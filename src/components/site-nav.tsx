@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { VocabularyAutoplaySettings } from "@/components/vocabulary-autoplay-settings";
 
 type NavChild = {
@@ -98,9 +99,12 @@ export function SiteNav() {
             <strong>英文解忧杂货铺</strong>
           </span>
         </Link>
-        <Link className="nav-cta" href="/login">
-          登录 / 注册
-        </Link>
+        <div className="nav-actions">
+          <ThemeToggle />
+          <Link className="nav-cta" href="/login">
+            登录 / 注册
+          </Link>
+        </div>
       </div>
 
       <nav className="nav-main" aria-label="主导航">
