@@ -1,0 +1,15 @@
+node_modules
+.next
+out
+.env.local
+.env*.local
+.env.seed.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.DS_Store
+*.tsbuildinfo
+HANDOFF.MD
+certificates/*.pem
+public/audio/

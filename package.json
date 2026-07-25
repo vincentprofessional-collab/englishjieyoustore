@@ -1,0 +1,39 @@
+{
+  "name": "ielts-platform",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --hostname 0.0.0.0 --experimental-https --experimental-https-key certificates/dev-localhost-key.pem --experimental-https-cert certificates/dev-localhost.pem",
+    "dev:http": "next dev --hostname 0.0.0.0",
+    "dev:local": "next dev",
+    "build": "next build",
+    "start": "next start --hostname 0.0.0.0",
+    "lint": "next lint",
+    "reading:ocr": "node scripts/extract-reading-ocr.mjs",
+    "seed:env": "node scripts/setup-seed-env.mjs",
+    "seed:listening": "node scripts/seed-listening-section.mjs",
+    "seed:cambridge4:test1:s1": "node scripts/seed-listening-section.mjs scripts/seed-data/cambridge-4-test-1-section-1.mjs",
+    "seed:cambridge4:test1:s2": "node scripts/seed-listening-section.mjs scripts/seed-data/cambridge-4-test-1-section-2.mjs",
+    "seed:cambridge4:test1:s3": "node scripts/seed-listening-section.mjs scripts/seed-data/cambridge-4-test-1-section-3.mjs",
+    "seed:cambridge4:test1:s4": "node scripts/seed-listening-section.mjs scripts/seed-data/cambridge-4-test-1-section-4.mjs",
+    "upload:cambridge4:test1:s1": "node scripts/upload-cambridge4-test1-section1-assets.mjs",
+    "upload:cambridge4:test1": "node scripts/upload-cambridge4-test1-assets.mjs",
+    "types:supabase": "npx supabase gen types typescript --project-id ahecwiqjfrrxxjxazmre --schema public > src/lib/database.types.ts"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "latest",
+    "@types/howler": "^2.2.13",
+    "howler": "^2.2.4",
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "eslint": "latest",
+    "eslint-config-next": "latest",
+    "typescript": "latest"
+  }
+}

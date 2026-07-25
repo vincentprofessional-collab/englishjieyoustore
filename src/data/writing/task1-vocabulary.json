@@ -1,0 +1,1399 @@
+[
+  {
+    "id": "line-graph",
+    "label": "折线图",
+    "labelEnglish": "Line Graph",
+    "description": "趋势、波动与交叉",
+    "entries": [
+      {
+        "id": "line-graph-increase",
+        "term": "increase",
+        "phonetic": "/ɪnˈkriːs/",
+        "partOfSpeech": "v.",
+        "definitionCn": "上升；增加",
+        "exampleEn": "The number of commuters increased steadily from 1.2 million in 2000 to 1.8 million in 2010.",
+        "exampleCn": "通勤人数从2000年的120万稳步增至2010年的180万。"
+      },
+      {
+        "id": "line-graph-rise",
+        "term": "rise",
+        "phonetic": "/raɪz/",
+        "partOfSpeech": "v./n.",
+        "definitionCn": "上升；增长",
+        "exampleEn": "Internet use rose by 35 percentage points over the period, reaching 80% in 2020.",
+        "exampleCn": "互联网使用率在此期间上升35个百分点，于2020年达到80%。"
+      },
+      {
+        "id": "line-graph-climb",
+        "term": "climb",
+        "phonetic": "/klaɪm/",
+        "partOfSpeech": "v.",
+        "definitionCn": "攀升",
+        "exampleEn": "The figure climbed gradually to around 65 before accelerating in the final two years.",
+        "exampleCn": "该数值逐渐升至约65，随后在最后两年加速增长。"
+      },
+      {
+        "id": "line-graph-surge",
+        "term": "surge",
+        "phonetic": "/sɜːdʒ/",
+        "partOfSpeech": "v./n.",
+        "definitionCn": "激增",
+        "exampleEn": "Demand for solar power surged from 15 to 45 gigawatt-hours between 2015 and 2018.",
+        "exampleCn": "太阳能需求在2015至2018年间从15吉瓦时激增至45吉瓦时。"
+      },
+      {
+        "id": "line-graph-peak-at",
+        "term": "peak at",
+        "phonetic": "/piːk æt/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "达到峰值",
+        "exampleEn": "Visitor numbers peaked at 2.4 million in August before falling sharply.",
+        "exampleCn": "游客数量在8月达到240万的峰值，随后急剧下降。"
+      },
+      {
+        "id": "line-graph-reach-a-peak-of",
+        "term": "reach a peak of",
+        "phonetic": "/riːtʃ ə piːk əv/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "达到……的峰值",
+        "exampleEn": "The unemployment rate reached a peak of 9.5% in 2012.",
+        "exampleCn": "失业率在2012年达到9.5%的峰值。"
+      },
+      {
+        "id": "line-graph-decline",
+        "term": "decline",
+        "phonetic": "/dɪˈklaɪn/",
+        "partOfSpeech": "v./n.",
+        "definitionCn": "下降",
+        "exampleEn": "After 2005, the birth rate declined gradually, ending the period at 11 per thousand.",
+        "exampleCn": "2005年后，出生率逐渐下降，期末降至每千人11。"
+      },
+      {
+        "id": "line-graph-fall",
+        "term": "fall",
+        "phonetic": "/fɔːl/",
+        "partOfSpeech": "v./n.",
+        "definitionCn": "下降",
+        "exampleEn": "The proportion fell from 58% to 41%, a decrease of 17 percentage points.",
+        "exampleCn": "该比例从58%降至41%，下降17个百分点。"
+      },
+      {
+        "id": "line-graph-drop",
+        "term": "drop",
+        "phonetic": "/drɒp/",
+        "partOfSpeech": "v./n.",
+        "definitionCn": "下跌；减少",
+        "exampleEn": "Sales dropped considerably in the second quarter but recovered thereafter.",
+        "exampleCn": "销售额在第二季度明显下降，但此后有所恢复。"
+      },
+      {
+        "id": "line-graph-plummet",
+        "term": "plummet",
+        "phonetic": "/ˈplʌmɪt/",
+        "partOfSpeech": "v.",
+        "definitionCn": "暴跌",
+        "exampleEn": "The index plummeted to 35 in April, its lowest point in the period shown.",
+        "exampleCn": "该指数在4月暴跌至35，为图示期间最低点。"
+      },
+      {
+        "id": "line-graph-dip",
+        "term": "dip",
+        "phonetic": "/dɪp/",
+        "partOfSpeech": "v./n.",
+        "definitionCn": "小幅下降",
+        "exampleEn": "There was a slight dip in 2016, when the figure slipped from 72% to 69%.",
+        "exampleCn": "2016年出现小幅回落，数值从72%降至69%。"
+      },
+      {
+        "id": "line-graph-fluctuate",
+        "term": "fluctuate",
+        "phonetic": "/ˈflʌktʃueɪt/",
+        "partOfSpeech": "v.",
+        "definitionCn": "波动",
+        "exampleEn": "Oil consumption fluctuated between 40 and 55 million tonnes throughout the decade.",
+        "exampleCn": "石油消费量在十年间始终在4,000万至5,500万吨之间波动。"
+      },
+      {
+        "id": "line-graph-remain-stable",
+        "term": "remain stable",
+        "phonetic": "/rɪˈmeɪn ˈsteɪbl/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "保持稳定",
+        "exampleEn": "The rate remained stable at approximately 30% from 2008 to 2012.",
+        "exampleCn": "该比例在2008至2012年间稳定在约30%。"
+      },
+      {
+        "id": "line-graph-level-off",
+        "term": "level off",
+        "phonetic": "/ˈlevl ɒf/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "趋于平稳",
+        "exampleEn": "Following a period of rapid growth, the figure levelled off at just under 90.",
+        "exampleCn": "在快速增长后，该数值稳定在略低于90的水平。"
+      },
+      {
+        "id": "line-graph-plateau",
+        "term": "plateau",
+        "phonetic": "/ˈplætəʊ/",
+        "partOfSpeech": "v.",
+        "definitionCn": "进入平台期",
+        "exampleEn": "Car ownership plateaued at around 75 vehicles per 100 households after 2015.",
+        "exampleCn": "2015年后，每百户汽车拥有量稳定在约75辆。"
+      },
+      {
+        "id": "line-graph-recover",
+        "term": "recover",
+        "phonetic": "/rɪˈkʌvə/",
+        "partOfSpeech": "v.",
+        "definitionCn": "恢复；回升",
+        "exampleEn": "The market recovered to its pre-2010 level by the end of the period.",
+        "exampleCn": "到期末，市场恢复至2010年前的水平。"
+      },
+      {
+        "id": "line-graph-rebound",
+        "term": "rebound",
+        "phonetic": "/rɪˈbaʊnd/",
+        "partOfSpeech": "v./n.",
+        "definitionCn": "反弹",
+        "exampleEn": "After reaching a low of 20, the figure rebounded to 46 in the following year.",
+        "exampleCn": "该数值降至20的低点后，于次年反弹至46。"
+      },
+      {
+        "id": "line-graph-overtake",
+        "term": "overtake",
+        "phonetic": "/ˌəʊvəˈteɪk/",
+        "partOfSpeech": "v.",
+        "definitionCn": "赶超",
+        "exampleEn": "Renewable energy overtook coal in 2018 and remained the leading source thereafter.",
+        "exampleCn": "可再生能源在2018年超过煤炭，此后一直是主要能源。"
+      },
+      {
+        "id": "line-graph-steadily",
+        "term": "steadily",
+        "phonetic": "/ˈstedɪli/",
+        "partOfSpeech": "adv.",
+        "definitionCn": "稳步地",
+        "exampleEn": "Household income grew steadily at an average rate of about 3% per year.",
+        "exampleCn": "家庭收入以年均约3%的速度稳步增长。"
+      },
+      {
+        "id": "line-graph-sharply",
+        "term": "sharply",
+        "phonetic": "/ˈʃɑːpli/",
+        "partOfSpeech": "adv.",
+        "definitionCn": "急剧地",
+        "exampleEn": "The line then fell sharply, from 85 units in June to 50 in July.",
+        "exampleCn": "随后该数值急剧下降，从6月的85降至7月的50。"
+      },
+      {
+        "id": "line-graph-by-from-to",
+        "term": "by / from ... to ...",
+        "phonetic": "/baɪ; frəm ... tə/",
+        "partOfSpeech": "",
+        "definitionCn": "结构 增减幅度 / 起止数值",
+        "exampleEn": "The rate rose by 12 percentage points, from 46% to 58%.",
+        "exampleCn": "该比例上升了12个百分点，即从46%升至58%。"
+      }
+    ]
+  },
+  {
+    "id": "bar-chart",
+    "label": "柱状图",
+    "labelEnglish": "Bar Chart",
+    "description": "类别比较、排序与差距",
+    "entries": [
+      {
+        "id": "bar-chart-stand-at",
+        "term": "stand at",
+        "phonetic": "/stænd æt/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "数值为；处于",
+        "exampleEn": "In 2020, the figure for public transport stood at 42%, compared with 28% for private cars.",
+        "exampleCn": "2020年，公共交通的比例为42%，而私家车为28%。"
+      },
+      {
+        "id": "bar-chart-record",
+        "term": "record",
+        "phonetic": "/rɪˈkɔːd/",
+        "partOfSpeech": "v.",
+        "definitionCn": "录得；达到",
+        "exampleEn": "Canada recorded the highest proportion of graduates, at just over 60%.",
+        "exampleCn": "加拿大的毕业生比例最高，略高于60%。"
+      },
+      {
+        "id": "bar-chart-exceed",
+        "term": "exceed",
+        "phonetic": "/ɪkˈsiːd/",
+        "partOfSpeech": "v.",
+        "definitionCn": "超过",
+        "exampleEn": "Spending on housing exceeded that on food in all five income groups.",
+        "exampleCn": "在五个收入群体中，住房支出均高于食品支出。"
+      },
+      {
+        "id": "bar-chart-be-higher-than",
+        "term": "be higher than",
+        "phonetic": "/biː ˈhaɪə ðæn/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "高于",
+        "exampleEn": "The male employment rate was considerably higher than the female rate in both years.",
+        "exampleCn": "两年中，男性就业率均明显高于女性。"
+      },
+      {
+        "id": "bar-chart-be-lower-than",
+        "term": "be lower than",
+        "phonetic": "/biː ˈləʊə ðæn/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "低于",
+        "exampleEn": "The figure for France was slightly lower than that for Germany, at 32% and 35% respectively.",
+        "exampleCn": "法国的数据略低于德国，分别为32%和35%。"
+      },
+      {
+        "id": "bar-chart-the-highest-figure",
+        "term": "the highest figure",
+        "phonetic": "/ðə ˈhaɪɪst ˈfɪɡə/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "最高数值",
+        "exampleEn": "The highest figure was seen in the 25–34 age group, which accounted for 48% of users.",
+        "exampleCn": "最高数值出现在25至34岁年龄组，占用户的48%。"
+      },
+      {
+        "id": "bar-chart-the-lowest-figure",
+        "term": "the lowest figure",
+        "phonetic": "/ðə ˈləʊɪst ˈfɪɡə/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "最低数值",
+        "exampleEn": "By contrast, the over-65s registered the lowest figure, at only 9%.",
+        "exampleCn": "相比之下，65岁以上人群的数值最低，仅为9%。"
+      },
+      {
+        "id": "bar-chart-rank-first",
+        "term": "rank first",
+        "phonetic": "/ræŋk fɜːst/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "位居第一",
+        "exampleEn": "Australia ranked first for household recycling, with a rate of approximately 70%.",
+        "exampleCn": "澳大利亚的家庭回收率位居第一，约为70%。"
+      },
+      {
+        "id": "bar-chart-rank-last",
+        "term": "rank last",
+        "phonetic": "/ræŋk lɑːst/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "位居末位",
+        "exampleEn": "Spain ranked last among the six countries, recording fewer than 20 applications per thousand people.",
+        "exampleCn": "西班牙在六国中位居末位，每千人申请数不足20。"
+      },
+      {
+        "id": "bar-chart-lead",
+        "term": "lead",
+        "phonetic": "/liːd/",
+        "partOfSpeech": "v.",
+        "definitionCn": "领先；居首",
+        "exampleEn": "The service sector led the three industries in terms of employment in 2015.",
+        "exampleCn": "2015年，服务业在三个行业中的就业人数居首。"
+      },
+      {
+        "id": "bar-chart-trail",
+        "term": "trail",
+        "phonetic": "/treɪl/",
+        "partOfSpeech": "v.",
+        "definitionCn": "落后于",
+        "exampleEn": "At 18%, the figure for rural households trailed the urban figure by 12 percentage points.",
+        "exampleCn": "农村家庭的比例为18%，比城市低12个百分点。"
+      },
+      {
+        "id": "bar-chart-outnumber",
+        "term": "outnumber",
+        "phonetic": "/ˌaʊtˈnʌmbə/",
+        "partOfSpeech": "v.",
+        "definitionCn": "数量多于",
+        "exampleEn": "Female part-time workers outnumbered their male counterparts in every age group.",
+        "exampleCn": "在各年龄组中，女性兼职人数均多于男性。"
+      },
+      {
+        "id": "bar-chart-twice-as-high-as",
+        "term": "twice as high as",
+        "phonetic": "/twaɪs æz haɪ æz/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "是……的两倍",
+        "exampleEn": "The rate in City A was twice as high as that in City B, at 60% versus 30%.",
+        "exampleCn": "A市的比例是B市的两倍，分别为60%和30%。"
+      },
+      {
+        "id": "bar-chart-a-narrow-gap",
+        "term": "a narrow gap",
+        "phonetic": "/ə ˈnærəʊ ɡæp/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "较小差距",
+        "exampleEn": "There was only a narrow gap between the two youngest groups, of around three percentage points.",
+        "exampleCn": "两个最年轻群体之间仅有约3个百分点的小幅差距。"
+      },
+      {
+        "id": "bar-chart-a-wide-gap",
+        "term": "a wide gap",
+        "phonetic": "/ə waɪd ɡæp/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "较大差距",
+        "exampleEn": "A wide gap of nearly 40 percentage points separated the highest and lowest categories.",
+        "exampleCn": "最高与最低类别之间相差近40个百分点。"
+      },
+      {
+        "id": "bar-chart-comparable",
+        "term": "comparable",
+        "phonetic": "/ˈkɒmpərəbl/",
+        "partOfSpeech": "adj.",
+        "definitionCn": "大致相当的",
+        "exampleEn": "The figures for books and clothing were comparable, at 24% and 26% respectively.",
+        "exampleCn": "书籍和服装的数据大致相当，分别为24%和26%。"
+      },
+      {
+        "id": "bar-chart-respectively",
+        "term": "respectively",
+        "phonetic": "/rɪˈspektɪvli/",
+        "partOfSpeech": "adv.",
+        "definitionCn": "分别地",
+        "exampleEn": "Japan and Korea spent 22% and 27% of their budgets on education, respectively.",
+        "exampleCn": "日本和韩国的教育支出分别占预算的22%和27%。"
+      },
+      {
+        "id": "bar-chart-account-for",
+        "term": "account for",
+        "phonetic": "/əˈkaʊnt fɔː/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "占（比例）",
+        "exampleEn": "Online purchases accounted for the largest share of sales in four of the five categories.",
+        "exampleCn": "在五个类别中的四个类别里，线上购买占销售额的最大份额。"
+      },
+      {
+        "id": "bar-chart-dominate",
+        "term": "dominate",
+        "phonetic": "/ˈdɒmɪneɪt/",
+        "partOfSpeech": "v.",
+        "definitionCn": "占主导地位",
+        "exampleEn": "Coal dominated electricity generation in 1990, representing almost three-quarters of the total.",
+        "exampleCn": "1990年煤炭在发电结构中占主导，接近总量的四分之三。"
+      },
+      {
+        "id": "bar-chart-by-comparison",
+        "term": "by comparison",
+        "phonetic": "/baɪ kəmˈpærɪsn/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "相比之下",
+        "exampleEn": "By comparison, expenditure on leisure remained below 10% in every country.",
+        "exampleCn": "相比之下，各国的休闲支出均低于10%。"
+      }
+    ]
+  },
+  {
+    "id": "pie-chart",
+    "label": "饼图",
+    "labelEnglish": "Pie Chart",
+    "description": "构成、份额与倍数",
+    "entries": [
+      {
+        "id": "pie-chart-account-for",
+        "term": "account for",
+        "phonetic": "/əˈkaʊnt fɔː/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "占（比例）",
+        "exampleEn": "Housing accounted for 35% of total household expenditure, the largest share shown.",
+        "exampleCn": "住房占家庭总支出的35%，是图中最大的份额。"
+      },
+      {
+        "id": "pie-chart-make-up",
+        "term": "make up",
+        "phonetic": "/meɪk ʌp/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "构成；占",
+        "exampleEn": "Food and transport together made up just over half of the monthly budget.",
+        "exampleCn": "食品和交通合计占月度预算的一半以上。"
+      },
+      {
+        "id": "pie-chart-constitute",
+        "term": "constitute",
+        "phonetic": "/ˈkɒnstɪtjuːt/",
+        "partOfSpeech": "v.",
+        "definitionCn": "构成；占",
+        "exampleEn": "People aged 18–35 constituted 42% of all respondents.",
+        "exampleCn": "18至35岁人群占全部受访者的42%。"
+      },
+      {
+        "id": "pie-chart-comprise",
+        "term": "comprise",
+        "phonetic": "/kəmˈpraɪz/",
+        "partOfSpeech": "v.",
+        "definitionCn": "包括；构成",
+        "exampleEn": "The two largest sources comprised almost two-thirds of total energy production.",
+        "exampleCn": "两个最大的能源来源合计占能源总产量的近三分之二。"
+      },
+      {
+        "id": "pie-chart-share",
+        "term": "share",
+        "phonetic": "/ʃeə/",
+        "partOfSpeech": "n.",
+        "definitionCn": "份额",
+        "exampleEn": "The share of spending allocated to food fell from 30% to 22%.",
+        "exampleCn": "用于食品的支出份额从30%降至22%。"
+      },
+      {
+        "id": "pie-chart-proportion",
+        "term": "proportion",
+        "phonetic": "/prəˈpɔːʃn/",
+        "partOfSpeech": "n.",
+        "definitionCn": "比例",
+        "exampleEn": "The proportion of waste sent to landfill was substantially lower in 2020 than in 2000.",
+        "exampleCn": "2020年送往填埋场的垃圾比例明显低于2000年。"
+      },
+      {
+        "id": "pie-chart-percentage",
+        "term": "percentage",
+        "phonetic": "/pəˈsentɪdʒ/",
+        "partOfSpeech": "n.",
+        "definitionCn": "百分比",
+        "exampleEn": "The percentage allocated to healthcare doubled over the 20-year period.",
+        "exampleCn": "分配给医疗保健的比例在20年间翻了一番。"
+      },
+      {
+        "id": "pie-chart-the-majority",
+        "term": "the majority",
+        "phonetic": "/ðə məˈdʒɒrəti/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "大多数；主要部分",
+        "exampleEn": "The majority of electricity, at 58%, was generated from fossil fuels.",
+        "exampleCn": "大部分电力由化石燃料产生，占58%。"
+      },
+      {
+        "id": "pie-chart-a-minority",
+        "term": "a minority",
+        "phonetic": "/ə maɪˈnɒrəti/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "少数；较小部分",
+        "exampleEn": "Only a small minority of commuters, 6%, travelled by bicycle.",
+        "exampleCn": "仅有少数通勤者骑自行车，占6%。"
+      },
+      {
+        "id": "pie-chart-combined-share",
+        "term": "combined share",
+        "phonetic": "/kəmˈbaɪnd ʃeə/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "合计份额",
+        "exampleEn": "The combined share of coal and gas declined from 70% to 48%.",
+        "exampleCn": "煤炭与天然气的合计份额从70%降至48%。"
+      },
+      {
+        "id": "pie-chart-collectively",
+        "term": "collectively",
+        "phonetic": "/kəˈlektɪvli/",
+        "partOfSpeech": "adv.",
+        "definitionCn": "合计；共同地",
+        "exampleEn": "The three smallest categories collectively represented less than one-fifth of the total.",
+        "exampleCn": "三个最小类别合计占总量不足五分之一。"
+      },
+      {
+        "id": "pie-chart-remainder",
+        "term": "remainder",
+        "phonetic": "/rɪˈmeɪndə/",
+        "partOfSpeech": "n.",
+        "definitionCn": "剩余部分",
+        "exampleEn": "Private vehicles accounted for 62%, while public transport made up the remainder.",
+        "exampleCn": "私家车占62%，其余部分由公共交通构成。"
+      },
+      {
+        "id": "pie-chart-one-third",
+        "term": "one-third",
+        "phonetic": "/ˌwʌn ˈθɜːd/",
+        "partOfSpeech": "n.",
+        "definitionCn": "三分之一",
+        "exampleEn": "Approximately one-third of the workforce was employed in manufacturing.",
+        "exampleCn": "约三分之一的劳动力受雇于制造业。"
+      },
+      {
+        "id": "pie-chart-half",
+        "term": "half",
+        "phonetic": "/hɑːf/",
+        "partOfSpeech": "n.",
+        "definitionCn": "一半",
+        "exampleEn": "In 1990, coal supplied exactly half of the country's electricity.",
+        "exampleCn": "1990年，煤炭恰好提供该国一半的电力。"
+      },
+      {
+        "id": "pie-chart-twice-the-share-of",
+        "term": "twice the share of",
+        "phonetic": "/twaɪs ðə ʃeə əv/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "份额是……的两倍",
+        "exampleEn": "At 40%, rent represented twice the share of food, which stood at 20%.",
+        "exampleCn": "房租占40%，是食品支出20%的两倍。"
+      },
+      {
+        "id": "pie-chart-distribution",
+        "term": "distribution",
+        "phonetic": "/ˌdɪstrɪˈbjuːʃn/",
+        "partOfSpeech": "n.",
+        "definitionCn": "分布；构成",
+        "exampleEn": "Overall, the distribution of expenditure became more balanced in 2020.",
+        "exampleCn": "总体而言，2020年的支出分布变得更加均衡。"
+      },
+      {
+        "id": "pie-chart-segment",
+        "term": "segment",
+        "phonetic": "/ˈseɡmənt/",
+        "partOfSpeech": "n.",
+        "definitionCn": "扇区；部分",
+        "exampleEn": "The smallest segment of the chart represents spending on insurance.",
+        "exampleCn": "图中最小的扇区代表保险支出。"
+      },
+      {
+        "id": "pie-chart-evenly-distributed",
+        "term": "evenly distributed",
+        "phonetic": "/ˈiːvnli dɪˈstrɪbjuːtɪd/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "分布均匀",
+        "exampleEn": "The budget was relatively evenly distributed across the four services.",
+        "exampleCn": "预算在四项服务之间分配得较为均匀。"
+      },
+      {
+        "id": "pie-chart-percentage-point",
+        "term": "percentage point",
+        "phonetic": "/pəˈsentɪdʒ pɔɪnt/",
+        "partOfSpeech": "n.",
+        "definitionCn": "百分点",
+        "exampleEn": "The share of renewables rose by 15 percentage points, from 10% to 25%.",
+        "exampleCn": "可再生能源占比从10%升至25%，增加15个百分点。"
+      },
+      {
+        "id": "pie-chart-respectively",
+        "term": "respectively",
+        "phonetic": "/rɪˈspektɪvli/",
+        "partOfSpeech": "adv.",
+        "definitionCn": "分别地",
+        "exampleEn": "Food and housing accounted for 25% and 40% of spending, respectively.",
+        "exampleCn": "食品和住房支出分别占25%和40%。"
+      }
+    ]
+  },
+  {
+    "id": "table",
+    "label": "表格",
+    "labelEnglish": "Table",
+    "description": "数据定位、范围与概括",
+    "entries": [
+      {
+        "id": "table-figure",
+        "term": "figure",
+        "phonetic": "/ˈfɪɡə/",
+        "partOfSpeech": "n.",
+        "definitionCn": "数值；数据",
+        "exampleEn": "The figure for Canada was 6.8 tonnes per person, slightly above the Australian figure.",
+        "exampleCn": "加拿大的数据为人均6.8吨，略高于澳大利亚。"
+      },
+      {
+        "id": "table-data",
+        "term": "data",
+        "phonetic": "/ˈdeɪtə/",
+        "partOfSpeech": "n.",
+        "definitionCn": "数据",
+        "exampleEn": "The data indicate that household size decreased in every region except the north.",
+        "exampleCn": "数据显示，除北部外，所有地区的家庭规模均有所缩小。"
+      },
+      {
+        "id": "table-stand-at",
+        "term": "stand at",
+        "phonetic": "/stænd æt/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "数值为",
+        "exampleEn": "Average weekly earnings stood at £620 in 2015 and £710 in 2020.",
+        "exampleCn": "平均周薪在2015年为620英镑，2020年为710英镑。"
+      },
+      {
+        "id": "table-record",
+        "term": "record",
+        "phonetic": "/rɪˈkɔːd/",
+        "partOfSpeech": "v.",
+        "definitionCn": "录得",
+        "exampleEn": "Norway recorded the highest recycling rate in both years.",
+        "exampleCn": "挪威在两年中均录得最高回收率。"
+      },
+      {
+        "id": "table-total",
+        "term": "total",
+        "phonetic": "/ˈtəʊtl/",
+        "partOfSpeech": "n./v.",
+        "definitionCn": "总数；合计",
+        "exampleEn": "The four regions produced a total of 12.6 million tonnes of wheat.",
+        "exampleCn": "四个地区的小麦总产量为1,260万吨。"
+      },
+      {
+        "id": "table-average",
+        "term": "average",
+        "phonetic": "/ˈævərɪdʒ/",
+        "partOfSpeech": "n./adj.",
+        "definitionCn": "平均值；平均的",
+        "exampleEn": "Average expenditure was highest among households with three children.",
+        "exampleCn": "有三个孩子的家庭平均支出最高。"
+      },
+      {
+        "id": "table-per-capita",
+        "term": "per capita",
+        "phonetic": "/pə ˈkæpɪtə/",
+        "partOfSpeech": "adj./adv.",
+        "definitionCn": "人均",
+        "exampleEn": "Per capita water consumption was lowest in Germany, at 125 litres per day.",
+        "exampleCn": "德国人均日用水量最低，为125升。"
+      },
+      {
+        "id": "table-ratio",
+        "term": "ratio",
+        "phonetic": "/ˈreɪʃiəʊ/",
+        "partOfSpeech": "n.",
+        "definitionCn": "比率；比例",
+        "exampleEn": "The student-to-teacher ratio fell from 24:1 to 18:1 over the period.",
+        "exampleCn": "师生比在此期间从24:1降至18:1。"
+      },
+      {
+        "id": "table-range-from-to",
+        "term": "range from ... to ...",
+        "phonetic": "/reɪndʒ frəm ... tə/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "范围从……到……",
+        "exampleEn": "Annual rainfall ranged from 420 millimetres in City A to 1,150 in City D.",
+        "exampleCn": "年降雨量从A市的420毫米到D市的1,150毫米不等。"
+      },
+      {
+        "id": "table-respectively",
+        "term": "respectively",
+        "phonetic": "/rɪˈspektɪvli/",
+        "partOfSpeech": "adv.",
+        "definitionCn": "分别地",
+        "exampleEn": "The corresponding figures for 2010 and 2020 were 36% and 49%, respectively.",
+        "exampleCn": "2010年和2020年的相应数据分别为36%和49%。"
+      },
+      {
+        "id": "table-compared-with",
+        "term": "compared with",
+        "phonetic": "/kəmˈpeəd wɪð/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "与……相比",
+        "exampleEn": "Compared with rural areas, cities had higher incomes but smaller households.",
+        "exampleCn": "与农村地区相比，城市收入更高，但家庭规模更小。"
+      },
+      {
+        "id": "table-whereas",
+        "term": "whereas",
+        "phonetic": "/ˌweərˈæz/",
+        "partOfSpeech": "conj.",
+        "definitionCn": "而；然而",
+        "exampleEn": "The rate for men increased to 74%, whereas that for women remained unchanged at 68%.",
+        "exampleCn": "男性比例升至74%，而女性比例保持在68%不变。"
+      },
+      {
+        "id": "table-similar",
+        "term": "similar",
+        "phonetic": "/ˈsɪmələ/",
+        "partOfSpeech": "adj.",
+        "definitionCn": "相似的",
+        "exampleEn": "France and Italy displayed similar patterns across all four categories.",
+        "exampleCn": "法国和意大利在四个类别中呈现相似模式。"
+      },
+      {
+        "id": "table-identical",
+        "term": "identical",
+        "phonetic": "/aɪˈdentɪkl/",
+        "partOfSpeech": "adj.",
+        "definitionCn": "完全相同的",
+        "exampleEn": "The two countries reported identical literacy rates of 96%.",
+        "exampleCn": "两国报告的识字率相同，均为96%。"
+      },
+      {
+        "id": "table-difference",
+        "term": "difference",
+        "phonetic": "/ˈdɪfrəns/",
+        "partOfSpeech": "n.",
+        "definitionCn": "差异",
+        "exampleEn": "The largest difference occurred in transport costs, at 18 percentage points.",
+        "exampleCn": "最大差异出现在交通成本上，为18个百分点。"
+      },
+      {
+        "id": "table-gap",
+        "term": "gap",
+        "phonetic": "/ɡæp/",
+        "partOfSpeech": "n.",
+        "definitionCn": "差距",
+        "exampleEn": "The gender gap narrowed from 12 to 5 percentage points.",
+        "exampleCn": "性别差距从12个百分点缩小至5个百分点。"
+      },
+      {
+        "id": "table-highest",
+        "term": "highest",
+        "phonetic": "/ˈhaɪɪst/",
+        "partOfSpeech": "adj.",
+        "definitionCn": "最高的",
+        "exampleEn": "The highest value in the table was recorded for urban electricity use in 2020.",
+        "exampleCn": "表中最高值为2020年的城市用电量。"
+      },
+      {
+        "id": "table-lowest",
+        "term": "lowest",
+        "phonetic": "/ˈləʊɪst/",
+        "partOfSpeech": "adj.",
+        "definitionCn": "最低的",
+        "exampleEn": "Agriculture had the lowest output per worker in each of the three countries.",
+        "exampleCn": "在三个国家中，农业的人均产出均最低。"
+      },
+      {
+        "id": "table-approximately",
+        "term": "approximately",
+        "phonetic": "/əˈprɒksɪmətli/",
+        "partOfSpeech": "adv.",
+        "definitionCn": "大约",
+        "exampleEn": "Approximately 1.5 million people used the service in each year shown.",
+        "exampleCn": "图示各年均约有150万人使用该服务。"
+      },
+      {
+        "id": "table-overall",
+        "term": "overall",
+        "phonetic": "/ˌəʊvərˈɔːl/",
+        "partOfSpeech": "adv.",
+        "definitionCn": "总体而言",
+        "exampleEn": "Overall, the table shows higher participation rates among younger adults.",
+        "exampleCn": "总体而言，表格显示年轻人的参与率更高。"
+      }
+    ]
+  },
+  {
+    "id": "map",
+    "label": "地图",
+    "labelEnglish": "Map",
+    "description": "方位、增删与功能变迁",
+    "entries": [
+      {
+        "id": "map-be-situated",
+        "term": "be situated",
+        "phonetic": "/biː ˈsɪtʃueɪtɪd/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "位于",
+        "exampleEn": "The school is situated in the north-eastern corner of the town.",
+        "exampleCn": "学校位于城镇的东北角。"
+      },
+      {
+        "id": "map-lie",
+        "term": "lie",
+        "phonetic": "/laɪ/",
+        "partOfSpeech": "v.",
+        "definitionCn": "位于",
+        "exampleEn": "A small woodland lay to the west of the river in 1990.",
+        "exampleCn": "1990年，一片小树林位于河流以西。"
+      },
+      {
+        "id": "map-to-the-north-of",
+        "term": "to the north of",
+        "phonetic": "/tə ðə nɔːθ əv/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "在……以北",
+        "exampleEn": "A new residential area was built to the north of the railway line.",
+        "exampleCn": "铁路以北新建了一片住宅区。"
+      },
+      {
+        "id": "map-adjacent-to",
+        "term": "adjacent to",
+        "phonetic": "/əˈdʒeɪsnt tə/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "与……相邻",
+        "exampleEn": "The car park was relocated to a site adjacent to the station.",
+        "exampleCn": "停车场被迁至车站旁边的一块地。"
+      },
+      {
+        "id": "map-opposite",
+        "term": "opposite",
+        "phonetic": "/ˈɒpəzɪt/",
+        "partOfSpeech": "prep.",
+        "definitionCn": "在……对面",
+        "exampleEn": "A café was added opposite the entrance to the park.",
+        "exampleCn": "公园入口对面增设了一家咖啡馆。"
+      },
+      {
+        "id": "map-along",
+        "term": "along",
+        "phonetic": "/əˈlɒŋ/",
+        "partOfSpeech": "prep.",
+        "definitionCn": "沿着",
+        "exampleEn": "Several shops were constructed along the southern side of the main road.",
+        "exampleCn": "主干道南侧沿线建起了数家商店。"
+      },
+      {
+        "id": "map-at-the-junction-of",
+        "term": "at the junction of",
+        "phonetic": "/æt ðə ˈdʒʌŋkʃn əv/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "在……交叉口",
+        "exampleEn": "A roundabout was installed at the junction of King Street and Park Road.",
+        "exampleCn": "国王街与公园路交叉口增设了环岛。"
+      },
+      {
+        "id": "map-construct",
+        "term": "construct",
+        "phonetic": "/kənˈstrʌkt/",
+        "partOfSpeech": "v.",
+        "definitionCn": "建造",
+        "exampleEn": "A bridge was constructed across the river, linking the two residential districts.",
+        "exampleCn": "河上建了一座桥，连接两个住宅区。"
+      },
+      {
+        "id": "map-demolish",
+        "term": "demolish",
+        "phonetic": "/dɪˈmɒlɪʃ/",
+        "partOfSpeech": "v.",
+        "definitionCn": "拆除",
+        "exampleEn": "The old warehouse was demolished to make room for a supermarket.",
+        "exampleCn": "旧仓库被拆除，以腾出空间建超市。"
+      },
+      {
+        "id": "map-replace",
+        "term": "replace",
+        "phonetic": "/rɪˈpleɪs/",
+        "partOfSpeech": "v.",
+        "definitionCn": "取代",
+        "exampleEn": "The farmland was replaced by a large housing estate.",
+        "exampleCn": "农田被一大片住宅区所取代。"
+      },
+      {
+        "id": "map-convert-into",
+        "term": "convert into",
+        "phonetic": "/kənˈvɜːt ˈɪntə/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "改建成",
+        "exampleEn": "The former railway station was converted into a museum.",
+        "exampleCn": "原火车站被改建成博物馆。"
+      },
+      {
+        "id": "map-expand",
+        "term": "expand",
+        "phonetic": "/ɪkˈspænd/",
+        "partOfSpeech": "v.",
+        "definitionCn": "扩建；扩大",
+        "exampleEn": "The industrial zone expanded eastwards, occupying part of the open land.",
+        "exampleCn": "工业区向东扩展，占用了部分空地。"
+      },
+      {
+        "id": "map-extend",
+        "term": "extend",
+        "phonetic": "/ɪkˈstend/",
+        "partOfSpeech": "v.",
+        "definitionCn": "延伸；扩建",
+        "exampleEn": "The footpath was extended as far as the new sports centre.",
+        "exampleCn": "步道被延伸至新体育中心。"
+      },
+      {
+        "id": "map-relocate",
+        "term": "relocate",
+        "phonetic": "/ˌriːləʊˈkeɪt/",
+        "partOfSpeech": "v.",
+        "definitionCn": "搬迁",
+        "exampleEn": "The bus terminal was relocated from the town centre to the outskirts.",
+        "exampleCn": "公交总站从市中心迁至郊区。"
+      },
+      {
+        "id": "map-pedestrianise",
+        "term": "pedestrianise",
+        "phonetic": "/pəˈdestriənaɪz/",
+        "partOfSpeech": "v.",
+        "definitionCn": "改为步行区",
+        "exampleEn": "The central shopping street was pedestrianised between 2000 and 2020.",
+        "exampleCn": "2000至2020年间，中央商业街被改为步行街。"
+      },
+      {
+        "id": "map-add",
+        "term": "add",
+        "phonetic": "/æd/",
+        "partOfSpeech": "v.",
+        "definitionCn": "增设",
+        "exampleEn": "Two tennis courts were added beside the existing swimming pool.",
+        "exampleCn": "现有游泳池旁增设了两个网球场。"
+      },
+      {
+        "id": "map-remove",
+        "term": "remove",
+        "phonetic": "/rɪˈmuːv/",
+        "partOfSpeech": "v.",
+        "definitionCn": "移除",
+        "exampleEn": "The trees in the south-western corner were removed to provide additional parking.",
+        "exampleCn": "西南角的树木被移除，以增加停车空间。"
+      },
+      {
+        "id": "map-remain-unchanged",
+        "term": "remain unchanged",
+        "phonetic": "/rɪˈmeɪn ʌnˈtʃeɪndʒd/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "保持不变",
+        "exampleEn": "The river and the main road remained unchanged throughout the period.",
+        "exampleCn": "河流和主干道在整个期间保持不变。"
+      },
+      {
+        "id": "map-transform",
+        "term": "transform",
+        "phonetic": "/trænsˈfɔːm/",
+        "partOfSpeech": "v.",
+        "definitionCn": "彻底改造",
+        "exampleEn": "The harbour was transformed into a leisure complex with restaurants and shops.",
+        "exampleCn": "港口被改造成设有餐厅和商店的休闲综合体。"
+      },
+      {
+        "id": "map-redevelop",
+        "term": "redevelop",
+        "phonetic": "/ˌriːdɪˈveləp/",
+        "partOfSpeech": "v.",
+        "definitionCn": "重新开发",
+        "exampleEn": "The entire waterfront was redeveloped for commercial and recreational use.",
+        "exampleCn": "整个滨水区被重新开发为商业和休闲用途。"
+      },
+      {
+        "id": "map-occupy",
+        "term": "occupy",
+        "phonetic": "/ˈɒkjupaɪ/",
+        "partOfSpeech": "v.",
+        "definitionCn": "占据（空间）",
+        "exampleEn": "By 2020, apartment blocks occupied most of the land south of the canal.",
+        "exampleCn": "到2020年，公寓楼占据了运河南侧的大部分土地。"
+      },
+      {
+        "id": "map-make-way-for",
+        "term": "make way for",
+        "phonetic": "/meɪk weɪ fɔː/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "为……腾出空间",
+        "exampleEn": "Several small houses were cleared to make way for a hospital.",
+        "exampleCn": "数座小房屋被清除，以便建设医院。"
+      },
+      {
+        "id": "map-on-the-outskirts",
+        "term": "on the outskirts",
+        "phonetic": "/ɒn ði ˈaʊtskɜːts/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "在郊区",
+        "exampleEn": "A new industrial estate was established on the eastern outskirts of the town.",
+        "exampleCn": "城镇东部郊区新建了一个工业园。"
+      },
+      {
+        "id": "map-in-the-centre",
+        "term": "in the centre",
+        "phonetic": "/ɪn ðə ˈsentə/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "在中心",
+        "exampleEn": "The fountain in the centre of the square was retained.",
+        "exampleCn": "广场中央的喷泉被保留下来。"
+      }
+    ]
+  },
+  {
+    "id": "process",
+    "label": "流程图",
+    "labelEnglish": "Process Diagram",
+    "description": "阶段、顺序与被动语态",
+    "entries": [
+      {
+        "id": "process-linear-process",
+        "term": "linear process",
+        "phonetic": "/ˈlɪniə ˈprəʊses/",
+        "partOfSpeech": "n.",
+        "definitionCn": "线性流程",
+        "exampleEn": "Overall, this is a linear process comprising seven stages, from harvesting the crop to packaging the final product.",
+        "exampleCn": "总体而言，这是一个包含七个阶段的线性流程，从收割作物到包装成品。"
+      },
+      {
+        "id": "process-cyclical-process",
+        "term": "cyclical process",
+        "phonetic": "/ˈsaɪklɪkl ˈprəʊses/",
+        "partOfSpeech": "n.",
+        "definitionCn": "循环流程",
+        "exampleEn": "Overall, it is a cyclical process in which the treated water is returned to the reservoir.",
+        "exampleCn": "总体而言，这是一个循环流程，处理后的水会被送回水库。"
+      },
+      {
+        "id": "process-consist-of",
+        "term": "consist of",
+        "phonetic": "/kənˈsɪst əv/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "由……组成",
+        "exampleEn": "The production process consists of four main stages.",
+        "exampleCn": "该生产流程由四个主要阶段组成。"
+      },
+      {
+        "id": "process-stage",
+        "term": "stage",
+        "phonetic": "/steɪdʒ/",
+        "partOfSpeech": "n.",
+        "definitionCn": "阶段",
+        "exampleEn": "At the first stage, raw materials are inspected and sorted by hand.",
+        "exampleCn": "在第一阶段，原材料由人工检查并分类。"
+      },
+      {
+        "id": "process-commence-with",
+        "term": "commence with",
+        "phonetic": "/kəˈmens wɪð/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "始于",
+        "exampleEn": "The procedure commences with the collection of used glass bottles.",
+        "exampleCn": "该流程始于收集用过的玻璃瓶。"
+      },
+      {
+        "id": "process-initially",
+        "term": "initially",
+        "phonetic": "/ɪˈnɪʃəli/",
+        "partOfSpeech": "adv.",
+        "definitionCn": "首先；最初",
+        "exampleEn": "Initially, the beans are laid out in the sun and dried for several days.",
+        "exampleCn": "首先，豆子被铺在阳光下晾晒数日。"
+      },
+      {
+        "id": "process-subsequently",
+        "term": "subsequently",
+        "phonetic": "/ˈsʌbsɪkwəntli/",
+        "partOfSpeech": "adv.",
+        "definitionCn": "随后",
+        "exampleEn": "The mixture is subsequently transferred to a fermentation tank.",
+        "exampleCn": "随后，混合物被转移到发酵罐中。"
+      },
+      {
+        "id": "process-thereafter",
+        "term": "thereafter",
+        "phonetic": "/ˌðeərˈɑːftə/",
+        "partOfSpeech": "adv.",
+        "definitionCn": "此后",
+        "exampleEn": "Thereafter, the paper is pressed and left to dry.",
+        "exampleCn": "此后，纸张被压制并静置晾干。"
+      },
+      {
+        "id": "process-once",
+        "term": "once",
+        "phonetic": "/wʌns/",
+        "partOfSpeech": "conj.",
+        "definitionCn": "一旦；……之后",
+        "exampleEn": "Once the liquid has cooled, it is poured into sterilised containers.",
+        "exampleCn": "液体冷却后，会被倒入消毒容器中。"
+      },
+      {
+        "id": "process-before-being",
+        "term": "before being",
+        "phonetic": "/bɪˈfɔː ˈbiːɪŋ/",
+        "partOfSpeech": "",
+        "definitionCn": "结构 在被……之前",
+        "exampleEn": "The clay is shaped into bricks before being fired in a kiln.",
+        "exampleCn": "黏土先被制成砖坯，然后送入窑中烧制。"
+      },
+      {
+        "id": "process-undergo",
+        "term": "undergo",
+        "phonetic": "/ˌʌndəˈɡəʊ/",
+        "partOfSpeech": "v.",
+        "definitionCn": "经历（处理/变化）",
+        "exampleEn": "The raw material undergoes a series of chemical treatments.",
+        "exampleCn": "原材料会经历一系列化学处理。"
+      },
+      {
+        "id": "process-pass-through",
+        "term": "pass through",
+        "phonetic": "/pɑːs θruː/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "通过；经过",
+        "exampleEn": "The water passes through two filters before entering the storage tank.",
+        "exampleCn": "水在进入储水罐前会经过两层过滤器。"
+      },
+      {
+        "id": "process-convert-into",
+        "term": "convert into",
+        "phonetic": "/kənˈvɜːt ˈɪntə/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "转化为",
+        "exampleEn": "Heat energy is converted into electricity by a generator.",
+        "exampleCn": "热能通过发电机转化为电能。"
+      },
+      {
+        "id": "process-feed-into",
+        "term": "feed into",
+        "phonetic": "/fiːd ˈɪntə/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "送入；输入",
+        "exampleEn": "The crushed material is fed into a rotating drum.",
+        "exampleCn": "粉碎后的材料被送入旋转滚筒。"
+      },
+      {
+        "id": "process-transport",
+        "term": "transport",
+        "phonetic": "/trænˈspɔːt/",
+        "partOfSpeech": "v.",
+        "definitionCn": "运输",
+        "exampleEn": "The logs are transported by lorry to a processing plant.",
+        "exampleCn": "原木由卡车运往加工厂。"
+      },
+      {
+        "id": "process-store",
+        "term": "store",
+        "phonetic": "/stɔː/",
+        "partOfSpeech": "v.",
+        "definitionCn": "储存",
+        "exampleEn": "The finished product is stored in a cool, dry warehouse.",
+        "exampleCn": "成品被储存在阴凉干燥的仓库中。"
+      },
+      {
+        "id": "process-crush",
+        "term": "crush",
+        "phonetic": "/krʌʃ/",
+        "partOfSpeech": "v.",
+        "definitionCn": "压碎；粉碎",
+        "exampleEn": "First, the limestone is crushed into small pieces.",
+        "exampleCn": "首先，石灰石被粉碎成小块。"
+      },
+      {
+        "id": "process-filter",
+        "term": "filter",
+        "phonetic": "/ˈfɪltə/",
+        "partOfSpeech": "v.",
+        "definitionCn": "过滤",
+        "exampleEn": "The liquid is filtered to remove any remaining impurities.",
+        "exampleCn": "液体经过过滤以去除残留杂质。"
+      },
+      {
+        "id": "process-heat",
+        "term": "heat",
+        "phonetic": "/hiːt/",
+        "partOfSpeech": "v.",
+        "definitionCn": "加热",
+        "exampleEn": "The mixture is heated to a temperature of approximately 80°C.",
+        "exampleCn": "混合物被加热至约80摄氏度。"
+      },
+      {
+        "id": "process-cool",
+        "term": "cool",
+        "phonetic": "/kuːl/",
+        "partOfSpeech": "v.",
+        "definitionCn": "冷却",
+        "exampleEn": "It is then cooled rapidly in a separate chamber.",
+        "exampleCn": "随后，它在独立的冷却室中迅速降温。"
+      },
+      {
+        "id": "process-assemble",
+        "term": "assemble",
+        "phonetic": "/əˈsembl/",
+        "partOfSpeech": "v.",
+        "definitionCn": "组装",
+        "exampleEn": "The individual components are assembled on a production line.",
+        "exampleCn": "各个部件在生产线上完成组装。"
+      },
+      {
+        "id": "process-package",
+        "term": "package",
+        "phonetic": "/ˈpækɪdʒ/",
+        "partOfSpeech": "v.",
+        "definitionCn": "包装",
+        "exampleEn": "Finally, the tablets are packaged in sealed boxes for distribution.",
+        "exampleCn": "最后，药片被装入密封盒中以便配送。"
+      },
+      {
+        "id": "process-recycle",
+        "term": "recycle",
+        "phonetic": "/ˌriːˈsaɪkl/",
+        "partOfSpeech": "v.",
+        "definitionCn": "回收利用",
+        "exampleEn": "Waste water is treated and recycled back into the system.",
+        "exampleCn": "废水经处理后被回收并重新送入系统。"
+      },
+      {
+        "id": "process-culminate-in",
+        "term": "culminate in",
+        "phonetic": "/ˈkʌlmɪneɪt ɪn/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "最终形成；以……告终",
+        "exampleEn": "The process culminates in the delivery of the finished cement to retailers.",
+        "exampleCn": "该流程最终以成品水泥运送至零售商告终。"
+      }
+    ]
+  },
+  {
+    "id": "mixed",
+    "label": "组合图",
+    "labelEnglish": "Mixed Charts",
+    "description": "跨图关联与综合比较",
+    "entries": [
+      {
+        "id": "mixed-illustrate",
+        "term": "illustrate",
+        "phonetic": "/ˈɪləstreɪt/",
+        "partOfSpeech": "v.",
+        "definitionCn": "展示；说明",
+        "exampleEn": "The bar chart illustrates energy output, while the line graph shows changes in demand.",
+        "exampleCn": "柱状图展示能源产量，而折线图显示需求变化。"
+      },
+      {
+        "id": "mixed-compare",
+        "term": "compare",
+        "phonetic": "/kəmˈpeə/",
+        "partOfSpeech": "v.",
+        "definitionCn": "比较",
+        "exampleEn": "The two charts compare household income with expenditure across five age groups.",
+        "exampleCn": "两张图比较了五个年龄组的家庭收入与支出。"
+      },
+      {
+        "id": "mixed-correspond-to",
+        "term": "correspond to",
+        "phonetic": "/ˌkɒrəˈspɒnd tə/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "与……相对应",
+        "exampleEn": "The sharp rise in output corresponded to an equally marked fall in unit costs.",
+        "exampleCn": "产量的急剧上升与单位成本同样明显的下降相对应。"
+      },
+      {
+        "id": "mixed-while",
+        "term": "while",
+        "phonetic": "/waɪl/",
+        "partOfSpeech": "conj.",
+        "definitionCn": "而；与此同时",
+        "exampleEn": "Car ownership increased steadily, while bus use declined over the same period.",
+        "exampleCn": "汽车拥有量稳步上升，而同期公交使用量下降。"
+      },
+      {
+        "id": "mixed-whereas",
+        "term": "whereas",
+        "phonetic": "/ˌweərˈæz/",
+        "partOfSpeech": "conj.",
+        "definitionCn": "然而；而",
+        "exampleEn": "The pie chart presents proportions, whereas the table gives the actual numbers.",
+        "exampleCn": "饼图呈现比例，而表格给出实际数量。"
+      },
+      {
+        "id": "mixed-in-contrast",
+        "term": "in contrast",
+        "phonetic": "/ɪn ˈkɒntrɑːst/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "相比之下",
+        "exampleEn": "In contrast, the category with the smallest budget experienced the fastest growth.",
+        "exampleCn": "相比之下，预算最少的类别增长最快。"
+      },
+      {
+        "id": "mixed-respectively",
+        "term": "respectively",
+        "phonetic": "/rɪˈspektɪvli/",
+        "partOfSpeech": "adv.",
+        "definitionCn": "分别地",
+        "exampleEn": "Output and employment rose by 18% and 12%, respectively.",
+        "exampleCn": "产量和就业人数分别增长18%和12%。"
+      },
+      {
+        "id": "mixed-follow-a-similar-pattern",
+        "term": "follow a similar pattern",
+        "phonetic": "/ˈfɒləʊ ə ˈsɪmələ ˈpætn/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "呈现相似走势",
+        "exampleEn": "Revenue and passenger numbers followed a similar pattern throughout the period.",
+        "exampleCn": "收入和乘客数量在整个期间呈现相似走势。"
+      },
+      {
+        "id": "mixed-move-in-opposite-directions",
+        "term": "move in opposite directions",
+        "phonetic": "/muːv ɪn ˈɒpəzɪt dəˈrekʃənz/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "呈相反走势",
+        "exampleEn": "After 2010, prices and sales moved in opposite directions.",
+        "exampleCn": "2010年后，价格与销量呈相反走势。"
+      },
+      {
+        "id": "mixed-align-with",
+        "term": "align with",
+        "phonetic": "/əˈlaɪn wɪð/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "与……一致",
+        "exampleEn": "The regional ranking in the table broadly aligned with the pattern shown in the bar chart.",
+        "exampleCn": "表格中的地区排名与柱状图所示模式大体一致。"
+      },
+      {
+        "id": "mixed-discrepancy",
+        "term": "discrepancy",
+        "phonetic": "/dɪˈskrepənsi/",
+        "partOfSpeech": "n.",
+        "definitionCn": "差异；不一致",
+        "exampleEn": "A notable discrepancy can be seen between the growth in users and the fall in revenue.",
+        "exampleCn": "用户增长与收入下降之间存在明显的不一致。"
+      },
+      {
+        "id": "mixed-simultaneously",
+        "term": "simultaneously",
+        "phonetic": "/ˌsɪmlˈteɪniəsli/",
+        "partOfSpeech": "adv.",
+        "definitionCn": "同时地",
+        "exampleEn": "Production expanded rapidly while emissions simultaneously declined.",
+        "exampleCn": "产量迅速扩大，同时排放量下降。"
+      },
+      {
+        "id": "mixed-alongside",
+        "term": "alongside",
+        "phonetic": "/əˌlɒŋˈsaɪd/",
+        "partOfSpeech": "prep.",
+        "definitionCn": "与……同时；伴随",
+        "exampleEn": "The increase in population occurred alongside a rise in housing demand.",
+        "exampleCn": "人口增长伴随着住房需求上升。"
+      },
+      {
+        "id": "mixed-despite",
+        "term": "despite",
+        "phonetic": "/dɪˈspaɪt/",
+        "partOfSpeech": "prep.",
+        "definitionCn": "尽管",
+        "exampleEn": "Despite a decline in unit prices, total revenue increased by almost one-third.",
+        "exampleCn": "尽管单价下降，总收入仍增长了近三分之一。"
+      },
+      {
+        "id": "mixed-relative-to",
+        "term": "relative to",
+        "phonetic": "/ˈrelətɪv tə/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "相对于",
+        "exampleEn": "Energy consumption rose modestly relative to the much sharper increase in GDP.",
+        "exampleCn": "相对于GDP的大幅增长，能源消费仅小幅上升。"
+      },
+      {
+        "id": "mixed-relationship",
+        "term": "relationship",
+        "phonetic": "/rɪˈleɪʃnʃɪp/",
+        "partOfSpeech": "n.",
+        "definitionCn": "关系；关联",
+        "exampleEn": "The charts reveal a clear relationship between income and car ownership.",
+        "exampleCn": "图表显示收入与汽车拥有量之间存在明显关联。"
+      },
+      {
+        "id": "mixed-inverse-relationship",
+        "term": "inverse relationship",
+        "phonetic": "/ˌɪnvɜːs rɪˈleɪʃnʃɪp/",
+        "partOfSpeech": "phr.",
+        "definitionCn": "反向关系",
+        "exampleEn": "There was an inverse relationship between the price of solar panels and the number installed.",
+        "exampleCn": "太阳能板价格与安装数量之间呈反向关系。"
+      },
+      {
+        "id": "mixed-combined",
+        "term": "combined",
+        "phonetic": "/kəmˈbaɪnd/",
+        "partOfSpeech": "adj.",
+        "definitionCn": "合计的；综合的",
+        "exampleEn": "The combined data indicate that higher investment was associated with lower unemployment.",
+        "exampleCn": "综合数据表明，较高投资与较低失业率相关。"
+      },
+      {
+        "id": "mixed-overall",
+        "term": "overall",
+        "phonetic": "/ˌəʊvərˈɔːl/",
+        "partOfSpeech": "adv.",
+        "definitionCn": "总体而言",
+        "exampleEn": "Overall, both charts point to a gradual shift away from fossil fuels.",
+        "exampleCn": "总体而言，两张图均表明能源结构正逐渐摆脱化石燃料。"
+      },
+      {
+        "id": "mixed-reveal",
+        "term": "reveal",
+        "phonetic": "/rɪˈviːl/",
+        "partOfSpeech": "v.",
+        "definitionCn": "揭示；显示",
+        "exampleEn": "Taken together, the charts reveal that demand grew faster than supply.",
+        "exampleCn": "综合来看，图表显示需求增长快于供给。"
+      }
+    ]
+  }
+]
