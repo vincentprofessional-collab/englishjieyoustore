@@ -8635,13 +8635,13 @@ body.share-sheet-open {
 
 /* Homepage visual direction lab */
 .home-style-lab {
-  --home-accent: #ff6338;
-  --home-bg: #fffaf2;
-  --home-ink: #201913;
-  --home-line: #2c231d;
-  --home-muted: #6f685f;
-  --home-soft: #f2eadf;
-  --home-surface: #fffdf8;
+  --home-accent: var(--accent);
+  --home-bg: var(--bg);
+  --home-ink: var(--ink);
+  --home-line: var(--line);
+  --home-muted: var(--muted);
+  --home-soft: var(--accent-soft);
+  --home-surface: var(--panel);
   display: grid;
   gap: 22px;
 }
@@ -8751,6 +8751,32 @@ body.share-sheet-open {
   overflow: hidden;
   padding: clamp(34px, 5vw, 64px);
   position: relative;
+}
+
+.home-simple .home-hero-panel {
+  background:
+    radial-gradient(circle at 88% 16%, rgba(200, 148, 25, 0.17), transparent 18rem),
+    radial-gradient(circle at 14% 82%, rgba(15, 107, 79, 0.1), transparent 16rem),
+    var(--home-surface);
+  border: 1px solid rgba(228, 216, 189, 0.95);
+  box-shadow: 0 22px 70px rgba(34, 54, 43, 0.11);
+  grid-template-columns: minmax(0, 1fr);
+  min-height: 520px;
+}
+
+.home-simple .home-hero-copy {
+  max-width: 760px;
+}
+
+.home-simple .home-primary-action {
+  background: var(--accent);
+  color: #fff;
+}
+
+.home-simple .home-secondary-action {
+  background: rgba(255, 250, 240, 0.72);
+  border-color: rgba(228, 216, 189, 0.95);
+  color: var(--accent-dark);
 }
 
 .home-hero-copy {
