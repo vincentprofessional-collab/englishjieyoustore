@@ -1,15 +1,9 @@
 :root {
   --bg: #f7f1df;
   --panel: #fffaf0;
-  --panel-glass: rgba(255, 250, 240, 0.96);
-  --surface: #fffdf8;
-  --surface-soft: rgba(255, 253, 246, 0.86);
-  --surface-muted: #f4f2ec;
   --ink: #17231d;
-  --heading: #111813;
   --muted: #706855;
   --line: #e4d8bd;
-  --line-soft: rgba(228, 216, 189, 0.9);
   --accent: #0f6b4f;
   --accent-dark: #0a4737;
   --accent-soft: #e0f0e8;
@@ -20,43 +14,6 @@
   --success: #24734d;
   --site-max: 1080px;
   --paper-block-max: 900px;
-  --body-gradient:
-    radial-gradient(circle at top left, rgba(15, 107, 79, 0.17), transparent 32rem),
-    radial-gradient(circle at top right, rgba(200, 148, 25, 0.14), transparent 28rem),
-    linear-gradient(135deg, #f8f1df 0%, #f7f1e5 42%, #eaf2ea 100%);
-  --panel-shadow: 0 22px 70px rgba(34, 54, 43, 0.12);
-  --card-shadow: 0 18px 60px rgba(68, 52, 30, 0.1);
-  --button-ink: #fff;
-}
-
-html[data-theme="night"] {
-  --bg: #11100d;
-  --panel: #1b1712;
-  --panel-glass: rgba(27, 23, 18, 0.96);
-  --surface: #211c16;
-  --surface-soft: rgba(38, 32, 24, 0.88);
-  --surface-muted: #29231b;
-  --ink: #f6efe2;
-  --heading: #fff8ea;
-  --muted: #b9ad99;
-  --line: #4d4030;
-  --line-soft: rgba(129, 105, 72, 0.58);
-  --accent: #3f6f5b;
-  --accent-dark: #91b59e;
-  --accent-soft: rgba(63, 111, 91, 0.22);
-  --gold: #9f792d;
-  --gold-soft: #d4bc7c;
-  --warning: #c28a47;
-  --danger: #db7c6d;
-  --success: #83b895;
-  --body-gradient:
-    radial-gradient(circle at top left, rgba(63, 111, 91, 0.28), transparent 30rem),
-    radial-gradient(circle at top right, rgba(159, 121, 45, 0.2), transparent 28rem),
-    linear-gradient(135deg, #0c0b09 0%, #14110e 45%, #1b1712 100%);
-  --panel-shadow: 0 22px 70px rgba(0, 0, 0, 0.42);
-  --card-shadow: 0 18px 60px rgba(0, 0, 0, 0.34);
-  --button-ink: #fff8ea;
-  color-scheme: dark;
 }
 
 /* IELTS Writing */
@@ -143,7 +100,7 @@ html[data-theme="night"] {
 }
 
 .writing-hero-copy h1 {
-  color: var(--heading);
+  color: #111;
   font-family: Georgia, "Times New Roman", "Noto Serif SC", serif;
   font-size: clamp(30px, 5vw, 58px);
   letter-spacing: -0.035em;
@@ -153,7 +110,7 @@ html[data-theme="night"] {
 }
 
 .writing-hero-copy > p {
-  color: var(--ink);
+  color: #292a26;
   font-size: 18px;
   line-height: 1.8;
   margin: 0;
@@ -224,7 +181,7 @@ html[data-theme="night"] {
 }
 
 .writing-paper-sheet small {
-  color: var(--ink);
+  color: #282c29;
   font-weight: 900;
   margin-top: 3px;
 }
@@ -269,14 +226,14 @@ html[data-theme="night"] {
 
 .writing-section-heading h2,
 .writing-after-practice-panel h2 {
-  color: var(--heading);
+  color: #111;
   font-size: 30px;
   letter-spacing: -0.035em;
   margin: 7px 0 0;
 }
 
 .writing-section-heading > p {
-  color: var(--muted);
+  color: #3e403a;
   line-height: 1.6;
   margin: 0;
   max-width: 440px;
@@ -452,7 +409,7 @@ html[data-theme="night"] {
   background: #fffdf7;
   border: 1px solid var(--line);
   border-radius: 20px;
-  color: var(--heading);
+  color: #111;
   cursor: default;
   display: grid;
   gap: 5px 15px;
@@ -484,7 +441,7 @@ html[data-theme="night"] {
 
 .writing-task-card > strong {
   align-items: baseline;
-  color: var(--heading);
+  color: #111;
   display: flex;
   gap: 12px;
   font-size: 22px;
@@ -544,7 +501,7 @@ html[data-theme="night"] {
 }
 
 .writing-category-intro > strong {
-  color: var(--heading);
+  color: #111;
   font-size: 22px;
   line-height: 1.3;
 }
@@ -573,7 +530,7 @@ html[data-theme="night"] {
   border: 1px solid rgba(200, 148, 25, 0.45);
   border-left: 9px solid var(--gold);
   border-radius: 17px;
-  color: var(--heading);
+  color: #111;
   cursor: pointer;
   display: grid;
   gap: 13px;
@@ -697,7 +654,7 @@ html[data-theme="night"] {
 }
 
 .writing-question-card > strong {
-  color: var(--heading);
+  color: #111;
   font-size: 16px;
   line-height: 1.45;
 }
@@ -726,7 +683,7 @@ html[data-theme="night"] {
 
 .writing-special-training-title {
   border-bottom: 1px solid rgba(228, 216, 189, 0.9);
-  color: var(--heading);
+  color: #111;
   font-size: 34px;
   letter-spacing: -0.045em;
   line-height: 1.15;
@@ -785,7 +742,7 @@ html[data-theme="night"] {
 .writing-resource-grid > a > strong,
 .writing-resource-grid article > strong,
 .writing-after-practice-grid article > strong {
-  color: var(--heading);
+  color: #111;
   font-size: 20px;
 }
 
@@ -811,7 +768,7 @@ html[data-theme="night"] {
 }
 
 .writing-task1-vocab-heading a {
-  color: var(--heading);
+  color: #111;
   font-size: 26px;
   font-weight: 1000;
   letter-spacing: 0.08em;
@@ -822,7 +779,7 @@ html[data-theme="night"] {
 
 .writing-task1-vocab-heading h1 {
   align-items: baseline;
-  color: var(--heading);
+  color: #111;
   display: flex;
   flex-wrap: wrap;
   font-size: clamp(22px, 2.6vw, 32px);
@@ -842,7 +799,7 @@ html[data-theme="night"] {
 }
 
 .writing-task1-vocab-heading h1 small {
-  color: var(--heading);
+  color: #111;
   font-size: 1em;
   font-weight: 1000;
   line-height: 1;
@@ -879,7 +836,7 @@ html[data-theme="night"] {
   appearance: none;
   background: transparent;
   border: 0;
-  color: var(--heading);
+  color: #111;
   cursor: pointer;
   display: grid;
   gap: 16px;
@@ -913,7 +870,7 @@ html[data-theme="night"] {
 }
 
 .writing-vocab-category-toggle small {
-  color: var(--heading);
+  color: #111;
   font-size: 20px;
   letter-spacing: 0;
   line-height: 1;
@@ -937,7 +894,7 @@ html[data-theme="night"] {
   background: #fff;
   border: 1px solid var(--line);
   border-radius: 999px;
-  color: var(--heading);
+  color: #111;
   cursor: pointer;
   font-size: 13px;
   font-weight: 1000;
@@ -998,14 +955,14 @@ html[data-theme="night"] {
 }
 
 .writing-vocab-entry-title-row > small {
-  color: var(--heading);
+  color: #111;
   font-size: 19px;
   font-weight: 1000;
   line-height: 1.08;
 }
 
 .writing-vocab-entry-title-row > em {
-  color: var(--heading);
+  color: #111;
   font-size: 15px;
   font-style: normal;
   font-weight: 1000;
@@ -1015,7 +972,7 @@ html[data-theme="night"] {
 
 .writing-vocab-entry-title-row .inline-pronunciation {
   align-items: baseline;
-  color: var(--heading);
+  color: #111;
   font-size: 15px;
   gap: 8px;
   line-height: 1.08;
@@ -1025,7 +982,7 @@ html[data-theme="night"] {
 .writing-vocab-entry-title-row .inline-pronunciation-side {
   align-items: baseline;
   background: transparent;
-  color: var(--heading);
+  color: #111;
   gap: 5px;
   min-height: 0;
   padding: 0;
@@ -1033,7 +990,7 @@ html[data-theme="night"] {
 
 .writing-vocab-entry-title-row .inline-pronunciation-side b,
 .writing-vocab-entry-title-row .inline-pronunciation-side > span {
-  color: var(--heading);
+  color: #111;
   font-size: 15px;
   line-height: 1.08;
 }
@@ -1050,7 +1007,7 @@ html[data-theme="night"] {
 }
 
 .writing-vocab-definition {
-  color: var(--heading);
+  color: #111;
   font-size: 18px;
   font-weight: 900;
   margin: 0;
@@ -1058,7 +1015,7 @@ html[data-theme="night"] {
 
 .writing-vocab-example-en,
 .writing-vocab-example-cn {
-  color: var(--heading);
+  color: #111;
   font-family: Georgia, "Times New Roman", "Noto Serif SC", serif;
   line-height: 1.45;
   margin: 0;
@@ -1088,7 +1045,7 @@ html[data-theme="night"] {
   background: #fffdf7;
   border: 1px solid var(--line);
   border-radius: 999px;
-  color: var(--heading);
+  color: #111;
   font-family: Georgia, "Times New Roman", "Noto Serif SC", serif;
   font-size: 15px;
   font-weight: 800;
@@ -1109,7 +1066,7 @@ html[data-theme="night"] {
 }
 
 .writing-vocab-order-line {
-  color: var(--heading);
+  color: #111;
   font-family: Georgia, "Times New Roman", "Noto Serif SC", serif;
   font-size: 20px;
   line-height: 2.2;
@@ -1126,7 +1083,7 @@ html[data-theme="night"] {
 .writing-vocab-order-slot {
   align-items: center;
   border-bottom: 3px dotted rgba(15, 107, 79, 0.58);
-  color: var(--heading);
+  color: #111;
   display: inline-flex;
   font-weight: 900;
   justify-content: center;
@@ -1171,7 +1128,7 @@ html[data-theme="night"] {
   background: #fffdf7;
   border: 1px solid rgba(15, 107, 79, 0.42);
   border-radius: 12px;
-  color: var(--heading);
+  color: #111;
   font: 17px/1.45 Georgia, "Times New Roman", "Noto Serif SC", serif;
   min-height: 110px;
   overflow-wrap: anywhere;
@@ -1232,7 +1189,7 @@ html[data-theme="night"] {
 
 .writing-workspace-mode > strong,
 .reading-workspace-mode > strong {
-  color: var(--heading);
+  color: #111;
   font-size: 18px;
 }
 
@@ -1361,7 +1318,7 @@ html[data-theme="night"] {
   background: rgba(255, 250, 240, 0.92);
   border: 1px solid var(--line);
   border-radius: 16px;
-  color: var(--heading);
+  color: #111;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
@@ -1396,12 +1353,12 @@ html[data-theme="night"] {
 }
 
 .writing-exam-instruction strong {
-  color: var(--heading);
+  color: #111;
   font-size: 18px;
 }
 
 .writing-exam-instruction span {
-  color: var(--ink);
+  color: #222;
   font-size: 14px;
 }
 
@@ -1460,7 +1417,7 @@ html[data-theme="night"] {
 }
 
 .writing-question-pane h1 {
-  color: var(--heading);
+  color: #111;
   font-family: Georgia, "Times New Roman", "Noto Serif SC", serif;
   font-size: clamp(23px, 2.5vw, 31px);
   letter-spacing: -0.025em;
@@ -1469,7 +1426,7 @@ html[data-theme="night"] {
 }
 
 .writing-question-pane > p {
-  color: var(--heading);
+  color: #111;
   font-size: 16px;
   font-weight: 700;
   line-height: 1.7;
@@ -1500,7 +1457,7 @@ html[data-theme="night"] {
 }
 
 .writing-response-pane > label {
-  color: var(--heading);
+  color: #111;
   font-size: 15px;
   font-weight: 1000;
   margin-bottom: 10px;
@@ -1510,7 +1467,7 @@ html[data-theme="night"] {
   background: #fffefb;
   border: 1px solid #777974;
   border-radius: 9px;
-  color: var(--heading);
+  color: #111;
   font-family: Georgia, "Times New Roman", serif;
   font-size: 17px;
   line-height: 1.75;
@@ -1534,7 +1491,7 @@ html[data-theme="night"] {
 }
 
 .writing-response-meta span {
-  color: var(--heading);
+  color: #111;
   font-size: 15px;
   font-weight: 1000;
 }
@@ -1594,7 +1551,7 @@ html[data-theme="night"] {
 
 .writing-bottom-part-switcher button.active {
   border-top-color: var(--accent);
-  color: var(--heading);
+  color: #111;
 }
 
 .writing-bottom-part-switcher > span {
@@ -1653,7 +1610,7 @@ html[data-theme="night"] {
 }
 
 .writing-model-answer-heading {
-  color: var(--heading);
+  color: #111;
   font-size: clamp(27px, 3vw, 36px);
   letter-spacing: 0.055em;
   line-height: 1.1;
@@ -1675,7 +1632,7 @@ html[data-theme="night"] {
   background: #fffdf8;
   border: 1px solid var(--line);
   border-radius: 14px;
-  color: var(--heading);
+  color: #111;
   font-family: Georgia, "Times New Roman", "Noto Serif SC", serif;
   padding: 24px 28px;
 }
@@ -1691,7 +1648,7 @@ html[data-theme="night"] {
 }
 
 .writing-vocabulary-term {
-  color: var(--heading);
+  color: #111;
   cursor: help;
   outline: none;
   position: relative;
@@ -1709,7 +1666,7 @@ html[data-theme="night"] {
   border-radius: 14px;
   bottom: calc(100% + 10px);
   box-shadow: 0 20px 50px rgba(45, 47, 39, 0.2);
-  color: var(--heading);
+  color: #111;
   display: none;
   font-family: Georgia, "Times New Roman", "Noto Serif SC", serif;
   gap: 7px;
@@ -1729,26 +1686,26 @@ html[data-theme="night"] {
 }
 
 .writing-vocabulary-tooltip > strong {
-  color: var(--heading);
+  color: #111;
   font-size: 18px;
   padding-right: 96px;
 }
 
 .writing-vocabulary-tooltip > span:not(.writing-vocabulary-tooltip-actions):not(.writing-vocabulary-note-editor) {
-  color: var(--heading);
+  color: #111;
   font-size: 13px;
   font-weight: 800;
 }
 
 .writing-vocabulary-tooltip > small {
-  color: var(--heading);
+  color: #111;
   font-size: 14px;
   font-weight: 800;
 }
 
 .writing-vocabulary-tooltip > em {
   border-top: 1px solid rgba(228, 216, 189, 0.9);
-  color: var(--heading);
+  color: #111;
   font-size: 13px;
   font-style: normal;
   line-height: 1.55;
@@ -1769,7 +1726,7 @@ html[data-theme="night"] {
   background: #fff;
   border: 1px solid var(--line);
   border-radius: 8px;
-  color: var(--heading);
+  color: #111;
   cursor: pointer;
   font-size: 11px;
   font-weight: 1000;
@@ -1805,7 +1762,7 @@ html[data-theme="night"] {
 .writing-vocabulary-note-editor textarea {
   border: 1px solid #bbb9ae;
   border-radius: 8px;
-  color: var(--heading);
+  color: #111;
   font: 14px/1.5 Georgia, "Times New Roman", "Noto Serif SC", serif;
   min-height: 76px;
   padding: 9px;
@@ -2198,7 +2155,7 @@ html.reading-fullscreen-active .shell {
 }
 
 .reading-part-instruction strong {
-  color: var(--heading);
+  color: #111;
   font-size: 19px;
 }
 
@@ -2237,7 +2194,7 @@ html.reading-fullscreen-active .shell {
 }
 
 .reading-passage-pane h1 {
-  color: var(--heading);
+  color: #111;
   font-size: clamp(25px, 2.9vw, 34px);
   letter-spacing: -0.035em;
   line-height: 1.2;
@@ -2252,7 +2209,7 @@ html.reading-fullscreen-active .shell {
 .reading-passage-copy p,
 .reading-passage-section p,
 .reading-heading-section p {
-  color: var(--heading);
+  color: #111;
   font-family: Arial, "Noto Sans SC", sans-serif;
   font-size: 17px;
   line-height: 1.72;
@@ -2263,7 +2220,7 @@ html.reading-fullscreen-active .shell {
   align-items: center;
   background: #fffdf8;
   border: 2px solid #73756f;
-  color: var(--ink);
+  color: #222;
   cursor: col-resize;
   display: flex;
   font-family: Arial, sans-serif;
@@ -2301,7 +2258,7 @@ html.reading-fullscreen-active .shell {
 .reading-question-section h2,
 .reading-question-section h3,
 .reading-question-section p {
-  color: var(--heading);
+  color: #111;
   margin: 0;
 }
 
@@ -2343,7 +2300,7 @@ html.reading-fullscreen-active .shell {
   align-items: center;
   border: 2px solid var(--gold);
   border-radius: 6px;
-  color: var(--heading);
+  color: #111;
   display: inline-flex;
   font-family: Arial, sans-serif;
   font-size: 14px;
@@ -2354,7 +2311,7 @@ html.reading-fullscreen-active .shell {
 }
 
 .reading-question-prompt > span {
-  color: var(--heading);
+  color: #111;
   font-family: Arial, "Noto Sans SC", sans-serif;
   font-size: 16px;
   font-weight: 700;
@@ -2441,7 +2398,7 @@ html.reading-fullscreen-active .shell {
 }
 
 .reading-choice-option.selected .reading-choice-mark.multiple::after {
-  color: var(--heading);
+  color: #111;
   content: "✓";
   font-size: 15px;
   font-weight: 1000;
@@ -2473,7 +2430,7 @@ html.reading-fullscreen-active .shell {
 
 .reading-fill-list > label {
   align-items: baseline;
-  color: var(--heading);
+  color: #111;
   display: flex;
   flex-wrap: wrap;
   font-family: Arial, "Noto Sans SC", sans-serif;
@@ -2500,7 +2457,7 @@ html.reading-fullscreen-active .shell {
 .reading-fill-input-wrap b {
   align-items: center;
   background: #f0eee6;
-  color: var(--heading);
+  color: #111;
   display: inline-flex;
   font-size: 13px;
   height: 34px;
@@ -2511,7 +2468,7 @@ html.reading-fullscreen-active .shell {
 .reading-fill-input-wrap input {
   background: #fff;
   border: 0;
-  color: var(--heading);
+  color: #111;
   font-family: Arial, "Noto Sans SC", sans-serif;
   font-size: 15px;
   font-weight: 800;
@@ -2557,7 +2514,7 @@ html.reading-fullscreen-active .shell {
 }
 
 .reading-heading-slot > span {
-  color: var(--heading);
+  color: #111;
   font-family: Arial, sans-serif;
   font-size: 15px;
   font-weight: 1000;
@@ -2573,7 +2530,7 @@ html.reading-fullscreen-active .shell {
 .reading-heading-slot > button {
   background: transparent;
   border: 0;
-  color: var(--heading);
+  color: #111;
   cursor: grab;
   font-family: Arial, "Noto Sans SC", sans-serif;
   font-size: 14px;
@@ -2609,7 +2566,7 @@ html.reading-fullscreen-active .shell {
   background: #fff;
   border: 1px solid #a6aaa5;
   border-radius: 7px;
-  color: var(--heading);
+  color: #111;
   cursor: grab;
   display: inline-flex;
   font-family: Arial, "Noto Sans SC", sans-serif;
@@ -2708,7 +2665,7 @@ html.reading-fullscreen-active .shell {
 }
 
 .reading-part-panel.active .reading-part-tab {
-  color: var(--heading);
+  color: #111;
   padding-inline: 0 3px;
 }
 
@@ -2752,7 +2709,7 @@ html.reading-fullscreen-active .shell {
 
 .reading-question-navigation > button.active {
   border-color: var(--gold);
-  color: var(--heading);
+  color: #111;
   font-weight: 1000;
 }
 
@@ -2817,7 +2774,7 @@ html.reading-fullscreen-active .shell {
 }
 
 .reading-review-head h2 {
-  color: var(--heading);
+  color: #111;
   font-size: 24px;
   margin: 4px 0 0;
 }
@@ -2848,7 +2805,7 @@ html.reading-fullscreen-active .shell {
 }
 
 .reading-review-group h3 {
-  color: var(--heading);
+  color: #111;
   font-size: 20px;
   margin: 0;
 }
@@ -2904,7 +2861,7 @@ html.reading-fullscreen-active .shell {
 }
 
 .reading-review-question-label {
-  color: var(--heading);
+  color: #111;
   font-size: 12px;
   font-weight: 1000;
   white-space: nowrap;
@@ -3214,10 +3171,13 @@ html.reading-fullscreen-active .shell {
 
 html,
 body {
-  background: var(--body-gradient);
-  color: var(--ink);
   margin: 0;
   min-height: 100%;
+  background:
+    radial-gradient(circle at top left, rgba(15, 107, 79, 0.17), transparent 32rem),
+    radial-gradient(circle at top right, rgba(200, 148, 25, 0.14), transparent 28rem),
+    linear-gradient(135deg, #f8f1df 0%, #f7f1e5 42%, #eaf2ea 100%);
+  color: var(--ink);
 }
 
 body {
@@ -3244,10 +3204,10 @@ textarea {
 }
 
 .site-header {
-  background: color-mix(in srgb, var(--panel-glass) 96%, transparent);
-  border: 1px solid var(--line-soft);
+  background: rgba(255, 250, 240, 0.94);
+  border: 1px solid rgba(228, 216, 189, 0.95);
   border-radius: 28px;
-  box-shadow: var(--panel-shadow);
+  box-shadow: 0 22px 70px rgba(34, 54, 43, 0.12);
   margin-bottom: 22px;
   overflow: visible;
   position: relative;
@@ -3309,46 +3269,11 @@ textarea {
   line-height: 1;
 }
 
-.nav-actions {
-  align-items: center;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: flex-end;
-}
-
-.theme-toggle {
-  align-items: center;
-  background: var(--surface-soft);
-  border: 1px solid var(--line-soft);
-  border-radius: 999px;
-  display: inline-flex;
-  gap: 4px;
-  padding: 4px;
-}
-
-.theme-toggle button {
-  background: transparent;
-  border: 0;
-  border-radius: 999px;
-  color: var(--muted);
-  cursor: pointer;
-  font-size: 13px;
-  font-weight: 1000;
-  min-height: 34px;
-  padding: 0 12px;
-}
-
-.theme-toggle button.active {
-  background: var(--accent);
-  color: var(--button-ink);
-}
-
 .nav-cta {
   background: var(--gold);
   border-radius: 999px;
   box-shadow: 0 12px 26px rgba(200, 148, 25, 0.24);
-  color: var(--button-ink);
+  color: #fff;
   font-size: 14px;
   font-weight: 900;
   padding: 10px 16px;
@@ -3357,7 +3282,7 @@ textarea {
 
 .nav-main {
   align-items: stretch;
-  border-top: 1px solid var(--line-soft);
+  border-top: 1px solid rgba(228, 216, 189, 0.95);
   display: flex;
   flex-wrap: wrap;
   min-height: 60px;
@@ -3372,7 +3297,7 @@ textarea {
   align-items: center;
   background: transparent;
   border: 0;
-  border-right: 1px solid var(--line-soft);
+  border-right: 1px solid rgba(228, 216, 189, 0.82);
   color: var(--accent-dark);
   cursor: pointer;
   display: inline-flex;
@@ -3396,7 +3321,7 @@ textarea {
 .nav-tab:hover,
 .nav-tab.active {
   background: var(--accent);
-  color: var(--button-ink);
+  color: #fff;
 }
 
 .nav-tab.active {
@@ -3542,7 +3467,7 @@ textarea {
 }
 
 .vocabulary-autoplay-settings span {
-  color: var(--muted);
+  color: #756d5d;
   font-size: 14px;
   font-weight: 800;
 }
@@ -3878,7 +3803,7 @@ h1 {
 
 .button.primary {
   background: var(--accent);
-  color: var(--button-ink);
+  color: #fff;
 }
 
 .button.secondary {
@@ -4211,7 +4136,7 @@ h1 {
 }
 
 .listening-library-head strong {
-  color: var(--heading);
+  color: #111;
   font-size: 28px;
   letter-spacing: -0.04em;
 }
@@ -4284,7 +4209,7 @@ h1 {
 }
 
 .listening-test-title {
-  color: var(--heading);
+  color: #111;
   font-size: 17px;
   line-height: 1;
 }
@@ -4358,7 +4283,7 @@ h1 {
 }
 
 .listening-mock-book-card span {
-  color: var(--heading);
+  color: #111;
   font-size: 16px;
   font-weight: 1000;
 }
@@ -4586,12 +4511,12 @@ h1 {
 }
 
 .exam-part-intro strong {
-  color: var(--heading);
+  color: #111;
   font-size: 22px;
 }
 
 .exam-part-intro span {
-  color: var(--ink);
+  color: #252525;
   font-size: 16px;
   line-height: 1.45;
 }
@@ -5075,7 +5000,7 @@ h1 {
 }
 
 .practice-subtitle-line p {
-  color: var(--ink);
+  color: #000;
   font-size: 16px;
   font-weight: 800;
   line-height: 1.55;
@@ -5083,14 +5008,14 @@ h1 {
 }
 
 .subtitle-english-line {
-  color: var(--ink);
+  color: #000;
   display: block;
   margin-bottom: 8px;
 }
 
 .subtitle-word {
   border-radius: 7px;
-  color: var(--ink);
+  color: #000;
   display: inline-block;
   line-height: 1.55;
   padding: 0 2px;
@@ -5108,7 +5033,7 @@ h1 {
   border: 1px solid var(--line);
   border-radius: 16px;
   box-shadow: 0 18px 45px rgba(68, 52, 30, 0.2);
-  color: var(--ink);
+  color: #1d2527;
   display: none;
   gap: 4px;
   left: 50%;
@@ -5126,7 +5051,7 @@ h1 {
   border: 1px solid var(--line);
   border-radius: 16px;
   box-shadow: 0 22px 55px rgba(68, 52, 30, 0.24);
-  color: var(--ink);
+  color: #1d2527;
   display: grid;
   gap: 6px;
   max-height: min(360px, calc(100vh - 32px));
@@ -5176,7 +5101,7 @@ h1 {
   background: #f7f7f7;
   border: 1px solid #d6d6d6;
   border-radius: 10px;
-  color: var(--ink);
+  color: #222;
   cursor: pointer;
   font-size: 14px;
   font-weight: 1000;
@@ -5241,7 +5166,7 @@ h1 {
 }
 
 .practice-subtitle-line small {
-  color: var(--ink);
+  color: #000;
   display: block;
   font-size: 16px;
   font-weight: 700;
@@ -5249,7 +5174,7 @@ h1 {
 }
 
 .practice-subtitle-line small.primary-translation {
-  color: var(--ink);
+  color: #000;
   font-size: 16px;
   font-weight: 800;
 }
@@ -5707,7 +5632,7 @@ body.share-sheet-open {
   background: transparent;
   border: 0;
   border-radius: 26px;
-  color: var(--heading);
+  color: #111813;
   cursor: pointer;
   display: grid;
   gap: 4px;
@@ -5726,7 +5651,7 @@ body.share-sheet-open {
   box-shadow:
     inset 0 0 0 1px rgba(200, 148, 25, 0.48),
     0 10px 30px rgba(68, 52, 30, 0.1);
-  color: var(--heading);
+  color: #111813;
   transform: translateY(-1px);
 }
 
@@ -5801,7 +5726,7 @@ body.share-sheet-open {
 }
 
 .favorite-sort-trigger span {
-  color: var(--muted);
+  color: #887d63;
   font-size: 12px;
 }
 
@@ -5829,7 +5754,7 @@ body.share-sheet-open {
   background: transparent;
   border: 0;
   border-radius: 9px;
-  color: var(--ink);
+  color: #24382f;
   cursor: pointer;
   font-size: 13px;
   font-weight: 900;
@@ -6064,7 +5989,7 @@ body.share-sheet-open {
 
 .favorite-library-meta,
 .favorite-library-date {
-  color: var(--muted);
+  color: #887d63;
   font-size: 13px;
   font-weight: 1000;
   justify-content: center;
@@ -6093,7 +6018,7 @@ body.share-sheet-open {
 
 .favorite-library-phonetics {
   align-items: center;
-  color: var(--muted);
+  color: #74776d;
   display: flex;
   flex-wrap: wrap;
   gap: 4px 10px;
@@ -6120,13 +6045,13 @@ body.share-sheet-open {
 }
 
 .favorite-library-phonetics b {
-  color: var(--muted);
+  color: #545850;
   font-size: 13px;
   font-weight: 1000;
 }
 
 .favorite-phonetic-side > span {
-  color: var(--muted);
+  color: #74776d;
   font-size: 13px;
   font-weight: 850;
   min-width: 0;
@@ -6155,7 +6080,7 @@ body.share-sheet-open {
 }
 
 .favorite-library-source b {
-  color: var(--muted);
+  color: #887d63;
   font-size: 13px;
   font-weight: 1000;
   letter-spacing: 0.1em;
@@ -6163,7 +6088,7 @@ body.share-sheet-open {
 }
 
 .favorite-library-source small {
-  color: var(--muted);
+  color: #887d63;
   display: block;
   font-size: 13px;
   font-weight: 1000;
@@ -6178,7 +6103,7 @@ body.share-sheet-open {
 
 .favorite-library-source a,
 .favorite-source-stack {
-  color: var(--muted);
+  color: #887d63;
   align-items: center;
   display: inline-flex;
   flex-direction: column;
@@ -6200,7 +6125,7 @@ body.share-sheet-open {
 
 .favorite-library-content {
   align-items: center;
-  color: var(--heading);
+  color: #111813;
   display: flex;
   font-size: 14px;
   line-height: 1.42;
@@ -6211,7 +6136,7 @@ body.share-sheet-open {
 }
 
 .favorite-library-row.word-row .favorite-library-content {
-  color: var(--heading);
+  color: #111813;
   font-size: 14px;
   line-height: 1.42;
 }
@@ -6599,7 +6524,7 @@ body.share-sheet-open {
 .paper-answer-slot input {
   background: transparent;
   border: 0;
-  color: var(--heading);
+  color: #111;
   font-size: 18px;
   font-weight: 900;
   min-height: 30px;
@@ -6801,7 +6726,7 @@ body.share-sheet-open {
 }
 
 .map-yard {
-  color: var(--ink);
+  color: #222;
   font-size: 20px;
   font-weight: 1000;
   left: 56%;
@@ -7277,7 +7202,7 @@ body.share-sheet-open {
 }
 
 .writing-mode-translation {
-  color: var(--ink);
+  color: #000;
   font-weight: 800;
 }
 
@@ -8510,7 +8435,7 @@ body.share-sheet-open {
 }
 
 .vocabulary-autocomplete-row > small {
-  color: var(--muted);
+  color: #887d63;
   font-size: 13px;
   font-weight: 1000;
   letter-spacing: 0.08em;
@@ -8521,7 +8446,7 @@ body.share-sheet-open {
 }
 
 .autocomplete-word-definition {
-  color: var(--muted);
+  color: #5e6259;
   font-size: 14px;
   line-height: 1.42;
   min-width: 0;
@@ -10494,7 +10419,7 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
 }
 
 .vocabulary-level-badge {
-  color: var(--muted);
+  color: #7e806f;
   font-size: 13px;
   letter-spacing: 0.08em;
 }
@@ -10608,7 +10533,7 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
 
 .definition-rows p {
   align-items: flex-start;
-  color: var(--muted);
+  color: #5e6259;
   display: grid;
   gap: 12px;
   grid-template-columns: 54px minmax(0, 1fr);
@@ -10700,7 +10625,7 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
 
 .etymology-title-row h1 {
   align-self: center;
-  color: var(--heading);
+  color: #111813;
   font-size: clamp(28px, 4vw, 44px);
   font-weight: 1000;
   letter-spacing: -0.04em;
@@ -10860,7 +10785,7 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
 }
 
 .etymology-word-pronunciation {
-  color: var(--muted);
+  color: #74776d;
   font-size: 13px;
   font-weight: 850;
   line-height: 1.15;
@@ -10881,7 +10806,7 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
   align-items: center;
   background: transparent;
   border: 0;
-  color: var(--muted);
+  color: #74776d;
   cursor: pointer;
   display: inline-flex;
   font-size: 13px;
@@ -10898,7 +10823,7 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
 }
 
 .directory-pronunciation-button b {
-  color: var(--muted);
+  color: #545850;
   flex: 0 0 auto;
   font-weight: 1000;
 }
@@ -10921,7 +10846,7 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
 }
 
 .etymology-word-level {
-  color: var(--muted);
+  color: #887d63;
   font-size: 13px;
   font-weight: 1000;
   letter-spacing: 0.08em;
@@ -10932,7 +10857,7 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
 }
 
 .etymology-word-definition {
-  color: var(--muted);
+  color: #5e6259;
   font-size: 14px;
   line-height: 1.42;
   min-width: 0;
@@ -11038,7 +10963,7 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
 
 .word-detail-title-row h1 {
   border-right: 1px solid rgba(228, 216, 189, 0.9);
-  color: var(--heading);
+  color: #111813;
   flex: 0 0 auto;
   font-size: clamp(30px, 4vw, 44px);
   font-weight: 1000;
@@ -11096,28 +11021,28 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
 
 .word-detail-title-row .inline-pronunciation {
   align-items: flex-end;
-  color: var(--heading);
+  color: #111813;
   font-size: 15px;
   gap: 8px;
 }
 
 .word-detail-title-row .inline-pronunciation-side {
   background: transparent;
-  color: var(--heading);
+  color: #111813;
   min-height: auto;
   padding: 0;
 }
 
 .word-detail-title-row .vocabulary-level-badge {
   align-self: flex-end;
-  color: var(--heading);
+  color: #111813;
   font-size: 15px;
   margin-bottom: 1px;
 }
 
 .word-detail-title-row .inline-pronunciation-side b,
 .word-detail-title-row .inline-pronunciation-side > span {
-  color: var(--heading);
+  color: #111813;
   font-size: 15px;
 }
 
@@ -11246,7 +11171,7 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
 }
 
 .word-inflection-grid b {
-  color: var(--muted);
+  color: #887d63;
   font-size: 12px;
   letter-spacing: 0.08em;
 }
@@ -11438,7 +11363,7 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
 }
 
 .vocabulary-usage-example-main small {
-  color: var(--muted);
+  color: #887d63;
   font-weight: 1000;
 }
 
@@ -11574,7 +11499,7 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
 }
 
 .word-share-snapshot h3 {
-  color: var(--heading);
+  color: #111813;
   font-size: clamp(42px, 9vw, 66px);
   letter-spacing: -0.065em;
   line-height: 0.94;
@@ -11726,7 +11651,7 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
 }
 
 .bbc-article-hero h1 {
-  color: var(--heading);
+  color: #111;
   display: grid;
   font-family: Georgia, "Times New Roman", "Noto Serif SC", serif;
   font-size: clamp(28px, 3.5vw, 38px);
@@ -11739,7 +11664,7 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
 }
 
 .bbc-article-title-id {
-  color: var(--heading);
+  color: #111;
   font-size: 21px;
   font-weight: 900;
   letter-spacing: 0.02em;
@@ -11748,13 +11673,13 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
 }
 
 .bbc-article-title-line {
-  color: var(--heading);
+  color: #111;
   display: block;
   font-size: 1em;
 }
 
 .bbc-hero h1 {
-  color: var(--heading);
+  color: #111;
   font-family: Georgia, "Times New Roman", "Noto Serif SC", serif;
   font-size: clamp(34px, 4.4vw, 52px);
   letter-spacing: 0.04em;
@@ -11795,7 +11720,7 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
 }
 
 .bbc-original-title > span {
-  color: var(--heading);
+  color: #111;
   font-size: 15px;
   font-weight: 900;
 }
@@ -11839,7 +11764,7 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
   background: rgba(255, 252, 245, 0.74);
   border: 1px solid rgba(228, 216, 189, 0.9);
   border-radius: 999px;
-  color: var(--heading);
+  color: #111;
   cursor: pointer;
   display: inline-flex;
   gap: 8px;
@@ -11920,7 +11845,7 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
 }
 
 .bbc-original-copy p {
-  color: var(--ink);
+  color: #000;
   font-family: Georgia, "Times New Roman", "Noto Serif SC", serif;
   font-size: 22px;
   font-weight: 400;
@@ -11995,7 +11920,7 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
   border: 1px solid rgba(191, 159, 70, 0.38);
   border-left: 8px solid var(--accent);
   border-radius: 10px;
-  color: var(--heading);
+  color: #111;
   display: flex;
   min-height: 50px;
   padding: 7px 14px 7px 96px;
@@ -12076,7 +12001,7 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
 .bbc-listening-sentence-card .bbc-sentence-english,
 .bbc-listening-sentence-card .bbc-sentence-chinese,
 .bbc-listening-sentence-copy > p {
-  color: var(--ink);
+  color: #000;
   font-family: Georgia, "Times New Roman", "Noto Serif SC", serif;
   font-size: 17px;
   font-weight: 700;
@@ -12086,7 +12011,7 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
 
 .transcript-panel .sentence-card .sentence-copy p,
 .transcript-panel .sentence-card .sentence-copy .translation {
-  color: var(--ink);
+  color: #000;
 }
 
 .bbc-listening-sentence-card .howler-player {
@@ -12156,7 +12081,7 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
 .bbc-vocabulary-item p,
 .bbc-vocabulary-item span,
 .bbc-vocabulary-item small {
-  color: var(--heading);
+  color: #111;
   line-height: 1.55;
   margin: 0;
 }
@@ -12545,7 +12470,7 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
   }
 
   .bbc-hero h1 {
-    color: var(--heading);
+    color: #111;
     font-family: Georgia, "Times New Roman", "Noto Serif SC", serif;
     font-size: clamp(27px, 7vw, 38px);
     letter-spacing: 0.03em;
@@ -12642,7 +12567,7 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
     border: 1px solid rgba(191, 159, 70, 0.38);
     border-left: 8px solid var(--accent);
     border-radius: 10px;
-    color: var(--heading);
+    color: #111;
     display: flex;
     min-height: 50px;
     padding: 8px 12px 8px 56px;
@@ -12712,327 +12637,4 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
   .bbc-back-strip a {
     background: linear-gradient(135deg, var(--accent), var(--accent-dark));
   }
-}
-
-/* Theme: 夜晚 / 暗夜复古。白天主题保留在 :root。 */
-html[data-theme="night"] {
-  background: var(--body-gradient);
-}
-
-html[data-theme="night"] body {
-  background: var(--body-gradient);
-}
-
-html[data-theme="night"] ::selection {
-  background: rgba(159, 121, 45, 0.42);
-  color: var(--heading);
-}
-
-html[data-theme="night"] :is(
-  .site-header,
-  .global-vocabulary-search-strip .vocabulary-search-row,
-  .hero-card,
-  .panel,
-  .module,
-  .section-card,
-  .book-tile,
-  .writing-hero-panel,
-  .writing-mode-panel,
-  .writing-library-panel,
-  .writing-resource-panel,
-  .writing-workspace-toolbar,
-  .reading-workspace-toolbar,
-  .writing-exam-panel,
-  .writing-after-practice-panel,
-  .ielts-module-hero,
-  .listening-library-panel,
-  .reading-exam-shell,
-  .reading-part-instruction,
-  .reading-question-section,
-  .reading-review-panel,
-  .reading-review-group,
-  .listening-exam-toolbar,
-  .listening-exam-toolbar.practice,
-  .exam-part-intro,
-  .practice-sidebar,
-  .practice-main,
-  .transcript-panel,
-  .practice-listening-card,
-  .bbc-hero,
-  .bbc-article-hero,
-  .bbc-original-panel,
-  .bbc-year-panel,
-  .bbc-player-panel,
-  .bbc-transcript-panel,
-  .bbc-vocabulary-panel,
-  .favorite-library-row > *,
-  .favorite-empty,
-  .favorites-segmented-tabs,
-  .favorite-sort-trigger,
-  .favorite-sort-menu,
-  .vocabulary-result-card,
-  .word-detail-main,
-  .word-side-panel,
-  .selected-root-panel,
-  .etymology-directory article,
-  .profile-settings-card,
-  .notes-panel,
-  .share-sheet-panel,
-  .word-share-panel
-) {
-  background: var(--panel-glass);
-  border-color: var(--line-soft);
-  box-shadow: var(--panel-shadow);
-  color: var(--ink);
-}
-
-html[data-theme="night"] :is(
-  .writing-paper-sheet,
-  .writing-hero-notes span,
-  .writing-question-card,
-  .writing-resource-grid > a,
-  .writing-resource-grid article,
-  .writing-prompt-card,
-  .writing-answer-card,
-  .writing-model-answer-card,
-  .reading-test-card,
-  .reading-choice-option,
-  .reading-fill-input-wrap,
-  .reading-heading-slot,
-  .reading-heading-pool,
-  .reading-heading-pool > button,
-  .reading-part-panel,
-  .reading-part-tab,
-  .reading-question-navigation > button,
-  .reading-review-row > span,
-  .listening-practice-book-row,
-  .listening-test-cluster,
-  .listening-part-box,
-  .listening-mock-book-card,
-  .listening-mock-test-link,
-  .practice-subtitle-line,
-  .sentence-card,
-  .question-card,
-  .bbc-year-banner,
-  .bbc-article-card,
-  .bbc-vocabulary-item,
-  .bbc-reading-timer,
-  .howler-player,
-  .player-menu-trigger,
-  .player-menu-panel,
-  .selection-action-popover,
-  .word-tooltip,
-  .word-tooltip-floating,
-  .vocabulary-search-row,
-  .vocabulary-autocomplete-panel,
-  .vocabulary-autocomplete-row > *,
-  .vocabulary-chip-grid a,
-  .inline-pronunciation-side,
-  .definition-rows p,
-  .word-detail-section .definition-rows.large p,
-  .english-definition-list p,
-  .english-example-list blockquote,
-  .word-detail-simple-list p,
-  .word-detail-story-card,
-  .word-detail-tag-list span,
-  .word-inflection-grid span,
-  .etymology-word-panel,
-  .etymology-word-row > *,
-  .word-share-snapshot,
-  .word-share-snapshot-meta span,
-  .word-share-snapshot-definitions p,
-  .word-share-snapshot-etymology,
-  .share-sheet-preview,
-  .share-sheet-actions button,
-  .exam-mode-bar,
-  .mode-switch,
-  .exam-lock-note
-) {
-  background: var(--surface-soft);
-  border-color: var(--line-soft);
-  color: var(--ink);
-}
-
-html[data-theme="night"] :is(
-  input,
-  textarea,
-  select,
-  .field input,
-  .profile-inline-control input,
-  .vocabulary-search-row input,
-  .reading-fill-input-wrap input,
-  .note-card textarea
-) {
-  background: #14110e;
-  border-color: var(--line-soft);
-  color: var(--heading);
-}
-
-html[data-theme="night"] :is(input, textarea)::placeholder {
-  color: rgba(246, 239, 226, 0.48);
-}
-
-html[data-theme="night"] :is(
-  h1,
-  h2,
-  h3,
-  .brand-copy strong,
-  .writing-hero-copy h1,
-  .writing-section-heading h2,
-  .listening-library-head strong,
-  .listening-book-label strong,
-  .listening-test-title,
-  .listening-mock-book-card strong,
-  .listening-mock-book-card span,
-  .exam-part-intro strong,
-  .reading-part-instruction strong,
-  .reading-passage-pane h1,
-  .reading-question-section h2,
-  .reading-question-section h3,
-  .reading-review-head h2,
-  .bbc-hero h1,
-  .bbc-article-hero h1,
-  .bbc-article-title-id,
-  .bbc-article-title-line,
-  .bbc-original-title > span,
-  .bbc-original-copy p,
-  .bbc-listening-sentence-card .bbc-sentence-english,
-  .bbc-listening-sentence-card .bbc-sentence-chinese,
-  .bbc-listening-sentence-copy > p,
-  .transcript-panel .sentence-card .sentence-copy p,
-  .transcript-panel .sentence-card .sentence-copy .translation,
-  .subtitle-english-line,
-  .subtitle-word,
-  .practice-subtitle-line p,
-  .practice-subtitle-line small,
-  .practice-subtitle-line small.primary-translation,
-  .favorite-library-title,
-  .favorite-library-content,
-  .favorite-library-row.word-row .favorite-library-content,
-  .vocabulary-card-head h2,
-  .word-detail-title-row h1,
-  .word-detail-title-row .inline-pronunciation,
-  .word-detail-title-row .inline-pronunciation-side,
-  .word-detail-title-row .inline-pronunciation-side b,
-  .word-detail-title-row .inline-pronunciation-side > span,
-  .word-detail-title-row .vocabulary-level-badge,
-  .word-share-snapshot h3,
-  .word-share-snapshot-definitions span,
-  .word-share-snapshot-etymology span
-) {
-  color: var(--heading);
-}
-
-html[data-theme="night"] :is(
-  p,
-  small,
-  .lead,
-  .muted,
-  .card-topline,
-  .card-meta,
-  .module span,
-  .section-card p,
-  .book-tile small,
-  .listening-book-label small,
-  .exam-part-intro span,
-  .favorite-library-meta,
-  .favorite-library-date,
-  .favorite-sort-trigger span,
-  .favorite-library-phonetics,
-  .favorite-phonetic-side > span,
-  .favorite-library-source b,
-  .favorite-library-source small,
-  .favorite-library-source a,
-  .favorite-source-stack,
-  .word-tooltip span,
-  .word-tooltip small,
-  .word-tooltip-floating span,
-  .word-tooltip-floating small
-) {
-  color: var(--muted);
-}
-
-html[data-theme="night"] :is(
-  .brand-mark,
-  .nav-tab:hover,
-  .nav-tab.active,
-  .nav-dropdown,
-  .nav-submenu,
-  .button.primary,
-  .nav-cta,
-  .annotation-toggle.active,
-  .bbc-original-actions .bbc-annotation-toggle.active,
-  .bbc-player-top a,
-  .bbc-back-strip a,
-  .reading-footer-actions > button.complete,
-  .mode-switch button.active,
-  .word-share-enter-site
-) {
-  color: var(--button-ink);
-}
-
-html[data-theme="night"] :is(.nav-dropdown, .nav-submenu) {
-  background:
-    radial-gradient(circle at 92% 12%, rgba(159, 121, 45, 0.22), transparent 9rem),
-    linear-gradient(135deg, #24382c, #18241e);
-  border-color: rgba(145, 181, 158, 0.22);
-}
-
-html[data-theme="night"] .nav-dropdown-grid a:hover,
-html[data-theme="night"] .nav-dropdown-branch:hover .nav-dropdown-branch-trigger {
-  color: var(--gold-soft);
-}
-
-html[data-theme="night"] :is(.footer-brand-band, .footer-action-band) {
-  background: linear-gradient(135deg, #213429, #151d18);
-  border: 1px solid var(--line-soft);
-  color: var(--button-ink);
-}
-
-html[data-theme="night"] .footer-action-band {
-  background: linear-gradient(135deg, #5f471b, #342813);
-}
-
-html[data-theme="night"] :is(.qr-card, .footer-brand-mark) {
-  background: var(--surface);
-  color: var(--accent-dark);
-}
-
-html[data-theme="night"] :is(.favorite-star, .content-share-button, .vocabulary-favorite-star, .vocabulary-share-button) {
-  color: #8d8064;
-}
-
-html[data-theme="night"] :is(.favorite-star.active, .favorite-library-star, .vocabulary-favorite-star.active, .content-share-button:hover) {
-  color: var(--gold-soft);
-  text-shadow: 0 4px 18px rgba(159, 121, 45, 0.28);
-}
-
-html[data-theme="night"] .reading-choice-option.selected,
-html[data-theme="night"] .practice-subtitle-line.active,
-html[data-theme="night"] .reading-heading-slot.filled,
-html[data-theme="night"] .favorites-segmented-tabs button.active {
-  background: rgba(63, 111, 91, 0.28);
-  border-color: rgba(145, 181, 158, 0.45);
-  color: var(--heading);
-}
-
-html[data-theme="night"] .reading-review-row.correct > span {
-  background: rgba(47, 90, 68, 0.36);
-}
-
-html[data-theme="night"] .reading-review-row.wrong > span {
-  background: rgba(117, 55, 44, 0.35);
-}
-
-html[data-theme="night"] .note-card {
-  background: #273f78;
-}
-
-html[data-theme="night"] .note-card.highlight {
-  background: #755719;
-}
-
-html[data-theme="night"] .inline-user-highlight {
-  background: rgba(159, 121, 45, 0.45);
-  color: var(--heading);
 }
