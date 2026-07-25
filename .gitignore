@@ -12,4 +12,8 @@ pnpm-debug.log*
 *.tsbuildinfo
 HANDOFF.MD
 certificates/*.pem
-public/audio/
+public/audio/*
+!public/audio/bbc/
+public/audio/bbc/*
+!public/audio/bbc/2015/
+!public/audio/bbc/2015/**

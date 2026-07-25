@@ -2,11 +2,6 @@
 
 import { usePathname } from "next/navigation";
 import { VocabularySearchAutocomplete } from "@/components/vocabulary-search-autocomplete";
-import type { VocabularyAutocompleteItem } from "@/lib/vocabulary/local-vocabulary";
-
-type GlobalVocabularySearchProps = {
-  suggestions: VocabularyAutocompleteItem[];
-};
 
 function shouldHideGlobalVocabularySearch(pathname: string) {
   if (pathname === "/vocabulary") {
@@ -16,7 +11,7 @@ function shouldHideGlobalVocabularySearch(pathname: string) {
   return false;
 }
 
-export function GlobalVocabularySearch({ suggestions }: GlobalVocabularySearchProps) {
+export function GlobalVocabularySearch() {
   const pathname = usePathname();
 
   if (shouldHideGlobalVocabularySearch(pathname)) {
@@ -25,7 +20,7 @@ export function GlobalVocabularySearch({ suggestions }: GlobalVocabularySearchPr
 
   return (
     <section className="global-vocabulary-search-strip" aria-label="全站查单词">
-      <VocabularySearchAutocomplete initialQuery="" suggestions={suggestions} />
+      <VocabularySearchAutocomplete initialQuery="" />
     </section>
   );
 }

@@ -8,7 +8,7 @@ import type { VocabularyAutocompleteItem } from "@/lib/vocabulary/local-vocabula
 
 type VocabularySearchAutocompleteProps = {
   initialQuery: string;
-  suggestions: VocabularyAutocompleteItem[];
+  suggestions?: VocabularyAutocompleteItem[];
 };
 
 function normalizeSearchInput(value: string) {
@@ -29,19 +29,29 @@ function isInteractiveTarget(target: EventTarget | null) {
 
 export function VocabularySearchAutocomplete({
   initialQuery,
-  suggestions,
+  suggestions = [],
 }: VocabularySearchAutocompleteProps) {
   const pathname = usePathname();
   const router = useRouter();
   const [query, setQuery] = useState(initialQuery);
+  const [remoteSuggestions, setRemoteSuggestions] = useState<VocabularyAutocompleteItem[]>([]);
+  const [remoteSuggestionCount, setRemoteSuggestionCount] = useState(0);
   const deferredQuery = useDeferredValue(query);
   const isChineseQuery = includesChinese(deferredQuery);
   const normalizedQuery = isChineseQuery
     ? normalizeDefinitionSearchInput(deferredQuery)
     : normalizeSearchInput(deferredQuery);
+  const shouldUseRemoteSuggestions = suggestions.length === 0;
   const { totalSuggestionCount, visibleSuggestions } = useMemo(() => {
     if (!normalizedQuery) {
       return { totalSuggestionCount: 0, visibleSuggestions: [] };
+    }
+
+    if (shouldUseRemoteSuggestions) {
+      return {
+        totalSuggestionCount: remoteSuggestionCount,
+        visibleSuggestions: remoteSuggestions,
+      };
     }
 
     const matchedSuggestions = suggestions
@@ -84,11 +94,49 @@ export function VocabularySearchAutocomplete({
       totalSuggestionCount: matchedSuggestions.length,
       visibleSuggestions: matchedSuggestions.slice(0, 40),
     };
-  }, [isChineseQuery, normalizedQuery, suggestions]);
+  }, [isChineseQuery, normalizedQuery, remoteSuggestionCount, remoteSuggestions, shouldUseRemoteSuggestions, suggestions]);
 
   useEffect(() => {
     setQuery(initialQuery);
   }, [initialQuery, pathname]);
+
+  useEffect(() => {
+    if (!shouldUseRemoteSuggestions) {
+      return;
+    }
+
+    if (!deferredQuery.trim()) {
+      setRemoteSuggestions([]);
+      setRemoteSuggestionCount(0);
+      return;
+    }
+
+    const controller = new AbortController();
+    const requestPath = `/api/vocabulary-autocomplete?q=${encodeURIComponent(deferredQuery)}&limit=40`;
+
+    fetch(requestPath, { signal: controller.signal })
+      .then((response) => {
+        if (!response.ok) {
+          return { suggestions: [], total: 0 } as { suggestions: VocabularyAutocompleteItem[]; total: number };
+        }
+
+        return response.json() as Promise<{ suggestions: VocabularyAutocompleteItem[]; total: number }>;
+      })
+      .then((payload) => {
+        setRemoteSuggestions(payload.suggestions ?? []);
+        setRemoteSuggestionCount(payload.total ?? payload.suggestions?.length ?? 0);
+      })
+      .catch((error: unknown) => {
+        if (error instanceof DOMException && error.name === "AbortError") {
+          return;
+        }
+
+        setRemoteSuggestions([]);
+        setRemoteSuggestionCount(0);
+      });
+
+    return () => controller.abort();
+  }, [deferredQuery, shouldUseRemoteSuggestions]);
 
   return (
     <form action="/vocabulary" className="vocabulary-search" role="search">
