@@ -16,18 +16,76 @@ type Task2FoldProps = {
   variant?: "essay" | "module";
 };
 
-const CONNECTOR_EXPRESSIONS: Task2VocabularyItem[] = [
-  { term: "however", meaningCn: "然而；用于转折", useCase: "转折连接" },
-  { term: "therefore", meaningCn: "因此；推出结果", useCase: "结果连接" },
-  { term: "as a result", meaningCn: "结果是", useCase: "因果连接" },
-  { term: "in other words", meaningCn: "换句话说", useCase: "解释说明" },
-  { term: "for instance", meaningCn: "例如", useCase: "举例展开" },
-  { term: "to illustrate", meaningCn: "举例来说", useCase: "举例展开" },
-  { term: "in conclusion", meaningCn: "总之", useCase: "结尾收束" },
-  { term: "on the other hand", meaningCn: "另一方面", useCase: "对比论证" },
-  { term: "firstly", meaningCn: "首先", useCase: "分点展开" },
-  { term: "secondly", meaningCn: "其次", useCase: "分点展开" },
+const ACADEMIC_EXPRESSIONS: Task2VocabularyItem[] = [
+  { term: "owing to", meaningCn: "由于；因为", useCase: "正式原因表达" },
+  { term: "in an effort to deal with", meaningCn: "为了处理……", useCase: "目的表达" },
+  { term: "the key to solving this issue", meaningCn: "解决该问题的关键", useCase: "方案判断" },
+  { term: "take into consideration", meaningCn: "纳入考虑", useCase: "补充维度" },
+  { term: "in the long run", meaningCn: "从长远来看", useCase: "长期影响" },
+  { term: "counteract", meaningCn: "抵消；对抗", useCase: "问题机制" },
+  { term: "by incorporating", meaningCn: "通过纳入……", useCase: "措施表达" },
+  { term: "extracurricular physical activities", meaningCn: "课外体育活动", useCase: "教育措施" },
+  { term: "not effective enough on its own", meaningCn: "单独使用还不够有效", useCase: "限制论证" },
+  { term: "constitutes", meaningCn: "构成；算作", useCase: "定义说明" },
+  { term: "for a more immediate impact", meaningCn: "为了产生更直接的效果", useCase: "方案递进" },
+  { term: "gravitate towards", meaningCn: "倾向于选择", useCase: "行为趋势" },
+  { term: "impose a tax on", meaningCn: "对……征税", useCase: "政策措施" },
+  { term: "predominate over", meaningCn: "压倒；占主导", useCase: "趋势表达" },
+  { term: "eventual disappearance", meaningCn: "最终消失", useCase: "长期后果" },
+  { term: "barriers", meaningCn: "障碍", useCase: "经济与交流" },
+  { term: "world heritage", meaningCn: "世界遗产", useCase: "文化价值" },
+  { term: "reoffend", meaningCn: "再次犯罪", useCase: "犯罪类核心词" },
+  { term: "rehabilitation", meaningCn: "改造；康复", useCase: "监狱制度" },
+  { term: "reintegrate back into society", meaningCn: "重新融入社会", useCase: "解决方案" },
+  { term: "deter them from reoffending", meaningCn: "阻止再次犯罪", useCase: "结果表达" },
+  { term: "long-term fulfilment", meaningCn: "长期满足感", useCase: "幸福与工作" },
+  { term: "in isolation", meaningCn: "孤立地；独自地", useCase: "人际关系论证" },
+  { term: "detrimental effect", meaningCn: "有害影响", useCase: "负面影响" },
+  { term: "supportive relationships", meaningCn: "支持性关系", useCase: "社区关系" },
+  { term: "transferable skills", meaningCn: "可迁移技能", useCase: "大学价值" },
+  { term: "hands-on experience", meaningCn: "实践经验", useCase: "工作技能" },
+  { term: "instant access", meaningCn: "即时获取", useCase: "便利性" },
+  { term: "accessibility and convenience", meaningCn: "可及性和便利性", useCase: "总结优势" },
 ];
+
+const SIMPLE_OR_REPEATED_TERMS = new Set([
+  "however",
+  "firstly",
+  "secondly",
+  "therefore",
+  "as a result",
+  "in other words",
+  "for instance",
+  "to illustrate",
+  "in conclusion",
+  "on the other hand",
+  "tackle the problem",
+]);
+
+const SENTENCE_CUE_OVERRIDES: Record<string, string> = {
+  "task2-overweight-physical-education-0-0":
+    "背景句：肥胖人群增加给医疗系统带来压力，因此有人认为学校应增加体育和运动课来解决问题。",
+  "task2-overweight-physical-education-0-1":
+    "立场句：学校体育确实有帮助，但饮食因素也必须一起考虑。",
+  "task2-overweight-physical-education-1-0":
+    "主题句：从长远看，学校规律运动有助于缓解大众体重问题。",
+  "task2-overweight-physical-education-1-1":
+    "解释句：这种方法能帮助新一代养成支持健康和合理体重的重要习惯。",
+  "task2-overweight-physical-education-1-2":
+    "问题句：目前西方儿童运动频率不足，难以抵消每天久坐上课带来的影响。",
+  "task2-overweight-physical-education-1-3":
+    "结果句：如果增加校内运动时间和课外体育活动，学生会更健康，并可能毕业后继续保持活跃。",
+  "task2-overweight-physical-education-2-0":
+    "转折句：只针对学生体育锻炼，并不能单独解决整个社会当前的肥胖问题。",
+  "task2-overweight-physical-education-2-1":
+    "补充句：学生还需要学习什么是健康食品，以及为什么要健康饮食。",
+  "task2-overweight-physical-education-2-2":
+    "递进句：若要更快见效，还要减少市场中过度加工食品的数量。",
+  "task2-overweight-physical-education-2-3":
+    "例证句：政府可以提高过度加工食品价格，同时降低蔬菜等健康食品成本，从而鼓励更好的饮食。",
+  "task2-overweight-physical-education-3-0":
+    "结论句：解决体重问题应从学校饮食和运动教育开始，同时通过食品价格调整促进更健康的选择。",
+};
 
 function countWords(paragraphs: string[]) {
   return paragraphs.join(" ").trim().split(/\s+/).filter(Boolean).length;
@@ -57,6 +115,12 @@ function splitIntoSentences(paragraph: string) {
 }
 
 function getChineseCue(essay: Task2ModelEssay, paragraphIndex: number, sentenceIndex: number) {
+  const override = SENTENCE_CUE_OVERRIDES[`${essay.id}-${paragraphIndex}-${sentenceIndex}`];
+
+  if (override) {
+    return override;
+  }
+
   const paragraphPlan = essay.paragraphPlan[paragraphIndex];
   const point = paragraphPlan?.points[sentenceIndex] ?? paragraphPlan?.points.at(-1);
   const sentenceRoles = ["主题句", "解释句", "例证句", "延伸句", "收束句"];
@@ -66,7 +130,7 @@ function getChineseCue(essay: Task2ModelEssay, paragraphIndex: number, sentenceI
   }
 
   if (paragraphIndex === 0 && sentenceIndex === 0) {
-    return `背景句：${point ?? essay.thesisCn}`;
+    return `背景句：${point ?? essay.thesisCn}。`;
   }
 
   if (paragraphIndex === 0) {
@@ -78,20 +142,16 @@ function getChineseCue(essay: Task2ModelEssay, paragraphIndex: number, sentenceI
 
 function getSentenceVocabulary(sentence: string, essay: Task2ModelEssay, paragraphIndex: number, sentenceIndex: number) {
   const lowerSentence = sentence.toLowerCase();
-  const matchedTopicVocabulary = essay.vocabulary.filter((item) =>
-    lowerSentence.includes(item.term.toLowerCase()),
+  const candidateItems = [...essay.vocabulary, ...ACADEMIC_EXPRESSIONS];
+  const uniqueItems = candidateItems.filter(
+    (item, index, allItems) =>
+      allItems.findIndex((candidate) => candidate.term.toLowerCase() === item.term.toLowerCase()) === index,
   );
-  const matchedConnectors = CONNECTOR_EXPRESSIONS.filter((item) =>
-    lowerSentence.includes(item.term.toLowerCase()),
-  );
-  const matched = [...matchedTopicVocabulary, ...matchedConnectors];
 
-  if (matched.length > 0) {
-    return matched.slice(0, 3);
-  }
-
-  const fallback = essay.vocabulary[(paragraphIndex + sentenceIndex) % essay.vocabulary.length];
-  return fallback ? [fallback] : [];
+  return uniqueItems
+    .filter((item) => !SIMPLE_OR_REPEATED_TERMS.has(item.term.toLowerCase()))
+    .filter((item) => lowerSentence.includes(item.term.toLowerCase()))
+    .slice(0, 3);
 }
 
 function Task2StageTitle({ index, title }: { index: string; title: string }) {
@@ -119,24 +179,6 @@ export function WritingTask2Library() {
           ← 返回雅思写作
         </Link>
       </div>
-
-      <nav className="task2-type-menu" aria-label="Task 2 essay types">
-        {groupedEssays.map((group, index) => {
-          const label = TASK2_TYPE_LABELS[group.type];
-
-          return (
-            <a className="task2-type-menu-card" href={`#task2-${group.type}`} key={group.type}>
-              <span className="task2-type-menu-index">{formatNumber(index)}</span>
-              <strong>
-                <b>{label.en}</b>
-                <em>{label.cn}</em>
-              </strong>
-              <small>{group.essays.length}</small>
-              <i aria-hidden="true">›</i>
-            </a>
-          );
-        })}
-      </nav>
 
       {groupedEssays.map((group) => {
         const label = TASK2_TYPE_LABELS[group.type];
@@ -274,19 +316,21 @@ export function WritingTask2EssayDetail({ essay }: { essay: Task2ModelEssay }) {
                             <p>{getChineseCue(essay, paragraphIndex, sentenceIndex)}</p>
                           </div>
 
-                          <div className="task2-sentence-vocabulary">
-                            <span>重点词汇与表达</span>
-                            <div>
-                              {vocabulary.map((item) => (
-                                <article key={`${sentenceId}-${item.term}`}>
-                                  <strong>{item.term}</strong>
-                                  <small>
-                                    {item.meaningCn} · {item.useCase}
-                                  </small>
-                                </article>
-                              ))}
+                          {vocabulary.length > 0 ? (
+                            <div className="task2-sentence-vocabulary">
+                              <span>重点词汇与表达</span>
+                              <div>
+                                {vocabulary.map((item) => (
+                                  <article key={`${sentenceId}-${item.term}`}>
+                                    <strong>{item.term}</strong>
+                                    <small>
+                                      {item.meaningCn} · {item.useCase}
+                                    </small>
+                                  </article>
+                                ))}
+                              </div>
                             </div>
-                          </div>
+                          ) : null}
 
                           <label className="task2-sentence-practice">
                             <span>学生英文练习</span>

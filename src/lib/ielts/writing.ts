@@ -111,6 +111,13 @@ export const WRITING_CATEGORIES: WritingCategory[] = [
     task: "task2",
   },
   {
+    id: "causes-solutions",
+    label: "原因与解决",
+    labelEnglish: "Cause & Solution Essay",
+    description: "分析问题成因，并提出与原因对应的解决措施。",
+    task: "task2",
+  },
+  {
     id: "two-part",
     label: "两问型",
     labelEnglish: "Two-part Question",
@@ -424,6 +431,17 @@ const CORE_WRITING_QUESTIONS: WritingQuestion[] = [
     title: "The effects of an ageing population",
     shortTitle: "人口老龄化是否利大于弊",
     prompt: "Some people say an ageing population creates problems for governments. Other people think there are benefits if society has more elderly people. To what extent do the advantages outweigh the disadvantages?",
+    wordTarget: 250,
+  },
+  {
+    id: "type-task2-repeat-offenders",
+    book: "题型专项",
+    test: "Cause & Solution",
+    task: "task2",
+    category: "causes-solutions",
+    title: "Many offenders commit more crimes after serving their first punishment.",
+    shortTitle: "罪犯为何再犯及如何解决",
+    prompt: "Why is this happening, and what measures can be taken to tackle this problem?",
     wordTarget: 250,
   },
   {
