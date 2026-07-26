@@ -1,16 +1,29 @@
 import Link from "next/link";
 import type { ManagedPageContent, ManagedPageItem } from "@/lib/content/page-content";
 
-const task2ModelEssayItem: ManagedPageItem = {
+const task2StepPracticeItem: ManagedPageItem = {
   actionLabel: "",
-  description: "按审题、段落规划、逻辑梳理和完整范文整理 Task 2 大作文。",
+  description: "按照审题、规划段落、逻辑梳理和完整范文逐步拆解大作文。",
   enabled: true,
   eyebrow: "TASK 2",
   href: "/writing/task2",
-  id: "task2-model-essays",
+  id: "task2-step-practice",
   kind: "secondary",
-  title: "大作文题目与范文拆解",
+  title: "Task2逐步练习",
 };
+
+function insertTask2StepPracticeItem(items: ManagedPageItem[]) {
+  const cleanedItems = items.filter(
+    (item) =>
+      item.id !== task2StepPracticeItem.id &&
+      item.id !== "task2-model-essays" &&
+      item.title !== "大作文题目与范文拆解",
+  );
+  const nextItems = [...cleanedItems];
+
+  nextItems.splice(3, 0, task2StepPracticeItem);
+  return nextItems;
+}
 
 function WritingResource({ item }: { item: ManagedPageItem }) {
   const content = (
@@ -24,23 +37,8 @@ function WritingResource({ item }: { item: ManagedPageItem }) {
 
 export function WritingHome({ content }: { content: ManagedPageContent }) {
   const primaryItems = content.items.filter((item) => item.enabled && item.kind === "primary");
-  const secondaryItems = content.items
-    .filter((item) => item.enabled && item.kind === "secondary")
-    .map((item) =>
-      item.id === "task2-vocabulary"
-        ? {
-            ...item,
-            description: item.description || task2ModelEssayItem.description,
-            href: item.href || task2ModelEssayItem.href,
-            title:
-              item.title === "场景词汇及翻译训练" ? task2ModelEssayItem.title : item.title,
-          }
-        : item,
-    );
-  const hasTask2ModelEssayItem = secondaryItems.some((item) => item.href === "/writing/task2");
-  const visibleSecondaryItems = hasTask2ModelEssayItem
-    ? secondaryItems
-    : [...secondaryItems, task2ModelEssayItem];
+  const secondaryItems = content.items.filter((item) => item.enabled && item.kind === "secondary");
+  const visibleSecondaryItems = insertTask2StepPracticeItem(secondaryItems);
 
   return (
     <section className="stack writing-home-page">
