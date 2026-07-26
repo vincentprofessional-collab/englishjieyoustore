@@ -1,34 +1,43 @@
 import Link from "next/link";
 import { READING_PARTS, getReadingQuestionNumbers } from "@/lib/ielts/reading";
+import type { ManagedPageContent } from "@/lib/content/page-content";
 
-export function ReadingHome() {
+export function ReadingHome({ content }: { content: ManagedPageContent }) {
   const totalQuestions = READING_PARTS.reduce(
     (total, part) => total + getReadingQuestionNumbers(part).length,
     0,
   );
+  const items = content.items.filter((item) => item.enabled);
 
   return (
     <section className="stack writing-home-page reading-home-page">
       <div className="writing-hero-panel reading-hero-panel ielts-module-hero">
         <div className="writing-hero-copy">
-          <h1>IELTS READING</h1>
+          <h1>{content.title}</h1>
+          {content.summary ? <p>{content.summary}</p> : null}
         </div>
       </div>
 
       <div className="writing-mode-panel reading-mode-panel">
         <div className="writing-mode-grid">
-          <Link className="writing-mode-card practice" href="/reading/practice">
-            <span>Practice</span>
-            <strong>练习</strong>
-            <p>按文章进入阅读工作台，保留原文、题目和底部题号导航。</p>
-            <em>进入练习 →</em>
-          </Link>
-          <Link className="writing-mode-card mock" href="/reading/mock">
-            <span>Mock Test</span>
-            <strong>模考</strong>
-            <p>{READING_PARTS.length} 篇文章，{totalQuestions} 道题，进入即开始 60 分钟倒计时。</p>
-            <em>开始完整模考 →</em>
-          </Link>
+          {items.map((item, index) => (
+            <Link
+              className={`writing-mode-card ${index % 2 === 0 ? "practice" : "mock"}`}
+              href={item.href || "/reading"}
+              key={item.id}
+            >
+              <span>{item.eyebrow}</span>
+              <strong>{item.title}</strong>
+              <p>
+                {item.id === "mock"
+                  ? item.description
+                      .replace("3 篇文章", `${READING_PARTS.length} 篇文章`)
+                      .replace("40 道题", `${totalQuestions} 道题`)
+                  : item.description}
+              </p>
+              <em>{item.actionLabel}</em>
+            </Link>
+          ))}
         </div>
       </div>
     </section>

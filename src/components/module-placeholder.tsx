@@ -4,7 +4,14 @@ type ModulePlaceholderProps = {
   badge: string;
   title: string;
   description: string;
-  items: string[];
+  items: Array<
+    | string
+    | {
+        description: string;
+        href?: string;
+        title: string;
+      }
+  >;
   primaryHref?: string;
   primaryLabel?: string;
 };
@@ -31,12 +38,29 @@ export function ModulePlaceholder({
       </div>
 
       <div className="grid three">
-        {items.map((item) => (
-          <article className="module large" key={item}>
-            <strong>{item}</strong>
-            <span>后台框架已预留，后续接入真实内容和权限开关。</span>
-          </article>
-        ))}
+        {items.map((item) => {
+          const title = typeof item === "string" ? item : item.title;
+          const description =
+            typeof item === "string"
+              ? "后台框架已预留，后续接入真实内容和权限开关。"
+              : item.description;
+
+          if (typeof item !== "string" && item.href) {
+            return (
+              <Link className="module large" href={item.href} key={title}>
+                <strong>{title}</strong>
+                <span>{description}</span>
+              </Link>
+            );
+          }
+
+          return (
+            <article className="module large" key={title}>
+              <strong>{title}</strong>
+              <span>{description}</span>
+            </article>
+          );
+        })}
       </div>
     </section>
   );

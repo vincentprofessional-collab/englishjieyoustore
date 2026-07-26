@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { VocabularyAutoplaySettings } from "@/components/vocabulary-autoplay-settings";
+import { supabase } from "@/lib/supabase/client";
 
 type NavChild = {
   children?: NavChild[];
@@ -88,6 +89,50 @@ const navItems: NavItem[] = [
 
 export function SiteNav() {
   const [openMenu, setOpenMenu] = useState<string | null>(null);
+  const [canAccessAdmin, setCanAccessAdmin] = useState(false);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    async function checkAdminAccess() {
+      const {
+        data: { user },
+        error: userError,
+      } = await supabase.auth.getUser();
+
+      if (userError || !user) {
+        if (isMounted) {
+          setCanAccessAdmin(false);
+        }
+        return;
+      }
+
+      const { data: profile, error: profileError } = await supabase
+        .from("profiles")
+        .select("role")
+        .eq("id", user.id)
+        .maybeSingle();
+
+      if (isMounted) {
+        setCanAccessAdmin(!profileError && profile?.role === "admin");
+      }
+    }
+
+    void checkAdminAccess();
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange(() => {
+      setTimeout(() => {
+        void checkAdminAccess();
+      }, 0);
+    });
+
+    return () => {
+      isMounted = false;
+      subscription.unsubscribe();
+    };
+  }, []);
 
   return (
     <header className="site-header">
@@ -98,9 +143,16 @@ export function SiteNav() {
             <strong>英文解忧杂货铺</strong>
           </span>
         </Link>
-        <Link className="nav-cta" href="/login">
-          登录 / 注册
-        </Link>
+        <div className="nav-actions">
+          {canAccessAdmin ? (
+            <Link className="nav-admin-link" href="/admin">
+              内容后台
+            </Link>
+          ) : null}
+          <Link className="nav-cta" href="/login">
+            登录 / 注册
+          </Link>
+        </div>
       </div>
 
       <nav className="nav-main" aria-label="主导航">

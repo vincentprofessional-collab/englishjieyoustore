@@ -1,12 +1,25 @@
 import { ModulePlaceholder } from "@/components/module-placeholder";
+import { getPublishedPageContent } from "@/lib/content/page-content";
 
-export default function TrainingPage() {
+export const dynamic = "force-dynamic";
+
+export default async function TrainingPage() {
+  const content = await getPublishedPageContent("training");
+
   return (
     <ModulePlaceholder
-      badge="Paid Module"
-      title="英语专项训练"
-      description="写作翻译训练一直收费，后期可以继续添加句子合并、语法改写、精听跟读等训练。"
-      items={["中文写英文", "两句英文合并", "语法改写", "后续训练入口"]}
+      badge={content.eyebrow}
+      title={content.title}
+      description={content.summary}
+      items={content.items
+        .filter((item) => item.enabled)
+        .map((item) => ({
+          description: item.description,
+          href: item.href,
+          title: item.title,
+        }))}
+      primaryHref={content.primaryHref}
+      primaryLabel={content.primaryLabel}
     />
   );
 }

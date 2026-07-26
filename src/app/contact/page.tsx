@@ -1,12 +1,25 @@
 import { ModulePlaceholder } from "@/components/module-placeholder";
+import { getPublishedPageContent } from "@/lib/content/page-content";
 
-export default function ContactPage() {
+export const dynamic = "force-dynamic";
+
+export default async function ContactPage() {
+  const content = await getPublishedPageContent("contact");
+
   return (
     <ModulePlaceholder
-      badge="Site"
-      title="联系我们"
-      description="第一阶段可以放邮箱、微信二维码和简单说明；后期再接表单提交到 contact_messages。"
-      items={["联系方式", "微信二维码", "常见问题", "留言表单"]}
+      badge={content.eyebrow}
+      title={content.title}
+      description={content.summary}
+      items={content.items
+        .filter((item) => item.enabled)
+        .map((item) => ({
+          description: item.description,
+          href: item.href,
+          title: item.title,
+        }))}
+      primaryHref={content.primaryHref}
+      primaryLabel={content.primaryLabel}
     />
   );
 }
