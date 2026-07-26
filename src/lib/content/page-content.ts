@@ -271,13 +271,13 @@ export const MANAGED_PAGE_DEFINITIONS: ManagedPageDefinition[] = [
         },
         {
           actionLabel: "",
-          description: "",
+          description: "按审题、段落规划、逻辑梳理和完整范文整理 Task 2 大作文。",
           enabled: true,
           eyebrow: "TASK 2",
-          href: "",
+          href: "/writing/task2",
           id: "task2-vocabulary",
           kind: "secondary",
-          title: "场景词汇及翻译训练",
+          title: "大作文题目与范文拆解",
         },
         {
           actionLabel: "",

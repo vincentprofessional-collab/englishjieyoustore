@@ -1,6 +1,17 @@
 import Link from "next/link";
 import type { ManagedPageContent, ManagedPageItem } from "@/lib/content/page-content";
 
+const task2ModelEssayItem: ManagedPageItem = {
+  actionLabel: "",
+  description: "按审题、段落规划、逻辑梳理和完整范文整理 Task 2 大作文。",
+  enabled: true,
+  eyebrow: "TASK 2",
+  href: "/writing/task2",
+  id: "task2-model-essays",
+  kind: "secondary",
+  title: "大作文题目与范文拆解",
+};
+
 function WritingResource({ item }: { item: ManagedPageItem }) {
   const content = (
     <strong>
@@ -13,9 +24,23 @@ function WritingResource({ item }: { item: ManagedPageItem }) {
 
 export function WritingHome({ content }: { content: ManagedPageContent }) {
   const primaryItems = content.items.filter((item) => item.enabled && item.kind === "primary");
-  const secondaryItems = content.items.filter(
-    (item) => item.enabled && item.kind === "secondary",
-  );
+  const secondaryItems = content.items
+    .filter((item) => item.enabled && item.kind === "secondary")
+    .map((item) =>
+      item.id === "task2-vocabulary"
+        ? {
+            ...item,
+            description: item.description || task2ModelEssayItem.description,
+            href: item.href || task2ModelEssayItem.href,
+            title:
+              item.title === "场景词汇及翻译训练" ? task2ModelEssayItem.title : item.title,
+          }
+        : item,
+    );
+  const hasTask2ModelEssayItem = secondaryItems.some((item) => item.href === "/writing/task2");
+  const visibleSecondaryItems = hasTask2ModelEssayItem
+    ? secondaryItems
+    : [...secondaryItems, task2ModelEssayItem];
 
   return (
     <section className="stack writing-home-page">
@@ -43,11 +68,11 @@ export function WritingHome({ content }: { content: ManagedPageContent }) {
         </div>
       </div>
 
-      {secondaryItems.length ? (
+      {visibleSecondaryItems.length ? (
         <div className="writing-resource-panel">
           <h2 className="writing-special-training-title">专项训练</h2>
           <div className="writing-resource-grid">
-            {secondaryItems.map((item) => (
+            {visibleSecondaryItems.map((item) => (
               <WritingResource item={item} key={item.id} />
             ))}
           </div>
