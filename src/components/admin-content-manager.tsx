@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { FormEvent, useEffect, useMemo, useState } from "react";
+import { AdminInlinePreview } from "@/components/admin-inline-preview";
 import {
   MANAGED_PAGE_DEFINITIONS,
   ManagedPageContent,
@@ -356,7 +357,31 @@ export function AdminContentManager() {
           })}
         </nav>
 
+        <div className="admin-live-column">
+          <AdminInlinePreview
+            content={draft}
+            definition={selectedDefinition}
+            onItemChange={updateItem}
+            onPageChange={(key, value) => updateDraft(key, value)}
+          />
+        </div>
+
         <div className="admin-editor-column">
+          <div className="admin-publish-card">
+            <p>在中间页面上直接点文字修改。点发布后，正式网站会读取这次修改。</p>
+            <button className="button primary" disabled={isSaving} type="button" onClick={publishPage}>
+              {isSaving ? "发布中…" : "发布更新"}
+            </button>
+            <button className="button secondary" disabled={isSaving} type="button" onClick={restoreDefaults}>
+              恢复默认内容
+            </button>
+            {saveMessage ? (
+              <p className={`admin-form-message ${saveMessage.includes("失败") ? "error" : ""}`}>
+                {saveMessage}
+              </p>
+            ) : null}
+          </div>
+
           <section className="admin-editor-card">
             <header className="admin-editor-heading">
               <div>
@@ -545,43 +570,6 @@ export function AdminContentManager() {
             </section>
           ) : null}
         </div>
-
-        <aside className="admin-preview-column">
-          <div className="admin-preview-card">
-            <span>{draft.eyebrow || "PAGE"}</span>
-            <h2>{draft.title || "未填写标题"}</h2>
-            <p>{draft.summary || "未填写页面说明。"}</p>
-            {showPageActions && draft.primaryLabel ? (
-              <strong>{draft.primaryLabel} →</strong>
-            ) : null}
-            <div className="admin-preview-items">
-              {draft.items
-                .filter((item) => item.enabled)
-                .map((item) => (
-                  <div key={item.id}>
-                    <small>{item.eyebrow}</small>
-                    <b>{item.title}</b>
-                    <p>{item.description}</p>
-                  </div>
-                ))}
-            </div>
-          </div>
-
-          <div className="admin-publish-card">
-            <p>发布后，前台会立即读取这次修改。未点击发布的内容只保留在当前页面。</p>
-            <button className="button primary" disabled={isSaving} type="button" onClick={publishPage}>
-              {isSaving ? "发布中…" : "发布更新"}
-            </button>
-            <button className="button secondary" disabled={isSaving} type="button" onClick={restoreDefaults}>
-              恢复默认内容
-            </button>
-            {saveMessage ? (
-              <p className={`admin-form-message ${saveMessage.includes("失败") ? "error" : ""}`}>
-                {saveMessage}
-              </p>
-            ) : null}
-          </div>
-        </aside>
       </div>
     </section>
   );
