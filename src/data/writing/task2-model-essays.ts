@@ -3,8 +3,7 @@ export type Task2EssayType =
   | "discussion"
   | "advantages"
   | "causes-solutions"
-  | "two-part"
-  | "positive-negative";
+  | "two-part";
 
 export type Task2ParagraphPlan = {
   heading: string;
@@ -47,16 +46,14 @@ export const TASK2_TYPE_ORDER: Task2EssayType[] = [
   "advantages",
   "causes-solutions",
   "two-part",
-  "positive-negative",
 ];
 
 export const TASK2_TYPE_LABELS: Record<Task2EssayType, { cn: string; en: string }> = {
-  opinion: { cn: "观点类", en: "Agree / Disagree" },
-  discussion: { cn: "双边讨论", en: "Discuss Both Views" },
+  opinion: { cn: "观点类", en: "Opinion" },
+  discussion: { cn: "双边讨论", en: "Discussion" },
   advantages: { cn: "利弊分析", en: "Advantages / Disadvantages" },
-  "causes-solutions": { cn: "原因与解决", en: "Causes / Solutions" },
-  "two-part": { cn: "两问型", en: "Two-part Question" },
-  "positive-negative": { cn: "积极或消极", en: "Positive / Negative" },
+  "causes-solutions": { cn: "原因与解决", en: "Cause & Solution Essay" },
+  "two-part": { cn: "两问型", en: "Two-Part Question" },
 };
 
 const source = "雅思大作文范文.docx";
@@ -682,7 +679,7 @@ export const TASK2_MODEL_ESSAYS: Task2ModelEssay[] = [
   {
     id: "task2-socialise-online",
     source,
-    taskType: "positive-negative",
+    taskType: "opinion",
     categoryCn: "互联网与生活",
     shortTitleCn: "线上社交是否是消极趋势",
     prompt:
@@ -886,3 +883,7 @@ export const TASK2_MODEL_ESSAYS: Task2ModelEssay[] = [
     ],
   },
 ];
+
+export function getTask2Essay(id: string) {
+  return TASK2_MODEL_ESSAYS.find((essay) => essay.id === id);
+}
