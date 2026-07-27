@@ -10,13 +10,15 @@ import type {
 } from "react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
-  READING_PARTS,
+  DEFAULT_READING_TEST,
   getReadingPart,
   getReadingQuestionNumbers,
   type ReadingChoiceQuestion,
+  type ReadingDiagramKind,
   type ReadingFillQuestion,
   type ReadingPart,
   type ReadingPartId,
+  type ReadingTest,
 } from "@/lib/ielts/reading";
 
 type AnswerMap = Record<number, string[]>;
@@ -24,6 +26,7 @@ type FillMap = Record<number, string>;
 type HeadingAssignments = Record<number, string>;
 type ReadingPracticeProps = {
   mode?: "mock" | "practice";
+  test?: ReadingTest;
 };
 
 type AnnotationItem = {
@@ -94,6 +97,45 @@ function getPartNavigation(part: ReadingPart): ReadingNavigationItem[] {
       }));
     })
     .sort((a, b) => a.questionNumbers[0] - b.questionNumbers[0]);
+}
+
+function ReadingMotionDiagram({ kind }: { kind: ReadingDiagramKind }) {
+  const spokes =
+    kind === "curved-spokes"
+      ? (
+        <g className="reading-diagram-curved">
+          {Array.from({ length: 6 }, (_, index) => (
+            <path
+              d="M50 50 C54 31, 66 23, 78 19"
+              key={index}
+              transform={`rotate(${index * 60} 50 50)`}
+            />
+          ))}
+        </g>
+      )
+      : (
+        <g className={kind === "dashed-spokes" ? "reading-diagram-dashed" : ""}>
+          {Array.from({ length: 6 }, (_, index) => (
+            <line
+              key={index}
+              x1="50"
+              x2={kind === "extended-spokes" ? "88" : "82"}
+              y1="50"
+              y2="50"
+              transform={`rotate(${index * 60} 50 50)`}
+            />
+          ))}
+        </g>
+      );
+
+  return (
+    <div className="reading-motion-diagram" aria-hidden="true">
+      <svg viewBox="0 0 100 100" role="img">
+        <circle cx="50" cy="50" r="32" />
+        {spokes}
+      </svg>
+    </div>
+  );
 }
 
 function normalizeAnswerValue(value: string) {
@@ -247,12 +289,14 @@ function buildReadingReviewRows({
   choiceAnswers,
   fillAnswers,
   headingAssignments,
+  parts,
 }: {
   choiceAnswers: AnswerMap;
   fillAnswers: FillMap;
   headingAssignments: HeadingAssignments;
+  parts: ReadingPart[];
 }): ReadingReviewRow[] {
-  return READING_PARTS.flatMap((part) =>
+  return parts.flatMap((part) =>
     part.questionBlocks.flatMap<ReadingReviewRow>((block) => {
       if (block.type === "fill") {
         return block.questions.map((question) => {
@@ -304,14 +348,6 @@ function buildReadingReviewRows({
   ).sort((a, b) => a.firstQuestionNo - b.firstQuestionNo);
 }
 
-const ALL_CHOICE_QUESTIONS = READING_PARTS.flatMap((part) =>
-  part.questionBlocks.flatMap((block) => block.type === "choice" ? block.questions : []),
-);
-
-const TOTAL_QUESTION_COUNT = new Set(
-  READING_PARTS.flatMap((part) => getReadingQuestionNumbers(part)),
-).size;
-
 function ReadingChoiceBlock({
   answers,
   onChange,
@@ -333,6 +369,7 @@ function ReadingChoiceBlock({
         <span>{question.prompt}</span>
         {isMultiple ? <small>已选 {selected.length}/{question.selectCount}</small> : null}
       </div>
+      {question.diagram ? <ReadingMotionDiagram kind={question.diagram} /> : null}
       <div className="reading-choice-options">
         {question.options.map((option) => {
           const isSelected = selected.includes(option.letter);
@@ -356,8 +393,9 @@ function ReadingChoiceBlock({
   );
 }
 
-export function ReadingPractice({ mode = "mock" }: ReadingPracticeProps) {
-  const firstPart = READING_PARTS[0];
+export function ReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: ReadingPracticeProps) {
+  const parts = test.parts;
+  const firstPart = parts[0];
   const firstQuestion = getReadingQuestionNumbers(firstPart)[0];
   const [activePartId, setActivePartId] = useState<ReadingPartId>(firstPart.id);
   const [activeQuestion, setActiveQuestion] = useState(firstQuestion);
@@ -387,7 +425,13 @@ export function ReadingPractice({ mode = "mock" }: ReadingPracticeProps) {
   const isResizingRef = useRef(false);
   const noticeTimerRef = useRef<number | null>(null);
 
-  const activePart = getReadingPart(activePartId);
+  const allChoiceQuestions = useMemo(
+    () => parts.flatMap((part) =>
+      part.questionBlocks.flatMap((block) => block.type === "choice" ? block.questions : []),
+    ),
+    [parts],
+  );
+  const activePart = getReadingPart(activePartId, parts);
   const headingBlocks = activePart.questionBlocks.filter((block) => block.type === "headings");
   const headingById = useMemo(
     () => new Map(headingBlocks.flatMap((block) => block.options).map((heading) => [heading.id, heading])),
@@ -397,16 +441,16 @@ export function ReadingPractice({ mode = "mock" }: ReadingPracticeProps) {
   const isUrgent = seconds <= 600;
   const isCritical = seconds <= 300;
   const reviewRows = useMemo(
-    () => buildReadingReviewRows({ choiceAnswers, fillAnswers, headingAssignments }),
-    [choiceAnswers, fillAnswers, headingAssignments],
+    () => buildReadingReviewRows({ choiceAnswers, fillAnswers, headingAssignments, parts }),
+    [choiceAnswers, fillAnswers, headingAssignments, parts],
   );
   const reviewGroups = useMemo(
     () =>
-      READING_PARTS.map((part) => ({
+      parts.map((part) => ({
         label: part.label,
         rows: reviewRows.filter((row) => row.partLabel === part.label),
       })),
-    [reviewRows],
+    [parts, reviewRows],
   );
   const correctCount = reviewRows.filter((row) => row.isCorrect).length;
 
@@ -495,7 +539,7 @@ export function ReadingPractice({ mode = "mock" }: ReadingPracticeProps) {
     const answered = new Set<number>();
     Object.entries(choiceAnswers).forEach(([questionNo, values]) => {
       const number = Number(questionNo);
-      const question = ALL_CHOICE_QUESTIONS.find(
+      const question = allChoiceQuestions.find(
         (item) => item.questionNumbers[0] === number,
       );
       if (!question) return;
@@ -509,10 +553,10 @@ export function ReadingPractice({ mode = "mock" }: ReadingPracticeProps) {
     });
     Object.keys(headingAssignments).forEach((questionNo) => answered.add(Number(questionNo)));
     return answered;
-  }, [choiceAnswers, fillAnswers, headingAssignments]);
+  }, [allChoiceQuestions, choiceAnswers, fillAnswers, headingAssignments]);
 
   function setPart(partId: ReadingPartId) {
-    const nextPart = getReadingPart(partId);
+    const nextPart = getReadingPart(partId, parts);
     const nextFirstQuestion = getPartNavigation(nextPart)[0].questionNumbers[0];
     setActivePartId(partId);
     setActiveQuestion(nextFirstQuestion);
@@ -629,7 +673,7 @@ export function ReadingPractice({ mode = "mock" }: ReadingPracticeProps) {
   }
 
   function getCurrentReadingHref() {
-    return mode === "mock" ? "/reading/mock" : "/reading/practice";
+    return mode === "mock" ? `/reading/mock/${test.id}` : `/reading/practice/${test.id}`;
   }
 
   function getPartSlug(partLabel: string) {
@@ -654,7 +698,7 @@ export function ReadingPractice({ mode = "mock" }: ReadingPracticeProps) {
   }
 
   function formatFavoriteQuestionTitle(row: ReadingReviewRow) {
-    return `reading cambridge21-test1-${getPartSlug(row.partLabel)}-question${row.label}`;
+    return `reading ${test.id}-${getPartSlug(row.partLabel)}-question${row.label}`;
   }
 
   function syncWrongReadingQuestionFavorites(rows: ReadingReviewRow[]) {
@@ -668,7 +712,7 @@ export function ReadingPractice({ mode = "mock" }: ReadingPracticeProps) {
         return;
       }
 
-      const id = `reading:cambridge21-test1:${getPartSlug(row.partLabel)}:question-${row.label}`;
+      const id = `reading:${test.id}:${getPartSlug(row.partLabel)}:question-${row.label}`;
 
       if (existingIds.has(id)) {
         return;
@@ -678,7 +722,7 @@ export function ReadingPractice({ mode = "mock" }: ReadingPracticeProps) {
         href: `${getCurrentReadingHref()}#reading-question-${row.firstQuestionNo}`,
         id,
         savedAt: now,
-        sourceTitle: `reading Cambridge IELTS 21 Test 1 ${row.partLabel}`,
+        sourceTitle: `reading ${test.bookTitle} Test ${test.testNo} ${row.partLabel}`,
         title: formatFavoriteQuestionTitle(row),
       });
       existingIds.add(id);
@@ -704,12 +748,12 @@ export function ReadingPractice({ mode = "mock" }: ReadingPracticeProps) {
   }
 
   function removeFavoriteAnnotation(itemId: number) {
-    const id = `reading:cambridge21-test1:annotation:${itemId}`;
+    const id = `reading:${test.id}:annotation:${itemId}`;
     writeFavoriteAnnotations(readFavoriteAnnotations().filter((item) => item.id !== id));
   }
 
   function removeFavoriteAnnotations(items: AnnotationItem[]) {
-    const ids = new Set(items.map((item) => `reading:cambridge21-test1:annotation:${item.id}`));
+    const ids = new Set(items.map((item) => `reading:${test.id}:annotation:${item.id}`));
     writeFavoriteAnnotations(readFavoriteAnnotations().filter((item) => !ids.has(item.id)));
   }
 
@@ -727,13 +771,13 @@ export function ReadingPractice({ mode = "mock" }: ReadingPracticeProps) {
     }
 
     const currentFavorites = readFavoriteAnnotations();
-    const id = `reading:cambridge21-test1:annotation:${item.id}`;
+    const id = `reading:${test.id}:annotation:${item.id}`;
     const nextItem: FavoriteAnnotationItem = {
       excerpt: noteText,
       href: getCurrentReadingHref(),
       id,
       savedAt: new Date(item.id).toISOString(),
-      sourceTitle: `reading Cambridge IELTS 21 Test 1 ${activePart.label}`,
+      sourceTitle: `reading ${test.bookTitle} Test ${test.testNo} ${activePart.label}`,
       title: sourceText,
     };
 
@@ -1120,6 +1164,13 @@ export function ReadingPractice({ mode = "mock" }: ReadingPracticeProps) {
                   <h2>Questions {formatQuestionNumbers(questionNumbers)}</h2>
                   <p>{block.instruction}</p>
                   <h3>{block.title}</h3>
+                  {block.wordBank ? (
+                    <div className="reading-word-bank" aria-label="word bank">
+                      {block.wordBank.map((word) => (
+                        <span key={word}>{word}</span>
+                      ))}
+                    </div>
+                  ) : null}
                   <div className="reading-fill-list">
                     {block.questions.map((question) => (
                       <label id={`reading-question-${question.number}`} key={question.number}>
@@ -1155,9 +1206,9 @@ export function ReadingPractice({ mode = "mock" }: ReadingPracticeProps) {
         <footer className="reading-exam-footer">
           <div
             className="reading-part-tabs"
-            style={{ "--reading-part-count": READING_PARTS.length } as CSSProperties}
+            style={{ "--reading-part-count": parts.length } as CSSProperties}
           >
-            {READING_PARTS.map((part) => {
+            {parts.map((part) => {
               const partQuestionNumbers = getReadingQuestionNumbers(part);
               const count = partQuestionNumbers.filter((number) => answeredNumbers.has(number)).length;
               const partNavigation = getPartNavigation(part);

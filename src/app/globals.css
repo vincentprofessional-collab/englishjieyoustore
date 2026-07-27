@@ -3256,6 +3256,7 @@
   }
 
   .listening-library-panel,
+  .reading-home-library-panel,
   .listening-mode-panel,
   .speaking-mode-panel {
     border-radius: 22px;
@@ -3689,6 +3690,36 @@ html.reading-fullscreen-active .shell {
   margin-top: 16px;
 }
 
+.reading-motion-diagram {
+  align-items: center;
+  background: #fffdf8;
+  border: 1px solid rgba(228, 216, 189, 0.95);
+  border-radius: 14px;
+  display: flex;
+  justify-content: center;
+  margin-left: 42px;
+  max-width: 150px;
+  padding: 12px;
+}
+
+.reading-motion-diagram svg {
+  height: 98px;
+  width: 98px;
+}
+
+.reading-motion-diagram circle,
+.reading-motion-diagram line,
+.reading-motion-diagram path {
+  fill: none;
+  stroke: #111;
+  stroke-linecap: round;
+  stroke-width: 3;
+}
+
+.reading-motion-diagram .reading-diagram-dashed line {
+  stroke-dasharray: 5 5;
+}
+
 .reading-choice-question {
   display: grid;
   gap: 12px;
@@ -3832,6 +3863,27 @@ html.reading-fullscreen-active .shell {
   display: grid;
   gap: 17px;
   margin-top: 10px;
+}
+
+.reading-word-bank {
+  background: #fffaf0;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+  padding: 10px;
+}
+
+.reading-word-bank span {
+  background: #fff;
+  border: 1px solid rgba(228, 216, 189, 0.95);
+  border-radius: 999px;
+  color: #111;
+  font-size: 13px;
+  font-weight: 900;
+  padding: 6px 10px;
 }
 
 .reading-fill-list > label {
@@ -5744,12 +5796,129 @@ h1 {
   opacity: 0.52;
 }
 
+.reading-home-library-panel {
+  background: rgba(255, 250, 240, 0.96);
+  border: 1px solid rgba(228, 216, 189, 0.95);
+  border-radius: 28px;
+  box-shadow: 0 22px 70px rgba(34, 54, 43, 0.11);
+  display: grid;
+  gap: 20px;
+  padding: 30px;
+  width: 100%;
+}
+
+.reading-home-test-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.reading-home-test-card {
+  align-items: center;
+  background:
+    radial-gradient(circle at 92% 18%, rgba(200, 148, 25, 0.14), transparent 8rem),
+    #fffdf8;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  box-shadow: 0 12px 34px rgba(68, 52, 30, 0.08);
+  display: grid;
+  gap: 14px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  padding: 18px;
+}
+
+.reading-home-test-card > div:first-child {
+  display: grid;
+  gap: 4px;
+}
+
+.reading-home-test-card span {
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 1000;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.reading-home-test-card strong {
+  color: var(--accent-dark);
+  font-size: 30px;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.reading-home-test-card small {
+  color: var(--muted);
+  font-weight: 900;
+}
+
+.reading-home-test-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.reading-home-test-actions a,
+.reading-test-link {
+  align-items: center;
+  background: rgba(255, 253, 248, 0.88);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  color: var(--ink);
+  display: inline-flex;
+  font-size: 13px;
+  font-weight: 1000;
+  justify-content: center;
+  min-height: 38px;
+  padding: 8px 12px;
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.reading-home-test-actions a:hover,
+.reading-test-link.available:hover {
+  border-color: var(--gold);
+  box-shadow: 0 8px 18px rgba(68, 52, 30, 0.12);
+  transform: translateY(-1px);
+}
+
+.reading-test-link {
+  align-content: center;
+  display: grid;
+  gap: 4px;
+  min-height: 78px;
+  text-align: center;
+}
+
+.reading-test-link strong {
+  color: var(--accent-dark);
+  font-size: 16px;
+  line-height: 1;
+}
+
+.reading-test-link span,
+.reading-test-link small {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.reading-test-link.locked {
+  background: #f1efe9;
+  color: var(--muted);
+  opacity: 0.52;
+}
+
 @media (max-width: 820px) {
   .listening-practice-book-row {
     grid-template-columns: 1fr;
   }
 
   .listening-test-grid,
+  .reading-home-test-grid,
   .listening-mock-book-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -5757,6 +5926,7 @@ h1 {
 
 @media (max-width: 560px) {
   .listening-test-grid,
+  .reading-home-test-grid,
   .listening-mock-book-grid {
     grid-template-columns: 1fr;
   }

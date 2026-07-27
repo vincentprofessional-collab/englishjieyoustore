@@ -1,4 +1,8 @@
+import { CAMBRIDGE4_TEST1_PARTS } from "./reading-cambridge4";
+
 export type ReadingPartId = string;
+
+export type ReadingDiagramKind = "curved-spokes" | "dashed-spokes" | "extended-spokes";
 
 export type ReadingOption = {
   letter: string;
@@ -7,6 +11,7 @@ export type ReadingOption = {
 
 export type ReadingChoiceQuestion = {
   answer?: string | string[];
+  diagram?: ReadingDiagramKind;
   instruction?: string;
   questionNumbers: number[];
   options: ReadingOption[];
@@ -46,6 +51,7 @@ export type ReadingFillBlock = {
   questions: ReadingFillQuestion[];
   title: string;
   type: "fill";
+  wordBank?: string[];
 };
 
 export type ReadingHeadingsBlock = {
@@ -67,6 +73,15 @@ export type ReadingPart = {
   questionBlocks: ReadingQuestionBlock[];
   questionRange: string;
   sections: ReadingPassageSection[];
+  title: string;
+};
+
+export type ReadingTest = {
+  bookCode: string;
+  bookTitle: string;
+  id: string;
+  parts: ReadingPart[];
+  testNo: number;
   title: string;
 };
 
@@ -871,14 +886,40 @@ const cambridge21Test1PartThree: ReadingPart = {
   ],
 };
 
-export const READING_PARTS: ReadingPart[] = [
+const CAMBRIDGE21_TEST1_PARTS: ReadingPart[] = [
   cambridge21Test1PartOne,
   cambridge21Test1PartTwo,
   cambridge21Test1PartThree,
 ];
 
-export function getReadingPart(id: ReadingPartId) {
-  return READING_PARTS.find((part) => part.id === id) ?? READING_PARTS[0];
+export const READING_TESTS: ReadingTest[] = [
+  {
+    bookCode: "cambridge-4",
+    bookTitle: "剑桥雅思 4",
+    id: "cambridge-4-test-1",
+    parts: CAMBRIDGE4_TEST1_PARTS,
+    testNo: 1,
+    title: "剑桥雅思 4 Test 1 Reading",
+  },
+  {
+    bookCode: "cambridge-21",
+    bookTitle: "剑桥雅思 21",
+    id: "cambridge-21-test-1",
+    parts: CAMBRIDGE21_TEST1_PARTS,
+    testNo: 1,
+    title: "剑桥雅思 21 Test 1 Reading",
+  },
+];
+
+export const DEFAULT_READING_TEST = READING_TESTS[0];
+export const READING_PARTS: ReadingPart[] = DEFAULT_READING_TEST.parts;
+
+export function getReadingTest(id: string) {
+  return READING_TESTS.find((test) => test.id === id);
+}
+
+export function getReadingPart(id: ReadingPartId, parts: ReadingPart[] = READING_PARTS) {
+  return parts.find((part) => part.id === id) ?? parts[0];
 }
 
 export function getReadingQuestionNumbers(part: ReadingPart) {

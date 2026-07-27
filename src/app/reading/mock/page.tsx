@@ -1,5 +1,5 @@
-import { ReadingPractice } from "@/components/reading-practice";
+import { ReadingLibrary } from "@/components/reading-library";
 
 export default function ReadingMockPage() {
-  return <ReadingPractice mode="mock" />;
+  return <ReadingLibrary mode="mock" />;
 }
