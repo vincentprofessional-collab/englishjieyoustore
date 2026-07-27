@@ -4,20 +4,94 @@ import path from "node:path";
 
 const repoRoot = process.cwd();
 const cambridgeRoot = "/Users/shidianjin/Documents/留学考试-雅思/剑桥雅思";
-const outputPath = path.join(repoRoot, "src/lib/ielts/generated-reading-tests.json");
+const outputPath = path.resolve(
+  repoRoot,
+  process.env.READING_OUTPUT ?? "src/lib/ielts/generated-reading-tests.json",
+);
 const ocrCacheDir = path.join(repoRoot, "tmp/reading-import");
-const books = Array.from({ length: 18 }, (_, index) => index + 4);
+const books = parseNumberSelection(process.env.READING_BOOKS) ?? Array.from({ length: 18 }, (_, index) => index + 4);
+const testsToGenerate = parseNumberSelection(process.env.READING_TESTS) ?? [1, 2, 3, 4];
+const minGeneratedTests = Number(process.env.READING_MIN_TESTS ?? 60);
 const manualTestIds = new Set(["cambridge-4-test-1", "cambridge-21-test-1"]);
+const knownPassageTitles = new Map([
+  ["cambridge-4-test-2-part1", "Lost for Words"],
+  ["cambridge-4-test-2-part2", "Alternative Medicine in Australia"],
+  ["cambridge-4-test-2-part3", "Play Is a Serious Business"],
+  ["cambridge-4-test-3-part1", "Micro-Enterprise Credit for Street Youth"],
+  ["cambridge-4-test-3-part2", "Volcanoes - earth-shattering news"],
+  ["cambridge-4-test-3-part3", "Obtaining Linguistic Data"],
+  ["cambridge-4-test-4-part1", "How much higher? How much faster?"],
+  ["cambridge-4-test-4-part2", "The Nature and Aims of Archaeology"],
+  ["cambridge-4-test-4-part3", "The Problem of Scarce Resources"],
+]);
+const knownPassageTextReplacements = new Map([
+  [
+    "cambridge-4-test-2-part2",
+    [[/^\s*ALTERNATIVE MEDICINE IN AUSTRALI\s*$/gim, ""]],
+  ],
+  [
+    "cambridge-4-test-3-part2",
+    [
+      [/^\s*Volcanoes-\s*$/gim, ""],
+      [/^\s*earth-shattering\s*$/gim, ""],
+      [/^\s*news\s*$/gim, ""],
+    ],
+  ],
+  [
+    "cambridge-4-test-4-part1",
+    [
+      [/^\s*How\s+·muc~:.*faster\?\s*$/gim, ""],
+      [/^\s*\d+\s*,\.\s*\/'.*$/gim, ""],
+      [/^\s*\d+\s*,.*~.*$/gim, ""],
+    ],
+  ],
+  [
+    "cambridge-4-test-4-part2",
+    [
+      [/^\s*~~~\s*\.?\s*$/gim, ""],
+      [/^\s*VH E NA"TW\(\{E\s*$/gim, ""],
+      [/^\s*AND AIMS OF\s*$/gim, ""],
+      [/^\s*ARCHAEOlOGY\s*$/gim, ""],
+    ],
+  ],
+  [
+    "cambridge-4-test-4-part3",
+    [
+      [/^\s*The\s+Problem\s+of\s*$/gim, ""],
+      [/^\s*Scarce\s+Resources\s*$/gim, ""],
+    ],
+  ],
+]);
+
+function cleanKnownPassageText(passageId, value) {
+  return (knownPassageTextReplacements.get(passageId) ?? [])
+    .reduce((text, [pattern, replacement]) => text.replace(pattern, replacement), value)
+    .replace(/\n{4,}/g, "\n\n\n")
+    .trim();
+}
+
+function parseNumberSelection(value) {
+  if (!value) return null;
+  const numbers = value
+    .split(",")
+    .map((item) => Number(item.trim()))
+    .filter((item) => Number.isInteger(item) && item > 0);
+  return numbers.length > 0 ? numbers : null;
+}
+
+function markPdfPages(rawText) {
+  return rawText
+    .replace(/\r/g, "")
+    .split("\f")
+    .map((page, index) => `\n\n=== PDF PAGE ${index + 1} ===\n${page}`)
+    .join("\n");
+}
 
 function runPdftotext(pdfPath) {
-  const text = execFileSync("pdftotext", ["-layout", pdfPath, "-"], {
+  return markPdfPages(execFileSync("pdftotext", ["-layout", pdfPath, "-"], {
     encoding: "utf8",
     maxBuffer: 160 * 1024 * 1024,
-  })
-    .replace(/\r/g, "")
-    .replace(/\f/g, "\n");
-
-  return text;
+  }));
 }
 
 function getPdfPageCount(pdfPath) {
@@ -123,6 +197,8 @@ function stripPageNoise(value) {
     value
       .split("\n")
       .filter((line) => !/^\s*\d{1,3}\s*$/.test(line))
+      .filter((line) => !/^\s*===\s+(?:PDF|OCR)\s+PAGE\s+\d+\s+===\s*$/i.test(line))
+      .filter((line) => !/^\s*[\d\s,.'"`/\\~•·:;_\-]{6,}\s*$/.test(line))
       .join("\n"),
   );
 }
@@ -130,6 +206,229 @@ function stripPageNoise(value) {
 function findFirstQuestionIndex(block) {
   const match = /\n\s*Questions?\s+\d{1,2}/i.exec(block);
   return match?.index ?? -1;
+}
+
+function splitColumnLine(line) {
+  const matches = [...line.matchAll(/[ \t]{4,}/g)]
+    .map((match) => {
+      const start = match.index ?? 0;
+      const end = start + match[0].length;
+      const left = line.slice(0, start).trimEnd();
+      const right = line.slice(end).trimStart();
+      return { left, right, start, width: match[0].length };
+    })
+    .filter(({ left, right }) => left.trim().length >= 8 && right.trim().length >= 8);
+
+  if (matches.length === 0) return null;
+
+  return matches.sort((a, b) => b.width - a.width)[0];
+}
+
+function median(values) {
+  if (values.length === 0) return 0;
+  const sorted = [...values].sort((a, b) => a - b);
+  return sorted[Math.floor(sorted.length / 2)];
+}
+
+function normalizeTwoColumnPage(pageText) {
+  const lines = pageText
+    .split("\n")
+    .filter((line) => !/^\s*===\s+(?:PDF|OCR)\s+PAGE\s+\d+\s+===\s*$/i.test(line));
+  const splitLines = lines
+    .map((line, index) => ({ index, split: splitColumnLine(line) }))
+    .filter(({ split }) => split);
+
+  if (splitLines.length < 6) return pageText;
+
+  const firstSplitIndex = splitLines[0].index;
+  const lastSplitIndex = splitLines.at(-1).index;
+  const splitStart = median(splitLines.map(({ split }) => split.start));
+  const head = [];
+  const left = [];
+  const right = [];
+  const tail = [];
+
+  lines.forEach((line, index) => {
+    if (index < firstSplitIndex) {
+      head.push(line);
+      return;
+    }
+
+    if (index > lastSplitIndex) {
+      tail.push(line);
+      return;
+    }
+
+    const split = splitColumnLine(line);
+    if (split) {
+      left.push(split.left);
+      right.push(split.right);
+      return;
+    }
+
+    if (!line.trim()) return;
+
+    if (line.search(/\S/) > splitStart * 0.65) {
+      right.push(line.trimEnd());
+    } else {
+      left.push(line.trimEnd());
+    }
+  });
+
+  return [head.join("\n"), left.join("\n"), right.join("\n"), tail.join("\n")]
+    .filter((chunk) => chunk.trim())
+    .join("\n\n");
+}
+
+function normalizePassageColumns(value) {
+  return value
+    .split(/(?=\n\s*===\s+(?:PDF|OCR)\s+PAGE\s+\d+\s+===\s*\n)/i)
+    .map((pageText) => normalizeTwoColumnPage(pageText))
+    .join("\n\n");
+}
+
+function getMarkedPageRanges(value) {
+  const markerPattern = /\n\s*===\s+(?:PDF|OCR)\s+PAGE\s+\d+\s+===\s*\n/gi;
+  const markers = [...value.matchAll(markerPattern)];
+  return markers.map((marker, index) => {
+    const start = (marker.index ?? 0) + marker[0].length;
+    const end = markers[index + 1]?.index ?? value.length;
+    return {
+      end,
+      start,
+      text: value.slice(start, end),
+    };
+  });
+}
+
+function looksLikePassagePage(value) {
+  const cleaned = stripPageNoise(value);
+  const lines = cleaned
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean);
+
+  if (lines.length < 3 || cleaned.replace(/\s/g, "").length < 300) return false;
+
+  const firstLines = lines.slice(0, 8).join(" ");
+  if (/^Questions?\s+\d/i.test(lines[0])) return false;
+  if (/Questions?\s+\d.*Choose.*Write/i.test(firstLines)) return false;
+  if (/List of Headings/i.test(firstLines)) return false;
+
+  return /[A-Za-z]{4}/.test(firstLines);
+}
+
+function getLineRecords(value) {
+  const records = [];
+  let offset = 0;
+
+  for (const line of value.split("\n")) {
+    records.push({
+      line,
+      start: offset,
+    });
+    offset += line.length + 1;
+  }
+
+  return records;
+}
+
+function isEmbeddedQuestionListLine(value) {
+  return /^\s*\d{1,2}\s+(?:Section|Paragraph)\s+[A-Z]\s*$/i.test(value);
+}
+
+function isPassageStartCandidateLine(value) {
+  const line = value.trim();
+  return (
+    line.length > 0 &&
+    !isEmbeddedQuestionListLine(line) &&
+    !/^===\s+(?:PDF|OCR)\s+PAGE\s+\d+\s+===$/i.test(line) &&
+    !/^Reading$/i.test(line) &&
+    !/^Test\s*\d+$/i.test(line) &&
+    !/^Questions?\s+\d/i.test(line) &&
+    !/^List of Headings/i.test(line) &&
+    !/^(?:Choose|Complete|Do the following|Write|Which|Match|Label|Look at|Reading Passage|In boxes)\b/i.test(line)
+  );
+}
+
+function findInlinePassageStart(questionText) {
+  const records = getLineRecords(questionText);
+
+  for (let index = 0; index < records.length; index += 1) {
+    if (!isEmbeddedQuestionListLine(records[index].line)) continue;
+
+    let candidateIndex = index + 1;
+    while (
+      candidateIndex < records.length &&
+      !isPassageStartCandidateLine(records[candidateIndex].line)
+    ) {
+      candidateIndex += 1;
+    }
+
+    if (candidateIndex >= records.length) continue;
+
+    const candidateStart = records[candidateIndex].start;
+    if (looksLikePassagePage(questionText.slice(candidateStart))) {
+      return candidateStart;
+    }
+  }
+
+  return -1;
+}
+
+function findFollowingPagesPassageStart(questionText) {
+  const inlineStart = findInlinePassageStart(questionText);
+  if (inlineStart >= 0) return inlineStart;
+
+  return getMarkedPageRanges(questionText).find((page) => looksLikePassagePage(page.text))?.start ?? -1;
+}
+
+function isIntroOnlyPassage(value) {
+  const cleaned = stripPageNoise(value);
+  const compact = cleaned.replace(/\s/g, "");
+  return (
+    compact.length < 450 ||
+    /\bon\s+(?:the\s+)?(?:following|fo\s*llowing)\s+pages?\.?/i.test(cleaned) ||
+    /\bon\s+pages?\s+\d{1,3}/i.test(cleaned)
+  );
+}
+
+function splitPassageAndQuestions(block) {
+  const cleanedBlock = cleanBlock(block);
+  const questionIndex = findFirstQuestionIndex(cleanedBlock);
+
+  if (questionIndex < 0) {
+    return { passageText: cleanedBlock, questionText: "" };
+  }
+
+  const leadingPassageText = cleanedBlock.slice(0, questionIndex);
+  const trailingText = cleanedBlock.slice(questionIndex);
+
+  if (isIntroOnlyPassage(leadingPassageText)) {
+    const embeddedPassageStart = findFollowingPagesPassageStart(trailingText);
+
+    if (embeddedPassageStart > 0) {
+      const prePassageQuestions = trailingText.slice(0, embeddedPassageStart);
+      const embeddedText = trailingText.slice(embeddedPassageStart);
+      const embeddedQuestionIndex = findFirstQuestionIndex(embeddedText);
+      const embeddedPassageText =
+        embeddedQuestionIndex >= 0 ? embeddedText.slice(0, embeddedQuestionIndex) : embeddedText;
+      const postPassageQuestions =
+        embeddedQuestionIndex >= 0 ? embeddedText.slice(embeddedQuestionIndex) : "";
+
+      return {
+        passageText: `${leadingPassageText}\n\n${embeddedPassageText}`,
+        questionText: [prePassageQuestions, postPassageQuestions]
+          .filter((chunk) => chunk.trim())
+          .join("\n\n"),
+      };
+    }
+  }
+
+  return {
+    passageText: leadingPassageText,
+    questionText: trailingText,
+  };
 }
 
 function getPassageTitle(block, fallback) {
@@ -140,7 +439,11 @@ function getPassageTitle(block, fallback) {
   const title = lines.find((line) =>
     !/^READING$/i.test(line) &&
     !/^READING PASSAGE\s+\d/i.test(line) &&
+    !/^Test\s*\d+$/i.test(line) &&
     !/^You should spend/i.test(line) &&
+    !/^on the following pages?\.?$/i.test(line) &&
+    !/^Passage\s+\d\s+(?:below|on\s+(?:the\s+)?(?:following|fo\s*llowing)\s+pages?|on\s+pages?\s+\d{1,3})/i.test(line) &&
+    !/^===\s+(?:PDF|OCR)\s+PAGE\s+\d+\s+===$/i.test(line) &&
     !/^below\.?$/i.test(line) &&
     !/^Questions?\s+\d/i.test(line) &&
     !/^\d{1,3}$/.test(line),
@@ -258,18 +561,22 @@ function extractReadingParts(text, bookNo, testNo) {
       end = marker.index + writingMatch.index;
     }
 
-    const block = stripPageNoise(mainText.slice(marker.index, end));
-    const questionIndex = findFirstQuestionIndex(block);
-    const passageText = questionIndex >= 0 ? block.slice(0, questionIndex) : block;
-    const questionText = questionIndex >= 0 ? block.slice(questionIndex) : "";
+    const block = mainText.slice(marker.index, end);
+    const { passageText, questionText } = splitPassageAndQuestions(block);
     const partNo = marker.partNo;
+    const passageId = `cambridge-${bookNo}-test-${testNo}-part${partNo}`;
+    const normalizedPassageText = cleanKnownPassageText(
+      passageId,
+      stripPageNoise(normalizePassageColumns(passageText)),
+    );
+    const normalizedQuestionText = stripPageNoise(questionText);
 
     return {
-      id: `cambridge-${bookNo}-test-${testNo}-part${partNo}`,
+      id: passageId,
       label: `Part ${partNo}`,
-      passageText: stripPageNoise(passageText),
-      questionText: stripPageNoise(questionText),
-      title: getPassageTitle(passageText, `Reading Passage ${partNo}`),
+      passageText: normalizedPassageText,
+      questionText: normalizedQuestionText,
+      title: knownPassageTitles.get(passageId) ?? getPassageTitle(normalizedPassageText, `Reading Passage ${partNo}`),
     };
   });
 }
@@ -292,7 +599,7 @@ function extractAcademicAnswerSegments(text) {
     return segments;
   }
 
-  for (const testNo of [1, 2, 3, 4]) {
+  for (const testNo of testsToGenerate) {
     const testMatch = new RegExp(`^\\s*TEST\\s+${testNo}\\s*$`, "im").exec(answerText);
     if (!testMatch) continue;
 
@@ -538,7 +845,7 @@ function buildReadingPart({ answerMap, bookNo, part, questionNumbers, rawAnswerT
 
 function getAnswerSegments(pdfPath, bookNo, text) {
   const textSegments = extractAcademicAnswerSegments(text);
-  const hasWeakTextSegment = [1, 2, 3, 4].some(
+  const hasWeakTextSegment = testsToGenerate.some(
     (testNo) => parseAnswerKey(textSegments.get(testNo) ?? "").size < 30,
   );
 
@@ -549,7 +856,7 @@ function getAnswerSegments(pdfPath, bookNo, text) {
   const ocrSegments = extractAcademicAnswerSegments(runOcrPdf(pdfPath, bookNo));
   const segments = new Map(textSegments);
 
-  for (const testNo of [1, 2, 3, 4]) {
+  for (const testNo of testsToGenerate) {
     const textSegment = textSegments.get(testNo) ?? "";
     const ocrSegment = ocrSegments.get(testNo) ?? "";
     if (parseAnswerKey(ocrSegment).size > parseAnswerKey(textSegment).size) {
@@ -566,7 +873,7 @@ function buildTestsForBook(bookNo) {
   const answerSegments = getAnswerSegments(pdfPath, bookNo, text);
   const tests = [];
 
-  for (const testNo of [1, 2, 3, 4]) {
+  for (const testNo of testsToGenerate) {
     const id = `cambridge-${bookNo}-test-${testNo}`;
     if (manualTestIds.has(id)) continue;
 
@@ -605,7 +912,7 @@ function buildTestsForBook(bookNo) {
 
 const tests = books.flatMap(buildTestsForBook);
 
-if (tests.length < 60) {
+if (tests.length < minGeneratedTests) {
   throw new Error(`Generated only ${tests.length} tests; expected most Cambridge 4-21 tests.`);
 }
 
@@ -626,6 +933,19 @@ if (weak.length > 0) {
   console.warn(
     `Tests with fewer than 30 parsed answers: ${weak.map((item) => `${item.id}:${item.answered}`).join(", ")}`,
   );
+}
+
+const weakPassages = tests.flatMap((test) =>
+  test.parts
+    .filter((part) => {
+      const passageText = part.sections[0]?.paragraphs[0] ?? "";
+      return passageText.replace(/\s/g, "").length < 1200 || /on the following pages/i.test(part.title);
+    })
+    .map((part) => `${test.id}:${part.label}:${part.title}:${(part.sections[0]?.paragraphs[0] ?? "").length}`),
+);
+
+if (weakPassages.length > 0) {
+  console.warn(`Passages needing manual review: ${weakPassages.join(", ")}`);
 }
 
 if (!existsSync(outputPath)) {

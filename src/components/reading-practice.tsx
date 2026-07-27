@@ -7,6 +7,7 @@ import type {
   KeyboardEvent as ReactKeyboardEvent,
   MouseEvent as ReactMouseEvent,
   PointerEvent as ReactPointerEvent,
+  ReactNode,
 } from "react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
@@ -212,8 +213,10 @@ function isRawReadingInstructionLine(value: string) {
     /^You should spend about 20 minutes/i.test(value) ||
     /^should spend about 20 minutes/i.test(value) ||
     /^Reading Passage \d below\.?$/i.test(value) ||
-    /^below\.?$/i.test(value) ||
-    /^=== OCR PAGE \d+ ===$/i.test(value)
+    /^Passage\s+\d\s+(?:below|on\s+(?:the\s+)?(?:following|fo\s*llowing)\s+pages?|on\s+pages?\s+\d{1,3})/i.test(value) ||
+    /^below\.[\s·]*$/i.test(value) ||
+    /^on the following pages?\.?$/i.test(value) ||
+    /^=== (?:PDF|OCR) PAGE \d+ ===$/i.test(value)
   );
 }
 
@@ -264,7 +267,7 @@ function cleanRawQuestionLine(value: string) {
 
 function getRawQuestionLineKind(value: string) {
   if (/^Questions?\s+\d{1,2}/i.test(value)) return "heading";
-  if (/^(?:A|B|C|D|E|F|G|H|I)\s+.+/.test(value)) return "option";
+  if (/^(?:[A-P]|8)\s+.+/.test(value)) return "option";
   if (/^\d{1,2}(?:\s|[).>])/.test(value)) return "question";
   if (
     /^(?:Choose|Complete|Do the following|Write|Which|Match|Label|Look at|The text has|Reading Passage|In boxes|TRUE|FALSE|NOT GIVEN|YES|NO)\b/i.test(
@@ -280,50 +283,440 @@ function getRawQuestionLines(value: string) {
   return value
     .split("\n")
     .map(cleanRawQuestionLine)
-    .filter((line) => line && !/^=== OCR PAGE \d+ ===$/i.test(line))
+    .filter((line) => line && !/^=== (?:PDF|OCR) PAGE \d+ ===$/i.test(line))
+    .filter((line) => !/^Test\s*\d+$/i.test(line))
+    .filter((line) => !/^R?\s*E?~?ADING$/i.test(line))
     .map((line) => ({
       kind: getRawQuestionLineKind(line),
       text: line,
     }));
 }
 
-function RawQuestionText({ text }: { text: string }) {
-  const lines = getRawQuestionLines(text);
+type RawQuestionOption = {
+  letter: string;
+  text: string;
+};
+
+type RawQuestionItem = {
+  number: number;
+  options: RawQuestionOption[];
+  text: string;
+};
+
+type RawQuestionSection = {
+  heading: string;
+  instructions: string[];
+  mode: "choice" | "fill" | "option-bank" | "plain" | "tfng" | "ynng";
+  options: RawQuestionOption[];
+  questionNumbers: number[];
+  questions: RawQuestionItem[];
+  textLines: string[];
+};
+
+function getQuestionNumbersFromHeading(value: string) {
+  const match = /^Questions?\s+(\d{1,2})(?:\s*(?:and|[-–])\s*(\d{1,2}))?/i.exec(value);
+  if (!match) return [];
+
+  const start = Number(match[1]);
+  const end = Number(match[2] ?? match[1]);
+  return Array.from({ length: end - start + 1 }, (_, index) => start + index);
+}
+
+function parseRawOption(value: string): RawQuestionOption | null {
+  const match = /^([A-P]|8)\s+(.+)$/.exec(value);
+  if (!match) return null;
+
+  return {
+    letter: match[1] === "8" ? "B" : match[1],
+    text: match[2].trim(),
+  };
+}
+
+function parseRawQuestion(value: string, validQuestionNumbers: Set<number>) {
+  const match = /^(\d{1,2})(?:\s|[).>])\s*(.*)$/.exec(value);
+  if (!match) return null;
+
+  const number = Number(match[1]);
+  if (!validQuestionNumbers.has(number)) return null;
+
+  return {
+    number,
+    text: match[2].trim(),
+  };
+}
+
+function shouldHideRawInstruction(value: string) {
+  return (
+    /^Write your answers? in boxes/i.test(value) ||
+    /^Write the appropriate letter/i.test(value) ||
+    /^In boxes \d/i.test(value) ||
+    /on your answer sheet\.?$/i.test(value) ||
+    /^(?:TRUE|FALSE|NOT GIVEN|YES|NO)\s+if\b/i.test(value)
+  );
+}
+
+function getRawQuestionMode(section: Omit<RawQuestionSection, "mode">): RawQuestionSection["mode"] {
+  const text = [
+    section.heading,
+    ...section.instructions,
+    ...section.textLines,
+    ...section.questions.map((question) => question.text),
+  ].join(" ");
+
+  if (/YES\b[\s\S]*NO\b[\s\S]*NOT GIVEN/i.test(text)) return "ynng";
+  if (/TRUE\b[\s\S]*FALSE\b[\s\S]*NOT GIVEN/i.test(text)) return "tfng";
+  if (/Do the following statements agree/i.test(text)) {
+    return /views|claims|writer thinks|opinion/i.test(text) ? "ynng" : "tfng";
+  }
+  if (section.options.length > 0) return "option-bank";
+  if (section.questions.some((question) => question.options.length > 0)) return "choice";
+  if (/Complete|NO MORE THAN|ONE WORD|summary|table|notes|sentence|diagram|axis/i.test(text)) return "fill";
+  return "plain";
+}
+
+function getRawQuestionSections(text: string, questionNumbers: number[]) {
+  const validQuestionNumbers = new Set(questionNumbers);
+  const sections: Array<Omit<RawQuestionSection, "mode">> = [];
+  let current: Omit<RawQuestionSection, "mode"> | null = null;
+
+  function ensureSection() {
+    current ??= {
+      heading: "",
+      instructions: [],
+      options: [],
+      questionNumbers: [],
+      questions: [],
+      textLines: [],
+    };
+    return current;
+  }
+
+  function pushSection() {
+    if (!current) return;
+    if (
+      current.heading ||
+      current.instructions.length ||
+      current.options.length ||
+      current.questions.length ||
+      current.textLines.length
+    ) {
+      sections.push(current);
+    }
+    current = null;
+  }
+
+  for (const line of getRawQuestionLines(text)) {
+    if (line.kind === "heading") {
+      pushSection();
+      current = {
+        heading: line.text,
+        instructions: [],
+        options: [],
+        questionNumbers: getQuestionNumbersFromHeading(line.text),
+        questions: [],
+        textLines: [],
+      };
+      continue;
+    }
+
+    const section = ensureSection();
+    const option = line.kind === "option" ? parseRawOption(line.text) : null;
+
+    if (option) {
+      const bankLike =
+        section.questions.length > 1 ||
+        /Match|list of|correct person|correct response|correct heading|Which paragraph/i.test(
+          [section.heading, ...section.instructions, ...section.textLines].join(" "),
+        );
+
+      if (bankLike) {
+        section.options.push(option);
+      } else {
+        const lastQuestion = section.questions.at(-1);
+        if (lastQuestion) {
+          lastQuestion.options.push(option);
+        } else {
+          section.options.push(option);
+        }
+      }
+      continue;
+    }
+
+    const rawQuestion = parseRawQuestion(line.text, validQuestionNumbers);
+    if (rawQuestion) {
+      section.questions.push({
+        number: rawQuestion.number,
+        options: [],
+        text: rawQuestion.text,
+      });
+      continue;
+    }
+
+    if (line.kind === "instruction") {
+      if (!shouldHideRawInstruction(line.text)) {
+        section.instructions.push(line.text);
+      }
+      continue;
+    }
+
+    const lastQuestion = section.questions.at(-1);
+    const isFillSection = /Complete|NO MORE THAN|ONE WORD|summary|table|notes|sentence|diagram|axis/i.test(
+      [section.heading, ...section.instructions].join(" "),
+    );
+
+    if (lastQuestion && !isFillSection && lastQuestion.options.length === 0 && section.options.length === 0) {
+      lastQuestion.text = `${lastQuestion.text} ${line.text}`.trim();
+    } else {
+      section.textLines.push(line.text);
+    }
+  }
+
+  pushSection();
+
+  return sections.map((section) => ({
+    ...section,
+    mode: getRawQuestionMode(section),
+  }));
+}
+
+function getRawDragPayload(event: ReactDragEvent<HTMLElement>) {
+  const raw = event.dataTransfer.getData("application/x-reading-option");
+  if (!raw) return null;
+
+  try {
+    return JSON.parse(raw) as { letter: string; sourceQuestion?: number };
+  } catch {
+    return null;
+  }
+}
+
+function setRawDragPayload(
+  event: ReactDragEvent<HTMLElement>,
+  payload: { letter: string; sourceQuestion?: number },
+) {
+  event.dataTransfer.effectAllowed = "move";
+  event.dataTransfer.setData("application/x-reading-option", JSON.stringify(payload));
+}
+
+function RawQuestionText({
+  fillAnswers,
+  onAnswerChange,
+  questions,
+  text,
+}: {
+  fillAnswers: FillMap;
+  onAnswerChange: (number: number, value: string) => void;
+  questions: ReadingFillQuestion[];
+  text: string;
+}) {
+  const questionNumbers = questions.map((question) => question.number);
+  const sections = getRawQuestionSections(text, questionNumbers);
+
+  function renderFillInput(number: number) {
+    return (
+      <span className="reading-fill-input-wrap reading-raw-inline-input" id={`reading-question-${number}`}>
+        <b>{number}</b>
+        <input
+          aria-label={`Question ${number}`}
+          autoComplete="off"
+          value={fillAnswers[number] ?? ""}
+          onChange={(event) => onAnswerChange(number, event.target.value)}
+        />
+      </span>
+    );
+  }
+
+  function renderFillLine(value: string, key: string) {
+    const pieces: ReactNode[] = [];
+    const pattern = /\b(\d{1,2})\b\s*(?:[._·•\-–—]{2,}|…+)?/g;
+    let lastIndex = 0;
+    let match: RegExpExecArray | null;
+
+    while ((match = pattern.exec(value))) {
+      const number = Number(match[1]);
+      if (!questionNumbers.includes(number)) continue;
+
+      pieces.push(value.slice(lastIndex, match.index));
+      pieces.push(renderFillInput(number));
+      lastIndex = match.index + match[0].length;
+    }
+
+    pieces.push(value.slice(lastIndex));
+    return <p className="reading-raw-fill-line" key={key}>{pieces}</p>;
+  }
+
+  function renderBinaryChoices(number: number, options: string[]) {
+    const selected = fillAnswers[number] ?? "";
+    return (
+      <div className="reading-raw-binary-options">
+        {options.map((option) => (
+          <label className={selected === option ? "selected" : ""} key={option}>
+            <input
+              checked={selected === option}
+              name={`reading-raw-question-${number}`}
+              type="radio"
+              value={option}
+              onChange={() => onAnswerChange(number, option)}
+            />
+            <span>{option}</span>
+          </label>
+        ))}
+      </div>
+    );
+  }
+
+  function renderOptionBank(options: RawQuestionOption[], sectionKey: string) {
+    return (
+      <div
+        className="reading-raw-option-bank"
+        onDragOver={(event) => event.preventDefault()}
+        onDrop={(event) => {
+          event.preventDefault();
+          const payload = getRawDragPayload(event);
+          if (payload?.sourceQuestion) {
+            onAnswerChange(payload.sourceQuestion, "");
+          }
+        }}
+      >
+        <small>拖动选项到题号后的虚线处作答；把已选选项拖回这里可取消。</small>
+        {options.map((option) => (
+          <button
+            draggable
+            key={`${sectionKey}-${option.letter}`}
+            type="button"
+            onDragStart={(event) => setRawDragPayload(event, { letter: option.letter })}
+          >
+            <span>{option.letter}</span>
+            {option.text}
+          </button>
+        ))}
+      </div>
+    );
+  }
 
   return (
     <div className="reading-raw-question-flow">
-      {lines.map((line, index) => {
-        if (line.kind === "heading") {
-          return <h2 key={`${line.text}-${index}`}>{line.text}</h2>;
-        }
+      {sections.map((section, sectionIndex) => {
+        const sectionKey = `${section.heading || "section"}-${sectionIndex}`;
+        const binaryOptions = section.mode === "ynng"
+          ? ["YES", "NO", "NOT GIVEN"]
+          : ["TRUE", "FALSE", "NOT GIVEN"];
 
-        if (line.kind === "option") {
-          const [, letter = "", optionText = line.text] = /^([A-I])\s+(.+)$/.exec(line.text) ?? [];
+        if (section.mode === "option-bank") {
           return (
-            <p className="reading-raw-option-line" key={`${line.text}-${index}`}>
-              <span>{letter}</span>
-              <strong>{optionText}</strong>
-            </p>
+            <section className="reading-raw-question-group" key={sectionKey}>
+              {section.heading ? <h2>{section.heading}</h2> : null}
+              {section.instructions.map((instruction) => (
+                <p className="reading-raw-question-instruction" key={instruction}>{instruction}</p>
+              ))}
+              {section.textLines.map((line, index) => (
+                <p className="reading-raw-question-copy" key={`${sectionKey}-text-${index}`}>{line}</p>
+              ))}
+              {(section.questions.length > 0 ? section.questions : section.questionNumbers.map((number) => ({
+                number,
+                options: [],
+                text: `Question ${number}`,
+              }))).map((question) => {
+                const selectedLetter = fillAnswers[question.number] ?? "";
+                const selectedOption = section.options.find((option) => option.letter === selectedLetter);
+
+                return (
+                  <article className="reading-raw-drag-question" id={`reading-question-${question.number}`} key={question.number}>
+                    <div className="reading-raw-drag-prompt">
+                      <b>{question.number}</b>
+                      <span>{question.text}</span>
+                    </div>
+                    <div
+                      className={`reading-raw-drop-slot ${selectedOption ? "filled" : ""}`}
+                      onDragOver={(event) => event.preventDefault()}
+                      onDrop={(event) => {
+                        event.preventDefault();
+                        const payload = getRawDragPayload(event);
+                        if (payload?.letter) {
+                          onAnswerChange(question.number, payload.letter);
+                        }
+                      }}
+                    >
+                      {selectedOption ? (
+                        <button
+                          draggable
+                          type="button"
+                          onDragStart={(event) =>
+                            setRawDragPayload(event, {
+                              letter: selectedOption.letter,
+                              sourceQuestion: question.number,
+                            })}
+                        >
+                          <span>{selectedOption.letter}</span>
+                          {selectedOption.text}
+                        </button>
+                      ) : (
+                        <span>拖到这里</span>
+                      )}
+                    </div>
+                  </article>
+                );
+              })}
+              {renderOptionBank(section.options, sectionKey)}
+            </section>
           );
         }
 
-        if (line.kind === "question") {
-          const [, number = "", questionText = line.text] = /^(\d{1,2})(?:\s|[).>])\s*(.*)$/.exec(line.text) ?? [];
+        if (section.mode === "tfng" || section.mode === "ynng") {
           return (
-            <p className="reading-raw-numbered-line" key={`${line.text}-${index}`}>
-              <b>{number}</b>
-              <span>{questionText}</span>
-            </p>
+            <section className="reading-raw-question-group" key={sectionKey}>
+              {section.heading ? <h2>{section.heading}</h2> : null}
+              {section.instructions.map((instruction) => (
+                <p className="reading-raw-question-instruction" key={instruction}>{instruction}</p>
+              ))}
+              {section.questions.map((question) => (
+                <article className="reading-raw-binary-question" id={`reading-question-${question.number}`} key={question.number}>
+                  <div className="reading-question-prompt">
+                    <strong>{question.number}</strong>
+                    <span>{question.text}</span>
+                  </div>
+                  {renderBinaryChoices(question.number, binaryOptions)}
+                </article>
+              ))}
+            </section>
           );
         }
 
         return (
-          <p
-            className={line.kind === "text" ? "reading-raw-question-copy" : `reading-raw-question-${line.kind}`}
-            key={`${line.text}-${index}`}
-          >
-            {line.text}
-          </p>
+          <section className="reading-raw-question-group" key={sectionKey}>
+            {section.heading ? <h2>{section.heading}</h2> : null}
+            {section.instructions.map((instruction) => (
+              <p className="reading-raw-question-instruction" key={instruction}>{instruction}</p>
+            ))}
+            {section.textLines.map((line, index) =>
+              section.mode === "fill" ? renderFillLine(line, `${sectionKey}-fill-${index}`) : (
+                <p className="reading-raw-question-copy" key={`${sectionKey}-text-${index}`}>{line}</p>
+              ),
+            )}
+            {section.questions.map((question) => (
+              <article className="reading-raw-numbered-line" id={`reading-question-${question.number}`} key={question.number}>
+                <b>{question.number}</b>
+                <span>{question.text}</span>
+                {section.mode === "choice" && question.options.length > 0 ? (
+                  <div className="reading-raw-binary-options reading-raw-letter-options">
+                    {question.options.map((option) => (
+                      <label className={fillAnswers[question.number] === option.letter ? "selected" : ""} key={option.letter}>
+                        <input
+                          checked={fillAnswers[question.number] === option.letter}
+                          name={`reading-raw-question-${question.number}`}
+                          type="radio"
+                          value={option.letter}
+                          onChange={() => onAnswerChange(question.number, option.letter)}
+                        />
+                        <span>{option.letter}</span>
+                        <strong>{option.text}</strong>
+                      </label>
+                    ))}
+                  </div>
+                ) : renderFillInput(question.number)}
+              </article>
+            ))}
+          </section>
         );
       })}
     </div>
@@ -1317,7 +1710,15 @@ export function ReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: 
               return (
                 <section className="reading-question-section reading-fill-section" key={block.id}>
                   {block.rawText ? (
-                    <RawQuestionText text={block.rawText} />
+                    <RawQuestionText
+                      fillAnswers={fillAnswers}
+                      onAnswerChange={(number, value) => setFillAnswers((current) => ({
+                        ...current,
+                        [number]: value,
+                      }))}
+                      questions={block.questions}
+                      text={block.rawText}
+                    />
                   ) : (
                     <>
                       <h2>Questions {formatQuestionNumbers(questionNumbers)}</h2>
@@ -1332,27 +1733,28 @@ export function ReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: 
                       ))}
                     </div>
                   ) : null}
-                  {block.rawText ? <h3>Your answers</h3> : null}
-                  <div className="reading-fill-list">
-                    {block.questions.map((question) => (
-                      <label id={`reading-question-${question.number}`} key={question.number}>
-                        <span>{question.before}</span>
-                        <span className="reading-fill-input-wrap">
-                          <b>{question.number}</b>
-                          <input
-                            aria-label={`Question ${question.number}`}
-                            autoComplete="off"
-                            value={fillAnswers[question.number] ?? ""}
-                            onChange={(event) => setFillAnswers((current) => ({
-                              ...current,
-                              [question.number]: event.target.value,
-                            }))}
-                          />
-                        </span>
-                        {question.after ? <span>{question.after}</span> : null}
-                      </label>
-                    ))}
-                  </div>
+                  {block.rawText ? null : (
+                    <div className="reading-fill-list">
+                      {block.questions.map((question) => (
+                        <label id={`reading-question-${question.number}`} key={question.number}>
+                          <span>{question.before}</span>
+                          <span className="reading-fill-input-wrap">
+                            <b>{question.number}</b>
+                            <input
+                              aria-label={`Question ${question.number}`}
+                              autoComplete="off"
+                              value={fillAnswers[question.number] ?? ""}
+                              onChange={(event) => setFillAnswers((current) => ({
+                                ...current,
+                                [question.number]: event.target.value,
+                              }))}
+                            />
+                          </span>
+                          {question.after ? <span>{question.after}</span> : null}
+                        </label>
+                      ))}
+                    </div>
+                  )}
                 </section>
               );
             })}
