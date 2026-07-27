@@ -258,6 +258,78 @@ function getRawReadingParagraphs(value: string, title: string) {
   return paragraphs.length > 0 ? paragraphs : [value];
 }
 
+function cleanRawQuestionLine(value: string) {
+  return value.replace(/[|]+/g, " ").replace(/\s+/g, " ").trim();
+}
+
+function getRawQuestionLineKind(value: string) {
+  if (/^Questions?\s+\d{1,2}/i.test(value)) return "heading";
+  if (/^(?:A|B|C|D|E|F|G|H|I)\s+.+/.test(value)) return "option";
+  if (/^\d{1,2}(?:\s|[).>])/.test(value)) return "question";
+  if (
+    /^(?:Choose|Complete|Do the following|Write|Which|Match|Label|Look at|The text has|Reading Passage|In boxes|TRUE|FALSE|NOT GIVEN|YES|NO)\b/i.test(
+      value,
+    )
+  ) {
+    return "instruction";
+  }
+  return "text";
+}
+
+function getRawQuestionLines(value: string) {
+  return value
+    .split("\n")
+    .map(cleanRawQuestionLine)
+    .filter((line) => line && !/^=== OCR PAGE \d+ ===$/i.test(line))
+    .map((line) => ({
+      kind: getRawQuestionLineKind(line),
+      text: line,
+    }));
+}
+
+function RawQuestionText({ text }: { text: string }) {
+  const lines = getRawQuestionLines(text);
+
+  return (
+    <div className="reading-raw-question-flow">
+      {lines.map((line, index) => {
+        if (line.kind === "heading") {
+          return <h2 key={`${line.text}-${index}`}>{line.text}</h2>;
+        }
+
+        if (line.kind === "option") {
+          const [, letter = "", optionText = line.text] = /^([A-I])\s+(.+)$/.exec(line.text) ?? [];
+          return (
+            <p className="reading-raw-option-line" key={`${line.text}-${index}`}>
+              <span>{letter}</span>
+              <strong>{optionText}</strong>
+            </p>
+          );
+        }
+
+        if (line.kind === "question") {
+          const [, number = "", questionText = line.text] = /^(\d{1,2})(?:\s|[).>])\s*(.*)$/.exec(line.text) ?? [];
+          return (
+            <p className="reading-raw-numbered-line" key={`${line.text}-${index}`}>
+              <b>{number}</b>
+              <span>{questionText}</span>
+            </p>
+          );
+        }
+
+        return (
+          <p
+            className={line.kind === "text" ? "reading-raw-question-copy" : `reading-raw-question-${line.kind}`}
+            key={`${line.text}-${index}`}
+          >
+            {line.text}
+          </p>
+        );
+      })}
+    </div>
+  );
+}
+
 function splitUserRequiredAnswers(value: string, requiredAnswers: string[]) {
   const normalizedValue = value.trim();
   if (!normalizedValue) return [];
@@ -1244,10 +1316,15 @@ export function ReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: 
               const questionNumbers = block.questions.map((question) => question.number);
               return (
                 <section className="reading-question-section reading-fill-section" key={block.id}>
-                  <h2>Questions {formatQuestionNumbers(questionNumbers)}</h2>
-                  <p>{block.instruction}</p>
-                  <h3>{block.title}</h3>
-                  {block.rawText ? <pre className="reading-raw-question-text">{block.rawText}</pre> : null}
+                  {block.rawText ? (
+                    <RawQuestionText text={block.rawText} />
+                  ) : (
+                    <>
+                      <h2>Questions {formatQuestionNumbers(questionNumbers)}</h2>
+                      <p>{block.instruction}</p>
+                      <h3>{block.title}</h3>
+                    </>
+                  )}
                   {block.wordBank ? (
                     <div className="reading-word-bank" aria-label="word bank">
                       {block.wordBank.map((word) => (
@@ -1255,6 +1332,7 @@ export function ReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: 
                       ))}
                     </div>
                   ) : null}
+                  {block.rawText ? <h3>Your answers</h3> : null}
                   <div className="reading-fill-list">
                     {block.questions.map((question) => (
                       <label id={`reading-question-${question.number}`} key={question.number}>
