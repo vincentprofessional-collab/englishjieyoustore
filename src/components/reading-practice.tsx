@@ -199,6 +199,65 @@ function formatFillCorrectAnswer(question: ReadingFillQuestion) {
   return groups[0].join(" / ");
 }
 
+function cleanRawReadingLine(value: string) {
+  return value.replace(/[|]+/g, " ").replace(/\s+/g, " ").trim();
+}
+
+function isRawReadingInstructionLine(value: string) {
+  return (
+    /^READING\s+PASSAGE\s+\d/i.test(value) ||
+    /^R\s*E\s*A\s*D\s*I\s*N\s*G$/i.test(value) ||
+    /^Reading$/i.test(value) ||
+    /^Test\s+\d$/i.test(value) ||
+    /^You should spend about 20 minutes/i.test(value) ||
+    /^should spend about 20 minutes/i.test(value) ||
+    /^Reading Passage \d below\.?$/i.test(value) ||
+    /^below\.?$/i.test(value) ||
+    /^=== OCR PAGE \d+ ===$/i.test(value)
+  );
+}
+
+function getRawReadingParagraphs(value: string, title: string) {
+  const titleLine = cleanRawReadingLine(title).toLowerCase();
+  const paragraphs: string[] = [];
+  let current: string[] = [];
+  let skippedTitle = false;
+
+  function flush() {
+    if (current.length > 0) {
+      paragraphs.push(current.join(" "));
+      current = [];
+    }
+  }
+
+  for (const rawLine of value.split("\n")) {
+    const line = cleanRawReadingLine(rawLine);
+
+    if (!line) {
+      flush();
+      continue;
+    }
+
+    if (isRawReadingInstructionLine(line)) {
+      continue;
+    }
+
+    if (!skippedTitle && titleLine && line.toLowerCase() === titleLine) {
+      skippedTitle = true;
+      continue;
+    }
+
+    if (/^[A-Z]$/.test(line) && current.length > 0) {
+      flush();
+    }
+
+    current.push(line);
+  }
+
+  flush();
+  return paragraphs.length > 0 ? paragraphs : [value];
+}
+
 function splitUserRequiredAnswers(value: string, requiredAnswers: string[]) {
   const normalizedValue = value.trim();
   if (!normalizedValue) return [];
@@ -1093,7 +1152,9 @@ export function ReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: 
                   <section className="reading-passage-section" key={section.id}>
                     {section.paragraphs.map((paragraph) =>
                       section.format === "pre" ? (
-                        <pre className="reading-raw-text" key={paragraph}>{paragraph}</pre>
+                        getRawReadingParagraphs(paragraph, activePart.title).map((rawParagraph, index) => (
+                          <p key={`${section.id}-${index}`}>{rawParagraph}</p>
+                        ))
                       ) : (
                         <p key={paragraph}>{paragraph}</p>
                       ),

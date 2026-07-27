@@ -1,12 +1,8 @@
 import Link from "next/link";
 import { CAMBRIDGE_BOOKS } from "@/lib/ielts/cambridge-books";
-import { READING_TESTS, getReadingQuestionNumbers, type ReadingTest } from "@/lib/ielts/reading";
+import { READING_TESTS, type ReadingTest } from "@/lib/ielts/reading";
 
 const IELTS_READING_TESTS = [1, 2, 3, 4];
-
-function getQuestionCount(test: ReadingTest) {
-  return new Set(test.parts.flatMap((part) => getReadingQuestionNumbers(part))).size;
-}
 
 export function ReadingLibrary({ mode }: { mode: "mock" | "practice" }) {
   const testsByBook = new Map<string, ReadingTest[]>();
@@ -54,7 +50,6 @@ export function ReadingLibrary({ mode }: { mode: "mock" | "practice" }) {
                 <div className="listening-book-label">
                   <strong>{book.shortTitle}</strong>
                   <span>{book.title}</span>
-                  <small>{isAvailable ? `${bookTests.length} 套已导入` : "待导入"}</small>
                 </div>
 
                 <div className="listening-test-grid reading-test-grid">
@@ -69,8 +64,6 @@ export function ReadingLibrary({ mode }: { mode: "mock" | "practice" }) {
                         key={testNo}
                       >
                         <strong>Test {testNo}</strong>
-                        <span>{test.parts.length} 篇文章</span>
-                        <small>{getQuestionCount(test)} 题</small>
                       </Link>
                     ) : (
                       <span className="reading-test-link locked" key={testNo}>
