@@ -157,6 +157,11 @@ function splitAnswerAlternatives(value: string) {
 function getComparableAnswerValues(value: string) {
   const trimmed = value.trim();
   const values = new Set([trimmed]);
+  const compact = trimmed.replace(/\s+/g, "");
+
+  if (compact) {
+    values.add(compact);
+  }
 
   if (trimmed.includes("(s)")) {
     values.add(trimmed.replace(/\(s\)/g, ""));
@@ -451,6 +456,17 @@ export function ReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: 
         rows: reviewRows.filter((row) => row.partLabel === part.label),
       })),
     [parts, reviewRows],
+  );
+  const rawAnswerBlocks = useMemo(
+    () =>
+      parts.flatMap((part) =>
+        part.questionBlocks.flatMap((block) =>
+          block.type === "fill" && block.rawAnswerText
+            ? [{ label: part.label, text: block.rawAnswerText }]
+            : [],
+        ),
+      ),
+    [parts],
   );
   const correctCount = reviewRows.filter((row) => row.isCorrect).length;
 
@@ -1075,7 +1091,13 @@ export function ReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: 
 
                 return (
                   <section className="reading-passage-section" key={section.id}>
-                    {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                    {section.paragraphs.map((paragraph) =>
+                      section.format === "pre" ? (
+                        <pre className="reading-raw-text" key={paragraph}>{paragraph}</pre>
+                      ) : (
+                        <p key={paragraph}>{paragraph}</p>
+                      ),
+                    )}
                   </section>
                 );
               })}
@@ -1164,6 +1186,7 @@ export function ReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: 
                   <h2>Questions {formatQuestionNumbers(questionNumbers)}</h2>
                   <p>{block.instruction}</p>
                   <h3>{block.title}</h3>
+                  {block.rawText ? <pre className="reading-raw-question-text">{block.rawText}</pre> : null}
                   {block.wordBank ? (
                     <div className="reading-word-bank" aria-label="word bank">
                       {block.wordBank.map((word) => (
@@ -1372,6 +1395,26 @@ export function ReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: 
                   ))}
                 </div>
               </section>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      {isSubmitted && rawAnswerBlocks.length > 0 ? (
+        <section className="reading-raw-answer-panel" aria-label="阅读原始答案参照">
+          <div className="reading-review-head">
+            <div>
+              <span>Answer Key</span>
+              <h2>原始答案参照</h2>
+            </div>
+          </div>
+
+          <div className="reading-raw-answer-grid">
+            {rawAnswerBlocks.map((block) => (
+              <article key={block.label}>
+                <h3>{block.label}</h3>
+                <pre>{block.text}</pre>
+              </article>
             ))}
           </div>
         </section>

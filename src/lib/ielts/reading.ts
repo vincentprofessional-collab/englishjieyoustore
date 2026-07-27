@@ -1,4 +1,5 @@
 import { CAMBRIDGE4_TEST1_PARTS } from "./reading-cambridge4";
+import generatedReadingTests from "./generated-reading-tests.json";
 
 export type ReadingPartId = string;
 
@@ -33,6 +34,7 @@ export type ReadingHeadingOption = {
 };
 
 export type ReadingPassageSection = {
+  format?: "pre";
   headingQuestionNumber?: number;
   id: string;
   paragraphs: string[];
@@ -49,6 +51,8 @@ export type ReadingFillBlock = {
   id: string;
   instruction: string;
   questions: ReadingFillQuestion[];
+  rawAnswerText?: string;
+  rawText?: string;
   title: string;
   type: "fill";
   wordBank?: string[];
@@ -892,7 +896,7 @@ const CAMBRIDGE21_TEST1_PARTS: ReadingPart[] = [
   cambridge21Test1PartThree,
 ];
 
-export const READING_TESTS: ReadingTest[] = [
+const MANUAL_READING_TESTS: ReadingTest[] = [
   {
     bookCode: "cambridge-4",
     bookTitle: "剑桥雅思 4",
@@ -910,6 +914,22 @@ export const READING_TESTS: ReadingTest[] = [
     title: "剑桥雅思 21 Test 1 Reading",
   },
 ];
+
+const manualReadingTestIds = new Set(MANUAL_READING_TESTS.map((test) => test.id));
+const GENERATED_READING_TESTS = (generatedReadingTests as ReadingTest[]).filter(
+  (test) => !manualReadingTestIds.has(test.id),
+);
+
+export const READING_TESTS: ReadingTest[] = [
+  ...MANUAL_READING_TESTS,
+  ...GENERATED_READING_TESTS,
+].sort((a, b) => {
+  const bookA = Number(a.bookCode.replace("cambridge-", ""));
+  const bookB = Number(b.bookCode.replace("cambridge-", ""));
+
+  if (bookA !== bookB) return bookA - bookB;
+  return a.testNo - b.testNo;
+});
 
 export const DEFAULT_READING_TEST = READING_TESTS[0];
 export const READING_PARTS: ReadingPart[] = DEFAULT_READING_TEST.parts;
