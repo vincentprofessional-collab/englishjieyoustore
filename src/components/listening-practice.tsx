@@ -22,6 +22,8 @@ import { ContentShareButton } from "@/components/content-share-button";
 import type { ListeningSectionDetail } from "@/lib/ielts/listening";
 import {
   getStudySelectionActionPosition,
+  hasStudySelectionText,
+  STUDY_SELECTION_ACTION_TIMEOUT_MS,
   type StudySelectionActionPosition,
 } from "@/lib/study-selection";
 import { cleanPartOfSpeech, cleanVocabularyDefinition } from "@/lib/vocabulary/display";
@@ -1299,6 +1301,139 @@ function CambridgeFourTestOneSheet({
   );
 }
 
+function CambridgeFourStructuredSheet({
+  answers,
+  onAnswerChange,
+  questionImageUrls,
+  questions,
+  sectionNo,
+  submitted,
+  testNo,
+}: {
+  answers: AnswerMap;
+  onAnswerChange: (questionId: string, value: string) => void;
+  questionImageUrls: string[];
+  questions: ListeningQuestion[];
+  sectionNo: number;
+  submitted: boolean;
+  testNo: number;
+}) {
+  return (
+    <div className="paper-sheet ci4-structured-sheet">
+      <header className="ci4-structured-sheet-heading">
+        <span>CAMBRIDGE IELTS 4</span>
+        <strong>
+          Test {testNo} · Section {sectionNo}
+        </strong>
+      </header>
+
+      {questionImageUrls.length > 0 ? (
+        <div className="ci4-map-image-stack">
+          {questionImageUrls.map((questionImageUrl, index) => (
+            <img
+              className="ci4-map-image"
+              key={questionImageUrl}
+              src={questionImageUrl}
+              alt={`Cambridge IELTS 4 Test ${testNo} Section ${sectionNo} 地图题 ${
+                index + 1
+              }`}
+            />
+          ))}
+        </div>
+      ) : null}
+
+      <section className="ci4-structured-question-area">
+        <div className="ci4-structured-question-heading">
+          <div>
+            <span>LISTENING</span>
+            <h2>Questions {(sectionNo - 1) * 10 + 1}–{sectionNo * 10}</h2>
+          </div>
+          <p>题目文字按原书整理；只有地图题使用书本原图。</p>
+        </div>
+
+        <div className="ci4-structured-question-list">
+          {questions.map((question) => {
+            const userAnswer = answers[question.id] ?? "";
+            const isCorrect = submitted && isAcceptedAnswer(userAnswer, question.answers);
+            const choicePrompt = parseChoicePrompt(question.promptText);
+            const shouldRenderRadio =
+              question.questionType === "single_choice" && choicePrompt.options.length > 0;
+
+            return (
+              <article
+                className={`ci4-structured-question ${
+                  submitted ? (isCorrect ? "correct" : "wrong") : ""
+                }`}
+                id={shouldRenderRadio ? `question-${question.questionNo}` : undefined}
+                key={question.id}
+              >
+                <div className="ci4-structured-question-head">
+                  <span>Question {question.questionNo}</span>
+                  <small>{question.questionType.replaceAll("_", " ")}</small>
+                </div>
+                <p className="ci4-structured-prompt">
+                  {shouldRenderRadio ? choicePrompt.stem : question.promptText}
+                </p>
+
+                {shouldRenderRadio ? (
+                  <div className="choice-options">
+                    {choicePrompt.options.map((option) => {
+                      const isSelected = userAnswer === option.letter;
+                      const isCorrectOption =
+                        isAcceptedAnswer(option.letter, question.answers) ||
+                        isAcceptedAnswer(option.text, question.answers);
+                      const isWrongSelection = submitted && isSelected && !isCorrectOption;
+
+                      return (
+                        <label
+                          className={`choice-option ${
+                            submitted && isCorrectOption ? "correct-option" : ""
+                          } ${isWrongSelection ? "wrong-option" : ""}`}
+                          key={option.letter}
+                        >
+                          <span className="choice-status-icon">
+                            {submitted && isCorrectOption ? "✅" : null}
+                            {isWrongSelection ? "❌" : null}
+                          </span>
+                          <span
+                            className={`choice-dot ${
+                              isSelected || (submitted && isCorrectOption) ? "selected" : ""
+                            }`}
+                          />
+                          <input
+                            checked={isSelected}
+                            disabled={submitted}
+                            name={`question-${question.id}`}
+                            type="radio"
+                            value={option.letter}
+                            onChange={() => onAnswerChange(question.id, option.letter)}
+                          />
+                          <span className="choice-letter">{option.letter}</span>
+                          <span>{option.text}</span>
+                        </label>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <div className="ci4-structured-answer">
+                    <InlineFillAnswer
+                      answers={answers}
+                      minAnswerChars={isChoiceQuestion(question.questionType) ? 4 : 12}
+                      onAnswerChange={onAnswerChange}
+                      question={question}
+                      submitted={submitted}
+                    />
+                  </div>
+                )}
+              </article>
+            );
+          })}
+        </div>
+      </section>
+    </div>
+  );
+}
+
 export function ListeningPractice({
   initialMode = "mock",
   initialSubmitted = false,
@@ -1351,11 +1486,19 @@ export function ListeningPractice({
   const [stopAtSeconds, setStopAtSeconds] = useState<number | null>(null);
   const [checkSecondsLeft, setCheckSecondsLeft] = useState<number | null>(null);
   const pageRef = useRef<HTMLElement | null>(null);
-  const shouldUsePaperLayout =
+  const shouldUseTestOnePaperLayout =
     section.bookCode === "cambridge-4" &&
     section.testNo === 1 &&
     section.sectionNo >= 1 &&
     section.sectionNo <= 4;
+  const shouldUseStructuredPaperLayout =
+    section.bookCode === "cambridge-4" &&
+    section.testNo >= 2 &&
+    section.testNo <= 4 &&
+    section.sectionNo >= 1 &&
+    section.sectionNo <= 4;
+  const shouldUsePaperLayout =
+    shouldUseTestOnePaperLayout || shouldUseStructuredPaperLayout;
   const practiceTitle = formatListeningSectionTitle(section);
   const questionImageUrls =
     section.questionImageUrls.length > 0
@@ -1764,7 +1907,7 @@ export function ListeningPractice({
   function handleQuestionSelection() {
     const selection = window.getSelection();
     const text = selection?.toString().trim() ?? "";
-    if (!selection || selection.rangeCount === 0 || !/[A-Za-z]/.test(text)) {
+    if (!selection || selection.rangeCount === 0 || !hasStudySelectionText(text)) {
       return;
     }
 
@@ -1777,18 +1920,7 @@ export function ListeningPractice({
     selectedRangeRef.current = range;
     setSelectedText(text);
     setSelectionActionPosition(getStudySelectionActionPosition(rect));
-
-    const firstWord = text.match(/[A-Za-z]+(?:['’-][A-Za-z]+)?/)?.[0];
-    if (firstWord) {
-      if (submitted) {
-        hoverRequestIdRef.current += 1;
-        void showWordTooltipFromRect(firstWord, rect, hoverRequestIdRef.current);
-      } else {
-        setActiveWordTooltip(null);
-      }
-    } else {
-      setActiveWordTooltip(null);
-    }
+    setActiveWordTooltip(null);
   }
 
   function clearSelectionHideTimer() {
@@ -1810,7 +1942,7 @@ export function ListeningPractice({
     selectionHideTimerRef.current = window.setTimeout(() => {
       hideSelectionAction();
       selectionHideTimerRef.current = null;
-    }, 1500);
+    }, STUDY_SELECTION_ACTION_TIMEOUT_MS);
   }
 
   function handleSubtitleClick(sentence: ListeningSentence) {
@@ -2680,7 +2812,7 @@ export function ListeningPractice({
       }`}
       data-local-selection-actions="true"
       ref={pageRef}
-      onMouseUp={handleQuestionSelection}
+      onPointerUp={handleQuestionSelection}
       onMouseLeave={() => setActiveWordTooltip(null)}
       onMouseMove={handleEnglishWordHover}
     >
@@ -2785,7 +2917,7 @@ export function ListeningPractice({
             : undefined
         }
       >
-        {selectedText && !submitted && !activeWordTooltip && selectionActionPosition ? (
+        {selectedText && selectionActionPosition ? (
           <div
             className={`selection-action-popover global-selection-popover ${
               selectionActionPosition.placement === "above" ? "above" : ""
@@ -2806,7 +2938,7 @@ export function ListeningPractice({
           <aside className="practice-audio-study-panel">
             <section
               className="practice-listening-card"
-              onMouseUp={handleQuestionSelection}
+              onPointerUp={handleQuestionSelection}
               onWheel={handleSubtitlePanelWheel}
             >
               {section.fullAudioUrl ? (
@@ -2896,7 +3028,7 @@ export function ListeningPractice({
         <div
           className="practice-main exam-question-surface"
           ref={questionSurfaceRef}
-          onMouseUp={handleQuestionSelection}
+          onPointerUp={handleQuestionSelection}
         >
           {mode === "practice" && !submitted ? (
             <section className="pre-submit-audio-panel">
@@ -2960,13 +3092,23 @@ export function ListeningPractice({
                 <h2>这套 Section 还没有结构化题目。</h2>
                 <p>下一步在后台或 Supabase 里导入 questions 和 question_answers 后，这里会自动变成可作答题目。</p>
               </div>
-            ) : shouldUsePaperLayout ? (
+            ) : shouldUseTestOnePaperLayout ? (
               <CambridgeFourTestOneSheet
                 answers={answers}
                 onAnswerChange={updateAnswer}
                 questions={section.questions}
                 sectionNo={section.sectionNo}
                 submitted={submitted}
+              />
+            ) : shouldUseStructuredPaperLayout ? (
+              <CambridgeFourStructuredSheet
+                answers={answers}
+                onAnswerChange={updateAnswer}
+                questionImageUrls={questionImageUrls}
+                questions={section.questions}
+                sectionNo={section.sectionNo}
+                submitted={submitted}
+                testNo={section.testNo}
               />
             ) : (
               section.questions.map((question) => {

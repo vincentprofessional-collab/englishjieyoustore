@@ -4,7 +4,7 @@ export type StudySelectionActionPosition = {
   top: number;
 };
 
-export const STUDY_SELECTION_ACTION_TIMEOUT_MS = 1500;
+export const STUDY_SELECTION_ACTION_TIMEOUT_MS = 2000;
 
 export function hasStudySelectionText(value: string) {
   return /[\p{L}\p{N}]/u.test(value);

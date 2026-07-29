@@ -16,8 +16,10 @@
     "seed:cambridge4:test1:s2": "node scripts/seed-listening-section.mjs scripts/seed-data/cambridge-4-test-1-section-2.mjs",
     "seed:cambridge4:test1:s3": "node scripts/seed-listening-section.mjs scripts/seed-data/cambridge-4-test-1-section-3.mjs",
     "seed:cambridge4:test1:s4": "node scripts/seed-listening-section.mjs scripts/seed-data/cambridge-4-test-1-section-4.mjs",
+    "seed:cambridge4:tests2-4": "node scripts/seed-cambridge4-tests2-4.mjs",
     "upload:cambridge4:test1:s1": "node scripts/upload-cambridge4-test1-section1-assets.mjs",
     "upload:cambridge4:test1": "node scripts/upload-cambridge4-test1-assets.mjs",
+    "upload:cambridge4:tests2-4": "node scripts/upload-cambridge4-tests2-4-assets.mjs",
     "types:supabase": "npx supabase gen types typescript --project-id ahecwiqjfrrxxjxazmre --schema public > src/lib/database.types.ts"
   },
   "dependencies": {
