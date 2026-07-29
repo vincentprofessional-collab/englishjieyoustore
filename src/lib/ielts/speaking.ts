@@ -21,11 +21,6 @@ export type SpeakingPart = {
   timing: string;
 };
 
-export type SpeakingQuestionGroup = {
-  questions: SpeakingQuestion[];
-  scene: string;
-};
-
 const questionData = speakingQuestionData as Record<SpeakingPartId, SpeakingQuestion[]>;
 
 const speakingPartDefinitions: Array<Omit<SpeakingPart, "count" | "questions" | "sceneCount">> = [
@@ -66,19 +61,4 @@ export const speakingParts: SpeakingPart[] = speakingPartDefinitions.map((part) 
 
 export function getSpeakingPart(partId: string) {
   return speakingParts.find((part) => part.id === partId);
-}
-
-export function groupSpeakingQuestions(questions: SpeakingQuestion[]) {
-  const groups = new Map<string, SpeakingQuestion[]>();
-
-  for (const question of questions) {
-    const currentQuestions = groups.get(question.scene) ?? [];
-    currentQuestions.push(question);
-    groups.set(question.scene, currentQuestions);
-  }
-
-  return Array.from(groups, ([scene, groupedQuestions]) => ({
-    questions: groupedQuestions,
-    scene,
-  }));
 }
