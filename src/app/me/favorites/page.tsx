@@ -78,7 +78,7 @@ type FavoriteAnnotationItem = {
   title: string;
 };
 
-type FavoriteSortMode = "time" | "alphabetical" | "random";
+type FavoriteSortMode = "time" | "alphabetical" | "type" | "random";
 
 const FAVORITE_ANNOTATIONS_STORAGE_KEY = "ielts-platform.favoriteAnnotations";
 const FAVORITE_ARTICLES_STORAGE_KEY = "ielts-platform.favoriteArticles";
@@ -97,8 +97,23 @@ const favoriteTabs: Array<{ id: FavoriteTab; label: string; eyebrow: string }> =
 const favoriteSortOptions: Array<{ id: FavoriteSortMode; label: string }> = [
   { id: "time", label: "按时间" },
   { id: "alphabetical", label: "按首字母" },
+  { id: "type", label: "按题型" },
   { id: "random", label: "乱序" },
 ];
+
+const favoriteQuestionModuleLabels: Record<string, string> = {
+  listening: "listening",
+  reading: "reading",
+  speaking: "speaking",
+  writing: "writing",
+};
+
+const favoriteQuestionModuleOrder: Record<string, number> = {
+  listening: 1,
+  speaking: 2,
+  reading: 3,
+  writing: 4,
+};
 
 function readStorageList<T>(key: string) {
   try {
@@ -295,7 +310,7 @@ function formatBbcSourceFromHref(href?: string) {
   return articleId ? `BBC ${articleId}` : "";
 }
 
-function getFavoriteQuestionSourceLabel(question: FavoriteQuestionItem) {
+function getFavoriteQuestionSourceDetails(question: FavoriteQuestionItem) {
   const sourceText = [
     question.id,
     question.href,
@@ -307,15 +322,9 @@ function getFavoriteQuestionSourceLabel(question: FavoriteQuestionItem) {
   const moduleMatch = sourceText.match(/\b(speaking|writing|listening|reading)\b/i);
 
   if (!moduleMatch) {
-    return question.sourceTitle ?? "";
+    return null;
   }
 
-  const moduleLabels: Record<string, string> = {
-    listening: "Listening",
-    reading: "Reading",
-    speaking: "Speaking",
-    writing: "Writing",
-  };
   const moduleKey = moduleMatch[1].toLowerCase();
   const cambridgeNumber =
     sourceText.match(/\bcambridge(?:\s+ielts)?[-\s]*(\d+)\b/i)?.[1] ??
@@ -331,20 +340,45 @@ function getFavoriteQuestionSourceLabel(question: FavoriteQuestionItem) {
     ?.split(/[-–]/)
     .map((value) => Number(value))
     .join("–");
-  const labels = [
-    cambridgeNumber ? `IELTS Cambridge ${Number(cambridgeNumber)}` : "IELTS",
-    moduleLabels[moduleKey],
-    testNumber ? `Test ${Number(testNumber)}` : "",
-    partNumber ? `Part ${Number(partNumber)}` : "",
-    taskNumber ? `Task ${Number(taskNumber)}` : "",
-    questionLabel ? `Question ${questionLabel}` : "",
+  const prefix = cambridgeNumber ? `IELTS Cambridge ${Number(cambridgeNumber)}` : "IELTS";
+  const segments = [
+    testNumber ? `test${Number(testNumber)}` : "",
+    partNumber ? `part${Number(partNumber)}` : "",
+    taskNumber ? `task${Number(taskNumber)}` : "",
+    questionLabel ? `question${questionLabel}` : "",
   ].filter(Boolean);
+  const sortNumbers = [cambridgeNumber, testNumber, partNumber, taskNumber, questionLabel]
+    .map((value) => String(value ?? "").padStart(4, "0"))
+    .join("-");
+  const plainLabel = [prefix, favoriteQuestionModuleLabels[moduleKey], ...segments].join("-");
 
-  return labels.join(" · ");
+  return {
+    moduleKey,
+    plainLabel,
+    prefix,
+    segments,
+    sortKey: `${favoriteQuestionModuleOrder[moduleKey] ?? 99}-${sortNumbers}-${question.title}`,
+  };
 }
 
 function isGeneratedFavoriteQuestionTitle(title: string) {
   return /^(?:listening|reading)\s+(?:ci|cambridge)[-\s\d]/i.test(title.trim());
+}
+
+function FavoriteQuestionSource({ details }: { details: NonNullable<ReturnType<typeof getFavoriteQuestionSourceDetails>> }) {
+  return (
+    <span className="favorite-question-source" title={details.plainLabel}>
+      <span>{details.prefix}</span>
+      <span className="favorite-source-separator">-</span>
+      <span className="favorite-question-module">{favoriteQuestionModuleLabels[details.moduleKey]}</span>
+      {details.segments.map((segment) => (
+        <span className="favorite-question-segment" key={segment}>
+          <span className="favorite-source-separator">-</span>
+          <span>{segment}</span>
+        </span>
+      ))}
+    </span>
+  );
 }
 
 function getFavoriteWordDisplay(word: FavoriteWordItem) {
@@ -393,9 +427,23 @@ function sortFavoriteItems<T extends { id: string; savedAt: string }>(
   mode: FavoriteSortMode,
   randomSeed: number,
   getText: (item: T) => string,
+  getType: (item: T) => string = getText,
 ) {
   return [...items].sort((left, right) => {
     if (mode === "alphabetical") {
+      return getText(left).localeCompare(getText(right), "en", { sensitivity: "base" });
+    }
+
+    if (mode === "type") {
+      const typeComparison = getType(left).localeCompare(getType(right), "en", {
+        numeric: true,
+        sensitivity: "base",
+      });
+
+      if (typeComparison !== 0) {
+        return typeComparison;
+      }
+
       return getText(left).localeCompare(getText(right), "en", { sensitivity: "base" });
     }
 
@@ -552,23 +600,57 @@ export default function FavoritesPage() {
     favoriteSortOptions.find((option) => option.id === sortMode)?.label ?? "按时间";
   const sortedWords = useMemo(
     () =>
-      sortFavoriteItems(words, sortMode, randomSeed, (word) => getFavoriteWordDisplay(word).word),
+      sortFavoriteItems(
+        words,
+        sortMode,
+        randomSeed,
+        (word) => getFavoriteWordDisplay(word).word,
+        (word) => word.partOfSpeech,
+      ),
     [randomSeed, sortMode, words],
   );
   const sortedSentences = useMemo(
-    () => sortFavoriteItems(sentences, sortMode, randomSeed, (sentence) => sentence.englishText),
+    () =>
+      sortFavoriteItems(
+        sentences,
+        sortMode,
+        randomSeed,
+        (sentence) => sentence.englishText,
+        (sentence) => `${sentence.bookCode ?? ""}-${sentence.testNo ?? ""}-${sentence.sectionTitle ?? ""}`,
+      ),
     [randomSeed, sentences, sortMode],
   );
   const sortedArticles = useMemo(
-    () => sortFavoriteItems(articles, sortMode, randomSeed, (article) => article.title),
+    () =>
+      sortFavoriteItems(
+        articles,
+        sortMode,
+        randomSeed,
+        (article) => article.title,
+        (article) => article.sourceTitle ?? "",
+      ),
     [articles, randomSeed, sortMode],
   );
   const sortedQuestions = useMemo(
-    () => sortFavoriteItems(questions, sortMode, randomSeed, (question) => question.title),
+    () =>
+      sortFavoriteItems(
+        questions,
+        sortMode,
+        randomSeed,
+        (question) => question.title,
+        (question) => getFavoriteQuestionSourceDetails(question)?.sortKey ?? question.title,
+      ),
     [questions, randomSeed, sortMode],
   );
   const sortedAnnotations = useMemo(
-    () => sortFavoriteItems(annotations, sortMode, randomSeed, (annotation) => annotation.title),
+    () =>
+      sortFavoriteItems(
+        annotations,
+        sortMode,
+        randomSeed,
+        (annotation) => annotation.title,
+        (annotation) => annotation.sourceTitle ?? "",
+      ),
     [annotations, randomSeed, sortMode],
   );
 
@@ -763,14 +845,14 @@ export default function FavoritesPage() {
           ) : (
             <div className="favorite-library-table">
               {sortedQuestions.map((question) => {
-                const sourceLabel = getFavoriteQuestionSourceLabel(question);
+                const sourceDetails = getFavoriteQuestionSourceDetails(question);
                 const showQuestionTitle = !isGeneratedFavoriteQuestionTitle(question.title);
 
                 return (
                   <article className="favorite-library-row question-row" key={question.id}>
                     <Link className="favorite-library-title question" href={question.href ?? "/training"}>
-                      {sourceLabel ? (
-                        <span className="favorite-question-source">{sourceLabel}</span>
+                      {sourceDetails ? (
+                        <FavoriteQuestionSource details={sourceDetails} />
                       ) : null}
                       {showQuestionTitle ? (
                         <span className="favorite-library-title-text">{question.title}</span>
