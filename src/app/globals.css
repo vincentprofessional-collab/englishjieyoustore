@@ -15182,3 +15182,105 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
     background: linear-gradient(135deg, var(--accent), var(--accent-dark));
   }
 }
+
+/* Keep favorite and share actions consistent with the IELTS Speaking controls. */
+.speaking-question-favorite.speaking-question-favorite,
+.favorite-star.favorite-star,
+.word-favorite-star.word-favorite-star,
+.favorite-library-star.favorite-library-star,
+.vocabulary-favorite-star.vocabulary-favorite-star,
+.vocabulary-example-star.vocabulary-example-star,
+.writing-vocabulary-favorite.writing-vocabulary-favorite {
+  align-items: center;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  box-sizing: border-box;
+  color: #a7822b;
+  cursor: pointer;
+  display: inline-flex;
+  flex: 0 0 38px;
+  font-size: 21px;
+  height: 38px;
+  justify-content: center;
+  line-height: 1;
+  min-height: 38px;
+  padding: 0;
+  text-shadow: none;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+  width: 38px;
+}
+
+.speaking-question-favorite.speaking-question-favorite:hover,
+.favorite-star.favorite-star:hover,
+.word-favorite-star.word-favorite-star:hover,
+.favorite-library-star.favorite-library-star:hover,
+.vocabulary-favorite-star.vocabulary-favorite-star:hover,
+.vocabulary-example-star.vocabulary-example-star:hover,
+.writing-vocabulary-favorite.writing-vocabulary-favorite:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  transform: translateY(-1px);
+}
+
+.speaking-question-favorite.speaking-question-favorite.active,
+.favorite-star.favorite-star.active,
+.word-favorite-star.word-favorite-star.active,
+.favorite-library-star.favorite-library-star.active,
+.vocabulary-favorite-star.vocabulary-favorite-star.active,
+.vocabulary-example-star.vocabulary-example-star.active,
+.writing-vocabulary-favorite.writing-vocabulary-favorite.active {
+  background: var(--gold-soft);
+  border-color: var(--gold);
+  color: var(--gold);
+  text-shadow: none;
+}
+
+.content-share-control.content-share-control {
+  align-items: center;
+  flex: 0 0 38px;
+  height: 38px;
+  width: 38px;
+}
+
+.content-share-button.content-share-button {
+  align-items: center;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  box-sizing: border-box;
+  color: #a7822b;
+  display: inline-flex;
+  flex: 0 0 38px;
+  height: 38px;
+  justify-content: center;
+  padding: 0;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+  width: 38px;
+}
+
+.content-share-button.content-share-button:hover {
+  background: transparent;
+  border-color: var(--gold);
+  color: var(--gold);
+  transform: translateY(-1px);
+}
+
+.content-share-button.content-share-button[aria-expanded="true"] {
+  background: var(--gold-soft);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.content-share-icon.content-share-icon {
+  height: 21px;
+  width: 21px;
+}
