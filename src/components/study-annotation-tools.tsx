@@ -7,6 +7,8 @@ import { useEffect, useRef, useState } from "react";
 import { ContentShareButton } from "@/components/content-share-button";
 import {
   getStudySelectionActionPosition,
+  hasStudySelectionText,
+  STUDY_SELECTION_ACTION_TIMEOUT_MS,
   type StudySelectionActionPosition,
 } from "@/lib/study-selection";
 import { cleanPartOfSpeech, cleanVocabularyDefinition } from "@/lib/vocabulary/display";
@@ -79,6 +81,22 @@ function writeStorageList<T extends { savedAt: string }>(key: string, items: T[]
   window.localStorage.setItem(key, JSON.stringify(sortedItems));
 }
 
+function pointIsInsideRect(rect: DOMRect, clientX: number, clientY: number) {
+  const padding = 2;
+  return (
+    rect.width > 0 &&
+    rect.height > 0 &&
+    clientX >= rect.left - padding &&
+    clientX <= rect.right + padding &&
+    clientY >= rect.top - padding &&
+    clientY <= rect.bottom + padding
+  );
+}
+
+function pointIsInsideRange(range: Range, clientX: number, clientY: number) {
+  return [...range.getClientRects()].some((rect) => pointIsInsideRect(rect, clientX, clientY));
+}
+
 function getEnglishWordAtPoint(clientX: number, clientY: number) {
   const documentWithCaret = document as Document & {
     caretPositionFromPoint?: (
@@ -120,12 +138,7 @@ function getEnglishWordAtPoint(clientX: number, clientY: number) {
         range.setEnd(candidateNode, candidateMatch.index + candidateMatch[0].length);
         const rect = range.getBoundingClientRect();
 
-        if (
-          clientX >= rect.left &&
-          clientX <= rect.right &&
-          clientY >= rect.top &&
-          clientY <= rect.bottom
-        ) {
+        if (pointIsInsideRange(range, clientX, clientY)) {
           return { rect, textNode: candidateNode, word: candidateMatch[0] };
         }
       }
@@ -153,7 +166,7 @@ function getEnglishWordAtPoint(clientX: number, clientY: number) {
     range.setEnd(textNode, end);
     const rect = range.getBoundingClientRect();
 
-    if (rect.width === 0 && rect.height === 0) {
+    if (!pointIsInsideRange(range, clientX, clientY)) {
       return null;
     }
 
@@ -233,7 +246,7 @@ export function StudyAnnotationTools({
 
     surface.setAttribute("data-local-selection-actions", "true");
 
-    function handleSelection(event: MouseEvent) {
+    function handleSelection(event: PointerEvent) {
       const target = event.target as HTMLElement | null;
       if (
         target?.closest(
@@ -245,7 +258,7 @@ export function StudyAnnotationTools({
 
       const selection = window.getSelection();
       const text = selection?.toString().trim() ?? "";
-      if (!selection || selection.rangeCount === 0 || !/[A-Za-z]/.test(text)) {
+      if (!selection || selection.rangeCount === 0 || !hasStudySelectionText(text)) {
         return;
       }
 
@@ -264,9 +277,9 @@ export function StudyAnnotationTools({
       setSelectionActionPosition(getStudySelectionActionPosition(rect));
     }
 
-    surface.addEventListener("mouseup", handleSelection);
+    document.addEventListener("pointerup", handleSelection);
     return () => {
-      surface.removeEventListener("mouseup", handleSelection);
+      document.removeEventListener("pointerup", handleSelection);
       surface.removeAttribute("data-local-selection-actions");
     };
   }, [surfaceRef]);
@@ -429,7 +442,7 @@ export function StudyAnnotationTools({
     selectionHideTimerRef.current = window.setTimeout(() => {
       hideSelectionAction();
       selectionHideTimerRef.current = null;
-    }, 1500);
+    }, STUDY_SELECTION_ACTION_TIMEOUT_MS);
   }
 
   function annotationFavoriteId(itemId: number) {

@@ -66,11 +66,118 @@ const knownPassageTextReplacements = new Map([
   ],
 ]);
 
+const knownQuestionTextReplacements = new Map([
+  [
+    "cambridge-4-test-2-part1",
+    [
+      [
+        /There are \.currently approximately 6,800 languages in the world\.[\s\S]*?systems in order to help secure the survival of their mother tongue\./,
+        `There are currently approximately 6,800 languages in the world. This great variety of
+languages came about largely as a result of geographical 1 ...... . But in today's world,
+factors such as government initiatives and 2 ...... are contributing to a huge decrease in the
+number of languages. One factor which may help to ensure that some endangered languages
+do not die out completely is people's increasing appreciation of their 3 ...... . This has been
+encouraged through programmes of language classes for children and through 'apprentice'
+schemes, in which the endangered language is used as the medium of instruction to teach
+people a 4 ...... . Some speakers of endangered languages have even produced writing
+systems in order to help secure the survival of their mother tongue.`,
+      ],
+      [/\n\s*8 Salikoko Mufwene/g, "\n                          B Salikoko Mufwene"],
+      [/\bMarkPagel\b/g, "Mark Pagel"],
+    ],
+  ],
+  [
+    "cambridge-4-test-2-part2",
+    [
+      [
+        /Questions 24-26[\s\S]*$/,
+        `Questions 24-26
+
+Complete the vertical axis on the table below.
+
+Choose NO MORE THAN THREE WORDS from Reading Passage 2 for each answer.
+
+24
+25
+26`,
+      ],
+    ],
+  ],
+]);
+
+function cleanOcrTextArtifacts(value) {
+  return value
+    .replace(/(^|[\s"'‘“])~t\s+the\b/g, "$1At the")
+    .replace(/(^|[\s"'‘“])~\s+lot\b/g, "$1a lot")
+    .replace(/\bt~\s*er\s*apists\b/gi, "therapists")
+    .replace(/\bt~erapists\b/gi, "therapists")
+    .replace(/\bth~rapies\b/gi, "therapies")
+    .replace(/\b~hose\b/gi, "those")
+    .replace(/\bofPublic\b/g, "of Public")
+    .replace(/\br\s*8%/g, "18%")
+    .replace(/\bro%/g, "10%")
+    .replace(/\bAlassk\b/g, "Alaska")
+    .replace(/\bpos~ibility\b/g, "possibility")
+    .replace(/\$USr\s*2/g, "$US12")
+    .replace(/\bl_ess\b/g, "less")
+    .replace(/\b1\s+994[·.]/g, "1994.")
+    .replace(/\bonly\s+r%\s+more\b/gi, "only 1% more")
+    .replace(/\u00ad\s*\n\s*/g, "")
+    .replace(/\bterapists\b/gi, "therapists")
+    .replace(/\b([A-Za-z]{3,})-\s*\n\s*([a-z]{2,})\b/g, "$1$2")
+    .replace(/\b([A-Za-z]{3,})-\s+(?!t['’])([a-z]{2,})\b/g, "$1$2")
+    .replace(/\bgenerationsthat's\b/g, "generations - that's")
+    .replace(/\bterapists\b/gi, "therapists")
+    .replace(/(^|[\s"'‘“])~(?=[A-Za-z])/g, "$1")
+    .replace(/~/g, "");
+}
+
 function cleanKnownPassageText(passageId, value) {
-  return (knownPassageTextReplacements.get(passageId) ?? [])
-    .reduce((text, [pattern, replacement]) => text.replace(pattern, replacement), value)
+  const replaced = (knownPassageTextReplacements.get(passageId) ?? [])
+    .reduce((text, [pattern, replacement]) => text.replace(pattern, replacement), value);
+
+  return cleanOcrTextArtifacts(replaced)
+    .replace(/terapists/gi, "therapists")
     .replace(/\n{4,}/g, "\n\n\n")
     .trim();
+}
+
+function cleanKnownQuestionText(passageId, value) {
+  const replaced = (knownQuestionTextReplacements.get(passageId) ?? [])
+    .reduce((text, [pattern, replacement]) => text.replace(pattern, replacement), value);
+
+  return cleanOcrTextArtifacts(replaced)
+    .replace(/terapists/gi, "therapists")
+    .replace(/(^|\n)\s*(?:[:.]\s*)?(?:oe\s+)?(?=Questions?\s+\d{1,2})/gi, "$1")
+    .replace(/(^|\n)\s*:\s+(?=Choose\b)/gi, "$1")
+    .replace(/\bReading Passage\s+(\d)for\b/g, "Reading Passage $1 for")
+    .replace(/\bCor D\b/g, "C or D")
+    .replace(/\bA-Gin\b/g, "A-G in")
+    .replace(/\bA-1\b/g, "A-I")
+    .replace(/\n[^\n]*(?:miiiZ|GIZBII|Illlia|I{6,}|•{3,})[^\n]*/gi, "")
+    .replace(/\n[^\n]*[-_]{2,}[^A-Za-z0-9\n]*$/gm, "")
+    .replace(/\n{4,}/g, "\n\n\n")
+    .trim();
+}
+
+function findNonReadingBoundary(value) {
+  const records = getLineRecords(value);
+
+  for (const record of records) {
+    const normalized = record.line.replace(/[^A-Za-z]/g, "").toUpperCase();
+    if (!normalized) continue;
+
+    if (
+      normalized === "SPEAKING" ||
+      normalized.startsWith("SPEAKINGPART") ||
+      normalized.startsWith("WRITINGTASK") ||
+      /^WRI[A-Z]{1,4}NG$/.test(normalized)
+    ) {
+      return record.start;
+    }
+  }
+
+  return -1;
 }
 
 function parseNumberSelection(value) {
@@ -207,7 +314,7 @@ function stripPageNoise(value) {
 }
 
 function findFirstQuestionIndex(block) {
-  const match = /\n\s*Questions?\s+\d{1,2}/i.exec(block);
+  const match = /\n\s*(?:[:|.]\s*)?(?:oe\s+)?Questions?\s+\d{1,2}/i.exec(block);
   return match?.index ?? -1;
 }
 
@@ -562,10 +669,10 @@ function extractReadingParts(text, bookNo, testNo) {
   return testMarkers.map((marker, index) => {
     const nextMarker = markers[(testNo - 1) * 3 + index + 1];
     let end = nextMarker?.index ?? mainText.length;
-    const writingMatch = /\n\s*WRITING\s*\n/i.exec(mainText.slice(marker.index, end));
+    const nonReadingBoundary = findNonReadingBoundary(mainText.slice(marker.index, end));
 
-    if (writingMatch) {
-      end = marker.index + writingMatch.index;
+    if (nonReadingBoundary >= 0) {
+      end = marker.index + nonReadingBoundary;
     }
 
     const block = mainText.slice(marker.index, end);
@@ -576,7 +683,7 @@ function extractReadingParts(text, bookNo, testNo) {
       passageId,
       stripPageNoise(normalizePassageColumns(passageText)),
     );
-    const normalizedQuestionText = stripPageNoise(questionText);
+    const normalizedQuestionText = cleanKnownQuestionText(passageId, stripPageNoise(questionText));
     const subtitle = knownPassageSubtitles.get(passageId);
 
     return {

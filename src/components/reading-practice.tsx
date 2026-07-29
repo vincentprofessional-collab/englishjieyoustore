@@ -23,6 +23,8 @@ import {
 } from "@/lib/ielts/reading";
 import {
   getStudySelectionActionPosition,
+  hasStudySelectionText,
+  STUDY_SELECTION_ACTION_TIMEOUT_MS,
   type StudySelectionActionPosition,
 } from "@/lib/study-selection";
 
@@ -289,6 +291,8 @@ function getRawReadingParagraphs(value: string, title: string, subtitle?: string
 function cleanRawQuestionLine(value: string) {
   return value
     .replace(/[|]+/g, " ")
+    .replace(/^\s*(?:[:.]\s*)?(?:oe\s+)?(?=Questions?\s+\d{1,2})/i, "")
+    .replace(/^\s*[.:]\s+(?=Reading$)/i, "")
     .replace(/\s+\.(?=[a-z])/g, " ")
     .replace(/\s+/g, " ")
     .trim();
@@ -489,7 +493,9 @@ function getRawQuestionSections(text: string, questionNumbers: number[]) {
       continue;
     }
 
-    const rawQuestion = parseRawQuestion(line.text, validQuestionNumbers);
+    const sectionQuestionNumbers =
+      section.questionNumbers.length > 0 ? new Set(section.questionNumbers) : validQuestionNumbers;
+    const rawQuestion = parseRawQuestion(line.text, sectionQuestionNumbers);
     if (rawQuestion) {
       if (parsedQuestionNumbers.has(rawQuestion.number)) {
         section.textLines.push(rawQuestion.text);
@@ -1403,7 +1409,7 @@ export function ReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: 
     writeFavoriteAnnotations([nextItem, ...currentFavorites.filter((favorite) => favorite.id !== id)]);
   }
 
-  function handleReadingSelection(event: ReactMouseEvent<HTMLElement>) {
+  function handleReadingSelection(event: ReactPointerEvent<HTMLElement>) {
     const target = event.target as HTMLElement | null;
     if (target?.closest("input, textarea, select, .notes-panel, .selection-action-popover, .reading-footer-actions")) {
       return;
@@ -1411,7 +1417,7 @@ export function ReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: 
 
     const selection = window.getSelection();
     const text = selection?.toString().trim() ?? "";
-    if (!selection || selection.rangeCount === 0 || !/[A-Za-z]/.test(text)) {
+    if (!selection || selection.rangeCount === 0 || !hasStudySelectionText(text)) {
       return;
     }
 
@@ -1450,7 +1456,7 @@ export function ReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: 
     selectionHideTimerRef.current = window.setTimeout(() => {
       hideSelectionAction();
       selectionHideTimerRef.current = null;
-    }, 1500);
+    }, STUDY_SELECTION_ACTION_TIMEOUT_MS);
   }
 
   function addAnnotation(kind: AnnotationItem["kind"]) {
@@ -1588,7 +1594,7 @@ export function ReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: 
       className={`stack reading-practice-page reading-exam-page ${isFullscreen ? "fullscreen" : ""}`}
       data-local-selection-actions="true"
       ref={pageRef}
-      onMouseUp={handleReadingSelection}
+      onPointerUp={handleReadingSelection}
     >
       <div className={`reading-workspace-toolbar ${mode}`}>
         <Link href="/reading">← 返回</Link>

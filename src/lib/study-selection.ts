@@ -4,6 +4,12 @@ export type StudySelectionActionPosition = {
   top: number;
 };
 
+export const STUDY_SELECTION_ACTION_TIMEOUT_MS = 1500;
+
+export function hasStudySelectionText(value: string) {
+  return /[\p{L}\p{N}]/u.test(value);
+}
+
 export function getStudySelectionActionPosition(rect: DOMRect): StudySelectionActionPosition {
   const viewportPadding = 16;
   const popoverWidth = Math.min(300, window.innerWidth - viewportPadding * 2);

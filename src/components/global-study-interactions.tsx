@@ -2,7 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 import { ContentShareButton } from "@/components/content-share-button";
-import { getStudySelectionActionPosition } from "@/lib/study-selection";
+import {
+  getStudySelectionActionPosition,
+  hasStudySelectionText,
+  STUDY_SELECTION_ACTION_TIMEOUT_MS,
+} from "@/lib/study-selection";
 import { cleanPartOfSpeech, cleanVocabularyDefinition } from "@/lib/vocabulary/display";
 
 type VocabularyHint = {
@@ -96,6 +100,22 @@ function writeFavoriteWords(items: FavoriteWordItem[]) {
   window.localStorage.setItem(FAVORITE_WORDS_STORAGE_KEY, JSON.stringify(sortedItems));
 }
 
+function pointIsInsideRect(rect: DOMRect, clientX: number, clientY: number) {
+  const padding = 2;
+  return (
+    rect.width > 0 &&
+    rect.height > 0 &&
+    clientX >= rect.left - padding &&
+    clientX <= rect.right + padding &&
+    clientY >= rect.top - padding &&
+    clientY <= rect.bottom + padding
+  );
+}
+
+function pointIsInsideRange(range: Range, clientX: number, clientY: number) {
+  return [...range.getClientRects()].some((rect) => pointIsInsideRect(rect, clientX, clientY));
+}
+
 function getEnglishWordAtPoint(clientX: number, clientY: number) {
   const documentWithCaret = document as Document & {
     caretPositionFromPoint?: (
@@ -131,7 +151,7 @@ function getEnglishWordAtPoint(clientX: number, clientY: number) {
     range.setStart(textNode, start);
     range.setEnd(textNode, end);
     const rect = range.getBoundingClientRect();
-    if (rect.width === 0 && rect.height === 0) return null;
+    if (!pointIsInsideRange(range, clientX, clientY)) return null;
 
     return { rect, textNode, word: match[0] };
   }
@@ -268,10 +288,10 @@ export function GlobalStudyInteractions() {
   }, [selectionPopover, wordTooltip]);
 
   useEffect(() => {
-    function handleMouseUp(event: MouseEvent) {
+    function handlePointerUp(event: PointerEvent) {
       const selection = window.getSelection();
       const text = selection?.toString().trim() ?? "";
-      if (!selection || selection.rangeCount === 0 || !/[A-Za-z]/.test(text)) return;
+      if (!selection || selection.rangeCount === 0 || !hasStudySelectionText(text)) return;
 
       const range = selection.getRangeAt(0).cloneRange();
       if (hasLocalSelectionHandler(event.target) || hasLocalSelectionHandler(range.commonAncestorContainer)) return;
@@ -290,8 +310,8 @@ export function GlobalStudyInteractions() {
       setWordTooltip(null);
     }
 
-    document.addEventListener("mouseup", handleMouseUp);
-    return () => document.removeEventListener("mouseup", handleMouseUp);
+    document.addEventListener("pointerup", handlePointerUp);
+    return () => document.removeEventListener("pointerup", handlePointerUp);
   }, []);
 
   function toggleFavoriteWord() {
@@ -341,7 +361,7 @@ export function GlobalStudyInteractions() {
       setNoteDraft("");
       setSelectionMode("actions");
       hideSelectionTimerRef.current = null;
-    }, 1500);
+    }, STUDY_SELECTION_ACTION_TIMEOUT_MS);
   }
 
   useEffect(() => {

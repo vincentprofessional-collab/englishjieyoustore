@@ -384,6 +384,22 @@ function stableHash(value: string) {
   return hash;
 }
 
+function pointIsInsideRect(rect: DOMRect, clientX: number, clientY: number) {
+  const padding = 2;
+  return (
+    rect.width > 0 &&
+    rect.height > 0 &&
+    clientX >= rect.left - padding &&
+    clientX <= rect.right + padding &&
+    clientY >= rect.top - padding &&
+    clientY <= rect.bottom + padding
+  );
+}
+
+function pointIsInsideRange(range: Range, clientX: number, clientY: number) {
+  return [...range.getClientRects()].some((rect) => pointIsInsideRect(rect, clientX, clientY));
+}
+
 function getEnglishWordAtPoint(clientX: number, clientY: number) {
   const documentWithCaret = document as Document & {
     caretPositionFromPoint?: (
@@ -424,16 +440,13 @@ function getEnglishWordAtPoint(clientX: number, clientY: number) {
         range.setStart(candidateNode, candidateMatch.index);
         range.setEnd(candidateNode, candidateMatch.index + candidateMatch[0].length);
         const rect = range.getBoundingClientRect();
-        range.detach();
 
-        if (
-          clientX >= rect.left &&
-          clientX <= rect.right &&
-          clientY >= rect.top &&
-          clientY <= rect.bottom
-        ) {
+        if (pointIsInsideRange(range, clientX, clientY)) {
+          range.detach();
           return { rect, word: candidateMatch[0] };
         }
+
+        range.detach();
       }
     }
   }
@@ -458,12 +471,13 @@ function getEnglishWordAtPoint(clientX: number, clientY: number) {
     range.setStart(textNode, start);
     range.setEnd(textNode, end);
     const rect = range.getBoundingClientRect();
-    range.detach();
 
-    if (rect.width === 0 && rect.height === 0) {
+    if (!pointIsInsideRange(range, clientX, clientY)) {
+      range.detach();
       return null;
     }
 
+    range.detach();
     return { rect, word: match[0] };
   }
 
