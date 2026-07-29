@@ -295,6 +295,58 @@ function formatBbcSourceFromHref(href?: string) {
   return articleId ? `BBC ${articleId}` : "";
 }
 
+function getFavoriteQuestionSourceLabel(question: FavoriteQuestionItem) {
+  const sourceText = [
+    question.id,
+    question.href,
+    question.sourceTitle,
+    question.title,
+  ]
+    .filter(Boolean)
+    .join(" ");
+  const moduleMatch = sourceText.match(/\b(speaking|writing|listening|reading)\b/i);
+
+  if (!moduleMatch) {
+    return question.sourceTitle ?? "";
+  }
+
+  const moduleLabels: Record<string, string> = {
+    listening: "Listening",
+    reading: "Reading",
+    speaking: "Speaking",
+    writing: "Writing",
+  };
+  const moduleKey = moduleMatch[1].toLowerCase();
+  const cambridgeNumber =
+    sourceText.match(/\bcambridge(?:\s+ielts)?[-\s]*(\d+)\b/i)?.[1] ??
+    sourceText.match(/\bci[-\s]*(\d+)\b/i)?.[1] ??
+    sourceText.match(/剑桥雅思\s*(\d+)/)?.[1];
+  const testNumber = sourceText.match(/\btest[-\s]*(\d+)\b/i)?.[1];
+  const partNumber = sourceText.match(/\bpart[-\s]*(\d+)\b/i)?.[1];
+  const taskNumber = sourceText.match(/\btask[-\s]*(\d+)\b/i)?.[1];
+  const questionNumber =
+    sourceText.match(/\bquestion[-\s]*(\d+(?:[-–]\d+)?)\b/i)?.[1] ??
+    sourceText.match(/\bspeaking-part-\d+-(\d+)\b/i)?.[1];
+  const questionLabel = questionNumber
+    ?.split(/[-–]/)
+    .map((value) => Number(value))
+    .join("–");
+  const labels = [
+    cambridgeNumber ? `IELTS Cambridge ${Number(cambridgeNumber)}` : "IELTS",
+    moduleLabels[moduleKey],
+    testNumber ? `Test ${Number(testNumber)}` : "",
+    partNumber ? `Part ${Number(partNumber)}` : "",
+    taskNumber ? `Task ${Number(taskNumber)}` : "",
+    questionLabel ? `Question ${questionLabel}` : "",
+  ].filter(Boolean);
+
+  return labels.join(" · ");
+}
+
+function isGeneratedFavoriteQuestionTitle(title: string) {
+  return /^(?:listening|reading)\s+(?:ci|cambridge)[-\s\d]/i.test(title.trim());
+}
+
 function getFavoriteWordDisplay(word: FavoriteWordItem) {
   const rawDefinition = word.definitionLines?.[0] ?? word.definitionCn;
   const parsedWord = parseEmbeddedVocabulary(word.word);
@@ -710,16 +762,26 @@ export default function FavoritesPage() {
             </div>
           ) : (
             <div className="favorite-library-table">
-              {sortedQuestions.map((question) => (
-                <article className="favorite-library-row question-row" key={question.id}>
-                  <Link className="favorite-library-title question" href={question.href ?? "/training"}>
-                    <span className="favorite-library-title-text">{question.title}</span>
-                  </Link>
-                  <div className="favorite-share-actions">
-                    <FavoriteRemoveButton label={`取消收藏 ${question.title}`} onRemove={() => removeQuestion(question.id)} />
-                  </div>
-                </article>
-              ))}
+              {sortedQuestions.map((question) => {
+                const sourceLabel = getFavoriteQuestionSourceLabel(question);
+                const showQuestionTitle = !isGeneratedFavoriteQuestionTitle(question.title);
+
+                return (
+                  <article className="favorite-library-row question-row" key={question.id}>
+                    <Link className="favorite-library-title question" href={question.href ?? "/training"}>
+                      {sourceLabel ? (
+                        <span className="favorite-question-source">{sourceLabel}</span>
+                      ) : null}
+                      {showQuestionTitle ? (
+                        <span className="favorite-library-title-text">{question.title}</span>
+                      ) : null}
+                    </Link>
+                    <div className="favorite-share-actions">
+                      <FavoriteRemoveButton label={`取消收藏 ${question.title}`} onRemove={() => removeQuestion(question.id)} />
+                    </div>
+                  </article>
+                );
+              })}
             </div>
           )
         ) : null}
