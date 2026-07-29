@@ -15284,3 +15284,841 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
   height: 21px;
   width: 21px;
 }
+
+/* 使用说明帖子墙 */
+.guide-board-page {
+  gap: 18px;
+}
+
+.guide-board-hero {
+  align-items: stretch;
+  background:
+    radial-gradient(circle at 88% 18%, rgba(200, 148, 25, 0.18), transparent 20rem),
+    rgba(255, 250, 241, 0.96);
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  box-shadow: 0 22px 70px rgba(34, 54, 43, 0.1);
+  display: grid;
+  gap: 30px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  min-height: 260px;
+  overflow: hidden;
+  padding: 38px;
+}
+
+.guide-board-hero > div {
+  align-content: center;
+  display: grid;
+  max-width: 760px;
+}
+
+.guide-board-hero > div > span,
+.guide-board-heading > div > span,
+.guide-comment-section > header > span,
+.guide-admin-heading > div > span,
+.guide-blocks-heading > div > span {
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 1000;
+  letter-spacing: 0.14em;
+}
+
+.guide-board-hero h1 {
+  color: var(--ink);
+  font-size: clamp(42px, 5vw, 68px);
+  letter-spacing: -0.06em;
+  line-height: 1;
+  margin: 16px 0 20px;
+}
+
+.guide-board-hero p {
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.8;
+  margin: 0;
+}
+
+.guide-board-hero > aside {
+  align-content: center;
+  background: var(--accent);
+  border-radius: 22px;
+  color: #fff;
+  display: grid;
+  justify-items: center;
+  min-width: 190px;
+  padding: 28px;
+  text-align: center;
+}
+
+.guide-board-hero > aside strong {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 58px;
+  line-height: 1;
+}
+
+.guide-board-hero > aside span {
+  font-size: 15px;
+  font-weight: 1000;
+  margin-top: 9px;
+}
+
+.guide-board-hero > aside small {
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  margin-top: 18px;
+  padding-top: 14px;
+  width: 100%;
+}
+
+.guide-board-heading {
+  align-items: end;
+  display: flex;
+  gap: 28px;
+  justify-content: space-between;
+  padding: 18px 10px 6px;
+}
+
+.guide-board-heading h2 {
+  color: var(--ink);
+  font-size: 30px;
+  margin: 7px 0 0;
+}
+
+.guide-board-heading > p {
+  color: var(--muted);
+  line-height: 1.65;
+  margin: 0;
+  max-width: 470px;
+  text-align: right;
+}
+
+.guide-post-list {
+  display: grid;
+  gap: 12px;
+}
+
+.guide-post-card {
+  background: rgba(255, 254, 250, 0.98);
+  border: 1px solid rgba(220, 226, 215, 0.95);
+  border-left: 8px solid var(--accent);
+  border-radius: 20px;
+  box-shadow: 0 12px 30px rgba(50, 61, 49, 0.06);
+  overflow: hidden;
+  padding: 22px 24px;
+}
+
+.guide-post-card.expanded {
+  border-left-color: var(--gold);
+  box-shadow: 0 18px 46px rgba(50, 61, 49, 0.1);
+}
+
+.guide-post-card-head {
+  align-items: start;
+  display: grid;
+  gap: 18px;
+  grid-template-columns: auto minmax(0, 1fr);
+}
+
+.guide-post-number {
+  align-items: center;
+  background: var(--accent-soft);
+  border: 1px solid rgba(15, 107, 79, 0.16);
+  border-radius: 50%;
+  color: var(--accent-dark);
+  display: flex;
+  font-size: 15px;
+  font-weight: 1000;
+  height: 48px;
+  justify-content: center;
+  width: 48px;
+}
+
+.guide-post-card-head > div:last-child > span {
+  color: var(--gold);
+  display: block;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.guide-post-card-head h2 {
+  color: var(--ink);
+  font-size: clamp(22px, 2.2vw, 29px);
+  line-height: 1.25;
+  margin: 7px 0 8px;
+}
+
+.guide-post-card-head p {
+  color: var(--muted);
+  line-height: 1.65;
+  margin: 0;
+}
+
+.guide-post-content {
+  border-top: 1px solid var(--line);
+  color: var(--ink);
+  display: grid;
+  gap: 18px;
+  margin-top: 24px;
+  padding: 26px 4px 4px 66px;
+}
+
+.guide-post-content h3,
+.guide-post-content p {
+  line-height: 1.75;
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.guide-post-content h3 {
+  color: var(--accent-dark);
+  line-height: 1.4;
+}
+
+.guide-post-link-line a {
+  align-items: center;
+  border-bottom: 1px solid currentColor;
+  color: var(--accent);
+  display: inline-flex;
+  font-weight: 1000;
+  gap: 9px;
+}
+
+.guide-post-media {
+  margin: 4px 0;
+}
+
+.guide-post-media img,
+.guide-post-media video {
+  background: #111;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  display: inline-block;
+  max-height: 680px;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.guide-post-media video {
+  width: min(100%, 860px);
+}
+
+.guide-post-media figcaption {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+.guide-post-actions {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+  padding-left: 66px;
+}
+
+.guide-post-actions > span {
+  color: var(--muted);
+  font-size: 13px;
+  margin-left: auto;
+}
+
+.guide-read-button,
+.guide-like-button {
+  align-items: center;
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--accent-dark);
+  cursor: pointer;
+  display: inline-flex;
+  font-weight: 1000;
+  justify-content: center;
+}
+
+.guide-read-button {
+  border-radius: 999px;
+  gap: 16px;
+  min-height: 38px;
+  padding: 0 16px;
+}
+
+.guide-like-button {
+  border-radius: 50%;
+  gap: 3px;
+  height: 42px;
+  width: 42px;
+}
+
+.guide-read-button:hover,
+.guide-like-button:hover,
+.guide-like-button.active {
+  background: var(--gold-soft);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.guide-like-button span {
+  font-size: 15px;
+}
+
+.guide-comment-section {
+  background: rgba(246, 243, 232, 0.72);
+  border-radius: 18px;
+  display: grid;
+  gap: 18px;
+  margin: 22px 0 0 66px;
+  padding: 20px;
+}
+
+.guide-comment-section > header {
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 14px;
+}
+
+.guide-comment-section > header > strong {
+  color: var(--accent-dark);
+  font-size: 14px;
+}
+
+.guide-comment-list {
+  display: grid;
+  gap: 12px;
+}
+
+.guide-comment-list > article {
+  align-items: start;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(220, 226, 215, 0.9);
+  border-radius: 14px;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: auto minmax(0, 1fr);
+  padding: 14px;
+}
+
+.guide-comment-avatar {
+  align-items: center;
+  background: var(--accent);
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  font-weight: 1000;
+  height: 36px;
+  justify-content: center;
+  width: 36px;
+}
+
+.guide-comment-list article header {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+.guide-comment-list article header strong {
+  color: var(--ink);
+}
+
+.guide-comment-list article time {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.guide-comment-list article p,
+.guide-comment-empty {
+  color: var(--ink);
+  line-height: 1.65;
+  margin: 6px 0 0;
+  white-space: pre-wrap;
+}
+
+.guide-comment-empty {
+  color: var(--muted);
+  text-align: center;
+}
+
+.guide-comment-form {
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 12px;
+  grid-template-columns: minmax(160px, 0.3fr) minmax(0, 0.7fr);
+  padding-top: 18px;
+}
+
+.guide-comment-form label {
+  display: grid;
+  gap: 7px;
+}
+
+.guide-comment-form label > span {
+  color: var(--accent-dark);
+  font-size: 13px;
+  font-weight: 1000;
+}
+
+.guide-comment-form input,
+.guide-comment-form textarea {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  color: var(--ink);
+  font: inherit;
+  outline: 0;
+  padding: 11px 13px;
+  resize: vertical;
+}
+
+.guide-comment-form input:focus,
+.guide-comment-form textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(15, 107, 79, 0.09);
+}
+
+.guide-comment-form > div {
+  align-items: center;
+  display: flex;
+  gap: 16px;
+  grid-column: 1 / -1;
+  justify-content: space-between;
+}
+
+.guide-comment-form > div small {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* 使用说明帖子后台 */
+.guide-admin {
+  background: rgba(255, 250, 241, 0.96);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(31, 66, 52, 0.1);
+  display: grid;
+  gap: 20px;
+  padding: 24px;
+}
+
+.guide-admin-heading {
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  gap: 24px;
+  justify-content: space-between;
+  padding-bottom: 20px;
+}
+
+.guide-admin-heading h2 {
+  color: var(--ink);
+  font-size: 30px;
+  margin: 7px 0 5px;
+}
+
+.guide-admin-heading p {
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.guide-admin-layout {
+  align-items: start;
+  display: grid;
+  gap: 18px;
+  grid-template-columns: 260px minmax(0, 1fr);
+}
+
+.guide-admin-posts {
+  background: rgba(245, 241, 228, 0.78);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  display: grid;
+  gap: 8px;
+  max-height: 760px;
+  overflow-y: auto;
+  padding: 12px;
+  position: sticky;
+  top: 16px;
+}
+
+.guide-admin-posts > header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 6px 10px;
+}
+
+.guide-admin-posts > header span {
+  align-items: center;
+  background: var(--accent);
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  font-size: 11px;
+  height: 26px;
+  justify-content: center;
+  width: 26px;
+}
+
+.guide-admin-posts > p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 8px;
+}
+
+.guide-admin-posts > button {
+  background: rgba(255, 255, 255, 0.76);
+  border: 1px solid transparent;
+  border-radius: 13px;
+  color: var(--ink);
+  cursor: pointer;
+  display: grid;
+  gap: 5px;
+  padding: 13px;
+  text-align: left;
+}
+
+.guide-admin-posts > button:hover,
+.guide-admin-posts > button.active {
+  border-color: var(--gold);
+}
+
+.guide-admin-posts > button.active {
+  background: var(--gold-soft);
+}
+
+.guide-admin-posts > button span {
+  color: var(--gold);
+  font-size: 10px;
+  font-weight: 1000;
+  letter-spacing: 0.08em;
+}
+
+.guide-admin-posts > button strong {
+  line-height: 1.4;
+}
+
+.guide-admin-posts > button small {
+  color: var(--muted);
+}
+
+.guide-admin-editor {
+  display: grid;
+  gap: 14px;
+  min-width: 0;
+}
+
+.guide-admin-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 18px;
+}
+
+.guide-admin-field-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.guide-admin-field-grid label {
+  display: grid;
+  gap: 7px;
+}
+
+.guide-admin-field-grid label.wide {
+  grid-column: 1 / -1;
+}
+
+.guide-admin-field-grid label > span,
+.guide-format-toolbar label > span {
+  color: var(--accent-dark);
+  font-size: 12px;
+  font-weight: 1000;
+}
+
+.guide-admin-field-grid input,
+.guide-admin-field-grid textarea,
+.guide-block-editor > textarea,
+.guide-block-editor select,
+.guide-format-toolbar select {
+  background: #fffdf8;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: var(--ink);
+  font: inherit;
+  outline: 0;
+  padding: 10px 11px;
+  resize: vertical;
+  width: 100%;
+}
+
+.guide-admin-field-grid input:focus,
+.guide-admin-field-grid textarea:focus,
+.guide-block-editor > textarea:focus,
+.guide-block-editor select:focus,
+.guide-format-toolbar select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(15, 107, 79, 0.08);
+}
+
+.guide-blocks-heading {
+  align-items: end;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding-bottom: 14px;
+}
+
+.guide-blocks-heading h3 {
+  color: var(--ink);
+  font-size: 22px;
+  margin: 5px 0 0;
+}
+
+.guide-blocks-heading small {
+  color: var(--muted);
+}
+
+.guide-block-editor-list {
+  display: grid;
+  gap: 12px;
+}
+
+.guide-block-editor {
+  background: rgba(246, 243, 232, 0.6);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+}
+
+.guide-block-editor > header {
+  align-items: center;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: auto minmax(150px, 220px) minmax(0, 1fr);
+}
+
+.guide-block-editor > header > span {
+  color: var(--gold);
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 1000;
+}
+
+.guide-block-editor > header > div {
+  display: flex;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+.guide-block-editor > header button,
+.guide-align-controls button,
+.guide-add-blocks button {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  color: var(--accent-dark);
+  cursor: pointer;
+  font-weight: 1000;
+  min-height: 34px;
+  padding: 0 10px;
+}
+
+.guide-block-editor > header button:hover,
+.guide-align-controls button:hover,
+.guide-align-controls button.active,
+.guide-add-blocks button:hover {
+  background: var(--gold-soft);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.guide-block-editor > header button.danger {
+  color: #9c3e36;
+}
+
+.guide-block-editor > header button:disabled {
+  cursor: not-allowed;
+  opacity: 0.35;
+}
+
+.guide-format-toolbar {
+  align-items: end;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: minmax(150px, 220px) 110px minmax(150px, 1fr);
+}
+
+.guide-format-toolbar label {
+  display: grid;
+  gap: 6px;
+}
+
+.guide-align-controls {
+  display: flex;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+.guide-align-controls button {
+  width: 42px;
+}
+
+.guide-upload-control input {
+  font-size: 12px;
+}
+
+.guide-add-blocks {
+  align-items: center;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+  padding-top: 16px;
+}
+
+.guide-add-blocks > span {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 1000;
+}
+
+.guide-admin-publish {
+  align-items: center;
+  background: var(--accent-dark);
+  border-radius: 16px;
+  color: #fff;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  padding: 16px;
+  position: sticky;
+  bottom: 10px;
+  z-index: 5;
+}
+
+.guide-admin-publish > div {
+  display: grid;
+  gap: 4px;
+}
+
+.guide-admin-publish > div span {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+@media (max-width: 900px) {
+  .guide-board-hero,
+  .guide-admin-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .guide-board-hero > aside {
+    align-items: center;
+    display: flex;
+    gap: 14px;
+    justify-content: flex-start;
+    min-width: 0;
+  }
+
+  .guide-board-hero > aside strong {
+    font-size: 38px;
+  }
+
+  .guide-board-hero > aside span,
+  .guide-board-hero > aside small {
+    margin: 0;
+  }
+
+  .guide-board-hero > aside small {
+    border-left: 1px solid rgba(255, 255, 255, 0.25);
+    border-top: 0;
+    padding: 0 0 0 14px;
+    width: auto;
+  }
+
+  .guide-admin-posts {
+    max-height: 280px;
+    position: static;
+  }
+}
+
+@media (max-width: 680px) {
+  .guide-board-hero {
+    padding: 26px 22px;
+  }
+
+  .guide-board-heading {
+    align-items: flex-start;
+    display: grid;
+  }
+
+  .guide-board-heading > p {
+    text-align: left;
+  }
+
+  .guide-post-card {
+    padding: 18px;
+  }
+
+  .guide-post-card-head {
+    grid-template-columns: 1fr;
+  }
+
+  .guide-post-number {
+    height: 40px;
+    width: 40px;
+  }
+
+  .guide-post-content,
+  .guide-post-actions,
+  .guide-comment-section {
+    margin-left: 0;
+    padding-left: 0;
+  }
+
+  .guide-comment-section {
+    padding: 16px;
+  }
+
+  .guide-comment-form,
+  .guide-admin-field-grid,
+  .guide-format-toolbar {
+    grid-template-columns: 1fr;
+  }
+
+  .guide-admin {
+    padding: 16px;
+  }
+
+  .guide-admin-heading,
+  .guide-blocks-heading {
+    align-items: flex-start;
+    display: grid;
+  }
+
+  .guide-block-editor > header {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .guide-block-editor > header > div {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+  }
+
+  .guide-align-controls {
+    justify-content: flex-start;
+  }
+
+  .guide-admin-publish {
+    grid-template-columns: 1fr;
+    position: static;
+  }
+}

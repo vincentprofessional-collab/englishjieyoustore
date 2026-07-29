@@ -1,11 +1,11 @@
 import Link from "next/link";
 
 const footerLinks = [
-  { label: "关于我们", href: "/contact" },
-  { label: "最新消息", href: "/news" },
+  { label: "使用说明", href: "/contact" },
   { label: "雅思听力", href: "/listening" },
+  { label: "雅思口语", href: "/speaking" },
   { label: "英语专项训练", href: "/training" },
-  { label: "联系我们", href: "/contact" },
+  { label: "我的收藏", href: "/me/favorites" },
 ];
 
 const socialLinks = [

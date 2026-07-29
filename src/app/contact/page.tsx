@@ -1,25 +1,14 @@
-import { ModulePlaceholder } from "@/components/module-placeholder";
-import { getPublishedPageContent } from "@/lib/content/page-content";
+import { GuideBoard } from "@/components/guide-board";
+import { getManagedPageDefinition } from "@/lib/content/page-content";
 
-export const dynamic = "force-dynamic";
-
-export default async function ContactPage() {
-  const content = await getPublishedPageContent("contact");
+export default function ContactPage() {
+  const content = getManagedPageDefinition("contact").content;
 
   return (
-    <ModulePlaceholder
-      badge={content.eyebrow}
+    <GuideBoard
+      eyebrow={content.eyebrow}
+      summary={content.summary}
       title={content.title}
-      description={content.summary}
-      items={content.items
-        .filter((item) => item.enabled)
-        .map((item) => ({
-          description: item.description,
-          href: item.href,
-          title: item.title,
-        }))}
-      primaryHref={content.primaryHref}
-      primaryLabel={content.primaryLabel}
     />
   );
 }

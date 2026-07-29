@@ -63,18 +63,8 @@ const navItems: NavItem[] = [
     ],
   },
   {
-    label: "信息中心",
-    children: [
-      { label: "最新消息", href: "/news" },
-      { label: "后台公告", href: "/news" },
-    ],
-  },
-  {
-    label: "有事您说话",
-    children: [
-      { label: "联系方式", href: "/contact" },
-      { label: "学习咨询", href: "/contact" },
-    ],
+    label: "使用说明",
+    href: "/contact",
   },
   {
     label: "我的",

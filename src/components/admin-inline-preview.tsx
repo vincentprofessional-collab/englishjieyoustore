@@ -283,7 +283,7 @@ export function AdminInlinePreview({
     );
   }
 
-  if (definition.slug === "training" || definition.slug === "news" || definition.slug === "contact") {
+  if (definition.slug === "training" || definition.slug === "contact") {
     return (
       <div className="admin-live-frame">
         <section className="stack admin-live-page">

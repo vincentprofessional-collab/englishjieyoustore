@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import { AdminInlinePreview } from "@/components/admin-inline-preview";
+import { GuidePostAdmin } from "@/components/guide-post-admin";
 import {
   MANAGED_PAGE_DEFINITIONS,
   ManagedPageContent,
@@ -25,6 +26,10 @@ type ManagedPageRow = {
   title: string;
   updated_at: string | null;
 };
+
+const ADMIN_MANAGED_PAGE_DEFINITIONS = MANAGED_PAGE_DEFINITIONS.filter(
+  (page) => page.slug !== "contact",
+);
 
 function rowToContent(row: ManagedPageRow | undefined, slug: ManagedPageSlug) {
   if (!row) {
@@ -67,14 +72,14 @@ export function AdminContentManager() {
     [selectedSlug],
   );
   const selectedRow = pageRows[selectedSlug];
-  const showPageActions = ["home", "training", "news", "contact"].includes(selectedSlug);
+  const showPageActions = ["home", "training"].includes(selectedSlug);
 
   useEffect(() => {
     void checkAdminAccess();
   }, []);
 
   async function loadPages() {
-    const slugs = MANAGED_PAGE_DEFINITIONS.map((page) => page.slug);
+    const slugs = ADMIN_MANAGED_PAGE_DEFINITIONS.map((page) => page.slug);
     const { data, error } = await supabase
       .from("managed_content_pages")
       .select("id,slug,title,summary,status,meta_json,published_at,updated_at")
@@ -321,11 +326,14 @@ export function AdminContentManager() {
     <section className="admin-workspace">
       <header className="admin-workspace-header">
         <div>
-          <span>CONTENT ADMIN · V1</span>
-          <h1>页面内容后台</h1>
-          <p>编辑文字、按钮和页面区块；音频、题库答案与用户数据不会出现在这里。</p>
+          <span>CONTENT ADMIN · V2</span>
+          <h1>内容与帖子后台</h1>
+          <p>发布使用说明帖子，也可以继续维护各学习页面的标题、按钮和页面区块。</p>
         </div>
         <div className="admin-header-actions">
+          <Link className="button secondary" href="/contact" target="_blank">
+            查看使用说明 ↗
+          </Link>
           <Link className="button secondary" href={selectedDefinition.path} target="_blank">
             打开前台页面 ↗
           </Link>
@@ -335,10 +343,12 @@ export function AdminContentManager() {
         </div>
       </header>
 
+      {adminUserId ? <GuidePostAdmin adminUserId={adminUserId} /> : null}
+
       <div className="admin-layout">
         <nav className="admin-page-nav" aria-label="可编辑页面">
           <strong>页面</strong>
-          {MANAGED_PAGE_DEFINITIONS.map((page) => {
+          {ADMIN_MANAGED_PAGE_DEFINITIONS.map((page) => {
             const isSelected = selectedSlug === page.slug;
             const isPublished = pageRows[page.slug]?.status === "published";
 

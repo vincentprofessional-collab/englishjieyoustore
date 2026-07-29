@@ -8,7 +8,6 @@ export type ManagedPageSlug =
   | "writing"
   | "articles"
   | "training"
-  | "news"
   | "contact";
 
 export type ManagedPageTheme = "doodle" | "sunrise" | "retro" | "editorial";
@@ -382,52 +381,17 @@ export const MANAGED_PAGE_DEFINITIONS: ManagedPageDefinition[] = [
   },
   {
     content: {
-      eyebrow: "Site",
-      items: ["课程更新", "题库更新", "活动通知", "产品公告"].map((title, index) => ({
-        actionLabel: "",
-        description: "后台可以更新此区块的标题和说明。",
-        enabled: true,
-        eyebrow: `News ${index + 1}`,
-        href: "",
-        id: `news-${index + 1}`,
-        kind: "primary" as const,
-        title,
-      })),
+      eyebrow: "GUIDE · 使用说明",
+      items: [],
       primaryHref: "/",
       primaryLabel: "回到首页",
       secondaryHref: "",
       secondaryLabel: "",
-      summary: "用于发布课程更新、题库更新、活动通知和产品公告。",
+      summary: "查找网站使用方法、功能更新和学习建议，也可以在帖子下留言交流。",
       theme: "editorial",
-      title: "最新消息",
+      title: "使用说明",
     },
-    label: "最新消息",
-    module: "site",
-    path: "/news",
-    slug: "news",
-  },
-  {
-    content: {
-      eyebrow: "Site",
-      items: ["联系方式", "微信二维码", "常见问题", "留言表单"].map((title, index) => ({
-        actionLabel: "",
-        description: "后台可以更新此区块的标题和说明。",
-        enabled: true,
-        eyebrow: `Contact ${index + 1}`,
-        href: "",
-        id: `contact-${index + 1}`,
-        kind: "primary" as const,
-        title,
-      })),
-      primaryHref: "/",
-      primaryLabel: "回到首页",
-      secondaryHref: "",
-      secondaryLabel: "",
-      summary: "展示联系方式、常见问题与后续留言入口。",
-      theme: "editorial",
-      title: "联系我们",
-    },
-    label: "联系我们",
+    label: "使用说明",
     module: "site",
     path: "/contact",
     slug: "contact",
