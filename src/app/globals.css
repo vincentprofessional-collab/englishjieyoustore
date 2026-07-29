@@ -8951,142 +8951,86 @@ body.share-sheet-open {
   padding: clamp(24px, 4vw, 44px);
 }
 
-.ci4-structured-sheet {
-  --paper-block-max: 980px;
-  background: #f5f0e4;
-  gap: clamp(22px, 3vw, 34px);
-}
-
-.ci4-structured-sheet-heading {
-  align-items: end;
-  border-bottom: 2px solid #1f1f1f;
-  display: flex;
-  justify-content: space-between;
+.paper-fill-list,
+.paper-dynamic-table {
+  display: grid;
   margin-inline: auto;
   max-width: var(--paper-block-max);
-  padding-bottom: 12px;
   width: 100%;
 }
 
-.ci4-structured-sheet-heading span,
-.ci4-structured-question-heading span {
-  font-family: Arial, "Noto Sans SC", sans-serif;
-  font-size: 12px;
-  font-weight: 900;
-  letter-spacing: 0.16em;
-}
-
-.ci4-structured-sheet-heading strong {
-  font-size: clamp(20px, 2.5vw, 28px);
-}
-
-.ci4-map-image-stack {
-  display: grid;
+.paper-fill-list {
   gap: 20px;
-  margin-inline: auto;
-  max-width: var(--paper-block-max);
-  width: 100%;
 }
 
-.ci4-map-image {
-  border: 1px solid #c9c2b3;
-  box-shadow: 0 14px 34px rgba(64, 52, 30, 0.14);
-  display: block;
-  height: auto;
-  width: 100%;
-}
-
-.ci4-structured-question-area {
-  background: #fff;
-  border: 2px solid #222;
-  display: grid;
-  gap: 22px;
-  margin-inline: auto;
-  max-width: var(--paper-block-max);
-  padding: clamp(18px, 3vw, 30px);
-  width: 100%;
-}
-
-.ci4-structured-question-heading {
-  align-items: end;
-  border-bottom: 1px solid #bdb7aa;
-  display: flex;
-  gap: 24px;
-  justify-content: space-between;
-  padding-bottom: 16px;
-}
-
-.ci4-structured-question-heading h2 {
-  font-size: clamp(24px, 3vw, 34px);
-  margin: 4px 0 0;
-}
-
-.ci4-structured-question-heading p {
-  color: #5d584e;
-  font-family: Arial, "Noto Sans SC", sans-serif;
-  font-size: 13px;
-  line-height: 1.6;
-  margin: 0;
-  max-width: 360px;
-}
-
-.ci4-structured-question-list {
-  display: grid;
-  gap: 18px;
-}
-
-.ci4-structured-question {
-  background: #fbfaf6;
-  border: 1px solid #d8d2c6;
-  display: grid;
-  gap: 14px;
-  min-width: 0;
-  padding: clamp(16px, 2.5vw, 24px);
-}
-
-.ci4-structured-question.correct {
-  border-color: #76a88a;
-}
-
-.ci4-structured-question.wrong {
-  border-color: #c77b70;
-}
-
-.ci4-structured-question-head {
-  align-items: baseline;
-  display: flex;
-  justify-content: space-between;
-}
-
-.ci4-structured-question-head span {
-  font-size: 16px;
-  font-weight: 900;
-}
-
-.ci4-structured-question-head small {
-  color: #70695d;
-  font-family: Arial, "Noto Sans SC", sans-serif;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.ci4-structured-prompt {
-  font-size: clamp(16px, 2vw, 19px);
-  line-height: 1.7;
+.paper-fill-list p,
+.paper-dynamic-table p {
+  font-size: 20px;
+  line-height: 1.65;
   margin: 0;
   white-space: pre-line;
 }
 
-.ci4-structured-answer {
-  display: flex;
-  justify-content: flex-start;
+.paper-form-card {
+  border: 2px solid #222;
+  box-shadow: 7px 7px 0 rgba(0, 0, 0, 0.14);
+  padding: 0 22px 22px;
 }
 
-.ci4-structured-answer .paper-answer-slot {
+.paper-form-card > h3 {
+  border-bottom: 2px solid #222;
+  font-size: clamp(24px, 3vw, 34px);
+  margin: 0 -22px 20px;
+  padding: 18px 22px;
+  text-align: center;
+}
+
+.paper-dynamic-table {
+  border: 2px solid #222;
+}
+
+.paper-dynamic-table p {
+  min-height: 68px;
+  padding: 15px 18px;
+}
+
+.paper-dynamic-table p + p {
+  border-top: 2px solid #222;
+}
+
+.paper-dynamic-table.paper-form-card {
+  padding: 0;
+}
+
+.paper-dynamic-table.paper-form-card > h3 {
   margin: 0;
-  min-width: min(100%, 180px);
+}
+
+.paper-shared-word-box {
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  max-width: 720px;
+}
+
+.paper-shared-word-box span {
+  text-align: center;
+}
+
+.paper-multiple-choice-box {
+  grid-template-columns: 1fr;
+  max-width: 760px;
+  width: min(100%, 760px);
+}
+
+.paper-multiple-answer-row {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
+  justify-content: center;
+  margin-inline: auto;
+  max-width: var(--paper-block-max);
+  padding: 4px 0 12px;
+  width: 100%;
 }
 
 .paper-listening-badge {
@@ -10722,12 +10666,6 @@ body.share-sheet-open {
     align-items: flex-start;
     flex-direction: column;
     gap: 10px;
-  }
-
-  .ci4-structured-sheet-heading,
-  .ci4-structured-question-heading {
-    align-items: flex-start;
-    flex-direction: column;
   }
 
   .programme-note-card {

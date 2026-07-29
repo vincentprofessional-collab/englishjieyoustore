@@ -1301,7 +1301,317 @@ function CambridgeFourTestOneSheet({
   );
 }
 
-function CambridgeFourStructuredSheet({
+const cambridgeFourPaperGroups: Record<number, Record<number, number[][]>> = {
+  2: {
+    1: [[1, 5], [6, 8], [9, 10]],
+    2: [[11, 20]],
+    3: [[21, 24], [25, 26], [27, 30]],
+    4: [[31, 32], [33, 38], [39, 40]],
+  },
+  3: {
+    1: [[1, 4], [5, 7], [8, 10]],
+    2: [[11, 14], [15, 20]],
+    3: [[21, 30]],
+    4: [[31, 32], [33, 37], [38, 38], [39, 39], [40, 40]],
+  },
+  4: {
+    1: [[1, 10]],
+    2: [[11, 15], [16, 20]],
+    3: [[21, 26], [27, 30]],
+    4: [[31, 34], [35, 38], [39, 40]],
+  },
+};
+
+function questionRangeTitle(questions: ListeningQuestion[]) {
+  const firstQuestionNo = questions[0]?.questionNo;
+  const lastQuestionNo = questions.at(-1)?.questionNo;
+
+  return firstQuestionNo === lastQuestionNo
+    ? `Question ${firstQuestionNo}`
+    : `Questions ${firstQuestionNo}-${lastQuestionNo}`;
+}
+
+function getPaperGroupTitle(questions: ListeningQuestion[]) {
+  const titles = questions.map((question) => {
+    const firstLine = (question.promptText ?? "").split(/\r?\n/)[0]?.trim() ?? "";
+    const dashTitle = firstLine.split(/\s+[—–-]\s+/)[0]?.trim();
+
+    if (
+      dashTitle &&
+      /^(Accommodation Request Form|New Union Building|CHOICE OF SITE|GOODBYE PARTY FOR JOHN|Sharks in Australia|DETAILS OF ASSIGNMENT)$/i.test(
+        dashTitle,
+      )
+    ) {
+      return dashTitle;
+    }
+
+    if (/Accommodation Request Form$/i.test(firstLine)) {
+      return firstLine;
+    }
+
+    return "";
+  });
+
+  return titles.every((title) => title && title === titles[0]) ? titles[0] : "";
+}
+
+function stripPaperGroupTitle(line: string, groupTitle: string) {
+  if (!groupTitle || !line.toLowerCase().startsWith(groupTitle.toLowerCase())) {
+    return line;
+  }
+
+  return line
+    .slice(groupTitle.length)
+    .replace(/^\s*[—–:-]\s*/, "")
+    .trim();
+}
+
+function isPaperInstructionLine(line: string) {
+  return /^(Complete|Write|Choose)\b/i.test(line);
+}
+
+function getPaperFillBodyLines(question: ListeningQuestion, groupTitle: string) {
+  return (question.promptText ?? "")
+    .split(/\r?\n/)
+    .map((line) => stripPaperGroupTitle(line.trim(), groupTitle))
+    .filter((line) => line && !/^[A-Z][.)]\s+/.test(line) && !isPaperInstructionLine(line));
+}
+
+function getPaperFillInstructions(questions: ListeningQuestion[], groupTitle: string) {
+  const instructions: string[] = [];
+
+  for (const question of questions) {
+    for (const rawLine of (question.promptText ?? "").split(/\r?\n/)) {
+      const line = stripPaperGroupTitle(rawLine.trim(), groupTitle);
+      if (line && isPaperInstructionLine(line) && !instructions.includes(line)) {
+        instructions.push(line);
+      }
+    }
+  }
+
+  return instructions.slice(0, 2);
+}
+
+function PaperInlinePrompt({
+  answers,
+  body,
+  onAnswerChange,
+  question,
+  submitted,
+}: {
+  answers: AnswerMap;
+  body: string;
+  onAnswerChange: (questionId: string, value: string) => void;
+  question: ListeningQuestion;
+  submitted: boolean;
+}) {
+  const blankIndex = body.indexOf("______");
+
+  if (blankIndex < 0) {
+    return (
+      <p>
+        {body}{" "}
+        <InlineFillAnswer
+          answers={answers}
+          onAnswerChange={onAnswerChange}
+          question={question}
+          submitted={submitted}
+        />
+      </p>
+    );
+  }
+
+  return (
+    <p>
+      {body.slice(0, blankIndex)}
+      <InlineFillAnswer
+        answers={answers}
+        onAnswerChange={onAnswerChange}
+        question={question}
+        submitted={submitted}
+      />
+      {body.slice(blankIndex + 6)}
+    </p>
+  );
+}
+
+function CambridgeFourPaperQuestionGroup({
+  answers,
+  onAnswerChange,
+  questions,
+  submitted,
+}: {
+  answers: AnswerMap;
+  onAnswerChange: (questionId: string, value: string) => void;
+  questions: ListeningQuestion[];
+  submitted: boolean;
+}) {
+  const rangeTitle = questionRangeTitle(questions);
+  const groupTypes = new Set(questions.map((question) => question.questionType));
+
+  if (groupTypes.size === 1 && groupTypes.has("single_choice")) {
+    return (
+      <>
+        <section className="paper-instructions">
+          <h3>{rangeTitle}</h3>
+          <p>
+            <em>Choose the correct letter, A, B or C.</em>
+          </p>
+        </section>
+        {questions.map((question) => {
+          const parsedPrompt = parseChoicePrompt(question.promptText);
+          return (
+            <ChoiceQuestionBlock
+              answers={answers}
+              key={question.id}
+              onAnswerChange={onAnswerChange}
+              options={parsedPrompt.options}
+              question={question}
+              stem={parsedPrompt.stem}
+              submitted={submitted}
+            />
+          );
+        })}
+      </>
+    );
+  }
+
+  if (groupTypes.size === 1 && groupTypes.has("multiple_choice")) {
+    const parsedPrompt = parseChoicePrompt(questions[0]?.promptText ?? "");
+    const stemLines = parsedPrompt.stem.split(/\r?\n/).filter(Boolean);
+    const instruction = stemLines.find((line) => /^Choose\b/i.test(line)) ?? "";
+    const stem = stemLines.filter((line) => !/^Choose\b/i.test(line)).join(" ");
+
+    return (
+      <>
+        <section className="paper-instructions">
+          <h3>{rangeTitle}</h3>
+          <p>
+            <em>{instruction.replace(/\s*Enter .*$/i, "")}</em>
+          </p>
+          {stem ? <p>{stem}</p> : null}
+        </section>
+        <div className="paper-option-box paper-multiple-choice-box">
+          {parsedPrompt.options.map((option) => (
+            <span key={option.letter}>
+              <strong>{option.letter}</strong> {option.text}
+            </span>
+          ))}
+        </div>
+        <section className="paper-multiple-answer-row">
+          {questions.map((question) => (
+            <InlineFillAnswer
+              answers={answers}
+              key={question.id}
+              minAnswerChars={4}
+              onAnswerChange={onAnswerChange}
+              question={question}
+              submitted={submitted}
+            />
+          ))}
+        </section>
+      </>
+    );
+  }
+
+  if (groupTypes.size === 1 && groupTypes.has("matching")) {
+    const parsedPrompt = parseChoicePrompt(questions[0]?.promptText ?? "");
+
+    return (
+      <>
+        <section className="paper-instructions">
+          <h3>{rangeTitle}</h3>
+          <p>
+            <em>Choose your answers from the box and write the correct letter next to each item.</em>
+          </p>
+        </section>
+        <div className="paper-option-box paper-chart-option-box">
+          {parsedPrompt.options.map((option) => (
+            <span key={option.letter}>
+              <strong>{option.letter}</strong> {option.text}
+            </span>
+          ))}
+        </div>
+        <section className="paper-match-list">
+          {questions.map((question) => {
+            const prompt = parseChoicePrompt(question.promptText).stem;
+            const label = prompt.replace(/^Choose .+?\bfor\s+/i, "").replace(/\.$/, "");
+
+            return (
+              <p key={question.id}>
+                {label}:{" "}
+                <InlineFillAnswer
+                  answers={answers}
+                  minAnswerChars={4}
+                  onAnswerChange={onAnswerChange}
+                  question={question}
+                  submitted={submitted}
+                />
+              </p>
+            );
+          })}
+        </section>
+      </>
+    );
+  }
+
+  const groupTitle = getPaperGroupTitle(questions);
+  const instructions = getPaperFillInstructions(questions, groupTitle);
+  const bodyLines = questions.map((question) => getPaperFillBodyLines(question, groupTitle));
+  const commonLines = bodyLines[0]?.filter(
+    (line) =>
+      !line.includes("______") &&
+      bodyLines.every((lines) => lines.includes(line)),
+  ) ?? [];
+  const isTableGroup = questions.some((question) => question.questionType === "table");
+
+  return (
+    <>
+      <section className="paper-instructions">
+        <h3>{rangeTitle}</h3>
+        {instructions.map((instruction) => (
+          <p key={instruction}>
+            <em>{instruction}</em>
+          </p>
+        ))}
+      </section>
+
+      {commonLines.length > 0 ? (
+        <div className="paper-option-box paper-shared-word-box">
+          {commonLines.flatMap((line) =>
+            line.split(/\s*·\s*/).map((item) => <span key={item}>{item}</span>),
+          )}
+        </div>
+      ) : null}
+
+      <section
+        className={`${isTableGroup ? "paper-dynamic-table" : "paper-fill-list"} ${
+          groupTitle ? "paper-form-card" : ""
+        }`}
+      >
+        {groupTitle ? <h3>{groupTitle}</h3> : null}
+        {questions.map((question, index) => {
+          const body = bodyLines[index]
+            .filter((line) => !commonLines.includes(line))
+            .join("\n");
+
+          return (
+            <PaperInlinePrompt
+              answers={answers}
+              body={body}
+              key={question.id}
+              onAnswerChange={onAnswerChange}
+              question={question}
+              submitted={submitted}
+            />
+          );
+        })}
+      </section>
+    </>
+  );
+}
+
+function CambridgeFourPaperSheet({
   answers,
   onAnswerChange,
   questionImageUrls,
@@ -1318,20 +1628,30 @@ function CambridgeFourStructuredSheet({
   submitted: boolean;
   testNo: number;
 }) {
+  const groupedQuestions = (cambridgeFourPaperGroups[testNo]?.[sectionNo] ?? []).map(
+    ([firstQuestionNo, lastQuestionNo]) =>
+      questions.filter(
+        (question) =>
+          question.questionNo >= firstQuestionNo && question.questionNo <= lastQuestionNo,
+      ),
+  );
+
   return (
-    <div className="paper-sheet ci4-structured-sheet">
-      <header className="ci4-structured-sheet-heading">
-        <span>CAMBRIDGE IELTS 4</span>
-        <strong>
-          Test {testNo} · Section {sectionNo}
-        </strong>
-      </header>
+    <div className="paper-sheet">
+      {sectionNo === 1 ? <div className="paper-listening-badge">LISTENING</div> : null}
+
+      <div className="paper-section-heading">
+        <h2>SECTION {sectionNo}</h2>
+        <h2>
+          Questions {(sectionNo - 1) * 10 + 1}-{sectionNo * 10}
+        </h2>
+      </div>
 
       {questionImageUrls.length > 0 ? (
-        <div className="ci4-map-image-stack">
+        <section className="riverside-book-plan">
           {questionImageUrls.map((questionImageUrl, index) => (
             <img
-              className="ci4-map-image"
+              className="riverside-book-plan-image"
               key={questionImageUrl}
               src={questionImageUrl}
               alt={`Cambridge IELTS 4 Test ${testNo} Section ${sectionNo} 地图题 ${
@@ -1339,97 +1659,18 @@ function CambridgeFourStructuredSheet({
               }`}
             />
           ))}
-        </div>
+        </section>
       ) : null}
 
-      <section className="ci4-structured-question-area">
-        <div className="ci4-structured-question-heading">
-          <div>
-            <span>LISTENING</span>
-            <h2>Questions {(sectionNo - 1) * 10 + 1}–{sectionNo * 10}</h2>
-          </div>
-          <p>题目文字按原书整理；只有地图题使用书本原图。</p>
-        </div>
-
-        <div className="ci4-structured-question-list">
-          {questions.map((question) => {
-            const userAnswer = answers[question.id] ?? "";
-            const isCorrect = submitted && isAcceptedAnswer(userAnswer, question.answers);
-            const choicePrompt = parseChoicePrompt(question.promptText);
-            const shouldRenderRadio =
-              question.questionType === "single_choice" && choicePrompt.options.length > 0;
-
-            return (
-              <article
-                className={`ci4-structured-question ${
-                  submitted ? (isCorrect ? "correct" : "wrong") : ""
-                }`}
-                id={shouldRenderRadio ? `question-${question.questionNo}` : undefined}
-                key={question.id}
-              >
-                <div className="ci4-structured-question-head">
-                  <span>Question {question.questionNo}</span>
-                  <small>{question.questionType.replaceAll("_", " ")}</small>
-                </div>
-                <p className="ci4-structured-prompt">
-                  {shouldRenderRadio ? choicePrompt.stem : question.promptText}
-                </p>
-
-                {shouldRenderRadio ? (
-                  <div className="choice-options">
-                    {choicePrompt.options.map((option) => {
-                      const isSelected = userAnswer === option.letter;
-                      const isCorrectOption =
-                        isAcceptedAnswer(option.letter, question.answers) ||
-                        isAcceptedAnswer(option.text, question.answers);
-                      const isWrongSelection = submitted && isSelected && !isCorrectOption;
-
-                      return (
-                        <label
-                          className={`choice-option ${
-                            submitted && isCorrectOption ? "correct-option" : ""
-                          } ${isWrongSelection ? "wrong-option" : ""}`}
-                          key={option.letter}
-                        >
-                          <span className="choice-status-icon">
-                            {submitted && isCorrectOption ? "✅" : null}
-                            {isWrongSelection ? "❌" : null}
-                          </span>
-                          <span
-                            className={`choice-dot ${
-                              isSelected || (submitted && isCorrectOption) ? "selected" : ""
-                            }`}
-                          />
-                          <input
-                            checked={isSelected}
-                            disabled={submitted}
-                            name={`question-${question.id}`}
-                            type="radio"
-                            value={option.letter}
-                            onChange={() => onAnswerChange(question.id, option.letter)}
-                          />
-                          <span className="choice-letter">{option.letter}</span>
-                          <span>{option.text}</span>
-                        </label>
-                      );
-                    })}
-                  </div>
-                ) : (
-                  <div className="ci4-structured-answer">
-                    <InlineFillAnswer
-                      answers={answers}
-                      minAnswerChars={isChoiceQuestion(question.questionType) ? 4 : 12}
-                      onAnswerChange={onAnswerChange}
-                      question={question}
-                      submitted={submitted}
-                    />
-                  </div>
-                )}
-              </article>
-            );
-          })}
-        </div>
-      </section>
+      {groupedQuestions.map((group) => (
+        <CambridgeFourPaperQuestionGroup
+          answers={answers}
+          key={`${group[0]?.questionNo}-${group.at(-1)?.questionNo}`}
+          onAnswerChange={onAnswerChange}
+          questions={group}
+          submitted={submitted}
+        />
+      ))}
     </div>
   );
 }
@@ -3101,7 +3342,7 @@ export function ListeningPractice({
                 submitted={submitted}
               />
             ) : shouldUseStructuredPaperLayout ? (
-              <CambridgeFourStructuredSheet
+              <CambridgeFourPaperSheet
                 answers={answers}
                 onAnswerChange={updateAnswer}
                 questionImageUrls={questionImageUrls}
