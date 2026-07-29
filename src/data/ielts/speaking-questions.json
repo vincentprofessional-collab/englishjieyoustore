@@ -1,0 +1,2784 @@
+{
+  "part-1": [
+    {
+      "id": "speaking-part-1-001",
+      "scene": "个人信息",
+      "year": "必考",
+      "question": "Home/Accommodation",
+      "translation": "住所",
+      "followUp": "House or flat? Favorite room? What's your neighbourhood like?"
+    },
+    {
+      "id": "speaking-part-1-002",
+      "scene": "个人信息",
+      "year": "必考",
+      "question": "Hometown",
+      "translation": "家乡",
+      "followUp": "Where is your hometown? What is it like? Has it changed?"
+    },
+    {
+      "id": "speaking-part-1-003",
+      "scene": "个人信息",
+      "year": "必考",
+      "question": "Work or Study",
+      "translation": "工作或学习",
+      "followUp": "What do you do? Do you like your job/subject? Why did you choose it?"
+    },
+    {
+      "id": "speaking-part-1-004",
+      "scene": "健康",
+      "year": "保留",
+      "question": "Walking",
+      "translation": "散步",
+      "followUp": "Do you walk a lot? Do you walk in nature or in cities?"
+    },
+    {
+      "id": "speaking-part-1-005",
+      "scene": "动物",
+      "year": "保留",
+      "question": "Pets and Animals",
+      "translation": "宠物与动物",
+      "followUp": "Have you had a pet? Favorite animal? Why?"
+    },
+    {
+      "id": "speaking-part-1-006",
+      "scene": "教育",
+      "year": "保留",
+      "question": "Reading",
+      "translation": "阅读",
+      "followUp": "Do you like reading? What kind of books? When do you read?"
+    },
+    {
+      "id": "speaking-part-1-007",
+      "scene": "文化",
+      "year": "保留",
+      "question": "Names",
+      "translation": "名字",
+      "followUp": "Does your name have any meaning? Do you like your name?"
+    },
+    {
+      "id": "speaking-part-1-008",
+      "scene": "爱好",
+      "year": "保留",
+      "question": "Hobbies",
+      "translation": "爱好",
+      "followUp": "Do you have any hobbies? How did you start?"
+    },
+    {
+      "id": "speaking-part-1-009",
+      "scene": "生活",
+      "year": "保留",
+      "question": "Daily routine",
+      "translation": "日常",
+      "followUp": "What is your daily routine? Do you follow a schedule?"
+    },
+    {
+      "id": "speaking-part-1-010",
+      "scene": "自然",
+      "year": "保留",
+      "question": "Scenery",
+      "translation": "风景",
+      "followUp": "Do you enjoy natural scenery? Where do you go for it?"
+    },
+    {
+      "id": "speaking-part-1-011",
+      "scene": "运动",
+      "year": "保留",
+      "question": "Sports team",
+      "translation": "运动队",
+      "followUp": "Do you like team sports? Were you in a school team?"
+    },
+    {
+      "id": "speaking-part-1-012",
+      "scene": "饮食",
+      "year": "保留",
+      "question": "Food & Cooking",
+      "translation": "食物/烹饪",
+      "followUp": "What is your favorite food? Can you cook? Who cooks in your family?"
+    },
+    {
+      "id": "speaking-part-1-013",
+      "scene": "地点",
+      "year": "2026/5-8",
+      "question": "Old Buildings",
+      "translation": "老建筑",
+      "followUp": "Should we preserve old buildings? Prefer old or modern?"
+    },
+    {
+      "id": "speaking-part-1-014",
+      "scene": "地点",
+      "year": "2026/5-8",
+      "question": "Parks & Public Gardens",
+      "translation": "公园",
+      "followUp": "Did you like parks as a child? Want more parks in your city?"
+    },
+    {
+      "id": "speaking-part-1-015",
+      "scene": "娱乐",
+      "year": "2026/5-8",
+      "question": "Music",
+      "translation": "音乐",
+      "followUp": "Do you like music? What kind? Did you take music lessons?"
+    },
+    {
+      "id": "speaking-part-1-016",
+      "scene": "教育",
+      "year": "2026/5-8",
+      "question": "Mathematics",
+      "translation": "数学",
+      "followUp": "Do you like math? When did you start learning math? Is math important?"
+    },
+    {
+      "id": "speaking-part-1-017",
+      "scene": "教育",
+      "year": "2026/5-8",
+      "question": "Science",
+      "translation": "科学",
+      "followUp": "Did you study science? Do you visit science museums?"
+    },
+    {
+      "id": "speaking-part-1-018",
+      "scene": "教育",
+      "year": "2026/5-8",
+      "question": "Teachers",
+      "translation": "老师",
+      "followUp": "Do you have a favorite teacher? Are you still in touch?"
+    },
+    {
+      "id": "speaking-part-1-019",
+      "scene": "旅行",
+      "year": "2026/5-8",
+      "question": "Cars",
+      "translation": "汽车",
+      "followUp": "Do you enjoy car travel? Driver or passenger?"
+    },
+    {
+      "id": "speaking-part-1-020",
+      "scene": "日常习惯",
+      "year": "2026/5-8",
+      "question": "Morning time",
+      "translation": "早晨时光",
+      "followUp": "Do you like getting up early? What do you do in the morning? Is breakfast important?"
+    },
+    {
+      "id": "speaking-part-1-021",
+      "scene": "梦想",
+      "year": "2026/5-8",
+      "question": "Dream and ambition",
+      "translation": "梦想与抱负",
+      "followUp": "What was your childhood dream? Are you ambitious?"
+    },
+    {
+      "id": "speaking-part-1-022",
+      "scene": "消费",
+      "year": "2026/5-8",
+      "question": "Shopping",
+      "translation": "购物",
+      "followUp": "Online or in-store? Do you compare prices?"
+    },
+    {
+      "id": "speaking-part-1-023",
+      "scene": "生活",
+      "year": "2026/5-8",
+      "question": "Evening Time",
+      "translation": "晚间时光",
+      "followUp": "Morning or evening person? What do you do at night?"
+    },
+    {
+      "id": "speaking-part-1-024",
+      "scene": "生活",
+      "year": "2026/5-8",
+      "question": "Morning Routines",
+      "translation": "晨间习惯",
+      "followUp": "What do you do after waking up? Is breakfast important?"
+    },
+    {
+      "id": "speaking-part-1-025",
+      "scene": "生活",
+      "year": "2026/5-8",
+      "question": "Perfume",
+      "translation": "香水",
+      "followUp": "Do you wear perfume? Do you like scented things?"
+    },
+    {
+      "id": "speaking-part-1-026",
+      "scene": "生活",
+      "year": "2026/5-8",
+      "question": "Tidiness",
+      "translation": "整洁",
+      "followUp": "Are you a tidy person? Was your room tidy as a child?"
+    },
+    {
+      "id": "speaking-part-1-027",
+      "scene": "生活",
+      "year": "2026/5-8",
+      "question": "Time Management",
+      "translation": "时间管理",
+      "followUp": "Are you good at managing time? How do you plan your day?"
+    },
+    {
+      "id": "speaking-part-1-028",
+      "scene": "生活",
+      "year": "2026/5-8",
+      "question": "Watches",
+      "translation": "手表",
+      "followUp": "Do you wear a watch? Is it important?"
+    },
+    {
+      "id": "speaking-part-1-029",
+      "scene": "社交",
+      "year": "2026/5-8",
+      "question": "Gifts",
+      "translation": "礼物",
+      "followUp": "Do you like giving gifts? Handmade or store-bought? What to consider when choosing gifts?"
+    },
+    {
+      "id": "speaking-part-1-030",
+      "scene": "社交",
+      "year": "2026/5-8",
+      "question": "Jokes & Comedies",
+      "translation": "笑话/喜剧",
+      "followUp": "Are you good at telling jokes? Do you watch comedies?"
+    },
+    {
+      "id": "speaking-part-1-031",
+      "scene": "社交",
+      "year": "2026/5-8",
+      "question": "Smiling",
+      "translation": "微笑",
+      "followUp": "Do you smile often? Do you smile at strangers?"
+    },
+    {
+      "id": "speaking-part-1-032",
+      "scene": "社交",
+      "year": "2026/5-8",
+      "question": "Social media",
+      "translation": "社交媒体",
+      "followUp": "Which platforms do you use? Do you spend too much time?"
+    },
+    {
+      "id": "speaking-part-1-033",
+      "scene": "科技",
+      "year": "2026/5-8",
+      "question": "Headphones",
+      "translation": "耳机",
+      "followUp": "Do you use headphones? When should people not use them?"
+    },
+    {
+      "id": "speaking-part-1-034",
+      "scene": "科技",
+      "year": "2026/5-8",
+      "question": "Typing",
+      "translation": "打字",
+      "followUp": "Do you type a lot? Do you prefer typing or writing by hand?"
+    },
+    {
+      "id": "speaking-part-1-035",
+      "scene": "科技",
+      "year": "2026/5-8",
+      "question": "Websites",
+      "translation": "网站",
+      "followUp": "What websites do you visit often? What's popular in your country?"
+    },
+    {
+      "id": "speaking-part-1-036",
+      "scene": "自然",
+      "year": "2026/5-8",
+      "question": "Outer Space & Stars",
+      "translation": "外太空/星星",
+      "followUp": "Do you like sci-fi movies? Want to go to space?"
+    },
+    {
+      "id": "speaking-part-1-037",
+      "scene": "人物",
+      "year": "2020-2026",
+      "question": "Describe a person who inspires you.",
+      "translation": "描述一个激励你的人。",
+      "followUp": "Part2/Part3可延伸"
+    },
+    {
+      "id": "speaking-part-1-038",
+      "scene": "人物",
+      "year": "2020-2026",
+      "question": "Do you prefer spending time with family or friends?",
+      "translation": "你更喜欢和家人还是朋友相处？",
+      "followUp": "常见人物题"
+    },
+    {
+      "id": "speaking-part-1-039",
+      "scene": "人物",
+      "year": "2020-2026",
+      "question": "Who do you talk to when you need advice?",
+      "translation": "你会向谁寻求建议？",
+      "followUp": "常见人物题"
+    },
+    {
+      "id": "speaking-part-1-040",
+      "scene": "兴趣爱好",
+      "year": "2020-2026",
+      "question": "Do you like listening to music?",
+      "translation": "你喜欢听音乐吗？",
+      "followUp": "Part1高频"
+    },
+    {
+      "id": "speaking-part-1-041",
+      "scene": "兴趣爱好",
+      "year": "2020-2026",
+      "question": "What do you usually do in your free time?",
+      "translation": "你空闲时通常做什么？",
+      "followUp": "Part1高频"
+    },
+    {
+      "id": "speaking-part-1-042",
+      "scene": "地点",
+      "year": "2020-2026",
+      "question": "Do you like living in a city or the countryside?",
+      "translation": "你喜欢住城市还是乡村？",
+      "followUp": "经典对比"
+    },
+    {
+      "id": "speaking-part-1-043",
+      "scene": "地点",
+      "year": "2020-2026",
+      "question": "What kind of place do you like to go to relax?",
+      "translation": "你喜欢去什么地方放松？",
+      "followUp": "常见地点题"
+    },
+    {
+      "id": "speaking-part-1-044",
+      "scene": "工作学习",
+      "year": "2020-2026",
+      "question": "Are you a student or do you work?",
+      "translation": "你是学生还是上班族？",
+      "followUp": "Part1核心"
+    },
+    {
+      "id": "speaking-part-1-045",
+      "scene": "工作学习",
+      "year": "2020-2026",
+      "question": "Do you prefer studying alone or with others?",
+      "translation": "你更喜欢独自学习还是和别人一起学？",
+      "followUp": "学习方式"
+    },
+    {
+      "id": "speaking-part-1-046",
+      "scene": "抽象观点",
+      "year": "2020-2026",
+      "question": "Do you think people in your country are friendly?",
+      "translation": "你觉得你们国家的人友好吗？",
+      "followUp": "社会印象"
+    },
+    {
+      "id": "speaking-part-1-047",
+      "scene": "物品",
+      "year": "2020-2026",
+      "question": "Do you often buy gifts for others?",
+      "translation": "你经常给别人买礼物吗？",
+      "followUp": "礼物类"
+    },
+    {
+      "id": "speaking-part-1-048",
+      "scene": "物品",
+      "year": "2020-2026",
+      "question": "What is your favorite object at home?",
+      "translation": "你家里最喜欢的物品是什么？",
+      "followUp": "常见物品题"
+    },
+    {
+      "id": "speaking-part-1-049",
+      "scene": "经历事件",
+      "year": "2020-2026",
+      "question": "Do you enjoy trying new activities?",
+      "translation": "你喜欢尝试新活动吗？",
+      "followUp": "经历类"
+    },
+    {
+      "id": "speaking-part-1-050",
+      "scene": "爱好",
+      "year": "2026/1-4",
+      "question": "Hobby",
+      "translation": "爱好",
+      "followUp": "What is your hobby?"
+    },
+    {
+      "id": "speaking-part-1-051",
+      "scene": "物品",
+      "year": "2026/1-4",
+      "question": "Keys",
+      "translation": "钥匙",
+      "followUp": "Do you often carry keys? What happens if you lose them?"
+    },
+    {
+      "id": "speaking-part-1-052",
+      "scene": "生活",
+      "year": "2026/1-4",
+      "question": "Day off",
+      "translation": "休息日",
+      "followUp": "How do you spend your days off?"
+    },
+    {
+      "id": "speaking-part-1-053",
+      "scene": "生活",
+      "year": "2026/1-4",
+      "question": "Fix things",
+      "translation": "修理东西",
+      "followUp": "Can you fix things yourself? Do you repair broken items or replace them?"
+    },
+    {
+      "id": "speaking-part-1-054",
+      "scene": "生活",
+      "year": "2026/1-4",
+      "question": "Food",
+      "translation": "食物",
+      "followUp": "What's your favorite food? Do you eat healthily?"
+    },
+    {
+      "id": "speaking-part-1-055",
+      "scene": "睡眠",
+      "year": "2026/1-4",
+      "question": "Dreams",
+      "translation": "梦境",
+      "followUp": "Do you remember your dreams? Do you think dreams have meaning?"
+    },
+    {
+      "id": "speaking-part-1-056",
+      "scene": "交通",
+      "year": "历年",
+      "question": "Transport",
+      "translation": "交通",
+      "followUp": "How do you commute? Do you like public transport?"
+    },
+    {
+      "id": "speaking-part-1-057",
+      "scene": "健康",
+      "year": "历年",
+      "question": "Health",
+      "translation": "健康",
+      "followUp": "How do you keep healthy? Do you exercise regularly?"
+    },
+    {
+      "id": "speaking-part-1-058",
+      "scene": "地点",
+      "year": "历年",
+      "question": "Public places",
+      "translation": "公共场所",
+      "followUp": "How do you behave in public? Do you talk to strangers?"
+    },
+    {
+      "id": "speaking-part-1-059",
+      "scene": "娱乐",
+      "year": "历年",
+      "question": "TV",
+      "translation": "电视",
+      "followUp": "Do you watch TV? What programs?"
+    },
+    {
+      "id": "speaking-part-1-060",
+      "scene": "文化",
+      "year": "历年",
+      "question": "Museum",
+      "translation": "博物馆",
+      "followUp": "Do you visit museums? What kind?"
+    },
+    {
+      "id": "speaking-part-1-061",
+      "scene": "旅游",
+      "year": "历年",
+      "question": "Crowded places",
+      "translation": "拥挤之地",
+      "followUp": "Do you like crowded places? Recently went to one?"
+    },
+    {
+      "id": "speaking-part-1-062",
+      "scene": "旅行",
+      "year": "历年",
+      "question": "Travel",
+      "translation": "旅行",
+      "followUp": "Do you like traveling? Where have you been?"
+    },
+    {
+      "id": "speaking-part-1-063",
+      "scene": "物品",
+      "year": "历年",
+      "question": "Shoes",
+      "translation": "鞋子",
+      "followUp": "Do you like shoes? How many pairs do you have?"
+    },
+    {
+      "id": "speaking-part-1-064",
+      "scene": "生活",
+      "year": "历年",
+      "question": "Carrying things",
+      "translation": "携带物品",
+      "followUp": "What do you carry in your bag? Do you often carry heavy things?"
+    },
+    {
+      "id": "speaking-part-1-065",
+      "scene": "生活",
+      "year": "历年",
+      "question": "Doing sth well",
+      "translation": "把事情做好",
+      "followUp": "Do you like finishing things perfectly? Are you detail-oriented?"
+    },
+    {
+      "id": "speaking-part-1-066",
+      "scene": "社交",
+      "year": "历年",
+      "question": "Working with old people",
+      "translation": "与老人共事",
+      "followUp": "Do you enjoy working with elderly people?"
+    },
+    {
+      "id": "speaking-part-1-067",
+      "scene": "社会",
+      "year": "历年",
+      "question": "Rules",
+      "translation": "规则",
+      "followUp": "Are there rules at home? Are rules important?"
+    },
+    {
+      "id": "speaking-part-1-068",
+      "scene": "科技",
+      "year": "历年",
+      "question": "Cellphones",
+      "translation": "手机",
+      "followUp": "How often do you use your phone? Do you like smartphone photography?"
+    },
+    {
+      "id": "speaking-part-1-069",
+      "scene": "自然",
+      "year": "历年",
+      "question": "Plants",
+      "translation": "植物",
+      "followUp": "Do you keep plants at home? Do you like gardening?"
+    },
+    {
+      "id": "speaking-part-1-070",
+      "scene": "自然",
+      "year": "历年",
+      "question": "Weather",
+      "translation": "天气",
+      "followUp": "What's your favorite weather? Does weather affect your mood?"
+    },
+    {
+      "id": "speaking-part-1-071",
+      "scene": "艺术",
+      "year": "历年",
+      "question": "Art",
+      "translation": "艺术",
+      "followUp": "Do you like art? Have you visited art galleries?"
+    }
+  ],
+  "part-2": [
+    {
+      "id": "speaking-part-2-001",
+      "scene": "事件",
+      "year": "2021-2020",
+      "question": "Describe a bad service you received",
+      "translation": "遇到的不良服务",
+      "followUp": "服务业发展 / 消费者权益"
+    },
+    {
+      "id": "speaking-part-2-002",
+      "scene": "事件",
+      "year": "2021-2020",
+      "question": "Describe a car journey you had",
+      "translation": "汽车旅行经历",
+      "followUp": "交通方式 / 旅行偏好"
+    },
+    {
+      "id": "speaking-part-2-003",
+      "scene": "事件",
+      "year": "2025",
+      "question": "Describe a challenge you faced that was difficult",
+      "translation": "遇到的困难挑战",
+      "followUp": "面对挫折的态度 / 解决问题的能力"
+    },
+    {
+      "id": "speaking-part-2-004",
+      "scene": "事件",
+      "year": "2024",
+      "question": "Describe a childhood game you played",
+      "translation": "童年游戏",
+      "followUp": "儿童发展 / 游戏教育"
+    },
+    {
+      "id": "speaking-part-2-005",
+      "scene": "事件",
+      "year": "2025",
+      "question": "Describe a complaint you were satisfied with",
+      "translation": "投诉后的满意结果",
+      "followUp": "消费者权益 / 投诉处理"
+    },
+    {
+      "id": "speaking-part-2-006",
+      "scene": "事件",
+      "year": "2024",
+      "question": "Describe a difficult task completed at work/study",
+      "translation": "完成困难任务",
+      "followUp": "职场挑战 / 学习方法"
+    },
+    {
+      "id": "speaking-part-2-007",
+      "scene": "事件",
+      "year": "2022/7",
+      "question": "Describe a happy event you organized",
+      "translation": "你组织的快乐活动",
+      "followUp": "组织能力 / 社交技巧"
+    },
+    {
+      "id": "speaking-part-2-008",
+      "scene": "事件",
+      "year": "2025",
+      "question": "Describe a historical period you would like to learn more about",
+      "translation": "想了解的历史时期",
+      "followUp": "历史教育 / 以史为鉴"
+    },
+    {
+      "id": "speaking-part-2-009",
+      "scene": "事件",
+      "year": "2024",
+      "question": "Describe a life-changing event (good way)",
+      "translation": "改变人生的好经历",
+      "followUp": "人生转折 / 个人成长"
+    },
+    {
+      "id": "speaking-part-2-010",
+      "scene": "事件",
+      "year": "2025",
+      "question": "Describe a missed/late meeting",
+      "translation": "错过或迟到的经历",
+      "followUp": "时间管理 / 守时文化"
+    },
+    {
+      "id": "speaking-part-2-011",
+      "scene": "事件",
+      "year": "2025",
+      "question": "Describe a party you enjoyed",
+      "translation": "享受的派对",
+      "followUp": "社交活动 / 庆祝文化"
+    },
+    {
+      "id": "speaking-part-2-012",
+      "scene": "事件",
+      "year": "2024",
+      "question": "Describe a party you enjoyed",
+      "translation": "喜欢的派对",
+      "followUp": "社交活动 / 庆祝文化"
+    },
+    {
+      "id": "speaking-part-2-013",
+      "scene": "事件",
+      "year": "2022/7",
+      "question": "Describe a positive change in your life",
+      "translation": "积极改变",
+      "followUp": "自我提升 / 习惯养成"
+    },
+    {
+      "id": "speaking-part-2-014",
+      "scene": "事件",
+      "year": "2026/1-4",
+      "question": "Describe a positive change you made in your life",
+      "translation": "生活中的积极改变",
+      "followUp": "自我提升 / 习惯养成"
+    },
+    {
+      "id": "speaking-part-2-015",
+      "scene": "事件",
+      "year": "2025",
+      "question": "Describe a prize you have received",
+      "translation": "获得的奖项",
+      "followUp": "激励与认可 / 竞争意识"
+    },
+    {
+      "id": "speaking-part-2-016",
+      "scene": "事件",
+      "year": "2025",
+      "question": "Describe a public event you attended",
+      "translation": "参加过的公共活动",
+      "followUp": "社区活动 / 大型活动组织"
+    },
+    {
+      "id": "speaking-part-2-017",
+      "scene": "事件",
+      "year": "2023/1",
+      "question": "Describe a special cheap day out",
+      "translation": "花费很少的特别外出",
+      "followUp": "节约消费 / 休闲方式"
+    },
+    {
+      "id": "speaking-part-2-018",
+      "scene": "事件",
+      "year": "2025",
+      "question": "Describe a special meal someone made for you",
+      "translation": "别人为你做的特别一餐",
+      "followUp": "饮食文化 / 人际关系"
+    },
+    {
+      "id": "speaking-part-2-019",
+      "scene": "事件",
+      "year": "2023/10",
+      "question": "Describe a sport you like to watch",
+      "translation": "喜欢观看的运动",
+      "followUp": "体育产业 / 运动文化"
+    },
+    {
+      "id": "speaking-part-2-020",
+      "scene": "事件",
+      "year": "2026/5-8",
+      "question": "Describe a team/group work experience",
+      "translation": "团队合作经历",
+      "followUp": "合作与竞争的利弊"
+    },
+    {
+      "id": "speaking-part-2-021",
+      "scene": "事件",
+      "year": "2023/10",
+      "question": "Describe a time a child behaved badly in public",
+      "translation": "小孩在公共场合行为不当",
+      "followUp": "家庭教育 / 公共礼仪"
+    },
+    {
+      "id": "speaking-part-2-022",
+      "scene": "事件",
+      "year": "2024",
+      "question": "Describe a time close to a wild animal",
+      "translation": "接近野生动物的经历",
+      "followUp": "动物保护 / 生态旅游"
+    },
+    {
+      "id": "speaking-part-2-023",
+      "scene": "事件",
+      "year": "2026/5-8",
+      "question": "Describe a time many people laughed together",
+      "translation": "很多人一起笑的场合",
+      "followUp": "幽默的社会功能 / 快乐传播"
+    },
+    {
+      "id": "speaking-part-2-024",
+      "scene": "事件",
+      "year": "2022/7",
+      "question": "Describe a time when you gave a gift",
+      "translation": "送礼的经历",
+      "followUp": "礼物文化 / 社交礼仪"
+    },
+    {
+      "id": "speaking-part-2-025",
+      "scene": "事件",
+      "year": "2025",
+      "question": "Describe a time when you received money as a gift",
+      "translation": "收到钱作为礼物",
+      "followUp": "金钱教育 / 消费观"
+    },
+    {
+      "id": "speaking-part-2-026",
+      "scene": "事件",
+      "year": "2025",
+      "question": "Describe a time you answered an unknown call in public",
+      "translation": "公共场所接陌生电话",
+      "followUp": "公共礼仪 / 通讯习惯"
+    },
+    {
+      "id": "speaking-part-2-027",
+      "scene": "事件",
+      "year": "2026/5-8",
+      "question": "Describe a time you asked for help",
+      "translation": "求助的经历",
+      "followUp": "求助vs独立 / 社会支持系统"
+    },
+    {
+      "id": "speaking-part-2-028",
+      "scene": "事件",
+      "year": "2026/5-8",
+      "question": "Describe a time you encouraged someone",
+      "translation": "鼓励他人的经历",
+      "followUp": "激励的艺术 / 心理健康"
+    },
+    {
+      "id": "speaking-part-2-029",
+      "scene": "事件",
+      "year": "2026/5-8",
+      "question": "Describe a time you encouraged someone to do something they didn't want to",
+      "translation": "鼓励别人做不愿做的事",
+      "followUp": "激励技巧 / 说服力"
+    },
+    {
+      "id": "speaking-part-2-030",
+      "scene": "事件",
+      "year": "2026/5-8",
+      "question": "Describe a time you gave advice to someone",
+      "translation": "给建议的经历",
+      "followUp": "有效建议 / 帮助与独立的平衡"
+    },
+    {
+      "id": "speaking-part-2-031",
+      "scene": "事件",
+      "year": "2026/1-4",
+      "question": "Describe a time you got up extremely early",
+      "translation": "早起的经历",
+      "followUp": "作息习惯 / 健康生活"
+    },
+    {
+      "id": "speaking-part-2-032",
+      "scene": "事件",
+      "year": "2026/5-8",
+      "question": "Describe a time you got up very early",
+      "translation": "早起的经历",
+      "followUp": "早起的好处 / 作息规律"
+    },
+    {
+      "id": "speaking-part-2-033",
+      "scene": "事件",
+      "year": "2026/5-8",
+      "question": "Describe a time you had to change your plan",
+      "translation": "被迫改变计划的经历",
+      "followUp": "灵活应变 / 计划的重要性"
+    },
+    {
+      "id": "speaking-part-2-034",
+      "scene": "事件",
+      "year": "2025",
+      "question": "Describe a time you helped a family member",
+      "translation": "帮助家人的经历",
+      "followUp": "家庭责任 / 代际互助"
+    },
+    {
+      "id": "speaking-part-2-035",
+      "scene": "事件",
+      "year": "2025",
+      "question": "Describe a time you lost a valuable item",
+      "translation": "丢失贵重物品",
+      "followUp": "物品价值 / 安全意识"
+    },
+    {
+      "id": "speaking-part-2-036",
+      "scene": "事件",
+      "year": "2023/4",
+      "question": "Describe a time you missed an appointment",
+      "translation": "错过约定",
+      "followUp": "时间管理 / 诚信"
+    },
+    {
+      "id": "speaking-part-2-037",
+      "scene": "事件",
+      "year": "2023/7",
+      "question": "Describe a time you organized a happy event",
+      "translation": "成功组织快乐活动",
+      "followUp": "组织能力 / 活动策划"
+    },
+    {
+      "id": "speaking-part-2-038",
+      "scene": "事件",
+      "year": "2022/2-3",
+      "question": "Describe a time you organized a happy event successfully",
+      "translation": "成功组织快乐活动",
+      "followUp": "项目管理 / 团队协作"
+    },
+    {
+      "id": "speaking-part-2-039",
+      "scene": "事件",
+      "year": "2025",
+      "question": "Describe a time you received good service",
+      "translation": "得到良好服务",
+      "followUp": "服务行业 / 客户体验"
+    },
+    {
+      "id": "speaking-part-2-040",
+      "scene": "事件",
+      "year": "2026/1-4",
+      "question": "Describe a time you received money as a gift",
+      "translation": "收到钱作为礼物",
+      "followUp": "金钱观念 / 礼物文化"
+    },
+    {
+      "id": "speaking-part-2-041",
+      "scene": "事件",
+      "year": "2023/1",
+      "question": "Describe a time you saw a lot of plastic waste",
+      "translation": "看到大量塑料垃圾",
+      "followUp": "塑料污染 / 环保行动"
+    },
+    {
+      "id": "speaking-part-2-042",
+      "scene": "事件",
+      "year": "2023/4",
+      "question": "Describe a time you taught someone something",
+      "translation": "教别人某事的经历",
+      "followUp": "教学相长 / 知识共享"
+    },
+    {
+      "id": "speaking-part-2-043",
+      "scene": "事件",
+      "year": "2025",
+      "question": "Describe a time you taught something to a younger person",
+      "translation": "教年轻人新事物",
+      "followUp": "知识传递 / 教育方法"
+    },
+    {
+      "id": "speaking-part-2-044",
+      "scene": "事件",
+      "year": "2026/5-8",
+      "question": "Describe a time you used AI to solve a problem",
+      "translation": "用AI解决问题的经历",
+      "followUp": "AI伦理 / AI是否取代人类工作"
+    },
+    {
+      "id": "speaking-part-2-045",
+      "scene": "事件",
+      "year": "2026/5-8",
+      "question": "Describe a time you used your imagination",
+      "translation": "发挥想象力的经历",
+      "followUp": "创造力培养 / 想象力在教育中的角色"
+    },
+    {
+      "id": "speaking-part-2-046",
+      "scene": "事件",
+      "year": "2021-2020",
+      "question": "Describe a time you were very busy",
+      "translation": "非常忙碌的经历",
+      "followUp": "工作生活平衡 / 压力管理"
+    },
+    {
+      "id": "speaking-part-2-047",
+      "scene": "事件",
+      "year": "2021-2020",
+      "question": "Describe an enjoyable childhood experience",
+      "translation": "愉快的童年经历",
+      "followUp": "童年影响 / 家庭教育"
+    },
+    {
+      "id": "speaking-part-2-048",
+      "scene": "事件",
+      "year": "2022/7",
+      "question": "Describe an event that changed your life",
+      "translation": "改变人生的事件",
+      "followUp": "人生转折 / 积极心态"
+    },
+    {
+      "id": "speaking-part-2-049",
+      "scene": "事件",
+      "year": "2024",
+      "question": "Describe an expensive activity you enjoy",
+      "translation": "喜欢的贵重活动",
+      "followUp": "消费观念 / 休闲方式"
+    },
+    {
+      "id": "speaking-part-2-050",
+      "scene": "事件",
+      "year": "2026/5-8",
+      "question": "Describe an important decision with a positive outcome",
+      "translation": "带来积极结果的重要决定",
+      "followUp": "决策能力 / 风险评估"
+    },
+    {
+      "id": "speaking-part-2-051",
+      "scene": "事件",
+      "year": "2023/7",
+      "question": "Describe an interesting conversation you had",
+      "translation": "有趣的对话",
+      "followUp": "沟通技巧 / 话题选择"
+    },
+    {
+      "id": "speaking-part-2-052",
+      "scene": "事件",
+      "year": "2021-2020",
+      "question": "Describe an occasion you waited a long time",
+      "translation": "长时间等待的经历",
+      "followUp": "耐心 / 服务质量"
+    },
+    {
+      "id": "speaking-part-2-053",
+      "scene": "事件",
+      "year": "2023/1",
+      "question": "Describe an outdoor activity in a new place",
+      "translation": "在新地方的户外活动",
+      "followUp": "户外运动 / 探索精神"
+    },
+    {
+      "id": "speaking-part-2-054",
+      "scene": "事件",
+      "year": "2023/7",
+      "question": "Describe an unusual meal you had",
+      "translation": "不寻常的一餐",
+      "followUp": "饮食文化 / 美食体验"
+    },
+    {
+      "id": "speaking-part-2-055",
+      "scene": "事件",
+      "year": "2025",
+      "question": "Describe something that made you feel confident",
+      "translation": "让你自信的事",
+      "followUp": "自信心建立 / 教育方式"
+    },
+    {
+      "id": "speaking-part-2-056",
+      "scene": "事件",
+      "year": "2025",
+      "question": "Describe something you did that made you proud",
+      "translation": "让你自豪的事",
+      "followUp": "成就感 / 自我价值"
+    },
+    {
+      "id": "speaking-part-2-057",
+      "scene": "人物",
+      "year": "2026/1-4",
+      "question": "Describe a child who likes to draw/paint",
+      "translation": "喜欢画画的孩子",
+      "followUp": "艺术教育 / 创造力培养"
+    },
+    {
+      "id": "speaking-part-2-058",
+      "scene": "人物",
+      "year": "2020-2026",
+      "question": "Describe a child you know.",
+      "translation": "描述一个你认识的小孩。",
+      "followUp": "家庭/成长"
+    },
+    {
+      "id": "speaking-part-2-059",
+      "scene": "人物",
+      "year": "2026/5-8",
+      "question": "Describe a childhood friend",
+      "translation": "发小/童年朋友",
+      "followUp": "童年友谊的意义 / 社交发展"
+    },
+    {
+      "id": "speaking-part-2-060",
+      "scene": "人物",
+      "year": "2022/10",
+      "question": "Describe a childhood friend",
+      "translation": "童年朋友",
+      "followUp": "童年友谊 vs 成年友谊"
+    },
+    {
+      "id": "speaking-part-2-061",
+      "scene": "人物",
+      "year": "2026/1-4",
+      "question": "Describe a family member you are proud of",
+      "translation": "让你骄傲的家人",
+      "followUp": "家庭教育 / 代际差异"
+    },
+    {
+      "id": "speaking-part-2-062",
+      "scene": "人物",
+      "year": "2022/2-3",
+      "question": "Describe a famous person from your country",
+      "translation": "本国名人",
+      "followUp": "名人的社会责任 / 媒体影响"
+    },
+    {
+      "id": "speaking-part-2-063",
+      "scene": "人物",
+      "year": "2026/1-4",
+      "question": "Describe a famous person you want to meet",
+      "translation": "想见的名人",
+      "followUp": "名人的社会影响 / 追星文化"
+    },
+    {
+      "id": "speaking-part-2-064",
+      "scene": "人物",
+      "year": "2020-2021",
+      "question": "Describe a foreigner who speaks your language well",
+      "translation": "外语好的外国人",
+      "followUp": "语言学习 / 文化交流"
+    },
+    {
+      "id": "speaking-part-2-065",
+      "scene": "人物",
+      "year": "2020-2026",
+      "question": "Describe a friend who has helped you.",
+      "translation": "描述一位曾帮助你的朋友。",
+      "followUp": "友情类"
+    },
+    {
+      "id": "speaking-part-2-066",
+      "scene": "人物",
+      "year": "2020-2021",
+      "question": "Describe a great team member you worked with",
+      "translation": "优秀的团队成员",
+      "followUp": "团队合作 / 领导力"
+    },
+    {
+      "id": "speaking-part-2-067",
+      "scene": "人物",
+      "year": "2025",
+      "question": "Describe a person from your childhood who you admired",
+      "translation": "童年崇拜的人",
+      "followUp": "榜样对儿童的影响"
+    },
+    {
+      "id": "speaking-part-2-068",
+      "scene": "人物",
+      "year": "2026/5-8",
+      "question": "Describe a person good at learning languages",
+      "translation": "语言天赋好的人",
+      "followUp": "学习外语的方法 / 多语种的优势"
+    },
+    {
+      "id": "speaking-part-2-069",
+      "scene": "人物",
+      "year": "2024",
+      "question": "Describe a person good at making people feel welcome",
+      "translation": "善于招待客人的人",
+      "followUp": "hospitality culture / 社交礼仪"
+    },
+    {
+      "id": "speaking-part-2-070",
+      "scene": "人物",
+      "year": "2024",
+      "question": "Describe a person who always has strong opinions",
+      "translation": "固执己见的人",
+      "followUp": "性格类型 / 团队合作"
+    },
+    {
+      "id": "speaking-part-2-071",
+      "scene": "人物",
+      "year": "2020-2021",
+      "question": "Describe a person who contributes to society",
+      "translation": "对社会有贡献的人",
+      "followUp": "社区服务 / 志愿精神"
+    },
+    {
+      "id": "speaking-part-2-072",
+      "scene": "人物",
+      "year": "2023/10",
+      "question": "Describe a person who dresses well",
+      "translation": "穿着讲究的人",
+      "followUp": "时尚产业 / 第一印象"
+    },
+    {
+      "id": "speaking-part-2-073",
+      "scene": "人物",
+      "year": "2024",
+      "question": "Describe a person who encouraged you to achieve your goal",
+      "translation": "鼓励你达成目标的人",
+      "followUp": "目标设定 / 激励方式"
+    },
+    {
+      "id": "speaking-part-2-074",
+      "scene": "人物",
+      "year": "2026/1-4",
+      "question": "Describe a person who encouraged you to protect nature",
+      "translation": "鼓励你保护自然的人",
+      "followUp": "环保意识 / 环境教育"
+    },
+    {
+      "id": "speaking-part-2-075",
+      "scene": "人物",
+      "year": "2026/5-8",
+      "question": "Describe a person who enjoys growing plants",
+      "translation": "爱种植物的人",
+      "followUp": "园艺的好处 / urban greening"
+    },
+    {
+      "id": "speaking-part-2-076",
+      "scene": "人物",
+      "year": "2026/5-8",
+      "question": "Describe a person who enjoys growing vegetables",
+      "translation": "喜欢种菜的人",
+      "followUp": "食品安全 / 健康饮食"
+    },
+    {
+      "id": "speaking-part-2-077",
+      "scene": "人物",
+      "year": "2026/5-8",
+      "question": "Describe a person who hasn't replied to your messages in a long time",
+      "translation": "很久没回消息的人",
+      "followUp": "沟通方式的变化 / 友谊的维系"
+    },
+    {
+      "id": "speaking-part-2-078",
+      "scene": "人物",
+      "year": "2024",
+      "question": "Describe a person who is a role model for young people",
+      "translation": "年轻人的榜样",
+      "followUp": "名人效应 / 价值观培养"
+    },
+    {
+      "id": "speaking-part-2-079",
+      "scene": "人物",
+      "year": "2024",
+      "question": "Describe a person who likes to buy goods with low prices",
+      "translation": "喜欢买便宜货的人",
+      "followUp": "消费主义 / 节约 vs 品质"
+    },
+    {
+      "id": "speaking-part-2-080",
+      "scene": "人物",
+      "year": "2023/10",
+      "question": "Describe a person who likes to grow plants",
+      "translation": "喜欢种植的人",
+      "followUp": "城市绿化 / 心理健康"
+    },
+    {
+      "id": "speaking-part-2-081",
+      "scene": "人物",
+      "year": "2024",
+      "question": "Describe a person who likes to make things by hand",
+      "translation": "喜欢做手工的人",
+      "followUp": "手工vs机器 / 创造力的价值"
+    },
+    {
+      "id": "speaking-part-2-082",
+      "scene": "人物",
+      "year": "2024",
+      "question": "Describe a person who likes to read a lot",
+      "translation": "喜欢大量阅读的人",
+      "followUp": "阅读习惯 / 纸质书vs电子书"
+    },
+    {
+      "id": "speaking-part-2-083",
+      "scene": "人物",
+      "year": "2023/10",
+      "question": "Describe a person who moved to a new accommodation",
+      "translation": "搬新家的人",
+      "followUp": "搬家经历 / 居住环境"
+    },
+    {
+      "id": "speaking-part-2-084",
+      "scene": "人物",
+      "year": "2026/5-8",
+      "question": "Describe a person who runs a successful business",
+      "translation": "成功创业者",
+      "followUp": "创业的困难与回报 / 成功需要的品质"
+    },
+    {
+      "id": "speaking-part-2-085",
+      "scene": "人物",
+      "year": "2026/1-4",
+      "question": "Describe a person who shows their emotions openly",
+      "translation": "情绪外露之人",
+      "followUp": "情绪表达的文化差异 / 心理健康"
+    },
+    {
+      "id": "speaking-part-2-086",
+      "scene": "人物",
+      "year": "2020-2026",
+      "question": "Describe a person who taught you something important.",
+      "translation": "描述一位教会你重要事情的人。",
+      "followUp": "经典人物题"
+    },
+    {
+      "id": "speaking-part-2-087",
+      "scene": "人物",
+      "year": "2024",
+      "question": "Describe a person who thinks music is important",
+      "translation": "热爱音乐的人",
+      "followUp": "音乐的作用 / 艺术教育"
+    },
+    {
+      "id": "speaking-part-2-088",
+      "scene": "人物",
+      "year": "2026/5-8",
+      "question": "Describe a person who works in the medical field",
+      "translation": "从事医疗行业的人",
+      "followUp": "医疗行业的挑战 / 医患关系"
+    },
+    {
+      "id": "speaking-part-2-089",
+      "scene": "人物",
+      "year": "2024",
+      "question": "Describe a person whom others ask for advice",
+      "translation": "别人喜欢寻求建议的人",
+      "followUp": "经验与智慧 / 代际沟通"
+    },
+    {
+      "id": "speaking-part-2-090",
+      "scene": "人物",
+      "year": "2024",
+      "question": "Describe a person you are happy to know",
+      "translation": "你很高兴认识的人",
+      "followUp": "人际关系的意义 / 社交网络"
+    },
+    {
+      "id": "speaking-part-2-091",
+      "scene": "人物",
+      "year": "2024",
+      "question": "Describe a person you met at a party who you enjoyed talking with",
+      "translation": "派对上聊得愉快的人",
+      "followUp": "社交活动 / 沟通技巧"
+    },
+    {
+      "id": "speaking-part-2-092",
+      "scene": "人物",
+      "year": "2022/10",
+      "question": "Describe a plant lover you know",
+      "translation": "爱植物的人",
+      "followUp": "室内绿植趋势 / 环保意识"
+    },
+    {
+      "id": "speaking-part-2-093",
+      "scene": "人物",
+      "year": "2020-2021",
+      "question": "Describe a sportsperson you admire",
+      "translation": "敬佩的运动员",
+      "followUp": "体育精神 / 运动产业"
+    },
+    {
+      "id": "speaking-part-2-094",
+      "scene": "人物",
+      "year": "2020-2021",
+      "question": "Describe a successful business person",
+      "translation": "成功商人",
+      "followUp": "创业精神 / 风险承担"
+    },
+    {
+      "id": "speaking-part-2-095",
+      "scene": "人物",
+      "year": "2024",
+      "question": "Describe a talented person you know",
+      "translation": "有才华的人",
+      "followUp": "天赋 vs 努力 / 教育培养"
+    },
+    {
+      "id": "speaking-part-2-096",
+      "scene": "人物",
+      "year": "2023/1",
+      "question": "Describe a well-dressed person",
+      "translation": "穿着得体的人",
+      "followUp": "时尚与个性 / 职场着装"
+    },
+    {
+      "id": "speaking-part-2-097",
+      "scene": "人物",
+      "year": "2026/5-8",
+      "question": "Describe an employee in a famous company",
+      "translation": "名企员工/优秀从业者",
+      "followUp": "工作中的品质 / 企业文化"
+    },
+    {
+      "id": "speaking-part-2-098",
+      "scene": "人物",
+      "year": "2025",
+      "question": "Describe an energetic person you know",
+      "translation": "精力充沛的人",
+      "followUp": "运动与健康 / 生活态度"
+    },
+    {
+      "id": "speaking-part-2-099",
+      "scene": "人物",
+      "year": "2026/5-8",
+      "question": "Describe an environmental blogger / someone who protects nature",
+      "translation": "环保博主/爱护自然的人",
+      "followUp": "个人如何保护环境 / 可再生能源"
+    },
+    {
+      "id": "speaking-part-2-100",
+      "scene": "人物",
+      "year": "2023/1",
+      "question": "Describe an important friend in your life",
+      "translation": "重要的朋友",
+      "followUp": "友谊的重要性 / 交友方式"
+    },
+    {
+      "id": "speaking-part-2-101",
+      "scene": "人物",
+      "year": "2023/4",
+      "question": "Describe an intelligent person you know",
+      "translation": "聪明的人",
+      "followUp": "智商与情商 / 教育方式"
+    },
+    {
+      "id": "speaking-part-2-102",
+      "scene": "人物",
+      "year": "2023/1",
+      "question": "Describe an interesting neighbour",
+      "translation": "有趣的邻居",
+      "followUp": "邻里关系 / 社区生活"
+    },
+    {
+      "id": "speaking-part-2-103",
+      "scene": "人物",
+      "year": "2023/4",
+      "question": "Describe an interesting old person",
+      "translation": "有趣的老人",
+      "followUp": "老年人生活方式 / 代沟"
+    },
+    {
+      "id": "speaking-part-2-104",
+      "scene": "人物",
+      "year": "2024",
+      "question": "Describe an interesting old person you met",
+      "translation": "遇到的有趣老人",
+      "followUp": "老龄化社会 / 老人生活质量"
+    },
+    {
+      "id": "speaking-part-2-105",
+      "scene": "人物",
+      "year": "2024",
+      "question": "Describe an old friend you lost touch with and got in contact again",
+      "translation": "重新联系的老朋友",
+      "followUp": "社交媒体的作用 / 人际关系维护"
+    },
+    {
+      "id": "speaking-part-2-106",
+      "scene": "人物",
+      "year": "2020-2026",
+      "question": "Describe an old person you admire.",
+      "translation": "描述一位你钦佩的老人。",
+      "followUp": "经典人物题"
+    },
+    {
+      "id": "speaking-part-2-107",
+      "scene": "人物",
+      "year": "2026/5-8",
+      "question": "Describe someone who achieved something difficult",
+      "translation": "达成艰难目标的人",
+      "followUp": "如何面对挫折 / 毅力的培养"
+    },
+    {
+      "id": "speaking-part-2-108",
+      "scene": "人物",
+      "year": "2023/7",
+      "question": "Describe someone who is very open",
+      "translation": "性格开朗的人",
+      "followUp": "性格对职业的影响"
+    },
+    {
+      "id": "speaking-part-2-109",
+      "scene": "人物",
+      "year": "2022/7",
+      "question": "Describe someone you like to spend time with",
+      "translation": "喜欢待在一起的人",
+      "followUp": "陪伴的意义 / 社交需求"
+    },
+    {
+      "id": "speaking-part-2-110",
+      "scene": "人物",
+      "year": "2025",
+      "question": "Describe someone you spend a lot of time with",
+      "translation": "经常待在一起的人",
+      "followUp": "社交需求 / 独处与陪伴"
+    },
+    {
+      "id": "speaking-part-2-111",
+      "scene": "人物",
+      "year": "2025",
+      "question": "Describe your grandpa/grandma's job",
+      "translation": "祖父母的工作",
+      "followUp": "职业变迁 / 代际差异"
+    },
+    {
+      "id": "speaking-part-2-112",
+      "scene": "兴趣爱好",
+      "year": "2020-2026",
+      "question": "Describe a hobby you enjoy.",
+      "translation": "描述一个你喜欢的爱好。",
+      "followUp": "经典兴趣题"
+    },
+    {
+      "id": "speaking-part-2-113",
+      "scene": "兴趣爱好",
+      "year": "2020-2026",
+      "question": "Describe a piece of music you like.",
+      "translation": "描述一首你喜欢的音乐。",
+      "followUp": "音乐题"
+    },
+    {
+      "id": "speaking-part-2-114",
+      "scene": "兴趣爱好",
+      "year": "2020-2026",
+      "question": "Describe a sport you like to watch or play.",
+      "translation": "描述一项你喜欢看或玩的运动。",
+      "followUp": "运动类"
+    },
+    {
+      "id": "speaking-part-2-115",
+      "scene": "兴趣爱好",
+      "year": "2020-2026",
+      "question": "Describe an activity you do to stay healthy.",
+      "translation": "描述一个你用来保持健康的活动。",
+      "followUp": "健康生活"
+    },
+    {
+      "id": "speaking-part-2-116",
+      "scene": "地点",
+      "year": "2020-2021",
+      "question": "Describe a beautiful city",
+      "translation": "美丽的城市",
+      "followUp": "城市化 / 旅游经济"
+    },
+    {
+      "id": "speaking-part-2-117",
+      "scene": "地点",
+      "year": "2026/5-8",
+      "question": "Describe a boring place you visited",
+      "translation": "无聊之地",
+      "followUp": "旅行规划 / 如何让旅行有意义"
+    },
+    {
+      "id": "speaking-part-2-118",
+      "scene": "地点",
+      "year": "2024",
+      "question": "Describe a city/town good for people to live in",
+      "translation": "宜居城市",
+      "followUp": "城市化 / 生活质量"
+    },
+    {
+      "id": "speaking-part-2-119",
+      "scene": "地点",
+      "year": "2025",
+      "question": "Describe a crowded place you went to",
+      "translation": "拥挤的地方",
+      "followUp": "人口密度 / 公共空间设计"
+    },
+    {
+      "id": "speaking-part-2-120",
+      "scene": "地点",
+      "year": "2024",
+      "question": "Describe a cultural place (library, museum, theatre)",
+      "translation": "文化场所",
+      "followUp": "文化设施的可及性 / 公共文化"
+    },
+    {
+      "id": "speaking-part-2-121",
+      "scene": "地点",
+      "year": "2022/10",
+      "question": "Describe a garden or park",
+      "translation": "公园/花园",
+      "followUp": "public parks / community spaces"
+    },
+    {
+      "id": "speaking-part-2-122",
+      "scene": "地点",
+      "year": "2022/10",
+      "question": "Describe a garden or park you enjoyed visiting",
+      "translation": "喜欢的公园/花园",
+      "followUp": "城市绿化 / 休闲方式"
+    },
+    {
+      "id": "speaking-part-2-123",
+      "scene": "地点",
+      "year": "2024",
+      "question": "Describe a historical building you have been to",
+      "translation": "历史建筑",
+      "followUp": "古建筑保护 / 文化遗产"
+    },
+    {
+      "id": "speaking-part-2-124",
+      "scene": "地点",
+      "year": "2026/5-8",
+      "question": "Describe a home you would visit but not live in",
+      "translation": "宜拜访不宜居住的住宅",
+      "followUp": "住房选择 / 居住偏好"
+    },
+    {
+      "id": "speaking-part-2-125",
+      "scene": "地点",
+      "year": "2020-2026",
+      "question": "Describe a market or shop you often visit.",
+      "translation": "描述一个你常去的市场或商店。",
+      "followUp": "购物场景"
+    },
+    {
+      "id": "speaking-part-2-126",
+      "scene": "地点",
+      "year": "2025",
+      "question": "Describe a noisy place you have been to",
+      "translation": "嘈杂的地方",
+      "followUp": "噪音污染 / 城市规划"
+    },
+    {
+      "id": "speaking-part-2-127",
+      "scene": "地点",
+      "year": "2020-2026",
+      "question": "Describe a park or garden you like.",
+      "translation": "描述一个你喜欢的公园或花园。",
+      "followUp": "自然/城市"
+    },
+    {
+      "id": "speaking-part-2-128",
+      "scene": "地点",
+      "year": "2023/10",
+      "question": "Describe a perfect house you visited",
+      "translation": "完美的房子",
+      "followUp": "房屋设计 / housing market"
+    },
+    {
+      "id": "speaking-part-2-129",
+      "scene": "地点",
+      "year": "2025",
+      "question": "Describe a place different from your hometown you enjoy visiting",
+      "translation": "与众不同的地方",
+      "followUp": "文化差异 / 旅游体验"
+    },
+    {
+      "id": "speaking-part-2-130",
+      "scene": "地点",
+      "year": "2024",
+      "question": "Describe a place easy to study (indoor/outdoor)",
+      "translation": "适合学习的地方",
+      "followUp": "学习环境 / 教育习惯"
+    },
+    {
+      "id": "speaking-part-2-131",
+      "scene": "地点",
+      "year": "2023/7",
+      "question": "Describe a place far away you want to visit",
+      "translation": "想去的远方",
+      "followUp": "旅行目的 / 文化探索"
+    },
+    {
+      "id": "speaking-part-2-132",
+      "scene": "地点",
+      "year": "2026/5-8",
+      "question": "Describe a place far away you would like to visit",
+      "translation": "想去的远方",
+      "followUp": "旅游的意义 / 长途旅行"
+    },
+    {
+      "id": "speaking-part-2-133",
+      "scene": "地点",
+      "year": "2023/10",
+      "question": "Describe a place for outdoor activities",
+      "translation": "户外活动的地方",
+      "followUp": "户外运动普及 / 公共体育设施"
+    },
+    {
+      "id": "speaking-part-2-134",
+      "scene": "地点",
+      "year": "2020-2021",
+      "question": "Describe a place in a village you visited",
+      "translation": "去过的乡村",
+      "followUp": "城乡差距 / 乡村旅游"
+    },
+    {
+      "id": "speaking-part-2-135",
+      "scene": "地点",
+      "year": "2025",
+      "question": "Describe a place in your city to see wildlife",
+      "translation": "观察野生动物的地方",
+      "followUp": "城市生态 / 生物多样性"
+    },
+    {
+      "id": "speaking-part-2-136",
+      "scene": "地点",
+      "year": "2024",
+      "question": "Describe a place where things are expensive",
+      "translation": "物价贵的地方",
+      "followUp": "生活成本 / 消费水平"
+    },
+    {
+      "id": "speaking-part-2-137",
+      "scene": "地点",
+      "year": "2025",
+      "question": "Describe a place where you took photos more than once",
+      "translation": "拍照多次的地方",
+      "followUp": "摄影文化 / 旅游纪念"
+    },
+    {
+      "id": "speaking-part-2-138",
+      "scene": "地点",
+      "year": "2024",
+      "question": "Describe a place with air pollution you visited",
+      "translation": "空气污染的地方",
+      "followUp": "环境治理 / 健康影响"
+    },
+    {
+      "id": "speaking-part-2-139",
+      "scene": "地点",
+      "year": "2020-2026",
+      "question": "Describe a place you go to regularly.",
+      "translation": "描述一个你经常去的地方。",
+      "followUp": "高频"
+    },
+    {
+      "id": "speaking-part-2-140",
+      "scene": "地点",
+      "year": "2026/1-4",
+      "question": "Describe a place you go to relax at home",
+      "translation": "家里放松的地方",
+      "followUp": "家居设计 / 减压方式"
+    },
+    {
+      "id": "speaking-part-2-141",
+      "scene": "地点",
+      "year": "2020-2026",
+      "question": "Describe a place you visited that was beautiful.",
+      "translation": "描述一个你去过的漂亮地方。",
+      "followUp": "旅游类"
+    },
+    {
+      "id": "speaking-part-2-142",
+      "scene": "地点",
+      "year": "2026/1-4",
+      "question": "Describe a public facility that needs improvement",
+      "translation": "需要改善的公共设施",
+      "followUp": "基础设施建设 / 政府投入"
+    },
+    {
+      "id": "speaking-part-2-143",
+      "scene": "地点",
+      "year": "2024",
+      "question": "Describe a public park or garden",
+      "translation": "公园或花园",
+      "followUp": "城市绿化 / 休闲生活"
+    },
+    {
+      "id": "speaking-part-2-144",
+      "scene": "地点",
+      "year": "2020-2026",
+      "question": "Describe a quiet place where you like to spend time.",
+      "translation": "描述一个你喜欢待着的安静地方。",
+      "followUp": "高频"
+    },
+    {
+      "id": "speaking-part-2-145",
+      "scene": "地点",
+      "year": "2026/5-8",
+      "question": "Describe a quiet place you enjoyed",
+      "translation": "享受的安静之地",
+      "followUp": "安静空间的重要性 / 城市噪音"
+    },
+    {
+      "id": "speaking-part-2-146",
+      "scene": "地点",
+      "year": "2026/1-4",
+      "question": "Describe a quiet place you like",
+      "translation": "喜欢的安静地方",
+      "followUp": "城市噪音污染 / 绿色空间"
+    },
+    {
+      "id": "speaking-part-2-147",
+      "scene": "地点",
+      "year": "2020-2021",
+      "question": "Describe a renovated public facility",
+      "translation": "翻新的公共设施",
+      "followUp": "基础设施投资 / 公共服务"
+    },
+    {
+      "id": "speaking-part-2-148",
+      "scene": "地点",
+      "year": "2023/4",
+      "question": "Describe a restaurant you like",
+      "translation": "喜欢的餐厅",
+      "followUp": "饮食文化 / 餐饮业发展"
+    },
+    {
+      "id": "speaking-part-2-149",
+      "scene": "地点",
+      "year": "2024",
+      "question": "Describe a small store where you often buy things",
+      "translation": "常去的小商店",
+      "followUp": "实体店vs电商 / 社区商业"
+    },
+    {
+      "id": "speaking-part-2-150",
+      "scene": "地点",
+      "year": "2026/5-8",
+      "question": "Describe a tall building you like or dislike",
+      "translation": "喜欢/讨厌的高楼",
+      "followUp": "城市建筑风格 / urban development"
+    },
+    {
+      "id": "speaking-part-2-151",
+      "scene": "地点",
+      "year": "2025",
+      "question": "Describe a tourist attraction few people visit",
+      "translation": "人少但有趣的景点",
+      "followUp": "小众旅游 / 文化遗产保护"
+    },
+    {
+      "id": "speaking-part-2-152",
+      "scene": "地点",
+      "year": "2026/5-8",
+      "question": "Describe a tourist attraction you recommend",
+      "translation": "推荐的旅游地",
+      "followUp": "旅游业的影响 / 过度旅游"
+    },
+    {
+      "id": "speaking-part-2-153",
+      "scene": "地点",
+      "year": "2024",
+      "question": "Describe an ideal place you would like to stay",
+      "translation": "理想的居住地",
+      "followUp": "住房市场 / 理想生活"
+    },
+    {
+      "id": "speaking-part-2-154",
+      "scene": "地点",
+      "year": "2022/10",
+      "question": "Describe an important building in your hometown",
+      "translation": "家乡的重要建筑",
+      "followUp": "城市规划 / 建筑文化"
+    },
+    {
+      "id": "speaking-part-2-155",
+      "scene": "地点",
+      "year": "2022/10",
+      "question": "Describe an important lake/river in your country",
+      "translation": "重要的河流/湖泊",
+      "followUp": "水资源保护 / 自然环境"
+    },
+    {
+      "id": "speaking-part-2-156",
+      "scene": "地点",
+      "year": "2022/2-3",
+      "question": "Describe an interesting city",
+      "translation": "有趣的城市",
+      "followUp": "城市特色 / 宜居性"
+    },
+    {
+      "id": "speaking-part-2-157",
+      "scene": "地点",
+      "year": "2020-2021",
+      "question": "Describe an interesting place in your country",
+      "translation": "国内有趣的地方",
+      "followUp": "文化遗产 / 区域发展"
+    },
+    {
+      "id": "speaking-part-2-158",
+      "scene": "地点",
+      "year": "2023/1",
+      "question": "Describe an interesting place to recommend to tourists",
+      "translation": "推荐给游客的地方",
+      "followUp": "旅游经济 / 文化推广"
+    },
+    {
+      "id": "speaking-part-2-159",
+      "scene": "地点",
+      "year": "2024",
+      "question": "Describe someone else's room you enjoy spending time in",
+      "translation": "喜欢待的别人的房间",
+      "followUp": "空间设计 / 社交习惯"
+    },
+    {
+      "id": "speaking-part-2-160",
+      "scene": "工作学习",
+      "year": "2020-2026",
+      "question": "Describe a job you would like to do in the future.",
+      "translation": "描述一份你未来想做的工作。",
+      "followUp": "职业规划"
+    },
+    {
+      "id": "speaking-part-2-161",
+      "scene": "工作学习",
+      "year": "2020-2026",
+      "question": "Describe a skill you learned recently.",
+      "translation": "描述一项你最近学会的技能。",
+      "followUp": "技能学习"
+    },
+    {
+      "id": "speaking-part-2-162",
+      "scene": "工作学习",
+      "year": "2020-2026",
+      "question": "Describe a subject you enjoyed at school.",
+      "translation": "描述一个你在学校喜欢的科目。",
+      "followUp": "学校类"
+    },
+    {
+      "id": "speaking-part-2-163",
+      "scene": "工作学习",
+      "year": "2020-2026",
+      "question": "Describe a teacher who made a difference.",
+      "translation": "描述一位对你影响很大的老师。",
+      "followUp": "教育人物"
+    },
+    {
+      "id": "speaking-part-2-164",
+      "scene": "抽象观点",
+      "year": "2020-2026",
+      "question": "Describe a piece of advice you received.",
+      "translation": "描述一条你收到过的建议。",
+      "followUp": "建议/经验"
+    },
+    {
+      "id": "speaking-part-2-165",
+      "scene": "抽象观点",
+      "year": "2020-2026",
+      "question": "Describe a rule that is important in your life.",
+      "translation": "描述一条对你很重要的规则。",
+      "followUp": "价值观"
+    },
+    {
+      "id": "speaking-part-2-166",
+      "scene": "物品",
+      "year": "2022/10",
+      "question": "Describe a book or novel you recently read",
+      "translation": "最近读的书/小说",
+      "followUp": "阅读习惯 / 电子书vs纸质书"
+    },
+    {
+      "id": "speaking-part-2-167",
+      "scene": "物品",
+      "year": "2020-2026",
+      "question": "Describe a book you recently read.",
+      "translation": "描述一本你最近读过的书。",
+      "followUp": "书籍类"
+    },
+    {
+      "id": "speaking-part-2-168",
+      "scene": "物品",
+      "year": "2026/5-8",
+      "question": "Describe a celebrity-endorsed advertisement",
+      "translation": "名人代言的广告",
+      "followUp": "广告影响 / 名人效应"
+    },
+    {
+      "id": "speaking-part-2-169",
+      "scene": "物品",
+      "year": "2020-2026",
+      "question": "Describe a gift you received that was special.",
+      "translation": "描述一份你收到过的特别礼物。",
+      "followUp": "经典物品题"
+    },
+    {
+      "id": "speaking-part-2-170",
+      "scene": "物品",
+      "year": "2023/10",
+      "question": "Describe a good advertisement you find useful",
+      "translation": "有用的广告",
+      "followUp": "广告的作用 / 消费引导"
+    },
+    {
+      "id": "speaking-part-2-171",
+      "scene": "物品",
+      "year": "2026/1-4",
+      "question": "Describe a mobile app or computer program",
+      "translation": "手机App或电脑应用",
+      "followUp": "数字生活 / 科技依赖"
+    },
+    {
+      "id": "speaking-part-2-172",
+      "scene": "物品",
+      "year": "2026/1-4",
+      "question": "Describe a movie you recently watched that disappointed you",
+      "translation": "让你失望的电影",
+      "followUp": "电影评价标准 / 娱乐产业"
+    },
+    {
+      "id": "speaking-part-2-173",
+      "scene": "物品",
+      "year": "2025",
+      "question": "Describe a movie you watched recently",
+      "translation": "最近看的电影",
+      "followUp": "电影文化 / 流媒体影响"
+    },
+    {
+      "id": "speaking-part-2-174",
+      "scene": "物品",
+      "year": "2025",
+      "question": "Describe a new law you want to introduce",
+      "translation": "想引入的新法律",
+      "followUp": "法律与社会 / 立法过程"
+    },
+    {
+      "id": "speaking-part-2-175",
+      "scene": "物品",
+      "year": "2025",
+      "question": "Describe a photo/picture you like most",
+      "translation": "最喜欢的照片",
+      "followUp": "摄影文化 / 记忆保存"
+    },
+    {
+      "id": "speaking-part-2-176",
+      "scene": "物品",
+      "year": "2020-2021",
+      "question": "Describe a photo that makes you happy",
+      "translation": "让你开心的照片",
+      "followUp": "摄影的意义 / 记忆保存"
+    },
+    {
+      "id": "speaking-part-2-177",
+      "scene": "物品",
+      "year": "2020-2026",
+      "question": "Describe a photo that means a lot to you.",
+      "translation": "描述一张对你很重要的照片。",
+      "followUp": "记忆物品"
+    },
+    {
+      "id": "speaking-part-2-178",
+      "scene": "物品",
+      "year": "2020-2026",
+      "question": "Describe a piece of clothing you like.",
+      "translation": "描述一件你喜欢的衣服。",
+      "followUp": "日常物品"
+    },
+    {
+      "id": "speaking-part-2-179",
+      "scene": "物品",
+      "year": "2024",
+      "question": "Describe a piece of clothing you wear most often",
+      "translation": "最常穿的衣服",
+      "followUp": "时尚产业 / 消费习惯"
+    },
+    {
+      "id": "speaking-part-2-180",
+      "scene": "物品",
+      "year": "2023/7",
+      "question": "Describe a piece of furniture you own",
+      "translation": "拥有的家具",
+      "followUp": "家居设计 / 消费选择"
+    },
+    {
+      "id": "speaking-part-2-181",
+      "scene": "物品",
+      "year": "2026/5-8",
+      "question": "Describe a piece of international news you heard",
+      "translation": "听到的国际新闻",
+      "followUp": "新闻可信度 / 媒体素养"
+    },
+    {
+      "id": "speaking-part-2-182",
+      "scene": "物品",
+      "year": "2025",
+      "question": "Describe a piece of technology difficult to use",
+      "translation": "难用的科技产品",
+      "followUp": "产品设计 / 用户体验"
+    },
+    {
+      "id": "speaking-part-2-183",
+      "scene": "物品",
+      "year": "2026/5-8",
+      "question": "Describe a problem with an electronic device",
+      "translation": "电子设备故障",
+      "followUp": "科技产品寿命 / 维修文化"
+    },
+    {
+      "id": "speaking-part-2-184",
+      "scene": "物品",
+      "year": "2024",
+      "question": "Describe a rule important at school/work",
+      "translation": "重要的规则",
+      "followUp": "规则与自由 / 社会秩序"
+    },
+    {
+      "id": "speaking-part-2-185",
+      "scene": "物品",
+      "year": "2020-2021",
+      "question": "Describe a skill you learned as a teenager",
+      "translation": "青少年时期学的技能",
+      "followUp": "教育体系 / 技能培养"
+    },
+    {
+      "id": "speaking-part-2-186",
+      "scene": "物品",
+      "year": "2023/7",
+      "question": "Describe a sports program you like to watch",
+      "translation": "喜欢的体育节目",
+      "followUp": "体育产业 / 媒体转播权"
+    },
+    {
+      "id": "speaking-part-2-187",
+      "scene": "物品",
+      "year": "2026/5-8",
+      "question": "Describe a story involving an animal",
+      "translation": "有关动物的故事",
+      "followUp": "动物保护 / 人与动物关系"
+    },
+    {
+      "id": "speaking-part-2-188",
+      "scene": "物品",
+      "year": "2026/1-4",
+      "question": "Describe a story you recently read",
+      "translation": "最近读到的故事",
+      "followUp": "阅读习惯 / 故事的力量"
+    },
+    {
+      "id": "speaking-part-2-189",
+      "scene": "物品",
+      "year": "2025",
+      "question": "Describe a subject you would like to learn",
+      "translation": "想学的科目",
+      "followUp": "终身学习 / 教育体系"
+    },
+    {
+      "id": "speaking-part-2-190",
+      "scene": "物品",
+      "year": "2024",
+      "question": "Describe a successful businessperson you know",
+      "translation": "认识的成功商人",
+      "followUp": "创业精神 / 市场经济"
+    },
+    {
+      "id": "speaking-part-2-191",
+      "scene": "物品",
+      "year": "2026/5-8",
+      "question": "Describe a technological product you want to own (not phone)",
+      "translation": "想拥有的科技产品（非手机）",
+      "followUp": "科技对社会的影响 / 消费主义"
+    },
+    {
+      "id": "speaking-part-2-192",
+      "scene": "物品",
+      "year": "2022/2-3",
+      "question": "Describe a toy from your childhood",
+      "translation": "童年玩具",
+      "followUp": "儿童发展 / 游戏教育"
+    },
+    {
+      "id": "speaking-part-2-193",
+      "scene": "物品",
+      "year": "2024",
+      "question": "Describe a toy you liked in childhood",
+      "translation": "童年喜欢的玩具",
+      "followUp": "儿童发展 / 玩具教育"
+    },
+    {
+      "id": "speaking-part-2-194",
+      "scene": "物品",
+      "year": "2026/5-8",
+      "question": "Describe a traditional product from your country",
+      "translation": "本国传统产品",
+      "followUp": "手工艺保护 / 文化遗产"
+    },
+    {
+      "id": "speaking-part-2-195",
+      "scene": "物品",
+      "year": "2024",
+      "question": "Describe a traditional product in your country",
+      "translation": "传统产品",
+      "followUp": "文化遗产 / 手工艺保护"
+    },
+    {
+      "id": "speaking-part-2-196",
+      "scene": "物品",
+      "year": "2026/5-8",
+      "question": "Describe a TV/online programme you enjoy",
+      "translation": "喜欢的电视/网络节目",
+      "followUp": "娱乐产业 / 内容消费"
+    },
+    {
+      "id": "speaking-part-2-197",
+      "scene": "物品",
+      "year": "2020-2021",
+      "question": "Describe a uniform you wear/ worn",
+      "translation": "穿过的制服",
+      "followUp": "制服文化 / 职业认同"
+    },
+    {
+      "id": "speaking-part-2-198",
+      "scene": "物品",
+      "year": "2020-2021",
+      "question": "Describe a useful advertisement",
+      "translation": "有用的广告",
+      "followUp": "广告与消费行为"
+    },
+    {
+      "id": "speaking-part-2-199",
+      "scene": "物品",
+      "year": "2025",
+      "question": "Describe a website you often visit",
+      "translation": "常访问的网站",
+      "followUp": "互联网习惯 / 信息获取"
+    },
+    {
+      "id": "speaking-part-2-200",
+      "scene": "物品",
+      "year": "2025",
+      "question": "Describe an advertisement you don't like",
+      "translation": "不喜欢的广告",
+      "followUp": "广告伦理 / 消费者心理"
+    },
+    {
+      "id": "speaking-part-2-201",
+      "scene": "物品",
+      "year": "2022/7",
+      "question": "Describe an ambition you haven't achieved",
+      "translation": "未实现的志向",
+      "followUp": "目标设定 / 坚持与放弃"
+    },
+    {
+      "id": "speaking-part-2-202",
+      "scene": "物品",
+      "year": "2023/4",
+      "question": "Describe an antique or old object your family kept",
+      "translation": "家中保留的古董/旧物",
+      "followUp": "物品的情感价值 / 收藏文化"
+    },
+    {
+      "id": "speaking-part-2-203",
+      "scene": "物品",
+      "year": "2026/5-8",
+      "question": "Describe an app or software you use often",
+      "translation": "常用App/软件",
+      "followUp": "数字生活 / 科技依赖"
+    },
+    {
+      "id": "speaking-part-2-204",
+      "scene": "物品",
+      "year": "2024",
+      "question": "Describe an important invention that changed the world",
+      "translation": "改变世界的重要发明",
+      "followUp": "科技进步 / 创新驱动"
+    },
+    {
+      "id": "speaking-part-2-205",
+      "scene": "物品",
+      "year": "2020-2026",
+      "question": "Describe an important piece of equipment you use at home or work.",
+      "translation": "描述一个你在家或工作中使用的重要设备。",
+      "followUp": "科技/生活"
+    },
+    {
+      "id": "speaking-part-2-206",
+      "scene": "物品",
+      "year": "2025",
+      "question": "Describe an important plant in your country",
+      "translation": "国家的重要植物",
+      "followUp": "植物保护 / 生态价值"
+    },
+    {
+      "id": "speaking-part-2-207",
+      "scene": "物品",
+      "year": "2022/7",
+      "question": "Describe an interesting song",
+      "translation": "有趣的歌曲",
+      "followUp": "音乐产业 / 音乐的社会作用"
+    },
+    {
+      "id": "speaking-part-2-208",
+      "scene": "物品",
+      "year": "2026/5-8",
+      "question": "Describe an interesting video you watched on social media",
+      "translation": "社交媒体上的有趣视频",
+      "followUp": "短视频文化 / 信息过载"
+    },
+    {
+      "id": "speaking-part-2-209",
+      "scene": "物品",
+      "year": "2022/7",
+      "question": "Describe an invention that changed the world",
+      "translation": "改变世界的发明",
+      "followUp": "科技发展 / 创新影响"
+    },
+    {
+      "id": "speaking-part-2-210",
+      "scene": "物品",
+      "year": "2020-2021",
+      "question": "Describe an item you lost and found",
+      "translation": "失而复得的物品",
+      "followUp": "物品管理 / 安全意识"
+    },
+    {
+      "id": "speaking-part-2-211",
+      "scene": "物品",
+      "year": "2026/1-4",
+      "question": "Describe an online TV programme",
+      "translation": "线上电视节目",
+      "followUp": "流媒体vs传统电视 / 观看习惯"
+    },
+    {
+      "id": "speaking-part-2-212",
+      "scene": "物品",
+      "year": "2025",
+      "question": "Describe an online video where you learned something",
+      "translation": "学到东西的网络视频",
+      "followUp": "在线教育 / 自学能力"
+    },
+    {
+      "id": "speaking-part-2-213",
+      "scene": "物品",
+      "year": "2025",
+      "question": "Describe good news about someone you know",
+      "translation": "关于熟人的好消息",
+      "followUp": "新闻传播 / 人际关系"
+    },
+    {
+      "id": "speaking-part-2-214",
+      "scene": "物品",
+      "year": "2022/7",
+      "question": "Describe something broken that was repaired",
+      "translation": "修好的物品",
+      "followUp": "维修文化 / 用完即弃vs可持续"
+    },
+    {
+      "id": "speaking-part-2-215",
+      "scene": "物品",
+      "year": "2022/7",
+      "question": "Describe something received for free",
+      "translation": "免费得到的物品",
+      "followUp": "免费文化 / 促销策略"
+    },
+    {
+      "id": "speaking-part-2-216",
+      "scene": "物品",
+      "year": "2022/10",
+      "question": "Describe something special you saved money to buy",
+      "translation": "攒钱买的特别物品",
+      "followUp": "金钱管理 / 消费目标"
+    },
+    {
+      "id": "speaking-part-2-217",
+      "scene": "物品",
+      "year": "2026/1-4",
+      "question": "Describe something you can't live without",
+      "translation": "生活中离不开的东西",
+      "followUp": "消费主义 / 必需品vs奢侈品"
+    },
+    {
+      "id": "speaking-part-2-218",
+      "scene": "物品",
+      "year": "2022/2-3",
+      "question": "Describe something you cannot live without (not computer/phone)",
+      "translation": "离不开的东西（非电子）",
+      "followUp": "物质依赖 / 极简生活"
+    },
+    {
+      "id": "speaking-part-2-219",
+      "scene": "物品",
+      "year": "2025",
+      "question": "Describe something you own that you want to replace",
+      "translation": "想换掉的东西",
+      "followUp": "消费主义 / 物品的情感价值"
+    },
+    {
+      "id": "speaking-part-2-220",
+      "scene": "物品",
+      "year": "2025",
+      "question": "Describe your favourite climate",
+      "translation": "最喜欢的气候",
+      "followUp": "气候变化 / 环境适应"
+    },
+    {
+      "id": "speaking-part-2-221",
+      "scene": "物品",
+      "year": "2025",
+      "question": "Describe your favourite festival food",
+      "translation": "节日最爱食物",
+      "followUp": "饮食文化 / 传统节日"
+    },
+    {
+      "id": "speaking-part-2-222",
+      "scene": "经历事件",
+      "year": "2020-2026",
+      "question": "Describe a memorable celebration.",
+      "translation": "描述一次难忘的庆祝活动。",
+      "followUp": "节日/聚会"
+    },
+    {
+      "id": "speaking-part-2-223",
+      "scene": "经历事件",
+      "year": "2020-2026",
+      "question": "Describe a situation when you solved a problem.",
+      "translation": "描述一次你解决问题的经历。",
+      "followUp": "解决问题"
+    },
+    {
+      "id": "speaking-part-2-224",
+      "scene": "经历事件",
+      "year": "2020-2026",
+      "question": "Describe a time when you helped someone.",
+      "translation": "描述一次你帮助别人的经历。",
+      "followUp": "经典经历题"
+    },
+    {
+      "id": "speaking-part-2-225",
+      "scene": "经历事件",
+      "year": "2020-2026",
+      "question": "Describe a time you received good news.",
+      "translation": "描述一次你收到好消息的经历。",
+      "followUp": "情绪类"
+    },
+    {
+      "id": "speaking-part-2-226",
+      "scene": "经历事件",
+      "year": "2020-2026",
+      "question": "Describe a time you were late.",
+      "translation": "描述一次你迟到的经历。",
+      "followUp": "高频事件题"
+    },
+    {
+      "id": "speaking-part-2-227",
+      "scene": "经历事件",
+      "year": "2020-2026",
+      "question": "Describe an interesting conversation you had.",
+      "translation": "描述一次有趣的对话。",
+      "followUp": "口语化表达"
+    }
+  ],
+  "part-3": [
+    {
+      "id": "speaking-part-3-001",
+      "scene": "AI与科技",
+      "year": "2020-2026",
+      "question": "How has technology changed communication?",
+      "translation": "常用App/社交媒体",
+      "followUp": "面对面vs线上交流；人际关系的质量变化"
+    },
+    {
+      "id": "speaking-part-3-002",
+      "scene": "AI与科技",
+      "year": "2020-2026",
+      "question": "Should AI-generated art be regulated?",
+      "translation": "用AI解决问题的经历",
+      "followUp": "权衡创新与监管；艺术的定义"
+    },
+    {
+      "id": "speaking-part-3-003",
+      "scene": "AI与科技",
+      "year": "2020-2026",
+      "question": "What impact has social media had on relationships?",
+      "translation": "社交媒体上的有趣视频",
+      "followUp": "浅层社交增多；虚拟关系的真实性"
+    },
+    {
+      "id": "speaking-part-3-004",
+      "scene": "AI与科技",
+      "year": "2020-2026",
+      "question": "Will AI replace human jobs?",
+      "translation": "科技产品/改变世界的发明",
+      "followUp": "哪些职业最难被替代；AI的辅助角色"
+    },
+    {
+      "id": "speaking-part-3-005",
+      "scene": "人物",
+      "year": "2020-2026",
+      "question": "How has the role of parents changed today?",
+      "translation": "今天父母的角色发生了什么变化？",
+      "followUp": "社会类"
+    },
+    {
+      "id": "speaking-part-3-006",
+      "scene": "人物",
+      "year": "2020-2026",
+      "question": "What qualities make a good teacher?",
+      "translation": "什么品质造就好老师？",
+      "followUp": "抽象追问"
+    },
+    {
+      "id": "speaking-part-3-007",
+      "scene": "人际",
+      "year": "2020-2026",
+      "question": "Should people express their emotions openly?",
+      "translation": "情绪外露之人",
+      "followUp": "文化差异；性别差异；心理健康"
+    },
+    {
+      "id": "speaking-part-3-008",
+      "scene": "人际",
+      "year": "2020-2026",
+      "question": "What makes someone a good listener?",
+      "translation": "趣味相投的人/给建议的经历",
+      "followUp": "同理心；专注；不急于评判"
+    },
+    {
+      "id": "speaking-part-3-009",
+      "scene": "健康",
+      "year": "2020-2026",
+      "question": "What are the benefits of early morning routines?",
+      "translation": "早起经历/早晨时光",
+      "followUp": "生物钟；生产力；心理健康"
+    },
+    {
+      "id": "speaking-part-3-010",
+      "scene": "健康",
+      "year": "2020-2026",
+      "question": "Why do people find it hard to change bad habits?",
+      "translation": "积极改变",
+      "followUp": "习惯形成的神经机制；意志力有限性"
+    },
+    {
+      "id": "speaking-part-3-011",
+      "scene": "兴趣爱好",
+      "year": "2020-2026",
+      "question": "How do hobbies change as people grow older?",
+      "translation": "随着年龄增长，爱好会如何变化？",
+      "followUp": "人生发展"
+    },
+    {
+      "id": "speaking-part-3-012",
+      "scene": "兴趣爱好",
+      "year": "2020-2026",
+      "question": "Why do people need hobbies?",
+      "translation": "为什么人们需要爱好？",
+      "followUp": "功能类"
+    },
+    {
+      "id": "speaking-part-3-013",
+      "scene": "地点",
+      "year": "2020-2026",
+      "question": "How can cities become more livable?",
+      "translation": "城市怎样才能更宜居？",
+      "followUp": "城市话题"
+    },
+    {
+      "id": "speaking-part-3-014",
+      "scene": "地点",
+      "year": "2020-2026",
+      "question": "Why do people choose to live in certain places?",
+      "translation": "为什么人们会选择住在某些地方？",
+      "followUp": "原因分析"
+    },
+    {
+      "id": "speaking-part-3-015",
+      "scene": "城市生活",
+      "year": "2020-2026",
+      "question": "How can we reduce noise pollution in cities?",
+      "translation": "嘈杂的地方",
+      "followUp": "城市规划；法规；个人习惯"
+    },
+    {
+      "id": "speaking-part-3-016",
+      "scene": "城市生活",
+      "year": "2020-2026",
+      "question": "What makes a city livable?",
+      "translation": "宜居城市/喜欢的城市",
+      "followUp": "基础设施；环境；就业机会；社区氛围"
+    },
+    {
+      "id": "speaking-part-3-017",
+      "scene": "媒体",
+      "year": "2020-2026",
+      "question": "How reliable is news on social media compared to traditional media?",
+      "translation": "听说的国际新闻/常访问的网站",
+      "followUp": "信息茧房；fact-checking的重要性"
+    },
+    {
+      "id": "speaking-part-3-018",
+      "scene": "媒体",
+      "year": "2020-2026",
+      "question": "What makes a good movie or TV show?",
+      "translation": "让你失望的电影/喜欢的节目",
+      "followUp": "剧本、演技、导演的综合评价；娱乐vs艺术"
+    },
+    {
+      "id": "speaking-part-3-019",
+      "scene": "工作学习",
+      "year": "2020-2026",
+      "question": "How has online learning changed education?",
+      "translation": "在线学习如何改变教育？",
+      "followUp": "教育科技"
+    },
+    {
+      "id": "speaking-part-3-020",
+      "scene": "工作学习",
+      "year": "2020-2026",
+      "question": "What makes a good employee?",
+      "translation": "什么样的人是好员工？",
+      "followUp": "职场品质"
+    },
+    {
+      "id": "speaking-part-3-021",
+      "scene": "成功与抱负",
+      "year": "2020-2026",
+      "question": "Can failure lead to success?",
+      "translation": "遇到的困难挑战",
+      "followUp": "How failure teaches resilience；失败的意义"
+    },
+    {
+      "id": "speaking-part-3-022",
+      "scene": "成功与抱负",
+      "year": "2020-2026",
+      "question": "What motivates people to achieve difficult goals?",
+      "translation": "达成艰难目标/让你自豪的事",
+      "followUp": "内在动机vs外在奖励；成就感的作用"
+    },
+    {
+      "id": "speaking-part-3-023",
+      "scene": "抽象观点",
+      "year": "2020-2026",
+      "question": "How can individuals become more creative?",
+      "translation": "个人如何变得更有创造力？",
+      "followUp": "能力提升"
+    },
+    {
+      "id": "speaking-part-3-024",
+      "scene": "抽象观点",
+      "year": "2020-2026",
+      "question": "Is competition always a good thing?",
+      "translation": "竞争总是好事吗？",
+      "followUp": "经典思辨"
+    },
+    {
+      "id": "speaking-part-3-025",
+      "scene": "抽象观点",
+      "year": "2020-2026",
+      "question": "Should success be measured by money?",
+      "translation": "成功是否应该用金钱衡量？",
+      "followUp": "高频抽象题"
+    },
+    {
+      "id": "speaking-part-3-026",
+      "scene": "抽象观点",
+      "year": "2020-2026",
+      "question": "What influences people’s opinions most?",
+      "translation": "什么最影响人们的观点？",
+      "followUp": "媒体/教育/家庭"
+    },
+    {
+      "id": "speaking-part-3-027",
+      "scene": "抽象观点",
+      "year": "2020-2026",
+      "question": "What role does culture play in identity?",
+      "translation": "文化在身份认同中有什么作用？",
+      "followUp": "文化类"
+    },
+    {
+      "id": "speaking-part-3-028",
+      "scene": "抽象观点",
+      "year": "2020-2026",
+      "question": "Why do people value time differently?",
+      "translation": "为什么人们对时间的重视程度不同？",
+      "followUp": "思辨题"
+    },
+    {
+      "id": "speaking-part-3-029",
+      "scene": "教育",
+      "year": "2020-2026",
+      "question": "Should schools teach practical skills?",
+      "translation": "教年轻人新事物",
+      "followUp": "理论与实践的平衡；职业教育的重要性"
+    },
+    {
+      "id": "speaking-part-3-030",
+      "scene": "教育",
+      "year": "2020-2026",
+      "question": "What are the advantages of lifelong learning?",
+      "translation": "想学的科目/学到东西的视频",
+      "followUp": "职业发展；个人成长；社会适应"
+    },
+    {
+      "id": "speaking-part-3-031",
+      "scene": "文化",
+      "year": "2020-2026",
+      "question": "Should old buildings be preserved or replaced?",
+      "translation": "历史建筑/老建筑",
+      "followUp": "文化认同 vs 城市发展；adaptive reuse"
+    },
+    {
+      "id": "speaking-part-3-032",
+      "scene": "文化",
+      "year": "2020-2026",
+      "question": "What role do museums play in society?",
+      "translation": "文化场所/博物馆",
+      "followUp": "教育功能；文物保护 vs 互动体验"
+    },
+    {
+      "id": "speaking-part-3-033",
+      "scene": "旅游",
+      "year": "2020-2026",
+      "question": "Is tourism beneficial or harmful to local communities?",
+      "translation": "推荐的旅游地/人少的景点",
+      "followUp": "经济收益 vs 环境破坏；文化商品化"
+    },
+    {
+      "id": "speaking-part-3-034",
+      "scene": "旅游",
+      "year": "2020-2026",
+      "question": "What makes a travel experience meaningful?",
+      "translation": "想去的远方/汽车旅行经历",
+      "followUp": "文化沉浸 vs 打卡旅游；旅行 vs 度假"
+    },
+    {
+      "id": "speaking-part-3-035",
+      "scene": "未来工作",
+      "year": "2020-2026",
+      "question": "Should companies provide training?",
+      "translation": "名企员工/聪明的人",
+      "followUp": "技能更新速度加快；企业long-term investment"
+    },
+    {
+      "id": "speaking-part-3-036",
+      "scene": "未来工作",
+      "year": "2020-2026",
+      "question": "Will remote work remain standard?",
+      "translation": "完美工作/在家放松的地方",
+      "followUp": "效率与社交需求；企业成本与文化"
+    },
+    {
+      "id": "speaking-part-3-037",
+      "scene": "消费",
+      "year": "2020-2026",
+      "question": "Do advertisements influence our purchasing decisions?",
+      "translation": "不喜欢的广告/名人广告",
+      "followUp": "广告心理；如何做出理性消费决策"
+    },
+    {
+      "id": "speaking-part-3-038",
+      "scene": "消费",
+      "year": "2020-2026",
+      "question": "Should we buy things we don't need?",
+      "translation": "喜欢买便宜货的人/离不开的东西",
+      "followUp": "消费主义 vs 极简主义；情绪消费"
+    },
+    {
+      "id": "speaking-part-3-039",
+      "scene": "消费",
+      "year": "2020-2026",
+      "question": "What is the value of handmade products compared to machine-made?",
+      "translation": "传统产品/传统节日食物",
+      "followUp": "手工艺的文化价值；效率 vs 独特性"
+    },
+    {
+      "id": "speaking-part-3-040",
+      "scene": "物品",
+      "year": "2020-2026",
+      "question": "How has technology changed the objects people use every day?",
+      "translation": "科技如何改变人们日常使用的物品？",
+      "followUp": "科技影响"
+    },
+    {
+      "id": "speaking-part-3-041",
+      "scene": "物品",
+      "year": "2020-2026",
+      "question": "Why do people buy branded products?",
+      "translation": "为什么人们会买品牌商品？",
+      "followUp": "消费类"
+    },
+    {
+      "id": "speaking-part-3-042",
+      "scene": "环保",
+      "year": "2020-2026",
+      "question": "How can individuals contribute to environmental protection?",
+      "translation": "爱种植物的人/种菜的人",
+      "followUp": "日常习惯改变；消费选择的力量"
+    },
+    {
+      "id": "speaking-part-3-043",
+      "scene": "环保",
+      "year": "2020-2026",
+      "question": "Should polluters be punished more severely?",
+      "translation": "空气污染的地方/塑料垃圾",
+      "followUp": "罚款力度与企业行为的关系"
+    },
+    {
+      "id": "speaking-part-3-044",
+      "scene": "环保",
+      "year": "2020-2026",
+      "question": "Who should protect the environment — government or individuals?",
+      "translation": "环保博主/塑料垃圾/接近野生动物",
+      "followUp": "政策引导 vs 个人行动；激励与惩罚手段"
+    },
+    {
+      "id": "speaking-part-3-045",
+      "scene": "社会",
+      "year": "2020-2026",
+      "question": "How has the concept of fame changed in recent years?",
+      "translation": "想见的名人",
+      "followUp": "社交媒体造星；粉丝文化"
+    },
+    {
+      "id": "speaking-part-3-046",
+      "scene": "社会",
+      "year": "2020-2026",
+      "question": "How important is it to maintain contact with childhood friends?",
+      "translation": "发小/重新联系的老朋友",
+      "followUp": "童年友谊的独特性；成长带来的变化"
+    },
+    {
+      "id": "speaking-part-3-047",
+      "scene": "社会",
+      "year": "2020-2026",
+      "question": "Why are some people very generous while others are not?",
+      "translation": "收到礼物/给予礼物",
+      "followUp": "文化背景；个人经历；经济条件"
+    },
+    {
+      "id": "speaking-part-3-048",
+      "scene": "经历事件",
+      "year": "2020-2026",
+      "question": "How do celebrations influence society?",
+      "translation": "庆祝活动如何影响社会？",
+      "followUp": "社会影响"
+    },
+    {
+      "id": "speaking-part-3-049",
+      "scene": "经历事件",
+      "year": "2020-2026",
+      "question": "Why do people remember some events more clearly than others?",
+      "translation": "为什么人们会更清楚地记住某些事件？",
+      "followUp": "记忆类"
+    }
+  ]
+}
