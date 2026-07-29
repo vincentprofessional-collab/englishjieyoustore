@@ -43,6 +43,7 @@ type AudioPlayerProps = {
   settings?: AudioPlayerSettings;
   settingsPlacement?: "inside" | "none";
   seekRequest?: { id: number; play?: boolean; positionSeconds: number } | null;
+  showRate?: boolean;
   src: string;
   stopAtSeconds?: number | null;
   title?: string;
@@ -144,6 +145,7 @@ export function AudioPlayer({
   settingsPlacement = "inside",
   src,
   stopAtSeconds = null,
+  showRate = true,
   title = "音频",
 }: AudioPlayerProps) {
   const soundRef = useRef<Howl | null>(null);
@@ -503,6 +505,7 @@ export function AudioPlayer({
       {settingsPlacement === "inside" ? (
         <AudioSettingsMenus
           hasSelectedRate={displayHasSelectedRate}
+          showRate={showRate}
           settings={playerSettings}
           onChange={updatePlayerSettings}
         />
@@ -516,12 +519,14 @@ export function AudioSettingsMenus({
   hasSelectedRate = true,
   onChange,
   settings,
+  showRate = true,
   variant = "full",
 }: {
   className?: string;
   hasSelectedRate?: boolean;
   onChange: (nextSettings: Partial<AudioPlayerSettings>) => void;
   settings: AudioPlayerSettings;
+  showRate?: boolean;
   variant?: "basic" | "full" | "rate-only";
 }) {
   function exitWritingMode(nextSettings: Partial<AudioPlayerSettings> = {}) {
@@ -537,12 +542,16 @@ export function AudioSettingsMenus({
   }
 
   const menuItems = [
-    {
-      selectedLabel: hasSelectedRate ? currentLabel(rateOptions, settings.rate) : "倍速",
-      selectedValue: settings.rate,
-      options: rateOptions,
-      onSelect: (value: string | number) => onChange({ rate: Number(value) }),
-    },
+    ...(showRate
+      ? [
+          {
+            selectedLabel: hasSelectedRate ? currentLabel(rateOptions, settings.rate) : "倍速",
+            selectedValue: settings.rate,
+            options: rateOptions,
+            onSelect: (value: string | number) => onChange({ rate: Number(value) }),
+          },
+        ]
+      : []),
     ...(variant !== "rate-only"
       ? [
           {

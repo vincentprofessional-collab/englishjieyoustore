@@ -2732,7 +2732,6 @@ export function ListeningPractice({
               isPracticeTimerRunning ? "active" : ""
             }`}
             onClick={() => setIsPracticeTimerRunning((current) => !current)}
-            role="timer"
             title={isPracticeTimerRunning ? "点击暂停计时" : "点击开始计时"}
             type="button"
           >

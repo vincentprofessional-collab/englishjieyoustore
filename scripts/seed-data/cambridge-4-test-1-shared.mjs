@@ -118,6 +118,194 @@ const sectionTitles = {
   4: "Section 4 - Urban Landscape",
 };
 
+const transcriptCorrections = {
+  1: {
+    2: {
+      englishText: "I understand that the school organises ... um, trips to different...",
+      chineseText: "男：我知道学校会组织……嗯，前往不同地方的旅行。",
+    },
+    4: {
+      englishText:
+        "What sort of places? Well, obviously, it varies, but always places of historical interest",
+      chineseText: "男：去什么样的地方呢？女：嗯，显然地点各不相同，但总是选择具有历史意义的地方",
+    },
+    6: {
+      chineseText:
+        "然后我们会选择那些有导游讲解的地方，因为这样能让参观有一个明确的重点",
+    },
+    7: {
+      englishText:
+        "for the visit. Do you travel far? Well, we're lucky here, obviously, because we're able to say that",
+      chineseText: "。男：你们会去很远吗？女：嗯，我们这里很幸运，因为可以说",
+    },
+    9: {
+      englishText: "Again, it varies between five and fifteen pounds a head, depending on distance.",
+      chineseText: "费用也各不相同，每人5到15英镑，具体取决于距离。",
+    },
+    14: {
+      englishText: "Oh, yes. And how do we reserve a place?",
+      chineseText: "男：哦，好的。那么我们要怎么预订位置呢？",
+    },
+    21: {
+      englishText: "Questions 5 to 10.",
+      chineseText: "第5至10题。",
+    },
+    24: {
+      englishText: "But we have confirmed the dates and planned the optional extra visits,",
+    },
+    26: {
+      englishText: "Oh, that's all right. If you can just give me some idea of the weekend ones,",
+    },
+    27: {
+      englishText: "so I can, you know, work out when to see friends, etc.",
+      chineseText: "这样我就能安排什么时间去见朋友之类的。",
+    },
+    38: {
+      englishText: "Where?",
+      chineseText: "男：哪里？",
+    },
+    44: {
+      englishText: "We're going to Salisbury on the 18th of March.",
+      chineseText: "女：我们3月18日要去索尔兹伯里。",
+    },
+    51: {
+      englishText: "And that's in the sixteen-seater minibus.",
+      chineseText: "女：这次乘坐的是一辆16座的小型巴士。",
+    },
+    57: {
+      chineseText: "女：很乐意帮忙。",
+    },
+    65: {
+      englishText: "Thank you very much for all your help.",
+      chineseText: "男：非常感谢你的帮助。",
+    },
+    67: {
+      chineseText: "女：祝你旅途愉快。",
+    },
+  },
+  2: {
+    11: {
+      englishText:
+        "and some of the water wheels were first established in the twelfth century, would you believe?",
+      chineseText: "有些水车早在12世纪就建成了，你们能相信吗？",
+    },
+    13: {
+      englishText:
+        "By the seventeenth and eighteenth centuries, the region's rivers supported more than 160 water mills,",
+    },
+    14: {
+      chineseText: "其中许多水磨一直运行到19世纪。",
+    },
+    18: {
+      chineseText: "这就是这里的历史。",
+    },
+    20: {
+      chineseText: "或者阅读我们这本内容详尽的参观指南。",
+    },
+    26: {
+      englishText: "running along the bottom is Woodside Road. Got it?",
+    },
+    31: {
+      englishText: "In front of us is the",
+      chineseText: "在我们前面是",
+    },
+    32: {
+      englishText: "car park.",
+      chineseText: "停车场。",
+    },
+    33: {
+      englishText: "As you can see,",
+      chineseText: "如你们所见，",
+    },
+    34: {
+      englishText: "to the left by the entry gate is the gift shop.",
+      chineseText: "左边入口大门旁是礼品店。",
+    },
+    39: {
+      englishText: "That's where the furnace is,",
+      chineseText: "熔炉就设在那里，",
+    },
+    44: {
+      englishText:
+        "where samples of all the tools that were made through the ages are on display.",
+      chineseText: "那里陈列着各个时代制造的工具样品。",
+    },
+    50: {
+      chineseText: "不过那里确实供应很不错的传统英式茶点。",
+    },
+  },
+  3: {
+    5: {
+      englishText:
+        "I'm having a bit of trouble with the second assignment, and it's due in twelve days.",
+      chineseText: "梅兰妮：我的第二项作业遇到了一些困难，而且12天后就要交了。",
+    },
+    7: {
+      chineseText: "梅兰妮：嗯，这是问题的一部分。我还一直很难借到那些书。",
+    },
+    11: {
+      englishText: "You thought you might get an extension of time to finish your assignment for me?",
+      chineseText: "约翰逊博士：你是想申请延期完成我这门课的作业？",
+    },
+    12: {
+      englishText: "If that's possible, but I don't know...",
+      chineseText: "梅兰妮：如果可以的话，不过我不知道……",
+    },
+    13: {
+      chineseText:
+        "约翰逊博士：可以，但通常只有出于医疗或其他特殊困难，才会批准延期。",
+    },
+    16: {
+      englishText: "I got 87 per cent.",
+      chineseText: "梅兰妮：我得了87%。",
+    },
+    23: {
+      chineseText: "约翰逊博士：那么阅读材料呢？你看过清单里列的期刊文章了吗？",
+    },
+    29: {
+      englishText:
+        "You should also read the article by Jackson, but just look at the part on the research methodology, how they did it.",
+    },
+    40: {
+      chineseText: "约翰逊博士：文章不差，也能提供一点帮助，但帮助不大。",
+    },
+    41: {
+      englishText: "Now listen and answer Questions 28 to 30.",
+      chineseText: "现在请听录音并回答第28至30题。",
+    },
+    44: {
+      englishText:
+        "What seems to be the problem? It's just the bar graph showing reasons why people change where they live.",
+      chineseText: "约翰逊博士：问题在哪里呢？这只是一张条形图，展示人们搬家的原因。",
+    },
+    52: {
+      englishText: "Okay. Proximity to the city is an issue.",
+      chineseText: "梅兰妮：好的，离城市近是一个因素。",
+    },
+  },
+  4: {
+    15: {
+      chineseText: "高层建筑使地面风力更大，是因为高度越高，风速就越快。",
+    },
+    19: {
+      chineseText: "建筑密集区的另一个问题是，高层建筑会加剧交通噪音。",
+    },
+    20: {
+      chineseText:
+        "在道路一侧种植一条林带，可以让环境安静一些，但大部分车辆噪音仍会穿过树林。",
+    },
+    25: {
+      chineseText: "因此，要在当地景观中为树木安排合适的位置可能并不容易。",
+    },
+    28: {
+      englishText:
+        "If you have the chance of knocking buildings down and replacing them, then suddenly you can start looking at different ways to design the streets and to introduce...",
+      chineseText:
+        "如果有机会拆除并重建建筑物，你就可以开始考虑采用不同的街道设计方式，并引入……（声音渐弱）",
+    },
+  },
+};
+
 function cleanText(value) {
   return String(value ?? "")
     .replace(/\u00a0/g, " ")
@@ -331,12 +519,13 @@ export function buildTranscriptSentences(sectionNo) {
 
   return rows.map((row) => {
     const sentenceNoPadded = String(row.sentenceNo).padStart(3, "0");
+    const correction = transcriptCorrections[sectionNo]?.[row.sentenceNo] ?? {};
 
     return {
       audioPath: `listening/ci4/t1/s${sectionNo}/sentences/ci4_t1_s${sectionNo}_${sentenceNoPadded}.mp3`,
-      chineseText: row.chineseText,
+      chineseText: correction.chineseText ?? row.chineseText,
       endMs: row.endMs,
-      englishText: row.englishText,
+      englishText: correction.englishText ?? row.englishText,
       sentenceNo: row.sentenceNo,
       speaker: row.speaker,
       startMs: row.startMs,
