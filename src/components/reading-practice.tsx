@@ -204,6 +204,16 @@ function cleanRawReadingLine(value: string) {
   return value.replace(/[|]+/g, " ").replace(/\s+/g, " ").trim();
 }
 
+function joinRawReadingLines(lines: string[]) {
+  return lines.reduce((paragraph, line) => {
+    if (!paragraph) return line;
+    if (/[A-Za-z]-$/.test(paragraph) && /^[a-z]/.test(line)) {
+      return `${paragraph.slice(0, -1)}${line}`;
+    }
+    return `${paragraph} ${line}`;
+  }, "");
+}
+
 function isRawReadingInstructionLine(value: string) {
   return (
     /^READING\s+PASSAGE\s+\d/i.test(value) ||
@@ -220,15 +230,17 @@ function isRawReadingInstructionLine(value: string) {
   );
 }
 
-function getRawReadingParagraphs(value: string, title: string) {
+function getRawReadingParagraphs(value: string, title: string, subtitle?: string) {
   const titleLine = cleanRawReadingLine(title).toLowerCase();
+  const subtitleLine = cleanRawReadingLine(subtitle ?? "").toLowerCase();
   const paragraphs: string[] = [];
   let current: string[] = [];
   let skippedTitle = false;
+  let skippedSubtitle = false;
 
   function flush() {
     if (current.length > 0) {
-      paragraphs.push(current.join(" "));
+      paragraphs.push(joinRawReadingLines(current));
       current = [];
     }
   }
@@ -250,7 +262,16 @@ function getRawReadingParagraphs(value: string, title: string) {
       continue;
     }
 
+    if (!skippedSubtitle && subtitleLine && line.toLowerCase() === subtitleLine) {
+      skippedSubtitle = true;
+      continue;
+    }
+
     if (/^[A-Z]$/.test(line) && current.length > 0) {
+      flush();
+    }
+
+    if (/^\s{2,4}\S/.test(rawLine) && current.length > 0 && /^[A-Z'"]/.test(line)) {
       flush();
     }
 
@@ -262,13 +283,17 @@ function getRawReadingParagraphs(value: string, title: string) {
 }
 
 function cleanRawQuestionLine(value: string) {
-  return value.replace(/[|]+/g, " ").replace(/\s+/g, " ").trim();
+  return value
+    .replace(/[|]+/g, " ")
+    .replace(/\s+\.(?=[a-z])/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 function getRawQuestionLineKind(value: string) {
   if (/^Questions?\s+\d{1,2}/i.test(value)) return "heading";
-  if (/^(?:[A-P]|8)\s+.+/.test(value)) return "option";
   if (/^\d{1,2}(?:\s|[).>])/.test(value)) return "question";
+  if (/^[A-P]\s+.+/.test(value)) return "option";
   if (
     /^(?:Choose|Complete|Do the following|Write|Which|Match|Label|Look at|The text has|Reading Passage|In boxes|TRUE|FALSE|NOT GIVEN|YES|NO)\b/i.test(
       value,
@@ -323,13 +348,19 @@ function getQuestionNumbersFromHeading(value: string) {
 }
 
 function parseRawOption(value: string): RawQuestionOption | null {
-  const match = /^([A-P]|8)\s+(.+)$/.exec(value);
+  const match = /^([A-P])\s+(.+)$/.exec(value);
   if (!match) return null;
 
   return {
-    letter: match[1] === "8" ? "B" : match[1],
+    letter: match[1],
     text: match[2].trim(),
   };
+}
+
+function parseRawOcrOption(value: string): RawQuestionOption | null {
+  const match = /^8\s+(.+)$/.exec(value);
+  if (!match) return null;
+  return { letter: "B", text: match[1].trim() };
 }
 
 function parseRawQuestion(value: string, validQuestionNumbers: Set<number>) {
@@ -350,8 +381,7 @@ function shouldHideRawInstruction(value: string) {
     /^Write your answers? in boxes/i.test(value) ||
     /^Write the appropriate letter/i.test(value) ||
     /^In boxes \d/i.test(value) ||
-    /on your answer sheet\.?$/i.test(value) ||
-    /^(?:TRUE|FALSE|NOT GIVEN|YES|NO)\s+if\b/i.test(value)
+    /on your answer sheet\.?$/i.test(value)
   );
 }
 
@@ -442,8 +472,26 @@ function getRawQuestionSections(text: string, questionNumbers: number[]) {
       continue;
     }
 
+    const parsedQuestionNumbers = new Set(section.questions.map((question) => question.number));
+    const ocrOption =
+      section.questionNumbers.length > 0 &&
+      section.questions.length >= section.questionNumbers.length &&
+      /^8\s+/.test(line.text)
+        ? parseRawOcrOption(line.text)
+        : null;
+
+    if (ocrOption) {
+      section.options.push(ocrOption);
+      continue;
+    }
+
     const rawQuestion = parseRawQuestion(line.text, validQuestionNumbers);
     if (rawQuestion) {
+      if (parsedQuestionNumbers.has(rawQuestion.number)) {
+        section.textLines.push(rawQuestion.text);
+        continue;
+      }
+
       section.questions.push({
         number: rawQuestion.number,
         options: [],
@@ -528,12 +576,12 @@ function RawQuestionText({
 
   function renderFillLine(value: string, key: string) {
     const pieces: ReactNode[] = [];
-    const pattern = /\b(\d{1,2})\b\s*(?:[._·•\-–—]{2,}|…+)?/g;
+    const pattern = /\b(\d{1,2})\b\s*(?:[._·•\-–—]{2,}|…+)|!\s*(?:[._·•\-–—]{2,}|…+)/g;
     let lastIndex = 0;
     let match: RegExpExecArray | null;
 
     while ((match = pattern.exec(value))) {
-      const number = Number(match[1]);
+      const number = match[1] ? Number(match[1]) : 1;
       if (!questionNumbers.includes(number)) continue;
 
       pieces.push(value.slice(lastIndex, match.index));
@@ -1564,6 +1612,7 @@ export function ReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: 
         >
           <article className="reading-passage-pane">
             <h1>{activePart.title}</h1>
+            {activePart.subtitle ? <p className="reading-passage-subtitle">{activePart.subtitle}</p> : null}
             <div className={activePart.sections.some((section) => section.headingQuestionNumber) ? "reading-heading-sections" : "reading-passage-copy"}>
               {activePart.sections.map((section) => {
                 const questionNo = section.headingQuestionNumber;
@@ -1617,7 +1666,7 @@ export function ReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: 
                   <section className="reading-passage-section" key={section.id}>
                     {section.paragraphs.map((paragraph) =>
                       section.format === "pre" ? (
-                        getRawReadingParagraphs(paragraph, activePart.title).map((rawParagraph, index) => (
+                        getRawReadingParagraphs(paragraph, activePart.title, activePart.subtitle).map((rawParagraph, index) => (
                           <p key={`${section.id}-${index}`}>{rawParagraph}</p>
                         ))
                       ) : (

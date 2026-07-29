@@ -3608,6 +3608,16 @@ html.reading-fullscreen-active .shell {
   margin: 0 0 22px;
 }
 
+.reading-passage-subtitle {
+  color: #222;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(18px, 1.8vw, 23px);
+  font-style: italic;
+  font-weight: 800;
+  line-height: 1.35;
+  margin: -8px 0 24px;
+}
+
 .reading-passage-copy {
   display: grid;
   gap: 22px;
@@ -6627,6 +6637,26 @@ h1 {
   position: fixed;
   transform: none;
   z-index: 110;
+}
+
+.global-selection-popover.expanded {
+  align-items: stretch;
+  flex-direction: column;
+  min-width: min(320px, calc(100vw - 32px));
+}
+
+.global-note-editor {
+  display: grid;
+  gap: 8px;
+}
+
+.global-note-editor textarea {
+  border: 1px solid #d6d6d6;
+  border-radius: 8px;
+  font: inherit;
+  min-height: 86px;
+  padding: 8px;
+  resize: vertical;
 }
 
 .inline-user-highlight {

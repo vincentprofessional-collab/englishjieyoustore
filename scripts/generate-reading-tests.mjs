@@ -24,6 +24,9 @@ const knownPassageTitles = new Map([
   ["cambridge-4-test-4-part2", "The Nature and Aims of Archaeology"],
   ["cambridge-4-test-4-part3", "The Problem of Scarce Resources"],
 ]);
+const knownPassageSubtitles = new Map([
+  ["cambridge-4-test-2-part1", "Many minority languages are on the danger list"],
+]);
 const knownPassageTextReplacements = new Map([
   [
     "cambridge-4-test-2-part2",
@@ -217,7 +220,7 @@ function splitColumnLine(line) {
       const right = line.slice(end).trimStart();
       return { left, right, start, width: match[0].length };
     })
-    .filter(({ left, right }) => left.trim().length >= 8 && right.trim().length >= 8);
+    .filter(({ left, right }) => left.trim().length >= 3 && right.trim().length >= 3);
 
   if (matches.length === 0) return null;
 
@@ -275,7 +278,11 @@ function normalizeTwoColumnPage(pageText) {
     }
   });
 
-  return [head.join("\n"), left.join("\n"), right.join("\n"), tail.join("\n")]
+  const body = [left.join("\n"), right.join("\n")]
+    .filter((chunk) => chunk.trim())
+    .join("\n");
+
+  return [head.join("\n"), body, tail.join("\n")]
     .filter((chunk) => chunk.trim())
     .join("\n\n");
 }
@@ -284,7 +291,7 @@ function normalizePassageColumns(value) {
   return value
     .split(/(?=\n\s*===\s+(?:PDF|OCR)\s+PAGE\s+\d+\s+===\s*\n)/i)
     .map((pageText) => normalizeTwoColumnPage(pageText))
-    .join("\n\n");
+    .join("\n");
 }
 
 function getMarkedPageRanges(value) {
@@ -570,12 +577,14 @@ function extractReadingParts(text, bookNo, testNo) {
       stripPageNoise(normalizePassageColumns(passageText)),
     );
     const normalizedQuestionText = stripPageNoise(questionText);
+    const subtitle = knownPassageSubtitles.get(passageId);
 
     return {
       id: passageId,
       label: `Part ${partNo}`,
       passageText: normalizedPassageText,
       questionText: normalizedQuestionText,
+      ...(subtitle ? { subtitle } : {}),
       title: knownPassageTitles.get(passageId) ?? getPassageTitle(normalizedPassageText, `Reading Passage ${partNo}`),
     };
   });
@@ -759,6 +768,10 @@ function parseAnswerKey(rawAnswerText) {
   }
 
   for (const line of rawAnswerText.split("\n")) {
+    if (isAnswerMetadata(normaliseAnswerValue(cleanAnswerLine(line)))) {
+      continue;
+    }
+
     const entries = parseNumberedEntries(line);
 
     if (entries.length === 0) {
@@ -813,6 +826,7 @@ function buildReadingPart({ answerMap, bookNo, part, questionNumbers, rawAnswerT
     intro: `You should spend about 20 minutes on ${part.label}.`,
     label: part.label,
     questionRange: `questions ${questionNumbers[0]}-${questionNumbers.at(-1)}`,
+    ...(part.subtitle ? { subtitle: part.subtitle } : {}),
     title: part.title,
     sections: [
       {

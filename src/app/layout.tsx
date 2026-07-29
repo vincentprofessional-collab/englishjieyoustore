@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import { GlobalStudyInteractions } from "@/components/global-study-interactions";
 import { GlobalVocabularySearch } from "@/components/global-vocabulary-search";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteNav } from "@/components/site-nav";
@@ -23,6 +24,7 @@ export default function RootLayout({
           <Suspense fallback={null}>
             <GlobalVocabularySearch />
           </Suspense>
+          <GlobalStudyInteractions />
           {children}
           <SiteFooter />
         </main>

@@ -77,6 +77,7 @@ export type ReadingPart = {
   questionBlocks: ReadingQuestionBlock[];
   questionRange: string;
   sections: ReadingPassageSection[];
+  subtitle?: string;
   title: string;
 };
 
