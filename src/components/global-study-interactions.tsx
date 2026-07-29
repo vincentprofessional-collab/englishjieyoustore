@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { ContentShareButton } from "@/components/content-share-button";
 import { getStudySelectionActionPosition } from "@/lib/study-selection";
+import { cleanPartOfSpeech, cleanVocabularyDefinition } from "@/lib/vocabulary/display";
 
 type VocabularyHint = {
   definitionCn: string;
@@ -36,6 +38,18 @@ type SavedSelectionNote = {
 };
 
 const GLOBAL_SELECTION_NOTES_KEY = "ielts-platform.globalSelectionNotes";
+const FAVORITE_WORDS_STORAGE_KEY = "ielts-platform.favoriteWords";
+
+type FavoriteWordItem = {
+  definitionCn: string;
+  id: string;
+  level?: string;
+  partOfSpeech: string;
+  phonetic: string;
+  savedAt: string;
+  ukPhonetic?: string;
+  word: string;
+};
 
 function normalizeWord(value: string) {
   return value.toLowerCase().replace(/^[^a-z]+|[^a-z]+$/gi, "");
@@ -64,6 +78,22 @@ function readStoredNotes() {
   } catch {
     return [];
   }
+}
+
+function readFavoriteWords() {
+  try {
+    const rawValue = window.localStorage.getItem(FAVORITE_WORDS_STORAGE_KEY);
+    return rawValue ? (JSON.parse(rawValue) as FavoriteWordItem[]) : [];
+  } catch {
+    return [];
+  }
+}
+
+function writeFavoriteWords(items: FavoriteWordItem[]) {
+  const sortedItems = [...items].sort(
+    (left, right) => new Date(right.savedAt).getTime() - new Date(left.savedAt).getTime(),
+  );
+  window.localStorage.setItem(FAVORITE_WORDS_STORAGE_KEY, JSON.stringify(sortedItems));
 }
 
 function getEnglishWordAtPoint(clientX: number, clientY: number) {
@@ -110,6 +140,7 @@ function getEnglishWordAtPoint(clientX: number, clientY: number) {
 }
 
 export function GlobalStudyInteractions() {
+  const [favoriteWordIds, setFavoriteWordIds] = useState<string[]>([]);
   const [noteDraft, setNoteDraft] = useState("");
   const [selectionMode, setSelectionMode] = useState<"actions" | "note">("actions");
   const [selectionPopover, setSelectionPopover] = useState<SelectionPopover | null>(null);
@@ -120,6 +151,10 @@ export function GlobalStudyInteractions() {
   const hoverWordTimerRef = useRef<number | null>(null);
   const pendingWordRef = useRef("");
   const selectedRangeRef = useRef<Range | null>(null);
+
+  useEffect(() => {
+    setFavoriteWordIds(readFavoriteWords().map((item) => item.id));
+  }, []);
 
   useEffect(() => {
     function clearHoverTimer() {
@@ -234,14 +269,14 @@ export function GlobalStudyInteractions() {
 
   useEffect(() => {
     function handleMouseUp(event: MouseEvent) {
-      if (hasLocalSelectionHandler(event.target)) return;
-      if (isInteractiveTarget(event.target)) return;
-
       const selection = window.getSelection();
       const text = selection?.toString().trim() ?? "";
       if (!selection || selection.rangeCount === 0 || !/[A-Za-z]/.test(text)) return;
 
       const range = selection.getRangeAt(0).cloneRange();
+      if (hasLocalSelectionHandler(event.target) || hasLocalSelectionHandler(range.commonAncestorContainer)) return;
+      if (isInteractiveTarget(event.target)) return;
+
       const rect = range.getBoundingClientRect();
       if (rect.width === 0 && rect.height === 0) return;
 
@@ -258,6 +293,37 @@ export function GlobalStudyInteractions() {
     document.addEventListener("mouseup", handleMouseUp);
     return () => document.removeEventListener("mouseup", handleMouseUp);
   }, []);
+
+  function toggleFavoriteWord() {
+    if (!wordTooltip) return;
+
+    const word = normalizeWord(wordTooltip.word);
+    const currentFavorites = readFavoriteWords();
+    const existingFavorite = currentFavorites.find((item) => item.id === word);
+
+    if (existingFavorite) {
+      const nextFavorites = currentFavorites.filter((item) => item.id !== word);
+      writeFavoriteWords(nextFavorites);
+      setFavoriteWordIds(nextFavorites.map((item) => item.id));
+      return;
+    }
+
+    const nextFavorites = [
+      {
+        definitionCn: cleanVocabularyDefinition(wordTooltip.hint.definitionCn),
+        id: word,
+        level: wordTooltip.hint.level,
+        partOfSpeech: cleanPartOfSpeech(wordTooltip.hint.partOfSpeech),
+        phonetic: wordTooltip.hint.phonetic || wordTooltip.hint.ukPhonetic || "",
+        savedAt: new Date().toISOString(),
+        ukPhonetic: wordTooltip.hint.ukPhonetic,
+        word,
+      },
+      ...currentFavorites,
+    ];
+    writeFavoriteWords(nextFavorites);
+    setFavoriteWordIds(nextFavorites.map((item) => item.id));
+  }
 
   function clearHideSelectionTimer() {
     if (hideSelectionTimerRef.current != null) {
@@ -345,12 +411,33 @@ export function GlobalStudyInteractions() {
             hideWordTimerRef.current = window.setTimeout(() => setWordTooltip(null), 1500);
           }}
         >
-          <strong>{wordTooltip.word}</strong>
+          <div className="word-tooltip-title-row">
+            <strong>{wordTooltip.word}</strong>
+            <div className="word-tooltip-favorite-share-actions favorite-share-actions">
+              <button
+                aria-label={`${favoriteWordIds.includes(wordTooltip.word) ? "取消收藏" : "收藏"} ${wordTooltip.word}`}
+                aria-pressed={favoriteWordIds.includes(wordTooltip.word)}
+                className={`word-favorite-star ${favoriteWordIds.includes(wordTooltip.word) ? "active" : ""}`}
+                type="button"
+                onClick={toggleFavoriteWord}
+              >
+                {favoriteWordIds.includes(wordTooltip.word) ? "★" : "☆"}
+              </button>
+              <ContentShareButton
+                label={`分享 ${wordTooltip.word}`}
+                text={`${wordTooltip.word}：${cleanVocabularyDefinition(wordTooltip.hint.definitionCn)}`}
+                title={`${wordTooltip.word} 词汇`}
+                url={`/vocabulary/${encodeURIComponent(wordTooltip.word)}`}
+              />
+            </div>
+          </div>
           {wordTooltip.hint.phonetic || wordTooltip.hint.ukPhonetic ? (
             <span>{wordTooltip.hint.phonetic || wordTooltip.hint.ukPhonetic}</span>
           ) : null}
-          {wordTooltip.hint.partOfSpeech ? <span>{wordTooltip.hint.partOfSpeech}</span> : null}
-          <small>{wordTooltip.hint.definitionCn}</small>
+          {cleanPartOfSpeech(wordTooltip.hint.partOfSpeech) ? (
+            <span>{cleanPartOfSpeech(wordTooltip.hint.partOfSpeech)}</span>
+          ) : null}
+          <small>{cleanVocabularyDefinition(wordTooltip.hint.definitionCn)}</small>
         </div>
       ) : null}
 
@@ -360,8 +447,8 @@ export function GlobalStudyInteractions() {
             selectionMode === "note" ? "expanded" : ""
           } ${selectionPopover.placement === "above" ? "above" : ""}`}
           style={{ left: selectionPopover.left, top: selectionPopover.top }}
-          onMouseEnter={clearHideSelectionTimer}
-          onMouseLeave={scheduleHideSelection}
+          onPointerEnter={clearHideSelectionTimer}
+          onPointerLeave={scheduleHideSelection}
         >
           {selectionMode === "actions" ? (
             <>

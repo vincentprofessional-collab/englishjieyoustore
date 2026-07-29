@@ -24,6 +24,7 @@ import {
   getStudySelectionActionPosition,
   type StudySelectionActionPosition,
 } from "@/lib/study-selection";
+import { cleanPartOfSpeech, cleanVocabularyDefinition } from "@/lib/vocabulary/display";
 import type { LocalVocabularyHint } from "@/lib/vocabulary/local-vocabulary";
 
 type ListeningPracticeProps = {
@@ -945,25 +946,30 @@ function CambridgeFourTestOneSectionTwoSheet({
         </p>
       </section>
 
-      <section className="riverside-plan-wrap" aria-label="Riverside Industrial Village plan">
-        <div className="riverside-plan">
-          <div className="map-river">River</div>
-          <div className="map-yard">Yard</div>
-          <div className="map-building map-engine">The Engine Room</div>
-          <div className="map-building map-grinding">The Grinding Shop</div>
-          <div className="map-building map-17">The {answer(17)}</div>
-          <div className="map-building map-18">The {answer(18)}</div>
-          <div className="map-building map-19">The {answer(19)}</div>
-          <div className="map-building map-20">The {answer(20)} for the workers</div>
-          <div className="map-building map-16">The {answer(16)}</div>
-          <div className="map-building map-15">The {answer(15)}</div>
-          <div className="map-building map-stables">The Stables</div>
-          <div className="map-building map-office">The Works Office</div>
-          <div className="map-building map-toilets">Toilets</div>
-          <div className="map-entrance">Entrance ↑</div>
-          <div className="map-carpark">Car Park</div>
+      <section className="riverside-book-plan" aria-label="Riverside Industrial Village plan">
+        <img
+          alt="Riverside Industrial Village plan from Cambridge IELTS 4"
+          className="riverside-book-plan-image"
+          height={1690}
+          src="/listening/ci4/t1/s2/riverside-industrial-village-plan.png"
+          width={1440}
+        />
+        <div className="riverside-plan-answer-fields">
+          <div className="riverside-plan-upper-answers" aria-label="Questions 14 to 16">
+            {[14, 15, 16].map((questionNo) => (
+              <div className="riverside-answer-line" key={questionNo}>
+                {answer(questionNo)}
+              </div>
+            ))}
+          </div>
+          <div className="riverside-plan-lower-answers" aria-label="Questions 17 to 20">
+            {[17, 18, 19, 20].map((questionNo) => (
+              <div className="riverside-answer-line" key={questionNo}>
+                {answer(questionNo)}
+              </div>
+            ))}
+          </div>
         </div>
-        <div className="riverside-road">{answer(14)} Road</div>
       </section>
     </div>
   );
@@ -2810,8 +2816,8 @@ export function ListeningPractice({
             className={`selection-action-popover global-selection-popover ${
               selectionActionPosition.placement === "above" ? "above" : ""
             }`}
-            onMouseEnter={clearSelectionHideTimer}
-            onMouseLeave={scheduleHideSelectionAction}
+            onPointerEnter={clearSelectionHideTimer}
+            onPointerLeave={scheduleHideSelectionAction}
             style={{
               left: selectionActionPosition.left,
               top: selectionActionPosition.top,
@@ -3252,32 +3258,36 @@ export function ListeningPractice({
           }}
           onMouseLeave={() => scheduleHideWordTooltip(1500)}
         >
-          <div className="word-tooltip-favorite-share-actions favorite-share-actions">
-            <button
-              aria-label={`收藏 ${activeWordTooltip.word}`}
-              className={`word-favorite-star ${
-                favoriteWordIds.includes(activeWordTooltip.word) ? "active" : ""
-              }`}
-              type="button"
-              onClick={(event) => {
-                event.stopPropagation();
-                toggleFavoriteWord(activeWordTooltip.word);
-              }}
-            >
-              {favoriteWordIds.includes(activeWordTooltip.word) ? "★" : "☆"}
-            </button>
-            <ContentShareButton
-              label={`分享 ${activeWordTooltip.word}`}
-              text={`${activeWordTooltip.word}：${activeWordTooltip.hint.definitionCn}`}
-              title={`${activeWordTooltip.word} 词汇`}
-              url={`/vocabulary/${encodeURIComponent(activeWordTooltip.word)}`}
-            />
+          <div className="word-tooltip-title-row">
+            <strong>{activeWordTooltip.word}</strong>
+            <div className="word-tooltip-favorite-share-actions favorite-share-actions">
+              <button
+                aria-label={`收藏 ${activeWordTooltip.word}`}
+                className={`word-favorite-star ${
+                  favoriteWordIds.includes(activeWordTooltip.word) ? "active" : ""
+                }`}
+                type="button"
+                onClick={(event) => {
+                  event.stopPropagation();
+                  toggleFavoriteWord(activeWordTooltip.word);
+                }}
+              >
+                {favoriteWordIds.includes(activeWordTooltip.word) ? "★" : "☆"}
+              </button>
+              <ContentShareButton
+                label={`分享 ${activeWordTooltip.word}`}
+                text={`${activeWordTooltip.word}：${cleanVocabularyDefinition(activeWordTooltip.hint.definitionCn)}`}
+                title={`${activeWordTooltip.word} 词汇`}
+                url={`/vocabulary/${encodeURIComponent(activeWordTooltip.word)}`}
+              />
+            </div>
           </div>
-          <strong>{activeWordTooltip.word}</strong>
-          <span>{activeWordTooltip.hint.phonetic}</span>
-          <span>{activeWordTooltip.hint.partOfSpeech}</span>
+          {activeWordTooltip.hint.phonetic ? <span>{activeWordTooltip.hint.phonetic}</span> : null}
+          {cleanPartOfSpeech(activeWordTooltip.hint.partOfSpeech) ? (
+            <span>{cleanPartOfSpeech(activeWordTooltip.hint.partOfSpeech)}</span>
+          ) : null}
           {activeWordTooltip.hint.level ? <span>等级：{activeWordTooltip.hint.level}</span> : null}
-          <small>{activeWordTooltip.hint.definitionCn}</small>
+          <small>{cleanVocabularyDefinition(activeWordTooltip.hint.definitionCn)}</small>
           {activeWordTooltip.hint.formation ? (
             <small>{activeWordTooltip.hint.formation}</small>
           ) : null}

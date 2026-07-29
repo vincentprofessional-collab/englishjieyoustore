@@ -597,6 +597,38 @@ function RawQuestionText({
     return <p className="reading-raw-fill-line" key={key}>{pieces}</p>;
   }
 
+  function getFillTextParagraphs(lines: string[]) {
+    const paragraphs: string[] = [];
+    let currentParagraph = "";
+
+    lines.forEach((line, index) => {
+      const trimmedLine = line.trim();
+      if (!trimmedLine) return;
+
+      const isLikelySubheading =
+        index === 0 &&
+        trimmedLine.length <= 60 &&
+        !/[.!?]$/.test(trimmedLine) &&
+        !/\d{1,2}\s*(?:[._·•\-–—]{2,}|…+)/.test(trimmedLine) &&
+        lines.slice(index + 1, index + 3).some((nextLine) =>
+          /\d{1,2}\s*(?:[._·•\-–—]{2,}|…+)/.test(nextLine),
+        );
+
+      if (isLikelySubheading) {
+        paragraphs.push(trimmedLine);
+        return;
+      }
+
+      currentParagraph = currentParagraph ? `${currentParagraph} ${trimmedLine}` : trimmedLine;
+    });
+
+    if (currentParagraph) {
+      paragraphs.push(currentParagraph);
+    }
+
+    return paragraphs;
+  }
+
   function renderBinaryChoices(number: number, options: string[]) {
     const selected = fillAnswers[number] ?? "";
     return (
@@ -740,7 +772,7 @@ function RawQuestionText({
             {section.instructions.map((instruction) => (
               <p className="reading-raw-question-instruction" key={instruction}>{instruction}</p>
             ))}
-            {section.textLines.map((line, index) =>
+            {(section.mode === "fill" ? getFillTextParagraphs(section.textLines) : section.textLines).map((line, index) =>
               section.mode === "fill" ? renderFillLine(line, `${sectionKey}-fill-${index}`) : (
                 <p className="reading-raw-question-copy" key={`${sectionKey}-text-${index}`}>{line}</p>
               ),
@@ -1611,8 +1643,8 @@ export function ReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: 
           className={`selection-action-popover global-selection-popover ${
             selectionActionPosition.placement === "above" ? "above" : ""
           }`}
-          onMouseEnter={clearSelectionHideTimer}
-          onMouseLeave={scheduleHideSelectionAction}
+          onPointerEnter={clearSelectionHideTimer}
+          onPointerLeave={scheduleHideSelectionAction}
           style={{
             left: selectionActionPosition.left,
             top: selectionActionPosition.top,

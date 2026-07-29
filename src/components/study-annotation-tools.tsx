@@ -9,6 +9,7 @@ import {
   getStudySelectionActionPosition,
   type StudySelectionActionPosition,
 } from "@/lib/study-selection";
+import { cleanPartOfSpeech, cleanVocabularyDefinition } from "@/lib/vocabulary/display";
 import type { LocalVocabularyHint } from "@/lib/vocabulary/local-vocabulary";
 
 type AnnotationItem = {
@@ -594,8 +595,8 @@ export function StudyAnnotationTools({
           className={`selection-action-popover global-selection-popover ${
             selectionActionPosition.placement === "above" ? "above" : ""
           }`}
-          onMouseEnter={clearSelectionHideTimer}
-          onMouseLeave={scheduleHideSelectionAction}
+          onPointerEnter={clearSelectionHideTimer}
+          onPointerLeave={scheduleHideSelectionAction}
           style={{ left: selectionActionPosition.left, top: selectionActionPosition.top }}
         >
           <span>{selectedText.slice(0, 26)}</span>
@@ -691,33 +692,39 @@ export function StudyAnnotationTools({
             }
           }}
           onMouseLeave={() => {
-            hideWordTimerRef.current = window.setTimeout(() => setActiveWordTooltip(null), 2600);
+            hideWordTimerRef.current = window.setTimeout(() => setActiveWordTooltip(null), 1500);
           }}
         >
-          <div className="word-tooltip-favorite-share-actions favorite-share-actions">
-            <button
-              aria-label={`收藏 ${activeWordTooltip.word}`}
-              className={`word-favorite-star ${
-                favoriteWordIds.includes(activeWordTooltip.word) ? "active" : ""
-              }`}
-              onClick={toggleFavoriteWord}
-              type="button"
-            >
-              {favoriteWordIds.includes(activeWordTooltip.word) ? "★" : "☆"}
-            </button>
-            <ContentShareButton
-              label={`分享 ${activeWordTooltip.word}`}
-              text={`${activeWordTooltip.word}：${activeWordTooltip.hint.definitionCn}`}
-              title={`${activeWordTooltip.word} 词汇`}
-              url={`/vocabulary/${encodeURIComponent(activeWordTooltip.word)}`}
-            />
+          <div className="word-tooltip-title-row">
+            <Link href={`/vocabulary/${encodeURIComponent(activeWordTooltip.word)}`}>
+              <strong>{activeWordTooltip.word}</strong>
+            </Link>
+            <div className="word-tooltip-favorite-share-actions favorite-share-actions">
+              <button
+                aria-label={`收藏 ${activeWordTooltip.word}`}
+                className={`word-favorite-star ${
+                  favoriteWordIds.includes(activeWordTooltip.word) ? "active" : ""
+                }`}
+                onClick={toggleFavoriteWord}
+                type="button"
+              >
+                {favoriteWordIds.includes(activeWordTooltip.word) ? "★" : "☆"}
+              </button>
+              <ContentShareButton
+                label={`分享 ${activeWordTooltip.word}`}
+                text={`${activeWordTooltip.word}：${cleanVocabularyDefinition(activeWordTooltip.hint.definitionCn)}`}
+                title={`${activeWordTooltip.word} 词汇`}
+                url={`/vocabulary/${encodeURIComponent(activeWordTooltip.word)}`}
+              />
+            </div>
           </div>
-          <Link href={`/vocabulary/${encodeURIComponent(activeWordTooltip.word)}`}>
-            <strong>{activeWordTooltip.word}</strong>
-          </Link>
-          <span>{activeWordTooltip.hint.phonetic || activeWordTooltip.hint.ukPhonetic}</span>
-          <span>{activeWordTooltip.hint.partOfSpeech}</span>
-          <small>{activeWordTooltip.hint.definitionCn}</small>
+          {activeWordTooltip.hint.phonetic || activeWordTooltip.hint.ukPhonetic ? (
+            <span>{activeWordTooltip.hint.phonetic || activeWordTooltip.hint.ukPhonetic}</span>
+          ) : null}
+          {cleanPartOfSpeech(activeWordTooltip.hint.partOfSpeech) ? (
+            <span>{cleanPartOfSpeech(activeWordTooltip.hint.partOfSpeech)}</span>
+          ) : null}
+          <small>{cleanVocabularyDefinition(activeWordTooltip.hint.definitionCn)}</small>
         </div>
       ) : null}
     </>
