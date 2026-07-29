@@ -3520,13 +3520,37 @@ html.reading-fullscreen-active .shell {
 }
 
 .listening-exam-page.fullscreen .exam-workspace {
+  align-items: stretch;
   grid-row: 2;
   min-height: 0;
-  overflow: auto;
+  overflow: hidden;
 }
 
 .listening-exam-page.fullscreen .exam-question-surface {
   min-height: 0;
+}
+
+.listening-exam-page.fullscreen .exam-workspace.practice.submitted,
+.listening-exam-page.fullscreen .exam-workspace.practice.submitted.notes-open {
+  align-items: stretch;
+}
+
+.listening-exam-page.fullscreen .practice-audio-study-panel {
+  align-self: stretch;
+  height: auto;
+  max-height: none;
+}
+
+.listening-exam-page.fullscreen .practice-listening-card {
+  height: 100%;
+  max-height: none;
+}
+
+.listening-exam-page.fullscreen .exam-workspace.practice .practice-main {
+  align-self: stretch;
+  height: 100%;
+  min-height: 0;
+  overflow: auto;
 }
 
 .reading-exam-page.fullscreen .reading-exam-split {
@@ -6634,9 +6658,15 @@ h1 {
 }
 
 .global-selection-popover {
+  max-width: min(300px, calc(100vw - 32px));
   position: fixed;
   transform: none;
+  width: max-content;
   z-index: 110;
+}
+
+.global-selection-popover.above {
+  transform: none;
 }
 
 .global-selection-popover.expanded {
@@ -6657,6 +6687,19 @@ h1 {
   min-height: 86px;
   padding: 8px;
   resize: vertical;
+}
+
+.global-selection-popover > span {
+  font-size: 13px;
+  max-width: 96px;
+}
+
+.global-selection-popover button {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 20px;
+  line-height: 1;
+  min-height: 0;
+  padding: 9px 14px;
 }
 
 .inline-user-highlight {
@@ -13784,6 +13827,10 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
   cursor: default;
   justify-self: center;
   pointer-events: none;
+}
+
+.listening-practice-timer {
+  justify-self: center;
 }
 
 .ielts-practice-center-timer:hover {

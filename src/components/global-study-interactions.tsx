@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { getStudySelectionActionPosition } from "@/lib/study-selection";
 
 type VocabularyHint = {
   definitionCn: string;
@@ -21,6 +22,7 @@ type WordTooltip = {
 
 type SelectionPopover = {
   left: number;
+  placement: "above" | "below";
   text: string;
   top: number;
 };
@@ -46,6 +48,12 @@ function isInteractiveTarget(target: EventTarget | null) {
           "button, input, textarea, select, [contenteditable='true'], .notes-panel, .selection-action-popover, .word-tooltip-floating",
         ),
       )
+    : false;
+}
+
+function hasLocalSelectionHandler(target: EventTarget | null) {
+  return target instanceof HTMLElement
+    ? Boolean(target.closest("[data-local-selection-actions='true']"))
     : false;
 }
 
@@ -226,6 +234,7 @@ export function GlobalStudyInteractions() {
 
   useEffect(() => {
     function handleMouseUp(event: MouseEvent) {
+      if (hasLocalSelectionHandler(event.target)) return;
       if (isInteractiveTarget(event.target)) return;
 
       const selection = window.getSelection();
@@ -240,9 +249,8 @@ export function GlobalStudyInteractions() {
       setNoteDraft("");
       setSelectionMode("actions");
       setSelectionPopover({
-        left: Math.min(window.innerWidth - 270, Math.max(16, rect.left + rect.width / 2 - 112)),
+        ...getStudySelectionActionPosition(rect),
         text,
-        top: Math.min(window.innerHeight - 96, rect.bottom + 10),
       });
       setWordTooltip(null);
     }
@@ -261,12 +269,20 @@ export function GlobalStudyInteractions() {
   function scheduleHideSelection() {
     clearHideSelectionTimer();
     hideSelectionTimerRef.current = window.setTimeout(() => {
+      window.getSelection()?.removeAllRanges();
+      selectedRangeRef.current = null;
       setSelectionPopover(null);
       setNoteDraft("");
       setSelectionMode("actions");
       hideSelectionTimerRef.current = null;
     }, 1500);
   }
+
+  useEffect(() => {
+    if (!selectionPopover || selectionMode === "note") return;
+    scheduleHideSelection();
+    return clearHideSelectionTimer;
+  }, [selectionMode, selectionPopover]);
 
   function highlightSelection() {
     const selectedRange = selectedRangeRef.current;
@@ -342,7 +358,7 @@ export function GlobalStudyInteractions() {
         <div
           className={`selection-action-popover global-selection-popover ${
             selectionMode === "note" ? "expanded" : ""
-          }`}
+          } ${selectionPopover.placement === "above" ? "above" : ""}`}
           style={{ left: selectionPopover.left, top: selectionPopover.top }}
           onMouseEnter={clearHideSelectionTimer}
           onMouseLeave={scheduleHideSelection}

@@ -21,6 +21,10 @@ import {
   type ReadingPartId,
   type ReadingTest,
 } from "@/lib/ielts/reading";
+import {
+  getStudySelectionActionPosition,
+  type StudySelectionActionPosition,
+} from "@/lib/study-selection";
 
 type AnswerMap = Record<number, string[]>;
 type FillMap = Record<number, string>;
@@ -987,10 +991,8 @@ export function ReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: 
   const [isNotesOpen, setIsNotesOpen] = useState(false);
   const [selectedText, setSelectedText] = useState("");
   const [annotations, setAnnotations] = useState<AnnotationItem[]>([]);
-  const [selectionActionPosition, setSelectionActionPosition] = useState<{
-    left: number;
-    top: number;
-  } | null>(null);
+  const [selectionActionPosition, setSelectionActionPosition] =
+    useState<StudySelectionActionPosition | null>(null);
   const [notePanelPosition, setNotePanelPosition] = useState({ left: 0, top: 0 });
   const [isDraggingNotes, setIsDraggingNotes] = useState(false);
   const [saveNotice, setSaveNotice] = useState(false);
@@ -1001,6 +1003,7 @@ export function ReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: 
   const selectedRangeRef = useRef<Range | null>(null);
   const isResizingRef = useRef(false);
   const noticeTimerRef = useRef<number | null>(null);
+  const selectionHideTimerRef = useRef<number | null>(null);
 
   const allChoiceQuestions = useMemo(
     () => parts.flatMap((part) =>
@@ -1062,14 +1065,9 @@ export function ReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: 
       return;
     }
 
-    const timer = window.setTimeout(() => {
-      window.getSelection()?.removeAllRanges();
-      selectedRangeRef.current = null;
-      setSelectedText("");
-      setSelectionActionPosition(null);
-    }, 10000);
+    scheduleHideSelectionAction();
 
-    return () => window.clearTimeout(timer);
+    return clearSelectionHideTimer;
   }, [selectedText, selectionActionPosition]);
 
   useEffect(() => {
@@ -1099,6 +1097,7 @@ export function ReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: 
       if (noticeTimerRef.current) {
         window.clearTimeout(noticeTimerRef.current);
       }
+      clearSelectionHideTimer();
     };
   }, []);
 
@@ -1397,10 +1396,29 @@ export function ReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: 
 
     selectedRangeRef.current = range;
     setSelectedText(text);
-    setSelectionActionPosition({
-      left: Math.min(window.innerWidth - 180, Math.max(16, rect.left + rect.width / 2 - 90)),
-      top: Math.min(window.innerHeight - 72, rect.bottom + 10),
-    });
+    setSelectionActionPosition(getStudySelectionActionPosition(rect));
+  }
+
+  function clearSelectionHideTimer() {
+    if (selectionHideTimerRef.current != null) {
+      window.clearTimeout(selectionHideTimerRef.current);
+      selectionHideTimerRef.current = null;
+    }
+  }
+
+  function hideSelectionAction() {
+    window.getSelection()?.removeAllRanges();
+    selectedRangeRef.current = null;
+    setSelectedText("");
+    setSelectionActionPosition(null);
+  }
+
+  function scheduleHideSelectionAction() {
+    clearSelectionHideTimer();
+    selectionHideTimerRef.current = window.setTimeout(() => {
+      hideSelectionAction();
+      selectionHideTimerRef.current = null;
+    }, 1500);
   }
 
   function addAnnotation(kind: AnnotationItem["kind"]) {
@@ -1427,6 +1445,7 @@ export function ReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: 
       selectedRangeRef.current = null;
       setSelectedText("");
       setSelectionActionPosition(null);
+      clearSelectionHideTimer();
       return;
     }
 
@@ -1442,6 +1461,7 @@ export function ReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: 
     setSelectedText("");
     setSelectionActionPosition(null);
     selectedRangeRef.current = null;
+    clearSelectionHideTimer();
     setIsNotesOpen(true);
   }
 
@@ -1534,6 +1554,7 @@ export function ReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: 
   return (
     <section
       className={`stack reading-practice-page reading-exam-page ${isFullscreen ? "fullscreen" : ""}`}
+      data-local-selection-actions="true"
       ref={pageRef}
       onMouseUp={handleReadingSelection}
     >
@@ -1587,7 +1608,11 @@ export function ReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: 
 
       {selectedText && selectionActionPosition ? (
         <div
-          className="selection-action-popover global-selection-popover"
+          className={`selection-action-popover global-selection-popover ${
+            selectionActionPosition.placement === "above" ? "above" : ""
+          }`}
+          onMouseEnter={clearSelectionHideTimer}
+          onMouseLeave={scheduleHideSelectionAction}
           style={{
             left: selectionActionPosition.left,
             top: selectionActionPosition.top,

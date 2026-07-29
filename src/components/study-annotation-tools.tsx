@@ -5,6 +5,10 @@ import type { MouseEvent as ReactMouseEvent, RefObject } from "react";
 import { useEffect, useRef, useState } from "react";
 
 import { ContentShareButton } from "@/components/content-share-button";
+import {
+  getStudySelectionActionPosition,
+  type StudySelectionActionPosition,
+} from "@/lib/study-selection";
 import type { LocalVocabularyHint } from "@/lib/vocabulary/local-vocabulary";
 
 type AnnotationItem = {
@@ -173,16 +177,15 @@ export function StudyAnnotationTools({
   const [isNotesOpen, setIsNotesOpen] = useState(false);
   const [notePanelPosition, setNotePanelPosition] = useState({ left: 16, top: 132 });
   const [selectedText, setSelectedText] = useState("");
-  const [selectionActionPosition, setSelectionActionPosition] = useState<{
-    left: number;
-    top: number;
-  } | null>(null);
+  const [selectionActionPosition, setSelectionActionPosition] =
+    useState<StudySelectionActionPosition | null>(null);
   const hintCacheRef = useRef(new Map<string, LocalVocabularyHint | null>());
   const hoverWordTimerRef = useRef<number | null>(null);
   const hideWordTimerRef = useRef<number | null>(null);
   const notesPanelRef = useRef<HTMLElement | null>(null);
   const pendingHoverWordRef = useRef("");
   const selectedRangeRef = useRef<Range | null>(null);
+  const selectionHideTimerRef = useRef<number | null>(null);
 
   useEffect(() => {
     setFavoriteWordIds(
@@ -192,6 +195,10 @@ export function StudyAnnotationTools({
       left: Math.max(16, window.innerWidth - 370),
       top: 132,
     });
+  }, []);
+
+  useEffect(() => {
+    return () => clearSelectionHideTimer();
   }, []);
 
   useEffect(() => {
@@ -223,6 +230,8 @@ export function StudyAnnotationTools({
       return;
     }
 
+    surface.setAttribute("data-local-selection-actions", "true");
+
     function handleSelection(event: MouseEvent) {
       const target = event.target as HTMLElement | null;
       if (
@@ -251,15 +260,23 @@ export function StudyAnnotationTools({
 
       selectedRangeRef.current = range;
       setSelectedText(text);
-      setSelectionActionPosition({
-        left: Math.min(window.innerWidth - 210, Math.max(16, rect.left + rect.width / 2 - 96)),
-        top: Math.min(window.innerHeight - 72, rect.bottom + 10),
-      });
+      setSelectionActionPosition(getStudySelectionActionPosition(rect));
     }
 
     surface.addEventListener("mouseup", handleSelection);
-    return () => surface.removeEventListener("mouseup", handleSelection);
+    return () => {
+      surface.removeEventListener("mouseup", handleSelection);
+      surface.removeAttribute("data-local-selection-actions");
+    };
   }, [surfaceRef]);
+
+  useEffect(() => {
+    if (!selectedText || !selectionActionPosition) return;
+
+    scheduleHideSelectionAction();
+
+    return clearSelectionHideTimer;
+  }, [selectedText, selectionActionPosition]);
 
   useEffect(() => {
     if (!enableVocabularyHover) {
@@ -392,6 +409,28 @@ export function StudyAnnotationTools({
     };
   }, [activeWordTooltip, enableVocabularyHover, selectedText, surfaceRef]);
 
+  function clearSelectionHideTimer() {
+    if (selectionHideTimerRef.current != null) {
+      window.clearTimeout(selectionHideTimerRef.current);
+      selectionHideTimerRef.current = null;
+    }
+  }
+
+  function hideSelectionAction() {
+    window.getSelection()?.removeAllRanges();
+    selectedRangeRef.current = null;
+    setSelectedText("");
+    setSelectionActionPosition(null);
+  }
+
+  function scheduleHideSelectionAction() {
+    clearSelectionHideTimer();
+    selectionHideTimerRef.current = window.setTimeout(() => {
+      hideSelectionAction();
+      selectionHideTimerRef.current = null;
+    }, 1500);
+  }
+
   function annotationFavoriteId(itemId: number) {
     return `${sourceId}:annotation:${itemId}`;
   }
@@ -460,6 +499,7 @@ export function StudyAnnotationTools({
       selectedRangeRef.current = null;
       setSelectedText("");
       setSelectionActionPosition(null);
+      clearSelectionHideTimer();
       return;
     }
 
@@ -471,6 +511,7 @@ export function StudyAnnotationTools({
     selectedRangeRef.current = null;
     setSelectedText("");
     setSelectionActionPosition(null);
+    clearSelectionHideTimer();
     setIsNotesOpen(true);
   }
 
@@ -550,7 +591,11 @@ export function StudyAnnotationTools({
 
       {selectedText && selectionActionPosition ? (
         <div
-          className="selection-action-popover global-selection-popover"
+          className={`selection-action-popover global-selection-popover ${
+            selectionActionPosition.placement === "above" ? "above" : ""
+          }`}
+          onMouseEnter={clearSelectionHideTimer}
+          onMouseLeave={scheduleHideSelectionAction}
           style={{ left: selectionActionPosition.left, top: selectionActionPosition.top }}
         >
           <span>{selectedText.slice(0, 26)}</span>

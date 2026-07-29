@@ -20,6 +20,10 @@ import {
 } from "@/components/audio-player";
 import { ContentShareButton } from "@/components/content-share-button";
 import type { ListeningSectionDetail } from "@/lib/ielts/listening";
+import {
+  getStudySelectionActionPosition,
+  type StudySelectionActionPosition,
+} from "@/lib/study-selection";
 import type { LocalVocabularyHint } from "@/lib/vocabulary/local-vocabulary";
 
 type ListeningPracticeProps = {
@@ -164,6 +168,16 @@ function formatExamCountdown(totalSeconds: number) {
   const minutes = Math.floor(totalSeconds / 60);
   const seconds = totalSeconds % 60;
   return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+}
+
+function MouseClickIcon() {
+  return (
+    <svg aria-hidden="true" className="bbc-reading-timer-icon" viewBox="0 0 24 24">
+      <path d="M12 3.5a5.5 5.5 0 0 0-5.5 5.5v6a5.5 5.5 0 0 0 11 0V9A5.5 5.5 0 0 0 12 3.5Z" />
+      <path d="M12 3.5v7.25" />
+      <path d="M9.25 15.25h5.5" />
+    </svg>
+  );
 }
 
 function formatFavoriteBookCode(bookCode: string) {
@@ -1277,13 +1291,15 @@ export function ListeningPractice({
   const [audioSettings, setAudioSettings] = useState<AudioPlayerSettings>(
     DEFAULT_AUDIO_PLAYER_SETTINGS,
   );
-  const [hasSelectedRate, setHasSelectedRate] = useState(false);
   const [isNotesOpen, setIsNotesOpen] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isPracticeTimerRunning, setIsPracticeTimerRunning] = useState(false);
   const [selectedText, setSelectedText] = useState("");
   const [annotations, setAnnotations] = useState<AnnotationItem[]>([]);
   const [mockStarted, setMockStarted] = useState(mode === "practice");
-  const [seconds, setSeconds] = useState(() => getListeningCountdownSeconds(section));
+  const [seconds, setSeconds] = useState(() =>
+    mode === "practice" ? 0 : getListeningCountdownSeconds(section),
+  );
   const [autoPlaySignal, setAutoPlaySignal] = useState(0);
   const [isFullAudioPlaying, setIsFullAudioPlaying] = useState(false);
   const [fullAudioPositionMs, setFullAudioPositionMs] = useState(0);
@@ -1293,10 +1309,8 @@ export function ListeningPractice({
   const [dictationAnswers, setDictationAnswers] = useState<Record<string, string>>({});
   const [sentenceOrderAnswers, setSentenceOrderAnswers] = useState<Record<string, SentenceOrderAnswer>>({});
   const [activeWordTooltip, setActiveWordTooltip] = useState<ActiveWordTooltip | null>(null);
-  const [selectionActionPosition, setSelectionActionPosition] = useState<{
-    left: number;
-    top: number;
-  } | null>(null);
+  const [selectionActionPosition, setSelectionActionPosition] =
+    useState<StudySelectionActionPosition | null>(null);
   const [questionSurfaceHeight, setQuestionSurfaceHeight] = useState<number | null>(null);
   const [notePanelPosition, setNotePanelPosition] = useState({ left: 0, top: 0 });
   const [isDraggingNotes, setIsDraggingNotes] = useState(false);
@@ -1305,6 +1319,7 @@ export function ListeningPractice({
   const selectedRangeRef = useRef<Range | null>(null);
   const hoverWordTimerRef = useRef<number | null>(null);
   const hideWordTimerRef = useRef<number | null>(null);
+  const selectionHideTimerRef = useRef<number | null>(null);
   const fetchedVocabularyHintsRef = useRef(new Map<string, WordHint | null>());
   const hoverRequestIdRef = useRef(0);
   const pendingHoverWordRef = useRef("");
@@ -1353,10 +1368,6 @@ export function ListeningPractice({
       : null;
 
   function updateAudioSettings(nextSettings: Partial<AudioPlayerSettings>) {
-    if (nextSettings.rate != null) {
-      setHasSelectedRate(true);
-    }
-
     setAudioSettings((current) => ({ ...current, ...nextSettings }));
   }
 
@@ -1774,10 +1785,7 @@ export function ListeningPractice({
 
     selectedRangeRef.current = range;
     setSelectedText(text);
-    setSelectionActionPosition({
-      left: Math.min(window.innerWidth - 180, Math.max(16, rect.left + rect.width / 2 - 90)),
-      top: Math.min(window.innerHeight - 72, rect.bottom + 10),
-    });
+    setSelectionActionPosition(getStudySelectionActionPosition(rect));
 
     const firstWord = text.match(/[A-Za-z]+(?:['’-][A-Za-z]+)?/)?.[0];
     if (firstWord) {
@@ -1790,6 +1798,28 @@ export function ListeningPractice({
     } else {
       setActiveWordTooltip(null);
     }
+  }
+
+  function clearSelectionHideTimer() {
+    if (selectionHideTimerRef.current != null) {
+      window.clearTimeout(selectionHideTimerRef.current);
+      selectionHideTimerRef.current = null;
+    }
+  }
+
+  function hideSelectionAction() {
+    window.getSelection()?.removeAllRanges();
+    selectedRangeRef.current = null;
+    setSelectedText("");
+    setSelectionActionPosition(null);
+  }
+
+  function scheduleHideSelectionAction() {
+    clearSelectionHideTimer();
+    selectionHideTimerRef.current = window.setTimeout(() => {
+      hideSelectionAction();
+      selectionHideTimerRef.current = null;
+    }, 1500);
   }
 
   function handleSubtitleClick(sentence: ListeningSentence) {
@@ -2339,6 +2369,7 @@ export function ListeningPractice({
       selectedRangeRef.current = null;
       setSelectedText("");
       setSelectionActionPosition(null);
+      clearSelectionHideTimer();
       return;
     }
 
@@ -2354,6 +2385,7 @@ export function ListeningPractice({
     setSelectedText("");
     setSelectionActionPosition(null);
     selectedRangeRef.current = null;
+    clearSelectionHideTimer();
     setIsNotesOpen(true);
   }
 
@@ -2391,10 +2423,10 @@ export function ListeningPractice({
 
     setAnswers(initialSubmitted ? readReviewAnswers(section.id) : {});
     setSubmitted(initialSubmitted);
-    setSeconds(getListeningCountdownSeconds(section));
+    setSeconds(mode === "practice" ? 0 : getListeningCountdownSeconds(section));
     setAudioSettings(DEFAULT_AUDIO_PLAYER_SETTINGS);
-    setHasSelectedRate(false);
     setIsNotesOpen(false);
+    setIsPracticeTimerRunning(false);
     setSelectedText("");
     setAnnotations([]);
     setMockStarted(mode === "practice");
@@ -2427,12 +2459,18 @@ export function ListeningPractice({
   }, [initialSubmitted, mode, section.id, section.timeLimitSeconds]);
 
   useEffect(() => {
+    if (mode === "practice" && !isPracticeTimerRunning) {
+      return;
+    }
+
     const timer = window.setInterval(() => {
-      setSeconds((current) => (current > 0 ? current - 1 : 0));
+      setSeconds((current) =>
+        mode === "practice" ? current + 1 : current > 0 ? current - 1 : 0,
+      );
     }, 1000);
 
     return () => window.clearInterval(timer);
-  }, []);
+  }, [isPracticeTimerRunning, mode]);
 
   useEffect(() => {
     document.documentElement.classList.toggle("ielts-fullscreen-active", isFullscreen);
@@ -2454,19 +2492,12 @@ export function ListeningPractice({
   }, []);
 
   useEffect(() => {
-    if (!selectedText || !selectionActionPosition || activeWordTooltip) {
-      return;
-    }
+    if (!selectedText || !selectionActionPosition) return;
 
-    const timer = window.setTimeout(() => {
-      window.getSelection()?.removeAllRanges();
-      selectedRangeRef.current = null;
-      setSelectedText("");
-      setSelectionActionPosition(null);
-    }, 3000);
+    scheduleHideSelectionAction();
 
-    return () => window.clearTimeout(timer);
-  }, [activeWordTooltip, selectedText, selectionActionPosition]);
+    return clearSelectionHideTimer;
+  }, [selectedText, selectionActionPosition]);
 
   useEffect(() => {
     setNotePanelPosition({
@@ -2543,22 +2574,9 @@ export function ListeningPractice({
     return () => {
       clearHoverWordTimer();
       clearHideWordTimer();
+      clearSelectionHideTimer();
     };
   }, []);
-
-  useEffect(() => {
-    if (!selectedText || submitted) {
-      return;
-    }
-
-    const timer = window.setTimeout(() => {
-      setSelectedText("");
-      setSelectionActionPosition(null);
-      selectedRangeRef.current = null;
-    }, 10000);
-
-    return () => window.clearTimeout(timer);
-  }, [selectedText]);
 
   useEffect(() => {
     if (mode !== "practice" || activeSentenceNo == null) {
@@ -2604,8 +2622,8 @@ export function ListeningPractice({
       total: section.questions.length,
     };
   }, [answers, section.questions, submitted]);
-  const isUrgent = seconds <= 600;
-  const isCritical = seconds <= 300;
+  const isUrgent = mode === "mock" && seconds <= 600;
+  const isCritical = mode === "mock" && seconds <= 300;
 
   const partNavigation = (
     <nav className="exam-bottom-nav" aria-label="Listening parts and questions">
@@ -2680,6 +2698,7 @@ export function ListeningPractice({
       className={`stack listening-exam-page ${mode} ${submitted ? "submitted" : "answering"} ${
         isFullscreen ? "fullscreen" : ""
       }`}
+      data-local-selection-actions="true"
       ref={pageRef}
       onMouseUp={handleQuestionSelection}
       onMouseLeave={() => setActiveWordTooltip(null)}
@@ -2706,24 +2725,29 @@ export function ListeningPractice({
         </div>
 
         {mode === "practice" ? (
-          <div
-            aria-label="雅思听力倒计时"
-            className={`bbc-reading-timer ielts-practice-center-timer ${isUrgent ? "urgent" : ""} ${
-              isCritical ? "critical" : ""
+          <button
+            aria-label={isPracticeTimerRunning ? "暂停听力练习计时" : "开始听力练习计时"}
+            aria-pressed={isPracticeTimerRunning}
+            className={`bbc-reading-timer listening-practice-timer ${
+              isPracticeTimerRunning ? "active" : ""
             }`}
+            onClick={() => setIsPracticeTimerRunning((current) => !current)}
             role="timer"
+            title={isPracticeTimerRunning ? "点击暂停计时" : "点击开始计时"}
+            type="button"
           >
             <span>{formatExamCountdown(seconds)}</span>
-          </div>
+            <MouseClickIcon />
+          </button>
         ) : null}
 
         <div className="exam-toolbar-actions">
-          {mode === "practice" ? (
+          {mode === "practice" && submitted ? (
             <AudioSettingsMenus
               className="toolbar-audio-settings"
-              hasSelectedRate={hasSelectedRate}
               settings={audioSettings}
-              variant={submitted ? "basic" : "rate-only"}
+              showRate={false}
+              variant="basic"
               onChange={updateAudioSettings}
             />
           ) : null}
@@ -2784,7 +2808,11 @@ export function ListeningPractice({
       >
         {selectedText && !submitted && !activeWordTooltip && selectionActionPosition ? (
           <div
-            className="selection-action-popover global-selection-popover"
+            className={`selection-action-popover global-selection-popover ${
+              selectionActionPosition.placement === "above" ? "above" : ""
+            }`}
+            onMouseEnter={clearSelectionHideTimer}
+            onMouseLeave={scheduleHideSelectionAction}
             style={{
               left: selectionActionPosition.left,
               top: selectionActionPosition.top,
@@ -2812,6 +2840,7 @@ export function ListeningPractice({
                   settings={audioSettings}
                   settingsPlacement="none"
                   seekRequest={seekRequest}
+                  showRate={false}
                   src={section.fullAudioUrl}
                   stopAtSeconds={stopAtSeconds}
                   title="Part audio"
@@ -2894,7 +2923,6 @@ export function ListeningPractice({
             <section className="pre-submit-audio-panel">
               {section.fullAudioUrl ? (
                 <AudioPlayer
-                  hasSelectedRate={hasSelectedRate}
                   loopSegment={activeLoopSegment}
                   onEnded={handleFullAudioEnded}
                   onPlayingChange={setIsFullAudioPlaying}
@@ -2904,6 +2932,7 @@ export function ListeningPractice({
                   seekRequest={seekRequest}
                   settings={audioSettings}
                   settingsPlacement="none"
+                  showRate={false}
                   src={section.fullAudioUrl}
                   stopAtSeconds={stopAtSeconds}
                   title="Part audio"
@@ -3190,11 +3219,11 @@ export function ListeningPractice({
                   {sentence.audioUrl ? (
                     <AudioPlayer
                       autoPlaySignal={sentenceAutoPlaySignals[sentence.id] ?? 0}
-                      hasSelectedRate={hasSelectedRate}
                       html5={false}
                       onEnded={() => handleSentenceAudioEnded(sentence)}
                       onSettingsChange={updateAudioSettings}
                       settings={audioSettings}
+                      showRate={false}
                       src={sentence.audioUrl}
                       title="单句音频"
                     />
