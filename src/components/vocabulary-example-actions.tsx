@@ -79,6 +79,8 @@ export function VocabularyExampleFavoriteButton({ example }: VocabularyExampleFa
         href:
           example.sourceType === "listening"
             ? `/listening/${example.sourceId}?mode=practice&review=1#transcript-sentence-${example.sentenceNo}`
+            : example.sourceType === "article"
+              ? `/articles/${example.sourceId}#bbc-sentence-${example.sentenceNo}`
             : undefined,
         id: example.id,
         savedAt: new Date().toISOString(),

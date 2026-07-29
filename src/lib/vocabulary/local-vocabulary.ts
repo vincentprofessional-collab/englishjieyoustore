@@ -1,6 +1,8 @@
 import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 
+import { supabase } from "@/lib/supabase/client";
+
 export type LocalVocabularyHint = {
   definitionCn: string;
   etymologySource: string;
@@ -108,6 +110,44 @@ type EcdictEntry = {
   phonetic: string;
   translation: string;
   word: string;
+};
+
+type DatabaseVocabularyEntry = {
+  definition_cn: string | null;
+  definition_en: string | null;
+  level: string | null;
+  part_of_speech: string | null;
+  phonetic: string | null;
+  uk_audio_url: string | null;
+  uk_phonetic: string | null;
+  us_audio_url: string | null;
+  us_phonetic: string | null;
+  word: string;
+  word_forms: unknown;
+};
+
+type FreeDictionaryDefinition = {
+  antonyms?: string[];
+  definition?: string;
+  example?: string;
+  synonyms?: string[];
+};
+
+type FreeDictionaryMeaning = {
+  antonyms?: string[];
+  definitions?: FreeDictionaryDefinition[];
+  partOfSpeech?: string;
+  synonyms?: string[];
+};
+
+type FreeDictionaryEntry = {
+  meanings?: FreeDictionaryMeaning[];
+  phonetic?: string;
+  phonetics?: Array<{
+    audio?: string;
+    text?: string;
+  }>;
+  word?: string;
 };
 
 export type VocabularySearchMatchType = "exact" | "prefix" | "fuzzy";
@@ -519,34 +559,6 @@ function parseEcdictExchange(exchange: string) {
     });
 }
 
-function looksLikeNoun(entry: FlatVocabularyEntry, definitionGroups?: VocabularyDefinitionGroup[]) {
-  return Boolean(
-    entry.plural ||
-      definitionGroups?.some((group) => group.partOfSpeech.toLowerCase().startsWith("n.")) ||
-      splitDefinition(entry.def ?? "").some((line) => /^n\./i.test(line)),
-  );
-}
-
-function getRegularPlural(word: string) {
-  if (!word || /\s/.test(word) || word.endsWith("s")) {
-    return "";
-  }
-
-  if (/[^aeiou]y$/i.test(word)) {
-    return `${word.slice(0, -1)}ies`;
-  }
-
-  if (/(s|x|z|ch|sh)$/i.test(word)) {
-    return `${word}es`;
-  }
-
-  if (/(f|fe)$/i.test(word)) {
-    return "";
-  }
-
-  return `${word}s`;
-}
-
 function collectEntryInflections(entry: FlatVocabularyEntry) {
   const rawInflections: VocabularyInflection[] = [
     { label: "三单", value: entry.thirdPersonSingular ?? entry.thirdPerson ?? "" },
@@ -807,15 +819,6 @@ function loadVocabularyEntries() {
     const primaryEtymologyReference = accumulator.etymologyReferences[0];
     const primaryRootReference = accumulator.rootReferences[0];
 
-    const hasPlural = accumulator.inflections.some((inflection) => inflection.label === "复数");
-    const plural = !hasPlural && looksLikeNoun({ def: accumulator.definitionLines.join("\n"), plural: "" }, definitionGroups)
-      ? getRegularPlural(accumulator.word)
-      : "";
-
-    if (plural) {
-      accumulator.inflections.push({ label: "复数", value: plural });
-    }
-
     return {
       definitionCn:
         definitionGroups.length > 0
@@ -984,6 +987,308 @@ function createEcdictVocabularyEntry(entry: EcdictEntry): LocalVocabularyEntry {
   };
 }
 
+function normalizeDatabaseWordForms(value: unknown) {
+  if (!value || typeof value !== "object" || Array.isArray(value)) {
+    return [];
+  }
+
+  return sortInflections(
+    Object.entries(value)
+      .flatMap(([label, rawValue]) => {
+        if (typeof rawValue !== "string") {
+          return [];
+        }
+
+        return rawValue
+          .split(";")
+          .map((item) => normalizeDefinitionText(item))
+          .filter(Boolean)
+          .map((item) => ({ label, value: item }));
+      }),
+  );
+}
+
+function createDatabaseVocabularyEntry(entry: DatabaseVocabularyEntry): LocalVocabularyEntry {
+  const definitionLines = (entry.definition_cn ?? "")
+    .replace(/\\n/g, "\n")
+    .split(/\n+/)
+    .map((line) => sanitizeDefinitionLine(line))
+    .filter(Boolean);
+  const definitionGroups = buildDefinitionGroups(definitionLines);
+  const phonetic = formatHintPhonetic(entry.phonetic ?? "");
+  const ukPhonetic = formatHintPhonetic(entry.uk_phonetic ?? "") || phonetic;
+  const usPhonetic = formatHintPhonetic(entry.us_phonetic ?? "") || phonetic;
+  const normalizedWord = normalizeLookupWord(entry.word);
+
+  return {
+    antonyms: [],
+    definitionCn:
+      definitionGroups.length > 0
+        ? definitionGroups.map((group) => group.text).join(" / ")
+        : definitionLines.join(" / "),
+    definitionGroups,
+    definitionLines:
+      definitionGroups.length > 0
+        ? definitionGroups.map((group) => group.text)
+        : definitionLines,
+    englishDefinitions: splitEcdictEnglishDefinitions(entry.definition_en ?? ""),
+    englishExamples: [],
+    etymologySource: "",
+    etymologyStory: "",
+    etymologyReferences: [],
+    formation: "",
+    inflections: normalizeDatabaseWordForms(entry.word_forms),
+    level: entry.level?.trim() ?? "",
+    normalizedWord,
+    partOfSpeech: entry.part_of_speech?.trim() || definitionGroups[0]?.partOfSpeech || "",
+    phonetic,
+    reviewNotes: [],
+    root: "",
+    rootReferences: [],
+    sourceRowNumber: 0,
+    synonyms: [],
+    ukAudioUrl: entry.uk_audio_url?.trim() || undefined,
+    ukPhonetic,
+    usAudioUrl: entry.us_audio_url?.trim() || undefined,
+    usPhonetic,
+    word: normalizedWord,
+  };
+}
+
+function mergeVocabularyEntries(
+  primary: LocalVocabularyEntry,
+  supplemental: LocalVocabularyEntry,
+): LocalVocabularyEntry {
+  const inflectionKeys = new Set<string>();
+  const inflections = [...primary.inflections, ...supplemental.inflections].filter(
+    (inflection) => {
+      const key = `${inflection.label}:${inflection.value}`.toLowerCase();
+
+      if (inflectionKeys.has(key)) {
+        return false;
+      }
+
+      inflectionKeys.add(key);
+      return true;
+    },
+  );
+
+  return {
+    ...supplemental,
+    ...primary,
+    antonyms: uniqueNormalizedValues([
+      ...primary.antonyms,
+      ...supplemental.antonyms,
+    ]),
+    englishDefinitions: uniqueNormalizedValues([
+      ...primary.englishDefinitions,
+      ...supplemental.englishDefinitions,
+    ]),
+    englishExamples: uniqueNormalizedValues([
+      ...primary.englishExamples,
+      ...supplemental.englishExamples,
+    ]),
+    inflections: sortInflections(inflections),
+    synonyms: uniqueNormalizedValues([
+      ...primary.synonyms,
+      ...supplemental.synonyms,
+    ]),
+    ukAudioUrl: primary.ukAudioUrl || supplemental.ukAudioUrl,
+    ukPhonetic: primary.ukPhonetic || supplemental.ukPhonetic,
+    usAudioUrl: primary.usAudioUrl || supplemental.usAudioUrl,
+    usPhonetic: primary.usPhonetic || supplemental.usPhonetic,
+  };
+}
+
+function normalizeDictionaryAudioUrl(value?: string) {
+  const audioUrl = value?.trim() ?? "";
+
+  if (audioUrl.startsWith("//")) {
+    return `https:${audioUrl}`;
+  }
+
+  return /^https:\/\//i.test(audioUrl) ? audioUrl : "";
+}
+
+function getFreeDictionaryPartOfSpeech(value?: string) {
+  const labels: Record<string, string> = {
+    adjective: "adj.",
+    adverb: "adv.",
+    conjunction: "conj.",
+    exclamation: "int.",
+    interjection: "int.",
+    noun: "n.",
+    preposition: "prep.",
+    pronoun: "pron.",
+    verb: "v.",
+  };
+
+  return labels[value?.trim().toLowerCase() ?? ""] ?? "";
+}
+
+function uniqueNormalizedValues(values: Array<string | undefined>) {
+  const seen = new Set<string>();
+
+  return values
+    .map((value) => normalizeDefinitionText(value ?? ""))
+    .filter((value) => {
+      const key = value.toLowerCase();
+
+      if (!value || seen.has(key)) {
+        return false;
+      }
+
+      seen.add(key);
+      return true;
+    });
+}
+
+function createFreeDictionaryVocabularyEntry(
+  responseEntry: FreeDictionaryEntry,
+  requestedWord: string,
+): LocalVocabularyEntry | null {
+  const normalizedWord = normalizeLookupWord(responseEntry.word ?? requestedWord);
+
+  if (!normalizedWord) {
+    return null;
+  }
+
+  const meanings = responseEntry.meanings ?? [];
+  const englishDefinitions = meanings.flatMap((meaning) => {
+    const partOfSpeech = getFreeDictionaryPartOfSpeech(meaning.partOfSpeech);
+
+    return (meaning.definitions ?? [])
+      .map((item) => normalizeDefinitionText(item.definition ?? ""))
+      .filter(Boolean)
+      .map((definition) => `${partOfSpeech} ${definition}`.trim());
+  });
+
+  if (englishDefinitions.length === 0) {
+    return null;
+  }
+
+  const phonetics = responseEntry.phonetics ?? [];
+  const phonetic = formatHintPhonetic(
+    responseEntry.phonetic ?? phonetics.find((item) => item.text?.trim())?.text ?? "",
+  );
+  const audioUrls = uniqueNormalizedValues(
+    phonetics.map((item) => normalizeDictionaryAudioUrl(item.audio)),
+  );
+  const ukAudioUrl =
+    audioUrls.find((url) => /(?:^|[\/_-])(?:uk|gb|british)(?:[\/_.-]|$)/i.test(url)) ??
+    audioUrls[0];
+  const usAudioUrl =
+    audioUrls.find((url) => /(?:^|[\/_-])(?:us|american)(?:[\/_.-]|$)/i.test(url)) ??
+    audioUrls.find((url) => url !== ukAudioUrl) ??
+    audioUrls[0];
+  const firstPartOfSpeech = getFreeDictionaryPartOfSpeech(meanings[0]?.partOfSpeech);
+  const englishExamples = uniqueNormalizedValues(
+    meanings.flatMap((meaning) => (meaning.definitions ?? []).map((item) => item.example)),
+  );
+  const synonyms = uniqueNormalizedValues(
+    meanings.flatMap((meaning) => [
+      ...(meaning.synonyms ?? []),
+      ...(meaning.definitions ?? []).flatMap((item) => item.synonyms ?? []),
+    ]),
+  );
+  const antonyms = uniqueNormalizedValues(
+    meanings.flatMap((meaning) => [
+      ...(meaning.antonyms ?? []),
+      ...(meaning.definitions ?? []).flatMap((item) => item.antonyms ?? []),
+    ]),
+  );
+  const fallbackDefinition = "暂缺中文释义，请参考下方英文释义。";
+
+  return {
+    antonyms,
+    definitionCn: fallbackDefinition,
+    definitionGroups: [],
+    definitionLines: [fallbackDefinition],
+    englishDefinitions,
+    englishExamples,
+    etymologySource: "",
+    etymologyStory: "",
+    etymologyReferences: [],
+    formation: "",
+    inflections: [],
+    level: "",
+    normalizedWord,
+    partOfSpeech: firstPartOfSpeech,
+    phonetic,
+    reviewNotes: [],
+    root: "",
+    rootReferences: [],
+    sourceRowNumber: 0,
+    synonyms,
+    ukAudioUrl,
+    ukPhonetic: phonetic,
+    usAudioUrl,
+    usPhonetic: phonetic,
+    word: normalizedWord,
+  };
+}
+
+async function getDatabaseVocabularyEntry(candidates: string[]) {
+  const { data, error } = await supabase
+    .from("vocabulary_entries")
+    .select(
+      "word, phonetic, uk_phonetic, us_phonetic, part_of_speech, definition_cn, definition_en, uk_audio_url, us_audio_url, level, word_forms",
+    )
+    .in("word", candidates);
+
+  if (error || !data) {
+    return null;
+  }
+
+  const rowsByWord = new Map(
+    (data as DatabaseVocabularyEntry[]).map((entry) => [normalizeLookupWord(entry.word), entry]),
+  );
+
+  for (const candidate of candidates) {
+    const entry = rowsByWord.get(candidate);
+
+    if (entry) {
+      return createDatabaseVocabularyEntry(entry);
+    }
+  }
+
+  return null;
+}
+
+async function getFreeDictionaryVocabularyEntry(candidates: string[]) {
+  for (const candidate of candidates) {
+    try {
+      const response = await fetch(
+        `https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(candidate)}`,
+        {
+          next: { revalidate: 60 * 60 * 24 * 30 },
+          signal: AbortSignal.timeout(6_000),
+        },
+      );
+
+      if (!response.ok) {
+        continue;
+      }
+
+      const entries = (await response.json()) as FreeDictionaryEntry[];
+      const exactEntry =
+        entries.find((entry) => normalizeLookupWord(entry.word ?? "") === candidate) ??
+        entries[0];
+      const vocabularyEntry = exactEntry
+        ? createFreeDictionaryVocabularyEntry(exactEntry, candidate)
+        : null;
+
+      if (vocabularyEntry) {
+        return vocabularyEntry;
+      }
+    } catch {
+      continue;
+    }
+  }
+
+  return null;
+}
+
 function getVocabularyLookupCandidates(value: string) {
   const normalizedWord = normalizeLookupWord(value);
   const candidates = new Set<string>();
@@ -1114,6 +1419,32 @@ export function getVocabularyEntry(word: string) {
   }
 
   return findVocabularyEntry(normalizedWord);
+}
+
+export async function getExtendedVocabularyEntry(word: string) {
+  const normalizedWord = normalizeLookupWord(word);
+
+  if (!normalizedWord) {
+    return null;
+  }
+
+  const candidates = getVocabularyLookupCandidates(normalizedWord);
+  const localEntry = getVocabularyEntry(normalizedWord);
+  const databaseEntry = await getDatabaseVocabularyEntry(candidates);
+
+  if (localEntry && databaseEntry) {
+    return mergeVocabularyEntries(localEntry, databaseEntry);
+  }
+
+  if (localEntry) {
+    return localEntry;
+  }
+
+  if (databaseEntry) {
+    return databaseEntry;
+  }
+
+  return getFreeDictionaryVocabularyEntry(candidates);
 }
 
 export function getVocabularyAutocompleteItems(): VocabularyAutocompleteItem[] {

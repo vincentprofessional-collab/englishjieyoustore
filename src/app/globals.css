@@ -5730,8 +5730,8 @@ h1 {
 }
 
 .speaking-hero-panel {
-  align-items: end;
-  grid-template-columns: minmax(0, 1fr) 250px;
+  align-items: center;
+  grid-template-columns: minmax(0, 1fr);
   min-height: 240px;
   padding-block: 42px;
 }
@@ -5740,55 +5740,12 @@ h1 {
   text-align: left;
 }
 
-.speaking-hero-panel .writing-hero-copy > p {
-  margin-top: 18px;
-  max-width: 660px;
-}
-
-.speaking-hero-kicker,
-.speaking-section-heading span,
 .speaking-library-hero > div > span {
   color: var(--accent);
   font-size: 11px;
   font-weight: 1000;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-}
-
-.speaking-hero-stats {
-  align-content: center;
-  background: var(--accent);
-  border: 1px solid var(--accent-dark);
-  border-radius: 22px;
-  color: #fff;
-  display: grid;
-  min-height: 150px;
-  padding: 24px;
-  position: relative;
-  z-index: 1;
-}
-
-.speaking-hero-stats strong {
-  font-family: Georgia, "Times New Roman", "Noto Serif SC", serif;
-  font-size: 58px;
-  font-weight: 500;
-  letter-spacing: -0.06em;
-  line-height: 0.9;
-}
-
-.speaking-hero-stats span {
-  font-size: 13px;
-  font-weight: 1000;
-  margin-top: 10px;
-}
-
-.speaking-hero-stats small {
-  border-top: 1px solid rgba(255, 255, 255, 0.28);
-  color: rgba(255, 255, 255, 0.78);
-  font-size: 10px;
-  line-height: 1.6;
-  margin-top: 16px;
-  padding-top: 14px;
 }
 
 .speaking-index-panel,
@@ -5813,12 +5770,26 @@ h1 {
   justify-content: space-between;
 }
 
-.speaking-section-heading h2 {
-  color: #111;
+.speaking-section-total {
+  align-items: baseline;
+  display: flex;
+  gap: 14px;
+  margin: 0;
+}
+
+.speaking-section-total strong {
+  color: var(--accent);
   font-family: Georgia, "Times New Roman", "Noto Serif SC", serif;
-  font-size: clamp(28px, 4vw, 42px);
-  letter-spacing: -0.035em;
-  margin: 7px 0 0;
+  font-size: clamp(44px, 5vw, 64px);
+  font-weight: 500;
+  letter-spacing: -0.06em;
+  line-height: 0.9;
+}
+
+.speaking-section-total span {
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 900;
 }
 
 .speaking-section-heading p {
@@ -5840,8 +5811,8 @@ h1 {
 .speaking-part-index a {
   color: var(--ink);
   display: grid;
-  min-height: 182px;
-  padding: 23px;
+  min-height: 224px;
+  padding: 30px;
   position: relative;
   text-decoration: none;
   transition:
@@ -5859,7 +5830,7 @@ h1 {
 }
 
 .speaking-part-index a > span {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 1000;
   letter-spacing: 0.09em;
   text-transform: uppercase;
@@ -5868,7 +5839,7 @@ h1 {
 .speaking-part-index a > strong {
   align-self: end;
   font-family: Georgia, "Times New Roman", "Noto Serif SC", serif;
-  font-size: 62px;
+  font-size: 74px;
   font-weight: 500;
   letter-spacing: -0.06em;
   line-height: 0.9;
@@ -5877,7 +5848,7 @@ h1 {
 
 .speaking-part-index a > small {
   color: var(--muted);
-  font-size: 11px;
+  font-size: 13px;
   margin-top: 14px;
 }
 
@@ -5890,8 +5861,8 @@ h1 {
   font-size: 20px;
   font-style: normal;
   position: absolute;
-  right: 23px;
-  top: 21px;
+  right: 30px;
+  top: 28px;
 }
 
 .speaking-library-breadcrumb {
@@ -6271,10 +6242,6 @@ h1 {
     grid-template-columns: 1fr;
   }
 
-  .speaking-hero-stats {
-    min-height: 0;
-  }
-
   .speaking-library-hero {
     align-items: flex-start;
     flex-direction: column;
@@ -6316,6 +6283,10 @@ h1 {
     flex-direction: column;
   }
 
+  .speaking-section-total {
+    gap: 10px;
+  }
+
   .speaking-section-heading p {
     text-align: left;
   }
@@ -6325,7 +6296,8 @@ h1 {
   }
 
   .speaking-part-index a {
-    min-height: 138px;
+    min-height: 164px;
+    padding: 26px;
   }
 
   .speaking-part-index a + a {
@@ -6334,7 +6306,7 @@ h1 {
   }
 
   .speaking-part-index a > strong {
-    font-size: 48px;
+    font-size: 56px;
     margin-top: 18px;
   }
 
@@ -15189,6 +15161,7 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
 .word-favorite-star.word-favorite-star,
 .favorite-library-star.favorite-library-star,
 .vocabulary-favorite-star.vocabulary-favorite-star,
+.vocabulary-example-audio-button.vocabulary-example-audio-button,
 .vocabulary-example-star.vocabulary-example-star,
 .writing-vocabulary-favorite.writing-vocabulary-favorite {
   align-items: center;
@@ -15220,6 +15193,7 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
 .word-favorite-star.word-favorite-star:hover,
 .favorite-library-star.favorite-library-star:hover,
 .vocabulary-favorite-star.vocabulary-favorite-star:hover,
+.vocabulary-example-audio-button.vocabulary-example-audio-button:hover,
 .vocabulary-example-star.vocabulary-example-star:hover,
 .writing-vocabulary-favorite.writing-vocabulary-favorite:hover {
   border-color: var(--gold);

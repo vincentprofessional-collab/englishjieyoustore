@@ -7,7 +7,7 @@ import { VocabularyFavoriteButton } from "@/components/vocabulary-favorite-butto
 import { VocabularyInlinePronunciation } from "@/components/vocabulary-pronunciation";
 import { VocabularyShareButton } from "@/components/vocabulary-share-button";
 import {
-  getVocabularyEntry,
+  getExtendedVocabularyEntry,
   getVocabularyFormationParts,
   type LocalVocabularyEntry,
   type VocabularyFormationPart,
@@ -292,13 +292,19 @@ export default async function VocabularyWordPage({
   params: Promise<{ word: string }>;
 }) {
   const { word } = await params;
-  const entry = getVocabularyEntry(decodeURIComponent(word));
+  const entry = await getExtendedVocabularyEntry(decodeURIComponent(word));
 
   if (!entry) {
     notFound();
   }
 
-  const [usageExamples] = await Promise.all([getVocabularyUsageExamples(entry.word)]);
+  const [usageExamples] = await Promise.all([
+    getVocabularyUsageExamples(
+      entry.word,
+      5,
+      entry.inflections.map((inflection) => inflection.value),
+    ),
+  ]);
   const phrases = getVocabularyPhraseMatches(entry.word);
   const formationParts = getVocabularyFormationParts(entry);
 

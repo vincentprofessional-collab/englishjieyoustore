@@ -1,3 +1,4 @@
+import { BBC_ARTICLES } from "@/lib/articles/bbc";
 import { supabase } from "@/lib/supabase/client";
 import { getPublicStorageUrl } from "@/lib/supabase/storage";
 import { normalizeLookupWord } from "@/lib/vocabulary/local-vocabulary";
@@ -54,7 +55,7 @@ function isConsonantVowelConsonant(word: string) {
   return /^[a-z]*[^aeiou][aeiou][^aeiouwxy]$/i.test(word);
 }
 
-function getExampleMatchForms(word: string) {
+function getExampleMatchForms(word: string, explicitForms: string[] = []) {
   const normalizedWord = normalizeLookupWord(word);
   const forms = new Set<string>();
 
@@ -63,6 +64,13 @@ function getExampleMatchForms(word: string) {
   }
 
   forms.add(normalizedWord);
+  for (const form of explicitForms) {
+    const normalizedForm = normalizeLookupWord(form);
+
+    if (normalizedForm) {
+      forms.add(normalizedForm);
+    }
+  }
 
   if (normalizedWord.length <= 2) {
     return forms;
@@ -100,31 +108,93 @@ function matchesUsageExampleWord(text: string, wordForms: Set<string>) {
   return tokens.some((token) => wordForms.has(normalizeLookupWord(token)));
 }
 
-export async function getVocabularyUsageExamples(word: string, limit = 8) {
-  const normalizedWord = normalizeLookupWord(word);
-  const wordForms = getExampleMatchForms(normalizedWord);
+function getBbcUsageExamples(wordForms: Set<string>, limit: number) {
+  const examples: VocabularyUsageExample[] = [];
+  const seenSentences = new Set<string>();
 
-  if (!normalizedWord) {
+  for (
+    let articleIndex = BBC_ARTICLES.length - 1;
+    articleIndex >= 0 && examples.length < limit;
+    articleIndex -= 1
+  ) {
+    const article = BBC_ARTICLES[articleIndex];
+
+    for (const sentence of article.sentences ?? []) {
+      const sentenceKey = sentence.english.toLowerCase().replace(/\s+/g, " ").trim();
+
+      if (
+        !sentence.audioUrl ||
+        seenSentences.has(sentenceKey) ||
+        !matchesUsageExampleWord(sentence.english, wordForms)
+      ) {
+        continue;
+      }
+
+      seenSentences.add(sentenceKey);
+      examples.push({
+        audioUrl: sentence.audioUrl,
+        bookCode: "BBC",
+        chineseText: sentence.chinese,
+        englishText: sentence.english,
+        id: `bbc:${article.id}:sentence:${sentence.sentenceNo}`,
+        sentenceNo: sentence.sentenceNo,
+        sourceId: article.id,
+        sourceTitle: `BBC ${article.year} · ${article.title}`,
+        sourceType: "article",
+        testNo: 0,
+      });
+
+      if (examples.length >= limit) {
+        break;
+      }
+    }
+  }
+
+  return examples;
+}
+
+export async function getVocabularyUsageExamples(
+  word: string,
+  limit = 5,
+  explicitForms: string[] = [],
+) {
+  const normalizedWord = normalizeLookupWord(word);
+  const wordForms = getExampleMatchForms(normalizedWord, explicitForms);
+  const maximumExamples = Math.min(Math.max(limit, 0), 5);
+
+  if (!normalizedWord || maximumExamples === 0) {
     return [];
+  }
+
+  const bbcExamples = getBbcUsageExamples(wordForms, maximumExamples);
+  const listeningLimit = maximumExamples - bbcExamples.length;
+
+  if (listeningLimit === 0) {
+    return bbcExamples;
   }
 
   const { data: transcriptRows, error: transcriptError } = await supabase
     .from("transcript_sentences")
     .select("id,section_id,sentence_no,english_text,chinese_text,audio_path")
-    .ilike("english_text", getWordSearchPattern(normalizedWord))
+    .or(
+      [...wordForms]
+        .slice(0, 12)
+        .map((form) => `english_text.ilike.${getWordSearchPattern(form)}`)
+        .join(","),
+    )
     .order("sentence_no", { ascending: true })
-    .limit(limit * 6);
+    .limit(listeningLimit * 6);
 
   if (transcriptError || !transcriptRows?.length) {
-    return [];
+    return bbcExamples;
   }
 
   const sentences = (transcriptRows as TranscriptSentenceRow[])
     .filter((sentence) => matchesUsageExampleWord(sentence.english_text, wordForms))
-    .slice(0, limit);
+    .slice(0, listeningLimit);
 
   if (sentences.length === 0) {
-    return [];
+    return bbcExamples;
   }
 
   const sectionIds = [...new Set(sentences.map((sentence) => sentence.section_id).filter(Boolean))];
@@ -148,7 +218,7 @@ export async function getVocabularyUsageExamples(word: string, limit = 8) {
     .in("id", sectionIds);
   const sectionMap = new Map((sectionRows as SectionRow[] | null | undefined)?.map((section) => [section.id, section]) ?? []);
 
-  return sentences.map((sentence) => {
+  const listeningExamples = sentences.map((sentence) => {
     const section = sectionMap.get(sentence.section_id);
     const test = pickOne(section?.tests);
     const book = pickOne(test?.content_books);
@@ -173,4 +243,6 @@ export async function getVocabularyUsageExamples(word: string, limit = 8) {
       testNo: test?.test_no ?? 0,
     };
   });
+
+  return [...bbcExamples, ...listeningExamples].slice(0, maximumExamples);
 }
