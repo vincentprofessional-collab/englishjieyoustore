@@ -570,10 +570,15 @@ function RawQuestionText({
   const questionNumbers = questions.map((question) => question.number);
   const sections = getRawQuestionSections(text, questionNumbers);
 
-  function renderFillInput(number: number) {
+  function renderFillInput(number: number, options: { showNumber?: boolean } = {}) {
+    const showNumber = options.showNumber ?? true;
+
     return (
-      <span className="reading-fill-input-wrap reading-raw-inline-input" id={`reading-question-${number}`}>
-        <b>{number}</b>
+      <span
+        className={`reading-fill-input-wrap reading-raw-inline-input ${showNumber ? "" : "no-number"}`}
+        id={`reading-question-${number}`}
+      >
+        {showNumber ? <b>{number}</b> : null}
         <input
           aria-label={`Question ${number}`}
           autoComplete="off"
@@ -784,7 +789,13 @@ function RawQuestionText({
               ),
             )}
             {section.questions.map((question) => (
-              <article className="reading-raw-numbered-line" id={`reading-question-${question.number}`} key={question.number}>
+              <article
+                className={`reading-raw-numbered-line ${
+                  section.mode === "choice" && question.options.length > 0 ? "has-options" : "has-fill"
+                }`}
+                id={`reading-question-${question.number}`}
+                key={question.number}
+              >
                 <b>{question.number}</b>
                 <span>{question.text}</span>
                 {section.mode === "choice" && question.options.length > 0 ? (
@@ -803,7 +814,7 @@ function RawQuestionText({
                       </label>
                     ))}
                   </div>
-                ) : renderFillInput(question.number)}
+                ) : renderFillInput(question.number, { showNumber: false })}
               </article>
             ))}
           </section>
