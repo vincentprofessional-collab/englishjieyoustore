@@ -23,6 +23,12 @@ const knownPassageTitles = new Map([
   ["cambridge-4-test-4-part1", "How much higher? How much faster?"],
   ["cambridge-4-test-4-part2", "The Nature and Aims of Archaeology"],
   ["cambridge-4-test-4-part3", "The Problem of Scarce Resources"],
+  ["cambridge-8-test-2-part2", "The Little Ice Age"],
+  ["cambridge-8-test-3-part3", "How does the biological clock tick?"],
+  ["cambridge-8-test-4-part1", "Land of the Rising Sum"],
+  ["cambridge-9-test-1-part3", "The history of the tortoise"],
+  ["cambridge-11-test-4-part1", "Research using twins"],
+  ["cambridge-16-test-1-part2", "The Step Pyramid of Djoser"],
 ]);
 const knownPassageSubtitles = new Map([
   ["cambridge-4-test-2-part1", "Many minority languages are on the danger list"],
@@ -63,6 +69,18 @@ const knownPassageTextReplacements = new Map([
       [/^\s*The\s+Problem\s+of\s*$/gim, ""],
       [/^\s*Scarce\s+Resources\s*$/gim, ""],
     ],
+  ],
+  [
+    "cambridge-8-test-2-part2",
+    [[/^[\s\S]*?\n\s*Test\s+2\s*\n(?=\s*A\s+This book)/i, ""]],
+  ],
+  [
+    "cambridge-8-test-3-part3",
+    [[/^[\s\S]*?(?=HOW DOES THE BIOLOGICAL CLOCK TICK\?)/i, ""]],
+  ],
+  [
+    "cambridge-8-test-4-part1",
+    [[/^[\s\S]*?(?=LAND OF THE RISING SUM)/i, ""]],
   ],
 ]);
 
@@ -107,6 +125,10 @@ Choose NO MORE THAN THREE WORDS from Reading Passage 2 for each answer.
 
 function cleanOcrTextArtifacts(value) {
   return value
+    .replace(/「/g, "r")
+    .replace(/」/g, "")
+    .replace(/仔/g, "ff")
+    .replace(/，/g, ",")
     .replace(/(^|[\s"'‘“])~t\s+the\b/g, "$1At the")
     .replace(/(^|[\s"'‘“])~\s+lot\b/g, "$1a lot")
     .replace(/\bt~\s*er\s*apists\b/gi, "therapists")
@@ -833,7 +855,7 @@ function parseAnswerKey(rawAnswerText) {
   }
 
   function cleanAnswerCandidate(value) {
-    return value
+    return cleanOcrTextArtifacts(value)
       .replace(/^[\s).:>°·•;|]+/, "")
       .replace(/[\s;|]+$/, "")
       .trim();
