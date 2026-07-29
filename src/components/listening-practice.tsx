@@ -1473,41 +1473,12 @@ export function ListeningPractice({
     syncWrongQuestionFavorites(section, answers);
     setSubmitted(true);
     if (isFullscreen) {
-      void exitListeningFullscreen();
+      setIsFullscreen(false);
     }
-  }
-
-  async function enterListeningFullscreen() {
-    setIsFullscreen(true);
-
-    if (!document.fullscreenElement && pageRef.current?.requestFullscreen) {
-      try {
-        await pageRef.current.requestFullscreen();
-      } catch {
-        // Keep the CSS fullscreen fallback if native fullscreen is blocked.
-      }
-    }
-  }
-
-  async function exitListeningFullscreen() {
-    if (document.fullscreenElement) {
-      try {
-        await document.exitFullscreen();
-      } catch {
-        // CSS fullscreen fallback will still be cleared below.
-      }
-    }
-
-    setIsFullscreen(false);
   }
 
   function toggleListeningFullscreen() {
-    if (isFullscreen) {
-      void exitListeningFullscreen();
-      return;
-    }
-
-    void enterListeningFullscreen();
+    setIsFullscreen((current) => !current);
   }
 
   function toggleFavoriteSentence(sentence: ListeningSentence) {
@@ -2485,17 +2456,6 @@ export function ListeningPractice({
       document.documentElement.classList.remove("ielts-fullscreen-active");
     };
   }, [isFullscreen]);
-
-  useEffect(() => {
-    function handleFullscreenChange() {
-      if (!document.fullscreenElement) {
-        setIsFullscreen(false);
-      }
-    }
-
-    document.addEventListener("fullscreenchange", handleFullscreenChange);
-    return () => document.removeEventListener("fullscreenchange", handleFullscreenChange);
-  }, []);
 
   useEffect(() => {
     if (!selectedText || !selectionActionPosition) return;
