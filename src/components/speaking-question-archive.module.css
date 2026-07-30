@@ -1,0 +1,15 @@
+.answerLink {
+  align-items: center;
+  color: #0f6b4f;
+  display: inline-flex;
+  font-size: 13px;
+  font-weight: 900;
+  gap: 6px;
+  margin-top: 8px;
+  text-decoration: none;
+}
+
+.answerLink:hover {
+  color: #9b6b1a;
+  text-decoration: underline;
+}

@@ -1,0 +1,302 @@
+.page {
+  display: grid;
+  gap: 24px;
+  padding: 18px 0 48px;
+}
+
+.breadcrumb {
+  align-items: center;
+  color: #68746b;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 13px;
+  font-weight: 800;
+  gap: 8px;
+  letter-spacing: 0.04em;
+}
+
+.breadcrumb a {
+  color: #0f6b4f;
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.hero,
+.section {
+  background: #fffdf8;
+  border: 1px solid rgba(228, 216, 189, 0.96);
+  border-radius: 24px;
+  box-shadow: 0 16px 36px rgba(34, 54, 43, 0.08);
+}
+
+.hero {
+  background:
+    radial-gradient(circle at top right, rgba(208, 166, 77, 0.2), transparent 28rem),
+    linear-gradient(135deg, #f2f4ed 0%, #fffdf8 70%);
+  overflow: hidden;
+  padding: clamp(26px, 5vw, 52px);
+}
+
+.hero > span {
+  color: #0f6b4f;
+  display: block;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+}
+
+.hero h1 {
+  color: #1e3126;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(30px, 5vw, 52px);
+  letter-spacing: -0.045em;
+  line-height: 1.08;
+  margin: 14px 0 10px;
+}
+
+.hero > p {
+  color: #5b675f;
+  font-size: 17px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.hero dl {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 28px 0 0;
+}
+
+.hero dl > div {
+  background: rgba(255, 253, 248, 0.82);
+  border: 1px solid rgba(190, 177, 144, 0.56);
+  border-radius: 14px;
+  min-width: 118px;
+  padding: 11px 14px;
+}
+
+.hero dt {
+  color: #7b877d;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.hero dd {
+  color: #203529;
+  font-size: 14px;
+  font-weight: 900;
+  margin: 4px 0 0;
+}
+
+.section {
+  padding: clamp(22px, 4vw, 34px);
+}
+
+.section h2 {
+  color: #173f2f;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(23px, 3vw, 30px);
+  letter-spacing: -0.035em;
+  margin: 0 0 15px;
+}
+
+.section > p {
+  color: #34433a;
+  font-size: 16px;
+  line-height: 1.8;
+  margin: 0;
+}
+
+.frames {
+  display: grid;
+  gap: 10px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.frames li {
+  background: #f3f6f0;
+  border-left: 3px solid #d0a64d;
+  color: #274837;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 16px;
+  line-height: 1.55;
+  padding: 12px 14px;
+}
+
+.vocabulary {
+  display: grid;
+  gap: 0;
+  margin: 0;
+}
+
+.vocabulary > div {
+  align-items: baseline;
+  border-top: 1px solid #e9e1cd;
+  display: grid;
+  gap: 14px;
+  grid-template-columns: minmax(155px, 0.85fr) minmax(0, 2fr);
+  padding: 14px 0;
+}
+
+.vocabulary > div:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.vocabulary > div:last-child {
+  padding-bottom: 0;
+}
+
+.vocabulary dt {
+  color: #174d39;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.vocabulary dd {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px 12px;
+  margin: 0;
+}
+
+.vocabulary dd strong {
+  color: #313f36;
+  font-size: 14px;
+}
+
+.vocabulary dd span {
+  color: #748077;
+  font-size: 14px;
+}
+
+.answerSection {
+  background: linear-gradient(145deg, #173f2f 0%, #245542 100%);
+  border-color: #173f2f;
+}
+
+.answerSection h2 {
+  color: #f6e8c2;
+}
+
+.answer {
+  display: grid;
+  gap: 18px;
+}
+
+.answer p {
+  color: #f7f4ea;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(17px, 2.3vw, 19px);
+  line-height: 1.82;
+  margin: 0;
+}
+
+.translationBlock,
+.audioBlock {
+  border-top: 1px solid rgba(246, 232, 194, 0.26);
+  margin-top: 28px;
+  padding-top: 24px;
+}
+
+.translationBlock h3,
+.audioBlock h3 {
+  color: #f6e8c2;
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  margin: 0 0 14px;
+}
+
+.translation {
+  display: grid;
+  gap: 16px;
+}
+
+.translation p {
+  color: rgba(247, 244, 234, 0.86);
+  font-size: 16px;
+  line-height: 1.85;
+  margin: 0;
+}
+
+.audioBlock audio {
+  display: block;
+  width: 100%;
+}
+
+.scoreNotes {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.scoreNotes > div {
+  background: #f4f5ef;
+  border: 1px solid #e4dcc7;
+  border-radius: 14px;
+  padding: 15px;
+}
+
+.scoreNotes span {
+  color: #ba8a31;
+  display: block;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.scoreNotes strong {
+  color: #1e4d39;
+  display: block;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.scoreNotes p {
+  color: #627168;
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 8px 0 0;
+}
+
+@media (max-width: 720px) {
+  .page {
+    gap: 18px;
+    padding-top: 10px;
+  }
+
+  .hero,
+  .section {
+    border-radius: 18px;
+  }
+
+  .hero dl {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .hero dl > div {
+    min-width: 0;
+    padding: 10px;
+  }
+
+  .hero dd {
+    font-size: 12px;
+  }
+
+  .vocabulary > div {
+    gap: 5px;
+    grid-template-columns: 1fr;
+  }
+
+  .scoreNotes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

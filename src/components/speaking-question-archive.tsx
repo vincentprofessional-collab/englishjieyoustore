@@ -1,8 +1,11 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState } from "react";
+import { getSpeakingModelAnswer } from "@/data/ielts/speaking-model-answers";
 import { SpeakingQuestionFavoriteButton } from "@/components/speaking-question-favorite-button";
 import type { SpeakingPart, SpeakingQuestion } from "@/lib/ielts/speaking";
+import styles from "./speaking-question-archive.module.css";
 
 type ArchiveView = "all" | "latest";
 
@@ -103,26 +106,40 @@ export function SpeakingQuestionArchive({ part }: { part: SpeakingPart }) {
               </header>
 
               <ol>
-                {group.questions.map((question, questionIndex) => (
-                  <li id={question.id} key={question.id}>
-                    <span className="speaking-question-number">
-                      {String(questionIndex + 1).padStart(2, "0")}
-                    </span>
-                    <div className="speaking-question-copy">
-                      <strong>{question.question}</strong>
-                      <span>{question.translation}</span>
-                      {question.followUp ? <small>常见追问：{question.followUp}</small> : null}
-                    </div>
-                    <div className="speaking-question-actions">
-                      <span>{question.year}</span>
-                      <SpeakingQuestionFavoriteButton
-                        partId={part.id}
-                        partLabel={part.label}
-                        question={question}
-                      />
-                    </div>
-                  </li>
-                ))}
+                {group.questions.map((question, questionIndex) => {
+                  const hasModelAnswer = Boolean(getSpeakingModelAnswer(question.id));
+
+                  return (
+                    <li id={question.id} key={question.id}>
+                      <span className="speaking-question-number">
+                        {String(questionIndex + 1).padStart(2, "0")}
+                      </span>
+                      <div className="speaking-question-copy">
+                        <strong>{question.question}</strong>
+                        <span>{question.translation}</span>
+                        {question.followUp ? (
+                          <small>常见追问：{question.followUp}</small>
+                        ) : null}
+                        {hasModelAnswer ? (
+                          <Link
+                            className={styles.answerLink}
+                            href={`/speaking/${part.id}/${question.id}`}
+                          >
+                            查看 7 分范文 <span aria-hidden="true">→</span>
+                          </Link>
+                        ) : null}
+                      </div>
+                      <div className="speaking-question-actions">
+                        <span>{question.year}</span>
+                        <SpeakingQuestionFavoriteButton
+                          partId={part.id}
+                          partLabel={part.label}
+                          question={question}
+                        />
+                      </div>
+                    </li>
+                  );
+                })}
               </ol>
             </section>
           ))}

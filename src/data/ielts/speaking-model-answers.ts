@@ -1,0 +1,470 @@
+import type { SpeakingPartId } from "@/lib/ielts/speaking";
+
+export type SpeakingVocabulary = {
+  note: string;
+  phrase: string;
+  translation: string;
+};
+
+export type SpeakingModelAnswer = {
+  answer: string[];
+  answerTranslation: string[];
+  approach: string;
+  audioUrl?: string;
+  frames: string[];
+  partId: SpeakingPartId;
+  questionId: string;
+  vocabulary: SpeakingVocabulary[];
+};
+
+export type SpeakingScoreNote = {
+  code: string;
+  label: string;
+  note: string;
+};
+
+export const speakingModelAnswers = [
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-001",
+    approach: "先交代住房类型，再补一个具体生活细节，最后说社区氛围；答案会比单纯罗列设施更自然。",
+    frames: [
+      "It’s not fancy, but it’s practical because ...",
+      "My favourite room is probably ..., where I can ...",
+      "The best thing about the neighbourhood is that ...",
+      "I wouldn’t call it ..., but it feels ...",
+    ],
+    vocabulary: [
+      { phrase: "a small flat", translation: "小公寓", note: "比 house 更贴近城市生活" },
+      { phrase: "within walking distance", translation: "步行可达", note: "说交通便利很自然" },
+      { phrase: "feel less boxed-in", translation: "没那么憋闷", note: "形容居住空间感" },
+      { phrase: "wind down", translation: "放松下来", note: "适合描述晚上在家状态" },
+      { phrase: "lived-in", translation: "有生活气息的", note: "比 comfortable 更有画面" },
+    ],
+    answer: [
+      "Well, at the moment I live in a small flat with my parents in a fairly quiet neighbourhood. It’s not fancy, but it’s practical, because the metro is about ten minutes away on foot and there’s a little park nearby, so the area feels less boxed-in. My favourite room is probably the living room, because that’s where we eat, chat and, you know, wind down in the evening. I wouldn’t call it my dream home, but it feels comfortable and lived-in.",
+    ],
+    answerTranslation: [
+      "嗯，我目前和父母住在一个相当安静的社区里，房子是一套小公寓。它谈不上豪华，但很实用，因为步行到地铁站大约只要十分钟，附近还有一个小公园，所以住在这里不会觉得太憋闷。我最喜欢的房间大概是客厅，因为我们会在那里吃饭、聊天，而且晚上也会在那里放松一下。我不会说这是我梦想中的家，但它住起来很舒适，也很有生活气息。",
+    ],
+    audioUrl: "/speaking/audio/speaking-part-1-001.mp3",
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-002",
+    approach: "家乡题用“位置—日常感受—一个变化”回答；不要把它讲成旅游宣传片。",
+    frames: [
+      "I’m originally from ..., which is ...",
+      "What I like most is that ...",
+      "It has changed quite a bit, especially ...",
+      "So it feels more ..., but a little less ...",
+    ],
+    vocabulary: [
+      { phrase: "a medium-sized city", translation: "中等规模城市", note: "避免 big 或 small 太笼统" },
+      { phrase: "laid-back", translation: "节奏轻松的", note: "形容城市氛围" },
+      { phrase: "local character", translation: "地方特色", note: "适合讲变化后的遗憾" },
+      { phrase: "new shopping complexes", translation: "新商业综合体", note: "描述城市发展" },
+      { phrase: "still has its charm", translation: "仍然有魅力", note: "自然收尾" },
+    ],
+    answer: [
+      "I’m originally from Suzhou, which is a medium-sized city near Shanghai. It’s famous for gardens and canals, but to be honest, what I like most is the slower pace. People can still find quiet streets, small noodle shops and old neighbourhoods if they know where to look. It has changed quite a bit, especially with new shopping complexes and metro lines. So it feels more convenient now, but maybe a little less local than it used to be.",
+    ],
+    answerTranslation: [
+      "我来自苏州，那是一座位于上海附近的中等规模城市。苏州以园林和河道闻名，但说实话，我最喜欢的是那里比较慢的生活节奏。只要知道去哪里找，人们仍然能发现安静的街道、小面馆和老社区。这座城市已经发生了很大变化，尤其是新建了不少商业综合体和地铁线路。所以现在生活确实更方便了，不过地方特色可能没有以前那么浓了。",
+    ],
+    audioUrl: "/speaking/audio/speaking-part-1-002.mp3",
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-003",
+    approach: "先说明身份，再说选择原因和真实感受。适度承认困难，比一味夸赞专业或工作更像真人。",
+    frames: [
+      "At the moment, I’m studying/working in ...",
+      "I chose it mainly because ...",
+      "What I enjoy most is ...",
+      "It can be ..., but it gives me ...",
+    ],
+    vocabulary: [
+      { phrase: "at the moment", translation: "目前", note: "Part 1 开头很自然" },
+      { phrase: "hands-on", translation: "实践性强的", note: "形容课程或工作" },
+      { phrase: "a steep learning curve", translation: "学习曲线陡", note: "说挑战很地道" },
+      { phrase: "pick up useful skills", translation: "学到实用技能", note: "比 learn things 更准确" },
+      { phrase: "keep me motivated", translation: "让我有动力", note: "解释喜欢的原因" },
+    ],
+    answer: [
+      "At the moment, I’m a university student, and I’m studying media and communication. I chose it mainly because I’ve always been interested in how people tell stories online, especially through short videos and social media. Some modules are quite theoretical, which can be a bit dry, but the practical projects are hands-on and genuinely useful. I feel I’m picking up skills I can actually use later, so that keeps me motivated.",
+    ],
+    answerTranslation: [
+      "目前我是一名大学生，学习的是媒体与传播。我选择这个专业，主要是因为我一直很感兴趣人们如何在网上讲故事，尤其是如何通过短视频和社交媒体来表达。有些课程理论性很强，学起来可能有点枯燥，不过实践项目动手性很强，也确实很有用。我觉得自己正在掌握一些以后真正能用得上的技能，所以这让我一直很有动力。",
+    ],
+    audioUrl: "/speaking/audio/speaking-part-1-003.mp3",
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-004",
+    approach: "把 walking 说成日常习惯，而不是运动项目。地点和时段一具体，答案马上变得生活化。",
+    frames: [
+      "I do walk quite a bit, especially when ...",
+      "I’m not doing it as a workout; it’s more ...",
+      "If I have a choice, I prefer walking in ...",
+      "It helps me clear my head after ...",
+    ],
+    vocabulary: [
+      { phrase: "clear my head", translation: "让头脑清醒", note: "散步题高频表达" },
+      { phrase: "after dinner", translation: "晚饭后", note: "简单但生活化" },
+      { phrase: "a proper workout", translation: "正经锻炼", note: "和散步形成对比" },
+      { phrase: "tree-lined streets", translation: "两旁有树的街道", note: "地点更有画面" },
+      { phrase: "get some fresh air", translation: "透透气", note: "口语自然" },
+    ],
+    answer: [
+      "Yes, I do walk quite a bit, especially after dinner. I’m not doing it as a proper workout; it’s more a way to get some fresh air and clear my head. On weekdays, I usually walk around the neighbourhood or to the metro station. If I have a choice, though, I prefer walking in a park or along tree-lined streets, because it feels quieter and I can actually slow down for a while.",
+    ],
+    answerTranslation: [
+      "是的，我确实经常走路，尤其是在晚饭后。我并不是把它当成正式锻炼，更多只是想透透气、清醒一下头脑。工作日里，我一般会在小区附近走走，或者步行去地铁站。不过如果可以选择，我更喜欢在公园里或绿树成荫的街道上散步，因为那里更安静，我也能真正放慢脚步一会儿。",
+    ],
+    audioUrl: "/speaking/audio/speaking-part-1-004.mp3",
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-005",
+    approach: "动物题用一只具体的动物和一个小片段来回答。即使现在没有养宠物，也可以讲过去的经历或未来计划。",
+    frames: [
+      "I don’t have a pet at the moment, mainly because ...",
+      "I’ve always been quite fond of ...",
+      "What I liked about it was that ...",
+      "I’d love to have one again once ...",
+    ],
+    vocabulary: [
+      { phrase: "be fond of", translation: "很喜欢", note: "比 like 更自然" },
+      { phrase: "keep someone company", translation: "陪伴某人", note: "讲宠物价值很贴切" },
+      { phrase: "a proper commitment", translation: "需要认真承担的责任", note: "解释暂不养宠物" },
+      { phrase: "a settled routine", translation: "稳定的生活规律", note: "生活类话题通用" },
+      { phrase: "a ginger cat", translation: "橘猫", note: "具体细节让答案更鲜活" },
+    ],
+    answer: [
+      "I don’t have a pet at the moment, mainly because my flat is fairly small and nobody is home all day, so it wouldn’t be fair to the animal. But I grew up with a ginger cat called Milo, so I’ve always been quite fond of cats. He wasn’t particularly affectionate, to be honest, but he would sit beside me while I was doing homework, which was oddly comforting. I’d love to have a cat again one day, once I have a bit more space and a more settled routine.",
+    ],
+    answerTranslation: [
+      "我目前没有养宠物，主要是因为我的公寓比较小，而且白天家里一直没人，所以对动物来说不太公平。不过我小时候和一只叫 Milo 的橘猫一起长大，因此我一直都很喜欢猫。说实话，它并不算特别黏人，但我做作业时它会坐在旁边，不知为什么，那种陪伴让人很安心。等以后住的地方宽敞一些、生活作息也更稳定时，我很想再养一只猫。",
+    ],
+    audioUrl: "/speaking/audio/speaking-part-1-005.mp3",
+  },
+  {
+    partId: "part-2",
+    questionId: "speaking-part-2-001",
+    approach: "按“期待—落差—处理结果—感受”推进。重点不是抱怨，而是说明对方为什么没有解决问题。",
+    frames: [
+      "The experience that jumps to mind happened when ...",
+      "What annoyed me wasn’t just ..., but the way ...",
+      "I wasn’t expecting ..., I just wanted ...",
+      "It left a bad taste in my mouth because ...",
+    ],
+    vocabulary: [
+      { phrase: "a faulty product", translation: "有问题的产品", note: "投诉和售后题通用" },
+      { phrase: "customer service", translation: "客服", note: "服务业核心词" },
+      { phrase: "a canned reply", translation: "模板回复", note: "形容敷衍回复" },
+      { phrase: "a full refund", translation: "全额退款", note: "投诉结果常用" },
+      { phrase: "leave a bad taste in my mouth", translation: "留下很差印象", note: "自然表达不满" },
+    ],
+    answer: [
+      "Well, the bad service that jumps to mind happened last year, when I bought a pair of wireless earphones from an online shop. The website looked pretty professional, and the delivery was quick, so at first I thought everything had gone smoothly.",
+      "But when I opened the box, one earbud wouldn’t charge at all. I checked the cable, reset the case, watched a couple of troubleshooting videos, you know, the usual things people do before admitting the product is faulty. Then I contacted customer service and expected a simple exchange.",
+      "What annoyed me wasn’t just the faulty product, but the way they handled the complaint. Every time I sent a message, a different person replied, and most of the answers sounded like canned replies. One person told me to read the returns policy; another asked me to send a video, which I had already done.",
+      "In the end, after almost two weeks, they agreed to give me a full refund. To be honest, I wasn’t expecting royal treatment. I just wanted someone to say, ‘Sorry, we’ll sort this out.’ The experience left a bad taste in my mouth because the product problem was small, but the poor communication made it feel much worse.",
+    ],
+    answerTranslation: [
+      "嗯，我最先想到的一次糟糕服务发生在去年，当时我从一家网店买了一副无线耳机。网站看起来很专业，送货也很快，所以一开始我以为整个过程都很顺利。",
+      "但打开包装后，我发现其中一只耳机完全充不进电。我检查了充电线，重置了充电盒，还看了几个故障排查视频，你知道，就是人们在承认产品确实坏了之前通常会做的那些事。然后我联系了客服，本以为简单换货就可以了。",
+      "让我恼火的不只是产品有问题，还有他们处理投诉的方式。每次我发消息，回复的都是不同的人，而且大多数答案听起来都像模板回复。一个人让我阅读退货政策，另一个人又让我发视频，可我明明已经发过了。",
+      "最后，差不多过了两周，他们才同意给我全额退款。说实话，我并没有期待什么贵宾待遇。我只是希望有人能说一句：“抱歉，我们会把这件事处理好。”这次经历给我留下了很差的印象，因为产品本身的问题并不大，但糟糕的沟通让整件事变得严重得多。",
+    ],
+    audioUrl: "/speaking/audio/speaking-part-2-001.mp3",
+  },
+  {
+    partId: "part-2",
+    questionId: "speaking-part-2-002",
+    approach: "不要只讲目的地。把车程讲活：出发、路上小插曲、风景、车内互动和最后感受。",
+    frames: [
+      "I’d like to talk about a car journey I took ...",
+      "We set off ..., hoping to ...",
+      "The best part was ...",
+      "Looking back, it was memorable because ...",
+    ],
+    vocabulary: [
+      { phrase: "set off", translation: "出发", note: "旅行故事开头常用" },
+      { phrase: "take the scenic route", translation: "走风景好的路线", note: "比 drive there 更有画面" },
+      { phrase: "get stuck in traffic", translation: "堵车", note: "车程题必备" },
+      { phrase: "pull over", translation: "靠边停车", note: "描述路上动作" },
+      { phrase: "a proper road trip", translation: "真正的公路旅行", note: "自然总结体验" },
+    ],
+    answer: [
+      "I’d like to talk about a car journey I took with two close friends during a short holiday. We drove from Suzhou to a mountain area near Moganshan, which took about three and a half hours in total. The plan was simple: leave early, avoid the traffic and spend the weekend somewhere cooler and quieter.",
+      "Of course, it didn’t go perfectly. We set off at seven in the morning, but still got stuck in traffic for nearly an hour outside the city. At first everyone was a bit grumpy, but then we put on an old playlist from university, and the mood changed completely. Once we got onto the smaller roads, the scenery became much better, with bamboo forests and little villages on both sides.",
+      "The best part was when we pulled over near a viewpoint to take photos and buy snacks from a tiny roadside shop. It wasn’t planned at all, but it made the journey feel like a proper road trip rather than just transport from A to B.",
+      "Looking back, I remember it because the car gave us time to talk properly. We weren’t rushing, and nobody was checking work messages every five minutes. The destination was lovely, but honestly, the journey itself was probably the most relaxing part of the trip.",
+    ],
+    answerTranslation: [
+      "我想讲一次短假期间和两位好朋友一起经历的汽车旅行。我们从苏州开车前往莫干山附近的山区，全程大约三个半小时。计划很简单：早点出发、避开堵车，然后去一个更凉快、更安静的地方度过周末。",
+      "当然，旅程并没有完全按计划进行。我们早上七点出发，但在出城时还是堵了将近一个小时。一开始大家都有点烦躁，不过后来我们播放了一张大学时期的老歌单，气氛一下子完全变了。驶入较窄的小路后，沿途景色也变得漂亮多了，两旁都是竹林和小村庄。",
+      "最棒的一段是我们在一个观景点附近靠边停车，拍了些照片，还从路边的一家小店买了零食。这完全不在计划之中，却让这段旅程更像一次真正的公路旅行，而不只是从 A 点到 B 点的交通过程。",
+      "现在回想起来，我之所以记得这段旅程，是因为坐在车里让我们有时间好好聊天。我们不赶时间，也没有人每隔五分钟就查看工作消息。目的地确实很美，但说实话，路上的这段时间大概才是整趟旅行中最让人放松的部分。",
+    ],
+    audioUrl: "/speaking/audio/speaking-part-2-002.mp3",
+  },
+  {
+    partId: "part-2",
+    questionId: "speaking-part-2-003",
+    approach: "困难题避免空泛励志。讲清楚“难在哪里、怎么拆解、最后学到了什么”。",
+    frames: [
+      "The challenge I want to talk about was ...",
+      "At first, I felt ... because ...",
+      "What helped was breaking it into ...",
+      "By the end, I realised that ...",
+    ],
+    vocabulary: [
+      { phrase: "step out of my comfort zone", translation: "走出舒适区", note: "挑战题通用" },
+      { phrase: "break it into smaller chunks", translation: "拆成小块", note: "解决问题很实用" },
+      { phrase: "under pressure", translation: "在压力下", note: "解释困难程度" },
+      { phrase: "ask for feedback", translation: "寻求反馈", note: "体现主动解决" },
+      { phrase: "pull it off", translation: "成功完成", note: "口语感强" },
+    ],
+    answer: [
+      "The challenge I want to talk about was giving a ten-minute presentation in English at university. It was part of a group project, but one teammate got sick two days before the deadline, so I had to cover most of the speaking part myself.",
+      "At first, I felt really nervous because public speaking had never been my strength. On top of that, the topic was quite technical, and I was worried I would either forget key points or sound like I was reading from a script. I knew I had to step out of my comfort zone, but knowing that didn’t make it easier.",
+      "What helped was breaking the task into smaller chunks. I wrote a simple outline, practised each section separately and asked a classmate to listen to me once. She pointed out that I was speaking too fast, so I added pauses after important ideas. I also prepared a few natural phrases like ‘What this basically means is...’ so I could explain the difficult parts more clearly.",
+      "In the end, I pulled it off. It wasn’t perfect, but I didn’t freeze, and our teacher said the structure was clear. The experience taught me that confidence doesn’t appear magically; it often comes from preparation and getting through something under pressure.",
+    ],
+    answerTranslation: [
+      "我想讲的挑战，是在大学里做一次十分钟的英语演讲。它原本是小组项目的一部分，但有位组员在截止日期前两天生病了，所以大部分演讲内容都得由我一个人完成。",
+      "一开始我非常紧张，因为公开演讲从来都不是我的强项。除此以外，主题还很专业，我担心自己要么忘掉重点，要么听起来像在照着稿子念。我知道自己必须走出舒适区，但明白这一点并没有让事情变得更容易。",
+      "真正帮到我的是把任务拆成更小的部分。我先写了一份简单提纲，分别练习每个部分，还请一位同学听我完整讲了一遍。她指出我的语速太快，于是我在重要观点后加了一些停顿。我还准备了几个很自然的表达，比如“What this basically means is...”，这样就能把比较难的内容解释得更清楚。",
+      "最后，我成功完成了。整个过程并不完美，但我没有大脑一片空白，而且老师也说我的结构很清楚。这次经历让我明白，自信不会凭空出现；它往往来自充分准备，以及自己在压力下真正完成过一件事。",
+    ],
+    audioUrl: "/speaking/audio/speaking-part-2-003.mp3",
+  },
+  {
+    partId: "part-2",
+    questionId: "speaking-part-2-004",
+    approach: "童年题要有声音、地点和规则。讲一个简单游戏，比硬讲复杂玩具更容易自然。",
+    frames: [
+      "A childhood game I remember clearly is ...",
+      "We didn’t need much equipment; we just ...",
+      "What made it fun was ...",
+      "I suppose it taught me ... without me realising it.",
+    ],
+    vocabulary: [
+      { phrase: "hide-and-seek", translation: "捉迷藏", note: "童年游戏基础词" },
+      { phrase: "make up rules", translation: "自己编规则", note: "体现孩子气" },
+      { phrase: "take turns", translation: "轮流", note: "游戏过程常用" },
+      { phrase: "out of breath", translation: "气喘吁吁", note: "动作感强" },
+      { phrase: "childhood memory", translation: "童年记忆", note: "自然收尾" },
+    ],
+    answer: [
+      "A childhood game I remember clearly is hide-and-seek. I used to play it with kids from my neighbourhood after dinner, usually in the small open space between our apartment buildings. There wasn’t much there, just a few trees, benches and parked bikes, but for us it felt like a whole adventure playground.",
+      "We didn’t need much equipment; we just made up rules as we went along. One person had to close their eyes and count to fifty, while the rest of us ran off to hide behind staircases, bushes or even behind our parents if they were chatting nearby. Sometimes the rules became slightly unfair, because someone would change the safe zone halfway through the game, and then everyone would start arguing.",
+      "What made it fun was the excitement. You had to stay quiet, but you were also trying not to laugh. When someone shouted your name, you would run back to the safe spot, usually completely out of breath. It was simple, noisy and a bit chaotic, but in a good way.",
+      "Looking back, I suppose it taught me how to take turns, read other people and deal with small disagreements without adults stepping in all the time. More than anything, it reminds me of a time when entertainment didn’t have to involve a screen.",
+    ],
+    answerTranslation: [
+      "我记得最清楚的一种童年游戏是捉迷藏。小时候我经常在晚饭后和小区里的孩子一起玩，地点通常是几栋公寓楼之间的一小块空地。那里其实没什么，只有几棵树、几张长椅和一些停着的自行车，但对我们来说，它就像一整座冒险乐园。",
+      "我们不需要什么器材，只是一边玩一边自己编规则。一个人要闭上眼睛数到五十，其他人则跑去藏在楼梯间、灌木丛后面；如果父母刚好在附近聊天，我们甚至会躲到他们身后。有时规则会变得有点不公平，因为有人会在游戏进行到一半时改变安全区，接着所有人就会争起来。",
+      "它好玩的地方就在于那种紧张又兴奋的感觉。你必须保持安静，同时还得忍住不笑。有人喊出你的名字时，你就会冲回安全点，通常已经跑得气喘吁吁。这个游戏很简单、很吵，也有一点混乱，但那是一种让人开心的混乱。",
+      "现在回想起来，我觉得它让我在不知不觉中学会了轮流、观察别人，也学会了在大人不总是介入的情况下处理小分歧。更重要的是，它让我想起了一个娱乐还不一定需要屏幕的年代。",
+    ],
+    audioUrl: "/speaking/audio/speaking-part-2-004.mp3",
+  },
+  {
+    partId: "part-2",
+    questionId: "speaking-part-2-005",
+    approach: "这题不是讲糟糕服务，而是讲投诉被好好处理。重点放在对方如何回应、为什么恢复信任。",
+    frames: [
+      "I normally avoid complaining, but this time ...",
+      "I explained the problem calmly and said ...",
+      "To my surprise, they handled it really well.",
+      "It restored my trust because ...",
+    ],
+    vocabulary: [
+      { phrase: "raise the issue", translation: "提出问题", note: "比 complain 更温和" },
+      { phrase: "handle it professionally", translation: "处理得专业", note: "满意投诉题核心" },
+      { phrase: "offer a practical solution", translation: "给出实际解决方案", note: "解释满意原因" },
+      { phrase: "a partial refund", translation: "部分退款", note: "售后结果常用" },
+      { phrase: "restore my trust", translation: "恢复我的信任", note: "自然总结" },
+    ],
+    answer: [
+      "I normally avoid complaining, but this time I had to raise the issue because the hotel room I booked was much noisier than expected. It happened during a weekend trip with my cousin. We had paid a bit extra for what was described as a quiet room, but it was right next to the lift, and we could hear people coming and going almost all night.",
+      "The next morning, I went to the front desk and explained the problem calmly. I said I understood the hotel was busy, but the room didn’t match what had been advertised. I wasn’t angry; I just wanted a reasonable solution because we had one more night there.",
+      "To my surprise, they handled it really well. The manager apologised straight away, checked the booking details and moved us to a room at the end of the corridor. She also offered a small partial refund, which I didn’t even ask for. More importantly, she didn’t make excuses or blame us for being sensitive.",
+      "I was satisfied because the complaint was dealt with quickly and respectfully. The new room was much quieter, so we actually slept well the second night. It restored my trust in the hotel, because mistakes can happen, but the way a business responds says a lot about its service.",
+    ],
+    answerTranslation: [
+      "我平时通常会避免投诉，但这一次不得不提出问题，因为我预订的酒店房间比预想中吵得多。这件事发生在我和表亲的一次周末旅行中。我们为了所谓的安静客房多付了一点钱，可房间正好紧挨着电梯，几乎整晚都能听到有人进进出出。",
+      "第二天早上，我去了前台，平静地说明了问题。我说我理解酒店当时很忙，但这个房间和宣传描述并不相符。我并没有生气，只是因为我们还要再住一晚，所以希望得到一个合理的解决办法。",
+      "令我意外的是，他们处理得非常好。经理立刻道了歉，核对预订信息后，把我们换到走廊尽头的一间房。她还主动给了我们一小笔部分退款，而这其实并不是我提出的要求。更重要的是，她没有找借口，也没有反过来指责我们太敏感。",
+      "我感到满意，是因为这次投诉得到了迅速而且尊重人的处理。新房间安静多了，所以第二晚我们确实睡得很好。这件事也恢复了我对这家酒店的信任，因为错误难免会发生，但一家企业如何回应，能充分说明它的服务水平。",
+    ],
+    audioUrl: "/speaking/audio/speaking-part-2-005.mp3",
+  },
+  {
+    partId: "part-3",
+    questionId: "speaking-part-3-001",
+    approach: "先讲便利，再讲代价。用“扩展了交流，但未必加深了关系”收束，逻辑清楚且不绝对。",
+    frames: [
+      "That’s incredibly useful, especially for ...",
+      "On the practical side, ...",
+      "The downside is that ...",
+      "It has made ... easier, but not always ...",
+    ],
+    vocabulary: [
+      { phrase: "instant communication", translation: "即时交流", note: "科技交流题通用" },
+      { phrase: "voice notes", translation: "语音消息", note: "很生活化" },
+      { phrase: "group chats", translation: "群聊", note: "例子自然" },
+      { phrase: "read the tone", translation: "读懂语气", note: "解释误解" },
+      { phrase: "at the expense of depth", translation: "以深度为代价", note: "观点句可迁移" },
+    ],
+    answer: [
+      "Technology has made communication much faster and less tied to place. People can send a quick text, leave a voice note, jump into a group chat or have a video call with someone on the other side of the world. That’s incredibly useful, especially for families and teams who don’t live in the same city.",
+      "The downside is that speed can come at the expense of depth. Because it’s so easy to fire off a message, people sometimes reply without thinking, and it’s harder to read tone through a screen. A short message like ‘fine’ can sound calm, cold or annoyed, depending on the context. So I’d say technology has made communication easier, but not always warmer or more meaningful.",
+    ],
+    answerTranslation: [
+      "科技让沟通变得快得多，也不再那么受地点限制。人们可以快速发一条文字消息、留一段语音、加入群聊，或者和身处世界另一端的人进行视频通话。这非常实用，尤其适合那些不住在同一座城市的家人和团队。",
+      "缺点是，速度有时是以交流深度为代价的。因为随手发一条消息太容易了，人们有时不经思考就回复，而且隔着屏幕也更难判断语气。像“fine”这样一条简短消息，根据语境不同，可能听起来平静、冷淡或不耐烦。所以我认为，科技确实让沟通更容易了，但沟通不一定因此变得更温暖或更有意义。",
+    ],
+  },
+  {
+    partId: "part-3",
+    questionId: "speaking-part-3-002",
+    approach: "不要一上来只表态。区分普通创作自由与商业、版权、署名透明度，论证会更成熟。",
+    frames: [
+      "I wouldn’t regulate every ..., but I would regulate ...",
+      "The main issue is whether ...",
+      "A sensible rule would be to ...",
+      "That protects ..., without killing ...",
+    ],
+    vocabulary: [
+      { phrase: "credit the original artists", translation: "标注原作者", note: "版权讨论常用" },
+      { phrase: "commercial use", translation: "商业用途", note: "限定讨论范围" },
+      { phrase: "be transparent about", translation: "对……透明", note: "监管题通用" },
+      { phrase: "creative freedom", translation: "创作自由", note: "平衡观点用" },
+      { phrase: "draw a clear line", translation: "划清界限", note: "规则类题可迁移" },
+    ],
+    answer: [
+      "I wouldn’t regulate every piece of AI-generated art, because people should still have creative freedom to experiment. If someone uses AI to make a funny poster for personal use, that doesn’t need strict rules. The main issue is commercial use, especially when an AI tool has copied the style of living artists or used their work without permission.",
+      "A sensible rule would be to make companies label AI-generated images clearly and be transparent about the data they use for training. If the work is sold, there should also be a way to credit or compensate original artists when their style is heavily used. That protects creators without killing innovation. So, well, regulation shouldn’t ban AI art; it should draw a clear line around honesty, ownership and money.",
+    ],
+    answerTranslation: [
+      "我不会监管每一件由 AI 生成的艺术作品，因为人们仍然应该拥有尝试和探索的创作自由。如果有人只是用 AI 为自己制作一张有趣的海报，就没有必要受到严格规则的限制。真正的问题在于商业用途，尤其是当 AI 工具模仿了仍在世的艺术家的风格，或者未经允许使用了他们的作品时。",
+      "比较合理的规定，是要求公司清楚标注 AI 生成的图片，并公开说明训练模型时使用的数据。如果作品被出售，而且大量使用了某位原作者的风格，也应该有相应方式为原作者署名或给予补偿。这样既能保护创作者，又不会扼杀创新。所以，嗯，监管不应该禁止 AI 艺术，而应该在诚信、所有权和经济利益方面划出清晰界限。",
+    ],
+  },
+  {
+    partId: "part-3",
+    questionId: "speaking-part-3-003",
+    approach: "承认社媒维持联系的好处，再指出浅层互动的问题。不要把社媒讲成纯坏事。",
+    frames: [
+      "It helps people stay in touch, especially when ...",
+      "The problem is that ...",
+      "You can know what someone is doing without really knowing ...",
+      "So it widens ..., but it can weaken ...",
+    ],
+    vocabulary: [
+      { phrase: "stay in touch", translation: "保持联系", note: "关系题基础表达" },
+      { phrase: "surface-level interaction", translation: "浅层互动", note: "Part 3 很好用" },
+      { phrase: "scroll past someone’s life", translation: "刷过别人的生活", note: "口语化且有画面" },
+      { phrase: "genuine connection", translation: "真实连接", note: "关系质量核心词" },
+      { phrase: "emotional support", translation: "情感支持", note: "讲深层关系" },
+    ],
+    answer: [
+      "Social media has had a mixed impact on relationships. On the positive side, it helps people stay in touch, especially when friends or family members live far away. You can see updates, send quick messages and share small moments that would otherwise be missed. That can keep a relationship alive in a low-effort way.",
+      "The problem is that low effort can also mean surface-level interaction. You might know where someone went for dinner, but not know whether they’re actually doing well. In other words, you can scroll past someone’s life without really connecting with them. So I’d say social media widens people’s networks, but it doesn’t automatically create genuine connection or emotional support.",
+    ],
+    answerTranslation: [
+      "社交媒体对人际关系产生的影响有好有坏。从积极的一面来看，它能帮助人们保持联系，尤其是在朋友或家人住得很远时。你可以看到他们的动态、快速发消息，也能分享那些原本可能被错过的生活片段。这样只需花很少精力，就能让一段关系继续维持下去。",
+      "问题在于，低投入也可能意味着互动只停留在表面。你也许知道某个人去了哪里吃晚饭，却不知道他真实的状态到底好不好。换句话说，你可以刷过一个人的生活，却没有真正和他建立联系。所以我认为，社交媒体扩大了人们的社交网络，但它不会自动带来真正的连接或情感支持。",
+    ],
+  },
+  {
+    partId: "part-3",
+    questionId: "speaking-part-3-004",
+    approach: "把“替代工作”和“替代任务”区分开，再讲高风险岗位、人类优势和再培训。",
+    frames: [
+      "It will probably replace tasks rather than whole professions.",
+      "Jobs that involve ... are more at risk.",
+      "Roles that require ... are harder to automate.",
+      "The real challenge is not ..., but ...",
+    ],
+    vocabulary: [
+      { phrase: "repetitive tasks", translation: "重复性任务", note: "AI 就业题核心词" },
+      { phrase: "human judgement", translation: "人的判断", note: "讲不可替代性" },
+      { phrase: "empathy", translation: "同理心", note: "医疗教育类岗位常用" },
+      { phrase: "reskill workers", translation: "帮助劳动者学习新技能", note: "解决方案表达" },
+      { phrase: "work alongside AI", translation: "和 AI 协同工作", note: "平衡结论" },
+    ],
+    answer: [
+      "I think AI will probably replace specific tasks rather than whole professions. Jobs that involve repetitive tasks, like basic data entry, simple translation or standard customer service replies, are more at risk because the work follows clear patterns. In those areas, AI can be faster and cheaper.",
+      "But roles that require empathy, human judgement or physical care are much harder to automate. A nurse, for example, does more than process medical information; they also comfort patients and notice small changes in behaviour. The real challenge is not whether AI exists, but whether workers are trained to work alongside it. If companies and governments help people reskill, AI could become a tool rather than just a threat.",
+    ],
+    answerTranslation: [
+      "我认为 AI 更有可能取代某些具体任务，而不是整个职业。涉及重复性任务的工作风险更高，比如基础数据录入、简单翻译或标准化客服回复，因为这些工作都有明确规律。在这些领域，AI 可以做得更快，成本也更低。",
+      "但是，需要同理心、人的判断或身体照护的岗位就难得多，很难实现自动化。比如护士所做的并不只是处理医疗信息，他们还会安慰病人，并留意患者行为上的细微变化。真正的挑战不在于 AI 是否存在，而在于劳动者有没有接受培训，学会与它协同工作。如果企业和政府能帮助人们学习新技能，AI 就可能成为一种工具，而不只是一种威胁。",
+    ],
+  },
+  {
+    partId: "part-3",
+    questionId: "speaking-part-3-005",
+    approach: "从传统养育转向情感支持和教育规划。注意平衡：更亲近是好事，但压力也更大。",
+    frames: [
+      "Parents today are expected to do more than ...",
+      "In the past, ... whereas now ...",
+      "That can be positive because ...",
+      "The pressure, though, is that ...",
+    ],
+    vocabulary: [
+      { phrase: "emotional support", translation: "情感支持", note: "父母角色核心词" },
+      { phrase: "set boundaries", translation: "设定边界", note: "亲子关系常用" },
+      { phrase: "academic pressure", translation: "学业压力", note: "教育类延伸" },
+      { phrase: "be actively involved", translation: "积极参与", note: "描述现代父母" },
+      { phrase: "overprotective", translation: "过度保护的", note: "讲负面影响" },
+    ],
+    answer: [
+      "Parents today are expected to do more than provide food, safety and basic discipline. In the past, many parents were seen mainly as authority figures, whereas now they are also expected to offer emotional support, understand mental health issues and be actively involved in their children’s education.",
+      "That can be positive because children may feel closer to their parents and more comfortable asking for help. The pressure, though, is that parents can become too involved. Some try to manage every exam, hobby and friendship, which may make children less independent. So I think the modern role of parents is more balanced but also more demanding: they need to be supportive without becoming overprotective, and friendly without forgetting to set boundaries.",
+    ],
+    answerTranslation: [
+      "如今，人们对父母的期待已经不只是提供食物、安全保障和基本管教。过去，许多父母主要被看作权威人物；而现在，人们还期望他们提供情感支持、了解心理健康问题，并积极参与孩子的教育。",
+      "这可能是件好事，因为孩子会觉得和父母更亲近，在需要帮助时也更愿意开口。不过压力在于，父母也可能参与得过多。有些父母试图管理孩子的每一场考试、每一种爱好和每一段友谊，这可能会让孩子变得不够独立。所以我认为，现代父母的角色更加平衡，但要求也更高：他们既要给予支持，又不能过度保护；既要和孩子友好相处，又不能忘记设定边界。",
+    ],
+  },
+] satisfies SpeakingModelAnswer[];
+
+const speakingModelAnswerByQuestionId = new Map(
+  speakingModelAnswers.map((answer) => [answer.questionId, answer]),
+);
+
+const speakingScoreNotes: Record<SpeakingPartId, SpeakingScoreNote[]> = {
+  "part-1": [
+    { code: "FC", label: "流利与连贯", note: "先直接回答，再补一两个具体细节，结尾给感受。" },
+    { code: "LR", label: "词汇资源", note: "使用生活化搭配，不堆难词，表达准确即可。" },
+    { code: "GRA", label: "语法范围", note: "用 because、although、especially when 扩展短回答。" },
+    { code: "P", label: "发音提示", note: "重读具体名词和态度词，语速保持自然。" },
+  ],
+  "part-2": [
+    { code: "FC", label: "流利与连贯", note: "按时间线讲故事，用转折点和结果推进内容。" },
+    { code: "LR", label: "词汇资源", note: "话题词要具体，但每段只放一两个亮点。" },
+    { code: "GRA", label: "语法范围", note: "定语从句、原因从句和让步句自然穿插。" },
+    { code: "P", label: "发音提示", note: "段落之间短暂停顿，关键词重读即可。" },
+  ],
+  "part-3": [
+    { code: "FC", label: "流利与连贯", note: "观点、解释、例子、让步形成完整讨论。" },
+    { code: "LR", label: "词汇资源", note: "用可迁移表达处理抽象问题，避免背定义。" },
+    { code: "GRA", label: "语法范围", note: "用 while、whereas、rather than 呈现对比。" },
+    { code: "P", label: "发音提示", note: "观点句慢一点，例子部分自然加速。" },
+  ],
+};
+
+export function getSpeakingModelAnswer(questionId: string) {
+  return speakingModelAnswerByQuestionId.get(questionId);
+}
+
+export function getSpeakingScoreNotes(partId: SpeakingPartId) {
+  return speakingScoreNotes[partId];
+}
