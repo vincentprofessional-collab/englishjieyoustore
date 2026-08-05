@@ -150,6 +150,246 @@ export const speakingModelAnswers = [
     audioUrl: "/speaking/audio/speaking-part-1-005.mp3",
   },
   {
+    partId: "part-1",
+    questionId: "speaking-part-1-006",
+    approach: "阅读题不要只说喜欢或不喜欢。先讲常读类型，再补固定阅读场景和它对情绪的作用，答案会更像真实学生。",
+    frames: [
+      "Yes, I do enjoy reading, especially ...",
+      "If I’m tired, I usually go for ...",
+      "I tend to read ..., because ...",
+      "For me, reading is a way to ...",
+    ],
+    vocabulary: [
+      { phrase: "a light read", translation: "轻松读物", note: "来自 BBC 词汇，适合说休闲阅读" },
+      { phrase: "take my mind off", translation: "转移注意力", note: "解释阅读的放松作用" },
+      { phrase: "absorbed in a book", translation: "沉浸在书里", note: "比 like reading 更有画面" },
+      { phrase: "broaden my perspective", translation: "拓宽视角", note: "教育类话题通用" },
+      { phrase: "wind down", translation: "放松下来", note: "睡前阅读自然搭配" },
+    ],
+    answer: [
+      "Yes, I do enjoy reading, especially novels and narrative non-fiction. If I’m tired, I usually go for a light read, but when I have more energy, I like books that explain real events or people’s lives. I tend to read before bed, partly because it helps me wind down and keeps me away from my phone. For me, reading is not just about learning facts; it can take my mind off small worries. When I’m really absorbed in a book, I feel as if I’ve stepped into someone else’s world for a while.",
+    ],
+    answerTranslation: [
+      "是的，我确实喜欢阅读，尤其是小说和叙事性非虚构作品。如果我比较累，我通常会选择轻松读物；但如果精力更足，我会喜欢那些解释真实事件或人物经历的书。我一般会在睡前读书，一方面是因为它能让我放松下来，也能让我远离手机。对我来说，阅读不只是学习知识；它还能让我暂时不去想一些小烦恼。当我真正沉浸在一本书里时，我会觉得自己好像短暂地走进了别人的世界。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-007",
+    approach: "名字题可以讲含义、家人期待和身份感。不要编得太宏大，用一个具体解释加个人态度即可。",
+    frames: [
+      "My name was chosen by ...",
+      "As far as I know, it means ...",
+      "I didn’t think much about it when ...",
+      "Now I see it as part of ...",
+    ],
+    vocabulary: [
+      { phrase: "carry a meaning", translation: "带有含义", note: "解释名字含义很自然" },
+      { phrase: "a sense of identity", translation: "身份认同感", note: "BBC 相关文章常见角度" },
+      { phrase: "shared identity", translation: "共同身份认同", note: "可用于家族或文化连接" },
+      { phrase: "live up to it", translation: "不辜负它", note: "表达父母期待" },
+      { phrase: "fairly uncommon", translation: "不太常见", note: "评价名字特点" },
+    ],
+    answer: [
+      "My name was chosen by my parents, and as far as I know, it carries a meaning connected with being calm and reliable. To be honest, I didn’t think much about it when I was younger; it was just something teachers called out in class. But now I quite like it because it is fairly uncommon without being difficult to pronounce. I suppose a name gives you a small sense of identity and a link to your family. I don’t feel I have to live up to it every day, but it does remind me of what my parents hoped for.",
+    ],
+    answerTranslation: [
+      "我的名字是父母取的。据我所知，它的含义和冷静、可靠有关。说实话，我小时候并没有太在意这个名字；它只是老师在课堂上点名时会叫到的一个称呼。但现在我挺喜欢它的，因为它不算常见，同时又不难读。我觉得名字会给人一点身份认同感，也会让人和家庭产生连接。我并不会觉得自己每天都必须完全配得上这个名字，但它确实会提醒我父母当初对我的期待。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-008",
+    approach: "爱好题聚焦一个真实爱好，讲开始方式、坚持原因和情绪价值。比列举很多爱好更容易拿高分。",
+    frames: [
+      "My main hobby is ...",
+      "I first got into it when ...",
+      "What keeps me interested is ...",
+      "It gives me a chance to ... rather than ...",
+    ],
+    vocabulary: [
+      { phrase: "a relaxing pastime", translation: "轻松的消遣", note: "描述爱好的自然表达" },
+      { phrase: "get into", translation: "开始喜欢上", note: "口语常用动词短语" },
+      { phrase: "switch off", translation: "让大脑放松", note: "BBC 园艺话题常见角度" },
+      { phrase: "a creative outlet", translation: "创意出口", note: "解释长期坚持原因" },
+      { phrase: "pressure to be perfect", translation: "追求完美的压力", note: "学生口吻很真实" },
+    ],
+    answer: [
+      "My main hobby is taking photos on my phone. I first got into it during the pandemic, when I needed a relaxing pastime that didn’t cost much or require special equipment. At first, I just took pictures of sunsets and coffee cups, but gradually I started noticing light, colours and tiny details on the street. What keeps me interested is that it gives me a creative outlet and a reason to go outside. It also helps me switch off for a while, because there is no pressure to be perfect; I just pay attention to what is around me.",
+    ],
+    answerTranslation: [
+      "我的主要爱好是用手机拍照。我最开始喜欢上它是在疫情期间，那时我需要一个花费不高、也不需要特殊设备的轻松消遣。一开始我只是拍日落和咖啡杯，但慢慢地，我开始注意街上的光线、颜色和细小的细节。让我一直保持兴趣的是，它给了我一个创意表达的出口，也给了我一个出门走走的理由。它还能让我暂时放松下来，因为这件事没有追求完美的压力；我只是去留意身边的东西。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-009",
+    approach: "日常题按早晨、白天、晚上三个节点回答，再强调是弹性安排，不要讲成机械时间表。",
+    frames: [
+      "On weekdays, I usually start my day with ...",
+      "Most of my day is divided between ...",
+      "In the evening, I try to ...",
+      "I follow a loose routine rather than ...",
+    ],
+    vocabulary: [
+      { phrase: "daily routine", translation: "日常作息", note: "BBC 词汇表基础表达" },
+      { phrase: "a fixed anchor", translation: "固定节点", note: "解释规律感" },
+      { phrase: "stay on track", translation: "保持进度", note: "学习工作类通用" },
+      { phrase: "leave room for changes", translation: "给变化留空间", note: "体现真实生活" },
+      { phrase: "a sense of control", translation: "掌控感", note: "说明 routine 的好处" },
+    ],
+    answer: [
+      "On weekdays, I usually start my day with breakfast and a quick check of my schedule. Breakfast is a fixed anchor for me, because if I skip it, the whole morning feels slightly messy. Most of my day is divided between classes, preparation and a bit of self-study. In the evening, I try to cook something simple or take a short walk so I can wind down. I follow a loose daily routine rather than a strict timetable. It gives me a sense of control, but still leaves room for changes when something unexpected happens.",
+    ],
+    answerTranslation: [
+      "工作日里，我通常会以吃早餐和快速查看当天安排开始一天。早餐对我来说是一个固定节点，因为如果我不吃早餐，整个上午都会有点混乱。白天大部分时间会分给上课、备课和一点自我学习。晚上我会尽量做点简单的饭，或者短暂散步，让自己放松下来。我遵循的是一种弹性的日常作息，而不是严格到每一分钟的时间表。它能给我一种掌控感，但如果有意外情况发生，也仍然给生活留出了调整空间。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-010",
+    approach: "风景题把自然景观和情绪修复联系起来。地点可以普通，但要说出为什么比打卡更有意义。",
+    frames: [
+      "Yes, I’m drawn to ...",
+      "When I need a short break, I usually ...",
+      "For a longer trip, I prefer ...",
+      "What makes scenery memorable for me is ...",
+    ],
+    vocabulary: [
+      { phrase: "natural landscape", translation: "自然景观", note: "风景题核心词" },
+      { phrase: "peace and quiet", translation: "宁静", note: "BBC 自然疗法文章角度" },
+      { phrase: "the great outdoors", translation: "户外天地", note: "自然话题可迁移" },
+      { phrase: "take it all in", translation: "好好欣赏", note: "口语感强" },
+      { phrase: "a perfect tonic", translation: "很好的调节剂", note: "形容自然对压力的缓解" },
+    ],
+    answer: [
+      "Yes, I’m drawn to natural landscapes, especially places with water and open sky. When I need a short break, I usually go to a lakeside park near my home, because it gives me a bit of peace and quiet without a long journey. For a longer trip, I prefer mountains or coastal areas where I can walk slowly and take it all in. What makes scenery memorable for me is not just taking a nice photo, but the feeling of being in the great outdoors. It works like a perfect tonic when I’m stressed.",
+    ],
+    answerTranslation: [
+      "是的，我很喜欢自然风景，尤其是有水面和开阔天空的地方。当我需要短暂休息时，我通常会去家附近的湖边公园，因为不用长途跋涉就能获得一点宁静。如果是更长一点的旅行，我更喜欢山区或海边，那样我可以慢慢走，好好欣赏周围的一切。对我来说，风景让人难忘的地方不只是能拍出好看的照片，而是身处户外自然中的那种感受。当我压力比较大时，它就像一种很好的调节剂。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-011",
+    approach: "团队运动题不必假装自己很擅长。可以区分观看和参与，再讲团队协作带来的价值。",
+    frames: [
+      "I enjoy watching team sports more than ...",
+      "The sport I like most is ... because ...",
+      "I was never a serious player, but ...",
+      "Team sports teach people to ...",
+    ],
+    vocabulary: [
+      { phrase: "team spirit", translation: "团队精神", note: "团队运动核心表达" },
+      { phrase: "work towards a common goal", translation: "朝共同目标努力", note: "解释团队价值" },
+      { phrase: "play a clear role", translation: "承担明确角色", note: "说协作很准确" },
+      { phrase: "team building", translation: "团队建设", note: "BBC 词汇，可转入口语" },
+      { phrase: "cheer from the sidelines", translation: "在场边加油", note: "适合不擅长运动的学生" },
+    ],
+    answer: [
+      "I enjoy watching team sports more than playing them, mainly because I’m not extremely athletic. The sport I like most is volleyball, because every player has to play a clear role, and one good move can lift the whole team. I was never a serious school-team player, but I did join casual matches in PE lessons, and I liked the energy. Team sports teach people to work towards a common goal, not just show off individual skill. Even if I’m only cheering from the sidelines, I can still feel the team spirit.",
+    ],
+    answerTranslation: [
+      "相比亲自参加团队运动，我更喜欢观看，主要是因为我并不是特别擅长运动。我最喜欢的团队运动是排球，因为每个队员都必须承担明确角色，而且一个漂亮的动作就能带动整个队伍。我从来不算正式的校队成员，但体育课上参加过一些轻松的比赛，我挺喜欢那种氛围。团队运动教会人们朝共同目标努力，而不只是展示个人能力。即使我只是在场边加油，也能感受到那种团队精神。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-012",
+    approach: "饮食题用一道具体食物开头，再讲自己的真实厨艺和家庭分工。把做饭和情绪稳定联系起来会更高级。",
+    frames: [
+      "My favourite food is ... because ...",
+      "I can cook a few simple dishes, especially ...",
+      "In my family, ... usually takes charge of ...",
+      "What I like about cooking is that ...",
+    ],
+    vocabulary: [
+      { phrase: "comfort food", translation: "慰藉美食", note: "BBC 词汇，适合家常菜" },
+      { phrase: "cook from scratch", translation: "从头做饭", note: "比 make food 更准确" },
+      { phrase: "ready meals", translation: "即食餐", note: "和自己做饭形成对比" },
+      { phrase: "a sense of control", translation: "掌控感", note: "做饭与心理健康角度" },
+      { phrase: "take charge of the kitchen", translation: "负责掌厨", note: "家庭分工自然表达" },
+    ],
+    answer: [
+      "My favourite food is tomato-and-egg noodles, because it is comfort food and reminds me of home. I can cook a few simple dishes, especially noodles and fried rice, and I’d rather cook from scratch than rely on ready meals every day. In my family, my father usually takes charge of the kitchen when relatives visit, while I help with chopping or washing up. What I like about cooking is that it gives me a small sense of control. Even when my day is busy, making a warm meal can calm me down.",
+    ],
+    answerTranslation: [
+      "我最喜欢的食物是番茄鸡蛋面，因为它是一种很治愈的家常食物，也让我想到家的味道。我会做几道简单的菜，尤其是面条和炒饭，而且比起每天依赖即食餐，我更愿意从头做饭。在我们家，如果亲戚来做客，通常是我父亲负责掌厨，而我会帮忙切菜或洗碗。我喜欢做饭的一点是，它能给我一点小小的掌控感。即使一天很忙，做一顿热乎的饭也能让我平静下来。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-013",
+    approach: "老建筑题用平衡回答：有价值的应保护，但日常居住仍需要现代安全和便利。避免绝对化。",
+    frames: [
+      "I think old buildings should be preserved if ...",
+      "They give a place ...",
+      "For everyday living, though, I prefer ...",
+      "A good solution is to ...",
+    ],
+    vocabulary: [
+      { phrase: "architectural character", translation: "建筑特色", note: "老建筑题核心表达" },
+      { phrase: "a sense of history", translation: "历史感", note: "解释保护价值" },
+      { phrase: "emotional wellbeing", translation: "情绪幸福感", note: "借鉴 BBC 建筑话题" },
+      { phrase: "modern safety standards", translation: "现代安全标准", note: "平衡现代需求" },
+      { phrase: "adaptive reuse", translation: "适应性再利用", note: "高分但实用的保护方案" },
+    ],
+    answer: [
+      "I think old buildings should be preserved if they have real architectural character or a strong link to local history. They give a street a sense of history, and they can make a city feel less soulless than rows of identical modern blocks. That said, for everyday living, I still prefer modern buildings because they usually have better lifts, heating and safety standards. A good solution is adaptive reuse, like turning an old factory into a library or community centre. In that way, the building keeps its story but still serves people’s lives today.",
+    ],
+    answerTranslation: [
+      "我认为，如果老建筑确实有建筑特色，或者和当地历史有很强的联系，就应该被保护。它们能给一条街带来历史感，也能让一座城市不像一排排相同的现代楼房那样没有灵魂。不过话说回来，如果是日常居住，我还是更喜欢现代建筑，因为它们通常有更好的电梯、供暖和安全标准。比较好的办法是适应性再利用，比如把旧工厂改造成图书馆或社区中心。这样一来，建筑可以保留自己的故事，同时仍然服务于今天人们的生活。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-014",
+    approach: "公园题可用童年与现在对比，再强调小而近的社区公园比遥远大公园更影响日常生活。",
+    frames: [
+      "As a child, I liked parks because ...",
+      "Now I use them more for ...",
+      "I’d like my city to have more ...",
+      "Even a small park can ...",
+    ],
+    vocabulary: [
+      { phrase: "public green space", translation: "公共绿地", note: "公园题准确表达" },
+      { phrase: "within walking distance", translation: "步行可达", note: "BBC 袖珍公园核心角度" },
+      { phrase: "community bonds", translation: "社区联系", note: "解释公共空间价值" },
+      { phrase: "escape traffic noise", translation: "躲开交通噪音", note: "城市公园真实功能" },
+      { phrase: "improve everyday wellbeing", translation: "改善日常幸福感", note: "高分观点表达" },
+    ],
+    answer: [
+      "As a child, I liked parks because they were places to run around, ride a bike and play until I was tired. Now I use them more for walking, clearing my head and escaping traffic noise. I’d like my city to have more public green space within walking distance, not only one huge park that takes an hour to reach. Even a small park can improve everyday wellbeing if people actually use it. It can also strengthen community bonds, because neighbours meet there naturally instead of only seeing each other in lifts.",
+    ],
+    answerTranslation: [
+      "小时候我喜欢公园，因为那里可以到处跑、骑自行车，一直玩到自己累了为止。现在我更多是把公园用来散步、放空头脑，以及躲开交通噪音。我希望我的城市能有更多步行可达的公共绿地，而不是只有一个需要花一小时才能到的大公园。如果人们真的经常使用，即使是一个小公园也能改善日常幸福感。它还可以加强社区联系，因为邻居们会在那里自然地见面，而不只是偶尔在电梯里碰到。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-015",
+    approach: "音乐题用场景回答不同音乐喜好，再讲是否学过乐器。可以借鉴 BBC 关于音乐与记忆的角度。",
+    frames: [
+      "Music is part of my day, especially when ...",
+      "I’m mostly into ..., but ...",
+      "I did learn ... for a while, although ...",
+      "What I like about music is that ...",
+    ],
+    vocabulary: [
+      { phrase: "be into", translation: "喜欢；热衷于", note: "口语自然表达喜好" },
+      { phrase: "background music", translation: "背景音乐", note: "日常场景常用" },
+      { phrase: "bring back memories", translation: "唤起回忆", note: "BBC 音乐与记忆文章角度" },
+      { phrase: "take piano lessons", translation: "上钢琴课", note: "回答是否学过音乐" },
+      { phrase: "develop an ear for melody", translation: "培养旋律感", note: "解释学习音乐的收获" },
+    ],
+    answer: [
+      "Music is part of my day, especially when I’m commuting or doing simple chores. I’m mostly into mellow pop and film soundtracks, but it depends on my mood. If I need to focus, I prefer quiet background music; if I’m walking outside, I like something more energetic. I did take piano lessons for a while as a child, although I can’t play well now. Still, it helped me develop an ear for melody. What I like most about music is that a familiar song can bring back memories almost immediately.",
+    ],
+    answerTranslation: [
+      "音乐是我日常生活的一部分，尤其是在通勤或做一些简单家务的时候。我主要喜欢舒缓的流行音乐和电影原声，不过这取决于我的心情。如果我需要集中注意力，我会更喜欢安静的背景音乐；如果我在外面走路，我会喜欢更有活力一点的歌。我小时候确实上过一段时间钢琴课，虽然现在已经弹得不好了。不过它帮助我培养了一点旋律感。我最喜欢音乐的一点是，一首熟悉的歌几乎能立刻唤起回忆。",
+    ],
+  },
+  {
     partId: "part-2",
     questionId: "speaking-part-2-001",
     approach: "按“期待—落差—处理结果—感受”推进。重点不是抱怨，而是说明对方为什么没有解决问题。",
