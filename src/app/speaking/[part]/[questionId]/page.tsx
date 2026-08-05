@@ -64,7 +64,16 @@ export default async function SpeakingModelAnswerPage({
       <header className={styles.hero}>
         <span>BAND 7 MODEL ANSWER</span>
         <h1>{question.question}</h1>
-        <p>{question.translation}</p>
+        <div className={styles.questionPrompt}>
+          <p>
+            <span>中文提示</span>
+            <strong>{question.translation}</strong>
+          </p>
+          <p>
+            <span>真实题目 / 常见追问</span>
+            <strong>{question.followUp}</strong>
+          </p>
+        </div>
         <dl>
           <div>
             <dt>题型</dt>

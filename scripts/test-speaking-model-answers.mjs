@@ -4,7 +4,7 @@ import test from "node:test";
 
 const source = readFileSync(new URL("../src/data/ielts/speaking-model-answers.ts", import.meta.url), "utf8");
 
-const requiredPartOneQuestionIds = Array.from({ length: 10 }, (_, index) => {
+const requiredPartOneQuestionIds = Array.from({ length: 20 }, (_, index) => {
   return `speaking-part-1-${String(index + 6).padStart(3, "0")}`;
 });
 

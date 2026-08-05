@@ -390,6 +390,246 @@ export const speakingModelAnswers = [
     ],
   },
   {
+    partId: "part-1",
+    questionId: "speaking-part-1-016",
+    approach: "数学题不要把自己说成天才或学渣。用“以前害怕—后来找到方法—现实作用”来回答，更自然也更完整。",
+    frames: [
+      "I wouldn’t say I’m naturally gifted at maths, but ...",
+      "I started learning it properly when ...",
+      "What helped me was ...",
+      "I think maths is important because ...",
+    ],
+    vocabulary: [
+      { phrase: "rocket science", translation: "高深难懂的事", note: "用否定句缓和数学难度" },
+      { phrase: "do the math", translation: "算一算；核算一下", note: "BBC 词汇，生活化表达" },
+      { phrase: "make progress in maths", translation: "数学取得进步", note: "适合学生口吻" },
+      { phrase: "problem-solving skills", translation: "解决问题的能力", note: "解释数学价值" },
+      { phrase: "stay on track", translation: "保持进度", note: "学习类通用表达" },
+    ],
+    answer: [
+      "I wouldn’t say I’m naturally gifted at maths, but I don’t dislike it either. I started learning it properly in primary school, and at first it felt like rocket science because I was slow with word problems. What helped me was writing each step down instead of trying to solve everything in my head. I’m not top of the class, but I have made steady progress in maths. I think it is important because it trains problem-solving skills, and in daily life you still need to do the math when you compare prices or manage money.",
+    ],
+    answerTranslation: [
+      "我不会说自己天生擅长数学，但我也并不讨厌它。我从小学开始正式学习数学，一开始应用题对我来说像很高深的东西，因为我做得比较慢。真正帮到我的是把每一步都写下来，而不是试图在脑子里直接解决所有问题。我不是班里最拔尖的学生，但我的数学一直在稳步进步。我认为数学很重要，因为它训练解决问题的能力，而且在日常生活中，当你比较价格或管理金钱时，仍然需要算一算。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-017",
+    approach: "科学题用具体学科和体验回答。把科学从课本拉回生活，比如实验、博物馆和好奇心。",
+    frames: [
+      "I studied science at school, mainly ...",
+      "The part I enjoyed most was ...",
+      "Science museums appeal to me because ...",
+      "For me, science is useful because ...",
+    ],
+    vocabulary: [
+      { phrase: "carry out an experiment", translation: "做实验", note: "科学课核心表达" },
+      { phrase: "spark curiosity", translation: "激发好奇心", note: "解释科学吸引力" },
+      { phrase: "hands-on exhibits", translation: "可动手体验的展品", note: "适合科学博物馆" },
+      { phrase: "get across difficult ideas", translation: "讲清楚难懂概念", note: "BBC 教学语境表达" },
+      { phrase: "scientific thinking", translation: "科学思维", note: "总结科学价值" },
+    ],
+    answer: [
+      "I studied science at school, mainly biology, chemistry and physics. I wasn’t brilliant at every topic, but I enjoyed the lessons where we could carry out an experiment instead of only copying notes. Science museums appeal to me for the same reason: the hands-on exhibits can get across difficult ideas in a simple way. I don’t visit them very often now, but when I do, they usually spark my curiosity. For me, science is useful because it teaches scientific thinking, so you learn to ask for evidence rather than believe the first explanation you hear.",
+    ],
+    answerTranslation: [
+      "我在学校学过科学，主要是生物、化学和物理。我并不是每个主题都学得很出色，但我喜欢那些能做实验的课，而不是只抄笔记。科学博物馆吸引我的原因也类似：那些可以动手体验的展品能用简单方式讲清楚难懂的概念。我现在并不经常去科学博物馆，但每次去都会被激发出一些好奇心。对我来说，科学很有用，因为它教会人科学思维，让你学会寻找证据，而不是听到第一个解释就马上相信。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-018",
+    approach: "老师题讲一个具体老师的教学方式和情感支持，不要只说 nice。最后说明是否保持联系即可。",
+    frames: [
+      "My favourite teacher was ...",
+      "What I liked about her was that ...",
+      "She helped me ... when ...",
+      "We are not really in touch now, but ...",
+    ],
+    vocabulary: [
+      { phrase: "motivate students", translation: "激励学生", note: "老师题核心表达" },
+      { phrase: "be attentive", translation: "细心关注的", note: "描述好老师" },
+      { phrase: "pastoral care", translation: "学生关怀", note: "BBC 教育语境词" },
+      { phrase: "channel energy into learning", translation: "把精力引导到学习上", note: "讲教学能力" },
+      { phrase: "make steady progress", translation: "稳步进步", note: "学生成长表达" },
+    ],
+    answer: [
+      "My favourite teacher was my middle-school English teacher. What I liked about her was that she was strict but also very attentive. She didn’t just hand out grades; she explained why we made mistakes and how to improve. I remember she helped me prepare for a speech contest when I was nervous, and she managed to channel my energy into learning instead of panic. We are not really in touch now, apart from occasional messages during festivals, but I still remember her because she made me feel I could make steady progress.",
+    ],
+    answerTranslation: [
+      "我最喜欢的老师是我初中的英语老师。我喜欢她的一点是，她很严格，但也非常细心。她并不是只发分数，而是会解释我们为什么犯错，以及该如何改进。我记得有一次我准备演讲比赛时特别紧张，她帮助我准备，并且成功把我的精力从慌乱引导到学习上。我们现在并不算经常联系，除了节日时偶尔发消息，但我仍然记得她，因为她让我觉得自己可以稳步进步。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-019",
+    approach: "汽车题可以承认车程方便，但也讲堵车、环保和自己更喜欢当乘客。答案会比单纯说喜欢开车更真实。",
+    frames: [
+      "I enjoy car travel when ...",
+      "I’d rather be the passenger because ...",
+      "For daily commuting, I usually ...",
+      "Cars are useful, but ...",
+    ],
+    vocabulary: [
+      { phrase: "daily commute", translation: "日常通勤", note: "交通题高频" },
+      { phrase: "public transport", translation: "公共交通", note: "和汽车形成对比" },
+      { phrase: "fuel-efficient cars", translation: "节能省油的车", note: "BBC 汽车话题词汇" },
+      { phrase: "car emissions", translation: "汽车排放", note: "环保角度" },
+      { phrase: "keep an eye out for", translation: "留意", note: "驾驶安全表达" },
+    ],
+    answer: [
+      "I enjoy car travel when the road is not too crowded, especially for short trips outside the city. I’d rather be the passenger because I can look out of the window, listen to a podcast or just relax. For my daily commute, though, I usually take public transport because parking is expensive and traffic can be tiring. Cars are useful, but I think cities should also take car emissions into account. If I buy a car in the future, I’d probably look for something fuel-efficient and easy to maintain.",
+    ],
+    answerTranslation: [
+      "如果路上不太拥挤，我是喜欢坐车出行的，尤其是去城市周边短途旅行时。我更愿意当乘客，因为我可以看窗外、听播客，或者只是放松一下。不过日常通勤时，我通常会坐公共交通，因为停车很贵，而且堵车会让人很累。汽车确实有用，但我认为城市也应该考虑汽车排放问题。如果我将来买车，我可能会选择一辆节能省油、容易维护的车。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-020",
+    approach: "早晨题先表明是否早起，再讲一个固定动作和早餐态度。用身体状态而不是空泛自律来回答。",
+    frames: [
+      "I’m not a natural morning person, but ...",
+      "The first thing I usually do is ...",
+      "A good breakfast can ...",
+      "If I skip ..., I tend to ...",
+    ],
+    vocabulary: [
+      { phrase: "morning person", translation: "早起型的人", note: "早晨题自然表达" },
+      { phrase: "early morning pick-me-up", translation: "晨间提神饮品", note: "BBC 词汇表表达" },
+      { phrase: "set me up for the day", translation: "让我为一天做好准备", note: "早餐题常用" },
+      { phrase: "hit the snooze button", translation: "按掉贪睡按钮", note: "生活化细节" },
+      { phrase: "perk up", translation: "提振精神", note: "描述早晨状态" },
+    ],
+    answer: [
+      "I’m not a natural morning person, but I’m trying to become better at getting up early. The first thing I usually do is drink water and check my plan for the day. I do sometimes hit the snooze button, especially in winter, so an early morning pick-me-up like coffee helps me perk up. Breakfast is important for me as well. If I skip it, I get distracted before lunchtime. A simple breakfast, even just oats or eggs, can set me up for the day and make the morning feel less rushed.",
+    ],
+    answerTranslation: [
+      "我并不是天生的早起型，但我正在努力让自己更擅长早起。我通常做的第一件事是喝水，然后看一下当天计划。我有时确实会按掉贪睡按钮，尤其是在冬天，所以像咖啡这样的晨间提神饮品能让我精神起来。早餐对我也很重要。如果不吃早餐，我到午饭前就容易分心。一顿简单的早餐，哪怕只是燕麦或鸡蛋，也能让我为一天做好准备，让早晨不那么匆忙。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-021",
+    approach: "梦想题可以讲童年梦想的变化，再讲现在更现实的抱负。重点是成熟，不是夸大目标。",
+    frames: [
+      "When I was a child, I dreamed of ...",
+      "As I got older, that dream changed because ...",
+      "Now my ambition is more about ...",
+      "I think ambition is healthy as long as ...",
+    ],
+    vocabulary: [
+      { phrase: "dream of", translation: "梦想做某事", note: "基础但自然" },
+      { phrase: "make it big", translation: "大获成功", note: "讲童年梦想很口语" },
+      { phrase: "career path", translation: "职业道路", note: "现实抱负表达" },
+      { phrase: "pipe dream", translation: "不切实际的空想", note: "区分梦想和幻想" },
+      { phrase: "pursue a goal", translation: "追求目标", note: "抱负题可迁移" },
+    ],
+    answer: [
+      "When I was a child, I dreamed of becoming a singer and making it big, mainly because I watched too many talent shows. As I got older, that dream changed because I realised enjoying music and building a career in it are not the same thing. Now my ambition is more about finding a career path where I can use my communication skills and keep learning. I do think I’m ambitious, but not in a reckless way. For me, ambition is healthy as long as it pushes you to pursue a goal without turning every plan into a pipe dream.",
+    ],
+    answerTranslation: [
+      "我小时候梦想成为歌手并取得很大成功，主要是因为看了太多选秀节目。长大以后，这个梦想发生了变化，因为我意识到喜欢音乐和真正把它当作职业是两回事。现在我的抱负更多是找到一条能发挥沟通能力、同时不断学习的职业道路。我确实认为自己有上进心，但不是那种盲目冒进的类型。对我来说，抱负是健康的，只要它能推动你追求目标，而不是把每个计划都变成不切实际的空想。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-022",
+    approach: "购物题用线上线下对比，再说比价习惯。不要把自己说成完全理性，承认偶尔冲动更自然。",
+    frames: [
+      "I do more shopping online because ...",
+      "For some things, though, I prefer ...",
+      "I usually compare prices before ...",
+      "I try not to ..., unless ...",
+    ],
+    vocabulary: [
+      { phrase: "online shopping", translation: "网购", note: "消费题基础词" },
+      { phrase: "in-store shopping", translation: "实体店购物", note: "线上线下对比" },
+      { phrase: "bargain hunting", translation: "淘便宜货", note: "BBC 词汇，学生口吻自然" },
+      { phrase: "shopping impulse", translation: "购物冲动", note: "解释消费控制" },
+      { phrase: "pay over the odds", translation: "花高价买", note: "比 expensive 更地道" },
+    ],
+    answer: [
+      "I do more shopping online because it is convenient and saves time, especially for books, daily products and small gadgets. For clothes or shoes, though, I still prefer in-store shopping because I want to check the size and material. I usually compare prices before buying anything expensive, partly because I hate paying over the odds. I wouldn’t call myself obsessed with bargain hunting, but I do enjoy finding a sensible deal. I also try to control my shopping impulse by leaving things in the basket for a day before I pay.",
+    ],
+    answerTranslation: [
+      "我现在更多是在网上购物，因为它很方便，也节省时间，尤其是买书、日用品和一些小电子产品时。不过如果是衣服或鞋子，我还是更喜欢去实体店，因为我想确认尺码和材质。买比较贵的东西之前，我通常会比较价格，部分原因是我不喜欢花高价买东西。我不会说自己特别沉迷于淘便宜货，但找到一个合理的优惠确实会让我开心。我也会通过把东西先放在购物车里一天再付款，来控制自己的购物冲动。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-023",
+    approach: "晚间题用 morning/evening person 做对比，再讲晚上如何放松。不要和 morning routine 题重复太多。",
+    frames: [
+      "I’m more of an evening person because ...",
+      "In the evening, I usually ...",
+      "After a busy day, I need ...",
+      "I try not to ..., otherwise ...",
+    ],
+    vocabulary: [
+      { phrase: "evening person", translation: "夜晚更有精神的人", note: "直接回答偏好" },
+      { phrase: "get a second wind", translation: "重新有精神", note: "BBC 文章常见生活表达" },
+      { phrase: "wind down", translation: "放松下来", note: "晚间题核心" },
+      { phrase: "a cosy evening", translation: "舒适的夜晚", note: "氛围表达" },
+      { phrase: "decaf", translation: "低因咖啡", note: "晚上饮品自然细节" },
+    ],
+    answer: [
+      "I’m more of an evening person because my brain usually works better after dinner. In the evening, I often get a second wind, so I can read, do some light study or plan the next day. After a busy day, though, I also need time to wind down, so a cosy evening for me might just mean a shower, decaf tea and a quiet playlist. I try not to scroll on my phone for too long, otherwise I sleep later than planned. Compared with mornings, evenings feel more flexible and less rushed.",
+    ],
+    answerTranslation: [
+      "我更像是一个晚上更有精神的人，因为我的大脑通常在晚饭后运转得更好。晚上我经常会重新有精神，所以可以读书、做一点轻量学习，或者计划第二天。不过忙了一天之后，我也需要时间放松下来，所以对我来说，一个舒适的夜晚可能只是洗个澡、喝一杯低因茶，再放一张安静的歌单。我会尽量不刷手机太久，否则就会比计划睡得更晚。和早晨相比，晚上感觉更灵活，也没那么匆忙。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-024",
+    approach: "晨间习惯题重点是顺序和稳定感。和 Morning time 区分开：这里讲具体动作流程。",
+    frames: [
+      "After waking up, I usually ...",
+      "Then I ... before ...",
+      "Breakfast is important because ...",
+      "This routine helps me ...",
+    ],
+    vocabulary: [
+      { phrase: "daily ritual", translation: "日常仪式", note: "晨间动作更有质感" },
+      { phrase: "skincare routine", translation: "护肤流程", note: "BBC 词汇，适合早晨习惯" },
+      { phrase: "set me up for the day", translation: "让我为一天做好准备", note: "早餐作用" },
+      { phrase: "perk up", translation: "提振精神", note: "早晨状态" },
+      { phrase: "a sense of control", translation: "掌控感", note: "解释固定流程价值" },
+    ],
+    answer: [
+      "After waking up, I usually make my bed first, because it gives me a small sense of control. Then I wash my face, do a very simple skincare routine and check my messages before breakfast. Breakfast is important to me because it sets me up for the day; without it, I’m less patient and less focused. I don’t do anything dramatic like a five-kilometre run, but I may stretch for a few minutes to perk up. This routine is simple, but it stops the morning from becoming completely chaotic.",
+    ],
+    answerTranslation: [
+      "起床后，我通常会先整理床铺，因为这会给我一点小小的掌控感。然后我会洗脸，做一个非常简单的护肤流程，再在早餐前查看消息。早餐对我来说很重要，因为它能让我为一天做好准备；如果不吃早餐，我会更没耐心，也更难集中注意力。我不会做什么很夸张的事，比如跑五公里，但可能会拉伸几分钟，让自己精神一点。这个流程很简单，但它能防止早晨变得完全混乱。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-025",
+    approach: "香水题讲频率、场合和气味偏好。注意表达适度，不要说得像广告文案。",
+    frames: [
+      "I don’t wear perfume every day, but ...",
+      "I prefer scents that are ...",
+      "Strong perfume can be ...",
+      "For me, scented things are nice when ...",
+    ],
+    vocabulary: [
+      { phrase: "scent", translation: "香气", note: "BBC 词汇，替代 smell" },
+      { phrase: "linger", translation: "萦绕；停留", note: "描述香味持续" },
+      { phrase: "sensitivity to perfume", translation: "对香水敏感", note: "解释不喜欢浓香" },
+      { phrase: "subtle", translation: "淡雅的", note: "香味偏好核心词" },
+      { phrase: "overpowering", translation: "过于浓烈的", note: "描述负面感受" },
+    ],
+    answer: [
+      "I don’t wear perfume every day, but I might use a little when I’m going out or attending something formal. I prefer scents that are subtle and clean, like citrus or tea, rather than anything too sweet. Strong perfume can be overpowering, especially in a lift or a small classroom, and some people have a sensitivity to perfume. I do like scented things at home, though, such as a mild candle or fresh laundry. A pleasant scent can linger in a room and make the space feel calmer, as long as it is not too strong.",
+    ],
+    answerTranslation: [
+      "我并不是每天都喷香水，但如果要出门见人，或者参加比较正式的场合，我可能会用一点。我更喜欢淡雅、干净的香味，比如柑橘或茶香，而不是太甜的味道。浓烈的香水可能会让人觉得压迫，尤其是在电梯或小教室里，而且有些人对香水比较敏感。不过我确实喜欢家里有一些带香气的东西，比如温和的香薰蜡烛或刚洗好的衣物。令人舒服的香气可以在房间里停留，让空间更平静，只要它不要太浓。",
+    ],
+  },
+  {
     partId: "part-2",
     questionId: "speaking-part-2-001",
     approach: "按“期待—落差—处理结果—感受”推进。重点不是抱怨，而是说明对方为什么没有解决问题。",

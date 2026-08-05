@@ -57,13 +57,6 @@
   margin: 14px 0 10px;
 }
 
-.hero > p {
-  color: #5b675f;
-  font-size: 17px;
-  font-weight: 700;
-  margin: 0;
-}
-
 .hero dl {
   display: flex;
   flex-wrap: wrap;
@@ -90,6 +83,36 @@
   font-size: 14px;
   font-weight: 900;
   margin: 4px 0 0;
+}
+
+.questionPrompt {
+  display: grid;
+  gap: 10px;
+  margin-top: 16px;
+  max-width: 760px;
+}
+
+.questionPrompt p {
+  background: rgba(255, 253, 248, 0.72);
+  border: 1px solid rgba(190, 177, 144, 0.5);
+  border-radius: 14px;
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 12px 14px;
+}
+
+.questionPrompt span {
+  color: #8a7443;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.questionPrompt strong {
+  color: #2b3a31;
+  font-size: 15px;
+  line-height: 1.55;
 }
 
 .section {
