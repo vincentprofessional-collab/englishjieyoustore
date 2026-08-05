@@ -7,13 +7,7 @@ const questions = JSON.parse(
   readFileSync(new URL("../src/data/ielts/speaking-questions.json", import.meta.url), "utf8"),
 );
 
-const previousPartOneQuestionIds = Array.from({ length: 20 }, (_, index) => {
-  return `speaking-part-1-${String(index + 6).padStart(3, "0")}`;
-});
-const latestPartOneQuestionIds = questions["part-1"]
-  .filter((question) => question.year === "2026/5-8")
-  .map((question) => question.id);
-const requiredPartOneQuestionIds = [...new Set([...previousPartOneQuestionIds, ...latestPartOneQuestionIds])];
+const requiredPartOneQuestionIds = questions["part-1"].map((question) => question.id);
 
 function extractAnswerObject(questionId) {
   const marker = `questionId: "${questionId}"`;

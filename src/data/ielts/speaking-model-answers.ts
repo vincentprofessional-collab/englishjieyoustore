@@ -894,6 +894,846 @@ export const speakingModelAnswers = [
     ],
   },
   {
+    partId: "part-1",
+    questionId: "speaking-part-1-037",
+    approach: "激励人物题不要说得像作文。用一个身边人、一个具体品质和一个真实影响来回答。",
+    frames: [
+      "The person who inspires me most is ...",
+      "What I admire about him/her is ...",
+      "He/She has shown me that ...",
+      "Because of that, I try to ...",
+    ],
+    vocabulary: [
+      { phrase: "role model", translation: "榜样", note: "人物题核心表达" },
+      { phrase: "work ethic", translation: "职业/学习态度", note: "解释为什么佩服" },
+      { phrase: "resilience", translation: "韧性", note: "BBC 常见品质词" },
+      { phrase: "stay grounded", translation: "保持踏实", note: "描述成熟性格" },
+      { phrase: "look up to", translation: "敬佩", note: "自然口语动词短语" },
+    ],
+    answer: [
+      "The person who inspires me most is my older cousin. She is not famous, but she is a real role model for me because of her work ethic and resilience. When she was preparing for an important exam, she failed once, but she didn’t complain or give up. She changed her plan, asked for feedback and kept going quietly. What I admire most is that she stays grounded even when she does well. Because of her, I try to be more patient with long-term goals instead of expecting quick results. I look up to her because she makes discipline seem practical, not dramatic.",
+    ],
+    answerTranslation: [
+      "最激励我的人是我的表姐。她并不出名，但对我来说她是真正的榜样，因为她有很强的学习态度和韧性。她准备一个重要考试的时候曾经失败过一次，但她没有抱怨，也没有放弃。她调整了计划，主动寻求反馈，然后安静地继续努力。我最佩服的是，即使她做得很好，也仍然很踏实。受她影响，我会尽量对长期目标更有耐心，而不是总期待快速见效。我敬佩她，是因为她让自律看起来很实际，而不是很夸张。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-038",
+    approach: "家人朋友偏好题用分场景回答。不要绝对化，说明情感支持和日常放松的不同作用。",
+    frames: [
+      "It depends on the situation, but ...",
+      "With my family, I can ...",
+      "With friends, I usually ...",
+      "So I need both, just in different ways.",
+    ],
+    vocabulary: [
+      { phrase: "quality time", translation: "高质量相处时间", note: "家庭朋友题通用" },
+      { phrase: "social circle", translation: "社交圈", note: "描述朋友群" },
+      { phrase: "emotional support", translation: "情感支持", note: "解释家人作用" },
+      { phrase: "catch up with", translation: "和某人叙旧/聊近况", note: "朋友场景自然" },
+      { phrase: "shared history", translation: "共同经历", note: "解释亲密感" },
+    ],
+    answer: [
+      "It depends on the situation, but if I had to choose, I probably spend more relaxed quality time with my friends. We are in a similar stage of life, so it is easy to catch up with them about study, work pressure or small daily problems. That said, my family gives me a kind of emotional support that my social circle can’t fully replace. With my family, there is a lot of shared history, so I don’t have to explain everything from the beginning. I think I need both. Friends make life lighter, while family makes me feel more secure.",
+    ],
+    answerTranslation: [
+      "这要看具体情况，但如果一定要选，我可能和朋友在一起时更放松。我们处在人生中比较相似的阶段，所以很容易聊学习、工作压力或日常小问题。不过，家人给我的情感支持是我的社交圈无法完全替代的。和家人在一起时，我们有很多共同经历，所以我不用从头解释每件事。我觉得两者都需要。朋友让生活变得轻松，而家人让我更有安全感。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-039",
+    approach: "建议题要说向谁求助、为什么信任、建议如何帮你厘清问题。用具体对象比泛泛回答更自然。",
+    frames: [
+      "When I need advice, I usually turn to ...",
+      "I trust him/her because ...",
+      "He/She doesn’t just tell me what to do; ...",
+      "That helps me ...",
+    ],
+    vocabulary: [
+      { phrase: "turn to someone", translation: "向某人求助", note: "建议题核心动词" },
+      { phrase: "sound advice", translation: "可靠的建议", note: "比 good advice 更地道" },
+      { phrase: "put things in perspective", translation: "帮人看清问题全貌", note: "BBC 常见表达" },
+      { phrase: "dilemma", translation: "两难处境", note: "解释为什么需要建议" },
+      { phrase: "trustworthy", translation: "值得信任的", note: "描述求助对象" },
+    ],
+    answer: [
+      "When I need advice, I usually turn to my mother first. She is calm and trustworthy, and she gives sound advice without making me feel judged. If I’m facing a dilemma, she doesn’t just tell me what to do. She asks practical questions, like what I’m worried about and what the worst result might be. That really helps me put things in perspective. For study-related problems, I may also ask a teacher or a friend, but for personal decisions I prefer someone who knows my personality well. Advice is most useful when it helps me think clearly, not when it controls my choice.",
+    ],
+    answerTranslation: [
+      "当我需要建议时，我通常会先向妈妈求助。她很冷静，也值得信任，而且她给的建议很可靠，不会让我觉得被评判。如果我处在两难的情况里，她不会直接告诉我该怎么做。她会问一些实际的问题，比如我到底担心什么，最坏的结果可能是什么。这真的能帮我看清问题全貌。学习方面的问题我也可能问老师或朋友，但涉及个人决定时，我更愿意问了解我性格的人。对我来说，好的建议不是控制我的选择，而是帮助我更清楚地思考。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-040",
+    approach: "听音乐题可以讲频率、类型和作用。避免只列歌手，用情绪和场景把答案说活。",
+    frames: [
+      "Yes, I listen to music almost ...",
+      "I usually choose music based on ...",
+      "When I need to focus, I prefer ...",
+      "For me, music is a way to ...",
+    ],
+    vocabulary: [
+      { phrase: "unwind", translation: "放松下来", note: "音乐作用常用" },
+      { phrase: "playlist", translation: "歌单", note: "现代听歌场景" },
+      { phrase: "background music", translation: "背景音乐", note: "学习或做事时听" },
+      { phrase: "lyrics", translation: "歌词", note: "讲音乐内容" },
+      { phrase: "lift my mood", translation: "改善心情", note: "BBC 自然表达" },
+    ],
+    answer: [
+      "Yes, I listen to music almost every day. I usually choose music based on my mood rather than one fixed style. If I’m travelling or walking alone, I like songs with clear lyrics because they keep me company. When I need to focus, I prefer soft background music without many words, otherwise I get distracted. Music helps me unwind after a busy day, and sometimes a familiar playlist can lift my mood very quickly. I wouldn’t say I’m an expert on music, but it is part of my daily routine, like a small emotional reset button.",
+    ],
+    answerTranslation: [
+      "是的，我几乎每天都会听音乐。我通常会根据心情来选音乐，而不是固定听一种风格。如果我在路上或一个人散步，我喜欢歌词清楚的歌，因为它们有一种陪伴感。需要专注时，我更喜欢没有太多歌词的轻柔背景音乐，否则容易分心。音乐能帮助我在忙碌的一天后放松下来，有时候一张熟悉的歌单很快就能改善我的心情。我不会说自己是音乐专家，但它确实是我日常生活的一部分，像一个小小的情绪重置按钮。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-041",
+    approach: "空闲时间题用真实低成本活动，不要堆很多爱好。重点讲它如何帮你恢复精力。",
+    frames: [
+      "In my free time, I usually ...",
+      "It is not a very exciting hobby, but ...",
+      "When I have more time, I might ...",
+      "The main reason I enjoy it is ...",
+    ],
+    vocabulary: [
+      { phrase: "downtime", translation: "休息时间", note: "比 free time 更自然" },
+      { phrase: "recharge", translation: "恢复精力", note: "解释休闲作用" },
+      { phrase: "go for a stroll", translation: "散步", note: "BBC 生活表达" },
+      { phrase: "screen time", translation: "屏幕时间", note: "讲刷手机适度" },
+      { phrase: "switch off", translation: "放空/暂时不想事情", note: "休闲题高频" },
+    ],
+    answer: [
+      "In my free time, I usually go for a stroll, watch short videos or read something light. It is not a very exciting routine, but it helps me recharge. If I’ve had too much screen time during the day, walking outside is better because it gives my eyes and mind a break. When I have more downtime, I might meet a friend for coffee or go to the gym. The main reason I value free time is that it lets me switch off for a while. Without that kind of pause, I become less patient and less productive later.",
+    ],
+    answerTranslation: [
+      "空闲时间里，我通常会散步、看短视频，或者读一点轻松的内容。这不是特别刺激的安排，但能帮我恢复精力。如果我白天屏幕时间太长，出门走走会更好，因为眼睛和大脑都能休息一下。如果休息时间更多，我可能会和朋友喝咖啡，或者去健身房。我重视空闲时间的主要原因是它能让我暂时放空一下。没有这种暂停，我之后会更没耐心，效率也会降低。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-042",
+    approach: "城市乡村题用优缺点平衡。学生口吻可以说当前更适合城市，长期可能更向往乡村。",
+    frames: [
+      "At this stage of my life, I prefer ...",
+      "The biggest advantage is ...",
+      "However, I can see why some people like ...",
+      "In the future, I might ...",
+    ],
+    vocabulary: [
+      { phrase: "pace of life", translation: "生活节奏", note: "城市乡村对比核心" },
+      { phrase: "amenities", translation: "生活设施", note: "城市便利" },
+      { phrase: "greenery", translation: "绿植/绿化", note: "乡村或社区环境" },
+      { phrase: "hustle and bustle", translation: "喧嚣忙碌", note: "BBC 城市表达" },
+      { phrase: "peace and quiet", translation: "安静平和", note: "乡村优势" },
+    ],
+    answer: [
+      "At this stage of my life, I prefer living in a city because it gives me easier access to schools, public transport and different amenities. The biggest advantage is convenience. I can buy things, meet friends or get medical help without travelling far. However, I can see why some people prefer the countryside. The pace of life is slower, there is more greenery, and people can enjoy real peace and quiet. The city’s hustle and bustle can be tiring, especially during rush hour. So for now, the city suits my study and work needs, but later I might want a quieter place.",
+    ],
+    answerTranslation: [
+      "在人生目前这个阶段，我更喜欢住在城市里，因为学校、公共交通和各种生活设施都更容易接触到。最大的优势就是方便。我可以买东西、见朋友，或者获得医疗帮助，而不需要走很远。不过我也能理解为什么有些人更喜欢乡村。那里的生活节奏更慢，绿化更多，人们也能享受真正的安静和平和。城市的喧嚣忙碌有时会让人疲惫，尤其是在高峰期。所以现在城市更适合我的学习和工作需要，但以后我可能会想住在更安静的地方。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-043",
+    approach: "放松地点题讲具体环境和感官感受。用一个常去地点，解释为什么它能让你清空大脑。",
+    frames: [
+      "A place I like to go to relax is ...",
+      "I like it because ...",
+      "When I’m there, I usually ...",
+      "It helps me feel ...",
+    ],
+    vocabulary: [
+      { phrase: "quiet corner", translation: "安静角落", note: "描述放松地点" },
+      { phrase: "green space", translation: "绿色空间", note: "公园/自然场景" },
+      { phrase: "clear my head", translation: "清空思绪", note: "BBC 常见表达" },
+      { phrase: "sensory overload", translation: "感官过载", note: "解释为什么需要安静" },
+      { phrase: "retreat", translation: "短暂避风港", note: "让地点更有质感" },
+    ],
+    answer: [
+      "A place I like to go to relax is a small park near my home. It has a quiet corner with benches and trees, and it feels like a little green space away from traffic. When I’m there, I usually walk slowly, listen to music or just sit for ten minutes without checking my phone. It helps me clear my head, especially after a day full of messages, noise and sensory overload. I don’t need an expensive café or a long trip to relax. Sometimes a simple retreat close to home is enough to make me feel calmer and more balanced.",
+    ],
+    answerTranslation: [
+      "我喜欢去放松的地方是家附近的一个小公园。那里有一个带长椅和树木的安静角落，感觉像是远离交通噪音的一小片绿色空间。我在那里的时候，通常会慢慢走路、听音乐，或者只是坐十分钟不看手机。它能帮我清空思绪，尤其是在一天充满消息、噪音和感官过载之后。我并不需要昂贵的咖啡馆或很远的旅行来放松。有时候，家附近一个简单的小避风港就足以让我更平静、更平衡。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-044",
+    approach: "工作学习题按学生身份回答：专业、原因、感受、未来用途。保持具体但不泄露个人隐私。",
+    frames: [
+      "I’m currently a student, and I study ...",
+      "I chose it because ...",
+      "The challenging part is ...",
+      "In the long run, I hope ...",
+    ],
+    vocabulary: [
+      { phrase: "major in", translation: "主修", note: "学生身份核心" },
+      { phrase: "coursework", translation: "课程作业", note: "学习细节" },
+      { phrase: "career prospects", translation: "职业前景", note: "解释选择原因" },
+      { phrase: "interdisciplinary", translation: "跨学科的", note: "BBC 教育类高分词" },
+      { phrase: "rewarding", translation: "有收获的", note: "评价学习体验" },
+    ],
+    answer: [
+      "I’m currently a student, and I major in a subject related to business and technology. I chose it because it feels practical, and the career prospects are quite broad. Some of the coursework is challenging, especially when I have to combine numbers, writing and teamwork in one project. But I also find it rewarding, because it trains me to think in a more interdisciplinary way. I don’t love every single class, to be honest, but I like the overall direction. In the long run, I hope what I’m studying can give me more flexibility when I start working.",
+    ],
+    answerTranslation: [
+      "我目前是一名学生，主修和商业及科技相关的专业。我选择它是因为它比较实用，而且职业前景比较宽。一些课程作业挺有挑战性的，尤其是当一个项目里同时需要数据、写作和团队合作时。但我也觉得很有收获，因为它训练我用更跨学科的方式思考。说实话，我并不是喜欢每一门课，但我喜欢整体方向。从长远来看，我希望现在学的东西能让我以后开始工作时有更多选择和灵活性。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-045",
+    approach: "独学还是共学题用任务类型区分：输入型独学，讨论型共学。这样比单选更真实。",
+    frames: [
+      "It depends on what I’m studying.",
+      "If I need deep focus, I prefer ...",
+      "If the task involves ideas, I like ...",
+      "The key is to avoid ...",
+    ],
+    vocabulary: [
+      { phrase: "study partner", translation: "学习搭子", note: "共学自然说法" },
+      { phrase: "stay in the zone", translation: "保持专注状态", note: "BBC 学习表达" },
+      { phrase: "bounce ideas off someone", translation: "和某人交流想法", note: "讨论型学习" },
+      { phrase: "distraction", translation: "干扰", note: "解释独学优势" },
+      { phrase: "accountable", translation: "有责任感/有人监督", note: "解释共学好处" },
+    ],
+    answer: [
+      "It depends on what I’m studying. If I need deep focus, like reading a difficult article or writing an essay, I prefer studying alone because I can stay in the zone without too much distraction. But if the task involves ideas, I like studying with a good study partner. It is useful to bounce ideas off someone, and it also makes me feel more accountable. The problem is that group study can easily turn into chatting if people are not serious. So my ideal way is to prepare alone first, then discuss the difficult parts with others.",
+    ],
+    answerTranslation: [
+      "这要看我在学什么。如果我需要深度专注，比如阅读一篇难文章或写一篇作文，我更喜欢独自学习，因为这样能保持专注状态，不会有太多干扰。但如果任务涉及想法，我喜欢和靠谱的学习搭子一起学。和别人交流想法很有用，而且也会让我更有责任感。问题是，如果大家不够认真，小组学习很容易变成聊天。所以我理想的方式是先自己准备，再和别人讨论难点。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-046",
+    approach: "国家友好度题避免绝对化。用陌生人、服务场景和熟人圈三种层次来回答。",
+    frames: [
+      "In general, I think people are ...",
+      "They may not always ..., but ...",
+      "In daily life, I often notice ...",
+      "So I’d describe them as ...",
+    ],
+    vocabulary: [
+      { phrase: "approachable", translation: "容易接近的", note: "描述友好度" },
+      { phrase: "community spirit", translation: "社区互助氛围", note: "社会类高分词" },
+      { phrase: "lend a hand", translation: "帮忙", note: "口语自然短语" },
+      { phrase: "reserved", translation: "内敛的", note: "平衡观点" },
+      { phrase: "hospitality", translation: "好客", note: "文化类常用" },
+    ],
+    answer: [
+      "In general, I think people in my country are friendly, but not always in a very obvious way. Some people can seem reserved at first, especially in big cities where everyone is busy. But in daily life, I often notice small examples of kindness, like neighbours lending a hand, strangers giving directions or shop owners being patient with older customers. In smaller communities, the community spirit can be quite strong. I wouldn’t say everyone is warm all the time, because that would be unrealistic, but I do think there is a basic sense of hospitality and willingness to help.",
+    ],
+    answerTranslation: [
+      "总体来说，我觉得我们国家的人是友好的，但不一定总是表现得特别明显。有些人一开始可能显得比较内敛，尤其是在大城市里，大家都很忙。但在日常生活中，我经常能看到一些小小的善意，比如邻居帮忙、陌生人指路，或者店主耐心对待老年顾客。在小社区里，互助氛围会比较强。我不会说每个人一直都很热情，因为那不现实，但我确实觉得这里有一种基本的好客和愿意帮忙的意识。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-047",
+    approach: "买礼物题和 Gifts 区分：这里重点回答购买频率、对象和预算，而不是泛讲礼物意义。",
+    frames: [
+      "I buy gifts for others from time to time, especially ...",
+      "I don’t usually buy anything too ...",
+      "Before buying, I think about ...",
+      "For me, the best gift is ...",
+    ],
+    vocabulary: [
+      { phrase: "from time to time", translation: "偶尔", note: "频率表达自然" },
+      { phrase: "thoughtful", translation: "用心的", note: "礼物题核心形容词" },
+      { phrase: "within my budget", translation: "在预算范围内", note: "学生口吻真实" },
+      { phrase: "wrap up", translation: "包装", note: "送礼动作" },
+      { phrase: "practical use", translation: "实际用途", note: "解释选择标准" },
+    ],
+    answer: [
+      "I buy gifts for others from time to time, especially for birthdays or important festivals. As a student, I don’t usually buy anything too expensive, so I try to choose something thoughtful and within my budget. Before buying a gift, I think about whether the person will actually use it, not just whether it looks nice. For example, I might buy a notebook, a small plant or a snack they like, then wrap it up neatly. For me, the best gift has some practical use but also shows that I know the person well. Price matters less than suitability.",
+    ],
+    answerTranslation: [
+      "我偶尔会给别人买礼物，尤其是在生日或重要节日的时候。作为学生，我通常不会买太贵的东西，所以会尽量选择用心而且在预算范围内的礼物。买之前，我会考虑对方是否真的会用到它，而不只是它看起来漂不漂亮。比如我可能会买一本笔记本、一盆小植物，或者对方喜欢的零食，然后把它包装好。对我来说，最好的礼物既有实际用途，也能说明我了解对方。价格没有合适程度那么重要。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-048",
+    approach: "家中物品题要选一个有细节的小物件。用地点、用途和情感价值支撑答案。",
+    frames: [
+      "My favourite object at home is ...",
+      "I keep it ...",
+      "It is useful because ...",
+      "More importantly, it has ...",
+    ],
+    vocabulary: [
+      { phrase: "sentimental value", translation: "情感价值", note: "物品题高分核心" },
+      { phrase: "hand-me-down", translation: "家人传下来的东西", note: "有故事感" },
+      { phrase: "keepsake", translation: "纪念物", note: "解释为什么珍惜" },
+      { phrase: "comforting", translation: "令人安心的", note: "情绪细节" },
+      { phrase: "within arm’s reach", translation: "伸手可及", note: "描述放置位置" },
+    ],
+    answer: [
+      "My favourite object at home is a small desk lamp in my room. It is not expensive, but it has a bit of sentimental value because my father bought it for me when I started studying seriously for exams. I keep it within arm’s reach on my desk, and I use it almost every evening. The warm light is comforting, especially when I’m reading or writing notes late at night. In a way, it feels like a small keepsake from that period of hard work. I like it because it is both practical and personal, not just decorative.",
+    ],
+    answerTranslation: [
+      "我家里最喜欢的物品是房间里的一盏小台灯。它并不贵，但有一点情感价值，因为这是我开始认真备考时爸爸给我买的。我把它放在书桌上伸手可及的位置，几乎每天晚上都会用。温暖的灯光让人很安心，尤其是我晚上读书或做笔记的时候。从某种程度上说，它像是那段努力学习时期的一个小纪念物。我喜欢它，是因为它既实用，又有个人意义，而不只是装饰品。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-049",
+    approach: "尝试新活动题要承认一开始会紧张，再讲低风险尝试如何扩大生活经验。",
+    frames: [
+      "I enjoy trying new activities, but ...",
+      "At first, I usually feel ...",
+      "Once I get started, ...",
+      "Trying new things helps me ...",
+    ],
+    vocabulary: [
+      { phrase: "step out of my comfort zone", translation: "走出舒适区", note: "活动题核心" },
+      { phrase: "give it a go", translation: "试一试", note: "BBC 口语短语" },
+      { phrase: "beginner", translation: "新手", note: "承认不熟练" },
+      { phrase: "broaden my horizons", translation: "开阔眼界", note: "解释好处" },
+      { phrase: "low-risk", translation: "低风险的", note: "说明尝试边界" },
+    ],
+    answer: [
+      "I enjoy trying new activities, but I’m not the kind of person who jumps into everything immediately. At first, I usually feel a bit nervous, especially if I’m a complete beginner. But if the activity is low-risk, like a new sport, a workshop or a different style of cooking, I’m happy to give it a go. Once I get started, I often find it less scary than I imagined. Trying new things helps me step out of my comfort zone and broaden my horizons. Even if I’m not good at the activity, I can still learn something about myself.",
+    ],
+    answerTranslation: [
+      "我喜欢尝试新活动，但我不是那种什么事都会立刻冲进去的人。一开始我通常会有点紧张，尤其是当我完全是新手的时候。但如果这个活动风险不高，比如一项新运动、一个工作坊，或者一种不同风格的烹饪，我会愿意试一试。一旦开始，我经常发现它没有想象中那么可怕。尝试新事物能帮助我走出舒适区，也能开阔眼界。即使我并不擅长这个活动，我仍然能从中更了解自己。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-050",
+    approach: "爱好题不要泛泛说 enjoy。讲一个稳定爱好、频率、具体收益和能否长期坚持。",
+    frames: [
+      "One hobby I’ve kept for a while is ...",
+      "I usually do it ...",
+      "It helps me ...",
+      "I think I’ll keep it up because ...",
+    ],
+    vocabulary: [
+      { phrase: "keep up with", translation: "坚持", note: "讲长期爱好" },
+      { phrase: "fitness routine", translation: "健身习惯", note: "运动类爱好" },
+      { phrase: "relieve stress", translation: "缓解压力", note: "BBC 健康生活表达" },
+      { phrase: "consistent", translation: "稳定持续的", note: "解释习惯" },
+      { phrase: "sense of progress", translation: "进步感", note: "说明为什么喜欢" },
+    ],
+    answer: [
+      "One hobby I’ve kept for a while is going to the gym. I’m not a professional athlete or anything like that, but I try to keep up with a simple fitness routine a few times a week. It helps me relieve stress, especially after sitting at a desk for too long. I also like the sense of progress. For example, if I can lift a little more weight or run for a bit longer, I feel that my effort is paying off. This hobby is not just about appearance for me. It makes my daily life more consistent and gives me more energy.",
+    ],
+    answerTranslation: [
+      "我坚持了一段时间的爱好是去健身房。我不是专业运动员之类的人，但我会尽量每周坚持几次简单的健身习惯。它能帮我缓解压力，尤其是在书桌前坐太久之后。我也喜欢那种进步感。比如如果我能多举一点重量，或者多跑一会儿，我会觉得自己的努力有了回报。对我来说，这个爱好不只是关于外表。它让我的日常生活更稳定，也让我更有精力。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-051",
+    approach: "钥匙题用日常细节回答：带几把、如何防丢、丢钥匙的后果。简单题也要有生活感。",
+    frames: [
+      "Yes, I carry keys almost every day.",
+      "I usually keep them ...",
+      "I’m careful because ...",
+      "If I lost them, ...",
+    ],
+    vocabulary: [
+      { phrase: "keyring", translation: "钥匙圈", note: "物品细节" },
+      { phrase: "misplace", translation: "随手放错地方", note: "比 lose 更准确" },
+      { phrase: "spare key", translation: "备用钥匙", note: "钥匙题常用" },
+      { phrase: "lock myself out", translation: "把自己锁在门外", note: "真实后果" },
+      { phrase: "part of my routine", translation: "日常习惯的一部分", note: "解释防丢方法" },
+    ],
+    answer: [
+      "Yes, I carry keys almost every day, mainly for my home and sometimes for a locker. I keep them on a small keyring, and I usually put them in the same pocket of my backpack. That has become part of my routine, because I’m quite likely to misplace small things if I change the place all the time. I’m careful with keys because losing them would be annoying and possibly unsafe. If I locked myself out, I would have to call my family or use a spare key. So even though keys are small, I treat them as something important.",
+    ],
+    answerTranslation: [
+      "是的，我几乎每天都会带钥匙，主要是家里的钥匙，有时还有储物柜钥匙。我把它们挂在一个小钥匙圈上，通常放在背包同一个口袋里。这已经成为我日常习惯的一部分，因为如果我总是换地方放，我很可能会把小东西随手放错。钥匙我会比较小心，因为丢了会很麻烦，也可能不太安全。如果我把自己锁在门外，就得联系家人或使用备用钥匙。所以虽然钥匙很小，我仍然把它当成重要物品。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-052",
+    approach: "休息日题按“睡懒觉—补生活事务—轻松活动”展开。体现恢复精力，不要像旅游计划。",
+    frames: [
+      "On a day off, I usually ...",
+      "I don’t like to make it too ...",
+      "If I have energy, I might ...",
+      "The purpose is to ...",
+    ],
+    vocabulary: [
+      { phrase: "day off", translation: "休息日", note: "题目关键词" },
+      { phrase: "sleep in", translation: "睡懒觉", note: "休息日自然表达" },
+      { phrase: "recharge my batteries", translation: "恢复精力", note: "BBC 口语短语" },
+      { phrase: "catch up on", translation: "补做", note: "补家务/消息/学习" },
+      { phrase: "low-key", translation: "低调轻松的", note: "描述轻松安排" },
+    ],
+    answer: [
+      "On a day off, I usually sleep in a little and keep the day quite low-key. I don’t like to make a very full schedule, because then it stops feeling like a real break. I might catch up on laundry, reply to messages or tidy my room in the morning. If I have more energy, I’ll meet a friend, watch a film or go for a walk. The purpose is to recharge my batteries, not to be productive every minute. I think a good day off should give me a sense of space, so I can return to study or work with a clearer mind.",
+    ],
+    answerTranslation: [
+      "休息日我通常会稍微睡个懒觉，然后把一天安排得比较轻松。我不喜欢把日程排得太满，因为那样就不像真正的休息了。早上我可能会补洗衣服、回复消息，或者整理房间。如果精力多一点，我会见朋友、看电影，或者出去散步。休息日的目的不是每一分钟都保持高效，而是恢复精力。我觉得好的休息日应该给我一点空间感，这样我回到学习或工作时头脑会更清楚。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-053",
+    approach: "修理东西题用诚实口吻：会做基础排查，但复杂问题找专业人士。顺带讲环保和省钱。",
+    frames: [
+      "I can fix simple things, but ...",
+      "For example, I might ...",
+      "If it looks complicated, I ...",
+      "I think repairing things is useful because ...",
+    ],
+    vocabulary: [
+      { phrase: "DIY", translation: "自己动手修理", note: "修理题核心" },
+      { phrase: "troubleshooting", translation: "故障排查", note: "科技/维修通用" },
+      { phrase: "throwaway culture", translation: "用完即丢文化", note: "BBC 环保表达" },
+      { phrase: "save money", translation: "省钱", note: "解释修理好处" },
+      { phrase: "call in a professional", translation: "请专业人士", note: "复杂问题处理" },
+    ],
+    answer: [
+      "I can fix simple things, but I’m not especially handy. For example, I might do basic troubleshooting if my phone, printer or headphones stop working. I’ll restart the device, check the cable or look up a short guide online. But if it involves electricity, plumbing or anything expensive, I’d rather call in a professional. I think repairing things is useful because it can save money and reduce throwaway culture. At the same time, people need to know their limits. DIY is satisfying when the problem is small, but it can become risky if you pretend to understand everything.",
+    ],
+    answerTranslation: [
+      "我能修一些简单的东西，但我不是特别擅长动手。比如如果手机、打印机或耳机出了问题，我可能会做一些基础故障排查。我会重启设备、检查线缆，或者在网上找一个简短教程。但如果涉及电路、管道，或者比较贵的东西，我宁愿请专业人士。我觉得修理东西很有用，因为它能省钱，也能减少用完即丢的文化。同时，人也要知道自己的能力边界。小问题自己修会很有成就感，但如果假装什么都懂，就可能有风险。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-054",
+    approach: "食物题从日常饮食、偏好和健康平衡回答。不要只说最喜欢的菜，补一点饮食习惯。",
+    frames: [
+      "I’m not a very picky eater, but ...",
+      "On a normal day, I usually ...",
+      "My comfort food is ...",
+      "I try to keep a balance between ...",
+    ],
+    vocabulary: [
+      { phrase: "comfort food", translation: "慰藉食物", note: "自然表达偏爱" },
+      { phrase: "balanced diet", translation: "均衡饮食", note: "健康角度" },
+      { phrase: "homemade", translation: "家里做的", note: "日常饮食细节" },
+      { phrase: "picky eater", translation: "挑食的人", note: "食物题常用" },
+      { phrase: "treat myself", translation: "犒劳自己", note: "讲偶尔吃甜食/外卖" },
+    ],
+    answer: [
+      "I’m not a very picky eater, but I do prefer food that is fresh and not too oily. On a normal day, I usually eat homemade meals, like rice, vegetables, eggs and some meat. My comfort food is probably noodles, because they are warm, simple and easy to customise. I also like trying different snacks, but I try not to treat myself too often with fried food or sweet drinks. For me, a balanced diet doesn’t mean being strict all the time. It means eating mostly healthy food while still enjoying something tasty when I really want it.",
+    ],
+    answerTranslation: [
+      "我不算特别挑食，但我确实更喜欢新鲜、不太油的食物。平时我通常吃家里做的饭，比如米饭、蔬菜、鸡蛋和一些肉。我的慰藉食物大概是面条，因为它热乎、简单，而且很容易按自己的口味调整。我也喜欢尝试不同的小吃，但会尽量不要太频繁地用油炸食品或甜饮料犒劳自己。对我来说，均衡饮食不是一直严格控制，而是大多数时候吃得健康，同时在真的想吃时也能享受一点好吃的东西。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-055",
+    approach: "梦境题要区分 night dreams 和 goals。讲是否常记得梦、梦的类型和睡眠状态的关系。",
+    frames: [
+      "I don’t remember my dreams every day, but ...",
+      "When I’m stressed, I tend to ...",
+      "Most dreams fade away ...",
+      "I think dreams are connected with ...",
+    ],
+    vocabulary: [
+      { phrase: "vivid dream", translation: "清晰生动的梦", note: "梦境题核心" },
+      { phrase: "nightmare", translation: "噩梦", note: "说明负面梦境" },
+      { phrase: "subconscious", translation: "潜意识", note: "BBC 心理类词汇" },
+      { phrase: "fade away", translation: "逐渐消失", note: "描述醒后忘记" },
+      { phrase: "sleep quality", translation: "睡眠质量", note: "把梦和状态联系起来" },
+    ],
+    answer: [
+      "I don’t remember my dreams every day, but sometimes I have a very vivid dream that stays in my mind after I wake up. When I’m stressed, I tend to dream about being late, missing a train or forgetting something important, which is not exactly a nightmare but still unpleasant. Most dreams fade away after a few minutes, especially if I check my phone immediately. I think dreams are connected with the subconscious and with sleep quality. If I sleep badly, my dreams feel more chaotic. I don’t take them too seriously, but they can show what has been on my mind.",
+    ],
+    answerTranslation: [
+      "我不是每天都记得自己的梦，但有时候会做一个非常清晰生动的梦，醒来之后还留在脑海里。压力大的时候，我经常会梦到自己迟到、错过火车，或者忘记了重要的东西；那不完全算噩梦，但还是让人不舒服。大多数梦几分钟后就会逐渐消失，尤其是如果我醒来马上看手机。我觉得梦和潜意识以及睡眠质量有关。如果睡得不好，梦就会更混乱。我不会把梦看得太严肃，但它们有时能反映我最近在想什么。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-056",
+    approach: "交通题用日常通勤回答，再补充高峰期和环保意识。Part1 不需要展开成城市规划。",
+    frames: [
+      "The transport I use most often is ...",
+      "It is convenient because ...",
+      "The downside is ...",
+      "If possible, I also try to ...",
+    ],
+    vocabulary: [
+      { phrase: "public transport", translation: "公共交通", note: "交通题核心" },
+      { phrase: "commute", translation: "通勤", note: "日常交通场景" },
+      { phrase: "rush hour", translation: "高峰期", note: "交通问题常用" },
+      { phrase: "carbon footprint", translation: "碳足迹", note: "BBC 环境表达" },
+      { phrase: "get around", translation: "出行", note: "自然口语动词短语" },
+    ],
+    answer: [
+      "The transport I use most often is public transport, especially the metro. It is convenient because I can get around the city without worrying about parking or traffic jams. For my daily commute, the metro is usually faster and more predictable than taking a taxi. The downside is rush hour, when the train can be packed and a bit stressful. If the distance is short, I also like walking or cycling, partly because it is healthier and partly because it reduces my carbon footprint. I don’t drive much, so public transport is still my main way of travelling around.",
+    ],
+    answerTranslation: [
+      "我最常用的交通方式是公共交通，尤其是地铁。它很方便，因为我可以在城市里出行，不用担心停车或堵车。对日常通勤来说，地铁通常比打车更快，也更可预测。缺点是高峰期，车厢可能非常拥挤，也有点让人紧张。如果距离比较短，我也喜欢步行或骑车，一方面更健康，另一方面也能减少碳足迹。我不太开车，所以公共交通仍然是我最主要的出行方式。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-057",
+    approach: "健康题从生活习惯入手，承认不完美但有意识。涵盖运动、饮食、睡眠和心理健康。",
+    frames: [
+      "I try to stay healthy by ...",
+      "I’m not perfect, especially when ...",
+      "One habit that helps is ...",
+      "For me, health is not only ... but also ...",
+    ],
+    vocabulary: [
+      { phrase: "balanced lifestyle", translation: "均衡的生活方式", note: "健康题总括词" },
+      { phrase: "mental wellbeing", translation: "心理健康", note: "BBC 健康类高频" },
+      { phrase: "check-up", translation: "体检", note: "健康管理" },
+      { phrase: "sedentary", translation: "久坐的", note: "现代生活问题" },
+      { phrase: "in moderation", translation: "适度地", note: "饮食/娱乐都适用" },
+    ],
+    answer: [
+      "I try to stay healthy by keeping a reasonably balanced lifestyle. I’m not perfect, especially when I’m busy with study, because I may sit for too long or sleep later than planned. But I try to exercise a few times a week, drink enough water and eat snacks in moderation. One habit that helps is taking short breaks, because a sedentary routine makes me feel stiff and tired. I also think mental wellbeing is part of health. If I’m stressed all the time, I don’t feel healthy even if I’m not physically ill. So health, for me, is about energy and balance.",
+    ],
+    answerTranslation: [
+      "我会尽量通过保持比较均衡的生活方式来维持健康。我并不完美，尤其是在学习很忙的时候，可能会坐太久，或者比计划睡得更晚。但我会尽量每周运动几次、喝足够的水，并且适度吃零食。一个有帮助的习惯是短暂休息，因为久坐的生活会让我觉得僵硬和疲惫。我也认为心理健康是健康的一部分。如果我一直压力很大，即使身体没生病，也不会觉得自己健康。所以对我来说，健康关乎精力和平衡。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-058",
+    approach: "公共场所题要讲行为规范：音量、垃圾、排队、个人空间。答案可体现公民意识。",
+    frames: [
+      "In public places, I think people should ...",
+      "For example, they need to ...",
+      "I feel uncomfortable when ...",
+      "Good behaviour in public shows ...",
+    ],
+    vocabulary: [
+      { phrase: "personal space", translation: "个人空间", note: "公共场所核心" },
+      { phrase: "keep my voice down", translation: "压低声音", note: "行为细节" },
+      { phrase: "litter", translation: "乱扔垃圾", note: "公共规范" },
+      { phrase: "queue up", translation: "排队", note: "日常公共行为" },
+      { phrase: "civic-minded", translation: "有公德心的", note: "BBC 社会类表达" },
+    ],
+    answer: [
+      "In public places, I think people should be considerate. For example, they need to queue up, keep their voice down and avoid taking up too much personal space. I feel uncomfortable when people play videos loudly on their phones or leave litter in parks and train stations. These are small things, but they affect everyone around them. I try to behave in a civic-minded way by cleaning up after myself and not blocking walkways. Good behaviour in public doesn’t require a big effort. It just means remembering that shared spaces are not private rooms, so other people’s comfort matters too.",
+    ],
+    answerTranslation: [
+      "在公共场所，我觉得人们应该为他人着想。比如需要排队、压低声音，也不要占用太多个人空间。当有人在手机上大声播放视频，或者在公园和车站乱扔垃圾时，我会觉得不舒服。这些都是小事，但会影响周围的每个人。我会尽量有公德心，比如自己收拾好东西，不挡住通道。公共场所里的良好行为并不需要付出很大努力。它只是意味着要记住，共享空间不是私人房间，所以别人的舒适也很重要。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-059",
+    approach: "电视题结合流媒体时代回答。说明不常看传统电视，但会看节目类型和使用场景。",
+    frames: [
+      "I don’t watch traditional TV very often, but ...",
+      "I usually watch ... on ...",
+      "Sometimes I use it as ...",
+      "The only problem is ...",
+    ],
+    vocabulary: [
+      { phrase: "streaming platform", translation: "流媒体平台", note: "现代电视观看方式" },
+      { phrase: "documentary", translation: "纪录片", note: "节目类型" },
+      { phrase: "binge-watch", translation: "连续刷剧", note: "BBC 媒体表达" },
+      { phrase: "background noise", translation: "背景声音", note: "真实使用场景" },
+      { phrase: "quality time", translation: "高质量相处时间", note: "和家人看电视" },
+    ],
+    answer: [
+      "I don’t watch traditional TV very often, but I do watch programmes on streaming platforms. I usually prefer documentaries, light dramas or travel shows, depending on how tired I am. Sometimes I use TV as background noise while I’m eating, but if the programme is really interesting, I’ll sit down and watch it properly. In my family, watching a show together can also be a bit of quality time, because we can talk about it afterwards. The only problem is that it is easy to binge-watch one episode after another, so I try not to start a series too late at night.",
+    ],
+    answerTranslation: [
+      "我不太常看传统电视，但会在流媒体平台上看节目。我通常更喜欢纪录片、轻松的电视剧或旅行节目，具体看我有多累。有时候我吃饭时会把电视当背景声音，但如果节目真的有意思，我会坐下来认真看。在我家里，一起看节目也算是一种高质量相处时间，因为看完之后我们可以聊一聊。唯一的问题是很容易一集接一集地刷下去，所以我会尽量不在太晚的时候开始追剧。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-060",
+    approach: "博物馆题讲是否喜欢、喜欢哪类展览和为什么。强调互动展览比背历史更吸引你。",
+    frames: [
+      "I like museums when ...",
+      "The kind of museum I enjoy most is ...",
+      "A good exhibit should ...",
+      "Museums are useful because ...",
+    ],
+    vocabulary: [
+      { phrase: "exhibit", translation: "展品/展览", note: "博物馆题核心" },
+      { phrase: "interactive display", translation: "互动展示", note: "现代博物馆表达" },
+      { phrase: "cultural heritage", translation: "文化遗产", note: "解释博物馆价值" },
+      { phrase: "spark curiosity", translation: "激发好奇心", note: "学习效果" },
+      { phrase: "take in information", translation: "吸收信息", note: "看展动作" },
+    ],
+    answer: [
+      "I like museums when they are well designed and not just full of long labels. The kind of museum I enjoy most is a science or history museum with interactive displays, because I can take in information more easily by seeing and touching things. A good exhibit should spark curiosity, not make visitors feel they are reading a textbook while standing up. Museums are useful because they protect cultural heritage and give people a calm place to learn. I don’t go every month, but when I travel to a new city, I often visit at least one museum to understand the place better.",
+    ],
+    answerTranslation: [
+      "如果博物馆设计得好，而不是只有一大堆很长的说明牌，我是喜欢博物馆的。我最喜欢的是带有互动展示的科学或历史博物馆，因为通过看和触摸，我能更容易吸收信息。好的展览应该激发好奇心，而不是让参观者觉得自己是在站着读课本。博物馆很有用，因为它们保护文化遗产，也给人们提供了一个安静学习的地方。我不是每个月都去，但旅行到一个新城市时，我经常会至少参观一个博物馆，以便更好地了解那个地方。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-061",
+    approach: "拥挤场所题讲感受、原因和处理方法。用 peak hours、personal space 表达具体。",
+    frames: [
+      "I don’t really enjoy crowded places because ...",
+      "They make me feel ...",
+      "If I have to go, I usually ...",
+      "I prefer places that ...",
+    ],
+    vocabulary: [
+      { phrase: "packed", translation: "挤满人的", note: "比 crowded 更口语" },
+      { phrase: "personal space", translation: "个人空间", note: "解释不舒服原因" },
+      { phrase: "overwhelming", translation: "让人不堪重负的", note: "感受表达" },
+      { phrase: "avoid peak hours", translation: "避开高峰期", note: "处理方法" },
+      { phrase: "claustrophobic", translation: "憋闷压抑的", note: "描述拥挤空间" },
+    ],
+    answer: [
+      "I don’t really enjoy crowded places because they make me feel a bit overwhelmed. If a shopping mall, station or tourist spot is packed, there is very little personal space, and I become more impatient. I don’t think I’m claustrophobic in a serious way, but I definitely dislike being pushed around or having to speak loudly just to be heard. If I have to go somewhere popular, I usually try to avoid peak hours or book things in advance. I prefer places that are lively but still manageable. A bit of energy is nice, but too much crowding ruins the experience for me.",
+    ],
+    answerTranslation: [
+      "我不太喜欢拥挤的地方，因为它们会让我觉得有点不堪重负。如果商场、车站或旅游景点挤满了人，个人空间就很少，我也会变得更没耐心。我不认为自己有严重的幽闭恐惧，但我确实不喜欢被人挤来挤去，或者为了让别人听见而不得不大声说话。如果必须去热门地点，我通常会尽量避开高峰期，或者提前预约。我更喜欢热闹但仍然可控的地方。有一点活力是好的，但太拥挤会破坏我的体验。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-062",
+    approach: "旅行题讲偏好和方式。Part1 用目的、准备和体验感回答，不要展开成 Part2 故事。",
+    frames: [
+      "I enjoy travelling, especially when ...",
+      "Before a trip, I usually ...",
+      "I don’t like trips that are too ...",
+      "Travel helps me ...",
+    ],
+    vocabulary: [
+      { phrase: "broaden my horizons", translation: "开阔眼界", note: "旅行题经典表达" },
+      { phrase: "itinerary", translation: "行程安排", note: "旅行准备" },
+      { phrase: "local cuisine", translation: "当地美食", note: "旅行体验" },
+      { phrase: "travel light", translation: "轻装旅行", note: "BBC 旅行表达" },
+      { phrase: "touristy", translation: "过于游客化的", note: "评价旅行地点" },
+    ],
+    answer: [
+      "I enjoy travelling, especially when the trip gives me enough time to explore rather than rush from one attraction to another. Before a trip, I usually make a simple itinerary, but I don’t plan every minute because that feels stressful. I like trying local cuisine, walking around ordinary neighbourhoods and taking photos of small details. I also prefer to travel light, because carrying too much luggage makes the journey tiring. I don’t mind famous places, but if somewhere is too touristy, it can feel less authentic. Travel helps me broaden my horizons and understand how different daily life can be in other places.",
+    ],
+    answerTranslation: [
+      "我喜欢旅行，尤其是当一趟旅行能给我足够时间探索，而不是从一个景点赶到另一个景点的时候。出发前我通常会做一个简单行程，但不会把每一分钟都安排好，因为那会让人有压力。我喜欢尝试当地美食、在普通街区走走，也喜欢拍一些小细节。我也更喜欢轻装旅行，因为带太多行李会让旅程很累。我不介意去著名景点，但如果一个地方过于游客化，就会显得不那么真实。旅行能开阔我的眼界，也让我理解不同地方的日常生活可以有多不一样。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-063",
+    approach: "鞋子题从数量、偏好和实用性回答。重点讲舒适度，不要变成购物广告。",
+    frames: [
+      "I don’t have a huge number of shoes, but ...",
+      "The pair I wear most often is ...",
+      "Comfort matters more to me than ...",
+      "I usually buy new shoes when ...",
+    ],
+    vocabulary: [
+      { phrase: "trainers", translation: "运动鞋", note: "英式常用" },
+      { phrase: "wear out", translation: "穿坏/磨损", note: "买新鞋原因" },
+      { phrase: "dress shoes", translation: "正装鞋", note: "正式场合" },
+      { phrase: "practical", translation: "实用的", note: "偏好表达" },
+      { phrase: "arch support", translation: "足弓支撑", note: "舒适细节" },
+    ],
+    answer: [
+      "I don’t have a huge number of shoes, but I have enough for different situations. The pair I wear most often is probably my trainers, because they are practical and comfortable for walking around campus or going out at weekends. Comfort matters more to me than fashion, especially if I need to stand or walk for a long time. I do have a pair of dress shoes for formal occasions, but I don’t wear them often. I usually buy new shoes when the old ones wear out or stop giving enough arch support. Good shoes should look decent, but they also need to protect my feet.",
+    ],
+    answerTranslation: [
+      "我的鞋子数量不算特别多，但足够应对不同场合。我最常穿的大概是运动鞋，因为它们很实用，也适合在校园里走路或周末出门。对我来说，舒适比时尚更重要，尤其是当我需要长时间站立或走路时。我也有一双正装鞋，用于正式场合，但不常穿。通常是旧鞋磨损了，或者足弓支撑不够了，我才会买新鞋。好的鞋子应该看起来得体，但也需要保护脚。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-064",
+    approach: "携带物品题讲日常包里带什么、为什么带、如何避免带太多。用 essentials 做归纳。",
+    frames: [
+      "When I go out, I usually carry ...",
+      "The essentials for me are ...",
+      "I also bring ... just in case.",
+      "I try not to carry too much because ...",
+    ],
+    vocabulary: [
+      { phrase: "essentials", translation: "必需品", note: "携带物品总括" },
+      { phrase: "backpack", translation: "双肩包", note: "学生场景自然" },
+      { phrase: "power bank", translation: "充电宝", note: "现代出门必备" },
+      { phrase: "clutter", translation: "杂物", note: "避免带太多" },
+      { phrase: "come in handy", translation: "派上用场", note: "BBC 口语短语" },
+    ],
+    answer: [
+      "When I go out, I usually carry a small backpack or a tote bag. The essentials for me are my phone, keys, wallet, tissues and sometimes a power bank. If I’m going to class, I also bring a notebook and a pen, because they can still come in handy even when most materials are digital. I try not to carry too much because extra clutter makes my bag heavy and messy. I used to pack things just in case, but many of them were never used. Now I’m more realistic. I carry what I need for the day, not everything I own.",
+    ],
+    answerTranslation: [
+      "出门时，我通常会带一个小双肩包或帆布包。对我来说，必需品包括手机、钥匙、钱包、纸巾，有时还有充电宝。如果我要去上课，我也会带一本笔记本和一支笔，因为即使大部分材料都是电子版，它们仍然可能派上用场。我会尽量不要带太多东西，因为额外的杂物会让包又重又乱。以前我会为了以防万一装很多东西，但其中很多从来没用过。现在我更现实，只带当天需要的东西，而不是把所有东西都带上。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-065",
+    approach: "把事情做好题要讲一个可迁移能力，如写作、整理或演讲。强调练习、反馈和细节。",
+    frames: [
+      "One thing I’m quite good at is ...",
+      "I became better at it by ...",
+      "What matters most is ...",
+      "I still want to improve ...",
+    ],
+    vocabulary: [
+      { phrase: "attention to detail", translation: "注重细节", note: "做好事情核心" },
+      { phrase: "practice consistently", translation: "持续练习", note: "能力来源" },
+      { phrase: "ask for feedback", translation: "寻求反馈", note: "改进方法" },
+      { phrase: "make progress", translation: "取得进步", note: "成长表达" },
+      { phrase: "raise the standard", translation: "提高标准", note: "高分表达" },
+    ],
+    answer: [
+      "One thing I’m quite good at is organising written work, like notes, outlines or short essays. I became better at it by practising consistently and asking for feedback from teachers and classmates. What matters most, I think, is attention to detail. A piece of writing can have good ideas, but if the structure is messy, the reader still gets lost. I’m not saying I’m perfect, but I can usually make information clear and easy to follow. I still want to improve my speed, because sometimes I spend too long polishing small parts. But overall, writing is something where I can see real progress.",
+    ],
+    answerTranslation: [
+      "我比较擅长的一件事是整理书面内容，比如笔记、提纲或短作文。我通过持续练习，以及向老师和同学寻求反馈，慢慢变得更好。我觉得最重要的是注重细节。一篇文章可以有不错的想法，但如果结构混乱，读者还是会看不懂。我不是说自己完美，但我通常能把信息整理得清楚、容易理解。我还想提高速度，因为有时我会花太多时间打磨小部分。不过总体来说，写作是一个我能看到真实进步的领域。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-066",
+    approach: "与老人共事题可讲尊重、耐心和代际差异。没有真实工作经历时，用志愿活动或家庭互动回答。",
+    frames: [
+      "I haven’t worked with old people formally, but ...",
+      "From my experience, older people often ...",
+      "The important thing is to ...",
+      "I think it can be rewarding because ...",
+    ],
+    vocabulary: [
+      { phrase: "elderly people", translation: "老年人", note: "更礼貌表达" },
+      { phrase: "patient", translation: "有耐心的", note: "相处品质" },
+      { phrase: "life experience", translation: "生活经验", note: "老人优势" },
+      { phrase: "generation gap", translation: "代沟", note: "平衡观点" },
+      { phrase: "rewarding", translation: "有收获的", note: "评价经历" },
+    ],
+    answer: [
+      "I haven’t worked with old people formally, but I’ve spent quite a lot of time helping my grandparents and older relatives. From my experience, elderly people often have a lot of life experience, but they may need more patience when dealing with new technology or complicated forms. The important thing is to speak clearly and not make them feel slow or useless. There can be a generation gap, of course, because our habits and values are not always the same. But I think working with old people can be rewarding. You learn to listen better, and sometimes their stories give you a wider view of life.",
+    ],
+    answerTranslation: [
+      "我没有正式和老人一起工作过，但我花过不少时间帮助祖父母和年长亲戚。根据我的经验，老年人通常有很多生活经验，但在面对新技术或复杂表格时，他们可能需要更多耐心。重要的是说话要清楚，不要让他们觉得自己很慢或没用。当然，代沟是存在的，因为我们的习惯和价值观不总是一样。但我觉得和老人相处或共事会很有收获。你会学着更好地倾听，而且有时他们的故事会让你对生活有更广阔的认识。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-067",
+    approach: "规则题先说明总体态度，再举学校或公共场所规则。强调合理规则保护效率和安全。",
+    frames: [
+      "In general, I think rules are necessary because ...",
+      "A rule I follow quite carefully is ...",
+      "Some rules can be annoying, but ...",
+      "Without rules, ...",
+    ],
+    vocabulary: [
+      { phrase: "ground rules", translation: "基本规则", note: "规则题核心" },
+      { phrase: "follow rules", translation: "遵守规则", note: "基础表达" },
+      { phrase: "bend the rules", translation: "变通/打擦边球", note: "讲例外" },
+      { phrase: "common sense", translation: "常识", note: "评价规则合理性" },
+      { phrase: "for safety reasons", translation: "出于安全原因", note: "解释规则必要性" },
+    ],
+    answer: [
+      "In general, I think rules are necessary because they create order and protect people’s safety. A rule I follow quite carefully is being quiet in libraries and study rooms. It sounds simple, but without that ground rule, people wouldn’t be able to concentrate. Some rules can be annoying, especially when they feel too strict or outdated, and I understand why people sometimes want to bend the rules. But most everyday rules are just common sense. For safety reasons, for example, people should follow traffic rules even when they are in a hurry. Rules are not exciting, but they make shared life possible.",
+    ],
+    answerTranslation: [
+      "总体来说，我认为规则是必要的，因为它们能建立秩序，也能保护人们的安全。我比较认真遵守的一条规则是在图书馆和自习室保持安静。这听起来很简单，但如果没有这条基本规则，人们就无法集中注意力。有些规则可能让人烦，尤其是当它们显得太严格或过时时，我也理解为什么人们有时想打擦边球。但大多数日常规则其实只是常识。比如出于安全原因，即使很赶时间，人们也应该遵守交通规则。规则不令人兴奋，但它们让共同生活成为可能。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-068",
+    approach: "手机题讲使用频率和依赖感，同时加入通知管理。要平衡便利和分心。",
+    frames: [
+      "I use my cellphone every day for ...",
+      "It is useful because ...",
+      "The problem is ...",
+      "To control it, I usually ...",
+    ],
+    vocabulary: [
+      { phrase: "smartphone", translation: "智能手机", note: "手机题基础" },
+      { phrase: "notifications", translation: "通知", note: "分心来源" },
+      { phrase: "put it on silent", translation: "调成静音", note: "管理手机" },
+      { phrase: "digital distraction", translation: "数字干扰", note: "BBC 科技生活表达" },
+      { phrase: "stay connected", translation: "保持联系", note: "手机好处" },
+    ],
+    answer: [
+      "I use my cellphone every day for messages, maps, payments, photos and study materials. It is useful because it helps me stay connected and solve small problems quickly. If I need to check a word, book a ride or contact a friend, my smartphone can do it in seconds. The problem is digital distraction. Notifications can break my focus, and sometimes I pick up the phone for one thing but end up scrolling for twenty minutes. To control it, I put it on silent when I study and keep only important notifications on. I don’t want to give up my phone, but I do want to use it more deliberately.",
+    ],
+    answerTranslation: [
+      "我每天都会用手机发消息、看地图、付款、拍照和查看学习资料。它很有用，因为它能让我保持联系，也能快速解决小问题。如果我需要查一个单词、叫车或联系朋友，智能手机几秒钟就能做到。问题是数字干扰。通知会打断我的专注力，而且有时候我拿起手机只是为了做一件事，最后却刷了二十分钟。为了控制这一点，我学习时会把手机调成静音，只保留重要通知。我不想放弃手机，但确实想更有意识地使用它。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-069",
+    approach: "植物题用是否养植物、喜欢原因和照顾难度回答。学生口吻可以选择低维护植物。",
+    frames: [
+      "I like plants, although ...",
+      "At home, we have ...",
+      "Plants make a room feel ...",
+      "The only difficulty is ...",
+    ],
+    vocabulary: [
+      { phrase: "houseplants", translation: "室内植物", note: "植物题核心" },
+      { phrase: "low-maintenance", translation: "低维护的", note: "适合学生口吻" },
+      { phrase: "greenery", translation: "绿色植物/绿意", note: "BBC 环境表达" },
+      { phrase: "water them regularly", translation: "定期浇水", note: "照顾植物" },
+      { phrase: "brighten up", translation: "让……更明亮/有生气", note: "描述植物作用" },
+    ],
+    answer: [
+      "I like plants, although I’m not an expert at looking after them. At home, we have a few houseplants, mostly low-maintenance ones that don’t need too much attention. I think greenery can brighten up a room and make it feel fresher, especially if the space is small or full of electronic devices. The only difficulty is remembering to water them regularly. I once forgot about a small plant for too long, and it didn’t survive, so now I choose tougher plants. I like them because they make the home feel more alive without requiring a huge amount of space.",
+    ],
+    answerTranslation: [
+      "我喜欢植物，虽然我并不是很会照顾它们。我们家有几盆室内植物，大多是低维护、不需要太多照顾的类型。我觉得绿色植物能让房间更有生气，也显得更清新，尤其是当空间比较小，或者充满电子设备的时候。唯一的困难是要记得定期浇水。我曾经太久忘了给一盆小植物浇水，结果它没活下来，所以现在我会选择更耐活的植物。我喜欢植物，是因为它们不需要占很多空间，却能让家里更有生命力。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-070",
+    approach: "天气题讲偏好、天气对心情和计划的影响。不要只说 sunny/rainy，补湿度或阴天细节。",
+    frames: [
+      "The weather I like most is ...",
+      "It affects my mood because ...",
+      "I’m not a fan of ...",
+      "Before going out, I usually ...",
+    ],
+    vocabulary: [
+      { phrase: "humid", translation: "潮湿闷热的", note: "天气细节" },
+      { phrase: "gloomy", translation: "阴沉的", note: "天气影响心情" },
+      { phrase: "forecast", translation: "天气预报", note: "出门准备" },
+      { phrase: "sunny spell", translation: "一段晴朗天气", note: "BBC 天气表达" },
+      { phrase: "affect my mood", translation: "影响心情", note: "解释偏好" },
+    ],
+    answer: [
+      "The weather I like most is mild and sunny, but not too hot. A sunny spell can affect my mood in a positive way, because I feel more energetic and more willing to go outside. I’m not a fan of humid weather, especially in summer, because it makes everything feel sticky and uncomfortable. Gloomy rainy days can also make me a bit lazy, although they are nice if I can stay at home and read. Before going out, I usually check the forecast, mainly to decide whether I need an umbrella or a jacket. Weather doesn’t control my life, but it definitely changes my plans.",
+    ],
+    answerTranslation: [
+      "我最喜欢温和、晴朗但不太热的天气。一段晴朗天气会积极影响我的心情，因为我会觉得更有精力，也更愿意出门。我不太喜欢潮湿闷热的天气，尤其是在夏天，因为它让一切都感觉黏黏的、不舒服。阴沉的雨天也会让我有点懒，虽然如果可以待在家里读书，那种天气也不错。出门前我通常会看天气预报，主要是决定要不要带伞或外套。天气不会控制我的生活，但它确实会改变我的计划。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-071",
+    approach: "艺术题讲个人兴趣，不必装专家。用画展、电影海报、设计等日常艺术入口回答。",
+    frames: [
+      "I like art, but ...",
+      "The kind of art I enjoy is ...",
+      "I don’t always understand ..., but ...",
+      "For me, art is valuable because ...",
+    ],
+    vocabulary: [
+      { phrase: "art gallery", translation: "美术馆", note: "艺术题核心场景" },
+      { phrase: "creative expression", translation: "创造性表达", note: "解释艺术本质" },
+      { phrase: "abstract art", translation: "抽象艺术", note: "艺术类型" },
+      { phrase: "appreciate", translation: "欣赏", note: "表达兴趣" },
+      { phrase: "thought-provoking", translation: "发人深省的", note: "BBC 艺术评论表达" },
+    ],
+    answer: [
+      "I like art, but I wouldn’t call myself an expert. The kind of art I enjoy is usually visual and easy to connect with, like photography, poster design or paintings in an art gallery. I don’t always understand abstract art, but I can still appreciate the colours, shapes and atmosphere. For me, art is valuable because it gives people a form of creative expression that is not limited to words. A good piece of art can be beautiful, but it can also be thought-provoking. Even if I only spend a few minutes looking at it, it may make me notice something in a different way.",
+    ],
+    answerTranslation: [
+      "我喜欢艺术，但我不会说自己是专家。我喜欢的艺术通常是视觉类、比较容易产生连接的，比如摄影、海报设计，或者美术馆里的绘画。我不总是能理解抽象艺术，但仍然可以欣赏其中的颜色、形状和氛围。对我来说，艺术很有价值，因为它给人们提供了一种不局限于语言的创造性表达方式。一件好的艺术作品可以很美，也可以发人深省。即使我只看几分钟，它也可能让我用不同方式注意到某些东西。",
+    ],
+  },
+  {
     partId: "part-2",
     questionId: "speaking-part-2-001",
     approach: "按“期待—落差—处理结果—感受”推进。重点不是抱怨，而是说明对方为什么没有解决问题。",
