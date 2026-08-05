@@ -630,6 +630,270 @@ export const speakingModelAnswers = [
     ],
   },
   {
+    partId: "part-1",
+    questionId: "speaking-part-1-026",
+    approach: "整洁题不要只说 yes/no。先承认现在比小时候整洁，再用房间或书桌细节说明整洁如何影响学习状态。",
+    frames: [
+      "I’m fairly tidy now, although ...",
+      "When I was a child, my room was ...",
+      "What changed was that ...",
+      "A tidy space helps me ...",
+    ],
+    vocabulary: [
+      { phrase: "tidying up", translation: "整理收纳", note: "BBC 生活类文章常用表达" },
+      { phrase: "cluttered", translation: "杂乱的", note: "比 messy 更准确" },
+      { phrase: "declutter", translation: "清理杂物", note: "讲改变习惯很自然" },
+      { phrase: "living space", translation: "居住空间", note: "描述房间和家庭环境" },
+      { phrase: "workspace", translation: "学习或工作区域", note: "把整洁和效率联系起来" },
+    ],
+    answer: [
+      "I’m fairly tidy now, although I wouldn’t say I’m obsessive about it. I try to do a bit of tidying up every evening, especially around my desk, because a cluttered workspace makes it harder for me to focus. When I was a child, my room was definitely messier. I used to leave toys, books and clothes everywhere until my parents complained. What changed was that I realised a tidy living space actually gives me a calmer mind. Now I declutter regularly, not because I love cleaning, but because it saves time and makes my room feel easier to live in.",
+    ],
+    answerTranslation: [
+      "我现在算是比较整洁的人，不过我不会说自己有洁癖。我通常每天晚上会简单整理一下，尤其是书桌周围，因为杂乱的学习区域会让我更难集中注意力。小时候我的房间确实乱得多。我以前会把玩具、书和衣服到处乱放，直到父母开始抱怨。后来我改变，是因为我发现整洁的居住空间真的会让头脑更平静。现在我会定期清理杂物，不是因为我特别喜欢打扫，而是因为这样能节省时间，也让房间住起来更舒服。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-027",
+    approach: "时间管理题要体现学生真实感：不是完美自律，而是用简单计划和缓冲时间避免拖延。",
+    frames: [
+      "I’m reasonably good at managing time, especially when ...",
+      "I usually plan my day by ...",
+      "The main thing I try to avoid is ...",
+      "If the clock is ticking, I ...",
+    ],
+    vocabulary: [
+      { phrase: "deadline", translation: "截止日期", note: "学习和工作通用" },
+      { phrase: "procrastinate", translation: "拖延", note: "时间管理高频词" },
+      { phrase: "time to spare", translation: "还有富余时间", note: "解释提前完成" },
+      { phrase: "underestimate", translation: "低估", note: "说明计划失误原因" },
+      { phrase: "knuckle down", translation: "开始认真做事", note: "BBC 口语短语，适合学生口吻" },
+    ],
+    answer: [
+      "I’m reasonably good at managing time, especially when there is a clear deadline. I usually plan my day by writing down three main tasks, not a huge to-do list, because long lists just make me anxious. The main thing I try to avoid is procrastinating until the clock is ticking. In the past, I often underestimated how long reading or writing would take, so I ended up rushing. Now I leave some time to spare and do the difficult task first if possible. I’m not perfectly disciplined, but once I knuckle down, I can usually stay focused for a decent stretch of time.",
+    ],
+    answerTranslation: [
+      "我时间管理还算不错，尤其是在截止日期很明确的时候。我通常会通过写下三件主要任务来安排一天，而不是列一长串待办事项，因为太长的清单只会让我焦虑。我最想避免的是一直拖延到时间很紧迫的时候。以前我经常低估阅读或写作需要多久，所以最后总是很赶。现在我会留出一点富余时间，并且尽量先做最难的任务。我并不是特别自律的人，但一旦开始认真做事，通常可以在一段时间内保持专注。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-028",
+    approach: "手表题可区分普通手表、智能手表和手机看时间。答案重点是实用性，不必硬说手表很重要。",
+    frames: [
+      "I don’t wear a watch every day because ...",
+      "If I do wear one, it’s usually ...",
+      "A watch is useful when ...",
+      "For me, it is more ... than ...",
+    ],
+    vocabulary: [
+      { phrase: "wearable tech", translation: "可穿戴科技", note: "讲智能手表很贴切" },
+      { phrase: "smartwatch", translation: "智能手表", note: "手表题现代化表达" },
+      { phrase: "keep track of time", translation: "掌握时间", note: "基础但自然" },
+      { phrase: "status symbol", translation: "身份或品味象征", note: "解释高端手表" },
+      { phrase: "bang on time", translation: "非常准时", note: "BBC 口语短语" },
+    ],
+    answer: [
+      "I don’t wear a watch every day because I can easily keep track of time on my phone. But if I do wear one, it’s usually a simple watch rather than a very expensive one. I can see why smartwatches and wearable tech are popular, since they count steps, show messages and help people check the time without pulling out a phone. Still, for me, a watch is more of a practical tool than a status symbol. It is useful in exams, meetings or interviews, because checking a watch looks less rude than checking a phone, and it helps me be bang on time.",
+    ],
+    answerTranslation: [
+      "我不是每天都戴手表，因为用手机也能很方便地看时间。但如果我戴，一般会戴一块简单的手表，而不是特别贵的那种。我能理解为什么智能手表和可穿戴科技很受欢迎，因为它们可以计步、显示消息，也能让人不用掏手机就看时间。不过对我来说，手表更像是实用工具，而不是身份或品味的象征。它在考试、会议或面试中很有用，因为看手表比看手机显得没那么没礼貌，而且能帮助我保持准时。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-029",
+    approach: "礼物题用“用心大于价格”展开，再比较手工和购买礼物，最后说选礼物要考虑对方真正需要什么。",
+    frames: [
+      "I do like giving gifts, especially when ...",
+      "A good gift doesn’t have to ...",
+      "Handmade gifts feel ..., while store-bought gifts can be ...",
+      "When choosing a gift, I usually think about ...",
+    ],
+    vocabulary: [
+      { phrase: "thoughtful gift", translation: "用心的礼物", note: "礼物题核心" },
+      { phrase: "sentimental value", translation: "情感价值", note: "解释礼物意义" },
+      { phrase: "homemade craft", translation: "手工制作的小物件", note: "比较 handmade" },
+      { phrase: "present budget", translation: "礼物预算", note: "讲现实考虑" },
+      { phrase: "don’t cost the earth", translation: "不需要花很多钱", note: "BBC 自然短语" },
+    ],
+    answer: [
+      "I do like giving gifts, especially when I know the person well. A good gift doesn’t have to cost the earth; it just needs to feel thoughtful. For close friends, I might choose something with sentimental value, like a photo book or a small homemade craft, because it shows I spent time on it. For classmates or colleagues, a store-bought gift is usually safer and more practical. When choosing a gift, I think about the person’s taste, whether they will actually use it, and my present budget. I’d rather give something small but suitable than something expensive that feels random.",
+    ],
+    answerTranslation: [
+      "我确实喜欢送礼物，尤其是当我很了解对方的时候。一份好的礼物不一定要花很多钱，只要能让人感觉到用心就可以。对于亲近的朋友，我可能会选择有情感价值的东西，比如一本照片书，或者一个小手工，因为这能说明我花了时间。对于同学或同事，买来的礼物通常更稳妥，也更实用。选礼物时，我会考虑对方的喜好、他们是否真的会用到，以及我的礼物预算。我宁愿送一件小但合适的东西，也不想送一件昂贵却很随意的礼物。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-030",
+    approach: "笑话和喜剧题可以承认自己不擅长讲笑话，但喜欢自然幽默；强调幽默要看场合，避免冒犯。",
+    frames: [
+      "I’m not brilliant at telling jokes, but ...",
+      "The kind of humour I like is ...",
+      "Comedies help me ...",
+      "I think jokes should be ..., not ...",
+    ],
+    vocabulary: [
+      { phrase: "sense of humour", translation: "幽默感", note: "话题基础词" },
+      { phrase: "lighten the mood", translation: "缓和气氛", note: "解释笑话作用" },
+      { phrase: "break the ice", translation: "打破尴尬", note: "社交场景常用" },
+      { phrase: "tickle my funny bone", translation: "让我觉得好笑", note: "BBC 口语表达" },
+      { phrase: "offensive", translation: "冒犯性的", note: "说明幽默边界" },
+    ],
+    answer: [
+      "I’m not brilliant at telling prepared jokes, because I usually forget the punchline or deliver it in a flat way. But I do have a sense of humour, and I prefer spontaneous comments that lighten the mood. Sometimes a small joke can break the ice in a group, especially when people feel awkward at first. I watch comedies from time to time, usually after a stressful day, because they help me switch off. What really tickles my funny bone is everyday humour, not jokes that are offensive or make fun of someone personally. Good comedy should feel clever and warm, not cruel.",
+    ],
+    answerTranslation: [
+      "我并不擅长讲那种提前准备好的笑话，因为我通常会忘记包袱，或者讲出来很平。我确实有幽默感，但我更喜欢自然冒出来的评论，可以缓和气氛。有时候一个小笑话能在群体里打破尴尬，尤其是大家一开始不太熟的时候。我偶尔会看喜剧，通常是在压力很大的一天之后，因为它能让我放松下来。真正让我觉得好笑的是日常生活里的幽默，而不是冒犯别人或拿别人开涮的笑话。好的喜剧应该聪明又温暖，而不是刻薄。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-031",
+    approach: "微笑题可讲频率、对象和场合。重点区分真诚微笑和礼貌性微笑，答案会更成熟。",
+    frames: [
+      "I smile quite often when ...",
+      "With strangers, I usually smile if ...",
+      "A genuine smile can ...",
+      "A forced smile, however, may ...",
+    ],
+    vocabulary: [
+      { phrase: "genuine smile", translation: "真诚的微笑", note: "区分自然与假笑" },
+      { phrase: "facial expression", translation: "面部表情", note: "描述非语言交流" },
+      { phrase: "body language", translation: "肢体语言", note: "社交题通用" },
+      { phrase: "put someone at ease", translation: "让某人放松", note: "解释微笑作用" },
+      { phrase: "forced smile", translation: "勉强的笑", note: "讲不自然的情况" },
+    ],
+    answer: [
+      "I smile quite often when I’m with friends or family, because I feel relaxed around them. With strangers, I usually smile in small situations, like when I thank a cashier, hold the lift for someone or ask for directions. I think a genuine smile is a powerful facial expression; it can put people at ease without saying very much. But I don’t think people should smile all the time just to look friendly. A forced smile can feel uncomfortable, and sometimes people smile only because social situations require it. So for me, smiling is best when it is polite but still natural.",
+    ],
+    answerTranslation: [
+      "和朋友或家人在一起时，我笑得比较多，因为和他们相处我很放松。面对陌生人时，我通常会在一些小场景里微笑，比如感谢收银员、帮别人按住电梯，或者问路的时候。我觉得真诚的微笑是一种很有力量的面部表情，不用说太多话就能让别人放松。但我不认为人应该为了显得友好而一直微笑。勉强的笑会让人觉得不自在，而且有时候人们只是因为社交场合需要才笑。所以对我来说，微笑最好既礼貌，又自然。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-032",
+    approach: "社交媒体题讲具体平台、用途和自控。高分关键是承认便利，同时点出 screen time、FOMO 和隐私问题。",
+    frames: [
+      "The platforms I use most are ...",
+      "I mainly use social media to ...",
+      "The downside is that ...",
+      "To control my screen time, I ...",
+    ],
+    vocabulary: [
+      { phrase: "social media", translation: "社交媒体", note: "话题关键词" },
+      { phrase: "screen time", translation: "屏幕使用时间", note: "讲过度使用" },
+      { phrase: "digital detox", translation: "数字排毒；短暂远离电子设备", note: "BBC 科技生活表达" },
+      { phrase: "FOMO", translation: "错失恐惧", note: "解释为什么容易一直刷" },
+      { phrase: "oversharing", translation: "过度分享", note: "讲社交媒体边界" },
+    ],
+    answer: [
+      "The platforms I use most are WeChat and a couple of short-video or lifestyle apps. I mainly use social media to keep in touch with friends, read quick updates and sometimes look for restaurant or study recommendations. The downside is that the content is designed to be addictive, so my screen time can easily go up without me noticing. I also think FOMO is a real problem, because people feel they must check everything immediately. I’m trying to do a small digital detox at night by putting my phone away before bed. I still like social media, but I’m more careful about oversharing and wasting time on it.",
+    ],
+    answerTranslation: [
+      "我最常用的平台是微信，还有几个短视频或生活方式类应用。我主要用社交媒体和朋友保持联系，看看快速更新，有时也会搜索餐厅或学习方面的推荐。缺点是这些内容本来就设计得很容易让人上瘾，所以我的屏幕使用时间可能会在不知不觉中增加。我也觉得错失恐惧是个真实的问题，因为人们会觉得所有东西都必须马上查看。我现在尝试在晚上做一点数字排毒，睡前把手机放远一点。我仍然喜欢社交媒体，但会更注意不要过度分享，也不要在上面浪费太多时间。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-033",
+    approach: "耳机题先说使用场景，再讲安全和礼貌限制。这样答案不只是物品描述，而有观点。",
+    frames: [
+      "I use headphones quite a lot, especially when ...",
+      "They help me ...",
+      "However, people shouldn’t use them when ...",
+      "I also try to keep the volume ...",
+    ],
+    vocabulary: [
+      { phrase: "headphones", translation: "耳机", note: "题目关键词" },
+      { phrase: "podcast", translation: "播客", note: "通勤和学习场景自然" },
+      { phrase: "wireless", translation: "无线的", note: "现代耳机常用" },
+      { phrase: "sensible volume", translation: "合理音量", note: "BBC 健康建议表达" },
+      { phrase: "ringing sensation", translation: "耳鸣感", note: "讲音量过大后果" },
+    ],
+    answer: [
+      "I use headphones quite a lot, especially on the metro or when I’m studying in a noisy place. I usually listen to music, a podcast or an English programme, and wireless headphones make that very convenient. They help me create a small private space, even when I’m surrounded by people. However, I don’t think people should use headphones when they are crossing the road, cycling or having a face-to-face conversation, because it can be unsafe or rude. I also try to keep the volume at a sensible level. If I hear a ringing sensation afterwards, that’s a sign I’ve listened for too long or too loudly.",
+    ],
+    answerTranslation: [
+      "我用耳机挺多的，尤其是在地铁上，或者在比较吵的地方学习时。我通常会听音乐、播客或英语节目，无线耳机让这些事情变得很方便。它们能帮我创造出一个小小的私人空间，即使周围都是人。不过我不认为人们在过马路、骑车或面对面聊天时应该戴耳机，因为这可能不安全，也可能显得没礼貌。我也会尽量把音量控制在合理范围内。如果听完之后有耳鸣的感觉，那就说明我听得太久或太大声了。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-034",
+    approach: "打字题要比较 typing 和 handwriting。用学习场景解释：打字快，手写更有记忆和思考感。",
+    frames: [
+      "I type quite a lot because ...",
+      "Typing is faster when ...",
+      "Handwriting feels better for ...",
+      "So I choose between them depending on ...",
+    ],
+    vocabulary: [
+      { phrase: "keyboard", translation: "键盘", note: "打字基础词" },
+      { phrase: "handwriting", translation: "手写", note: "对比 typing" },
+      { phrase: "make a note of", translation: "记下", note: "学习和工作通用" },
+      { phrase: "tactile feedback", translation: "触觉反馈", note: "BBC 学习类表达" },
+      { phrase: "cognitive engagement", translation: "认知投入", note: "解释手写帮助思考" },
+    ],
+    answer: [
+      "I type quite a lot because most of my messages, assignments and notes are now on a phone or laptop. Typing on a keyboard is definitely faster when I need to organise information, edit a paragraph or send something quickly. But I still prefer handwriting when I’m trying to remember ideas or make a note of something important. The tactile feedback of writing by hand makes me slow down a little, and that actually improves my cognitive engagement. So I don’t think one is always better than the other. I type for efficiency, but I write by hand when I want to think more carefully.",
+    ],
+    answerTranslation: [
+      "我打字挺多的，因为现在大多数消息、作业和笔记都在手机或电脑上完成。当我需要整理信息、修改段落或快速发送内容时，用键盘打字肯定更快。但如果我想记住一些想法，或者记下重要内容，我仍然更喜欢手写。手写带来的触觉反馈会让我稍微慢下来，而这反而能提高我的认知投入。所以我不觉得两者一定谁更好。我为了效率会打字，但当我想更认真地思考时，会选择手写。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-035",
+    approach: "网站题讲常去网站类型，不要报太多品牌。再补充国内流行网站和隐私意识，显得观点完整。",
+    frames: [
+      "The websites I visit most often are ...",
+      "I use them mainly to ...",
+      "In my country, people often use websites or apps for ...",
+      "One thing I’m more aware of now is ...",
+    ],
+    vocabulary: [
+      { phrase: "browse", translation: "浏览", note: "网站题高频动词" },
+      { phrase: "platform", translation: "平台", note: "比 website 更宽泛" },
+      { phrase: "track your activity", translation: "追踪你的行为", note: "讲网络隐私" },
+      { phrase: "privacy", translation: "隐私", note: "科技话题高分点" },
+      { phrase: "subscription", translation: "订阅", note: "视频、学习网站常用" },
+    ],
+    answer: [
+      "The websites I visit most often are probably search engines, online dictionaries, video platforms and a few shopping sites. I use them mainly to look up information, watch lessons, compare products and browse reviews before buying anything. In my country, people often use websites or apps for almost everything, from ordering food to booking tickets, although many services have moved from websites to mobile platforms. One thing I’m more aware of now is privacy. Some websites track your activity very closely, and some keep pushing subscriptions or adverts. So I try not to sign up for every site unless I really need it.",
+    ],
+    answerTranslation: [
+      "我最常访问的网站大概是搜索引擎、在线词典、视频平台和一些购物网站。我主要用它们查信息、看课程、比较产品，并且在买东西前浏览评论。在我的国家，人们经常通过网站或应用处理几乎所有事情，从点外卖到订票都可以，不过很多服务已经从网页转移到了手机平台。现在我更注意的一点是隐私。有些网站会非常仔细地追踪你的行为，还有些会不停推送订阅或广告。所以除非真的需要，我尽量不会随便注册每一个网站。",
+    ],
+  },
+  {
+    partId: "part-1",
+    questionId: "speaking-part-1-036",
+    approach: "外太空题可把科幻兴趣和真实太空旅行分开。喜欢想象，但对风险保持现实态度。",
+    frames: [
+      "I do enjoy sci-fi movies, especially when ...",
+      "What interests me about space is ...",
+      "Going to space sounds ..., but ...",
+      "For now, I’d rather ...",
+    ],
+    vocabulary: [
+      { phrase: "sci-fi", translation: "科幻的", note: "题目原词，口语自然" },
+      { phrase: "space exploration", translation: "太空探索", note: "拓展观点" },
+      { phrase: "astronaut", translation: "宇航员", note: "讲职业和旅行" },
+      { phrase: "float in space", translation: "在太空中漂浮", note: "有画面感" },
+      { phrase: "out of reach", translation: "遥不可及", note: "表达现实距离" },
+    ],
+    answer: [
+      "I do enjoy sci-fi movies, especially when they are not just about explosions but also about human choices and imagination. What interests me about space is how huge and mysterious it is. Looking at stars can make everyday problems feel smaller, in a good way. Going to space sounds amazing in theory, because it would be unforgettable to float in space and see the Earth from far away. But realistically, I’m not sure I’d want to do it. The training, the cost and the risks are all quite serious. For now, space exploration is fascinating to read about, but actual space travel feels out of reach for me.",
+    ],
+    answerTranslation: [
+      "我确实喜欢科幻电影，尤其是那些不只是爆炸场面，而是关于人类选择和想象力的作品。我对太空感兴趣，是因为它巨大又神秘。看星星会让日常生活中的问题显得小一点，而且是以一种积极的方式。理论上来说，去太空听起来很不可思议，因为在太空中漂浮、从远处看地球一定会让人难忘。但现实一点说，我不确定自己真的想去。训练、费用和风险都相当严肃。对我来说，现在阅读太空探索很有趣，但真正的太空旅行仍然有点遥不可及。",
+    ],
+  },
+  {
     partId: "part-2",
     questionId: "speaking-part-2-001",
     approach: "按“期待—落差—处理结果—感受”推进。重点不是抱怨，而是说明对方为什么没有解决问题。",

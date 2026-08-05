@@ -3,10 +3,17 @@ import { readFileSync } from "node:fs";
 import test from "node:test";
 
 const source = readFileSync(new URL("../src/data/ielts/speaking-model-answers.ts", import.meta.url), "utf8");
+const questions = JSON.parse(
+  readFileSync(new URL("../src/data/ielts/speaking-questions.json", import.meta.url), "utf8"),
+);
 
-const requiredPartOneQuestionIds = Array.from({ length: 20 }, (_, index) => {
+const previousPartOneQuestionIds = Array.from({ length: 20 }, (_, index) => {
   return `speaking-part-1-${String(index + 6).padStart(3, "0")}`;
 });
+const latestPartOneQuestionIds = questions["part-1"]
+  .filter((question) => question.year === "2026/5-8")
+  .map((question) => question.id);
+const requiredPartOneQuestionIds = [...new Set([...previousPartOneQuestionIds, ...latestPartOneQuestionIds])];
 
 function extractAnswerObject(questionId) {
   const marker = `questionId: "${questionId}"`;
