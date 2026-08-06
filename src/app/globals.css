@@ -1007,16 +1007,40 @@
 .junior-high-analysis { position: absolute; z-index: 2; top: calc(100% + 8px); right: 0; left: 0; border: 1px solid #d8c99d; border-radius: 10px; background: #fff8df; padding: 15px; box-shadow: 0 12px 25px #5845221f; }
 .junior-high-analysis > button { float: right; }
 .junior-high-source-name { max-width: 780px; color: #766f62; font-size: 13px; line-height: 1.6; overflow-wrap: anywhere; }
+.junior-high-exam-page { position: relative; }
+.junior-high-exam-toolbar { display: grid; grid-template-columns: auto 1fr auto auto; align-items: center; gap: 18px; border: 1px solid #e4dccd; border-radius: 14px; background: #fffdf7; padding: 14px 18px; }
+.junior-high-exam-toolbar-title { display: grid; gap: 2px; min-width: 0; color: #173f35; }
+.junior-high-exam-toolbar-title strong { font-size: 17px; }
+.junior-high-exam-toolbar-title span, .junior-high-exam-source { color: #766f62; font-size: 12px; }
+.junior-high-toolbar-actions { display: flex; align-items: center; gap: 8px; }
+.junior-high-exam-source { border-inline: 1px solid #e4dccd; padding: 8px 12px; line-height: 1.7; overflow-wrap: anywhere; }
 .junior-high-paper-nav { display: flex; flex-wrap: wrap; gap: 6px; border-block: 1px solid #e7e0d3; margin: 22px 0; padding: 12px 0; }
 .junior-high-paper-nav button { min-width: 32px; border: 1px solid #d8d0c2; border-radius: 7px; background: #fff; color: #4c5a52; cursor: pointer; padding: 6px 8px; }
 .junior-high-paper-nav button.selected { border-color: #1f5b4d; background: #1f5b4d; color: #fff; }
 .junior-high-paper-content { display: grid; gap: 16px; }
+.junior-high-paper-section { display: grid; gap: 16px; }
+.junior-high-paper-section > h2 { margin: 12px 0 0; color: #1f5b4d; font-family: KaiTi, STKaiti, serif; font-size: 26px; }
+.junior-high-question-stack { display: grid; gap: 14px; }
+.junior-high-passage-layout { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(360px, .8fr); gap: 18px; align-items: start; }
+.junior-high-passage-column { position: sticky; top: 18px; border: 1px solid #e4dccd; border-radius: 14px; background: #fff; padding: 24px; color: #27362f; font-size: 18px; line-height: 2; white-space: pre-line; }
+.junior-high-passage-column h2 { margin: 0 0 12px; color: #477467; font-family: KaiTi, STKaiti, serif; font-size: 23px; }
+.junior-high-passage-questions { display: grid; gap: 12px; }
+.junior-high-passage-questions .junior-high-question-prompt { font-size: 18px; line-height: 1.85; }
+.junior-high-cloze-question { border-style: dashed; border-width: 0 0 1px; border-radius: 0; padding-inline: 4px; }
+.junior-high-cloze-question .junior-high-options button { font-size: 16px; }
+.junior-high-paper-section:last-of-type .junior-high-passage-column { font-size: 19px; line-height: 2.05; }
+.junior-high-paper-section:last-of-type .junior-high-question-prompt { font-size: 19px; line-height: 1.95; }
 .junior-high-paper-writing { border: 1px solid #e4dccd; border-radius: 14px; background: #fff; padding: 22px; }
 .junior-high-paper-writing > p { line-height: 1.75; white-space: pre-line; }
 .junior-high-writing-requirements { color: #766f62; font-size: 14px; }
 .junior-high-paper-writing textarea { width: 100%; box-sizing: border-box; border: 1px solid #d8d0c2; border-radius: 9px; padding: 12px; resize: vertical; }
+.junior-high-exam-page.fullscreen { position: fixed; z-index: 100; inset: 0; overflow: auto; background: #f7f4eb; padding: 18px 24px 32px; }
+.junior-high-exam-page.fullscreen:fullscreen { overflow: auto; background: #f7f4eb; }
+.junior-high-exam-page.fullscreen .junior-high-passage-column { top: 18px; }
+.junior-high-exam-page > footer { display: flex; align-items: center; justify-content: space-between; gap: 16px; border-top: 1px solid #e7e0d3; padding-top: 18px; color: #766f62; }
 .junior-high-workbench footer { border-top: 1px solid #e7e0d3; padding-top: 18px; color: #766f62; }
 @media (max-width: 800px) { .junior-high-workspace-grid { grid-template-columns: 1fr; } .junior-high-workbench header { align-items: flex-start; flex-direction: column; } }
+@media (max-width: 900px) { .junior-high-exam-toolbar { grid-template-columns: 1fr auto; } .junior-high-exam-toolbar-title { order: 3; grid-column: 1 / -1; } .junior-high-toolbar-actions { justify-content: flex-end; } .junior-high-passage-layout { grid-template-columns: 1fr; } .junior-high-passage-column { position: static; } }
 .writing-home-page,
 .writing-practice-page,
 .reading-home-page,
