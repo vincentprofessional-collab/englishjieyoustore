@@ -976,7 +976,8 @@
 .junior-high-page button { font: inherit; }
 .junior-high-page .writing-mode-card strong { display: block; text-align: center; font-family: KaiTi, STKaiti, serif; font-size: 24px; }
 .junior-high-selection, .junior-high-workbench { background: #fffdf7; border: 1px solid #e4dccd; border-radius: 18px; padding: 28px; }
-.junior-high-selection h1, .junior-high-workbench h1 { margin: 12px 0 4px; color: #173f35; }
+.junior-high-selection h1 { margin: 18px 0 28px; color: #173f35; text-align: center; font-family: KaiTi, STKaiti, serif; font-size: 44px; }
+.junior-high-workbench h1 { margin: 12px 0 4px; color: #173f35; }
 .junior-high-back { border: 0; background: transparent; color: #477467; cursor: pointer; padding: 0; }
 .junior-high-selection-step { display: flex; gap: 18px; border-top: 1px solid #e7e0d3; padding: 22px 0; }
 .junior-high-selection-step > span { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: #d7a84b; color: #fff; font-weight: 700; }
