@@ -1031,6 +1031,9 @@
 .junior-high-passage-text { white-space: pre-line; }
 .junior-high-inline-blank { display: inline-block; min-width: 26px; margin: 0 3px; border-bottom: 2px dotted #9a907f; padding: 0 10px 1px; color: #477467; line-height: 1.2; text-align: center; }
 .junior-high-context-image { display: block; max-width: min(100%, 320px); max-height: 280px; margin: 0 auto 18px; object-fit: contain; }
+.junior-high-question-image { display: block; max-width: min(100%, 180px); max-height: 140px; margin: 0 0 12px; object-fit: contain; }
+.junior-high-generic-source { display: grid; gap: 12px; }
+.junior-high-generic-source pre { margin: 0; max-height: 680px; overflow: auto; white-space: pre-wrap; font: inherit; line-height: 1.85; color: #2f3f39; }
 .junior-high-passage-note { margin: 18px 0 0; border-top: 1px dashed #ddd3c2; padding-top: 12px; color: #766f62; font-size: 13px; line-height: 1.65; }
 .junior-high-passage-questions { display: grid; gap: 12px; }
 .junior-high-passage-questions .junior-high-question-prompt { font-size: 18px; line-height: 1.85; }

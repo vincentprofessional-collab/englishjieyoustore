@@ -13,6 +13,7 @@ test("paper inventory contains ten complete unique source pairs", () => {
     assert.ok(item.analysisPath.endsWith(".docx"));
     assert.ok(fs.existsSync(item.originalPath), `missing original: ${item.originalPath}`);
     assert.ok(fs.existsSync(item.analysisPath), `missing analysis: ${item.analysisPath}`);
+    assert.equal(item.analysisName, item.originalName.replace("（原卷版）", "（解析版）"));
     const key = `${item.year}-${item.region}-${item.originalName}`;
     assert.equal(keys.has(key), false, `duplicate inventory entry: ${key}`);
     keys.add(key);

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import re
 from pathlib import Path
 
@@ -39,6 +40,26 @@ def first_match(year: int, hint: str) -> Path:
     return sorted(candidates, key=lambda item: str(item))[0]
 
 
+def matching_analysis(original: Path) -> Path:
+    """Prefer the analysis file with the same source stem, never a sibling from another region."""
+    expected = original.with_name(original.name.replace("（原卷版）", "（解析版）"))
+    if expected.exists():
+        return expected
+    candidates = list(original.parent.glob("*（解析版）.docx"))
+    source_stem = re.sub(r"（原卷版）|原卷版", "", original.stem)
+    ranked = sorted(
+        candidates,
+        key=lambda item: (
+            0 if re.sub(r"（解析版）|解析版", "", item.stem) == source_stem else 1,
+            -len(os.path.commonprefix((original.stem, item.stem))),
+            str(item),
+        ),
+    )
+    if ranked:
+        return ranked[0]
+    raise FileNotFoundError(f"No matching analysis file found for {original}")
+
+
 def year_from_path(path: Path) -> int:
     years = [int(value) for value in re.findall(r"20\d{2}", str(path))]
     return max(years)
@@ -47,7 +68,7 @@ def year_from_path(path: Path) -> int:
 inventory = []
 for year, region, hint in PREFERRED:
     original = first_match(year, hint)
-    analysis = sorted(original.parent.glob("*（解析版）.docx"), key=lambda item: str(item))[0]
+    analysis = matching_analysis(original)
     kind = "simulation" if "模拟" in original.name or "模拟" in str(original.parent) else "real"
     label = f"{region}{'模拟卷' if kind == 'simulation' else '真题'}"
     inventory.append(

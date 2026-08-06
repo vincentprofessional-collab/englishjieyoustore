@@ -40,11 +40,13 @@ export type JuniorHighPaper = {
   year: number;
   region: string;
   label: string;
+  layout?: "beijing" | "generic";
   displayTitle?: string;
   durationMinutes: number;
   fileName: string;
   analysisFileName: string;
   sourceDirectory: string;
+  sourceText?: string;
   questions: JuniorHighQuestion[];
   readingA: {
     instructions: string;
@@ -58,5 +60,6 @@ export type JuniorHighPaper = {
     readingC?: string | string[];
     readingD?: string | string[];
     readingResponse?: string | string[];
+    all?: string[];
   };
 };

@@ -19,7 +19,7 @@ export type JuniorHighSample = {
   analysis: string;
 };
 
-export const JUNIOR_HIGH_REGIONS = ["北京", "上海", "天津", "广东", "江苏", "浙江", "山东", "河北"];
+export const JUNIOR_HIGH_REGIONS = ["北京", "上海", "天津", "广东", "江苏", "浙江", "山东", "河北", "福建"];
 export const JUNIOR_HIGH_YEARS = [2024, 2023, 2022, 2021, 2020, 2019];
 
 export const JUNIOR_HIGH_SAMPLES: JuniorHighSample[] = [
