@@ -1,5 +1,5 @@
 import { supabase } from "@/lib/supabase/client";
-import { ensureJuniorHighExamLink } from "@/lib/content/site-chrome-nav";
+import { ensureJuniorHighExamMenu } from "@/lib/content/site-chrome-nav";
 
 export const SITE_CHROME_SLUG = "site-chrome";
 export const SITE_CHROME_VERSION = 1;
@@ -444,13 +444,12 @@ export function mergeSiteChromeConfig(value: unknown): SiteChromeConfig {
     ? (footer.promo as Record<string, unknown>)
     : {};
   const mergedNavItems = mergeNavItems(nav.items, fallback.nav.items);
+  const examsFallback = fallback.nav.items.find((item) => item.id === "exams");
   const juniorHighFallback = fallback.nav.items
     .find((item) => item.id === "exams")
     ?.children.find((item) => item.id === "junior-high-english");
-  const navItems = juniorHighFallback
-    ? mergedNavItems.map((item) => item.id === "exams"
-      ? { ...item, children: ensureJuniorHighExamLink(item.children, juniorHighFallback) }
-      : item)
+  const navItems = examsFallback && juniorHighFallback
+    ? ensureJuniorHighExamMenu(mergedNavItems, examsFallback, juniorHighFallback)
     : mergedNavItems;
 
   return {

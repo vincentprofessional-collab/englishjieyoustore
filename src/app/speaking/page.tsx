@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getPublishedPageContent } from "@/lib/content/page-content";
+import {
+  getManagedPageItemClassName,
+  getPublishedPageContent,
+} from "@/lib/content/page-content";
 import { speakingParts } from "@/lib/ielts/speaking";
+import { findSpeakingPartForItem } from "@/lib/ielts/speaking-navigation";
 
 export const dynamic = "force-dynamic";
 
@@ -13,6 +17,7 @@ export const metadata: Metadata = {
 export default async function SpeakingPage() {
   const content = await getPublishedPageContent("speaking");
   const totalQuestions = speakingParts.reduce((total, part) => total + part.count, 0);
+  const items = content.items.filter((item) => item.enabled);
 
   return (
     <section className="stack ielts-module-page speaking-home-page">
@@ -32,14 +37,22 @@ export default async function SpeakingPage() {
         </header>
 
         <nav className="speaking-part-index" aria-label="雅思口语 Part 导航">
-          {speakingParts.map((part) => (
-            <Link href={`/speaking/${part.id}`} key={part.id}>
-              <span>{part.label}</span>
-              <strong>{part.count}</strong>
-              <small>{part.timing}</small>
-              <em aria-hidden="true">↗</em>
-            </Link>
-          ))}
+          {items.map((item, index) => {
+            const part = findSpeakingPartForItem(item, speakingParts);
+
+            return (
+              <Link
+                className={getManagedPageItemClassName(item, index, "")}
+                href={item.href || (part ? `/speaking/${part.id}` : "/speaking")}
+                key={item.id}
+              >
+                <span>{item.title}</span>
+                <strong>{part?.count ?? ""}</strong>
+                <small>{item.description || part?.timing}</small>
+                <em aria-hidden="true">↗</em>
+              </Link>
+            );
+          })}
         </nav>
       </section>
     </section>
