@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { BeijingPaperWorkbench } from "@/components/junior-high/beijing-paper-workbench";
+import { BeijingPaperWorkbench, JuniorHighPaperWorkbench } from "@/components/junior-high/beijing-paper-workbench";
+import beijing2023Paper from "@/lib/junior-high/beijing-2023.json";
+import type { JuniorHighPaper } from "@/lib/junior-high/paper-types";
 import {
   JUNIOR_HIGH_REGIONS,
   JUNIOR_HIGH_SAMPLES,
@@ -58,7 +60,10 @@ export function JuniorHighDemo() {
 
   if (mode === "mock-select" || mode === "practice-select") return <section className="stack junior-high-page"><div className="junior-high-selection"><button className="junior-high-back" onClick={() => setMode("home")} type="button">← 返回中考英语</button><h1>{mode === "mock-select" ? "真题模考" : "题型练习"}</h1><div className="junior-high-selection-step"><span>1</span><div><strong>选择年份</strong><div className="junior-high-chip-row">{JUNIOR_HIGH_YEARS.map((item) => <button className={year === item ? "selected" : ""} key={item} onClick={() => setYear(item)} type="button">{item}年</button>)}</div></div></div>{mode === "practice-select" ? <div className="junior-high-selection-step"><span>2</span><div><strong>选择题型</strong><div className="junior-high-type-list">{JUNIOR_HIGH_SAMPLES.map((item) => <button className={type === item.type ? "selected" : ""} key={item.type} onClick={() => setType(item.type)} type="button">{item.label}</button>)}</div></div></div> : null}<div className="junior-high-selection-step"><span>{mode === "practice-select" ? "3" : "2"}</span><div><strong>选择地区</strong><div className="junior-high-chip-row">{JUNIOR_HIGH_REGIONS.map((item) => <button className={region === item ? "selected" : ""} key={item} onClick={() => setRegion(item)} type="button">{item}</button>)}</div></div></div><div className="junior-high-selection-actions"><button className="junior-high-confirm" disabled={!canConfirm} onClick={() => openMode(mode === "mock-select" ? "mock" : "practice")} type="button">确认</button></div></div></section>;
 
-  if (mode === "mock" && year === 2024 && region === "北京") return <BeijingPaperWorkbench onBack={() => setMode("mock-select")} />;
+  if (mode === "mock" && region === "北京") {
+    if (year === 2024) return <BeijingPaperWorkbench onBack={() => setMode("mock-select")} />;
+    if (year === 2023) return <JuniorHighPaperWorkbench onBack={() => setMode("mock-select")} paper={beijing2023Paper as unknown as JuniorHighPaper} />;
+  }
 
   const sample = mode === "mock" ? JUNIOR_HIGH_SAMPLES[3] : selected;
   return <section className="stack junior-high-page"><div className="junior-high-workbench"><header><div><button className="junior-high-back" onClick={() => setMode(mode === "mock" ? "mock-select" : "practice-select")} type="button">← 返回选择</button><h1>中考英语 · {mode === "mock" ? "真题模考" : "题型练习"}</h1><p>{year} 年 · {region} · {mode === "mock" ? MOCK_SAMPLE.paperLabel : sample.label}</p></div><Timer running={running} seconds={seconds} onToggle={() => setRunning(!running)} /></header><div className="junior-high-workspace-grid">{sample.passage ? <div className="junior-high-reading-pane"><span>阅读材料</span><p>{sample.passage}</p></div> : null}<div className="junior-high-question-pane"><SampleQuestion sample={sample} submitted={submitted} /></div></div><footer><span>样板题目 1 / 1</span><button className="junior-high-submit" onClick={() => { setSubmitted(true); setRunning(false); }} type="button">提交答卷</button></footer></div></section>;
