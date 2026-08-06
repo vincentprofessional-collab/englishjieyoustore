@@ -9,6 +9,7 @@ const questions = JSON.parse(
 
 const requiredQuestionIds = [
   ...questions["part-1"].map((question) => question.id),
+  ...questions["part-2"].slice(0, 20).map((question) => question.id),
   ...questions["part-3"].map((question) => question.id),
 ];
 
