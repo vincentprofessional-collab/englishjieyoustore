@@ -133,6 +133,7 @@ def extract_questions(lines):
 
 def extract_analysis(lines):
     pattern = re.compile(r"^(\d+)．(句意|细节理解题|推理判断题|最佳标题题|根据原文|本题为主观题)")
+    section_heading = re.compile(r"^[一二三四五六七八九十]+、")
     result = {}
     current = None
     for line in lines:
@@ -140,6 +141,8 @@ def extract_analysis(lines):
         if match:
             current = int(match.group(1))
             result[current] = [line]
+        elif current is not None and section_heading.match(line):
+            current = None
         elif current is not None and not line.startswith("【"):
             result[current].append(line)
     return {number: "\n".join(parts).strip()[:700] for number, parts in result.items()}
