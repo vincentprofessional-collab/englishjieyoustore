@@ -1,6 +1,7 @@
 export type SiteChromeNavNode = {
   children: SiteChromeNavNode[];
   id: string;
+  label: string;
 };
 
 export function ensureJuniorHighExamLink<T extends SiteChromeNavNode>(items: T[], juniorHigh: T): T[] {
@@ -26,7 +27,11 @@ export function ensureJuniorHighExamMenu<T extends SiteChromeNavNode>(
 
   return items.map((item) =>
     item.id === exams.id
-      ? { ...item, children: ensureJuniorHighExamLink(item.children, juniorHigh) }
+      ? {
+          ...item,
+          label: exams.label,
+          children: ensureJuniorHighExamLink(item.children, juniorHigh),
+        }
       : item,
   );
 }
