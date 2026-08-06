@@ -1,4 +1,5 @@
 import { supabase } from "@/lib/supabase/client";
+import { ensureJuniorHighExamLink } from "@/lib/content/site-chrome-nav";
 
 export const SITE_CHROME_SLUG = "site-chrome";
 export const SITE_CHROME_VERSION = 1;
@@ -442,6 +443,15 @@ export function mergeSiteChromeConfig(value: unknown): SiteChromeConfig {
   const promo = footer.promo && typeof footer.promo === "object"
     ? (footer.promo as Record<string, unknown>)
     : {};
+  const mergedNavItems = mergeNavItems(nav.items, fallback.nav.items);
+  const juniorHighFallback = fallback.nav.items
+    .find((item) => item.id === "exams")
+    ?.children.find((item) => item.id === "junior-high-english");
+  const navItems = juniorHighFallback
+    ? mergedNavItems.map((item) => item.id === "exams"
+      ? { ...item, children: ensureJuniorHighExamLink(item.children, juniorHighFallback) }
+      : item)
+    : mergedNavItems;
 
   return {
     brand: {
@@ -516,7 +526,7 @@ export function mergeSiteChromeConfig(value: unknown): SiteChromeConfig {
       adminHref: readString(nav.adminHref, fallback.nav.adminHref),
       adminLabel: readString(nav.adminLabel, fallback.nav.adminLabel),
       fontSize: readNumber(nav.fontSize, fallback.nav.fontSize, 12, 28),
-      items: mergeNavItems(nav.items, fallback.nav.items),
+      items: navItems,
       loginHref: readString(nav.loginHref, fallback.nav.loginHref),
       loginLabel: readString(nav.loginLabel, fallback.nav.loginLabel),
     },

@@ -8,6 +8,10 @@ import paper from "@/lib/junior-high/beijing-2024-simulation.json";
 type PaperQuestion = (typeof paper.questions)[number];
 type BookCard = (typeof paper.readingA.books)[number];
 
+function countWords(value: string) {
+  return value.trim() ? value.trim().split(/\s+/).length : 0;
+}
+
 function PaperTimer({ running, seconds, onToggle }: { running: boolean; seconds: number; onToggle: () => void }) {
   const negative = seconds < 0;
   const absolute = Math.abs(seconds);
@@ -58,7 +62,8 @@ function PassageGroup({ title, context, questions, answers, submitted, onAnswer,
 }
 
 function WritingTask({ label, prompt, requirements, opening, closing, value, onChange, children }: { label: string; prompt: string; requirements: string; opening?: string; closing?: string; value: string; onChange: (value: string) => void; children?: ReactNode }) {
-  return <section className="junior-high-writing-task"><h3>{label}</h3><p className="junior-high-writing-prompt">{prompt}</p>{children}<p className="junior-high-writing-requirements">{requirements}</p>{opening ? <p className="junior-high-writing-opening">{opening}</p> : null}<textarea value={value} onChange={(event) => onChange(event.target.value)} placeholder="请在此处完成作文……" rows={9} />{closing ? <p className="junior-high-writing-closing">{closing}</p> : null}</section>;
+  const wordCount = countWords(value);
+  return <section className="junior-high-writing-task"><h3>{label}</h3><p className="junior-high-writing-prompt">{prompt}</p>{children}<p className="junior-high-writing-requirements">{requirements}</p>{opening ? <p className="junior-high-writing-opening">{opening}</p> : null}<textarea value={value} onChange={(event) => onChange(event.target.value)} placeholder="请在此处完成作文……" rows={9} /><div className="junior-high-writing-word-count">字数：{wordCount}</div>{closing ? <p className="junior-high-writing-closing">{closing}</p> : null}</section>;
 }
 
 export function BeijingPaperWorkbench({ onBack }: { onBack: () => void }) {
@@ -110,8 +115,7 @@ export function BeijingPaperWorkbench({ onBack }: { onBack: () => void }) {
   const handleAnswer = (question: PaperQuestion, value: string) => setAnswers((previous) => ({ ...previous, [question.id]: value }));
 
   return <section className={`stack junior-high-page junior-high-exam-page ${isFullscreen ? "fullscreen" : ""}`} data-local-selection-actions="true" ref={pageRef}>
-    <div className="junior-high-exam-toolbar"><button className="junior-high-back" onClick={onBack} type="button">← 返回选择</button><div className="junior-high-exam-toolbar-title"><strong>中考英语 · 北京模拟卷</strong><span>2024 年模拟卷</span></div><PaperTimer onToggle={() => setRunning(!running)} running={running} seconds={seconds} /><div className="junior-high-toolbar-actions"><button className={`annotation-toggle ielts-exam-action ielts-fullscreen-toggle ${isFullscreen ? "active" : ""}`} onClick={() => void toggleFullscreen()} type="button">{isFullscreen ? "退出全屏" : "全屏"}</button><StudyAnnotationTools buttonClassName="annotation-toggle ielts-exam-action" sourceHref="/junior-high" sourceId="junior-high:2024-beijing-simulation" sourceTitle={paper.fileName} surfaceRef={pageRef} /></div></div>
-    <div className="junior-high-exam-source">原卷文件：{paper.fileName}<br />解析文件：{paper.analysisFileName}</div>
+    <div className="junior-high-exam-toolbar"><button className="junior-high-back" onClick={onBack} type="button">← 返回选择</button><div className="junior-high-exam-toolbar-title"><strong>中考英语 北京2024年模拟卷</strong></div><PaperTimer onToggle={() => setRunning(!running)} running={running} seconds={seconds} /><div className="junior-high-toolbar-actions"><button className={`annotation-toggle ielts-exam-action ielts-fullscreen-toggle ${isFullscreen ? "active" : ""}`} onClick={() => void toggleFullscreen()} type="button">{isFullscreen ? "退出全屏" : "全屏"}</button><StudyAnnotationTools buttonClassName="annotation-toggle ielts-exam-action" sourceHref="/junior-high" sourceId="junior-high:2024-beijing-simulation" sourceTitle={paper.fileName} surfaceRef={pageRef} /></div></div>
     <QuestionNavigation current={current} onSelect={selectQuestion} />
     <div className="junior-high-paper-content">
       <section className="junior-high-paper-section"><h2>第一部分</h2><p className="junior-high-paper-intro">本部分共33题，共40分。在每题列出的四个选项中，选出最符合题目要求的一项。</p><h3 className="junior-high-section-subtitle">一、单项填空（每题0. 5分，共6分）</h3><p className="junior-high-paper-intro">从下面各题所给的A、B、C、D四个选项中，选择可以填入空白处的最佳选项。</p><div className="junior-high-question-stack">{byRange(1, 12).map((question) => <PaperQuestionCard key={question.id} onAnswer={(value) => handleAnswer(question, value)} question={question} submitted={submitted} value={answers[question.id] || ""} />)}</div></section>
