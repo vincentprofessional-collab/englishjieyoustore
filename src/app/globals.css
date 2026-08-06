@@ -993,7 +993,8 @@
 .junior-high-workspace-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px; margin: 26px 0; }
 .junior-high-reading-pane, .junior-high-question-card { border: 1px solid #e4dccd; border-radius: 14px; background: #fff; padding: 22px; }
 .junior-high-reading-pane { color: #39463f; line-height: 1.85; }
-.junior-high-question-heading { display: flex; justify-content: space-between; color: #477467; font-size: 14px; }
+.junior-high-question-heading { display: flex; align-items: center; justify-content: flex-start; gap: 10px; color: #477467; font-size: 14px; }
+.junior-high-question-heading span { margin-left: auto; color: #8a8377; font-size: 12px; }
 .junior-high-question-prompt { font-size: 18px; line-height: 1.65; white-space: pre-line; }
 .junior-high-options { display: grid; gap: 10px; }
 .junior-high-options button { border: 1px solid #d8d0c2; border-radius: 9px; background: #fffdf7; cursor: pointer; padding: 12px; text-align: left; }
@@ -1020,20 +1021,45 @@
 .junior-high-paper-content { display: grid; gap: 16px; }
 .junior-high-paper-section { display: grid; gap: 16px; }
 .junior-high-paper-section > h2 { margin: 12px 0 0; color: #1f5b4d; font-family: KaiTi, STKaiti, serif; font-size: 26px; }
+.junior-high-section-subtitle { margin: 4px 0 0; color: #27362f; font-family: KaiTi, STKaiti, serif; font-size: 21px; }
+.junior-high-paper-intro { margin: 0; color: #4c5a52; font-size: 16px; line-height: 1.8; }
+.junior-high-paper-intro-muted { color: #766f62; font-size: 14px; }
 .junior-high-question-stack { display: grid; gap: 14px; }
 .junior-high-passage-layout { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(360px, .8fr); gap: 18px; align-items: start; }
-.junior-high-passage-column { position: sticky; top: 18px; border: 1px solid #e4dccd; border-radius: 14px; background: #fff; padding: 24px; color: #27362f; font-size: 18px; line-height: 2; white-space: pre-line; }
-.junior-high-passage-column h2 { margin: 0 0 12px; color: #477467; font-family: KaiTi, STKaiti, serif; font-size: 23px; }
+.junior-high-passage-column { position: sticky; top: 18px; border: 1px solid #e4dccd; border-radius: 14px; background: #fff; padding: 24px; color: #27362f; font-size: 18px; line-height: 2; }
+.junior-high-passage-column h3 { margin: 0 0 12px; color: #477467; font-family: KaiTi, STKaiti, serif; font-size: 23px; }
+.junior-high-passage-text { white-space: pre-line; }
+.junior-high-inline-blank { display: inline-block; min-width: 26px; margin: 0 3px; border-bottom: 2px dotted #9a907f; padding: 0 10px 1px; color: #477467; line-height: 1.2; text-align: center; }
+.junior-high-context-image { display: block; max-width: min(100%, 320px); max-height: 280px; margin: 0 auto 18px; object-fit: contain; }
+.junior-high-passage-note { margin: 18px 0 0; border-top: 1px dashed #ddd3c2; padding-top: 12px; color: #766f62; font-size: 13px; line-height: 1.65; }
 .junior-high-passage-questions { display: grid; gap: 12px; }
 .junior-high-passage-questions .junior-high-question-prompt { font-size: 18px; line-height: 1.85; }
 .junior-high-cloze-question { border-style: dashed; border-width: 0 0 1px; border-radius: 0; padding-inline: 4px; }
 .junior-high-cloze-question .junior-high-options button { font-size: 16px; }
 .junior-high-paper-section:last-of-type .junior-high-passage-column { font-size: 19px; line-height: 2.05; }
 .junior-high-paper-section:last-of-type .junior-high-question-prompt { font-size: 19px; line-height: 1.95; }
-.junior-high-paper-writing { border: 1px solid #e4dccd; border-radius: 14px; background: #fff; padding: 22px; }
-.junior-high-paper-writing > p { line-height: 1.75; white-space: pre-line; }
-.junior-high-writing-requirements { color: #766f62; font-size: 14px; }
-.junior-high-paper-writing textarea { width: 100%; box-sizing: border-box; border: 1px solid #d8d0c2; border-radius: 9px; padding: 12px; resize: vertical; }
+.junior-high-reading-response-section .junior-high-passage-column { font-size: 19px; line-height: 2.05; }
+.junior-high-reading-response-section .junior-high-question-prompt { font-size: 19px; line-height: 1.95; }
+.junior-high-book-table { display: grid; gap: 16px; }
+.junior-high-book-card { display: grid; grid-template-columns: 28px 92px minmax(0, 1fr); gap: 14px; align-items: start; border-top: 1px solid #e7e0d3; padding-top: 16px; }
+.junior-high-book-card:first-child { border-top: 0; padding-top: 0; }
+.junior-high-book-card img { width: 92px; max-height: 146px; border: 1px solid #e4dccd; border-radius: 5px; object-fit: contain; background: #fffdf7; }
+.junior-high-book-letter { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: #d7a84b; color: #fff; font-weight: 800; }
+.junior-high-book-copy h3 { margin: 0 0 4px; color: #173f35; font-size: 17px; line-height: 1.35; }
+.junior-high-book-copy p { margin: 7px 0 0; font-size: 14px; line-height: 1.65; }
+.junior-high-book-copy .junior-high-book-meta { color: #766f62; font-size: 12px; line-height: 1.55; }
+.junior-high-paper-writing { display: grid; gap: 18px; border: 1px solid #e4dccd; border-radius: 14px; background: #fff; padding: 22px; }
+.junior-high-writing-task { display: grid; gap: 12px; border-top: 1px solid #e7e0d3; padding-top: 18px; }
+.junior-high-writing-task:first-of-type { border-top: 0; padding-top: 0; }
+.junior-high-writing-task h3 { margin: 0; color: #477467; font-family: KaiTi, STKaiti, serif; font-size: 21px; }
+.junior-high-writing-prompt { margin: 0; font-size: 17px; line-height: 1.85; }
+.junior-high-writing-requirements { margin: 0; color: #766f62; font-size: 14px; line-height: 1.75; white-space: pre-line; }
+.junior-high-writing-opening, .junior-high-writing-closing { margin: 0; white-space: pre-line; font-family: Georgia, "Times New Roman", serif; font-size: 16px; line-height: 1.8; }
+.junior-high-writing-table { width: 100%; border-collapse: collapse; color: #39463f; font-size: 15px; line-height: 1.65; }
+.junior-high-writing-table th, .junior-high-writing-table td { border: 1px solid #d8d0c2; padding: 10px 12px; text-align: left; vertical-align: top; }
+.junior-high-writing-table th { width: 24%; background: #fbf6e9; color: #477467; }
+.junior-high-writing-diagram { display: block; width: min(100%, 760px); margin: 2px auto 6px; border: 1px solid #e4dccd; border-radius: 8px; background: #fffdf7; }
+.junior-high-writing-task textarea { width: 100%; box-sizing: border-box; border: 1px solid #d8d0c2; border-radius: 9px; padding: 12px; resize: vertical; }
 .junior-high-exam-page.fullscreen { position: fixed; z-index: 100; inset: 0; overflow: auto; background: #f7f4eb; padding: 18px 24px 32px; }
 .junior-high-exam-page.fullscreen:fullscreen { overflow: auto; background: #f7f4eb; }
 .junior-high-exam-page.fullscreen .junior-high-passage-column { top: 18px; }

@@ -536,16 +536,97 @@
       "id": "beijing-2024-simulation-37",
       "number": 37,
       "type": "reading-response",
-      "prompt": "37．Would you like to have an exoskeleton? Why or why not? (List at least two reasons)\n五、文段表达 (10分)",
+      "prompt": "37．Would you like to have an exoskeleton? Why or why not? (List at least two reasons)",
       "context": "When you talk about, or even think about Iron Man, the first image that pops into your head is the red and gold suit worn by Tony Stark. It provides Stark strength, protection against most attacks (攻击) and the power of flight. Iron Man is just a story, but the suit is not. Engineers call it an exoskeleton (外骨骼). It is the protective or supporting structure covering the outside of the body.\nIn fact, the exoskeletons were used in hospitals at first. They have changed the lives of many people with injuries (受伤) or illnesses that affect movement. A disease had paralyzed Stacey Kozel and she could not walk anymore. But in 2016, she went hiking with an exoskeleton. In recent years, more and more exoskeletons have been used in factories. It is easy for people to do the tiring or dangerous work with the exoskeletons. “We usually pay attention to efficiency (效率). Using the exoskeletons saves us much time and money. The workers can make more products at the same time. “One factory manager said. “Also, wearing the exoskeletons can reduce the risk of injury. “What’s more, exoskeletons can be used in rescue (救援) operations, providing workers with a lot of strength to lift heavy objects while protecting them from being hurt by falling weights.\nHowever, the global spread of exoskeletons remains difficult. For one thing today’s exoskeletons are expensive because they need to be charged (充电) regularly. For another, most exoskeletons can help people do only one type of movement. A company called SuitX is developing new forms of exoskeletons now. The company hopes people of all ages can use their products in the future.\nThat would be really cool, but some people worry that the technology will divide humanity. People who can afford exoskeletons will become stronger and achieve more than those without suits. We may end up with two classes of humanity: the superhumans and everybody else. That wouldn’t be fair. Also, researchers have found that when people work in exoskeletons, muscles (肌肉) compete with each other, causing the brain to work less efficiently. Over time, it can also cause harm to the body.\nSo will exoskeletons harm or benefit humanity? No one knows for sure. More research is needed.",
       "options": [],
       "answer": "Open response. The reference answer supports using an exoskeleton for tiring or dangerous work and for people with movement-related injuries or illnesses.",
       "analysis": "37．本题为主观题，无标准答案，言之成理即可。故参考答案为Yes, I would like to have an exoskeleton because it can be used to do some tiring or dangerous work and help people with injuries or illnesses that affect movement.\n五、文段表达 (10分)\nA.回首抗击新冠疫情的这三年，每个人都在自己的岗位发光发热。每个人的心中都有一位“英雄”。请你结合自身经历，根据下表谈谈疫情防控期间你的所见所闻，所思所感。\nThe unforgettable three years\nWhat you did\nstayed at home, wore masks, volunteered to do... , had online class...\nWhat you saw\nenvironment around you...\nYour hero and why\ndoctors/nurses/teachers/police...\nYour feeling\n...\n写作要求：\n1. 短文应包括提示中所有的写作要点，条理清楚，行文连贯，可适当发挥；\n2. 短文中不能出现真实的人名和地名；\n3. 词数80—120，短文开头已给出，不计入总词数。\nThe unforgettable three years\nHow time flies! The COVID-19 attacked people three years ago.\n__________"
     }
   ],
+  "readingA": {
+    "instructions": "(一) 阅读下列课程介绍, 请根据人物喜好和需求匹配最适合的课程, 并将课程所对应的A、B、C、D选项填在相应位置上。选项中有一项为多余选项。",
+    "books": [
+      {
+        "letter": "A",
+        "title": "Arlen’s Gun",
+        "author": "Edgar Doleman",
+        "site": "www.authorhouse.com",
+        "format": "Hardback | Paperback | E-book",
+        "price": "$34.99 | $20.99 | $5.99",
+        "description": "A young airman, soldier on an AC-47 gunship, lands in a country. Overcoming difficulties together with his rescuer(营救者) through many battles that follow, he discovers true brotherhood and inner courage.",
+        "image": "/junior-high/beijing-2024/arlen-gun.png"
+      },
+      {
+        "letter": "B",
+        "title": "Edward’s Xlibris Best",
+        "author": "Edward R. Levenson, Editor",
+        "site": "www.xlibris.com",
+        "format": "Hardback | Paperback | E-book",
+        "price": "$28.99 | $16.99 | $3.99",
+        "description": "This book includes 58 of Edward Levenson’s favorite pieces from among his seven previous Xlibris books. They cover the styles of “Humor”, “Word Play”, “Poetry”, “Stories”, “Memoirs”, “Translation” and “Reviews”.",
+        "image": "/junior-high/beijing-2024/edward-xlibri.png"
+      },
+      {
+        "letter": "C",
+        "title": "Gardening: A Growing Addiction",
+        "author": "Jo Ann Wiblin",
+        "site": "www.iuniverse.com",
+        "format": "Paperback | E-book",
+        "price": "$17.99 | $3.99",
+        "description": "Jo Ann Wiblin, Master Gardener, shares wisdom(智慧) and interesting personal stories in this collection of writings. Gardening can be funny and you will learn a lot in this book.",
+        "image": "/junior-high/beijing-2024/gardening.png"
+      },
+      {
+        "letter": "D",
+        "title": "Using Japanese Paper for Digital Printing of Photographs",
+        "author": "Carl-Evert Jonsson",
+        "site": "www.authorhouse.co.uk",
+        "format": "Paperback | E-book",
+        "price": "$17.22 | $4.99",
+        "description": "Find out how to use a method that will give new life to photos with the suggestions in Using Japanese Paper for Digital Printing of Photographs.",
+        "image": "/junior-high/beijing-2024/japanese-paper.png"
+      }
+    ]
+  },
   "writing": {
     "title": "五、文段表达",
-    "prompts": "A. 回首抗击新冠疫情的这三年……\n\nB. 假定你是李华，四月你校组织了以“快乐阅读”为主题的读书节……",
-    "requirements": "任选一题；包括所有写作要点；不得出现真实姓名和地名；词数约 80—120。"
+    "promptA": "回首抗击新冠疫情的这三年，每个人都在自己的岗位发光发热。每个人的心中都有一位“英雄”。请你结合自身经历，根据下表谈谈疫情防控期间你的所见所闻，所思所感。",
+    "tableA": [
+      [
+        "What you did",
+        "stayed at home, wore masks, volunteered to do... , had online class..."
+      ],
+      [
+        "What you saw",
+        "environment around you..."
+      ],
+      [
+        "Your hero and why",
+        "doctors/nurses/teachers/police..."
+      ],
+      [
+        "Your feeling",
+        "..."
+      ]
+    ],
+    "openingA": "The unforgettable three years\nHow time flies! The COVID-19 attacked people three years ago.",
+    "requirementsA": "短文应包括提示中所有的写作要点，条理清楚，行文连贯，可适当发挥；不得出现真实人名和地名；词数80—120，短文开头已给出，不计入总词数。",
+    "promptB": "假定你是李华，四月你校组织了以“快乐阅读”为主题的读书节。请你结合以下图示用英语给笔友Peter写一封信。词数80左右。",
+    "requirementsB": "必须包含所有提示信息，可适当发挥；请勿在文中使用真实姓名和校名；开头和结尾已给出，不计入总词数。",
+    "contentPointsB": "1. 介绍本次读书节；\n2. 谈谈自己接下来的暑假阅读计划（至少两点）。",
+    "openingB": "Dear Peter,\nHow is everything going?",
+    "closingB": "Yours,\nLi Hua",
+    "diagram": "/junior-high/beijing-2024/happy-reading-day.png"
+  },
+  "assets": {
+    "beanTaco": "/junior-high/beijing-2024/bean-taco.png",
+    "bookCovers": {
+      "arlenGun": "/junior-high/beijing-2024/arlen-gun.png",
+      "edwardXlibris": "/junior-high/beijing-2024/edward-xlibri.png",
+      "gardening": "/junior-high/beijing-2024/gardening.png",
+      "japanesePaper": "/junior-high/beijing-2024/japanese-paper.png"
+    },
+    "exoskeleton": "/junior-high/beijing-2024/exoskeleton.png",
+    "happyReadingDay": "/junior-high/beijing-2024/happy-reading-day.png"
   }
 }
