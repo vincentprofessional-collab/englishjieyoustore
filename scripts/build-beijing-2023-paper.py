@@ -54,7 +54,7 @@ def analysis_for(number: int) -> str:
     return "\n".join(analysis_lines[start + 1:end]).strip() or "解析内容见对应解析版文件。"
 
 
-def question(number: int, kind: str, prompt: str, options: list[str], answer: str, context: str = "") -> dict:
+def question(number: int, kind: str, prompt: str, options: list[str], answer: str, context: str = "", image: str | None = None) -> dict:
     return {
         "id": f"beijing-2023-real-{number}",
         "number": number,
@@ -62,6 +62,7 @@ def question(number: int, kind: str, prompt: str, options: list[str], answer: st
         "prompt": prompt,
         "context": context,
         "options": options,
+        **({"image": image} if image else {}),
         "answer": answer,
         "analysis": analysis_for(number),
     }
@@ -105,9 +106,9 @@ questions.extend(
     for number, options, answer in zip(range(13, 21), cloze_options, list("ACBDCDAB"))
 )
 questions.extend([
-    question(21, "reading", "21. ________ I’m interested in designing clothes and want to study it at college.", ["A. Wild Art", "B. Art Matters", "C. Creative Art", "D. Art Magic"], "B", ""),
-    question(22, "reading", "22. ________ I enjoy making wall posters of animals and I’d like to read picture books.", ["A. Wild Art", "B. Art Matters", "C. Creative Art", "D. Art Magic"], "A", ""),
-    question(23, "reading", "23. ________ I like making bags and want to visit art museums to get creative ideas.", ["A. Wild Art", "B. Art Matters", "C. Creative Art", "D. Art Magic"], "C", ""),
+    question(21, "reading", "21. ________ I’m interested in designing clothes and want to study it at college.", ["A. Wild Art", "B. Art Matters", "C. Creative Art", "D. Art Magic"], "B", "", "/junior-high/beijing-2023/alice.png"),
+    question(22, "reading", "22. ________ I enjoy making wall posters of animals and I’d like to read picture books.", ["A. Wild Art", "B. Art Matters", "C. Creative Art", "D. Art Magic"], "A", "", "/junior-high/beijing-2023/tony.png"),
+    question(23, "reading", "23. ________ I like making bags and want to visit art museums to get creative ideas.", ["A. Wild Art", "B. Art Matters", "C. Creative Art", "D. Art Magic"], "C", "", "/junior-high/beijing-2023/harry.png"),
     question(24, "reading", "24. What did Betty think of the seashells?", ["A. Clean.", "B. Useless.", "C. Expensive.", "D. Special."], "D", reading_b),
     question(25, "reading", "25. Betty began to cry when ________.", ["A. she slipped and hurt herself", "B. she knocked over the basket", "C. she saw the broken seashells", "D. she told her dad about the accident"], "C", reading_b),
     question(26, "reading", "26. David glued the seashells to the frame to ________.", ["A. make it up to his sister", "B. develop his painting skill", "C. prepare a gift for his dad", "D. make the picture beautiful"], "A", reading_b),
@@ -132,6 +133,9 @@ asset_map = {
     "image7.png": "art-magic.png",
     "image11.png": "seashells.png",
     "image12.png": "seashell-frame.png",
+    "image8.png": "alice.png",
+    "image9.png": "tony.png",
+    "image10.png": "harry.png",
 }
 ASSET_DIR.mkdir(parents=True, exist_ok=True)
 with zipfile.ZipFile(ORIGINAL) as archive:

@@ -48,7 +48,7 @@ function PaperQuestionCard({ question, value, submitted, onAnswer, cloze }: { qu
   return (
     <article className={`junior-high-question-card ${cloze ? "junior-high-cloze-question" : ""}`} data-question-number={question.number} id={`junior-high-question-${question.number}`}>
       <div className="junior-high-question-heading"><strong>第 {question.number} 题</strong>{cloze ? null : <span>{questionSection(question)}</span>}</div>
-      <p className="junior-high-question-prompt">{question.prompt}</p>
+      {question.image ? <img alt="题目配图" className="junior-high-question-image" src={question.image} /> : null}<p className="junior-high-question-prompt">{question.prompt}</p>
       {isOpenResponse ? <textarea value={value} onChange={(event) => onAnswer(event.target.value)} placeholder="请输入答案……" rows={question.number === 37 ? 4 : 2} /> : <div className="junior-high-options">{question.options.map((option) => <button className={value === option[0] ? "selected" : ""} key={option} onClick={() => onAnswer(option[0])} type="button">{option}</button>)}</div>}
       {submitted ? <div className="junior-high-feedback"><span>你的答案：{value || "未作答"}</span><span>{isOpenResponse ? "参考答案" : "正确答案"}：{question.answer}</span><span className={isOpenResponse ? "manual" : isCorrect ? "correct" : "incorrect"}>{isOpenResponse ? "人工复核" : isCorrect ? "✓ 正确" : "✕ 请查看解析"}</span><button onClick={() => setShowAnalysis(!showAnalysis)} type="button">解析</button>{showAnalysis ? <div className="junior-high-analysis"><strong>解析</strong><button onClick={() => setShowAnalysis(false)} type="button">关闭</button><p>{question.analysis}</p></div> : null}</div> : null}
     </article>

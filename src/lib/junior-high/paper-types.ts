@@ -5,6 +5,7 @@ export type JuniorHighQuestion = {
   prompt: string;
   context: string;
   options: string[];
+  image?: string;
   answer: string;
   analysis: string;
 };
