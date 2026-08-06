@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useDeferredValue, useEffect, useMemo, useState, type KeyboardEvent, type MouseEvent } from "react";
 import { VocabularyDirectoryPronunciation } from "@/components/vocabulary-directory-pronunciation";
+import { sortVocabularyAutocompleteItems } from "@/lib/vocabulary/autocomplete-ranking";
 import type { VocabularyAutocompleteItem } from "@/lib/vocabulary/local-vocabulary";
 
 type VocabularySearchAutocompleteProps = {
@@ -59,40 +60,16 @@ export function VocabularySearchAutocomplete({
         isChineseQuery
           ? item.definitionSearchText.includes(normalizedQuery)
           : item.normalizedWord.includes(normalizedQuery),
-      )
-      .sort((a, b) => {
-        const getRank = (item: VocabularyAutocompleteItem) => {
-          if (isChineseQuery) {
-            const definitionIndex = item.definitionSearchText.indexOf(normalizedQuery);
-            return definitionIndex < 0 ? Number.MAX_SAFE_INTEGER : definitionIndex;
-          }
-
-          if (item.normalizedWord === normalizedQuery) {
-            return 0;
-          }
-
-          if (item.normalizedWord.startsWith(normalizedQuery)) {
-            return 1;
-          }
-
-          return 2;
-        };
-        const rankDelta = getRank(a) - getRank(b);
-
-        if (rankDelta !== 0) {
-          return rankDelta;
-        }
-
-        if (a.normalizedWord.length !== b.normalizedWord.length) {
-          return a.normalizedWord.length - b.normalizedWord.length;
-        }
-
-        return a.normalizedWord.localeCompare(b.normalizedWord);
-      });
+      );
+    const sortedSuggestions = sortVocabularyAutocompleteItems(
+      matchedSuggestions,
+      normalizedQuery,
+      isChineseQuery,
+    );
 
     return {
-      totalSuggestionCount: matchedSuggestions.length,
-      visibleSuggestions: matchedSuggestions.slice(0, 40),
+      totalSuggestionCount: sortedSuggestions.length,
+      visibleSuggestions: sortedSuggestions.slice(0, 40),
     };
   }, [isChineseQuery, normalizedQuery, remoteSuggestionCount, remoteSuggestions, shouldUseRemoteSuggestions, suggestions]);
 

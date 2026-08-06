@@ -113,11 +113,19 @@ function pickOne<T>(value: MaybeArray<T>) {
   return Array.isArray(value) ? value[0] : value;
 }
 
+function splitQuestionImagePaths(questionImagePath: string | null) {
+  return (questionImagePath ?? "")
+    .split(/\r?\n/)
+    .map((path) => path.trim())
+    .filter(Boolean);
+}
+
 function mapSection(row: SectionRow): ListeningSectionSummary {
   const test = pickOne(row.tests);
   const book = pickOne(test?.content_books ?? null);
   const sectionTitle = row.title || `Section ${row.section_no}`;
   const testTitle = test?.title || `Test ${test?.test_no ?? "-"}`;
+  const firstQuestionImagePath = splitQuestionImagePaths(row.question_image_path)[0] ?? null;
 
   return {
     id: row.id,
@@ -130,21 +138,15 @@ function mapSection(row: SectionRow): ListeningSectionSummary {
     questionCount: row.question_count,
     timeLimitSeconds: row.time_limit_seconds,
     fullAudioUrl: getPublicStorageUrl("audio", row.full_audio_path),
-    questionImageUrl: getPublicStorageUrl("images", row.question_image_path),
+    questionImageUrl: getPublicStorageUrl("images", firstQuestionImagePath),
     isPublished: Boolean(book?.is_published && test?.is_published),
   };
 }
 
 async function getQuestionImageUrls(questionImagePath: string | null) {
-  const firstImageUrl = getPublicStorageUrl("images", questionImagePath);
-
-  if (!questionImagePath) {
-    return [];
-  }
-
-  // question_image_path is an explicit single image. Do not auto-include sibling
-  // pages, otherwise structured CSS questions may accidentally render full scans.
-  return firstImageUrl ? [firstImageUrl] : [];
+  return splitQuestionImagePaths(questionImagePath)
+    .map((path) => getPublicStorageUrl("images", path))
+    .filter((url): url is string => Boolean(url));
 }
 
 export async function getListeningSections() {

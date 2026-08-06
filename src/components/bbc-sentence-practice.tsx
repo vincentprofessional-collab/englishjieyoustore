@@ -392,7 +392,6 @@ export function BbcSentencePractice({
     return (
       <>
         {renderSentenceOrderLine()}
-        {renderTranslation("primary-translation writing-mode-translation")}
         {renderSentenceOrderWordBank()}
       </>
     );
@@ -411,9 +410,6 @@ export function BbcSentencePractice({
     return (
       <>
         {renderDictationSentence()}
-        {settings.subtitleMode !== "english"
-          ? renderTranslation(settings.subtitleMode === "chinese" ? "primary-translation" : "")
-          : null}
       </>
     );
   }

@@ -1,85 +1,83 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { VocabularyAutoplaySettings } from "@/components/vocabulary-autoplay-settings";
+import {
+  getPublishedSiteChromeConfig,
+  type SiteChromeConfig,
+  type SiteChromeNavItem,
+} from "@/lib/content/site-chrome";
 import { supabase } from "@/lib/supabase/client";
 
-type NavChild = {
-  children?: NavChild[];
-  href?: string;
-  label: string;
+type SiteNavStyle = CSSProperties & {
+  "--brand-mark-size": string;
+  "--brand-subtitle-size": string;
+  "--brand-title-size": string;
+  "--nav-tab-size": string;
 };
 
-type NavItem = {
-  children?: NavChild[];
-  dropdownAlign?: "left" | "right";
-  href?: string;
-  label: string;
-  note?: string;
-};
+function renderNavChild(child: SiteChromeNavItem, onNavigate: () => void) {
+  const enabledChildren = child.children.filter((nestedChild) => nestedChild.enabled);
 
-// 后期这组配置可以直接迁移到后台表，支持增删模块和调整顺序。
-const navItems: NavItem[] = [
-  {
-    label: "查单词",
-    href: "/",
-  },
-  {
-    label: "背单词",
-    note: "暂时未开发",
-    children: [
-      { label: "词汇书", href: "/vocabulary/books" },
-      { label: "SRS 复习", href: "/vocabulary/books" },
-    ],
-  },
-  {
-    label: "外刊学习",
-    children: [
-      { label: "BBC随身英语", href: "/articles" },
-      { label: "美音专辑待定", href: "/articles" },
-    ],
-  },
-  {
-    label: "语言考试",
-    children: [
-      {
-        label: "雅思",
-        children: [
-          { label: "听力", href: "/listening" },
-          { label: "口语", href: "/speaking" },
-          { label: "阅读", href: "/reading" },
-          { label: "写作", href: "/writing" },
-        ],
-      },
-      { label: "其他考试正在开发中" },
-    ],
-  },
-  {
-    label: "英语专项技能训练",
-    children: [
-      { label: "写作翻译训练", href: "/training" },
-      { label: "专项训练库", href: "/training" },
-    ],
-  },
-  {
-    label: "使用说明",
-    href: "/contact",
-  },
-  {
-    label: "我的",
-    dropdownAlign: "left",
-    children: [
-      { label: "收藏夹", href: "/me/favorites" },
-      { label: "学习记录", href: "/me/favorites" },
-      { label: "个人设置", href: "/me/settings" },
-    ],
-  },
-];
+  if (enabledChildren.length) {
+    return (
+      <div className="nav-dropdown-branch" key={child.id}>
+        <button className="nav-dropdown-branch-trigger" type="button">
+          <strong>{child.label}</strong>
+          <em aria-hidden="true">›</em>
+        </button>
+        <div className="nav-submenu">
+          {enabledChildren.map((nestedChild) => renderNavChild(nestedChild, onNavigate))}
+        </div>
+      </div>
+    );
+  }
 
-export function SiteNav() {
+  if (!child.href) {
+    return (
+      <div className="nav-dropdown-static" key={child.id}>
+        <strong>{child.label}</strong>
+      </div>
+    );
+  }
+
+  return (
+    <Link href={child.href} key={child.id} onClick={onNavigate}>
+      <strong>{child.label}</strong>
+    </Link>
+  );
+}
+
+export function SiteNav({ config: initialConfig }: { config: SiteChromeConfig }) {
+  const [config, setConfig] = useState(initialConfig);
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [canAccessAdmin, setCanAccessAdmin] = useState(false);
+  const navStyle: SiteNavStyle = {
+    "--brand-mark-size": `${config.brand.markFontSize}px`,
+    "--brand-subtitle-size": `${config.brand.subtitleFontSize}px`,
+    "--brand-title-size": `${config.brand.titleFontSize}px`,
+    "--nav-tab-size": `${config.nav.fontSize}px`,
+  };
+  const navItems = config.nav.items.filter((item) => item.enabled);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    async function loadSiteChrome() {
+      const nextConfig = await getPublishedSiteChromeConfig();
+
+      if (isMounted) {
+        setConfig(nextConfig);
+      }
+    }
+
+    void loadSiteChrome();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   useEffect(() => {
     let isMounted = true;
@@ -125,34 +123,42 @@ export function SiteNav() {
   }, []);
 
   return (
-    <header className="site-header">
+    <header className="site-header" style={navStyle}>
       <div className="nav-topbar">
-        <Link className="brand" href="/">
-          <span className="brand-mark">英</span>
+        <Link className="brand" href={config.brand.href || "/"}>
+          <span className="brand-mark">
+            {config.brand.imageUrl ? (
+              <img alt={config.brand.title} src={config.brand.imageUrl} />
+            ) : (
+              config.brand.mark
+            )}
+          </span>
           <span className="brand-copy">
-            <strong>英文解忧杂货铺</strong>
+            <strong>{config.brand.title}</strong>
+            {config.brand.subtitle ? <small>{config.brand.subtitle}</small> : null}
           </span>
         </Link>
         <div className="nav-actions">
           {canAccessAdmin ? (
-            <Link className="nav-admin-link" href="/admin">
-              内容后台
+            <Link className="nav-admin-link" href={config.nav.adminHref || "/admin"}>
+              {config.nav.adminLabel}
             </Link>
           ) : null}
-          <Link className="nav-cta" href="/login">
-            登录 / 注册
+          <Link className="nav-cta" href={config.nav.loginHref || "/login"}>
+            {config.nav.loginLabel}
           </Link>
         </div>
       </div>
 
       <nav className="nav-main" aria-label="主导航">
         {navItems.map((item) => {
-          const isOpen = openMenu === item.label;
-          const hasDropdown = Boolean(item.children?.length);
+          const isOpen = openMenu === item.id;
+          const enabledChildren = item.children.filter((child) => child.enabled);
+          const hasDropdown = Boolean(enabledChildren.length);
 
           if (!hasDropdown && item.href) {
             return (
-              <div className="nav-menu" key={item.label}>
+              <div className="nav-menu" key={item.id}>
                 <Link className="nav-tab nav-link-tab" href={item.href}>
                   {item.label}
                 </Link>
@@ -163,8 +169,8 @@ export function SiteNav() {
           return (
             <div
               className={`nav-menu ${item.dropdownAlign === "left" ? "open-left" : ""}`}
-              key={item.label}
-              onMouseEnter={() => setOpenMenu(item.label)}
+              key={item.id}
+              onMouseEnter={() => setOpenMenu(item.id)}
               onMouseLeave={() => setOpenMenu(null)}
             >
               <button
@@ -176,7 +182,7 @@ export function SiteNav() {
                     setOpenMenu(null);
                   }
                 }}
-                onClick={() => setOpenMenu(isOpen ? null : item.label)}
+                onClick={() => setOpenMenu(isOpen ? null : item.id)}
               >
                 {item.label}
                 <span className="nav-caret">{isOpen ? "▲" : "▼"}</span>
@@ -184,45 +190,10 @@ export function SiteNav() {
               <div className={`nav-dropdown ${isOpen ? "open" : ""}`}>
                 {item.note ? <div className="nav-dropdown-note">{item.note}</div> : null}
                 <div className="nav-dropdown-grid">
-                  {item.children?.map((child) => {
-                    if (child.children?.length) {
-                      return (
-                        <div className="nav-dropdown-branch" key={child.label}>
-                          <button className="nav-dropdown-branch-trigger" type="button">
-                            <strong>{child.label}</strong>
-                            <em aria-hidden="true">›</em>
-                          </button>
-                          <div className="nav-submenu">
-                            {child.children.map((nestedChild) => (
-                              <Link
-                                href={nestedChild.href ?? "#"}
-                                key={nestedChild.label}
-                                onClick={() => setOpenMenu(null)}
-                              >
-                                <strong>{nestedChild.label}</strong>
-                              </Link>
-                            ))}
-                          </div>
-                        </div>
-                      );
-                    }
-
-                    if (!child.href) {
-                      return (
-                        <div className="nav-dropdown-static" key={child.label}>
-                          <strong>{child.label}</strong>
-                        </div>
-                      );
-                    }
-
-                    return (
-                      <Link href={child.href} key={child.label} onClick={() => setOpenMenu(null)}>
-                        <strong>{child.label}</strong>
-                      </Link>
-                    );
-                  })}
+                  {enabledChildren.map((child) =>
+                    renderNavChild(child, () => setOpenMenu(null)),
+                  )}
                 </div>
-                {item.label === "我的" ? <VocabularyAutoplaySettings variant="dropdown" /> : null}
               </div>
             </div>
           );

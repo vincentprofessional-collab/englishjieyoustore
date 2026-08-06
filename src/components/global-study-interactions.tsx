@@ -3,6 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 import { ContentShareButton } from "@/components/content-share-button";
 import {
+  VocabularyHoverDefinitionLine,
+  VocabularyHoverPronunciation,
+} from "@/components/vocabulary-hover-details";
+import {
   getStudySelectionActionPosition,
   hasStudySelectionText,
   STUDY_SELECTION_ACTION_TIMEOUT_MS,
@@ -14,7 +18,10 @@ type VocabularyHint = {
   level?: string;
   partOfSpeech?: string;
   phonetic?: string;
+  ukAudioUrl?: string;
   ukPhonetic?: string;
+  usAudioUrl?: string;
+  usPhonetic?: string;
 };
 
 type WordTooltip = {
@@ -451,13 +458,11 @@ export function GlobalStudyInteractions() {
               />
             </div>
           </div>
-          {wordTooltip.hint.phonetic || wordTooltip.hint.ukPhonetic ? (
-            <span>{wordTooltip.hint.phonetic || wordTooltip.hint.ukPhonetic}</span>
-          ) : null}
-          {cleanPartOfSpeech(wordTooltip.hint.partOfSpeech) ? (
-            <span>{cleanPartOfSpeech(wordTooltip.hint.partOfSpeech)}</span>
-          ) : null}
-          <small>{cleanVocabularyDefinition(wordTooltip.hint.definitionCn)}</small>
+          <VocabularyHoverPronunciation hint={wordTooltip.hint} word={wordTooltip.word} />
+          <VocabularyHoverDefinitionLine
+            definitionCn={wordTooltip.hint.definitionCn}
+            partOfSpeech={wordTooltip.hint.partOfSpeech}
+          />
         </div>
       ) : null}
 

@@ -8,6 +8,7 @@ import {
   GuidePostRow,
   parseGuidePostRow,
 } from "@/lib/guide/posts";
+import { uploadAdminImage } from "@/lib/admin/upload-image";
 import { supabase } from "@/lib/supabase/client";
 
 type GuidePostAdminProps = {
@@ -27,6 +28,12 @@ type GuideDraft = {
   slug: string | null;
   status: AdminGuidePostRow["status"];
   title: string;
+};
+
+type TextCursorTarget = {
+  blockId: string;
+  selectionEnd: number;
+  selectionStart: number;
 };
 
 const EMPTY_DRAFT: GuideDraft = {
@@ -76,19 +83,6 @@ function firstImage(blocks: GuideContentBlock[]) {
   return blocks.find((block) => block.type === "image" && block.url)?.url ?? null;
 }
 
-function safeFilename(filename: string) {
-  const parts = filename.split(".");
-  const extension = parts.length > 1 ? `.${parts.pop()!.toLowerCase()}` : "";
-  const stem = parts
-    .join(".")
-    .normalize("NFKD")
-    .replace(/[^a-zA-Z0-9-_]+/g, "-")
-    .replace(/^-+|-+$/g, "")
-    .slice(0, 60);
-
-  return `${stem || "guide-image"}${extension}`;
-}
-
 export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
   const [draft, setDraft] = useState<GuideDraft>(createEmptyDraft);
   const [isLoading, setIsLoading] = useState(true);
@@ -96,6 +90,7 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
   const [message, setMessage] = useState("");
   const [rows, setRows] = useState<AdminGuidePostRow[]>([]);
   const [uploadingBlockId, setUploadingBlockId] = useState<string | null>(null);
+  const [textCursorTarget, setTextCursorTarget] = useState<TextCursorTarget | null>(null);
 
   useEffect(() => {
     void loadPosts();
@@ -144,6 +139,14 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
     setMessage("");
   }
 
+  function rememberTextCursor(blockId: string, textarea: HTMLTextAreaElement) {
+    setTextCursorTarget({
+      blockId,
+      selectionEnd: textarea.selectionEnd,
+      selectionStart: textarea.selectionStart,
+    });
+  }
+
   function changeBlockType(blockId: string, type: GuideBlockType) {
     updateBlock(blockId, {
       caption: "",
@@ -155,11 +158,71 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
   }
 
   function addBlock(type: GuideBlockType) {
+    if (type === "image" && textCursorTarget) {
+      insertImageAtTextCursor(textCursorTarget.blockId);
+      return;
+    }
+
     setDraft((current) => ({
       ...current,
       blocks: [...current.blocks, createGuideBlock(type)],
     }));
     setMessage("");
+  }
+
+  function insertImageAtTextCursor(blockId: string, imageUrl = "") {
+    setDraft((current) => {
+      const blockIndex = current.blocks.findIndex((block) => block.id === blockId);
+      const block = current.blocks[blockIndex];
+
+      if (blockIndex < 0 || !block || block.type !== "paragraph") {
+        return {
+          ...current,
+          blocks: [...current.blocks, { ...createGuideBlock("image"), url: imageUrl }],
+        };
+      }
+
+      const cursor =
+        textCursorTarget?.blockId === blockId
+          ? textCursorTarget
+          : {
+              blockId,
+              selectionEnd: block.text.length,
+              selectionStart: block.text.length,
+            };
+      const selectionStart = Math.min(cursor.selectionStart, block.text.length);
+      const selectionEnd = Math.min(cursor.selectionEnd, block.text.length);
+      const beforeText = block.text.slice(0, selectionStart);
+      const afterText = block.text.slice(selectionEnd);
+      const insertedImageBlock: GuideContentBlock = {
+        ...createGuideBlock("image"),
+        align: block.align,
+        url: imageUrl,
+      };
+      const replacementBlocks: GuideContentBlock[] = [
+        ...(beforeText ? [{ ...block, text: beforeText }] : []),
+        insertedImageBlock,
+        ...(afterText
+          ? [
+              {
+                ...block,
+                id: createGuideBlock("paragraph").id,
+                text: afterText,
+              },
+            ]
+          : []),
+      ];
+
+      return {
+        ...current,
+        blocks: [
+          ...current.blocks.slice(0, blockIndex),
+          ...(replacementBlocks.length ? replacementBlocks : [insertedImageBlock]),
+          ...current.blocks.slice(blockIndex + 1),
+        ],
+      };
+    });
+    setMessage(imageUrl ? "图片已插入到正文光标处。" : "已在正文光标处插入图片区块。");
   }
 
   function moveBlock(index: number, direction: -1 | 1) {
@@ -203,22 +266,45 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
 
     setUploadingBlockId(blockId);
     setMessage("");
-    const objectPath = `site/guide/${Date.now()}-${safeFilename(file.name)}`;
-    const { error } = await supabase.storage.from("images").upload(objectPath, file, {
-      cacheControl: "3600",
-      upsert: false,
-    });
 
-    if (error) {
-      setMessage(`图片上传失败：${error.message}`);
+    try {
+      const publicUrl = await uploadAdminImage(file, "site/guide");
+      updateBlock(blockId, { url: publicUrl });
+      setMessage("图片上传成功。");
+    } catch (error) {
+      setMessage(`图片上传失败：${error instanceof Error ? error.message : "请稍后再试。"}`);
+    } finally {
       setUploadingBlockId(null);
+    }
+  }
+
+  async function uploadImageAtTextCursor(
+    blockId: string,
+    event: ChangeEvent<HTMLInputElement>,
+  ) {
+    const file = event.target.files?.[0];
+    event.target.value = "";
+
+    if (!file) {
       return;
     }
 
-    const { data } = supabase.storage.from("images").getPublicUrl(objectPath);
-    updateBlock(blockId, { url: data.publicUrl });
-    setMessage("图片上传成功。");
-    setUploadingBlockId(null);
+    if (!file.type.startsWith("image/")) {
+      setMessage("请选择图片文件。");
+      return;
+    }
+
+    setUploadingBlockId(`inline-${blockId}`);
+    setMessage("");
+
+    try {
+      const publicUrl = await uploadAdminImage(file, "site/guide");
+      insertImageAtTextCursor(blockId, publicUrl);
+    } catch (error) {
+      setMessage(`图片上传失败：${error instanceof Error ? error.message : "请稍后再试。"}`);
+    } finally {
+      setUploadingBlockId(null);
+    }
   }
 
   async function savePost(status: "draft" | "published") {
@@ -273,8 +359,42 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
       return;
     }
 
-    setMessage(status === "published" ? "帖子已发布到使用说明页面。" : "草稿已保存。");
+    setMessage(status === "published" ? "帖子已发布到公告栏。" : "草稿已保存。");
     await loadPosts(data.id);
+    setIsSaving(false);
+  }
+
+  async function deletePost() {
+    if (!draft.id) {
+      return;
+    }
+
+    const confirmed = window.confirm(
+      `确定删除公告“${draft.title || "未命名公告"}”吗？公告及其评论会永久删除，无法恢复。`,
+    );
+
+    if (!confirmed) {
+      return;
+    }
+
+    setIsSaving(true);
+    setMessage("");
+    const deletedId = draft.id;
+    const { error } = await supabase
+      .from("managed_content_pages")
+      .delete()
+      .eq("id", deletedId);
+
+    if (error) {
+      setMessage(`删除失败：${error.message}`);
+      setIsSaving(false);
+      return;
+    }
+
+    const remainingRows = rows.filter((row) => row.id !== deletedId);
+    setRows(remainingRows);
+    setDraft(remainingRows.length ? rowToDraft(remainingRows[0]) : createEmptyDraft());
+    setMessage("公告已删除。");
     setIsSaving(false);
   }
 
@@ -282,23 +402,23 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
     <section className="guide-admin">
       <header className="guide-admin-heading">
         <div>
-          <span>GUIDE POSTS · 使用说明</span>
-          <h2>帖子发布后台</h2>
+          <span>NOTICE BOARD · 公告栏</span>
+          <h2>公告发布后台</h2>
           <p>组合正文、链接、图片和视频区块，设置字体、字号与对齐方式后直接发布。</p>
         </div>
         <button className="button secondary" onClick={startNewPost} type="button">
-          ＋ 新建帖子
+          ＋ 新建公告
         </button>
       </header>
 
       <div className="guide-admin-layout">
         <aside className="guide-admin-posts">
           <header>
-            <strong>帖子</strong>
+            <strong>公告</strong>
             <span>{rows.length}</span>
           </header>
-          {isLoading ? <p>正在读取帖子…</p> : null}
-          {!isLoading && !rows.length ? <p>还没有后台帖子，可以先新建一篇。</p> : null}
+          {isLoading ? <p>正在读取公告…</p> : null}
+          {!isLoading && !rows.length ? <p>还没有后台公告，可以先新建一篇。</p> : null}
           {rows.map((row) => (
             <button
               className={draft.id === row.id ? "active" : ""}
@@ -320,13 +440,13 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
           <section className="guide-admin-card">
             <div className="guide-admin-field-grid">
               <label className="wide">
-                <span>帖子标题</span>
+                <span>公告标题</span>
                 <input
                   maxLength={120}
                   onChange={(event) =>
                     setDraft((current) => ({ ...current, title: event.target.value }))
                   }
-                  placeholder="例如：如何使用雅思听力练习"
+                  placeholder="例如：资料下载或使用说明"
                   value={draft.title}
                 />
               </label>
@@ -448,13 +568,33 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
                   </div>
 
                   {block.type === "paragraph" || block.type === "heading" ? (
-                    <textarea
-                      aria-label={`${BLOCK_LABELS[block.type]}内容`}
-                      onChange={(event) => updateBlock(block.id, { text: event.target.value })}
-                      placeholder={block.type === "heading" ? "输入小标题" : "输入正文内容"}
-                      rows={block.type === "heading" ? 2 : 5}
-                      value={block.text}
-                    />
+                    <>
+                      <textarea
+                        aria-label={`${BLOCK_LABELS[block.type]}内容`}
+                        onChange={(event) => {
+                          updateBlock(block.id, { text: event.target.value });
+                          rememberTextCursor(block.id, event.currentTarget);
+                        }}
+                        onClick={(event) => rememberTextCursor(block.id, event.currentTarget)}
+                        onFocus={(event) => rememberTextCursor(block.id, event.currentTarget)}
+                        onKeyUp={(event) => rememberTextCursor(block.id, event.currentTarget)}
+                        onSelect={(event) => rememberTextCursor(block.id, event.currentTarget)}
+                        placeholder={block.type === "heading" ? "输入小标题" : "输入正文内容"}
+                        rows={block.type === "heading" ? 2 : 5}
+                        value={block.text}
+                      />
+                      {block.type === "paragraph" ? (
+                        <label className="guide-inline-image-upload">
+                          <span>在光标处插入图片</span>
+                          <input
+                            accept="image/*"
+                            disabled={uploadingBlockId === `inline-${block.id}`}
+                            onChange={(event) => void uploadImageAtTextCursor(block.id, event)}
+                            type="file"
+                          />
+                        </label>
+                      ) : null}
+                    </>
                   ) : null}
 
                   {block.type === "link" ? (
@@ -560,6 +700,16 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
                 {message ? ` · ${message}` : ""}
               </span>
             </div>
+            {draft.id ? (
+              <button
+                className="button danger guide-delete-post"
+                disabled={isSaving}
+                onClick={() => void deletePost()}
+                type="button"
+              >
+                删除公告
+              </button>
+            ) : null}
             <button
               className="button secondary"
               disabled={isSaving}
@@ -574,7 +724,7 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
               onClick={() => void savePost("published")}
               type="button"
             >
-              {isSaving ? "保存中…" : "发布到使用说明"}
+              {isSaving ? "保存中…" : "发布到公告栏"}
             </button>
           </footer>
         </div>

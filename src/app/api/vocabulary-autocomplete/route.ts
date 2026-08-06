@@ -1,6 +1,11 @@
 import { NextResponse } from "next/server";
 
-import { getVocabularyAutocompleteItems } from "@/lib/vocabulary/local-vocabulary";
+import { sortVocabularyAutocompleteItems } from "@/lib/vocabulary/autocomplete-ranking";
+import {
+  getDatabaseVocabularyAutocompleteItems,
+  getVocabularyAutocompleteItems,
+  type VocabularyAutocompleteItem,
+} from "@/lib/vocabulary/local-vocabulary";
 
 export const dynamic = "force-dynamic";
 
@@ -16,7 +21,7 @@ function includesChinese(value: string) {
   return /[\u3400-\u9fff]/u.test(value);
 }
 
-export function GET(request: Request) {
+export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const query = searchParams.get("q")?.trim() ?? "";
   const requestedLimit = Number(searchParams.get("limit") ?? 40);
@@ -30,45 +35,32 @@ export function GET(request: Request) {
     return NextResponse.json({ suggestions: [], total: 0 });
   }
 
-  const matchedSuggestions = getVocabularyAutocompleteItems()
+  const localSuggestions = getVocabularyAutocompleteItems()
     .filter((item) =>
       isChineseQuery
         ? item.definitionSearchText.includes(normalizedQuery)
         : item.normalizedWord.includes(normalizedQuery),
-    )
-    .sort((a, b) => {
-      const getRank = (item: ReturnType<typeof getVocabularyAutocompleteItems>[number]) => {
-        if (isChineseQuery) {
-          const definitionIndex = item.definitionSearchText.indexOf(normalizedQuery);
+    );
+  const databaseSuggestions = await getDatabaseVocabularyAutocompleteItems({
+    isChineseQuery,
+    limit: Math.max(limit * 2, 40),
+    query,
+  });
+  const suggestionMap = new Map<string, VocabularyAutocompleteItem>();
 
-          return definitionIndex < 0 ? Number.MAX_SAFE_INTEGER : definitionIndex;
-        }
+  for (const item of [...localSuggestions, ...databaseSuggestions]) {
+    suggestionMap.set(item.normalizedWord, item);
+  }
 
-        if (item.normalizedWord === normalizedQuery) {
-          return 0;
-        }
-
-        if (item.normalizedWord.startsWith(normalizedQuery)) {
-          return 1;
-        }
-
-        return 2;
-      };
-      const rankDelta = getRank(a) - getRank(b);
-
-      if (rankDelta !== 0) {
-        return rankDelta;
-      }
-
-      if (a.normalizedWord.length !== b.normalizedWord.length) {
-        return a.normalizedWord.length - b.normalizedWord.length;
-      }
-
-      return a.normalizedWord.localeCompare(b.normalizedWord);
-    });
+  const matchedSuggestions = [...suggestionMap.values()];
+  const sortedSuggestions = sortVocabularyAutocompleteItems(
+    matchedSuggestions,
+    normalizedQuery,
+    isChineseQuery,
+  );
 
   return NextResponse.json({
-    suggestions: matchedSuggestions.slice(0, limit),
+    suggestions: sortedSuggestions.slice(0, limit),
     total: matchedSuggestions.length,
   });
 }

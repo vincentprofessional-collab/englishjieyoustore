@@ -1,5 +1,8 @@
 import Link from "next/link";
-import type { ManagedPageContent } from "@/lib/content/page-content";
+import {
+  getManagedPageItemClassName,
+  type ManagedPageContent,
+} from "@/lib/content/page-content";
 
 export function ReadingHome({ content }: { content: ManagedPageContent }) {
   const items = content.items.filter((item) => item.enabled);
@@ -17,7 +20,11 @@ export function ReadingHome({ content }: { content: ManagedPageContent }) {
         <div className="writing-mode-grid">
           {items.map((item, index) => (
             <Link
-              className={`writing-mode-card ${index % 2 === 0 ? "practice" : "mock"}`}
+              className={getManagedPageItemClassName(
+                item,
+                index,
+                `writing-mode-card ${index % 2 === 0 ? "practice" : "mock"}`,
+              )}
               href={item.href || "/reading"}
               key={item.id}
             >

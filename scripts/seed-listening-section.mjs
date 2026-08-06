@@ -104,14 +104,16 @@ function assertStoragePath(value, label) {
 
   assertNonEmptyString(value, label);
 
-  if (value.startsWith("/") || value.startsWith("http://") || value.startsWith("https://")) {
-    throw new Error(`${label} must be a Storage object path, not a URL or absolute path.`);
-  }
+  for (const path of value.split(/\r?\n/).map((entry) => entry.trim()).filter(Boolean)) {
+    if (path.startsWith("/") || path.startsWith("http://") || path.startsWith("https://")) {
+      throw new Error(`${label} must be a Storage object path, not a URL or absolute path.`);
+    }
 
-  if (value.startsWith("audio/") || value.startsWith("images/")) {
-    throw new Error(
-      `${label} should not include the bucket name. Use "listening/ci4/t1/s1/full.mp3", not "audio/listening/...".`,
-    );
+    if (path.startsWith("audio/") || path.startsWith("images/")) {
+      throw new Error(
+        `${label} should not include the bucket name. Use "listening/ci4/t1/s1/full.mp3", not "audio/listening/...".`,
+      );
+    }
   }
 }
 

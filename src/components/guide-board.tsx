@@ -11,9 +11,8 @@ import {
 import { supabase } from "@/lib/supabase/client";
 
 type GuideBoardProps = {
-  eyebrow: string;
-  summary: string;
-  title: string;
+  eyebrow?: string;
+  title?: string;
 };
 
 type GuideComment = {
@@ -74,7 +73,7 @@ function GuideBlock({ block }: { block: GuideContentBlock }) {
       <figure className="guide-post-media" style={{ textAlign: block.align }}>
         {/* Admin-controlled public media URLs are intentionally rendered without image optimization. */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img alt={block.caption || ""} src={block.url} />
+        <img alt={block.caption || ""} decoding="async" loading="lazy" src={block.url} />
         {block.caption ? <figcaption>{block.caption}</figcaption> : null}
       </figure>
     ) : null;
@@ -299,13 +298,15 @@ function GuidePostCard({ post }: { post: GuidePost }) {
     <article className={`guide-post-card ${expanded ? "expanded" : ""}`}>
       <header className="guide-post-card-head">
         <div className="guide-post-number" aria-hidden="true">
-          帖
+          告
         </div>
-        <div>
-          <span>{formatGuideDate(post.publishedAt)}</span>
+        <div className="guide-post-title-block">
           <h2>{post.title}</h2>
           <p>{post.excerpt}</p>
         </div>
+        <time className="guide-post-date" dateTime={post.publishedAt}>
+          {formatGuideDate(post.publishedAt)}
+        </time>
       </header>
 
       {expanded ? (
@@ -317,26 +318,27 @@ function GuidePostCard({ post }: { post: GuidePost }) {
       ) : null}
 
       <footer className="guide-post-actions">
-        <button
-          aria-expanded={expanded}
-          className="guide-read-button"
-          onClick={() => setExpanded((current) => !current)}
-          type="button"
-        >
-          {expanded ? "收起内容" : "阅读全文与留言"}
-          <span aria-hidden="true">{expanded ? "↑" : "↓"}</span>
-        </button>
-        <button
-          aria-label={isLiked ? `取消点赞 ${post.title}` : `点赞 ${post.title}`}
-          aria-pressed={isLiked}
-          className={`guide-like-button ${isLiked ? "active" : ""}`}
-          onClick={() => void toggleLike()}
-          type="button"
-        >
-          <span aria-hidden="true">♥</span>
-          {likeCount}
-        </button>
-        <span>{comments.length} 条留言</span>
+        <div className="guide-post-action-buttons">
+          <button
+            aria-expanded={expanded}
+            className="guide-read-button"
+            onClick={() => setExpanded((current) => !current)}
+            type="button"
+          >
+            {expanded ? "收起内容" : "阅读全文与留言"}
+            <span aria-hidden="true">{expanded ? "↑" : "↓"}</span>
+          </button>
+          <button
+            aria-label={isLiked ? `取消点赞 ${post.title}` : `点赞 ${post.title}`}
+            aria-pressed={isLiked}
+            className={`guide-like-button ${isLiked ? "active" : ""}`}
+            onClick={() => void toggleLike()}
+            type="button"
+          >
+            <span aria-hidden="true">♥</span>
+            {likeCount}
+          </button>
+        </div>
       </footer>
 
       {expanded ? (
@@ -400,8 +402,10 @@ function GuidePostCard({ post }: { post: GuidePost }) {
   );
 }
 
-export function GuideBoard({ eyebrow, summary, title }: GuideBoardProps) {
-  const [loadMessage, setLoadMessage] = useState("");
+export function GuideBoard({
+  eyebrow = "NOTICE BOARD",
+  title = "公告栏",
+}: GuideBoardProps) {
   const [posts, setPosts] = useState<GuidePost[]>(DEFAULT_GUIDE_POSTS);
 
   useEffect(() => {
@@ -421,13 +425,11 @@ export function GuideBoard({ eyebrow, summary, title }: GuideBoardProps) {
       }
 
       if (error) {
-        setLoadMessage("当前显示基础使用说明。");
         return;
       }
 
       if (data?.length) {
         setPosts((data as GuidePostRow[]).map(parseGuidePostRow));
-        setLoadMessage("");
       }
     }
 
@@ -440,25 +442,11 @@ export function GuideBoard({ eyebrow, summary, title }: GuideBoardProps) {
 
   return (
     <main className="stack guide-board-page">
-      <section className="guide-board-hero">
-        <div>
-          <span>{eyebrow}</span>
-          <h1>{title}</h1>
-          <p>{summary}</p>
-        </div>
-        <aside>
-          <strong>{String(posts.length).padStart(2, "0")}</strong>
-          <span>篇使用说明</span>
-          <small>{loadMessage || "持续更新中"}</small>
-        </aside>
-      </section>
-
       <section className="guide-board-heading">
         <div>
-          <span>GUIDE BOARD</span>
-          <h2>帖子与使用指南</h2>
+          <span>{eyebrow}</span>
+          <h2>{title}</h2>
         </div>
-        <p>按发布时间由新到旧排列。打开帖子后可以点赞，也可以在下方留言交流。</p>
       </section>
 
       <div className="guide-post-list">

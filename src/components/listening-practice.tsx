@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import {
+  type ComponentType,
   type CSSProperties,
   type DragEvent as ReactDragEvent,
   type KeyboardEvent as ReactKeyboardEvent,
@@ -19,6 +20,10 @@ import {
   type AudioPlayerSettings,
 } from "@/components/audio-player";
 import { ContentShareButton } from "@/components/content-share-button";
+import {
+  VocabularyHoverDefinitionLine,
+  VocabularyHoverPronunciation,
+} from "@/components/vocabulary-hover-details";
 import type { ListeningSectionDetail } from "@/lib/ielts/listening";
 import {
   getStudySelectionActionPosition,
@@ -26,7 +31,7 @@ import {
   STUDY_SELECTION_ACTION_TIMEOUT_MS,
   type StudySelectionActionPosition,
 } from "@/lib/study-selection";
-import { cleanPartOfSpeech, cleanVocabularyDefinition } from "@/lib/vocabulary/display";
+import { cleanVocabularyDefinition } from "@/lib/vocabulary/display";
 import type { LocalVocabularyHint } from "@/lib/vocabulary/local-vocabulary";
 
 type ListeningPracticeProps = {
@@ -94,6 +99,10 @@ type WordHint = {
   phonetic: string;
   partOfSpeech: string;
   root?: string;
+  ukAudioUrl?: string;
+  ukPhonetic?: string;
+  usAudioUrl?: string;
+  usPhonetic?: string;
   word?: string;
 };
 type ActiveWordTooltip = {
@@ -1301,24 +1310,42 @@ function CambridgeFourTestOneSheet({
   );
 }
 
-const cambridgeFourPaperGroups: Record<number, Record<number, number[][]>> = {
-  2: {
+const structuredPaperGroups: Record<string, Record<number, number[][]>> = {
+  "cambridge-4:2": {
     1: [[1, 5], [6, 8], [9, 10]],
     2: [[11, 20]],
     3: [[21, 24], [25, 26], [27, 30]],
     4: [[31, 32], [33, 38], [39, 40]],
   },
-  3: {
+  "cambridge-4:3": {
     1: [[1, 4], [5, 7], [8, 10]],
     2: [[11, 14], [15, 20]],
     3: [[21, 30]],
     4: [[31, 32], [33, 37], [38, 38], [39, 39], [40, 40]],
   },
-  4: {
+  "cambridge-4:4": {
     1: [[1, 10]],
     2: [[11, 15], [16, 20]],
     3: [[21, 26], [27, 30]],
     4: [[31, 34], [35, 38], [39, 40]],
+  },
+  "cambridge-6:2": {
+    1: [[1, 5], [6, 10]],
+    2: [[11, 14], [15, 17], [18, 20]],
+    3: [[21, 30]],
+    4: [[31, 37], [38, 40]],
+  },
+  "cambridge-6:3": {
+    1: [[1, 10]],
+    2: [[11, 13], [14, 17], [18, 20]],
+    3: [[21, 24], [25, 30]],
+    4: [[31, 34], [35, 37], [38, 40]],
+  },
+  "cambridge-6:4": {
+    1: [[1, 10]],
+    2: [[11, 13], [14, 20]],
+    3: [[21, 25], [26, 27], [28, 30]],
+    4: [[31, 34], [35, 40]],
   },
 };
 
@@ -1331,21 +1358,44 @@ function questionRangeTitle(questions: ListeningQuestion[]) {
     : `Questions ${firstQuestionNo}-${lastQuestionNo}`;
 }
 
+const PAPER_GROUP_TITLES = new Set(
+  [
+    // Cambridge 4
+    "Accommodation Request Form",
+    "New Union Building",
+    "CHOICE OF SITE",
+    "GOODBYE PARTY FOR JOHN",
+    "Sharks in Australia",
+    "DETAILS OF ASSIGNMENT",
+    // Cambridge 6
+    "CHILDREN'S ART AND CRAFT WORKSHOPS",
+    "TRAIN INFORMATION",
+    "Dissertation Tutorial Record (Education)",
+    "OPENING A BANK ACCOUNT",
+    "ROSEWOOD HOUSE AND GARDENS",
+    "RIVER WALK",
+    "MARKETING ASSIGNMENT",
+    "Marketing Survey: Music Preferences",
+    "THE HISTORY OF ROSEWOOD HOUSE",
+    "IRELAND IN THE NEOLITHIC PERIOD",
+    "STONE TOOLS",
+    "POTTERY MAKING",
+    "The School of Education Libraries",
+    "Travel Expo",
+    "THE GIR SANCTUARY",
+  ].map((title) => title.toLowerCase()),
+);
+
 function getPaperGroupTitle(questions: ListeningQuestion[]) {
   const titles = questions.map((question) => {
     const firstLine = (question.promptText ?? "").split(/\r?\n/)[0]?.trim() ?? "";
     const dashTitle = firstLine.split(/\s+[—–-]\s+/)[0]?.trim();
 
-    if (
-      dashTitle &&
-      /^(Accommodation Request Form|New Union Building|CHOICE OF SITE|GOODBYE PARTY FOR JOHN|Sharks in Australia|DETAILS OF ASSIGNMENT)$/i.test(
-        dashTitle,
-      )
-    ) {
+    if (dashTitle && PAPER_GROUP_TITLES.has(dashTitle.toLowerCase())) {
       return dashTitle;
     }
 
-    if (/Accommodation Request Form$/i.test(firstLine)) {
+    if (PAPER_GROUP_TITLES.has(firstLine.toLowerCase())) {
       return firstLine;
     }
 
@@ -1367,7 +1417,7 @@ function stripPaperGroupTitle(line: string, groupTitle: string) {
 }
 
 function isPaperInstructionLine(line: string) {
-  return /^(Complete|Write|Choose)\b/i.test(line);
+  return /^(Complete|Write|Choose|Label|Answer)\b/i.test(line);
 }
 
 function getPaperFillBodyLines(question: ListeningQuestion, groupTitle: string) {
@@ -1611,8 +1661,513 @@ function CambridgeFourPaperQuestionGroup({
   );
 }
 
+type CambridgePaperSheetProps = {
+  answers: AnswerMap;
+  bookCode: string;
+  onAnswerChange: (questionId: string, value: string) => void;
+  questionImageUrls: string[];
+  questions: ListeningQuestion[];
+  sectionNo: number;
+  submitted: boolean;
+  testNo: number;
+};
+
+function CambridgeSixTestTwoSectionOneSheet({
+  answers,
+  onAnswerChange,
+  questionImageUrls,
+  questions,
+  sectionNo,
+  submitted,
+  testNo,
+}: CambridgePaperSheetProps) {
+  const questionByNo = new Map(questions.map((question) => [question.questionNo, question]));
+  const answer = (questionNo: number) => (
+    <InlineFillAnswer
+      answers={answers}
+      onAnswerChange={onAnswerChange}
+      question={questionByNo.get(questionNo)}
+      submitted={submitted}
+    />
+  );
+
+  return (
+    <div className="paper-sheet">
+      <div className="paper-listening-badge">LISTENING</div>
+
+      <div className="paper-section-heading">
+        <h2>SECTION 1</h2>
+        <h2>Questions 1-10</h2>
+      </div>
+
+      <section className="paper-instructions">
+        <h3>Questions 1-5</h3>
+        <p>
+          <em>Complete the notes below.</em>
+        </p>
+        <p>
+          Write <strong>NO MORE THAN TWO WORDS AND/OR A NUMBER</strong> for each answer.
+        </p>
+      </section>
+
+      <section className="programme-note-card" aria-label="Children's Art and Craft Workshops">
+        <div className="programme-note-title">CHILDREN'S ART AND CRAFT WORKSHOPS</div>
+
+        <div className="programme-example">
+          <div>
+            <strong>Example</strong>
+            <span>Workshops organised every:</span>
+          </div>
+          <div>
+            <strong>Answer</strong>
+            <span>fortnight</span>
+          </div>
+        </div>
+
+        <div className="programme-detail-grid">
+          <strong>Adults</strong>
+          <span>must accompany children under {answer(1)}.</span>
+
+          <strong>Cost</strong>
+          <span>£2.50</span>
+
+          <strong>Workshops held in:</strong>
+          <span>Winter House, {answer(2)} Street</span>
+
+          <strong>Security device:</strong>
+          <span>must push the {answer(3)} to open door</span>
+
+          <strong>Car</strong>
+          <span>leave it behind the {answer(4)}.</span>
+
+          <strong>Booking</strong>
+          <span>phone the {answer(5)} (on 200765)</span>
+        </div>
+      </section>
+
+      <section className="paper-instructions">
+        <h3>Questions 6-10</h3>
+        <p>
+          <em>Complete the table below.</em>
+        </p>
+        <p>
+          Write <strong>NO MORE THAN TWO WORDS</strong> for each answer.
+        </p>
+      </section>
+
+      <div className="paper-table-wrap">
+        <table className="paper-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Workshop title</th>
+              <th>Children advised to wear</th>
+              <th>Please bring (if possible)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>16/11</td>
+              <td>'Building {answer(6)}'</td>
+              <td>{answer(7)}</td>
+              <td>{answer(8)}</td>
+            </tr>
+            <tr>
+              <td>23/11</td>
+              <td>'{answer(9)}'</td>
+              <td>(Nothing special)</td>
+              <td>{answer(10)}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+function CambridgeSixTestTwoSectionTwoSheet({
+  answers,
+  onAnswerChange,
+  questionImageUrls,
+  questions,
+  sectionNo,
+  submitted,
+  testNo,
+}: CambridgePaperSheetProps) {
+  const questionByNo = new Map(questions.map((question) => [question.questionNo, question]));
+  const answer = (questionNo: number, options: { showQuestionNumber?: boolean } = {}) => (
+    <InlineFillAnswer
+      answers={answers}
+      onAnswerChange={onAnswerChange}
+      question={questionByNo.get(questionNo)}
+      showQuestionNumber={options.showQuestionNumber}
+      submitted={submitted}
+    />
+  );
+
+  return (
+    <div className="paper-sheet">
+      <div className="paper-listening-badge">LISTENING</div>
+
+      <div className="paper-section-heading">
+        <h2>SECTION 2</h2>
+        <h2>Questions 11-20</h2>
+      </div>
+
+      <section className="paper-instructions">
+        <h3>Questions 11-14</h3>
+        <p>
+          <em>Complete the sentences below.</em>
+        </p>
+        <p>
+          Write <strong>NO MORE THAN TWO WORDS AND/OR A NUMBER</strong> for each answer.
+        </p>
+      </section>
+
+      <section className="paper-fill-list paper-form-card">
+        <h3>TRAIN INFORMATION</h3>
+        <p>Local services depart from {answer(11)} railway station.</p>
+        <p>National services depart from the {answer(12)} railway station.</p>
+        <p>Trains for London depart every {answer(13)} each day during the week.</p>
+        <p>The price of a first class ticket includes {answer(14)}.</p>
+      </section>
+
+      <section className="paper-instructions">
+        <h3>Questions 15-17</h3>
+        <p>
+          <em>Complete the table below.</em>
+        </p>
+        <p>
+          Write <strong>NO MORE THAN TWO WORDS AND/OR A NUMBER</strong> for each answer.
+        </p>
+      </section>
+
+      <div className="paper-table-wrap">
+        <table className="paper-table">
+          <thead>
+            <tr>
+              <th>Type of ticket</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Standard open</td>
+              <td>no restrictions</td>
+            </tr>
+            <tr>
+              <td>Supersave</td>
+              <td>travel after 8.45</td>
+            </tr>
+            <tr>
+              <td>Special</td>
+              <td>travel after {answer(15)} and at weekends</td>
+            </tr>
+            <tr>
+              <td>{answer(16)}</td>
+              <td>
+                buy at least six days ahead, limited numbers
+                <br />
+                {answer(17)} essential
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <section className="paper-instructions">
+        <h3>Questions 18-20</h3>
+        <p>
+          <em>Choose THREE letters, A-G.</em>
+        </p>
+        <p>Which THREE attractions can you visit at present by train from Trebirch?</p>
+      </section>
+
+      <div className="paper-option-box-plain">
+        <span>
+          <strong>A</strong> a science museum
+        </span>
+        <span>
+          <strong>B</strong> a theme park
+        </span>
+        <span>
+          <strong>C</strong> a climbing wall
+        </span>
+        <span>
+          <strong>D</strong> a mining museum
+        </span>
+        <span>
+          <strong>E</strong> an aquarium
+        </span>
+        <span>
+          <strong>F</strong> a castle
+        </span>
+        <span>
+          <strong>G</strong> a zoo
+        </span>
+      </div>
+
+      <section className="paper-vertical-answers">
+        <p>{answer(18)}</p>
+        <p>{answer(19)}</p>
+        <p>{answer(20)}</p>
+      </section>
+    </div>
+  );
+}
+
+function CambridgeSixTestTwoSectionThreeSheet({
+  answers,
+  onAnswerChange,
+  questionImageUrls,
+  questions,
+  sectionNo,
+  submitted,
+  testNo,
+}: CambridgePaperSheetProps) {
+  const questionByNo = new Map(questions.map((question) => [question.questionNo, question]));
+  const answer = (questionNo: number) => (
+    <InlineFillAnswer
+      answers={answers}
+      onAnswerChange={onAnswerChange}
+      question={questionByNo.get(questionNo)}
+      submitted={submitted}
+    />
+  );
+
+  return (
+    <div className="paper-sheet">
+      <div className="paper-listening-badge">LISTENING</div>
+
+      <div className="paper-section-heading">
+        <h2>SECTION 3</h2>
+        <h2>Questions 21-30</h2>
+      </div>
+
+      <section className="paper-instructions">
+        <h3>Questions 21-30</h3>
+        <p>
+          <em>Complete the tables below.</em>
+        </p>
+        <p>
+          Write <strong>NO MORE THAN THREE WORDS AND/OR A NUMBER</strong> for each answer.
+        </p>
+      </section>
+
+      <div className="paper-table-wrap">
+        <table className="paper-table">
+          <caption className="paper-table-title">
+            Dissertation Tutorial Record (Education)
+            <span className="paper-table-subtitle">Name: Sandy Gibbons</span>
+          </caption>
+          <thead>
+            <tr>
+              <th>Targets previously agreed</th>
+              <th>Work completed</th>
+              <th>Further action suggested</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Investigate suitable data analysis software</td>
+              <td>
+                - Read IT {answer(21)}
+                <br />
+                - Spoken to Jane Prince, Head of the {answer(22)}
+              </td>
+              <td>Sign up for some software practice sessions</td>
+            </tr>
+            <tr>
+              <td>Prepare a {answer(23)} for survey</td>
+              <td>- Completed and sent for review</td>
+              <td>Add questions in section three on {answer(24)}</td>
+            </tr>
+            <tr>
+              <td>Further reading about discipline</td>
+              <td>
+                - Read Banerjee
+                <br />
+                - N.B. Couldn't find Ericsson's essays on managing the {answer(25)}
+              </td>
+              <td>Obtain from library through special loans service</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div className="paper-table-wrap">
+        <table className="paper-table">
+          <thead>
+            <tr>
+              <th>New Targets</th>
+              <th>Work completed</th>
+              <th>Further action suggested</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Do further work on Chapter 1 (Give the title: Context {answer(26)})</td>
+              <td>
+                - Add statistics on the {answer(27)} in various zones
+                <br />
+                - Include more references to works dated after {answer(28)}
+              </td>
+              <td>By the {answer(29)}</td>
+            </tr>
+            <tr>
+              <td>Prepare list of main sections for Chapter 2</td>
+              <td>- Use index cards to help in organisation</td>
+              <td>Before starting the {answer(30)}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+function CambridgeSixTestFourSectionTwoSheet({
+  answers,
+  onAnswerChange,
+  questionImageUrls,
+  questions,
+  sectionNo,
+  submitted,
+  testNo,
+}: CambridgePaperSheetProps) {
+  const questionByNo = new Map(questions.map((question) => [question.questionNo, question]));
+  const answer = (questionNo: number) => (
+    <InlineFillAnswer
+      answers={answers}
+      onAnswerChange={onAnswerChange}
+      question={questionByNo.get(questionNo)}
+      submitted={submitted}
+    />
+  );
+
+  return (
+    <div className="paper-sheet">
+      <div className="paper-listening-badge">LISTENING</div>
+
+      <div className="paper-section-heading">
+        <h2>SECTION 2</h2>
+        <h2>Questions 11-20</h2>
+      </div>
+
+      <section className="paper-instructions">
+        <h3>Questions 11-13</h3>
+        <p>Which team will do each of the following jobs?</p>
+        <p>
+          Choose <strong>THREE answers</strong> from the box and write the correct letter, A-D,
+          next to questions 11-13.
+        </p>
+      </section>
+
+      <div className="paper-option-box paper-chart-option-box">
+        <span>
+          <strong>A</strong> the blue team
+        </span>
+        <span>
+          <strong>B</strong> the yellow team
+        </span>
+        <span>
+          <strong>C</strong> the green team
+        </span>
+        <span>
+          <strong>D</strong> the red team
+        </span>
+      </div>
+
+      <section className="paper-match-list">
+        <p>checking entrance tickets: {answer(11)}</p>
+        <p>preparing refreshments: {answer(12)}</p>
+        <p>directing car-park traffic: {answer(13)}</p>
+      </section>
+
+      <section className="paper-instructions">
+        <h3>Questions 14-20</h3>
+        <p>
+          <em>Complete the table below.</em>
+        </p>
+        <p>
+          Write <strong>NO MORE THAN THREE WORDS AND/OR A NUMBER</strong> for each answer.
+        </p>
+      </section>
+
+      <div className="paper-table-wrap">
+        <table className="paper-table">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Activity</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>9.30 am</td>
+              <td>Talk by Anne Smith</td>
+              <td>
+                • information about pay
+                <br />
+                • will give out the {answer(14)} forms
+              </td>
+            </tr>
+            <tr>
+              <td>10.00 am</td>
+              <td>Talk by Peter Chen</td>
+              <td>
+                • will discuss Conference Centre plan
+                <br />
+                • will explain about arrangements for {answer(15)} and fire exits
+              </td>
+            </tr>
+            <tr>
+              <td>10.30 am</td>
+              <td>Coffee Break</td>
+              <td>• go to Staff Canteen on the {answer(16)}</td>
+            </tr>
+            <tr>
+              <td>11.00 am</td>
+              <td>Video Presentation</td>
+              <td>
+                • go to {answer(17)}
+                <br />
+                • video title: {answer(18)}
+              </td>
+            </tr>
+            <tr>
+              <td>12.00</td>
+              <td>Buffet Lunch</td>
+              <td>• go to the {answer(19)} on 1st floor</td>
+            </tr>
+            <tr>
+              <td>1.00 pm</td>
+              <td>Meet the {answer(20)}</td>
+              <td />
+            </tr>
+            <tr>
+              <td>3.00 pm</td>
+              <td>Finish</td>
+              <td />
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+const CAMBRIDGE_SIX_CUSTOM_SHEETS: Record<string, ComponentType<CambridgePaperSheetProps>> = {
+  "2:1": CambridgeSixTestTwoSectionOneSheet,
+  "2:2": CambridgeSixTestTwoSectionTwoSheet,
+  "2:3": CambridgeSixTestTwoSectionThreeSheet,
+  "4:2": CambridgeSixTestFourSectionTwoSheet,
+};
+
 function CambridgeFourPaperSheet({
   answers,
+  bookCode,
   onAnswerChange,
   questionImageUrls,
   questions,
@@ -1621,6 +2176,7 @@ function CambridgeFourPaperSheet({
   testNo,
 }: {
   answers: AnswerMap;
+  bookCode: string;
   onAnswerChange: (questionId: string, value: string) => void;
   questionImageUrls: string[];
   questions: ListeningQuestion[];
@@ -1628,13 +2184,37 @@ function CambridgeFourPaperSheet({
   submitted: boolean;
   testNo: number;
 }) {
-  const groupedQuestions = (cambridgeFourPaperGroups[testNo]?.[sectionNo] ?? []).map(
-    ([firstQuestionNo, lastQuestionNo]) =>
-      questions.filter(
-        (question) =>
-          question.questionNo >= firstQuestionNo && question.questionNo <= lastQuestionNo,
-      ),
+  const CustomSheet =
+    bookCode === "cambridge-6" ? CAMBRIDGE_SIX_CUSTOM_SHEETS[`${testNo}:${sectionNo}`] : undefined;
+
+  if (CustomSheet) {
+    return (
+      <CustomSheet
+        answers={answers}
+        bookCode={bookCode}
+        onAnswerChange={onAnswerChange}
+        questionImageUrls={questionImageUrls}
+        questions={questions}
+        sectionNo={sectionNo}
+        submitted={submitted}
+        testNo={testNo}
+      />
+    );
+  }
+
+  const groupedQuestions = (
+    structuredPaperGroups[`${bookCode}:${testNo}`]?.[sectionNo] ?? []
+  ).map(([firstQuestionNo, lastQuestionNo]) =>
+    questions.filter(
+      (question) =>
+        question.questionNo >= firstQuestionNo && question.questionNo <= lastQuestionNo,
+    ),
   );
+
+  // For Cambridge 6 the questions are fully reconstructed as text/tables, so PDF screenshots
+  // are redundant except for map questions where the image is the question itself.
+  const isCambridgeSix = bookCode === "cambridge-6";
+  const showImages = !isCambridgeSix || questions.some((q) => q.questionType === "map");
 
   return (
     <div className="paper-sheet">
@@ -1647,16 +2227,14 @@ function CambridgeFourPaperSheet({
         </h2>
       </div>
 
-      {questionImageUrls.length > 0 ? (
+      {showImages && questionImageUrls.length > 0 ? (
         <section className="riverside-book-plan">
           {questionImageUrls.map((questionImageUrl, index) => (
             <img
               className="riverside-book-plan-image"
               key={questionImageUrl}
               src={questionImageUrl}
-              alt={`Cambridge IELTS 4 Test ${testNo} Section ${sectionNo} 地图题 ${
-                index + 1
-              }`}
+              alt={`Test ${testNo} Section ${sectionNo} 地图题 ${index + 1}`}
             />
           ))}
         </section>
@@ -1732,10 +2310,9 @@ export function ListeningPractice({
     section.testNo === 1 &&
     section.sectionNo >= 1 &&
     section.sectionNo <= 4;
+  const structuredPaperKey = `${section.bookCode}:${section.testNo}`;
   const shouldUseStructuredPaperLayout =
-    section.bookCode === "cambridge-4" &&
-    section.testNo >= 2 &&
-    section.testNo <= 4 &&
+    !!structuredPaperGroups[structuredPaperKey] &&
     section.sectionNo >= 1 &&
     section.sectionNo <= 4;
   const shouldUsePaperLayout =
@@ -2607,7 +3184,6 @@ export function ListeningPractice({
       return (
         <>
           {renderSentenceOrderLine(sentence)}
-          {renderTranslation(sentence, "primary-translation writing-mode-translation")}
           {renderSentenceOrderWordBank(sentence)}
         </>
       );
@@ -2626,12 +3202,6 @@ export function ListeningPractice({
       return (
         <>
           {renderDictationSentence(sentence)}
-          {audioSettings.subtitleMode !== "english"
-            ? renderTranslation(
-                sentence,
-                audioSettings.subtitleMode === "chinese" ? "primary-translation" : "",
-              )
-            : null}
         </>
       );
     }
@@ -3344,6 +3914,7 @@ export function ListeningPractice({
             ) : shouldUseStructuredPaperLayout ? (
               <CambridgeFourPaperSheet
                 answers={answers}
+                bookCode={section.bookCode}
                 onAnswerChange={updateAnswer}
                 questionImageUrls={questionImageUrls}
                 questions={section.questions}
@@ -3639,14 +4210,19 @@ export function ListeningPractice({
               />
             </div>
           </div>
-          {activeWordTooltip.hint.phonetic ? <span>{activeWordTooltip.hint.phonetic}</span> : null}
-          {cleanPartOfSpeech(activeWordTooltip.hint.partOfSpeech) ? (
-            <span>{cleanPartOfSpeech(activeWordTooltip.hint.partOfSpeech)}</span>
+          <VocabularyHoverPronunciation
+            hint={activeWordTooltip.hint}
+            word={activeWordTooltip.word}
+          />
+          <VocabularyHoverDefinitionLine
+            definitionCn={activeWordTooltip.hint.definitionCn}
+            partOfSpeech={activeWordTooltip.hint.partOfSpeech}
+          />
+          {activeWordTooltip.hint.level ? (
+            <span className="word-tooltip-meta-line">等级：{activeWordTooltip.hint.level}</span>
           ) : null}
-          {activeWordTooltip.hint.level ? <span>等级：{activeWordTooltip.hint.level}</span> : null}
-          <small>{cleanVocabularyDefinition(activeWordTooltip.hint.definitionCn)}</small>
           {activeWordTooltip.hint.formation ? (
-            <small>{activeWordTooltip.hint.formation}</small>
+            <small className="word-tooltip-extra-line">{activeWordTooltip.hint.formation}</small>
           ) : null}
           {submitted && selectedText ? (
             <div className="word-tooltip-actions">

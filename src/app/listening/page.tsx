@@ -1,5 +1,8 @@
 import Link from "next/link";
-import { getPublishedPageContent } from "@/lib/content/page-content";
+import {
+  getManagedPageItemClassName,
+  getPublishedPageContent,
+} from "@/lib/content/page-content";
 
 export const dynamic = "force-dynamic";
 
@@ -20,7 +23,11 @@ export default async function ListeningPage() {
         <div className="writing-mode-grid">
           {items.map((item, index) => (
             <Link
-              className={`writing-mode-card ${index % 2 === 0 ? "practice" : "mock"}`}
+              className={getManagedPageItemClassName(
+                item,
+                index,
+                `writing-mode-card ${index % 2 === 0 ? "practice" : "mock"}`,
+              )}
               href={item.href || "/listening"}
               key={item.id}
             >

@@ -2,6 +2,7 @@ import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 
 import { supabase } from "@/lib/supabase/client";
+import { sortVocabularyFamilyItems } from "@/lib/vocabulary/autocomplete-ranking";
 
 export type LocalVocabularyHint = {
   definitionCn: string;
@@ -1463,6 +1464,52 @@ export function getVocabularyAutocompleteItems(): VocabularyAutocompleteItem[] {
     .sort((a, b) => a.word.localeCompare(b.word));
 }
 
+export async function getDatabaseVocabularyAutocompleteItems({
+  isChineseQuery,
+  limit,
+  query,
+}: {
+  isChineseQuery: boolean;
+  limit: number;
+  query: string;
+}): Promise<VocabularyAutocompleteItem[]> {
+  const normalizedQuery = isChineseQuery
+    ? query.trim()
+    : normalizeLookupWord(query);
+
+  if (!normalizedQuery) {
+    return [];
+  }
+
+  const selection =
+    "word, phonetic, uk_phonetic, us_phonetic, part_of_speech, definition_cn, definition_en, uk_audio_url, us_audio_url, level, word_forms";
+  const databaseQuery = supabase
+    .from("vocabulary_entries")
+    .select(selection)
+    .limit(Math.min(Math.max(limit, 1), 120));
+  const { data, error } = isChineseQuery
+    ? await databaseQuery.ilike("definition_cn", `%${normalizedQuery}%`)
+    : await databaseQuery.ilike("word", `%${normalizedQuery}%`);
+
+  if (error || !data) {
+    return [];
+  }
+
+  return (data as DatabaseVocabularyEntry[])
+    .map(createDatabaseVocabularyEntry)
+    .map((entry) => ({
+      definition: entry.definitionLines[0] ?? entry.definitionCn,
+      definitionSearchText: entry.definitionCn.toLowerCase().replace(/\s+/g, ""),
+      level: entry.level,
+      normalizedWord: entry.normalizedWord,
+      ukAudioUrl: entry.ukAudioUrl,
+      ukPhonetic: entry.ukPhonetic,
+      usAudioUrl: entry.usAudioUrl,
+      usPhonetic: entry.usPhonetic,
+      word: entry.word,
+    }));
+}
+
 export function getFeaturedVocabularyEntries(limit = 9) {
   return loadVocabularyEntries().slice(0, limit);
 }
@@ -1657,14 +1704,10 @@ export function getVocabularyEtymologyDirectory(sourceKey: string): VocabularyEt
   const groups = [...groupMap.values()]
     .map((group) => ({
       ...group,
-      entries: [...group.entries].sort(
-        (a, b) =>
-          (isFormationDirectory
-            ? getEntryFormationRootSortRow(a, normalizedSourceKey, group.rootKey)
-            : getEntryRootSortRow(a, normalizedSourceKey, group.rootKey)) -
-          (isFormationDirectory
-            ? getEntryFormationRootSortRow(b, normalizedSourceKey, group.rootKey)
-            : getEntryRootSortRow(b, normalizedSourceKey, group.rootKey)),
+      entries: sortVocabularyFamilyItems(group.entries, (entry) =>
+        isFormationDirectory
+          ? getEntryFormationRootSortRow(entry, normalizedSourceKey, group.rootKey)
+          : getEntryRootSortRow(entry, normalizedSourceKey, group.rootKey),
       ),
     }))
     .sort((a, b) => {

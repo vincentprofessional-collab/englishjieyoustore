@@ -559,11 +559,7 @@ export function AudioSettingsMenus({
             selectedValue: settings.subtitleMode,
             options: subtitleModeOptions,
             onSelect: (value: string | number) =>
-              onChange(
-                settings.dictationMode === "none"
-                  ? { subtitleMode: String(value) as AudioSubtitleMode }
-                  : exitWritingMode(),
-              ),
+              onChange({ subtitleMode: String(value) as AudioSubtitleMode }),
           },
           {
             selectedLabel: "听力模式",

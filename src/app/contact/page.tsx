@@ -1,14 +1,7 @@
 import { GuideBoard } from "@/components/guide-board";
-import { getManagedPageDefinition } from "@/lib/content/page-content";
+
+export const dynamic = "force-dynamic";
 
 export default function ContactPage() {
-  const content = getManagedPageDefinition("contact").content;
-
-  return (
-    <GuideBoard
-      eyebrow={content.eyebrow}
-      summary={content.summary}
-      title={content.title}
-    />
-  );
+  return <GuideBoard />;
 }

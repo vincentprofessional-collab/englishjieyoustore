@@ -1,107 +1,28 @@
 "use client";
 
 import Link from "next/link";
-import { FormEvent, useEffect, useMemo, useState } from "react";
-import { AdminInlinePreview } from "@/components/admin-inline-preview";
+import { FormEvent, useEffect, useState } from "react";
+import { AdminAnalyticsPanel } from "@/components/admin-analytics-panel";
+import { AdminHomeEditor } from "@/components/admin-home-editor";
+import { AdminSiteChromeEditor } from "@/components/admin-site-chrome-editor";
 import { GuidePostAdmin } from "@/components/guide-post-admin";
-import {
-  MANAGED_PAGE_DEFINITIONS,
-  ManagedPageContent,
-  ManagedPageItem,
-  ManagedPageSlug,
-  getManagedPageDefinition,
-  mergeManagedPageContent,
-} from "@/lib/content/page-content";
 import { supabase } from "@/lib/supabase/client";
 
 type AdminState = "checking" | "signed-out" | "forbidden" | "ready" | "error";
-
-type ManagedPageRow = {
-  id: string;
-  meta_json: unknown;
-  published_at: string | null;
-  slug: ManagedPageSlug;
-  status: "draft" | "published" | "archived";
-  summary: string | null;
-  title: string;
-  updated_at: string | null;
-};
-
-const ADMIN_MANAGED_PAGE_DEFINITIONS = MANAGED_PAGE_DEFINITIONS.filter(
-  (page) => page.slug !== "contact",
-);
-
-function rowToContent(row: ManagedPageRow | undefined, slug: ManagedPageSlug) {
-  if (!row) {
-    return getManagedPageDefinition(slug).content;
-  }
-
-  return mergeManagedPageContent(slug, {
-    ...(row.meta_json && typeof row.meta_json === "object" ? row.meta_json : {}),
-    summary: row.summary,
-    title: row.title,
-  });
-}
-
-function createEditableCopy(content: ManagedPageContent): ManagedPageContent {
-  return {
-    ...content,
-    items: content.items.map((item) => ({ ...item })),
-  };
-}
+type AdminView = "analytics" | "home" | "chrome" | "guide";
 
 export function AdminContentManager() {
+  const [activeView, setActiveView] = useState<AdminView>("analytics");
   const [adminState, setAdminState] = useState<AdminState>("checking");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [authMessage, setAuthMessage] = useState("");
   const [isSigningIn, setIsSigningIn] = useState(false);
-  const [isSaving, setIsSaving] = useState(false);
-  const [pageRows, setPageRows] = useState<Partial<Record<ManagedPageSlug, ManagedPageRow>>>(
-    {},
-  );
-  const [selectedSlug, setSelectedSlug] = useState<ManagedPageSlug>("home");
-  const [draft, setDraft] = useState<ManagedPageContent>(() =>
-    createEditableCopy(getManagedPageDefinition("home").content),
-  );
-  const [saveMessage, setSaveMessage] = useState("");
   const [adminUserId, setAdminUserId] = useState<string | null>(null);
-
-  const selectedDefinition = useMemo(
-    () => getManagedPageDefinition(selectedSlug),
-    [selectedSlug],
-  );
-  const selectedRow = pageRows[selectedSlug];
-  const showPageActions = ["home", "training"].includes(selectedSlug);
 
   useEffect(() => {
     void checkAdminAccess();
   }, []);
-
-  async function loadPages() {
-    const slugs = ADMIN_MANAGED_PAGE_DEFINITIONS.map((page) => page.slug);
-    const { data, error } = await supabase
-      .from("managed_content_pages")
-      .select("id,slug,title,summary,status,meta_json,published_at,updated_at")
-      .in("slug", slugs);
-
-    if (error) {
-      setAuthMessage(`无法读取后台内容：${error.message}`);
-      setAdminState("error");
-      return;
-    }
-
-    const nextRows: Partial<Record<ManagedPageSlug, ManagedPageRow>> = {};
-    (data ?? []).forEach((row) => {
-      if (slugs.includes(row.slug as ManagedPageSlug)) {
-        nextRows[row.slug as ManagedPageSlug] = row as ManagedPageRow;
-      }
-    });
-
-    setPageRows(nextRows);
-    setDraft(createEditableCopy(rowToContent(nextRows[selectedSlug], selectedSlug)));
-    setAdminState("ready");
-  }
 
   async function checkAdminAccess() {
     setAdminState("checking");
@@ -137,7 +58,7 @@ export function AdminContentManager() {
     }
 
     setAdminUserId(user.id);
-    await loadPages();
+    setAdminState("ready");
   }
 
   async function handleSignIn(event: FormEvent<HTMLFormElement>) {
@@ -165,90 +86,6 @@ export function AdminContentManager() {
     setAuthMessage("");
   }
 
-  function selectPage(slug: ManagedPageSlug) {
-    setSelectedSlug(slug);
-    setDraft(createEditableCopy(rowToContent(pageRows[slug], slug)));
-    setSaveMessage("");
-  }
-
-  function updateDraft<K extends keyof ManagedPageContent>(
-    key: K,
-    value: ManagedPageContent[K],
-  ) {
-    setDraft((current) => ({ ...current, [key]: value }));
-    setSaveMessage("");
-  }
-
-  function updateItem(index: number, patch: Partial<ManagedPageItem>) {
-    setDraft((current) => ({
-      ...current,
-      items: current.items.map((item, itemIndex) =>
-        itemIndex === index ? { ...item, ...patch } : item,
-      ),
-    }));
-    setSaveMessage("");
-  }
-
-  function moveItem(index: number, direction: -1 | 1) {
-    const nextIndex = index + direction;
-    if (nextIndex < 0 || nextIndex >= draft.items.length) {
-      return;
-    }
-
-    const items = [...draft.items];
-    [items[index], items[nextIndex]] = [items[nextIndex], items[index]];
-    updateDraft("items", items);
-  }
-
-  function restoreDefaults() {
-    setDraft(createEditableCopy(selectedDefinition.content));
-    setSaveMessage("已恢复默认内容，尚未发布。");
-  }
-
-  async function publishPage() {
-    if (!adminUserId) {
-      setSaveMessage("管理员身份已失效，请重新登录。");
-      return;
-    }
-
-    setIsSaving(true);
-    setSaveMessage("");
-    const now = new Date().toISOString();
-    const payload = {
-      access_feature_key: null,
-      created_by: adminUserId,
-      is_paid_only: false,
-      meta_json: draft,
-      module: selectedDefinition.module,
-      published_at: now,
-      slug: selectedDefinition.slug,
-      status: "published",
-      summary: draft.summary,
-      template_key: "site_announcement_page",
-      title: draft.title,
-      updated_at: now,
-    };
-
-    const { data, error } = await supabase
-      .from("managed_content_pages")
-      .upsert(payload, { onConflict: "slug" })
-      .select("id,slug,title,summary,status,meta_json,published_at,updated_at")
-      .single();
-
-    if (error) {
-      setSaveMessage(`发布失败：${error.message}`);
-      setIsSaving(false);
-      return;
-    }
-
-    setPageRows((current) => ({
-      ...current,
-      [selectedSlug]: data as ManagedPageRow,
-    }));
-    setSaveMessage("发布成功，刷新对应前台页面即可看到更新。");
-    setIsSaving(false);
-  }
-
   if (adminState === "checking") {
     return (
       <section className="admin-gate panel">
@@ -263,8 +100,8 @@ export function AdminContentManager() {
       <section className="admin-gate">
         <div className="admin-gate-copy">
           <div className="eyebrow">Admin access</div>
-          <h1>登录内容后台</h1>
-          <p>只有数据库中标记为管理员的账号可以读取和发布页面内容。</p>
+          <h1>登录网站后台</h1>
+          <p>只有数据库中标记为管理员的账号可以查看数据和发布内容。</p>
         </div>
         <form className="admin-login-card" onSubmit={handleSignIn}>
           <label htmlFor="admin-email">管理员邮箱</label>
@@ -327,15 +164,15 @@ export function AdminContentManager() {
       <header className="admin-workspace-header">
         <div>
           <span>CONTENT ADMIN · V2</span>
-          <h1>内容与帖子后台</h1>
-          <p>发布使用说明帖子，也可以继续维护各学习页面的标题、按钮和页面区块。</p>
+          <h1>网站后台</h1>
+          <p>查看网站数据，维护导航底部，并发布公告栏帖子。</p>
         </div>
         <div className="admin-header-actions">
           <Link className="button secondary" href="/contact" target="_blank">
-            查看使用说明 ↗
+            查看公告栏 ↗
           </Link>
-          <Link className="button secondary" href={selectedDefinition.path} target="_blank">
-            打开前台页面 ↗
+          <Link className="button secondary" href="/" target="_blank">
+            打开首页 ↗
           </Link>
           <button className="button secondary" type="button" onClick={handleSignOut}>
             退出
@@ -343,244 +180,50 @@ export function AdminContentManager() {
         </div>
       </header>
 
-      {adminUserId ? <GuidePostAdmin adminUserId={adminUserId} /> : null}
-
-      <div className="admin-layout">
-        <nav className="admin-page-nav" aria-label="可编辑页面">
-          <strong>页面</strong>
-          {ADMIN_MANAGED_PAGE_DEFINITIONS.map((page) => {
-            const isSelected = selectedSlug === page.slug;
-            const isPublished = pageRows[page.slug]?.status === "published";
-
-            return (
-              <button
-                aria-current={isSelected ? "page" : undefined}
-                className={isSelected ? "active" : ""}
-                key={page.slug}
-                type="button"
-                onClick={() => selectPage(page.slug)}
-              >
-                <span>{page.label}</span>
-                <small>{isPublished ? "已发布" : "使用默认内容"}</small>
-              </button>
-            );
-          })}
-        </nav>
-
-        <div className="admin-live-column">
-          <AdminInlinePreview
-            content={draft}
-            definition={selectedDefinition}
-            onItemChange={updateItem}
-            onPageChange={(key, value) => updateDraft(key, value)}
-          />
-        </div>
-
-        <div className="admin-editor-column">
-          <div className="admin-publish-card">
-            <p>在中间页面上直接点文字修改。点发布后，正式网站会读取这次修改。</p>
-            <button className="button primary" disabled={isSaving} type="button" onClick={publishPage}>
-              {isSaving ? "发布中…" : "发布更新"}
-            </button>
-            <button className="button secondary" disabled={isSaving} type="button" onClick={restoreDefaults}>
-              恢复默认内容
-            </button>
-            {saveMessage ? (
-              <p className={`admin-form-message ${saveMessage.includes("失败") ? "error" : ""}`}>
-                {saveMessage}
-              </p>
-            ) : null}
-          </div>
-
-          <section className="admin-editor-card">
-            <header className="admin-editor-heading">
-              <div>
-                <span>{selectedDefinition.path}</span>
-                <h2>{selectedDefinition.label}</h2>
-              </div>
-              <span className={`admin-status ${selectedRow ? "published" : ""}`}>
-                {selectedRow ? "已发布到数据库" : "尚未发布 · 当前使用代码默认内容"}
-              </span>
-            </header>
-
-            <div className="admin-field-grid">
-              <label>
-                <span>页面小标题</span>
-                <input
-                  onChange={(event) => updateDraft("eyebrow", event.target.value)}
-                  value={draft.eyebrow}
-                />
-              </label>
-              <label className="admin-field-wide">
-                <span>页面主标题</span>
-                <textarea
-                  onChange={(event) => updateDraft("title", event.target.value)}
-                  rows={2}
-                  value={draft.title}
-                />
-              </label>
-              <label className="admin-field-wide">
-                <span>页面说明</span>
-                <textarea
-                  onChange={(event) => updateDraft("summary", event.target.value)}
-                  rows={4}
-                  value={draft.summary}
-                />
-              </label>
-            </div>
-
-            {showPageActions ? (
-              <div className="admin-action-editor">
-                <h3>页面按钮</h3>
-                <div className="admin-field-grid">
-                  <label>
-                    <span>主按钮文字</span>
-                    <input
-                      onChange={(event) => updateDraft("primaryLabel", event.target.value)}
-                      value={draft.primaryLabel}
-                    />
-                  </label>
-                  <label>
-                    <span>主按钮链接</span>
-                    <input
-                      onChange={(event) => updateDraft("primaryHref", event.target.value)}
-                      placeholder="/example"
-                      value={draft.primaryHref}
-                    />
-                  </label>
-                  {selectedSlug === "home" ? (
-                    <>
-                      <label>
-                        <span>次按钮文字</span>
-                        <input
-                          onChange={(event) =>
-                            updateDraft("secondaryLabel", event.target.value)
-                          }
-                          value={draft.secondaryLabel}
-                        />
-                      </label>
-                      <label>
-                        <span>次按钮链接</span>
-                        <input
-                          onChange={(event) =>
-                            updateDraft("secondaryHref", event.target.value)
-                          }
-                          placeholder="/example"
-                          value={draft.secondaryHref}
-                        />
-                      </label>
-                    </>
-                  ) : null}
-                </div>
-              </div>
-            ) : null}
-          </section>
-
-          {draft.items.length ? (
-            <section className="admin-editor-card">
-              <header className="admin-editor-heading">
-                <div>
-                  <span>SECTIONS</span>
-                  <h2>页面区块</h2>
-                </div>
-                <small>可修改、隐藏和调整顺序</small>
-              </header>
-
-              <div className="admin-section-list">
-                {draft.items.map((item, index) => (
-                  <article className={`admin-section-item ${item.enabled ? "" : "disabled"}`} key={item.id}>
-                    <header>
-                      <span>{String(index + 1).padStart(2, "0")}</span>
-                      <strong>{item.title}</strong>
-                      <div>
-                        <button
-                          aria-label={`上移 ${item.title}`}
-                          disabled={index === 0}
-                          type="button"
-                          onClick={() => moveItem(index, -1)}
-                        >
-                          ↑
-                        </button>
-                        <button
-                          aria-label={`下移 ${item.title}`}
-                          disabled={index === draft.items.length - 1}
-                          type="button"
-                          onClick={() => moveItem(index, 1)}
-                        >
-                          ↓
-                        </button>
-                        <label className="admin-toggle">
-                          <input
-                            checked={item.enabled}
-                            type="checkbox"
-                            onChange={(event) =>
-                              updateItem(index, { enabled: event.target.checked })
-                            }
-                          />
-                          <span>{item.enabled ? "显示" : "隐藏"}</span>
-                        </label>
-                      </div>
-                    </header>
-
-                    <div className="admin-field-grid compact">
-                      <label>
-                        <span>区块小标题</span>
-                        <input
-                          aria-label={`区块 ${index + 1} 小标题`}
-                          onChange={(event) =>
-                            updateItem(index, { eyebrow: event.target.value })
-                          }
-                          value={item.eyebrow}
-                        />
-                      </label>
-                      <label>
-                        <span>区块标题</span>
-                        <input
-                          aria-label={`区块 ${index + 1} 标题`}
-                          onChange={(event) =>
-                            updateItem(index, { title: event.target.value })
-                          }
-                          value={item.title}
-                        />
-                      </label>
-                      <label className="admin-field-wide">
-                        <span>区块说明</span>
-                        <textarea
-                          aria-label={`区块 ${index + 1} 说明`}
-                          onChange={(event) =>
-                            updateItem(index, { description: event.target.value })
-                          }
-                          rows={3}
-                          value={item.description}
-                        />
-                      </label>
-                      <label>
-                        <span>跳转链接</span>
-                        <input
-                          aria-label={`区块 ${index + 1} 链接`}
-                          onChange={(event) => updateItem(index, { href: event.target.value })}
-                          placeholder="/example"
-                          value={item.href}
-                        />
-                      </label>
-                      <label>
-                        <span>入口文字</span>
-                        <input
-                          aria-label={`区块 ${index + 1} 入口文字`}
-                          onChange={(event) =>
-                            updateItem(index, { actionLabel: event.target.value })
-                          }
-                          value={item.actionLabel}
-                        />
-                      </label>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </section>
-          ) : null}
-        </div>
+      <div className="admin-view-tabs" role="tablist" aria-label="后台视图">
+        <button
+          className={activeView === "analytics" ? "active" : ""}
+          type="button"
+          onClick={() => setActiveView("analytics")}
+        >
+          数据后台
+        </button>
+        <button
+          className={activeView === "home" ? "active" : ""}
+          type="button"
+          onClick={() => setActiveView("home")}
+        >
+          首页
+        </button>
+        <button
+          className={activeView === "chrome" ? "active" : ""}
+          type="button"
+          onClick={() => setActiveView("chrome")}
+        >
+          导航底部
+        </button>
+        <button
+          className={activeView === "guide" ? "active" : ""}
+          type="button"
+          onClick={() => setActiveView("guide")}
+        >
+          公告栏发帖
+        </button>
       </div>
+
+      {activeView === "analytics" ? <AdminAnalyticsPanel /> : null}
+
+      {activeView === "home" && adminUserId ? (
+        <AdminHomeEditor adminUserId={adminUserId} />
+      ) : null}
+
+      {activeView === "chrome" && adminUserId ? (
+        <AdminSiteChromeEditor adminUserId={adminUserId} />
+      ) : null}
+
+      {activeView === "guide" && adminUserId ? (
+        <GuidePostAdmin adminUserId={adminUserId} />
+      ) : null}
     </section>
   );
 }

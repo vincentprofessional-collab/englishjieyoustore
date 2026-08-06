@@ -6,12 +6,16 @@ import { useEffect, useRef, useState } from "react";
 
 import { ContentShareButton } from "@/components/content-share-button";
 import {
+  VocabularyHoverDefinitionLine,
+  VocabularyHoverPronunciation,
+} from "@/components/vocabulary-hover-details";
+import {
   getStudySelectionActionPosition,
   hasStudySelectionText,
   STUDY_SELECTION_ACTION_TIMEOUT_MS,
   type StudySelectionActionPosition,
 } from "@/lib/study-selection";
-import { cleanPartOfSpeech, cleanVocabularyDefinition } from "@/lib/vocabulary/display";
+import { cleanVocabularyDefinition } from "@/lib/vocabulary/display";
 import type { LocalVocabularyHint } from "@/lib/vocabulary/local-vocabulary";
 
 type AnnotationItem = {
@@ -731,13 +735,14 @@ export function StudyAnnotationTools({
               />
             </div>
           </div>
-          {activeWordTooltip.hint.phonetic || activeWordTooltip.hint.ukPhonetic ? (
-            <span>{activeWordTooltip.hint.phonetic || activeWordTooltip.hint.ukPhonetic}</span>
-          ) : null}
-          {cleanPartOfSpeech(activeWordTooltip.hint.partOfSpeech) ? (
-            <span>{cleanPartOfSpeech(activeWordTooltip.hint.partOfSpeech)}</span>
-          ) : null}
-          <small>{cleanVocabularyDefinition(activeWordTooltip.hint.definitionCn)}</small>
+          <VocabularyHoverPronunciation
+            hint={activeWordTooltip.hint}
+            word={activeWordTooltip.word}
+          />
+          <VocabularyHoverDefinitionLine
+            definitionCn={activeWordTooltip.hint.definitionCn}
+            partOfSpeech={activeWordTooltip.hint.partOfSpeech}
+          />
         </div>
       ) : null}
     </>

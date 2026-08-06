@@ -2,6 +2,7 @@ import { supabase } from "@/lib/supabase/client";
 
 export type ManagedPageSlug =
   | "home"
+  | "vocabulary"
   | "listening"
   | "speaking"
   | "reading"
@@ -11,27 +12,45 @@ export type ManagedPageSlug =
   | "contact";
 
 export type ManagedPageTheme = "doodle" | "sunrise" | "retro" | "editorial";
+export type ManagedPageItemTone = "auto" | "cream" | "green" | "gold";
 
 export type ManagedPageItem = {
   actionLabel: string;
+  actionLabelColor?: string;
+  actionLabelFontSize?: number;
+  boxed: boolean;
   description: string;
+  descriptionColor?: string;
+  descriptionFontSize?: number;
   enabled: boolean;
   eyebrow: string;
+  eyebrowColor?: string;
+  eyebrowFontSize?: number;
   href: string;
   id: string;
   kind: "primary" | "secondary";
+  tone: ManagedPageItemTone;
   title: string;
+  titleColor?: string;
+  titleFontSize?: number;
 };
 
 export type ManagedPageContent = {
+  contentVersion?: number;
   eyebrow: string;
+  eyebrowColor?: string;
+  eyebrowFontSize?: number;
   primaryHref: string;
   primaryLabel: string;
   secondaryHref: string;
   secondaryLabel: string;
   summary: string;
+  summaryColor?: string;
+  summaryFontSize?: number;
   theme: ManagedPageTheme;
   title: string;
+  titleColor?: string;
+  titleFontSize?: number;
   items: ManagedPageItem[];
 };
 
@@ -43,6 +62,7 @@ export type ManagedPageDefinition = {
     | "reading"
     | "speaking"
     | "writing"
+    | "vocabulary"
     | "training"
     | "articles"
     | "site";
@@ -53,62 +73,74 @@ export type ManagedPageDefinition = {
 const homeItems: ManagedPageItem[] = [
   {
     actionLabel: "进入词汇学习",
+    boxed: true,
     description: "中文释义、发音、词根词源和自己的词汇书。",
     enabled: true,
     eyebrow: "Vocabulary",
     href: "/vocabulary/books",
     id: "vocabulary",
     kind: "primary",
+    tone: "gold",
     title: "查词与词汇",
   },
   {
     actionLabel: "进入外刊精读",
+    boxed: true,
     description: "从 BBC 随身英语开始，积累真实语境里的表达。",
     enabled: true,
     eyebrow: "Daily English",
     href: "/articles",
     id: "articles",
     kind: "primary",
+    tone: "green",
     title: "外刊精读",
   },
   {
     actionLabel: "进入雅思听力",
+    boxed: false,
     description: "练习、精听与模考，逐步适应真实考试节奏。",
     enabled: true,
     eyebrow: "IELTS Listening",
     href: "/listening",
     id: "listening",
     kind: "primary",
+    tone: "auto",
     title: "雅思听力",
   },
   {
     actionLabel: "进入雅思阅读",
+    boxed: false,
     description: "按题型练习，建立定位、理解与时间管理能力。",
     enabled: true,
     eyebrow: "IELTS Reading",
     href: "/reading",
     id: "reading",
     kind: "primary",
+    tone: "auto",
     title: "雅思阅读",
   },
   {
     actionLabel: "进入雅思写作",
+    boxed: false,
     description: "题型拆解、限时练习、词汇与范文放在一起学。",
     enabled: true,
     eyebrow: "IELTS Writing",
     href: "/writing",
     id: "writing",
     kind: "primary",
+    tone: "auto",
     title: "雅思写作",
   },
   {
     actionLabel: "进入专项训练",
+    boxed: false,
     description: "针对写作、翻译与薄弱技能进行短时高频训练。",
     enabled: true,
     eyebrow: "Skill Training",
     href: "/training",
     id: "training",
     kind: "primary",
+    tone: "auto",
     title: "专项训练",
   },
 ];
@@ -134,26 +166,72 @@ export const MANAGED_PAGE_DEFINITIONS: ManagedPageDefinition[] = [
   },
   {
     content: {
+      eyebrow: "Vocabulary",
+      items: [
+        {
+          actionLabel: "打开词汇书 →",
+          boxed: true,
+          description: "从词汇书开始背词，并逐步接入复习队列。",
+          enabled: true,
+          eyebrow: "Word Books",
+          href: "/vocabulary/books",
+          id: "vocabulary-books",
+          kind: "primary",
+          tone: "gold",
+          title: "词汇书",
+        },
+        {
+          actionLabel: "查看生词本 →",
+          boxed: false,
+          description: "收藏重点单词和例句，后续同步到个人复习。",
+          enabled: true,
+          eyebrow: "My Words",
+          href: "/me/favorites",
+          id: "wordbook",
+          kind: "primary",
+          tone: "green",
+          title: "生词本",
+        },
+      ],
+      primaryHref: "/vocabulary/books",
+      primaryLabel: "进入词汇书",
+      secondaryHref: "",
+      secondaryLabel: "",
+      summary: "搜索单词、查看词源、收藏例句，把零散词汇整理成自己的学习路径。",
+      theme: "editorial",
+      title: "查词与词汇学习",
+    },
+    label: "查词与词汇",
+    module: "vocabulary",
+    path: "/vocabulary",
+    slug: "vocabulary",
+  },
+  {
+    content: {
       eyebrow: "IELTS",
       items: [
         {
           actionLabel: "进入练习列表 →",
+          boxed: false,
           description: "按 CI 题册自上而下选择 Part，进入后直接显示该 Part 的题目与音频。",
           enabled: true,
           eyebrow: "Practice",
           href: "/listening/practice",
           id: "practice",
           kind: "primary",
+          tone: "auto",
           title: "练习",
         },
         {
           actionLabel: "进入模考列表 →",
+          boxed: false,
           description: "按 CI 题册选择完整模考入口，进入正式听力考试界面。",
           enabled: true,
           eyebrow: "Mock Test",
           href: "/listening/mock",
           id: "mock",
           kind: "primary",
+          tone: "auto",
           title: "模考",
         },
       ],
@@ -176,32 +254,38 @@ export const MANAGED_PAGE_DEFINITIONS: ManagedPageDefinition[] = [
       items: [
         {
           actionLabel: "",
+          boxed: true,
           description: "熟悉话题短回答，共整理 71 道。",
           enabled: true,
           eyebrow: "Short answers",
           href: "/speaking/part-1",
           id: "speaking-part-1",
           kind: "primary",
+          tone: "cream",
           title: "Part 1",
         },
         {
           actionLabel: "",
+          boxed: true,
           description: "一分钟准备、两分钟个人陈述，共整理 227 道。",
           enabled: true,
           eyebrow: "Long turn",
           href: "/speaking/part-2",
           id: "speaking-part-2",
           kind: "primary",
+          tone: "green",
           title: "Part 2",
         },
         {
           actionLabel: "",
+          boxed: true,
           description: "围绕抽象问题展开观点讨论，共整理 49 道。",
           enabled: true,
           eyebrow: "Discussion",
           href: "/speaking/part-3",
           id: "speaking-part-3",
           kind: "primary",
+          tone: "gold",
           title: "Part 3",
         },
       ],
@@ -224,22 +308,26 @@ export const MANAGED_PAGE_DEFINITIONS: ManagedPageDefinition[] = [
       items: [
         {
           actionLabel: "进入练习 →",
+          boxed: false,
           description: "按文章进入阅读工作台，保留原文、题目和底部题号导航。",
           enabled: true,
           eyebrow: "Practice",
           href: "/reading/practice",
           id: "practice",
           kind: "primary",
+          tone: "auto",
           title: "练习",
         },
         {
           actionLabel: "开始完整模考 →",
+          boxed: false,
           description: "3 篇文章，40 道题，进入即开始 60 分钟倒计时。",
           enabled: true,
           eyebrow: "Mock Test",
           href: "/reading/mock",
           id: "mock",
           kind: "primary",
+          tone: "auto",
           title: "模考",
         },
       ],
@@ -262,62 +350,74 @@ export const MANAGED_PAGE_DEFINITIONS: ManagedPageDefinition[] = [
       items: [
         {
           actionLabel: "进入题库 →",
+          boxed: false,
           description: "按 Task 和题型选题，自由计时。",
           enabled: true,
           eyebrow: "Practice",
           href: "/writing/practice",
           id: "practice",
           kind: "primary",
+          tone: "auto",
           title: "练习",
         },
         {
           actionLabel: "开始完整模考 →",
+          boxed: false,
           description: "Task 1 + Task 2，进入即开始 60 分钟倒计时。",
           enabled: true,
           eyebrow: "Mock Test",
           href: "/writing/mock",
           id: "mock",
           kind: "primary",
+          tone: "auto",
           title: "模考",
         },
         {
           actionLabel: "",
+          boxed: true,
           description: "",
           enabled: true,
           eyebrow: "TASK 1",
           href: "/writing/task1-vocabulary",
           id: "task1-vocabulary",
           kind: "secondary",
+          tone: "cream",
           title: "必备词汇及翻译训练",
         },
         {
           actionLabel: "",
+          boxed: false,
           description: "",
           enabled: true,
           eyebrow: "TASK 2",
           href: "",
           id: "task2-vocabulary",
           kind: "secondary",
+          tone: "auto",
           title: "场景词汇及翻译训练",
         },
         {
           actionLabel: "",
+          boxed: false,
           description: "",
           enabled: true,
           eyebrow: "Writing",
           href: "",
           id: "linking-words",
           kind: "secondary",
+          tone: "auto",
           title: "写作常用逻辑转换词汇",
         },
         {
           actionLabel: "",
+          boxed: true,
           description: "按照审题、规划段落、逻辑梳理和完整范文逐步拆解大作文。",
           enabled: true,
           eyebrow: "TASK 2",
           href: "/writing/task2",
           id: "task2-step-practice",
           kind: "secondary",
+          tone: "green",
           title: "Task2逐步练习",
         },
       ],
@@ -357,12 +457,14 @@ export const MANAGED_PAGE_DEFINITIONS: ManagedPageDefinition[] = [
       items: ["中文写英文", "两句英文合并", "语法改写", "后续训练入口"].map(
         (title, index) => ({
           actionLabel: "",
+          boxed: index === 0,
           description: "专项训练内容将逐步接入。",
           enabled: true,
           eyebrow: `Training ${index + 1}`,
           href: "",
           id: `training-${index + 1}`,
           kind: "primary" as const,
+          tone: index % 2 === 0 ? "gold" : "green",
           title,
         }),
       ),
@@ -398,12 +500,22 @@ export const MANAGED_PAGE_DEFINITIONS: ManagedPageDefinition[] = [
   },
 ];
 
+export const MANAGED_PAGE_CONTENT_VERSION = 2;
+
 export function getManagedPageDefinition(slug: ManagedPageSlug) {
   return MANAGED_PAGE_DEFINITIONS.find((page) => page.slug === slug)!;
 }
 
 function readString(value: unknown, fallback: string) {
   return typeof value === "string" ? value : fallback;
+}
+
+function readBoolean(value: unknown, fallback: boolean) {
+  return typeof value === "boolean" ? value : fallback;
+}
+
+function readNumber(value: unknown, fallback: number) {
+  return typeof value === "number" && Number.isFinite(value) ? value : fallback;
 }
 
 function readTheme(value: unknown, fallback: ManagedPageTheme): ManagedPageTheme {
@@ -415,56 +527,159 @@ function readTheme(value: unknown, fallback: ManagedPageTheme): ManagedPageTheme
     : fallback;
 }
 
+function readTone(value: unknown, fallback: ManagedPageItemTone): ManagedPageItemTone {
+  return value === "auto" || value === "cream" || value === "green" || value === "gold"
+    ? value
+    : fallback;
+}
+
+function readContentVersion(value: unknown) {
+  return typeof value === "number" && Number.isFinite(value) ? value : 1;
+}
+
+function emptyFallbackItem(index: number): ManagedPageItem {
+  return {
+    actionLabel: "",
+    boxed: false,
+    description: "",
+    enabled: true,
+    eyebrow: "",
+    href: "",
+    id: `item-${index + 1}`,
+    kind: "primary",
+    tone: "auto",
+    title: "",
+  };
+}
+
+function normalizeManagedPageItem(
+  item: unknown,
+  fallbackItem: ManagedPageItem,
+): ManagedPageItem {
+  const candidate = item && typeof item === "object" ? (item as Record<string, unknown>) : {};
+  const isGreen = fallbackItem.tone === "green";
+
+  return {
+    actionLabel: readString(candidate.actionLabel, fallbackItem.actionLabel),
+    actionLabelColor: readString(
+      candidate.actionLabelColor,
+      fallbackItem.actionLabelColor ?? (isGreen ? "#ffffff" : "#0f6b4f"),
+    ),
+    actionLabelFontSize: readNumber(
+      candidate.actionLabelFontSize,
+      fallbackItem.actionLabelFontSize ?? 15,
+    ),
+    boxed: readBoolean(candidate.boxed, fallbackItem.boxed),
+    description: readString(candidate.description, fallbackItem.description),
+    descriptionColor: readString(
+      candidate.descriptionColor,
+      fallbackItem.descriptionColor ?? (isGreen ? "#e0f0e8" : "#706855"),
+    ),
+    descriptionFontSize: readNumber(
+      candidate.descriptionFontSize,
+      fallbackItem.descriptionFontSize ?? 15,
+    ),
+    enabled: typeof candidate.enabled === "boolean" ? candidate.enabled : fallbackItem.enabled,
+    eyebrow: readString(candidate.eyebrow, fallbackItem.eyebrow),
+    eyebrowColor: readString(
+      candidate.eyebrowColor,
+      fallbackItem.eyebrowColor ?? (isGreen ? "#d9eee7" : "#c89419"),
+    ),
+    eyebrowFontSize: readNumber(
+      candidate.eyebrowFontSize,
+      fallbackItem.eyebrowFontSize ?? 12,
+    ),
+    href: readString(candidate.href, fallbackItem.href),
+    id: readString(candidate.id, fallbackItem.id),
+    kind:
+      candidate.kind === "secondary" || candidate.kind === "primary"
+        ? candidate.kind
+        : fallbackItem.kind,
+    tone: readTone(candidate.tone, fallbackItem.tone),
+    title: readString(candidate.title, fallbackItem.title),
+    titleColor: readString(
+      candidate.titleColor,
+      fallbackItem.titleColor ?? (isGreen ? "#ffffff" : "#17231d"),
+    ),
+    titleFontSize: readNumber(
+      candidate.titleFontSize,
+      fallbackItem.titleFontSize ?? 24,
+    ),
+  };
+}
+
+export function getManagedPageItemClassName(
+  item: ManagedPageItem,
+  index: number,
+  baseClassName: string,
+) {
+  const toneClassName = item.tone === "auto" ? "" : `tone-${item.tone}`;
+  const boxedClassName = item.boxed ? "module-boxed" : "";
+
+  return [baseClassName, toneClassName, boxedClassName].filter(Boolean).join(" ");
+}
+
 export function mergeManagedPageContent(
   slug: ManagedPageSlug,
   value: unknown,
 ): ManagedPageContent {
   const fallback = getManagedPageDefinition(slug).content;
   const source = value && typeof value === "object" ? (value as Record<string, unknown>) : {};
-  const sourceItems = Array.isArray(source.items) ? source.items : fallback.items;
+  const candidateItems = Array.isArray(source.items) ? source.items : [];
+  const contentVersion = readContentVersion(source.contentVersion);
+  const isCurrentContent = contentVersion >= MANAGED_PAGE_CONTENT_VERSION;
+  const hasUsableSourceItems = candidateItems.some((item) => {
+    const candidate = item && typeof item === "object" ? (item as Record<string, unknown>) : {};
+    return typeof candidate.title === "string" && candidate.title.trim();
+  });
+  const sourceItems = isCurrentContent || hasUsableSourceItems ? candidateItems : fallback.items;
 
   const items = sourceItems
     .map((item, index) => {
-      const fallbackItem = fallback.items[index] ?? {
-        actionLabel: "",
-        description: "",
-        enabled: true,
-        eyebrow: "",
-        href: "",
-        id: `item-${index + 1}`,
-        kind: "primary" as const,
-        title: "",
-      };
-      const candidate =
-        item && typeof item === "object" ? (item as Record<string, unknown>) : {};
+      const candidate = item && typeof item === "object" ? (item as Record<string, unknown>) : {};
+      const candidateId = typeof candidate.id === "string" ? candidate.id : "";
+      const fallbackItem =
+        fallback.items.find((fallbackCandidate) => fallbackCandidate.id === candidateId) ??
+        fallback.items[index] ??
+        emptyFallbackItem(index);
 
-      return {
-        actionLabel: readString(candidate.actionLabel, fallbackItem.actionLabel),
-        description: readString(candidate.description, fallbackItem.description),
-        enabled:
-          typeof candidate.enabled === "boolean" ? candidate.enabled : fallbackItem.enabled,
-        eyebrow: readString(candidate.eyebrow, fallbackItem.eyebrow),
-        href: readString(candidate.href, fallbackItem.href),
-        id: readString(candidate.id, fallbackItem.id),
-        kind:
-          candidate.kind === "secondary" || candidate.kind === "primary"
-            ? candidate.kind
-            : fallbackItem.kind,
-        title: readString(candidate.title, fallbackItem.title),
-      };
+      return normalizeManagedPageItem(item, fallbackItem);
     })
     .filter((item) => item.id && item.title);
 
+  if (hasUsableSourceItems && !isCurrentContent) {
+    const existingIds = new Set(items.map((item) => item.id));
+
+    fallback.items.forEach((fallbackItem) => {
+      if (!existingIds.has(fallbackItem.id)) {
+        items.push({ ...fallbackItem });
+      }
+    });
+  }
+
   return {
+    contentVersion,
     eyebrow: readString(source.eyebrow, fallback.eyebrow),
+    eyebrowColor: readString(source.eyebrowColor, fallback.eyebrowColor ?? "#0f6b4f"),
+    eyebrowFontSize: readNumber(
+      source.eyebrowFontSize,
+      fallback.eyebrowFontSize ?? 13,
+    ),
     items,
     primaryHref: readString(source.primaryHref, fallback.primaryHref),
     primaryLabel: readString(source.primaryLabel, fallback.primaryLabel),
     secondaryHref: readString(source.secondaryHref, fallback.secondaryHref),
     secondaryLabel: readString(source.secondaryLabel, fallback.secondaryLabel),
     summary: readString(source.summary, fallback.summary),
+    summaryColor: readString(source.summaryColor, fallback.summaryColor ?? "#706855"),
+    summaryFontSize: readNumber(
+      source.summaryFontSize,
+      fallback.summaryFontSize ?? 18,
+    ),
     theme: readTheme(source.theme, fallback.theme),
     title: readString(source.title, fallback.title),
+    titleColor: readString(source.titleColor, fallback.titleColor ?? "#17231d"),
+    titleFontSize: readNumber(source.titleFontSize, fallback.titleFontSize ?? 72),
   };
 }
 

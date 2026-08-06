@@ -1,4 +1,8 @@
 import Link from "next/link";
+import {
+  getManagedPageItemClassName,
+  type ManagedPageItem,
+} from "@/lib/content/page-content";
 
 type ModulePlaceholderProps = {
   badge: string;
@@ -9,6 +13,7 @@ type ModulePlaceholderProps = {
     | {
         description: string;
         href?: string;
+        item?: ManagedPageItem;
         title: string;
       }
   >;
@@ -38,16 +43,21 @@ export function ModulePlaceholder({
       </div>
 
       <div className="grid three">
-        {items.map((item) => {
+        {items.map((item, index) => {
           const title = typeof item === "string" ? item : item.title;
           const description =
             typeof item === "string"
               ? "后台框架已预留，后续接入真实内容和权限开关。"
               : item.description;
 
+          const className =
+            typeof item !== "string" && item.item
+              ? getManagedPageItemClassName(item.item, index, "module large")
+              : "module large";
+
           if (typeof item !== "string" && item.href) {
             return (
-              <Link className="module large" href={item.href} key={title}>
+              <Link className={className} href={item.href} key={title}>
                 <strong>{title}</strong>
                 <span>{description}</span>
               </Link>
@@ -55,7 +65,7 @@ export function ModulePlaceholder({
           }
 
           return (
-            <article className="module large" key={title}>
+            <article className={className} key={title}>
               <strong>{title}</strong>
               <span>{description}</span>
             </article>

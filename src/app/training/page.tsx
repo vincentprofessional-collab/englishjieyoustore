@@ -16,6 +16,7 @@ export default async function TrainingPage() {
         .map((item) => ({
           description: item.description,
           href: item.href,
+          item,
           title: item.title,
         }))}
       primaryHref={content.primaryHref}
