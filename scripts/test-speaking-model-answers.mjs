@@ -7,7 +7,10 @@ const questions = JSON.parse(
   readFileSync(new URL("../src/data/ielts/speaking-questions.json", import.meta.url), "utf8"),
 );
 
-const requiredPartOneQuestionIds = questions["part-1"].map((question) => question.id);
+const requiredQuestionIds = [
+  ...questions["part-1"].map((question) => question.id),
+  ...questions["part-3"].slice(0, 20).map((question) => question.id),
+];
 
 function extractAnswerObject(questionId) {
   const marker = `questionId: "${questionId}"`;
@@ -33,7 +36,7 @@ function extractArrayBlock(answerObject, propertyName) {
   return answerObject.slice(blockStart, blockEnd + 1);
 }
 
-for (const questionId of requiredPartOneQuestionIds) {
+for (const questionId of requiredQuestionIds) {
   test(`${questionId} has complete model answer content`, () => {
     const answerObject = extractAnswerObject(questionId);
     const framesBlock = extractArrayBlock(answerObject, "frames");

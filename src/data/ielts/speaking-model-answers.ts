@@ -2018,6 +2018,396 @@ export const speakingModelAnswers = [
       "这可能是件好事，因为孩子会觉得和父母更亲近，在需要帮助时也更愿意开口。不过压力在于，父母也可能参与得过多。有些父母试图管理孩子的每一场考试、每一种爱好和每一段友谊，这可能会让孩子变得不够独立。所以我认为，现代父母的角色更加平衡，但要求也更高：他们既要给予支持，又不能过度保护；既要和孩子友好相处，又不能忘记设定边界。",
     ],
   },
+  {
+    partId: "part-3",
+    questionId: "speaking-part-3-006",
+    approach: "好老师题要避免只说 kind。把清晰解释、同理心、反馈和高标准结合起来，会更像 Part 3 讨论。",
+    frames: [
+      "A good teacher needs more than knowledge.",
+      "First of all, they should be able to ...",
+      "Another important quality is ...",
+      "The best teachers balance ... with ...",
+    ],
+    vocabulary: [
+      { phrase: "empathy", translation: "同理心", note: "BBC 高频词，适合教育话题" },
+      { phrase: "give constructive feedback", translation: "给建设性反馈", note: "教师品质核心" },
+      { phrase: "set high expectations", translation: "设定高期待", note: "解释严格但有帮助" },
+      { phrase: "break down complex ideas", translation: "拆解复杂概念", note: "教学能力表达" },
+      { phrase: "praise effort", translation: "表扬努力", note: "BBC 词汇 praise 的自然用法" },
+    ],
+    answer: [
+      "A good teacher needs more than knowledge. Of course, they should understand the subject well, but more importantly, they need to break down complex ideas in a way students can actually follow. A teacher who only shows how clever they are may impress people, but that does not always help students learn.",
+      "Another important quality is empathy. Different students struggle for different reasons, so a good teacher should notice when someone is confused and give constructive feedback rather than simply criticise. At the same time, I don’t think teachers should be too soft. The best teachers set high expectations and praise effort, so students feel both supported and pushed to improve.",
+    ],
+    answerTranslation: [
+      "一个好老师需要的不只是知识。当然，他们应该很了解自己的学科，但更重要的是，他们要能把复杂概念拆解成学生真正能听懂的方式。一个只展示自己多聪明的老师也许会让人印象深刻，但这并不一定能帮助学生学习。",
+      "另一个重要品质是同理心。不同学生遇到困难的原因不一样，所以好老师应该能注意到谁听不懂，并给予建设性反馈，而不是简单批评。不过，我也不认为老师应该过于温和。最好的老师会设定较高期待，也会表扬努力，这样学生既能感到被支持，也会被推动着进步。",
+    ],
+  },
+  {
+    partId: "part-3",
+    questionId: "speaking-part-3-007",
+    approach: "情绪表达题用平衡观点：开放表达有利于心理健康，但表达方式和场合也很重要。",
+    frames: [
+      "I think people should express emotions, but ...",
+      "Keeping everything inside can ...",
+      "However, being open doesn’t mean ...",
+      "A healthy approach is to ...",
+    ],
+    vocabulary: [
+      { phrase: "mental wellbeing", translation: "心理健康", note: "健康/情绪题通用" },
+      { phrase: "bottle up emotions", translation: "压抑情绪", note: "表达情绪核心短语" },
+      { phrase: "social norms", translation: "社会规范", note: "文化差异角度" },
+      { phrase: "emotional maturity", translation: "情绪成熟", note: "高分抽象表达" },
+      { phrase: "set boundaries", translation: "设定边界", note: "说明表达要有分寸" },
+    ],
+    answer: [
+      "I think people should express emotions, but not in a completely uncontrolled way. Keeping everything inside can be harmful to mental wellbeing, because stress and sadness do not just disappear when people ignore them. Talking to a trusted friend or family member can help people understand what they are feeling and avoid feeling isolated.",
+      "However, being open does not mean pouring every emotion onto everyone around you. Social norms and timing still matter. For example, shouting at a colleague in public may be honest, but it is not emotionally mature. A healthier approach is to name the feeling, explain the reason and set boundaries calmly. So I support emotional openness, as long as it comes with respect and self-control.",
+    ],
+    answerTranslation: [
+      "我认为人们应该表达情绪，但不能完全失控地表达。把所有情绪都压在心里可能会损害心理健康，因为压力和悲伤不会因为被忽视就自动消失。和可信任的朋友或家人谈谈，能帮助人们理解自己的感受，也能避免孤立无援的感觉。",
+      "不过，开放表达并不意味着把每一种情绪都倒给周围所有人。社会规范和时机仍然很重要。比如，在公共场合对同事大喊大叫也许很真实，但这并不代表情绪成熟。更健康的方式是说出自己的感受，解释原因，并且冷静地设定边界。所以我支持情绪开放，但前提是它伴随着尊重和自控。",
+    ],
+  },
+  {
+    partId: "part-3",
+    questionId: "speaking-part-3-008",
+    approach: "好倾听者题重点不是安静，而是专注、同理心、追问和不急着评判。",
+    frames: [
+      "A good listener is not just someone who stays silent.",
+      "They show attention by ...",
+      "They also avoid ...",
+      "That makes the speaker feel ...",
+    ],
+    vocabulary: [
+      { phrase: "active listening", translation: "主动倾听", note: "人际沟通核心" },
+      { phrase: "empathy", translation: "同理心", note: "BBC 口语/写作高频" },
+      { phrase: "jump to conclusions", translation: "急着下结论", note: "解释坏倾听" },
+      { phrase: "body language", translation: "肢体语言", note: "非语言沟通" },
+      { phrase: "follow-up questions", translation: "追问", note: "体现真正听懂" },
+    ],
+    answer: [
+      "A good listener is not just someone who stays silent. Good listening is active listening. It means the person gives full attention, uses appropriate body language and asks follow-up questions that show they have really understood the point. Small things like nodding or putting the phone away can make a big difference.",
+      "A good listener also has empathy and avoids jumping to conclusions. Many people listen only because they are waiting for their turn to speak, so they quickly give advice before understanding the whole situation. That can make the speaker feel dismissed. A good listener, by contrast, creates a safe space where the other person can think aloud and feel respected, even if the listener does not agree with everything.",
+    ],
+    answerTranslation: [
+      "好的倾听者并不只是一个保持沉默的人。好的倾听是主动倾听。它意味着这个人会全神贯注，使用合适的肢体语言，并提出能显示自己真正理解了对方观点的追问。像点头、把手机放下这样的小动作，也会产生很大影响。",
+      "好的倾听者还需要有同理心，并避免急着下结论。很多人听别人说话，只是在等自己开口的机会，所以还没理解完整情况就急着给建议。这会让说话的人觉得自己被敷衍。相反，好的倾听者会创造一个安全空间，让对方可以边说边思考，并感到被尊重，即使倾听者并不完全同意所有观点。",
+    ],
+  },
+  {
+    partId: "part-3",
+    questionId: "speaking-part-3-009",
+    approach: "早晨习惯题从结构感、精力和心理状态展开，不要只讲早起一定好。",
+    frames: [
+      "Early morning routines can be beneficial because ...",
+      "They give people a sense of ...",
+      "However, the benefit depends on ...",
+      "A routine should support health, not ...",
+    ],
+    vocabulary: [
+      { phrase: "daily ritual", translation: "日常仪式", note: "BBC 词汇 ritual 的自然用法" },
+      { phrase: "kick-start the day", translation: "开启一天", note: "BBC 早晨表达" },
+      { phrase: "decision fatigue", translation: "决策疲劳", note: "解释固定流程价值" },
+      { phrase: "biological clock", translation: "生物钟", note: "健康角度" },
+      { phrase: "perk up", translation: "提振精神", note: "BBC 口语短语" },
+    ],
+    answer: [
+      "Early morning routines can be beneficial because they give people a sense of structure before the day becomes busy. A simple daily ritual, like making the bed, stretching or having breakfast, can kick-start the day and reduce decision fatigue. People do not have to waste energy deciding what to do first.",
+      "That said, the benefit depends on sleep quality. If someone sleeps at two in the morning and forces themselves to get up at five, that routine may damage their biological clock rather than improve their life. A good morning routine should help people perk up and feel prepared, not turn into another source of pressure. So I think consistency matters more than waking up extremely early.",
+    ],
+    answerTranslation: [
+      "早晨习惯有好处，因为它能在一天变得忙碌之前给人一种结构感。一个简单的日常仪式，比如整理床铺、拉伸或吃早餐，能开启一天，也能减少决策疲劳。人们不用浪费精力去想第一件事应该做什么。",
+      "不过，这种好处取决于睡眠质量。如果一个人凌晨两点才睡，却强迫自己五点起床，那这个习惯可能不是改善生活，而是在破坏生物钟。好的早晨习惯应该帮助人们提振精神、做好准备，而不是变成另一种压力来源。所以我认为，稳定性比极早起床更重要。",
+    ],
+  },
+  {
+    partId: "part-3",
+    questionId: "speaking-part-3-010",
+    approach: "坏习惯题要解释机制：即时满足、环境线索、意志力有限。再给解决方向。",
+    frames: [
+      "People find it hard because bad habits usually provide ...",
+      "Another reason is that habits are linked to ...",
+      "Willpower alone is often not enough.",
+      "It is easier to change a habit by ...",
+    ],
+    vocabulary: [
+      { phrase: "instant gratification", translation: "即时满足感", note: "BBC 词汇，坏习惯核心" },
+      { phrase: "cue and reward", translation: "线索和奖励", note: "习惯机制" },
+      { phrase: "willpower", translation: "意志力", note: "解释为什么难" },
+      { phrase: "trigger", translation: "触发因素", note: "行为改变表达" },
+      { phrase: "replace a habit", translation: "替换习惯", note: "解决方案" },
+    ],
+    answer: [
+      "People find it hard to change bad habits because those habits usually provide instant gratification. For example, scrolling on a phone, eating junk food or staying up late may feel good in the moment, even if the long-term result is negative. The brain tends to prefer the quick reward over the distant benefit.",
+      "Another reason is that habits are linked to cues and rewards. If a person always eats snacks while watching TV, the sofa and the screen become triggers. Willpower alone is often not enough, especially when people are tired or stressed. It is usually easier to change a habit by changing the environment and replacing the habit with something less harmful, rather than simply telling yourself to stop.",
+    ],
+    answerTranslation: [
+      "人们很难改变坏习惯，是因为这些习惯通常会提供即时满足感。比如刷手机、吃垃圾食品或熬夜，当下可能感觉不错，即使长期结果是负面的。大脑往往更偏好快速奖励，而不是遥远的好处。",
+      "另一个原因是，习惯和线索及奖励相关。如果一个人总是在看电视时吃零食，那么沙发和屏幕就会变成触发因素。单靠意志力通常不够，尤其是当人疲惫或压力大时。改变习惯通常更有效的方法，是改变环境，并用一个危害较小的习惯替代原来的习惯，而不是简单告诉自己不要再做。",
+    ],
+  },
+  {
+    partId: "part-3",
+    questionId: "speaking-part-3-011",
+    approach: "爱好随年龄变化题按时间、体力、收入和身份变化来分析，避免只说老人喜欢安静。",
+    frames: [
+      "Hobbies often change because people’s responsibilities change.",
+      "When people are young, they may prefer ...",
+      "As they get older, they often look for ...",
+      "So hobbies reflect both ... and ...",
+    ],
+    vocabulary: [
+      { phrase: "life stage", translation: "人生阶段", note: "年龄变化题核心" },
+      { phrase: "physically demanding", translation: "体力要求高的", note: "运动类爱好变化" },
+      { phrase: "meaningful leisure", translation: "有意义的休闲", note: "Part 3 抽象表达" },
+      { phrase: "social circle", translation: "社交圈", note: "爱好的人际功能" },
+      { phrase: "keep up with", translation: "坚持", note: "BBC 口语短语" },
+    ],
+    answer: [
+      "Hobbies often change because people’s responsibilities and life stage change. When people are young, they may prefer hobbies that are social, exciting or physically demanding, like team sports, concerts or travelling with friends. They usually have more energy and may use hobbies to build a social circle.",
+      "As people get older, time becomes more limited, so they may look for meaningful leisure that is easier to keep up with, such as gardening, reading, walking or cooking. Income can also make a difference, because adults may be able to afford hobbies they could not try as students. So hobbies are not just personal preferences; they reflect people’s time, health, money and emotional needs.",
+    ],
+    answerTranslation: [
+      "爱好经常会变化，因为人的责任和人生阶段会变化。年轻时，人们可能更喜欢社交性强、刺激或体力要求高的爱好，比如团队运动、演唱会，或者和朋友旅行。他们通常精力更多，也可能通过爱好建立社交圈。",
+      "随着年龄增长，时间变得更有限，所以人们可能会寻找更容易坚持、也更有意义的休闲方式，比如园艺、阅读、散步或做饭。收入也会产生影响，因为成年人可能负担得起学生时期无法尝试的爱好。所以爱好不只是个人偏好，它也反映了一个人的时间、健康、金钱和情感需求。",
+    ],
+  },
+  {
+    partId: "part-3",
+    questionId: "speaking-part-3-012",
+    approach: "为什么需要爱好题从压力、身份、技能和社交四个角度展开，结尾强调不是浪费时间。",
+    frames: [
+      "People need hobbies because life cannot be only about ...",
+      "A hobby gives people ...",
+      "It can also help them ...",
+      "So hobbies are not a luxury; they are ...",
+    ],
+    vocabulary: [
+      { phrase: "downtime", translation: "休息时间", note: "BBC 生活表达" },
+      { phrase: "mental wellbeing", translation: "心理健康", note: "健康角度" },
+      { phrase: "sense of identity", translation: "身份感", note: "抽象高分表达" },
+      { phrase: "creative outlet", translation: "创造性出口", note: "爱好作用" },
+      { phrase: "work-life balance", translation: "工作生活平衡", note: "社会话题通用" },
+    ],
+    answer: [
+      "People need hobbies because life cannot be only about work, study and responsibilities. A hobby gives people real downtime and protects their mental wellbeing. When someone plays music, goes hiking or does photography, they can focus on something enjoyable without being judged only by results.",
+      "Hobbies also give people a sense of identity. A person may be an employee or a student during the day, but their hobby allows them to be a runner, a baker or a volunteer as well. In that sense, hobbies are a creative outlet and sometimes a social bridge. I don’t think they are a luxury. They are part of a healthy work-life balance, especially in a society where people are often under pressure.",
+    ],
+    answerTranslation: [
+      "人们需要爱好，因为生活不能只有工作、学习和责任。爱好能给人真正的休息时间，也能保护心理健康。当一个人弹音乐、徒步或摄影时，他可以专注于一件令人愉快的事，而不是只被结果评价。",
+      "爱好还会给人一种身份感。一个人白天可能是员工或学生，但爱好让他也可以成为跑步者、烘焙爱好者或志愿者。从这个意义上说，爱好是一种创造性出口，有时也是社交桥梁。我不认为爱好是奢侈品。它们是健康工作生活平衡的一部分，尤其是在一个人们经常处于压力下的社会中。",
+    ],
+  },
+  {
+    partId: "part-3",
+    questionId: "speaking-part-3-013",
+    approach: "宜居城市题可以从交通、住房、绿地和公共服务回答。注意给优先级，不要像清单。",
+    frames: [
+      "Cities can become more livable by focusing on ...",
+      "The first priority should be ...",
+      "Another key factor is ...",
+      "A livable city is not just ..., but ...",
+    ],
+    vocabulary: [
+      { phrase: "public transport", translation: "公共交通", note: "城市宜居核心" },
+      { phrase: "infrastructure", translation: "基础设施", note: "BBC 学术词汇" },
+      { phrase: "green spaces", translation: "绿色空间", note: "城市环境" },
+      { phrase: "affordable housing", translation: "可负担住房", note: "社会公平角度" },
+      { phrase: "city dwellers", translation: "城市居民", note: "BBC 城市词汇" },
+    ],
+    answer: [
+      "Cities can become more livable by focusing on basic quality of life rather than only building taller skyscrapers. The first priority should be public transport and infrastructure. If city dwellers can get to school, work and hospitals without spending hours in traffic, daily life becomes much less stressful.",
+      "Another key factor is the balance between development and comfort. Cities need green spaces, affordable housing and safe public areas where people can walk, exercise or meet neighbours. A livable city is not just a place with shopping malls and office towers. It is a place where ordinary people can breathe, move around easily and feel that they belong to a community.",
+    ],
+    answerTranslation: [
+      "城市要变得更宜居，就应该关注基本生活质量，而不是只建更高的摩天大楼。首要任务应该是公共交通和基础设施。如果城市居民能不用花几个小时堵在路上，就能到达学校、工作地点和医院，日常生活的压力会小很多。",
+      "另一个关键因素是发展与舒适之间的平衡。城市需要绿色空间、可负担住房，以及安全的公共区域，让人们可以散步、锻炼或和邻居见面。宜居城市不只是一个拥有商场和办公楼的地方。它应该让普通人能够呼吸、方便出行，并感到自己属于一个社区。",
+    ],
+  },
+  {
+    partId: "part-3",
+    questionId: "speaking-part-3-014",
+    approach: "居住选择题从现实因素和情感因素两层回答：工作、成本、安全、家人和生活方式。",
+    frames: [
+      "People choose places for both practical and emotional reasons.",
+      "On the practical side, ...",
+      "Emotionally, people may ...",
+      "So location is really a mix of ...",
+    ],
+    vocabulary: [
+      { phrase: "cost of living", translation: "生活成本", note: "居住选择核心" },
+      { phrase: "job opportunities", translation: "工作机会", note: "现实原因" },
+      { phrase: "sense of belonging", translation: "归属感", note: "情感原因" },
+      { phrase: "neighbourhood", translation: "社区", note: "居住环境" },
+      { phrase: "quality of life", translation: "生活质量", note: "总结性表达" },
+    ],
+    answer: [
+      "People choose places for both practical and emotional reasons. On the practical side, job opportunities, cost of living, transport and safety are usually very important. A young graduate, for example, may move to a big city not because it is relaxing, but because it offers better career chances and a wider social network.",
+      "Emotionally, people may choose a place because it is close to family, familiar food or a neighbourhood where they feel comfortable. Some people value excitement, while others care more about peace and privacy. So location is really a mix of money, convenience and sense of belonging. A place that looks attractive on paper may not feel right if it does not support the person’s quality of life.",
+    ],
+    answerTranslation: [
+      "人们选择居住地点既有现实原因，也有情感原因。从现实角度看，工作机会、生活成本、交通和安全通常都很重要。比如一个刚毕业的年轻人可能会搬去大城市，并不是因为那里轻松，而是因为它提供更好的职业机会和更广的社交网络。",
+      "从情感角度看，人们可能会因为靠近家人、熟悉的食物，或一个让自己感觉舒服的社区而选择某个地方。有些人重视刺激和机会，另一些人更在意安静和隐私。所以居住地点其实是金钱、便利和归属感的混合。一个地方即使纸面上很有吸引力，如果它不能支持这个人的生活质量，也未必真正适合。",
+    ],
+  },
+  {
+    partId: "part-3",
+    questionId: "speaking-part-3-015",
+    approach: "噪音污染题要给多层解决方案：规划、交通、建筑、执法和个人习惯。",
+    frames: [
+      "Noise pollution needs both policy and personal effort.",
+      "At the city level, governments can ...",
+      "Buildings and businesses should also ...",
+      "Individuals can help by ...",
+    ],
+    vocabulary: [
+      { phrase: "noise pollution", translation: "噪音污染", note: "题目关键词" },
+      { phrase: "zoning rules", translation: "区域规划规则", note: "城市治理表达" },
+      { phrase: "repetitive noise", translation: "重复性噪音", note: "BBC 短语" },
+      { phrase: "disrupt", translation: "扰乱", note: "BBC 学术词汇" },
+      { phrase: "soundproofing", translation: "隔音", note: "建筑解决方案" },
+    ],
+    answer: [
+      "Noise pollution needs both policy and personal effort. At the city level, governments can use zoning rules to keep very noisy factories, bars or construction sites away from residential areas. They can also improve public transport so there are fewer private cars constantly honking and creating repetitive noise.",
+      "Buildings and businesses should also take responsibility. Better soundproofing, limits on night-time construction and stricter rules for loud advertising speakers would help a lot. At the individual level, people can keep their voice down in shared spaces and avoid playing music loudly in public. Noise may seem less serious than air pollution, but it can disrupt sleep, concentration and mental wellbeing, so cities should treat it as a real health issue.",
+    ],
+    answerTranslation: [
+      "噪音污染需要政策和个人努力共同解决。在城市层面，政府可以通过区域规划规则，让非常吵的工厂、酒吧或建筑工地远离居民区。政府也可以改善公共交通，减少私家车不断鸣笛和产生重复噪音的情况。",
+      "建筑和商家也应该承担责任。更好的隔音、限制夜间施工，以及更严格管理大声播放广告喇叭，都会有很大帮助。在个人层面，人们可以在共享空间压低声音，并避免在公共场所大声放音乐。噪音看起来可能没有空气污染严重，但它会扰乱睡眠、专注力和心理健康，所以城市应该把它当成真正的健康问题来处理。",
+    ],
+  },
+  {
+    partId: "part-3",
+    questionId: "speaking-part-3-016",
+    approach: "这题和 013 相近，但更适合归纳标准：安全、便利、可负担、人情味。",
+    frames: [
+      "A livable city should meet people’s basic needs first.",
+      "Safety and convenience are essential because ...",
+      "Affordability is also important.",
+      "Finally, a city needs ...",
+    ],
+    vocabulary: [
+      { phrase: "livable city", translation: "宜居城市", note: "题目核心" },
+      { phrase: "reliable infrastructure", translation: "可靠基础设施", note: "BBC infrastructure 拓展" },
+      { phrase: "affordability", translation: "可负担性", note: "住房和生活成本" },
+      { phrase: "community spirit", translation: "社区氛围", note: "城市人情味" },
+      { phrase: "access to services", translation: "获得服务的便利性", note: "公共服务表达" },
+    ],
+    answer: [
+      "A livable city should meet people’s basic needs first. Safety and convenience are essential because people cannot enjoy culture or entertainment if they worry about crime, traffic or unreliable infrastructure every day. Good access to services, such as hospitals, schools and public transport, makes daily life smoother.",
+      "Affordability is also important. If rent is so high that ordinary workers have to live far from their jobs, the city may look successful but feel exhausting. Finally, a city needs community spirit. Parks, libraries and small public spaces give people chances to meet and relax. So, in my view, a livable city is not the richest city; it is one where people can live with dignity and some breathing room.",
+    ],
+    answerTranslation: [
+      "宜居城市首先应该满足人们的基本需求。安全和便利是必要的，因为如果人们每天都担心犯罪、交通或不可靠的基础设施，就很难享受文化和娱乐。方便获得医院、学校和公共交通等服务，会让日常生活更顺畅。",
+      "可负担性也很重要。如果房租高到普通工作者不得不住得离工作地点很远，那么这座城市可能看起来很成功，但生活起来很疲惫。最后，城市需要社区氛围。公园、图书馆和小型公共空间能给人们见面和放松的机会。所以在我看来，宜居城市不是最富有的城市，而是让人们能有尊严、有一点呼吸空间地生活的城市。",
+    ],
+  },
+  {
+    partId: "part-3",
+    questionId: "speaking-part-3-017",
+    approach: "媒体可靠性题要避免传统媒体绝对可靠。比较速度、审核、偏见和事实核查。",
+    frames: [
+      "Social media is faster, but ...",
+      "Traditional media usually has ...",
+      "That said, traditional media can also ...",
+      "The safest approach is to ...",
+    ],
+    vocabulary: [
+      { phrase: "fact-checking", translation: "事实核查", note: "媒体可靠性核心" },
+      { phrase: "misinformation", translation: "错误信息", note: "社媒风险" },
+      { phrase: "editorial standards", translation: "编辑标准", note: "传统媒体优势" },
+      { phrase: "echo chamber", translation: "信息茧房", note: "Part 3 高分表达" },
+      { phrase: "verify the source", translation: "核实来源", note: "解决方案" },
+    ],
+    answer: [
+      "Social media is faster, but that speed often makes it less reliable. Anyone can post breaking news, photos or opinions before proper fact-checking happens, so misinformation can spread very quickly. Another problem is the echo chamber effect, where people only see content that confirms what they already believe.",
+      "Traditional media usually has stronger editorial standards and professional responsibility, so it is often more reliable for serious news. That said, traditional media can also have bias, and mistakes still happen. I don’t think people should trust a source just because it looks official. The safest approach is to compare several sources, verify the original evidence and be careful with headlines that are designed mainly to shock or attract clicks.",
+    ],
+    answerTranslation: [
+      "社交媒体速度更快，但这种速度往往会让它不那么可靠。任何人都可以在充分事实核查之前发布突发新闻、图片或观点，所以错误信息可能传播得非常快。另一个问题是信息茧房效应，人们只看到那些确认自己已有看法的内容。",
+      "传统媒体通常有更强的编辑标准和职业责任，所以在严肃新闻方面往往更可靠。不过，传统媒体也可能有偏见，也仍然会出错。我不认为人们应该因为一个来源看起来正式就完全信任它。最安全的方法是比较多个来源，核实原始证据，并且警惕那些主要为了制造震惊或吸引点击而设计的标题。",
+    ],
+  },
+  {
+    partId: "part-3",
+    questionId: "speaking-part-3-018",
+    approach: "影视题从故事、人物、节奏和真实感回答。强调好作品不一定大制作。",
+    frames: [
+      "A good movie or TV show needs ...",
+      "The story should ...",
+      "Characters matter because ...",
+      "Big budgets help, but ...",
+    ],
+    vocabulary: [
+      { phrase: "well-paced", translation: "节奏好的", note: "评价影视作品" },
+      { phrase: "authenticity", translation: "真实感", note: "BBC 艺术/媒体词汇" },
+      { phrase: "character development", translation: "人物成长", note: "影视评价核心" },
+      { phrase: "thought-provoking", translation: "发人深省的", note: "艺术类高分词" },
+      { phrase: "special effects", translation: "特效", note: "大制作评价" },
+    ],
+    answer: [
+      "A good movie or TV show needs a strong story, believable characters and good pacing. The story should make viewers want to know what happens next, but it should not rely only on surprises. If the plot is well-paced, even a quiet scene can be interesting because it builds tension or reveals something about the characters.",
+      "Characters matter because people remember emotions more than special effects. A film with a huge budget can still feel empty if the characters do not have authenticity or clear motivation. On the other hand, a simple story can be powerful if the character development is honest and thought-provoking. So I think entertainment value is important, but the best shows also leave viewers with something to think about afterwards.",
+    ],
+    answerTranslation: [
+      "一部好的电影或电视剧需要强有力的故事、可信的人物和良好的节奏。故事应该让观众想知道接下来会发生什么，但不能只依赖反转。如果情节节奏好，即使安静的场景也可以很有意思，因为它能制造张力，或揭示人物的某些东西。",
+      "人物很重要，因为人们记住的更多是情感，而不是特效。一部预算很高的电影，如果人物没有真实感或清晰动机，仍然会显得空洞。相反，一个简单故事如果人物成长真实，也可以很有力量、发人深省。所以我认为娱乐性很重要，但最好的作品也会让观众在看完之后仍然有所思考。",
+    ],
+  },
+  {
+    partId: "part-3",
+    questionId: "speaking-part-3-019",
+    approach: "在线学习题平衡便利与缺点。强调它扩大了 access，但需要自律和互动设计。",
+    frames: [
+      "Online learning has made education more flexible.",
+      "It gives students access to ...",
+      "However, it also requires ...",
+      "The best model may be ...",
+    ],
+    vocabulary: [
+      { phrase: "online learning platform", translation: "线上学习平台", note: "BBC 口语词汇" },
+      { phrase: "flexible hours", translation: "灵活时间", note: "BBC flexible 用法" },
+      { phrase: "self-discipline", translation: "自律", note: "在线学习难点" },
+      { phrase: "digital divide", translation: "数字鸿沟", note: "教育公平角度" },
+      { phrase: "blended learning", translation: "混合式学习", note: "解决方案" },
+    ],
+    answer: [
+      "Online learning has made education more flexible. Through an online learning platform, students can review lessons, watch lectures from different countries and study at flexible hours. This is especially helpful for people who live far from good schools or have work and family responsibilities.",
+      "However, online learning also requires self-discipline. Without a teacher physically in the room, some students get distracted or fall behind. There is also a digital divide, because not everyone has a quiet room, a stable internet connection or a good device. For that reason, I think the best model may be blended learning. Online tools can provide access and convenience, while face-to-face classes still offer discussion, structure and human support.",
+    ],
+    answerTranslation: [
+      "在线学习让教育变得更灵活。通过线上学习平台，学生可以复习课程、观看来自不同国家的讲座，并在灵活时间学习。这对那些住得离优质学校很远，或者有工作和家庭责任的人尤其有帮助。",
+      "不过，在线学习也需要自律。如果老师不在同一个房间里，有些学生会分心或落后。数字鸿沟也是问题，因为不是每个人都有安静的房间、稳定的网络或好的设备。因此，我认为最好的模式可能是混合式学习。在线工具可以提供机会和便利，而面对面课堂仍然能提供讨论、结构和人的支持。",
+    ],
+  },
+  {
+    partId: "part-3",
+    questionId: "speaking-part-3-020",
+    approach: "好员工题不要只讲 hardworking。按可靠性、沟通、适应力和团队合作组织。",
+    frames: [
+      "A good employee is not just someone who works long hours.",
+      "Reliability matters because ...",
+      "Communication is also essential.",
+      "In modern workplaces, employees also need ...",
+    ],
+    vocabulary: [
+      { phrase: "reliable", translation: "可靠的", note: "员工品质核心" },
+      { phrase: "take initiative", translation: "主动做事", note: "职场高分表达" },
+      { phrase: "adaptable", translation: "适应力强的", note: "现代职场关键词" },
+      { phrase: "team player", translation: "有团队精神的人", note: "职场常用" },
+      { phrase: "constructive feedback", translation: "建设性反馈", note: "沟通能力" },
+    ],
+    answer: [
+      "A good employee is not just someone who works long hours. Reliability matters more. If a person finishes tasks on time, keeps promises and communicates problems early, colleagues can trust them. That kind of trust is the foundation of teamwork, especially when a project involves many people.",
+      "Communication is also essential. A good employee should be able to explain ideas clearly, accept constructive feedback and give honest updates instead of hiding mistakes. In modern workplaces, employees also need to be adaptable, because technology and customer needs change quickly. I would say the best employees are team players who take initiative, but they do not create drama or make everything about themselves.",
+    ],
+    answerTranslation: [
+      "好员工并不只是工作时间很长的人。可靠性更重要。如果一个人能按时完成任务、遵守承诺，并且在问题刚出现时就及时沟通，同事就会信任他。这种信任是团队合作的基础，尤其是当一个项目涉及很多人时。",
+      "沟通也很关键。好员工应该能够清楚解释想法，接受建设性反馈，并诚实更新进度，而不是隐藏错误。在现代职场中，员工还需要有适应力，因为技术和客户需求变化很快。我会说，最好的员工是有团队精神、能主动做事的人，但他们不会制造戏剧化冲突，也不会把所有事情都变成围绕自己展开。",
+    ],
+  },
 ] satisfies SpeakingModelAnswer[];
 
 const speakingModelAnswerByQuestionId = new Map(
