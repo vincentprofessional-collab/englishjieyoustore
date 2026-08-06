@@ -61,5 +61,6 @@ export type JuniorHighPaper = {
     readingD?: string | string[];
     readingResponse?: string | string[];
     all?: string[];
+    audio?: string[];
   };
 };

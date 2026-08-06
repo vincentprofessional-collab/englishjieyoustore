@@ -12,6 +12,7 @@ NS = {"w": "http://schemas.openxmlformats.org/wordprocessingml/2006/main"}
 SECTION_HEADING = re.compile(r"^[一二三四五六七八九十]+、")
 QUESTION = re.compile(r"^\s*(\d{1,3})\s*[．.、)]\s*(.*)$")
 OPTION_MARKER = re.compile(r"([A-D])[．.、)]\s*")
+AUDIO_EXTENSIONS = {".mp3", ".wav", ".m4a", ".mp4", ".flac", ".aac", ".ogg"}
 
 
 def read_docx(path: Path) -> tuple[list[str], list[str]]:
@@ -126,6 +127,24 @@ def copy_media(original: Path, assets_dir: Path, slug: str) -> list[str]:
     return paths
 
 
+def copy_audio(original: Path, assets_dir: Path, slug: str) -> list[str]:
+    candidates = sorted(
+        path for path in original.parent.rglob("*") if path.is_file() and path.suffix.lower() in AUDIO_EXTENSIONS
+    )
+    marker = re.search(r"（([^（）]*(?:专用|省卷)[^（）]*)）", original.name)
+    if marker:
+        scoped = [path for path in candidates if marker.group(1) in path.stem]
+        candidates = scoped
+    audio_dir = assets_dir / "audio"
+    audio_dir.mkdir(parents=True, exist_ok=True)
+    paths = []
+    for index, source in enumerate(candidates, 1):
+        target = audio_dir / f"audio-{index}{source.suffix.lower()}"
+        target.write_bytes(source.read_bytes())
+        paths.append(f"/junior-high/{slug}/audio/{target.name}")
+    return paths
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--original", required=True, type=Path)
@@ -162,6 +181,7 @@ def main() -> None:
     is_simulation = "模拟" in args.original.name or "模拟" in str(args.original.parent)
     kind_label = "模拟卷" if is_simulation else "真题"
     asset_paths = copy_media(args.original, args.assets, args.slug)
+    audio_paths = copy_audio(args.original, args.assets, args.slug)
     duration_match = re.search(r"(\d+)\s*分钟", source_text)
     duration = int(duration_match.group(1)) if duration_match else 90
 
@@ -178,7 +198,7 @@ def main() -> None:
         "sourceText": source_text,
         "questions": questions,
         "readingA": {"instructions": "原卷阅读材料与题目如下。", "books": []},
-        "assets": {"all": asset_paths},
+        "assets": {"all": asset_paths, "audio": audio_paths},
         "writing": {
             "title": "写作",
             "promptA": writing_text,

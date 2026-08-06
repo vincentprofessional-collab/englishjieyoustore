@@ -2,9 +2,9 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import test from "node:test";
 
-test("ten generated papers contain renderable questions, writing tasks, and media", () => {
+test("thirty generated papers contain renderable questions, writing tasks, and media", () => {
   const inventory = JSON.parse(fs.readFileSync(new URL("../src/lib/junior-high/paper-inventory.json", import.meta.url), "utf8"));
-  assert.equal(inventory.length, 10);
+  assert.equal(inventory.length, 30);
   for (const item of inventory) {
     const paper = JSON.parse(fs.readFileSync(item.dataPath, "utf8"));
     assert.ok(paper.questions.length > 0, `${item.slug} has no questions`);
@@ -14,6 +14,12 @@ test("ten generated papers contain renderable questions, writing tasks, and medi
     assert.ok(paper.writing.promptB.length > 0, `${item.slug} has no second writing prompt`);
     for (const asset of paper.assets?.all ?? []) {
       assert.ok(fs.existsSync(`${process.cwd()}/public${asset}`), `${item.slug} missing asset ${asset}`);
+    }
+    if (item.audioAvailable) {
+      assert.ok((paper.assets?.audio ?? []).length > 0, `${item.slug} should include audio`);
+    }
+    for (const audio of paper.assets?.audio ?? []) {
+      assert.ok(fs.existsSync(`${process.cwd()}/public${audio}`), `${item.slug} missing audio ${audio}`);
     }
   }
 });
