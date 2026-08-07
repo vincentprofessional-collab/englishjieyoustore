@@ -1,6 +1,10 @@
 export type JuniorHighQuestion = {
   id: string;
   number: number;
+  displayNumber?: string;
+  sectionId?: string;
+  groupId?: string;
+  inputKind?: "choice" | "blank" | "text" | "writing";
   type: string;
   prompt: string;
   context: string;
@@ -8,6 +12,36 @@ export type JuniorHighQuestion = {
   image?: string;
   answer: string;
   analysis: string;
+};
+
+export type JuniorHighBlock = {
+  id: string;
+  kind: "paragraph" | "table" | "image" | "audio";
+  text?: string;
+  rows?: string[][];
+  src?: string;
+  alt?: string;
+};
+
+export type JuniorHighSection = {
+  id: string;
+  title: string;
+  instructions: string[];
+  blocks: JuniorHighBlock[];
+  questionIds: string[];
+};
+
+export type JuniorHighWritingTask = {
+  id: string;
+  label: string;
+  prompt: string;
+  requirements: string;
+  opening?: string;
+  closing?: string;
+  table?: string[][];
+  image?: string;
+  wordMin?: number;
+  wordMax?: number;
 };
 
 export type JuniorHighBook = {
@@ -40,7 +74,7 @@ export type JuniorHighPaper = {
   year: number;
   region: string;
   label: string;
-  layout?: "beijing" | "generic";
+  layout?: "beijing" | "generic" | "structured";
   displayTitle?: string;
   durationMinutes: number;
   fileName: string;
@@ -53,6 +87,9 @@ export type JuniorHighPaper = {
     books: JuniorHighBook[];
   };
   writing: JuniorHighWriting;
+  sections?: JuniorHighSection[];
+  writingTasks?: JuniorHighWritingTask[];
+  sourceBlocks?: JuniorHighBlock[];
   assets?: {
     cloze?: string;
     readingA?: string | string[];
