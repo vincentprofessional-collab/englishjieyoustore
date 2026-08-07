@@ -1431,7 +1431,15 @@
           "text": "4. 考试结束后，请将”试题卷”和”答题卡”一并交回。"
         }
       ],
-      "questionIds": []
+      "questionIds": [],
+      "displayBlocks": [
+        {
+          "id": "image-1-1",
+          "kind": "image",
+          "src": "/junior-high/2024-anhui-anhui/image1.png",
+          "alt": "原卷图片"
+        }
+      ]
     },
     {
       "id": "section-2",
@@ -1446,7 +1454,8 @@
           "text": "第一部分  听力（共四大题，满分20分）"
         }
       ],
-      "questionIds": []
+      "questionIds": [],
+      "displayBlocks": []
     },
     {
       "id": "section-3",
@@ -1568,6 +1577,49 @@
         "2024-anhui-anhui-section-3-section-3-group-1-3",
         "2024-anhui-anhui-section-3-section-3-group-1-4",
         "2024-anhui-anhui-section-3-section-3-group-1-5"
+      ],
+      "displayBlocks": [
+        {
+          "id": "paragraph-9",
+          "kind": "paragraph",
+          "text": "你将听到五段对话。每段对话后有一个小题，请在每小题所给的A、B、C三个选项中选出一个最佳选项。每段对话读两遍"
+        },
+        {
+          "id": "image-11-1",
+          "kind": "image",
+          "src": "/junior-high/2024-anhui-anhui/image2.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "image-11-2",
+          "kind": "image",
+          "src": "/junior-high/2024-anhui-anhui/image3.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "image-11-3",
+          "kind": "image",
+          "src": "/junior-high/2024-anhui-anhui/image4.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "image-13-1",
+          "kind": "image",
+          "src": "/junior-high/2024-anhui-anhui/image5.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "image-13-2",
+          "kind": "image",
+          "src": "/junior-high/2024-anhui-anhui/image6.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "image-13-3",
+          "kind": "image",
+          "src": "/junior-high/2024-anhui-anhui/image7.png",
+          "alt": "原卷图片"
+        }
       ]
     },
     {
@@ -1654,6 +1706,18 @@
         "2024-anhui-anhui-section-4-section-4-group-1-8",
         "2024-anhui-anhui-section-4-section-4-group-1-9",
         "2024-anhui-anhui-section-4-section-4-group-1-10"
+      ],
+      "displayBlocks": [
+        {
+          "id": "paragraph-23",
+          "kind": "paragraph",
+          "text": "你将听到两段对话。每段对话后有几个小题，请在每小题所给的A、B、C三个选项中选出一个最佳选项。每段对话读两遍。"
+        },
+        {
+          "id": "paragraph-24",
+          "kind": "paragraph",
+          "text": "听下面一段对话，回答第6、7题"
+        }
       ]
     },
     {
@@ -1730,6 +1794,13 @@
         "2024-anhui-anhui-section-5-section-5-group-1-13",
         "2024-anhui-anhui-section-5-section-5-group-1-14",
         "2024-anhui-anhui-section-5-section-5-group-1-15"
+      ],
+      "displayBlocks": [
+        {
+          "id": "paragraph-37",
+          "kind": "paragraph",
+          "text": "你将听到一篇短文。短文后有五个小题，请根据短文内容，在每小题所给的A、B、C三个选项中选出一个最佳选项。短文读两遍"
+        }
       ]
     },
     {
@@ -1745,7 +1816,8 @@
           "text": "Ⅳ．信息转换（共5小题；每小题1分，满分5分）"
         }
       ],
-      "questionIds": []
+      "questionIds": [],
+      "displayBlocks": []
     },
     {
       "id": "section-7",
@@ -1787,7 +1859,35 @@
         "2024-anhui-anhui-section-7-section-7-group-1-16",
         "2024-anhui-anhui-section-7-section-7-group-1-17",
         "2024-anhui-anhui-section-7-section-7-group-1-18",
-        "2024-anhui-anhui-section-7-section-7-group-1-19"
+        "2024-anhui-anhui-section-7-section-7-group-1-19",
+        "2024-anhui-anhui-section-7-section-7-group-1-20"
+      ],
+      "displayBlocks": [
+        {
+          "id": "table-1",
+          "kind": "table",
+          "rows": [
+            [
+              "Activities for School’s 70 Birthday"
+            ],
+            [
+              "School Open Day",
+              "Time: At 9:00 am on September 10th To have a     16     to learn about the history of the school. To     17     the teachers about students’ school life."
+            ],
+            [
+              "Music Festival",
+              "Time: At 2:30 pm on September 10th. To make the school life more     18     and relaxing."
+            ],
+            [
+              "Dancing Party",
+              "Time: From 7:30 pm to 9:00 pm on September     19    . To be held in the     20    . To make more new friends."
+            ],
+            [
+              "Wish",
+              "Welcome to take part in the activities to celebrate the birthday of the school."
+            ]
+          ]
+        }
       ]
     },
     {
@@ -1803,7 +1903,8 @@
           "text": "第二部分 语言知识运用（共三大题，满分35分）"
         }
       ],
-      "questionIds": []
+      "questionIds": [],
+      "displayBlocks": []
     },
     {
       "id": "section-9",
@@ -1970,7 +2071,6 @@
         }
       ],
       "questionIds": [
-        "2024-anhui-anhui-section-9-section-9-group-1-20",
         "2024-anhui-anhui-section-9-section-9-group-1-21",
         "2024-anhui-anhui-section-9-section-9-group-1-22",
         "2024-anhui-anhui-section-9-section-9-group-1-23",
@@ -1979,8 +2079,10 @@
         "2024-anhui-anhui-section-9-section-9-group-1-26",
         "2024-anhui-anhui-section-9-section-9-group-1-27",
         "2024-anhui-anhui-section-9-section-9-group-1-28",
-        "2024-anhui-anhui-section-9-section-9-group-1-29"
-      ]
+        "2024-anhui-anhui-section-9-section-9-group-1-29",
+        "2024-anhui-anhui-section-9-section-9-group-1-30"
+      ],
+      "displayBlocks": []
     },
     {
       "id": "section-10",
@@ -2173,7 +2275,6 @@
         }
       ],
       "questionIds": [
-        "2024-anhui-anhui-section-10-section-10-group-1-30",
         "2024-anhui-anhui-section-10-section-10-group-1-31",
         "2024-anhui-anhui-section-10-section-10-group-1-32",
         "2024-anhui-anhui-section-10-section-10-group-1-33",
@@ -2192,7 +2293,40 @@
         "2024-anhui-anhui-section-10-section-10-group-1-46",
         "2024-anhui-anhui-section-10-section-10-group-1-47",
         "2024-anhui-anhui-section-10-section-10-group-1-48",
-        "2024-anhui-anhui-section-10-section-10-group-1-49"
+        "2024-anhui-anhui-section-10-section-10-group-1-49",
+        "2024-anhui-anhui-section-10-section-10-group-1-50"
+      ],
+      "displayBlocks": [
+        {
+          "id": "paragraph-84",
+          "kind": "paragraph",
+          "text": "A"
+        },
+        {
+          "id": "paragraph-85",
+          "kind": "paragraph",
+          "text": "Cheng Lijin is from Guangxi. In the past, she spent her summer and winter vacations teaching in some poor countries in Africa."
+        },
+        {
+          "id": "paragraph-86",
+          "kind": "paragraph",
+          "text": "Cheng had the idea of being a volunteer     31     after she watched a movie called Desert Flower. She showed a great     32     in Africa. She wanted to see what Africa looked like with her own eyes."
+        },
+        {
+          "id": "paragraph-87",
+          "kind": "paragraph",
+          "text": "In December 2016, Cheng     33     Africa. She taught English, science and art at a primary school. Life was     34     there. She couldn’t even take a shower.     35     she didn’t leave. She knew she could help her students learn and bring hope to them."
+        },
+        {
+          "id": "paragraph-88",
+          "kind": "paragraph",
+          "text": "In March 2017, Cheng     36     an African orphanage (孤儿院). She found the children there didn’t have enough school things. Then she decided to     37     money to help them. Within three days, Cheng successfully got more than 20,000 yuan. She used the money to buy school things for the children. She felt very     38     when she saw the look of joy on the children’s faces."
+        },
+        {
+          "id": "paragraph-89",
+          "kind": "paragraph",
+          "text": "Cheng’s story     39     the hearts of many people. Now she is studying in the UK and plans to go back to her hometown and become a teacher there. She is     40     a girl with a loving heart."
+        }
       ]
     },
     {
@@ -2308,7 +2442,14 @@
           "text": "G．May I know your name?"
         }
       ],
-      "questionIds": []
+      "questionIds": [
+        "2024-anhui-anhui-section-11-section-11-group-1-51",
+        "2024-anhui-anhui-section-11-section-11-group-1-52",
+        "2024-anhui-anhui-section-11-section-11-group-1-53",
+        "2024-anhui-anhui-section-11-section-11-group-1-54",
+        "2024-anhui-anhui-section-11-section-11-group-1-55"
+      ],
+      "displayBlocks": []
     },
     {
       "id": "section-12",
@@ -2323,7 +2464,8 @@
           "text": "第三部分  阅读（共两节，满分40分）"
         }
       ],
-      "questionIds": []
+      "questionIds": [],
+      "displayBlocks": []
     },
     {
       "id": "section-13",
@@ -2774,12 +2916,6 @@
         }
       ],
       "questionIds": [
-        "2024-anhui-anhui-section-13-section-13-group-1-50",
-        "2024-anhui-anhui-section-13-section-13-group-1-51",
-        "2024-anhui-anhui-section-13-section-13-group-1-52",
-        "2024-anhui-anhui-section-13-section-13-group-1-53",
-        "2024-anhui-anhui-section-13-section-13-group-1-54",
-        "2024-anhui-anhui-section-13-section-13-group-1-55",
         "2024-anhui-anhui-section-13-section-13-group-1-56",
         "2024-anhui-anhui-section-13-section-13-group-1-57",
         "2024-anhui-anhui-section-13-section-13-group-1-58",
@@ -2791,7 +2927,43 @@
         "2024-anhui-anhui-section-13-section-13-group-1-64",
         "2024-anhui-anhui-section-13-section-13-group-1-65",
         "2024-anhui-anhui-section-13-section-13-group-1-66",
-        "2024-anhui-anhui-section-13-section-13-group-1-67"
+        "2024-anhui-anhui-section-13-section-13-group-1-67",
+        "2024-anhui-anhui-section-13-section-13-group-1-68",
+        "2024-anhui-anhui-section-13-section-13-group-1-69",
+        "2024-anhui-anhui-section-13-section-13-group-1-70",
+        "2024-anhui-anhui-section-13-section-13-group-1-71",
+        "2024-anhui-anhui-section-13-section-13-group-1-72"
+      ],
+      "displayBlocks": [
+        {
+          "id": "paragraph-142",
+          "kind": "paragraph",
+          "text": "A"
+        },
+        {
+          "id": "table-2",
+          "kind": "table",
+          "rows": [
+            [
+              "Welcome to City Center Hotel! We will give you the best service to make you feel at home."
+            ],
+            [
+              "Room service",
+              "You can use the service 24 hours a day. If you want to ask for some service, call the Information Desk, and we will pass on your message to the room waiter."
+            ],
+            [
+              "Dining Room",
+              "Breakfast: from 8:00 to 9:30. Lunch: from 12:00 to 14:00. Dinner: from 18:00 to 20:30. Also, the room waiter may bring breakfast to your room at any time after 7:00. If you need it, please fill in a card and hang it outside of your door before 6:00."
+            ],
+            [
+              "Other Service",
+              "Shop: The hotel shop is open from 8:30 to 17:30. Coffee House: Open hours:12:00—16:00, 20:00—23:30. Cinema: Films begin at 19:00 every night. Hot water is offered 24 hours. There is also a big swimming pool in the hotel for free. You can enjoy yourself at any time."
+            ],
+            [
+              "We are always ready to help you."
+            ]
+          ]
+        }
       ]
     },
     {
@@ -2851,8 +3023,41 @@
         }
       ],
       "questionIds": [
-        "2024-anhui-anhui-section-14-section-14-group-1-68",
-        "2024-anhui-anhui-section-14-section-14-group-1-69"
+        "2024-anhui-anhui-section-14-section-14-group-1-73",
+        "2024-anhui-anhui-section-14-section-14-group-1-74",
+        "2024-anhui-anhui-section-14-section-14-group-1-75"
+      ],
+      "displayBlocks": [
+        {
+          "id": "paragraph-224",
+          "kind": "paragraph",
+          "text": "A new coffee shop on Shanghai’s Yongkang Road has no seats or tables, and its shopfront is just a wall with a hole. Through the hole , a furry bear paw hands out coffee. People simply scan a QR code (扫二维码) to place their orders. Each cup of coffee is 20 yuan."
+        },
+        {
+          "id": "paragraph-225",
+          "kind": "paragraph",
+          "text": "The coffee shop’s name is Hinichijou. It fully opened on December 3, the International Day of Persons with Disabilities, and soon got popular. That’s not only because it’s so different, but also because it provides jobs for disabled people."
+        },
+        {
+          "id": "paragraph-226",
+          "kind": "paragraph",
+          "text": "Wang Haiqing, one founder (创办者) of the shop, said most of the workers in Hinichijou are disabled people. The shop manager Chen Yingying has difficulty in hearing. She has won several prizes at coffee-making competitions. The person handing out coffee with a bear paw suffered facial burns (遭受面部烧伤). Both of them got training from Shanghai Disabled Persons’ Federation."
+        },
+        {
+          "id": "paragraph-227",
+          "kind": "paragraph",
+          "text": "Why does the coffee shop place its workers behind a wall? Wang said it just wants to help them feel more comfortable at work."
+        },
+        {
+          "id": "paragraph-228",
+          "kind": "paragraph",
+          "text": "The wait for a coffee may take up to an hour, but many people still go to the coffee shop. Li Mengqian went to the coffee shop after reading about it online. “I know it is difficult for disabled people to find a job. It is great to have such a shop,” she said. “We should show our love for them. As long as everyone gives a love, the world will become a beautiful home.”"
+        },
+        {
+          "id": "paragraph-229",
+          "kind": "paragraph",
+          "text": "Wang said he and the other founders plan to open more shops to help disabled people."
+        }
       ]
     },
     {
@@ -2868,7 +3073,8 @@
           "text": "第四部分写（共两大题，满分25分）"
         }
       ],
-      "questionIds": []
+      "questionIds": [],
+      "displayBlocks": []
     },
     {
       "id": "section-16",
@@ -2914,11 +3120,13 @@
         }
       ],
       "questionIds": [
-        "2024-anhui-anhui-section-16-section-16-group-1-70",
-        "2024-anhui-anhui-section-16-section-16-group-1-71",
-        "2024-anhui-anhui-section-16-section-16-group-1-72",
-        "2024-anhui-anhui-section-16-section-16-group-1-73"
-      ]
+        "2024-anhui-anhui-section-16-section-16-group-1-76",
+        "2024-anhui-anhui-section-16-section-16-group-1-77",
+        "2024-anhui-anhui-section-16-section-16-group-1-78",
+        "2024-anhui-anhui-section-16-section-16-group-1-79",
+        "2024-anhui-anhui-section-16-section-16-group-1-80"
+      ],
+      "displayBlocks": []
     },
     {
       "id": "section-17",
@@ -3009,13 +3217,8 @@
           "text": "Li Hua"
         }
       ],
-      "questionIds": [
-        "2024-anhui-anhui-section-17-section-17-group-1-74",
-        "2024-anhui-anhui-section-17-section-17-group-1-75",
-        "2024-anhui-anhui-section-17-section-17-group-1-76",
-        "2024-anhui-anhui-section-17-section-17-group-1-77",
-        "2024-anhui-anhui-section-17-section-17-group-1-78"
-      ]
+      "questionIds": [],
+      "displayBlocks": []
     }
   ],
   "questions": [
@@ -3113,9 +3316,7 @@
       "options": [
         "A. At home.",
         "B. At school.",
-        "C. In the cinema. Ⅱ．长对话理解（共5小题；每小题1分，满分5分） 你将听到两段对话。每段对话后有几个小题，请在每小题所给的",
-        "A. ",
-        "B. C三个选项中选出一个最佳选项。每段对话读两遍。 听下面一段对话，回答第6、7题"
+        "C. In the cinema."
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -3220,9 +3421,7 @@
       "options": [
         "A. Once.",
         "B. Twice.",
-        "C. Three times. Ⅲ. 短文理解（共5小题；每小题1分，满分5分） 你将听到一篇短文。短文后有五个小题，请根据短文内容，在每小题所给的",
-        "A. ",
-        "B. C三个选项中选出一个最佳选项。短文读两遍"
+        "C. Three times."
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -3327,7 +3526,7 @@
       "options": [
         "A. clever and brave",
         "B. strong but careless",
-        "C. weak and foolish Ⅳ．信息转换（共5小题；每小题1分，满分5分） 你将听到一篇短文。请根据短文内容，写出下面表格中所缺的单词，每空仅填一词。短文读两遍。 Activities for School’s 70 Birthday"
+        "C. weak and foolish"
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -3344,11 +3543,11 @@
       "displayNumber": "16",
       "sectionId": "section-7",
       "groupId": "section-7-group-1",
-      "prompt": "School Open Day Time: At 9:00 am on September 10th To have a     16     to learn about the history of the school. To     17     the teachers about students’ school life.",
+      "prompt": "School Open Day Time: At 9:00 am on September 10th To have  ______      to learn about the history of the school. To     17     the teachers about students’ school life.",
       "options": [],
       "inputKind": "blank",
       "sourceBlockIds": [
-        "table-1-row-2"
+        "table-1"
       ],
       "type": "blank",
       "context": "",
@@ -3361,11 +3560,11 @@
       "displayNumber": "17",
       "sectionId": "section-7",
       "groupId": "section-7-group-1",
-      "prompt": "School Open Day Time: At 9:00 am on September 10th To have a     16     to learn about the history of the school. To     17     the teachers about students’ school life.",
+      "prompt": "School Open Day Time: At 9:00 am on September 10th To have a     16     to learn about the history of the school. To  ______ the teachers about students’ school life.",
       "options": [],
       "inputKind": "blank",
       "sourceBlockIds": [
-        "table-1-row-2"
+        "table-1"
       ],
       "type": "blank",
       "context": "",
@@ -3378,11 +3577,11 @@
       "displayNumber": "18",
       "sectionId": "section-7",
       "groupId": "section-7-group-1",
-      "prompt": "Music Festival Time: At 2:30 pm on September 10th. To make the school life more     18     and relaxing.",
+      "prompt": "Music Festival Time: At 2:30 pm on September 10th. To make the school life more  ______ and relaxing.",
       "options": [],
       "inputKind": "blank",
       "sourceBlockIds": [
-        "table-1-row-3"
+        "table-1"
       ],
       "type": "blank",
       "context": "",
@@ -3395,19 +3594,44 @@
       "displayNumber": "19",
       "sectionId": "section-7",
       "groupId": "section-7-group-1",
-      "prompt": "Dancing Party Time: From 7:30 pm to 9:00 pm on September     19    . To be held in the     20    . To make more new friends.",
-      "options": [],
-      "inputKind": "blank",
-      "sourceBlockIds": [
-        "table-1-row-4"
+      "prompt": "Dancing Party Time: From 7:30 pm to 9:00 pm on September  ______ . To be held in the     20    . To make more new friends.",
+      "options": [
+        "A. ",
+        "B. ",
+        "C. D四个选项中选出一个可以填入空白处的最佳选项。"
       ],
-      "type": "blank",
+      "inputKind": "choice",
+      "sourceBlockIds": [
+        "table-1"
+      ],
+      "type": "choice",
       "context": "",
       "answer": "11th/eleventh",
       "analysis": "【原文】Hello, boys and girls! Our school’s 70th birthday is coming next week. We will have some fun and interesting activities for you.September 10th is the School Open Day, and your parents can come to our school at 9:00 am and we will have a meeting to learn about the history of our school. What’s more, they can talk with your teachers about your school life, too. At 2:30 pm, we will have a music festival, and it can make our school life more interesting and relaxing. On September 11th we are going to hold a big dancing party. And it will be held in the hall from 7:30 pm to 9:00 pm. You can make more new friends.I believe we will have a good time on these two days. Come and take an active part in the activities to celebrate the birthday of our school!\n第二部分 语言知识运用（共三大题，满分35分）\nⅤ．单项填空（共10小题；每小题1分，满分10分）\n从每小题所给的A、B、C、D四个选项中选出一个可以填入空白处的最佳选项。"
     },
     {
-      "id": "2024-anhui-anhui-section-9-section-9-group-1-20",
+      "id": "2024-anhui-anhui-section-7-section-7-group-1-20",
+      "number": 20,
+      "displayNumber": "20",
+      "sectionId": "section-7",
+      "groupId": "section-7-group-1",
+      "prompt": "Dancing Party Time: From 7:30 pm to 9:00 pm on September     19    . To be held in the  ______ . To make more new friends.",
+      "options": [
+        "A. ",
+        "B. ",
+        "C. D四个选项中选出一个可以填入空白处的最佳选项。"
+      ],
+      "inputKind": "choice",
+      "sourceBlockIds": [
+        "table-1"
+      ],
+      "type": "choice",
+      "context": "",
+      "answer": "hall",
+      "analysis": "【原文】Hello, boys and girls! Our school’s 70th birthday is coming next week. We will have some fun and interesting activities for you.September 10th is the School Open Day, and your parents can come to our school at 9:00 am and we will have a meeting to learn about the history of our school. What’s more, they can talk with your teachers about your school life, too. At 2:30 pm, we will have a music festival, and it can make our school life more interesting and relaxing. On September 11th we are going to hold a big dancing party. And it will be held in the hall from 7:30 pm to 9:00 pm. You can make more new friends.I believe we will have a good time on these two days. Come and take an active part in the activities to celebrate the birthday of our school!\n第二部分 语言知识运用（共三大题，满分35分）\nⅤ．单项填空（共10小题；每小题1分，满分10分）\n从每小题所给的A、B、C、D四个选项中选出一个可以填入空白处的最佳选项。"
+    },
+    {
+      "id": "2024-anhui-anhui-section-9-section-9-group-1-21",
       "number": 21,
       "displayNumber": "21",
       "sectionId": "section-9",
@@ -3429,7 +3653,7 @@
       "analysis": "【详解】句意：苏珊去买报纸，当她回来时，排队的地方已经被占了。\n考查名词辨析。way方法；place地方；chance机会；time时间。根据“Susan went to buy a newspaper and when she came back she lost her ... in the queue.”可知，苏珊去买报纸了，原先排队的位置被占了。故选B。"
     },
     {
-      "id": "2024-anhui-anhui-section-9-section-9-group-1-21",
+      "id": "2024-anhui-anhui-section-9-section-9-group-1-22",
       "number": 22,
       "displayNumber": "22",
       "sectionId": "section-9",
@@ -3451,7 +3675,7 @@
       "analysis": "【详解】句意：——你的手机坏了吗？——没有。为什么？——我试着给你打电话，但打不通。\n考查动词短语。go through经历；get through打通电话；pass through经历；put through完成。根据“I tried calling you but couldn’t”可知是打不通对方的电话，所以询问对方的电话是不是坏了。故选B。"
     },
     {
-      "id": "2024-anhui-anhui-section-9-section-9-group-1-22",
+      "id": "2024-anhui-anhui-section-9-section-9-group-1-23",
       "number": 23,
       "displayNumber": "23",
       "sectionId": "section-9",
@@ -3473,7 +3697,7 @@
       "analysis": "【详解】句意：——自从吉姆来到中国，他交了很多朋友。——这对他来说很容易，因为他很外向。\n考查动词时态。根据“since he came to China（自从他来中国后）”可知此句用现在完成时（have/has done）。since表示“自从”，引导时间状语从句，主句用现在完成时，从句用一般过去时。故选C。"
     },
     {
-      "id": "2024-anhui-anhui-section-9-section-9-group-1-23",
+      "id": "2024-anhui-anhui-section-9-section-9-group-1-24",
       "number": 24,
       "displayNumber": "24",
       "sectionId": "section-9",
@@ -3495,7 +3719,7 @@
       "analysis": "【详解】句意：由于局势危险，美国军方采取行动将美国政府人员撤出苏丹。\n考查动词辨析。conducted指挥、实施；made制作；fought战斗；took拿。根据“The United States military…an operation to pull US government personnel out of Sudan”可推知，此处应指美国军方应是采取行动，空处填conducted符合语境。故选A。"
     },
     {
-      "id": "2024-anhui-anhui-section-9-section-9-group-1-24",
+      "id": "2024-anhui-anhui-section-9-section-9-group-1-25",
       "number": 25,
       "displayNumber": "25",
       "sectionId": "section-9",
@@ -3517,7 +3741,7 @@
       "analysis": "【详解】句意：——你的意思是我可以在一天内轻松游览这两个地方吗？——你看，江汉大桥离月湖大桥不远。考查代词辨析。all（三者或三者以上）都；either（两者中）任一个；both（两者）都；neither（两者）都不。根据“the Jianghan Bridge is not far from the Yuehu Bridge.”可知因为这两座桥相距不远，因此一天内可以同时游览这两个地方。故选C。"
     },
     {
-      "id": "2024-anhui-anhui-section-9-section-9-group-1-25",
+      "id": "2024-anhui-anhui-section-9-section-9-group-1-26",
       "number": 26,
       "displayNumber": "26",
       "sectionId": "section-9",
@@ -3539,7 +3763,7 @@
       "analysis": "【详解】句意：——你弟弟汤姆在家吗？——我想是的。刚才我听到隔壁房间有人在大声唱歌。\n考查一般过去时。根据时间状语“just now”可知此句时态为一般过去时，故选B。"
     },
     {
-      "id": "2024-anhui-anhui-section-9-section-9-group-1-26",
+      "id": "2024-anhui-anhui-section-9-section-9-group-1-27",
       "number": 27,
       "displayNumber": "27",
       "sectionId": "section-9",
@@ -3561,7 +3785,7 @@
       "analysis": "【详解】句意：没有你的帮助我不会熬过去。\n考查介词。from来自；off远离；under在……下面；without没有。根据“I’d never have got through it...your help.”可知，此处表达没有你的帮助我不会熬过去，表否定。故选D。"
     },
     {
-      "id": "2024-anhui-anhui-section-9-section-9-group-1-27",
+      "id": "2024-anhui-anhui-section-9-section-9-group-1-28",
       "number": 28,
       "displayNumber": "28",
       "sectionId": "section-9",
@@ -3583,7 +3807,7 @@
       "analysis": "【详解】句意：——班主任在课堂上大声喊叫。她想知道是谁造成了这次事故。——难怪每个人都紧张地等待对方先说话时，会有一种令人不安的沉默。考查形容词词义辨析。ugly丑陋的；uneasy不安的；upset不高兴的；unpleasant不愉快的。根据上文和句中的“nervously”可知，此处表示不安的沉默。故选B。"
     },
     {
-      "id": "2024-anhui-anhui-section-9-section-9-group-1-28",
+      "id": "2024-anhui-anhui-section-9-section-9-group-1-29",
       "number": 29,
       "displayNumber": "29",
       "sectionId": "section-9",
@@ -3605,7 +3829,7 @@
       "analysis": "【详解】句意：——你知道上次发生什么了吗？——对不起，我不知道什么让他生气。\n考查宾语从句。分析选项可知，选项C语序错误，其陈述语序为“what was the matter with him”，排除；A选项中that引导的从句缺少主语，所以不能用that引导，排除；根据“last time”可知，问句中已经提到了时间，所以答语不能用when引导宾语从句，排除。故选B。"
     },
     {
-      "id": "2024-anhui-anhui-section-9-section-9-group-1-29",
+      "id": "2024-anhui-anhui-section-9-section-9-group-1-30",
       "number": 30,
       "displayNumber": "30",
       "sectionId": "section-9",
@@ -3615,10 +3839,7 @@
         "A. Not really",
         "B. I hope not",
         "C. It’s nothing",
-        "D. Very much Ⅵ. 完形填空（共20小题：每小题1分，满分20分） 阅读下列短文，从每小题所给的",
-        "A. ",
-        "B. ",
-        "C. D四个选项中选出可以填入空白处的最佳选项。 A Cheng Lijin is from Guangxi. In the past, she spent her summer and winter vacations teaching in some poor countries in Africa. Cheng had the idea of being a volunteer     31     after she watched a movie called Desert Flower. She showed a great     32     in Africa. She wanted to see what Africa looked like with her own eyes. In December 2016, Cheng     33     Africa. She taught English, science and art at a primary school. Life was     34     there. She couldn’t even take a shower.     35     she didn’t leave. She knew she could help her students learn and bring hope to them. In March 2017, Cheng     36     an African orphanage (孤儿院). She found the children there didn’t have enough school things. Then she decided to     37     money to help them. Within three days, Cheng successfully got more than 20,000 yuan. She used the money to buy school things for the children. She felt very     38     when she saw the look of joy on the children’s faces. Cheng’s story     39     the hearts of many people. Now she is studying in the UK and plans to go back to her hometown and become a teacher there. She is     40     a girl with a loving heart."
+        "D. Very much"
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -3630,7 +3851,7 @@
       "analysis": "【详解】句意：——你知道我的意思吗，莉莉？——不见得。我的注意力被吸引到了云端。\n考查情景交际。Not really不尽然，不见得；I hope not我希望不；It’s nothing没什么；Very much非常。根据“My attention was taken up to the clouds.”可知注意力不在此，不见得明白对方的意思。故选A。\nⅥ. 完形填空（共20小题：每小题1分，满分20分）\n阅读下列短文，从每小题所给的A、B、C、D四个选项中选出可以填入空白处的最佳选项。\nA\nCheng Lijin is from Guangxi. In the past, she spent her summer and winter vacations teaching in some poor countries in Africa.\nCheng had the idea of being a volunteer     31     after she watched a movie called Desert Flower. She showed a great     32     in Africa. She wanted to see what Africa looked like with her own eyes.\nIn December 2016, Cheng     33     Africa. She taught English, science and art at a primary school. Life was     34     there. She couldn’t even take a shower.     35     she didn’t leave. She knew she could help her students learn and bring hope to them.\nIn March 2017, Cheng     36     an African orphanage (孤儿院). She found the children there didn’t have enough school things. Then she decided to     37     money to help them. Within three days, Cheng successfully got more than 20,000 yuan. She used the money to buy school things for the children. She felt very     38     when she saw the look of joy on the children’s faces.\nCheng’s story     39     the hearts of many people. Now she is studying in the UK and plans to go back to her hometown and become a teacher there. She is     40     a girl with a loving heart."
     },
     {
-      "id": "2024-anhui-anhui-section-10-section-10-group-1-30",
+      "id": "2024-anhui-anhui-section-10-section-10-group-1-31",
       "number": 31,
       "displayNumber": "31",
       "sectionId": "section-10",
@@ -3652,7 +3873,7 @@
       "analysis": "31．C    32．D    33．B    34．D    35．B    36．D    37．A    38．C    39．C    40．A\n【导语】本文是一篇记叙文。文章主要讲述程丽金在看了一部名为《沙漠之花》的电影后，她就有了要去非洲当一名志愿者老师的想法，以及她在非洲当志愿者老师的一些经历。"
     },
     {
-      "id": "2024-anhui-anhui-section-10-section-10-group-1-31",
+      "id": "2024-anhui-anhui-section-10-section-10-group-1-32",
       "number": 32,
       "displayNumber": "32",
       "sectionId": "section-10",
@@ -3674,7 +3895,7 @@
       "analysis": "31．C    32．D    33．B    34．D    35．B    36．D    37．A    38．C    39．C    40．A\n【导语】本文是一篇记叙文。文章主要讲述程丽金在看了一部名为《沙漠之花》的电影后，她就有了要去非洲当一名志愿者老师的想法，以及她在非洲当志愿者老师的一些经历。"
     },
     {
-      "id": "2024-anhui-anhui-section-10-section-10-group-1-32",
+      "id": "2024-anhui-anhui-section-10-section-10-group-1-33",
       "number": 33,
       "displayNumber": "33",
       "sectionId": "section-10",
@@ -3696,7 +3917,7 @@
       "analysis": "31．C    32．D    33．B    34．D    35．B    36．D    37．A    38．C    39．C    40．A\n【导语】本文是一篇记叙文。文章主要讲述程丽金在看了一部名为《沙漠之花》的电影后，她就有了要去非洲当一名志愿者老师的想法，以及她在非洲当志愿者老师的一些经历。"
     },
     {
-      "id": "2024-anhui-anhui-section-10-section-10-group-1-33",
+      "id": "2024-anhui-anhui-section-10-section-10-group-1-34",
       "number": 34,
       "displayNumber": "34",
       "sectionId": "section-10",
@@ -3718,7 +3939,7 @@
       "analysis": "31．C    32．D    33．B    34．D    35．B    36．D    37．A    38．C    39．C    40．A\n【导语】本文是一篇记叙文。文章主要讲述程丽金在看了一部名为《沙漠之花》的电影后，她就有了要去非洲当一名志愿者老师的想法，以及她在非洲当志愿者老师的一些经历。"
     },
     {
-      "id": "2024-anhui-anhui-section-10-section-10-group-1-34",
+      "id": "2024-anhui-anhui-section-10-section-10-group-1-35",
       "number": 35,
       "displayNumber": "35",
       "sectionId": "section-10",
@@ -3740,7 +3961,7 @@
       "analysis": "31．C    32．D    33．B    34．D    35．B    36．D    37．A    38．C    39．C    40．A\n【导语】本文是一篇记叙文。文章主要讲述程丽金在看了一部名为《沙漠之花》的电影后，她就有了要去非洲当一名志愿者老师的想法，以及她在非洲当志愿者老师的一些经历。"
     },
     {
-      "id": "2024-anhui-anhui-section-10-section-10-group-1-35",
+      "id": "2024-anhui-anhui-section-10-section-10-group-1-36",
       "number": 36,
       "displayNumber": "36",
       "sectionId": "section-10",
@@ -3762,7 +3983,7 @@
       "analysis": "31．C    32．D    33．B    34．D    35．B    36．D    37．A    38．C    39．C    40．A\n【导语】本文是一篇记叙文。文章主要讲述程丽金在看了一部名为《沙漠之花》的电影后，她就有了要去非洲当一名志愿者老师的想法，以及她在非洲当志愿者老师的一些经历。"
     },
     {
-      "id": "2024-anhui-anhui-section-10-section-10-group-1-36",
+      "id": "2024-anhui-anhui-section-10-section-10-group-1-37",
       "number": 37,
       "displayNumber": "37",
       "sectionId": "section-10",
@@ -3784,7 +4005,7 @@
       "analysis": "31．C    32．D    33．B    34．D    35．B    36．D    37．A    38．C    39．C    40．A\n【导语】本文是一篇记叙文。文章主要讲述程丽金在看了一部名为《沙漠之花》的电影后，她就有了要去非洲当一名志愿者老师的想法，以及她在非洲当志愿者老师的一些经历。"
     },
     {
-      "id": "2024-anhui-anhui-section-10-section-10-group-1-37",
+      "id": "2024-anhui-anhui-section-10-section-10-group-1-38",
       "number": 38,
       "displayNumber": "38",
       "sectionId": "section-10",
@@ -3806,7 +4027,7 @@
       "analysis": "31．C    32．D    33．B    34．D    35．B    36．D    37．A    38．C    39．C    40．A\n【导语】本文是一篇记叙文。文章主要讲述程丽金在看了一部名为《沙漠之花》的电影后，她就有了要去非洲当一名志愿者老师的想法，以及她在非洲当志愿者老师的一些经历。"
     },
     {
-      "id": "2024-anhui-anhui-section-10-section-10-group-1-38",
+      "id": "2024-anhui-anhui-section-10-section-10-group-1-39",
       "number": 39,
       "displayNumber": "39",
       "sectionId": "section-10",
@@ -3828,7 +4049,7 @@
       "analysis": "31．C    32．D    33．B    34．D    35．B    36．D    37．A    38．C    39．C    40．A\n【导语】本文是一篇记叙文。文章主要讲述程丽金在看了一部名为《沙漠之花》的电影后，她就有了要去非洲当一名志愿者老师的想法，以及她在非洲当志愿者老师的一些经历。"
     },
     {
-      "id": "2024-anhui-anhui-section-10-section-10-group-1-39",
+      "id": "2024-anhui-anhui-section-10-section-10-group-1-40",
       "number": 40,
       "displayNumber": "40",
       "sectionId": "section-10",
@@ -3853,7 +4074,7 @@
       "analysis": "31．C    32．D    33．B    34．D    35．B    36．D    37．A    38．C    39．C    40．A\n【导语】本文是一篇记叙文。文章主要讲述程丽金在看了一部名为《沙漠之花》的电影后，她就有了要去非洲当一名志愿者老师的想法，以及她在非洲当志愿者老师的一些经历。"
     },
     {
-      "id": "2024-anhui-anhui-section-10-section-10-group-1-40",
+      "id": "2024-anhui-anhui-section-10-section-10-group-1-41",
       "number": 41,
       "displayNumber": "41",
       "sectionId": "section-10",
@@ -3875,7 +4096,7 @@
       "analysis": "41．C    42．B    43．A    44．C    45．D    46．A    47．C    48．A    49．B    50．D\n【导语】本文是一篇说明文。文章介绍了肾脏对于人类非常重要，肾移植一般是治疗肾病患者的常用做法，但是现状是可供移植的肾脏不能满足需求，为了解决这一问题，科学家们试着将猪的肾脏移植到人类身上，并取得了比预期要好的结果。"
     },
     {
-      "id": "2024-anhui-anhui-section-10-section-10-group-1-41",
+      "id": "2024-anhui-anhui-section-10-section-10-group-1-42",
       "number": 42,
       "displayNumber": "42",
       "sectionId": "section-10",
@@ -3897,7 +4118,7 @@
       "analysis": "41．C    42．B    43．A    44．C    45．D    46．A    47．C    48．A    49．B    50．D\n【导语】本文是一篇说明文。文章介绍了肾脏对于人类非常重要，肾移植一般是治疗肾病患者的常用做法，但是现状是可供移植的肾脏不能满足需求，为了解决这一问题，科学家们试着将猪的肾脏移植到人类身上，并取得了比预期要好的结果。"
     },
     {
-      "id": "2024-anhui-anhui-section-10-section-10-group-1-42",
+      "id": "2024-anhui-anhui-section-10-section-10-group-1-43",
       "number": 43,
       "displayNumber": "43",
       "sectionId": "section-10",
@@ -3919,7 +4140,7 @@
       "analysis": "41．C    42．B    43．A    44．C    45．D    46．A    47．C    48．A    49．B    50．D\n【导语】本文是一篇说明文。文章介绍了肾脏对于人类非常重要，肾移植一般是治疗肾病患者的常用做法，但是现状是可供移植的肾脏不能满足需求，为了解决这一问题，科学家们试着将猪的肾脏移植到人类身上，并取得了比预期要好的结果。"
     },
     {
-      "id": "2024-anhui-anhui-section-10-section-10-group-1-43",
+      "id": "2024-anhui-anhui-section-10-section-10-group-1-44",
       "number": 44,
       "displayNumber": "44",
       "sectionId": "section-10",
@@ -3941,7 +4162,7 @@
       "analysis": "41．C    42．B    43．A    44．C    45．D    46．A    47．C    48．A    49．B    50．D\n【导语】本文是一篇说明文。文章介绍了肾脏对于人类非常重要，肾移植一般是治疗肾病患者的常用做法，但是现状是可供移植的肾脏不能满足需求，为了解决这一问题，科学家们试着将猪的肾脏移植到人类身上，并取得了比预期要好的结果。"
     },
     {
-      "id": "2024-anhui-anhui-section-10-section-10-group-1-44",
+      "id": "2024-anhui-anhui-section-10-section-10-group-1-45",
       "number": 45,
       "displayNumber": "45",
       "sectionId": "section-10",
@@ -3963,7 +4184,7 @@
       "analysis": "41．C    42．B    43．A    44．C    45．D    46．A    47．C    48．A    49．B    50．D\n【导语】本文是一篇说明文。文章介绍了肾脏对于人类非常重要，肾移植一般是治疗肾病患者的常用做法，但是现状是可供移植的肾脏不能满足需求，为了解决这一问题，科学家们试着将猪的肾脏移植到人类身上，并取得了比预期要好的结果。"
     },
     {
-      "id": "2024-anhui-anhui-section-10-section-10-group-1-45",
+      "id": "2024-anhui-anhui-section-10-section-10-group-1-46",
       "number": 46,
       "displayNumber": "46",
       "sectionId": "section-10",
@@ -3985,7 +4206,7 @@
       "analysis": "41．C    42．B    43．A    44．C    45．D    46．A    47．C    48．A    49．B    50．D\n【导语】本文是一篇说明文。文章介绍了肾脏对于人类非常重要，肾移植一般是治疗肾病患者的常用做法，但是现状是可供移植的肾脏不能满足需求，为了解决这一问题，科学家们试着将猪的肾脏移植到人类身上，并取得了比预期要好的结果。"
     },
     {
-      "id": "2024-anhui-anhui-section-10-section-10-group-1-46",
+      "id": "2024-anhui-anhui-section-10-section-10-group-1-47",
       "number": 47,
       "displayNumber": "47",
       "sectionId": "section-10",
@@ -4007,7 +4228,7 @@
       "analysis": "41．C    42．B    43．A    44．C    45．D    46．A    47．C    48．A    49．B    50．D\n【导语】本文是一篇说明文。文章介绍了肾脏对于人类非常重要，肾移植一般是治疗肾病患者的常用做法，但是现状是可供移植的肾脏不能满足需求，为了解决这一问题，科学家们试着将猪的肾脏移植到人类身上，并取得了比预期要好的结果。"
     },
     {
-      "id": "2024-anhui-anhui-section-10-section-10-group-1-47",
+      "id": "2024-anhui-anhui-section-10-section-10-group-1-48",
       "number": 48,
       "displayNumber": "48",
       "sectionId": "section-10",
@@ -4029,7 +4250,7 @@
       "analysis": "41．C    42．B    43．A    44．C    45．D    46．A    47．C    48．A    49．B    50．D\n【导语】本文是一篇说明文。文章介绍了肾脏对于人类非常重要，肾移植一般是治疗肾病患者的常用做法，但是现状是可供移植的肾脏不能满足需求，为了解决这一问题，科学家们试着将猪的肾脏移植到人类身上，并取得了比预期要好的结果。"
     },
     {
-      "id": "2024-anhui-anhui-section-10-section-10-group-1-48",
+      "id": "2024-anhui-anhui-section-10-section-10-group-1-49",
       "number": 49,
       "displayNumber": "49",
       "sectionId": "section-10",
@@ -4051,7 +4272,7 @@
       "analysis": "41．C    42．B    43．A    44．C    45．D    46．A    47．C    48．A    49．B    50．D\n【导语】本文是一篇说明文。文章介绍了肾脏对于人类非常重要，肾移植一般是治疗肾病患者的常用做法，但是现状是可供移植的肾脏不能满足需求，为了解决这一问题，科学家们试着将猪的肾脏移植到人类身上，并取得了比预期要好的结果。"
     },
     {
-      "id": "2024-anhui-anhui-section-10-section-10-group-1-49",
+      "id": "2024-anhui-anhui-section-10-section-10-group-1-50",
       "number": 50,
       "displayNumber": "50",
       "sectionId": "section-10",
@@ -4061,14 +4282,7 @@
         "A. is leading",
         "B. led",
         "C. was leading",
-        "D. was led Ⅶ. 补全对话（共5小题；每小题1分，满分5分） 根据对话内容，从文后的选项中选出能填入空白处的最佳选项，其中有两个为多余选项。 A: Excuse me, madam.    51 B: Sure, sir. A:    52 B: My name is Alice Smith. A: What were you doing when the accident happened, Ms. Smith? B:    53 A: Did you see what happened? B: Yes, a woman was going across the street, but the car drove too fast and knocked her down. A: Did you see the traffic lights?    54 B: I didn’t notice that.    55 A: OK. Thank you, Ms. Smith. B: Not at all.",
-        "A. I was walking in the street with my friend, Tony.",
-        "B. I was hurrying to help the woman.",
-        "C. Was the woman hurt seriously?",
-        "D. May I ask you some questions? E．Do you know where the woman lives? F．Were they red or green at that time? G．May I know your name? 第三部分  阅读（共两节，满分40分） Ⅷ．阅读理解（共20小题；每小题2分，满分40分） 第一节 阅读下列短文，从每小题所给的",
-        "A. ",
-        "B. ",
-        "C. D四个选项中选出最佳选项。 A Welcome to City Center Hotel! We will give you the best service to make you feel at home. Room service You can use the service 24 hours a day. If you want to ask for some service, call the Information Desk, and we will pass on your message to the room waiter. Dining Room Breakfast: from 8:00 to 9:30. Lunch: from 12:00 to 14:00. Dinner: from 18:00 to 20:30. Also, the room waiter may bring breakfast to your room at any time after 7:00. If you need it, please fill in a card and hang it outside of your door before 6:00. Other Service Shop: The hotel shop is open from 8:30 to 17:30. Coffee House: Open hours:12:00—16:00, 20:00—23:30. Cinema: Films begin at 19:00 every night. Hot water is offered 24 hours. There is also a big swimming pool in the hotel for free. You can enjoy yourself at any time. We are always ready to help you."
+        "D. was led"
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -4080,7 +4294,96 @@
       "analysis": "41．C    42．B    43．A    44．C    45．D    46．A    47．C    48．A    49．B    50．D\n【导语】本文是一篇说明文。文章介绍了肾脏对于人类非常重要，肾移植一般是治疗肾病患者的常用做法，但是现状是可供移植的肾脏不能满足需求，为了解决这一问题，科学家们试着将猪的肾脏移植到人类身上，并取得了比预期要好的结果。"
     },
     {
-      "id": "2024-anhui-anhui-section-13-section-13-group-1-50",
+      "id": "2024-anhui-anhui-section-11-section-11-group-1-51",
+      "number": 51,
+      "displayNumber": "51",
+      "sectionId": "section-11",
+      "groupId": "section-11-group-1",
+      "prompt": "A: Excuse me, madam. ______",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-120"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "D",
+      "analysis": "【导语】本文是一则对话，A问了史密斯女士一些关于车祸的问题。"
+    },
+    {
+      "id": "2024-anhui-anhui-section-11-section-11-group-1-52",
+      "number": 52,
+      "displayNumber": "52",
+      "sectionId": "section-11",
+      "groupId": "section-11-group-1",
+      "prompt": "A: ______",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-122"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "G",
+      "analysis": "【导语】本文是一则对话，A问了史密斯女士一些关于车祸的问题。"
+    },
+    {
+      "id": "2024-anhui-anhui-section-11-section-11-group-1-53",
+      "number": 53,
+      "displayNumber": "53",
+      "sectionId": "section-11",
+      "groupId": "section-11-group-1",
+      "prompt": "B: ______",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-125"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "A",
+      "analysis": "【导语】本文是一则对话，A问了史密斯女士一些关于车祸的问题。"
+    },
+    {
+      "id": "2024-anhui-anhui-section-11-section-11-group-1-54",
+      "number": 54,
+      "displayNumber": "54",
+      "sectionId": "section-11",
+      "groupId": "section-11-group-1",
+      "prompt": "A: Did you see the traffic lights? ______",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-128"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "F",
+      "analysis": "【导语】本文是一则对话，A问了史密斯女士一些关于车祸的问题。"
+    },
+    {
+      "id": "2024-anhui-anhui-section-11-section-11-group-1-55",
+      "number": 55,
+      "displayNumber": "55",
+      "sectionId": "section-11",
+      "groupId": "section-11-group-1",
+      "prompt": "B: I didn’t notice that. ______",
+      "options": [
+        "A. ",
+        "B. ",
+        "C. D四个选项中选出最佳选项。"
+      ],
+      "inputKind": "choice",
+      "sourceBlockIds": [
+        "paragraph-129"
+      ],
+      "type": "choice",
+      "context": "",
+      "answer": "B",
+      "analysis": "【导语】本文是一则对话，A问了史密斯女士一些关于车祸的问题。"
+    },
+    {
+      "id": "2024-anhui-anhui-section-13-section-13-group-1-56",
       "number": 56,
       "displayNumber": "56",
       "sectionId": "section-13",
@@ -4102,29 +4405,12 @@
       "analysis": "【导语】本文是一家酒店的广告信息，主要介绍了酒店提供的服务信息。"
     },
     {
-      "id": "2024-anhui-anhui-section-13-section-13-group-1-51",
+      "id": "2024-anhui-anhui-section-13-section-13-group-1-57",
       "number": 57,
       "displayNumber": "57",
       "sectionId": "section-13",
       "groupId": "section-13-group-1",
-      "prompt": "We can ________ at",
-      "options": [],
-      "inputKind": "blank",
-      "sourceBlockIds": [
-        "paragraph-145"
-      ],
-      "type": "blank",
-      "context": "",
-      "answer": "B",
-      "analysis": "【导语】本文是一家酒店的广告信息，主要介绍了酒店提供的服务信息。"
-    },
-    {
-      "id": "2024-anhui-anhui-section-13-section-13-group-1-52",
-      "number": 11,
-      "displayNumber": "11",
-      "sectionId": "section-13",
-      "groupId": "section-13-group-1",
-      "prompt": "00 a.m. in City Center Hotel.",
+      "prompt": "We can ________ at 11:00 a.m. in City Center Hotel.",
       "options": [
         "A. eat breakfast",
         "B. go shopping",
@@ -4137,11 +4423,11 @@
       ],
       "type": "choice",
       "context": "",
-      "answer": "She has difficulty in hearing",
-      "analysis": "She has difficulty in hearing.\nTo keep them feel more comfortable at work."
+      "answer": "B",
+      "analysis": "【导语】本文是一家酒店的广告信息，主要介绍了酒店提供的服务信息。"
     },
     {
-      "id": "2024-anhui-anhui-section-13-section-13-group-1-53",
+      "id": "2024-anhui-anhui-section-13-section-13-group-1-58",
       "number": 58,
       "displayNumber": "58",
       "sectionId": "section-13",
@@ -4163,7 +4449,7 @@
       "analysis": "【导语】本文是一家酒店的广告信息，主要介绍了酒店提供的服务信息。"
     },
     {
-      "id": "2024-anhui-anhui-section-13-section-13-group-1-54",
+      "id": "2024-anhui-anhui-section-13-section-13-group-1-59",
       "number": 59,
       "displayNumber": "59",
       "sectionId": "section-13",
@@ -4185,7 +4471,7 @@
       "analysis": "【导语】本文是对孔子的介绍。介绍了他的生平，他的成长历程，他对教育的贡献等。"
     },
     {
-      "id": "2024-anhui-anhui-section-13-section-13-group-1-55",
+      "id": "2024-anhui-anhui-section-13-section-13-group-1-60",
       "number": 60,
       "displayNumber": "60",
       "sectionId": "section-13",
@@ -4207,7 +4493,7 @@
       "analysis": "【导语】本文是对孔子的介绍。介绍了他的生平，他的成长历程，他对教育的贡献等。"
     },
     {
-      "id": "2024-anhui-anhui-section-13-section-13-group-1-56",
+      "id": "2024-anhui-anhui-section-13-section-13-group-1-61",
       "number": 61,
       "displayNumber": "61",
       "sectionId": "section-13",
@@ -4229,7 +4515,7 @@
       "analysis": "【导语】本文是对孔子的介绍。介绍了他的生平，他的成长历程，他对教育的贡献等。"
     },
     {
-      "id": "2024-anhui-anhui-section-13-section-13-group-1-57",
+      "id": "2024-anhui-anhui-section-13-section-13-group-1-62",
       "number": 62,
       "displayNumber": "62",
       "sectionId": "section-13",
@@ -4251,7 +4537,7 @@
       "analysis": "【导语】本文是对孔子的介绍。介绍了他的生平，他的成长历程，他对教育的贡献等。"
     },
     {
-      "id": "2024-anhui-anhui-section-13-section-13-group-1-58",
+      "id": "2024-anhui-anhui-section-13-section-13-group-1-63",
       "number": 63,
       "displayNumber": "63",
       "sectionId": "section-13",
@@ -4273,7 +4559,7 @@
       "analysis": "【导语】本文主要讲述了Mike非常想念他去世的祖母，一天下午碰巧在公园里遇到了一位几周前失去孙子的老太太，他们彼此善待对方并且使自己开心起来的故事，告诉我们：善待他人，别人也会善待你。"
     },
     {
-      "id": "2024-anhui-anhui-section-13-section-13-group-1-59",
+      "id": "2024-anhui-anhui-section-13-section-13-group-1-64",
       "number": 64,
       "displayNumber": "64",
       "sectionId": "section-13",
@@ -4295,7 +4581,7 @@
       "analysis": "【导语】本文主要讲述了Mike非常想念他去世的祖母，一天下午碰巧在公园里遇到了一位几周前失去孙子的老太太，他们彼此善待对方并且使自己开心起来的故事，告诉我们：善待他人，别人也会善待你。"
     },
     {
-      "id": "2024-anhui-anhui-section-13-section-13-group-1-60",
+      "id": "2024-anhui-anhui-section-13-section-13-group-1-65",
       "number": 65,
       "displayNumber": "65",
       "sectionId": "section-13",
@@ -4317,7 +4603,7 @@
       "analysis": "【导语】本文主要讲述了Mike非常想念他去世的祖母，一天下午碰巧在公园里遇到了一位几周前失去孙子的老太太，他们彼此善待对方并且使自己开心起来的故事，告诉我们：善待他人，别人也会善待你。"
     },
     {
-      "id": "2024-anhui-anhui-section-13-section-13-group-1-61",
+      "id": "2024-anhui-anhui-section-13-section-13-group-1-66",
       "number": 66,
       "displayNumber": "66",
       "sectionId": "section-13",
@@ -4339,7 +4625,7 @@
       "analysis": "【导语】本文主要讲述了一些关于狼的表达和习语。"
     },
     {
-      "id": "2024-anhui-anhui-section-13-section-13-group-1-62",
+      "id": "2024-anhui-anhui-section-13-section-13-group-1-67",
       "number": 67,
       "displayNumber": "67",
       "sectionId": "section-13",
@@ -4361,7 +4647,7 @@
       "analysis": "【导语】本文主要讲述了一些关于狼的表达和习语。"
     },
     {
-      "id": "2024-anhui-anhui-section-13-section-13-group-1-63",
+      "id": "2024-anhui-anhui-section-13-section-13-group-1-68",
       "number": 68,
       "displayNumber": "68",
       "sectionId": "section-13",
@@ -4383,7 +4669,7 @@
       "analysis": "【导语】本文主要讲述了一些关于狼的表达和习语。"
     },
     {
-      "id": "2024-anhui-anhui-section-13-section-13-group-1-64",
+      "id": "2024-anhui-anhui-section-13-section-13-group-1-69",
       "number": 69,
       "displayNumber": "69",
       "sectionId": "section-13",
@@ -4405,7 +4691,7 @@
       "analysis": "【导语】本文主要讲述了一些关于狼的表达和习语。"
     },
     {
-      "id": "2024-anhui-anhui-section-13-section-13-group-1-65",
+      "id": "2024-anhui-anhui-section-13-section-13-group-1-70",
       "number": 70,
       "displayNumber": "70",
       "sectionId": "section-13",
@@ -4427,7 +4713,7 @@
       "analysis": "【导语】本文介绍了孩子们上学的目的以及学校应该教会孩子们如何学习。"
     },
     {
-      "id": "2024-anhui-anhui-section-13-section-13-group-1-66",
+      "id": "2024-anhui-anhui-section-13-section-13-group-1-71",
       "number": 71,
       "displayNumber": "71",
       "sectionId": "section-13",
@@ -4449,7 +4735,7 @@
       "analysis": "【导语】本文介绍了孩子们上学的目的以及学校应该教会孩子们如何学习。"
     },
     {
-      "id": "2024-anhui-anhui-section-13-section-13-group-1-67",
+      "id": "2024-anhui-anhui-section-13-section-13-group-1-72",
       "number": 72,
       "displayNumber": "72",
       "sectionId": "section-13",
@@ -4459,7 +4745,7 @@
         "A. children must go to school",
         "B. the subjects at school are useful",
         "C. parents should send their children to school",
-        "D. children should be taught how to learn F 阅读下面短文，并用英语回答问题（请注意每小题的词数要求）。 A new coffee shop on Shanghai’s Yongkang Road has no seats or tables, and its shopfront is just a wall with a hole. Through the hole , a furry bear paw hands out coffee. People simply scan a QR code (扫二维码) to place their orders. Each cup of coffee is 20 yuan. The coffee shop’s name is Hinichijou. It fully opened on December 3, the International Day of Persons with Disabilities, and soon got popular. That’s not only because it’s so different, but also because it provides jobs for disabled people. Wang Haiqing, one founder (创办者) of the shop, said most of the workers in Hinichijou are disabled people. The shop manager Chen Yingying has difficulty in hearing. She has won several prizes at coffee-making competitions. The person handing out coffee with a bear paw suffered facial burns (遭受面部烧伤). Both of them got training from Shanghai Disabled Persons’ Federation. Why does the coffee shop place its workers behind a wall? Wang said it just wants to help them feel more comfortable at work. The wait for a coffee may take up to an hour, but many people still go to the coffee shop. Li Mengqian went to the coffee shop after reading about it online. “I know it is difficult for disabled people to find a job. It is great to have such a shop,” she said. “We should show our love for them. As long as everyone gives a love, the world will become a beautiful home.” Wang said he and the other founders plan to open more shops to help disabled people."
+        "D. children should be taught how to learn F"
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -4471,7 +4757,7 @@
       "analysis": "【导语】本文介绍了孩子们上学的目的以及学校应该教会孩子们如何学习。"
     },
     {
-      "id": "2024-anhui-anhui-section-14-section-14-group-1-68",
+      "id": "2024-anhui-anhui-section-14-section-14-group-1-73",
       "number": 73,
       "displayNumber": "73",
       "sectionId": "section-14",
@@ -4484,11 +4770,11 @@
       ],
       "type": "text",
       "context": "",
-      "answer": "(s)tones",
-      "analysis": "【详解】句意：一些孩子们正开心地往河里扔石头。根据汉语提示可知，此处填“stone石头”，stone为可数名词，根据提示语可知，此处没有冠词，因此需用复数stones。故填stones。"
+      "answer": "She has difficulty in hearing",
+      "analysis": "She has difficulty in hearing.\nTo keep them feel more comfortable at work."
     },
     {
-      "id": "2024-anhui-anhui-section-14-section-14-group-1-69",
+      "id": "2024-anhui-anhui-section-14-section-14-group-1-74",
       "number": 74,
       "displayNumber": "74",
       "sectionId": "section-14",
@@ -4501,11 +4787,28 @@
       ],
       "type": "text",
       "context": "",
+      "answer": "(s)tones",
+      "analysis": "【详解】句意：一些孩子们正开心地往河里扔石头。根据汉语提示可知，此处填“stone石头”，stone为可数名词，根据提示语可知，此处没有冠词，因此需用复数stones。故填stones。"
+    },
+    {
+      "id": "2024-anhui-anhui-section-14-section-14-group-1-75",
+      "number": 75,
+      "displayNumber": "75",
+      "sectionId": "section-14",
+      "groupId": "section-14-group-1",
+      "prompt": "Why do people still go to the shop though they may have to wait for a coffee for an hour? (不超过10个单词)",
+      "options": [],
+      "inputKind": "text",
+      "sourceBlockIds": [
+        "paragraph-232"
+      ],
+      "type": "text",
+      "context": "",
       "answer": "(h)eroes",
       "analysis": "【详解】句意：一些消防员在可怕的大火中丧生。他们是我们心中的英雄。根据中文提示可知，hero表示“英雄”，根据“They are”可知，此空应填名词复数形式heroes，故填heroes。"
     },
     {
-      "id": "2024-anhui-anhui-section-16-section-16-group-1-70",
+      "id": "2024-anhui-anhui-section-16-section-16-group-1-76",
       "number": 76,
       "displayNumber": "76",
       "sectionId": "section-16",
@@ -4522,7 +4825,7 @@
       "analysis": "【详解】句意：如果你想保持健康，你应该每天至少锻炼30分钟。短语at least意为“至少”，为固定短语。故填(l)east。"
     },
     {
-      "id": "2024-anhui-anhui-section-16-section-16-group-1-71",
+      "id": "2024-anhui-anhui-section-16-section-16-group-1-77",
       "number": 77,
       "displayNumber": "77",
       "sectionId": "section-16",
@@ -4539,7 +4842,7 @@
       "analysis": "【详解】句意：每天早上给我弟弟穿衣服是我的责任。“穿衣服”dress，动词，dress sb.“给某人穿衣服”。“It’s one’s duty to do sth.”意为“做某事是某人的责任”。故填(d)ress。"
     },
     {
-      "id": "2024-anhui-anhui-section-16-section-16-group-1-72",
+      "id": "2024-anhui-anhui-section-16-section-16-group-1-78",
       "number": 78,
       "displayNumber": "78",
       "sectionId": "section-16",
@@ -4556,7 +4859,7 @@
       "analysis": "【详解】句意：当看到老虎时，他们跳回车里把车开走了。分析题干可知，此处缺动词作谓语，“跳跃”的英文表达为“jump”，为动词。并列连词and连接两个具有平行关系的成分，又由“drove off”可推测，该句时态为一般过去时，应用jump的过去式。故填(j)umped。\nⅩ．书面表达（共1小题；满分20分）\n假如你是李华，你们班将组织研学旅行，你打算邀请外教Mr. Brown 参加。请你根据以下提示用英文给他写一封电子邮件。\n提示："
     },
     {
-      "id": "2024-anhui-anhui-section-16-section-16-group-1-73",
+      "id": "2024-anhui-anhui-section-16-section-16-group-1-79",
       "number": 79,
       "displayNumber": "79",
       "sectionId": "section-16",
@@ -4573,86 +4876,18 @@
       "analysis": "Dear Mr. Brown,\nHow are you doing? I am writing to invite you to join our study tour. We believe that your presence will make the educational experience more meaningful to us.\nThe study tour will take place on October 10th and we are going to visit a historical place in the nearby city. We will travel by bus. And we will meet at the school gate at 8:00 that day.\nIf you’d like to join us, please let me know as soon as possible so that we can make necessary preparations. Thank you for considering our invitation. We look forward to hearing from you soon.\nYours,\nLi Hua\n【详解】[总体分析]\n①题材：本文是一篇应用文，为电子邮件；\n②时态：时态为“一般将来时”；\n③提示：写作要点已给出，要注意不要遗漏材料中的三个问题，并适当增加细节。\n[写作步骤]\n①第一步，表明写作意图。借用“班级将举办研学旅行”来引出下文中对三个问题的回答；\n②第二步，具体阐述写作内容。从“写信意图和邀请原因、时间和地点、注意事项”三方面入手，重点介绍此次研学旅行；\n③第三步，书写结语。表达对回信的期待。\n[亮点词汇]\n①take place 发生\n②would like to do sth 愿意做某事\n③as soon as possible 尽快\n④so that 以便\n⑤look forward to 期待\n[高分句型]\n①We believe that your presence will make the educational experience more meaningful to us.（that引导的宾语从句）\n②If you’d like to join us, please let me know as soon as possible so that we can make necessary preparations.（if引导的条件状语从句；so that引导的目的状语从句）"
     },
     {
-      "id": "2024-anhui-anhui-section-17-section-17-group-1-74",
-      "number": 1,
-      "displayNumber": "1",
-      "sectionId": "section-17",
-      "groupId": "section-17-group-1",
-      "prompt": "写信意图和邀请原因；",
+      "id": "2024-anhui-anhui-section-16-section-16-group-1-80",
+      "number": 80,
+      "displayNumber": "80",
+      "sectionId": "section-16",
+      "groupId": "section-16-group-1",
+      "prompt": "When seeing the tiger, they j          （跳跃）back into the car and drove off.",
       "options": [],
       "inputKind": "text",
       "sourceBlockIds": [
-        "paragraph-244"
+        "paragraph-240"
       ],
       "type": "text",
-      "context": "",
-      "answer": "",
-      "analysis": ""
-    },
-    {
-      "id": "2024-anhui-anhui-section-17-section-17-group-1-75",
-      "number": 1,
-      "displayNumber": "1",
-      "sectionId": "section-17",
-      "groupId": "section-17-group-1",
-      "prompt": "词数80～100；",
-      "options": [],
-      "inputKind": "text",
-      "sourceBlockIds": [
-        "paragraph-248"
-      ],
-      "type": "text",
-      "context": "",
-      "answer": "",
-      "analysis": ""
-    },
-    {
-      "id": "2024-anhui-anhui-section-17-section-17-group-1-76",
-      "number": 2,
-      "displayNumber": "2",
-      "sectionId": "section-17",
-      "groupId": "section-17-group-1",
-      "prompt": "可适当增加细节，以使行文连贯；",
-      "options": [],
-      "inputKind": "text",
-      "sourceBlockIds": [
-        "paragraph-249"
-      ],
-      "type": "text",
-      "context": "",
-      "answer": "",
-      "analysis": ""
-    },
-    {
-      "id": "2024-anhui-anhui-section-17-section-17-group-1-77",
-      "number": 3,
-      "displayNumber": "3",
-      "sectionId": "section-17",
-      "groupId": "section-17-group-1",
-      "prompt": "邮件中不能出现与本人相关的信息；",
-      "options": [],
-      "inputKind": "text",
-      "sourceBlockIds": [
-        "paragraph-250"
-      ],
-      "type": "text",
-      "context": "",
-      "answer": "",
-      "analysis": ""
-    },
-    {
-      "id": "2024-anhui-anhui-section-17-section-17-group-1-78",
-      "number": 4,
-      "displayNumber": "4",
-      "sectionId": "section-17",
-      "groupId": "section-17-group-1",
-      "prompt": "开头和结尾已为你写好，不计入总词数。 Dear Mr. Brown, How are you doing? ________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________ Yours, Li Hua",
-      "options": [],
-      "inputKind": "blank",
-      "sourceBlockIds": [
-        "paragraph-251"
-      ],
-      "type": "blank",
       "context": "",
       "answer": "",
       "analysis": ""

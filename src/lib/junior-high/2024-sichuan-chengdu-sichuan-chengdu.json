@@ -1422,7 +1422,15 @@
           "text": "A 卷 (共100分)"
         }
       ],
-      "questionIds": []
+      "questionIds": [],
+      "displayBlocks": [
+        {
+          "id": "image-1-1",
+          "kind": "image",
+          "src": "/junior-high/2024-sichuan-chengdu-sichuan-chengdu/image1.png",
+          "alt": "原卷图片"
+        }
+      ]
     },
     {
       "id": "section-2",
@@ -1446,7 +1454,15 @@
           "alt": "原卷图片"
         }
       ],
-      "questionIds": []
+      "questionIds": [],
+      "displayBlocks": [
+        {
+          "id": "image-6-1",
+          "kind": "image",
+          "src": "/junior-high/2024-sichuan-chengdu-sichuan-chengdu/image2.png",
+          "alt": "原卷图片"
+        }
+      ]
     },
     {
       "id": "section-3",
@@ -1515,7 +1531,8 @@
         "2024-sichuan-chengdu-sichuan-chengdu-section-3-section-3-group-1-3",
         "2024-sichuan-chengdu-sichuan-chengdu-section-3-section-3-group-1-4",
         "2024-sichuan-chengdu-sichuan-chengdu-section-3-section-3-group-1-5"
-      ]
+      ],
+      "displayBlocks": []
     },
     {
       "id": "section-4",
@@ -1639,7 +1656,8 @@
         "2024-sichuan-chengdu-sichuan-chengdu-section-4-section-4-group-1-13",
         "2024-sichuan-chengdu-sichuan-chengdu-section-4-section-4-group-1-14",
         "2024-sichuan-chengdu-sichuan-chengdu-section-4-section-4-group-1-15"
-      ]
+      ],
+      "displayBlocks": []
     },
     {
       "id": "section-5",
@@ -1728,7 +1746,8 @@
         "2024-sichuan-chengdu-sichuan-chengdu-section-5-section-5-group-1-18",
         "2024-sichuan-chengdu-sichuan-chengdu-section-5-section-5-group-1-19",
         "2024-sichuan-chengdu-sichuan-chengdu-section-5-section-5-group-1-20"
-      ]
+      ],
+      "displayBlocks": []
     },
     {
       "id": "section-6",
@@ -1766,8 +1785,30 @@
         "2024-sichuan-chengdu-sichuan-chengdu-section-6-section-6-group-1-21",
         "2024-sichuan-chengdu-sichuan-chengdu-section-6-section-6-group-1-22",
         "2024-sichuan-chengdu-sichuan-chengdu-section-6-section-6-group-1-23",
-        "2024-sichuan-chengdu-sichuan-chengdu-section-6-section-6-group-1-24",
-        "2024-sichuan-chengdu-sichuan-chengdu-section-6-section-6-group-1-25"
+        "2024-sichuan-chengdu-sichuan-chengdu-section-6-section-6-group-1-24"
+      ],
+      "displayBlocks": [
+        {
+          "id": "table-1",
+          "kind": "table",
+          "rows": [
+            [
+              "School Leavers’ Party"
+            ],
+            [
+              "Where",
+              "I have      26      the restaurant this evening."
+            ],
+            [
+              "When",
+              "The guests will arrive at      27     ."
+            ],
+            [
+              "What",
+              "Kathy will buy some      28      for our teachers. 29      music will be better for the party. People will be      30      to have some ice cream after dinner."
+            ]
+          ]
+        }
       ]
     },
     {
@@ -1781,7 +1822,8 @@
           "text": "第二部分 基础知识运用 (共30小题；计40分)"
         }
       ],
-      "questionIds": []
+      "questionIds": [],
+      "displayBlocks": []
     },
     {
       "id": "section-8",
@@ -2052,6 +2094,7 @@
         }
       ],
       "questionIds": [
+        "2024-sichuan-chengdu-sichuan-chengdu-section-8-section-8-group-2-25",
         "2024-sichuan-chengdu-sichuan-chengdu-section-8-section-8-group-2-26",
         "2024-sichuan-chengdu-sichuan-chengdu-section-8-section-8-group-2-27",
         "2024-sichuan-chengdu-sichuan-chengdu-section-8-section-8-group-2-28",
@@ -2061,8 +2104,13 @@
         "2024-sichuan-chengdu-sichuan-chengdu-section-8-section-8-group-2-32",
         "2024-sichuan-chengdu-sichuan-chengdu-section-8-section-8-group-2-33",
         "2024-sichuan-chengdu-sichuan-chengdu-section-8-section-8-group-2-34",
-        "2024-sichuan-chengdu-sichuan-chengdu-section-8-section-8-group-2-35"
-      ]
+        "2024-sichuan-chengdu-sichuan-chengdu-section-8-section-8-group-2-35",
+        "2024-sichuan-chengdu-sichuan-chengdu-section-8-section-8-group-2-36",
+        "2024-sichuan-chengdu-sichuan-chengdu-section-8-section-8-group-2-37",
+        "2024-sichuan-chengdu-sichuan-chengdu-section-8-section-8-group-2-38",
+        "2024-sichuan-chengdu-sichuan-chengdu-section-8-section-8-group-2-39"
+      ],
+      "displayBlocks": []
     },
     {
       "id": "section-9",
@@ -2201,10 +2249,6 @@
         }
       ],
       "questionIds": [
-        "2024-sichuan-chengdu-sichuan-chengdu-section-9-section-9-group-1-36",
-        "2024-sichuan-chengdu-sichuan-chengdu-section-9-section-9-group-1-37",
-        "2024-sichuan-chengdu-sichuan-chengdu-section-9-section-9-group-1-38",
-        "2024-sichuan-chengdu-sichuan-chengdu-section-9-section-9-group-1-39",
         "2024-sichuan-chengdu-sichuan-chengdu-section-9-section-9-group-1-40",
         "2024-sichuan-chengdu-sichuan-chengdu-section-9-section-9-group-1-41",
         "2024-sichuan-chengdu-sichuan-chengdu-section-9-section-9-group-1-42",
@@ -2215,7 +2259,33 @@
         "2024-sichuan-chengdu-sichuan-chengdu-section-9-section-9-group-1-47",
         "2024-sichuan-chengdu-sichuan-chengdu-section-9-section-9-group-1-48",
         "2024-sichuan-chengdu-sichuan-chengdu-section-9-section-9-group-1-49",
-        "2024-sichuan-chengdu-sichuan-chengdu-section-9-section-9-group-1-50"
+        "2024-sichuan-chengdu-sichuan-chengdu-section-9-section-9-group-1-50",
+        "2024-sichuan-chengdu-sichuan-chengdu-section-9-section-9-group-1-51",
+        "2024-sichuan-chengdu-sichuan-chengdu-section-9-section-9-group-1-52",
+        "2024-sichuan-chengdu-sichuan-chengdu-section-9-section-9-group-1-53",
+        "2024-sichuan-chengdu-sichuan-chengdu-section-9-section-9-group-1-54"
+      ],
+      "displayBlocks": [
+        {
+          "id": "paragraph-109",
+          "kind": "paragraph",
+          "text": "A"
+        },
+        {
+          "id": "paragraph-110",
+          "kind": "paragraph",
+          "text": "Teahouse (茶馆) is one of Lao She’s (老舍) most famous plays. He wrote it in 1957. The play has three acts and shows the     46     of common people in China from the end of the nineteenth century to the middle of the twentieth century. It tells us the story of Wang Lifa and the customers of his teahouse in Beijing. It     47     the changes in Chinese society over fifty years."
+        },
+        {
+          "id": "paragraph-111",
+          "kind": "paragraph",
+          "text": "Lao She was born in Beijing in 1899. His mother sent him to a teacher’s school in 1913. After     48     school in 1918, he became a head teacher of a primary school. In 1924, Lao She left home and went to England. He taught Chinese at a college in London and returned to China five years later. He wrote many plays, novels and short stories about people’s lives, and was named “the People’s Artist”. Lao She is one of the greatest Chinese     49     of the twentieth century."
+        },
+        {
+          "id": "paragraph-112",
+          "kind": "paragraph",
+          "text": "At Lao She Teahouse today, customers can drink tea and eat delicious Beijing food. If you like the Beijing Opera, traditional music or magic shows, you can     50     them at the teahouse. Lao She Teahouse gives a warm welcome to everyone from all over the world."
+        }
       ]
     },
     {
@@ -2229,7 +2299,8 @@
           "text": "第三部分 阅读理解 (共15小题；计30分)"
         }
       ],
-      "questionIds": []
+      "questionIds": [],
+      "displayBlocks": []
     },
     {
       "id": "section-11",
@@ -2267,7 +2338,8 @@
           "text": "In South Sudan, the radio has been seen as an important tool for providing information for hard-to-reach communities. It not only provides chances for local women and young people to learn about and take part in community events but also brings hope to those living in instability(不安定)."
         }
       ],
-      "questionIds": []
+      "questionIds": [],
+      "displayBlocks": []
     },
     {
       "id": "section-12",
@@ -2306,12 +2378,13 @@
         }
       ],
       "questionIds": [
-        "2024-sichuan-chengdu-sichuan-chengdu-section-12-section-12-group-1-51",
-        "2024-sichuan-chengdu-sichuan-chengdu-section-12-section-12-group-1-52",
-        "2024-sichuan-chengdu-sichuan-chengdu-section-12-section-12-group-1-53",
-        "2024-sichuan-chengdu-sichuan-chengdu-section-12-section-12-group-1-54",
-        "2024-sichuan-chengdu-sichuan-chengdu-section-12-section-12-group-1-55"
-      ]
+        "2024-sichuan-chengdu-sichuan-chengdu-section-12-section-12-group-1-55",
+        "2024-sichuan-chengdu-sichuan-chengdu-section-12-section-12-group-1-56",
+        "2024-sichuan-chengdu-sichuan-chengdu-section-12-section-12-group-1-57",
+        "2024-sichuan-chengdu-sichuan-chengdu-section-12-section-12-group-1-58",
+        "2024-sichuan-chengdu-sichuan-chengdu-section-12-section-12-group-1-59"
+      ],
+      "displayBlocks": []
     },
     {
       "id": "section-13",
@@ -2709,10 +2782,6 @@
         }
       ],
       "questionIds": [
-        "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-56",
-        "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-57",
-        "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-58",
-        "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-59",
         "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-60",
         "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-61",
         "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-62",
@@ -2723,7 +2792,107 @@
         "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-67",
         "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-68",
         "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-69",
-        "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-70"
+        "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-70",
+        "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-71",
+        "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-72",
+        "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-73",
+        "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-74",
+        "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-75",
+        "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-76",
+        "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-77",
+        "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-78",
+        "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-79",
+        "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-80",
+        "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-81",
+        "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-82",
+        "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-83",
+        "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-84"
+      ],
+      "displayBlocks": [
+        {
+          "id": "paragraph-148",
+          "kind": "paragraph",
+          "text": "A"
+        },
+        {
+          "id": "table-2",
+          "kind": "table",
+          "rows": [
+            [
+              "Get inspired by these apps and enter a competition organized by the Voda Foundation with your school or community group for the chance to win a prize. We are looking for smart creators to design(设计) an app to help communities meet with the challenges(挑战) they face. Now take a look at the apps for inspiration!",
+              "TIP Is there someone or something you worry about? Could you come up with an idea to help solve that problem in your local community?"
+            ],
+            [
+              "This is a great app for anyone wanting to learn a new language. You’ll pick up lots of words in no time."
+            ],
+            [
+              "Do you want to make new friends in your community? It can help you discover lots of local activities from sports clubs to art classes."
+            ],
+            [
+              "Do you want to learn more about the world? This app has you covered. You can fly all around a 3D world and find out about its different parts and environments, meeting people and wildlife along the way."
+            ],
+            [
+              "This helps you reduce (减少) waste by sharing unwanted food and other things with neighbors exactly the kind of community app you could design. Download it and your family can do their bit for the environment."
+            ],
+            [
+              "To sign up, visit communitytoday.com."
+            ]
+          ]
+        },
+        {
+          "id": "image-table-2-1",
+          "kind": "image",
+          "src": "/junior-high/2024-sichuan-chengdu-sichuan-chengdu/image3.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "image-table-2-2",
+          "kind": "image",
+          "src": "/junior-high/2024-sichuan-chengdu-sichuan-chengdu/image4.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "image-table-2-3",
+          "kind": "image",
+          "src": "/junior-high/2024-sichuan-chengdu-sichuan-chengdu/image5.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "image-table-2-4",
+          "kind": "image",
+          "src": "/junior-high/2024-sichuan-chengdu-sichuan-chengdu/image6.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "image-table-2-5",
+          "kind": "image",
+          "src": "/junior-high/2024-sichuan-chengdu-sichuan-chengdu/image7.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "image-154-1",
+          "kind": "image",
+          "src": "/junior-high/2024-sichuan-chengdu-sichuan-chengdu/image8.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "image-154-2",
+          "kind": "image",
+          "src": "/junior-high/2024-sichuan-chengdu-sichuan-chengdu/image9.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "image-154-3",
+          "kind": "image",
+          "src": "/junior-high/2024-sichuan-chengdu-sichuan-chengdu/image10.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "image-160-1",
+          "kind": "image",
+          "src": "/junior-high/2024-sichuan-chengdu-sichuan-chengdu/image11.png",
+          "alt": "原卷图片"
+        }
       ]
     },
     {
@@ -2777,7 +2946,35 @@
           "text": "The activity is the     98     addition to Guochao, or the “Chinese fashion trend” movement. Slow-boiling was the main way to make tea in ancient China     99     a faster brewing (冲泡) method became widespread during the Ming dynasty. Now, the old method is making a      100     comeback in the hands of young Chinese people."
         }
       ],
-      "questionIds": []
+      "questionIds": [
+        "2024-sichuan-chengdu-sichuan-chengdu-section-14-section-14-group-1-85",
+        "2024-sichuan-chengdu-sichuan-chengdu-section-14-section-14-group-1-86",
+        "2024-sichuan-chengdu-sichuan-chengdu-section-14-section-14-group-1-87",
+        "2024-sichuan-chengdu-sichuan-chengdu-section-14-section-14-group-1-88",
+        "2024-sichuan-chengdu-sichuan-chengdu-section-14-section-14-group-1-89",
+        "2024-sichuan-chengdu-sichuan-chengdu-section-14-section-14-group-1-90",
+        "2024-sichuan-chengdu-sichuan-chengdu-section-14-section-14-group-1-91",
+        "2024-sichuan-chengdu-sichuan-chengdu-section-14-section-14-group-1-92",
+        "2024-sichuan-chengdu-sichuan-chengdu-section-14-section-14-group-1-93",
+        "2024-sichuan-chengdu-sichuan-chengdu-section-14-section-14-group-1-94"
+      ],
+      "displayBlocks": [
+        {
+          "id": "table-3",
+          "kind": "table",
+          "rows": [
+            [
+              "late   offer   until   drink   society   expect   first   choose   press   while   succeed   including"
+            ]
+          ]
+        },
+        {
+          "id": "image-211-1",
+          "kind": "image",
+          "src": "/junior-high/2024-sichuan-chengdu-sichuan-chengdu/image12.png",
+          "alt": "原卷图片"
+        }
+      ]
     },
     {
       "id": "section-15",
@@ -2790,7 +2987,8 @@
           "text": "四、阅读表达 (共10小题；计10分)"
         }
       ],
-      "questionIds": []
+      "questionIds": [],
+      "displayBlocks": []
     },
     {
       "id": "section-16",
@@ -2863,7 +3061,19 @@
           "text": "F．In fact, “children” can even mean young adults who are unmarried."
         }
       ],
-      "questionIds": []
+      "questionIds": [
+        "2024-sichuan-chengdu-sichuan-chengdu-section-16-section-16-group-1-95",
+        "2024-sichuan-chengdu-sichuan-chengdu-section-16-section-16-group-1-96",
+        "2024-sichuan-chengdu-sichuan-chengdu-section-16-section-16-group-1-97",
+        "2024-sichuan-chengdu-sichuan-chengdu-section-16-section-16-group-1-98"
+      ],
+      "displayBlocks": [
+        {
+          "id": "paragraph-219",
+          "kind": "paragraph",
+          "text": "Hongbao in China"
+        }
+      ]
     },
     {
       "id": "section-17",
@@ -2927,10 +3137,62 @@
         }
       ],
       "questionIds": [
-        "2024-sichuan-chengdu-sichuan-chengdu-section-17-section-17-group-1-71",
-        "2024-sichuan-chengdu-sichuan-chengdu-section-17-section-17-group-1-72",
-        "2024-sichuan-chengdu-sichuan-chengdu-section-17-section-17-group-1-73",
-        "2024-sichuan-chengdu-sichuan-chengdu-section-17-section-17-group-1-74"
+        "2024-sichuan-chengdu-sichuan-chengdu-section-17-section-17-group-1-99",
+        "2024-sichuan-chengdu-sichuan-chengdu-section-17-section-17-group-1-100",
+        "2024-sichuan-chengdu-sichuan-chengdu-section-17-section-17-group-1-101",
+        "2024-sichuan-chengdu-sichuan-chengdu-section-17-section-17-group-1-102"
+      ],
+      "displayBlocks": [
+        {
+          "id": "paragraph-232",
+          "kind": "paragraph",
+          "text": "Whenever the word “peace” comes into our mind, we will imagine a white-colored bird who has a leaf in its mouth. But have you ever wondered why this little bird became a symbol of peace?"
+        },
+        {
+          "id": "paragraph-233",
+          "kind": "paragraph",
+          "text": "It is believed that this symbol comes from the Bible. Actually, for the first time, it appeared in the story about Noah’s Ark(诺亚方舟). In the story, when the heavy rain that flooded(淹没) the earth stopped pouring down, Noah sent out a white dove to see if there was any land. Then the dove returned with a leaf in its mouth, which meant that it had found dry land somewhere. This brought hope to Noah, who had spent almost a year on his ark. From then on, the white dove was considered the symbol of hope and new life."
+        },
+        {
+          "id": "paragraph-234",
+          "kind": "paragraph",
+          "text": "In another very popular story from Central Asia, a big war was about to happen between two kingdoms. When one of the kings asked for his helmet(头盔), he was told that a dove had made a nest into it. The king’s mother wanted him to keep the nest and doves. The king agreed and headed for the war without the helmet. Seeing the king have no helmet, the other king asked the reason. The king told the truth. The other king was touched by his action. And they finally agreed to make peace instead of war. A nest of dove became a reason for stopping a war. Since then, the dove has been connected with peace. In ancient Japan, a dove carrying a sword(剑) meant the final agreement that two sides had reached in a war. And in Europe, there was a tradition that if a dove flew around a house where someone was dying, then their soul would be at peace."
+        },
+        {
+          "id": "paragraph-235",
+          "kind": "paragraph",
+          "text": "Many artists also regard the bird as a symbol of peace. But it was Picasso who made the white dove widely regarded as a popular modern symbol of peace when he used it on a poster for the World Peace Congress in 1949."
+        },
+        {
+          "id": "table-4",
+          "kind": "table",
+          "rows": [
+            [
+              "106 The white-colored bird with a leaf in its mouth is a symbol of peace."
+            ],
+            [
+              "Two stories of its source(起源)"
+            ],
+            [
+              "Story 1: In the story of Noah’s Ark, a white dove brought a leaf—a    107    of dry land—back, which gave hope to Noah."
+            ],
+            [
+              "Story 2: In the story of Central Asia, a nest of doves in the helmet of one of the kings    108    in keeping peace between the two countries."
+            ],
+            [
+              "Two examples that show its meaning: ●In ancient Japan, a dove crying sword showed the war    109   . ●In Europe, a dove flying around shows the peace of the dead."
+            ],
+            [
+              "It didn’t become popular as a symbol of peace    110    Picasso used it on a poster in 1949."
+            ]
+          ]
+        },
+        {
+          "id": "image-table-4-1",
+          "kind": "image",
+          "src": "/junior-high/2024-sichuan-chengdu-sichuan-chengdu/image13.png",
+          "alt": "原卷图片"
+        }
       ]
     },
     {
@@ -3005,10 +3267,14 @@
           "text": "Yang Guang"
         }
       ],
-      "questionIds": [
-        "2024-sichuan-chengdu-sichuan-chengdu-section-18-section-18-group-1-75",
-        "2024-sichuan-chengdu-sichuan-chengdu-section-18-section-18-group-1-76",
-        "2024-sichuan-chengdu-sichuan-chengdu-section-18-section-18-group-1-77"
+      "questionIds": [],
+      "displayBlocks": [
+        {
+          "id": "image-238-1",
+          "kind": "image",
+          "src": "/junior-high/2024-sichuan-chengdu-sichuan-chengdu/image14.png",
+          "alt": "原卷图片"
+        }
       ]
     }
   ],
@@ -3107,7 +3373,7 @@
       "options": [
         "A. Not at all.",
         "B. Sorry, I won’t.",
-        "C. Sorry to hear that. 三、听对话，根据对话内容及问题选择正确答案。每小题念两遍。(共10小题；每小题1分，计10分)"
+        "C. Sorry to hear that."
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -3317,7 +3583,7 @@
       "options": [
         "A. Phone Li Ming.",
         "B. Go to English class.",
-        "C. Go to school. 四、听短文，根据短文内容选择正确答案。短文念两遍。(共5小题；每小题1分，计5分)"
+        "C. Go to school."
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -3422,7 +3688,7 @@
       "options": [
         "A. Hailey’s job.",
         "B. Hailey’s magazine.",
-        "C. Women’s sports. 五、听短文，根据短文内容完成图表中所缺信息。短文念三遍。(共5小题；每小题1分，计5分) School Leavers’ Party"
+        "C. Women’s sports."
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -3439,11 +3705,11 @@
       "displayNumber": "26",
       "sectionId": "section-6",
       "groupId": "section-6-group-1",
-      "prompt": "Where I have      26      the restaurant this evening.",
+      "prompt": "Where I have  ______ the restaurant this evening.",
       "options": [],
       "inputKind": "blank",
       "sourceBlockIds": [
-        "table-1-row-2"
+        "table-1"
       ],
       "type": "blank",
       "context": "",
@@ -3456,11 +3722,11 @@
       "displayNumber": "27",
       "sectionId": "section-6",
       "groupId": "section-6-group-1",
-      "prompt": "When The guests will arrive at      27     .",
+      "prompt": "When The guests will arrive at  ______ .",
       "options": [],
       "inputKind": "blank",
       "sourceBlockIds": [
-        "table-1-row-3"
+        "table-1"
       ],
       "type": "blank",
       "context": "",
@@ -3473,41 +3739,7 @@
       "displayNumber": "28",
       "sectionId": "section-6",
       "groupId": "section-6-group-1",
-      "prompt": "What Kathy will buy some      28      for our teachers. 29      music will be better for the party. People will be      30      to have some ice cream after dinner.",
-      "options": [],
-      "inputKind": "blank",
-      "sourceBlockIds": [
-        "table-1-row-4"
-      ],
-      "type": "blank",
-      "context": "",
-      "answer": "flowers",
-      "analysis": "【原文】Hello, everyone. Here is the final information about our school leavers’ party. I’ve booked the restaurant this evening. You need to get there at about 6: 00, so that we’ll have time to prepare before the guests arrive at 7 o’clock. Kathy will buy some flowers for teachers. Bill must get the music ready for the party. I think pop music will be better than country music or jazz for the party.\nAs for food I know we talked about serving hot food but I think people will be happier to have some ice cream after dinner. Betty is bringing cakes and I’m happy to buy some drinks. Please come on time and have a good time.\n第二部分 基础知识运用 (共30小题；计40分)\n六、选择填空 (共15小题；计20分)\nA. 从以下各题的A、B、C三个选项中选择最佳选项。(共10小题；每小题1分，计10分)"
-    },
-    {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-6-section-6-group-1-24",
-      "number": 29,
-      "displayNumber": "29",
-      "sectionId": "section-6",
-      "groupId": "section-6-group-1",
-      "prompt": "What Kathy will buy some      28      for our teachers. 29      music will be better for the party. People will be      30      to have some ice cream after dinner.",
-      "options": [],
-      "inputKind": "blank",
-      "sourceBlockIds": [
-        "table-1-row-4"
-      ],
-      "type": "blank",
-      "context": "",
-      "answer": "Pop",
-      "analysis": "【原文】Hello, everyone. Here is the final information about our school leavers’ party. I’ve booked the restaurant this evening. You need to get there at about 6: 00, so that we’ll have time to prepare before the guests arrive at 7 o’clock. Kathy will buy some flowers for teachers. Bill must get the music ready for the party. I think pop music will be better than country music or jazz for the party.\nAs for food I know we talked about serving hot food but I think people will be happier to have some ice cream after dinner. Betty is bringing cakes and I’m happy to buy some drinks. Please come on time and have a good time.\n第二部分 基础知识运用 (共30小题；计40分)\n六、选择填空 (共15小题；计20分)\nA. 从以下各题的A、B、C三个选项中选择最佳选项。(共10小题；每小题1分，计10分)"
-    },
-    {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-6-section-6-group-1-25",
-      "number": 30,
-      "displayNumber": "30",
-      "sectionId": "section-6",
-      "groupId": "section-6-group-1",
-      "prompt": "What Kathy will buy some      28      for our teachers. 29      music will be better for the party. People will be      30      to have some ice cream after dinner. 第二部分 基础知识运用 (共30小题；计40分) 六、选择填空 (共15小题；计20分)",
+      "prompt": "What Kathy will buy some  ______ for our teachers. 29      music will be better for the party. People will be      30      to have some ice cream after dinner.",
       "options": [
         "A. 从以下各题的",
         "A. ",
@@ -3515,7 +3747,28 @@
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
-        "table-1-row-4"
+        "table-1"
+      ],
+      "type": "choice",
+      "context": "",
+      "answer": "flowers",
+      "analysis": "【原文】Hello, everyone. Here is the final information about our school leavers’ party. I’ve booked the restaurant this evening. You need to get there at about 6: 00, so that we’ll have time to prepare before the guests arrive at 7 o’clock. Kathy will buy some flowers for teachers. Bill must get the music ready for the party. I think pop music will be better than country music or jazz for the party.\nAs for food I know we talked about serving hot food but I think people will be happier to have some ice cream after dinner. Betty is bringing cakes and I’m happy to buy some drinks. Please come on time and have a good time.\n第二部分 基础知识运用 (共30小题；计40分)\n六、选择填空 (共15小题；计20分)\nA. 从以下各题的A、B、C三个选项中选择最佳选项。(共10小题；每小题1分，计10分)"
+    },
+    {
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-6-section-6-group-1-24",
+      "number": 30,
+      "displayNumber": "30",
+      "sectionId": "section-6",
+      "groupId": "section-6-group-1",
+      "prompt": "What Kathy will buy some      28      for our teachers. 29      music will be better for the party. People will be  ______ to have some ice cream after dinner.",
+      "options": [
+        "A. 从以下各题的",
+        "A. ",
+        "B. C三个选项中选择最佳选项。(共10小题；每小题1分，计10分)"
+      ],
+      "inputKind": "choice",
+      "sourceBlockIds": [
+        "table-1"
       ],
       "type": "choice",
       "context": "",
@@ -3523,7 +3776,7 @@
       "analysis": "【原文】Hello, everyone. Here is the final information about our school leavers’ party. I’ve booked the restaurant this evening. You need to get there at about 6: 00, so that we’ll have time to prepare before the guests arrive at 7 o’clock. Kathy will buy some flowers for teachers. Bill must get the music ready for the party. I think pop music will be better than country music or jazz for the party.\nAs for food I know we talked about serving hot food but I think people will be happier to have some ice cream after dinner. Betty is bringing cakes and I’m happy to buy some drinks. Please come on time and have a good time.\n第二部分 基础知识运用 (共30小题；计40分)\n六、选择填空 (共15小题；计20分)\nA. 从以下各题的A、B、C三个选项中选择最佳选项。(共10小题；每小题1分，计10分)"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-8-section-8-group-2-26",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-8-section-8-group-2-25",
       "number": 31,
       "displayNumber": "31",
       "sectionId": "section-8",
@@ -3540,11 +3793,11 @@
       ],
       "type": "choice",
       "context": "",
-      "answer": "A",
+      "answer": "C",
       "analysis": "【详解】句意：当人们进入一个新的环境时，他们通常需要做一个简短的介绍，以便让其他人迅速了解他们。考查名词辨析。examination检查；suggestion建议；introduction介绍；根据句子中的“...in order to let others know them quickly.”可知，以便让其他人迅速了解他们。由此说明此处指的是做简短的介绍。故选C。"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-8-section-8-group-2-27",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-8-section-8-group-2-26",
       "number": 32,
       "displayNumber": "32",
       "sectionId": "section-8",
@@ -3561,11 +3814,11 @@
       ],
       "type": "choice",
       "context": "",
-      "answer": "C",
+      "answer": "B",
       "analysis": "【详解】句意：——西蒙，恐怕我们今天下午不能完成宇宙飞船模型。——好吧，我们今天不必完成。如果我们明天把它交给王先生就好了。考查情态动词。can’t不可能；needn’t不需要，不必；mustn’t禁止。根据“It’s fine if we give it to Mr. Wang tomorrow.”可知，今天不必完成。故选B。"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-8-section-8-group-2-28",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-8-section-8-group-2-27",
       "number": 33,
       "displayNumber": "33",
       "sectionId": "section-8",
@@ -3582,11 +3835,11 @@
       ],
       "type": "choice",
       "context": "",
-      "answer": "B",
+      "answer": "C",
       "analysis": "【详解】句意：——这些天烟雾弥漫。太糟糕啦！——对。我希望植树。树木越多，空气污染越少。\n考查形容词比较级。more更多的；fewer较少的，后接复数名词，表否定；less较少的，little的比较级，后接不可数名词。“the+比较级，the+比较级”是固定句式，意思是“越……越……”；trees“树木”，复数名词；pollution“污染”，不可数名词；根据常识可知，应是树越多，污染越少，故选C。"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-8-section-8-group-2-29",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-8-section-8-group-2-28",
       "number": 34,
       "displayNumber": "34",
       "sectionId": "section-8",
@@ -3603,11 +3856,11 @@
       ],
       "type": "choice",
       "context": "",
-      "answer": "C",
+      "answer": "B",
       "analysis": "【详解】句意：——嗨，彼得，你说话太小声了，我几乎听不见！——抱歉，我的喉咙有问题。\n考查副词辨析。loudly大声地；quietly安静地， 轻声地；patiently耐心地。根据“that I could hardly hear you!”可知，此处是指说话声太小了。故选B。"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-8-section-8-group-2-30",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-8-section-8-group-2-29",
       "number": 35,
       "displayNumber": "35",
       "sectionId": "section-8",
@@ -3624,11 +3877,11 @@
       ],
       "type": "choice",
       "context": "",
-      "answer": "B",
+      "answer": "C",
       "analysis": "【详解】句意：——杰克，你为什么不把你的铅笔收起来？——嗯，它们不是我的，而是山姆的。\n考查代词辨析。your你的，形容词性物主代词；my我的，形容词性物主代词；yours你的，名词性物主代词；mine我的，名词性物主代词。第一空修饰名词pencils作定语，应用形容词性物主代词；第二空表示我的铅笔，空后无名词，应用名词性物主代词，故选C。"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-8-section-8-group-2-31",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-8-section-8-group-2-30",
       "number": 36,
       "displayNumber": "36",
       "sectionId": "section-8",
@@ -3645,11 +3898,11 @@
       ],
       "type": "choice",
       "context": "",
-      "answer": "C",
+      "answer": "B",
       "analysis": "【详解】句意：——每个人都在这吗？——不。除了汤姆我们都在这。他因为重感冒缺席了。\n考查介词词义辨析。besides除……之外还包括；except除……之外（不包含）；除去；including包括。根据题干“He is absent because of a bad cold.”可知汤姆因重感冒缺席了，可见汤姆不在这，故填except。故选 B。"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-8-section-8-group-2-32",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-8-section-8-group-2-31",
       "number": 37,
       "displayNumber": "37",
       "sectionId": "section-8",
@@ -3670,7 +3923,7 @@
       "analysis": "【详解】句意：——汤姆，我的电脑出了问题。你能帮我吗？——对不起，请稍等。我正在制作一个短视频。考查动词时态。根据“Sorry, just a moment.”可知，此处表示动作正在进行，应用现在进行时。故选B。"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-8-section-8-group-2-33",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-8-section-8-group-2-32",
       "number": 38,
       "displayNumber": "38",
       "sectionId": "section-8",
@@ -3691,7 +3944,7 @@
       "analysis": "【详解】句意：除非邀请我去，否则我不会去参加聚会。\n考查动词时态及语态。unless引导条件状语从句，遵循“主将从现”原则，主句是一般将来时，从句是一般现在时。“我”被邀请参加聚会，应为被动语态，结构为am/is/are done。故选B。"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-8-section-8-group-2-34",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-8-section-8-group-2-33",
       "number": 39,
       "displayNumber": "39",
       "sectionId": "section-8",
@@ -3708,11 +3961,11 @@
       ],
       "type": "choice",
       "context": "",
-      "answer": "B",
+      "answer": "A",
       "analysis": "【详解】句意：——打扰一下，你能告诉我在哪里停车吗？——当然。银行后面有一个新停车场。你可以停在那里。考查疑问词+不定式。where to park在哪里停车；when to park什么时候停车；how to park如何停车。根据答语“There is a new parking lot behind the bank. You can park it there.”可知，询问在哪里停车。故选A。"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-8-section-8-group-2-35",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-8-section-8-group-2-34",
       "number": 40,
       "displayNumber": "40",
       "sectionId": "section-8",
@@ -3721,13 +3974,7 @@
       "options": [
         "A. I couldn’t agree more",
         "B. Take it easy",
-        "C. That depends 补全对话根据对话内容，选出适当的选项补全对话。 W: Where were you yesterday? I called you three times! M: Oh?     41     But why did you call me? W: You always say that you like music. M: That’s right. W:     42     But at last I had to go there by myself. M: I’m sorry. But where? W: Just in the Century Concert Hall. M: What a pity! How was it? W:     43 M: I supposed all the pieces were world-famous ones. W: Of course. M:     44 W: Yes. I think that was the climax (高潮). M: What were they? W:     45     All of them were adapted (改编) from some famous movies. M: I really shouldn’t go out yesterday!",
-        "A. Were there any songs at the concert?",
-        "B. I was out for a picnic with a few of my old friends.",
-        "C. It was the most wonderful one I have ever attended.",
-        "D. Some were Chinese songs and some were foreign songs. E．So I tried my best to get two tickets for yesterday’s concert. 七、完形填空阅读下面两篇短文，根据短文内容，从",
-        "A. ",
-        "B. C 三个选项中选出可以填入空白处的最佳选项。 (共15小题；计20分。 A 篇每小题2分，计10分；B 篇每小题1分，计10分) A Teahouse (茶馆) is one of Lao She’s (老舍) most famous plays. He wrote it in 1957. The play has three acts and shows the     46     of common people in China from the end of the nineteenth century to the middle of the twentieth century. It tells us the story of Wang Lifa and the customers of his teahouse in Beijing. It     47     the changes in Chinese society over fifty years. Lao She was born in Beijing in 1899. His mother sent him to a teacher’s school in 1913. After     48     school in 1918, he became a head teacher of a primary school. In 1924, Lao She left home and went to England. He taught Chinese at a college in London and returned to China five years later. He wrote many plays, novels and short stories about people’s lives, and was named “the People’s Artist”. Lao She is one of the greatest Chinese     49     of the twentieth century. At Lao She Teahouse today, customers can drink tea and eat delicious Beijing food. If you like the Beijing Opera, traditional music or magic shows, you can     50     them at the teahouse. Lao She Teahouse gives a warm welcome to everyone from all over the world."
+        "C. That depends 补全对话根据对话内容，选出适当的选项补全对话。 W: Where were you yesterday? I called you three times!"
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -3739,7 +3986,95 @@
       "analysis": "【详解】句意：——烹饪可以帮助我们表达对家庭成员的爱。——我非常同意，每次我给妈妈做菜，她都非常开心。考查情景交际。I couldn’t agree more“我非常同意”；Take it easy“别紧张”；That depends“这得看情况”。根据“Every time I make dishes for Mom, she is very happy.”可知，每次我给妈妈做菜，她都非常开心，即同意对方的说法。故选A。\n补全对话根据对话内容，选出适当的选项补全对话。\nW: Where were you yesterday? I called you three times!\nM: Oh?     41     But why did you call me?\nW: You always say that you like music.\nM: That’s right.\nW:     42     But at last I had to go there by myself.\nM: I’m sorry. But where?\nW: Just in the Century Concert Hall.\nM: What a pity! How was it?\nW:     43\nM: I supposed all the pieces were world-famous ones.\nW: Of course.\nM:     44\nW: Yes. I think that was the climax (高潮).\nM: What were they?\nW:     45     All of them were adapted (改编) from some famous movies.\nM: I really shouldn’t go out yesterday!\nA．Were there any songs at the concert?\nB．I was out for a picnic with a few of my old friends.\nC．It was the most wonderful one I have ever attended.\nD．Some were Chinese songs and some were foreign songs.\nE．So I tried my best to get two tickets for yesterday’s concert."
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-9-section-9-group-1-36",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-8-section-8-group-2-35",
+      "number": 41,
+      "displayNumber": "41",
+      "sectionId": "section-8",
+      "groupId": "section-8-group-2",
+      "prompt": "M: Oh? ______      But why did you call me?",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-88"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "B",
+      "analysis": "【导语】本文主要介绍W本来打电话邀请M去参加音乐会，但是M没有接到电话，W自己去了音乐会，两人谈论了音乐会的情况。"
+    },
+    {
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-8-section-8-group-2-36",
+      "number": 42,
+      "displayNumber": "42",
+      "sectionId": "section-8",
+      "groupId": "section-8-group-2",
+      "prompt": "W: ______      But at last I had to go there by myself.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-91"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "E",
+      "analysis": "【导语】本文主要介绍W本来打电话邀请M去参加音乐会，但是M没有接到电话，W自己去了音乐会，两人谈论了音乐会的情况。"
+    },
+    {
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-8-section-8-group-2-37",
+      "number": 43,
+      "displayNumber": "43",
+      "sectionId": "section-8",
+      "groupId": "section-8-group-2",
+      "prompt": "W: ______",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-95"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "C",
+      "analysis": "【导语】本文主要介绍W本来打电话邀请M去参加音乐会，但是M没有接到电话，W自己去了音乐会，两人谈论了音乐会的情况。"
+    },
+    {
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-8-section-8-group-2-38",
+      "number": 44,
+      "displayNumber": "44",
+      "sectionId": "section-8",
+      "groupId": "section-8-group-2",
+      "prompt": "M: ______",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-98"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "A",
+      "analysis": "【导语】本文主要介绍W本来打电话邀请M去参加音乐会，但是M没有接到电话，W自己去了音乐会，两人谈论了音乐会的情况。"
+    },
+    {
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-8-section-8-group-2-39",
+      "number": 45,
+      "displayNumber": "45",
+      "sectionId": "section-8",
+      "groupId": "section-8-group-2",
+      "prompt": "W: ______      All of them were adapted (改编) from some famous movies.",
+      "options": [
+        "A. ",
+        "B. C 三个选项中选出可以填入空白处的最佳选项。 (共15小题；计20分。 A 篇每小题2分，计10分；B 篇每小题1分，计10分)"
+      ],
+      "inputKind": "choice",
+      "sourceBlockIds": [
+        "paragraph-101"
+      ],
+      "type": "choice",
+      "context": "",
+      "answer": "D",
+      "analysis": "【导语】本文主要介绍W本来打电话邀请M去参加音乐会，但是M没有接到电话，W自己去了音乐会，两人谈论了音乐会的情况。"
+    },
+    {
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-9-section-9-group-1-40",
       "number": 46,
       "displayNumber": "46",
       "sectionId": "section-9",
@@ -3760,7 +4095,7 @@
       "analysis": "【导语】本文主要介绍了老舍的生平以及他的代表作《茶馆》。"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-9-section-9-group-1-37",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-9-section-9-group-1-41",
       "number": 47,
       "displayNumber": "47",
       "sectionId": "section-9",
@@ -3781,7 +4116,7 @@
       "analysis": "【导语】本文主要介绍了老舍的生平以及他的代表作《茶馆》。"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-9-section-9-group-1-38",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-9-section-9-group-1-42",
       "number": 48,
       "displayNumber": "48",
       "sectionId": "section-9",
@@ -3802,7 +4137,7 @@
       "analysis": "【导语】本文主要介绍了老舍的生平以及他的代表作《茶馆》。"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-9-section-9-group-1-39",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-9-section-9-group-1-43",
       "number": 49,
       "displayNumber": "49",
       "sectionId": "section-9",
@@ -3823,7 +4158,7 @@
       "analysis": "【导语】本文主要介绍了老舍的生平以及他的代表作《茶馆》。"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-9-section-9-group-1-40",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-9-section-9-group-1-44",
       "number": 50,
       "displayNumber": "50",
       "sectionId": "section-9",
@@ -3844,7 +4179,7 @@
       "analysis": "【导语】本文主要介绍了老舍的生平以及他的代表作《茶馆》。"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-9-section-9-group-1-41",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-9-section-9-group-1-45",
       "number": 51,
       "displayNumber": "51",
       "sectionId": "section-9",
@@ -3865,7 +4200,7 @@
       "analysis": "51．B    52．A    53．C    54．C    55．A    56．C    57．A    58．B    59．C    60．B\n【导语】本文主要讲述了作者教育女儿要乐于助人的故事。"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-9-section-9-group-1-42",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-9-section-9-group-1-46",
       "number": 52,
       "displayNumber": "52",
       "sectionId": "section-9",
@@ -3886,7 +4221,7 @@
       "analysis": "51．B    52．A    53．C    54．C    55．A    56．C    57．A    58．B    59．C    60．B\n【导语】本文主要讲述了作者教育女儿要乐于助人的故事。"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-9-section-9-group-1-43",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-9-section-9-group-1-47",
       "number": 53,
       "displayNumber": "53",
       "sectionId": "section-9",
@@ -3907,7 +4242,7 @@
       "analysis": "51．B    52．A    53．C    54．C    55．A    56．C    57．A    58．B    59．C    60．B\n【导语】本文主要讲述了作者教育女儿要乐于助人的故事。"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-9-section-9-group-1-44",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-9-section-9-group-1-48",
       "number": 54,
       "displayNumber": "54",
       "sectionId": "section-9",
@@ -3928,7 +4263,7 @@
       "analysis": "51．B    52．A    53．C    54．C    55．A    56．C    57．A    58．B    59．C    60．B\n【导语】本文主要讲述了作者教育女儿要乐于助人的故事。"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-9-section-9-group-1-45",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-9-section-9-group-1-49",
       "number": 55,
       "displayNumber": "55",
       "sectionId": "section-9",
@@ -3949,7 +4284,7 @@
       "analysis": "51．B    52．A    53．C    54．C    55．A    56．C    57．A    58．B    59．C    60．B\n【导语】本文主要讲述了作者教育女儿要乐于助人的故事。"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-9-section-9-group-1-46",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-9-section-9-group-1-50",
       "number": 56,
       "displayNumber": "56",
       "sectionId": "section-9",
@@ -3970,7 +4305,7 @@
       "analysis": "51．B    52．A    53．C    54．C    55．A    56．C    57．A    58．B    59．C    60．B\n【导语】本文主要讲述了作者教育女儿要乐于助人的故事。"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-9-section-9-group-1-47",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-9-section-9-group-1-51",
       "number": 57,
       "displayNumber": "57",
       "sectionId": "section-9",
@@ -3991,7 +4326,7 @@
       "analysis": "51．B    52．A    53．C    54．C    55．A    56．C    57．A    58．B    59．C    60．B\n【导语】本文主要讲述了作者教育女儿要乐于助人的故事。"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-9-section-9-group-1-48",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-9-section-9-group-1-52",
       "number": 58,
       "displayNumber": "58",
       "sectionId": "section-9",
@@ -4012,7 +4347,7 @@
       "analysis": "51．B    52．A    53．C    54．C    55．A    56．C    57．A    58．B    59．C    60．B\n【导语】本文主要讲述了作者教育女儿要乐于助人的故事。"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-9-section-9-group-1-49",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-9-section-9-group-1-53",
       "number": 59,
       "displayNumber": "59",
       "sectionId": "section-9",
@@ -4033,7 +4368,7 @@
       "analysis": "51．B    52．A    53．C    54．C    55．A    56．C    57．A    58．B    59．C    60．B\n【导语】本文主要讲述了作者教育女儿要乐于助人的故事。"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-9-section-9-group-1-50",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-9-section-9-group-1-54",
       "number": 60,
       "displayNumber": "60",
       "sectionId": "section-9",
@@ -4042,7 +4377,7 @@
       "options": [
         "A. suddenly",
         "B. easily",
-        "C. hardly 第三部分 阅读理解 (共15小题；计30分) 阅读下面短文，根据短文内容判断句子正误。正确的涂“A”，错误的涂“B”。 Likiso Irene Lasu Silwa has very few memories of her early childhood. She was only a few months old when her mother ran away from their hometown with her and her sisters during the Second Sudanese Civil War(苏丹内战). They had lived in a refugee camp(难民营) in neighboring Uganda ever since. Likiso finally returned in 2015 only to find that her hometown was already part of a new country South Sudan. Today, 31-year-old Likiso is a host on Radio Miraya. Miraya is the biggest network in South Sudan which has worked hard to push for peace in the area. “Radio was the only source(来源) of information and happiness that kept my family going in the refugee camp. My mother would listen to the radio to keep up with what was happening back home. It is this experience that made me want to become a radio host,” Likiso recalled. Recently a sad story shocked her country. A child was killed and her body was found in a toilet.“If that is not difficult to report, then I don’t know what is,” Likiso said. Of course, a young man decided to return home from the refugee camp he was living in to help homeless women. He built houses for them using unused water bottles.“At the time of my interview with him, he had already managed to take 10 women and their children off the streets. In South Sudan, the radio has been seen as an important tool for providing information for hard-to-reach communities. It not only provides chances for local women and young people to learn about and take part in community events but also brings hope to those living in instability(不安定). 根据短文内容判断句子正误。正确的涂“A”，错误的涂“B”。"
+        "C. hardly"
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -4054,7 +4389,7 @@
       "analysis": "51．B    52．A    53．C    54．C    55．A    56．C    57．A    58．B    59．C    60．B\n【导语】本文主要讲述了作者教育女儿要乐于助人的故事。"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-12-section-12-group-1-51",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-12-section-12-group-1-55",
       "number": 61,
       "displayNumber": "61",
       "sectionId": "section-12",
@@ -4071,7 +4406,7 @@
       "analysis": "【导语】本文主要讲述了利基索的故事。"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-12-section-12-group-1-52",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-12-section-12-group-1-56",
       "number": 62,
       "displayNumber": "62",
       "sectionId": "section-12",
@@ -4088,7 +4423,7 @@
       "analysis": "【导语】本文主要讲述了利基索的故事。"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-12-section-12-group-1-53",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-12-section-12-group-1-57",
       "number": 63,
       "displayNumber": "63",
       "sectionId": "section-12",
@@ -4105,7 +4440,7 @@
       "analysis": "【导语】本文主要讲述了利基索的故事。"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-12-section-12-group-1-54",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-12-section-12-group-1-58",
       "number": 64,
       "displayNumber": "64",
       "sectionId": "section-12",
@@ -4122,12 +4457,12 @@
       "analysis": "【导语】本文主要讲述了利基索的故事。"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-12-section-12-group-1-55",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-12-section-12-group-1-59",
       "number": 65,
       "displayNumber": "65",
       "sectionId": "section-12",
       "groupId": "section-12-group-1",
-      "prompt": "The purpose of the passage is to show the importance of radio in people’s daily life in South Sudan. 九、阅读下面两篇短文，根据短文内容选择最佳选项。(共10小题；每小题2分，计20分) A Get inspired by these apps and enter a competition organized by the Voda Foundation with your school or community group for the chance to win a prize. We are looking for smart creators to design(设计) an app to help communities meet with the challenges(挑战) they face. Now take a look at the apps for inspiration! TIP Is there someone or something you worry about? Could you come up with an idea to help solve that problem in your local community? This is a great app for anyone wanting to learn a new language. You’ll pick up lots of words in no time. Do you want to make new friends in your community? It can help you discover lots of local activities from sports clubs to art classes. Do you want to learn more about the world? This app has you covered. You can fly all around a 3D world and find out about its different parts and environments, meeting people and wildlife along the way. This helps you reduce (减少) waste by sharing unwanted food and other things with neighbors exactly the kind of community app you could design. Download it and your family can do their bit for the environment. To sign up, visit communitytoday.com.",
+      "prompt": "The purpose of the passage is to show the importance of radio in people’s daily life in South Sudan.",
       "options": [],
       "inputKind": "text",
       "sourceBlockIds": [
@@ -4139,7 +4474,7 @@
       "analysis": "【导语】本文主要讲述了利基索的故事。"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-56",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-60",
       "number": 66,
       "displayNumber": "66",
       "sectionId": "section-13",
@@ -4160,7 +4495,7 @@
       "analysis": "【导语】本文是一篇应用文。这是一张海报，海报内容为：主办方举办一个社区应用程序设计比赛，并提供了四个应用程序作为样本供参赛者参考。"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-57",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-61",
       "number": 67,
       "displayNumber": "67",
       "sectionId": "section-13",
@@ -4181,7 +4516,7 @@
       "analysis": "【导语】本文是一篇应用文。这是一张海报，海报内容为：主办方举办一个社区应用程序设计比赛，并提供了四个应用程序作为样本供参赛者参考。"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-58",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-62",
       "number": 68,
       "displayNumber": "68",
       "sectionId": "section-13",
@@ -4202,7 +4537,7 @@
       "analysis": "【导语】本文是一篇应用文。这是一张海报，海报内容为：主办方举办一个社区应用程序设计比赛，并提供了四个应用程序作为样本供参赛者参考。"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-59",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-63",
       "number": 69,
       "displayNumber": "69",
       "sectionId": "section-13",
@@ -4223,7 +4558,7 @@
       "analysis": "【导语】本文是一篇应用文。这是一张海报，海报内容为：主办方举办一个社区应用程序设计比赛，并提供了四个应用程序作为样本供参赛者参考。"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-60",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-64",
       "number": 70,
       "displayNumber": "70",
       "sectionId": "section-13",
@@ -4244,7 +4579,7 @@
       "analysis": "【导语】本文是一篇应用文。这是一张海报，海报内容为：主办方举办一个社区应用程序设计比赛，并提供了四个应用程序作为样本供参赛者参考。"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-61",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-65",
       "number": 71,
       "displayNumber": "71",
       "sectionId": "section-13",
@@ -4265,7 +4600,7 @@
       "analysis": "【导语】本文主要讲述了如何能使友谊保持长久。"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-62",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-66",
       "number": 72,
       "displayNumber": "72",
       "sectionId": "section-13",
@@ -4286,7 +4621,7 @@
       "analysis": "【导语】本文主要讲述了如何能使友谊保持长久。"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-63",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-67",
       "number": 73,
       "displayNumber": "73",
       "sectionId": "section-13",
@@ -4307,7 +4642,7 @@
       "analysis": "【导语】本文主要讲述了如何能使友谊保持长久。"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-64",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-68",
       "number": 74,
       "displayNumber": "74",
       "sectionId": "section-13",
@@ -4328,7 +4663,7 @@
       "analysis": "【导语】本文主要讲述了如何能使友谊保持长久。"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-65",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-69",
       "number": 75,
       "displayNumber": "75",
       "sectionId": "section-13",
@@ -4349,7 +4684,7 @@
       "analysis": "【导语】本文主要讲述了如何能使友谊保持长久。"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-66",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-70",
       "number": 76,
       "displayNumber": "76",
       "sectionId": "section-13",
@@ -4362,11 +4697,11 @@
       ],
       "type": "text",
       "context": "",
-      "answer": "A",
+      "answer": "(e)xchange",
       "analysis": "【详解】句意：我们生活在信息时代。我们应该彼此经常交流想法和信息。根据“We live in an information age.”和固定词组exchange with“和……交换”可知，此处填exchange“交换”。故填(e)xchange。"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-67",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-71",
       "number": 77,
       "displayNumber": "77",
       "sectionId": "section-13",
@@ -4379,11 +4714,11 @@
       ],
       "type": "text",
       "context": "",
-      "answer": "(e)xchange",
+      "answer": "(w)idely",
       "analysis": "【详解】句意：2022年春节晚会后，舞诗剧《只此青绿》在全中国广为人知。根据“became…known all over China.”及首字母提示可知，此处应填widely“广泛地”，修饰形容词“known”，故填(w)idely。"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-68",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-72",
       "number": 78,
       "displayNumber": "78",
       "sectionId": "section-13",
@@ -4396,11 +4731,11 @@
       ],
       "type": "text",
       "context": "",
-      "answer": "(w)idely",
+      "answer": "(r)egret",
       "analysis": "【详解】句意：我后悔浪费时间和精力去学习这些无用的技能。根据首字母提示可知，此处是regret doing sth.“后悔做某事”。时态是一般现在时，主语是第一人称，谓语动词用其原形。故填(r)egret。"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-69",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-73",
       "number": 79,
       "displayNumber": "79",
       "sectionId": "section-13",
@@ -4413,43 +4748,445 @@
       ],
       "type": "text",
       "context": "",
-      "answer": "(r)egret",
+      "answer": "(e)xactly",
       "analysis": "【详解】句意：英雄所见略同。彼得的建议正是我所想的。根据“Great minds think alike.”以及首字母可知此处是指两人的建议正好相同，exactly“恰好，确切地”符合语境，故填(e)xactly。"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-70",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-74",
       "number": 80,
       "displayNumber": "80",
       "sectionId": "section-13",
       "groupId": "section-13-group-1",
-      "prompt": "She rides her bike to school, e         on days with heavy rain or strong winds. In those cases, her dad may drive her instead. 完成对话 在空格中填上适当的单词，使对话完整正确。 一空一词(含缩写词)。 A: Wow, Wei Ming! You are wearing glasses! B: Yeah, my eyesight     81     from 5. 0 to 4. 0 in only a term. A: That’s bad! How come? B: 1 have no idea. I found that I couldn’t see the words on the blackboard     82    , so I went to the hospital. The doctor gave some advice on using my eyes. A: What should you do? B: I should keep a certain     83     between the eyes and the book when reading. A: Incorrect posture (姿势) is an important     84     of myopia (近视). B: I should also reduce the time 1 spend using electronic products,     85    phones and computers. A: Strong light from electronic products is     86     to the eyes. B:     87    , I should eat more fruits and vegetables which are rich in vitamin (维他命)",
-      "options": [
-        "A. A: If you     88     the advice, your eyesight will not go worse. B: I hope so. By the way, don’t you think light in the classroom is too dark? A: Kind of. Don’t worry about that. New lights with more natural light will be installed (安装) in the classroom. B: Great news! A: It’s said the government will also take some other     89     to protect our eyesight. B: Like what? A: The size of words in students’ textbooks shouldn’t be     90     than Times New Roman number 5 font (小五号). B: Bigger words will make us feel more comfortable when reading. A: One more thing! Don’t forget to go outside and do sports! B: I will! 短文填空从下面方框中选出10个单词，将其正确形式填入短文，使短文意思正确通顺 (每词限用一次)。 late   offer   until   drink   society   expect   first   choose   press   while   succeed   including In some areas of Yunnan, when winter comes, people sit around a fire and bake tea in pottery pots. After the tea leaves are roasted, people add hot water to boil them. While     91     tea, they chat with each other and bake fruits over the fire which is a common     92     scene in these areas. Today, the topic of “boiling tea around a stove” has become popular on the Internet     93    . On the social media platform Xiaohongshu, the number of views on the topic has also been over 12 million. People are sharing many other options in the activity, from homemade roasted milk tea to heated wine. Besides drinks, the     94     of snacks are even more diverse (多样化). The most popular ones     95     roasted sweet potatoes, oranges, as well as dried fruits, nuts. The appeal of boiling tea around a stove also comes from companionship (陪伴). When people are facing the     96     of a fast lifestyle and the stress of work and study, making tea around the fire     97     a chance to slow down, relax and get back to living a life with friends. The activity is the     98     addition to Guochao, or the “Chinese fashion trend” movement. Slow-boiling was the main way to make tea in ancient China     99     a faster brewing (冲泡) method became widespread during the Ming dynasty. Now, the old method is making a      100     comeback in the hands of young Chinese people. 四、阅读表达 (共10小题；计10分) 补全短文根据短文内容，从短文后的A～F 选项中，选出5个适当的选项补全短文。 Hongbao in China While Western kids dream about what Santa will bring them, Chinese kids will be getting their money box ready to receive hongbao. Hongbao, red envelopes, are the traditional gifts that adults give children during the Chinese New Year holiday period. The general idea is that adults with income give children with no income hongbao during Chinese New Year.     101 You’ll see hongbao used as decorations (装饰) on just about every Chinese New Year flower and plant that is displayed during the season.     102     And they are only used for decoration. I know because my son checks them whenever he can reach them. 103     Weddings (婚礼) are big events where hongbao are given by guests invited to the wedding instead of gifts. The amount of money to give at a wedding can be tricky (微妙的) and if you are invited to a Chinese wedding, you can ask for some advice about how much to give. If you need hongbao, you can buy them at shops at any time of the year.     104     So you ensure you don’t get one that says “Congratulations on your marriage” for a birthday. These days, people don’t even have to leave the comfort of their sofas to give hongbao.     105     Wechat, a popular instant message and photo sharing app, introduced electronic hongbao, so now it’s even easier.",
-        "A. These will be empty.",
-        "B. It is necessary to buy fancy ones.",
-        "C. Hongbao are given at other occasions too.",
-        "D. Ask the shop owner or a friend which one to buy. E．Friends send each other hongbao from their phones! F．In fact, “children” can even mean young adults who are unmarried. 完成图表根据短文内容，完成图表中所缺信息。 Whenever the word “peace” comes into our mind, we will imagine a white-colored bird who has a leaf in its mouth. But have you ever wondered why this little bird became a symbol of peace? It is believed that this symbol comes from the Bible. Actually, for the first time, it appeared in the story about Noah’s Ark(诺亚方舟). In the story, when the heavy rain that flooded(淹没) the earth stopped pouring down, Noah sent out a white dove to see if there was any land. Then the dove returned with a leaf in its mouth, which meant that it had found dry land somewhere. This brought hope to Noah, who had spent almost a year on his ark. From then on, the white dove was considered the symbol of hope and new life. In another very popular story from Central Asia, a big war was about to happen between two kingdoms. When one of the kings asked for his helmet(头盔), he was told that a dove had made a nest into it. The king’s mother wanted him to keep the nest and doves. The king agreed and headed for the war without the helmet. Seeing the king have no helmet, the other king asked the reason. The king told the truth. The other king was touched by his action. And they finally agreed to make peace instead of war. A nest of dove became a reason for stopping a war. Since then, the dove has been connected with peace. In ancient Japan, a dove carrying a sword(剑) meant the final agreement that two sides had reached in a war. And in Europe, there was a tradition that if a dove flew around a house where someone was dying, then their soul would be at peace. Many artists also regard the bird as a symbol of peace. But it was Picasso who made the white dove widely regarded as a popular modern symbol of peace when he used it on a poster for the World Peace Congress in 1949. 106 The white-colored bird with a leaf in its mouth is a symbol of peace. Two stories of its source(起源)"
-      ],
-      "inputKind": "choice",
+      "prompt": "She rides her bike to school, e         on days with heavy rain or strong winds. In those cases, her dad may drive her instead. 完成对话 在空格中填上适当的单词，使对话完整正确。 一空一词(含缩写词)。 A: Wow, Wei Ming! You are wearing glasses!",
+      "options": [],
+      "inputKind": "blank",
       "sourceBlockIds": [
         "paragraph-188"
       ],
-      "type": "choice",
+      "type": "blank",
       "context": "",
-      "answer": "(e)xactly",
+      "answer": "(e)xcept",
       "analysis": "【详解】句意：她骑自行车去上学，除了下大雨或刮大风的日子，在这种情况下，她的父亲可能会开车送她。根据“She rides her bike to school”和“her dad may drive her instead”可知，空处表示“除了”，except“除了……”，故填(e)xcept。\n完成对话 在空格中填上适当的单词，使对话完整正确。 一空一词(含缩写词)。\nA: Wow, Wei Ming! You are wearing glasses!\nB: Yeah, my eyesight     81     from 5. 0 to 4. 0 in only a term.\nA: That’s bad! How come?\nB: 1 have no idea. I found that I couldn’t see the words on the blackboard     82    , so I went to the hospital. The doctor gave some advice on using my eyes.\nA: What should you do?\nB: I should keep a certain     83     between the eyes and the book when reading.\nA: Incorrect posture (姿势) is an important     84     of myopia (近视).\nB: I should also reduce the time 1 spend using electronic products,     85    phones and computers.\nA: Strong light from electronic products is     86     to the eyes.\nB:     87    , I should eat more fruits and vegetables which are rich in vitamin (维他命) A．\nA: If you     88     the advice, your eyesight will not go worse.\nB: I hope so. By the way, don’t you think light in the classroom is too dark?\nA: Kind of. Don’t worry about that. New lights with more natural light will be installed (安装) in the classroom.\nB: Great news!\nA: It’s said the government will also take some other     89     to protect our eyesight.\nB: Like what?\nA: The size of words in students’ textbooks shouldn’t be     90     than Times New Roman number 5 font (小五号).\nB: Bigger words will make us feel more comfortable when reading.\nA: One more thing! Don’t forget to go outside and do sports!\nB: I will!"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-17-section-17-group-1-71",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-75",
+      "number": 81,
+      "displayNumber": "81",
+      "sectionId": "section-13",
+      "groupId": "section-13-group-1",
+      "prompt": "B: Yeah, my eyesight  ______ from 5. 0 to 4. 0 in only a term.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-191"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "dropped",
+      "analysis": "81．dropped    82．clearly    83．distance    84．cause    85．including    86．harmful    87．Besides    88．follow/take    89．actions/measures    90．smaller\n【导语】本文是A和B的对话。对话围绕着B视力下降展开，重点谈论了如何让近视不再发展。"
+    },
+    {
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-76",
+      "number": 82,
+      "displayNumber": "82",
+      "sectionId": "section-13",
+      "groupId": "section-13-group-1",
+      "prompt": "B: 1 have no idea. I found that I couldn’t see the words on the blackboard  ______ , so I went to the hospital. The doctor gave some advice on using my eyes.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-193"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "clearly",
+      "analysis": "81．dropped    82．clearly    83．distance    84．cause    85．including    86．harmful    87．Besides    88．follow/take    89．actions/measures    90．smaller\n【导语】本文是A和B的对话。对话围绕着B视力下降展开，重点谈论了如何让近视不再发展。"
+    },
+    {
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-77",
+      "number": 83,
+      "displayNumber": "83",
+      "sectionId": "section-13",
+      "groupId": "section-13-group-1",
+      "prompt": "B: I should keep a certain  ______ between the eyes and the book when reading.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-195"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "distance",
+      "analysis": "81．dropped    82．clearly    83．distance    84．cause    85．including    86．harmful    87．Besides    88．follow/take    89．actions/measures    90．smaller\n【导语】本文是A和B的对话。对话围绕着B视力下降展开，重点谈论了如何让近视不再发展。"
+    },
+    {
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-78",
+      "number": 84,
+      "displayNumber": "84",
+      "sectionId": "section-13",
+      "groupId": "section-13-group-1",
+      "prompt": "A: Incorrect posture (姿势) is an important  ______ of myopia (近视).",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-196"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "cause",
+      "analysis": "81．dropped    82．clearly    83．distance    84．cause    85．including    86．harmful    87．Besides    88．follow/take    89．actions/measures    90．smaller\n【导语】本文是A和B的对话。对话围绕着B视力下降展开，重点谈论了如何让近视不再发展。"
+    },
+    {
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-79",
+      "number": 85,
+      "displayNumber": "85",
+      "sectionId": "section-13",
+      "groupId": "section-13-group-1",
+      "prompt": "B: I should also reduce the time 1 spend using electronic products, ______ phones and computers.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-197"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "including",
+      "analysis": "81．dropped    82．clearly    83．distance    84．cause    85．including    86．harmful    87．Besides    88．follow/take    89．actions/measures    90．smaller\n【导语】本文是A和B的对话。对话围绕着B视力下降展开，重点谈论了如何让近视不再发展。"
+    },
+    {
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-80",
+      "number": 86,
+      "displayNumber": "86",
+      "sectionId": "section-13",
+      "groupId": "section-13-group-1",
+      "prompt": "A: Strong light from electronic products is  ______ to the eyes.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-198"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "harmful",
+      "analysis": "81．dropped    82．clearly    83．distance    84．cause    85．including    86．harmful    87．Besides    88．follow/take    89．actions/measures    90．smaller\n【导语】本文是A和B的对话。对话围绕着B视力下降展开，重点谈论了如何让近视不再发展。"
+    },
+    {
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-81",
+      "number": 87,
+      "displayNumber": "87",
+      "sectionId": "section-13",
+      "groupId": "section-13-group-1",
+      "prompt": "B: ______     , I should eat more fruits and vegetables which are rich in vitamin (维他命) A．",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-199"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "Besides",
+      "analysis": "81．dropped    82．clearly    83．distance    84．cause    85．including    86．harmful    87．Besides    88．follow/take    89．actions/measures    90．smaller\n【导语】本文是A和B的对话。对话围绕着B视力下降展开，重点谈论了如何让近视不再发展。"
+    },
+    {
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-82",
+      "number": 88,
+      "displayNumber": "88",
+      "sectionId": "section-13",
+      "groupId": "section-13-group-1",
+      "prompt": "A: If you  ______ the advice, your eyesight will not go worse.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-200"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "follow/take",
+      "analysis": "81．dropped    82．clearly    83．distance    84．cause    85．including    86．harmful    87．Besides    88．follow/take    89．actions/measures    90．smaller\n【导语】本文是A和B的对话。对话围绕着B视力下降展开，重点谈论了如何让近视不再发展。"
+    },
+    {
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-83",
+      "number": 89,
+      "displayNumber": "89",
+      "sectionId": "section-13",
+      "groupId": "section-13-group-1",
+      "prompt": "A: It’s said the government will also take some other  ______ to protect our eyesight.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-204"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "actions/measures",
+      "analysis": "81．dropped    82．clearly    83．distance    84．cause    85．including    86．harmful    87．Besides    88．follow/take    89．actions/measures    90．smaller\n【导语】本文是A和B的对话。对话围绕着B视力下降展开，重点谈论了如何让近视不再发展。"
+    },
+    {
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-13-section-13-group-1-84",
+      "number": 90,
+      "displayNumber": "90",
+      "sectionId": "section-13",
+      "groupId": "section-13-group-1",
+      "prompt": "A: The size of words in students’ textbooks shouldn’t be  ______ than Times New Roman number 5 font (小五号).",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-206"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "smaller",
+      "analysis": "81．dropped    82．clearly    83．distance    84．cause    85．including    86．harmful    87．Besides    88．follow/take    89．actions/measures    90．smaller\n【导语】本文是A和B的对话。对话围绕着B视力下降展开，重点谈论了如何让近视不再发展。"
+    },
+    {
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-14-section-14-group-1-85",
+      "number": 91,
+      "displayNumber": "91",
+      "sectionId": "section-14",
+      "groupId": "section-14-group-1",
+      "prompt": "In some areas of Yunnan, when winter comes, people sit around a fire and bake tea in pottery pots. After the tea leaves are roasted, people add hot water to boil them. While  ______ tea, they chat with each other and bake fruits over the fire which is a common     92     scene in these areas.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-212"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "drinking",
+      "analysis": "91．drinking    92．social    93．unexpectedly    94．choices    95．include    96．pressure    97．offers    98．latest    99．until    100．successful\n【导语】本文讲述了云南一些地区“围炉煮茶”的社会文化场景。"
+    },
+    {
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-14-section-14-group-1-86",
+      "number": 92,
+      "displayNumber": "92",
+      "sectionId": "section-14",
+      "groupId": "section-14-group-1",
+      "prompt": "In some areas of Yunnan, when winter comes, people sit around a fire and bake tea in pottery pots. After the tea leaves are roasted, people add hot water to boil them. While     91     tea, they chat with each other and bake fruits over the fire which is a common  ______ scene in these areas.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-212"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "social",
+      "analysis": "91．drinking    92．social    93．unexpectedly    94．choices    95．include    96．pressure    97．offers    98．latest    99．until    100．successful\n【导语】本文讲述了云南一些地区“围炉煮茶”的社会文化场景。"
+    },
+    {
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-14-section-14-group-1-87",
+      "number": 93,
+      "displayNumber": "93",
+      "sectionId": "section-14",
+      "groupId": "section-14-group-1",
+      "prompt": "Today, the topic of “boiling tea around a stove” has become popular on the Internet  ______ . On the social media platform Xiaohongshu, the number of views on the topic has also been over 12 million.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-213"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "unexpectedly",
+      "analysis": "91．drinking    92．social    93．unexpectedly    94．choices    95．include    96．pressure    97．offers    98．latest    99．until    100．successful\n【导语】本文讲述了云南一些地区“围炉煮茶”的社会文化场景。"
+    },
+    {
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-14-section-14-group-1-88",
+      "number": 94,
+      "displayNumber": "94",
+      "sectionId": "section-14",
+      "groupId": "section-14-group-1",
+      "prompt": "People are sharing many other options in the activity, from homemade roasted milk tea to heated wine. Besides drinks, the  ______ of snacks are even more diverse (多样化). The most popular ones     95     roasted sweet potatoes, oranges, as well as dried fruits, nuts.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-214"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "choices",
+      "analysis": "91．drinking    92．social    93．unexpectedly    94．choices    95．include    96．pressure    97．offers    98．latest    99．until    100．successful\n【导语】本文讲述了云南一些地区“围炉煮茶”的社会文化场景。"
+    },
+    {
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-14-section-14-group-1-89",
+      "number": 95,
+      "displayNumber": "95",
+      "sectionId": "section-14",
+      "groupId": "section-14-group-1",
+      "prompt": "People are sharing many other options in the activity, from homemade roasted milk tea to heated wine. Besides drinks, the     94     of snacks are even more diverse (多样化). The most popular ones  ______ roasted sweet potatoes, oranges, as well as dried fruits, nuts.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-214"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "include",
+      "analysis": "91．drinking    92．social    93．unexpectedly    94．choices    95．include    96．pressure    97．offers    98．latest    99．until    100．successful\n【导语】本文讲述了云南一些地区“围炉煮茶”的社会文化场景。"
+    },
+    {
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-14-section-14-group-1-90",
+      "number": 96,
+      "displayNumber": "96",
+      "sectionId": "section-14",
+      "groupId": "section-14-group-1",
+      "prompt": "The appeal of boiling tea around a stove also comes from companionship (陪伴). When people are facing the  ______ of a fast lifestyle and the stress of work and study, making tea around the fire     97     a chance to slow down, relax and get back to living a life with friends.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-215"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "pressure",
+      "analysis": "91．drinking    92．social    93．unexpectedly    94．choices    95．include    96．pressure    97．offers    98．latest    99．until    100．successful\n【导语】本文讲述了云南一些地区“围炉煮茶”的社会文化场景。"
+    },
+    {
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-14-section-14-group-1-91",
+      "number": 97,
+      "displayNumber": "97",
+      "sectionId": "section-14",
+      "groupId": "section-14-group-1",
+      "prompt": "The appeal of boiling tea around a stove also comes from companionship (陪伴). When people are facing the     96     of a fast lifestyle and the stress of work and study, making tea around the fire  ______ a chance to slow down, relax and get back to living a life with friends.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-215"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "offers",
+      "analysis": "91．drinking    92．social    93．unexpectedly    94．choices    95．include    96．pressure    97．offers    98．latest    99．until    100．successful\n【导语】本文讲述了云南一些地区“围炉煮茶”的社会文化场景。"
+    },
+    {
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-14-section-14-group-1-92",
+      "number": 98,
+      "displayNumber": "98",
+      "sectionId": "section-14",
+      "groupId": "section-14-group-1",
+      "prompt": "The activity is the  ______ addition to Guochao, or the “Chinese fashion trend” movement. Slow-boiling was the main way to make tea in ancient China     99     a faster brewing (冲泡) method became widespread during the Ming dynasty. Now, the old method is making a      100     comeback in the hands of young Chinese people.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-216"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "latest",
+      "analysis": "91．drinking    92．social    93．unexpectedly    94．choices    95．include    96．pressure    97．offers    98．latest    99．until    100．successful\n【导语】本文讲述了云南一些地区“围炉煮茶”的社会文化场景。"
+    },
+    {
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-14-section-14-group-1-93",
+      "number": 99,
+      "displayNumber": "99",
+      "sectionId": "section-14",
+      "groupId": "section-14-group-1",
+      "prompt": "The activity is the     98     addition to Guochao, or the “Chinese fashion trend” movement. Slow-boiling was the main way to make tea in ancient China  ______ a faster brewing (冲泡) method became widespread during the Ming dynasty. Now, the old method is making a      100     comeback in the hands of young Chinese people.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-216"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "until",
+      "analysis": "91．drinking    92．social    93．unexpectedly    94．choices    95．include    96．pressure    97．offers    98．latest    99．until    100．successful\n【导语】本文讲述了云南一些地区“围炉煮茶”的社会文化场景。"
+    },
+    {
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-14-section-14-group-1-94",
+      "number": 100,
+      "displayNumber": "100",
+      "sectionId": "section-14",
+      "groupId": "section-14-group-1",
+      "prompt": "The activity is the     98     addition to Guochao, or the “Chinese fashion trend” movement. Slow-boiling was the main way to make tea in ancient China     99     a faster brewing (冲泡) method became widespread during the Ming dynasty. Now, the old method is making  ______      comeback in the hands of young Chinese people.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-216"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "successful",
+      "analysis": "91．drinking    92．social    93．unexpectedly    94．choices    95．include    96．pressure    97．offers    98．latest    99．until    100．successful\n【导语】本文讲述了云南一些地区“围炉煮茶”的社会文化场景。"
+    },
+    {
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-16-section-16-group-1-95",
+      "number": 101,
+      "displayNumber": "101",
+      "sectionId": "section-16",
+      "groupId": "section-16-group-1",
+      "prompt": "While Western kids dream about what Santa will bring them, Chinese kids will be getting their money box ready to receive hongbao. Hongbao, red envelopes, are the traditional gifts that adults give children during the Chinese New Year holiday period. The general idea is that adults with income give children with no income hongbao during Chinese New Year. ______",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-220"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "F",
+      "analysis": "【导语】本文详细地介绍了红包在生活中的应用和发展情况。"
+    },
+    {
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-16-section-16-group-1-96",
+      "number": 102,
+      "displayNumber": "102",
+      "sectionId": "section-16",
+      "groupId": "section-16-group-1",
+      "prompt": "You’ll see hongbao used as decorations (装饰) on just about every Chinese New Year flower and plant that is displayed during the season. ______      And they are only used for decoration. I know because my son checks them whenever he can reach them.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-221"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "A",
+      "analysis": "【导语】本文详细地介绍了红包在生活中的应用和发展情况。"
+    },
+    {
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-16-section-16-group-1-97",
+      "number": 104,
+      "displayNumber": "104",
+      "sectionId": "section-16",
+      "groupId": "section-16-group-1",
+      "prompt": "If you need hongbao, you can buy them at shops at any time of the year. ______      So you ensure you don’t get one that says “Congratulations on your marriage” for a birthday.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-223"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "D",
+      "analysis": "【导语】本文详细地介绍了红包在生活中的应用和发展情况。"
+    },
+    {
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-16-section-16-group-1-98",
+      "number": 105,
+      "displayNumber": "105",
+      "sectionId": "section-16",
+      "groupId": "section-16-group-1",
+      "prompt": "These days, people don’t even have to leave the comfort of their sofas to give hongbao. ______      Wechat, a popular instant message and photo sharing app, introduced electronic hongbao, so now it’s even easier.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-224"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "E",
+      "analysis": "【导语】本文详细地介绍了红包在生活中的应用和发展情况。"
+    },
+    {
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-17-section-17-group-1-99",
       "number": 107,
       "displayNumber": "107",
       "sectionId": "section-17",
       "groupId": "section-17-group-1",
-      "prompt": "Story 1: In the story of Noah’s Ark, a white dove brought a leaf—a    107    of dry land—back, which gave hope to Noah.",
+      "prompt": "Story 1: In the story of Noah’s Ark, a white dove brought a leaf— ______     of dry land—back, which gave hope to Noah.",
       "options": [],
       "inputKind": "blank",
       "sourceBlockIds": [
-        "table-4-row-3"
+        "table-4"
       ],
       "type": "blank",
       "context": "",
@@ -4457,16 +5194,16 @@
       "analysis": "【导语】本文主要通过两个故事解释白鸽为什么是和平的象征。"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-17-section-17-group-1-72",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-17-section-17-group-1-100",
       "number": 108,
       "displayNumber": "108",
       "sectionId": "section-17",
       "groupId": "section-17-group-1",
-      "prompt": "Story 2: In the story of Central Asia, a nest of doves in the helmet of one of the kings    108    in keeping peace between the two countries.",
+      "prompt": "Story 2: In the story of Central Asia, a nest of doves in the helmet of one of the kings  ______ in keeping peace between the two countries.",
       "options": [],
       "inputKind": "blank",
       "sourceBlockIds": [
-        "table-4-row-4"
+        "table-4"
       ],
       "type": "blank",
       "context": "",
@@ -4474,16 +5211,16 @@
       "analysis": "【导语】本文主要通过两个故事解释白鸽为什么是和平的象征。"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-17-section-17-group-1-73",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-17-section-17-group-1-101",
       "number": 109,
       "displayNumber": "109",
       "sectionId": "section-17",
       "groupId": "section-17-group-1",
-      "prompt": "Two examples that show its meaning: ●In ancient Japan, a dove crying sword showed the war    109   . ●In Europe, a dove flying around shows the peace of the dead.",
+      "prompt": "Two examples that show its meaning: ●In ancient Japan, a dove crying sword showed the war  ______ . ●In Europe, a dove flying around shows the peace of the dead.",
       "options": [],
       "inputKind": "blank",
       "sourceBlockIds": [
-        "table-4-row-5"
+        "table-4"
       ],
       "type": "blank",
       "context": "",
@@ -4491,72 +5228,21 @@
       "analysis": "【导语】本文主要通过两个故事解释白鸽为什么是和平的象征。"
     },
     {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-17-section-17-group-1-74",
+      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-17-section-17-group-1-102",
       "number": 110,
       "displayNumber": "110",
       "sectionId": "section-17",
       "groupId": "section-17-group-1",
-      "prompt": "It didn’t become popular as a symbol of peace    110    Picasso used it on a poster in 1949. 书面表达 你校响应成都大运会的号召，委托校英语社储备志愿者，特举办“承梦而来”主题冬令营活动。假如你是杨光，对此很感兴趣，根据以下海报内容向英语社Eason提出申请，表达你的意愿。 要求：",
+      "prompt": "It didn’t become popular as a symbol of peace  ______ Picasso used it on a poster in 1949.",
       "options": [],
       "inputKind": "blank",
       "sourceBlockIds": [
-        "table-4-row-6"
+        "table-4"
       ],
       "type": "blank",
       "context": "",
       "answer": "until",
       "analysis": "【导语】本文主要通过两个故事解释白鸽为什么是和平的象征。"
-    },
-    {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-18-section-18-group-1-75",
-      "number": 1,
-      "displayNumber": "1",
-      "sectionId": "section-18",
-      "groupId": "section-18-group-1",
-      "prompt": "比较所给信息，选择你心仪的冬令营，并阐明选择的理由，至少四条；",
-      "options": [],
-      "inputKind": "text",
-      "sourceBlockIds": [
-        "paragraph-240"
-      ],
-      "type": "text",
-      "context": "",
-      "answer": "(e)xcept",
-      "analysis": "Dear Eason,\nThanks for offering us such wonderful two camps. Being a volunteer during the 31st Universiade is my dream. I am also honored to have this opportunity to apply for the winter camp.\nAs for me, I prefer the Sports Camp. The reasons for choosing the Sports Camp are as follows. First of all, for the coming high school entrance examination, I have not done much exercise for a long time, so I want to take this opportunity to exercise myself. Second, the main theme of the 31st Universiade is sports, so participation in the Sports Camp also responds to the call of the government. Third, I have always dreamed of rock climbing, which is an activity in the Sports Camp. In addition, Madame Curie once said that science is based on a healthy body. As the next generation of the new era, we need to keep moving.\nLooking forward to your early reply!\nYours,\nYang Guang\n【详解】1.题干解读：本文是一篇书信作文。要求比较所给信息，选择你心仪的冬令营，并阐明选择的理由，注意要点齐全，可适当发挥。"
-    },
-    {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-18-section-18-group-1-76",
-      "number": 2,
-      "displayNumber": "2",
-      "sectionId": "section-18",
-      "groupId": "section-18-group-1",
-      "prompt": "文中不得提及有关个人的任何真实信息，如：校名、人名等；",
-      "options": [],
-      "inputKind": "text",
-      "sourceBlockIds": [
-        "paragraph-241"
-      ],
-      "type": "text",
-      "context": "",
-      "answer": "例文",
-      "analysis": ""
-    },
-    {
-      "id": "2024-sichuan-chengdu-sichuan-chengdu-section-18-section-18-group-1-77",
-      "number": 3,
-      "displayNumber": "3",
-      "sectionId": "section-18",
-      "groupId": "section-18-group-1",
-      "prompt": "词数：110词左右，开头和结尾已给出，不计入总词数。 Dear Eason, Thanks for offering us such wonderful two camps. Being a volunteer during the 31st Universiade is my dream. _________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________ Looking forward to your early reply! Yours, Yang Guang",
-      "options": [],
-      "inputKind": "blank",
-      "sourceBlockIds": [
-        "paragraph-242"
-      ],
-      "type": "blank",
-      "context": "",
-      "answer": "",
-      "analysis": ""
     }
   ],
   "readingA": {

@@ -1258,7 +1258,15 @@
           "text": "5.考试结束时，请将本试卷和答题卡一并交回。"
         }
       ],
-      "questionIds": []
+      "questionIds": [],
+      "displayBlocks": [
+        {
+          "id": "image-1-1",
+          "kind": "image",
+          "src": "/junior-high/2023-hebei-hebei/image1.png",
+          "alt": "原卷图片"
+        }
+      ]
     },
     {
       "id": "section-2",
@@ -1271,7 +1279,8 @@
           "text": "听力部分"
         }
       ],
-      "questionIds": []
+      "questionIds": [],
+      "displayBlocks": []
     },
     {
       "id": "section-3",
@@ -1317,7 +1326,8 @@
         "2023-hebei-hebei-section-3-section-3-group-1-3",
         "2023-hebei-hebei-section-3-section-3-group-1-4",
         "2023-hebei-hebei-section-3-section-3-group-1-5"
-      ]
+      ],
+      "displayBlocks": []
     },
     {
       "id": "section-4",
@@ -1375,7 +1385,8 @@
         "2023-hebei-hebei-section-4-section-4-group-1-8",
         "2023-hebei-hebei-section-4-section-4-group-1-9",
         "2023-hebei-hebei-section-4-section-4-group-1-10"
-      ]
+      ],
+      "displayBlocks": []
     },
     {
       "id": "section-5",
@@ -1523,6 +1534,44 @@
         "2023-hebei-hebei-section-5-section-5-group-6-16",
         "2023-hebei-hebei-section-5-section-5-group-7-17",
         "2023-hebei-hebei-section-5-section-5-group-8-18"
+      ],
+      "displayBlocks": [
+        {
+          "id": "image-26-1",
+          "kind": "image",
+          "src": "/junior-high/2023-hebei-hebei/image2.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "image-26-2",
+          "kind": "image",
+          "src": "/junior-high/2023-hebei-hebei/image3.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "image-26-3",
+          "kind": "image",
+          "src": "/junior-high/2023-hebei-hebei/image4.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "image-28-1",
+          "kind": "image",
+          "src": "/junior-high/2023-hebei-hebei/image5.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "image-28-2",
+          "kind": "image",
+          "src": "/junior-high/2023-hebei-hebei/image6.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "image-28-3",
+          "kind": "image",
+          "src": "/junior-high/2023-hebei-hebei/image7.png",
+          "alt": "原卷图片"
+        }
       ]
     },
     {
@@ -1623,7 +1672,8 @@
         "2023-hebei-hebei-section-6-section-6-group-5-23",
         "2023-hebei-hebei-section-6-section-6-group-6-24",
         "2023-hebei-hebei-section-6-section-6-group-7-25"
-      ]
+      ],
+      "displayBlocks": []
     },
     {
       "id": "section-7",
@@ -1652,7 +1702,18 @@
           "text": "笔试部分"
         }
       ],
-      "questionIds": []
+      "questionIds": [],
+      "displayBlocks": [
+        {
+          "id": "table-1",
+          "kind": "table",
+          "rows": [
+            [
+              "Information Sheet Activity:    a fire practice Day:    26. this ___________ Start at:    27. ___________ o’clock Get up from:    28. your ___________ Must:    29. ___________ out of the building Meet at:    30. the ___________ behind the building"
+            ]
+          ]
+        }
+      ]
     },
     {
       "id": "section-8",
@@ -1803,6 +1864,19 @@
         "2023-hebei-hebei-section-8-section-8-group-7-33",
         "2023-hebei-hebei-section-8-section-8-group-8-34",
         "2023-hebei-hebei-section-8-section-8-group-9-35"
+      ],
+      "displayBlocks": [
+        {
+          "id": "paragraph-59",
+          "kind": "paragraph",
+          "text": "选出可以填入空白处的最佳选项。"
+        },
+        {
+          "id": "image-70-1",
+          "kind": "image",
+          "src": "/junior-high/2023-hebei-hebei/image8.png",
+          "alt": "原卷图片"
+        }
       ]
     },
     {
@@ -1818,7 +1892,8 @@
           "text": "Ⅶ.完形填空（共10小题：每小题1分，满分10分）"
         }
       ],
-      "questionIds": []
+      "questionIds": [],
+      "displayBlocks": []
     },
     {
       "id": "section-10",
@@ -1923,7 +1998,36 @@
         "2023-hebei-hebei-section-10-section-10-group-1-41",
         "2023-hebei-hebei-section-10-section-10-group-1-42",
         "2023-hebei-hebei-section-10-section-10-group-1-43",
-        "2023-hebei-hebei-section-10-section-10-group-1-44"
+        "2023-hebei-hebei-section-10-section-10-group-1-44",
+        "2023-hebei-hebei-section-10-section-10-group-1-45"
+      ],
+      "displayBlocks": [
+        {
+          "id": "paragraph-83",
+          "kind": "paragraph",
+          "text": "Some people have no interest in sports. They think that sports make them ____11____ and smell bad. They say, “Why waste time playing sports?” To these people, I politely say, “You have not discovered the ____12____ of sports!”"
+        },
+        {
+          "id": "paragraph-84",
+          "kind": "paragraph",
+          "text": "Let me share with you a basketball game I played two weeks ago. Our parents and friends were there to ____13____ us. A lot of people were watching. We all wanted to ____14____ the game in front of so many people."
+        },
+        {
+          "id": "paragraph-85",
+          "kind": "paragraph",
+          "text": "The game was ____15____ over and we were one point behind. Our coach called us together and said, “Okay, this is it! Either we score now or the game is over. Let’s work hard to score. Even if we don’t score, ____16____ we know that we have tried our best. So, boys, don’t think too much. It doesn’t matter if we lose. Just do it.”"
+        },
+        {
+          "id": "paragraph-86",
+          "kind": "paragraph",
+          "text": "Well, in the last ____17____ of the game, we truly scored and two teams tied (打成平局)! We went into overtime (加时) and we lost in the end. But after the game, the coach hugged all of us. He told us that he was ____18____ because he had never seen a team try harder than us."
+        },
+        {
+          "id": "image-96-1",
+          "kind": "image",
+          "src": "/junior-high/2023-hebei-hebei/image8.png",
+          "alt": "原卷图片"
+        }
       ]
     },
     {
@@ -2358,21 +2462,108 @@
         }
       ],
       "questionIds": [
-        "2023-hebei-hebei-section-11-section-11-group-1-45",
-        "2023-hebei-hebei-section-11-section-11-group-2-46",
-        "2023-hebei-hebei-section-11-section-11-group-4-47",
-        "2023-hebei-hebei-section-11-section-11-group-5-48",
-        "2023-hebei-hebei-section-11-section-11-group-6-49",
-        "2023-hebei-hebei-section-11-section-11-group-8-50",
-        "2023-hebei-hebei-section-11-section-11-group-12-51",
-        "2023-hebei-hebei-section-11-section-11-group-14-52",
-        "2023-hebei-hebei-section-11-section-11-group-16-53",
-        "2023-hebei-hebei-section-11-section-11-group-18-54",
-        "2023-hebei-hebei-section-11-section-11-group-20-55",
-        "2023-hebei-hebei-section-11-section-11-group-22-56",
-        "2023-hebei-hebei-section-11-section-11-group-24-57",
-        "2023-hebei-hebei-section-11-section-11-group-26-58",
-        "2023-hebei-hebei-section-11-section-11-group-27-59"
+        "2023-hebei-hebei-section-11-section-11-group-1-46",
+        "2023-hebei-hebei-section-11-section-11-group-2-47",
+        "2023-hebei-hebei-section-11-section-11-group-4-48",
+        "2023-hebei-hebei-section-11-section-11-group-5-49",
+        "2023-hebei-hebei-section-11-section-11-group-6-50",
+        "2023-hebei-hebei-section-11-section-11-group-8-51",
+        "2023-hebei-hebei-section-11-section-11-group-12-52",
+        "2023-hebei-hebei-section-11-section-11-group-14-53",
+        "2023-hebei-hebei-section-11-section-11-group-16-54",
+        "2023-hebei-hebei-section-11-section-11-group-18-55",
+        "2023-hebei-hebei-section-11-section-11-group-20-56",
+        "2023-hebei-hebei-section-11-section-11-group-22-57",
+        "2023-hebei-hebei-section-11-section-11-group-24-58",
+        "2023-hebei-hebei-section-11-section-11-group-26-59",
+        "2023-hebei-hebei-section-11-section-11-group-27-60"
+      ],
+      "displayBlocks": [
+        {
+          "id": "paragraph-99",
+          "kind": "paragraph",
+          "text": "阅读A、B、C、D四篇材料，从解小题所给的四个选项中选出最佳选项。"
+        },
+        {
+          "id": "paragraph-100",
+          "kind": "paragraph",
+          "text": "A"
+        },
+        {
+          "id": "table-2",
+          "kind": "table",
+          "rows": [
+            [
+              "Home    News    Activities    Ideas Pilar When I was a child, I collected books about nature. I loved learning about animals from other countries. When I get older, I find out that my own country has interesting nature too. That’s why I like studying nature now. I often write articles about nature and put them on my website. Sarah I love birds and animals because my school has organized many visits to forests and lakes for us. I also like walking in the countryside and seeing what I can find. I’ve taken many photos about nature. Some are published (发表) in our school magazine. Some are hung on the walls of the school hall. Lia A few years ago, I read an article with beautiful photos of animals, birds and plants in it. It made me start looking at what lives around us. I’ve made some short videos and I often show them to my friends. Now I sometimes give talks about nature at school. I love it. I was once interviewed by the local newspaper."
+            ]
+          ]
+        },
+        {
+          "id": "image-table-2-1",
+          "kind": "image",
+          "src": "/junior-high/2023-hebei-hebei/image9.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "image-111-1",
+          "kind": "image",
+          "src": "/junior-high/2023-hebei-hebei/image10.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "image-117-1",
+          "kind": "image",
+          "src": "/junior-high/2023-hebei-hebei/image8.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "table-3",
+          "kind": "table",
+          "rows": [
+            [
+              "Know the goals Make sure everyone understands the goal of the project. If you’re doing a class project, you need to check the teacher’s instructions carefully and ask questions whenever something isn’t clear. There’s a popular saying: If you don’t know where you’re going, you probably won’t get there."
+            ],
+            [
+              "Assign (指派) roles Everyone should have a role in the team. For example, there should be a leader who helps everyone make decisions. There might be a note-taker who writes down the team’s ideas during meetings, and a time-keeper to control the time. There might also be a fact-checker or a group speaker."
+            ],
+            [
+              "Divide the work For large projects, the work can be divided into smaller tasks. Then you can choose tasks that you do well or enjoy. Of course, you shouldn’t always do the same task. It’s good to try new things, even if they’re difficult!"
+            ],
+            [
+              "Make a plan After you divide the work write down a plan on paper. You can use a calendar to help you. List all the tasks and think about when each one must be finished. It’s important for everyone to follow the plan. And if you can’t finish your part on time, tell the others as soon as possible."
+            ]
+          ]
+        },
+        {
+          "id": "image-table-3-1",
+          "kind": "image",
+          "src": "/junior-high/2023-hebei-hebei/image11.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "image-table-3-2",
+          "kind": "image",
+          "src": "/junior-high/2023-hebei-hebei/image12.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "image-table-3-3",
+          "kind": "image",
+          "src": "/junior-high/2023-hebei-hebei/image13.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "image-table-3-4",
+          "kind": "image",
+          "src": "/junior-high/2023-hebei-hebei/image14.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "image-table-3-5",
+          "kind": "image",
+          "src": "/junior-high/2023-hebei-hebei/image10.png",
+          "alt": "原卷图片"
+        }
       ]
     },
     {
@@ -2388,7 +2579,8 @@
           "text": "Ⅸ.任务型阅读（共5小题：每小题2分，满分10分）"
         }
       ],
-      "questionIds": []
+      "questionIds": [],
+      "displayBlocks": []
     },
     {
       "id": "section-13",
@@ -2477,11 +2669,44 @@
         }
       ],
       "questionIds": [
-        "2023-hebei-hebei-section-13-section-13-group-1-60",
         "2023-hebei-hebei-section-13-section-13-group-1-61",
         "2023-hebei-hebei-section-13-section-13-group-1-62",
         "2023-hebei-hebei-section-13-section-13-group-1-63",
-        "2023-hebei-hebei-section-13-section-13-group-1-64"
+        "2023-hebei-hebei-section-13-section-13-group-1-64",
+        "2023-hebei-hebei-section-13-section-13-group-1-65",
+        "2023-hebei-hebei-section-13-section-13-group-1-66"
+      ],
+      "displayBlocks": [
+        {
+          "id": "paragraph-164",
+          "kind": "paragraph",
+          "text": "Last week we went on a school trip to a science museum. Ms. Liu, the guide, showed us around a smart home."
+        },
+        {
+          "id": "paragraph-165",
+          "kind": "paragraph",
+          "text": "We started with the front door. Ms. Liu asked me to ring the doorbell. I didn’t notice the tiny camera that was fixed just above it. After I pressed (按) the doorbell, the camera sent a live video (视频直播) to the home-owners. “They can electronically open the door when they are not at home,” said Ms. Liu."
+        },
+        {
+          "id": "paragraph-166",
+          "kind": "paragraph",
+          "text": "The other thing I couldn’t see on the door was a lock. “There must be one,” I thought. At this time, Ms. Liu took out a smart phone and put it against the door. And it opened. “Oh, the key is on the smart phone.”"
+        },
+        {
+          "id": "paragraph-167",
+          "kind": "paragraph",
+          "text": "After entering the living room, I saw a computer on a table. By using the computer, the owners can control how much energy is used. In this way, they can manage their living cost."
+        },
+        {
+          "id": "paragraph-168",
+          "kind": "paragraph",
+          "text": "One of the rooms I wanted to see most was the bedroom. To my great surprise, the bed disappeared into the floor at the touch of the smart phone. The window has a smart blind (百叶窗). It can be raised and lowered with a voice."
+        },
+        {
+          "id": "paragraph-169",
+          "kind": "paragraph",
+          "text": "As I left the smart home, I looked back on what I had just seen. Scientists often say that these products are improving our life. I think the technology in the smart home may make us lazier. However, there is no doubt that it will become more popular in the homes of tomorrow."
+        }
       ]
     },
     {
@@ -2497,7 +2722,8 @@
           "text": "Ⅹ.词语运用（共10小题；每小题1分，满分10分）"
         }
       ],
-      "questionIds": []
+      "questionIds": [],
+      "displayBlocks": []
     },
     {
       "id": "section-15",
@@ -2520,7 +2746,19 @@
           "text": "When he ____45____ (get) to my desk, he looked at my picture and said, “Wow! I like those bright ____46____ (color)! That’s great!” I felt ____47____ (relax) at once. Mr. Zhao is patient and he always ____48____ (tell) us not to worry about giving wrong answers. Also, he shows us how to learn ____49____ our mistakes. Now I am in the _____50_____ (nine) grade, and I’m leaving school. I will remember all the suggestions he has given me."
         }
       ],
-      "questionIds": []
+      "questionIds": [
+        "2023-hebei-hebei-section-15-section-15-group-1-67",
+        "2023-hebei-hebei-section-15-section-15-group-1-68",
+        "2023-hebei-hebei-section-15-section-15-group-1-69",
+        "2023-hebei-hebei-section-15-section-15-group-1-70",
+        "2023-hebei-hebei-section-15-section-15-group-1-71",
+        "2023-hebei-hebei-section-15-section-15-group-1-72",
+        "2023-hebei-hebei-section-15-section-15-group-1-73",
+        "2023-hebei-hebei-section-15-section-15-group-1-74",
+        "2023-hebei-hebei-section-15-section-15-group-1-75",
+        "2023-hebei-hebei-section-15-section-15-group-1-76"
+      ],
+      "displayBlocks": []
     },
     {
       "id": "section-16",
@@ -2540,7 +2778,8 @@
           "text": "A）连词成句（共5小题；每小题1分，满分5分）"
         }
       ],
-      "questionIds": []
+      "questionIds": [],
+      "displayBlocks": []
     },
     {
       "id": "section-17",
@@ -2609,10 +2848,18 @@
         }
       ],
       "questionIds": [
-        "2023-hebei-hebei-section-17-section-17-group-1-65",
-        "2023-hebei-hebei-section-17-section-17-group-1-66",
-        "2023-hebei-hebei-section-17-section-17-group-1-67",
-        "2023-hebei-hebei-section-17-section-17-group-1-68"
+        "2023-hebei-hebei-section-17-section-17-group-1-77",
+        "2023-hebei-hebei-section-17-section-17-group-1-78",
+        "2023-hebei-hebei-section-17-section-17-group-1-79",
+        "2023-hebei-hebei-section-17-section-17-group-1-80",
+        "2023-hebei-hebei-section-17-section-17-group-1-81"
+      ],
+      "displayBlocks": [
+        {
+          "id": "paragraph-186",
+          "kind": "paragraph",
+          "text": "句末标点已给出。"
+        }
       ]
     },
     {
@@ -2693,10 +2940,23 @@
           "alt": "原卷图片"
         }
       ],
-      "questionIds": [
-        "2023-hebei-hebei-section-18-section-18-group-1-69",
-        "2023-hebei-hebei-section-18-section-18-group-1-70",
-        "2023-hebei-hebei-section-18-section-18-group-1-71"
+      "questionIds": [],
+      "displayBlocks": [
+        {
+          "id": "table-4",
+          "kind": "table",
+          "rows": [
+            [
+              "You know, in English, given names (名字) come first and family names (姓) come last. How about Chinese names? And can you help me choose a Chinese name and tell me its meaning?"
+            ]
+          ]
+        },
+        {
+          "id": "image-208-1",
+          "kind": "image",
+          "src": "/junior-high/2023-hebei-hebei/image15.png",
+          "alt": "原卷图片"
+        }
       ]
     }
   ],
@@ -2720,7 +2980,7 @@
       "type": "choice",
       "context": "",
       "answer": "C",
-      "analysis": "【解析】\n【详解】句意：非常感谢你的礼物。我喜欢它。\n考查固定搭配。in在……里；of……的；for为了；with和。thank for sth“因某物而感谢”，固定短语，for表示原因，故选C。"
+      "analysis": ""
     },
     {
       "id": "2023-hebei-hebei-section-3-section-3-group-1-2",
@@ -2741,7 +3001,7 @@
       "type": "choice",
       "context": "",
       "answer": "C",
-      "analysis": "【解析】\n【详解】句意：——你从哪里弄来的玩具车？——从Betty那。她自己做的。\n考查代词辨析。myself我自己；himself他自己；herself她自己；yourself你自己。根据“She made it...”可知是她自己做的，用反身代词herself。故选C。"
+      "analysis": ""
     },
     {
       "id": "2023-hebei-hebei-section-3-section-3-group-1-3",
@@ -2762,7 +3022,7 @@
       "type": "choice",
       "context": "",
       "answer": "B",
-      "analysis": "【解析】\n【详解】句意：快点，否则你会错过音乐会的开场。\n考查连词辨析。so所以；or否则；and和；but但是。根据“Hurry up...you will miss”可知要快点，否则就会错过音乐会的开场。故选B。"
+      "analysis": ""
     },
     {
       "id": "2023-hebei-hebei-section-3-section-3-group-1-4",
@@ -2783,7 +3043,7 @@
       "type": "choice",
       "context": "",
       "answer": "D",
-      "analysis": "【解析】\n【详解】句意：这个星期天我要去滑冰。你想来吗？\n考查时态。根据“Do you want to come”可知动作还未发生，用一般将来时will do。故选D。"
+      "analysis": ""
     },
     {
       "id": "2023-hebei-hebei-section-3-section-3-group-1-5",
@@ -2795,7 +3055,7 @@
       "options": [
         "A. Amy will have supper.",
         "B. Amy’s dad will wait for her.",
-        "C. Amy’s brother will play with her. Ⅱ.听句子，选出该句的最佳答语（共5小题；每小题1分，满分5分）"
+        "C. Amy’s brother will play with her."
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -2804,7 +3064,7 @@
       "type": "choice",
       "context": "",
       "answer": "A",
-      "analysis": "【解析】\n【详解】句意：如果我们能找到更好的方法，我们就能更快地完成这项工作。\n考查情态动词。can能；can’t不能；must必须；mustn’t禁止。根据“ ...find a better way, we’ll finish the job faster”可知，此处指要是能找到更好的方法，就能更快地完成工作，故选A。"
+      "analysis": ""
     },
     {
       "id": "2023-hebei-hebei-section-4-section-4-group-1-6",
@@ -2825,7 +3085,7 @@
       "type": "choice",
       "context": "",
       "answer": "A",
-      "analysis": "【解析】\n【详解】句意：在课堂上发言之前，我们应该先举手。\n考查动词短语辨析。put up举起；put out扑灭；put down放下；put away放好。根据“We are supposed to...our hand before we speak in class.”可知，发言之前应该先举手。故选A。"
+      "analysis": ""
     },
     {
       "id": "2023-hebei-hebei-section-4-section-4-group-1-7",
@@ -2846,7 +3106,7 @@
       "type": "choice",
       "context": "",
       "answer": "B",
-      "analysis": "【解析】\n【详解】句意：这本书一定很棒。我妹妹读了五遍。\n考查时态。根据“My sister...it five times.”可知，强调动作已经完成的次数，用现在完成时，故选B。"
+      "analysis": ""
     },
     {
       "id": "2023-hebei-hebei-section-4-section-4-group-1-8",
@@ -2867,7 +3127,7 @@
       "type": "choice",
       "context": "",
       "answer": "C",
-      "analysis": "【解析】\n【详解】句意：有些学生在那边打太极。让我们去加入他们吧。\n考查时态。根据“Let’s go and join them.”可知他们正在打太极，可以去加入他们，故时态用现在进行时（am/is/are doing）。故选C。"
+      "analysis": ""
     },
     {
       "id": "2023-hebei-hebei-section-4-section-4-group-1-9",
@@ -2888,7 +3148,7 @@
       "type": "choice",
       "context": "",
       "answer": "D",
-      "analysis": "【解析】\n【详解】句意：当马克演讲时，丽莎正忙着做笔记。\n考查连词辨析。if如果；unless除非；until直到；while当，而。根据“Lisa was busy taking notes...Mark was giving a talk”可知此处表示两个动作同时发生，用while连接。故选D。"
+      "analysis": ""
     },
     {
       "id": "2023-hebei-hebei-section-4-section-4-group-1-10",
@@ -2900,7 +3160,7 @@
       "options": [
         "A. Check my writing, Mr. Li, OK?",
         "B. Mr. Li, could you please check my writing?",
-        "C. Can you see any mistakes in my writing, Mr. Li? Ⅲ.听对话和问题，选择正确答案（共8小题；每小题1分，满分8分）"
+        "C. Can you see any mistakes in my writing, Mr. Li?"
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -2909,7 +3169,7 @@
       "type": "choice",
       "context": "",
       "answer": "C",
-      "analysis": "【解析】\n【详解】句意：这个村子每天为60岁以上的老人免费提供早餐。\n考查一般现在时的被动语态。本句主语Breakfast是动作provide的承受者，结合“every day”可知，是一般现在时，所以用一般现在时的被动语态。故选C。\nⅦ.完形填空（共10小题：每小题1分，满分10分）\n阅读下面短文，从每小题所给的四个选项中选出最佳选项。\nSome people have no interest in sports. They think that sports make them ____11____ and smell bad. They say, “Why waste time playing sports?” To these people, I politely say, “You have not discovered the ____12____ of sports!”\nLet me share with you a basketball game I played two weeks ago. Our parents and friends were there to ____13____ us. A lot of people were watching. We all wanted to ____14____ the game in front of so many people.\nThe game was ____15____ over and we were one point behind. Our coach called us together and said, “Okay, this is it! Either we score now or the game is over. Let’s work hard to score. Even if we don’t score, ____16____ we know that we have tried our best. So, boys, don’t think too much. It doesn’t matter if we lose. Just do it.”\nWell, in the last ____17____ of the game, we truly scored and two teams tied (打成平局)! We went into overtime (加时) and we lost in the end. But after the game, the coach hugged all of us. He told us that he was ____18____ because he had never seen a team try harder than us.\nTo be honest, I ____19____ a lot of pleasure in playing sports. It makes me happy and comfortable. That’s why I play sports whenever I get the chance. So my ____20____ is to choose a sport and keep doing it. Your body will thank you and your mind will be ready to work well."
+      "analysis": ""
     },
     {
       "id": "2023-hebei-hebei-section-5-section-5-group-1-11",
@@ -3035,7 +3295,7 @@
       "type": "choice",
       "context": "",
       "answer": "D",
-      "analysis": "【解析】\n【导语】本文作者介绍自己对运动的喜爱以及自己的运动经历。\n【11题详解】\n句意：他们认为运动使他们疲劳和气味不好。\nlazy懒的；tired累的；ugly丑陋的；stupid愚蠢的。根据“Some people have no interest in sports. They think that sports make them...and smell bad.”可知，对运动不感兴趣的人会觉得运动使他们疲劳和气味不好。故选B。\n【12题详解】\n句意：你们还没有发现运动的乐趣！\nprice价格；time时间；fun乐趣；level水平。根据“You have not discovered the...of sports!”可知，对于对运动不感兴趣的人，作者想表达他们还没有发现运动的乐趣。故选C。\n【13题详解】\n句意：我们的父母和朋友都在那里为我们加油。\ncall打电话；praise赞扬；help帮助；cheer使振奋。根据“Our parents and friends were there to...us.”可知，父母和朋友都在那里加油。故选D。\n【14题详解】\n句意：我们都想在这么多人面前赢得比赛。\nwin赢得；watch观看；join参加；report报道。根据“We all wanted to...the game in front of so many people.”可知，想要赢得比赛，故选A。\n【15题详解】\n句意：比赛快结束了，我们落后一分。\nsuddenly突然；nearly几乎；finally最终；recently最近。根据“The game was...over and we were one point behind.”可知，比赛快结束时，还落后一分，故选B。\n16题详解】\n句意：即使我们没有得分，至少我们知道我们已经尽力了。\nat first起初；at once立刻；at times有时；at least至少。根据“Even if we don’t score, ...we know that we have tried our best.”可知，即使我们没有得分，至少已经尽力了。故选D。\n【17题详解】\n句意：嗯，在比赛的最后一分钟，我们真的进球了，两队打平了！\nmonth月；week周；hour小时；minute分钟。根据“in the last...of the game, we truly scored and two teams tied (打成平局)”可知，最后一分钟打平，故选D。\n【18题详解】\n句意：他告诉我们，他很自豪，因为他从未见过一支球队比我们更努力。\nbrave勇敢的；active积极的；proud骄傲的；honest诚实的。根据“He told us that he was...because he had never seen a team try harder than us.”可知，队员们的努力使教练骄傲，故选C。\n【19题详解】\n句意：老实说，我在运动中感到很多乐趣。\nfeel感觉；face面对；guess猜；give给。根据“To be honest, I...a lot of pleasure in playing sports.”可知，作者在运动中感到很多乐趣。故选A。\n【20题详解】\n句意：所以我的建议是选择一项运动并坚持下去。\nadvice建议；order命令；action行动；interest兴趣。根据“So my...is to choose a sport and keep doing it.”可知，作者建议选择一项运动并坚持下去。故选A。\nⅦ.阅读理解（共15小题：每小题2分，满分30分）\n阅读A、B、C、D四篇材料，从解小题所给的四个选项中选出最佳选项。\nA"
+      "analysis": ""
     },
     {
       "id": "2023-hebei-hebei-section-5-section-5-group-7-17",
@@ -3068,7 +3328,7 @@
       "options": [
         "A. Go back to his seat.",
         "B. Take down the answer.",
-        "C. Think about another question. Ⅳ.听短文和问题，选择正确答案（共7小题：每小题1分，满分7分）"
+        "C. Think about another question."
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -3215,7 +3475,7 @@
       "options": [
         "A. Some famous actors.",
         "B. Some foreign students.",
-        "C. Some English teachers. V.听短文填空（共5小题；每小题1分，满分5分） Information Sheet Activity:    a fire practice Day:    26. this ___________ Start at:    27. ___________ o’clock Get up from:    28. your ___________ Must:    29. ___________ out of the building Meet at:    30. the ___________ behind the building 笔试部分 Ⅵ.单项选择（共10小题；每小题1分，满分10分） 选出可以填入空白处的最佳选项。"
+        "C. Some English teachers."
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -3245,8 +3505,8 @@
       ],
       "type": "choice",
       "context": "",
-      "answer": "What fine weather",
-      "analysis": "【解析】\n【详解】根据标点提示可知，本句是感叹句，强调的中心词是不可数名词weather，用“What+adj+不可数名词!”句型，故填What fine weather“多好的天气啊”。"
+      "answer": "",
+      "analysis": ""
     },
     {
       "id": "2023-hebei-hebei-section-8-section-8-group-2-27",
@@ -3267,8 +3527,8 @@
       ],
       "type": "choice",
       "context": "",
-      "answer": "It’s a great day for a picnic",
-      "analysis": "【解析】\n【详解】根据所给词以及标点可知，句子是陈述句，主语是It，系动词是is，表语是a great day；介词短语for a picnic作定语。故填It’s a great day for a picnic“今天是野餐的好日子”。"
+      "answer": "",
+      "analysis": ""
     },
     {
       "id": "2023-hebei-hebei-section-8-section-8-group-3-28",
@@ -3289,8 +3549,8 @@
       ],
       "type": "choice",
       "context": "",
-      "answer": "Shall we go to the beach",
-      "analysis": "【解析】\n【详解】根据标点提示可知，本句是疑问句，分析所给单词可知，shall放句首，we作主语， go to the beach去海滩。故填Shall we go to the beach“我们去海滩好吗”。"
+      "answer": "",
+      "analysis": ""
     },
     {
       "id": "2023-hebei-hebei-section-8-section-8-group-4-29",
@@ -3311,8 +3571,8 @@
       ],
       "type": "choice",
       "context": "",
-      "answer": "I’ll take some food",
-      "analysis": "【解析】\n【详解】根据所给词以及标点可知，句子是陈述句，主语是I，谓语是will take，宾语是some food。故填I’ll take some food“我会带一些食物”。"
+      "answer": "",
+      "analysis": ""
     },
     {
       "id": "2023-hebei-hebei-section-8-section-8-group-5-30",
@@ -3332,8 +3592,8 @@
       ],
       "type": "choice",
       "context": "",
-      "answer": "I believe we’ll have a good time",
-      "analysis": "【解析】\n【详解】根据所给词以及标点可知，句子是陈述句，为省略that的宾语从句，主句主谓结构为I believe；从句主语是we，谓语是will have，宾语是a good time。故填I believe we’ll have a good time“我相信我们会玩得很开心”。\nB）书面表达（满分 15 分）"
+      "answer": "",
+      "analysis": ""
     },
     {
       "id": "2023-hebei-hebei-section-8-section-8-group-5-31",
@@ -3354,8 +3614,8 @@
       ],
       "type": "choice",
       "context": "",
-      "answer": "例文",
-      "analysis": "Hi Tony,\nI’m very happy to know that you’ll come to China to learn Chinese. There is no doubt that it is very important and useful to learn Chinese well.\nWe always put our family name first. They are from our family, and it’s surely our Chinese tradition. Then given names come last. Secondly, I prefer Li Cong as your Chinese name. I think this name represents intelligence and cleverness. Just like you! As far as I am concerned, the names are the culture of a country. A good name stands for a good luck.\nLooking forward to seeing you.\nYours,\nWang Mei\n【解析】\n【详解】[总体分析]\n①题材：本文是一篇应用文，为电子邮件；\n②时态：时态为“一般现在时”；\n③提示：写作要点已给出，要求针对邮件内容给出答复，适当添加细节，并突出写作重点。\n[写作步骤]\n第一步，表明学好中文的必要性；\n第二步，介绍中国的姓名文化并为对方推荐一个名字；\n第三步，书写结语。\n[亮点词汇]\n①important and useful重要的和有用的\n②Chinese tradition中国传统\n③stand for代表\n[高分句型]\n①There is no doubt that it is very important and useful to learn Chinese well.（There is no doubt that...句型）\n②I think this name represents intelligence and cleverness. （省略that的宾语从句）"
+      "answer": "",
+      "analysis": ""
     },
     {
       "id": "2023-hebei-hebei-section-8-section-8-group-6-32",
@@ -3434,7 +3694,7 @@
         "A. provides",
         "B. provided",
         "C. is provided",
-        "D. was provided Ⅶ.完形填空（共10小题：每小题1分，满分10分） 阅读下面短文，从每小题所给的四个选项中选出最佳选项。 Some people have no interest in sports. They think that sports make them ____11____ and smell bad. They say, “Why waste time playing sports?” To these people, I politely say, “You have not discovered the ____12____ of sports!” Let me share with you a basketball game I played two weeks ago. Our parents and friends were there to ____13____ us. A lot of people were watching. We all wanted to ____14____ the game in front of so many people. The game was ____15____ over and we were one point behind. Our coach called us together and said, “Okay, this is it! Either we score now or the game is over. Let’s work hard to score. Even if we don’t score, ____16____ we know that we have tried our best. So, boys, don’t think too much. It doesn’t matter if we lose. Just do it.” Well, in the last ____17____ of the game, we truly scored and two teams tied (打成平局)! We went into overtime (加时) and we lost in the end. But after the game, the coach hugged all of us. He told us that he was ____18____ because he had never seen a team try harder than us. To be honest, I ____19____ a lot of pleasure in playing sports. It makes me happy and comfortable. That’s why I play sports whenever I get the chance. So my ____20____ is to choose a sport and keep doing it. Your body will thank you and your mind will be ready to work well."
+        "D. was provided"
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -3447,6 +3707,23 @@
     },
     {
       "id": "2023-hebei-hebei-section-10-section-10-group-1-36",
+      "number": 19,
+      "displayNumber": "19",
+      "sectionId": "section-10",
+      "groupId": "section-10-group-1",
+      "prompt": "To be honest, I  ______  a lot of pleasure in playing sports. It makes me happy and comfortable. That’s why I play sports whenever I get the chance. So my ____20____ is to choose a sport and keep doing it. Your body will thank you and your mind will be ready to work well.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-87"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "",
+      "analysis": ""
+    },
+    {
+      "id": "2023-hebei-hebei-section-10-section-10-group-1-37",
       "number": 11,
       "displayNumber": "11",
       "sectionId": "section-10",
@@ -3465,10 +3742,10 @@
       "type": "choice",
       "context": "",
       "answer": "",
-      "analysis": "【解析】\n【导语】本文作者介绍自己对运动的喜爱以及自己的运动经历。\n【11题详解】\n句意：他们认为运动使他们疲劳和气味不好。\nlazy懒的；tired累的；ugly丑陋的；stupid愚蠢的。根据“Some people have no interest in sports. They think that sports make them...and smell bad.”可知，对运动不感兴趣的人会觉得运动使他们疲劳和气味不好。故选B。\n【12题详解】\n句意：你们还没有发现运动的乐趣！\nprice价格；time时间；fun乐趣；level水平。根据“You have not discovered the...of sports!”可知，对于对运动不感兴趣的人，作者想表达他们还没有发现运动的乐趣。故选C。\n【13题详解】\n句意：我们的父母和朋友都在那里为我们加油。\ncall打电话；praise赞扬；help帮助；cheer使振奋。根据“Our parents and friends were there to...us.”可知，父母和朋友都在那里加油。故选D。\n【14题详解】\n句意：我们都想在这么多人面前赢得比赛。\nwin赢得；watch观看；join参加；report报道。根据“We all wanted to...the game in front of so many people.”可知，想要赢得比赛，故选A。\n【15题详解】\n句意：比赛快结束了，我们落后一分。\nsuddenly突然；nearly几乎；finally最终；recently最近。根据“The game was...over and we were one point behind.”可知，比赛快结束时，还落后一分，故选B。\n16题详解】\n句意：即使我们没有得分，至少我们知道我们已经尽力了。\nat first起初；at once立刻；at times有时；at least至少。根据“Even if we don’t score, ...we know that we have tried our best.”可知，即使我们没有得分，至少已经尽力了。故选D。\n【17题详解】\n句意：嗯，在比赛的最后一分钟，我们真的进球了，两队打平了！\nmonth月；week周；hour小时；minute分钟。根据“in the last...of the game, we truly scored and two teams tied (打成平局)”可知，最后一分钟打平，故选D。\n【18题详解】\n句意：他告诉我们，他很自豪，因为他从未见过一支球队比我们更努力。\nbrave勇敢的；active积极的；proud骄傲的；honest诚实的。根据“He told us that he was...because he had never seen a team try harder than us.”可知，队员们的努力使教练骄傲，故选C。\n【19题详解】\n句意：老实说，我在运动中感到很多乐趣。\nfeel感觉；face面对；guess猜；give给。根据“To be honest, I...a lot of pleasure in playing sports.”可知，作者在运动中感到很多乐趣。故选A。\n【20题详解】\n句意：所以我的建议是选择一项运动并坚持下去。\nadvice建议；order命令；action行动；interest兴趣。根据“So my...is to choose a sport and keep doing it.”可知，作者建议选择一项运动并坚持下去。故选A。\nⅦ.阅读理解（共15小题：每小题2分，满分30分）\n阅读A、B、C、D四篇材料，从解小题所给的四个选项中选出最佳选项。\nA"
+      "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-10-section-10-group-1-37",
+      "id": "2023-hebei-hebei-section-10-section-10-group-1-38",
       "number": 12,
       "displayNumber": "12",
       "sectionId": "section-10",
@@ -3487,10 +3764,10 @@
       "type": "choice",
       "context": "",
       "answer": "",
-      "analysis": "【解析】\n【导语】本文作者介绍自己对运动的喜爱以及自己的运动经历。\n【11题详解】\n句意：他们认为运动使他们疲劳和气味不好。\nlazy懒的；tired累的；ugly丑陋的；stupid愚蠢的。根据“Some people have no interest in sports. They think that sports make them...and smell bad.”可知，对运动不感兴趣的人会觉得运动使他们疲劳和气味不好。故选B。\n【12题详解】\n句意：你们还没有发现运动的乐趣！\nprice价格；time时间；fun乐趣；level水平。根据“You have not discovered the...of sports!”可知，对于对运动不感兴趣的人，作者想表达他们还没有发现运动的乐趣。故选C。\n【13题详解】\n句意：我们的父母和朋友都在那里为我们加油。\ncall打电话；praise赞扬；help帮助；cheer使振奋。根据“Our parents and friends were there to...us.”可知，父母和朋友都在那里加油。故选D。\n【14题详解】\n句意：我们都想在这么多人面前赢得比赛。\nwin赢得；watch观看；join参加；report报道。根据“We all wanted to...the game in front of so many people.”可知，想要赢得比赛，故选A。\n【15题详解】\n句意：比赛快结束了，我们落后一分。\nsuddenly突然；nearly几乎；finally最终；recently最近。根据“The game was...over and we were one point behind.”可知，比赛快结束时，还落后一分，故选B。\n16题详解】\n句意：即使我们没有得分，至少我们知道我们已经尽力了。\nat first起初；at once立刻；at times有时；at least至少。根据“Even if we don’t score, ...we know that we have tried our best.”可知，即使我们没有得分，至少已经尽力了。故选D。\n【17题详解】\n句意：嗯，在比赛的最后一分钟，我们真的进球了，两队打平了！\nmonth月；week周；hour小时；minute分钟。根据“in the last...of the game, we truly scored and two teams tied (打成平局)”可知，最后一分钟打平，故选D。\n【18题详解】\n句意：他告诉我们，他很自豪，因为他从未见过一支球队比我们更努力。\nbrave勇敢的；active积极的；proud骄傲的；honest诚实的。根据“He told us that he was...because he had never seen a team try harder than us.”可知，队员们的努力使教练骄傲，故选C。\n【19题详解】\n句意：老实说，我在运动中感到很多乐趣。\nfeel感觉；face面对；guess猜；give给。根据“To be honest, I...a lot of pleasure in playing sports.”可知，作者在运动中感到很多乐趣。故选A。\n【20题详解】\n句意：所以我的建议是选择一项运动并坚持下去。\nadvice建议；order命令；action行动；interest兴趣。根据“So my...is to choose a sport and keep doing it.”可知，作者建议选择一项运动并坚持下去。故选A。\nⅦ.阅读理解（共15小题：每小题2分，满分30分）\n阅读A、B、C、D四篇材料，从解小题所给的四个选项中选出最佳选项。\nA"
+      "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-10-section-10-group-1-38",
+      "id": "2023-hebei-hebei-section-10-section-10-group-1-39",
       "number": 13,
       "displayNumber": "13",
       "sectionId": "section-10",
@@ -3509,10 +3786,10 @@
       "type": "choice",
       "context": "",
       "answer": "",
-      "analysis": "【解析】\n【导语】本文作者介绍自己对运动的喜爱以及自己的运动经历。\n【11题详解】\n句意：他们认为运动使他们疲劳和气味不好。\nlazy懒的；tired累的；ugly丑陋的；stupid愚蠢的。根据“Some people have no interest in sports. They think that sports make them...and smell bad.”可知，对运动不感兴趣的人会觉得运动使他们疲劳和气味不好。故选B。\n【12题详解】\n句意：你们还没有发现运动的乐趣！\nprice价格；time时间；fun乐趣；level水平。根据“You have not discovered the...of sports!”可知，对于对运动不感兴趣的人，作者想表达他们还没有发现运动的乐趣。故选C。\n【13题详解】\n句意：我们的父母和朋友都在那里为我们加油。\ncall打电话；praise赞扬；help帮助；cheer使振奋。根据“Our parents and friends were there to...us.”可知，父母和朋友都在那里加油。故选D。\n【14题详解】\n句意：我们都想在这么多人面前赢得比赛。\nwin赢得；watch观看；join参加；report报道。根据“We all wanted to...the game in front of so many people.”可知，想要赢得比赛，故选A。\n【15题详解】\n句意：比赛快结束了，我们落后一分。\nsuddenly突然；nearly几乎；finally最终；recently最近。根据“The game was...over and we were one point behind.”可知，比赛快结束时，还落后一分，故选B。\n16题详解】\n句意：即使我们没有得分，至少我们知道我们已经尽力了。\nat first起初；at once立刻；at times有时；at least至少。根据“Even if we don’t score, ...we know that we have tried our best.”可知，即使我们没有得分，至少已经尽力了。故选D。\n【17题详解】\n句意：嗯，在比赛的最后一分钟，我们真的进球了，两队打平了！\nmonth月；week周；hour小时；minute分钟。根据“in the last...of the game, we truly scored and two teams tied (打成平局)”可知，最后一分钟打平，故选D。\n【18题详解】\n句意：他告诉我们，他很自豪，因为他从未见过一支球队比我们更努力。\nbrave勇敢的；active积极的；proud骄傲的；honest诚实的。根据“He told us that he was...because he had never seen a team try harder than us.”可知，队员们的努力使教练骄傲，故选C。\n【19题详解】\n句意：老实说，我在运动中感到很多乐趣。\nfeel感觉；face面对；guess猜；give给。根据“To be honest, I...a lot of pleasure in playing sports.”可知，作者在运动中感到很多乐趣。故选A。\n【20题详解】\n句意：所以我的建议是选择一项运动并坚持下去。\nadvice建议；order命令；action行动；interest兴趣。根据“So my...is to choose a sport and keep doing it.”可知，作者建议选择一项运动并坚持下去。故选A。\nⅦ.阅读理解（共15小题：每小题2分，满分30分）\n阅读A、B、C、D四篇材料，从解小题所给的四个选项中选出最佳选项。\nA"
+      "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-10-section-10-group-1-39",
+      "id": "2023-hebei-hebei-section-10-section-10-group-1-40",
       "number": 14,
       "displayNumber": "14",
       "sectionId": "section-10",
@@ -3531,10 +3808,10 @@
       "type": "choice",
       "context": "",
       "answer": "",
-      "analysis": "【解析】\n【导语】本文作者介绍自己对运动的喜爱以及自己的运动经历。\n【11题详解】\n句意：他们认为运动使他们疲劳和气味不好。\nlazy懒的；tired累的；ugly丑陋的；stupid愚蠢的。根据“Some people have no interest in sports. They think that sports make them...and smell bad.”可知，对运动不感兴趣的人会觉得运动使他们疲劳和气味不好。故选B。\n【12题详解】\n句意：你们还没有发现运动的乐趣！\nprice价格；time时间；fun乐趣；level水平。根据“You have not discovered the...of sports!”可知，对于对运动不感兴趣的人，作者想表达他们还没有发现运动的乐趣。故选C。\n【13题详解】\n句意：我们的父母和朋友都在那里为我们加油。\ncall打电话；praise赞扬；help帮助；cheer使振奋。根据“Our parents and friends were there to...us.”可知，父母和朋友都在那里加油。故选D。\n【14题详解】\n句意：我们都想在这么多人面前赢得比赛。\nwin赢得；watch观看；join参加；report报道。根据“We all wanted to...the game in front of so many people.”可知，想要赢得比赛，故选A。\n【15题详解】\n句意：比赛快结束了，我们落后一分。\nsuddenly突然；nearly几乎；finally最终；recently最近。根据“The game was...over and we were one point behind.”可知，比赛快结束时，还落后一分，故选B。\n16题详解】\n句意：即使我们没有得分，至少我们知道我们已经尽力了。\nat first起初；at once立刻；at times有时；at least至少。根据“Even if we don’t score, ...we know that we have tried our best.”可知，即使我们没有得分，至少已经尽力了。故选D。\n【17题详解】\n句意：嗯，在比赛的最后一分钟，我们真的进球了，两队打平了！\nmonth月；week周；hour小时；minute分钟。根据“in the last...of the game, we truly scored and two teams tied (打成平局)”可知，最后一分钟打平，故选D。\n【18题详解】\n句意：他告诉我们，他很自豪，因为他从未见过一支球队比我们更努力。\nbrave勇敢的；active积极的；proud骄傲的；honest诚实的。根据“He told us that he was...because he had never seen a team try harder than us.”可知，队员们的努力使教练骄傲，故选C。\n【19题详解】\n句意：老实说，我在运动中感到很多乐趣。\nfeel感觉；face面对；guess猜；give给。根据“To be honest, I...a lot of pleasure in playing sports.”可知，作者在运动中感到很多乐趣。故选A。\n【20题详解】\n句意：所以我的建议是选择一项运动并坚持下去。\nadvice建议；order命令；action行动；interest兴趣。根据“So my...is to choose a sport and keep doing it.”可知，作者建议选择一项运动并坚持下去。故选A。\nⅦ.阅读理解（共15小题：每小题2分，满分30分）\n阅读A、B、C、D四篇材料，从解小题所给的四个选项中选出最佳选项。\nA"
+      "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-10-section-10-group-1-40",
+      "id": "2023-hebei-hebei-section-10-section-10-group-1-41",
       "number": 15,
       "displayNumber": "15",
       "sectionId": "section-10",
@@ -3553,10 +3830,10 @@
       "type": "choice",
       "context": "",
       "answer": "",
-      "analysis": "【解析】\n【导语】本文作者介绍自己对运动的喜爱以及自己的运动经历。\n【11题详解】\n句意：他们认为运动使他们疲劳和气味不好。\nlazy懒的；tired累的；ugly丑陋的；stupid愚蠢的。根据“Some people have no interest in sports. They think that sports make them...and smell bad.”可知，对运动不感兴趣的人会觉得运动使他们疲劳和气味不好。故选B。\n【12题详解】\n句意：你们还没有发现运动的乐趣！\nprice价格；time时间；fun乐趣；level水平。根据“You have not discovered the...of sports!”可知，对于对运动不感兴趣的人，作者想表达他们还没有发现运动的乐趣。故选C。\n【13题详解】\n句意：我们的父母和朋友都在那里为我们加油。\ncall打电话；praise赞扬；help帮助；cheer使振奋。根据“Our parents and friends were there to...us.”可知，父母和朋友都在那里加油。故选D。\n【14题详解】\n句意：我们都想在这么多人面前赢得比赛。\nwin赢得；watch观看；join参加；report报道。根据“We all wanted to...the game in front of so many people.”可知，想要赢得比赛，故选A。\n【15题详解】\n句意：比赛快结束了，我们落后一分。\nsuddenly突然；nearly几乎；finally最终；recently最近。根据“The game was...over and we were one point behind.”可知，比赛快结束时，还落后一分，故选B。\n16题详解】\n句意：即使我们没有得分，至少我们知道我们已经尽力了。\nat first起初；at once立刻；at times有时；at least至少。根据“Even if we don’t score, ...we know that we have tried our best.”可知，即使我们没有得分，至少已经尽力了。故选D。\n【17题详解】\n句意：嗯，在比赛的最后一分钟，我们真的进球了，两队打平了！\nmonth月；week周；hour小时；minute分钟。根据“in the last...of the game, we truly scored and two teams tied (打成平局)”可知，最后一分钟打平，故选D。\n【18题详解】\n句意：他告诉我们，他很自豪，因为他从未见过一支球队比我们更努力。\nbrave勇敢的；active积极的；proud骄傲的；honest诚实的。根据“He told us that he was...because he had never seen a team try harder than us.”可知，队员们的努力使教练骄傲，故选C。\n【19题详解】\n句意：老实说，我在运动中感到很多乐趣。\nfeel感觉；face面对；guess猜；give给。根据“To be honest, I...a lot of pleasure in playing sports.”可知，作者在运动中感到很多乐趣。故选A。\n【20题详解】\n句意：所以我的建议是选择一项运动并坚持下去。\nadvice建议；order命令；action行动；interest兴趣。根据“So my...is to choose a sport and keep doing it.”可知，作者建议选择一项运动并坚持下去。故选A。\nⅦ.阅读理解（共15小题：每小题2分，满分30分）\n阅读A、B、C、D四篇材料，从解小题所给的四个选项中选出最佳选项。\nA"
+      "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-10-section-10-group-1-41",
+      "id": "2023-hebei-hebei-section-10-section-10-group-1-42",
       "number": 16,
       "displayNumber": "16",
       "sectionId": "section-10",
@@ -3578,7 +3855,7 @@
       "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-10-section-10-group-1-42",
+      "id": "2023-hebei-hebei-section-10-section-10-group-1-43",
       "number": 17,
       "displayNumber": "17",
       "sectionId": "section-10",
@@ -3597,10 +3874,10 @@
       "type": "choice",
       "context": "",
       "answer": "",
-      "analysis": "【解析】\n【导语】本文作者介绍自己对运动的喜爱以及自己的运动经历。\n【11题详解】\n句意：他们认为运动使他们疲劳和气味不好。\nlazy懒的；tired累的；ugly丑陋的；stupid愚蠢的。根据“Some people have no interest in sports. They think that sports make them...and smell bad.”可知，对运动不感兴趣的人会觉得运动使他们疲劳和气味不好。故选B。\n【12题详解】\n句意：你们还没有发现运动的乐趣！\nprice价格；time时间；fun乐趣；level水平。根据“You have not discovered the...of sports!”可知，对于对运动不感兴趣的人，作者想表达他们还没有发现运动的乐趣。故选C。\n【13题详解】\n句意：我们的父母和朋友都在那里为我们加油。\ncall打电话；praise赞扬；help帮助；cheer使振奋。根据“Our parents and friends were there to...us.”可知，父母和朋友都在那里加油。故选D。\n【14题详解】\n句意：我们都想在这么多人面前赢得比赛。\nwin赢得；watch观看；join参加；report报道。根据“We all wanted to...the game in front of so many people.”可知，想要赢得比赛，故选A。\n【15题详解】\n句意：比赛快结束了，我们落后一分。\nsuddenly突然；nearly几乎；finally最终；recently最近。根据“The game was...over and we were one point behind.”可知，比赛快结束时，还落后一分，故选B。\n16题详解】\n句意：即使我们没有得分，至少我们知道我们已经尽力了。\nat first起初；at once立刻；at times有时；at least至少。根据“Even if we don’t score, ...we know that we have tried our best.”可知，即使我们没有得分，至少已经尽力了。故选D。\n【17题详解】\n句意：嗯，在比赛的最后一分钟，我们真的进球了，两队打平了！\nmonth月；week周；hour小时；minute分钟。根据“in the last...of the game, we truly scored and two teams tied (打成平局)”可知，最后一分钟打平，故选D。\n【18题详解】\n句意：他告诉我们，他很自豪，因为他从未见过一支球队比我们更努力。\nbrave勇敢的；active积极的；proud骄傲的；honest诚实的。根据“He told us that he was...because he had never seen a team try harder than us.”可知，队员们的努力使教练骄傲，故选C。\n【19题详解】\n句意：老实说，我在运动中感到很多乐趣。\nfeel感觉；face面对；guess猜；give给。根据“To be honest, I...a lot of pleasure in playing sports.”可知，作者在运动中感到很多乐趣。故选A。\n【20题详解】\n句意：所以我的建议是选择一项运动并坚持下去。\nadvice建议；order命令；action行动；interest兴趣。根据“So my...is to choose a sport and keep doing it.”可知，作者建议选择一项运动并坚持下去。故选A。\nⅦ.阅读理解（共15小题：每小题2分，满分30分）\n阅读A、B、C、D四篇材料，从解小题所给的四个选项中选出最佳选项。\nA"
+      "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-10-section-10-group-1-43",
+      "id": "2023-hebei-hebei-section-10-section-10-group-1-44",
       "number": 18,
       "displayNumber": "18",
       "sectionId": "section-10",
@@ -3623,10 +3900,10 @@
       "type": "choice",
       "context": "",
       "answer": "",
-      "analysis": "【解析】\n【导语】本文作者介绍自己对运动的喜爱以及自己的运动经历。\n【11题详解】\n句意：他们认为运动使他们疲劳和气味不好。\nlazy懒的；tired累的；ugly丑陋的；stupid愚蠢的。根据“Some people have no interest in sports. They think that sports make them...and smell bad.”可知，对运动不感兴趣的人会觉得运动使他们疲劳和气味不好。故选B。\n【12题详解】\n句意：你们还没有发现运动的乐趣！\nprice价格；time时间；fun乐趣；level水平。根据“You have not discovered the...of sports!”可知，对于对运动不感兴趣的人，作者想表达他们还没有发现运动的乐趣。故选C。\n【13题详解】\n句意：我们的父母和朋友都在那里为我们加油。\ncall打电话；praise赞扬；help帮助；cheer使振奋。根据“Our parents and friends were there to...us.”可知，父母和朋友都在那里加油。故选D。\n【14题详解】\n句意：我们都想在这么多人面前赢得比赛。\nwin赢得；watch观看；join参加；report报道。根据“We all wanted to...the game in front of so many people.”可知，想要赢得比赛，故选A。\n【15题详解】\n句意：比赛快结束了，我们落后一分。\nsuddenly突然；nearly几乎；finally最终；recently最近。根据“The game was...over and we were one point behind.”可知，比赛快结束时，还落后一分，故选B。\n16题详解】\n句意：即使我们没有得分，至少我们知道我们已经尽力了。\nat first起初；at once立刻；at times有时；at least至少。根据“Even if we don’t score, ...we know that we have tried our best.”可知，即使我们没有得分，至少已经尽力了。故选D。\n【17题详解】\n句意：嗯，在比赛的最后一分钟，我们真的进球了，两队打平了！\nmonth月；week周；hour小时；minute分钟。根据“in the last...of the game, we truly scored and two teams tied (打成平局)”可知，最后一分钟打平，故选D。\n【18题详解】\n句意：他告诉我们，他很自豪，因为他从未见过一支球队比我们更努力。\nbrave勇敢的；active积极的；proud骄傲的；honest诚实的。根据“He told us that he was...because he had never seen a team try harder than us.”可知，队员们的努力使教练骄傲，故选C。\n【19题详解】\n句意：老实说，我在运动中感到很多乐趣。\nfeel感觉；face面对；guess猜；give给。根据“To be honest, I...a lot of pleasure in playing sports.”可知，作者在运动中感到很多乐趣。故选A。\n【20题详解】\n句意：所以我的建议是选择一项运动并坚持下去。\nadvice建议；order命令；action行动；interest兴趣。根据“So my...is to choose a sport and keep doing it.”可知，作者建议选择一项运动并坚持下去。故选A。\nⅦ.阅读理解（共15小题：每小题2分，满分30分）\n阅读A、B、C、D四篇材料，从解小题所给的四个选项中选出最佳选项。\nA"
+      "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-10-section-10-group-1-44",
+      "id": "2023-hebei-hebei-section-10-section-10-group-1-45",
       "number": 20,
       "displayNumber": "20",
       "sectionId": "section-10",
@@ -3636,10 +3913,7 @@
         "A. advice",
         "B. order",
         "C. action",
-        "D. interest Ⅶ.阅读理解（共15小题：每小题2分，满分30分） 阅读",
-        "A. ",
-        "B. ",
-        "C. D四篇材料，从解小题所给的四个选项中选出最佳选项。 A Home    News    Activities    Ideas Pilar When I was a child, I collected books about nature. I loved learning about animals from other countries. When I get older, I find out that my own country has interesting nature too. That’s why I like studying nature now. I often write articles about nature and put them on my website. Sarah I love birds and animals because my school has organized many visits to forests and lakes for us. I also like walking in the countryside and seeing what I can find. I’ve taken many photos about nature. Some are published (发表) in our school magazine. Some are hung on the walls of the school hall. Lia A few years ago, I read an article with beautiful photos of animals, birds and plants in it. It made me start looking at what lives around us. I’ve made some short videos and I often show them to my friends. Now I sometimes give talks about nature at school. I love it. I was once interviewed by the local newspaper."
+        "D. interest"
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -3648,10 +3922,10 @@
       "type": "choice",
       "context": "",
       "answer": "",
-      "analysis": "【解析】\n【导语】本文作者介绍自己对运动的喜爱以及自己的运动经历。\n【11题详解】\n句意：他们认为运动使他们疲劳和气味不好。\nlazy懒的；tired累的；ugly丑陋的；stupid愚蠢的。根据“Some people have no interest in sports. They think that sports make them...and smell bad.”可知，对运动不感兴趣的人会觉得运动使他们疲劳和气味不好。故选B。\n【12题详解】\n句意：你们还没有发现运动的乐趣！\nprice价格；time时间；fun乐趣；level水平。根据“You have not discovered the...of sports!”可知，对于对运动不感兴趣的人，作者想表达他们还没有发现运动的乐趣。故选C。\n【13题详解】\n句意：我们的父母和朋友都在那里为我们加油。\ncall打电话；praise赞扬；help帮助；cheer使振奋。根据“Our parents and friends were there to...us.”可知，父母和朋友都在那里加油。故选D。\n【14题详解】\n句意：我们都想在这么多人面前赢得比赛。\nwin赢得；watch观看；join参加；report报道。根据“We all wanted to...the game in front of so many people.”可知，想要赢得比赛，故选A。\n【15题详解】\n句意：比赛快结束了，我们落后一分。\nsuddenly突然；nearly几乎；finally最终；recently最近。根据“The game was...over and we were one point behind.”可知，比赛快结束时，还落后一分，故选B。\n16题详解】\n句意：即使我们没有得分，至少我们知道我们已经尽力了。\nat first起初；at once立刻；at times有时；at least至少。根据“Even if we don’t score, ...we know that we have tried our best.”可知，即使我们没有得分，至少已经尽力了。故选D。\n【17题详解】\n句意：嗯，在比赛的最后一分钟，我们真的进球了，两队打平了！\nmonth月；week周；hour小时；minute分钟。根据“in the last...of the game, we truly scored and two teams tied (打成平局)”可知，最后一分钟打平，故选D。\n【18题详解】\n句意：他告诉我们，他很自豪，因为他从未见过一支球队比我们更努力。\nbrave勇敢的；active积极的；proud骄傲的；honest诚实的。根据“He told us that he was...because he had never seen a team try harder than us.”可知，队员们的努力使教练骄傲，故选C。\n【19题详解】\n句意：老实说，我在运动中感到很多乐趣。\nfeel感觉；face面对；guess猜；give给。根据“To be honest, I...a lot of pleasure in playing sports.”可知，作者在运动中感到很多乐趣。故选A。\n【20题详解】\n句意：所以我的建议是选择一项运动并坚持下去。\nadvice建议；order命令；action行动；interest兴趣。根据“So my...is to choose a sport and keep doing it.”可知，作者建议选择一项运动并坚持下去。故选A。\nⅦ.阅读理解（共15小题：每小题2分，满分30分）\n阅读A、B、C、D四篇材料，从解小题所给的四个选项中选出最佳选项。\nA"
+      "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-11-section-11-group-1-45",
+      "id": "2023-hebei-hebei-section-11-section-11-group-1-46",
       "number": 21,
       "displayNumber": "21",
       "sectionId": "section-11",
@@ -3670,10 +3944,10 @@
       "type": "choice",
       "context": "",
       "answer": "",
-      "analysis": "【解析】\n【导语】本文主要介绍了三个人对自然感兴趣。\n【21题详解】\n细节理解题。根据“I often write articles about nature and put them on my website”可知，可以在Pilar的网站上看到他写的文章，故选C。\n【22题详解】\n细节理解题。根据“I love birds and animals because my school has organized many visits to forests and lakes for us.”可知，Sara喜欢鸟类和动物，因为她的学校组织了很多次森林和湖泊之旅。故选D。\n【23题详解】\n细节理解题。根据“I’ve made some short videos and I often show them to my friends.”可知，Lia做了一些短视频，经常给朋友们看。故选A。\nB\nMy best friend Bill is always trying to find out ways to give the environment a helping hand. One day, Bill brought some green cakes to school. At lunch, he shared his cakes with us. “Delicious!” “Wonderful!” Everyone liked the cakes and wondered how he made them.\nThe story goes back a few weeks. Bill’s family likes fruit very much. His father especially loves watermelons. He eats a lot of them in summer. They always throw away the skins (皮).\nAfter seeing the cleaner working hard to pick up the heavy rubbish pail (桶), Bill said. “There must be a good way to use all the watermelon skins.”\nAfter a lot of thinking, he decided to make something with the skins. First, he made the skins into juice. Then he carefully made his delicious GREEN cakes.\nOnce he tasted the cake, he knew his cakes were a great by-product (副产品) of the watermelon eating. And it was nature friendly too.\nFrom now on, he doesn’t need to worry about the heavy waste from eating watermelons. And everyone always wants more of his special cakes."
+      "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-11-section-11-group-2-46",
+      "id": "2023-hebei-hebei-section-11-section-11-group-2-47",
       "number": 22,
       "displayNumber": "22",
       "sectionId": "section-11",
@@ -3692,10 +3966,10 @@
       "type": "choice",
       "context": "",
       "answer": "",
-      "analysis": "【解析】\n【导语】本文主要介绍了三个人对自然感兴趣。\n【21题详解】\n细节理解题。根据“I often write articles about nature and put them on my website”可知，可以在Pilar的网站上看到他写的文章，故选C。\n【22题详解】\n细节理解题。根据“I love birds and animals because my school has organized many visits to forests and lakes for us.”可知，Sara喜欢鸟类和动物，因为她的学校组织了很多次森林和湖泊之旅。故选D。\n【23题详解】\n细节理解题。根据“I’ve made some short videos and I often show them to my friends.”可知，Lia做了一些短视频，经常给朋友们看。故选A。\nB\nMy best friend Bill is always trying to find out ways to give the environment a helping hand. One day, Bill brought some green cakes to school. At lunch, he shared his cakes with us. “Delicious!” “Wonderful!” Everyone liked the cakes and wondered how he made them.\nThe story goes back a few weeks. Bill’s family likes fruit very much. His father especially loves watermelons. He eats a lot of them in summer. They always throw away the skins (皮).\nAfter seeing the cleaner working hard to pick up the heavy rubbish pail (桶), Bill said. “There must be a good way to use all the watermelon skins.”\nAfter a lot of thinking, he decided to make something with the skins. First, he made the skins into juice. Then he carefully made his delicious GREEN cakes.\nOnce he tasted the cake, he knew his cakes were a great by-product (副产品) of the watermelon eating. And it was nature friendly too.\nFrom now on, he doesn’t need to worry about the heavy waste from eating watermelons. And everyone always wants more of his special cakes."
+      "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-11-section-11-group-4-47",
+      "id": "2023-hebei-hebei-section-11-section-11-group-4-48",
       "number": 23,
       "displayNumber": "23",
       "sectionId": "section-11",
@@ -3714,10 +3988,10 @@
       "type": "choice",
       "context": "",
       "answer": "",
-      "analysis": "【解析】\n【导语】本文主要介绍了三个人对自然感兴趣。\n【21题详解】\n细节理解题。根据“I often write articles about nature and put them on my website”可知，可以在Pilar的网站上看到他写的文章，故选C。\n【22题详解】\n细节理解题。根据“I love birds and animals because my school has organized many visits to forests and lakes for us.”可知，Sara喜欢鸟类和动物，因为她的学校组织了很多次森林和湖泊之旅。故选D。\n【23题详解】\n细节理解题。根据“I’ve made some short videos and I often show them to my friends.”可知，Lia做了一些短视频，经常给朋友们看。故选A。\nB\nMy best friend Bill is always trying to find out ways to give the environment a helping hand. One day, Bill brought some green cakes to school. At lunch, he shared his cakes with us. “Delicious!” “Wonderful!” Everyone liked the cakes and wondered how he made them.\nThe story goes back a few weeks. Bill’s family likes fruit very much. His father especially loves watermelons. He eats a lot of them in summer. They always throw away the skins (皮).\nAfter seeing the cleaner working hard to pick up the heavy rubbish pail (桶), Bill said. “There must be a good way to use all the watermelon skins.”\nAfter a lot of thinking, he decided to make something with the skins. First, he made the skins into juice. Then he carefully made his delicious GREEN cakes.\nOnce he tasted the cake, he knew his cakes were a great by-product (副产品) of the watermelon eating. And it was nature friendly too.\nFrom now on, he doesn’t need to worry about the heavy waste from eating watermelons. And everyone always wants more of his special cakes."
+      "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-11-section-11-group-5-48",
+      "id": "2023-hebei-hebei-section-11-section-11-group-5-49",
       "number": 24,
       "displayNumber": "24",
       "sectionId": "section-11",
@@ -3735,10 +4009,10 @@
       "type": "choice",
       "context": "",
       "answer": "",
-      "analysis": "【解析】\n【导语】本文主要讲述了Bill用西瓜皮制作了蛋糕，并带到学校和同学分享，同学也很喜欢他做的蛋糕。\n【24题详解】\n细节理解题。根据“Bill brought some green cakes to school. At lunch, he shared his cakes with us...Everyone liked the cakes and wondered how he made them”可知他和同学分享他做的蛋糕。故选B。\n【25题详解】\n细节理解题。根据“Bill’s family likes fruit very much”可知他家人非常喜欢水果。故选B。\n【26题详解】\n推理判断题。通读全文可知，本文主要讲述了Bill用西瓜皮制作了蛋糕，并带到学校和同学分享，同学也很喜欢他做的蛋糕，故他可能会在日记中写“我做了很好的蛋糕，每个人都很喜欢”。故选A。\nC\nDo you do team projects at school? I do a lot. I enjoy team projects because I like sharing ideas with other people. Of course, team activities aren’t always easy. You need to know how to work well together. Here are some suggestions to make team work easier.\nTry to be positive (积极的). Everything is easier when you’re enjoying yourself in the team."
+      "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-11-section-11-group-6-49",
+      "id": "2023-hebei-hebei-section-11-section-11-group-6-50",
       "number": 25,
       "displayNumber": "25",
       "sectionId": "section-11",
@@ -3757,10 +4031,10 @@
       "type": "choice",
       "context": "",
       "answer": "",
-      "analysis": "【解析】\n【导语】本文主要讲述了Bill用西瓜皮制作了蛋糕，并带到学校和同学分享，同学也很喜欢他做的蛋糕。\n【24题详解】\n细节理解题。根据“Bill brought some green cakes to school. At lunch, he shared his cakes with us...Everyone liked the cakes and wondered how he made them”可知他和同学分享他做的蛋糕。故选B。\n【25题详解】\n细节理解题。根据“Bill’s family likes fruit very much”可知他家人非常喜欢水果。故选B。\n【26题详解】\n推理判断题。通读全文可知，本文主要讲述了Bill用西瓜皮制作了蛋糕，并带到学校和同学分享，同学也很喜欢他做的蛋糕，故他可能会在日记中写“我做了很好的蛋糕，每个人都很喜欢”。故选A。\nC\nDo you do team projects at school? I do a lot. I enjoy team projects because I like sharing ideas with other people. Of course, team activities aren’t always easy. You need to know how to work well together. Here are some suggestions to make team work easier.\nTry to be positive (积极的). Everything is easier when you’re enjoying yourself in the team."
+      "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-11-section-11-group-8-50",
+      "id": "2023-hebei-hebei-section-11-section-11-group-8-51",
       "number": 26,
       "displayNumber": "26",
       "sectionId": "section-11",
@@ -3782,7 +4056,7 @@
       "analysis": "推理判断题。通读全文可知，本文主要讲述了Bill用西瓜皮制作了蛋糕，并带到学校和同学分享，同学也很喜欢他做的蛋糕，故他可能会在日记中写“我做了很好的蛋糕，每个人都很喜欢”。故选A。\nC\nDo you do team projects at school? I do a lot. I enjoy team projects because I like sharing ideas with other people. Of course, team activities aren’t always easy. You need to know how to work well together. Here are some suggestions to make team work easier.\nTry to be positive (积极的). Everything is easier when you’re enjoying yourself in the team.\n27. How does the writer begin the text?\nA. By telling a story.B. By asking a question.\nC. By showing a saying.D. By sending a message.\n28. What is the leader’s main job in the team?\nA. Controlling the activity time.B. Writing down the team’s ideas.\nC. Making speeches for the team.D. Helping the others make decisions.\n29. What should you do after dividing the work?\nA. Set a clear goal.B. Work out a plan.\nC. Decide everyone’s role.D. Check the teacher’s examples.\n30. What is the writer trying to do in the text?\nA. Introduce the teacher’s instructions.B. Give information about smaller tasks.\nC. Explain the method to do team projects.D. Describe the importance of creative ideas.\n【答案】27 B    28. D    29. B    30. C\n【解析】\n【导语】本文主要介绍了一些让团队工作更容易的建议。"
     },
     {
-      "id": "2023-hebei-hebei-section-11-section-11-group-12-51",
+      "id": "2023-hebei-hebei-section-11-section-11-group-12-52",
       "number": 27,
       "displayNumber": "27",
       "sectionId": "section-11",
@@ -3804,7 +4078,7 @@
       "analysis": "细节理解题。根据“Do you do team projects at school”可知作者以一个问题开始本文。故选B。"
     },
     {
-      "id": "2023-hebei-hebei-section-11-section-11-group-14-52",
+      "id": "2023-hebei-hebei-section-11-section-11-group-14-53",
       "number": 28,
       "displayNumber": "28",
       "sectionId": "section-11",
@@ -3826,7 +4100,7 @@
       "analysis": "细节理解题根据“there should be a leader who helps everyone make decisions.”可知领导者帮助每个人做决定。故选D。"
     },
     {
-      "id": "2023-hebei-hebei-section-11-section-11-group-16-53",
+      "id": "2023-hebei-hebei-section-11-section-11-group-16-54",
       "number": 29,
       "displayNumber": "29",
       "sectionId": "section-11",
@@ -3848,7 +4122,7 @@
       "analysis": "细节理解题。根据“After you divide the work, write down a plan on paper.”可知分工后，在纸上写一个计划。故选B。"
     },
     {
-      "id": "2023-hebei-hebei-section-11-section-11-group-18-54",
+      "id": "2023-hebei-hebei-section-11-section-11-group-18-55",
       "number": 30,
       "displayNumber": "30",
       "sectionId": "section-11",
@@ -3870,7 +4144,7 @@
       "analysis": "主旨大意题。本文主要介绍了一些让团队工作更容易的建议。故选C。\nD\nProgress means the act of going forward. Making any kind of progress can make us healthy and happy in life. By setting and actively working towards our goals, we can make progress in our life.\nTo make more progress in life, start looking at problems in a different way. Whatever happens, if we think positively, it can be useful and helpful. We need to know that problems are part of our life. After we solve problems one after another, we can make more progress and become stronger.\nHaving confidence (信心) is helpful for us to make progress. Confidence comes from different places, such as proper education, training or having good relationships. We should also stay with people who believe in our success and actively support us. These people can help push us towards progress.\nSlow progress is still progress. Just as the old saying goes, “It does not matter how slowly you go as long as you do not stop.” Progress usually comes a lot more slowly than we expect. Even if progress is slow, try not to be worried. One important thing is that we keep taking steps towards our goals, and another is that we clearly remember what our goals are all the time. The actual speed isn’t important.\nThe road to progress is not always smooth. Most progress often comes with setbacks along the way. Sometimes, maybe it feels like we’re taking one step forward and three steps back, but it won’t always be like that. Keep going towards our goals and we can much more easily make the progress we want.\nProgress doesn’t always happen in a straight line. As long as we keep working, we will achieve higher levels.\n31. What does progress make us do?\nA. Set lifelong goals.B. Go forward easily.\nC. Live healthily and happily.D. Think about new things.\n32. What does Paragraph 3 tell us?\nA. We should support different people.B. Some people can push us to failure.\nC. Confidence helps us make progress.D. Different schools expect the same progress.\n33. What does the writer say about slow progress?\nA. It often goes smoothly.B. It still means progress.\nC. It sometimes stops progress.D. It always gives us a clear mind.\n34. Which word is close to the underlined word “setbacks”?\nA. Prizes.B. Advantages.C. Excuses.D. Difficulties.\n35. Which can be a proper title for the text?\nA. Ideas about Making ProgressB. Keys to Speeding up Progress\nC. Meanings of Having ConfidenceD. Suggestions on Relationships\n【答案】31. C    32. C    33. B    34. D    35. A\n【解析】\n【导语】本文主要介绍了如何取得进步，虽然通往进步的道路不总是平坦的，但是只要我们继续努力，我们就会达到更高的水平。"
     },
     {
-      "id": "2023-hebei-hebei-section-11-section-11-group-20-55",
+      "id": "2023-hebei-hebei-section-11-section-11-group-20-56",
       "number": 31,
       "displayNumber": "31",
       "sectionId": "section-11",
@@ -3892,7 +4166,7 @@
       "analysis": "细节理解题。根据“Making any kind of progress can make us healthy and happy in life”可知任何形式的进步都能使我们在生活中健康快乐。故选C。"
     },
     {
-      "id": "2023-hebei-hebei-section-11-section-11-group-22-56",
+      "id": "2023-hebei-hebei-section-11-section-11-group-22-57",
       "number": 32,
       "displayNumber": "32",
       "sectionId": "section-11",
@@ -3914,7 +4188,7 @@
       "analysis": "主旨大意题。根据“Having confidence (信心) is helpful for us to make progress”以及本段内容可知信心有助于我们取得进步。故选C。"
     },
     {
-      "id": "2023-hebei-hebei-section-11-section-11-group-24-57",
+      "id": "2023-hebei-hebei-section-11-section-11-group-24-58",
       "number": 33,
       "displayNumber": "33",
       "sectionId": "section-11",
@@ -3936,7 +4210,7 @@
       "analysis": "细节理解题。根据“Slow progress is still progress”可知缓慢的进步仍然是进步。故选B。"
     },
     {
-      "id": "2023-hebei-hebei-section-11-section-11-group-26-58",
+      "id": "2023-hebei-hebei-section-11-section-11-group-26-59",
       "number": 34,
       "displayNumber": "34",
       "sectionId": "section-11",
@@ -3958,7 +4232,7 @@
       "analysis": "词义猜测题。根据“The road to progress is not always smooth. Most progress often comes with setbacks along the way”可知通往进步的道路并不总是平坦的，大多数进步往往伴随着挫折，故此处划线部分意为“挫折，困难”，和difficulties意义相近。故选D。"
     },
     {
-      "id": "2023-hebei-hebei-section-11-section-11-group-27-59",
+      "id": "2023-hebei-hebei-section-11-section-11-group-27-60",
       "number": 35,
       "displayNumber": "35",
       "sectionId": "section-11",
@@ -3968,7 +4242,7 @@
         "A. Ideas about Making Progress",
         "B. Keys to Speeding up Progress",
         "C. Meanings of Having Confidence",
-        "D. Suggestions on Relationships Ⅸ.任务型阅读（共5小题：每小题2分，满分10分） 阅读下面短文，按要求完成下面小题。 Last week we went on a school trip to a science museum. Ms. Liu, the guide, showed us around a smart home. We started with the front door. Ms. Liu asked me to ring the doorbell. I didn’t notice the tiny camera that was fixed just above it. After I pressed (按) the doorbell, the camera sent a live video (视频直播) to the home-owners. “They can electronically open the door when they are not at home,” said Ms. Liu. The other thing I couldn’t see on the door was a lock. “There must be one,” I thought. At this time, Ms. Liu took out a smart phone and put it against the door. And it opened. “Oh, the key is on the smart phone.” After entering the living room, I saw a computer on a table. By using the computer, the owners can control how much energy is used. In this way, they can manage their living cost. One of the rooms I wanted to see most was the bedroom. To my great surprise, the bed disappeared into the floor at the touch of the smart phone. The window has a smart blind (百叶窗). It can be raised and lowered with a voice. As I left the smart home, I looked back on what I had just seen. Scientists often say that these products are improving our life. I think the technology in the smart home may make us lazier. However, there is no doubt that it will become more popular in the homes of tomorrow."
+        "D. Suggestions on Relationships"
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -3980,7 +4254,7 @@
       "analysis": "最佳标题题。本文主要介绍了如何取得进步，虽然通往进步的道路不总是平坦的，但是只要我们继续努力，我们就会达到更高的水平，以选项A“关于进步的想法”为标题最合适。故选A。"
     },
     {
-      "id": "2023-hebei-hebei-section-13-section-13-group-1-60",
+      "id": "2023-hebei-hebei-section-13-section-13-group-1-61",
       "number": 1,
       "displayNumber": "1",
       "sectionId": "section-13",
@@ -3997,7 +4271,7 @@
       "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-13-section-13-group-1-61",
+      "id": "2023-hebei-hebei-section-13-section-13-group-1-62",
       "number": 36,
       "displayNumber": "36",
       "sectionId": "section-13",
@@ -4014,7 +4288,7 @@
       "analysis": "根据“Ms. Liu, the guide, showed us around a smart home.”可知，导游刘女士带我们参观了一个智能家居。故填a smart home。"
     },
     {
-      "id": "2023-hebei-hebei-section-13-section-13-group-1-62",
+      "id": "2023-hebei-hebei-section-13-section-13-group-1-63",
       "number": 37,
       "displayNumber": "37",
       "sectionId": "section-13",
@@ -4031,7 +4305,7 @@
       "analysis": "根据“They can electronically open the door when they are not at home”可知，他们不在家的时候可以用电子方式开门，故填open the door。"
     },
     {
-      "id": "2023-hebei-hebei-section-13-section-13-group-1-63",
+      "id": "2023-hebei-hebei-section-13-section-13-group-1-64",
       "number": 38,
       "displayNumber": "38",
       "sectionId": "section-13",
@@ -4048,7 +4322,7 @@
       "analysis": "根据“Oh, the key is on the smart phone.”可知，钥匙在智能手机上。故填On the smart phone."
     },
     {
-      "id": "2023-hebei-hebei-section-13-section-13-group-1-64",
+      "id": "2023-hebei-hebei-section-13-section-13-group-1-65",
       "number": 39,
       "displayNumber": "39",
       "sectionId": "section-13",
@@ -4065,7 +4339,194 @@
       "analysis": "根据“By using the computer, the owners can control how much energy is used.”可知，通过使用电脑，业主可以控制使用多少能源。故填By using the computer."
     },
     {
-      "id": "2023-hebei-hebei-section-17-section-17-group-1-65",
+      "id": "2023-hebei-hebei-section-13-section-13-group-1-66",
+      "number": 40,
+      "displayNumber": "40",
+      "sectionId": "section-13",
+      "groupId": "section-13-group-1",
+      "prompt": "Do you like the technology in the smart home? Why or why not? _________________________________________________________________________________________",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-177"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "",
+      "analysis": "言之有理即可。故填Yes. Because it is very convenient."
+    },
+    {
+      "id": "2023-hebei-hebei-section-15-section-15-group-1-67",
+      "number": 41,
+      "displayNumber": "41",
+      "sectionId": "section-15",
+      "groupId": "section-15-group-1",
+      "prompt": "My favorite teacher is Mr. Zhao. He has made  ______  big difference in my life. I was ____42____ (real) shy and nervous on the first day at school. But Mr. Zhao was ____43____ kind that I soon forgot about that. In ____44____ (he) first class, he asked us to draw a picture of ourselves.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-181"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "a",
+      "analysis": "句意：他给我的生活带来了很大的改变。make a big difference“有很大影响”。故填a。"
+    },
+    {
+      "id": "2023-hebei-hebei-section-15-section-15-group-1-68",
+      "number": 42,
+      "displayNumber": "42",
+      "sectionId": "section-15",
+      "groupId": "section-15-group-1",
+      "prompt": "My favorite teacher is Mr. Zhao. He has made ____41____ big difference in my life. I was  ______  (real) shy and nervous on the first day at school. But Mr. Zhao was ____43____ kind that I soon forgot about that. In ____44____ (he) first class, he asked us to draw a picture of ourselves.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-181"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "really",
+      "analysis": "句意：上学的第一天，我非常害羞和紧张。此处修饰形容词shy用副词really“真地”。故填really。"
+    },
+    {
+      "id": "2023-hebei-hebei-section-15-section-15-group-1-69",
+      "number": 43,
+      "displayNumber": "43",
+      "sectionId": "section-15",
+      "groupId": "section-15-group-1",
+      "prompt": "My favorite teacher is Mr. Zhao. He has made ____41____ big difference in my life. I was ____42____ (real) shy and nervous on the first day at school. But Mr. Zhao was  ______  kind that I soon forgot about that. In ____44____ (he) first class, he asked us to draw a picture of ourselves.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-181"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "so",
+      "analysis": "句意：但是赵老师太好了，我很快就忘记了。根据“kind that I soon forgot about that”可知此处是so...that“如此……以至于”结构。故填so。"
+    },
+    {
+      "id": "2023-hebei-hebei-section-15-section-15-group-1-70",
+      "number": 44,
+      "displayNumber": "44",
+      "sectionId": "section-15",
+      "groupId": "section-15-group-1",
+      "prompt": "My favorite teacher is Mr. Zhao. He has made ____41____ big difference in my life. I was ____42____ (real) shy and nervous on the first day at school. But Mr. Zhao was ____43____ kind that I soon forgot about that. In  ______  (he) first class, he asked us to draw a picture of ourselves.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-181"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "What fine weather",
+      "analysis": "句意：在他的第一节课上，他让我们给自己画一幅画。空格后是名词，此处用形容词性物主代词his“他的”。故填his。"
+    },
+    {
+      "id": "2023-hebei-hebei-section-15-section-15-group-1-71",
+      "number": 45,
+      "displayNumber": "45",
+      "sectionId": "section-15",
+      "groupId": "section-15-group-1",
+      "prompt": "When he  ______  (get) to my desk, he looked at my picture and said, “Wow! I like those bright ____46____ (color)! That’s great!” I felt ____47____ (relax) at once. Mr. Zhao is patient and he always ____48____ (tell) us not to worry about giving wrong answers. Also, he shows us how to learn ____49____ our mistakes. Now I am in the _____50_____ (nine) grade, and I’m leaving school. I will remember all the suggestions he has given me.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-182"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "It’s a great day for a picnic",
+      "analysis": "句意：当他走到我的桌子旁时，他看着我的照片说。根据“he looked...”可知句子用一般过去时，动词用过去式。故填got。"
+    },
+    {
+      "id": "2023-hebei-hebei-section-15-section-15-group-1-72",
+      "number": 46,
+      "displayNumber": "46",
+      "sectionId": "section-15",
+      "groupId": "section-15-group-1",
+      "prompt": "When he ____45____ (get) to my desk, he looked at my picture and said, “Wow! I like those bright  ______  (color)! That’s great!” I felt ____47____ (relax) at once. Mr. Zhao is patient and he always ____48____ (tell) us not to worry about giving wrong answers. Also, he shows us how to learn ____49____ our mistakes. Now I am in the _____50_____ (nine) grade, and I’m leaving school. I will remember all the suggestions he has given me.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-182"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "Shall we go to the beach",
+      "analysis": "句意：我喜欢那些鲜艳的颜色！those后加可数名词复数colors“颜色”。故填colors。"
+    },
+    {
+      "id": "2023-hebei-hebei-section-15-section-15-group-1-73",
+      "number": 47,
+      "displayNumber": "47",
+      "sectionId": "section-15",
+      "groupId": "section-15-group-1",
+      "prompt": "When he ____45____ (get) to my desk, he looked at my picture and said, “Wow! I like those bright ____46____ (color)! That’s great!” I felt  ______  (relax) at once. Mr. Zhao is patient and he always ____48____ (tell) us not to worry about giving wrong answers. Also, he shows us how to learn ____49____ our mistakes. Now I am in the _____50_____ (nine) grade, and I’m leaving school. I will remember all the suggestions he has given me.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-182"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "I’ll take some food",
+      "analysis": "句意：我立刻感到放松。作felt的表语用形容词，形容人用relaxed“放松的”。故填relaxed。"
+    },
+    {
+      "id": "2023-hebei-hebei-section-15-section-15-group-1-74",
+      "number": 48,
+      "displayNumber": "48",
+      "sectionId": "section-15",
+      "groupId": "section-15-group-1",
+      "prompt": "When he ____45____ (get) to my desk, he looked at my picture and said, “Wow! I like those bright ____46____ (color)! That’s great!” I felt ____47____ (relax) at once. Mr. Zhao is patient and he always  ______  (tell) us not to worry about giving wrong answers. Also, he shows us how to learn ____49____ our mistakes. Now I am in the _____50_____ (nine) grade, and I’m leaving school. I will remember all the suggestions he has given me.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-182"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "I believe we’ll have a good time",
+      "analysis": "句意：赵老师很有耐心，他总是告诉我们不要担心回答错误。根据“Mr. Zhao is patient and he always...”可知句子用一般现在时，主语是he，谓语动词用单三tells“告诉”。故填tells。"
+    },
+    {
+      "id": "2023-hebei-hebei-section-15-section-15-group-1-75",
+      "number": 49,
+      "displayNumber": "49",
+      "sectionId": "section-15",
+      "groupId": "section-15-group-1",
+      "prompt": "When he ____45____ (get) to my desk, he looked at my picture and said, “Wow! I like those bright ____46____ (color)! That’s great!” I felt ____47____ (relax) at once. Mr. Zhao is patient and he always ____48____ (tell) us not to worry about giving wrong answers. Also, he shows us how to learn  ______  our mistakes. Now I am in the _____50_____ (nine) grade, and I’m leaving school. I will remember all the suggestions he has given me.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-182"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "例文",
+      "analysis": "句意：他还向我们展示了如何从错误中吸取教训learn from“从……中学习”。故填from。"
+    },
+    {
+      "id": "2023-hebei-hebei-section-15-section-15-group-1-76",
+      "number": 50,
+      "displayNumber": "50",
+      "sectionId": "section-15",
+      "groupId": "section-15-group-1",
+      "prompt": "When he ____45____ (get) to my desk, he looked at my picture and said, “Wow! I like those bright ____46____ (color)! That’s great!” I felt ____47____ (relax) at once. Mr. Zhao is patient and he always ____48____ (tell) us not to worry about giving wrong answers. Also, he shows us how to learn ____49____ our mistakes. Now I am in the  ______  (nine) grade, and I’m leaving school. I will remember all the suggestions he has given me.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-182"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "",
+      "analysis": "句意：现在我上九年级了，我要离开学校了。此处指“九年级”，用序数词ninth“第九”。故填ninth。"
+    },
+    {
+      "id": "2023-hebei-hebei-section-17-section-17-group-1-77",
       "number": 51,
       "displayNumber": "51",
       "sectionId": "section-17",
@@ -4079,10 +4540,10 @@
       "type": "blank",
       "context": "",
       "answer": "",
-      "analysis": ""
+      "analysis": "【解析】\n【详解】句意：非常感谢你的礼物。我喜欢它。\n考查固定搭配。in在……里；of……的；for为了；with和。thank for sth“因某物而感谢”，固定短语，for表示原因，故选C。"
     },
     {
-      "id": "2023-hebei-hebei-section-17-section-17-group-1-66",
+      "id": "2023-hebei-hebei-section-17-section-17-group-1-78",
       "number": 52,
       "displayNumber": "52",
       "sectionId": "section-17",
@@ -4096,10 +4557,10 @@
       "type": "blank",
       "context": "",
       "answer": "",
-      "analysis": ""
+      "analysis": "【解析】\n【详解】句意：——你从哪里弄来的玩具车？——从Betty那。她自己做的。\n考查代词辨析。myself我自己；himself他自己；herself她自己；yourself你自己。根据“She made it...”可知是她自己做的，用反身代词herself。故选C。"
     },
     {
-      "id": "2023-hebei-hebei-section-17-section-17-group-1-67",
+      "id": "2023-hebei-hebei-section-17-section-17-group-1-79",
       "number": 53,
       "displayNumber": "53",
       "sectionId": "section-17",
@@ -4113,10 +4574,10 @@
       "type": "blank",
       "context": "",
       "answer": "",
-      "analysis": ""
+      "analysis": "【解析】\n【详解】句意：快点，否则你会错过音乐会的开场。\n考查连词辨析。so所以；or否则；and和；but但是。根据“Hurry up...you will miss”可知要快点，否则就会错过音乐会的开场。故选B。"
     },
     {
-      "id": "2023-hebei-hebei-section-17-section-17-group-1-68",
+      "id": "2023-hebei-hebei-section-17-section-17-group-1-80",
       "number": 54,
       "displayNumber": "54",
       "sectionId": "section-17",
@@ -4130,58 +4591,24 @@
       "type": "blank",
       "context": "",
       "answer": "",
-      "analysis": ""
+      "analysis": "【解析】\n【详解】句意：这个星期天我要去滑冰。你想来吗？\n考查时态。根据“Do you want to come”可知动作还未发生，用一般将来时will do。故选D。"
     },
     {
-      "id": "2023-hebei-hebei-section-18-section-18-group-1-69",
-      "number": 56,
-      "displayNumber": "56",
-      "sectionId": "section-18",
-      "groupId": "section-18-group-1",
-      "prompt": "王梅的英国朋友Tony要来中国学习汉语，下面是Tony给她发来的电子邮件的部分内容。请你根据所给内容，以王梅的名义回复。 You know, in English, given names (名字) come first and family names (姓) come last. How about Chinese names? And can you help me choose a Chinese name and tell me its meaning? 注意：（1）回复邮件须回答所给邮件内容中的两个问题，可适当发挥。",
-      "options": [],
-      "inputKind": "text",
-      "sourceBlockIds": [
-        "paragraph-198"
-      ],
-      "type": "text",
-      "context": "",
-      "answer": "",
-      "analysis": ""
-    },
-    {
-      "id": "2023-hebei-hebei-section-18-section-18-group-1-70",
-      "number": 2,
-      "displayNumber": "2",
-      "sectionId": "section-18",
-      "groupId": "section-18-group-1",
-      "prompt": "回复邮件中不得出现真实的地名、校名和人名，所起名字只限于备选名字。",
-      "options": [],
-      "inputKind": "text",
-      "sourceBlockIds": [
-        "paragraph-200"
-      ],
-      "type": "text",
-      "context": "",
-      "answer": "",
-      "analysis": ""
-    },
-    {
-      "id": "2023-hebei-hebei-section-18-section-18-group-1-71",
-      "number": 3,
-      "displayNumber": "3",
-      "sectionId": "section-18",
-      "groupId": "section-18-group-1",
-      "prompt": "词数80个左右（开头和结尾已给出，不计入总词数）。 备选名字：王健（Wang Jian）；李聪（Li Cong）；张友好（Zhang Youhao） Hi Tony, I’m very happy to know that you’ll come to China to learn Chinese. _________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________ Looking forward to seeing you. Yours, Wang Mei",
+      "id": "2023-hebei-hebei-section-17-section-17-group-1-81",
+      "number": 55,
+      "displayNumber": "55",
+      "sectionId": "section-17",
+      "groupId": "section-17-group-1",
+      "prompt": "have, we’ll, I, a good time, believe ________________________________________________.",
       "options": [],
       "inputKind": "blank",
       "sourceBlockIds": [
-        "paragraph-201"
+        "paragraph-195"
       ],
       "type": "blank",
       "context": "",
       "answer": "",
-      "analysis": ""
+      "analysis": "【解析】\n【详解】句意：如果我们能找到更好的方法，我们就能更快地完成这项工作。\n考查情态动词。can能；can’t不能；must必须；mustn’t禁止。根据“ ...find a better way, we’ll finish the job faster”可知，此处指要是能找到更好的方法，就能更快地完成工作，故选A。"
     }
   ],
   "readingA": {

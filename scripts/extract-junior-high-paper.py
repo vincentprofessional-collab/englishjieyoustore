@@ -130,6 +130,12 @@ INSTRUCTION_MARKERS = (
 GROUP_KEYWORDS = ("听力", "听说", "单项", "语法", "完形", "阅读", "任务型", "短文", "写作", "作文", "书面表达", "文段表达")
 BLANK_MARKER = re.compile(r"_{2,}|…{2,}|（\s*）|\(\s*\)|空格|填空|填写|填入|信息转换|首字母")
 TABLE_BLANK = re.compile(r"(?<=\s)(\d{1,3})(?=\s{2,})")
+INLINE_PLACEHOLDER_PATTERNS = (
+    re.compile(r"_{2,}\s*(\d{1,3})\s*_{2,}"),
+    re.compile(r"(?<![A-Za-z0-9])([A-Za-z])\s{2,}(\d{1,3})(?!\d)"),
+    re.compile(r"(?<=[.!?。！？：:])\s{2,}(\d{1,3})(?!\d)(?=\s|$)"),
+    re.compile(r"(?<![A-Za-z0-9])\s{2,}(\d{2,3})\s{2,}(?!\d)"),
+)
 
 
 def _is_section_heading(text: str) -> bool:
@@ -172,10 +178,38 @@ def _flatten_blocks(blocks: list[dict]) -> list[dict]:
                 if text:
                     entries.append({
                         "text": text,
-                        "blockId": f"{block.get('id', 'table')}-row-{row_index}",
+                        "blockId": block.get("id", "table"),
+                        "rowId": f"{block.get('id', 'table')}-row-{row_index}",
                         "kind": "table",
                     })
     return entries
+
+
+def _inline_placeholder_matches(text: str) -> list[dict]:
+    """Find numbered blanks embedded in dialogue, cloze text, or tables."""
+    matches = []
+    for pattern in INLINE_PLACEHOLDER_PATTERNS:
+        for match in pattern.finditer(text):
+            number_text = match.group(1) if len(match.groups()) == 1 else match.group(2)
+            matches.append({"number": int(number_text), "start": match.start(), "end": match.end()})
+    unique = {}
+    for match in matches:
+        unique[(match["number"], match["start"], match["end"])] = match
+    return sorted(unique.values(), key=lambda item: item["start"])
+
+
+def _inline_prompt(text: str, match: dict) -> str:
+    return f"{text[:match['start']]} ______ {text[match['end']:]}".strip()
+
+
+def _nearby_options(entries: list[dict], last_entry_index: int, next_entry_index: int | None) -> list[str]:
+    """Find a shared option list placed after an inline dialogue/table group."""
+    end = next_entry_index if next_entry_index is not None else min(len(entries), last_entry_index + 4)
+    for entry in entries[last_entry_index:end]:
+        _, options = split_options(entry["text"])
+        if len(options) >= 2:
+            return options
+    return []
 
 
 def detect_sections(blocks: list[dict]) -> list[dict]:
@@ -216,8 +250,19 @@ def detect_sections(blocks: list[dict]) -> list[dict]:
 
 
 def _split_numbered_line(text: str) -> list[tuple[int, str]]:
-    matches = list(re.finditer(r"(?<![A-Za-z])(?<!\d)(\d{1,3})\s*[．.、:：)）]\s*", text))
-    if not matches or matches[0].start() > 1:
+    matches = list(re.finditer(r"(?<![A-Za-z])(?<!\d)(\d{1,3})\s*[．.、:：)）](?!\s*\d{2}\b)\s*", text))
+    if not matches:
+        plain = re.match(r"^\s*(\d{1,3})\s+(.+)$", text)
+        if plain and 1 <= int(plain.group(1)) <= 200:
+            prompt = plain.group(2).strip()
+            question_lead = re.match(
+                r"(?i)(?:what|who|where|when|why|how|which|whose|whom|is|are|am|do|does|did|can|could|will|would|shall|should|may|might|have|has|had|please|tell|name|describe)\b",
+                prompt,
+            )
+            if question_lead or re.search(r"[?？]", prompt):
+                return [(int(plain.group(1)), prompt)]
+        return []
+    if matches[0].start() > 1:
         return []
     chunks = []
     for index, match in enumerate(matches):
@@ -237,10 +282,17 @@ def _input_kind(prompt: str, options: list[str], *, table: bool = False) -> str:
 def parse_questions(blocks: list[dict], sections: list[dict] | None = None, slug: str = "paper") -> list[dict]:
     entries = _flatten_blocks(blocks)
     block_section = {}
+    writing_sections = set()
     if sections:
         for section in sections:
             for block_id in section.get("_blockIds", []):
                 block_section[block_id] = section["id"]
+            title = section.get("title", "")
+            essay_section = re.search(r"作文|书面表达|文段表达", title) or (
+                "写作" in title and not re.search(r"共\s*[一二三四五六七八九十\d]+\s*节|单词填空|补全对话|短文填空", title)
+            )
+            if essay_section:
+                writing_sections.add(section["id"])
 
     starts = []
     active_section = sections[0]["id"] if sections else "section-1"
@@ -252,6 +304,8 @@ def parse_questions(blocks: list[dict], sections: list[dict] | None = None, slug
             active_section = section_id
             group_counter.setdefault(active_section, 0)
             current_group = f"{active_section}-group-{group_counter.get(active_section, 0) + 1}"
+        if active_section in writing_sections:
+            continue
         text = entry["text"]
         if _group_heading(text) and not QUESTION.match(text):
             group_counter[active_section] = group_counter.get(active_section, 0) + 1
@@ -260,7 +314,7 @@ def parse_questions(blocks: list[dict], sections: list[dict] | None = None, slug
         chunks = _split_numbered_line(text)
         if chunks:
             for number, prompt in chunks:
-                if _looks_like_instruction(prompt) or _looks_like_instruction(text):
+                if _looks_like_instruction(prompt):
                     continue
                 starts.append({
                     "entryIndex": entry_index,
@@ -270,8 +324,26 @@ def parse_questions(blocks: list[dict], sections: list[dict] | None = None, slug
                     "groupId": current_group,
                     "blockId": entry["blockId"],
                     "table": entry["kind"] == "table",
+                    "position": text.find(prompt),
+                    "inline": False,
                 })
-        elif entry["kind"] == "table":
+        inline_matches = _inline_placeholder_matches(text)
+        for match in inline_matches:
+            if not 1 <= match["number"] <= 200:
+                continue
+            starts.append({
+                "entryIndex": entry_index,
+                "number": match["number"],
+                "prompt": _inline_prompt(text, match),
+                "sectionId": active_section,
+                "groupId": current_group,
+                "blockId": entry["blockId"],
+                "table": entry["kind"] == "table",
+                "position": match["start"],
+                "inline": True,
+                "inlineGroup": f"{active_section}:{entry_index}",
+            })
+        if entry["kind"] == "table" and not inline_matches:
             for match in TABLE_BLANK.finditer(text):
                 number = int(match.group(1))
                 if 1 <= number <= 200:
@@ -283,17 +355,60 @@ def parse_questions(blocks: list[dict], sections: list[dict] | None = None, slug
                         "groupId": current_group,
                         "blockId": entry["blockId"],
                         "table": True,
+                        "position": match.start(),
+                        "inline": False,
                     })
+
+    starts.sort(key=lambda start: (start["entryIndex"], start.get("position", 0)))
+    unique_inline = set()
+    deduped_starts = []
+    for start in starts:
+        if start.get("inline"):
+            key = (start["sectionId"], start["entryIndex"], start["number"])
+            if key in unique_inline:
+                continue
+            unique_inline.add(key)
+        deduped_starts.append(start)
+    starts = deduped_starts
+    inline_groups = {}
+    for start in starts:
+        if start.get("inline"):
+            inline_groups.setdefault(start["inlineGroup"], []).append(start)
+    for group_starts in inline_groups.values():
+        last_entry_index = max(start["entryIndex"] for start in group_starts)
+        next_start = next(
+            (start for start in starts if start["entryIndex"] > last_entry_index),
+            None,
+        )
+        shared_options = _nearby_options(entries, last_entry_index, next_start["entryIndex"] if next_start else None)
+        if shared_options:
+            for start in group_starts:
+                start["options"] = shared_options
+
+    explicit_keys = {(start["sectionId"], start["number"]) for start in starts if not start.get("inline")}
+    starts = [start for start in starts if not (start.get("inline") and (start["sectionId"], start["number"]) in explicit_keys)]
 
     questions = []
     for position, start in enumerate(starts):
         next_start = starts[position + 1] if position + 1 < len(starts) else None
-        if next_start and next_start["entryIndex"] == start["entryIndex"]:
+        if start.get("inline"):
+            text = start["prompt"]
+        elif next_start and next_start["entryIndex"] == start["entryIndex"]:
             text = start["prompt"]
         else:
-            end = next_start["entryIndex"] if next_start else len(entries)
+            section_end = next(
+                (
+                    entry_index
+                    for entry_index in range(start["entryIndex"] + 1, len(entries))
+                    if block_section.get(entries[entry_index]["blockId"], start["sectionId"]) != start["sectionId"]
+                ),
+                len(entries),
+            )
+            end = min(next_start["entryIndex"] if next_start else len(entries), section_end)
             text = " ".join([start["prompt"]] + [entry["text"] for entry in entries[start["entryIndex"] + 1 : end]]).strip()
         prompt, options = split_options(text)
+        if start.get("options") and not options:
+            options = start["options"]
         if _looks_like_instruction(prompt):
             continue
         if not prompt:
@@ -362,21 +477,37 @@ def answer_map(lines: list[str], questions: list[dict] | None = None) -> dict:
 
     answers = {}
     assigned = set()
+    last_index = -1
+    current_section = None
     for number, answer in entries:
-        if number is None:
-            continue
-        candidate = next((question for question in questions if question["id"] not in assigned and question["number"] == number), None)
+        candidates = [
+            (index, question)
+            for index, question in enumerate(questions)
+            if index > last_index and question["id"] not in assigned and (number is None or question["number"] == number)
+        ]
+        if current_section is not None:
+            same_section = [candidate for candidate in candidates if candidate[1]["sectionId"] == current_section]
+            if same_section:
+                candidates = same_section
+            else:
+                next_same_section = next(
+                    (
+                        (index, question)
+                        for index, question in enumerate(questions)
+                        if index > last_index and question["id"] not in assigned and question["sectionId"] == current_section
+                    ),
+                    None,
+                )
+                if next_same_section is not None and number is not None and next_same_section[1]["number"] > number:
+                    continue
+                if next_same_section is not None and not candidates:
+                    candidates = [next_same_section]
+        candidate_index, candidate = candidates[0] if candidates else (None, None)
         if candidate is not None:
             answers[candidate["id"]] = answer
             assigned.add(candidate["id"])
-    for number, answer in entries:
-        if number is not None:
-            continue
-        candidate = next((question for question in questions if question["id"] not in assigned), None)
-        if candidate is None:
-            break
-        answers[candidate["id"]] = answer
-        assigned.add(candidate["id"])
+            last_index = candidate_index
+            current_section = candidate["sectionId"]
     return answers
 
 
@@ -417,17 +548,37 @@ def analysis_map(lines: list[str], questions: list[dict] | None = None) -> dict:
         return {number: text for number, text in entries}
     result = {}
     assigned = set()
+    last_index = -1
+    current_section = None
     for number, text in entries:
-        if number is None:
-            candidate = next((question for question in questions if question["id"] not in assigned), None)
-            if candidate is not None:
-                result[candidate["id"]] = text
-                assigned.add(candidate["id"])
-            continue
-        candidate = next((question for question in questions if question["id"] not in assigned and question["number"] == number), None)
+        candidates = [
+            (index, question)
+            for index, question in enumerate(questions)
+            if index > last_index and question["id"] not in assigned and (number is None or question["number"] == number)
+        ]
+        if current_section is not None:
+            same_section = [candidate for candidate in candidates if candidate[1]["sectionId"] == current_section]
+            if same_section:
+                candidates = same_section
+            else:
+                next_same_section = next(
+                    (
+                        (index, question)
+                        for index, question in enumerate(questions)
+                        if index > last_index and question["id"] not in assigned and question["sectionId"] == current_section
+                    ),
+                    None,
+                )
+                if next_same_section is not None and number is not None and next_same_section[1]["number"] > number:
+                    continue
+                if next_same_section is not None and not candidates:
+                    candidates = [next_same_section]
+        candidate_index, candidate = candidates[0] if candidates else (None, None)
         if candidate is not None:
             result[candidate["id"]] = text
             assigned.add(candidate["id"])
+            last_index = candidate_index
+            current_section = candidate["sectionId"]
     return result
 
 
@@ -487,6 +638,60 @@ def extract_media(original: Path, assets_dir: Path, slug: str) -> dict[str, str]
                 continue
             paths[rel_id] = f"/junior-high/{slug}/{target_name}"
     return paths
+
+
+DISPLAY_INSTRUCTION_PREFIXES = ("请", "阅读下面", "根据", "从每", "从下", "选择", "填写", "完成", "作答", "注意事项", "第I卷", "第II卷")
+
+
+def _is_display_instruction(text: str, section_title: str) -> bool:
+    cleaned = text.strip()
+    if not cleaned or cleaned == section_title.strip():
+        return True
+    if _looks_like_instruction(cleaned) or _is_section_heading(cleaned) or _group_heading(cleaned):
+        return True
+    if cleaned.startswith(DISPLAY_INSTRUCTION_PREFIXES) and len(cleaned) < 180:
+        return True
+    if re.search(r"^(?:答案|解析|参考答案|评分标准|试卷答案)", cleaned):
+        return True
+    return False
+
+
+def build_display_blocks(sections: list[dict], questions: list[dict]) -> None:
+    """Attach a sanitized source view without removing original extraction blocks."""
+    questions_by_section: dict[str, list[dict]] = {}
+    for question in questions:
+        questions_by_section.setdefault(question["sectionId"], []).append(question)
+
+    for section in sections:
+        blocks = section.get("blocks", [])
+        section_questions = questions_by_section.get(section["id"], [])
+        block_indexes = {block.get("id"): index for index, block in enumerate(blocks) if block.get("id")}
+        starts = sorted({
+            block_indexes[source_id]
+            for question in section_questions
+            for source_id in question.get("sourceBlockIds", [])
+            if source_id in block_indexes
+        })
+        hidden_paragraph_indexes = set()
+        for start_index, next_index in zip(starts, starts[1:] + [len(blocks)]):
+            for index in range(start_index, next_index):
+                if blocks[index].get("kind") == "paragraph":
+                    hidden_paragraph_indexes.add(index)
+
+        display_blocks = []
+        for index, block in enumerate(blocks):
+            if block.get("kind") != "paragraph":
+                display_blocks.append(block)
+                continue
+            text = (block.get("text") or "").strip()
+            if index in hidden_paragraph_indexes:
+                continue
+            if not section_questions:
+                continue
+            if _is_display_instruction(text, section.get("title", "")):
+                continue
+            display_blocks.append(block)
+        section["displayBlocks"] = display_blocks
 
 
 def copy_audio(original: Path, assets_dir: Path, slug: str) -> list[str]:
@@ -550,6 +755,7 @@ def main() -> None:
         section.pop("_blockIndexes", None)
         section["blocks"] = [block for block in source_blocks if block.get("id") in block_ids]
         section["questionIds"] = [question["id"] for question in questions if question["sectionId"] == section["id"]]
+    build_display_blocks(sections, questions)
 
     ordered_source_lines = []
     for block in source_blocks:

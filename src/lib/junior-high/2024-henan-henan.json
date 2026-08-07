@@ -1110,7 +1110,15 @@
           "text": "2. 本试卷上不要答题，请按答题卡上注意事项的要求直接把答案填写在答题卡上，答在试卷上的答案无效。"
         }
       ],
-      "questionIds": []
+      "questionIds": [],
+      "displayBlocks": [
+        {
+          "id": "image-1-1",
+          "kind": "image",
+          "src": "/junior-high/2024-henan-henan/image1.png",
+          "alt": "原卷图片"
+        }
+      ]
     },
     {
       "id": "section-2",
@@ -1329,6 +1337,13 @@
         "2024-henan-henan-section-2-section-2-group-1-13",
         "2024-henan-henan-section-2-section-2-group-1-14",
         "2024-henan-henan-section-2-section-2-group-1-15"
+      ],
+      "displayBlocks": [
+        {
+          "id": "paragraph-6",
+          "kind": "paragraph",
+          "text": "第一节 听下面5段对话。每段对话后有一个小题，从题中所给的A、B、C三个选项中选出最佳答案。每段对话读两遍。"
+        }
       ]
     },
     {
@@ -1359,6 +1374,14 @@
         "2024-henan-henan-section-3-section-3-group-1-18",
         "2024-henan-henan-section-3-section-3-group-1-19",
         "2024-henan-henan-section-3-section-3-group-1-20"
+      ],
+      "displayBlocks": [
+        {
+          "id": "image-45-1",
+          "kind": "image",
+          "src": "/junior-high/2024-henan-henan/image2.png",
+          "alt": "原卷图片"
+        }
       ]
     },
     {
@@ -1372,7 +1395,8 @@
           "text": "二、阅读理解（20小题，每小题2分，共40分）"
         }
       ],
-      "questionIds": []
+      "questionIds": [],
+      "displayBlocks": []
     },
     {
       "id": "section-5",
@@ -1886,7 +1910,64 @@
         "2024-henan-henan-section-5-section-5-group-1-32",
         "2024-henan-henan-section-5-section-5-group-1-33",
         "2024-henan-henan-section-5-section-5-group-1-34",
-        "2024-henan-henan-section-5-section-5-group-1-35"
+        "2024-henan-henan-section-5-section-5-group-1-35",
+        "2024-henan-henan-section-5-section-5-group-1-36",
+        "2024-henan-henan-section-5-section-5-group-1-37",
+        "2024-henan-henan-section-5-section-5-group-1-38",
+        "2024-henan-henan-section-5-section-5-group-1-39"
+      ],
+      "displayBlocks": [
+        {
+          "id": "paragraph-49",
+          "kind": "paragraph",
+          "text": "A"
+        },
+        {
+          "id": "paragraph-50",
+          "kind": "paragraph",
+          "text": "Useful Apps for You"
+        },
+        {
+          "id": "paragraph-51",
+          "kind": "paragraph",
+          "text": "Many of you may have experienced surfing the Internet for searching the helpful apps in order to finish the schoolwork. Apps are typical digital tools for your study, which can give you different and personalized content (个性化的内容) to meet your learning or needs. Do you also want to find an app that can help you learn something efficiently (高效地)? It is my great honor to recommend (推荐) you some great apps to you!"
+        },
+        {
+          "id": "table-1",
+          "kind": "table",
+          "rows": [
+            [
+              "This free app is a great tool for those who are interested in public speaking. It has collected more than seven hundred talks from the world’s most famous thinkers, leaders and artists. There is a short introduction for each talk so that you can get the main idea in advance. You can watch talks by subject and download some to watch on offline.",
+              ""
+            ],
+            [
+              "BrainPOP mixes learning and technology in a fun and simple way. It is free and teaches you something new in English every day. From the solar system to DNA, each topic starts with an interesting cartoon. After you have watched it, you can take a test to see how much you have learned.",
+              ""
+            ],
+            [
+              "This app allows you to learn almost anything for free. It covers subjects such as math, physics, biology, and even computer science. The real magic of Khan Academy is that you can learn at your own speed. You can review subjects that you are not good at, or start learning a subject, like a geometry (几何). The app is in English if you need its translation, you can visit http://open.163.com/khan.",
+              ""
+            ]
+          ]
+        },
+        {
+          "id": "image-table-1-1",
+          "kind": "image",
+          "src": "/junior-high/2024-henan-henan/image3.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "image-table-1-2",
+          "kind": "image",
+          "src": "/junior-high/2024-henan-henan/image4.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "image-table-1-3",
+          "kind": "image",
+          "src": "/junior-high/2024-henan-henan/image5.png",
+          "alt": "原卷图片"
+        }
       ]
     },
     {
@@ -2016,10 +2097,6 @@
         }
       ],
       "questionIds": [
-        "2024-henan-henan-section-6-section-6-group-1-36",
-        "2024-henan-henan-section-6-section-6-group-1-37",
-        "2024-henan-henan-section-6-section-6-group-1-38",
-        "2024-henan-henan-section-6-section-6-group-1-39",
         "2024-henan-henan-section-6-section-6-group-1-40",
         "2024-henan-henan-section-6-section-6-group-1-41",
         "2024-henan-henan-section-6-section-6-group-1-42",
@@ -2030,7 +2107,53 @@
         "2024-henan-henan-section-6-section-6-group-1-47",
         "2024-henan-henan-section-6-section-6-group-1-48",
         "2024-henan-henan-section-6-section-6-group-1-49",
-        "2024-henan-henan-section-6-section-6-group-1-50"
+        "2024-henan-henan-section-6-section-6-group-1-50",
+        "2024-henan-henan-section-6-section-6-group-1-51",
+        "2024-henan-henan-section-6-section-6-group-1-52",
+        "2024-henan-henan-section-6-section-6-group-1-53",
+        "2024-henan-henan-section-6-section-6-group-1-54"
+      ],
+      "displayBlocks": [
+        {
+          "id": "paragraph-140",
+          "kind": "paragraph",
+          "text": "先通读短文，掌握其大意，然后从A、B、C、D四个选项中选出一个可以填入相应空白处的最佳答案。"
+        },
+        {
+          "id": "paragraph-141",
+          "kind": "paragraph",
+          "text": "The little girl went to school each day feeling frightened. She had been used to it, but it still hurt her when her classmates    41    her."
+        },
+        {
+          "id": "paragraph-142",
+          "kind": "paragraph",
+          "text": "When she was younger, she used to    42    when the laughing began. But as she grew older, she no longer hid in shame. Still, it hurt. She had no    43   . The laughing turned her into a girl who kept to herself. But friends were what she wanted most."
+        },
+        {
+          "id": "paragraph-143",
+          "kind": "paragraph",
+          "text": "“Your mother is so    44   ,” the kids would say, “Your mother’s    45    is like a monster’s one,” they said. “Cathy has a monster for a mother!”"
+        },
+        {
+          "id": "paragraph-144",
+          "kind": "paragraph",
+          "text": "Sometimes, Cathy wanted to    46    that her mother was not her mother. She wanted to tell the others that the woman was not her mother at all. When this happened, she was filled with guilt(内疚) and    47   , for her mother was the    48    and most generous of all the mothers in the world. She did so many great things and helped lots of people."
+        },
+        {
+          "id": "paragraph-145",
+          "kind": "paragraph",
+          "text": "Cathy’s mother did in fact have a scary face. It has long purple ugly scars (伤疤) on it. One day, when Cathy came home    49   , her grandmother took her aside. “Why are you crying?” asked her grandmother. Cathy explained how difficult it was to stand the laughing from her classmates. She told her how     50     she felt each day at school with no friends around her."
+        },
+        {
+          "id": "paragraph-146",
+          "kind": "paragraph",
+          "text": "Her grandmother said, “It’s time to tell you the story of     51     your mother came to have such a face. One day, you were sleeping in your bed and your mother was across the street talking with a neighbor.     52    , she noticed smoke coming from your house. Everyone rushed to the door, but it was too dangerous to go inside. Your mother ran into the fire without thinking twice, not thinking of      53     , only of you, her dear child. She brought you out safely,     54     her own body was burned from top to bottom, especially her face. That’s the story of the ugly scars.” Cathy was     55     again embarrassed of her mother."
+        },
+        {
+          "id": "paragraph-147",
+          "kind": "paragraph",
+          "text": "From that day on, she walked with her head high, knowing that she, above all the other children, had a mother who loved her very much."
+        }
       ]
     },
     {
@@ -2049,7 +2172,8 @@
           "text": "第一节"
         }
       ],
-      "questionIds": []
+      "questionIds": [],
+      "displayBlocks": []
     },
     {
       "id": "section-8",
@@ -2101,7 +2225,28 @@
           "text": "第二节"
         }
       ],
-      "questionIds": []
+      "questionIds": [
+        "2024-henan-henan-section-8-section-8-group-1-55",
+        "2024-henan-henan-section-8-section-8-group-1-56",
+        "2024-henan-henan-section-8-section-8-group-1-57",
+        "2024-henan-henan-section-8-section-8-group-1-58",
+        "2024-henan-henan-section-8-section-8-group-1-59",
+        "2024-henan-henan-section-8-section-8-group-1-60",
+        "2024-henan-henan-section-8-section-8-group-1-61",
+        "2024-henan-henan-section-8-section-8-group-1-62",
+        "2024-henan-henan-section-8-section-8-group-1-63"
+      ],
+      "displayBlocks": [
+        {
+          "id": "table-2",
+          "kind": "table",
+          "rows": [
+            [
+              "since   write   power   usual   for   reply   mean   correct   lucky   they"
+            ]
+          ]
+        }
+      ]
     },
     {
       "id": "section-9",
@@ -2134,7 +2279,14 @@
           "text": "All of them became happy again, “Congratulations!” they said. They all had a good time that evening."
         }
       ],
-      "questionIds": []
+      "questionIds": [
+        "2024-henan-henan-section-9-section-9-group-1-64",
+        "2024-henan-henan-section-9-section-9-group-1-65",
+        "2024-henan-henan-section-9-section-9-group-1-66",
+        "2024-henan-henan-section-9-section-9-group-1-67",
+        "2024-henan-henan-section-9-section-9-group-1-68"
+      ],
+      "displayBlocks": []
     },
     {
       "id": "section-10",
@@ -2222,7 +2374,20 @@
           "text": "B: OK. See you on Saturday afternoon."
         }
       ],
-      "questionIds": []
+      "questionIds": [
+        "2024-henan-henan-section-10-section-10-group-1-69",
+        "2024-henan-henan-section-10-section-10-group-1-70",
+        "2024-henan-henan-section-10-section-10-group-1-71",
+        "2024-henan-henan-section-10-section-10-group-1-72",
+        "2024-henan-henan-section-10-section-10-group-1-73"
+      ],
+      "displayBlocks": [
+        {
+          "id": "paragraph-179",
+          "kind": "paragraph",
+          "text": "A: Hey, Bill. What a long day!"
+        }
+      ]
     },
     {
       "id": "section-11",
@@ -2280,14 +2445,8 @@
           "text": "____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________"
         }
       ],
-      "questionIds": [
-        "2024-henan-henan-section-11-section-11-group-1-51",
-        "2024-henan-henan-section-11-section-11-group-1-52",
-        "2024-henan-henan-section-11-section-11-group-1-53",
-        "2024-henan-henan-section-11-section-11-group-1-54",
-        "2024-henan-henan-section-11-section-11-group-1-55",
-        "2024-henan-henan-section-11-section-11-group-1-56"
-      ]
+      "questionIds": [],
+      "displayBlocks": []
     }
   ],
   "questions": [
@@ -2597,7 +2756,7 @@
       "options": [
         "A. The man will travel with his family.",
         "B. The man will take the ticket for business class.",
-        "C. The man’s telephone number is 8250-2248. 第三节 听下面一篇短文。按照你所听内容的先后顺序将下列图片排序。短文读两遍。"
+        "C. The man’s telephone number is 8250-2248."
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -2639,8 +2798,8 @@
       ],
       "type": "blank",
       "context": "",
-      "answer": "Do you have any plans on Saturday",
-      "analysis": "Do you have any plans on Saturday\nWould you like to join me\nI’m afraid I can’t play it well\nWhat can I do"
+      "answer": "",
+      "analysis": ""
     },
     {
       "id": "2024-henan-henan-section-3-section-3-group-1-18",
@@ -2656,8 +2815,8 @@
       ],
       "type": "blank",
       "context": "",
-      "answer": "例文",
-      "analysis": "How to get over difficulty\nIn our daily life, we often meet different kinds of difficulties. But how can we get over them? Here is one of my unusual experiences.\nWhen I was in Grade 7, I didn’t do well in my lessons first. Exams always brought me sadness. As a result, I was afraid of study and I became very lonely. Then, I decided to ask my teachers for help. Luckily, they gave me some useful advice. They told me not to give up easily because nothing is impossible if we put our heart into it. I was deeply moved by their words and worked harder than before. Finally, I improved myself a lot.\nFrom this experience, I understand that I should learn to get over difficulty by myself with my confidence and my hard work.\n【详解】[总体分析]\n①题材：本文是一篇记叙文；\n②时态：一般过去时；\n③提示：以“How to get over difficulty”为题，结合所给的要点提示，写一篇介绍自己如何克服困难的短文。\n[写作步骤]\n第一步：介绍你自己遇到了什么困难；\n第二步：你解决问题的方法是什么；\n第三步：谈谈你的收获与感想。\n[亮点词汇]\n①different kinds of 各种各样的……\n②one of ……之一\n③give up 放弃\n[高分句型]\n①When I was in Grade 7, I didn’t do well in my lessons first. （when引导时间状语从句）\n②They told me not to give up easily because nothing is impossible if we put our heart into it.  （because引导原因状语从句）"
+      "answer": "",
+      "analysis": ""
     },
     {
       "id": "2024-henan-henan-section-3-section-3-group-1-19",
@@ -2682,7 +2841,7 @@
       "displayNumber": "20",
       "sectionId": "section-3",
       "groupId": "section-3-group-1",
-      "prompt": "_________ 二、阅读理解（20小题，每小题2分，共40分） 阅读下面四篇语言材料，然后按文后要求做题。 A Useful Apps for You Many of you may have experienced surfing the Internet for searching the helpful apps in order to finish the schoolwork. Apps are typical digital tools for your study, which can give you different and personalized content (个性化的内容) to meet your learning or needs. Do you also want to find an app that can help you learn something efficiently (高效地)? It is my great honor to recommend (推荐) you some great apps to you! This free app is a great tool for those who are interested in public speaking. It has collected more than seven hundred talks from the world’s most famous thinkers, leaders and artists. There is a short introduction for each talk so that you can get the main idea in advance. You can watch talks by subject and download some to watch on offline. BrainPOP mixes learning and technology in a fun and simple way. It is free and teaches you something new in English every day. From the solar system to DNA, each topic starts with an interesting cartoon. After you have watched it, you can take a test to see how much you have learned. This app allows you to learn almost anything for free. It covers subjects such as math, physics, biology, and even computer science. The real magic of Khan Academy is that you can learn at your own speed. You can review subjects that you are not good at, or start learning a subject, like a geometry (几何). The app is in English if you need its translation, you can visit http://open.163.com/khan. 根据材料选择最佳答案。",
+      "prompt": "_________",
       "options": [],
       "inputKind": "blank",
       "sourceBlockIds": [
@@ -3014,14 +3173,7 @@
         "A. By doing a test.",
         "B. By giving examples.",
         "C. By asking questions.",
-        "D. By comparing different ways. D The Art of Paper Chen Zijiang is a paper-cutting expert whom I interviewed for my article on Chinese Art. Paper-cutting is something that he learned to do from an early age. \"It is a Chinese folk art with a long history,\" Mr. Chen told me, \"Paper cuts of animals have been found in tombs(坟墓).    36   \" He added that by the Southern Song Dynasty, paper-cutting had become an important part of everyday life. 37   They are paper cuts for decoration, for religious purposes(宗教目的) and for design patterns. Paper cuts for decoration are often seen on windows and gates.   38   They are also used on presents. A present for parents whose child has recently been born might show a paper cut of children, for example. Paper cuts which show the Chinese character for double happiness are often used to celebrate weddings. Paper cuts for religious purposes are often found in temples.   39 The third kind of paper cuts are those used to make patterns on clothing. They are also sometimes used to decorate jewellery boxes.   40",
-        "A. They are usually put up during holidays to bring good luck.",
-        "B. They are also used as offerings to the dead.",
-        "C. Dragons are very popular patterns for these designs.",
-        "D. They can date back to the time of the Northern and Southern Dynasty. E．Mr. Chen went on to explain that there are three types of paper cuts which people still make. 三、完形填空（15小题，每小题1分，共15分） 先通读短文，掌握其大意，然后从",
-        "A. ",
-        "B. ",
-        "C. D四个选项中选出一个可以填入相应空白处的最佳答案。 The little girl went to school each day feeling frightened. She had been used to it, but it still hurt her when her classmates    41    her. When she was younger, she used to    42    when the laughing began. But as she grew older, she no longer hid in shame. Still, it hurt. She had no    43   . The laughing turned her into a girl who kept to herself. But friends were what she wanted most. “Your mother is so    44   ,” the kids would say, “Your mother’s    45    is like a monster’s one,” they said. “Cathy has a monster for a mother!” Sometimes, Cathy wanted to    46    that her mother was not her mother. She wanted to tell the others that the woman was not her mother at all. When this happened, she was filled with guilt(内疚) and    47   , for her mother was the    48    and most generous of all the mothers in the world. She did so many great things and helped lots of people. Cathy’s mother did in fact have a scary face. It has long purple ugly scars (伤疤) on it. One day, when Cathy came home    49   , her grandmother took her aside. “Why are you crying?” asked her grandmother. Cathy explained how difficult it was to stand the laughing from her classmates. She told her how     50     she felt each day at school with no friends around her. Her grandmother said, “It’s time to tell you the story of     51     your mother came to have such a face. One day, you were sleeping in your bed and your mother was across the street talking with a neighbor.     52    , she noticed smoke coming from your house. Everyone rushed to the door, but it was too dangerous to go inside. Your mother ran into the fire without thinking twice, not thinking of      53     , only of you, her dear child. She brought you out safely,     54     her own body was burned from top to bottom, especially her face. That’s the story of the ugly scars.” Cathy was     55     again embarrassed of her mother. From that day on, she walked with her head high, knowing that she, above all the other children, had a mother who loved her very much."
+        "D. By comparing different ways. D The Art of Paper Chen Zijiang is a paper-cutting expert whom I interviewed for my article on Chinese Art. Paper-cutting is something that he learned to do from an early age."
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -3033,7 +3185,79 @@
       "analysis": "【导语】本文讲述人们可以根据外表猜测出别人的名字。一个人的外表会受名字的影响。"
     },
     {
-      "id": "2024-henan-henan-section-6-section-6-group-1-36",
+      "id": "2024-henan-henan-section-5-section-5-group-1-36",
+      "number": 36,
+      "displayNumber": "36",
+      "sectionId": "section-5",
+      "groupId": "section-5-group-1",
+      "prompt": "\"It is a Chinese folk art with a long history,\" Mr. Chen told me, \"Paper cuts of animals have been found in tombs(坟墓). ______    \" He added that by the Southern Song Dynasty, paper-cutting had become an important part of everyday life.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-129"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "D",
+      "analysis": "【分析】本文是一篇说明文，主要介绍剪纸艺术的发展以及它的三种类型。"
+    },
+    {
+      "id": "2024-henan-henan-section-5-section-5-group-1-37",
+      "number": 38,
+      "displayNumber": "38",
+      "sectionId": "section-5",
+      "groupId": "section-5-group-1",
+      "prompt": "Paper cuts for decoration are often seen on windows and gates. ______    They are also used on presents. A present for parents whose child has recently been born might show a paper cut of children, for example. Paper cuts which show the Chinese character for double happiness are often used to celebrate weddings.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-131"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "A",
+      "analysis": "【分析】本文是一篇说明文，主要介绍剪纸艺术的发展以及它的三种类型。"
+    },
+    {
+      "id": "2024-henan-henan-section-5-section-5-group-1-38",
+      "number": 39,
+      "displayNumber": "39",
+      "sectionId": "section-5",
+      "groupId": "section-5-group-1",
+      "prompt": "Paper cuts for religious purposes are often found in temples. ______",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-132"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "B",
+      "analysis": "【分析】本文是一篇说明文，主要介绍剪纸艺术的发展以及它的三种类型。"
+    },
+    {
+      "id": "2024-henan-henan-section-5-section-5-group-1-39",
+      "number": 40,
+      "displayNumber": "40",
+      "sectionId": "section-5",
+      "groupId": "section-5-group-1",
+      "prompt": "The third kind of paper cuts are those used to make patterns on clothing. They are also sometimes used to decorate jewellery boxes. ______",
+      "options": [
+        "A. ",
+        "B. ",
+        "C. D四个选项中选出一个可以填入相应空白处的最佳答案。"
+      ],
+      "inputKind": "choice",
+      "sourceBlockIds": [
+        "paragraph-133"
+      ],
+      "type": "choice",
+      "context": "",
+      "answer": "C",
+      "analysis": "【分析】本文是一篇说明文，主要介绍剪纸艺术的发展以及它的三种类型。"
+    },
+    {
+      "id": "2024-henan-henan-section-6-section-6-group-1-40",
       "number": 41,
       "displayNumber": "41",
       "sectionId": "section-6",
@@ -3055,7 +3279,7 @@
       "analysis": "41．C    42．A    43．B    44．D    45．A    46．A    47．B    48．D    49．B    50．C    51．A    52．C    53．A    54．D    55．B\n【导语】本文讲述了小女孩Cathy的妈妈脸上有伤疤，同学们都嘲笑她，她自己也为此感到很羞耻，但得知妈妈伤疤的来历后，Cathy不再感到尴尬和自卑，因为她知道妈妈非常爱她。"
     },
     {
-      "id": "2024-henan-henan-section-6-section-6-group-1-37",
+      "id": "2024-henan-henan-section-6-section-6-group-1-41",
       "number": 42,
       "displayNumber": "42",
       "sectionId": "section-6",
@@ -3077,7 +3301,7 @@
       "analysis": "41．C    42．A    43．B    44．D    45．A    46．A    47．B    48．D    49．B    50．C    51．A    52．C    53．A    54．D    55．B\n【导语】本文讲述了小女孩Cathy的妈妈脸上有伤疤，同学们都嘲笑她，她自己也为此感到很羞耻，但得知妈妈伤疤的来历后，Cathy不再感到尴尬和自卑，因为她知道妈妈非常爱她。"
     },
     {
-      "id": "2024-henan-henan-section-6-section-6-group-1-38",
+      "id": "2024-henan-henan-section-6-section-6-group-1-42",
       "number": 43,
       "displayNumber": "43",
       "sectionId": "section-6",
@@ -3099,7 +3323,7 @@
       "analysis": "41．C    42．A    43．B    44．D    45．A    46．A    47．B    48．D    49．B    50．C    51．A    52．C    53．A    54．D    55．B\n【导语】本文讲述了小女孩Cathy的妈妈脸上有伤疤，同学们都嘲笑她，她自己也为此感到很羞耻，但得知妈妈伤疤的来历后，Cathy不再感到尴尬和自卑，因为她知道妈妈非常爱她。"
     },
     {
-      "id": "2024-henan-henan-section-6-section-6-group-1-39",
+      "id": "2024-henan-henan-section-6-section-6-group-1-43",
       "number": 44,
       "displayNumber": "44",
       "sectionId": "section-6",
@@ -3121,7 +3345,7 @@
       "analysis": "41．C    42．A    43．B    44．D    45．A    46．A    47．B    48．D    49．B    50．C    51．A    52．C    53．A    54．D    55．B\n【导语】本文讲述了小女孩Cathy的妈妈脸上有伤疤，同学们都嘲笑她，她自己也为此感到很羞耻，但得知妈妈伤疤的来历后，Cathy不再感到尴尬和自卑，因为她知道妈妈非常爱她。"
     },
     {
-      "id": "2024-henan-henan-section-6-section-6-group-1-40",
+      "id": "2024-henan-henan-section-6-section-6-group-1-44",
       "number": 45,
       "displayNumber": "45",
       "sectionId": "section-6",
@@ -3143,7 +3367,7 @@
       "analysis": "41．C    42．A    43．B    44．D    45．A    46．A    47．B    48．D    49．B    50．C    51．A    52．C    53．A    54．D    55．B\n【导语】本文讲述了小女孩Cathy的妈妈脸上有伤疤，同学们都嘲笑她，她自己也为此感到很羞耻，但得知妈妈伤疤的来历后，Cathy不再感到尴尬和自卑，因为她知道妈妈非常爱她。"
     },
     {
-      "id": "2024-henan-henan-section-6-section-6-group-1-41",
+      "id": "2024-henan-henan-section-6-section-6-group-1-45",
       "number": 46,
       "displayNumber": "46",
       "sectionId": "section-6",
@@ -3165,7 +3389,7 @@
       "analysis": "41．C    42．A    43．B    44．D    45．A    46．A    47．B    48．D    49．B    50．C    51．A    52．C    53．A    54．D    55．B\n【导语】本文讲述了小女孩Cathy的妈妈脸上有伤疤，同学们都嘲笑她，她自己也为此感到很羞耻，但得知妈妈伤疤的来历后，Cathy不再感到尴尬和自卑，因为她知道妈妈非常爱她。"
     },
     {
-      "id": "2024-henan-henan-section-6-section-6-group-1-42",
+      "id": "2024-henan-henan-section-6-section-6-group-1-46",
       "number": 47,
       "displayNumber": "47",
       "sectionId": "section-6",
@@ -3187,7 +3411,7 @@
       "analysis": "41．C    42．A    43．B    44．D    45．A    46．A    47．B    48．D    49．B    50．C    51．A    52．C    53．A    54．D    55．B\n【导语】本文讲述了小女孩Cathy的妈妈脸上有伤疤，同学们都嘲笑她，她自己也为此感到很羞耻，但得知妈妈伤疤的来历后，Cathy不再感到尴尬和自卑，因为她知道妈妈非常爱她。"
     },
     {
-      "id": "2024-henan-henan-section-6-section-6-group-1-43",
+      "id": "2024-henan-henan-section-6-section-6-group-1-47",
       "number": 48,
       "displayNumber": "48",
       "sectionId": "section-6",
@@ -3209,7 +3433,7 @@
       "analysis": "41．C    42．A    43．B    44．D    45．A    46．A    47．B    48．D    49．B    50．C    51．A    52．C    53．A    54．D    55．B\n【导语】本文讲述了小女孩Cathy的妈妈脸上有伤疤，同学们都嘲笑她，她自己也为此感到很羞耻，但得知妈妈伤疤的来历后，Cathy不再感到尴尬和自卑，因为她知道妈妈非常爱她。"
     },
     {
-      "id": "2024-henan-henan-section-6-section-6-group-1-44",
+      "id": "2024-henan-henan-section-6-section-6-group-1-48",
       "number": 49,
       "displayNumber": "49",
       "sectionId": "section-6",
@@ -3231,7 +3455,7 @@
       "analysis": "41．C    42．A    43．B    44．D    45．A    46．A    47．B    48．D    49．B    50．C    51．A    52．C    53．A    54．D    55．B\n【导语】本文讲述了小女孩Cathy的妈妈脸上有伤疤，同学们都嘲笑她，她自己也为此感到很羞耻，但得知妈妈伤疤的来历后，Cathy不再感到尴尬和自卑，因为她知道妈妈非常爱她。"
     },
     {
-      "id": "2024-henan-henan-section-6-section-6-group-1-45",
+      "id": "2024-henan-henan-section-6-section-6-group-1-49",
       "number": 50,
       "displayNumber": "50",
       "sectionId": "section-6",
@@ -3253,7 +3477,7 @@
       "analysis": "41．C    42．A    43．B    44．D    45．A    46．A    47．B    48．D    49．B    50．C    51．A    52．C    53．A    54．D    55．B\n【导语】本文讲述了小女孩Cathy的妈妈脸上有伤疤，同学们都嘲笑她，她自己也为此感到很羞耻，但得知妈妈伤疤的来历后，Cathy不再感到尴尬和自卑，因为她知道妈妈非常爱她。"
     },
     {
-      "id": "2024-henan-henan-section-6-section-6-group-1-46",
+      "id": "2024-henan-henan-section-6-section-6-group-1-50",
       "number": 51,
       "displayNumber": "51",
       "sectionId": "section-6",
@@ -3275,7 +3499,7 @@
       "analysis": "41．C    42．A    43．B    44．D    45．A    46．A    47．B    48．D    49．B    50．C    51．A    52．C    53．A    54．D    55．B\n【导语】本文讲述了小女孩Cathy的妈妈脸上有伤疤，同学们都嘲笑她，她自己也为此感到很羞耻，但得知妈妈伤疤的来历后，Cathy不再感到尴尬和自卑，因为她知道妈妈非常爱她。"
     },
     {
-      "id": "2024-henan-henan-section-6-section-6-group-1-47",
+      "id": "2024-henan-henan-section-6-section-6-group-1-51",
       "number": 52,
       "displayNumber": "52",
       "sectionId": "section-6",
@@ -3297,7 +3521,7 @@
       "analysis": "41．C    42．A    43．B    44．D    45．A    46．A    47．B    48．D    49．B    50．C    51．A    52．C    53．A    54．D    55．B\n【导语】本文讲述了小女孩Cathy的妈妈脸上有伤疤，同学们都嘲笑她，她自己也为此感到很羞耻，但得知妈妈伤疤的来历后，Cathy不再感到尴尬和自卑，因为她知道妈妈非常爱她。"
     },
     {
-      "id": "2024-henan-henan-section-6-section-6-group-1-48",
+      "id": "2024-henan-henan-section-6-section-6-group-1-52",
       "number": 53,
       "displayNumber": "53",
       "sectionId": "section-6",
@@ -3319,7 +3543,7 @@
       "analysis": "41．C    42．A    43．B    44．D    45．A    46．A    47．B    48．D    49．B    50．C    51．A    52．C    53．A    54．D    55．B\n【导语】本文讲述了小女孩Cathy的妈妈脸上有伤疤，同学们都嘲笑她，她自己也为此感到很羞耻，但得知妈妈伤疤的来历后，Cathy不再感到尴尬和自卑，因为她知道妈妈非常爱她。"
     },
     {
-      "id": "2024-henan-henan-section-6-section-6-group-1-49",
+      "id": "2024-henan-henan-section-6-section-6-group-1-53",
       "number": 54,
       "displayNumber": "54",
       "sectionId": "section-6",
@@ -3341,7 +3565,7 @@
       "analysis": "41．C    42．A    43．B    44．D    45．A    46．A    47．B    48．D    49．B    50．C    51．A    52．C    53．A    54．D    55．B\n【导语】本文讲述了小女孩Cathy的妈妈脸上有伤疤，同学们都嘲笑她，她自己也为此感到很羞耻，但得知妈妈伤疤的来历后，Cathy不再感到尴尬和自卑，因为她知道妈妈非常爱她。"
     },
     {
-      "id": "2024-henan-henan-section-6-section-6-group-1-50",
+      "id": "2024-henan-henan-section-6-section-6-group-1-54",
       "number": 55,
       "displayNumber": "55",
       "sectionId": "section-6",
@@ -3351,7 +3575,7 @@
         "A. always",
         "B. never",
         "C. sometimes",
-        "D. often 四、语篇填空（15小题，每小题1分，共15分） 第一节 阅读短文，从方框中选择适当的词并用其正确形式填空，使短文通顺、意思完整。每空限填一词，每词限用一次。 since   write   power   usual   for   reply   mean   correct   lucky   they In Chinese culture, the color red stands for many good things, for example, happiness. But writing names and letters with red pens is    56    avoided. In ancient times, red was the symbol of    57   . Not everyone could write with red pens-only emperors. They would reply to officials’ memorials (奏折) with red pens. These    58    were known as pizhu. Writing with red pens was also related to death. In ancient China, the criminals who were sentenced to death signed    59    names with red pens. The records of criminals’ names were all    60    in red words. Therefore, it was thought to be    61    to write names with red pens. 62    red words carry bad meanings, people don’t write letters with red pens. If you write to friends or family members with red pens, it    63    you want to break up with them. Nowadays, red pens are used    64    proof-reading (校对). Teachers mark students’ homework with red pens. So do editors who need to    65    mistakes in newspapers and magazines. But writing names or letters with red pens is still a bad idea to many people. 第二节 阅读短文，根据语篇要求填空，使短文通顺、意思完整。每空限填一词。 In some foreign countries, some people don’t like the number 13. They don’t think 13 is     66     lucky number, for example, they don’t like to live on the thirteenth floor. One day, my friend Jack asked friends to dinner. When all of his friends arrived, he asked them     67     sit at the table. He began to count the people in his mind while they were having the delicious food. Suddenly, he cried out, “Oh,     68     are thirteen people here!” Everyone’s face turned white except Mr. Brown. He said slowly     69     a smile on his face, “Don’t worry, my friends. We have fourteen people here. My wife Mrs. Brown     70     have a baby in a few weeks. She is in the family now.” All of them became happy again, “Congratulations!” they said. They all had a good time that evening. 五、补全对话（5小题，每小题2分，共10分） 根据下面的对话情景，在每个空白处填上一个适当的句子，使对话的意思连贯、完整。 A: Hey, Bill. What a long day! B: Hi, Sam.             71            ? A: Yes. I do. I’m going to play soccer on Saturday afternoon. B: Sounds fun. Where do you play? A: At the soccer field near my home.             72            ? B: Sure, I’d love to. A: Great. I’ll call my teammates and tell them you are coming. B: Thanks. But I’m a little worried.             73            . A: That’s OK. Don’t worry about it. B:             74            ? A: Well, you should warm up before we play the game, and bring a bottle of water. If you want to learn some skills, my teammate Scott will tell you something about that. B:             75            . A: You’re welcome. It’s just for fun, so no one takes it too seriously. B: OK. See you on Saturday afternoon. 六、书面表达（20分） 奋斗的道路不会一帆风顺，初中三年我们在生活和学习上都经历过困难。Teenager magazine正在举办“How to get over difficulty”为题的英文征文比赛。请根据提示结合自身实际情况，写一篇短文投稿。"
+        "D. often"
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -3363,101 +3587,322 @@
       "analysis": "41．C    42．A    43．B    44．D    45．A    46．A    47．B    48．D    49．B    50．C    51．A    52．C    53．A    54．D    55．B\n【导语】本文讲述了小女孩Cathy的妈妈脸上有伤疤，同学们都嘲笑她，她自己也为此感到很羞耻，但得知妈妈伤疤的来历后，Cathy不再感到尴尬和自卑，因为她知道妈妈非常爱她。"
     },
     {
-      "id": "2024-henan-henan-section-11-section-11-group-1-51",
-      "number": 1,
-      "displayNumber": "1",
-      "sectionId": "section-11",
-      "groupId": "section-11-group-1",
-      "prompt": "遇到的困难，",
-      "options": [],
-      "inputKind": "text",
-      "sourceBlockIds": [
-        "paragraph-195"
-      ],
-      "type": "text",
-      "context": "",
-      "answer": "",
-      "analysis": ""
-    },
-    {
-      "id": "2024-henan-henan-section-11-section-11-group-1-52",
-      "number": 2,
-      "displayNumber": "2",
-      "sectionId": "section-11",
-      "groupId": "section-11-group-1",
-      "prompt": "解决的办法，",
-      "options": [],
-      "inputKind": "text",
-      "sourceBlockIds": [
-        "paragraph-196"
-      ],
-      "type": "text",
-      "context": "",
-      "answer": "",
-      "analysis": ""
-    },
-    {
-      "id": "2024-henan-henan-section-11-section-11-group-1-53",
-      "number": 3,
-      "displayNumber": "3",
-      "sectionId": "section-11",
-      "groupId": "section-11-group-1",
-      "prompt": "收获与感想。",
-      "options": [],
-      "inputKind": "text",
-      "sourceBlockIds": [
-        "paragraph-197"
-      ],
-      "type": "text",
-      "context": "",
-      "answer": "",
-      "analysis": ""
-    },
-    {
-      "id": "2024-henan-henan-section-11-section-11-group-1-54",
-      "number": 1,
-      "displayNumber": "1",
-      "sectionId": "section-11",
-      "groupId": "section-11-group-1",
-      "prompt": "请围绕所给要点写作，可适当发挥；",
-      "options": [],
-      "inputKind": "text",
-      "sourceBlockIds": [
-        "paragraph-198"
-      ],
-      "type": "text",
-      "context": "",
-      "answer": "",
-      "analysis": ""
-    },
-    {
-      "id": "2024-henan-henan-section-11-section-11-group-1-55",
-      "number": 2,
-      "displayNumber": "2",
-      "sectionId": "section-11",
-      "groupId": "section-11-group-1",
-      "prompt": "语句通顺、意思连贯，80—100 词左右；",
-      "options": [],
-      "inputKind": "text",
-      "sourceBlockIds": [
-        "paragraph-199"
-      ],
-      "type": "text",
-      "context": "",
-      "answer": "",
-      "analysis": ""
-    },
-    {
-      "id": "2024-henan-henan-section-11-section-11-group-1-56",
-      "number": 3,
-      "displayNumber": "3",
-      "sectionId": "section-11",
-      "groupId": "section-11-group-1",
-      "prompt": "文中不得使用真实的个人及学校信息。 How to get over difficulty ____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________",
+      "id": "2024-henan-henan-section-8-section-8-group-1-55",
+      "number": 56,
+      "displayNumber": "56",
+      "sectionId": "section-8",
+      "groupId": "section-8-group-1",
+      "prompt": "In Chinese culture, the color red stands for many good things, for example, happiness. But writing names and letters with red pens is  ______ avoided.",
       "options": [],
       "inputKind": "blank",
       "sourceBlockIds": [
-        "paragraph-200"
+        "paragraph-166"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "usually",
+      "analysis": "56．usually    57．power    58．replies    59．their    60．written    61．unlucky    62．Since    63．means    64．for    65．correct\n【导语】本文主要讲述了用红笔写字在中国古代的不同含义。"
+    },
+    {
+      "id": "2024-henan-henan-section-8-section-8-group-1-56",
+      "number": 57,
+      "displayNumber": "57",
+      "sectionId": "section-8",
+      "groupId": "section-8-group-1",
+      "prompt": "In ancient times, red was the symbol of  ______ . Not everyone could write with red pens-only emperors. They would reply to officials’ memorials (奏折) with red pens. These    58    were known as pizhu.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-167"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "power",
+      "analysis": "56．usually    57．power    58．replies    59．their    60．written    61．unlucky    62．Since    63．means    64．for    65．correct\n【导语】本文主要讲述了用红笔写字在中国古代的不同含义。"
+    },
+    {
+      "id": "2024-henan-henan-section-8-section-8-group-1-57",
+      "number": 58,
+      "displayNumber": "58",
+      "sectionId": "section-8",
+      "groupId": "section-8-group-1",
+      "prompt": "In ancient times, red was the symbol of    57   . Not everyone could write with red pens-only emperors. They would reply to officials’ memorials (奏折) with red pens. These  ______ were known as pizhu.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-167"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "replies",
+      "analysis": "56．usually    57．power    58．replies    59．their    60．written    61．unlucky    62．Since    63．means    64．for    65．correct\n【导语】本文主要讲述了用红笔写字在中国古代的不同含义。"
+    },
+    {
+      "id": "2024-henan-henan-section-8-section-8-group-1-58",
+      "number": 59,
+      "displayNumber": "59",
+      "sectionId": "section-8",
+      "groupId": "section-8-group-1",
+      "prompt": "Writing with red pens was also related to death. In ancient China, the criminals who were sentenced to death signed  ______ names with red pens. The records of criminals’ names were all    60    in red words. Therefore, it was thought to be    61    to write names with red pens.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-168"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "their",
+      "analysis": "56．usually    57．power    58．replies    59．their    60．written    61．unlucky    62．Since    63．means    64．for    65．correct\n【导语】本文主要讲述了用红笔写字在中国古代的不同含义。"
+    },
+    {
+      "id": "2024-henan-henan-section-8-section-8-group-1-59",
+      "number": 60,
+      "displayNumber": "60",
+      "sectionId": "section-8",
+      "groupId": "section-8-group-1",
+      "prompt": "Writing with red pens was also related to death. In ancient China, the criminals who were sentenced to death signed    59    names with red pens. The records of criminals’ names were all  ______ in red words. Therefore, it was thought to be    61    to write names with red pens.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-168"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "written",
+      "analysis": "56．usually    57．power    58．replies    59．their    60．written    61．unlucky    62．Since    63．means    64．for    65．correct\n【导语】本文主要讲述了用红笔写字在中国古代的不同含义。"
+    },
+    {
+      "id": "2024-henan-henan-section-8-section-8-group-1-60",
+      "number": 61,
+      "displayNumber": "61",
+      "sectionId": "section-8",
+      "groupId": "section-8-group-1",
+      "prompt": "Writing with red pens was also related to death. In ancient China, the criminals who were sentenced to death signed    59    names with red pens. The records of criminals’ names were all    60    in red words. Therefore, it was thought to be  ______ to write names with red pens.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-168"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "unlucky",
+      "analysis": "56．usually    57．power    58．replies    59．their    60．written    61．unlucky    62．Since    63．means    64．for    65．correct\n【导语】本文主要讲述了用红笔写字在中国古代的不同含义。"
+    },
+    {
+      "id": "2024-henan-henan-section-8-section-8-group-1-61",
+      "number": 63,
+      "displayNumber": "63",
+      "sectionId": "section-8",
+      "groupId": "section-8-group-1",
+      "prompt": "62    red words carry bad meanings, people don’t write letters with red pens. If you write to friends or family members with red pens, it  ______ you want to break up with them.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-169"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "means",
+      "analysis": "56．usually    57．power    58．replies    59．their    60．written    61．unlucky    62．Since    63．means    64．for    65．correct\n【导语】本文主要讲述了用红笔写字在中国古代的不同含义。"
+    },
+    {
+      "id": "2024-henan-henan-section-8-section-8-group-1-62",
+      "number": 64,
+      "displayNumber": "64",
+      "sectionId": "section-8",
+      "groupId": "section-8-group-1",
+      "prompt": "Nowadays, red pens are used  ______ proof-reading (校对). Teachers mark students’ homework with red pens. So do editors who need to    65    mistakes in newspapers and magazines. But writing names or letters with red pens is still a bad idea to many people.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-170"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "for",
+      "analysis": "56．usually    57．power    58．replies    59．their    60．written    61．unlucky    62．Since    63．means    64．for    65．correct\n【导语】本文主要讲述了用红笔写字在中国古代的不同含义。"
+    },
+    {
+      "id": "2024-henan-henan-section-8-section-8-group-1-63",
+      "number": 65,
+      "displayNumber": "65",
+      "sectionId": "section-8",
+      "groupId": "section-8-group-1",
+      "prompt": "Nowadays, red pens are used    64    proof-reading (校对). Teachers mark students’ homework with red pens. So do editors who need to  ______ mistakes in newspapers and magazines. But writing names or letters with red pens is still a bad idea to many people.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-170"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "correct",
+      "analysis": "56．usually    57．power    58．replies    59．their    60．written    61．unlucky    62．Since    63．means    64．for    65．correct\n【导语】本文主要讲述了用红笔写字在中国古代的不同含义。"
+    },
+    {
+      "id": "2024-henan-henan-section-9-section-9-group-1-64",
+      "number": 66,
+      "displayNumber": "66",
+      "sectionId": "section-9",
+      "groupId": "section-9-group-1",
+      "prompt": "In some foreign countries, some people don’t like the number 13. They don’t think 13 is  ______ lucky number, for example, they don’t like to live on the thirteenth floor.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-173"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "a",
+      "analysis": "【导语】本文讲述了一个关于有些国家的人不喜欢数字13的故事，作者的朋友杰克请一些朋友吃饭，坐下来一数发现是13个人，把大家都吓坏了，结果布朗先生说他的妻子怀孕了，因此是14个人，大家才放下心来。"
+    },
+    {
+      "id": "2024-henan-henan-section-9-section-9-group-1-65",
+      "number": 67,
+      "displayNumber": "67",
+      "sectionId": "section-9",
+      "groupId": "section-9-group-1",
+      "prompt": "One day, my friend Jack asked friends to dinner. When all of his friends arrived, he asked them  ______ sit at the table. He began to count the people in his mind while they were having the delicious food. Suddenly, he cried out, “Oh,     68     are thirteen people here!”",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-174"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "to",
+      "analysis": "【导语】本文讲述了一个关于有些国家的人不喜欢数字13的故事，作者的朋友杰克请一些朋友吃饭，坐下来一数发现是13个人，把大家都吓坏了，结果布朗先生说他的妻子怀孕了，因此是14个人，大家才放下心来。"
+    },
+    {
+      "id": "2024-henan-henan-section-9-section-9-group-1-66",
+      "number": 68,
+      "displayNumber": "68",
+      "sectionId": "section-9",
+      "groupId": "section-9-group-1",
+      "prompt": "One day, my friend Jack asked friends to dinner. When all of his friends arrived, he asked them     67     sit at the table. He began to count the people in his mind while they were having the delicious food. Suddenly, he cried out, “Oh, ______ are thirteen people here!”",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-174"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "there",
+      "analysis": "【导语】本文讲述了一个关于有些国家的人不喜欢数字13的故事，作者的朋友杰克请一些朋友吃饭，坐下来一数发现是13个人，把大家都吓坏了，结果布朗先生说他的妻子怀孕了，因此是14个人，大家才放下心来。"
+    },
+    {
+      "id": "2024-henan-henan-section-9-section-9-group-1-67",
+      "number": 69,
+      "displayNumber": "69",
+      "sectionId": "section-9",
+      "groupId": "section-9-group-1",
+      "prompt": "Everyone’s face turned white except Mr. Brown. He said slowly  ______ a smile on his face, “Don’t worry, my friends. We have fourteen people here. My wife Mrs. Brown     70     have a baby in a few weeks. She is in the family now.”",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-175"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "with",
+      "analysis": "【导语】本文讲述了一个关于有些国家的人不喜欢数字13的故事，作者的朋友杰克请一些朋友吃饭，坐下来一数发现是13个人，把大家都吓坏了，结果布朗先生说他的妻子怀孕了，因此是14个人，大家才放下心来。"
+    },
+    {
+      "id": "2024-henan-henan-section-9-section-9-group-1-68",
+      "number": 70,
+      "displayNumber": "70",
+      "sectionId": "section-9",
+      "groupId": "section-9-group-1",
+      "prompt": "Everyone’s face turned white except Mr. Brown. He said slowly     69     a smile on his face, “Don’t worry, my friends. We have fourteen people here. My wife Mrs. Brown  ______ have a baby in a few weeks. She is in the family now.”",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-175"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "will",
+      "analysis": "【导语】本文讲述了一个关于有些国家的人不喜欢数字13的故事，作者的朋友杰克请一些朋友吃饭，坐下来一数发现是13个人，把大家都吓坏了，结果布朗先生说他的妻子怀孕了，因此是14个人，大家才放下心来。"
+    },
+    {
+      "id": "2024-henan-henan-section-10-section-10-group-1-69",
+      "number": 71,
+      "displayNumber": "71",
+      "sectionId": "section-10",
+      "groupId": "section-10-group-1",
+      "prompt": "B: Hi, Sam. ______             ?",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-180"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "Do you have any plans on Saturday",
+      "analysis": "Do you have any plans on Saturday\nWould you like to join me\nI’m afraid I can’t play it well\nWhat can I do"
+    },
+    {
+      "id": "2024-henan-henan-section-10-section-10-group-1-70",
+      "number": 72,
+      "displayNumber": "72",
+      "sectionId": "section-10",
+      "groupId": "section-10-group-1",
+      "prompt": "A: At the soccer field near my home. ______             ?",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-183"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "例文",
+      "analysis": "How to get over difficulty\nIn our daily life, we often meet different kinds of difficulties. But how can we get over them? Here is one of my unusual experiences.\nWhen I was in Grade 7, I didn’t do well in my lessons first. Exams always brought me sadness. As a result, I was afraid of study and I became very lonely. Then, I decided to ask my teachers for help. Luckily, they gave me some useful advice. They told me not to give up easily because nothing is impossible if we put our heart into it. I was deeply moved by their words and worked harder than before. Finally, I improved myself a lot.\nFrom this experience, I understand that I should learn to get over difficulty by myself with my confidence and my hard work.\n【详解】[总体分析]\n①题材：本文是一篇记叙文；\n②时态：一般过去时；\n③提示：以“How to get over difficulty”为题，结合所给的要点提示，写一篇介绍自己如何克服困难的短文。\n[写作步骤]\n第一步：介绍你自己遇到了什么困难；\n第二步：你解决问题的方法是什么；\n第三步：谈谈你的收获与感想。\n[亮点词汇]\n①different kinds of 各种各样的……\n②one of ……之一\n③give up 放弃\n[高分句型]\n①When I was in Grade 7, I didn’t do well in my lessons first. （when引导时间状语从句）\n②They told me not to give up easily because nothing is impossible if we put our heart into it.  （because引导原因状语从句）"
+    },
+    {
+      "id": "2024-henan-henan-section-10-section-10-group-1-71",
+      "number": 73,
+      "displayNumber": "73",
+      "sectionId": "section-10",
+      "groupId": "section-10-group-1",
+      "prompt": "B: Thanks. But I’m a little worried. ______             .",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-186"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "",
+      "analysis": ""
+    },
+    {
+      "id": "2024-henan-henan-section-10-section-10-group-1-72",
+      "number": 74,
+      "displayNumber": "74",
+      "sectionId": "section-10",
+      "groupId": "section-10-group-1",
+      "prompt": "B: ______             ?",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-188"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "",
+      "analysis": ""
+    },
+    {
+      "id": "2024-henan-henan-section-10-section-10-group-1-73",
+      "number": 75,
+      "displayNumber": "75",
+      "sectionId": "section-10",
+      "groupId": "section-10-group-1",
+      "prompt": "B: ______             .",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-190"
       ],
       "type": "blank",
       "context": "",

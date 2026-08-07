@@ -1482,7 +1482,15 @@
           "text": "英语试卷"
         }
       ],
-      "questionIds": []
+      "questionIds": [],
+      "displayBlocks": [
+        {
+          "id": "image-1-1",
+          "kind": "image",
+          "src": "/junior-high/2022-gansu-pingliang-gansu-pingliang/image1.png",
+          "alt": "原卷图片"
+        }
+      ]
     },
     {
       "id": "section-2",
@@ -1497,7 +1505,8 @@
           "text": "考生注意：本试卷含听力，满分为150分，考试时间为120分钟。所有试题均在答题卡上作答，否则无效。"
         }
       ],
-      "questionIds": []
+      "questionIds": [],
+      "displayBlocks": []
     },
     {
       "id": "section-3",
@@ -1510,7 +1519,8 @@
           "text": "听力部分"
         }
       ],
-      "questionIds": []
+      "questionIds": [],
+      "displayBlocks": []
     },
     {
       "id": "section-4",
@@ -1714,6 +1724,44 @@
         "2022-gansu-pingliang-gansu-pingliang-section-4-section-4-group-9-14",
         "2022-gansu-pingliang-gansu-pingliang-section-4-section-4-group-10-15",
         "2022-gansu-pingliang-gansu-pingliang-section-4-section-4-group-11-16"
+      ],
+      "displayBlocks": [
+        {
+          "id": "image-7-1",
+          "kind": "image",
+          "src": "/junior-high/2022-gansu-pingliang-gansu-pingliang/image2.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "image-7-2",
+          "kind": "image",
+          "src": "/junior-high/2022-gansu-pingliang-gansu-pingliang/image3.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "image-7-3",
+          "kind": "image",
+          "src": "/junior-high/2022-gansu-pingliang-gansu-pingliang/image4.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "image-7-4",
+          "kind": "image",
+          "src": "/junior-high/2022-gansu-pingliang-gansu-pingliang/image5.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "image-7-5",
+          "kind": "image",
+          "src": "/junior-high/2022-gansu-pingliang-gansu-pingliang/image6.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "image-16-1",
+          "kind": "image",
+          "src": "/junior-high/2022-gansu-pingliang-gansu-pingliang/image7.png",
+          "alt": "原卷图片"
+        }
       ]
     },
     {
@@ -1811,6 +1859,13 @@
         "2022-gansu-pingliang-gansu-pingliang-section-5-section-5-group-3-19",
         "2022-gansu-pingliang-gansu-pingliang-section-5-section-5-group-4-20",
         "2022-gansu-pingliang-gansu-pingliang-section-5-section-5-group-7-21"
+      ],
+      "displayBlocks": [
+        {
+          "id": "paragraph-32",
+          "kind": "paragraph",
+          "text": "【此处可播放相关音频，请去附件查看】"
+        }
       ]
     },
     {
@@ -2178,11 +2233,61 @@
         "2022-gansu-pingliang-gansu-pingliang-section-6-section-6-group-12-33",
         "2022-gansu-pingliang-gansu-pingliang-section-6-section-6-group-13-34",
         "2022-gansu-pingliang-gansu-pingliang-section-6-section-6-group-15-35",
-        "2022-gansu-pingliang-gansu-pingliang-section-6-section-6-group-20-36",
-        "2022-gansu-pingliang-gansu-pingliang-section-6-section-6-group-21-37",
-        "2022-gansu-pingliang-gansu-pingliang-section-6-section-6-group-22-38",
-        "2022-gansu-pingliang-gansu-pingliang-section-6-section-6-group-24-39",
-        "2022-gansu-pingliang-gansu-pingliang-section-6-section-6-group-25-40"
+        "2022-gansu-pingliang-gansu-pingliang-section-6-section-6-group-16-36",
+        "2022-gansu-pingliang-gansu-pingliang-section-6-section-6-group-20-37",
+        "2022-gansu-pingliang-gansu-pingliang-section-6-section-6-group-21-38",
+        "2022-gansu-pingliang-gansu-pingliang-section-6-section-6-group-22-39",
+        "2022-gansu-pingliang-gansu-pingliang-section-6-section-6-group-24-40",
+        "2022-gansu-pingliang-gansu-pingliang-section-6-section-6-group-25-41"
+      ],
+      "displayBlocks": [
+        {
+          "id": "paragraph-47",
+          "kind": "paragraph",
+          "text": "阅读下列各题，从A、B、C、D四个选项中选择一个最佳答案。"
+        },
+        {
+          "id": "image-55-1",
+          "kind": "image",
+          "src": "/junior-high/2022-gansu-pingliang-gansu-pingliang/image8.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "image-83-1",
+          "kind": "image",
+          "src": "/junior-high/2022-gansu-pingliang-gansu-pingliang/image9.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "image-84-1",
+          "kind": "image",
+          "src": "/junior-high/2022-gansu-pingliang-gansu-pingliang/image10.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "image-102-1",
+          "kind": "image",
+          "src": "/junior-high/2022-gansu-pingliang-gansu-pingliang/image11.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "image-102-2",
+          "kind": "image",
+          "src": "/junior-high/2022-gansu-pingliang-gansu-pingliang/image12.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "image-102-3",
+          "kind": "image",
+          "src": "/junior-high/2022-gansu-pingliang-gansu-pingliang/image13.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "image-102-4",
+          "kind": "image",
+          "src": "/junior-high/2022-gansu-pingliang-gansu-pingliang/image14.png",
+          "alt": "原卷图片"
+        }
       ]
     },
     {
@@ -2198,7 +2303,8 @@
           "text": "III.完形填空(共10小题；每小题1.5分，满分15分)"
         }
       ],
-      "questionIds": []
+      "questionIds": [],
+      "displayBlocks": []
     },
     {
       "id": "section-8",
@@ -2303,7 +2409,6 @@
         }
       ],
       "questionIds": [
-        "2022-gansu-pingliang-gansu-pingliang-section-8-section-8-group-1-41",
         "2022-gansu-pingliang-gansu-pingliang-section-8-section-8-group-1-42",
         "2022-gansu-pingliang-gansu-pingliang-section-8-section-8-group-1-43",
         "2022-gansu-pingliang-gansu-pingliang-section-8-section-8-group-1-44",
@@ -2312,7 +2417,51 @@
         "2022-gansu-pingliang-gansu-pingliang-section-8-section-8-group-1-47",
         "2022-gansu-pingliang-gansu-pingliang-section-8-section-8-group-1-48",
         "2022-gansu-pingliang-gansu-pingliang-section-8-section-8-group-1-49",
-        "2022-gansu-pingliang-gansu-pingliang-section-8-section-8-group-1-50"
+        "2022-gansu-pingliang-gansu-pingliang-section-8-section-8-group-1-50",
+        "2022-gansu-pingliang-gansu-pingliang-section-8-section-8-group-1-51"
+      ],
+      "displayBlocks": [
+        {
+          "id": "paragraph-105",
+          "kind": "paragraph",
+          "text": "It was the turkey that made it the worst Thanksgiving ever…well, it ___37___ did."
+        },
+        {
+          "id": "paragraph-106",
+          "kind": "paragraph",
+          "text": "All the family—my grandparents my parents, my aunt and uncle, my cousin, my sister and I— ___38___ the turkey. However, turkey is not the easiest thing to ___39___. It takes a lot of time to prepare and a lot of work to cook…and there are a lot of chances for things to go wrong."
+        },
+        {
+          "id": "image-106-1",
+          "kind": "image",
+          "src": "/junior-high/2022-gansu-pingliang-gansu-pingliang/image15.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "paragraph-107",
+          "kind": "paragraph",
+          "text": "My mum and dad bought a nice, big turkey a few days before Thanksgiving. ___40___ was proud of herself as she got it for a good price. ___41___ Thanksgiving, Mum got the turkey out of the fridge. Early the next morning, my sister and I helped her put some butter and salt on the turkey. After that, Mum put it in the oven. It looked like it would be delicious. My sister and I were ___42___."
+        },
+        {
+          "id": "paragraph-108",
+          "kind": "paragraph",
+          "text": "But soon, we noticed something was wrong. The oven was ___43___. Dad checked it closely. ___44___ he said in a low voice, “it’s broken.”"
+        },
+        {
+          "id": "paragraph-109",
+          "kind": "paragraph",
+          "text": "Mum’s heart almost stopped. She didn’t want her dinner to be a failure. We didn’t know ___45___. How were we going to feed everyone without the turkey? Mum looked worried."
+        },
+        {
+          "id": "paragraph-110",
+          "kind": "paragraph",
+          "text": "Finally, Dad had an idea, and we all agreed with his suggestion to order ____46____ instead. After all, Thanksgiving is about giving thanks and spending time with your family."
+        },
+        {
+          "id": "paragraph-111",
+          "kind": "paragraph",
+          "text": "That evening, we shared a delicious pizza. We had a great time, talking, eating and playing games. Thanksgiving without turkey can still be fun!"
+        }
       ]
     },
     {
@@ -2348,7 +2497,24 @@
           "alt": "原卷图片"
         }
       ],
-      "questionIds": []
+      "questionIds": [],
+      "displayBlocks": [
+        {
+          "id": "table-1",
+          "kind": "table",
+          "rows": [
+            [
+              "Dear Kimmy, Guess what, we have a class pet! It’s a hamster. Miss Lee showed us how to take care of our new furry friend, Tobin. She explained that her own hamster had given birth to three pups and Tobin is one of them. Needless to say, we were delighted and promised to be responsible pet owners. Well, till next time. PS: It’s a picture of our new pet. Do you have a pet? Your pen-pal, Andrew"
+            ]
+          ]
+        },
+        {
+          "id": "image-table-1-1",
+          "kind": "image",
+          "src": "/junior-high/2022-gansu-pingliang-gansu-pingliang/image16.png",
+          "alt": "原卷图片"
+        }
+      ]
     },
     {
       "id": "section-10",
@@ -2412,11 +2578,33 @@
         }
       ],
       "questionIds": [
-        "2022-gansu-pingliang-gansu-pingliang-section-10-section-10-group-1-51",
         "2022-gansu-pingliang-gansu-pingliang-section-10-section-10-group-1-52",
         "2022-gansu-pingliang-gansu-pingliang-section-10-section-10-group-1-53",
         "2022-gansu-pingliang-gansu-pingliang-section-10-section-10-group-1-54",
-        "2022-gansu-pingliang-gansu-pingliang-section-10-section-10-group-1-55"
+        "2022-gansu-pingliang-gansu-pingliang-section-10-section-10-group-1-55",
+        "2022-gansu-pingliang-gansu-pingliang-section-10-section-10-group-1-56"
+      ],
+      "displayBlocks": [
+        {
+          "id": "table-2",
+          "kind": "table",
+          "rows": [
+            [
+              "Riddle 1 I carry a big bag every day. There are letters and parcels in the bag. I take them to people. Who am I?",
+              "Riddle 2 I wear a uniform. I catch thieves. I make sure the neighbourhood is safe. Who am I?"
+            ],
+            [
+              "Riddle 3 I work on a bus. I drive it around every day I take people to different places. Who am I?",
+              "Riddle 4 I work in a shop. Many children come to the shop. They buy sweets and chocolate. Who am I?"
+            ]
+          ]
+        },
+        {
+          "id": "image-table-2-1",
+          "kind": "image",
+          "src": "/junior-high/2022-gansu-pingliang-gansu-pingliang/image9.png",
+          "alt": "原卷图片"
+        }
       ]
     },
     {
@@ -2528,11 +2716,19 @@
         }
       ],
       "questionIds": [
-        "2022-gansu-pingliang-gansu-pingliang-section-11-section-11-group-1-56",
-        "2022-gansu-pingliang-gansu-pingliang-section-11-section-11-group-2-57",
-        "2022-gansu-pingliang-gansu-pingliang-section-11-section-11-group-3-58",
-        "2022-gansu-pingliang-gansu-pingliang-section-11-section-11-group-4-59",
-        "2022-gansu-pingliang-gansu-pingliang-section-11-section-11-group-5-60"
+        "2022-gansu-pingliang-gansu-pingliang-section-11-section-11-group-1-57",
+        "2022-gansu-pingliang-gansu-pingliang-section-11-section-11-group-2-58",
+        "2022-gansu-pingliang-gansu-pingliang-section-11-section-11-group-3-59",
+        "2022-gansu-pingliang-gansu-pingliang-section-11-section-11-group-4-60",
+        "2022-gansu-pingliang-gansu-pingliang-section-11-section-11-group-5-61"
+      ],
+      "displayBlocks": [
+        {
+          "id": "image-144-1",
+          "kind": "image",
+          "src": "/junior-high/2022-gansu-pingliang-gansu-pingliang/image17.png",
+          "alt": "原卷图片"
+        }
       ]
     },
     {
@@ -2627,12 +2823,13 @@
         }
       ],
       "questionIds": [
-        "2022-gansu-pingliang-gansu-pingliang-section-12-section-12-group-1-61",
-        "2022-gansu-pingliang-gansu-pingliang-section-12-section-12-group-2-62",
-        "2022-gansu-pingliang-gansu-pingliang-section-12-section-12-group-3-63",
-        "2022-gansu-pingliang-gansu-pingliang-section-12-section-12-group-4-64",
-        "2022-gansu-pingliang-gansu-pingliang-section-12-section-12-group-8-65"
-      ]
+        "2022-gansu-pingliang-gansu-pingliang-section-12-section-12-group-1-62",
+        "2022-gansu-pingliang-gansu-pingliang-section-12-section-12-group-2-63",
+        "2022-gansu-pingliang-gansu-pingliang-section-12-section-12-group-3-64",
+        "2022-gansu-pingliang-gansu-pingliang-section-12-section-12-group-4-65",
+        "2022-gansu-pingliang-gansu-pingliang-section-12-section-12-group-8-66"
+      ],
+      "displayBlocks": []
     },
     {
       "id": "section-13",
@@ -2647,7 +2844,8 @@
           "text": "V.任务型完形填空(共10空；每空1分，满分10分)"
         }
       ],
-      "questionIds": []
+      "questionIds": [],
+      "displayBlocks": []
     },
     {
       "id": "section-14",
@@ -2769,7 +2967,44 @@
           "text": "…"
         }
       ],
-      "questionIds": []
+      "questionIds": [
+        "2022-gansu-pingliang-gansu-pingliang-section-14-section-14-group-1-67",
+        "2022-gansu-pingliang-gansu-pingliang-section-14-section-14-group-1-68",
+        "2022-gansu-pingliang-gansu-pingliang-section-14-section-14-group-1-69",
+        "2022-gansu-pingliang-gansu-pingliang-section-14-section-14-group-1-70",
+        "2022-gansu-pingliang-gansu-pingliang-section-14-section-14-group-1-71",
+        "2022-gansu-pingliang-gansu-pingliang-section-14-section-14-group-1-72",
+        "2022-gansu-pingliang-gansu-pingliang-section-14-section-14-group-1-73",
+        "2022-gansu-pingliang-gansu-pingliang-section-14-section-14-group-1-74",
+        "2022-gansu-pingliang-gansu-pingliang-section-14-section-14-group-1-75",
+        "2022-gansu-pingliang-gansu-pingliang-section-14-section-14-group-1-76"
+      ],
+      "displayBlocks": [
+        {
+          "id": "table-3",
+          "kind": "table",
+          "rows": [
+            [
+              "can, I, be, five, miss, good, in, road, wait for, back"
+            ]
+          ]
+        },
+        {
+          "id": "paragraph-167",
+          "kind": "paragraph",
+          "text": "“What a great film!” says Dan."
+        },
+        {
+          "id": "paragraph-168",
+          "kind": "paragraph",
+          "text": "Dan Parks and Sue Barrington are leaving the Odeon cinema in Oxford."
+        },
+        {
+          "id": "paragraph-169",
+          "kind": "paragraph",
+          "text": "“I love Eddie Redmayne,” says Sue."
+        }
+      ]
     },
     {
       "id": "section-15",
@@ -2784,7 +3019,8 @@
           "text": "VI.任务型阅读理解(共5小题；每小题2分，满分10分)"
         }
       ],
-      "questionIds": []
+      "questionIds": [],
+      "displayBlocks": []
     },
     {
       "id": "section-16",
@@ -2882,12 +3118,41 @@
         }
       ],
       "questionIds": [
-        "2022-gansu-pingliang-gansu-pingliang-section-16-section-16-group-1-66",
-        "2022-gansu-pingliang-gansu-pingliang-section-16-section-16-group-1-67",
-        "2022-gansu-pingliang-gansu-pingliang-section-16-section-16-group-1-68",
-        "2022-gansu-pingliang-gansu-pingliang-section-16-section-16-group-1-69",
-        "2022-gansu-pingliang-gansu-pingliang-section-16-section-16-group-1-70",
-        "2022-gansu-pingliang-gansu-pingliang-section-16-section-16-group-1-71"
+        "2022-gansu-pingliang-gansu-pingliang-section-16-section-16-group-1-77",
+        "2022-gansu-pingliang-gansu-pingliang-section-16-section-16-group-1-78",
+        "2022-gansu-pingliang-gansu-pingliang-section-16-section-16-group-1-79",
+        "2022-gansu-pingliang-gansu-pingliang-section-16-section-16-group-1-80",
+        "2022-gansu-pingliang-gansu-pingliang-section-16-section-16-group-1-81",
+        "2022-gansu-pingliang-gansu-pingliang-section-16-section-16-group-1-82"
+      ],
+      "displayBlocks": [
+        {
+          "id": "table-4",
+          "kind": "table",
+          "rows": [
+            [
+              "Beijing has become the first city ever to hold both Summer and Winter Olympic Games after winning the 2022 Winter Olympics bid with co-host city Zhangjiakou. That brings snow and ice sports into public spotlight. Unlike the hugely popular Summer Olympic events such as tennis and badminton, winter sports have limited fans in China. ②However, Beijing and Zhangjiakou’s success in holding the Winter Olympics has … Let’s take a look at the present and the future plans of the ice and snow sports."
+            ]
+          ]
+        },
+        {
+          "id": "image-table-4-1",
+          "kind": "image",
+          "src": "/junior-high/2022-gansu-pingliang-gansu-pingliang/image18.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "image-table-4-2",
+          "kind": "image",
+          "src": "/junior-high/2022-gansu-pingliang-gansu-pingliang/image19.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "image-199-1",
+          "kind": "image",
+          "src": "/junior-high/2022-gansu-pingliang-gansu-pingliang/image20.png",
+          "alt": "原卷图片"
+        }
       ]
     },
     {
@@ -3111,19 +3376,38 @@
         }
       ],
       "questionIds": [
-        "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-72",
-        "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-73",
-        "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-74",
-        "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-75",
-        "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-76",
-        "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-77",
-        "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-78",
-        "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-79",
-        "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-80",
-        "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-81",
-        "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-82",
-        "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-83",
-        "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-84"
+        "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-1-83",
+        "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-1-84",
+        "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-1-85",
+        "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-1-86",
+        "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-1-87",
+        "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-88",
+        "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-89",
+        "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-90",
+        "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-91",
+        "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-92",
+        "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-93",
+        "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-94",
+        "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-95",
+        "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-96",
+        "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-97",
+        "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-98",
+        "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-99",
+        "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-100",
+        "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-101"
+      ],
+      "displayBlocks": [
+        {
+          "id": "paragraph-202",
+          "kind": "paragraph",
+          "text": "A: What’s the matter, John?"
+        },
+        {
+          "id": "image-234-1",
+          "kind": "image",
+          "src": "/junior-high/2022-gansu-pingliang-gansu-pingliang/image9.png",
+          "alt": "原卷图片"
+        }
       ]
     },
     {
@@ -3229,7 +3513,34 @@
           "alt": "原卷图片"
         }
       ],
-      "questionIds": []
+      "questionIds": [],
+      "displayBlocks": [
+        {
+          "id": "image-243-1",
+          "kind": "image",
+          "src": "/junior-high/2022-gansu-pingliang-gansu-pingliang/image21.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "table-5",
+          "kind": "table",
+          "rows": [
+            [
+              "要求： 1.条理清楚，行文连贯，可适当发挥； 2.文中不能出现其他人名和地名等信息； 3.在答题卡的相应位置作答。"
+            ]
+          ]
+        },
+        {
+          "id": "image-256-1",
+          "kind": "image",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "image-256-2",
+          "kind": "image",
+          "alt": "原卷图片"
+        }
+      ]
     }
   ],
   "questions": [
@@ -3253,7 +3564,7 @@
       "type": "choice",
       "context": "",
       "answer": "A",
-      "analysis": "【解析】\n【原文】1. Be confident and you can do well in the exam."
+      "analysis": ""
     },
     {
       "id": "2022-gansu-pingliang-gansu-pingliang-section-4-section-4-group-2-2",
@@ -3270,7 +3581,7 @@
       "type": "blank",
       "context": "",
       "answer": "C",
-      "analysis": "【解析】\n【原文】Would you like some orange juice?"
+      "analysis": ""
     },
     {
       "id": "2022-gansu-pingliang-gansu-pingliang-section-4-section-4-group-2-3",
@@ -3287,7 +3598,7 @@
       "type": "blank",
       "context": "",
       "answer": "E",
-      "analysis": "【解析】\n【原文】I don’t feel well now and I think I’ve had a bad cold."
+      "analysis": ""
     },
     {
       "id": "2022-gansu-pingliang-gansu-pingliang-section-4-section-4-group-2-4",
@@ -3304,7 +3615,7 @@
       "type": "blank",
       "context": "",
       "answer": "B",
-      "analysis": "【解析】\n【原文】How is the weather today?"
+      "analysis": ""
     },
     {
       "id": "2022-gansu-pingliang-gansu-pingliang-section-4-section-4-group-2-5",
@@ -3321,7 +3632,7 @@
       "type": "blank",
       "context": "",
       "answer": "D",
-      "analysis": "【解析】\n【原文】Thank you so much for helping us."
+      "analysis": ""
     },
     {
       "id": "2022-gansu-pingliang-gansu-pingliang-section-4-section-4-group-2-6",
@@ -3338,7 +3649,7 @@
       "type": "blank",
       "context": "",
       "answer": "A",
-      "analysis": "【解析】\n【原文】Whose hair band is it?\n第三节：听对话及问题，选择能回答所提问题的最佳答案。"
+      "analysis": ""
     },
     {
       "id": "2022-gansu-pingliang-gansu-pingliang-section-4-section-4-group-2-7",
@@ -3359,7 +3670,7 @@
       "type": "choice",
       "context": "",
       "answer": "B",
-      "analysis": "【解析】\n【原文】W: Hello, Sam. Let’s go to the zoo today. What animals do you like best?\nM: My favorite animals are pandas.\nQuestion: What animals does Sam like best?"
+      "analysis": ""
     },
     {
       "id": "2022-gansu-pingliang-gansu-pingliang-section-4-section-4-group-3-8",
@@ -3380,7 +3691,7 @@
       "type": "choice",
       "context": "",
       "answer": "C",
-      "analysis": "【解析】\n【原文】W: Steve, there’s going to be a football game this afternoon. Do you know when it starts?\nM: Sure, I do. It will start at half past four this afternoon.\nQuestion: When will the football game start?"
+      "analysis": ""
     },
     {
       "id": "2022-gansu-pingliang-gansu-pingliang-section-4-section-4-group-4-9",
@@ -3401,7 +3712,7 @@
       "type": "choice",
       "context": "",
       "answer": "B",
-      "analysis": "【解析】\n【原文】W: Hi, John. Do you know who is the tall woman next to Daisy?\nM: That’s her mother Tina.\nQuestion: Who is Tina?"
+      "analysis": ""
     },
     {
       "id": "2022-gansu-pingliang-gansu-pingliang-section-4-section-4-group-5-10",
@@ -3422,7 +3733,7 @@
       "type": "choice",
       "context": "",
       "answer": "A",
-      "analysis": "【解析】\n【原文】M: What do you think of the life in Gansu, Betty?\nW: I enjoy the time here. People here are so friendly and the food is amazing.\nQuestion: How is Betty’s life in Gansu?"
+      "analysis": ""
     },
     {
       "id": "2022-gansu-pingliang-gansu-pingliang-section-4-section-4-group-6-11",
@@ -3443,7 +3754,7 @@
       "type": "choice",
       "context": "",
       "answer": "B",
-      "analysis": "【解析】\n【原文】W: David, you were late for the meeting just now. You’d never been late. What’s up?\nM: Oh, there’s something wrong with my car. And I couldn’t get a taxi, so I had to walk here.\nQuestion: Why was David late for the meeting?\n第四节：听短文，根据其内容选择能回答下列问题的最佳答案。\n【此处可播放相关音频，请去附件查看】"
+      "analysis": ""
     },
     {
       "id": "2022-gansu-pingliang-gansu-pingliang-section-4-section-4-group-7-12",
@@ -3464,7 +3775,7 @@
       "type": "choice",
       "context": "",
       "answer": "A",
-      "analysis": "【解析】\n【详解】句意：我刚刚买了一件新衬衫。这件新衬衫相当贵。\n考查冠词用法。此空特指前文提到的这件衬衫，用the表特指，故选C。"
+      "analysis": ""
     },
     {
       "id": "2022-gansu-pingliang-gansu-pingliang-section-4-section-4-group-8-13",
@@ -3485,7 +3796,7 @@
       "type": "choice",
       "context": "",
       "answer": "A",
-      "analysis": "【解析】\n【详解】句意：电话铃响了，帕特接了电话。是他儿子从纽约打来的。\n考查名词辨析。telephone电话；doorbell门铃；clock时钟；bike自行车。结合语境和下一句“It was his son calling from New York.”可知帕特的儿子从纽约打电话来，所以应该是电话铃声响了。故选A。"
+      "analysis": ""
     },
     {
       "id": "2022-gansu-pingliang-gansu-pingliang-section-4-section-4-group-9-14",
@@ -3506,7 +3817,7 @@
       "type": "choice",
       "context": "",
       "answer": "B",
-      "analysis": "【解析】\n【详解】句意：这些是我的堂兄弟姐妹。 他们都是大学生。\n考查代词辨析。we我们；you你们；I我；they他们。此空指代前文的“cousins”，此空应填人称代词they，故选D。"
+      "analysis": ""
     },
     {
       "id": "2022-gansu-pingliang-gansu-pingliang-section-4-section-4-group-10-15",
@@ -3527,7 +3838,7 @@
       "type": "choice",
       "context": "",
       "answer": "C",
-      "analysis": "【解析】\n【详解】句意：我们可以在图中看到床上的玩具熊。\n考查介词短语。in the box在盒子里；on the bed在床上；beside the shelf在架子旁边；under the table在桌子下面；根据“the toy bear”及图片提示可知，玩具熊在床上，故选B。"
+      "analysis": ""
     },
     {
       "id": "2022-gansu-pingliang-gansu-pingliang-section-4-section-4-group-11-16",
@@ -3539,7 +3850,7 @@
       "options": [
         "A. Because he’s ill.",
         "B. Because he forgot the time.",
-        "C. Because his car didn’t work. 第四节：听短文，根据其内容选择能回答下列问题的最佳答案。 【此处可播放相关音频，请去附件查看】"
+        "C. Because his car didn’t work."
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -3547,8 +3858,8 @@
       ],
       "type": "choice",
       "context": "",
-      "answer": "C",
-      "analysis": "【解析】\n【详解】句意：——这将是我第一次参观长城。我真的很兴奋。——真的吗？真不敢相信你还没去过那里。你到北京差不多有一年了！\n考查序数词。first第一；second第二；third第三；fourth第四；根据“I can’t believe you’ve never been there yet.”可知，这是第一次参观长城，故选A。"
+      "answer": "",
+      "analysis": ""
     },
     {
       "id": "2022-gansu-pingliang-gansu-pingliang-section-5-section-5-group-1-17",
@@ -3569,7 +3880,7 @@
       "type": "choice",
       "context": "",
       "answer": "B",
-      "analysis": "【解析】\n【原文】John Smith is a taxi driver. But he can’t go to work now because he has been badly ill for more than three months. He is still too weak to drive his taxi. He lives in a small town with his wife and five children.\nJohn’s eldest son is twenty-six. He teaches in a village school. He lives in the school because it takes too long to travel there every day from his father’s. The other children are not yet old enough to go out to work. They still go to school except his youngest son.\n笔试部分\nII.语法与情景对话(共20小题；每小题1分，满分20分)\n阅读下列各题，从A、B、C、D四个选项中选择一个最佳答案。"
+      "analysis": ""
     },
     {
       "id": "2022-gansu-pingliang-gansu-pingliang-section-5-section-5-group-2-18",
@@ -3590,7 +3901,7 @@
       "type": "choice",
       "context": "",
       "answer": "C",
-      "analysis": "【解析】\n【原文】John Smith is a taxi driver. But he can’t go to work now because he has been badly ill for more than three months. He is still too weak to drive his taxi. He lives in a small town with his wife and five children.\nJohn’s eldest son is twenty-six. He teaches in a village school. He lives in the school because it takes too long to travel there every day from his father’s. The other children are not yet old enough to go out to work. They still go to school except his youngest son.\n笔试部分\nII.语法与情景对话(共20小题；每小题1分，满分20分)\n阅读下列各题，从A、B、C、D四个选项中选择一个最佳答案。"
+      "analysis": ""
     },
     {
       "id": "2022-gansu-pingliang-gansu-pingliang-section-5-section-5-group-3-19",
@@ -3611,7 +3922,7 @@
       "type": "choice",
       "context": "",
       "answer": "B",
-      "analysis": "【解析】\n【原文】John Smith is a taxi driver. But he can’t go to work now because he has been badly ill for more than three months. He is still too weak to drive his taxi. He lives in a small town with his wife and five children.\nJohn’s eldest son is twenty-six. He teaches in a village school. He lives in the school because it takes too long to travel there every day from his father’s. The other children are not yet old enough to go out to work. They still go to school except his youngest son.\n笔试部分\nII.语法与情景对话(共20小题；每小题1分，满分20分)\n阅读下列各题，从A、B、C、D四个选项中选择一个最佳答案。"
+      "analysis": ""
     },
     {
       "id": "2022-gansu-pingliang-gansu-pingliang-section-5-section-5-group-4-20",
@@ -3632,7 +3943,7 @@
       "type": "choice",
       "context": "",
       "answer": "A",
-      "analysis": "【解析】\n【原文】John Smith is a taxi driver. But he can’t go to work now because he has been badly ill for more than three months. He is still too weak to drive his taxi. He lives in a small town with his wife and five children.\nJohn’s eldest son is twenty-six. He teaches in a village school. He lives in the school because it takes too long to travel there every day from his father’s. The other children are not yet old enough to go out to work. They still go to school except his youngest son.\n笔试部分\nII.语法与情景对话(共20小题；每小题1分，满分20分)\n阅读下列各题，从A、B、C、D四个选项中选择一个最佳答案。"
+      "analysis": ""
     },
     {
       "id": "2022-gansu-pingliang-gansu-pingliang-section-5-section-5-group-7-21",
@@ -3644,10 +3955,7 @@
       "options": [
         "A. His youngest daughter and his eldest son.",
         "B. His youngest son.",
-        "C. All of his children. 笔试部分 II.语法与情景对话(共20小题；每小题1分，满分20分) 阅读下列各题，从",
-        "A. ",
-        "B. ",
-        "C. D四个选项中选择一个最佳答案。"
+        "C. All of his children. 笔试部分"
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -3656,7 +3964,7 @@
       "type": "choice",
       "context": "",
       "answer": "B",
-      "analysis": "【解析】\n【原文】John Smith is a taxi driver. But he can’t go to work now because he has been badly ill for more than three months. He is still too weak to drive his taxi. He lives in a small town with his wife and five children.\nJohn’s eldest son is twenty-six. He teaches in a village school. He lives in the school because it takes too long to travel there every day from his father’s. The other children are not yet old enough to go out to work. They still go to school except his youngest son.\n笔试部分\nII.语法与情景对话(共20小题；每小题1分，满分20分)\n阅读下列各题，从A、B、C、D四个选项中选择一个最佳答案。"
+      "analysis": ""
     },
     {
       "id": "2022-gansu-pingliang-gansu-pingliang-section-6-section-6-group-1-22",
@@ -3677,8 +3985,8 @@
       ],
       "type": "choice",
       "context": "",
-      "answer": "A",
-      "analysis": "【解析】\n【详解】句意：我们把鸡肉切碎煮汤吧。\n考查动词短语辨析。look at看；cut up切碎；put off推迟；knock against撞击。根据“the chicken and make some soup”可知，是切碎鸡肉做汤，故选B。"
+      "answer": "C",
+      "analysis": ""
     },
     {
       "id": "2022-gansu-pingliang-gansu-pingliang-section-6-section-6-group-2-23",
@@ -3699,8 +4007,8 @@
       ],
       "type": "choice",
       "context": "",
-      "answer": "D",
-      "analysis": "【解析】\n【详解】句意：——那家新餐馆怎么样？——很糟糕。我们等了很长时间才上菜。\n考查形容词辨析。wonderful精彩的；exciting兴奋的；difficult困难的；awful糟糕的；根据“We waited a long time for the food to arrive.”可知，新餐厅很糟糕，故选D。"
+      "answer": "A",
+      "analysis": ""
     },
     {
       "id": "2022-gansu-pingliang-gansu-pingliang-section-6-section-6-group-3-24",
@@ -3721,8 +4029,8 @@
       ],
       "type": "choice",
       "context": "",
-      "answer": "B",
-      "analysis": "【解析】\n【详解】句意：我没有苹果汁了，但我有橙汁。 你想来点吗？\n考查连词辨析。but但是；and和；or或者；for因为。“I haven’t got any apple juice”与“I’ve got some orange juice”是转折关系，用but连接。故选A。"
+      "answer": "D",
+      "analysis": ""
     },
     {
       "id": "2022-gansu-pingliang-gansu-pingliang-section-6-section-6-group-4-25",
@@ -3743,8 +4051,8 @@
       ],
       "type": "choice",
       "context": "",
-      "answer": "A",
-      "analysis": "【解析】\n【详解】句意：——你多久锻炼一次？——每天。\n考查特殊疑问句。How long多久；Why为什么；What time几点；How often多久一次。根据答语“Every day.”可知，此处对频率进行提问，故选D。"
+      "answer": "B",
+      "analysis": ""
     },
     {
       "id": "2022-gansu-pingliang-gansu-pingliang-section-6-section-6-group-5-26",
@@ -3765,8 +4073,8 @@
       ],
       "type": "choice",
       "context": "",
-      "answer": "B",
-      "analysis": "【解析】\n【详解】句意：琳达说话太轻了。 我在后面几乎听不见她说话。\n考查副词辨析。always总是；ever曾经；hardly几乎不；usually通常。根据“spoke too quietly”及“hear her at the back”可知，说话声音太轻，所以几乎听不见，故选C。"
+      "answer": "A",
+      "analysis": ""
     },
     {
       "id": "2022-gansu-pingliang-gansu-pingliang-section-6-section-6-group-6-27",
@@ -3787,8 +4095,8 @@
       ],
       "type": "choice",
       "context": "",
-      "answer": "D",
-      "analysis": "【解析】\n【详解】句意：——考试结束后我们举行一个户外毕业晚会好吗？——好主意。我认为每个人都会喜欢它。\n考查情景交际。Good idea好主意；No way没门；Enjoy yourself玩得开心；The same to you你也一样。根据“Shall we have an outdoor graduation party after the exam”及“I think everyone will love it”可知，认为对方的建议很不错，故选A。"
+      "answer": "B",
+      "analysis": ""
     },
     {
       "id": "2022-gansu-pingliang-gansu-pingliang-section-6-section-6-group-7-28",
@@ -3809,8 +4117,8 @@
       ],
       "type": "choice",
       "context": "",
-      "answer": "A",
-      "analysis": "【解析】\n【详解】句意：纸是在2000多年前的中国古代发明的。\n考查一般过去时态的被动语态。根据“2,000 years ago”可知，此题时态为一般过去时；又因为“paper”和动词“invent”之间是被动的关系，故此题应该用一般过去时态的被动语态，结构为was/were+过去分词，主语paper为第三人称单数，助动词用was。故选B。"
+      "answer": "D",
+      "analysis": ""
     },
     {
       "id": "2022-gansu-pingliang-gansu-pingliang-section-6-section-6-group-8-29",
@@ -3831,8 +4139,8 @@
       ],
       "type": "choice",
       "context": "",
-      "answer": "D",
-      "analysis": "【解析】\n【详解】句意：我想知道六月是不是去甘肃旅游的好时机。\n考查宾语从句。宾语从句要用陈述句语序，排除B/D选项；结合“I wonder”可知，从句应该是问一个问题，而that是引导陈述句，排除A选项，故选C。"
+      "answer": "A",
+      "analysis": ""
     },
     {
       "id": "2022-gansu-pingliang-gansu-pingliang-section-6-section-6-group-9-30",
@@ -3853,8 +4161,8 @@
       ],
       "type": "choice",
       "context": "",
-      "answer": "C",
-      "analysis": "【解析】\n【详解】句意：——我认为十六岁的孩子不应该被允许吸烟。——我同意。这对青少年的健康有害。\n考查情景交际。I agree.我同意；I hope so.我希望如此；I disagree.我不同意；I hope not我不希望；根据“I don’t think sixteen-year-olds should be allowed to smoke.”及“It’s bad for the teens’ health.”可知，此处是同意对方观点，故选A。"
+      "answer": "D",
+      "analysis": ""
     },
     {
       "id": "2022-gansu-pingliang-gansu-pingliang-section-6-section-6-group-10-31",
@@ -3875,8 +4183,8 @@
       ],
       "type": "choice",
       "context": "",
-      "answer": "A",
-      "analysis": "【解析】\n【详解】句意：从这份学校通知中我们能知道什么？\n考查常识。通知表示“学校由于新冠疫情于3月16日星期一开始闭校”，结合选项可知，选项D表述正确，故选D。"
+      "answer": "C",
+      "analysis": ""
     },
     {
       "id": "2022-gansu-pingliang-gansu-pingliang-section-6-section-6-group-11-32",
@@ -3897,8 +4205,8 @@
       ],
       "type": "choice",
       "context": "",
-      "answer": "B",
-      "analysis": "【解析】\n【详解】句意：——嗨，玛丽。你看起来很累。发生了什么事？——我没赶上校车，所以今天早上不得不跑着去上学。\n考查情景交际。What happened发生了什么事；What a pain真痛苦；You’re kidding你在开玩笑；How about you你呢？根据“You look tired.”和“I missed the school bus so I had to run to school this morning.”可知，询问对方怎么了，故选A。"
+      "answer": "A",
+      "analysis": ""
     },
     {
       "id": "2022-gansu-pingliang-gansu-pingliang-section-6-section-6-group-12-33",
@@ -3919,8 +4227,8 @@
       ],
       "type": "choice",
       "context": "",
-      "answer": "C",
-      "analysis": "【解析】\n【详解】句意：我们正在开会。来加入我们吧。\n考查动词时态。根据“Come and join in”可知，这里表示正在开会，所以建议加入进来，用现在进行时“be doing”表达正在进行动作，故选B。"
+      "answer": "B",
+      "analysis": ""
     },
     {
       "id": "2022-gansu-pingliang-gansu-pingliang-section-6-section-6-group-13-34",
@@ -3941,8 +4249,8 @@
       ],
       "type": "choice",
       "context": "",
-      "answer": "A",
-      "analysis": "【解析】\n【详解】句意：——Kevin，你正在做什么？你不记得医生警告过你不要吃糖果吗？——我很抱歉！我完全忘记了。我习惯了每年万圣节都吃糖果，以至于我都不记得今年我不应该吃糖果。积习难改。\n考查常识和习语。Practice makes perfect熟能生巧；When in Rome, do as the Romans do入乡随俗；Old habits die hard积习难改；Time is money时间就是金钱。根据“I’m so used to eating candy every Halloween that I didn’t remember this year I wasn’t supposed to”可知，此处指旧习惯很难改掉，故选C。"
+      "answer": "C",
+      "analysis": ""
     },
     {
       "id": "2022-gansu-pingliang-gansu-pingliang-section-6-section-6-group-15-35",
@@ -3955,11 +4263,7 @@
         "A. I agree.",
         "B. I hope so.",
         "C. I disagree.",
-        "D. I hope not. 31 What can we know from this School Notice?",
-        "A. School will start on Monday.",
-        "B. School will be closed for a week.",
-        "C. We’ve succeeded in fighting against COVID-19.",
-        "D. Students needn’t go to school on March 16."
+        "D. I hope not."
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -3967,11 +4271,33 @@
       ],
       "type": "choice",
       "context": "",
-      "answer": "D",
-      "analysis": "【解析】\n【详解】句意：——Mary，祝你生日快乐。——谢谢你。\n考查情景交际。Have a nice day祝你有美好的一天；See you再见；The same to you你也一样；Thank you谢谢你。根据“Happy birthday to you”可知，对于对方的祝愿应表示感谢，故选D。"
+      "answer": "A",
+      "analysis": ""
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-6-section-6-group-20-36",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-6-section-6-group-16-36",
+      "number": 31,
+      "displayNumber": "31",
+      "sectionId": "section-6",
+      "groupId": "section-6-group-16",
+      "prompt": "What can we know from this School Notice?",
+      "options": [
+        "A. School will start on Monday.",
+        "B. School will be closed for a week.",
+        "C. We’ve succeeded in fighting against COVID-19.",
+        "D. Students needn’t go to school on March 16."
+      ],
+      "inputKind": "choice",
+      "sourceBlockIds": [
+        "paragraph-83"
+      ],
+      "type": "choice",
+      "context": "",
+      "answer": "D",
+      "analysis": ""
+    },
+    {
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-6-section-6-group-20-37",
       "number": 32,
       "displayNumber": "32",
       "sectionId": "section-6",
@@ -3990,10 +4316,10 @@
       "type": "choice",
       "context": "",
       "answer": "A",
-      "analysis": "【解析】\n【详解】句意：在图书馆的阅览室里，你可能会看到下列哪个标志？\n考查常识。根据题干“in a reading room of a library”可知，图书馆应该是保持安静的，选项B符合，故选B。\nIII.完形填空(共10小题；每小题1.5分，满分15分)\n阅读下面短文，从短文后各题所给的四个选项中选出能填入空白处的最佳答案。\nIt was the turkey that made it the worst Thanksgiving ever…well, it ___37___ did.\nAll the family—my grandparents, my parents, my aunt and uncle, my cousin, my sister and I— ___38___ the turkey. However, turkey is not the easiest thing to ___39___. It takes a lot of time to prepare and a lot of work to cook…and there are a lot of chances for things to go wrong.\nMy mum and dad bought a nice, big turkey a few days before Thanksgiving. ___40___ was proud of herself as she got it for a good price. ___41___ Thanksgiving, Mum got the turkey out of the fridge. Early the next morning, my sister and I helped her put some butter and salt on the turkey. After that, Mum put it in the oven. It looked like it would be delicious. My sister and I were ___42___.\nBut soon, we noticed something was wrong. The oven was ___43___. Dad checked it closely. ___44___ he said in a low voice, “it’s broken.”\nMum’s heart almost stopped. She didn’t want her dinner to be a failure. We didn’t know ___45___. How were we going to feed everyone without the turkey? Mum looked worried.\nFinally, Dad had an idea, and we all agreed with his suggestion to order ____46____ instead. After all, Thanksgiving is about giving thanks and spending time with your family.\nThat evening, we shared a delicious pizza. We had a great time, talking, eating and playing games. Thanksgiving without turkey can still be fun!"
+      "analysis": ""
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-6-section-6-group-21-37",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-6-section-6-group-21-38",
       "number": 33,
       "displayNumber": "33",
       "sectionId": "section-6",
@@ -4012,10 +4338,10 @@
       "type": "choice",
       "context": "",
       "answer": "B",
-      "analysis": "【解析】\n【详解】句意：我昨天买了两个笔记本。空前有two修饰，名词用复数形式，故填notebooks。"
+      "analysis": ""
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-6-section-6-group-22-38",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-6-section-6-group-22-39",
       "number": 34,
       "displayNumber": "34",
       "sectionId": "section-6",
@@ -4034,10 +4360,10 @@
       "type": "choice",
       "context": "",
       "answer": "C",
-      "analysis": "【解析】\n【详解】句意：昨晚外面下了很多雨。根据“last night”可知，句子用一般过去时；本题是“there be”句型，遵循就近原则，rain是不可数名词，be动词用was，故填was。"
+      "analysis": ""
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-6-section-6-group-24-39",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-6-section-6-group-24-40",
       "number": 35,
       "displayNumber": "35",
       "sectionId": "section-6",
@@ -4056,10 +4382,10 @@
       "type": "choice",
       "context": "",
       "answer": "D",
-      "analysis": "【解析】\n【详解】句意：年幼的孩子们不应该自己留下来。by oneself“独自”，they的反身代词是themselves“他们自己”，故填themselves。"
+      "analysis": ""
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-6-section-6-group-25-40",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-6-section-6-group-25-41",
       "number": 36,
       "displayNumber": "36",
       "sectionId": "section-6",
@@ -4069,7 +4395,7 @@
         "A. ",
         "B. ",
         "C. ",
-        "D. III.完形填空(共10小题；每小题1.5分，满分15分) 阅读下面短文，从短文后各题所给的四个选项中选出能填入空白处的最佳答案。 It was the turkey that made it the worst Thanksgiving ever…well, it ___37___ did. All the family—my grandparents my parents, my aunt and uncle, my cousin, my sister and I— ___38___ the turkey. However, turkey is not the easiest thing to ___39___. It takes a lot of time to prepare and a lot of work to cook…and there are a lot of chances for things to go wrong. My mum and dad bought a nice, big turkey a few days before Thanksgiving. ___40___ was proud of herself as she got it for a good price. ___41___ Thanksgiving, Mum got the turkey out of the fridge. Early the next morning, my sister and I helped her put some butter and salt on the turkey. After that, Mum put it in the oven. It looked like it would be delicious. My sister and I were ___42___. But soon, we noticed something was wrong. The oven was ___43___. Dad checked it closely. ___44___ he said in a low voice, “it’s broken.” Mum’s heart almost stopped. She didn’t want her dinner to be a failure. We didn’t know ___45___. How were we going to feed everyone without the turkey? Mum looked worried. Finally, Dad had an idea, and we all agreed with his suggestion to order ____46____ instead. After all, Thanksgiving is about giving thanks and spending time with your family. That evening, we shared a delicious pizza. We had a great time, talking, eating and playing games. Thanksgiving without turkey can still be fun!"
+        "D. "
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -4078,10 +4404,10 @@
       "type": "choice",
       "context": "",
       "answer": "B",
-      "analysis": "【解析】\n【详解】句意：微笑，友好地问候他人。此处作定语修饰way，用形容词形式，故填friendly。"
+      "analysis": ""
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-8-section-8-group-1-41",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-8-section-8-group-1-42",
       "number": 37,
       "displayNumber": "37",
       "sectionId": "section-8",
@@ -4103,7 +4429,7 @@
       "analysis": "句意：它几乎做到了。\nreally真地；nearly几乎；finally最终；hardly几乎不；根据下文的介绍“we noticed something was wrong. The oven was...he said in a low voice, ‘it’s broken.’ ”可知，火鸡把感恩节搞砸了，it指代的是火鸡，表示“几乎”做到了，故选B。\n38题详解】\n句意：所有的家人——我的祖父母，我的父母，我的阿姨和叔叔，我的表妹，我的妹妹和我——都期待着火鸡。\nshared分享；hated讨厌；expected期待；bought买；根据“However, turkey is not the easiest thing to...It takes a lot of time to prepare and a lot of work to cook”可知，一家人都期待着火鸡，故选C。"
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-8-section-8-group-1-42",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-8-section-8-group-1-43",
       "number": 38,
       "displayNumber": "38",
       "sectionId": "section-8",
@@ -4122,10 +4448,10 @@
       "type": "choice",
       "context": "",
       "answer": "C",
-      "analysis": "【解析】\n【导语】本文讲述了作者一家在感恩节制作火鸡时出现了问题后，改为点披萨的故事。\n【37题详解】\n句意：它几乎做到了。\nreally真地；nearly几乎；finally最终；hardly几乎不；根据下文的介绍“we noticed something was wrong. The oven was...he said in a low voice, ‘it’s broken.’ ”可知，火鸡把感恩节搞砸了，it指代的是火鸡，表示“几乎”做到了，故选B。\n38题详解】\n句意：所有的家人——我的祖父母，我的父母，我的阿姨和叔叔，我的表妹，我的妹妹和我——都期待着火鸡。\nshared分享；hated讨厌；expected期待；bought买；根据“However, turkey is not the easiest thing to...It takes a lot of time to prepare and a lot of work to cook”可知，一家人都期待着火鸡，故选C。\n【39题详解】\n句意：然而，火鸡并不是最容易烹饪的食物。\ncook烹饪；eat吃；buy买；raise饲养；根据“It takes a lot of time to prepare and a lot of work to cook”可知，烹饪火鸡并不容易，故选A。\n【40题详解】\n句意：妈妈为自己感到骄傲，因为她以很好的价格买到了它。\nGrandma奶奶；My aunt我的阿姨；My sister我的姐妹；Mum妈妈；根据“My mum and dad bought a nice, big turkey”可知，是妈妈买的火鸡，故选D。\n【41题详解】\n句意：感恩节前一天晚上，妈妈把火鸡从冰箱里拿了出来。\nThe night before前一天晚上；After在……之后；On在……上；Two days before两天前；根据“Early the next morning”可知，是前一天晚上把火鸡拿出来，故选A。\n【42题详解】\n句意：我和妹妹都很兴奋。\nworried担心的；excited激动的；nervous紧张的；full满的；根据“my sister and I helped her put some butter and salt on the turkey...It looked like it would be delicious.”可知，火鸡看起来很美味，作者和妹妹很激动，故选B。\n【43题详解】\n句意：烤箱没有加热。\ncooking well容易煮；self cleaning自净；not heating up不加热；not smoking不吸烟；根据“Dad checked it closely...he said in a low voice, ‘it’s broken.’ ”可知，烤箱没有加热，故选C。\n【44题详解】\n句意：他低声说：“坏了。”\nFor因为；Or或者；But但是；And和；根据“Dad checked it closely...he said”可知，此处是顺承关系，应用and连接，故选D。\n【45题详解】\n句意：我们不知道该怎么办。\nwhat to do该做什么；how to do it如何做；where to buy it在哪里买；when to have it什么时候有；根据“How were we going to feed everyone without the turkey?”可知，烤箱坏了，火鸡没法做了，不知道该做什么，故选A。\n【46题详解】\n句意：最后，爸爸有了一个主意，我们都同意他的建议，点披萨代替。\npizza披萨；a turkey一只火鸡；sandwiches三明治；chicken鸡肉；根据“we shared a delicious pizza”可知，最后点了披萨， 故选A。\nIV.阅读理解(共15小题；每小题2分，满分30分)\nA\n阅读以上书信，根据其内容判读下列句子正误。正确填（涂）A、错误填（涂）B。"
+      "analysis": ""
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-8-section-8-group-1-43",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-8-section-8-group-1-44",
       "number": 39,
       "displayNumber": "39",
       "sectionId": "section-8",
@@ -4147,7 +4473,7 @@
       "analysis": "句意：然而，火鸡并不是最容易烹饪的食物。\ncook烹饪；eat吃；buy买；raise饲养；根据“It takes a lot of time to prepare and a lot of work to cook”可知，烹饪火鸡并不容易，故选A。"
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-8-section-8-group-1-44",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-8-section-8-group-1-45",
       "number": 40,
       "displayNumber": "40",
       "sectionId": "section-8",
@@ -4169,7 +4495,7 @@
       "analysis": "句意：妈妈为自己感到骄傲，因为她以很好的价格买到了它。\nGrandma奶奶；My aunt我的阿姨；My sister我的姐妹；Mum妈妈；根据“My mum and dad bought a nice, big turkey”可知，是妈妈买的火鸡，故选D。"
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-8-section-8-group-1-45",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-8-section-8-group-1-46",
       "number": 41,
       "displayNumber": "41",
       "sectionId": "section-8",
@@ -4191,7 +4517,7 @@
       "analysis": "句意：感恩节前一天晚上，妈妈把火鸡从冰箱里拿了出来。\nThe night before前一天晚上；After在……之后；On在……上；Two days before两天前；根据“Early the next morning”可知，是前一天晚上把火鸡拿出来，故选A。"
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-8-section-8-group-1-46",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-8-section-8-group-1-47",
       "number": 42,
       "displayNumber": "42",
       "sectionId": "section-8",
@@ -4213,7 +4539,7 @@
       "analysis": "句意：我和妹妹都很兴奋。\nworried担心的；excited激动的；nervous紧张的；full满的；根据“my sister and I helped her put some butter and salt on the turkey...It looked like it would be delicious.”可知，火鸡看起来很美味，作者和妹妹很激动，故选B。"
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-8-section-8-group-1-47",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-8-section-8-group-1-48",
       "number": 43,
       "displayNumber": "43",
       "sectionId": "section-8",
@@ -4235,7 +4561,7 @@
       "analysis": "句意：烤箱没有加热。\ncooking well容易煮；self cleaning自净；not heating up不加热；not smoking不吸烟；根据“Dad checked it closely...he said in a low voice, ‘it’s broken.’ ”可知，烤箱没有加热，故选C。"
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-8-section-8-group-1-48",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-8-section-8-group-1-49",
       "number": 44,
       "displayNumber": "44",
       "sectionId": "section-8",
@@ -4257,7 +4583,7 @@
       "analysis": "句意：他低声说：“坏了。”\nFor因为；Or或者；But但是；And和；根据“Dad checked it closely...he said”可知，此处是顺承关系，应用and连接，故选D。"
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-8-section-8-group-1-49",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-8-section-8-group-1-50",
       "number": 45,
       "displayNumber": "45",
       "sectionId": "section-8",
@@ -4279,7 +4605,7 @@
       "analysis": "句意：我们不知道该怎么办。\nwhat to do该做什么；how to do it如何做；where to buy it在哪里买；when to have it什么时候有；根据“How were we going to feed everyone without the turkey?”可知，烤箱坏了，火鸡没法做了，不知道该做什么，故选A。"
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-8-section-8-group-1-50",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-8-section-8-group-1-51",
       "number": 46,
       "displayNumber": "46",
       "sectionId": "section-8",
@@ -4289,8 +4615,7 @@
         "A. pizza",
         "B. a turkey",
         "C. sandwiches",
-        "D. chicken IV.阅读理解(共15小题；每小题2分，满分30分) A Dear Kimmy, Guess what, we have a class pet! It’s a hamster. Miss Lee showed us how to take care of our new furry friend, Tobin. She explained that her own hamster had given birth to three pups and Tobin is one of them. Needless to say, we were delighted and promised to be responsible pet owners. Well, till next time. PS: It’s a picture of our new pet. Do you have a pet? Your pen-pal, Andrew 阅读以上书信，根据其内容判读下列句子正误。正确填（涂）",
-        "A. 错误填（涂）B。"
+        "D. chicken"
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -4302,7 +4627,7 @@
       "analysis": "句意：最后，爸爸有了一个主意，我们都同意他的建议，点披萨代替。\npizza披萨；a turkey一只火鸡；sandwiches三明治；chicken鸡肉；根据“we shared a delicious pizza”可知，最后点了披萨， 故选A。"
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-10-section-10-group-1-51",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-10-section-10-group-1-52",
       "number": 47,
       "displayNumber": "47",
       "sectionId": "section-10",
@@ -4319,7 +4644,7 @@
       "analysis": "细节理解题。根据书信的称呼和署名可知，是Andrew写给Kimmy的信，该项表述错误，故选B。"
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-10-section-10-group-1-52",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-10-section-10-group-1-53",
       "number": 48,
       "displayNumber": "48",
       "sectionId": "section-10",
@@ -4336,7 +4661,7 @@
       "analysis": "细节理解题。根据“Guess what, we have a class pet! It’s a hamster. Miss Lee showed us how to take care of our new furry friend”可知，Andrew的班级宠物是一只毛茸茸的仓鼠。该项表述正确，故选A。"
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-10-section-10-group-1-53",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-10-section-10-group-1-54",
       "number": 49,
       "displayNumber": "49",
       "sectionId": "section-10",
@@ -4353,7 +4678,7 @@
       "analysis": "细节理解题。根据“Miss Lee showed us how to take care of our new furry friend, Tobin.”可知，李老师把Tobin带来教室。该项表述正确，故选A。"
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-10-section-10-group-1-54",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-10-section-10-group-1-55",
       "number": 50,
       "displayNumber": "50",
       "sectionId": "section-10",
@@ -4370,12 +4695,12 @@
       "analysis": "细节理解题。根据“She explained that her own hamster had given birth to three pups”可知，仓鼠生了三只幼崽，该项表述错误，故选B。"
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-10-section-10-group-1-55",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-10-section-10-group-1-56",
       "number": 51,
       "displayNumber": "51",
       "sectionId": "section-10",
       "groupId": "section-10-group-1",
-      "prompt": "Andrew is sure that his pen-pal has a pet and loves animals. B Riddle 1 I carry a big bag every day. There are letters and parcels in the bag. I take them to people. Who am I? Riddle 2 I wear a uniform. I catch thieves. I make sure the neighbourhood is safe. Who am I? Riddle 3 I work on a bus. I drive it around every day I take people to different places. Who am I? Riddle 4 I work in a shop. Many children come to the shop. They buy sweets and chocolate. Who am I? 阅读以上四条谜语，根据其内容回答其后各个小题。",
+      "prompt": "Andrew is sure that his pen-pal has a pet and loves animals. B Riddle 1 I carry a big bag every day. There are letters and parcels in the bag. I take them to people. Who am I? Riddle 2 I wear a uniform. I catch thieves. I make sure the neighbourhood is safe. Who am I? Riddle 3 I work on a bus. I drive it around every day I take people to different places. Who am I? Riddle 4 I work in a shop. Many children come to the shop. They buy sweets and chocolate. Who am I?",
       "options": [],
       "inputKind": "text",
       "sourceBlockIds": [
@@ -4387,7 +4712,7 @@
       "analysis": "推理判断题。根据“Do you have a pet?”可知，Andrew不知道Kimmy有没有宠物，是否喜欢动物。该项表述错误，故选B。\nB"
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-11-section-11-group-1-56",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-11-section-11-group-1-57",
       "number": 52,
       "displayNumber": "52",
       "sectionId": "section-11",
@@ -4409,7 +4734,7 @@
       "analysis": "词义猜测题。根据“There are letters and parcels in the bag”可知，把包里的信件和包裹那给他们，所以them是指代“信件和包裹”，故选B。"
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-11-section-11-group-2-57",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-11-section-11-group-2-58",
       "number": 53,
       "displayNumber": "53",
       "sectionId": "section-11",
@@ -4431,7 +4756,7 @@
       "analysis": "推理判断题。根据“I wear a uniform”及“I catch thieves”可知，穿制服还抓小偷，由此可推断谜底是“警察”，故选D。"
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-11-section-11-group-3-58",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-11-section-11-group-3-59",
       "number": 54,
       "displayNumber": "54",
       "sectionId": "section-11",
@@ -4453,7 +4778,7 @@
       "analysis": "细节理解题。根据“I work on a bus”可知，在公交车上工作，故选A。"
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-11-section-11-group-4-59",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-11-section-11-group-4-60",
       "number": 55,
       "displayNumber": "55",
       "sectionId": "section-11",
@@ -4475,7 +4800,7 @@
       "analysis": "推理判断题。根据“Many children come to the shop. They buy sweets and chocolate”可知，许多学生来店里买糖果和巧克力，由此可推断这是一个糖果店，故选D。"
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-11-section-11-group-5-60",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-11-section-11-group-5-61",
       "number": 56,
       "displayNumber": "56",
       "sectionId": "section-11",
@@ -4485,7 +4810,7 @@
         "A. children",
         "B. parents",
         "C. jobs",
-        "D. places C Life in Outer Space Life in Outer Space Chinese taikonauts Zhai Zhigang, Wang Yaping and Ye Guangfu carried out the Shenzhou-13 spaceflight mission (任务) that started on Oct. 15, 2021. This mission lasts 6 months, which was also a national record. Zhai is the commander (指令长) who performed China’s first spacewalk in the Shenzhou-7 mission in 2008. Wang, who was in the Shenzhou-10 mission in 2013, is the first Chinese woman astronaut to visit China’s space station. Ye is a new comer to space. The trio had carried out two spacewalks and completed more than 20 scientific tasks. Besides their tasks, they had also given two live lectures from the space station, showing the students their living and working areas at the Tianhe core module and several scientific experiments under zero-gravity conditions and answering real-time questions from students. The trio also became the first Chinese to spend the nation’s most important festival — the Chinese Lunar New Year — in outer space. They returned to Earth on April 16, 2022 and made Shenzhou-13 mission a great success. 阅读以上新闻稿，根据其内容回答其后各个小题。"
+        "D. places C Life in Outer Space Life in Outer Space Chinese taikonauts Zhai Zhigang, Wang Yaping and Ye Guangfu carried out the Shenzhou-13 spaceflight mission (任务) that started on Oct. 15, 2021. This mission lasts 6 months, which was also a national record. Zhai is the commander (指令长) who performed China’s first spacewalk in the Shenzhou-7 mission in 2008. Wang, who was in the Shenzhou-10 mission in 2013, is the first Chinese woman astronaut to visit China’s space station. Ye is a new comer to space. The trio had carried out two spacewalks and completed more than 20 scientific tasks. Besides their tasks, they had also given two live lectures from the space station, showing the students their living and working areas at the Tianhe core module and several scientific experiments under zero-gravity conditions and answering real-time questions from students. The trio also became the first Chinese to spend the nation’s most important festival — the Chinese Lunar New Year — in outer space. They returned to Earth on April 16, 2022 and made Shenzhou-13 mission a great success."
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -4497,7 +4822,7 @@
       "analysis": "推理判断题。根据四个谜语的内容可知，这四个谜语都是与职业有关的，故选C。\nC\nLife in Outer Space\nLife in Outer Space\nChinese taikonauts Zhai Zhigang, Wang Yaping and Ye Guangfu carried out the Shenzhou-13 spaceflight mission (任务) that started on Oct. 15, 2021. This mission lasts 6 months, which was also a national record. Zhai is the commander (指令长) who performed China’s first spacewalk in the Shenzhou-7 mission in 2008. Wang, who was in the Shenzhou-10 mission in 2013, is the first Chinese woman astronaut to visit China’s space station. Ye is a new comer to space.\nThe trio had carried out two spacewalks and completed more than 20 scientific tasks. Besides their tasks, they had also given two live lectures from the space station, showing the students their living and working areas at the Tianhe core module and several scientific experiments under zero-gravity conditions and answering real-time questions from students.\nThe trio also became the first Chinese to spend the nation’s most important festival — the Chinese Lunar New Year — in outer space.\nThey returned to Earth on April 16, 2022 and made Shenzhou-13 mission a great success."
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-12-section-12-group-1-61",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-12-section-12-group-1-62",
       "number": 57,
       "displayNumber": "57",
       "sectionId": "section-12",
@@ -4519,7 +4844,7 @@
       "analysis": "细节理解题。根据“This mission lasts 6 months”可知，任务持续6个月，故选D。"
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-12-section-12-group-2-62",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-12-section-12-group-2-63",
       "number": 58,
       "displayNumber": "58",
       "sectionId": "section-12",
@@ -4541,7 +4866,7 @@
       "analysis": "词句猜测题。分析“The trio had carried out two spacewalks and completed more than 20 scientific tasks.”和前段介绍可知，此处指三位宇航员，所以trio的意思是“三人组”。故选B。"
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-12-section-12-group-3-63",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-12-section-12-group-3-64",
       "number": 59,
       "displayNumber": "59",
       "sectionId": "section-12",
@@ -4563,7 +4888,7 @@
       "analysis": "段落大意题。根据第二段内容可知，本段主要介绍三位宇航员在太空做了什么任务，故选B。"
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-12-section-12-group-4-64",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-12-section-12-group-4-65",
       "number": 60,
       "displayNumber": "60",
       "sectionId": "section-12",
@@ -4585,7 +4910,7 @@
       "analysis": "细节理解题。根据图片提示可知，是叶光富拿着福字，故选C。"
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-12-section-12-group-8-65",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-12-section-12-group-8-66",
       "number": 61,
       "displayNumber": "61",
       "sectionId": "section-12",
@@ -4595,7 +4920,7 @@
         "A. All the three taikonauts had been to the space before.",
         "B. Zhai Zhigang is a commander.",
         "C. The trio gave two live lectures from the space station.",
-        "D. They returned to earth in mid-April. V.任务型完形填空(共10空；每空1分，满分10分) 用方框中所给单词或短语的适当形式填空，使短文通顺、正确、连贯，每个单词或短语限用一次。 can, I, be, five, miss, good, in, road, wait for, back “What a great film!” says Dan. Dan Parks and Sue Barrington are leaving the Odeon cinema in Oxford. “I love Eddie Redmayne,” says Sue. “Yes, he’s a ___62___ actor,” replies Dan. He looks at his watch. “It’s ___63___ o’clock already,” he says. “Time to get home.” “Yes,” says Sue. “It’s beginning to get dark.” They walk up the street and look for their bikes. There ___64___ a lot of bikes in Oxford. The city is flat and a lot of people cycle. “There’s my bike,” says Dan. He looks for Sue’s, but he ___65___ see it. “Where’s ___66___?” asks Sue. “It’s not here.” Then they see her bike lock on the ground — ___67___ two bits. “Oh no!” says Sue. “Bike thieves!” Dan looks up and down the road. He sees a police car fifty metres away on the other side of the street. “___68___ me,” he says to Sue, and runs across the street. She watches him. He talks through the window of the police car and points ___69___ at her. Then a policewoman gets out of the car and comes across the road with Dan. “Hello,” says the policewoman to Sue. “I’m PC Jennings. Your friend tells me your bike is ___70___ . Now tell me about the bike.” “Well, it’s blue,” begins Sue. “It’s a ____71____ bike. And it’s only a year old.” Jennings writes everything in her notebook. … VI.任务型阅读理解(共5小题；每小题2分，满分10分) 阅读下面材料，并按要求完成1至5小题。 Beijing has become the first city ever to hold both Summer and Winter Olympic Games after winning the 2022 Winter Olympics bid with co-host city Zhangjiakou. That brings snow and ice sports into public spotlight. Unlike the hugely popular Summer Olympic events such as tennis and badminton, winter sports have limited fans in China. ②However, Beijing and Zhangjiakou’s success in holding the Winter Olympics has … Let’s take a look at the present and the future plans of the ice and snow sports."
+        "D. They returned to earth in mid-April."
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -4607,7 +4932,177 @@
       "analysis": "推理判断题。根据“Ye is a new comer to space.”可知，叶光富是第一次上太空，故选A。"
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-16-section-16-group-1-66",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-14-section-14-group-1-67",
+      "number": 62,
+      "displayNumber": "62",
+      "sectionId": "section-14",
+      "groupId": "section-14-group-1",
+      "prompt": "“Yes, he’s a  ______  actor,” replies Dan.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-170"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "good",
+      "analysis": "句意：他是一名优秀的演员。此空缺少形容词修饰名词actor，备选词good“优秀的”符合，故填good。"
+    },
+    {
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-14-section-14-group-1-68",
+      "number": 63,
+      "displayNumber": "63",
+      "sectionId": "section-14",
+      "groupId": "section-14-group-1",
+      "prompt": "“It’s  ______  o’clock already,” he says. “Time to get home.”",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-172"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "",
+      "analysis": "句意：已经五点钟了。根据“o’clock ”可知，此空应填入数词，表示具体的时刻，备选词five“五”符合，故填five。"
+    },
+    {
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-14-section-14-group-1-69",
+      "number": 64,
+      "displayNumber": "64",
+      "sectionId": "section-14",
+      "groupId": "section-14-group-1",
+      "prompt": "They walk up the street and look for their bikes. There  ______  a lot of bikes in Oxford. The city is flat and a lot of people cycle.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-174"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "",
+      "analysis": "句意：牛津有很多自行车。there be表示“有”，句子是一般现在时，bikes是复数形式，be动词用are，故填are。"
+    },
+    {
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-14-section-14-group-1-70",
+      "number": 65,
+      "displayNumber": "65",
+      "sectionId": "section-14",
+      "groupId": "section-14-group-1",
+      "prompt": "“There’s my bike,” says Dan. He looks for Sue’s, but he  ______  see it.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-175"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "",
+      "analysis": "句意：但是他找不到它。根据“He looks for Sue’s”及but可知，他没有找到Sue的自行车，备选词can的否定形式can’t“不能”符合，故填can’t。"
+    },
+    {
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-14-section-14-group-1-71",
+      "number": 66,
+      "displayNumber": "66",
+      "sectionId": "section-14",
+      "groupId": "section-14-group-1",
+      "prompt": "“Where’s  ______ ?” asks Sue. “It’s not here.”",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-176"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "",
+      "analysis": "句意：我的自行车在哪里？根据““There’s my bike,” says Dan. He looks for Sue’s, but he… see it”可知，没有找到Sue的自行车，所以Sue问自己的自行车在哪，空格后无名词，应填名词性物主代词mine表示“我的（自行车）”，故填mine。"
+    },
+    {
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-14-section-14-group-1-72",
+      "number": 67,
+      "displayNumber": "67",
+      "sectionId": "section-14",
+      "groupId": "section-14-group-1",
+      "prompt": "Then they see her bike lock on the ground —  ______  two bits.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-177"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "",
+      "analysis": "句意：然后他们看到她的自行车锁在地上，断成两截。根据“two bits”可知，此处指变成了两截，备选词in符合，故填in。"
+    },
+    {
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-14-section-14-group-1-73",
+      "number": 68,
+      "displayNumber": "68",
+      "sectionId": "section-14",
+      "groupId": "section-14-group-1",
+      "prompt": "“ ______  me,” he says to Sue, and runs across the street.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-180"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "",
+      "analysis": "句意：等我一下。根据“he says to Sue, and runs across the street”可知，他让Sue等他一下，wait for“等待”，此处是祈使句的肯定形式，应填动词原形，句首的单词首字母要大写，故填Wait for。"
+    },
+    {
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-14-section-14-group-1-74",
+      "number": 69,
+      "displayNumber": "69",
+      "sectionId": "section-14",
+      "groupId": "section-14-group-1",
+      "prompt": "She watches him. He talks through the window of the police car and points  ______  at her.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-181"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "",
+      "analysis": "句意：他隔着警车的窗户说话，回头指着她。根据“He talks through the window of the police car and points… at her”及备选词可知，他向警察解释是谁遇到了问题，所以此处是回头指着Sue，point back“回头指”，故填back。"
+    },
+    {
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-14-section-14-group-1-75",
+      "number": 70,
+      "displayNumber": "70",
+      "sectionId": "section-14",
+      "groupId": "section-14-group-1",
+      "prompt": "“Hello,” says the policewoman to Sue. “I’m PC Jennings. Your friend tells me your bike is  ______  . Now tell me about the bike.”",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-183"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "",
+      "analysis": "句意：你朋友告诉我你的自行车不见了。is后接形容词作表语，根据前文的描述可知，Sue的自行车不见了，missing“消失的”符合，故填missing。"
+    },
+    {
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-14-section-14-group-1-76",
+      "number": 71,
+      "displayNumber": "71",
+      "sectionId": "section-14",
+      "groupId": "section-14-group-1",
+      "prompt": "“Well, it’s blue,” begins Sue. “It’s a  ______  bike. And it’s only a year old.”",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-184"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "",
+      "analysis": "句意：这是一辆公路自行车。此空的词语修饰名词bike，备选词road“公路”符合，故填road。"
+    },
+    {
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-16-section-16-group-1-77",
       "number": 1,
       "displayNumber": "1",
       "sectionId": "section-16",
@@ -4620,11 +5115,11 @@
       ],
       "type": "text",
       "context": "",
-      "answer": "notebooks",
-      "analysis": "【解析】\n【详解】句意：越来越多的年轻人喜欢读诗。enjoy doing sth“喜欢做某事”，故填reading。"
+      "answer": "",
+      "analysis": ""
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-16-section-16-group-1-67",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-16-section-16-group-1-78",
       "number": 3,
       "displayNumber": "3",
       "sectionId": "section-16",
@@ -4637,11 +5132,11 @@
       ],
       "type": "text",
       "context": "",
-      "answer": "was",
-      "analysis": "【解析】\n【详解】句意：你们班谁跑得最快？根据“in your class”及语境可知，此处应用最高级形式，修饰动词run，故填fastest。"
+      "answer": "",
+      "analysis": ""
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-16-section-16-group-1-68",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-16-section-16-group-1-79",
       "number": 72,
       "displayNumber": "72",
       "sectionId": "section-16",
@@ -4658,7 +5153,7 @@
       "analysis": "根据“Beijing has become the first city ever to hold both Summer and Winter Olympic Games after winning the 2022 Winter Olympics bid with co-host city Zhangjiakou.”可知，北京与协办城市张家口共同申办2022年冬奥会，故填Two."
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-16-section-16-group-1-69",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-16-section-16-group-1-80",
       "number": 73,
       "displayNumber": "73",
       "sectionId": "section-16",
@@ -4671,11 +5166,11 @@
       ],
       "type": "blank",
       "context": "",
-      "answer": "themselves",
+      "answer": "",
       "analysis": "根据图片显示可知，冰上运动更受欢迎，故填Ice sports."
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-16-section-16-group-1-70",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-16-section-16-group-1-81",
       "number": 74,
       "displayNumber": "74",
       "sectionId": "section-16",
@@ -4688,11 +5183,11 @@
       ],
       "type": "blank",
       "context": "",
-      "answer": "friendly",
+      "answer": "",
       "analysis": "根据“That brings snow and ice sports into public spotlight.”可知，介绍的是中国的冰雪运动，故填Snow and ice."
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-16-section-16-group-1-71",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-16-section-16-group-1-82",
       "number": 75,
       "displayNumber": "75",
       "sectionId": "section-16",
@@ -4705,11 +5200,96 @@
       ],
       "type": "blank",
       "context": "",
-      "answer": "reading",
+      "answer": "",
       "analysis": "根据“However, Beijing and Zhangjiakou’s success in holding the Winter Olympics has...”和提示词可知，北京和张家口成功举办冬奥会让体育变得更加有趣，用于完成时结构中，动词用过去分词，此处是make sth+adj结构，adj修饰sports，用interesting。故填However, Beijing and Zhangjiakou’s success in holding the Winter Olympics has made sports more interesting."
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-72",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-1-83",
+      "number": 77,
+      "displayNumber": "77",
+      "sectionId": "section-17",
+      "groupId": "section-17-group-1",
+      "prompt": "B: I’m thinking about going somewhere nice after the exam with my parents.  ______",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-203"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "B",
+      "analysis": "根据下一句“Why don’t you go to Dunhuang?”可知A建议去敦煌，可推断出问句应是John向A征求意见，所以选项B“你有什么想法吗？”符合语境。故选B。"
+    },
+    {
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-1-84",
+      "number": 78,
+      "displayNumber": "78",
+      "sectionId": "section-17",
+      "groupId": "section-17-group-1",
+      "prompt": "A: Why don’t you go to Dunhuang?  ______",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-204"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "A",
+      "analysis": "根据前一句“Why don’t you go to Dunhuang?”可知A建议去敦煌，接下来应说明理由，即敦煌有何名胜古迹，所以选项A“你可以去莫高窟。”符合语境。故选A。"
+    },
+    {
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-1-85",
+      "number": 79,
+      "displayNumber": "79",
+      "sectionId": "section-17",
+      "groupId": "section-17-group-1",
+      "prompt": "A:  ______  The beach city is a perfect place for the summer holidays.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-206"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "D",
+      "analysis": "根据后一句“The beach city is a perfect place for the summer holidays.”可知海滨城市是避暑的好地方，可推断出空处应提到一个海滨城市，所以选项D“青岛怎么样？”符合语境。故选D。"
+    },
+    {
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-1-86",
+      "number": 80,
+      "displayNumber": "80",
+      "sectionId": "section-17",
+      "groupId": "section-17-group-1",
+      "prompt": "B: It’s a lovely place, but it’s a bit far away from here.  ______",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-207"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "G",
+      "analysis": "根据上下文“It’s a lovely place, but it’s a bit far away from here.”和“Well, you’d better find some advice for a short trip in a travel guide.”可知John觉得青岛有点远，后来A又建议他在旅行指南上看看短途旅游，说明空处应是John想进行短途旅行，所以选项G“我们想要短途旅行。”符合语境。故选G。"
+    },
+    {
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-1-87",
+      "number": 81,
+      "displayNumber": "81",
+      "sectionId": "section-17",
+      "groupId": "section-17-group-1",
+      "prompt": "B:  ______  Thank you.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-209"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "E",
+      "analysis": "根据上下文“Well, you’d better find some advice for a short trip in a travel guide.”和“Thank you.”可知John对A的建议表示感谢，即John肯定了A的想法，因此选项E“那是个好主意。”符合语境。故选E。\nVIII.词汇考查(共10小题；每小题1分，满分10分)\n根据句意，用括号内所给单词的适当形式填空。\n82. I bought two ________ (notebook) yesterday.\n【答案】notebooks\n【解析】\n【详解】句意：我昨天买了两个笔记本。空前有two修饰，名词用复数形式，故填notebooks。\n83. There ________ (be) a lot of rain outside last night.\n【答案】was\n【解析】\n【详解】句意：昨晚外面下了很多雨。根据“last night”可知，句子用一般过去时；本题是“there be”句型，遵循就近原则，rain是不可数名词，be动词用was，故填was。\n84. Young children should not be left by ________ (they).\n【答案】themselves\n【解析】\n【详解】句意：年幼的孩子们不应该自己留下来。by oneself“独自”，they的反身代词是themselves“他们自己”，故填themselves。\n85. Smile and greet others in a ________ (friend) way.\n【答案】friendly\n【解析】\n【详解】句意：微笑，友好地问候他人。此处作定语修饰way，用形容词形式，故填friendly。\n86. More and more young people enjoy ________ (read) poems.\n【答案】reading\n【解析】\n【详解】句意：越来越多的年轻人喜欢读诗。enjoy doing sth“喜欢做某事”，故填reading。\n87. Who can run ________ (fast) in your class?\n【答案】fastest\n【解析】\n【详解】句意：你们班谁跑得最快？根据“in your class”及语境可知，此处应用最高级形式，修饰动词run，故填fastest。\n88. I go to a chess club ________ (two) a week.\n【答案】twice\n【解析】\n【详解】句意：我每周去两次国际象棋俱乐部。此处表示动作发生的频率，表示“一周两次”，表达为twice a week，故填twice。\n89. Sometimes brothers or sisters will ________ (agree) with each other and begin to argue.\n【答案】disagree\n【解析】\n【详解】句意：有时兄弟姐妹之间会产生分歧并开始争吵。根据“each other and begin to argue.”可知，此处不同意彼此的观点，disagree“有分歧”，是动词，will后接动词原形，故填disagree。\n90. ________ (make) sure you lock the door when you go out.\n【答案】Make\n【解析】\n【详解】句意：你出去的时候一定要确保锁门。句子是祈使句，应用动词原形开头，故填Make。\n91. The teacher asked the students ________ (circle) the correct answer.\n【答案】to circle\n【解析】\n【详解】句意：老师让学生圈出正确的答案。 ask sb to do sth“告诉某人做某事”，动词不定式作宾补，故填to circle。\nIX.根据所给汉语提示完成句子(共5小题；每空1分，满分10分)(每空限填一词)\n92. 他过去特别安静。\nHe ________ ________ be really quiet.\n【答案】    ①. used    ②. to\n【解析】\n【详解】根据句意可知，空处缺少“过去”的翻译，used to be“过去……”，故填used；to。\n93. 甘肃是我国三个大熊猫自然憩息分布省之一。\nGansu Province is ________ ________ the three natural habitats of giant pandas.\n【答案】    ①. one    ②. of\n【解析】\n【详解】对比中英文，空处缺少“……之一”的翻译，英文表达为one of…，故填one；of。\n94. 我们应该遵守交通法规。\nWe should always ________ the ________ signs and rules.\n【答案】    ①. follow##obey    ②. traffic\n【解析】\n【详解】follow/obey表示“遵守”，情态动词should后接动词原形；traffic signs and rules“交通法规”，故填follow/obey；traffic。\n95. 我更喜欢自己创作音乐的歌手。\nI ________ ________ that write their own music\n【答案】    ①. prefer    ②. singers\n【解析】\n【详解】由中英文可知第一空用动词“更喜欢prefer”，本句用一般现在时，主语是“I”，所以prefer用原形；本句包含一个定语从句，由中文可知第二空为定语从句的先行词“歌手”，用可数名词singer，定语从句的动词是“write”，说明singer应为复数。故填prefer；singers。\n96. 我们齐心协力就能创造更加美好的未来。\nTogether, our actions can lead to a ________ ________.\n【答案】    ①. better    ②. future\n【解析】\n【详解】此处缺少“更加美好的未来”，表达为better future，用比较级修饰名词，故填better；future。"
+    },
+    {
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-88",
       "number": 82,
       "displayNumber": "82",
       "sectionId": "section-17",
@@ -4722,11 +5302,11 @@
       ],
       "type": "blank",
       "context": "",
-      "answer": "fastest",
-      "analysis": "【解析】\n【详解】句意：我每周去两次国际象棋俱乐部。此处表示动作发生的频率，表示“一周两次”，表达为twice a week，故填twice。"
+      "answer": "notebooks",
+      "analysis": "【解析】\n【原文】1. Be confident and you can do well in the exam."
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-73",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-89",
       "number": 83,
       "displayNumber": "83",
       "sectionId": "section-17",
@@ -4739,11 +5319,11 @@
       ],
       "type": "blank",
       "context": "",
-      "answer": "twice",
-      "analysis": "【解析】\n【详解】句意：有时兄弟姐妹之间会产生分歧并开始争吵。根据“each other and begin to argue.”可知，此处不同意彼此的观点，disagree“有分歧”，是动词，will后接动词原形，故填disagree。"
+      "answer": "was",
+      "analysis": "【解析】\n【原文】Would you like some orange juice?"
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-74",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-90",
       "number": 84,
       "displayNumber": "84",
       "sectionId": "section-17",
@@ -4756,11 +5336,11 @@
       ],
       "type": "blank",
       "context": "",
-      "answer": "disagree",
-      "analysis": "【解析】\n【详解】句意：你出去的时候一定要确保锁门。句子是祈使句，应用动词原形开头，故填Make。"
+      "answer": "themselves",
+      "analysis": "【解析】\n【原文】I don’t feel well now and I think I’ve had a bad cold."
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-75",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-91",
       "number": 85,
       "displayNumber": "85",
       "sectionId": "section-17",
@@ -4773,11 +5353,11 @@
       ],
       "type": "blank",
       "context": "",
-      "answer": "Make",
-      "analysis": "【解析】\n【详解】句意：老师让学生圈出正确的答案。 ask sb to do sth“告诉某人做某事”，动词不定式作宾补，故填to circle。\nIX.根据所给汉语提示完成句子(共5小题；每空1分，满分10分)(每空限填一词)"
+      "answer": "friendly",
+      "analysis": "【解析】\n【原文】How is the weather today?"
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-76",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-92",
       "number": 86,
       "displayNumber": "86",
       "sectionId": "section-17",
@@ -4790,11 +5370,11 @@
       ],
       "type": "blank",
       "context": "",
-      "answer": "to circle",
-      "analysis": "【解析】\n【详解】根据句意可知，空处缺少“过去”的翻译，used to be“过去……”，故填used；to。"
+      "answer": "reading",
+      "analysis": "【解析】\n【原文】Thank you so much for helping us."
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-77",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-93",
       "number": 87,
       "displayNumber": "87",
       "sectionId": "section-17",
@@ -4807,11 +5387,11 @@
       ],
       "type": "blank",
       "context": "",
-      "answer": "used",
-      "analysis": "【解析】\n【详解】对比中英文，空处缺少“……之一”的翻译，英文表达为one of…，故填one；of。"
+      "answer": "fastest",
+      "analysis": "【解析】\n【原文】Whose hair band is it?\n第三节：听对话及问题，选择能回答所提问题的最佳答案。"
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-78",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-94",
       "number": 88,
       "displayNumber": "88",
       "sectionId": "section-17",
@@ -4824,11 +5404,11 @@
       ],
       "type": "blank",
       "context": "",
-      "answer": "to",
-      "analysis": "【解析】\n【详解】follow/obey表示“遵守”，情态动词should后接动词原形；traffic signs and rules“交通法规”，故填follow/obey；traffic。"
+      "answer": "twice",
+      "analysis": "【解析】\n【原文】W: Hello, Sam. Let’s go to the zoo today. What animals do you like best?\nM: My favorite animals are pandas.\nQuestion: What animals does Sam like best?"
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-79",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-95",
       "number": 89,
       "displayNumber": "89",
       "sectionId": "section-17",
@@ -4841,11 +5421,11 @@
       ],
       "type": "blank",
       "context": "",
-      "answer": "one",
-      "analysis": "【解析】\n【详解】由中英文可知第一空用动词“更喜欢prefer”，本句用一般现在时，主语是“I”，所以prefer用原形；本句包含一个定语从句，由中文可知第二空为定语从句的先行词“歌手”，用可数名词singer，定语从句的动词是“write”，说明singer应为复数。故填prefer；singers。"
+      "answer": "disagree",
+      "analysis": "【解析】\n【原文】W: Steve, there’s going to be a football game this afternoon. Do you know when it starts?\nM: Sure, I do. It will start at half past four this afternoon.\nQuestion: When will the football game start?"
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-80",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-96",
       "number": 90,
       "displayNumber": "90",
       "sectionId": "section-17",
@@ -4858,11 +5438,11 @@
       ],
       "type": "blank",
       "context": "",
-      "answer": "of",
-      "analysis": "【解析】\n【详解】此处缺少“更加美好的未来”，表达为better future，用比较级修饰名词，故填better；future。\nX.书面表达(满分15分)"
+      "answer": "Make",
+      "analysis": "【解析】\n【原文】W: Hi, John. Do you know who is the tall woman next to Daisy?\nM: That’s her mother Tina.\nQuestion: Who is Tina?"
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-81",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-97",
       "number": 92,
       "displayNumber": "92",
       "sectionId": "section-17",
@@ -4875,11 +5455,11 @@
       ],
       "type": "blank",
       "context": "",
-      "answer": "follow##obey",
-      "analysis": "Mary went to the zoo with her mother on a lovely Sunday afternoon. The zoo was crowded with visitors. Near the gate of the zoo stood two pretty giraffes. Mary had never seen such amazing animals before. She was so interested in the animals that she looked at every small movement of them carefully. After a while, she wanted to tell her mother what she’d found about these animals. However, she noticed there was no one around. She was afraid and worried, but she remembered that her mother told her not to move when being lost. So she waited for her mother just at the gate of the zoo. Soon after, she saw her mother walking to the gate anxiously. When seeing her mother, Mary was happy and ran to her mother.\n【解析】\n【详解】1. 题干解读：题目要求根据提示要点，结合图片提示进行详细地描述故事的发生以及过程及结果，可以适当的发挥，写作时要运用正确的英语表达，要选用恰当的词汇和短语。2. 写作指导：写作时要紧密结合所给出的要点内容，本文应该用第三人称来介绍内容；时态采用一般过去时；在介绍内容时，力求语言准确，内容完整，保证行文连贯，条理清晰。"
+      "answer": "to circle",
+      "analysis": "【解析】\n【原文】M: What do you think of the life in Gansu, Betty?\nW: I enjoy the time here. People here are so friendly and the food is amazing.\nQuestion: How is Betty’s life in Gansu?"
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-82",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-98",
       "number": 93,
       "displayNumber": "93",
       "sectionId": "section-17",
@@ -4892,11 +5472,11 @@
       ],
       "type": "blank",
       "context": "",
-      "answer": "traffic",
-      "analysis": ""
+      "answer": "used",
+      "analysis": "【解析】\n【原文】W: David, you were late for the meeting just now. You’d never been late. What’s up?\nM: Oh, there’s something wrong with my car. And I couldn’t get a taxi, so I had to walk here.\nQuestion: Why was David late for the meeting?\n第四节：听短文，根据其内容选择能回答下列问题的最佳答案。\n【此处可播放相关音频，请去附件查看】"
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-83",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-99",
       "number": 94,
       "displayNumber": "94",
       "sectionId": "section-17",
@@ -4909,11 +5489,11 @@
       ],
       "type": "blank",
       "context": "",
-      "answer": "prefer",
-      "analysis": ""
+      "answer": "to",
+      "analysis": "【解析】\n【详解】句意：我刚刚买了一件新衬衫。这件新衬衫相当贵。\n考查冠词用法。此空特指前文提到的这件衬衫，用the表特指，故选C。"
     },
     {
-      "id": "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-84",
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-100",
       "number": 95,
       "displayNumber": "95",
       "sectionId": "section-17",
@@ -4926,8 +5506,25 @@
       ],
       "type": "blank",
       "context": "",
-      "answer": "singers",
-      "analysis": ""
+      "answer": "one",
+      "analysis": "【解析】\n【详解】句意：电话铃响了，帕特接了电话。是他儿子从纽约打来的。\n考查名词辨析。telephone电话；doorbell门铃；clock时钟；bike自行车。结合语境和下一句“It was his son calling from New York.”可知帕特的儿子从纽约打电话来，所以应该是电话铃声响了。故选A。"
+    },
+    {
+      "id": "2022-gansu-pingliang-gansu-pingliang-section-17-section-17-group-6-101",
+      "number": 96,
+      "displayNumber": "96",
+      "sectionId": "section-17",
+      "groupId": "section-17-group-6",
+      "prompt": "我们齐心协力就能创造更加美好的未来。 Together, our actions can lead to a ________ ________.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-239"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "of",
+      "analysis": "【解析】\n【详解】句意：这些是我的堂兄弟姐妹。 他们都是大学生。\n考查代词辨析。we我们；you你们；I我；they他们。此空指代前文的“cousins”，此空应填人称代词they，故选D。"
     }
   ],
   "readingA": {

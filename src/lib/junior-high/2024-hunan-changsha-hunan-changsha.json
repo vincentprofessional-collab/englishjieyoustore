@@ -1150,7 +1150,15 @@
           "text": "试卷分为四个部分，共8页，71小题，时量120分钟，满分120分。"
         }
       ],
-      "questionIds": []
+      "questionIds": [],
+      "displayBlocks": [
+        {
+          "id": "image-1-1",
+          "kind": "image",
+          "src": "/junior-high/2024-hunan-changsha-hunan-changsha/image1.png",
+          "alt": "原卷图片"
+        }
+      ]
     },
     {
       "id": "section-2",
@@ -1444,6 +1452,19 @@
         "2024-hunan-changsha-hunan-changsha-section-2-section-2-group-1-18",
         "2024-hunan-changsha-hunan-changsha-section-2-section-2-group-1-19",
         "2024-hunan-changsha-hunan-changsha-section-2-section-2-group-1-20"
+      ],
+      "displayBlocks": [
+        {
+          "id": "paragraph-13",
+          "kind": "paragraph",
+          "text": "听下面5段对话。每段对话后有一个小题，从题中所给的A、B、C三个选项中选出最佳选项。听完每段对话后，你都有10秒钟的时间来回答有关小题和阅读下一小题。每段对话读两遍。"
+        },
+        {
+          "id": "image-55-1",
+          "kind": "image",
+          "src": "/junior-high/2024-hunan-changsha-hunan-changsha/image2.png",
+          "alt": "原卷图片"
+        }
       ]
     },
     {
@@ -1522,6 +1543,27 @@
       "questionIds": [
         "2024-hunan-changsha-hunan-changsha-section-3-section-3-group-1-21",
         "2024-hunan-changsha-hunan-changsha-section-3-section-3-group-1-22"
+      ],
+      "displayBlocks": [
+        {
+          "id": "paragraph-64",
+          "kind": "paragraph",
+          "text": "阅读下列材料，从每题所给的A、B、C 三个选项中，选出最佳选项。"
+        },
+        {
+          "id": "paragraph-65",
+          "kind": "paragraph",
+          "text": "A"
+        },
+        {
+          "id": "table-1",
+          "kind": "table",
+          "rows": [
+            [
+              "The 2nd Yong Zhou Cultural Tourism Festival Time: April 26th and 27th, 2023 Place: Lingling, Yong Zhou Activities: folk lantern show, oilpaper umbrella, acrobatics, delicious food and so on. In order to make sure the festival goes on well, we implement (实施) traffic control from 17: 30 to 21: 30, April 26th."
+            ]
+          ]
+        }
       ]
     },
     {
@@ -1852,6 +1894,74 @@
         "2024-hunan-changsha-hunan-changsha-section-4-section-4-group-1-38",
         "2024-hunan-changsha-hunan-changsha-section-4-section-4-group-1-39",
         "2024-hunan-changsha-hunan-changsha-section-4-section-4-group-1-40"
+      ],
+      "displayBlocks": [
+        {
+          "id": "paragraph-74",
+          "kind": "paragraph",
+          "text": "Do you have good habits? Do you think good study habits help you a lot? Look at the five study habits below. How often do you practice them? Add up your points to see how your study habits are."
+        },
+        {
+          "id": "table-2",
+          "kind": "table",
+          "rows": [
+            [
+              "Study habits",
+              "Frequency",
+              "Point(s)"
+            ],
+            [
+              "1. I preview (预习) the textbooks before each class. 2. I review and organize my notes after each class. 3. Each week I review my notes and homework, and then evaluate (评估) my progress. 4. If I don’t understand something, I write it down and ask the teachers for help. 5. If I do something very well, I reward (奖励) myself.",
+              "Always",
+              "4"
+            ],
+            [
+              "",
+              "Most of the time",
+              "3"
+            ],
+            [
+              "",
+              "Half of the time",
+              "2"
+            ],
+            [
+              "",
+              "Sometimes",
+              "1"
+            ],
+            [
+              "",
+              "Never",
+              "0"
+            ],
+            [
+              "Results"
+            ],
+            [
+              "15-20 points",
+              "You have good study habits! Well done!"
+            ],
+            [
+              "10-14 points",
+              "You have some good habits, but you can do better. Choose one habit and practice it more often."
+            ],
+            [
+              "5-9 points",
+              "You still have lots of things to do. Your grades are OK, but you are not getting the most out of your study. Choose one habit and improve it."
+            ],
+            [
+              "below 5 points",
+              "Don’t worry! Just keep on trying. With the help of the teachers and your parents, you can make a big difference. One day, you’ll succeed by working hard. Good lucy!"
+            ]
+          ]
+        },
+        {
+          "id": "image-103-1",
+          "kind": "image",
+          "src": "/junior-high/2024-hunan-changsha-hunan-changsha/image3.png",
+          "alt": "原卷图片"
+        }
       ]
     },
     {
@@ -1895,7 +2005,11 @@
           "text": "40     Use the advice above and you will spend a great time with your parents."
         }
       ],
-      "questionIds": []
+      "questionIds": [
+        "2024-hunan-changsha-hunan-changsha-section-5-section-5-group-1-41",
+        "2024-hunan-changsha-hunan-changsha-section-5-section-5-group-1-42"
+      ],
+      "displayBlocks": []
     },
     {
       "id": "section-6",
@@ -1940,7 +2054,8 @@
           "text": "第三节 (共5小题：每小题2分，满分10分)"
         }
       ],
-      "questionIds": []
+      "questionIds": [],
+      "displayBlocks": []
     },
     {
       "id": "section-7",
@@ -2004,10 +2119,38 @@
         }
       ],
       "questionIds": [
-        "2024-hunan-changsha-hunan-changsha-section-7-section-7-group-1-41",
-        "2024-hunan-changsha-hunan-changsha-section-7-section-7-group-1-42",
         "2024-hunan-changsha-hunan-changsha-section-7-section-7-group-1-43",
-        "2024-hunan-changsha-hunan-changsha-section-7-section-7-group-1-44"
+        "2024-hunan-changsha-hunan-changsha-section-7-section-7-group-1-44",
+        "2024-hunan-changsha-hunan-changsha-section-7-section-7-group-1-45",
+        "2024-hunan-changsha-hunan-changsha-section-7-section-7-group-1-46",
+        "2024-hunan-changsha-hunan-changsha-section-7-section-7-group-1-47"
+      ],
+      "displayBlocks": [
+        {
+          "id": "paragraph-137",
+          "kind": "paragraph",
+          "text": "Dear Helen,"
+        },
+        {
+          "id": "paragraph-138",
+          "kind": "paragraph",
+          "text": "Thanks for your last letter. Yes, I’m enjoying myself on my exchange programme （交流项目）in France. It’s even better than I thought it would be. I was a bit nervous before I arrived here, but there was no reason to be. My host family are really nice. They go out of their way to make me feel at home. And you wouldn’t believe how quickly my French has improved! I’m very comfortable with speaking French now. Although I still make lots of mistakes, it doesn’t make me worried as it used to. My biggest challenge（挑战） is learning how to behave at the dinner table. As you can imagine, things are really not the same as the way they are at home. For example, you shouldn’t put your bread on your plate. You should put it on the table! I thought that was very strange at first, but now I’m used to it. You shouldn’t eat anything with your hands except bread, not even fruit! You have to cut it up and eat it with a fork. Another thing is that it is very rude to say you’re full. If you don’t want any more food, you should just say, “It is delicious.”Also, it’s rude to put your hands in your lap. You should always keep your hands, but not your elbows（肘部） on the table. I have to say that I find it difficult to remember everything, but I’m gradually getting used to the things. I don’t find them so strange any more."
+        },
+        {
+          "id": "paragraph-139",
+          "kind": "paragraph",
+          "text": "I’ll write soon and tell you more about my life in France. Hope you can have a good school year."
+        },
+        {
+          "id": "paragraph-140",
+          "kind": "paragraph",
+          "text": "Yours,"
+        },
+        {
+          "id": "paragraph-141",
+          "kind": "paragraph",
+          "text": "Li Ying"
+        }
       ]
     },
     {
@@ -2111,16 +2254,38 @@
         }
       ],
       "questionIds": [
-        "2024-hunan-changsha-hunan-changsha-section-8-section-8-group-1-45",
-        "2024-hunan-changsha-hunan-changsha-section-8-section-8-group-1-46",
-        "2024-hunan-changsha-hunan-changsha-section-8-section-8-group-1-47",
         "2024-hunan-changsha-hunan-changsha-section-8-section-8-group-1-48",
         "2024-hunan-changsha-hunan-changsha-section-8-section-8-group-1-49",
         "2024-hunan-changsha-hunan-changsha-section-8-section-8-group-1-50",
         "2024-hunan-changsha-hunan-changsha-section-8-section-8-group-1-51",
         "2024-hunan-changsha-hunan-changsha-section-8-section-8-group-1-52",
         "2024-hunan-changsha-hunan-changsha-section-8-section-8-group-1-53",
-        "2024-hunan-changsha-hunan-changsha-section-8-section-8-group-1-54"
+        "2024-hunan-changsha-hunan-changsha-section-8-section-8-group-1-54",
+        "2024-hunan-changsha-hunan-changsha-section-8-section-8-group-1-55",
+        "2024-hunan-changsha-hunan-changsha-section-8-section-8-group-1-56",
+        "2024-hunan-changsha-hunan-changsha-section-8-section-8-group-1-57"
+      ],
+      "displayBlocks": [
+        {
+          "id": "paragraph-150",
+          "kind": "paragraph",
+          "text": "Time is very important in our lives. But it never had any importance in my life until I    46    a watch from my father that made me responsible. It    47    me the importance of time in my life."
+        },
+        {
+          "id": "paragraph-151",
+          "kind": "paragraph",
+          "text": "I got this gift on a gray-sky day. I had to go to the    48    at 9: 00 a.m. to pick up my uncle Ali and take him to my father’s house. However, I forgot it    49    I was playing with my friends. Later on that day, around 11: 00 a.m., I remembered my uncle, but I was late for him. He had got out of the plane and    50    a taxi to my father’s house."
+        },
+        {
+          "id": "paragraph-152",
+          "kind": "paragraph",
+          "text": "I got to my father’s house at 2: 00 p.m. My father looked at me angrily. I said “hi” to him and my    51    uncle. My father asked me to sit    52    him and handed me this watch. It weighed 8 oz (盎司) and all of it was made of silver. Then he said, “Essa, did you have fun with your friends today? What you did was not very nice and you should be sorry for your actions.” I felt sorry and told my father that I wouldn’t do it again. Then he said, “This watch will be a reminder for you. I hope today you have learned something    53   .”"
+        },
+        {
+          "id": "paragraph-153",
+          "kind": "paragraph",
+          "text": "I learned a lesson from my father: to respect (尊重) time and    54    be late. The watch is important to me, not because of its      55     , but because of the lesson that I learned from it."
+        }
       ]
     },
     {
@@ -2171,7 +2336,19 @@
           "text": "第三节 (共5小题；每小题2分，满分10分)"
         }
       ],
-      "questionIds": []
+      "questionIds": [
+        "2024-hunan-changsha-hunan-changsha-section-9-section-9-group-1-58",
+        "2024-hunan-changsha-hunan-changsha-section-9-section-9-group-1-59",
+        "2024-hunan-changsha-hunan-changsha-section-9-section-9-group-1-60",
+        "2024-hunan-changsha-hunan-changsha-section-9-section-9-group-1-61",
+        "2024-hunan-changsha-hunan-changsha-section-9-section-9-group-1-62",
+        "2024-hunan-changsha-hunan-changsha-section-9-section-9-group-1-63",
+        "2024-hunan-changsha-hunan-changsha-section-9-section-9-group-1-64",
+        "2024-hunan-changsha-hunan-changsha-section-9-section-9-group-1-65",
+        "2024-hunan-changsha-hunan-changsha-section-9-section-9-group-1-66",
+        "2024-hunan-changsha-hunan-changsha-section-9-section-9-group-1-67"
+      ],
+      "displayBlocks": []
     },
     {
       "id": "section-10",
@@ -2236,10 +2413,39 @@
         }
       ],
       "questionIds": [
-        "2024-hunan-changsha-hunan-changsha-section-10-section-10-group-1-55",
-        "2024-hunan-changsha-hunan-changsha-section-10-section-10-group-1-56",
-        "2024-hunan-changsha-hunan-changsha-section-10-section-10-group-1-57",
-        "2024-hunan-changsha-hunan-changsha-section-10-section-10-group-1-58"
+        "2024-hunan-changsha-hunan-changsha-section-10-section-10-group-1-68",
+        "2024-hunan-changsha-hunan-changsha-section-10-section-10-group-1-69",
+        "2024-hunan-changsha-hunan-changsha-section-10-section-10-group-1-70",
+        "2024-hunan-changsha-hunan-changsha-section-10-section-10-group-1-71",
+        "2024-hunan-changsha-hunan-changsha-section-10-section-10-group-1-72"
+      ],
+      "displayBlocks": [
+        {
+          "id": "image-174-1",
+          "kind": "image",
+          "src": "/junior-high/2024-hunan-changsha-hunan-changsha/image4.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "paragraph-175",
+          "kind": "paragraph",
+          "text": "Chinese New Year’s Day, or Spring Festival, is the most important special festival in China. To celebrate it, Chinese people have the tradition of putting up New Year Paintings, nianhua (年画). It is especially popular in the countryside. 1. 人们盼望在新的一年拥有好运。"
+        },
+        {
+          "id": "paragraph-176",
+          "kind": "paragraph",
+          "text": "Chinese New Year Painting is an old handicraft. Its very first form was a picture of a door god (神) during the Tang Dynasty. Later, more subjects such as the kitchen gods, goddess were included. As the Chinese New Year arrives, 2. every family is busy putting up its New Year paintings to say goodbye to the old year and welcome the new one. One of the most famous woodblock (木刻版画) New Year paintings comes from Shandong Province. It covers all kinds of themes and forms, which show people’s everyday life. 3. People won’t change their New Year paintings until the next year."
+        },
+        {
+          "id": "paragraph-177",
+          "kind": "paragraph",
+          "text": "As time went by, people find New Year paintings old-fashioned. 4. They think the door gods are too scary to hang in their homes. They want something more artistic, so babies start to become a popular theme in New Year paintings. One of the most popular pictures is the cherubic (白胖可爱的) baby. He usually holds a lotus flower (莲花) in one hand and a big fish under one arm."
+        },
+        {
+          "id": "paragraph-178",
+          "kind": "paragraph",
+          "text": "The traditional New Year is coming soon! Are you still thinking about preparing New Year’s gifts? Would you like to buy some interesting New Year paintings? 5. 如果你把年画作为礼物送给朋友，他们会很惊喜。 Don’t hesitate, just go and buy some!"
+        }
       ]
     },
     {
@@ -2327,11 +2533,14 @@
           "text": "Li Hua"
         }
       ],
-      "questionIds": [
-        "2024-hunan-changsha-hunan-changsha-section-11-section-11-group-1-59",
-        "2024-hunan-changsha-hunan-changsha-section-11-section-11-group-1-60",
-        "2024-hunan-changsha-hunan-changsha-section-11-section-11-group-1-61",
-        "2024-hunan-changsha-hunan-changsha-section-11-section-11-group-1-62"
+      "questionIds": [],
+      "displayBlocks": [
+        {
+          "id": "image-186-1",
+          "kind": "image",
+          "src": "/junior-high/2024-hunan-changsha-hunan-changsha/image5.png",
+          "alt": "原卷图片"
+        }
       ]
     }
   ],
@@ -2747,9 +2956,7 @@
       "options": [
         "A. Hobby.",
         "B. Travel.",
-        "C. Education. 第二部分  阅读 (共三节，满分50分) 第一节 (共15小题：每小题2分，满分30分) 阅读下列材料，从每题所给的",
-        "A. ",
-        "B. C 三个选项中，选出最佳选项。 A The 2nd Yong Zhou Cultural Tourism Festival Time: April 26th and 27th, 2023 Place: Lingling, Yong Zhou Activities: folk lantern show, oilpaper umbrella, acrobatics, delicious food and so on. In order to make sure the festival goes on well, we implement (实施) traffic control from 17: 30 to 21: 30, April 26th."
+        "C. Education."
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -2791,7 +2998,7 @@
       "options": [
         "A. go to it on Mar. 26th",
         "B. enjoy the Chinese Kungfu",
-        "C. drive through the place by day B 阅读下面的图表，完成23～25小题。 Do you have good habits? Do you think good study habits help you a lot? Look at the five study habits below. How often do you practice them? Add up your points to see how your study habits are. Study habits Frequency Point(s)"
+        "C. drive through the place by day B"
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -2812,12 +3019,12 @@
       "options": [],
       "inputKind": "blank",
       "sourceBlockIds": [
-        "table-2-row-2"
+        "table-2"
       ],
       "type": "blank",
       "context": "",
-      "answer": "In France",
-      "analysis": "In France.\nThey are really nice.\nComfortable.\nBread."
+      "answer": "",
+      "analysis": ""
     },
     {
       "id": "2024-hunan-changsha-hunan-changsha-section-4-section-4-group-1-24",
@@ -2829,12 +3036,12 @@
       "options": [],
       "inputKind": "blank",
       "sourceBlockIds": [
-        "table-2-row-2"
+        "table-2"
       ],
       "type": "blank",
       "context": "",
-      "answer": "Possible versions",
-      "analysis": "Dear Anna,\nI’m so glad to hear from you. Knowing you have an interest in Chinese, I suggest you choose the Chinese course. Chinese is spoken by the most people in the world. With the development of China, Chinese is becoming more and more popular. Learning Chinese is not only a way to communicate, but also a chance to admire Chinese culture.\nIn my opinion, there are many ways to learn Chinese. It’s useful to read Chinese books and listen to Chinese songs. What’s more, you are supposed to join a Chinese club to practice your spoken Chinese. Learning is a lifelong journey. Keep practicing every day, then it will bring something new.\nI hope my advice can help you.\nYours,\nLi Hua\n【详解】[总体分析]\n①题材：本文是一篇书信作文；\n②时态：时态为“一般现在时”；\n③提示：根据所给提示完成写作，注意标点符号及大小写等问题，不要犯语法错误。注意上下文之间的逻辑关系，语意连贯。\n[写作步骤]\n第一步，表明写作意图；\n第二步，给出相应的建议；\n第三步，书写结语。\n[亮点词汇]\nhear from收到……的信\nsuggest建议\nnot only…but also…不仅……而且……\ncommunicate交流\nadmire欣赏\nbe supposed to应该\n[高分句型]\nKnowing you have an interest in Chinese, I suggest you choose the Chinese course.(省略that的宾语从句)\nLearning Chinese is not only a way to communicate, but also a chance to admire Chinese culture.（动名词作主语）"
+      "answer": "",
+      "analysis": ""
     },
     {
       "id": "2024-hunan-changsha-hunan-changsha-section-4-section-4-group-1-25",
@@ -2846,7 +3053,7 @@
       "options": [],
       "inputKind": "blank",
       "sourceBlockIds": [
-        "table-2-row-2"
+        "table-2"
       ],
       "type": "blank",
       "context": "",
@@ -2863,7 +3070,7 @@
       "options": [],
       "inputKind": "blank",
       "sourceBlockIds": [
-        "table-2-row-2"
+        "table-2"
       ],
       "type": "blank",
       "context": "",
@@ -2880,7 +3087,7 @@
       "options": [],
       "inputKind": "blank",
       "sourceBlockIds": [
-        "table-2-row-2"
+        "table-2"
       ],
       "type": "blank",
       "context": "",
@@ -3149,11 +3356,7 @@
       "options": [
         "A. We’d better not watch TV more than one hour a day.",
         "B. Hanging out after dinner is good for our heart health.",
-        "C. Having snacks while watching TV adds risks for heart. 第二节 (共5小题：每小题2分，满分10分) 阅读下面短文，从短文后的选项中选出可以填入空白处的最佳选项。每个选项仅使用一次。 Are you nervous when talking to your parents? Do you often make them angry? No need to worry!     36 Try to find things that you and your parents both enjoy. For example, if you and your dad both like playing basketball, why not watch a game together and talk about it?     37 Try to start a talk with your parents during dinner. Ask your parents about their day, and they’ll feel more comfortable sharing with you. Don’t forget that you have to open up to them, too. 38     Besides, it’s also a good idea to share something about the latest movies. Soon all of you will have a good conversation. 39     Eye contact(交流）is necessary. Don’t be bored, or they will probably stop talking and walk away. Let them know you’re listening. By doing so, they’ll be more interested in talking to you, leading to warm conversations between you and your parents. 40     Use the advice above and you will spend a great time with your parents. 根据短文内容，将下面方框内的句子还原到文中空白处，使短文内容完整，通顺（每个选项只能用一次）。",
-        "A. Tell them what happened at school.",
-        "B. Here is some advice about how to talk to your parents.",
-        "C. You can find the conversation will come easily.",
-        "D. In a word, it’s easy to get along well with your parents if you see them as your friends. E．Try to look at your parents when you talk. 第三节 (共5小题：每小题2分，满分10分) 阅读下面短文，根据短文内容回答问题。 Dear Helen, Thanks for your last letter. Yes, I’m enjoying myself on my exchange programme （交流项目）in France. It’s even better than I thought it would be. I was a bit nervous before I arrived here, but there was no reason to be. My host family are really nice. They go out of their way to make me feel at home. And you wouldn’t believe how quickly my French has improved! I’m very comfortable with speaking French now. Although I still make lots of mistakes, it doesn’t make me worried as it used to. My biggest challenge（挑战） is learning how to behave at the dinner table. As you can imagine, things are really not the same as the way they are at home. For example, you shouldn’t put your bread on your plate. You should put it on the table! I thought that was very strange at first, but now I’m used to it. You shouldn’t eat anything with your hands except bread, not even fruit! You have to cut it up and eat it with a fork. Another thing is that it is very rude to say you’re full. If you don’t want any more food, you should just say, “It is delicious.”Also, it’s rude to put your hands in your lap. You should always keep your hands, but not your elbows（肘部） on the table. I have to say that I find it difficult to remember everything, but I’m gradually getting used to the things. I don’t find them so strange any more. I’ll write soon and tell you more about my life in France. Hope you can have a good school year. Yours, Li Ying"
+        "C. Having snacks while watching TV adds risks for heart. 第二节 (共5小题：每小题2分，满分10分)"
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -3165,7 +3368,41 @@
       "analysis": "【导语】文章主要讲了研究表明长时间坐在电视机前对人们的健康有风险。"
     },
     {
-      "id": "2024-hunan-changsha-hunan-changsha-section-7-section-7-group-1-41",
+      "id": "2024-hunan-changsha-hunan-changsha-section-5-section-5-group-1-41",
+      "number": 36,
+      "displayNumber": "36",
+      "sectionId": "section-5",
+      "groupId": "section-5-group-1",
+      "prompt": "Are you nervous when talking to your parents? Do you often make them angry? No need to worry! ______",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-123"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "B",
+      "analysis": "【导语】本文主要介绍了孩子要如何与父母进行愉快的交谈。"
+    },
+    {
+      "id": "2024-hunan-changsha-hunan-changsha-section-5-section-5-group-1-42",
+      "number": 37,
+      "displayNumber": "37",
+      "sectionId": "section-5",
+      "groupId": "section-5-group-1",
+      "prompt": "Try to find things that you and your parents both enjoy. For example, if you and your dad both like playing basketball, why not watch a game together and talk about it? ______",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-124"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "C",
+      "analysis": "【导语】本文主要介绍了孩子要如何与父母进行愉快的交谈。"
+    },
+    {
+      "id": "2024-hunan-changsha-hunan-changsha-section-7-section-7-group-1-43",
       "number": 41,
       "displayNumber": "41",
       "sectionId": "section-7",
@@ -3178,11 +3415,11 @@
       ],
       "type": "text",
       "context": "",
-      "answer": "",
-      "analysis": ""
+      "answer": "In France",
+      "analysis": "In France.\nThey are really nice.\nComfortable.\nBread."
     },
     {
-      "id": "2024-hunan-changsha-hunan-changsha-section-7-section-7-group-1-42",
+      "id": "2024-hunan-changsha-hunan-changsha-section-7-section-7-group-1-44",
       "number": 42,
       "displayNumber": "42",
       "sectionId": "section-7",
@@ -3199,7 +3436,7 @@
       "analysis": ""
     },
     {
-      "id": "2024-hunan-changsha-hunan-changsha-section-7-section-7-group-1-43",
+      "id": "2024-hunan-changsha-hunan-changsha-section-7-section-7-group-1-45",
       "number": 43,
       "displayNumber": "43",
       "sectionId": "section-7",
@@ -3216,7 +3453,7 @@
       "analysis": ""
     },
     {
-      "id": "2024-hunan-changsha-hunan-changsha-section-7-section-7-group-1-44",
+      "id": "2024-hunan-changsha-hunan-changsha-section-7-section-7-group-1-46",
       "number": 44,
       "displayNumber": "44",
       "sectionId": "section-7",
@@ -3233,7 +3470,24 @@
       "analysis": ""
     },
     {
-      "id": "2024-hunan-changsha-hunan-changsha-section-8-section-8-group-1-45",
+      "id": "2024-hunan-changsha-hunan-changsha-section-7-section-7-group-1-47",
+      "number": 45,
+      "displayNumber": "45",
+      "sectionId": "section-7",
+      "groupId": "section-7-group-1",
+      "prompt": "Do you want to go there if you have the chance to take part in an exchange programme? Why or why not?",
+      "options": [],
+      "inputKind": "text",
+      "sourceBlockIds": [
+        "paragraph-146"
+      ],
+      "type": "text",
+      "context": "",
+      "answer": "",
+      "analysis": ""
+    },
+    {
+      "id": "2024-hunan-changsha-hunan-changsha-section-8-section-8-group-1-48",
       "number": 46,
       "displayNumber": "46",
       "sectionId": "section-8",
@@ -3254,7 +3508,7 @@
       "analysis": "46．B    47．C    48．A    49．C    50．A    51．B    52．A    53．B    54．C    55．B\n【导语】本文主要介绍了作者忘记去机场接叔叔，父亲很生气。后来父亲送给他一块表让他知道时间在生命中的重要性。"
     },
     {
-      "id": "2024-hunan-changsha-hunan-changsha-section-8-section-8-group-1-46",
+      "id": "2024-hunan-changsha-hunan-changsha-section-8-section-8-group-1-49",
       "number": 47,
       "displayNumber": "47",
       "sectionId": "section-8",
@@ -3275,7 +3529,7 @@
       "analysis": "46．B    47．C    48．A    49．C    50．A    51．B    52．A    53．B    54．C    55．B\n【导语】本文主要介绍了作者忘记去机场接叔叔，父亲很生气。后来父亲送给他一块表让他知道时间在生命中的重要性。"
     },
     {
-      "id": "2024-hunan-changsha-hunan-changsha-section-8-section-8-group-1-47",
+      "id": "2024-hunan-changsha-hunan-changsha-section-8-section-8-group-1-50",
       "number": 48,
       "displayNumber": "48",
       "sectionId": "section-8",
@@ -3296,7 +3550,7 @@
       "analysis": "46．B    47．C    48．A    49．C    50．A    51．B    52．A    53．B    54．C    55．B\n【导语】本文主要介绍了作者忘记去机场接叔叔，父亲很生气。后来父亲送给他一块表让他知道时间在生命中的重要性。"
     },
     {
-      "id": "2024-hunan-changsha-hunan-changsha-section-8-section-8-group-1-48",
+      "id": "2024-hunan-changsha-hunan-changsha-section-8-section-8-group-1-51",
       "number": 49,
       "displayNumber": "49",
       "sectionId": "section-8",
@@ -3317,7 +3571,7 @@
       "analysis": "46．B    47．C    48．A    49．C    50．A    51．B    52．A    53．B    54．C    55．B\n【导语】本文主要介绍了作者忘记去机场接叔叔，父亲很生气。后来父亲送给他一块表让他知道时间在生命中的重要性。"
     },
     {
-      "id": "2024-hunan-changsha-hunan-changsha-section-8-section-8-group-1-49",
+      "id": "2024-hunan-changsha-hunan-changsha-section-8-section-8-group-1-52",
       "number": 50,
       "displayNumber": "50",
       "sectionId": "section-8",
@@ -3338,7 +3592,7 @@
       "analysis": "46．B    47．C    48．A    49．C    50．A    51．B    52．A    53．B    54．C    55．B\n【导语】本文主要介绍了作者忘记去机场接叔叔，父亲很生气。后来父亲送给他一块表让他知道时间在生命中的重要性。"
     },
     {
-      "id": "2024-hunan-changsha-hunan-changsha-section-8-section-8-group-1-50",
+      "id": "2024-hunan-changsha-hunan-changsha-section-8-section-8-group-1-53",
       "number": 51,
       "displayNumber": "51",
       "sectionId": "section-8",
@@ -3359,7 +3613,7 @@
       "analysis": "46．B    47．C    48．A    49．C    50．A    51．B    52．A    53．B    54．C    55．B\n【导语】本文主要介绍了作者忘记去机场接叔叔，父亲很生气。后来父亲送给他一块表让他知道时间在生命中的重要性。"
     },
     {
-      "id": "2024-hunan-changsha-hunan-changsha-section-8-section-8-group-1-51",
+      "id": "2024-hunan-changsha-hunan-changsha-section-8-section-8-group-1-54",
       "number": 52,
       "displayNumber": "52",
       "sectionId": "section-8",
@@ -3380,7 +3634,7 @@
       "analysis": "46．B    47．C    48．A    49．C    50．A    51．B    52．A    53．B    54．C    55．B\n【导语】本文主要介绍了作者忘记去机场接叔叔，父亲很生气。后来父亲送给他一块表让他知道时间在生命中的重要性。"
     },
     {
-      "id": "2024-hunan-changsha-hunan-changsha-section-8-section-8-group-1-52",
+      "id": "2024-hunan-changsha-hunan-changsha-section-8-section-8-group-1-55",
       "number": 53,
       "displayNumber": "53",
       "sectionId": "section-8",
@@ -3401,7 +3655,7 @@
       "analysis": "46．B    47．C    48．A    49．C    50．A    51．B    52．A    53．B    54．C    55．B\n【导语】本文主要介绍了作者忘记去机场接叔叔，父亲很生气。后来父亲送给他一块表让他知道时间在生命中的重要性。"
     },
     {
-      "id": "2024-hunan-changsha-hunan-changsha-section-8-section-8-group-1-53",
+      "id": "2024-hunan-changsha-hunan-changsha-section-8-section-8-group-1-56",
       "number": 54,
       "displayNumber": "54",
       "sectionId": "section-8",
@@ -3422,7 +3676,7 @@
       "analysis": "46．B    47．C    48．A    49．C    50．A    51．B    52．A    53．B    54．C    55．B\n【导语】本文主要介绍了作者忘记去机场接叔叔，父亲很生气。后来父亲送给他一块表让他知道时间在生命中的重要性。"
     },
     {
-      "id": "2024-hunan-changsha-hunan-changsha-section-8-section-8-group-1-54",
+      "id": "2024-hunan-changsha-hunan-changsha-section-8-section-8-group-1-57",
       "number": 55,
       "displayNumber": "55",
       "sectionId": "section-8",
@@ -3431,7 +3685,7 @@
       "options": [
         "A. weight",
         "B. price",
-        "C. size 第二节 (共10小题；每小题1分，满分10分) 阅读下面短文，在空白处填入1个适当的单词或括号内单词的正确形式。 “Every day, we see the sunrise 16    56   （time）. Do you know why? Well, we circle the Earth every 90 minutes! Do you still remember these words? It was June 20th, 2013. Chinese astronaut Wang Yaping gave    57    science lesson in space. Six million school children and teachers across China listened to it. Were you one of them?    58   the afternoon of December 9th, Ms. Wang gave her “Lesson Two”! This time, Wang and her team will stay in space for 183 days. She has become the first woman    59    completed a spacewalk. We also heard the first Chinese New Year’s greetings coming from space. But perhaps the most exciting part for you is Ms. Wang’s “Lesson Two. ” Wang’s space dream    60   （begin）when Yang Liwei became China’s first man in space in 2003. “When will our country have a space-woman?” She thought to    61   （she）. Wang was a fighter pilot. Because of her excellent performance, in 2010, she    62   （choose）to train as an astronaut by the government. After lots of hard training, the woman    63   （final）realized her space dream in 2013. Like many young Chinese people, Wang likes photography, music    64    basketball. She said, “We are all students in facing the universe（宇宙）. We are looking forward to    65   （join）our young friends to learn and explore（探索）beautiful universe. ” 第三节 (共5小题；每小题2分，满分10分) 阅读下面短文，将划线部分译成英文或中文。 Chinese New Year’s Day, or Spring Festival, is the most important special festival in China. To celebrate it, Chinese people have the tradition of putting up New Year Paintings, nianhua (年画). It is especially popular in the countryside. 1. 人们盼望在新的一年拥有好运。 Chinese New Year Painting is an old handicraft. Its very first form was a picture of a door god (神) during the Tang Dynasty. Later, more subjects such as the kitchen gods, goddess were included. As the Chinese New Year arrives, 2. every family is busy putting up its New Year paintings to say goodbye to the old year and welcome the new one. One of the most famous woodblock (木刻版画) New Year paintings comes from Shandong Province. It covers all kinds of themes and forms, which show people’s everyday life. 3. People won’t change their New Year paintings until the next year. As time went by, people find New Year paintings old-fashioned. 4. They think the door gods are too scary to hang in their homes. They want something more artistic, so babies start to become a popular theme in New Year paintings. One of the most popular pictures is the cherubic (白胖可爱的) baby. He usually holds a lotus flower (莲花) in one hand and a big fish under one arm. The traditional New Year is coming soon! Are you still thinking about preparing New Year’s gifts? Would you like to buy some interesting New Year paintings? 5. 如果你把年画作为礼物送给朋友，他们会很惊喜。 Don’t hesitate, just go and buy some!"
+        "C. size 第二节 (共10小题；每小题1分，满分10分)"
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -3443,7 +3697,177 @@
       "analysis": "46．B    47．C    48．A    49．C    50．A    51．B    52．A    53．B    54．C    55．B\n【导语】本文主要介绍了作者忘记去机场接叔叔，父亲很生气。后来父亲送给他一块表让他知道时间在生命中的重要性。"
     },
     {
-      "id": "2024-hunan-changsha-hunan-changsha-section-10-section-10-group-1-55",
+      "id": "2024-hunan-changsha-hunan-changsha-section-9-section-9-group-1-58",
+      "number": 56,
+      "displayNumber": "56",
+      "sectionId": "section-9",
+      "groupId": "section-9-group-1",
+      "prompt": "“Every day, we see the sunrise 16  ______ （time）. Do you know why? Well, we circle the Earth every 90 minutes!",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-166"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "",
+      "analysis": ""
+    },
+    {
+      "id": "2024-hunan-changsha-hunan-changsha-section-9-section-9-group-1-59",
+      "number": 57,
+      "displayNumber": "57",
+      "sectionId": "section-9",
+      "groupId": "section-9-group-1",
+      "prompt": "Do you still remember these words? It was June 20th, 2013. Chinese astronaut Wang Yaping gave  ______ science lesson in space. Six million school children and teachers across China listened to it. Were you one of them?    58   the afternoon of December 9th, Ms. Wang gave her “Lesson Two”!",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-167"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "a",
+      "analysis": "times    57．a    58．On    59．that/who    60．began"
+    },
+    {
+      "id": "2024-hunan-changsha-hunan-changsha-section-9-section-9-group-1-60",
+      "number": 58,
+      "displayNumber": "58",
+      "sectionId": "section-9",
+      "groupId": "section-9-group-1",
+      "prompt": "Do you still remember these words? It was June 20th, 2013. Chinese astronaut Wang Yaping gave    57    science lesson in space. Six million school children and teachers across China listened to it. Were you one of them? ______    the afternoon of December 9th, Ms. Wang gave her “Lesson Two”!",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-167"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "On",
+      "analysis": "times    57．a    58．On    59．that/who    60．began"
+    },
+    {
+      "id": "2024-hunan-changsha-hunan-changsha-section-9-section-9-group-1-61",
+      "number": 59,
+      "displayNumber": "59",
+      "sectionId": "section-9",
+      "groupId": "section-9-group-1",
+      "prompt": "This time, Wang and her team will stay in space for 183 days. She has become the first woman  ______ completed a spacewalk. We also heard the first Chinese New Year’s greetings coming from space. But perhaps the most exciting part for you is Ms. Wang’s “Lesson Two. ”",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-168"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "that/who",
+      "analysis": "times    57．a    58．On    59．that/who    60．began"
+    },
+    {
+      "id": "2024-hunan-changsha-hunan-changsha-section-9-section-9-group-1-62",
+      "number": 60,
+      "displayNumber": "60",
+      "sectionId": "section-9",
+      "groupId": "section-9-group-1",
+      "prompt": "Wang’s space dream  ______ （begin）when Yang Liwei became China’s first man in space in 2003.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-169"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "began",
+      "analysis": "times    57．a    58．On    59．that/who    60．began"
+    },
+    {
+      "id": "2024-hunan-changsha-hunan-changsha-section-9-section-9-group-1-63",
+      "number": 61,
+      "displayNumber": "61",
+      "sectionId": "section-9",
+      "groupId": "section-9-group-1",
+      "prompt": "“When will our country have a space-woman?” She thought to  ______ （she）. Wang was a fighter pilot. Because of her excellent performance, in 2010, she    62   （choose）to train as an astronaut by the government. After lots of hard training, the woman    63   （final）realized her space dream in 2013.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-170"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "",
+      "analysis": ""
+    },
+    {
+      "id": "2024-hunan-changsha-hunan-changsha-section-9-section-9-group-1-64",
+      "number": 62,
+      "displayNumber": "62",
+      "sectionId": "section-9",
+      "groupId": "section-9-group-1",
+      "prompt": "“When will our country have a space-woman?” She thought to    61   （she）. Wang was a fighter pilot. Because of her excellent performance, in 2010, she  ______ （choose）to train as an astronaut by the government. After lots of hard training, the woman    63   （final）realized her space dream in 2013.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-170"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "",
+      "analysis": ""
+    },
+    {
+      "id": "2024-hunan-changsha-hunan-changsha-section-9-section-9-group-1-65",
+      "number": 63,
+      "displayNumber": "63",
+      "sectionId": "section-9",
+      "groupId": "section-9-group-1",
+      "prompt": "“When will our country have a space-woman?” She thought to    61   （she）. Wang was a fighter pilot. Because of her excellent performance, in 2010, she    62   （choose）to train as an astronaut by the government. After lots of hard training, the woman  ______ （final）realized her space dream in 2013.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-170"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "",
+      "analysis": ""
+    },
+    {
+      "id": "2024-hunan-changsha-hunan-changsha-section-9-section-9-group-1-66",
+      "number": 64,
+      "displayNumber": "64",
+      "sectionId": "section-9",
+      "groupId": "section-9-group-1",
+      "prompt": "Like many young Chinese people, Wang likes photography, music  ______ basketball. She said, “We are all students in facing the universe（宇宙）. We are looking forward to    65   （join）our young friends to learn and explore（探索）beautiful universe. ”",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-171"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "",
+      "analysis": ""
+    },
+    {
+      "id": "2024-hunan-changsha-hunan-changsha-section-9-section-9-group-1-67",
+      "number": 65,
+      "displayNumber": "65",
+      "sectionId": "section-9",
+      "groupId": "section-9-group-1",
+      "prompt": "Like many young Chinese people, Wang likes photography, music    64    basketball. She said, “We are all students in facing the universe（宇宙）. We are looking forward to  ______ （join）our young friends to learn and explore（探索）beautiful universe. ”",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-171"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "",
+      "analysis": ""
+    },
+    {
+      "id": "2024-hunan-changsha-hunan-changsha-section-10-section-10-group-1-68",
       "number": 66,
       "displayNumber": "66",
       "sectionId": "section-10",
@@ -3460,7 +3884,7 @@
       "analysis": "66．People expect to have good luck in the new year.\n家家户户忙着贴年画，辞旧迎新。\n人们要到第二年才会换年画。\n他们认为门神太吓人，不能挂在家里。"
     },
     {
-      "id": "2024-hunan-changsha-hunan-changsha-section-10-section-10-group-1-56",
+      "id": "2024-hunan-changsha-hunan-changsha-section-10-section-10-group-1-69",
       "number": 67,
       "displayNumber": "67",
       "sectionId": "section-10",
@@ -3473,11 +3897,11 @@
       ],
       "type": "text",
       "context": "",
-      "answer": "",
-      "analysis": ""
+      "answer": "Possible versions",
+      "analysis": "Dear Anna,\nI’m so glad to hear from you. Knowing you have an interest in Chinese, I suggest you choose the Chinese course. Chinese is spoken by the most people in the world. With the development of China, Chinese is becoming more and more popular. Learning Chinese is not only a way to communicate, but also a chance to admire Chinese culture.\nIn my opinion, there are many ways to learn Chinese. It’s useful to read Chinese books and listen to Chinese songs. What’s more, you are supposed to join a Chinese club to practice your spoken Chinese. Learning is a lifelong journey. Keep practicing every day, then it will bring something new.\nI hope my advice can help you.\nYours,\nLi Hua\n【详解】[总体分析]\n①题材：本文是一篇书信作文；\n②时态：时态为“一般现在时”；\n③提示：根据所给提示完成写作，注意标点符号及大小写等问题，不要犯语法错误。注意上下文之间的逻辑关系，语意连贯。\n[写作步骤]\n第一步，表明写作意图；\n第二步，给出相应的建议；\n第三步，书写结语。\n[亮点词汇]\nhear from收到……的信\nsuggest建议\nnot only…but also…不仅……而且……\ncommunicate交流\nadmire欣赏\nbe supposed to应该\n[高分句型]\nKnowing you have an interest in Chinese, I suggest you choose the Chinese course.(省略that的宾语从句)\nLearning Chinese is not only a way to communicate, but also a chance to admire Chinese culture.（动名词作主语）"
     },
     {
-      "id": "2024-hunan-changsha-hunan-changsha-section-10-section-10-group-1-57",
+      "id": "2024-hunan-changsha-hunan-changsha-section-10-section-10-group-1-70",
       "number": 68,
       "displayNumber": "68",
       "sectionId": "section-10",
@@ -3494,7 +3918,7 @@
       "analysis": ""
     },
     {
-      "id": "2024-hunan-changsha-hunan-changsha-section-10-section-10-group-1-58",
+      "id": "2024-hunan-changsha-hunan-changsha-section-10-section-10-group-1-71",
       "number": 69,
       "displayNumber": "69",
       "sectionId": "section-10",
@@ -3511,69 +3935,18 @@
       "analysis": ""
     },
     {
-      "id": "2024-hunan-changsha-hunan-changsha-section-11-section-11-group-1-59",
-      "number": 1,
-      "displayNumber": "1",
-      "sectionId": "section-11",
-      "groupId": "section-11-group-1",
-      "prompt": "必须包含所给要点，可适当发挥；",
+      "id": "2024-hunan-changsha-hunan-changsha-section-10-section-10-group-1-72",
+      "number": 70,
+      "displayNumber": "70",
+      "sectionId": "section-10",
+      "groupId": "section-10-group-1",
+      "prompt": "第 70 题",
       "options": [],
       "inputKind": "text",
       "sourceBlockIds": [
-        "paragraph-188"
+        "paragraph-183"
       ],
       "type": "text",
-      "context": "",
-      "answer": "",
-      "analysis": ""
-    },
-    {
-      "id": "2024-hunan-changsha-hunan-changsha-section-11-section-11-group-1-60",
-      "number": 2,
-      "displayNumber": "2",
-      "sectionId": "section-11",
-      "groupId": "section-11-group-1",
-      "prompt": "语句通顺，意思连贯，语法正确，书写规范；",
-      "options": [],
-      "inputKind": "text",
-      "sourceBlockIds": [
-        "paragraph-189"
-      ],
-      "type": "text",
-      "context": "",
-      "answer": "",
-      "analysis": ""
-    },
-    {
-      "id": "2024-hunan-changsha-hunan-changsha-section-11-section-11-group-1-61",
-      "number": 3,
-      "displayNumber": "3",
-      "sectionId": "section-11",
-      "groupId": "section-11-group-1",
-      "prompt": "信中不得出现真实人名、校名或地名；",
-      "options": [],
-      "inputKind": "text",
-      "sourceBlockIds": [
-        "paragraph-190"
-      ],
-      "type": "text",
-      "context": "",
-      "answer": "",
-      "analysis": ""
-    },
-    {
-      "id": "2024-hunan-changsha-hunan-changsha-section-11-section-11-group-1-62",
-      "number": 4,
-      "displayNumber": "4",
-      "sectionId": "section-11",
-      "groupId": "section-11-group-1",
-      "prompt": "词数80词左右，开头和结尾已经给出，不计入总词数。 Dear Anna, I’m so glad to hear from you. ____________________________________________________________________________________________ ____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________ I hope my advice can help you. Yours, Li Hua",
-      "options": [],
-      "inputKind": "blank",
-      "sourceBlockIds": [
-        "paragraph-191"
-      ],
-      "type": "blank",
       "context": "",
       "answer": "",
       "analysis": ""

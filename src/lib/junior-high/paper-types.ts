@@ -9,6 +9,7 @@ export type JuniorHighQuestion = {
   prompt: string;
   context: string;
   options: string[];
+  sourceBlockIds?: string[];
   image?: string;
   answer: string;
   analysis: string;
@@ -28,6 +29,7 @@ export type JuniorHighSection = {
   title: string;
   instructions: string[];
   blocks: JuniorHighBlock[];
+  displayBlocks?: JuniorHighBlock[];
   questionIds: string[];
 };
 

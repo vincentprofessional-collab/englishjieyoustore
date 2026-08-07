@@ -962,7 +962,24 @@
           ]
         }
       ],
-      "questionIds": []
+      "questionIds": [],
+      "displayBlocks": [
+        {
+          "id": "image-1-1",
+          "kind": "image",
+          "src": "/junior-high/2024-hunan-hunan/image1.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "table-1",
+          "kind": "table",
+          "rows": [
+            [
+              "注意事项： 1、答题前，请考生先将自己的姓名、准考证号填写清楚，并认真核对条形码上的姓名、准考证号、考室和座位号； 2、必须在答题卡上答题，在草稿纸、试题卷上答题无效； 3、答题时，请考生注意各大题题号后面的答题提示； 4、请勿折叠答题卡，保持字体工整、笔迹清晰、卡面清洁; 5、答题卡上不得使用涂改液、涂改胶和贴纸； 6、本学科试卷中听力材料以中速朗读两遍。"
+            ]
+          ]
+        }
+      ]
     },
     {
       "id": "section-2",
@@ -1235,6 +1252,53 @@
         "2024-hunan-hunan-section-2-section-2-group-2-13",
         "2024-hunan-hunan-section-2-section-2-group-2-14",
         "2024-hunan-hunan-section-2-section-2-group-2-15"
+      ],
+      "displayBlocks": [
+        {
+          "id": "paragraph-5",
+          "kind": "paragraph",
+          "text": "第一节   听下面5段对话。每段对话后有一个小题，从题中所给的A、B、C三个选项中选出最佳图片。（共5小题，计5分）"
+        },
+        {
+          "id": "image-6-1",
+          "kind": "image",
+          "src": "/junior-high/2024-hunan-hunan/image2.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "image-6-2",
+          "kind": "image",
+          "src": "/junior-high/2024-hunan-hunan/image3.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "image-6-3",
+          "kind": "image",
+          "src": "/junior-high/2024-hunan-hunan/image4.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "image-6-4",
+          "kind": "image",
+          "src": "/junior-high/2024-hunan-hunan/image5.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "image-6-5",
+          "kind": "image",
+          "src": "/junior-high/2024-hunan-hunan/image6.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "paragraph-8",
+          "kind": "paragraph",
+          "text": "听下面6段对话或独白。每段对话或独白后有几个小题，从题中所给的A、B、C三个选项中选出最佳选项。听每段对话或独白前，你将有时间阅读各个小题，每小题5秒钟；听完后，各小题将给出5秒钟的作答时间。每段对话或独白读两遍。"
+        },
+        {
+          "id": "paragraph-9",
+          "kind": "paragraph",
+          "text": "听第六段材料，回答第6、7题。"
+        }
       ]
     },
     {
@@ -1570,6 +1634,54 @@
         "2024-hunan-hunan-section-3-section-3-group-1-24",
         "2024-hunan-hunan-section-3-section-3-group-1-25",
         "2024-hunan-hunan-section-3-section-3-group-1-26"
+      ],
+      "displayBlocks": [
+        {
+          "id": "paragraph-49",
+          "kind": "paragraph",
+          "text": "阅读下列材料，从每题所给的A、B、C三个选项中，选出最佳选项。"
+        },
+        {
+          "id": "paragraph-50",
+          "kind": "paragraph",
+          "text": "A"
+        },
+        {
+          "id": "table-2",
+          "kind": "table",
+          "rows": [
+            [
+              "Home  Education  Zoo ALIVE Teen Volunteers"
+            ],
+            [
+              "Love animals and kids? Want to help protect animals and the natural world? Have some time to give? Then enroll in(加入) the interesting program for teenagers in Saint Louis, Zoo ALIVE, and become a volunteer. Help the zoo workers plan weekend activities for children. Encourage the zoo visitors to take part in educational activities. Go on camping trips to explore(探索) nature and wildlife. Help with the zoo’s activities and plan your own project. Learn about the zoo, its animals, etc. Attend a monthly meeting. (Usually held from 5 pm to 7:30 pm on the first Sunday of each month) At the meeting, volunteers ● receive training and learn about events and happenings at the zoo; ● give speeches about environmental subjects; ● get to know other volunteers. Give us a call at 646-467X. We are happy to share more information with you!"
+            ]
+          ]
+        },
+        {
+          "id": "image-table-2-1",
+          "kind": "image",
+          "src": "/junior-high/2024-hunan-hunan/image7.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "image-table-2-2",
+          "kind": "image",
+          "src": "/junior-high/2024-hunan-hunan/image8.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "image-table-2-3",
+          "kind": "image",
+          "src": "/junior-high/2024-hunan-hunan/image9.png",
+          "alt": "原卷图片"
+        },
+        {
+          "id": "image-83-1",
+          "kind": "image",
+          "src": "/junior-high/2024-hunan-hunan/image10.png",
+          "alt": "原卷图片"
+        }
       ]
     },
     {
@@ -1759,7 +1871,18 @@
         "2024-hunan-hunan-section-4-section-4-group-1-33",
         "2024-hunan-hunan-section-4-section-4-group-1-34",
         "2024-hunan-hunan-section-4-section-4-group-1-35",
-        "2024-hunan-hunan-section-4-section-4-group-1-36"
+        "2024-hunan-hunan-section-4-section-4-group-1-36",
+        "2024-hunan-hunan-section-4-section-4-group-1-37",
+        "2024-hunan-hunan-section-4-section-4-group-1-38",
+        "2024-hunan-hunan-section-4-section-4-group-1-39"
+      ],
+      "displayBlocks": [
+        {
+          "id": "image-122-1",
+          "kind": "image",
+          "src": "/junior-high/2024-hunan-hunan/image11.png",
+          "alt": "原卷图片"
+        }
       ]
     },
     {
@@ -1800,7 +1923,19 @@
           "text": "第三节 （共5小题；每小题2分，满分10分）"
         }
       ],
-      "questionIds": []
+      "questionIds": [
+        "2024-hunan-hunan-section-5-section-5-group-1-40",
+        "2024-hunan-hunan-section-5-section-5-group-1-41",
+        "2024-hunan-hunan-section-5-section-5-group-1-42",
+        "2024-hunan-hunan-section-5-section-5-group-1-43",
+        "2024-hunan-hunan-section-5-section-5-group-1-44",
+        "2024-hunan-hunan-section-5-section-5-group-1-45",
+        "2024-hunan-hunan-section-5-section-5-group-1-46",
+        "2024-hunan-hunan-section-5-section-5-group-1-47",
+        "2024-hunan-hunan-section-5-section-5-group-1-48",
+        "2024-hunan-hunan-section-5-section-5-group-1-49"
+      ],
+      "displayBlocks": []
     },
     {
       "id": "section-6",
@@ -1839,7 +1974,24 @@
         }
       ],
       "questionIds": [
-        "2024-hunan-hunan-section-6-section-6-group-1-37"
+        "2024-hunan-hunan-section-6-section-6-group-1-50"
+      ],
+      "displayBlocks": [
+        {
+          "id": "paragraph-142",
+          "kind": "paragraph",
+          "text": "There is an old saying, “Take the time to stop and smell the flowers.” I think we should also take the time to plant flowers."
+        },
+        {
+          "id": "paragraph-143",
+          "kind": "paragraph",
+          "text": "My grandma knew just how to do that. She grew flowers with earth, water and love. 4. Her back garden was filled with beautiful flowers. She would smile when she saw the sunshine down on them."
+        },
+        {
+          "id": "paragraph-144",
+          "kind": "paragraph",
+          "text": "My mom and I used to walk around them and enjoy their smells. Beautiful butterflies flew among them. Grandma also cared for the wild flowers. She would ask me to water flowers in the fields behind her garden."
+        }
       ]
     },
     {
@@ -1869,10 +2021,11 @@
         }
       ],
       "questionIds": [
-        "2024-hunan-hunan-section-7-section-7-group-1-38",
-        "2024-hunan-hunan-section-7-section-7-group-1-39",
-        "2024-hunan-hunan-section-7-section-7-group-1-40"
-      ]
+        "2024-hunan-hunan-section-7-section-7-group-1-51",
+        "2024-hunan-hunan-section-7-section-7-group-1-52",
+        "2024-hunan-hunan-section-7-section-7-group-1-53"
+      ],
+      "displayBlocks": []
     },
     {
       "id": "section-8",
@@ -1896,8 +2049,10 @@
         }
       ],
       "questionIds": [
-        "2024-hunan-hunan-section-8-section-8-group-1-41"
-      ]
+        "2024-hunan-hunan-section-8-section-8-group-1-54",
+        "2024-hunan-hunan-section-8-section-8-group-1-55"
+      ],
+      "displayBlocks": []
     },
     {
       "id": "section-9",
@@ -1972,11 +2127,8 @@
           "text": "_________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________"
         }
       ],
-      "questionIds": [
-        "2024-hunan-hunan-section-9-section-9-group-1-42",
-        "2024-hunan-hunan-section-9-section-9-group-1-43",
-        "2024-hunan-hunan-section-9-section-9-group-1-44"
-      ]
+      "questionIds": [],
+      "displayBlocks": []
     }
   ],
   "questions": [
@@ -1998,7 +2150,7 @@
       ],
       "type": "choice",
       "context": "",
-      "answer": "B",
+      "answer": "C D B E A",
       "analysis": "【原文】1.M: How did you go to Qingdao last summer?\nW: By ship. It was really a wonderful trip."
     },
     {
@@ -2284,9 +2436,7 @@
       "options": [
         "A. One hour.",
         "B. Two hours.",
-        "C. Three hours. II．阅读（共三节，满分30分） 第一节 （共11小题；每小题2分，满分22分） 阅读下列材料，从每题所给的",
-        "A. ",
-        "B. C三个选项中，选出最佳选项。 A Home  Education  Zoo ALIVE Teen Volunteers Love animals and kids? Want to help protect animals and the natural world? Have some time to give? Then enroll in(加入) the interesting program for teenagers in Saint Louis, Zoo ALIVE, and become a volunteer. Help the zoo workers plan weekend activities for children. Encourage the zoo visitors to take part in educational activities. Go on camping trips to explore(探索) nature and wildlife. Help with the zoo’s activities and plan your own project. Learn about the zoo, its animals, etc. Attend a monthly meeting. (Usually held from 5 pm to 7:30 pm on the first Sunday of each month) At the meeting, volunteers ● receive training and learn about events and happenings at the zoo; ● give speeches about environmental subjects; ● get to know other volunteers. Give us a call at 646-467X. We are happy to share more information with you!"
+        "C. Three hours."
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -2517,13 +2667,7 @@
       "options": [
         "A. Problems and improvements of electric vehicles",
         "B. Importance of electric cars in our life.",
-        "C. Ways to produce more electric vehicles. 第二节 (共4小题；每小题2分，满分8分) 根据短文内容，将下面的选项填入空白处，使短文意思完整、连贯，并将其代表字母涂在答题卡的相应位置。（每个选项限用一次） What will our life be like in 50 years? Although we don’t know the answer, we believe that it will be very different from the life today.     32     Here is what life will be like there. First of all, transport should be much better. Now, our spaceships are too slow to carry lots of people to space-it takes months. However, in the future, it will take us two or three days to get to Mars by spaceship! Secondly, human beings need food, water, and air to live. Scientists will be able to develop plants that can be grown on Mars.    33     However, can these plants give water to us? There is no answer now. There is a problem for us. Mars pulls us much less than the Earth does. This will be dangerous because we can easily jump too high and fly slowly away into space.     34    . 35     Many people believe that robots will do most of our work, so we will have more time for our hobbies. However, life on Mars may not be better than that on Earth today. Food will look like pills and will not be as delicious as it is today. Also, space travel will make many people feel ill.",
-        "A. Life on Mars allows people to have more free timẹ.",
-        "B. In the future, I think we will live on Mars.",
-        "C. These plants will produce the food and air we need.",
-        "D. To stop this, humans on Mars have to wear special shoes to put on weight. III．语言运用（共三节，满分35分） 第一节 （共10小题；每小题1.5分，满分15分） 阅读下面短文，从短文后各题所给的",
-        "A. ",
-        "B. C三个选项中，选出可以填入空白处的最佳选项。 There was a girl whose family was very rich. One day her father took her on a trip to the country where he wanted to show his daughter what a    36    life people there had. So they arrived at a farm of such a family. They spent several days there. On their return, the father asked his daughter    37    she liked the trip. “Oh, yes. It was great, dad.” the girl answered. Feeling surprised, the father asked again, “Did you    38    how people live there?” “Yeah, I did.” said the girl. The father asked his daughter to    39    the differences between her life and those people’s life. “Well...we have only one dog, and they have four dogs. In our garden, there is a pool, while they have a    40    that has no end. We’ve got expensive lanterns, but they have stars above their heads at night.” With a bright smile, the daughter replied in    41   . She further added “We have only a small piece of land, while they have endless    42   . We buy food, but they    43    it. We have a high fence  for protecting our property (财产), and they don’t need it. Because their friends would    44    protect them. Thank you, Dad, for letting me see how poor we are.” What the girl said made the father feel    45   . He could not say a word but hung his head."
+        "C. Ways to produce more electric vehicles. 第二节 (共4小题；每小题2分，满分8分)"
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -2536,6 +2680,60 @@
     },
     {
       "id": "2024-hunan-hunan-section-4-section-4-group-1-27",
+      "number": 32,
+      "displayNumber": "32",
+      "sectionId": "section-4",
+      "groupId": "section-4-group-1",
+      "prompt": "What will our life be like in 50 years? Although we don’t know the answer, we believe that it will be very different from the life today. ______      Here is what life will be like there.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-104"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "B",
+      "analysis": "【导语】本文主要介绍了未来在火星上的生活情况。"
+    },
+    {
+      "id": "2024-hunan-hunan-section-4-section-4-group-1-28",
+      "number": 33,
+      "displayNumber": "33",
+      "sectionId": "section-4",
+      "groupId": "section-4-group-1",
+      "prompt": "Secondly, human beings need food, water, and air to live. Scientists will be able to develop plants that can be grown on Mars. ______      However, can these plants give water to us? There is no answer now.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-106"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "C",
+      "analysis": "【导语】本文主要介绍了未来在火星上的生活情况。"
+    },
+    {
+      "id": "2024-hunan-hunan-section-4-section-4-group-1-29",
+      "number": 34,
+      "displayNumber": "34",
+      "sectionId": "section-4",
+      "groupId": "section-4-group-1",
+      "prompt": "There is a problem for us. Mars pulls us much less than the Earth does. This will be dangerous because we can easily jump too high and fly slowly away into space. ______     .",
+      "options": [
+        "A. ",
+        "B. C三个选项中，选出可以填入空白处的最佳选项。"
+      ],
+      "inputKind": "choice",
+      "sourceBlockIds": [
+        "paragraph-107"
+      ],
+      "type": "choice",
+      "context": "",
+      "answer": "D",
+      "analysis": "【导语】本文主要介绍了未来在火星上的生活情况。"
+    },
+    {
+      "id": "2024-hunan-hunan-section-4-section-4-group-1-30",
       "number": 36,
       "displayNumber": "36",
       "sectionId": "section-4",
@@ -2556,7 +2754,7 @@
       "analysis": "36．C    37．C    38．A    39．B    40．C    41．C    42．A    43．C    44．B    45．B\n【导语】本文主要介绍了一个富裕家庭的女孩，通过一次乡村之旅，从一个贫穷家庭的生活中学到了真正的幸福和财富的含义。"
     },
     {
-      "id": "2024-hunan-hunan-section-4-section-4-group-1-28",
+      "id": "2024-hunan-hunan-section-4-section-4-group-1-31",
       "number": 37,
       "displayNumber": "37",
       "sectionId": "section-4",
@@ -2577,7 +2775,7 @@
       "analysis": "36．C    37．C    38．A    39．B    40．C    41．C    42．A    43．C    44．B    45．B\n【导语】本文主要介绍了一个富裕家庭的女孩，通过一次乡村之旅，从一个贫穷家庭的生活中学到了真正的幸福和财富的含义。"
     },
     {
-      "id": "2024-hunan-hunan-section-4-section-4-group-1-29",
+      "id": "2024-hunan-hunan-section-4-section-4-group-1-32",
       "number": 38,
       "displayNumber": "38",
       "sectionId": "section-4",
@@ -2598,7 +2796,7 @@
       "analysis": "36．C    37．C    38．A    39．B    40．C    41．C    42．A    43．C    44．B    45．B\n【导语】本文主要介绍了一个富裕家庭的女孩，通过一次乡村之旅，从一个贫穷家庭的生活中学到了真正的幸福和财富的含义。"
     },
     {
-      "id": "2024-hunan-hunan-section-4-section-4-group-1-30",
+      "id": "2024-hunan-hunan-section-4-section-4-group-1-33",
       "number": 39,
       "displayNumber": "39",
       "sectionId": "section-4",
@@ -2619,7 +2817,7 @@
       "analysis": "36．C    37．C    38．A    39．B    40．C    41．C    42．A    43．C    44．B    45．B\n【导语】本文主要介绍了一个富裕家庭的女孩，通过一次乡村之旅，从一个贫穷家庭的生活中学到了真正的幸福和财富的含义。"
     },
     {
-      "id": "2024-hunan-hunan-section-4-section-4-group-1-31",
+      "id": "2024-hunan-hunan-section-4-section-4-group-1-34",
       "number": 40,
       "displayNumber": "40",
       "sectionId": "section-4",
@@ -2640,7 +2838,7 @@
       "analysis": "36．C    37．C    38．A    39．B    40．C    41．C    42．A    43．C    44．B    45．B\n【导语】本文主要介绍了一个富裕家庭的女孩，通过一次乡村之旅，从一个贫穷家庭的生活中学到了真正的幸福和财富的含义。"
     },
     {
-      "id": "2024-hunan-hunan-section-4-section-4-group-1-32",
+      "id": "2024-hunan-hunan-section-4-section-4-group-1-35",
       "number": 41,
       "displayNumber": "41",
       "sectionId": "section-4",
@@ -2661,7 +2859,7 @@
       "analysis": "36．C    37．C    38．A    39．B    40．C    41．C    42．A    43．C    44．B    45．B\n【导语】本文主要介绍了一个富裕家庭的女孩，通过一次乡村之旅，从一个贫穷家庭的生活中学到了真正的幸福和财富的含义。"
     },
     {
-      "id": "2024-hunan-hunan-section-4-section-4-group-1-33",
+      "id": "2024-hunan-hunan-section-4-section-4-group-1-36",
       "number": 42,
       "displayNumber": "42",
       "sectionId": "section-4",
@@ -2682,7 +2880,7 @@
       "analysis": "36．C    37．C    38．A    39．B    40．C    41．C    42．A    43．C    44．B    45．B\n【导语】本文主要介绍了一个富裕家庭的女孩，通过一次乡村之旅，从一个贫穷家庭的生活中学到了真正的幸福和财富的含义。"
     },
     {
-      "id": "2024-hunan-hunan-section-4-section-4-group-1-34",
+      "id": "2024-hunan-hunan-section-4-section-4-group-1-37",
       "number": 43,
       "displayNumber": "43",
       "sectionId": "section-4",
@@ -2703,7 +2901,7 @@
       "analysis": "36．C    37．C    38．A    39．B    40．C    41．C    42．A    43．C    44．B    45．B\n【导语】本文主要介绍了一个富裕家庭的女孩，通过一次乡村之旅，从一个贫穷家庭的生活中学到了真正的幸福和财富的含义。"
     },
     {
-      "id": "2024-hunan-hunan-section-4-section-4-group-1-35",
+      "id": "2024-hunan-hunan-section-4-section-4-group-1-38",
       "number": 44,
       "displayNumber": "44",
       "sectionId": "section-4",
@@ -2724,7 +2922,7 @@
       "analysis": "36．C    37．C    38．A    39．B    40．C    41．C    42．A    43．C    44．B    45．B\n【导语】本文主要介绍了一个富裕家庭的女孩，通过一次乡村之旅，从一个贫穷家庭的生活中学到了真正的幸福和财富的含义。"
     },
     {
-      "id": "2024-hunan-hunan-section-4-section-4-group-1-36",
+      "id": "2024-hunan-hunan-section-4-section-4-group-1-39",
       "number": 45,
       "displayNumber": "45",
       "sectionId": "section-4",
@@ -2733,7 +2931,7 @@
       "options": [
         "A. comfortable",
         "B. shame",
-        "C. mad 第二节 （共10小题；每小题1分，满分10分） 阅读下面短文，在空白处填入1个适当的单词或括号内单词的正确形式。 Growing up, I was a try-hard in school. If I didn’t get straight A’s, I would be so hard on myself. I drove myself into a dark place that I was still recovering    46   . Last year was my freshman year of college. In my first semester, I drove myself into the ground and got a GPA of 3.8. In my second semester, things stopped    47    (go) my way. I was sick, mentally and emotionally. I got my first C ever. I thought geography had ruined my life, but    48    (actual), maybe that changed my life. It wasn’t until my sophomore year    49    I realized that I needed help. I always tried to hide my    50    (anxious) but it came to the point where I couldn’t pretend that I was OK anymore.    51    (admit) I needed help was the best thing that I ever did for myself. Now with all of this being said, I want to make    52    very clear that I still always give 100 percent. But things are different now. I know my limits and I understand    53    (I) more. I no longer have a(an)    54    (health) relationship with school and really I am learning more now than ever before. I am so excited to show the company that hires me everything I have to offer. I am    55    (confidence) that even though I am not a straight-A student, I have more to offer than my grades. 第三节 （共5小题；每小题2分，满分10分） 阅读下面的短文，回答问题或将划线部分译成英文或中文。 There is an old saying, “Take the time to stop and smell the flowers.” I think we should also take the time to plant flowers. My grandma knew just how to do that. She grew flowers with earth, water and love. 4. Her back garden was filled with beautiful flowers. She would smile when she saw the sunshine down on them. My mom and I used to walk around them and enjoy their smells. Beautiful butterflies flew among them. Grandma also cared for the wild flowers. She would ask me to water flowers in the fields behind her garden."
+        "C. mad 第二节 （共10小题；每小题1分，满分10分）"
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -2745,12 +2943,182 @@
       "analysis": "36．C    37．C    38．A    39．B    40．C    41．C    42．A    43．C    44．B    45．B\n【导语】本文主要介绍了一个富裕家庭的女孩，通过一次乡村之旅，从一个贫穷家庭的生活中学到了真正的幸福和财富的含义。"
     },
     {
-      "id": "2024-hunan-hunan-section-6-section-6-group-1-37",
+      "id": "2024-hunan-hunan-section-5-section-5-group-1-40",
+      "number": 46,
+      "displayNumber": "46",
+      "sectionId": "section-5",
+      "groupId": "section-5-group-1",
+      "prompt": "Growing up, I was a try-hard in school. If I didn’t get straight A’s, I would be so hard on myself. I drove myself into a dark place that I was still recovering  ______ .",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-136"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "from",
+      "analysis": "46．from    47．going    48．actually    49．that    50．anxiety    51．Admitting    52．it    53．myself    54．unhealthy    55．confident\n【导语】本文讲述了作者在成长过程中，努力成为一名优秀的学生但失败，最终找到自己的故事。"
+    },
+    {
+      "id": "2024-hunan-hunan-section-5-section-5-group-1-41",
+      "number": 47,
+      "displayNumber": "47",
+      "sectionId": "section-5",
+      "groupId": "section-5-group-1",
+      "prompt": "Last year was my freshman year of college. In my first semester, I drove myself into the ground and got a GPA of 3.8. In my second semester, things stopped  ______ (go) my way. I was sick, mentally and emotionally. I got my first C ever. I thought geography had ruined my life, but    48    (actual), maybe that changed my life.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-137"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "going",
+      "analysis": "46．from    47．going    48．actually    49．that    50．anxiety    51．Admitting    52．it    53．myself    54．unhealthy    55．confident\n【导语】本文讲述了作者在成长过程中，努力成为一名优秀的学生但失败，最终找到自己的故事。"
+    },
+    {
+      "id": "2024-hunan-hunan-section-5-section-5-group-1-42",
+      "number": 48,
+      "displayNumber": "48",
+      "sectionId": "section-5",
+      "groupId": "section-5-group-1",
+      "prompt": "Last year was my freshman year of college. In my first semester, I drove myself into the ground and got a GPA of 3.8. In my second semester, things stopped    47    (go) my way. I was sick, mentally and emotionally. I got my first C ever. I thought geography had ruined my life, but  ______ (actual), maybe that changed my life.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-137"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "actually",
+      "analysis": "46．from    47．going    48．actually    49．that    50．anxiety    51．Admitting    52．it    53．myself    54．unhealthy    55．confident\n【导语】本文讲述了作者在成长过程中，努力成为一名优秀的学生但失败，最终找到自己的故事。"
+    },
+    {
+      "id": "2024-hunan-hunan-section-5-section-5-group-1-43",
+      "number": 49,
+      "displayNumber": "49",
+      "sectionId": "section-5",
+      "groupId": "section-5-group-1",
+      "prompt": "It wasn’t until my sophomore year  ______ I realized that I needed help. I always tried to hide my    50    (anxious) but it came to the point where I couldn’t pretend that I was OK anymore.    51    (admit) I needed help was the best thing that I ever did for myself.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-138"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "that",
+      "analysis": "46．from    47．going    48．actually    49．that    50．anxiety    51．Admitting    52．it    53．myself    54．unhealthy    55．confident\n【导语】本文讲述了作者在成长过程中，努力成为一名优秀的学生但失败，最终找到自己的故事。"
+    },
+    {
+      "id": "2024-hunan-hunan-section-5-section-5-group-1-44",
+      "number": 50,
+      "displayNumber": "50",
+      "sectionId": "section-5",
+      "groupId": "section-5-group-1",
+      "prompt": "It wasn’t until my sophomore year    49    I realized that I needed help. I always tried to hide my  ______ (anxious) but it came to the point where I couldn’t pretend that I was OK anymore.    51    (admit) I needed help was the best thing that I ever did for myself.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-138"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "anxiety",
+      "analysis": "46．from    47．going    48．actually    49．that    50．anxiety    51．Admitting    52．it    53．myself    54．unhealthy    55．confident\n【导语】本文讲述了作者在成长过程中，努力成为一名优秀的学生但失败，最终找到自己的故事。"
+    },
+    {
+      "id": "2024-hunan-hunan-section-5-section-5-group-1-45",
+      "number": 51,
+      "displayNumber": "51",
+      "sectionId": "section-5",
+      "groupId": "section-5-group-1",
+      "prompt": "It wasn’t until my sophomore year    49    I realized that I needed help. I always tried to hide my    50    (anxious) but it came to the point where I couldn’t pretend that I was OK anymore. ______     (admit) I needed help was the best thing that I ever did for myself.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-138"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "Admitting",
+      "analysis": "46．from    47．going    48．actually    49．that    50．anxiety    51．Admitting    52．it    53．myself    54．unhealthy    55．confident\n【导语】本文讲述了作者在成长过程中，努力成为一名优秀的学生但失败，最终找到自己的故事。"
+    },
+    {
+      "id": "2024-hunan-hunan-section-5-section-5-group-1-46",
+      "number": 52,
+      "displayNumber": "52",
+      "sectionId": "section-5",
+      "groupId": "section-5-group-1",
+      "prompt": "Now with all of this being said, I want to make  ______ very clear that I still always give 100 percent. But things are different now. I know my limits and I understand    53    (I) more. I no longer have a(an)    54    (health) relationship with school and really I am learning more now than ever before. I am so excited to show the company that hires me everything I have to offer. I am    55    (confidence) that even though I am not a straight-A student, I have more to offer than my grades.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-139"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "it",
+      "analysis": "46．from    47．going    48．actually    49．that    50．anxiety    51．Admitting    52．it    53．myself    54．unhealthy    55．confident\n【导语】本文讲述了作者在成长过程中，努力成为一名优秀的学生但失败，最终找到自己的故事。"
+    },
+    {
+      "id": "2024-hunan-hunan-section-5-section-5-group-1-47",
+      "number": 53,
+      "displayNumber": "53",
+      "sectionId": "section-5",
+      "groupId": "section-5-group-1",
+      "prompt": "Now with all of this being said, I want to make    52    very clear that I still always give 100 percent. But things are different now. I know my limits and I understand  ______ (I) more. I no longer have a(an)    54    (health) relationship with school and really I am learning more now than ever before. I am so excited to show the company that hires me everything I have to offer. I am    55    (confidence) that even though I am not a straight-A student, I have more to offer than my grades.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-139"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "myself",
+      "analysis": "46．from    47．going    48．actually    49．that    50．anxiety    51．Admitting    52．it    53．myself    54．unhealthy    55．confident\n【导语】本文讲述了作者在成长过程中，努力成为一名优秀的学生但失败，最终找到自己的故事。"
+    },
+    {
+      "id": "2024-hunan-hunan-section-5-section-5-group-1-48",
+      "number": 54,
+      "displayNumber": "54",
+      "sectionId": "section-5",
+      "groupId": "section-5-group-1",
+      "prompt": "Now with all of this being said, I want to make    52    very clear that I still always give 100 percent. But things are different now. I know my limits and I understand    53    (I) more. I no longer have a(an) ______ (health) relationship with school and really I am learning more now than ever before. I am so excited to show the company that hires me everything I have to offer. I am    55    (confidence) that even though I am not a straight-A student, I have more to offer than my grades.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-139"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "unhealthy",
+      "analysis": "46．from    47．going    48．actually    49．that    50．anxiety    51．Admitting    52．it    53．myself    54．unhealthy    55．confident\n【导语】本文讲述了作者在成长过程中，努力成为一名优秀的学生但失败，最终找到自己的故事。"
+    },
+    {
+      "id": "2024-hunan-hunan-section-5-section-5-group-1-49",
+      "number": 55,
+      "displayNumber": "55",
+      "sectionId": "section-5",
+      "groupId": "section-5-group-1",
+      "prompt": "Now with all of this being said, I want to make    52    very clear that I still always give 100 percent. But things are different now. I know my limits and I understand    53    (I) more. I no longer have a(an)    54    (health) relationship with school and really I am learning more now than ever before. I am so excited to show the company that hires me everything I have to offer. I am  ______ (confidence) that even though I am not a straight-A student, I have more to offer than my grades.",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-139"
+      ],
+      "type": "blank",
+      "context": "",
+      "answer": "confident",
+      "analysis": "46．from    47．going    48．actually    49．that    50．anxiety    51．Admitting    52．it    53．myself    54．unhealthy    55．confident\n【导语】本文讲述了作者在成长过程中，努力成为一名优秀的学生但失败，最终找到自己的故事。"
+    },
+    {
+      "id": "2024-hunan-hunan-section-6-section-6-group-1-50",
       "number": 5,
       "displayNumber": "5",
       "sectionId": "section-6",
       "groupId": "section-6-group-1",
-      "prompt": "祖母不仅在花园里种花，而且在我们心里种花。Her delicious dinners made with love encouraged us. Her smiles and kisses were the sunshine that kept our love growing day after day. “Take the time to plant a few flowers yourself,” Grandma always told me. She wished me to plant my wishes, gifts and pleasure. And she believed I would make the world brighter. 根据短文内容，用简要答语回答下面三个问题。",
+      "prompt": "祖母不仅在花园里种花，而且在我们心里种花。Her delicious dinners made with love encouraged us. Her smiles and kisses were the sunshine that kept our love growing day after day. “Take the time to plant a few flowers yourself,” Grandma always told me. She wished me to plant my wishes, gifts and pleasure. And she believed I would make the world brighter.",
       "options": [],
       "inputKind": "text",
       "sourceBlockIds": [
@@ -2758,11 +3126,11 @@
       ],
       "type": "text",
       "context": "",
-      "answer": "C D B E A",
-      "analysis": "That Day, I Solved a Trouble\nSince I became a Grade 9 student, I have had a colourful school life. However, I still meet with some troubles. One day, it was my grandma’s eightieth birthday. It was really a meaningful day for my family. Since my parents were occupied with the decoration of the house, they asked me to order a cake. However, I was so careless that I left the matter behind my mind when my friends invited me to play basketball that day. I felt sorry for that, but I didn’t lose myself in self-blame. I made a handmade cake with cookies and colourful candies. Grandma was very happy when she saw the special cake.\nWhen terrible things happen, what we should do is not to find fault with others, but to use our intelligent brain to solve them. In our daily life, there are occasions when we are faced with something unpleasant. And self-blame, which is always the first choice of some people, is really of little use in solving the problems.\n【详解】[总体分析]\n① 题材：本文是一篇记叙文，为投稿作文；\n② 时态：时态叙述过去用“一般过去时”，得到的教训/学会的经验部分用“一般现在时”；\n③ 提示：写作要点已给出，考生应注意不要遗漏要点，并适当添加细节，突出写作重点。\n[写作步骤]\n第一步，介绍你遇到了什么麻烦；\n第二步，具体阐述写作内容。包括你是怎么解决这个麻烦的；\n第三步，描述你从这次经历中得到的教训/学会的经验。\n[亮点词汇]\n① be occupied with忙于\n② invite sb. to do sth.邀请某人做某事\n③ be faced with面对\n④ hate doing讨厌做某事\n⑤ mind washing介意做某事\n[高分句型]\n① Since my parents were occupied with the decoration of the house, they asked me to order a cake.（since引导的原因状语从句）\n② However, I was so careless that I left the matter behind my mind when my friends invited me to play basketball that day.（so...that引导的结果状语从句；when引导的时间状语从句）\n③ Grandma was very happy when she saw the special cake.（when引导的时间状语从句）\n④ When terrible things happen, what we should do is not to find fault with others, but to use our intelligent brain to solve them.（when引导的时间状语从句；what引导的主语从句）\n⑤ In our daily life, there are occasions when we are faced with something unpleasant.（when引导的定语从句）\n⑥ And self-blame, which is always the first choice of some people, is really of little use in solving the problems.（which引导的非限制性定语从句）"
+      "answer": "",
+      "analysis": ""
     },
     {
-      "id": "2024-hunan-hunan-section-7-section-7-group-1-38",
+      "id": "2024-hunan-hunan-section-7-section-7-group-1-51",
       "number": 56,
       "displayNumber": "56",
       "sectionId": "section-7",
@@ -2779,7 +3147,7 @@
       "analysis": "In the fields behind her garden."
     },
     {
-      "id": "2024-hunan-hunan-section-7-section-7-group-1-39",
+      "id": "2024-hunan-hunan-section-7-section-7-group-1-52",
       "number": 57,
       "displayNumber": "57",
       "sectionId": "section-7",
@@ -2793,15 +3161,15 @@
       "type": "text",
       "context": "",
       "answer": "例文",
-      "analysis": ""
+      "analysis": "That Day, I Solved a Trouble\nSince I became a Grade 9 student, I have had a colourful school life. However, I still meet with some troubles. One day, it was my grandma’s eightieth birthday. It was really a meaningful day for my family. Since my parents were occupied with the decoration of the house, they asked me to order a cake. However, I was so careless that I left the matter behind my mind when my friends invited me to play basketball that day. I felt sorry for that, but I didn’t lose myself in self-blame. I made a handmade cake with cookies and colourful candies. Grandma was very happy when she saw the special cake.\nWhen terrible things happen, what we should do is not to find fault with others, but to use our intelligent brain to solve them. In our daily life, there are occasions when we are faced with something unpleasant. And self-blame, which is always the first choice of some people, is really of little use in solving the problems.\n【详解】[总体分析]\n① 题材：本文是一篇记叙文，为投稿作文；\n② 时态：时态叙述过去用“一般过去时”，得到的教训/学会的经验部分用“一般现在时”；\n③ 提示：写作要点已给出，考生应注意不要遗漏要点，并适当添加细节，突出写作重点。\n[写作步骤]\n第一步，介绍你遇到了什么麻烦；\n第二步，具体阐述写作内容。包括你是怎么解决这个麻烦的；\n第三步，描述你从这次经历中得到的教训/学会的经验。\n[亮点词汇]\n① be occupied with忙于\n② invite sb. to do sth.邀请某人做某事\n③ be faced with面对\n④ hate doing讨厌做某事\n⑤ mind washing介意做某事\n[高分句型]\n① Since my parents were occupied with the decoration of the house, they asked me to order a cake.（since引导的原因状语从句）\n② However, I was so careless that I left the matter behind my mind when my friends invited me to play basketball that day.（so...that引导的结果状语从句；when引导的时间状语从句）\n③ Grandma was very happy when she saw the special cake.（when引导的时间状语从句）\n④ When terrible things happen, what we should do is not to find fault with others, but to use our intelligent brain to solve them.（when引导的时间状语从句；what引导的主语从句）\n⑤ In our daily life, there are occasions when we are faced with something unpleasant.（when引导的定语从句）\n⑥ And self-blame, which is always the first choice of some people, is really of little use in solving the problems.（which引导的非限制性定语从句）"
     },
     {
-      "id": "2024-hunan-hunan-section-7-section-7-group-1-40",
+      "id": "2024-hunan-hunan-section-7-section-7-group-1-53",
       "number": 58,
       "displayNumber": "58",
       "sectionId": "section-7",
       "groupId": "section-7-group-1",
-      "prompt": "What did the writer’s grandma wish him to do? 将短文中划线的两个句子翻译成中文或英文。",
+      "prompt": "What did the writer’s grandma wish him to do?",
       "options": [],
       "inputKind": "text",
       "sourceBlockIds": [
@@ -2813,7 +3181,7 @@
       "analysis": ""
     },
     {
-      "id": "2024-hunan-hunan-section-8-section-8-group-1-41",
+      "id": "2024-hunan-hunan-section-8-section-8-group-1-54",
       "number": 59,
       "displayNumber": "59",
       "sectionId": "section-8",
@@ -2830,52 +3198,18 @@
       "analysis": ""
     },
     {
-      "id": "2024-hunan-hunan-section-9-section-9-group-1-42",
-      "number": 1,
-      "displayNumber": "1",
-      "sectionId": "section-9",
-      "groupId": "section-9-group-1",
-      "prompt": "内容涵盖所有要点，可适当发挥。",
+      "id": "2024-hunan-hunan-section-8-section-8-group-1-55",
+      "number": 60,
+      "displayNumber": "60",
+      "sectionId": "section-8",
+      "groupId": "section-8-group-1",
+      "prompt": "第 60 题",
       "options": [],
       "inputKind": "text",
       "sourceBlockIds": [
-        "paragraph-161"
+        "paragraph-153"
       ],
       "type": "text",
-      "context": "",
-      "answer": "",
-      "analysis": ""
-    },
-    {
-      "id": "2024-hunan-hunan-section-9-section-9-group-1-43",
-      "number": 2,
-      "displayNumber": "2",
-      "sectionId": "section-9",
-      "groupId": "section-9-group-1",
-      "prompt": "词数100左右（已给出的开头不计入总词数）。",
-      "options": [],
-      "inputKind": "text",
-      "sourceBlockIds": [
-        "paragraph-162"
-      ],
-      "type": "text",
-      "context": "",
-      "answer": "",
-      "analysis": ""
-    },
-    {
-      "id": "2024-hunan-hunan-section-9-section-9-group-1-44",
-      "number": 3,
-      "displayNumber": "3",
-      "sectionId": "section-9",
-      "groupId": "section-9-group-1",
-      "prompt": "文中不得提及有关考生个人身份的任何信息，如校名、人名等。 That Day, I Solved a Trouble Since I became a Grade 9 student, I have had a colourful school life. However, I still meet with some troubles. One day, _________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________",
-      "options": [],
-      "inputKind": "blank",
-      "sourceBlockIds": [
-        "paragraph-163"
-      ],
-      "type": "blank",
       "context": "",
       "answer": "",
       "analysis": ""

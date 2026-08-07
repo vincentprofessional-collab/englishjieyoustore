@@ -94,6 +94,33 @@ function renderStructuredBlock(block: JuniorHighBlock, section: JuniorHighSectio
   return null;
 }
 
+function isCompatibleDisplayInstruction(text: string, sectionTitle: string) {
+  const value = text.trim();
+  if (!value || value === sectionTitle.trim()) return true;
+  if (/注意事项|答题卡|考试结束|监考教师|准考证|本试卷共|本卷共|满分|考试时间|答卷前|作答选择题|每题选出答案|请务必|请根据所听|从每小题所给|根据短文|阅读下列|从下面|选择可以|填写所缺|完成相应任务|作文要求|评分标准|参考答案|解析/.test(value)) return true;
+  if (/^(?:请|阅读下面|根据|从每|从下|选择|填写|完成|作答|注意事项|第I卷|第II卷)/.test(value) && value.length < 180) return true;
+  return false;
+}
+
+function getCompatibleDisplayBlocks(section: JuniorHighSection, questions: PaperQuestion[]) {
+  const sectionQuestions = questions.filter((question) => question.sectionId === section.id);
+  if (!sectionQuestions.length) return section.blocks.filter((block) => block.kind !== "paragraph");
+  const blockIndexes = new Map(section.blocks.map((block, index) => [block.id, index]));
+  const starts = [...new Set(sectionQuestions.flatMap((question) => (question.sourceBlockIds ?? []).map((sourceId) => blockIndexes.get(sourceId)).filter((index): index is number => index !== undefined)))].sort((a, b) => a - b);
+  const hiddenParagraphs = new Set<number>();
+  starts.forEach((start, index) => {
+    const end = starts[index + 1] ?? section.blocks.length;
+    for (let blockIndex = start; blockIndex < end; blockIndex += 1) {
+      if (section.blocks[blockIndex].kind === "paragraph") hiddenParagraphs.add(blockIndex);
+    }
+  });
+  return section.blocks.filter((block, index) => {
+    if (block.kind !== "paragraph") return true;
+    if (hiddenParagraphs.has(index)) return false;
+    return !isCompatibleDisplayInstruction(block.text ?? "", section.title);
+  });
+}
+
 function StructuredPaperContent({ paper, answers, submitted, onAnswer, writingA, writingB, onWritingA, onWritingB }: { paper: JuniorHighPaper; answers: Record<string, string>; submitted: boolean; onAnswer: (question: PaperQuestion, value: string) => void; writingA: string; writingB: string; onWritingA: (value: string) => void; onWritingB: (value: string) => void }) {
   const sections = paper.sections ?? [];
   const questionsById = new Map(paper.questions.map((question) => [question.id, question]));
@@ -104,7 +131,7 @@ function StructuredPaperContent({ paper, answers, submitted, onAnswer, writingA,
       const sectionQuestions = section.questionIds.map((id) => questionsById.get(id)).filter((question): question is PaperQuestion => Boolean(question));
       return <section className="junior-high-paper-section junior-high-structured-section" key={section.id}>
         <h2>{section.title}</h2>
-        <div className="junior-high-structured-blocks">{section.blocks.map((block) => <div className="junior-high-structured-block" key={block.id}>{renderStructuredBlock(block, section)}</div>)}</div>
+        <div className="junior-high-structured-blocks">{(section.displayBlocks ?? getCompatibleDisplayBlocks(section, paper.questions)).map((block) => <div className="junior-high-structured-block" key={block.id}>{renderStructuredBlock(block, section)}</div>)}</div>
         {sectionQuestions.length ? <div className="junior-high-question-stack">{sectionQuestions.map((question) => <PaperQuestionCard key={question.id} onAnswer={(value) => onAnswer(question, value)} question={question} sectionTitle={section.title} submitted={submitted} value={answers[question.id] || ""} />)}</div> : null}
       </section>;
     })}
