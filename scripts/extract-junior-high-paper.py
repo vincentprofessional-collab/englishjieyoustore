@@ -136,12 +136,13 @@ def _is_section_heading(text: str) -> bool:
     text = text.strip()
     if not text or QUESTION.match(text):
         return False
-    if text in {"A．B．C．", "A. B. C.", "A    B    C"}:
-        return False
     if SECTION_HEADING.match(text):
         return True
+    if text in {"A．B．C．", "A. B. C.", "A    B    C"} or len(OPTION_MARKER.findall(text)) >= 2:
+        return False
     if re.match(r"^[A-E][.．、)]\s*", text) and len(text) > 4:
-        return True
+        heading_text = re.sub(r"^[A-E][.．、)]\s*", "", text, count=1)
+        return any(keyword in heading_text for keyword in GROUP_KEYWORDS) or heading_text.lower().startswith(("listen", "reading", "writing", "part"))
     return any(keyword in text for keyword in GROUP_KEYWORDS) and len(text) < 100
 
 

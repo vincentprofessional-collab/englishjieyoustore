@@ -1322,7 +1322,9 @@
       "instructions": [
         "准考证号____________________姓名____________",
         "说明：1. 全卷满分120分，考试时间120分钟。",
-        "2. 请按试题序号在答题卡相应位置作答，答在试题卷或其它位置无效。"
+        "2. 请按试题序号在答题卡相应位置作答，答在试题卷或其它位置无效。",
+        "A) 请听下面5段对话。每段对话后有一小题，从题中所给的A、B、C三个选项中选出最佳选项，并在答题卡上将该项涂黑。听完每段对话后，你都将有10秒钟的时间回答有关小题和阅读下一小题。每段对话读两遍。",
+        "B) 请听下面4段对话。每段对话后有几个小题，从题中所给的A、B、C三个选项中选出最佳选项，并在答题卡上将该项涂黑。听每段对话前，你将有时间阅读各个小题，每小题5秒钟；听完后，各小题给出5秒钟的作答时间。每段对话读两遍。"
       ],
       "blocks": [
         {
@@ -1361,17 +1363,7 @@
           "id": "paragraph-5",
           "kind": "paragraph",
           "text": "2. 请按试题序号在答题卡相应位置作答，答在试题卷或其它位置无效。"
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-2",
-      "title": "A) 请听下面5段对话。每段对话后有一小题，从题中所给的A、B、C三个选项中选出最佳选项，并在答题卡上将该项涂黑。听完每段对话后，你都将有10秒钟的时间回答有关小题和阅读下一小题。每段对话读两遍。",
-      "instructions": [
-        "A) 请听下面5段对话。每段对话后有一小题，从题中所给的A、B、C三个选项中选出最佳选项，并在答题卡上将该项涂黑。听完每段对话后，你都将有10秒钟的时间回答有关小题和阅读下一小题。每段对话读两遍。"
-      ],
-      "blocks": [
+        },
         {
           "id": "paragraph-6",
           "kind": "paragraph",
@@ -1381,17 +1373,7 @@
           "id": "paragraph-7",
           "kind": "paragraph",
           "text": "1．Where does the conversation take place?"
-        }
-      ],
-      "questionIds": [
-        "2024-jiangxi-jiangxi-section-2-section-2-group-1-1"
-      ]
-    },
-    {
-      "id": "section-3",
-      "title": "A．On a train.B．In a post office.C．At a ticket office.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-8",
           "kind": "paragraph",
@@ -1401,17 +1383,7 @@
           "id": "paragraph-9",
           "kind": "paragraph",
           "text": "2．Which skirt will the girl buy?"
-        }
-      ],
-      "questionIds": [
-        "2024-jiangxi-jiangxi-section-3-section-3-group-1-2"
-      ]
-    },
-    {
-      "id": "section-4",
-      "title": "A．The blue one.B．The green one.C．The purple one.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-10",
           "kind": "paragraph",
@@ -1421,17 +1393,7 @@
           "id": "paragraph-11",
           "kind": "paragraph",
           "text": "3． How often does the man go to the restaurant?"
-        }
-      ],
-      "questionIds": [
-        "2024-jiangxi-jiangxi-section-4-section-4-group-1-3"
-      ]
-    },
-    {
-      "id": "section-5",
-      "title": "A．Twice a week.B．Three times a week.C．Four times a week.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-12",
           "kind": "paragraph",
@@ -1441,17 +1403,7 @@
           "id": "paragraph-13",
           "kind": "paragraph",
           "text": "4．What will Mary do this afternoon?"
-        }
-      ],
-      "questionIds": [
-        "2024-jiangxi-jiangxi-section-5-section-5-group-1-4"
-      ]
-    },
-    {
-      "id": "section-6",
-      "title": "A．Go on reading.B．Go to the movies.C．Return the book.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-14",
           "kind": "paragraph",
@@ -1461,32 +1413,12 @@
           "id": "paragraph-15",
           "kind": "paragraph",
           "text": "5．How will the woman get to London?"
-        }
-      ],
-      "questionIds": [
-        "2024-jiangxi-jiangxi-section-6-section-6-group-1-5"
-      ]
-    },
-    {
-      "id": "section-7",
-      "title": "A．By bus.B．By train.C．By plane.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-16",
           "kind": "paragraph",
           "text": "A．By bus.B．By train.C．By plane."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-8",
-      "title": "B) 请听下面4段对话。每段对话后有几个小题，从题中所给的A、B、C三个选项中选出最佳选项，并在答题卡上将该项涂黑。听每段对话前，你将有时间阅读各个小题，每小题5秒钟；听完后，各小题给出5秒钟的作答时间。每段对话读两遍。",
-      "instructions": [
-        "B) 请听下面4段对话。每段对话后有几个小题，从题中所给的A、B、C三个选项中选出最佳选项，并在答题卡上将该项涂黑。听每段对话前，你将有时间阅读各个小题，每小题5秒钟；听完后，各小题给出5秒钟的作答时间。每段对话读两遍。"
-      ],
-      "blocks": [
+        },
         {
           "id": "paragraph-17",
           "kind": "paragraph",
@@ -1501,17 +1433,7 @@
           "id": "paragraph-19",
           "kind": "paragraph",
           "text": "6．Which kind of room is the woman going to book?"
-        }
-      ],
-      "questionIds": [
-        "2024-jiangxi-jiangxi-section-8-section-8-group-1-6"
-      ]
-    },
-    {
-      "id": "section-9",
-      "title": "A．A single room.B．A double room.C．A family room.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-20",
           "kind": "paragraph",
@@ -1521,17 +1443,7 @@
           "id": "paragraph-21",
           "kind": "paragraph",
           "text": "7．How many nights will the woman stay in the hotel?"
-        }
-      ],
-      "questionIds": [
-        "2024-jiangxi-jiangxi-section-9-section-9-group-1-7"
-      ]
-    },
-    {
-      "id": "section-10",
-      "title": "A．Five.B．Ten.C．Fifteen.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-22",
           "kind": "paragraph",
@@ -1546,17 +1458,7 @@
           "id": "paragraph-24",
           "kind": "paragraph",
           "text": "8．What is Jason’s favorite subject at the new school?"
-        }
-      ],
-      "questionIds": [
-        "2024-jiangxi-jiangxi-section-10-section-10-group-1-8"
-      ]
-    },
-    {
-      "id": "section-11",
-      "title": "A．Chinese.B．Computer science.C．Geography.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-25",
           "kind": "paragraph",
@@ -1566,17 +1468,7 @@
           "id": "paragraph-26",
           "kind": "paragraph",
           "text": "9．How does Tony like math?"
-        }
-      ],
-      "questionIds": [
-        "2024-jiangxi-jiangxi-section-11-section-11-group-1-9"
-      ]
-    },
-    {
-      "id": "section-12",
-      "title": "A．Interesting.B．Difficult.C．Boring.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-27",
           "kind": "paragraph",
@@ -1591,17 +1483,7 @@
           "id": "paragraph-29",
           "kind": "paragraph",
           "text": "10．Where does the conversation take place?"
-        }
-      ],
-      "questionIds": [
-        "2024-jiangxi-jiangxi-section-12-section-12-group-1-10"
-      ]
-    },
-    {
-      "id": "section-13",
-      "title": "A．On a plane.B．In a post office.C．At a ticket office.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-30",
           "kind": "paragraph",
@@ -1611,17 +1493,7 @@
           "id": "paragraph-31",
           "kind": "paragraph",
           "text": "11．How long does the flight take?"
-        }
-      ],
-      "questionIds": [
-        "2024-jiangxi-jiangxi-section-13-section-13-group-1-11"
-      ]
-    },
-    {
-      "id": "section-14",
-      "title": "A．About 3 hours.B．About 4 hours.C．About 5 hours.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-32",
           "kind": "paragraph",
@@ -1631,43 +1503,17 @@
           "id": "paragraph-33",
           "kind": "paragraph",
           "text": "12．What can we learn from the dialogue?"
-        }
-      ],
-      "questionIds": [
-        "2024-jiangxi-jiangxi-section-14-section-14-group-1-12"
-      ]
-    },
-    {
-      "id": "section-15",
-      "title": "A．The man will travel with his family.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-34",
           "kind": "paragraph",
           "text": "A．The man will travel with his family."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-16",
-      "title": "B．The man will take the ticket for business class.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-35",
           "kind": "paragraph",
           "text": "B．The man will take the ticket for business class."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-17",
-      "title": "C．The man’s telephone number is 8250-2248.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-36",
           "kind": "paragraph",
@@ -1682,17 +1528,7 @@
           "id": "paragraph-38",
           "kind": "paragraph",
           "text": "13．What kind of music does the woman like?"
-        }
-      ],
-      "questionIds": [
-        "2024-jiangxi-jiangxi-section-17-section-17-group-1-13"
-      ]
-    },
-    {
-      "id": "section-18",
-      "title": "A．Rap.B．Classical music.C．Pop music.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-39",
           "kind": "paragraph",
@@ -1702,17 +1538,7 @@
           "id": "paragraph-40",
           "kind": "paragraph",
           "text": "14．What does Beethoven do?"
-        }
-      ],
-      "questionIds": [
-        "2024-jiangxi-jiangxi-section-18-section-18-group-1-14"
-      ]
-    },
-    {
-      "id": "section-19",
-      "title": "A．A singer.B．A producer.C．A composer.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-41",
           "kind": "paragraph",
@@ -1722,53 +1548,43 @@
           "id": "paragraph-42",
           "kind": "paragraph",
           "text": "15．Why does the man like pop music?"
-        }
-      ],
-      "questionIds": [
-        "2024-jiangxi-jiangxi-section-19-section-19-group-1-15"
-      ]
-    },
-    {
-      "id": "section-20",
-      "title": "A．Because he needs to focus after listening to it.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-43",
           "kind": "paragraph",
           "text": "A．Because he needs to focus after listening to it."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-21",
-      "title": "B．Because it is a little noisy to him but energetic.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-44",
           "kind": "paragraph",
           "text": "B．Because it is a little noisy to him but energetic."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-22",
-      "title": "C．Because it makes him want to sing and dance.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-45",
           "kind": "paragraph",
           "text": "C．Because it makes him want to sing and dance."
         }
       ],
-      "questionIds": []
+      "questionIds": [
+        "2024-jiangxi-jiangxi-section-1-section-1-group-1-1",
+        "2024-jiangxi-jiangxi-section-1-section-1-group-1-2",
+        "2024-jiangxi-jiangxi-section-1-section-1-group-1-3",
+        "2024-jiangxi-jiangxi-section-1-section-1-group-1-4",
+        "2024-jiangxi-jiangxi-section-1-section-1-group-1-5",
+        "2024-jiangxi-jiangxi-section-1-section-1-group-2-6",
+        "2024-jiangxi-jiangxi-section-1-section-1-group-2-7",
+        "2024-jiangxi-jiangxi-section-1-section-1-group-2-8",
+        "2024-jiangxi-jiangxi-section-1-section-1-group-2-9",
+        "2024-jiangxi-jiangxi-section-1-section-1-group-2-10",
+        "2024-jiangxi-jiangxi-section-1-section-1-group-2-11",
+        "2024-jiangxi-jiangxi-section-1-section-1-group-2-12",
+        "2024-jiangxi-jiangxi-section-1-section-1-group-2-13",
+        "2024-jiangxi-jiangxi-section-1-section-1-group-2-14",
+        "2024-jiangxi-jiangxi-section-1-section-1-group-2-15"
+      ]
     },
     {
-      "id": "section-23",
+      "id": "section-2",
       "title": "C) 请听下面一段独白，根据独白内容完成下列句子，每个空格不超过3个单词。将答案填写到答题卡的相应位置。听独白前你将有50秒钟的时间阅读句子内容。独白读两遍。",
       "instructions": [
         "C) 请听下面一段独白，根据独白内容完成下列句子，每个空格不超过3个单词。将答案填写到答题卡的相应位置。听独白前你将有50秒钟的时间阅读句子内容。独白读两遍。"
@@ -1783,17 +1599,7 @@
           "id": "paragraph-47",
           "kind": "paragraph",
           "text": "16．What did the writer do in the band?"
-        }
-      ],
-      "questionIds": [
-        "2024-jiangxi-jiangxi-section-23-section-23-group-1-16"
-      ]
-    },
-    {
-      "id": "section-24",
-      "title": "A．He played the piano.B．He sang the songs.C．He played the guitar.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-48",
           "kind": "paragraph",
@@ -1803,43 +1609,17 @@
           "id": "paragraph-49",
           "kind": "paragraph",
           "text": "17．What problem did the writer have?"
-        }
-      ],
-      "questionIds": [
-        "2024-jiangxi-jiangxi-section-24-section-24-group-1-17"
-      ]
-    },
-    {
-      "id": "section-25",
-      "title": "A．He couldn’t meet new friends.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-50",
           "kind": "paragraph",
           "text": "A．He couldn’t meet new friends."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-26",
-      "title": "B．He couldn’t have time to relax.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-51",
           "kind": "paragraph",
           "text": "B．He couldn’t have time to relax."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-27",
-      "title": "C．He couldn’t catch up with others.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-52",
           "kind": "paragraph",
@@ -1849,17 +1629,7 @@
           "id": "paragraph-53",
           "kind": "paragraph",
           "text": "18．Who had a talk with the writer?"
-        }
-      ],
-      "questionIds": [
-        "2024-jiangxi-jiangxi-section-27-section-27-group-1-18"
-      ]
-    },
-    {
-      "id": "section-28",
-      "title": "A．His friend.B．His teacher.C．His parents.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-54",
           "kind": "paragraph",
@@ -1869,43 +1639,17 @@
           "id": "paragraph-55",
           "kind": "paragraph",
           "text": "19．How did the writer’s teammates help him?"
-        }
-      ],
-      "questionIds": [
-        "2024-jiangxi-jiangxi-section-28-section-28-group-1-19"
-      ]
-    },
-    {
-      "id": "section-29",
-      "title": "A．By asking the teacher for help.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-56",
           "kind": "paragraph",
           "text": "A．By asking the teacher for help."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-30",
-      "title": "B．By telling him to relax himself.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-57",
           "kind": "paragraph",
           "text": "B．By telling him to relax himself."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-31",
-      "title": "C．By spending time practicing with him.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-58",
           "kind": "paragraph",
@@ -1915,71 +1659,43 @@
           "id": "paragraph-59",
           "kind": "paragraph",
           "text": "20．What can we learn from the experience?"
-        }
-      ],
-      "questionIds": [
-        "2024-jiangxi-jiangxi-section-31-section-31-group-1-20"
-      ]
-    },
-    {
-      "id": "section-32",
-      "title": "A．Once a teacher, always a father.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-60",
           "kind": "paragraph",
           "text": "A．Once a teacher, always a father."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-33",
-      "title": "B．Failure is the mother of success.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-61",
           "kind": "paragraph",
           "text": "B．Failure is the mother of success."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-34",
-      "title": "C．One tree does not make a forest.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-62",
           "kind": "paragraph",
           "text": "C．One tree does not make a forest."
         }
       ],
-      "questionIds": []
+      "questionIds": [
+        "2024-jiangxi-jiangxi-section-2-section-2-group-1-16",
+        "2024-jiangxi-jiangxi-section-2-section-2-group-1-17",
+        "2024-jiangxi-jiangxi-section-2-section-2-group-1-18",
+        "2024-jiangxi-jiangxi-section-2-section-2-group-1-19",
+        "2024-jiangxi-jiangxi-section-2-section-2-group-1-20"
+      ]
     },
     {
-      "id": "section-35",
+      "id": "section-3",
       "title": "二、单项填空（本大题共8小题，每小题1分，共8分）",
-      "instructions": [],
+      "instructions": [
+        "请阅读下面各小题，从题中所给的A、B、C、D四个选项中选出可以填入空白处的最佳选项，并在答题卡上将该项涂黑。"
+      ],
       "blocks": [
         {
           "id": "paragraph-63",
           "kind": "paragraph",
           "text": "二、单项填空（本大题共8小题，每小题1分，共8分）"
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-36",
-      "title": "请阅读下面各小题，从题中所给的A、B、C、D四个选项中选出可以填入空白处的最佳选项，并在答题卡上将该项涂黑。",
-      "instructions": [
-        "请阅读下面各小题，从题中所给的A、B、C、D四个选项中选出可以填入空白处的最佳选项，并在答题卡上将该项涂黑。"
-      ],
-      "blocks": [
+        },
         {
           "id": "paragraph-64",
           "kind": "paragraph",
@@ -1994,17 +1710,7 @@
           "id": "paragraph-66",
           "kind": "paragraph",
           "text": "— It is to the _________. The flight to Beijing is checking tickets now."
-        }
-      ],
-      "questionIds": [
-        "2024-jiangxi-jiangxi-section-36-section-36-group-1-21"
-      ]
-    },
-    {
-      "id": "section-37",
-      "title": "A．customersB．touristsC．membersD．passengers",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-67",
           "kind": "paragraph",
@@ -2019,17 +1725,7 @@
           "id": "paragraph-69",
           "kind": "paragraph",
           "text": "—It ________ be Frank. He phoned to tell me he would come to our home soon."
-        }
-      ],
-      "questionIds": [
-        "2024-jiangxi-jiangxi-section-37-section-37-group-1-22"
-      ]
-    },
-    {
-      "id": "section-38",
-      "title": "A．must; mustB．could; mustC．might; can’tD．might; mustn’t",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-70",
           "kind": "paragraph",
@@ -2039,17 +1735,7 @@
           "id": "paragraph-71",
           "kind": "paragraph",
           "text": "23．It is said that people who like laughing are ________ because smiles bring more chances."
-        }
-      ],
-      "questionIds": [
-        "2024-jiangxi-jiangxi-section-38-section-38-group-1-23"
-      ]
-    },
-    {
-      "id": "section-39",
-      "title": "A．luckierB．the luckiestC．funnierD．the funniest",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-72",
           "kind": "paragraph",
@@ -2064,17 +1750,7 @@
           "id": "paragraph-74",
           "kind": "paragraph",
           "text": "— Don’t worry. Frank told me that he had worked out the problem."
-        }
-      ],
-      "questionIds": [
-        "2024-jiangxi-jiangxi-section-39-section-39-group-1-24"
-      ]
-    },
-    {
-      "id": "section-40",
-      "title": "A．quicklyB．widelyC．suddenlyD．badly",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-75",
           "kind": "paragraph",
@@ -2089,17 +1765,7 @@
           "id": "paragraph-77",
           "kind": "paragraph",
           "text": "—________. I cleaned it all by myself."
-        }
-      ],
-      "questionIds": [
-        "2024-jiangxi-jiangxi-section-40-section-40-group-1-25"
-      ]
-    },
-    {
-      "id": "section-41",
-      "title": "A．NobodyB．EverybodyC．SomebodyD．Anybody",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-78",
           "kind": "paragraph",
@@ -2114,17 +1780,7 @@
           "id": "paragraph-80",
           "kind": "paragraph",
           "text": "—Of course, you can, Helen."
-        }
-      ],
-      "questionIds": [
-        "2024-jiangxi-jiangxi-section-41-section-41-group-1-26"
-      ]
-    },
-    {
-      "id": "section-42",
-      "title": "A．insideB．exceptC．besidesD．without",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-81",
           "kind": "paragraph",
@@ -2134,17 +1790,7 @@
           "id": "paragraph-82",
           "kind": "paragraph",
           "text": "27．I ________ a few pages of the book. I will finish the rest as quickly as possible."
-        }
-      ],
-      "questionIds": [
-        "2024-jiangxi-jiangxi-section-42-section-42-group-1-27"
-      ]
-    },
-    {
-      "id": "section-43",
-      "title": "A．readB．will readC．was readingD．have read",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-83",
           "kind": "paragraph",
@@ -2154,45 +1800,36 @@
           "id": "paragraph-84",
           "kind": "paragraph",
           "text": "28．My daughter is studying in Nanchang. ________ I’m not with her, I have a video chat with her every day."
-        }
-      ],
-      "questionIds": [
-        "2024-jiangxi-jiangxi-section-43-section-43-group-1-28"
-      ]
-    },
-    {
-      "id": "section-44",
-      "title": "A．UntilB．Even thoughC．Ever sinceD．Unless",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-85",
           "kind": "paragraph",
           "text": "A．UntilB．Even thoughC．Ever sinceD．Unless"
         }
       ],
-      "questionIds": []
+      "questionIds": [
+        "2024-jiangxi-jiangxi-section-3-section-3-group-1-21",
+        "2024-jiangxi-jiangxi-section-3-section-3-group-1-22",
+        "2024-jiangxi-jiangxi-section-3-section-3-group-1-23",
+        "2024-jiangxi-jiangxi-section-3-section-3-group-1-24",
+        "2024-jiangxi-jiangxi-section-3-section-3-group-1-25",
+        "2024-jiangxi-jiangxi-section-3-section-3-group-1-26",
+        "2024-jiangxi-jiangxi-section-3-section-3-group-1-27",
+        "2024-jiangxi-jiangxi-section-3-section-3-group-1-28"
+      ]
     },
     {
-      "id": "section-45",
+      "id": "section-4",
       "title": "三、完形填空（本大题共26小题，每小题1分，共26分）",
-      "instructions": [],
+      "instructions": [
+        "A) 请先阅读下面短文，掌握其大意，然后从各小题所给的A、B、C、D四个选项中选出可以填入相应空白处的最佳选项，并在答题卡上将该项涂黑。"
+      ],
       "blocks": [
         {
           "id": "paragraph-86",
           "kind": "paragraph",
           "text": "三、完形填空（本大题共26小题，每小题1分，共26分）"
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-46",
-      "title": "A) 请先阅读下面短文，掌握其大意，然后从各小题所给的A、B、C、D四个选项中选出可以填入相应空白处的最佳选项，并在答题卡上将该项涂黑。",
-      "instructions": [
-        "A) 请先阅读下面短文，掌握其大意，然后从各小题所给的A、B、C、D四个选项中选出可以填入相应空白处的最佳选项，并在答题卡上将该项涂黑。"
-      ],
-      "blocks": [
+        },
         {
           "id": "paragraph-87",
           "kind": "paragraph",
@@ -2315,25 +1952,25 @@
         }
       ],
       "questionIds": [
-        "2024-jiangxi-jiangxi-section-46-section-46-group-1-29",
-        "2024-jiangxi-jiangxi-section-46-section-46-group-1-30",
-        "2024-jiangxi-jiangxi-section-46-section-46-group-1-31",
-        "2024-jiangxi-jiangxi-section-46-section-46-group-1-32",
-        "2024-jiangxi-jiangxi-section-46-section-46-group-1-33",
-        "2024-jiangxi-jiangxi-section-46-section-46-group-1-34",
-        "2024-jiangxi-jiangxi-section-46-section-46-group-1-35",
-        "2024-jiangxi-jiangxi-section-46-section-46-group-1-36",
-        "2024-jiangxi-jiangxi-section-46-section-46-group-1-37",
-        "2024-jiangxi-jiangxi-section-46-section-46-group-1-38",
-        "2024-jiangxi-jiangxi-section-46-section-46-group-1-39",
-        "2024-jiangxi-jiangxi-section-46-section-46-group-1-40",
-        "2024-jiangxi-jiangxi-section-46-section-46-group-1-41",
-        "2024-jiangxi-jiangxi-section-46-section-46-group-1-42",
-        "2024-jiangxi-jiangxi-section-46-section-46-group-1-43"
+        "2024-jiangxi-jiangxi-section-4-section-4-group-2-29",
+        "2024-jiangxi-jiangxi-section-4-section-4-group-2-30",
+        "2024-jiangxi-jiangxi-section-4-section-4-group-2-31",
+        "2024-jiangxi-jiangxi-section-4-section-4-group-2-32",
+        "2024-jiangxi-jiangxi-section-4-section-4-group-2-33",
+        "2024-jiangxi-jiangxi-section-4-section-4-group-2-34",
+        "2024-jiangxi-jiangxi-section-4-section-4-group-2-35",
+        "2024-jiangxi-jiangxi-section-4-section-4-group-2-36",
+        "2024-jiangxi-jiangxi-section-4-section-4-group-2-37",
+        "2024-jiangxi-jiangxi-section-4-section-4-group-2-38",
+        "2024-jiangxi-jiangxi-section-4-section-4-group-2-39",
+        "2024-jiangxi-jiangxi-section-4-section-4-group-2-40",
+        "2024-jiangxi-jiangxi-section-4-section-4-group-2-41",
+        "2024-jiangxi-jiangxi-section-4-section-4-group-2-42",
+        "2024-jiangxi-jiangxi-section-4-section-4-group-2-43"
       ]
     },
     {
-      "id": "section-47",
+      "id": "section-5",
       "title": "B) 请先阅读下面短文，掌握其大意，然后用方框中所给词的适当形式填空，并将答案填写到答题卡的相应位置。每个词限用一次。",
       "instructions": [
         "B) 请先阅读下面短文，掌握其大意，然后用方框中所给词的适当形式填空，并将答案填写到答题卡的相应位置。每个词限用一次。"
@@ -2377,25 +2014,17 @@
       "questionIds": []
     },
     {
-      "id": "section-48",
+      "id": "section-6",
       "title": "四、阅读理解（本大题共23小题，每小题2分，共46分）",
-      "instructions": [],
+      "instructions": [
+        "A) 请阅读下面短文，根据短文内容从每小题所给的A、B、C、D四个选项中选出最佳选项，并在答题卡上将该项涂黑。"
+      ],
       "blocks": [
         {
           "id": "paragraph-116",
           "kind": "paragraph",
           "text": "四、阅读理解（本大题共23小题，每小题2分，共46分）"
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-49",
-      "title": "A) 请阅读下面短文，根据短文内容从每小题所给的A、B、C、D四个选项中选出最佳选项，并在答题卡上将该项涂黑。",
-      "instructions": [
-        "A) 请阅读下面短文，根据短文内容从每小题所给的A、B、C、D四个选项中选出最佳选项，并在答题卡上将该项涂黑。"
-      ],
-      "blocks": [
+        },
         {
           "id": "paragraph-117",
           "kind": "paragraph",
@@ -2428,17 +2057,7 @@
           "id": "paragraph-119",
           "kind": "paragraph",
           "text": "55．Which number can you call if you want to find a place to taste some green farm food?"
-        }
-      ],
-      "questionIds": [
-        "2024-jiangxi-jiangxi-section-49-section-49-group-1-44"
-      ]
-    },
-    {
-      "id": "section-50",
-      "title": "A．234-3456.B．234-6688.C．234-9999.D．234-6789.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-120",
           "kind": "paragraph",
@@ -2448,30 +2067,12 @@
           "id": "paragraph-121",
           "kind": "paragraph",
           "text": "56．Where is Happy Pet House?"
-        }
-      ],
-      "questionIds": [
-        "2024-jiangxi-jiangxi-section-50-section-50-group-1-45"
-      ]
-    },
-    {
-      "id": "section-51",
-      "title": "A．At No.128 Huafeng Road.B．At No.256 Dengcheng Road.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-122",
           "kind": "paragraph",
           "text": "A．At No.128 Huafeng Road.B．At No.256 Dengcheng Road."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-52",
-      "title": "C．At No.468 North Street.D．At No.899 East Street.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-123",
           "kind": "paragraph",
@@ -2481,56 +2082,22 @@
           "id": "paragraph-124",
           "kind": "paragraph",
           "text": "57．Which of the following is TRUE?"
-        }
-      ],
-      "questionIds": [
-        "2024-jiangxi-jiangxi-section-52-section-52-group-1-46"
-      ]
-    },
-    {
-      "id": "section-53",
-      "title": "A．Old Friend Restaurant only offers guests rooms of the same size.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-125",
           "kind": "paragraph",
           "text": "A．Old Friend Restaurant only offers guests rooms of the same size."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-54",
-      "title": "B．The fresh flowers in Fresh Flower Market are sold for only an hour a day.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-126",
           "kind": "paragraph",
           "text": "B．The fresh flowers in Fresh Flower Market are sold for only an hour a day."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-55",
-      "title": "C．Your pet can be take care of in Happy Pet House while you’re away on business.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-127",
           "kind": "paragraph",
           "text": "C．Your pet can be take care of in Happy Pet House while you’re away on business."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-56",
-      "title": "D．You need to pay $ 36000 if you want to rent the house for a whole year.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-128",
           "kind": "paragraph",
@@ -2580,17 +2147,7 @@
           "id": "paragraph-137",
           "kind": "paragraph",
           "text": "58．What did the writer see in the long box when he opened it?"
-        }
-      ],
-      "questionIds": [
-        "2024-jiangxi-jiangxi-section-56-section-56-group-1-47"
-      ]
-    },
-    {
-      "id": "section-57",
-      "title": "A．Pogo stick.B．An old broom.C．A tiger toy.D．A saving pot.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-138",
           "kind": "paragraph",
@@ -2600,17 +2157,7 @@
           "id": "paragraph-139",
           "kind": "paragraph",
           "text": "59．How did the writer feel at the time he received the beautiful pogo stick?"
-        }
-      ],
-      "questionIds": [
-        "2024-jiangxi-jiangxi-section-57-section-57-group-1-48"
-      ]
-    },
-    {
-      "id": "section-58",
-      "title": "A．Excited.B．Upset.C．Unbelievable.D．Scared.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-140",
           "kind": "paragraph",
@@ -2620,30 +2167,12 @@
           "id": "paragraph-141",
           "kind": "paragraph",
           "text": "60．What does the underlined word “They” refer to according to the passage?"
-        }
-      ],
-      "questionIds": [
-        "2024-jiangxi-jiangxi-section-58-section-58-group-1-49"
-      ]
-    },
-    {
-      "id": "section-59",
-      "title": "A．The writer’s parents.B．The pogo sticks.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-142",
           "kind": "paragraph",
           "text": "A．The writer’s parents.B．The pogo sticks."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-60",
-      "title": "C．Some nice gifts.D．The wonderful memories.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-143",
           "kind": "paragraph",
@@ -2653,56 +2182,22 @@
           "id": "paragraph-144",
           "kind": "paragraph",
           "text": "61．What can we infer from the passage?"
-        }
-      ],
-      "questionIds": [
-        "2024-jiangxi-jiangxi-section-60-section-60-group-1-50"
-      ]
-    },
-    {
-      "id": "section-61",
-      "title": "A．The writer can always get what he wants from his parents.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-145",
           "kind": "paragraph",
           "text": "A．The writer can always get what he wants from his parents."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-62",
-      "title": "B．His parents gave the writer enough love although he was born in poor.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-146",
           "kind": "paragraph",
           "text": "B．His parents gave the writer enough love although he was born in poor."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-63",
-      "title": "C．The writer is about 60 years old now.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-147",
           "kind": "paragraph",
           "text": "C．The writer is about 60 years old now."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-64",
-      "title": "D．The writer felt disappointed with his parents.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-148",
           "kind": "paragraph",
@@ -2712,56 +2207,22 @@
           "id": "paragraph-149",
           "kind": "paragraph",
           "text": "62．What does the writer want to tell us from the passage?"
-        }
-      ],
-      "questionIds": [
-        "2024-jiangxi-jiangxi-section-64-section-64-group-1-51"
-      ]
-    },
-    {
-      "id": "section-65",
-      "title": "A．Parents should satisfy all their children’s needs.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-150",
           "kind": "paragraph",
           "text": "A．Parents should satisfy all their children’s needs."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-66",
-      "title": "B．Kids shouldn’t ask parents for any gifts.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-151",
           "kind": "paragraph",
           "text": "B．Kids shouldn’t ask parents for any gifts."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-67",
-      "title": "C．It’s good to play some tricks on each other sometimes.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-152",
           "kind": "paragraph",
           "text": "C．It’s good to play some tricks on each other sometimes."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-68",
-      "title": "D．The most expensive gift may not cost much money but full of love.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-153",
           "kind": "paragraph",
@@ -2801,30 +2262,12 @@
           "id": "paragraph-160",
           "kind": "paragraph",
           "text": "63．What was Alia Juma’s newest collection made from?"
-        }
-      ],
-      "questionIds": [
-        "2024-jiangxi-jiangxi-section-68-section-68-group-1-52"
-      ]
-    },
-    {
-      "id": "section-69",
-      "title": "A．Recycled plastic.B．Recycled glasses.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-161",
           "kind": "paragraph",
           "text": "A．Recycled plastic.B．Recycled glasses."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-70",
-      "title": "C．Recycled paper.                    D．Recycled clothes.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-162",
           "kind": "paragraph",
@@ -2854,30 +2297,12 @@
           "id": "paragraph-167",
           "kind": "paragraph",
           "text": "④Melt and shape the pieces into small balls."
-        }
-      ],
-      "questionIds": [
-        "2024-jiangxi-jiangxi-section-70-section-70-group-1-53"
-      ]
-    },
-    {
-      "id": "section-71",
-      "title": "A.①→②→③→④B．②→①→④→③",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-168",
           "kind": "paragraph",
           "text": "A.①→②→③→④B．②→①→④→③"
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-72",
-      "title": "C．③→②→①→④D．④→②→①→③",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-169",
           "kind": "paragraph",
@@ -2887,17 +2312,7 @@
           "id": "paragraph-170",
           "kind": "paragraph",
           "text": "65．What does the underlined word “originate” mean?"
-        }
-      ],
-      "questionIds": [
-        "2024-jiangxi-jiangxi-section-72-section-72-group-1-54"
-      ]
-    },
-    {
-      "id": "section-73",
-      "title": "A．Waste.B．Create.C．Find.D．Save.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-171",
           "kind": "paragraph",
@@ -2907,56 +2322,22 @@
           "id": "paragraph-172",
           "kind": "paragraph",
           "text": "66．What can we infer(推断) from the last paragraph?"
-        }
-      ],
-      "questionIds": [
-        "2024-jiangxi-jiangxi-section-73-section-73-group-1-55"
-      ]
-    },
-    {
-      "id": "section-74",
-      "title": "A．Plastic clothes will take the place of the clothes made from other materials.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-173",
           "kind": "paragraph",
           "text": "A．Plastic clothes will take the place of the clothes made from other materials."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-75",
-      "title": "B．Plastics can only be used to make clothes.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-174",
           "kind": "paragraph",
           "text": "B．Plastics can only be used to make clothes."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-76",
-      "title": "C．People don’t like the clothes made from plastics.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-175",
           "kind": "paragraph",
           "text": "C．People don’t like the clothes made from plastics."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-77",
-      "title": "D．The future of making plastic clothes is bright.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-176",
           "kind": "paragraph",
@@ -2966,56 +2347,22 @@
           "id": "paragraph-177",
           "kind": "paragraph",
           "text": "67．What’s the main idea of this passage?"
-        }
-      ],
-      "questionIds": [
-        "2024-jiangxi-jiangxi-section-77-section-77-group-1-56"
-      ]
-    },
-    {
-      "id": "section-78",
-      "title": "A．Making clothes made from plastics is more environmental.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-178",
           "kind": "paragraph",
           "text": "A．Making clothes made from plastics is more environmental."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-79",
-      "title": "B．Wearing a new material can be more beautiful.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-179",
           "kind": "paragraph",
           "text": "B．Wearing a new material can be more beautiful."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-80",
-      "title": "C．Collecting plastics is everyone’s duty.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-180",
           "kind": "paragraph",
           "text": "C．Collecting plastics is everyone’s duty."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-81",
-      "title": "D．Choosing different kinds of clothes is helpful to make the world wonderful.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-181",
           "kind": "paragraph",
@@ -3055,17 +2402,7 @@
           "id": "paragraph-188",
           "kind": "paragraph",
           "text": "68．Which is NOT the common belief that China and Western countries may have about pigs?"
-        }
-      ],
-      "questionIds": [
-        "2024-jiangxi-jiangxi-section-81-section-81-group-1-57"
-      ]
-    },
-    {
-      "id": "section-82",
-      "title": "A．Ugly.B．Lovely.C．Lazy.D．Stupid.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-189",
           "kind": "paragraph",
@@ -3075,17 +2412,7 @@
           "id": "paragraph-190",
           "kind": "paragraph",
           "text": "69．What does the underlined word “them” in the second paragraph refer to?"
-        }
-      ],
-      "questionIds": [
-        "2024-jiangxi-jiangxi-section-82-section-82-group-1-58"
-      ]
-    },
-    {
-      "id": "section-83",
-      "title": "A．the idiomsB．some pigsC．certain cartoonsD．all pig characters",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-191",
           "kind": "paragraph",
@@ -3095,56 +2422,22 @@
           "id": "paragraph-192",
           "kind": "paragraph",
           "text": "70．Which of the following is TRUE according to the passage?"
-        }
-      ],
-      "questionIds": [
-        "2024-jiangxi-jiangxi-section-83-section-83-group-1-59"
-      ]
-    },
-    {
-      "id": "section-84",
-      "title": "A．Pigs have good short-term memories.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-193",
           "kind": "paragraph",
           "text": "A．Pigs have good short-term memories."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-85",
-      "title": "B．McDull puts too much focus on efficiency.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-194",
           "kind": "paragraph",
           "text": "B．McDull puts too much focus on efficiency."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-86",
-      "title": "C．Peppa Pig teaches people about love, friendship and the value of family.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-195",
           "kind": "paragraph",
           "text": "C．Peppa Pig teaches people about love, friendship and the value of family."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-87",
-      "title": "D．McDull, Kung Fu Ding Ding Dong is a popular television series that began in 2004.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-196",
           "kind": "paragraph",
@@ -3154,17 +2447,7 @@
           "id": "paragraph-197",
           "kind": "paragraph",
           "text": "71．What does the underlined word “defeated” in Paragraph 4 mean?"
-        }
-      ],
-      "questionIds": [
-        "2024-jiangxi-jiangxi-section-87-section-87-group-1-60"
-      ]
-    },
-    {
-      "id": "section-88",
-      "title": "A．succeededB．beatenC．achievedD．challenged",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-198",
           "kind": "paragraph",
@@ -3174,66 +2457,51 @@
           "id": "paragraph-199",
           "kind": "paragraph",
           "text": "72．What is the purpose of writing this passage?"
-        }
-      ],
-      "questionIds": [
-        "2024-jiangxi-jiangxi-section-88-section-88-group-1-61"
-      ]
-    },
-    {
-      "id": "section-89",
-      "title": "A．To introduce two interesting cartoons about pigs.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-200",
           "kind": "paragraph",
           "text": "A．To introduce two interesting cartoons about pigs."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-90",
-      "title": "B．To prove that pigs are ugly, lazy, stupid and shameless.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-201",
           "kind": "paragraph",
           "text": "B．To prove that pigs are ugly, lazy, stupid and shameless."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-91",
-      "title": "C．To show pigs can be intelligent, cute , patient and innocent.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-202",
           "kind": "paragraph",
           "text": "C．To show pigs can be intelligent, cute , patient and innocent."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-92",
-      "title": "D．To share different beliefs about pigs in China and Western countries.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-203",
           "kind": "paragraph",
           "text": "D．To share different beliefs about pigs in China and Western countries."
         }
       ],
-      "questionIds": []
+      "questionIds": [
+        "2024-jiangxi-jiangxi-section-6-section-6-group-2-44",
+        "2024-jiangxi-jiangxi-section-6-section-6-group-2-45",
+        "2024-jiangxi-jiangxi-section-6-section-6-group-2-46",
+        "2024-jiangxi-jiangxi-section-6-section-6-group-2-47",
+        "2024-jiangxi-jiangxi-section-6-section-6-group-2-48",
+        "2024-jiangxi-jiangxi-section-6-section-6-group-2-49",
+        "2024-jiangxi-jiangxi-section-6-section-6-group-2-50",
+        "2024-jiangxi-jiangxi-section-6-section-6-group-2-51",
+        "2024-jiangxi-jiangxi-section-6-section-6-group-2-52",
+        "2024-jiangxi-jiangxi-section-6-section-6-group-2-53",
+        "2024-jiangxi-jiangxi-section-6-section-6-group-2-54",
+        "2024-jiangxi-jiangxi-section-6-section-6-group-2-55",
+        "2024-jiangxi-jiangxi-section-6-section-6-group-2-56",
+        "2024-jiangxi-jiangxi-section-6-section-6-group-2-57",
+        "2024-jiangxi-jiangxi-section-6-section-6-group-2-58",
+        "2024-jiangxi-jiangxi-section-6-section-6-group-2-59",
+        "2024-jiangxi-jiangxi-section-6-section-6-group-2-60",
+        "2024-jiangxi-jiangxi-section-6-section-6-group-2-61"
+      ]
     },
     {
-      "id": "section-93",
+      "id": "section-7",
       "title": "B) 请先阅读下面短文，掌握其大意，然后根据短文内容从下面方框内的七个选项中选择五个还原到文中，使短文意思通顺、结构完整，并在答题卡上将其序号涂黑。一空一句。",
       "instructions": [
         "B) 请先阅读下面短文，掌握其大意，然后根据短文内容从下面方框内的七个选项中选择五个还原到文中，使短文意思通顺、结构完整，并在答题卡上将其序号涂黑。一空一句。"
@@ -3278,67 +2546,27 @@
           "id": "paragraph-211",
           "kind": "paragraph",
           "text": "Comic books continue to be popular, but over time, many of their characters have also been pictured in television shows and in movies."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-94",
-      "title": "A．Other artists don’t like comic strips.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-212",
           "kind": "paragraph",
           "text": "A．Other artists don’t like comic strips."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-95",
-      "title": "B．Sometimes the comics are more serious.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-213",
           "kind": "paragraph",
           "text": "B．Sometimes the comics are more serious."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-96",
-      "title": "C．Comic strips became popular in France.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-214",
           "kind": "paragraph",
           "text": "C．Comic strips became popular in France."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-97",
-      "title": "D．All of these characters started in comic books.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-215",
           "kind": "paragraph",
           "text": "D．All of these characters started in comic books."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-98",
-      "title": "E．He is considered to be the father of the comic strip.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-216",
           "kind": "paragraph",
@@ -3358,7 +2586,7 @@
       "questionIds": []
     },
     {
-      "id": "section-99",
+      "id": "section-8",
       "title": "五、补全对话（共5分）",
       "instructions": [],
       "blocks": [
@@ -3371,7 +2599,7 @@
       "questionIds": []
     },
     {
-      "id": "section-100",
+      "id": "section-9",
       "title": "请阅读下面对话，根据对话内容从下面的七个选项中选择五个填入空白处，使对话通顺、合理，意思完整，并在答题卡上将其序号涂黑。一空一句。",
       "instructions": [
         "请阅读下面对话，根据对话内容从下面的七个选项中选择五个填入空白处，使对话通顺、合理，意思完整，并在答题卡上将其序号涂黑。一空一句。"
@@ -3446,67 +2674,27 @@
           "id": "paragraph-233",
           "kind": "paragraph",
           "text": "K: Yeah, I am hungry. Let’s go to the food street."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-101",
-      "title": "A．Was he busy just now?",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-234",
           "kind": "paragraph",
           "text": "A．Was he busy just now?"
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-102",
-      "title": "B．So many fun things to do.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-235",
           "kind": "paragraph",
           "text": "B．So many fun things to do."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-103",
-      "title": "C．What is that red building?",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-236",
           "kind": "paragraph",
           "text": "C．What is that red building?"
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-104",
-      "title": "D．I am so excited to hear that.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-237",
           "kind": "paragraph",
           "text": "D．I am so excited to hear that."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-105",
-      "title": "E．Have you got some special food?",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-238",
           "kind": "paragraph",
@@ -3526,7 +2714,7 @@
       "questionIds": []
     },
     {
-      "id": "section-106",
+      "id": "section-10",
       "title": "六、书面表达（15分）",
       "instructions": [],
       "blocks": [
@@ -3544,7 +2732,7 @@
       "questionIds": []
     },
     {
-      "id": "section-107",
+      "id": "section-11",
       "title": "写作要点：",
       "instructions": [],
       "blocks": [
@@ -3575,13 +2763,13 @@
         }
       ],
       "questionIds": [
-        "2024-jiangxi-jiangxi-section-107-section-107-group-1-62",
-        "2024-jiangxi-jiangxi-section-107-section-107-group-1-63",
-        "2024-jiangxi-jiangxi-section-107-section-107-group-1-64"
+        "2024-jiangxi-jiangxi-section-11-section-11-group-1-62",
+        "2024-jiangxi-jiangxi-section-11-section-11-group-1-63",
+        "2024-jiangxi-jiangxi-section-11-section-11-group-1-64"
       ]
     },
     {
-      "id": "section-108",
+      "id": "section-12",
       "title": "（1）短文应包括提示中所有的写作要点，条理清楚，行文连贯，可适当发挥；",
       "instructions": [],
       "blocks": [
@@ -3594,7 +2782,7 @@
       "questionIds": []
     },
     {
-      "id": "section-109",
+      "id": "section-13",
       "title": "（2）短文中不能出现真实的人名和地名；",
       "instructions": [],
       "blocks": [
@@ -3607,7 +2795,7 @@
       "questionIds": []
     },
     {
-      "id": "section-110",
+      "id": "section-14",
       "title": "（3）词数80—120， 短文开头及结尾已给出，不计入总词数。",
       "instructions": [],
       "blocks": [
@@ -3637,11 +2825,11 @@
   ],
   "questions": [
     {
-      "id": "2024-jiangxi-jiangxi-section-2-section-2-group-1-1",
+      "id": "2024-jiangxi-jiangxi-section-1-section-1-group-1-1",
       "number": 1,
       "displayNumber": "1",
-      "sectionId": "section-2",
-      "groupId": "section-2-group-1",
+      "sectionId": "section-1",
+      "groupId": "section-1-group-1",
       "prompt": "Where does the conversation take place?",
       "options": [
         "A. On a train.",
@@ -3658,11 +2846,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-3-section-3-group-1-2",
+      "id": "2024-jiangxi-jiangxi-section-1-section-1-group-1-2",
       "number": 2,
       "displayNumber": "2",
-      "sectionId": "section-3",
-      "groupId": "section-3-group-1",
+      "sectionId": "section-1",
+      "groupId": "section-1-group-1",
       "prompt": "Which skirt will the girl buy?",
       "options": [
         "A. The blue one.",
@@ -3679,11 +2867,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-4-section-4-group-1-3",
+      "id": "2024-jiangxi-jiangxi-section-1-section-1-group-1-3",
       "number": 3,
       "displayNumber": "3",
-      "sectionId": "section-4",
-      "groupId": "section-4-group-1",
+      "sectionId": "section-1",
+      "groupId": "section-1-group-1",
       "prompt": "How often does the man go to the restaurant?",
       "options": [
         "A. Twice a week.",
@@ -3700,11 +2888,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-5-section-5-group-1-4",
+      "id": "2024-jiangxi-jiangxi-section-1-section-1-group-1-4",
       "number": 4,
       "displayNumber": "4",
-      "sectionId": "section-5",
-      "groupId": "section-5-group-1",
+      "sectionId": "section-1",
+      "groupId": "section-1-group-1",
       "prompt": "What will Mary do this afternoon?",
       "options": [
         "A. Go on reading.",
@@ -3721,11 +2909,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-6-section-6-group-1-5",
+      "id": "2024-jiangxi-jiangxi-section-1-section-1-group-1-5",
       "number": 5,
       "displayNumber": "5",
-      "sectionId": "section-6",
-      "groupId": "section-6-group-1",
+      "sectionId": "section-1",
+      "groupId": "section-1-group-1",
       "prompt": "How will the woman get to London?",
       "options": [
         "A. By bus.",
@@ -3745,11 +2933,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-8-section-8-group-1-6",
+      "id": "2024-jiangxi-jiangxi-section-1-section-1-group-2-6",
       "number": 6,
       "displayNumber": "6",
-      "sectionId": "section-8",
-      "groupId": "section-8-group-1",
+      "sectionId": "section-1",
+      "groupId": "section-1-group-2",
       "prompt": "Which kind of room is the woman going to book?",
       "options": [
         "A. A single room.",
@@ -3766,11 +2954,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-9-section-9-group-1-7",
+      "id": "2024-jiangxi-jiangxi-section-1-section-1-group-2-7",
       "number": 7,
       "displayNumber": "7",
-      "sectionId": "section-9",
-      "groupId": "section-9-group-1",
+      "sectionId": "section-1",
+      "groupId": "section-1-group-2",
       "prompt": "How many nights will the woman stay in the hotel?",
       "options": [
         "A. Five.",
@@ -3787,11 +2975,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-10-section-10-group-1-8",
+      "id": "2024-jiangxi-jiangxi-section-1-section-1-group-2-8",
       "number": 8,
       "displayNumber": "8",
-      "sectionId": "section-10",
-      "groupId": "section-10-group-1",
+      "sectionId": "section-1",
+      "groupId": "section-1-group-2",
       "prompt": "What is Jason’s favorite subject at the new school?",
       "options": [
         "A. Chinese.",
@@ -3808,11 +2996,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-11-section-11-group-1-9",
+      "id": "2024-jiangxi-jiangxi-section-1-section-1-group-2-9",
       "number": 9,
       "displayNumber": "9",
-      "sectionId": "section-11",
-      "groupId": "section-11-group-1",
+      "sectionId": "section-1",
+      "groupId": "section-1-group-2",
       "prompt": "How does Tony like math?",
       "options": [
         "A. Interesting.",
@@ -3829,11 +3017,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-12-section-12-group-1-10",
+      "id": "2024-jiangxi-jiangxi-section-1-section-1-group-2-10",
       "number": 10,
       "displayNumber": "10",
-      "sectionId": "section-12",
-      "groupId": "section-12-group-1",
+      "sectionId": "section-1",
+      "groupId": "section-1-group-2",
       "prompt": "Where does the conversation take place?",
       "options": [
         "A. On a plane.",
@@ -3850,11 +3038,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-13-section-13-group-1-11",
+      "id": "2024-jiangxi-jiangxi-section-1-section-1-group-2-11",
       "number": 11,
       "displayNumber": "11",
-      "sectionId": "section-13",
-      "groupId": "section-13-group-1",
+      "sectionId": "section-1",
+      "groupId": "section-1-group-2",
       "prompt": "How long does the flight take?",
       "options": [
         "A. About 3 hours.",
@@ -3871,11 +3059,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-14-section-14-group-1-12",
+      "id": "2024-jiangxi-jiangxi-section-1-section-1-group-2-12",
       "number": 12,
       "displayNumber": "12",
-      "sectionId": "section-14",
-      "groupId": "section-14-group-1",
+      "sectionId": "section-1",
+      "groupId": "section-1-group-2",
       "prompt": "What can we learn from the dialogue?",
       "options": [
         "A. The man will travel with his family.",
@@ -3892,11 +3080,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-17-section-17-group-1-13",
+      "id": "2024-jiangxi-jiangxi-section-1-section-1-group-2-13",
       "number": 13,
       "displayNumber": "13",
-      "sectionId": "section-17",
-      "groupId": "section-17-group-1",
+      "sectionId": "section-1",
+      "groupId": "section-1-group-2",
       "prompt": "What kind of music does the woman like?",
       "options": [
         "A. Rap.",
@@ -3913,11 +3101,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-18-section-18-group-1-14",
+      "id": "2024-jiangxi-jiangxi-section-1-section-1-group-2-14",
       "number": 14,
       "displayNumber": "14",
-      "sectionId": "section-18",
-      "groupId": "section-18-group-1",
+      "sectionId": "section-1",
+      "groupId": "section-1-group-2",
       "prompt": "What does Beethoven do?",
       "options": [
         "A. A singer.",
@@ -3934,11 +3122,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-19-section-19-group-1-15",
+      "id": "2024-jiangxi-jiangxi-section-1-section-1-group-2-15",
       "number": 15,
       "displayNumber": "15",
-      "sectionId": "section-19",
-      "groupId": "section-19-group-1",
+      "sectionId": "section-1",
+      "groupId": "section-1-group-2",
       "prompt": "Why does the man like pop music?",
       "options": [
         "A. Because he needs to focus after listening to it.",
@@ -3956,11 +3144,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-23-section-23-group-1-16",
+      "id": "2024-jiangxi-jiangxi-section-2-section-2-group-1-16",
       "number": 16,
       "displayNumber": "16",
-      "sectionId": "section-23",
-      "groupId": "section-23-group-1",
+      "sectionId": "section-2",
+      "groupId": "section-2-group-1",
       "prompt": "What did the writer do in the band?",
       "options": [
         "A. He played the piano.",
@@ -3977,11 +3165,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-24-section-24-group-1-17",
+      "id": "2024-jiangxi-jiangxi-section-2-section-2-group-1-17",
       "number": 17,
       "displayNumber": "17",
-      "sectionId": "section-24",
-      "groupId": "section-24-group-1",
+      "sectionId": "section-2",
+      "groupId": "section-2-group-1",
       "prompt": "What problem did the writer have?",
       "options": [
         "A. He couldn’t meet new friends.",
@@ -3998,11 +3186,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-27-section-27-group-1-18",
+      "id": "2024-jiangxi-jiangxi-section-2-section-2-group-1-18",
       "number": 18,
       "displayNumber": "18",
-      "sectionId": "section-27",
-      "groupId": "section-27-group-1",
+      "sectionId": "section-2",
+      "groupId": "section-2-group-1",
       "prompt": "Who had a talk with the writer?",
       "options": [
         "A. His friend.",
@@ -4019,11 +3207,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-28-section-28-group-1-19",
+      "id": "2024-jiangxi-jiangxi-section-2-section-2-group-1-19",
       "number": 19,
       "displayNumber": "19",
-      "sectionId": "section-28",
-      "groupId": "section-28-group-1",
+      "sectionId": "section-2",
+      "groupId": "section-2-group-1",
       "prompt": "How did the writer’s teammates help him?",
       "options": [
         "A. By asking the teacher for help.",
@@ -4040,11 +3228,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-31-section-31-group-1-20",
+      "id": "2024-jiangxi-jiangxi-section-2-section-2-group-1-20",
       "number": 20,
       "displayNumber": "20",
-      "sectionId": "section-31",
-      "groupId": "section-31-group-1",
+      "sectionId": "section-2",
+      "groupId": "section-2-group-1",
       "prompt": "What can we learn from the experience?",
       "options": [
         "A. Once a teacher, always a father.",
@@ -4064,11 +3252,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-36-section-36-group-1-21",
+      "id": "2024-jiangxi-jiangxi-section-3-section-3-group-1-21",
       "number": 21,
       "displayNumber": "21",
-      "sectionId": "section-36",
-      "groupId": "section-36-group-1",
+      "sectionId": "section-3",
+      "groupId": "section-3-group-1",
       "prompt": "— Dad, what is the loudspeaker saying? — It is to the _________. The flight to Beijing is checking tickets now.",
       "options": [
         "A. customers",
@@ -4086,11 +3274,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-37-section-37-group-1-22",
+      "id": "2024-jiangxi-jiangxi-section-3-section-3-group-1-22",
       "number": 22,
       "displayNumber": "22",
-      "sectionId": "section-37",
-      "groupId": "section-37-group-1",
+      "sectionId": "section-3",
+      "groupId": "section-3-group-1",
       "prompt": "—There is someone knocking on the door. I wonder who it ________ be. —It ________ be Frank. He phoned to tell me he would come to our home soon.",
       "options": [
         "A. must; must",
@@ -4108,11 +3296,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-38-section-38-group-1-23",
+      "id": "2024-jiangxi-jiangxi-section-3-section-3-group-1-23",
       "number": 23,
       "displayNumber": "23",
-      "sectionId": "section-38",
-      "groupId": "section-38-group-1",
+      "sectionId": "section-3",
+      "groupId": "section-3-group-1",
       "prompt": "It is said that people who like laughing are ________ because smiles bring more chances.",
       "options": [
         "A. luckier",
@@ -4130,11 +3318,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-39-section-39-group-1-24",
+      "id": "2024-jiangxi-jiangxi-section-3-section-3-group-1-24",
       "number": 24,
       "displayNumber": "24",
-      "sectionId": "section-39",
-      "groupId": "section-39-group-1",
+      "sectionId": "section-3",
+      "groupId": "section-3-group-1",
       "prompt": "— We ________ want to help Frank, but we don’t know how to. — Don’t worry. Frank told me that he had worked out the problem.",
       "options": [
         "A. quickly",
@@ -4152,11 +3340,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-40-section-40-group-1-25",
+      "id": "2024-jiangxi-jiangxi-section-3-section-3-group-1-25",
       "number": 25,
       "displayNumber": "25",
-      "sectionId": "section-40",
-      "groupId": "section-40-group-1",
+      "sectionId": "section-3",
+      "groupId": "section-3-group-1",
       "prompt": "—Who helped you clean the reading room yesterday, Lily? —________. I cleaned it all by myself.",
       "options": [
         "A. Nobody",
@@ -4174,11 +3362,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-41-section-41-group-1-26",
+      "id": "2024-jiangxi-jiangxi-section-3-section-3-group-1-26",
       "number": 26,
       "displayNumber": "26",
-      "sectionId": "section-41",
-      "groupId": "section-41-group-1",
+      "sectionId": "section-3",
+      "groupId": "section-3-group-1",
       "prompt": "—Mom, I have cleaned all the rooms _______ the kitchen. Could I clean it this afternoon? —Of course, you can, Helen.",
       "options": [
         "A. inside",
@@ -4196,11 +3384,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-42-section-42-group-1-27",
+      "id": "2024-jiangxi-jiangxi-section-3-section-3-group-1-27",
       "number": 27,
       "displayNumber": "27",
-      "sectionId": "section-42",
-      "groupId": "section-42-group-1",
+      "sectionId": "section-3",
+      "groupId": "section-3-group-1",
       "prompt": "I ________ a few pages of the book. I will finish the rest as quickly as possible.",
       "options": [
         "A. read",
@@ -4218,11 +3406,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-43-section-43-group-1-28",
+      "id": "2024-jiangxi-jiangxi-section-3-section-3-group-1-28",
       "number": 28,
       "displayNumber": "28",
-      "sectionId": "section-43",
-      "groupId": "section-43-group-1",
+      "sectionId": "section-3",
+      "groupId": "section-3-group-1",
       "prompt": "My daughter is studying in Nanchang. ________ I’m not with her, I have a video chat with her every day.",
       "options": [
         "A. Until",
@@ -4244,11 +3432,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-46-section-46-group-1-29",
+      "id": "2024-jiangxi-jiangxi-section-4-section-4-group-2-29",
       "number": 29,
       "displayNumber": "29",
-      "sectionId": "section-46",
-      "groupId": "section-46-group-1",
+      "sectionId": "section-4",
+      "groupId": "section-4-group-2",
       "prompt": "第 29 题",
       "options": [
         "A. angry",
@@ -4266,11 +3454,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-46-section-46-group-1-30",
+      "id": "2024-jiangxi-jiangxi-section-4-section-4-group-2-30",
       "number": 30,
       "displayNumber": "30",
-      "sectionId": "section-46",
-      "groupId": "section-46-group-1",
+      "sectionId": "section-4",
+      "groupId": "section-4-group-2",
       "prompt": "第 30 题",
       "options": [
         "A. juice",
@@ -4288,11 +3476,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-46-section-46-group-1-31",
+      "id": "2024-jiangxi-jiangxi-section-4-section-4-group-2-31",
       "number": 31,
       "displayNumber": "31",
-      "sectionId": "section-46",
-      "groupId": "section-46-group-1",
+      "sectionId": "section-4",
+      "groupId": "section-4-group-2",
       "prompt": "第 31 题",
       "options": [
         "A. lower",
@@ -4310,11 +3498,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-46-section-46-group-1-32",
+      "id": "2024-jiangxi-jiangxi-section-4-section-4-group-2-32",
       "number": 32,
       "displayNumber": "32",
-      "sectionId": "section-46",
-      "groupId": "section-46-group-1",
+      "sectionId": "section-4",
+      "groupId": "section-4-group-2",
       "prompt": "第 32 题",
       "options": [
         "A. whoever",
@@ -4332,11 +3520,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-46-section-46-group-1-33",
+      "id": "2024-jiangxi-jiangxi-section-4-section-4-group-2-33",
       "number": 33,
       "displayNumber": "33",
-      "sectionId": "section-46",
-      "groupId": "section-46-group-1",
+      "sectionId": "section-4",
+      "groupId": "section-4-group-2",
       "prompt": "第 33 题",
       "options": [
         "A. without",
@@ -4354,11 +3542,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-46-section-46-group-1-34",
+      "id": "2024-jiangxi-jiangxi-section-4-section-4-group-2-34",
       "number": 34,
       "displayNumber": "34",
-      "sectionId": "section-46",
-      "groupId": "section-46-group-1",
+      "sectionId": "section-4",
+      "groupId": "section-4-group-2",
       "prompt": "第 34 题",
       "options": [
         "A. swimmers",
@@ -4376,11 +3564,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-46-section-46-group-1-35",
+      "id": "2024-jiangxi-jiangxi-section-4-section-4-group-2-35",
       "number": 35,
       "displayNumber": "35",
-      "sectionId": "section-46",
-      "groupId": "section-46-group-1",
+      "sectionId": "section-4",
+      "groupId": "section-4-group-2",
       "prompt": "第 35 题",
       "options": [
         "A. clear",
@@ -4398,11 +3586,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-46-section-46-group-1-36",
+      "id": "2024-jiangxi-jiangxi-section-4-section-4-group-2-36",
       "number": 36,
       "displayNumber": "36",
-      "sectionId": "section-46",
-      "groupId": "section-46-group-1",
+      "sectionId": "section-4",
+      "groupId": "section-4-group-2",
       "prompt": "第 36 题",
       "options": [
         "A. discovered",
@@ -4420,11 +3608,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-46-section-46-group-1-37",
+      "id": "2024-jiangxi-jiangxi-section-4-section-4-group-2-37",
       "number": 37,
       "displayNumber": "37",
-      "sectionId": "section-46",
-      "groupId": "section-46-group-1",
+      "sectionId": "section-4",
+      "groupId": "section-4-group-2",
       "prompt": "第 37 题",
       "options": [
         "A. this",
@@ -4442,11 +3630,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-46-section-46-group-1-38",
+      "id": "2024-jiangxi-jiangxi-section-4-section-4-group-2-38",
       "number": 38,
       "displayNumber": "38",
-      "sectionId": "section-46",
-      "groupId": "section-46-group-1",
+      "sectionId": "section-4",
+      "groupId": "section-4-group-2",
       "prompt": "第 38 题",
       "options": [
         "A. important",
@@ -4464,11 +3652,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-46-section-46-group-1-39",
+      "id": "2024-jiangxi-jiangxi-section-4-section-4-group-2-39",
       "number": 39,
       "displayNumber": "39",
-      "sectionId": "section-46",
-      "groupId": "section-46-group-1",
+      "sectionId": "section-4",
+      "groupId": "section-4-group-2",
       "prompt": "第 39 题",
       "options": [
         "A. habit",
@@ -4486,11 +3674,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-46-section-46-group-1-40",
+      "id": "2024-jiangxi-jiangxi-section-4-section-4-group-2-40",
       "number": 40,
       "displayNumber": "40",
-      "sectionId": "section-46",
-      "groupId": "section-46-group-1",
+      "sectionId": "section-4",
+      "groupId": "section-4-group-2",
       "prompt": "第 40 题",
       "options": [
         "A. talk about",
@@ -4508,11 +3696,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-46-section-46-group-1-41",
+      "id": "2024-jiangxi-jiangxi-section-4-section-4-group-2-41",
       "number": 41,
       "displayNumber": "41",
-      "sectionId": "section-46",
-      "groupId": "section-46-group-1",
+      "sectionId": "section-4",
+      "groupId": "section-4-group-2",
       "prompt": "第 41 题",
       "options": [
         "A. exactly",
@@ -4530,11 +3718,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-46-section-46-group-1-42",
+      "id": "2024-jiangxi-jiangxi-section-4-section-4-group-2-42",
       "number": 42,
       "displayNumber": "42",
-      "sectionId": "section-46",
-      "groupId": "section-46-group-1",
+      "sectionId": "section-4",
+      "groupId": "section-4-group-2",
       "prompt": "第 42 题",
       "options": [
         "A. forget",
@@ -4552,11 +3740,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-46-section-46-group-1-43",
+      "id": "2024-jiangxi-jiangxi-section-4-section-4-group-2-43",
       "number": 43,
       "displayNumber": "43",
-      "sectionId": "section-46",
-      "groupId": "section-46-group-1",
+      "sectionId": "section-4",
+      "groupId": "section-4-group-2",
       "prompt": "第 43 题",
       "options": [
         "A. move",
@@ -4579,11 +3767,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-49-section-49-group-1-44",
+      "id": "2024-jiangxi-jiangxi-section-6-section-6-group-2-44",
       "number": 55,
       "displayNumber": "55",
-      "sectionId": "section-49",
-      "groupId": "section-49-group-1",
+      "sectionId": "section-6",
+      "groupId": "section-6-group-2",
       "prompt": "Which number can you call if you want to find a place to taste some green farm food?",
       "options": [
         "A. 234-3456.",
@@ -4601,11 +3789,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-50-section-50-group-1-45",
+      "id": "2024-jiangxi-jiangxi-section-6-section-6-group-2-45",
       "number": 56,
       "displayNumber": "56",
-      "sectionId": "section-50",
-      "groupId": "section-50-group-1",
+      "sectionId": "section-6",
+      "groupId": "section-6-group-2",
       "prompt": "Where is Happy Pet House?",
       "options": [
         "A. At No.128 Huafeng Road.",
@@ -4623,11 +3811,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-52-section-52-group-1-46",
+      "id": "2024-jiangxi-jiangxi-section-6-section-6-group-2-46",
       "number": 57,
       "displayNumber": "57",
-      "sectionId": "section-52",
-      "groupId": "section-52-group-1",
+      "sectionId": "section-6",
+      "groupId": "section-6-group-2",
       "prompt": "Which of the following is TRUE?",
       "options": [
         "A. Old Friend Restaurant only offers guests rooms of the same size.",
@@ -4645,11 +3833,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-56-section-56-group-1-47",
+      "id": "2024-jiangxi-jiangxi-section-6-section-6-group-2-47",
       "number": 58,
       "displayNumber": "58",
-      "sectionId": "section-56",
-      "groupId": "section-56-group-1",
+      "sectionId": "section-6",
+      "groupId": "section-6-group-2",
       "prompt": "What did the writer see in the long box when he opened it?",
       "options": [
         "A. Pogo stick.",
@@ -4667,11 +3855,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-57-section-57-group-1-48",
+      "id": "2024-jiangxi-jiangxi-section-6-section-6-group-2-48",
       "number": 59,
       "displayNumber": "59",
-      "sectionId": "section-57",
-      "groupId": "section-57-group-1",
+      "sectionId": "section-6",
+      "groupId": "section-6-group-2",
       "prompt": "How did the writer feel at the time he received the beautiful pogo stick?",
       "options": [
         "A. Excited.",
@@ -4689,11 +3877,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-58-section-58-group-1-49",
+      "id": "2024-jiangxi-jiangxi-section-6-section-6-group-2-49",
       "number": 60,
       "displayNumber": "60",
-      "sectionId": "section-58",
-      "groupId": "section-58-group-1",
+      "sectionId": "section-6",
+      "groupId": "section-6-group-2",
       "prompt": "What does the underlined word “They” refer to according to the passage?",
       "options": [
         "A. The writer’s parents.",
@@ -4711,11 +3899,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-60-section-60-group-1-50",
+      "id": "2024-jiangxi-jiangxi-section-6-section-6-group-2-50",
       "number": 61,
       "displayNumber": "61",
-      "sectionId": "section-60",
-      "groupId": "section-60-group-1",
+      "sectionId": "section-6",
+      "groupId": "section-6-group-2",
       "prompt": "What can we infer from the passage?",
       "options": [
         "A. The writer can always get what he wants from his parents.",
@@ -4733,11 +3921,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-64-section-64-group-1-51",
+      "id": "2024-jiangxi-jiangxi-section-6-section-6-group-2-51",
       "number": 62,
       "displayNumber": "62",
-      "sectionId": "section-64",
-      "groupId": "section-64-group-1",
+      "sectionId": "section-6",
+      "groupId": "section-6-group-2",
       "prompt": "What does the writer want to tell us from the passage?",
       "options": [
         "A. Parents should satisfy all their children’s needs.",
@@ -4755,11 +3943,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-68-section-68-group-1-52",
+      "id": "2024-jiangxi-jiangxi-section-6-section-6-group-2-52",
       "number": 63,
       "displayNumber": "63",
-      "sectionId": "section-68",
-      "groupId": "section-68-group-1",
+      "sectionId": "section-6",
+      "groupId": "section-6-group-2",
       "prompt": "What was Alia Juma’s newest collection made from?",
       "options": [
         "A. Recycled plastic.",
@@ -4777,11 +3965,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-70-section-70-group-1-53",
+      "id": "2024-jiangxi-jiangxi-section-6-section-6-group-2-53",
       "number": 64,
       "displayNumber": "64",
-      "sectionId": "section-70",
-      "groupId": "section-70-group-1",
+      "sectionId": "section-6",
+      "groupId": "section-6-group-2",
       "prompt": "How do the companies make clothes according to Paragraph 3? ①Cut the plastic bottles into small pieces. ②Wash the plastic bottles. ③Melt the balls again to form threads. ④Melt and shape the pieces into small balls.",
       "options": [
         "A. ①→②→③→④",
@@ -4799,11 +3987,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-72-section-72-group-1-54",
+      "id": "2024-jiangxi-jiangxi-section-6-section-6-group-2-54",
       "number": 65,
       "displayNumber": "65",
-      "sectionId": "section-72",
-      "groupId": "section-72-group-1",
+      "sectionId": "section-6",
+      "groupId": "section-6-group-2",
       "prompt": "What does the underlined word “originate” mean?",
       "options": [
         "A. Waste.",
@@ -4821,11 +4009,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-73-section-73-group-1-55",
+      "id": "2024-jiangxi-jiangxi-section-6-section-6-group-2-55",
       "number": 66,
       "displayNumber": "66",
-      "sectionId": "section-73",
-      "groupId": "section-73-group-1",
+      "sectionId": "section-6",
+      "groupId": "section-6-group-2",
       "prompt": "What can we infer(推断) from the last paragraph?",
       "options": [
         "A. Plastic clothes will take the place of the clothes made from other materials.",
@@ -4843,11 +4031,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-77-section-77-group-1-56",
+      "id": "2024-jiangxi-jiangxi-section-6-section-6-group-2-56",
       "number": 67,
       "displayNumber": "67",
-      "sectionId": "section-77",
-      "groupId": "section-77-group-1",
+      "sectionId": "section-6",
+      "groupId": "section-6-group-2",
       "prompt": "What’s the main idea of this passage?",
       "options": [
         "A. Making clothes made from plastics is more environmental.",
@@ -4865,11 +4053,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-81-section-81-group-1-57",
+      "id": "2024-jiangxi-jiangxi-section-6-section-6-group-2-57",
       "number": 68,
       "displayNumber": "68",
-      "sectionId": "section-81",
-      "groupId": "section-81-group-1",
+      "sectionId": "section-6",
+      "groupId": "section-6-group-2",
       "prompt": "Which is NOT the common belief that China and Western countries may have about pigs?",
       "options": [
         "A. Ugly.",
@@ -4887,11 +4075,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-82-section-82-group-1-58",
+      "id": "2024-jiangxi-jiangxi-section-6-section-6-group-2-58",
       "number": 69,
       "displayNumber": "69",
-      "sectionId": "section-82",
-      "groupId": "section-82-group-1",
+      "sectionId": "section-6",
+      "groupId": "section-6-group-2",
       "prompt": "What does the underlined word “them” in the second paragraph refer to?",
       "options": [
         "A. the idioms",
@@ -4909,11 +4097,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-83-section-83-group-1-59",
+      "id": "2024-jiangxi-jiangxi-section-6-section-6-group-2-59",
       "number": 70,
       "displayNumber": "70",
-      "sectionId": "section-83",
-      "groupId": "section-83-group-1",
+      "sectionId": "section-6",
+      "groupId": "section-6-group-2",
       "prompt": "Which of the following is TRUE according to the passage?",
       "options": [
         "A. Pigs have good short-term memories.",
@@ -4931,11 +4119,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-87-section-87-group-1-60",
+      "id": "2024-jiangxi-jiangxi-section-6-section-6-group-2-60",
       "number": 71,
       "displayNumber": "71",
-      "sectionId": "section-87",
-      "groupId": "section-87-group-1",
+      "sectionId": "section-6",
+      "groupId": "section-6-group-2",
       "prompt": "What does the underlined word “defeated” in Paragraph 4 mean?",
       "options": [
         "A. succeeded",
@@ -4953,11 +4141,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-88-section-88-group-1-61",
+      "id": "2024-jiangxi-jiangxi-section-6-section-6-group-2-61",
       "number": 72,
       "displayNumber": "72",
-      "sectionId": "section-88",
-      "groupId": "section-88-group-1",
+      "sectionId": "section-6",
+      "groupId": "section-6-group-2",
       "prompt": "What is the purpose of writing this passage?",
       "options": [
         "A. To introduce two interesting cartoons about pigs.",
@@ -4984,11 +4172,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-107-section-107-group-1-62",
+      "id": "2024-jiangxi-jiangxi-section-11-section-11-group-1-62",
       "number": 1,
       "displayNumber": "1",
-      "sectionId": "section-107",
-      "groupId": "section-107-group-1",
+      "sectionId": "section-11",
+      "groupId": "section-11-group-1",
       "prompt": "What do you think of mistakes?",
       "options": [],
       "inputKind": "text",
@@ -5001,11 +4189,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-107-section-107-group-1-63",
+      "id": "2024-jiangxi-jiangxi-section-11-section-11-group-1-63",
       "number": 2,
       "displayNumber": "2",
-      "sectionId": "section-107",
-      "groupId": "section-107-group-1",
+      "sectionId": "section-11",
+      "groupId": "section-11-group-1",
       "prompt": "What mistake have you ever made?",
       "options": [],
       "inputKind": "text",
@@ -5018,11 +4206,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-jiangxi-jiangxi-section-107-section-107-group-1-64",
+      "id": "2024-jiangxi-jiangxi-section-11-section-11-group-1-64",
       "number": 3,
       "displayNumber": "3",
-      "sectionId": "section-107",
-      "groupId": "section-107-group-1",
+      "sectionId": "section-11",
+      "groupId": "section-11-group-1",
       "prompt": "What did you learn from it? 要求： （1）短文应包括提示中所有的写作要点，条理清楚，行文连贯，可适当发挥； （2）短文中不能出现真实的人名和地名； （3）词数80—120， 短文开头及结尾已给出，不计入总词数。 Hello, everyone! It’s my honor to stand here to make a speech. ___________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________ Thank you!",
       "options": [],
       "inputKind": "blank",

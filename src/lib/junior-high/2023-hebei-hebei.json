@@ -1323,7 +1323,9 @@
       "id": "section-4",
       "title": "Ⅱ.听句子，选出该句的最佳答语（共5小题；每小题1分，满分5分）",
       "instructions": [
-        "Ⅱ.听句子，选出该句的最佳答语（共5小题；每小题1分，满分5分）"
+        "Ⅱ.听句子，选出该句的最佳答语（共5小题；每小题1分，满分5分）",
+        "B. Mr. Li, could you please check my writing?",
+        "C. Can you see any mistakes in my writing, Mr. Li?"
       ],
       "blocks": [
         {
@@ -1355,6 +1357,16 @@
           "id": "paragraph-21",
           "kind": "paragraph",
           "text": "10. A. Check my writing, Mr. Li, OK?"
+        },
+        {
+          "id": "paragraph-22",
+          "kind": "paragraph",
+          "text": "B. Mr. Li, could you please check my writing?"
+        },
+        {
+          "id": "paragraph-23",
+          "kind": "paragraph",
+          "text": "C. Can you see any mistakes in my writing, Mr. Li?"
         }
       ],
       "questionIds": [
@@ -1367,35 +1379,17 @@
     },
     {
       "id": "section-5",
-      "title": "B. Mr. Li, could you please check my writing?",
-      "instructions": [],
-      "blocks": [
-        {
-          "id": "paragraph-22",
-          "kind": "paragraph",
-          "text": "B. Mr. Li, could you please check my writing?"
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-6",
-      "title": "C. Can you see any mistakes in my writing, Mr. Li?",
-      "instructions": [],
-      "blocks": [
-        {
-          "id": "paragraph-23",
-          "kind": "paragraph",
-          "text": "C. Can you see any mistakes in my writing, Mr. Li?"
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-7",
       "title": "Ⅲ.听对话和问题，选择正确答案（共8小题；每小题1分，满分8分）",
       "instructions": [
-        "Ⅲ.听对话和问题，选择正确答案（共8小题；每小题1分，满分8分）"
+        "Ⅲ.听对话和问题，选择正确答案（共8小题；每小题1分，满分8分）",
+        "A.    B.    C.",
+        "A.    B.    C.",
+        "A. Jane.    B. David.    C. Cindy.",
+        "A. Busy.    B. Crazy.    C. Lucky.",
+        "A. Take a walk.    B. Have a meeting.    C. Hand in a report.",
+        "A. Tell a story.    B. Make a sentence.    C. Explain a word.",
+        "A. Read to him.    B. Use a dictionary.    C. Give him the meaning.",
+        "A. Go back to his seat.    B. Take down the answer.    C. Think about another question."
       ],
       "blocks": [
         {
@@ -1407,17 +1401,7 @@
           "id": "paragraph-25",
           "kind": "paragraph",
           "text": "11. What is the boy looking for?"
-        }
-      ],
-      "questionIds": [
-        "2023-hebei-hebei-section-7-section-7-group-1-11"
-      ]
-    },
-    {
-      "id": "section-8",
-      "title": "A.    B.    C.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-26",
           "kind": "paragraph",
@@ -1445,17 +1429,7 @@
           "id": "paragraph-27",
           "kind": "paragraph",
           "text": "12. Where will they go first?"
-        }
-      ],
-      "questionIds": [
-        "2023-hebei-hebei-section-8-section-8-group-1-12"
-      ]
-    },
-    {
-      "id": "section-9",
-      "title": "A.    B.    C.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-28",
           "kind": "paragraph",
@@ -1483,17 +1457,7 @@
           "id": "paragraph-29",
           "kind": "paragraph",
           "text": "13. Who is answering the telephone?"
-        }
-      ],
-      "questionIds": [
-        "2023-hebei-hebei-section-9-section-9-group-1-13"
-      ]
-    },
-    {
-      "id": "section-10",
-      "title": "A. Jane.    B. David.    C. Cindy.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-30",
           "kind": "paragraph",
@@ -1503,17 +1467,7 @@
           "id": "paragraph-31",
           "kind": "paragraph",
           "text": "14. How is Cindy today?"
-        }
-      ],
-      "questionIds": [
-        "2023-hebei-hebei-section-10-section-10-group-1-14"
-      ]
-    },
-    {
-      "id": "section-11",
-      "title": "A. Busy.    B. Crazy.    C. Lucky.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-32",
           "kind": "paragraph",
@@ -1523,17 +1477,7 @@
           "id": "paragraph-33",
           "kind": "paragraph",
           "text": "15. What does Jane ask Cindy to do?"
-        }
-      ],
-      "questionIds": [
-        "2023-hebei-hebei-section-11-section-11-group-1-15"
-      ]
-    },
-    {
-      "id": "section-12",
-      "title": "A. Take a walk.    B. Have a meeting.    C. Hand in a report.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-34",
           "kind": "paragraph",
@@ -1543,17 +1487,7 @@
           "id": "paragraph-35",
           "kind": "paragraph",
           "text": "16. What does Jack ask Miss White to do?"
-        }
-      ],
-      "questionIds": [
-        "2023-hebei-hebei-section-12-section-12-group-1-16"
-      ]
-    },
-    {
-      "id": "section-13",
-      "title": "A. Tell a story.    B. Make a sentence.    C. Explain a word.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-36",
           "kind": "paragraph",
@@ -1563,17 +1497,7 @@
           "id": "paragraph-37",
           "kind": "paragraph",
           "text": "17. How does Miss White help Jack?"
-        }
-      ],
-      "questionIds": [
-        "2023-hebei-hebei-section-13-section-13-group-1-17"
-      ]
-    },
-    {
-      "id": "section-14",
-      "title": "A. Read to him.    B. Use a dictionary.    C. Give him the meaning.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-38",
           "kind": "paragraph",
@@ -1583,30 +1507,36 @@
           "id": "paragraph-39",
           "kind": "paragraph",
           "text": "18. What will Jack do next?"
-        }
-      ],
-      "questionIds": [
-        "2023-hebei-hebei-section-14-section-14-group-1-18"
-      ]
-    },
-    {
-      "id": "section-15",
-      "title": "A. Go back to his seat.    B. Take down the answer.    C. Think about another question.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-40",
           "kind": "paragraph",
           "text": "A. Go back to his seat.    B. Take down the answer.    C. Think about another question."
         }
       ],
-      "questionIds": []
+      "questionIds": [
+        "2023-hebei-hebei-section-5-section-5-group-1-11",
+        "2023-hebei-hebei-section-5-section-5-group-2-12",
+        "2023-hebei-hebei-section-5-section-5-group-3-13",
+        "2023-hebei-hebei-section-5-section-5-group-4-14",
+        "2023-hebei-hebei-section-5-section-5-group-5-15",
+        "2023-hebei-hebei-section-5-section-5-group-6-16",
+        "2023-hebei-hebei-section-5-section-5-group-7-17",
+        "2023-hebei-hebei-section-5-section-5-group-8-18"
+      ]
     },
     {
-      "id": "section-16",
+      "id": "section-6",
       "title": "Ⅳ.听短文和问题，选择正确答案（共7小题：每小题1分，满分7分）",
       "instructions": [
-        "Ⅳ.听短文和问题，选择正确答案（共7小题：每小题1分，满分7分）"
+        "Ⅳ.听短文和问题，选择正确答案（共7小题：每小题1分，满分7分）",
+        "A. The traffic is busy.    B. His bike is broken.    C. He has to do his homework.",
+        "A. Twenty minutes.    B. Thirty minutes.    C. Forty minutes.",
+        "A. Some apples.    B. Some cookies.    C. Some chocolates.",
+        "A. At 2 o’clock.    B. A3    C. Al 4 o’clock.",
+        "A. Six.    B. Seven.    C. Eight.",
+        "A. Write their play.    B. Read their play.    C. Act out their play.",
+        "A. Some famous actors.    B. Some foreign students.    C. Some English teachers."
       ],
       "blocks": [
         {
@@ -1618,17 +1548,7 @@
           "id": "paragraph-42",
           "kind": "paragraph",
           "text": "19. Why will Peter be late for the party?"
-        }
-      ],
-      "questionIds": [
-        "2023-hebei-hebei-section-16-section-16-group-1-19"
-      ]
-    },
-    {
-      "id": "section-17",
-      "title": "A. The traffic is busy.    B. His bike is broken.    C. He has to do his homework.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-43",
           "kind": "paragraph",
@@ -1638,17 +1558,7 @@
           "id": "paragraph-44",
           "kind": "paragraph",
           "text": "20. How long may it take Peter to get there by bus?"
-        }
-      ],
-      "questionIds": [
-        "2023-hebei-hebei-section-17-section-17-group-1-20"
-      ]
-    },
-    {
-      "id": "section-18",
-      "title": "A. Twenty minutes.    B. Thirty minutes.    C. Forty minutes.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-45",
           "kind": "paragraph",
@@ -1658,17 +1568,7 @@
           "id": "paragraph-46",
           "kind": "paragraph",
           "text": "21. What will Peter bring to the party?"
-        }
-      ],
-      "questionIds": [
-        "2023-hebei-hebei-section-18-section-18-group-1-21"
-      ]
-    },
-    {
-      "id": "section-19",
-      "title": "A. Some apples.    B. Some cookies.    C. Some chocolates.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-47",
           "kind": "paragraph",
@@ -1678,17 +1578,7 @@
           "id": "paragraph-48",
           "kind": "paragraph",
           "text": "22. When will the students start to work in groups?"
-        }
-      ],
-      "questionIds": [
-        "2023-hebei-hebei-section-19-section-19-group-1-22"
-      ]
-    },
-    {
-      "id": "section-20",
-      "title": "A. At 2 o’clock.    B. A3    C. Al 4 o’clock.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-49",
           "kind": "paragraph",
@@ -1698,17 +1588,7 @@
           "id": "paragraph-50",
           "kind": "paragraph",
           "text": "23. How many students will each group have?"
-        }
-      ],
-      "questionIds": [
-        "2023-hebei-hebei-section-20-section-20-group-1-23"
-      ]
-    },
-    {
-      "id": "section-21",
-      "title": "A. Six.    B. Seven.    C. Eight.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-51",
           "kind": "paragraph",
@@ -1718,17 +1598,7 @@
           "id": "paragraph-52",
           "kind": "paragraph",
           "text": "24. What will they do in the west hall?"
-        }
-      ],
-      "questionIds": [
-        "2023-hebei-hebei-section-21-section-21-group-1-24"
-      ]
-    },
-    {
-      "id": "section-22",
-      "title": "A. Write their play.    B. Read their play.    C. Act out their play.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-53",
           "kind": "paragraph",
@@ -1738,27 +1608,25 @@
           "id": "paragraph-54",
           "kind": "paragraph",
           "text": "25. Who will be invited to watch the plays?"
-        }
-      ],
-      "questionIds": [
-        "2023-hebei-hebei-section-22-section-22-group-1-25"
-      ]
-    },
-    {
-      "id": "section-23",
-      "title": "A. Some famous actors.    B. Some foreign students.    C. Some English teachers.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-55",
           "kind": "paragraph",
           "text": "A. Some famous actors.    B. Some foreign students.    C. Some English teachers."
         }
       ],
-      "questionIds": []
+      "questionIds": [
+        "2023-hebei-hebei-section-6-section-6-group-1-19",
+        "2023-hebei-hebei-section-6-section-6-group-2-20",
+        "2023-hebei-hebei-section-6-section-6-group-3-21",
+        "2023-hebei-hebei-section-6-section-6-group-4-22",
+        "2023-hebei-hebei-section-6-section-6-group-5-23",
+        "2023-hebei-hebei-section-6-section-6-group-6-24",
+        "2023-hebei-hebei-section-6-section-6-group-7-25"
+      ]
     },
     {
-      "id": "section-24",
+      "id": "section-7",
       "title": "V.听短文填空（共5小题；每小题1分，满分5分）",
       "instructions": [
         "V.听短文填空（共5小题；每小题1分，满分5分）"
@@ -1787,10 +1655,19 @@
       "questionIds": []
     },
     {
-      "id": "section-25",
+      "id": "section-8",
       "title": "Ⅵ.单项选择（共10小题；每小题1分，满分10分）",
       "instructions": [
-        "Ⅵ.单项选择（共10小题；每小题1分，满分10分）"
+        "Ⅵ.单项选择（共10小题；每小题1分，满分10分）",
+        "A. inB. ofC. forD. with",
+        "A. myselfB. himselfC. herselfD. yourself",
+        "A. soB. orC. andD. but",
+        "A. goB. wentC. was goingD. will go",
+        "A. put upB. put outC. put downD. put away",
+        "A. readsB. has readC. is readingD. was reading",
+        "A. playB. playedC. are playingD. were playing",
+        "A. ifB. unlessC. untilD. while",
+        "A. providesB. providedC. is providedD. was provided"
       ],
       "blocks": [
         {
@@ -1807,17 +1684,7 @@
           "id": "paragraph-60",
           "kind": "paragraph",
           "text": "1. Many thanks ________ your gift. I love it."
-        }
-      ],
-      "questionIds": [
-        "2023-hebei-hebei-section-25-section-25-group-1-26"
-      ]
-    },
-    {
-      "id": "section-26",
-      "title": "A. inB. ofC. forD. with",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-61",
           "kind": "paragraph",
@@ -1832,17 +1699,7 @@
           "id": "paragraph-63",
           "kind": "paragraph",
           "text": "—From Betty. She made it ________."
-        }
-      ],
-      "questionIds": [
-        "2023-hebei-hebei-section-26-section-26-group-1-27"
-      ]
-    },
-    {
-      "id": "section-27",
-      "title": "A. myselfB. himselfC. herselfD. yourself",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-64",
           "kind": "paragraph",
@@ -1852,17 +1709,7 @@
           "id": "paragraph-65",
           "kind": "paragraph",
           "text": "3. Hurry up, ________ you will miss the beginning of the concert."
-        }
-      ],
-      "questionIds": [
-        "2023-hebei-hebei-section-27-section-27-group-1-28"
-      ]
-    },
-    {
-      "id": "section-28",
-      "title": "A. soB. orC. andD. but",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-66",
           "kind": "paragraph",
@@ -1872,17 +1719,7 @@
           "id": "paragraph-67",
           "kind": "paragraph",
           "text": "4. I ________ ice skating this Sunday. Do you want to come?"
-        }
-      ],
-      "questionIds": [
-        "2023-hebei-hebei-section-28-section-28-group-1-29"
-      ]
-    },
-    {
-      "id": "section-29",
-      "title": "A. goB. wentC. was goingD. will go",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-68",
           "kind": "paragraph",
@@ -1908,18 +1745,7 @@
           "id": "paragraph-71",
           "kind": "paragraph",
           "text": "6. We are supposed to ________ our hand before we speak in class."
-        }
-      ],
-      "questionIds": [
-        "2023-hebei-hebei-section-29-section-29-group-1-30",
-        "2023-hebei-hebei-section-29-section-29-group-1-31"
-      ]
-    },
-    {
-      "id": "section-30",
-      "title": "A. put upB. put outC. put downD. put away",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-72",
           "kind": "paragraph",
@@ -1929,17 +1755,7 @@
           "id": "paragraph-73",
           "kind": "paragraph",
           "text": "7. This book must be great. My sister ________ it five times."
-        }
-      ],
-      "questionIds": [
-        "2023-hebei-hebei-section-30-section-30-group-1-32"
-      ]
-    },
-    {
-      "id": "section-31",
-      "title": "A. readsB. has readC. is readingD. was reading",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-74",
           "kind": "paragraph",
@@ -1949,17 +1765,7 @@
           "id": "paragraph-75",
           "kind": "paragraph",
           "text": "8. Some students ________ Taiji over there. Let’s go and join them."
-        }
-      ],
-      "questionIds": [
-        "2023-hebei-hebei-section-31-section-31-group-1-33"
-      ]
-    },
-    {
-      "id": "section-32",
-      "title": "A. playB. playedC. are playingD. were playing",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-76",
           "kind": "paragraph",
@@ -1969,17 +1775,7 @@
           "id": "paragraph-77",
           "kind": "paragraph",
           "text": "9. Lisa was busy taking notes ________ Mark was giving a talk."
-        }
-      ],
-      "questionIds": [
-        "2023-hebei-hebei-section-32-section-32-group-1-34"
-      ]
-    },
-    {
-      "id": "section-33",
-      "title": "A. ifB. unlessC. untilD. while",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-78",
           "kind": "paragraph",
@@ -1989,27 +1785,28 @@
           "id": "paragraph-79",
           "kind": "paragraph",
           "text": "10. Breakfast ________ every day for people aged over 60 for free in this village."
-        }
-      ],
-      "questionIds": [
-        "2023-hebei-hebei-section-33-section-33-group-1-35"
-      ]
-    },
-    {
-      "id": "section-34",
-      "title": "A. providesB. providedC. is providedD. was provided",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-80",
           "kind": "paragraph",
           "text": "A. providesB. providedC. is providedD. was provided"
         }
       ],
-      "questionIds": []
+      "questionIds": [
+        "2023-hebei-hebei-section-8-section-8-group-1-26",
+        "2023-hebei-hebei-section-8-section-8-group-2-27",
+        "2023-hebei-hebei-section-8-section-8-group-3-28",
+        "2023-hebei-hebei-section-8-section-8-group-4-29",
+        "2023-hebei-hebei-section-8-section-8-group-5-30",
+        "2023-hebei-hebei-section-8-section-8-group-5-31",
+        "2023-hebei-hebei-section-8-section-8-group-6-32",
+        "2023-hebei-hebei-section-8-section-8-group-7-33",
+        "2023-hebei-hebei-section-8-section-8-group-8-34",
+        "2023-hebei-hebei-section-8-section-8-group-9-35"
+      ]
     },
     {
-      "id": "section-35",
+      "id": "section-9",
       "title": "Ⅶ.完形填空（共10小题：每小题1分，满分10分）",
       "instructions": [
         "Ⅶ.完形填空（共10小题：每小题1分，满分10分）"
@@ -2024,7 +1821,7 @@
       "questionIds": []
     },
     {
-      "id": "section-36",
+      "id": "section-10",
       "title": "阅读下面短文，从每小题所给的四个选项中选出最佳选项。",
       "instructions": [
         "阅读下面短文，从每小题所给的四个选项中选出最佳选项。"
@@ -2118,37 +1915,57 @@
         }
       ],
       "questionIds": [
-        "2023-hebei-hebei-section-36-section-36-group-1-36",
-        "2023-hebei-hebei-section-36-section-36-group-1-37",
-        "2023-hebei-hebei-section-36-section-36-group-1-38",
-        "2023-hebei-hebei-section-36-section-36-group-1-39",
-        "2023-hebei-hebei-section-36-section-36-group-1-40",
-        "2023-hebei-hebei-section-36-section-36-group-1-41",
-        "2023-hebei-hebei-section-36-section-36-group-1-42",
-        "2023-hebei-hebei-section-36-section-36-group-1-43",
-        "2023-hebei-hebei-section-36-section-36-group-1-44"
+        "2023-hebei-hebei-section-10-section-10-group-1-36",
+        "2023-hebei-hebei-section-10-section-10-group-1-37",
+        "2023-hebei-hebei-section-10-section-10-group-1-38",
+        "2023-hebei-hebei-section-10-section-10-group-1-39",
+        "2023-hebei-hebei-section-10-section-10-group-1-40",
+        "2023-hebei-hebei-section-10-section-10-group-1-41",
+        "2023-hebei-hebei-section-10-section-10-group-1-42",
+        "2023-hebei-hebei-section-10-section-10-group-1-43",
+        "2023-hebei-hebei-section-10-section-10-group-1-44"
       ]
     },
     {
-      "id": "section-37",
+      "id": "section-11",
       "title": "Ⅶ.阅读理解（共15小题：每小题2分，满分30分）",
       "instructions": [
-        "Ⅶ.阅读理解（共15小题：每小题2分，满分30分）"
+        "Ⅶ.阅读理解（共15小题：每小题2分，满分30分）",
+        "A. On the walls.B. In the newspaper.C. On his website.D. In his favorite book.",
+        "A. Because of a talk about nature.B. Because of an article about nature.",
+        "C. Because of the people around her.D. Because of her visits to forests and lakes.",
+        "A. Some videos.B. Some magazines.C. Some photos.D. Some collections.",
+        "A. Something he bought.B. Something he made.",
+        "A. They work very hard.B. They like fruit very much.",
+        "C. They help pick up the rubbish.D. They enjoy making green cakes.",
+        "A. I made very good cakes and everyone enjoyed them.",
+        "B. I worked with the cleaner and my parents praised me.",
+        "C. I made some fruit juice but my classmates needed more.",
+        "D. I tried to help others but I worried about the heavy waste.",
+        "A. By telling a story.B. By asking a question.",
+        "C. By showing a saying.D. By sending a message.",
+        "A. Controlling the activity time.B. Writing down the team’s ideas.",
+        "C. Making speeches for the team.D. Helping the others make decisions.",
+        "A. Set a clear goal.B. Work out a plan.",
+        "C. Decide everyone’s role.D. Check the teacher’s examples.",
+        "A. Introduce the teacher’s instructions.B. Give information about smaller tasks.",
+        "C. Explain the method to do team projects.D. Describe the importance of creative ideas.",
+        "A. Set lifelong goals.B. Go forward easily.",
+        "C. Live healthily and happily.D. Think about new things.",
+        "A. We should support different people.B. Some people can push us to failure.",
+        "C. Confidence helps us make progress.D. Different schools expect the same progress.",
+        "A. It often goes smoothly.B. It still means progress.",
+        "C. It sometimes stops progress.D. It always gives us a clear mind.",
+        "A. Prizes.B. Advantages.C. Excuses.D. Difficulties.",
+        "A. Ideas about Making ProgressB. Keys to Speeding up Progress",
+        "C. Meanings of Having ConfidenceD. Suggestions on Relationships"
       ],
       "blocks": [
         {
           "id": "paragraph-98",
           "kind": "paragraph",
           "text": "Ⅶ.阅读理解（共15小题：每小题2分，满分30分）"
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-38",
-      "title": "阅读A、B、C、D四篇材料，从解小题所给的四个选项中选出最佳选项。",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-99",
           "kind": "paragraph",
@@ -2178,17 +1995,7 @@
           "id": "paragraph-101",
           "kind": "paragraph",
           "text": "21. Where can we read Pilar’s articles?"
-        }
-      ],
-      "questionIds": [
-        "2023-hebei-hebei-section-38-section-38-group-1-45"
-      ]
-    },
-    {
-      "id": "section-39",
-      "title": "A. On the walls.B. In the newspaper.C. On his website.D. In his favorite book.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-102",
           "kind": "paragraph",
@@ -2198,30 +2005,12 @@
           "id": "paragraph-103",
           "kind": "paragraph",
           "text": "22. Why does Sarah love birds and animals?"
-        }
-      ],
-      "questionIds": [
-        "2023-hebei-hebei-section-39-section-39-group-1-46"
-      ]
-    },
-    {
-      "id": "section-40",
-      "title": "A. Because of a talk about nature.B. Because of an article about nature.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-104",
           "kind": "paragraph",
           "text": "A. Because of a talk about nature.B. Because of an article about nature."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-41",
-      "title": "C. Because of the people around her.D. Because of her visits to forests and lakes.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-105",
           "kind": "paragraph",
@@ -2231,17 +2020,7 @@
           "id": "paragraph-106",
           "kind": "paragraph",
           "text": "23. What does Lia show to her friends?"
-        }
-      ],
-      "questionIds": [
-        "2023-hebei-hebei-section-41-section-41-group-1-47"
-      ]
-    },
-    {
-      "id": "section-42",
-      "title": "A. Some videos.B. Some magazines.C. Some photos.D. Some collections.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-107",
           "kind": "paragraph",
@@ -2292,17 +2071,7 @@
           "id": "paragraph-115",
           "kind": "paragraph",
           "text": "24. What did Bill share with his classmates one day?"
-        }
-      ],
-      "questionIds": [
-        "2023-hebei-hebei-section-42-section-42-group-1-48"
-      ]
-    },
-    {
-      "id": "section-43",
-      "title": "A. Something he bought.B. Something he made.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-116",
           "kind": "paragraph",
@@ -2323,30 +2092,12 @@
           "id": "paragraph-118",
           "kind": "paragraph",
           "text": "25. What do we know about Bill’s family?"
-        }
-      ],
-      "questionIds": [
-        "2023-hebei-hebei-section-43-section-43-group-1-49"
-      ]
-    },
-    {
-      "id": "section-44",
-      "title": "A. They work very hard.B. They like fruit very much.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-119",
           "kind": "paragraph",
           "text": "A. They work very hard.B. They like fruit very much."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-45",
-      "title": "C. They help pick up the rubbish.D. They enjoy making green cakes.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-120",
           "kind": "paragraph",
@@ -2356,56 +2107,22 @@
           "id": "paragraph-121",
           "kind": "paragraph",
           "text": "26. What will Bill most probably write in his diary?"
-        }
-      ],
-      "questionIds": [
-        "2023-hebei-hebei-section-45-section-45-group-1-50"
-      ]
-    },
-    {
-      "id": "section-46",
-      "title": "A. I made very good cakes and everyone enjoyed them.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-122",
           "kind": "paragraph",
           "text": "A. I made very good cakes and everyone enjoyed them."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-47",
-      "title": "B. I worked with the cleaner and my parents praised me.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-123",
           "kind": "paragraph",
           "text": "B. I worked with the cleaner and my parents praised me."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-48",
-      "title": "C. I made some fruit juice but my classmates needed more.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-124",
           "kind": "paragraph",
           "text": "C. I made some fruit juice but my classmates needed more."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-49",
-      "title": "D. I tried to help others but I worried about the heavy waste.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-125",
           "kind": "paragraph",
@@ -2478,30 +2195,12 @@
           "id": "paragraph-129",
           "kind": "paragraph",
           "text": "27. How does the writer begin the text?"
-        }
-      ],
-      "questionIds": [
-        "2023-hebei-hebei-section-49-section-49-group-1-51"
-      ]
-    },
-    {
-      "id": "section-50",
-      "title": "A. By telling a story.B. By asking a question.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-130",
           "kind": "paragraph",
           "text": "A. By telling a story.B. By asking a question."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-51",
-      "title": "C. By showing a saying.D. By sending a message.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-131",
           "kind": "paragraph",
@@ -2511,30 +2210,12 @@
           "id": "paragraph-132",
           "kind": "paragraph",
           "text": "28. What is the leader’s main job in the team?"
-        }
-      ],
-      "questionIds": [
-        "2023-hebei-hebei-section-51-section-51-group-1-52"
-      ]
-    },
-    {
-      "id": "section-52",
-      "title": "A. Controlling the activity time.B. Writing down the team’s ideas.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-133",
           "kind": "paragraph",
           "text": "A. Controlling the activity time.B. Writing down the team’s ideas."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-53",
-      "title": "C. Making speeches for the team.D. Helping the others make decisions.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-134",
           "kind": "paragraph",
@@ -2544,30 +2225,12 @@
           "id": "paragraph-135",
           "kind": "paragraph",
           "text": "29. What should you do after dividing the work?"
-        }
-      ],
-      "questionIds": [
-        "2023-hebei-hebei-section-53-section-53-group-1-53"
-      ]
-    },
-    {
-      "id": "section-54",
-      "title": "A. Set a clear goal.B. Work out a plan.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-136",
           "kind": "paragraph",
           "text": "A. Set a clear goal.B. Work out a plan."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-55",
-      "title": "C. Decide everyone’s role.D. Check the teacher’s examples.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-137",
           "kind": "paragraph",
@@ -2577,30 +2240,12 @@
           "id": "paragraph-138",
           "kind": "paragraph",
           "text": "30. What is the writer trying to do in the text?"
-        }
-      ],
-      "questionIds": [
-        "2023-hebei-hebei-section-55-section-55-group-1-54"
-      ]
-    },
-    {
-      "id": "section-56",
-      "title": "A. Introduce the teacher’s instructions.B. Give information about smaller tasks.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-139",
           "kind": "paragraph",
           "text": "A. Introduce the teacher’s instructions.B. Give information about smaller tasks."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-57",
-      "title": "C. Explain the method to do team projects.D. Describe the importance of creative ideas.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-140",
           "kind": "paragraph",
@@ -2645,30 +2290,12 @@
           "id": "paragraph-148",
           "kind": "paragraph",
           "text": "31. What does progress make us do?"
-        }
-      ],
-      "questionIds": [
-        "2023-hebei-hebei-section-57-section-57-group-1-55"
-      ]
-    },
-    {
-      "id": "section-58",
-      "title": "A. Set lifelong goals.B. Go forward easily.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-149",
           "kind": "paragraph",
           "text": "A. Set lifelong goals.B. Go forward easily."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-59",
-      "title": "C. Live healthily and happily.D. Think about new things.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-150",
           "kind": "paragraph",
@@ -2678,30 +2305,12 @@
           "id": "paragraph-151",
           "kind": "paragraph",
           "text": "32. What does Paragraph 3 tell us?"
-        }
-      ],
-      "questionIds": [
-        "2023-hebei-hebei-section-59-section-59-group-1-56"
-      ]
-    },
-    {
-      "id": "section-60",
-      "title": "A. We should support different people.B. Some people can push us to failure.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-152",
           "kind": "paragraph",
           "text": "A. We should support different people.B. Some people can push us to failure."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-61",
-      "title": "C. Confidence helps us make progress.D. Different schools expect the same progress.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-153",
           "kind": "paragraph",
@@ -2711,30 +2320,12 @@
           "id": "paragraph-154",
           "kind": "paragraph",
           "text": "33. What does the writer say about slow progress?"
-        }
-      ],
-      "questionIds": [
-        "2023-hebei-hebei-section-61-section-61-group-1-57"
-      ]
-    },
-    {
-      "id": "section-62",
-      "title": "A. It often goes smoothly.B. It still means progress.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-155",
           "kind": "paragraph",
           "text": "A. It often goes smoothly.B. It still means progress."
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-63",
-      "title": "C. It sometimes stops progress.D. It always gives us a clear mind.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-156",
           "kind": "paragraph",
@@ -2744,17 +2335,7 @@
           "id": "paragraph-157",
           "kind": "paragraph",
           "text": "34. Which word is close to the underlined word “setbacks”?"
-        }
-      ],
-      "questionIds": [
-        "2023-hebei-hebei-section-63-section-63-group-1-58"
-      ]
-    },
-    {
-      "id": "section-64",
-      "title": "A. Prizes.B. Advantages.C. Excuses.D. Difficulties.",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-158",
           "kind": "paragraph",
@@ -2764,40 +2345,38 @@
           "id": "paragraph-159",
           "kind": "paragraph",
           "text": "35. Which can be a proper title for the text?"
-        }
-      ],
-      "questionIds": [
-        "2023-hebei-hebei-section-64-section-64-group-1-59"
-      ]
-    },
-    {
-      "id": "section-65",
-      "title": "A. Ideas about Making ProgressB. Keys to Speeding up Progress",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-160",
           "kind": "paragraph",
           "text": "A. Ideas about Making ProgressB. Keys to Speeding up Progress"
-        }
-      ],
-      "questionIds": []
-    },
-    {
-      "id": "section-66",
-      "title": "C. Meanings of Having ConfidenceD. Suggestions on Relationships",
-      "instructions": [],
-      "blocks": [
+        },
         {
           "id": "paragraph-161",
           "kind": "paragraph",
           "text": "C. Meanings of Having ConfidenceD. Suggestions on Relationships"
         }
       ],
-      "questionIds": []
+      "questionIds": [
+        "2023-hebei-hebei-section-11-section-11-group-1-45",
+        "2023-hebei-hebei-section-11-section-11-group-2-46",
+        "2023-hebei-hebei-section-11-section-11-group-4-47",
+        "2023-hebei-hebei-section-11-section-11-group-5-48",
+        "2023-hebei-hebei-section-11-section-11-group-6-49",
+        "2023-hebei-hebei-section-11-section-11-group-8-50",
+        "2023-hebei-hebei-section-11-section-11-group-12-51",
+        "2023-hebei-hebei-section-11-section-11-group-14-52",
+        "2023-hebei-hebei-section-11-section-11-group-16-53",
+        "2023-hebei-hebei-section-11-section-11-group-18-54",
+        "2023-hebei-hebei-section-11-section-11-group-20-55",
+        "2023-hebei-hebei-section-11-section-11-group-22-56",
+        "2023-hebei-hebei-section-11-section-11-group-24-57",
+        "2023-hebei-hebei-section-11-section-11-group-26-58",
+        "2023-hebei-hebei-section-11-section-11-group-27-59"
+      ]
     },
     {
-      "id": "section-67",
+      "id": "section-12",
       "title": "Ⅸ.任务型阅读（共5小题：每小题2分，满分10分）",
       "instructions": [
         "Ⅸ.任务型阅读（共5小题：每小题2分，满分10分）"
@@ -2812,7 +2391,7 @@
       "questionIds": []
     },
     {
-      "id": "section-68",
+      "id": "section-13",
       "title": "阅读下面短文，按要求完成下面小题。",
       "instructions": [],
       "blocks": [
@@ -2898,15 +2477,15 @@
         }
       ],
       "questionIds": [
-        "2023-hebei-hebei-section-68-section-68-group-1-60",
-        "2023-hebei-hebei-section-68-section-68-group-1-61",
-        "2023-hebei-hebei-section-68-section-68-group-1-62",
-        "2023-hebei-hebei-section-68-section-68-group-1-63",
-        "2023-hebei-hebei-section-68-section-68-group-1-64"
+        "2023-hebei-hebei-section-13-section-13-group-1-60",
+        "2023-hebei-hebei-section-13-section-13-group-1-61",
+        "2023-hebei-hebei-section-13-section-13-group-1-62",
+        "2023-hebei-hebei-section-13-section-13-group-1-63",
+        "2023-hebei-hebei-section-13-section-13-group-1-64"
       ]
     },
     {
-      "id": "section-69",
+      "id": "section-14",
       "title": "Ⅹ.词语运用（共10小题；每小题1分，满分10分）",
       "instructions": [
         "Ⅹ.词语运用（共10小题；每小题1分，满分10分）"
@@ -2921,7 +2500,7 @@
       "questionIds": []
     },
     {
-      "id": "section-70",
+      "id": "section-15",
       "title": "阅读下面短文，在空白处填入一个适当的单词（有提示词的，填入所给单词的正确形式）。",
       "instructions": [],
       "blocks": [
@@ -2944,7 +2523,7 @@
       "questionIds": []
     },
     {
-      "id": "section-71",
+      "id": "section-16",
       "title": "Ⅺ.基础写作（包括A、B两部分，A部分5分，B部分15分，共20分）",
       "instructions": [
         "A）连词成句（共5小题；每小题1分，满分5分）"
@@ -2964,7 +2543,7 @@
       "questionIds": []
     },
     {
-      "id": "section-72",
+      "id": "section-17",
       "title": "将所给词语连成句子，要求符合语法，语句通顺，大小写正确，词语不得重复使用。",
       "instructions": [],
       "blocks": [
@@ -3030,14 +2609,14 @@
         }
       ],
       "questionIds": [
-        "2023-hebei-hebei-section-72-section-72-group-1-65",
-        "2023-hebei-hebei-section-72-section-72-group-1-66",
-        "2023-hebei-hebei-section-72-section-72-group-1-67",
-        "2023-hebei-hebei-section-72-section-72-group-1-68"
+        "2023-hebei-hebei-section-17-section-17-group-1-65",
+        "2023-hebei-hebei-section-17-section-17-group-1-66",
+        "2023-hebei-hebei-section-17-section-17-group-1-67",
+        "2023-hebei-hebei-section-17-section-17-group-1-68"
       ]
     },
     {
-      "id": "section-73",
+      "id": "section-18",
       "title": "B）书面表达（满分 15 分）",
       "instructions": [
         "B）书面表达（满分 15 分）"
@@ -3115,9 +2694,9 @@
         }
       ],
       "questionIds": [
-        "2023-hebei-hebei-section-73-section-73-group-1-69",
-        "2023-hebei-hebei-section-73-section-73-group-1-70",
-        "2023-hebei-hebei-section-73-section-73-group-1-71"
+        "2023-hebei-hebei-section-18-section-18-group-1-69",
+        "2023-hebei-hebei-section-18-section-18-group-1-70",
+        "2023-hebei-hebei-section-18-section-18-group-1-71"
       ]
     }
   ],
@@ -3333,11 +2912,11 @@
       "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-7-section-7-group-1-11",
+      "id": "2023-hebei-hebei-section-5-section-5-group-1-11",
       "number": 11,
       "displayNumber": "11",
-      "sectionId": "section-7",
-      "groupId": "section-7-group-1",
+      "sectionId": "section-5",
+      "groupId": "section-5-group-1",
       "prompt": "What is the boy looking for?",
       "options": [
         "A. ",
@@ -3354,11 +2933,11 @@
       "analysis": "句意：他们认为运动使他们疲劳和气味不好。\nlazy懒的；tired累的；ugly丑陋的；stupid愚蠢的。根据“Some people have no interest in sports. They think that sports make them...and smell bad.”可知，对运动不感兴趣的人会觉得运动使他们疲劳和气味不好。故选B。"
     },
     {
-      "id": "2023-hebei-hebei-section-8-section-8-group-1-12",
+      "id": "2023-hebei-hebei-section-5-section-5-group-2-12",
       "number": 12,
       "displayNumber": "12",
-      "sectionId": "section-8",
-      "groupId": "section-8-group-1",
+      "sectionId": "section-5",
+      "groupId": "section-5-group-2",
       "prompt": "Where will they go first?",
       "options": [
         "A. ",
@@ -3375,11 +2954,11 @@
       "analysis": "句意：你们还没有发现运动的乐趣！\nprice价格；time时间；fun乐趣；level水平。根据“You have not discovered the...of sports!”可知，对于对运动不感兴趣的人，作者想表达他们还没有发现运动的乐趣。故选C。"
     },
     {
-      "id": "2023-hebei-hebei-section-9-section-9-group-1-13",
+      "id": "2023-hebei-hebei-section-5-section-5-group-3-13",
       "number": 13,
       "displayNumber": "13",
-      "sectionId": "section-9",
-      "groupId": "section-9-group-1",
+      "sectionId": "section-5",
+      "groupId": "section-5-group-3",
       "prompt": "Who is answering the telephone?",
       "options": [
         "A. Jane.",
@@ -3396,11 +2975,11 @@
       "analysis": "句意：我们的父母和朋友都在那里为我们加油。\ncall打电话；praise赞扬；help帮助；cheer使振奋。根据“Our parents and friends were there to...us.”可知，父母和朋友都在那里加油。故选D。"
     },
     {
-      "id": "2023-hebei-hebei-section-10-section-10-group-1-14",
+      "id": "2023-hebei-hebei-section-5-section-5-group-4-14",
       "number": 14,
       "displayNumber": "14",
-      "sectionId": "section-10",
-      "groupId": "section-10-group-1",
+      "sectionId": "section-5",
+      "groupId": "section-5-group-4",
       "prompt": "How is Cindy today?",
       "options": [
         "A. Busy.",
@@ -3417,11 +2996,11 @@
       "analysis": "句意：我们都想在这么多人面前赢得比赛。\nwin赢得；watch观看；join参加；report报道。根据“We all wanted to...the game in front of so many people.”可知，想要赢得比赛，故选A。"
     },
     {
-      "id": "2023-hebei-hebei-section-11-section-11-group-1-15",
+      "id": "2023-hebei-hebei-section-5-section-5-group-5-15",
       "number": 15,
       "displayNumber": "15",
-      "sectionId": "section-11",
-      "groupId": "section-11-group-1",
+      "sectionId": "section-5",
+      "groupId": "section-5-group-5",
       "prompt": "What does Jane ask Cindy to do?",
       "options": [
         "A. Take a walk.",
@@ -3438,11 +3017,11 @@
       "analysis": "句意：比赛快结束了，我们落后一分。\nsuddenly突然；nearly几乎；finally最终；recently最近。根据“The game was...over and we were one point behind.”可知，比赛快结束时，还落后一分，故选B。\n16题详解】\n句意：即使我们没有得分，至少我们知道我们已经尽力了。\nat first起初；at once立刻；at times有时；at least至少。根据“Even if we don’t score, ...we know that we have tried our best.”可知，即使我们没有得分，至少已经尽力了。故选D。"
     },
     {
-      "id": "2023-hebei-hebei-section-12-section-12-group-1-16",
+      "id": "2023-hebei-hebei-section-5-section-5-group-6-16",
       "number": 16,
       "displayNumber": "16",
-      "sectionId": "section-12",
-      "groupId": "section-12-group-1",
+      "sectionId": "section-5",
+      "groupId": "section-5-group-6",
       "prompt": "What does Jack ask Miss White to do?",
       "options": [
         "A. Tell a story.",
@@ -3459,11 +3038,11 @@
       "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-13-section-13-group-1-17",
+      "id": "2023-hebei-hebei-section-5-section-5-group-7-17",
       "number": 17,
       "displayNumber": "17",
-      "sectionId": "section-13",
-      "groupId": "section-13-group-1",
+      "sectionId": "section-5",
+      "groupId": "section-5-group-7",
       "prompt": "How does Miss White help Jack?",
       "options": [
         "A. Read to him.",
@@ -3480,11 +3059,11 @@
       "analysis": "句意：嗯，在比赛的最后一分钟，我们真的进球了，两队打平了！\nmonth月；week周；hour小时；minute分钟。根据“in the last...of the game, we truly scored and two teams tied (打成平局)”可知，最后一分钟打平，故选D。"
     },
     {
-      "id": "2023-hebei-hebei-section-14-section-14-group-1-18",
+      "id": "2023-hebei-hebei-section-5-section-5-group-8-18",
       "number": 18,
       "displayNumber": "18",
-      "sectionId": "section-14",
-      "groupId": "section-14-group-1",
+      "sectionId": "section-5",
+      "groupId": "section-5-group-8",
       "prompt": "What will Jack do next?",
       "options": [
         "A. Go back to his seat.",
@@ -3501,11 +3080,11 @@
       "analysis": "句意：他告诉我们，他很自豪，因为他从未见过一支球队比我们更努力。\nbrave勇敢的；active积极的；proud骄傲的；honest诚实的。根据“He told us that he was...because he had never seen a team try harder than us.”可知，队员们的努力使教练骄傲，故选C。"
     },
     {
-      "id": "2023-hebei-hebei-section-16-section-16-group-1-19",
+      "id": "2023-hebei-hebei-section-6-section-6-group-1-19",
       "number": 19,
       "displayNumber": "19",
-      "sectionId": "section-16",
-      "groupId": "section-16-group-1",
+      "sectionId": "section-6",
+      "groupId": "section-6-group-1",
       "prompt": "Why will Peter be late for the party?",
       "options": [
         "A. The traffic is busy.",
@@ -3522,11 +3101,11 @@
       "analysis": "句意：老实说，我在运动中感到很多乐趣。\nfeel感觉；face面对；guess猜；give给。根据“To be honest, I...a lot of pleasure in playing sports.”可知，作者在运动中感到很多乐趣。故选A。"
     },
     {
-      "id": "2023-hebei-hebei-section-17-section-17-group-1-20",
+      "id": "2023-hebei-hebei-section-6-section-6-group-2-20",
       "number": 20,
       "displayNumber": "20",
-      "sectionId": "section-17",
-      "groupId": "section-17-group-1",
+      "sectionId": "section-6",
+      "groupId": "section-6-group-2",
       "prompt": "How long may it take Peter to get there by bus?",
       "options": [
         "A. Twenty minutes.",
@@ -3543,11 +3122,11 @@
       "analysis": "句意：所以我的建议是选择一项运动并坚持下去。\nadvice建议；order命令；action行动；interest兴趣。根据“So my...is to choose a sport and keep doing it.”可知，作者建议选择一项运动并坚持下去。故选A。"
     },
     {
-      "id": "2023-hebei-hebei-section-18-section-18-group-1-21",
+      "id": "2023-hebei-hebei-section-6-section-6-group-3-21",
       "number": 21,
       "displayNumber": "21",
-      "sectionId": "section-18",
-      "groupId": "section-18-group-1",
+      "sectionId": "section-6",
+      "groupId": "section-6-group-3",
       "prompt": "What will Peter bring to the party?",
       "options": [
         "A. Some apples.",
@@ -3564,11 +3143,11 @@
       "analysis": "细节理解题。根据“I often write articles about nature and put them on my website”可知，可以在Pilar的网站上看到他写的文章，故选C。"
     },
     {
-      "id": "2023-hebei-hebei-section-19-section-19-group-1-22",
+      "id": "2023-hebei-hebei-section-6-section-6-group-4-22",
       "number": 22,
       "displayNumber": "22",
-      "sectionId": "section-19",
-      "groupId": "section-19-group-1",
+      "sectionId": "section-6",
+      "groupId": "section-6-group-4",
       "prompt": "When will the students start to work in groups?",
       "options": [
         "A. At 2 o’clock.",
@@ -3585,11 +3164,11 @@
       "analysis": "细节理解题。根据“I love birds and animals because my school has organized many visits to forests and lakes for us.”可知，Sara喜欢鸟类和动物，因为她的学校组织了很多次森林和湖泊之旅。故选D。"
     },
     {
-      "id": "2023-hebei-hebei-section-20-section-20-group-1-23",
+      "id": "2023-hebei-hebei-section-6-section-6-group-5-23",
       "number": 23,
       "displayNumber": "23",
-      "sectionId": "section-20",
-      "groupId": "section-20-group-1",
+      "sectionId": "section-6",
+      "groupId": "section-6-group-5",
       "prompt": "How many students will each group have?",
       "options": [
         "A. Six.",
@@ -3603,14 +3182,14 @@
       "type": "choice",
       "context": "",
       "answer": "A",
-      "analysis": "细节理解题。根据“I’ve made some short videos and I often show them to my friends.”可知，Lia做了一些短视频，经常给朋友们看。故选A。\nB\nMy best friend Bill is always trying to find out ways to give the environment a helping hand. One day, Bill brought some green cakes to school. At lunch, he shared his cakes with us. “Delicious!” “Wonderful!” Everyone liked the cakes and wondered how he made them.\nThe story goes back a few weeks. Bill’s family likes fruit very much. His father especially loves watermelons. He eats a lot of them in summer. They always throw away the skins (皮).\nAfter seeing the cleaner working hard to pick up the heavy rubbish pail (桶), Bill said. “There must be a good way to use all the watermelon skins.”\nAfter a lot of thinking, he decided to make something with the skins. First, he made the skins into juice. Then he carefully made his delicious GREEN cakes.\nOnce he tasted the cake, he knew his cakes were a great by-product (副产品) of the watermelon eating. And it was nature friendly too.\nFrom now on, he doesn’t need to worry about the heavy waste from eating watermelons. And everyone always wants more of his special cakes.\n24. What did Bill share with his classmates one day?"
+      "analysis": "细节理解题。根据“I’ve made some short videos and I often show them to my friends.”可知，Lia做了一些短视频，经常给朋友们看。故选A。\nB\nMy best friend Bill is always trying to find out ways to give the environment a helping hand. One day, Bill brought some green cakes to school. At lunch, he shared his cakes with us. “Delicious!” “Wonderful!” Everyone liked the cakes and wondered how he made them.\nThe story goes back a few weeks. Bill’s family likes fruit very much. His father especially loves watermelons. He eats a lot of them in summer. They always throw away the skins (皮).\nAfter seeing the cleaner working hard to pick up the heavy rubbish pail (桶), Bill said. “There must be a good way to use all the watermelon skins.”\nAfter a lot of thinking, he decided to make something with the skins. First, he made the skins into juice. Then he carefully made his delicious GREEN cakes.\nOnce he tasted the cake, he knew his cakes were a great by-product (副产品) of the watermelon eating. And it was nature friendly too.\nFrom now on, he doesn’t need to worry about the heavy waste from eating watermelons. And everyone always wants more of his special cakes.\n24. What did Bill share with his classmates one day?\nA. Something he bought.B. Something he made.\nC Something he planted.D. Something he picked.\n25. What do we know about Bill’s family?\nA. They work very hard.B. They like fruit very much.\nC. They help pick up the rubbish.D. They enjoy making green cakes.\n26. What will Bill most probably write in his diary?\nA. I made very good cakes and everyone enjoyed them.\nB. I worked with the cleaner and my parents praised me.\nC. I made some fruit juice but my classmates needed more.\nD. I tried to help others but I worried about the heavy waste.\n【答案】24. B    25. B    26. A\n【解析】\n【导语】本文主要讲述了Bill用西瓜皮制作了蛋糕，并带到学校和同学分享，同学也很喜欢他做的蛋糕。"
     },
     {
-      "id": "2023-hebei-hebei-section-21-section-21-group-1-24",
+      "id": "2023-hebei-hebei-section-6-section-6-group-6-24",
       "number": 24,
       "displayNumber": "24",
-      "sectionId": "section-21",
-      "groupId": "section-21-group-1",
+      "sectionId": "section-6",
+      "groupId": "section-6-group-6",
       "prompt": "What will they do in the west hall?",
       "options": [
         "A. Write their play.",
@@ -3627,11 +3206,11 @@
       "analysis": "细节理解题。根据“Bill brought some green cakes to school. At lunch, he shared his cakes with us...Everyone liked the cakes and wondered how he made them”可知他和同学分享他做的蛋糕。故选B。"
     },
     {
-      "id": "2023-hebei-hebei-section-22-section-22-group-1-25",
+      "id": "2023-hebei-hebei-section-6-section-6-group-7-25",
       "number": 25,
       "displayNumber": "25",
-      "sectionId": "section-22",
-      "groupId": "section-22-group-1",
+      "sectionId": "section-6",
+      "groupId": "section-6-group-7",
       "prompt": "Who will be invited to watch the plays?",
       "options": [
         "A. Some famous actors.",
@@ -3648,11 +3227,11 @@
       "analysis": "细节理解题。根据“Bill’s family likes fruit very much”可知他家人非常喜欢水果。故选B。"
     },
     {
-      "id": "2023-hebei-hebei-section-25-section-25-group-1-26",
+      "id": "2023-hebei-hebei-section-8-section-8-group-1-26",
       "number": 1,
       "displayNumber": "1",
-      "sectionId": "section-25",
-      "groupId": "section-25-group-1",
+      "sectionId": "section-8",
+      "groupId": "section-8-group-1",
       "prompt": "Many thanks ________ your gift. I love it.",
       "options": [
         "A. in",
@@ -3670,11 +3249,11 @@
       "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-26-section-26-group-1-27",
+      "id": "2023-hebei-hebei-section-8-section-8-group-2-27",
       "number": 2,
       "displayNumber": "2",
-      "sectionId": "section-26",
-      "groupId": "section-26-group-1",
+      "sectionId": "section-8",
+      "groupId": "section-8-group-2",
       "prompt": "—Where did you get the toy car? —From Betty. She made it ________.",
       "options": [
         "A. myself",
@@ -3692,11 +3271,11 @@
       "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-27-section-27-group-1-28",
+      "id": "2023-hebei-hebei-section-8-section-8-group-3-28",
       "number": 3,
       "displayNumber": "3",
-      "sectionId": "section-27",
-      "groupId": "section-27-group-1",
+      "sectionId": "section-8",
+      "groupId": "section-8-group-3",
       "prompt": "Hurry up, ________ you will miss the beginning of the concert.",
       "options": [
         "A. so",
@@ -3714,11 +3293,11 @@
       "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-28-section-28-group-1-29",
+      "id": "2023-hebei-hebei-section-8-section-8-group-4-29",
       "number": 4,
       "displayNumber": "4",
-      "sectionId": "section-28",
-      "groupId": "section-28-group-1",
+      "sectionId": "section-8",
+      "groupId": "section-8-group-4",
       "prompt": "I ________ ice skating this Sunday. Do you want to come?",
       "options": [
         "A. go",
@@ -3736,11 +3315,11 @@
       "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-29-section-29-group-1-30",
+      "id": "2023-hebei-hebei-section-8-section-8-group-5-30",
       "number": 5,
       "displayNumber": "5",
-      "sectionId": "section-29",
-      "groupId": "section-29-group-1",
+      "sectionId": "section-8",
+      "groupId": "section-8-group-5",
       "prompt": "If we ________ find a better way, we’ll finish the job faster. A can",
       "options": [
         "B. can’t",
@@ -3757,11 +3336,11 @@
       "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-29-section-29-group-1-31",
+      "id": "2023-hebei-hebei-section-8-section-8-group-5-31",
       "number": 6,
       "displayNumber": "6",
-      "sectionId": "section-29",
-      "groupId": "section-29-group-1",
+      "sectionId": "section-8",
+      "groupId": "section-8-group-5",
       "prompt": "We are supposed to ________ our hand before we speak in class.",
       "options": [
         "A. put up",
@@ -3779,11 +3358,11 @@
       "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-30-section-30-group-1-32",
+      "id": "2023-hebei-hebei-section-8-section-8-group-6-32",
       "number": 7,
       "displayNumber": "7",
-      "sectionId": "section-30",
-      "groupId": "section-30-group-1",
+      "sectionId": "section-8",
+      "groupId": "section-8-group-6",
       "prompt": "This book must be great. My sister ________ it five times.",
       "options": [
         "A. reads",
@@ -3801,11 +3380,11 @@
       "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-31-section-31-group-1-33",
+      "id": "2023-hebei-hebei-section-8-section-8-group-7-33",
       "number": 8,
       "displayNumber": "8",
-      "sectionId": "section-31",
-      "groupId": "section-31-group-1",
+      "sectionId": "section-8",
+      "groupId": "section-8-group-7",
       "prompt": "Some students ________ Taiji over there. Let’s go and join them.",
       "options": [
         "A. play",
@@ -3823,11 +3402,11 @@
       "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-32-section-32-group-1-34",
+      "id": "2023-hebei-hebei-section-8-section-8-group-8-34",
       "number": 9,
       "displayNumber": "9",
-      "sectionId": "section-32",
-      "groupId": "section-32-group-1",
+      "sectionId": "section-8",
+      "groupId": "section-8-group-8",
       "prompt": "Lisa was busy taking notes ________ Mark was giving a talk.",
       "options": [
         "A. if",
@@ -3845,11 +3424,11 @@
       "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-33-section-33-group-1-35",
+      "id": "2023-hebei-hebei-section-8-section-8-group-9-35",
       "number": 10,
       "displayNumber": "10",
-      "sectionId": "section-33",
-      "groupId": "section-33-group-1",
+      "sectionId": "section-8",
+      "groupId": "section-8-group-9",
       "prompt": "Breakfast ________ every day for people aged over 60 for free in this village.",
       "options": [
         "A. provides",
@@ -3867,11 +3446,11 @@
       "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-36-section-36-group-1-36",
+      "id": "2023-hebei-hebei-section-10-section-10-group-1-36",
       "number": 11,
       "displayNumber": "11",
-      "sectionId": "section-36",
-      "groupId": "section-36-group-1",
+      "sectionId": "section-10",
+      "groupId": "section-10-group-1",
       "prompt": "第 11 题",
       "options": [
         "A. lazy",
@@ -3889,11 +3468,11 @@
       "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-36-section-36-group-1-37",
+      "id": "2023-hebei-hebei-section-10-section-10-group-1-37",
       "number": 12,
       "displayNumber": "12",
-      "sectionId": "section-36",
-      "groupId": "section-36-group-1",
+      "sectionId": "section-10",
+      "groupId": "section-10-group-1",
       "prompt": "第 12 题",
       "options": [
         "A. price",
@@ -3911,11 +3490,11 @@
       "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-36-section-36-group-1-38",
+      "id": "2023-hebei-hebei-section-10-section-10-group-1-38",
       "number": 13,
       "displayNumber": "13",
-      "sectionId": "section-36",
-      "groupId": "section-36-group-1",
+      "sectionId": "section-10",
+      "groupId": "section-10-group-1",
       "prompt": "第 13 题",
       "options": [
         "A. call",
@@ -3933,11 +3512,11 @@
       "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-36-section-36-group-1-39",
+      "id": "2023-hebei-hebei-section-10-section-10-group-1-39",
       "number": 14,
       "displayNumber": "14",
-      "sectionId": "section-36",
-      "groupId": "section-36-group-1",
+      "sectionId": "section-10",
+      "groupId": "section-10-group-1",
       "prompt": "第 14 题",
       "options": [
         "A. win",
@@ -3955,11 +3534,11 @@
       "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-36-section-36-group-1-40",
+      "id": "2023-hebei-hebei-section-10-section-10-group-1-40",
       "number": 15,
       "displayNumber": "15",
-      "sectionId": "section-36",
-      "groupId": "section-36-group-1",
+      "sectionId": "section-10",
+      "groupId": "section-10-group-1",
       "prompt": "第 15 题",
       "options": [
         "A. suddenly",
@@ -3977,11 +3556,11 @@
       "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-36-section-36-group-1-41",
+      "id": "2023-hebei-hebei-section-10-section-10-group-1-41",
       "number": 16,
       "displayNumber": "16",
-      "sectionId": "section-36",
-      "groupId": "section-36-group-1",
+      "sectionId": "section-10",
+      "groupId": "section-10-group-1",
       "prompt": "第 16 题",
       "options": [
         "A. at first",
@@ -3999,11 +3578,11 @@
       "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-36-section-36-group-1-42",
+      "id": "2023-hebei-hebei-section-10-section-10-group-1-42",
       "number": 17,
       "displayNumber": "17",
-      "sectionId": "section-36",
-      "groupId": "section-36-group-1",
+      "sectionId": "section-10",
+      "groupId": "section-10-group-1",
       "prompt": "第 17 题",
       "options": [
         "A. month",
@@ -4021,11 +3600,11 @@
       "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-36-section-36-group-1-43",
+      "id": "2023-hebei-hebei-section-10-section-10-group-1-43",
       "number": 18,
       "displayNumber": "18",
-      "sectionId": "section-36",
-      "groupId": "section-36-group-1",
+      "sectionId": "section-10",
+      "groupId": "section-10-group-1",
       "prompt": "第 18 题",
       "options": [
         "A. brave",
@@ -4047,11 +3626,11 @@
       "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-36-section-36-group-1-44",
+      "id": "2023-hebei-hebei-section-10-section-10-group-1-44",
       "number": 20,
       "displayNumber": "20",
-      "sectionId": "section-36",
-      "groupId": "section-36-group-1",
+      "sectionId": "section-10",
+      "groupId": "section-10-group-1",
       "prompt": "第 20 题",
       "options": [
         "A. advice",
@@ -4072,11 +3651,11 @@
       "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-38-section-38-group-1-45",
+      "id": "2023-hebei-hebei-section-11-section-11-group-1-45",
       "number": 21,
       "displayNumber": "21",
-      "sectionId": "section-38",
-      "groupId": "section-38-group-1",
+      "sectionId": "section-11",
+      "groupId": "section-11-group-1",
       "prompt": "Where can we read Pilar’s articles?",
       "options": [
         "A. On the walls.",
@@ -4094,11 +3673,11 @@
       "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-39-section-39-group-1-46",
+      "id": "2023-hebei-hebei-section-11-section-11-group-2-46",
       "number": 22,
       "displayNumber": "22",
-      "sectionId": "section-39",
-      "groupId": "section-39-group-1",
+      "sectionId": "section-11",
+      "groupId": "section-11-group-2",
       "prompt": "Why does Sarah love birds and animals?",
       "options": [
         "A. Because of a talk about nature.",
@@ -4116,11 +3695,11 @@
       "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-41-section-41-group-1-47",
+      "id": "2023-hebei-hebei-section-11-section-11-group-4-47",
       "number": 23,
       "displayNumber": "23",
-      "sectionId": "section-41",
-      "groupId": "section-41-group-1",
+      "sectionId": "section-11",
+      "groupId": "section-11-group-4",
       "prompt": "What does Lia show to her friends?",
       "options": [
         "A. Some videos.",
@@ -4138,11 +3717,11 @@
       "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-42-section-42-group-1-48",
+      "id": "2023-hebei-hebei-section-11-section-11-group-5-48",
       "number": 24,
       "displayNumber": "24",
-      "sectionId": "section-42",
-      "groupId": "section-42-group-1",
+      "sectionId": "section-11",
+      "groupId": "section-11-group-5",
       "prompt": "What did Bill share with his classmates one day?",
       "options": [
         "A. Something he bought.",
@@ -4159,11 +3738,11 @@
       "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-43-section-43-group-1-49",
+      "id": "2023-hebei-hebei-section-11-section-11-group-6-49",
       "number": 25,
       "displayNumber": "25",
-      "sectionId": "section-43",
-      "groupId": "section-43-group-1",
+      "sectionId": "section-11",
+      "groupId": "section-11-group-6",
       "prompt": "What do we know about Bill’s family?",
       "options": [
         "A. They work very hard.",
@@ -4181,11 +3760,11 @@
       "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-45-section-45-group-1-50",
+      "id": "2023-hebei-hebei-section-11-section-11-group-8-50",
       "number": 26,
       "displayNumber": "26",
-      "sectionId": "section-45",
-      "groupId": "section-45-group-1",
+      "sectionId": "section-11",
+      "groupId": "section-11-group-8",
       "prompt": "What will Bill most probably write in his diary?",
       "options": [
         "A. I made very good cakes and everyone enjoyed them.",
@@ -4200,14 +3779,14 @@
       "type": "choice",
       "context": "",
       "answer": "A",
-      "analysis": "推理判断题。通读全文可知，本文主要讲述了Bill用西瓜皮制作了蛋糕，并带到学校和同学分享，同学也很喜欢他做的蛋糕，故他可能会在日记中写“我做了很好的蛋糕，每个人都很喜欢”。故选A。\nC\nDo you do team projects at school? I do a lot. I enjoy team projects because I like sharing ideas with other people. Of course, team activities aren’t always easy. You need to know how to work well together. Here are some suggestions to make team work easier.\nTry to be positive (积极的). Everything is easier when you’re enjoying yourself in the team.\n27. How does the writer begin the text?"
+      "analysis": "推理判断题。通读全文可知，本文主要讲述了Bill用西瓜皮制作了蛋糕，并带到学校和同学分享，同学也很喜欢他做的蛋糕，故他可能会在日记中写“我做了很好的蛋糕，每个人都很喜欢”。故选A。\nC\nDo you do team projects at school? I do a lot. I enjoy team projects because I like sharing ideas with other people. Of course, team activities aren’t always easy. You need to know how to work well together. Here are some suggestions to make team work easier.\nTry to be positive (积极的). Everything is easier when you’re enjoying yourself in the team.\n27. How does the writer begin the text?\nA. By telling a story.B. By asking a question.\nC. By showing a saying.D. By sending a message.\n28. What is the leader’s main job in the team?\nA. Controlling the activity time.B. Writing down the team’s ideas.\nC. Making speeches for the team.D. Helping the others make decisions.\n29. What should you do after dividing the work?\nA. Set a clear goal.B. Work out a plan.\nC. Decide everyone’s role.D. Check the teacher’s examples.\n30. What is the writer trying to do in the text?\nA. Introduce the teacher’s instructions.B. Give information about smaller tasks.\nC. Explain the method to do team projects.D. Describe the importance of creative ideas.\n【答案】27 B    28. D    29. B    30. C\n【解析】\n【导语】本文主要介绍了一些让团队工作更容易的建议。"
     },
     {
-      "id": "2023-hebei-hebei-section-49-section-49-group-1-51",
+      "id": "2023-hebei-hebei-section-11-section-11-group-12-51",
       "number": 27,
       "displayNumber": "27",
-      "sectionId": "section-49",
-      "groupId": "section-49-group-1",
+      "sectionId": "section-11",
+      "groupId": "section-11-group-12",
       "prompt": "How does the writer begin the text?",
       "options": [
         "A. By telling a story.",
@@ -4225,11 +3804,11 @@
       "analysis": "细节理解题。根据“Do you do team projects at school”可知作者以一个问题开始本文。故选B。"
     },
     {
-      "id": "2023-hebei-hebei-section-51-section-51-group-1-52",
+      "id": "2023-hebei-hebei-section-11-section-11-group-14-52",
       "number": 28,
       "displayNumber": "28",
-      "sectionId": "section-51",
-      "groupId": "section-51-group-1",
+      "sectionId": "section-11",
+      "groupId": "section-11-group-14",
       "prompt": "What is the leader’s main job in the team?",
       "options": [
         "A. Controlling the activity time.",
@@ -4247,11 +3826,11 @@
       "analysis": "细节理解题根据“there should be a leader who helps everyone make decisions.”可知领导者帮助每个人做决定。故选D。"
     },
     {
-      "id": "2023-hebei-hebei-section-53-section-53-group-1-53",
+      "id": "2023-hebei-hebei-section-11-section-11-group-16-53",
       "number": 29,
       "displayNumber": "29",
-      "sectionId": "section-53",
-      "groupId": "section-53-group-1",
+      "sectionId": "section-11",
+      "groupId": "section-11-group-16",
       "prompt": "What should you do after dividing the work?",
       "options": [
         "A. Set a clear goal.",
@@ -4269,11 +3848,11 @@
       "analysis": "细节理解题。根据“After you divide the work, write down a plan on paper.”可知分工后，在纸上写一个计划。故选B。"
     },
     {
-      "id": "2023-hebei-hebei-section-55-section-55-group-1-54",
+      "id": "2023-hebei-hebei-section-11-section-11-group-18-54",
       "number": 30,
       "displayNumber": "30",
-      "sectionId": "section-55",
-      "groupId": "section-55-group-1",
+      "sectionId": "section-11",
+      "groupId": "section-11-group-18",
       "prompt": "What is the writer trying to do in the text?",
       "options": [
         "A. Introduce the teacher’s instructions.",
@@ -4288,14 +3867,14 @@
       "type": "choice",
       "context": "",
       "answer": "C",
-      "analysis": "主旨大意题。本文主要介绍了一些让团队工作更容易的建议。故选C。\nD\nProgress means the act of going forward. Making any kind of progress can make us healthy and happy in life. By setting and actively working towards our goals, we can make progress in our life.\nTo make more progress in life, start looking at problems in a different way. Whatever happens, if we think positively, it can be useful and helpful. We need to know that problems are part of our life. After we solve problems one after another, we can make more progress and become stronger.\nHaving confidence (信心) is helpful for us to make progress. Confidence comes from different places, such as proper education, training or having good relationships. We should also stay with people who believe in our success and actively support us. These people can help push us towards progress.\nSlow progress is still progress. Just as the old saying goes, “It does not matter how slowly you go as long as you do not stop.” Progress usually comes a lot more slowly than we expect. Even if progress is slow, try not to be worried. One important thing is that we keep taking steps towards our goals, and another is that we clearly remember what our goals are all the time. The actual speed isn’t important.\nThe road to progress is not always smooth. Most progress often comes with setbacks along the way. Sometimes, maybe it feels like we’re taking one step forward and three steps back, but it won’t always be like that. Keep going towards our goals and we can much more easily make the progress we want.\nProgress doesn’t always happen in a straight line. As long as we keep working, we will achieve higher levels.\n31. What does progress make us do?"
+      "analysis": "主旨大意题。本文主要介绍了一些让团队工作更容易的建议。故选C。\nD\nProgress means the act of going forward. Making any kind of progress can make us healthy and happy in life. By setting and actively working towards our goals, we can make progress in our life.\nTo make more progress in life, start looking at problems in a different way. Whatever happens, if we think positively, it can be useful and helpful. We need to know that problems are part of our life. After we solve problems one after another, we can make more progress and become stronger.\nHaving confidence (信心) is helpful for us to make progress. Confidence comes from different places, such as proper education, training or having good relationships. We should also stay with people who believe in our success and actively support us. These people can help push us towards progress.\nSlow progress is still progress. Just as the old saying goes, “It does not matter how slowly you go as long as you do not stop.” Progress usually comes a lot more slowly than we expect. Even if progress is slow, try not to be worried. One important thing is that we keep taking steps towards our goals, and another is that we clearly remember what our goals are all the time. The actual speed isn’t important.\nThe road to progress is not always smooth. Most progress often comes with setbacks along the way. Sometimes, maybe it feels like we’re taking one step forward and three steps back, but it won’t always be like that. Keep going towards our goals and we can much more easily make the progress we want.\nProgress doesn’t always happen in a straight line. As long as we keep working, we will achieve higher levels.\n31. What does progress make us do?\nA. Set lifelong goals.B. Go forward easily.\nC. Live healthily and happily.D. Think about new things.\n32. What does Paragraph 3 tell us?\nA. We should support different people.B. Some people can push us to failure.\nC. Confidence helps us make progress.D. Different schools expect the same progress.\n33. What does the writer say about slow progress?\nA. It often goes smoothly.B. It still means progress.\nC. It sometimes stops progress.D. It always gives us a clear mind.\n34. Which word is close to the underlined word “setbacks”?\nA. Prizes.B. Advantages.C. Excuses.D. Difficulties.\n35. Which can be a proper title for the text?\nA. Ideas about Making ProgressB. Keys to Speeding up Progress\nC. Meanings of Having ConfidenceD. Suggestions on Relationships\n【答案】31. C    32. C    33. B    34. D    35. A\n【解析】\n【导语】本文主要介绍了如何取得进步，虽然通往进步的道路不总是平坦的，但是只要我们继续努力，我们就会达到更高的水平。"
     },
     {
-      "id": "2023-hebei-hebei-section-57-section-57-group-1-55",
+      "id": "2023-hebei-hebei-section-11-section-11-group-20-55",
       "number": 31,
       "displayNumber": "31",
-      "sectionId": "section-57",
-      "groupId": "section-57-group-1",
+      "sectionId": "section-11",
+      "groupId": "section-11-group-20",
       "prompt": "What does progress make us do?",
       "options": [
         "A. Set lifelong goals.",
@@ -4313,11 +3892,11 @@
       "analysis": "细节理解题。根据“Making any kind of progress can make us healthy and happy in life”可知任何形式的进步都能使我们在生活中健康快乐。故选C。"
     },
     {
-      "id": "2023-hebei-hebei-section-59-section-59-group-1-56",
+      "id": "2023-hebei-hebei-section-11-section-11-group-22-56",
       "number": 32,
       "displayNumber": "32",
-      "sectionId": "section-59",
-      "groupId": "section-59-group-1",
+      "sectionId": "section-11",
+      "groupId": "section-11-group-22",
       "prompt": "What does Paragraph 3 tell us?",
       "options": [
         "A. We should support different people.",
@@ -4335,11 +3914,11 @@
       "analysis": "主旨大意题。根据“Having confidence (信心) is helpful for us to make progress”以及本段内容可知信心有助于我们取得进步。故选C。"
     },
     {
-      "id": "2023-hebei-hebei-section-61-section-61-group-1-57",
+      "id": "2023-hebei-hebei-section-11-section-11-group-24-57",
       "number": 33,
       "displayNumber": "33",
-      "sectionId": "section-61",
-      "groupId": "section-61-group-1",
+      "sectionId": "section-11",
+      "groupId": "section-11-group-24",
       "prompt": "What does the writer say about slow progress?",
       "options": [
         "A. It often goes smoothly.",
@@ -4357,11 +3936,11 @@
       "analysis": "细节理解题。根据“Slow progress is still progress”可知缓慢的进步仍然是进步。故选B。"
     },
     {
-      "id": "2023-hebei-hebei-section-63-section-63-group-1-58",
+      "id": "2023-hebei-hebei-section-11-section-11-group-26-58",
       "number": 34,
       "displayNumber": "34",
-      "sectionId": "section-63",
-      "groupId": "section-63-group-1",
+      "sectionId": "section-11",
+      "groupId": "section-11-group-26",
       "prompt": "Which word is close to the underlined word “setbacks”?",
       "options": [
         "A. Prizes.",
@@ -4379,11 +3958,11 @@
       "analysis": "词义猜测题。根据“The road to progress is not always smooth. Most progress often comes with setbacks along the way”可知通往进步的道路并不总是平坦的，大多数进步往往伴随着挫折，故此处划线部分意为“挫折，困难”，和difficulties意义相近。故选D。"
     },
     {
-      "id": "2023-hebei-hebei-section-64-section-64-group-1-59",
+      "id": "2023-hebei-hebei-section-11-section-11-group-27-59",
       "number": 35,
       "displayNumber": "35",
-      "sectionId": "section-64",
-      "groupId": "section-64-group-1",
+      "sectionId": "section-11",
+      "groupId": "section-11-group-27",
       "prompt": "Which can be a proper title for the text?",
       "options": [
         "A. Ideas about Making Progress",
@@ -4401,11 +3980,11 @@
       "analysis": "最佳标题题。本文主要介绍了如何取得进步，虽然通往进步的道路不总是平坦的，但是只要我们继续努力，我们就会达到更高的水平，以选项A“关于进步的想法”为标题最合适。故选A。"
     },
     {
-      "id": "2023-hebei-hebei-section-68-section-68-group-1-60",
+      "id": "2023-hebei-hebei-section-13-section-13-group-1-60",
       "number": 1,
       "displayNumber": "1",
-      "sectionId": "section-68",
-      "groupId": "section-68-group-1",
+      "sectionId": "section-13",
+      "groupId": "section-13-group-1",
       "prompt": "2题完成句子；3~5题简略回答问题。",
       "options": [],
       "inputKind": "text",
@@ -4418,11 +3997,11 @@
       "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-68-section-68-group-1-61",
+      "id": "2023-hebei-hebei-section-13-section-13-group-1-61",
       "number": 36,
       "displayNumber": "36",
-      "sectionId": "section-68",
-      "groupId": "section-68-group-1",
+      "sectionId": "section-13",
+      "groupId": "section-13-group-1",
       "prompt": "Ms. Liu showed the students around ___________________ in a science museum.",
       "options": [],
       "inputKind": "blank",
@@ -4435,11 +4014,11 @@
       "analysis": "根据“Ms. Liu, the guide, showed us around a smart home.”可知，导游刘女士带我们参观了一个智能家居。故填a smart home。"
     },
     {
-      "id": "2023-hebei-hebei-section-68-section-68-group-1-62",
+      "id": "2023-hebei-hebei-section-13-section-13-group-1-62",
       "number": 37,
       "displayNumber": "37",
-      "sectionId": "section-68",
-      "groupId": "section-68-group-1",
+      "sectionId": "section-13",
+      "groupId": "section-13-group-1",
       "prompt": "The home-owners can electronically ___________________ when they are not at home.",
       "options": [],
       "inputKind": "blank",
@@ -4452,11 +4031,11 @@
       "analysis": "根据“They can electronically open the door when they are not at home”可知，他们不在家的时候可以用电子方式开门，故填open the door。"
     },
     {
-      "id": "2023-hebei-hebei-section-68-section-68-group-1-63",
+      "id": "2023-hebei-hebei-section-13-section-13-group-1-63",
       "number": 38,
       "displayNumber": "38",
-      "sectionId": "section-68",
-      "groupId": "section-68-group-1",
+      "sectionId": "section-13",
+      "groupId": "section-13-group-1",
       "prompt": "Where is the key to the door? _________________________________________________________________________________________",
       "options": [],
       "inputKind": "blank",
@@ -4469,11 +4048,11 @@
       "analysis": "根据“Oh, the key is on the smart phone.”可知，钥匙在智能手机上。故填On the smart phone."
     },
     {
-      "id": "2023-hebei-hebei-section-68-section-68-group-1-64",
+      "id": "2023-hebei-hebei-section-13-section-13-group-1-64",
       "number": 39,
       "displayNumber": "39",
-      "sectionId": "section-68",
-      "groupId": "section-68-group-1",
+      "sectionId": "section-13",
+      "groupId": "section-13-group-1",
       "prompt": "How can the owners control how much energy is used? _________________________________________________________________________________________",
       "options": [],
       "inputKind": "blank",
@@ -4486,11 +4065,11 @@
       "analysis": "根据“By using the computer, the owners can control how much energy is used.”可知，通过使用电脑，业主可以控制使用多少能源。故填By using the computer."
     },
     {
-      "id": "2023-hebei-hebei-section-72-section-72-group-1-65",
+      "id": "2023-hebei-hebei-section-17-section-17-group-1-65",
       "number": 51,
       "displayNumber": "51",
-      "sectionId": "section-72",
-      "groupId": "section-72-group-1",
+      "sectionId": "section-17",
+      "groupId": "section-17-group-1",
       "prompt": "fine, what, weather ____________________!",
       "options": [],
       "inputKind": "blank",
@@ -4503,11 +4082,11 @@
       "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-72-section-72-group-1-66",
+      "id": "2023-hebei-hebei-section-17-section-17-group-1-66",
       "number": 52,
       "displayNumber": "52",
-      "sectionId": "section-72",
-      "groupId": "section-72-group-1",
+      "sectionId": "section-17",
+      "groupId": "section-17-group-1",
       "prompt": "a great day, a picnic, it’s, for ________________________________________________.",
       "options": [],
       "inputKind": "blank",
@@ -4520,11 +4099,11 @@
       "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-72-section-72-group-1-67",
+      "id": "2023-hebei-hebei-section-17-section-17-group-1-67",
       "number": 53,
       "displayNumber": "53",
-      "sectionId": "section-72",
-      "groupId": "section-72-group-1",
+      "sectionId": "section-17",
+      "groupId": "section-17-group-1",
       "prompt": "go to, we, the beach, shall ____________________?",
       "options": [],
       "inputKind": "blank",
@@ -4537,11 +4116,11 @@
       "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-72-section-72-group-1-68",
+      "id": "2023-hebei-hebei-section-17-section-17-group-1-68",
       "number": 54,
       "displayNumber": "54",
-      "sectionId": "section-72",
-      "groupId": "section-72-group-1",
+      "sectionId": "section-17",
+      "groupId": "section-17-group-1",
       "prompt": "food, I’ll, some, take ________________________________________________.",
       "options": [],
       "inputKind": "blank",
@@ -4554,11 +4133,11 @@
       "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-73-section-73-group-1-69",
+      "id": "2023-hebei-hebei-section-18-section-18-group-1-69",
       "number": 56,
       "displayNumber": "56",
-      "sectionId": "section-73",
-      "groupId": "section-73-group-1",
+      "sectionId": "section-18",
+      "groupId": "section-18-group-1",
       "prompt": "王梅的英国朋友Tony要来中国学习汉语，下面是Tony给她发来的电子邮件的部分内容。请你根据所给内容，以王梅的名义回复。 You know, in English, given names (名字) come first and family names (姓) come last. How about Chinese names? And can you help me choose a Chinese name and tell me its meaning? 注意：（1）回复邮件须回答所给邮件内容中的两个问题，可适当发挥。",
       "options": [],
       "inputKind": "text",
@@ -4571,11 +4150,11 @@
       "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-73-section-73-group-1-70",
+      "id": "2023-hebei-hebei-section-18-section-18-group-1-70",
       "number": 2,
       "displayNumber": "2",
-      "sectionId": "section-73",
-      "groupId": "section-73-group-1",
+      "sectionId": "section-18",
+      "groupId": "section-18-group-1",
       "prompt": "回复邮件中不得出现真实的地名、校名和人名，所起名字只限于备选名字。",
       "options": [],
       "inputKind": "text",
@@ -4588,11 +4167,11 @@
       "analysis": ""
     },
     {
-      "id": "2023-hebei-hebei-section-73-section-73-group-1-71",
+      "id": "2023-hebei-hebei-section-18-section-18-group-1-71",
       "number": 3,
       "displayNumber": "3",
-      "sectionId": "section-73",
-      "groupId": "section-73-group-1",
+      "sectionId": "section-18",
+      "groupId": "section-18-group-1",
       "prompt": "词数80个左右（开头和结尾已给出，不计入总词数）。 备选名字：王健（Wang Jian）；李聪（Li Cong）；张友好（Zhang Youhao） Hi Tony, I’m very happy to know that you’ll come to China to learn Chinese. _________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________ Looking forward to seeing you. Yours, Wang Mei",
       "options": [],
       "inputKind": "blank",
