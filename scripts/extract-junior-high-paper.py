@@ -395,11 +395,31 @@ def analysis_map(lines: list[str], questions: list[dict] | None = None) -> dict:
         text = "\n".join(lines[start + 1 : end]).strip()
         if text:
             entries.append((number, text))
+    answer_markers = [index for index, line in enumerate(lines) if "【答案】" in line]
+    for marker_index, start in enumerate(answer_markers):
+        end = answer_markers[marker_index + 1] if marker_index + 1 < len(answer_markers) else len(lines)
+        marker_value = lines[start].split("【答案】", 1)[1].strip()
+        if not marker_value and start + 1 < len(lines):
+            marker_value = lines[start + 1].strip()
+        numbers = [int(match.group(1)) for match in re.finditer(r"(?<!\d)(\d{1,3})\s*[．.、:：)]", marker_value)]
+        text = "\n".join(lines[start + 1 : end]).strip()
+        if not text:
+            continue
+        if numbers:
+            entries.extend((number, text) for number in numbers)
+        else:
+            entries.append((None, text))
     if questions is None:
         return {number: text for number, text in entries}
     result = {}
     assigned = set()
     for number, text in entries:
+        if number is None:
+            candidate = next((question for question in questions if question["id"] not in assigned), None)
+            if candidate is not None:
+                result[candidate["id"]] = text
+                assigned.add(candidate["id"])
+            continue
         candidate = next((question for question in questions if question["id"] not in assigned and question["number"] == number), None)
         if candidate is not None:
             result[candidate["id"]] = text
