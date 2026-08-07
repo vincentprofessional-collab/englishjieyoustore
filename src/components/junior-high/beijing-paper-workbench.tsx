@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 import { StudyAnnotationTools } from "@/components/study-annotation-tools";
 import beijing2024Paper from "@/lib/junior-high/beijing-2024-simulation.json";
-import type { JuniorHighBook, JuniorHighPaper, JuniorHighQuestion } from "@/lib/junior-high/paper-types";
+import type { JuniorHighBlock, JuniorHighBook, JuniorHighPaper, JuniorHighQuestion, JuniorHighSection } from "@/lib/junior-high/paper-types";
 
 const defaultPaper = beijing2024Paper as unknown as JuniorHighPaper;
 type PaperQuestion = JuniorHighQuestion;
@@ -22,7 +22,7 @@ function PaperTimer({ running, seconds, onToggle }: { running: boolean; seconds:
 }
 
 function QuestionNavigation({ paper, current, onSelect }: { paper: JuniorHighPaper; current: number; onSelect: (index: number) => void }) {
-  return <nav aria-label="试卷题号导航" className="junior-high-paper-nav">{paper.questions.map((question, index) => <button className={current === index ? "selected" : ""} key={question.id} onClick={() => onSelect(index)} type="button">{question.number}</button>)}</nav>;
+  return <nav aria-label="试卷题号导航" className="junior-high-paper-nav">{paper.questions.map((question, index) => <button className={current === index ? "selected" : ""} key={question.id} onClick={() => onSelect(index)} type="button"><span>{question.displayNumber ?? question.number}</span>{question.sectionId ? <small>{question.sectionId.replace("section-", "")}</small> : null}</button>)}</nav>;
 }
 
 function questionSection(question: PaperQuestion) {
@@ -41,16 +41,16 @@ function renderContext(text: string): ReactNode {
   });
 }
 
-function PaperQuestionCard({ question, value, submitted, onAnswer, cloze }: { question: PaperQuestion; value: string; submitted: boolean; onAnswer: (value: string) => void; cloze?: boolean }) {
+function PaperQuestionCard({ question, value, submitted, onAnswer, cloze, sectionTitle }: { question: PaperQuestion; value: string; submitted: boolean; onAnswer: (value: string) => void; cloze?: boolean; sectionTitle?: string }) {
   const [showAnalysis, setShowAnalysis] = useState(false);
-  const isOpenResponse = question.options.length === 0;
+  const isOpenResponse = question.inputKind === "blank" || question.inputKind === "text" || question.inputKind === "writing" || (!question.inputKind && !question.options.length);
   const isCorrect = !isOpenResponse && value === question.answer;
   return (
     <article className={`junior-high-question-card ${cloze ? "junior-high-cloze-question" : ""}`} data-question-number={question.number} id={`junior-high-question-${question.id}`}>
-      <div className="junior-high-question-heading"><strong>第 {question.number} 题</strong>{cloze ? null : <span>{questionSection(question)}</span>}</div>
+      <div className="junior-high-question-heading"><strong>第 {question.displayNumber ?? question.number} 题</strong>{cloze ? null : <span>{sectionTitle ?? questionSection(question)}</span>}</div>
       {question.image ? <img alt="题目配图" className="junior-high-question-image" src={question.image} /> : null}<p className="junior-high-question-prompt">{question.prompt}</p>
       {isOpenResponse ? <textarea value={value} onChange={(event) => onAnswer(event.target.value)} placeholder="请输入答案……" rows={question.number === 37 ? 4 : 2} /> : <div className="junior-high-options">{question.options.map((option) => <button className={value === option[0] ? "selected" : ""} key={option} onClick={() => onAnswer(option[0])} type="button">{option}</button>)}</div>}
-      {submitted ? <div className="junior-high-feedback"><span>你的答案：{value || "未作答"}</span><span>{isOpenResponse ? "参考答案" : "正确答案"}：{question.answer}</span><span className={isOpenResponse ? "manual" : isCorrect ? "correct" : "incorrect"}>{isOpenResponse ? "人工复核" : isCorrect ? "✓ 正确" : "✕ 请查看解析"}</span><button onClick={() => setShowAnalysis(!showAnalysis)} type="button">解析</button>{showAnalysis ? <div className="junior-high-analysis"><strong>解析</strong><button onClick={() => setShowAnalysis(false)} type="button">关闭</button><p>{question.analysis}</p></div> : null}</div> : null}
+      {submitted ? <div className="junior-high-feedback"><span>你的答案：{value || "未作答"}</span><span>{isOpenResponse ? "参考答案" : "正确答案"}：{question.answer || "—"}</span><span className={isOpenResponse ? "manual" : isCorrect ? "correct" : "incorrect"}>{isOpenResponse ? "人工复核" : isCorrect ? "✓ 正确" : "✕ 请查看解析"}</span><button onClick={() => setShowAnalysis(!showAnalysis)} type="button">解析</button>{showAnalysis ? <div className="junior-high-analysis"><strong>解析</strong><button onClick={() => setShowAnalysis(false)} type="button">关闭</button><p>{question.analysis || "原解析文件未提供本题的独立解析。"}</p></div> : null}</div> : null}
     </article>
   );
 }
@@ -71,9 +71,48 @@ function WritingTask({ label, prompt, requirements, opening, closing, value, onC
 
 function GenericPaperContent({ paper, answers, submitted, onAnswer, writingA, writingB, onWritingA, onWritingB }: { paper: JuniorHighPaper; answers: Record<string, string>; submitted: boolean; onAnswer: (question: PaperQuestion, value: string) => void; writingA: string; writingB: string; onWritingA: (value: string) => void; onWritingB: (value: string) => void }) {
   return <>
-    <section className="junior-high-paper-section"><h2>原卷内容</h2><div className="junior-high-generic-source">{paper.assets?.audio?.length ? <div className="junior-high-audio-list"><strong>听力音频</strong>{paper.assets.audio.map((src, index) => <label key={src}>音频 {index + 1}<audio controls preload="metadata" src={src} /></label>)}</div> : null}{paper.assets?.all?.map((src) => <img alt="原卷配图" className="junior-high-context-image" key={src} src={src} />)}<pre>{paper.sourceText}</pre></div></section>
+    <section className="junior-high-paper-section"><h2>原卷内容</h2><div className="junior-high-generic-source">{paper.assets?.audio?.length ? <div className="junior-high-audio-list"><strong>听力音频</strong>{paper.assets.audio.map((src, index) => <label key={src}>音频 {index + 1}<audio controls preload="metadata" src={src} /></label>)}</div> : null}{paper.assets?.all?.map((src) => <img alt="原卷配图" className="junior-high-context-image" key={src} src={src} />)}<p>该试卷正在转换为结构化版式，请稍后查看分节内容。</p></div></section>
     <section className="junior-high-paper-section"><h2>题目</h2><div className="junior-high-question-stack">{paper.questions.map((question) => <PaperQuestionCard key={question.id} onAnswer={(value) => onAnswer(question, value)} question={question} submitted={submitted} value={answers[question.id] || ""} />)}</div></section>
     <section className="junior-high-paper-section"><h2>{paper.writing.title ?? "写作"}</h2><div className="junior-high-paper-writing"><WritingTask label="A." prompt={paper.writing.promptA} requirements={paper.writing.requirementsA} value={writingA} onChange={onWritingA} /><WritingTask label="B." prompt={paper.writing.promptB} requirements={paper.writing.requirementsB} value={writingB} onChange={onWritingB} />{submitted ? <div className="junior-high-feedback"><span>作文：已提交</span><span className="manual">人工评分</span></div> : null}</div></section>
+  </>;
+}
+
+function renderStructuredBlock(block: JuniorHighBlock, section: JuniorHighSection): ReactNode {
+  if (block.kind === "paragraph") {
+    if (!block.text || block.text === section.title) return null;
+    return <p className="junior-high-source-paragraph">{block.text}</p>;
+  }
+  if (block.kind === "image" && block.src) {
+    return <img alt={block.alt ?? `${section.title} 原卷图片`} className="junior-high-source-image" src={block.src} />;
+  }
+  if (block.kind === "audio" && block.src) {
+    return <audio className="junior-high-source-audio" controls preload="metadata" src={block.src} />;
+  }
+  if (block.kind === "table" && block.rows?.length) {
+    return <div className="junior-high-source-table-wrap"><table className="junior-high-source-table"><tbody>{block.rows.map((row, rowIndex) => <tr key={`${block.id}-${rowIndex}`}>{row.map((cell, cellIndex) => <td key={`${block.id}-${rowIndex}-${cellIndex}`}>{cell}</td>)}</tr>)}</tbody></table></div>;
+  }
+  return null;
+}
+
+function StructuredPaperContent({ paper, answers, submitted, onAnswer, writingA, writingB, onWritingA, onWritingB }: { paper: JuniorHighPaper; answers: Record<string, string>; submitted: boolean; onAnswer: (question: PaperQuestion, value: string) => void; writingA: string; writingB: string; onWritingA: (value: string) => void; onWritingB: (value: string) => void }) {
+  const sections = paper.sections ?? [];
+  const questionsById = new Map(paper.questions.map((question) => [question.id, question]));
+  const writingTasks = paper.writingTasks?.length ? paper.writingTasks : [{ id: "writing-1", label: "写作", prompt: paper.writing.promptA, requirements: paper.writing.requirementsA }];
+  return <>
+    {paper.assets?.audio?.length ? <div className="junior-high-audio-list"><strong>听力音频</strong>{paper.assets.audio.map((src, index) => <label key={src}>音频 {index + 1}<audio controls preload="metadata" src={src} /></label>)}</div> : null}
+    {sections.map((section) => {
+      const sectionQuestions = section.questionIds.map((id) => questionsById.get(id)).filter((question): question is PaperQuestion => Boolean(question));
+      return <section className="junior-high-paper-section junior-high-structured-section" key={section.id}>
+        <h2>{section.title}</h2>
+        <div className="junior-high-structured-blocks">{section.blocks.map((block) => <div className="junior-high-structured-block" key={block.id}>{renderStructuredBlock(block, section)}</div>)}</div>
+        {sectionQuestions.length ? <div className="junior-high-question-stack">{sectionQuestions.map((question) => <PaperQuestionCard key={question.id} onAnswer={(value) => onAnswer(question, value)} question={question} sectionTitle={section.title} submitted={submitted} value={answers[question.id] || ""} />)}</div> : null}
+      </section>;
+    })}
+    <section className="junior-high-paper-section"><h2>{paper.writing.title ?? "写作"}</h2><div className="junior-high-paper-writing">{writingTasks.map((task, index) => {
+      const value = index === 0 ? writingA : writingB;
+      const onChange = index === 0 ? onWritingA : onWritingB;
+      return <WritingTask key={task.id} label={task.label} prompt={task.prompt} requirements={task.requirements} value={value} onChange={onChange}>{task.table?.length ? <table className="junior-high-writing-table"><tbody>{task.table.map((row, rowIndex) => <tr key={`${task.id}-${rowIndex}`}>{row.map((cell, cellIndex) => <td key={`${task.id}-${rowIndex}-${cellIndex}`}>{cell}</td>)}</tr>)}</tbody></table> : null}{task.image ? <img alt={`${task.label} 写作配图`} className="junior-high-writing-diagram" src={task.image} /> : null}</WritingTask>;
+    })}{submitted ? <div className="junior-high-feedback"><span>作文：已提交</span><span className="manual">人工评分</span></div> : null}</div></section>
   </>;
 }
 
@@ -122,18 +161,18 @@ export function JuniorHighPaperWorkbench({ paper, onBack }: { paper: JuniorHighP
     if (!document.fullscreenElement && pageRef.current?.requestFullscreen) await pageRef.current.requestFullscreen().catch(() => undefined);
   }
 
-  const byRange = (from: number, to: number) => paper.questions.filter((question) => question.number >= from && question.number <= to);
+  const beijingRange = (from: number, to: number) => paper.questions.filter((question) => question.number >= from && question.number <= to);
   const handleAnswer = (question: PaperQuestion, value: string) => setAnswers((previous) => ({ ...previous, [question.id]: value }));
 
   return <section className={`stack junior-high-page junior-high-exam-page ${isFullscreen ? "fullscreen" : ""}`} data-local-selection-actions="true" ref={pageRef}>
     <div className="junior-high-exam-toolbar"><button className="junior-high-back" onClick={onBack} type="button">← 返回选择</button><div className="junior-high-exam-toolbar-title"><strong>{paper.displayTitle ?? `中考英语 ${paper.year}年${paper.region}${paper.label}`}</strong></div><PaperTimer onToggle={() => setRunning(!running)} running={running} seconds={seconds} /><div className="junior-high-toolbar-actions"><button className={`annotation-toggle ielts-exam-action ielts-fullscreen-toggle ${isFullscreen ? "active" : ""}`} onClick={() => void toggleFullscreen()} type="button">{isFullscreen ? "退出全屏" : "全屏"}</button><StudyAnnotationTools buttonClassName="annotation-toggle ielts-exam-action" sourceHref="/junior-high" sourceId={`junior-high:${paper.year}-${paper.region}-${paper.label}`} sourceTitle={paper.fileName} surfaceRef={pageRef} /></div></div>
     <QuestionNavigation paper={paper} current={current} onSelect={selectQuestion} />
     <div className="junior-high-paper-content">
-      {paper.layout === "generic" ? <GenericPaperContent answers={answers} onAnswer={handleAnswer} onWritingA={setWritingA} onWritingB={setWritingB} paper={paper} submitted={submitted} writingA={writingA} writingB={writingB} /> : <>
-      <section className="junior-high-paper-section"><h2>第一部分</h2><p className="junior-high-paper-intro">本部分共33题，共40分。在每题列出的四个选项中，选出最符合题目要求的一项。</p><h3 className="junior-high-section-subtitle">一、单项填空（每题0. 5分，共6分）</h3><p className="junior-high-paper-intro">从下面各题所给的A、B、C、D四个选项中，选择可以填入空白处的最佳选项。</p><div className="junior-high-question-stack">{byRange(1, 12).map((question) => <PaperQuestionCard key={question.id} onAnswer={(value) => handleAnswer(question, value)} question={question} submitted={submitted} value={answers[question.id] || ""} />)}</div></section>
-      <section className="junior-high-paper-section"><h2>二、完形填空（每题1分，共8分）</h2><p className="junior-high-paper-intro">阅读下面的短文，掌握其大意，然后从短文后各题所给的A、B、C、D四个选项中，选择最佳选项。</p><PassageGroup context={paper.questions.find((question) => question.number === 13)?.context ?? ""} image={paper.assets?.cloze} questions={byRange(13, 20)} answers={answers} onAnswer={handleAnswer} submitted={submitted} title="完形填空原文" variant="cloze" /></section>
-      <section className="junior-high-paper-section"><h2>三、阅读理解（每题2分，共26分）</h2><p className="junior-high-paper-intro">阅读下列短文或课程介绍，根据题目要求选择最佳选项。</p><p className="junior-high-paper-intro junior-high-paper-intro-muted">{paper.readingA.instructions}</p><PassageGroup books={paper.readingA.books} context={paper.questions.find((question) => question.number === 21)?.context ?? ""} image={paper.assets?.readingA} questions={byRange(21, 23)} answers={answers} onAnswer={handleAnswer} submitted={submitted} title="阅读理解 · A" variant="readingA" /><PassageGroup context={paper.questions.find((question) => question.number === 24)?.context ?? ""} image={paper.assets?.readingB} questions={byRange(24, 26)} answers={answers} onAnswer={handleAnswer} submitted={submitted} title="阅读理解 · B" /><PassageGroup context={paper.questions.find((question) => question.number === 27)?.context ?? ""} image={paper.assets?.readingC} questions={byRange(27, 29)} answers={answers} onAnswer={handleAnswer} submitted={submitted} title="阅读理解 · C" /><PassageGroup context={paper.questions.find((question) => question.number === 30)?.context ?? ""} image={paper.assets?.readingD} questions={byRange(30, 33)} answers={answers} onAnswer={handleAnswer} submitted={submitted} title="阅读理解 · D" /></section>
-      <section className="junior-high-paper-section junior-high-reading-response-section"><h2>第二部分</h2><p className="junior-high-paper-intro">本部分共5题，共20分。根据题目要求，完成相应任务。</p><h3 className="junior-high-section-subtitle">四、阅读表达（第34—36题每题2分，第37题4分，共10分）</h3><p className="junior-high-paper-intro">阅读短文，根据短文内容回答问题。</p><PassageGroup context={paper.questions.find((question) => question.number === 34)?.context ?? ""} image={paper.assets?.readingResponse} questions={byRange(34, 37)} answers={answers} onAnswer={handleAnswer} submitted={submitted} title="阅读表达原文" variant="readingResponse" /></section>
+      {paper.layout === "generic" ? <GenericPaperContent answers={answers} onAnswer={handleAnswer} onWritingA={setWritingA} onWritingB={setWritingB} paper={paper} submitted={submitted} writingA={writingA} writingB={writingB} /> : paper.layout === "structured" ? <StructuredPaperContent answers={answers} onAnswer={handleAnswer} onWritingA={setWritingA} onWritingB={setWritingB} paper={paper} submitted={submitted} writingA={writingA} writingB={writingB} /> : <>
+      <section className="junior-high-paper-section"><h2>第一部分</h2><p className="junior-high-paper-intro">本部分共33题，共40分。在每题列出的四个选项中，选出最符合题目要求的一项。</p><h3 className="junior-high-section-subtitle">一、单项填空（每题0. 5分，共6分）</h3><p className="junior-high-paper-intro">从下面各题所给的A、B、C、D四个选项中，选择可以填入空白处的最佳选项。</p><div className="junior-high-question-stack">{beijingRange(1, 12).map((question) => <PaperQuestionCard key={question.id} onAnswer={(value) => handleAnswer(question, value)} question={question} submitted={submitted} value={answers[question.id] || ""} />)}</div></section>
+      <section className="junior-high-paper-section"><h2>二、完形填空（每题1分，共8分）</h2><p className="junior-high-paper-intro">阅读下面的短文，掌握其大意，然后从短文后各题所给的A、B、C、D四个选项中，选择最佳选项。</p><PassageGroup context={paper.questions.find((question) => question.number === 13)?.context ?? ""} image={paper.assets?.cloze} questions={beijingRange(13, 20)} answers={answers} onAnswer={handleAnswer} submitted={submitted} title="完形填空原文" variant="cloze" /></section>
+      <section className="junior-high-paper-section"><h2>三、阅读理解（每题2分，共26分）</h2><p className="junior-high-paper-intro">阅读下列短文或课程介绍，根据题目要求选择最佳选项。</p><p className="junior-high-paper-intro junior-high-paper-intro-muted">{paper.readingA.instructions}</p><PassageGroup books={paper.readingA.books} context={paper.questions.find((question) => question.number === 21)?.context ?? ""} image={paper.assets?.readingA} questions={beijingRange(21, 23)} answers={answers} onAnswer={handleAnswer} submitted={submitted} title="阅读理解 · A" variant="readingA" /><PassageGroup context={paper.questions.find((question) => question.number === 24)?.context ?? ""} image={paper.assets?.readingB} questions={beijingRange(24, 26)} answers={answers} onAnswer={handleAnswer} submitted={submitted} title="阅读理解 · B" /><PassageGroup context={paper.questions.find((question) => question.number === 27)?.context ?? ""} image={paper.assets?.readingC} questions={beijingRange(27, 29)} answers={answers} onAnswer={handleAnswer} submitted={submitted} title="阅读理解 · C" /><PassageGroup context={paper.questions.find((question) => question.number === 30)?.context ?? ""} image={paper.assets?.readingD} questions={beijingRange(30, 33)} answers={answers} onAnswer={handleAnswer} submitted={submitted} title="阅读理解 · D" /></section>
+      <section className="junior-high-paper-section junior-high-reading-response-section"><h2>第二部分</h2><p className="junior-high-paper-intro">本部分共5题，共20分。根据题目要求，完成相应任务。</p><h3 className="junior-high-section-subtitle">四、阅读表达（第34—36题每题2分，第37题4分，共10分）</h3><p className="junior-high-paper-intro">阅读短文，根据短文内容回答问题。</p><PassageGroup context={paper.questions.find((question) => question.number === 34)?.context ?? ""} image={paper.assets?.readingResponse} questions={beijingRange(34, 37)} answers={answers} onAnswer={handleAnswer} submitted={submitted} title="阅读表达原文" variant="readingResponse" /></section>
       <section className="junior-high-paper-section"><h2>{paper.writing.title ?? "五、文段表达（10分）"}</h2><div className="junior-high-paper-writing"><WritingTask label="A." closing={paper.writing.closingA} opening={paper.writing.openingA} prompt={paper.writing.promptA} requirements={paper.writing.requirementsA} value={writingA} onChange={setWritingA}>{paper.writing.tableA?.length ? <table className="junior-high-writing-table"><tbody>{paper.writing.tableA.map(([label, value]) => <tr key={label}><th scope="row">{label}</th><td>{value}</td></tr>)}</tbody></table> : null}</WritingTask><WritingTask label="B." closing={paper.writing.closingB} opening={paper.writing.openingB} prompt={paper.writing.promptB} requirements={`${paper.writing.contentPointsB ? `${paper.writing.contentPointsB}\n` : ""}${paper.writing.requirementsB}`} value={writingB} onChange={setWritingB}>{paper.writing.diagram ? <img alt="写作任务图示" className="junior-high-writing-diagram" src={paper.writing.diagram} /> : null}</WritingTask>{submitted ? <div className="junior-high-feedback"><span>作文：已提交</span><span className="manual">人工评分</span></div> : null}</div></section>
       </>}
     </div>

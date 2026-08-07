@@ -1016,11 +1016,23 @@
 .junior-high-toolbar-actions { display: flex; align-items: center; gap: 8px; }
 .junior-high-exam-source { border-inline: 1px solid #e4dccd; padding: 8px 12px; line-height: 1.7; overflow-wrap: anywhere; }
 .junior-high-paper-nav { display: flex; flex-wrap: wrap; gap: 6px; border-block: 1px solid #e7e0d3; margin: 22px 0; padding: 12px 0; }
-.junior-high-paper-nav button { min-width: 32px; border: 1px solid #d8d0c2; border-radius: 7px; background: #fff; color: #4c5a52; cursor: pointer; padding: 6px 8px; }
+.junior-high-paper-nav button { display: inline-flex; align-items: baseline; justify-content: center; gap: 3px; min-width: 32px; border: 1px solid #d8d0c2; border-radius: 7px; background: #fff; color: #4c5a52; cursor: pointer; padding: 6px 8px; }
+.junior-high-paper-nav button small { color: #8a8377; font-size: 9px; }
 .junior-high-paper-nav button.selected { border-color: #1f5b4d; background: #1f5b4d; color: #fff; }
+.junior-high-paper-nav button.selected small { color: #dce9e2; }
 .junior-high-paper-content { display: grid; gap: 16px; }
 .junior-high-paper-section { display: grid; gap: 16px; }
 .junior-high-paper-section > h2 { margin: 12px 0 0; color: #1f5b4d; font-family: KaiTi, STKaiti, serif; font-size: 26px; }
+.junior-high-structured-section { gap: 18px; }
+.junior-high-structured-blocks { display: grid; gap: 12px; }
+.junior-high-structured-block { min-width: 0; }
+.junior-high-source-paragraph { margin: 0; color: #27362f; font-size: 17px; line-height: 1.85; white-space: pre-line; }
+.junior-high-source-image { display: block; width: min(100%, 760px); max-height: 620px; margin: 4px auto; border: 1px solid #e4dccd; border-radius: 9px; object-fit: contain; background: #fffdf7; }
+.junior-high-source-audio { width: min(100%, 620px); }
+.junior-high-source-table-wrap { max-width: 100%; overflow-x: auto; }
+.junior-high-source-table { width: 100%; min-width: 520px; border-collapse: collapse; color: #27362f; font-size: 15px; line-height: 1.65; background: #fffdf7; }
+.junior-high-source-table td { border: 1px solid #d8d0c2; padding: 10px 12px; vertical-align: top; white-space: pre-line; }
+.junior-high-source-table tr:first-child td { background: #fbf6e9; color: #315e51; font-weight: 700; }
 .junior-high-section-subtitle { margin: 4px 0 0; color: #27362f; font-family: KaiTi, STKaiti, serif; font-size: 21px; }
 .junior-high-paper-intro { margin: 0; color: #4c5a52; font-size: 16px; line-height: 1.8; }
 .junior-high-paper-intro-muted { color: #766f62; font-size: 14px; }
