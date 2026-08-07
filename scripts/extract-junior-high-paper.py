@@ -14,8 +14,8 @@ from xml.etree import ElementTree as ET
 
 NS = {"w": "http://schemas.openxmlformats.org/wordprocessingml/2006/main"}
 RELS_NS = {"pr": "http://schemas.openxmlformats.org/package/2006/relationships"}
-SECTION_HEADING = re.compile(r"^[一二三四五六七八九十]+、")
-QUESTION = re.compile(r"^\s*(\d{1,3})\s*[．.、)]\s*(.*)$")
+SECTION_HEADING = re.compile(r"^\s*(?:[一二三四五六七八九十]+[、.．]|第[一二三四五六七八九十]+部分|Part\s*\d+|[ⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩ]+[.．])")
+QUESTION = re.compile(r"^\s*(\d{1,3})\s*(?:[．.、:：)）]\s*|\s+)(.*)$")
 OPTION_MARKER = re.compile(r"([A-D])[．.、)]\s*")
 AUDIO_EXTENSIONS = {".mp3", ".wav", ".m4a", ".mp4", ".flac", ".aac", ".ogg"}
 DIRECT_MEDIA_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp", ".gif", ".svg"}
@@ -123,67 +123,291 @@ def split_options(text: str) -> tuple[str, list[str]]:
     return prompt, options
 
 
-def parse_questions(lines: list[str]) -> list[dict]:
-    starts = [(index, int(match.group(1))) for index, line in enumerate(lines) if (match := QUESTION.match(line))]
+INSTRUCTION_MARKERS = (
+    "注意事项", "答题卡", "考试结束", "监考教师", "准考证", "本试卷共", "本卷共", "满分", "考试时间",
+    "答卷前", "作答选择题", "每题选出答案", "请务必", "请根据所听", "从每小题所给",
+)
+GROUP_KEYWORDS = ("听力", "听说", "单项", "语法", "完形", "阅读", "任务型", "短文", "写作", "作文", "书面表达", "文段表达")
+BLANK_MARKER = re.compile(r"_{2,}|…{2,}|（\s*）|\(\s*\)|空格|填空|填写|填入|信息转换|首字母")
+TABLE_BLANK = re.compile(r"(?<=\s)(\d{1,3})(?=\s{2,})")
+
+
+def _is_section_heading(text: str) -> bool:
+    text = text.strip()
+    if not text or QUESTION.match(text):
+        return False
+    if text in {"A．B．C．", "A. B. C.", "A    B    C"}:
+        return False
+    if SECTION_HEADING.match(text):
+        return True
+    if re.match(r"^[A-E][.．、)]\s*", text) and len(text) > 4:
+        return True
+    return any(keyword in text for keyword in GROUP_KEYWORDS) and len(text) < 100
+
+
+def _looks_like_instruction(text: str) -> bool:
+    return any(marker in text for marker in INSTRUCTION_MARKERS)
+
+
+def _group_heading(text: str) -> bool:
+    text = text.strip()
+    if not text or QUESTION.match(text):
+        return False
+    if _is_section_heading(text):
+        return True
+    return bool(re.match(r"^[A-E][.．、)]\s+", text))
+
+
+def _flatten_blocks(blocks: list[dict]) -> list[dict]:
+    entries = []
+    for block in blocks:
+        if block.get("kind") == "paragraph":
+            text = (block.get("text") or "").strip()
+            if text:
+                entries.append({"text": text, "blockId": block.get("id", ""), "kind": "paragraph"})
+        elif block.get("kind") == "table":
+            for row_index, row in enumerate(block.get("rows", []), 1):
+                text = " ".join(cell.strip() for cell in row if cell and cell.strip()).strip()
+                if text:
+                    entries.append({
+                        "text": text,
+                        "blockId": f"{block.get('id', 'table')}-row-{row_index}",
+                        "kind": "table",
+                    })
+    return entries
+
+
+def detect_sections(blocks: list[dict]) -> list[dict]:
+    sections = []
+    active = None
+    for index, block in enumerate(blocks):
+        text = (block.get("text") or "").strip()
+        if block.get("kind") == "paragraph" and _is_section_heading(text):
+            if active is not None:
+                sections.append(active)
+            active = {
+                "id": f"section-{len(sections) + 1}",
+                "title": text,
+                "instructions": [],
+                "blocks": [],
+                "questionIds": [],
+                "_blockIndexes": [],
+                "_blockIds": [],
+            }
+        if active is None:
+            active = {
+                "id": "section-1",
+                "title": "试卷正文",
+                "instructions": [],
+                "blocks": [],
+                "questionIds": [],
+                "_blockIndexes": [],
+                "_blockIds": [],
+            }
+        active["_blockIndexes"].append(index)
+        if block.get("id"):
+            active["_blockIds"].append(block["id"])
+        if text and (_looks_like_instruction(text) or (_group_heading(text) and text != active["title"])):
+            active["instructions"].append(text)
+    if active is not None:
+        sections.append(active)
+    return sections
+
+
+def _split_numbered_line(text: str) -> list[tuple[int, str]]:
+    matches = list(re.finditer(r"(?<![A-Za-z])(?<!\d)(\d{1,3})\s*[．.、:：)）]\s*", text))
+    if not matches or matches[0].start() > 1:
+        return []
+    chunks = []
+    for index, match in enumerate(matches):
+        end = matches[index + 1].start() if index + 1 < len(matches) else len(text)
+        chunks.append((int(match.group(1)), text[match.end() : end].strip()))
+    return chunks
+
+
+def _input_kind(prompt: str, options: list[str], *, table: bool = False) -> str:
+    if options:
+        return "choice"
+    if table or BLANK_MARKER.search(prompt) or re.search(r"\b(?:T|F)\b", prompt):
+        return "blank"
+    return "text"
+
+
+def parse_questions(blocks: list[dict], sections: list[dict] | None = None, slug: str = "paper") -> list[dict]:
+    entries = _flatten_blocks(blocks)
+    block_section = {}
+    if sections:
+        for section in sections:
+            for block_id in section.get("_blockIds", []):
+                block_section[block_id] = section["id"]
+
+    starts = []
+    active_section = sections[0]["id"] if sections else "section-1"
+    group_counter = {}
+    current_group = f"{active_section}-group-1"
+    for entry_index, entry in enumerate(entries):
+        section_id = block_section.get(entry["blockId"], active_section)
+        if section_id != active_section:
+            active_section = section_id
+            group_counter.setdefault(active_section, 0)
+            current_group = f"{active_section}-group-{group_counter.get(active_section, 0) + 1}"
+        text = entry["text"]
+        if _group_heading(text) and not QUESTION.match(text):
+            group_counter[active_section] = group_counter.get(active_section, 0) + 1
+            current_group = f"{active_section}-group-{group_counter[active_section]}"
+            continue
+        chunks = _split_numbered_line(text)
+        if chunks:
+            for number, prompt in chunks:
+                if _looks_like_instruction(prompt) or _looks_like_instruction(text):
+                    continue
+                starts.append({
+                    "entryIndex": entry_index,
+                    "number": number,
+                    "prompt": prompt,
+                    "sectionId": active_section,
+                    "groupId": current_group,
+                    "blockId": entry["blockId"],
+                    "table": entry["kind"] == "table",
+                })
+        elif entry["kind"] == "table":
+            for match in TABLE_BLANK.finditer(text):
+                number = int(match.group(1))
+                if 1 <= number <= 200:
+                    starts.append({
+                        "entryIndex": entry_index,
+                        "number": number,
+                        "prompt": text,
+                        "sectionId": active_section,
+                        "groupId": current_group,
+                        "blockId": entry["blockId"],
+                        "table": True,
+                    })
+
     questions = []
-    for position, (start, number) in enumerate(starts):
-        end = starts[position + 1][0] if position + 1 < len(starts) else len(lines)
-        block = lines[start:end]
-        text = " ".join(block).strip()
+    for position, start in enumerate(starts):
+        next_start = starts[position + 1] if position + 1 < len(starts) else None
+        if next_start and next_start["entryIndex"] == start["entryIndex"]:
+            text = start["prompt"]
+        else:
+            end = next_start["entryIndex"] if next_start else len(entries)
+            text = " ".join([start["prompt"]] + [entry["text"] for entry in entries[start["entryIndex"] + 1 : end]]).strip()
         prompt, options = split_options(text)
-        looks_like_instruction = any(
-            token in block[0]
-            for token in ("注意事项", "答题卡", "考试结束", "监考教师", "准考证", "本试卷共", "满分", "考试时间")
-        )
-        if looks_like_instruction:
-            continue
-        if len(re.findall(r"\d{1,3}\s*[．.、)]", text)) > 1 and not options and not re.search(r"[A-Za-z]{3,}", prompt):
-            continue
-        looks_like_open_question = any(token in text for token in ("?", "？", "____", "请", "What ", "Which ", "How ", "Why "))
-        if len(options) < 2 and not looks_like_open_question:
+        if _looks_like_instruction(prompt):
             continue
         if not prompt:
-            prompt = f"第 {number} 题"
+            prompt = f"第 {start['number']} 题"
+        index = len(questions) + 1
+        question_id = f"{slug}-{start['sectionId']}-{start['groupId']}-{index}"
         questions.append({
-            "number": number,
+            "id": question_id,
+            "number": start["number"],
+            "displayNumber": str(start["number"]),
+            "sectionId": start["sectionId"],
+            "groupId": start["groupId"],
             "prompt": prompt,
             "options": options,
+            "inputKind": _input_kind(prompt, options, table=start["table"]),
+            "sourceBlockIds": [start["blockId"]],
         })
     return questions
 
 
-def answer_map(lines: list[str]) -> dict[int, str]:
-    answers: dict[int, str] = {}
-    single_answers = []
+def _clean_answer(value: str) -> str:
+    value = re.sub(r"[①②③④⑤⑥⑦⑧⑨⑩]\s*[．.、:：)]?", " ", value)
+    value = re.sub(r"\s+", " ", value)
+    return value.strip(" .．、:：")
+
+
+def _answer_entries(lines: list[str]) -> list[tuple[int | None, str]]:
+    entries = []
     for index, line in enumerate(lines):
         if "【答案】" not in line:
             continue
         value = line.split("【答案】", 1)[1].strip()
         if not value and index + 1 < len(lines):
             value = lines[index + 1].strip()
-        pairs = re.findall(r"(?<!\d)(\d{1,3})\s*[．.、)]?\s*([A-D])", value)
-        for number, answer in pairs:
-            answers[int(number)] = answer
-        if not pairs and re.fullmatch(r"[A-D]", value):
-            single_answers.append(value)
-    for number, answer in enumerate(single_answers, 1):
-        answers.setdefault(number, answer)
+        numbered = list(re.finditer(r"(?<!\d)(\d{1,3})\s*[．.、:：)]\s*(.*?)(?=(?:\s+\d{1,3}\s*[．.、:：)]|$))", value))
+        if numbered:
+            for match in numbered:
+                answer = _clean_answer(match.group(2))
+                if answer:
+                    entries.append((int(match.group(1)), answer))
+            continue
+        circled = list(re.finditer(r"[①②③④⑤⑥⑦⑧⑨⑩]\s*[．.、:：)]?\s*([^①②③④⑤⑥⑦⑧⑨⑩]+?)(?=\s*[①②③④⑤⑥⑦⑧⑨⑩]|$)", value))
+        if circled:
+            entries.extend((None, _clean_answer(match.group(1))) for match in circled if _clean_answer(match.group(1)))
+            continue
+        cleaned = _clean_answer(value)
+        if cleaned:
+            entries.append((None, cleaned))
+    return entries
+
+
+def answer_map(lines: list[str], questions: list[dict] | None = None) -> dict:
+    entries = _answer_entries(lines)
+    if questions is None:
+        answers = {}
+        sequence = 1
+        for number, answer in entries:
+            if number is None:
+                while sequence in answers:
+                    sequence += 1
+                answers[sequence] = answer
+                sequence += 1
+            else:
+                answers[number] = answer
+        return answers
+
+    answers = {}
+    assigned = set()
+    for number, answer in entries:
+        if number is None:
+            continue
+        candidate = next((question for question in questions if question["id"] not in assigned and question["number"] == number), None)
+        if candidate is not None:
+            answers[candidate["id"]] = answer
+            assigned.add(candidate["id"])
+    for number, answer in entries:
+        if number is not None:
+            continue
+        candidate = next((question for question in questions if question["id"] not in assigned), None)
+        if candidate is None:
+            break
+        answers[candidate["id"]] = answer
+        assigned.add(candidate["id"])
     return answers
 
 
+ANALYSIS_MARKER = re.compile(r"^【\s*(?:第\s*)?(\d+)\s*题详解】$")
+
+
+def analysis_map(lines: list[str], questions: list[dict] | None = None) -> dict:
+    entries = []
+    markers = [(index, int(match.group(1))) for index, line in enumerate(lines) if (match := ANALYSIS_MARKER.match(line.strip()))]
+    for marker_index, (start, number) in enumerate(markers):
+        end = markers[marker_index + 1][0] if marker_index + 1 < len(markers) else len(lines)
+        for index in range(start + 1, end):
+            if _is_section_heading(lines[index]) and index > start + 1:
+                end = index
+                break
+        text = "\n".join(lines[start + 1 : end]).strip()
+        if text:
+            entries.append((number, text))
+    if questions is None:
+        return {number: text for number, text in entries}
+    result = {}
+    assigned = set()
+    for number, text in entries:
+        candidate = next((question for question in questions if question["id"] not in assigned and question["number"] == number), None)
+        if candidate is not None:
+            result[candidate["id"]] = text
+            assigned.add(candidate["id"])
+    return result
+
+
 def analysis_for(lines: list[str], number: int) -> str:
-    marker = f"【{number}题详解】"
-    try:
-        start = next(index for index, line in enumerate(lines) if line == marker)
-    except StopIteration:
-        return "解析内容见对应解析版文件。"
-    end = len(lines)
-    for index in range(start + 1, len(lines)):
-        if re.match(r"^【\d+题详解】$", lines[index]) or SECTION_HEADING.match(lines[index]):
-            end = index
-            break
-    text = "\n".join(lines[start + 1 : end]).strip()
-    return text or "解析内容见对应解析版文件。"
+    return analysis_map(lines).get(number, "")
 
 
 def copy_media(original: Path, assets_dir: Path, slug: str) -> list[str]:
@@ -282,19 +506,25 @@ def main() -> None:
         if block.get("src") is None:
             block.pop("src", None)
     analysis_lines, _ = read_docx(args.analysis)
-    questions = parse_questions(original_lines)
-    answers = answer_map(analysis_lines)
-    for index, question in enumerate(questions, 1):
-        number = question["number"]
+    sections = detect_sections(source_blocks)
+    questions = parse_questions(source_blocks, sections, args.slug)
+    answers = answer_map(analysis_lines, questions)
+    analyses = analysis_map(analysis_lines, questions)
+    for question in questions:
         question.update(
             {
-                "id": f"{args.slug}-{index}-{number}",
-                "type": "generic",
+                "type": question["inputKind"],
                 "context": "",
-                "answer": answers.get(number, ""),
-                "analysis": analysis_for(analysis_lines, number),
+                "answer": answers.get(question["id"], ""),
+                "analysis": analyses.get(question["id"], ""),
             }
         )
+
+    for section in sections:
+        block_ids = set(section.pop("_blockIds", []))
+        section.pop("_blockIndexes", None)
+        section["blocks"] = [block for block in source_blocks if block.get("id") in block_ids]
+        section["questionIds"] = [question["id"] for question in questions if question["sectionId"] == section["id"]]
 
     source_text = "\n".join(original_lines + (["表格内容："] + original_tables if original_tables else []))
     writing_start = next(
@@ -321,6 +551,7 @@ def main() -> None:
         "sourceDirectory": str(args.original.parent),
         "sourceText": source_text,
         "sourceBlocks": source_blocks,
+        "sections": sections,
         "questions": questions,
         "readingA": {"instructions": "原卷阅读材料与题目如下。", "books": []},
         "assets": {"all": asset_paths, "audio": audio_paths},
