@@ -116,9 +116,9 @@ function StructuredPaperContent({ paper, answers, submitted, onAnswer, writingA,
   </>;
 }
 
-export function JuniorHighPaperWorkbench({ paper, onBack }: { paper: JuniorHighPaper; onBack: () => void }) {
-  const [running, setRunning] = useState(true);
-  const [seconds, setSeconds] = useState(paper.durationMinutes * 60);
+export function JuniorHighPaperWorkbench({ paper, onBack, autoStart = true, timerMode = "countdown" }: { paper: JuniorHighPaper; onBack: () => void; autoStart?: boolean; timerMode?: "countdown" | "stopwatch" }) {
+  const [running, setRunning] = useState(autoStart);
+  const [seconds, setSeconds] = useState(autoStart ? paper.durationMinutes * 60 : 0);
   const [current, setCurrent] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [writingA, setWritingA] = useState("");
@@ -129,9 +129,9 @@ export function JuniorHighPaperWorkbench({ paper, onBack }: { paper: JuniorHighP
 
   useEffect(() => {
     if (!running) return;
-    const timer = window.setInterval(() => setSeconds((value) => value - 1), 1000);
+    const timer = window.setInterval(() => setSeconds((value) => timerMode === "countdown" ? value - 1 : value + 1), 1000);
     return () => window.clearInterval(timer);
-  }, [running]);
+  }, [running, timerMode]);
 
   useEffect(() => {
     document.documentElement.classList.toggle("ielts-fullscreen-active", isFullscreen);
