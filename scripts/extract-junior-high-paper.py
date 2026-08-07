@@ -526,12 +526,26 @@ def main() -> None:
         section["blocks"] = [block for block in source_blocks if block.get("id") in block_ids]
         section["questionIds"] = [question["id"] for question in questions if question["sectionId"] == section["id"]]
 
-    source_text = "\n".join(original_lines + (["表格内容："] + original_tables if original_tables else []))
+    ordered_source_lines = []
+    for block in source_blocks:
+        if block["kind"] == "paragraph" and block.get("text"):
+            ordered_source_lines.append(block["text"])
+        elif block["kind"] == "table":
+            ordered_source_lines.extend(" | ".join(row) for row in block.get("rows", []) if row)
+        elif block["kind"] == "image":
+            ordered_source_lines.append("[原卷图片]")
+    source_text = "\n".join(ordered_source_lines)
     writing_start = next(
         (index for index, line in enumerate(original_lines) if any(keyword in line for keyword in ("文段表达", "书面表达", "写作", "作文"))),
         None,
     )
-    writing_text = "\n".join(original_lines[writing_start:]) if writing_start is not None else "请根据原卷要求完成写作。"
+    writing_text = "\n".join(original_lines[writing_start:]).strip() if writing_start is not None else "原卷未提供可识别的写作提示。"
+    writing_task = {
+        "id": f"{args.slug}-writing-1",
+        "label": "写作",
+        "prompt": writing_text,
+        "requirements": "请按照原卷写作要求完成作文。",
+    }
     is_simulation = "模拟" in args.original.name or "模拟" in str(args.original.parent)
     kind_label = "模拟卷" if is_simulation else "真题"
     asset_paths = sorted(set(media_map.values()))
@@ -543,7 +557,7 @@ def main() -> None:
         "year": args.year,
         "region": args.region,
         "label": f"{args.region}{kind_label}",
-        "layout": "generic",
+        "layout": "structured",
         "displayTitle": f"中考英语 {args.region}{args.year}年{kind_label}",
         "durationMinutes": duration,
         "fileName": args.original.name,
@@ -559,9 +573,10 @@ def main() -> None:
             "title": "写作",
             "promptA": writing_text,
             "requirementsA": "请按照原卷写作要求完成作文。",
-            "promptB": "请根据原卷写作部分的另一项要求完成作文。",
+            "promptB": writing_text,
             "requirementsB": "词数和内容要求以原卷为准。",
         },
+        "writingTasks": [writing_task],
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(paper, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
