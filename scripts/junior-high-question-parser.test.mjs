@@ -32,6 +32,8 @@ test("instruction paragraphs do not become Tianjin questions", () => {
   assert.equal(paper.questions.some((question) => question.prompt.includes("本卷共五大题")), false);
   assert.ok(paper.questions.every((question) => question.sectionId && question.groupId));
   assert.ok(paper.questions.every((question) => question.id.includes(question.sectionId)));
+  const firstAnalysis = paper.questions.find((question) => question.displayNumber === "1")?.analysis ?? "";
+  assert.doesNotMatch(firstAnalysis, /2．/);
 });
 
 test("regional numbering remains unique when a paper restarts display numbers", () => {

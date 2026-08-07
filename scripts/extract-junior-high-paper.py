@@ -402,6 +402,10 @@ def analysis_map(lines: list[str], questions: list[dict] | None = None) -> dict:
         if not marker_value and start + 1 < len(lines):
             marker_value = lines[start + 1].strip()
         numbers = [int(match.group(1)) for match in re.finditer(r"(?<!\d)(\d{1,3})\s*[．.、:：)]", marker_value)]
+        for boundary in range(start + 1, end):
+            if QUESTION.match(lines[boundary].strip()) and boundary > start + 1:
+                end = boundary
+                break
         text = "\n".join(lines[start + 1 : end]).strip()
         if not text:
             continue
