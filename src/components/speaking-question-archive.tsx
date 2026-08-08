@@ -107,7 +107,9 @@ export function SpeakingQuestionArchive({ part }: { part: SpeakingPart }) {
 
               <ol>
                 {group.questions.map((question, questionIndex) => {
-                  const hasModelAnswer = Boolean(getSpeakingModelAnswer(question.id));
+                  const modelAnswer = getSpeakingModelAnswer(question.id);
+                  const hasModelAnswer = Boolean(modelAnswer);
+                  const hasBand8Answer = Boolean(modelAnswer?.band8Answer?.length);
 
                   return (
                     <li id={question.id} key={question.id}>
@@ -121,12 +123,22 @@ export function SpeakingQuestionArchive({ part }: { part: SpeakingPart }) {
                           <small>常见追问：{question.followUp}</small>
                         ) : null}
                         {hasModelAnswer ? (
-                          <Link
-                            className={styles.answerLink}
-                            href={`/speaking/${part.id}/${question.id}`}
-                          >
-                            查看 7 分范文 <span aria-hidden="true">→</span>
-                          </Link>
+                          <div className={styles.answerLinks}>
+                            <Link
+                              className={styles.answerLink}
+                              href={`/speaking/${part.id}/${question.id}`}
+                            >
+                              查看 7 分范文 <span aria-hidden="true">→</span>
+                            </Link>
+                            {hasBand8Answer ? (
+                              <Link
+                                className={`${styles.answerLink} ${styles.band8Link}`}
+                                href={`/speaking/${part.id}/${question.id}#band-8`}
+                              >
+                                查看 8 分范文 <span aria-hidden="true">→</span>
+                              </Link>
+                            ) : null}
+                          </div>
                         ) : null}
                       </div>
                       <div className="speaking-question-actions">

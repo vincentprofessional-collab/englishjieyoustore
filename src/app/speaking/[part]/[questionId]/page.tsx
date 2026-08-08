@@ -156,7 +156,7 @@ export default async function SpeakingModelAnswerPage({
             ) : null}
           </section>
 
-          <section className={`${styles.answerCard} ${styles.band8Card}`}>
+          <section className={`${styles.answerCard} ${styles.band8Card}`} id="band-8">
             <header>
               <span>Band 8</span>
               <h3>8 分范文</h3>
