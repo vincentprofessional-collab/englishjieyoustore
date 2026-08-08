@@ -994,7 +994,10 @@
 .junior-high-reading-pane, .junior-high-question-card { border: 1px solid #e4dccd; border-radius: 14px; background: #fff; padding: 22px; }
 .junior-high-reading-pane { color: #39463f; line-height: 1.85; }
 .junior-high-question-heading { display: flex; align-items: center; justify-content: flex-start; gap: 10px; color: #477467; font-size: 14px; }
-.junior-high-question-heading span { margin-left: auto; color: #8a8377; font-size: 12px; }
+.junior-high-question-group { display: grid; gap: 12px; min-width: 0; }
+.junior-high-question-group > h3 { margin: 0; color: #477467; font-family: KaiTi, STKaiti, serif; font-size: 21px; font-weight: 600; }
+.junior-high-inline-audio { display: grid; gap: 5px; max-width: 620px; color: #315e51; font-size: 13px; }
+.junior-high-inline-audio audio { width: 100%; }
 .junior-high-question-prompt { font-size: 18px; line-height: 1.65; white-space: pre-line; overflow-wrap: anywhere; }
 .junior-high-options { display: grid; gap: 10px; }
 .junior-high-options button { border: 1px solid #d8d0c2; border-radius: 9px; background: #fffdf7; cursor: pointer; padding: 12px; text-align: left; }
@@ -1029,7 +1032,7 @@
 .junior-high-structured-blocks { display: grid; gap: 12px; }
 .junior-high-structured-block { min-width: 0; }
 .junior-high-source-paragraph { margin: 0; color: #27362f; font-size: 17px; line-height: 1.85; white-space: pre-line; overflow-wrap: anywhere; }
-.junior-high-source-image { display: block; width: min(100%, 380px); max-height: 240px; height: auto; margin: 4px auto; border: 1px solid #e4dccd; border-radius: 9px; object-fit: contain; background: #fffdf7; }
+.junior-high-source-image { display: block; width: min(100%, 380px); max-height: 240px; max-height: 300px; height: auto; margin: 4px auto; border: 1px solid #e4dccd; border-radius: 9px; object-fit: contain; background: #fffdf7; }
 .junior-high-source-audio { width: min(100%, 620px); }
 .junior-high-source-table-wrap { max-width: 100%; overflow-x: auto; }
 .junior-high-source-table { width: 100%; min-width: 0; table-layout: fixed; border-collapse: collapse; color: #27362f; font-size: 15px; line-height: 1.65; background: #fffdf7; }
@@ -1044,8 +1047,10 @@
 .junior-high-passage-column h3 { margin: 0 0 12px; color: #477467; font-family: KaiTi, STKaiti, serif; font-size: 23px; }
 .junior-high-passage-text { white-space: pre-line; }
 .junior-high-inline-blank { display: inline-block; min-width: 26px; margin: 0 3px; border-bottom: 2px dotted #9a907f; padding: 0 10px 1px; color: #477467; line-height: 1.2; text-align: center; }
+.junior-high-inline-answer { width: 88px; margin: 0 5px; border: 0; border-bottom: 2px dotted #9a907f; border-radius: 0; background: transparent; color: #1f5b4d; font: inherit; line-height: 1.35; outline: none; text-align: center; vertical-align: baseline; }
+.junior-high-inline-answer:focus { border-bottom-color: #1f5b4d; box-shadow: 0 2px 0 rgba(31,91,77,.16); }
 .junior-high-inline-blank-wide { min-width: 180px; }
-.junior-high-context-image { display: block; max-width: min(100%, 180px); max-height: 140px; height: auto; margin: 0 auto 18px; object-fit: contain; }
+.junior-high-context-image { display: block; max-width: min(100%, 180px); max-height: 140px; max-height: 180px; height: auto; margin: 0 auto 18px; object-fit: contain; }
 .junior-high-question-image { display: block; max-width: min(100%, 140px); max-height: 100px; margin: 0 0 12px; object-fit: contain; }
 .junior-high-generic-source { display: grid; gap: 12px; }
 .junior-high-generic-source pre { margin: 0; max-height: 680px; overflow: auto; white-space: pre-wrap; font: inherit; line-height: 1.85; color: #2f3f39; }
@@ -1079,7 +1084,7 @@
 .junior-high-writing-table { width: 100%; border-collapse: collapse; color: #39463f; font-size: 15px; line-height: 1.65; }
 .junior-high-writing-table th, .junior-high-writing-table td { border: 1px solid #d8d0c2; padding: 10px 12px; text-align: left; vertical-align: top; }
 .junior-high-writing-table th { width: 24%; background: #fbf6e9; color: #477467; }
-.junior-high-writing-diagram { display: block; width: min(100%, 380px); max-height: 240px; height: auto; margin: 2px auto 6px; border: 1px solid #e4dccd; border-radius: 8px; object-fit: contain; background: #fffdf7; }
+.junior-high-writing-diagram { display: block; width: min(100%, 380px); max-height: 240px; max-height: 300px; height: auto; margin: 2px auto 6px; border: 1px solid #e4dccd; border-radius: 8px; object-fit: contain; background: #fffdf7; }
 .junior-high-writing-task textarea { width: 100%; box-sizing: border-box; border: 1px solid #d8d0c2; border-radius: 9px; padding: 12px; resize: vertical; }
 .junior-high-writing-word-count { color: #766f62; font-size: 13px; text-align: right; }
 .junior-high-exam-page.fullscreen { position: fixed; z-index: 100; inset: 0; overflow: auto; background: #f7f4eb; padding: 18px 24px 32px; }

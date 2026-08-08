@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 import { StudyAnnotationTools } from "@/components/study-annotation-tools";
 import beijing2024Paper from "@/lib/junior-high/beijing-2024-simulation.json";
-import type { JuniorHighBlock, JuniorHighBook, JuniorHighPaper, JuniorHighQuestion, JuniorHighSection } from "@/lib/junior-high/paper-types";
+import type { JuniorHighBlock, JuniorHighBook, JuniorHighPaper, JuniorHighQuestion, JuniorHighQuestionGroup, JuniorHighPart } from "@/lib/junior-high/paper-types";
 
 const defaultPaper = beijing2024Paper as unknown as JuniorHighPaper;
 type PaperQuestion = JuniorHighQuestion;
@@ -23,13 +23,6 @@ function PaperTimer({ running, seconds, onToggle }: { running: boolean; seconds:
 
 function QuestionNavigation({ paper, current, onSelect }: { paper: JuniorHighPaper; current: number; onSelect: (index: number) => void }) {
   return <nav aria-label="试卷题号导航" className="junior-high-paper-nav">{paper.questions.map((question, index) => <button className={current === index ? "selected" : ""} key={question.id} onClick={() => onSelect(index)} type="button"><span>{question.displayNumber ?? question.number}</span>{question.sectionId ? <small>{question.sectionId.replace("section-", "")}</small> : null}</button>)}</nav>;
-}
-
-function questionSection(question: PaperQuestion) {
-  if (question.number <= 12) return "单项填空";
-  if (question.number <= 20) return "完形填空";
-  if (question.number <= 33) return "阅读理解";
-  return "阅读表达";
 }
 
 function renderContext(text: string): ReactNode {
@@ -56,15 +49,35 @@ function renderInlineBlanks(text: string): ReactNode {
   });
 }
 
-function PaperQuestionCard({ question, value, submitted, onAnswer, cloze, sectionTitle }: { question: PaperQuestion; value: string; submitted: boolean; onAnswer: (value: string) => void; cloze?: boolean; sectionTitle?: string }) {
+const QUESTION_BLANK_PATTERN = /_{2,}\s*\d{0,3}\s*_{2,}|_{2,}\s*\d{1,3}\s*_{2,}|\s{2,}\d{1,3}\s{2,}/g;
+
+function renderQuestionPrompt(text: string, value: string, onAnswer: (value: string) => void): ReactNode {
+  const parts = text.split(QUESTION_BLANK_PATTERN);
+  const blanks = text.match(QUESTION_BLANK_PATTERN) ?? [];
+  if (!blanks.length) return text;
+  return parts.flatMap((part, index) => [
+    <span key={`prompt-${index}`}>{part}</span>,
+    index < blanks.length ? <input aria-label="填空答案" className="junior-high-inline-answer" key={`blank-${index}`} onChange={(event) => onAnswer(event.target.value)} value={value} /> : null,
+  ]);
+}
+
+function compactBlankPrompt(text: string): string {
+  const marker = text.search(/_{2,}/);
+  if (marker < 0 || text.length <= 180) return text;
+  const start = Math.max(0, marker - 78);
+  const end = Math.min(text.length, marker + 100);
+  return `${start > 0 ? "…" : ""}${text.slice(start, end)}${end < text.length ? "…" : ""}`;
+}
+
+function PaperQuestionCard({ question, value, submitted, onAnswer, cloze }: { question: PaperQuestion; value: string; submitted: boolean; onAnswer: (value: string) => void; cloze?: boolean }) {
   const [showAnalysis, setShowAnalysis] = useState(false);
   const isOpenResponse = question.inputKind === "blank" || question.inputKind === "text" || question.inputKind === "writing" || (!question.inputKind && !question.options.length);
   const isCorrect = !isOpenResponse && value === question.answer;
   return (
     <article className={`junior-high-question-card ${cloze ? "junior-high-cloze-question" : ""}`} data-question-number={question.number} id={`junior-high-question-${question.id}`}>
-      <div className="junior-high-question-heading"><strong>第 {question.displayNumber ?? question.number} 题</strong>{cloze ? null : <span>{sectionTitle ?? questionSection(question)}</span>}</div>
-      {question.image ? <img alt="题目配图" className="junior-high-question-image" src={question.image} /> : null}<p className="junior-high-question-prompt">{question.prompt}</p>
-      {isOpenResponse ? <textarea value={value} onChange={(event) => onAnswer(event.target.value)} placeholder="请输入答案……" rows={question.number === 37 ? 4 : 2} /> : <div className="junior-high-options">{question.options.map((option) => <button className={value === option[0] ? "selected" : ""} key={option} onClick={() => onAnswer(option[0])} type="button">{option}</button>)}</div>}
+      <div className="junior-high-question-heading"><strong>第 {question.displayNumber ?? question.number} 题</strong></div>
+      {question.image ? <img alt="题目配图" className="junior-high-question-image" src={question.image} /> : null}{cloze && question.options.length ? null : <p className="junior-high-question-prompt">{question.inputKind === "blank" ? renderQuestionPrompt(compactBlankPrompt(question.prompt), value, onAnswer) : question.prompt}</p>}
+      {isOpenResponse && !(question.inputKind === "blank" && Boolean(question.prompt.match(QUESTION_BLANK_PATTERN))) ? <textarea value={value} onChange={(event) => onAnswer(event.target.value)} placeholder="请输入答案……" rows={question.number === 37 ? 4 : 2} /> : isOpenResponse ? null : <div className="junior-high-options">{question.options.map((option) => <button className={value === option[0] ? "selected" : ""} key={option} onClick={() => onAnswer(option[0])} type="button">{option}</button>)}</div>}
       {submitted ? <div className="junior-high-feedback"><span>你的答案：{value || "未作答"}</span><span>{isOpenResponse ? "参考答案" : "正确答案"}：{question.answer || "—"}</span><span className={isOpenResponse ? "manual" : isCorrect ? "correct" : "incorrect"}>{isOpenResponse ? "人工复核" : isCorrect ? "✓ 正确" : "✕ 请查看解析"}</span><button onClick={() => setShowAnalysis(!showAnalysis)} type="button">解析</button>{showAnalysis ? <div className="junior-high-analysis"><strong>解析</strong><button onClick={() => setShowAnalysis(false)} type="button">关闭</button><p>{question.analysis || "原解析文件未提供本题的独立解析。"}</p></div> : null}</div> : null}
     </article>
   );
@@ -92,7 +105,7 @@ function GenericPaperContent({ paper, answers, submitted, onAnswer, writingA, wr
   </>;
 }
 
-function renderStructuredBlock(block: JuniorHighBlock, section: JuniorHighSection): ReactNode {
+function renderStructuredBlock(block: JuniorHighBlock, section: { title: string }): ReactNode {
   if (block.kind === "paragraph") {
     if (!block.text || block.text === section.title) return null;
     return <p className="junior-high-source-paragraph">{renderInlineBlanks(block.text)}</p>;
@@ -110,52 +123,35 @@ function renderStructuredBlock(block: JuniorHighBlock, section: JuniorHighSectio
 }
 
 function isStructuredReadingSection(title: string) {
-  return /阅读理解|阅读表达|任务型阅读|完形填空|部分\s*阅读|^阅读下面/.test(title);
-}
-
-function getCompatibleDisplayBlocks(section: JuniorHighSection, questions: PaperQuestion[]) {
-  const sectionQuestions = questions.filter((question) => question.sectionId === section.id);
-  if (!sectionQuestions.length) return section.blocks.filter((block) => block.kind !== "paragraph");
-  const blockIndexes = new Map(section.blocks.map((block, index) => [block.id, index]));
-  const starts = [...new Set(sectionQuestions.flatMap((question) => (question.sourceBlockIds ?? []).map((sourceId) => blockIndexes.get(sourceId)).filter((index): index is number => index !== undefined)))].sort((a, b) => a - b);
-  const hiddenParagraphs = new Set<number>();
-  const passageSection = isStructuredReadingSection(section.title);
-  starts.forEach((start, index) => {
-    const end = starts[index + 1] ?? section.blocks.length;
-    let sawOption = false;
-    for (let blockIndex = start; blockIndex < end; blockIndex += 1) {
-      const block = section.blocks[blockIndex];
-      if (block.kind !== "paragraph") continue;
-      const text = block.text?.trim() ?? "";
-      if (passageSection && blockIndex > start && sawOption && !/^\s*[A-GＡ-Ｇ]\s*[．.、:：)]\s*\S+/.test(text)) break;
-      hiddenParagraphs.add(blockIndex);
-      if (passageSection && /^\s*[A-GＡ-Ｇ]\s*[．.、:：)]\s*\S+/.test(text)) sawOption = true;
-    }
-  });
-  return section.blocks.filter((block, index) => {
-    if (block.kind !== "paragraph") return true;
-    if (hiddenParagraphs.has(index)) return false;
-    return (block.text ?? "").trim() !== section.title.trim();
-  });
+  return /阅读理解|阅读表达|任务型阅读|完形填空|部分\s*阅读|^阅读下面|请通读下面|根据短文内容|根据材料内容|语法和上下文/.test(title);
 }
 
 function StructuredPaperContent({ paper, answers, submitted, onAnswer, writingA, writingB, onWritingA, onWritingB }: { paper: JuniorHighPaper; answers: Record<string, string>; submitted: boolean; onAnswer: (question: PaperQuestion, value: string) => void; writingA: string; writingB: string; onWritingA: (value: string) => void; onWritingB: (value: string) => void }) {
+  const parts = paper.parts ?? [];
   const sections = paper.sections ?? [];
   const questionsById = new Map(paper.questions.map((question) => [question.id, question]));
   const writingTasks = paper.writingTasks?.length ? paper.writingTasks : [{ id: "writing-1", label: "写作", prompt: paper.writing.promptA, requirements: paper.writing.requirementsA }];
   return <>
-    {paper.assets?.audio?.length ? <div className="junior-high-audio-list"><strong>听力音频</strong>{paper.assets.audio.map((src, index) => <label key={src}>音频 {index + 1}<audio controls preload="metadata" src={src} /></label>)}</div> : null}
-    {sections.map((section) => {
-      const sectionQuestions = section.questionIds.map((id) => questionsById.get(id)).filter((question): question is PaperQuestion => Boolean(question));
-      const displayBlocks = section.displayBlocks ?? getCompatibleDisplayBlocks(section, paper.questions);
-      const useReadingLayout = isStructuredReadingSection(section.title) && sectionQuestions.length > 0 && displayBlocks.length > 0;
-      const sourceBlocks = <div className="junior-high-structured-blocks">{displayBlocks.map((block) => <div className="junior-high-structured-block" key={block.id}>{renderStructuredBlock(block, section)}</div>)}</div>;
-      const questionBlocks = <div className="junior-high-question-stack">{sectionQuestions.map((question) => <PaperQuestionCard key={question.id} onAnswer={(value) => onAnswer(question, value)} question={question} sectionTitle={section.title} submitted={submitted} value={answers[question.id] || ""} />)}</div>;
-      return <section className="junior-high-paper-section junior-high-structured-section" key={section.id}>
-        <h2>{section.title}</h2>
-        {useReadingLayout ? <div className="junior-high-passage-layout junior-high-structured-reading-layout"><div className="junior-high-passage-column">{sourceBlocks}</div><div className="junior-high-passage-questions">{questionBlocks}</div></div> : <>{sourceBlocks}{sectionQuestions.length ? questionBlocks : null}</>}
-      </section>;
-    })}
+    {(parts.length ? parts : sections.map((section) => ({ id: section.id, title: section.title, instructions: section.instructions, groups: [{ id: `${section.id}-group-1`, title: section.title, instructions: section.instructions, blocks: section.blocks, displayBlocks: section.displayBlocks, questionIds: section.questionIds }] } as JuniorHighPart))).map((part) => <section className="junior-high-paper-section junior-high-structured-part" key={part.id}>
+      <h2>{part.title}</h2>
+      {part.instructions.filter((instruction) => instruction.trim() !== part.title.trim()).slice(0, 2).map((instruction) => <p className="junior-high-paper-intro" key={`${part.id}-${instruction}`}>{instruction}</p>)}
+      {part.groups.map((group: JuniorHighQuestionGroup) => {
+        const groupQuestions = group.questionIds.map((id) => questionsById.get(id)).filter((question): question is PaperQuestion => Boolean(question));
+        const displayBlocks = group.displayBlocks ?? group.blocks;
+        const readingTitle = `${part.title} ${group.title}`;
+        const useReadingLayout = isStructuredReadingSection(readingTitle) && groupQuestions.length > 0 && displayBlocks.length > 0;
+        const groupInstructionSet = new Set(group.instructions.map((instruction) => instruction.trim()));
+        const visibleBlocks = displayBlocks.filter((block) => block.kind !== "paragraph" || (!groupInstructionSet.has((block.text ?? "").trim()) && (block.text ?? "").trim() !== part.title.trim()));
+        const sourceBlocks = <div className="junior-high-structured-blocks">{visibleBlocks.map((block) => <div className="junior-high-structured-block" key={block.id}>{renderStructuredBlock(block, group)}</div>)}</div>;
+        const questionBlocks = <div className="junior-high-question-stack">{groupQuestions.map((question) => <PaperQuestionCard cloze={group.inputMode === "inline-blank"} key={question.id} onAnswer={(value) => onAnswer(question, value)} question={question} submitted={submitted} value={answers[question.id] || ""} />)}</div>;
+        return <section className="junior-high-question-group" key={group.id}>
+          <h3>{group.title}</h3>
+          {group.instructions.filter((instruction) => instruction.trim() !== group.title.trim() && instruction.trim() !== part.title.trim()).slice(0, 2).map((instruction) => <p className="junior-high-paper-intro" key={`${group.id}-${instruction}`}>{instruction}</p>)}
+          {group.audio?.map((src, index) => <label className="junior-high-inline-audio" key={src}>听力音频 {index + 1}<audio controls preload="metadata" src={src} /></label>)}
+          {useReadingLayout ? <div className="junior-high-passage-layout junior-high-structured-reading-layout"><div className="junior-high-passage-column">{sourceBlocks}</div><div className="junior-high-passage-questions">{questionBlocks}</div></div> : <>{sourceBlocks}{groupQuestions.length ? questionBlocks : null}</>}
+        </section>;
+      })}
+    </section>)}
     <section className="junior-high-paper-section"><h2>{paper.writing.title ?? "写作"}</h2><div className="junior-high-paper-writing">{writingTasks.map((task, index) => {
       const value = index === 0 ? writingA : writingB;
       const onChange = index === 0 ? onWritingA : onWritingB;

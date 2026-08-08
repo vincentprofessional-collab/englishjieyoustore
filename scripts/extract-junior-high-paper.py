@@ -23,6 +23,7 @@ OPTION_TAIL_BOUNDARY = re.compile(
     r"[A-GＡ-Ｇ]卷|"
     r"听下面|听下列|请听|听材料|听一段|根据材料|根据短文|阅读下面|请阅读下面|从题中所给|从每小题所给|补全对话|第[一二三四五六七八九十IVX]+卷|注意：|将答案))"
 )
+OPTION_CONTENT_BOUNDARY = re.compile(r"\s+(?=(?:听第|回答第|回答下面|请听|听下面|下一题))")
 AUDIO_EXTENSIONS = {".mp3", ".wav", ".m4a", ".mp4", ".flac", ".aac", ".ogg"}
 DIRECT_MEDIA_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp", ".gif", ".svg"}
 CONVERTIBLE_MEDIA_EXTENSIONS = {".wmf", ".emf"}
@@ -129,15 +130,29 @@ def split_options(text: str) -> tuple[str, list[str]]:
     for index, match in enumerate(matches):
         end = matches[index + 1].start() if index + 1 < len(matches) else len(text)
         value = text[match.end() : end].strip()
+        value = OPTION_CONTENT_BOUNDARY.split(value, maxsplit=1)[0].strip()
         options.append(f"{match.group(1)}. {value}")
     return prompt, options
 
 
+def split_compact_letter_options(text: str) -> tuple[str, list[str]]:
+    """Handle image-choice questions whose DOCX stores only the labels `A B C` after the prompt."""
+    match = re.search(r"\s+((?:[A-G]\s+){1,6}[A-G])\s*$", text)
+    if not match:
+        return text.strip(), []
+    labels = re.findall(r"[A-G]", match.group(1))
+    return text[: match.start()].strip(), [f"{label}. {label}" for label in labels]
+
+
 INSTRUCTION_MARKERS = (
     "注意事项", "答题卡", "考试结束", "监考教师", "准考证", "本试卷共", "本卷共", "满分", "考试时间",
-    "答卷前", "作答选择题", "每题选出答案", "请务必", "请根据所听", "从每小题所给",
+    "答卷前", "作答选择题", "每题选出答案", "请务必", "请根据所听", "根据听到", "选择正确的图片",
+    "从每小题所给", "每小题读", "每段对话", "短文读", "你将听到", "先考听力",
 )
-GROUP_KEYWORDS = ("听力", "听说", "单项", "语法", "完形", "阅读", "任务型", "短文", "写作", "作文", "书面表达", "文段表达")
+GROUP_KEYWORDS = (
+    "听力", "听说", "听音", "情景反应", "对话理解", "短文理解", "信息转换", "口语匹配",
+    "单项", "语法", "完形", "阅读", "任务型", "短文", "选词", "写作", "作文", "书面表达", "文段表达",
+)
 QUESTION_BOUNDARY_PREFIXES = (
     "听下面", "听下列", "请听", "听材料", "每段对话", "每个问题后", "从题中所给", "从每小题所给",
     "从短文后", "根据材料内容", "根据短文内容", "阅读下面", "请阅读下面", "仔细阅读", "从以下各题",
@@ -224,6 +239,204 @@ def _is_question_text_boundary(text: str) -> bool:
     return cleaned.startswith(QUESTION_BOUNDARY_PREFIXES)
 
 
+PART_MARKER = re.compile(
+    r"^\s*(?P<marker>第\s*[一二三四五六七八九十\dIVXⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩ]+\s*(?:部分|卷)|Part\s*[IVX\d]+)"
+)
+TOP_LEVEL_MARKER = re.compile(r"^\s*(?P<marker>[一二三四五六七八九十\d]+)\s*[、.．]")
+SUBSECTION_MARKER = re.compile(
+    r"^\s*(?P<marker>(?:[A-GＡ-Ｇ]|[ⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩ]+|[一二三四五六七八九十\d]+)\s*[、.．:：)]|[（(][一二三四五六七八九十\d]+[）)])"
+)
+
+
+def _part_marker(text: str) -> str | None:
+    match = PART_MARKER.match(text.strip())
+    return match.group("marker").strip() if match else None
+
+
+def _top_level_marker(text: str) -> str | None:
+    match = TOP_LEVEL_MARKER.match(text.strip())
+    return match.group("marker").strip() if match else None
+
+
+def _subsection_marker(text: str) -> str | None:
+    match = SUBSECTION_MARKER.match(text.strip())
+    return match.group("marker").strip() if match else None
+
+
+def _clean_question_prompt(text: str) -> str:
+    cleaned = re.sub(r"【\s*此处可播放相关音频[^】]*】", "", text)
+    cleaned = re.sub(r"\[\s*此处可播放相关音频[^\]]*\]", "", cleaned)
+    cleaned = re.sub(r"\s+", " ", cleaned).strip()
+    return cleaned
+
+
+def _section_starts_part(title: str, *, has_explicit_parts: bool) -> bool:
+    if _part_marker(title):
+        return True
+    return not has_explicit_parts and bool(_top_level_marker(title))
+
+
+def _group_title_for_section(section: dict, part_title: str) -> tuple[str, str | None]:
+    title = (section.get("title") or "").strip()
+    if title and title != "试卷正文":
+        marker = _subsection_marker(title)
+        if marker:
+            return title, marker
+        return title, None
+    for instruction in section.get("instructions", []):
+        cleaned = instruction.strip()
+        if cleaned and not _looks_like_instruction(cleaned):
+            marker = _subsection_marker(cleaned)
+            return cleaned, marker
+    return part_title or "题目", None
+
+
+def build_parts(
+    sections: list[dict],
+    questions: list[dict],
+    audio_paths: list[str] | None = None,
+) -> list[dict]:
+    """Build a stable part -> group hierarchy while keeping flat sections for compatibility."""
+    explicit_parts = any(_part_marker(section.get("title", "")) for section in sections)
+    question_by_section: dict[str, list[dict]] = {}
+    for question in questions:
+        question_by_section.setdefault(question["sectionId"], []).append(question)
+
+    part_records: list[dict] = []
+    current: dict | None = None
+    for section in sections:
+        title = (section.get("title") or "").strip()
+        if current is None or _section_starts_part(title, has_explicit_parts=explicit_parts):
+            marker = _part_marker(title) or _top_level_marker(title)
+            if title == "试卷正文" and current is None and len(sections) > 1:
+                # Cover/instructions before the first real section stay attached to the first part.
+                current = None
+            else:
+                part_number = len(part_records) + 1
+                current = {
+                    "id": f"part-{part_number}",
+                    "marker": marker,
+                    "title": title or f"第{part_number}部分",
+                    "instructions": list(section.get("instructions", [])),
+                    "groups": [],
+                    "_sectionIds": [],
+                }
+                part_records.append(current)
+        if current is None:
+            continue
+        current["_sectionIds"].append(section["id"])
+
+    # A preface section can exist before the first numbered part. Attach it to part 1.
+    if sections and sections[0].get("title") == "试卷正文" and part_records:
+        preface = sections[0]
+        if preface["id"] not in part_records[0]["_sectionIds"]:
+            part_records[0]["_sectionIds"].insert(0, preface["id"])
+            part_records[0]["instructions"] = list(preface.get("instructions", [])) + part_records[0]["instructions"]
+
+    for part in part_records:
+        part_sections = [section for section in sections if section["id"] in part["_sectionIds"]]
+        part_questions = [question for question in questions if question["sectionId"] in part["_sectionIds"]]
+        groups: list[dict] = []
+        seen_groups: set[str] = set()
+        for section in part_sections:
+            section_questions = question_by_section.get(section["id"], [])
+            section_group_ids = []
+            for question in section_questions:
+                if question["groupId"] not in section_group_ids:
+                    section_group_ids.append(question["groupId"])
+            if not section_group_ids:
+                title = (section.get("title") or "").strip()
+                if title and title != part["title"] and title != "试卷正文":
+                    section_group_ids = [f"{section['id']}-group-1"]
+            for group_index, group_id in enumerate(section_group_ids):
+                if group_id in seen_groups:
+                    continue
+                seen_groups.add(group_id)
+                group_questions = [question for question in section_questions if question["groupId"] == group_id]
+                group_title, marker = _group_title_for_section(section, part["title"])
+                if group_index > 0:
+                    group_title = f"题组 {group_index + 1}"
+                section_blocks = list(section.get("blocks", []))
+                source_indexes = [
+                    index
+                    for index, block in enumerate(section_blocks)
+                    if block.get("id") in {
+                        source_id
+                        for question in group_questions
+                        for source_id in question.get("sourceBlockIds", [])
+                    }
+                ]
+                next_group_sources = [
+                    index
+                    for later_group_id in section_group_ids[group_index + 1 :]
+                    for question in section_questions
+                    if question["groupId"] == later_group_id
+                    for source_id in question.get("sourceBlockIds", [])
+                    for index, block in enumerate(section_blocks)
+                    if block.get("id") == source_id
+                ]
+                if source_indexes:
+                    block_start = 0 if group_index == 0 else min(source_indexes)
+                    block_end = min(next_group_sources) if next_group_sources else len(section_blocks)
+                    group_blocks = section_blocks[block_start:block_end]
+                else:
+                    group_blocks = section_blocks if group_index == 0 else []
+                display_ids = {block.get("id") for block in group_blocks}
+                group_display_blocks = [
+                    block for block in section.get("displayBlocks", []) if block.get("id") in display_ids or block.get("sourceId") in display_ids
+                ]
+                group = {
+                    "id": group_id,
+                    "marker": marker,
+                    "title": group_title,
+                    "instructions": list(section.get("instructions", [])),
+                    "blocks": group_blocks,
+                    "displayBlocks": group_display_blocks,
+                    "questionIds": [question["id"] for question in group_questions],
+                    "inputMode": (
+                        "choice" if group_questions and all(question.get("inputKind") == "choice" for question in group_questions)
+                        else "inline-blank" if any(question.get("inputKind") == "blank" for question in group_questions)
+                        else "text"
+                    ),
+                }
+                groups.append(group)
+        if re.search(r"听力|听说|听音", part["title"]):
+            index = 0
+            while index + 1 < len(groups):
+                current_group = groups[index]
+                next_group = groups[index + 1]
+                if current_group["questionIds"] or not current_group.get("marker"):
+                    index += 1
+                    continue
+                next_group["title"] = current_group["title"]
+                next_group["marker"] = current_group.get("marker")
+                next_group["instructions"] = current_group.get("instructions", []) + next_group.get("instructions", [])
+                next_group["blocks"] = current_group.get("blocks", []) + next_group.get("blocks", [])
+                next_group["displayBlocks"] = current_group.get("displayBlocks", []) + next_group.get("displayBlocks", [])
+                groups.pop(index)
+        if not groups:
+            groups.append({
+                "id": f"{part['id']}-group-1",
+                "title": part["title"],
+                "instructions": list(part.get("instructions", [])),
+                "blocks": [],
+                "displayBlocks": [],
+                "questionIds": [],
+                "inputMode": "text",
+            })
+        part["groups"] = groups
+        for question in part_questions:
+            question["partId"] = part["id"]
+
+        if audio_paths and re.search(r"听力|听说|听音|听短文|听对话|listening", part["title"], re.IGNORECASE):
+            audio_group = next((group for group in groups if group["questionIds"]), groups[0])
+            audio_group["audio"] = list(audio_paths)
+
+    for part in part_records:
+        part.pop("_sectionIds", None)
+    return part_records
+
+
 def _flatten_blocks(blocks: list[dict]) -> list[dict]:
     entries = []
     for block in blocks:
@@ -251,14 +464,27 @@ def _inline_placeholder_matches(text: str) -> list[dict]:
         for match in pattern.finditer(text):
             number_text = match.group(1) if len(match.groups()) == 1 else match.group(2)
             matches.append({"number": int(number_text), "start": match.start(), "end": match.end()})
-    unique = {}
-    for match in matches:
-        unique[(match["number"], match["start"], match["end"])] = match
-    return sorted(unique.values(), key=lambda item: item["start"])
+    ordered = sorted(matches, key=lambda item: (item["start"], -(item["end"] - item["start"])))
+    selected: list[dict] = []
+    for match in ordered:
+        overlap = next((item for item in selected if match["start"] < item["end"] and item["start"] < match["end"]), None)
+        if overlap:
+            overlap["start"] = min(overlap["start"], match["start"])
+            overlap["end"] = max(overlap["end"], match["end"])
+            continue
+        selected.append(dict(match))
+    return sorted(selected, key=lambda item: item["start"])
 
 
 def _inline_prompt(text: str, match: dict) -> str:
-    return f"{text[:match['start']]} ______ {text[match['end']:]}".strip()
+    parts = []
+    cursor = 0
+    for blank in _inline_placeholder_matches(text):
+        parts.append(text[cursor:blank["start"]])
+        parts.append(" ______ " if blank["start"] == match["start"] else " ···· ")
+        cursor = blank["end"]
+    parts.append(text[cursor:])
+    return "".join(parts).strip()
 
 
 def _nearby_options(entries: list[dict], last_entry_index: int, next_entry_index: int | None) -> list[str]:
@@ -371,7 +597,7 @@ def parse_questions(blocks: list[dict], sections: list[dict] | None = None, slug
         if active_section in writing_sections:
             continue
         text = entry["text"]
-        if _group_heading(text) and not QUESTION.match(text):
+        if _group_heading(text) and not QUESTION.match(text) and (not _is_option_line(text) or any(keyword in text for keyword in GROUP_KEYWORDS)):
             group_counter[active_section] = group_counter.get(active_section, 0) + 1
             current_group = f"{active_section}-group-{group_counter[active_section]}"
             continue
@@ -449,8 +675,26 @@ def parse_questions(blocks: list[dict], sections: list[dict] | None = None, slug
             for start in group_starts:
                 start["options"] = shared_options
 
-    explicit_keys = {(start["sectionId"], start["number"]) for start in starts if not start.get("inline")}
-    starts = [start for start in starts if not (start.get("inline") and (start["sectionId"], start["number"]) in explicit_keys)]
+    # When a cloze paragraph contains the numbered blank and the DOCX puts its
+    # answer choices on a later `36．A...` line, merge those choices back into
+    # the inline blank instead of replacing the passage with an option card.
+    inline_starts = {
+        (start["sectionId"], start["number"]): start
+        for start in starts
+        if start.get("inline")
+    }
+    for start in starts:
+        if start.get("inline"):
+            continue
+        option_prompt, option_values = split_options(entries[start["entryIndex"]]["text"])
+        option_prompt = re.sub(r"^\s*\d{1,3}\s*[．.、:：)）]?\s*", "", option_prompt)
+        candidate = inline_starts.get((start["sectionId"], start["number"]))
+        if candidate and not option_prompt and option_values:
+            candidate["options"] = option_values
+            start["drop"] = True
+
+    explicit_keys = {(start["sectionId"], start["number"]) for start in starts if not start.get("inline") and not start.get("drop")}
+    starts = [start for start in starts if not start.get("drop") and not (start.get("inline") and (start["sectionId"], start["number"]) in explicit_keys)]
 
     questions = []
     for position, start in enumerate(starts):
@@ -476,12 +720,25 @@ def parse_questions(blocks: list[dict], sections: list[dict] | None = None, slug
                 continuation.append(entry["text"])
             text = " ".join([start["prompt"]] + continuation).strip()
         prompt, options = split_options(text)
+        if not options:
+            prompt, options = split_compact_letter_options(prompt)
+        if not options and (not prompt or re.fullmatch(r"[_…\s]+", prompt)):
+            nearby_labels = []
+            for nearby in entries[max(0, start["entryIndex"] - 4) : start["entryIndex"]]:
+                nearby_labels.extend(re.findall(r"\b([A-F])\b", nearby["text"]))
+            labels = list(dict.fromkeys(nearby_labels))
+            if len(labels) >= 3:
+                options = [f"{label}. {label}" for label in labels]
+                prompt = "请根据题目配图作答。"
         if start.get("options") and not options:
             options = start["options"]
+        prompt = _clean_question_prompt(prompt)
         if _looks_like_instruction(prompt):
             continue
+        if re.fullmatch(r"第\s*\d+\s*题", prompt):
+            continue
         if not prompt:
-            prompt = f"第 {start['number']} 题"
+            prompt = "请根据原卷内容作答。"
         index = len(questions) + 1
         question_id = f"{slug}-{start['sectionId']}-{start['groupId']}-{index}"
         questions.append({
@@ -709,6 +966,24 @@ def extract_media(original: Path, assets_dir: Path, slug: str) -> dict[str, str]
     return paths
 
 
+def _is_meaningful_image(path: Path) -> bool:
+    """Reject empty white page placeholders while keeping diagrams and scanned content."""
+    try:
+        from PIL import Image
+
+        with Image.open(path) as image:
+            sample = image.convert("L")
+            sample.thumbnail((96, 96))
+            pixels = sample.tobytes()
+            if not pixels:
+                return False
+            non_white = sum(1 for pixel in pixels if pixel < 245)
+            return non_white >= max(3, len(pixels) // 1000)
+    except Exception:
+        # Unsupported formats are kept; the browser can still render them.
+        return True
+
+
 DISPLAY_INSTRUCTION_PREFIXES = ("请", "阅读下面", "根据", "从每", "从下", "选择", "填写", "完成", "作答", "注意事项", "第I卷", "第II卷")
 
 
@@ -734,7 +1009,7 @@ def _is_answer_option_block(text: str) -> bool:
 
 
 def _is_passage_section(section_title: str) -> bool:
-    return bool(re.search(r"阅读|完形|任务型|短文填空|综合填空|选词填空|语篇填空", section_title))
+    return bool(re.search(r"阅读|完形|任务型|短文填空|综合填空|选词填空|语篇填空|请通读下面|根据短文内容|根据材料内容|语法和上下文", section_title))
 
 
 def build_display_blocks(sections: list[dict], questions: list[dict]) -> None:
@@ -746,53 +1021,45 @@ def build_display_blocks(sections: list[dict], questions: list[dict]) -> None:
     for section in sections:
         blocks = section.get("blocks", [])
         section_questions = questions_by_section.get(section["id"], [])
-        block_indexes = {block.get("id"): index for index, block in enumerate(blocks) if block.get("id")}
-        source_indexes = sorted({
-            block_indexes[source_id]
+        question_source_ids = {
+            source_id
             for question in section_questions
             for source_id in question.get("sourceBlockIds", [])
-            if source_id in block_indexes
-        })
-        hidden_paragraph_indexes = set()
+        }
         passage_section = _is_passage_section(section.get("title", ""))
-        for source_position, source_index in enumerate(source_indexes):
-            if blocks[source_index].get("kind") != "paragraph":
-                continue
-            hidden_paragraph_indexes.add(source_index)
-            next_index = source_index + 1
-            next_source_index = source_indexes[source_position + 1] if source_position + 1 < len(source_indexes) else len(blocks)
-            saw_option = False
-            while next_index < len(blocks):
-                block = blocks[next_index]
-                if block.get("kind") != "paragraph":
-                    next_index += 1
-                    continue
-                text = (block.get("text") or "").strip()
-                if next_index >= next_source_index or _is_question_marker(text):
-                    break
-                if passage_section:
-                    if _is_answer_option_block(text):
-                        hidden_paragraph_indexes.add(next_index)
-                        saw_option = True
-                    elif saw_option:
-                        break
-                    else:
-                        hidden_paragraph_indexes.add(next_index)
-                else:
-                    hidden_paragraph_indexes.add(next_index)
-                next_index += 1
-
+        in_question = False
         display_blocks = []
-        for index, block in enumerate(blocks):
+        for block in blocks:
             if block.get("kind") != "paragraph":
                 display_blocks.append(block)
                 continue
             text = (block.get("text") or "").strip()
-            if index in hidden_paragraph_indexes:
+            if not section_questions or not text or text == section.get("title", "").strip():
                 continue
-            if not section_questions:
+            if text.startswith("【此处可播放相关音频"):
                 continue
-            if text == section.get("title", "").strip():
+            is_question_source = block.get("id") in question_source_ids or _is_question_marker(text) or bool(_split_numbered_line(text))
+            if is_question_source:
+                in_question = True
+                if passage_section and (len(text) > 120 or _inline_placeholder_matches(text)):
+                    display_block = dict(block)
+                    display_block["id"] = f"display-{block.get('id', 'paragraph')}"
+                    display_block["sourceId"] = block.get("id")
+                    display_blocks.append(display_block)
+                continue
+            # Keep subsection headings, but never mistake an option line for a heading.
+            if _group_heading(text) and not _is_option_line(text):
+                in_question = False
+                display_blocks.append(block)
+                continue
+            if _is_answer_option_block(text):
+                in_question = False
+                continue
+            _, options = split_options(text)
+            if len(options) >= 2:
+                in_question = False
+                continue
+            if in_question and not passage_section:
                 continue
             display_blocks.append(block)
         section["displayBlocks"] = display_blocks
@@ -830,6 +1097,11 @@ def main() -> None:
     original_lines, original_tables = read_docx(args.original)
     source_blocks = read_docx_blocks(args.original)
     media_map = extract_media(args.original, args.assets, args.slug)
+    media_map = {
+        relationship: path
+        for relationship, path in media_map.items()
+        if _is_meaningful_image(args.assets / Path(path).name)
+    }
     for block in source_blocks:
         refs = block.pop("mediaRefs", [])
         if block["kind"] == "paragraph" and refs:
@@ -839,9 +1111,11 @@ def main() -> None:
             block["alt"] = block.get("text") or "原卷图片"
         if block.get("src") is None:
             block.pop("src", None)
+    source_blocks = [block for block in source_blocks if block.get("kind") != "image" or block.get("src")]
     analysis_lines, _ = read_docx(args.analysis)
     sections = detect_sections(source_blocks)
     questions = parse_questions(source_blocks, sections, args.slug)
+    audio_paths = copy_audio(args.original, args.assets, args.slug)
     answers = answer_map(analysis_lines, questions)
     analyses = analysis_map(analysis_lines, questions)
     for question in questions:
@@ -860,6 +1134,7 @@ def main() -> None:
         section["blocks"] = [block for block in source_blocks if block.get("id") in block_ids]
         section["questionIds"] = [question["id"] for question in questions if question["sectionId"] == section["id"]]
     build_display_blocks(sections, questions)
+    parts = build_parts(sections, questions, audio_paths)
 
     ordered_source_lines = []
     for block in source_blocks:
@@ -884,7 +1159,6 @@ def main() -> None:
     is_simulation = "模拟" in args.original.name or "模拟" in str(args.original.parent)
     kind_label = "模拟卷" if is_simulation else "真题"
     asset_paths = sorted(set(media_map.values()))
-    audio_paths = copy_audio(args.original, args.assets, args.slug)
     duration_match = re.search(r"(\d+)\s*分钟", source_text)
     duration = int(duration_match.group(1)) if duration_match else 90
 
@@ -901,6 +1175,7 @@ def main() -> None:
         "sourceText": source_text,
         "sourceBlocks": source_blocks,
         "sections": sections,
+        "parts": parts,
         "questions": questions,
         "readingA": {"instructions": "原卷阅读材料与题目如下。", "books": []},
         "assets": {"all": asset_paths, "audio": audio_paths},
