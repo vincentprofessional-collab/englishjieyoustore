@@ -13,6 +13,8 @@ const requiredQuestionIds = [
   ...questions["part-3"].map((question) => question.id),
 ];
 
+const requiredBand8QuestionIds = questions["part-1"].slice(0, 10).map((question) => question.id);
+
 function extractAnswerObject(questionId) {
   const marker = `questionId: "${questionId}"`;
   const markerIndex = source.indexOf(marker);
@@ -51,5 +53,19 @@ for (const questionId of requiredQuestionIds) {
     assert.ok((vocabularyBlock.match(/phrase:/g) ?? []).length >= 5, `${questionId} needs at least 5 vocabulary items`);
     assert.match(answerBlock, /"[A-Z][\s\S]{220,}"/, `${questionId} needs a substantial English answer`);
     assert.match(answerTranslationBlock, /"[\s\S]*[\u4e00-\u9fff][\s\S]{120,}"/, `${questionId} needs a substantial Chinese translation`);
+  });
+}
+
+for (const questionId of requiredBand8QuestionIds) {
+  test(`${questionId} has complete Band 8 model answer content`, () => {
+    const answerObject = extractAnswerObject(questionId);
+    const vocabularyBlock = extractArrayBlock(answerObject, "band8Vocabulary");
+    const answerBlock = extractArrayBlock(answerObject, "band8Answer");
+    const answerTranslationBlock = extractArrayBlock(answerObject, "band8AnswerTranslation");
+
+    assert.notEqual(answerObject, "", `${questionId} is missing`);
+    assert.ok((vocabularyBlock.match(/phrase:/g) ?? []).length >= 5, `${questionId} needs at least 5 Band 8 vocabulary items`);
+    assert.ok((answerBlock.match(/"[^"]{120,}"/g) ?? []).length >= 2, `${questionId} needs at least 2 substantial Band 8 English paragraphs`);
+    assert.match(answerTranslationBlock, /"[\s\S]*[\u4e00-\u9fff][\s\S]{160,}"/, `${questionId} needs a substantial Band 8 Chinese translation`);
   });
 }

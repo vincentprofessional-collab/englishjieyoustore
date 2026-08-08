@@ -14,3 +14,13 @@ test("speaking detail pages include the real question and common follow-ups belo
   assert.match(output, /常见追问/);
   assert.match(output, /Does your name have any meaning\? Do you like your name\?/);
 });
+
+test("speaking detail pages reserve side-by-side Band 7, Band 8, and Band 9 answer columns", () => {
+  assert.ok(existsSync(namesPage), "Run `npm run build` before this test.");
+
+  const output = readFileSync(namesPage, "utf8");
+  assert.match(output, /7 分范文/);
+  assert.match(output, /8 分范文/);
+  assert.match(output, /9 分范文/);
+  assert.match(output, /预留/);
+});

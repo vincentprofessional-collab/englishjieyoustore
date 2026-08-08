@@ -26,14 +26,17 @@ export async function generateMetadata({
   const { part: partId, questionId } = await params;
   const part = getSpeakingPart(partId);
   const question = part?.questions.find((item) => item.id === questionId);
+  const modelAnswer = getSpeakingModelAnswer(questionId);
 
-  if (!part || !question || !getSpeakingModelAnswer(questionId)) {
+  if (!part || !question || !modelAnswer) {
     return {};
   }
 
+  const bandLabel = modelAnswer.band8Answer?.length ? "7/8 分范文" : "7 分范文";
+
   return {
-    description: `${question.question} 雅思口语 ${part.label} 7 分范文、万能句型与重点词汇。`,
-    title: `${question.question}｜雅思口语 7 分范文`,
+    description: `${question.question} 雅思口语 ${part.label} ${bandLabel}、万能句型与重点词汇。`,
+    title: `${question.question}｜雅思口语 ${bandLabel}`,
   };
 }
 
@@ -58,11 +61,11 @@ export default async function SpeakingModelAnswerPage({
         <span aria-hidden="true">/</span>
         <Link href={`/speaking/${part.id}`}>{part.label}</Link>
         <span aria-hidden="true">/</span>
-        <strong>7 分范文</strong>
+        <strong>范文对照</strong>
       </nav>
 
       <header className={styles.hero}>
-        <span>BAND 7 MODEL ANSWER</span>
+        <span>BAND 7 · 8 MODEL ANSWERS</span>
         <h1>{question.question}</h1>
         <div className={styles.questionPrompt}>
           <p>
@@ -120,30 +123,99 @@ export default async function SpeakingModelAnswerPage({
       </section>
 
       <section className={`${styles.section} ${styles.answerSection}`}>
-        <h2>口语范文</h2>
-        <div className={styles.answer}>
-          {modelAnswer.answer.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
-          ))}
-        </div>
+        <h2>口语范文对照</h2>
+        <div className={styles.answerGrid}>
+          <section className={styles.answerCard}>
+            <header>
+              <span>Band 7</span>
+              <h3>7 分范文</h3>
+              <p>自然、清楚、适合先背熟的高分版本。</p>
+            </header>
+            <div className={styles.answer}>
+              {modelAnswer.answer.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </div>
 
-        <div className={styles.translationBlock}>
-          <h3>中文翻译</h3>
-          <div className={styles.translation}>
-            {modelAnswer.answerTranslation.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
-          </div>
-        </div>
+            <div className={styles.translationBlock}>
+              <h4>中文翻译</h4>
+              <div className={styles.translation}>
+                {modelAnswer.answerTranslation.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
+            </div>
 
-        {modelAnswer.audioUrl ? (
-          <div className={styles.audioBlock}>
-            <h3>范文音频</h3>
-            <audio controls preload="none" src={modelAnswer.audioUrl}>
-              您的浏览器暂不支持音频播放。
-            </audio>
-          </div>
-        ) : null}
+            {modelAnswer.audioUrl ? (
+              <div className={styles.audioBlock}>
+                <h4>范文音频</h4>
+                <audio controls preload="none" src={modelAnswer.audioUrl}>
+                  您的浏览器暂不支持音频播放。
+                </audio>
+              </div>
+            ) : null}
+          </section>
+
+          <section className={`${styles.answerCard} ${styles.band8Card}`}>
+            <header>
+              <span>Band 8</span>
+              <h3>8 分范文</h3>
+              <p>更精准、更地道，避免 Chinglish 的升级版本。</p>
+            </header>
+            {modelAnswer.band8Answer?.length ? (
+              <>
+                <div className={styles.answer}>
+                  {modelAnswer.band8Answer.map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
+                </div>
+
+                <div className={styles.translationBlock}>
+                  <h4>中文翻译</h4>
+                  <div className={styles.translation}>
+                    {modelAnswer.band8AnswerTranslation?.map((paragraph) => (
+                      <p key={paragraph}>{paragraph}</p>
+                    ))}
+                  </div>
+                </div>
+
+                {modelAnswer.band8Vocabulary?.length ? (
+                  <div className={styles.bandVocabularyBlock}>
+                    <h4>8 分词汇与短语</h4>
+                    <dl>
+                      {modelAnswer.band8Vocabulary.map((item) => (
+                        <div key={item.phrase}>
+                          <dt>{item.phrase}</dt>
+                          <dd>
+                            <strong>{item.translation}</strong>
+                            <span>{item.note}</span>
+                          </dd>
+                        </div>
+                      ))}
+                    </dl>
+                  </div>
+                ) : null}
+              </>
+            ) : (
+              <div className={styles.placeholderCard}>
+                <strong>8 分范文分批更新中</strong>
+                <p>本题会按同一标准补充：自然英语表达、准确搭配、丰富但可说出口的句式。</p>
+              </div>
+            )}
+          </section>
+
+          <section className={`${styles.answerCard} ${styles.futureCard}`}>
+            <header>
+              <span>Band 9</span>
+              <h3>9 分范文</h3>
+              <p>预留给后续更高阶表达版本。</p>
+            </header>
+            <div className={styles.placeholderCard}>
+              <strong>9 分范文预留</strong>
+              <p>后续可加入更强的语义控制、语域变化和近母语级表达。</p>
+            </div>
+          </section>
+        </div>
       </section>
 
       <section className={styles.section}>
