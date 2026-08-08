@@ -2,6 +2,7 @@ export type JuniorHighQuestion = {
   id: string;
   number: number;
   displayNumber?: string;
+  partId?: string;
   sectionId?: string;
   groupId?: string;
   inputKind?: "choice" | "blank" | "text" | "writing";
@@ -31,6 +32,26 @@ export type JuniorHighSection = {
   blocks: JuniorHighBlock[];
   displayBlocks?: JuniorHighBlock[];
   questionIds: string[];
+};
+
+export type JuniorHighQuestionGroup = {
+  id: string;
+  marker?: string;
+  title: string;
+  instructions: string[];
+  blocks: JuniorHighBlock[];
+  displayBlocks?: JuniorHighBlock[];
+  questionIds: string[];
+  audio?: string[];
+  inputMode?: "choice" | "inline-blank" | "text";
+};
+
+export type JuniorHighPart = {
+  id: string;
+  marker?: string;
+  title: string;
+  instructions: string[];
+  groups: JuniorHighQuestionGroup[];
 };
 
 export type JuniorHighWritingTask = {
@@ -90,6 +111,7 @@ export type JuniorHighPaper = {
   };
   writing: JuniorHighWriting;
   sections?: JuniorHighSection[];
+  parts?: JuniorHighPart[];
   writingTasks?: JuniorHighWritingTask[];
   sourceBlocks?: JuniorHighBlock[];
   assets?: {
