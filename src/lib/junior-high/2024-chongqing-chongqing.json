@@ -1463,18 +1463,24 @@
     {
       "id": "section-2",
       "title": "Ⅰ、听力测试。（共30分）",
-      "instructions": [
-        "听一遍。根据你所听到的句子，从A、B、C三个选项中选出最恰当的答语，并把答题卡上对应题目的答案标号涂黑。",
-        "听一遍。根据你所听到的对话和问题，从Ａ、B、C三个选项中选出正确答案，并把答题卡上对应题目的答案标号涂黑。",
-        "听两遍。根据你所听到的长对话，从A、B、C三个选项中选出正确答案，并把答题卡上对应题目的答案标号涂黑。",
-        "听两遍。根据你所听到的短文内容，从A、B、C三个选项中选出正确答案，并把答题卡上对应题目的答案标号涂黑。"
-      ],
+      "instructions": [],
       "blocks": [
         {
           "id": "paragraph-9",
           "kind": "paragraph",
           "text": "Ⅰ、听力测试。（共30分）"
-        },
+        }
+      ],
+      "questionIds": [],
+      "displayBlocks": []
+    },
+    {
+      "id": "section-3",
+      "title": "第一节（每小题1.5分，共9分）",
+      "instructions": [
+        "听一遍。根据你所听到的句子，从A、B、C三个选项中选出最恰当的答语，并把答题卡上对应题目的答案标号涂黑。"
+      ],
+      "blocks": [
         {
           "id": "paragraph-10",
           "kind": "paragraph",
@@ -1544,7 +1550,31 @@
           "id": "paragraph-23",
           "kind": "paragraph",
           "text": "A．Sure.B．Yes, I can.C．That’s all right."
-        },
+        }
+      ],
+      "questionIds": [
+        "2024-chongqing-chongqing-section-3-section-3-group-1-1",
+        "2024-chongqing-chongqing-section-3-section-3-group-1-2",
+        "2024-chongqing-chongqing-section-3-section-3-group-1-3",
+        "2024-chongqing-chongqing-section-3-section-3-group-1-4",
+        "2024-chongqing-chongqing-section-3-section-3-group-1-5",
+        "2024-chongqing-chongqing-section-3-section-3-group-1-6"
+      ],
+      "displayBlocks": [
+        {
+          "id": "paragraph-11",
+          "kind": "paragraph",
+          "text": "听一遍。根据你所听到的句子，从A、B、C三个选项中选出最恰当的答语，并把答题卡上对应题目的答案标号涂黑。"
+        }
+      ]
+    },
+    {
+      "id": "section-4",
+      "title": "第二节（每小题1.5分，共9分）",
+      "instructions": [
+        "听一遍。根据你所听到的对话和问题，从Ａ、B、C三个选项中选出正确答案，并把答题卡上对应题目的答案标号涂黑。"
+      ],
+      "blocks": [
         {
           "id": "paragraph-24",
           "kind": "paragraph",
@@ -1614,7 +1644,31 @@
           "id": "paragraph-37",
           "kind": "paragraph",
           "text": "A．By bus.B．By bike.C．By car."
-        },
+        }
+      ],
+      "questionIds": [
+        "2024-chongqing-chongqing-section-4-section-4-group-1-7",
+        "2024-chongqing-chongqing-section-4-section-4-group-1-8",
+        "2024-chongqing-chongqing-section-4-section-4-group-1-9",
+        "2024-chongqing-chongqing-section-4-section-4-group-1-10",
+        "2024-chongqing-chongqing-section-4-section-4-group-1-11",
+        "2024-chongqing-chongqing-section-4-section-4-group-1-12"
+      ],
+      "displayBlocks": [
+        {
+          "id": "paragraph-25",
+          "kind": "paragraph",
+          "text": "听一遍。根据你所听到的对话和问题，从Ａ、B、C三个选项中选出正确答案，并把答题卡上对应题目的答案标号涂黑。"
+        }
+      ]
+    },
+    {
+      "id": "section-5",
+      "title": "第三节（每小题1.5分，共6分）",
+      "instructions": [
+        "听两遍。根据你所听到的长对话，从A、B、C三个选项中选出正确答案，并把答题卡上对应题目的答案标号涂黑。"
+      ],
+      "blocks": [
         {
           "id": "paragraph-38",
           "kind": "paragraph",
@@ -1694,7 +1748,34 @@
           "id": "paragraph-53",
           "kind": "paragraph",
           "text": "A．Making flashcards.B．Listening to tapes.C．Joining an English language club."
+        }
+      ],
+      "questionIds": [
+        "2024-chongqing-chongqing-section-5-section-5-group-1-13",
+        "2024-chongqing-chongqing-section-5-section-5-group-1-14",
+        "2024-chongqing-chongqing-section-5-section-5-group-1-15",
+        "2024-chongqing-chongqing-section-5-section-5-group-1-16"
+      ],
+      "displayBlocks": [
+        {
+          "id": "paragraph-39",
+          "kind": "paragraph",
+          "text": "听两遍。根据你所听到的长对话，从A、B、C三个选项中选出正确答案，并把答题卡上对应题目的答案标号涂黑。"
         },
+        {
+          "id": "paragraph-40",
+          "kind": "paragraph",
+          "text": "听第一段材料，回答第13和14小题。"
+        }
+      ]
+    },
+    {
+      "id": "section-6",
+      "title": "第四节（每小题1.5分，共6分）",
+      "instructions": [
+        "听两遍。根据你所听到的短文内容，从A、B、C三个选项中选出正确答案，并把答题卡上对应题目的答案标号涂黑。"
+      ],
+      "blocks": [
         {
           "id": "paragraph-54",
           "kind": "paragraph",
@@ -1747,64 +1828,24 @@
         }
       ],
       "questionIds": [
-        "2024-chongqing-chongqing-section-2-section-2-group-1-1",
-        "2024-chongqing-chongqing-section-2-section-2-group-1-2",
-        "2024-chongqing-chongqing-section-2-section-2-group-1-3",
-        "2024-chongqing-chongqing-section-2-section-2-group-1-4",
-        "2024-chongqing-chongqing-section-2-section-2-group-1-5",
-        "2024-chongqing-chongqing-section-2-section-2-group-1-6",
-        "2024-chongqing-chongqing-section-2-section-2-group-1-7",
-        "2024-chongqing-chongqing-section-2-section-2-group-1-8",
-        "2024-chongqing-chongqing-section-2-section-2-group-1-9",
-        "2024-chongqing-chongqing-section-2-section-2-group-1-10",
-        "2024-chongqing-chongqing-section-2-section-2-group-1-11",
-        "2024-chongqing-chongqing-section-2-section-2-group-1-12",
-        "2024-chongqing-chongqing-section-2-section-2-group-1-13",
-        "2024-chongqing-chongqing-section-2-section-2-group-1-14",
-        "2024-chongqing-chongqing-section-2-section-2-group-1-15",
-        "2024-chongqing-chongqing-section-2-section-2-group-1-16",
-        "2024-chongqing-chongqing-section-2-section-2-group-1-17",
-        "2024-chongqing-chongqing-section-2-section-2-group-1-18",
-        "2024-chongqing-chongqing-section-2-section-2-group-1-19",
-        "2024-chongqing-chongqing-section-2-section-2-group-1-20"
+        "2024-chongqing-chongqing-section-6-section-6-group-1-17",
+        "2024-chongqing-chongqing-section-6-section-6-group-1-18",
+        "2024-chongqing-chongqing-section-6-section-6-group-1-19",
+        "2024-chongqing-chongqing-section-6-section-6-group-1-20"
       ],
       "displayBlocks": [
         {
-          "id": "paragraph-10",
+          "id": "paragraph-55",
           "kind": "paragraph",
-          "text": "第一节（每小题1.5分，共9分）"
-        },
-        {
-          "id": "paragraph-24",
-          "kind": "paragraph",
-          "text": "第二节（每小题1.5分，共9分）"
-        },
-        {
-          "id": "paragraph-38",
-          "kind": "paragraph",
-          "text": "第三节（每小题1.5分，共6分）"
-        },
-        {
-          "id": "paragraph-40",
-          "kind": "paragraph",
-          "text": "听第一段材料，回答第13和14小题。"
-        },
-        {
-          "id": "paragraph-47",
-          "kind": "paragraph",
-          "text": "听第二段材料，回答第15和16小题。"
-        },
-        {
-          "id": "paragraph-54",
-          "kind": "paragraph",
-          "text": "第四节（每小题1.5分，共6分）"
+          "text": "听两遍。根据你所听到的短文内容，从A、B、C三个选项中选出正确答案，并把答题卡上对应题目的答案标号涂黑。"
         }
       ]
     },
     {
-      "id": "section-3",
+      "id": "section-7",
       "title": "Ⅱ.语法选择。（每小题1分，共10分）",
       "instructions": [
+        "Ⅱ.语法选择。（每小题1分，共10分）",
         "根据短文内容，从A、B、C三个选项中选出一个语法正确的答案，并把答题卡上对应题目的答案标号涂黑。"
       ],
       "blocks": [
@@ -1895,18 +1936,23 @@
         }
       ],
       "questionIds": [
-        "2024-chongqing-chongqing-section-3-section-3-group-1-21",
-        "2024-chongqing-chongqing-section-3-section-3-group-1-22",
-        "2024-chongqing-chongqing-section-3-section-3-group-1-23",
-        "2024-chongqing-chongqing-section-3-section-3-group-1-24",
-        "2024-chongqing-chongqing-section-3-section-3-group-1-25",
-        "2024-chongqing-chongqing-section-3-section-3-group-1-26",
-        "2024-chongqing-chongqing-section-3-section-3-group-1-27",
-        "2024-chongqing-chongqing-section-3-section-3-group-1-28",
-        "2024-chongqing-chongqing-section-3-section-3-group-1-29",
-        "2024-chongqing-chongqing-section-3-section-3-group-1-30"
+        "2024-chongqing-chongqing-section-7-section-7-group-1-21",
+        "2024-chongqing-chongqing-section-7-section-7-group-1-22",
+        "2024-chongqing-chongqing-section-7-section-7-group-1-23",
+        "2024-chongqing-chongqing-section-7-section-7-group-1-24",
+        "2024-chongqing-chongqing-section-7-section-7-group-1-25",
+        "2024-chongqing-chongqing-section-7-section-7-group-1-26",
+        "2024-chongqing-chongqing-section-7-section-7-group-1-27",
+        "2024-chongqing-chongqing-section-7-section-7-group-1-28",
+        "2024-chongqing-chongqing-section-7-section-7-group-1-29",
+        "2024-chongqing-chongqing-section-7-section-7-group-1-30"
       ],
       "displayBlocks": [
+        {
+          "id": "paragraph-65",
+          "kind": "paragraph",
+          "text": "根据短文内容，从A、B、C三个选项中选出一个语法正确的答案，并把答题卡上对应题目的答案标号涂黑。"
+        },
         {
           "id": "paragraph-66",
           "kind": "paragraph",
@@ -1935,7 +1981,7 @@
       ]
     },
     {
-      "id": "section-4",
+      "id": "section-8",
       "title": "Ⅲ.完形填空。（每小题1.5分，共15分）",
       "instructions": [
         "根据短文内容，从A、B、C、D四个选项中选出一个能填入相应空格内的最佳答案，并把答题卡上对应题目的答案标号涂黑。"
@@ -2038,18 +2084,23 @@
         }
       ],
       "questionIds": [
-        "2024-chongqing-chongqing-section-4-section-4-group-1-31",
-        "2024-chongqing-chongqing-section-4-section-4-group-1-32",
-        "2024-chongqing-chongqing-section-4-section-4-group-1-33",
-        "2024-chongqing-chongqing-section-4-section-4-group-1-34",
-        "2024-chongqing-chongqing-section-4-section-4-group-1-35",
-        "2024-chongqing-chongqing-section-4-section-4-group-1-36",
-        "2024-chongqing-chongqing-section-4-section-4-group-1-37",
-        "2024-chongqing-chongqing-section-4-section-4-group-1-38",
-        "2024-chongqing-chongqing-section-4-section-4-group-1-39",
-        "2024-chongqing-chongqing-section-4-section-4-group-1-40"
+        "2024-chongqing-chongqing-section-8-section-8-group-1-31",
+        "2024-chongqing-chongqing-section-8-section-8-group-1-32",
+        "2024-chongqing-chongqing-section-8-section-8-group-1-33",
+        "2024-chongqing-chongqing-section-8-section-8-group-1-34",
+        "2024-chongqing-chongqing-section-8-section-8-group-1-35",
+        "2024-chongqing-chongqing-section-8-section-8-group-1-36",
+        "2024-chongqing-chongqing-section-8-section-8-group-1-37",
+        "2024-chongqing-chongqing-section-8-section-8-group-1-38",
+        "2024-chongqing-chongqing-section-8-section-8-group-1-39",
+        "2024-chongqing-chongqing-section-8-section-8-group-1-40"
       ],
       "displayBlocks": [
+        {
+          "id": "paragraph-82",
+          "kind": "paragraph",
+          "text": "根据短文内容，从A、B、C、D四个选项中选出一个能填入相应空格内的最佳答案，并把答题卡上对应题目的答案标号涂黑。"
+        },
         {
           "id": "paragraph-83",
           "kind": "paragraph",
@@ -2088,9 +2139,10 @@
       ]
     },
     {
-      "id": "section-5",
+      "id": "section-9",
       "title": "Ⅳ.阅读理解。（41-43小题，每小题1分，44-59小题，每小题2分，共35分）",
       "instructions": [
+        "Ⅳ.阅读理解。（41-43小题，每小题1分，44-59小题，每小题2分，共35分）",
         "阅读下列材料，从A、B、C、D四个选项中选出最佳答案，并把答题卡上对应题目的答案标号涂黑。"
       ],
       "blocks": [
@@ -2665,27 +2717,32 @@
         }
       ],
       "questionIds": [
-        "2024-chongqing-chongqing-section-5-section-5-group-1-41",
-        "2024-chongqing-chongqing-section-5-section-5-group-1-42",
-        "2024-chongqing-chongqing-section-5-section-5-group-1-43",
-        "2024-chongqing-chongqing-section-5-section-5-group-1-44",
-        "2024-chongqing-chongqing-section-5-section-5-group-1-45",
-        "2024-chongqing-chongqing-section-5-section-5-group-1-46",
-        "2024-chongqing-chongqing-section-5-section-5-group-1-47",
-        "2024-chongqing-chongqing-section-5-section-5-group-1-48",
-        "2024-chongqing-chongqing-section-5-section-5-group-1-49",
-        "2024-chongqing-chongqing-section-5-section-5-group-1-50",
-        "2024-chongqing-chongqing-section-5-section-5-group-1-51",
-        "2024-chongqing-chongqing-section-5-section-5-group-1-52",
-        "2024-chongqing-chongqing-section-5-section-5-group-1-53",
-        "2024-chongqing-chongqing-section-5-section-5-group-1-54",
-        "2024-chongqing-chongqing-section-5-section-5-group-1-55",
-        "2024-chongqing-chongqing-section-5-section-5-group-1-56",
-        "2024-chongqing-chongqing-section-5-section-5-group-1-57",
-        "2024-chongqing-chongqing-section-5-section-5-group-1-58",
-        "2024-chongqing-chongqing-section-5-section-5-group-1-59"
+        "2024-chongqing-chongqing-section-9-section-9-group-1-41",
+        "2024-chongqing-chongqing-section-9-section-9-group-1-42",
+        "2024-chongqing-chongqing-section-9-section-9-group-1-43",
+        "2024-chongqing-chongqing-section-9-section-9-group-1-44",
+        "2024-chongqing-chongqing-section-9-section-9-group-1-45",
+        "2024-chongqing-chongqing-section-9-section-9-group-1-46",
+        "2024-chongqing-chongqing-section-9-section-9-group-1-47",
+        "2024-chongqing-chongqing-section-9-section-9-group-1-48",
+        "2024-chongqing-chongqing-section-9-section-9-group-1-49",
+        "2024-chongqing-chongqing-section-9-section-9-group-1-50",
+        "2024-chongqing-chongqing-section-9-section-9-group-1-51",
+        "2024-chongqing-chongqing-section-9-section-9-group-1-52",
+        "2024-chongqing-chongqing-section-9-section-9-group-1-53",
+        "2024-chongqing-chongqing-section-9-section-9-group-1-54",
+        "2024-chongqing-chongqing-section-9-section-9-group-1-55",
+        "2024-chongqing-chongqing-section-9-section-9-group-1-56",
+        "2024-chongqing-chongqing-section-9-section-9-group-1-57",
+        "2024-chongqing-chongqing-section-9-section-9-group-1-58",
+        "2024-chongqing-chongqing-section-9-section-9-group-1-59"
       ],
       "displayBlocks": [
+        {
+          "id": "paragraph-101",
+          "kind": "paragraph",
+          "text": "阅读下列材料，从A、B、C、D四个选项中选出最佳答案，并把答题卡上对应题目的答案标号涂黑。"
+        },
         {
           "id": "paragraph-102",
           "kind": "paragraph",
@@ -2918,9 +2975,11 @@
       ]
     },
     {
-      "id": "section-6",
+      "id": "section-10",
       "title": "Ⅴ.口语应用。（每小题1分，共5分）",
-      "instructions": [],
+      "instructions": [
+        "Ⅴ.口语应用。（每小题1分，共5分）"
+      ],
       "blocks": [
         {
           "id": "paragraph-206",
@@ -2932,7 +2991,7 @@
       "displayBlocks": []
     },
     {
-      "id": "section-7",
+      "id": "section-11",
       "title": "阅读下面对话，从7个选项中选择5个恰当的句子完成此对话，并把答题卡上对应题目的答案标号涂黑。",
       "instructions": [
         "阅读下面对话，从7个选项中选择5个恰当的句子完成此对话，并把答题卡上对应题目的答案标号涂黑。"
@@ -3035,28 +3094,13 @@
         }
       ],
       "questionIds": [
-        "2024-chongqing-chongqing-section-7-section-7-group-1-60",
-        "2024-chongqing-chongqing-section-7-section-7-group-1-61",
-        "2024-chongqing-chongqing-section-7-section-7-group-1-62",
-        "2024-chongqing-chongqing-section-7-section-7-group-1-63",
-        "2024-chongqing-chongqing-section-7-section-7-group-1-64"
+        "2024-chongqing-chongqing-section-11-section-11-group-1-60",
+        "2024-chongqing-chongqing-section-11-section-11-group-1-61",
+        "2024-chongqing-chongqing-section-11-section-11-group-1-62",
+        "2024-chongqing-chongqing-section-11-section-11-group-1-63",
+        "2024-chongqing-chongqing-section-11-section-11-group-1-64"
       ],
       "displayBlocks": [
-        {
-          "id": "paragraph-222",
-          "kind": "paragraph",
-          "text": "E．I want to learn how to make videos."
-        },
-        {
-          "id": "paragraph-223",
-          "kind": "paragraph",
-          "text": "F．It also helps us to become independent."
-        },
-        {
-          "id": "paragraph-224",
-          "kind": "paragraph",
-          "text": "G．Do we have any outdoor activities on weekends?"
-        },
         {
           "id": "paragraph-225",
           "kind": "paragraph",
@@ -3065,9 +3109,11 @@
       ]
     },
     {
-      "id": "section-8",
+      "id": "section-12",
       "title": "Ⅵ.任务型阅读。（65-67小题，每小题2分，68小题3分，共9分）",
-      "instructions": [],
+      "instructions": [
+        "Ⅵ.任务型阅读。（65-67小题，每小题2分，68小题3分，共9分）"
+      ],
       "blocks": [
         {
           "id": "paragraph-226",
@@ -3079,7 +3125,7 @@
       "displayBlocks": []
     },
     {
-      "id": "section-9",
+      "id": "section-13",
       "title": "阅读下文并回答问题。",
       "instructions": [],
       "blocks": [
@@ -3135,10 +3181,10 @@
         }
       ],
       "questionIds": [
-        "2024-chongqing-chongqing-section-9-section-9-group-1-65",
-        "2024-chongqing-chongqing-section-9-section-9-group-1-66",
-        "2024-chongqing-chongqing-section-9-section-9-group-1-67",
-        "2024-chongqing-chongqing-section-9-section-9-group-1-68"
+        "2024-chongqing-chongqing-section-13-section-13-group-1-65",
+        "2024-chongqing-chongqing-section-13-section-13-group-1-66",
+        "2024-chongqing-chongqing-section-13-section-13-group-1-67",
+        "2024-chongqing-chongqing-section-13-section-13-group-1-68"
       ],
       "displayBlocks": [
         {
@@ -3169,7 +3215,7 @@
       ]
     },
     {
-      "id": "section-10",
+      "id": "section-14",
       "title": "Ⅶ.完成句子。（每空1分，共10分）",
       "instructions": [],
       "blocks": [
@@ -3235,42 +3281,22 @@
         }
       ],
       "questionIds": [
-        "2024-chongqing-chongqing-section-10-section-10-group-1-69",
-        "2024-chongqing-chongqing-section-10-section-10-group-1-70",
-        "2024-chongqing-chongqing-section-10-section-10-group-1-71",
-        "2024-chongqing-chongqing-section-10-section-10-group-1-72",
-        "2024-chongqing-chongqing-section-10-section-10-group-1-73"
+        "2024-chongqing-chongqing-section-14-section-14-group-1-69",
+        "2024-chongqing-chongqing-section-14-section-14-group-1-70",
+        "2024-chongqing-chongqing-section-14-section-14-group-1-71",
+        "2024-chongqing-chongqing-section-14-section-14-group-1-72",
+        "2024-chongqing-chongqing-section-14-section-14-group-1-73"
       ],
       "displayBlocks": [
         {
-          "id": "paragraph-240",
+          "id": "paragraph-238",
           "kind": "paragraph",
-          "text": "He                   any salt in the soup yet."
-        },
-        {
-          "id": "paragraph-242",
-          "kind": "paragraph",
-          "text": "has Sally kept the story book?"
-        },
-        {
-          "id": "paragraph-244",
-          "kind": "paragraph",
-          "text": "Teenagers should know                     use Internet correctly."
-        },
-        {
-          "id": "paragraph-246",
-          "kind": "paragraph",
-          "text": "I                     die than live without freedom."
-        },
-        {
-          "id": "paragraph-248",
-          "kind": "paragraph",
-          "text": "As the moon shines over the sea, you          this moment          me from far away."
+          "text": "根据所给提示，完成句子。每空一词，含缩略词。"
         }
       ]
     },
     {
-      "id": "section-11",
+      "id": "section-15",
       "title": "Ⅷ.短文填空。（每空2分，共16分）",
       "instructions": [],
       "blocks": [
@@ -3284,7 +3310,7 @@
       "displayBlocks": []
     },
     {
-      "id": "section-12",
+      "id": "section-16",
       "title": "根据下面短文内容及部分首字母提示，在短文的空格处填上一个最恰当的词，使短文完整、通顺。请将完整的单词填写在答题卡上对应的位置。",
       "instructions": [
         "根据下面短文内容及部分首字母提示，在短文的空格处填上一个最恰当的词，使短文完整、通顺。请将完整的单词填写在答题卡上对应的位置。"
@@ -3322,19 +3348,19 @@
         }
       ],
       "questionIds": [
-        "2024-chongqing-chongqing-section-12-section-12-group-1-74",
-        "2024-chongqing-chongqing-section-12-section-12-group-1-75",
-        "2024-chongqing-chongqing-section-12-section-12-group-1-76",
-        "2024-chongqing-chongqing-section-12-section-12-group-1-77",
-        "2024-chongqing-chongqing-section-12-section-12-group-1-78",
-        "2024-chongqing-chongqing-section-12-section-12-group-1-79",
-        "2024-chongqing-chongqing-section-12-section-12-group-1-80",
-        "2024-chongqing-chongqing-section-12-section-12-group-1-81"
+        "2024-chongqing-chongqing-section-16-section-16-group-1-74",
+        "2024-chongqing-chongqing-section-16-section-16-group-1-75",
+        "2024-chongqing-chongqing-section-16-section-16-group-1-76",
+        "2024-chongqing-chongqing-section-16-section-16-group-1-77",
+        "2024-chongqing-chongqing-section-16-section-16-group-1-78",
+        "2024-chongqing-chongqing-section-16-section-16-group-1-79",
+        "2024-chongqing-chongqing-section-16-section-16-group-1-80",
+        "2024-chongqing-chongqing-section-16-section-16-group-1-81"
       ],
       "displayBlocks": []
     },
     {
-      "id": "section-13",
+      "id": "section-17",
       "title": "Ⅸ.书面表达。（满分20分）",
       "instructions": [
         "Ⅸ.书面表达。（满分20分）"
@@ -3407,11 +3433,11 @@
   ],
   "questions": [
     {
-      "id": "2024-chongqing-chongqing-section-2-section-2-group-1-1",
+      "id": "2024-chongqing-chongqing-section-3-section-3-group-1-1",
       "number": 1,
       "displayNumber": "1",
-      "sectionId": "section-2",
-      "groupId": "section-2-group-1",
+      "sectionId": "section-3",
+      "groupId": "section-3-group-1",
       "prompt": "第 1 题",
       "options": [
         "A. I agree with you.",
@@ -3428,11 +3454,11 @@
       "analysis": "【原文】I have never been to the Great Wall."
     },
     {
-      "id": "2024-chongqing-chongqing-section-2-section-2-group-1-2",
+      "id": "2024-chongqing-chongqing-section-3-section-3-group-1-2",
       "number": 2,
       "displayNumber": "2",
-      "sectionId": "section-2",
-      "groupId": "section-2-group-1",
+      "sectionId": "section-3",
+      "groupId": "section-3-group-1",
       "prompt": "第 2 题",
       "options": [
         "A. No problem.",
@@ -3449,11 +3475,11 @@
       "analysis": "【原文】How do you get home from work?"
     },
     {
-      "id": "2024-chongqing-chongqing-section-2-section-2-group-1-3",
+      "id": "2024-chongqing-chongqing-section-3-section-3-group-1-3",
       "number": 3,
       "displayNumber": "3",
-      "sectionId": "section-2",
-      "groupId": "section-2-group-1",
+      "sectionId": "section-3",
+      "groupId": "section-3-group-1",
       "prompt": "第 3 题",
       "options": [
         "A. Yes, thanks a lot.",
@@ -3470,11 +3496,11 @@
       "analysis": "【原文】Can I ask you to pass me the salt?"
     },
     {
-      "id": "2024-chongqing-chongqing-section-2-section-2-group-1-4",
+      "id": "2024-chongqing-chongqing-section-3-section-3-group-1-4",
       "number": 4,
       "displayNumber": "4",
-      "sectionId": "section-2",
-      "groupId": "section-2-group-1",
+      "sectionId": "section-3",
+      "groupId": "section-3-group-1",
       "prompt": "第 4 题",
       "options": [
         "A. Thank you.",
@@ -3491,11 +3517,11 @@
       "analysis": "【原文】You can use my computer if necessary."
     },
     {
-      "id": "2024-chongqing-chongqing-section-2-section-2-group-1-5",
+      "id": "2024-chongqing-chongqing-section-3-section-3-group-1-5",
       "number": 5,
       "displayNumber": "5",
-      "sectionId": "section-2",
-      "groupId": "section-2-group-1",
+      "sectionId": "section-3",
+      "groupId": "section-3-group-1",
       "prompt": "第 5 题",
       "options": [
         "A. Good luck.",
@@ -3512,17 +3538,16 @@
       "analysis": "【原文】What about reading aloud to practice our spoken English?"
     },
     {
-      "id": "2024-chongqing-chongqing-section-2-section-2-group-1-6",
+      "id": "2024-chongqing-chongqing-section-3-section-3-group-1-6",
       "number": 6,
       "displayNumber": "6",
-      "sectionId": "section-2",
-      "groupId": "section-2-group-1",
+      "sectionId": "section-3",
+      "groupId": "section-3-group-1",
       "prompt": "第 6 题",
       "options": [
         "A. Sure.",
         "B. Yes, I can.",
-        "C. That’s all right. 第二节（每小题1.5分，共9分） 听一遍。根据你所听到的对话和问题，从Ａ、",
-        "B. C三个选项中选出正确答案，并把答题卡上对应题目的答案标号涂黑。"
+        "C. That’s all right."
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -3534,11 +3559,11 @@
       "analysis": "【原文】Shall we meet tomorrow at the school garden?\n第二节（每小题1.5分，共9分）\n听一遍。根据你所听到的对话和问题，从Ａ、B、C三个选项中选出正确答案，并把答题卡上对应题目的答案标号涂黑。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-2-section-2-group-1-7",
+      "id": "2024-chongqing-chongqing-section-4-section-4-group-1-7",
       "number": 7,
       "displayNumber": "7",
-      "sectionId": "section-2",
-      "groupId": "section-2-group-1",
+      "sectionId": "section-4",
+      "groupId": "section-4-group-1",
       "prompt": "第 7 题",
       "options": [
         "A. By air.",
@@ -3555,11 +3580,11 @@
       "analysis": "【原文】M: Dear, have you booked the air tickets to Guangzhou yet?\nW: Not yet. I’m wondering if we can travel there by train instead of by air.\nM: No problem. We can save money if we take the train.\nQ: How will the two speakers travel to Guangzhou?"
     },
     {
-      "id": "2024-chongqing-chongqing-section-2-section-2-group-1-8",
+      "id": "2024-chongqing-chongqing-section-4-section-4-group-1-8",
       "number": 8,
       "displayNumber": "8",
-      "sectionId": "section-2",
-      "groupId": "section-2-group-1",
+      "sectionId": "section-4",
+      "groupId": "section-4-group-1",
       "prompt": "第 8 题",
       "options": [
         "A. Five.",
@@ -3576,11 +3601,11 @@
       "analysis": "【原文】W: These T-shirts sell for 5 yuan each, but two will cost you nine.\nM: I’ll take four, please.\nQ: How many T-shirts will the man buy?"
     },
     {
-      "id": "2024-chongqing-chongqing-section-2-section-2-group-1-9",
+      "id": "2024-chongqing-chongqing-section-4-section-4-group-1-9",
       "number": 9,
       "displayNumber": "9",
-      "sectionId": "section-2",
-      "groupId": "section-2-group-1",
+      "sectionId": "section-4",
+      "groupId": "section-4-group-1",
       "prompt": "第 9 题",
       "options": [
         "A. Rainy.",
@@ -3597,11 +3622,11 @@
       "analysis": "【原文】W: It’s so sunny. Let’s go out for a walk.\nM: OK. But It’s said there would be a heavy rain this afternoon.\nQuestion: How will the weather be this afternoon?"
     },
     {
-      "id": "2024-chongqing-chongqing-section-2-section-2-group-1-10",
+      "id": "2024-chongqing-chongqing-section-4-section-4-group-1-10",
       "number": 10,
       "displayNumber": "10",
-      "sectionId": "section-2",
-      "groupId": "section-2-group-1",
+      "sectionId": "section-4",
+      "groupId": "section-4-group-1",
       "prompt": "第 10 题",
       "options": [
         "A. At 2:30 p.m.",
@@ -3618,11 +3643,11 @@
       "analysis": "【原文】W: Would you like to join us for soccer practice this afternoon?\nM: Sure. What time? How about 2:30?\nW: Oh, I can’t meet that early. Shall we make it 3:30?\nM: OK. See you then.\nQuestion: When will they meet this afternoon?"
     },
     {
-      "id": "2024-chongqing-chongqing-section-2-section-2-group-1-11",
+      "id": "2024-chongqing-chongqing-section-4-section-4-group-1-11",
       "number": 11,
       "displayNumber": "11",
-      "sectionId": "section-2",
-      "groupId": "section-2-group-1",
+      "sectionId": "section-4",
+      "groupId": "section-4-group-1",
       "prompt": "第 11 题",
       "options": [
         "A. To the park.",
@@ -3639,18 +3664,16 @@
       "analysis": "【原文】M: Excuse me, could you please tell me where I can find a place to have lunch?\nW: Yes, there is a restaurant near here. It’s next to the bank across from the park.\nQuestion: Where is the man going?"
     },
     {
-      "id": "2024-chongqing-chongqing-section-2-section-2-group-1-12",
+      "id": "2024-chongqing-chongqing-section-4-section-4-group-1-12",
       "number": 12,
       "displayNumber": "12",
-      "sectionId": "section-2",
-      "groupId": "section-2-group-1",
+      "sectionId": "section-4",
+      "groupId": "section-4-group-1",
       "prompt": "第 12 题",
       "options": [
         "A. By bus.",
         "B. By bike.",
-        "C. By car. 第三节（每小题1.5分，共6分） 听两遍。根据你所听到的长对话，从",
-        "A. ",
-        "B. C三个选项中选出正确答案，并把答题卡上对应题目的答案标号涂黑。 听第一段材料，回答第13和14小题。"
+        "C. By car."
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -3662,11 +3685,11 @@
       "analysis": "【原文】W: Mike, how do you go to school?\nM: Well, I used to take the bus, but now I like riding bikes.\nQuestion: How does the man go to school now?\n第三节（每小题1.5分，共6分）\n听两遍。根据你所听到的长对话，从A、B、C三个选项中选出正确答案，并把答题卡上对应题目的答案标号涂黑。\n听第一段材料，回答第13和14小题。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-2-section-2-group-1-13",
+      "id": "2024-chongqing-chongqing-section-5-section-5-group-1-13",
       "number": 13,
       "displayNumber": "13",
-      "sectionId": "section-2",
-      "groupId": "section-2-group-1",
+      "sectionId": "section-5",
+      "groupId": "section-5-group-1",
       "prompt": "How long is Susan probably online every week?",
       "options": [
         "A. For about 1 or 2 hours.",
@@ -3683,11 +3706,11 @@
       "analysis": "【原文】M: Susan, do you often go online?\nW: Well, I don’t really like that. I suppose I am online for about one or two hours every week.\nM: So, what do you do on the Internet?\nW: Well, I write e-mails. And I get about three or four e-mails a week. In fact, I prefer writing on the paper.\nM: Yeah, the same as me. Anything else you do on the Internet?\nW: Well, sometimes I look up information I need for my work. It’s faster than looking through books in the library.\nM: Yes, it sure is. Well, thanks for talking with me, Susan.\nW: My pleasure.\n听第二段材料，回答第15和16小题。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-2-section-2-group-1-14",
+      "id": "2024-chongqing-chongqing-section-5-section-5-group-1-14",
       "number": 14,
       "displayNumber": "14",
-      "sectionId": "section-2",
-      "groupId": "section-2-group-1",
+      "sectionId": "section-5",
+      "groupId": "section-5-group-1",
       "prompt": "What do we know about Susan’s work?",
       "options": [
         "A. She works in the library.",
@@ -3704,11 +3727,11 @@
       "analysis": "【原文】M: Susan, do you often go online?\nW: Well, I don’t really like that. I suppose I am online for about one or two hours every week.\nM: So, what do you do on the Internet?\nW: Well, I write e-mails. And I get about three or four e-mails a week. In fact, I prefer writing on the paper.\nM: Yeah, the same as me. Anything else you do on the Internet?\nW: Well, sometimes I look up information I need for my work. It’s faster than looking through books in the library.\nM: Yes, it sure is. Well, thanks for talking with me, Susan.\nW: My pleasure.\n听第二段材料，回答第15和16小题。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-2-section-2-group-1-15",
+      "id": "2024-chongqing-chongqing-section-5-section-5-group-1-15",
       "number": 15,
       "displayNumber": "15",
-      "sectionId": "section-2",
-      "groupId": "section-2-group-1",
+      "sectionId": "section-5",
+      "groupId": "section-5-group-1",
       "prompt": "What’s Bob’s trouble?",
       "options": [
         "A. He can’t get the pronunciation right.",
@@ -3725,18 +3748,16 @@
       "analysis": "【原文】W: You look worried, Bob?\nM: Yes, Mary. I am having trouble learning English.\nW: But you said you liked English. What’s the problem?\nM: I can’t get the pronunciation right.\nW: Well, listening can help. Why don’t you borrow the teacher’s tapes? You can listen to them at home and repeat the sentences that are difficult for you.\nM: That’s a good idea. Thank you!\n第四节（每小题1.5分，共6分）\n听两遍。根据你所听到的短文内容，从A、B、C三个选项中选出正确答案，并把答题卡上对应题目的答案标号涂黑。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-2-section-2-group-1-16",
+      "id": "2024-chongqing-chongqing-section-5-section-5-group-1-16",
       "number": 16,
       "displayNumber": "16",
-      "sectionId": "section-2",
-      "groupId": "section-2-group-1",
+      "sectionId": "section-5",
+      "groupId": "section-5-group-1",
       "prompt": "What’s Mary’s advice on English learning?",
       "options": [
         "A. Making flashcards.",
         "B. Listening to tapes.",
-        "C. Joining an English language club. 第四节（每小题1.5分，共6分） 听两遍。根据你所听到的短文内容，从",
-        "A. ",
-        "B. C三个选项中选出正确答案，并把答题卡上对应题目的答案标号涂黑。"
+        "C. Joining an English language club."
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -3748,11 +3769,11 @@
       "analysis": "【原文】W: You look worried, Bob?\nM: Yes, Mary. I am having trouble learning English.\nW: But you said you liked English. What’s the problem?\nM: I can’t get the pronunciation right.\nW: Well, listening can help. Why don’t you borrow the teacher’s tapes? You can listen to them at home and repeat the sentences that are difficult for you.\nM: That’s a good idea. Thank you!\n第四节（每小题1.5分，共6分）\n听两遍。根据你所听到的短文内容，从A、B、C三个选项中选出正确答案，并把答题卡上对应题目的答案标号涂黑。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-2-section-2-group-1-17",
+      "id": "2024-chongqing-chongqing-section-6-section-6-group-1-17",
       "number": 17,
       "displayNumber": "17",
-      "sectionId": "section-2",
-      "groupId": "section-2-group-1",
+      "sectionId": "section-6",
+      "groupId": "section-6-group-1",
       "prompt": "How old was Molly when she first met Lisa?",
       "options": [
         "A. She was four.",
@@ -3769,11 +3790,11 @@
       "analysis": "【原文】It’s great to have many friends, and I can’t imagine my life without my friends. My name’s Molly. My best friend is Lisa. When I first met her, I was five. She is one year older than me. Now we are in the same class of the 8th grade. She is tall and quite thin. She has long curly blond hair and blue eyes. But I am not so beautiful as she is. I am tall enough but a little fat. Lisa and I like doing lots of things together and talking about different things. She always helps me with my math and I sometimes help her with her English and history. I had to make a report on science once, but I didn't understand what the teacher said. The next day, I read it in front of the class. But the teacher told me that my report was wrong and all my classmates laughed at me. I felt very bad about myself. Lisa was the only one who didn’t laugh at me. She tried to be nicer than anybody else and made me happy. I am a shy person and sometimes I feel that people don’t understand me. Lisa is popular and everybody loves her. She is also smart and she can solve everything. I am happy to have a friend like her.\nⅡ.语法选择。（每小题1分，共10分）\n根据短文内容，从A、B、C三个选项中选出一个语法正确的答案，并把答题卡上对应题目的答案标号涂黑。\nOne evening I was in a coffee shop with my friend. When we     21     a relaxing time, an old man entered and sat at a table next to us. He called the waiter and placed     22     order, saying, “Two cups of coffee, one on the wall.”\nThen the waiter served the man with one cup of coffee,     23     he paid for two. When he left, the waiter placed a piece of paper on the wall, saying “A Cup of Coffee.” I noticed there were several pieces of paper     24     were the same as this one on the wall.\nMy friend and I felt very     25    . After a while, a poorly dressed man entered. He got his seat and looked     26     the wall and said,“One cup from the wall.”\nThe waiter offered him the coffee     27    .  The man enjoyed it and then left without paying. Then the waiter took off a piece of paper     28     the wall.\nThen we well understood     29     was happening. The first man and the waiter showed great respect(尊重) for people like     30     poor man. They could have a chance to enjoy a cup of free coffee without losing face. How beautiful the idea was!"
     },
     {
-      "id": "2024-chongqing-chongqing-section-2-section-2-group-1-18",
+      "id": "2024-chongqing-chongqing-section-6-section-6-group-1-18",
       "number": 18,
       "displayNumber": "18",
-      "sectionId": "section-2",
-      "groupId": "section-2-group-1",
+      "sectionId": "section-6",
+      "groupId": "section-6-group-1",
       "prompt": "Which subject does Lisa always help Molly with?",
       "options": [
         "A. English.",
@@ -3790,11 +3811,11 @@
       "analysis": "【原文】It’s great to have many friends, and I can’t imagine my life without my friends. My name’s Molly. My best friend is Lisa. When I first met her, I was five. She is one year older than me. Now we are in the same class of the 8th grade. She is tall and quite thin. She has long curly blond hair and blue eyes. But I am not so beautiful as she is. I am tall enough but a little fat. Lisa and I like doing lots of things together and talking about different things. She always helps me with my math and I sometimes help her with her English and history. I had to make a report on science once, but I didn't understand what the teacher said. The next day, I read it in front of the class. But the teacher told me that my report was wrong and all my classmates laughed at me. I felt very bad about myself. Lisa was the only one who didn’t laugh at me. She tried to be nicer than anybody else and made me happy. I am a shy person and sometimes I feel that people don’t understand me. Lisa is popular and everybody loves her. She is also smart and she can solve everything. I am happy to have a friend like her.\nⅡ.语法选择。（每小题1分，共10分）\n根据短文内容，从A、B、C三个选项中选出一个语法正确的答案，并把答题卡上对应题目的答案标号涂黑。\nOne evening I was in a coffee shop with my friend. When we     21     a relaxing time, an old man entered and sat at a table next to us. He called the waiter and placed     22     order, saying, “Two cups of coffee, one on the wall.”\nThen the waiter served the man with one cup of coffee,     23     he paid for two. When he left, the waiter placed a piece of paper on the wall, saying “A Cup of Coffee.” I noticed there were several pieces of paper     24     were the same as this one on the wall.\nMy friend and I felt very     25    . After a while, a poorly dressed man entered. He got his seat and looked     26     the wall and said,“One cup from the wall.”\nThe waiter offered him the coffee     27    .  The man enjoyed it and then left without paying. Then the waiter took off a piece of paper     28     the wall.\nThen we well understood     29     was happening. The first man and the waiter showed great respect(尊重) for people like     30     poor man. They could have a chance to enjoy a cup of free coffee without losing face. How beautiful the idea was!"
     },
     {
-      "id": "2024-chongqing-chongqing-section-2-section-2-group-1-19",
+      "id": "2024-chongqing-chongqing-section-6-section-6-group-1-19",
       "number": 19,
       "displayNumber": "19",
-      "sectionId": "section-2",
-      "groupId": "section-2-group-1",
+      "sectionId": "section-6",
+      "groupId": "section-6-group-1",
       "prompt": "Why did Molly feel bad after reading the report?",
       "options": [
         "A. Lisa did better than her.",
@@ -3811,11 +3832,11 @@
       "analysis": "【原文】It’s great to have many friends, and I can’t imagine my life without my friends. My name’s Molly. My best friend is Lisa. When I first met her, I was five. She is one year older than me. Now we are in the same class of the 8th grade. She is tall and quite thin. She has long curly blond hair and blue eyes. But I am not so beautiful as she is. I am tall enough but a little fat. Lisa and I like doing lots of things together and talking about different things. She always helps me with my math and I sometimes help her with her English and history. I had to make a report on science once, but I didn't understand what the teacher said. The next day, I read it in front of the class. But the teacher told me that my report was wrong and all my classmates laughed at me. I felt very bad about myself. Lisa was the only one who didn’t laugh at me. She tried to be nicer than anybody else and made me happy. I am a shy person and sometimes I feel that people don’t understand me. Lisa is popular and everybody loves her. She is also smart and she can solve everything. I am happy to have a friend like her.\nⅡ.语法选择。（每小题1分，共10分）\n根据短文内容，从A、B、C三个选项中选出一个语法正确的答案，并把答题卡上对应题目的答案标号涂黑。\nOne evening I was in a coffee shop with my friend. When we     21     a relaxing time, an old man entered and sat at a table next to us. He called the waiter and placed     22     order, saying, “Two cups of coffee, one on the wall.”\nThen the waiter served the man with one cup of coffee,     23     he paid for two. When he left, the waiter placed a piece of paper on the wall, saying “A Cup of Coffee.” I noticed there were several pieces of paper     24     were the same as this one on the wall.\nMy friend and I felt very     25    . After a while, a poorly dressed man entered. He got his seat and looked     26     the wall and said,“One cup from the wall.”\nThe waiter offered him the coffee     27    .  The man enjoyed it and then left without paying. Then the waiter took off a piece of paper     28     the wall.\nThen we well understood     29     was happening. The first man and the waiter showed great respect(尊重) for people like     30     poor man. They could have a chance to enjoy a cup of free coffee without losing face. How beautiful the idea was!"
     },
     {
-      "id": "2024-chongqing-chongqing-section-2-section-2-group-1-20",
+      "id": "2024-chongqing-chongqing-section-6-section-6-group-1-20",
       "number": 20,
       "displayNumber": "20",
-      "sectionId": "section-2",
-      "groupId": "section-2-group-1",
+      "sectionId": "section-6",
+      "groupId": "section-6-group-1",
       "prompt": "What is Lisa like?",
       "options": [
         "A. Shy and friendly.",
@@ -3832,11 +3853,11 @@
       "analysis": "【原文】It’s great to have many friends, and I can’t imagine my life without my friends. My name’s Molly. My best friend is Lisa. When I first met her, I was five. She is one year older than me. Now we are in the same class of the 8th grade. She is tall and quite thin. She has long curly blond hair and blue eyes. But I am not so beautiful as she is. I am tall enough but a little fat. Lisa and I like doing lots of things together and talking about different things. She always helps me with my math and I sometimes help her with her English and history. I had to make a report on science once, but I didn't understand what the teacher said. The next day, I read it in front of the class. But the teacher told me that my report was wrong and all my classmates laughed at me. I felt very bad about myself. Lisa was the only one who didn’t laugh at me. She tried to be nicer than anybody else and made me happy. I am a shy person and sometimes I feel that people don’t understand me. Lisa is popular and everybody loves her. She is also smart and she can solve everything. I am happy to have a friend like her.\nⅡ.语法选择。（每小题1分，共10分）\n根据短文内容，从A、B、C三个选项中选出一个语法正确的答案，并把答题卡上对应题目的答案标号涂黑。\nOne evening I was in a coffee shop with my friend. When we     21     a relaxing time, an old man entered and sat at a table next to us. He called the waiter and placed     22     order, saying, “Two cups of coffee, one on the wall.”\nThen the waiter served the man with one cup of coffee,     23     he paid for two. When he left, the waiter placed a piece of paper on the wall, saying “A Cup of Coffee.” I noticed there were several pieces of paper     24     were the same as this one on the wall.\nMy friend and I felt very     25    . After a while, a poorly dressed man entered. He got his seat and looked     26     the wall and said,“One cup from the wall.”\nThe waiter offered him the coffee     27    .  The man enjoyed it and then left without paying. Then the waiter took off a piece of paper     28     the wall.\nThen we well understood     29     was happening. The first man and the waiter showed great respect(尊重) for people like     30     poor man. They could have a chance to enjoy a cup of free coffee without losing face. How beautiful the idea was!"
     },
     {
-      "id": "2024-chongqing-chongqing-section-3-section-3-group-1-21",
+      "id": "2024-chongqing-chongqing-section-7-section-7-group-1-21",
       "number": 21,
       "displayNumber": "21",
-      "sectionId": "section-3",
-      "groupId": "section-3-group-1",
+      "sectionId": "section-7",
+      "groupId": "section-7-group-1",
       "prompt": "第 21 题",
       "options": [
         "A. are enjoying",
@@ -3853,11 +3874,11 @@
       "analysis": "21．C    22．C    23．A    24．B    25．A    26．C    27．C    28．A    29．B    30．C\n【导语】本文主要讲了我和朋友在咖啡厅喝咖啡遇到的一件事情，一位老人独自喝咖啡却付了两杯咖啡钱，最后我们知道这杯咖啡是给穷人付的，展现了这位老人和服务生对穷人的尊重。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-3-section-3-group-1-22",
+      "id": "2024-chongqing-chongqing-section-7-section-7-group-1-22",
       "number": 22,
       "displayNumber": "22",
-      "sectionId": "section-3",
-      "groupId": "section-3-group-1",
+      "sectionId": "section-7",
+      "groupId": "section-7-group-1",
       "prompt": "第 22 题",
       "options": [
         "A. he",
@@ -3874,11 +3895,11 @@
       "analysis": "21．C    22．C    23．A    24．B    25．A    26．C    27．C    28．A    29．B    30．C\n【导语】本文主要讲了我和朋友在咖啡厅喝咖啡遇到的一件事情，一位老人独自喝咖啡却付了两杯咖啡钱，最后我们知道这杯咖啡是给穷人付的，展现了这位老人和服务生对穷人的尊重。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-3-section-3-group-1-23",
+      "id": "2024-chongqing-chongqing-section-7-section-7-group-1-23",
       "number": 23,
       "displayNumber": "23",
-      "sectionId": "section-3",
-      "groupId": "section-3-group-1",
+      "sectionId": "section-7",
+      "groupId": "section-7-group-1",
       "prompt": "第 23 题",
       "options": [
         "A. but",
@@ -3895,11 +3916,11 @@
       "analysis": "21．C    22．C    23．A    24．B    25．A    26．C    27．C    28．A    29．B    30．C\n【导语】本文主要讲了我和朋友在咖啡厅喝咖啡遇到的一件事情，一位老人独自喝咖啡却付了两杯咖啡钱，最后我们知道这杯咖啡是给穷人付的，展现了这位老人和服务生对穷人的尊重。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-3-section-3-group-1-24",
+      "id": "2024-chongqing-chongqing-section-7-section-7-group-1-24",
       "number": 24,
       "displayNumber": "24",
-      "sectionId": "section-3",
-      "groupId": "section-3-group-1",
+      "sectionId": "section-7",
+      "groupId": "section-7-group-1",
       "prompt": "第 24 题",
       "options": [
         "A. when",
@@ -3916,11 +3937,11 @@
       "analysis": "21．C    22．C    23．A    24．B    25．A    26．C    27．C    28．A    29．B    30．C\n【导语】本文主要讲了我和朋友在咖啡厅喝咖啡遇到的一件事情，一位老人独自喝咖啡却付了两杯咖啡钱，最后我们知道这杯咖啡是给穷人付的，展现了这位老人和服务生对穷人的尊重。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-3-section-3-group-1-25",
+      "id": "2024-chongqing-chongqing-section-7-section-7-group-1-25",
       "number": 25,
       "displayNumber": "25",
-      "sectionId": "section-3",
-      "groupId": "section-3-group-1",
+      "sectionId": "section-7",
+      "groupId": "section-7-group-1",
       "prompt": "第 25 题",
       "options": [
         "A. surprised",
@@ -3937,11 +3958,11 @@
       "analysis": "21．C    22．C    23．A    24．B    25．A    26．C    27．C    28．A    29．B    30．C\n【导语】本文主要讲了我和朋友在咖啡厅喝咖啡遇到的一件事情，一位老人独自喝咖啡却付了两杯咖啡钱，最后我们知道这杯咖啡是给穷人付的，展现了这位老人和服务生对穷人的尊重。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-3-section-3-group-1-26",
+      "id": "2024-chongqing-chongqing-section-7-section-7-group-1-26",
       "number": 26,
       "displayNumber": "26",
-      "sectionId": "section-3",
-      "groupId": "section-3-group-1",
+      "sectionId": "section-7",
+      "groupId": "section-7-group-1",
       "prompt": "第 26 题",
       "options": [
         "A. after",
@@ -3958,11 +3979,11 @@
       "analysis": "21．C    22．C    23．A    24．B    25．A    26．C    27．C    28．A    29．B    30．C\n【导语】本文主要讲了我和朋友在咖啡厅喝咖啡遇到的一件事情，一位老人独自喝咖啡却付了两杯咖啡钱，最后我们知道这杯咖啡是给穷人付的，展现了这位老人和服务生对穷人的尊重。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-3-section-3-group-1-27",
+      "id": "2024-chongqing-chongqing-section-7-section-7-group-1-27",
       "number": 27,
       "displayNumber": "27",
-      "sectionId": "section-3",
-      "groupId": "section-3-group-1",
+      "sectionId": "section-7",
+      "groupId": "section-7-group-1",
       "prompt": "第 27 题",
       "options": [
         "A. polite",
@@ -3979,11 +4000,11 @@
       "analysis": "21．C    22．C    23．A    24．B    25．A    26．C    27．C    28．A    29．B    30．C\n【导语】本文主要讲了我和朋友在咖啡厅喝咖啡遇到的一件事情，一位老人独自喝咖啡却付了两杯咖啡钱，最后我们知道这杯咖啡是给穷人付的，展现了这位老人和服务生对穷人的尊重。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-3-section-3-group-1-28",
+      "id": "2024-chongqing-chongqing-section-7-section-7-group-1-28",
       "number": 28,
       "displayNumber": "28",
-      "sectionId": "section-3",
-      "groupId": "section-3-group-1",
+      "sectionId": "section-7",
+      "groupId": "section-7-group-1",
       "prompt": "第 28 题",
       "options": [
         "A. from",
@@ -4000,11 +4021,11 @@
       "analysis": "21．C    22．C    23．A    24．B    25．A    26．C    27．C    28．A    29．B    30．C\n【导语】本文主要讲了我和朋友在咖啡厅喝咖啡遇到的一件事情，一位老人独自喝咖啡却付了两杯咖啡钱，最后我们知道这杯咖啡是给穷人付的，展现了这位老人和服务生对穷人的尊重。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-3-section-3-group-1-29",
+      "id": "2024-chongqing-chongqing-section-7-section-7-group-1-29",
       "number": 29,
       "displayNumber": "29",
-      "sectionId": "section-3",
-      "groupId": "section-3-group-1",
+      "sectionId": "section-7",
+      "groupId": "section-7-group-1",
       "prompt": "第 29 题",
       "options": [
         "A. that",
@@ -4021,11 +4042,11 @@
       "analysis": "21．C    22．C    23．A    24．B    25．A    26．C    27．C    28．A    29．B    30．C\n【导语】本文主要讲了我和朋友在咖啡厅喝咖啡遇到的一件事情，一位老人独自喝咖啡却付了两杯咖啡钱，最后我们知道这杯咖啡是给穷人付的，展现了这位老人和服务生对穷人的尊重。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-3-section-3-group-1-30",
+      "id": "2024-chongqing-chongqing-section-7-section-7-group-1-30",
       "number": 30,
       "displayNumber": "30",
-      "sectionId": "section-3",
-      "groupId": "section-3-group-1",
+      "sectionId": "section-7",
+      "groupId": "section-7-group-1",
       "prompt": "第 30 题",
       "options": [
         "A. a",
@@ -4042,11 +4063,11 @@
       "analysis": "21．C    22．C    23．A    24．B    25．A    26．C    27．C    28．A    29．B    30．C\n【导语】本文主要讲了我和朋友在咖啡厅喝咖啡遇到的一件事情，一位老人独自喝咖啡却付了两杯咖啡钱，最后我们知道这杯咖啡是给穷人付的，展现了这位老人和服务生对穷人的尊重。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-4-section-4-group-1-31",
+      "id": "2024-chongqing-chongqing-section-8-section-8-group-1-31",
       "number": 31,
       "displayNumber": "31",
-      "sectionId": "section-4",
-      "groupId": "section-4-group-1",
+      "sectionId": "section-8",
+      "groupId": "section-8-group-1",
       "prompt": "第 31 题",
       "options": [
         "A. worried",
@@ -4064,11 +4085,11 @@
       "analysis": "31．C    32．A    33．D    34．B    35．A    36．C    37．D    38．A    39．B    40．C\n【导语】本文讲述了妈妈给吉姆买了一部他一直想要的iphone，但是需要吉姆遵守的一些规定。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-4-section-4-group-1-32",
+      "id": "2024-chongqing-chongqing-section-8-section-8-group-1-32",
       "number": 32,
       "displayNumber": "32",
-      "sectionId": "section-4",
-      "groupId": "section-4-group-1",
+      "sectionId": "section-8",
+      "groupId": "section-8-group-1",
       "prompt": "第 32 题",
       "options": [
         "A. wrote down",
@@ -4086,11 +4107,11 @@
       "analysis": "31．C    32．A    33．D    34．B    35．A    36．C    37．D    38．A    39．B    40．C\n【导语】本文讲述了妈妈给吉姆买了一部他一直想要的iphone，但是需要吉姆遵守的一些规定。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-4-section-4-group-1-33",
+      "id": "2024-chongqing-chongqing-section-8-section-8-group-1-33",
       "number": 33,
       "displayNumber": "33",
-      "sectionId": "section-4",
-      "groupId": "section-4-group-1",
+      "sectionId": "section-8",
+      "groupId": "section-8-group-1",
       "prompt": "第 33 题",
       "options": [
         "A. tasks",
@@ -4108,11 +4129,11 @@
       "analysis": "31．C    32．A    33．D    34．B    35．A    36．C    37．D    38．A    39．B    40．C\n【导语】本文讲述了妈妈给吉姆买了一部他一直想要的iphone，但是需要吉姆遵守的一些规定。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-4-section-4-group-1-34",
+      "id": "2024-chongqing-chongqing-section-8-section-8-group-1-34",
       "number": 34,
       "displayNumber": "34",
-      "sectionId": "section-4",
-      "groupId": "section-4-group-1",
+      "sectionId": "section-8",
+      "groupId": "section-8-group-1",
       "prompt": "第 34 题",
       "options": [
         "A. bike",
@@ -4130,11 +4151,11 @@
       "analysis": "31．C    32．A    33．D    34．B    35．A    36．C    37．D    38．A    39．B    40．C\n【导语】本文讲述了妈妈给吉姆买了一部他一直想要的iphone，但是需要吉姆遵守的一些规定。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-4-section-4-group-1-35",
+      "id": "2024-chongqing-chongqing-section-8-section-8-group-1-35",
       "number": 35,
       "displayNumber": "35",
-      "sectionId": "section-4",
-      "groupId": "section-4-group-1",
+      "sectionId": "section-8",
+      "groupId": "section-8-group-1",
       "prompt": "第 35 题",
       "options": [
         "A. breaking",
@@ -4152,11 +4173,11 @@
       "analysis": "31．C    32．A    33．D    34．B    35．A    36．C    37．D    38．A    39．B    40．C\n【导语】本文讲述了妈妈给吉姆买了一部他一直想要的iphone，但是需要吉姆遵守的一些规定。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-4-section-4-group-1-36",
+      "id": "2024-chongqing-chongqing-section-8-section-8-group-1-36",
       "number": 36,
       "displayNumber": "36",
-      "sectionId": "section-4",
-      "groupId": "section-4-group-1",
+      "sectionId": "section-8",
+      "groupId": "section-8-group-1",
       "prompt": "第 36 题",
       "options": [
         "A. drop",
@@ -4174,11 +4195,11 @@
       "analysis": "31．C    32．A    33．D    34．B    35．A    36．C    37．D    38．A    39．B    40．C\n【导语】本文讲述了妈妈给吉姆买了一部他一直想要的iphone，但是需要吉姆遵守的一些规定。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-4-section-4-group-1-37",
+      "id": "2024-chongqing-chongqing-section-8-section-8-group-1-37",
       "number": 37,
       "displayNumber": "37",
-      "sectionId": "section-4",
-      "groupId": "section-4-group-1",
+      "sectionId": "section-8",
+      "groupId": "section-8-group-1",
       "prompt": "第 37 题",
       "options": [
         "A. actually",
@@ -4196,11 +4217,11 @@
       "analysis": "31．C    32．A    33．D    34．B    35．A    36．C    37．D    38．A    39．B    40．C\n【导语】本文讲述了妈妈给吉姆买了一部他一直想要的iphone，但是需要吉姆遵守的一些规定。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-4-section-4-group-1-38",
+      "id": "2024-chongqing-chongqing-section-8-section-8-group-1-38",
       "number": 38,
       "displayNumber": "38",
-      "sectionId": "section-4",
-      "groupId": "section-4-group-1",
+      "sectionId": "section-8",
+      "groupId": "section-8-group-1",
       "prompt": "第 38 题",
       "options": [
         "A. rude",
@@ -4218,11 +4239,11 @@
       "analysis": "31．C    32．A    33．D    34．B    35．A    36．C    37．D    38．A    39．B    40．C\n【导语】本文讲述了妈妈给吉姆买了一部他一直想要的iphone，但是需要吉姆遵守的一些规定。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-4-section-4-group-1-39",
+      "id": "2024-chongqing-chongqing-section-8-section-8-group-1-39",
       "number": 39,
       "displayNumber": "39",
-      "sectionId": "section-4",
-      "groupId": "section-4-group-1",
+      "sectionId": "section-8",
+      "groupId": "section-8-group-1",
       "prompt": "第 39 题",
       "options": [
         "A. entry",
@@ -4240,11 +4261,11 @@
       "analysis": "31．C    32．A    33．D    34．B    35．A    36．C    37．D    38．A    39．B    40．C\n【导语】本文讲述了妈妈给吉姆买了一部他一直想要的iphone，但是需要吉姆遵守的一些规定。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-4-section-4-group-1-40",
+      "id": "2024-chongqing-chongqing-section-8-section-8-group-1-40",
       "number": 40,
       "displayNumber": "40",
-      "sectionId": "section-4",
-      "groupId": "section-4-group-1",
+      "sectionId": "section-8",
+      "groupId": "section-8-group-1",
       "prompt": "第 40 题",
       "options": [
         "A. pass",
@@ -4262,11 +4283,11 @@
       "analysis": "31．C    32．A    33．D    34．B    35．A    36．C    37．D    38．A    39．B    40．C\n【导语】本文讲述了妈妈给吉姆买了一部他一直想要的iphone，但是需要吉姆遵守的一些规定。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-5-section-5-group-1-41",
+      "id": "2024-chongqing-chongqing-section-9-section-9-group-1-41",
       "number": 41,
       "displayNumber": "41",
-      "sectionId": "section-5",
-      "groupId": "section-5-group-1",
+      "sectionId": "section-9",
+      "groupId": "section-9-group-1",
       "prompt": "If you want to join the video competition, you first must ________.",
       "options": [
         "A. make it",
@@ -4284,11 +4305,11 @@
       "analysis": "【导语】本文是一篇应用文，主要介绍了2023“我眼中的重庆”视频大赛的相关信息。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-5-section-5-group-1-42",
+      "id": "2024-chongqing-chongqing-section-9-section-9-group-1-42",
       "number": 42,
       "displayNumber": "42",
-      "sectionId": "section-5",
-      "groupId": "section-5-group-1",
+      "sectionId": "section-9",
+      "groupId": "section-9-group-1",
       "prompt": "According to the passage, we know that ________.",
       "options": [
         "A. photos of changes in Chongqing are accepted",
@@ -4306,17 +4327,17 @@
       "analysis": "【导语】本文是一篇应用文，主要介绍了2023“我眼中的重庆”视频大赛的相关信息。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-5-section-5-group-1-43",
+      "id": "2024-chongqing-chongqing-section-9-section-9-group-1-43",
       "number": 43,
       "displayNumber": "43",
-      "sectionId": "section-5",
-      "groupId": "section-5-group-1",
+      "sectionId": "section-9",
+      "groupId": "section-9-group-1",
       "prompt": "The passage may come from the column (栏目) ________ in a newspaper.",
       "options": [
         "A. Education",
         "B. Business",
         "C. Sports",
-        "D. Life B ①Walking around the city, you will see girls wearing hanfu on the underground or people wearing T-shirt with Chinese characters in the streets. A new trend（潮流）is getting popular in China. It’s guochao or China-Chic. Guochao adds traditional Chinese culture into products, and it shows the rise of China’s native fashion（时尚）. ②Guochao got people’s attention in 2018. Before that, the market was controlled by foreign companies. There were few Chinese brands. To win the market share, many Chinese brands followed the footsteps of these western brands. In 2018, Chinese sportswear brand Li Ning made changes to the situation. It introduced its Wu Dao collection to the world. The collection not only looked fashionable, but also included elements of traditional Chinese culture. It quickly caught people’s attention at home and abroad. And it created amazing sales. ③Later, many Chinese brands, from food, drinks and clothing to mobile phones and cars, started to add Chinese culture into their products. Even the film and music industries made every effort to create Chinese styles. “We want our products to be the ones that young people would like to share”, they said. ④These brands got what they wanted. Young people gradually converted their attention from western culture to guochao. They accepted it with pleasure. What’s more they started to develop interest in traditional Chinese art and literature. Now they wear traditional clothes, practice Chinese calligraphy（书法）and play Chinese musical instruments. Some of them are working together to spread Chinese culture to people around the world. ⑤At the same time, people of different ages start to choose products “made in China”. According to a survey, 68% Chinese people prefer Chinese brands. Among them, 62% say they are open to international brands, but local brands remain the first choice. ⑥No matter how guochao develops, there is one thing that won’t change—people’s confidence in our country’s development and culture is growing."
+        "D. Life"
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -4328,11 +4349,11 @@
       "analysis": "【导语】本文是一篇应用文，主要介绍了2023“我眼中的重庆”视频大赛的相关信息。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-5-section-5-group-1-44",
+      "id": "2024-chongqing-chongqing-section-9-section-9-group-1-44",
       "number": 44,
       "displayNumber": "44",
-      "sectionId": "section-5",
-      "groupId": "section-5-group-1",
+      "sectionId": "section-9",
+      "groupId": "section-9-group-1",
       "prompt": "What can we learn about Chinese brand Li Ning from Paragraph 2?",
       "options": [
         "A. It increased the world market share before 2018.",
@@ -4350,11 +4371,11 @@
       "analysis": "【导语】本文是一篇记叙文，介绍了中国国潮的兴起。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-5-section-5-group-1-45",
+      "id": "2024-chongqing-chongqing-section-9-section-9-group-1-45",
       "number": 45,
       "displayNumber": "45",
-      "sectionId": "section-5",
-      "groupId": "section-5-group-1",
+      "sectionId": "section-9",
+      "groupId": "section-9-group-1",
       "prompt": "The underlined word “converted” can be replaced by “________”.",
       "options": [
         "A. changed",
@@ -4372,11 +4393,11 @@
       "analysis": "【导语】本文是一篇记叙文，介绍了中国国潮的兴起。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-5-section-5-group-1-46",
+      "id": "2024-chongqing-chongqing-section-9-section-9-group-1-46",
       "number": 46,
       "displayNumber": "46",
-      "sectionId": "section-5",
-      "groupId": "section-5-group-1",
+      "sectionId": "section-9",
+      "groupId": "section-9-group-1",
       "prompt": "Which is the structure of the passage?",
       "options": [
         "A. ①-②-③④⑤-⑥",
@@ -4394,17 +4415,17 @@
       "analysis": "【导语】本文是一篇记叙文，介绍了中国国潮的兴起。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-5-section-5-group-1-47",
+      "id": "2024-chongqing-chongqing-section-9-section-9-group-1-47",
       "number": 47,
       "displayNumber": "47",
-      "sectionId": "section-5",
-      "groupId": "section-5-group-1",
+      "sectionId": "section-9",
+      "groupId": "section-9-group-1",
       "prompt": "What’s the best title for the passage?",
       "options": [
         "A. Guochao, A New Fashion Trend",
         "B. Young People’s Special Love",
         "C. The Advantages of Local Brands",
-        "D. The Development of Chinese Brands C Little river ran down from a high mountain through many villages and forests. Then it reached a desert. “I went through so many difficulties. I should have no problem crossing the desert,” she thought. As she started, she found herself slowly disappearing into the sand. After many tries, she still failed. “Maybe I can’t reach the ocean.” she said sadly to herself. At this time, a deep voice said, “If a breeze (微风) can cross the desert, so can a river.” It was the voice of the desert. But the little river answered, “That’s because a breeze can fly, but I cannot.” “That’s because you can’t give up what you are. Let yourself evaporate (蒸发) into the breeze, and it can take you across.” said the desert. “Give up what I am now? No! No!” The little river could not accept this idea. “The breeze can carry the vapor (水蒸气) across the desert and let it leave as rain. The rain will form a river again,” said the desert. “And whether you’re a river or vapor, your nature never changes.” Hearing this, the little river went into the open arms of the breeze. It carried her to the next stage of her life. The course of our lives is like the experience of the little river. If you want to go through difficulties in your life to head for success, you should also change the way you are."
+        "D. The Development of Chinese Brands"
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -4416,11 +4437,11 @@
       "analysis": "【导语】本文是一篇记叙文，介绍了中国国潮的兴起。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-5-section-5-group-1-48",
+      "id": "2024-chongqing-chongqing-section-9-section-9-group-1-48",
       "number": 48,
       "displayNumber": "48",
-      "sectionId": "section-5",
-      "groupId": "section-5-group-1",
+      "sectionId": "section-9",
+      "groupId": "section-9-group-1",
       "prompt": "The little river wanted to reach ________.",
       "options": [
         "A. the forest",
@@ -4438,11 +4459,11 @@
       "analysis": "【导语】本文讲述了想要流向大海的一条小河在穿越沙漠时，放弃自己的本质，让自己蒸发成水蒸气，被风带过沙漠的故事。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-5-section-5-group-1-49",
+      "id": "2024-chongqing-chongqing-section-9-section-9-group-1-49",
       "number": 49,
       "displayNumber": "49",
-      "sectionId": "section-5",
-      "groupId": "section-5-group-1",
+      "sectionId": "section-9",
+      "groupId": "section-9-group-1",
       "prompt": "The little river ________ before she got to the desert.",
       "options": [
         "A. didn’t meet much difficulty",
@@ -4460,11 +4481,11 @@
       "analysis": "【导语】本文讲述了想要流向大海的一条小河在穿越沙漠时，放弃自己的本质，让自己蒸发成水蒸气，被风带过沙漠的故事。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-5-section-5-group-1-50",
+      "id": "2024-chongqing-chongqing-section-9-section-9-group-1-50",
       "number": 50,
       "displayNumber": "50",
-      "sectionId": "section-5",
-      "groupId": "section-5-group-1",
+      "sectionId": "section-9",
+      "groupId": "section-9-group-1",
       "prompt": "At first, the little river didn’t accept the desert’s advice because ________.",
       "options": [
         "A. she wouldn’t give up what she was",
@@ -4482,17 +4503,17 @@
       "analysis": "【导语】本文讲述了想要流向大海的一条小河在穿越沙漠时，放弃自己的本质，让自己蒸发成水蒸气，被风带过沙漠的故事。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-5-section-5-group-1-51",
+      "id": "2024-chongqing-chongqing-section-9-section-9-group-1-51",
       "number": 51,
       "displayNumber": "51",
-      "sectionId": "section-5",
-      "groupId": "section-5-group-1",
+      "sectionId": "section-9",
+      "groupId": "section-9-group-1",
       "prompt": "What does the story mainly tell us?",
       "options": [
         "A. The road to success is not always easy and smooth.",
         "B. Whatever others say, we should always be ourselves.",
         "C. We may experience difficulty in life just like the little river.",
-        "D. To succeed, we should change the way we are if necessary. D Do you have good friends? Do you sometimes feel so close to them that they are like family to you? It turns out that this isn’t just an expression. A study has found that you and your friends have more genes （基因） in common than strangers do. Researchers looked at the genes of 1,932 people and compared them in pairs of unrelated friends and strangers. They found that friends have 1% of genes that match. 1% of genes may not sound like much to us, but to geneticists it is a larger number. In fact, this is the same amount of genes you share with your fourth cousins. So do you happen to become friends with people who share your genes? Not at all. In fact, it is evolution （进化） that brings you together. People who share certain genes also share skills and have similar likes and dislikes. In ancient times, it was important that people who were alike stayed together. For example, people who had a similar susceptibility （易感性）, giving them a better chance to stay alive. Among all the genes studied, those producing a change in sense of smell were the most similar in friends. This is probably because people who smell things in the same way are more easily drawn to similar environments. For example, people who like the smell of coffee may hang out at cafes more often and as a result are more likely to meet and become friends with each other. With these findings, researchers have developed an interesting test called the “friendship score”. It can help tell how likely two people will be friends by studying their genes. So, here is a question for you: would you like to take this test and know in advance （提前） who your friends are going to be."
+        "D. To succeed, we should change the way we are if necessary."
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -4504,11 +4525,11 @@
       "analysis": "【导语】本文讲述了想要流向大海的一条小河在穿越沙漠时，放弃自己的本质，让自己蒸发成水蒸气，被风带过沙漠的故事。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-5-section-5-group-1-52",
+      "id": "2024-chongqing-chongqing-section-9-section-9-group-1-52",
       "number": 52,
       "displayNumber": "52",
-      "sectionId": "section-5",
-      "groupId": "section-5-group-1",
+      "sectionId": "section-9",
+      "groupId": "section-9-group-1",
       "prompt": "What does the author mean by saying “It turns out that this isn’t just an expression”?",
       "options": [
         "A. Friends look like our cousin.",
@@ -4526,11 +4547,11 @@
       "analysis": "【导语】本文是一篇说明文。文章讲述了基因与朋友之间的关系。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-5-section-5-group-1-53",
+      "id": "2024-chongqing-chongqing-section-9-section-9-group-1-53",
       "number": 53,
       "displayNumber": "53",
-      "sectionId": "section-5",
-      "groupId": "section-5-group-1",
+      "sectionId": "section-9",
+      "groupId": "section-9-group-1",
       "prompt": "The writer takes the example of ancient people in Paragraph 5 to ________.",
       "options": [
         "A. study how ancient people dealt with the cold",
@@ -4548,11 +4569,11 @@
       "analysis": "【导语】本文是一篇说明文。文章讲述了基因与朋友之间的关系。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-5-section-5-group-1-54",
+      "id": "2024-chongqing-chongqing-section-9-section-9-group-1-54",
       "number": 54,
       "displayNumber": "54",
-      "sectionId": "section-5",
-      "groupId": "section-5-group-1",
+      "sectionId": "section-9",
+      "groupId": "section-9-group-1",
       "prompt": "According to this passage, what is the right relationship?",
       "options": [
         "A. Evolve same skills and hobbies → Same Genes → Become friends",
@@ -4570,17 +4591,17 @@
       "analysis": "【导语】本文是一篇说明文。文章讲述了基因与朋友之间的关系。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-5-section-5-group-1-55",
+      "id": "2024-chongqing-chongqing-section-9-section-9-group-1-55",
       "number": 55,
       "displayNumber": "55",
-      "sectionId": "section-5",
-      "groupId": "section-5-group-1",
+      "sectionId": "section-9",
+      "groupId": "section-9-group-1",
       "prompt": "You decide to use the “friendship score” described in the article to make an App based on the purpose of the score. What’s the best name for your new App?",
       "options": [
         "A. Hello Gene!",
         "B. Gene Test",
         "C. Green Finder",
-        "D. Gene Friends E “Earth provides enough to satisfy every man’s need, but not enough for any man’s greed（贪婪）.” —Mahatma Ghandi What you need depends on how old you are and your way of life. If we don’t need to buy so much, we don’t need to work so much. We can reduce our working time from eight hours to six hours each day. Some people are leaving very well-paid jobs to live a healthier life in the countryside. This is called “downshifting（放慢生活节奏）”. Parents can spend more time with their children and people who are looking for a job are given more opportunities to work. What was the best thing you bought last week? Were you able to choose from lots of different products? People who buy things are called consumers. Consumers have choices. We usually choose the color, taste, smell or size of what we buy, but there are other choices we can make. The following questions will help you to consider these choices. Who made it? If a friend made it, you probably like it more and you will want to keep it for a long time. If it was made by somebody who enjoyed making it, the quality and the design are probably better. What is it made from? One of the places where we want to buy expensive products is at the airport’s duty-free shop. There are beautifully shaped bottles and small boxes full of perfumes（香水）and creams （护肤霜）that promise to make you look good. However, if you look at the ingredients you will find that the perfumes are mainly alcohol（酒精）and the creams mainly contain petroleum（石油）. Does it have much packaging（包装）? Almost all products are sold in packaging. Some products have too much packaging, creating more rubbish and using up resources. Some use recycled packaging, which is better for the environment. Next time you go shopping, think about what you really need to buy. If it is more expensive to buy goods that don’t have much packaging and things that last longer, buy less. If you can choose to work less, decide which richer. After all, _________."
+        "D. Gene Friends"
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -4592,11 +4613,11 @@
       "analysis": "【导语】本文是一篇说明文。文章讲述了基因与朋友之间的关系。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-5-section-5-group-1-56",
+      "id": "2024-chongqing-chongqing-section-9-section-9-group-1-56",
       "number": 56,
       "displayNumber": "56",
-      "sectionId": "section-5",
-      "groupId": "section-5-group-1",
+      "sectionId": "section-9",
+      "groupId": "section-9-group-1",
       "prompt": "The writer starts the passage by _________.",
       "options": [
         "A. showing an example from Ghandi",
@@ -4614,11 +4635,11 @@
       "analysis": "【导语】本文是一篇说明文，主要告诉人们要合理消费，保护环境，需求不能太贪婪。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-5-section-5-group-1-57",
+      "id": "2024-chongqing-chongqing-section-9-section-9-group-1-57",
       "number": 57,
       "displayNumber": "57",
-      "sectionId": "section-5",
-      "groupId": "section-5-group-1",
+      "sectionId": "section-9",
+      "groupId": "section-9-group-1",
       "prompt": "If a man lives a “downshifting” life, he _________.",
       "options": [
         "A. cuts down his everyday working hours",
@@ -4636,11 +4657,11 @@
       "analysis": "【导语】本文是一篇说明文，主要告诉人们要合理消费，保护环境，需求不能太贪婪。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-5-section-5-group-1-58",
+      "id": "2024-chongqing-chongqing-section-9-section-9-group-1-58",
       "number": 58,
       "displayNumber": "58",
-      "sectionId": "section-5",
-      "groupId": "section-5-group-1",
+      "sectionId": "section-9",
+      "groupId": "section-9-group-1",
       "prompt": "The best sentence to end the passage is probably “_________”.",
       "options": [
         "A. nothing is impossible",
@@ -4658,11 +4679,11 @@
       "analysis": "【导语】本文是一篇说明文，主要告诉人们要合理消费，保护环境，需求不能太贪婪。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-5-section-5-group-1-59",
+      "id": "2024-chongqing-chongqing-section-9-section-9-group-1-59",
       "number": 59,
       "displayNumber": "59",
-      "sectionId": "section-5",
-      "groupId": "section-5-group-1",
+      "sectionId": "section-9",
+      "groupId": "section-9-group-1",
       "prompt": "We can infer from the passage that _________.",
       "options": [
         "A. the writer prefers products with beautiful packaging because they will last longer",
@@ -4680,11 +4701,11 @@
       "analysis": "【导语】本文是一篇说明文，主要告诉人们要合理消费，保护环境，需求不能太贪婪。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-7-section-7-group-1-60",
+      "id": "2024-chongqing-chongqing-section-11-section-11-group-1-60",
       "number": 60,
       "displayNumber": "60",
-      "sectionId": "section-7",
-      "groupId": "section-7-group-1",
+      "sectionId": "section-11",
+      "groupId": "section-11-group-1",
       "prompt": "A: Hi, Mary. ______",
       "options": [],
       "inputKind": "blank",
@@ -4697,11 +4718,11 @@
       "analysis": "【导语】本文是A和B两个人的对话。主要谈论了B周末在家给家人做饭的事情。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-7-section-7-group-1-61",
+      "id": "2024-chongqing-chongqing-section-11-section-11-group-1-61",
       "number": 61,
       "displayNumber": "61",
-      "sectionId": "section-7",
-      "groupId": "section-7-group-1",
+      "sectionId": "section-11",
+      "groupId": "section-11-group-1",
       "prompt": "A: ______",
       "options": [],
       "inputKind": "blank",
@@ -4714,11 +4735,11 @@
       "analysis": "【导语】本文是A和B两个人的对话。主要谈论了B周末在家给家人做饭的事情。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-7-section-7-group-1-62",
+      "id": "2024-chongqing-chongqing-section-11-section-11-group-1-62",
       "number": 62,
       "displayNumber": "62",
-      "sectionId": "section-7",
-      "groupId": "section-7-group-1",
+      "sectionId": "section-11",
+      "groupId": "section-11-group-1",
       "prompt": "A: ______      How did you prepare?",
       "options": [],
       "inputKind": "blank",
@@ -4731,11 +4752,11 @@
       "analysis": "【导语】本文是A和B两个人的对话。主要谈论了B周末在家给家人做饭的事情。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-7-section-7-group-1-63",
+      "id": "2024-chongqing-chongqing-section-11-section-11-group-1-63",
       "number": 63,
       "displayNumber": "63",
-      "sectionId": "section-7",
-      "groupId": "section-7-group-1",
+      "sectionId": "section-11",
+      "groupId": "section-11-group-1",
       "prompt": "A: Sounds nice! ______",
       "options": [],
       "inputKind": "blank",
@@ -4748,11 +4769,11 @@
       "analysis": "【导语】本文是A和B两个人的对话。主要谈论了B周末在家给家人做饭的事情。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-7-section-7-group-1-64",
+      "id": "2024-chongqing-chongqing-section-11-section-11-group-1-64",
       "number": 64,
       "displayNumber": "64",
-      "sectionId": "section-7",
-      "groupId": "section-7-group-1",
+      "sectionId": "section-11",
+      "groupId": "section-11-group-1",
       "prompt": "A: Wow, that was a long time. Cooking is really a useful life skill. ______",
       "options": [],
       "inputKind": "blank",
@@ -4765,11 +4786,11 @@
       "analysis": "【导语】本文是A和B两个人的对话。主要谈论了B周末在家给家人做饭的事情。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-9-section-9-group-1-65",
+      "id": "2024-chongqing-chongqing-section-13-section-13-group-1-65",
       "number": 65,
       "displayNumber": "65",
-      "sectionId": "section-9",
-      "groupId": "section-9-group-1",
+      "sectionId": "section-13",
+      "groupId": "section-13-group-1",
       "prompt": "Is bicycling riding just a way of transportation?",
       "options": [],
       "inputKind": "text",
@@ -4782,11 +4803,11 @@
       "analysis": "65．No, it isn’t."
     },
     {
-      "id": "2024-chongqing-chongqing-section-9-section-9-group-1-66",
+      "id": "2024-chongqing-chongqing-section-13-section-13-group-1-66",
       "number": 66,
       "displayNumber": "66",
-      "sectionId": "section-9",
-      "groupId": "section-9-group-1",
+      "sectionId": "section-13",
+      "groupId": "section-13-group-1",
       "prompt": "How did Wang go to school in her childhood?",
       "options": [],
       "inputKind": "text",
@@ -4799,11 +4820,11 @@
       "analysis": "【详解】句意：他已经在汤里放了一些盐。分析句子可知，肯定句中的He’s是He has的缩写，变为否定句时，缩写成hasn’t。故填hasn’t；put。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-9-section-9-group-1-67",
+      "id": "2024-chongqing-chongqing-section-13-section-13-group-1-67",
       "number": 67,
       "displayNumber": "67",
-      "sectionId": "section-9",
-      "groupId": "section-9-group-1",
+      "sectionId": "section-13",
+      "groupId": "section-13-group-1",
       "prompt": "What does Wang think of traveling in a car?",
       "options": [],
       "inputKind": "text",
@@ -4816,11 +4837,11 @@
       "analysis": "【详解】句意：萨莉从上星期起就一直留着这本故事书。划线部分表示一段时间，对此提问用how long表示“多久”，故填How；long。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-9-section-9-group-1-68",
+      "id": "2024-chongqing-chongqing-section-13-section-13-group-1-68",
       "number": 68,
       "displayNumber": "68",
-      "sectionId": "section-9",
-      "groupId": "section-9-group-1",
+      "sectionId": "section-13",
+      "groupId": "section-13-group-1",
       "prompt": "Do you want to ride a bike to explore the city? Why or why not?",
       "options": [],
       "inputKind": "text",
@@ -4833,11 +4854,11 @@
       "analysis": "【详解】句意：青少年应该知道如何正确使用互联网。原句是宾语从句，此处可以转换成“疑问词+不定式”的结构，此处应用how to use...结构，故填how；to。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-10-section-10-group-1-69",
+      "id": "2024-chongqing-chongqing-section-14-section-14-group-1-69",
       "number": 69,
       "displayNumber": "69",
-      "sectionId": "section-10",
-      "groupId": "section-10-group-1",
+      "sectionId": "section-14",
+      "groupId": "section-14-group-1",
       "prompt": "He’s already put some salt in the soup. （改为否定句） He                   any salt in the soup yet.",
       "options": [],
       "inputKind": "text",
@@ -4850,11 +4871,11 @@
       "analysis": "【详解】宁愿做某事也不愿做某事：would rather do sth. than do sth.。故填would；rather。"
     },
     {
-      "id": "2024-chongqing-chongqing-section-10-section-10-group-1-70",
+      "id": "2024-chongqing-chongqing-section-14-section-14-group-1-70",
       "number": 70,
       "displayNumber": "70",
-      "sectionId": "section-10",
-      "groupId": "section-10-group-1",
+      "sectionId": "section-14",
+      "groupId": "section-14-group-1",
       "prompt": "Sally has kept the story book since last week.（对划线部分提问） has Sally kept the story book?",
       "options": [],
       "inputKind": "text",
@@ -4867,11 +4888,11 @@
       "analysis": "【详解】“和某人共享”share sth. with sb.；根据“the moon shines...”可知句子用一般现在时，主语是you，谓语动词用原形。故填share；with。\nⅧ.短文填空。（每空2分，共16分）\n根据下面短文内容及部分首字母提示，在短文的空格处填上一个最恰当的词，使短文完整、通顺。请将完整的单词填写在答题卡上对应的位置。\nOne bright morning, I was out for my usual run when I met an elderly lady who was waving her phone and talking to me in a language I couldn’t understand. It sounded like she was in a hurry to get somewhere. I quickly realized that she was l   74    and couldn’t speak any English.\nShe showed me a map app on her phone, but I had no ideas    75    to read it. So, I quickly got a translation app online and we used the app to communicate. She spoke into the microphone in her language and it translated her words into English for me to understand. I put in some words    76    my reply to her and we were able to communicate!\nI soon knew that she needed to get home, which was a long walk away. She didn’t want to use any public transportation but I offered to walk her to a bus stop where she could call her daughter for a    77   . Then her daughter could drive her home. As we walked, we laughed and joked,    78    we couldn’t understand each other’s language. It was a pretty fun experience!\nAlong the way, the elderly lady kept t   79    me for my time. I had to keep reminding her that it was no trouble at all and saying that it was my pleasure to help her. Finally, we reached the bus stop and she made her call. We said our goodbyes and she gave me a heart-warming message that made me happy the whole day. Even today, I    80    hold that warm feeling in my heart.\nNowadays, as technology has progressed and changed our world day by day, there’s always    81    that never changes. If you help a stranger find his or her way, maybe you will also get help from another stranger sometime in the future when you get lost in a strange city. We might lose our way but there is always a way to help."
     },
     {
-      "id": "2024-chongqing-chongqing-section-10-section-10-group-1-71",
+      "id": "2024-chongqing-chongqing-section-14-section-14-group-1-71",
       "number": 71,
       "displayNumber": "71",
-      "sectionId": "section-10",
-      "groupId": "section-10-group-1",
+      "sectionId": "section-14",
+      "groupId": "section-14-group-1",
       "prompt": "Teenagers should know how they use the Internet correctly. （改为同义句） Teenagers should know                     use Internet correctly.",
       "options": [],
       "inputKind": "text",
@@ -4884,11 +4905,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-chongqing-chongqing-section-10-section-10-group-1-72",
+      "id": "2024-chongqing-chongqing-section-14-section-14-group-1-72",
       "number": 72,
       "displayNumber": "72",
-      "sectionId": "section-10",
-      "groupId": "section-10-group-1",
+      "sectionId": "section-14",
+      "groupId": "section-14-group-1",
       "prompt": "不自由，毋宁死。（完成译句） I                     die than live without freedom.",
       "options": [],
       "inputKind": "text",
@@ -4901,11 +4922,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-chongqing-chongqing-section-10-section-10-group-1-73",
+      "id": "2024-chongqing-chongqing-section-14-section-14-group-1-73",
       "number": 73,
       "displayNumber": "73",
-      "sectionId": "section-10",
-      "groupId": "section-10-group-1",
+      "sectionId": "section-14",
+      "groupId": "section-14-group-1",
       "prompt": "海上生明月，天涯共此时。（完成译句） As the moon shines over the sea, you          this moment          me from far away.",
       "options": [],
       "inputKind": "text",
@@ -4918,11 +4939,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-chongqing-chongqing-section-12-section-12-group-1-74",
+      "id": "2024-chongqing-chongqing-section-16-section-16-group-1-74",
       "number": 74,
       "displayNumber": "74",
-      "sectionId": "section-12",
-      "groupId": "section-12-group-1",
+      "sectionId": "section-16",
+      "groupId": "section-16-group-1",
       "prompt": "One bright morning, I was out for my usual run when I met an elderly lady who was waving her phone and talking to me in a language I couldn’t understand. It sounded like she was in a hurry to get somewhere. I quickly realized that she was  ______     and couldn’t speak any English.",
       "options": [],
       "inputKind": "blank",
@@ -4935,11 +4956,11 @@
       "analysis": "74．lost    75．how    76．with    77．ride"
     },
     {
-      "id": "2024-chongqing-chongqing-section-12-section-12-group-1-75",
+      "id": "2024-chongqing-chongqing-section-16-section-16-group-1-75",
       "number": 75,
       "displayNumber": "75",
-      "sectionId": "section-12",
-      "groupId": "section-12-group-1",
+      "sectionId": "section-16",
+      "groupId": "section-16-group-1",
       "prompt": "She showed me a map app on her phone, but I had no ideas  ______ to read it. So, I quickly got a translation app online and we used the app to communicate. She spoke into the microphone in her language and it translated her words into English for me to understand. I put in some words    76    my reply to her and we were able to communicate!",
       "options": [],
       "inputKind": "blank",
@@ -4952,11 +4973,11 @@
       "analysis": "74．lost    75．how    76．with    77．ride"
     },
     {
-      "id": "2024-chongqing-chongqing-section-12-section-12-group-1-76",
+      "id": "2024-chongqing-chongqing-section-16-section-16-group-1-76",
       "number": 76,
       "displayNumber": "76",
-      "sectionId": "section-12",
-      "groupId": "section-12-group-1",
+      "sectionId": "section-16",
+      "groupId": "section-16-group-1",
       "prompt": "She showed me a map app on her phone, but I had no ideas    75    to read it. So, I quickly got a translation app online and we used the app to communicate. She spoke into the microphone in her language and it translated her words into English for me to understand. I put in some words  ______ my reply to her and we were able to communicate!",
       "options": [],
       "inputKind": "blank",
@@ -4969,11 +4990,11 @@
       "analysis": "74．lost    75．how    76．with    77．ride"
     },
     {
-      "id": "2024-chongqing-chongqing-section-12-section-12-group-1-77",
+      "id": "2024-chongqing-chongqing-section-16-section-16-group-1-77",
       "number": 77,
       "displayNumber": "77",
-      "sectionId": "section-12",
-      "groupId": "section-12-group-1",
+      "sectionId": "section-16",
+      "groupId": "section-16-group-1",
       "prompt": "I soon knew that she needed to get home, which was a long walk away. She didn’t want to use any public transportation but I offered to walk her to a bus stop where she could call her daughter for  ______    . Then her daughter could drive her home. As we walked, we laughed and joked,    78    we couldn’t understand each other’s language. It was a pretty fun experience!",
       "options": [],
       "inputKind": "blank",
@@ -4986,11 +5007,11 @@
       "analysis": "74．lost    75．how    76．with    77．ride"
     },
     {
-      "id": "2024-chongqing-chongqing-section-12-section-12-group-1-78",
+      "id": "2024-chongqing-chongqing-section-16-section-16-group-1-78",
       "number": 78,
       "displayNumber": "78",
-      "sectionId": "section-12",
-      "groupId": "section-12-group-1",
+      "sectionId": "section-16",
+      "groupId": "section-16-group-1",
       "prompt": "I soon knew that she needed to get home, which was a long walk away. She didn’t want to use any public transportation but I offered to walk her to a bus stop where she could call her daughter for a    77   . Then her daughter could drive her home. As we walked, we laughed and joked, ______ we couldn’t understand each other’s language. It was a pretty fun experience!",
       "options": [],
       "inputKind": "blank",
@@ -5003,11 +5024,11 @@
       "analysis": "The homework that impressed me most\nAs we all know, proper homework is necessary for study. The homework that impressed me most was to make a dish and introduce how to make it in English by making a video.\nThe dish I made was fried potatoes with green pepper. First, I got the vegetables and ingredients ready. Second, I looked up some new words like garlic, vinegar in the dictionary. Finally, I asked my mother to shoot a video of how I made it. And then we shared the dish together.\nI felt happy and relaxed during the process. Not only did I learn how to cook, but also I had a great time with my mother.\n【详解】[总体分析]\n①题材：本文是一篇记叙文，为材料作文；\n②时态：时态为“一般过去时”；\n③提示：写作要点已给出，考生应注意在讲述自己“过去经历”的时候，时态需用一般过去时。\n[写作步骤]\n第一步，表明写作意图。直接点明自己“印象最深刻的作业”是什么；\n第二步，具体阐述写作内容。分四步，详细描述如何完成这项作业的；\n第三步，书写结语。表达完成这项作业后的感受或收获。\n[亮点词汇]\n①as we all know 众所周知\n②make a dish 做一道菜\n③look up 查阅\n④ask sb. to do sth. 请求某人做某事\n[高分句型]\n①The homework that impressed me most was to make a dish and introduce how to make it in English by making a video.（不定式作表语）\n②Not only did I learn how to cook, but also I had a great time with my mother.（not only…but also…句型，部分倒装）"
     },
     {
-      "id": "2024-chongqing-chongqing-section-12-section-12-group-1-79",
+      "id": "2024-chongqing-chongqing-section-16-section-16-group-1-79",
       "number": 79,
       "displayNumber": "79",
-      "sectionId": "section-12",
-      "groupId": "section-12-group-1",
+      "sectionId": "section-16",
+      "groupId": "section-16-group-1",
       "prompt": "Along the way, the elderly lady kept  ______     me for my time. I had to keep reminding her that it was no trouble at all and saying that it was my pleasure to help her. Finally, we reached the bus stop and she made her call. We said our goodbyes and she gave me a heart-warming message that made me happy the whole day. Even today, I    80    hold that warm feeling in my heart.",
       "options": [],
       "inputKind": "blank",
@@ -5020,11 +5041,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-chongqing-chongqing-section-12-section-12-group-1-80",
+      "id": "2024-chongqing-chongqing-section-16-section-16-group-1-80",
       "number": 80,
       "displayNumber": "80",
-      "sectionId": "section-12",
-      "groupId": "section-12-group-1",
+      "sectionId": "section-16",
+      "groupId": "section-16-group-1",
       "prompt": "Along the way, the elderly lady kept t   79    me for my time. I had to keep reminding her that it was no trouble at all and saying that it was my pleasure to help her. Finally, we reached the bus stop and she made her call. We said our goodbyes and she gave me a heart-warming message that made me happy the whole day. Even today,  ______     hold that warm feeling in my heart.",
       "options": [],
       "inputKind": "blank",
@@ -5037,11 +5058,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-chongqing-chongqing-section-12-section-12-group-1-81",
+      "id": "2024-chongqing-chongqing-section-16-section-16-group-1-81",
       "number": 81,
       "displayNumber": "81",
-      "sectionId": "section-12",
-      "groupId": "section-12-group-1",
+      "sectionId": "section-16",
+      "groupId": "section-16-group-1",
       "prompt": "Nowadays, as technology has progressed and changed our world day by day, there’s always  ______ that never changes. If you help a stranger find his or her way, maybe you will also get help from another stranger sometime in the future when you get lost in a strange city. We might lose our way but there is always a way to help.",
       "options": [],
       "inputKind": "blank",

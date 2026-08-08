@@ -53,3 +53,25 @@ test("reading display blocks preserve passages between question groups", () => {
   assert.equal(paragraphs.some((text) => /^51[．.]/.test(text)), false, "question text should stay in the interactive question column");
   assert.equal(paragraphs.some((text) => /^A[．.].*B[．.]/.test(text)), false, "answer options should stay out of the passage column");
 });
+
+test("generated options do not contain the following section or passage", () => {
+  const inventory = JSON.parse(fs.readFileSync(new URL("../src/lib/junior-high/paper-inventory.json", import.meta.url), "utf8"));
+  const boundary = /第二节|第三节|第四节|第五节|第[一二三四五六七八九十]+部分|听下面|听下列|阅读下面|完形填空|选择填空/;
+  for (const item of inventory) {
+    const paper = JSON.parse(fs.readFileSync(item.dataPath, "utf8"));
+    for (const question of paper.questions) {
+      for (const option of question.options ?? []) {
+        assert.doesNotMatch(option, boundary, `${item.slug} question ${question.displayNumber} option contains a section boundary`);
+      }
+    }
+  }
+});
+
+test("choice-section source blocks do not repeat the interactive question text", () => {
+  const paper = readPaper("2024-hubei-wuhan-hubei-wuhan.json");
+  const section = paper.sections.find((item) => item.title.includes("二、选择填空"));
+  assert.ok(section);
+  const paragraphs = section.displayBlocks.filter((block) => block.kind === "paragraph").map((block) => block.text);
+  assert.equal(paragraphs.some((text) => text.includes("It can provide a good place for the old")), false);
+  assert.equal(paragraphs.some((text) => /^26[．.]/.test(text)), false);
+});

@@ -67,3 +67,24 @@ test("analysis text stops before the next question marker", () => {
   assert.doesNotMatch(question.analysis, /【\s*2题详解】/);
   assert.doesNotMatch(question.analysis, /What’s the time now/);
 });
+
+test("question metadata and options stop at the next listening group", () => {
+  const paper = buildPaper(2024, "湖北武汉");
+  const question4 = paper.questions.find((question) => question.displayNumber === "4");
+  const question12 = paper.questions.find((question) => question.displayNumber === "12");
+  assert.deepEqual(question4?.options, ["A. Good luck.", "B. Of course.", "C. Never mind."]);
+  assert.deepEqual(question12?.options, [
+    "A. He hasn’t watched the movie.",
+    "B. He doesn’t like the movie at all.",
+    "C. He knows a lot about the movie.",
+  ]);
+  assert.doesNotMatch(question4?.prompt ?? "", /第二节|听下面/);
+  assert.doesNotMatch(question12?.prompt ?? "", /第三节|听下面/);
+});
+
+test("reading options stop before the next passage label", () => {
+  const paper = buildPaper(2024, "天津");
+  const question50 = paper.questions.find((question) => question.displayNumber === "50");
+  assert.equal(question50?.options.length, 4);
+  assert.doesNotMatch(question50?.options.join(" ") ?? "", /high school graduation ceremony|Mark/);
+});

@@ -110,15 +110,7 @@ function renderStructuredBlock(block: JuniorHighBlock, section: JuniorHighSectio
 }
 
 function isStructuredReadingSection(title: string) {
-  return /阅读理解|阅读表达|任务型阅读|部分\s*阅读|^阅读下面/.test(title);
-}
-
-function isCompatibleDisplayInstruction(text: string, sectionTitle: string) {
-  const value = text.trim();
-  if (!value || value === sectionTitle.trim()) return true;
-  if (/注意事项|答题卡|考试结束|监考教师|准考证|本试卷共|本卷共|满分|考试时间|答卷前|作答选择题|每题选出答案|请务必|请根据所听|从每小题所给|根据短文|阅读下列|从下面|选择可以|填写所缺|完成相应任务|作文要求|评分标准|参考答案|解析/.test(value)) return true;
-  if (/^(?:请|阅读下面|根据|从每|从下|选择|填写|完成|作答|注意事项|第I卷|第II卷)/.test(value) && value.length < 180) return true;
-  return false;
+  return /阅读理解|阅读表达|任务型阅读|完形填空|部分\s*阅读|^阅读下面/.test(title);
 }
 
 function getCompatibleDisplayBlocks(section: JuniorHighSection, questions: PaperQuestion[]) {
@@ -127,16 +119,23 @@ function getCompatibleDisplayBlocks(section: JuniorHighSection, questions: Paper
   const blockIndexes = new Map(section.blocks.map((block, index) => [block.id, index]));
   const starts = [...new Set(sectionQuestions.flatMap((question) => (question.sourceBlockIds ?? []).map((sourceId) => blockIndexes.get(sourceId)).filter((index): index is number => index !== undefined)))].sort((a, b) => a - b);
   const hiddenParagraphs = new Set<number>();
+  const passageSection = isStructuredReadingSection(section.title);
   starts.forEach((start, index) => {
     const end = starts[index + 1] ?? section.blocks.length;
+    let sawOption = false;
     for (let blockIndex = start; blockIndex < end; blockIndex += 1) {
-      if (section.blocks[blockIndex].kind === "paragraph") hiddenParagraphs.add(blockIndex);
+      const block = section.blocks[blockIndex];
+      if (block.kind !== "paragraph") continue;
+      const text = block.text?.trim() ?? "";
+      if (passageSection && blockIndex > start && sawOption && !/^\s*[A-GＡ-Ｇ]\s*[．.、:：)]\s*\S+/.test(text)) break;
+      hiddenParagraphs.add(blockIndex);
+      if (passageSection && /^\s*[A-GＡ-Ｇ]\s*[．.、:：)]\s*\S+/.test(text)) sawOption = true;
     }
   });
   return section.blocks.filter((block, index) => {
     if (block.kind !== "paragraph") return true;
     if (hiddenParagraphs.has(index)) return false;
-    return !isCompatibleDisplayInstruction(block.text ?? "", section.title);
+    return (block.text ?? "").trim() !== section.title.trim();
   });
 }
 

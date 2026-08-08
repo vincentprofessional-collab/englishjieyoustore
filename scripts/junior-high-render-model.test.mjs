@@ -11,6 +11,7 @@ test("structured papers render ordered sections and source blocks", () => {
   assert.match(source, /block\.kind === "image"/);
   assert.doesNotMatch(source, /<pre>\{paper\.sourceText\}<\/pre>/);
   assert.match(source, /junior-high-structured-reading-layout/);
+  assert.match(source, /完形填空/);
   assert.match(source, /renderInlineBlanks/);
 });
 

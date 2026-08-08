@@ -1255,12 +1255,30 @@
           "id": "paragraph-8",
           "kind": "paragraph",
           "text": "第一部分（听力共30分）"
-        },
+        }
+      ],
+      "questionIds": [],
+      "displayBlocks": []
+    },
+    {
+      "id": "section-3",
+      "title": "I.听选答案（共15小题,计20分）",
+      "instructions": [],
+      "blocks": [
         {
           "id": "paragraph-9",
           "kind": "paragraph",
           "text": "I.听选答案（共15小题,计20分）"
-        },
+        }
+      ],
+      "questionIds": [],
+      "displayBlocks": []
+    },
+    {
+      "id": "section-4",
+      "title": "第一节:听下面10段对话,每段对话后有一个问题,读两遍。请根据每段对话的内容和后面的问题,从所给的三个选项中选出最恰当的一项。（共10小题,计10分）",
+      "instructions": [],
+      "blocks": [
         {
           "id": "paragraph-10",
           "kind": "paragraph",
@@ -1365,7 +1383,27 @@
           "id": "paragraph-30",
           "kind": "paragraph",
           "text": "A．In America.B．In France.C．In England."
-        },
+        }
+      ],
+      "questionIds": [
+        "2024-shaanxi-shaanxi-section-4-section-4-group-1-1",
+        "2024-shaanxi-shaanxi-section-4-section-4-group-1-2",
+        "2024-shaanxi-shaanxi-section-4-section-4-group-1-3",
+        "2024-shaanxi-shaanxi-section-4-section-4-group-1-4",
+        "2024-shaanxi-shaanxi-section-4-section-4-group-1-5",
+        "2024-shaanxi-shaanxi-section-4-section-4-group-1-6",
+        "2024-shaanxi-shaanxi-section-4-section-4-group-1-7",
+        "2024-shaanxi-shaanxi-section-4-section-4-group-1-8",
+        "2024-shaanxi-shaanxi-section-4-section-4-group-1-9",
+        "2024-shaanxi-shaanxi-section-4-section-4-group-1-10"
+      ],
+      "displayBlocks": []
+    },
+    {
+      "id": "section-5",
+      "title": "第二节:听下面两段对话,每段对话后有几道小题,请根据对话的内容,从题目所给的三个选项中选出问题的正确答案。每段对话读两遍。（共5小题,计10分）",
+      "instructions": [],
+      "blocks": [
         {
           "id": "paragraph-31",
           "kind": "paragraph",
@@ -1443,52 +1481,22 @@
         }
       ],
       "questionIds": [
-        "2024-shaanxi-shaanxi-section-2-section-2-group-1-1",
-        "2024-shaanxi-shaanxi-section-2-section-2-group-1-2",
-        "2024-shaanxi-shaanxi-section-2-section-2-group-1-3",
-        "2024-shaanxi-shaanxi-section-2-section-2-group-1-4",
-        "2024-shaanxi-shaanxi-section-2-section-2-group-1-5",
-        "2024-shaanxi-shaanxi-section-2-section-2-group-1-6",
-        "2024-shaanxi-shaanxi-section-2-section-2-group-1-7",
-        "2024-shaanxi-shaanxi-section-2-section-2-group-1-8",
-        "2024-shaanxi-shaanxi-section-2-section-2-group-1-9",
-        "2024-shaanxi-shaanxi-section-2-section-2-group-1-10",
-        "2024-shaanxi-shaanxi-section-2-section-2-group-1-11",
-        "2024-shaanxi-shaanxi-section-2-section-2-group-1-12",
-        "2024-shaanxi-shaanxi-section-2-section-2-group-1-13",
-        "2024-shaanxi-shaanxi-section-2-section-2-group-1-14",
-        "2024-shaanxi-shaanxi-section-2-section-2-group-1-15"
+        "2024-shaanxi-shaanxi-section-5-section-5-group-1-11",
+        "2024-shaanxi-shaanxi-section-5-section-5-group-1-12",
+        "2024-shaanxi-shaanxi-section-5-section-5-group-1-13",
+        "2024-shaanxi-shaanxi-section-5-section-5-group-1-14",
+        "2024-shaanxi-shaanxi-section-5-section-5-group-1-15"
       ],
       "displayBlocks": [
-        {
-          "id": "paragraph-9",
-          "kind": "paragraph",
-          "text": "I.听选答案（共15小题,计20分）"
-        },
-        {
-          "id": "paragraph-10",
-          "kind": "paragraph",
-          "text": "第一节:听下面10段对话,每段对话后有一个问题,读两遍。请根据每段对话的内容和后面的问题,从所给的三个选项中选出最恰当的一项。（共10小题,计10分）"
-        },
-        {
-          "id": "paragraph-31",
-          "kind": "paragraph",
-          "text": "第二节:听下面两段对话,每段对话后有几道小题,请根据对话的内容,从题目所给的三个选项中选出问题的正确答案。每段对话读两遍。（共5小题,计10分）"
-        },
         {
           "id": "paragraph-32",
           "kind": "paragraph",
           "text": "听第11段对话,回答第11、12小题。"
-        },
-        {
-          "id": "paragraph-37",
-          "kind": "paragraph",
-          "text": "听第12段对话, 回答第13至15小题。"
         }
       ]
     },
     {
-      "id": "section-3",
+      "id": "section-6",
       "title": "Ⅱ. 听填信息（共5小题, 计10分）",
       "instructions": [],
       "blocks": [
@@ -1529,11 +1537,11 @@
         }
       ],
       "questionIds": [
-        "2024-shaanxi-shaanxi-section-3-section-3-group-1-16",
-        "2024-shaanxi-shaanxi-section-3-section-3-group-1-17",
-        "2024-shaanxi-shaanxi-section-3-section-3-group-1-18",
-        "2024-shaanxi-shaanxi-section-3-section-3-group-1-19",
-        "2024-shaanxi-shaanxi-section-3-section-3-group-1-20"
+        "2024-shaanxi-shaanxi-section-6-section-6-group-1-16",
+        "2024-shaanxi-shaanxi-section-6-section-6-group-1-17",
+        "2024-shaanxi-shaanxi-section-6-section-6-group-1-18",
+        "2024-shaanxi-shaanxi-section-6-section-6-group-1-19",
+        "2024-shaanxi-shaanxi-section-6-section-6-group-1-20"
       ],
       "displayBlocks": [
         {
@@ -1544,7 +1552,7 @@
       ]
     },
     {
-      "id": "section-4",
+      "id": "section-7",
       "title": "第二部分（笔试共90分）",
       "instructions": [],
       "blocks": [
@@ -1558,7 +1566,7 @@
       "displayBlocks": []
     },
     {
-      "id": "section-5",
+      "id": "section-8",
       "title": "Ⅲ.完形填空（共20小题,计20分）",
       "instructions": [],
       "blocks": [
@@ -1572,7 +1580,7 @@
       "displayBlocks": []
     },
     {
-      "id": "section-6",
+      "id": "section-9",
       "title": "第一节: 阅读第一封英文书信, 按照句子结构的语法性和上下文连贯的要求, 从各小题的四个选项中选出一个最佳答案, 使书信连贯完整。",
       "instructions": [],
       "blocks": [
@@ -1668,16 +1676,16 @@
         }
       ],
       "questionIds": [
-        "2024-shaanxi-shaanxi-section-6-section-6-group-1-21",
-        "2024-shaanxi-shaanxi-section-6-section-6-group-1-22",
-        "2024-shaanxi-shaanxi-section-6-section-6-group-1-23",
-        "2024-shaanxi-shaanxi-section-6-section-6-group-1-24",
-        "2024-shaanxi-shaanxi-section-6-section-6-group-1-25",
-        "2024-shaanxi-shaanxi-section-6-section-6-group-1-26",
-        "2024-shaanxi-shaanxi-section-6-section-6-group-1-27",
-        "2024-shaanxi-shaanxi-section-6-section-6-group-1-28",
-        "2024-shaanxi-shaanxi-section-6-section-6-group-1-29",
-        "2024-shaanxi-shaanxi-section-6-section-6-group-1-30"
+        "2024-shaanxi-shaanxi-section-9-section-9-group-1-21",
+        "2024-shaanxi-shaanxi-section-9-section-9-group-1-22",
+        "2024-shaanxi-shaanxi-section-9-section-9-group-1-23",
+        "2024-shaanxi-shaanxi-section-9-section-9-group-1-24",
+        "2024-shaanxi-shaanxi-section-9-section-9-group-1-25",
+        "2024-shaanxi-shaanxi-section-9-section-9-group-1-26",
+        "2024-shaanxi-shaanxi-section-9-section-9-group-1-27",
+        "2024-shaanxi-shaanxi-section-9-section-9-group-1-28",
+        "2024-shaanxi-shaanxi-section-9-section-9-group-1-29",
+        "2024-shaanxi-shaanxi-section-9-section-9-group-1-30"
       ],
       "displayBlocks": [
         {
@@ -1718,7 +1726,7 @@
       ]
     },
     {
-      "id": "section-7",
+      "id": "section-10",
       "title": "第二节: 阅读第二封英文书信, 理解大意, 然后从各小题的四个选项中选出一个最佳答案, 使书信连贯完整。",
       "instructions": [],
       "blocks": [
@@ -1829,16 +1837,16 @@
         }
       ],
       "questionIds": [
-        "2024-shaanxi-shaanxi-section-7-section-7-group-1-31",
-        "2024-shaanxi-shaanxi-section-7-section-7-group-1-32",
-        "2024-shaanxi-shaanxi-section-7-section-7-group-1-33",
-        "2024-shaanxi-shaanxi-section-7-section-7-group-1-34",
-        "2024-shaanxi-shaanxi-section-7-section-7-group-1-35",
-        "2024-shaanxi-shaanxi-section-7-section-7-group-1-36",
-        "2024-shaanxi-shaanxi-section-7-section-7-group-1-37",
-        "2024-shaanxi-shaanxi-section-7-section-7-group-1-38",
-        "2024-shaanxi-shaanxi-section-7-section-7-group-1-39",
-        "2024-shaanxi-shaanxi-section-7-section-7-group-1-40"
+        "2024-shaanxi-shaanxi-section-10-section-10-group-1-31",
+        "2024-shaanxi-shaanxi-section-10-section-10-group-1-32",
+        "2024-shaanxi-shaanxi-section-10-section-10-group-1-33",
+        "2024-shaanxi-shaanxi-section-10-section-10-group-1-34",
+        "2024-shaanxi-shaanxi-section-10-section-10-group-1-35",
+        "2024-shaanxi-shaanxi-section-10-section-10-group-1-36",
+        "2024-shaanxi-shaanxi-section-10-section-10-group-1-37",
+        "2024-shaanxi-shaanxi-section-10-section-10-group-1-38",
+        "2024-shaanxi-shaanxi-section-10-section-10-group-1-39",
+        "2024-shaanxi-shaanxi-section-10-section-10-group-1-40"
       ],
       "displayBlocks": [
         {
@@ -1894,7 +1902,7 @@
       ]
     },
     {
-      "id": "section-8",
+      "id": "section-11",
       "title": "Ⅳ. 阅读理解（共15小题, 计20分）",
       "instructions": [],
       "blocks": [
@@ -1902,7 +1910,16 @@
           "id": "paragraph-94",
           "kind": "paragraph",
           "text": "Ⅳ. 阅读理解（共15小题, 计20分）"
-        },
+        }
+      ],
+      "questionIds": [],
+      "displayBlocks": []
+    },
+    {
+      "id": "section-12",
+      "title": "第一节: 阅读下面A、B、C三篇材料, 从所给的四个选项中选出能回答所提问题或完成所给句子的一个最佳答案。（共10小题,计15分）",
+      "instructions": [],
+      "blocks": [
         {
           "id": "paragraph-95",
           "kind": "paragraph",
@@ -2210,23 +2227,18 @@
         }
       ],
       "questionIds": [
-        "2024-shaanxi-shaanxi-section-8-section-8-group-1-41",
-        "2024-shaanxi-shaanxi-section-8-section-8-group-1-42",
-        "2024-shaanxi-shaanxi-section-8-section-8-group-1-43",
-        "2024-shaanxi-shaanxi-section-8-section-8-group-1-44",
-        "2024-shaanxi-shaanxi-section-8-section-8-group-1-45",
-        "2024-shaanxi-shaanxi-section-8-section-8-group-1-46",
-        "2024-shaanxi-shaanxi-section-8-section-8-group-1-47",
-        "2024-shaanxi-shaanxi-section-8-section-8-group-1-48",
-        "2024-shaanxi-shaanxi-section-8-section-8-group-1-49",
-        "2024-shaanxi-shaanxi-section-8-section-8-group-1-50"
+        "2024-shaanxi-shaanxi-section-12-section-12-group-1-41",
+        "2024-shaanxi-shaanxi-section-12-section-12-group-1-42",
+        "2024-shaanxi-shaanxi-section-12-section-12-group-1-43",
+        "2024-shaanxi-shaanxi-section-12-section-12-group-1-44",
+        "2024-shaanxi-shaanxi-section-12-section-12-group-1-45",
+        "2024-shaanxi-shaanxi-section-12-section-12-group-1-46",
+        "2024-shaanxi-shaanxi-section-12-section-12-group-1-47",
+        "2024-shaanxi-shaanxi-section-12-section-12-group-1-48",
+        "2024-shaanxi-shaanxi-section-12-section-12-group-1-49",
+        "2024-shaanxi-shaanxi-section-12-section-12-group-1-50"
       ],
       "displayBlocks": [
-        {
-          "id": "paragraph-95",
-          "kind": "paragraph",
-          "text": "第一节: 阅读下面A、B、C三篇材料, 从所给的四个选项中选出能回答所提问题或完成所给句子的一个最佳答案。（共10小题,计15分）"
-        },
         {
           "id": "paragraph-96",
           "kind": "paragraph",
@@ -2375,7 +2387,7 @@
       ]
     },
     {
-      "id": "section-9",
+      "id": "section-13",
       "title": "第二节:根据短文内容,从短文后的选项中选出能填入空白处的最佳选项。选项中有两项为多余选项。（共5小题,计5分）",
       "instructions": [],
       "blocks": [
@@ -2443,7 +2455,22 @@
           "id": "paragraph-168",
           "kind": "paragraph",
           "text": "G．This is because a lunar day, which is 14 earth days long, is followed by 14 days of darkness."
-        },
+        }
+      ],
+      "questionIds": [
+        "2024-shaanxi-shaanxi-section-13-section-13-group-1-51",
+        "2024-shaanxi-shaanxi-section-13-section-13-group-1-52",
+        "2024-shaanxi-shaanxi-section-13-section-13-group-1-53",
+        "2024-shaanxi-shaanxi-section-13-section-13-group-1-54",
+        "2024-shaanxi-shaanxi-section-13-section-13-group-1-55"
+      ],
+      "displayBlocks": []
+    },
+    {
+      "id": "section-14",
+      "title": "V. 完成句子: 根据所给汉语意思, 用单词或短语完成下列英文句子。（共5小题, 计10分）",
+      "instructions": [],
+      "blocks": [
         {
           "id": "paragraph-169",
           "kind": "paragraph",
@@ -2501,92 +2528,16 @@
         }
       ],
       "questionIds": [
-        "2024-shaanxi-shaanxi-section-9-section-9-group-1-51",
-        "2024-shaanxi-shaanxi-section-9-section-9-group-1-52",
-        "2024-shaanxi-shaanxi-section-9-section-9-group-1-53",
-        "2024-shaanxi-shaanxi-section-9-section-9-group-1-54",
-        "2024-shaanxi-shaanxi-section-9-section-9-group-1-55",
-        "2024-shaanxi-shaanxi-section-9-section-9-group-1-56",
-        "2024-shaanxi-shaanxi-section-9-section-9-group-1-57",
-        "2024-shaanxi-shaanxi-section-9-section-9-group-1-58",
-        "2024-shaanxi-shaanxi-section-9-section-9-group-1-59",
-        "2024-shaanxi-shaanxi-section-9-section-9-group-1-60"
+        "2024-shaanxi-shaanxi-section-14-section-14-group-1-56",
+        "2024-shaanxi-shaanxi-section-14-section-14-group-1-57",
+        "2024-shaanxi-shaanxi-section-14-section-14-group-1-58",
+        "2024-shaanxi-shaanxi-section-14-section-14-group-1-59",
+        "2024-shaanxi-shaanxi-section-14-section-14-group-1-60"
       ],
-      "displayBlocks": [
-        {
-          "id": "paragraph-161",
-          "kind": "paragraph",
-          "text": "So perhaps in a few years you might be enjoying yourselves on the moon."
-        },
-        {
-          "id": "paragraph-162",
-          "kind": "paragraph",
-          "text": "A．Next, the hotel will have a wide range of sporting activities."
-        },
-        {
-          "id": "paragraph-163",
-          "kind": "paragraph",
-          "text": "B．Tourists who want to travel into space can stay at a big hotel."
-        },
-        {
-          "id": "paragraph-164",
-          "kind": "paragraph",
-          "text": "C．The first thing to do is to organize trips around the earth for a few hours."
-        },
-        {
-          "id": "paragraph-165",
-          "kind": "paragraph",
-          "text": "D．There would probably be holidays to a moon hotel within the next ten years."
-        },
-        {
-          "id": "paragraph-166",
-          "kind": "paragraph",
-          "text": "E．There is plenty of sand, but the big problem will come with producing water."
-        },
-        {
-          "id": "paragraph-167",
-          "kind": "paragraph",
-          "text": "F．This part of the development plan does not seem to be too difficult to carry out."
-        },
-        {
-          "id": "paragraph-168",
-          "kind": "paragraph",
-          "text": "G．This is because a lunar day, which is 14 earth days long, is followed by 14 days of darkness."
-        },
-        {
-          "id": "paragraph-169",
-          "kind": "paragraph",
-          "text": "V. 完成句子: 根据所给汉语意思, 用单词或短语完成下列英文句子。（共5小题, 计10分）"
-        },
-        {
-          "id": "paragraph-171",
-          "kind": "paragraph",
-          "text": "I think Amy is          most of her classmates."
-        },
-        {
-          "id": "paragraph-173",
-          "kind": "paragraph",
-          "text": "the forest, the number of the wild animals has increased a lot."
-        },
-        {
-          "id": "paragraph-175",
-          "kind": "paragraph",
-          "text": "At home, I always          and nervous."
-        },
-        {
-          "id": "paragraph-177",
-          "kind": "paragraph",
-          "text": "For safety, drivers must                  while driving."
-        },
-        {
-          "id": "paragraph-179",
-          "kind": "paragraph",
-          "text": "It’s not a good habit for you to         what should be done today until tomorrow."
-        }
-      ]
+      "displayBlocks": []
     },
     {
-      "id": "section-10",
+      "id": "section-15",
       "title": "Ⅵ. 短文填空:（共10小题, 计10分）",
       "instructions": [],
       "blocks": [
@@ -2600,7 +2551,7 @@
       "displayBlocks": []
     },
     {
-      "id": "section-11",
+      "id": "section-16",
       "title": "用方框中所给单词的适当形式填空，使短文完整正确。（每个单词限用一次，每空限填一个单词。）",
       "instructions": [],
       "blocks": [
@@ -2645,15 +2596,15 @@
         }
       ],
       "questionIds": [
-        "2024-shaanxi-shaanxi-section-11-section-11-group-1-61",
-        "2024-shaanxi-shaanxi-section-11-section-11-group-1-62",
-        "2024-shaanxi-shaanxi-section-11-section-11-group-1-63",
-        "2024-shaanxi-shaanxi-section-11-section-11-group-1-64",
-        "2024-shaanxi-shaanxi-section-11-section-11-group-1-65",
-        "2024-shaanxi-shaanxi-section-11-section-11-group-1-66",
-        "2024-shaanxi-shaanxi-section-11-section-11-group-1-67",
-        "2024-shaanxi-shaanxi-section-11-section-11-group-1-68",
-        "2024-shaanxi-shaanxi-section-11-section-11-group-1-69"
+        "2024-shaanxi-shaanxi-section-16-section-16-group-1-61",
+        "2024-shaanxi-shaanxi-section-16-section-16-group-1-62",
+        "2024-shaanxi-shaanxi-section-16-section-16-group-1-63",
+        "2024-shaanxi-shaanxi-section-16-section-16-group-1-64",
+        "2024-shaanxi-shaanxi-section-16-section-16-group-1-65",
+        "2024-shaanxi-shaanxi-section-16-section-16-group-1-66",
+        "2024-shaanxi-shaanxi-section-16-section-16-group-1-67",
+        "2024-shaanxi-shaanxi-section-16-section-16-group-1-68",
+        "2024-shaanxi-shaanxi-section-16-section-16-group-1-69"
       ],
       "displayBlocks": [
         {
@@ -2664,16 +2615,11 @@
               "help  before  bad  about  neighbor  what  find  feel  empty  steal"
             ]
           ]
-        },
-        {
-          "id": "paragraph-186",
-          "kind": "paragraph",
-          "text": "For the farmer, the true wealth isn’t the gold buried in the yard but those buried deep in his heart."
         }
       ]
     },
     {
-      "id": "section-12",
+      "id": "section-17",
       "title": "VII. 任务型阅读:（共5小题, 计10分）",
       "instructions": [],
       "blocks": [
@@ -2687,7 +2633,7 @@
       "displayBlocks": []
     },
     {
-      "id": "section-13",
+      "id": "section-18",
       "title": "阅读下面短文，根据短文内容，完成下列各题。",
       "instructions": [],
       "blocks": [
@@ -2770,7 +2716,48 @@
           "id": "paragraph-203",
           "kind": "paragraph",
           "text": "He is                     ."
+        }
+      ],
+      "questionIds": [
+        "2024-shaanxi-shaanxi-section-18-section-18-group-1-70",
+        "2024-shaanxi-shaanxi-section-18-section-18-group-1-71",
+        "2024-shaanxi-shaanxi-section-18-section-18-group-1-72",
+        "2024-shaanxi-shaanxi-section-18-section-18-group-1-73",
+        "2024-shaanxi-shaanxi-section-18-section-18-group-1-74"
+      ],
+      "displayBlocks": [
+        {
+          "id": "paragraph-189",
+          "kind": "paragraph",
+          "text": "Recently, the “Secret Box from the Tang Dynasty” performance at the Xi’an Datang Night City has become really popular. The two actors in the show play the roles of “Fang Xuanling” and “Du Ruhui”, who ask tourists in a question-and-answer game. Their funny way of talking and lively interactions with the tourists has made the performance a huge hit."
         },
+        {
+          "id": "paragraph-190",
+          "kind": "paragraph",
+          "text": "The questions that the two actors ask are usually about Chinese history. Tourists who fail to answer them can win a prize of photos with the actors. Once in a while, some “wise people” successfully pass the test, but the prizes are just some daily things like notebooks or pens. The show includes four 10-minute performances each night, during which the actors dress in ancient clothes and speak in the tone(语气) of the ancient people."
+        },
+        {
+          "id": "paragraph-191",
+          "kind": "paragraph",
+          "text": "“We’ve been doing talk shows for a while as a hobby. If we find that the tourist cannot answer the question, we find ways to have fun interactions with them to make them happy,” said one of the actors, who plays “Du Ruhui”."
+        },
+        {
+          "id": "paragraph-192",
+          "kind": "paragraph",
+          "text": "Wang Ze, who plays “Fang Xuanling” said that because he doesn’t have a high education as some people say, he feels the stress of playing the knowledgeable “Fang Xuanling” of the Tang Dynasty. This pushes him to keep learning about different topics, songs to brain teasers(脑筋急转弯)."
+        },
+        {
+          "id": "paragraph-193",
+          "kind": "paragraph",
+          "text": "The members of the “Secret Box from the Tang Dynasty” hope that tourists can learn more about Chinese culture through these performances."
+        }
+      ]
+    },
+    {
+      "id": "section-19",
+      "title": "VIII. 补全对话（共5小题, 计5分）",
+      "instructions": [],
+      "blocks": [
         {
           "id": "paragraph-204",
           "kind": "paragraph",
@@ -2843,72 +2830,17 @@
         }
       ],
       "questionIds": [
-        "2024-shaanxi-shaanxi-section-13-section-13-group-1-70",
-        "2024-shaanxi-shaanxi-section-13-section-13-group-1-71",
-        "2024-shaanxi-shaanxi-section-13-section-13-group-1-72",
-        "2024-shaanxi-shaanxi-section-13-section-13-group-1-73",
-        "2024-shaanxi-shaanxi-section-13-section-13-group-1-74",
-        "2024-shaanxi-shaanxi-section-13-section-13-group-1-75",
-        "2024-shaanxi-shaanxi-section-13-section-13-group-1-76",
-        "2024-shaanxi-shaanxi-section-13-section-13-group-1-77",
-        "2024-shaanxi-shaanxi-section-13-section-13-group-1-78",
-        "2024-shaanxi-shaanxi-section-13-section-13-group-1-79"
+        "2024-shaanxi-shaanxi-section-19-section-19-group-1-75",
+        "2024-shaanxi-shaanxi-section-19-section-19-group-1-76",
+        "2024-shaanxi-shaanxi-section-19-section-19-group-1-77",
+        "2024-shaanxi-shaanxi-section-19-section-19-group-1-78",
+        "2024-shaanxi-shaanxi-section-19-section-19-group-1-79"
       ],
       "displayBlocks": [
         {
-          "id": "paragraph-189",
+          "id": "paragraph-205",
           "kind": "paragraph",
-          "text": "Recently, the “Secret Box from the Tang Dynasty” performance at the Xi’an Datang Night City has become really popular. The two actors in the show play the roles of “Fang Xuanling” and “Du Ruhui”, who ask tourists in a question-and-answer game. Their funny way of talking and lively interactions with the tourists has made the performance a huge hit."
-        },
-        {
-          "id": "paragraph-190",
-          "kind": "paragraph",
-          "text": "The questions that the two actors ask are usually about Chinese history. Tourists who fail to answer them can win a prize of photos with the actors. Once in a while, some “wise people” successfully pass the test, but the prizes are just some daily things like notebooks or pens. The show includes four 10-minute performances each night, during which the actors dress in ancient clothes and speak in the tone(语气) of the ancient people."
-        },
-        {
-          "id": "paragraph-191",
-          "kind": "paragraph",
-          "text": "“We’ve been doing talk shows for a while as a hobby. If we find that the tourist cannot answer the question, we find ways to have fun interactions with them to make them happy,” said one of the actors, who plays “Du Ruhui”."
-        },
-        {
-          "id": "paragraph-192",
-          "kind": "paragraph",
-          "text": "Wang Ze, who plays “Fang Xuanling” said that because he doesn’t have a high education as some people say, he feels the stress of playing the knowledgeable “Fang Xuanling” of the Tang Dynasty. This pushes him to keep learning about different topics, songs to brain teasers(脑筋急转弯)."
-        },
-        {
-          "id": "paragraph-193",
-          "kind": "paragraph",
-          "text": "The members of the “Secret Box from the Tang Dynasty” hope that tourists can learn more about Chinese culture through these performances."
-        },
-        {
-          "id": "paragraph-195",
-          "kind": "paragraph",
-          "text": "They play games by                     ."
-        },
-        {
-          "id": "paragraph-197",
-          "kind": "paragraph",
-          "text": "It is                 ."
-        },
-        {
-          "id": "paragraph-199",
-          "kind": "paragraph",
-          "text": "like notebooks or pens will be given to the winners."
-        },
-        {
-          "id": "paragraph-201",
-          "kind": "paragraph",
-          "text": "There are             performances each night at the Xi’an Datang Night City."
-        },
-        {
-          "id": "paragraph-203",
-          "kind": "paragraph",
-          "text": "He is                     ."
-        },
-        {
-          "id": "paragraph-204",
-          "kind": "paragraph",
-          "text": "VIII. 补全对话（共5小题, 计5分）"
+          "text": "根据下面对话中的情境，在每个空白处填入一个适当的语句，使对话恢复完整。"
         },
         {
           "id": "paragraph-206",
@@ -2918,7 +2850,7 @@
       ]
     },
     {
-      "id": "section-14",
+      "id": "section-20",
       "title": "IX. 书面表达（共1题, 计15分）",
       "instructions": [],
       "blocks": [
@@ -3007,11 +2939,11 @@
   ],
   "questions": [
     {
-      "id": "2024-shaanxi-shaanxi-section-2-section-2-group-1-1",
+      "id": "2024-shaanxi-shaanxi-section-4-section-4-group-1-1",
       "number": 1,
       "displayNumber": "1",
-      "sectionId": "section-2",
-      "groupId": "section-2-group-1",
+      "sectionId": "section-4",
+      "groupId": "section-4-group-1",
       "prompt": "第 1 题",
       "options": [
         "A. An eraser.",
@@ -3028,11 +2960,11 @@
       "analysis": "【原文】W: Jack, may I borrow your eraser and pencil?\nM: Sorry, I don’t have them, either. You can use my pen instead.\nQ: What does Jack lend the girl?"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-2-section-2-group-1-2",
+      "id": "2024-shaanxi-shaanxi-section-4-section-4-group-1-2",
       "number": 2,
       "displayNumber": "2",
-      "sectionId": "section-2",
-      "groupId": "section-2-group-1",
+      "sectionId": "section-4",
+      "groupId": "section-4-group-1",
       "prompt": "第 2 题",
       "options": [
         "A. Cartoons.",
@@ -3049,11 +2981,11 @@
       "analysis": "【原文】W: I prefer science fictions to action movies. How about you?\nM: I like comedies. They can make me happy.\nQ: What kind of movie does the man like?"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-2-section-2-group-1-3",
+      "id": "2024-shaanxi-shaanxi-section-4-section-4-group-1-3",
       "number": 3,
       "displayNumber": "3",
-      "sectionId": "section-2",
-      "groupId": "section-2-group-1",
+      "sectionId": "section-4",
+      "groupId": "section-4-group-1",
       "prompt": "第 3 题",
       "options": [
         "A. Mother and son.",
@@ -3070,11 +3002,11 @@
       "analysis": "【原文】W: Mike, I’ll pick you up after the chess class.\nM: OK, thank you, mom.\nQ: Who are the two speakers?"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-2-section-2-group-1-4",
+      "id": "2024-shaanxi-shaanxi-section-4-section-4-group-1-4",
       "number": 4,
       "displayNumber": "4",
-      "sectionId": "section-2",
-      "groupId": "section-2-group-1",
+      "sectionId": "section-4",
+      "groupId": "section-4-group-1",
       "prompt": "第 4 题",
       "options": [
         "A. By bike",
@@ -3091,11 +3023,11 @@
       "analysis": "【原文】W: Tom, I saw you take your mother’s car to school this morning.\nM: Yes. She is free today.\nW: How did Tom come to school this morning?"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-2-section-2-group-1-5",
+      "id": "2024-shaanxi-shaanxi-section-4-section-4-group-1-5",
       "number": 5,
       "displayNumber": "5",
-      "sectionId": "section-2",
-      "groupId": "section-2-group-1",
+      "sectionId": "section-4",
+      "groupId": "section-4-group-1",
       "prompt": "第 5 题",
       "options": [
         "A. In a hospital.",
@@ -3112,11 +3044,11 @@
       "analysis": "【原文】W: How long have you been like this?\nM: Since yesterday morning. I coughed a lot and couldn’t even fall asleep.\nQ: Where does the conversation take place?"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-2-section-2-group-1-6",
+      "id": "2024-shaanxi-shaanxi-section-4-section-4-group-1-6",
       "number": 6,
       "displayNumber": "6",
-      "sectionId": "section-2",
-      "groupId": "section-2-group-1",
+      "sectionId": "section-4",
+      "groupId": "section-4-group-1",
       "prompt": "第 6 题",
       "options": [
         "A. At 9:20",
@@ -3133,11 +3065,11 @@
       "analysis": "【原文】W: Has the sports meeting started yet?\nM: Yes, you are ten minutes late. It began at half past nine.\nQ: When did the sports meeting begin?"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-2-section-2-group-1-7",
+      "id": "2024-shaanxi-shaanxi-section-4-section-4-group-1-7",
       "number": 7,
       "displayNumber": "7",
-      "sectionId": "section-2",
-      "groupId": "section-2-group-1",
+      "sectionId": "section-4",
+      "groupId": "section-4-group-1",
       "prompt": "第 7 题",
       "options": [
         "A. It’s hot.",
@@ -3154,11 +3086,11 @@
       "analysis": "【原文】W: You’d better put on your sweater, Jimmy.\nM: OK, mom. It’s cold outside.\nQ: What’s the weather like today?"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-2-section-2-group-1-8",
+      "id": "2024-shaanxi-shaanxi-section-4-section-4-group-1-8",
       "number": 8,
       "displayNumber": "8",
-      "sectionId": "section-2",
-      "groupId": "section-2-group-1",
+      "sectionId": "section-4",
+      "groupId": "section-4-group-1",
       "prompt": "第 8 题",
       "options": [
         "A. White",
@@ -3175,11 +3107,11 @@
       "analysis": "【原文】W: The yellow fridge is nice. It fits the style of our house.\nM: Yeah. Let’s take it.\nQ: What color is the fridge?"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-2-section-2-group-1-9",
+      "id": "2024-shaanxi-shaanxi-section-4-section-4-group-1-9",
       "number": 9,
       "displayNumber": "9",
-      "sectionId": "section-2",
-      "groupId": "section-2-group-1",
+      "sectionId": "section-4",
+      "groupId": "section-4-group-1",
       "prompt": "第 9 题",
       "options": [
         "A. Snowy.",
@@ -3196,16 +3128,16 @@
       "analysis": "【原文】M: Did you have a good time last weekend, Alice?\nW: No. It was terrible because of the bad weather! It was rainy on Saturday and cloudy on Sunday.\nQ: How was the weather last Sunday?"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-2-section-2-group-1-10",
+      "id": "2024-shaanxi-shaanxi-section-4-section-4-group-1-10",
       "number": 10,
       "displayNumber": "10",
-      "sectionId": "section-2",
-      "groupId": "section-2-group-1",
+      "sectionId": "section-4",
+      "groupId": "section-4-group-1",
       "prompt": "第 10 题",
       "options": [
         "A. In America.",
         "B. In France.",
-        "C. In England. 第二节:听下面两段对话,每段对话后有几道小题,请根据对话的内容,从题目所给的三个选项中选出问题的正确答案。每段对话读两遍。（共5小题,计10分） 听第11段对话,回答第11、12小题。"
+        "C. In England."
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -3217,11 +3149,11 @@
       "analysis": "【原文】W: Hi, Jerry. Are you American?\nM: Oh, no. I was born there, but I grew up in England.\nQ: Where did Jerry grow up?\n第二节:听下面两段对话,每段对话后有几道小题,请根据对话的内容,从题目所给的三个选项中选出问题的正确答案。每段对话读两遍。（共5小题,计10分）\n听第11段对话,回答第11、12小题。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-2-section-2-group-1-11",
+      "id": "2024-shaanxi-shaanxi-section-5-section-5-group-1-11",
       "number": 11,
       "displayNumber": "11",
-      "sectionId": "section-2",
-      "groupId": "section-2-group-1",
+      "sectionId": "section-5",
+      "groupId": "section-5-group-1",
       "prompt": "What does Bob want to be in the future?",
       "options": [
         "A. Dentist.",
@@ -3238,11 +3170,11 @@
       "analysis": "【原文】W: Bob, would you like to talk something about your life in the future?\nM: My pleasure. I have so many plans about the future.\nW: What are they?\nM: I will go to a medical college in three years and I want to be a dentist.\nW: Good choice. So where do you want to work, big cities or small village.\nM: I like the fresh air in the countryside but I don’t think it’s convenient to live there.\nW: I see. So it seems you will study hard from now, right.\nM: Yes. In order to achieve my goal, I’ll try my best and my parents also support my choice.\nW: Wish you succeed!\n听第12段对话, 回答第13至15小题。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-2-section-2-group-1-12",
+      "id": "2024-shaanxi-shaanxi-section-5-section-5-group-1-12",
       "number": 12,
       "displayNumber": "12",
-      "sectionId": "section-2",
-      "groupId": "section-2-group-1",
+      "sectionId": "section-5",
+      "groupId": "section-5-group-1",
       "prompt": "Where will Bob probably work?",
       "options": [
         "A. In small countryside.",
@@ -3259,11 +3191,11 @@
       "analysis": "【原文】W: Bob, would you like to talk something about your life in the future?\nM: My pleasure. I have so many plans about the future.\nW: What are they?\nM: I will go to a medical college in three years and I want to be a dentist.\nW: Good choice. So where do you want to work, big cities or small village.\nM: I like the fresh air in the countryside but I don’t think it’s convenient to live there.\nW: I see. So it seems you will study hard from now, right.\nM: Yes. In order to achieve my goal, I’ll try my best and my parents also support my choice.\nW: Wish you succeed!\n听第12段对话, 回答第13至15小题。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-2-section-2-group-1-13",
+      "id": "2024-shaanxi-shaanxi-section-5-section-5-group-1-13",
       "number": 13,
       "displayNumber": "13",
-      "sectionId": "section-2",
-      "groupId": "section-2-group-1",
+      "sectionId": "section-5",
+      "groupId": "section-5-group-1",
       "prompt": "Where does Eric’s aunt live?",
       "options": [
         "A. In China.",
@@ -3281,11 +3213,11 @@
       "analysis": "【原文】W: Eric, the summer vacation is coming. Do you have any plans?\nM: I’m not sure. How about you, Tina?\nW: My aunt in England invited me to pay a visit there.\nM: Sound good. It’s a good chance to practice your English.\nW: I agree with you. But I was chosen to be a volunteer for our community three days ago. You know, I like to help others and it’s really a good chance.\nM: So what will you do as a volunteer?\nW: I’ll visit the old people’s home and help them do some cleaning.\nM: Anything else?\nW: Yes. We will also go to the children’s hospital to cheer the sick children up.\nM: It’s so meaningful. Let’s do together.\nⅡ. 听填信息（共5小题, 计10分）\n本题你将听到一段独白, 读两遍。请根据独白内容, 用所听到的单词或短语完成下列各题。（每空不超过三个单词。）"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-2-section-2-group-1-14",
+      "id": "2024-shaanxi-shaanxi-section-5-section-5-group-1-14",
       "number": 14,
       "displayNumber": "14",
-      "sectionId": "section-2",
-      "groupId": "section-2-group-1",
+      "sectionId": "section-5",
+      "groupId": "section-5-group-1",
       "prompt": "Which thing that Eric won’t do as a volunteer?",
       "options": [
         "A. He won’t do some cleaning.",
@@ -3302,11 +3234,11 @@
       "analysis": "【原文】W: Eric, the summer vacation is coming. Do you have any plans?\nM: I’m not sure. How about you, Tina?\nW: My aunt in England invited me to pay a visit there.\nM: Sound good. It’s a good chance to practice your English.\nW: I agree with you. But I was chosen to be a volunteer for our community three days ago. You know, I like to help others and it’s really a good chance.\nM: So what will you do as a volunteer?\nW: I’ll visit the old people’s home and help them do some cleaning.\nM: Anything else?\nW: Yes. We will also go to the children’s hospital to cheer the sick children up.\nM: It’s so meaningful. Let’s do together.\nⅡ. 听填信息（共5小题, 计10分）\n本题你将听到一段独白, 读两遍。请根据独白内容, 用所听到的单词或短语完成下列各题。（每空不超过三个单词。）"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-2-section-2-group-1-15",
+      "id": "2024-shaanxi-shaanxi-section-5-section-5-group-1-15",
       "number": 15,
       "displayNumber": "15",
-      "sectionId": "section-2",
-      "groupId": "section-2-group-1",
+      "sectionId": "section-5",
+      "groupId": "section-5-group-1",
       "prompt": "How does Tina like the work as a volunteer?",
       "options": [
         "A. Interesting.",
@@ -3323,11 +3255,11 @@
       "analysis": "【原文】W: Eric, the summer vacation is coming. Do you have any plans?\nM: I’m not sure. How about you, Tina?\nW: My aunt in England invited me to pay a visit there.\nM: Sound good. It’s a good chance to practice your English.\nW: I agree with you. But I was chosen to be a volunteer for our community three days ago. You know, I like to help others and it’s really a good chance.\nM: So what will you do as a volunteer?\nW: I’ll visit the old people’s home and help them do some cleaning.\nM: Anything else?\nW: Yes. We will also go to the children’s hospital to cheer the sick children up.\nM: It’s so meaningful. Let’s do together.\nⅡ. 听填信息（共5小题, 计10分）\n本题你将听到一段独白, 读两遍。请根据独白内容, 用所听到的单词或短语完成下列各题。（每空不超过三个单词。）"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-3-section-3-group-1-16",
+      "id": "2024-shaanxi-shaanxi-section-6-section-6-group-1-16",
       "number": 16,
       "displayNumber": "16",
-      "sectionId": "section-3",
-      "groupId": "section-3-group-1",
+      "sectionId": "section-6",
+      "groupId": "section-6-group-1",
       "prompt": "The Dashan Collection House is a building of                            floors.",
       "options": [],
       "inputKind": "text",
@@ -3340,11 +3272,11 @@
       "analysis": "【原文】This morning, we had a school trip to the Dashan Collection House, a building of two floors. We took the school bus and arrived at 9:00. When we got into the house, our eyes were caught by a collection of old photos. Those photos told us something about the history of the town.Then we went upstairs. On the left, there were over one hundred different clocks. The oldest clock was already more than two hundred years old. On the right, there was a stone collection. The stones were in different sizes, colors and shapes. I really loved one stone that looked like a little rabbit, which was eating a carrot. The collections there were wonderful. We stayed there until 11:00. Everyone had a good time in the school trip.\n第二部分（笔试共90分）\nⅢ.完形填空（共20小题,计20分）\n第一节: 阅读第一封英文书信, 按照句子结构的语法性和上下文连贯的要求, 从各小题的四个选项中选出一个最佳答案, 使书信连贯完整。\nDear Bruce,\nThanks for your email—good to hear from you. I’m looking forward to the exchange（交流）, too!\nAnyway, about the     21     and things. The school here isn’t very     22     about most things, but there are a few things you need to know. First of all—     23     . You can wear what you want,     24     you can’t wear jeans（牛仔裤）with holes in them. You should     25     comfortable things. And it’ll be cold when you’re here so you’d better bring some     26     clothes.\nThe school’s pretty strict about phones—of course you can     27     them, but you have to     28     the phones and keep them in a place as you are required before class. You can’t just put them on silent, right? And you can bring     29     to school but you must eat it outside during the break. If it’s raining, you can eat in the classroom.\nIn short, it’s a good school and the teachers are kind. You really don’t have to worry about anything here. Hope my advice is     30     to you. Write again soon, OK? And tell me if there’s anything else vou need to know.\nYours,\nSaral"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-3-section-3-group-1-17",
+      "id": "2024-shaanxi-shaanxi-section-6-section-6-group-1-17",
       "number": 17,
       "displayNumber": "17",
-      "sectionId": "section-3",
-      "groupId": "section-3-group-1",
+      "sectionId": "section-6",
+      "groupId": "section-6-group-1",
       "prompt": "Our eyes were caught by a collection of                            that told us something about the history of the town.",
       "options": [],
       "inputKind": "text",
@@ -3357,11 +3289,11 @@
       "analysis": "【原文】This morning, we had a school trip to the Dashan Collection House, a building of two floors. We took the school bus and arrived at 9:00. When we got into the house, our eyes were caught by a collection of old photos. Those photos told us something about the history of the town.Then we went upstairs. On the left, there were over one hundred different clocks. The oldest clock was already more than two hundred years old. On the right, there was a stone collection. The stones were in different sizes, colors and shapes. I really loved one stone that looked like a little rabbit, which was eating a carrot. The collections there were wonderful. We stayed there until 11:00. Everyone had a good time in the school trip.\n第二部分（笔试共90分）\nⅢ.完形填空（共20小题,计20分）\n第一节: 阅读第一封英文书信, 按照句子结构的语法性和上下文连贯的要求, 从各小题的四个选项中选出一个最佳答案, 使书信连贯完整。\nDear Bruce,\nThanks for your email—good to hear from you. I’m looking forward to the exchange（交流）, too!\nAnyway, about the     21     and things. The school here isn’t very     22     about most things, but there are a few things you need to know. First of all—     23     . You can wear what you want,     24     you can’t wear jeans（牛仔裤）with holes in them. You should     25     comfortable things. And it’ll be cold when you’re here so you’d better bring some     26     clothes.\nThe school’s pretty strict about phones—of course you can     27     them, but you have to     28     the phones and keep them in a place as you are required before class. You can’t just put them on silent, right? And you can bring     29     to school but you must eat it outside during the break. If it’s raining, you can eat in the classroom.\nIn short, it’s a good school and the teachers are kind. You really don’t have to worry about anything here. Hope my advice is     30     to you. Write again soon, OK? And tell me if there’s anything else vou need to know.\nYours,\nSaral"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-3-section-3-group-1-18",
+      "id": "2024-shaanxi-shaanxi-section-6-section-6-group-1-18",
       "number": 18,
       "displayNumber": "18",
-      "sectionId": "section-3",
-      "groupId": "section-3-group-1",
+      "sectionId": "section-6",
+      "groupId": "section-6-group-1",
       "prompt": ", there were over one hundred different clocks.",
       "options": [],
       "inputKind": "text",
@@ -3374,11 +3306,11 @@
       "analysis": "【原文】This morning, we had a school trip to the Dashan Collection House, a building of two floors. We took the school bus and arrived at 9:00. When we got into the house, our eyes were caught by a collection of old photos. Those photos told us something about the history of the town.Then we went upstairs. On the left, there were over one hundred different clocks. The oldest clock was already more than two hundred years old. On the right, there was a stone collection. The stones were in different sizes, colors and shapes. I really loved one stone that looked like a little rabbit, which was eating a carrot. The collections there were wonderful. We stayed there until 11:00. Everyone had a good time in the school trip.\n第二部分（笔试共90分）\nⅢ.完形填空（共20小题,计20分）\n第一节: 阅读第一封英文书信, 按照句子结构的语法性和上下文连贯的要求, 从各小题的四个选项中选出一个最佳答案, 使书信连贯完整。\nDear Bruce,\nThanks for your email—good to hear from you. I’m looking forward to the exchange（交流）, too!\nAnyway, about the     21     and things. The school here isn’t very     22     about most things, but there are a few things you need to know. First of all—     23     . You can wear what you want,     24     you can’t wear jeans（牛仔裤）with holes in them. You should     25     comfortable things. And it’ll be cold when you’re here so you’d better bring some     26     clothes.\nThe school’s pretty strict about phones—of course you can     27     them, but you have to     28     the phones and keep them in a place as you are required before class. You can’t just put them on silent, right? And you can bring     29     to school but you must eat it outside during the break. If it’s raining, you can eat in the classroom.\nIn short, it’s a good school and the teachers are kind. You really don’t have to worry about anything here. Hope my advice is     30     to you. Write again soon, OK? And tell me if there’s anything else vou need to know.\nYours,\nSaral"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-3-section-3-group-1-19",
+      "id": "2024-shaanxi-shaanxi-section-6-section-6-group-1-19",
       "number": 19,
       "displayNumber": "19",
-      "sectionId": "section-3",
-      "groupId": "section-3-group-1",
+      "sectionId": "section-6",
+      "groupId": "section-6-group-1",
       "prompt": "One stone that looked like a little rabbit was                           .",
       "options": [],
       "inputKind": "text",
@@ -3391,11 +3323,11 @@
       "analysis": "【原文】This morning, we had a school trip to the Dashan Collection House, a building of two floors. We took the school bus and arrived at 9:00. When we got into the house, our eyes were caught by a collection of old photos. Those photos told us something about the history of the town.Then we went upstairs. On the left, there were over one hundred different clocks. The oldest clock was already more than two hundred years old. On the right, there was a stone collection. The stones were in different sizes, colors and shapes. I really loved one stone that looked like a little rabbit, which was eating a carrot. The collections there were wonderful. We stayed there until 11:00. Everyone had a good time in the school trip.\n第二部分（笔试共90分）\nⅢ.完形填空（共20小题,计20分）\n第一节: 阅读第一封英文书信, 按照句子结构的语法性和上下文连贯的要求, 从各小题的四个选项中选出一个最佳答案, 使书信连贯完整。\nDear Bruce,\nThanks for your email—good to hear from you. I’m looking forward to the exchange（交流）, too!\nAnyway, about the     21     and things. The school here isn’t very     22     about most things, but there are a few things you need to know. First of all—     23     . You can wear what you want,     24     you can’t wear jeans（牛仔裤）with holes in them. You should     25     comfortable things. And it’ll be cold when you’re here so you’d better bring some     26     clothes.\nThe school’s pretty strict about phones—of course you can     27     them, but you have to     28     the phones and keep them in a place as you are required before class. You can’t just put them on silent, right? And you can bring     29     to school but you must eat it outside during the break. If it’s raining, you can eat in the classroom.\nIn short, it’s a good school and the teachers are kind. You really don’t have to worry about anything here. Hope my advice is     30     to you. Write again soon, OK? And tell me if there’s anything else vou need to know.\nYours,\nSaral"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-3-section-3-group-1-20",
+      "id": "2024-shaanxi-shaanxi-section-6-section-6-group-1-20",
       "number": 20,
       "displayNumber": "20",
-      "sectionId": "section-3",
-      "groupId": "section-3-group-1",
+      "sectionId": "section-6",
+      "groupId": "section-6-group-1",
       "prompt": "The collections in the house were                             .",
       "options": [],
       "inputKind": "text",
@@ -3408,11 +3340,11 @@
       "analysis": "【原文】This morning, we had a school trip to the Dashan Collection House, a building of two floors. We took the school bus and arrived at 9:00. When we got into the house, our eyes were caught by a collection of old photos. Those photos told us something about the history of the town.Then we went upstairs. On the left, there were over one hundred different clocks. The oldest clock was already more than two hundred years old. On the right, there was a stone collection. The stones were in different sizes, colors and shapes. I really loved one stone that looked like a little rabbit, which was eating a carrot. The collections there were wonderful. We stayed there until 11:00. Everyone had a good time in the school trip.\n第二部分（笔试共90分）\nⅢ.完形填空（共20小题,计20分）\n第一节: 阅读第一封英文书信, 按照句子结构的语法性和上下文连贯的要求, 从各小题的四个选项中选出一个最佳答案, 使书信连贯完整。\nDear Bruce,\nThanks for your email—good to hear from you. I’m looking forward to the exchange（交流）, too!\nAnyway, about the     21     and things. The school here isn’t very     22     about most things, but there are a few things you need to know. First of all—     23     . You can wear what you want,     24     you can’t wear jeans（牛仔裤）with holes in them. You should     25     comfortable things. And it’ll be cold when you’re here so you’d better bring some     26     clothes.\nThe school’s pretty strict about phones—of course you can     27     them, but you have to     28     the phones and keep them in a place as you are required before class. You can’t just put them on silent, right? And you can bring     29     to school but you must eat it outside during the break. If it’s raining, you can eat in the classroom.\nIn short, it’s a good school and the teachers are kind. You really don’t have to worry about anything here. Hope my advice is     30     to you. Write again soon, OK? And tell me if there’s anything else vou need to know.\nYours,\nSaral"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-6-section-6-group-1-21",
+      "id": "2024-shaanxi-shaanxi-section-9-section-9-group-1-21",
       "number": 21,
       "displayNumber": "21",
-      "sectionId": "section-6",
-      "groupId": "section-6-group-1",
+      "sectionId": "section-9",
+      "groupId": "section-9-group-1",
       "prompt": "第 21 题",
       "options": [
         "A. interviews",
@@ -3430,11 +3362,11 @@
       "analysis": "21．D    22．A    23．C    24．D    25．B    26．C    27．A    28．C    29．B    30．A\n【导语】本文是Saral写信给Bruce介绍学校里的校规以及学校人员的情况。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-6-section-6-group-1-22",
+      "id": "2024-shaanxi-shaanxi-section-9-section-9-group-1-22",
       "number": 22,
       "displayNumber": "22",
-      "sectionId": "section-6",
-      "groupId": "section-6-group-1",
+      "sectionId": "section-9",
+      "groupId": "section-9-group-1",
       "prompt": "第 22 题",
       "options": [
         "A. strict",
@@ -3452,11 +3384,11 @@
       "analysis": "21．D    22．A    23．C    24．D    25．B    26．C    27．A    28．C    29．B    30．A\n【导语】本文是Saral写信给Bruce介绍学校里的校规以及学校人员的情况。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-6-section-6-group-1-23",
+      "id": "2024-shaanxi-shaanxi-section-9-section-9-group-1-23",
       "number": 23,
       "displayNumber": "23",
-      "sectionId": "section-6",
-      "groupId": "section-6-group-1",
+      "sectionId": "section-9",
+      "groupId": "section-9-group-1",
       "prompt": "第 23 题",
       "options": [
         "A. questions",
@@ -3474,11 +3406,11 @@
       "analysis": "21．D    22．A    23．C    24．D    25．B    26．C    27．A    28．C    29．B    30．A\n【导语】本文是Saral写信给Bruce介绍学校里的校规以及学校人员的情况。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-6-section-6-group-1-24",
+      "id": "2024-shaanxi-shaanxi-section-9-section-9-group-1-24",
       "number": 24,
       "displayNumber": "24",
-      "sectionId": "section-6",
-      "groupId": "section-6-group-1",
+      "sectionId": "section-9",
+      "groupId": "section-9-group-1",
       "prompt": "第 24 题",
       "options": [
         "A. or",
@@ -3496,11 +3428,11 @@
       "analysis": "21．D    22．A    23．C    24．D    25．B    26．C    27．A    28．C    29．B    30．A\n【导语】本文是Saral写信给Bruce介绍学校里的校规以及学校人员的情况。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-6-section-6-group-1-25",
+      "id": "2024-shaanxi-shaanxi-section-9-section-9-group-1-25",
       "number": 25,
       "displayNumber": "25",
-      "sectionId": "section-6",
-      "groupId": "section-6-group-1",
+      "sectionId": "section-9",
+      "groupId": "section-9-group-1",
       "prompt": "第 25 题",
       "options": [
         "A. borrow",
@@ -3518,11 +3450,11 @@
       "analysis": "21．D    22．A    23．C    24．D    25．B    26．C    27．A    28．C    29．B    30．A\n【导语】本文是Saral写信给Bruce介绍学校里的校规以及学校人员的情况。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-6-section-6-group-1-26",
+      "id": "2024-shaanxi-shaanxi-section-9-section-9-group-1-26",
       "number": 26,
       "displayNumber": "26",
-      "sectionId": "section-6",
-      "groupId": "section-6-group-1",
+      "sectionId": "section-9",
+      "groupId": "section-9-group-1",
       "prompt": "第 26 题",
       "options": [
         "A. clean",
@@ -3540,11 +3472,11 @@
       "analysis": "21．D    22．A    23．C    24．D    25．B    26．C    27．A    28．C    29．B    30．A\n【导语】本文是Saral写信给Bruce介绍学校里的校规以及学校人员的情况。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-6-section-6-group-1-27",
+      "id": "2024-shaanxi-shaanxi-section-9-section-9-group-1-27",
       "number": 27,
       "displayNumber": "27",
-      "sectionId": "section-6",
-      "groupId": "section-6-group-1",
+      "sectionId": "section-9",
+      "groupId": "section-9-group-1",
       "prompt": "第 27 题",
       "options": [
         "A. bring",
@@ -3562,11 +3494,11 @@
       "analysis": "21．D    22．A    23．C    24．D    25．B    26．C    27．A    28．C    29．B    30．A\n【导语】本文是Saral写信给Bruce介绍学校里的校规以及学校人员的情况。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-6-section-6-group-1-28",
+      "id": "2024-shaanxi-shaanxi-section-9-section-9-group-1-28",
       "number": 28,
       "displayNumber": "28",
-      "sectionId": "section-6",
-      "groupId": "section-6-group-1",
+      "sectionId": "section-9",
+      "groupId": "section-9-group-1",
       "prompt": "第 28 题",
       "options": [
         "A. hand out",
@@ -3584,11 +3516,11 @@
       "analysis": "21．D    22．A    23．C    24．D    25．B    26．C    27．A    28．C    29．B    30．A\n【导语】本文是Saral写信给Bruce介绍学校里的校规以及学校人员的情况。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-6-section-6-group-1-29",
+      "id": "2024-shaanxi-shaanxi-section-9-section-9-group-1-29",
       "number": 29,
       "displayNumber": "29",
-      "sectionId": "section-6",
-      "groupId": "section-6-group-1",
+      "sectionId": "section-9",
+      "groupId": "section-9-group-1",
       "prompt": "第 29 题",
       "options": [
         "A. money",
@@ -3606,11 +3538,11 @@
       "analysis": "21．D    22．A    23．C    24．D    25．B    26．C    27．A    28．C    29．B    30．A\n【导语】本文是Saral写信给Bruce介绍学校里的校规以及学校人员的情况。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-6-section-6-group-1-30",
+      "id": "2024-shaanxi-shaanxi-section-9-section-9-group-1-30",
       "number": 30,
       "displayNumber": "30",
-      "sectionId": "section-6",
-      "groupId": "section-6-group-1",
+      "sectionId": "section-9",
+      "groupId": "section-9-group-1",
       "prompt": "第 30 题",
       "options": [
         "A. helpful",
@@ -3628,11 +3560,11 @@
       "analysis": "21．D    22．A    23．C    24．D    25．B    26．C    27．A    28．C    29．B    30．A\n【导语】本文是Saral写信给Bruce介绍学校里的校规以及学校人员的情况。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-7-section-7-group-1-31",
+      "id": "2024-shaanxi-shaanxi-section-10-section-10-group-1-31",
       "number": 31,
       "displayNumber": "31",
-      "sectionId": "section-7",
-      "groupId": "section-7-group-1",
+      "sectionId": "section-10",
+      "groupId": "section-10-group-1",
       "prompt": "第 31 题",
       "options": [
         "A. aunt",
@@ -3650,11 +3582,11 @@
       "analysis": "31．C    32．A    33．D    34．D    35．B    36．A    37．C    38．B    39．B    40．C\n【导语】本文是老师写给学生们的一封信，老师在信中表达了自己对即将踏上新征程的学生们的嘱托及殷切期望。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-7-section-7-group-1-32",
+      "id": "2024-shaanxi-shaanxi-section-10-section-10-group-1-32",
       "number": 32,
       "displayNumber": "32",
-      "sectionId": "section-7",
-      "groupId": "section-7-group-1",
+      "sectionId": "section-10",
+      "groupId": "section-10-group-1",
       "prompt": "第 32 题",
       "options": [
         "A. say",
@@ -3672,11 +3604,11 @@
       "analysis": "31．C    32．A    33．D    34．D    35．B    36．A    37．C    38．B    39．B    40．C\n【导语】本文是老师写给学生们的一封信，老师在信中表达了自己对即将踏上新征程的学生们的嘱托及殷切期望。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-7-section-7-group-1-33",
+      "id": "2024-shaanxi-shaanxi-section-10-section-10-group-1-33",
       "number": 33,
       "displayNumber": "33",
-      "sectionId": "section-7",
-      "groupId": "section-7-group-1",
+      "sectionId": "section-10",
+      "groupId": "section-10-group-1",
       "prompt": "第 33 题",
       "options": [
         "A. good for",
@@ -3694,11 +3626,11 @@
       "analysis": "31．C    32．A    33．D    34．D    35．B    36．A    37．C    38．B    39．B    40．C\n【导语】本文是老师写给学生们的一封信，老师在信中表达了自己对即将踏上新征程的学生们的嘱托及殷切期望。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-7-section-7-group-1-34",
+      "id": "2024-shaanxi-shaanxi-section-10-section-10-group-1-34",
       "number": 34,
       "displayNumber": "34",
-      "sectionId": "section-7",
-      "groupId": "section-7-group-1",
+      "sectionId": "section-10",
+      "groupId": "section-10-group-1",
       "prompt": "第 34 题",
       "options": [
         "A. provide",
@@ -3716,11 +3648,11 @@
       "analysis": "31．C    32．A    33．D    34．D    35．B    36．A    37．C    38．B    39．B    40．C\n【导语】本文是老师写给学生们的一封信，老师在信中表达了自己对即将踏上新征程的学生们的嘱托及殷切期望。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-7-section-7-group-1-35",
+      "id": "2024-shaanxi-shaanxi-section-10-section-10-group-1-35",
       "number": 35,
       "displayNumber": "35",
-      "sectionId": "section-7",
-      "groupId": "section-7-group-1",
+      "sectionId": "section-10",
+      "groupId": "section-10-group-1",
       "prompt": "第 35 题",
       "options": [
         "A. sometimes",
@@ -3738,11 +3670,11 @@
       "analysis": "31．C    32．A    33．D    34．D    35．B    36．A    37．C    38．B    39．B    40．C\n【导语】本文是老师写给学生们的一封信，老师在信中表达了自己对即将踏上新征程的学生们的嘱托及殷切期望。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-7-section-7-group-1-36",
+      "id": "2024-shaanxi-shaanxi-section-10-section-10-group-1-36",
       "number": 36,
       "displayNumber": "36",
-      "sectionId": "section-7",
-      "groupId": "section-7-group-1",
+      "sectionId": "section-10",
+      "groupId": "section-10-group-1",
       "prompt": "第 36 题",
       "options": [
         "A. watch",
@@ -3760,11 +3692,11 @@
       "analysis": "31．C    32．A    33．D    34．D    35．B    36．A    37．C    38．B    39．B    40．C\n【导语】本文是老师写给学生们的一封信，老师在信中表达了自己对即将踏上新征程的学生们的嘱托及殷切期望。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-7-section-7-group-1-37",
+      "id": "2024-shaanxi-shaanxi-section-10-section-10-group-1-37",
       "number": 37,
       "displayNumber": "37",
-      "sectionId": "section-7",
-      "groupId": "section-7-group-1",
+      "sectionId": "section-10",
+      "groupId": "section-10-group-1",
       "prompt": "第 37 题",
       "options": [
         "A. movies",
@@ -3782,11 +3714,11 @@
       "analysis": "31．C    32．A    33．D    34．D    35．B    36．A    37．C    38．B    39．B    40．C\n【导语】本文是老师写给学生们的一封信，老师在信中表达了自己对即将踏上新征程的学生们的嘱托及殷切期望。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-7-section-7-group-1-38",
+      "id": "2024-shaanxi-shaanxi-section-10-section-10-group-1-38",
       "number": 38,
       "displayNumber": "38",
-      "sectionId": "section-7",
-      "groupId": "section-7-group-1",
+      "sectionId": "section-10",
+      "groupId": "section-10-group-1",
       "prompt": "第 38 题",
       "options": [
         "A. anything",
@@ -3804,11 +3736,11 @@
       "analysis": "31．C    32．A    33．D    34．D    35．B    36．A    37．C    38．B    39．B    40．C\n【导语】本文是老师写给学生们的一封信，老师在信中表达了自己对即将踏上新征程的学生们的嘱托及殷切期望。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-7-section-7-group-1-39",
+      "id": "2024-shaanxi-shaanxi-section-10-section-10-group-1-39",
       "number": 39,
       "displayNumber": "39",
-      "sectionId": "section-7",
-      "groupId": "section-7-group-1",
+      "sectionId": "section-10",
+      "groupId": "section-10-group-1",
       "prompt": "第 39 题",
       "options": [
         "A. since",
@@ -3826,11 +3758,11 @@
       "analysis": "31．C    32．A    33．D    34．D    35．B    36．A    37．C    38．B    39．B    40．C\n【导语】本文是老师写给学生们的一封信，老师在信中表达了自己对即将踏上新征程的学生们的嘱托及殷切期望。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-7-section-7-group-1-40",
+      "id": "2024-shaanxi-shaanxi-section-10-section-10-group-1-40",
       "number": 40,
       "displayNumber": "40",
-      "sectionId": "section-7",
-      "groupId": "section-7-group-1",
+      "sectionId": "section-10",
+      "groupId": "section-10-group-1",
       "prompt": "第 40 题",
       "options": [
         "A. help",
@@ -3848,11 +3780,11 @@
       "analysis": "31．C    32．A    33．D    34．D    35．B    36．A    37．C    38．B    39．B    40．C\n【导语】本文是老师写给学生们的一封信，老师在信中表达了自己对即将踏上新征程的学生们的嘱托及殷切期望。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-8-section-8-group-1-41",
+      "id": "2024-shaanxi-shaanxi-section-12-section-12-group-1-41",
       "number": 41,
       "displayNumber": "41",
-      "sectionId": "section-8",
-      "groupId": "section-8-group-1",
+      "sectionId": "section-12",
+      "groupId": "section-12-group-1",
       "prompt": "How old is Kate?",
       "options": [
         "A. 4.",
@@ -3870,11 +3802,11 @@
       "analysis": "【导语】本文是Kate写给Rice女士的信，介绍了自己的问题并寻求帮助。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-8-section-8-group-1-42",
+      "id": "2024-shaanxi-shaanxi-section-12-section-12-group-1-42",
       "number": 42,
       "displayNumber": "42",
-      "sectionId": "section-8",
-      "groupId": "section-8-group-1",
+      "sectionId": "section-12",
+      "groupId": "section-12-group-1",
       "prompt": "What did the parents do about Kate’s problem?",
       "options": [
         "A. They did nothing.",
@@ -3892,17 +3824,17 @@
       "analysis": "【导语】本文是Kate写给Rice女士的信，介绍了自己的问题并寻求帮助。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-8-section-8-group-1-43",
+      "id": "2024-shaanxi-shaanxi-section-12-section-12-group-1-43",
       "number": 43,
       "displayNumber": "43",
-      "sectionId": "section-8",
-      "groupId": "section-8-group-1",
+      "sectionId": "section-12",
+      "groupId": "section-12-group-1",
       "prompt": "Why did Kate write the letter?",
       "options": [
         "A. To give advice.",
         "B. To ask for help.",
         "C. To talk about her family.",
-        "D. To says he has a bad brother. B Jackson was walking home from school one afternoon when his untied shoelaces (鞋带) caught his foot. He almost fell. He put down his backpack and tied them. Eva and Dave were riding down the other side of the street. Suddenly, Dave stopped and pointed. “Whoa! Did you see that?” he asked. “Jackson just totally fell down there!” “Oh, no! Is he okay?” asked Eva. “It looks like he hurt his knee.” Just as they were still talking about this, Mandy caught up with them. “What are you guys talking about?” she asked. “Jackson just fell and hurt his knee,” said Eva. “Was he bleeding (流血)?” asked Mandy. The story began to spread. Within an hour, Kevin heard the whole story. “Jackson got hit by a car on his way home. There was blood everywhere, and he was sent to hospital. That night, Oliver got more information. “ ▲  He doesn’t even remember anything about the accident! He won’t be at school for at least four weeks.” The next morning, everybody at school was talking about Jackson. “Lucky Jackson,” Maya said. “He gets to miss so much school.” “The poor guy can’t even move, and you think he’s lucky?” said Kathy. Bob shook his head sadly, “He was so good at soccer—what if he can never play again?” “Maybe we should send him a card or visit him in the hospital,” suggested Bill. “Will he even remember us?” asked Gina. “I can’t believe he lost his memory!” Lisa cried. Just then, Jackson came around the corner and walked over to Gina and Lisa. “Hey guys, what’s going on?” he asked. Everyone stopped talking and stared at him."
+        "D. To says he has a bad brother."
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -3914,11 +3846,11 @@
       "analysis": "【导语】本文是Kate写给Rice女士的信，介绍了自己的问题并寻求帮助。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-8-section-8-group-1-44",
+      "id": "2024-shaanxi-shaanxi-section-12-section-12-group-1-44",
       "number": 44,
       "displayNumber": "44",
-      "sectionId": "section-8",
-      "groupId": "section-8-group-1",
+      "sectionId": "section-12",
+      "groupId": "section-12-group-1",
       "prompt": "What was Jackson doing when he almost fell?",
       "options": [
         "A. Tying his shoelaces.",
@@ -3936,11 +3868,11 @@
       "analysis": "【导语】本文主要讲述了Jackson在放学回家的路上，因为鞋带没有系好差点摔倒，被好心的朋友们误解成被车撞伤送医院，结果他们都很担心。但事实上，Jackson并没有受伤，当大家看到他的时候都感到十分惊讶。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-8-section-8-group-1-45",
+      "id": "2024-shaanxi-shaanxi-section-12-section-12-group-1-45",
       "number": 45,
       "displayNumber": "45",
-      "sectionId": "section-8",
-      "groupId": "section-8-group-1",
+      "sectionId": "section-12",
+      "groupId": "section-12-group-1",
       "prompt": "Which of the following is the best to fill in the “ ▲ ” in the passage?",
       "options": [
         "A. Jackson fell down and hurt his knee.",
@@ -3958,11 +3890,11 @@
       "analysis": "【导语】本文主要讲述了Jackson在放学回家的路上，因为鞋带没有系好差点摔倒，被好心的朋友们误解成被车撞伤送医院，结果他们都很担心。但事实上，Jackson并没有受伤，当大家看到他的时候都感到十分惊讶。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-8-section-8-group-1-46",
+      "id": "2024-shaanxi-shaanxi-section-12-section-12-group-1-46",
       "number": 46,
       "displayNumber": "46",
-      "sectionId": "section-8",
-      "groupId": "section-8-group-1",
+      "sectionId": "section-12",
+      "groupId": "section-12-group-1",
       "prompt": "From the last sentence of the passage, we can infer that everyone was ________.",
       "options": [
         "A. shocked",
@@ -3980,17 +3912,17 @@
       "analysis": "【导语】本文主要讲述了Jackson在放学回家的路上，因为鞋带没有系好差点摔倒，被好心的朋友们误解成被车撞伤送医院，结果他们都很担心。但事实上，Jackson并没有受伤，当大家看到他的时候都感到十分惊讶。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-8-section-8-group-1-47",
+      "id": "2024-shaanxi-shaanxi-section-12-section-12-group-1-47",
       "number": 47,
       "displayNumber": "47",
-      "sectionId": "section-8",
-      "groupId": "section-8-group-1",
+      "sectionId": "section-12",
+      "groupId": "section-12-group-1",
       "prompt": "The best title for the passage can probably be ________.",
       "options": [
         "A. A Funny Friend",
         "B. He Said, She Said",
         "C. A Terrible Accident",
-        "D. He Hurt, She Cared C Bicycles have long been a kind of transport in China. In the past, only a small group of people thought cycling a sport. Now more and more people discover the joy of it. ________ Riders share their favourite routes and health tips about cycling on some apps like Xiaohongshu or Sina Weibo. On Xiaohongshu, there are more than 2.5 million posts (帖子) about cycling, and on Weibo, the topic about cycling has been viewed more than 700 million times. A bicycle company says the sales in one of its stores rose 20% to 30%, compared to the same period a year earlier. Cycling activities are also welcomed. According to the Chinese Cycling Association, at least 20 million people have joined in the sport. People turn to cycling as more people care about their health and their demand for outdoor exercise becomes stronger. For people who have begun cycling, the sport seems to provide a good way to run away from the busy city life. It also gives them a stronger sense of being part of the natural environment. Though the sport cycling sometimes costs a lot, many cyclists think spending money on their own bodies is more valuable than on other items. More people take part in cycling as cities in China are also planning to build more cycle-only lanes (车道). Several years ago, Beijing started building the city’s first cycle-only lane. Since its opening, the lane has seen a larger daily traffic flow. Such lanes are also being built in some other cities."
+        "D. He Hurt, She Cared"
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -4002,11 +3934,11 @@
       "analysis": "【导语】本文主要讲述了Jackson在放学回家的路上，因为鞋带没有系好差点摔倒，被好心的朋友们误解成被车撞伤送医院，结果他们都很担心。但事实上，Jackson并没有受伤，当大家看到他的时候都感到十分惊讶。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-8-section-8-group-1-48",
+      "id": "2024-shaanxi-shaanxi-section-12-section-12-group-1-48",
       "number": 48,
       "displayNumber": "48",
-      "sectionId": "section-8",
-      "groupId": "section-8-group-1",
+      "sectionId": "section-12",
+      "groupId": "section-12-group-1",
       "prompt": "Which of the following sentences is the most suitable for the blank (空格) in Paragraph 2?",
       "options": [
         "A. Cycling has a long history.",
@@ -4024,11 +3956,11 @@
       "analysis": "【导语】本文主要介绍了随着越来越多的人关心自己的健康，他们对户外运动的需求也越来越强烈，人们开始骑自行车，骑自行车变得越来越受欢迎。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-8-section-8-group-1-49",
+      "id": "2024-shaanxi-shaanxi-section-12-section-12-group-1-49",
       "number": 49,
       "displayNumber": "49",
-      "sectionId": "section-8",
-      "groupId": "section-8-group-1",
+      "sectionId": "section-12",
+      "groupId": "section-12-group-1",
       "prompt": "The underlined word “demand” in Paragraph 3 means ________.",
       "options": [
         "A. need",
@@ -4046,11 +3978,11 @@
       "analysis": "【导语】本文主要介绍了随着越来越多的人关心自己的健康，他们对户外运动的需求也越来越强烈，人们开始骑自行车，骑自行车变得越来越受欢迎。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-8-section-8-group-1-50",
+      "id": "2024-shaanxi-shaanxi-section-12-section-12-group-1-50",
       "number": 50,
       "displayNumber": "50",
-      "sectionId": "section-8",
-      "groupId": "section-8-group-1",
+      "sectionId": "section-12",
+      "groupId": "section-12-group-1",
       "prompt": "What’s the purpose of this passage?",
       "options": [
         "A. It advises cities to build cycling lanes.",
@@ -4068,11 +4000,11 @@
       "analysis": "【导语】本文主要介绍了随着越来越多的人关心自己的健康，他们对户外运动的需求也越来越强烈，人们开始骑自行车，骑自行车变得越来越受欢迎。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-9-section-9-group-1-51",
+      "id": "2024-shaanxi-shaanxi-section-13-section-13-group-1-51",
       "number": 51,
       "displayNumber": "51",
-      "sectionId": "section-9",
-      "groupId": "section-9-group-1",
+      "sectionId": "section-13",
+      "groupId": "section-13-group-1",
       "prompt": "Imagine a holiday to the moon? Sounds crazy? Not really. A Japanese company has been working on how to organize holidays to the moon for several years now. ______",
       "options": [],
       "inputKind": "blank",
@@ -4085,11 +4017,11 @@
       "analysis": "【导语】本文介绍一家日本公司致力于到月球旅行的项目，并介绍该项目的相关信息。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-9-section-9-group-1-52",
+      "id": "2024-shaanxi-shaanxi-section-13-section-13-group-1-52",
       "number": 52,
       "displayNumber": "52",
-      "sectionId": "section-9",
-      "groupId": "section-9-group-1",
+      "sectionId": "section-13",
+      "groupId": "section-13-group-1",
       "prompt": "Trying to make the holiday possible will not be an easy task, and the Japanese company plans to make it in stages. ______     A transport system, like the space shuttle (航天飞机) used by NASA, at the moment is likely to be developed for this purpose.",
       "options": [],
       "inputKind": "blank",
@@ -4102,11 +4034,11 @@
       "analysis": "【导语】本文介绍一家日本公司致力于到月球旅行的项目，并介绍该项目的相关信息。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-9-section-9-group-1-53",
+      "id": "2024-shaanxi-shaanxi-section-13-section-13-group-1-53",
       "number": 53,
       "displayNumber": "53",
-      "sectionId": "section-9",
-      "groupId": "section-9-group-1",
+      "sectionId": "section-13",
+      "groupId": "section-13-group-1",
       "prompt": "The next stage is to build a big hotel orbiting 500 km above the earth. The hotel will orbit the earth once every four or five hours, which will offer visitors some fascinating views of the earth. ______     While this may not seem very exciting at first, think about new sports that can be designed for people to play in zero gravity.",
       "options": [],
       "inputKind": "blank",
@@ -4119,11 +4051,11 @@
       "analysis": "【导语】本文介绍一家日本公司致力于到月球旅行的项目，并介绍该项目的相关信息。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-9-section-9-group-1-54",
+      "id": "2024-shaanxi-shaanxi-section-13-section-13-group-1-54",
       "number": 54,
       "displayNumber": "54",
-      "sectionId": "section-9",
-      "groupId": "section-9-group-1",
+      "sectionId": "section-13",
+      "groupId": "section-13-group-1",
       "prompt": "The final stage in the plan is the construction of a hotel on the surface of the moon itself. As solar energy would be used to provide power, it would be important to build the hotel near one of the poles of the moon in order to gather as much solar energy as possible. ______     It is also important to find a part of the moon which is flat, as a long runway will need to be built for the space shuttle to land on. Meanwhile, the company has already developed ways to make cement (水泥) on the moon.    55    The company plans to produce water from oxygen elements, which can be found in moon rocks, and hydrogen (氢), which will have to be imported from earth.",
       "options": [],
       "inputKind": "blank",
@@ -4136,11 +4068,11 @@
       "analysis": "【导语】本文介绍一家日本公司致力于到月球旅行的项目，并介绍该项目的相关信息。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-9-section-9-group-1-55",
+      "id": "2024-shaanxi-shaanxi-section-13-section-13-group-1-55",
       "number": 55,
       "displayNumber": "55",
-      "sectionId": "section-9",
-      "groupId": "section-9-group-1",
+      "sectionId": "section-13",
+      "groupId": "section-13-group-1",
       "prompt": "The final stage in the plan is the construction of a hotel on the surface of the moon itself. As solar energy would be used to provide power, it would be important to build the hotel near one of the poles of the moon in order to gather as much solar energy as possible.    54    It is also important to find a part of the moon which is flat, as a long runway will need to be built for the space shuttle to land on. Meanwhile, the company has already developed ways to make cement (水泥) on the moon. ______     The company plans to produce water from oxygen elements, which can be found in moon rocks, and hydrogen (氢), which will have to be imported from earth.",
       "options": [],
       "inputKind": "blank",
@@ -4153,11 +4085,11 @@
       "analysis": "【导语】本文介绍一家日本公司致力于到月球旅行的项目，并介绍该项目的相关信息。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-9-section-9-group-1-56",
+      "id": "2024-shaanxi-shaanxi-section-14-section-14-group-1-56",
       "number": 56,
       "displayNumber": "56",
-      "sectionId": "section-9",
-      "groupId": "section-9-group-1",
+      "sectionId": "section-14",
+      "groupId": "section-14-group-1",
       "prompt": "我认为Amy和她的大多数同学都不一样。 I think Amy is          most of her classmates.",
       "options": [],
       "inputKind": "text",
@@ -4170,11 +4102,11 @@
       "analysis": "【详解】根据中英文对照可知，此处是固定短语be different from“和……不同”，故填different from。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-9-section-9-group-1-57",
+      "id": "2024-shaanxi-shaanxi-section-14-section-14-group-1-57",
       "number": 57,
       "displayNumber": "57",
-      "sectionId": "section-9",
-      "groupId": "section-9-group-1",
+      "sectionId": "section-14",
+      "groupId": "section-14-group-1",
       "prompt": "多亏了这片森林，野生动物数量增加了很多。 the forest, the number of the wild animals has increased a lot.",
       "options": [],
       "inputKind": "text",
@@ -4187,11 +4119,11 @@
       "analysis": "【详解】根据英汉对照可知，需要补充内容“多亏了”，thanks to“多亏了”，句首首字母大写。故填Thanks to。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-9-section-9-group-1-58",
+      "id": "2024-shaanxi-shaanxi-section-14-section-14-group-1-58",
       "number": 58,
       "displayNumber": "58",
-      "sectionId": "section-9",
-      "groupId": "section-9-group-1",
+      "sectionId": "section-14",
+      "groupId": "section-14-group-1",
       "prompt": "在家里我总是感到孤独和焦虑。 At home, I always          and nervous.",
       "options": [],
       "inputKind": "text",
@@ -4204,11 +4136,11 @@
       "analysis": "【详解】根据语境可知，时态为一般现在时，主语为I，动词用原形；feel lonely表示“感到孤独”，感官动词feel后接形容词，表示“感到……”，lonely“孤独的”，形容词。故填feel lonely。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-9-section-9-group-1-59",
+      "id": "2024-shaanxi-shaanxi-section-14-section-14-group-1-59",
       "number": 59,
       "displayNumber": "59",
-      "sectionId": "section-9",
-      "groupId": "section-9-group-1",
+      "sectionId": "section-14",
+      "groupId": "section-14-group-1",
       "prompt": "出于安全考虑，司机驾驶时必须避免抽烟。 For safety, drivers must                  while driving.",
       "options": [],
       "inputKind": "text",
@@ -4221,11 +4153,11 @@
       "analysis": "【详解】smoke“抽烟”，动词；avoid doing sth.“避免做某事”，空前单词must是情态动词，所以动词avoid用原形。故填avoid smoking。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-9-section-9-group-1-60",
+      "id": "2024-shaanxi-shaanxi-section-14-section-14-group-1-60",
       "number": 60,
       "displayNumber": "60",
-      "sectionId": "section-9",
-      "groupId": "section-9-group-1",
+      "sectionId": "section-14",
+      "groupId": "section-14-group-1",
       "prompt": "对于你来说将今天应该做的事情推迟到明天不是个好习惯。 It’s not a good habit for you to         what should be done today until tomorrow.",
       "options": [],
       "inputKind": "text",
@@ -4238,11 +4170,11 @@
       "analysis": "【详解】根据句意，空格处表示“推迟”，用固定短语put off。本句采用固定句型“It’s ... for sb. to do sth.”表示“对某人来说做某事是……的”。to后面要接动词原形，构成动词不定式。故填put off。\nⅥ. 短文填空:（共10小题, 计10分）\n用方框中所给单词的适当形式填空，使短文完整正确。（每个单词限用一次，每空限填一个单词。）\nWorrying about his farm, his health and his family, a farmer was always afraid, angry and upset. Sometimes he treated his family     61     though they didn’t make mistakes.\nOne morning, when the farmer was working in his yard, he suddenly     62     a box of gold. He was shocked by his good luck. He wondered     63     he would do or buy with his new wealth. At last, he decided to bury (埋藏) the gold again and save it. He told nobody     64     the thing. He thought the gold would be     65     in hard times. However, he never dug it up.\nKnowing the gold was there, the farmer was no longer worried or angry. He was kind to his family. He even began to help his     66    . His change made the whole village     67     surprised. From then on, he got on with others and lived a happy life."
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-11-section-11-group-1-61",
+      "id": "2024-shaanxi-shaanxi-section-16-section-16-group-1-61",
       "number": 61,
       "displayNumber": "61",
-      "sectionId": "section-11",
-      "groupId": "section-11-group-1",
+      "sectionId": "section-16",
+      "groupId": "section-16-group-1",
       "prompt": "Worrying about his farm, his health and his family, a farmer was always afraid, angry and upset. Sometimes he treated his family  ______ though they didn’t make mistakes.",
       "options": [],
       "inputKind": "blank",
@@ -4255,11 +4187,11 @@
       "analysis": "61．badly    62．found    63．what    64．about    65．helpful    66．neighbors    67．feel    68．Before    69．empty    70．stolen\n【导语】本文主要讲述了一个农民因为担心自己的农场、健康、家人，一直害怕、生气，一天早上，他发现了一盒金子，他把金子藏起来后，他不再担心和生气，开始帮助别人，过着幸福的生活。在他去世之前，他把秘密告诉了儿子，但是当儿子去挖盒子时，发现金子被偷走了。这个故事告诉我们：真正的财富不是埋在院子里的金子，而是埋在他内心深处的金子。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-11-section-11-group-1-62",
+      "id": "2024-shaanxi-shaanxi-section-16-section-16-group-1-62",
       "number": 62,
       "displayNumber": "62",
-      "sectionId": "section-11",
-      "groupId": "section-11-group-1",
+      "sectionId": "section-16",
+      "groupId": "section-16-group-1",
       "prompt": "One morning, when the farmer was working in his yard, he suddenly  ______ a box of gold. He was shocked by his good luck. He wondered     63     he would do or buy with his new wealth. At last, he decided to bury (埋藏) the gold again and save it. He told nobody     64     the thing. He thought the gold would be     65     in hard times. However, he never dug it up.",
       "options": [],
       "inputKind": "blank",
@@ -4272,11 +4204,11 @@
       "analysis": "61．badly    62．found    63．what    64．about    65．helpful    66．neighbors    67．feel    68．Before    69．empty    70．stolen\n【导语】本文主要讲述了一个农民因为担心自己的农场、健康、家人，一直害怕、生气，一天早上，他发现了一盒金子，他把金子藏起来后，他不再担心和生气，开始帮助别人，过着幸福的生活。在他去世之前，他把秘密告诉了儿子，但是当儿子去挖盒子时，发现金子被偷走了。这个故事告诉我们：真正的财富不是埋在院子里的金子，而是埋在他内心深处的金子。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-11-section-11-group-1-63",
+      "id": "2024-shaanxi-shaanxi-section-16-section-16-group-1-63",
       "number": 63,
       "displayNumber": "63",
-      "sectionId": "section-11",
-      "groupId": "section-11-group-1",
+      "sectionId": "section-16",
+      "groupId": "section-16-group-1",
       "prompt": "One morning, when the farmer was working in his yard, he suddenly     62     a box of gold. He was shocked by his good luck. He wondered  ______ he would do or buy with his new wealth. At last, he decided to bury (埋藏) the gold again and save it. He told nobody     64     the thing. He thought the gold would be     65     in hard times. However, he never dug it up.",
       "options": [],
       "inputKind": "blank",
@@ -4289,11 +4221,11 @@
       "analysis": "61．badly    62．found    63．what    64．about    65．helpful    66．neighbors    67．feel    68．Before    69．empty    70．stolen\n【导语】本文主要讲述了一个农民因为担心自己的农场、健康、家人，一直害怕、生气，一天早上，他发现了一盒金子，他把金子藏起来后，他不再担心和生气，开始帮助别人，过着幸福的生活。在他去世之前，他把秘密告诉了儿子，但是当儿子去挖盒子时，发现金子被偷走了。这个故事告诉我们：真正的财富不是埋在院子里的金子，而是埋在他内心深处的金子。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-11-section-11-group-1-64",
+      "id": "2024-shaanxi-shaanxi-section-16-section-16-group-1-64",
       "number": 64,
       "displayNumber": "64",
-      "sectionId": "section-11",
-      "groupId": "section-11-group-1",
+      "sectionId": "section-16",
+      "groupId": "section-16-group-1",
       "prompt": "One morning, when the farmer was working in his yard, he suddenly     62     a box of gold. He was shocked by his good luck. He wondered     63     he would do or buy with his new wealth. At last, he decided to bury (埋藏) the gold again and save it. He told nobody  ______ the thing. He thought the gold would be     65     in hard times. However, he never dug it up.",
       "options": [],
       "inputKind": "blank",
@@ -4306,11 +4238,11 @@
       "analysis": "61．badly    62．found    63．what    64．about    65．helpful    66．neighbors    67．feel    68．Before    69．empty    70．stolen\n【导语】本文主要讲述了一个农民因为担心自己的农场、健康、家人，一直害怕、生气，一天早上，他发现了一盒金子，他把金子藏起来后，他不再担心和生气，开始帮助别人，过着幸福的生活。在他去世之前，他把秘密告诉了儿子，但是当儿子去挖盒子时，发现金子被偷走了。这个故事告诉我们：真正的财富不是埋在院子里的金子，而是埋在他内心深处的金子。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-11-section-11-group-1-65",
+      "id": "2024-shaanxi-shaanxi-section-16-section-16-group-1-65",
       "number": 65,
       "displayNumber": "65",
-      "sectionId": "section-11",
-      "groupId": "section-11-group-1",
+      "sectionId": "section-16",
+      "groupId": "section-16-group-1",
       "prompt": "One morning, when the farmer was working in his yard, he suddenly     62     a box of gold. He was shocked by his good luck. He wondered     63     he would do or buy with his new wealth. At last, he decided to bury (埋藏) the gold again and save it. He told nobody     64     the thing. He thought the gold would be  ______ in hard times. However, he never dug it up.",
       "options": [],
       "inputKind": "blank",
@@ -4323,11 +4255,11 @@
       "analysis": "61．badly    62．found    63．what    64．about    65．helpful    66．neighbors    67．feel    68．Before    69．empty    70．stolen\n【导语】本文主要讲述了一个农民因为担心自己的农场、健康、家人，一直害怕、生气，一天早上，他发现了一盒金子，他把金子藏起来后，他不再担心和生气，开始帮助别人，过着幸福的生活。在他去世之前，他把秘密告诉了儿子，但是当儿子去挖盒子时，发现金子被偷走了。这个故事告诉我们：真正的财富不是埋在院子里的金子，而是埋在他内心深处的金子。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-11-section-11-group-1-66",
+      "id": "2024-shaanxi-shaanxi-section-16-section-16-group-1-66",
       "number": 66,
       "displayNumber": "66",
-      "sectionId": "section-11",
-      "groupId": "section-11-group-1",
+      "sectionId": "section-16",
+      "groupId": "section-16-group-1",
       "prompt": "Knowing the gold was there, the farmer was no longer worried or angry. He was kind to his family. He even began to help his  ______ . His change made the whole village     67     surprised. From then on, he got on with others and lived a happy life.",
       "options": [],
       "inputKind": "blank",
@@ -4340,11 +4272,11 @@
       "analysis": "61．badly    62．found    63．what    64．about    65．helpful    66．neighbors    67．feel    68．Before    69．empty    70．stolen\n【导语】本文主要讲述了一个农民因为担心自己的农场、健康、家人，一直害怕、生气，一天早上，他发现了一盒金子，他把金子藏起来后，他不再担心和生气，开始帮助别人，过着幸福的生活。在他去世之前，他把秘密告诉了儿子，但是当儿子去挖盒子时，发现金子被偷走了。这个故事告诉我们：真正的财富不是埋在院子里的金子，而是埋在他内心深处的金子。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-11-section-11-group-1-67",
+      "id": "2024-shaanxi-shaanxi-section-16-section-16-group-1-67",
       "number": 67,
       "displayNumber": "67",
-      "sectionId": "section-11",
-      "groupId": "section-11-group-1",
+      "sectionId": "section-16",
+      "groupId": "section-16-group-1",
       "prompt": "Knowing the gold was there, the farmer was no longer worried or angry. He was kind to his family. He even began to help his     66    . His change made the whole village  ______ surprised. From then on, he got on with others and lived a happy life.",
       "options": [],
       "inputKind": "blank",
@@ -4357,11 +4289,11 @@
       "analysis": "61．badly    62．found    63．what    64．about    65．helpful    66．neighbors    67．feel    68．Before    69．empty    70．stolen\n【导语】本文主要讲述了一个农民因为担心自己的农场、健康、家人，一直害怕、生气，一天早上，他发现了一盒金子，他把金子藏起来后，他不再担心和生气，开始帮助别人，过着幸福的生活。在他去世之前，他把秘密告诉了儿子，但是当儿子去挖盒子时，发现金子被偷走了。这个故事告诉我们：真正的财富不是埋在院子里的金子，而是埋在他内心深处的金子。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-11-section-11-group-1-68",
+      "id": "2024-shaanxi-shaanxi-section-16-section-16-group-1-68",
       "number": 69,
       "displayNumber": "69",
-      "sectionId": "section-11",
-      "groupId": "section-11-group-1",
+      "sectionId": "section-16",
+      "groupId": "section-16-group-1",
       "prompt": "68     the farmer died, he told his sons about the secret. His sons went out to the yard to dig up the gold. When they found the box, though, it was  ______ . In fact, someone had already discovered it and     70     the gold.",
       "options": [],
       "inputKind": "blank",
@@ -4374,11 +4306,11 @@
       "analysis": "61．badly    62．found    63．what    64．about    65．helpful    66．neighbors    67．feel    68．Before    69．empty    70．stolen\n【导语】本文主要讲述了一个农民因为担心自己的农场、健康、家人，一直害怕、生气，一天早上，他发现了一盒金子，他把金子藏起来后，他不再担心和生气，开始帮助别人，过着幸福的生活。在他去世之前，他把秘密告诉了儿子，但是当儿子去挖盒子时，发现金子被偷走了。这个故事告诉我们：真正的财富不是埋在院子里的金子，而是埋在他内心深处的金子。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-11-section-11-group-1-69",
+      "id": "2024-shaanxi-shaanxi-section-16-section-16-group-1-69",
       "number": 70,
       "displayNumber": "70",
-      "sectionId": "section-11",
-      "groupId": "section-11-group-1",
+      "sectionId": "section-16",
+      "groupId": "section-16-group-1",
       "prompt": "68     the farmer died, he told his sons about the secret. His sons went out to the yard to dig up the gold. When they found the box, though, it was     69    . In fact, someone had already discovered it and  ______ the gold.",
       "options": [],
       "inputKind": "blank",
@@ -4391,11 +4323,11 @@
       "analysis": "61．badly    62．found    63．what    64．about    65．helpful    66．neighbors    67．feel    68．Before    69．empty    70．stolen\n【导语】本文主要讲述了一个农民因为担心自己的农场、健康、家人，一直害怕、生气，一天早上，他发现了一盒金子，他把金子藏起来后，他不再担心和生气，开始帮助别人，过着幸福的生活。在他去世之前，他把秘密告诉了儿子，但是当儿子去挖盒子时，发现金子被偷走了。这个故事告诉我们：真正的财富不是埋在院子里的金子，而是埋在他内心深处的金子。"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-13-section-13-group-1-70",
+      "id": "2024-shaanxi-shaanxi-section-18-section-18-group-1-70",
       "number": 71,
       "displayNumber": "71",
-      "sectionId": "section-13",
-      "groupId": "section-13-group-1",
+      "sectionId": "section-18",
+      "groupId": "section-18-group-1",
       "prompt": "How do the two actors in the “Secret Box from the Tang Dynasty” play games with tourists? They play games by                     .",
       "options": [],
       "inputKind": "text",
@@ -4408,11 +4340,11 @@
       "analysis": "71．asking questions to tourists in question-and-answer games\ninteraction\nSome daily things\nfour/4"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-13-section-13-group-1-71",
+      "id": "2024-shaanxi-shaanxi-section-18-section-18-group-1-71",
       "number": 72,
       "displayNumber": "72",
-      "sectionId": "section-13",
-      "groupId": "section-13-group-1",
+      "sectionId": "section-18",
+      "groupId": "section-18-group-1",
       "prompt": "Which word means “互动” in the passage? It is                 .",
       "options": [],
       "inputKind": "text",
@@ -4425,11 +4357,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-13-section-13-group-1-72",
+      "id": "2024-shaanxi-shaanxi-section-18-section-18-group-1-72",
       "number": 73,
       "displayNumber": "73",
-      "sectionId": "section-13",
-      "groupId": "section-13-group-1",
+      "sectionId": "section-18",
+      "groupId": "section-18-group-1",
       "prompt": "What prizes will tourists get if they pass the test? like notebooks or pens will be given to the winners.",
       "options": [],
       "inputKind": "text",
@@ -4442,11 +4374,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-13-section-13-group-1-73",
+      "id": "2024-shaanxi-shaanxi-section-18-section-18-group-1-73",
       "number": 74,
       "displayNumber": "74",
-      "sectionId": "section-13",
-      "groupId": "section-13-group-1",
+      "sectionId": "section-18",
+      "groupId": "section-18-group-1",
       "prompt": "How many performances does the “Secret Box from the Tang Dynasty” have each night? There are             performances each night at the Xi’an Datang Night City.",
       "options": [],
       "inputKind": "text",
@@ -4459,28 +4391,28 @@
       "analysis": ""
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-13-section-13-group-1-74",
+      "id": "2024-shaanxi-shaanxi-section-18-section-18-group-1-74",
       "number": 75,
       "displayNumber": "75",
-      "sectionId": "section-13",
-      "groupId": "section-13-group-1",
-      "prompt": "From the fourth paragraph, how do you like Wang Ze? He is                     . VIII. 补全对话（共5小题, 计5分） 根据下面对话中的情境，在每个空白处填入一个适当的语句，使对话恢复完整。 A: Hello, I’m the reporter from the school newspaper. I know you are going to leave school. Can I ask you some questions?",
+      "sectionId": "section-18",
+      "groupId": "section-18-group-1",
+      "prompt": "From the fourth paragraph, how do you like Wang Ze? He is                     .",
       "options": [],
-      "inputKind": "blank",
+      "inputKind": "text",
       "sourceBlockIds": [
         "paragraph-202"
       ],
-      "type": "blank",
+      "type": "text",
       "context": "",
       "answer": "",
       "analysis": ""
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-13-section-13-group-1-75",
+      "id": "2024-shaanxi-shaanxi-section-19-section-19-group-1-75",
       "number": 76,
       "displayNumber": "76",
-      "sectionId": "section-13",
-      "groupId": "section-13-group-1",
+      "sectionId": "section-19",
+      "groupId": "section-19-group-1",
       "prompt": "B: ______     .",
       "options": [],
       "inputKind": "blank",
@@ -4493,11 +4425,11 @@
       "analysis": "76．Sure/OK/Of course\nWhat are you going to do before you leave school/What are you going to do before leaving school    78．Which teacher do you like best/Who is your favorite teacher\nWhat is she like"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-13-section-13-group-1-76",
+      "id": "2024-shaanxi-shaanxi-section-19-section-19-group-1-76",
       "number": 77,
       "displayNumber": "77",
-      "sectionId": "section-13",
-      "groupId": "section-13-group-1",
+      "sectionId": "section-19",
+      "groupId": "section-19-group-1",
       "prompt": "A: That’s true. ______     ?",
       "options": [],
       "inputKind": "blank",
@@ -4510,11 +4442,11 @@
       "analysis": "One Thing I Keep Doing\nI am very happy to be here to make a speech today. The topic is “One Thing I Keep Doing”.\nI love running and I have kept running for six years. When I was nine years old, I was often ill. So I made up my mind to run to keep healthy. At first, I was not good at sports and running was always my weakness. But my father encouraged me all the time. With his help, I kept running every day after school. Sometimes I was so tired that I really wanted to give up. But I kept telling myself that I could make it. No matter what kind of difficulty I faced, I tried my best to keep running. Now I do much better in running. I’m very healthy. I’m very proud of myself and I’m ready for any challenge in the future.\nThat’s all. Thank you for listening.\n【详解】[总体分析]\n① 题材：本文是一篇给材料的讲稿作文；\n② 时态：时态为“一般过去时”；\n③ 提示：根据所给提示完成写作，注意标点符号及大小写等问题，不要犯语法错误。注意上下文之间的逻辑关系，语意连贯。\n[写作步骤]\n第一步，介绍自己演讲的主题（题目已给出）；\n第二步，具体介绍自己坚持做的事情，并介绍过去与现在的情况，进行对比；\n第三步，最后结束演讲（题目已给出）。\n[亮点词汇]\n① make up one’s mind to do sth下定决心做某事\n② give up放弃\n③ try one’s best to do sth尽最大努力做某事\n[高分句型]\n① No matter what kind of difficulty I faced, I tried my best to keep running.（让步状语从句）\n② When I was nine years old, I was often ill.（时间状语从句）"
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-13-section-13-group-1-77",
+      "id": "2024-shaanxi-shaanxi-section-19-section-19-group-1-77",
       "number": 78,
       "displayNumber": "78",
-      "sectionId": "section-13",
-      "groupId": "section-13-group-1",
+      "sectionId": "section-19",
+      "groupId": "section-19-group-1",
       "prompt": "A: That sounds great! ______     ?",
       "options": [],
       "inputKind": "blank",
@@ -4527,11 +4459,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-13-section-13-group-1-78",
+      "id": "2024-shaanxi-shaanxi-section-19-section-19-group-1-78",
       "number": 79,
       "displayNumber": "79",
-      "sectionId": "section-13",
-      "groupId": "section-13-group-1",
+      "sectionId": "section-19",
+      "groupId": "section-19-group-1",
       "prompt": "A: ______     ?",
       "options": [],
       "inputKind": "blank",
@@ -4544,11 +4476,11 @@
       "analysis": ""
     },
     {
-      "id": "2024-shaanxi-shaanxi-section-13-section-13-group-1-79",
+      "id": "2024-shaanxi-shaanxi-section-19-section-19-group-1-79",
       "number": 80,
       "displayNumber": "80",
-      "sectionId": "section-13",
-      "groupId": "section-13-group-1",
+      "sectionId": "section-19",
+      "groupId": "section-19-group-1",
       "prompt": "B: ______     .",
       "options": [],
       "inputKind": "blank",

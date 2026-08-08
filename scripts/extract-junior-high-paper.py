@@ -14,9 +14,15 @@ from xml.etree import ElementTree as ET
 
 NS = {"w": "http://schemas.openxmlformats.org/wordprocessingml/2006/main"}
 RELS_NS = {"pr": "http://schemas.openxmlformats.org/package/2006/relationships"}
-SECTION_HEADING = re.compile(r"^\s*(?:[一二三四五六七八九十]+[、.．]|第[一二三四五六七八九十]+部分|Part\s*\d+|[ⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩ]+[.．])")
+SECTION_HEADING = re.compile(r"^\s*(?:[一二三四五六七八九十]+[、.．]|第[一二三四五六七八九十]+部分|第[一二三四五六七八九十\d]+节|[IVX]+[.．、)]|Part\s*\d+|[ⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩ]+[.．])")
 QUESTION = re.compile(r"^\s*(\d{1,3})\s*(?:[．.、:：)）]\s*|\s+)(.*)$")
-OPTION_MARKER = re.compile(r"([A-D])[．.、)]\s*")
+OPTION_MARKER = re.compile(r"([A-G])[．.、)]\s*")
+OPTION_TAIL_BOUNDARY = re.compile(
+    r"\s+(?=(?:[一二三四五六七八九十]+[、.．]|第[一二三四五六七八九十\d]+节|[IVX]+[.．、)]|"
+    r"[（(][一二三四五六七八九十\d]+[）)]|[A-GＡ-Ｇ][.．、:：)）]\s*(?:在|听|请|根据|从|阅读|选择|完成|补全|填写|填空|注意|第)|"
+    r"[A-GＡ-Ｇ]卷|"
+    r"听下面|听下列|请听|听材料|听一段|根据材料|根据短文|阅读下面|请阅读下面|从题中所给|从每小题所给|补全对话|第[一二三四五六七八九十IVX]+卷|注意：|将答案))"
+)
 AUDIO_EXTENSIONS = {".mp3", ".wav", ".m4a", ".mp4", ".flac", ".aac", ".ogg"}
 DIRECT_MEDIA_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp", ".gif", ".svg"}
 CONVERTIBLE_MEDIA_EXTENSIONS = {".wmf", ".emf"}
@@ -110,6 +116,10 @@ def read_docx(path: Path) -> tuple[list[str], list[str]]:
 
 
 def split_options(text: str) -> tuple[str, list[str]]:
+    initial_matches = list(OPTION_MARKER.finditer(text))
+    first_boundary = OPTION_TAIL_BOUNDARY.search(text, initial_matches[0].end() if initial_matches else 0)
+    if first_boundary:
+        text = text[:first_boundary.start()].rstrip()
     matches = list(OPTION_MARKER.finditer(text))
     if len(matches) < 2:
         return text.strip(), []
@@ -128,6 +138,11 @@ INSTRUCTION_MARKERS = (
     "答卷前", "作答选择题", "每题选出答案", "请务必", "请根据所听", "从每小题所给",
 )
 GROUP_KEYWORDS = ("听力", "听说", "单项", "语法", "完形", "阅读", "任务型", "短文", "写作", "作文", "书面表达", "文段表达")
+QUESTION_BOUNDARY_PREFIXES = (
+    "听下面", "听下列", "请听", "听材料", "每段对话", "每个问题后", "从题中所给", "从每小题所给",
+    "从短文后", "根据材料内容", "根据短文内容", "阅读下面", "请阅读下面", "仔细阅读", "从以下各题",
+    "听一段", "听对话", "听短文", "回答下面", "补全对话", "注意：", "将答案",
+)
 BLANK_MARKER = re.compile(r"_{2,}|…{2,}|（\s*）|\(\s*\)|空格|填空|填写|填入|信息转换|首字母")
 TABLE_BLANK = re.compile(r"(?<=\s)(\d{1,3})(?=\s{2,})")
 INLINE_PLACEHOLDER_PATTERNS = (
@@ -146,14 +161,21 @@ def _is_section_heading(text: str) -> bool:
         return True
     if text in {"A．B．C．", "A. B. C.", "A    B    C"} or len(OPTION_MARKER.findall(text)) >= 2:
         return False
-    if re.match(r"^[A-E][.．、)]\s*", text) and len(text) > 4:
-        heading_text = re.sub(r"^[A-E][.．、)]\s*", "", text, count=1)
+    if re.match(r"^[A-G][.．、)]\s*", text) and len(text) > 4:
+        heading_text = re.sub(r"^[A-G][.．、)]\s*", "", text, count=1)
         return any(keyword in heading_text for keyword in GROUP_KEYWORDS) or heading_text.lower().startswith(("listen", "reading", "writing", "part"))
     return any(keyword in text for keyword in GROUP_KEYWORDS) and len(text) < 100
 
 
 def _looks_like_instruction(text: str) -> bool:
-    return any(marker in text for marker in INSTRUCTION_MARKERS)
+    cleaned = text.strip()
+    if any(marker in cleaned for marker in INSTRUCTION_MARKERS):
+        return True
+    if re.search(r"(?:本题|本节|本部分|本大题)共\s*[一二三四五六七八九十\d]+\s*小题", cleaned):
+        return True
+    if re.search(r"每小题\s*\d*\s*分|选择题，满分|听力（共|听力\(共|在录音中|第[一二三四五六七八九十IVX]+卷", cleaned):
+        return True
+    return False
 
 
 def _group_heading(text: str) -> bool:
@@ -162,7 +184,44 @@ def _group_heading(text: str) -> bool:
         return False
     if _is_section_heading(text):
         return True
-    return bool(re.match(r"^[A-E][.．、)]\s+", text))
+    return bool(re.match(r"^[A-G][.．、)]\s+", text))
+
+
+def _is_passage_label(text: str) -> bool:
+    return bool(re.fullmatch(r"[A-GＡ-Ｇ]", text.strip()))
+
+
+def _is_option_line(text: str) -> bool:
+    return bool(re.match(r"^\s*[A-GＡ-Ｇ]\s*[．.、:：)]\s*\S+", text))
+
+
+def _is_question_text_boundary(text: str) -> bool:
+    """Return whether a block starts a new instruction, group, or passage.
+
+    Question text is assembled from consecutive DOCX paragraphs.  A paper often
+    puts the next group's instructions or a passage label between two numbered
+    questions, so those blocks must terminate the current question instead of
+    being swallowed into its options.
+    """
+    cleaned = text.strip()
+    if not cleaned:
+        return False
+    if cleaned.startswith("【此处可播放相关音频"):
+        return True
+    if _is_passage_label(cleaned) or _is_section_heading(cleaned) or re.match(r"^第[一二三四五六七八九十\d]+节", cleaned):
+        return True
+    stripped_heading = re.sub(r"^[A-GＡ-Ｇ][.．、:：)）]\s*", "", cleaned, count=1)
+    if stripped_heading != cleaned and (
+        stripped_heading.startswith(QUESTION_BOUNDARY_PREFIXES)
+        or stripped_heading.startswith(("下面", "在下列"))
+        or _is_section_heading(stripped_heading)
+        or "本题共" in stripped_heading
+        or any(keyword in stripped_heading for keyword in GROUP_KEYWORDS)
+    ):
+        return True
+    if _group_heading(cleaned) and not _is_option_line(cleaned):
+        return True
+    return cleaned.startswith(QUESTION_BOUNDARY_PREFIXES)
 
 
 def _flatten_blocks(blocks: list[dict]) -> list[dict]:
@@ -207,7 +266,12 @@ def _nearby_options(entries: list[dict], last_entry_index: int, next_entry_index
     end = next_entry_index if next_entry_index is not None else min(len(entries), last_entry_index + 4)
     for entry in entries[last_entry_index:end]:
         _, options = split_options(entry["text"])
-        if len(options) >= 2:
+        if len(options) >= 2 and all(
+            option.split(".", 1)[1].strip()
+            and not _looks_like_instruction(option)
+            and not any(keyword in option for keyword in ("听下面", "阅读下面", "选择最佳", "从题中所给", "从以下各题"))
+            for option in options
+        ):
             return options
     return []
 
@@ -405,7 +469,12 @@ def parse_questions(blocks: list[dict], sections: list[dict] | None = None, slug
                 len(entries),
             )
             end = min(next_start["entryIndex"] if next_start else len(entries), section_end)
-            text = " ".join([start["prompt"]] + [entry["text"] for entry in entries[start["entryIndex"] + 1 : end]]).strip()
+            continuation = []
+            for entry in entries[start["entryIndex"] + 1 : end]:
+                if _is_question_text_boundary(entry["text"]):
+                    break
+                continuation.append(entry["text"])
+            text = " ".join([start["prompt"]] + continuation).strip()
         prompt, options = split_options(text)
         if start.get("options") and not options:
             options = start["options"]
@@ -661,7 +730,11 @@ def _is_question_marker(text: str) -> bool:
 
 
 def _is_answer_option_block(text: str) -> bool:
-    return bool(re.match(r"^\s*[A-DＡ-Ｄ]\s*[．.、:：)]\s*\S+", text))
+    return _is_option_line(text)
+
+
+def _is_passage_section(section_title: str) -> bool:
+    return bool(re.search(r"阅读|完形|任务型|短文填空|综合填空|选词填空|语篇填空", section_title))
 
 
 def build_display_blocks(sections: list[dict], questions: list[dict]) -> None:
@@ -681,22 +754,32 @@ def build_display_blocks(sections: list[dict], questions: list[dict]) -> None:
             if source_id in block_indexes
         })
         hidden_paragraph_indexes = set()
-        for source_index in source_indexes:
+        passage_section = _is_passage_section(section.get("title", ""))
+        for source_position, source_index in enumerate(source_indexes):
             if blocks[source_index].get("kind") != "paragraph":
                 continue
             hidden_paragraph_indexes.add(source_index)
             next_index = source_index + 1
+            next_source_index = source_indexes[source_position + 1] if source_position + 1 < len(source_indexes) else len(blocks)
+            saw_option = False
             while next_index < len(blocks):
                 block = blocks[next_index]
                 if block.get("kind") != "paragraph":
                     next_index += 1
                     continue
                 text = (block.get("text") or "").strip()
-                if _is_question_marker(text) or next_index in source_indexes:
+                if next_index >= next_source_index or _is_question_marker(text):
                     break
-                if not _is_answer_option_block(text):
-                    break
-                hidden_paragraph_indexes.add(next_index)
+                if passage_section:
+                    if _is_answer_option_block(text):
+                        hidden_paragraph_indexes.add(next_index)
+                        saw_option = True
+                    elif saw_option:
+                        break
+                    else:
+                        hidden_paragraph_indexes.add(next_index)
+                else:
+                    hidden_paragraph_indexes.add(next_index)
                 next_index += 1
 
         display_blocks = []
@@ -709,7 +792,7 @@ def build_display_blocks(sections: list[dict], questions: list[dict]) -> None:
                 continue
             if not section_questions:
                 continue
-            if _is_display_instruction(text, section.get("title", "")):
+            if text == section.get("title", "").strip():
                 continue
             display_blocks.append(block)
         section["displayBlocks"] = display_blocks

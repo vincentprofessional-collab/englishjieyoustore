@@ -1265,6 +1265,7 @@
       "title": "第一部分 听力测试（满分30分）",
       "instructions": [
         "第一部分 听力测试（满分30分）",
+        "1. 听力（共30分）",
         "A. 听音选图（本题共5小题，每小题1分，共5分）",
         "A.   B.  C.   D.     E.",
         "B. 情景反应（本题共5小题，每小题1分，共5分）",
@@ -1469,25 +1470,34 @@
         }
       ],
       "questionIds": [
-        "2022-xinjiang-xinjiang-section-2-section-2-group-1-1",
-        "2022-xinjiang-xinjiang-section-2-section-2-group-2-2",
+        "2022-xinjiang-xinjiang-section-2-section-2-group-2-1",
+        "2022-xinjiang-xinjiang-section-2-section-2-group-3-2",
         "2022-xinjiang-xinjiang-section-2-section-2-group-3-3",
         "2022-xinjiang-xinjiang-section-2-section-2-group-3-4",
         "2022-xinjiang-xinjiang-section-2-section-2-group-3-5",
         "2022-xinjiang-xinjiang-section-2-section-2-group-3-6",
-        "2022-xinjiang-xinjiang-section-2-section-2-group-3-7",
-        "2022-xinjiang-xinjiang-section-2-section-2-group-4-8",
-        "2022-xinjiang-xinjiang-section-2-section-2-group-5-9",
-        "2022-xinjiang-xinjiang-section-2-section-2-group-6-10",
-        "2022-xinjiang-xinjiang-section-2-section-2-group-7-11",
-        "2022-xinjiang-xinjiang-section-2-section-2-group-8-12",
-        "2022-xinjiang-xinjiang-section-2-section-2-group-10-13",
-        "2022-xinjiang-xinjiang-section-2-section-2-group-11-14",
-        "2022-xinjiang-xinjiang-section-2-section-2-group-12-15",
-        "2022-xinjiang-xinjiang-section-2-section-2-group-13-16",
-        "2022-xinjiang-xinjiang-section-2-section-2-group-14-17"
+        "2022-xinjiang-xinjiang-section-2-section-2-group-4-7",
+        "2022-xinjiang-xinjiang-section-2-section-2-group-5-8",
+        "2022-xinjiang-xinjiang-section-2-section-2-group-6-9",
+        "2022-xinjiang-xinjiang-section-2-section-2-group-7-10",
+        "2022-xinjiang-xinjiang-section-2-section-2-group-8-11",
+        "2022-xinjiang-xinjiang-section-2-section-2-group-10-12",
+        "2022-xinjiang-xinjiang-section-2-section-2-group-11-13",
+        "2022-xinjiang-xinjiang-section-2-section-2-group-12-14",
+        "2022-xinjiang-xinjiang-section-2-section-2-group-13-15",
+        "2022-xinjiang-xinjiang-section-2-section-2-group-14-16"
       ],
       "displayBlocks": [
+        {
+          "id": "paragraph-8",
+          "kind": "paragraph",
+          "text": "1. 听力（共30分）"
+        },
+        {
+          "id": "paragraph-9",
+          "kind": "paragraph",
+          "text": "A. 听音选图（本题共5小题，每小题1分，共5分）"
+        },
         {
           "id": "image-11-1",
           "kind": "image",
@@ -1519,27 +1529,19 @@
           "alt": "原卷图片"
         },
         {
-          "id": "paragraph-14",
-          "kind": "paragraph",
-          "text": "听句子，选择正确的应答。每小题读两遍。"
-        },
-        {
           "id": "image-18-1",
           "kind": "image",
           "src": "/junior-high/2022-xinjiang-xinjiang/image7.png",
           "alt": "原卷图片"
-        },
-        {
-          "id": "paragraph-26",
-          "kind": "paragraph",
-          "text": "听对话及问题，选择正确的答案。每组对话读两遍。"
         }
       ]
     },
     {
       "id": "section-3",
       "title": "D. 短文理解（本题共5小题，每小题2分，共10分）",
-      "instructions": [],
+      "instructions": [
+        "D. 短文理解（本题共5小题，每小题2分，共10分）"
+      ],
       "blocks": [
         {
           "id": "paragraph-37",
@@ -1618,11 +1620,11 @@
         }
       ],
       "questionIds": [
-        "2022-xinjiang-xinjiang-section-4-section-4-group-1-18",
-        "2022-xinjiang-xinjiang-section-4-section-4-group-2-19",
-        "2022-xinjiang-xinjiang-section-4-section-4-group-3-20",
-        "2022-xinjiang-xinjiang-section-4-section-4-group-4-21",
-        "2022-xinjiang-xinjiang-section-4-section-4-group-5-22"
+        "2022-xinjiang-xinjiang-section-4-section-4-group-1-17",
+        "2022-xinjiang-xinjiang-section-4-section-4-group-2-18",
+        "2022-xinjiang-xinjiang-section-4-section-4-group-3-19",
+        "2022-xinjiang-xinjiang-section-4-section-4-group-4-20",
+        "2022-xinjiang-xinjiang-section-4-section-4-group-5-21"
       ],
       "displayBlocks": []
     },
@@ -1637,7 +1639,18 @@
           "id": "paragraph-49",
           "kind": "paragraph",
           "text": "第二部分 语言知识运用（满分70分）"
-        },
+        }
+      ],
+      "questionIds": [],
+      "displayBlocks": []
+    },
+    {
+      "id": "section-6",
+      "title": "II. 口语匹配（本题共5小题，每小题2分，共10分）",
+      "instructions": [
+        "II. 口语匹配（本题共5小题，每小题2分，共10分）"
+      ],
+      "blocks": [
         {
           "id": "paragraph-50",
           "kind": "paragraph",
@@ -1664,18 +1677,13 @@
         }
       ],
       "questionIds": [
-        "2022-xinjiang-xinjiang-section-5-section-5-group-1-23",
-        "2022-xinjiang-xinjiang-section-5-section-5-group-1-24",
-        "2022-xinjiang-xinjiang-section-5-section-5-group-1-25",
-        "2022-xinjiang-xinjiang-section-5-section-5-group-1-26",
-        "2022-xinjiang-xinjiang-section-5-section-5-group-1-27"
+        "2022-xinjiang-xinjiang-section-6-section-6-group-1-22",
+        "2022-xinjiang-xinjiang-section-6-section-6-group-1-23",
+        "2022-xinjiang-xinjiang-section-6-section-6-group-1-24",
+        "2022-xinjiang-xinjiang-section-6-section-6-group-1-25",
+        "2022-xinjiang-xinjiang-section-6-section-6-group-1-26"
       ],
       "displayBlocks": [
-        {
-          "id": "paragraph-50",
-          "kind": "paragraph",
-          "text": "II. 口语匹配（本题共5小题，每小题2分，共10分）"
-        },
         {
           "id": "paragraph-51",
           "kind": "paragraph",
@@ -1698,9 +1706,10 @@
       ]
     },
     {
-      "id": "section-6",
+      "id": "section-7",
       "title": "III. 单项选择（本题共10小题，每小题1分，共10分）",
       "instructions": [
+        "III. 单项选择（本题共10小题，每小题1分，共10分）",
         "A. the; anB. a; theC. a; /D. an; /",
         "A. nothingB. anythingC. everythingD. something",
         "A. tasksB. choicesC. gradesD. habits",
@@ -1873,60 +1882,32 @@
         }
       ],
       "questionIds": [
-        "2022-xinjiang-xinjiang-section-6-section-6-group-1-28",
-        "2022-xinjiang-xinjiang-section-6-section-6-group-2-29",
-        "2022-xinjiang-xinjiang-section-6-section-6-group-3-30",
-        "2022-xinjiang-xinjiang-section-6-section-6-group-4-31",
-        "2022-xinjiang-xinjiang-section-6-section-6-group-4-32",
-        "2022-xinjiang-xinjiang-section-6-section-6-group-5-33",
-        "2022-xinjiang-xinjiang-section-6-section-6-group-6-34",
-        "2022-xinjiang-xinjiang-section-6-section-6-group-7-35",
-        "2022-xinjiang-xinjiang-section-6-section-6-group-8-36",
-        "2022-xinjiang-xinjiang-section-6-section-6-group-9-37",
-        "2022-xinjiang-xinjiang-section-6-section-6-group-13-38"
+        "2022-xinjiang-xinjiang-section-7-section-7-group-1-27",
+        "2022-xinjiang-xinjiang-section-7-section-7-group-2-28",
+        "2022-xinjiang-xinjiang-section-7-section-7-group-3-29",
+        "2022-xinjiang-xinjiang-section-7-section-7-group-4-30",
+        "2022-xinjiang-xinjiang-section-7-section-7-group-4-31",
+        "2022-xinjiang-xinjiang-section-7-section-7-group-5-32",
+        "2022-xinjiang-xinjiang-section-7-section-7-group-6-33",
+        "2022-xinjiang-xinjiang-section-7-section-7-group-7-34",
+        "2022-xinjiang-xinjiang-section-7-section-7-group-8-35",
+        "2022-xinjiang-xinjiang-section-7-section-7-group-9-36",
+        "2022-xinjiang-xinjiang-section-7-section-7-group-13-37"
       ],
       "displayBlocks": [
         {
           "id": "paragraph-53",
           "kind": "paragraph",
           "text": "从A、B、C、D四个选项中，选择一个正确答案。"
-        },
-        {
-          "id": "paragraph-55",
-          "kind": "paragraph",
-          "text": "—Yes, I am going to have ________ picnic on ________ Sunday."
-        },
-        {
-          "id": "paragraph-58",
-          "kind": "paragraph",
-          "text": "—I believe ________ is impossible to a hopeful heart."
-        },
-        {
-          "id": "paragraph-61",
-          "kind": "paragraph",
-          "text": "—Exactly, so we should have good eating ________."
-        },
-        {
-          "id": "paragraph-70",
-          "kind": "paragraph",
-          "text": "—Sorry, I was ________ for the English test at that time."
-        },
-        {
-          "id": "paragraph-75",
-          "kind": "paragraph",
-          "text": "—Yes, it tastes really nice."
-        },
-        {
-          "id": "paragraph-81",
-          "kind": "paragraph",
-          "text": "—________."
         }
       ]
     },
     {
-      "id": "section-7",
+      "id": "section-8",
       "title": "IV. 完形填空（本题共10小题，每小题1分，共10分）",
-      "instructions": [],
+      "instructions": [
+        "IV. 完形填空（本题共10小题，每小题1分，共10分）"
+      ],
       "blocks": [
         {
           "id": "paragraph-83",
@@ -2005,18 +1986,23 @@
         }
       ],
       "questionIds": [
-        "2022-xinjiang-xinjiang-section-7-section-7-group-1-39",
-        "2022-xinjiang-xinjiang-section-7-section-7-group-1-40",
-        "2022-xinjiang-xinjiang-section-7-section-7-group-1-41",
-        "2022-xinjiang-xinjiang-section-7-section-7-group-1-42",
-        "2022-xinjiang-xinjiang-section-7-section-7-group-1-43",
-        "2022-xinjiang-xinjiang-section-7-section-7-group-1-44",
-        "2022-xinjiang-xinjiang-section-7-section-7-group-1-45",
-        "2022-xinjiang-xinjiang-section-7-section-7-group-1-46",
-        "2022-xinjiang-xinjiang-section-7-section-7-group-1-47",
-        "2022-xinjiang-xinjiang-section-7-section-7-group-1-48"
+        "2022-xinjiang-xinjiang-section-8-section-8-group-1-38",
+        "2022-xinjiang-xinjiang-section-8-section-8-group-1-39",
+        "2022-xinjiang-xinjiang-section-8-section-8-group-1-40",
+        "2022-xinjiang-xinjiang-section-8-section-8-group-1-41",
+        "2022-xinjiang-xinjiang-section-8-section-8-group-1-42",
+        "2022-xinjiang-xinjiang-section-8-section-8-group-1-43",
+        "2022-xinjiang-xinjiang-section-8-section-8-group-1-44",
+        "2022-xinjiang-xinjiang-section-8-section-8-group-1-45",
+        "2022-xinjiang-xinjiang-section-8-section-8-group-1-46",
+        "2022-xinjiang-xinjiang-section-8-section-8-group-1-47"
       ],
       "displayBlocks": [
+        {
+          "id": "paragraph-84",
+          "kind": "paragraph",
+          "text": "根据短文内容，从A、B、C、D四个选项中选择一个正确答案。"
+        },
         {
           "id": "paragraph-85",
           "kind": "paragraph",
@@ -2035,9 +2021,11 @@
       ]
     },
     {
-      "id": "section-8",
+      "id": "section-9",
       "title": "V. 阅读理解（本题共20小题，每小题2分，共40分）",
-      "instructions": [],
+      "instructions": [
+        "V. 阅读理解（本题共20小题，每小题2分，共40分）"
+      ],
       "blocks": [
         {
           "id": "paragraph-98",
@@ -2054,7 +2042,7 @@
       "displayBlocks": []
     },
     {
-      "id": "section-9",
+      "id": "section-10",
       "title": "根据短文内容，判断下面各小题的正（T）误（F）。",
       "instructions": [
         "A. On Sunday.B. On Saturday.C. On Tuesday.D. On Monday.",
@@ -2334,21 +2322,21 @@
         }
       ],
       "questionIds": [
-        "2022-xinjiang-xinjiang-section-9-section-9-group-1-49",
-        "2022-xinjiang-xinjiang-section-9-section-9-group-1-50",
-        "2022-xinjiang-xinjiang-section-9-section-9-group-1-51",
-        "2022-xinjiang-xinjiang-section-9-section-9-group-1-52",
-        "2022-xinjiang-xinjiang-section-9-section-9-group-1-53",
-        "2022-xinjiang-xinjiang-section-9-section-9-group-1-54",
-        "2022-xinjiang-xinjiang-section-9-section-9-group-2-55",
-        "2022-xinjiang-xinjiang-section-9-section-9-group-3-56",
-        "2022-xinjiang-xinjiang-section-9-section-9-group-4-57",
-        "2022-xinjiang-xinjiang-section-9-section-9-group-5-58",
-        "2022-xinjiang-xinjiang-section-9-section-9-group-6-59",
-        "2022-xinjiang-xinjiang-section-9-section-9-group-7-60",
-        "2022-xinjiang-xinjiang-section-9-section-9-group-8-61",
-        "2022-xinjiang-xinjiang-section-9-section-9-group-10-62",
-        "2022-xinjiang-xinjiang-section-9-section-9-group-11-63"
+        "2022-xinjiang-xinjiang-section-10-section-10-group-1-48",
+        "2022-xinjiang-xinjiang-section-10-section-10-group-1-49",
+        "2022-xinjiang-xinjiang-section-10-section-10-group-1-50",
+        "2022-xinjiang-xinjiang-section-10-section-10-group-1-51",
+        "2022-xinjiang-xinjiang-section-10-section-10-group-1-52",
+        "2022-xinjiang-xinjiang-section-10-section-10-group-1-53",
+        "2022-xinjiang-xinjiang-section-10-section-10-group-2-54",
+        "2022-xinjiang-xinjiang-section-10-section-10-group-3-55",
+        "2022-xinjiang-xinjiang-section-10-section-10-group-4-56",
+        "2022-xinjiang-xinjiang-section-10-section-10-group-5-57",
+        "2022-xinjiang-xinjiang-section-10-section-10-group-6-58",
+        "2022-xinjiang-xinjiang-section-10-section-10-group-7-59",
+        "2022-xinjiang-xinjiang-section-10-section-10-group-8-60",
+        "2022-xinjiang-xinjiang-section-10-section-10-group-10-61",
+        "2022-xinjiang-xinjiang-section-10-section-10-group-11-62"
       ],
       "displayBlocks": [
         {
@@ -2372,16 +2360,6 @@
           "text": "But growing potatoes needs less land than growing oats, and it requires little water. Also it has more production than most plants. The new healthy drink may have a huge hill to climb, but it certainly has a chance to become the next big thing."
         },
         {
-          "id": "paragraph-110",
-          "kind": "paragraph",
-          "text": "B"
-        },
-        {
-          "id": "paragraph-112",
-          "kind": "paragraph",
-          "text": "Here is a timetable of courses in Children’s Palace."
-        },
-        {
           "id": "table-2",
           "kind": "table",
           "rows": [
@@ -2400,20 +2378,10 @@
           ]
         },
         {
-          "id": "paragraph-118",
-          "kind": "paragraph",
-          "text": "A In Room 109.B. In Room 305."
-        },
-        {
           "id": "image-118-1",
           "kind": "image",
           "src": "/junior-high/2022-xinjiang-xinjiang/image8.png",
           "alt": "原卷图片"
-        },
-        {
-          "id": "paragraph-123",
-          "kind": "paragraph",
-          "text": "A Photography Course.B. Chinese Shadow Puppetry Course."
         },
         {
           "id": "image-123-1",
@@ -2422,50 +2390,15 @@
           "alt": "原卷图片"
         },
         {
-          "id": "paragraph-125",
-          "kind": "paragraph",
-          "text": "C"
-        },
-        {
           "id": "image-127-1",
           "kind": "image",
           "src": "/junior-high/2022-xinjiang-xinjiang/image9.png",
           "alt": "原卷图片"
-        },
-        {
-          "id": "paragraph-128",
-          "kind": "paragraph",
-          "text": "Why did Chinese people have more than one name in ancient times?"
-        },
-        {
-          "id": "paragraph-129",
-          "kind": "paragraph",
-          "text": "In ancient China, people’s names had three parts, their family name, given name and courtesy name. Take famous poet Li Bai for example. His family name, which came from his father’s name, was Li. His given name was Bai, and his courtesy name was Taibai."
-        },
-        {
-          "id": "paragraph-130",
-          "kind": "paragraph",
-          "text": "People used their given names when they were among family members. But in social life, they called each other by their courtesy names to show respect. This was mostly done among people of similar age. If you were talking about yourself, or if your elders were talking about you, the given name would be used instead of the courtesy name."
-        },
-        {
-          "id": "paragraph-131",
-          "kind": "paragraph",
-          "text": "Men would get their courtesy names when they turned 20. It was a symbol of adulthood (成年礼). Women would get their courtesy names after getting married."
-        },
-        {
-          "id": "paragraph-132",
-          "kind": "paragraph",
-          "text": "One’s courtesy name often had something to do with one’s given name. For example, the name of Mencius was Meng Ke. His courtesy name was Ziyu. Both Ke and Ziyu mean “carriage (马车)”. Zhuge Liang’s given name was Liang, which means “bright”. His courtesy name was Kongming, which means “very bright”."
-        },
-        {
-          "id": "paragraph-145",
-          "kind": "paragraph",
-          "text": "D"
         }
       ]
     },
     {
-      "id": "section-10",
+      "id": "section-11",
       "title": "阅读下面短文，把A-E五个句子填入文中空缺处，使短文内容完整。",
       "instructions": [
         "A. They do a better job of stopping outside noise so you can listen at a lower volume.",
@@ -2473,9 +2406,7 @@
         "C. Dry your ears after swimming or taking a shower.",
         "D. Usually, our ears clean themselves.",
         "E. In winter, protect your ears with a hat or a scarf.",
-        "第II卷（非选择题，满分50分）",
-        "A. 根据首字母提示补全单词，使句子完整、通顺。将完整的单词写在答题卷上，每空一词",
-        "B. 根据汉语提示完成单词，使句子完整、通顺，每空一词。"
+        "第II卷（非选择题，满分50分）"
       ],
       "blocks": [
         {
@@ -2552,7 +2483,32 @@
           "id": "paragraph-160",
           "kind": "paragraph",
           "text": "第II卷（非选择题，满分50分）"
-        },
+        }
+      ],
+      "questionIds": [
+        "2022-xinjiang-xinjiang-section-11-section-11-group-1-63",
+        "2022-xinjiang-xinjiang-section-11-section-11-group-1-64",
+        "2022-xinjiang-xinjiang-section-11-section-11-group-1-65",
+        "2022-xinjiang-xinjiang-section-11-section-11-group-1-66",
+        "2022-xinjiang-xinjiang-section-11-section-11-group-1-67"
+      ],
+      "displayBlocks": [
+        {
+          "id": "paragraph-160",
+          "kind": "paragraph",
+          "text": "第II卷（非选择题，满分50分）"
+        }
+      ]
+    },
+    {
+      "id": "section-12",
+      "title": "VI. 词汇（本题共10小题，每小题1分，共10分）",
+      "instructions": [
+        "VI. 词汇（本题共10小题，每小题1分，共10分）",
+        "A. 根据首字母提示补全单词，使句子完整、通顺。将完整的单词写在答题卷上，每空一词",
+        "B. 根据汉语提示完成单词，使句子完整、通顺，每空一词。"
+      ],
+      "blocks": [
         {
           "id": "paragraph-161",
           "kind": "paragraph",
@@ -2623,7 +2579,41 @@
           "id": "paragraph-173",
           "kind": "paragraph",
           "text": "71. I think the car is _________ (便宜的) and I can afford it."
+        }
+      ],
+      "questionIds": [
+        "2022-xinjiang-xinjiang-section-12-section-12-group-2-68",
+        "2022-xinjiang-xinjiang-section-12-section-12-group-2-69",
+        "2022-xinjiang-xinjiang-section-12-section-12-group-2-70",
+        "2022-xinjiang-xinjiang-section-12-section-12-group-2-71",
+        "2022-xinjiang-xinjiang-section-12-section-12-group-2-72",
+        "2022-xinjiang-xinjiang-section-12-section-12-group-3-73",
+        "2022-xinjiang-xinjiang-section-12-section-12-group-3-74",
+        "2022-xinjiang-xinjiang-section-12-section-12-group-3-75",
+        "2022-xinjiang-xinjiang-section-12-section-12-group-3-76",
+        "2022-xinjiang-xinjiang-section-12-section-12-group-3-77"
+      ],
+      "displayBlocks": [
+        {
+          "id": "paragraph-162",
+          "kind": "paragraph",
+          "text": "A. 根据首字母提示补全单词，使句子完整、通顺。将完整的单词写在答题卷上，每空一词"
         },
+        {
+          "id": "image-172-1",
+          "kind": "image",
+          "src": "/junior-high/2022-xinjiang-xinjiang/image7.png",
+          "alt": "原卷图片"
+        }
+      ]
+    },
+    {
+      "id": "section-13",
+      "title": "VII. 完成句子（本题共5小题，每小题2分，共10分）",
+      "instructions": [
+        "VII. 完成句子（本题共5小题，每小题2分，共10分）"
+      ],
+      "blocks": [
         {
           "id": "paragraph-174",
           "kind": "paragraph",
@@ -2683,7 +2673,30 @@
           "id": "paragraph-185",
           "kind": "paragraph",
           "text": "_________ _________ you go on summer vacation?"
-        },
+        }
+      ],
+      "questionIds": [
+        "2022-xinjiang-xinjiang-section-13-section-13-group-1-78",
+        "2022-xinjiang-xinjiang-section-13-section-13-group-1-79",
+        "2022-xinjiang-xinjiang-section-13-section-13-group-1-80",
+        "2022-xinjiang-xinjiang-section-13-section-13-group-1-81",
+        "2022-xinjiang-xinjiang-section-13-section-13-group-1-82"
+      ],
+      "displayBlocks": [
+        {
+          "id": "paragraph-175",
+          "kind": "paragraph",
+          "text": "根据所给提示完成句子。每空一词，含缩略词。"
+        }
+      ]
+    },
+    {
+      "id": "section-14",
+      "title": "VIII. 英语口语（本题共5小题，每小题1分，共5分）",
+      "instructions": [
+        "VIII. 英语口语（本题共5小题，每小题1分，共5分）"
+      ],
+      "blocks": [
         {
           "id": "paragraph-186",
           "kind": "paragraph",
@@ -2751,98 +2764,17 @@
         }
       ],
       "questionIds": [
-        "2022-xinjiang-xinjiang-section-10-section-10-group-1-64",
-        "2022-xinjiang-xinjiang-section-10-section-10-group-1-65",
-        "2022-xinjiang-xinjiang-section-10-section-10-group-1-66",
-        "2022-xinjiang-xinjiang-section-10-section-10-group-1-67",
-        "2022-xinjiang-xinjiang-section-10-section-10-group-1-68",
-        "2022-xinjiang-xinjiang-section-10-section-10-group-7-69",
-        "2022-xinjiang-xinjiang-section-10-section-10-group-7-70",
-        "2022-xinjiang-xinjiang-section-10-section-10-group-7-71",
-        "2022-xinjiang-xinjiang-section-10-section-10-group-7-72",
-        "2022-xinjiang-xinjiang-section-10-section-10-group-7-73",
-        "2022-xinjiang-xinjiang-section-10-section-10-group-8-74",
-        "2022-xinjiang-xinjiang-section-10-section-10-group-8-75",
-        "2022-xinjiang-xinjiang-section-10-section-10-group-8-76",
-        "2022-xinjiang-xinjiang-section-10-section-10-group-8-77",
-        "2022-xinjiang-xinjiang-section-10-section-10-group-8-78",
-        "2022-xinjiang-xinjiang-section-10-section-10-group-8-79",
-        "2022-xinjiang-xinjiang-section-10-section-10-group-8-80",
-        "2022-xinjiang-xinjiang-section-10-section-10-group-8-81",
-        "2022-xinjiang-xinjiang-section-10-section-10-group-8-82",
-        "2022-xinjiang-xinjiang-section-10-section-10-group-8-83",
-        "2022-xinjiang-xinjiang-section-10-section-10-group-8-84",
-        "2022-xinjiang-xinjiang-section-10-section-10-group-8-85",
-        "2022-xinjiang-xinjiang-section-10-section-10-group-8-86",
-        "2022-xinjiang-xinjiang-section-10-section-10-group-8-87",
-        "2022-xinjiang-xinjiang-section-10-section-10-group-8-88"
+        "2022-xinjiang-xinjiang-section-14-section-14-group-1-83",
+        "2022-xinjiang-xinjiang-section-14-section-14-group-1-84",
+        "2022-xinjiang-xinjiang-section-14-section-14-group-1-85",
+        "2022-xinjiang-xinjiang-section-14-section-14-group-1-86",
+        "2022-xinjiang-xinjiang-section-14-section-14-group-1-87"
       ],
       "displayBlocks": [
         {
-          "id": "paragraph-148",
+          "id": "paragraph-187",
           "kind": "paragraph",
-          "text": "Ears help us hear the world. But many things, such as loud noises, can cause hearing troubles. So how can we protect our ears? Let’s take a look together."
-        },
-        {
-          "id": "paragraph-149",
-          "kind": "paragraph",
-          "text": "Keep your ears dry and warm"
-        },
-        {
-          "id": "paragraph-151",
-          "kind": "paragraph",
-          "text": "How to clean your ears"
-        },
-        {
-          "id": "paragraph-153",
-          "kind": "paragraph",
-          "text": "How to use headphones"
-        },
-        {
-          "id": "paragraph-161",
-          "kind": "paragraph",
-          "text": "VI. 词汇（本题共10小题，每小题1分，共10分）"
-        },
-        {
-          "id": "image-172-1",
-          "kind": "image",
-          "src": "/junior-high/2022-xinjiang-xinjiang/image7.png",
-          "alt": "原卷图片"
-        },
-        {
-          "id": "paragraph-174",
-          "kind": "paragraph",
-          "text": "VII. 完成句子（本题共5小题，每小题2分，共10分）"
-        },
-        {
-          "id": "paragraph-177",
-          "kind": "paragraph",
-          "text": "If I _________ the bus to the airport, I’ll _________ my flight."
-        },
-        {
-          "id": "paragraph-179",
-          "kind": "paragraph",
-          "text": "Xinjiang is suitable for visiting _________ year _________."
-        },
-        {
-          "id": "paragraph-181",
-          "kind": "paragraph",
-          "text": "John does his best to keep the balance _________ work _________ play."
-        },
-        {
-          "id": "paragraph-183",
-          "kind": "paragraph",
-          "text": "_________ life just _________ a journey of discovery?"
-        },
-        {
-          "id": "paragraph-185",
-          "kind": "paragraph",
-          "text": "_________ _________ you go on summer vacation?"
-        },
-        {
-          "id": "paragraph-186",
-          "kind": "paragraph",
-          "text": "VIII. 英语口语（本题共5小题，每小题1分，共5分）"
+          "text": "根据对话内容，用恰当的单词、短语或句子补全对话。"
         },
         {
           "id": "paragraph-188",
@@ -2857,9 +2789,11 @@
       ]
     },
     {
-      "id": "section-11",
+      "id": "section-15",
       "title": "IX. 短文填空（本题共10小题，每小题1分，共10分）",
-      "instructions": [],
+      "instructions": [
+        "IX. 短文填空（本题共10小题，每小题1分，共10分）"
+      ],
       "blocks": [
         {
           "id": "paragraph-199",
@@ -2871,7 +2805,7 @@
       "displayBlocks": []
     },
     {
-      "id": "section-12",
+      "id": "section-16",
       "title": "根据短文内容，在每个空格处填写一个适当的词，使文章意思完整且符合逻辑。每空一词，每词限用一次。",
       "instructions": [],
       "blocks": [
@@ -2911,16 +2845,16 @@
         }
       ],
       "questionIds": [
-        "2022-xinjiang-xinjiang-section-12-section-12-group-1-89",
-        "2022-xinjiang-xinjiang-section-12-section-12-group-1-90",
-        "2022-xinjiang-xinjiang-section-12-section-12-group-1-91",
-        "2022-xinjiang-xinjiang-section-12-section-12-group-1-92",
-        "2022-xinjiang-xinjiang-section-12-section-12-group-1-93",
-        "2022-xinjiang-xinjiang-section-12-section-12-group-1-94",
-        "2022-xinjiang-xinjiang-section-12-section-12-group-1-95",
-        "2022-xinjiang-xinjiang-section-12-section-12-group-1-96",
-        "2022-xinjiang-xinjiang-section-12-section-12-group-1-97",
-        "2022-xinjiang-xinjiang-section-12-section-12-group-1-98"
+        "2022-xinjiang-xinjiang-section-16-section-16-group-1-88",
+        "2022-xinjiang-xinjiang-section-16-section-16-group-1-89",
+        "2022-xinjiang-xinjiang-section-16-section-16-group-1-90",
+        "2022-xinjiang-xinjiang-section-16-section-16-group-1-91",
+        "2022-xinjiang-xinjiang-section-16-section-16-group-1-92",
+        "2022-xinjiang-xinjiang-section-16-section-16-group-1-93",
+        "2022-xinjiang-xinjiang-section-16-section-16-group-1-94",
+        "2022-xinjiang-xinjiang-section-16-section-16-group-1-95",
+        "2022-xinjiang-xinjiang-section-16-section-16-group-1-96",
+        "2022-xinjiang-xinjiang-section-16-section-16-group-1-97"
       ],
       "displayBlocks": [
         {
@@ -2935,7 +2869,7 @@
       ]
     },
     {
-      "id": "section-13",
+      "id": "section-17",
       "title": "X. 书面表达（15分）",
       "instructions": [],
       "blocks": [
@@ -2974,7 +2908,7 @@
       "displayBlocks": []
     },
     {
-      "id": "section-14",
+      "id": "section-18",
       "title": "要求：1.语句通顺，意思连贯，内容详实，语法正确，书写规范；",
       "instructions": [],
       "blocks": [
@@ -3021,8 +2955,8 @@
         }
       ],
       "questionIds": [
-        "2022-xinjiang-xinjiang-section-14-section-14-group-1-99",
-        "2022-xinjiang-xinjiang-section-14-section-14-group-1-100"
+        "2022-xinjiang-xinjiang-section-18-section-18-group-1-98",
+        "2022-xinjiang-xinjiang-section-18-section-18-group-1-99"
       ],
       "displayBlocks": [
         {
@@ -3030,16 +2964,6 @@
           "kind": "image",
           "src": "/junior-high/2022-xinjiang-xinjiang/image10.png",
           "alt": "原卷图片"
-        },
-        {
-          "id": "paragraph-214",
-          "kind": "paragraph",
-          "text": "Looking back at these past three years, I had a lot of sweet memories…"
-        },
-        {
-          "id": "paragraph-215",
-          "kind": "paragraph",
-          "text": "________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________"
         },
         {
           "id": "image-215-1",
@@ -3056,24 +2980,7 @@
   ],
   "questions": [
     {
-      "id": "2022-xinjiang-xinjiang-section-2-section-2-group-1-1",
-      "number": 1,
-      "displayNumber": "1",
-      "sectionId": "section-2",
-      "groupId": "section-2-group-1",
-      "prompt": "听力（共30分） A. 听音选图（本题共5小题，每小题1分，共5分）",
-      "options": [],
-      "inputKind": "text",
-      "sourceBlockIds": [
-        "paragraph-8"
-      ],
-      "type": "text",
-      "context": "",
-      "answer": "C",
-      "analysis": ""
-    },
-    {
-      "id": "2022-xinjiang-xinjiang-section-2-section-2-group-2-2",
+      "id": "2022-xinjiang-xinjiang-section-2-section-2-group-2-1",
       "number": 1,
       "displayNumber": "1",
       "sectionId": "section-2",
@@ -3083,7 +2990,8 @@
         "A. ",
         "B. ",
         "C. ",
-        "D. E."
+        "D. ",
+        "E. "
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -3091,13 +2999,30 @@
       ],
       "type": "choice",
       "context": "",
+      "answer": "C",
+      "analysis": ""
+    },
+    {
+      "id": "2022-xinjiang-xinjiang-section-2-section-2-group-3-2",
+      "number": 1,
+      "displayNumber": "1",
+      "sectionId": "section-2",
+      "groupId": "section-2-group-3",
+      "prompt": "_________",
+      "options": [],
+      "inputKind": "blank",
+      "sourceBlockIds": [
+        "paragraph-12"
+      ],
+      "type": "blank",
+      "context": "",
       "answer": "D",
       "analysis": ""
     },
     {
       "id": "2022-xinjiang-xinjiang-section-2-section-2-group-3-3",
-      "number": 1,
-      "displayNumber": "1",
+      "number": 2,
+      "displayNumber": "2",
       "sectionId": "section-2",
       "groupId": "section-2-group-3",
       "prompt": "_________",
@@ -3113,8 +3038,8 @@
     },
     {
       "id": "2022-xinjiang-xinjiang-section-2-section-2-group-3-4",
-      "number": 2,
-      "displayNumber": "2",
+      "number": 3,
+      "displayNumber": "3",
       "sectionId": "section-2",
       "groupId": "section-2-group-3",
       "prompt": "_________",
@@ -3130,23 +3055,6 @@
     },
     {
       "id": "2022-xinjiang-xinjiang-section-2-section-2-group-3-5",
-      "number": 3,
-      "displayNumber": "3",
-      "sectionId": "section-2",
-      "groupId": "section-2-group-3",
-      "prompt": "_________",
-      "options": [],
-      "inputKind": "blank",
-      "sourceBlockIds": [
-        "paragraph-12"
-      ],
-      "type": "blank",
-      "context": "",
-      "answer": "A",
-      "analysis": ""
-    },
-    {
-      "id": "2022-xinjiang-xinjiang-section-2-section-2-group-3-6",
       "number": 4,
       "displayNumber": "4",
       "sectionId": "section-2",
@@ -3163,12 +3071,12 @@
       "analysis": ""
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-2-section-2-group-3-7",
+      "id": "2022-xinjiang-xinjiang-section-2-section-2-group-3-6",
       "number": 5,
       "displayNumber": "5",
       "sectionId": "section-2",
       "groupId": "section-2-group-3",
-      "prompt": "_________ B. 情景反应（本题共5小题，每小题1分，共5分） 听句子，选择正确的应答。每小题读两遍。",
+      "prompt": "_________",
       "options": [],
       "inputKind": "blank",
       "sourceBlockIds": [
@@ -3176,11 +3084,11 @@
       ],
       "type": "blank",
       "context": "",
-      "answer": "B",
+      "answer": "A",
       "analysis": ""
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-2-section-2-group-4-8",
+      "id": "2022-xinjiang-xinjiang-section-2-section-2-group-4-7",
       "number": 2,
       "displayNumber": "2",
       "sectionId": "section-2",
@@ -3197,11 +3105,11 @@
       ],
       "type": "choice",
       "context": "",
-      "answer": "A",
+      "answer": "B",
       "analysis": ""
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-2-section-2-group-5-9",
+      "id": "2022-xinjiang-xinjiang-section-2-section-2-group-5-8",
       "number": 3,
       "displayNumber": "3",
       "sectionId": "section-2",
@@ -3218,11 +3126,11 @@
       ],
       "type": "choice",
       "context": "",
-      "answer": "C",
+      "answer": "A",
       "analysis": ""
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-2-section-2-group-6-10",
+      "id": "2022-xinjiang-xinjiang-section-2-section-2-group-6-9",
       "number": 4,
       "displayNumber": "4",
       "sectionId": "section-2",
@@ -3243,7 +3151,7 @@
       "analysis": ""
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-2-section-2-group-7-11",
+      "id": "2022-xinjiang-xinjiang-section-2-section-2-group-7-10",
       "number": 5,
       "displayNumber": "5",
       "sectionId": "section-2",
@@ -3260,11 +3168,11 @@
       ],
       "type": "choice",
       "context": "",
-      "answer": "A",
+      "answer": "C",
       "analysis": ""
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-2-section-2-group-8-12",
+      "id": "2022-xinjiang-xinjiang-section-2-section-2-group-8-11",
       "number": 6,
       "displayNumber": "6",
       "sectionId": "section-2",
@@ -3273,8 +3181,7 @@
       "options": [
         "A. In two days.",
         "B. For two days.",
-        "C. Three times a week.",
-        "C. 对话理解（本题共5小题，每小题2分，共10分） 听对话及问题，选择正确的答案。每组对话读两遍。"
+        "C. Three times a week."
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -3282,11 +3189,11 @@
       ],
       "type": "choice",
       "context": "",
-      "answer": "B",
+      "answer": "A",
       "analysis": ""
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-2-section-2-group-10-13",
+      "id": "2022-xinjiang-xinjiang-section-2-section-2-group-10-12",
       "number": 7,
       "displayNumber": "7",
       "sectionId": "section-2",
@@ -3307,7 +3214,7 @@
       "analysis": ""
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-2-section-2-group-11-14",
+      "id": "2022-xinjiang-xinjiang-section-2-section-2-group-11-13",
       "number": 8,
       "displayNumber": "8",
       "sectionId": "section-2",
@@ -3324,11 +3231,11 @@
       ],
       "type": "choice",
       "context": "",
-      "answer": "A",
+      "answer": "B",
       "analysis": ""
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-2-section-2-group-12-15",
+      "id": "2022-xinjiang-xinjiang-section-2-section-2-group-12-14",
       "number": 9,
       "displayNumber": "9",
       "sectionId": "section-2",
@@ -3345,11 +3252,11 @@
       ],
       "type": "choice",
       "context": "",
-      "answer": "C",
+      "answer": "A",
       "analysis": ""
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-2-section-2-group-13-16",
+      "id": "2022-xinjiang-xinjiang-section-2-section-2-group-13-15",
       "number": 10,
       "displayNumber": "10",
       "sectionId": "section-2",
@@ -3366,11 +3273,11 @@
       ],
       "type": "choice",
       "context": "",
-      "answer": "",
+      "answer": "C",
       "analysis": ""
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-2-section-2-group-14-17",
+      "id": "2022-xinjiang-xinjiang-section-2-section-2-group-14-16",
       "number": 11,
       "displayNumber": "11",
       "sectionId": "section-2",
@@ -3391,7 +3298,7 @@
       "analysis": ""
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-4-section-4-group-1-18",
+      "id": "2022-xinjiang-xinjiang-section-4-section-4-group-1-17",
       "number": 12,
       "displayNumber": "12",
       "sectionId": "section-4",
@@ -3412,7 +3319,7 @@
       "analysis": ""
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-4-section-4-group-2-19",
+      "id": "2022-xinjiang-xinjiang-section-4-section-4-group-2-18",
       "number": 13,
       "displayNumber": "13",
       "sectionId": "section-4",
@@ -3433,7 +3340,7 @@
       "analysis": ""
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-4-section-4-group-3-20",
+      "id": "2022-xinjiang-xinjiang-section-4-section-4-group-3-19",
       "number": 14,
       "displayNumber": "14",
       "sectionId": "section-4",
@@ -3454,7 +3361,7 @@
       "analysis": ""
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-4-section-4-group-4-21",
+      "id": "2022-xinjiang-xinjiang-section-4-section-4-group-4-20",
       "number": 15,
       "displayNumber": "15",
       "sectionId": "section-4",
@@ -3475,7 +3382,7 @@
       "analysis": ""
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-4-section-4-group-5-22",
+      "id": "2022-xinjiang-xinjiang-section-4-section-4-group-5-21",
       "number": 16,
       "displayNumber": "16",
       "sectionId": "section-4",
@@ -3496,17 +3403,18 @@
       "analysis": ""
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-5-section-5-group-1-23",
+      "id": "2022-xinjiang-xinjiang-section-6-section-6-group-1-22",
       "number": 17,
       "displayNumber": "17",
-      "sectionId": "section-5",
-      "groupId": "section-5-group-1",
+      "sectionId": "section-6",
+      "groupId": "section-6-group-1",
       "prompt": "______  Which season do you like best? ___18___ I think teenagers should do chores. ___19___ How much is the blue shirt? ___20___ What does she look like? ___21___ Is there a library near here?",
       "options": [
         "A. She has long straight hair.",
         "B. Autumn.",
         "C. Yes, it’s next to the bank.",
-        "D. I agree with you. E. It’s 50 dollars."
+        "D. I agree with you.",
+        "E. It’s 50 dollars."
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -3518,17 +3426,18 @@
       "analysis": "句意：你最喜欢哪个季节？根据“Which season do you like best?”可知，询问最喜欢哪个季节，应回答某个季节，选项B“秋天。”符合语境。故选B。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-5-section-5-group-1-24",
+      "id": "2022-xinjiang-xinjiang-section-6-section-6-group-1-23",
       "number": 18,
       "displayNumber": "18",
-      "sectionId": "section-5",
-      "groupId": "section-5-group-1",
+      "sectionId": "section-6",
+      "groupId": "section-6-group-1",
       "prompt": "___17___ Which season do you like best?  ______  I think teenagers should do chores. ___19___ How much is the blue shirt? ___20___ What does she look like? ___21___ Is there a library near here?",
       "options": [
         "A. She has long straight hair.",
         "B. Autumn.",
         "C. Yes, it’s next to the bank.",
-        "D. I agree with you. E. It’s 50 dollars."
+        "D. I agree with you.",
+        "E. It’s 50 dollars."
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -3540,17 +3449,18 @@
       "analysis": "句意：我认为青少年应该做家务。根据“I think teenagers should do chores.”可知，答句应针对对方观点表示同意或不同意，选项D“我同意你的看法。”符合语境。故选D。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-5-section-5-group-1-25",
+      "id": "2022-xinjiang-xinjiang-section-6-section-6-group-1-24",
       "number": 19,
       "displayNumber": "19",
-      "sectionId": "section-5",
-      "groupId": "section-5-group-1",
+      "sectionId": "section-6",
+      "groupId": "section-6-group-1",
       "prompt": "___17___ Which season do you like best? ___18___ I think teenagers should do chores.  ______  How much is the blue shirt? ___20___ What does she look like? ___21___ Is there a library near here?",
       "options": [
         "A. She has long straight hair.",
         "B. Autumn.",
         "C. Yes, it’s next to the bank.",
-        "D. I agree with you. E. It’s 50 dollars."
+        "D. I agree with you.",
+        "E. It’s 50 dollars."
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -3562,17 +3472,18 @@
       "analysis": "句意：这件蓝色衬衫多少钱？根据“How much is the blue shirt?”可知，问句询问蓝色T恤多少钱，应回答相应的价格，选项E“50美元。”符合语境。故选E。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-5-section-5-group-1-26",
+      "id": "2022-xinjiang-xinjiang-section-6-section-6-group-1-25",
       "number": 20,
       "displayNumber": "20",
-      "sectionId": "section-5",
-      "groupId": "section-5-group-1",
+      "sectionId": "section-6",
+      "groupId": "section-6-group-1",
       "prompt": "___17___ Which season do you like best? ___18___ I think teenagers should do chores. ___19___ How much is the blue shirt?  ______  What does she look like? ___21___ Is there a library near here?",
       "options": [
         "A. She has long straight hair.",
         "B. Autumn.",
         "C. Yes, it’s next to the bank.",
-        "D. I agree with you. E. It’s 50 dollars."
+        "D. I agree with you.",
+        "E. It’s 50 dollars."
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -3584,17 +3495,18 @@
       "analysis": "句意：她长什么样？根据“What does she look like?”可知，问句询问她长什么样，应回答她的外貌特征，选项A“她有一头长长的直发。”符合语境。故选A。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-5-section-5-group-1-27",
+      "id": "2022-xinjiang-xinjiang-section-6-section-6-group-1-26",
       "number": 21,
       "displayNumber": "21",
-      "sectionId": "section-5",
-      "groupId": "section-5-group-1",
+      "sectionId": "section-6",
+      "groupId": "section-6-group-1",
       "prompt": "___17___ Which season do you like best? ___18___ I think teenagers should do chores. ___19___ How much is the blue shirt? ___20___ What does she look like?  ______  Is there a library near here?",
       "options": [
         "A. She has long straight hair.",
         "B. Autumn.",
         "C. Yes, it’s next to the bank.",
-        "D. I agree with you. E. It’s 50 dollars."
+        "D. I agree with you.",
+        "E. It’s 50 dollars."
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -3606,11 +3518,11 @@
       "analysis": "句意：这附近有图书馆吗？根据“Is there a library near here?”可知，问句是一般疑问句，询问是否附近有图书馆，选项C“是的，在银行旁边。”符合语境。故选C。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-6-section-6-group-1-28",
+      "id": "2022-xinjiang-xinjiang-section-7-section-7-group-1-27",
       "number": 22,
       "displayNumber": "22",
-      "sectionId": "section-6",
-      "groupId": "section-6-group-1",
+      "sectionId": "section-7",
+      "groupId": "section-7-group-1",
       "prompt": "—Are you free on weekends? —Yes, I am going to have ________ picnic on ________ Sunday.",
       "options": [
         "A. the; an",
@@ -3628,11 +3540,11 @@
       "analysis": ""
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-6-section-6-group-2-29",
+      "id": "2022-xinjiang-xinjiang-section-7-section-7-group-2-28",
       "number": 23,
       "displayNumber": "23",
-      "sectionId": "section-6",
-      "groupId": "section-6-group-2",
+      "sectionId": "section-7",
+      "groupId": "section-7-group-2",
       "prompt": "—You never give up in difficult situations. —I believe ________ is impossible to a hopeful heart.",
       "options": [
         "A. nothing",
@@ -3650,11 +3562,11 @@
       "analysis": ""
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-6-section-6-group-3-30",
+      "id": "2022-xinjiang-xinjiang-section-7-section-7-group-3-29",
       "number": 24,
       "displayNumber": "24",
-      "sectionId": "section-6",
-      "groupId": "section-6-group-3",
+      "sectionId": "section-7",
+      "groupId": "section-7-group-3",
       "prompt": "—I find there are more and more overweight children in our school. —Exactly, so we should have good eating ________.",
       "options": [
         "A. tasks",
@@ -3672,11 +3584,11 @@
       "analysis": ""
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-6-section-6-group-4-31",
+      "id": "2022-xinjiang-xinjiang-section-7-section-7-group-4-30",
       "number": 12,
       "displayNumber": "12",
-      "sectionId": "section-6",
-      "groupId": "section-6-group-4",
+      "sectionId": "section-7",
+      "groupId": "section-7-group-4",
       "prompt": "第 12 题",
       "options": [],
       "inputKind": "text",
@@ -3689,11 +3601,11 @@
       "analysis": ""
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-6-section-6-group-4-32",
+      "id": "2022-xinjiang-xinjiang-section-7-section-7-group-4-31",
       "number": 25,
       "displayNumber": "25",
-      "sectionId": "section-6",
-      "groupId": "section-6-group-4",
+      "sectionId": "section-7",
+      "groupId": "section-7-group-4",
       "prompt": "We promised to meet at 10 in the park last Sunday, but Bob didn’t ________ until",
       "options": [
         "A. put up",
@@ -3711,11 +3623,11 @@
       "analysis": ""
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-6-section-6-group-5-33",
+      "id": "2022-xinjiang-xinjiang-section-7-section-7-group-5-32",
       "number": 26,
       "displayNumber": "26",
-      "sectionId": "section-6",
-      "groupId": "section-6-group-5",
+      "sectionId": "section-7",
+      "groupId": "section-7-group-5",
       "prompt": "Photos speak ________, but they say a lot about our lives.",
       "options": [
         "A. comfortably",
@@ -3733,11 +3645,11 @@
       "analysis": ""
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-6-section-6-group-6-34",
+      "id": "2022-xinjiang-xinjiang-section-7-section-7-group-6-33",
       "number": 27,
       "displayNumber": "27",
-      "sectionId": "section-6",
-      "groupId": "section-6-group-6",
+      "sectionId": "section-7",
+      "groupId": "section-7-group-6",
       "prompt": "Poems influence people a lot. ________, the poems of Bai Juyi are still meaningful today.",
       "options": [
         "A. In the end",
@@ -3755,11 +3667,11 @@
       "analysis": ""
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-6-section-6-group-7-35",
+      "id": "2022-xinjiang-xinjiang-section-7-section-7-group-7-34",
       "number": 28,
       "displayNumber": "28",
-      "sectionId": "section-6",
-      "groupId": "section-6-group-7",
+      "sectionId": "section-7",
+      "groupId": "section-7-group-7",
       "prompt": "—Why didn’t you go to my party last night? —Sorry, I was ________ for the English test at that time.",
       "options": [
         "A. caring",
@@ -3777,11 +3689,11 @@
       "analysis": ""
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-6-section-6-group-8-36",
+      "id": "2022-xinjiang-xinjiang-section-7-section-7-group-8-35",
       "number": 29,
       "displayNumber": "29",
-      "sectionId": "section-6",
-      "groupId": "section-6-group-8",
+      "sectionId": "section-7",
+      "groupId": "section-7-group-8",
       "prompt": "Cindy felt ________ in her new school, so she joined some clubs to make new friends.",
       "options": [
         "A. lonely",
@@ -3799,11 +3711,11 @@
       "analysis": ""
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-6-section-6-group-9-37",
+      "id": "2022-xinjiang-xinjiang-section-7-section-7-group-9-36",
       "number": 30,
       "displayNumber": "30",
-      "sectionId": "section-6",
-      "groupId": "section-6-group-9",
+      "sectionId": "section-7",
+      "groupId": "section-7-group-9",
       "prompt": "—I wonder ________. —Yes, it tastes really nice.",
       "options": [
         "A. who likes eating zongzi",
@@ -3821,11 +3733,11 @@
       "analysis": ""
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-6-section-6-group-13-38",
+      "id": "2022-xinjiang-xinjiang-section-7-section-7-group-13-37",
       "number": 31,
       "displayNumber": "31",
-      "sectionId": "section-6",
-      "groupId": "section-6-group-13",
+      "sectionId": "section-7",
+      "groupId": "section-7-group-13",
       "prompt": "—Don’t forget to keep a safe social distance (距离) in public places, Tony! —________.",
       "options": [
         "A. Sorry, I won’t",
@@ -3843,11 +3755,11 @@
       "analysis": ""
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-7-section-7-group-1-39",
+      "id": "2022-xinjiang-xinjiang-section-8-section-8-group-1-38",
       "number": 32,
       "displayNumber": "32",
-      "sectionId": "section-7",
-      "groupId": "section-7-group-1",
+      "sectionId": "section-8",
+      "groupId": "section-8-group-1",
       "prompt": "第 32 题",
       "options": [
         "A. Kite",
@@ -3865,11 +3777,11 @@
       "analysis": "句意：那是山东潍坊的风筝节。\nKite风筝；Water水；Lantern灯笼；Spring春天。根据“the sky full of colorful kites of all kinds”以及后文的描述可知这是风筝节。故选A。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-7-section-7-group-1-40",
+      "id": "2022-xinjiang-xinjiang-section-8-section-8-group-1-39",
       "number": 33,
       "displayNumber": "33",
-      "sectionId": "section-7",
-      "groupId": "section-7-group-1",
+      "sectionId": "section-8",
+      "groupId": "section-8-group-1",
       "prompt": "第 33 题",
       "options": [
         "A. dropping",
@@ -3887,11 +3799,11 @@
       "analysis": "句意：爸爸，好像绳子阻止了风筝飞得更高。\ndropping下降；having有；stopping停止；catching抓住。根据“If we cut it, it will be free and fly even...”可知小男孩认为如果把线剪掉，风筝会飞得更高，说明他认为绳子阻止了风筝飞得更高。故选C。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-7-section-7-group-1-41",
+      "id": "2022-xinjiang-xinjiang-section-8-section-8-group-1-40",
       "number": 34,
       "displayNumber": "34",
-      "sectionId": "section-7",
-      "groupId": "section-7-group-1",
+      "sectionId": "section-8",
+      "groupId": "section-8-group-1",
       "prompt": "第 34 题",
       "options": [
         "A. higher",
@@ -3909,11 +3821,11 @@
       "analysis": "句意：如果我们剪掉它，它就会自由，飞得更高。\nhigher更高；shorter更短；slower更慢；quicker更快。根据“The father cut the string off. The kite started to go higher”可知剪掉绳子时候风筝飞得更高了。故选A。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-7-section-7-group-1-42",
+      "id": "2022-xinjiang-xinjiang-section-8-section-8-group-1-41",
       "number": 35,
       "displayNumber": "35",
-      "sectionId": "section-7",
-      "groupId": "section-7-group-1",
+      "sectionId": "section-8",
+      "groupId": "section-8-group-1",
       "prompt": "第 35 题",
       "options": [
         "A. excited",
@@ -3931,11 +3843,11 @@
       "analysis": "句意：这使小男孩很兴奋。\nexcited兴奋的；bored无聊的；worried担心的；scared害怕的。根据“The kite started to go higher”可知剪掉绳子以后的风筝开始飞得更高了，小男孩很兴奋。故选A。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-7-section-7-group-1-43",
+      "id": "2022-xinjiang-xinjiang-section-8-section-8-group-1-42",
       "number": 36,
       "displayNumber": "36",
-      "sectionId": "section-7",
-      "groupId": "section-7-group-1",
+      "sectionId": "section-8",
+      "groupId": "section-8-group-1",
       "prompt": "第 36 题",
       "options": [
         "A. run away",
@@ -3953,11 +3865,11 @@
       "analysis": "句意：但是，慢慢地，男孩看到风筝开始落下。\nrun away逃跑；go up向上；come true实现；fall down落下。根据“It soon fell to the ground”可知，剪掉绳子的风筝应是慢慢地开始落下。故选D。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-7-section-7-group-1-44",
+      "id": "2022-xinjiang-xinjiang-section-8-section-8-group-1-43",
       "number": 37,
       "displayNumber": "37",
-      "sectionId": "section-7",
-      "groupId": "section-7-group-1",
+      "sectionId": "section-8",
+      "groupId": "section-8-group-1",
       "prompt": "第 37 题",
       "options": [
         "A. before",
@@ -3975,11 +3887,11 @@
       "analysis": "句意：我以为剪断绳子后，风筝会飞得更高。\nbefore在……之前；after在……之后；so所以；since自从。根据“cutting the string, the kite would fly higher”可知是剪掉绳子之后飞得更高。故选B。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-7-section-7-group-1-45",
+      "id": "2022-xinjiang-xinjiang-section-8-section-8-group-1-44",
       "number": 38,
       "displayNumber": "38",
-      "sectionId": "section-7",
-      "groupId": "section-7-group-1",
+      "sectionId": "section-8",
+      "groupId": "section-8-group-1",
       "prompt": "第 38 题",
       "options": [
         "A. Who",
@@ -3997,11 +3909,11 @@
       "analysis": "句意：为什么它会掉下来？\nWho谁；When什么时候；Why为什么；Where哪里。根据前句“I thought that…cutting the string, the kite would fly higher.”可知，应是问为什么会掉下来。故选C。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-7-section-7-group-1-46",
+      "id": "2022-xinjiang-xinjiang-section-8-section-8-group-1-45",
       "number": 39,
       "displayNumber": "39",
-      "sectionId": "section-7",
-      "groupId": "section-7-group-1",
+      "sectionId": "section-8",
+      "groupId": "section-8-group-1",
       "prompt": "第 39 题",
       "options": [
         "A. jump",
@@ -4019,11 +3931,11 @@
       "analysis": "句意：这根线并没有阻止风筝飞得更高，而是帮助它停留在天空中。\njump跳；stay停留；get得到；make制作。根据下文“But when you cut the...it could no longer support the kite.”可知，这根线是帮助它停留在天空中。故选B。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-7-section-7-group-1-47",
+      "id": "2022-xinjiang-xinjiang-section-8-section-8-group-1-46",
       "number": 40,
       "displayNumber": "40",
-      "sectionId": "section-7",
-      "groupId": "section-7-group-1",
+      "sectionId": "section-8",
+      "groupId": "section-8-group-1",
       "prompt": "第 40 题",
       "options": [
         "A. paper",
@@ -4041,11 +3953,11 @@
       "analysis": "句意：但是当你剪掉绳子，它再也不能支撑风筝了。\npaper纸；tree树；grass草地；string绳子。根据“But when you cut the...it could no longer support the kite.”可知是剪掉绳子。故选D。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-7-section-7-group-1-48",
+      "id": "2022-xinjiang-xinjiang-section-8-section-8-group-1-47",
       "number": 41,
       "displayNumber": "41",
-      "sectionId": "section-7",
-      "groupId": "section-7-group-1",
+      "sectionId": "section-8",
+      "groupId": "section-8-group-1",
       "prompt": "第 41 题",
       "options": [
         "A. in total",
@@ -4063,11 +3975,11 @@
       "analysis": "句意：但事实上，这些可能是最支持我们的东西。\nin total总共；in fact事实上；by the way顺便说一下；what’s more而且。承接前句“We may sometimes feel like there are certain things that are holding us back and stopping us from growing.”语境和But的提示可知，空处应用“事实上”。故选B。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-9-section-9-group-1-49",
+      "id": "2022-xinjiang-xinjiang-section-10-section-10-group-1-48",
       "number": 42,
       "displayNumber": "42",
-      "sectionId": "section-9",
-      "groupId": "section-9-group-1",
+      "sectionId": "section-10",
+      "groupId": "section-10-group-1",
       "prompt": "Potato milk is a kind of new plant milk.",
       "options": [],
       "inputKind": "text",
@@ -4080,11 +3992,11 @@
       "analysis": "细节理解题。根据“When it comes to daily choices, we already have a lot of tasty plant “milks” to choose from, but the latest one, potato milk, is a new one”可知，土豆牛奶是一种新型的植物牛奶，此句表述正确，故填T。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-9-section-9-group-1-50",
+      "id": "2022-xinjiang-xinjiang-section-10-section-10-group-1-49",
       "number": 43,
       "displayNumber": "43",
-      "sectionId": "section-9",
-      "groupId": "section-9-group-1",
+      "sectionId": "section-10",
+      "groupId": "section-10-group-1",
       "prompt": "People can’t make potato milk at home.",
       "options": [],
       "inputKind": "text",
@@ -4097,11 +4009,11 @@
       "analysis": "细节理解题。根据“If you hope to try potato milk, you’ll be happy to know that you can make it yourself at home”可知，可以在家制作土豆牛奶，此句表述错误，故填F。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-9-section-9-group-1-51",
+      "id": "2022-xinjiang-xinjiang-section-10-section-10-group-1-50",
       "number": 44,
       "displayNumber": "44",
-      "sectionId": "section-9",
-      "groupId": "section-9-group-1",
+      "sectionId": "section-10",
+      "groupId": "section-10-group-1",
       "prompt": "The success of potato milk doesn’t need time.",
       "options": [],
       "inputKind": "text",
@@ -4114,11 +4026,11 @@
       "analysis": "细节理解题。根据“Although some people noticed the potato milk when it was sold, the success of this “milk” still needs time”可知，这种“牛奶”的成功还需要时间，此句表述错误，故填F。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-9-section-9-group-1-52",
+      "id": "2022-xinjiang-xinjiang-section-10-section-10-group-1-51",
       "number": 45,
       "displayNumber": "45",
-      "sectionId": "section-9",
-      "groupId": "section-9-group-1",
+      "sectionId": "section-10",
+      "groupId": "section-10-group-1",
       "prompt": "Potato milk may not taste good to some people.",
       "options": [],
       "inputKind": "text",
@@ -4131,32 +4043,28 @@
       "analysis": "细节理解题。根据“as some people who have tried it said that it tasted so so, others thought that it tasted a little salty”可知，土豆奶对某些人来说可能味道不好，此句表述正确，故填T。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-9-section-9-group-1-53",
+      "id": "2022-xinjiang-xinjiang-section-10-section-10-group-1-52",
       "number": 46,
       "displayNumber": "46",
-      "sectionId": "section-9",
-      "groupId": "section-9-group-1",
-      "prompt": "The production of potatoes is less than that of most plants. B 根据表格内容，从",
-      "options": [
-        "A. ",
-        "B. ",
-        "C. D四个选项中选择一个正确答案。 Here is a timetable of courses in Children’s Palace. Monday Space Course 19: 00—20: 00 (once a week for two months) Dr. Li Hua (the teacher from Red Star School) More knowledge about the outer space. Place: Room 105 Thursday Chinese Clay Art Course 19: 00—21: 00 (once a week for three months) Chinese Clay Art. Join us to learn it. Call Ms. Huang Li at 8820231. Place: Room 109 Tuesday Photography Course 18: 30—19: 30 (once a week for two months) Mr. Chen Yi, from Evening Paper, will show you how to take good pictures. Bring your own camera. Place: Room 218 Saturday Cooking Course 14: 00—16: 00 (once a week for two months) Ms. Qian Hong (a famous cook) Learn some common dishes, like scrambled eggs with tomato (番茄炒蛋). Place: Room 305 Wednesday Biology Course 18: 00—19: 00 (once a week for one month) Learn about earthworms (蚯蚓) in a field. Place: In the yard of Children’s Palace Sunday Chinese Shadow Puppetry (皮影戏) Course 15: 00—17: 30 (once a week for three months) Tell the story of Journey to the West by Mr. Liang. Place: Room 308"
-      ],
-      "inputKind": "choice",
+      "sectionId": "section-10",
+      "groupId": "section-10-group-1",
+      "prompt": "The production of potatoes is less than that of most plants.",
+      "options": [],
+      "inputKind": "text",
       "sourceBlockIds": [
         "paragraph-109"
       ],
-      "type": "choice",
+      "type": "text",
       "context": "",
       "answer": "",
       "analysis": "细节理解题。根据“Also it has more production than most plants”可知，它的产量超过了大多数植物，此句表述错误，故填F。\nB\n根据表格内容，从A、B、C、D四个选项中选择一个正确答案。\nHere is a timetable of courses in Children’s Palace.\n47. When can you learn more about the outer space in Children’s Palace?\nA. On Sunday.B. On Saturday.C. On Tuesday.D. On Monday.\n48. Who can you learn from if you want to know more about the Chinese Clay Art?\nA. From Dr. Li Hua.B. From Ms. Huang Li.C. From Mr. Chen Yi.D. From Mr. Liang.\n49. Where can we have the Biology Course?\nA. In Room 109.B. In Room 305.\nC. In the yard of Children’s Palace.D. In Room 218.\n50. What can you learn in the Cooking Course?\nA. How to cook.B. How to tell a story.C. How to take photos.D. How to make clay pieces.\n51. Which course will last for the longest time?\nA. Photography Course.B. Chinese Shadow Puppetry Course.\nC. Cooking Course.D. Biology Course.\n【答案】47. D    48. B    49. C    50. A    51. B\n【解析】\n【导语】本文是一张少年宫的课程表，介绍了课程内容、时间、老师信息和教室。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-9-section-9-group-1-54",
+      "id": "2022-xinjiang-xinjiang-section-10-section-10-group-1-53",
       "number": 47,
       "displayNumber": "47",
-      "sectionId": "section-9",
-      "groupId": "section-9-group-1",
+      "sectionId": "section-10",
+      "groupId": "section-10-group-1",
       "prompt": "When can you learn more about the outer space in Children’s Palace?",
       "options": [
         "A. On Sunday.",
@@ -4174,11 +4082,11 @@
       "analysis": "细节理解题。根据“Monday；Space Course；More knowledge about the outer space.”可知，礼拜一的外太空课程能让你在少年宫了解关于外太空的知识。故选D。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-9-section-9-group-2-55",
+      "id": "2022-xinjiang-xinjiang-section-10-section-10-group-2-54",
       "number": 48,
       "displayNumber": "48",
-      "sectionId": "section-9",
-      "groupId": "section-9-group-2",
+      "sectionId": "section-10",
+      "groupId": "section-10-group-2",
       "prompt": "Who can you learn from if you want to know more about the Chinese Clay Art?",
       "options": [
         "A. From Dr. Li Hua.",
@@ -4196,11 +4104,11 @@
       "analysis": "细节理解题。根据“Chinese Clay Art Course；Call Ms. Huang Li at 8820231.”可知，想更多地了解中国泥塑艺术，你可以打电话给Ms. Huang Li来了解更多的信息。故选B。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-9-section-9-group-3-56",
+      "id": "2022-xinjiang-xinjiang-section-10-section-10-group-3-55",
       "number": 49,
       "displayNumber": "49",
-      "sectionId": "section-9",
-      "groupId": "section-9-group-3",
+      "sectionId": "section-10",
+      "groupId": "section-10-group-3",
       "prompt": "Where can we have the Biology Course? A In Room 109.",
       "options": [
         "B. In Room 305.",
@@ -4217,11 +4125,11 @@
       "analysis": "细节理解题。根据“Biology Course；Place: In the yard of Children’s Palace”可知，上生物课程是在少年宫庭院里。故选C。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-9-section-9-group-4-57",
+      "id": "2022-xinjiang-xinjiang-section-10-section-10-group-4-56",
       "number": 50,
       "displayNumber": "50",
-      "sectionId": "section-9",
-      "groupId": "section-9-group-4",
+      "sectionId": "section-10",
+      "groupId": "section-10-group-4",
       "prompt": "What can you learn in the Cooking Course?",
       "options": [
         "A. How to cook.",
@@ -4239,19 +4147,16 @@
       "analysis": "细节理解题。根据“Learn some common dishes, like scrambled eggs with tomato (番茄炒蛋).”可知，上烹饪课程可以学到如何烹饪。故选A。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-9-section-9-group-5-58",
+      "id": "2022-xinjiang-xinjiang-section-10-section-10-group-5-57",
       "number": 51,
       "displayNumber": "51",
-      "sectionId": "section-9",
-      "groupId": "section-9-group-5",
+      "sectionId": "section-10",
+      "groupId": "section-10-group-5",
       "prompt": "Which course will last for the longest time? A Photography Course.",
       "options": [
         "B. Chinese Shadow Puppetry Course.",
         "C. Cooking Course.",
-        "D. Biology Course. C 根据短文内容，从",
-        "A. ",
-        "B. ",
-        "C. D四个选项中选择一个正确答案。 Why did Chinese people have more than one name in ancient times? In ancient China, people’s names had three parts, their family name, given name and courtesy name. Take famous poet Li Bai for example. His family name, which came from his father’s name, was Li. His given name was Bai, and his courtesy name was Taibai. People used their given names when they were among family members. But in social life, they called each other by their courtesy names to show respect. This was mostly done among people of similar age. If you were talking about yourself, or if your elders were talking about you, the given name would be used instead of the courtesy name. Men would get their courtesy names when they turned 20. It was a symbol of adulthood (成年礼). Women would get their courtesy names after getting married. One’s courtesy name often had something to do with one’s given name. For example, the name of Mencius was Meng Ke. His courtesy name was Ziyu. Both Ke and Ziyu mean “carriage (马车)”. Zhuge Liang’s given name was Liang, which means “bright”. His courtesy name was Kongming, which means “very bright”."
+        "D. Biology Course."
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -4263,11 +4168,11 @@
       "analysis": "细节理解题。根据“Space Course 19: 00—20: 00；Chinese Clay Art Course 19: 00—21: 00；Photography Course 18: 30—19: 30；Cooking Course 14: 00—16: 00；Biology Course 18: 00—19: 00；Chinese Shadow Puppetry (皮影戏) Course 15: 00—17: 30”可知，皮影戏课程的时间最长，持续两个半小时。故选B。\nC\n根据短文内容，从A、B、C、D四个选项中选择一个正确答案。\nWhy did Chinese people have more than one name in ancient times?\nIn ancient China, people’s names had three parts, their family name, given name and courtesy name. Take famous poet Li Bai for example. His family name, which came from his father’s name, was Li. His given name was Bai, and his courtesy name was Taibai.\nPeople used their given names when they were among family members. But in social life, they called each other by their courtesy names to show respect. This was mostly done among people of similar age. If you were talking about yourself, or if your elders were talking about you, the given name would be used instead of the courtesy name.\nMen would get their courtesy names when they turned 20. It was a symbol of adulthood (成年礼). Women would get their courtesy names after getting married.\nOne’s courtesy name often had something to do with one’s given name. For example, the name of Mencius was Meng Ke. His courtesy name was Ziyu. Both Ke and Ziyu mean “carriage (马车)”. Zhuge Liang’s given name was Liang, which means “bright”. His courtesy name was Kongming, which means “very bright”.\n52. How many parts are there in people’s names in ancient China?\nA. 3.B. 4.C. 5.D. 6.\n53. What does the underlined word “courtesy” in Paragraph 2 mean in Chinese?\nA. 名B. 姓氏C. 字D. 昵称\n54. Why did people call each other by their courtesy names in social life?\nA. To show their love.B. To show their good relationship.\nC. To show their kindness.D. To show their respect.\n55. What would be used if your elders were talking about you according to the passage?\nA. Family name.B. Nickname.C. Given name.D. Courtesy name.\n56. What’s the main idea of the passage?\nA. The famous poet Li Bai.B. Three parts of ancient names.\nC. The ancient names and the modern names.D. The development of names.\n【答案】52. A    53. C    54. D    55. C    56. B\n【解析】\n【导语】本文主要介绍了古代人名字的组成部分以及它所代表的意义。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-9-section-9-group-6-59",
+      "id": "2022-xinjiang-xinjiang-section-10-section-10-group-6-58",
       "number": 52,
       "displayNumber": "52",
-      "sectionId": "section-9",
-      "groupId": "section-9-group-6",
+      "sectionId": "section-10",
+      "groupId": "section-10-group-6",
       "prompt": "How many parts are there in people’s names in ancient China?",
       "options": [
         "A. 3.",
@@ -4285,11 +4190,11 @@
       "analysis": "细节理解题。根据“In ancient China, people’s names had three parts, their family name, given name and courtesy name”可知，名字有三部分，故选A。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-9-section-9-group-7-60",
+      "id": "2022-xinjiang-xinjiang-section-10-section-10-group-7-59",
       "number": 53,
       "displayNumber": "53",
-      "sectionId": "section-9",
-      "groupId": "section-9-group-7",
+      "sectionId": "section-10",
+      "groupId": "section-10-group-7",
       "prompt": "What does the underlined word “courtesy” in Paragraph 2 mean in Chinese?",
       "options": [
         "A. 名",
@@ -4307,11 +4212,11 @@
       "analysis": "词义猜测题。根据前文“In ancient China, people’s names had three parts, their family name, given name and courtesy name”可知，三部分包括了姓，名和字，所以courtesy表示“字”，故选C。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-9-section-9-group-8-61",
+      "id": "2022-xinjiang-xinjiang-section-10-section-10-group-8-60",
       "number": 54,
       "displayNumber": "54",
-      "sectionId": "section-9",
-      "groupId": "section-9-group-8",
+      "sectionId": "section-10",
+      "groupId": "section-10-group-8",
       "prompt": "Why did people call each other by their courtesy names in social life?",
       "options": [
         "A. To show their love.",
@@ -4329,11 +4234,11 @@
       "analysis": "细节理解题。根据“But in social life, they called each other by their courtesy names to show respect”可知，他们互相称呼对方的尊称以示尊重，故选D。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-9-section-9-group-10-62",
+      "id": "2022-xinjiang-xinjiang-section-10-section-10-group-10-61",
       "number": 55,
       "displayNumber": "55",
-      "sectionId": "section-9",
-      "groupId": "section-9-group-10",
+      "sectionId": "section-10",
+      "groupId": "section-10-group-10",
       "prompt": "What would be used if your elders were talking about you according to the passage?",
       "options": [
         "A. Family name.",
@@ -4351,17 +4256,17 @@
       "analysis": "细节理解题。根据“or if your elders were talking about you, the given name would be used instead of the courtesy name”可知，如果长者谈论你会用名来称呼，故选C。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-9-section-9-group-11-63",
+      "id": "2022-xinjiang-xinjiang-section-10-section-10-group-11-62",
       "number": 56,
       "displayNumber": "56",
-      "sectionId": "section-9",
-      "groupId": "section-9-group-11",
+      "sectionId": "section-10",
+      "groupId": "section-10-group-11",
       "prompt": "What’s the main idea of the passage?",
       "options": [
         "A. The famous poet Li Bai.",
         "B. Three parts of ancient names.",
         "C. The ancient names and the modern names.",
-        "D. The development of names. D"
+        "D. The development of names."
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -4373,11 +4278,11 @@
       "analysis": "主旨大意题。通读全文可知，本文主要介绍了古代人名字的组成部分以及它所代表的意义，故选B。\nD"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-10-section-10-group-1-64",
+      "id": "2022-xinjiang-xinjiang-section-11-section-11-group-1-63",
       "number": 57,
       "displayNumber": "57",
-      "sectionId": "section-10",
-      "groupId": "section-10-group-1",
+      "sectionId": "section-11",
+      "groupId": "section-11-group-1",
       "prompt": "We do eye exercises. We wear sunglasses. We do lots of things to protect our eyes.  ______",
       "options": [],
       "inputKind": "blank",
@@ -4390,11 +4295,11 @@
       "analysis": "根据“We do lots of things to protect our eyes.”和“Ears help us hear the world.”可知，横线处句子起到过渡作用，告诉读者除了眼睛，耳朵也是重要的身体部分，选项B“但我们通常会忘记我们身体的另一个重要部分，耳朵。”符合语境。故选B。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-10-section-10-group-1-65",
+      "id": "2022-xinjiang-xinjiang-section-11-section-11-group-1-64",
       "number": 58,
       "displayNumber": "58",
-      "sectionId": "section-10",
-      "groupId": "section-10-group-1",
+      "sectionId": "section-11",
+      "groupId": "section-11-group-1",
       "prompt": "______  If you feel water in your ear, shake your head a little bit. This can help you get the water out of your ear. Also in summer, when the sun is shining, wear some sunscreen (防晒霜) on your ears. ___59___",
       "options": [],
       "inputKind": "blank",
@@ -4407,11 +4312,11 @@
       "analysis": "根据“Keep your ears dry and warm”和“If you feel water in your ear, shake your head a little bit.”可知，此段讲述要保持耳朵干燥，防止水进入耳朵，选项C“游泳或淋浴后擦干耳朵。”符合语境。故选C。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-10-section-10-group-1-66",
+      "id": "2022-xinjiang-xinjiang-section-11-section-11-group-1-65",
       "number": 59,
       "displayNumber": "59",
-      "sectionId": "section-10",
-      "groupId": "section-10-group-1",
+      "sectionId": "section-11",
+      "groupId": "section-11-group-1",
       "prompt": "___58___ If you feel water in your ear, shake your head a little bit. This can help you get the water out of your ear. Also in summer, when the sun is shining, wear some sunscreen (防晒霜) on your ears.  ______",
       "options": [],
       "inputKind": "blank",
@@ -4424,11 +4329,11 @@
       "analysis": "根据“Also in summer, when the sun is shining, wear some sunscreen (防晒霜) on your ears.”可知，此处讲述不同季节如何保护耳朵，选项E“冬天，用帽子或围巾保护你的耳朵。”符合语境。故选E。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-10-section-10-group-1-67",
+      "id": "2022-xinjiang-xinjiang-section-11-section-11-group-1-66",
       "number": 60,
       "displayNumber": "60",
-      "sectionId": "section-10",
-      "groupId": "section-10-group-1",
+      "sectionId": "section-11",
+      "groupId": "section-11-group-1",
       "prompt": "______  The earwax (耳屎) itself comes out of the ear along with some dirt. Don’t clean your ears with anything sharp, or it can make the earwax go too deep into your ears and hurt them. But if your ears start to hurt, you can go to a doctor for help.",
       "options": [],
       "inputKind": "blank",
@@ -4441,11 +4346,11 @@
       "analysis": "根据“The earwax (耳屎) itself comes out of the ear along with some dirt.”可知，此处讲述耳朵自己能够完成清洁，不需要额外的清洁，选项D“通常，我们的耳朵会自己清洗。”符合语境。故选D。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-10-section-10-group-1-68",
+      "id": "2022-xinjiang-xinjiang-section-11-section-11-group-1-67",
       "number": 61,
       "displayNumber": "61",
-      "sectionId": "section-10",
-      "groupId": "section-10-group-1",
+      "sectionId": "section-11",
+      "groupId": "section-11-group-1",
       "prompt": "Don’t listen to loud music on your headphones for a long time. Over-the-ear headphones (头戴式耳机) are better than in-ear ones.  ______",
       "options": [],
       "inputKind": "blank",
@@ -4455,14 +4360,14 @@
       "type": "blank",
       "context": "",
       "answer": "A",
-      "analysis": "根据“Over-the-ear headphones (头戴式耳机) are better than in-ear ones.”可知，此处讲述头戴式耳机的好处，选项A“它们在阻止外界噪音方面做得更好，所以你可以用更低的音量听。”符合语境。故选A。\n第II卷（非选择题，满分50分）\nVI. 词汇（本题共10小题，每小题1分，共10分）\nA. 根据首字母提示补全单词，使句子完整、通顺。将完整的单词写在答题卷上，每空一词\n62. Cartoon characters like Monkey King are still p_________ in China.\n【答案】(p)opular\n【解析】\n【详解】句意：像孙悟空这样的卡通人物在中国仍然很受欢迎。根据“Cartoon characters like Monkey King are still p...”可知，表示卡通人物在中国仍然很受欢迎，popular“受欢迎的”，形容词，在句中作表语。故填(p)opular。\n63. It is reported that the h_________ of Qomolangma is more than 8844.43 meters.\n【答案】(h)eight\n【解析】\n【详解】句意：据报道，珠穆朗玛峰的高度超过8844.43米。根据“more than 8844.43 meters”可知此处指珠穆朗玛峰的高度，height“高度”，不可数名词。故填(h)eight。\n64. They are such interesting books that we all enjoy r_________ them.\n【答案】(r)eading\n【解析】\n【详解】句意：这些书很有趣，我们都喜欢读。根据“They are such interesting books”可知，此处指喜欢阅读这些有趣的书，read“阅读”，动词；enjoy doing“喜欢做某事”，故空格处为动名词“reading”。故填(r)eading。\n65. Learning to s_________ problems is very important.\n【答案】(s)olve\n【解析】\n【详解】句意：学习解决问题非常重要。根据“problems”和首字母可知，此处指学习解决问题很重要，slove“解决”；learn to do sth“学习做某事”，空格处应为动词原形，与to构成动词不定式。故填(s)olve。\n66. She is fifteen, and next year she is going to celebrate her s_________ birthday.\n【答案】(s)ixteenth\n【解析】\n【详解】句意：她十五岁了，明年她将庆祝她十六岁的生日。根据“birthday”可知此处用序数词表顺序，结合“She is fifteen”可知现在十五岁，明年庆祝十六岁生日，“第十六”sixteenth。故填(s)ixteenth。\nB. 根据汉语提示完成单词，使句子完整、通顺，每空一词。\n67. I _________ (几乎不) travel. As you know, I don’t have enough time.\n【答案】hardly\n【解析】\n【详解】句意：我几乎不旅游。如你所知，我没有足够的时间。几乎不：hardly，频度副词。故填hardly。\n68. It was yesterday that I met one of my good friends in the _________ (街道).\n【答案】street\n【解析】\n【详解】句意：昨天我在街上遇到了我的一个好朋友。根据中文提示可知，street“街道”符合句意；故填street。\n69. His hometown is famous for tea, and _________ (我的) is famous for pears and grapes.\n【答案】mine\n【解析】\n【详解】句意：他的家乡以茶闻名，我的家乡以梨和葡萄闻名。空格后是“is”，可知这里缺少主语，因此用名词性物主代词mine，表示“我的家乡”。故填mine。\n70. Next time you come to Yili, _________ (记得) to visit Sailimu Lake.\n【答案】remember\n【解析】\n【详解】句意：下次来伊犁时，记得参观赛里木湖。remember“记得”，此句为肯定祈使句，应以动词原形开头。故填remember。\n71. I think the car is _________ (便宜的) and I can afford it.\n【答案】cheap\n【解析】\n【详解】句意：我觉得这辆车很便宜，我买得起。此处作be动词的表语用形容词cheap“便宜的”。故填cheap。\nVII. 完成句子（本题共5小题，每小题2分，共10分）\n根据所给提示完成句子。每空一词，含缩略词。\n72. 如果乘公交车去机场的话，我会错过我的航班。\nIf I _________ the bus to the airport, I’ll _________ my flight.\n【答案】    ①. take    ②. miss\n【解析】\n【详解】句子是if引导的条件状语从句，遵循“主将从现”，从句用一般现在时，take the bus“乘公交车”，主语是I，谓语动词用原形；miss“错过”，will后加动词原形。故填take；miss。\n73. 新疆一年四季都有适合游玩的美景。\nXinjiang is suitable for visiting _________ year _________.\n【答案】    ①. all    ②. round\n【解析】\n【详解】对比中英文可知，此处缺少“一年四季”的翻译，英文表达为all year round，故填all；round。\n74. 约翰尽力在工作和娱乐中获得平衡。\nJohn does his best to keep the balance _________ work _________ play.\n【答案】    ①. between    ②. and\n【解析】\n【详解】根据中英对比可知，空格处表示“在……之间”，between…and…表示“两者之间”，是固定搭配，宾语为人或事物。故填between；and。\n75. Life is just like a journey of discovery.（改为一般疑问句）\n_________ life just _________ a journey of discovery?\n【答案】    ①. Is    ②. like\n【解析】\n【详解】句意：人生就像一场发现之旅。原句时态是一般现在时，be动词为is，改为一般疑问句应将is放在句首，大写句首字母，其后保持不变。故填Is；like。\n76. We will go to Beijing on summer vacation.（对画线部分提问）\n_________ _________ you go on summer vacation?\n【答案】    ①. Where    ②. will\n【解析】\n【详解】句意：我们将在暑假去北京。画线部分“Beijing”是地点，询问地点用特殊疑问词where“哪里”，大写句首字母；原句为一般将来时，借助助动词“will”构成疑问句。故填Where；will。\nVIII. 英语口语（本题共5小题，每小题1分，共5分）\n根据对话内容，用恰当的单词、短语或句子补全对话。\n(Two friends are talking about one’s new job)\nA: Hey, Sam, you look so happy. Is there any good news?\nB: _____77_____, I have got a new job.\nA: A new job? It seems that you like it very much. _____78_____?\nB: A computer programmer. You know I am good at computer programming.\nA: Congratulations!\nB: _____79_____. I will have a celebration party in my house tomorrow. Would you join us?\nA: Yes, I’d love to. _____80_____?\nB: Let’s meet at 5 o’clock in the afternoon.\nA: OK, see you!\nB: _____81_____!\n【答案】77. Yes\n78. What’s your job/What is it\n79. Thanks    80. When shall we meet\n81. See you\n【解析】\n【导语】本文主要围绕Sam找到了新工作而展开话题。"
+      "analysis": "根据“Over-the-ear headphones (头戴式耳机) are better than in-ear ones.”可知，此处讲述头戴式耳机的好处，选项A“它们在阻止外界噪音方面做得更好，所以你可以用更低的音量听。”符合语境。故选A。\n第II卷（非选择题，满分50分）"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-10-section-10-group-7-69",
+      "id": "2022-xinjiang-xinjiang-section-12-section-12-group-2-68",
       "number": 62,
       "displayNumber": "62",
-      "sectionId": "section-10",
-      "groupId": "section-10-group-7",
+      "sectionId": "section-12",
+      "groupId": "section-12-group-2",
       "prompt": "Cartoon characters like Monkey King are still p_________ in China.",
       "options": [],
       "inputKind": "blank",
@@ -4475,11 +4380,11 @@
       "analysis": ""
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-10-section-10-group-7-70",
+      "id": "2022-xinjiang-xinjiang-section-12-section-12-group-2-69",
       "number": 63,
       "displayNumber": "63",
-      "sectionId": "section-10",
-      "groupId": "section-10-group-7",
+      "sectionId": "section-12",
+      "groupId": "section-12-group-2",
       "prompt": "It is reported that the h_________ of Qomolangma is more than 8844.43 meters.",
       "options": [],
       "inputKind": "blank",
@@ -4492,11 +4397,11 @@
       "analysis": ""
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-10-section-10-group-7-71",
+      "id": "2022-xinjiang-xinjiang-section-12-section-12-group-2-70",
       "number": 64,
       "displayNumber": "64",
-      "sectionId": "section-10",
-      "groupId": "section-10-group-7",
+      "sectionId": "section-12",
+      "groupId": "section-12-group-2",
       "prompt": "They are such interesting books that we all enjoy r_________ them.",
       "options": [],
       "inputKind": "blank",
@@ -4509,11 +4414,11 @@
       "analysis": ""
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-10-section-10-group-7-72",
+      "id": "2022-xinjiang-xinjiang-section-12-section-12-group-2-71",
       "number": 65,
       "displayNumber": "65",
-      "sectionId": "section-10",
-      "groupId": "section-10-group-7",
+      "sectionId": "section-12",
+      "groupId": "section-12-group-2",
       "prompt": "Learning to s_________ problems is very important.",
       "options": [],
       "inputKind": "blank",
@@ -4526,11 +4431,11 @@
       "analysis": ""
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-10-section-10-group-7-73",
+      "id": "2022-xinjiang-xinjiang-section-12-section-12-group-2-72",
       "number": 66,
       "displayNumber": "66",
-      "sectionId": "section-10",
-      "groupId": "section-10-group-7",
+      "sectionId": "section-12",
+      "groupId": "section-12-group-2",
       "prompt": "She is fifteen, and next year she is going to celebrate her s_________ birthday. B. 根据汉语提示完成单词，使句子完整、通顺，每空一词。",
       "options": [],
       "inputKind": "blank",
@@ -4543,11 +4448,11 @@
       "analysis": ""
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-10-section-10-group-8-74",
+      "id": "2022-xinjiang-xinjiang-section-12-section-12-group-3-73",
       "number": 67,
       "displayNumber": "67",
-      "sectionId": "section-10",
-      "groupId": "section-10-group-8",
+      "sectionId": "section-12",
+      "groupId": "section-12-group-3",
       "prompt": "I _________ (几乎不) travel. As you know, I don’t have enough time.",
       "options": [],
       "inputKind": "blank",
@@ -4560,11 +4465,11 @@
       "analysis": ""
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-10-section-10-group-8-75",
+      "id": "2022-xinjiang-xinjiang-section-12-section-12-group-3-74",
       "number": 68,
       "displayNumber": "68",
-      "sectionId": "section-10",
-      "groupId": "section-10-group-8",
+      "sectionId": "section-12",
+      "groupId": "section-12-group-3",
       "prompt": "It was yesterday that I met one of my good friends in the _________ (街道).",
       "options": [],
       "inputKind": "blank",
@@ -4577,11 +4482,11 @@
       "analysis": ""
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-10-section-10-group-8-76",
+      "id": "2022-xinjiang-xinjiang-section-12-section-12-group-3-75",
       "number": 69,
       "displayNumber": "69",
-      "sectionId": "section-10",
-      "groupId": "section-10-group-8",
+      "sectionId": "section-12",
+      "groupId": "section-12-group-3",
       "prompt": "His hometown is famous for tea, and _________ (我的) is famous for pears and grapes.",
       "options": [],
       "inputKind": "blank",
@@ -4594,11 +4499,11 @@
       "analysis": ""
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-10-section-10-group-8-77",
+      "id": "2022-xinjiang-xinjiang-section-12-section-12-group-3-76",
       "number": 70,
       "displayNumber": "70",
-      "sectionId": "section-10",
-      "groupId": "section-10-group-8",
+      "sectionId": "section-12",
+      "groupId": "section-12-group-3",
       "prompt": "Next time you come to Yili _________ (记得) to visit Sailimu Lake.",
       "options": [],
       "inputKind": "blank",
@@ -4611,12 +4516,12 @@
       "analysis": ""
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-10-section-10-group-8-78",
+      "id": "2022-xinjiang-xinjiang-section-12-section-12-group-3-77",
       "number": 71,
       "displayNumber": "71",
-      "sectionId": "section-10",
-      "groupId": "section-10-group-8",
-      "prompt": "I think the car is _________ (便宜的) and I can afford it. VII. 完成句子（本题共5小题，每小题2分，共10分） 根据所给提示完成句子。每空一词，含缩略词。",
+      "sectionId": "section-12",
+      "groupId": "section-12-group-3",
+      "prompt": "I think the car is _________ (便宜的) and I can afford it.",
       "options": [],
       "inputKind": "blank",
       "sourceBlockIds": [
@@ -4628,11 +4533,11 @@
       "analysis": ""
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-10-section-10-group-8-79",
+      "id": "2022-xinjiang-xinjiang-section-13-section-13-group-1-78",
       "number": 72,
       "displayNumber": "72",
-      "sectionId": "section-10",
-      "groupId": "section-10-group-8",
+      "sectionId": "section-13",
+      "groupId": "section-13-group-1",
       "prompt": "如果乘公交车去机场的话，我会错过我的航班。 If I _________ the bus to the airport, I’ll _________ my flight.",
       "options": [],
       "inputKind": "blank",
@@ -4645,11 +4550,11 @@
       "analysis": ""
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-10-section-10-group-8-80",
+      "id": "2022-xinjiang-xinjiang-section-13-section-13-group-1-79",
       "number": 73,
       "displayNumber": "73",
-      "sectionId": "section-10",
-      "groupId": "section-10-group-8",
+      "sectionId": "section-13",
+      "groupId": "section-13-group-1",
       "prompt": "新疆一年四季都有适合游玩的美景。 Xinjiang is suitable for visiting _________ year _________.",
       "options": [],
       "inputKind": "blank",
@@ -4662,11 +4567,11 @@
       "analysis": ""
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-10-section-10-group-8-81",
+      "id": "2022-xinjiang-xinjiang-section-13-section-13-group-1-80",
       "number": 74,
       "displayNumber": "74",
-      "sectionId": "section-10",
-      "groupId": "section-10-group-8",
+      "sectionId": "section-13",
+      "groupId": "section-13-group-1",
       "prompt": "约翰尽力在工作和娱乐中获得平衡。 John does his best to keep the balance _________ work _________ play.",
       "options": [],
       "inputKind": "blank",
@@ -4679,11 +4584,11 @@
       "analysis": ""
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-10-section-10-group-8-82",
+      "id": "2022-xinjiang-xinjiang-section-13-section-13-group-1-81",
       "number": 75,
       "displayNumber": "75",
-      "sectionId": "section-10",
-      "groupId": "section-10-group-8",
+      "sectionId": "section-13",
+      "groupId": "section-13-group-1",
       "prompt": "Life is just like a journey of discovery.（改为一般疑问句） _________ life just _________ a journey of discovery?",
       "options": [],
       "inputKind": "blank",
@@ -4696,12 +4601,12 @@
       "analysis": ""
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-10-section-10-group-8-83",
+      "id": "2022-xinjiang-xinjiang-section-13-section-13-group-1-82",
       "number": 76,
       "displayNumber": "76",
-      "sectionId": "section-10",
-      "groupId": "section-10-group-8",
-      "prompt": "We will go to Beijing on summer vacation.（对画线部分提问） _________ _________ you go on summer vacation? VIII. 英语口语（本题共5小题，每小题1分，共5分） 根据对话内容，用恰当的单词、短语或句子补全对话。 (Two friends are talking about one’s new job) A: Hey, Sam, you look so happy. Is there any good news?",
+      "sectionId": "section-13",
+      "groupId": "section-13-group-1",
+      "prompt": "We will go to Beijing on summer vacation.（对画线部分提问） _________ _________ you go on summer vacation?",
       "options": [],
       "inputKind": "blank",
       "sourceBlockIds": [
@@ -4713,11 +4618,11 @@
       "analysis": ""
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-10-section-10-group-8-84",
+      "id": "2022-xinjiang-xinjiang-section-14-section-14-group-1-83",
       "number": 77,
       "displayNumber": "77",
-      "sectionId": "section-10",
-      "groupId": "section-10-group-8",
+      "sectionId": "section-14",
+      "groupId": "section-14-group-1",
       "prompt": "B:  ______ , I have got a new job.",
       "options": [],
       "inputKind": "blank",
@@ -4730,11 +4635,11 @@
       "analysis": "根据“Is there any good news?”可知，用yes/no回答一般疑问句，结合“I have got a new job.”，是肯定回答，Yes符合句意；故填Yes。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-10-section-10-group-8-85",
+      "id": "2022-xinjiang-xinjiang-section-14-section-14-group-1-84",
       "number": 78,
       "displayNumber": "78",
-      "sectionId": "section-10",
-      "groupId": "section-10-group-8",
+      "sectionId": "section-14",
+      "groupId": "section-14-group-1",
       "prompt": "A: A new job? It seems that you like it very much.  ______ ?",
       "options": [],
       "inputKind": "blank",
@@ -4747,11 +4652,11 @@
       "analysis": "根据“A computer programmer.”可知，询问工作是什么，因此What’s your job/What is it符合句意；故填What’s your job/What is it。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-10-section-10-group-8-86",
+      "id": "2022-xinjiang-xinjiang-section-14-section-14-group-1-85",
       "number": 79,
       "displayNumber": "79",
-      "sectionId": "section-10",
-      "groupId": "section-10-group-8",
+      "sectionId": "section-14",
+      "groupId": "section-14-group-1",
       "prompt": "B:  ______ . I will have a celebration party in my house tomorrow. Would you join us?",
       "options": [],
       "inputKind": "blank",
@@ -4764,11 +4669,11 @@
       "analysis": "根据“Congratulations!”可知，对对方的祝福表示感谢，因此Thanks符合句意；故填Thanks。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-10-section-10-group-8-87",
+      "id": "2022-xinjiang-xinjiang-section-14-section-14-group-1-86",
       "number": 80,
       "displayNumber": "80",
-      "sectionId": "section-10",
-      "groupId": "section-10-group-8",
+      "sectionId": "section-14",
+      "groupId": "section-14-group-1",
       "prompt": "A: Yes, I’d love to.  ______ ?",
       "options": [],
       "inputKind": "blank",
@@ -4781,11 +4686,11 @@
       "analysis": "根据“Let’s meet at 5 o’clock in the afternoon.”可知，询问什么时候见面，因此When shall we meet符合句意；故填When shall we meet。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-10-section-10-group-8-88",
+      "id": "2022-xinjiang-xinjiang-section-14-section-14-group-1-87",
       "number": 81,
       "displayNumber": "81",
-      "sectionId": "section-10",
-      "groupId": "section-10-group-8",
+      "sectionId": "section-14",
+      "groupId": "section-14-group-1",
       "prompt": "B:  ______ !",
       "options": [],
       "inputKind": "blank",
@@ -4798,11 +4703,11 @@
       "analysis": "根据“OK, see you!”可知，跟对方道别；故填See you。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-12-section-12-group-1-89",
+      "id": "2022-xinjiang-xinjiang-section-16-section-16-group-1-88",
       "number": 82,
       "displayNumber": "82",
-      "sectionId": "section-12",
-      "groupId": "section-12-group-1",
+      "sectionId": "section-16",
+      "groupId": "section-16-group-1",
       "prompt": "Zhang Junli, an amazing woman, is from Taiyuan, Shanxi Province. She has overcome life’s greatest difficulties to become one of the most famous  ______  in China. She has been paralyzed (瘫痪的) for over 30 years. When she was six, Zhang had a ___83___ illness. At eight, she could not move 90% of her body. She can only ___84___ her shoulders and neck a little now.",
       "options": [],
       "inputKind": "blank",
@@ -4815,11 +4720,11 @@
       "analysis": "句意：她克服了人生最大的困难，成为中国最著名的画家之一。根据“learning painting”和备选词汇可知，是一名画家，one of the最高级+名词复数，painters符合句意；故填painters。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-12-section-12-group-1-90",
+      "id": "2022-xinjiang-xinjiang-section-16-section-16-group-1-89",
       "number": 83,
       "displayNumber": "83",
-      "sectionId": "section-12",
-      "groupId": "section-12-group-1",
+      "sectionId": "section-16",
+      "groupId": "section-16-group-1",
       "prompt": "Zhang Junli, an amazing woman, is from Taiyuan, Shanxi Province. She has overcome life’s greatest difficulties to become one of the most famous ___82___ in China. She has been paralyzed (瘫痪的) for over 30 years. When she was six, Zhang had a  ______  illness. At eight, she could not move 90% of her body. She can only ___84___ her shoulders and neck a little now.",
       "options": [],
       "inputKind": "blank",
@@ -4832,11 +4737,11 @@
       "analysis": "句意：当她六岁的时候，她得了一场重病。根据“At eight, she could not move 90% of her body.”和备选词汇可知，得了很严重的病，serious“严重的”；故填serious。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-12-section-12-group-1-91",
+      "id": "2022-xinjiang-xinjiang-section-16-section-16-group-1-90",
       "number": 84,
       "displayNumber": "84",
-      "sectionId": "section-12",
-      "groupId": "section-12-group-1",
+      "sectionId": "section-16",
+      "groupId": "section-16-group-1",
       "prompt": "Zhang Junli, an amazing woman, is from Taiyuan, Shanxi Province. She has overcome life’s greatest difficulties to become one of the most famous ___82___ in China. She has been paralyzed (瘫痪的) for over 30 years. When she was six, Zhang had a ___83___ illness. At eight, she could not move 90% of her body. She can only  ______  her shoulders and neck a little now.",
       "options": [],
       "inputKind": "blank",
@@ -4849,11 +4754,11 @@
       "analysis": "句意：她现在只能稍微活动一下肩膀和脖子了。根据“her shoulders and neck a little now”和备选词汇可知，只能移动肩膀和脖子，can后接动词原形，move符合句意；故填move。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-12-section-12-group-1-92",
+      "id": "2022-xinjiang-xinjiang-section-16-section-16-group-1-91",
       "number": 85,
       "displayNumber": "85",
-      "sectionId": "section-12",
-      "groupId": "section-12-group-1",
+      "sectionId": "section-16",
+      "groupId": "section-16-group-1",
       "prompt": "However, being paralyzed never prevented her from  ______  to follow her dreams. Zhang took up drawing at a young age and ____86____ learning painting in 2015. Though it is hard for her to pick a paintbrush, her love for painting is ____87____ pushing her to challenge herself.",
       "options": [],
       "inputKind": "blank",
@@ -4866,11 +4771,11 @@
       "analysis": "句意：然而，瘫痪并不妨碍她追寻自己的梦想。根据“to follow her dreams”和备选词汇可知，试着追随自己的梦想，prevent sb from doing sth“阻止某人做某事”，trying符合句意；故填trying。\n86题详解】\n句意：张俊莉从小就开始画画。根据“Zhang took up drawing at a young age”和备选词汇可知，需要一个动词过去式，应该是开始学习画画，started符合句意；故填started。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-12-section-12-group-1-93",
+      "id": "2022-xinjiang-xinjiang-section-16-section-16-group-1-92",
       "number": 86,
       "displayNumber": "86",
-      "sectionId": "section-12",
-      "groupId": "section-12-group-1",
+      "sectionId": "section-16",
+      "groupId": "section-16-group-1",
       "prompt": "However, being paralyzed never prevented her from ___85___ to follow her dreams. Zhang took up drawing at a young age and  ______  learning painting in 2015. Though it is hard for her to pick a paintbrush, her love for painting is ____87____ pushing her to challenge herself.",
       "options": [],
       "inputKind": "blank",
@@ -4883,11 +4788,11 @@
       "analysis": ""
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-12-section-12-group-1-94",
+      "id": "2022-xinjiang-xinjiang-section-16-section-16-group-1-93",
       "number": 87,
       "displayNumber": "87",
-      "sectionId": "section-12",
-      "groupId": "section-12-group-1",
+      "sectionId": "section-16",
+      "groupId": "section-16-group-1",
       "prompt": "However, being paralyzed never prevented her from ___85___ to follow her dreams. Zhang took up drawing at a young age and ____86____ learning painting in 2015. Though it is hard for her to pick a paintbrush, her love for painting is  ______  pushing her to challenge herself.",
       "options": [],
       "inputKind": "blank",
@@ -4900,11 +4805,11 @@
       "analysis": "句意：虽然她很难选择画笔，但她对绘画的热爱正促使她挑战自己。根据“pushing her to challenge herself”和备选词汇可知，总是推动她挑战自己；always符合句意；故填always。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-12-section-12-group-1-95",
+      "id": "2022-xinjiang-xinjiang-section-16-section-16-group-1-94",
       "number": 88,
       "displayNumber": "88",
-      "sectionId": "section-12",
-      "groupId": "section-12-group-1",
+      "sectionId": "section-16",
+      "groupId": "section-16-group-1",
       "prompt": "“Painting has changed me. The first time I picked up a brush, I felt that I liked to draw,” says Zhang. “The world is so beautiful. Even if I am in poor  ______ , I don’t want to give up the chance to live”. Now Zhang has created thousands ___89___ pencil sketches (素描). She also has an online shop ___90___ Zhang Junli’s Paintings, where she sells her works.",
       "options": [],
       "inputKind": "blank",
@@ -4917,11 +4822,11 @@
       "analysis": "句意：即使我身体不好，我也不想放弃活下去的机会。根据全文内容和备选词汇可知，身体不好，in poor health“身体差”符合句意；故填health。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-12-section-12-group-1-96",
+      "id": "2022-xinjiang-xinjiang-section-16-section-16-group-1-95",
       "number": 89,
       "displayNumber": "89",
-      "sectionId": "section-12",
-      "groupId": "section-12-group-1",
+      "sectionId": "section-16",
+      "groupId": "section-16-group-1",
       "prompt": "“Painting has changed me. The first time I picked up a brush, I felt that I liked to draw,” says Zhang. “The world is so beautiful. Even if I am in poor ___88___, I don’t want to give up the chance to live”. Now Zhang has created thousands  ______  pencil sketches (素描). She also has an online shop ___90___ Zhang Junli’s Paintings, where she sells her works.",
       "options": [],
       "inputKind": "blank",
@@ -4934,11 +4839,11 @@
       "analysis": "句意：现在，张俊莉已经创作了数千幅铅笔素描。thousands of“成千上万”，故填of。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-12-section-12-group-1-97",
+      "id": "2022-xinjiang-xinjiang-section-16-section-16-group-1-96",
       "number": 90,
       "displayNumber": "90",
-      "sectionId": "section-12",
-      "groupId": "section-12-group-1",
+      "sectionId": "section-16",
+      "groupId": "section-16-group-1",
       "prompt": "“Painting has changed me. The first time I picked up a brush, I felt that I liked to draw,” says Zhang. “The world is so beautiful. Even if I am in poor ___88___, I don’t want to give up the chance to live”. Now Zhang has created thousands ___89___ pencil sketches (素描). She also has an online shop  ______  Zhang Junli’s Paintings, where she sells her works.",
       "options": [],
       "inputKind": "blank",
@@ -4951,11 +4856,11 @@
       "analysis": "句意：她还开了一家网店，名叫“张俊莉的画”，出售她的作品。根据“where she sells her works”和备选词汇可知，叫作张俊莉的画，called符合句意；故填called。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-12-section-12-group-1-98",
+      "id": "2022-xinjiang-xinjiang-section-16-section-16-group-1-97",
       "number": 91,
       "displayNumber": "91",
-      "sectionId": "section-12",
-      "groupId": "section-12-group-1",
+      "sectionId": "section-16",
+      "groupId": "section-16-group-1",
       "prompt": "Zhang wants to use her  ______  to encourage those who are like her, and to tell them never to give up. “Instead of crying and worrying all day, find your meaning in life. Live in the present,” says Zhang, a true inspiration.",
       "options": [],
       "inputKind": "blank",
@@ -4968,11 +4873,11 @@
       "analysis": "句意：张俊莉想用她的作品来鼓励那些和她一样的人，告诉他们永远不要放弃。根据“encourage those who are like her”和备选词汇可知，用作品鼓励人们，works符合句意；故填works。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-14-section-14-group-1-99",
+      "id": "2022-xinjiang-xinjiang-section-18-section-18-group-1-98",
       "number": 2,
       "displayNumber": "2",
-      "sectionId": "section-14",
-      "groupId": "section-14-group-1",
+      "sectionId": "section-18",
+      "groupId": "section-18-group-1",
       "prompt": "文中不得出现真实人名、校名：",
       "options": [],
       "inputKind": "text",
@@ -4985,11 +4890,11 @@
       "analysis": "【解析】\n【原文】略\nB. 情景反应（本题共5小题，每小题1分，共5分）\n听句子，选择正确的应答。每小题读两遍。"
     },
     {
-      "id": "2022-xinjiang-xinjiang-section-14-section-14-group-1-100",
+      "id": "2022-xinjiang-xinjiang-section-18-section-18-group-1-99",
       "number": 3,
       "displayNumber": "3",
-      "sectionId": "section-14",
-      "groupId": "section-14-group-1",
+      "sectionId": "section-18",
+      "groupId": "section-18-group-1",
       "prompt": "词数：80-120，开头已给出，开头及标点符号不计入总词数 Looking back at these past three years, I had a lot of sweet memories… ________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________",
       "options": [],
       "inputKind": "blank",

@@ -1200,6 +1200,7 @@
       "id": "section-2",
       "title": "一、听说应用 （本大题共30小题,每小题1分,共30分，分为A、B、C、D部分为听力理解，E部分为情景对话）",
       "instructions": [
+        "一、听说应用 （本大题共30小题,每小题1分,共30分，分为A、B、C、D部分为听力理解，E部分为情景对话）",
         "A. 听句子（本题共5小题，每小题1分，共5分）",
         "请根据所听内容，选择符合题意的图画回答问题，并将答题卡上对应题目所选的选项涂黑。每个句子听两遍。",
         "A. B. C.",
@@ -1516,6 +1517,16 @@
       ],
       "displayBlocks": [
         {
+          "id": "paragraph-11",
+          "kind": "paragraph",
+          "text": "A. 听句子（本题共5小题，每小题1分，共5分）"
+        },
+        {
+          "id": "paragraph-12",
+          "kind": "paragraph",
+          "text": "请根据所听内容，选择符合题意的图画回答问题，并将答题卡上对应题目所选的选项涂黑。每个句子听两遍。"
+        },
+        {
           "id": "image-14-1",
           "kind": "image",
           "src": "/junior-high/2022-guangdong-guangdong/image2.png",
@@ -1604,23 +1615,15 @@
           "kind": "image",
           "src": "/junior-high/2022-guangdong-guangdong/image16.png",
           "alt": "原卷图片"
-        },
-        {
-          "id": "paragraph-35",
-          "kind": "paragraph",
-          "text": "听一段对话，回答下面各小题。【此处可播放相关音频，请去附件查看】"
-        },
-        {
-          "id": "paragraph-40",
-          "kind": "paragraph",
-          "text": "听一段对话，回答下面各小题。【此处可播放相关音频，请去附件查看】"
         }
       ]
     },
     {
       "id": "section-3",
       "title": "C. 听短文（本题共5小题。每小题1分，共5分）",
-      "instructions": [],
+      "instructions": [
+        "C. 听短文（本题共5小题。每小题1分，共5分）"
+      ],
       "blocks": [
         {
           "id": "paragraph-47",
@@ -1723,7 +1726,8 @@
         "B. What about you?",
         "C. Maybe next time.",
         "D. The park near your home?",
-        "E. Have a good time."
+        "E. Have a good time.",
+        "F. Would you like to go with us?"
       ],
       "blocks": [
         {
@@ -1877,6 +1881,16 @@
           "alt": "原卷图片"
         },
         {
+          "id": "paragraph-61",
+          "kind": "paragraph",
+          "text": "E. 情景对话（本题共5小题，每小题1分，共5分）"
+        },
+        {
+          "id": "paragraph-62",
+          "kind": "paragraph",
+          "text": "请通读下面对话，根据对话内容，从选项中选出能填入空白处的最佳选项，选项中有一项为多余选项。"
+        },
+        {
           "id": "image-63-1",
           "kind": "image",
           "src": "/junior-high/2022-guangdong-guangdong/image18.png",
@@ -1886,43 +1900,15 @@
           "id": "paragraph-64",
           "kind": "paragraph",
           "text": "Tom: What’s your plan tomorrow, Ann?"
-        },
-        {
-          "id": "paragraph-66",
-          "kind": "paragraph",
-          "text": "Tom: I will have a picnic in a park with some friends."
-        },
-        {
-          "id": "paragraph-68",
-          "kind": "paragraph",
-          "text": "Tom: No. We’ll go to Zhongshan Park."
-        },
-        {
-          "id": "paragraph-69",
-          "kind": "paragraph",
-          "text": "Ann: Have you checked the weather report?"
-        },
-        {
-          "id": "paragraph-71",
-          "kind": "paragraph",
-          "text": "Ann: I’d love to, but I have to finish a school report."
-        },
-        {
-          "id": "paragraph-74",
-          "kind": "paragraph",
-          "text": "Tom: Thank you."
-        },
-        {
-          "id": "paragraph-80",
-          "kind": "paragraph",
-          "text": "F. Would you like to go with us?"
         }
       ]
     },
     {
       "id": "section-6",
       "title": "二、语法选择（本大题共10小题，每小题1分，共10分）",
-      "instructions": [],
+      "instructions": [
+        "二、语法选择（本大题共10小题，每小题1分，共10分）"
+      ],
       "blocks": [
         {
           "id": "paragraph-81",
@@ -2035,25 +2021,10 @@
       ],
       "displayBlocks": [
         {
-          "id": "paragraph-84",
-          "kind": "paragraph",
-          "text": "Wang Yiyi passed the test ____35____ and became a student of that school. She worked ____36____. Students in the school ____37____ to get up at 6:45 a.m. to practice their basic skills. But she got up at 6:00 in the morning. And she was always the last one to go to bed. Sometimes she was tired that she felt like crying, she would find ____38____ quiet place and cried aloud. She ____39____ herself that she still had a long way to go and that she should keep practicing…"
-        },
-        {
-          "id": "paragraph-88",
-          "kind": "paragraph",
-          "text": "33 A. teacherB. teachersC. teacher’s"
-        },
-        {
           "id": "image-88-1",
           "kind": "image",
           "src": "/junior-high/2022-guangdong-guangdong/image19.png",
           "alt": "原卷图片"
-        },
-        {
-          "id": "paragraph-95",
-          "kind": "paragraph",
-          "text": "40 A. sheB. herC. hers"
         },
         {
           "id": "image-95-1",
@@ -2066,7 +2037,9 @@
     {
       "id": "section-8",
       "title": "二、完形填空(本大题有10小题,每小题1分,共10分)",
-      "instructions": [],
+      "instructions": [
+        "二、完形填空(本大题有10小题,每小题1分,共10分)"
+      ],
       "blocks": [
         {
           "id": "paragraph-96",
@@ -2194,35 +2167,10 @@
           "text": "Almost every Saturday morning, Molly pulls a table into her front yard. On the table she lays out some ____41____ in season, such as carrots and tomatoes. They are all from her garden and free for her neighbors to ____42____. “It’s just lovely, like you walk by and get a beautiful gift around the corner,” said a neighbor."
         },
         {
-          "id": "paragraph-100",
-          "kind": "paragraph",
-          "text": "Then the pandemic(疫情) came. Molly and her family had much time to ____46____ in their garden. They decided to ____47____ what they grew in their garden."
-        },
-        {
-          "id": "paragraph-101",
-          "kind": "paragraph",
-          "text": "No one knew about it at first. But ____48____, people got into the habit of coming around. They would stop by and leave with some vegetables. Molly’s yard became a ____49____ place."
-        },
-        {
-          "id": "paragraph-102",
-          "kind": "paragraph",
-          "text": "One thing Molly has learned from this experience is that people have to work together when days are ____50____. She is glad that love has spread in this community."
-        },
-        {
-          "id": "paragraph-105",
-          "kind": "paragraph",
-          "text": "43 A. familyB. classC. officeD. team"
-        },
-        {
           "id": "image-105-1",
           "kind": "image",
           "src": "/junior-high/2022-guangdong-guangdong/image19.png",
           "alt": "原卷图片"
-        },
-        {
-          "id": "paragraph-107",
-          "kind": "paragraph",
-          "text": "45 A. movedB. interestedC. tiredD. bored"
         },
         {
           "id": "image-107-1",
@@ -2235,7 +2183,9 @@
     {
       "id": "section-10",
       "title": "四．阅读理解（本大题共15小题，每小题2分，共30分）",
-      "instructions": [],
+      "instructions": [
+        "四．阅读理解（本大题共15小题，每小题2分，共30分）"
+      ],
       "blocks": [
         {
           "id": "paragraph-113",
@@ -2576,6 +2526,11 @@
           "alt": "原卷图片"
         },
         {
+          "id": "paragraph-142",
+          "kind": "paragraph",
+          "text": "A. their hobbiesB. their friendshipC. their understanding of lifeD. their living conditions"
+        },
+        {
           "id": "paragraph-146",
           "kind": "paragraph",
           "text": "C"
@@ -2626,7 +2581,9 @@
     {
       "id": "section-13",
       "title": "五、短文填空（本大题共10小题，每小题1. 5分，共15分）",
-      "instructions": [],
+      "instructions": [
+        "五、短文填空（本大题共10小题，每小题1. 5分，共15分）"
+      ],
       "blocks": [
         {
           "id": "paragraph-148",
@@ -2815,31 +2772,6 @@
           "id": "paragraph-160",
           "kind": "paragraph",
           "text": "Some students are now thinking about inviting their teachers to join them in their daily runs."
-        },
-        {
-          "id": "paragraph-162",
-          "kind": "paragraph",
-          "text": "________________________________________"
-        },
-        {
-          "id": "paragraph-164",
-          "kind": "paragraph",
-          "text": "________________________________________"
-        },
-        {
-          "id": "paragraph-166",
-          "kind": "paragraph",
-          "text": "________________________________________"
-        },
-        {
-          "id": "paragraph-168",
-          "kind": "paragraph",
-          "text": "________________________________________"
-        },
-        {
-          "id": "paragraph-170",
-          "kind": "paragraph",
-          "text": "________________________________________"
         }
       ]
     },
@@ -3065,8 +2997,7 @@
       "options": [
         "A. ",
         "B. ",
-        "C. ",
-        "B. 听对话（本题共10小题，每小题1分，共10分） 请根据每段对话的内容回答问题，从每小题所给的三个选项中选出一个最佳答案，并将答题卡上对应题目所选的选项涂黑。每段对话听两遍。"
+        "C. "
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -3171,7 +3102,7 @@
       "options": [
         "A. A new home.",
         "B. A broken window.",
-        "C. A big bed. 听一段对话，回答下面各小题。【此处可播放相关音频，请去附件查看】"
+        "C. A big bed."
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -3213,7 +3144,7 @@
       "options": [
         "A. To buy a computer.",
         "B. To fix the computer.",
-        "C. To borrow. 听一段对话，回答下面各小题。【此处可播放相关音频，请去附件查看】"
+        "C. To borrow."
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -3381,8 +3312,7 @@
       "options": [
         "A. Every evening.",
         "B. Every afternoon.",
-        "C. Every weekend.",
-        "D. 听填信息（本题共5小题，每小题1分，共5分）"
+        "C. Every weekend."
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -4088,7 +4018,7 @@
         "A. By making a phone call.",
         "B. By sending an e-mail.",
         "C. By visiting the website.",
-        "D. By going to the ticket office. B Jerry is a world-famous mountain climber. He has climbed many high mountains in the world. Starting in 2015, he and his friends spent two years on an adventure（探险）in South America, covering 7,800 miles. He was even named Adventure of the Year by a famous geography magazine in 2018. Although Jerry had achieved great success, he didn’t feel fulfilled. He asked himself, “Is it enough to climb the highest mountains? Am I doing something helpful? How can I turn my adventures into something that can help the world?” Jerry learned that scientists need plants, rocks and water samples（样本）from the places far away to do research. But scientists can’t get there themselves as such places are hard to reach——only the bravest adventurers can make it. Jerry thought himself could do something to help. He then came up with an idea. He set up a team of top adventures to collect samples for scientists. By studying the samples, scientists could know more about the earth and find ways to protect it. Recently Jerry and his adventurer friends have discovered a special plant life of Mountain Qomolangma. The samples they brought back have helped scientists how plants live in extreme（极端的）conditions. For Jerry, this kind of adventure is most satisfying. “Such adventures had made us see life in a different way. Now, being the best climber isn’t important for me, what matters is doing something helpful while climbing the mountains. There is still much more we can do.” Jerry said to a newspaper."
+        "D. By going to the ticket office."
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -4180,7 +4110,7 @@
         "A. Dangerous Mountains Climbing.",
         "B. Important Scientific Discoveries.",
         "C. Plants Found on High Mountains.",
-        "D. Adventures Turned into Something Greater. C"
+        "D. Adventures Turned into Something Greater."
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -4202,7 +4132,10 @@
         "A. What a pity! Shall we meet sometime next week? After all, shopping won’t be fun without you.",
         "B. We still have some in the kitchen. I bought a bottle of milk the day before yesterday and we haven’t opened it yet.",
         "C. Great! I’ll collect them on my way to work tomorrow morning. Many thanks.",
-        "D. Sure. There is a fruit shop on my way home. What would you like me to buy? What about some bananas? E. Take your time. I will be there in a few minutes. What salad would you like, fruit salad or vegetable salad? F. You can take No.27 bus to my house. Get off at East Street. There is a shop near the bus stop. I will wait for you there. G. Thanks. It is getting much better now. My doctor said I could return to the sports field next month. Anyway, I’ll be there next week."
+        "D. Sure. There is a fruit shop on my way home. What would you like me to buy? What about some bananas?",
+        "E. Take your time. I will be there in a few minutes. What salad would you like, fruit salad or vegetable salad?",
+        "F. You can take No.27 bus to my house. Get off at East Street. There is a shop near the bus stop. I will wait for you there.",
+        "G. Thanks. It is getting much better now. My doctor said I could return to the sports field next month. Anyway, I’ll be there next week."
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -4224,7 +4157,10 @@
         "A. What a pity! Shall we meet sometime next week? After all, shopping won’t be fun without you.",
         "B. We still have some in the kitchen. I bought a bottle of milk the day before yesterday and we haven’t opened it yet.",
         "C. Great! I’ll collect them on my way to work tomorrow morning. Many thanks.",
-        "D. Sure. There is a fruit shop on my way home. What would you like me to buy? What about some bananas? E. Take your time. I will be there in a few minutes. What salad would you like, fruit salad or vegetable salad? F. You can take No.27 bus to my house. Get off at East Street. There is a shop near the bus stop. I will wait for you there. G. Thanks. It is getting much better now. My doctor said I could return to the sports field next month. Anyway, I’ll be there next week."
+        "D. Sure. There is a fruit shop on my way home. What would you like me to buy? What about some bananas?",
+        "E. Take your time. I will be there in a few minutes. What salad would you like, fruit salad or vegetable salad?",
+        "F. You can take No.27 bus to my house. Get off at East Street. There is a shop near the bus stop. I will wait for you there.",
+        "G. Thanks. It is getting much better now. My doctor said I could return to the sports field next month. Anyway, I’ll be there next week."
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -4246,7 +4182,10 @@
         "A. What a pity! Shall we meet sometime next week? After all, shopping won’t be fun without you.",
         "B. We still have some in the kitchen. I bought a bottle of milk the day before yesterday and we haven’t opened it yet.",
         "C. Great! I’ll collect them on my way to work tomorrow morning. Many thanks.",
-        "D. Sure. There is a fruit shop on my way home. What would you like me to buy? What about some bananas? E. Take your time. I will be there in a few minutes. What salad would you like, fruit salad or vegetable salad? F. You can take No.27 bus to my house. Get off at East Street. There is a shop near the bus stop. I will wait for you there. G. Thanks. It is getting much better now. My doctor said I could return to the sports field next month. Anyway, I’ll be there next week."
+        "D. Sure. There is a fruit shop on my way home. What would you like me to buy? What about some bananas?",
+        "E. Take your time. I will be there in a few minutes. What salad would you like, fruit salad or vegetable salad?",
+        "F. You can take No.27 bus to my house. Get off at East Street. There is a shop near the bus stop. I will wait for you there.",
+        "G. Thanks. It is getting much better now. My doctor said I could return to the sports field next month. Anyway, I’ll be there next week."
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -4268,7 +4207,10 @@
         "A. What a pity! Shall we meet sometime next week? After all, shopping won’t be fun without you.",
         "B. We still have some in the kitchen. I bought a bottle of milk the day before yesterday and we haven’t opened it yet.",
         "C. Great! I’ll collect them on my way to work tomorrow morning. Many thanks.",
-        "D. Sure. There is a fruit shop on my way home. What would you like me to buy? What about some bananas? E. Take your time. I will be there in a few minutes. What salad would you like, fruit salad or vegetable salad? F. You can take No.27 bus to my house. Get off at East Street. There is a shop near the bus stop. I will wait for you there. G. Thanks. It is getting much better now. My doctor said I could return to the sports field next month. Anyway, I’ll be there next week."
+        "D. Sure. There is a fruit shop on my way home. What would you like me to buy? What about some bananas?",
+        "E. Take your time. I will be there in a few minutes. What salad would you like, fruit salad or vegetable salad?",
+        "F. You can take No.27 bus to my house. Get off at East Street. There is a shop near the bus stop. I will wait for you there.",
+        "G. Thanks. It is getting much better now. My doctor said I could return to the sports field next month. Anyway, I’ll be there next week."
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
@@ -4290,7 +4232,10 @@
         "A. What a pity! Shall we meet sometime next week? After all, shopping won’t be fun without you.",
         "B. We still have some in the kitchen. I bought a bottle of milk the day before yesterday and we haven’t opened it yet.",
         "C. Great! I’ll collect them on my way to work tomorrow morning. Many thanks.",
-        "D. Sure. There is a fruit shop on my way home. What would you like me to buy? What about some bananas? E. Take your time. I will be there in a few minutes. What salad would you like, fruit salad or vegetable salad? F. You can take No.27 bus to my house. Get off at East Street. There is a shop near the bus stop. I will wait for you there. G. Thanks. It is getting much better now. My doctor said I could return to the sports field next month. Anyway, I’ll be there next week."
+        "D. Sure. There is a fruit shop on my way home. What would you like me to buy? What about some bananas?",
+        "E. Take your time. I will be there in a few minutes. What salad would you like, fruit salad or vegetable salad?",
+        "F. You can take No.27 bus to my house. Get off at East Street. There is a shop near the bus stop. I will wait for you there.",
+        "G. Thanks. It is getting much better now. My doctor said I could return to the sports field next month. Anyway, I’ll be there next week."
       ],
       "inputKind": "choice",
       "sourceBlockIds": [
