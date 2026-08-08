@@ -41,6 +41,21 @@ function renderContext(text: string): ReactNode {
   });
 }
 
+function renderInlineBlanks(text: string): ReactNode {
+  return text.split(/(_{2,}\s*\d{0,3}\s*_{2,}|[A-Za-z]\s{2,}\d{1,3}\b)/g).map((part, index) => {
+    if (!part) return null;
+    const clue = part.match(/^([A-Za-z])\s{2,}(\d{1,3})$/);
+    if (clue) {
+      return <span key={`${part}-${index}`}><span>{clue[1]}</span><span className="junior-high-inline-blank">{clue[2]}</span></span>;
+    }
+    if (/_{2,}/.test(part)) {
+      const blankClassName = part.replace(/_/g, "").trim().length >= 8 ? "junior-high-inline-blank junior-high-inline-blank-wide" : "junior-high-inline-blank";
+      return <span className={blankClassName} key={`${part}-${index}`}>{part.replace(/_/g, "").trim() || " "}</span>;
+    }
+    return <span key={`${part}-${index}`}>{part}</span>;
+  });
+}
+
 function PaperQuestionCard({ question, value, submitted, onAnswer, cloze, sectionTitle }: { question: PaperQuestion; value: string; submitted: boolean; onAnswer: (value: string) => void; cloze?: boolean; sectionTitle?: string }) {
   const [showAnalysis, setShowAnalysis] = useState(false);
   const isOpenResponse = question.inputKind === "blank" || question.inputKind === "text" || question.inputKind === "writing" || (!question.inputKind && !question.options.length);
@@ -80,7 +95,7 @@ function GenericPaperContent({ paper, answers, submitted, onAnswer, writingA, wr
 function renderStructuredBlock(block: JuniorHighBlock, section: JuniorHighSection): ReactNode {
   if (block.kind === "paragraph") {
     if (!block.text || block.text === section.title) return null;
-    return <p className="junior-high-source-paragraph">{block.text}</p>;
+    return <p className="junior-high-source-paragraph">{renderInlineBlanks(block.text)}</p>;
   }
   if (block.kind === "image" && block.src) {
     return <img alt={block.alt ?? `${section.title} 原卷图片`} className="junior-high-source-image" src={block.src} />;
@@ -92,6 +107,10 @@ function renderStructuredBlock(block: JuniorHighBlock, section: JuniorHighSectio
     return <div className="junior-high-source-table-wrap"><table className="junior-high-source-table"><tbody>{block.rows.map((row, rowIndex) => <tr key={`${block.id}-${rowIndex}`}>{row.map((cell, cellIndex) => <td key={`${block.id}-${rowIndex}-${cellIndex}`}>{cell}</td>)}</tr>)}</tbody></table></div>;
   }
   return null;
+}
+
+function isStructuredReadingSection(title: string) {
+  return /阅读理解|阅读表达|任务型阅读|部分\s*阅读|^阅读下面/.test(title);
 }
 
 function isCompatibleDisplayInstruction(text: string, sectionTitle: string) {
@@ -129,10 +148,13 @@ function StructuredPaperContent({ paper, answers, submitted, onAnswer, writingA,
     {paper.assets?.audio?.length ? <div className="junior-high-audio-list"><strong>听力音频</strong>{paper.assets.audio.map((src, index) => <label key={src}>音频 {index + 1}<audio controls preload="metadata" src={src} /></label>)}</div> : null}
     {sections.map((section) => {
       const sectionQuestions = section.questionIds.map((id) => questionsById.get(id)).filter((question): question is PaperQuestion => Boolean(question));
+      const displayBlocks = section.displayBlocks ?? getCompatibleDisplayBlocks(section, paper.questions);
+      const useReadingLayout = isStructuredReadingSection(section.title) && sectionQuestions.length > 0 && displayBlocks.length > 0;
+      const sourceBlocks = <div className="junior-high-structured-blocks">{displayBlocks.map((block) => <div className="junior-high-structured-block" key={block.id}>{renderStructuredBlock(block, section)}</div>)}</div>;
+      const questionBlocks = <div className="junior-high-question-stack">{sectionQuestions.map((question) => <PaperQuestionCard key={question.id} onAnswer={(value) => onAnswer(question, value)} question={question} sectionTitle={section.title} submitted={submitted} value={answers[question.id] || ""} />)}</div>;
       return <section className="junior-high-paper-section junior-high-structured-section" key={section.id}>
         <h2>{section.title}</h2>
-        <div className="junior-high-structured-blocks">{(section.displayBlocks ?? getCompatibleDisplayBlocks(section, paper.questions)).map((block) => <div className="junior-high-structured-block" key={block.id}>{renderStructuredBlock(block, section)}</div>)}</div>
-        {sectionQuestions.length ? <div className="junior-high-question-stack">{sectionQuestions.map((question) => <PaperQuestionCard key={question.id} onAnswer={(value) => onAnswer(question, value)} question={question} sectionTitle={section.title} submitted={submitted} value={answers[question.id] || ""} />)}</div> : null}
+        {useReadingLayout ? <div className="junior-high-passage-layout junior-high-structured-reading-layout"><div className="junior-high-passage-column">{sourceBlocks}</div><div className="junior-high-passage-questions">{questionBlocks}</div></div> : <>{sourceBlocks}{sectionQuestions.length ? questionBlocks : null}</>}
       </section>;
     })}
     <section className="junior-high-paper-section"><h2>{paper.writing.title ?? "写作"}</h2><div className="junior-high-paper-writing">{writingTasks.map((task, index) => {

@@ -656,6 +656,14 @@ def _is_display_instruction(text: str, section_title: str) -> bool:
     return False
 
 
+def _is_question_marker(text: str) -> bool:
+    return bool(re.match(r"^\s*\d{1,3}\s*[．.、)]", text))
+
+
+def _is_answer_option_block(text: str) -> bool:
+    return bool(re.match(r"^\s*[A-DＡ-Ｄ]\s*[．.、:：)]\s*\S+", text))
+
+
 def build_display_blocks(sections: list[dict], questions: list[dict]) -> None:
     """Attach a sanitized source view without removing original extraction blocks."""
     questions_by_section: dict[str, list[dict]] = {}
@@ -666,17 +674,30 @@ def build_display_blocks(sections: list[dict], questions: list[dict]) -> None:
         blocks = section.get("blocks", [])
         section_questions = questions_by_section.get(section["id"], [])
         block_indexes = {block.get("id"): index for index, block in enumerate(blocks) if block.get("id")}
-        starts = sorted({
+        source_indexes = sorted({
             block_indexes[source_id]
             for question in section_questions
             for source_id in question.get("sourceBlockIds", [])
             if source_id in block_indexes
         })
         hidden_paragraph_indexes = set()
-        for start_index, next_index in zip(starts, starts[1:] + [len(blocks)]):
-            for index in range(start_index, next_index):
-                if blocks[index].get("kind") == "paragraph":
-                    hidden_paragraph_indexes.add(index)
+        for source_index in source_indexes:
+            if blocks[source_index].get("kind") != "paragraph":
+                continue
+            hidden_paragraph_indexes.add(source_index)
+            next_index = source_index + 1
+            while next_index < len(blocks):
+                block = blocks[next_index]
+                if block.get("kind") != "paragraph":
+                    next_index += 1
+                    continue
+                text = (block.get("text") or "").strip()
+                if _is_question_marker(text) or next_index in source_indexes:
+                    break
+                if not _is_answer_option_block(text):
+                    break
+                hidden_paragraph_indexes.add(next_index)
+                next_index += 1
 
         display_blocks = []
         for index, block in enumerate(blocks):

@@ -25,6 +25,9 @@ test("junior high exam layout contains long content without page-wide overflow",
   assert.match(sourceTextRule, /overflow-wrap:\s*anywhere/);
   assert.match(questionTextRule, /overflow-wrap:\s*anywhere/);
   assert.match(writingTextRule, /overflow-wrap:\s*anywhere/);
+  assert.match(rule(".junior-high-source-image"), /max-height:\s*360px/);
+  assert.match(rule(".junior-high-context-image"), /max-height:\s*220px/);
+  assert.match(rule(".junior-high-inline-blank-wide"), /min-width:\s*180px/);
 });
 
 test("source tables keep their own narrow overflow boundary", () => {

@@ -1029,7 +1029,7 @@
 .junior-high-structured-blocks { display: grid; gap: 12px; }
 .junior-high-structured-block { min-width: 0; }
 .junior-high-source-paragraph { margin: 0; color: #27362f; font-size: 17px; line-height: 1.85; white-space: pre-line; overflow-wrap: anywhere; }
-.junior-high-source-image { display: block; width: min(100%, 760px); max-height: 620px; margin: 4px auto; border: 1px solid #e4dccd; border-radius: 9px; object-fit: contain; background: #fffdf7; }
+.junior-high-source-image { display: block; width: min(100%, 760px); max-height: 360px; height: auto; margin: 4px auto; border: 1px solid #e4dccd; border-radius: 9px; object-fit: contain; background: #fffdf7; }
 .junior-high-source-audio { width: min(100%, 620px); }
 .junior-high-source-table-wrap { max-width: 100%; overflow-x: auto; }
 .junior-high-source-table { width: 100%; min-width: 520px; border-collapse: collapse; color: #27362f; font-size: 15px; line-height: 1.65; background: #fffdf7; }
@@ -1044,7 +1044,8 @@
 .junior-high-passage-column h3 { margin: 0 0 12px; color: #477467; font-family: KaiTi, STKaiti, serif; font-size: 23px; }
 .junior-high-passage-text { white-space: pre-line; }
 .junior-high-inline-blank { display: inline-block; min-width: 26px; margin: 0 3px; border-bottom: 2px dotted #9a907f; padding: 0 10px 1px; color: #477467; line-height: 1.2; text-align: center; }
-.junior-high-context-image { display: block; max-width: min(100%, 320px); max-height: 280px; margin: 0 auto 18px; object-fit: contain; }
+.junior-high-inline-blank-wide { min-width: 180px; }
+.junior-high-context-image { display: block; max-width: min(100%, 280px); max-height: 220px; height: auto; margin: 0 auto 18px; object-fit: contain; }
 .junior-high-question-image { display: block; max-width: min(100%, 180px); max-height: 140px; margin: 0 0 12px; object-fit: contain; }
 .junior-high-generic-source { display: grid; gap: 12px; }
 .junior-high-generic-source pre { margin: 0; max-height: 680px; overflow: auto; white-space: pre-wrap; font: inherit; line-height: 1.85; color: #2f3f39; }

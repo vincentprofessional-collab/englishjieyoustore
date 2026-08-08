@@ -43,3 +43,13 @@ test("structured papers expose sanitized display blocks", () => {
   }
   assert.ok(paper.sections.some((section) => section.displayBlocks.some((block) => block.kind === "image")), "images should remain available");
 });
+
+test("reading display blocks preserve passages between question groups", () => {
+  const paper = readPaper("2024-tianjin-tianjin.json");
+  const section = paper.sections.find((item) => item.title.includes("阅读理解"));
+  assert.ok(section);
+  const paragraphs = section.displayBlocks.filter((block) => block.kind === "paragraph").map((block) => block.text);
+  assert.ok(paragraphs.some((text) => text.includes("high school graduation ceremony")), "the second reading passage should remain visible");
+  assert.equal(paragraphs.some((text) => /^51[．.]/.test(text)), false, "question text should stay in the interactive question column");
+  assert.equal(paragraphs.some((text) => /^A[．.].*B[．.]/.test(text)), false, "answer options should stay out of the passage column");
+});
