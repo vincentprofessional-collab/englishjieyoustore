@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { StudyAnnotationTools } from "@/components/study-annotation-tools";
 import beijing2024Paper from "@/lib/junior-high/beijing-2024-simulation.json";
 import type { JuniorHighBlock, JuniorHighBook, JuniorHighPaper, JuniorHighQuestion, JuniorHighQuestionGroup, JuniorHighPart } from "@/lib/junior-high/paper-types";
+import { isExamInstructionTitle, isSectionHeading, normalizeStructuredGroups } from "@/lib/junior-high/structured-layout";
 
 const defaultPaper = beijing2024Paper as unknown as JuniorHighPaper;
 type PaperQuestion = JuniorHighQuestion;
@@ -22,7 +23,7 @@ function PaperTimer({ running, seconds, onToggle }: { running: boolean; seconds:
 }
 
 function QuestionNavigation({ paper, current, onSelect }: { paper: JuniorHighPaper; current: number; onSelect: (index: number) => void }) {
-  return <nav aria-label="试卷题号导航" className="junior-high-paper-nav">{paper.questions.map((question, index) => <button className={current === index ? "selected" : ""} key={question.id} onClick={() => onSelect(index)} type="button"><span>{question.displayNumber ?? question.number}</span>{question.sectionId ? <small>{question.sectionId.replace("section-", "")}</small> : null}</button>)}</nav>;
+  return <nav aria-label="试卷题号导航" className="junior-high-paper-nav">{paper.questions.map((question, index) => <button className={current === index ? "selected" : ""} key={question.id} onClick={() => onSelect(index)} type="button"><span>{question.displayNumber ?? question.number}</span></button>)}</nav>;
 }
 
 function renderContext(text: string): ReactNode {
@@ -35,11 +36,11 @@ function renderContext(text: string): ReactNode {
 }
 
 function renderInlineBlanks(text: string): ReactNode {
-  return text.split(/(_{2,}\s*\d{0,3}\s*_{2,}|[A-Za-z]\s{2,}\d{1,3}\b)/g).map((part, index) => {
+  const blankPattern = /(_{2,}\s*\d{0,3}\s*_{2,}|\s{2,}\d{1,3}(?=\s|[.,!?;:)”'’]|$))/g;
+  return text.split(blankPattern).map((part, index) => {
     if (!part) return null;
-    const clue = part.match(/^([A-Za-z])\s{2,}(\d{1,3})$/);
-    if (clue) {
-      return <span key={`${part}-${index}`}><span>{clue[1]}</span><span className="junior-high-inline-blank">{clue[2]}</span></span>;
+    if (/^\s{2,}\d{1,3}/.test(part)) {
+      return <span className="junior-high-inline-blank" key={`${part}-${index}`}>{part.match(/\d{1,3}/)?.[0]}</span>;
     }
     if (/_{2,}/.test(part)) {
       const blankClassName = part.replace(/_/g, "").trim().length >= 8 ? "junior-high-inline-blank junior-high-inline-blank-wide" : "junior-high-inline-blank";
@@ -123,7 +124,7 @@ function renderStructuredBlock(block: JuniorHighBlock, section: { title: string 
 }
 
 function isStructuredReadingSection(title: string) {
-  return /阅读理解|阅读表达|任务型阅读|完形填空|部分\s*阅读|^阅读下面|请通读下面|根据短文内容|根据材料内容|语法和上下文/.test(title);
+  return /阅读理解|阅读表达|任务型阅读|完形填空|部分\s*阅读|^阅读下面|请通读下面|根据短文内容|根据材料内容|语法和上下文|\b(?:reading|passage|cloze)\b/i.test(title);
 }
 
 function StructuredPaperContent({ paper, answers, submitted, onAnswer, writingA, writingB, onWritingA, onWritingB }: { paper: JuniorHighPaper; answers: Record<string, string>; submitted: boolean; onAnswer: (question: PaperQuestion, value: string) => void; writingA: string; writingB: string; onWritingA: (value: string) => void; onWritingB: (value: string) => void }) {
@@ -131,11 +132,16 @@ function StructuredPaperContent({ paper, answers, submitted, onAnswer, writingA,
   const sections = paper.sections ?? [];
   const questionsById = new Map(paper.questions.map((question) => [question.id, question]));
   const writingTasks = paper.writingTasks?.length ? paper.writingTasks : [{ id: "writing-1", label: "写作", prompt: paper.writing.promptA, requirements: paper.writing.requirementsA }];
+  const writingSectionTitle = paper.parts?.flatMap((part) => part.groups).find((group) => group.questionIds.length === 0 && /书面表达|写作|作文/.test(group.title) && isSectionHeading(group.title))?.title ?? paper.writing.title ?? "写作";
   return <>
-    {(parts.length ? parts : sections.map((section) => ({ id: section.id, title: section.title, instructions: section.instructions, groups: [{ id: `${section.id}-group-1`, title: section.title, instructions: section.instructions, blocks: section.blocks, displayBlocks: section.displayBlocks, questionIds: section.questionIds }] } as JuniorHighPart))).map((part) => <section className="junior-high-paper-section junior-high-structured-part" key={part.id}>
-      <h2>{part.title}</h2>
-      {part.instructions.filter((instruction) => instruction.trim() !== part.title.trim()).slice(0, 2).map((instruction) => <p className="junior-high-paper-intro" key={`${part.id}-${instruction}`}>{instruction}</p>)}
-      {part.groups.map((group: JuniorHighQuestionGroup) => {
+    {(parts.length ? parts : sections.map((section) => ({ id: section.id, title: section.title, instructions: section.instructions, groups: [{ id: `${section.id}-group-1`, title: section.title, instructions: section.instructions, blocks: section.blocks, displayBlocks: section.displayBlocks, questionIds: section.questionIds }] } as JuniorHighPart))).map((part) => {
+      const renderGroups = normalizeStructuredGroups(part.groups);
+      if (!renderGroups.length) return null;
+      const showPartTitle = !isExamInstructionTitle(part.title);
+      return <section className="junior-high-paper-section junior-high-structured-part" key={part.id}>
+      {showPartTitle ? <h2>{part.title}</h2> : null}
+      {showPartTitle ? part.instructions.filter((instruction) => instruction.trim() !== part.title.trim()).slice(0, 2).map((instruction) => <p className="junior-high-paper-intro" key={`${part.id}-${instruction}`}>{instruction}</p>) : null}
+      {renderGroups.map((group: JuniorHighQuestionGroup & { sourceOnly?: boolean }) => {
         const groupQuestions = group.questionIds.map((id) => questionsById.get(id)).filter((question): question is PaperQuestion => Boolean(question));
         const displayBlocks = group.displayBlocks ?? group.blocks;
         const readingTitle = `${part.title} ${group.title}`;
@@ -144,15 +150,18 @@ function StructuredPaperContent({ paper, answers, submitted, onAnswer, writingA,
         const visibleBlocks = displayBlocks.filter((block) => block.kind !== "paragraph" || (!groupInstructionSet.has((block.text ?? "").trim()) && (block.text ?? "").trim() !== part.title.trim()));
         const sourceBlocks = <div className="junior-high-structured-blocks">{visibleBlocks.map((block) => <div className="junior-high-structured-block" key={block.id}>{renderStructuredBlock(block, group)}</div>)}</div>;
         const questionBlocks = <div className="junior-high-question-stack">{groupQuestions.map((question) => <PaperQuestionCard cloze={group.inputMode === "inline-blank"} key={question.id} onAnswer={(value) => onAnswer(question, value)} question={question} submitted={submitted} value={answers[question.id] || ""} />)}</div>;
-        return <section className="junior-high-question-group" key={group.id}>
-          <h3>{group.title}</h3>
+        const showGroupTitle = group.title.trim() !== part.title.trim() && isSectionHeading(group.title);
+        const showGroupInstructionTitle = group.title.trim() !== part.title.trim() && !showGroupTitle;
+        return <section className={`junior-high-question-group ${group.sourceOnly ? "junior-high-source-only-group" : ""}`} key={group.id}>
+          {showGroupTitle ? <h3>{group.title}</h3> : null}
+          {showGroupInstructionTitle ? <p className="junior-high-paper-intro junior-high-group-instruction">{group.title}</p> : null}
           {group.instructions.filter((instruction) => instruction.trim() !== group.title.trim() && instruction.trim() !== part.title.trim()).slice(0, 2).map((instruction) => <p className="junior-high-paper-intro" key={`${group.id}-${instruction}`}>{instruction}</p>)}
           {group.audio?.map((src, index) => <label className="junior-high-inline-audio" key={src}>听力音频 {index + 1}<audio controls preload="metadata" src={src} /></label>)}
           {useReadingLayout ? <div className="junior-high-passage-layout junior-high-structured-reading-layout"><div className="junior-high-passage-column">{sourceBlocks}</div><div className="junior-high-passage-questions">{questionBlocks}</div></div> : <>{sourceBlocks}{groupQuestions.length ? questionBlocks : null}</>}
         </section>;
       })}
-    </section>)}
-    <section className="junior-high-paper-section"><h2>{paper.writing.title ?? "写作"}</h2><div className="junior-high-paper-writing">{writingTasks.map((task, index) => {
+    </section>})}
+    <section className="junior-high-paper-section"><h2>{writingSectionTitle}</h2><div className="junior-high-paper-writing">{writingTasks.map((task, index) => {
       const value = index === 0 ? writingA : writingB;
       const onChange = index === 0 ? onWritingA : onWritingB;
       return <WritingTask key={task.id} label={task.label} prompt={task.prompt} requirements={task.requirements} value={value} onChange={onChange}>{task.table?.length ? <table className="junior-high-writing-table"><tbody>{task.table.map((row, rowIndex) => <tr key={`${task.id}-${rowIndex}`}>{row.map((cell, cellIndex) => <td key={`${task.id}-${rowIndex}-${cellIndex}`}>{cell}</td>)}</tr>)}</tbody></table> : null}{task.image ? <img alt={`${task.label} 写作配图`} className="junior-high-writing-diagram" src={task.image} /> : null}</WritingTask>;
