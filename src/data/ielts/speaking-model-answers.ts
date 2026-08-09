@@ -13,6 +13,8 @@ export type SpeakingModelAnswer = {
   audioUrl?: string;
   band8Answer?: string[];
   band8AnswerTranslation?: string[];
+  band8Approach?: string;
+  band8Frames?: string[];
   band8Vocabulary?: SpeakingVocabulary[];
   frames: string[];
   partId: SpeakingPartId;
@@ -49,6 +51,13 @@ export const speakingModelAnswers = [
     ],
     answerTranslation: [
       "嗯，我目前和父母住在一个相当安静的社区里，房子是一套小公寓。它谈不上豪华，但很实用，因为步行到地铁站大约只要十分钟，附近还有一个小公园，所以住在这里不会觉得太憋闷。我最喜欢的房间大概是客厅，因为我们会在那里吃饭、聊天，而且晚上也会在那里放松一下。我不会说这是我梦想中的家，但它住起来很舒适，也很有生活气息。",
+    ],
+    band8Approach: "从住所的实际功能切入，先说明公寓不炫目但方便日常安排，再用客厅和社区氛围体现家的归属感。",
+    band8Frames: [
+      "It works well for everyday logistics because ...",
+      "What matters more to me is ...",
+      "It feels like a genuinely lived-in space where ...",
+      "The flat can feel a bit cramped, but ...",
     ],
     band8Vocabulary: [
       { phrase: "a lived-in space", translation: "有生活气息的空间", note: "比 comfortable 更具体" },
@@ -90,6 +99,13 @@ export const speakingModelAnswers = [
     answerTranslation: [
       "我来自苏州，那是一座位于上海附近的中等规模城市。苏州以园林和河道闻名，但说实话，我最喜欢的是那里比较慢的生活节奏。只要知道去哪里找，人们仍然能发现安静的街道、小面馆和老社区。这座城市已经发生了很大变化，尤其是新建了不少商业综合体和地铁线路。所以现在生活确实更方便了，不过地方特色可能没有以前那么浓了。",
     ],
+    band8Approach: "用地方特色和城市变化作对比，先给家乡的辨识度，再评价发展如何重塑生活并保留身份感。",
+    band8Frames: [
+      "What I like most is its local character, especially ...",
+      "Even though the city is modern now, ...",
+      "It has been reshaped by development, particularly ...",
+      "The city is trying to strike a balance between ...",
+    ],
     band8Vocabulary: [
       { phrase: "local character", translation: "地方特色", note: "城市身份感" },
       { phrase: "urban fabric", translation: "城市肌理", note: "较高级但自然的城市表达" },
@@ -129,6 +145,13 @@ export const speakingModelAnswers = [
     ],
     answerTranslation: [
       "目前我是一名大学生，学习的是媒体与传播。我选择这个专业，主要是因为我一直很感兴趣人们如何在网上讲故事，尤其是如何通过短视频和社交媒体来表达。有些课程理论性很强，学起来可能有点枯燥，不过实践项目动手性很强，也确实很有用。我觉得自己正在掌握一些以后真正能用得上的技能，所以这让我一直很有动力。",
+    ],
+    band8Approach: "先明确专业选择，再把兴趣从社交媒体上升到信息理解、受众行为和媒介素养，最后说明挑战与实践价值。",
+    band8Frames: [
+      "I chose it because I’m interested in how ...",
+      "It is not just about ..., but also ...",
+      "The course has a steep learning curve because ...",
+      "That said, I enjoy ..., which makes it ...",
     ],
     band8Vocabulary: [
       { phrase: "media literacy", translation: "媒介素养", note: "学习内容更专业" },
@@ -170,6 +193,13 @@ export const speakingModelAnswers = [
     answerTranslation: [
       "是的，我确实经常走路，尤其是在晚饭后。我并不是把它当成正式锻炼，更多只是想透透气、清醒一下头脑。工作日里，我一般会在小区附近走走，或者步行去地铁站。不过如果可以选择，我更喜欢在公园里或绿树成荫的街道上散步，因为那里更安静，我也能真正放慢脚步一会儿。",
     ],
+    band8Approach: "把 walking 从简单爱好提升为 active transport 和 digital detox，突出它如何打断久坐、清理思绪。",
+    band8Frames: [
+      "I walk quite a lot, partly because ...",
+      "It is a simple way to break up ...",
+      "I prefer places where I can engage with ...",
+      "In a way, it works as a small digital detox because ...",
+    ],
     band8Vocabulary: [
       { phrase: "active transport", translation: "主动出行", note: "走路不只是运动" },
       { phrase: "sedentary routine", translation: "久坐的日常", note: "健康话题自然表达" },
@@ -209,6 +239,13 @@ export const speakingModelAnswers = [
     ],
     answerTranslation: [
       "我目前没有养宠物，主要是因为我的公寓比较小，而且白天家里一直没人，所以对动物来说不太公平。不过我小时候和一只叫 Milo 的橘猫一起长大，因此我一直都很喜欢猫。说实话，它并不算特别黏人，但我做作业时它会坐在旁边，不知为什么，那种陪伴让人很安心。等以后住的地方宽敞一些、生活作息也更稳定时，我很想再养一只猫。",
+    ],
+    band8Approach: "先表达喜欢动物，再成熟地说明养宠物涉及长期责任和动物福利，最后用童年猫的细节补情感。",
+    band8Frames: [
+      "I see it as a long-term commitment, not just ...",
+      "I would worry about animal welfare if ...",
+      "What I liked was the quiet relationship we had ...",
+      "I would love to have ... when my routine becomes ...",
     ],
     band8Vocabulary: [
       { phrase: "a long-term commitment", translation: "长期责任", note: "解释养宠物更成熟" },
@@ -250,6 +287,13 @@ export const speakingModelAnswers = [
     answerTranslation: [
       "是的，我确实喜欢阅读，尤其是小说和叙事性非虚构作品。如果我比较累，我通常会选择轻松读物；但如果精力更足，我会喜欢那些解释真实事件或人物经历的书。我一般会在睡前读书，一方面是因为它能让我放松下来，也能让我远离手机。对我来说，阅读不只是学习知识；它还能让我暂时不去想一些小烦恼。当我真正沉浸在一本书里时，我会觉得自己好像短暂地走进了别人的世界。",
     ],
+    band8Approach: "按阅读状态分层回答，从 light read 到 narrative non-fiction，再说明阅读如何拓宽视角并减少刷手机。",
+    band8Frames: [
+      "What I read depends very much on ...",
+      "When I have more mental energy, I prefer ...",
+      "What I value about reading is that ...",
+      "A good book lets me ..., which can ...",
+    ],
     band8Vocabulary: [
       { phrase: "narrative non-fiction", translation: "叙事性非虚构作品", note: "阅读类型更准确" },
       { phrase: "a light read", translation: "轻松读物", note: "BBC 阅读话题常用表达" },
@@ -288,6 +332,13 @@ export const speakingModelAnswers = [
     ],
     answerTranslation: [
       "我的名字是父母取的。据我所知，它的含义和冷静、可靠有关。说实话，我小时候并没有太在意这个名字；它只是老师在课堂上点名时会叫到的一个称呼。但现在我挺喜欢它的，因为它不算常见，同时又不难读。我觉得名字会给人一点身份认同感，也会让人和家庭产生连接。我并不会觉得自己每天都必须完全配得上这个名字，但它确实会提醒我父母当初对我的期待。",
+    ],
+    band8Approach: "把名字从含义扩展到个人身份和家庭连接，语气避免夸张，用 quiet expectation 和 grow into it 呈现成熟表达。",
+    band8Frames: [
+      "It carries a quiet expectation rather than ...",
+      "They wanted it to suggest ..., which ...",
+      "I’ve started to see it as part of ...",
+      "I don’t feel pressured to ..., but ...",
     ],
     band8Vocabulary: [
       { phrase: "carry a quiet expectation", translation: "承载一种含蓄期待", note: "解释名字含义更自然" },
@@ -328,6 +379,13 @@ export const speakingModelAnswers = [
     answerTranslation: [
       "我的主要爱好是用手机拍照。我最开始喜欢上它是在疫情期间，那时我需要一个花费不高、也不需要特殊设备的轻松消遣。一开始我只是拍日落和咖啡杯，但慢慢地，我开始注意街上的光线、颜色和细小的细节。让我一直保持兴趣的是，它给了我一个创意表达的出口，也给了我一个出门走走的理由。它还能让我暂时放松下来，因为这件事没有追求完美的压力；我只是去留意身边的东西。",
     ],
+    band8Approach: "把爱好定位为 low-pressure hobby，核心不是炫耀作品，而是观察日常、放松大脑和培养审美注意力。",
+    band8Frames: [
+      "I like it because it is a low-pressure hobby: ...",
+      "I can simply notice ..., or ...",
+      "It has become ..., but also ...",
+      "It is not about ..., but more about ...",
+    ],
     band8Vocabulary: [
       { phrase: "a low-pressure hobby", translation: "低压力爱好", note: "学生口吻自然" },
       { phrase: "a creative outlet", translation: "创意出口", note: "解释长期坚持原因" },
@@ -367,6 +425,13 @@ export const speakingModelAnswers = [
     answerTranslation: [
       "工作日里，我通常会以吃早餐和快速查看当天安排开始一天。早餐对我来说是一个固定节点，因为如果我不吃早餐，整个上午都会有点混乱。白天大部分时间会分给上课、备课和一点自我学习。晚上我会尽量做点简单的饭，或者短暂散步，让自己放松下来。我遵循的是一种弹性的日常作息，而不是严格到每一分钟的时间表。它能给我一种掌控感，但如果有意外情况发生，也仍然给生活留出了调整空间。",
     ],
+    band8Approach: "把 routine 写成有结构但不死板，使用 fixed anchors、sleep routine 和 leave room for the unexpected 展示弹性安排。",
+    band8Frames: [
+      "My daily routine is structured, but not rigid.",
+      "I use a few fixed anchors, such as ...",
+      "These anchors help me stay on track without ...",
+      "A good routine should create ..., but still ...",
+    ],
     band8Vocabulary: [
       { phrase: "a loose routine", translation: "弹性作息", note: "避免 strict schedule" },
       { phrase: "fixed anchors", translation: "固定节点", note: "解释日常结构" },
@@ -405,6 +470,13 @@ export const speakingModelAnswers = [
     ],
     answerTranslation: [
       "是的，我很喜欢自然风景，尤其是有水面和开阔天空的地方。当我需要短暂休息时，我通常会去家附近的湖边公园，因为不用长途跋涉就能获得一点宁静。如果是更长一点的旅行，我更喜欢山区或海边，那样我可以慢慢走，好好欣赏周围的一切。对我来说，风景让人难忘的地方不只是能拍出好看的照片，而是身处户外自然中的那种感受。当我压力比较大时，它就像一种很好的调节剂。",
+    ],
+    band8Approach: "围绕 open scenery 讲心理重启，不把风景说成打卡拍照，而是强调慢下来、户外感和新鲜空气。",
+    band8Frames: [
+      "I’m drawn to ..., like ...",
+      "I don’t necessarily need ...; sometimes ... is enough.",
+      "What I enjoy is the chance to ... rather than ...",
+      "For me, natural scenery offers a kind of ...",
     ],
     band8Vocabulary: [
       { phrase: "wide-open scenery", translation: "开阔景色", note: "比 beautiful scenery 更具体" },
@@ -9583,7 +9655,7 @@ export const speakingModelAnswers = [
   },
 ] satisfies SpeakingModelAnswer[];
 
-const speakingModelAnswerByQuestionId = new Map(
+const speakingModelAnswerByQuestionId = new Map<string, SpeakingModelAnswer>(
   speakingModelAnswers.map((answer) => [answer.questionId, answer]),
 );
 
@@ -9608,7 +9680,7 @@ const speakingScoreNotes: Record<SpeakingPartId, SpeakingScoreNote[]> = {
   ],
 };
 
-export function getSpeakingModelAnswer(questionId: string) {
+export function getSpeakingModelAnswer(questionId: string): SpeakingModelAnswer | undefined {
   return speakingModelAnswerByQuestionId.get(questionId);
 }
 

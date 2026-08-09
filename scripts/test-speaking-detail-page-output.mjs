@@ -44,6 +44,11 @@ test("Band 8 answer pages render independently from Band 7 detail pages", () => 
   assert.ok(existsSync(band8Page), "Run `npm run build` before this test.");
 
   const output = readFileSync(band8Page, "utf8");
+  assert.match(output, /高分思路/);
+  assert.match(output, /万能句型/);
+  assert.match(output, /重点词汇和短语/);
+  assert.match(output, /从住所的实际功能切入/);
+  assert.match(output, /It works well for everyday logistics because/);
   assert.match(output, /8 分范文/);
   assert.match(output, /everyday logistics/);
   assert.match(output, /中文翻译/);

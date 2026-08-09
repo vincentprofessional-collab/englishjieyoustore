@@ -59,11 +59,14 @@ for (const questionId of requiredQuestionIds) {
 for (const questionId of requiredBand8QuestionIds) {
   test(`${questionId} has complete Band 8 model answer content`, () => {
     const answerObject = extractAnswerObject(questionId);
+    const framesBlock = extractArrayBlock(answerObject, "band8Frames");
     const vocabularyBlock = extractArrayBlock(answerObject, "band8Vocabulary");
     const answerBlock = extractArrayBlock(answerObject, "band8Answer");
     const answerTranslationBlock = extractArrayBlock(answerObject, "band8AnswerTranslation");
 
     assert.notEqual(answerObject, "", `${questionId} is missing`);
+    assert.match(answerObject, /band8Approach:\s*"[^"]{30,}"/, `${questionId} needs a specific Band 8 approach`);
+    assert.ok((framesBlock.match(/"/g) ?? []).length >= 6, `${questionId} needs at least 3 Band 8 frames`);
     assert.ok((vocabularyBlock.match(/phrase:/g) ?? []).length >= 5, `${questionId} needs at least 5 Band 8 vocabulary items`);
     assert.ok((answerBlock.match(/"[^"]{120,}"/g) ?? []).length >= 2, `${questionId} needs at least 2 substantial Band 8 English paragraphs`);
     assert.match(answerTranslationBlock, /"[\s\S]*[\u4e00-\u9fff][\s\S]{160,}"/, `${questionId} needs a substantial Band 8 Chinese translation`);
