@@ -57,6 +57,8 @@ export default async function SpeakingBand8Page({ params }: SpeakingBand8PagePro
   }
 
   const scoreNotes = getSpeakingScoreNotes(part.id);
+  const band8Approach = modelAnswer.band8Approach ?? modelAnswer.approach;
+  const band8Frames = modelAnswer.band8Frames ?? modelAnswer.frames;
 
   return (
     <article className={styles.page}>
@@ -98,16 +100,22 @@ export default async function SpeakingBand8Page({ params }: SpeakingBand8PagePro
       </header>
 
       <section className={styles.section}>
-        <h2>8 分提升思路</h2>
-        <p>
-          在原题思路上加入更精准的搭配、更自然的语义转折和更完整的细节展开。表达保持学生口吻，
-          但句式控制、词汇准确度和逻辑层次比基础版本更强。
-        </p>
+        <h2>高分思路</h2>
+        <p>{band8Approach}</p>
+      </section>
+
+      <section className={styles.section}>
+        <h2>万能句型</h2>
+        <ul className={styles.frames}>
+          {band8Frames.map((frame) => (
+            <li key={frame}>{frame}</li>
+          ))}
+        </ul>
       </section>
 
       {modelAnswer.band8Vocabulary?.length ? (
         <section className={styles.section}>
-          <h2>8 分词汇和短语</h2>
+          <h2>重点词汇和短语</h2>
           <dl className={styles.vocabulary}>
             {modelAnswer.band8Vocabulary.map((item) => (
               <div key={item.phrase}>
