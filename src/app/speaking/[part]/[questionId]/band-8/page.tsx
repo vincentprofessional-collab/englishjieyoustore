@@ -7,46 +7,52 @@ import {
   speakingModelAnswers,
 } from "@/data/ielts/speaking-model-answers";
 import { getSpeakingPart } from "@/lib/ielts/speaking";
-import styles from "./speaking-model-answer.module.css";
+import styles from "../speaking-model-answer.module.css";
 
-type SpeakingModelAnswerPageProps = {
+type SpeakingBand8PageProps = {
   params: Promise<{ part: string; questionId: string }>;
 };
 
 export function generateStaticParams() {
-  return speakingModelAnswers.map((answer) => ({
-    part: answer.partId,
-    questionId: answer.questionId,
-  }));
+  return speakingModelAnswers
+    .filter((answer) => Boolean(answer.band8Answer?.length))
+    .map((answer) => ({
+      part: answer.partId,
+      questionId: answer.questionId,
+    }));
 }
 
 export async function generateMetadata({
   params,
-}: SpeakingModelAnswerPageProps): Promise<Metadata> {
+}: SpeakingBand8PageProps): Promise<Metadata> {
   const { part: partId, questionId } = await params;
   const part = getSpeakingPart(partId);
   const question = part?.questions.find((item) => item.id === questionId);
   const modelAnswer = getSpeakingModelAnswer(questionId);
 
-  if (!part || !question || !modelAnswer) {
+  if (!part || !question || !modelAnswer?.band8Answer?.length) {
     return {};
   }
 
   return {
-    description: `${question.question} 雅思口语 ${part.label} 7 分范文、万能句型与重点词汇。`,
-    title: `${question.question}｜雅思口语 7 分范文`,
+    description: `${question.question} 雅思口语 ${part.label} 8 分范文、中文翻译与地道词汇短语。`,
+    title: `${question.question}｜雅思口语 8 分范文`,
   };
 }
 
-export default async function SpeakingModelAnswerPage({
-  params,
-}: SpeakingModelAnswerPageProps) {
+export default async function SpeakingBand8Page({ params }: SpeakingBand8PageProps) {
   const { part: partId, questionId } = await params;
   const part = getSpeakingPart(partId);
   const question = part?.questions.find((item) => item.id === questionId);
   const modelAnswer = getSpeakingModelAnswer(questionId);
 
-  if (!part || !question || !modelAnswer || modelAnswer.partId !== part.id) {
+  if (
+    !part ||
+    !question ||
+    !modelAnswer ||
+    modelAnswer.partId !== part.id ||
+    !modelAnswer.band8Answer?.length
+  ) {
     notFound();
   }
 
@@ -59,11 +65,11 @@ export default async function SpeakingModelAnswerPage({
         <span aria-hidden="true">/</span>
         <Link href={`/speaking/${part.id}`}>{part.label}</Link>
         <span aria-hidden="true">/</span>
-        <strong>7 分范文</strong>
+        <strong>8 分范文</strong>
       </nav>
 
       <header className={styles.hero}>
-        <span>BAND 7 MODEL ANSWER</span>
+        <span>BAND 8 MODEL ANSWER</span>
         <h1>{question.question}</h1>
         <div className={styles.questionPrompt}>
           <p>
@@ -92,57 +98,46 @@ export default async function SpeakingModelAnswerPage({
       </header>
 
       <section className={styles.section}>
-        <h2>高分思路</h2>
-        <p>{modelAnswer.approach}</p>
+        <h2>8 分提升思路</h2>
+        <p>
+          在原题思路上加入更精准的搭配、更自然的语义转折和更完整的细节展开。表达保持学生口吻，
+          但句式控制、词汇准确度和逻辑层次比基础版本更强。
+        </p>
       </section>
 
-      <section className={styles.section}>
-        <h2>万能句型</h2>
-        <ul className={styles.frames}>
-          {modelAnswer.frames.map((frame) => (
-            <li key={frame}>{frame}</li>
-          ))}
-        </ul>
-      </section>
-
-      <section className={styles.section}>
-        <h2>重点词汇和短语</h2>
-        <dl className={styles.vocabulary}>
-          {modelAnswer.vocabulary.map((item) => (
-            <div key={item.phrase}>
-              <dt>{item.phrase}</dt>
-              <dd>
-                <strong>{item.translation}</strong>
-                <span>{item.note}</span>
-              </dd>
-            </div>
-          ))}
-        </dl>
-      </section>
+      {modelAnswer.band8Vocabulary?.length ? (
+        <section className={styles.section}>
+          <h2>8 分词汇和短语</h2>
+          <dl className={styles.vocabulary}>
+            {modelAnswer.band8Vocabulary.map((item) => (
+              <div key={item.phrase}>
+                <dt>{item.phrase}</dt>
+                <dd>
+                  <strong>{item.translation}</strong>
+                  <span>{item.note}</span>
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+      ) : null}
 
       <section className={`${styles.section} ${styles.answerSection}`}>
-        <h2>7 分范文</h2>
+        <h2>8 分范文</h2>
         <div className={styles.answer}>
-          {modelAnswer.answer.map((paragraph) => (
+          {modelAnswer.band8Answer.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}
         </div>
 
-        <div className={styles.translationBlock}>
-          <h3>中文翻译</h3>
-          <div className={styles.translation}>
-            {modelAnswer.answerTranslation.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
-          </div>
-        </div>
-
-        {modelAnswer.audioUrl ? (
-          <div className={styles.audioBlock}>
-            <h3>范文音频</h3>
-            <audio controls preload="none" src={modelAnswer.audioUrl}>
-              您的浏览器暂不支持音频播放。
-            </audio>
+        {modelAnswer.band8AnswerTranslation?.length ? (
+          <div className={styles.translationBlock}>
+            <h3>中文翻译</h3>
+            <div className={styles.translation}>
+              {modelAnswer.band8AnswerTranslation.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </div>
           </div>
         ) : null}
       </section>

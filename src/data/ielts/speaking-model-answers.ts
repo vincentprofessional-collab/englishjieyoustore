@@ -11,6 +11,9 @@ export type SpeakingModelAnswer = {
   answerTranslation: string[];
   approach: string;
   audioUrl?: string;
+  band8Answer?: string[];
+  band8AnswerTranslation?: string[];
+  band8Vocabulary?: SpeakingVocabulary[];
   frames: string[];
   partId: SpeakingPartId;
   questionId: string;
@@ -47,6 +50,21 @@ export const speakingModelAnswers = [
     answerTranslation: [
       "嗯，我目前和父母住在一个相当安静的社区里，房子是一套小公寓。它谈不上豪华，但很实用，因为步行到地铁站大约只要十分钟，附近还有一个小公园，所以住在这里不会觉得太憋闷。我最喜欢的房间大概是客厅，因为我们会在那里吃饭、聊天，而且晚上也会在那里放松一下。我不会说这是我梦想中的家，但它住起来很舒适，也很有生活气息。",
     ],
+    band8Vocabulary: [
+      { phrase: "a lived-in space", translation: "有生活气息的空间", note: "比 comfortable 更具体" },
+      { phrase: "everyday logistics", translation: "日常事务安排", note: "解释住所实用性" },
+      { phrase: "within easy reach", translation: "很容易到达", note: "自然表达便利" },
+      { phrase: "feel cramped", translation: "觉得拥挤压抑", note: "谈空间限制" },
+      { phrase: "community spirit", translation: "社区互助氛围", note: "BBC 社区话题可迁移表达" },
+    ],
+    band8Answer: [
+      "I live with my parents in a compact flat in a fairly settled neighbourhood. It is not the sort of place that looks impressive in photos, but it works well for everyday logistics: the metro, a small supermarket and a park are all within easy reach. That matters to me more than having a large living room, because a home has to support your routine, not just look good.",
+      "My favourite part is probably the living room, because it feels like a genuinely lived-in space. We have dinner there, talk about our day and sometimes watch something together when everyone is free. The flat can feel a bit cramped when we are all busy, but the neighbourhood has a quiet kind of community spirit, so I feel quite rooted there.",
+    ],
+    band8AnswerTranslation: [
+      "我和父母住在一个比较稳定的社区里，房子是一套紧凑型公寓。它不是那种拍照看起来特别气派的地方，但对日常事务安排来说很实用：地铁、小超市和公园都很容易到达。对我来说，这比拥有一个很大的客厅更重要，因为家应该支持你的生活节奏，而不只是看起来好看。",
+      "我最喜欢的部分大概是客厅，因为它真的有生活气息。我们会在那里吃晚饭，聊聊一天发生的事，有空的时候也会一起看点东西。人都忙起来时，公寓确实会有点拥挤压抑，但这个社区有一种安静的互助氛围，所以我在那里挺有归属感的。",
+    ],
     audioUrl: "/speaking/audio/speaking-part-1-001.mp3",
   },
   {
@@ -71,6 +89,21 @@ export const speakingModelAnswers = [
     ],
     answerTranslation: [
       "我来自苏州，那是一座位于上海附近的中等规模城市。苏州以园林和河道闻名，但说实话，我最喜欢的是那里比较慢的生活节奏。只要知道去哪里找，人们仍然能发现安静的街道、小面馆和老社区。这座城市已经发生了很大变化，尤其是新建了不少商业综合体和地铁线路。所以现在生活确实更方便了，不过地方特色可能没有以前那么浓了。",
+    ],
+    band8Vocabulary: [
+      { phrase: "local character", translation: "地方特色", note: "城市身份感" },
+      { phrase: "urban fabric", translation: "城市肌理", note: "较高级但自然的城市表达" },
+      { phrase: "retain its charm", translation: "保留魅力", note: "谈变化后的保留" },
+      { phrase: "be reshaped by development", translation: "被发展重塑", note: "描述城市变化" },
+      { phrase: "strike a balance", translation: "取得平衡", note: "Part 3 也可迁移" },
+    ],
+    band8Answer: [
+      "I’m from Suzhou, a city near Shanghai that is known for its canals, gardens and rather gentle pace of life. What I like most is its local character. Even though the city is modern now, you can still find narrow lanes, old bridges and small noodle shops that make the place feel distinctive rather than generic.",
+      "It has definitely been reshaped by development. New metro lines and shopping complexes have made daily life much easier, but parts of the old urban fabric have also become less visible. I think the city is trying to strike a balance between convenience and identity. It is not frozen in the past, but it still retains enough charm to feel like home.",
+    ],
+    band8AnswerTranslation: [
+      "我来自苏州，一座靠近上海的城市，以河道、园林和相对温和的生活节奏闻名。我最喜欢的是它的地方特色。尽管这座城市现在已经很现代化，你仍然能找到窄巷、老桥和小面馆，这些东西让它有辨识度，而不是变成千篇一律的城市。",
+      "它确实已经被发展重塑了。新的地铁线路和商业综合体让日常生活方便了很多，但老城市肌理的一部分也变得不那么明显了。我觉得这座城市正在尝试在便利和身份感之间取得平衡。它并不是停留在过去，但仍然保留了足够的魅力，让我觉得它是家乡。",
     ],
     audioUrl: "/speaking/audio/speaking-part-1-002.mp3",
   },
@@ -97,6 +130,21 @@ export const speakingModelAnswers = [
     answerTranslation: [
       "目前我是一名大学生，学习的是媒体与传播。我选择这个专业，主要是因为我一直很感兴趣人们如何在网上讲故事，尤其是如何通过短视频和社交媒体来表达。有些课程理论性很强，学起来可能有点枯燥，不过实践项目动手性很强，也确实很有用。我觉得自己正在掌握一些以后真正能用得上的技能，所以这让我一直很有动力。",
     ],
+    band8Vocabulary: [
+      { phrase: "media literacy", translation: "媒介素养", note: "学习内容更专业" },
+      { phrase: "make sense of information", translation: "理解并判断信息", note: "比 understand information 更地道" },
+      { phrase: "digital behaviour", translation: "数字行为", note: "BBC 科技话题可迁移" },
+      { phrase: "a steep learning curve", translation: "陡峭学习曲线", note: "准确表达挑战" },
+      { phrase: "hands-on projects", translation: "实践型项目", note: "学习体验具体化" },
+    ],
+    band8Answer: [
+      "At the moment, I’m studying media and communication at university. I chose it because I’m interested in how people make sense of information, especially now that so much of our daily life happens through screens. It is not just about social media; we also look at journalism, audience behaviour and media literacy.",
+      "The course has a fairly steep learning curve, because some theories are abstract and the reading can be heavy. That said, I enjoy the hands-on projects, like analysing short videos or planning a small campaign. They make me notice digital behaviour in a more critical way, so I feel the subject is both practical and intellectually useful.",
+    ],
+    band8AnswerTranslation: [
+      "目前我在大学学习媒体与传播。我选择这个专业，是因为我对人们如何理解和判断信息很感兴趣，尤其是现在我们很多日常生活都通过屏幕发生。它不只是关于社交媒体；我们也会学习新闻、受众行为和媒介素养。",
+      "这门课程的学习曲线相当陡，因为有些理论比较抽象，阅读量也很大。话虽如此，我很喜欢实践型项目，比如分析短视频或策划一个小型传播活动。它们让我能更批判地观察数字行为，所以我觉得这个专业既实用，也有思考价值。",
+    ],
     audioUrl: "/speaking/audio/speaking-part-1-003.mp3",
   },
   {
@@ -121,6 +169,21 @@ export const speakingModelAnswers = [
     ],
     answerTranslation: [
       "是的，我确实经常走路，尤其是在晚饭后。我并不是把它当成正式锻炼，更多只是想透透气、清醒一下头脑。工作日里，我一般会在小区附近走走，或者步行去地铁站。不过如果可以选择，我更喜欢在公园里或绿树成荫的街道上散步，因为那里更安静，我也能真正放慢脚步一会儿。",
+    ],
+    band8Vocabulary: [
+      { phrase: "active transport", translation: "主动出行", note: "走路不只是运动" },
+      { phrase: "sedentary routine", translation: "久坐的日常", note: "健康话题自然表达" },
+      { phrase: "clear my head", translation: "理清思绪", note: "散步高频地道表达" },
+      { phrase: "engage with my surroundings", translation: "感知周围环境", note: "比 look around 更高级" },
+      { phrase: "reduce screen time", translation: "减少屏幕时间", note: "BBC digital detox 话题借鉴" },
+    ],
+    band8Answer: [
+      "Yes, I walk quite a lot, partly because it is a form of active transport for me. I walk to the metro station, to nearby shops and sometimes around campus between classes. It is a simple way to break up a sedentary routine, especially on days when I have been sitting in front of a laptop for hours.",
+      "I prefer walking in places where I can engage with my surroundings, like tree-lined streets or a quiet park. It helps me clear my head without making a big plan to exercise. In a way, walking is also a small digital detox for me, because it reduces screen time and gives my mind a chance to reset.",
+    ],
+    band8AnswerTranslation: [
+      "是的，我走路挺多的，部分原因是对我来说它是一种主动出行方式。我会步行去地铁站、附近商店，有时也会在课间走过校园。特别是当我已经在电脑前坐了好几个小时后，走路是一种简单的方法，可以打断久坐的日常。",
+      "我更喜欢在能感知周围环境的地方走路，比如绿树成荫的街道或安静的公园。它能让我理清思绪，而且不需要专门制定一个运动计划。从某种意义上说，散步对我也是一种小型数字排毒，因为它减少了屏幕时间，也让大脑有机会重新调整。",
     ],
     audioUrl: "/speaking/audio/speaking-part-1-004.mp3",
   },
@@ -147,6 +210,21 @@ export const speakingModelAnswers = [
     answerTranslation: [
       "我目前没有养宠物，主要是因为我的公寓比较小，而且白天家里一直没人，所以对动物来说不太公平。不过我小时候和一只叫 Milo 的橘猫一起长大，因此我一直都很喜欢猫。说实话，它并不算特别黏人，但我做作业时它会坐在旁边，不知为什么，那种陪伴让人很安心。等以后住的地方宽敞一些、生活作息也更稳定时，我很想再养一只猫。",
     ],
+    band8Vocabulary: [
+      { phrase: "a long-term commitment", translation: "长期责任", note: "解释养宠物更成熟" },
+      { phrase: "keep me company", translation: "陪伴我", note: "宠物价值" },
+      { phrase: "read an animal’s body language", translation: "读懂动物的肢体语言", note: "BBC 社交技能角度迁移" },
+      { phrase: "animal welfare", translation: "动物福利", note: "表达责任感" },
+      { phrase: "a settled routine", translation: "稳定作息", note: "是否适合养宠物" },
+    ],
+    band8Answer: [
+      "I do like animals, but I don’t have a pet at the moment because I see it as a long-term commitment, not just something cute to post online. My flat is small and my schedule is not settled enough, so I would worry about animal welfare if the pet had to stay alone most of the day.",
+      "When I was younger, my family had a ginger cat, and he used to keep me company while I was doing homework. What I liked was the quiet relationship we had. You learn to read an animal’s body language and respect its space, which is quite different from interacting with people. I would love to have a cat again when my routine becomes more stable.",
+    ],
+    band8AnswerTranslation: [
+      "我确实喜欢动物，但目前没有养宠物，因为我认为这是一项长期责任，而不只是一个可以发到网上的可爱东西。我的公寓比较小，作息也还不够稳定，所以如果宠物一天大部分时间都得独自在家，我会担心动物福利问题。",
+      "我小时候家里养过一只橘猫，我做作业时它常常陪在我身边。我喜欢的是我们之间那种安静的关系。你会学着读懂动物的肢体语言，也会尊重它的空间，这和与人互动很不一样。等我的生活规律更稳定后，我很想再养一只猫。",
+    ],
     audioUrl: "/speaking/audio/speaking-part-1-005.mp3",
   },
   {
@@ -172,6 +250,21 @@ export const speakingModelAnswers = [
     answerTranslation: [
       "是的，我确实喜欢阅读，尤其是小说和叙事性非虚构作品。如果我比较累，我通常会选择轻松读物；但如果精力更足，我会喜欢那些解释真实事件或人物经历的书。我一般会在睡前读书，一方面是因为它能让我放松下来，也能让我远离手机。对我来说，阅读不只是学习知识；它还能让我暂时不去想一些小烦恼。当我真正沉浸在一本书里时，我会觉得自己好像短暂地走进了别人的世界。",
     ],
+    band8Vocabulary: [
+      { phrase: "narrative non-fiction", translation: "叙事性非虚构作品", note: "阅读类型更准确" },
+      { phrase: "a light read", translation: "轻松读物", note: "BBC 阅读话题常用表达" },
+      { phrase: "make assumptions about people", translation: "对人作出预设判断", note: "阅读选择可延展观点" },
+      { phrase: "stay absorbed", translation: "保持沉浸", note: "比 keep reading 更地道" },
+      { phrase: "broaden my perspective", translation: "拓宽视角", note: "阅读价值表达" },
+    ],
+    band8Answer: [
+      "Yes, I enjoy reading, although what I read depends very much on my mood. If I’m tired, I might choose a light read, like a contemporary novel. When I have more mental energy, I prefer narrative non-fiction, especially books about psychology, social behaviour or ordinary people living through unusual events.",
+      "What I value about reading is that it makes me less quick to make assumptions about people. A good book lets me stay absorbed in another person’s way of thinking for a while, which can broaden my perspective without feeling like formal study. I usually read before bed because it slows me down and keeps me from scrolling endlessly on my phone.",
+    ],
+    band8AnswerTranslation: [
+      "是的，我喜欢阅读，不过我读什么很大程度上取决于当时的心情。如果我比较累，可能会选择一本轻松读物，比如当代小说。如果我精神状态更好，我更喜欢叙事性非虚构作品，尤其是关于心理、社会行为，或者普通人在特殊事件中生活经历的书。",
+      "我看重阅读的一点是，它让我不那么快地对别人作出预设判断。一本好书能让我短暂地沉浸在另一个人的思维方式里，这可以拓宽我的视角，而且不像正式学习那样有压力。我通常在睡前读书，因为它能让我慢下来，也能避免我无休止地刷手机。",
+    ],
   },
   {
     partId: "part-1",
@@ -195,6 +288,21 @@ export const speakingModelAnswers = [
     ],
     answerTranslation: [
       "我的名字是父母取的。据我所知，它的含义和冷静、可靠有关。说实话，我小时候并没有太在意这个名字；它只是老师在课堂上点名时会叫到的一个称呼。但现在我挺喜欢它的，因为它不算常见，同时又不难读。我觉得名字会给人一点身份认同感，也会让人和家庭产生连接。我并不会觉得自己每天都必须完全配得上这个名字，但它确实会提醒我父母当初对我的期待。",
+    ],
+    band8Vocabulary: [
+      { phrase: "carry a quiet expectation", translation: "承载一种含蓄期待", note: "解释名字含义更自然" },
+      { phrase: "personal identity", translation: "个人身份认同", note: "名字话题核心" },
+      { phrase: "family connection", translation: "家庭连接", note: "解释来源" },
+      { phrase: "easy to pronounce", translation: "容易发音", note: "评价名字实用性" },
+      { phrase: "grow into it", translation: "慢慢与它相称", note: "比 live up to 更柔和" },
+    ],
+    band8Answer: [
+      "My name was chosen by my parents, and it carries a quiet expectation rather than a dramatic meaning. They wanted it to suggest calmness and reliability, which sounds simple, but I actually appreciate that now. When I was little, I saw it just as a label teachers used in class.",
+      "As I’ve grown older, I’ve started to see my name as part of my personal identity and family connection. I like that it is not extremely common, but it is still easy to pronounce and remember. I don’t feel pressured to match the meaning perfectly, but in a small way I suppose I have grown into it.",
+    ],
+    band8AnswerTranslation: [
+      "我的名字是父母取的，它承载的不是特别戏剧化的含义，而是一种比较含蓄的期待。他们希望这个名字能让人联想到冷静和可靠，听起来很简单，但我现在其实挺欣赏这一点的。小时候，我只是把它看成老师在课堂上叫我的一个标签。",
+      "随着年龄增长，我开始把自己的名字看作个人身份认同和家庭连接的一部分。我喜欢它不是特别常见，但仍然容易发音、容易记住。我不会觉得自己必须完美符合它的含义，不过某种程度上，我觉得自己确实在慢慢与这个名字相称。",
     ],
   },
   {
@@ -220,6 +328,21 @@ export const speakingModelAnswers = [
     answerTranslation: [
       "我的主要爱好是用手机拍照。我最开始喜欢上它是在疫情期间，那时我需要一个花费不高、也不需要特殊设备的轻松消遣。一开始我只是拍日落和咖啡杯，但慢慢地，我开始注意街上的光线、颜色和细小的细节。让我一直保持兴趣的是，它给了我一个创意表达的出口，也给了我一个出门走走的理由。它还能让我暂时放松下来，因为这件事没有追求完美的压力；我只是去留意身边的东西。",
     ],
+    band8Vocabulary: [
+      { phrase: "a low-pressure hobby", translation: "低压力爱好", note: "学生口吻自然" },
+      { phrase: "a creative outlet", translation: "创意出口", note: "解释长期坚持原因" },
+      { phrase: "switch off", translation: "让大脑放松", note: "BBC 休闲话题常用" },
+      { phrase: "pay closer attention", translation: "更细致地观察", note: "摄影爱好核心" },
+      { phrase: "an oasis of calm", translation: "一片安静空间", note: "BBC 园艺/放松话题表达迁移" },
+    ],
+    band8Answer: [
+      "My main hobby is taking photos, mostly on my phone. I like it because it is a low-pressure hobby: I don’t need expensive equipment or a perfect location. I can simply notice a shadow on a wall, a quiet street after rain or the way light falls on a cup of coffee.",
+      "It has become a creative outlet for me, but also a way to switch off. When I take photos, I pay closer attention to ordinary surroundings instead of rushing through them. That makes the hobby feel like a small oasis of calm in my routine. It is not about posting impressive pictures; it is more about training myself to look properly.",
+    ],
+    band8AnswerTranslation: [
+      "我的主要爱好是拍照，大多数时候是用手机拍。我喜欢它，是因为这是一种低压力爱好：我不需要昂贵设备，也不需要完美地点。我可以只是注意到墙上的影子、雨后一条安静的街，或者光线落在一杯咖啡上的样子。",
+      "它已经变成了我的一个创意出口，同时也是一种让大脑放松的方式。当我拍照时，我会更细致地观察普通的周围环境，而不是匆忙经过它们。这让这个爱好像是我日常生活里的一小片安静空间。它不是为了发布多么令人印象深刻的照片；更多是训练自己真正去看。",
+    ],
   },
   {
     partId: "part-1",
@@ -244,6 +367,21 @@ export const speakingModelAnswers = [
     answerTranslation: [
       "工作日里，我通常会以吃早餐和快速查看当天安排开始一天。早餐对我来说是一个固定节点，因为如果我不吃早餐，整个上午都会有点混乱。白天大部分时间会分给上课、备课和一点自我学习。晚上我会尽量做点简单的饭，或者短暂散步，让自己放松下来。我遵循的是一种弹性的日常作息，而不是严格到每一分钟的时间表。它能给我一种掌控感，但如果有意外情况发生，也仍然给生活留出了调整空间。",
     ],
+    band8Vocabulary: [
+      { phrase: "a loose routine", translation: "弹性作息", note: "避免 strict schedule" },
+      { phrase: "fixed anchors", translation: "固定节点", note: "解释日常结构" },
+      { phrase: "stay on track", translation: "保持进度", note: "学习生活通用" },
+      { phrase: "get back into a regular sleep routine", translation: "恢复规律睡眠", note: "BBC routine 表达迁移" },
+      { phrase: "leave room for the unexpected", translation: "给意外情况留空间", note: "成熟表达" },
+    ],
+    band8Answer: [
+      "My daily routine is fairly structured, but not rigid. On weekdays, I use a few fixed anchors: breakfast, classes, a block of self-study and a short break in the evening. These anchors help me stay on track without turning the whole day into a military-style timetable.",
+      "In the evening, I try to keep things calm. If I have been staring at screens for too long, I will take a walk or read for a while, because that helps me get back into a regular sleep routine. I think a good routine should create a sense of control but still leave room for the unexpected. Otherwise it becomes stressful rather than helpful.",
+    ],
+    band8AnswerTranslation: [
+      "我的日常作息比较有结构，但并不死板。工作日里，我会有几个固定节点：早餐、上课、一段自习时间，以及晚上短暂休息。这些节点能帮助我保持进度，但不会把整天变成军训式时间表。",
+      "晚上我会尽量让节奏平静下来。如果我盯屏幕太久，我会去散步或读一会儿书，因为这能帮助我恢复规律睡眠。我觉得好的作息应该创造一种掌控感，但仍然给意外情况留空间。否则它就会变成压力，而不是帮助。",
+    ],
   },
   {
     partId: "part-1",
@@ -267,6 +405,21 @@ export const speakingModelAnswers = [
     ],
     answerTranslation: [
       "是的，我很喜欢自然风景，尤其是有水面和开阔天空的地方。当我需要短暂休息时，我通常会去家附近的湖边公园，因为不用长途跋涉就能获得一点宁静。如果是更长一点的旅行，我更喜欢山区或海边，那样我可以慢慢走，好好欣赏周围的一切。对我来说，风景让人难忘的地方不只是能拍出好看的照片，而是身处户外自然中的那种感受。当我压力比较大时，它就像一种很好的调节剂。",
+    ],
+    band8Vocabulary: [
+      { phrase: "wide-open scenery", translation: "开阔景色", note: "比 beautiful scenery 更具体" },
+      { phrase: "take it all in", translation: "慢慢欣赏", note: "自然口语表达" },
+      { phrase: "the great outdoors", translation: "户外自然", note: "BBC 自然话题表达" },
+      { phrase: "mental reset", translation: "心理重启", note: "解释风景价值" },
+      { phrase: "be drawn to", translation: "被吸引", note: "替代 like" },
+    ],
+    band8Answer: [
+      "Yes, I’m especially drawn to wide-open scenery, like lakes, mountains or coastlines. I don’t necessarily need a famous tourist spot; sometimes a quiet park with open sky and water is enough. What I enjoy is the chance to slow down and take it all in, rather than just take a quick photo and leave.",
+      "For me, natural scenery offers a kind of mental reset. Student life can become very screen-heavy, so being in the great outdoors helps me feel less trapped in my own thoughts. I like places where there is space, movement and fresh air, because they make my problems feel smaller for a while.",
+    ],
+    band8AnswerTranslation: [
+      "是的，我尤其容易被开阔的景色吸引，比如湖泊、山脉或海岸线。我并不一定需要去著名旅游景点；有时一个安静的公园，只要有开阔天空和水面就足够了。我享受的是有机会慢下来，好好感受周围的一切，而不是快速拍张照片就离开。",
+      "对我来说，自然风景提供了一种心理重启。学生生活有时会被屏幕占据太多，所以身处户外自然中，会让我不那么困在自己的思绪里。我喜欢那些有空间感、有变化、有新鲜空气的地方，因为它们会让我暂时觉得自己的问题没有那么大。",
     ],
   },
   {
