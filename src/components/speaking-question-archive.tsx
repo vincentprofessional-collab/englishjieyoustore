@@ -133,7 +133,7 @@ export function SpeakingQuestionArchive({ part }: { part: SpeakingPart }) {
                             {hasBand8Answer ? (
                               <Link
                                 className={`${styles.answerLink} ${styles.band8Link}`}
-                                href={`/speaking/${part.id}/${question.id}#band-8`}
+                                href={`/speaking/${part.id}/${question.id}/band-8`}
                               >
                                 查看 8 分范文 <span aria-hidden="true">→</span>
                               </Link>
