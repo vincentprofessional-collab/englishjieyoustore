@@ -7,6 +7,11 @@ import {
   speakingModelAnswers,
 } from "@/data/ielts/speaking-model-answers";
 import { getSpeakingPart } from "@/lib/ielts/speaking";
+import {
+  getSpeakingContentSlug,
+  type SpeakingEditableContent,
+} from "@/lib/ielts/speaking-managed-content";
+import SpeakingModelAnswerContent from "./speaking-model-answer-content";
 import styles from "./speaking-model-answer.module.css";
 
 type SpeakingModelAnswerPageProps = {
@@ -51,6 +56,26 @@ export default async function SpeakingModelAnswerPage({
   }
 
   const scoreNotes = getSpeakingScoreNotes(part.id);
+  const initialContent: SpeakingEditableContent = {
+    answer: modelAnswer.answer,
+    answerHeading: "7 分范文",
+    answerTranslation: modelAnswer.answerTranslation,
+    approach: modelAnswer.approach,
+    audioUrl: modelAnswer.audioUrl ?? "",
+    band: "band-7",
+    followUp: question.followUp,
+    frames: modelAnswer.frames,
+    heroLabel: "BAND 7 MODEL ANSWER",
+    partId: part.id,
+    partLabel: part.label,
+    question: question.question,
+    questionId: question.id,
+    questionTranslation: question.translation,
+    slug: getSpeakingContentSlug(part.id, question.id, "band-7"),
+    timing: part.timing,
+    vocabulary: modelAnswer.vocabulary,
+    year: question.year,
+  };
 
   return (
     <article className={styles.page}>
@@ -62,103 +87,7 @@ export default async function SpeakingModelAnswerPage({
         <strong>7 分范文</strong>
       </nav>
 
-      <header className={styles.hero}>
-        <span>BAND 7 MODEL ANSWER</span>
-        <h1>{question.question}</h1>
-        <div className={styles.questionPrompt}>
-          <p>
-            <span>中文提示</span>
-            <strong>{question.translation}</strong>
-          </p>
-          <p>
-            <span>真实题目 / 常见追问</span>
-            <strong>{question.followUp}</strong>
-          </p>
-        </div>
-        <dl>
-          <div>
-            <dt>题型</dt>
-            <dd>{part.label}</dd>
-          </div>
-          <div>
-            <dt>建议时长</dt>
-            <dd>{part.timing}</dd>
-          </div>
-          <div>
-            <dt>题目来源</dt>
-            <dd>{question.year}</dd>
-          </div>
-        </dl>
-      </header>
-
-      <section className={styles.section}>
-        <h2>高分思路</h2>
-        <p>{modelAnswer.approach}</p>
-      </section>
-
-      <section className={styles.section}>
-        <h2>万能句型</h2>
-        <ul className={styles.frames}>
-          {modelAnswer.frames.map((frame) => (
-            <li key={frame}>{frame}</li>
-          ))}
-        </ul>
-      </section>
-
-      <section className={styles.section}>
-        <h2>重点词汇和短语</h2>
-        <dl className={styles.vocabulary}>
-          {modelAnswer.vocabulary.map((item) => (
-            <div key={item.phrase}>
-              <dt>{item.phrase}</dt>
-              <dd>
-                <strong>{item.translation}</strong>
-                <span>{item.note}</span>
-              </dd>
-            </div>
-          ))}
-        </dl>
-      </section>
-
-      <section className={`${styles.section} ${styles.answerSection}`}>
-        <h2>7 分范文</h2>
-        <div className={styles.answer}>
-          {modelAnswer.answer.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
-          ))}
-        </div>
-
-        <div className={styles.translationBlock}>
-          <h3>中文翻译</h3>
-          <div className={styles.translation}>
-            {modelAnswer.answerTranslation.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
-          </div>
-        </div>
-
-        {modelAnswer.audioUrl ? (
-          <div className={styles.audioBlock}>
-            <h3>范文音频</h3>
-            <audio controls preload="none" src={modelAnswer.audioUrl}>
-              您的浏览器暂不支持音频播放。
-            </audio>
-          </div>
-        ) : null}
-      </section>
-
-      <section className={styles.section}>
-        <h2>IELTS 评分对照</h2>
-        <div className={styles.scoreNotes}>
-          {scoreNotes.map((item) => (
-            <div key={item.code}>
-              <span>{item.code}</span>
-              <strong>{item.label}</strong>
-              <p>{item.note}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      <SpeakingModelAnswerContent initialContent={initialContent} scoreNotes={scoreNotes} />
     </article>
   );
 }
