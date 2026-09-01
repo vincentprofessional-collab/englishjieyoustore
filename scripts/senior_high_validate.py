@@ -22,6 +22,7 @@ def main() -> int:
     errors: list[str] = []
     knowledge = catalog.get("knowledge", [])
     practice = catalog.get("practice", [])
+    practice_groups = {group.get("id"): group for group in catalog.get("practice_groups", [])}
     papers = catalog.get("papers", [])
     paper_items = [question for paper in papers for question in paper.get("questions", []) if question.get("active")]
     published = knowledge + practice + paper_items
@@ -60,16 +61,19 @@ def main() -> int:
         check(2 <= len(options) <= 6, f"practice item {item_id} has {len(options)} options")
         check(labels == [chr(ord("A") + index) for index in range(len(labels))], f"practice item {item_id} option labels are incomplete")
         check(all(option.get("text") and len(option["text"]) <= 500 and not LEAK_RE.search(option["text"]) for option in options), f"practice item {item_id} has a leaked or oversized option")
-        check(bool(item.get("passage")) and bool(item.get("group_id")), f"practice item {item_id} has no source-aligned passage group")
-        check(not LEAK_RE.search(str(item.get("passage", ""))), f"practice item {item_id} passage leaks answer/navigation text")
+        group = practice_groups.get(item.get("group_id"))
+        check(group is not None, f"practice item {item_id} has no source-aligned passage group")
+        check(bool(group and group.get("passage")), f"practice item {item_id} has no passage")
+        check(not LEAK_RE.search(str(group.get("passage", "") if group else "")), f"practice item {item_id} passage leaks answer/navigation text")
         check(item.get("answer") in labels, f"practice item {item_id} answer does not reference an option")
         if item.get("group_id"):
-            group_passages[item["group_id"]].add(item.get("passage", ""))
+            group_passages[item["group_id"]].add(group.get("passage", "") if group else "")
             group_numbers[item["group_id"]].append(int(item.get("source_question_number", 0)))
 
     for group_id, passages in group_passages.items():
         check(len(passages) == 1, f"reading group {group_id} contains mismatched passages")
         check(all(number > 0 for number in group_numbers[group_id]), f"reading group {group_id} has an invalid source question number")
+        check(practice_groups.get(group_id, {}).get("question_count") == len(group_numbers[group_id]), f"reading group {group_id} has a wrong question count")
 
     paper_fingerprints = {item.get("fingerprint") for item in paper_items}
     training_fingerprints = {item.get("fingerprint") for item in knowledge + practice}
@@ -85,9 +89,8 @@ def main() -> int:
         "category_counts": dict(Counter(item.get("category", "") for item in practice)),
         "answer_leak_count": sum(bool(LEAK_RE.search(" ".join([
             str(item.get("stem", "")),
-            str(item.get("passage", "")),
             " ".join(str(option.get("text", "")) for option in item.get("options", [])),
-        ]))) for item in knowledge + practice),
+        ]))) for item in knowledge + practice) + sum(bool(LEAK_RE.search(str(group.get("passage", "")))) for group in practice_groups.values()),
         "paper_training_fingerprint_intersection": len(paper_fingerprints & training_fingerprints),
     }
     result = {"generated_at": datetime.now(timezone.utc).isoformat(), "ok": not errors, "checks": checks, "errors": errors}

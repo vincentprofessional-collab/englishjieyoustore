@@ -138,6 +138,8 @@ def topic_from_path(path: str, answer: str, analysis: str) -> str:
         if re.search(pattern, Path(path).name):
             return label
     if "名词数词形容词副词" in path.replace(" ", ""):
+        if re.search(r"主谓一致|现在完成时|一般现在时|一般过去时|一般将来时|被动语态|谓语动词(?:使用|应用|用|应)", combined) or re.match(r"^(?:am|is|are|was|were|has|have|had|will|shall|do|does|did)\b", answer, re.I):
+            return "动词时态和语态"
         if re.search(r"数词", combined):
             return "数词"
         if re.search(r"形容词|副词|比较级|最高级|作定语|作表语|作状语", combined):
@@ -360,6 +362,21 @@ def main() -> int:
     practice = unique(practice)
     number_items(knowledge)
     number_items(practice)
+    practice_groups: dict[str, dict[str, Any]] = {}
+    for item in practice:
+        group_id = item["group_id"]
+        practice_groups.setdefault(group_id, {
+            "id": group_id,
+            "title": item["group_title"],
+            "passage": item["passage"],
+            "category": item["category"],
+            "source_relpath": item["source_relpath"],
+            "source_sha256": item["source_sha256"],
+            "question_count": 0,
+        })
+        practice_groups[group_id]["question_count"] += 1
+        item.pop("passage", None)
+        item.pop("group_title", None)
     generated_at = datetime.now(timezone.utc).isoformat()
     catalog = {
         "version": 2,
@@ -368,6 +385,7 @@ def main() -> int:
         "categories": legacy.get("categories", []),
         "knowledge": knowledge,
         "practice": practice,
+        "practice_groups": list(practice_groups.values()),
         "papers": [],
         "paper_review_count": legacy.get("paper_review_count", 0),
     }
@@ -379,7 +397,7 @@ def main() -> int:
         "practice_source_count": len(practice_paths),
         "knowledge_published": len(knowledge),
         "practice_published": len(practice),
-        "practice_groups": len({item["group_id"] for item in practice}),
+        "practice_groups": len(practice_groups),
         "topic_counts": Counter(item["knowledge_topic"] for item in knowledge),
         "category_counts": Counter(item["category"] for item in practice),
         "exclusions": exclusions,
@@ -387,7 +405,7 @@ def main() -> int:
     print(json.dumps({
         "knowledge": len(knowledge),
         "practice": len(practice),
-        "practice_groups": len({item["group_id"] for item in practice}),
+        "practice_groups": len(practice_groups),
         "excluded_sources": len(exclusions),
     }, ensure_ascii=False))
     return 0

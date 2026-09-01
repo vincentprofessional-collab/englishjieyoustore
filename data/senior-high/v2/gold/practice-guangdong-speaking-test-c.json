@@ -1,0 +1,848 @@
+{
+  "schemaVersion": 2,
+  "id": "practice-guangdong-speaking-test-c",
+  "kind": "practice",
+  "title": "广东听说 Test C",
+  "year": "2020",
+  "region": "广东",
+  "variant": "听说",
+  "instructions": [],
+  "sections": [
+    {
+      "id": "section-oral",
+      "title": "听说及口语",
+      "instructions": [],
+      "layout": "dialogue",
+      "groups": [
+        {
+          "id": "group-oral",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "q-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "oral_response",
+              "promptBlocks": [
+                {
+                  "type": "video",
+                  "assetId": "asset-b513b642329728c66a2b3b756b579bd59378af3d59debd6c292d41b8a8b78354",
+                  "label": "video"
+                },
+                {
+                  "type": "audio",
+                  "assetId": "asset-1a081b4ffafcf341ebc9d04db03c9c713b53d03089814bf1c8ef8a616310d412",
+                  "label": "audio"
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Part A Reading aloud (模仿朗读)"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "In 1905, sitting alone on a city bus, Einstein looks back at the clock tower and what he sees is astonishing. In his imagination, as he reaches the speed of light, the hands of the clock appear frozen in time. Einstein knows that back at the clock tower, time is passing normally. But on Einstein’s light-speed bus, the light from the clock can no longer catch up to him. The faster he races through space, the slower he moves through time. This sparks the birth of Einstein’s “Special Theory of Relativity”, which says that space and time are deeply connected."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4115aa1f1507c7f363e486090126e0b57d89ee6384cdd4753d41f586572f9981",
+                  "relativePath": "2020年/2020年广东高考英语听说考试真题 Test C/2020年广东高考英语听说考试真题 Test C.docx",
+                  "sha256": "4115aa1f1507c7f363e486090126e0b57d89ee6384cdd4753d41f586572f9981",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                },
+                {
+                  "sourceDocumentId": "1a081b4ffafcf341ebc9d04db03c9c713b53d03089814bf1c8ef8a616310d412",
+                  "relativePath": "高考内容总/2009-2021广东真题/2020年广东高考英语听说考试C.mp3",
+                  "sha256": "1a081b4ffafcf341ebc9d04db03c9c713b53d03089814bf1c8ef8a616310d412",
+                  "locator": {},
+                  "extractionMethod": "media-manifest",
+                  "confidence": 0.9
+                },
+                {
+                  "sourceDocumentId": "b513b642329728c66a2b3b756b579bd59378af3d59debd6c292d41b8a8b78354",
+                  "relativePath": "高考内容总/2009-2021广东真题/2020年广东高考英语听说考试C.mp4",
+                  "sha256": "b513b642329728c66a2b3b756b579bd59378af3d59debd6c292d41b8a8b78354",
+                  "locator": {},
+                  "extractionMethod": "media-manifest",
+                  "confidence": 0.9
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "35e0706311232d7f9e7597dee3ff4abd66cb4939f51c067808cecbdc867c3511"
+              }
+            },
+            {
+              "id": "q-2",
+              "displayNumber": 2,
+              "sourceQuestionNumber": 2,
+              "type": "oral_response",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Part B Role Play (角色扮演)"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "                               情景介绍"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "角色：你是Tom。"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "任务：(1)与同学Mary谈论组织阅读活动的话题；"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "         (2)根据谈话内容回答另一同学的提问。"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "生词：drama戏剧；legend传说"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "下面请用英语提出三个问题。"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "提问①：你们将如何组织这个阅读活动？"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "提问②：有些什么主题呢？"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "提问③：学生们可以在哪里找到书单上的书？"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4115aa1f1507c7f363e486090126e0b57d89ee6384cdd4753d41f586572f9981",
+                  "relativePath": "2020年/2020年广东高考英语听说考试真题 Test C/2020年广东高考英语听说考试真题 Test C.docx",
+                  "sha256": "4115aa1f1507c7f363e486090126e0b57d89ee6384cdd4753d41f586572f9981",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                },
+                {
+                  "sourceDocumentId": "1a081b4ffafcf341ebc9d04db03c9c713b53d03089814bf1c8ef8a616310d412",
+                  "relativePath": "高考内容总/2009-2021广东真题/2020年广东高考英语听说考试C.mp3",
+                  "sha256": "1a081b4ffafcf341ebc9d04db03c9c713b53d03089814bf1c8ef8a616310d412",
+                  "locator": {},
+                  "extractionMethod": "media-manifest",
+                  "confidence": 0.9
+                },
+                {
+                  "sourceDocumentId": "b513b642329728c66a2b3b756b579bd59378af3d59debd6c292d41b8a8b78354",
+                  "relativePath": "高考内容总/2009-2021广东真题/2020年广东高考英语听说考试C.mp4",
+                  "sha256": "b513b642329728c66a2b3b756b579bd59378af3d59debd6c292d41b8a8b78354",
+                  "locator": {},
+                  "extractionMethod": "media-manifest",
+                  "confidence": 0.9
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "56b8a349b4ed202c05ac20db4d06339694e32959ebd4caa79684b89f920b5618"
+              }
+            },
+            {
+              "id": "q-3",
+              "displayNumber": 3,
+              "sourceQuestionNumber": 3,
+              "type": "oral_response",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Part C Retelling (故事复述)"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "梗概：Tom的双胞胎兄弟走失，长大后兄弟俩因同一件T恤衫而重逢相认。"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "关键词：twin(双胞胎)  T-shirt(T恤衫)  missing(走失的)  looked the same(长得一样) excited(激动的)"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "参考答案"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4115aa1f1507c7f363e486090126e0b57d89ee6384cdd4753d41f586572f9981",
+                  "relativePath": "2020年/2020年广东高考英语听说考试真题 Test C/2020年广东高考英语听说考试真题 Test C.docx",
+                  "sha256": "4115aa1f1507c7f363e486090126e0b57d89ee6384cdd4753d41f586572f9981",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                },
+                {
+                  "sourceDocumentId": "1a081b4ffafcf341ebc9d04db03c9c713b53d03089814bf1c8ef8a616310d412",
+                  "relativePath": "高考内容总/2009-2021广东真题/2020年广东高考英语听说考试C.mp3",
+                  "sha256": "1a081b4ffafcf341ebc9d04db03c9c713b53d03089814bf1c8ef8a616310d412",
+                  "locator": {},
+                  "extractionMethod": "media-manifest",
+                  "confidence": 0.9
+                },
+                {
+                  "sourceDocumentId": "b513b642329728c66a2b3b756b579bd59378af3d59debd6c292d41b8a8b78354",
+                  "relativePath": "高考内容总/2009-2021广东真题/2020年广东高考英语听说考试C.mp4",
+                  "sha256": "b513b642329728c66a2b3b756b579bd59378af3d59debd6c292d41b8a8b78354",
+                  "locator": {},
+                  "extractionMethod": "media-manifest",
+                  "confidence": 0.9
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "e2966a3f1e37f6129a691abf4a87062f8a52abbbfe7f1fcfac2464a7d2da94c2"
+              }
+            },
+            {
+              "id": "q-4",
+              "displayNumber": 4,
+              "sourceQuestionNumber": 4,
+              "type": "oral_response",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Part B Role Play (角色扮演)"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "视频原文"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "M: Hi, Mary. I went to your dorm last night, but didn’t find you. Where were you?"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "W: Oh, I was at the Student Union last night till 10:30 pm."
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "M: Why so late?"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "W: I was in a meeting and it lasted for three hours. I was so tired."
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "M: Three hours? It was quite long. What was this meeting about?"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "W: It was about a reading project we’re going to carry out on campus. The head teacher was also at the meeting to support us."
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "M: Sounds interesting. Will all the students participate in the reading project?"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "W: Not really. We will give it a try on all the Grade 11 students in this term."
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "三问"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "提问①：你们将如何组织这个阅读活动？"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "翻译：How will you organize the reading activity?"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "电脑回答：Well, we’re going to put the students in different reading groups. We will give them a theme each week with a reading list. Each group will produce a reading report every two weeks. We may also organize other activities, for example, storytelling competition and drama show."
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "提问②：有些什么主题呢？"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "翻译：What themes are there?"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "电脑回答：We have chosen ten themes covering Chinese history, space travel, legends, music, adventures, etc. There are 18 weeks this term, so we need more themes. The Student Union has designed a poster calling for all the students to come up with themes for the remaining weeks."
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "提问③：学生们可以在哪里找到书单上的书？"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "翻译：Where can students find the books on the reading?"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "电脑回答：They can find most of the books on the list in the school library. We have spent quite a lot of time in sorting out the books in the library according to different reading themes. We will also provide them with some electronic books. The students can download them from either the school website or the city library website."
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "五答"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "1. 电脑提问：How long did Mary’s meeting last?"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "考生回答：Three hours."
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "2. 电脑提问：Who will participate in the reading project for this term?"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "考生回答：All the Grade 11 students."
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "3. 电脑提问：How often should each group write a reading report?  "
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "考生回答：Every two weeks."
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "4. 电脑提问：Why did the Student Union design a poster?"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "考生回答：To call for all the students to come up with the themes for the remaining week."
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "5. 电脑提问：Where can the students download the electronic books from?"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "考生回答：From either the school website or the city library website."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4115aa1f1507c7f363e486090126e0b57d89ee6384cdd4753d41f586572f9981",
+                  "relativePath": "2020年/2020年广东高考英语听说考试真题 Test C/2020年广东高考英语听说考试真题 Test C.docx",
+                  "sha256": "4115aa1f1507c7f363e486090126e0b57d89ee6384cdd4753d41f586572f9981",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                },
+                {
+                  "sourceDocumentId": "1a081b4ffafcf341ebc9d04db03c9c713b53d03089814bf1c8ef8a616310d412",
+                  "relativePath": "高考内容总/2009-2021广东真题/2020年广东高考英语听说考试C.mp3",
+                  "sha256": "1a081b4ffafcf341ebc9d04db03c9c713b53d03089814bf1c8ef8a616310d412",
+                  "locator": {},
+                  "extractionMethod": "media-manifest",
+                  "confidence": 0.9
+                },
+                {
+                  "sourceDocumentId": "b513b642329728c66a2b3b756b579bd59378af3d59debd6c292d41b8a8b78354",
+                  "relativePath": "高考内容总/2009-2021广东真题/2020年广东高考英语听说考试C.mp4",
+                  "sha256": "b513b642329728c66a2b3b756b579bd59378af3d59debd6c292d41b8a8b78354",
+                  "locator": {},
+                  "extractionMethod": "media-manifest",
+                  "confidence": 0.9
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "56b8a349b4ed202c05ac20db4d06339694e32959ebd4caa79684b89f920b5618"
+              }
+            },
+            {
+              "id": "q-5",
+              "displayNumber": 5,
+              "sourceQuestionNumber": 5,
+              "type": "oral_response",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Part C Retelling (故事复述)"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "视频原文"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "A Green T-shirt"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Tom had a twin brother who went lost at the age of five. Tom did not have much memory of his brother. He only remembered vaguely that they were both in green T-shirt the day his twin brother was missing. One day, when he was walking along the street, a green T-shirt in the store window attracted his attention. He went in and reached out for the T-shirt. Just then, he heard a gentle voice behind him saying, “It’s a nice T-shirt. I really like it.” The voice sounded like his own. Tom looked back and saw a young man. The young man’s face surprised him. And the young man was also astonished when he saw Tom’s face. It was as if they were looking into a mirror. The two looked just the same. They immediately talked to each other. In their conversation, the young man told Tom that he was adopted and couldn’t only remember much about his biological family. He remembered that he was in a green T-shirt when he got on the wrong bus and left his family from then on. On hearing this, Tom got very excited and burst into tears, “I am your brother.”"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4115aa1f1507c7f363e486090126e0b57d89ee6384cdd4753d41f586572f9981",
+                  "relativePath": "2020年/2020年广东高考英语听说考试真题 Test C/2020年广东高考英语听说考试真题 Test C.docx",
+                  "sha256": "4115aa1f1507c7f363e486090126e0b57d89ee6384cdd4753d41f586572f9981",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                },
+                {
+                  "sourceDocumentId": "1a081b4ffafcf341ebc9d04db03c9c713b53d03089814bf1c8ef8a616310d412",
+                  "relativePath": "高考内容总/2009-2021广东真题/2020年广东高考英语听说考试C.mp3",
+                  "sha256": "1a081b4ffafcf341ebc9d04db03c9c713b53d03089814bf1c8ef8a616310d412",
+                  "locator": {},
+                  "extractionMethod": "media-manifest",
+                  "confidence": 0.9
+                },
+                {
+                  "sourceDocumentId": "b513b642329728c66a2b3b756b579bd59378af3d59debd6c292d41b8a8b78354",
+                  "relativePath": "高考内容总/2009-2021广东真题/2020年广东高考英语听说考试C.mp4",
+                  "sha256": "b513b642329728c66a2b3b756b579bd59378af3d59debd6c292d41b8a8b78354",
+                  "locator": {},
+                  "extractionMethod": "media-manifest",
+                  "confidence": 0.9
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "e2966a3f1e37f6129a691abf4a87062f8a52abbbfe7f1fcfac2464a7d2da94c2"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "assetRefs": [
+    {
+      "assetId": "asset-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "kind": "image",
+      "url": "source://2020年/2020年广东高考英语听说考试真题 Test C/2020年广东高考英语听说考试真题 Test C.docx#word/media/",
+      "mimeType": "application/octet-stream",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "4115aa1f1507c7f363e486090126e0b57d89ee6384cdd4753d41f586572f9981",
+          "relativePath": "2020年/2020年广东高考英语听说考试真题 Test C/2020年广东高考英语听说考试真题 Test C.docx",
+          "sha256": "4115aa1f1507c7f363e486090126e0b57d89ee6384cdd4753d41f586572f9981",
+          "locator": {},
+          "extractionMethod": "docx-xml",
+          "confidence": 0.96
+        }
+      ]
+    },
+    {
+      "assetId": "asset-e8bc1e0bb7cd9a3981aae9e6500547c141cb18ebe6c2c553ff9736bcb244e37d",
+      "kind": "image",
+      "url": "source://2020年/2020年广东高考英语听说考试真题 Test C/2020年广东高考英语听说考试真题 Test C.docx#word/media/image1.png",
+      "mimeType": "image/png",
+      "sha256": "e8bc1e0bb7cd9a3981aae9e6500547c141cb18ebe6c2c553ff9736bcb244e37d",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "4115aa1f1507c7f363e486090126e0b57d89ee6384cdd4753d41f586572f9981",
+          "relativePath": "2020年/2020年广东高考英语听说考试真题 Test C/2020年广东高考英语听说考试真题 Test C.docx",
+          "sha256": "4115aa1f1507c7f363e486090126e0b57d89ee6384cdd4753d41f586572f9981",
+          "locator": {},
+          "extractionMethod": "docx-xml",
+          "confidence": 0.96
+        }
+      ]
+    },
+    {
+      "assetId": "asset-1a081b4ffafcf341ebc9d04db03c9c713b53d03089814bf1c8ef8a616310d412",
+      "kind": "audio",
+      "url": "source://高考内容总/2009-2021广东真题/2020年广东高考英语听说考试C.mp3",
+      "mimeType": "audio/mpeg",
+      "sha256": "1a081b4ffafcf341ebc9d04db03c9c713b53d03089814bf1c8ef8a616310d412",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "1a081b4ffafcf341ebc9d04db03c9c713b53d03089814bf1c8ef8a616310d412",
+          "relativePath": "高考内容总/2009-2021广东真题/2020年广东高考英语听说考试C.mp3",
+          "sha256": "1a081b4ffafcf341ebc9d04db03c9c713b53d03089814bf1c8ef8a616310d412",
+          "locator": {},
+          "extractionMethod": "media-manifest",
+          "confidence": 0.9
+        }
+      ]
+    },
+    {
+      "assetId": "asset-b513b642329728c66a2b3b756b579bd59378af3d59debd6c292d41b8a8b78354",
+      "kind": "video",
+      "url": "source://高考内容总/2009-2021广东真题/2020年广东高考英语听说考试C.mp4",
+      "mimeType": "video/mp4",
+      "sha256": "b513b642329728c66a2b3b756b579bd59378af3d59debd6c292d41b8a8b78354",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "b513b642329728c66a2b3b756b579bd59378af3d59debd6c292d41b8a8b78354",
+          "relativePath": "高考内容总/2009-2021广东真题/2020年广东高考英语听说考试C.mp4",
+          "sha256": "b513b642329728c66a2b3b756b579bd59378af3d59debd6c292d41b8a8b78354",
+          "locator": {},
+          "extractionMethod": "media-manifest",
+          "confidence": 0.9
+        }
+      ]
+    }
+  ],
+  "sourceRefs": [
+    {
+      "sourceDocumentId": "4115aa1f1507c7f363e486090126e0b57d89ee6384cdd4753d41f586572f9981",
+      "relativePath": "2020年/2020年广东高考英语听说考试真题 Test C/2020年广东高考英语听说考试真题 Test C.docx",
+      "sha256": "4115aa1f1507c7f363e486090126e0b57d89ee6384cdd4753d41f586572f9981",
+      "locator": {},
+      "extractionMethod": "docx-xml",
+      "confidence": 0.96
+    },
+    {
+      "sourceDocumentId": "1a081b4ffafcf341ebc9d04db03c9c713b53d03089814bf1c8ef8a616310d412",
+      "relativePath": "高考内容总/2009-2021广东真题/2020年广东高考英语听说考试C.mp3",
+      "sha256": "1a081b4ffafcf341ebc9d04db03c9c713b53d03089814bf1c8ef8a616310d412",
+      "locator": {},
+      "extractionMethod": "media-manifest",
+      "confidence": 0.9
+    },
+    {
+      "sourceDocumentId": "b513b642329728c66a2b3b756b579bd59378af3d59debd6c292d41b8a8b78354",
+      "relativePath": "高考内容总/2009-2021广东真题/2020年广东高考英语听说考试C.mp4",
+      "sha256": "b513b642329728c66a2b3b756b579bd59378af3d59debd6c292d41b8a8b78354",
+      "locator": {},
+      "extractionMethod": "media-manifest",
+      "confidence": 0.9
+    }
+  ],
+  "quality": {
+    "structureStatus": "approved",
+    "structureConfidence": 0.84,
+    "issueCount": 0,
+    "issues": []
+  },
+  "dedupeSignature": {
+    "paperIdentityKey": "practice|2020年/2020年广东高考英语听说考试真题 Test C/2020年广东高考英语听说考试真题 Test C.docx",
+    "answerVariantFingerprint": "6bb0e37067c89444457112dd5959f4a7cdd63da20ca09389392fd7a925876977"
+  }
+}

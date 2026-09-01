@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "status": "frozen_baseline",
+  "publishable": false,
+  "publicCatalog": {
+    "path": "public/senior-high/catalog.json",
+    "sha256": "5ed01532d99e204b24780f22b43318001e8e26d696ffdec28032736f964b110c",
+    "itemCount": 1183,
+    "paperCount": 0
+  },
+  "measuredDefects": {
+    "oneOptionCount": 524,
+    "optionLeakCount": 467,
+    "optionOver500CharactersCount": 441,
+    "completePaperCount": 0,
+    "leakPattern": "答案|解析|下一题|passage (case-insensitive)"
+  },
+  "frozenPlanClaim": {
+    "optionLeakCount": 529,
+    "note": "The frozen plan reports 529; the reproducible current-catalog matcher reports 467. Both values remain visible until the matching rule is reconciled."
+  },
+  "legacyValidationEvidence": {
+    "reportedOk": true,
+    "reportedPublishedItemCount": 1183,
+    "meaning": "The old validation only established file/count consistency and did not establish question quality."
+  },
+  "inventoryReconciliation": {
+    "previousCount": 1257,
+    "currentCount": 1266,
+    "difference": 9,
+    "differenceExplanation": "The nine additional inventory entries are .DS_Store metadata files; they are excluded/quarantined and no source document was moved or deleted."
+  },
+  "nextGate": "Do not publish or deploy until v2 schema, content-quality validation, gold fixtures, renderer and regression tests pass."
+}

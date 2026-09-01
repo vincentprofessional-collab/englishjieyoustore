@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "status": "phase_1_source_locked",
+  "purpose": "Real-source fixtures for the v2 importer and renderer; this matrix is not public data.",
+  "samples": [
+    {
+      "id": "paper-2025-new-gaokao-i",
+      "kind": "paper",
+      "assertions": ["blank_plus_analysis_merge", "listening_audio", "table_preservation"],
+      "sources": [
+        "2025·高考英语真题/2025年高考英语试卷（新高考Ⅰ卷）（空白卷）.docx",
+        "2025·高考英语真题/2025年高考英语试卷（新高考Ⅰ卷）（解析卷）.docx",
+        "2025·高考英语真题/2025年高考英语试卷（新高考Ⅰ卷）听力音频.mp3"
+      ]
+    },
+    {
+      "id": "paper-2025-new-gaokao-ii",
+      "kind": "paper",
+      "assertions": ["blank_plus_analysis_merge", "listening_audio"],
+      "sources": [
+        "2025·高考英语真题/2025年高考英语试卷（新高考Ⅱ卷）（空白卷）.docx",
+        "2025·高考英语真题/2025年高考英语试卷（新高考Ⅱ卷）（解析卷）.docx",
+        "2025·高考英语真题/2025年高考英语试卷（新高考Ⅱ卷）听力音频.mp3"
+      ]
+    },
+    {
+      "id": "paper-2025-beijing",
+      "kind": "paper",
+      "assertions": ["blank_plus_analysis_merge"],
+      "sources": [
+        "2025·高考英语真题/2025年高考英语试卷（北京）（空白卷）.docx",
+        "2025·高考英语真题/2025年高考英语试卷（北京）（解析卷）.docx"
+      ]
+    },
+    {
+      "id": "paper-2025-zhejiang-january",
+      "kind": "paper",
+      "assertions": ["blank_plus_analysis_merge", "listening_audio", "table_preservation"],
+      "sources": [
+        "2025·高考英语真题/2025年高考英语试卷（浙江）（1月）（空白卷）.docx",
+        "2025·高考英语真题/2025年高考英语试卷（浙江）（1月）（解析卷）.docx",
+        "2025·高考英语真题/2025年高考英语试卷（浙江）（1月）听力音频.mp3"
+      ]
+    },
+    {
+      "id": "practice-5-3-seven-choice",
+      "kind": "practice",
+      "assertions": ["seven_choice", "practice_renumbering"],
+      "sources": ["新高考版高考总复习英语5·3A版/专题十七阅读补全（七选五）/专题资料包/专题资料包/专题资料包/专题资料包.docx"]
+    },
+    {
+      "id": "practice-5-3-cloze",
+      "kind": "practice",
+      "assertions": ["cloze_inline_options"],
+      "sources": ["新高考版高考总复习英语5·3A版/专题十八完形填空/专题资料包/专题资料包/专题资料包/专题资料包.docx"]
+    },
+    {
+      "id": "practice-5-3-grammar-fill",
+      "kind": "practice",
+      "assertions": ["inline_fill_tokens"],
+      "sources": ["新高考版高考总复习英语5·3A版/专题十九语法填空/专题资料包/专题资料包/专题资料包/专题资料包.docx"]
+    },
+    {
+      "id": "practice-5-3-application-writing",
+      "kind": "practice",
+      "assertions": ["essay_prompt", "manual_grading"],
+      "sources": ["新高考版高考总复习英语5·3A版/专题二十一应用文写作/专题资料包/专题资料包/专题资料包/专题资料包.docx"]
+    },
+    {
+      "id": "practice-5-3-continuation-writing",
+      "kind": "practice",
+      "assertions": ["essay_prompt", "manual_grading"],
+      "sources": ["新高考版高考总复习英语5·3A版/专题二十二读后续写/专题资料包/专题资料包/专题资料包/专题资料包.docx"]
+    },
+    {
+      "id": "practice-5-3-summary-writing",
+      "kind": "practice",
+      "assertions": ["essay_prompt", "manual_grading"],
+      "sources": ["新高考版高考总复习英语5·3A版/专题二十三概要写作/专题资料包/专题资料包/专题资料包/专题资料包.docx"]
+    },
+    {
+      "id": "practice-guangdong-speaking-test-c",
+      "kind": "practice",
+      "assertions": ["oral_response", "audio", "video_asset_pair"],
+      "sources": [
+        "2020年/2020年广东高考英语听说考试真题 Test C/2020年广东高考英语听说考试真题 Test C.docx",
+        "高考内容总/2009-2021广东真题/2020年广东高考英语听说考试C.mp3",
+        "高考内容总/2009-2021广东真题/2020年广东高考英语听说考试C.mp4"
+      ]
+    },
+    {
+      "id": "paper-2007-beijing-legacy",
+      "kind": "paper",
+      "assertions": ["regional_legacy_type", "doc_conversion"],
+      "sources": ["1990-2007·高考英语真题·word/北京/2007年北京高考英语真题及答案.doc"]
+    },
+    {
+      "id": "reference-5-3-seven-choice-pdf",
+      "kind": "reference",
+      "assertions": ["pdf_text_layer", "pdf_coordinates"],
+      "sources": ["新高考版高考总复习英语5·3A版/专题十七阅读补全（七选五）/专题PDF/专题PDF/专题电子书/专题十七 阅读补全（七选五）.pdf"]
+    },
+    {
+      "id": "reference-high-school-phrases-xlsx",
+      "kind": "reference",
+      "assertions": ["xlsx_cells"],
+      "sources": ["高中短语.xlsx"]
+    },
+    {
+      "id": "archive-seven-choice-2019-2021",
+      "kind": "practice",
+      "assertions": ["safe_zip_expansion", "virtual_source_mapping"],
+      "sources": ["高考专题练习/专题08：阅读填空之七选五类-最近三年（2019-2021）高考英语真题分类精编.zip"]
+    }
+  ]
+}

@@ -1,5 +1,5 @@
-import { SeniorHighDemo } from "@/components/senior-high/senior-high-demo";
+import { SeniorHighLibrary } from "@/components/senior-high/senior-high-library";
 
 export default function SeniorHighPage() {
-  return <SeniorHighDemo />;
+  return <SeniorHighLibrary />;
 }

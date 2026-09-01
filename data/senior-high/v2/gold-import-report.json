@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-01T09:14:38.037588+00:00",
+  "matrixStatus": "phase_1_source_locked",
+  "written": [
+    {
+      "id": "paper-2025-new-gaokao-i",
+      "path": "data/senior-high/v2/gold/paper-2025-new-gaokao-i.json",
+      "questionCount": 67,
+      "structureStatus": "approved",
+      "issues": []
+    },
+    {
+      "id": "paper-2025-new-gaokao-ii",
+      "path": "data/senior-high/v2/gold/paper-2025-new-gaokao-ii.json",
+      "questionCount": 67,
+      "structureStatus": "approved",
+      "issues": []
+    },
+    {
+      "id": "paper-2025-beijing",
+      "path": "data/senior-high/v2/gold/paper-2025-beijing.json",
+      "questionCount": 44,
+      "structureStatus": "approved",
+      "issues": []
+    },
+    {
+      "id": "paper-2025-zhejiang-january",
+      "path": "data/senior-high/v2/gold/paper-2025-zhejiang-january.json",
+      "questionCount": 67,
+      "structureStatus": "approved",
+      "issues": []
+    },
+    {
+      "id": "practice-5-3-seven-choice",
+      "path": "data/senior-high/v2/gold/practice-5-3-seven-choice.json",
+      "questionCount": 105,
+      "structureStatus": "approved",
+      "issues": []
+    },
+    {
+      "id": "practice-5-3-cloze",
+      "path": "data/senior-high/v2/gold/practice-5-3-cloze.json",
+      "questionCount": 180,
+      "structureStatus": "approved",
+      "issues": []
+    },
+    {
+      "id": "practice-5-3-grammar-fill",
+      "path": "data/senior-high/v2/gold/practice-5-3-grammar-fill.json",
+      "questionCount": 220,
+      "structureStatus": "approved",
+      "issues": []
+    },
+    {
+      "id": "practice-5-3-application-writing",
+      "path": "data/senior-high/v2/gold/practice-5-3-application-writing.json",
+      "questionCount": 18,
+      "structureStatus": "approved",
+      "issues": []
+    },
+    {
+      "id": "practice-5-3-continuation-writing",
+      "path": "data/senior-high/v2/gold/practice-5-3-continuation-writing.json",
+      "questionCount": 12,
+      "structureStatus": "approved",
+      "issues": []
+    },
+    {
+      "id": "practice-5-3-summary-writing",
+      "path": "data/senior-high/v2/gold/practice-5-3-summary-writing.json",
+      "questionCount": 12,
+      "structureStatus": "approved",
+      "issues": []
+    },
+    {
+      "id": "practice-guangdong-speaking-test-c",
+      "path": "data/senior-high/v2/gold/practice-guangdong-speaking-test-c.json",
+      "questionCount": 5,
+      "structureStatus": "approved",
+      "issues": []
+    },
+    {
+      "id": "paper-2007-beijing-legacy",
+      "path": "data/senior-high/v2/gold/paper-2007-beijing-legacy.json",
+      "questionCount": 70,
+      "structureStatus": "approved",
+      "issues": []
+    }
+  ],
+  "skipped": [
+    "reference-5-3-seven-choice-pdf",
+    "reference-high-school-phrases-xlsx",
+    "archive-seven-choice-2019-2021"
+  ],
+  "publishable": false
+}

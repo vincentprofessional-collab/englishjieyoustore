@@ -1,0 +1,137 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-01T15:10:10.086Z",
+  "publishable": true,
+  "published": [
+    {
+      "id": "paper-2007-beijing-legacy",
+      "kind": "paper",
+      "questions": 70,
+      "unavailableAssets": [
+        {
+          "assetId": "asset-ef595dbc2046f3e28f5251c54c3cdd1a97ce90b0fb9ded3a89b56c43c1206cb8",
+          "kind": "image",
+          "reason": "Command failed: unzip -p /Users/shidianjin/Documents/高考英语/1990-2007·高考英语真题·word/北京/2007年北京高考英语真题及答案.doc word/media/image1.jpeg"
+        },
+        {
+          "assetId": "asset-f865026bd02bd9d20cc44c9f58da7c7d4cbce5a9ed007e058e151b5d77a15342",
+          "kind": "image",
+          "reason": "Command failed: unzip -p /Users/shidianjin/Documents/高考英语/1990-2007·高考英语真题·word/北京/2007年北京高考英语真题及答案.doc word/media/image2.jpeg"
+        },
+        {
+          "assetId": "asset-abf4d0fb611da54498f0339241521bf5a2d39f30934de2d3ae909d704f4dc3a3",
+          "kind": "image",
+          "reason": "Command failed: unzip -p /Users/shidianjin/Documents/高考英语/1990-2007·高考英语真题·word/北京/2007年北京高考英语真题及答案.doc word/media/image3.jpeg"
+        }
+      ]
+    },
+    {
+      "id": "paper-2025-beijing",
+      "kind": "paper",
+      "questions": 44,
+      "unavailableAssets": [
+        {
+          "assetId": "asset-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "kind": "image",
+          "reason": "empty_asset"
+        }
+      ]
+    },
+    {
+      "id": "paper-2025-new-gaokao-i",
+      "kind": "paper",
+      "questions": 67,
+      "unavailableAssets": []
+    },
+    {
+      "id": "paper-2025-new-gaokao-ii",
+      "kind": "paper",
+      "questions": 67,
+      "unavailableAssets": [
+        {
+          "assetId": "asset-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "kind": "image",
+          "reason": "empty_asset"
+        }
+      ]
+    },
+    {
+      "id": "paper-2025-zhejiang-january",
+      "kind": "paper",
+      "questions": 67,
+      "unavailableAssets": [
+        {
+          "assetId": "asset-4bce2f9b1416c895d1bbbb3b11e80edd910f97d26e566693513a27aeda639cdd",
+          "kind": "audio",
+          "reason": "media_over_12582912_bytes"
+        }
+      ]
+    },
+    {
+      "id": "practice-5-3-application-writing",
+      "kind": "practice",
+      "questions": 18,
+      "unavailableAssets": []
+    },
+    {
+      "id": "practice-5-3-cloze",
+      "kind": "practice",
+      "questions": 180,
+      "unavailableAssets": []
+    },
+    {
+      "id": "practice-5-3-continuation-writing",
+      "kind": "practice",
+      "questions": 12,
+      "unavailableAssets": []
+    },
+    {
+      "id": "practice-5-3-grammar-fill",
+      "kind": "practice",
+      "questions": 220,
+      "unavailableAssets": []
+    },
+    {
+      "id": "practice-5-3-seven-choice",
+      "kind": "practice",
+      "questions": 105,
+      "unavailableAssets": []
+    },
+    {
+      "id": "practice-5-3-summary-writing",
+      "kind": "practice",
+      "questions": 12,
+      "unavailableAssets": []
+    },
+    {
+      "id": "practice-guangdong-speaking-test-c",
+      "kind": "practice",
+      "questions": 5,
+      "unavailableAssets": [
+        {
+          "assetId": "asset-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "kind": "image",
+          "reason": "empty_asset"
+        },
+        {
+          "assetId": "asset-1a081b4ffafcf341ebc9d04db03c9c713b53d03089814bf1c8ef8a616310d412",
+          "kind": "audio",
+          "reason": "media_over_12582912_bytes"
+        },
+        {
+          "assetId": "asset-b513b642329728c66a2b3b756b579bd59378af3d59debd6c292d41b8a8b78354",
+          "kind": "video",
+          "reason": "media_over_12582912_bytes"
+        }
+      ]
+    }
+  ],
+  "rejected": [],
+  "totals": {
+    "sets": 12,
+    "papers": 5,
+    "practiceSets": 7,
+    "questions": 867,
+    "unavailableAssets": 9
+  }
+}

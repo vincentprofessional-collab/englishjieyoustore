@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.englishjieyou.cn/schemas/senior-high/v2.json",
+  "title": "Senior-high paper or practice set v2",
+  "type": "object",
+  "required": ["schemaVersion", "id", "kind", "title", "year", "region", "variant", "instructions", "sections", "assetRefs", "sourceRefs", "quality"],
+  "properties": {
+    "schemaVersion": {"const": 2},
+    "id": {"type": "string", "minLength": 1},
+    "kind": {"enum": ["paper", "practice"]},
+    "title": {"type": "string", "minLength": 1},
+    "year": {"type": "string", "minLength": 1},
+    "region": {"type": "string", "minLength": 1},
+    "variant": {"type": "string", "minLength": 1},
+    "instructions": {"type": "array", "items": {"$ref": "#/$defs/block"}},
+    "timeLimit": {"type": "number", "minimum": 0},
+    "score": {"type": "number", "minimum": 0},
+    "sections": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/section"}},
+    "assetRefs": {"type": "array", "items": {"$ref": "#/$defs/assetRef"}},
+    "sourceRefs": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/sourceRef"}},
+    "quality": {"$ref": "#/$defs/quality"},
+    "dedupeSignature": {"$ref": "#/$defs/dedupeSignature"}
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "sourceRef": {
+      "type": "object",
+      "required": ["sourceDocumentId", "relativePath", "sha256", "locator", "extractionMethod", "confidence"],
+      "properties": {
+        "sourceDocumentId": {"type": "string", "minLength": 1},
+        "relativePath": {"type": "string", "minLength": 1},
+        "sha256": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"},
+        "locator": {"type": "object", "additionalProperties": true},
+        "extractionMethod": {"enum": ["docx-xml", "docx-text", "doc-html", "pdf-text", "pdf-ocr", "pptx-xml", "xlsx-cell", "media-manifest", "manual-review"]},
+        "confidence": {"type": "number", "minimum": 0, "maximum": 1}
+      },
+      "additionalProperties": true
+    },
+    "assetRef": {
+      "type": "object",
+      "required": ["assetId", "kind", "url", "mimeType", "sha256", "sourceRefs"],
+      "properties": {
+        "assetId": {"type": "string", "minLength": 1},
+        "kind": {"enum": ["image", "audio", "video"]},
+        "url": {"type": "string", "minLength": 1},
+        "mimeType": {"type": "string", "minLength": 1},
+        "sha256": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"},
+        "sourceRefs": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/sourceRef"}}
+      },
+      "additionalProperties": true
+    },
+    "run": {
+      "oneOf": [
+        {"type": "object", "required": ["type", "text"], "properties": {"type": {"const": "text"}, "text": {"type": "string"}}, "additionalProperties": false},
+        {"type": "object", "required": ["type", "blankId"], "properties": {"type": {"const": "blank"}, "blankId": {"type": "string", "minLength": 1}}, "additionalProperties": false}
+      ]
+    },
+    "block": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {"enum": ["heading", "paragraph", "richText", "image", "audio", "video", "table", "dialogue", "notice"]},
+        "id": {"type": "string"},
+        "level": {"type": "integer", "minimum": 1, "maximum": 4},
+        "text": {"type": "string"},
+        "runs": {"type": "array", "items": {"$ref": "#/$defs/run"}},
+        "assetId": {"type": "string"},
+        "alt": {"type": "string"},
+        "caption": {"type": "string"},
+        "label": {"type": "string"},
+        "tone": {"enum": ["info", "warning"]},
+        "headers": {"type": "array", "items": {"$ref": "#/$defs/block"}},
+        "rows": {"type": "array", "items": {"type": "object", "required": ["cells"], "properties": {"cells": {"type": "array", "items": {"type": "array", "items": {"$ref": "#/$defs/block"}}}}, "additionalProperties": true}},
+        "turns": {"type": "array", "items": {"type": "object", "required": ["speaker", "blocks"], "properties": {"speaker": {"type": "string"}, "blocks": {"type": "array", "items": {"$ref": "#/$defs/block"}}}, "additionalProperties": true}}
+      },
+      "additionalProperties": true,
+      "allOf": [
+        {"if": {"properties": {"type": {"enum": ["paragraph", "richText"]}}}, "then": {"required": ["runs"]}},
+        {"if": {"properties": {"type": {"enum": ["heading", "notice"]}}}, "then": {"required": ["text"]}},
+        {"if": {"properties": {"type": {"enum": ["image", "audio", "video"]}}}, "then": {"required": ["assetId"]}}
+      ]
+    },
+    "option": {"type": "object", "required": ["id", "label", "blocks"], "properties": {"id": {"type": "string", "minLength": 1}, "label": {"type": "string", "minLength": 1}, "blocks": {"type": "array", "items": {"$ref": "#/$defs/block"}}}, "additionalProperties": true},
+    "blank": {"type": "object", "required": ["blankId"], "properties": {"blankId": {"type": "string", "minLength": 1}, "label": {"type": "string"}, "answerShape": {"enum": ["text", "number", "date", "word", "sentence"]}}, "additionalProperties": false},
+    "answerSpec": {"type": "object", "required": ["availability", "gradingMode", "kind"], "properties": {"availability": {"enum": ["answered", "none", "conflict"]}, "gradingMode": {"enum": ["auto", "manual", "none"]}, "kind": {"enum": ["choice", "multi_choice", "text", "per_blank", "reference", "none"]}, "acceptedAnswers": {"type": "array", "items": {"type": "string"}}, "perBlankAnswers": {"type": "object", "additionalProperties": {"type": "array", "items": {"type": "string"}}}, "normalization": {"type": "object", "additionalProperties": true}, "referenceAnswer": {}, "conflictReason": {"type": "string"}}, "additionalProperties": true},
+    "question": {"type": "object", "required": ["id", "displayNumber", "type", "promptBlocks", "placement", "options", "blanks", "answerSpec", "explanationBlocks", "sourceRefs", "reviewStatus"], "properties": {"id": {"type": "string", "minLength": 1}, "displayNumber": {"type": "integer", "minimum": 1}, "sourceQuestionNumber": {"type": "integer", "minimum": 1}, "type": {"enum": ["single_choice", "multi_choice", "shared_option_matching", "inline_fill", "multi_blank", "table_fill", "short_answer", "translation", "error_correction", "essay", "oral_response", "instruction_only"]}, "promptBlocks": {"type": "array", "items": {"$ref": "#/$defs/block"}}, "placement": {"type": "object", "required": ["kind"], "properties": {"kind": {"enum": ["standalone", "inline", "table", "dialogue"]}, "blankIds": {"type": "array", "items": {"type": "string"}}}, "additionalProperties": false}, "options": {"type": "array", "items": {"$ref": "#/$defs/option"}}, "blanks": {"type": "array", "items": {"$ref": "#/$defs/blank"}}, "answerSpec": {"$ref": "#/$defs/answerSpec"}, "explanationBlocks": {"type": "array", "items": {"$ref": "#/$defs/block"}}, "sourceRefs": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/sourceRef"}}, "reviewStatus": {"enum": ["approved", "review_required", "excluded"]}, "dedupeSignature": {"type": "object", "additionalProperties": {"type": "string"}}}, "additionalProperties": true},
+    "group": {"type": "object", "required": ["id", "instructions", "stimulusBlocks", "sharedOptions", "questions"], "properties": {"id": {"type": "string", "minLength": 1}, "title": {"type": "string"}, "instructions": {"type": "array", "items": {"$ref": "#/$defs/block"}}, "stimulusBlocks": {"type": "array", "items": {"$ref": "#/$defs/block"}}, "sharedOptions": {"type": "array", "items": {"$ref": "#/$defs/option"}}, "sharedOptionsReusable": {"type": "boolean"}, "questions": {"type": "array", "items": {"$ref": "#/$defs/question"}}}, "additionalProperties": true},
+    "section": {"type": "object", "required": ["id", "title", "instructions", "layout", "groups"], "properties": {"id": {"type": "string", "minLength": 1}, "title": {"type": "string", "minLength": 1}, "instructions": {"type": "array", "items": {"$ref": "#/$defs/block"}}, "score": {"type": "number", "minimum": 0}, "layout": {"enum": ["flow", "split", "table", "dialogue"]}, "groups": {"type": "array", "items": {"$ref": "#/$defs/group"}}}, "additionalProperties": true},
+    "quality": {"type": "object", "required": ["structureStatus", "structureConfidence", "issueCount", "issues"], "properties": {"structureStatus": {"enum": ["approved", "review_required", "excluded"]}, "structureConfidence": {"type": "number", "minimum": 0, "maximum": 1}, "issueCount": {"type": "integer", "minimum": 0}, "issues": {"type": "array", "items": {"type": "string"}}}, "additionalProperties": true},
+    "dedupeSignature": {"type": "object", "required": ["paperIdentityKey", "answerVariantFingerprint"], "properties": {"paperIdentityKey": {"type": "string", "minLength": 1}, "answerVariantFingerprint": {"type": "string", "minLength": 1}}, "additionalProperties": false}
+  }
+}
