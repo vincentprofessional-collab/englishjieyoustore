@@ -1,1 +1,14 @@
 public/audio/bbc/
+public/audio/**
+.next/
+.next/dev/
+.next/dev/**
+.next/cache/
+.next/cache/**
+node_modules/
+tmp/
+.git/
+.venv-listening-align/
+data/senior-high/
+data/phrase-videos/
+data/phrase-videos/checkpoints/

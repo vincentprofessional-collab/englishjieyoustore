@@ -1,12 +1,7 @@
-"use client";
-
 import type { CSSProperties } from "react";
-import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
-import {
-  getPublishedSiteChromeConfig,
-  type SiteChromeConfig,
-} from "@/lib/content/site-chrome";
+import type { SiteChromeConfig } from "@/lib/content/site-chrome";
 
 type SiteFooterStyle = CSSProperties & {
   "--footer-bottom-text-color": string;
@@ -23,8 +18,7 @@ type SiteFooterStyle = CSSProperties & {
   "--footer-social-size": string;
 };
 
-export function SiteFooter({ config: initialConfig }: { config: SiteChromeConfig }) {
-  const [config, setConfig] = useState(initialConfig);
+export function SiteFooter({ config }: { config: SiteChromeConfig }) {
   const footerStyle: SiteFooterStyle = {
     "--footer-bottom-text-color": config.footer.bottomTextColor,
     "--footer-brand-mark-size": `${config.footer.brandMarkFontSize}px`,
@@ -42,31 +36,19 @@ export function SiteFooter({ config: initialConfig }: { config: SiteChromeConfig
   const footerLinks = config.footer.links.filter((item) => item.enabled);
   const socialLinks = config.footer.socials.filter((item) => item.enabled);
 
-  useEffect(() => {
-    let isMounted = true;
-
-    async function loadSiteChrome() {
-      const nextConfig = await getPublishedSiteChromeConfig();
-
-      if (isMounted) {
-        setConfig(nextConfig);
-      }
-    }
-
-    void loadSiteChrome();
-
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-
   return (
     <footer className="site-footer" style={footerStyle}>
       <section className="footer-brand-band">
         <Link className="footer-brand" href={config.footer.brandHref || "/"}>
           <span className="footer-brand-mark">
             {config.footer.brandImageUrl ? (
-              <img alt={config.footer.brandTitle} src={config.footer.brandImageUrl} />
+              <Image
+                alt={config.footer.brandTitle}
+                height={96}
+                sizes="96px"
+                src={config.footer.brandImageUrl}
+                width={96}
+              />
             ) : (
               config.footer.brandMark
             )}
@@ -81,7 +63,9 @@ export function SiteFooter({ config: initialConfig }: { config: SiteChromeConfig
           {socialLinks.map((item) => (
             <Link href={item.href || "/contact"} key={item.id} title={item.label}>
               <span>
-                {item.imageUrl ? <img alt={item.label} src={item.imageUrl} /> : item.mark}
+                {item.imageUrl ? (
+                  <Image alt={item.label} height={48} sizes="48px" src={item.imageUrl} width={48} />
+                ) : item.mark}
               </span>
               <small>{item.label}</small>
             </Link>
@@ -94,7 +78,14 @@ export function SiteFooter({ config: initialConfig }: { config: SiteChromeConfig
           {footerLinks.map((item) => (
             <Link href={item.href || "/"} key={item.id}>
               {item.imageUrl ? (
-                <img className="footer-link-icon" alt="" src={item.imageUrl} />
+                <Image
+                  alt=""
+                  className="footer-link-icon"
+                  height={24}
+                  sizes="24px"
+                  src={item.imageUrl}
+                  width={24}
+                />
               ) : null}
               {item.label}
             </Link>
@@ -105,7 +96,13 @@ export function SiteFooter({ config: initialConfig }: { config: SiteChromeConfig
           <aside className="footer-promo-card">
             <div className="qr-card" aria-label="二维码">
               {config.footer.promo.imageUrl ? (
-                <img alt={config.footer.promo.title} src={config.footer.promo.imageUrl} />
+                <Image
+                  alt={config.footer.promo.title}
+                  height={320}
+                  sizes="(max-width: 760px) 240px, 320px"
+                  src={config.footer.promo.imageUrl}
+                  width={320}
+                />
               ) : (
                 <>
                   <span />

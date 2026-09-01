@@ -1,7 +1,7 @@
 import { ModulePlaceholder } from "@/components/module-placeholder";
 import { getPublishedPageContent } from "@/lib/content/page-content";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 export default async function TrainingPage() {
   const content = await getPublishedPageContent("training");

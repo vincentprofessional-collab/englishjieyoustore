@@ -1,14 +1,13 @@
 "use client";
 
 import type { CSSProperties } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import {
-  getPublishedSiteChromeConfig,
-  type SiteChromeConfig,
-  type SiteChromeNavItem,
+import type {
+  SiteChromeConfig,
+  SiteChromeNavItem,
 } from "@/lib/content/site-chrome";
-import { supabase } from "@/lib/supabase/client";
 
 type SiteNavStyle = CSSProperties & {
   "--brand-mark-size": string;
@@ -62,63 +61,73 @@ export function SiteNav({ config: initialConfig }: { config: SiteChromeConfig })
   const navItems = config.nav.items.filter((item) => item.enabled);
 
   useEffect(() => {
-    let isMounted = true;
-
-    async function loadSiteChrome() {
-      const nextConfig = await getPublishedSiteChromeConfig();
-
-      if (isMounted) {
-        setConfig(nextConfig);
-      }
-    }
-
-    void loadSiteChrome();
-
-    return () => {
-      isMounted = false;
-    };
+    setConfig((current) => ({
+      ...current,
+      nav: {
+        ...current.nav,
+        items: current.nav.items.map((item) => item.id === "me" ? {
+          ...item,
+          children: item.children.map((child) => child.id === "learning-records" ? { ...child, href: "/me/progress", label: "学习进度" } : child),
+        } : item),
+      },
+    }));
   }, []);
 
   useEffect(() => {
     let isMounted = true;
+    let unsubscribe = () => {};
 
-    async function checkAdminAccess() {
-      const {
-        data: { user },
-        error: userError,
-      } = await supabase.auth.getUser();
+    async function setupAdminAccess() {
+      const { supabase } = await import("@/lib/supabase/client");
 
-      if (userError || !user) {
-        if (isMounted) {
-          setCanAccessAdmin(false);
+      async function checkAdminAccess() {
+        const {
+          data: { user },
+          error: userError,
+        } = await supabase.auth.getUser();
+
+        if (userError || !user) {
+          if (isMounted) {
+            setCanAccessAdmin(false);
+          }
+          return;
         }
+
+        const { data: profile, error: profileError } = await supabase
+          .from("profiles")
+          .select("role")
+          .eq("id", user.id)
+          .maybeSingle();
+
+        if (isMounted) {
+          setCanAccessAdmin(!profileError && profile?.role === "admin");
+        }
+      }
+
+      await checkAdminAccess();
+
+      if (!isMounted) {
         return;
       }
 
-      const { data: profile, error: profileError } = await supabase
-        .from("profiles")
-        .select("role")
-        .eq("id", user.id)
-        .maybeSingle();
-
-      if (isMounted) {
-        setCanAccessAdmin(!profileError && profile?.role === "admin");
-      }
+      const {
+        data: { subscription },
+      } = supabase.auth.onAuthStateChange(() => {
+        setTimeout(() => {
+          void checkAdminAccess();
+        }, 0);
+      });
+      unsubscribe = () => subscription.unsubscribe();
     }
 
-    void checkAdminAccess();
-
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange(() => {
-      setTimeout(() => {
-        void checkAdminAccess();
-      }, 0);
-    });
+    const adminCheckTimer = window.setTimeout(() => {
+      void setupAdminAccess();
+    }, 5_000);
 
     return () => {
       isMounted = false;
-      subscription.unsubscribe();
+      window.clearTimeout(adminCheckTimer);
+      unsubscribe();
     };
   }, []);
 
@@ -128,7 +137,13 @@ export function SiteNav({ config: initialConfig }: { config: SiteChromeConfig })
         <Link className="brand" href={config.brand.href || "/"}>
           <span className="brand-mark">
             {config.brand.imageUrl ? (
-              <img alt={config.brand.title} src={config.brand.imageUrl} />
+              <Image
+                alt={config.brand.title}
+                height={96}
+                sizes="96px"
+                src={config.brand.imageUrl}
+                width={96}
+              />
             ) : (
               config.brand.mark
             )}

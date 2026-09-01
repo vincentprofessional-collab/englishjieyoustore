@@ -9,11 +9,24 @@ import bbc2022Articles from "@/data/bbc/2022/index.json";
 import bbc2023Articles from "@/data/bbc/2023/index.json";
 import bbc2024Articles from "@/data/bbc/2024/index.json";
 import bbc2025Articles from "@/data/bbc/2025/index.json";
+export {
+  mergeBbcVocabularyItems,
+  normalizeBbcVocabularyTerm,
+} from "@/lib/articles/bbc-vocabulary-merge";
 
 export type BbcVocabularyItem = {
+  definition?: string;
   entry: string;
   example: string;
+  highlightTerm?: string;
+  lemma?: string;
   number: number;
+  partOfSpeech?: string;
+  phonetic?: string;
+  sourceLevel?: string;
+  ukPhonetic?: string;
+  usPhonetic?: string;
+  highlight?: boolean;
   term: string;
   translation: string;
 };

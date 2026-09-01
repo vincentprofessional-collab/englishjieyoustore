@@ -62,11 +62,19 @@ type FavoriteArticleItem = {
 };
 
 type FavoriteQuestionItem = {
+  category?: "wrong";
+  correctAnswer?: string;
   href?: string;
   id: string;
+  knowledgePoint?: string;
+  origin?: "junior-high";
+  prompt?: string;
+  questionNumber?: string;
+  questionType?: string;
   savedAt: string;
   sourceTitle?: string;
   title: string;
+  userAnswer?: string;
 };
 
 type FavoriteAnnotationItem = {
@@ -90,7 +98,7 @@ const favoriteTabs: Array<{ id: FavoriteTab; label: string; eyebrow: string }> =
   { id: "words", label: "单词", eyebrow: "Words" },
   { id: "sentences", label: "句子", eyebrow: "Sentences" },
   { id: "articles", label: "文章", eyebrow: "Articles" },
-  { id: "questions", label: "题目", eyebrow: "Questions" },
+  { id: "questions", label: "错题", eyebrow: "Wrong" },
   { id: "annotations", label: "批注", eyebrow: "Notes" },
 ];
 
@@ -381,6 +389,28 @@ function FavoriteQuestionSource({ details }: { details: NonNullable<ReturnType<t
   );
 }
 
+function FavoriteJuniorHighQuestionMeta({ question }: { question: FavoriteQuestionItem }) {
+  const meta = [
+    question.sourceTitle,
+    question.questionType ? `题型：${question.questionType}` : "",
+    question.knowledgePoint ? `知识点：${question.knowledgePoint}` : "",
+  ].filter(Boolean);
+  const answerText = [
+    question.userAnswer ? `你的答案：${question.userAnswer}` : "",
+    question.correctAnswer ? `参考答案：${question.correctAnswer}` : "",
+  ].filter(Boolean).join("；");
+
+  return (
+    <>
+      <span className="favorite-question-badge">错题</span>
+      <span className="favorite-library-title-text">第 {question.questionNumber ?? ""} 题</span>
+      {meta.length ? <span className="favorite-question-meta-line">{meta.join(" · ")}</span> : null}
+      {question.prompt ? <span className="favorite-question-prompt">{question.prompt}</span> : null}
+      {answerText ? <span className="favorite-question-answer-line">{answerText}</span> : null}
+    </>
+  );
+}
+
 function getFavoriteWordDisplay(word: FavoriteWordItem) {
   const rawDefinition = word.definitionLines?.[0] ?? word.definitionCn;
   const parsedWord = parseEmbeddedVocabulary(word.word);
@@ -638,7 +668,9 @@ export default function FavoritesPage() {
         sortMode,
         randomSeed,
         (question) => question.title,
-        (question) => getFavoriteQuestionSourceDetails(question)?.sortKey ?? question.title,
+        (question) => question.origin === "junior-high"
+          ? `junior-high-${question.sourceTitle ?? ""}-${question.questionType ?? ""}-${question.knowledgePoint ?? ""}-${question.questionNumber ?? ""}`
+          : getFavoriteQuestionSourceDetails(question)?.sortKey ?? question.title,
       ),
     [questions, randomSeed, sortMode],
   );
@@ -839,19 +871,22 @@ export default function FavoritesPage() {
         {activeTab === "questions" ? (
           questions.length === 0 ? (
             <div className="favorite-empty full">
-              <strong>还没有收藏题目</strong>
-              <span>做错的题会自动出现在这里；点击题号可以回到提交后的复盘页。</span>
+              <strong>还没有错题</strong>
+              <span>提交后做错的中考英语题会自动出现在这里；点击题号可以回到对应页面的原题位置。</span>
             </div>
           ) : (
             <div className="favorite-library-table">
               {sortedQuestions.map((question) => {
                 const sourceDetails = getFavoriteQuestionSourceDetails(question);
-                const showQuestionTitle = !isGeneratedFavoriteQuestionTitle(question.title);
+                const isJuniorHighWrongQuestion = question.origin === "junior-high";
+                const showQuestionTitle = !isJuniorHighWrongQuestion && !isGeneratedFavoriteQuestionTitle(question.title);
 
                 return (
                   <article className="favorite-library-row question-row" key={question.id}>
-                    <Link className="favorite-library-title question" href={question.href ?? "/training"}>
-                      {sourceDetails ? (
+                    <Link className={`favorite-library-title question ${isJuniorHighWrongQuestion ? "junior-high-wrong-question-link" : ""}`} href={question.href ?? "/training"}>
+                      {isJuniorHighWrongQuestion ? (
+                        <FavoriteJuniorHighQuestionMeta question={question} />
+                      ) : sourceDetails ? (
                         <FavoriteQuestionSource details={sourceDetails} />
                       ) : null}
                       {showQuestionTitle ? (

@@ -1,21 +1,26 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
-import { BBC_YEARS, getBbcArticlesByYear } from "@/lib/articles/bbc";
+import { useState } from "react";
 import type { ManagedPageContent } from "@/lib/content/page-content";
 
-export function ArticlesHome({ content }: { content: ManagedPageContent }) {
-  const [openYears, setOpenYears] = useState<number[]>([]);
+export type BbcArticleListGroup = {
+  articles: {
+    id: string;
+    title: string;
+    titleChinese?: string;
+  }[];
+  year: number;
+};
 
-  const yearGroups = useMemo(
-    () =>
-      BBC_YEARS.map((year) => ({
-        articles: getBbcArticlesByYear(year),
-        year,
-      })),
-    [],
-  );
+export function ArticlesHome({
+  content,
+  yearGroups,
+}: {
+  content: ManagedPageContent;
+  yearGroups: BbcArticleListGroup[];
+}) {
+  const [openYears, setOpenYears] = useState<number[]>([]);
 
   function toggleYear(year: number) {
     setOpenYears((current) =>

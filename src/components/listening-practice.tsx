@@ -7,8 +7,10 @@ import {
   type DragEvent as ReactDragEvent,
   type KeyboardEvent as ReactKeyboardEvent,
   type MouseEvent as ReactMouseEvent,
+  type PointerEvent as ReactPointerEvent,
   type WheelEvent as ReactWheelEvent,
   useEffect,
+  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -18,12 +20,27 @@ import {
   AudioSettingsMenus,
   DEFAULT_AUDIO_PLAYER_SETTINGS,
   type AudioPlayerSettings,
+  type AudioSpeakingMode,
 } from "@/components/audio-player";
+import { BbcSentencePractice } from "@/components/bbc-sentence-practice";
 import { ContentShareButton } from "@/components/content-share-button";
 import {
   VocabularyHoverDefinitionLine,
   VocabularyHoverPronunciation,
 } from "@/components/vocabulary-hover-details";
+import {
+  getListeningRuntimeGroupMetadata,
+  isListeningQuestionCorrect,
+  type ListeningAnswerGroup,
+  normalizeListeningAnswer as normalizeAnswer,
+  toggleOrderedChoiceSelection,
+} from "@/lib/ielts/listening-answer-grading";
+import {
+  RuntimeListeningQuestionGroups,
+  selectListeningAnswerGroupsForLayout,
+  selectListeningPaperLayout,
+} from "@/components/listening-runtime-question-groups";
+import { getListeningQuestionPageGroups } from "@/lib/ielts/listening-question-page-overrides";
 import type { ListeningSectionDetail } from "@/lib/ielts/listening";
 import {
   getStudySelectionActionPosition,
@@ -31,20 +48,59 @@ import {
   STUDY_SELECTION_ACTION_TIMEOUT_MS,
   type StudySelectionActionPosition,
 } from "@/lib/study-selection";
+import { clearPersistedInlineHighlights, inlineHighlightKey, persistInlineHighlight, restoreInlineHighlights } from "@/lib/inline-highlights";
 import { cleanVocabularyDefinition } from "@/lib/vocabulary/display";
 import type { LocalVocabularyHint } from "@/lib/vocabulary/local-vocabulary";
+import {
+  getActiveWordIndex,
+  getNextSentenceNo,
+  getSpeakingPracticeDelayMs,
+} from "@/lib/articles/bbc-speaking-training.mjs";
+import {
+  clampListeningReviewSplit,
+  getListeningAttemptScore,
+  shouldShowListeningMockStartOverlay,
+} from "@/lib/ielts/listening-review-state.mjs";
 
 type ListeningPracticeProps = {
+  initialAttemptId?: string;
   initialSubmitted?: boolean;
   initialMode?: ListeningMode;
   section: ListeningSectionDetail;
+  testSections?: ListeningSectionDetail[];
   vocabularyHints?: Record<string, LocalVocabularyHint>;
 };
 
 type ListeningMode = "mock" | "practice";
+type ListeningOriginalDisplayMode = "english" | "bilingual" | "chinese";
 type ListeningQuestion = ListeningSectionDetail["questions"][number];
 type ListeningSentence = ListeningSectionDetail["transcriptSentences"][number];
 type AnswerMap = Record<string, string>;
+type ListeningReviewMobilePane = "questions" | "transcript";
+type ActiveSpeakingMode = Exclude<AudioSpeakingMode, "none">;
+type SpeakingTrainingState = {
+  mode: ActiveSpeakingMode;
+  remainingSeconds: number;
+  sentenceId: string;
+};
+type ListeningPartResult = {
+  correctCount: number;
+  total: number;
+};
+type StoredListeningAttempt = {
+  answers: AnswerMap;
+  bookCode: string;
+  completedAt?: string;
+  id: string;
+  mode: ListeningMode;
+  partResults: Record<string, ListeningPartResult>;
+  startedAt: string;
+  status: "answering" | "review";
+  testNo: number;
+  timeSeconds: number;
+  updatedAt: string;
+  version: 1;
+};
 type AnnotationItem = {
   id: number;
   kind: "note" | "highlight";
@@ -128,6 +184,21 @@ const FAVORITE_ANNOTATIONS_STORAGE_KEY = "ielts-platform.favoriteAnnotations";
 const FAVORITE_QUESTIONS_STORAGE_KEY = "ielts-platform.favoriteQuestions";
 const FAVORITE_WORDS_STORAGE_KEY = "ielts-platform.favoriteWords";
 const LISTENING_REVIEW_ANSWERS_STORAGE_PREFIX = "ielts-platform.listeningReviewAnswers";
+const LISTENING_ATTEMPT_STORAGE_PREFIX = "ielts-platform.listeningAttempt";
+const LISTENING_REVIEW_DEFAULT_LEFT_PERCENT = 58;
+const LISTENING_REVIEW_MIN_LEFT_PX = 320;
+const LISTENING_REVIEW_MIN_RIGHT_PX = 360;
+const LISTENING_REVIEW_HANDLE_PX = 14;
+const SPEAKING_MODE_LABELS: Record<ActiveSpeakingMode, string> = {
+  imitation: "模仿朗读",
+  shadowing: "影子练习",
+  "sight-translation": "视译训练",
+};
+const SPEAKING_PHASE_LABELS: Record<ActiveSpeakingMode, string> = {
+  imitation: "轮到你模仿朗读",
+  shadowing: "影子练习缓冲",
+  "sight-translation": "请看中文视译成英文",
+};
 const VOCABULARY_HINTS: Record<string, WordHint> = {
   climate: { definitionCn: "气候", partOfSpeech: "n.", phonetic: "/ˈklaɪmət/" },
   environment: { definitionCn: "环境", partOfSpeech: "n.", phonetic: "/ɪnˈvaɪrənmənt/" },
@@ -141,15 +212,22 @@ const VOCABULARY_HINTS: Record<string, WordHint> = {
   vegetation: { definitionCn: "植被", partOfSpeech: "n.", phonetic: "/ˌvedʒəˈteɪʃən/" },
 };
 
-function normalizeAnswer(value: string) {
-  return value
-    .trim()
-    .toLowerCase()
-    .replace(/[.,;:!?'"“”‘’()\[\]\s-]/g, "");
-}
-
 const IELTS_LISTENING_PARTS = [1, 2, 3, 4];
 const QUESTIONS_PER_PART = 10;
+const LISTENING_ORIGINAL_DISPLAY_MODES: { label: string; mode: ListeningOriginalDisplayMode }[] = [
+  { label: "英文", mode: "english" },
+  { label: "中英", mode: "bilingual" },
+  { label: "中文", mode: "chinese" },
+];
+const LISTENING_ORIGINAL_DISPLAY_TITLES: Record<ListeningOriginalDisplayMode, string> = {
+  bilingual: "中英原文",
+  chinese: "中文原文",
+  english: "英文原文",
+};
+const LISTENING_DEFAULT_AUDIO_SETTINGS: AudioPlayerSettings = {
+  ...DEFAULT_AUDIO_PLAYER_SETTINGS,
+  subtitleMode: "bilingual",
+};
 
 function getQuestionRangeForPart(partNo: number) {
   return Array.from({ length: QUESTIONS_PER_PART }, (_, index) => index + 1);
@@ -174,6 +252,13 @@ function formatListeningSectionTitle(section: ListeningSectionDetail) {
 
 function getListeningCountdownSeconds(section: ListeningSectionDetail) {
   return section.timeLimitSeconds ?? 30 * 60;
+}
+
+function getListeningMockCountdownSeconds(sections: ListeningSectionDetail[]) {
+  return sections.reduce(
+    (total, testSection) => total + (testSection.timeLimitSeconds ?? 10 * 60),
+    0,
+  );
 }
 
 function formatExamCountdown(totalSeconds: number) {
@@ -223,6 +308,34 @@ function getReviewAnswersStorageKey(sectionId: string) {
   return `${LISTENING_REVIEW_ANSWERS_STORAGE_PREFIX}.${sectionId}`;
 }
 
+function getListeningAttemptStorageKey(attemptId: string) {
+  return `${LISTENING_ATTEMPT_STORAGE_PREFIX}.${attemptId}`;
+}
+
+function createListeningAttemptId() {
+  if (typeof crypto !== "undefined" && "randomUUID" in crypto) {
+    return crypto.randomUUID();
+  }
+
+  return `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+}
+
+function readListeningAttempt(attemptId: string) {
+  try {
+    const rawValue = window.localStorage.getItem(getListeningAttemptStorageKey(attemptId));
+    return rawValue ? (JSON.parse(rawValue) as StoredListeningAttempt) : null;
+  } catch {
+    return null;
+  }
+}
+
+function writeListeningAttempt(attempt: StoredListeningAttempt) {
+  window.localStorage.setItem(
+    getListeningAttemptStorageKey(attempt.id),
+    JSON.stringify(attempt),
+  );
+}
+
 function getQuestionForPart(
   questions: ListeningSectionDetail["questions"],
   sectionNo: number,
@@ -269,21 +382,30 @@ function readReviewAnswers(sectionId: string): AnswerMap {
   }
 }
 
-function writeReviewAnswers(sectionId: string, answers: AnswerMap) {
-  window.localStorage.setItem(getReviewAnswersStorageKey(sectionId), JSON.stringify(answers));
-}
-
-function syncWrongQuestionFavorites(section: ListeningSectionDetail, answers: AnswerMap) {
+function syncWrongQuestionFavorites(
+  section: ListeningSectionDetail,
+  answers: AnswerMap,
+  answerGroups: ListeningAnswerGroup[],
+) {
   const currentFavorites = readFavoriteQuestions();
   const existingIds = new Set(currentFavorites.map((item) => item.id));
   const now = new Date().toISOString();
   const nextFavorites = [...currentFavorites];
 
   for (const question of section.questions) {
-    const userAnswer = normalizeAnswer(answers[question.id] ?? "");
-    const acceptedAnswers = question.answers.map(normalizeAnswer);
-
-    if (acceptedAnswers.includes(userAnswer)) {
+    if (
+      isListeningQuestionCorrect(
+        {
+          answerGroups,
+          answers,
+          bookCode: section.bookCode,
+          questions: section.questions,
+          sectionNo: section.sectionNo,
+          testNo: section.testNo,
+        },
+        question,
+      )
+    ) {
       continue;
     }
 
@@ -498,14 +620,20 @@ function getEnglishWordAtPoint(clientX: number, clientY: number) {
 function InlineFillAnswer({
   answers,
   className = "",
+  answerPrefix,
+  answerSuffix,
+  isCorrectOverride,
   minAnswerChars = 7,
   onAnswerChange,
   question,
   showQuestionNumber = true,
   submitted,
 }: {
+  answerPrefix?: string;
+  answerSuffix?: string;
   answers: AnswerMap;
   className?: string;
+  isCorrectOverride?: boolean;
   minAnswerChars?: number;
   onAnswerChange: (questionId: string, value: string) => void;
   question?: ListeningQuestion;
@@ -517,7 +645,7 @@ function InlineFillAnswer({
   }
 
   const userAnswer = answers[question.id] ?? "";
-  const isCorrect = submitted && isAcceptedAnswer(userAnswer, question.answers);
+  const isCorrect = submitted && (isCorrectOverride ?? isAcceptedAnswer(userAnswer, question.answers));
   const correctAnswer = question.answers[0] ?? "未录入";
   const answerCharacters = Math.max(
     minAnswerChars,
@@ -531,9 +659,10 @@ function InlineFillAnswer({
         submitted ? (isCorrect ? "correct" : "wrong") : ""
       }`}
       id={`question-${question.questionNo}`}
-      style={{ "--paper-answer-ch": `${answerCharacters + 1}ch` } as CSSProperties}
+      style={{ "--paper-answer-ch": `${Math.ceil(Math.max(3, answerCharacters + 1) * 1.5)}ch` } as CSSProperties}
     >
       {showQuestionNumber ? <span className="paper-question-number">{question.questionNo}</span> : null}
+      {answerPrefix ? <span className="paper-runtime-answer-affix">{answerPrefix}</span> : null}
       {submitted ? (
         <span className="paper-answer-result">
           <span>{isCorrect ? "✅" : "❌"}</span>
@@ -553,6 +682,7 @@ function InlineFillAnswer({
           onChange={(event) => onAnswerChange(question.id, event.target.value)}
         />
       )}
+      {answerSuffix ? <span className="paper-runtime-answer-affix">{answerSuffix}</span> : null}
     </span>
   );
 }
@@ -641,7 +771,7 @@ function InlineDoubleFillAnswer({
           submitted ? (isCorrect ? "correct" : "wrong") : ""
         }`}
         id={`question-${question.questionNo}`}
-        style={{ "--paper-answer-ch": `${Math.max(5, firstAnswer.length, firstCorrectAnswer.length) + 1}ch` } as CSSProperties}
+        style={{ "--paper-answer-ch": `${Math.ceil((Math.max(5, firstAnswer.length, firstCorrectAnswer.length) + 1) * 1.5)}ch` } as CSSProperties}
       >
         {submitted ? (
           renderSubmittedPart(firstAnswer, firstCorrectAnswer)
@@ -658,7 +788,7 @@ function InlineDoubleFillAnswer({
         className={`paper-answer-slot paper-answer-slot-no-number ${
           submitted ? (isCorrect ? "correct" : "wrong") : ""
         }`}
-        style={{ "--paper-answer-ch": `${Math.max(5, secondAnswer.length, secondCorrectAnswer.length) + 1}ch` } as CSSProperties}
+        style={{ "--paper-answer-ch": `${Math.ceil((Math.max(5, secondAnswer.length, secondCorrectAnswer.length) + 1) * 1.5)}ch` } as CSSProperties}
       >
         {submitted ? (
           renderSubmittedPart(secondAnswer, secondCorrectAnswer)
@@ -1442,6 +1572,19 @@ function getPaperFillInstructions(questions: ListeningQuestion[], groupTitle: st
   return instructions.slice(0, 2);
 }
 
+function renderPaperInstruction(instruction: string) {
+  const rulePattern = /(NO MORE THAN (?:ONE|TWO|THREE|FOUR|FIVE|SIX|SEVEN|EIGHT|NINE|TEN) WORDS(?: AND\/OR (?:A )?NUMBERS?)?|ONE WORD ONLY|TWO WORDS ONLY|THREE WORDS ONLY)/i;
+  const match = instruction.match(rulePattern);
+  if (!match || match.index === undefined) return instruction;
+  return (
+    <>
+      {instruction.slice(0, match.index)}
+      <strong>{match[0]}</strong>
+      {instruction.slice(match.index + match[0].length)}
+    </>
+  );
+}
+
 function PaperInlinePrompt({
   answers,
   body,
@@ -1621,7 +1764,7 @@ function CambridgeFourPaperQuestionGroup({
         <h3>{rangeTitle}</h3>
         {instructions.map((instruction) => (
           <p key={instruction}>
-            <em>{instruction}</em>
+            <em>{renderPaperInstruction(instruction)}</em>
           </p>
         ))}
       </section>
@@ -1672,6 +1815,561 @@ type CambridgePaperSheetProps = {
   testNo: number;
 };
 
+function CambridgeFourTestTwoSectionOneSheet({
+  answers,
+  onAnswerChange,
+  questions,
+  submitted,
+}: CambridgePaperSheetProps) {
+  const questionByNo = new Map(questions.map((question) => [question.questionNo, question]));
+  const answer = (
+    questionNo: number,
+    options: { minAnswerChars?: number; showQuestionNumber?: boolean } = {},
+  ) => (
+    <InlineFillAnswer
+      answers={answers}
+      minAnswerChars={options.minAnswerChars}
+      onAnswerChange={onAnswerChange}
+      question={questionByNo.get(questionNo)}
+      showQuestionNumber={options.showQuestionNumber}
+      submitted={submitted}
+    />
+  );
+
+  return (
+    <div className="paper-sheet ci4-t2-paper-sheet">
+      <div className="paper-listening-badge">LISTENING</div>
+
+      <div className="paper-section-heading">
+        <h2>SECTION 1</h2>
+        <h2>Questions 1-10</h2>
+      </div>
+
+      <section className="paper-instructions">
+        <h3>Questions 1-5</h3>
+        <p>
+          <em>Choose the correct letter, A, B or C.</em>
+        </p>
+      </section>
+
+      <section className="paper-example-box ci4-t2-example-box">
+        <strong>Example</strong>
+        <p>How long has Sally been waiting?</p>
+        <div className="ci4-t2-example-options">
+          <span>
+            <strong>A</strong> five minutes
+          </span>
+          <span>
+            <strong>B</strong> twenty minutes
+          </span>
+          <span>
+            <strong className="ci4-t2-circled-letter">C</strong> thirty minutes
+          </span>
+        </div>
+      </section>
+
+      {[1, 2, 3, 4, 5].map((questionNo) => {
+        const question = questionByNo.get(questionNo);
+        const parsedPrompt = parseChoicePrompt(question?.promptText ?? "");
+
+        return (
+          <ChoiceQuestionBlock
+            answers={answers}
+            key={questionNo}
+            onAnswerChange={onAnswerChange}
+            options={parsedPrompt.options}
+            question={question}
+            stem={parsedPrompt.stem}
+            submitted={submitted}
+          />
+        );
+      })}
+
+      <section className="paper-instructions">
+        <h3>Questions 6-8</h3>
+        <p>
+          <em>Complete the notes below using words from the box.</em>
+        </p>
+      </section>
+
+      <div className="ci4-t2-word-box" aria-label="Words for questions 6 to 8">
+        <span>Art Gallery</span>
+        <span>Cathedral</span>
+        <span>Castle</span>
+        <span>Gardens</span>
+        <span>Markets</span>
+      </div>
+
+      <section className="ci4-t2-fill-lines" aria-label="Tourist attraction notes">
+        <p>Tourist attractions open all day: {answer(6)} and Gardens</p>
+        <p>Tourist attractions NOT open on Mondays: {answer(7)} and Castle</p>
+        <p>Tourist attractions which have free entry: {answer(8)} and Markets</p>
+      </section>
+
+      <section className="paper-instructions">
+        <h3>Questions 9 and 10</h3>
+        <p>
+          <em>Complete the sentences below.</em>
+        </p>
+        <p>
+          Write <strong>NO MORE THAN THREE WORDS</strong> for each answer.
+        </p>
+      </section>
+
+      <section className="ci4-t2-fill-lines ci4-t2-numbered-fill-lines">
+        <p>
+          <strong>9</strong> The first place Peter and Sally will visit is the{" "}
+          {answer(9, { minAnswerChars: 12, showQuestionNumber: false })}.
+        </p>
+        <p>
+          <strong>10</strong> At the Cathedral, Peter really wants to{" "}
+          {answer(10, { minAnswerChars: 14, showQuestionNumber: false })}.
+        </p>
+      </section>
+    </div>
+  );
+}
+
+function CambridgeFourTestTwoSectionTwoSheet({
+  answers,
+  onAnswerChange,
+  questions,
+  submitted,
+}: CambridgePaperSheetProps) {
+  const questionByNo = new Map(questions.map((question) => [question.questionNo, question]));
+
+  return (
+    <div className="paper-sheet ci4-t2-paper-sheet">
+      <div className="paper-section-heading">
+        <h2>SECTION 2</h2>
+        <h2>Questions 11-20</h2>
+      </div>
+
+      <section className="paper-instructions">
+        <h3>Questions 11-20</h3>
+        <p>
+          <em>Choose the correct letter, A, B or C.</em>
+        </p>
+      </section>
+
+      <section className="ci4-t2-choice-page">
+        {[11, 12, 13, 14, 15, 16, 17, 18, 19, 20].map((questionNo) => {
+          const question = questionByNo.get(questionNo);
+          const parsedPrompt = parseChoicePrompt(question?.promptText ?? "");
+
+          return (
+            <ChoiceQuestionBlock
+              answers={answers}
+              key={questionNo}
+              onAnswerChange={onAnswerChange}
+              options={parsedPrompt.options}
+              question={question}
+              stem={parsedPrompt.stem}
+              submitted={submitted}
+            />
+          );
+        })}
+      </section>
+    </div>
+  );
+}
+
+function CambridgeFourTestTwoSectionThreeSheet({
+  answers,
+  onAnswerChange,
+  questions,
+  submitted,
+}: CambridgePaperSheetProps) {
+  const questionByNo = new Map(questions.map((question) => [question.questionNo, question]));
+  const answer = (
+    questionNo: number,
+    options: {
+      className?: string;
+      isCorrectOverride?: boolean;
+      minAnswerChars?: number;
+      onAnswerChange?: (questionId: string, value: string) => void;
+      showQuestionNumber?: boolean;
+    } = {},
+  ) => (
+    <InlineFillAnswer
+      answers={answers}
+      className={options.className}
+      isCorrectOverride={options.isCorrectOverride}
+      minAnswerChars={options.minAnswerChars}
+      onAnswerChange={options.onAnswerChange ?? onAnswerChange}
+      question={questionByNo.get(questionNo)}
+      showQuestionNumber={options.showQuestionNumber}
+      submitted={submitted}
+    />
+  );
+  const choiceQuestions = [25, 26]
+    .map((questionNo) => questionByNo.get(questionNo))
+    .filter((question): question is ListeningQuestion => Boolean(question));
+  const correctLetters = new Set(
+    choiceQuestions.map((question) => normalizeAnswer(question.answers[0] ?? "")),
+  );
+  const choiceOptions = [
+    { letter: "A", text: "The data is sometimes invalid." },
+    { letter: "B", text: "Too few people may respond." },
+    { letter: "C", text: "It is less likely to reveal the unexpected." },
+    { letter: "D", text: "It can only be used with literate populations." },
+    {
+      letter: "E",
+      text: "There is a delay between the distribution and return of questionnaires.",
+    },
+  ];
+
+  function updateChoiceAnswer(questionId: string, value: string) {
+    const nextLetter = value.toUpperCase().match(/[A-E]/)?.[0] ?? "";
+    const duplicateQuestion = choiceQuestions.find(
+      (question) => question.id !== questionId && (answers[question.id] ?? "").trim().toUpperCase() === nextLetter,
+    );
+    onAnswerChange(questionId, duplicateQuestion && nextLetter ? "" : nextLetter);
+  }
+
+  return (
+    <div className="paper-sheet">
+      <div className="paper-section-heading">
+        <h2>SECTION 3</h2>
+        <h2>Questions 21-30</h2>
+      </div>
+
+      <section className="paper-instructions">
+        <h3>Questions 21-24</h3>
+        <p>
+          <em>Complete the notes below.</em>
+        </p>
+        <p>
+          Write <strong>NO MORE THAN TWO WORDS AND/OR A NUMBER</strong> for each answer.
+        </p>
+      </section>
+
+      <section
+        className="ci4-t2-note-paper ci4-t2-assignment-note"
+        aria-label="Details of assignment"
+      >
+        <h3>DETAILS OF ASSIGNMENT</h3>
+        <div className="ci4-t2-assignment-layout">
+          <strong>Part 1</strong>
+          <div>
+            <u>Essay</u>
+            <br />
+            <br />
+            Title: ‘Assess the two main methods of {answer(21)} in social science research’
+            <br />
+            <br />
+            Number of words: {answer(22)}
+          </div>
+
+          <strong>Part 2</strong>
+          <div>
+            <u>Small-scale study</u>
+            <br />
+            <br />
+            Choose one method.
+            <br />
+            <br />
+            Gather data from at least {answer(23)} subjects.
+          </div>
+
+          <strong>Part 3</strong>
+          <div>
+            <u>Report on study</u>
+            <br />
+            <br />
+            Number of words: {answer(24)}
+          </div>
+        </div>
+      </section>
+
+      <section className="paper-instructions">
+        <h3>Questions 25 and 26</h3>
+        <p>
+          <em>Choose TWO letters A-E.</em>
+        </p>
+        <p>
+          What <strong>TWO</strong> disadvantages of the questionnaire form of data collection do
+          the students discuss?
+        </p>
+      </section>
+
+      <div className="ci4-t2-plain-letter-list" aria-label="Options A to E">
+        {choiceOptions.map((option) => (
+          <p key={option.letter}>
+            <strong>{option.letter}</strong>
+            <span>{option.text}</span>
+          </p>
+        ))}
+      </div>
+      <div className="ci4-t2-choice-answer-lines" aria-label="Answers for questions 25 and 26">
+        {choiceQuestions.map((question) => answer(question.questionNo, {
+          isCorrectOverride: correctLetters.has(normalizeAnswer(answers[question.id] ?? "")),
+          minAnswerChars: 4,
+          onAnswerChange: updateChoiceAnswer,
+        }))}
+      </div>
+
+      <section className="paper-instructions">
+        <h3>Questions 27-30</h3>
+        <p>
+          <em>Complete the table below.</em>
+        </p>
+        <p>
+          Write <strong>NO MORE THAN THREE WORDS OR A NUMBER</strong> for each answer.
+        </p>
+      </section>
+
+      <div className="paper-table-wrap">
+        <table className="paper-table ci4-t2-reference-table">
+          <thead>
+            <tr>
+              <th>AUTHOR</th>
+              <th>TITLE</th>
+              <th>PUBLISHER</th>
+              <th>YEAR OF PUBLICATION</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{answer(27, { minAnswerChars: 8 })}</td>
+              <td>‘Sample Surveys in Social Science Research’</td>
+              <td className="ci4-t2-empty-cell" />
+              <td className="ci4-t2-empty-cell" />
+            </tr>
+            <tr>
+              <td>Bell</td>
+              <td>{answer(28, { minAnswerChars: 16 })}</td>
+              <td>{answer(29, { minAnswerChars: 10 })}</td>
+              <td className="ci4-t2-empty-cell" />
+            </tr>
+            <tr>
+              <td>Wilson</td>
+              <td>‘Interviews That Work’</td>
+              <td>
+                Oxford University
+                <br />
+                Press
+              </td>
+              <td>{answer(30, { minAnswerChars: 8 })}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+function CambridgeFourTestTwoSectionFourSheet({
+  answers,
+  onAnswerChange,
+  questions,
+  submitted,
+}: CambridgePaperSheetProps) {
+  const questionByNo = new Map(questions.map((question) => [question.questionNo, question]));
+  const answer = (
+    questionNo: number,
+    options: { minAnswerChars?: number; showQuestionNumber?: boolean } = {},
+  ) => (
+    <InlineFillAnswer
+      answers={answers}
+      minAnswerChars={options.minAnswerChars}
+      onAnswerChange={onAnswerChange}
+      question={questionByNo.get(questionNo)}
+      showQuestionNumber={options.showQuestionNumber}
+      submitted={submitted}
+    />
+  );
+  const choiceQuestions = [39, 40]
+    .map((questionNo) => questionByNo.get(questionNo))
+    .filter((question): question is ListeningQuestion => Boolean(question));
+  const selectedLetters = Array.from(
+    new Set(
+      choiceQuestions
+        .map((question) => (answers[question.id] ?? "").trim().toUpperCase())
+        .filter(Boolean),
+    ),
+  ).sort();
+  const correctLetters = new Set(
+    choiceQuestions.map((question) => normalizeAnswer(question.answers[0] ?? "")),
+  );
+  const choiceOptions = [
+    { letter: "A", text: "was no-one's fault." },
+    { letter: "B", text: "was not a corporate crime." },
+    { letter: "C", text: "was intentional." },
+    { letter: "D", text: "was caused by indifference." },
+    { letter: "E", text: "had tragic results." },
+    { letter: "F", text: "made a large profit for the company." },
+  ];
+
+  function updateChoiceSelection(letter: string, checked: boolean) {
+    const nextSelection = toggleOrderedChoiceSelection(
+      selectedLetters,
+      letter,
+      checked,
+      choiceQuestions.length,
+    );
+
+    choiceQuestions.forEach((question, index) => {
+      onAnswerChange(question.id, nextSelection[index] ?? "");
+    });
+  }
+
+  return (
+    <div className="paper-sheet">
+      <div className="paper-section-heading">
+        <h2>SECTION 4</h2>
+        <h2>Questions 31-40</h2>
+      </div>
+
+      <section className="paper-instructions">
+        <h3>Questions 31 and 32</h3>
+        <p>
+          <em>Choose the correct letter, A, B or C.</em>
+        </p>
+      </section>
+
+      {[31, 32].map((questionNo) => {
+        const question = questionByNo.get(questionNo);
+        const parsedPrompt = parseChoicePrompt(question?.promptText ?? "");
+
+        return (
+          <ChoiceQuestionBlock
+            answers={answers}
+            key={questionNo}
+            onAnswerChange={onAnswerChange}
+            options={parsedPrompt.options}
+            question={question}
+            stem={parsedPrompt.stem}
+            submitted={submitted}
+          />
+        );
+      })}
+
+      <section className="paper-instructions">
+        <h3>Questions 33-38</h3>
+        <p>
+          <em>Complete the notes below.</em>
+        </p>
+        <p>
+          Write <strong>NO MORE THAN THREE WORDS</strong> for each answer.
+        </p>
+      </section>
+
+      <section className="ci4-t2-note-paper ci4-t2-corporate-note" aria-label="Corporate crime notes">
+        <p>Corporate crime has been ignored by:</p>
+        <ol className="ci4-t2-alpha-list">
+          <li>
+            <span>a)</span>
+            <span>the {answer(33, { minAnswerChars: 15 })}, e.g. films</span>
+          </li>
+          <li>
+            <span>b)</span>
+            <span>{answer(34, { minAnswerChars: 16 })}</span>
+          </li>
+        </ol>
+
+        <p>Reasons:</p>
+        <ol className="ci4-t2-alpha-list">
+          <li>
+            <span>a)</span>
+            <span>often more complex, and needing {answer(35, { minAnswerChars: 18 })}</span>
+          </li>
+          <li>
+            <span>b)</span>
+            <span>less human interest than conventional crime</span>
+          </li>
+          <li>
+            <span>c)</span>
+            <span>victims often {answer(36, { minAnswerChars: 14 })}</span>
+          </li>
+        </ol>
+
+        <p>Effects:</p>
+        <ol className="ci4-t2-alpha-list">
+          <li>
+            <span>a)</span>
+            <span>Economic costs</span>
+          </li>
+        </ol>
+        <ul className="ci4-t2-bullet-list">
+          <li>may appear unimportant to {answer(37, { minAnswerChars: 18 })}</li>
+          <li>can make large {answer(38, { minAnswerChars: 16 })} for company</li>
+          <li>cause more losses to individuals than conventional crimes</li>
+        </ul>
+        <ol className="ci4-t2-alpha-list ci4-t2-alpha-list-continuation">
+          <li>
+            <span>b)</span>
+            <span>Social costs</span>
+          </li>
+        </ol>
+        <ul className="ci4-t2-bullet-list">
+          <li>make people lose trust in business world</li>
+          <li>affect poorer people most</li>
+        </ul>
+      </section>
+
+      <section className="paper-instructions">
+        <h3>Questions 39 and 40</h3>
+        <p>
+          <em>Choose TWO letters A–F.</em>
+        </p>
+        <p>The oil tanker explosion was an example of a crime which</p>
+      </section>
+
+      <div className="choice-options paper-choice-options paper-letter-choice-options ci4-t2-letter-list">
+        {choiceOptions.map((option) => {
+          const isSelected = selectedLetters.includes(option.letter);
+          const isCorrectOption = correctLetters.has(normalizeAnswer(option.letter));
+          const isWrongSelection = submitted && isSelected && !isCorrectOption;
+          const isAtSelectionLimit = selectedLetters.length >= choiceQuestions.length;
+
+          return (
+            <label
+              className={`choice-option ${
+                submitted && isCorrectOption ? "correct-option" : ""
+              } ${isWrongSelection ? "wrong-option" : ""} ${isSelected ? "selected-option" : ""}`}
+              key={option.letter}
+            >
+              <span className="choice-status-icon">
+                {submitted && isCorrectOption ? "✅" : null}
+                {isWrongSelection ? "❌" : null}
+              </span>
+              <span
+                className={`choice-dot ${isSelected ? "selected" : ""}`}
+                style={{ borderRadius: 4 }}
+              />
+              <input
+                checked={isSelected}
+                disabled={submitted || (!isSelected && isAtSelectionLimit)}
+                type="checkbox"
+                value={option.letter}
+                onChange={(event) => updateChoiceSelection(option.letter, event.target.checked)}
+              />
+              <span className="choice-letter">{option.letter}</span>
+              <span>{option.text}</span>
+            </label>
+          );
+        })}
+      </div>
+      <p className="paper-multiple-answer-row" aria-live="polite">
+        <span id="question-39" />
+        <span id="question-40" />
+        Selected answers: <strong>{selectedLetters.join(", ") || "None"}</strong>
+      </p>
+    </div>
+  );
+}
+
+const CAMBRIDGE_FOUR_TEST_TWO_CUSTOM_SHEETS: Record<
+  number,
+  ComponentType<CambridgePaperSheetProps>
+> = {
+  1: CambridgeFourTestTwoSectionOneSheet,
+  2: CambridgeFourTestTwoSectionTwoSheet,
+  3: CambridgeFourTestTwoSectionThreeSheet,
+  4: CambridgeFourTestTwoSectionFourSheet,
+};
+
 function CambridgeSixTestTwoSectionOneSheet({
   answers,
   onAnswerChange,
@@ -1682,8 +2380,10 @@ function CambridgeSixTestTwoSectionOneSheet({
   testNo,
 }: CambridgePaperSheetProps) {
   const questionByNo = new Map(questions.map((question) => [question.questionNo, question]));
-  const answer = (questionNo: number) => (
+  const answer = (questionNo: number, options: { answerPrefix?: string; answerSuffix?: string } = {}) => (
     <InlineFillAnswer
+      answerPrefix={options.answerPrefix}
+      answerSuffix={options.answerSuffix}
       answers={answers}
       onAnswerChange={onAnswerChange}
       question={questionByNo.get(questionNo)}
@@ -1710,39 +2410,24 @@ function CambridgeSixTestTwoSectionOneSheet({
         </p>
       </section>
 
-      <section className="programme-note-card" aria-label="Children's Art and Craft Workshops">
-        <div className="programme-note-title">CHILDREN'S ART AND CRAFT WORKSHOPS</div>
+      <section className="ci6-t2-notes-block" aria-label="Children's Art and Craft Workshops">
+        <div className="ci6-t2-notes-title">CHILDREN’S ART AND CRAFT WORKSHOPS</div>
 
-        <div className="programme-example">
-          <div>
-            <strong>Example</strong>
-            <span>Workshops organised every:</span>
-          </div>
-          <div>
-            <strong>Answer</strong>
-            <span>fortnight</span>
-          </div>
+        <div className="ci6-t2-example">
+          <div><em>Example</em></div>
+          <div><em>Answer</em></div>
+          <div>Workshops organised every:</div>
+          <div><strong><u>Saturday</u></strong></div>
         </div>
 
-        <div className="programme-detail-grid">
-          <strong>Adults</strong>
-          <span>must accompany children under {answer(1)}.</span>
-
-          <strong>Cost</strong>
-          <span>£2.50</span>
-
-          <strong>Workshops held in:</strong>
-          <span>Winter House, {answer(2)} Street</span>
-
-          <strong>Security device:</strong>
-          <span>must push the {answer(3)} to open door</span>
-
-          <strong>Car</strong>
-          <span>leave it behind the {answer(4)}.</span>
-
-          <strong>Booking</strong>
-          <span>phone the {answer(5)} (on 200765)</span>
-        </div>
+        <ul className="ci6-t2-notes-list">
+          <li>Adults must accompany children under {answer(1)}.</li>
+          <li>Cost: £2.50</li>
+          <li>Workshops held in: Winter House, {answer(2)} Street</li>
+          <li>Security device: must push the {answer(3)} to open door</li>
+          <li>Should leave car behind the {answer(4)}</li>
+          <li>Book workshops by phoning the {answer(5)} (on 200765)</li>
+        </ul>
       </section>
 
       <section className="paper-instructions">
@@ -1761,7 +2446,7 @@ function CambridgeSixTestTwoSectionOneSheet({
             <tr>
               <th>Date</th>
               <th>Workshop title</th>
-              <th>Children advised to wear</th>
+              <th>Children advised to wear:</th>
               <th>Please bring (if possible)</th>
             </tr>
           </thead>
@@ -1774,7 +2459,7 @@ function CambridgeSixTestTwoSectionOneSheet({
             </tr>
             <tr>
               <td>23/11</td>
-              <td>'{answer(9)}'</td>
+              <td>{answer(9, { answerPrefix: "'" })}'</td>
               <td>(Nothing special)</td>
               <td>{answer(10)}</td>
             </tr>
@@ -1866,7 +2551,9 @@ function CambridgeSixTestTwoSectionTwoSheet({
             <tr>
               <td>{answer(16)}</td>
               <td>
-                buy at least six days ahead, limited numbers
+                buy at least six days ahead
+                <br />
+                limited numbers
                 <br />
                 {answer(17)} essential
               </td>
@@ -1945,7 +2632,6 @@ function CambridgeSixTestTwoSectionThreeSheet({
       </div>
 
       <section className="paper-instructions">
-        <h3>Questions 21-30</h3>
         <p>
           <em>Complete the tables below.</em>
         </p>
@@ -1955,11 +2641,11 @@ function CambridgeSixTestTwoSectionThreeSheet({
       </section>
 
       <div className="paper-table-wrap">
+        <div className="ci6-t2-s3-table-heading">
+          <h3>Dissertation Tutorial Record (Education)</h3>
+          <span>Name: Sandy Gibbons</span>
+        </div>
         <table className="paper-table">
-          <caption className="paper-table-title">
-            Dissertation Tutorial Record (Education)
-            <span className="paper-table-subtitle">Name: Sandy Gibbons</span>
-          </caption>
           <thead>
             <tr>
               <th>Targets previously agreed</th>
@@ -1971,23 +2657,23 @@ function CambridgeSixTestTwoSectionThreeSheet({
             <tr>
               <td>Investigate suitable data analysis software</td>
               <td>
-                - Read IT {answer(21)}
+                – Read IT {answer(21)}
                 <br />
-                - Spoken to Jane Prince, Head of the {answer(22)}
+                – Spoken to Jane Prince, Head of the {answer(22)}
               </td>
               <td>Sign up for some software practice sessions</td>
             </tr>
             <tr>
               <td>Prepare a {answer(23)} for survey</td>
-              <td>- Completed and sent for review</td>
+                <td>– Completed and sent for review</td>
               <td>Add questions in section three on {answer(24)}</td>
             </tr>
             <tr>
               <td>Further reading about discipline</td>
               <td>
-                - Read Banerjee
+                – Read Banerjee
                 <br />
-                - N.B. Couldn't find Ericsson's essays on managing the {answer(25)}
+                – N.B. Couldn't find Ericsson's essays on managing the {answer(25)}
               </td>
               <td>Obtain from library through special loans service</td>
             </tr>
@@ -2008,148 +2694,16 @@ function CambridgeSixTestTwoSectionThreeSheet({
             <tr>
               <td>Do further work on Chapter 1 (Give the title: Context {answer(26)})</td>
               <td>
-                - Add statistics on the {answer(27)} in various zones
+                – Add statistics on the {answer(27)} in various zones
                 <br />
-                - Include more references to works dated after {answer(28)}
+                – Include more references to works dated after {answer(28)}
               </td>
               <td>By the {answer(29)}</td>
             </tr>
             <tr>
               <td>Prepare list of main sections for Chapter 2</td>
-              <td>- Use index cards to help in organisation</td>
+                <td>– Use index cards to help in organisation</td>
               <td>Before starting the {answer(30)}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  );
-}
-
-function CambridgeSixTestFourSectionTwoSheet({
-  answers,
-  onAnswerChange,
-  questionImageUrls,
-  questions,
-  sectionNo,
-  submitted,
-  testNo,
-}: CambridgePaperSheetProps) {
-  const questionByNo = new Map(questions.map((question) => [question.questionNo, question]));
-  const answer = (questionNo: number) => (
-    <InlineFillAnswer
-      answers={answers}
-      onAnswerChange={onAnswerChange}
-      question={questionByNo.get(questionNo)}
-      submitted={submitted}
-    />
-  );
-
-  return (
-    <div className="paper-sheet">
-      <div className="paper-listening-badge">LISTENING</div>
-
-      <div className="paper-section-heading">
-        <h2>SECTION 2</h2>
-        <h2>Questions 11-20</h2>
-      </div>
-
-      <section className="paper-instructions">
-        <h3>Questions 11-13</h3>
-        <p>Which team will do each of the following jobs?</p>
-        <p>
-          Choose <strong>THREE answers</strong> from the box and write the correct letter, A-D,
-          next to questions 11-13.
-        </p>
-      </section>
-
-      <div className="paper-option-box paper-chart-option-box">
-        <span>
-          <strong>A</strong> the blue team
-        </span>
-        <span>
-          <strong>B</strong> the yellow team
-        </span>
-        <span>
-          <strong>C</strong> the green team
-        </span>
-        <span>
-          <strong>D</strong> the red team
-        </span>
-      </div>
-
-      <section className="paper-match-list">
-        <p>checking entrance tickets: {answer(11)}</p>
-        <p>preparing refreshments: {answer(12)}</p>
-        <p>directing car-park traffic: {answer(13)}</p>
-      </section>
-
-      <section className="paper-instructions">
-        <h3>Questions 14-20</h3>
-        <p>
-          <em>Complete the table below.</em>
-        </p>
-        <p>
-          Write <strong>NO MORE THAN THREE WORDS AND/OR A NUMBER</strong> for each answer.
-        </p>
-      </section>
-
-      <div className="paper-table-wrap">
-        <table className="paper-table">
-          <thead>
-            <tr>
-              <th>Time</th>
-              <th>Activity</th>
-              <th>Details</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>9.30 am</td>
-              <td>Talk by Anne Smith</td>
-              <td>
-                • information about pay
-                <br />
-                • will give out the {answer(14)} forms
-              </td>
-            </tr>
-            <tr>
-              <td>10.00 am</td>
-              <td>Talk by Peter Chen</td>
-              <td>
-                • will discuss Conference Centre plan
-                <br />
-                • will explain about arrangements for {answer(15)} and fire exits
-              </td>
-            </tr>
-            <tr>
-              <td>10.30 am</td>
-              <td>Coffee Break</td>
-              <td>• go to Staff Canteen on the {answer(16)}</td>
-            </tr>
-            <tr>
-              <td>11.00 am</td>
-              <td>Video Presentation</td>
-              <td>
-                • go to {answer(17)}
-                <br />
-                • video title: {answer(18)}
-              </td>
-            </tr>
-            <tr>
-              <td>12.00</td>
-              <td>Buffet Lunch</td>
-              <td>• go to the {answer(19)} on 1st floor</td>
-            </tr>
-            <tr>
-              <td>1.00 pm</td>
-              <td>Meet the {answer(20)}</td>
-              <td />
-            </tr>
-            <tr>
-              <td>3.00 pm</td>
-              <td>Finish</td>
-              <td />
             </tr>
           </tbody>
         </table>
@@ -2162,7 +2716,6 @@ const CAMBRIDGE_SIX_CUSTOM_SHEETS: Record<string, ComponentType<CambridgePaperSh
   "2:1": CambridgeSixTestTwoSectionOneSheet,
   "2:2": CambridgeSixTestTwoSectionTwoSheet,
   "2:3": CambridgeSixTestTwoSectionThreeSheet,
-  "4:2": CambridgeSixTestFourSectionTwoSheet,
 };
 
 function CambridgeFourPaperSheet({
@@ -2185,7 +2738,11 @@ function CambridgeFourPaperSheet({
   testNo: number;
 }) {
   const CustomSheet =
-    bookCode === "cambridge-6" ? CAMBRIDGE_SIX_CUSTOM_SHEETS[`${testNo}:${sectionNo}`] : undefined;
+    bookCode === "cambridge-4" && testNo === 2
+      ? CAMBRIDGE_FOUR_TEST_TWO_CUSTOM_SHEETS[sectionNo]
+      : bookCode === "cambridge-6"
+        ? CAMBRIDGE_SIX_CUSTOM_SHEETS[`${testNo}:${sectionNo}`]
+        : undefined;
 
   if (CustomSheet) {
     return (
@@ -2253,18 +2810,70 @@ function CambridgeFourPaperSheet({
   );
 }
 
+function getListeningSectionResult(
+  section: ListeningSectionDetail,
+  answers: AnswerMap,
+): ListeningPartResult {
+  const answerGroups = getListeningRuntimeGroupMetadata(
+    section.bookCode,
+    section.testNo,
+    section.sectionNo,
+    section.questions,
+  ).answerGroups;
+  const correctCount = section.questions.reduce(
+    (count, question) =>
+      isListeningQuestionCorrect(
+        {
+          answerGroups,
+          answers,
+          bookCode: section.bookCode,
+          questions: section.questions,
+          sectionNo: section.sectionNo,
+          testNo: section.testNo,
+        },
+        question,
+      )
+        ? count + 1
+        : count,
+    0,
+  );
+
+  return { correctCount, total: section.questions.length };
+}
+
 export function ListeningPractice({
+  initialAttemptId,
   initialMode = "mock",
   initialSubmitted = false,
-  section,
+  section: initialSection,
+  testSections = [],
   vocabularyHints = {},
 }: ListeningPracticeProps) {
+  const availableTestSections = useMemo(() => {
+    const sectionsById = new Map(
+      [initialSection, ...testSections].map((testSection) => [testSection.id, testSection]),
+    );
+
+    return [...sectionsById.values()].sort((left, right) => left.sectionNo - right.sectionNo);
+  }, [initialSection, testSections]);
+  const [activeSectionId, setActiveSectionId] = useState(initialSection.id);
+  const section =
+    availableTestSections.find((testSection) => testSection.id === activeSectionId) ??
+    initialSection;
+  const initialEffectiveMode: ListeningMode =
+    initialSection.questions.length === 0 && initialSection.transcriptSentences.length > 0
+      ? "practice"
+      : initialMode;
   const [answers, setAnswers] = useState<Record<string, string>>({});
-  const [mode] = useState<ListeningMode>(initialMode);
+  const [mode] = useState<ListeningMode>(initialEffectiveMode);
   const [submitted, setSubmitted] = useState(initialSubmitted);
+  const [attemptId, setAttemptId] = useState(initialAttemptId ?? "");
+  const [attemptHydrated, setAttemptHydrated] = useState(false);
   const [audioSettings, setAudioSettings] = useState<AudioPlayerSettings>(
-    DEFAULT_AUDIO_PLAYER_SETTINGS,
+    LISTENING_DEFAULT_AUDIO_SETTINGS,
   );
+  const [originalDisplayMode, setOriginalDisplayMode] =
+    useState<ListeningOriginalDisplayMode>("bilingual");
   const [isNotesOpen, setIsNotesOpen] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isPracticeTimerRunning, setIsPracticeTimerRunning] = useState(false);
@@ -2272,7 +2881,7 @@ export function ListeningPractice({
   const [annotations, setAnnotations] = useState<AnnotationItem[]>([]);
   const [mockStarted, setMockStarted] = useState(mode === "practice");
   const [seconds, setSeconds] = useState(() =>
-    mode === "practice" ? 0 : getListeningCountdownSeconds(section),
+    mode === "practice" ? 0 : getListeningMockCountdownSeconds(availableTestSections),
   );
   const [autoPlaySignal, setAutoPlaySignal] = useState(0);
   const [isFullAudioPlaying, setIsFullAudioPlaying] = useState(false);
@@ -2282,14 +2891,30 @@ export function ListeningPractice({
   const [sentenceAutoPlaySignals, setSentenceAutoPlaySignals] = useState<Record<string, number>>({});
   const [dictationAnswers, setDictationAnswers] = useState<Record<string, string>>({});
   const [sentenceOrderAnswers, setSentenceOrderAnswers] = useState<Record<string, SentenceOrderAnswer>>({});
+  const [activeSentenceClipId, setActiveSentenceClipId] = useState<string | null>(null);
+  const [activeSentenceClipPosition, setActiveSentenceClipPosition] = useState(0);
+  const [isSentenceClipPlaying, setIsSentenceClipPlaying] = useState(false);
+  const [speakingTraining, setSpeakingTraining] = useState<SpeakingTrainingState | null>(null);
   const [activeWordTooltip, setActiveWordTooltip] = useState<ActiveWordTooltip | null>(null);
   const [selectionActionPosition, setSelectionActionPosition] =
     useState<StudySelectionActionPosition | null>(null);
   const [questionSurfaceHeight, setQuestionSurfaceHeight] = useState<number | null>(null);
+  const [reviewLeftPercent, setReviewLeftPercent] = useState(
+    LISTENING_REVIEW_DEFAULT_LEFT_PERCENT,
+  );
+  const [isReviewSplitDragging, setIsReviewSplitDragging] = useState(false);
+  const [mobileReviewPane, setMobileReviewPane] =
+    useState<ListeningReviewMobilePane>("transcript");
   const [notePanelPosition, setNotePanelPosition] = useState({ left: 0, top: 0 });
   const [isDraggingNotes, setIsDraggingNotes] = useState(false);
   const questionSurfaceRef = useRef<HTMLDivElement | null>(null);
+  const reviewWorkspaceRef = useRef<HTMLDivElement | null>(null);
   const subtitleListRef = useRef<HTMLDivElement | null>(null);
+  const audioSettingsRef = useRef(audioSettings);
+  const activeSentenceClipIdRef = useRef<string | null>(null);
+  const sentenceDurationsRef = useRef<Record<string, number>>({});
+  const speakingCountdownRef = useRef<number | null>(null);
+  const speakingAdvanceRef = useRef<number | null>(null);
   const selectedRangeRef = useRef<Range | null>(null);
   const hoverWordTimerRef = useRef<number | null>(null);
   const hideWordTimerRef = useRef<number | null>(null);
@@ -2305,18 +2930,62 @@ export function ListeningPractice({
   const [stopAtSeconds, setStopAtSeconds] = useState<number | null>(null);
   const [checkSecondsLeft, setCheckSecondsLeft] = useState<number | null>(null);
   const pageRef = useRef<HTMLElement | null>(null);
+  const highlightStorageKey = inlineHighlightKey(`listening:${section.bookCode}:${section.testNo}:${section.sectionNo}`);
+
+  useEffect(() => {
+    if (pageRef.current) restoreInlineHighlights(pageRef.current, highlightStorageKey);
+  }, [highlightStorageKey]);
   const shouldUseTestOnePaperLayout =
     section.bookCode === "cambridge-4" &&
     section.testNo === 1 &&
     section.sectionNo >= 1 &&
     section.sectionNo <= 4;
   const structuredPaperKey = `${section.bookCode}:${section.testNo}`;
-  const shouldUseStructuredPaperLayout =
+  const hasLegacyStructuredPaperLayout =
     !!structuredPaperGroups[structuredPaperKey] &&
     section.sectionNo >= 1 &&
     section.sectionNo <= 4;
+  const hasSectionSpecificPaperLayout =
+    shouldUseTestOnePaperLayout ||
+    (section.bookCode === "cambridge-4" &&
+      section.testNo === 2 &&
+      Boolean(CAMBRIDGE_FOUR_TEST_TWO_CUSTOM_SHEETS[section.sectionNo])) ||
+    (section.bookCode === "cambridge-6" &&
+      Boolean(CAMBRIDGE_SIX_CUSTOM_SHEETS[`${section.testNo}:${section.sectionNo}`]));
+  const runtimeGroupMetadata = getListeningRuntimeGroupMetadata(
+    section.bookCode,
+    section.testNo,
+    section.sectionNo,
+    section.questions,
+  );
+  const questionPageGroups = getListeningQuestionPageGroups(
+    section.bookCode,
+    section.testNo,
+    section.sectionNo,
+    runtimeGroupMetadata.groups,
+  );
+  const selectedPaperLayout = selectListeningPaperLayout({
+    groups: questionPageGroups,
+    hasLegacyStructuredLayout: hasLegacyStructuredPaperLayout,
+    hasSectionSpecificLayout: hasSectionSpecificPaperLayout,
+    metadataStatus: runtimeGroupMetadata.metadataStatus,
+    questions: section.questions,
+  });
+  const activeAnswerGroups = selectListeningAnswerGroupsForLayout(
+    runtimeGroupMetadata.answerGroups,
+    selectedPaperLayout,
+  );
+  const isTranscriptOnlySection =
+    section.questions.length === 0 && section.transcriptSentences.length > 0;
+  const effectiveMode: ListeningMode = isTranscriptOnlySection ? "practice" : mode;
+  const shouldUseRuntimePaperLayout = selectedPaperLayout === "runtime";
+  const shouldUseStructuredPaperLayout =
+    selectedPaperLayout === "legacy-structured" ||
+    (selectedPaperLayout === "section-specific" && !shouldUseTestOnePaperLayout);
   const shouldUsePaperLayout =
-    shouldUseTestOnePaperLayout || shouldUseStructuredPaperLayout;
+    shouldUseTestOnePaperLayout ||
+    shouldUseStructuredPaperLayout ||
+    shouldUseRuntimePaperLayout;
   const practiceTitle = formatListeningSectionTitle(section);
   const questionImageUrls =
     section.questionImageUrls.length > 0
@@ -2325,7 +2994,7 @@ export function ListeningPractice({
         ? [section.questionImageUrl]
         : [];
   const activeSentence = useMemo(() => {
-    if (mode !== "practice") {
+    if (!submitted && effectiveMode !== "practice") {
       return null;
     }
 
@@ -2338,7 +3007,7 @@ export function ListeningPractice({
         return fullAudioPositionMs >= sentence.startMs && fullAudioPositionMs <= sentence.endMs;
       }) ?? null
     );
-  }, [fullAudioPositionMs, mode, section.transcriptSentences]);
+  }, [effectiveMode, fullAudioPositionMs, section.transcriptSentences, submitted]);
   const activeSentenceNo = activeSentence?.sentenceNo ?? null;
   const activeLoopSegment =
     activeSentence?.startMs != null && activeSentence.endMs != null
@@ -2349,7 +3018,214 @@ export function ListeningPractice({
       : null;
 
   function updateAudioSettings(nextSettings: Partial<AudioPlayerSettings>) {
-    setAudioSettings((current) => ({ ...current, ...nextSettings }));
+    setAudioSettings((current) => {
+      const next = { ...current, ...nextSettings };
+      audioSettingsRef.current = next;
+      return next;
+    });
+  }
+
+  function clearSpeakingPracticeTimers(resetState = true) {
+    if (speakingCountdownRef.current != null) {
+      window.clearInterval(speakingCountdownRef.current);
+      speakingCountdownRef.current = null;
+    }
+    if (speakingAdvanceRef.current != null) {
+      window.clearTimeout(speakingAdvanceRef.current);
+      speakingAdvanceRef.current = null;
+    }
+    if (resetState) {
+      setSpeakingTraining(null);
+    }
+  }
+
+  function centerReviewSentence(sentenceNo: number) {
+    window.requestAnimationFrame(() => {
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      document.getElementById(`transcript-sentence-${sentenceNo}`)?.scrollIntoView({
+        behavior: reduceMotion ? "auto" : "smooth",
+        block: "center",
+      });
+    });
+  }
+
+  function playReviewSentenceByMode(sentence: ListeningSentence) {
+    const nextSentenceNo = getNextSentenceNo(
+      section.transcriptSentences
+        .filter((transcriptSentence) => transcriptSentence.audioUrl)
+        .map((transcriptSentence) => transcriptSentence.sentenceNo),
+      sentence.sentenceNo,
+      audioSettingsRef.current.playMode,
+    );
+    const nextSentence = section.transcriptSentences.find(
+      (transcriptSentence) => transcriptSentence.sentenceNo === nextSentenceNo,
+    );
+
+    if (!nextSentence?.audioUrl) {
+      return;
+    }
+
+    activeSentenceClipIdRef.current = nextSentence.id;
+    setActiveSentenceClipId(nextSentence.id);
+    setActiveSentenceClipPosition(0);
+    setSentenceAutoPlaySignals((current) => ({
+      ...current,
+      [nextSentence.id]: (current[nextSentence.id] ?? 0) + 1,
+    }));
+    centerReviewSentence(nextSentence.sentenceNo);
+  }
+
+  function startSpeakingPractice(sentence: ListeningSentence, speakingMode: ActiveSpeakingMode) {
+    const boundaryDurationSeconds =
+      sentence.startMs != null && sentence.endMs != null
+        ? Math.max((sentence.endMs - sentence.startMs) / 1_000, 0.1)
+        : 0.1;
+    const durationSeconds = sentenceDurationsRef.current[sentence.id] ?? boundaryDurationSeconds;
+    const delayMs = getSpeakingPracticeDelayMs(speakingMode, durationSeconds);
+    const deadline = Date.now() + delayMs;
+
+    clearSpeakingPracticeTimers(false);
+    setSpeakingTraining({
+      mode: speakingMode,
+      remainingSeconds: Math.ceil(delayMs / 1_000),
+      sentenceId: sentence.id,
+    });
+    centerReviewSentence(sentence.sentenceNo);
+
+    speakingCountdownRef.current = window.setInterval(() => {
+      setSpeakingTraining((current) =>
+        current?.sentenceId === sentence.id
+          ? {
+              ...current,
+              remainingSeconds: Math.max(0, Math.ceil((deadline - Date.now()) / 1_000)),
+            }
+          : current,
+      );
+    }, 250);
+    speakingAdvanceRef.current = window.setTimeout(() => {
+      if (speakingCountdownRef.current != null) {
+        window.clearInterval(speakingCountdownRef.current);
+        speakingCountdownRef.current = null;
+      }
+      speakingAdvanceRef.current = null;
+      setSpeakingTraining(null);
+      playReviewSentenceByMode(sentence);
+    }, delayMs);
+  }
+
+  function handleReviewSentencePlayingChange(sentence: ListeningSentence, isPlaying: boolean) {
+    if (isPlaying) {
+      clearSpeakingPracticeTimers();
+      activeSentenceClipIdRef.current = sentence.id;
+      setActiveSentenceClipId(sentence.id);
+      setActiveSentenceClipPosition(0);
+      setIsSentenceClipPlaying(true);
+      setIsFullAudioPlaying(false);
+      centerReviewSentence(sentence.sentenceNo);
+      return;
+    }
+
+    if (activeSentenceClipIdRef.current === sentence.id) {
+      setIsSentenceClipPlaying(false);
+    }
+  }
+
+  function handleReviewSentenceTimeChange(sentence: ListeningSentence, positionSeconds: number) {
+    if (activeSentenceClipIdRef.current === sentence.id) {
+      setActiveSentenceClipPosition(positionSeconds);
+    }
+  }
+
+  function updateListeningUrl(
+    nextSection: ListeningSectionDetail,
+    isReview: boolean,
+    nextAttemptId = attemptId,
+  ) {
+    const url = new URL(window.location.href);
+    url.pathname = `/listening/${nextSection.id}`;
+    url.searchParams.set("mode", mode);
+    if (nextAttemptId) {
+      url.searchParams.set("attempt", nextAttemptId);
+    }
+    if (isReview) {
+      url.searchParams.set("review", "1");
+    } else {
+      url.searchParams.delete("review");
+    }
+    window.history.replaceState(window.history.state, "", url);
+  }
+
+  function switchListeningPart(partNo: number, autoPlayNextPart = false) {
+    const nextSection = availableTestSections.find(
+      (testSection) => testSection.sectionNo === partNo,
+    );
+    if (!nextSection || nextSection.id === section.id) {
+      return;
+    }
+
+    clearSpeakingPracticeTimers();
+    activeSentenceClipIdRef.current = null;
+    setActiveSentenceClipId(null);
+    setActiveSentenceClipPosition(0);
+    setIsSentenceClipPlaying(false);
+    setIsFullAudioPlaying(false);
+    setFullAudioPositionMs(0);
+    setSeekRequest(null);
+    setStopAtSeconds(null);
+    setActiveSectionId(nextSection.id);
+    setMobileReviewPane("transcript");
+    updateListeningUrl(nextSection, submitted);
+    if (autoPlayNextPart) {
+      setAutoPlaySignal((value) => value + 1);
+    }
+    window.requestAnimationFrame(() => window.scrollTo({ top: 0 }));
+  }
+
+  function beginReviewSplitDrag(event: ReactPointerEvent<HTMLButtonElement>) {
+    if (!reviewWorkspaceRef.current || window.matchMedia("(max-width: 820px)").matches) {
+      return;
+    }
+
+    event.preventDefault();
+    setIsReviewSplitDragging(true);
+
+    const handlePointerMove = (moveEvent: PointerEvent) => {
+      const workspace = reviewWorkspaceRef.current;
+      if (!workspace) {
+        return;
+      }
+
+      const rect = workspace.getBoundingClientRect();
+      setReviewLeftPercent(
+        clampListeningReviewSplit({
+          clientX: moveEvent.clientX,
+          handleWidth: LISTENING_REVIEW_HANDLE_PX,
+          minLeftWidth: LISTENING_REVIEW_MIN_LEFT_PX,
+          minRightWidth: LISTENING_REVIEW_MIN_RIGHT_PX,
+          workspaceLeft: rect.left,
+          workspaceWidth: rect.width,
+        }),
+      );
+    };
+    const handlePointerUp = () => {
+      setIsReviewSplitDragging(false);
+      window.removeEventListener("pointermove", handlePointerMove);
+      window.removeEventListener("pointerup", handlePointerUp);
+    };
+
+    window.addEventListener("pointermove", handlePointerMove);
+    window.addEventListener("pointerup", handlePointerUp);
+  }
+
+  function handleReviewSplitKeyDown(event: ReactKeyboardEvent<HTMLButtonElement>) {
+    if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") {
+      return;
+    }
+
+    event.preventDefault();
+    setReviewLeftPercent((current) =>
+      Math.min(70, Math.max(40, current + (event.key === "ArrowLeft" ? -2 : 2))),
+    );
   }
 
   function favoriteSentenceId(sentence: ListeningSentence) {
@@ -2444,9 +3320,46 @@ export function ListeningPractice({
   }
 
   function submitListeningAnswers() {
-    writeReviewAnswers(section.id, answers);
-    syncWrongQuestionFavorites(section, answers);
+    const completedAttemptId = attemptId || createListeningAttemptId();
+    const completedSections = mode === "mock" ? availableTestSections : [section];
+    const completedAt = new Date().toISOString();
+    const partResults = Object.fromEntries(
+      completedSections.map((testSection) => [
+        testSection.id,
+        getListeningSectionResult(testSection, answers),
+      ]),
+    );
+
+    for (const testSection of completedSections) {
+      const answerGroups = getListeningRuntimeGroupMetadata(
+        testSection.bookCode,
+        testSection.testNo,
+        testSection.sectionNo,
+        testSection.questions,
+      ).answerGroups;
+      syncWrongQuestionFavorites(testSection, answers, answerGroups);
+    }
+
+    writeListeningAttempt({
+      answers,
+      bookCode: initialSection.bookCode,
+      completedAt,
+      id: completedAttemptId,
+      mode,
+      partResults,
+      startedAt:
+        readListeningAttempt(completedAttemptId)?.startedAt ?? completedAt,
+      status: "review",
+      testNo: initialSection.testNo,
+      timeSeconds: seconds,
+      updatedAt: completedAt,
+      version: 1,
+    });
+    setAttemptId(completedAttemptId);
     setSubmitted(true);
+    setIsPracticeTimerRunning(false);
+    setCheckSecondsLeft(null);
+    updateListeningUrl(section, true, completedAttemptId);
     if (isFullscreen) {
       setIsFullscreen(false);
     }
@@ -2790,21 +3703,15 @@ export function ListeningPractice({
   }
 
   function handleSentenceAudioEnded(sentence: ListeningSentence) {
-    if (audioSettings.playMode !== "sequential") {
+    setIsSentenceClipPlaying(false);
+    const speakingMode = audioSettingsRef.current.speakingMode;
+
+    if (speakingMode !== "none") {
+      startSpeakingPractice(sentence, speakingMode);
       return;
     }
 
-    const currentIndex = section.transcriptSentences.findIndex(
-      (transcriptSentence) => transcriptSentence.id === sentence.id,
-    );
-    const nextSentence =
-      currentIndex >= 0
-        ? section.transcriptSentences.slice(currentIndex + 1).find((item) => item.audioUrl)
-        : null;
-
-    if (nextSentence) {
-      playSentenceAudioClip(nextSentence);
-    }
+    playReviewSentenceByMode(sentence);
   }
 
   function handleSubtitlePanelWheel(event: ReactWheelEvent<HTMLElement>) {
@@ -3221,6 +4128,175 @@ export function ListeningPractice({
     );
   }
 
+  function renderListeningTranscriptOnlyStudy() {
+    const wordCount = section.transcriptSentences.reduce(
+      (total, sentence) => total + splitEnglishTokens(sentence.englishText).filter(isWordToken).length,
+      0,
+    );
+
+    return (
+      <div className="listening-transcript-study">
+        <section
+          className="bbc-original-panel listening-bbc-original-panel"
+          onPointerUp={handleQuestionSelection}
+        >
+          <header className="bbc-original-head">
+            <div className="bbc-original-title">
+              <h2>{LISTENING_ORIGINAL_DISPLAY_TITLES[originalDisplayMode]}</h2>
+              <span>
+                共 <b className="stat-number">{wordCount}</b> 词
+              </span>
+            </div>
+            <button
+              aria-label={isPracticeTimerRunning ? "暂停听力学习计时" : "开始听力学习计时"}
+              aria-pressed={isPracticeTimerRunning}
+              className={`bbc-reading-timer ${isPracticeTimerRunning ? "active" : ""}`}
+              onClick={() => setIsPracticeTimerRunning((current) => !current)}
+              title={isPracticeTimerRunning ? "点击暂停计时" : "点击开始计时"}
+              type="button"
+            >
+              <span>{formatExamCountdown(seconds)}</span>
+              <MouseClickIcon />
+            </button>
+            <div className="bbc-original-actions">
+              <div aria-label="原文显示模式" className="bbc-original-display-menu" role="group">
+                {LISTENING_ORIGINAL_DISPLAY_MODES.map((displayMode) => (
+                  <button
+                    aria-pressed={originalDisplayMode === displayMode.mode}
+                    className={originalDisplayMode === displayMode.mode ? "active" : ""}
+                    key={displayMode.mode}
+                    onClick={() => setOriginalDisplayMode(displayMode.mode)}
+                    type="button"
+                  >
+                    {displayMode.label}
+                  </button>
+                ))}
+              </div>
+              <AudioSettingsMenus
+                className="toolbar-audio-settings"
+                settings={audioSettings}
+                showRate={false}
+                variant="basic"
+                onChange={updateAudioSettings}
+              />
+              <button
+                className={`annotation-toggle ielts-exam-action bbc-annotation-toggle ${isNotesOpen ? "active" : ""}`}
+                data-study-annotation-toggle
+                type="button"
+                onClick={() => setIsNotesOpen((value) => !value)}
+              >
+                批注
+              </button>
+            </div>
+          </header>
+
+          {section.fullAudioUrl ? (
+            <div className="bbc-full-audio">
+              <AudioPlayer
+                hasSelectedRate
+                loopSegment={activeLoopSegment}
+                onEnded={handleFullAudioEnded}
+                onPlayingChange={setIsFullAudioPlaying}
+                onStopAtEnd={handleSentenceStopAtEnd}
+                onTimeChange={(positionSeconds) =>
+                  setFullAudioPositionMs(Math.round(positionSeconds * 1000))
+                }
+                settings={audioSettings}
+                settingsPlacement="none"
+                seekRequest={seekRequest}
+                showRate={false}
+                src={section.fullAudioUrl}
+                stopAtSeconds={stopAtSeconds}
+                title={`${practiceTitle} 完整音频`}
+              />
+            </div>
+          ) : (
+            <div className="notice">还没有上传音频。</div>
+          )}
+
+          <div className={`bbc-original-copy ${originalDisplayMode === "bilingual" ? "bilingual" : ""}`}>
+            {section.transcriptSentences.map((sentence) => (
+              <div
+                className="bbc-original-text-block"
+                id={`practice-subtitle-${sentence.sentenceNo}`}
+                key={`${sentence.id}-original`}
+              >
+                {originalDisplayMode !== "chinese" ? <p lang="en">{sentence.englishText}</p> : null}
+                {originalDisplayMode !== "english" && sentence.chineseText ? (
+                  <p className="bbc-original-chinese" lang="zh-CN">
+                    {sentence.chineseText}
+                  </p>
+                ) : null}
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <article className="bbc-transcript-panel listening-bbc-transcript-panel">
+          <header className="bbc-transcript-head">
+            <span className="bbc-transcript-kicker">Transcript</span>
+            <h2>中英逐句原文</h2>
+          </header>
+
+          <div className="sentence-list bbc-listening-sentence-list">
+            {section.transcriptSentences.map((sentence) => (
+              <article
+                className={`sentence-card bbc-listening-sentence-card ${
+                  activeSentenceNo === sentence.sentenceNo ? "active" : ""
+                }`}
+                id={`transcript-sentence-${sentence.sentenceNo}`}
+                key={sentence.id}
+              >
+                <div className="sentence-meta">
+                  <div className="sentence-meta-copy">
+                    <span>#{sentence.sentenceNo}</span>
+                    {sentence.speaker ? <span>{sentence.speaker}</span> : null}
+                  </div>
+                  <div className="favorite-share-actions">
+                    <button
+                      aria-label={`收藏第 ${sentence.sentenceNo} 句`}
+                      className={`favorite-star ${
+                        favoriteSentenceIds.includes(favoriteSentenceId(sentence)) ? "active" : ""
+                      }`}
+                      type="button"
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        toggleFavoriteSentence(sentence);
+                      }}
+                    >
+                      {favoriteSentenceIds.includes(favoriteSentenceId(sentence)) ? "★" : "☆"}
+                    </button>
+                    <ContentShareButton
+                      label={`分享第 ${sentence.sentenceNo} 句`}
+                      text={`${sentence.englishText}\n${sentence.chineseText ?? ""}`.trim()}
+                      title={`${practiceTitle} 第 ${sentence.sentenceNo} 句`}
+                      url={`/listening/${section.id}?mode=practice#transcript-sentence-${sentence.sentenceNo}`}
+                    />
+                  </div>
+                </div>
+                <div className="bbc-listening-sentence-copy">
+                  {renderTranscriptSentenceContent(sentence)}
+                </div>
+                {sentence.audioUrl ? (
+                  <AudioPlayer
+                    autoPlaySignal={sentenceAutoPlaySignals[sentence.id] ?? 0}
+                    hasSelectedRate
+                    html5={false}
+                    onEnded={() => handleSentenceAudioEnded(sentence)}
+                    onSettingsChange={updateAudioSettings}
+                    settings={audioSettings}
+                    src={sentence.audioUrl}
+                    title="单句音频"
+                  />
+                ) : null}
+              </article>
+            ))}
+          </div>
+        </article>
+      </div>
+    );
+  }
+
   function renderEnglishSubtitle(
     sentence: ListeningSentence,
     options: { onWordClick?: (sentence: ListeningSentence) => void } = {},
@@ -3287,8 +4363,10 @@ export function ListeningPractice({
     if (kind === "highlight") {
       const selectedRange = selectedRangeRef.current;
       if (selectedRange && !selectedRange.collapsed) {
+        const root = pageRef.current;
         const marker = document.createElement("mark");
         marker.className = "inline-user-highlight";
+        if (root) marker.dataset.highlightId = persistInlineHighlight(root, selectedRange, highlightStorageKey);
 
         try {
           selectedRange.surroundContents(marker);
@@ -3337,6 +4415,7 @@ export function ListeningPractice({
       parent.removeChild(highlight);
       parent.normalize();
     });
+    if (pageRef.current) clearPersistedInlineHighlights(pageRef.current, highlightStorageKey);
   }
 
   function handleFullAudioEnded() {
@@ -3344,7 +4423,11 @@ export function ListeningPractice({
       return;
     }
 
-    if (section.sectionNo !== 4) {
+    const nextSection = availableTestSections.find(
+      (testSection) => testSection.sectionNo === section.sectionNo + 1,
+    );
+    if (nextSection) {
+      switchListeningPart(nextSection.sectionNo, true);
       return;
     }
 
@@ -3354,27 +4437,51 @@ export function ListeningPractice({
   useEffect(() => {
     const previousScrollRestoration = window.history.scrollRestoration;
     window.history.scrollRestoration = "manual";
+    const resolvedAttemptId = initialAttemptId || createListeningAttemptId();
+    const storedAttempt = readListeningAttempt(resolvedAttemptId);
+    const isCompatibleAttempt =
+      storedAttempt?.bookCode === initialSection.bookCode &&
+      storedAttempt.testNo === initialSection.testNo &&
+      storedAttempt.mode === mode;
+    const restoredAttempt = isCompatibleAttempt ? storedAttempt : null;
+    const restoredSubmitted = initialSubmitted || restoredAttempt?.status === "review";
+    const restoredAnswers =
+      restoredAttempt?.answers ?? (initialSubmitted ? readReviewAnswers(initialSection.id) : {});
 
-    setAnswers(initialSubmitted ? readReviewAnswers(section.id) : {});
-    setSubmitted(initialSubmitted);
-    setSeconds(mode === "practice" ? 0 : getListeningCountdownSeconds(section));
-    setAudioSettings(DEFAULT_AUDIO_PLAYER_SETTINGS);
+    setAttemptId(resolvedAttemptId);
+    setAnswers(restoredAnswers);
+    setSubmitted(restoredSubmitted);
+    setSeconds(
+      restoredAttempt?.timeSeconds ??
+        (mode === "practice" ? 0 : getListeningMockCountdownSeconds(availableTestSections)),
+    );
+    setAudioSettings(LISTENING_DEFAULT_AUDIO_SETTINGS);
+    audioSettingsRef.current = LISTENING_DEFAULT_AUDIO_SETTINGS;
     setIsNotesOpen(false);
     setIsPracticeTimerRunning(false);
     setSelectedText("");
     setAnnotations([]);
-    setMockStarted(mode === "practice");
+    setMockStarted(mode === "practice" || restoredSubmitted);
     setIsFullAudioPlaying(false);
     setFullAudioPositionMs(0);
     setSentenceAutoPlaySignals({});
     setDictationAnswers({});
     setSentenceOrderAnswers({});
+    activeSentenceClipIdRef.current = null;
+    setActiveSentenceClipId(null);
+    setActiveSentenceClipPosition(0);
+    setIsSentenceClipPlaying(false);
+    clearSpeakingPracticeTimers();
     setActiveWordTooltip(null);
     setSelectionActionPosition(null);
     setSeekRequest(null);
     setStopAtSeconds(null);
     setCheckSecondsLeft(null);
+    setReviewLeftPercent(LISTENING_REVIEW_DEFAULT_LEFT_PERCENT);
+    setMobileReviewPane("transcript");
     selectedRangeRef.current = null;
+    updateListeningUrl(initialSection, restoredSubmitted, resolvedAttemptId);
+    setAttemptHydrated(true);
 
     const resetScroll = () => {
       window.scrollTo(0, 0);
@@ -3390,10 +4497,50 @@ export function ListeningPractice({
       window.clearTimeout(timeoutId);
       window.history.scrollRestoration = previousScrollRestoration;
     };
-  }, [initialSubmitted, mode, section.id, section.timeLimitSeconds]);
+  }, [initialAttemptId, initialSection.id, initialSubmitted, mode]);
 
   useEffect(() => {
-    if (mode === "practice" && !isPracticeTimerRunning) {
+    if (!attemptHydrated || !attemptId) {
+      return;
+    }
+
+    const existingAttempt = readListeningAttempt(attemptId);
+    const now = new Date().toISOString();
+    const scoredSections = submitted
+      ? mode === "mock"
+        ? availableTestSections
+        : [section]
+      : [];
+    const partResults = submitted
+      ? Object.fromEntries(
+          scoredSections.map((testSection) => [
+            testSection.id,
+            getListeningSectionResult(testSection, answers),
+          ]),
+        )
+      : existingAttempt?.partResults ?? {};
+
+    writeListeningAttempt({
+      answers,
+      bookCode: initialSection.bookCode,
+      completedAt: submitted ? existingAttempt?.completedAt ?? now : undefined,
+      id: attemptId,
+      mode,
+      partResults,
+      startedAt: existingAttempt?.startedAt ?? now,
+      status: submitted ? "review" : "answering",
+      testNo: initialSection.testNo,
+      timeSeconds: seconds,
+      updatedAt: now,
+      version: 1,
+    });
+  }, [answers, attemptHydrated, attemptId, mode, seconds, submitted]);
+
+  useEffect(() => {
+    if (
+      (mode === "practice" && !isPracticeTimerRunning) ||
+      (mode === "mock" && (!mockStarted || submitted))
+    ) {
       return;
     }
 
@@ -3404,7 +4551,13 @@ export function ListeningPractice({
     }, 1000);
 
     return () => window.clearInterval(timer);
-  }, [isPracticeTimerRunning, mode]);
+  }, [isPracticeTimerRunning, mockStarted, mode, submitted]);
+
+  useEffect(() => {
+    if (mode === "mock" && mockStarted && !submitted && seconds <= 0) {
+      submitListeningAnswers();
+    }
+  }, [mockStarted, mode, seconds, submitted]);
 
   useEffect(() => {
     document.documentElement.classList.toggle("ielts-fullscreen-active", isFullscreen);
@@ -3452,16 +4605,20 @@ export function ListeningPractice({
   }, [isNotesOpen]);
 
   useEffect(() => {
-    if (mode !== "practice") {
+    if (mode !== "practice" && !submitted) {
       return;
     }
 
     setFavoriteSentenceIds(readFavoriteSentences().map((item) => item.id));
     setFavoriteWordIds(readFavoriteWords().map((item) => item.id));
-  }, [mode]);
+  }, [mode, submitted]);
 
-  useEffect(() => {
-    if (mode !== "practice" || !questionSurfaceRef.current) {
+  useLayoutEffect(() => {
+    if (
+      !submitted ||
+      !questionSurfaceRef.current ||
+      window.matchMedia("(max-width: 820px)").matches
+    ) {
       setQuestionSurfaceHeight(null);
       return;
     }
@@ -3471,16 +4628,19 @@ export function ListeningPractice({
       setQuestionSurfaceHeight(Math.ceil(questionSurface.getBoundingClientRect().height));
     };
     const observer = new ResizeObserver(updateQuestionSurfaceHeight);
+    const animationFrameId = window.requestAnimationFrame(updateQuestionSurfaceHeight);
 
     updateQuestionSurfaceHeight();
     observer.observe(questionSurface);
     window.addEventListener("resize", updateQuestionSurfaceHeight);
+    void document.fonts?.ready.then(updateQuestionSurfaceHeight);
 
     return () => {
+      window.cancelAnimationFrame(animationFrameId);
       observer.disconnect();
       window.removeEventListener("resize", updateQuestionSurfaceHeight);
     };
-  }, [mode, section.id, submitted]);
+  }, [isFullscreen, reviewLeftPercent, section.id, submitted]);
 
   useEffect(() => {
     if (!submitted) {
@@ -3494,7 +4654,12 @@ export function ListeningPractice({
   }, [audioSettings.dictationMode]);
 
   useEffect(() => {
+    clearSpeakingPracticeTimers();
+  }, [audioSettings.speakingMode, section.id]);
+
+  useEffect(() => {
     return () => {
+      clearSpeakingPracticeTimers(false);
       clearHoverWordTimer();
       clearHideWordTimer();
       clearSelectionHideTimer();
@@ -3502,14 +4667,14 @@ export function ListeningPractice({
   }, []);
 
   useEffect(() => {
-    if (mode !== "practice" || activeSentenceNo == null) {
+    if ((!submitted && mode !== "practice") || activeSentenceNo == null) {
       return;
     }
 
     document
       .getElementById(`practice-subtitle-${activeSentenceNo}`)
       ?.scrollIntoView({ behavior: "smooth", block: "center" });
-  }, [activeSentenceNo, mode]);
+  }, [activeSentenceNo, mode, submitted]);
 
   useEffect(() => {
     if (checkSecondsLeft == null) {
@@ -3534,45 +4699,45 @@ export function ListeningPractice({
       return null;
     }
 
-    const correctCount = section.questions.reduce((count, question) => {
-      const userAnswer = normalizeAnswer(answers[question.id] ?? "");
-      const acceptedAnswers = question.answers.map(normalizeAnswer);
-      return acceptedAnswers.includes(userAnswer) ? count + 1 : count;
-    }, 0);
+    const scoredSections = mode === "mock" ? availableTestSections : [section];
+    const partResults = Object.fromEntries(
+      scoredSections.map((testSection) => [
+        testSection.id,
+        getListeningSectionResult(testSection, answers),
+      ]),
+    );
 
-    return {
-      correctCount,
-      total: section.questions.length,
-    };
-  }, [answers, section.questions, submitted]);
-  const isUrgent = mode === "mock" && seconds <= 600;
-  const isCritical = mode === "mock" && seconds <= 300;
+    return getListeningAttemptScore(partResults, mode, section.id);
+  }, [answers, availableTestSections, mode, section, submitted]);
+  const isUrgent = mode === "mock" && !submitted && seconds <= 600;
+  const isCritical = mode === "mock" && !submitted && seconds <= 300;
 
   const partNavigation = (
     <nav className="exam-bottom-nav" aria-label="Listening parts and questions">
       {IELTS_LISTENING_PARTS.map((partNo) => {
         const localQuestionNumbers = getQuestionRangeForPart(partNo);
-        const partLink = section.partLinks.find((item) => item.sectionNo === partNo);
-        const answeredCount = localQuestionNumbers.filter((localQuestionNo) => {
-          const question = getQuestionForPart(
-            section.questions,
-            section.sectionNo,
-            partNo,
-            localQuestionNo,
-          );
-          return question ? Boolean(answers[question.id]?.trim()) : false;
-        }).length;
+        const partSection = availableTestSections.find(
+          (testSection) => testSection.sectionNo === partNo,
+        );
+        const answeredCount =
+          partSection?.questions.filter((question) => Boolean(answers[question.id]?.trim())).length ??
+          0;
+        const partResult = partSection
+          ? getListeningSectionResult(partSection, answers)
+          : null;
         const partLabel = <span>Part {partNo}</span>;
 
         return (
           <div
             className={`exam-part-nav ${partNo === section.sectionNo ? "active" : ""} ${
-              !partLink ? "disabled" : ""
+              !partSection ? "disabled" : ""
             } ${partNo === section.sectionNo ? "current-part" : "compact-part"}`}
             key={partNo}
           >
-            {partLink && partNo !== section.sectionNo ? (
-              <Link href={`/listening/${partLink.id}?mode=${mode}`}>{partLabel}</Link>
+            {partSection && partNo !== section.sectionNo ? (
+              <button type="button" onClick={() => switchListeningPart(partNo)}>
+                {partLabel}
+              </button>
             ) : (
               partLabel
             )}
@@ -3608,13 +4773,198 @@ export function ListeningPractice({
               </div>
             ) : null}
             {partNo !== section.sectionNo ? (
-              <span className="exam-part-score">{answeredCount}/10</span>
+              <span className="exam-part-score">
+                {submitted && partResult
+                  ? `${partResult.correctCount}/${partResult.total}`
+                  : `${answeredCount}/${partSection?.questions.length ?? 10}`}
+              </span>
             ) : null}
           </div>
         );
       })}
     </nav>
   );
+
+  if (isTranscriptOnlySection) {
+    return (
+      <section
+        className={`stack listening-exam-page practice transcript-only ${
+          isNotesOpen ? "notes-open" : ""
+        }`}
+        data-local-selection-actions="true"
+        ref={pageRef}
+        onPointerUp={handleQuestionSelection}
+        onMouseLeave={() => setActiveWordTooltip(null)}
+        onMouseMove={handleEnglishWordHover}
+      >
+        <div className="listening-exam-toolbar practice transcript-only">
+          <Link
+            aria-label="返回听力书目"
+            className="listening-back-button"
+            href={`/listening/books/${section.bookCode}`}
+          >
+            ← 返回
+          </Link>
+          <div className="exam-part-intro">
+            <strong>{practiceTitle}</strong>
+            <span>音频 + 中英原文学习</span>
+          </div>
+          <div className="exam-toolbar-actions">
+            <button
+              className={`annotation-toggle ielts-exam-action ielts-fullscreen-toggle listening-fullscreen-toggle ${
+                isFullscreen ? "active" : ""
+              }`}
+              type="button"
+              onClick={toggleListeningFullscreen}
+            >
+              {isFullscreen ? "退出全屏" : "全屏"}
+            </button>
+          </div>
+        </div>
+
+        {selectedText && selectionActionPosition ? (
+          <div
+            className={`selection-action-popover global-selection-popover ${
+              selectionActionPosition.placement === "above" ? "above" : ""
+            }`}
+            onPointerEnter={clearSelectionHideTimer}
+            onPointerLeave={scheduleHideSelectionAction}
+            style={{
+              left: selectionActionPosition.left,
+              top: selectionActionPosition.top,
+            }}
+          >
+            <span>{selectedText.slice(0, 26)}</span>
+            <button type="button" onClick={() => addAnnotation("note")}>Note</button>
+            <button type="button" onClick={() => addAnnotation("highlight")}>Highlight</button>
+          </div>
+        ) : null}
+
+        {renderListeningTranscriptOnlyStudy()}
+
+        {isNotesOpen ? (
+          <aside
+            className={`notes-panel draggable-notes-panel ${isDraggingNotes ? "dragging" : ""}`}
+            style={{ left: notePanelPosition.left, top: notePanelPosition.top }}
+          >
+            <div className="notes-panel-head" onMouseDown={beginNotesDrag}>
+              <strong>Notes</strong>
+              <div className="notes-panel-actions">
+                <button
+                  className="clear-inline-highlights"
+                  type="button"
+                  onMouseDown={(event) => event.stopPropagation()}
+                  onClick={clearAllInlineHighlights}
+                >
+                  撤销全部高亮
+                </button>
+                <button
+                  type="button"
+                  onMouseDown={(event) => event.stopPropagation()}
+                  onClick={() => setIsNotesOpen(false)}
+                >
+                  ×
+                </button>
+              </div>
+            </div>
+            {annotations.length === 0 ? (
+              <div className="notes-empty">
+                <strong>Your private notes will show here</strong>
+                <span>Select text to highlight or create a note.</span>
+              </div>
+            ) : (
+              <div className="notes-list">
+                <button
+                  className="delete-all-notes"
+                  type="button"
+                  onClick={() => {
+                    removeFavoriteAnnotations(annotations);
+                    setAnnotations([]);
+                  }}
+                >
+                  全部删除 note
+                </button>
+                {annotations.map((item) => (
+                  <article className={`note-card ${item.kind}`} key={item.id}>
+                    <div>
+                      <span>{item.kind === "note" ? "Note" : "Highlight"}</span>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          removeFavoriteAnnotation(item.id);
+                          setAnnotations((current) => current.filter((note) => note.id !== item.id));
+                        }}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                    <strong>{item.text}</strong>
+                    {item.kind === "note" ? (
+                      <textarea
+                        placeholder="Start typing your note"
+                        value={item.note}
+                        onChange={(event) => {
+                          const nextItem = { ...item, note: event.target.value };
+
+                          setAnnotations((current) =>
+                            current.map((note) => (note.id === item.id ? nextItem : note)),
+                          );
+                          saveFavoriteAnnotation(nextItem);
+                        }}
+                      />
+                    ) : null}
+                  </article>
+                ))}
+              </div>
+            )}
+          </aside>
+        ) : null}
+
+        {activeWordTooltip ? (
+          <div
+            className={`word-tooltip-floating ${
+              activeWordTooltip.placement === "above" ? "above" : ""
+            }`}
+            style={{
+              left: activeWordTooltip.left,
+              top: activeWordTooltip.top,
+              width: activeWordTooltip.width,
+            }}
+            onClick={(event) => event.stopPropagation()}
+            onMouseEnter={() => {
+              clearHoverWordTimer();
+              clearHideWordTimer();
+            }}
+            onMouseLeave={() => scheduleHideWordTooltip(1500)}
+          >
+            <div className="word-tooltip-title-row">
+              <strong>{activeWordTooltip.word}</strong>
+              <div className="word-tooltip-favorite-share-actions favorite-share-actions">
+                <button
+                  aria-label={`收藏 ${activeWordTooltip.word}`}
+                  className={`word-favorite-star ${
+                    favoriteWordIds.includes(activeWordTooltip.word) ? "active" : ""
+                  }`}
+                  type="button"
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    toggleFavoriteWord(activeWordTooltip.word);
+                  }}
+                >
+                  {favoriteWordIds.includes(activeWordTooltip.word) ? "★" : "☆"}
+                </button>
+              </div>
+            </div>
+            <VocabularyHoverPronunciation hint={activeWordTooltip.hint} word={activeWordTooltip.word} />
+            <VocabularyHoverDefinitionLine
+              definitionCn={activeWordTooltip.hint.definitionCn}
+              partOfSpeech={activeWordTooltip.hint.partOfSpeech}
+            />
+          </div>
+        ) : null}
+      </section>
+    );
+  }
 
   return (
     <section
@@ -3628,6 +4978,13 @@ export function ListeningPractice({
       onMouseMove={handleEnglishWordHover}
     >
       <div className={`listening-exam-toolbar ${mode}`}>
+        <Link
+          aria-label="返回听力书目"
+          className="listening-back-button"
+          href={`/listening/books/${section.bookCode}`}
+        >
+          ← 返回
+        </Link>
         <div className="exam-part-intro">
           <strong>
             {mode === "mock"
@@ -3664,7 +5021,7 @@ export function ListeningPractice({
         ) : null}
 
         <div className="exam-toolbar-actions">
-          {mode === "practice" && submitted ? (
+          {submitted ? (
             <AudioSettingsMenus
               className="toolbar-audio-settings"
               settings={audioSettings}
@@ -3673,7 +5030,7 @@ export function ListeningPractice({
               onChange={updateAudioSettings}
             />
           ) : null}
-          {mode === "mock" ? (
+          {mode === "mock" && !submitted ? (
             section.fullAudioUrl ? (
               <AudioPlayer
                 autoPlaySignal={autoPlaySignal}
@@ -3687,7 +5044,7 @@ export function ListeningPractice({
               <div className="notice">还没有上传音频。</div>
             )
           ) : null}
-          {mode === "mock" ? (
+          {mode === "mock" && !submitted ? (
             <div
               className={`ielts-exam-timer listening-timer ${isUrgent ? "urgent" : ""} ${
                 isCritical ? "critical" : ""
@@ -3719,13 +5076,20 @@ export function ListeningPractice({
       </div>
 
       <div
-        className={`exam-workspace ${mode} ${submitted ? "submitted" : "answering"} ${
+        className={`exam-workspace ${mode} ${submitted ? "submitted review" : "answering"} ${
+          isReviewSplitDragging ? "resizing" : ""
+        } ${
           isNotesOpen ? "notes-open" : ""
         }`}
+        ref={reviewWorkspaceRef}
         style={
-          questionSurfaceHeight
-            ? ({ "--practice-panel-height": `${questionSurfaceHeight}px` } as CSSProperties)
-            : undefined
+          {
+            "--listening-review-left": `${reviewLeftPercent}fr`,
+            "--listening-review-right": `${100 - reviewLeftPercent}fr`,
+            ...(questionSurfaceHeight
+              ? { "--practice-panel-height": `${questionSurfaceHeight}px` }
+              : {}),
+          } as CSSProperties
         }
       >
         {selectedText && selectionActionPosition ? (
@@ -3745,8 +5109,34 @@ export function ListeningPractice({
             <button type="button" onClick={() => addAnnotation("highlight")}>Highlight</button>
           </div>
         ) : null}
-        {mode === "practice" && submitted ? (
-          <aside className="practice-audio-study-panel">
+        {submitted ? (
+          <div className="listening-review-mobile-switch" role="tablist" aria-label="复盘内容">
+            <button
+              aria-selected={mobileReviewPane === "transcript"}
+              className={mobileReviewPane === "transcript" ? "active" : ""}
+              role="tab"
+              type="button"
+              onClick={() => setMobileReviewPane("transcript")}
+            >
+              原文
+            </button>
+            <button
+              aria-selected={mobileReviewPane === "questions"}
+              className={mobileReviewPane === "questions" ? "active" : ""}
+              role="tab"
+              type="button"
+              onClick={() => setMobileReviewPane("questions")}
+            >
+              题目
+            </button>
+          </div>
+        ) : null}
+        {submitted ? (
+          <aside
+            className={`practice-audio-study-panel ${
+              mobileReviewPane === "transcript" ? "mobile-pane-active" : "mobile-pane-hidden"
+            }`}
+          >
             <section
               className="practice-listening-card"
               onPointerUp={handleQuestionSelection}
@@ -3754,9 +5144,16 @@ export function ListeningPractice({
             >
               {section.fullAudioUrl ? (
                 <AudioPlayer
-                  onEnded={handleFullAudioEnded}
                   loopSegment={activeLoopSegment}
-                  onPlayingChange={setIsFullAudioPlaying}
+                  onPlayingChange={(isPlaying) => {
+                    setIsFullAudioPlaying(isPlaying);
+                    if (isPlaying) {
+                      clearSpeakingPracticeTimers();
+                      activeSentenceClipIdRef.current = null;
+                      setActiveSentenceClipId(null);
+                      setIsSentenceClipPlaying(false);
+                    }
+                  }}
                   onStopAtEnd={handleSentenceStopAtEnd}
                   onTimeChange={(seconds) => setFullAudioPositionMs(Math.round(seconds * 1000))}
                   settings={audioSettings}
@@ -3836,8 +5233,27 @@ export function ListeningPractice({
           </aside>
         ) : null}
 
+        {submitted ? (
+          <button
+            aria-label="拖动调整原文和题目宽度"
+            aria-orientation="vertical"
+            aria-valuemax={70}
+            aria-valuemin={40}
+            aria-valuenow={Math.round(reviewLeftPercent)}
+            className="listening-review-split-handle"
+            onKeyDown={handleReviewSplitKeyDown}
+            onPointerDown={beginReviewSplitDrag}
+            role="separator"
+            type="button"
+          >
+            <span aria-hidden="true">⋮</span>
+          </button>
+        ) : null}
+
         <div
-          className="practice-main exam-question-surface"
+          className={`practice-main exam-question-surface ${
+            submitted && mobileReviewPane !== "questions" ? "mobile-pane-hidden" : "mobile-pane-active"
+          }`}
           ref={questionSurfaceRef}
           onPointerUp={handleQuestionSelection}
         >
@@ -3865,7 +5281,7 @@ export function ListeningPractice({
             </section>
           ) : null}
 
-          {mode === "mock" && !mockStarted ? (
+          {shouldShowListeningMockStartOverlay({ mode, mockStarted, submitted }) ? (
             <div className="mock-start-overlay">
               <div className="headphone-icon" aria-hidden="true">◖◗</div>
               <p>
@@ -3922,6 +5338,29 @@ export function ListeningPractice({
                 submitted={submitted}
                 testNo={section.testNo}
               />
+            ) : shouldUseRuntimePaperLayout ? (
+              <RuntimeListeningQuestionGroups
+                answerGroups={activeAnswerGroups}
+                answers={answers}
+                groups={questionPageGroups}
+                isQuestionCorrect={(question) => isListeningQuestionCorrect(
+                  {
+                    answerGroups: activeAnswerGroups,
+                    answers,
+                    bookCode: section.bookCode,
+                    questions: section.questions,
+                    sectionNo: section.sectionNo,
+                    testNo: section.testNo,
+                  },
+                  question,
+                )}
+                onAnswerChange={updateAnswer}
+                questionImageRefs={runtimeGroupMetadata.questionImageRefs}
+                questionImageUrls={questionImageUrls}
+                questions={section.questions}
+                sectionNo={section.sectionNo}
+                submitted={submitted}
+              />
             ) : (
               section.questions.map((question) => {
                 const userAnswer = answers[question.id] ?? "";
@@ -3933,17 +5372,24 @@ export function ListeningPractice({
 
                 return (
                   <article
-                    className={`question-card ${submitted ? (isCorrect ? "correct" : "wrong") : ""}`}
+                    className={`question-card ${shouldRenderChoice ? "listening-choice-question-card" : ""} ${submitted ? (isCorrect ? "correct" : "wrong") : ""}`}
                     id={`question-${question.questionNo}`}
                     key={question.id}
                   >
-                    <span className="question-number">Q{question.questionNo}</span>
-                    <span className="question-prompt">
-                      {(shouldRenderChoice ? choicePrompt.stem : question.promptText) ||
-                        "后台还没有录入题干文本。"}
-                    </span>
+                    {shouldRenderChoice ? null : (
+                      <span className="question-number">Q{question.questionNo}</span>
+                    )}
                     {shouldRenderChoice ? (
-                      <div className="choice-options">
+                      <p className="question-prompt listening-choice-question-prompt">
+                        <strong>{question.questionNo}</strong> {choicePrompt.stem}
+                      </p>
+                    ) : (
+                      <span className="question-prompt">
+                        {question.promptText || "后台还没有录入题干文本。"}
+                      </span>
+                    )}
+                    {shouldRenderChoice ? (
+                      <div className="choice-options paper-letter-choice-options">
                         {choicePrompt.options.map((option) => {
                           const isSelected = userAnswer === option.letter;
                           const isCorrectOption =
@@ -4006,12 +5452,11 @@ export function ListeningPractice({
             )}
 
             <div className="submit-row">
-              <button
-                className="button primary"
-                type="submit"
-              >
-                提交
-              </button>
+              {!submitted ? (
+                <button className="button primary" type="submit">
+                  提交
+                </button>
+              ) : null}
               {result ? (
                 <strong className="score-pill">
                   {result.correctCount}/{result.total} 正确
@@ -4115,12 +5560,29 @@ export function ListeningPractice({
             <p className="muted">还没有逐句原文。导入 transcript_sentences 后会显示英文、中文和单句音频。</p>
           ) : (
             <div className="sentence-list">
-              {section.transcriptSentences.map((sentence) => (
-                <article
-                  className="sentence-card"
-                  id={`transcript-sentence-${sentence.sentenceNo}`}
-                  key={sentence.id}
-                >
+              {section.transcriptSentences.map((sentence) => {
+                const isActiveSentenceClip = activeSentenceClipId === sentence.id;
+                const boundaryDurationSeconds =
+                  sentence.startMs != null && sentence.endMs != null
+                    ? Math.max((sentence.endMs - sentence.startMs) / 1_000, 0.1)
+                    : 0.1;
+                const activeWordIndex =
+                  isActiveSentenceClip && isSentenceClipPlaying
+                    ? getActiveWordIndex(
+                        sentence.englishText,
+                        activeSentenceClipPosition,
+                        sentenceDurationsRef.current[sentence.id] ?? boundaryDurationSeconds,
+                      )
+                    : null;
+
+                return (
+                  <article
+                    className={`sentence-card bbc-listening-sentence-card ${
+                      isActiveSentenceClip ? "active" : ""
+                    }`}
+                    id={`transcript-sentence-${sentence.sentenceNo}`}
+                    key={sentence.id}
+                  >
                   <div className="sentence-meta">
                     <div className="sentence-meta-copy">
                       <span>#{sentence.sentenceNo}</span>
@@ -4148,21 +5610,64 @@ export function ListeningPractice({
                       />
                     </div>
                   </div>
-                  <div className="sentence-copy">{renderTranscriptSentenceContent(sentence)}</div>
+                  <div className="sentence-copy bbc-listening-sentence-copy">
+                    <BbcSentencePractice
+                      activeWordIndex={activeWordIndex}
+                      isAudioPlaying={isActiveSentenceClip && isSentenceClipPlaying}
+                      sentence={{
+                        chinese: sentence.chineseText,
+                        english: sentence.englishText,
+                        sentenceNo: sentence.sentenceNo,
+                      }}
+                      settings={audioSettings}
+                    />
+                  </div>
+                  {speakingTraining?.sentenceId === sentence.id ? (
+                    <div aria-live="polite" className="bbc-speaking-training-status practicing">
+                      <span>{SPEAKING_PHASE_LABELS[speakingTraining.mode]}</span>
+                      <strong>{speakingTraining.remainingSeconds} 秒</strong>
+                      <small>
+                        后
+                        {audioSettings.playMode === "sentence-loop"
+                          ? "重播本句"
+                          : sentence.sentenceNo === section.transcriptSentences.at(-1)?.sentenceNo
+                            ? "结束本轮训练"
+                            : "播放下一句"}
+                      </small>
+                    </div>
+                  ) : isActiveSentenceClip &&
+                    isSentenceClipPlaying &&
+                    audioSettings.speakingMode !== "none" ? (
+                    <div className="bbc-speaking-training-status playing">
+                      <span>{SPEAKING_MODE_LABELS[audioSettings.speakingMode]}</span>
+                      <strong>正在播放</strong>
+                    </div>
+                  ) : null}
                   {sentence.audioUrl ? (
                     <AudioPlayer
                       autoPlaySignal={sentenceAutoPlaySignals[sentence.id] ?? 0}
+                      deferSentenceLoop={audioSettings.speakingMode !== "none"}
+                      hasSelectedRate
                       html5={false}
+                      onDurationChange={(durationSeconds) => {
+                        sentenceDurationsRef.current[sentence.id] = durationSeconds;
+                      }}
                       onEnded={() => handleSentenceAudioEnded(sentence)}
+                      onPlayingChange={(isPlaying) =>
+                        handleReviewSentencePlayingChange(sentence, isPlaying)
+                      }
                       onSettingsChange={updateAudioSettings}
+                      onTimeChange={(positionSeconds) =>
+                        handleReviewSentenceTimeChange(sentence, positionSeconds)
+                      }
                       settings={audioSettings}
-                      showRate={false}
                       src={sentence.audioUrl}
                       title="单句音频"
                     />
                   ) : null}
-                </article>
-              ))}
+                  </article>
+                );
+              })}
             </div>
           )}
         </section>

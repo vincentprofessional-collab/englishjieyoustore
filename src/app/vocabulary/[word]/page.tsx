@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { VocabularyExampleAudioButton, VocabularyExampleFavoriteButton } from "@/components/vocabulary-example-actions";
+import { VocabularyExampleArticleLink } from "@/components/vocabulary-example-article-link";
 import { VocabularyAutoplay } from "@/components/vocabulary-autoplay";
 import { ContentShareButton } from "@/components/content-share-button";
 import { VocabularyFavoriteButton } from "@/components/vocabulary-favorite-button";
@@ -14,6 +15,7 @@ import {
 } from "@/lib/vocabulary/local-vocabulary";
 import { getVocabularyUsageExamples, type VocabularyUsageExample } from "@/lib/vocabulary/examples";
 import { getVocabularyPhraseMatches, type VocabularyPhraseMatch } from "@/lib/vocabulary/phrases";
+import { getBbcVocabularyDetail } from "@/lib/articles/bbc-vocabulary";
 
 export const dynamic = "force-dynamic";
 
@@ -263,11 +265,23 @@ function UsageExamplesSection({
               id={`vocabulary-example-${index + 1}`}
               key={example.id}
             >
-              <div className="vocabulary-usage-example-main">
-                <p>{example.englishText}</p>
-                {example.chineseText ? <span>{example.chineseText}</span> : null}
-                <small>{example.sourceTitle}</small>
-              </div>
+              {example.sourceType === "article" ? (
+                <VocabularyExampleArticleLink
+                  example={example}
+                >
+                  <div className="vocabulary-usage-example-main">
+                    <p>{example.englishText}</p>
+                    {example.chineseText ? <span>{example.chineseText}</span> : null}
+                    <small>{example.sourceTitle}</small>
+                  </div>
+                </VocabularyExampleArticleLink>
+              ) : (
+                <div className="vocabulary-usage-example-main">
+                  <p>{example.englishText}</p>
+                  {example.chineseText ? <span>{example.chineseText}</span> : null}
+                  <small>{example.sourceTitle}</small>
+                </div>
+              )}
               <div className="vocabulary-usage-example-actions">
                 {example.audioUrl ? <VocabularyExampleAudioButton audioUrl={example.audioUrl} /> : null}
                 <VocabularyExampleFavoriteButton example={example} />
@@ -292,21 +306,26 @@ export default async function VocabularyWordPage({
   params: Promise<{ word: string }>;
 }) {
   const { word } = await params;
-  const entry = await getExtendedVocabularyEntry(decodeURIComponent(word));
+  const decodedWord = decodeURIComponent(word);
+  const bbcVocabularyDetail = getBbcVocabularyDetail(decodedWord);
+  const entry = /\s/.test(decodedWord) && bbcVocabularyDetail
+    ? bbcVocabularyDetail.entry
+    : (await getExtendedVocabularyEntry(decodedWord)) ?? bbcVocabularyDetail?.entry;
 
   if (!entry) {
     notFound();
   }
 
-  const [usageExamples] = await Promise.all([
-    getVocabularyUsageExamples(
-      entry.word,
-      5,
-      entry.inflections.map((inflection) => inflection.value),
-    ),
-  ]);
+  const usageExamples = bbcVocabularyDetail?.examples.length
+    ? bbcVocabularyDetail.examples.slice(0, 5)
+    : await getVocabularyUsageExamples(
+        entry.word,
+        5,
+        entry.inflections.map((inflection) => inflection.value),
+      );
   const phrases = getVocabularyPhraseMatches(entry.word);
   const formationParts = getVocabularyFormationParts(entry);
+  const hasEtymologyContent = Boolean(entry.etymologyStory || formationParts.length);
 
   return (
     <section className="stack vocabulary-word-page">
@@ -349,8 +368,12 @@ export default async function VocabularyWordPage({
           <PhraseSection phrases={phrases} />
           <WordDetailTagSection items={entry.synonyms} title="同义词" />
           <WordDetailTagSection items={entry.antonyms} title="反义词" />
-          <EtymologyStorySection story={entry.etymologyStory} />
-          <WordFormationSection parts={formationParts} />
+          {hasEtymologyContent ? (
+            <>
+              <EtymologyStorySection story={entry.etymologyStory} />
+              <WordFormationSection parts={formationParts} />
+            </>
+          ) : null}
         </section>
       </div>
     </section>

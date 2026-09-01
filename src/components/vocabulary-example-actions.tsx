@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import type { VocabularyUsageExample } from "@/lib/vocabulary/examples";
+import { getVocabularyExampleHref } from "@/lib/vocabulary/example-links";
 
 type VocabularyExampleAudioButtonProps = {
   audioUrl: string;
@@ -76,12 +77,7 @@ export function VocabularyExampleFavoriteButton({ example }: VocabularyExampleFa
         bookCode: example.bookCode,
         chineseText: example.chineseText,
         englishText: example.englishText,
-        href:
-          example.sourceType === "listening"
-            ? `/listening/${example.sourceId}?mode=practice&review=1#transcript-sentence-${example.sentenceNo}`
-            : example.sourceType === "article"
-              ? `/articles/${example.sourceId}#bbc-sentence-${example.sentenceNo}`
-            : undefined,
+        href: getVocabularyExampleHref(example) ?? undefined,
         id: example.id,
         savedAt: new Date().toISOString(),
         sectionId: example.sourceId,

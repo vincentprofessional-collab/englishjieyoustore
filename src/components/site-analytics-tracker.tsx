@@ -2,11 +2,20 @@
 
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
-import type { User } from "@supabase/supabase-js";
-import { supabase } from "@/lib/supabase/client";
 
 const SESSION_ID_KEY = "ielts-platform.analytics.sessionId";
 const SESSION_STARTED_KEY = "ielts-platform.analytics.startedAt";
+const LOCAL_STUDY_SECONDS_KEY = "ielts-platform.analytics.studySeconds";
+const LOCAL_SESSION_REPORTED_KEY = "ielts-platform.analytics.reportedSeconds";
+
+function recordLocalStudySeconds(durationSeconds: number) {
+  const previousDuration = Number(window.sessionStorage.getItem(LOCAL_SESSION_REPORTED_KEY) ?? "0");
+  const delta = Math.max(0, durationSeconds - previousDuration);
+  if (!delta) return;
+  const total = Number(window.localStorage.getItem(LOCAL_STUDY_SECONDS_KEY) ?? "0");
+  window.localStorage.setItem(LOCAL_STUDY_SECONDS_KEY, String(total + delta));
+  window.sessionStorage.setItem(LOCAL_SESSION_REPORTED_KEY, String(durationSeconds));
+}
 
 function getSessionId() {
   const existingId = window.sessionStorage.getItem(SESSION_ID_KEY);
@@ -46,9 +55,11 @@ function shouldSkipAnalyticsPath(path: string) {
 }
 
 async function updateSessionActivity(path: string) {
+  const { supabase } = await import("@/lib/supabase/client");
   const sessionId = getSessionId();
   const startedAt = getStartedAt();
   const durationSeconds = getDurationSeconds(startedAt);
+  recordLocalStudySeconds(durationSeconds);
   const {
     data: { session },
   } = await supabase.auth.getSession();
@@ -70,7 +81,9 @@ async function updateSessionActivity(path: string) {
         startedAt,
       }),
       headers,
+      keepalive: true,
       method: "POST",
+      signal: AbortSignal.timeout(5_000),
     });
   } catch {
     // Analytics should never block learning pages.
@@ -81,6 +94,7 @@ async function recordActivity(
   eventType: "page_view" | "login" | "logout",
   path: string,
 ) {
+  const { supabase } = await import("@/lib/supabase/client");
   const sessionId = getSessionId();
   const startedAt = getStartedAt();
   const durationSeconds = getDurationSeconds(startedAt);
@@ -107,7 +121,9 @@ async function recordActivity(
         startedAt,
       }),
       headers,
+      keepalive: true,
       method: "POST",
+      signal: AbortSignal.timeout(5_000),
     });
   } catch {
     // Analytics should never block learning pages.
@@ -117,11 +133,8 @@ async function recordActivity(
 export function SiteAnalyticsTracker() {
   const pathname = usePathname();
   const lastTrackedPathRef = useRef("");
-  const currentUserRef = useRef<User | null>(null);
 
   useEffect(() => {
-    let isMounted = true;
-
     async function trackPageView() {
       const path = `${pathname}${window.location.search}`;
 
@@ -134,23 +147,17 @@ export function SiteAnalyticsTracker() {
       }
 
       lastTrackedPathRef.current = path;
-
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-
-      if (!isMounted) {
-        return;
-      }
-
-      currentUserRef.current = user;
       await recordActivity("page_view", path);
     }
 
-    void trackPageView();
+    const startTracking = () => {
+      void trackPageView();
+    };
+
+    const trackingTimer = window.setTimeout(startTracking, 3_000);
 
     return () => {
-      isMounted = false;
+      window.clearTimeout(trackingTimer);
     };
   }, [pathname]);
 
@@ -166,31 +173,11 @@ export function SiteAnalyticsTracker() {
     };
     const intervalId = window.setInterval(updateCurrentSession, 60_000);
 
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((event, session) => {
-      currentUserRef.current = session?.user ?? null;
-      const path = `${window.location.pathname}${window.location.search}`;
-
-      if (shouldSkipAnalyticsPath(path)) {
-        return;
-      }
-
-      if (event === "SIGNED_IN") {
-        void recordActivity("login", path);
-      }
-
-      if (event === "SIGNED_OUT") {
-        void recordActivity("logout", path);
-      }
-    });
-
     document.addEventListener("visibilitychange", updateCurrentSession);
 
     return () => {
       window.clearInterval(intervalId);
       document.removeEventListener("visibilitychange", updateCurrentSession);
-      subscription.unsubscribe();
     };
   }, []);
 

@@ -27,6 +27,7 @@ import {
   STUDY_SELECTION_ACTION_TIMEOUT_MS,
   type StudySelectionActionPosition,
 } from "@/lib/study-selection";
+import { clearPersistedInlineHighlights, inlineHighlightKey, persistInlineHighlight, restoreInlineHighlights } from "@/lib/inline-highlights";
 
 type AnswerMap = Record<number, string[]>;
 type FillMap = Record<number, string>;
@@ -1053,6 +1054,11 @@ export function ReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: 
   const isResizingRef = useRef(false);
   const noticeTimerRef = useRef<number | null>(null);
   const selectionHideTimerRef = useRef<number | null>(null);
+  const highlightStorageKey = inlineHighlightKey(`reading:${mode}:${test.id}`);
+
+  useEffect(() => {
+    if (pageRef.current) restoreInlineHighlights(pageRef.current, highlightStorageKey);
+  }, [highlightStorageKey]);
 
   const allChoiceQuestions = useMemo(
     () => parts.flatMap((part) =>
@@ -1478,8 +1484,10 @@ export function ReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: 
     if (kind === "highlight") {
       const selectedRange = selectedRangeRef.current;
       if (selectedRange && !selectedRange.collapsed) {
+        const root = pageRef.current;
         const marker = document.createElement("mark");
         marker.className = "inline-user-highlight";
+        if (root) marker.dataset.highlightId = persistInlineHighlight(root, selectedRange, highlightStorageKey);
 
         try {
           selectedRange.surroundContents(marker);
@@ -1529,6 +1537,7 @@ export function ReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: 
       parent.removeChild(highlight);
       parent.normalize();
     });
+    if (pageRef.current) clearPersistedInlineHighlights(pageRef.current, highlightStorageKey);
   }
 
   function beginNotesDrag(event: ReactMouseEvent<HTMLElement>) {

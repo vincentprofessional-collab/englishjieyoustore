@@ -15,6 +15,10 @@ import { cleanPartOfSpeech, cleanVocabularyDefinition } from "@/lib/vocabulary/d
 
 type VocabularyHint = {
   definitionCn: string;
+  definitionGroups?: Array<{
+    definitions: string[];
+    partOfSpeech: string;
+  }>;
   level?: string;
   partOfSpeech?: string;
   phonetic?: string;
@@ -176,6 +180,9 @@ export function GlobalStudyInteractions() {
   const hideWordTimerRef = useRef<number | null>(null);
   const hintCacheRef = useRef(new Map<string, VocabularyHint>());
   const hoverWordTimerRef = useRef<number | null>(null);
+  const longPressPointRef = useRef<{ x: number; y: number } | null>(null);
+  const longPressTimerRef = useRef<number | null>(null);
+  const longPressTriggeredRef = useRef(false);
   const pendingWordRef = useRef("");
   const selectedRangeRef = useRef<Range | null>(null);
 
@@ -198,6 +205,14 @@ export function GlobalStudyInteractions() {
       }
     }
 
+    function clearLongPressTimer() {
+      if (longPressTimerRef.current != null) {
+        window.clearTimeout(longPressTimerRef.current);
+        longPressTimerRef.current = null;
+      }
+      longPressPointRef.current = null;
+    }
+
     function scheduleHideWord() {
       pendingWordRef.current = "";
       clearHoverTimer();
@@ -205,7 +220,7 @@ export function GlobalStudyInteractions() {
         hideWordTimerRef.current = window.setTimeout(() => {
           setWordTooltip(null);
           hideWordTimerRef.current = null;
-        }, 1500);
+        }, 1000);
       }
     }
 
@@ -286,16 +301,75 @@ export function GlobalStudyInteractions() {
       }, 1500);
     }
 
-    document.addEventListener("mousemove", handleMouseMove);
-    return () => {
-      document.removeEventListener("mousemove", handleMouseMove);
+    function handlePointerDown(event: PointerEvent) {
+      if (event.pointerType !== "touch" || selectionPopover || isInteractiveTarget(event.target)) {
+        return;
+      }
+
+      const wordAtPoint = getEnglishWordAtPoint(event.clientX, event.clientY);
+      if (!wordAtPoint) {
+        if (wordTooltip) scheduleHideWord();
+        return;
+      }
+
       clearHoverTimer();
       clearHideWordTimer();
+      clearLongPressTimer();
+      longPressTriggeredRef.current = false;
+      longPressPointRef.current = { x: event.clientX, y: event.clientY };
+      longPressTimerRef.current = window.setTimeout(() => {
+        longPressTriggeredRef.current = true;
+        void showHint(wordAtPoint.word, wordAtPoint.rect);
+        longPressTimerRef.current = null;
+      }, 650);
+    }
+
+    function handlePointerMove(event: PointerEvent) {
+      if (event.pointerType !== "touch" || !longPressPointRef.current) return;
+      const distance = Math.hypot(
+        event.clientX - longPressPointRef.current.x,
+        event.clientY - longPressPointRef.current.y,
+      );
+      if (distance > 12) clearLongPressTimer();
+    }
+
+    function handlePointerEnd(event: PointerEvent) {
+      if (event.pointerType !== "touch") return;
+      clearLongPressTimer();
+      if (longPressTriggeredRef.current) event.preventDefault();
+    }
+
+    function handleContextMenu(event: MouseEvent) {
+      if (longPressTriggeredRef.current) event.preventDefault();
+    }
+
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("pointerdown", handlePointerDown);
+    document.addEventListener("pointermove", handlePointerMove);
+    document.addEventListener("pointerup", handlePointerEnd);
+    document.addEventListener("pointercancel", handlePointerEnd);
+    document.addEventListener("contextmenu", handleContextMenu);
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("pointerdown", handlePointerDown);
+      document.removeEventListener("pointermove", handlePointerMove);
+      document.removeEventListener("pointerup", handlePointerEnd);
+      document.removeEventListener("pointercancel", handlePointerEnd);
+      document.removeEventListener("contextmenu", handleContextMenu);
+      clearHoverTimer();
+      clearHideWordTimer();
+      clearLongPressTimer();
     };
   }, [selectionPopover, wordTooltip]);
 
   useEffect(() => {
     function handlePointerUp(event: PointerEvent) {
+      if (longPressTriggeredRef.current) {
+        window.getSelection()?.removeAllRanges();
+        longPressTriggeredRef.current = false;
+        return;
+      }
+
       const selection = window.getSelection();
       const text = selection?.toString().trim() ?? "";
       if (!selection || selection.rangeCount === 0 || !hasStudySelectionText(text)) return;
@@ -435,7 +509,11 @@ export function GlobalStudyInteractions() {
             }
           }}
           onMouseLeave={() => {
-            hideWordTimerRef.current = window.setTimeout(() => setWordTooltip(null), 1500);
+            if (hideWordTimerRef.current != null) window.clearTimeout(hideWordTimerRef.current);
+            hideWordTimerRef.current = window.setTimeout(() => {
+              setWordTooltip(null);
+              hideWordTimerRef.current = null;
+            }, 1000);
           }}
         >
           <div className="word-tooltip-title-row">
@@ -461,6 +539,7 @@ export function GlobalStudyInteractions() {
           <VocabularyHoverPronunciation hint={wordTooltip.hint} word={wordTooltip.word} />
           <VocabularyHoverDefinitionLine
             definitionCn={wordTooltip.hint.definitionCn}
+            definitionGroups={wordTooltip.hint.definitionGroups}
             partOfSpeech={wordTooltip.hint.partOfSpeech}
           />
         </div>

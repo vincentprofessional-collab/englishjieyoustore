@@ -9,6 +9,27 @@ const AUTH_REDIRECT_URL = "https://www.englishjieyou.cn/login";
 const SESSION_ID_KEY = "ielts-platform.analytics.sessionId";
 const SESSION_STARTED_KEY = "ielts-platform.analytics.startedAt";
 
+function getSafeRedirectPath() {
+  const searchParams = new URLSearchParams(window.location.search);
+  const redirect = searchParams.get("redirect");
+
+  if (!redirect?.startsWith("/") || redirect.startsWith("//")) {
+    return "";
+  }
+
+  return redirect;
+}
+
+function getAuthRedirectUrl() {
+  const redirectPath = getSafeRedirectPath();
+
+  if (!redirectPath) {
+    return AUTH_REDIRECT_URL;
+  }
+
+  return `${window.location.origin}/login?redirect=${encodeURIComponent(redirectPath)}`;
+}
+
 function getSessionId() {
   const existingId = window.sessionStorage.getItem(SESSION_ID_KEY);
 
@@ -103,6 +124,13 @@ export default function LoginPage() {
       return;
     }
 
+    const redirectPath = getSafeRedirectPath();
+
+    if (redirectPath) {
+      window.location.assign(redirectPath);
+      return;
+    }
+
     setMessage("登录成功。");
     setIsLoading(false);
   }
@@ -127,7 +155,7 @@ export default function LoginPage() {
     const { data, error } = await supabase.auth.signUp({
       email: registerEmail.trim(),
       options: {
-        emailRedirectTo: AUTH_REDIRECT_URL,
+        emailRedirectTo: getAuthRedirectUrl(),
       },
       password: registerPassword,
     });
@@ -140,6 +168,15 @@ export default function LoginPage() {
 
     if (data.user) {
       await recordAuthEvent("registration");
+    }
+
+    if (data.session) {
+      const redirectPath = getSafeRedirectPath();
+
+      if (redirectPath) {
+        window.location.assign(redirectPath);
+        return;
+      }
     }
 
     setMessage(
@@ -166,7 +203,7 @@ export default function LoginPage() {
     const { error } = await supabase.auth.resend({
       email,
       options: {
-        emailRedirectTo: AUTH_REDIRECT_URL,
+        emailRedirectTo: getAuthRedirectUrl(),
       },
       type: "signup",
     });

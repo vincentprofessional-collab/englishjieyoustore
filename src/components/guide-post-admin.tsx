@@ -346,21 +346,43 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
       updated_at: now,
     };
 
-    const query = draft.id
-      ? supabase.from("managed_content_pages").update(payload).eq("id", draft.id)
-      : supabase.from("managed_content_pages").insert(payload);
-    const { data, error } = await query
-      .select("id,slug,title,summary,status,meta_json,published_at,created_at,updated_at")
-      .single();
+    let savedPostId = draft.id;
 
-    if (error || !data) {
-      setMessage(`保存失败：${error?.message ?? "未返回帖子数据"}`);
-      setIsSaving(false);
-      return;
+    if (draft.id) {
+      const { count, error } = await supabase
+        .from("managed_content_pages")
+        .update(payload, { count: "exact" })
+        .eq("id", draft.id);
+
+      if (error) {
+        setMessage(`保存失败：${error.message}`);
+        setIsSaving(false);
+        return;
+      }
+
+      if (count === 0) {
+        setMessage("保存失败：没有找到当前公告，请刷新后重试。");
+        setIsSaving(false);
+        return;
+      }
+    } else {
+      const { data, error } = await supabase
+        .from("managed_content_pages")
+        .insert(payload)
+        .select("id,slug,title,summary,status,meta_json,published_at,created_at,updated_at")
+        .maybeSingle();
+
+      if (error || !data) {
+        setMessage(`保存失败：${error?.message ?? "未返回帖子数据"}`);
+        setIsSaving(false);
+        return;
+      }
+
+      savedPostId = data.id;
     }
 
     setMessage(status === "published" ? "帖子已发布到公告栏。" : "草稿已保存。");
-    await loadPosts(data.id);
+    await loadPosts(savedPostId ?? undefined);
     setIsSaving(false);
   }
 

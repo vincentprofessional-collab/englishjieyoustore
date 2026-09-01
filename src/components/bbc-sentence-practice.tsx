@@ -55,30 +55,56 @@ function stableHash(value: string) {
   return hash;
 }
 
-function renderUnderlinedEnglish(sentence: BbcPracticeSentence) {
+function renderUnderlinedEnglish(
+  sentence: BbcPracticeSentence,
+  activeWordIndex: number | null = null,
+) {
   const terms = [...(sentence.underlinedTerms ?? [])]
     .filter(Boolean)
     .sort((left, right) => right.length - left.length);
-  if (terms.length === 0) {
-    return sentence.english;
-  }
-
-  const escapedTerms = terms.map((term) => {
-    const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    return `(?<![A-Za-z])${escaped}(?![A-Za-z])`;
-  });
-  const pattern = new RegExp(`(${escapedTerms.join("|")})`, "gi");
+  const pattern = terms.length
+    ? new RegExp(
+        `(${terms
+          .map((term) => {
+            const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+            return `(?<![A-Za-z])${escaped}(?![A-Za-z])`;
+          })
+          .join("|")})`,
+        "gi",
+      )
+    : null;
   const termSet = new Set(terms.map((term) => term.toLowerCase()));
+  let wordIndex = 0;
 
-  return sentence.english.split(pattern).map((part, index) =>
-    termSet.has(part.toLowerCase()) ? (
-      <span className="bbc-wave-term" key={`${sentence.sentenceNo}-wave-${index}`}>
-        {part}
+  return (pattern ? sentence.english.split(pattern) : [sentence.english]).map((part, partIndex) => {
+    const tokens = splitEnglishTokens(part).map((token, tokenIndex) => {
+      const currentWordIndex = isWordToken(token) ? wordIndex : null;
+      if (currentWordIndex != null) {
+        wordIndex += 1;
+      }
+
+      return (
+        <span
+          className={
+            currentWordIndex != null && currentWordIndex === activeWordIndex
+              ? "bbc-active-word"
+              : undefined
+          }
+          key={`${sentence.sentenceNo}-word-${partIndex}-${tokenIndex}`}
+        >
+          {token}
+        </span>
+      );
+    });
+
+    return termSet.has(part.toLowerCase()) ? (
+      <span className="bbc-wave-term" key={`${sentence.sentenceNo}-wave-${partIndex}`}>
+        {tokens}
       </span>
     ) : (
-      <span key={`${sentence.sentenceNo}-text-${index}`}>{part}</span>
-    ),
-  );
+      <span key={`${sentence.sentenceNo}-text-${partIndex}`}>{tokens}</span>
+    );
+  });
 }
 
 function renderUnderlinedChinese(sentence: BbcPracticeSentence) {
@@ -105,9 +131,13 @@ function renderUnderlinedChinese(sentence: BbcPracticeSentence) {
 }
 
 export function BbcSentencePractice({
+  activeWordIndex = null,
+  isAudioPlaying = false,
   sentence,
   settings,
 }: {
+  activeWordIndex?: number | null;
+  isAudioPlaying?: boolean;
   sentence: BbcPracticeSentence;
   settings: AudioPlayerSettings;
 }) {
@@ -388,6 +418,21 @@ export function BbcSentencePractice({
     );
   }
 
+  if (settings.speakingMode === "sight-translation") {
+    if (!isAudioPlaying) {
+      return renderTranslation("primary-translation bbc-sight-translation");
+    }
+
+    return (
+      <>
+        <p className="bbc-sentence-english">
+          {renderUnderlinedEnglish(sentence, activeWordIndex)}
+        </p>
+        {renderTranslation("primary-translation bbc-sight-translation")}
+      </>
+    );
+  }
+
   if (settings.dictationMode === "sentence-order") {
     return (
       <>
@@ -417,7 +462,9 @@ export function BbcSentencePractice({
   return (
     <>
       {settings.subtitleMode !== "chinese" ? (
-        <p className="bbc-sentence-english">{renderUnderlinedEnglish(sentence)}</p>
+        <p className="bbc-sentence-english">
+          {renderUnderlinedEnglish(sentence, activeWordIndex)}
+        </p>
       ) : null}
       {settings.subtitleMode !== "english" ? (
         <p className="translation bbc-sentence-chinese">{renderUnderlinedChinese(sentence)}</p>

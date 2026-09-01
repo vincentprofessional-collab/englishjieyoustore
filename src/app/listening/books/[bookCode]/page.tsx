@@ -13,6 +13,7 @@ export default async function ListeningBookPage({
   const { sections, error } = await getListeningSections();
   const bookSections = sections.filter((section) => section.bookCode === bookCode);
   const firstSection = bookSections[0];
+  const firstMockSection = bookSections.find((section) => section.questionCount > 0);
 
   if (error) {
     return (
@@ -37,21 +38,25 @@ export default async function ListeningBookPage({
         <div className="eyebrow">Listening Book</div>
         <h1>{firstSection.bookTitle}</h1>
         <p className="lead">
-          先选择练习或模考。练习和模考都会显示统一倒计时；模考模式会隐藏学习工具，并按考试流程开始。
+          {firstMockSection
+            ? "先选择练习或模考。练习和模考都会显示统一倒计时；模考模式会隐藏学习工具，并按考试流程开始。"
+            : "当前已导入音频和中英原文，暂未导入题目与模考内容。"}
         </p>
       </div>
 
       <div className="mode-choice-grid">
         <Link className="mode-choice-card practice" href={`/listening/${firstSection.id}?mode=practice`}>
           <span>Practice</span>
-          <strong>练习</strong>
-          <p>自己点击播放音频，不计时；提交后可看原文、中文和单句音频。</p>
+          <strong>{firstMockSection ? "练习" : "原文学习"}</strong>
+          <p>自己点击播放音频，可看原文、中文和单句音频。</p>
         </Link>
-        <Link className="mode-choice-card mock" href={`/listening/${firstSection.id}?mode=mock`}>
-          <span>Mock Test</span>
-          <strong>模考</strong>
-          <p>进入正式考试界面，点击 Play 后开始；后续会接 Part1-4 连播和自动提交。</p>
-        </Link>
+        {firstMockSection ? (
+          <Link className="mode-choice-card mock" href={`/listening/${firstMockSection.id}?mode=mock`}>
+            <span>Mock Test</span>
+            <strong>模考</strong>
+            <p>进入正式考试界面，点击 Play 后开始；后续会接 Part1-4 连播和自动提交。</p>
+          </Link>
+        ) : null}
       </div>
 
       <div className="section-title-row">
@@ -71,7 +76,7 @@ export default async function ListeningBookPage({
             <h2>Section {section.sectionNo}</h2>
             <p>{section.title}</p>
             <div className="card-meta">
-              <span>{section.questionCount} 题</span>
+              <span>{section.questionCount > 0 ? `${section.questionCount} 题` : "原文学习"}</span>
               <span>{section.fullAudioUrl ? "有完整音频" : "待上传音频"}</span>
             </div>
           </Link>

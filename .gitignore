@@ -1,4 +1,5 @@
 node_modules
+.venv-listening-align/
 .next
 out
 .env.local
@@ -18,4 +19,7 @@ public/audio/bbc/*
 !public/audio/bbc/2015/
 !public/audio/bbc/2015/**
 .vercel
+tmp/
+__pycache__/
+*.pyc
 .env*

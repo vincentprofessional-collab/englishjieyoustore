@@ -44,7 +44,9 @@ export default async function ListeningMockIndexPage() {
 
         <div className="listening-mock-book-grid">
           {CAMBRIDGE_BOOKS.map((book) => {
-            const bookSections = [...(sectionsByBook.get(book.code) ?? [])].sort(sortSections);
+            const bookSections = [...(sectionsByBook.get(book.code) ?? [])]
+              .filter((section) => section.questionCount > 0)
+              .sort(sortSections);
 
             return (
               <article

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 
 import { sortVocabularyAutocompleteItems } from "@/lib/vocabulary/autocomplete-ranking";
+import { getBbcVocabularyAutocompleteItems } from "@/lib/articles/bbc-vocabulary";
 import {
   getDatabaseVocabularyAutocompleteItems,
   getVocabularyAutocompleteItems,
@@ -41,6 +42,12 @@ export async function GET(request: Request) {
         ? item.definitionSearchText.includes(normalizedQuery)
         : item.normalizedWord.includes(normalizedQuery),
     );
+  const bbcPhraseSuggestions = getBbcVocabularyAutocompleteItems()
+    .filter((item) =>
+      isChineseQuery
+        ? item.definitionSearchText.includes(normalizedQuery)
+        : item.normalizedWord.includes(normalizedQuery),
+    );
   const databaseSuggestions = await getDatabaseVocabularyAutocompleteItems({
     isChineseQuery,
     limit: Math.max(limit * 2, 40),
@@ -48,7 +55,7 @@ export async function GET(request: Request) {
   });
   const suggestionMap = new Map<string, VocabularyAutocompleteItem>();
 
-  for (const item of [...localSuggestions, ...databaseSuggestions]) {
+  for (const item of [...localSuggestions, ...bbcPhraseSuggestions, ...databaseSuggestions]) {
     suggestionMap.set(item.normalizedWord, item);
   }
 

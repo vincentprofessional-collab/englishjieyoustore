@@ -10,10 +10,10 @@ export default async function ListeningSectionPage({
   searchParams,
 }: {
   params: Promise<{ sectionId: string }>;
-  searchParams: Promise<{ mode?: string; review?: string }>;
+  searchParams: Promise<{ attempt?: string; mode?: string; review?: string }>;
 }) {
   const { sectionId } = await params;
-  const { mode, review } = await searchParams;
+  const { attempt, mode, review } = await searchParams;
   const { section, error } = await getListeningSection(sectionId);
 
   if (error) {
@@ -30,21 +30,36 @@ export default async function ListeningSectionPage({
     notFound();
   }
 
-  const vocabularyHints = getVocabularyHintsForTexts(
-    [
-      ...section.transcriptSentences.map((sentence) => sentence.englishText),
-      ...section.questions.map((question) => question.promptText ?? ""),
-    ],
+  const siblingResults = await Promise.all(
+    section.partLinks.map((partLink) =>
+      partLink.id === section.id
+        ? Promise.resolve({ section, error: null })
+        : getListeningSection(partLink.id),
+    ),
   );
-  const normalizedMode = mode === "practice" ? "practice" : "mock";
-  const initialSubmitted = review === "1";
+  const testSections = siblingResults
+    .map((result) => result.section)
+    .filter((item): item is NonNullable<typeof item> => Boolean(item))
+    .sort((left, right) => left.sectionNo - right.sectionNo);
+  const vocabularyHints = getVocabularyHintsForTexts(
+    testSections.flatMap((testSection) => [
+      ...testSection.transcriptSentences.map((sentence) => sentence.englishText),
+      ...testSection.questions.map((question) => question.promptText ?? ""),
+    ]),
+  );
+  const isTranscriptOnlySection =
+    section.questions.length === 0 && section.transcriptSentences.length > 0;
+  const normalizedMode = mode === "practice" || isTranscriptOnlySection ? "practice" : "mock";
+  const initialSubmitted = !isTranscriptOnlySection && review === "1";
 
   return (
     <ListeningPractice
       key={`${section.id}:${normalizedMode}:${initialSubmitted ? "review" : "answer"}`}
+      initialAttemptId={attempt}
       initialSubmitted={initialSubmitted}
       initialMode={normalizedMode}
       section={section}
+      testSections={testSections}
       vocabularyHints={vocabularyHints}
     />
   );

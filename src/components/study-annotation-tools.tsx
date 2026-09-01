@@ -64,6 +64,88 @@ type StudyAnnotationToolsProps = {
 
 const FAVORITE_ANNOTATIONS_STORAGE_KEY = "ielts-platform.favoriteAnnotations";
 const FAVORITE_WORDS_STORAGE_KEY = "ielts-platform.favoriteWords";
+const INLINE_HIGHLIGHTS_STORAGE_PREFIX = "ielts-platform.inlineHighlights";
+
+type InlineHighlight = { end?: number; id: string; occurrence?: number; start?: number; text: string };
+
+function inlineHighlightsStorageKey(sourceId: string) {
+  return `${INLINE_HIGHLIGHTS_STORAGE_PREFIX}:${sourceId}`;
+}
+
+function textOffsetWithin(root: HTMLElement, target: Node, offset: number) {
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  let total = 0;
+  let node: Node | null;
+  while ((node = walker.nextNode())) {
+    if (node === target) return total + offset;
+    total += node.textContent?.length ?? 0;
+  }
+  return total;
+}
+
+function textPositionAt(root: HTMLElement, offset: number) {
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  let total = 0;
+  let node: Node | null;
+  while ((node = walker.nextNode())) {
+    const length = node.textContent?.length ?? 0;
+    if (offset <= total + length) return { node, offset: Math.max(0, offset - total) };
+    total += length;
+  }
+  return null;
+}
+
+function textOccurrenceAt(root: HTMLElement, text: string, offset: number) {
+  if (!text) return 0;
+  return root.textContent?.slice(0, offset).split(text).length - 1 || 0;
+}
+
+function textRangeForOccurrence(root: HTMLElement, text: string, occurrence: number) {
+  const fullText = root.textContent ?? "";
+  let startOffset = -1;
+  let searchFrom = 0;
+  for (let index = 0; index <= occurrence; index += 1) {
+    startOffset = fullText.indexOf(text, searchFrom);
+    if (startOffset < 0) return null;
+    searchFrom = startOffset + text.length;
+  }
+  const start = textPositionAt(root, startOffset);
+  const end = textPositionAt(root, startOffset + text.length);
+  if (!start || !end) return null;
+  const range = document.createRange();
+  range.setStart(start.node, start.offset);
+  range.setEnd(end.node, end.offset);
+  return range;
+}
+
+function wrapInlineHighlight(root: HTMLElement, item: InlineHighlight) {
+  const fullText = root.textContent ?? "";
+  const range = typeof item.occurrence === "number"
+    ? textRangeForOccurrence(root, item.text, item.occurrence)
+    : item.start !== undefined && item.end !== undefined && fullText.slice(item.start, item.end) === item.text
+      ? (() => {
+          const start = textPositionAt(root, item.start!);
+          const end = textPositionAt(root, item.end!);
+          if (!start || !end) return null;
+          const legacyRange = document.createRange();
+          legacyRange.setStart(start.node, start.offset);
+          legacyRange.setEnd(end.node, end.offset);
+          return legacyRange;
+        })()
+      : null;
+  if (!range) return;
+  if (range.collapsed) return;
+  const marker = document.createElement("mark");
+  marker.className = "inline-user-highlight";
+  marker.dataset.highlightId = item.id;
+  try {
+    range.surroundContents(marker);
+  } catch {
+    const contents = range.extractContents();
+    marker.appendChild(contents);
+    range.insertNode(marker);
+  }
+}
 
 function normalizeWord(value: string) {
   return value.toLowerCase().replace(/^[^a-z]+|[^a-z]+$/gi, "");
@@ -204,6 +286,19 @@ export function StudyAnnotationTools({
   const pendingHoverWordRef = useRef("");
   const selectedRangeRef = useRef<Range | null>(null);
   const selectionHideTimerRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    const surface = surfaceRef.current;
+    if (!surface) return;
+    let saved: InlineHighlight[] = [];
+    try {
+      const parsed = JSON.parse(window.localStorage.getItem(inlineHighlightsStorageKey(sourceId)) || "[]");
+      saved = Array.isArray(parsed) ? parsed.filter((item): item is InlineHighlight => item && typeof item.id === "string" && typeof item.text === "string" && (typeof item.occurrence === "number" || (typeof item.start === "number" && typeof item.end === "number"))) : [];
+    } catch {
+      saved = [];
+    }
+    saved.forEach((item) => wrapInlineHighlight(surface, item));
+  }, [sourceId, surfaceRef]);
 
   useEffect(() => {
     setFavoriteWordIds(
@@ -501,8 +596,13 @@ export function StudyAnnotationTools({
     if (kind === "highlight") {
       const selectedRange = selectedRangeRef.current;
       if (selectedRange && !selectedRange.collapsed) {
+        const surface = surfaceRef.current;
+        const text = selectedRange.toString();
         const marker = document.createElement("mark");
         marker.className = "inline-user-highlight";
+        const start = surface ? textOffsetWithin(surface, selectedRange.startContainer, selectedRange.startOffset) : 0;
+        const item = surface ? { end: textOffsetWithin(surface, selectedRange.endContainer, selectedRange.endOffset), id: `${Date.now()}-${Math.random().toString(36).slice(2)}`, occurrence: textOccurrenceAt(surface, text, start), start, text } : null;
+        if (item) marker.dataset.highlightId = item.id;
 
         try {
           selectedRange.surroundContents(marker);
@@ -510,6 +610,14 @@ export function StudyAnnotationTools({
           const selectedContents = selectedRange.extractContents();
           marker.appendChild(selectedContents);
           selectedRange.insertNode(marker);
+        }
+        if (surface && item) {
+          const highlights = readStorageList<InlineHighlight>(inlineHighlightsStorageKey(sourceId));
+          try {
+            window.localStorage.setItem(inlineHighlightsStorageKey(sourceId), JSON.stringify([...highlights, item]));
+          } catch {
+            // Highlight persistence is best-effort.
+          }
         }
       }
 
@@ -542,6 +650,11 @@ export function StudyAnnotationTools({
       parent.removeChild(highlight);
       parent.normalize();
     });
+    try {
+      window.localStorage.removeItem(inlineHighlightsStorageKey(sourceId));
+    } catch {
+      // Highlight persistence is best-effort.
+    }
   }
 
   function toggleFavoriteWord() {

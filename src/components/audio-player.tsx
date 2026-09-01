@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 
 export type AudioPlayMode = "sequential" | "sentence-loop";
 export type AudioSubtitleMode = "english" | "bilingual" | "chinese";
-export type AudioSpeakingMode = "read-aloud" | "shadowing" | "sight-translation";
+export type AudioSpeakingMode = "none" | "imitation" | "shadowing" | "sight-translation";
 export type AudioDictationMode =
   | "none"
   | "blank-dictation"
@@ -25,16 +25,18 @@ export const DEFAULT_AUDIO_PLAYER_SETTINGS: AudioPlayerSettings = {
   dictationMode: "none",
   playMode: "sequential",
   rate: 1,
-  speakingMode: "shadowing",
+  speakingMode: "none",
   subtitleMode: "chinese",
 };
 
 type AudioPlayerProps = {
   autoPlaySignal?: number;
   controls?: "full" | "hidden";
+  deferSentenceLoop?: boolean;
   hasSelectedRate?: boolean;
   html5?: boolean;
   loopSegment?: { endSeconds: number; startSeconds: number } | null;
+  onDurationChange?: (durationSeconds: number) => void;
   onEnded?: () => void;
   onPlayingChange?: (isPlaying: boolean) => void;
   onSettingsChange?: (nextSettings: Partial<AudioPlayerSettings>) => void;
@@ -60,10 +62,9 @@ function formatTime(seconds: number) {
 }
 
 const rateOptions = [
-  { label: "0.5", value: 0.5 },
+  { label: "0.75", value: 0.75 },
   { label: "正常", value: 1 },
-  { label: "1.5", value: 1.5 },
-  { label: "2.0", value: 2 },
+  { label: "1.25", value: 1.25 },
 ];
 
 const playModeOptions = [
@@ -84,10 +85,36 @@ const dictationModeOptions = [
   { label: "翻译训练", value: "translation-training" },
 ] satisfies { label: string; value: AudioDictationMode }[];
 
+const speakingModeOptions = [
+  { label: "模仿朗读", value: "imitation" },
+  { label: "视译训练", value: "sight-translation" },
+  { label: "影子练习", value: "shadowing" },
+] satisfies { label: string; value: Exclude<AudioSpeakingMode, "none"> }[];
+
 const activeAudioPlayers = new Set<Howl>();
 const pendingAudioPlaybackRequests = new WeakMap<Howl, number>();
 const audioPlayerStopHandlers = new WeakMap<Howl, () => void>();
 let latestAudioPlaybackRequestId = 0;
+
+type PitchPreservingAudioElement = HTMLMediaElement & {
+  mozPreservesPitch?: boolean;
+  webkitPreservesPitch?: boolean;
+};
+
+function enablePitchPreservation(sound: Howl) {
+  const sounds = (sound as Howl & { _sounds?: Array<{ _node?: unknown }> })._sounds ?? [];
+
+  sounds.forEach(({ _node }) => {
+    if (typeof HTMLMediaElement === "undefined" || !(_node instanceof HTMLMediaElement)) {
+      return;
+    }
+
+    const media = _node as PitchPreservingAudioElement;
+    media.preservesPitch = true;
+    media.mozPreservesPitch = true;
+    media.webkitPreservesPitch = true;
+  });
+}
 
 function stopOtherAudioPlayers(currentSound: Howl) {
   activeAudioPlayers.forEach((sound) => {
@@ -132,9 +159,11 @@ function currentLabel<T extends string | number>(options: { label: string; value
 export function AudioPlayer({
   autoPlaySignal = 0,
   controls = "full",
+  deferSentenceLoop = false,
   hasSelectedRate,
   html5 = true,
   loopSegment = null,
+  onDurationChange,
   onEnded,
   onPlayingChange,
   onSettingsChange,
@@ -149,11 +178,13 @@ export function AudioPlayer({
   title = "音频",
 }: AudioPlayerProps) {
   const soundRef = useRef<Howl | null>(null);
+  const onDurationChangeRef = useRef(onDurationChange);
   const onEndedRef = useRef(onEnded);
   const onPlayingChangeRef = useRef(onPlayingChange);
   const onStopAtEndRef = useRef(onStopAtEnd);
   const onTimeChangeRef = useRef(onTimeChange);
   const loopSegmentRef = useRef(loopSegment);
+  const deferSentenceLoopRef = useRef(deferSentenceLoop);
   const playModeRef = useRef<AudioPlayMode>(settings?.playMode ?? DEFAULT_AUDIO_PLAYER_SETTINGS.playMode);
   const stopAtSecondsRef = useRef(stopAtSeconds);
   const [isReady, setIsReady] = useState(false);
@@ -185,6 +216,10 @@ export function AudioPlayer({
   }
 
   useEffect(() => {
+    onDurationChangeRef.current = onDurationChange;
+  }, [onDurationChange]);
+
+  useEffect(() => {
     onEndedRef.current = onEnded;
   }, [onEnded]);
 
@@ -203,6 +238,10 @@ export function AudioPlayer({
   useEffect(() => {
     loopSegmentRef.current = loopSegment;
   }, [loopSegment]);
+
+  useEffect(() => {
+    deferSentenceLoopRef.current = deferSentenceLoop;
+  }, [deferSentenceLoop]);
 
   useEffect(() => {
     stopAtSecondsRef.current = stopAtSeconds;
@@ -236,9 +275,12 @@ export function AudioPlayer({
           return;
         }
 
+        enablePitchPreservation(sound);
         loadRetryCount = 0;
         setLoadError(null);
-        setDuration(sound.duration());
+        const loadedDuration = sound.duration();
+        setDuration(loadedDuration);
+        onDurationChangeRef.current?.(loadedDuration);
         setIsReady(true);
       },
       onloaderror: () => {
@@ -317,7 +359,11 @@ export function AudioPlayer({
           return;
         }
 
-        if (playModeRef.current === "sentence-loop" && !loopSegmentRef.current) {
+        if (
+          playModeRef.current === "sentence-loop" &&
+          !loopSegmentRef.current &&
+          !deferSentenceLoopRef.current
+        ) {
           pendingAudioPlaybackRequests.set(sound, latestAudioPlaybackRequestId);
           sound.seek(0);
           sound.play();
@@ -335,6 +381,7 @@ export function AudioPlayer({
     });
 
     soundRef.current = sound;
+    enablePitchPreservation(sound);
     activeAudioPlayers.add(sound);
     audioPlayerStopHandlers.set(sound, () => {
       if (isDisposed || soundRef.current !== sound) {
@@ -362,7 +409,13 @@ export function AudioPlayer({
   }, [html5, src]);
 
   useEffect(() => {
-    soundRef.current?.rate(playerSettings.rate);
+    const sound = soundRef.current;
+    if (!sound) {
+      return;
+    }
+
+    enablePitchPreservation(sound);
+    sound.rate(playerSettings.rate);
   }, [playerSettings.rate]);
 
   useEffect(() => {
@@ -573,13 +626,19 @@ export function AudioSettingsMenus({
     ...(variant === "full"
       ? [
           {
-            selectedLabel: "口语模式",
+            selectedLabel:
+              settings.speakingMode === "none"
+                ? "口语模式"
+                : currentLabel(speakingModeOptions, settings.speakingMode),
             selectedValue: settings.speakingMode,
-            options: [{ label: "待后续开发", value: settings.speakingMode }],
-            onSelect: () => {
-              if (settings.dictationMode !== "none") {
-                onChange(exitWritingMode());
-              }
+            options: speakingModeOptions,
+            onSelect: (value: string | number) => {
+              const speakingMode = String(value) as Exclude<AudioSpeakingMode, "none">;
+              onChange({
+                dictationMode: "none",
+                speakingMode,
+                subtitleMode: speakingMode === "sight-translation" ? "chinese" : "bilingual",
+              });
             },
           },
           {
@@ -587,7 +646,10 @@ export function AudioSettingsMenus({
             selectedValue: settings.dictationMode,
             options: dictationModeOptions,
             onSelect: (value: string | number) =>
-              onChange({ dictationMode: String(value) as AudioDictationMode }),
+              onChange({
+                dictationMode: String(value) as AudioDictationMode,
+                speakingMode: "none",
+              }),
           },
         ]
       : []),

@@ -35,3 +35,31 @@ export function ensureJuniorHighExamMenu<T extends SiteChromeNavNode>(
       : item,
   );
 }
+
+export function ensureSeniorHighExamMenu<T extends SiteChromeNavNode>(
+  items: T[],
+  exams: T,
+  seniorHigh: T,
+): T[] {
+  const existingExams = items.find((item) => item.id === exams.id);
+
+  if (!existingExams) {
+    return [
+      ...items,
+      {
+        ...exams,
+        children: ensureJuniorHighExamLink(exams.children, seniorHigh),
+      },
+    ];
+  }
+
+  return items.map((item) =>
+    item.id === exams.id
+      ? {
+          ...item,
+          label: exams.label,
+          children: ensureJuniorHighExamLink(item.children, seniorHigh),
+        }
+      : item,
+  );
+}

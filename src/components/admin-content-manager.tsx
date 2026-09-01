@@ -3,13 +3,25 @@
 import Link from "next/link";
 import { FormEvent, useEffect, useState } from "react";
 import { AdminAnalyticsPanel } from "@/components/admin-analytics-panel";
+import { AdminBbcArticleEditor } from "@/components/admin-bbc-article-editor";
 import { AdminHomeEditor } from "@/components/admin-home-editor";
+import { AdminEntitlementManager } from "@/components/admin-entitlement-manager";
 import { AdminSiteChromeEditor } from "@/components/admin-site-chrome-editor";
+import { AdminJuniorHighQuestionEditor } from "@/components/admin-junior-high-question-editor";
+import { AdminSeniorHighQuestionEditor } from "@/components/admin-senior-high-question-editor";
 import { GuidePostAdmin } from "@/components/guide-post-admin";
 import { supabase } from "@/lib/supabase/client";
 
 type AdminState = "checking" | "signed-out" | "forbidden" | "ready" | "error";
-type AdminView = "analytics" | "home" | "chrome" | "guide";
+type AdminView =
+  | "analytics"
+  | "access"
+  | "home"
+  | "chrome"
+  | "guide"
+  | "bbc-vocabulary"
+  | "junior-high-questions"
+  | "senior-high-questions";
 
 export function AdminContentManager() {
   const [activeView, setActiveView] = useState<AdminView>("analytics");
@@ -189,6 +201,13 @@ export function AdminContentManager() {
           数据后台
         </button>
         <button
+          className={activeView === "access" ? "active" : ""}
+          type="button"
+          onClick={() => setActiveView("access")}
+        >
+          项目开通
+        </button>
+        <button
           className={activeView === "home" ? "active" : ""}
           type="button"
           onClick={() => setActiveView("home")}
@@ -209,9 +228,32 @@ export function AdminContentManager() {
         >
           公告栏发帖
         </button>
+        <button
+          className={activeView === "bbc-vocabulary" ? "active" : ""}
+          type="button"
+          onClick={() => setActiveView("bbc-vocabulary")}
+        >
+          BBC词汇
+        </button>
+        <button
+          className={activeView === "junior-high-questions" ? "active" : ""}
+          type="button"
+          onClick={() => setActiveView("junior-high-questions")}
+        >
+          中考题目
+        </button>
+        <button
+          className={activeView === "senior-high-questions" ? "active" : ""}
+          type="button"
+          onClick={() => setActiveView("senior-high-questions")}
+        >
+          高考题目
+        </button>
       </div>
 
       {activeView === "analytics" ? <AdminAnalyticsPanel /> : null}
+
+      {activeView === "access" ? <AdminEntitlementManager /> : null}
 
       {activeView === "home" && adminUserId ? (
         <AdminHomeEditor adminUserId={adminUserId} />
@@ -223,6 +265,18 @@ export function AdminContentManager() {
 
       {activeView === "guide" && adminUserId ? (
         <GuidePostAdmin adminUserId={adminUserId} />
+      ) : null}
+
+      {activeView === "bbc-vocabulary" && adminUserId ? (
+        <AdminBbcArticleEditor adminUserId={adminUserId} />
+      ) : null}
+
+      {activeView === "junior-high-questions" && adminUserId ? (
+        <AdminJuniorHighQuestionEditor adminUserId={adminUserId} />
+      ) : null}
+
+      {activeView === "senior-high-questions" && adminUserId ? (
+        <AdminSeniorHighQuestionEditor adminUserId={adminUserId} />
       ) : null}
     </section>
   );

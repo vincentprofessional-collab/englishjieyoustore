@@ -7,7 +7,7 @@ import {
 import { speakingParts } from "@/lib/ielts/speaking";
 import { findSpeakingPartForItem } from "@/lib/ielts/speaking-navigation";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   description: "按 Part 1、Part 2、Part 3 和场景分类浏览 2020—2026 雅思口语真题。",

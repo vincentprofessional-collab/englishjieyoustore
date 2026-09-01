@@ -22,6 +22,7 @@ import shanghai2022 from "@/lib/junior-high/2022-shanghai-shanghai.json";
 import shandong2023 from "@/lib/junior-high/2023-shandong-shandong.json";
 import shaanxi2024 from "@/lib/junior-high/2024-shaanxi-shaanxi.json";
 import sichuanChengdu2024 from "@/lib/junior-high/2024-sichuan-chengdu-sichuan-chengdu.json";
+import sichuanChengdu2023 from "@/lib/junior-high/2023-sichuan-chengdu-sichuan-chengdu.json";
 import sichuanLiangshan2022 from "@/lib/junior-high/2022-sichuan-liangshan-sichuan-liangshan.json";
 import sichuanYibin2022 from "@/lib/junior-high/2022-sichuan-yibin-sichuan-yibin.json";
 import sichuanZiyang2022 from "@/lib/junior-high/2022-sichuan-ziyang-sichuan-ziyang.json";
@@ -60,6 +61,7 @@ export const JUNIOR_HIGH_PAPER_CATALOG: JuniorHighPaper[] = [
   shanghai2022,
   shaanxi2024,
   sichuanChengdu2024,
+  sichuanChengdu2023,
   sichuanLiangshan2022,
   sichuanYibin2022,
   sichuanZiyang2022,

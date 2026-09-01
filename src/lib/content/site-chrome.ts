@@ -1,5 +1,5 @@
 import { supabase } from "@/lib/supabase/client";
-import { ensureJuniorHighExamMenu } from "@/lib/content/site-chrome-nav";
+import { ensureJuniorHighExamMenu, ensureSeniorHighExamMenu } from "@/lib/content/site-chrome-nav";
 
 export const SITE_CHROME_SLUG = "site-chrome";
 export const SITE_CHROME_VERSION = 1;
@@ -255,6 +255,15 @@ export const DEFAULT_SITE_CHROME_CONFIG: SiteChromeConfig = {
             label: "中考英语",
             note: "",
           },
+          {
+            children: [],
+            dropdownAlign: "right",
+            enabled: true,
+            href: "/senior-high",
+            id: "senior-high-english",
+            label: "高考英语",
+            note: "",
+          },
         ],
         dropdownAlign: "right",
         enabled: true,
@@ -315,9 +324,9 @@ export const DEFAULT_SITE_CHROME_CONFIG: SiteChromeConfig = {
             children: [],
             dropdownAlign: "right",
             enabled: true,
-            href: "/me/favorites",
+            href: "/me/progress",
             id: "learning-records",
-            label: "学习记录",
+            label: "学习进度",
             note: "",
           },
           {
@@ -448,9 +457,15 @@ export function mergeSiteChromeConfig(value: unknown): SiteChromeConfig {
   const juniorHighFallback = fallback.nav.items
     .find((item) => item.id === "exams")
     ?.children.find((item) => item.id === "junior-high-english");
-  const navItems = examsFallback && juniorHighFallback
+  const seniorHighFallback = fallback.nav.items
+    .find((item) => item.id === "exams")
+    ?.children.find((item) => item.id === "senior-high-english");
+  const navWithJuniorHigh = examsFallback && juniorHighFallback
     ? ensureJuniorHighExamMenu(mergedNavItems, examsFallback, juniorHighFallback)
     : mergedNavItems;
+  const navItems = examsFallback && seniorHighFallback
+    ? ensureSeniorHighExamMenu(navWithJuniorHigh, examsFallback, seniorHighFallback)
+    : navWithJuniorHigh;
 
   return {
     brand: {
