@@ -1399,6 +1399,10 @@
 .senior-high-result { border: 1px solid #c9dfd4; border-radius: 12px; background: #edf6f1; color: var(--accent-dark); margin-bottom: 16px; padding: 14px 16px; }
 .senior-high-result strong { font-size: 22px; margin-right: 7px; }
 .senior-high-question-list { display: grid; gap: 16px; }
+.senior-high-passage-card { display: grid; gap: 14px; min-width: 0; border: 1px solid #cfded5; border-radius: 14px; background: #f7fbf8; padding: clamp(18px, 3vw, 28px); }
+.senior-high-passage-card > div { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px 14px; color: var(--accent-dark); }
+.senior-high-passage-card > div span { color: var(--muted); font-size: 13px; }
+.senior-high-passage-card p { margin: 0; color: #27362f; font-size: 16px; line-height: 1.9; white-space: pre-line; overflow-wrap: anywhere; }
 .senior-high-question-card { display: grid; gap: 13px; min-width: 0; border: 1px solid #e4dccd; border-radius: 14px; background: #fffdf7; padding: clamp(16px, 3vw, 24px); }
 .senior-high-question-meta { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px 14px; color: var(--accent-dark); font-weight: 800; }
 .senior-high-question-meta small { color: var(--muted); font-size: 12px; font-weight: 500; }

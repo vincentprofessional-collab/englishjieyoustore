@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { Fragment, useEffect, useMemo, useState } from "react";
 import type { ReactNode } from "react";
 import { SENIOR_HIGH_CATALOG_URL, seniorHighCategoryLabel } from "@/lib/senior-high/catalog";
 import { applySeniorHighCatalogOverrides, loadSeniorHighQuestionOverrides } from "@/lib/senior-high/question-overrides";
@@ -59,7 +59,7 @@ function practiceCompletionKey(group: PracticeSourceGroup) {
 }
 
 function practiceSourceKey(item: SeniorHighItem) {
-  return [item.category, item.source_relpath, item.source_section ?? "", item.title].join("|");
+  return [item.category, item.source_relpath, item.source_section ?? "", item.group_id ?? item.title].join("|");
 }
 
 function practiceSourceGroups(items: SeniorHighItem[], category: string): PracticeSourceGroup[] {
@@ -67,7 +67,7 @@ function practiceSourceGroups(items: SeniorHighItem[], category: string): Practi
   for (const item of items) {
     if (item.category !== category) continue;
     const key = practiceSourceKey(item);
-    const group = groups.get(key) ?? { key, title: item.title, items: [] };
+    const group = groups.get(key) ?? { key, title: item.group_title ? `${item.title} · ${item.group_title}` : item.title, items: [] };
     group.items.push(item);
     groups.set(key, group);
   }
@@ -197,7 +197,13 @@ export function SeniorHighDemo() {
           {questions.map((item, index) => {
             const value = answers[item.id] || "";
             const correct = submitted && item.category !== "writing" && isCorrect(item, value);
-            return <article className="senior-high-question-card" key={item.id}>
+            const showPassage = Boolean(item.passage) && (index === 0 || questions[index - 1].group_id !== item.group_id);
+            return <Fragment key={item.id}>
+              {showPassage ? <section className="senior-high-passage-card">
+                <div><strong>阅读材料</strong>{item.group_title ? <span>{item.group_title}</span> : null}</div>
+                <p>{item.passage}</p>
+              </section> : null}
+              <article className="senior-high-question-card">
               <div className="senior-high-question-meta">
                 <span>第 {index + 1} 题</span>
                 {item.source_question_number && item.source_question_number !== index + 1 ? <small>原卷题号 {item.source_question_number}</small> : null}
@@ -206,7 +212,8 @@ export function SeniorHighDemo() {
               <p className="senior-high-question-stem">{item.options.length ? item.stem : item.category === "writing" ? item.stem : <SeniorHighInlineStem item={item} onAnswer={(nextValue) => setAnswer(item.id, nextValue)} value={value} />}</p>
               {item.options.length ? <div className="senior-high-options">{item.options.map((option) => <button className={value === option.letter ? "selected" : ""} key={option.letter} onClick={() => setAnswer(item.id, option.letter)} type="button"><b>{option.letter}.</b><span>{option.text}</span></button>)}</div> : item.category === "writing" ? <textarea aria-label={`第 ${index + 1} 题答案`} className="senior-high-answer-input" onChange={(event) => setAnswer(item.id, event.target.value)} placeholder="请在这里完成写作…" rows={8} value={value} /> : null}
               {submitted ? <div className={`senior-high-feedback ${item.category === "writing" ? "manual" : correct ? "correct" : "incorrect"}`}><span>{item.category === "writing" ? "已提交，需人工评分" : correct ? "✓ 正确" : "✕ 未答对"}</span><strong>答案：{item.answer}</strong>{item.analysis ? <button onClick={() => setExpanded((current) => ({ ...current, [item.id]: !current[item.id] }))} type="button">{expanded[item.id] ? "收起解析" : "查看解析"}</button> : <small>暂无解析</small>}{expanded[item.id] && item.analysis ? <div className="senior-high-analysis"><p>{item.analysis}</p><small>来源：{sourceLabel(item)}</small></div> : null}</div> : null}
-            </article>;
+              </article>
+            </Fragment>;
           })}
         </div>
         <div className="senior-high-submit-row"><button className="senior-high-submit" onClick={submit} type="button">{submitted ? "重新提交" : "提交并查看答案"}</button></div>

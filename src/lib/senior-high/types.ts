@@ -14,6 +14,9 @@ export type SeniorHighItem = {
   display_number?: number;
   source_question_number?: number;
   stem: string;
+  passage?: string;
+  group_id?: string;
+  group_title?: string;
   options: SeniorHighOption[];
   answer: string;
   analysis: string;

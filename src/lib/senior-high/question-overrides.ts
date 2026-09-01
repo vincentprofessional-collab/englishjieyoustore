@@ -3,7 +3,7 @@ import { supabase } from "@/lib/supabase/client";
 
 export const SENIOR_HIGH_OVERRIDE_SLUG = "senior-high-question-overrides";
 
-export type SeniorHighQuestionPatch = Partial<Pick<SeniorHighItem, "stem" | "options" | "answer" | "analysis">>;
+export type SeniorHighQuestionPatch = Partial<Pick<SeniorHighItem, "stem" | "passage" | "group_title" | "options" | "answer" | "analysis">>;
 
 export type SeniorHighQuestionOverride = {
   deleted?: boolean;
