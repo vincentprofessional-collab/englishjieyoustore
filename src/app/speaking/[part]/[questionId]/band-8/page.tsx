@@ -7,8 +7,13 @@ import {
   getSpeakingScoreNotes,
   speakingModelAnswers,
 } from "@/data/ielts/speaking-model-answers";
-import { getSpeakingPart } from "@/lib/ielts/speaking";
 import { getPaidContentKey } from "@/lib/access-control";
+import { getSpeakingPart } from "@/lib/ielts/speaking";
+import {
+  getSpeakingContentSlug,
+  type SpeakingEditableContent,
+} from "@/lib/ielts/speaking-managed-content";
+import SpeakingModelAnswerContent from "../speaking-model-answer-content";
 import styles from "../speaking-model-answer.module.css";
 
 export const dynamic = "force-dynamic";
@@ -63,6 +68,27 @@ export default async function SpeakingBand8Page({ params }: SpeakingBand8PagePro
   const scoreNotes = getSpeakingScoreNotes(part.id);
   const band8Approach = modelAnswer.band8Approach ?? modelAnswer.approach;
   const band8Frames = modelAnswer.band8Frames ?? modelAnswer.frames;
+  const initialContent: SpeakingEditableContent = {
+    answer: modelAnswer.band8Answer,
+    answerHeading: "8 分范文",
+    answerTranslation: modelAnswer.band8AnswerTranslation ?? [],
+    approach: band8Approach,
+    audioUrl: "",
+    band: "band-8",
+    followUp: question.followUp,
+    frames: band8Frames,
+    heroLabel: "BAND 8 MODEL ANSWER",
+    partId: part.id,
+    partLabel: part.label,
+    question: question.question,
+    questionId: question.id,
+    questionTranslation: question.translation,
+    slug: getSpeakingContentSlug(part.id, question.id, "band-8"),
+    timing: part.timing,
+    vocabulary: modelAnswer.band8Vocabulary ?? modelAnswer.vocabulary,
+    year: question.year,
+  };
+
   return (
     <ProjectAccessGate
       contentKey={getPaidContentKey("speaking-question", `${part.id}:${questionId}`)}
@@ -77,99 +103,7 @@ export default async function SpeakingBand8Page({ params }: SpeakingBand8PagePro
           <span aria-hidden="true">/</span>
           <strong>8 分范文</strong>
         </nav>
-
-        <header className={styles.hero}>
-          <span>BAND 8 MODEL ANSWER</span>
-          <h1>{question.question}</h1>
-          <div className={styles.questionPrompt}>
-            <p>
-              <span>中文提示</span>
-              <strong>{question.translation}</strong>
-            </p>
-            <p>
-              <span>真实题目 / 常见追问</span>
-              <strong>{question.followUp}</strong>
-            </p>
-          </div>
-          <dl>
-            <div>
-              <dt>题型</dt>
-              <dd>{part.label}</dd>
-            </div>
-            <div>
-              <dt>建议时长</dt>
-              <dd>{part.timing}</dd>
-            </div>
-            <div>
-              <dt>题目来源</dt>
-              <dd>{question.year}</dd>
-            </div>
-          </dl>
-        </header>
-
-        <section className={styles.section}>
-          <h2>高分思路</h2>
-          <p>{band8Approach}</p>
-        </section>
-
-        <section className={styles.section}>
-          <h2>万能句型</h2>
-          <ul className={styles.frames}>
-            {band8Frames.map((frame) => (
-              <li key={frame}>{frame}</li>
-            ))}
-          </ul>
-        </section>
-
-        {modelAnswer.band8Vocabulary?.length ? (
-          <section className={styles.section}>
-            <h2>重点词汇和短语</h2>
-            <dl className={styles.vocabulary}>
-              {modelAnswer.band8Vocabulary.map((item) => (
-                <div key={item.phrase}>
-                  <dt>{item.phrase}</dt>
-                  <dd>
-                    <strong>{item.translation}</strong>
-                    <span>{item.note}</span>
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </section>
-        ) : null}
-
-        <section className={`${styles.section} ${styles.answerSection}`}>
-          <h2>8 分范文</h2>
-          <div className={styles.answer}>
-            {modelAnswer.band8Answer.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
-          </div>
-
-          {modelAnswer.band8AnswerTranslation?.length ? (
-            <div className={styles.translationBlock}>
-              <h3>中文翻译</h3>
-              <div className={styles.translation}>
-                {modelAnswer.band8AnswerTranslation.map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
-                ))}
-              </div>
-            </div>
-          ) : null}
-        </section>
-
-        <section className={styles.section}>
-          <h2>IELTS 评分对照</h2>
-          <div className={styles.scoreNotes}>
-            {scoreNotes.map((item) => (
-              <div key={item.code}>
-                <span>{item.code}</span>
-                <strong>{item.label}</strong>
-                <p>{item.note}</p>
-              </div>
-            ))}
-          </div>
-        </section>
+        <SpeakingModelAnswerContent initialContent={initialContent} scoreNotes={scoreNotes} />
       </article>
     </ProjectAccessGate>
   );
