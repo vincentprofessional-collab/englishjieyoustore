@@ -7,7 +7,6 @@ import type {
   SeniorHighBlock,
   SeniorHighOption,
   SeniorHighQuestion,
-  SeniorHighQuestionGroup,
   SeniorHighSet,
 } from "@/lib/senior-high/v2-types";
 import {
@@ -17,6 +16,7 @@ import {
   type SeniorHighGrade,
   type SeniorHighV2Answers,
 } from "@/lib/senior-high/v2-grading";
+import { focusNextSeniorHighInlineAnswer } from "@/lib/senior-high/inline-navigation";
 
 type RunnerProps = { kind: "paper" | "practice"; setId: string };
 type BlankBinding = { options: SeniorHighOption[]; question: SeniorHighQuestion };
@@ -73,12 +73,12 @@ function BlockRenderer({
     const { question } = binding;
     const number = displayNumber(question, kind);
     if (["inline_fill", "multi_blank", "table_fill"].includes(question.type)) {
-      return <span className="senior-high-v2-inline-control" id={question.id} key={run.blankId}><b>{number}</b><input aria-label={`第 ${number} 题答案`} autoComplete="off" className="senior-high-inline-answer" onChange={(event) => onAnswer(run.blankId, event.target.value)} spellCheck={false} value={answers[run.blankId] || ""} /></span>;
+      return <span className="senior-high-v2-inline-control" id={question.id} key={run.blankId}><b>{number}</b><input aria-label={`第 ${number} 题答案`} autoCapitalize="none" autoComplete="off" autoCorrect="off" className="senior-high-inline-answer" data-1p-ignore="true" data-form-type="other" data-lpignore="true" data-senior-high-inline-answer="true" name={`senior-high-${kind}-${run.blankId}`} onChange={(event) => onAnswer(run.blankId, event.target.value)} onKeyDown={(event) => { if (event.key !== "Enter" || event.nativeEvent.isComposing) return; event.preventDefault(); focusNextSeniorHighInlineAnswer(event.currentTarget); }} spellCheck={false} type="text" value={answers[run.blankId] || ""} /></span>;
     }
     if (question.type === "shared_option_matching") {
       return <span className="senior-high-v2-inline-control" id={question.id} key={run.blankId}><b>{number}</b><select aria-label={`第 ${number} 题选项`} onChange={(event) => onAnswer(question.id, event.target.value)} value={answers[question.id] || ""}><option value="">请选择</option>{binding.options.map((option) => <option key={option.id} value={option.id}>{option.id}</option>)}</select></span>;
     }
-    return <span className="senior-high-v2-choice-blank" id={question.id} key={run.blankId}><b>{number}</b><span>{answers[question.id] || "…"}</span></span>;
+    return <span className="senior-high-v2-choice-blank" id={question.id} key={run.blankId}><b>{number}</b><span>{answers[question.id] || ""}</span></span>;
   });
 
   return <>{blocks.map((block, index) => {
@@ -112,21 +112,17 @@ function Feedback({
   answers,
   assets,
   bindings,
-  expanded,
   grade,
   kind,
   onAnswer,
-  onToggle,
   question,
 }: {
   answers: SeniorHighV2Answers;
   assets: Map<string, SeniorHighAssetRef>;
   bindings: Map<string, BlankBinding>;
-  expanded: boolean;
   grade: SeniorHighGrade;
   kind: SeniorHighSet["kind"];
   onAnswer: (key: string, value: string) => void;
-  onToggle: () => void;
   question: SeniorHighQuestion;
 }) {
   const labels: Record<SeniorHighGrade, string> = {
@@ -143,9 +139,9 @@ function Feedback({
     <span>{labels[grade]}</span>
     {answer ? <strong>答案：{answer}</strong> : null}
     {hasReference ? <strong>参考答案／范文见下方</strong> : null}
-    {question.explanationBlocks.length > 0 ? <button onClick={onToggle} type="button">{expanded ? "收起解析" : "查看解析"}</button> : <small>{answer || hasReference ? "暂无解析" : ""}</small>}
+    {question.explanationBlocks.length === 0 && !hasReference ? <small>{answer ? "暂无解析" : ""}</small> : null}
     {hasReference ? <div className="senior-high-analysis"><BlockRenderer answers={answers} assets={assets} bindings={bindings} blocks={Array.isArray(question.answerSpec.referenceAnswer) ? question.answerSpec.referenceAnswer : [{ type: "paragraph", runs: [{ type: "text", text: question.answerSpec.referenceAnswer || "" }] }]} kind={kind} onAnswer={onAnswer} /></div> : null}
-    {expanded && question.explanationBlocks.length > 0 ? <div className="senior-high-analysis"><BlockRenderer answers={answers} assets={assets} bindings={bindings} blocks={question.explanationBlocks} kind={kind} onAnswer={onAnswer} /></div> : null}
+    {question.explanationBlocks.length > 0 ? <div className="senior-high-analysis"><BlockRenderer answers={answers} assets={assets} bindings={bindings} blocks={question.explanationBlocks} kind={kind} onAnswer={onAnswer} /></div> : null}
   </div>;
 }
 
@@ -153,28 +149,22 @@ function QuestionCard({
   answers,
   assets,
   bindings,
-  expanded,
-  group,
   kind,
   onAnswer,
-  onToggle,
   question,
   submitted,
 }: {
   answers: SeniorHighV2Answers;
   assets: Map<string, SeniorHighAssetRef>;
   bindings: Map<string, BlankBinding>;
-  expanded: boolean;
-  group: SeniorHighQuestionGroup;
   kind: SeniorHighSet["kind"];
   onAnswer: (key: string, value: string) => void;
-  onToggle: () => void;
   question: SeniorHighQuestion;
   submitted: boolean;
 }) {
   const inlineOnly = ["inline_fill", "multi_blank", "table_fill", "shared_option_matching"].includes(question.type) && question.promptBlocks.length === 0 && question.options.length === 0;
   const grade = gradeSeniorHighQuestion(question, answers);
-  if (inlineOnly) return submitted ? <div className="senior-high-v2-inline-feedback" key={question.id}><b>第 {displayNumber(question, kind)} 题</b><Feedback answers={answers} assets={assets} bindings={bindings} expanded={expanded} grade={grade} kind={kind} onAnswer={onAnswer} onToggle={onToggle} question={question} /></div> : null;
+  if (inlineOnly) return submitted ? <div className="senior-high-v2-inline-feedback" key={question.id}><b>第 {displayNumber(question, kind)} 题</b><Feedback answers={answers} assets={assets} bindings={bindings} grade={grade} kind={kind} onAnswer={onAnswer} question={question} /></div> : null;
   const value = answers[question.id] || "";
   const selected = new Set(value.split(",").filter(Boolean));
   const choose = (optionId: string) => {
@@ -189,15 +179,15 @@ function QuestionCard({
     {question.promptBlocks.length > 0 ? <div className="senior-high-v2-question-prompt"><BlockRenderer answers={answers} assets={assets} bindings={bindings} blocks={question.promptBlocks} kind={kind} onAnswer={onAnswer} /></div> : null}
     {question.options.length > 0 ? <div className="senior-high-options">{question.options.map((option) => <button aria-pressed={selected.has(option.id)} className={selected.has(option.id) ? "selected" : ""} key={option.id} onClick={() => choose(option.id)} type="button"><b>{option.label}.</b><span>{plainText(option.blocks)}</span></button>)}</div> : null}
     {textInput ? <><textarea aria-label={`第 ${displayNumber(question, kind)} 题答案`} className="senior-high-answer-input" onChange={(event) => onAnswer(question.id, event.target.value)} placeholder={question.type === "essay" ? "请在这里完成写作…" : question.type === "oral_response" ? "可在此记录口语回答要点（录音不会上传）…" : "请输入答案…"} rows={question.type === "essay" ? 12 : 5} value={value} />{question.type === "essay" ? <small className="senior-high-v2-word-count">当前 {value.trim() ? value.trim().split(/\s+/).length : 0} 词</small> : null}</> : null}
-    {submitted && question.type !== "instruction_only" ? <Feedback answers={answers} assets={assets} bindings={bindings} expanded={expanded} grade={grade} kind={kind} onAnswer={onAnswer} onToggle={onToggle} question={question} /> : null}
+    {submitted && question.type !== "instruction_only" ? <Feedback answers={answers} assets={assets} bindings={bindings} grade={grade} kind={kind} onAnswer={onAnswer} question={question} /> : null}
   </article>;
 }
 
 export function SeniorHighRunner({ kind, setId }: RunnerProps) {
   const [data, setData] = useState<SeniorHighSet | null>(null);
   const [answers, setAnswers] = useState<SeniorHighV2Answers>({});
-  const [expanded, setExpanded] = useState<Record<string, boolean>>({});
   const [submitted, setSubmitted] = useState(false);
+  const [submittedGroups, setSubmittedGroups] = useState<Record<string, boolean>>({});
   const [restored, setRestored] = useState(false);
   const [error, setError] = useState("");
   const storageKey = `senior-high:v2:2:${kind}:${setId}`;
@@ -211,10 +201,10 @@ export function SeniorHighRunner({ kind, setId }: RunnerProps) {
       .then((payload) => setData(payload))
       .catch(() => setError("这套资料暂时无法载入，请返回后重试。"));
     try {
-      const saved = JSON.parse(window.localStorage.getItem(storageKey) || "null") as { answers?: SeniorHighV2Answers; expanded?: Record<string, boolean>; submitted?: boolean } | null;
+      const saved = JSON.parse(window.localStorage.getItem(storageKey) || "null") as { answers?: SeniorHighV2Answers; submitted?: boolean; submittedGroups?: Record<string, boolean> } | null;
       setAnswers(saved?.answers || {});
-      setExpanded(saved?.expanded || {});
       setSubmitted(Boolean(saved?.submitted));
+      setSubmittedGroups(saved?.submittedGroups || {});
     } catch {
       setAnswers({});
     } finally {
@@ -223,10 +213,15 @@ export function SeniorHighRunner({ kind, setId }: RunnerProps) {
   }, [setId, storageKey]);
 
   useEffect(() => {
-    if (restored) window.localStorage.setItem(storageKey, JSON.stringify({ answers, expanded, submitted }));
-  }, [answers, expanded, restored, storageKey, submitted]);
+    if (restored) window.localStorage.setItem(storageKey, JSON.stringify({ answers, submitted, submittedGroups }));
+  }, [answers, restored, storageKey, submitted, submittedGroups]);
 
   const questions = useMemo(() => data?.sections.flatMap((section) => section.groups.flatMap((group) => group.questions)).filter((question) => question.type !== "instruction_only") || [], [data]);
+  const questionGroupKeys = useMemo(() => {
+    const keys = new Map<string, string>();
+    for (const section of data?.sections || []) for (const group of section.groups) for (const question of group.questions) keys.set(question.id, `${section.id}:${group.id}`);
+    return keys;
+  }, [data]);
   const assets = useMemo(() => new Map((data?.assetRefs || []).map((asset) => [asset.assetId, asset])), [data]);
   const answeredCount = questions.filter((question) => seniorHighQuestionAnswered(question, answers)).length;
   const grades = submitted ? questions.map((question) => gradeSeniorHighQuestion(question, answers)) : [];
@@ -236,9 +231,15 @@ export function SeniorHighRunner({ kind, setId }: RunnerProps) {
   const noneCount = grades.filter((grade) => grade === "none" || grade === "conflict").length;
   const unansweredCount = grades.filter((grade) => grade === "unanswered").length;
 
-  const onAnswer = (key: string, value: string) => {
+  const onAnswer = (key: string, value: string, groupKey?: string) => {
     setAnswers((current) => ({ ...current, [key]: value }));
     setSubmitted(false);
+    if (groupKey) setSubmittedGroups((current) => {
+      if (!current[groupKey]) return current;
+      const next = { ...current };
+      delete next[groupKey];
+      return next;
+    });
   };
 
   if (error) return <section className="senior-high-page"><div className="senior-high-alert">{error}</div></section>;
@@ -256,15 +257,25 @@ export function SeniorHighRunner({ kind, setId }: RunnerProps) {
       const bindings = new Map<string, BlankBinding>();
       for (const question of group.questions) for (const blank of question.blanks) bindings.set(blank.blankId, { options: group.sharedOptions, question });
       const inlineQuestions = group.questions.filter((question) => ["inline_fill", "multi_blank", "table_fill", "shared_option_matching"].includes(question.type) && question.promptBlocks.length === 0 && question.options.length === 0);
-      return <article className={`senior-high-v2-group ${section.layout}`} key={group.id}>
+      const standaloneQuestions = group.questions.filter((question) => !inlineQuestions.includes(question));
+      const groupKey = `${section.id}:${group.id}`;
+      const hasStimulusQuestions = group.stimulusBlocks.length > 0 && group.questions.length > 0;
+      const groupSubmitted = submitted || Boolean(submittedGroups[groupKey]);
+      const groupAnswered = group.questions.filter((question) => seniorHighQuestionAnswered(question, answers)).length;
+      const answerGroup = (key: string, value: string) => onAnswer(key, value, groupKey);
+      return <article className={`senior-high-v2-group ${section.layout}${hasStimulusQuestions ? " with-stimulus-questions" : ""}`} key={group.id}>
         {group.title ? <h3>{group.title}</h3> : null}
-        {group.instructions.length > 0 ? <BlockRenderer answers={answers} assets={assets} bindings={bindings} blocks={group.instructions} kind={data.kind} onAnswer={onAnswer} /> : null}
+        {group.instructions.length > 0 ? <BlockRenderer answers={answers} assets={assets} bindings={bindings} blocks={group.instructions} kind={data.kind} onAnswer={answerGroup} /> : null}
         <div className="senior-high-v2-group-body">
-          {group.stimulusBlocks.length > 0 ? <div className="senior-high-v2-stimulus"><BlockRenderer answers={answers} assets={assets} bindings={bindings} blocks={group.stimulusBlocks} kind={data.kind} onAnswer={onAnswer} />{group.sharedOptions.length > 0 ? <div className="senior-high-v2-shared-options"><strong>共用选项</strong>{group.sharedOptions.map((option) => <p key={option.id}><b>{option.label}.</b> {plainText(option.blocks)}</p>)}</div> : null}{submitted && inlineQuestions.length > 0 ? <div className="senior-high-v2-inline-results">{inlineQuestions.map((question) => <QuestionCard answers={answers} assets={assets} bindings={bindings} expanded={Boolean(expanded[question.id])} group={group} key={question.id} kind={data.kind} onAnswer={onAnswer} onToggle={() => setExpanded((current) => ({ ...current, [question.id]: !current[question.id] }))} question={question} submitted={submitted} />)}</div> : null}</div> : null}
-          <div className="senior-high-v2-question-column">{group.questions.filter((question) => !inlineQuestions.includes(question)).map((question) => <QuestionCard answers={answers} assets={assets} bindings={bindings} expanded={Boolean(expanded[question.id])} group={group} key={question.id} kind={data.kind} onAnswer={onAnswer} onToggle={() => setExpanded((current) => ({ ...current, [question.id]: !current[question.id] }))} question={question} submitted={submitted} />)}</div>
+          {group.stimulusBlocks.length > 0 ? <div className="senior-high-v2-stimulus"><BlockRenderer answers={answers} assets={assets} bindings={bindings} blocks={group.stimulusBlocks} kind={data.kind} onAnswer={answerGroup} />{group.sharedOptions.length > 0 ? <div className="senior-high-v2-shared-options"><strong>共用选项</strong>{group.sharedOptions.map((option) => <p key={option.id}><b>{option.label}.</b> {plainText(option.blocks)}</p>)}</div> : null}</div> : null}
+          <div className="senior-high-v2-question-column">
+            {standaloneQuestions.map((question) => <QuestionCard answers={answers} assets={assets} bindings={bindings} key={question.id} kind={data.kind} onAnswer={answerGroup} question={question} submitted={groupSubmitted} />)}
+            {hasStimulusQuestions ? <div className="senior-high-v2-group-submit"><span>{groupAnswered}/{group.questions.length} 已作答</span><button onClick={() => setSubmittedGroups((current) => ({ ...current, [groupKey]: true }))} type="button">{groupSubmitted ? "重新提交本篇" : "提交本篇"}</button></div> : null}
+            {groupSubmitted && inlineQuestions.length > 0 ? <div className="senior-high-v2-inline-results">{inlineQuestions.map((question) => <QuestionCard answers={answers} assets={assets} bindings={bindings} key={question.id} kind={data.kind} onAnswer={answerGroup} question={question} submitted />)}</div> : null}
+          </div>
         </div>
       </article>;
     })}</div></section>)}</div>
-    <footer className="senior-high-v2-submit-bar"><nav aria-label="题号导航">{questions.map((question) => { const grade = submitted ? gradeSeniorHighQuestion(question, answers) : null; return <button className={grade || (seniorHighQuestionAnswered(question, answers) ? "answered" : "")} key={question.id} onClick={() => document.getElementById(question.id)?.scrollIntoView({ behavior: "smooth", block: "center" })} type="button">{displayNumber(question, data.kind)}</button>; })}</nav><button className="senior-high-submit" onClick={() => setSubmitted(true)} type="button">{submitted ? "重新提交" : "提交并查看答案"}</button></footer>
+    <footer className="senior-high-v2-submit-bar"><nav aria-label="题号导航">{questions.map((question) => { const groupKey = questionGroupKeys.get(question.id); const grade = submitted || (groupKey && submittedGroups[groupKey]) ? gradeSeniorHighQuestion(question, answers) : null; return <button className={grade || (seniorHighQuestionAnswered(question, answers) ? "answered" : "")} key={question.id} onClick={() => document.getElementById(question.id)?.scrollIntoView({ behavior: "smooth", block: "center" })} type="button">{displayNumber(question, data.kind)}</button>; })}</nav><button className="senior-high-submit" onClick={() => setSubmitted(true)} type="button">{submitted ? "重新提交全部" : "提交全部答案"}</button></footer>
   </section>;
 }
