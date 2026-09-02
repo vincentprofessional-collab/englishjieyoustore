@@ -186,7 +186,6 @@ function QuestionCard({
 export function SeniorHighRunner({ kind, setId }: RunnerProps) {
   const [data, setData] = useState<SeniorHighSet | null>(null);
   const [answers, setAnswers] = useState<SeniorHighV2Answers>({});
-  const [submitted, setSubmitted] = useState(false);
   const [submittedGroups, setSubmittedGroups] = useState<Record<string, boolean>>({});
   const [restored, setRestored] = useState(false);
   const [error, setError] = useState("");
@@ -201,9 +200,8 @@ export function SeniorHighRunner({ kind, setId }: RunnerProps) {
       .then((payload) => setData(payload))
       .catch(() => setError("这套资料暂时无法载入，请返回后重试。"));
     try {
-      const saved = JSON.parse(window.localStorage.getItem(storageKey) || "null") as { answers?: SeniorHighV2Answers; submitted?: boolean; submittedGroups?: Record<string, boolean> } | null;
+      const saved = JSON.parse(window.localStorage.getItem(storageKey) || "null") as { answers?: SeniorHighV2Answers; submittedGroups?: Record<string, boolean> } | null;
       setAnswers(saved?.answers || {});
-      setSubmitted(Boolean(saved?.submitted));
       setSubmittedGroups(saved?.submittedGroups || {});
     } catch {
       setAnswers({});
@@ -213,8 +211,8 @@ export function SeniorHighRunner({ kind, setId }: RunnerProps) {
   }, [setId, storageKey]);
 
   useEffect(() => {
-    if (restored) window.localStorage.setItem(storageKey, JSON.stringify({ answers, submitted, submittedGroups }));
-  }, [answers, restored, storageKey, submitted, submittedGroups]);
+    if (restored) window.localStorage.setItem(storageKey, JSON.stringify({ answers, submittedGroups }));
+  }, [answers, restored, storageKey, submittedGroups]);
 
   const questions = useMemo(() => data?.sections.flatMap((section) => section.groups.flatMap((group) => group.questions)).filter((question) => question.type !== "instruction_only") || [], [data]);
   const questionGroupKeys = useMemo(() => {
@@ -224,16 +222,9 @@ export function SeniorHighRunner({ kind, setId }: RunnerProps) {
   }, [data]);
   const assets = useMemo(() => new Map((data?.assetRefs || []).map((asset) => [asset.assetId, asset])), [data]);
   const answeredCount = questions.filter((question) => seniorHighQuestionAnswered(question, answers)).length;
-  const grades = submitted ? questions.map((question) => gradeSeniorHighQuestion(question, answers)) : [];
-  const correctCount = grades.filter((grade) => grade === "correct").length;
-  const incorrectCount = grades.filter((grade) => grade === "incorrect").length;
-  const manualCount = grades.filter((grade) => grade === "manual").length;
-  const noneCount = grades.filter((grade) => grade === "none" || grade === "conflict").length;
-  const unansweredCount = grades.filter((grade) => grade === "unanswered").length;
 
   const onAnswer = (key: string, value: string, groupKey?: string) => {
     setAnswers((current) => ({ ...current, [key]: value }));
-    setSubmitted(false);
     if (groupKey) setSubmittedGroups((current) => {
       if (!current[groupKey]) return current;
       const next = { ...current };
@@ -241,6 +232,11 @@ export function SeniorHighRunner({ kind, setId }: RunnerProps) {
       return next;
     });
   };
+  const questionNavigation = (position: "top" | "bottom") => <nav aria-label={`题号导航（${position === "top" ? "顶部" : "底部"}）`} className={`senior-high-v2-question-nav ${position}`}>{questions.map((question) => {
+    const groupKey = questionGroupKeys.get(question.id);
+    const grade = groupKey && submittedGroups[groupKey] ? gradeSeniorHighQuestion(question, answers) : null;
+    return <button className={grade || (seniorHighQuestionAnswered(question, answers) ? "answered" : "")} key={question.id} onClick={() => document.getElementById(question.id)?.scrollIntoView({ behavior: "smooth", block: "center" })} type="button">{displayNumber(question, kind)}</button>;
+  })}</nav>;
 
   if (error) return <section className="senior-high-page"><div className="senior-high-alert">{error}</div></section>;
   if (!data) return <section className="senior-high-page"><div className="senior-high-loading">正在载入真实题目与作答结构…</div></section>;
@@ -251,8 +247,8 @@ export function SeniorHighRunner({ kind, setId }: RunnerProps) {
       <div><span>{data.kind === "paper" ? "历年真题" : "题型训练"} · {data.year} · {data.region}</span><h1>{data.title}</h1><p>{data.variant}{data.timeLimit ? ` · ${data.timeLimit} 分钟` : ""}{data.score ? ` · ${data.score} 分` : ""}</p></div>
       <div className="senior-high-v2-progress"><strong>{answeredCount}/{questions.length}</strong><span>已作答</span></div>
     </header>
+    {questionNavigation("top")}
     {data.instructions.length > 0 ? <div className="senior-high-v2-instructions"><BlockRenderer answers={answers} assets={assets} bindings={new Map()} blocks={data.instructions} kind={data.kind} onAnswer={onAnswer} /></div> : null}
-    {submitted ? <div className="senior-high-result"><strong>{correctCount}</strong> 正确 · <strong>{incorrectCount}</strong> 错误{unansweredCount ? ` · ${unansweredCount} 题未作答` : ""}{manualCount ? ` · ${manualCount} 题待人工评阅` : ""}{noneCount ? ` · ${noneCount} 题暂无标准答案` : ""}</div> : null}
     <div className="senior-high-v2-sections">{data.sections.map((section) => <section className="senior-high-v2-section" key={section.id}><header><h2>{section.title}</h2>{section.score ? <span>{section.score} 分</span> : null}</header>{section.instructions.length > 0 ? <BlockRenderer answers={answers} assets={assets} bindings={new Map()} blocks={section.instructions} kind={data.kind} onAnswer={onAnswer} /> : null}<div className="senior-high-v2-groups">{section.groups.map((group) => {
       const bindings = new Map<string, BlankBinding>();
       for (const question of group.questions) for (const blank of question.blanks) bindings.set(blank.blankId, { options: group.sharedOptions, question });
@@ -260,22 +256,26 @@ export function SeniorHighRunner({ kind, setId }: RunnerProps) {
       const standaloneQuestions = group.questions.filter((question) => !inlineQuestions.includes(question));
       const groupKey = `${section.id}:${group.id}`;
       const hasStimulusQuestions = group.stimulusBlocks.length > 0 && group.questions.length > 0;
-      const groupSubmitted = submitted || Boolean(submittedGroups[groupKey]);
+      const groupSubmitted = Boolean(submittedGroups[groupKey]);
       const groupAnswered = group.questions.filter((question) => seniorHighQuestionAnswered(question, answers)).length;
       const answerGroup = (key: string, value: string) => onAnswer(key, value, groupKey);
-      return <article className={`senior-high-v2-group ${section.layout}${hasStimulusQuestions ? " with-stimulus-questions" : ""}`} key={group.id}>
+      const showQuestionColumn = standaloneQuestions.length > 0 || groupSubmitted || group.stimulusBlocks.length === 0;
+      const groupLabel = group.stimulusBlocks.length > 0 ? "本篇" : "本组";
+      const groupSubmit = <div className="senior-high-v2-group-submit"><span>{groupAnswered}/{group.questions.length} 已作答</span><button onClick={() => setSubmittedGroups((current) => ({ ...current, [groupKey]: true }))} type="button">{groupSubmitted ? `重新提交${groupLabel}` : `提交${groupLabel}`}</button></div>;
+      return <article className={`senior-high-v2-group ${section.layout}${hasStimulusQuestions && showQuestionColumn ? " with-stimulus-questions" : ""}`} key={group.id}>
         {group.title ? <h3>{group.title}</h3> : null}
         {group.instructions.length > 0 ? <BlockRenderer answers={answers} assets={assets} bindings={bindings} blocks={group.instructions} kind={data.kind} onAnswer={answerGroup} /> : null}
         <div className="senior-high-v2-group-body">
-          {group.stimulusBlocks.length > 0 ? <div className="senior-high-v2-stimulus"><BlockRenderer answers={answers} assets={assets} bindings={bindings} blocks={group.stimulusBlocks} kind={data.kind} onAnswer={answerGroup} />{group.sharedOptions.length > 0 ? <div className="senior-high-v2-shared-options"><strong>共用选项</strong>{group.sharedOptions.map((option) => <p key={option.id}><b>{option.label}.</b> {plainText(option.blocks)}</p>)}</div> : null}</div> : null}
-          <div className="senior-high-v2-question-column">
+          {group.stimulusBlocks.length > 0 ? <div className="senior-high-v2-stimulus"><BlockRenderer answers={answers} assets={assets} bindings={bindings} blocks={group.stimulusBlocks} kind={data.kind} onAnswer={answerGroup} />{group.sharedOptions.length > 0 ? <div className="senior-high-v2-shared-options"><strong>共用选项</strong>{group.sharedOptions.map((option) => <p key={option.id}><b>{option.label}.</b> {plainText(option.blocks)}</p>)}</div> : null}{hasStimulusQuestions && standaloneQuestions.length === 0 && !groupSubmitted ? groupSubmit : null}</div> : null}
+          {showQuestionColumn ? <div className="senior-high-v2-question-column">
+            {groupSubmitted ? groupSubmit : null}
             {standaloneQuestions.map((question) => <QuestionCard answers={answers} assets={assets} bindings={bindings} key={question.id} kind={data.kind} onAnswer={answerGroup} question={question} submitted={groupSubmitted} />)}
-            {hasStimulusQuestions ? <div className="senior-high-v2-group-submit"><span>{groupAnswered}/{group.questions.length} 已作答</span><button onClick={() => setSubmittedGroups((current) => ({ ...current, [groupKey]: true }))} type="button">{groupSubmitted ? "重新提交本篇" : "提交本篇"}</button></div> : null}
+            {!groupSubmitted && (standaloneQuestions.length > 0 || group.stimulusBlocks.length === 0) ? groupSubmit : null}
             {groupSubmitted && inlineQuestions.length > 0 ? <div className="senior-high-v2-inline-results">{inlineQuestions.map((question) => <QuestionCard answers={answers} assets={assets} bindings={bindings} key={question.id} kind={data.kind} onAnswer={answerGroup} question={question} submitted />)}</div> : null}
-          </div>
+          </div> : null}
         </div>
       </article>;
     })}</div></section>)}</div>
-    <footer className="senior-high-v2-submit-bar"><nav aria-label="题号导航">{questions.map((question) => { const groupKey = questionGroupKeys.get(question.id); const grade = submitted || (groupKey && submittedGroups[groupKey]) ? gradeSeniorHighQuestion(question, answers) : null; return <button className={grade || (seniorHighQuestionAnswered(question, answers) ? "answered" : "")} key={question.id} onClick={() => document.getElementById(question.id)?.scrollIntoView({ behavior: "smooth", block: "center" })} type="button">{displayNumber(question, data.kind)}</button>; })}</nav><button className="senior-high-submit" onClick={() => setSubmitted(true)} type="button">{submitted ? "重新提交全部" : "提交全部答案"}</button></footer>
+    {questionNavigation("bottom")}
   </section>;
 }

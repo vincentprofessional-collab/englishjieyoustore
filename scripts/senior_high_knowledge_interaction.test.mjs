@@ -49,6 +49,20 @@ test("article groups use isolated submission and do not render green ellipsis pl
   assert.doesNotMatch(runnerSource, /answers\[question\.id\] \|\| "…"/);
   assert.match(runnerSource, /submittedGroups/);
   assert.match(runnerSource, /with-stimulus-questions/);
-  assert.match(runnerSource, /提交本篇/);
+  assert.match(runnerSource, /const groupLabel = group\.stimulusBlocks\.length > 0 \? "本篇" : "本组"/);
+  assert.match(runnerSource, /提交\$\{groupLabel\}/);
   assert.match(runnerSource, /groupSubmitted && inlineQuestions\.length > 0/);
+});
+
+test("question navigation stays in normal flow at the top and bottom", () => {
+  assert.doesNotMatch(runnerSource, /senior-high-v2-submit-bar|提交全部答案|重新提交全部/);
+  assert.match(runnerSource, /questionNavigation\("top"\)/);
+  assert.match(runnerSource, /questionNavigation\("bottom"\)/);
+  assert.match(runnerSource, /submittedGroups\[groupKey\]/);
+});
+
+test("inline article results stay hidden until that article is submitted", () => {
+  assert.match(runnerSource, /standaloneQuestions\.length > 0 \|\| groupSubmitted \|\| group\.stimulusBlocks\.length === 0/);
+  assert.match(runnerSource, /standaloneQuestions\.length === 0 && !groupSubmitted \? groupSubmit/);
+  assert.match(runnerSource, /showQuestionColumn \? <div className="senior-high-v2-question-column"/);
 });
