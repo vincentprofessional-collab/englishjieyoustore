@@ -2,6 +2,7 @@ import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 
 import { supabase } from "@/lib/supabase/client";
+import excelLeftmostRootAffix from "@/data/vocabulary/excel-leftmost-root-affix.json";
 import { sortVocabularyFamilyItems } from "@/lib/vocabulary/autocomplete-ranking";
 
 export type LocalVocabularyHint = {
@@ -151,6 +152,11 @@ type FreeDictionaryEntry = {
   word?: string;
 };
 
+type ExcelLeftmostRootAffixIndex = {
+  labels: Record<string, string>;
+  words: Record<string, string>;
+};
+
 export type VocabularySearchMatchType = "exact" | "prefix" | "fuzzy";
 
 export type VocabularySearchResult = {
@@ -207,6 +213,7 @@ const VOCABULARY_SOURCE_PATH =
   (existsSync(BUNDLED_VOCABULARY_SOURCE_PATH) ? BUNDLED_VOCABULARY_SOURCE_PATH : LOCAL_VOCABULARY_SOURCE_PATH);
 const ECDICT_SOURCE_PATH =
   process.env.ECDICT_SOURCE_PATH?.trim() || "/Users/shidianjin/Desktop/未命名文件夹/ecdict.csv";
+const EXCEL_LEFTMOST_ROOT_AFFIX_INDEX = excelLeftmostRootAffix as ExcelLeftmostRootAffixIndex;
 
 let cachedVocabularyMap: Map<string, LocalVocabularyEntry> | null = null;
 let cachedVocabularyEntries: LocalVocabularyEntry[] | null = null;
@@ -256,6 +263,18 @@ function normalizeDirectoryKey(value: string) {
     .replace(/['"`]/g, "")
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
+}
+
+function getExcelLeftmostRootAffixKey(word: string) {
+  return EXCEL_LEFTMOST_ROOT_AFFIX_INDEX.words[word] ?? "";
+}
+
+function getExcelLeftmostRootAffixLabel(key: string) {
+  return EXCEL_LEFTMOST_ROOT_AFFIX_INDEX.labels[key] ?? "";
+}
+
+function isExcelLeftmostRootAffixDirectory(key: string) {
+  return Boolean(getExcelLeftmostRootAffixLabel(key));
 }
 
 function normalizeDefinitionText(value: string) {
@@ -929,7 +948,7 @@ export function getVocabularyRootAffixDirectory() {
 
   function addItem(
     label: string,
-    kind: "词根" | "词缀",
+    kind: "词根" | "词缀" | "词根/词缀",
     href: string,
     entryKey: string,
   ) {
@@ -952,8 +971,8 @@ export function getVocabularyRootAffixDirectory() {
 
     current.entryKeys.add(entryKey);
     current.count = current.entryKeys.size;
-    current.hasRoot = current.hasRoot || kind === "词根";
-    current.hasAffix = current.hasAffix || kind === "词缀";
+    current.hasRoot = current.hasRoot || kind === "词根" || kind === "词根/词缀";
+    current.hasAffix = current.hasAffix || kind === "词缀" || kind === "词根/词缀";
     current.kind = current.hasRoot && current.hasAffix ? "词根/词缀" : current.hasRoot ? "词根" : "词缀";
 
     if (kind === "词根") {
@@ -964,12 +983,11 @@ export function getVocabularyRootAffixDirectory() {
   }
 
   for (const entry of loadVocabularyEntries()) {
-    for (const reference of entry.rootReferences) {
-      addItem(reference.root, "词根", `/vocabulary/roots/${reference.rootKey}`, entry.normalizedWord);
-    }
+    const labelKey = getExcelLeftmostRootAffixKey(entry.normalizedWord);
+    const label = getExcelLeftmostRootAffixLabel(labelKey);
 
-    for (const label of getFormationLabels(entry.formation)) {
-      addItem(label, "词缀", `/vocabulary/etymologies/${normalizeDirectoryKey(label)}`, entry.normalizedWord);
+    if (labelKey && label) {
+      addItem(label, "词根/词缀", `/vocabulary/etymologies/${labelKey}`, entry.normalizedWord);
     }
   }
 
@@ -1696,20 +1714,27 @@ export function getVocabularyEtymologyDirectory(sourceKey: string): VocabularyEt
   }
 
   const entries = loadVocabularyEntries();
-  const directlyMatchedEntries = entries
-    .filter((entry) =>
-      entry.etymologyReferences.some((reference) => reference.etymologySourceKey === normalizedSourceKey),
-    )
-    .sort(
-      (a, b) =>
-        getEntryEtymologySortRow(a, normalizedSourceKey) -
-        getEntryEtymologySortRow(b, normalizedSourceKey),
-    );
+  const isExcelFirstColumnDirectory = isExcelLeftmostRootAffixDirectory(normalizedSourceKey);
+  const directlyMatchedEntries = isExcelFirstColumnDirectory
+    ? []
+    : entries
+        .filter((entry) =>
+          entry.etymologyReferences.some((reference) => reference.etymologySourceKey === normalizedSourceKey),
+        )
+        .sort(
+          (a, b) =>
+            getEntryEtymologySortRow(a, normalizedSourceKey) -
+            getEntryEtymologySortRow(b, normalizedSourceKey),
+        );
   const firstReference = directlyMatchedEntries
     .flatMap((entry) => entry.etymologyReferences)
     .find((reference) => reference.etymologySourceKey === normalizedSourceKey);
-  const isFormationDirectory = !firstReference;
-  const matchedEntries = (isFormationDirectory
+  const isFormationDirectory = isExcelFirstColumnDirectory || !firstReference;
+  const matchedEntries = (isExcelFirstColumnDirectory
+    ? entries
+        .filter((entry) => getExcelLeftmostRootAffixKey(entry.normalizedWord) === normalizedSourceKey)
+        .sort((a, b) => a.sourceRowNumber - b.sourceRowNumber)
+    : isFormationDirectory
     ? entries
         .filter((entry) =>
           [...entry.etymologyReferences, ...entry.rootReferences].some((reference) =>
@@ -1723,7 +1748,9 @@ export function getVocabularyEtymologyDirectory(sourceKey: string): VocabularyEt
         )
     : directlyMatchedEntries
   );
-  const formationLabel = isFormationDirectory
+  const formationLabel = isExcelFirstColumnDirectory
+    ? getExcelLeftmostRootAffixLabel(normalizedSourceKey)
+    : isFormationDirectory
     ? matchedEntries
         .flatMap((entry) => [...entry.etymologyReferences, ...entry.rootReferences])
         .map((reference) => getFormationLabelByKey(reference.formation, normalizedSourceKey))
@@ -1739,11 +1766,13 @@ export function getVocabularyEtymologyDirectory(sourceKey: string): VocabularyEt
   const groupWordKeys = new Map<string, Set<string>>();
 
   for (const entry of matchedEntries) {
-    const matchingRootReferences = entry.rootReferences.filter((reference) =>
-      isFormationDirectory
-        ? formationIncludesKey(reference.formation, normalizedSourceKey)
-        : reference.etymologySourceKey === normalizedSourceKey,
-    );
+    const matchingRootReferences = isExcelFirstColumnDirectory
+      ? []
+      : entry.rootReferences.filter((reference) =>
+          isFormationDirectory
+            ? formationIncludesKey(reference.formation, normalizedSourceKey)
+            : reference.etymologySourceKey === normalizedSourceKey,
+        );
     const etymologySortRow = isFormationDirectory
       ? getEntryFormationSortRow(entry, normalizedSourceKey)
       : getEntryEtymologySortRow(entry, normalizedSourceKey);

@@ -21,9 +21,7 @@ export default async function VocabularyPage({
       <section className="vocabulary-root-affix-directory" aria-labelledby="vocabulary-directory-title">
         <div className="vocabulary-directory-heading">
           <div>
-            <p className="eyebrow">词源导航</p>
             <h1 id="vocabulary-directory-title">词根词缀词典</h1>
-            <p>按词根和词缀浏览词汇家族。目录免费，首次打开详情页可免费预览一次，之后需要开通。</p>
           </div>
           <span className="vocabulary-directory-count">{directory.length} 个词根/词缀</span>
         </div>
