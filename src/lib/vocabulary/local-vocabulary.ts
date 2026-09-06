@@ -191,6 +191,14 @@ export type VocabularyEtymologyDirectory = {
   groups: VocabularyRootGroup[];
 };
 
+export type VocabularyRootAffixDirectoryItem = {
+  count: number;
+  href: string;
+  key: string;
+  kind: "词根" | "词缀" | "词根/词缀";
+  label: string;
+};
+
 const BUNDLED_VOCABULARY_SOURCE_PATH = resolve(process.cwd(), "src/data/vocabulary/flat-vocabulary.json");
 const LOCAL_VOCABULARY_SOURCE_PATH =
   "/Users/shidianjin/Desktop/词源词根背单词/词源词根_平铺数据.json";
@@ -204,6 +212,7 @@ let cachedVocabularyMap: Map<string, LocalVocabularyEntry> | null = null;
 let cachedVocabularyEntries: LocalVocabularyEntry[] | null = null;
 let cachedEcdictMap: Map<string, EcdictEntry> | null = null;
 let cachedFormationTargetMap: Map<string, string> | null = null;
+let cachedRootAffixDirectory: VocabularyRootAffixDirectoryItem[] | null = null;
 
 export function normalizeLookupWord(value: string) {
   return value.toLowerCase().replace(/^[^a-z]+|[^a-z]+$/gi, "");
@@ -906,6 +915,70 @@ function loadFormationTargetMap() {
   }
 
   return cachedFormationTargetMap;
+}
+
+export function getVocabularyRootAffixDirectory() {
+  if (cachedRootAffixDirectory) {
+    return cachedRootAffixDirectory;
+  }
+
+  const directoryMap = new Map<
+    string,
+    VocabularyRootAffixDirectoryItem & { entryKeys: Set<string>; hasRoot: boolean; hasAffix: boolean }
+  >();
+
+  function addItem(
+    label: string,
+    kind: "词根" | "词缀",
+    href: string,
+    entryKey: string,
+  ) {
+    const key = normalizeDirectoryKey(label);
+
+    if (!key) {
+      return;
+    }
+
+    const current = directoryMap.get(key) ?? {
+      count: 0,
+      entryKeys: new Set<string>(),
+      hasAffix: false,
+      hasRoot: false,
+      href,
+      key,
+      kind,
+      label,
+    };
+
+    current.entryKeys.add(entryKey);
+    current.count = current.entryKeys.size;
+    current.hasRoot = current.hasRoot || kind === "词根";
+    current.hasAffix = current.hasAffix || kind === "词缀";
+    current.kind = current.hasRoot && current.hasAffix ? "词根/词缀" : current.hasRoot ? "词根" : "词缀";
+
+    if (kind === "词根") {
+      current.href = href;
+    }
+
+    directoryMap.set(key, current);
+  }
+
+  for (const entry of loadVocabularyEntries()) {
+    for (const reference of entry.rootReferences) {
+      addItem(reference.root, "词根", `/vocabulary/roots/${reference.rootKey}`, entry.normalizedWord);
+    }
+
+    for (const label of getFormationLabels(entry.formation)) {
+      addItem(label, "词缀", `/vocabulary/etymologies/${normalizeDirectoryKey(label)}`, entry.normalizedWord);
+    }
+  }
+
+  const collator = new Intl.Collator("en", { sensitivity: "base" });
+  cachedRootAffixDirectory = [...directoryMap.values()]
+    .map(({ entryKeys: _entryKeys, hasAffix: _hasAffix, hasRoot: _hasRoot, ...item }) => item)
+    .sort((left, right) => collator.compare(left.label, right.label));
+
+  return cachedRootAffixDirectory;
 }
 
 export function getVocabularyFormationParts(entry: LocalVocabularyEntry): VocabularyFormationPart[] {

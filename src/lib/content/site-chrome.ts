@@ -137,9 +137,9 @@ export const DEFAULT_SITE_CHROME_CONFIG: SiteChromeConfig = {
         children: [],
         dropdownAlign: "right",
         enabled: true,
-        href: "/",
+        href: "/vocabulary",
         id: "dictionary",
-        label: "查单词",
+        label: "词根词缀词典",
         note: "",
       },
       {
@@ -467,6 +467,16 @@ export function mergeSiteChromeConfig(value: unknown): SiteChromeConfig {
     ? ensureSeniorHighExamMenu(navWithJuniorHigh, examsFallback, seniorHighFallback)
     : navWithJuniorHigh;
 
+  const normalizedNavItems = navItems.map((item) =>
+    item.id === "dictionary"
+      ? {
+          ...item,
+          href: item.href === "/" || !item.href ? "/vocabulary" : item.href,
+          label: "词根词缀词典",
+        }
+      : item,
+  );
+
   return {
     brand: {
       href: readString(brand.href, fallback.brand.href),
@@ -540,7 +550,7 @@ export function mergeSiteChromeConfig(value: unknown): SiteChromeConfig {
       adminHref: readString(nav.adminHref, fallback.nav.adminHref),
       adminLabel: readString(nav.adminLabel, fallback.nav.adminLabel),
       fontSize: readNumber(nav.fontSize, fallback.nav.fontSize, 12, 28),
-      items: navItems,
+      items: normalizedNavItems,
       loginHref: readString(nav.loginHref, fallback.nav.loginHref),
       loginLabel: readString(nav.loginLabel, fallback.nav.loginLabel),
     },

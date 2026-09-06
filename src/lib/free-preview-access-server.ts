@@ -18,6 +18,7 @@ export async function claimPaidContentAccess(projectKey: string, contentKey: str
   const supabase = await createServerSupabaseClient();
   const { data, error } = await supabase.rpc("claim_paid_content_access", {
     _content_key: contentKey,
+    _free_limit: 1,
     _project_key: projectKey,
     _visitor_id: visitorId,
   });
