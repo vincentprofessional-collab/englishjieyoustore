@@ -1,6 +1,11 @@
+"use client";
+
 import Link from "next/link";
+import { useState } from "react";
 import type { PastPaperRecord } from "@/lib/ielts/past-papers";
 import { getPastPaperDetailHref } from "@/lib/ielts/past-papers";
+
+const SECTION_NUMBERS = [1, 2, 3, 4] as const;
 
 export function ListeningPastPapersHome({
   papers,
@@ -9,10 +14,20 @@ export function ListeningPastPapersHome({
   papers: PastPaperRecord[];
   source: {
     audioAvailableCount: number;
-    missingAudio: Array<{ sourceId: string; title: string }>;
+    recordCount: number;
     sectionCount: number;
   };
 }) {
+  const [openSections, setOpenSections] = useState<number[]>([]);
+
+  function toggleSection(sectionNo: number) {
+    setOpenSections((current) =>
+      current.includes(sectionNo)
+        ? current.filter((item) => item !== sectionNo)
+        : [...current, sectionNo],
+    );
+  }
+
   return (
     <section className="stack bbc-home-page listening-past-papers-home">
       <div className="page-heading bbc-hero">
@@ -27,30 +42,44 @@ export function ListeningPastPapersHome({
         <div className="bbc-player-top">
           <strong>历年真题 · 中英文本</strong>
           <span>
-            {source.sectionCount} 篇 · {source.audioAvailableCount} 篇音频可用
+            {source.sectionCount} 个 Section · {source.recordCount} 篇 · {source.audioAvailableCount} 个音频
           </span>
         </div>
 
-        {source.missingAudio.length ? (
-          <div className="notice warning">
-            {source.missingAudio.map((paper) => `${paper.sourceId} ${paper.title}`).join("；")} 暂无匹配音频，
-            已保留文本并标注状态。
-          </div>
-        ) : null}
+        <div className="bbc-year-list">
+          {SECTION_NUMBERS.map((sectionNo) => {
+            const sectionPapers = papers.filter((paper) => paper.sectionNo === sectionNo);
+            const isOpen = openSections.includes(sectionNo);
 
-        <div className="bbc-article-list">
-          {papers.map((paper) => (
-            <Link
-              className="bbc-article-card"
-              href={getPastPaperDetailHref(paper.sourceId)}
-              key={paper.sourceId}
-            >
-              <strong>
-                {String(paper.sourceNumber).padStart(3, "0")} · {paper.sourceId} · {paper.title}
-                {paper.audioStatus === "missing" ? " · 音频待补" : ""}
-              </strong>
-            </Link>
-          ))}
+            return (
+              <div className="bbc-year-item" key={sectionNo}>
+                <button
+                  aria-expanded={isOpen}
+                  className="bbc-year-banner"
+                  onClick={() => toggleSection(sectionNo)}
+                  type="button"
+                >
+                  <span>
+                    Section {sectionNo} · {sectionPapers.length} 篇
+                  </span>
+                  <i>{isOpen ? "▾" : "▸"}</i>
+                </button>
+                {isOpen ? (
+                  <div className="bbc-article-list">
+                    {sectionPapers.map((paper) => (
+                      <Link
+                        className="bbc-article-card"
+                        href={getPastPaperDetailHref(paper.slug)}
+                        key={paper.slug}
+                      >
+                        <strong>{paper.title}</strong>
+                      </Link>
+                    ))}
+                  </div>
+                ) : null}
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

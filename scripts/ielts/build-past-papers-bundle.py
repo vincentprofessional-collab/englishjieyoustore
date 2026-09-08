@@ -30,6 +30,25 @@ def normalise_audio_id(value: str) -> str:
     return value.upper().replace("新", "")
 
 
+def make_slug(source_number: int, title: str) -> str:
+    readable_title = re.sub(r"[^a-z0-9]+", "-", title.lower()).strip("-")
+    return f"{source_number:03d}-{readable_title}"
+
+
+def infer_section_no(source_number: int) -> int:
+    # The master DOCX is ordered by the four listening sections: Section 1
+    # appears in two source batches, followed by Sections 3, 4, and 2.
+    if source_number <= 13 or 42 <= source_number <= 68:
+        return 1
+    if 14 <= source_number <= 28:
+        return 3
+    if 29 <= source_number <= 41:
+        return 4
+    if 69 <= source_number <= 88:
+        return 2
+    raise ValueError(f"No section mapping for source number {source_number}")
+
+
 def parse_source(source_docx: Path) -> list[dict]:
     lines = [paragraph.text.strip() for paragraph in Document(source_docx).paragraphs]
     lines = [line for line in lines if line]
@@ -69,6 +88,7 @@ def parse_source(source_docx: Path) -> list[dict]:
             {
                 "sourceNumber": int(source_number),
                 "sourceId": source_id,
+                "slug": make_slug(int(source_number), title),
                 "title": title,
                 "transcriptBlocks": blocks,
             }
@@ -102,7 +122,7 @@ def attach_audio(records: list[dict], source_root: Path) -> list[dict]:
     for record in records:
         source_id = normalise_audio_id(record["sourceId"])
         audio_path = m4a_files.get(source_id)
-        section_no = None
+        section_no = infer_section_no(record["sourceNumber"])
         if audio_path:
             extension = ".m4a"
             mime_type = "audio/mp4"
@@ -124,7 +144,11 @@ def attach_audio(records: list[dict], source_root: Path) -> list[dict]:
                 item = candidates[0]
                 used_mp3.add(item["path"])
                 audio_path = item["path"]
-                section_no = item["sectionNo"]
+                if item["sectionNo"] != section_no:
+                    raise ValueError(
+                        f"Section mismatch for {record['sourceId']}: "
+                        f"source={section_no}, audio={item['sectionNo']}"
+                    )
                 extension = ".mp3"
                 mime_type = "audio/mpeg"
                 audio_kind = "mp3"
@@ -158,21 +182,24 @@ def main() -> None:
     if not source_docx.is_file():
         raise FileNotFoundError(source_docx)
 
-    records = attach_audio(parse_source(source_docx), source_root)
+    all_records = attach_audio(parse_source(source_docx), source_root)
     missing_audio = [
         {
             "sourceId": record["sourceId"],
             "sourceNumber": record["sourceNumber"],
             "title": record["title"],
         }
-        for record in records
+        for record in all_records
         if record["audioStatus"] != "available"
     ]
+    records = [record for record in all_records if record["audioStatus"] == "available"]
     bundle = {
         "source": {
             "file": source_docx.name,
-            "sectionCount": len(records),
-            "audioAvailableCount": len(records) - len(missing_audio),
+            "sectionCount": 4,
+            "recordCount": len(records),
+            "totalSourceRecordCount": len(all_records),
+            "audioAvailableCount": len(records),
             "missingAudio": missing_audio,
         },
         "records": records,
@@ -185,7 +212,7 @@ def main() -> None:
             {
                 "output": str(args.output),
                 "records": len(records),
-                "audioAvailable": len(records) - len(missing_audio),
+                "audioAvailable": len(records),
                 "missingAudio": missing_audio,
             },
             ensure_ascii=False,

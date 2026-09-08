@@ -7,7 +7,9 @@ import {
   DEFAULT_AUDIO_PLAYER_SETTINGS,
   type AudioPlayerSettings,
 } from "@/components/audio-player";
+import { StudyAnnotationTools } from "@/components/study-annotation-tools";
 import type { PastPaperRecord } from "@/lib/ielts/past-papers";
+import { getPastPaperDetailHref } from "@/lib/ielts/past-papers";
 import styles from "@/components/listening-past-paper-page.module.css";
 
 type OriginalDisplayMode = "english" | "bilingual" | "chinese";
@@ -75,11 +77,10 @@ export function ListeningPastPaperPage({
   return (
     <section className="stack bbc-article-page">
       <div className="page-heading bbc-article-hero">
-        <div className="bbc-article-hero-top">
+        <div className="bbc-article-hero-top past-paper-hero-top">
           <Link className="bbc-detail-back-link" href="/listening/past-papers">
             ← 返回
           </Link>
-          <span className="bbc-article-title-id">{paper.sourceId}</span>
           <div className="bbc-article-actions">
             <span className="eyebrow">IELTS LISTENING</span>
           </div>
@@ -96,12 +97,6 @@ export function ListeningPastPaperPage({
       </div>
 
       <div className="bbc-article-study" ref={workspaceRef}>
-        {paper.audioStatus === "missing" ? (
-          <div className="notice warning">
-            原文已导入；当前资料目录中没有找到与这篇原文匹配的音频。
-          </div>
-        ) : null}
-
         {audioUrl ? (
           <section className="bbc-full-audio-panel">
             <div className="bbc-full-audio">
@@ -162,6 +157,13 @@ export function ListeningPastPaperPage({
                 >
                   {isFullscreen ? "退出全屏" : "全屏"}
                 </button>
+                <StudyAnnotationTools
+                  buttonClassName="annotation-toggle ielts-exam-action bbc-annotation-toggle"
+                  sourceHref={getPastPaperDetailHref(paper.slug)}
+                  sourceId={`ielts-past-paper:${paper.slug}`}
+                  sourceTitle={`IELTS Listening ${paper.title}`}
+                  surfaceRef={workspaceRef}
+                />
               </div>
             </header>
 

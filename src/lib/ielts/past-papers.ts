@@ -12,7 +12,8 @@ export type PastPaperRecord = {
   audioPath: string | null;
   audioSourceFile: string | null;
   audioStatus: "available" | "missing";
-  sectionNo: number | null;
+  sectionNo: 1 | 2 | 3 | 4;
+  slug: string;
   sourceId: string;
   sourceNumber: number;
   title: string;
@@ -22,10 +23,10 @@ export type PastPaperRecord = {
 export const PAST_PAPERS_SOURCE = pastPaperBundle.source;
 export const PAST_PAPERS = pastPaperBundle.records as PastPaperRecord[];
 
-export function getPastPaperById(sourceId: string) {
-  return PAST_PAPERS.find((paper) => paper.sourceId.toLowerCase() === sourceId.toLowerCase());
+export function getPastPaperBySlug(slug: string) {
+  return PAST_PAPERS.find((paper) => paper.slug === slug);
 }
 
-export function getPastPaperDetailHref(sourceId: string) {
-  return `/listening/past-papers/${sourceId}`;
+export function getPastPaperDetailHref(slug: string) {
+  return `/listening/past-papers/${slug}`;
 }

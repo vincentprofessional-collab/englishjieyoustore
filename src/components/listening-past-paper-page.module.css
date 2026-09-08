@@ -10,3 +10,7 @@
   background: var(--accent-dark) !important;
   border-color: var(--accent-dark) !important;
 }
+
+:global(.past-paper-hero-top) {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
