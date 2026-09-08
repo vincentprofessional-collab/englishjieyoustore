@@ -2,12 +2,14 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { GlobalStudyInteractions } from "@/components/global-study-interactions";
 import { GlobalVocabularySearch } from "@/components/global-vocabulary-search";
+import { IeltsSectionShell } from "@/components/ielts-section-shell";
 import { SiteAnalyticsTracker } from "@/components/site-analytics-tracker";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteNav } from "@/components/site-nav";
 import { getCachedPublishedSiteChromeConfig } from "@/lib/content/site-chrome-server";
 import { getLegacySessionMigrationScript } from "@/lib/supabase/legacy-session-migration";
 import "./globals.css";
+import "./ielts-section-shell.css";
 
 export const metadata: Metadata = {
   title: "英文解忧杂货铺",
@@ -39,7 +41,7 @@ export default async function RootLayout({
           </Suspense>
           <SiteAnalyticsTracker />
           <GlobalStudyInteractions />
-          {children}
+          <IeltsSectionShell>{children}</IeltsSectionShell>
           <SiteFooter config={siteChromeConfig} />
         </main>
       </body>
