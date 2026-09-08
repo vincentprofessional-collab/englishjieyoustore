@@ -1,0 +1,3438 @@
+{
+  "schemaVersion": 2,
+  "id": "paper-2024-zhejiang-bb3fb00e8526",
+  "kind": "paper",
+  "title": "2024年1月普通高等学校招生全国统一考试（浙江卷）",
+  "year": "2024",
+  "region": "浙江",
+  "variant": "浙江卷（1月）",
+  "submissionMode": "whole-paper",
+  "instructions": [],
+  "sections": [
+    {
+      "id": "section-listening",
+      "title": "第一部分 听力及可做题目",
+      "instructions": [
+        {
+          "type": "paragraph",
+          "runs": [
+            {
+              "type": "text",
+              "text": "请先播放听力音频，再完成下方选择题。"
+            }
+          ]
+        }
+      ],
+      "layout": "flow",
+      "groups": [
+        {
+          "id": "group-legacy-listening",
+          "instructions": [],
+          "stimulusBlocks": [
+            {
+              "type": "audio",
+              "assetId": "asset-384e72b0cd719649da3ff6c563a9f4ba1783da5db36b0fd53286aeebe509af60",
+              "label": "听力音频"
+            }
+          ],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "q-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 4,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What will the speakers have for dinner today?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Fried rice."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Noodles."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Steak."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "C"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（浙江）（1月）（解析卷）.docx",
+                  "sha256": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "0703b7d6acdb6638643e7cf9c86278518483ef46dbd3f95f8911f269bca92c14",
+                "answerVariantFingerprint": "d5796dc99c53ef1f079fedef756459a9f659ef62472d6696de8963f512308568"
+              }
+            },
+            {
+              "id": "q-2",
+              "displayNumber": 2,
+              "sourceQuestionNumber": 5,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "How is Sophie feeling now?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Confused."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Worried."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Tired."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "B"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（浙江）（1月）（解析卷）.docx",
+                  "sha256": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "6fa9cd1be313fba41802bacfb53b3555448b39816999832b893c81cf107b977b",
+                "answerVariantFingerprint": "def368a441ea012218ee914d03e346c49ea297f2e2a12b78ce89b4c26eae5425"
+              }
+            },
+            {
+              "id": "q-3",
+              "displayNumber": 3,
+              "sourceQuestionNumber": 6,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What does the man want to do before noon?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Post a letter."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Make a card."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Write an email."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（浙江）（1月）（解析卷）.docx",
+                  "sha256": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "012ae2906493ed558d137253892244214fd0deca33fab57a9465e3195bdb7db1",
+                "answerVariantFingerprint": "65b5629dd74fc1c0f79980a9351bf92b5eafe2e6df17c4491d42d3de2952acec"
+              }
+            },
+            {
+              "id": "q-4",
+              "displayNumber": 4,
+              "sourceQuestionNumber": 8,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What course does Professor Brooks teach?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Public Speaking."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "European History."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "English Literature."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "B"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（浙江）（1月）（解析卷）.docx",
+                  "sha256": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "ec1321eebf67a46b3d9ccac2308bd723d37bc83d399496b6dfb8564c6c65a17c",
+                "answerVariantFingerprint": "8aa84a31cfdd29e5e4a1aeeeb563a08138aef40d8e826b0e81de7bafa95266da"
+              }
+            },
+            {
+              "id": "q-5",
+              "displayNumber": 5,
+              "sourceQuestionNumber": 9,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Why does Vicky come to talk with Professor Brooks?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To sign up for his course."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To ask for a make-up test."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To discuss her homework."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "B"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（浙江）（1月）（解析卷）.docx",
+                  "sha256": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "99e0c22443ee9f46409def8feeb5c92795c2458772fac58cad2f90ba7430962f",
+                "answerVariantFingerprint": "1d691030f452a3978b5795e905b563aa95b9a9d8c30bdbedf5608225a5ca6b43"
+              }
+            },
+            {
+              "id": "q-6",
+              "displayNumber": 6,
+              "sourceQuestionNumber": 10,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What does Linda do for plays and shows?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "She gives actors advice."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "She assigns roles to actors."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "She designs actors' clothes."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "C"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（浙江）（1月）（解析卷）.docx",
+                  "sha256": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "2d9c7bc39ae1505a7e913dcf5caaa55531fe8e9e58a811f9862d4c1cc4d2c4ea",
+                "answerVariantFingerprint": "1a7f61ea82cac090c1841273194ae18fd613a76c2fca2c9a18036330ba4d8171"
+              }
+            },
+            {
+              "id": "q-7",
+              "displayNumber": 7,
+              "sourceQuestionNumber": 11,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What does Linda need to research?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The setting of the story."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The decoration of the stage."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The name s of the characters."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（浙江）（1月）（解析卷）.docx",
+                  "sha256": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "44f3f05c7284b4025da765f568edf7d349d725ce47af30599abf79be8b025fad"
+              }
+            },
+            {
+              "id": "q-8",
+              "displayNumber": 8,
+              "sourceQuestionNumber": 12,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Who does Linda report her work to?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The director."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The editor."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The photographer."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（浙江）（1月）（解析卷）.docx",
+                  "sha256": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "37099b3271e5d487941ffe160d9e119f312f249eb25214a14f98a1d33fa19b03"
+              }
+            },
+            {
+              "id": "q-9",
+              "displayNumber": 9,
+              "sourceQuestionNumber": 13,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What does Linda say about her job?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It pays very well."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It requires team effort."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It involves frequent travel."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "B"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（浙江）（1月）（解析卷）.docx",
+                  "sha256": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "68cb971c1b59f1b025fd45d5e91d5add89d24c17c1d11527928563487273c68c",
+                "answerVariantFingerprint": "bfec169b07cb8dd668f5337bc37ccccc6389e2cebb00fec422366d7559455e74"
+              }
+            },
+            {
+              "id": "q-10",
+              "displayNumber": 10,
+              "sourceQuestionNumber": 14,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What does Kevin think of abstract art?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It has lasting artistic value."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It makes little sense to him."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It appeals mainly to children."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "B"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（浙江）（1月）（解析卷）.docx",
+                  "sha256": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "ba29bbfe8c7cc54ab8b702a3431eb0ea004dc97f18854dd2b165c083a4f47805",
+                "answerVariantFingerprint": "5314564ebf1d4c9c6a72a67711ab95271b7b2ef3e7fd41dbd4606465e40ad6df"
+              }
+            },
+            {
+              "id": "q-11",
+              "displayNumber": 11,
+              "sourceQuestionNumber": 15,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What impression did the first painting give the woman?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Hopefulness."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Nervousness."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Coldness."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "C"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（浙江）（1月）（解析卷）.docx",
+                  "sha256": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "09ed9d1df577527a374d609192e63b7174daa11bcb3ddb3fd2c030130d47cdf5"
+              }
+            },
+            {
+              "id": "q-12",
+              "displayNumber": 12,
+              "sourceQuestionNumber": 16,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What color was used for the background in the second painting?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Green."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Purple."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Red."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（浙江）（1月）（解析卷）.docx",
+                  "sha256": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "29112b14de95f5199ec1bbfbf53ea2793cb39801143607e583754e17cca4a461"
+              }
+            },
+            {
+              "id": "q-13",
+              "displayNumber": 13,
+              "sourceQuestionNumber": 17,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What will Kevin probably do this Saturday? A Attend an art class."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Visit an exhibition."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Buy an abstract painting."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "B"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（浙江）（1月）（解析卷）.docx",
+                  "sha256": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "2997819f49805418b85d729cf1fbbd3a176d5ef2ce947220147c4a379038bdc0"
+              }
+            },
+            {
+              "id": "q-14",
+              "displayNumber": 14,
+              "sourceQuestionNumber": 18,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What caused the closure of Pittwater Road?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "A fallen tree."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "A flooded river."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "A car accident."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "C"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（浙江）（1月）（解析卷）.docx",
+                  "sha256": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "2f60a9bcd4fc762f9fbe3beff7a69151af62a371e52737ab730138ce3b78d5ee",
+                "answerVariantFingerprint": "e651b1d75efd64fc3e48f6587ba98ecd0c74d0bd9e771123e427a38a43a63f36"
+              }
+            },
+            {
+              "id": "q-15",
+              "displayNumber": 15,
+              "sourceQuestionNumber": 19,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What happened at Town Hall Station?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "A police officer got hurt."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "A passenger went missing."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The station roof was broken."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "C"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（浙江）（1月）（解析卷）.docx",
+                  "sha256": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "d8f95d967db5889c8f97855f1107d3c831400a2e3dcacc82b902ec7e16b5df72"
+              }
+            },
+            {
+              "id": "q-16",
+              "displayNumber": 16,
+              "sourceQuestionNumber": 20,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What are road users advised to do?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Drive at low speed."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Postpone their trips."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Follow traffic signs."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "B"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（浙江）（1月）（解析卷）.docx",
+                  "sha256": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "8fcf1f18dc2af3bb823a92ef1f8394ad6e7eb4fa17487da024ed938961e081ba"
+              }
+            }
+          ],
+          "title": "听力选择题",
+          "presentation": "reading"
+        },
+        {
+          "id": "group-legacy-questions",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "q-17",
+              "displayNumber": 17,
+              "sourceQuestionNumber": 7,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Why did the author start to use the “library”?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "He wanted to borrow some love stories."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "He was encouraged by a close neighbour."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "He found there were excellent free books."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "He thought it was an ideal place for reading."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "C"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（浙江）（1月）（解析卷）.docx",
+                  "sha256": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "e92e6e9301cc02171814832df482f926a7ac3790622d906a560e8cfc9e225e65",
+                "answerVariantFingerprint": "91dd9d072c01fdbcd56e5b123276a4d764c5c01b3c86404b5a49161013848acf"
+              }
+            },
+            {
+              "id": "q-18",
+              "displayNumber": 18,
+              "sourceQuestionNumber": 21,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "A"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "experiment"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "encounter"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "competition"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "appointment"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "B"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（浙江）（1月）（解析卷）.docx",
+                  "sha256": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "c1becb6413d1908729b8f5e9af1bd3a9727ea78bf841d1a6674ad7ad81e2da47",
+                "answerVariantFingerprint": "285a41ead63022fa6fe4a771bbfa513f20de52d8cd1fb2f9f8d7e7db991f0873"
+              }
+            },
+            {
+              "id": "q-19",
+              "displayNumber": 19,
+              "sourceQuestionNumber": 22,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "A"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "treated"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "saved"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "lectured"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "approached"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "D"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（浙江）（1月）（解析卷）.docx",
+                  "sha256": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "80794b0cba8cb7d21b5bcb2fe5b0bbef4b0d816ae6a9c6940339a216fa1245e8",
+                "answerVariantFingerprint": "e15dcf7b8522ad8ae5efc4a13af66cca59aca16dcb2a902af32f7f79b9edcf3f"
+              }
+            },
+            {
+              "id": "q-20",
+              "displayNumber": 20,
+              "sourceQuestionNumber": 23,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "A"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "true"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "so-called"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "new"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "long-lost"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "C"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（浙江）（1月）（解析卷）.docx",
+                  "sha256": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "b200d6e177030d92774a629025031026d5526542d965399c636aca43dddcb6d4",
+                "answerVariantFingerprint": "9e015b6e42af524d955b6cae5522057cec3751c36f3a2e592902f234b7ba314a"
+              }
+            },
+            {
+              "id": "q-21",
+              "displayNumber": 21,
+              "sourceQuestionNumber": 24,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "A"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "chance"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "advice"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "trouble"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "right"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（浙江）（1月）（解析卷）.docx",
+                  "sha256": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "0fa55f2085478dc5a8aaefa5438ded955774b6431c9182ed137857497a94ecde",
+                "answerVariantFingerprint": "242bce6b37aa7abda1d80a1995e27980d2a164eff950d68cc5c039dee8e33407"
+              }
+            },
+            {
+              "id": "q-22",
+              "displayNumber": 22,
+              "sourceQuestionNumber": 25,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "A"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "visited"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "financed"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "attended"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "founded"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "C"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（浙江）（1月）（解析卷）.docx",
+                  "sha256": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "fe4b9915709bccc94dfac24082d088ac9fa14eaee5d948a5640e71a98fa60c00",
+                "answerVariantFingerprint": "3cf7426de50ffef825d68546fc8daa75c1c729b0773fadc3c674cefd70fbc464"
+              }
+            },
+            {
+              "id": "q-23",
+              "displayNumber": 23,
+              "sourceQuestionNumber": 26,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "A"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "building"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "sweeping"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "checking"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "guarding"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（浙江）（1月）（解析卷）.docx",
+                  "sha256": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "be660bdfac3dd875fbe19b2683195bb952a55c17a84612e7f1a75db69e910d17",
+                "answerVariantFingerprint": "9d0e39f97d25c27b470fcde3fbec72e9298145ac240321284174efd6ecf1dd73"
+              }
+            },
+            {
+              "id": "q-24",
+              "displayNumber": 24,
+              "sourceQuestionNumber": 27,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "A"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "typical"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "obvious"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "natural"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "remarkable"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "D"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（浙江）（1月）（解析卷）.docx",
+                  "sha256": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "8b2f6fd37870b3d746de063e3268a97ce08f38eb6eabd8e458db58244bbf6791",
+                "answerVariantFingerprint": "b1e0cfc775ddd065a588016ccb155ed9df0513a12b7681bb81f1a6de7fda08f2"
+              }
+            },
+            {
+              "id": "q-25",
+              "displayNumber": 25,
+              "sourceQuestionNumber": 28,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "A"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "publish"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "quote"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "сорy"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "download"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "B"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（浙江）（1月）（解析卷）.docx",
+                  "sha256": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "87f1ac1f64428b09641ece0882346be88dde3da4c7a70c3959b07fee96056b36",
+                "answerVariantFingerprint": "2c8d0fbf5c7585ef0a728812539f6b12e8b4965f52b7badf7bec8270ce12a451"
+              }
+            },
+            {
+              "id": "q-26",
+              "displayNumber": 26,
+              "sourceQuestionNumber": 29,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "A"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "writers"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "historians"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "workers"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "students"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（浙江）（1月）（解析卷）.docx",
+                  "sha256": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "8143dbb9e1881db1ac7ec4ae41d78a662eda515902b9c5fea7a25caae2fc3b0f",
+                "answerVariantFingerprint": "7d5a3636345036125b459a145e9cd42ef62f32616089d2048abf9f42c57247c9"
+              }
+            },
+            {
+              "id": "q-27",
+              "displayNumber": 27,
+              "sourceQuestionNumber": 30,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "A anticipate B"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "A anticipate"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "imagine"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "recall"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "catch"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "C"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（浙江）（1月）（解析卷）.docx",
+                  "sha256": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "d19fcc19ce91124dd213ddcfe5fd0f6b28410fce799ce79277cea59f14fd0cc8",
+                "answerVariantFingerprint": "bc3a431b8caf788995c634750c5b2fa75ca413370470bb0f698ee74bf2d4c897"
+              }
+            },
+            {
+              "id": "q-28",
+              "displayNumber": 28,
+              "sourceQuestionNumber": 31,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "A"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "look into"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "rely on"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "go over"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "deal with"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "B"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（浙江）（1月）（解析卷）.docx",
+                  "sha256": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "1274fb2e2db974561289a7eab69e7269df15d50d744bec8ca4fa657cf5f3f434",
+                "answerVariantFingerprint": "941474b69020bdf9c32ca410d1670c5870f9c30841705bc68e7eebc9acd94069"
+              }
+            },
+            {
+              "id": "q-29",
+              "displayNumber": 29,
+              "sourceQuestionNumber": 32,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "A"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "well-behaved"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "multi-skilled"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "warm-hearted"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "self-educated"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "D"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（浙江）（1月）（解析卷）.docx",
+                  "sha256": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "4573234edc1f2c86b62c18b0514d06bf4e46d94e107587b0a8903762cb729a73",
+                "answerVariantFingerprint": "ab4dc776b7cc5c28dc432b443cc47a6b80fdeab33783c0eae789dd7d51c69869"
+              }
+            },
+            {
+              "id": "q-30",
+              "displayNumber": 30,
+              "sourceQuestionNumber": 33,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "A"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "asked"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "warned"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "showed"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "promised"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "C"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（浙江）（1月）（解析卷）.docx",
+                  "sha256": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "4ec03b8a16059fdbfbc6792189948d16870eb96845c604d537dd149f2a323f51",
+                "answerVariantFingerprint": "61dcf0cbe967fc7dc9b6883672e484b10f65862894808ccc6dc75ba306606dc9"
+              }
+            },
+            {
+              "id": "q-31",
+              "displayNumber": 31,
+              "sourceQuestionNumber": 34,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "A"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "traveling"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "reading"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "searching"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "teaching"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（浙江）（1月）（解析卷）.docx",
+                  "sha256": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "8cc18a3ac22c9787a0375684ea909af6f0bf9bed2ff808f880d68bd4433c2c59",
+                "answerVariantFingerprint": "9528cd9ace82efc348903b39019e1661b63a449bf8306ebe15c17b92ce66f5c7"
+              }
+            }
+          ],
+          "title": "其他选择题"
+        }
+      ]
+    }
+  ],
+  "assetRefs": [
+    {
+      "assetId": "asset-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "kind": "image",
+      "url": "source://历年真题/【未上传】2024年高考英语试卷（浙江）（1月）（解析卷）.docx#word/media/",
+      "mimeType": "application/octet-stream",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+          "relativePath": "历年真题/【未上传】2024年高考英语试卷（浙江）（1月）（解析卷）.docx",
+          "sha256": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+          "locator": {},
+          "extractionMethod": "docx-xml",
+          "confidence": 0.96
+        }
+      ]
+    },
+    {
+      "assetId": "asset-3cf47a5e221b06f3abaf2eaaf89eaa2cf1133f5d9ec66ae77ffb2b1b49c0368a",
+      "kind": "image",
+      "url": "source://历年真题/【未上传】2024年高考英语试卷（浙江）（1月）（解析卷）.docx#word/media/image1.png",
+      "mimeType": "image/png",
+      "sha256": "3cf47a5e221b06f3abaf2eaaf89eaa2cf1133f5d9ec66ae77ffb2b1b49c0368a",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+          "relativePath": "历年真题/【未上传】2024年高考英语试卷（浙江）（1月）（解析卷）.docx",
+          "sha256": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+          "locator": {},
+          "extractionMethod": "docx-xml",
+          "confidence": 0.96
+        }
+      ]
+    },
+    {
+      "assetId": "asset-dbe6d880f9d976eac4de491290d43bae735e18ef3db614853400f4527726c659",
+      "kind": "image",
+      "url": "source://历年真题/【未上传】2024年高考英语试卷（浙江）（1月）（解析卷）.docx#word/media/image2.png",
+      "mimeType": "image/png",
+      "sha256": "dbe6d880f9d976eac4de491290d43bae735e18ef3db614853400f4527726c659",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+          "relativePath": "历年真题/【未上传】2024年高考英语试卷（浙江）（1月）（解析卷）.docx",
+          "sha256": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+          "locator": {},
+          "extractionMethod": "docx-xml",
+          "confidence": 0.96
+        }
+      ]
+    },
+    {
+      "assetId": "asset-d87f65da20a1ed343dbf417779290417c0de27a02574afa13f3fae58b1a0a10e",
+      "kind": "image",
+      "url": "source://历年真题/【未上传】2024年高考英语试卷（浙江）（1月）（解析卷）.docx#word/media/image3.png",
+      "mimeType": "image/png",
+      "sha256": "d87f65da20a1ed343dbf417779290417c0de27a02574afa13f3fae58b1a0a10e",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+          "relativePath": "历年真题/【未上传】2024年高考英语试卷（浙江）（1月）（解析卷）.docx",
+          "sha256": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+          "locator": {},
+          "extractionMethod": "docx-xml",
+          "confidence": 0.96
+        }
+      ]
+    },
+    {
+      "assetId": "asset-12eba0ca96cfdbdfccaba46ba9ddab29bd7ea65e7dd7cec61f1ab8df5bbee7e6",
+      "kind": "image",
+      "url": "source://历年真题/【未上传】2024年高考英语试卷（浙江）（1月）（解析卷）.docx#word/media/image4.wmf",
+      "mimeType": "application/x-msmetafile",
+      "sha256": "12eba0ca96cfdbdfccaba46ba9ddab29bd7ea65e7dd7cec61f1ab8df5bbee7e6",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+          "relativePath": "历年真题/【未上传】2024年高考英语试卷（浙江）（1月）（解析卷）.docx",
+          "sha256": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+          "locator": {},
+          "extractionMethod": "docx-xml",
+          "confidence": 0.96
+        }
+      ]
+    },
+    {
+      "assetId": "asset-b6ce7d9e3a510ffba12471ead6a6b9301672c27e50c47cbb765728a4ee0bc673",
+      "kind": "image",
+      "url": "source://历年真题/【未上传】2024年高考英语试卷（浙江）（1月）（解析卷）.docx#word/media/image5.wmf",
+      "mimeType": "application/x-msmetafile",
+      "sha256": "b6ce7d9e3a510ffba12471ead6a6b9301672c27e50c47cbb765728a4ee0bc673",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+          "relativePath": "历年真题/【未上传】2024年高考英语试卷（浙江）（1月）（解析卷）.docx",
+          "sha256": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+          "locator": {},
+          "extractionMethod": "docx-xml",
+          "confidence": 0.96
+        }
+      ]
+    },
+    {
+      "assetId": "asset-384e72b0cd719649da3ff6c563a9f4ba1783da5db36b0fd53286aeebe509af60",
+      "kind": "audio",
+      "url": "/senior-high/assets/384e72b0cd719649da3ff6c563a9f4ba1783da5db36b0fd53286aeebe509af60.mp3",
+      "mimeType": "audio/mpeg",
+      "sha256": "384e72b0cd719649da3ff6c563a9f4ba1783da5db36b0fd53286aeebe509af60",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "384e72b0cd719649da3ff6c563a9f4ba1783da5db36b0fd53286aeebe509af60",
+          "relativePath": "历年真题/【未上传】2024年高考英语试卷（浙江）（1月）听力音频.mp3",
+          "sha256": "384e72b0cd719649da3ff6c563a9f4ba1783da5db36b0fd53286aeebe509af60",
+          "locator": {},
+          "extractionMethod": "media-manifest",
+          "confidence": 0.9
+        }
+      ]
+    }
+  ],
+  "sourceRefs": [
+    {
+      "sourceDocumentId": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+      "relativePath": "历年真题/【未上传】2024年高考英语试卷（浙江）（1月）（解析卷）.docx",
+      "sha256": "bb3fb00e8526788fabe8de2fc33cd722849bfc0f6eb3acd346927b905a015a5b",
+      "locator": {},
+      "extractionMethod": "docx-xml",
+      "confidence": 0.96
+    }
+  ],
+  "quality": {
+    "structureStatus": "approved",
+    "structureConfidence": 0.82,
+    "issueCount": 0,
+    "issues": []
+  },
+  "dedupeSignature": {
+    "paperIdentityKey": "2007|北京|legacy",
+    "answerVariantFingerprint": "784f43b2719642b3c4daca1cf34f5ee79d0a2d5f05e1c3dc257c9a2fc886324d"
+  }
+}

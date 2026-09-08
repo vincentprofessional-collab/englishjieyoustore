@@ -1,0 +1,652 @@
+{
+  "schemaVersion": 2,
+  "id": "practice-专项-source-018721bf51fd",
+  "kind": "practice",
+  "title": "概要写作专项训练",
+  "year": "专项",
+  "region": "资料",
+  "variant": "可作答资料",
+  "instructions": [],
+  "sections": [
+    {
+      "id": "section-practice",
+      "title": "概要写作专项训练",
+      "instructions": [],
+      "layout": "flow",
+      "groups": [
+        {
+          "id": "group-writing",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "q-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "essay",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Writing 1(2020山东济宁鱼台一中期中)"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "　　阅读下面短文,根据其内容写一篇60词左右的内容概要。"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Smoking a whole packet of cigarettes in a day once or twice a year would certainly make someone feel ill, but probably would not kill him. Smoking even one cigarette every day for decades, though, might do so. That is the difference between the acute exposure and the chronic(慢性的)one, and it is a difference that most people understand. What they may not understand is that the same thing applies to air pollution."
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "On a day-to-day basis, the forecasts most European cities offer turn red only when pollution levels rise to a point where they will cause immediate discomfort. That makes sense, but it might also make the badly-informed citizens think that if most days in the place where they live are green, the air they're breathing is basically safe. This may not be the case. For example, in London where the national data said air quality was “good” or “very good”four days out of five, a study found that levels of NO2 were always higher than the WHO's limit of a long-term danger."
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Official data also fail to notice patterns of difference within a day. These can be important,because people might be able to change their behavior if they understood them. Our study suggests, for example, that Parisians who head out for work at 9 a.m. and return at 6 p.m. could reduce their average daily intake of NO2 by 16% by traveling both ways an hour earlier. Going two hours earlier would cut the intake by 28%."
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "The best advice of all to people in these cities,though, is to move to America. In New York, levels of NO2 were 20% below the WHO's limit, and that is pretty typical of places in the United States, where diesel(柴油) is less common than that in Europe. As the words on the Statue of Liberty say, “Give me your tired, your poor, your huddled(蜷缩的) masses yearning to breathe free.”"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": [
+                  {
+                    "type": "paragraph",
+                    "runs": [
+                      {
+                        "type": "text",
+                        "text": "[写作提示]"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "paragraph",
+                    "runs": [
+                      {
+                        "type": "text",
+                        "text": "本文是一篇说明文。文章认为空气污染即使很轻微,长期污染也会有害健康。"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "paragraph",
+                    "runs": [
+                      {
+                        "type": "text",
+                        "text": "1.本文共分四段:第一段引出下文要谈论的话题,接下来三个段落对空气污染的话题展开论述并提出解决问题的对策。"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "paragraph",
+                    "runs": [
+                      {
+                        "type": "text",
+                        "text": "2.概要可以从每个自然段提取核心信息,组成四个要点。 "
+                      }
+                    ]
+                  },
+                  {
+                    "type": "paragraph",
+                    "runs": [
+                      {
+                        "type": "text",
+                        "text": "3.注意各个要点之间的自然衔接。"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "paragraph",
+                    "runs": [
+                      {
+                        "type": "text",
+                        "text": "One possible version:"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "paragraph",
+                    "runs": [
+                      {
+                        "type": "text",
+                        "text": "Like cigarettes, air pollution can be mild, but it is also harmful to human health in the long term.(要点1)The forecasts saying days are green don't mean the air is absolutely safe to breathe.(要点2)Most European citizens are not informed of the different patterns of pollution within a day. (要点3)These people are advised to move to America, where the air is quite clean.(要点4)"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "018721bf51fd1cf7f4f2d141e87c58ff11b92aae866abbcabc0dc87c265772f2",
+                  "relativePath": "题型/【未上传】试题部分WORD—5年高考、3年模拟_专题二十三概要写作.docx",
+                  "sha256": "018721bf51fd1cf7f4f2d141e87c58ff11b92aae866abbcabc0dc87c265772f2",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "61d3f00977e05c00c40ccb6b7238d40a1e2b44fffd8271b26a68cb699eeddbca",
+                "answerVariantFingerprint": "e93dce2887a64c59ddce433ec263b788f10ba796a547c62e9e5b56016f48023b"
+              }
+            },
+            {
+              "id": "q-2",
+              "displayNumber": 2,
+              "sourceQuestionNumber": 2,
+              "type": "essay",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Writing 2(2020浙江杭州三校一模)"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "　　阅读下面短文,根据其内容写一篇60词左右的内容概要。"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "It was once common to regard Britain as a society with class distinction. Each class had unique characteristics. In recent years, many writers have begun to speak of the “decline of class” and “classless society” in Britain. And in modern-day consumer society everyone is considered to be the middle class."
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "But pronouncing the death of class is too early. A recent wide-ranging study of public opinion found 90 percent of people still placing themselves in a particular class; 73 percent agreed that class was still a vital part of British society; and 52 percent thought there were still sharp class differences. Thus, class may not be culturally and politically obvious, yet it remains an important part of British society. Britain seems to have a love of class."
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "One unchanging aspect of a British person's class position is accent. The words a person speaks show her or his class. A study of British accents during the 1970s found that a voice sounding like a BBC newsreader was viewed as the most attractive voice. Most people said this accent sounded “educated” and “soft”. The accents placed at the bottom in this study, on the other hand, were regional (地区的) city accents. These accents were seen as “common” and “ugly”. However, a similar study of British accents in the US turned these results upside down and placed some regional accents as the most attractive and BBC English as the least. This suggests that British attitudes towards accents have deep roots and are based on class prejudice."
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "In recent years, however, young upper middle-class people in London, have begun to adopt some regional accents, in order to hide their class origins. This is an indication of class becoming unnoticed. However, the 1995 pop song “Common People” puts forward the view that though a middle-class person may “want to live like common people” they can never appreciate the reality of a working-class life."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": [
+                  {
+                    "type": "paragraph",
+                    "runs": [
+                      {
+                        "type": "text",
+                        "text": "[写作提示]"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "paragraph",
+                    "runs": [
+                      {
+                        "type": "text",
+                        "text": "本文是一篇说明文。文章认为目前英国仍然有浓厚的阶层倾向。"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "paragraph",
+                    "runs": [
+                      {
+                        "type": "text",
+                        "text": "1.本文共分四段,每段主旨都很清楚。"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "paragraph",
+                    "runs": [
+                      {
+                        "type": "text",
+                        "text": "2.概要可以根据各个自然段来写。"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "paragraph",
+                    "runs": [
+                      {
+                        "type": "text",
+                        "text": "3.注意各个要点之间的自然衔接。"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "paragraph",
+                    "runs": [
+                      {
+                        "type": "text",
+                        "text": "One possible version:"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "paragraph",
+                    "runs": [
+                      {
+                        "type": "text",
+                        "text": "Currently Britain seems to be classless in the consumer society. (要点1)However, a study shows British still have a strong sense of class which continues to be a crucial part for them. (要点2)What remains the same is that the accent represents a person's class while people's attitudes to the accent are related to class prejudice. (要点3)Nevertheless, nowadays the young upper middle class cover up their origins with other accents. (要点4)"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "018721bf51fd1cf7f4f2d141e87c58ff11b92aae866abbcabc0dc87c265772f2",
+                  "relativePath": "题型/【未上传】试题部分WORD—5年高考、3年模拟_专题二十三概要写作.docx",
+                  "sha256": "018721bf51fd1cf7f4f2d141e87c58ff11b92aae866abbcabc0dc87c265772f2",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "573dc9853db77e59805f9172817b28e368d409fb27c2366243b1dc2163d40b16",
+                "answerVariantFingerprint": "cdf32a36d243c5e0c48cbdbbccd1944497c7725aefe0059d28c09ed1ee9d0010"
+              }
+            },
+            {
+              "id": "q-3",
+              "displayNumber": 3,
+              "sourceQuestionNumber": 3,
+              "type": "essay",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Writing 1(2020上海华东师大第二附中开学考试)"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "　　阅读下面短文,根据其内容写一篇60词左右的内容概要。"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What Coffee Does to Your Health"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Coffee can be considered one of nature's greatest gifts. It gives mental and emotional clearness without harmful side effects, and it contains a wealth of nutrients. Yet, when most people drink coffee, they are not thinking that the drink is improving their health. In fact, some may even feel a little guilty, since some believe coffee isn't good for them at all."
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Well, there's the truth of the matter. Coffee, like anything else, can bring about problems if too much is consumed. In the short term, too much coffee will cause sleep problems and high blood pressure. In the long term, too much coffee will cause stomach problems as well as teeth staining."
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "As for the benefits, moderate consumption of coffee, which means one to four cups a day, provides your body with a wealth of antioxidants(抗氧化物质).These substances are responsible for eliminating free radicals(自由基). They are the chemical by-products produced any time your body does something. A small number of them can help serve as something against negative elements, but if they aren't kept in control, they can cause health problems. Antioxidants ensure that this doesn't happen."
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "The psychological effects of caffeine cannot be ignored either. Not only does caffeine make you more alert, but it can actually affect your mood. If you were feeling depressed, a nice cup of coffee could change your perspective. The stack of work that seemed impossible before isn't even a problem now."
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "In addition, caffeine helps stimulate creativity as it speeds up the body's functioning. That's why coffee is often associated with writers and other intellectual professions. Other drugs tend to make people dumber. Consider what happens when people get drunk off of alcohol. They won't be functional at all. But with coffee, an individual gets a push in creative thinking while still helping their body."
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "In conclusion, don't feel bad when you are making your morning cup of coffee. Unlike a shot of alcohol, coffee will make you feel wonderful while keeping you healthy. Just remember, you do have to consume it in moderation."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": [
+                  {
+                    "type": "paragraph",
+                    "runs": [
+                      {
+                        "type": "text",
+                        "text": "[写作提示]"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "paragraph",
+                    "runs": [
+                      {
+                        "type": "text",
+                        "text": "本文是说明文,主要说明了适量饮用咖啡对我们的健康有益。"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "paragraph",
+                    "runs": [
+                      {
+                        "type": "text",
+                        "text": "1.本文共分六段:第一段、第二段和第六段重点介绍了喝咖啡的好与坏,可整合为第一个要点;第三段说明了抗氧化物质对人体的好处,可作为第二个要点;第四、五两个段落重点说明了咖啡因的功能,可整合为第三个要点。 "
+                      }
+                    ]
+                  },
+                  {
+                    "type": "paragraph",
+                    "runs": [
+                      {
+                        "type": "text",
+                        "text": "2.注意各个要点之间的自然衔接。"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "paragraph",
+                    "runs": [
+                      {
+                        "type": "text",
+                        "text": "One possible version:"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "paragraph",
+                    "runs": [
+                      {
+                        "type": "text",
+                        "text": "If drunk moderately, coffee is beneficial to our health. (要点1)Drinking moderate coffee, people will get many antioxidants, which ensure free radicals are in control. (要点2)Besides, the caffeine contained in coffee makes people more alert, affects people's mood and helps stimulate creativity without hurting their health.(要点3)"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "018721bf51fd1cf7f4f2d141e87c58ff11b92aae866abbcabc0dc87c265772f2",
+                  "relativePath": "题型/【未上传】试题部分WORD—5年高考、3年模拟_专题二十三概要写作.docx",
+                  "sha256": "018721bf51fd1cf7f4f2d141e87c58ff11b92aae866abbcabc0dc87c265772f2",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "1d4e50bdb5d88c9cd404e1c14c77fe4264d81e651e3bf126fc30b98905b56c29",
+                "answerVariantFingerprint": "d0ce81448be7af536938d84c54477be5f7f6a6a8bd65e0f54d07a362b749805c"
+              }
+            },
+            {
+              "id": "q-4",
+              "displayNumber": 4,
+              "sourceQuestionNumber": 4,
+              "type": "essay",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Writing 2(2020浙江名校协作体联考)"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "　　阅读下面短文,根据其内容写一篇60词左右的内容概要。"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "We already know that the underwater world is anything but silent. It is full of natural sounds produced by animals and by the motion of the atmosphere and water. But today's researchers are increasingly concerned about the man-made noises under the water. They are confusing whales and other marine animals."
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Although hearing is important to all animals, the special qualities of the undersea world emphasize the use of sound. Underwater sound allows marine animals to gather information and communicate at great distances and from all directions. Loud underwater noises can cause damage to their hearing. And nowadays it's becoming too much for marine wildlife. Evidence shows that whales will swim hundreds of miles, rapidly change their depth, and even beach themselves to get away from the sounds of sonar."
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "You might think lower noises, typically caused by shipping or construction, do not pose a threat to marine animals. In fact, while they may not kill the animals directly, they can disturb their ability to locate food, find mates and avoid predators (捕食性动物).Scientists looked at the effects of noise from small motorboats on coral reef fish at the Great Barrier Reef in Australia. In the lab, the fish had been trained to recognize the smell of three common predators as a threat. Some fish were trained in the presence of boat noise, while the others had training with the natural sounds of the ocean. It turned out that the first group showed no fright reactions when exposed to the predators. However, the other group was scared. And under the influence of underwater noise on this group, only 20 percent of fish survived, compared to almost 70 percent of unexposed fish."
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Humans rely on the ocean for its natural resources and biodiversity. The ocean also plays an important role in regulating(调节)temperatures. As Cousteau said, “For most of history, man has had to fight nature to survive; in this century he is beginning to realize that, in order to survive, he must protect it.”"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": [
+                  {
+                    "type": "paragraph",
+                    "runs": [
+                      {
+                        "type": "text",
+                        "text": "[写作提示]"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "paragraph",
+                    "runs": [
+                      {
+                        "type": "text",
+                        "text": "本文是一篇说明文。文章介绍了人造的噪音对海洋动物的伤害,呼吁人们要保护海洋环境。文章结构清楚,自然段自成要点,概括时把握各段的核心词,忽略细节信息。"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "paragraph",
+                    "runs": [
+                      {
+                        "type": "text",
+                        "text": "One possible version:"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "paragraph",
+                    "runs": [
+                      {
+                        "type": "text",
+                        "text": "Although the underwater world is not silent, man-made sound is doing great harm to marine animals. (要点1) Important as underwater sound is to animals there, loud noises in the sea threaten their normal life. (要点2) According to scientists' research, the survival rate of fish drops sharply under the influence of noise, whether loud or not. (要点3) Thus, with the benefits of the ocean to the environment and temperature, people must protect it rather than fight it.(要点4)"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "018721bf51fd1cf7f4f2d141e87c58ff11b92aae866abbcabc0dc87c265772f2",
+                  "relativePath": "题型/【未上传】试题部分WORD—5年高考、3年模拟_专题二十三概要写作.docx",
+                  "sha256": "018721bf51fd1cf7f4f2d141e87c58ff11b92aae866abbcabc0dc87c265772f2",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "8fc22b2130b63b286452e708f84d6efd327ebe1a52c3f71006de84a64f767a84",
+                "answerVariantFingerprint": "da363c6008f1f1e2bdedfcea3fbe9e4102a8f45c065e0426e43848a7714d7d65"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "assetRefs": [],
+  "sourceRefs": [
+    {
+      "sourceDocumentId": "018721bf51fd1cf7f4f2d141e87c58ff11b92aae866abbcabc0dc87c265772f2",
+      "relativePath": "题型/【未上传】试题部分WORD—5年高考、3年模拟_专题二十三概要写作.docx",
+      "sha256": "018721bf51fd1cf7f4f2d141e87c58ff11b92aae866abbcabc0dc87c265772f2",
+      "locator": {},
+      "extractionMethod": "docx-xml",
+      "confidence": 0.96
+    }
+  ],
+  "quality": {
+    "structureStatus": "approved",
+    "structureConfidence": 0.84,
+    "issueCount": 0,
+    "issues": []
+  },
+  "dedupeSignature": {
+    "paperIdentityKey": "source|018721bf51fd1cf7f4f2d141e87c58ff11b92aae866abbcabc0dc87c265772f2",
+    "answerVariantFingerprint": "9573bb90d445640f37d824d64397ead8a2cf4715e4c89857dcc0926e1441af4d"
+  }
+}

@@ -204,6 +204,7 @@ export function validateSeniorHighV2Set(set, { publicData = false } = {}) {
   if (set.schemaVersion !== 2) add(errors, "schemaVersion", "must be 2");
   requireString(set.id, "id", errors);
   if (!["paper", "practice"].includes(set.kind)) add(errors, "kind", "must be paper or practice");
+  if (set.kind === "paper" && set.submissionMode !== "whole-paper") add(errors, "submissionMode", "paper sets must use whole-paper submission");
   for (const field of ["title", "year", "region", "variant"]) requireString(set[field], field, errors);
   if (!requireArray(set.assetRefs, "assetRefs", errors)) return { ok: false, errors };
   const assets = new Set();
@@ -273,6 +274,62 @@ export function validateSeniorHighV2Set(set, { publicData = false } = {}) {
     if (sorted.some((number, index) => number !== index + 1)) add(errors, "questions.displayNumber", "practice questions must be continuous from 1");
   }
   return { ok: errors.length === 0, errors, questionCount };
+}
+
+function questionHasContent(question) {
+  return blockText(question.promptBlocks).trim().length > 0
+    || blockText((question.options || []).flatMap((option) => option.blocks || [])).trim().length > 0
+    || (question.blanks || []).length > 0
+    || Boolean(question.correctionStatement?.trim());
+}
+
+function blocksContainAudio(blocks) {
+  if (!Array.isArray(blocks)) return false;
+  return blocks.some((block) => {
+    if (!isObject(block)) return false;
+    if (block.type === "audio") return true;
+    if (block.type === "table") {
+      return blocksContainAudio(block.headers)
+        || block.rows.some((row) => (row.cells || []).some((cell) => blocksContainAudio(cell)));
+    }
+    if (block.type === "dialogue") return block.turns.some((turn) => blocksContainAudio(turn.blocks));
+    return false;
+  });
+}
+
+function hasLegacyListeningMarker(text) {
+  return /(?:^|\s)(?:[IVX]+\s*[.、:]?\s*)?听力\s*[（(]|listening\s+comprehension|听下面|听第一节|听第二节|录音|音频/i.test(text);
+}
+
+export function validateSeniorHighV2Publishability(set) {
+  const questions = set.sections.flatMap((section) => section.groups.flatMap((group) => group.questions)).filter((question) => question.type !== "instruction_only");
+  const errors = [];
+  if (questions.length === 0) errors.push("publishability: no usable questions");
+  if (!questions.some(questionHasContent)) errors.push("publishability: no question or article content");
+  if (!questions.some((question) => question.answerSpec?.availability === "answered")) errors.push("publishability: no reliable answers");
+  const questionGroups = set.sections.flatMap((section) => section.groups).filter((group) => group.questions.some((question) => question.type !== "instruction_only"));
+  const groupsWithoutContext = questionGroups.filter((group) => {
+    const stimulusText = blockText(group.stimulusBlocks).trim();
+    const hasStimulus = stimulusText.length > 0;
+    const questionsWithoutPrompt = group.questions.filter((question) => question.type !== "instruction_only").some((question) => blockText(question.promptBlocks).trim().length === 0 && !question.correctionStatement?.trim());
+    return (!hasStimulus || stimulusText.length < 150) && questionsWithoutPrompt;
+  });
+  if (groupsWithoutContext.length > 0) errors.push(`publishability: ${groupsWithoutContext.length} question group(s) have no article or question prompt`);
+  const legacyGroupsWithUnavailableListening = set.kind === "paper" ? set.sections.flatMap((section) => section.groups.map((group) => ({ section, group }))).filter(({ section, group }) => {
+    if (!(section.id.toLowerCase().includes("legacy") || group.id.toLowerCase().includes("legacy"))) return false;
+    const questions = group.questions.filter((question) => question.type !== "instruction_only");
+    if (questions.length < 10) return false;
+    const materialText = [
+      blockText(group.instructions),
+      blockText(group.stimulusBlocks),
+    ].join(" ").trim();
+    if (!hasLegacyListeningMarker(materialText)) return false;
+    return !blocksContainAudio(section.instructions)
+      && !blocksContainAudio(group.instructions)
+      && !blocksContainAudio(group.stimulusBlocks);
+  }) : [];
+  if (legacyGroupsWithUnavailableListening.length > 0) errors.push(`publishability: ${legacyGroupsWithUnavailableListening.length} legacy question group(s) contain listening material without usable audio and cannot be safely separated`);
+  return { ok: errors.length === 0, errors };
 }
 
 export function isSeniorHighV2Set(value) {

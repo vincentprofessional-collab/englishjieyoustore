@@ -1,82 +1,234 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-01T15:10:10.086Z",
+  "generatedAt": "2026-09-08T12:44:58.460Z",
   "publishable": true,
   "published": [
     {
-      "id": "paper-2007-beijing-legacy",
-      "kind": "paper",
-      "questions": 70,
-      "unavailableAssets": [
-        {
-          "assetId": "asset-ef595dbc2046f3e28f5251c54c3cdd1a97ce90b0fb9ded3a89b56c43c1206cb8",
-          "kind": "image",
-          "reason": "Command failed: unzip -p /Users/shidianjin/Documents/高考英语/1990-2007·高考英语真题·word/北京/2007年北京高考英语真题及答案.doc word/media/image1.jpeg"
-        },
-        {
-          "assetId": "asset-f865026bd02bd9d20cc44c9f58da7c7d4cbce5a9ed007e058e151b5d77a15342",
-          "kind": "image",
-          "reason": "Command failed: unzip -p /Users/shidianjin/Documents/高考英语/1990-2007·高考英语真题·word/北京/2007年北京高考英语真题及答案.doc word/media/image2.jpeg"
-        },
-        {
-          "assetId": "asset-abf4d0fb611da54498f0339241521bf5a2d39f30934de2d3ae909d704f4dc3a3",
-          "kind": "image",
-          "reason": "Command failed: unzip -p /Users/shidianjin/Documents/高考英语/1990-2007·高考英语真题·word/北京/2007年北京高考英语真题及答案.doc word/media/image3.jpeg"
-        }
-      ]
+      "id": "practice-专项-source-3b9b5ea1fd29",
+      "kind": "practice",
+      "questions": 25,
+      "unavailableAssets": []
+    },
+    {
+      "id": "practice-专项-source-4afa2ccc7660",
+      "kind": "practice",
+      "questions": 6,
+      "unavailableAssets": []
+    },
+    {
+      "id": "practice-专项-source-8a7d06e069d3",
+      "kind": "practice",
+      "questions": 5,
+      "unavailableAssets": []
+    },
+    {
+      "id": "practice-专项-source-f85ed9915446",
+      "kind": "practice",
+      "questions": 6,
+      "unavailableAssets": []
+    },
+    {
+      "id": "practice-专项-source-41ad7d8b53dd",
+      "kind": "practice",
+      "questions": 6,
+      "unavailableAssets": []
+    },
+    {
+      "id": "practice-专项-source-5d56cfaf0127",
+      "kind": "practice",
+      "questions": 14,
+      "unavailableAssets": []
+    },
+    {
+      "id": "practice-专项-source-7d222b2e8d08",
+      "kind": "practice",
+      "questions": 14,
+      "unavailableAssets": []
+    },
+    {
+      "id": "practice-专项-source-f0c1625c1696",
+      "kind": "practice",
+      "questions": 5,
+      "unavailableAssets": []
+    },
+    {
+      "id": "practice-专项-source-e944e16ac99c",
+      "kind": "practice",
+      "questions": 5,
+      "unavailableAssets": []
+    },
+    {
+      "id": "practice-专项-source-98f3e60f553b",
+      "kind": "practice",
+      "questions": 6,
+      "unavailableAssets": []
+    },
+    {
+      "id": "practice-专项-source-81011228c8a1",
+      "kind": "practice",
+      "questions": 5,
+      "unavailableAssets": []
+    },
+    {
+      "id": "practice-专项-source-03ba8617e4ce",
+      "kind": "practice",
+      "questions": 4,
+      "unavailableAssets": []
+    },
+    {
+      "id": "practice-专项-source-35231b3d48e3",
+      "kind": "practice",
+      "questions": 5,
+      "unavailableAssets": []
+    },
+    {
+      "id": "practice-专项-source-a980f519df83",
+      "kind": "practice",
+      "questions": 5,
+      "unavailableAssets": []
+    },
+    {
+      "id": "practice-专项-source-92a82eb39452",
+      "kind": "practice",
+      "questions": 6,
+      "unavailableAssets": []
+    },
+    {
+      "id": "practice-专项-source-b3f5c381f0e6",
+      "kind": "practice",
+      "questions": 4,
+      "unavailableAssets": []
+    },
+    {
+      "id": "practice-专项-source-6205e806d14f",
+      "kind": "practice",
+      "questions": 4,
+      "unavailableAssets": []
+    },
+    {
+      "id": "practice-专项-source-235fd0e098a6",
+      "kind": "practice",
+      "questions": 4,
+      "unavailableAssets": []
+    },
+    {
+      "id": "practice-专项-source-790de23c8894",
+      "kind": "practice",
+      "questions": 4,
+      "unavailableAssets": []
+    },
+    {
+      "id": "practice-专项-source-4e3835ec030d",
+      "kind": "practice",
+      "questions": 30,
+      "unavailableAssets": []
+    },
+    {
+      "id": "practice-专项-source-998619a4108b",
+      "kind": "practice",
+      "questions": 30,
+      "unavailableAssets": []
+    },
+    {
+      "id": "practice-专项-source-c93b1e791a12",
+      "kind": "practice",
+      "questions": 15,
+      "unavailableAssets": []
+    },
+    {
+      "id": "practice-专项-source-018721bf51fd",
+      "kind": "practice",
+      "questions": 4,
+      "unavailableAssets": []
+    },
+    {
+      "id": "practice-专项-source-c11559e92a76",
+      "kind": "practice",
+      "questions": 300,
+      "unavailableAssets": []
+    },
+    {
+      "id": "practice-专项-source-5e84e615b28b",
+      "kind": "practice",
+      "questions": 1422,
+      "unavailableAssets": []
+    },
+    {
+      "id": "practice-专项-source-c798c707ac19",
+      "kind": "practice",
+      "questions": 1393,
+      "unavailableAssets": []
+    },
+    {
+      "id": "practice-专项-source-c9747d52f7d9",
+      "kind": "practice",
+      "questions": 340,
+      "unavailableAssets": []
+    },
+    {
+      "id": "practice-专项-source-656067399b0d",
+      "kind": "practice",
+      "questions": 10,
+      "unavailableAssets": []
+    },
+    {
+      "id": "practice-专项-source-b85d44865b7e",
+      "kind": "practice",
+      "questions": 3,
+      "unavailableAssets": []
+    },
+    {
+      "id": "practice-专项-source-c5d22e6fbe73",
+      "kind": "practice",
+      "questions": 84,
+      "unavailableAssets": []
+    },
+    {
+      "id": "practice-专项-source-ce37bca3061e",
+      "kind": "practice",
+      "questions": 22,
+      "unavailableAssets": []
+    },
+    {
+      "id": "practice-专项-source-d29f01cc78e3",
+      "kind": "practice",
+      "questions": 92,
+      "unavailableAssets": []
+    },
+    {
+      "id": "practice-专项-source-d7de1b7f399a",
+      "kind": "practice",
+      "questions": 10,
+      "unavailableAssets": []
+    },
+    {
+      "id": "practice-专项-source-e309ef015fa1",
+      "kind": "practice",
+      "questions": 32,
+      "unavailableAssets": []
+    },
+    {
+      "id": "practice-专项-source-f776d234aab3",
+      "kind": "practice",
+      "questions": 60,
+      "unavailableAssets": []
     },
     {
       "id": "paper-2025-beijing",
       "kind": "paper",
       "questions": 44,
-      "unavailableAssets": [
-        {
-          "assetId": "asset-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-          "kind": "image",
-          "reason": "empty_asset"
-        }
-      ]
-    },
-    {
-      "id": "paper-2025-new-gaokao-i",
-      "kind": "paper",
-      "questions": 67,
       "unavailableAssets": []
     },
     {
       "id": "paper-2025-new-gaokao-ii",
       "kind": "paper",
-      "questions": 67,
-      "unavailableAssets": [
-        {
-          "assetId": "asset-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-          "kind": "image",
-          "reason": "empty_asset"
-        }
-      ]
-    },
-    {
-      "id": "paper-2025-zhejiang-january",
-      "kind": "paper",
-      "questions": 67,
-      "unavailableAssets": [
-        {
-          "assetId": "asset-4bce2f9b1416c895d1bbbb3b11e80edd910f97d26e566693513a27aeda639cdd",
-          "kind": "audio",
-          "reason": "media_over_12582912_bytes"
-        }
-      ]
-    },
-    {
-      "id": "practice-5-3-application-writing",
-      "kind": "practice",
-      "questions": 18,
+      "questions": 47,
       "unavailableAssets": []
     },
     {
-      "id": "practice-5-3-cloze",
-      "kind": "practice",
-      "questions": 180,
+      "id": "paper-2025-new-gaokao-i",
+      "kind": "paper",
+      "questions": 47,
       "unavailableAssets": []
     },
     {
@@ -86,9 +238,9 @@
       "unavailableAssets": []
     },
     {
-      "id": "practice-5-3-grammar-fill",
+      "id": "practice-5-3-summary-writing",
       "kind": "practice",
-      "questions": 220,
+      "questions": 12,
       "unavailableAssets": []
     },
     {
@@ -98,40 +250,522 @@
       "unavailableAssets": []
     },
     {
-      "id": "practice-5-3-summary-writing",
+      "id": "practice-5-3-cloze",
       "kind": "practice",
-      "questions": 12,
+      "questions": 180,
       "unavailableAssets": []
     },
     {
-      "id": "practice-guangdong-speaking-test-c",
+      "id": "practice-5-3-application-writing",
       "kind": "practice",
-      "questions": 5,
-      "unavailableAssets": [
-        {
-          "assetId": "asset-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-          "kind": "image",
-          "reason": "empty_asset"
-        },
-        {
-          "assetId": "asset-1a081b4ffafcf341ebc9d04db03c9c713b53d03089814bf1c8ef8a616310d412",
-          "kind": "audio",
-          "reason": "media_over_12582912_bytes"
-        },
-        {
-          "assetId": "asset-b513b642329728c66a2b3b756b579bd59378af3d59debd6c292d41b8a8b78354",
-          "kind": "video",
-          "reason": "media_over_12582912_bytes"
-        }
-      ]
+      "questions": 18,
+      "unavailableAssets": []
+    },
+    {
+      "id": "practice-5-3-grammar-fill",
+      "kind": "practice",
+      "questions": 220,
+      "unavailableAssets": []
+    },
+    {
+      "id": "paper-2025-zhejiang-january",
+      "kind": "paper",
+      "questions": 47,
+      "unavailableAssets": []
+    },
+    {
+      "id": "paper-2024-beijing",
+      "kind": "paper",
+      "questions": 43,
+      "unavailableAssets": []
+    },
+    {
+      "id": "paper-2024-new-gaokao-ii",
+      "kind": "paper",
+      "questions": 67,
+      "unavailableAssets": []
+    },
+    {
+      "id": "paper-2024-national-eaf467d6a8f1",
+      "kind": "paper",
+      "questions": 20,
+      "unavailableAssets": []
+    },
+    {
+      "id": "paper-2024-new-gaokao-i",
+      "kind": "paper",
+      "questions": 67,
+      "unavailableAssets": []
+    },
+    {
+      "id": "paper-2024-tianjin-27a290d25555",
+      "kind": "paper",
+      "questions": 36,
+      "unavailableAssets": []
+    },
+    {
+      "id": "paper-2024-zhejiang-bb3fb00e8526",
+      "kind": "paper",
+      "questions": 31,
+      "unavailableAssets": []
     }
   ],
-  "rejected": [],
+  "rejected": [
+    {
+      "id": "paper-2004-guangxi-f9750632e163",
+      "errors": [
+        "publishability: 1 legacy question group(s) contain listening material without usable audio and cannot be safely separated"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2004-heilongjiang-4e7bcd28c3ae",
+      "errors": [
+        "publishability: 1 legacy question group(s) contain listening material without usable audio and cannot be safely separated"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2005-guangdong-2aa5b1333cb2",
+      "errors": [
+        "publishability: 1 legacy question group(s) contain listening material without usable audio and cannot be safely separated"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2006-guangdong-c14a665dbe06",
+      "errors": [
+        "publishability: 1 legacy question group(s) contain listening material without usable audio and cannot be safely separated"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2007-beijing-legacy",
+      "errors": [
+        "legacy .doc conversion does not preserve a complete article and question layout"
+      ],
+      "structureStatus": "review_required"
+    },
+    {
+      "id": "paper-2007-guangdong-1e7257f7e436",
+      "errors": [
+        "publishability: 1 legacy question group(s) contain listening material without usable audio and cannot be safely separated"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2007-guangdong-4d20c35304d0",
+      "errors": [
+        "publishability: 1 legacy question group(s) contain listening material without usable audio and cannot be safely separated"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2007-shandong-97dabcdc1dfe",
+      "errors": [
+        "publishability: 1 legacy question group(s) contain listening material without usable audio and cannot be safely separated"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2007-shanghai-fc5c568459f2",
+      "errors": [
+        "publishability: 1 legacy question group(s) contain listening material without usable audio and cannot be safely separated"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2008-guangdong-66b60adf545f",
+      "errors": [
+        "publishability: 1 legacy question group(s) contain listening material without usable audio and cannot be safely separated"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2008-shanghai-30adfcd5956c",
+      "errors": [
+        "publishability: 1 legacy question group(s) contain listening material without usable audio and cannot be safely separated"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2009-guangdong-343dfe9ca0a3",
+      "errors": [
+        "publishability: 1 legacy question group(s) contain listening material without usable audio and cannot be safely separated"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2009-guangdong-beb223d62ed1",
+      "errors": [
+        "publishability: 1 legacy question group(s) contain listening material without usable audio and cannot be safely separated"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2010-fujian-a41de770a267",
+      "errors": [
+        "publishability: 1 legacy question group(s) contain listening material without usable audio and cannot be safely separated"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2010-guangdong-26b38a0a8b14",
+      "errors": [
+        "publishability: 1 legacy question group(s) contain listening material without usable audio and cannot be safely separated"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2010-hunan-1a956c6e41cc",
+      "errors": [
+        "publishability: 1 legacy question group(s) contain listening material without usable audio and cannot be safely separated"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2010-hunan-c932eec1caaf",
+      "errors": [
+        "publishability: 1 legacy question group(s) contain listening material without usable audio and cannot be safely separated"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2010-jiangsu-65adade85e8b",
+      "errors": [
+        "publishability: 1 legacy question group(s) contain listening material without usable audio and cannot be safely separated"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2010-national-b0bc94f9d4b2",
+      "errors": [
+        "publishability: 1 legacy question group(s) contain listening material without usable audio and cannot be safely separated"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2010-shanghai-b90d85290057",
+      "errors": [
+        "publishability: 1 legacy question group(s) contain listening material without usable audio and cannot be safely separated"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2011-chongqing-d9ab89522c26",
+      "errors": [
+        "publishability: 1 question group(s) have no article or question prompt"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2011-fujian-748b3614808a",
+      "errors": [
+        "publishability: 1 question group(s) have no article or question prompt"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2011-hunan-ceb94d5c1a81",
+      "errors": [
+        "publishability: 1 legacy question group(s) contain listening material without usable audio and cannot be safely separated"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2011-shanghai-96e4a0cf97b8",
+      "errors": [
+        "publishability: 1 legacy question group(s) contain listening material without usable audio and cannot be safely separated"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2012-hubei-0fa863c4c4c8",
+      "errors": [
+        "publishability: 1 question group(s) have no article or question prompt"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2012-hunan-2fc5c4bd64d6",
+      "errors": [
+        "publishability: 1 legacy question group(s) contain listening material without usable audio and cannot be safely separated"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2012-hunan-9ebed4946b94",
+      "errors": [
+        "publishability: 1 legacy question group(s) contain listening material without usable audio and cannot be safely separated"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2013-anhui-51ad45e4b597",
+      "errors": [
+        "publishability: 1 question group(s) have no article or question prompt"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2013-guangdong-02f567c00ac2",
+      "errors": [
+        "publishability: 1 question group(s) have no article or question prompt"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2013-guangdong-88e65003bb57",
+      "errors": [
+        "publishability: 1 question group(s) have no article or question prompt"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2013-hubei-79467d0aa00e",
+      "errors": [
+        "publishability: 1 question group(s) have no article or question prompt"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2013-hunan-29187db9afc8",
+      "errors": [
+        "publishability: 1 legacy question group(s) contain listening material without usable audio and cannot be safely separated"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2013-hunan-b0406080596b",
+      "errors": [
+        "publishability: 1 legacy question group(s) contain listening material without usable audio and cannot be safely separated"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2013-jiangsu-eefaf8d6433e",
+      "errors": [
+        "publishability: 1 legacy question group(s) contain listening material without usable audio and cannot be safely separated"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2013-jiangxi-aaddb47fa25c",
+      "errors": [
+        "publishability: 1 question group(s) have no article or question prompt"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2014-fujian-3b60eb0bdd2e",
+      "errors": [
+        "publishability: 1 legacy question group(s) contain listening material without usable audio and cannot be safely separated"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2014-fujian-9fc3a5592eb4",
+      "errors": [
+        "publishability: 1 legacy question group(s) contain listening material without usable audio and cannot be safely separated"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2014-hubei-d74a2beaf541",
+      "errors": [
+        "publishability: 1 question group(s) have no article or question prompt"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2014-hunan-2cfc10810f59",
+      "errors": [
+        "publishability: 1 legacy question group(s) contain listening material without usable audio and cannot be safely separated"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2014-hunan-33eedece2c42",
+      "errors": [
+        "publishability: 1 legacy question group(s) contain listening material without usable audio and cannot be safely separated"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2014-shanghai-59574934bc88",
+      "errors": [
+        "publishability: 1 legacy question group(s) contain listening material without usable audio and cannot be safely separated"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2015-anhui-aab30a3df583",
+      "errors": [
+        "publishability: 1 question group(s) have no article or question prompt"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2015-hunan-aee0e718c24e",
+      "errors": [
+        "publishability: 1 legacy question group(s) contain listening material without usable audio and cannot be safely separated"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2015-hunan-bf5326ebb084",
+      "errors": [
+        "publishability: 1 legacy question group(s) contain listening material without usable audio and cannot be safely separated"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2015-national-ad99339ae7b7",
+      "errors": [
+        "publishability: 1 question group(s) have no article or question prompt"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2015-shanghai-2c0782bc6135",
+      "errors": [
+        "publishability: 1 legacy question group(s) contain listening material without usable audio and cannot be safely separated"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2016-shanghai-8cbf7262d66b",
+      "errors": [
+        "publishability: 1 legacy question group(s) contain listening material without usable audio and cannot be safely separated"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2018-national-be167dce11a8",
+      "errors": [
+        "publishability: 1 question group(s) have no article or question prompt"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2019-national-548fd5eda2e1",
+      "errors": [
+        "publishability: 1 legacy question group(s) contain listening material without usable audio and cannot be safely separated"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2019-national-aaa933ab5530",
+      "errors": [
+        "publishability: 1 legacy question group(s) contain listening material without usable audio and cannot be safely separated"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2020-shanghai-eda0bb4b14b8",
+      "errors": [
+        "publishability: 1 legacy question group(s) contain listening material without usable audio and cannot be safely separated"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2020-shanghai-eedbbf91a8ad",
+      "errors": [
+        "publishability: 1 legacy question group(s) contain listening material without usable audio and cannot be safely separated"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2020-zhejiang-4a31da9725f8",
+      "errors": [
+        "publishability: 1 legacy question group(s) contain listening material without usable audio and cannot be safely separated"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2021-shanghai-098b0afb3295",
+      "errors": [
+        "publishability: 1 legacy question group(s) contain listening material without usable audio and cannot be safely separated"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2021-shanghai-97dea11eaff3",
+      "errors": [
+        "publishability: 1 legacy question group(s) contain listening material without usable audio and cannot be safely separated"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2022-shanghai-9aa8691bc7cf",
+      "errors": [
+        "publishability: 1 legacy question group(s) contain listening material without usable audio and cannot be safely separated"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2022-shanghai-cbf8a867987b",
+      "errors": [
+        "publishability: 1 legacy question group(s) contain listening material without usable audio and cannot be safely separated"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2022-shanghai-e29d1f227c26",
+      "errors": [
+        "publishability: 1 legacy question group(s) contain listening material without usable audio and cannot be safely separated"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2022-zhejiang-55819fa15bda",
+      "errors": [
+        "publishability: 1 legacy question group(s) contain listening material without usable audio and cannot be safely separated"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2023-national-bda6bdcacfa8",
+      "errors": [
+        "publishability: 1 question group(s) have no article or question prompt"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2023-shanghai-f2eb2b4d14dd",
+      "errors": [
+        "publishability: 1 legacy question group(s) contain listening material without usable audio and cannot be safely separated"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "paper-2023-source-ccc908f40956",
+      "errors": [
+        "publishability: 1 question group(s) have no article or question prompt"
+      ],
+      "structureStatus": "approved"
+    },
+    {
+      "id": "practice-guangdong-speaking-test-c",
+      "errors": [
+        "publishability: no reliable answers"
+      ],
+      "structureStatus": "approved"
+    }
+  ],
   "totals": {
-    "sets": 12,
-    "papers": 5,
-    "practiceSets": 7,
-    "questions": 867,
-    "unavailableAssets": 9
+    "sets": 51,
+    "papers": 10,
+    "practiceSets": 41,
+    "questions": 4976,
+    "unavailableAssets": 0,
+    "rejected": 63
+  },
+  "scope": {
+    "paperYears": [
+      "2024",
+      "2025"
+    ],
+    "note": "Public paper library is limited to the user-approved 2024 and 2025 cohorts."
   }
 }

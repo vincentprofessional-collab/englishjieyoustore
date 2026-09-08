@@ -50,6 +50,16 @@ export type SeniorHighPaper = {
   questions: SeniorHighItem[];
 };
 
+export type SeniorHighPracticeGroup = {
+  id: string;
+  title: string;
+  passage: string;
+  category: string;
+  source_relpath: string;
+  source_sha256: string;
+  question_count: number;
+};
+
 export type SeniorHighCatalog = {
   version: number;
   generated_at: string;
@@ -57,5 +67,6 @@ export type SeniorHighCatalog = {
   paper_review_count: number;
   knowledge: SeniorHighItem[];
   practice: SeniorHighItem[];
+  practice_groups?: SeniorHighPracticeGroup[];
   papers: SeniorHighPaper[];
 };

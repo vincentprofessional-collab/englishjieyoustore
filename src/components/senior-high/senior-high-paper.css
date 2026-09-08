@@ -1,0 +1,121 @@
+/* Opt-in paper layouts; existing catalogs retain their current group layout. */
+.senior-high-v2-group[data-presentation="cloze"] .senior-high-v2-group-body,
+.senior-high-v2-group[data-presentation="inline"] .senior-high-v2-group-body {
+  grid-template-columns: minmax(0, 1fr);
+}
+.senior-high-v2-group[data-presentation="cloze"] .senior-high-question-card {
+  grid-template-columns: 64px minmax(0, 1fr);
+  align-items: start;
+  gap: 12px;
+  border: 0;
+  border-bottom: 1px solid #e5e1d6;
+  border-radius: 0;
+  padding: 12px 0;
+  background: transparent;
+}
+.senior-high-v2-group[data-presentation="cloze"] .senior-high-question-meta {
+  padding-top: 10px;
+}
+.senior-high-v2-group[data-presentation="cloze"] .senior-high-question-meta small { display: none; }
+.senior-high-v2-group[data-presentation="cloze"] .senior-high-options { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.senior-high-v2-group[data-presentation="cloze"] .senior-high-feedback { grid-column: 1 / -1; }
+.senior-high-v2-group[data-presentation="inline"] .senior-high-v2-stimulus { background: #fffefb; }
+.senior-high-v2-group[data-presentation="inline"] .senior-high-v2-shared-options { font-size: 17px; }
+.senior-high-v2-group[data-presentation="reading"] .senior-high-v2-group-body {
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  align-items: start;
+}
+.senior-high-v2-group[data-presentation="inline"][data-has-options="true"] .senior-high-v2-group-body {
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  align-items: start;
+}
+.senior-high-v2-group[data-side-questions="false"] .senior-high-v2-group-body {
+  grid-template-columns: minmax(0, 1fr);
+}
+.senior-high-v2-group[data-presentation="reading"] .senior-high-v2-stimulus,
+.senior-high-v2-group[data-presentation="inline"][data-has-options="true"] .senior-high-v2-stimulus {
+  align-self: start;
+}
+.senior-high-v2-group[data-presentation="inline"][data-has-options="false"] .senior-high-v2-group-body,
+.senior-high-v2-group.listening .senior-high-v2-group-body {
+  grid-template-columns: minmax(0, 1fr);
+}
+.senior-high-v2-group[data-presentation="reading"] .senior-high-v2-question-column,
+.senior-high-v2-group.split .senior-high-v2-question-column,
+.senior-high-v2-group.with-stimulus-questions .senior-high-v2-question-column {
+  min-height: 0;
+  height: auto;
+  max-height: var(--senior-high-article-height);
+  overflow-y: auto;
+  padding-right: 8px;
+  scrollbar-gutter: stable;
+}
+.senior-high-v2-group.listening .senior-high-v2-question-column {
+  max-height: none;
+  overflow: visible;
+  padding-right: 0;
+}
+.senior-high-v2-group[data-presentation="writing"] .senior-high-question-card { border: 0; padding: 0; }
+.senior-high-writing-prompt { display: grid; gap: 12px; }
+.senior-high-writing-input { min-height: 9rem; }
+.senior-high-v2-runner button.senior-high-v2-choice-blank {
+  border: 0;
+  border-bottom: 2px dashed #9a907f;
+  border-radius: 0;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+  padding: 0 4px;
+}
+.senior-high-v2-runner button.senior-high-v2-choice-blank.drop-target { min-width: 80px; border-bottom: 2px dashed #9a907f; touch-action: none; }
+.senior-high-v2-runner button.senior-high-v2-choice-blank.drop-target.assigned { border-bottom-color: var(--accent); border-radius: 4px; background: var(--accent-soft); }
+.senior-high-v2-runner button.senior-high-v2-choice-blank.drop-target.correct { border-bottom-color: var(--success); background: #e8f6ee; color: var(--success); }
+.senior-high-v2-runner button.senior-high-v2-choice-blank.drop-target.incorrect { border-bottom-color: var(--danger); background: #fff0ef; color: var(--danger); }
+.senior-high-v2-runner [id], .senior-high-paper-review { scroll-margin-top: 110px; }
+.senior-high-paper-review, .senior-high-paper-finish {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  border: 1px solid #cfdfd6;
+  border-radius: 14px;
+  background: #f2f8f4;
+  padding: 20px;
+  margin-top: 18px;
+}
+.senior-high-paper-review p { margin: 6px 0 0; color: #52675d; line-height: 1.6; }
+.senior-high-paper-review button, .senior-high-paper-finish button {
+  border: 0;
+  border-radius: 10px;
+  background: #17624e;
+  color: #fff;
+  padding: 13px 18px;
+  font: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.senior-high-writing-response { display: grid; gap: 12px; min-width: 0; }
+.senior-high-writing-response p { margin: 0; font: 18px/1.8 Georgia, "Times New Roman", serif; }
+.senior-high-letter-signature { text-align: right; }
+.senior-high-correction small { display: block; color: #596a61; line-height: 1.6; }
+.senior-high-correction p { line-height: 2.2; }
+.senior-high-correction button { border: 0; border-radius: 3px; background: transparent; color: inherit; font: inherit; padding: 3px 1px; cursor: pointer; }
+.senior-high-correction button.marked { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; background: #fff0cc; }
+.senior-high-v2-runner button:focus-visible, .senior-high-v2-runner input:focus-visible, .senior-high-v2-runner textarea:focus-visible, .senior-high-v2-runner select:focus-visible { outline: 3px solid #438572; outline-offset: 3px; }
+@media (max-width: 900px) {
+  .senior-high-v2-group[data-presentation="reading"] .senior-high-v2-group-body { grid-template-columns: minmax(0, 1fr); }
+  .senior-high-v2-group[data-presentation="inline"][data-has-options="true"] .senior-high-v2-group-body { grid-template-columns: minmax(0, 1fr); }
+  .senior-high-v2-group[data-presentation="reading"] .senior-high-v2-question-column,
+  .senior-high-v2-group.split .senior-high-v2-question-column,
+  .senior-high-v2-group.with-stimulus-questions .senior-high-v2-question-column {
+    height: auto;
+    max-height: none;
+    overflow: visible;
+    padding-right: 0;
+  }
+}
+@media (max-width: 620px) {
+  .senior-high-v2-group[data-presentation="cloze"] .senior-high-question-card { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .senior-high-v2-group[data-presentation="cloze"] .senior-high-options { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .senior-high-paper-review, .senior-high-paper-finish { align-items: stretch; flex-direction: column; gap: 12px; padding: 16px; }
+}

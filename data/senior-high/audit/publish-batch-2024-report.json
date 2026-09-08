@@ -1,0 +1,81 @@
+{
+  "batch": "2024-high-confidence",
+  "generated": [
+    {
+      "id": "paper-2024-new-gaokao-i",
+      "kind": "paper",
+      "title": "2024年普通高等学校招生全国统一考试（新课标Ⅰ卷）",
+      "year": "2024",
+      "region": "全国",
+      "variant": "新高考Ⅰ卷",
+      "questionCount": 67,
+      "answeredCount": 65,
+      "explanationCount": 45,
+      "answerStatus": "partial",
+      "questionTypes": [
+        "essay",
+        "inline_fill",
+        "shared_option_matching",
+        "single_choice"
+      ],
+      "href": "/senior-high/papers/paper-2024-new-gaokao-i",
+      "quality": {
+        "structureStatus": "approved",
+        "structureConfidence": 0.9,
+        "issueCount": 0
+      }
+    },
+    {
+      "id": "paper-2024-new-gaokao-ii",
+      "kind": "paper",
+      "title": "2024年普通高等学校招生全国统一考试",
+      "year": "2024",
+      "region": "全国",
+      "variant": "新高考Ⅱ卷",
+      "questionCount": 67,
+      "answeredCount": 58,
+      "explanationCount": 44,
+      "answerStatus": "partial",
+      "questionTypes": [
+        "essay",
+        "inline_fill",
+        "shared_option_matching",
+        "single_choice"
+      ],
+      "href": "/senior-high/papers/paper-2024-new-gaokao-ii",
+      "quality": {
+        "structureStatus": "approved",
+        "structureConfidence": 0.9,
+        "issueCount": 0
+      }
+    },
+    {
+      "id": "paper-2024-beijing",
+      "kind": "paper",
+      "title": "2024年普通高等学校招生高考真题全国统一考试(北京卷)",
+      "year": "2024",
+      "region": "北京",
+      "variant": "北京卷",
+      "questionCount": 43,
+      "answeredCount": 35,
+      "explanationCount": 37,
+      "answerStatus": "partial",
+      "questionTypes": [
+        "error_correction",
+        "essay",
+        "inline_fill",
+        "shared_option_matching",
+        "short_answer",
+        "single_choice"
+      ],
+      "href": "/senior-high/papers/paper-2024-beijing",
+      "quality": {
+        "structureStatus": "approved",
+        "structureConfidence": 0.84,
+        "issueCount": 0
+      }
+    }
+  ],
+  "sourceCount": 8,
+  "qualityGate": "approved-only"
+}

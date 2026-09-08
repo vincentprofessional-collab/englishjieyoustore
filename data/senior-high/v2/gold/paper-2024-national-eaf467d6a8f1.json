@@ -1,0 +1,2177 @@
+{
+  "schemaVersion": 2,
+  "id": "paper-2024-national-eaf467d6a8f1",
+  "kind": "paper",
+  "title": "2024年普通高等学校招生全国统一考试（全国甲卷）",
+  "year": "2024",
+  "region": "全国",
+  "variant": "全国甲卷",
+  "submissionMode": "whole-paper",
+  "instructions": [],
+  "sections": [
+    {
+      "id": "section-listening",
+      "title": "第一部分 听力及可做题目",
+      "instructions": [
+        {
+          "type": "paragraph",
+          "runs": [
+            {
+              "type": "text",
+              "text": "请先播放听力音频，再完成下方选择题。"
+            }
+          ]
+        }
+      ],
+      "layout": "flow",
+      "groups": [
+        {
+          "id": "group-legacy-listening",
+          "instructions": [],
+          "stimulusBlocks": [
+            {
+              "type": "audio",
+              "assetId": "asset-c04098edcaa54dc8cb4f4da6ea17379902d3d234d590084289aa952f1cfcd736",
+              "label": "听力音频"
+            }
+          ],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "q-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Where are the speakers going?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "A new restaurant."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "A convenience store."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Their office."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（全国甲卷）（解析卷）.docx",
+                  "sha256": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "5230186c5a89a8a7a66712f5c4ec0a23f51e05d0b471ccf8c9c5da4abdc4369a",
+                "answerVariantFingerprint": "83d2471dafcfab32d98492442ec8198c3306bcf17da497e4e41cd0a4bf9e695b"
+              }
+            },
+            {
+              "id": "q-2",
+              "displayNumber": 2,
+              "sourceQuestionNumber": 2,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "When is the class presentation according to Vicky?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "On Thursday."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "On Wednesday."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "On Tuesday."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "C"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（全国甲卷）（解析卷）.docx",
+                  "sha256": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "d149d53faeaadfbb9b0294348f54a6f9511655f866fefee3d522b1bd0ca48a64",
+                "answerVariantFingerprint": "df6dcc7435b557f8f53f63043a3fff90e3b8ec4fcea026f956997ba4439fa662"
+              }
+            },
+            {
+              "id": "q-3",
+              "displayNumber": 3,
+              "sourceQuestionNumber": 3,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Why does the woman make the call?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To check the price."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To make an apology."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To cancel her order."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "B"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（全国甲卷）（解析卷）.docx",
+                  "sha256": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "98a00c7f83d2e986a0f47b299609f679c685e41ddfb0192c35f4e59209bb8bdd",
+                "answerVariantFingerprint": "f1ace480903fb05f18fc4c090597990a65bd004709088eb2679d49894183dd87"
+              }
+            },
+            {
+              "id": "q-4",
+              "displayNumber": 4,
+              "sourceQuestionNumber": 4,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What is the probable relationship between the speakers?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Husband and wife."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Boss and employee."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Salesperson and customer."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "C"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（全国甲卷）（解析卷）.docx",
+                  "sha256": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "6f08a57a8427178b39265e3f9aeda868140312c76f2fa5b02883f62b3582a4f2",
+                "answerVariantFingerprint": "faa6b1d15b50fa25873aee00c3b61d3710ca216cb9898176571b17cf95dfea61"
+              }
+            },
+            {
+              "id": "q-5",
+              "displayNumber": 5,
+              "sourceQuestionNumber": 5,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What are the speakers mainly talking about?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Their move to a new place."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Tom's friends at school."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "A sports center."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（全国甲卷）（解析卷）.docx",
+                  "sha256": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "8f0b7acfe83ca43173187df301d5608b7cf0e35fdf924539ddea052308bf6812",
+                "answerVariantFingerprint": "89d7b122dcaadb9296cca3bcc47d6f73f62470e3cdb5737c75f867bce5739171"
+              }
+            },
+            {
+              "id": "q-6",
+              "displayNumber": 6,
+              "sourceQuestionNumber": 6,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What does the girl tell her dad?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "She decides to quit college."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "She worries about her academic ability."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "She is unpopular with her classmates."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "B"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（全国甲卷）（解析卷）.docx",
+                  "sha256": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "58a5bef9f75b8d6ef9f9ac65475810266d305110e0a84e75ccbae065c33991de"
+              }
+            },
+            {
+              "id": "q-7",
+              "displayNumber": 7,
+              "sourceQuestionNumber": 7,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "How does the father help his daughter?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "By telling a funny joke."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "By sharing his own story."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "By planning a school tour."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "B"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（全国甲卷）（解析卷）.docx",
+                  "sha256": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "30c3b392ee5258ec59966bf9a28d509f048fe2af62487c1573aebc54e7fa432a",
+                "answerVariantFingerprint": "d0d16e4791266cdeb944afed638c306f649904f99fbf6f29e888c67d9ec1149e"
+              }
+            },
+            {
+              "id": "q-8",
+              "displayNumber": 8,
+              "sourceQuestionNumber": 8,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Who is the man?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "A researcher."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "A bird watcher."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "A radio host."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "C"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（全国甲卷）（解析卷）.docx",
+                  "sha256": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "22bbb5f51848c5b46e2fd98e537f287c4b09b51ba0a9a33b2ee5a81f3a292d0c",
+                "answerVariantFingerprint": "001bb5781a16ac8daca6aeef1a0f25157df4b14033b0ee32b081cb3c52e9feec"
+              }
+            },
+            {
+              "id": "q-9",
+              "displayNumber": 9,
+              "sourceQuestionNumber": 9,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "When do birds sing quieter?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "On weekend mornings."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "During rush hours."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "In early evenings."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（全国甲卷）（解析卷）.docx",
+                  "sha256": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "3d96b1eb41f78e2ea65fbf48d422f2f8eda8b58a0f634ab68db44eded838d7d2"
+              }
+            },
+            {
+              "id": "q-10",
+              "displayNumber": 10,
+              "sourceQuestionNumber": 10,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What is Dr. Zollinger going to do next?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Summarize her studies."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Play some recordings."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Answer more questions."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "B"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（全国甲卷）（解析卷）.docx",
+                  "sha256": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "0301f3c815da8b1d456769c5676562d1dc52a9e2a05b5f24668db1455e3feb58"
+              }
+            },
+            {
+              "id": "q-11",
+              "displayNumber": 11,
+              "sourceQuestionNumber": 11,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Where was Jena born?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "In Canada."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "In Japan."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "In Australia."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（全国甲卷）（解析卷）.docx",
+                  "sha256": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "0ff7592a103c8e51fa5e78f15d5dc76104ada54a6268a9d6638bc70d59f7ce03",
+                "answerVariantFingerprint": "af0d423f587986de517c22f0c60cb78f09c9ca4cd0c2b8c86d6306140bd5431d"
+              }
+            },
+            {
+              "id": "q-12",
+              "displayNumber": 12,
+              "sourceQuestionNumber": 12,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "How old was Mike when he left Glasgow?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Five."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Six."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Ten."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "B"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（全国甲卷）（解析卷）.docx",
+                  "sha256": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "d0d85240c347b1b3513f6d9f14ad43bc165c1722cd98958a382fa4a74eed1552",
+                "answerVariantFingerprint": "3d45319ad492ff9838272189334ee6ac7b1b940e36c7ae5ca5bdc0158c80455b"
+              }
+            },
+            {
+              "id": "q-13",
+              "displayNumber": 13,
+              "sourceQuestionNumber": 13,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What do we know about Mike's parents?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They enjoy living abroad."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They first met at the age of 20."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They will start their own company."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（全国甲卷）（解析卷）.docx",
+                  "sha256": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "80429fcaf32a32f68d4ad1c9349991cc642bf8d6bb615300b47d4f537b996881",
+                "answerVariantFingerprint": "5bcdf7e5f01b93ad087afc7505187a149af132c376aeb09e6e818d9fa110833c"
+              }
+            },
+            {
+              "id": "q-14",
+              "displayNumber": 14,
+              "sourceQuestionNumber": 14,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What is the first question to Mr. Green about?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "His adventure in space."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "His physical condition."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "His doctor's advice."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "B"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（全国甲卷）（解析卷）.docx",
+                  "sha256": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "6b04ce90c6011f8444000848688ba3b9fc6846ace59b9909621bb8f9797a5e24",
+                "answerVariantFingerprint": "541b97942939ecfc39c86d5659d98f1a4ef91d8c778fc32d74010ccb61205c77"
+              }
+            },
+            {
+              "id": "q-15",
+              "displayNumber": 15,
+              "sourceQuestionNumber": 15,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "How does Mr. Green feel about traveling to Mars?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It's unlikely to happen."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It's physically demanding."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It's a chance not to be missed."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "C"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（全国甲卷）（解析卷）.docx",
+                  "sha256": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "aba46cbbf01ee7279f0744c4f3aade0c0e5ff44e82129cc72f32a34028dde14b",
+                "answerVariantFingerprint": "5244754d478ece31b7bc3f0f5d3e2a11380c1bb0cc0de546f056cfe4a07651c0"
+              }
+            },
+            {
+              "id": "q-16",
+              "displayNumber": 16,
+              "sourceQuestionNumber": 16,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Which is Mr. Green's favorite movie?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Apollo 13."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Blue Earth."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Space Station."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（全国甲卷）（解析卷）.docx",
+                  "sha256": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "6187e23faae2cbee3eb3e0ebfa7176fac921d151c7f687fee5aeb2635677b8a3"
+              }
+            },
+            {
+              "id": "q-17",
+              "displayNumber": 17,
+              "sourceQuestionNumber": 17,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What is the speaker doing?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Giving a report."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Introducing a musical play."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Making an announcement."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "C"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（全国甲卷）（解析卷）.docx",
+                  "sha256": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "53768ca17ef7b7af5db90fc40edbbcee454f48dc2aa8c07b70201dd1827fd1b5",
+                "answerVariantFingerprint": "126397ee61f022e52d40cc238a9a7d9fbb47461c309b3e6d14388d0d9e39eb36"
+              }
+            },
+            {
+              "id": "q-18",
+              "displayNumber": 18,
+              "sourceQuestionNumber": 18,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What are the students expected to do?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Carry school flags."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Wear fun clothes."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Design fancy masks."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "B"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（全国甲卷）（解析卷）.docx",
+                  "sha256": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "d7b7b377ae8f992e1d4057a9ae5e4620833e7f2f3378bb9f436caf4dc45de3b0"
+              }
+            },
+            {
+              "id": "q-19",
+              "displayNumber": 19,
+              "sourceQuestionNumber": 19,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Where can the parents stand and watch?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "On the sidewalk."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "On the playground."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "In front of the office."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "C"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（全国甲卷）（解析卷）.docx",
+                  "sha256": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "5240b6969b14eee72cf7603583e265b712774d875a2830f8df1e4eee1bc8c0e8",
+                "answerVariantFingerprint": "ca271d64a545be70206d8ee8ae2efde81284bff88a51e0570d1088e5dea872da"
+              }
+            },
+            {
+              "id": "q-20",
+              "displayNumber": 20,
+              "sourceQuestionNumber": 20,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What should the students do if they don't take part?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Let their teacher know."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Stay in the lecture hall."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Do some reading."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+                  "relativePath": "历年真题/【未上传】2024年高考英语试卷（全国甲卷）（解析卷）.docx",
+                  "sha256": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "344227abeeee7e18a174cce74619b31ff63af8b44e3035131cb89f93f1721139",
+                "answerVariantFingerprint": "2aaf9458dafc36d1ee320fec6db01e04fef7c12f1835ea50ce6424e54da6ccf3"
+              }
+            }
+          ],
+          "title": "听力选择题",
+          "presentation": "reading"
+        }
+      ]
+    }
+  ],
+  "assetRefs": [
+    {
+      "assetId": "asset-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "kind": "image",
+      "url": "source://历年真题/【未上传】2024年高考英语试卷（全国甲卷）（解析卷）.docx#word/media/",
+      "mimeType": "application/octet-stream",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+          "relativePath": "历年真题/【未上传】2024年高考英语试卷（全国甲卷）（解析卷）.docx",
+          "sha256": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+          "locator": {},
+          "extractionMethod": "docx-xml",
+          "confidence": 0.96
+        }
+      ]
+    },
+    {
+      "assetId": "asset-ab8e14b3a9bcb80ee2939690c1e8659374571c1ec398e7dad632eb76e08687f8",
+      "kind": "image",
+      "url": "source://历年真题/【未上传】2024年高考英语试卷（全国甲卷）（解析卷）.docx#word/media/image1.png",
+      "mimeType": "image/png",
+      "sha256": "ab8e14b3a9bcb80ee2939690c1e8659374571c1ec398e7dad632eb76e08687f8",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+          "relativePath": "历年真题/【未上传】2024年高考英语试卷（全国甲卷）（解析卷）.docx",
+          "sha256": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+          "locator": {},
+          "extractionMethod": "docx-xml",
+          "confidence": 0.96
+        }
+      ]
+    },
+    {
+      "assetId": "asset-26463ce93280b7190e0702d58516380a62df81a3cf27c41407a45c6cd3e9620b",
+      "kind": "image",
+      "url": "source://历年真题/【未上传】2024年高考英语试卷（全国甲卷）（解析卷）.docx#word/media/image2.png",
+      "mimeType": "image/png",
+      "sha256": "26463ce93280b7190e0702d58516380a62df81a3cf27c41407a45c6cd3e9620b",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+          "relativePath": "历年真题/【未上传】2024年高考英语试卷（全国甲卷）（解析卷）.docx",
+          "sha256": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+          "locator": {},
+          "extractionMethod": "docx-xml",
+          "confidence": 0.96
+        }
+      ]
+    },
+    {
+      "assetId": "asset-bc45f62f2c6992854e3656b2896f71debea8dbb0f6b67618f0c4ad94eaf0264d",
+      "kind": "image",
+      "url": "source://历年真题/【未上传】2024年高考英语试卷（全国甲卷）（解析卷）.docx#word/media/image3.wmf",
+      "mimeType": "application/x-msmetafile",
+      "sha256": "bc45f62f2c6992854e3656b2896f71debea8dbb0f6b67618f0c4ad94eaf0264d",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+          "relativePath": "历年真题/【未上传】2024年高考英语试卷（全国甲卷）（解析卷）.docx",
+          "sha256": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+          "locator": {},
+          "extractionMethod": "docx-xml",
+          "confidence": 0.96
+        }
+      ]
+    },
+    {
+      "assetId": "asset-ad2bf96598e6886574f8f1419e7714a9eacc6bc1f6ba0edd5c7ea6eaf11a0a67",
+      "kind": "image",
+      "url": "source://历年真题/【未上传】2024年高考英语试卷（全国甲卷）（解析卷）.docx#word/media/image4.wmf",
+      "mimeType": "application/x-msmetafile",
+      "sha256": "ad2bf96598e6886574f8f1419e7714a9eacc6bc1f6ba0edd5c7ea6eaf11a0a67",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+          "relativePath": "历年真题/【未上传】2024年高考英语试卷（全国甲卷）（解析卷）.docx",
+          "sha256": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+          "locator": {},
+          "extractionMethod": "docx-xml",
+          "confidence": 0.96
+        }
+      ]
+    },
+    {
+      "assetId": "asset-974e1b4b4e9dcf2ebe888d6cfc52d4d5692c8b9461f1d1089958d68c6f4c2165",
+      "kind": "image",
+      "url": "source://历年真题/【未上传】2024年高考英语试卷（全国甲卷）（解析卷）.docx#word/media/image5.wmf",
+      "mimeType": "application/x-msmetafile",
+      "sha256": "974e1b4b4e9dcf2ebe888d6cfc52d4d5692c8b9461f1d1089958d68c6f4c2165",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+          "relativePath": "历年真题/【未上传】2024年高考英语试卷（全国甲卷）（解析卷）.docx",
+          "sha256": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+          "locator": {},
+          "extractionMethod": "docx-xml",
+          "confidence": 0.96
+        }
+      ]
+    },
+    {
+      "assetId": "asset-0219a4c0d074e52c83f2ed240b46eec5e93554b7a852af326e4f4a1b9aef980b",
+      "kind": "image",
+      "url": "source://历年真题/【未上传】2024年高考英语试卷（全国甲卷）（解析卷）.docx#word/media/image6.wmf",
+      "mimeType": "application/x-msmetafile",
+      "sha256": "0219a4c0d074e52c83f2ed240b46eec5e93554b7a852af326e4f4a1b9aef980b",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+          "relativePath": "历年真题/【未上传】2024年高考英语试卷（全国甲卷）（解析卷）.docx",
+          "sha256": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+          "locator": {},
+          "extractionMethod": "docx-xml",
+          "confidence": 0.96
+        }
+      ]
+    },
+    {
+      "assetId": "asset-244fcebc896cfe8d0dc170a96ae1e5fe5f1669b6474c71760b6c40488a65c9bd",
+      "kind": "image",
+      "url": "source://历年真题/【未上传】2024年高考英语试卷（全国甲卷）（解析卷）.docx#word/media/image7.png",
+      "mimeType": "image/png",
+      "sha256": "244fcebc896cfe8d0dc170a96ae1e5fe5f1669b6474c71760b6c40488a65c9bd",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+          "relativePath": "历年真题/【未上传】2024年高考英语试卷（全国甲卷）（解析卷）.docx",
+          "sha256": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+          "locator": {},
+          "extractionMethod": "docx-xml",
+          "confidence": 0.96
+        }
+      ]
+    },
+    {
+      "assetId": "asset-c04098edcaa54dc8cb4f4da6ea17379902d3d234d590084289aa952f1cfcd736",
+      "kind": "audio",
+      "url": "/senior-high/assets/c04098edcaa54dc8cb4f4da6ea17379902d3d234d590084289aa952f1cfcd736.mp3",
+      "mimeType": "audio/mpeg",
+      "sha256": "c04098edcaa54dc8cb4f4da6ea17379902d3d234d590084289aa952f1cfcd736",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "c04098edcaa54dc8cb4f4da6ea17379902d3d234d590084289aa952f1cfcd736",
+          "relativePath": "历年真题/【未上传】2024年高考英语试卷（全国甲卷）听力音频.mp3",
+          "sha256": "c04098edcaa54dc8cb4f4da6ea17379902d3d234d590084289aa952f1cfcd736",
+          "locator": {},
+          "extractionMethod": "media-manifest",
+          "confidence": 0.9
+        }
+      ]
+    }
+  ],
+  "sourceRefs": [
+    {
+      "sourceDocumentId": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+      "relativePath": "历年真题/【未上传】2024年高考英语试卷（全国甲卷）（解析卷）.docx",
+      "sha256": "eaf467d6a8f1fa4f148ff381625fd5332c7d836e785873f966ea6e07cf346cc2",
+      "locator": {},
+      "extractionMethod": "docx-xml",
+      "confidence": 0.96
+    }
+  ],
+  "quality": {
+    "structureStatus": "approved",
+    "structureConfidence": 0.82,
+    "issueCount": 0,
+    "issues": []
+  },
+  "dedupeSignature": {
+    "paperIdentityKey": "2007|北京|legacy",
+    "answerVariantFingerprint": "784f43b2719642b3c4daca1cf34f5ee79d0a2d5f05e1c3dc257c9a2fc886324d"
+  }
+}

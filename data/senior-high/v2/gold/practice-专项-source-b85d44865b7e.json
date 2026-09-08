@@ -1,0 +1,472 @@
+{
+  "schemaVersion": 2,
+  "id": "practice-专项-source-b85d44865b7e",
+  "kind": "practice",
+  "title": "应用文写作专项训练",
+  "year": "专项",
+  "region": "资料",
+  "variant": "可作答资料",
+  "instructions": [],
+  "sections": [
+    {
+      "id": "section-practice",
+      "title": "应用文写作专项训练",
+      "instructions": [],
+      "layout": "flow",
+      "groups": [
+        {
+          "id": "group-writing",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "q-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "essay",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Writing 1(2021届浙江嘉兴9月联考)"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "　　假定你是高三(7)班学生李华,上周日你班部分同学到阳光儿童福利院开展志愿者活动。请你为校英语报写一篇报道,内容包括:"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "1.时间、地点、参与者;2.活动内容;3.简要评论。"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "注意:"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "1.词数80左右(文章标题已给出,不计入总词数);"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "2.可适当增加细节,以使行文连贯。"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Volunteering in the Sunshine Children's Home"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": [
+                  {
+                    "type": "paragraph",
+                    "runs": [
+                      {
+                        "type": "text",
+                        "text": "One possible version:"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "paragraph",
+                    "runs": [
+                      {
+                        "type": "text",
+                        "text": "Volunteering in the Sunshine Children's Home"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "paragraph",
+                    "runs": [
+                      {
+                        "type": "text",
+                        "text": "Last Sunday, some students from Class 7, Senior 3 went to the Sunshine Children's Home for voluntary work. On arrival, they presented the kids with gifts. Then they involved the kids in activities. Some taught the older to draw pictures. Others told stories to the younger. Later they held a party, playing games, singing and dancing together. All day the kids were immersed in happiness. Voluntary work of this kind is significant. Not only does it enrich students' life experiences, but it helps them take their social responsibility."
+                      }
+                    ]
+                  }
+                ]
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "b85d44865b7ec881847b2b5748fd3410b4e923694ca22b962af9ec2e51c3d118",
+                  "relativePath": "题型/【未上传】试题部分WORD—考点集训_专题二十一应用文写作.docx",
+                  "sha256": "b85d44865b7ec881847b2b5748fd3410b4e923694ca22b962af9ec2e51c3d118",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "578fae23b81cd228c7a82f6f2f4ab3c6b609f3e578e3d9718297335730d62c0d",
+                "answerVariantFingerprint": "ea3563c8472dbd9c5b94e7f7f38c6fcba2fd190271406ada316e544155349b8e"
+              }
+            },
+            {
+              "id": "q-2",
+              "displayNumber": 2,
+              "sourceQuestionNumber": 2,
+              "type": "essay",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Writing 2(2021届“决胜高考”新高考八省一模) "
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "　　假定你是李华,你校羽毛球俱乐部下周将举行校羽毛球决赛。请写一封邮件,邀请你的外国朋友Sam与你一起观看,内容包括:"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "1.比赛安排;2.见面时间、地点;3.表达期待。"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "注意:"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "1.词数80左右;"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "2.可适当增加细节,以使行文连贯。"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": [
+                  {
+                    "type": "paragraph",
+                    "runs": [
+                      {
+                        "type": "text",
+                        "text": "One possible version:"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "paragraph",
+                    "runs": [
+                      {
+                        "type": "text",
+                        "text": "Dear Sam,"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "paragraph",
+                    "runs": [
+                      {
+                        "type": "text",
+                        "text": "I'm extremely excited to tell you that our school badminton club will hold the final competition next Friday at 3 o'clock in the afternoon. Knowing that you're rather interested in it, I'm sure you will want to watch it."
+                      }
+                    ]
+                  },
+                  {
+                    "type": "paragraph",
+                    "runs": [
+                      {
+                        "type": "text",
+                        "text": "As scheduled, the match will take place in the school gym beside the teaching building. Therefore, if it is convenient for you, how about we meet at the school gate at 2: 45 on Friday afternoon? There is no doubt that you will be extremely impressed by the excellent athletic skills of the participating contestants and have a better understanding of the fascination of this sport."
+                      }
+                    ]
+                  },
+                  {
+                    "type": "paragraph",
+                    "runs": [
+                      {
+                        "type": "text",
+                        "text": "I sincerely hope you can come. If so, I will reserve a seat next to me for you. I'm looking forward to your reply."
+                      }
+                    ]
+                  },
+                  {
+                    "type": "paragraph",
+                    "runs": [
+                      {
+                        "type": "text",
+                        "text": "Yours,"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "paragraph",
+                    "runs": [
+                      {
+                        "type": "text",
+                        "text": "Li Hua"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "b85d44865b7ec881847b2b5748fd3410b4e923694ca22b962af9ec2e51c3d118",
+                  "relativePath": "题型/【未上传】试题部分WORD—考点集训_专题二十一应用文写作.docx",
+                  "sha256": "b85d44865b7ec881847b2b5748fd3410b4e923694ca22b962af9ec2e51c3d118",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "435bf1b7527d914fde6aa941a790e09bf9c404a928a4f9813be7654f0430f786",
+                "answerVariantFingerprint": "90e6bbe87b90e6ccf0922cab48214f22d2f961cb0c67a6f7848072180264236d"
+              }
+            },
+            {
+              "id": "q-3",
+              "displayNumber": 3,
+              "sourceQuestionNumber": 3,
+              "type": "essay",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Writing 3(2021届湖南五市十校10月大联考) "
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "　　12月3日是国际残疾人日(International Day of Persons with Disability),请你以学校英语俱乐部的名义向同学们写一封倡议信,内容包括: "
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "1.倡议的主题:我为残疾人做点什么?2.活动安排:国际残疾人日当天,访问残疾人。3.今后的打算。"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "注意:写作词数应为80左右。"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Dear Classmates,"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "The Students English Club"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": [
+                  {
+                    "type": "paragraph",
+                    "runs": [
+                      {
+                        "type": "text",
+                        "text": "One possible version:"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "paragraph",
+                    "runs": [
+                      {
+                        "type": "text",
+                        "text": "Dear classmates, "
+                      }
+                    ]
+                  },
+                  {
+                    "type": "paragraph",
+                    "runs": [
+                      {
+                        "type": "text",
+                        "text": "December 3, International Day of Persons with Disability, is around the corner. To show our great concern about the disabled, we Students Union will organize an activity with the theme “What can we do for the disabled”. Anyone who volunteers is welcome. On that day, we will visit some disabled people near our school, doing some work for them, such as cleaning their houses and washing clothes. To make this kind of activity become regular, every one of us is welcome to have a disabled person as a partner, and will do what we can to help them."
+                      }
+                    ]
+                  },
+                  {
+                    "type": "paragraph",
+                    "runs": [
+                      {
+                        "type": "text",
+                        "text": "The Students English Club "
+                      }
+                    ]
+                  }
+                ]
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "b85d44865b7ec881847b2b5748fd3410b4e923694ca22b962af9ec2e51c3d118",
+                  "relativePath": "题型/【未上传】试题部分WORD—考点集训_专题二十一应用文写作.docx",
+                  "sha256": "b85d44865b7ec881847b2b5748fd3410b4e923694ca22b962af9ec2e51c3d118",
+                  "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 0.96
+                }
+              ],
+              "reviewStatus": "approved",
+              "dedupeSignature": {
+                "questionContentFingerprint": "d578748b069210cb26d62de05f1c1520300c6f35fd36e5156460d4dbb51dd0ad",
+                "answerVariantFingerprint": "9173cd382e698c5cbe1c7d9a1d33bf6857148188126474adf71bb8298a432d20"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "assetRefs": [
+    {
+      "assetId": "asset-6921f6d4db5e83bab24171754e0b6363fa77efe806d3b2492f5bc11d62826509",
+      "kind": "image",
+      "url": "source://题型/【未上传】试题部分WORD—考点集训_专题二十一应用文写作.docx#word/media/image1.jpeg",
+      "mimeType": "image/jpeg",
+      "sha256": "6921f6d4db5e83bab24171754e0b6363fa77efe806d3b2492f5bc11d62826509",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "b85d44865b7ec881847b2b5748fd3410b4e923694ca22b962af9ec2e51c3d118",
+          "relativePath": "题型/【未上传】试题部分WORD—考点集训_专题二十一应用文写作.docx",
+          "sha256": "b85d44865b7ec881847b2b5748fd3410b4e923694ca22b962af9ec2e51c3d118",
+          "locator": {},
+          "extractionMethod": "docx-xml",
+          "confidence": 0.96
+        }
+      ]
+    }
+  ],
+  "sourceRefs": [
+    {
+      "sourceDocumentId": "b85d44865b7ec881847b2b5748fd3410b4e923694ca22b962af9ec2e51c3d118",
+      "relativePath": "题型/【未上传】试题部分WORD—考点集训_专题二十一应用文写作.docx",
+      "sha256": "b85d44865b7ec881847b2b5748fd3410b4e923694ca22b962af9ec2e51c3d118",
+      "locator": {},
+      "extractionMethod": "docx-xml",
+      "confidence": 0.96
+    }
+  ],
+  "quality": {
+    "structureStatus": "approved",
+    "structureConfidence": 0.84,
+    "issueCount": 0,
+    "issues": []
+  },
+  "dedupeSignature": {
+    "paperIdentityKey": "source|b85d44865b7ec881847b2b5748fd3410b4e923694ca22b962af9ec2e51c3d118",
+    "answerVariantFingerprint": "d4409b62545f7edb820948ccf8e1bfd98f919cb192356d3be27b05ee7380d25f"
+  }
+}

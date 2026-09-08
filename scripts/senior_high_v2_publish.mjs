@@ -5,7 +5,7 @@ import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import { validateSeniorHighV2Set } from "./senior_high_v2_schema.mjs";
+import { validateSeniorHighV2Publishability, validateSeniorHighV2Set } from "./senior_high_v2_schema.mjs";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const SOURCE_ROOT = "/Users/shidianjin/Documents/高考英语";
@@ -22,6 +22,17 @@ const MIME_EXTENSIONS = {
   "video/mp4": ".mp4",
 };
 
+const BROKEN_APOSTROPHE = /\u{1001b3}/gu;
+
+function normalizeSeniorHighText(value) {
+  if (typeof value === "string") return value.replace(BROKEN_APOSTROPHE, "'");
+  if (Array.isArray(value)) return value.map(normalizeSeniorHighText);
+  if (value && typeof value === "object") {
+    for (const [key, child] of Object.entries(value)) value[key] = normalizeSeniorHighText(child);
+  }
+  return value;
+}
+
 function ensureDirectory(directory) {
   fs.mkdirSync(directory, { recursive: true });
 }
@@ -33,9 +44,18 @@ function cleanJsonDirectory(directory) {
   }
 }
 
-function cleanAssetDirectory(directory) {
+function cleanAssetDirectory(directory, preservedNames = new Set()) {
   ensureDirectory(directory);
-  for (const name of fs.readdirSync(directory)) fs.unlinkSync(path.join(directory, name));
+  for (const name of fs.readdirSync(directory)) if (!preservedNames.has(name)) fs.unlinkSync(path.join(directory, name));
+}
+
+function localAssetNames() {
+  const names = new Set();
+  for (const name of fs.readdirSync(GOLD_DIR).filter((value) => value.endsWith(".json"))) {
+    const set = JSON.parse(fs.readFileSync(path.join(GOLD_DIR, name), "utf8"));
+    for (const asset of set.assetRefs || []) if (!asset.url.startsWith("source://")) names.add(path.basename(asset.url));
+  }
+  return names;
 }
 
 function sha256(buffer) {
@@ -46,18 +66,25 @@ function extensionFor(asset, sourcePath) {
   return path.extname(sourcePath) || MIME_EXTENSIONS[asset.mimeType] || "";
 }
 
-function sourceAssetParts(url) {
+function sourceAssetParts(asset) {
+  const url = asset.url;
   const value = url.slice("source://".length);
   const marker = value.indexOf("#");
+  const currentRelativePath = asset.sourceRefs?.find((ref) => ref.currentRelativePath)?.currentRelativePath || "";
   return marker < 0
-    ? { relativePath: value, packagePath: "" }
-    : { relativePath: value.slice(0, marker), packagePath: value.slice(marker + 1) };
+    ? { relativePath: value, packagePath: "", currentRelativePath }
+    : { relativePath: value.slice(0, marker), packagePath: value.slice(marker + 1), currentRelativePath };
 }
 
 function materializeAsset(asset) {
-  if (!asset.url.startsWith("source://")) return { asset, unavailableReason: "" };
-  const { relativePath, packagePath } = sourceAssetParts(asset.url);
-  const sourcePath = path.join(SOURCE_ROOT, relativePath);
+  if (!asset.url.startsWith("source://")) {
+    const publicPath = path.join(ROOT, "public", asset.url.replace(/^\//, ""));
+    return fs.existsSync(publicPath) && fs.statSync(publicPath).size > 0
+      ? { asset, unavailableReason: "" }
+      : { asset: null, unavailableReason: "public_asset_missing" };
+  }
+  const { relativePath, packagePath, currentRelativePath } = sourceAssetParts(asset);
+  const sourcePath = path.join(SOURCE_ROOT, currentRelativePath || relativePath);
   try {
     let buffer;
     let sourceName = sourcePath;
@@ -100,19 +127,22 @@ function unavailableNotice(kind) {
 }
 
 function rewriteBlocks(blocks, assets) {
-  return (blocks || []).map((block) => {
-    if (["image", "audio", "video"].includes(block.type) && !assets.has(block.assetId)) return unavailableNotice(block.type);
+  return (blocks || []).flatMap((block) => {
+    if (["image", "audio", "video"].includes(block.type) && !assets.has(block.assetId)) {
+      if (block.type === "image" && block.alt?.trim().toLowerCase() === "source image") return [];
+      return [unavailableNotice(block.type)];
+    }
     if (block.type === "table") {
-      return {
+      return [{
         ...block,
         headers: block.headers ? rewriteBlocks(block.headers, assets) : undefined,
         rows: block.rows.map((row) => ({ cells: row.cells.map((cell) => rewriteBlocks(cell, assets)) })),
-      };
+      }];
     }
     if (block.type === "dialogue") {
-      return { ...block, turns: block.turns.map((turn) => ({ ...turn, blocks: rewriteBlocks(turn.blocks, assets) })) };
+      return [{ ...block, turns: block.turns.map((turn) => ({ ...turn, blocks: rewriteBlocks(turn.blocks, assets) })) }];
     }
-    return block;
+    return [block];
   });
 }
 
@@ -120,8 +150,93 @@ function rewriteOptions(options, assets) {
   return (options || []).map((option) => ({ ...option, blocks: rewriteBlocks(option.blocks, assets) }));
 }
 
+function blocksHaveAvailableAudio(blocks, assets) {
+  for (const block of blocks || []) {
+    if (block.type === "audio" && assets.has(block.assetId)) return true;
+    if (block.type === "table") {
+      if (blocksHaveAvailableAudio(block.headers, assets)) return true;
+      for (const row of block.rows || []) for (const cell of row.cells || []) if (blocksHaveAvailableAudio(cell, assets)) return true;
+    }
+    if (block.type === "dialogue") for (const turn of block.turns || []) if (blocksHaveAvailableAudio(turn.blocks, assets)) return true;
+  }
+  return false;
+}
+
+function listeningSectionHasAvailableAudio(section, assets) {
+  if (blocksHaveAvailableAudio(section.instructions, assets)) return true;
+  for (const group of section.groups || []) {
+    if (blocksHaveAvailableAudio(group.instructions, assets) || blocksHaveAvailableAudio(group.stimulusBlocks, assets)) return true;
+    for (const option of group.sharedOptions || []) if (blocksHaveAvailableAudio(option.blocks, assets)) return true;
+    for (const question of group.questions || []) {
+      if (blocksHaveAvailableAudio(question.promptBlocks, assets) || blocksHaveAvailableAudio(question.explanationBlocks, assets)) return true;
+      for (const option of question.options || []) if (blocksHaveAvailableAudio(option.blocks, assets)) return true;
+    }
+  }
+  return false;
+}
+
+function blockText(block) {
+  if (!block) return "";
+  if (block.type === "heading" || block.type === "notice") return block.text || "";
+  if (block.type === "paragraph" || block.type === "richText") return (block.runs || []).map((run) => run.type === "text" ? run.text : "____").join("");
+  if (block.type === "table") return (block.headers || []).map(blockText).concat((block.rows || []).flatMap((row) => row.cells.flatMap((cell) => cell.map(blockText)))).join(" ");
+  if (block.type === "dialogue") return (block.turns || []).flatMap((turn) => turn.blocks || []).map(blockText).join(" ");
+  return "";
+}
+
+function normalizedText(value) {
+  return value.replace(/\s+/g, " ").trim();
+}
+
+function structuredBlockTexts(set) {
+  const texts = [];
+  const add = (blocks) => {
+    for (const block of blocks || []) {
+      const text = normalizedText(blockText(block));
+      if (text) texts.push(text);
+    }
+  };
+  for (const section of set.sections || []) {
+    add(section.instructions);
+    for (const group of section.groups || []) {
+      add(group.instructions);
+      add(group.stimulusBlocks);
+      for (const option of group.sharedOptions || []) add(option.blocks);
+      for (const question of group.questions || []) {
+        add(question.promptBlocks);
+        for (const option of question.options || []) add(option.blocks);
+        add(question.explanationBlocks);
+        if (Array.isArray(question.answerSpec?.referenceAnswer)) add(question.answerSpec.referenceAnswer);
+      }
+    }
+  }
+  return texts;
+}
+
+function removeDuplicateInstructionBlocks(set) {
+  const structuredTexts = structuredBlockTexts(set);
+  const structuredText = normalizedText(structuredTexts.join(" "));
+  const hasQuestionContext = set.sections.some((section) => section.groups.some((group) => {
+    const questions = (group.questions || []).filter((question) => question.type !== "instruction_only");
+    const stimulusText = normalizedText((group.stimulusBlocks || []).map(blockText).join(" "));
+    return questions.length > 0 && (stimulusText || questions.some((question) => normalizedText((question.promptBlocks || []).map(blockText).join(" "))));
+  }));
+  const hasListeningSection = set.sections.some((section) => section.id.toLowerCase().includes("listening") || section.title.includes("听力"));
+  set.instructions = (set.instructions || []).filter((block) => {
+    if (block.type === "image" && block.alt?.trim().toLowerCase() === "source image" && hasQuestionContext) return false;
+    const text = normalizedText(blockText(block));
+    if (!text) return true;
+    if (!hasListeningSection && /听力|listening|听下面|录音|音频|播放 audio/i.test(text)) return false;
+    if (structuredTexts.includes(text)) return false;
+    if (hasQuestionContext && text.length >= 80 && /[A-Za-z]{12}|_{3,}|_{1,}\d|阅读下面|听下面|选项|答案|解析|[?？]/i.test(text)) {
+      if (structuredText.includes(text)) return false;
+    }
+    return true;
+  });
+}
+
 function makePublicSet(source) {
-  const set = structuredClone(source);
+  const set = normalizeSeniorHighText(structuredClone(source));
   const availableAssets = new Map();
   const unavailable = [];
   for (const sourceAsset of set.assetRefs || []) {
@@ -130,6 +245,13 @@ function makePublicSet(source) {
     else unavailable.push({ assetId: sourceAsset.assetId, kind: sourceAsset.kind, reason: result.unavailableReason });
   }
   set.assetRefs = [...availableAssets.values()];
+  set.sections = set.sections.filter((section) => {
+    const isListeningSection = section.id.toLowerCase().includes("listening") || section.title.includes("听力");
+    return !isListeningSection || listeningSectionHasAvailableAudio(section, availableAssets);
+  });
+  removeDuplicateInstructionBlocks(set);
+  let displayNumber = 1;
+  for (const section of set.sections) for (const group of section.groups) for (const question of group.questions) question.displayNumber = displayNumber++;
   set.instructions = rewriteBlocks(set.instructions, availableAssets);
   for (const section of set.sections) {
     section.instructions = rewriteBlocks(section.instructions, availableAssets);
@@ -186,7 +308,7 @@ function libraryEntry(set) {
 }
 
 function main() {
-  cleanAssetDirectory(ASSET_DIR);
+  cleanAssetDirectory(ASSET_DIR, localAssetNames());
   const paperDirectory = path.join(PUBLIC_ROOT, "papers");
   const practiceDirectory = path.join(PUBLIC_ROOT, "practice");
   cleanJsonDirectory(paperDirectory);
@@ -198,7 +320,12 @@ function main() {
     const source = JSON.parse(fs.readFileSync(path.join(GOLD_DIR, name), "utf8"));
     const sourceValidation = validateSeniorHighV2Set(source);
     if (!sourceValidation.ok || source.quality.structureStatus !== "approved") {
-      rejected.push({ id: source.id, errors: sourceValidation.errors, structureStatus: source.quality.structureStatus });
+      rejected.push({ id: source.id, errors: [...sourceValidation.errors, ...(source.quality.structureStatus === "approved" ? [] : source.quality.issues || [])], structureStatus: source.quality.structureStatus });
+      continue;
+    }
+    const publishability = validateSeniorHighV2Publishability(source);
+    if (!publishability.ok) {
+      rejected.push({ id: source.id, errors: publishability.errors, structureStatus: source.quality.structureStatus });
       continue;
     }
     const { set, unavailable } = makePublicSet(source);
@@ -222,7 +349,7 @@ function main() {
   const report = {
     schemaVersion: 2,
     generatedAt: index.generatedAt,
-    publishable: rejected.length === 0 && published.length > 0,
+    publishable: published.length > 0,
     published,
     rejected,
     totals: {
@@ -231,6 +358,7 @@ function main() {
       practiceSets: published.filter((value) => value.kind === "practice").length,
       questions: published.reduce((sum, value) => sum + value.questions, 0),
       unavailableAssets: published.reduce((sum, value) => sum + value.unavailableAssets.length, 0),
+      rejected: rejected.length,
     },
   };
   fs.writeFileSync(path.join(ROOT, "data", "senior-high", "v2", "publish-report.json"), JSON.stringify(report, null, 2));

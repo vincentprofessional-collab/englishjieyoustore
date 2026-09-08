@@ -38,6 +38,7 @@ export function SeniorHighLibrary() {
   const [error, setError] = useState("");
 
   useEffect(() => {
+    if (new URLSearchParams(window.location.search).get("entry") === "papers") setEntry("papers");
     fetch("/senior-high/index.json").then((response) => {
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       return response.json() as Promise<SeniorHighLibraryIndex>;
@@ -46,8 +47,8 @@ export function SeniorHighLibrary() {
       const done = new Set<string>();
       for (const item of payload.entries) {
         try {
-          const value = JSON.parse(window.localStorage.getItem(`senior-high:v2:2:${item.kind}:${item.id}`) || "null") as { submitted?: boolean } | null;
-          if (value?.submitted) done.add(item.id);
+          const value = JSON.parse(window.localStorage.getItem(`senior-high:v2:2:${item.kind}:${item.id}`) || "null") as { submitted?: boolean; submittedGroups?: Record<string, boolean> } | null;
+          if (value?.submitted || Object.keys(value?.submittedGroups || {}).length > 0) done.add(item.id);
         } catch { /* Ignore a damaged local attempt. */ }
       }
       setCompleted(done);

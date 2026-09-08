@@ -25,7 +25,7 @@ export type SeniorHighQuestionType =
   | "instruction_only";
 
 export type SeniorHighInlineRun =
-  | { type: "text"; text: string }
+  | { type: "text"; text: string; underline?: boolean }
   | { type: "blank"; blankId: string };
 
 export type SeniorHighBlock =
@@ -124,11 +124,14 @@ export type SeniorHighQuestion = {
   explanationBlocks: SeniorHighBlock[];
   sourceRefs: SeniorHighSourceRef[];
   reviewStatus: SeniorHighReviewStatus;
+  correctionStatement?: string;
+  writingFrame?: { before: string[]; after: string[] };
 };
 
 export type SeniorHighQuestionGroup = {
   id: string;
   title?: string;
+  presentation?: "cloze" | "reading" | "inline" | "writing";
   instructions: SeniorHighBlock[];
   stimulusBlocks: SeniorHighBlock[];
   sharedOptions: SeniorHighOption[];
@@ -167,6 +170,7 @@ export type SeniorHighSet = {
   assetRefs: SeniorHighAssetRef[];
   sourceRefs: SeniorHighSourceRef[];
   quality: SeniorHighSetQuality;
+  submissionMode?: "whole-paper";
 };
 
 export type SeniorHighLibraryEntry = {

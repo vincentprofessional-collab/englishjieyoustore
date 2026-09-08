@@ -4,10 +4,10 @@ import { Fragment, useEffect, useMemo, useState } from "react";
 import type { ReactNode } from "react";
 import { SENIOR_HIGH_CATALOG_URL, seniorHighCategoryLabel } from "@/lib/senior-high/catalog";
 import { applySeniorHighCatalogOverrides, loadSeniorHighQuestionOverrides } from "@/lib/senior-high/question-overrides";
-import type { SeniorHighCatalog, SeniorHighItem, SeniorHighPaper } from "@/lib/senior-high/types";
+import type { SeniorHighCatalog, SeniorHighItem, SeniorHighPaper, SeniorHighPracticeGroup } from "@/lib/senior-high/types";
 
 type Entry = "knowledge" | "practice" | "papers";
-type PracticeSourceGroup = { key: string; title: string; items: SeniorHighItem[] };
+type PracticeSourceGroup = { key: string; title: string; passage?: string; groupTitle?: string; items: SeniorHighItem[] };
 type Session = { kind: "topic"; topic: string; items: SeniorHighItem[] } | { kind: "practice-group"; category: string; group: PracticeSourceGroup } | { kind: "item"; item: SeniorHighItem } | { kind: "paper"; paper: SeniorHighPaper };
 
 const ENTRY_LABELS: Record<Entry, string> = {
@@ -62,12 +62,14 @@ function practiceSourceKey(item: SeniorHighItem) {
   return [item.category, item.source_relpath, item.source_section ?? "", item.group_id ?? item.title].join("|");
 }
 
-function practiceSourceGroups(items: SeniorHighItem[], category: string): PracticeSourceGroup[] {
+function practiceSourceGroups(items: SeniorHighItem[], category: string, metadata: Map<string, SeniorHighPracticeGroup>): PracticeSourceGroup[] {
   const groups = new Map<string, PracticeSourceGroup>();
   for (const item of items) {
     if (item.category !== category) continue;
     const key = practiceSourceKey(item);
-    const group = groups.get(key) ?? { key, title: item.group_title ? `${item.title} · ${item.group_title}` : item.title, items: [] };
+    const groupMetadata = item.group_id ? metadata.get(item.group_id) : undefined;
+    const groupTitle = groupMetadata?.title ?? item.group_title;
+    const group = groups.get(key) ?? { key, title: groupTitle ? `${item.title} · ${groupTitle}` : item.title, passage: groupMetadata?.passage ?? item.passage, groupTitle, items: [] };
     group.items.push(item);
     groups.set(key, group);
   }
@@ -197,11 +199,13 @@ export function SeniorHighDemo() {
           {questions.map((item, index) => {
             const value = answers[item.id] || "";
             const correct = submitted && item.category !== "writing" && isCorrect(item, value);
-            const showPassage = Boolean(item.passage) && (index === 0 || questions[index - 1].group_id !== item.group_id);
+            const passage = item.passage ?? (session.kind === "practice-group" && index === 0 ? session.group.passage : undefined);
+            const groupTitle = item.group_title ?? (session.kind === "practice-group" ? session.group.groupTitle : undefined);
+            const showPassage = Boolean(passage) && (index === 0 || questions[index - 1].group_id !== item.group_id);
             return <Fragment key={item.id}>
               {showPassage ? <section className="senior-high-passage-card">
-                <div><strong>阅读材料</strong>{item.group_title ? <span>{item.group_title}</span> : null}</div>
-                <p>{item.passage}</p>
+                <div><strong>阅读材料</strong>{groupTitle ? <span>{groupTitle}</span> : null}</div>
+                <p>{passage}</p>
               </section> : null}
               <article className="senior-high-question-card">
               <div className="senior-high-question-meta">
@@ -223,14 +227,15 @@ export function SeniorHighDemo() {
 
   const grouped = (items: SeniorHighItem[], byKnowledgeTopic = false) => Object.entries(items.reduce<Record<string, SeniorHighItem[]>>((groups, item) => { const key = byKnowledgeTopic ? item.knowledge_topic || "综合语法" : item.category; (groups[key] ||= []).push(item); return groups; }, {})).map(([key, groupedItems]) => [key, [...groupedItems].sort((a, b) => a.title.localeCompare(b.title, "zh-CN") || (a.source_question_number ?? a.question_number) - (b.source_question_number ?? b.question_number))] as [string, SeniorHighItem[]]).sort(([a], [b]) => { if (!byKnowledgeTopic) return a.localeCompare(b, "zh-CN"); const aIndex = KNOWLEDGE_TOPIC_ORDER.indexOf(a); const bIndex = KNOWLEDGE_TOPIC_ORDER.indexOf(b); return (aIndex < 0 ? KNOWLEDGE_TOPIC_ORDER.length : aIndex) - (bIndex < 0 ? KNOWLEDGE_TOPIC_ORDER.length : bIndex) || a.localeCompare(b, "zh-CN"); });
   const knowledgeGroups = grouped(catalog.knowledge, true);
+  const practiceGroupMetadata = new Map((catalog.practice_groups ?? []).map((group) => [group.id, group]));
   const practiceCategoryList = practiceCategories(catalog.practice);
-  const selectedPracticeGroups = selectedPracticeCategory ? practiceSourceGroups(catalog.practice, selectedPracticeCategory) : [];
+  const selectedPracticeGroups = selectedPracticeCategory ? practiceSourceGroups(catalog.practice, selectedPracticeCategory, practiceGroupMetadata) : [];
   const paperYears = Object.entries(catalog.papers.reduce<Record<string, SeniorHighPaper[]>>((groups, paper) => { (groups[paper.year] ||= []).push(paper); return groups; }, {})).sort(([a], [b]) => Number(b) - Number(a));
   return <section className="senior-high-page">
     <div className="senior-high-hero"><div><div className="senior-high-eyebrow">SENIOR HIGH · ENGLISH</div><h1>高考英语学习中心</h1><p>按知识点、题型训练和完整历年真题组织资料。完整试卷只保留在真题入口，提交后显示答案，有解析则同步显示。</p></div><div className="senior-high-stats"><strong>{catalog.knowledge.length + catalog.practice.length}</strong><span>已发布训练题</span><strong>{catalog.papers.length}</strong><span>已通过审核的完整卷</span></div></div>
     <nav className="senior-high-entry-tabs" aria-label="高考英语资料入口">{(Object.keys(ENTRY_LABELS) as Entry[]).map((key) => <button className={entry === key ? "selected" : ""} key={key} onClick={() => openEntry(key)} type="button">{ENTRY_LABELS[key]}<small>{key === "knowledge" ? catalog.knowledge.length : key === "practice" ? catalog.practice.length : catalog.papers.length}</small></button>)}</nav>
     {entry === "knowledge" ? <div className="senior-high-section"><h2>知识点</h2><p className="senior-high-muted">先按语法主题选择，再进入该主题的连续题目；有答案即可学习，解析有则显示。</p><div className="senior-high-topic-grid">{knowledgeGroups.map(([topic, items]) => { const completionId = `topic:${topic}`; return <button className="senior-high-topic-card" key={topic} onClick={() => start({ kind: "topic", topic, items })} type="button"><strong>{topic}</strong><span>{items.length} 题 · {completed[completionId] ? "已完成" : "未完成"}</span></button>; })}</div></div> : null}
-    {entry === "practice" ? <div className="senior-high-section">{selectedPracticeCategory === null ? <><h2>题型训练</h2><p className="senior-high-muted">先按题型大类选择，再按真实来源选择题组；题号在题组内连续，答案即可作答，解析为可选内容。</p><div className="senior-high-practice-family-grid">{practiceCategoryList.map((category) => { const groups = practiceSourceGroups(catalog.practice, category); const total = groups.reduce((sum, group) => sum + group.items.length, 0); const completedGroups = groups.filter((group) => completed[practiceCompletionKey(group)]).length; return <button className="senior-high-practice-family-card" key={category} onClick={() => setSelectedPracticeCategory(category)} type="button"><strong>{seniorHighCategoryLabel(category)}</strong><span>{total} 题 · {groups.length} 组</span><small>已完成 {completedGroups} 组 · 未完成 {groups.length - completedGroups} 组</small></button>; })}</div></> : <><button className="senior-high-back" onClick={() => setSelectedPracticeCategory(null)} type="button">← 返回题型训练</button><h2>{seniorHighCategoryLabel(selectedPracticeCategory)}</h2><p className="senior-high-muted">按真实来源选择一组练习；进入后题号从第 1 题连续排列，提交后显示答案。</p><div className="senior-high-practice-source-grid">{selectedPracticeGroups.map((group) => { const first = group.items[0]; return <button className="senior-high-library-card" key={group.key} onClick={() => start({ kind: "practice-group", category: selectedPracticeCategory, group })} type="button"><strong>{group.title}</strong><span>{group.items.length} 题 · {completed[practiceCompletionKey(group)] ? "已完成" : "未完成"}</span><small>来源：{sourceLabel(first)}</small></button>; })}</div></>}</div> : null}
+    {entry === "practice" ? <div className="senior-high-section">{selectedPracticeCategory === null ? <><h2>题型训练</h2><p className="senior-high-muted">先按题型大类选择，再按真实来源选择题组；题号在题组内连续，答案即可作答，解析为可选内容。</p><div className="senior-high-practice-family-grid">{practiceCategoryList.map((category) => { const groups = practiceSourceGroups(catalog.practice, category, practiceGroupMetadata); const total = groups.reduce((sum, group) => sum + group.items.length, 0); const completedGroups = groups.filter((group) => completed[practiceCompletionKey(group)]).length; return <button className="senior-high-practice-family-card" key={category} onClick={() => setSelectedPracticeCategory(category)} type="button"><strong>{seniorHighCategoryLabel(category)}</strong><span>{total} 题 · {groups.length} 组</span><small>已完成 {completedGroups} 组 · 未完成 {groups.length - completedGroups} 组</small></button>; })}</div></> : <><button className="senior-high-back" onClick={() => setSelectedPracticeCategory(null)} type="button">← 返回题型训练</button><h2>{seniorHighCategoryLabel(selectedPracticeCategory)}</h2><p className="senior-high-muted">按真实来源选择一组练习；进入后题号从第 1 题连续排列，提交后显示答案。</p><div className="senior-high-practice-source-grid">{selectedPracticeGroups.map((group) => { const first = group.items[0]; return <button className="senior-high-library-card" key={group.key} onClick={() => start({ kind: "practice-group", category: selectedPracticeCategory, group })} type="button"><strong>{group.title}</strong><span>{group.items.length} 题 · {completed[practiceCompletionKey(group)] ? "已完成" : "未完成"}</span><small>来源：{sourceLabel(first)}</small></button>; })}</div></>}</div> : null}
     {entry === "papers" ? <div className="senior-high-section"><h2>历年真题</h2><p className="senior-high-muted">完整卷按年份、地区和卷型排列；待审核源只在后台审计清单中，不会混入训练题。</p>{paperYears.length ? paperYears.map(([year, papers]) => <div className="senior-high-group" key={year}><h3>{year} 年</h3><div className="senior-high-paper-grid">{papers.map((paper) => <button className="senior-high-paper-card" key={paper.id} onClick={() => start({ kind: "paper", paper })} type="button"><strong>{paper.region} · {paper.paper}</strong><span>{paper.question_count} 题 · {completed[paper.id] ? "已完成" : "开始整卷练习"}</span><small>原始来源：{paper.source_relpath}</small></button>)}</div></div>) : <div className="senior-high-empty">当前没有通过完整性审核的试卷。审计目录中保留了 {catalog.paper_review_count} 份待审核源，不会被误发布。</div>}</div> : null}
   </section>;
 }

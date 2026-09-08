@@ -18,7 +18,12 @@ function matches(value: string, accepted: string[], answerSpec: SeniorHighAnswer
   return accepted.some((candidate) => normalizeAnswer(candidate, answerSpec) === actual);
 }
 
+export function seniorHighAnswerMatches(value: string, accepted: string[], answerSpec: SeniorHighAnswerSpec) {
+  return matches(value, accepted, answerSpec);
+}
+
 export function seniorHighQuestionAnswered(question: SeniorHighQuestion, answers: SeniorHighV2Answers) {
+  if (question.correctionStatement) return Boolean(answers[question.id]?.trim() && answers[`${question.id}:marked`]?.trim());
   if (question.blanks.length > 0) return question.blanks.every((blank) => Boolean(answers[blank.blankId]?.trim() || answers[question.id]?.trim()));
   return Boolean(answers[question.id]?.trim());
 }
