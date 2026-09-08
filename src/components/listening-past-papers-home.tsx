@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import type { PastPaperRecord } from "@/lib/ielts/past-papers";
+import type { PastPaperListItem } from "@/lib/ielts/past-papers";
 import { getPastPaperDetailHref } from "@/lib/ielts/past-papers";
 
 const SECTION_NUMBERS = [1, 2, 3, 4] as const;
@@ -11,7 +11,7 @@ export function ListeningPastPapersHome({
   papers,
   source,
 }: {
-  papers: PastPaperRecord[];
+  papers: PastPaperListItem[];
   source: {
     audioAvailableCount: number;
     recordCount: number;

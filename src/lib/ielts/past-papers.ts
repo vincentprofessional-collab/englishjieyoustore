@@ -20,8 +20,21 @@ export type PastPaperRecord = {
   transcriptBlocks: PastPaperTranscriptBlock[];
 };
 
-export const PAST_PAPERS_SOURCE = pastPaperBundle.source;
+export type PastPaperListItem = Pick<PastPaperRecord, "sectionNo" | "slug" | "title">;
+
+export type PastPaperPageData = Pick<PastPaperRecord, "slug" | "title" | "transcriptBlocks">;
+
+export const PAST_PAPERS_SOURCE = {
+  audioAvailableCount: pastPaperBundle.source.audioAvailableCount,
+  recordCount: pastPaperBundle.source.recordCount,
+  sectionCount: pastPaperBundle.source.sectionCount,
+};
 export const PAST_PAPERS = pastPaperBundle.records as PastPaperRecord[];
+export const PAST_PAPER_LIST: PastPaperListItem[] = PAST_PAPERS.map(({ sectionNo, slug, title }) => ({
+  sectionNo,
+  slug,
+  title,
+}));
 
 export function getPastPaperBySlug(slug: string) {
   return PAST_PAPERS.find((paper) => paper.slug === slug);

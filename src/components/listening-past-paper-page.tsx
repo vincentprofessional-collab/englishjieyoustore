@@ -8,13 +8,13 @@ import {
   type AudioPlayerSettings,
 } from "@/components/audio-player";
 import { StudyAnnotationTools } from "@/components/study-annotation-tools";
-import type { PastPaperRecord } from "@/lib/ielts/past-papers";
+import type { PastPaperPageData } from "@/lib/ielts/past-papers";
 import { getPastPaperDetailHref } from "@/lib/ielts/past-papers";
 import styles from "@/components/listening-past-paper-page.module.css";
 
 type OriginalDisplayMode = "english" | "bilingual" | "chinese";
 
-function getWordCount(paper: PastPaperRecord) {
+function getWordCount(paper: PastPaperPageData) {
   return (
     paper.transcriptBlocks
       .map((block) => block.english)
@@ -28,7 +28,7 @@ export function ListeningPastPaperPage({
   paper,
 }: {
   audioUrl: string | null;
-  paper: PastPaperRecord;
+  paper: PastPaperPageData;
 }) {
   const [audioSettings, setAudioSettings] = useState<AudioPlayerSettings>(() => ({
     ...DEFAULT_AUDIO_PLAYER_SETTINGS,
@@ -170,7 +170,7 @@ export function ListeningPastPaperPage({
             {isOriginalVisible ? (
               <div className={`bbc-original-copy ${displayMode === "bilingual" ? "bilingual" : ""}`}>
                 {paper.transcriptBlocks.map((block) => (
-                  <div className="bbc-original-text-block" key={`${paper.sourceId}-${block.blockNo}`}>
+                  <div className="bbc-original-text-block" key={`${paper.slug}-${block.blockNo}`}>
                     {displayMode !== "chinese" ? <p lang="en">{block.english}</p> : null}
                     {displayMode !== "english" ? (
                       <p className="bbc-original-chinese" lang="zh-CN">

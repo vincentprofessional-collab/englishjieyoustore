@@ -24,7 +24,11 @@ export default async function PastPaperPage({
   return (
     <ListeningPastPaperPage
       audioUrl={getPublicStorageUrl("audio", paper.audioPath)}
-      paper={paper}
+      paper={{
+        slug: paper.slug,
+        title: paper.title,
+        transcriptBlocks: paper.transcriptBlocks,
+      }}
     />
   );
 }
