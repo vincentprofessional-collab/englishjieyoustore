@@ -1,0 +1,12 @@
+.displayActive,
+.toggleActive {
+  background: var(--accent) !important;
+  border-color: var(--accent) !important;
+  color: #fff !important;
+}
+
+.displayActive:hover,
+.toggleActive:hover {
+  background: var(--accent-dark) !important;
+  border-color: var(--accent-dark) !important;
+}
