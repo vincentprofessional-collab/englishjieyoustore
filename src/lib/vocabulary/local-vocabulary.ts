@@ -1412,22 +1412,110 @@ function getVocabularyLookupCandidates(value: string) {
   }
   if (normalizedWord.endsWith("ed") && normalizedWord.length > 3) {
     const stem = normalizedWord.slice(0, -2);
-    addCandidate(stem);
-    addCandidate(`${stem}e`);
     if (stem.at(-1) === stem.at(-2)) {
       addCandidate(stem.slice(0, -1));
+    }
+    if (/[^aeiou][aeiou][^aeiou]$/i.test(stem)) {
+      addCandidate(`${stem}e`);
+    } else {
+      addCandidate(stem);
+      addCandidate(`${stem}e`);
     }
   }
   if (normalizedWord.endsWith("ing") && normalizedWord.length > 5) {
     const stem = normalizedWord.slice(0, -3);
-    addCandidate(stem);
-    addCandidate(`${stem}e`);
     if (stem.at(-1) === stem.at(-2)) {
       addCandidate(stem.slice(0, -1));
+    }
+    if (/[^aeiou][aeiou][^aeiou]$/i.test(stem)) {
+      addCandidate(`${stem}e`);
+    } else {
+      addCandidate(stem);
+      addCandidate(`${stem}e`);
     }
   }
 
   return [...candidates];
+}
+
+function hasPartOfSpeech(entry: LocalVocabularyEntry, pattern: RegExp) {
+  return entry.definitionGroups.some((group) => pattern.test(group.partOfSpeech));
+}
+
+export function getVocabularyBaseEntryForWordForm(word: string) {
+  const normalizedWord = normalizeLookupWord(word);
+
+  if (!normalizedWord) {
+    return null;
+  }
+
+  const vocabularyMap = loadVocabularyMap();
+  const exactEntry = vocabularyMap.get(normalizedWord);
+  const candidates = getVocabularyLookupCandidates(normalizedWord).slice(1);
+  const isVerbForm = /(?:ied|ed|ing)$/.test(normalizedWord);
+  const isNounForm = /(?:ies|ves|es|s)$/.test(normalizedWord) && !normalizedWord.endsWith("ss");
+
+  for (const candidate of candidates) {
+    const entry = vocabularyMap.get(candidate);
+
+    if (!entry) {
+      continue;
+    }
+
+    if (isVerbForm && hasPartOfSpeech(entry, /^(?:v|vt|vi)\.?$/i)) {
+      return entry;
+    }
+
+    if (isNounForm && hasPartOfSpeech(entry, /^(?:n|v|vt|vi)\.?$/i)) {
+      return entry;
+    }
+  }
+
+  return exactEntry ?? null;
+}
+
+function getReferencedVocabularyBaseWord(entry: LocalVocabularyEntry, vocabularyMap: Map<string, LocalVocabularyEntry>) {
+  const definitionText = entry.definitionLines.join(" ");
+  const references = definitionText.matchAll(
+    /[（(]([a-z][a-z'-]*)\s*的[^）)]*(?:形式|复数|过去式|过去分词|三单)[^）)]*[）)]/gi,
+  );
+
+  for (const reference of references) {
+    const baseWord = normalizeLookupWord(reference[1]);
+
+    if (baseWord && vocabularyMap.has(baseWord)) {
+      return baseWord;
+    }
+  }
+
+  return "";
+}
+
+export function getVocabularyEntryForWordForm(word: string) {
+  const normalizedWord = normalizeLookupWord(word);
+
+  if (!normalizedWord) {
+    return null;
+  }
+
+  const vocabularyMap = loadVocabularyMap();
+  const exactEntry = vocabularyMap.get(normalizedWord);
+
+  if (exactEntry) {
+    const baseWord = getReferencedVocabularyBaseWord(exactEntry, vocabularyMap);
+
+    return baseWord ? vocabularyMap.get(baseWord) ?? exactEntry : exactEntry;
+  }
+
+  for (const candidate of getVocabularyLookupCandidates(normalizedWord).slice(1)) {
+    const entry = vocabularyMap.get(candidate);
+
+    if (entry) {
+      return entry;
+    }
+  }
+
+  return null;
 }
 
 function findVocabularyEntry(value: string) {

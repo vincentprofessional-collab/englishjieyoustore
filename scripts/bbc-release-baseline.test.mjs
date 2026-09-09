@@ -40,6 +40,7 @@ test("BBC 2026 remains wired into the article catalog and learning modules", () 
   const catalogSource = read("src/lib/articles/bbc.ts");
   const detailSource = read("src/components/bbc-article-detail-page.tsx");
   const vocabularySource = read("src/lib/articles/bbc-vocabulary.ts");
+  const localVocabularySource = read("src/lib/vocabulary/local-vocabulary.ts");
 
   assert.match(catalogSource, /import bbc2026Articles from "@\/data\/bbc\/2026\/index\.json"/);
   assert.match(catalogSource, /\.\.\.bbc2026Articles/);
@@ -49,6 +50,8 @@ test("BBC 2026 remains wired into the article catalog and learning modules", () 
   assert.match(detailSource, /getBbcArticleContentOverride/);
   assert.match(vocabularySource, /getVocabularyBaseEntryForWordForm/);
   assert.match(vocabularySource, /getBbcVocabularyEntryForWordForm/);
+  assert.match(localVocabularySource, /export function getVocabularyBaseEntryForWordForm/);
+  assert.match(localVocabularySource, /export function getVocabularyEntryForWordForm/);
 });
 
 test("BBC source quiz and wrong-answer collection stay in the release", () => {
