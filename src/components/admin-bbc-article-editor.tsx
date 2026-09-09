@@ -8,6 +8,7 @@ import {
   type BbcArticle,
   type BbcVocabularyItem,
 } from "@/lib/articles/bbc";
+import { getBbcArticleContentOverride } from "@/lib/articles/bbc-content-overrides";
 import { supabase } from "@/lib/supabase/client";
 
 type EditableBbcVocabularyItem = BbcVocabularyItem & {
@@ -27,6 +28,10 @@ function copyVocabulary(items: BbcVocabularyItem[] | undefined): EditableBbcVoca
     term: item.term ?? "",
     translation: item.translation ?? "",
   }));
+}
+
+function copyChineseParagraphs(article: BbcArticle, paragraphs?: string[]) {
+  return article.body.map((_, index) => paragraphs?.[index] ?? "");
 }
 
 function createVocabularyItem(number: number): EditableBbcVocabularyItem {
@@ -52,15 +57,6 @@ function bbcArticleSlug(articleId: string) {
   return `bbc-article-${articleId}`;
 }
 
-function readOverride(metaJson: unknown) {
-  if (!metaJson || typeof metaJson !== "object" || !("vocabulary" in metaJson)) {
-    return null;
-  }
-
-  const vocabulary = (metaJson as { vocabulary?: unknown }).vocabulary;
-  return Array.isArray(vocabulary) ? copyVocabulary(vocabulary as BbcVocabularyItem[]) : null;
-}
-
 function updateItem(
   items: EditableBbcVocabularyItem[],
   index: number,
@@ -74,6 +70,8 @@ function updateItem(
 export function AdminBbcArticleEditor({ adminUserId }: { adminUserId: string }) {
   const [articleId, setArticleId] = useState("150720");
   const [article, setArticle] = useState<BbcArticle | null>(null);
+  const [draftTitleChinese, setDraftTitleChinese] = useState("");
+  const [draftChineseParagraphs, setDraftChineseParagraphs] = useState<string[]>([]);
   const [draft, setDraft] = useState<EditableBbcVocabularyItem[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -92,6 +90,8 @@ export function AdminBbcArticleEditor({ adminUserId }: { adminUserId: string }) 
     setIsLoading(true);
     setMessage("");
     setArticle(nextArticle);
+    setDraftTitleChinese(nextArticle.titleChinese ?? "");
+    setDraftChineseParagraphs(copyChineseParagraphs(nextArticle, nextArticle.chineseParagraphs));
     setDraft(copyVocabulary(nextArticle.vocabulary));
 
     const [automaticResponse, overrideResult] = await Promise.all([
@@ -115,13 +115,23 @@ export function AdminBbcArticleEditor({ adminUserId }: { adminUserId: string }) 
       setDraft(copyVocabulary(mergeBbcVocabularyItems(nextArticle.vocabulary, automaticVocabulary)));
       setMessage(`读取前台覆盖内容失败，将使用自动分级词汇：${error.message}`);
     } else {
-      const override = readOverride(data?.meta_json);
+      const override = getBbcArticleContentOverride(data?.meta_json);
       if (override) {
-        setDraft(override);
+        if (override.titleChinese !== undefined) {
+          setDraftTitleChinese(override.titleChinese);
+        }
+        if (override.chineseParagraphs !== undefined) {
+          setDraftChineseParagraphs(copyChineseParagraphs(nextArticle, override.chineseParagraphs));
+        }
+        if (override.vocabulary !== undefined) {
+          setDraft(copyVocabulary(override.vocabulary));
+        } else {
+          setDraft(copyVocabulary(mergeBbcVocabularyItems(nextArticle.vocabulary, automaticVocabulary)));
+        }
       } else {
         setDraft(copyVocabulary(mergeBbcVocabularyItems(nextArticle.vocabulary, automaticVocabulary)));
       }
-      setMessage(override ? "已载入后台保存的词汇高亮设置。" : "已载入原始短语和自动分级词汇，可直接勾选高亮或新增词汇。 ");
+      setMessage(override ? "已载入后台保存的文章翻译和词汇设置。" : "已载入原始翻译和自动分级词汇，可直接编辑。 ");
     }
 
     setIsLoading(false);
@@ -146,7 +156,7 @@ export function AdminBbcArticleEditor({ adminUserId }: { adminUserId: string }) 
     setMessage("");
   }
 
-  async function publishVocabulary() {
+  async function publishContent() {
     if (!article) {
       setMessage("请先载入一篇 BBC 文章。 ");
       return;
@@ -161,15 +171,17 @@ export function AdminBbcArticleEditor({ adminUserId }: { adminUserId: string }) 
         created_by: adminUserId,
         is_paid_only: false,
         meta_json: {
-          contentVersion: 1,
-          source: "bbc-vocabulary-editor",
+          chineseParagraphs: draftChineseParagraphs.slice(0, article.body.length).map((paragraph) => paragraph.trim()),
+          contentVersion: 2,
+          source: "bbc-content-editor",
+          titleChinese: draftTitleChinese.trim(),
           vocabulary: draft,
         },
         module: "articles",
         published_at: now,
         slug: bbcArticleSlug(article.id),
         status: "published",
-        summary: article.titleChinese ?? article.lead,
+        summary: draftTitleChinese.trim() || article.lead,
         template_key: "foreign_article_page",
         title: article.title,
         updated_at: now,
@@ -180,7 +192,7 @@ export function AdminBbcArticleEditor({ adminUserId }: { adminUserId: string }) 
     if (error) {
       setMessage(`发布失败：${error.message}`);
     } else {
-      setMessage("已发布：前台会只高亮并显示勾选的词汇和短语。 ");
+      setMessage("已保存：前台会显示最新的文章翻译和词汇设置。 ");
     }
     setIsSaving(false);
   }
@@ -194,9 +206,9 @@ export function AdminBbcArticleEditor({ adminUserId }: { adminUserId: string }) 
   return (
     <div className="admin-editor-column admin-bbc-vocabulary-editor">
       <section className="admin-publish-card">
-        <strong>BBC 词汇高亮管理</strong>
+        <strong>BBC 文章内容与词汇管理</strong>
         <small>
-          系统会从查单词页面的等级中自动载入高中、四级、六级及以上词汇；文章原有短语也会保留。勾选后，前台原文会同时高亮并加下划线，右侧显示英美音标、词性、释义、例句和翻译。取消勾选或删除后发布即可移除。
+          可以修改文章中文标题和逐段翻译，也可以增加、删除词汇，修改右侧词汇卡片的例句、释义和翻译。保存后前台刷新生效；原始 BBC 数据不会被覆盖。
         </small>
         <div className="bbc-admin-article-picker">
           <label>
@@ -229,8 +241,8 @@ export function AdminBbcArticleEditor({ adminUserId }: { adminUserId: string }) 
           </div>
         ) : null}
         <div className="bbc-admin-publish-actions">
-          <button className="button primary" disabled={!article || isSaving} type="button" onClick={publishVocabulary}>
-            {isSaving ? "发布中…" : "发布词汇高亮设置"}
+          <button className="button primary" disabled={!article || isSaving} type="button" onClick={publishContent}>
+            {isSaving ? "保存中…" : "保存 BBC 文章内容"}
           </button>
           {message ? <p className={`admin-form-message ${message.includes("失败") || message.includes("没有") ? "error" : ""}`}>{message}</p> : null}
         </div>
@@ -245,6 +257,45 @@ export function AdminBbcArticleEditor({ adminUserId }: { adminUserId: string }) 
             </div>
             <span className="admin-status">{draft.filter((item) => item.highlight).length} 项高亮</span>
           </header>
+
+          <section className="bbc-admin-translation-editor">
+            <div className="admin-editor-section-heading">
+              <strong>文章翻译</strong>
+              <small>标题和段落翻译会显示在前台中英对照原文区域。</small>
+            </div>
+            <div className="admin-field-grid compact">
+              <label className="admin-field-wide">
+                <span>中文标题</span>
+                <input
+                  value={draftTitleChinese}
+                  onChange={(event) => {
+                    setDraftTitleChinese(event.target.value);
+                    setMessage("");
+                  }}
+                  placeholder="输入文章中文标题"
+                />
+              </label>
+              {article.body.map((paragraph, index) => (
+                <label className="admin-field-wide" key={`${article.id}-paragraph-translation-${index}`}>
+                  <span>第 {index + 1} 段中文翻译</span>
+                  <small className="bbc-admin-source-paragraph">{paragraph}</small>
+                  <textarea
+                    rows={5}
+                    value={draftChineseParagraphs[index] ?? ""}
+                    onChange={(event) => {
+                      setDraftChineseParagraphs((current) => {
+                        const next = [...current];
+                        next[index] = event.target.value;
+                        return next;
+                      });
+                      setMessage("");
+                    }}
+                    placeholder="输入这一段中文翻译"
+                  />
+                </label>
+              ))}
+            </div>
+          </section>
 
           <div className="bbc-admin-vocabulary-list">
             {draft.map((item, index) => (

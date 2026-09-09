@@ -6,7 +6,9 @@ import {
   type BbcVocabularyItem,
 } from "@/lib/articles/bbc";
 import {
+  getVocabularyBaseEntryForWordForm,
   getVocabularyEntry,
+  getVocabularyEntryForWordForm,
   normalizeLookupWord,
   type LocalVocabularyEntry,
   type VocabularyAutocompleteItem,
@@ -239,16 +241,56 @@ export function getBbcVocabularyAutocompleteItems(): VocabularyAutocompleteItem[
     .sort((left, right) => left.word.localeCompare(right.word));
 }
 
+function getBbcVocabularyEntryForWordForm(value: string) {
+  const normalizedWord = normalizeLookupWord(value);
+
+  const baseEntry = getVocabularyBaseEntryForWordForm(value);
+  if (baseEntry && normalizeLookupWord(baseEntry.word) !== normalizedWord) {
+    return baseEntry;
+  }
+
+  return getVocabularyEntryForWordForm(value);
+}
+
 function shouldKeepStaticVocabularyItem(item: BbcVocabularyItem) {
-  const displayText = getStaticVocabularyDisplayText(item.term);
+  const displayText = getBbcVocabularyDisplayTerm(item);
 
   if (/\s/.test(displayText)) {
     return true;
   }
 
-  const entry = getVocabularyEntry(displayText.toLowerCase());
+  const entry = getBbcVocabularyEntryForWordForm(displayText) ?? getVocabularyEntry(displayText.toLowerCase());
 
-  return !entry?.level.trim() || isHighLevel(entry.level);
+  if (entry?.level.trim()) {
+    return isHighLevel(entry.level);
+  }
+
+  if (item.sourceLevel?.trim()) {
+    return isHighLevel(item.sourceLevel);
+  }
+
+  return Boolean(entry?.level.trim()) && isHighLevel(entry?.level);
+}
+
+function canonicalizeBbcVocabularyItem(item: BbcVocabularyItem) {
+  const displayText = getBbcVocabularyDisplayTerm(item);
+
+  if (!displayText || /\s/.test(displayText)) {
+    return item;
+  }
+
+  const entry = getBbcVocabularyEntryForWordForm(displayText);
+
+  if (!entry || normalizeLookupWord(entry.word) === normalizeLookupWord(displayText)) {
+    return item;
+  }
+
+  return {
+    ...item,
+    highlightTerm: entry.word,
+    lemma: entry.word,
+    term: entry.word,
+  };
 }
 
 function getExampleMatchWords(words: string[]) {
@@ -348,22 +390,24 @@ function createAutoVocabularyItem(
   matchedWord: string,
   number: number,
 ): BbcVocabularyItem {
+  const displayTerm = entry.word;
+  const definition = getDefinition(entry);
   const example =
     findShortestBbcExample([entry.word, matchedWord]) ?? findArticleExample(article, matchedWord);
   const phonetic = entry.phonetic || entry.ukPhonetic || entry.usPhonetic || "";
 
   return {
-    definition: getDefinition(entry),
-    entry: [entry.word, phonetic, getDefinition(entry)].filter(Boolean).join(" "),
+    definition,
+    entry: [displayTerm, phonetic, definition].filter(Boolean).join(" "),
     example: example.example,
     highlight: true,
     highlightTerm: matchedWord,
-    lemma: entry.word,
+    lemma: displayTerm,
     number,
     partOfSpeech: getPartOfSpeech(entry),
     phonetic,
     sourceLevel: entry.level || "未分级",
-    term: entry.word,
+    term: displayTerm,
     translation: example.translation,
     ukPhonetic: entry.ukPhonetic,
     usPhonetic: entry.usPhonetic,
@@ -375,14 +419,12 @@ export function getBbcHighLevelVocabulary(article: BbcArticle) {
   const seenEntries = new Set<string>();
 
   for (const word of getArticleWords(article)) {
-    const entry = getVocabularyEntry(word);
-
-    const isExternalFallbackEntry = Boolean(entry && !entry.level.trim() && entry.sourceRowNumber === 0);
+    const entry = getBbcVocabularyEntryForWordForm(word);
 
     if (
       !entry ||
+      !entry.level.trim() ||
       !isHighLevel(entry.level) ||
-      isExternalFallbackEntry ||
       seenEntries.has(entry.normalizedWord)
     ) {
       continue;
@@ -396,7 +438,9 @@ export function getBbcHighLevelVocabulary(article: BbcArticle) {
 }
 
 export function getBbcEffectiveVocabulary(article: BbcArticle) {
-  const preservedVocabulary = (article.vocabulary ?? []).filter(shouldKeepStaticVocabularyItem);
+  const preservedVocabulary = (article.vocabulary ?? [])
+    .filter(shouldKeepStaticVocabularyItem)
+    .map(canonicalizeBbcVocabularyItem);
 
   return mergeBbcVocabularyItems(preservedVocabulary, getBbcHighLevelVocabulary(article));
 }

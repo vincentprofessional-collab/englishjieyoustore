@@ -4,10 +4,11 @@ import { readdir, stat } from "node:fs/promises";
 import { request } from "node:https";
 import path from "node:path";
 
-const sourceDir = "/Users/shidianjin/ielts-platform/public/audio/bbc";
+const sourceDir = process.env.R2_SOURCE_DIR || "/Users/shidianjin/ielts-platform/public/audio/bbc";
 const accountId = process.env.R2_ACCOUNT_ID;
 const accessKeyId = process.env.R2_ACCESS_KEY_ID;
-const secretAccessKey = process.env.R2_SECRET_ACCESS_KEY;
+const apiToken = process.env.R2_API_TOKEN;
+const secretAccessKey = process.env.R2_SECRET_ACCESS_KEY || (apiToken ? sha256(apiToken) : undefined);
 const bucket = process.env.R2_BUCKET || "englishjieyou-bbc-audio";
 const prefix = (process.env.R2_PREFIX || "bbc").replace(/^\/+|\/+$/g, "");
 const concurrency = Number(process.env.R2_UPLOAD_CONCURRENCY || "6");
@@ -15,6 +16,7 @@ const uploadLimit = Number(process.env.R2_UPLOAD_LIMIT || "0");
 const publicBaseUrl = process.env.R2_PUBLIC_BASE_URL?.replace(/\/+$/, "");
 const skipExisting = process.env.R2_SKIP_EXISTING !== "0" && Boolean(publicBaseUrl);
 const progressInterval = Number(process.env.R2_PROGRESS_INTERVAL || "2000");
+const includePrefix = (process.env.R2_INCLUDE_PREFIX || "").replace(/^\/+|\/+$/g, "");
 
 if (!accountId || !accessKeyId || !secretAccessKey) {
   console.error("Missing R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, or R2_SECRET_ACCESS_KEY.");
@@ -220,7 +222,11 @@ async function runPool(items, worker) {
   await Promise.all(Array.from({ length: Math.min(concurrency, items.length) }, runWorker));
 }
 
-const files = await listMp3Files(sourceDir);
+const files = (await listMp3Files(sourceDir)).filter((filePath) => {
+  if (!includePrefix) return true;
+  const relativePath = path.relative(sourceDir, filePath).split(path.sep).join("/");
+  return relativePath === includePrefix || relativePath.startsWith(`${includePrefix}/`);
+});
 const selectedFiles = uploadLimit > 0 ? files.slice(0, uploadLimit) : files;
 
 console.log(`Uploading ${selectedFiles.length} BBC mp3 files to r2://${bucket}/${prefix}/`);

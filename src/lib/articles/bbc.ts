@@ -9,6 +9,7 @@ import bbc2022Articles from "@/data/bbc/2022/index.json";
 import bbc2023Articles from "@/data/bbc/2023/index.json";
 import bbc2024Articles from "@/data/bbc/2024/index.json";
 import bbc2025Articles from "@/data/bbc/2025/index.json";
+import bbc2026Articles from "@/data/bbc/2026/index.json";
 export {
   mergeBbcVocabularyItems,
   normalizeBbcVocabularyTerm,
@@ -45,6 +46,7 @@ export type BbcArticleSentence = {
 export type BbcArticle = {
   audioUrl?: string;
   body: string[];
+  chineseParagraphs?: string[];
   date: string;
   fullAudioUrl?: string;
   id: string;
@@ -69,11 +71,12 @@ const allGeneratedBbcArticles = [
   ...bbc2023Articles,
   ...bbc2024Articles,
   ...bbc2025Articles,
+  ...bbc2026Articles,
 ];
 
 const bbcAudioBaseUrl = process.env.NEXT_PUBLIC_BBC_AUDIO_BASE_URL?.replace(/\/+$/, "");
 
-const generatedBbcArticles = bbcAudioBaseUrl ? allGeneratedBbcArticles : bbc2015Articles;
+const generatedBbcArticles = bbcAudioBaseUrl ? allGeneratedBbcArticles : [...bbc2015Articles, ...bbc2026Articles];
 
 function getBbcAudioUrl(year: number, articleId: string, audioFile: string) {
   const path = `${year}/${articleId}/${audioFile}`;
@@ -94,7 +97,8 @@ function mapGeneratedArticle(article: (typeof generatedBbcArticles)[number]): Bb
     date: article.date,
     fullAudioUrl,
     id: article.id,
-    lead: article.titleChinese,
+    lead: article.titleChinese ?? "",
+    chineseParagraphs: "chineseParagraphs" in article ? article.chineseParagraphs : undefined,
     sentences: article.sentences.map((sentence) => ({
       audioUrl: getBbcAudioUrl(article.year, article.id, sentence.audioFile),
       chinese: sentence.chinese,
@@ -115,19 +119,6 @@ function mapGeneratedArticle(article: (typeof generatedBbcArticles)[number]): Bb
 
 export const BBC_ARTICLES: BbcArticle[] = [
   ...generatedBbcArticles.map(mapGeneratedArticle),
-  {
-    id: "2026-urban-gardens",
-    year: 2026,
-    date: "2026-07-15",
-    title: "Urban gardens are turning balconies into tiny ecosystems",
-    lead: "How compact green spaces are reshaping daily routines in busy cities.",
-    body: [
-      "Across many cities, balconies and rooftops are being transformed into miniature gardens, creating pockets of shade, scent and slow living in places that once felt purely functional.",
-      "For some residents, the appeal is practical. Fresh herbs are cheaper than buying them every week, while a few pots of vegetables can reduce household waste and make cooking feel more connected to the seasons.",
-      "Others are drawn to the emotional value of the space. Caring for plants offers a small but meaningful break from screens, deadlines and crowded commutes.",
-      "Researchers say these informal gardens can also encourage neighbours to talk, swap cuttings and share advice, turning private outdoor corners into social spaces.",
-    ],
-  },
   {
     id: "2025-night-trains",
     year: 2025,

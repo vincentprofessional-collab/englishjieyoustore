@@ -67,10 +67,12 @@ type FavoriteQuestionItem = {
   href?: string;
   id: string;
   knowledgePoint?: string;
-  origin?: "junior-high";
+  options?: string[];
+  origin?: "bbc" | "junior-high";
   prompt?: string;
   questionNumber?: string;
   questionType?: string;
+  quizKind?: "matching" | "quiz" | "exercise";
   savedAt: string;
   sourceTitle?: string;
   title: string;
@@ -110,6 +112,7 @@ const favoriteSortOptions: Array<{ id: FavoriteSortMode; label: string }> = [
 ];
 
 const favoriteQuestionModuleLabels: Record<string, string> = {
+  bbc: "bbc",
   listening: "listening",
   reading: "reading",
   speaking: "speaking",
@@ -117,6 +120,7 @@ const favoriteQuestionModuleLabels: Record<string, string> = {
 };
 
 const favoriteQuestionModuleOrder: Record<string, number> = {
+  bbc: 0,
   listening: 1,
   speaking: 2,
   reading: 3,
@@ -319,6 +323,21 @@ function formatBbcSourceFromHref(href?: string) {
 }
 
 function getFavoriteQuestionSourceDetails(question: FavoriteQuestionItem) {
+  if (question.origin === "bbc") {
+    const articleId = question.id.match(/^bbc-wrong:([^:]+)/)?.[1] ?? question.href?.match(/^\/articles\/([^#?]+)/)?.[1] ?? "";
+    const kind = question.quizKind ?? (question.questionNumber?.startsWith("exercise") ? "exercise" : "quiz");
+    const questionNumber = question.questionNumber?.match(/\d+$/)?.[0] ?? "";
+    const plainLabel = [`BBC ${articleId}`, kind, questionNumber ? `question${questionNumber}` : ""].filter(Boolean).join("-");
+
+    return {
+      moduleKey: "bbc",
+      plainLabel,
+      prefix: `BBC ${articleId}`,
+      segments: [kind, questionNumber ? `question${questionNumber}` : ""].filter(Boolean),
+      sortKey: `0-${articleId}-${kind}-${questionNumber}`,
+    };
+  }
+
   const sourceText = [
     question.id,
     question.href,
@@ -405,6 +424,23 @@ function FavoriteJuniorHighQuestionMeta({ question }: { question: FavoriteQuesti
       <span className="favorite-question-badge">错题</span>
       <span className="favorite-library-title-text">第 {question.questionNumber ?? ""} 题</span>
       {meta.length ? <span className="favorite-question-meta-line">{meta.join(" · ")}</span> : null}
+      {question.prompt ? <span className="favorite-question-prompt">{question.prompt}</span> : null}
+      {answerText ? <span className="favorite-question-answer-line">{answerText}</span> : null}
+    </>
+  );
+}
+
+function FavoriteBbcQuestionMeta({ question }: { question: FavoriteQuestionItem }) {
+  const answerText = [
+    question.userAnswer ? `你的答案：${question.userAnswer}` : "",
+    question.correctAnswer ? `参考答案：${question.correctAnswer}` : "",
+  ].filter(Boolean).join("；");
+
+  return (
+    <>
+      <span className="favorite-question-badge">BBC 错题</span>
+      <span className="favorite-library-title-text">{question.questionNumber ?? ""}</span>
+      {question.sourceTitle ? <span className="favorite-question-meta-line">{question.sourceTitle}</span> : null}
       {question.prompt ? <span className="favorite-question-prompt">{question.prompt}</span> : null}
       {answerText ? <span className="favorite-question-answer-line">{answerText}</span> : null}
     </>
@@ -872,20 +908,23 @@ export default function FavoritesPage() {
           questions.length === 0 ? (
             <div className="favorite-empty full">
               <strong>还没有错题</strong>
-              <span>提交后做错的中考英语题会自动出现在这里；点击题号可以回到对应页面的原题位置。</span>
+              <span>提交后做错的题会自动出现在这里；点击题号可以回到对应页面的原题位置。</span>
             </div>
           ) : (
             <div className="favorite-library-table">
               {sortedQuestions.map((question) => {
                 const sourceDetails = getFavoriteQuestionSourceDetails(question);
                 const isJuniorHighWrongQuestion = question.origin === "junior-high";
-                const showQuestionTitle = !isJuniorHighWrongQuestion && !isGeneratedFavoriteQuestionTitle(question.title);
+                const isBbcWrongQuestion = question.origin === "bbc";
+                const showQuestionTitle = !isJuniorHighWrongQuestion && !isBbcWrongQuestion && !isGeneratedFavoriteQuestionTitle(question.title);
 
                 return (
                   <article className="favorite-library-row question-row" key={question.id}>
-                    <Link className={`favorite-library-title question ${isJuniorHighWrongQuestion ? "junior-high-wrong-question-link" : ""}`} href={question.href ?? "/training"}>
+                    <Link className={`favorite-library-title question ${isJuniorHighWrongQuestion || isBbcWrongQuestion ? "junior-high-wrong-question-link" : ""}`} href={question.href ?? "/training"}>
                       {isJuniorHighWrongQuestion ? (
                         <FavoriteJuniorHighQuestionMeta question={question} />
+                      ) : isBbcWrongQuestion ? (
+                        <FavoriteBbcQuestionMeta question={question} />
                       ) : sourceDetails ? (
                         <FavoriteQuestionSource details={sourceDetails} />
                       ) : null}

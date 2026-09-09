@@ -233,7 +233,7 @@ export function AdminContentManager() {
           type="button"
           onClick={() => setActiveView("bbc-vocabulary")}
         >
-          BBC词汇
+          BBC内容
         </button>
         <button
           className={activeView === "junior-high-questions" ? "active" : ""}

@@ -3,6 +3,8 @@
 import {
   type DragEvent as ReactDragEvent,
   type KeyboardEvent as ReactKeyboardEvent,
+  type PointerEvent as ReactPointerEvent,
+  useEffect,
   useState,
 } from "react";
 import type { AudioPlayerSettings } from "@/components/audio-player";
@@ -25,6 +27,13 @@ type SentenceOrderAnswer = {
   token: string;
   tokenIndex: number;
 };
+
+type SentenceOrderDrag = SentenceOrderAnswer & {
+  pointerId: number;
+  sourceSlot: number | null;
+};
+
+type SentenceOrderDropTarget = number | "bank";
 
 function normalizeAnswer(value: string) {
   return value
@@ -55,13 +64,21 @@ function stableHash(value: string) {
   return hash;
 }
 
+function getWavePhrases(terms: string[] = []) {
+  return [
+    ...new Set(
+      terms
+        .map((term) => term.trim())
+        .filter((term) => (term.match(/[A-Za-z]+(?:['’-][A-Za-z]+)*/g)?.length ?? 0) >= 2),
+    ),
+  ].sort((left, right) => right.length - left.length);
+}
+
 function renderUnderlinedEnglish(
   sentence: BbcPracticeSentence,
   activeWordIndex: number | null = null,
 ) {
-  const terms = [...(sentence.underlinedTerms ?? [])]
-    .filter(Boolean)
-    .sort((left, right) => right.length - left.length);
+  const terms = getWavePhrases(sentence.underlinedTerms);
   const pattern = terms.length
     ? new RegExp(
         `(${terms
@@ -77,19 +94,24 @@ function renderUnderlinedEnglish(
   let wordIndex = 0;
 
   return (pattern ? sentence.english.split(pattern) : [sentence.english]).map((part, partIndex) => {
+    const isWaveTerm = termSet.has(part.toLowerCase());
     const tokens = splitEnglishTokens(part).map((token, tokenIndex) => {
       const currentWordIndex = isWordToken(token) ? wordIndex : null;
       if (currentWordIndex != null) {
         wordIndex += 1;
       }
 
+      const isActiveWord = currentWordIndex != null && currentWordIndex === activeWordIndex;
+      const className = [
+        isActiveWord ? "bbc-active-word" : "",
+        isWaveTerm && isWordToken(token) ? "bbc-wave-term-word" : "",
+      ]
+        .filter(Boolean)
+        .join(" ");
+
       return (
         <span
-          className={
-            currentWordIndex != null && currentWordIndex === activeWordIndex
-              ? "bbc-active-word"
-              : undefined
-          }
+          className={className || undefined}
           key={`${sentence.sentenceNo}-word-${partIndex}-${tokenIndex}`}
         >
           {token}
@@ -97,7 +119,7 @@ function renderUnderlinedEnglish(
       );
     });
 
-    return termSet.has(part.toLowerCase()) ? (
+    return isWaveTerm ? (
       <span className="bbc-wave-term" key={`${sentence.sentenceNo}-wave-${partIndex}`}>
         {tokens}
       </span>
@@ -145,6 +167,70 @@ export function BbcSentencePractice({
   const [sentenceOrderAnswers, setSentenceOrderAnswers] = useState<
     Record<number, SentenceOrderAnswer>
   >({});
+  const [sentenceOrderDrag, setSentenceOrderDrag] = useState<SentenceOrderDrag | null>(null);
+  const [sentenceOrderHover, setSentenceOrderHover] = useState<SentenceOrderDropTarget | null>(null);
+
+  useEffect(() => {
+    if (!sentenceOrderDrag) {
+      return;
+    }
+    const activeDrag = sentenceOrderDrag;
+
+    function getDropTarget(clientX: number, clientY: number): SentenceOrderDropTarget | null {
+      const element = document.elementFromPoint(clientX, clientY);
+      const dropZone = element?.closest<HTMLElement>("[data-sentence-order-drop-target]");
+      if (dropZone?.dataset.sentenceOrderDropTarget) {
+        return Number(dropZone.dataset.sentenceOrderDropTarget);
+      }
+
+      if (element?.closest("[data-sentence-order-bank]")) {
+        return "bank";
+      }
+
+      return null;
+    }
+
+    function handlePointerMove(event: PointerEvent) {
+      if (event.pointerId !== activeDrag.pointerId) {
+        return;
+      }
+
+      event.preventDefault();
+      setSentenceOrderHover(getDropTarget(event.clientX, event.clientY));
+    }
+
+    function handlePointerUp(event: PointerEvent) {
+      if (event.pointerId !== activeDrag.pointerId) {
+        return;
+      }
+
+      const target = getDropTarget(event.clientX, event.clientY);
+      if (target !== null) {
+        moveSentenceOrderAnswer(activeDrag, target);
+      }
+      setSentenceOrderDrag(null);
+      setSentenceOrderHover(null);
+    }
+
+    function handlePointerCancel(event: PointerEvent) {
+      if (event.pointerId !== activeDrag.pointerId) {
+        return;
+      }
+
+      setSentenceOrderDrag(null);
+      setSentenceOrderHover(null);
+    }
+
+    window.addEventListener("pointermove", handlePointerMove, { passive: false });
+    window.addEventListener("pointerup", handlePointerUp);
+    window.addEventListener("pointercancel", handlePointerCancel);
+
+    return () => {
+      window.removeEventListener("pointermove", handlePointerMove);
+      window.removeEventListener("pointerup", handlePointerUp);
+      window.removeEventListener("pointercancel", handlePointerCancel);
+    };
+  }, [sentenceOrderDrag]);
 
   function getDictationAnswerKey(tokenIndex: number) {
     return `${settings.dictationMode}:${tokenIndex}`;
@@ -302,6 +388,10 @@ export function BbcSentencePractice({
   }
 
   function getSentenceOrderWordBank() {
+    const usedTokenIndexes = new Set(
+      Object.values(sentenceOrderAnswers).map((answer) => answer.tokenIndex),
+    );
+
     return [...getSentenceWordTargets()].sort((left, right) => {
       const leftHash = stableHash(
         `${sentence.sentenceNo}:${left.tokenIndex}:${left.token.toLowerCase()}`,
@@ -315,7 +405,87 @@ export function BbcSentencePractice({
       }
 
       return left.tokenIndex - right.tokenIndex;
+    }).filter((target) => !usedTokenIndexes.has(target.tokenIndex));
+  }
+
+  function moveSentenceOrderAnswer(
+    payload: SentenceOrderAnswer & { sourceSlot: number | null },
+    target: SentenceOrderDropTarget,
+  ) {
+    setSentenceOrderAnswers((current) => {
+      const next = { ...current };
+      const movingAnswer = payload.sourceSlot == null ? payload : next[payload.sourceSlot];
+
+      if (!movingAnswer?.token) {
+        return current;
+      }
+
+      if (target === "bank") {
+        if (payload.sourceSlot != null) {
+          delete next[payload.sourceSlot];
+        }
+        return next;
+      }
+
+      if (payload.sourceSlot === target) {
+        return current;
+      }
+
+      const replacedAnswer = next[target];
+      if (payload.sourceSlot != null) {
+        delete next[payload.sourceSlot];
+        if (replacedAnswer) {
+          next[payload.sourceSlot] = replacedAnswer;
+        }
+      }
+      next[target] = {
+        token: movingAnswer.token,
+        tokenIndex: movingAnswer.tokenIndex,
+      };
+      return next;
     });
+  }
+
+  function startSentenceOrderPointerDrag(
+    event: ReactPointerEvent<HTMLElement>,
+    answer: SentenceOrderAnswer,
+    sourceSlot: number | null,
+  ) {
+    if (event.pointerType === "mouse" && event.button !== 0) {
+      return;
+    }
+
+    event.preventDefault();
+    event.stopPropagation();
+    setSentenceOrderDrag({
+      ...answer,
+      pointerId: event.pointerId,
+      sourceSlot,
+    });
+    setSentenceOrderHover(null);
+  }
+
+  function readSentenceOrderDragPayload(event: ReactDragEvent<HTMLElement>) {
+    try {
+      const payload = JSON.parse(
+        event.dataTransfer.getData("application/json"),
+      ) as SentenceOrderAnswer & { sourceSlot?: number | null };
+
+      if (payload.token) {
+        return {
+          sourceSlot: payload.sourceSlot ?? null,
+          token: payload.token,
+          tokenIndex: payload.tokenIndex,
+        };
+      }
+    } catch {
+      const fallbackToken = event.dataTransfer.getData("text/plain");
+      if (fallbackToken) {
+        return { sourceSlot: null, token: fallbackToken, tokenIndex: -1 };
+      }
+    }
+
+    return null;
   }
 
   function renderSentenceOrderBlank(target: DictationTarget) {
@@ -327,33 +497,34 @@ export function BbcSentencePractice({
     return (
       <span
         aria-label={`语序排列 ${target.normalizedWord}`}
-        className={`sentence-order-dropzone ${isCorrect ? "correct" : ""} ${isWrong ? "wrong" : ""}`}
+        className={`sentence-order-dropzone ${hasAnswer ? "filled" : ""} ${
+          sentenceOrderDrag?.sourceSlot === target.tokenIndex ? "sentence-order-dragging" : ""
+        } ${sentenceOrderHover === target.tokenIndex ? "hover" : ""} ${isCorrect ? "correct" : ""} ${isWrong ? "wrong" : ""}`}
+        data-sentence-order-drop-target={target.tokenIndex}
+        draggable={hasAnswer}
         key={`${sentence.sentenceNo}-order-${target.tokenIndex}`}
         onDragOver={(event) => event.preventDefault()}
         onDrop={(event: ReactDragEvent<HTMLSpanElement>) => {
           event.preventDefault();
           event.stopPropagation();
 
-          try {
-            const payload = JSON.parse(
-              event.dataTransfer.getData("application/json"),
-            ) as SentenceOrderAnswer;
+          const payload = readSentenceOrderDragPayload(event);
+          if (payload) {
+            moveSentenceOrderAnswer(payload, target.tokenIndex);
+          }
+        }}
+        onDragStart={(event) => {
+          if (!placedAnswer) {
+            return;
+          }
 
-            if (payload.token) {
-              setSentenceOrderAnswers((current) => ({
-                ...current,
-                [target.tokenIndex]: payload,
-              }));
-            }
-          } catch {
-            const fallbackToken = event.dataTransfer.getData("text/plain");
-
-            if (fallbackToken) {
-              setSentenceOrderAnswers((current) => ({
-                ...current,
-                [target.tokenIndex]: { token: fallbackToken, tokenIndex: -1 },
-              }));
-            }
+          const payload = { ...placedAnswer, sourceSlot: target.tokenIndex };
+          event.dataTransfer.setData("application/json", JSON.stringify(payload));
+          event.dataTransfer.setData("text/plain", placedAnswer.token);
+        }}
+        onPointerDown={(event) => {
+          if (placedAnswer) {
+            startSentenceOrderPointerDrag(event, placedAnswer, target.tokenIndex);
           }
         }}
         role="button"
@@ -387,15 +558,29 @@ export function BbcSentencePractice({
 
   function renderSentenceOrderWordBank() {
     return (
-      <div className="sentence-order-word-bank">
+      <div
+        className={`sentence-order-word-bank ${sentenceOrderHover === "bank" ? "hover" : ""}`}
+        data-sentence-order-bank
+        onDragOver={(event) => event.preventDefault()}
+        onDrop={(event: ReactDragEvent<HTMLDivElement>) => {
+          event.preventDefault();
+          const payload = readSentenceOrderDragPayload(event);
+          if (payload) {
+            moveSentenceOrderAnswer(payload, "bank");
+          }
+        }}
+      >
         {getSentenceOrderWordBank().map((target) => (
           <button
-            className="sentence-order-chip"
+            className={`sentence-order-chip ${
+              sentenceOrderDrag?.tokenIndex === target.tokenIndex ? "sentence-order-dragging" : ""
+            }`}
             draggable
             key={`${sentence.sentenceNo}-word-bank-${target.tokenIndex}`}
             onClick={(event) => event.stopPropagation()}
             onDragStart={(event) => {
-              const payload: SentenceOrderAnswer = {
+              const payload = {
+                sourceSlot: null,
                 token: target.token,
                 tokenIndex: target.tokenIndex,
               };
@@ -403,6 +588,9 @@ export function BbcSentencePractice({
               event.dataTransfer.setData("application/json", JSON.stringify(payload));
               event.dataTransfer.setData("text/plain", target.token);
             }}
+            onPointerDown={(event) =>
+              startSentenceOrderPointerDrag(event, target, null)
+            }
             type="button"
           >
             {target.token}

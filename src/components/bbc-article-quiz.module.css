@@ -1,0 +1,51 @@
+.panel {
+  min-width: 0;
+  padding: clamp(20px, 3vw, 44px);
+  border: 1px solid #e5d8b9;
+  border-radius: 28px;
+  background: #fffaf0;
+  color: #171d19;
+}
+.group h3 { margin: 0 0 8px; color: #174f40; }
+.group h3 { font-size: clamp(20px, 1.7vw, 25px); }
+.group { margin-top: 30px; }
+.question { min-width: 0; padding: 24px 0; border-bottom: 1px solid #e5d8b9; }
+.question:last-child { border-bottom: 0; padding-bottom: 0; }
+.prompt { display: flex; align-items: baseline; gap: 10px; margin: 0 0 16px; font-size: clamp(18px, 1.4vw, 22px); line-height: 1.65; overflow-wrap: anywhere; }
+.summaryPrompt { display: block; }
+.number { flex: 0 0 auto; color: #174f40; }
+.choiceGrid { display: grid; gap: 10px; }
+.choice { display: grid; grid-template-columns: 30px minmax(0, 1fr) 24px; align-items: start; gap: 8px; width: 100%; border: 1px solid #d8d0c2; border-radius: 12px; padding: 12px 14px; background: #fff; color: #171d19; text-align: left; font: inherit; font-size: 17px; line-height: 1.5; cursor: pointer; }
+.choice:hover, .choice[aria-checked="true"] { border-color: #b78926; background: #fff8e5; }
+.correctChoice { border-color: #3e8b63 !important; background: #edf6f1 !important; }
+.wrongChoice { border-color: #b44b3e !important; background: #fff0ed !important; }
+.textarea { display: block; width: 100%; max-width: 100%; min-height: 92px; box-sizing: border-box; resize: vertical; border: 1px solid #d8d0c2; border-radius: 10px; padding: 12px 16px; background: #fff; color: #171d19; font: inherit; font-size: 18px; line-height: 1.6; }
+.matchingRow { display: grid; grid-template-columns: minmax(130px, .35fr) minmax(0, 1fr); align-items: center; gap: 14px; font-size: 18px; line-height: 1.5; }
+.matchingForm { min-width: 0; }
+.matchingPrompt { color: #174f40; font-weight: 700; }
+.matchingSelect { min-width: 0; border: 1px solid #d8d0c2; border-radius: 10px; padding: 11px 12px; background: #fff; color: #171d19; font: inherit; }
+.answerBlank { display: inline-block; min-width: 125px; margin: 0 5px; border-bottom: 2px solid #b78926; border-radius: 4px 4px 0 0; padding: 2px 8px; background: #fff8e5; color: #174f40; font: inherit; font-weight: 700; vertical-align: baseline; }
+.dropZone { display: inline-block; min-width: 125px; margin: 0 5px; border: 0; border-bottom: 2px solid #b78926; border-radius: 4px 4px 0 0; padding: 2px 8px; background: #fff8e5; color: #174f40; font: inherit; font-weight: 700; cursor: pointer; vertical-align: baseline; }
+.dropZoneHover, .dropZone:focus-visible { outline: 2px solid #b78926; outline-offset: 2px; background: #f9edc5; }
+.wrongDropZone { border-bottom-color: #b44b3e; background: #fff0ed; }
+.wordBank { display: flex; flex-wrap: wrap; align-items: center; gap: 9px; margin: 4px 0 0 34px; font-size: clamp(18px, 1.4vw, 22px); }
+.wordBankDropHover { outline: 2px solid #b78926; outline-offset: 3px; border-radius: 10px; }
+.word { border: 1px solid #cda94e; border-radius: 999px; padding: 7px 13px; background: #fff8e5; color: #684c11; font: inherit; font-size: inherit; line-height: 1.35; cursor: grab; touch-action: none; }
+.word:active, .wordDragging { cursor: grabbing; background: #f5e2a4; }
+.actions { display: flex; justify-content: flex-end; align-items: center; gap: 12px; margin-top: 14px; }
+.submit { border: 1px solid #174f40; border-radius: 999px; padding: 9px 28px; background: #174f40; color: #fff; font-size: 16px; cursor: pointer; }
+.submit:disabled { opacity: .45; cursor: not-allowed; }
+.question button:focus-visible, .question select:focus-visible, .question textarea:focus-visible { outline: 2px solid #b78926; outline-offset: 3px; }
+.hint { color: #59675f; font-size: 15px; }
+.answer { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; padding: 14px 16px; border-radius: 10px; font-size: 18px; line-height: 1.65; overflow-wrap: anywhere; }
+.answerCorrect { background: #edf6f1; color: #174f40; }
+.answerWrong { background: #fff0ed; color: #8a332d; }
+.answerPending { background: #fff8e5; color: #684c11; }
+.answerItem { display: block; }
+@media (max-width: 600px) {
+  .panel { border-radius: 18px; padding: 20px 16px; }
+  .prompt { gap: 7px; }
+  .matchingRow { grid-template-columns: 1fr; gap: 8px; }
+  .wordBank { margin-left: 0; }
+  .dropZone { min-width: 110px; }
+}

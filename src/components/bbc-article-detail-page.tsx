@@ -9,6 +9,7 @@ import {
   type AudioSpeakingMode,
 } from "@/components/audio-player";
 import { BbcSentencePractice } from "@/components/bbc-sentence-practice";
+import { BbcArticleQuiz } from "@/components/bbc-article-quiz";
 import { ContentShareButton } from "@/components/content-share-button";
 import { StudyAnnotationTools } from "@/components/study-annotation-tools";
 import { supabase } from "@/lib/supabase/client";
@@ -17,6 +18,7 @@ import type {
   BbcArticleSentence,
   BbcVocabularyItem,
 } from "@/lib/articles/bbc";
+import { getBbcArticleContentOverride } from "@/lib/articles/bbc-content-overrides";
 import { mergeBbcVocabularyItems } from "@/lib/articles/bbc-vocabulary-merge";
 import {
   getActiveWordIndex,
@@ -280,15 +282,6 @@ function parseBbcVocabularyItem(item: BbcVocabularyItem) {
   };
 }
 
-function getBbcVocabularyOverride(metaJson: unknown): BbcVocabularyItem[] | null {
-  if (!metaJson || typeof metaJson !== "object" || !("vocabulary" in metaJson)) {
-    return null;
-  }
-
-  const vocabulary = (metaJson as { vocabulary?: unknown }).vocabulary;
-  return Array.isArray(vocabulary) ? (vocabulary as BbcVocabularyItem[]) : null;
-}
-
 function MouseClickIcon() {
   return (
     <svg aria-hidden="true" className="bbc-reading-timer-icon" viewBox="0 0 24 24">
@@ -314,14 +307,18 @@ function normalizeBbcParagraphText(value: string) {
 function getOriginalTextBlocks(
   paragraphs: string[],
   sentences?: { chinese: string; english: string }[],
+  chineseParagraphs?: string[],
 ): { chinese?: string; english: string }[] {
   if (!sentences?.length) {
-    return paragraphs.map((english) => ({ english }));
+    return paragraphs.map((english, index) => ({
+      chinese: chineseParagraphs?.[index] || undefined,
+      english,
+    }));
   }
 
   let sentenceIndex = 0;
 
-  return paragraphs.map((english) => {
+  return paragraphs.map((english, paragraphIndex) => {
     const normalizedParagraph = normalizeBbcParagraphText(english);
     const chineseParts: string[] = [];
     let normalizedSentences = "";
@@ -336,7 +333,7 @@ function getOriginalTextBlocks(
     }
 
     return {
-      chinese: chineseParts.join("") || undefined,
+      chinese: chineseParagraphs?.[paragraphIndex] || chineseParts.join("") || undefined,
       english,
     };
   });
@@ -460,9 +457,9 @@ function getBbcVocabularyMatchPattern(item: BbcVocabularyItem) {
   const source = cleanBbcVocabularyText(item.highlightTerm ?? item.term);
   const bracketStart = source.search(/[\[【]/);
   const headword = (bracketStart >= 0 ? source.slice(0, bracketStart) : source).trim();
-  return (
-    headword.match(/\.{3}|…|[A-Za-z]+(?:['’\-][A-Za-z]+)*/g) ?? []
-  ).map(normalizeBbcVocabularyToken);
+  return (headword.match(/\.{3}|…|[A-Za-z0-9]+(?:['’\-][A-Za-z0-9]+)*/g) ?? [])
+    .filter((token) => !/^\d+[A-Za-z]+$/i.test(token))
+    .map(normalizeBbcVocabularyToken);
 }
 
 function isBbcVocabularyPlaceholder(value: string) {
@@ -470,7 +467,7 @@ function isBbcVocabularyPlaceholder(value: string) {
 }
 
 function getBbcVocabularyPhraseMatchIndexes(words: string[], vocabularyPattern: string[], start: number) {
-  const maxInsertedWords = vocabularyPattern.length > 1 ? 6 : 0;
+  const maxInsertedWords = vocabularyPattern.includes("...") || vocabularyPattern.includes("…") ? 6 : 0;
 
   function matchPattern(patternIndex: number, wordIndex: number): number[] | null {
     if (patternIndex >= vocabularyPattern.length) {
@@ -557,56 +554,89 @@ function renderHighlightedEnglish(
   wordOffset: number,
   activeGlobalWordIndex: number | null,
   vocabularyHighlightWordIndexes: Set<number>,
+  waveTerms: string[] = [],
 ) {
   let wordIndex = wordOffset;
-  const tokens = text.match(/[A-Za-z]+(?:['’-][A-Za-z]+)*|[^A-Za-z]+/g) ?? [text];
-  const tokenStates = tokens.map((token) => {
-    const isWord = /^[A-Za-z]/.test(token);
-    const currentWordIndex = isWord ? wordIndex : null;
-    if (isWord) {
-      wordIndex += 1;
-    }
+  const normalizedWaveTerms = [
+    ...new Set(
+      waveTerms
+        .map((term) => term.trim())
+        .filter((term) => (term.match(/[A-Za-z]+(?:['’-][A-Za-z]+)*/g)?.length ?? 0) >= 2),
+    ),
+  ];
+  const wavePattern = normalizedWaveTerms.length
+    ? new RegExp(
+        `(${normalizedWaveTerms
+          .map((term) => {
+            const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+            return `(?<![A-Za-z])${escaped}(?![A-Za-z])`;
+          })
+          .join("|")})`,
+        "gi",
+      )
+    : null;
+  const waveTermSet = new Set(normalizedWaveTerms.map((term) => term.toLowerCase().replace(/’/g, "'")));
+  const parts = wavePattern ? text.split(wavePattern) : [text];
 
-    const isVocabularyHighlight =
-      currentWordIndex != null && vocabularyHighlightWordIndexes.has(currentWordIndex);
-    const classNames = [
-      isVocabularyHighlight ? "bbc-vocabulary-highlight" : "",
-      currentWordIndex != null && currentWordIndex === activeGlobalWordIndex
-        ? "bbc-active-word"
-        : "",
-    ]
-      .filter(Boolean)
-      .join(" ");
+  return parts.map((part, partIndex) => {
+    const partTokens = part.match(/[A-Za-z]+(?:['’-][A-Za-z]+)*|[^A-Za-z]+/g) ?? [part];
+    const tokenStates = partTokens.map((token) => {
+      const isWord = /^[A-Za-z]/.test(token);
+      const currentWordIndex = isWord ? wordIndex : null;
+      if (isWord) {
+        wordIndex += 1;
+      }
 
-    return { classNames, isVocabularyHighlight, isWord, token };
+      const isVocabularyHighlight =
+        currentWordIndex != null && vocabularyHighlightWordIndexes.has(currentWordIndex);
+      const classNames = [
+        isVocabularyHighlight ? "bbc-vocabulary-highlight" : "",
+        currentWordIndex != null && currentWordIndex === activeGlobalWordIndex
+          ? "bbc-active-word"
+          : "",
+      ]
+        .filter(Boolean)
+        .join(" ");
+
+      return { classNames, isVocabularyHighlight, isWord, token };
+    });
+    const groupedTokens: { classNames: string; text: string }[] = [];
+
+    tokenStates.forEach((state, tokenIndex) => {
+      const previousState = tokenStates[tokenIndex - 1];
+      const nextState = tokenStates[tokenIndex + 1];
+      const classNames =
+        !state.isWord && /^[\s]+$/.test(state.token) && previousState?.isVocabularyHighlight && nextState?.isVocabularyHighlight
+          ? "bbc-vocabulary-highlight"
+          : state.classNames;
+      const previousGroup = groupedTokens.at(-1);
+
+      if (previousGroup && previousGroup.classNames === classNames) {
+        previousGroup.text += state.token;
+        return;
+      }
+
+      groupedTokens.push({ classNames, text: state.token });
+    });
+
+    const content = groupedTokens.map((group, tokenIndex) => (
+      <span
+        className={group.classNames || undefined}
+        key={`${wordOffset}-${partIndex}-${tokenIndex}`}
+      >
+        {group.text}
+      </span>
+    ));
+    const isWaveTerm = waveTermSet.has(part.toLowerCase().replace(/’/g, "'"));
+
+    return isWaveTerm ? (
+      <span className="bbc-wave-term" key={`${wordOffset}-wave-${partIndex}`}>
+        {content}
+      </span>
+    ) : (
+      <span key={`${wordOffset}-text-${partIndex}`}>{content}</span>
+    );
   });
-  const groupedTokens: { classNames: string; text: string }[] = [];
-
-  tokenStates.forEach((state, tokenIndex) => {
-    const previousState = tokenStates[tokenIndex - 1];
-    const nextState = tokenStates[tokenIndex + 1];
-    const classNames =
-      !state.isWord && /^[\s]+$/.test(state.token) && previousState?.isVocabularyHighlight && nextState?.isVocabularyHighlight
-        ? "bbc-vocabulary-highlight"
-        : state.classNames;
-    const previousGroup = groupedTokens.at(-1);
-
-    if (previousGroup && previousGroup.classNames === classNames) {
-      previousGroup.text += state.token;
-      return;
-    }
-
-    groupedTokens.push({ classNames, text: state.token });
-  });
-
-  return groupedTokens.map((group, tokenIndex) => (
-    <span
-      className={group.classNames || undefined}
-      key={`${wordOffset}-${tokenIndex}`}
-    >
-      {group.text}
-    </span>
-  ));
 }
 
 function OriginalDisplayMenu({
@@ -690,6 +720,10 @@ export default function ArticleDetailPage({ article }: ArticlePageProps) {
   }));
   const [isOriginalVisible, setIsOriginalVisible] = useState(true);
   const [isVocabularyVisible, setIsVocabularyVisible] = useState(true);
+  const [articleTitleChinese, setArticleTitleChinese] = useState(article?.titleChinese ?? "");
+  const [articleChineseParagraphs, setArticleChineseParagraphs] = useState<string[]>(
+    article?.chineseParagraphs ?? [],
+  );
   // Keep the bilingual article body visible on first load. Users can still
   // switch to English-only or Chinese-only from the display menu.
   const [originalDisplayMode, setOriginalDisplayMode] = useState<OriginalDisplayMode>("bilingual");
@@ -722,6 +756,8 @@ export default function ArticleDetailPage({ article }: ArticlePageProps) {
 
   useEffect(() => {
     let cancelled = false;
+    setArticleTitleChinese(article?.titleChinese ?? "");
+    setArticleChineseParagraphs(article?.chineseParagraphs ?? []);
     setArticleVocabulary(article?.vocabulary ?? []);
 
     if (!article) {
@@ -754,10 +790,18 @@ export default function ArticleDetailPage({ article }: ArticlePageProps) {
       }
 
       const override = !overrideResult.error
-        ? getBbcVocabularyOverride(overrideResult.data?.meta_json)
+        ? getBbcArticleContentOverride(overrideResult.data?.meta_json)
         : null;
 
-      setArticleVocabulary(override ?? mergeBbcVocabularyItems(currentArticle.vocabulary, automaticVocabulary));
+      if (override?.titleChinese !== undefined) {
+        setArticleTitleChinese(override.titleChinese);
+      }
+      if (override?.chineseParagraphs !== undefined) {
+        setArticleChineseParagraphs(override.chineseParagraphs);
+      }
+      setArticleVocabulary(
+        override?.vocabulary ?? mergeBbcVocabularyItems(currentArticle.vocabulary, automaticVocabulary),
+      );
     }
 
     void loadBbcVocabulary();
@@ -1015,7 +1059,7 @@ export default function ArticleDetailPage({ article }: ArticlePageProps) {
             id,
             savedAt: new Date().toISOString(),
             sourceTitle: "BBC TAKE AWAY ENGLISH",
-            title: `${article.id}-${article.title}${article.titleChinese ? ` ${article.titleChinese}` : ""}`,
+            title: `${article.id}-${article.title}${articleTitleChinese ? ` ${articleTitleChinese}` : ""}`,
           },
           ...currentFavorites,
         ];
@@ -1061,7 +1105,7 @@ export default function ArticleDetailPage({ article }: ArticlePageProps) {
 
   const articleWordCount =
     article.body.join(" ").match(/[A-Za-z]+(?:['’-][A-Za-z]+)*/g)?.length ?? 0;
-  const originalTextBlocks = getOriginalTextBlocks(article.body, article.sentences);
+  const originalTextBlocks = getOriginalTextBlocks(article.body, article.sentences, articleChineseParagraphs);
   const visibleArticleVocabulary = articleVocabulary.filter((item) => item.highlight !== false);
   const vocabularyMatches = getBbcVocabularyMatches(visibleArticleVocabulary, article.body);
   const vocabularyHighlightWordIndexes = new Set(
@@ -1123,7 +1167,7 @@ export default function ArticleDetailPage({ article }: ArticlePageProps) {
               </button>
               <ContentShareButton
                 label="分享文章"
-                text={`${article.title}\n${article.titleChinese ?? ""}`.trim()}
+                text={`${article.title}\n${articleTitleChinese}`.trim()}
                 title={`${article.id}-${article.title}`}
                 url={`/articles/${article.id}`}
               />
@@ -1133,9 +1177,9 @@ export default function ArticleDetailPage({ article }: ArticlePageProps) {
             <span className="bbc-article-title-line" lang="en">
               {article.title}
             </span>
-            {article.titleChinese ? (
+            {articleTitleChinese ? (
               <span className="bbc-article-title-line" lang="zh-CN">
-                {article.titleChinese}
+                {articleTitleChinese}
               </span>
             ) : null}
           </h1>
@@ -1144,7 +1188,7 @@ export default function ArticleDetailPage({ article }: ArticlePageProps) {
           </div>
         </div>
 
-        <div className="bbc-article-study" ref={studyWorkspaceRef}>
+      <div className="bbc-article-study" ref={studyWorkspaceRef}>
         {article.fullAudioUrl ? (
           <section className="bbc-full-audio-panel">
             <div className="bbc-full-audio">
@@ -1162,7 +1206,6 @@ export default function ArticleDetailPage({ article }: ArticlePageProps) {
             </div>
           </section>
         ) : null}
-
         <div
           className={`bbc-article-columns ${isVocabularyVisible && orderedArticleVocabulary.length ? "" : "without-vocabulary"} ${
             !isOriginalVisible ? "original-hidden" : ""
@@ -1232,6 +1275,7 @@ export default function ArticleDetailPage({ article }: ArticlePageProps) {
                         textBlock.wordOffset,
                         activeFullGlobalWordIndex,
                         vocabularyHighlightWordIndexes,
+                        [],
                       )}
                     </p>
                   ) : null}
@@ -1315,10 +1359,11 @@ export default function ArticleDetailPage({ article }: ArticlePageProps) {
 
         </div>
 
+          <BbcArticleQuiz key={article.id} articleId={article.id} articleTitle={article.title} />
+
         <article className="bbc-transcript-panel">
           <header className="bbc-transcript-head">
-            <span className="bbc-transcript-kicker">Transcript</span>
-            <h2>中英逐句原文</h2>
+            <h2>综合训练模块</h2>
           </header>
 
           {article.sentences?.length ? (
@@ -1419,8 +1464,15 @@ export default function ArticleDetailPage({ article }: ArticlePageProps) {
             </div>
           ) : (
             <div className="bbc-original-copy">
-              {article.body.map((paragraph, index) => (
-                <p key={`${article.id}-fallback-${index}`}>{paragraph}</p>
+              {originalTextBlocks.map((textBlock, index) => (
+                <div className="bbc-original-text-block" key={`${article.id}-fallback-${index}`}>
+                  <p lang="en">{textBlock.english}</p>
+                  {textBlock.chinese ? (
+                    <p className="bbc-original-chinese" lang="zh-CN">
+                      {textBlock.chinese}
+                    </p>
+                  ) : null}
+                </div>
               ))}
             </div>
           )}

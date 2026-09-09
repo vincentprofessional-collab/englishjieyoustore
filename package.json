@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "prebuild": "node --test scripts/bbc-release-baseline.test.mjs scripts/bbc-content-isolation.test.mjs",
     "dev": "next dev --hostname 0.0.0.0 --experimental-https --experimental-https-key certificates/dev-localhost-key.pem --experimental-https-cert certificates/dev-localhost.pem",
     "dev:http": "next dev --hostname 0.0.0.0",
     "dev:local": "next dev",
