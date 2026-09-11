@@ -22,12 +22,16 @@ test("navigation opens the TV speaking page", () => {
 
 test("player keeps the requested video learning controls", () => {
   assert.match(player, /className="tv-subtitle-mask"[\s\S]*?<BbcSentencePractice/);
-  assert.match(player, /className="howler-player tv-video-player"[\s\S]*?player-main-controls[\s\S]*?player-progress-row/);
+  assert.match(player, /className="tv-subtitle-mask"[\s\S]*?className="tv-video-progress"/);
+  assert.match(player, /className="tv-video-nav previous"/);
+  assert.match(player, /className="tv-video-nav next"/);
   assert.match(player, /AudioSettingsMenus/);
   assert.match(player, /上一条/);
   assert.match(player, /下一条/);
   assert.doesNotMatch(player, /tv-speaking-hero/);
   assert.doesNotMatch(player, /tv-speaking-copy/);
+  assert.doesNotMatch(player, /howler-player tv-video-player/);
+  assert.doesNotMatch(player, /tv-speaking-navigation/);
 });
 
 test("admin mutations require an authenticated admin and support edit and delete", () => {

@@ -146,6 +146,29 @@ export function TvSpeakingLearning({ manifest }: { manifest: TvSpeakingManifest 
               settings={settings}
             />
           </div>
+          <div className="tv-video-progress" aria-label="视频播放进度">
+            <span>{formatTime(position)}</span>
+            <input aria-label="视频播放进度" max={duration || clip.durationSeconds} min="0" onChange={(event) => seek(Number(event.target.value))} step="0.1" type="range" value={position} />
+            <span>{formatTime(duration || clip.durationSeconds)}</span>
+          </div>
+          <button
+            aria-label="上一条"
+            className="tv-video-nav previous"
+            disabled={index === 0}
+            onClick={() => moveTo(index - 1)}
+            type="button"
+          >
+            <span aria-hidden="true">‹</span><strong>上一条</strong>
+          </button>
+          <button
+            aria-label="下一条"
+            className="tv-video-nav next"
+            disabled={index === clips.length - 1}
+            onClick={() => moveTo(index + 1)}
+            type="button"
+          >
+            <strong>下一条</strong><span aria-hidden="true">›</span>
+          </button>
           <button
             aria-label={isPlaying ? "暂停视频" : "播放视频"}
             className={`tv-center-play ${isPlaying ? "playing" : ""}`}
@@ -157,19 +180,6 @@ export function TvSpeakingLearning({ manifest }: { manifest: TvSpeakingManifest 
           </button>
         </div>
 
-        <div className="howler-player tv-video-player">
-          <div className="player-main-controls" aria-label="视频控制">
-            <button aria-label="倒退 5 秒" className="icon-button" onClick={() => seek(position - 5)} type="button"><span className="player-skip-icon backward" /></button>
-            <button className="play-button" disabled={!clip.videoUrl} onClick={togglePlay} type="button"><span className={`player-play-icon ${isPlaying ? "pause" : "play"}`} /><span className="sr-only">{isPlaying ? "暂停" : "播放"}</span></button>
-            <button aria-label="前进 5 秒" className="icon-button" onClick={() => seek(position + 5)} type="button"><span className="player-skip-icon forward" /></button>
-          </div>
-          <div className="player-progress-row" aria-label="视频播放进度">
-            <span>{formatTime(position)}</span>
-            <input aria-label="视频播放进度" max={duration || clip.durationSeconds} min="0" onChange={(event) => seek(Number(event.target.value))} step="0.1" type="range" value={position} />
-            <span>{formatTime(duration || clip.durationSeconds)}</span>
-          </div>
-        </div>
-
         <AudioSettingsMenus onChange={updateSettings} settings={settings} />
 
         {trainingSeconds != null ? (
@@ -178,10 +188,6 @@ export function TvSpeakingLearning({ manifest }: { manifest: TvSpeakingManifest 
           </div>
         ) : null}
 
-        <footer className="tv-speaking-navigation">
-          <button disabled={index === 0} onClick={() => moveTo(index - 1)} type="button">← 上一条</button>
-          <button disabled={index === clips.length - 1} onClick={() => moveTo(index + 1)} type="button">下一条 →</button>
-        </footer>
       </article>
     </section>
   );

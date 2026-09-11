@@ -73,7 +73,7 @@
   backdrop-filter: blur(22px);
   -webkit-backdrop-filter: blur(22px);
   background: rgba(22, 32, 27, 0.45);
-  bottom: 5%;
+  bottom: 10%;
   color: white;
   display: grid;
   height: 31%;
@@ -126,7 +126,7 @@
   border-radius: 999px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.24);
   display: flex;
-  height: 76px;
+  height: 58px;
   justify-content: center;
   left: 50%;
   opacity: 1;
@@ -134,8 +134,8 @@
   top: 50%;
   transform: translate(-50%, -50%);
   transition: opacity 160ms ease, transform 160ms ease;
-  width: 76px;
-  z-index: 2;
+  width: 58px;
+  z-index: 3;
 }
 
 .tv-center-play.playing {
@@ -151,37 +151,91 @@
   transform: translate(-50%, -50%) scale(1.05);
 }
 
-.tv-video-player {
-  margin: 16px auto 12px;
-  max-width: 780px;
+.tv-center-play .player-play-icon {
+  height: 22px;
+  width: 22px;
+}
+
+.tv-center-play .player-play-icon.play::before {
+  border-bottom-width: 11px;
+  border-left-color: #111;
+  border-left-width: 18px;
+  border-top-width: 11px;
+  left: 3px;
+}
+
+.tv-video-progress {
+  align-items: center;
+  bottom: 1.5%;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 45px minmax(80px, 1fr) 45px;
+  left: 5%;
+  position: absolute;
+  right: 5%;
+  z-index: 2;
+}
+
+.tv-video-progress span {
+  color: white;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+}
+
+.tv-video-progress span:last-child {
+  text-align: right;
+}
+
+.tv-video-progress input[type="range"] {
+  accent-color: #fff;
+  margin: 0;
+  min-width: 0;
+  width: 100%;
+}
+
+.tv-video-nav {
+  align-items: center;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: rgba(15, 36, 27, 0.68);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 999px;
+  color: white;
+  display: flex;
+  gap: 5px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 48%;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+
+.tv-video-nav.previous {
+  left: 14px;
+}
+
+.tv-video-nav.next {
+  right: 14px;
+}
+
+.tv-video-nav span {
+  font-size: 26px;
+  line-height: 0.65;
+}
+
+.tv-video-nav strong {
+  font-size: 13px;
+}
+
+.tv-video-nav:disabled {
+  opacity: 0.28;
 }
 
 .tv-speaking-card .exam-player-settings {
   justify-content: center;
-  margin: 10px 0 18px;
-}
-
-.tv-speaking-navigation {
-  align-items: center;
-  display: grid;
-  gap: 14px;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  margin: 20px auto 0;
-  max-width: 780px;
-}
-
-.tv-speaking-navigation button {
-  background: #173f2d;
-  border: 0;
-  border-radius: 999px;
-  color: white;
-  font: inherit;
-  font-weight: 700;
-  padding: 11px 16px;
-}
-
-.tv-speaking-navigation button:disabled {
-  opacity: 0.35;
+  margin: 16px 0 4px;
 }
 
 .admin-tv-speaking-list {
@@ -240,12 +294,20 @@
 @media (max-width: 760px) {
   .tv-speaking-page { padding: 6px 10px 48px; }
   .tv-speaking-card { border-radius: 16px; padding: 10px; }
-  .tv-subtitle-mask { bottom: 3%; height: 38%; left: 2%; padding: 7px 10px; right: 2%; }
+  .tv-subtitle-mask { bottom: 13%; height: 36%; left: 2%; padding: 7px 10px; right: 2%; }
   .tv-subtitle-mask .bbc-sentence-english,
   .tv-subtitle-mask .subtitle-english-line { font-size: clamp(18px, 6vw, 24px); }
   .tv-subtitle-mask .translation { font-size: clamp(13px, 4vw, 17px); margin-top: 4px; }
-  .tv-center-play { height: 62px; width: 62px; }
-  .tv-video-player { border-radius: 14px; gap: 9px; margin-block: 10px; padding: 10px; }
+  .tv-center-play { height: 48px; width: 48px; }
+  .tv-center-play .player-play-icon { height: 20px; width: 20px; }
+  .tv-center-play .player-play-icon.play::before { border-bottom-width: 10px; border-left-width: 17px; border-top-width: 10px; }
+  .tv-video-progress { bottom: 2%; gap: 5px; grid-template-columns: 34px minmax(60px, 1fr) 34px; left: 3%; right: 3%; }
+  .tv-video-progress span { font-size: 10px; }
+  .tv-video-nav { height: 38px; justify-content: center; padding: 0; width: 38px; }
+  .tv-video-nav.previous { left: 7px; }
+  .tv-video-nav.next { right: 7px; }
+  .tv-video-nav strong { display: none; }
+  .tv-video-nav span { font-size: 28px; }
   .tv-speaking-card .exam-player-settings { display: grid; gap: 6px; grid-template-columns: repeat(5, minmax(0, 1fr)); margin-bottom: 14px; width: 100%; }
   .tv-speaking-card .exam-player-settings .player-menu,
   .tv-speaking-card .exam-player-settings .player-menu-trigger { min-width: 0; width: 100%; }
