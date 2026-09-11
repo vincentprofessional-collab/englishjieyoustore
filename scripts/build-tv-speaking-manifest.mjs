@@ -17,7 +17,11 @@ function wordsFromFilename(filename) {
 }
 
 function chineseFromFilename(filename) {
-  return (filename.match(/[\u3400-\u9fff]+/g) ?? []).join(" ").trim();
+  const stem = filename
+    .replace(/\.mp4$/i, "")
+    .replace(/^\d+_\d+分\d+_?/, "")
+    .replace(/[\u202a-\u202e\u2066-\u2069]/g, " ");
+  return (stem.match(/[\u3400-\u9fff]+/g) ?? []).join(" ").trim();
 }
 
 function shortDefinition(definition = "") {
