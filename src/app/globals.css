@@ -238,53 +238,38 @@
   margin: 16px 0 4px;
 }
 
-.admin-tv-speaking-list {
+.admin-tv-speaking-card {
+  margin: 0 auto;
+  max-width: 1000px;
+}
+
+.admin-tv-speaking-fields {
   display: grid;
   gap: 12px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 14px;
 }
 
-.admin-tv-speaking-row {
-  align-items: end;
-  background: #fffdf7;
-  border: 1px solid #e2dac8;
-  border-radius: 14px;
-  display: grid;
-  gap: 12px;
-  grid-template-columns: 42px 150px minmax(160px, 1fr) minmax(180px, 1fr) auto;
-  padding: 12px;
-}
-
-.admin-tv-speaking-rank {
-  align-self: center;
-  color: #687169;
-  font-weight: 700;
-}
-
-.admin-tv-speaking-row video {
-  aspect-ratio: 16 / 9;
-  background: #17231d;
-  border-radius: 8px;
-  object-fit: contain;
-  width: 150px;
-}
-
-.admin-tv-speaking-row label {
+.admin-tv-speaking-fields label {
   color: #33443a;
   display: grid;
-  font-size: 12px;
+  font-size: 13px;
+  font-weight: 800;
   gap: 5px;
 }
 
-.admin-tv-speaking-row input {
+.admin-tv-speaking-fields input {
   border: 1px solid #cfc6b3;
   border-radius: 8px;
   font: inherit;
-  padding: 9px 10px;
+  padding: 11px 12px;
 }
 
 .admin-tv-speaking-actions {
   display: flex;
-  gap: 7px;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 14px;
 }
 
 .admin-tv-speaking-actions .danger {
@@ -314,10 +299,8 @@
   .tv-speaking-card .exam-player-settings .player-menu-trigger { border-radius: 10px; font-size: 12px; min-height: 36px; padding-inline: 4px; }
   .tv-speaking-card .exam-player-settings .player-menu-trigger span { white-space: nowrap; }
   .tv-speaking-card .exam-player-settings .player-menu-panel { min-width: 120px; position: absolute; width: max-content; }
-  .admin-tv-speaking-row { align-items: stretch; grid-template-columns: 34px 1fr; }
-  .admin-tv-speaking-row video { width: 100%; }
-  .admin-tv-speaking-row label,
-  .admin-tv-speaking-actions { grid-column: 1 / -1; }
+  .admin-tv-speaking-fields { grid-template-columns: 1fr; }
+  .admin-tv-speaking-actions .button { flex: 1; }
 }
 
 @media (max-width: 420px) {

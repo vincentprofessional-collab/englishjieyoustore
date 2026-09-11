@@ -39,5 +39,9 @@ test("admin mutations require an authenticated admin and support edit and delete
   assert.match(api, /export async function PATCH/);
   assert.match(api, /export async function DELETE/);
   assert.match(api, /storage\.from\("videos"\)\.remove/);
-  assert.match(admin, /<video controls playsInline/);
+  assert.match(admin, /className="tv-subtitle-mask"[\s\S]*?<BbcSentencePractice/);
+  assert.match(admin, /className="tv-video-nav previous"/);
+  assert.match(admin, /className="tv-video-progress"/);
+  assert.match(admin, /保存修改/);
+  assert.match(admin, /删除本条视频/);
 });
