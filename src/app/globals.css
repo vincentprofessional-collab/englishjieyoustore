@@ -20,24 +20,7 @@
 .tv-speaking-page {
   margin: 0 auto;
   max-width: 1040px;
-  padding: 34px 20px 72px;
-}
-
-.tv-speaking-hero {
-  margin-bottom: 22px;
-  text-align: center;
-}
-
-.tv-speaking-hero h1 {
-  color: var(--ink, #17231d);
-  font-family: Georgia, "Noto Serif SC", serif;
-  font-size: clamp(32px, 5vw, 52px);
-  margin: 6px 0 8px;
-}
-
-.tv-speaking-hero p:last-child {
-  color: #5d695f;
-  margin: 0;
+  padding: 10px 20px 72px;
 }
 
 .tv-speaking-card {
@@ -86,15 +69,52 @@
 }
 
 .tv-subtitle-mask {
+  align-content: center;
   backdrop-filter: blur(22px);
   -webkit-backdrop-filter: blur(22px);
   background: rgba(22, 32, 27, 0.45);
   bottom: 5%;
+  color: white;
+  display: grid;
   height: 31%;
   left: 5%;
-  pointer-events: none;
+  overflow: auto;
+  padding: 10px 20px;
   position: absolute;
   right: 5%;
+  text-align: center;
+  z-index: 1;
+}
+
+.tv-subtitle-mask .bbc-sentence-english,
+.tv-subtitle-mask .subtitle-english-line,
+.tv-subtitle-mask .translation {
+  color: white;
+  margin: 0;
+  text-align: center;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.85);
+}
+
+.tv-subtitle-mask .bbc-sentence-english,
+.tv-subtitle-mask .subtitle-english-line {
+  font-size: clamp(22px, 3vw, 31px);
+  font-weight: 800;
+}
+
+.tv-subtitle-mask .translation {
+  font-size: clamp(15px, 2vw, 19px);
+  margin-top: 7px;
+}
+
+.tv-subtitle-mask .dictation-blank-input {
+  background: rgba(255, 255, 255, 0.94);
+  color: #173f2d;
+  text-shadow: none;
+}
+
+.tv-subtitle-mask .sentence-order-word-bank {
+  justify-content: center;
+  margin-top: 8px;
 }
 
 .tv-center-play {
@@ -115,6 +135,7 @@
   transform: translate(-50%, -50%);
   transition: opacity 160ms ease, transform 160ms ease;
   width: 76px;
+  z-index: 2;
 }
 
 .tv-center-play.playing {
@@ -130,25 +151,9 @@
   transform: translate(-50%, -50%) scale(1.05);
 }
 
-.tv-video-controls {
-  align-items: center;
-  display: grid;
-  gap: 10px;
-  grid-template-columns: auto auto auto auto minmax(120px, 1fr) auto;
+.tv-video-player {
   margin: 16px auto 12px;
   max-width: 780px;
-}
-
-.tv-video-controls > span {
-  color: #566259;
-  font-size: 12px;
-  font-variant-numeric: tabular-nums;
-}
-
-.tv-video-controls input[type="range"] {
-  accent-color: #b88a32;
-  min-width: 0;
-  width: 100%;
 }
 
 .tv-speaking-card .exam-player-settings {
@@ -156,36 +161,13 @@
   margin: 10px 0 18px;
 }
 
-.tv-speaking-copy {
-  background: #f5f0e3;
-  border-left: 4px solid #b88a32;
-  border-radius: 12px;
-  margin: 0 auto;
-  max-width: 780px;
-  padding: 18px 20px;
-}
-
-.tv-speaking-copy .bbc-sentence-english,
-.tv-speaking-copy .subtitle-english-line {
-  color: #111914;
-  font-size: clamp(22px, 3vw, 30px);
-  margin: 0;
-  text-align: center;
-}
-
-.tv-speaking-copy .translation {
-  color: #26372e;
-  font-size: 17px;
-  margin: 9px 0 0;
-  text-align: center;
-}
-
 .tv-speaking-navigation {
   align-items: center;
   display: grid;
   gap: 14px;
-  grid-template-columns: 1fr minmax(100px, 2fr) 1fr;
-  margin-top: 20px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 20px auto 0;
+  max-width: 780px;
 }
 
 .tv-speaking-navigation button {
@@ -200,14 +182,6 @@
 
 .tv-speaking-navigation button:disabled {
   opacity: 0.35;
-}
-
-.tv-speaking-navigation span {
-  color: #17231d;
-  font-size: 18px;
-  font-weight: 700;
-  overflow-wrap: anywhere;
-  text-align: center;
 }
 
 .admin-tv-speaking-list {
@@ -264,18 +238,31 @@
 }
 
 @media (max-width: 760px) {
-  .tv-speaking-page { padding-inline: 10px; }
+  .tv-speaking-page { padding: 6px 10px 48px; }
   .tv-speaking-card { border-radius: 16px; padding: 10px; }
-  .tv-subtitle-mask { bottom: 3%; height: 35%; left: 2%; right: 2%; }
+  .tv-subtitle-mask { bottom: 3%; height: 38%; left: 2%; padding: 7px 10px; right: 2%; }
+  .tv-subtitle-mask .bbc-sentence-english,
+  .tv-subtitle-mask .subtitle-english-line { font-size: clamp(18px, 6vw, 24px); }
+  .tv-subtitle-mask .translation { font-size: clamp(13px, 4vw, 17px); margin-top: 4px; }
   .tv-center-play { height: 62px; width: 62px; }
-  .tv-video-controls { gap: 6px; grid-template-columns: auto auto auto minmax(80px, 1fr); }
-  .tv-video-controls > span { display: none; }
-  .tv-speaking-navigation { grid-template-columns: 1fr 1fr; }
-  .tv-speaking-navigation span { grid-column: 1 / -1; grid-row: 1; }
+  .tv-video-player { border-radius: 14px; gap: 9px; margin-block: 10px; padding: 10px; }
+  .tv-speaking-card .exam-player-settings { display: grid; gap: 6px; grid-template-columns: repeat(5, minmax(0, 1fr)); margin-bottom: 14px; width: 100%; }
+  .tv-speaking-card .exam-player-settings .player-menu,
+  .tv-speaking-card .exam-player-settings .player-menu-trigger { min-width: 0; width: 100%; }
+  .tv-speaking-card .exam-player-settings .player-menu-trigger { border-radius: 10px; font-size: 12px; min-height: 36px; padding-inline: 4px; }
+  .tv-speaking-card .exam-player-settings .player-menu-trigger span { white-space: nowrap; }
+  .tv-speaking-card .exam-player-settings .player-menu-panel { min-width: 120px; position: absolute; width: max-content; }
   .admin-tv-speaking-row { align-items: stretch; grid-template-columns: 34px 1fr; }
   .admin-tv-speaking-row video { width: 100%; }
   .admin-tv-speaking-row label,
   .admin-tv-speaking-actions { grid-column: 1 / -1; }
+}
+
+@media (max-width: 420px) {
+  .tv-speaking-card .exam-player-settings { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .tv-speaking-card .exam-player-settings .player-menu { grid-column: span 2; }
+  .tv-speaking-card .exam-player-settings .player-menu:nth-child(4) { grid-column: 2 / span 2; }
+  .tv-speaking-card .exam-player-settings .player-menu:nth-child(5) { grid-column: 4 / span 2; }
 }
 
 /* Content admin v1 */

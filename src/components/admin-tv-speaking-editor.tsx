@@ -71,7 +71,7 @@ export function AdminTvSpeakingEditor() {
         {clips.map((clip) => (
           <article className="admin-tv-speaking-row" key={clip.id}>
             <div className="admin-tv-speaking-rank">#{clip.rank}</div>
-            <video muted playsInline preload="metadata" src={clip.videoUrl ?? undefined} />
+            <video controls playsInline preload="metadata" src={clip.videoUrl ?? undefined} />
             <label>英文<input value={drafts[clip.id]?.english ?? ""} onChange={(event) => setDrafts((current) => ({ ...current, [clip.id]: { chinese: current[clip.id]?.chinese ?? "", english: event.target.value } }))} /></label>
             <label>中文翻译<input value={drafts[clip.id]?.chinese ?? ""} onChange={(event) => setDrafts((current) => ({ ...current, [clip.id]: { chinese: event.target.value, english: current[clip.id]?.english ?? "" } }))} /></label>
             <div className="admin-tv-speaking-actions"><button className="button primary" disabled={busyId === clip.id} onClick={() => void save(clip)} type="button">保存</button><button className="button secondary danger" disabled={busyId === clip.id} onClick={() => void remove(clip)} type="button">删除</button></div>

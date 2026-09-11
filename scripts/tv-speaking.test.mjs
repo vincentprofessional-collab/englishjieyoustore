@@ -6,6 +6,7 @@ const manifest = JSON.parse(readFileSync(new URL("../data/tv-speaking/clips.json
 const nav = readFileSync(new URL("../src/lib/content/site-chrome.ts", import.meta.url), "utf8");
 const player = readFileSync(new URL("../src/components/tv-speaking-learning.tsx", import.meta.url), "utf8");
 const api = readFileSync(new URL("../src/app/api/tv-speaking/route.ts", import.meta.url), "utf8");
+const admin = readFileSync(new URL("../src/components/admin-tv-speaking-editor.tsx", import.meta.url), "utf8");
 
 test("manifest contains the 100 shortest unique valid clips", () => {
   assert.equal(manifest.clips.length, 100);
@@ -20,10 +21,13 @@ test("navigation opens the TV speaking page", () => {
 });
 
 test("player keeps the requested video learning controls", () => {
-  assert.match(player, /tv-subtitle-mask/);
+  assert.match(player, /className="tv-subtitle-mask"[\s\S]*?<BbcSentencePractice/);
+  assert.match(player, /className="howler-player tv-video-player"[\s\S]*?player-main-controls[\s\S]*?player-progress-row/);
   assert.match(player, /AudioSettingsMenus/);
   assert.match(player, /上一条/);
   assert.match(player, /下一条/);
+  assert.doesNotMatch(player, /tv-speaking-hero/);
+  assert.doesNotMatch(player, /tv-speaking-copy/);
 });
 
 test("admin mutations require an authenticated admin and support edit and delete", () => {
@@ -31,4 +35,5 @@ test("admin mutations require an authenticated admin and support edit and delete
   assert.match(api, /export async function PATCH/);
   assert.match(api, /export async function DELETE/);
   assert.match(api, /storage\.from\("videos"\)\.remove/);
+  assert.match(admin, /<video controls playsInline/);
 });

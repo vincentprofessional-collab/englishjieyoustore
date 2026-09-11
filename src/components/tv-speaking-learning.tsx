@@ -119,12 +119,6 @@ export function TvSpeakingLearning({ manifest }: { manifest: TvSpeakingManifest 
 
   return (
     <section className="tv-speaking-page">
-      <header className="tv-speaking-hero">
-        <p className="eyebrow">TV SPEAKING PRACTICE</p>
-        <h1>{manifest.title}</h1>
-        <p>短台词精听、模仿、影子练习与听写 · 共 {clips.length} 条</p>
-      </header>
-
       <article className="tv-speaking-card" id={`tv-speaking-${clip.id}`}>
         <div className="tv-speaking-count"><strong>{index + 1}</strong><span>/ {clips.length}</span></div>
         <div className="tv-video-frame">
@@ -144,7 +138,14 @@ export function TvSpeakingLearning({ manifest }: { manifest: TvSpeakingManifest 
           ) : (
             <div className="tv-video-unavailable">视频媒体正在准备中</div>
           )}
-          <div className="tv-subtitle-mask" aria-label="内嵌字幕已虚化遮挡" />
+          <div className="tv-subtitle-mask" aria-label="视频学习字幕">
+            <BbcSentencePractice
+              activeWordIndex={isPlaying ? activeWordIndex(clip.english, position, duration || clip.durationSeconds) : null}
+              isAudioPlaying={isPlaying}
+              sentence={{ chinese: clip.chinese || "中文翻译待补充", english: clip.english, sentenceNo: clip.rank }}
+              settings={settings}
+            />
+          </div>
           <button
             aria-label={isPlaying ? "暂停视频" : "播放视频"}
             className={`tv-center-play ${isPlaying ? "playing" : ""}`}
@@ -156,25 +157,20 @@ export function TvSpeakingLearning({ manifest }: { manifest: TvSpeakingManifest 
           </button>
         </div>
 
-        <div className="tv-video-controls">
-          <button aria-label="倒退 5 秒" className="icon-button" onClick={() => seek(position - 5)} type="button"><span className="player-skip-icon backward" /></button>
-          <button className="play-button" disabled={!clip.videoUrl} onClick={togglePlay} type="button"><span className={`player-play-icon ${isPlaying ? "pause" : "play"}`} /><span className="sr-only">{isPlaying ? "暂停" : "播放"}</span></button>
-          <button aria-label="前进 5 秒" className="icon-button" onClick={() => seek(position + 5)} type="button"><span className="player-skip-icon forward" /></button>
-          <span>{formatTime(position)}</span>
-          <input aria-label="视频播放进度" max={duration || clip.durationSeconds} min="0" onChange={(event) => seek(Number(event.target.value))} step="0.1" type="range" value={position} />
-          <span>{formatTime(duration || clip.durationSeconds)}</span>
+        <div className="howler-player tv-video-player">
+          <div className="player-main-controls" aria-label="视频控制">
+            <button aria-label="倒退 5 秒" className="icon-button" onClick={() => seek(position - 5)} type="button"><span className="player-skip-icon backward" /></button>
+            <button className="play-button" disabled={!clip.videoUrl} onClick={togglePlay} type="button"><span className={`player-play-icon ${isPlaying ? "pause" : "play"}`} /><span className="sr-only">{isPlaying ? "暂停" : "播放"}</span></button>
+            <button aria-label="前进 5 秒" className="icon-button" onClick={() => seek(position + 5)} type="button"><span className="player-skip-icon forward" /></button>
+          </div>
+          <div className="player-progress-row" aria-label="视频播放进度">
+            <span>{formatTime(position)}</span>
+            <input aria-label="视频播放进度" max={duration || clip.durationSeconds} min="0" onChange={(event) => seek(Number(event.target.value))} step="0.1" type="range" value={position} />
+            <span>{formatTime(duration || clip.durationSeconds)}</span>
+          </div>
         </div>
 
         <AudioSettingsMenus onChange={updateSettings} settings={settings} />
-
-        <div className="tv-speaking-copy">
-          <BbcSentencePractice
-            activeWordIndex={isPlaying ? activeWordIndex(clip.english, position, duration || clip.durationSeconds) : null}
-            isAudioPlaying={isPlaying}
-            sentence={{ chinese: clip.chinese || "中文翻译待补充", english: clip.english, sentenceNo: clip.rank }}
-            settings={settings}
-          />
-        </div>
 
         {trainingSeconds != null ? (
           <div className="bbc-speaking-training-status practicing" aria-live="polite">
@@ -184,7 +180,6 @@ export function TvSpeakingLearning({ manifest }: { manifest: TvSpeakingManifest 
 
         <footer className="tv-speaking-navigation">
           <button disabled={index === 0} onClick={() => moveTo(index - 1)} type="button">← 上一条</button>
-          <span>{clip.english}</span>
           <button disabled={index === clips.length - 1} onClick={() => moveTo(index + 1)} type="button">下一条 →</button>
         </footer>
       </article>
