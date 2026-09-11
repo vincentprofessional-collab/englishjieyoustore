@@ -33,6 +33,34 @@ const dictionary = new Map(
     .filter((entry) => entry?.word && entry?.def)
     .map((entry) => [String(entry.word).toLowerCase(), shortDefinition(entry.def)]),
 );
+const manualChinese = new Map(Object.entries({
+  aka: "又名",
+  bail: "保释；舀出",
+  bake: "烘烤",
+  crap: "废话；垃圾",
+  cub: "幼兽",
+  cute: "可爱的",
+  dam: "水坝",
+  demo: "演示",
+  gay: "同性恋的；快乐的",
+  guts: "内脏；勇气",
+  hex: "诅咒；十六进制",
+  hoop: "圆环",
+  hug: "拥抱",
+  hush: "安静；使安静",
+  id: "身份；身份证明",
+  jam: "果酱；堵塞",
+  kid: "小孩",
+  leak: "泄漏",
+  log: "原木；日志",
+  loo: "厕所",
+  minx: "淘气女子",
+  nap: "小睡",
+  nip: "轻咬；捏",
+  pod: "豆荚；舱",
+  spaz: "笨手笨脚的人（冒犯性用语）",
+  zit: "粉刺",
+}));
 
 const candidates = readdirSync(sourceRoot, { withFileTypes: true })
   .filter(
@@ -121,7 +149,7 @@ const clips = selected.map((candidate, index) => {
   const filenameChinese = chineseFromFilename(candidate.filename);
 
   return {
-    chinese: filenameChinese || dictionary.get(normalizedEnglish) || "",
+    chinese: filenameChinese || dictionary.get(normalizedEnglish) || manualChinese.get(normalizedEnglish) || "",
     durationSeconds: candidate.durationSeconds,
     english: candidate.english,
     height: Number(candidate.videoStream.height ?? 0),
