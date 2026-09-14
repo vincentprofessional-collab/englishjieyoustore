@@ -19,6 +19,18 @@ type SiteNavStyle = CSSProperties & {
 function renderNavChild(child: SiteChromeNavItem, onNavigate: () => void) {
   const enabledChildren = child.children.filter((nestedChild) => nestedChild.enabled);
 
+  if (child.id === "ielts") {
+    return (
+      <Link
+        href="/listening/practice"
+        key={child.id}
+        onClick={onNavigate}
+      >
+        <strong>{child.label}</strong>
+      </Link>
+    );
+  }
+
   if (enabledChildren.length) {
     return (
       <div className="nav-dropdown-branch" key={child.id}>
@@ -58,7 +70,9 @@ export function SiteNav({ config: initialConfig }: { config: SiteChromeConfig })
     "--brand-title-size": `${config.brand.titleFontSize}px`,
     "--nav-tab-size": `${config.nav.fontSize}px`,
   };
-  const navItems = config.nav.items.filter((item) => item.enabled);
+  const navItems = config.nav.items.filter(
+    (item) => item.enabled && item.label !== "公告栏" && item.label !== "使用说明",
+  );
 
   useEffect(() => {
     setConfig((current) => ({

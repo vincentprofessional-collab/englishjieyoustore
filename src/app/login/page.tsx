@@ -93,13 +93,33 @@ async function recordAuthEvent(eventType: "registration") {
   });
 }
 
+async function uploadProfileAvatar(file: File, accessToken: string) {
+  const formData = new FormData();
+  formData.append("file", file);
+  const response = await fetch("/api/profile-avatar-upload", {
+    body: formData,
+    headers: { Authorization: `Bearer ${accessToken}` },
+    method: "POST",
+  });
+  const payload = (await response.json().catch(() => null)) as { avatarUrl?: string; error?: string } | null;
+
+  if (!response.ok) {
+    throw new Error(payload?.error || "头像上传失败");
+  }
+
+  return payload?.avatarUrl ?? "";
+}
+
 export default function LoginPage() {
   const [authMode, setAuthMode] = useState<AuthMode>("login");
   const [loginAccount, setLoginAccount] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [registerEmail, setRegisterEmail] = useState("");
+  const [registerNickname, setRegisterNickname] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
   const [registerPasswordConfirm, setRegisterPasswordConfirm] = useState("");
+  const [registerAvatarFile, setRegisterAvatarFile] = useState<File | null>(null);
+  const [registerAvatarPreview, setRegisterAvatarPreview] = useState("");
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -146,6 +166,14 @@ export default function LoginPage() {
       return;
     }
 
+    const nickname = registerNickname.replace(/\s+/g, " ").trim();
+
+    if (!nickname) {
+      setMessage("请先填写昵称。 ");
+      setIsLoading(false);
+      return;
+    }
+
     if (registerPassword !== registerPasswordConfirm) {
       setMessage("两次输入的密码不一致。");
       setIsLoading(false);
@@ -155,6 +183,7 @@ export default function LoginPage() {
     const { data, error } = await supabase.auth.signUp({
       email: registerEmail.trim(),
       options: {
+        data: { display_name: nickname },
         emailRedirectTo: getAuthRedirectUrl(),
       },
       password: registerPassword,
@@ -170,6 +199,16 @@ export default function LoginPage() {
       await recordAuthEvent("registration");
     }
 
+    let avatarMessage = "";
+
+    if (data.session && registerAvatarFile) {
+      try {
+        await uploadProfileAvatar(registerAvatarFile, data.session.access_token);
+      } catch (avatarError) {
+        avatarMessage = `头像上传失败：${avatarError instanceof Error ? avatarError.message : "请登录后重试"}`;
+      }
+    }
+
     if (data.session) {
       const redirectPath = getSafeRedirectPath();
 
@@ -180,9 +219,9 @@ export default function LoginPage() {
     }
 
     setMessage(
-      data.session
+      avatarMessage || (data.session
         ? "注册成功，已自动登录。"
-        : "注册已提交。若系统开启邮箱确认，请先到邮箱里点击确认链接。",
+        : "注册已提交。若系统开启邮箱确认，请先到邮箱里点击确认链接。"),
     );
     setRegisterPassword("");
     setRegisterPasswordConfirm("");
@@ -268,6 +307,16 @@ export default function LoginPage() {
           <form className="auth-form" onSubmit={handleRegister}>
             <h2>注册账号</h2>
             <label>
+              <span>昵称</span>
+              <input
+                autoComplete="nickname"
+                maxLength={24}
+                onChange={(event) => setRegisterNickname(event.target.value)}
+                required
+                value={registerNickname}
+              />
+            </label>
+            <label>
               <span>邮箱</span>
               <input
                 autoComplete="email"
@@ -276,6 +325,23 @@ export default function LoginPage() {
                 type="email"
                 value={registerEmail}
               />
+            </label>
+            <label className="auth-avatar-field">
+              <span>头像（可选）</span>
+              <input
+                accept="image/*"
+                onChange={(event) => {
+                  const file = event.target.files?.[0] ?? null;
+                  setRegisterAvatarFile(file);
+                  setRegisterAvatarPreview(file ? URL.createObjectURL(file) : "");
+                }}
+                type="file"
+              />
+              {registerAvatarPreview ? (
+                // The selected local file is only a registration preview.
+                // eslint-disable-next-line @next/next/no-img-element
+                <img alt="头像预览" src={registerAvatarPreview} />
+              ) : null}
             </label>
             <label>
               <span>密码</span>

@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
+import { getFirstOpenedAt } from "@/lib/visitor-identity";
 
 const SESSION_ID_KEY = "ielts-platform.analytics.sessionId";
 const SESSION_STARTED_KEY = "ielts-platform.analytics.startedAt";
@@ -135,6 +136,8 @@ export function SiteAnalyticsTracker() {
   const lastTrackedPathRef = useRef("");
 
   useEffect(() => {
+    getFirstOpenedAt();
+
     async function trackPageView() {
       const path = `${pathname}${window.location.search}`;
 
@@ -150,15 +153,7 @@ export function SiteAnalyticsTracker() {
       await recordActivity("page_view", path);
     }
 
-    const startTracking = () => {
-      void trackPageView();
-    };
-
-    const trackingTimer = window.setTimeout(startTracking, 3_000);
-
-    return () => {
-      window.clearTimeout(trackingTimer);
-    };
+    void trackPageView();
   }, [pathname]);
 
   useEffect(() => {
@@ -174,10 +169,12 @@ export function SiteAnalyticsTracker() {
     const intervalId = window.setInterval(updateCurrentSession, 60_000);
 
     document.addEventListener("visibilitychange", updateCurrentSession);
+    window.addEventListener("pagehide", updateCurrentSession);
 
     return () => {
       window.clearInterval(intervalId);
       document.removeEventListener("visibilitychange", updateCurrentSession);
+      window.removeEventListener("pagehide", updateCurrentSession);
     };
   }, []);
 

@@ -1,0 +1,3370 @@
+{
+  "id": "standard-english-conventions__boundaries__easy",
+  "assessment": "SAT",
+  "test": "Reading and Writing",
+  "domain": "Standard English Conventions",
+  "skill": "boundaries",
+  "difficulty": "Easy",
+  "expectedCount": 51,
+  "questionIds": [
+    "e803340a",
+    "562d4b57",
+    "72b7feaa",
+    "af557364",
+    "ef8408a4",
+    "e48e163e",
+    "72ba319f",
+    "fe4e10cc",
+    "5631e99d",
+    "f8497cc6",
+    "3bfd0a4f",
+    "f6da3294",
+    "bfc41dd2",
+    "37ccf84e",
+    "b3e861cf",
+    "e437ac5e",
+    "0693086b",
+    "1dd740ff",
+    "2aa0bdaf",
+    "121aae1f",
+    "103d9693",
+    "ca565d66",
+    "3baa0f75",
+    "c2fe5bbd",
+    "26a66f24",
+    "d4c3122b",
+    "61e6cf3b",
+    "3c2cf8cd",
+    "f856be23",
+    "1da00c69",
+    "9edd64ae",
+    "9bcab648",
+    "550d6484",
+    "9e56d8e7",
+    "fb0a6682",
+    "c4e54735",
+    "082574fc",
+    "27260414",
+    "26b716e8",
+    "6378f094",
+    "c18d995f",
+    "47e67c42",
+    "d1145534",
+    "62e50f59",
+    "678404ae",
+    "dd53fb5c",
+    "83868036",
+    "2e1e5d09",
+    "7399839f",
+    "4439e901",
+    "ad00132a"
+  ],
+  "sourceRefs": [
+    {
+      "role": "question",
+      "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+      "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+      "pages": [],
+      "extractionMethod": "pdf-text-layout"
+    },
+    {
+      "role": "answer",
+      "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+      "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+      "pages": [],
+      "extractionMethod": "pdf-text-layout"
+    }
+  ],
+  "questions": [
+    {
+      "id": "e803340a",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Dolores Huerta’s advocacy on behalf of farmworkers was rooted in her experience as a schoolteacher in Stockton, California, in the early 1950s. Hoping to help her students and their families outside the ______ Huerta left teaching to start the Stockton chapter of the Community Service Organization, a group focused on the needs of local farmworkers."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "classroom."
+        },
+        {
+          "id": "B",
+          "text": "classroom;"
+        },
+        {
+          "id": "C",
+          "text": "classroom,"
+        },
+        {
+          "id": "D",
+          "text": "classroom"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Choice C is the best answer. The convention being tested is the use of punctuation within a sentence. This choice correctly uses a comma to mark the boundary between the introductory participial phrase (\"Hoping…classroom\") and the main clause (\"Huerta…farmworkers\").\n\nChoice A is incorrect because it results in a rhetorically unacceptable sentence fragment beginning with \"hoping.\" Choice B is incorrect because a semicolon can’t be used in this way to mark the boundary between the participial phrase (\"Hoping…classroom\") and the main clause (\"Huerta…farmworkers\"). Choice D is incorrect because it fails to mark the boundary between the participial phrase (\"Hoping…classroom\") and the main clause (\"Huerta…farmworkers\").",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            1
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            1,
+            2
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "C": "Choice C is the best answer. The convention being tested is the use of punctuation within a sentence. This choice correctly uses a comma to mark the boundary between the introductory participial phrase (\"Hoping…classroom\") and the main clause (\"Huerta…farmworkers\").",
+        "A": "Choice A is incorrect because it results in a rhetorically unacceptable sentence fragment beginning with \"hoping.\"",
+        "B": "Choice B is incorrect because a semicolon can’t be used in this way to mark the boundary between the participial phrase (\"Hoping…classroom\") and the main clause (\"Huerta…farmworkers\").",
+        "D": "Choice D is incorrect because it fails to mark the boundary between the participial phrase (\"Hoping…classroom\") and the main clause (\"Huerta…farmworkers\")."
+      }
+    },
+    {
+      "id": "562d4b57",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In 2000, Nora de Hoyos Comstock, herself an owner of a successful consulting firm, sought to increase Latina representation in corporate ______ founded Las Comadres para las Americas, an international community that for over two decades has served as a resource and information network for Latina business professionals."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "settings she"
+        },
+        {
+          "id": "B",
+          "text": "settings, she"
+        },
+        {
+          "id": "C",
+          "text": "settings and she"
+        },
+        {
+          "id": "D",
+          "text": "settings. She"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "Choice D is the best answer. It appropriately uses a period to mark the end of one independent clause (\"In 2000… settings\") and the start of another (\"She founded…professionals\").\n\nChoice A is incorrect. This choice results in a run-on sentence error. Both the clause before the blank (\"In 2000…settings\") and the clause after the blank (\"she…professionals\") are independent clauses, so they need to be separated by punctuation. Choice B is incorrect. This choice results in a comma splice error. It incorrectly joins two independent clauses with just a comma. Linking two independent clauses with a comma also requires the use of a coordinating conjunction (like for, and, nor, but, or, yet, or so). Choice C is incorrect. This choice results in a run-on sentence, an error caused when two independent clauses are joined without punctuation or appropriate conjunctions. Since both the clause before the blank (\"In 2000…settings\") and the clause after the blank (\"she…professionals\") are independent, a comma would be required in addition to the coordinating conjunction \"and.\"",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            1,
+            2
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            2,
+            3
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "D": "Choice D is the best answer. It appropriately uses a period to mark the end of one independent clause (\"In 2000… settings\") and the start of another (\"She founded…professionals\").",
+        "A": "Choice A is incorrect. This choice results in a run-on sentence error. Both the clause before the blank (\"In 2000…settings\") and the clause after the blank (\"she…professionals\") are independent clauses, so they need to be separated by punctuation.",
+        "B": "Choice B is incorrect. This choice results in a comma splice error. It incorrectly joins two independent clauses with just a comma. Linking two independent clauses with a comma also requires the use of a coordinating conjunction (like for, and, nor, but, or, yet, or so).",
+        "C": "Choice C is incorrect. This choice results in a run-on sentence, an error caused when two independent clauses are joined without punctuation or appropriate conjunctions. Since both the clause before the blank (\"In 2000…settings\") and the clause after the blank (\"she…professionals\") are independent, a comma would be required in addition to the coordinating conjunction \"and.\""
+      }
+    },
+    {
+      "id": "72b7feaa",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Technologies such as microphones and inkjet printers are made using piezoelectric materials, which generate an internal electric field when pressure is applied to them. The toxic nature of some of these materials recently led a team from the University of Sheffield to investigate how ______"
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "could their use be better regulated?"
+        },
+        {
+          "id": "B",
+          "text": "their use could be better regulated."
+        },
+        {
+          "id": "C",
+          "text": "their use could be better regulated?"
+        },
+        {
+          "id": "D",
+          "text": "could their use be better regulated."
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Choice B is the best answer. The convention being tested is end-of-sentence punctuation. This choice correctly uses a period to punctuate a declarative sentence that asks an indirect question (\"The toxic nature of some of these materials recently led a team from the University of Sheffield to investigate how their use could be better regulated\").\n\nChoice A is incorrect because the structure requires a period and a declarative clause at the end of the sentence that states what the team investigated, not an interrogative clause that asks a direct question, such as \"how could their use be better regulated?\" Choice C is incorrect because it’s unconventional to use a question mark in this way to punctuate a declarative sentence. Choice D is incorrect because the structure requires a declarative clause at the end of the sentence that states what the team investigated, not an interrogative clause that asks a direct question, such as \"how could their use be better regulated?\"",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            2
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            3,
+            4
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "B": "Choice B is the best answer. The convention being tested is end-of-sentence punctuation. This choice correctly uses a period to punctuate a declarative sentence that asks an indirect question (\"The toxic nature of some of these materials recently led a team from the University of Sheffield to investigate how their use could be better regulated\").",
+        "A": "Choice A is incorrect because the structure requires a period and a declarative clause at the end of the sentence that states what the team investigated, not an interrogative clause that asks a direct question, such as \"how could their use be better regulated?\"",
+        "C": "Choice C is incorrect because it’s unconventional to use a question mark in this way to punctuate a declarative sentence.",
+        "D": "Choice D is incorrect because the structure requires a declarative clause at the end of the sentence that states what the team investigated, not an interrogative clause that asks a direct question, such as \"how could their use be better regulated?\""
+      }
+    },
+    {
+      "id": "af557364",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In the novel Things Fall Apart by Chinua Achebe, Okonkwo is a leader of Umuofia (a fictional Nigerian clan) and takes pride in his culture’s traditions. However, when the arrival of European missionaries brings changes to Umuofia, the novel asks a central question: How ______"
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Umuofia’s traditions will be affected."
+        },
+        {
+          "id": "B",
+          "text": "will Umuofia’s traditions be affected."
+        },
+        {
+          "id": "C",
+          "text": "Umuofia’s traditions will be affected?"
+        },
+        {
+          "id": "D",
+          "text": "will Umuofia’s traditions be affected?"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "Choice D is the best answer. The clause before the colon tells us that the novel “asks a question,” so the clause after the colon should be in the conventional form of a question: with the verb before the subject, and a question mark at the end.\n\nChoice A is incorrect. This choice ends the sentence with a period, which isn’t right. The clause before the colon tells us that the novel “asks a question,” so the clause after the colon should be that question. Choice B is incorrect. This choice ends the sentence with a period, which isn’t right. The clause before the colon tells us that the novel “asks a question,” so the clause after the colon should be that question. In Standard English, questions place the verb before the subject and end with a question mark. Choice C is incorrect. This choice doesn’t conform to the conventions of Standard English. In Standard English, questions place the verb before the subject.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            2,
+            3
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            4,
+            5
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "D": "Choice D is the best answer. The clause before the colon tells us that the novel “asks a question,” so the clause after the colon should be in the conventional form of a question: with the verb before the subject, and a question mark at the end.",
+        "A": "Choice A is incorrect. This choice ends the sentence with a period, which isn’t right. The clause before the colon tells us that the novel “asks a question,” so the clause after the colon should be that question.",
+        "B": "Choice B is incorrect. This choice ends the sentence with a period, which isn’t right. The clause before the colon tells us that the novel “asks a question,” so the clause after the colon should be that question. In Standard English, questions place the verb before the subject and end with a question mark.",
+        "C": "Choice C is incorrect. This choice doesn’t conform to the conventions of Standard English. In Standard English, questions place the verb before the subject."
+      }
+    },
+    {
+      "id": "ef8408a4",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Typically, underlines, scribbles, and notes left in the margins by a former owner lower a book’s ______ when the former owner is a famous poet like Walt Whitman, such markings, known as marginalia, can be a gold mine to literary scholars."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "value, but"
+        },
+        {
+          "id": "B",
+          "text": "value"
+        },
+        {
+          "id": "C",
+          "text": "value,"
+        },
+        {
+          "id": "D",
+          "text": "value but"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "Choice A is the best answer. The convention being tested is the coordination of independent clauses within a sentence. An independent clause is a phrase containing a subject and a verb that can stand on its own as a sentence. This choice uses a comma and the coordinating conjunction “but” to join the first independent clause (“underlines…lower a book’s value”) and the second independent clause (“such markings…can be a gold mine to scholars”) to create a compound sentence.\n\nChoice B is incorrect because it results in a run-on sentence. The two independent clauses are fused without punctuation and/or a conjunction. Choice C is incorrect because it results in a comma splice. A comma can’t be used in this way to mark the boundary between two independent clauses. Choice D is incorrect because a comma is needed to mark the boundary between two coordinated independent clauses.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            3
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            5,
+            6
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "A": "Choice A is the best answer. The convention being tested is the coordination of independent clauses within a sentence. An independent clause is a phrase containing a subject and a verb that can stand on its own as a sentence. This choice uses a comma and the coordinating conjunction “but” to join the first independent clause (“underlines…lower a book’s value”) and the second independent clause (“such markings…can be a gold mine to scholars”) to create a compound sentence.",
+        "B": "Choice B is incorrect because it results in a run-on sentence. The two independent clauses are fused without punctuation and/or a conjunction.",
+        "C": "Choice C is incorrect because it results in a comma splice. A comma can’t be used in this way to mark the boundary between two independent clauses.",
+        "D": "Choice D is incorrect because a comma is needed to mark the boundary between two coordinated independent clauses."
+      }
+    },
+    {
+      "id": "e48e163e",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The element carbon has the highest melting point ______ all the elements on the periodic table—3,500 degrees Celsius."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "of"
+        },
+        {
+          "id": "B",
+          "text": "of—"
+        },
+        {
+          "id": "C",
+          "text": "of,"
+        },
+        {
+          "id": "D",
+          "text": "of:"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "Choice A is the best answer. The convention being tested is punctuation use between a preposition and its complement. No punctuation is needed between the preposition \"of\" and its complement \"all the elements on the periodic table.\" The complement completes the meaning of the preposition in the phrase \"the highest melting point of all the elements on the periodic table,\" and using punctuation to separate the complement from the preposition results in an ungrammatical sentence.\n\nChoice B is incorrect because no punctuation is needed between the preposition and its complement. Choice C is incorrect because no punctuation is needed between the preposition and its complement. Choice D is incorrect because no punctuation is needed between the preposition and its complement.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            3,
+            4
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            6,
+            7
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "A": "Choice A is the best answer. The convention being tested is punctuation use between a preposition and its complement. No punctuation is needed between the preposition \"of\" and its complement \"all the elements on the periodic table.\" The complement completes the meaning of the preposition in the phrase \"the highest melting point of all the elements on the periodic table,\" and using punctuation to separate the complement from the preposition results in an ungrammatical sentence.",
+        "B": "Choice B is incorrect because no punctuation is needed between the preposition and its complement.",
+        "C": "Choice C is incorrect because no punctuation is needed between the preposition and its complement.",
+        "D": "Choice D is incorrect because no punctuation is needed between the preposition and its complement."
+      }
+    },
+    {
+      "id": "72ba319f",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In 1959, the film industry debuted Smell-O-Vision. Theaters were fitted with specialized vents that emitted odors at specific points in a ______ as the scent of roses when roses appeared in a scene. Smell-O-Vision failed to impress, however, with one reviewer declaring it “briefly weird and not very interesting.”"
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "movie such"
+        },
+        {
+          "id": "B",
+          "text": "movie; such"
+        },
+        {
+          "id": "C",
+          "text": "movie. Such"
+        },
+        {
+          "id": "D",
+          "text": "movie, such"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "Choice D is the best answer. The comma appropriately separates the nonessential descriptive aside \"such as…scene\" from the independent clause \"Theaters were…movie.\" Since the descriptive example of roses isn’t necessary for the sentence to function, it needs to be set off with punctuation.\n\nChoice A is incorrect. This choice results in a run-on sentence. Since the example of roses isn’t necessary for the sentence to function, the descriptive aside \"such as…scene\" needs to be separated from the preceding independent clause with some sort of punctuation. Choice B is incorrect. This choice creates a punctuation error. A semicolon can only be used to separate two independent clauses, but \"such…scene\" is not an independent clause and couldn’t stand on its own as a sentence. Choice C is incorrect. This choice results in a sentence fragment. The descriptive aside \"Such… scene\" is not an independent clause and can’t stand on its own as a sentence.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            4
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            7,
+            8
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "D": "Choice D is the best answer. The comma appropriately separates the nonessential descriptive aside \"such as…scene\" from the independent clause \"Theaters were…movie.\" Since the descriptive example of roses isn’t necessary for the sentence to function, it needs to be set off with punctuation.",
+        "A": "Choice A is incorrect. This choice results in a run-on sentence. Since the example of roses isn’t necessary for the sentence to function, the descriptive aside \"such as…scene\" needs to be separated from the preceding independent clause with some sort of punctuation.",
+        "B": "Choice B is incorrect. This choice creates a punctuation error. A semicolon can only be used to separate two independent clauses, but \"such…scene\" is not an independent clause and couldn’t stand on its own as a sentence.",
+        "C": "Choice C is incorrect. This choice results in a sentence fragment. The descriptive aside \"Such… scene\" is not an independent clause and can’t stand on its own as a sentence."
+      }
+    },
+    {
+      "id": "fe4e10cc",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Louise Bennett (1919–2006), also known as “Miss Lou,” was an influential Jamaican poet and folklorist. Her innovative poems ______ the use of Jamaican Creole (a spoken language) in literature."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "popularized;"
+        },
+        {
+          "id": "B",
+          "text": "popularized,"
+        },
+        {
+          "id": "C",
+          "text": "popularized"
+        },
+        {
+          "id": "D",
+          "text": "popularized:"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Choice C is the best answer. The convention being tested is punctuation use between a verb and an object. No punctuation is needed between the verb \"popularized\" and its object \"the use of Jamaican Creole.\" The object helps complete the idea of the verb—in this case, it explains what Louise Bennett popularized—and any punctuation between the two results in an ungrammatical sentence.\n\nChoice A is incorrect because no punctuation is needed between the verb and its object. Choice B is incorrect because no punctuation is needed between the verb and its object. Choice D is incorrect because no punctuation is needed between the verb and its object.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            4,
+            5
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            8,
+            9
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "C": "Choice C is the best answer. The convention being tested is punctuation use between a verb and an object. No punctuation is needed between the verb \"popularized\" and its object \"the use of Jamaican Creole.\" The object helps complete the idea of the verb—in this case, it explains what Louise Bennett popularized—and any punctuation between the two results in an ungrammatical sentence.",
+        "A": "Choice A is incorrect because no punctuation is needed between the verb and its object.",
+        "B": "Choice B is incorrect because no punctuation is needed between the verb and its object.",
+        "D": "Choice D is incorrect because no punctuation is needed between the verb and its object."
+      }
+    },
+    {
+      "id": "5631e99d",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "By analyzing ice cores from Greenland and Antarctica, a research team at Sweden’s Lund University discovered evidence of a solar storm that occurred 9,200 years ago. Scientists had previously thought the Sun to be in a relatively “quiet” phase at that ______ the Lund team’s finding suggests otherwise."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "time but"
+        },
+        {
+          "id": "B",
+          "text": "time, but"
+        },
+        {
+          "id": "C",
+          "text": "time,"
+        },
+        {
+          "id": "D",
+          "text": "time"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Choice B is the best answer. The convention being tested is the coordination of main clauses within a sentence. This choice correctly uses a comma and the coordinating conjunction \"but\" to join the first main clause (\"Scientists...time\") and the second main clause (\"the Lund...otherwise\").\n\nChoice A is incorrect because when coordinating two longer main clauses such as these, it’s conventional to use a comma before the coordinating conjunction. Choice C is incorrect because it results in a comma splice. Without a conjunction following it, a comma can’t be used in this way to join two main clauses. Choice D is incorrect because it results in a run-on sentence. The two main clauses are fused without punctuation and/or a conjunction.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            5
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            9,
+            10
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "B": "Choice B is the best answer. The convention being tested is the coordination of main clauses within a sentence. This choice correctly uses a comma and the coordinating conjunction \"but\" to join the first main clause (\"Scientists...time\") and the second main clause (\"the Lund...otherwise\").",
+        "A": "Choice A is incorrect because when coordinating two longer main clauses such as these, it’s conventional to use a comma before the coordinating conjunction.",
+        "C": "Choice C is incorrect because it results in a comma splice. Without a conjunction following it, a comma can’t be used in this way to join two main clauses.",
+        "D": "Choice D is incorrect because it results in a run-on sentence. The two main clauses are fused without punctuation and/or a conjunction."
+      }
+    },
+    {
+      "id": "f8497cc6",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The fine, powdery substance that covers the Moon’s surface is called regolith. Because regolith is both readily available and high in oxygen ______ scientists have wondered whether it could be used as a potential source of oxygen for future lunar settlements."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "content and"
+        },
+        {
+          "id": "B",
+          "text": "content,"
+        },
+        {
+          "id": "C",
+          "text": "content"
+        },
+        {
+          "id": "D",
+          "text": "content, and"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Choice B is the best answer. The convention being tested is punctuation between a subordinate clause and a main clause. This choice correctly uses a comma to mark the boundary between the subordinate clause (“Because...content”) and the main clause (“scientists...settlements”).\n\nChoice A is incorrect. Joining the subordinate clause (“Because...content”) and the clause that follows (“scientists...settlements”) with the conjunction “and” results in an ungrammatical sentence that lacks a main clause. Choice C is incorrect because it fails to mark the boundary between the subordinate clause and the main clause with appropriate punctuation. Choice D is incorrect. Joining the subordinate clause (“Because...content”) and the clause that follows (“scientists...settlements”) with a comma and the conjunction “and” results in an ungrammatical sentence that lacks a main clause.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            5,
+            6
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            10,
+            11
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "B": "Choice B is the best answer. The convention being tested is punctuation between a subordinate clause and a main clause. This choice correctly uses a comma to mark the boundary between the subordinate clause (“Because...content”) and the main clause (“scientists...settlements”).",
+        "A": "Choice A is incorrect. Joining the subordinate clause (“Because...content”) and the clause that follows (“scientists...settlements”) with the conjunction “and” results in an ungrammatical sentence that lacks a main clause.",
+        "C": "Choice C is incorrect because it fails to mark the boundary between the subordinate clause and the main clause with appropriate punctuation.",
+        "D": "Choice D is incorrect. Joining the subordinate clause (“Because...content”) and the clause that follows (“scientists...settlements”) with a comma and the conjunction “and” results in an ungrammatical sentence that lacks a main clause."
+      }
+    },
+    {
+      "id": "3bfd0a4f",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Azulejos, mosaics made of glazed ceramic tiles, can be found throughout Portugal. These mosaics beautify places such as ______ stations, and public squares."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "libraries train"
+        },
+        {
+          "id": "B",
+          "text": "libraries: train"
+        },
+        {
+          "id": "C",
+          "text": "libraries—train"
+        },
+        {
+          "id": "D",
+          "text": "libraries, train"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "Choice D is the best answer. The convention being tested is the punctuation of items in a simple series. The comma after \"libraries\" is used conventionally to separate the first and second items (\"libraries\" and \"train stations\") in the series.\n\nChoice A is incorrect because it fails to separate the first two items (\"libraries\" and \"train stations\") in the series. Choice B is incorrect because a colon can’t be used in this way to separate items in a simple series. Choice C is incorrect because a dash can’t be used in this way to separate items in a simple series.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            6
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            11,
+            12
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "D": "Choice D is the best answer. The convention being tested is the punctuation of items in a simple series. The comma after \"libraries\" is used conventionally to separate the first and second items (\"libraries\" and \"train stations\") in the series.",
+        "A": "Choice A is incorrect because it fails to separate the first two items (\"libraries\" and \"train stations\") in the series.",
+        "B": "Choice B is incorrect because a colon can’t be used in this way to separate items in a simple series.",
+        "C": "Choice C is incorrect because a dash can’t be used in this way to separate items in a simple series."
+      }
+    },
+    {
+      "id": "f6da3294",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In her two major series “Memory Test” and “Autobiography,” painter Howardena Pindell explored themes ______ healing, self-discovery, and memory by cutting and sewing back together pieces of canvas and inserting personal artifacts, such as postcards, into some of the paintings."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "of"
+        },
+        {
+          "id": "B",
+          "text": "of,"
+        },
+        {
+          "id": "C",
+          "text": "of—"
+        },
+        {
+          "id": "D",
+          "text": "of:"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "Choice A is the best answer. The convention being tested is punctuation between a preposition and its complement. No punctuation is needed between the preposition “of” and its complement, the noun phrase “healing, self-discovery, and memory.”\n\nChoice B is incorrect because no punctuation is needed between a preposition and its complement. Choice C is incorrect because no punctuation is needed between a preposition and its complement. Choice D is incorrect because no punctuation is needed between a preposition and its complement.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            6,
+            7
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            12,
+            13
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "A": "Choice A is the best answer. The convention being tested is punctuation between a preposition and its complement. No punctuation is needed between the preposition “of” and its complement, the noun phrase “healing, self-discovery, and memory.”",
+        "B": "Choice B is incorrect because no punctuation is needed between a preposition and its complement.",
+        "C": "Choice C is incorrect because no punctuation is needed between a preposition and its complement.",
+        "D": "Choice D is incorrect because no punctuation is needed between a preposition and its complement."
+      }
+    },
+    {
+      "id": "bfc41dd2",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "About 70,000 meteorites have been found on Earth. Although most meteorites are fragments of ______ hundred have been identified as being from the Moon or Mars."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "asteroids. Several"
+        },
+        {
+          "id": "B",
+          "text": "asteroids, several"
+        },
+        {
+          "id": "C",
+          "text": "asteroids; several"
+        },
+        {
+          "id": "D",
+          "text": "asteroids: several"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Choice B is the best answer. This choice uses a comma to correctly separate the dependent clause \"although…asteroids\" from the independent clause \"several hundred have been…Mars.\"\n\nChoice A is incorrect. This choice results in a sentence fragment. \"Although…asteroids\" is a dependent clause. It can’t stand on its own as a sentence, which means it can’t end in a period. Choice C is incorrect. This choice results in a punctuation error. \"Although…asteroids\" is a dependent clause and can’t be joined to the independent clause \"several hundred have been…Mars\" with a semicolon. A semicolon can only join two independent clauses. Choice D is incorrect. This choice creates a punctuation error. A colon can only come after an independent clause, but \"although…asteroids\" is a dependent clause.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            7
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            13,
+            14
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "B": "Choice B is the best answer. This choice uses a comma to correctly separate the dependent clause \"although…asteroids\" from the independent clause \"several hundred have been…Mars.\"",
+        "A": "Choice A is incorrect. This choice results in a sentence fragment. \"Although…asteroids\" is a dependent clause. It can’t stand on its own as a sentence, which means it can’t end in a period.",
+        "C": "Choice C is incorrect. This choice results in a punctuation error. \"Although…asteroids\" is a dependent clause and can’t be joined to the independent clause \"several hundred have been…Mars\" with a semicolon. A semicolon can only join two independent clauses.",
+        "D": "Choice D is incorrect. This choice creates a punctuation error. A colon can only come after an independent clause, but \"although…asteroids\" is a dependent clause."
+      }
+    },
+    {
+      "id": "37ccf84e",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "When particles are suspended in liquid (like pollen in a water glass), they will zigzag randomly through the liquid and collide with one another in perpetuity. This type of random, continuous ______ is known as Brownian motion, can be observed throughout the natural world."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "movement: which"
+        },
+        {
+          "id": "B",
+          "text": "movement, which"
+        },
+        {
+          "id": "C",
+          "text": "movement which"
+        },
+        {
+          "id": "D",
+          "text": "movement. Which"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Choice B is the best answer. This choice correctly uses commas to set off the nonessential relative clause \"which is known as Brownian motion\" that provides extra information about the \"random, continuous movement\" that isn’t necessary for the function of the sentence.\n\nChoice A is incorrect. This choice results in a punctuation error. The relative clause \"which is known as Brownian motion\" is a nonessential supplement. Nonessential supplements need to be set apart from the rest of the sentence with a pair of commas, dashes, or parentheses, so we can’t use a colon here. Also, notice that colons can only come after an independent clause, which isn’t the case here. Choice C is incorrect. This choice results in a punctuation error. The relative clause \"which is known as Brownian motion\" is a nonessential supplement, so it should be separated from the rest of the sentence by a pair of matching punctuation marks. We already have a comma after \"motion,\" so we need to add a comma before \"which.\" This choice is missing that comma. Choice D is incorrect. This choice results in a sentence fragment. \"This type of random, continuous movement\" is not an independent clause and can’t stand alone as a full sentence, so we can’t put a period here.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            7,
+            8
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            14,
+            15
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "B": "Choice B is the best answer. This choice correctly uses commas to set off the nonessential relative clause \"which is known as Brownian motion\" that provides extra information about the \"random, continuous movement\" that isn’t necessary for the function of the sentence.",
+        "A": "Choice A is incorrect. This choice results in a punctuation error. The relative clause \"which is known as Brownian motion\" is a nonessential supplement. Nonessential supplements need to be set apart from the rest of the sentence with a pair of commas, dashes, or parentheses, so we can’t use a colon here. Also, notice that colons can only come after an independent clause, which isn’t the case here.",
+        "C": "Choice C is incorrect. This choice results in a punctuation error. The relative clause \"which is known as Brownian motion\" is a nonessential supplement, so it should be separated from the rest of the sentence by a pair of matching punctuation marks. We already have a comma after \"motion,\" so we need to add a comma before \"which.\" This choice is missing that comma.",
+        "D": "Choice D is incorrect. This choice results in a sentence fragment. \"This type of random, continuous movement\" is not an independent clause and can’t stand alone as a full sentence, so we can’t put a period here."
+      }
+    },
+    {
+      "id": "b3e861cf",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The algaita is a double reed wind instrument from West Africa. The reed of a wind instrument is the mouthpiece ______ A double reed contains two pieces of cane that vibrate and produce sound as air passes between them."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "where sound is made?"
+        },
+        {
+          "id": "B",
+          "text": "where is sound made."
+        },
+        {
+          "id": "C",
+          "text": "where sound is made."
+        },
+        {
+          "id": "D",
+          "text": "where is sound made?"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Choice C is the best answer. The convention being tested is end-of-sentence punctuation. This choice correctly uses a period to punctuate a declarative sentence (\"the reed of a wind instrument is the mouthpiece\") that ends with a prepositional phrase (\"where sound is made\").\n\nChoice A is incorrect. It’s unconventional to use a question mark to punctuate a declarative sentence. Choice B is incorrect. The structure requires that the sentence continue as a declarative clause, not end with an interrogative clause. Choice D is incorrect. The structure requires that the sentence continue as a declarative clause and end with a period, not end with an interrogative clause and a question mark.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            8
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            15,
+            16
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "C": "Choice C is the best answer. The convention being tested is end-of-sentence punctuation. This choice correctly uses a period to punctuate a declarative sentence (\"the reed of a wind instrument is the mouthpiece\") that ends with a prepositional phrase (\"where sound is made\").",
+        "A": "Choice A is incorrect. It’s unconventional to use a question mark to punctuate a declarative sentence.",
+        "B": "Choice B is incorrect. The structure requires that the sentence continue as a declarative clause, not end with an interrogative clause.",
+        "D": "Choice D is incorrect. The structure requires that the sentence continue as a declarative clause and end with a period, not end with an interrogative clause and a question mark."
+      }
+    },
+    {
+      "id": "e437ac5e",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In 1959, marine biologist Dr. Albert Jones founded the Underwater Adventure Seekers, a scuba diving ______ that is the oldest club for Black divers in the United States and that has helped thousands of diving enthusiasts become certified in the field."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "club"
+        },
+        {
+          "id": "B",
+          "text": "club,"
+        },
+        {
+          "id": "C",
+          "text": "club—"
+        },
+        {
+          "id": "D",
+          "text": "club, and"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "Choice A is the best answer. “That is…field” is an essential supplement, so we should not use punctuation to separate it from “scuba diving club.” .\n\nChoice B is incorrect. This choice creates a punctuation error. “That is…field” is an essential supplement, so we should not use a comma (or any kind of punctuation) to separate it from “scuba diving club.” . Choice C is incorrect. This choice creates a punctuation error. “That is…field” is an essential supplement, so we should not use a dash (or any kind of punctuation) to separate it from “scuba diving club.” . Choice D is incorrect. This choice creates a run-on sentence. It makes “that is…United States” into an awkward independent clause, but it also makes “that has…field” into its own awkward independent clause without the correct punctuation separating it.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            8,
+            9
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            16,
+            17
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "A": "Choice A is the best answer. “That is…field” is an essential supplement, so we should not use punctuation to separate it from “scuba diving club.” .",
+        "B": "Choice B is incorrect. This choice creates a punctuation error. “That is…field” is an essential supplement, so we should not use a comma (or any kind of punctuation) to separate it from “scuba diving club.” .",
+        "C": "Choice C is incorrect. This choice creates a punctuation error. “That is…field” is an essential supplement, so we should not use a dash (or any kind of punctuation) to separate it from “scuba diving club.” .",
+        "D": "Choice D is incorrect. This choice creates a run-on sentence. It makes “that is…United States” into an awkward independent clause, but it also makes “that has…field” into its own awkward independent clause without the correct punctuation separating it."
+      }
+    },
+    {
+      "id": "0693086b",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "While one requires oxygen and one does ______ and anaerobic respiration are both forms of cellular respiration—that is, they are processes by which cells break down glucose to use as energy."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "not aerobic"
+        },
+        {
+          "id": "B",
+          "text": "not. Aerobic"
+        },
+        {
+          "id": "C",
+          "text": "not, aerobic"
+        },
+        {
+          "id": "D",
+          "text": "not; aerobic"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Choice C is the best answer. A comma is the appropriate way to link the dependent clause “While...not” and the independent clause that follows.\n\nChoice A is incorrect. This choice creates a run-on sentence error. “While...not” is a dependent clause, which must be separated from the independent clause that follows with some sort of punctuation. Choice B is incorrect. This choice creates a sentence fragment. “While one requires oxygen and one does not” isn’t an independent clause, so it can’t stand alone as a complete sentence. Choice D is incorrect. This choice creates a punctuation error. “While one requires oxygen and one does not” isn’t an independent clause, so it can’t be linked to the clause that follows with a semicolon.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            9
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            17,
+            18
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "C": "Choice C is the best answer. A comma is the appropriate way to link the dependent clause “While...not” and the independent clause that follows.",
+        "A": "Choice A is incorrect. This choice creates a run-on sentence error. “While...not” is a dependent clause, which must be separated from the independent clause that follows with some sort of punctuation.",
+        "B": "Choice B is incorrect. This choice creates a sentence fragment. “While one requires oxygen and one does not” isn’t an independent clause, so it can’t stand alone as a complete sentence.",
+        "D": "Choice D is incorrect. This choice creates a punctuation error. “While one requires oxygen and one does not” isn’t an independent clause, so it can’t be linked to the clause that follows with a semicolon."
+      }
+    },
+    {
+      "id": "1dd740ff",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "While many video game creators strive to make their graphics ever more ______ others look to the past, developing titles with visuals inspired by the “8-bit” games of the 1980s and 1990s. (The term “8-bit” refers to a console whose processor could only handle eight bits of data at once.)"
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "lifelike but"
+        },
+        {
+          "id": "B",
+          "text": "lifelike"
+        },
+        {
+          "id": "C",
+          "text": "lifelike,"
+        },
+        {
+          "id": "D",
+          "text": "lifelike, but"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Choice C is the best answer. The convention being tested is punctuation between a subordinate clause and a main clause. This choice correctly uses a comma to mark the boundary between the subordinate clause (“While…lifelike”) and the main clause (“others look to the past”).\n\nChoice A is incorrect because it results in an incomplete sentence with no main clause. Choice B is incorrect because it fails to mark the boundary between the subordinate clause (“While…lifelike”) and the main clause (“others…past”). Choice D is incorrect because it results in an incomplete sentence with no main clause.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            9,
+            10
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            18,
+            19
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "C": "Choice C is the best answer. The convention being tested is punctuation between a subordinate clause and a main clause. This choice correctly uses a comma to mark the boundary between the subordinate clause (“While…lifelike”) and the main clause (“others look to the past”).",
+        "A": "Choice A is incorrect because it results in an incomplete sentence with no main clause.",
+        "B": "Choice B is incorrect because it fails to mark the boundary between the subordinate clause (“While…lifelike”) and the main clause (“others…past”).",
+        "D": "Choice D is incorrect because it results in an incomplete sentence with no main clause."
+      }
+    },
+    {
+      "id": "2aa0bdaf",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In her large-scale sculpture Casa-Isla, artist Edra Soto included references to her childhood in Puerto Rico. For example, the sculpture’s steel panels have a crisscrossing pattern inspired by the iron gates ______"
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Soto would see in her neighborhood?"
+        },
+        {
+          "id": "B",
+          "text": "Soto would see in her neighborhood."
+        },
+        {
+          "id": "C",
+          "text": "would Soto see in her neighborhood."
+        },
+        {
+          "id": "D",
+          "text": "would Soto see in her neighborhood?"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Choice B is the best answer. The convention being tested is end-of-sentence punctuation. This choice correctly uses a period to punctuate a declarative sentence (\"For example...neighborhood\").\n\nChoice A is incorrect. It’s unconventional to use a question mark in this way to punctuate a declarative sentence. Choice C is incorrect. The structure requires a declarative clause at the end of the sentence that states where Soto saw the steel panels, not an incomplete interrogative clause that asks a direct question, such as \"would Soto see in her neighborhood.\" Choice D is incorrect. The structure requires a period and a declarative clause at the end of the sentence that states where Soto saw the steel panels, not an incomplete interrogative clause asking a direct question, such as \"would Soto see in her neighborhood?\"",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            10
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            19,
+            20
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "B": "Choice B is the best answer. The convention being tested is end-of-sentence punctuation. This choice correctly uses a period to punctuate a declarative sentence (\"For example...neighborhood\").",
+        "A": "Choice A is incorrect. It’s unconventional to use a question mark in this way to punctuate a declarative sentence.",
+        "C": "Choice C is incorrect. The structure requires a declarative clause at the end of the sentence that states where Soto saw the steel panels, not an incomplete interrogative clause that asks a direct question, such as \"would Soto see in her neighborhood.\"",
+        "D": "Choice D is incorrect. The structure requires a period and a declarative clause at the end of the sentence that states where Soto saw the steel panels, not an incomplete interrogative clause asking a direct question, such as \"would Soto see in her neighborhood?\""
+      }
+    },
+    {
+      "id": "121aae1f",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Human-made (synthetic) fibers used in clothes and many other consumer products are more durable than most natural plant ______ the manufacture of synthetic fibers requires toxic chemical solvents that can pollute air and water."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "fibers,"
+        },
+        {
+          "id": "B",
+          "text": "fibers but"
+        },
+        {
+          "id": "C",
+          "text": "fibers"
+        },
+        {
+          "id": "D",
+          "text": "fibers, but"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "Choice D is the best answer. The convention being tested is the coordination of main clauses within a sentence. This choice correctly uses a comma and the coordinating conjunction “but” to join the first main clause (“Human-made...fibers”) and the second main clause (“the manufacture...water”).\n\nChoice A is incorrect because it results in a comma splice. Without a conjunction following it, a comma can’t be used in this way to join two main clauses. Choice B is incorrect because when coordinating two longer main clauses such as these, it’s conventional to use a comma before the coordinating conjunction. Choice C is incorrect because it results in a run-on sentence. The two main clauses are fused without punctuation and/or a conjunction.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            10,
+            11
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            20,
+            21
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "D": "Choice D is the best answer. The convention being tested is the coordination of main clauses within a sentence. This choice correctly uses a comma and the coordinating conjunction “but” to join the first main clause (“Human-made...fibers”) and the second main clause (“the manufacture...water”).",
+        "A": "Choice A is incorrect because it results in a comma splice. Without a conjunction following it, a comma can’t be used in this way to join two main clauses.",
+        "B": "Choice B is incorrect because when coordinating two longer main clauses such as these, it’s conventional to use a comma before the coordinating conjunction.",
+        "C": "Choice C is incorrect because it results in a run-on sentence. The two main clauses are fused without punctuation and/or a conjunction."
+      }
+    },
+    {
+      "id": "103d9693",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Psychophysicist Howard Moskowitz was hired by a soda company to determine how much artificial sweetener ______ After conducting consumer taste tests, he found that no such ideal existed: participants expressed a wide range of preferences for different blends of sweetener, carbonization, and flavoring."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "do most people prefer in a diet drink?"
+        },
+        {
+          "id": "B",
+          "text": "do most people prefer in a diet drink."
+        },
+        {
+          "id": "C",
+          "text": "most people prefer in a diet drink?"
+        },
+        {
+          "id": "D",
+          "text": "most people prefer in a diet drink."
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "Choice D is the best answer. This sentence is a statement: “Moskowitz was hired by a soda company to determine how much artificial sweetener most people prefer in a diet drink.” So a period is the most appropriate punctuation mark.\n\nChoice A is incorrect. This doesn’t complete the text in a way that conforms to the conventions of Standard English. This sentence is not a question—it’s a statement. So a question mark is not the appropriate punctuation. Choice B is incorrect. This doesn’t complete the text in a way that conforms to the conventions of Standard English. We already have the verbs “was hired…to determine” in this sentence. The verb “do” is not needed and results in a confusing, ungrammatical sentence. Choice C is incorrect. This doesn’t complete the text in a way that conforms to the conventions of Standard English. This sentence is not a question—it’s a statement. So a question mark is not the appropriate punctuation.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            11
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            21,
+            22
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "D": "Choice D is the best answer. This sentence is a statement: “Moskowitz was hired by a soda company to determine how much artificial sweetener most people prefer in a diet drink.” So a period is the most appropriate punctuation mark.",
+        "A": "Choice A is incorrect. This doesn’t complete the text in a way that conforms to the conventions of Standard English. This sentence is not a question—it’s a statement. So a question mark is not the appropriate punctuation.",
+        "B": "Choice B is incorrect. This doesn’t complete the text in a way that conforms to the conventions of Standard English. We already have the verbs “was hired…to determine” in this sentence. The verb “do” is not needed and results in a confusing, ungrammatical sentence.",
+        "C": "Choice C is incorrect. This doesn’t complete the text in a way that conforms to the conventions of Standard English. This sentence is not a question—it’s a statement. So a question mark is not the appropriate punctuation."
+      }
+    },
+    {
+      "id": "ca565d66",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Many Samoans enjoy a sport called kilikiti. This bat-and-ball game was derived from ______ kilikiti differs from cricket in a few key ways."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "cricket but:"
+        },
+        {
+          "id": "B",
+          "text": "cricket but,"
+        },
+        {
+          "id": "C",
+          "text": "cricket, but"
+        },
+        {
+          "id": "D",
+          "text": "cricket, but,"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Choice C is the best answer. The convention being tested is the coordination of main clauses within a sentence. This choice correctly uses a comma before the coordinating conjunction \"but\" to join the first main clause (\"This bat-and-ball game was derived from cricket\") and the second main clause (\"kilikiti differs from cricket in a few key ways\").\n\nChoice A is incorrect. When coordinating two main clauses such as these, it’s not conventional to use a colon in this way after the coordinating conjunction. Choice B is incorrect. When coordinating two main clauses such as these, it’s not conventional to use a comma in this way after the coordinating conjunction. Choice D is incorrect. When coordinating two main clauses such as these, it’s not conventional to use a comma in this way after the coordinating conjunction.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            11,
+            12
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            22,
+            23
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "C": "Choice C is the best answer. The convention being tested is the coordination of main clauses within a sentence. This choice correctly uses a comma before the coordinating conjunction \"but\" to join the first main clause (\"This bat-and-ball game was derived from cricket\") and the second main clause (\"kilikiti differs from cricket in a few key ways\").",
+        "A": "Choice A is incorrect. When coordinating two main clauses such as these, it’s not conventional to use a colon in this way after the coordinating conjunction.",
+        "B": "Choice B is incorrect. When coordinating two main clauses such as these, it’s not conventional to use a comma in this way after the coordinating conjunction.",
+        "D": "Choice D is incorrect. When coordinating two main clauses such as these, it’s not conventional to use a comma in this way after the coordinating conjunction."
+      }
+    },
+    {
+      "id": "3baa0f75",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Before the Erie Canal was completed in 1825, transporting goods by wagon between New York City and the Midwest took up to forty-five days and cost one hundred dollars per ton. By linking the Hudson River to Lake ______ canal reduced transport time to nine days and cut costs to six dollars per ton."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Erie; the"
+        },
+        {
+          "id": "B",
+          "text": "Erie (the"
+        },
+        {
+          "id": "C",
+          "text": "Erie, the"
+        },
+        {
+          "id": "D",
+          "text": "Erie: the"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Choice C is the best answer. The convention being tested is punctuation between a supplementary phrase and a main clause. This choice correctly uses a comma to mark the boundary between the introductory supplementary phrase (“By linking the Hudson River to Lake Erie”), which identifies how the canal reduced transport time, and the main clause (“the canal reduced transport time to nine days and cut costs to six dollars per ton”).\n\nChoice A is incorrect because a semicolon can’t be used in this way to mark the boundary between a supplementary phrase (“By…Erie”) and the main clause (“the canal...ton”). Choice B is incorrect because an open parenthesis can’t be used in this way to mark the boundary between a supplementary phrase (“By…Erie”) and the main clause (“the canal...ton”). Choice D is incorrect because a colon can’t be used in this way to mark the boundary between an introductory supplementary phrase (“By…Erie”) and the main clause (“the canal...ton”).",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            12
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            23,
+            24
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "C": "Choice C is the best answer. The convention being tested is punctuation between a supplementary phrase and a main clause. This choice correctly uses a comma to mark the boundary between the introductory supplementary phrase (“By linking the Hudson River to Lake Erie”), which identifies how the canal reduced transport time, and the main clause (“the canal reduced transport time to nine days and cut costs to six dollars per ton”).",
+        "A": "Choice A is incorrect because a semicolon can’t be used in this way to mark the boundary between a supplementary phrase (“By…Erie”) and the main clause (“the canal...ton”).",
+        "B": "Choice B is incorrect because an open parenthesis can’t be used in this way to mark the boundary between a supplementary phrase (“By…Erie”) and the main clause (“the canal...ton”).",
+        "D": "Choice D is incorrect because a colon can’t be used in this way to mark the boundary between an introductory supplementary phrase (“By…Erie”) and the main clause (“the canal...ton”)."
+      }
+    },
+    {
+      "id": "c2fe5bbd",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "A harpsichord may look just like a piano, but the difference between the two instruments is easy to hear. When a harpsichord’s keys are pressed, the strings inside the ______ are plucked, not struck."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "instrument:"
+        },
+        {
+          "id": "B",
+          "text": "instrument"
+        },
+        {
+          "id": "C",
+          "text": "instrument—"
+        },
+        {
+          "id": "D",
+          "text": "instrument,"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Choice B is the best answer. The convention being tested is punctuation use between a subject and a verb. When, as in this case, a subject (\"the strings inside the instrument\") is immediately followed by a main verb (\"are plucked\"), no punctuation is needed.\n\nChoice A is incorrect because no punctuation is needed between the subject and the verb. Choice C is incorrect because no punctuation is needed between the subject and the verb. Choice D is incorrect because no punctuation is needed between the subject and the verb.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            12,
+            13
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            24,
+            25
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "B": "Choice B is the best answer. The convention being tested is punctuation use between a subject and a verb. When, as in this case, a subject (\"the strings inside the instrument\") is immediately followed by a main verb (\"are plucked\"), no punctuation is needed.",
+        "A": "Choice A is incorrect because no punctuation is needed between the subject and the verb.",
+        "C": "Choice C is incorrect because no punctuation is needed between the subject and the verb.",
+        "D": "Choice D is incorrect because no punctuation is needed between the subject and the verb."
+      }
+    },
+    {
+      "id": "26a66f24",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Fans of science fiction will ______ multiple references to classic sci-fi stories in Janelle Monáe’s song lyrics, including her recurring nods to the plot of the 1927 sci-fi film Metropolis."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "appreciate the"
+        },
+        {
+          "id": "B",
+          "text": "appreciate. The"
+        },
+        {
+          "id": "C",
+          "text": "appreciate, the"
+        },
+        {
+          "id": "D",
+          "text": "appreciate: the"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "Choice A is the best answer. The convention being tested here is punctuation between a verb and object. No punctuation is needed between the verb (\"appreciate\") and its object (\"the multiple references...\"). The object helps complete the idea of the verb—in this case, it explains what fans of science fiction will appreciate—and any punctuation between the two results in an ungrammatical sentence.\n\nChoice B is incorrect because no punctuation is needed between the verb and its object. Choice C is incorrect because no punctuation is needed between the verb and its object. Choice D is incorrect because no punctuation is needed between the verb and its object.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            13
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            25,
+            26
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "A": "Choice A is the best answer. The convention being tested here is punctuation between a verb and object. No punctuation is needed between the verb (\"appreciate\") and its object (\"the multiple references...\"). The object helps complete the idea of the verb—in this case, it explains what fans of science fiction will appreciate—and any punctuation between the two results in an ungrammatical sentence.",
+        "B": "Choice B is incorrect because no punctuation is needed between the verb and its object.",
+        "C": "Choice C is incorrect because no punctuation is needed between the verb and its object.",
+        "D": "Choice D is incorrect because no punctuation is needed between the verb and its object."
+      }
+    },
+    {
+      "id": "d4c3122b",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Lucía Michel of the University of Chile observed that alkaline soils contain an insoluble form of iron that blueberry plants cannot absorb, thus inhibiting blueberry growth. If these plants were grown in alkaline soil alongside grasses that aid in iron solubilization, ______ Michel was determined to find out."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "could the blueberries thrive."
+        },
+        {
+          "id": "B",
+          "text": "the blueberries could thrive."
+        },
+        {
+          "id": "C",
+          "text": "the blueberries could thrive?"
+        },
+        {
+          "id": "D",
+          "text": "could the blueberries thrive?"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "Choice D is the best answer. The convention being tested is end-of-sentence punctuation. This choice correctly uses a question mark to punctuate the interrogative clause “could the blueberries thrive,” which asks a direct question at the end of the sentence.\n\nChoice A is incorrect because a period can’t be used in this way to punctuate an interrogative clause, such as “could the blueberries thrive,” at the end of a sentence. Choice B is incorrect because the context requires an interrogative clause. The declarative clause “the blueberries could thrive” incorrectly indicates that it was known that the blueberries could thrive in alkaline soil, whereas Michel had yet to find this out. Choice C is incorrect because a question mark can’t be used in this way to punctuate a declarative clause, such as “the blueberries could thrive,” at the end of a sentence.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            13,
+            14
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            26,
+            27
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "D": "Choice D is the best answer. The convention being tested is end-of-sentence punctuation. This choice correctly uses a question mark to punctuate the interrogative clause “could the blueberries thrive,” which asks a direct question at the end of the sentence.",
+        "A": "Choice A is incorrect because a period can’t be used in this way to punctuate an interrogative clause, such as “could the blueberries thrive,” at the end of a sentence.",
+        "B": "Choice B is incorrect because the context requires an interrogative clause. The declarative clause “the blueberries could thrive” incorrectly indicates that it was known that the blueberries could thrive in alkaline soil, whereas Michel had yet to find this out.",
+        "C": "Choice C is incorrect because a question mark can’t be used in this way to punctuate a declarative clause, such as “the blueberries could thrive,” at the end of a sentence."
+      }
+    },
+    {
+      "id": "61e6cf3b",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Located in the northern United States, the Great Lakes Basin contains roughly 35,000 islands. Lake Superior has Grand Island, for example. Lake Michigan has Belle Isle. Lake Huron, though, is home ______ the largest island of them all: Manitoulin Island."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "to;"
+        },
+        {
+          "id": "B",
+          "text": "to—"
+        },
+        {
+          "id": "C",
+          "text": "to"
+        },
+        {
+          "id": "D",
+          "text": "to,"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Choice C is the best answer. The convention being tested is punctuation use between a preposition and its complement. No punctuation is needed between the preposition \"to\" and its complement \"the largest island of them all.\" The complement completes the meaning of the preposition in the phrase \"home to the largest island of them all,\" and any punctuation within it results in an ungrammatical sentence.\n\nChoice A is incorrect because no punctuation is needed between the preposition and its complement. Choice B is incorrect because no punctuation is needed between the preposition and its complement. Choice D is incorrect because no punctuation is needed between the preposition and its complement.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            14
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            27,
+            28
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "C": "Choice C is the best answer. The convention being tested is punctuation use between a preposition and its complement. No punctuation is needed between the preposition \"to\" and its complement \"the largest island of them all.\" The complement completes the meaning of the preposition in the phrase \"home to the largest island of them all,\" and any punctuation within it results in an ungrammatical sentence.",
+        "A": "Choice A is incorrect because no punctuation is needed between the preposition and its complement.",
+        "B": "Choice B is incorrect because no punctuation is needed between the preposition and its complement.",
+        "D": "Choice D is incorrect because no punctuation is needed between the preposition and its complement."
+      }
+    },
+    {
+      "id": "3c2cf8cd",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "After the United Kingdom began rolling out taxes equivalent to a few cents on single-use plastic grocery bags in 2011, plastic-bag consumption decreased by up to ninety ______ taxes are subject to what economists call the “rebound effect”: as the change became normalized, plastic-bag use started to creep back up."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "percent, such"
+        },
+        {
+          "id": "B",
+          "text": "percent and such"
+        },
+        {
+          "id": "C",
+          "text": "percent. Such"
+        },
+        {
+          "id": "D",
+          "text": "percent such"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Choice C is the best answer. The convention being tested is punctuation use between sentences. In this choice, the period after “percent” is used correctly to mark the boundary between one sentence (“After…percent”) and another (“Such…up”).\n\nChoice A is incorrect because it results in a comma splice. A comma can’t be used in this way to mark the boundary between sentences. Choice B is incorrect. Without a comma preceding it, the conjunction “and” can’t be used in this way to join sentences. Choice D is incorrect because it results in a run-on sentence. The sentences (“After…percent” and “Such…up”) are fused without punctuation and/or a conjunction.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            14,
+            15
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            28,
+            29
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "C": "Choice C is the best answer. The convention being tested is punctuation use between sentences. In this choice, the period after “percent” is used correctly to mark the boundary between one sentence (“After…percent”) and another (“Such…up”).",
+        "A": "Choice A is incorrect because it results in a comma splice. A comma can’t be used in this way to mark the boundary between sentences.",
+        "B": "Choice B is incorrect. Without a comma preceding it, the conjunction “and” can’t be used in this way to join sentences.",
+        "D": "Choice D is incorrect because it results in a run-on sentence. The sentences (“After…percent” and “Such…up”) are fused without punctuation and/or a conjunction."
+      }
+    },
+    {
+      "id": "f856be23",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In her book The Woman Warrior: Memoirs of a Girlhood Among Ghosts, author Maxine Hong Kingston examines themes ______ childhood, womanhood, and Chinese American identity by intertwining autobiography and mythology."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "of:"
+        },
+        {
+          "id": "B",
+          "text": "of"
+        },
+        {
+          "id": "C",
+          "text": "of—"
+        },
+        {
+          "id": "D",
+          "text": "of,"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Choice B is the best answer. “Themes of childhood” is one noun phrase, with “themes of” implicitly carrying over to the other items on the list (“themes of childhood, [themes of] womanhood, and [themes of] Chinese American identity”).\n\nChoice A is incorrect. This choice inappropriately breaks up the introduction of a list. Also, “In her book…themes of” is not an independent clause, thanks to the dangling “of” at the end, so it can’t precede a colon. Choice C is incorrect. This choice inappropriately breaks up the introduction of a list. Also, “In her book…themes of” is not an independent clause, thanks to the dangling “of” at the end, so it can’t precede a single dash. Choice D is incorrect. This choice inappropriately breaks up the introduction of a list. “Themes of” implicitly carries over to each item on the list (“themes of childhood, [themes of] womanhood, and [themes of] Chinese American identity”), so we don’t want to use a comma to separate it.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            15
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            29,
+            30
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "B": "Choice B is the best answer. “Themes of childhood” is one noun phrase, with “themes of” implicitly carrying over to the other items on the list (“themes of childhood, [themes of] womanhood, and [themes of] Chinese American identity”).",
+        "A": "Choice A is incorrect. This choice inappropriately breaks up the introduction of a list. Also, “In her book…themes of” is not an independent clause, thanks to the dangling “of” at the end, so it can’t precede a colon.",
+        "C": "Choice C is incorrect. This choice inappropriately breaks up the introduction of a list. Also, “In her book…themes of” is not an independent clause, thanks to the dangling “of” at the end, so it can’t precede a single dash.",
+        "D": "Choice D is incorrect. This choice inappropriately breaks up the introduction of a list. “Themes of” implicitly carries over to each item on the list (“themes of childhood, [themes of] womanhood, and [themes of] Chinese American identity”), so we don’t want to use a comma to separate it."
+      }
+    },
+    {
+      "id": "1da00c69",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "A subseasonal weather forecast attempts to predict weather conditions three to four weeks in ______ its predictions are therefore more short-term than those of the seasonal forecast, which attempts to predict the weather more than a month in advance."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "advance,"
+        },
+        {
+          "id": "B",
+          "text": "advance"
+        },
+        {
+          "id": "C",
+          "text": "advance;"
+        },
+        {
+          "id": "D",
+          "text": "advance and"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Choice C is the best answer. The clause “A subseasonal…advance” and the clause “its predictions…forecast” are both independent clauses, so using a semicolon to separate them is grammatically correct.\n\nChoice A is incorrect. This choice creates a run-on sentence error. The clause “A subseasonal…advance” and the clause “its predictions…forecast” are both independent clauses, so a comma is not enough to separate them. Choice B is incorrect. This choice creates a run-on sentence error. The clause “A subseasonal…advance” and the clause “its predictions…forecast” are both independent clauses, so they need to be separated with specific punctuation (a period, a semi-colon, a colon, a dash, or a comma + a coordinating conjunction). Choice D is incorrect. This choice creates a run-on sentence error. The clause “A subseasonal…advance” and the clause “its predictions…forecast” are both independent clauses, so the word “and” by itself is not enough to separate them. There would need to be a comma before “and” for this choice to work.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            15,
+            16
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            30,
+            31
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "C": "Choice C is the best answer. The clause “A subseasonal…advance” and the clause “its predictions…forecast” are both independent clauses, so using a semicolon to separate them is grammatically correct.",
+        "A": "Choice A is incorrect. This choice creates a run-on sentence error. The clause “A subseasonal…advance” and the clause “its predictions…forecast” are both independent clauses, so a comma is not enough to separate them.",
+        "B": "Choice B is incorrect. This choice creates a run-on sentence error. The clause “A subseasonal…advance” and the clause “its predictions…forecast” are both independent clauses, so they need to be separated with specific punctuation (a period, a semi-colon, a colon, a dash, or a comma + a coordinating conjunction).",
+        "D": "Choice D is incorrect. This choice creates a run-on sentence error. The clause “A subseasonal…advance” and the clause “its predictions…forecast” are both independent clauses, so the word “and” by itself is not enough to separate them. There would need to be a comma before “and” for this choice to work."
+      }
+    },
+    {
+      "id": "9edd64ae",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In 1953, a fellow performer tripped on legendary jazz musician Dizzy Gillespie’s trumpet, bending its bell upward. When Gillespie tested the damaged instrument, he realized that he ______ sound of a bent bell over that of a straight one."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "preferred; the"
+        },
+        {
+          "id": "B",
+          "text": "preferred the"
+        },
+        {
+          "id": "C",
+          "text": "preferred, the"
+        },
+        {
+          "id": "D",
+          "text": "preferred. The"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Choice B is the best answer. The convention being tested is punctuation use between a verb and its object. No punctuation is needed between the verb \"preferred\" and its object \"the sound of a bent bell over that of a straight one.\" The object helps complete the idea of the verb—in this case, it explains what type of sound Gillespie preferred—and any punctuation between the two results in an ungrammatical sentence.\n\nChoice A is incorrect because no punctuation is needed between the verb and its object. Choice C is incorrect because no punctuation is needed between the verb and its object. Choice D is incorrect because no punctuation is needed between the verb and its object.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            16
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            31,
+            32
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "B": "Choice B is the best answer. The convention being tested is punctuation use between a verb and its object. No punctuation is needed between the verb \"preferred\" and its object \"the sound of a bent bell over that of a straight one.\" The object helps complete the idea of the verb—in this case, it explains what type of sound Gillespie preferred—and any punctuation between the two results in an ungrammatical sentence.",
+        "A": "Choice A is incorrect because no punctuation is needed between the verb and its object.",
+        "C": "Choice C is incorrect because no punctuation is needed between the verb and its object.",
+        "D": "Choice D is incorrect because no punctuation is needed between the verb and its object."
+      }
+    },
+    {
+      "id": "9bcab648",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In 1976, the Inuit rock group Sikumiut recorded the album People of the Ice. Though only their first record, it shows a band already skilled at the difficult task of making music that sounds easy and fun. On songs like “Utirumavunga,” Lucassie Koperqualuk’s guitar riffs effortlessly ______ Charlie Adams’s delightfully catchy vocal melodies."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "blend, with"
+        },
+        {
+          "id": "B",
+          "text": "blend. With"
+        },
+        {
+          "id": "C",
+          "text": "blend; with"
+        },
+        {
+          "id": "D",
+          "text": "blend with"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "Choice D is the best answer. The convention being tested is punctuation between a verb and a prepositional phrase. No punctuation is needed between the verb “blend” and the prepositional phrase “with Charlie Adams’s delightfully catchy vocal melodies.” The prepositional phrase completes the idea of the sentence, explaining with what Koperqualuk’s guitar riffs blend.\n\nChoice A is incorrect because no punctuation is needed between the verb and the prepositional phrase. Choice B is incorrect because no punctuation is needed between the verb and the prepositional phrase. Choice C is incorrect because no punctuation is needed between the verb and the prepositional phrase.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            16,
+            17
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            32,
+            33
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "D": "Choice D is the best answer. The convention being tested is punctuation between a verb and a prepositional phrase. No punctuation is needed between the verb “blend” and the prepositional phrase “with Charlie Adams’s delightfully catchy vocal melodies.” The prepositional phrase completes the idea of the sentence, explaining with what Koperqualuk’s guitar riffs blend.",
+        "A": "Choice A is incorrect because no punctuation is needed between the verb and the prepositional phrase.",
+        "B": "Choice B is incorrect because no punctuation is needed between the verb and the prepositional phrase.",
+        "C": "Choice C is incorrect because no punctuation is needed between the verb and the prepositional phrase."
+      }
+    },
+    {
+      "id": "550d6484",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In forecasting weather events, meteorologists sometimes discuss the role of atmospheric rivers. What are atmospheric rivers, and how ______ Part of the water cycle, atmospheric rivers are narrow channels of moisture moving through the atmosphere. In certain conditions, these “rivers” can release some of their moisture as precipitation."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "do they affect our weather."
+        },
+        {
+          "id": "B",
+          "text": "they do affect our weather."
+        },
+        {
+          "id": "C",
+          "text": "do they affect our weather?"
+        },
+        {
+          "id": "D",
+          "text": "they do affect our weather?"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Choice C is the best answer. The convention being tested is end-of-sentence punctuation. This choice correctly uses a question mark to punctuate the coordinated interrogative clauses \"What are atmospheric rivers\" and \"how do they affect our weather,\" both of which ask direct questions.\n\nChoice A is incorrect because a period can’t be used in this way to punctuate an interrogative clause, such as \"how do they affect our weather,\" at the end of a sentence. Choice B is incorrect because the structure requires an interrogative clause and a question mark at the end of the sentence. Choice D is incorrect because the structure requires an interrogative clause at the end of the sentence.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            17
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            33,
+            34
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "C": "Choice C is the best answer. The convention being tested is end-of-sentence punctuation. This choice correctly uses a question mark to punctuate the coordinated interrogative clauses \"What are atmospheric rivers\" and \"how do they affect our weather,\" both of which ask direct questions.",
+        "A": "Choice A is incorrect because a period can’t be used in this way to punctuate an interrogative clause, such as \"how do they affect our weather,\" at the end of a sentence.",
+        "B": "Choice B is incorrect because the structure requires an interrogative clause and a question mark at the end of the sentence.",
+        "D": "Choice D is incorrect because the structure requires an interrogative clause at the end of the sentence."
+      }
+    },
+    {
+      "id": "9e56d8e7",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Award-winning cinematographer James Wong Howe was known for his innovative filming techniques. While filming a boxing match for the movie Body and Soul ______ Howe had a handheld camera operator wear roller skates. This allowed the operator to move smoothly around actors in a boxing ring, creating an immersive experience for viewers."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "(1947), and"
+        },
+        {
+          "id": "B",
+          "text": "(1947),"
+        },
+        {
+          "id": "C",
+          "text": "(1947) and"
+        },
+        {
+          "id": "D",
+          "text": "(1947)"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Choice B is the best answer. The convention being tested is punctuation between a supplementary element and a main clause. This choice correctly uses a comma to mark the boundary between the supplementary phrase (“While...1947”), which indicates when the action occurred, and the main clause (“Howe had a handheld camera operator wear roller skates”).\n\nChoice A is incorrect because a comma paired with the conjunction “and” can’t be used in this way to mark the boundary between the supplementary element (“While…1947”) and the main clause (“Howe…skates”). Choice C is incorrect because the conjunction “and” can’t be used in this way to join the supplementary element (“While…1947”) and the main clause (“Howe…skates”). Choice D is incorrect because it fails to mark the boundary between the supplementary element and the main clause with appropriate punctuation.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            17,
+            18
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            34,
+            35
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "B": "Choice B is the best answer. The convention being tested is punctuation between a supplementary element and a main clause. This choice correctly uses a comma to mark the boundary between the supplementary phrase (“While...1947”), which indicates when the action occurred, and the main clause (“Howe had a handheld camera operator wear roller skates”).",
+        "A": "Choice A is incorrect because a comma paired with the conjunction “and” can’t be used in this way to mark the boundary between the supplementary element (“While…1947”) and the main clause (“Howe…skates”).",
+        "C": "Choice C is incorrect because the conjunction “and” can’t be used in this way to join the supplementary element (“While…1947”) and the main clause (“Howe…skates”).",
+        "D": "Choice D is incorrect because it fails to mark the boundary between the supplementary element and the main clause with appropriate punctuation."
+      }
+    },
+    {
+      "id": "fb0a6682",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "At eight paragraphs long, the preamble to the constitution of ______ country in Western Asia—is much longer than the one-paragraph preamble to the United States Constitution."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Bahrain—a"
+        },
+        {
+          "id": "B",
+          "text": "Bahrain, a"
+        },
+        {
+          "id": "C",
+          "text": "Bahrain a"
+        },
+        {
+          "id": "D",
+          "text": "Bahrain: a"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "Choice A is the best answer. The convention being tested is the punctuation of a supplementary element within a sentence. The dash after “Bahrain” pairs with the dash after “Asia” to separate the supplementary element “a country in Western Asia” from the rest of the sentence.\n\nChoice B is incorrect because a comma can’t be paired with a dash in this way to separate the supplementary element from the rest of the sentence. Choice C is incorrect because it fails to use appropriate punctuation to separate the supplementary element from the rest of the sentence. Choice D is incorrect because a colon can’t be paired with a dash in this way to separate the supplementary element from the rest of the sentence.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            18
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            35,
+            36
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "A": "Choice A is the best answer. The convention being tested is the punctuation of a supplementary element within a sentence. The dash after “Bahrain” pairs with the dash after “Asia” to separate the supplementary element “a country in Western Asia” from the rest of the sentence.",
+        "B": "Choice B is incorrect because a comma can’t be paired with a dash in this way to separate the supplementary element from the rest of the sentence.",
+        "C": "Choice C is incorrect because it fails to use appropriate punctuation to separate the supplementary element from the rest of the sentence.",
+        "D": "Choice D is incorrect because a colon can’t be paired with a dash in this way to separate the supplementary element from the rest of the sentence."
+      }
+    },
+    {
+      "id": "c4e54735",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Researchers Amit Kumar and Nicholas Epley investigated how ______ In a series of experiments conducted in 2022, they found that people performing small acts of kindness underestimated the positive effect their actions had on others."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "do people perceive acts of kindness."
+        },
+        {
+          "id": "B",
+          "text": "do people perceive acts of kindness?"
+        },
+        {
+          "id": "C",
+          "text": "people perceive acts of kindness?"
+        },
+        {
+          "id": "D",
+          "text": "people perceive acts of kindness."
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "Choice D is the best answer. The convention being tested is end-of-sentence punctuation. This choice correctly uses a period to punctuate a declarative sentence that asks an indirect question (\"Researchers Amit Kumar and Nicholas Epley investigated how people perceive acts of kindness\").\n\nChoice A is incorrect. The structure of the sentence requires a declarative clause at the end of the sentence that states what Kumar and Epley did, not an interrogative clause that asks a direct question, such as \"how do people perceive acts of kindness.\" Choice B is incorrect. The structure of the sentence requires a declarative clause at the end of the sentence that states what Kumar and Epley did, not an interrogative clause that asks a direct question, such as \"how do people perceive acts of kindness?\" Choice C is incorrect. It’s unconventional to use a question mark in this way to punctuate a declarative sentence that asks an indirect question, such as \"Researchers…kindness.\"",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            18,
+            19
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            36,
+            37
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "D": "Choice D is the best answer. The convention being tested is end-of-sentence punctuation. This choice correctly uses a period to punctuate a declarative sentence that asks an indirect question (\"Researchers Amit Kumar and Nicholas Epley investigated how people perceive acts of kindness\").",
+        "A": "Choice A is incorrect. The structure of the sentence requires a declarative clause at the end of the sentence that states what Kumar and Epley did, not an interrogative clause that asks a direct question, such as \"how do people perceive acts of kindness.\"",
+        "B": "Choice B is incorrect. The structure of the sentence requires a declarative clause at the end of the sentence that states what Kumar and Epley did, not an interrogative clause that asks a direct question, such as \"how do people perceive acts of kindness?\"",
+        "C": "Choice C is incorrect. It’s unconventional to use a question mark in this way to punctuate a declarative sentence that asks an indirect question, such as \"Researchers…kindness.\""
+      }
+    },
+    {
+      "id": "082574fc",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The life spans of rockfish vary greatly by species. For instance, the colorful calico rockfish (Sebastes dalli) can survive for a little over a ______ the rougheye rockfish (Sebastes aleutianus) boasts a maximum life span of about two centuries."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "decade: while"
+        },
+        {
+          "id": "B",
+          "text": "decade. While"
+        },
+        {
+          "id": "C",
+          "text": "decade; while"
+        },
+        {
+          "id": "D",
+          "text": "decade, while"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "Choice D is the best answer. The convention being tested is punctuation between a main clause and a subordinate clause. This choice correctly uses a comma to mark the boundary between the main clause (“the colorful…decade”) and the subordinate clause (“while…centuries”) that provides contrasting information about the life span of rougheye rockfish.\n\nChoice A is incorrect because a colon can’t be used in this way to join a main clause and a subordinate clause. Choice B is incorrect because it results in a rhetorically unacceptable sentence fragment beginning with “while.” Choice C is incorrect because a semicolon can’t be used in this way to join a main clause and a subordinate clause.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            19
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            37,
+            38
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "D": "Choice D is the best answer. The convention being tested is punctuation between a main clause and a subordinate clause. This choice correctly uses a comma to mark the boundary between the main clause (“the colorful…decade”) and the subordinate clause (“while…centuries”) that provides contrasting information about the life span of rougheye rockfish.",
+        "A": "Choice A is incorrect because a colon can’t be used in this way to join a main clause and a subordinate clause.",
+        "B": "Choice B is incorrect because it results in a rhetorically unacceptable sentence fragment beginning with “while.”",
+        "C": "Choice C is incorrect because a semicolon can’t be used in this way to join a main clause and a subordinate clause."
+      }
+    },
+    {
+      "id": "27260414",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "According to the University of Hawaiʻi at Mānoa, aloha ʻāina is “a recognition, commitment, and practice sustaining the ea—or life breath” between the Hawaiian people and their natural environments. The concept has been proudly embodied ______ Native Hawaiians for generations, contributing to the lush flora and renowned beauty of the islands."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "by;"
+        },
+        {
+          "id": "B",
+          "text": "by:"
+        },
+        {
+          "id": "C",
+          "text": "by,"
+        },
+        {
+          "id": "D",
+          "text": "by"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "Choice D is the best answer. The convention being tested is punctuation use between a preposition and its complement. No punctuation is needed between the preposition \"by\" and its complement \"Native Hawaiians.\" The complement completes the meaning of the preposition in the phrase \"proudly embodied by Native Hawaiians,\" and any punctuation within it results in an ungrammatical sentence.\n\nChoice A is incorrect because no punctuation is needed between the preposition and its complement. Choice B is incorrect because no punctuation is needed between the preposition and its complement. Choice C is incorrect because no punctuation is needed between the preposition and its complement.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            19,
+            20
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            38,
+            39
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "D": "Choice D is the best answer. The convention being tested is punctuation use between a preposition and its complement. No punctuation is needed between the preposition \"by\" and its complement \"Native Hawaiians.\" The complement completes the meaning of the preposition in the phrase \"proudly embodied by Native Hawaiians,\" and any punctuation within it results in an ungrammatical sentence.",
+        "A": "Choice A is incorrect because no punctuation is needed between the preposition and its complement.",
+        "B": "Choice B is incorrect because no punctuation is needed between the preposition and its complement.",
+        "C": "Choice C is incorrect because no punctuation is needed between the preposition and its complement."
+      }
+    },
+    {
+      "id": "26b716e8",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Emperor Ashoka ruled the Maurya Empire in South Asia from roughly 270 to 232 BCE. He is known for enforcing a moral code called the Law of Piety, which established the sanctity of animal ______ the just treatment of the elderly, and the abolition of the slave trade."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "life"
+        },
+        {
+          "id": "B",
+          "text": "life;"
+        },
+        {
+          "id": "C",
+          "text": "life:"
+        },
+        {
+          "id": "D",
+          "text": "life,"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "Choice D is the best answer. Notice that \"the sanctity of animal life\" is the first item in a list of three things. We must use a comma to separate the first two items in the list, just as a comma is used to separate \"the just treatment of the elderly\" and \"the abolition of the slave trade.\"\n\nChoice A is incorrect. This choice creates a punctuation error. Notice that \"the sanctity of animal life\" is the first item in a list of three things. To appropriately format the list, we need punctuation to separate each item. Choice B is incorrect. This choice creates a punctuation error. Notice that \"the sanctity of animal life\" is the first item in a list of three things. While semicolons are sometimes used to separate list items, this list uses commas to separate the other list items, and lists must use the same punctuation throughout. Choice C is incorrect. This choice creates a punctuation error. Notice that \"the sanctity of animal life\" is the first item in a list of three things. While colons can be used to introduce lists, they can’t be used to separate items within a list.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            20
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            39,
+            40
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "D": "Choice D is the best answer. Notice that \"the sanctity of animal life\" is the first item in a list of three things. We must use a comma to separate the first two items in the list, just as a comma is used to separate \"the just treatment of the elderly\" and \"the abolition of the slave trade.\"",
+        "A": "Choice A is incorrect. This choice creates a punctuation error. Notice that \"the sanctity of animal life\" is the first item in a list of three things. To appropriately format the list, we need punctuation to separate each item.",
+        "B": "Choice B is incorrect. This choice creates a punctuation error. Notice that \"the sanctity of animal life\" is the first item in a list of three things. While semicolons are sometimes used to separate list items, this list uses commas to separate the other list items, and lists must use the same punctuation throughout.",
+        "C": "Choice C is incorrect. This choice creates a punctuation error. Notice that \"the sanctity of animal life\" is the first item in a list of three things. While colons can be used to introduce lists, they can’t be used to separate items within a list."
+      }
+    },
+    {
+      "id": "6378f094",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Emperor penguins don’t waddle out of the ocean. They launch themselves at such a high speed that they travel up to two meters before landing. How ______ A layer of microbubbles on their plumage reduces friction as the penguins speed to the surface."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "they are able to move so fast!"
+        },
+        {
+          "id": "B",
+          "text": "are they able to move so fast."
+        },
+        {
+          "id": "C",
+          "text": "they are able to move so fast."
+        },
+        {
+          "id": "D",
+          "text": "are they able to move so fast?"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "Choice D is the best answer. The convention being tested is end-of-sentence punctuation. This choice correctly uses a question mark to punctuate the interrogative sentence “how are they able to move so fast?” The interrogative sentence asks a direct question, and the next sentence answers it.\n\nChoice A is incorrect because the context requires an interrogative sentence. The exclamative sentence “how they are able to move so fast!” emphasizes the penguin’s high rate of speed, but it doesn’t set up the next sentence’s explanation of how the penguins achieve such speeds. Choice B is incorrect because a period can’t be used in this way to punctuate an interrogative sentence. Choice C is incorrect because the context requires an interrogative sentence. The exclamative sentence “how they are able to move so fast” emphasizes the penguin’s high rate of speed, but it doesn’t set up the next sentence’s explanation of how the penguins achieve such speeds.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            20,
+            21
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            40,
+            41
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "D": "Choice D is the best answer. The convention being tested is end-of-sentence punctuation. This choice correctly uses a question mark to punctuate the interrogative sentence “how are they able to move so fast?” The interrogative sentence asks a direct question, and the next sentence answers it.",
+        "A": "Choice A is incorrect because the context requires an interrogative sentence. The exclamative sentence “how they are able to move so fast!” emphasizes the penguin’s high rate of speed, but it doesn’t set up the next sentence’s explanation of how the penguins achieve such speeds.",
+        "B": "Choice B is incorrect because a period can’t be used in this way to punctuate an interrogative sentence.",
+        "C": "Choice C is incorrect because the context requires an interrogative sentence. The exclamative sentence “how they are able to move so fast” emphasizes the penguin’s high rate of speed, but it doesn’t set up the next sentence’s explanation of how the penguins achieve such speeds."
+      }
+    },
+    {
+      "id": "c18d995f",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The Alvarez theory, developed in 1980 by physicist Luis Walter Alvarez and his geologist son Walter Alvarez, maintained that the secondary effects of an asteroid impact caused many dinosaurs and other animals to die ______ it left unexplored the question of whether unrelated volcanic activity might have also contributed to the mass extinctions."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "out but"
+        },
+        {
+          "id": "B",
+          "text": "out, but"
+        },
+        {
+          "id": "C",
+          "text": "out"
+        },
+        {
+          "id": "D",
+          "text": "out,"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Choice B is the best answer. The convention being tested is the coordination of main clauses within a sentence. This choice correctly uses a comma and the coordinating conjunction “but” to join the first main clause (“the Alvarez…out”) and the second main clause (“it left…extinctions”).\n\nChoice A is incorrect because when coordinating two longer main clauses such as these, it’s conventional to use a comma before the coordinating conjunction. Choice C is incorrect because it results in a run-on sentence. The two main clauses are fused without punctuation and/or a conjunction. Choice D is incorrect because it results in a comma splice. Without a conjunction following it, a comma can’t be used in this way to join two main clauses.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            21
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            41,
+            42
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "B": "Choice B is the best answer. The convention being tested is the coordination of main clauses within a sentence. This choice correctly uses a comma and the coordinating conjunction “but” to join the first main clause (“the Alvarez…out”) and the second main clause (“it left…extinctions”).",
+        "A": "Choice A is incorrect because when coordinating two longer main clauses such as these, it’s conventional to use a comma before the coordinating conjunction.",
+        "C": "Choice C is incorrect because it results in a run-on sentence. The two main clauses are fused without punctuation and/or a conjunction.",
+        "D": "Choice D is incorrect because it results in a comma splice. Without a conjunction following it, a comma can’t be used in this way to join two main clauses."
+      }
+    },
+    {
+      "id": "47e67c42",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Polyphenols are organic compounds ______ among their many roles, provide pigment that helps protect plants against ultraviolet radiation from sunlight."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "that—"
+        },
+        {
+          "id": "B",
+          "text": "that;"
+        },
+        {
+          "id": "C",
+          "text": "that,"
+        },
+        {
+          "id": "D",
+          "text": "that:"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Choice C is the best answer. The convention being tested is the punctuation of a supplementary element within a sentence. The comma after “that” pairs with the comma after “roles” to separate the supplementary element “among their many roles” from the rest of the sentence. This supplementary element functions to clarify that polyphenols have many roles, and the pair of commas indicates that this element could be removed without affecting the grammatical coherence of the sentence.\n\nChoice A is incorrect because a dash can’t be paired with a comma to separate the supplementary element from the rest of the sentence. Choice B is incorrect because a semicolon can’t be paired with a comma to separate the supplementary element from the rest of the sentence. Choice D is incorrect because a colon can’t be paired with a comma to separate the supplementary element from the rest of the sentence.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            21,
+            22
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            42,
+            43
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "C": "Choice C is the best answer. The convention being tested is the punctuation of a supplementary element within a sentence. The comma after “that” pairs with the comma after “roles” to separate the supplementary element “among their many roles” from the rest of the sentence. This supplementary element functions to clarify that polyphenols have many roles, and the pair of commas indicates that this element could be removed without affecting the grammatical coherence of the sentence.",
+        "A": "Choice A is incorrect because a dash can’t be paired with a comma to separate the supplementary element from the rest of the sentence.",
+        "B": "Choice B is incorrect because a semicolon can’t be paired with a comma to separate the supplementary element from the rest of the sentence.",
+        "D": "Choice D is incorrect because a colon can’t be paired with a comma to separate the supplementary element from the rest of the sentence."
+      }
+    },
+    {
+      "id": "d1145534",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Generations of mystery and horror ______ have been influenced by the dark, gothic stories of celebrated American author Edgar Allan Poe (1809–1849)."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "writers"
+        },
+        {
+          "id": "B",
+          "text": "writers,"
+        },
+        {
+          "id": "C",
+          "text": "writers—"
+        },
+        {
+          "id": "D",
+          "text": "writers;"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "Choice A is the best answer. The convention being tested is punctuation between a subject and a verb. When, as in this case, a subject (“Generations of mystery and horror writers”) is immediately followed by a verb (“have been influenced”), no punctuation is needed.\n\nChoice B is incorrect because no punctuation is needed between the subject and the verb. Choice C is incorrect because no punctuation is needed between the subject and the verb. Choice D is incorrect because no punctuation is needed between the subject and the verb.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            22
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            43,
+            44
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "A": "Choice A is the best answer. The convention being tested is punctuation between a subject and a verb. When, as in this case, a subject (“Generations of mystery and horror writers”) is immediately followed by a verb (“have been influenced”), no punctuation is needed.",
+        "B": "Choice B is incorrect because no punctuation is needed between the subject and the verb.",
+        "C": "Choice C is incorrect because no punctuation is needed between the subject and the verb.",
+        "D": "Choice D is incorrect because no punctuation is needed between the subject and the verb."
+      }
+    },
+    {
+      "id": "62e50f59",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "A standard Argo float, a type of autonomous robot, measures temperature and salinity in the upper regions of ice-free oceans. More advanced floats can measure a wider range of ______ and monitor seasonal ice zones."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "variables: travel to greater depths"
+        },
+        {
+          "id": "B",
+          "text": "variables, travel to greater depths,"
+        },
+        {
+          "id": "C",
+          "text": "variables travel to greater depths,"
+        },
+        {
+          "id": "D",
+          "text": "variables, travel to greater depths;"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Choice B is the best answer. The convention being tested is the punctuation of items in a series. The comma after “variables” is used conventionally to separate the first and second items in the series, and the comma after “depths” is used conventionally to separate the second and third items.\n\nChoice A is incorrect because a colon can’t be used in this way to separate items in a simple series. Choice C is incorrect because a comma is needed after “variables” to separate the first and second items in the series. Choice D is incorrect because a semicolon can’t be used in this way to separate items in a simple series.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            22,
+            23
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            44,
+            45
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "B": "Choice B is the best answer. The convention being tested is the punctuation of items in a series. The comma after “variables” is used conventionally to separate the first and second items in the series, and the comma after “depths” is used conventionally to separate the second and third items.",
+        "A": "Choice A is incorrect because a colon can’t be used in this way to separate items in a simple series.",
+        "C": "Choice C is incorrect because a comma is needed after “variables” to separate the first and second items in the series.",
+        "D": "Choice D is incorrect because a semicolon can’t be used in this way to separate items in a simple series."
+      }
+    },
+    {
+      "id": "678404ae",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The intense pressure found in the deep ocean can affect the structure of proteins in fish’s cells, distorting the proteins’ shape. The chemical trimethylamine N-oxide (TMAO) counters this effect, ensuring that proteins retain their original ______ is found in high concentrations in the cells of the deepest-dwelling fish."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "configurations. TMAO"
+        },
+        {
+          "id": "B",
+          "text": "configurations TMAO"
+        },
+        {
+          "id": "C",
+          "text": "configurations, TMAO"
+        },
+        {
+          "id": "D",
+          "text": "configurations and TMAO"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "Choice A is the best answer. The convention being tested is punctuation use between sentences. In this choice, the period after “configurations” is used correctly to mark the boundary between one sentence (“The intense… configurations”) and another (“TMAO…fish”). The supplementary phrase (“ensuring…configurations”) modifies the main clause of the first sentence (“The chemical…effect”), and “TMAO” is the subject of the second sentence.\n\nChoice B is incorrect because it results in a run-on sentence. The sentences (“The intense…configurations” and “TMAO… fish”) are fused without punctuation and/or a conjunction. Choice C is incorrect because it results in a comma splice. A comma can’t be used in this way to mark the boundary between sentences. Choice D is incorrect. Without a comma preceding it, the conjunction “and” can’t be used in this way to join sentences.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            23
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            45,
+            46
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "A": "Choice A is the best answer. The convention being tested is punctuation use between sentences. In this choice, the period after “configurations” is used correctly to mark the boundary between one sentence (“The intense… configurations”) and another (“TMAO…fish”). The supplementary phrase (“ensuring…configurations”) modifies the main clause of the first sentence (“The chemical…effect”), and “TMAO” is the subject of the second sentence.",
+        "B": "Choice B is incorrect because it results in a run-on sentence. The sentences (“The intense…configurations” and “TMAO… fish”) are fused without punctuation and/or a conjunction.",
+        "C": "Choice C is incorrect because it results in a comma splice. A comma can’t be used in this way to mark the boundary between sentences.",
+        "D": "Choice D is incorrect. Without a comma preceding it, the conjunction “and” can’t be used in this way to join sentences."
+      }
+    },
+    {
+      "id": "dd53fb5c",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Both Sona Charaipotra, an Indian American, and Dhonielle Clayton, an African American, grew up frustrated by the lack of diverse characters in books for young people. In 2011, these two writers joined forces to found CAKE Literary, a book packaging ______ specializes in the creation and promotion of stories told from diverse perspectives for children and young adults."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "company,"
+        },
+        {
+          "id": "B",
+          "text": "company that"
+        },
+        {
+          "id": "C",
+          "text": "company"
+        },
+        {
+          "id": "D",
+          "text": "company, that"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Choice B is the best answer. The convention being tested is the use and punctuation of an integrated relative clause. This choice correctly uses the relative pronoun “that” and no punctuation to create an integrated relative clause that provides essential information about the noun phrase (“a book packaging company”) that it modifies.\n\nChoice A is incorrect because it doesn’t use a relative pronoun to link the verb phrase beginning with “specializes” to the noun phrase that it modifies (“a book packaging company”). Choice C is incorrect because it doesn’t use a relative pronoun to link the verb phrase beginning with “specializes” to the noun phrase that it modifies (“a book packaging company”). Choice D is incorrect because no punctuation is needed between the integrated relative clause beginning with “that specializes” and the noun phrase that it modifies (“a book packaging company”).",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            23,
+            24
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            46,
+            47
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "B": "Choice B is the best answer. The convention being tested is the use and punctuation of an integrated relative clause. This choice correctly uses the relative pronoun “that” and no punctuation to create an integrated relative clause that provides essential information about the noun phrase (“a book packaging company”) that it modifies.",
+        "A": "Choice A is incorrect because it doesn’t use a relative pronoun to link the verb phrase beginning with “specializes” to the noun phrase that it modifies (“a book packaging company”).",
+        "C": "Choice C is incorrect because it doesn’t use a relative pronoun to link the verb phrase beginning with “specializes” to the noun phrase that it modifies (“a book packaging company”).",
+        "D": "Choice D is incorrect because no punctuation is needed between the integrated relative clause beginning with “that specializes” and the noun phrase that it modifies (“a book packaging company”)."
+      }
+    },
+    {
+      "id": "83868036",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The short story “Rogue Enchantments” by Isabel Ibañez appears in Reclaim the ______ anthology of fantasy and science fiction written by authors of Latin American descent."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Stars. An"
+        },
+        {
+          "id": "B",
+          "text": "Stars, while an"
+        },
+        {
+          "id": "C",
+          "text": "Stars an"
+        },
+        {
+          "id": "D",
+          "text": "Stars, an"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "Choice D is the best answer. The convention being tested is the use of punctuation within a sentence. This choice correctly uses a comma to mark the boundary between the main clause (\"The short...Stars\") and the supplementary element (\"an anthology...descent\") that provides additional information about what Reclaim the Stars is.\n\nChoice A is incorrect because it results in a rhetorically unacceptable sentence fragment beginning with \"an anthology.\" Choice B is incorrect. Joining the main clause and the following supplementary element with the conjunction \"while\" results in a confusing and ungrammatical sentence. Choice C is incorrect because it fails to mark the boundary between the main clause and the supplementary element with appropriate punctuation.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            24
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            47,
+            48
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "D": "Choice D is the best answer. The convention being tested is the use of punctuation within a sentence. This choice correctly uses a comma to mark the boundary between the main clause (\"The short...Stars\") and the supplementary element (\"an anthology...descent\") that provides additional information about what Reclaim the Stars is.",
+        "A": "Choice A is incorrect because it results in a rhetorically unacceptable sentence fragment beginning with \"an anthology.\"",
+        "B": "Choice B is incorrect. Joining the main clause and the following supplementary element with the conjunction \"while\" results in a confusing and ungrammatical sentence.",
+        "C": "Choice C is incorrect because it fails to mark the boundary between the main clause and the supplementary element with appropriate punctuation."
+      }
+    },
+    {
+      "id": "2e1e5d09",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In 2009, researchers determined that pottery fragments from a cave in China were close to 18,000 years old. These are some of the oldest ______ of pottery ever found."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "pieces:"
+        },
+        {
+          "id": "B",
+          "text": "pieces,"
+        },
+        {
+          "id": "C",
+          "text": "pieces"
+        },
+        {
+          "id": "D",
+          "text": "pieces—"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Choice C is the best answer. The convention being tested is punctuation use between a noun and a prepositional phrase. No punctuation is needed between the noun \"pieces\" and the prepositional phrase \"of pottery.\" The prepositional phrase provides essential information about what kind of pieces were found, so it shouldn’t be separated from the rest of the noun phrase (\"some of the oldest pieces\") with punctuation.\n\nChoice A is incorrect because no punctuation is needed between the noun phrase \"some of the oldest pieces\" and the prepositional phrase \"of pottery.\" Choice B is incorrect because no punctuation is needed between the noun phrase \"some of the oldest pieces\" and the prepositional phrase \"of pottery.\" Choice D is incorrect because no punctuation is needed between the noun phrase \"some of the oldest pieces\" and the prepositional phrase \"of pottery.\"",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            24,
+            25
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            48,
+            49
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "C": "Choice C is the best answer. The convention being tested is punctuation use between a noun and a prepositional phrase. No punctuation is needed between the noun \"pieces\" and the prepositional phrase \"of pottery.\" The prepositional phrase provides essential information about what kind of pieces were found, so it shouldn’t be separated from the rest of the noun phrase (\"some of the oldest pieces\") with punctuation.",
+        "A": "Choice A is incorrect because no punctuation is needed between the noun phrase \"some of the oldest pieces\" and the prepositional phrase \"of pottery.\"",
+        "B": "Choice B is incorrect because no punctuation is needed between the noun phrase \"some of the oldest pieces\" and the prepositional phrase \"of pottery.\"",
+        "D": "Choice D is incorrect because no punctuation is needed between the noun phrase \"some of the oldest pieces\" and the prepositional phrase \"of pottery.\""
+      }
+    },
+    {
+      "id": "7399839f",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "After the printing press was introduced in 1440, handwritten manuscripts from Europe’s medieval period were often destroyed and the paper used for other purposes. In one instance, pages ______ a collection of Norse tales dating to 1270 were discovered lining a bishop’s miter (hat)."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "from:"
+        },
+        {
+          "id": "B",
+          "text": "from,"
+        },
+        {
+          "id": "C",
+          "text": "from"
+        },
+        {
+          "id": "D",
+          "text": "from—"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Choice C is the best answer. The word “from” introduces a prepositional phrase that modifies the noun “pages” and provides essential information about their origin. No additional punctuation is needed after “from” in this context.\n\nChoice A is incorrect. This choice results in a punctuation error, illogically separating the preposition “from” from the rest of the prepositional phrase with a colon. Also, a colon can only follow an independent clause, but what comes before the blank could not stand on its own as a complete sentence. Choice B is incorrect. This choice results in a punctuation error, illogically separating the preposition “from” from the rest of the prepositional phrase with a comma. Choice D is incorrect. This choice results in a punctuation error, illogically separating the preposition “from” from the rest of the prepositional phrase with a dash.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            25
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            49,
+            50
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "C": "Choice C is the best answer. The word “from” introduces a prepositional phrase that modifies the noun “pages” and provides essential information about their origin. No additional punctuation is needed after “from” in this context.",
+        "A": "Choice A is incorrect. This choice results in a punctuation error, illogically separating the preposition “from” from the rest of the prepositional phrase with a colon. Also, a colon can only follow an independent clause, but what comes before the blank could not stand on its own as a complete sentence.",
+        "B": "Choice B is incorrect. This choice results in a punctuation error, illogically separating the preposition “from” from the rest of the prepositional phrase with a comma.",
+        "D": "Choice D is incorrect. This choice results in a punctuation error, illogically separating the preposition “from” from the rest of the prepositional phrase with a dash."
+      }
+    },
+    {
+      "id": "4439e901",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Robin Wall Kimmerer of the Citizen Potawatomi Nation is a bryologist, a plant scientist who specializes in mosses. To Kimmerer, mosses are Earth’s most adaptable plants: they can clone ______ enter a dormant state in times of drought, and grow in areas that don’t have soil."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "themselves;"
+        },
+        {
+          "id": "B",
+          "text": "themselves,"
+        },
+        {
+          "id": "C",
+          "text": "themselves. And"
+        },
+        {
+          "id": "D",
+          "text": "themselves"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Choice B is the best answer. The convention being tested is the punctuation of items in a series. The comma after “themselves” is used conventionally to separate the first item (“they can clone themselves”) and the second item (“enter a dormant state in times of drought”) in the series of things mosses can do.\n\nChoice A is incorrect because a semicolon can’t be used in this way to separate items in a simple series such as this. Choice C is incorrect because it results in a rhetorically unacceptable sentence fragment beginning with “And enter.” Choice D is incorrect because it fails to use appropriate punctuation to separate the first and second items in the series.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            25,
+            26
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            50,
+            51
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "B": "Choice B is the best answer. The convention being tested is the punctuation of items in a series. The comma after “themselves” is used conventionally to separate the first item (“they can clone themselves”) and the second item (“enter a dormant state in times of drought”) in the series of things mosses can do.",
+        "A": "Choice A is incorrect because a semicolon can’t be used in this way to separate items in a simple series such as this.",
+        "C": "Choice C is incorrect because it results in a rhetorically unacceptable sentence fragment beginning with “And enter.”",
+        "D": "Choice D is incorrect because it fails to use appropriate punctuation to separate the first and second items in the series."
+      }
+    },
+    {
+      "id": "ad00132a",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "boundaries",
+      "difficulty": "Easy",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Winding through the ice atop Norway’s Jotunheim Mountains is the Lendbreen pass, an ancient route that was used by hunters, farmers, traders, and travelers in the Middle Ages before eventually falling into disuse. Recently, archeologists have ______ knives, horseshoes, wool tunics, and thousands of other artifacts from the icy pass."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "unearthed:"
+        },
+        {
+          "id": "B",
+          "text": "unearthed,"
+        },
+        {
+          "id": "C",
+          "text": "unearthed—"
+        },
+        {
+          "id": "D",
+          "text": "unearthed"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "Choice D is the best answer. No punctuation should separate the verb \"unearthed\" and its objects (i.e, what was \"unearthed\"): \"knives, horseshoes, wool tunics, and thousands of other artifacts.\"\n\nChoice A is incorrect. This choice creates a punctuation error, separating the verb \"unearthed\" from its objects (i.e, what was \"unearthed\") with a colon. Choice B is incorrect. This choice creates a punctuation error, separating the verb \"unearthed\" from its objects (i.e, what was \"unearthed\") with a comma. Choice C is incorrect. This choice creates a punctuation error, separating the verb \"unearthed\" from its objects (i.e, what was \"unearthed\") with a dash.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51.pdf",
+          "sha256": "6e1b9a87f147d15338e82ee01228a674cfccb456668804eb97949c12eed136a9",
+          "pages": [
+            26,
+            27
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/boundaries/Easy-boundaries-51-with answers and explanations.pdf",
+          "sha256": "56f86f4929b8e9037e290c2bfa313f2a844480f7be1c402464aa51fec3c1bd2d",
+          "pages": [
+            51,
+            52
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "D": "Choice D is the best answer. No punctuation should separate the verb \"unearthed\" and its objects (i.e, what was \"unearthed\"): \"knives, horseshoes, wool tunics, and thousands of other artifacts.\"",
+        "A": "Choice A is incorrect. This choice creates a punctuation error, separating the verb \"unearthed\" from its objects (i.e, what was \"unearthed\") with a colon.",
+        "B": "Choice B is incorrect. This choice creates a punctuation error, separating the verb \"unearthed\" from its objects (i.e, what was \"unearthed\") with a comma.",
+        "C": "Choice C is incorrect. This choice creates a punctuation error, separating the verb \"unearthed\" from its objects (i.e, what was \"unearthed\") with a dash."
+      }
+    }
+  ]
+}

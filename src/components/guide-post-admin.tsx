@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from "react";
 import {
   createGuideBlock,
   GuideBlockType,
@@ -10,6 +10,8 @@ import {
 } from "@/lib/guide/posts";
 import { uploadAdminImage } from "@/lib/admin/upload-image";
 import { supabase } from "@/lib/supabase/client";
+import { uploadAdminAudio } from "@/lib/admin/upload-audio";
+import { uploadAdminVideo } from "@/lib/admin/upload-video";
 
 type GuidePostAdminProps = {
   adminUserId: string;
@@ -21,6 +23,7 @@ type AdminGuidePostRow = GuidePostRow & {
 };
 
 type GuideDraft = {
+  author: string;
   blocks: GuideContentBlock[];
   excerpt: string;
   id: string | null;
@@ -36,7 +39,20 @@ type TextCursorTarget = {
   selectionStart: number;
 };
 
+type MediaDialogKind = "audio" | "image" | "link" | "video";
+
+type MediaDialogState = {
+  caption: string;
+  file: File | null;
+  kind: MediaDialogKind;
+  text: string;
+  url: string;
+};
+
+type EditorSnapshot = Pick<GuideDraft, "author" | "blocks" | "excerpt" | "title">;
+
 const EMPTY_DRAFT: GuideDraft = {
+  author: "",
   blocks: [createGuideBlock()],
   excerpt: "",
   id: null,
@@ -47,6 +63,7 @@ const EMPTY_DRAFT: GuideDraft = {
 };
 
 const BLOCK_LABELS: Record<GuideBlockType, string> = {
+  audio: "音频",
   heading: "小标题",
   image: "图片",
   link: "链接",
@@ -65,6 +82,7 @@ function rowToDraft(row: AdminGuidePostRow): GuideDraft {
   const post = parseGuidePostRow(row);
 
   return {
+    author: post.author ?? "",
     blocks: post.blocks.map((block) => ({ ...block })),
     excerpt: post.excerpt,
     id: row.id,
@@ -83,6 +101,91 @@ function firstImage(blocks: GuideContentBlock[]) {
   return blocks.find((block) => block.type === "image" && block.url)?.url ?? null;
 }
 
+const EDITOR_FONT_FAMILIES: Record<GuideContentBlock["fontFamily"], string> = {
+  georgia: 'Georgia, "Times New Roman", serif',
+  kaiti: '"KaiTi", "STKaiti", serif',
+  sans: "Arial, sans-serif",
+  serif: '"Songti SC", "SimSun", serif',
+};
+
+const EDITOR_FONT_COMMANDS: Record<GuideContentBlock["fontFamily"], string> = {
+  georgia: "Georgia",
+  kaiti: "KaiTi",
+  sans: "Arial",
+  serif: "SimSun",
+};
+
+function editorBlockStyle(block: GuideContentBlock) {
+  return {
+    backgroundColor: block.backgroundColor || undefined,
+    color: block.color || undefined,
+    fontFamily: EDITOR_FONT_FAMILIES[block.fontFamily],
+    fontSize: `${block.fontSize}px`,
+    fontStyle: block.italic ? "italic" : undefined,
+    fontWeight: block.bold ? 800 : undefined,
+    textAlign: block.align,
+    textDecoration:
+      [block.underline ? "underline" : "", block.strike ? "line-through" : ""]
+        .filter(Boolean)
+        .join(" ") || undefined,
+  };
+}
+
+function escapeEditorHtml(value: string) {
+  if (typeof document === "undefined") {
+    return value;
+  }
+
+  const container = document.createElement("div");
+  container.textContent = value;
+  return container.innerHTML;
+}
+
+function editorHtml(block: GuideContentBlock) {
+  return block.html || escapeEditorHtml(block.text);
+}
+
+function textOffsetInElement(element: HTMLElement, node: Node, offset: number) {
+  const range = document.createRange();
+  range.selectNodeContents(element);
+  range.setEnd(node, offset);
+  return range.toString().length;
+}
+
+function pointAtTextOffset(element: HTMLElement, requestedOffset: number) {
+  const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
+  let node = walker.nextNode();
+  let consumed = 0;
+
+  while (node) {
+    const length = node.textContent?.length ?? 0;
+    if (requestedOffset <= consumed + length) {
+      return { node, offset: Math.max(0, requestedOffset - consumed) };
+    }
+    consumed += length;
+    node = walker.nextNode();
+  }
+
+  return { node: element, offset: element.childNodes.length };
+}
+
+function splitEditorHtml(html: string, offset: number) {
+  const root = document.createElement("div");
+  root.innerHTML = html;
+  const point = pointAtTextOffset(root, Math.max(0, offset));
+  const beforeRange = document.createRange();
+  beforeRange.selectNodeContents(root);
+  beforeRange.setEnd(point.node, point.offset);
+  const afterRange = document.createRange();
+  afterRange.selectNodeContents(root);
+  afterRange.setStart(point.node, point.offset);
+  const before = document.createElement("div");
+  before.appendChild(beforeRange.cloneContents());
+  const after = document.createElement("div");
+  after.appendChild(afterRange.cloneContents());
+  return { after: after.innerHTML, before: before.innerHTML };
+}
+
 export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
   const [draft, setDraft] = useState<GuideDraft>(createEmptyDraft);
   const [isLoading, setIsLoading] = useState(true);
@@ -91,6 +194,12 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
   const [rows, setRows] = useState<AdminGuidePostRow[]>([]);
   const [uploadingBlockId, setUploadingBlockId] = useState<string | null>(null);
   const [textCursorTarget, setTextCursorTarget] = useState<TextCursorTarget | null>(null);
+  const [activeBlockId, setActiveBlockId] = useState<string | null>(null);
+  const [mediaDialog, setMediaDialog] = useState<MediaDialogState | null>(null);
+  const editableRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const historyRef = useRef<EditorSnapshot[]>([]);
+  const futureRef = useRef<EditorSnapshot[]>([]);
+  const [, refreshHistory] = useState(0);
 
   useEffect(() => {
     void loadPosts();
@@ -126,10 +235,32 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
 
   function startNewPost() {
     setDraft(createEmptyDraft());
+    setActiveBlockId(null);
+    historyRef.current = [];
+    futureRef.current = [];
+    refreshHistory((value) => value + 1);
     setMessage("");
   }
 
-  function updateBlock(blockId: string, patch: Partial<GuideContentBlock>) {
+  function snapshot(current: GuideDraft): EditorSnapshot {
+    return {
+      author: current.author,
+      blocks: current.blocks.map((block) => ({ ...block })),
+      excerpt: current.excerpt,
+      title: current.title,
+    };
+  }
+
+  function updateBlock(
+    blockId: string,
+    patch: Partial<GuideContentBlock>,
+    recordHistory = false,
+  ) {
+    if (recordHistory) {
+      historyRef.current = [...historyRef.current, snapshot(draft)].slice(-50);
+      futureRef.current = [];
+      refreshHistory((value) => value + 1);
+    }
     setDraft((current) => ({
       ...current,
       blocks: current.blocks.map((block) =>
@@ -139,12 +270,69 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
     setMessage("");
   }
 
-  function rememberTextCursor(blockId: string, textarea: HTMLTextAreaElement) {
+  function rememberTextCursor(blockId: string, element: HTMLElement) {
+    const selection = window.getSelection();
+    if (!selection?.rangeCount) {
+      return;
+    }
+
+    const range = selection.getRangeAt(0);
+    if (!element.contains(range.startContainer) || !element.contains(range.endContainer)) {
+      return;
+    }
+
+    setActiveBlockId(blockId);
     setTextCursorTarget({
       blockId,
-      selectionEnd: textarea.selectionEnd,
-      selectionStart: textarea.selectionStart,
+      selectionEnd: textOffsetInElement(element, range.endContainer, range.endOffset),
+      selectionStart: textOffsetInElement(element, range.startContainer, range.startOffset),
     });
+  }
+
+  function restoreTextSelection(blockId: string) {
+    const target = textCursorTarget;
+    const element = editableRefs.current[blockId];
+    if (!element || !target || target.blockId !== blockId) {
+      return false;
+    }
+
+    const selection = window.getSelection();
+    if (!selection) {
+      return false;
+    }
+
+    const start = pointAtTextOffset(element, target.selectionStart);
+    const end = pointAtTextOffset(element, target.selectionEnd);
+    const range = document.createRange();
+    range.setStart(start.node, start.offset);
+    range.setEnd(end.node, end.offset);
+    selection.removeAllRanges();
+    selection.addRange(range);
+    return true;
+  }
+
+  function syncEditableBlock(blockId: string, element: HTMLElement, recordHistory = false) {
+    const text = element.innerText.replace(/\u00a0/g, " ");
+    const html = element.innerHTML;
+    updateBlock(blockId, { html, text }, recordHistory);
+    rememberTextCursor(blockId, element);
+  }
+
+  function applySelectionCommand(command: string, value?: string) {
+    const block = activeBlock();
+    const element = block ? editableRefs.current[block.id] : null;
+    if (!block || !element || (block.type !== "paragraph" && block.type !== "heading")) {
+      return false;
+    }
+
+    element.focus();
+    if (!restoreTextSelection(block.id)) {
+      return false;
+    }
+
+    document.execCommand(command, false, value);
+    syncEditableBlock(block.id, element, true);
+    return true;
   }
 
   function changeBlockType(blockId: string, type: GuideBlockType) {
@@ -154,39 +342,139 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
       text: "",
       type,
       url: "",
+      html: undefined,
     });
   }
 
   function addBlock(type: GuideBlockType) {
-    if (type === "image" && textCursorTarget) {
-      insertImageAtTextCursor(textCursorTarget.blockId);
+    if (type === "image" || type === "video" || type === "audio" || type === "link") {
+      openMediaDialog(type);
       return;
     }
 
+    const block = createGuideBlock(type);
     setDraft((current) => ({
       ...current,
-      blocks: [...current.blocks, createGuideBlock(type)],
+      blocks: [...current.blocks, block],
     }));
+    setActiveBlockId(block.id);
     setMessage("");
   }
 
-  function insertImageAtTextCursor(blockId: string, imageUrl = "") {
-    setDraft((current) => {
-      const blockIndex = current.blocks.findIndex((block) => block.id === blockId);
-      const block = current.blocks[blockIndex];
+  function activeBlock() {
+    return draft.blocks.find((block) => block.id === activeBlockId) ?? draft.blocks[0];
+  }
 
-      if (blockIndex < 0 || !block || block.type !== "paragraph") {
+  function toggleFormat(field: "bold" | "italic" | "strike" | "underline") {
+    const block = activeBlock();
+    if (!block || (block.type !== "paragraph" && block.type !== "heading")) return;
+    const command = field === "bold" ? "bold" : field === "italic" ? "italic" : field === "underline" ? "underline" : "strikeThrough";
+    if (applySelectionCommand(command)) {
+      return;
+    }
+    updateBlock(block.id, { [field]: !block[field] }, true);
+  }
+
+  function applyFontFamily(fontFamily: GuideContentBlock["fontFamily"]) {
+    if (applySelectionCommand("fontName", EDITOR_FONT_COMMANDS[fontFamily])) {
+      return;
+    }
+    const block = activeBlock();
+    if (block) updateBlock(block.id, { fontFamily }, true);
+  }
+
+  function applyFontSize(fontSize: number) {
+    const sizeMap: Record<number, string> = { 14: "1", 16: "2", 17: "3", 18: "3", 20: "4", 24: "5", 28: "6", 32: "7", 36: "7", 42: "7" };
+    if (applySelectionCommand("fontSize", sizeMap[fontSize] ?? "3")) {
+      return;
+    }
+    const block = activeBlock();
+    if (block) updateBlock(block.id, { fontSize }, true);
+  }
+
+  function applyColor(command: "foreColor" | "hiliteColor", color: string) {
+    if (applySelectionCommand(command, color)) {
+      return;
+    }
+    const block = activeBlock();
+    if (block) updateBlock(block.id, command === "foreColor" ? { color } : { backgroundColor: color }, true);
+  }
+
+  function clearFormatting() {
+    const block = activeBlock();
+    if (!block) return;
+    if (applySelectionCommand("removeFormat")) {
+      return;
+    }
+    updateBlock(block.id, {
+      align: "left",
+      backgroundColor: undefined,
+      bold: false,
+      color: undefined,
+      fontFamily: "serif",
+      fontSize: block.type === "heading" ? 28 : 18,
+      italic: false,
+      strike: false,
+      underline: false,
+    }, true);
+  }
+
+  function insertEmoji() {
+    const block = activeBlock();
+    if (!block || (block.type !== "paragraph" && block.type !== "heading")) return;
+    if (applySelectionCommand("insertText", "😊")) {
+      return;
+    }
+    updateBlock(block.id, { text: `${block.text}${block.text ? " " : ""}😊`, html: undefined }, true);
+  }
+
+  function undo() {
+    const previous = historyRef.current.pop();
+    if (!previous) return;
+    futureRef.current.unshift(snapshot(draft));
+    setDraft((current) => ({ ...current, ...previous, blocks: previous.blocks.map((block) => ({ ...block })) }));
+    refreshHistory((value) => value + 1);
+    setMessage("已撤销上一步格式操作。");
+  }
+
+  function redo() {
+    const next = futureRef.current.shift();
+    if (!next) return;
+    historyRef.current.push(snapshot(draft));
+    setDraft((current) => ({ ...current, ...next, blocks: next.blocks.map((block) => ({ ...block })) }));
+    refreshHistory((value) => value + 1);
+    setMessage("已恢复上一步格式操作。");
+  }
+
+  function insertBlockAtTextCursor(
+    type: MediaDialogKind,
+    payload: { caption?: string; text?: string; url: string },
+  ) {
+    setDraft((current) => {
+      const blockId = textCursorTarget?.blockId;
+      const blockIndex = blockId
+        ? current.blocks.findIndex((block) => block.id === blockId)
+        : -1;
+      const block = current.blocks[blockIndex];
+      const insertedBlock: GuideContentBlock = {
+        ...createGuideBlock(type),
+        caption: payload.caption ?? "",
+        text: payload.text ?? "",
+        url: payload.url,
+      };
+
+      if (blockIndex < 0 || !block || (block.type !== "paragraph" && block.type !== "heading")) {
         return {
           ...current,
-          blocks: [...current.blocks, { ...createGuideBlock("image"), url: imageUrl }],
+          blocks: [...current.blocks, insertedBlock],
         };
       }
 
-      const cursor =
-        textCursorTarget?.blockId === blockId
+      const cursor: TextCursorTarget =
+        textCursorTarget?.blockId === block.id
           ? textCursorTarget
           : {
-              blockId,
+              blockId: block.id,
               selectionEnd: block.text.length,
               selectionStart: block.text.length,
             };
@@ -194,19 +482,18 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
       const selectionEnd = Math.min(cursor.selectionEnd, block.text.length);
       const beforeText = block.text.slice(0, selectionStart);
       const afterText = block.text.slice(selectionEnd);
-      const insertedImageBlock: GuideContentBlock = {
-        ...createGuideBlock("image"),
-        align: block.align,
-        url: imageUrl,
-      };
+      const htmlParts = splitEditorHtml(editorHtml(block), selectionStart);
       const replacementBlocks: GuideContentBlock[] = [
-        ...(beforeText ? [{ ...block, text: beforeText }] : []),
-        insertedImageBlock,
+        ...(beforeText
+          ? [{ ...block, html: htmlParts.before, text: beforeText }]
+          : []),
+        { ...insertedBlock, align: block.align },
         ...(afterText
           ? [
               {
                 ...block,
                 id: createGuideBlock("paragraph").id,
+                html: htmlParts.after,
                 text: afterText,
               },
             ]
@@ -217,12 +504,66 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
         ...current,
         blocks: [
           ...current.blocks.slice(0, blockIndex),
-          ...(replacementBlocks.length ? replacementBlocks : [insertedImageBlock]),
+          ...(replacementBlocks.length ? replacementBlocks : [insertedBlock]),
           ...current.blocks.slice(blockIndex + 1),
         ],
       };
     });
-    setMessage(imageUrl ? "图片已插入到正文光标处。" : "已在正文光标处插入图片区块。");
+    setTextCursorTarget(null);
+    setActiveBlockId(null);
+    setMessage(`${BLOCK_LABELS[type]}已插入到正文光标处。`);
+  }
+
+  function openMediaDialog(kind: MediaDialogKind) {
+    setMediaDialog({
+      caption: "",
+      file: null,
+      kind,
+      text: kind === "link" ? "查看链接" : "",
+      url: "",
+    });
+  }
+
+  function closeMediaDialog() {
+    if (!uploadingBlockId) {
+      setMediaDialog(null);
+    }
+  }
+
+  async function confirmMediaDialog() {
+    if (!mediaDialog) return;
+    const { caption, file, kind, text, url } = mediaDialog;
+
+    if (kind === "link" && !url.trim()) {
+      setMessage("请输入链接地址。");
+      return;
+    }
+    if (kind !== "link" && !file && !url.trim()) {
+      setMessage(`请选择${BLOCK_LABELS[kind]}文件，或填写直链。`);
+      return;
+    }
+
+    setUploadingBlockId("media-dialog");
+    setMessage("");
+    try {
+      const publicUrl = file
+        ? kind === "image"
+          ? await uploadAdminImage(file, "site/guide")
+          : kind === "video"
+            ? await uploadAdminVideo(file, "site/guide")
+            : await uploadAdminAudio(file, "site/guide")
+        : url.trim();
+      insertBlockAtTextCursor(kind, {
+        caption: caption.trim(),
+        text: kind === "link" ? text.trim() : "",
+        url: publicUrl,
+      });
+      setMediaDialog(null);
+    } catch (error) {
+      setMessage(`${BLOCK_LABELS[kind]}上传失败：${error instanceof Error ? error.message : "请稍后再试。"}`);
+    } finally {
+      setUploadingBlockId(null);
+    }
   }
 
   function moveBlock(index: number, direction: -1 | 1) {
@@ -246,6 +587,13 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
       };
     });
     setMessage("");
+  }
+
+  function handleBlockKeyDown(block: GuideContentBlock, event: KeyboardEvent<HTMLElement>) {
+    if ((event.key === "Backspace" || event.key === "Delete") && block.type !== "paragraph" && block.type !== "heading") {
+      event.preventDefault();
+      removeBlock(block.id);
+    }
   }
 
   async function uploadImage(
@@ -278,35 +626,6 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
     }
   }
 
-  async function uploadImageAtTextCursor(
-    blockId: string,
-    event: ChangeEvent<HTMLInputElement>,
-  ) {
-    const file = event.target.files?.[0];
-    event.target.value = "";
-
-    if (!file) {
-      return;
-    }
-
-    if (!file.type.startsWith("image/")) {
-      setMessage("请选择图片文件。");
-      return;
-    }
-
-    setUploadingBlockId(`inline-${blockId}`);
-    setMessage("");
-
-    try {
-      const publicUrl = await uploadAdminImage(file, "site/guide");
-      insertImageAtTextCursor(blockId, publicUrl);
-    } catch (error) {
-      setMessage(`图片上传失败：${error instanceof Error ? error.message : "请稍后再试。"}`);
-    } finally {
-      setUploadingBlockId(null);
-    }
-  }
-
   async function savePost(status: "draft" | "published") {
     const title = draft.title.trim();
     const excerpt = draft.excerpt.trim() || firstText(draft.blocks).slice(0, 140);
@@ -331,6 +650,7 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
       created_by: adminUserId,
       is_paid_only: false,
       meta_json: {
+        author: draft.author.trim(),
         blocks: draft.blocks,
         excerpt,
         kind: "guide-post",
@@ -361,7 +681,7 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
       }
 
       if (count === 0) {
-        setMessage("保存失败：没有找到当前公告，请刷新后重试。");
+        setMessage("保存失败：没有找到当前帖子，请刷新后重试。");
         setIsSaving(false);
         return;
       }
@@ -381,7 +701,7 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
       savedPostId = data.id;
     }
 
-    setMessage(status === "published" ? "帖子已发布到公告栏。" : "草稿已保存。");
+    setMessage(status === "published" ? "帖子已发布到首页。" : "草稿已保存。");
     await loadPosts(savedPostId ?? undefined);
     setIsSaving(false);
   }
@@ -392,7 +712,7 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
     }
 
     const confirmed = window.confirm(
-      `确定删除公告“${draft.title || "未命名公告"}”吗？公告及其评论会永久删除，无法恢复。`,
+      `确定删除帖子“${draft.title || "未命名帖子"}”吗？帖子及其评论会永久删除，无法恢复。`,
     );
 
     if (!confirmed) {
@@ -416,31 +736,33 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
     const remainingRows = rows.filter((row) => row.id !== deletedId);
     setRows(remainingRows);
     setDraft(remainingRows.length ? rowToDraft(remainingRows[0]) : createEmptyDraft());
-    setMessage("公告已删除。");
+    setMessage("帖子已删除。");
     setIsSaving(false);
   }
+
+  const selectedBlock = activeBlock();
 
   return (
     <section className="guide-admin">
       <header className="guide-admin-heading">
         <div>
-          <span>NOTICE BOARD · 公告栏</span>
-          <h2>公告发布后台</h2>
+          <span>HOME POSTS · 首页发帖</span>
+          <h2>首页发帖后台</h2>
           <p>组合正文、链接、图片和视频区块，设置字体、字号与对齐方式后直接发布。</p>
         </div>
         <button className="button secondary" onClick={startNewPost} type="button">
-          ＋ 新建公告
+          ＋ 新建帖子
         </button>
       </header>
 
       <div className="guide-admin-layout">
         <aside className="guide-admin-posts">
           <header>
-            <strong>公告</strong>
+            <strong>帖子</strong>
             <span>{rows.length}</span>
           </header>
-          {isLoading ? <p>正在读取公告…</p> : null}
-          {!isLoading && !rows.length ? <p>还没有后台公告，可以先新建一篇。</p> : null}
+          {isLoading ? <p>正在读取帖子…</p> : null}
+          {!isLoading && !rows.length ? <p>还没有首页帖子，可以先新建一篇。</p> : null}
           {rows.map((row) => (
             <button
               className={draft.id === row.id ? "active" : ""}
@@ -459,10 +781,93 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
         </aside>
 
         <div className="guide-admin-editor">
-          <section className="guide-admin-card">
+          <section className="guide-rich-editor">
+            <div className="guide-rich-toolbar" aria-label="文章格式工具栏">
+              <div className="guide-rich-toolbar-group">
+                <button aria-label="撤销" disabled={!historyRef.current.length} onClick={undo} title="撤销" type="button">↶</button>
+                <button aria-label="重做" disabled={!futureRef.current.length} onClick={redo} title="重做" type="button">↷</button>
+                <button aria-label="清除格式" onClick={clearFormatting} title="清除格式" type="button">◇</button>
+              </div>
+              <div className="guide-rich-toolbar-group guide-rich-toolbar-selects">
+                <select aria-label="字体" disabled={!selectedBlock} onChange={(event) => applyFontFamily(event.target.value as GuideContentBlock["fontFamily"])} value={selectedBlock?.fontFamily ?? "serif"}>
+                  <option value="serif">宋体</option>
+                  <option value="sans">黑体</option>
+                  <option value="kaiti">楷体</option>
+                  <option value="georgia">Georgia</option>
+                </select>
+                <select aria-label="字号" disabled={!selectedBlock} onChange={(event) => applyFontSize(Number(event.target.value))} value={selectedBlock?.fontSize ?? 18}>
+                  {[14, 16, 17, 18, 20, 24, 28, 32, 36, 42].map((size) => <option key={size} value={size}>{size}px</option>)}
+                </select>
+              </div>
+              <div className="guide-rich-toolbar-group">
+                <button aria-pressed={Boolean(selectedBlock?.bold)} className={selectedBlock?.bold ? "active" : ""} onClick={() => toggleFormat("bold")} title="粗体" type="button"><strong>B</strong></button>
+                <button aria-pressed={Boolean(selectedBlock?.italic)} className={selectedBlock?.italic ? "active" : ""} onClick={() => toggleFormat("italic")} title="斜体" type="button"><em>I</em></button>
+                <button aria-pressed={Boolean(selectedBlock?.underline)} className={selectedBlock?.underline ? "active" : ""} onClick={() => toggleFormat("underline")} title="下划线" type="button"><u>U</u></button>
+                <button aria-pressed={Boolean(selectedBlock?.strike)} className={selectedBlock?.strike ? "active" : ""} onClick={() => toggleFormat("strike")} title="删除线" type="button"><s>S</s></button>
+                <label className="guide-color-tool" title="文字颜色"><span style={{ color: selectedBlock?.color || "#1f5b4d" }}>A</span><input aria-label="文字颜色" disabled={!selectedBlock} onChange={(event) => applyColor("foreColor", event.target.value)} type="color" value={selectedBlock?.color || "#1f5b4d"} /></label>
+                <label className="guide-color-tool" title="背景高亮"><span style={{ backgroundColor: selectedBlock?.backgroundColor || "#fff3bf" }}>ab</span><input aria-label="背景高亮" disabled={!selectedBlock} onChange={(event) => applyColor("hiliteColor", event.target.value)} type="color" value={selectedBlock?.backgroundColor || "#fff3bf"} /></label>
+              </div>
+              <div className="guide-rich-toolbar-group guide-rich-align-group" aria-label="文字对齐">
+                {(["left", "center", "right"] as const).map((align) => <button aria-label={`${align === "left" ? "左" : align === "center" ? "居中" : "右"}对齐`} aria-pressed={selectedBlock?.align === align} className={selectedBlock?.align === align ? "active" : ""} key={align} onClick={() => selectedBlock && updateBlock(selectedBlock.id, { align }, true)} title={`${align === "left" ? "左" : align === "center" ? "居中" : "右"}对齐`} type="button">{align === "center" ? "≣" : "≡"}</button>)}
+              </div>
+              <div className="guide-rich-toolbar-group guide-rich-insert-group">
+                <button aria-label="添加小标题" onClick={() => addBlock("heading")} title="添加小标题" type="button">H</button>
+                <button aria-label="插入链接" onClick={() => openMediaDialog("link")} title="插入链接" type="button">↗</button>
+                <button aria-label="插入图片" onClick={() => openMediaDialog("image")} title="插入图片" type="button">▧</button>
+                <button aria-label="插入视频" onClick={() => openMediaDialog("video")} title="插入视频" type="button">▶</button>
+                <button aria-label="插入音频" onClick={() => openMediaDialog("audio")} title="插入音频" type="button">♫</button>
+                <button aria-label="插入表情" onClick={insertEmoji} title="插入表情" type="button">☺</button>
+              </div>
+            </div>
+
+            <div className="guide-editor-workspace">
+              <div className="guide-editor-paper">
+                <label className="guide-editor-title-field">
+                  <input aria-label="文章标题" maxLength={64} onChange={(event) => setDraft((current) => ({ ...current, title: event.target.value }))} placeholder="请在这里输入标题" value={draft.title} />
+                  <span>{draft.title.length}/64</span>
+                </label>
+                <label className="guide-editor-author-field">
+                  <input aria-label="文章作者" maxLength={8} onChange={(event) => setDraft((current) => ({ ...current, author: event.target.value }))} placeholder="请输入作者" value={draft.author} />
+                  <span>{draft.author.length}/8</span>
+                </label>
+                <div className="guide-editor-body">
+                  {draft.blocks.map((block, index) => (
+                    <article className={`guide-editor-block ${activeBlockId === block.id ? "active" : ""}`} key={block.id} onClick={() => setActiveBlockId(block.id)} onKeyDown={(event) => handleBlockKeyDown(block, event)} tabIndex={block.type === "paragraph" || block.type === "heading" ? -1 : 0}>
+                      {block.type === "paragraph" || block.type === "heading" ? (
+                        <div
+                          aria-label={`${BLOCK_LABELS[block.type]}内容`}
+                          className={block.type === "heading" ? "guide-editor-heading-input" : "guide-editor-text-input"}
+                          contentEditable
+                          data-placeholder={block.type === "heading" ? "输入小标题" : index === 0 ? "从这里开始写正文" : "继续输入正文"}
+                          onClick={(event) => rememberTextCursor(block.id, event.currentTarget)}
+                          onFocus={(event) => rememberTextCursor(block.id, event.currentTarget)}
+                          onInput={(event) => syncEditableBlock(block.id, event.currentTarget)}
+                          onKeyUp={(event) => rememberTextCursor(block.id, event.currentTarget)}
+                          onMouseUp={(event) => rememberTextCursor(block.id, event.currentTarget)}
+                          onSelect={(event) => rememberTextCursor(block.id, event.currentTarget)}
+                          ref={(element) => { editableRefs.current[block.id] = element; }}
+                          role="textbox"
+                          spellCheck
+                          style={editorBlockStyle(block)}
+                          suppressContentEditableWarning
+                          dangerouslySetInnerHTML={{ __html: editorHtml(block) }}
+                        />
+                      ) : null}
+                      {block.type === "link" && block.url ? <a className="guide-editor-link-preview" href={block.url} rel="noreferrer" target="_blank">{block.text || block.url} ↗</a> : null}
+                      {block.type === "image" && block.url ? <figure className="guide-editor-inline-media"><img className="guide-editor-asset-preview" alt={block.caption || "图片预览"} src={block.url} />{block.caption ? <figcaption>{block.caption}</figcaption> : null}</figure> : null}
+                      {block.type === "video" && block.url ? <figure className="guide-editor-inline-media"><video className="guide-editor-asset-preview" controls playsInline preload="metadata" src={block.url} />{block.caption ? <figcaption>{block.caption}</figcaption> : null}</figure> : null}
+                      {block.type === "audio" && block.url ? <figure className="guide-editor-inline-media"><audio className="guide-editor-asset-preview" controls preload="metadata" src={block.url} />{block.caption ? <figcaption>{block.caption}</figcaption> : null}</figure> : null}
+                    </article>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section className="guide-admin-card guide-admin-legacy-meta">
             <div className="guide-admin-field-grid">
               <label className="wide">
-                <span>公告标题</span>
+                <span>帖子标题</span>
                 <input
                   maxLength={120}
                   onChange={(event) =>
@@ -487,7 +892,7 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
             </div>
           </section>
 
-          <section className="guide-admin-card">
+          <section className="guide-admin-card guide-admin-legacy-blocks">
             <header className="guide-blocks-heading">
               <div>
                 <span>CONTENT BLOCKS</span>
@@ -605,17 +1010,6 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
                         rows={block.type === "heading" ? 2 : 5}
                         value={block.text}
                       />
-                      {block.type === "paragraph" ? (
-                        <label className="guide-inline-image-upload">
-                          <span>在光标处插入图片</span>
-                          <input
-                            accept="image/*"
-                            disabled={uploadingBlockId === `inline-${block.id}`}
-                            onChange={(event) => void uploadImageAtTextCursor(block.id, event)}
-                            type="file"
-                          />
-                        </label>
-                      ) : null}
                     </>
                   ) : null}
 
@@ -729,7 +1123,7 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
                 onClick={() => void deletePost()}
                 type="button"
               >
-                删除公告
+                删除帖子
               </button>
             ) : null}
             <button
@@ -746,11 +1140,38 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
               onClick={() => void savePost("published")}
               type="button"
             >
-              {isSaving ? "保存中…" : "发布到公告栏"}
+              {isSaving ? "保存中…" : "发布到首页"}
             </button>
           </footer>
         </div>
       </div>
+      {mediaDialog ? (
+        <div className="guide-media-dialog-backdrop" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) closeMediaDialog(); }}>
+          <section aria-labelledby="guide-media-dialog-title" aria-modal="true" className="guide-media-dialog" role="dialog">
+            <header>
+              <div>
+                <span>INSERT · 插入内容</span>
+                <h3 id="guide-media-dialog-title">插入{BLOCK_LABELS[mediaDialog.kind]}</h3>
+              </div>
+              <button aria-label="关闭插入对话框" onClick={closeMediaDialog} type="button">×</button>
+            </header>
+            {mediaDialog.kind === "link" ? (
+              <label><span>链接地址</span><input autoFocus onChange={(event) => setMediaDialog((current) => current ? { ...current, url: event.target.value } : current)} placeholder="https://..." type="url" value={mediaDialog.url} /></label>
+            ) : (
+              <>
+                <label><span>从本机选择文件</span><input accept={mediaDialog.kind === "image" ? "image/*" : mediaDialog.kind === "video" ? "video/*" : "audio/*"} autoFocus onChange={(event) => setMediaDialog((current) => current ? { ...current, file: event.target.files?.[0] ?? null } : current)} type="file" /></label>
+                <label><span>或填写直链</span><input onChange={(event) => setMediaDialog((current) => current ? { ...current, url: event.target.value } : current)} placeholder="https://..." type="url" value={mediaDialog.url} /></label>
+              </>
+            )}
+            {mediaDialog.kind === "link" ? <label><span>链接文字</span><input onChange={(event) => setMediaDialog((current) => current ? { ...current, text: event.target.value } : current)} placeholder="查看链接" value={mediaDialog.text} /></label> : null}
+            {mediaDialog.kind !== "link" ? <label><span>说明（可选）</span><input onChange={(event) => setMediaDialog((current) => current ? { ...current, caption: event.target.value } : current)} placeholder="为插入内容添加说明" value={mediaDialog.caption} /></label> : null}
+            <footer>
+              <button className="button secondary" disabled={uploadingBlockId === "media-dialog"} onClick={closeMediaDialog} type="button">取消</button>
+              <button className="button primary" disabled={uploadingBlockId === "media-dialog"} onClick={() => void confirmMediaDialog()} type="button">{uploadingBlockId === "media-dialog" ? "处理中…" : "确定插入"}</button>
+            </footer>
+          </section>
+        </div>
+      ) : null}
     </section>
   );
 }

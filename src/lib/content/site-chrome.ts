@@ -1,5 +1,5 @@
 import { supabase } from "@/lib/supabase/client";
-import { ensureJuniorHighExamMenu, ensureSeniorHighExamMenu } from "@/lib/content/site-chrome-nav";
+import { ensureJuniorHighExamMenu, ensureSatExamMenu, ensureSeniorHighExamMenu } from "@/lib/content/site-chrome-nav";
 
 export const SITE_CHROME_SLUG = "site-chrome";
 export const SITE_CHROME_VERSION = 1;
@@ -137,6 +137,15 @@ export const DEFAULT_SITE_CHROME_CONFIG: SiteChromeConfig = {
         children: [],
         dropdownAlign: "right",
         enabled: true,
+        href: "/",
+        id: "home",
+        label: "主页",
+        note: "",
+      },
+      {
+        children: [],
+        dropdownAlign: "right",
+        enabled: true,
         href: "/vocabulary",
         id: "dictionary",
         label: "词根词缀词典",
@@ -264,6 +273,15 @@ export const DEFAULT_SITE_CHROME_CONFIG: SiteChromeConfig = {
             label: "高考英语",
             note: "",
           },
+          {
+            children: [],
+            dropdownAlign: "right",
+            enabled: true,
+            href: "/sat",
+            id: "sat-reading-writing",
+            label: "SAT Reading and Writing",
+            note: "",
+          },
         ],
         dropdownAlign: "right",
         enabled: true,
@@ -306,7 +324,7 @@ export const DEFAULT_SITE_CHROME_CONFIG: SiteChromeConfig = {
         enabled: true,
         href: "/contact",
         id: "guide",
-        label: "公告栏",
+        label: "使用说明",
         note: "",
       },
       {
@@ -460,21 +478,64 @@ export function mergeSiteChromeConfig(value: unknown): SiteChromeConfig {
   const seniorHighFallback = fallback.nav.items
     .find((item) => item.id === "exams")
     ?.children.find((item) => item.id === "senior-high-english");
+  const satFallback = fallback.nav.items
+    .find((item) => item.id === "exams")
+    ?.children.find((item) => item.id === "sat-reading-writing");
   const navWithJuniorHigh = examsFallback && juniorHighFallback
     ? ensureJuniorHighExamMenu(mergedNavItems, examsFallback, juniorHighFallback)
     : mergedNavItems;
-  const navItems = examsFallback && seniorHighFallback
+  const navWithSeniorHigh = examsFallback && seniorHighFallback
     ? ensureSeniorHighExamMenu(navWithJuniorHigh, examsFallback, seniorHighFallback)
     : navWithJuniorHigh;
+  const navItems = examsFallback && satFallback
+    ? ensureSatExamMenu(navWithSeniorHigh, examsFallback, satFallback)
+    : navWithSeniorHigh;
 
-  const normalizedNavItems = navItems.map((item) =>
-    item.id === "dictionary"
-      ? {
-          ...item,
-          href: item.href === "/" || !item.href ? "/vocabulary" : item.href,
-          label: "词根词缀词典",
-        }
-      : item,
+  const normalizedNavItems = navItems.map((item) => {
+    if (item.id === "dictionary") {
+      return {
+        ...item,
+        href: item.href === "/" || !item.href ? "/vocabulary" : item.href,
+        label: "词根词缀词典",
+      };
+    }
+
+    if (item.id === "guide") {
+      return {
+        ...item,
+        children: [],
+        href: item.href || "/contact",
+        label: "使用说明",
+      };
+    }
+
+    if (item.id === "home") {
+      return {
+        ...item,
+        children: [],
+        href: "/",
+        label: "主页",
+      };
+    }
+
+    return item;
+  });
+  const visibleNavItems = [
+    {
+      children: [],
+      dropdownAlign: "right" as const,
+      enabled: true,
+      href: "/",
+      id: "home",
+      label: "主页",
+      note: "",
+    },
+    ...normalizedNavItems.filter(
+      (item) => item.id !== "home" && item.label !== "公告栏" && item.label !== "使用说明",
+    ),
+  ];
+  const visibleFooterLinks = mergeLinks(footer.links, fallback.footer.links).filter(
+    (item) => item.id !== "contact" && item.label !== "公告栏",
   );
 
   return {
@@ -525,7 +586,7 @@ export function mergeSiteChromeConfig(value: unknown): SiteChromeConfig {
         16,
         64,
       ),
-      links: mergeLinks(footer.links, fallback.footer.links),
+      links: visibleFooterLinks,
       linkTextColor: readColor(footer.linkTextColor, fallback.footer.linkTextColor),
       linkFontSize: readNumber(footer.linkFontSize, fallback.footer.linkFontSize, 12, 32),
       promo: {
@@ -550,7 +611,7 @@ export function mergeSiteChromeConfig(value: unknown): SiteChromeConfig {
       adminHref: readString(nav.adminHref, fallback.nav.adminHref),
       adminLabel: readString(nav.adminLabel, fallback.nav.adminLabel),
       fontSize: readNumber(nav.fontSize, fallback.nav.fontSize, 12, 28),
-      items: normalizedNavItems,
+      items: visibleNavItems,
       loginHref: readString(nav.loginHref, fallback.nav.loginHref),
       loginLabel: readString(nav.loginLabel, fallback.nav.loginLabel),
     },

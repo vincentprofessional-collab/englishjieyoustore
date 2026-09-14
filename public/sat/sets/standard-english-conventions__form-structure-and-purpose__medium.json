@@ -1,0 +1,2322 @@
+{
+  "id": "standard-english-conventions__form-structure-and-purpose__medium",
+  "assessment": "SAT",
+  "test": "Reading and Writing",
+  "domain": "Standard English Conventions",
+  "skill": "form,structure,and purpose",
+  "difficulty": "Medium",
+  "expectedCount": 35,
+  "questionIds": [
+    "fd5268ad",
+    "296f8a05",
+    "ad201599",
+    "dec9ed59",
+    "cf86d6fd",
+    "42548ee2",
+    "094e6e94",
+    "1007161b",
+    "178c8b8e",
+    "c709441f",
+    "8bd8f58c",
+    "52930290",
+    "992e6994",
+    "1483cd89",
+    "1e1286b0",
+    "4efacd65",
+    "a3f9a509",
+    "d0884ae5",
+    "87eb538d",
+    "f6572385",
+    "ce6fa228",
+    "1ea3651d",
+    "727d9787",
+    "e40007b2",
+    "72ae84d8",
+    "362db9f6",
+    "81e5993c",
+    "0063f37a",
+    "2a2a4f43",
+    "0fb17962",
+    "aeba7f69",
+    "473d9645",
+    "6ea5d254",
+    "1e27b2b3",
+    "35256536"
+  ],
+  "sourceRefs": [
+    {
+      "role": "question",
+      "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35.pdf",
+      "sha256": "1c7c4c1ac160ed5df317c075e9f4a33077e98bbf59e0b9971949937e04dc745a",
+      "pages": [],
+      "extractionMethod": "pdf-text-layout"
+    },
+    {
+      "role": "answer",
+      "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35-with answers and explanations.pdf",
+      "sha256": "7138438f0a990b9a5ee16e8b8d04f573648201b1247bf33ca4604fdf9f444de6",
+      "pages": [],
+      "extractionMethod": "pdf-text-layout"
+    }
+  ],
+  "questions": [
+    {
+      "id": "fd5268ad",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "form,structure,and purpose",
+      "difficulty": "Medium",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Oglala Lakota poet Layli Long Soldier’s star quilt poems offer an unusually open-ended reading experience. With ______ eight panels of text stitched together in the shape of a traditional eight-pointed Lakota star quilt, the poems present viewers with a seemingly infinite number of ways to read them."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "their"
+        },
+        {
+          "id": "B",
+          "text": "it’s"
+        },
+        {
+          "id": "C",
+          "text": "they’re"
+        },
+        {
+          "id": "D",
+          "text": "its"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "Choice A is the best answer. The convention being tested is the use of possessive determiners. The plural possessive determiner \"their\" agrees in number with the plural noun \"the poems,\" thus indicating that the poems had eight panels of text stitched together in the shape of a traditional eight-pointed Lakota star quilt.\n\nChoice B is incorrect because \"it’s\" is the contraction for \"it is\" or \"it has,\" not a possessive determiner. Choice C is incorrect because \"they’re\" is the contraction for \"they are,\" not a possessive determiner. Choice D is incorrect because the singular possessive determiner \"its\" doesn’t agree in number with the plural noun \"the poems.\"",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35.pdf",
+          "sha256": "1c7c4c1ac160ed5df317c075e9f4a33077e98bbf59e0b9971949937e04dc745a",
+          "pages": [
+            1
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35-with answers and explanations.pdf",
+          "sha256": "7138438f0a990b9a5ee16e8b8d04f573648201b1247bf33ca4604fdf9f444de6",
+          "pages": [
+            1,
+            2
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "A": "Choice A is the best answer. The convention being tested is the use of possessive determiners. The plural possessive determiner \"their\" agrees in number with the plural noun \"the poems,\" thus indicating that the poems had eight panels of text stitched together in the shape of a traditional eight-pointed Lakota star quilt.",
+        "B": "Choice B is incorrect because \"it’s\" is the contraction for \"it is\" or \"it has,\" not a possessive determiner.",
+        "C": "Choice C is incorrect because \"they’re\" is the contraction for \"they are,\" not a possessive determiner.",
+        "D": "Choice D is incorrect because the singular possessive determiner \"its\" doesn’t agree in number with the plural noun \"the poems.\""
+      }
+    },
+    {
+      "id": "296f8a05",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "form,structure,and purpose",
+      "difficulty": "Medium",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Based on genetic evidence, archaeologists have generally agreed that reindeer domestication began in the eleventh century CE. However, since uncovering fragments of a 2,000-year-old reindeer training harness in northern Siberia, ______ may have begun much earlier."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "researcher Robert Losey has argued that domestication"
+        },
+        {
+          "id": "B",
+          "text": "researcher Robert Losey’s argument is that domestication"
+        },
+        {
+          "id": "C",
+          "text": "domestication, researcher Robert Losey has argued,"
+        },
+        {
+          "id": "D",
+          "text": "the argument researcher Robert Losey has made is that domestication"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "Choice A is the best answer. The convention being tested is subject-modifier placement. This choice makes the noun phrase “researcher Robert Losey” the subject of the sentence and places it immediately after the modifying phrase “since…Siberia.” In doing so, this choice clearly establishes that researcher Robert Losey—and not another noun in the sentence—is who uncovered fragments of a 2,000-year-old reindeer training harness in northern Siberia.\n\nChoice B is incorrect because it results in a dangling modifier. The placement of the noun phrase “researcher Robert Losey’s argument” immediately after the modifying phrase illogically suggests that the “argument” is what uncovered fragments of a 2,000-year-old reindeer training harness in northern Siberia. Choice C is incorrect because it results in a dangling modifier. The placement of the noun “domestication” immediately after the modifying phrase illogically suggests that “domestication” is what uncovered fragments of a 2,000-year-old reindeer training harness in northern Siberia. Choice D is incorrect because it results in a dangling modifier. The placement of the noun phrase “the argument” immediately after the modifying phrase illogically suggests that the “argument” is what uncovered fragments of a 2,000-year-old reindeer training harness in northern Siberia.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35.pdf",
+          "sha256": "1c7c4c1ac160ed5df317c075e9f4a33077e98bbf59e0b9971949937e04dc745a",
+          "pages": [
+            1,
+            2
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35-with answers and explanations.pdf",
+          "sha256": "7138438f0a990b9a5ee16e8b8d04f573648201b1247bf33ca4604fdf9f444de6",
+          "pages": [
+            2,
+            3
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "A": "Choice A is the best answer. The convention being tested is subject-modifier placement. This choice makes the noun phrase “researcher Robert Losey” the subject of the sentence and places it immediately after the modifying phrase “since…Siberia.” In doing so, this choice clearly establishes that researcher Robert Losey—and not another noun in the sentence—is who uncovered fragments of a 2,000-year-old reindeer training harness in northern Siberia.",
+        "B": "Choice B is incorrect because it results in a dangling modifier. The placement of the noun phrase “researcher Robert Losey’s argument” immediately after the modifying phrase illogically suggests that the “argument” is what uncovered fragments of a 2,000-year-old reindeer training harness in northern Siberia.",
+        "C": "Choice C is incorrect because it results in a dangling modifier. The placement of the noun “domestication” immediately after the modifying phrase illogically suggests that “domestication” is what uncovered fragments of a 2,000-year-old reindeer training harness in northern Siberia.",
+        "D": "Choice D is incorrect because it results in a dangling modifier. The placement of the noun phrase “the argument” immediately after the modifying phrase illogically suggests that the “argument” is what uncovered fragments of a 2,000-year-old reindeer training harness in northern Siberia."
+      }
+    },
+    {
+      "id": "ad201599",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "form,structure,and purpose",
+      "difficulty": "Medium",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In 1930, Japanese American artist Chiura Obata depicted the natural beauty of Yosemite National Park in two memorable woodcuts: Evening at Carl Inn and Lake Basin in the High Sierra. In 2019, ______ exhibited alongside 150 of Obata’s other works in a single-artist show at the Smithsonian American Art Museum."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "it was"
+        },
+        {
+          "id": "B",
+          "text": "they were"
+        },
+        {
+          "id": "C",
+          "text": "this was"
+        },
+        {
+          "id": "D",
+          "text": "some were"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Choice B is the best answer. The convention being tested is pronoun–antecedent agreement. The plural pronoun “they” agrees in number with the plural antecedent “woodcuts” and clearly identifies what was exhibited at the Smithsonian American Art Museum.\n\nChoice A is incorrect because the singular pronoun “it” doesn’t agree in number with the plural antecedent “woodcuts.” Choice C is incorrect because the singular pronoun “this” doesn’t agree in number with the plural antecedent “woodcuts.” Choice D is incorrect because the plural pronoun “some” is illogical in this context (referring to “some” of two woodcuts).",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35.pdf",
+          "sha256": "1c7c4c1ac160ed5df317c075e9f4a33077e98bbf59e0b9971949937e04dc745a",
+          "pages": [
+            2
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35-with answers and explanations.pdf",
+          "sha256": "7138438f0a990b9a5ee16e8b8d04f573648201b1247bf33ca4604fdf9f444de6",
+          "pages": [
+            3,
+            4
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "B": "Choice B is the best answer. The convention being tested is pronoun–antecedent agreement. The plural pronoun “they” agrees in number with the plural antecedent “woodcuts” and clearly identifies what was exhibited at the Smithsonian American Art Museum.",
+        "A": "Choice A is incorrect because the singular pronoun “it” doesn’t agree in number with the plural antecedent “woodcuts.”",
+        "C": "Choice C is incorrect because the singular pronoun “this” doesn’t agree in number with the plural antecedent “woodcuts.”",
+        "D": "Choice D is incorrect because the plural pronoun “some” is illogical in this context (referring to “some” of two woodcuts)."
+      }
+    },
+    {
+      "id": "dec9ed59",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "form,structure,and purpose",
+      "difficulty": "Medium",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Oyster mushrooms typically get their nutrients from the damp logs on which they grow, but the fungi are also carnivorous, with the ability to kill and consume microscopic worms known as nematodes. As researcher Yen-Ping Hsueh has shown, the mushrooms release a toxin that is deadly to nematodes that ______ in contact with it."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "has come"
+        },
+        {
+          "id": "B",
+          "text": "comes"
+        },
+        {
+          "id": "C",
+          "text": "is coming"
+        },
+        {
+          "id": "D",
+          "text": "come"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "Choice D is the best answer. The convention being tested is subject-verb agreement. The plural verb \"come\" agrees in number with the plural subject \"nematodes.\"\n\nChoice A is incorrect because the singular verb \"has come\" doesn’t agree in number with the plural subject \"nematodes.\" Choice B is incorrect because the singular verb \"comes\" doesn’t agree in number with the plural subject \"nematodes.\" Choice C is incorrect because the singular verb \"is coming\" doesn’t agree in number with the plural subject \"nematodes.\"",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35.pdf",
+          "sha256": "1c7c4c1ac160ed5df317c075e9f4a33077e98bbf59e0b9971949937e04dc745a",
+          "pages": [
+            2,
+            3
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35-with answers and explanations.pdf",
+          "sha256": "7138438f0a990b9a5ee16e8b8d04f573648201b1247bf33ca4604fdf9f444de6",
+          "pages": [
+            4,
+            5
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "D": "Choice D is the best answer. The convention being tested is subject-verb agreement. The plural verb \"come\" agrees in number with the plural subject \"nematodes.\"",
+        "A": "Choice A is incorrect because the singular verb \"has come\" doesn’t agree in number with the plural subject \"nematodes.\"",
+        "B": "Choice B is incorrect because the singular verb \"comes\" doesn’t agree in number with the plural subject \"nematodes.\"",
+        "C": "Choice C is incorrect because the singular verb \"is coming\" doesn’t agree in number with the plural subject \"nematodes.\""
+      }
+    },
+    {
+      "id": "cf86d6fd",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "form,structure,and purpose",
+      "difficulty": "Medium",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "By the time Hawaiian king Kamehameha III ______ the throne, the number of longhorn cattle, first introduced to the islands in 1793, had drastically increased, and so too had the need for paniolo (Hawaiian cowboys) to manage the wild herds that then roamed throughout the volcanic terrain."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "ascended"
+        },
+        {
+          "id": "B",
+          "text": "will ascend"
+        },
+        {
+          "id": "C",
+          "text": "ascends"
+        },
+        {
+          "id": "D",
+          "text": "is ascending"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "Choice A is the best answer. \"Ascended\" is in the simple past tense. Since Kamehameha became king in the past, this makes the most sense.\n\nChoice B is incorrect. \"Will ascend\" is in the future tense, but we wouldn’t know about Kamehameha III’s ascent if it hadn’t happened yet. The information in the sentence, as well as the tense of other verbs, tells us that the events described happened in the past. Choice C is incorrect. \"Ascends\" is in the simple present tense. However, the information in the sentence, as well as the tense of other verbs, tells us that the events described happened in the past. Choice D is incorrect. \"Is ascending\" is in the continuous present tense, which we use to show that something is ongoing, but this doesn’t make sense here—the information in the sentence, as well as the tense of other verbs, tells us that the events described happened in the past.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35.pdf",
+          "sha256": "1c7c4c1ac160ed5df317c075e9f4a33077e98bbf59e0b9971949937e04dc745a",
+          "pages": [
+            3
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35-with answers and explanations.pdf",
+          "sha256": "7138438f0a990b9a5ee16e8b8d04f573648201b1247bf33ca4604fdf9f444de6",
+          "pages": [
+            5,
+            6
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "A": "Choice A is the best answer. \"Ascended\" is in the simple past tense. Since Kamehameha became king in the past, this makes the most sense.",
+        "B": "Choice B is incorrect. \"Will ascend\" is in the future tense, but we wouldn’t know about Kamehameha III’s ascent if it hadn’t happened yet. The information in the sentence, as well as the tense of other verbs, tells us that the events described happened in the past.",
+        "C": "Choice C is incorrect. \"Ascends\" is in the simple present tense. However, the information in the sentence, as well as the tense of other verbs, tells us that the events described happened in the past.",
+        "D": "Choice D is incorrect. \"Is ascending\" is in the continuous present tense, which we use to show that something is ongoing, but this doesn’t make sense here—the information in the sentence, as well as the tense of other verbs, tells us that the events described happened in the past."
+      }
+    },
+    {
+      "id": "42548ee2",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "form,structure,and purpose",
+      "difficulty": "Medium",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "“Praise Song for the Day,” Elizabeth Alexander’s 2009 inaugural poem, asserts that “We cross dirt roads and highways…to see what’s on the other side.” Alexander’s use of “we” ______ Americans’ collective efforts and shared desire to seek new opportunity."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "evokes"
+        },
+        {
+          "id": "B",
+          "text": "are evoking"
+        },
+        {
+          "id": "C",
+          "text": "have evoked"
+        },
+        {
+          "id": "D",
+          "text": "evoke"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "Choice A is the best answer. The convention being tested is subject-verb agreement. The singular verb \"evokes\" agrees in number with the singular subject \"Alexander’s use.\"\n\nChoice B is incorrect because the plural verb \"are evoking\" doesn’t agree in number with the singular subject \"Alexander’s use.\" Choice C is incorrect because the plural verb \"have evoked\" doesn’t agree in number with the singular subject \"Alexander’s use.\" Choice D is incorrect because the plural verb \"evoke\" doesn’t agree in number with the singular subject \"Alexander’s use.\"",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35.pdf",
+          "sha256": "1c7c4c1ac160ed5df317c075e9f4a33077e98bbf59e0b9971949937e04dc745a",
+          "pages": [
+            3,
+            4
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35-with answers and explanations.pdf",
+          "sha256": "7138438f0a990b9a5ee16e8b8d04f573648201b1247bf33ca4604fdf9f444de6",
+          "pages": [
+            6,
+            7
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "A": "Choice A is the best answer. The convention being tested is subject-verb agreement. The singular verb \"evokes\" agrees in number with the singular subject \"Alexander’s use.\"",
+        "B": "Choice B is incorrect because the plural verb \"are evoking\" doesn’t agree in number with the singular subject \"Alexander’s use.\"",
+        "C": "Choice C is incorrect because the plural verb \"have evoked\" doesn’t agree in number with the singular subject \"Alexander’s use.\"",
+        "D": "Choice D is incorrect because the plural verb \"evoke\" doesn’t agree in number with the singular subject \"Alexander’s use.\""
+      }
+    },
+    {
+      "id": "094e6e94",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "form,structure,and purpose",
+      "difficulty": "Medium",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The human brain is primed to recognize faces—so much so that, due to a perceptual tendency called pareidolia, ______ will even find faces in clouds, wooden doors, pieces of fruit, and other faceless inanimate objects. Researcher Susan Magsamen has focused her work on better understanding this everyday phenomenon."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "she"
+        },
+        {
+          "id": "B",
+          "text": "they"
+        },
+        {
+          "id": "C",
+          "text": "it"
+        },
+        {
+          "id": "D",
+          "text": "those"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Choice C is the best answer. \"It\" is a singular pronoun used to stand in for objects. Since the antecedent in this case is the singular noun phrase \"the human brain,\" \"it\" is a perfect pronoun to use here.\n\nChoice A is incorrect. Although \"she\" is a singular pronoun, it is reserved for people and animals, not objects like \"the human brain.\" Choice B is incorrect. \"They\" is a plural pronoun, but we need a singular pronoun to represent the antecedent \"the human brain.\" Choice D is incorrect. \"Those\" is a plural pronoun, but we need a singular pronoun to represent the antecedent \"the human brain.\"",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35.pdf",
+          "sha256": "1c7c4c1ac160ed5df317c075e9f4a33077e98bbf59e0b9971949937e04dc745a",
+          "pages": [
+            4
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35-with answers and explanations.pdf",
+          "sha256": "7138438f0a990b9a5ee16e8b8d04f573648201b1247bf33ca4604fdf9f444de6",
+          "pages": [
+            7,
+            8
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "C": "Choice C is the best answer. \"It\" is a singular pronoun used to stand in for objects. Since the antecedent in this case is the singular noun phrase \"the human brain,\" \"it\" is a perfect pronoun to use here.",
+        "A": "Choice A is incorrect. Although \"she\" is a singular pronoun, it is reserved for people and animals, not objects like \"the human brain.\"",
+        "B": "Choice B is incorrect. \"They\" is a plural pronoun, but we need a singular pronoun to represent the antecedent \"the human brain.\"",
+        "D": "Choice D is incorrect. \"Those\" is a plural pronoun, but we need a singular pronoun to represent the antecedent \"the human brain.\""
+      }
+    },
+    {
+      "id": "1007161b",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "form,structure,and purpose",
+      "difficulty": "Medium",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In 1966, Emmett Ashford became the first African American to umpire a Major League Baseball game. His energetic gestures announcing when a player had struck out and his habit of barreling after a hit ball to see if it would land out of ______ transform the traditionally solemn umpire role into a dynamic one."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "bounds helped"
+        },
+        {
+          "id": "B",
+          "text": "bounds, helping"
+        },
+        {
+          "id": "C",
+          "text": "bounds that helped"
+        },
+        {
+          "id": "D",
+          "text": "bounds to help"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "Choice A is the best answer. The convention being tested is finite verb use in a main clause. A main clause requires a finite verb to perform the action of the subject (in this case, Ashford’s “gestures” and “habit”), and this choice supplies the finite past tense verb “helped” to indicate what Ashford’s gestures and habit helped accomplish.\n\nChoice B is incorrect because the non-finite participle “helping” doesn’t supply the main clause with a finite verb. Choice C is incorrect because the relative clause “that helped” doesn’t supply the main clause with a finite verb. Choice D is incorrect because the non-finite to-infinitive “to help” doesn’t supply the main clause with a finite verb.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35.pdf",
+          "sha256": "1c7c4c1ac160ed5df317c075e9f4a33077e98bbf59e0b9971949937e04dc745a",
+          "pages": [
+            4,
+            5
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35-with answers and explanations.pdf",
+          "sha256": "7138438f0a990b9a5ee16e8b8d04f573648201b1247bf33ca4604fdf9f444de6",
+          "pages": [
+            8,
+            9
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "A": "Choice A is the best answer. The convention being tested is finite verb use in a main clause. A main clause requires a finite verb to perform the action of the subject (in this case, Ashford’s “gestures” and “habit”), and this choice supplies the finite past tense verb “helped” to indicate what Ashford’s gestures and habit helped accomplish.",
+        "B": "Choice B is incorrect because the non-finite participle “helping” doesn’t supply the main clause with a finite verb.",
+        "C": "Choice C is incorrect because the relative clause “that helped” doesn’t supply the main clause with a finite verb.",
+        "D": "Choice D is incorrect because the non-finite to-infinitive “to help” doesn’t supply the main clause with a finite verb."
+      }
+    },
+    {
+      "id": "178c8b8e",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "form,structure,and purpose",
+      "difficulty": "Medium",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Cheng Dang and her colleagues at the University of Washington recently ran simulations to determine the extent to which individual snow ______ affect the amount of light reflecting off a snowy surface."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "grain’s physical properties’"
+        },
+        {
+          "id": "B",
+          "text": "grains’ physical properties"
+        },
+        {
+          "id": "C",
+          "text": "grains’ physical property’s"
+        },
+        {
+          "id": "D",
+          "text": "grains physical properties"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Choice B is the best answer. The convention being tested is the use of plural and possessive nouns. The plural possessive noun “grains’” and the plural noun “properties” correctly indicate that the simulations involved multiple snow grains and that those snow grains had several properties.\n\nChoice A is incorrect because the context requires the plural possessive noun “grains’” and the plural noun “properties,” not the singular possessive noun “grain’s” and the plural possessive noun “properties’.” Choice C is incorrect because the context requires the plural noun “properties,” not the singular possessive noun “property’s.” Choice D is incorrect because the context requires the plural possessive noun “grains’,” not the plural noun “grains.”",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35.pdf",
+          "sha256": "1c7c4c1ac160ed5df317c075e9f4a33077e98bbf59e0b9971949937e04dc745a",
+          "pages": [
+            5
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35-with answers and explanations.pdf",
+          "sha256": "7138438f0a990b9a5ee16e8b8d04f573648201b1247bf33ca4604fdf9f444de6",
+          "pages": [
+            9,
+            10
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "B": "Choice B is the best answer. The convention being tested is the use of plural and possessive nouns. The plural possessive noun “grains’” and the plural noun “properties” correctly indicate that the simulations involved multiple snow grains and that those snow grains had several properties.",
+        "A": "Choice A is incorrect because the context requires the plural possessive noun “grains’” and the plural noun “properties,” not the singular possessive noun “grain’s” and the plural possessive noun “properties’.”",
+        "C": "Choice C is incorrect because the context requires the plural noun “properties,” not the singular possessive noun “property’s.”",
+        "D": "Choice D is incorrect because the context requires the plural possessive noun “grains’,” not the plural noun “grains.”"
+      }
+    },
+    {
+      "id": "c709441f",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "form,structure,and purpose",
+      "difficulty": "Medium",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "French philosopher René Descartes doubted whether he could prove his own existence. Eventually, he found proof in his famous phrase “I think, therefore I am.” The ______ complexity: only those who exist would be able to ponder their existence."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "phrases’ simplicity masks its"
+        },
+        {
+          "id": "B",
+          "text": "phrases simplicity masks their"
+        },
+        {
+          "id": "C",
+          "text": "phrase’s simplicity masks their"
+        },
+        {
+          "id": "D",
+          "text": "phrase’s simplicity masks its"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "Choice D is the best answer. The conventions being tested are the use of possessive nouns and the use of possessive determiners. The singular possessive noun \"phrase’s\" correctly indicates that there is only one simple phrase. The singular possessive determiner \"its\" agrees in number with the singular possessive noun \"phrase’s,\" reinforcing the idea that there is only one simple yet complex phrase.\n\nChoice A is incorrect because the context requires the singular possessive noun \"phrase’s,\" not the plural possessive noun \"phrases’.\" Choice B is incorrect because the context requires the singular possessive noun \"phrase’s\" and the corresponding singular possessive determiner \"its,\" not the plural noun \"phrases\" and the corresponding plural possessive determiner \"their.\" Choice C is incorrect because the context requires the singular possessive determiner \"its,\" not the plural possessive determiner \"their.\"",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35.pdf",
+          "sha256": "1c7c4c1ac160ed5df317c075e9f4a33077e98bbf59e0b9971949937e04dc745a",
+          "pages": [
+            5,
+            6
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35-with answers and explanations.pdf",
+          "sha256": "7138438f0a990b9a5ee16e8b8d04f573648201b1247bf33ca4604fdf9f444de6",
+          "pages": [
+            10,
+            11
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "D": "Choice D is the best answer. The conventions being tested are the use of possessive nouns and the use of possessive determiners. The singular possessive noun \"phrase’s\" correctly indicates that there is only one simple phrase. The singular possessive determiner \"its\" agrees in number with the singular possessive noun \"phrase’s,\" reinforcing the idea that there is only one simple yet complex phrase.",
+        "A": "Choice A is incorrect because the context requires the singular possessive noun \"phrase’s,\" not the plural possessive noun \"phrases’.\"",
+        "B": "Choice B is incorrect because the context requires the singular possessive noun \"phrase’s\" and the corresponding singular possessive determiner \"its,\" not the plural noun \"phrases\" and the corresponding plural possessive determiner \"their.\"",
+        "C": "Choice C is incorrect because the context requires the singular possessive determiner \"its,\" not the plural possessive determiner \"their.\""
+      }
+    },
+    {
+      "id": "8bd8f58c",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "form,structure,and purpose",
+      "difficulty": "Medium",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The violins handmade in the seventeenth century by Italian craftsman Antonio Stradivari have been celebrated as some of the finest in the world. In close collaboration with musicians, Stradivari introduced changes to the shape of a traditional violin, flattening some of the instrument’s curves and making ______ lighter overall."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "those"
+        },
+        {
+          "id": "B",
+          "text": "one"
+        },
+        {
+          "id": "C",
+          "text": "them"
+        },
+        {
+          "id": "D",
+          "text": "it"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "Choice D is the best answer. The convention being tested is pronoun–antecedent agreement. The singular pronoun “it” agrees in number with the singular antecedent “violin” and thus indicates that the traditional violin (and not its curves) was made lighter.\n\nChoice A is incorrect because the plural pronoun “those” doesn’t agree in number with the singular antecedent “violin.” Choice B is incorrect because the singular pronoun “one” is ambiguous in this context; the resulting sentence leaves unclear what Stradivari made lighter. Choice C is incorrect because the plural pronoun “them” doesn’t agree in number with the singular antecedent “violin.”",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35.pdf",
+          "sha256": "1c7c4c1ac160ed5df317c075e9f4a33077e98bbf59e0b9971949937e04dc745a",
+          "pages": [
+            6
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35-with answers and explanations.pdf",
+          "sha256": "7138438f0a990b9a5ee16e8b8d04f573648201b1247bf33ca4604fdf9f444de6",
+          "pages": [
+            11,
+            12
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "D": "Choice D is the best answer. The convention being tested is pronoun–antecedent agreement. The singular pronoun “it” agrees in number with the singular antecedent “violin” and thus indicates that the traditional violin (and not its curves) was made lighter.",
+        "A": "Choice A is incorrect because the plural pronoun “those” doesn’t agree in number with the singular antecedent “violin.”",
+        "B": "Choice B is incorrect because the singular pronoun “one” is ambiguous in this context; the resulting sentence leaves unclear what Stradivari made lighter.",
+        "C": "Choice C is incorrect because the plural pronoun “them” doesn’t agree in number with the singular antecedent “violin.”"
+      }
+    },
+    {
+      "id": "52930290",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "form,structure,and purpose",
+      "difficulty": "Medium",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Tortoises can be found in many works of literature. For example, in Tom Stoppard’s 1993 play Arcadia, there is a tortoise that ______ by two names (Plautus and Lightning) and appears in both of the play’s parallel timelines. As a character, the tortoise symbolizes the connection between the past and present."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "goes"
+        },
+        {
+          "id": "B",
+          "text": "will have gone"
+        },
+        {
+          "id": "C",
+          "text": "went"
+        },
+        {
+          "id": "D",
+          "text": "had gone"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "Choice A is the best answer. The convention being tested is the use of verbs to express tense in a sentence. In this choice, the present tense verb \"goes\" is consistent with the other present tense verbs (\"appears\" and \"symbolizes\") used to describe the tortoise in Stoppard’s play. Furthermore, it’s conventional to use the present tense when discussing a literary work.\n\nChoice B is incorrect because the future perfect tense verb \"will have gone\" isn’t consistent with the other present tense verbs used to describe the tortoise in Stoppard’s play. Choice C is incorrect because the past tense verb \"went\" isn’t consistent with the other present tense verbs used to describe the tortoise in Stoppard’s play. Choice D is incorrect because the past perfect tense verb \"had gone\" isn’t consistent with the other present tense verbs used to describe the tortoise in Stoppard’s play.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35.pdf",
+          "sha256": "1c7c4c1ac160ed5df317c075e9f4a33077e98bbf59e0b9971949937e04dc745a",
+          "pages": [
+            6,
+            7
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35-with answers and explanations.pdf",
+          "sha256": "7138438f0a990b9a5ee16e8b8d04f573648201b1247bf33ca4604fdf9f444de6",
+          "pages": [
+            12,
+            13
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "A": "Choice A is the best answer. The convention being tested is the use of verbs to express tense in a sentence. In this choice, the present tense verb \"goes\" is consistent with the other present tense verbs (\"appears\" and \"symbolizes\") used to describe the tortoise in Stoppard’s play. Furthermore, it’s conventional to use the present tense when discussing a literary work.",
+        "B": "Choice B is incorrect because the future perfect tense verb \"will have gone\" isn’t consistent with the other present tense verbs used to describe the tortoise in Stoppard’s play.",
+        "C": "Choice C is incorrect because the past tense verb \"went\" isn’t consistent with the other present tense verbs used to describe the tortoise in Stoppard’s play.",
+        "D": "Choice D is incorrect because the past perfect tense verb \"had gone\" isn’t consistent with the other present tense verbs used to describe the tortoise in Stoppard’s play."
+      }
+    },
+    {
+      "id": "992e6994",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "form,structure,and purpose",
+      "difficulty": "Medium",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Far from being modern inventions, ______ more than 5,000 years ago."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Sumerians in ancient Mesopotamia used drinking straws"
+        },
+        {
+          "id": "B",
+          "text": "drinking straws were used by Sumerians in ancient Mesopotamia"
+        },
+        {
+          "id": "C",
+          "text": "the use of drinking straws by Sumerians in ancient Mesopotamia happened"
+        },
+        {
+          "id": "D",
+          "text": "ancient Mesopotamia was home to Sumerians who used drinking straws"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Choice B is the best answer. Modifiers and their subjects must go next to each other. The modifier “far from being modern inventions” must be describing “drinking straws,” because those are the only possible inventions in this sentence.\n\nChoice A is incorrect. Modifiers and their subjects must go next to each other. The modifier “far from being modern inventions” can’t be describing “Sumerians,” because they are a group of people, not an invention. Choice C is incorrect. Modifiers and their subjects must go next to each other. The modifier “far from being modern inventions” can’t be describing “the use of drinking straws,” because it is not “the use” of drinking straws that is an invention—it is the drinking straws themselves. Choice D is incorrect. Modifiers and their subjects must go next to each other. The modifier “far from being modern inventions” can’t be describing “Ancient Mesopotamia,” because that is a place, not an invention.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35.pdf",
+          "sha256": "1c7c4c1ac160ed5df317c075e9f4a33077e98bbf59e0b9971949937e04dc745a",
+          "pages": [
+            7
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35-with answers and explanations.pdf",
+          "sha256": "7138438f0a990b9a5ee16e8b8d04f573648201b1247bf33ca4604fdf9f444de6",
+          "pages": [
+            13,
+            14
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "B": "Choice B is the best answer. Modifiers and their subjects must go next to each other. The modifier “far from being modern inventions” must be describing “drinking straws,” because those are the only possible inventions in this sentence.",
+        "A": "Choice A is incorrect. Modifiers and their subjects must go next to each other. The modifier “far from being modern inventions” can’t be describing “Sumerians,” because they are a group of people, not an invention.",
+        "C": "Choice C is incorrect. Modifiers and their subjects must go next to each other. The modifier “far from being modern inventions” can’t be describing “the use of drinking straws,” because it is not “the use” of drinking straws that is an invention—it is the drinking straws themselves.",
+        "D": "Choice D is incorrect. Modifiers and their subjects must go next to each other. The modifier “far from being modern inventions” can’t be describing “Ancient Mesopotamia,” because that is a place, not an invention."
+      }
+    },
+    {
+      "id": "1483cd89",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "form,structure,and purpose",
+      "difficulty": "Medium",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In Death Valley National Park’s Racetrack Playa, a flat, dry lakebed, are 162 rocks—some weighing less than a pound but others almost 700 pounds—that move periodically from place to place, seemingly of their own volition. Racetrack-like trails in the ______ mysterious migration."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "playas sediment mark the rock’s"
+        },
+        {
+          "id": "B",
+          "text": "playa’s sediment mark the rocks"
+        },
+        {
+          "id": "C",
+          "text": "playa’s sediment mark the rocks’"
+        },
+        {
+          "id": "D",
+          "text": "playas’ sediment mark the rocks’"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Choice C is the best answer. The convention being tested is the use of plural and possessive nouns. The singular possessive noun “playa’s” and the plural possessive noun “rocks’” correctly indicate that the sediment is that of one playa (the Racetrack Playa) and that there are multiple rocks that have mysteriously migrated across the sediment.\n\nChoice A is incorrect because the context requires the singular possessive noun “playa’s” and the plural possessive noun “rocks’,” not the plural noun “playas” and the singular possessive noun “rock’s.” Choice B is incorrect because the context requires the plural possessive noun “rocks’,” not the plural noun “rocks.” Choice D is incorrect because the context requires the singular possessive noun “playa’s,” not the plural possessive noun “playas’.”",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35.pdf",
+          "sha256": "1c7c4c1ac160ed5df317c075e9f4a33077e98bbf59e0b9971949937e04dc745a",
+          "pages": [
+            7,
+            8
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35-with answers and explanations.pdf",
+          "sha256": "7138438f0a990b9a5ee16e8b8d04f573648201b1247bf33ca4604fdf9f444de6",
+          "pages": [
+            14,
+            15
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "C": "Choice C is the best answer. The convention being tested is the use of plural and possessive nouns. The singular possessive noun “playa’s” and the plural possessive noun “rocks’” correctly indicate that the sediment is that of one playa (the Racetrack Playa) and that there are multiple rocks that have mysteriously migrated across the sediment.",
+        "A": "Choice A is incorrect because the context requires the singular possessive noun “playa’s” and the plural possessive noun “rocks’,” not the plural noun “playas” and the singular possessive noun “rock’s.”",
+        "B": "Choice B is incorrect because the context requires the plural possessive noun “rocks’,” not the plural noun “rocks.”",
+        "D": "Choice D is incorrect because the context requires the singular possessive noun “playa’s,” not the plural possessive noun “playas’.”"
+      }
+    },
+    {
+      "id": "1e1286b0",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "form,structure,and purpose",
+      "difficulty": "Medium",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Solarpunk is an art movement that imagines renewable energy–powered technology infused complementarily into nature. In Paolo Bacigalupi’s solarpunk short story “Efficiency,” an artificial intelligence that absorbs sustainable energies, redistributing them through intricate networks of weights and generators, ______ Chicago’s energy grid."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "have been powering"
+        },
+        {
+          "id": "B",
+          "text": "power"
+        },
+        {
+          "id": "C",
+          "text": "powers"
+        },
+        {
+          "id": "D",
+          "text": "are powering"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Choice C is the best answer. The convention being tested is subject-verb agreement. The singular verb \"powers\" agrees in number with the singular subject \"an artificial intelligence.\"\n\nChoice A is incorrect because the plural verb \"have been powering\" doesn’t agree in number with the singular subject \"an artificial intelligence.\" Choice B is incorrect because the plural verb \"power\" doesn’t agree in number with the singular subject \"an artificial intelligence.\" Choice D is incorrect because the plural verb \"are powering\" doesn’t agree in number with the singular subject \"an artificial intelligence.\"",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35.pdf",
+          "sha256": "1c7c4c1ac160ed5df317c075e9f4a33077e98bbf59e0b9971949937e04dc745a",
+          "pages": [
+            8
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35-with answers and explanations.pdf",
+          "sha256": "7138438f0a990b9a5ee16e8b8d04f573648201b1247bf33ca4604fdf9f444de6",
+          "pages": [
+            15,
+            16
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "C": "Choice C is the best answer. The convention being tested is subject-verb agreement. The singular verb \"powers\" agrees in number with the singular subject \"an artificial intelligence.\"",
+        "A": "Choice A is incorrect because the plural verb \"have been powering\" doesn’t agree in number with the singular subject \"an artificial intelligence.\"",
+        "B": "Choice B is incorrect because the plural verb \"power\" doesn’t agree in number with the singular subject \"an artificial intelligence.\"",
+        "D": "Choice D is incorrect because the plural verb \"are powering\" doesn’t agree in number with the singular subject \"an artificial intelligence.\""
+      }
+    },
+    {
+      "id": "4efacd65",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "form,structure,and purpose",
+      "difficulty": "Medium",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Nuhād al-Ḥaddād, known as Fairuz, was one of the most beloved Lebanese singers of the twentieth century. Her broad singing repertoire—which included traditional forms, such as the Arabic qasida and maqam, alongside modern pop and jazz styles—lent Fairuz a timeless, cross-generational appeal, ______ her the moniker “the soul of Lebanon.”"
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "earned"
+        },
+        {
+          "id": "B",
+          "text": "had earned"
+        },
+        {
+          "id": "C",
+          "text": "earning"
+        },
+        {
+          "id": "D",
+          "text": "earn"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Choice C is the best answer. The word \"earning\" is being used to introduce an additional modifying phrase, which describes how Fairuz’s repertoire lent her cross-generational appeal. When a verb ends in -ing and doesn’t have a helper verb like \"is\" before it, it can be used to modify a noun or verb. This is appropriate here.\n\nChoice A is incorrect. The underlined verb is being used to introduce additional descriptive information, which is set off from the rest of the sentence by a comma. Because there is no subject here, a finite form of the verb (like \"earned\") creates an error. We need another form of the verb that doesn’t require a subject and can introduce descriptive information. Choice B is incorrect. The underlined verb is being used to introduce additional descriptive information, which is set off from the rest of the sentence by a comma. Because there is no subject here, a finite form of the verb (like \"had earned\") creates an error. We need another form of the verb that doesn’t require a subject and can introduce descriptive information. Choice D is incorrect. The underlined verb is being used to introduce additional descriptive information, which is set off from the rest of the sentence by a comma. Because there is no subject here, a finite form of the verb (like \"earn\") creates an error. We need another form of the verb that doesn’t require a subject and can introduce descriptive information.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35.pdf",
+          "sha256": "1c7c4c1ac160ed5df317c075e9f4a33077e98bbf59e0b9971949937e04dc745a",
+          "pages": [
+            8,
+            9
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35-with answers and explanations.pdf",
+          "sha256": "7138438f0a990b9a5ee16e8b8d04f573648201b1247bf33ca4604fdf9f444de6",
+          "pages": [
+            16,
+            17
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "C": "Choice C is the best answer. The word \"earning\" is being used to introduce an additional modifying phrase, which describes how Fairuz’s repertoire lent her cross-generational appeal. When a verb ends in -ing and doesn’t have a helper verb like \"is\" before it, it can be used to modify a noun or verb. This is appropriate here.",
+        "A": "Choice A is incorrect. The underlined verb is being used to introduce additional descriptive information, which is set off from the rest of the sentence by a comma. Because there is no subject here, a finite form of the verb (like \"earned\") creates an error. We need another form of the verb that doesn’t require a subject and can introduce descriptive information.",
+        "B": "Choice B is incorrect. The underlined verb is being used to introduce additional descriptive information, which is set off from the rest of the sentence by a comma. Because there is no subject here, a finite form of the verb (like \"had earned\") creates an error. We need another form of the verb that doesn’t require a subject and can introduce descriptive information.",
+        "D": "Choice D is incorrect. The underlined verb is being used to introduce additional descriptive information, which is set off from the rest of the sentence by a comma. Because there is no subject here, a finite form of the verb (like \"earn\") creates an error. We need another form of the verb that doesn’t require a subject and can introduce descriptive information."
+      }
+    },
+    {
+      "id": "a3f9a509",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "form,structure,and purpose",
+      "difficulty": "Medium",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Inventor John Friedman created a prototype of the first flexible straw by inserting a screw into a paper straw and, using dental floss, binding the straw tightly around the ______ When the floss and screw were removed, the resulting corrugations in the paper allowed the straw to bend easily over the edge of a glass."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "screw’s thread’s."
+        },
+        {
+          "id": "B",
+          "text": "screws’ threads."
+        },
+        {
+          "id": "C",
+          "text": "screw’s threads."
+        },
+        {
+          "id": "D",
+          "text": "screws threads’."
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Choice C is the best answer. The convention being tested is the use of plural and possessive nouns. The singular possessive noun “screw’s” and the plural noun “threads” correctly indicate that there is only one screw and it has multiple threads.\n\nChoice A is incorrect because the context requires the plural noun “threads,” not the singular possessive noun “thread’s.” Choice B is incorrect because the context requires the singular possessive noun “screw’s,” not the plural possessive noun “screws’.” Choice D is incorrect because the context requires the singular possessive noun “screw’s” and the plural noun “threads,” not the plural noun “screws” or the plural possessive noun “threads.’”",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35.pdf",
+          "sha256": "1c7c4c1ac160ed5df317c075e9f4a33077e98bbf59e0b9971949937e04dc745a",
+          "pages": [
+            9
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35-with answers and explanations.pdf",
+          "sha256": "7138438f0a990b9a5ee16e8b8d04f573648201b1247bf33ca4604fdf9f444de6",
+          "pages": [
+            17,
+            18
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "C": "Choice C is the best answer. The convention being tested is the use of plural and possessive nouns. The singular possessive noun “screw’s” and the plural noun “threads” correctly indicate that there is only one screw and it has multiple threads.",
+        "A": "Choice A is incorrect because the context requires the plural noun “threads,” not the singular possessive noun “thread’s.”",
+        "B": "Choice B is incorrect because the context requires the singular possessive noun “screw’s,” not the plural possessive noun “screws’.”",
+        "D": "Choice D is incorrect because the context requires the singular possessive noun “screw’s” and the plural noun “threads,” not the plural noun “screws” or the plural possessive noun “threads.’”"
+      }
+    },
+    {
+      "id": "d0884ae5",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "form,structure,and purpose",
+      "difficulty": "Medium",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Official measurements of the Mississippi River’s length vary: according to the US Geologic Survey, the river is 2,300 miles long, whereas the Environmental Protection Agency records its length as 2,320 miles. This disparity can be explained in part by the fact that rivers such as the Mississippi expand and contract as ______ sediment."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "they accumulate"
+        },
+        {
+          "id": "B",
+          "text": "one accumulates"
+        },
+        {
+          "id": "C",
+          "text": "it accumulates"
+        },
+        {
+          "id": "D",
+          "text": "we accumulate"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "Choice A is the best answer. The noun that goes with \"expand and contract\" is \"rivers,\" a plural noun. \"They\" is a third-person plural pronoun, so it can correctly stand in for \"rivers.\"\n\nChoice B is incorrect. This choice creates a pronoun-antecedent agreement error. \"One\" is a singular pronoun, but the noun that goes with \"expand and contract\" is \"rivers,\" a plural noun. Choice C is incorrect. This choice creates a pronoun-antecedent agreement error. \"It\" is a singular pronoun, but the noun that goes with \"expand and contract\" is \"rivers,\" a plural noun. Choice D is incorrect. This choice creates a pronoun-antecedent agreement error. The noun that goes with \"expand and contract\" is the plural noun \"rivers.\" Rivers are not people, so \"we\" can’t be used to stand in for it.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35.pdf",
+          "sha256": "1c7c4c1ac160ed5df317c075e9f4a33077e98bbf59e0b9971949937e04dc745a",
+          "pages": [
+            9,
+            10
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35-with answers and explanations.pdf",
+          "sha256": "7138438f0a990b9a5ee16e8b8d04f573648201b1247bf33ca4604fdf9f444de6",
+          "pages": [
+            18,
+            19
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "A": "Choice A is the best answer. The noun that goes with \"expand and contract\" is \"rivers,\" a plural noun. \"They\" is a third-person plural pronoun, so it can correctly stand in for \"rivers.\"",
+        "B": "Choice B is incorrect. This choice creates a pronoun-antecedent agreement error. \"One\" is a singular pronoun, but the noun that goes with \"expand and contract\" is \"rivers,\" a plural noun.",
+        "C": "Choice C is incorrect. This choice creates a pronoun-antecedent agreement error. \"It\" is a singular pronoun, but the noun that goes with \"expand and contract\" is \"rivers,\" a plural noun.",
+        "D": "Choice D is incorrect. This choice creates a pronoun-antecedent agreement error. The noun that goes with \"expand and contract\" is the plural noun \"rivers.\" Rivers are not people, so \"we\" can’t be used to stand in for it."
+      }
+    },
+    {
+      "id": "87eb538d",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "form,structure,and purpose",
+      "difficulty": "Medium",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Because a cycle of lunar phases ______ 29.5 days to complete, it’s possible to observe two full moons in a single month, one at the beginning and one at the end."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "are taking"
+        },
+        {
+          "id": "B",
+          "text": "have taken"
+        },
+        {
+          "id": "C",
+          "text": "take"
+        },
+        {
+          "id": "D",
+          "text": "takes"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "Choice D is the best answer. The convention being tested is subject-verb agreement. The singular verb \"takes\" agrees in number with the singular subject \"a cycle of lunar phases.\"\n\nChoice A is incorrect because the plural verb \"are taking\" doesn’t agree in number with the singular subject \"a cycle of lunar phases.\" Choice B is incorrect because the plural verb \"have taken\" doesn’t agree in number with the singular subject \"a cycle of lunar phases.\" Choice C is incorrect because the plural verb \"take\" doesn’t agree in number with the singular subject \"a cycle of lunar phases.\"",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35.pdf",
+          "sha256": "1c7c4c1ac160ed5df317c075e9f4a33077e98bbf59e0b9971949937e04dc745a",
+          "pages": [
+            10
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35-with answers and explanations.pdf",
+          "sha256": "7138438f0a990b9a5ee16e8b8d04f573648201b1247bf33ca4604fdf9f444de6",
+          "pages": [
+            19,
+            20
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "D": "Choice D is the best answer. The convention being tested is subject-verb agreement. The singular verb \"takes\" agrees in number with the singular subject \"a cycle of lunar phases.\"",
+        "A": "Choice A is incorrect because the plural verb \"are taking\" doesn’t agree in number with the singular subject \"a cycle of lunar phases.\"",
+        "B": "Choice B is incorrect because the plural verb \"have taken\" doesn’t agree in number with the singular subject \"a cycle of lunar phases.\"",
+        "C": "Choice C is incorrect because the plural verb \"take\" doesn’t agree in number with the singular subject \"a cycle of lunar phases.\""
+      }
+    },
+    {
+      "id": "f6572385",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "form,structure,and purpose",
+      "difficulty": "Medium",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Professional American football player Fred Cox invented one of the world’s most popular toys. In the 1970s, he came up with the idea for the Nerf football, which ______ of the harder and heavier regulation football."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "were a smaller, foam version"
+        },
+        {
+          "id": "B",
+          "text": "are smaller, foam versions"
+        },
+        {
+          "id": "C",
+          "text": "were smaller, foam versions"
+        },
+        {
+          "id": "D",
+          "text": "is a smaller, foam version"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "Choice D is the best answer. The convention being tested is subject-verb agreement and agreement between nouns. The singular verb “is” and the singular noun “version” both agree in number with the relative pronoun “which.” In this context, “which” functions as a singular subject because it refers to the singular noun “the Nerf football.”\n\nChoice A is incorrect because the plural verb “were” doesn’t agree in number with the singular noun phrase “the Nerf football” that it’s modifying. Choice B is incorrect because the plural verb “are” and the plural noun “versions” don’t agree in number with the singular noun phrase “the Nerf football” that they’re modifying. Choice C is incorrect because the plural verb “were” and the plural noun “versions” don’t agree in number with the singular noun phrase “the Nerf football” that they’re modifying.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35.pdf",
+          "sha256": "1c7c4c1ac160ed5df317c075e9f4a33077e98bbf59e0b9971949937e04dc745a",
+          "pages": [
+            10,
+            11
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35-with answers and explanations.pdf",
+          "sha256": "7138438f0a990b9a5ee16e8b8d04f573648201b1247bf33ca4604fdf9f444de6",
+          "pages": [
+            20,
+            21
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "D": "Choice D is the best answer. The convention being tested is subject-verb agreement and agreement between nouns. The singular verb “is” and the singular noun “version” both agree in number with the relative pronoun “which.” In this context, “which” functions as a singular subject because it refers to the singular noun “the Nerf football.”",
+        "A": "Choice A is incorrect because the plural verb “were” doesn’t agree in number with the singular noun phrase “the Nerf football” that it’s modifying.",
+        "B": "Choice B is incorrect because the plural verb “are” and the plural noun “versions” don’t agree in number with the singular noun phrase “the Nerf football” that they’re modifying.",
+        "C": "Choice C is incorrect because the plural verb “were” and the plural noun “versions” don’t agree in number with the singular noun phrase “the Nerf football” that they’re modifying."
+      }
+    },
+    {
+      "id": "ce6fa228",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "form,structure,and purpose",
+      "difficulty": "Medium",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "A pioneer in the field of taphonomy (the study of how organic remains become fossils), ______ may be just as prevalent in the fossil record as those of thick-shelled organisms."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "fossils of thin-shelled organisms, Anna Behrensmeyer demonstrated in a 2005 analysis,"
+        },
+        {
+          "id": "B",
+          "text": "Anna Behrensmeyer demonstrated in a 2005 analysis that fossils of thin-shelled organisms"
+        },
+        {
+          "id": "C",
+          "text": "it was demonstrated in a 2005 analysis by Anna Behrensmeyer that fossils of thin-shelled organisms"
+        },
+        {
+          "id": "D",
+          "text": "a 2005 analysis—by Anna Behrensmeyer—demonstrated that fossils of thin-shelled organisms"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Choice B is the best answer. The convention being tested is subject-modifier placement. This choice makes the noun phrase “Anna Behrensmeyer” the subject of the sentence and places it immediately after the modifying phrase “a pioneer…fossils.” In doing so, this choice clearly establishes that Anna Behrensmeyer—and not another noun in the sentence—is a pioneer in the field of taphonomy.\n\nChoice A is incorrect because it results in a dangling modifier. The placement of the noun phrase “fossils of thin-shelled organisms” immediately after the modifying phrase illogically suggests that the “fossils” are a pioneer in the field of taphonomy. Choice C is incorrect because it results in a dangling modifier. The placement of the pronoun “it” immediately after the modifying phrase illogically suggests that “it” is a pioneer in the field of taphonomy. Choice D is incorrect because it results in a dangling modifier. The placement of the noun phrase “a 2005 analysis” immediately after the modifying phrase illogically suggests that “a 2005 analysis” is a pioneer in the field of taphonomy.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35.pdf",
+          "sha256": "1c7c4c1ac160ed5df317c075e9f4a33077e98bbf59e0b9971949937e04dc745a",
+          "pages": [
+            11,
+            12
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35-with answers and explanations.pdf",
+          "sha256": "7138438f0a990b9a5ee16e8b8d04f573648201b1247bf33ca4604fdf9f444de6",
+          "pages": [
+            21,
+            22
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "B": "Choice B is the best answer. The convention being tested is subject-modifier placement. This choice makes the noun phrase “Anna Behrensmeyer” the subject of the sentence and places it immediately after the modifying phrase “a pioneer…fossils.” In doing so, this choice clearly establishes that Anna Behrensmeyer—and not another noun in the sentence—is a pioneer in the field of taphonomy.",
+        "A": "Choice A is incorrect because it results in a dangling modifier. The placement of the noun phrase “fossils of thin-shelled organisms” immediately after the modifying phrase illogically suggests that the “fossils” are a pioneer in the field of taphonomy.",
+        "C": "Choice C is incorrect because it results in a dangling modifier. The placement of the pronoun “it” immediately after the modifying phrase illogically suggests that “it” is a pioneer in the field of taphonomy.",
+        "D": "Choice D is incorrect because it results in a dangling modifier. The placement of the noun phrase “a 2005 analysis” immediately after the modifying phrase illogically suggests that “a 2005 analysis” is a pioneer in the field of taphonomy."
+      }
+    },
+    {
+      "id": "1ea3651d",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "form,structure,and purpose",
+      "difficulty": "Medium",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Classical composer Florence Price’s 1927 move to Chicago marked a turning point in her career. It was there that Price premiered her First Symphony—a piece that was praised for blending traditional Romantic motifs with aspects of Black folk music—and ______ supportive relationships with other Black artists."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "developing"
+        },
+        {
+          "id": "B",
+          "text": "developed"
+        },
+        {
+          "id": "C",
+          "text": "to develop"
+        },
+        {
+          "id": "D",
+          "text": "having developed"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Choice B is the best answer. The missing verb is part of the same clause as the verb \"premiered,\" and \"Price\" is the subject of both. So we need the past-tense form \"developed\" in order to match \"premiered.\"\n\nChoice A is incorrect. This choice creates a verb form error. The missing verb is part of the same clause as the verb \"premiered,\" and \"Price\" is the subject of both. So we need the past-tense form \"developed\" in order to match \"premiered.\" Choice C is incorrect. This choice creates a verb form error. The missing verb is part of the same clause as the verb \"premiered,\" and \"Price\" is the subject of both. So we need the past-tense form \"developed\" in order to match \"premiered.\" Choice D is incorrect. This choice creates a verb form error. The missing verb is part of the same clause as the verb \"premiered,\" and \"Price\" is the subject of both. So we need the past-tense form \"developed\" in order to match \"premiered.\"",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35.pdf",
+          "sha256": "1c7c4c1ac160ed5df317c075e9f4a33077e98bbf59e0b9971949937e04dc745a",
+          "pages": [
+            12
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35-with answers and explanations.pdf",
+          "sha256": "7138438f0a990b9a5ee16e8b8d04f573648201b1247bf33ca4604fdf9f444de6",
+          "pages": [
+            22,
+            23
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "B": "Choice B is the best answer. The missing verb is part of the same clause as the verb \"premiered,\" and \"Price\" is the subject of both. So we need the past-tense form \"developed\" in order to match \"premiered.\"",
+        "A": "Choice A is incorrect. This choice creates a verb form error. The missing verb is part of the same clause as the verb \"premiered,\" and \"Price\" is the subject of both. So we need the past-tense form \"developed\" in order to match \"premiered.\"",
+        "C": "Choice C is incorrect. This choice creates a verb form error. The missing verb is part of the same clause as the verb \"premiered,\" and \"Price\" is the subject of both. So we need the past-tense form \"developed\" in order to match \"premiered.\"",
+        "D": "Choice D is incorrect. This choice creates a verb form error. The missing verb is part of the same clause as the verb \"premiered,\" and \"Price\" is the subject of both. So we need the past-tense form \"developed\" in order to match \"premiered.\""
+      }
+    },
+    {
+      "id": "727d9787",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "form,structure,and purpose",
+      "difficulty": "Medium",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In the 1950s, a man named Joseph McVicker was struggling to keep his business afloat when his sister-in-law Kay Zufall advised him to repurpose the company’s product, a nontoxic, clay-like substance for removing soot from wallpaper, as a modeling putty for kids. In addition, Zufall ______ selling the product under a child-friendly name: Play-Doh."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "suggested"
+        },
+        {
+          "id": "B",
+          "text": "suggests"
+        },
+        {
+          "id": "C",
+          "text": "had suggested"
+        },
+        {
+          "id": "D",
+          "text": "was suggesting"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "Choice A is the best answer. The convention being tested is the use of verbs to express tense. In this choice, the simple past tense verb “suggested” properly indicates that Zufall offered her suggestion for the product’s name in the past. This verb tense is consistent with the previous sentence’s use of a simple past tense verb (“advised”) to describe Zufall’s advice to McVicker in the 1950s.\n\nChoice B is incorrect because the present tense verb “suggests” doesn’t indicate that Zufall offered her suggestion in the past. Choice C is incorrect because the past perfect verb “had suggested” isn’t consistent with the previous sentence’s use of the simple past tense verb “advised” to describe Zufall’s advice to McVicker. Choice D is incorrect because the past progressive verb “was suggesting” isn’t consistent with the previous sentence’s use of the simple past tense verb “advised” to describe Zufall’s advice to McVicker.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35.pdf",
+          "sha256": "1c7c4c1ac160ed5df317c075e9f4a33077e98bbf59e0b9971949937e04dc745a",
+          "pages": [
+            12,
+            13
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35-with answers and explanations.pdf",
+          "sha256": "7138438f0a990b9a5ee16e8b8d04f573648201b1247bf33ca4604fdf9f444de6",
+          "pages": [
+            23,
+            24
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "A": "Choice A is the best answer. The convention being tested is the use of verbs to express tense. In this choice, the simple past tense verb “suggested” properly indicates that Zufall offered her suggestion for the product’s name in the past. This verb tense is consistent with the previous sentence’s use of a simple past tense verb (“advised”) to describe Zufall’s advice to McVicker in the 1950s.",
+        "B": "Choice B is incorrect because the present tense verb “suggests” doesn’t indicate that Zufall offered her suggestion in the past.",
+        "C": "Choice C is incorrect because the past perfect verb “had suggested” isn’t consistent with the previous sentence’s use of the simple past tense verb “advised” to describe Zufall’s advice to McVicker.",
+        "D": "Choice D is incorrect because the past progressive verb “was suggesting” isn’t consistent with the previous sentence’s use of the simple past tense verb “advised” to describe Zufall’s advice to McVicker."
+      }
+    },
+    {
+      "id": "e40007b2",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "form,structure,and purpose",
+      "difficulty": "Medium",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "It can take time for proposed amendments to the US Constitution to become law. For example, the Twenty-Second Amendment, which limits the number of ______ can serve, was first proposed in 1947 but wasn’t approved by the required three-fourths majority of state legislatures until 1951."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "terms presidents"
+        },
+        {
+          "id": "B",
+          "text": "term’s presidents"
+        },
+        {
+          "id": "C",
+          "text": "term’s president’s"
+        },
+        {
+          "id": "D",
+          "text": "terms president’s"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "Choice A is the best answer. The convention being tested is the use of plural nouns. The plural nouns \"terms\" and \"presidents\" correctly indicate that the amendment involves multiple terms and applies to presidents in general.\n\nChoice B is incorrect because the context requires the plural noun \"terms,\" not the singular possessive noun \"term’s.\" Choice C is incorrect because the context requires the plural nouns \"terms\" and \"presidents,\" not the singular possessive nouns \"term’s\" and \"president’s.\" Choice D is incorrect because the context requires the plural noun \"presidents,\" not the singular possessive noun \"president’s.\"",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35.pdf",
+          "sha256": "1c7c4c1ac160ed5df317c075e9f4a33077e98bbf59e0b9971949937e04dc745a",
+          "pages": [
+            13
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35-with answers and explanations.pdf",
+          "sha256": "7138438f0a990b9a5ee16e8b8d04f573648201b1247bf33ca4604fdf9f444de6",
+          "pages": [
+            24,
+            25
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "A": "Choice A is the best answer. The convention being tested is the use of plural nouns. The plural nouns \"terms\" and \"presidents\" correctly indicate that the amendment involves multiple terms and applies to presidents in general.",
+        "B": "Choice B is incorrect because the context requires the plural noun \"terms,\" not the singular possessive noun \"term’s.\"",
+        "C": "Choice C is incorrect because the context requires the plural nouns \"terms\" and \"presidents,\" not the singular possessive nouns \"term’s\" and \"president’s.\"",
+        "D": "Choice D is incorrect because the context requires the plural noun \"presidents,\" not the singular possessive noun \"president’s.\""
+      }
+    },
+    {
+      "id": "72ae84d8",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "form,structure,and purpose",
+      "difficulty": "Medium",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Slam poet Elizabeth Acevedo’s debut novel The Poet X, winner of the 2018 National Book Award for Young People’s Literature, is composed of ______ protagonist, fifteen-year-old Xiomara Batista."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "poems putatively written by the novel’s"
+        },
+        {
+          "id": "B",
+          "text": "poem’s putatively written by the novel’s"
+        },
+        {
+          "id": "C",
+          "text": "poem’s putatively written by the novels’"
+        },
+        {
+          "id": "D",
+          "text": "poems putatively written by the novels’"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "Choice A is the best answer. Nothing belongs to the “poems” in the sentence, so it should not be possessive—just a simple plural noun. The protagonist does belong to the novel—it’s the protagonist of the novel—so “novel” needs to be a singular possessive noun.\n\nChoice B is incorrect. This doesn’t complete the text in a way that conforms to the conventions of Standard English. This choice uses the singular possessive “poem’s,” but the text indicates that it should be the simple plural “poems”: there is more than one poem, and nothing belongs to the poems. Choice C is incorrect. This doesn’t complete the text in a way that conforms to the conventions of Standard English. This choice uses the singular possessive “poem’s,” but the text indicates that it should be the simple plural “poems”: there is more than one poem, and nothing belongs to the poems. This choice also uses the plural possessive “novels’,” which is incorrect because there is only one novel. Choice D is incorrect. This doesn’t complete the text in a way that conforms to the conventions of Standard English. This choice uses the plural possessive “novels’,” which is incorrect because there is only one novel, so it should be the singular possessive “novel’s.” .",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35.pdf",
+          "sha256": "1c7c4c1ac160ed5df317c075e9f4a33077e98bbf59e0b9971949937e04dc745a",
+          "pages": [
+            13,
+            14
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35-with answers and explanations.pdf",
+          "sha256": "7138438f0a990b9a5ee16e8b8d04f573648201b1247bf33ca4604fdf9f444de6",
+          "pages": [
+            25,
+            26
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "A": "Choice A is the best answer. Nothing belongs to the “poems” in the sentence, so it should not be possessive—just a simple plural noun. The protagonist does belong to the novel—it’s the protagonist of the novel—so “novel” needs to be a singular possessive noun.",
+        "B": "Choice B is incorrect. This doesn’t complete the text in a way that conforms to the conventions of Standard English. This choice uses the singular possessive “poem’s,” but the text indicates that it should be the simple plural “poems”: there is more than one poem, and nothing belongs to the poems.",
+        "C": "Choice C is incorrect. This doesn’t complete the text in a way that conforms to the conventions of Standard English. This choice uses the singular possessive “poem’s,” but the text indicates that it should be the simple plural “poems”: there is more than one poem, and nothing belongs to the poems. This choice also uses the plural possessive “novels’,” which is incorrect because there is only one novel.",
+        "D": "Choice D is incorrect. This doesn’t complete the text in a way that conforms to the conventions of Standard English. This choice uses the plural possessive “novels’,” which is incorrect because there is only one novel, so it should be the singular possessive “novel’s.” ."
+      }
+    },
+    {
+      "id": "362db9f6",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "form,structure,and purpose",
+      "difficulty": "Medium",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The soundtrack to Mira Nair’s 1991 film Mississippi Masala expressively captures the clashing of cultures that happens when ______ (a young Indian woman from Uganda and a young African American man from Mississippi) meet. Featured throughout the film are songs from Uganda’s Afrigo Band, the Indian composer L. Subramaniam, and the Mississippi blues musician Sam Chatmon."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "it’s two protagonists"
+        },
+        {
+          "id": "B",
+          "text": "its two protagonist’s"
+        },
+        {
+          "id": "C",
+          "text": "it’s two protagonist’s"
+        },
+        {
+          "id": "D",
+          "text": "its two protagonists"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "Choice D is the best answer. The conventions being tested are the use of possessive determiners and the use of plural nouns. The singular possessive determiner \"its\"—which agrees in number with the singular noun phrase \"Mira Nair’s 1991 film Mississippi Masala\"—and the plural noun \"protagonists\" correctly indicate that Nair’s film has multiple protagonists.\n\nChoice A is incorrect because \"it’s\" is the contraction for \"it is,\" not a possessive determiner. Choice B is incorrect because the context requires the plural noun \"protagonists,\" not the singular possessive noun \"protagonist’s.\" Choice C is incorrect because the context requires the possessive determiner \"its\" and the plural noun \"protagonists,\" not the contraction \"it’s\" or the singular possessive noun \"protagonist’s.\"",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35.pdf",
+          "sha256": "1c7c4c1ac160ed5df317c075e9f4a33077e98bbf59e0b9971949937e04dc745a",
+          "pages": [
+            14
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35-with answers and explanations.pdf",
+          "sha256": "7138438f0a990b9a5ee16e8b8d04f573648201b1247bf33ca4604fdf9f444de6",
+          "pages": [
+            26,
+            27
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "D": "Choice D is the best answer. The conventions being tested are the use of possessive determiners and the use of plural nouns. The singular possessive determiner \"its\"—which agrees in number with the singular noun phrase \"Mira Nair’s 1991 film Mississippi Masala\"—and the plural noun \"protagonists\" correctly indicate that Nair’s film has multiple protagonists.",
+        "A": "Choice A is incorrect because \"it’s\" is the contraction for \"it is,\" not a possessive determiner.",
+        "B": "Choice B is incorrect because the context requires the plural noun \"protagonists,\" not the singular possessive noun \"protagonist’s.\"",
+        "C": "Choice C is incorrect because the context requires the possessive determiner \"its\" and the plural noun \"protagonists,\" not the contraction \"it’s\" or the singular possessive noun \"protagonist’s.\""
+      }
+    },
+    {
+      "id": "81e5993c",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "form,structure,and purpose",
+      "difficulty": "Medium",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Water in the North Atlantic Ocean is pushed eastward by powerful winds, but the rotation of Earth and interference from nearby landmasses together cause ______ to swirl into a massive, churning whirlpool— also called the North Atlantic Gyre—that spins clockwise."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "these"
+        },
+        {
+          "id": "B",
+          "text": "those"
+        },
+        {
+          "id": "C",
+          "text": "them"
+        },
+        {
+          "id": "D",
+          "text": "it"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "Choice D is the best answer. The convention being tested is pronoun-antecedent agreement. The singular pronoun \"it\" agrees in number with the singular antecedent \"water\" and clearly indicates that the water swirls into a whirlpool.\n\nChoice A is incorrect. The plural pronoun \"these\" neither agrees in number with the singular antecedent \"water\" nor clearly indicates that the water—not another plural noun in the sentence, such as \"landmasses\" or \"winds\"—swirls into a whirlpool. Choice B is incorrect. The plural pronoun \"those\" neither agrees in number with the singular antecedent \"water\" nor clearly indicates that the water—not another plural noun in the sentence, such as \"landmasses\" or \"winds\"—swirls into a whirlpool. Choice C is incorrect. The plural pronoun \"them\" neither agrees in number with the singular antecedent \"water\" nor clearly indicates that the water—not another plural noun in the sentence, such as \"landmasses\" or \"winds\"— swirls into a whirlpool.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35.pdf",
+          "sha256": "1c7c4c1ac160ed5df317c075e9f4a33077e98bbf59e0b9971949937e04dc745a",
+          "pages": [
+            14,
+            15
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35-with answers and explanations.pdf",
+          "sha256": "7138438f0a990b9a5ee16e8b8d04f573648201b1247bf33ca4604fdf9f444de6",
+          "pages": [
+            27,
+            28
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "D": "Choice D is the best answer. The convention being tested is pronoun-antecedent agreement. The singular pronoun \"it\" agrees in number with the singular antecedent \"water\" and clearly indicates that the water swirls into a whirlpool.",
+        "A": "Choice A is incorrect. The plural pronoun \"these\" neither agrees in number with the singular antecedent \"water\" nor clearly indicates that the water—not another plural noun in the sentence, such as \"landmasses\" or \"winds\"—swirls into a whirlpool.",
+        "B": "Choice B is incorrect. The plural pronoun \"those\" neither agrees in number with the singular antecedent \"water\" nor clearly indicates that the water—not another plural noun in the sentence, such as \"landmasses\" or \"winds\"—swirls into a whirlpool.",
+        "C": "Choice C is incorrect. The plural pronoun \"them\" neither agrees in number with the singular antecedent \"water\" nor clearly indicates that the water—not another plural noun in the sentence, such as \"landmasses\" or \"winds\"— swirls into a whirlpool."
+      }
+    },
+    {
+      "id": "0063f37a",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "form,structure,and purpose",
+      "difficulty": "Medium",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The Progressive Era in the United States witnessed the rise of numerous Black women’s clubs, local organizations that advocated for racial and gender equality. Among the clubs’ leaders ______ Josephine St. Pierre Ruffin, founder of the Women’s Era Club of Boston."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "was"
+        },
+        {
+          "id": "B",
+          "text": "were"
+        },
+        {
+          "id": "C",
+          "text": "are"
+        },
+        {
+          "id": "D",
+          "text": "have been"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "Choice A is the best answer. The convention being tested here is subject-verb agreement. The singular verb “was” agrees in number with the singular subject “Josephine St. Pierre Ruffin.”\n\nChoice B is incorrect because the plural verb “were” doesn’t agree in number with the singular subject “Josephine St. Pierre Ruffin.” Choice C is incorrect because the plural verb “are” doesn’t agree in number with the singular subject “Josephine St. Pierre Ruffin.” Choice D is incorrect because the plural verb “have been” doesn’t agree in number with the singular subject “Josephine St. Pierre Ruffin.”",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35.pdf",
+          "sha256": "1c7c4c1ac160ed5df317c075e9f4a33077e98bbf59e0b9971949937e04dc745a",
+          "pages": [
+            15
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35-with answers and explanations.pdf",
+          "sha256": "7138438f0a990b9a5ee16e8b8d04f573648201b1247bf33ca4604fdf9f444de6",
+          "pages": [
+            28,
+            29
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "A": "Choice A is the best answer. The convention being tested here is subject-verb agreement. The singular verb “was” agrees in number with the singular subject “Josephine St. Pierre Ruffin.”",
+        "B": "Choice B is incorrect because the plural verb “were” doesn’t agree in number with the singular subject “Josephine St. Pierre Ruffin.”",
+        "C": "Choice C is incorrect because the plural verb “are” doesn’t agree in number with the singular subject “Josephine St. Pierre Ruffin.”",
+        "D": "Choice D is incorrect because the plural verb “have been” doesn’t agree in number with the singular subject “Josephine St. Pierre Ruffin.”"
+      }
+    },
+    {
+      "id": "2a2a4f43",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "form,structure,and purpose",
+      "difficulty": "Medium",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "On April 5, 1977, Kitty Cone and 150 other disability rights activists entered a San Francisco federal building. After pleading for years—to no effect—for the passage of key antidiscrimination legislation, ______ until their demands were addressed. Finally, on April 28, the legislation was signed."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "pressure on lawmakers increased when the activists staged a sit-in protest"
+        },
+        {
+          "id": "B",
+          "text": "a sit-in protest staged by the activists increased pressure on lawmakers"
+        },
+        {
+          "id": "C",
+          "text": "lawmakers came under increased pressure when the activists staged a sit-in protest"
+        },
+        {
+          "id": "D",
+          "text": "the activists increased pressure on lawmakers by staging a sit-in protest"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "Choice D is the best answer. The convention being tested is subject-modifier placement. This choice makes the noun phrase “the activists” the subject of the sentence and places it immediately after the modifying phrase “after...legislation.” In doing so, this choice clearly establishes that the activists—and not another noun in the sentence— were pleading for the passage of antidiscrimination legislation.\n\nChoice A is incorrect because it results in a dangling modifier. The placement of the noun phrase “pressure on lawmakers” immediately after the modifying phrase illogically suggests that the “pressure” was pleading for the passage of antidiscrimination legislation. Choice B is incorrect because it results in a dangling modifier. The placement of the noun phrase “a sit-in protest” immediately after the modifying phrase illogically suggests that the “protest” was pleading for the passage of antidiscrimination legislation. Choice C is incorrect because it results in a dangling modifier. The placement of the noun phrase “lawmakers” immediately after the modifying phrase suggests that “lawmakers” were pleading for the passage of antidiscrimination legislation. While it’s possible for lawmakers to plead for the passage of legislation, the context strongly suggests that it’s the activists who pleaded for years for the passage of antidiscrimination legislation.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35.pdf",
+          "sha256": "1c7c4c1ac160ed5df317c075e9f4a33077e98bbf59e0b9971949937e04dc745a",
+          "pages": [
+            15,
+            16
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35-with answers and explanations.pdf",
+          "sha256": "7138438f0a990b9a5ee16e8b8d04f573648201b1247bf33ca4604fdf9f444de6",
+          "pages": [
+            29,
+            30
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "D": "Choice D is the best answer. The convention being tested is subject-modifier placement. This choice makes the noun phrase “the activists” the subject of the sentence and places it immediately after the modifying phrase “after...legislation.” In doing so, this choice clearly establishes that the activists—and not another noun in the sentence— were pleading for the passage of antidiscrimination legislation.",
+        "A": "Choice A is incorrect because it results in a dangling modifier. The placement of the noun phrase “pressure on lawmakers” immediately after the modifying phrase illogically suggests that the “pressure” was pleading for the passage of antidiscrimination legislation.",
+        "B": "Choice B is incorrect because it results in a dangling modifier. The placement of the noun phrase “a sit-in protest” immediately after the modifying phrase illogically suggests that the “protest” was pleading for the passage of antidiscrimination legislation.",
+        "C": "Choice C is incorrect because it results in a dangling modifier. The placement of the noun phrase “lawmakers” immediately after the modifying phrase suggests that “lawmakers” were pleading for the passage of antidiscrimination legislation. While it’s possible for lawmakers to plead for the passage of legislation, the context strongly suggests that it’s the activists who pleaded for years for the passage of antidiscrimination legislation."
+      }
+    },
+    {
+      "id": "0fb17962",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "form,structure,and purpose",
+      "difficulty": "Medium",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "African American Percy Julian was a scientist and entrepreneur whose work helped people around the world to see. Named in 1999 as one of the greatest achievements by a US chemist in the past hundred years, ______ led to the first mass-produced treatment for glaucoma."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Julian synthesized the alkaloid physostigmine in 1935; it"
+        },
+        {
+          "id": "B",
+          "text": "in 1935 Julian synthesized the alkaloid physostigmine, which"
+        },
+        {
+          "id": "C",
+          "text": "Julian’s 1935 synthesis of the alkaloid physostigmine"
+        },
+        {
+          "id": "D",
+          "text": "the alkaloid physostigmine was synthesized by Julian in 1935 and"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Choice C is the best answer. The convention being tested is subject-modifier placement. This choice makes the noun phrase “Julian’s 1935 synthesis” the subject of the sentence and places it immediately after the modifying phrase “named…years.” In doing so, this choice clearly establishes that Julian’s 1935 synthesis of the alkaloid physostigmine— and not another noun in the sentence—was named in 1999 as one of the greatest achievements by a US chemist in the past hundred years.\n\nChoice A is incorrect because it results in a dangling modifier. The placement of the noun “Julian” immediately after the modifying phrase illogically suggests that Julian himself was named as one of the greatest achievements by a US chemist in the past hundred years. Choice B is incorrect because it results in a dangling modifier. The placement of the prepositional phrase “in 1935” immediately after the modifying phrase illogically and confusingly suggests that “in 1935” was named as one of the greatest achievements by a US chemist in the past hundred years. Choice D is incorrect because it results in a dangling modifier. The placement of the noun phrase “the alkaloid physostigmine” immediately after the modifying phrase illogically and confusingly suggests that the alkaloid physostigmine itself (not the synthesis of it) was named as one of the greatest achievements by a US chemist in the past hundred years.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35.pdf",
+          "sha256": "1c7c4c1ac160ed5df317c075e9f4a33077e98bbf59e0b9971949937e04dc745a",
+          "pages": [
+            16
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35-with answers and explanations.pdf",
+          "sha256": "7138438f0a990b9a5ee16e8b8d04f573648201b1247bf33ca4604fdf9f444de6",
+          "pages": [
+            30,
+            31
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "C": "Choice C is the best answer. The convention being tested is subject-modifier placement. This choice makes the noun phrase “Julian’s 1935 synthesis” the subject of the sentence and places it immediately after the modifying phrase “named…years.” In doing so, this choice clearly establishes that Julian’s 1935 synthesis of the alkaloid physostigmine— and not another noun in the sentence—was named in 1999 as one of the greatest achievements by a US chemist in the past hundred years.",
+        "A": "Choice A is incorrect because it results in a dangling modifier. The placement of the noun “Julian” immediately after the modifying phrase illogically suggests that Julian himself was named as one of the greatest achievements by a US chemist in the past hundred years.",
+        "B": "Choice B is incorrect because it results in a dangling modifier. The placement of the prepositional phrase “in 1935” immediately after the modifying phrase illogically and confusingly suggests that “in 1935” was named as one of the greatest achievements by a US chemist in the past hundred years.",
+        "D": "Choice D is incorrect because it results in a dangling modifier. The placement of the noun phrase “the alkaloid physostigmine” immediately after the modifying phrase illogically and confusingly suggests that the alkaloid physostigmine itself (not the synthesis of it) was named as one of the greatest achievements by a US chemist in the past hundred years."
+      }
+    },
+    {
+      "id": "aeba7f69",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "form,structure,and purpose",
+      "difficulty": "Medium",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "After winning the 1860 presidential election, Abraham Lincoln appointed Edward Bates, Salmon P. Chase, and William H. Seward to his cabinet. Lincoln’s decision was surprising, since each of these men had run against him, but historians have praised it, noting that Lincoln ______ his rivals’ diverse talents to strengthen his administration."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "has leveraged"
+        },
+        {
+          "id": "B",
+          "text": "is leveraging"
+        },
+        {
+          "id": "C",
+          "text": "will leverage"
+        },
+        {
+          "id": "D",
+          "text": "leveraged"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "Choice D is the best answer. The subject of the verb is “Lincoln,” and the first sentence tells us that we’re talking about something that Abraham Lincoln did in 1860. So the simple past tense “leveraged” fits the logic of the text.\n\nChoice A is incorrect. This choice creates a tense issue. “Has leveraged” is the present perfect tense, which is used for an action that began in the past and continues into the present. Lincoln started leveraging his rivals’ talents in 1860—it’s definitely not still happening today. So the present perfect tense isn’t appropriate. Choice B is incorrect. This choice creates a tense issue. “Is leveraging” is the present tense, but Lincoln leveraged his rivals’ talents in 1860, so the present tense isn’t appropriate. Choice C is incorrect. This choice creates a tense issue. “Will leverage” is the future tense, but Lincoln leveraged his rivals’ talents in 1860, so the future tense isn’t appropriate.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35.pdf",
+          "sha256": "1c7c4c1ac160ed5df317c075e9f4a33077e98bbf59e0b9971949937e04dc745a",
+          "pages": [
+            16,
+            17
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35-with answers and explanations.pdf",
+          "sha256": "7138438f0a990b9a5ee16e8b8d04f573648201b1247bf33ca4604fdf9f444de6",
+          "pages": [
+            31,
+            32
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "D": "Choice D is the best answer. The subject of the verb is “Lincoln,” and the first sentence tells us that we’re talking about something that Abraham Lincoln did in 1860. So the simple past tense “leveraged” fits the logic of the text.",
+        "A": "Choice A is incorrect. This choice creates a tense issue. “Has leveraged” is the present perfect tense, which is used for an action that began in the past and continues into the present. Lincoln started leveraging his rivals’ talents in 1860—it’s definitely not still happening today. So the present perfect tense isn’t appropriate.",
+        "B": "Choice B is incorrect. This choice creates a tense issue. “Is leveraging” is the present tense, but Lincoln leveraged his rivals’ talents in 1860, so the present tense isn’t appropriate.",
+        "C": "Choice C is incorrect. This choice creates a tense issue. “Will leverage” is the future tense, but Lincoln leveraged his rivals’ talents in 1860, so the future tense isn’t appropriate."
+      }
+    },
+    {
+      "id": "473d9645",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "form,structure,and purpose",
+      "difficulty": "Medium",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Bonnie Buratti of NASA’s Jet Propulsion Laboratory ______ data about Saturn’s rings collected by the Cassini spacecraft when she made an interesting discovery: the tiny moons embedded between and within Saturn’s rings are shaped by the buildup of ring material on the moons’ surfaces."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "studies"
+        },
+        {
+          "id": "B",
+          "text": "has been studying"
+        },
+        {
+          "id": "C",
+          "text": "will study"
+        },
+        {
+          "id": "D",
+          "text": "was studying"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "Choice D is the best answer. The convention being tested is the use of verbs to express tense in a sentence. In this choice, the past progressive tense verb “was studying” is consistent with the other past tense verbs (e.g., “made” and “collected”) used to describe Buratti’s discovery. Further, the past progressive tense correctly indicates that an ongoing action in the past was occurring (she was studying) at the same time that another event occurred in the past (she made an interesting discovery).\n\nChoice A is incorrect because the present tense verb “studies” isn’t consistent with the past tense verbs used to describe Buratti’s discovery. Choice B is incorrect because the present perfect progressive tense verb “has been studying” isn’t consistent with the past tense verbs used to describe Buratti’s discovery. Choice C is incorrect because the future tense verb “will study” isn’t consistent with the past tense verbs used to describe Buratti’s discovery.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35.pdf",
+          "sha256": "1c7c4c1ac160ed5df317c075e9f4a33077e98bbf59e0b9971949937e04dc745a",
+          "pages": [
+            17
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35-with answers and explanations.pdf",
+          "sha256": "7138438f0a990b9a5ee16e8b8d04f573648201b1247bf33ca4604fdf9f444de6",
+          "pages": [
+            32,
+            33
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "D": "Choice D is the best answer. The convention being tested is the use of verbs to express tense in a sentence. In this choice, the past progressive tense verb “was studying” is consistent with the other past tense verbs (e.g., “made” and “collected”) used to describe Buratti’s discovery. Further, the past progressive tense correctly indicates that an ongoing action in the past was occurring (she was studying) at the same time that another event occurred in the past (she made an interesting discovery).",
+        "A": "Choice A is incorrect because the present tense verb “studies” isn’t consistent with the past tense verbs used to describe Buratti’s discovery.",
+        "B": "Choice B is incorrect because the present perfect progressive tense verb “has been studying” isn’t consistent with the past tense verbs used to describe Buratti’s discovery.",
+        "C": "Choice C is incorrect because the future tense verb “will study” isn’t consistent with the past tense verbs used to describe Buratti’s discovery."
+      }
+    },
+    {
+      "id": "6ea5d254",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "form,structure,and purpose",
+      "difficulty": "Medium",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In many of her landscape paintings from the 1970s and 1980s, Lebanese American artist Etel Adnan worked to capture the essence of California’s fog-shrouded Mount Tamalpais region through abstraction, using splotches of color to represent the area’s features. Interestingly, the triangle representing the mountain itself ______ among the few defined figures in her paintings."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "are"
+        },
+        {
+          "id": "B",
+          "text": "have been"
+        },
+        {
+          "id": "C",
+          "text": "were"
+        },
+        {
+          "id": "D",
+          "text": "is"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "Choice D is the best answer. The convention being tested is subject–verb agreement. The singular verb “is” agrees in number with the singular subject “the triangle.”\n\nChoice A is incorrect because the plural verb “are” doesn’t agree in number with the singular subject “the triangle.” Choice B is incorrect because the plural verb “have been” doesn’t agree in number with the singular subject “the triangle.” Choice C is incorrect because the plural verb “were” doesn’t agree in number with the singular subject “the triangle.”",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35.pdf",
+          "sha256": "1c7c4c1ac160ed5df317c075e9f4a33077e98bbf59e0b9971949937e04dc745a",
+          "pages": [
+            17,
+            18
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35-with answers and explanations.pdf",
+          "sha256": "7138438f0a990b9a5ee16e8b8d04f573648201b1247bf33ca4604fdf9f444de6",
+          "pages": [
+            33,
+            34
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "D": "Choice D is the best answer. The convention being tested is subject–verb agreement. The singular verb “is” agrees in number with the singular subject “the triangle.”",
+        "A": "Choice A is incorrect because the plural verb “are” doesn’t agree in number with the singular subject “the triangle.”",
+        "B": "Choice B is incorrect because the plural verb “have been” doesn’t agree in number with the singular subject “the triangle.”",
+        "C": "Choice C is incorrect because the plural verb “were” doesn’t agree in number with the singular subject “the triangle.”"
+      }
+    },
+    {
+      "id": "1e27b2b3",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "form,structure,and purpose",
+      "difficulty": "Medium",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In knot theory (the mathematical study of curved, closed loops), knots are characterized by their crossing numbers—that is, the number of times the knotted thread crosses over itself. The trefoil knot and the figure-eight knot, each with a crossing number below five, ______ among the simplest possible knots with the fewest number of crossings."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "was"
+        },
+        {
+          "id": "B",
+          "text": "are"
+        },
+        {
+          "id": "C",
+          "text": "has been"
+        },
+        {
+          "id": "D",
+          "text": "is"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Choice B is the best answer. The convention being tested is subject-verb agreement. The plural verb \"are\" agrees in number with the plural compound subject \"the trefoil knot and the figure-eight knot.\" The two types of knots joined by \"and\" function as a plural subject and thus require a plural verb.\n\nChoice A is incorrect because the singular verb \"was\" doesn’t agree in number with the plural compound subject \"the trefoil knot and the figure-eight knot.\" Choice C is incorrect because the singular verb \"has been\" doesn’t agree in number with the plural compound subject \"the trefoil knot and the figure-eight knot.\" Choice D is incorrect because the singular verb \"is\" doesn’t agree in number with the plural compound subject \"the trefoil knot and the figure-eight knot.\"",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35.pdf",
+          "sha256": "1c7c4c1ac160ed5df317c075e9f4a33077e98bbf59e0b9971949937e04dc745a",
+          "pages": [
+            18
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35-with answers and explanations.pdf",
+          "sha256": "7138438f0a990b9a5ee16e8b8d04f573648201b1247bf33ca4604fdf9f444de6",
+          "pages": [
+            34,
+            35
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "B": "Choice B is the best answer. The convention being tested is subject-verb agreement. The plural verb \"are\" agrees in number with the plural compound subject \"the trefoil knot and the figure-eight knot.\" The two types of knots joined by \"and\" function as a plural subject and thus require a plural verb.",
+        "A": "Choice A is incorrect because the singular verb \"was\" doesn’t agree in number with the plural compound subject \"the trefoil knot and the figure-eight knot.\"",
+        "C": "Choice C is incorrect because the singular verb \"has been\" doesn’t agree in number with the plural compound subject \"the trefoil knot and the figure-eight knot.\"",
+        "D": "Choice D is incorrect because the singular verb \"is\" doesn’t agree in number with the plural compound subject \"the trefoil knot and the figure-eight knot.\""
+      }
+    },
+    {
+      "id": "35256536",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "form,structure,and purpose",
+      "difficulty": "Medium",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Known for her massive photorealistic paintings of African American figures floating or swimming in pools, Calida Garcia ______ was the logical choice to design the book cover for Ta-Nehisi Coates’s The Water Dancer, a novel about an African American man who can travel great distances through water."
+        }
+      ],
+      "prompt": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Rawles—"
+        },
+        {
+          "id": "B",
+          "text": "Rawles:"
+        },
+        {
+          "id": "C",
+          "text": "Rawles,"
+        },
+        {
+          "id": "D",
+          "text": "Rawles"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "Choice D is the best answer. The convention being tested is punctuation between a subject and a verb. When, as in this case, a subject (“Calida Garcia Rawles”) is immediately followed by a verb (“was”), no punctuation is needed.\n\nChoice A is incorrect because no punctuation is needed between the subject and the verb. Choice B is incorrect because no punctuation is needed between the subject and the verb. Choice C is incorrect because no punctuation is needed between the subject and the verb.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35.pdf",
+          "sha256": "1c7c4c1ac160ed5df317c075e9f4a33077e98bbf59e0b9971949937e04dc745a",
+          "pages": [
+            18,
+            19
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Standard English Conventions/form,structure,and purpose/Medium-form,structure,and purpose-35-with answers and explanations.pdf",
+          "sha256": "7138438f0a990b9a5ee16e8b8d04f573648201b1247bf33ca4604fdf9f444de6",
+          "pages": [
+            35,
+            36
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "D": "Choice D is the best answer. The convention being tested is punctuation between a subject and a verb. When, as in this case, a subject (“Calida Garcia Rawles”) is immediately followed by a verb (“was”), no punctuation is needed.",
+        "A": "Choice A is incorrect because no punctuation is needed between the subject and the verb.",
+        "B": "Choice B is incorrect because no punctuation is needed between the subject and the verb.",
+        "C": "Choice C is incorrect because no punctuation is needed between the subject and the verb."
+      }
+    }
+  ]
+}

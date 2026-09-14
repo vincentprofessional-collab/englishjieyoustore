@@ -55,10 +55,13 @@ function displayNumber(question: SeniorHighQuestion, _kind: SeniorHighSet["kind"
 }
 
 const QUESTION_NAV_PAGE_SIZE = 50;
+const QUESTION_NAV_GROUPS_PER_ROW = 9;
 
 const SOLUTION_MARKER = /(?:^|\n)\s*(?:【\s*(?:(?:参考)?(?:答案|解析|导语)|\d{1,3}\s*题详解)\s*】|(?:(?:选择题|英语|参考)?答案|解析|导语|故填|故选)\s*(?:[：:]|是|为|\d|[（(]|[A-Ha-h]|[a-z]|$)|\d{1,3}\s*题详解\s*(?:[：:]|是|为|\d|[（(]|和|$))/i;
 const NUMBERED_ANSWER_LINE = /^\s*\d{1,3}\s*[.．、]\s*(?:[a-z][a-z'-]*|[A-H])(?:\s+\d{1,3}\s*[.．、]\s*(?:[a-z][a-z'-]*|[A-H]))*\s*$/;
 const WRITING_LINE_RE = /_{4,}|＿{4,}|-{8,}|—{6,}/g;
+const SHORT_ANSWER_NUMBER_RE = /^\s*\d{1,3}\s*[.．、:：]\s*(?=\S)/;
+const SHORT_ANSWER_QUESTION_RE = /^\s*(?:what|when|where|who|why|how|which|is|are|does|did|can|could|would|should)\b[^.!。！？]*[?？]/i;
 
 function clozeTextWithoutSourceLines(text: string) {
   return text.replace(/[_＿]+\s*\d{1,3}\s*[_＿]+/g, "").replace(/[_＿]+/g, "");
@@ -77,6 +80,12 @@ function clozeRunsWithoutSourceLines(
   });
 }
 
+function isClozeOptionLabelBlock(block: SeniorHighBlock) {
+  if (block.type !== "paragraph" && block.type !== "richText") return false;
+  const text = block.runs.filter((run) => run.type === "text").map((run) => run.text).join("").replace(/\s+/g, " ").trim();
+  return /^(?:[A-H]\s*[.．、:：]?\s*){2,}$/i.test(text);
+}
+
 function solutionMarkerIndex(text: string) {
   const markerIndex = text.search(SOLUTION_MARKER);
   return markerIndex >= 0 || NUMBERED_ANSWER_LINE.test(text) ? Math.max(markerIndex, 0) : -1;
@@ -88,32 +97,161 @@ function isWritingLineBlock(block: SeniorHighBlock) {
   return Boolean(text.trim()) && !text.replace(WRITING_LINE_RE, "").trim();
 }
 
-function writingPromptPieces(blocks: SeniorHighBlock[]) {
+function isWritingNoiseBlock(block: SeniorHighBlock) {
+  if (block.type !== "paragraph" && block.type !== "richText") return false;
+  const text = block.runs.filter((run) => run.type === "text").map((run) => run.text).join("").replace(/\s+/g, " ").trim();
+  if (!text) return true;
+  if (/^www\.\S+$/i.test(text) || /^绝密/.test(text) || /^试卷类型/.test(text)) return true;
+  if (/^\d{4}年.*(?:高考|招生全国统一考试).*(?:试卷|答案)/.test(text)) return true;
+  return /^(?:[A-H]\s*)?(?:\d{1,3}\s*[.．、:]?\s*[A-H]\s*){2,}$/i.test(text);
+}
+
+function cleanWritingPromptBlocks(blocks: SeniorHighBlock[]) {
+  return blocks.map((block) => {
+    if (block.type !== "paragraph" && block.type !== "richText") return block;
+    return {
+      ...block,
+      runs: block.runs.map((run) => {
+        if (run.type !== "text") return run;
+        const metadataIndex = run.text.search(/(?:绝密[☆★]?启用前|试卷类型\s*[:：]?|(?:19|20)\d{2}年普通高等学校招生全国统一考试)/);
+        return metadataIndex >= 0 ? { ...run, text: run.text.slice(0, metadataIndex).trimEnd() } : run;
+      }),
+    };
+  }).filter((block) => !isWritingNoiseBlock(block));
+}
+
+function splitWritingReference(blocks: SeniorHighBlock[]) {
+  const referenceIndex = blocks.findIndex((block) => {
+    if (block.type !== "paragraph" && block.type !== "richText") return false;
+    const text = block.runs.filter((run) => run.type === "text").map((run) => run.text).join("").trim();
+    return /^(?:possible\s+version|sample\s*\d*\s*:|参考答案|参考范文|范文)\s*:?/i.test(text);
+  });
+  return referenceIndex < 0
+    ? { prompt: blocks, reference: [] }
+    : { prompt: blocks.slice(0, referenceIndex), reference: blocks.slice(referenceIndex) };
+}
+
+function continuationParagraphCount(blocks: SeniorHighBlock[]) {
+  const text = plainText(blocks);
+  if (!/(续写词数|续写部分|续写两段|续写一段|paragraph\s*2|para\s*2)/i.test(text)) return 0;
+  if (/(?:续写|续写部分).{0,24}(?:一|1)\s*段/i.test(text)) return 1;
+  if (/(?:续写|续写部分).{0,32}(?:两|2)\s*段|paragraph\s*2|para\s*2/i.test(text)) return 2;
+  if (/续写词数|续写部分/.test(text)) return 2;
+  return 1;
+}
+
+function writingPromptPieces(blocks: SeniorHighBlock[], expectedParagraphs = 0) {
+  const starterPattern = /^\s*(?:para(?:graph)?\s*)\d+\s*[.．、:：]/i;
+  const starterIndices = new Set<number>();
+  blocks.forEach((block, index) => {
+    if ((block.type === "paragraph" || block.type === "richText") && starterPattern.test(block.runs.filter((run) => run.type === "text").map((run) => run.text).join(""))) starterIndices.add(index);
+  });
+  if (expectedParagraphs > starterIndices.size) {
+    const noteIndex = blocks.reduce((last, block, index) => {
+      const text = block.type === "paragraph" || block.type === "richText" ? block.runs.filter((run) => run.type === "text").map((run) => run.text).join("") : "";
+      return /注意|续写词数|续写部分/.test(text) ? index : last;
+    }, -1);
+    const candidates = blocks.map((block, index) => ({ block, index })).filter(({ block, index }) => {
+      if (index <= noteIndex || block.type !== "paragraph" && block.type !== "richText") return false;
+      const text = block.runs.filter((run) => run.type === "text").map((run) => run.text).join("").trim();
+      return text.length > 0 && !isWritingLineBlock(block) && !/^\s*(?:注意|[（(]?\d+[)）.．、])/.test(text) && !/词数|作答|关键词|续写部分/.test(text);
+    });
+    for (const candidate of candidates.slice(-expectedParagraphs)) starterIndices.add(candidate.index);
+  }
   const pieces: Array<{ kind: "blocks"; blocks: SeniorHighBlock[] } | { kind: "input"; index: number }> = [];
   let pendingInput = false;
+  let pendingStarter = false;
   let inputIndex = 0;
-  for (const block of blocks) {
-    const continuationStarter = (block.type === "paragraph" || block.type === "richText")
-      && /^\s*(?:para(?:graph)?\s*)\d+\s*[:：]/i.test(block.runs.filter((run) => run.type === "text").map((run) => run.text).join(""));
-    if (continuationStarter) {
-      pendingInput = false;
-      const previous = pieces[pieces.length - 1];
-      if (previous?.kind === "blocks") previous.blocks.push(block);
-      else pieces.push({ kind: "blocks", blocks: [block] });
-      pieces.push({ kind: "input", index: inputIndex++ });
-      continue;
-    }
-    if (isWritingLineBlock(block)) {
-      if (!pendingInput) pieces.push({ kind: "input", index: inputIndex++ });
-      pendingInput = true;
-      continue;
-    }
-    pendingInput = false;
+  const appendBlock = (block: SeniorHighBlock) => {
     const previous = pieces[pieces.length - 1];
     if (previous?.kind === "blocks") previous.blocks.push(block);
     else pieces.push({ kind: "blocks", blocks: [block] });
+  };
+  for (const [blockIndex, block] of blocks.entries()) {
+    const continuationStarter = starterIndices.has(blockIndex);
+    if (continuationStarter) {
+      if (pendingStarter && !pendingInput) pieces.push({ kind: "input", index: inputIndex++ });
+      appendBlock(block);
+      const text = block.type === "paragraph" || block.type === "richText" ? block.runs.filter((run) => run.type === "text").map((run) => run.text).join("") : "";
+      const starterOnly = /^\s*(?:para(?:graph)?\s*)\d+\s*[.．、:：]\s*$/i.test(text);
+      pendingStarter = starterOnly;
+      if (!starterOnly) {
+        pieces.push({ kind: "input", index: inputIndex++ });
+        pendingInput = true;
+      } else pendingInput = false;
+      continue;
+    }
+    if (isWritingLineBlock(block)) {
+      if (pendingStarter && !pendingInput) {
+        pieces.push({ kind: "input", index: inputIndex++ });
+        pendingInput = true;
+      }
+      if (!pendingInput) pieces.push({ kind: "input", index: inputIndex++ });
+      pendingInput = true;
+      pendingStarter = false;
+      continue;
+    }
+    appendBlock(block);
+    if (!pendingStarter) pendingInput = false;
   }
+  if (pendingStarter && !pendingInput) pieces.push({ kind: "input", index: inputIndex++ });
   return pieces;
+}
+
+function shortAnswerQuestionStart(block: SeniorHighBlock) {
+  if (block.type !== "paragraph" && block.type !== "richText") return false;
+  const text = block.runs.filter((run) => run.type === "text").map((run) => run.text).join("").trim();
+  if (!text) return false;
+  return SHORT_ANSWER_NUMBER_RE.test(text) || SHORT_ANSWER_QUESTION_RE.test(text);
+}
+
+function shortAnswerPromptPieces(blocks: SeniorHighBlock[]) {
+  const questionIndices = blocks.map((block, index) => shortAnswerQuestionStart(block) ? index : -1).filter((index) => index >= 0);
+  const numberedQuestionCount = blocks.filter((block) => {
+    if (block.type !== "paragraph" && block.type !== "richText") return false;
+    const text = block.runs.filter((run) => run.type === "text").map((run) => run.text).join("");
+    return SHORT_ANSWER_NUMBER_RE.test(text) && /(?:\?|？|no more than|不超过|词数|回答问题|answer)/i.test(text);
+  }).length;
+  const allText = plainText(blocks);
+  if (numberedQuestionCount < 2 || !/(?:no more than|不超过|词数|回答问题|answer the following questions)/i.test(allText)) return [];
+
+  const pieces: Array<{ kind: "blocks"; blocks: SeniorHighBlock[] } | { kind: "input"; index: number }> = [];
+  let prelude: SeniorHighBlock[] = [];
+  let currentQuestion: SeniorHighBlock[] | null = null;
+  let inputIndex = 0;
+  const appendBlocks = (nextBlocks: SeniorHighBlock[]) => {
+    if (nextBlocks.length === 0) return;
+    const previous = pieces[pieces.length - 1];
+    if (previous?.kind === "blocks") previous.blocks.push(...nextBlocks);
+    else pieces.push({ kind: "blocks", blocks: nextBlocks });
+  };
+  const flushQuestion = () => {
+    if (!currentQuestion) return;
+    appendBlocks(currentQuestion);
+    pieces.push({ kind: "input", index: inputIndex++ });
+    currentQuestion = null;
+  };
+
+  for (const [index, block] of blocks.entries()) {
+    if (questionIndices.includes(index)) {
+      flushQuestion();
+      appendBlocks(prelude);
+      prelude = [];
+      currentQuestion = [block];
+      continue;
+    }
+    if (currentQuestion) {
+      if (!isWritingLineBlock(block)) currentQuestion.push(block);
+    } else prelude.push(block);
+  }
+  flushQuestion();
+  appendBlocks(prelude);
+  return pieces;
+}
+
+function autoResizeTextarea(element: HTMLTextAreaElement) {
+  element.style.height = "auto";
+  element.style.height = `${element.scrollHeight}px`;
 }
 
 function withoutLeadingQuestionNumber(blocks: SeniorHighBlock[]) {
@@ -187,6 +325,7 @@ function BlockRenderer({
   hideWritingImages = false,
   hideWritingLines = false,
   hideClozeLines = false,
+  clozeNumbers,
 }: {
   answers: SeniorHighV2Answers;
   assets: Map<string, SeniorHighAssetRef>;
@@ -200,11 +339,21 @@ function BlockRenderer({
   hideWritingImages?: boolean;
   hideWritingLines?: boolean;
   hideClozeLines?: boolean;
+  clozeNumbers?: number[];
 }) {
+  const sourceClozeNumbers = clozeNumbers || [...new Set([...bindings.values()].map(({ question }) => displayNumber(question, kind)))];
+  const visibleClozeNumbers = hideClozeLines
+    ? sourceClozeNumbers
+    : [];
+  let clozeNumberIndex = 0;
   const renderRuns = (sourceRuns: Extract<SeniorHighBlock, { type: "paragraph" | "richText" }>["runs"]) => {
     const runs = hideClozeLines ? clozeRunsWithoutSourceLines(sourceRuns) : sourceRuns;
     return runs.map((run, index) => {
     if (run.type === "text") {
+      if (hideClozeLines && run.underline && /^\s*\d{1,3}\s*$/.test(run.text)) {
+        const number = visibleClozeNumbers[clozeNumberIndex++] ?? Number(run.text.trim());
+        return <span className="senior-high-cloze-source-blank" key={`cloze-source-${index}`}>{number}</span>;
+      }
       const text = hideWritingLines ? run.text.replace(WRITING_LINE_RE, "") : writingPlaceholder ? run.text.replace(WRITING_LINE_RE, writingPlaceholder) : run.text;
       if (!text) return null;
       return run.underline ? <u key={`text-${index}`}>{text}</u> : <Fragment key={`text-${index}`}>{text}</Fragment>;
@@ -242,15 +391,17 @@ function BlockRenderer({
       return <h4 key={key}>{block.text}</h4>;
     }
     if (block.type === "paragraph") {
+      if (hideClozeLines && isClozeOptionLabelBlock(block)) return null;
       const runs = visibleRuns(block.runs, revealSolutions);
       if (!revealSolutions && block.runs.some((run) => run.type === "text" && solutionMarkerIndex(run.text) >= 0)) solutionStarted = true;
-      const visibleText = hideWritingLines || hideClozeLines ? runs.filter((run) => run.type === "blank" || run.text.replace(hideClozeLines ? /[_＿]+/g : WRITING_LINE_RE, "").trim()) : runs;
+      const visibleText = runs.filter((run) => run.type === "blank" || (hideClozeLines ? run.text.replace(/[_＿]+/g, "") : hideWritingLines ? run.text.replace(WRITING_LINE_RE, "") : run.text).trim());
       return visibleText.length > 0 ? <p className="senior-high-v2-paragraph" key={key}>{renderRuns(visibleText)}</p> : null;
     }
     if (block.type === "richText") {
+      if (hideClozeLines && isClozeOptionLabelBlock(block)) return null;
       const runs = visibleRuns(block.runs, revealSolutions);
       if (!revealSolutions && block.runs.some((run) => run.type === "text" && solutionMarkerIndex(run.text) >= 0)) solutionStarted = true;
-      const visibleText = hideWritingLines || hideClozeLines ? runs.filter((run) => run.type === "blank" || run.text.replace(hideClozeLines ? /[_＿]+/g : WRITING_LINE_RE, "").trim()) : runs;
+      const visibleText = runs.filter((run) => run.type === "blank" || (hideClozeLines ? run.text.replace(/[_＿]+/g, "") : hideWritingLines ? run.text.replace(WRITING_LINE_RE, "") : run.text).trim());
       return visibleText.length > 0 ? <div className="senior-high-v2-paragraph" key={key}>{renderRuns(visibleText)}</div> : null;
     }
     if (block.type === "notice") {
@@ -261,7 +412,7 @@ function BlockRenderer({
       return <div className={`senior-high-v2-notice ${block.tone || "info"}`} key={key}>{block.text}</div>;
     }
     if (block.type === "image") {
-      if (hideWritingImages && block.alt.trim().toLowerCase() === "source image") return null;
+      if (block.alt.trim().toLowerCase() === "source image") return null;
       const asset = assets.get(block.assetId);
       return asset ? <figure className="senior-high-v2-figure" key={key}><img alt={block.alt} src={asset.url} />{block.caption ? <figcaption>{block.caption}</figcaption> : null}</figure> : null;
     }
@@ -273,8 +424,8 @@ function BlockRenderer({
       const asset = assets.get(block.assetId);
       return asset ? <div className="senior-high-v2-media" key={key}><span>{block.label || "视频"}</span><video controls preload="metadata" src={asset.url} /></div> : null;
     }
-    if (block.type === "dialogue") return <div className="senior-high-v2-dialogue" key={key}>{block.turns.map((turn, turnIndex) => <div key={`${turn.speaker}-${turnIndex}`}><strong>{turn.speaker}</strong><div><BlockRenderer answers={answers} assets={assets} bindings={bindings} blocks={turn.blocks} kind={kind} onAnswer={onAnswer} onOptionDrop={onOptionDrop} revealSolutions={revealSolutions} writingPlaceholder={writingPlaceholder} hideWritingImages={hideWritingImages} hideWritingLines={hideWritingLines} hideClozeLines={hideClozeLines} /></div></div>)}</div>;
-    return <div className="senior-high-v2-table-wrap" key={key}><table><tbody>{block.rows.map((row, rowIndex) => <tr key={rowIndex}>{row.cells.map((cell, cellIndex) => <td key={cellIndex}><BlockRenderer answers={answers} assets={assets} bindings={bindings} blocks={cell} kind={kind} onAnswer={onAnswer} onOptionDrop={onOptionDrop} revealSolutions={revealSolutions} writingPlaceholder={writingPlaceholder} hideWritingImages={hideWritingImages} hideWritingLines={hideWritingLines} hideClozeLines={hideClozeLines} /></td>)}</tr>)}</tbody></table></div>;
+    if (block.type === "dialogue") return <div className="senior-high-v2-dialogue" key={key}>{block.turns.map((turn, turnIndex) => <div key={`${turn.speaker}-${turnIndex}`}><strong>{turn.speaker}</strong><div><BlockRenderer answers={answers} assets={assets} bindings={bindings} blocks={turn.blocks} kind={kind} onAnswer={onAnswer} onOptionDrop={onOptionDrop} revealSolutions={revealSolutions} writingPlaceholder={writingPlaceholder} hideWritingImages={hideWritingImages} hideWritingLines={hideWritingLines} hideClozeLines={hideClozeLines} clozeNumbers={clozeNumbers} /></div></div>)}</div>;
+    return <div className="senior-high-v2-table-wrap" key={key}><table><tbody>{block.rows.map((row, rowIndex) => <tr key={rowIndex}>{row.cells.map((cell, cellIndex) => <td key={cellIndex}><BlockRenderer answers={answers} assets={assets} bindings={bindings} blocks={cell} kind={kind} onAnswer={onAnswer} onOptionDrop={onOptionDrop} revealSolutions={revealSolutions} writingPlaceholder={writingPlaceholder} hideWritingImages={hideWritingImages} hideWritingLines={hideWritingLines} hideClozeLines={hideClozeLines} clozeNumbers={clozeNumbers} /></td>)}</tr>)}</tbody></table></div>;
   })}</>;
 }
 
@@ -332,7 +483,10 @@ function QuestionCard({
   question: SeniorHighQuestion;
   submitted: boolean;
 }) {
-  const writingSignature = question.type === "essay" ? splitWritingSignature(question.promptBlocks) : { content: question.promptBlocks, signature: [] };
+  const writingSource = question.type === "essay" ? splitWritingReference(question.promptBlocks) : { prompt: question.promptBlocks, reference: [] };
+  const sourcePromptBlocks = question.type === "essay" ? cleanWritingPromptBlocks(writingSource.prompt) : writingSource.prompt;
+  const writingReferenceBlocks = writingSource.reference;
+  const writingSignature = question.type === "essay" ? splitWritingSignature(sourcePromptBlocks) : { content: sourcePromptBlocks, signature: [] };
   const promptBlocks = withoutLeadingQuestionNumber(writingSignature.content);
   const writingAfterLines = [...(question.writingFrame?.after || []), ...writingSignature.signature];
   const inlineOnly = ["inline_fill", "multi_blank", "table_fill", "shared_option_matching"].includes(question.type) && promptBlocks.length === 0 && question.options.length === 0;
@@ -350,9 +504,14 @@ function QuestionCard({
     onAnswer(question.id, [...next].sort().join(","));
   };
   const textInput = ["short_answer", "translation", "error_correction", "essay", "oral_response"].includes(question.type);
-  const writingPlaceholder = question.type === "essay" ? "请在这里完成正文…" : question.correctionStatement ? "请在这里说明错误及理由…" : question.type === "oral_response" ? "请在这里记录口语回答要点…" : "请在这里完成答案…";
-  const writingPieces = question.type === "essay" && !question.writingFrame ? writingPromptPieces(promptBlocks) : [];
+  const shortAnswerPieces = textInput ? shortAnswerPromptPieces(promptBlocks) : [];
+  const continuationParagraphs = question.type === "essay" ? continuationParagraphCount(promptBlocks) : 0;
+  const writingPieces = textInput && !question.writingFrame
+    ? question.type === "essay" && continuationParagraphs > 0 ? writingPromptPieces(promptBlocks, continuationParagraphs) : shortAnswerPieces
+    : [];
   const embeddedWriting = writingPieces.some((piece) => piece.kind === "input");
+  const embeddedShortAnswer = shortAnswerPieces.length > 0 && writingPieces === shortAnswerPieces;
+  const writingPlaceholder = embeddedShortAnswer ? "请输入答案…" : question.type === "essay" ? "请在这里完成正文…" : question.correctionStatement ? "请在这里说明错误及理由…" : question.type === "oral_response" ? "请在这里记录口语回答要点…" : "请在这里完成答案…";
   const writingInputCount = embeddedWriting ? writingPieces.filter((piece) => piece.kind === "input").length : 1;
   const writingValues = Array.from({ length: writingInputCount }, (_, index) => writingInputCount === 1 ? value : answers[`${question.id}:writing:${index}`] || "");
   const updateWriting = (index: number, nextValue: string) => {
@@ -365,11 +524,12 @@ function QuestionCard({
   const markedWords = new Set((answers[`${question.id}:marked`] || "").split(",").filter(Boolean));
   return <article className="senior-high-question-card" id={question.id}>
     <div className="senior-high-question-meta"><span>第 {displayNumber(question, kind)} 题</span><small>{TYPE_LABELS[question.type] || question.type}</small></div>
-    {promptBlocks.length > 0 ? <div className={`senior-high-v2-question-prompt${embeddedWriting ? " senior-high-writing-prompt" : ""}`}>{embeddedWriting ? writingPieces.map((piece) => piece.kind === "blocks" ? <BlockRenderer answers={answers} assets={assets} bindings={bindings} blocks={piece.blocks} kind={kind} key={`writing-blocks-${piece.blocks[0]?.id || piece.blocks.length}`} onAnswer={onAnswer} revealSolutions={submitted} hideWritingImages={question.type === "essay"} hideWritingLines /> : <textarea aria-label={`第 ${displayNumber(question, kind)} 题正文第 ${piece.index + 1} 段`} className="senior-high-answer-input senior-high-writing-input" data-senior-high-writing-input="true" key={`writing-input-${piece.index}`} onChange={(event) => updateWriting(piece.index, event.target.value)} placeholder={writingPlaceholder} rows={6} value={writingValues[piece.index]} />) : <BlockRenderer answers={answers} assets={assets} bindings={bindings} blocks={promptBlocks} kind={kind} onAnswer={onAnswer} revealSolutions={submitted} hideWritingImages={question.type === "essay"} hideWritingLines={textInput} />}</div> : null}
+    {promptBlocks.length > 0 ? <div className={`senior-high-v2-question-prompt${embeddedWriting ? " senior-high-writing-prompt" : ""}`}>{embeddedWriting ? writingPieces.map((piece) => piece.kind === "blocks" ? <BlockRenderer answers={answers} assets={assets} bindings={bindings} blocks={piece.blocks} kind={kind} key={`writing-blocks-${piece.blocks[0]?.id || piece.blocks.length}`} onAnswer={onAnswer} revealSolutions={submitted} hideWritingImages={question.type === "essay"} hideWritingLines /> : <textarea aria-label={embeddedShortAnswer ? `第 ${displayNumber(question, kind)} 题第 ${piece.index + 1} 小题答案` : `第 ${displayNumber(question, kind)} 题正文第 ${piece.index + 1} 段`} className={`senior-high-answer-input${embeddedShortAnswer ? " senior-high-auto-grow" : " senior-high-writing-input"}`} data-senior-high-writing-input="true" key={`writing-input-${piece.index}`} onChange={(event) => updateWriting(piece.index, event.target.value)} onInput={(event) => embeddedShortAnswer && autoResizeTextarea(event.currentTarget)} placeholder={writingPlaceholder} rows={embeddedShortAnswer ? 1 : 6} value={writingValues[piece.index]} />) : <BlockRenderer answers={answers} assets={assets} bindings={bindings} blocks={promptBlocks} kind={kind} onAnswer={onAnswer} revealSolutions={submitted} hideWritingImages={question.type === "essay"} hideWritingLines={textInput} />}</div> : null}
     {question.options.length > 0 ? <div className="senior-high-options">{question.options.map((option) => { const isSelected = selected.has(option.id); const isCorrect = correctOptionIds.has(option.id.trim().toUpperCase()); const optionState = showChoiceFeedback && isCorrect ? "correct-option" : showChoiceFeedback && isSelected ? "incorrect-option" : isSelected ? "selected" : ""; return <button aria-pressed={isSelected} className={optionState} key={option.id} onClick={() => choose(option.id)} type="button"><b>{option.label}.</b><span>{plainText(option.blocks)}</span>{showChoiceFeedback && isCorrect ? <strong aria-label="正确选项" className="senior-high-option-status">✓</strong> : null}{showChoiceFeedback && isSelected && !isCorrect ? <strong aria-label="回答错误" className="senior-high-option-status">×</strong> : null}</button>; })}</div> : null}
     {question.correctionStatement ? <div className="senior-high-correction"><small>点击句中词语划线标错，再在下方说明原因；再次点击可取消。</small><p>{question.correctionStatement.split(/\s+/).map((word, index) => <Fragment key={index}><button aria-pressed={markedWords.has(String(index))} className={markedWords.has(String(index)) ? "marked" : ""} onClick={() => { const next = new Set(markedWords); if (next.has(String(index))) next.delete(String(index)); else next.add(String(index)); onAnswer(`${question.id}:marked`, [...next].sort((a, b) => Number(a) - Number(b)).join(",")); }} type="button">{word}</button>{" "}</Fragment>)}</p></div> : null}
-    {textInput && !embeddedWriting ? <div className="senior-high-writing-response">{question.writingFrame?.before.map((line) => <p key={line}>{line.replace(WRITING_LINE_RE, "")}</p>)}<textarea aria-label={`第 ${displayNumber(question, kind)} 题答案`} className="senior-high-answer-input" data-senior-high-writing-input="true" onChange={(event) => updateWriting(0, event.target.value)} placeholder={writingPlaceholder} rows={question.type === "essay" ? 6 : 4} value={writingValues[0]} />{writingAfterLines.length > 0 ? <div className="senior-high-letter-signature">{writingAfterLines.map((line, index) => <p key={`${line}-${index}`}>{line.replace(WRITING_LINE_RE, "")}</p>)}</div> : null}{question.type === "essay" ? <small className="senior-high-v2-word-count">当前 {writingValues.join(" ").trim() ? writingValues.join(" ").trim().split(/\s+/).length : 0} 词{question.writingFrame ? "（不含已给出的开头和结尾）" : ""}</small> : null}</div> : null}
+    {textInput && !embeddedWriting ? <div className="senior-high-writing-response">{question.writingFrame?.before.map((line) => <p key={line}>{line.replace(WRITING_LINE_RE, "")}</p>)}<textarea aria-label={`第 ${displayNumber(question, kind)} 题答案`} className={`senior-high-answer-input${question.type === "essay" ? "" : " senior-high-auto-grow"}`} data-senior-high-writing-input="true" onChange={(event) => updateWriting(0, event.target.value)} onInput={(event) => question.type !== "essay" && autoResizeTextarea(event.currentTarget)} placeholder={writingPlaceholder} rows={question.type === "essay" ? 6 : 1} value={writingValues[0]} />{writingAfterLines.length > 0 ? <div className="senior-high-letter-signature">{writingAfterLines.map((line, index) => <p key={`${line}-${index}`}>{line.replace(WRITING_LINE_RE, "")}</p>)}</div> : null}{question.type === "essay" ? <small className="senior-high-v2-word-count">当前 {writingValues.join(" ").trim() ? writingValues.join(" ").trim().split(/\s+/).length : 0} 词{question.writingFrame ? "（不含已给出的开头和结尾）" : ""}</small> : null}</div> : null}
     {question.type === "essay" && embeddedWriting ? <>{writingAfterLines.length > 0 ? <div className="senior-high-letter-signature">{writingAfterLines.map((line, index) => <p key={`${line}-${index}`}>{line.replace(WRITING_LINE_RE, "")}</p>)}</div> : null}<small className="senior-high-v2-word-count">当前 {writingValues.join(" ").trim() ? writingValues.join(" ").trim().split(/\s+/).length : 0} 词</small></> : null}
+    {submitted && writingReferenceBlocks.length > 0 ? <div className="senior-high-writing-reference"><strong>参考范文</strong><BlockRenderer answers={answers} assets={assets} bindings={bindings} blocks={writingReferenceBlocks} kind={kind} onAnswer={onAnswer} revealSolutions /></div> : null}
     {submitted && question.type !== "instruction_only" ? <Feedback answers={answers} assets={assets} bindings={bindings} grade={grade} kind={kind} onAnswer={onAnswer} question={question} /> : null}
   </article>;
 }
@@ -384,10 +544,23 @@ export function SeniorHighRunner({ kind, setId }: RunnerProps) {
   const storageKey = `senior-high:v2:2:${kind}:${setId}`;
 
   useEffect(() => {
-    fetch(`/senior-high/${kind === "paper" ? "papers" : "practice"}/${setId}.json`)
-      .then((response) => {
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        return response.json() as Promise<SeniorHighSet>;
+    const basePath = `/senior-high/${kind === "paper" ? "papers" : "practice"}`;
+    const urls = setId === "practice-gaokao-writing-2000-2019"
+      ? [`${basePath}/${setId}.json`, `${basePath}/practice-gaokao-application-writing-2000-2019.json`]
+      : [`${basePath}/${setId}.json`];
+    Promise.all(urls.map((url) => fetch(url).then((response) => {
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      return response.json() as Promise<SeniorHighSet>;
+    })))
+      .then(([payload, applicationWriting]) => {
+        if (!applicationWriting) return payload;
+        const existingQuestionCount = payload.sections.reduce((count, section) => count + section.groups.reduce((groupCount, group) => groupCount + group.questions.length, 0), 0);
+        let nextQuestionNumber = existingQuestionCount + 1;
+        const appendedGroups = applicationWriting.sections.flatMap((section) => section.groups).map((group) => ({
+          ...group,
+          questions: group.questions.map((question) => ({ ...question, displayNumber: nextQuestionNumber++ })),
+        }));
+        return { ...payload, assetRefs: [...(payload.assetRefs || []), ...(applicationWriting.assetRefs || [])], sections: payload.sections.map((section, index) => index === 0 ? { ...section, groups: [...section.groups, ...appendedGroups] } : section) };
       })
       .then((payload) => setData(payload))
       .catch(() => setError("这套资料暂时无法载入，请返回后重试。"));
@@ -407,27 +580,40 @@ export function SeniorHighRunner({ kind, setId }: RunnerProps) {
   }, [answers, restored, storageKey, submittedGroups]);
 
   useEffect(() => {
-    if (!data || typeof ResizeObserver === "undefined") return;
-    const groups = [...document.querySelectorAll<HTMLElement>(
-      ".senior-high-v2-group[data-side-questions=\"true\"]",
-    )];
-    const observers = groups.map((group) => {
+    if (!data || kind !== "paper") return;
+    const runner = document.querySelector<HTMLElement>(".senior-high-v2-runner");
+    if (!runner) return;
+    const groups = [...runner.querySelectorAll<HTMLElement>('.senior-high-v2-group[data-side-questions="true"]')];
+    const syncQuestionColumnHeights = () => {
+      const compact = window.matchMedia("(max-width: 900px)").matches;
+      for (const group of groups) {
+        const stimulus = group.querySelector<HTMLElement>(".senior-high-v2-stimulus");
+        const questionColumn = group.querySelector<HTMLElement>(".senior-high-v2-question-column");
+        if (!stimulus || !questionColumn) continue;
+        if (compact) {
+          questionColumn.style.maxHeight = "";
+          questionColumn.style.overflowY = "";
+          continue;
+        }
+        const articleHeight = Math.floor(stimulus.getBoundingClientRect().height);
+        if (articleHeight > 0) {
+          questionColumn.style.maxHeight = `${articleHeight}px`;
+          questionColumn.style.overflowY = "auto";
+        }
+      }
+    };
+    syncQuestionColumnHeights();
+    const observer = typeof ResizeObserver === "undefined" ? null : new ResizeObserver(syncQuestionColumnHeights);
+    for (const group of groups) {
       const stimulus = group.querySelector<HTMLElement>(".senior-high-v2-stimulus");
-      if (!stimulus) return null;
-      const updateHeight = () => {
-        group.style.setProperty("--senior-high-article-height", `${stimulus.getBoundingClientRect().height}px`);
-      };
-      updateHeight();
-      const observer = new ResizeObserver(updateHeight);
-      observer.observe(stimulus);
-      window.addEventListener("resize", updateHeight);
-      return () => {
-        observer.disconnect();
-        window.removeEventListener("resize", updateHeight);
-      };
-    });
-    return () => observers.forEach((disconnect) => disconnect?.());
-  }, [data, submittedGroups]);
+      if (stimulus) observer?.observe(stimulus);
+    }
+    window.addEventListener("resize", syncQuestionColumnHeights);
+    return () => {
+      observer?.disconnect();
+      window.removeEventListener("resize", syncQuestionColumnHeights);
+    };
+  }, [data, kind]);
 
   const questions = useMemo(() => data?.sections.flatMap((section) => section.groups.flatMap((group) => group.questions)).filter((question) => question.type !== "instruction_only") || [], [data]);
   const questionGroupKeys = useMemo(() => {
@@ -463,16 +649,18 @@ export function SeniorHighRunner({ kind, setId }: RunnerProps) {
   const navigationButton = (question: SeniorHighQuestion) => <button className={questionNavigationStatus(question)} key={question.id} onClick={() => document.getElementById(question.id)?.scrollIntoView({ behavior: "smooth", block: "center" })} type="button">{displayNumber(question, kind)}</button>;
   const questionNavigation = (position: "top" | "bottom") => {
     if (questions.length < QUESTION_NAV_PAGE_SIZE * 2) return <nav aria-label={`题号导航（${position === "top" ? "顶部" : "底部"}）`} className={`senior-high-v2-question-nav direct ${position}`}>{questions.map(navigationButton)}</nav>;
-    const ranges = [];
+    const ranges: Array<{ start: number; end: number; first: number; last: number }> = [];
     for (let start = 0; start < questions.length; start += QUESTION_NAV_PAGE_SIZE) {
       const end = Math.min(start + QUESTION_NAV_PAGE_SIZE, questions.length);
       ranges.push({ start, end, first: displayNumber(questions[start], kind), last: displayNumber(questions[end - 1], kind) });
     }
     const expandedRange = openQuestionGroup === null ? null : ranges[openQuestionGroup];
-    return <nav aria-label={`题号导航（${position === "top" ? "顶部" : "底部"}）`} className={`senior-high-v2-question-nav ${position}`}><div className="senior-high-v2-question-nav-groups">{ranges.map((range, rangeIndex) => {
+    const rangeRows = Array.from({ length: Math.ceil(ranges.length / QUESTION_NAV_GROUPS_PER_ROW) }, (_, rowIndex) => ranges.slice(rowIndex * QUESTION_NAV_GROUPS_PER_ROW, (rowIndex + 1) * QUESTION_NAV_GROUPS_PER_ROW));
+    return <nav aria-label={`题号导航（${position === "top" ? "顶部" : "底部"}）`} className={`senior-high-v2-question-nav ${position}`}><div className="senior-high-v2-question-nav-groups">{rangeRows.map((row, rowIndex) => <div className={`senior-high-question-nav-group-row${row.length < QUESTION_NAV_GROUPS_PER_ROW ? " sparse" : ""}`} key={`range-row-${rowIndex}`}>{row.map((range) => {
+      const rangeIndex = ranges.indexOf(range);
       const expanded = openQuestionGroup === rangeIndex;
       return <button aria-expanded={expanded} className="senior-high-question-nav-group-toggle" key={`${range.start}-${range.end}`} onClick={() => setOpenQuestionGroup((current) => current === rangeIndex ? null : rangeIndex)} type="button">{range.first}-{range.last}</button>;
-    })}</div>{expandedRange ? <div aria-label={`${expandedRange.first}-${expandedRange.last}题号`} className="senior-high-question-nav-group-items">{questions.slice(expandedRange.start, expandedRange.end).map(navigationButton)}</div> : null}</nav>;
+    })}</div>)}</div>{expandedRange ? <div aria-label={`${expandedRange.first}-${expandedRange.last}题号`} className="senior-high-question-nav-group-items">{questions.slice(expandedRange.start, expandedRange.end).map(navigationButton)}</div> : null}</nav>;
   };
 
   if (error) return <section className="senior-high-page"><div className="senior-high-alert">{error}</div></section>;
@@ -497,9 +685,8 @@ export function SeniorHighRunner({ kind, setId }: RunnerProps) {
       const isClozeGroup = group.stimulusBlocks.length > 0
         && group.sharedOptions.length === 0
         && group.questions.length > 0
-        && group.questions.every((question) => question.type === "single_choice" && question.placement.kind === "inline");
-      const stimulusText = plainText(group.stimulusBlocks);
-      const instructionOnlyStimulus = /(?:选出|选择|填入).*(?:最佳|正确)选项|(?:^|\s)例[：:]|听第?\s*\d+\s*段材料|听下面.*(?:材料|对话|独白)|回答第?\s*\d+/i.test(stimulusText);
+        && group.questions.every((question) => question.type === "single_choice")
+        && (group.questions.every((question) => question.placement.kind === "inline") || group.stimulusBlocks.reduce((count, block) => count + (block.type === "paragraph" || block.type === "richText" ? block.runs.filter((run) => run.type === "text" && run.underline && /^\s*[_＿]*\d{1,3}[_＿]*\s*$/.test(run.text)).length : 0), 0) >= Math.min(group.questions.length, 5));
       const groupSubmitted = Boolean(submittedGroups[groupKey]);
       const groupAnswered = group.questions.filter((question) => seniorHighQuestionAnswered(question, answers)).length;
       const assignedOptionIds = new Set(group.questions.map((question) => answers[question.id]).filter(Boolean));
@@ -525,8 +712,7 @@ export function SeniorHighRunner({ kind, setId }: RunnerProps) {
       const showQuestionColumn = standaloneQuestions.length > 0 || inlineQuestions.length > 0 || group.sharedOptions.length > 0 || groupSubmitted || group.stimulusBlocks.length === 0;
       const hasSideQuestions = hasStimulusQuestions
         && !isListeningSection
-        && group.presentation === "reading"
-        && !instructionOnlyStimulus
+        && group.presentation !== "inline"
         && showQuestionColumn
         && (standaloneQuestions.length > 0 || group.sharedOptions.length > 0);
       const groupLabel = group.stimulusBlocks.length > 0 ? "本篇" : "本组";
@@ -535,7 +721,7 @@ export function SeniorHighRunner({ kind, setId }: RunnerProps) {
         {group.title ? <h3>{group.title}</h3> : null}
         {group.instructions.length > 0 ? <BlockRenderer answers={answers} assets={assets} bindings={bindings} blocks={group.instructions} kind={data.kind} onAnswer={answerGroup} revealSolutions={groupSubmitted} /> : null}
         <div className="senior-high-v2-group-body">
-          {group.stimulusBlocks.length > 0 ? <div className="senior-high-v2-stimulus"><BlockRenderer answers={answers} assets={assets} bindings={bindings} blocks={group.stimulusBlocks} kind={data.kind} onAnswer={answerGroup} onOptionDrop={moveOption} revealSolutions={groupSubmitted} hideClozeLines={isClozeGroup} /></div> : null}
+          {group.stimulusBlocks.length > 0 ? <div className="senior-high-v2-stimulus"><BlockRenderer answers={answers} assets={assets} bindings={bindings} blocks={group.stimulusBlocks} kind={data.kind} onAnswer={answerGroup} onOptionDrop={moveOption} revealSolutions={groupSubmitted} hideClozeLines={isClozeGroup} clozeNumbers={isClozeGroup ? group.questions.map((question) => displayNumber(question, data.kind)) : undefined} /></div> : null}
           {showQuestionColumn ? <div className="senior-high-v2-question-column">
             {(data.submissionMode !== "whole-paper" || perGroupSubmission) && groupSubmitted ? groupSubmit : null}
             {group.sharedOptions.length > 0 ? <div className="senior-high-v2-shared-options" onDragOver={(event) => event.preventDefault()} onDrop={(event) => { event.preventDefault(); const optionId = event.dataTransfer.getData("text/senior-high-option"); const sourceQuestionId = event.dataTransfer.getData("text/senior-high-source-question"); if (optionId) moveOption(null, optionId, sourceQuestionId || undefined); }}><strong>拖动选项到下划线处</strong>{group.sharedOptions.filter((option) => group.sharedOptionsReusable || !assignedOptionIds.has(option.id)).map((option) => <div aria-label={`选项 ${option.label}`} className="senior-high-v2-shared-option" draggable role="button" tabIndex={0} key={option.id} onClick={() => { const target = group.questions.find((question) => question.type === "shared_option_matching" && !answers[question.id])?.id; if (target) moveOption(target, option.id); }} onDragStart={(event) => { event.dataTransfer.setData("text/senior-high-option", option.id); event.dataTransfer.effectAllowed = "move"; }} onKeyDown={(event) => { if (event.key !== "Enter" && event.key !== " ") return; event.preventDefault(); const target = group.questions.find((question) => question.type === "shared_option_matching" && !answers[question.id])?.id; if (target) moveOption(target, option.id); }}><b>{option.label}.</b><div><BlockRenderer answers={answers} assets={assets} bindings={bindings} blocks={option.blocks} kind={data.kind} onAnswer={answerGroup} onOptionDrop={moveOption} revealSolutions={groupSubmitted} /></div></div>)}</div> : null}
@@ -546,7 +732,7 @@ export function SeniorHighRunner({ kind, setId }: RunnerProps) {
         </div>
       </article>;
     })}</div></section>; })}</div>
-    {questionNavigation("bottom")}
+    {questions.length < QUESTION_NAV_PAGE_SIZE * 2 ? questionNavigation("bottom") : null}
     {kind === "paper" && data.submissionMode === "whole-paper" ? <div className="senior-high-paper-finish"><span>{answeredCount}/{questions.length} 已作答</span><button onClick={submitPaper} type="button">{allSubmitted ? "重新提交整卷" : "提交整卷并查看解析"}</button></div> : null}
   </section>;
 }

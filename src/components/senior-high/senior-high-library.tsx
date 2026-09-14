@@ -8,7 +8,7 @@ import { SeniorHighKnowledge } from "./senior-high-knowledge";
 type Entry = "knowledge" | "practice" | "papers";
 
 const ENTRY_LABELS: Record<Entry, string> = { knowledge: "知识点", practice: "题型训练", papers: "历年真题" };
-const PRACTICE_FAMILY_ORDER = ["听力", "语法填空／语言运用", "单项填空", "完形填空", "七选五／阅读补全", "阅读理解", "写作／书面表达", "读后续写", "应用文写作"];
+const PRACTICE_FAMILY_ORDER = ["听力", "语法填空／语言运用", "单项填空", "完形填空", "七选五／阅读补全", "阅读理解", "写作／书面表达", "读后续写"];
 const PRACTICE_AGGREGATE_IDS: Record<string, string> = {
   "听力": "practice-gaokao-listening-2000-2019",
   "语法填空／语言运用": "practice-gaokao-grammar-fill-2000-2019",
@@ -17,7 +17,6 @@ const PRACTICE_AGGREGATE_IDS: Record<string, string> = {
   "七选五／阅读补全": "practice-gaokao-seven-choice-2000-2019",
   "阅读理解": "practice-gaokao-reading-2000-2019",
   "读后续写": "practice-gaokao-continuation-writing-2000-2019",
-  "应用文写作": "practice-gaokao-application-writing-2000-2019",
   "写作／书面表达": "practice-gaokao-writing-2000-2019",
   "短文回答／阅读表达": "practice-gaokao-short-answer-2000-2019",
 };
@@ -59,9 +58,10 @@ export function SeniorHighLibrary() {
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       return response.json() as Promise<SeniorHighLibraryIndex>;
     }).then((payload) => {
-      setIndex(payload);
+      const entries = payload.entries.filter((item) => item.id !== "practice-gaokao-application-writing-2000-2019").map((item) => item.id === "practice-gaokao-writing-2000-2019" ? { ...item, questionCount: item.questionCount + 2 } : item);
+      setIndex({ ...payload, entries });
       const done = new Set<string>();
-      for (const item of payload.entries) {
+      for (const item of entries) {
         try {
           const value = JSON.parse(window.localStorage.getItem(`senior-high:v2:2:${item.kind}:${item.id}`) || "null") as { submitted?: boolean; submittedGroups?: Record<string, boolean> } | null;
           if (value?.submitted || Object.keys(value?.submittedGroups || {}).length > 0) done.add(item.id);

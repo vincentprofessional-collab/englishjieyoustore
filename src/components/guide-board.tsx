@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { FormEvent, useEffect, useState, type CSSProperties } from "react";
 import {
   DEFAULT_GUIDE_POSTS,
@@ -9,13 +10,19 @@ import {
   parseGuidePostRow,
 } from "@/lib/guide/posts";
 import { supabase } from "@/lib/supabase/client";
+import { getVisitorNumber } from "@/lib/visitor-identity";
 
 type GuideBoardProps = {
   eyebrow?: string;
+  compact?: boolean;
+  hideHeading?: boolean;
+  hidePostChrome?: boolean;
+  postLimit?: number;
   title?: string;
 };
 
 type GuideComment = {
+  avatarUrl?: string;
   body: string;
   createdAt: string;
   displayName: string;
@@ -55,17 +62,30 @@ function formatGuideDate(value: string) {
 
 function blockStyle(block: GuideContentBlock): CSSProperties {
   return {
+    backgroundColor: block.backgroundColor || undefined,
+    color: block.color || undefined,
     fontFamily: FONT_FAMILIES[block.fontFamily],
     fontSize: `${block.fontSize}px`,
+    fontStyle: block.italic ? "italic" : undefined,
+    fontWeight: block.bold ? 800 : undefined,
     textAlign: block.align,
+    textDecoration: [block.underline ? "underline" : "", block.strike ? "line-through" : ""].filter(Boolean).join(" ") || undefined,
   };
+}
+
+function renderBlockText(block: GuideContentBlock) {
+  return block.html ? (
+    <span dangerouslySetInnerHTML={{ __html: block.html }} />
+  ) : (
+    block.text
+  );
 }
 
 function GuideBlock({ block }: { block: GuideContentBlock }) {
   const style = blockStyle(block);
 
   if (block.type === "heading") {
-    return block.text ? <h3 style={style}>{block.text}</h3> : null;
+    return block.text ? <h3 style={style}>{renderBlockText(block)}</h3> : null;
   }
 
   if (block.type === "image") {
@@ -88,6 +108,15 @@ function GuideBlock({ block }: { block: GuideContentBlock }) {
     ) : null;
   }
 
+  if (block.type === "audio") {
+    return block.url ? (
+      <figure className="guide-post-media" style={{ textAlign: block.align }}>
+        <audio controls preload="metadata" src={block.url} />
+        {block.caption ? <figcaption>{block.caption}</figcaption> : null}
+      </figure>
+    ) : null;
+  }
+
   if (block.type === "link") {
     return block.url ? (
       <p className="guide-post-link-line" style={style}>
@@ -99,18 +128,35 @@ function GuideBlock({ block }: { block: GuideContentBlock }) {
     ) : null;
   }
 
-  return block.text ? <p style={style}>{block.text}</p> : null;
+  return block.text ? <p style={style}>{renderBlockText(block)}</p> : null;
 }
 
-function GuidePostCard({ post }: { post: GuidePost }) {
+function GuidePostCard({
+  hidePostChrome = false,
+  initialExpanded = false,
+  linkTitle = true,
+  post,
+}: {
+  hidePostChrome?: boolean;
+  initialExpanded?: boolean;
+  linkTitle?: boolean;
+  post: GuidePost;
+}) {
   const [comments, setComments] = useState<GuideComment[]>([]);
   const [commentBody, setCommentBody] = useState("");
-  const [commentName, setCommentName] = useState("");
-  const [expanded, setExpanded] = useState(false);
+  const [commentIdentity, setCommentIdentity] = useState({
+    avatarUrl: "",
+    displayName: "",
+  });
+  const [expanded, setExpanded] = useState(initialExpanded);
   const [interactionMessage, setInteractionMessage] = useState("");
   const [isLiked, setIsLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
   const [userId, setUserId] = useState<string | null>(null);
+
+  function toggleExpanded() {
+    setExpanded((current) => !current);
+  }
 
   useEffect(() => {
     const localLikes = readLocalRecord<boolean>(LOCAL_LIKES_KEY);
@@ -118,13 +164,27 @@ function GuidePostCard({ post }: { post: GuidePost }) {
     setIsLiked(Boolean(localLikes[post.id]));
     setLikeCount(localLikes[post.id] ? 1 : 0);
     setComments(localComments[post.id] ?? []);
+    setCommentIdentity({ avatarUrl: "", displayName: getVisitorNumber() });
 
-    void supabase.auth.getUser().then(({ data }) => {
+    void supabase.auth.getUser().then(async ({ data }) => {
       const user = data.user;
       setUserId(user?.id ?? null);
-      setCommentName(
-        String(user?.user_metadata?.display_name ?? user?.email?.split("@")[0] ?? ""),
-      );
+      if (user) {
+        const { data: profile } = await supabase
+          .from("profiles")
+          .select("display_name,avatar_url")
+          .eq("id", user.id)
+          .maybeSingle();
+        setCommentIdentity({
+          avatarUrl: String(profile?.avatar_url ?? user.user_metadata?.avatar_url ?? ""),
+          displayName: String(
+            profile?.display_name ??
+              user.user_metadata?.display_name ??
+              user.email?.split("@")[0] ??
+              getVisitorNumber(),
+          ),
+        });
+      }
     });
   }, [post.id]);
 
@@ -139,7 +199,7 @@ function GuidePostCard({ post }: { post: GuidePost }) {
       const [commentsResult, likesResult] = await Promise.all([
         supabase
           .from("guide_comments")
-          .select("id,display_name,body,created_at")
+          .select("id,display_name,avatar_url,body,created_at")
           .eq("post_id", post.id)
           .eq("status", "published")
           .order("created_at", { ascending: true }),
@@ -160,6 +220,7 @@ function GuidePostCard({ post }: { post: GuidePost }) {
             createdAt: comment.created_at,
             displayName: comment.display_name,
             id: comment.id,
+            avatarUrl: comment.avatar_url ?? undefined,
           })),
         );
       }
@@ -240,13 +301,14 @@ function GuidePostCard({ post }: { post: GuidePost }) {
   async function submitComment(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const body = commentBody.trim();
-    const displayName = commentName.trim();
+    const displayName = commentIdentity.displayName.trim() || getVisitorNumber();
 
-    if (!body || !displayName) {
+    if (!body) {
       return;
     }
 
     const optimisticComment: GuideComment = {
+      avatarUrl: commentIdentity.avatarUrl || undefined,
       body,
       createdAt: new Date().toISOString(),
       displayName,
@@ -266,13 +328,14 @@ function GuidePostCard({ post }: { post: GuidePost }) {
     const { data, error } = await supabase
       .from("guide_comments")
       .insert({
+        avatar_url: commentIdentity.avatarUrl || null,
         body,
         display_name: displayName,
         post_id: post.id,
         status: "published",
         user_id: userId,
       })
-      .select("id,display_name,body,created_at")
+      .select("id,display_name,avatar_url,body,created_at")
       .single();
 
     if (error || !data) {
@@ -289,6 +352,7 @@ function GuidePostCard({ post }: { post: GuidePost }) {
         createdAt: data.created_at,
         displayName: data.display_name,
         id: data.id,
+        avatarUrl: data.avatar_url ?? undefined,
       },
     ]);
     setInteractionMessage("留言发布成功。");
@@ -297,12 +361,31 @@ function GuidePostCard({ post }: { post: GuidePost }) {
   return (
     <article className={`guide-post-card ${expanded ? "expanded" : ""}`}>
       <header className="guide-post-card-head">
-        <div className="guide-post-number" aria-hidden="true">
-          告
-        </div>
+        {!hidePostChrome ? (
+          <div className="guide-post-number" aria-hidden="true">
+            告
+          </div>
+        ) : null}
         <div className="guide-post-title-block">
-          <h2>{post.title}</h2>
-          <p>{post.excerpt}</p>
+          {hidePostChrome ? (
+            linkTitle ? (
+              <Link className="guide-post-title-button" href={`/contact/${post.slug}`}>
+                {post.title}
+              </Link>
+            ) : (
+              <h2>{post.title}</h2>
+            )
+          ) : (
+            linkTitle ? (
+              <Link className="guide-post-title-link" href={`/contact/${post.slug}`}>
+                {post.title}
+              </Link>
+            ) : (
+              <h2>{post.title}</h2>
+            )
+          )}
+          {!hidePostChrome ? <p>{post.excerpt}</p> : null}
+          {post.author ? <small className="guide-post-author">作者：{post.author}</small> : null}
         </div>
         <time className="guide-post-date" dateTime={post.publishedAt}>
           {formatGuideDate(post.publishedAt)}
@@ -317,42 +400,46 @@ function GuidePostCard({ post }: { post: GuidePost }) {
         </div>
       ) : null}
 
-      <footer className="guide-post-actions">
-        <div className="guide-post-action-buttons">
-          <button
-            aria-expanded={expanded}
-            className="guide-read-button"
-            onClick={() => setExpanded((current) => !current)}
-            type="button"
-          >
-            {expanded ? "收起内容" : "阅读全文与留言"}
-            <span aria-hidden="true">{expanded ? "↑" : "↓"}</span>
-          </button>
-          <button
-            aria-label={isLiked ? `取消点赞 ${post.title}` : `点赞 ${post.title}`}
-            aria-pressed={isLiked}
-            className={`guide-like-button ${isLiked ? "active" : ""}`}
-            onClick={() => void toggleLike()}
-            type="button"
-          >
-            <span aria-hidden="true">♥</span>
-            {likeCount}
-          </button>
-        </div>
-      </footer>
+      {!hidePostChrome ? (
+        <footer className="guide-post-actions">
+          <div className="guide-post-action-buttons">
+            <button
+              aria-expanded={expanded}
+              className="guide-read-button"
+              onClick={() => setExpanded((current) => !current)}
+              type="button"
+            >
+              {expanded ? "收起内容" : "阅读全文与留言"}
+              <span aria-hidden="true">{expanded ? "↑" : "↓"}</span>
+            </button>
+            <button
+              aria-label={isLiked ? `取消点赞 ${post.title}` : `点赞 ${post.title}`}
+              aria-pressed={isLiked}
+              className={`guide-like-button ${isLiked ? "active" : ""}`}
+              onClick={() => void toggleLike()}
+              type="button"
+            >
+              <span aria-hidden="true">♥</span>
+              {likeCount}
+            </button>
+          </div>
+        </footer>
+      ) : null}
 
       {expanded ? (
         <section className="guide-comment-section" aria-label={`${post.title} 留言`}>
-          <header>
-            <span>COMMENTS · 留言</span>
-            <strong>{comments.length} 条</strong>
-          </header>
           <div className="guide-comment-list">
             {comments.length ? (
               comments.map((comment) => (
                 <article key={comment.id}>
                   <div className="guide-comment-avatar" aria-hidden="true">
-                    {comment.displayName.slice(0, 1).toUpperCase()}
+                    {comment.avatarUrl ? (
+                      // Public avatar URLs are supplied by the authenticated profile upload route.
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img alt="" decoding="async" loading="lazy" src={comment.avatarUrl} />
+                    ) : (
+                      comment.displayName.slice(0, 1).toUpperCase()
+                    )}
                   </div>
                   <div>
                     <header>
@@ -363,21 +450,9 @@ function GuidePostCard({ post }: { post: GuidePost }) {
                   </div>
                 </article>
               ))
-            ) : (
-              <p className="guide-comment-empty">还没有留言，欢迎留下第一个问题或建议。</p>
-            )}
+            ) : null}
           </div>
           <form className="guide-comment-form" onSubmit={submitComment}>
-            <label>
-              <span>昵称</span>
-              <input
-                maxLength={30}
-                onChange={(event) => setCommentName(event.target.value)}
-                placeholder="怎么称呼你"
-                required
-                value={commentName}
-              />
-            </label>
             <label>
               <span>留言</span>
               <textarea
@@ -402,9 +477,21 @@ function GuidePostCard({ post }: { post: GuidePost }) {
   );
 }
 
+export function GuidePostDetail({ post }: { post: GuidePost }) {
+  return (
+    <section className="stack guide-post-detail-page">
+      <GuidePostCard initialExpanded linkTitle={false} post={post} />
+    </section>
+  );
+}
+
 export function GuideBoard({
-  eyebrow = "NOTICE BOARD",
-  title = "公告栏",
+  compact = false,
+  eyebrow = "GUIDE · 使用说明",
+  hideHeading = false,
+  hidePostChrome = false,
+  postLimit,
+  title = "使用说明",
 }: GuideBoardProps) {
   const [posts, setPosts] = useState<GuidePost[]>(DEFAULT_GUIDE_POSTS);
 
@@ -440,20 +527,26 @@ export function GuideBoard({
     };
   }, []);
 
+  const visiblePosts = postLimit ? posts.slice(0, postLimit) : posts;
+
   return (
-    <main className="stack guide-board-page">
-      <section className="guide-board-heading">
-        <div>
-          <span>{eyebrow}</span>
-          <h2>{title}</h2>
-        </div>
-      </section>
+    <section
+      className={`stack guide-board-page ${compact ? "guide-board-compact" : ""} ${hidePostChrome ? "guide-board-home" : ""}`}
+    >
+      {!hideHeading ? (
+        <section className="guide-board-heading">
+          <div>
+            <span>{eyebrow}</span>
+            <h2>{title}</h2>
+          </div>
+        </section>
+      ) : null}
 
       <div className="guide-post-list">
-        {posts.map((post) => (
-          <GuidePostCard key={post.id} post={post} />
+        {visiblePosts.map((post) => (
+          <GuidePostCard hidePostChrome={hidePostChrome} key={post.id} post={post} />
         ))}
       </div>
-    </main>
+    </section>
   );
 }

@@ -10,6 +10,7 @@ import { AdminSiteChromeEditor } from "@/components/admin-site-chrome-editor";
 import { AdminJuniorHighQuestionEditor } from "@/components/admin-junior-high-question-editor";
 import { AdminSeniorHighQuestionEditor } from "@/components/admin-senior-high-question-editor";
 import { GuidePostAdmin } from "@/components/guide-post-admin";
+import { GuideCommentsAdmin } from "@/components/guide-comments-admin";
 import { supabase } from "@/lib/supabase/client";
 
 type AdminState = "checking" | "signed-out" | "forbidden" | "ready" | "error";
@@ -177,11 +178,11 @@ export function AdminContentManager() {
         <div>
           <span>CONTENT ADMIN · V2</span>
           <h1>网站后台</h1>
-          <p>查看网站数据，维护导航底部，并发布公告栏帖子。</p>
+          <p>查看网站数据，维护导航底部，并发布首页帖子。</p>
         </div>
         <div className="admin-header-actions">
-          <Link className="button secondary" href="/contact" target="_blank">
-            查看公告栏 ↗
+          <Link className="button secondary" href="/" target="_blank">
+            查看首页帖子 ↗
           </Link>
           <Link className="button secondary" href="/" target="_blank">
             打开首页 ↗
@@ -226,7 +227,7 @@ export function AdminContentManager() {
           type="button"
           onClick={() => setActiveView("guide")}
         >
-          公告栏发帖
+          首页发帖
         </button>
         <button
           className={activeView === "bbc-vocabulary" ? "active" : ""}
@@ -264,7 +265,10 @@ export function AdminContentManager() {
       ) : null}
 
       {activeView === "guide" && adminUserId ? (
-        <GuidePostAdmin adminUserId={adminUserId} />
+        <>
+          <GuidePostAdmin adminUserId={adminUserId} />
+          <GuideCommentsAdmin />
+        </>
       ) : null}
 
       {activeView === "bbc-vocabulary" && adminUserId ? (

@@ -1,4 +1,4 @@
-export type GuideBlockType = "heading" | "image" | "link" | "paragraph" | "video";
+export type GuideBlockType = "heading" | "image" | "link" | "paragraph" | "video" | "audio";
 
 export type GuideTextAlign = "center" | "left" | "right";
 
@@ -6,16 +6,24 @@ export type GuideFontFamily = "georgia" | "kaiti" | "sans" | "serif";
 
 export type GuideContentBlock = {
   align: GuideTextAlign;
+  backgroundColor?: string;
+  bold?: boolean;
   caption: string;
+  color?: string;
   fontFamily: GuideFontFamily;
   fontSize: number;
   id: string;
+  italic?: boolean;
+  html?: string;
   text: string;
   type: GuideBlockType;
+  underline?: boolean;
+  strike?: boolean;
   url: string;
 };
 
 export type GuidePost = {
+  author?: string;
   blocks: GuideContentBlock[];
   createdAt: string;
   excerpt: string;
@@ -59,7 +67,8 @@ function readBlock(value: unknown, index: number): GuideContentBlock | null {
     block.type === "heading" ||
     block.type === "image" ||
     block.type === "link" ||
-    block.type === "video"
+    block.type === "video" ||
+    block.type === "audio"
       ? block.type
       : "paragraph";
   const align: GuideTextAlign =
@@ -75,12 +84,19 @@ function readBlock(value: unknown, index: number): GuideContentBlock | null {
 
   return {
     align,
+    backgroundColor: readString(block.backgroundColor) || undefined,
+    bold: block.bold === true,
     caption: readString(block.caption),
+    color: readString(block.color) || undefined,
     fontFamily,
     fontSize: Math.min(42, Math.max(14, requestedFontSize)),
+    html: readString(block.html) || undefined,
     id: readString(block.id) || `block-${index + 1}`,
+    italic: block.italic === true,
     text: readString(block.text),
     type,
+    underline: block.underline === true,
+    strike: block.strike === true,
     url: readString(block.url),
   };
 }
@@ -106,6 +122,7 @@ export function parseGuidePostRow(row: GuidePostRow): GuidePost {
     : [];
 
   return {
+    author: readString(meta.author),
     blocks: blocks.length ? blocks : [{ ...createGuideBlock(), text: row.summary ?? "" }],
     createdAt: row.created_at ?? row.published_at ?? new Date().toISOString(),
     excerpt: readString(meta.excerpt) || row.summary || "",

@@ -192,6 +192,8 @@ export function AdminEntitlementManager() {
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
+  const [isAccessCatalogExpanded, setIsAccessCatalogExpanded] = useState(false);
+  const [isPendingPaymentRequestsExpanded, setIsPendingPaymentRequestsExpanded] = useState(true);
 
   const entitlementByUserId = useMemo(() => {
     const groupedEntitlements = new Map<string, EntitlementRow[]>();
@@ -456,6 +458,31 @@ export function AdminEntitlementManager() {
     setIsSaving(false);
   }
 
+  async function deletePaymentRequest(requestId: string) {
+    const request = paymentRequests.find((item) => item.id === requestId);
+
+    if (!request || request.status !== "pending") return;
+    if (!window.confirm(`确定删除付款申请 ${request.order_no} 吗？`)) return;
+
+    setIsSaving(true);
+    setMessage("");
+    const { error } = await supabase
+      .from("project_payment_requests")
+      .update({ status: "canceled", updated_at: new Date().toISOString() })
+      .eq("id", requestId)
+      .eq("status", "pending");
+
+    if (error) {
+      setMessage("删除失败：" + error.message);
+      setIsSaving(false);
+      return;
+    }
+
+    await loadAccessData();
+    setMessage("付款申请已删除。");
+    setIsSaving(false);
+  }
+
   const pendingPaymentRequests = paymentRequests.filter((request) => request.status === "pending");
   const enabledProjects = accessProjects.filter((project) => project.is_enabled);
 
@@ -474,15 +501,28 @@ export function AdminEntitlementManager() {
       {message ? <p className="admin-form-message">{message}</p> : null}
 
       <section className="admin-editor-card admin-access-catalog">
-        <header className="admin-compact-heading">
+        <header className="admin-compact-heading admin-section-heading">
           <div>
             <h3>网站单项与价格</h3>
             <p>每个周期可单独启用；修改后，用户购买页和开通 / 续期会自动使用最新配置。</p>
           </div>
-          <span>{accessProjects.length} 个单项</span>
+          <div className="admin-section-heading-actions">
+            <span>{accessProjects.length} 个单项</span>
+            <button
+              aria-controls="admin-access-catalog-content"
+              aria-expanded={isAccessCatalogExpanded}
+              className="admin-list-actions-button"
+              type="button"
+              onClick={() => setIsAccessCatalogExpanded((expanded) => !expanded)}
+            >
+              {isAccessCatalogExpanded ? "隐藏" : "展开"}
+            </button>
+          </div>
         </header>
 
-        <div className="admin-access-catalog-list">
+        {isAccessCatalogExpanded ? (
+          <div className="admin-access-catalog-content" id="admin-access-catalog-content">
+            <div className="admin-access-catalog-list">
           {accessProjects.map((project) => {
             const draft = catalogDrafts[project.project_key];
             if (!draft) return null;
@@ -592,9 +632,9 @@ export function AdminEntitlementManager() {
               </article>
             );
           })}
-        </div>
+            </div>
 
-        <form
+            <form
           className="admin-access-catalog-item admin-access-new-item"
           onSubmit={(event) => {
             event.preventDefault();
@@ -701,17 +741,30 @@ export function AdminEntitlementManager() {
               {isSaving ? "增加中..." : "增加单项"}
             </button>
           </div>
-        </form>
+            </form>
+          </div>
+        ) : null}
       </section>
 
       <section className="admin-editor-card admin-payment-request-list">
-        <header className="admin-compact-heading">
+        <header className="admin-compact-heading admin-section-heading">
           <h3>待付款申请</h3>
-          <span>{pendingPaymentRequests.length} 条</span>
+          <div className="admin-section-heading-actions">
+            <span>{pendingPaymentRequests.length} 条</span>
+            <button
+              aria-controls="admin-pending-payment-requests"
+              aria-expanded={isPendingPaymentRequestsExpanded}
+              className="admin-list-actions-button"
+              type="button"
+              onClick={() => setIsPendingPaymentRequestsExpanded((expanded) => !expanded)}
+            >
+              {isPendingPaymentRequestsExpanded ? "隐藏申请" : "展开申请"}
+            </button>
+          </div>
         </header>
 
-        {pendingPaymentRequests.length ? (
-          <div className="admin-payment-requests">
+        {isPendingPaymentRequestsExpanded && pendingPaymentRequests.length ? (
+          <div className="admin-payment-requests" id="admin-pending-payment-requests">
             {pendingPaymentRequests.map((request) => (
               <article key={request.id}>
                 <div>
@@ -723,19 +776,31 @@ export function AdminEntitlementManager() {
                   {formatProjectPrice(Number(request.amount_cny))}
                 </small>
                 <time>{formatDateTime(request.created_at)}</time>
-                <button
-                  className="button primary"
-                  disabled={isSaving}
-                  type="button"
-                  onClick={() => void fulfillPaymentRequest(request.id)}
-                >
-                  确认开通
-                </button>
+                <div className="admin-payment-request-actions">
+                  <button
+                    className="button primary"
+                    disabled={isSaving}
+                    type="button"
+                    onClick={() => void fulfillPaymentRequest(request.id)}
+                  >
+                    确认开通
+                  </button>
+                  <button
+                    className="admin-list-actions-button danger"
+                    disabled={isSaving}
+                    type="button"
+                    onClick={() => void deletePaymentRequest(request.id)}
+                  >
+                    删除
+                  </button>
+                </div>
               </article>
             ))}
           </div>
-        ) : (
+        ) : isPendingPaymentRequestsExpanded ? (
           <p className="admin-empty-text">暂无待付款申请。</p>
+        ) : (
+          <p className="admin-collapsed-note">申请列表已隐藏，点击“展开申请”查看。</p>
         )}
       </section>
 

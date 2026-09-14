@@ -33,7 +33,9 @@ export function SiteFooter({ config }: { config: SiteChromeConfig }) {
     "--footer-social-color": config.footer.socialTextColor,
     "--footer-social-size": `${config.footer.socialFontSize}px`,
   };
-  const footerLinks = config.footer.links.filter((item) => item.enabled);
+  const footerLinks = config.footer.links.filter(
+    (item) => item.enabled && item.id !== "contact" && item.label !== "公告栏",
+  );
   const socialLinks = config.footer.socials.filter((item) => item.enabled);
 
   return (

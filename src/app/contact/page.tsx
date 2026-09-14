@@ -7,7 +7,7 @@ export default function ContactPage() {
   return (
     <>
       <ProjectOpenRequestBanner />
-      <GuideBoard />
+      <GuideBoard compact />
     </>
   );
 }

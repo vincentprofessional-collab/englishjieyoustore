@@ -1,0 +1,1832 @@
+{
+  "id": "information-and-ideas__central-idea-and-details__hard",
+  "assessment": "SAT",
+  "test": "Reading and Writing",
+  "domain": "Information and Ideas",
+  "skill": "central idea and details",
+  "difficulty": "Hard",
+  "expectedCount": 27,
+  "questionIds": [
+    "0a017199",
+    "4d671b68",
+    "e4466b2f",
+    "12b370c2",
+    "e3b5bb66",
+    "d2fbb566",
+    "e752ee68",
+    "d2316673",
+    "b8abc32e",
+    "f7e843d4",
+    "bf43e45f",
+    "497015e1",
+    "57fb41c0",
+    "c1f1a631",
+    "68bef552",
+    "2d77d2b7",
+    "f37f0c11",
+    "e7b2ca56",
+    "260f8d93",
+    "eb5814a5",
+    "a61a35f5",
+    "4e66210f",
+    "e67a5268",
+    "bea987a6",
+    "18d2dfab",
+    "5544272f",
+    "ba29d116"
+  ],
+  "sourceRefs": [
+    {
+      "role": "question",
+      "path": "Information and Ideas/central idea and details/Hard-central idea and details-27.pdf",
+      "sha256": "faeec7cfe9985315fd63575c02c7071864c120fc6a0e48d3bf4727c5e1f945b6",
+      "pages": [],
+      "extractionMethod": "pdf-text-layout"
+    },
+    {
+      "role": "answer",
+      "path": "Information and Ideas/central idea and details/Hard-central idea and details-27-with answers and explanations.pdf",
+      "sha256": "33d01b40e59c612652bf98e5430b8a3cd80457212d8e4eaba815d73672759a1f",
+      "pages": [],
+      "extractionMethod": "pdf-text-layout"
+    }
+  ],
+  "questions": [
+    {
+      "id": "0a017199",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Information and Ideas",
+      "skill": "central idea and details",
+      "difficulty": "Hard",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Some animal-behavior studies involve observing wild animals in their natural habitat, and some involve capturing wild animals and observing them in a laboratory. Each approach has advantages over the other. In wild studies, researchers can more easily presume that the animals are behaving normally, and in lab studies, researchers can more easily control factors that might affect the results. But if, for example, the results from a wild study and a lab study of Western scrub-jays (Aphelocoma californica) contradict each other, one or both of the studies must have failed to account for some factor that was relevant to the birds’ behavior."
+        }
+      ],
+      "prompt": "Which choice best states the main idea of the text?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "When the results of a natural-habitat study and those from a lab study of a wild animal such as the Western scrub-jay conflict, the study in the natural habitat is more likely than the lab study to have accurate results."
+        },
+        {
+          "id": "B",
+          "text": "Studying wild animals such as the Western scrub-jay in both their natural habitat and lab settings is likely to yield conflicting results that researchers cannot fully resolve."
+        },
+        {
+          "id": "C",
+          "text": "Wild animals such as the Western scrub-jay can be effectively studied in their natural habitat and in the lab, but each approach has drawbacks that could affect the accuracy of the findings."
+        },
+        {
+          "id": "D",
+          "text": "Differing results between natural-habitat and lab studies of wild animals such as the Western scrub-jay are a strong indication that both of the studies had design flaws that affected the accuracy of their results."
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Choice C is the best answer because it most accurately states the main idea of the text. The text begins by explaining that wild animals can be studied in their natural habitat or in a laboratory setting, with each setting offering unique advantages to researchers. The text then highlights an instance in which Western scrub-jays were studied in both settings but with conflicting results, indicating that one or both studies may have failed to account for the disadvantages of its research setting. Thus, the main idea of the text is that while wild animals can be effectively studied in natural or lab settings, there are drawbacks to each that need to be considered to ensure accurate results.\n\nChoice A is incorrect because the text does not position one study setting (natural or lab) as superior to the other; rather, the text states that each one has advantages over the other. Choice B is incorrect. The text provides a hypothetical example of two studies in different environments with conflicting results, but this single example cannot be extrapolated to a general claim about the likelihood that results of studies in different environments will conflict. Additionally, the text does not assert anything about how researchers can or cannot resolve conflicting study results. Choice D is incorrect because the text does not state that discrepancies between natural-habitat and lab-based animal behavior studies are due to both of the designs being flawed. Rather, the text states that the conflict in results can be the consequence of one or both of the studies having failed to account for some factor.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27.pdf",
+          "sha256": "faeec7cfe9985315fd63575c02c7071864c120fc6a0e48d3bf4727c5e1f945b6",
+          "pages": [
+            1,
+            2
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27-with answers and explanations.pdf",
+          "sha256": "33d01b40e59c612652bf98e5430b8a3cd80457212d8e4eaba815d73672759a1f",
+          "pages": [
+            1,
+            2,
+            3
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "C": "Choice C is the best answer because it most accurately states the main idea of the text. The text begins by explaining that wild animals can be studied in their natural habitat or in a laboratory setting, with each setting offering unique advantages to researchers. The text then highlights an instance in which Western scrub-jays were studied in both settings but with conflicting results, indicating that one or both studies may have failed to account for the disadvantages of its research setting. Thus, the main idea of the text is that while wild animals can be effectively studied in natural or lab settings, there are drawbacks to each that need to be considered to ensure accurate results.",
+        "A": "Choice A is incorrect because the text does not position one study setting (natural or lab) as superior to the other; rather, the text states that each one has advantages over the other.",
+        "B": "Choice B is incorrect. The text provides a hypothetical example of two studies in different environments with conflicting results, but this single example cannot be extrapolated to a general claim about the likelihood that results of studies in different environments will conflict. Additionally, the text does not assert anything about how researchers can or cannot resolve conflicting study results.",
+        "D": "Choice D is incorrect because the text does not state that discrepancies between natural-habitat and lab-based animal behavior studies are due to both of the designs being flawed. Rather, the text states that the conflict in results can be the consequence of one or both of the studies having failed to account for some factor."
+      }
+    },
+    {
+      "id": "4d671b68",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Information and Ideas",
+      "skill": "central idea and details",
+      "difficulty": "Hard",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Algae living within the tissues of corals play a critical role in keeping corals, and the marine ecosystems they are part of, thriving. Some coral species appear brown in color when healthy due to the algae colonies living in their tissues. In the event of an environmental stressor, the algae can die or be expelled, causing the corals to appear white. To recover the algae, the bleached corals then begin to produce bright colors, which block intense sunlight, encouraging the light-sensitive algae to recolonize the corals."
+        }
+      ],
+      "prompt": "What does the text most strongly suggest about corals that produce bright colors?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "These corals have likely been subjected to stressful environmental conditions."
+        },
+        {
+          "id": "B",
+          "text": "These corals are likely more vulnerable to exposure from intense sunlight than white corals are."
+        },
+        {
+          "id": "C",
+          "text": "These corals have likely recovered from an environmental event without the assistance of algae colonies."
+        },
+        {
+          "id": "D",
+          "text": "These corals are more likely to survive without algae colonies than brown corals are."
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "Choice A is the best answer. The text says that corals produce bright colors to block sunlight and encourage algae to recolonize after “an environmental stressor.” From this, we can infer that corals that produce bright colors have probably been subjected to an environmental stressor.\n\nChoice B is incorrect. The text says that corals produce bright colors to block intense sunlight, which protects the light-sensitive algae that keep the coral healthy. In other words, bright colors make the coral’s health less vulnerable to intense sunlight. Choice C is incorrect. The text says that corals produce bright colors to encourage algae to recolonize, not that they have recovered without the assistance of algae colonies. Choice D is incorrect. The text never compares the likelihood of differently colored corals surviving without algae colonies.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27.pdf",
+          "sha256": "faeec7cfe9985315fd63575c02c7071864c120fc6a0e48d3bf4727c5e1f945b6",
+          "pages": [
+            2,
+            3
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27-with answers and explanations.pdf",
+          "sha256": "33d01b40e59c612652bf98e5430b8a3cd80457212d8e4eaba815d73672759a1f",
+          "pages": [
+            3,
+            4
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "A": "Choice A is the best answer. The text says that corals produce bright colors to block sunlight and encourage algae to recolonize after “an environmental stressor.” From this, we can infer that corals that produce bright colors have probably been subjected to an environmental stressor.",
+        "B": "Choice B is incorrect. The text says that corals produce bright colors to block intense sunlight, which protects the light-sensitive algae that keep the coral healthy. In other words, bright colors make the coral’s health less vulnerable to intense sunlight.",
+        "C": "Choice C is incorrect. The text says that corals produce bright colors to encourage algae to recolonize, not that they have recovered without the assistance of algae colonies.",
+        "D": "Choice D is incorrect. The text never compares the likelihood of differently colored corals surviving without algae colonies."
+      }
+    },
+    {
+      "id": "e4466b2f",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Information and Ideas",
+      "skill": "central idea and details",
+      "difficulty": "Hard",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The following text is adapted from Countee Cullen’s 1926 poem “Thoughts in a Zoo.”"
+        },
+        {
+          "type": "quote",
+          "text": "They in their cruel traps, and we in ours, Survey each other’s rage, and pass the hours Commiserating each the other’s woe, To mitigate his own pain’s fiery glow. Man could but little proffer in exchange Save that his cages have a larger range. That lion with his lordly, untamed heart Has in some man his human counterpart, Some lofty soul in dreams and visions wrapped, But in the stifling flesh securely trapped."
+        }
+      ],
+      "prompt": "Based on the text, what challenge do humans sometimes experience?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "They cannot effectively tame certain wild animals because of a lack of compassion."
+        },
+        {
+          "id": "B",
+          "text": "They cannot focus on setting attainable goals because of a lack of motivation."
+        },
+        {
+          "id": "C",
+          "text": "They quickly become frustrated when faced with difficult tasks because of a lack of self-control."
+        },
+        {
+          "id": "D",
+          "text": "They have aspirations that cannot be fulfilled because of certain limitations."
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "Choice D is the best answer. The text metaphorically likens humans to animals in a zoo, suggesting that humans have dreams that they cannot fulfill because they are trapped.\n\nChoice A is incorrect. The speaker says that the lion has an “untamed heart,” but the speaker doesn’t actually mention anything about humans taming wild animals or a lack of compassion. Choice B is incorrect. The speaker doesn’t suggest that humans lack motivation. Rather, the speaker thinks that humans are “trapped” and prevented from achieving their dreams. Choice C is incorrect. The speaker doesn’t mention anything about humans becoming frustrated or lacking self-control. Rather, the speaker thinks that humans are “trapped” and prevented from achieving their dreams.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27.pdf",
+          "sha256": "faeec7cfe9985315fd63575c02c7071864c120fc6a0e48d3bf4727c5e1f945b6",
+          "pages": [
+            3,
+            4
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27-with answers and explanations.pdf",
+          "sha256": "33d01b40e59c612652bf98e5430b8a3cd80457212d8e4eaba815d73672759a1f",
+          "pages": [
+            4,
+            5
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "D": "Choice D is the best answer. The text metaphorically likens humans to animals in a zoo, suggesting that humans have dreams that they cannot fulfill because they are trapped.",
+        "A": "Choice A is incorrect. The speaker says that the lion has an “untamed heart,” but the speaker doesn’t actually mention anything about humans taming wild animals or a lack of compassion.",
+        "B": "Choice B is incorrect. The speaker doesn’t suggest that humans lack motivation. Rather, the speaker thinks that humans are “trapped” and prevented from achieving their dreams.",
+        "C": "Choice C is incorrect. The speaker doesn’t mention anything about humans becoming frustrated or lacking self-control. Rather, the speaker thinks that humans are “trapped” and prevented from achieving their dreams."
+      }
+    },
+    {
+      "id": "12b370c2",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Information and Ideas",
+      "skill": "central idea and details",
+      "difficulty": "Hard",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Disco remains one of the most ridiculed popular music genres of the late twentieth century. But as scholars have argued, the genre is far less superficial than many people believe. Take the case of disco icon Donna Summer: she may have been associated with popular songs about love and heartbreak (subjects hardly unique to disco, by the way), but like many Black women singers before her, much of her music also reflects concerns about community and identity. These concerns are present in many of the genre’s greatest songs, and they generally don’t require much digging to reveal."
+        }
+      ],
+      "prompt": "What does the text most strongly suggest about the disco genre?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "It has been unjustly ignored by most scholars despite the importance of the themes addressed by many of the genre’s songs."
+        },
+        {
+          "id": "B",
+          "text": "It evolved over time from a superficial genre focused on romance to a genre focused on more serious concerns."
+        },
+        {
+          "id": "C",
+          "text": "It has been unfairly dismissed for the inclusion of subject matter that is also found in other musical genres."
+        },
+        {
+          "id": "D",
+          "text": "It gave rise to a Black women’s musical tradition that has endured even though the genre itself faded in the late twentieth century."
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Choice C is the best answer. The text argues that disco is \"far less superficial\" than its popular perception might indicate, and that love and heartbreak are \"subjects hardly unique to disco.\"\n\nChoice A is incorrect. This choice conflicts with the text, which says that scholars argue that disco \"is far less superficial than many people believe.\" Choice B is incorrect. This choice says the opposite of what the text suggests. The writer argues that the genre is not as superficial as commonly believed, but that it always reflected \"concerns about community and identity.\" Choice D is incorrect. The text doesn’t support this choice. There’s nothing in the text about disco giving rise to an enduring Black women’s musical tradition.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27.pdf",
+          "sha256": "faeec7cfe9985315fd63575c02c7071864c120fc6a0e48d3bf4727c5e1f945b6",
+          "pages": [
+            4,
+            5
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27-with answers and explanations.pdf",
+          "sha256": "33d01b40e59c612652bf98e5430b8a3cd80457212d8e4eaba815d73672759a1f",
+          "pages": [
+            5,
+            6
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "C": "Choice C is the best answer. The text argues that disco is \"far less superficial\" than its popular perception might indicate, and that love and heartbreak are \"subjects hardly unique to disco.\"",
+        "A": "Choice A is incorrect. This choice conflicts with the text, which says that scholars argue that disco \"is far less superficial than many people believe.\"",
+        "B": "Choice B is incorrect. This choice says the opposite of what the text suggests. The writer argues that the genre is not as superficial as commonly believed, but that it always reflected \"concerns about community and identity.\"",
+        "D": "Choice D is incorrect. The text doesn’t support this choice. There’s nothing in the text about disco giving rise to an enduring Black women’s musical tradition."
+      }
+    },
+    {
+      "id": "e3b5bb66",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Information and Ideas",
+      "skill": "central idea and details",
+      "difficulty": "Hard",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The most recent iteration of the immersive theater experience Sleep No More, which premiered in New York City in 2011, transforms its performance space—a five-story warehouse—into a 1930s-era hotel. Audience members, who wander through the labyrinthine venue at their own pace and follow the actors as they play out simultaneous, interweaving narrative loops, confront the impossibility of experiencing the production in its entirety. The play’s refusal of narrative coherence thus hinges on the sense of spatial fragmentation that the venue’s immense and intricate layout generates."
+        }
+      ],
+      "prompt": "What does the text most strongly suggest about Sleep No More’s use of its performance space?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "The choice of a New York City venue likely enabled the play’s creators to experiment with the use of theatrical space in a way that venues from earlier productions could not."
+        },
+        {
+          "id": "B",
+          "text": "Audience members likely find the experience of the play disappointing because they generally cannot make their way through the entire venue."
+        },
+        {
+          "id": "C",
+          "text": "The production’s dependence on a particular performance environment would likely make it difficult to reproduce exactly in a different theatrical space."
+        },
+        {
+          "id": "D",
+          "text": "Audience members who navigate the space according to a recommended itinerary will likely have a better grasp of the play’s narrative than audience members who depart from that itinerary."
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Choice C is the best answer. The text says that the production’s use of its large, winding space has a very specific effect on the audience. Given that the space itself is so important to creating this effect, it would be difficult to reproduce the production in a different space.\n\nChoice A is incorrect. The fact that the venue is in New York City isn’t connected to the experimental nature of the performance. It’s the size of the venue, not its location in New York, that affects the theatrical experience. Choice B is incorrect. The text never suggests that audience members are disappointed because they can’t see the entire production. In fact, it suggests that that’s an important part of the experience. Choice D is incorrect. The text doesn’t mention a recommended itinerary for audience members.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27.pdf",
+          "sha256": "faeec7cfe9985315fd63575c02c7071864c120fc6a0e48d3bf4727c5e1f945b6",
+          "pages": [
+            5,
+            6
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27-with answers and explanations.pdf",
+          "sha256": "33d01b40e59c612652bf98e5430b8a3cd80457212d8e4eaba815d73672759a1f",
+          "pages": [
+            6,
+            7
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "C": "Choice C is the best answer. The text says that the production’s use of its large, winding space has a very specific effect on the audience. Given that the space itself is so important to creating this effect, it would be difficult to reproduce the production in a different space.",
+        "A": "Choice A is incorrect. The fact that the venue is in New York City isn’t connected to the experimental nature of the performance. It’s the size of the venue, not its location in New York, that affects the theatrical experience.",
+        "B": "Choice B is incorrect. The text never suggests that audience members are disappointed because they can’t see the entire production. In fact, it suggests that that’s an important part of the experience.",
+        "D": "Choice D is incorrect. The text doesn’t mention a recommended itinerary for audience members."
+      }
+    },
+    {
+      "id": "d2fbb566",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Information and Ideas",
+      "skill": "central idea and details",
+      "difficulty": "Hard",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In superfluorescence, electrical charges known as dipoles emit light in synchronized bursts so intense that they are visible to the eye. Until recently, this phenomenon has only been observed at extremely cold temperatures because dipoles cannot synchronize at higher temperatures. But in a study, Melike Biliroglu and colleagues observed superfluorescence at room temperature in thin films made of perovskite and other similarly crystalline materials; the researchers propose that the formation of shock-absorbing quasiparticles called polarons in the material protects dipoles from thermal interference."
+        }
+      ],
+      "prompt": "Based on the text, how are polarons believed to be involved in the superfluorescence observed in Biliroglu and colleagues’ study?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Polarons enable superfluorescent bursts to cross from one crystalline material to another."
+        },
+        {
+          "id": "B",
+          "text": "Polarons allow for the dipoles to synchronize despite higher temperatures."
+        },
+        {
+          "id": "C",
+          "text": "Polarons accelerate the dipoles’ release of superfluorescent bursts."
+        },
+        {
+          "id": "D",
+          "text": "Polarons decrease the intensity of the superfluorescent burst."
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Choice B is the best answer because it most accurately describes Biliroglu and colleagues’ claim about how the polarons function in relation to superfluorescence. The text indicates that “until recently,” superfluorescence (intense, synchronized bursts of light emitted by dipoles) has solely been observed at very cold temperatures. However, it also states that, recently, Biliroglu and colleagues report observing the phenomenon at room temperature. They achieved this using “thin films made of perovskite and other similarly crystalline materials,” which the researchers claim allows for the formation of polarons. They also suggest that these polarons might absorb the thermal shocks that typically disrupt dipole synchronization at warmer temperatures. Thus, based on the text, Biliroglu and colleagues believe that polarons help dipoles synchronize at temperatures well above those at which superfluorescence had previously been observed.\n\nChoice A is incorrect because the text doesn’t address the prospect of a superfluorescent burst moving between crystalline materials or any other mediums. Choice C is incorrect because the text’s discussion of polarons is about how they might enable superfluorescence at higher temperatures than those at which it had previously been observed. Rather than suggesting that polarons speed up superfluorescent bursts, the text suggests that no superfluorescence can occur at room temperature in the absence of polarons. Thus, the text indicates that polarons make superfluorescent bursts more likely to occur at higher temperatures than those at which it had previously been observed, not that polarons accelerate the bursts. Choice D is incorrect because the text’s discussion of polarons is about how they might enable superfluorescence at higher temperatures than those at which it had previously been observed. In the absence of polarons, the text suggests there would be no superfluorescence at room temperature. Thus, rather than decrease the intensity of superfluorescent bursts, polarons make them more likely to occur under certain circumstances.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27.pdf",
+          "sha256": "faeec7cfe9985315fd63575c02c7071864c120fc6a0e48d3bf4727c5e1f945b6",
+          "pages": [
+            6,
+            7
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27-with answers and explanations.pdf",
+          "sha256": "33d01b40e59c612652bf98e5430b8a3cd80457212d8e4eaba815d73672759a1f",
+          "pages": [
+            7,
+            8,
+            9
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "B": "Choice B is the best answer because it most accurately describes Biliroglu and colleagues’ claim about how the polarons function in relation to superfluorescence. The text indicates that “until recently,” superfluorescence (intense, synchronized bursts of light emitted by dipoles) has solely been observed at very cold temperatures. However, it also states that, recently, Biliroglu and colleagues report observing the phenomenon at room temperature. They achieved this using “thin films made of perovskite and other similarly crystalline materials,” which the researchers claim allows for the formation of polarons. They also suggest that these polarons might absorb the thermal shocks that typically disrupt dipole synchronization at warmer temperatures. Thus, based on the text, Biliroglu and colleagues believe that polarons help dipoles synchronize at temperatures well above those at which superfluorescence had previously been observed.",
+        "A": "Choice A is incorrect because the text doesn’t address the prospect of a superfluorescent burst moving between crystalline materials or any other mediums.",
+        "C": "Choice C is incorrect because the text’s discussion of polarons is about how they might enable superfluorescence at higher temperatures than those at which it had previously been observed. Rather than suggesting that polarons speed up superfluorescent bursts, the text suggests that no superfluorescence can occur at room temperature in the absence of polarons. Thus, the text indicates that polarons make superfluorescent bursts more likely to occur at higher temperatures than those at which it had previously been observed, not that polarons accelerate the bursts.",
+        "D": "Choice D is incorrect because the text’s discussion of polarons is about how they might enable superfluorescence at higher temperatures than those at which it had previously been observed. In the absence of polarons, the text suggests there would be no superfluorescence at room temperature. Thus, rather than decrease the intensity of superfluorescent bursts, polarons make them more likely to occur under certain circumstances."
+      }
+    },
+    {
+      "id": "e752ee68",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Information and Ideas",
+      "skill": "central idea and details",
+      "difficulty": "Hard",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The following text is adapted from Lewis Carroll’s 1889 satirical novel Sylvie and Bruno. A crowd has gathered outside a room belonging to the Warden, an official who reports to the Lord Chancellor. One man, who was more excited than the rest, flung his hat high into the air, and shouted (as well as I could make out) “Who roar for the Sub-Warden?” Everybody roared, but whether it was for the Sub- Warden, or not, did not clearly appear: some were shouting “Bread!” and some “Taxes!”, but no one seemed to know what it was they really wanted. All this I saw from the open window of the Warden’s breakfast-saloon, looking across the shoulder of the Lord Chancellor. “What can it all mean?” he kept repeating to himself. “I never heard such shouting before—and at this time of the morning, too! And with such unanimity!”"
+        }
+      ],
+      "prompt": "Based on the text, how does the Lord Chancellor respond to the crowd?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "He asks about the meaning of the crowd’s shouting, even though he claims to know what the crowd wants."
+        },
+        {
+          "id": "B",
+          "text": "He indicates a desire to speak to the crowd, even though the crowd has asked to speak to the Sub- Warden."
+        },
+        {
+          "id": "C",
+          "text": "He expresses sympathy for the crowd’s demands, even though the crowd’s shouting annoys him."
+        },
+        {
+          "id": "D",
+          "text": "He describes the crowd as being united, even though the crowd clearly appears otherwise."
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "Choice D is the best answer because it presents a statement about how the Lord Chancellor responds to the crowd that is supported by the text. The text indicates that the people in the crowd are roaring and shouting “Bread!” or “Taxes!” and presents them as not knowing what they really want. The Lord Chancellor’s response is to ask what their shouting means but also to observe that they’re shouting with “unanimity,” or total agreement. Clearly, this isn’t the case, which supports the statement that the Lord Chancellor describes the crowd as being united even though it’s not.\n\nChoice A is incorrect because it isn’t supported by the text. Although the text indicates that the Lord Chancellor asks about the meaning of the crowd’s shouting, it doesn’t suggest that he knows what the crowd really wants. Choice B is incorrect because the text doesn’t suggest that the Lord Chancellor wants to speak to the crowd. Furthermore, the text doesn’t indicate that the crowd wants to hear from the Sub-Warden. Although the crowd roars when asked “Who roar for the Sub-Warden?” it’s unclear what the roaring means. Choice C is incorrect because the text doesn’t suggest that the Lord Chancellor knows of or sympathizes with the crowd’s demands. In addition, the text doesn’t indicate that the crowd’s shouting annoys the Lord Chancellor, just that it causes him to keep repeating “What can it all mean?”",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27.pdf",
+          "sha256": "faeec7cfe9985315fd63575c02c7071864c120fc6a0e48d3bf4727c5e1f945b6",
+          "pages": [
+            7,
+            8
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27-with answers and explanations.pdf",
+          "sha256": "33d01b40e59c612652bf98e5430b8a3cd80457212d8e4eaba815d73672759a1f",
+          "pages": [
+            9,
+            10,
+            11
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "D": "Choice D is the best answer because it presents a statement about how the Lord Chancellor responds to the crowd that is supported by the text. The text indicates that the people in the crowd are roaring and shouting “Bread!” or “Taxes!” and presents them as not knowing what they really want. The Lord Chancellor’s response is to ask what their shouting means but also to observe that they’re shouting with “unanimity,” or total agreement. Clearly, this isn’t the case, which supports the statement that the Lord Chancellor describes the crowd as being united even though it’s not.",
+        "A": "Choice A is incorrect because it isn’t supported by the text. Although the text indicates that the Lord Chancellor asks about the meaning of the crowd’s shouting, it doesn’t suggest that he knows what the crowd really wants.",
+        "B": "Choice B is incorrect because the text doesn’t suggest that the Lord Chancellor wants to speak to the crowd. Furthermore, the text doesn’t indicate that the crowd wants to hear from the Sub-Warden. Although the crowd roars when asked “Who roar for the Sub-Warden?” it’s unclear what the roaring means.",
+        "C": "Choice C is incorrect because the text doesn’t suggest that the Lord Chancellor knows of or sympathizes with the crowd’s demands. In addition, the text doesn’t indicate that the crowd’s shouting annoys the Lord Chancellor, just that it causes him to keep repeating “What can it all mean?”"
+      }
+    },
+    {
+      "id": "d2316673",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Information and Ideas",
+      "skill": "central idea and details",
+      "difficulty": "Hard",
+      "contentBlocks": [
+        {
+          "type": "quote",
+          "text": "The following text is from Maggie Pogue Johnson’s 1910 poem “Poet of Our Race.” In this poem, the speaker is addressing Paul Laurence Dunbar, a Black author. Thou, with stroke of mighty pen, Hast told of joy and mirth, And read the hearts and souls of men As cradled from their birth. The language of the flowers, Thou hast read them all, And e’en the little brook Responded to thy call."
+        }
+      ],
+      "prompt": "Which choice best states the main purpose of the text?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "To praise a certain writer for being especially perceptive regarding people and nature"
+        },
+        {
+          "id": "B",
+          "text": "To establish that a certain writer has read extensively about a variety of topics"
+        },
+        {
+          "id": "C",
+          "text": "To call attention to a certain writer’s careful and elaborately detailed writing process"
+        },
+        {
+          "id": "D",
+          "text": "To recount fond memories of an afternoon spent in nature with a certain writer"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "Choice A is the best answer because it most accurately states the main purpose of the text. In the first part of the text, the speaker addresses Paul Laurence Dunbar’s ability to understand people (he has “read the hearts and souls of men” and written of their “joy and mirth”). In the second part of the text, the speaker describes Dunbar’s thorough understanding of the natural world (he has read “the language of the flowers” and engaged with “the little brook”). Thus, the text mainly praises Dunbar for being especially perceptive about people and nature.\n\nChoice B is incorrect because the speaker describes Dunbar as having read the “hearts and souls of men” and the “language of flowers” to convey Dunbar’s ability to comprehend people and nature, not to suggest that Dunbar has literally read any of these things or has read a great deal about them. Choice C is incorrect because the text notes how well Dunbar has made sense of the topics he’s written about but doesn’t address any specific parts of Dunbar’s writing process beyond the suggestion that he used a pen. Choice D is incorrect because the text focuses on Dunbar’s understanding of people and nature as expressed in his writing. Nothing in the text suggests that the speaker is recalling a particular afternoon actually spent in nature with Dunbar; even if there had been a shared experience, the text isn’t focused on reminiscing.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27.pdf",
+          "sha256": "faeec7cfe9985315fd63575c02c7071864c120fc6a0e48d3bf4727c5e1f945b6",
+          "pages": [
+            8,
+            9
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27-with answers and explanations.pdf",
+          "sha256": "33d01b40e59c612652bf98e5430b8a3cd80457212d8e4eaba815d73672759a1f",
+          "pages": [
+            11,
+            12
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "A": "Choice A is the best answer because it most accurately states the main purpose of the text. In the first part of the text, the speaker addresses Paul Laurence Dunbar’s ability to understand people (he has “read the hearts and souls of men” and written of their “joy and mirth”). In the second part of the text, the speaker describes Dunbar’s thorough understanding of the natural world (he has read “the language of the flowers” and engaged with “the little brook”). Thus, the text mainly praises Dunbar for being especially perceptive about people and nature.",
+        "B": "Choice B is incorrect because the speaker describes Dunbar as having read the “hearts and souls of men” and the “language of flowers” to convey Dunbar’s ability to comprehend people and nature, not to suggest that Dunbar has literally read any of these things or has read a great deal about them.",
+        "C": "Choice C is incorrect because the text notes how well Dunbar has made sense of the topics he’s written about but doesn’t address any specific parts of Dunbar’s writing process beyond the suggestion that he used a pen.",
+        "D": "Choice D is incorrect because the text focuses on Dunbar’s understanding of people and nature as expressed in his writing. Nothing in the text suggests that the speaker is recalling a particular afternoon actually spent in nature with Dunbar; even if there had been a shared experience, the text isn’t focused on reminiscing."
+      }
+    },
+    {
+      "id": "b8abc32e",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Information and Ideas",
+      "skill": "central idea and details",
+      "difficulty": "Hard",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The following text is from Milan Kundera’s 1984 novel The Unbearable Lightness of Being (translated by Michael Henry Heim in 1984). Karenin is a dog that belongs to Tomas and Tereza."
+        },
+        {
+          "type": "quote",
+          "text": "Karenin was not overjoyed by the move to Switzerland [from Prague]. Karenin hated change. Dog time cannot be plotted along a straight line; it does not move on and on, from one thing to the next. It moves in a circle like the hands of a clock, which—they, too, unwilling to dash madly ahead—turn round and round the face, day in and day out following the same path. In Prague, when Tomas and Tereza bought a new chair or moved a flower pot, Karenin would look on in displeasure. It disturbed his sense of time. It was as though they were trying to dupe the hands of the clock by changing the numbers on its face. ©1984 by Milan Kundera. Translation ©1984 by Harper & Row, Publishers, Inc."
+        }
+      ],
+      "prompt": "Which choice best states the main idea of the text?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "As a dog, Karenin possesses a sense of time that involves a strong preference for predictability and an aversion to disruption."
+        },
+        {
+          "id": "B",
+          "text": "After he’s moved to a new home, Karenin’s negative response to changes has become more pronounced."
+        },
+        {
+          "id": "C",
+          "text": "Similar to Tomas and Tereza, Karenin comprehends time as circular rather than as a straightforward progression."
+        },
+        {
+          "id": "D",
+          "text": "As is the case for other dogs, Karenin’s sense of time seems to accelerate depending on the objects and places that surround him."
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "Choice A is the best answer because it most accurately states the main idea of the text. The text begins by stating that Tomas and Tereza’s dog Karenin felt disrupted by a recent move because of his dislike of change. The text then goes on to suggest that this is because the way a dog experiences time differs from the way humans experience time: time for a dog doesn’t move linearly, going \"on and on, from one thing to the next,\" but instead moves circularly, \"like the hands of a clock.\" That is, time for a dog is experienced as a cyclical pattern characterized by routine and predictability, with each day \"following the same path.\" The text then concludes by providing examples of seemingly insignificant changes in routine that profoundly \"disturbed [Karenin’s] sense of time,\" causing him to feel displeasure. Thus, the main idea of the text is that Karenin’s sense of time as a dog involves a strong preference for predictability and an aversion to disruption.\n\nChoice B is incorrect. Although the text emphasizes Karenin’s displeasure with the recent move to a new home, it doesn’t suggest that the move has made his negative responses more pronounced than they once were. Rather, in accounting for Karenin’s displeasure with the move to Switzerland, the text explains that Karenin generally has a negative response to any kind of change. Choice C is incorrect because the text doesn’t suggest that Karenin comprehends time similarly to how Tomas and Tereza comprehend it. On the contrary, the text strongly implies a contrast between dogs’ circular experience of time with the way humans experience time as a straightforward progression that can be \"plotted on a straight line.\" Choice D is incorrect because the text provides no indication that a change in the places and objects surrounding Karenin causes him to feel as though time is accelerating. Although the text does use the language of \"dash[ing] madly ahead\" in relation to time, the phrase appears in the context of a comparison illustrating how dogs experience time: time for a dog moves just as the hands of a clock do, in a circle and \"unwilling to dash madly ahead\"— that is, always in a regular and predictable way.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27.pdf",
+          "sha256": "faeec7cfe9985315fd63575c02c7071864c120fc6a0e48d3bf4727c5e1f945b6",
+          "pages": [
+            9,
+            10
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27-with answers and explanations.pdf",
+          "sha256": "33d01b40e59c612652bf98e5430b8a3cd80457212d8e4eaba815d73672759a1f",
+          "pages": [
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "A": "Choice A is the best answer because it most accurately states the main idea of the text. The text begins by stating that Tomas and Tereza’s dog Karenin felt disrupted by a recent move because of his dislike of change. The text then goes on to suggest that this is because the way a dog experiences time differs from the way humans experience time: time for a dog doesn’t move linearly, going \"on and on, from one thing to the next,\" but instead moves circularly, \"like the hands of a clock.\" That is, time for a dog is experienced as a cyclical pattern characterized by routine and predictability, with each day \"following the same path.\" The text then concludes by providing examples of seemingly insignificant changes in routine that profoundly \"disturbed [Karenin’s] sense of time,\" causing him to feel displeasure. Thus, the main idea of the text is that Karenin’s sense of time as a dog involves a strong preference for predictability and an aversion to disruption.",
+        "B": "Choice B is incorrect. Although the text emphasizes Karenin’s displeasure with the recent move to a new home, it doesn’t suggest that the move has made his negative responses more pronounced than they once were. Rather, in accounting for Karenin’s displeasure with the move to Switzerland, the text explains that Karenin generally has a negative response to any kind of change.",
+        "C": "Choice C is incorrect because the text doesn’t suggest that Karenin comprehends time similarly to how Tomas and Tereza comprehend it. On the contrary, the text strongly implies a contrast between dogs’ circular experience of time with the way humans experience time as a straightforward progression that can be \"plotted on a straight line.\"",
+        "D": "Choice D is incorrect because the text provides no indication that a change in the places and objects surrounding Karenin causes him to feel as though time is accelerating. Although the text does use the language of \"dash[ing] madly ahead\" in relation to time, the phrase appears in the context of a comparison illustrating how dogs experience time: time for a dog moves just as the hands of a clock do, in a circle and \"unwilling to dash madly ahead\"— that is, always in a regular and predictable way."
+      }
+    },
+    {
+      "id": "f7e843d4",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Information and Ideas",
+      "skill": "central idea and details",
+      "difficulty": "Hard",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Artificial leaves are a developing renewable energy technology that mimics the process of photosynthesis in plants. These devices are silicon-based solar cells coated in chemical catalysts that activate reactions that split water molecules into hydrogen and oxygen gas. The technology, while generating lots of interest, is not yet commercially viable as a large-scale energy source. To meet this challenge, scientists from many fields are researching ways to store, transport, and distribute the energy the devices produce while other scientists are working to improve the cost and efficiency of the devices."
+        }
+      ],
+      "prompt": "Which choice best states the main idea of the text?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Continued research and development in artificial-leaf technology is needed before the devices can be widely used as an energy source."
+        },
+        {
+          "id": "B",
+          "text": "The recent increase in the commercial use of artificial leaves as an energy source has encouraged many scientists to research ways to improve the technology."
+        },
+        {
+          "id": "C",
+          "text": "Artificial leaves split water molecules into oxygen and hydrogen gas using catalysts more efficiently than plants do using the process of photosynthesis."
+        },
+        {
+          "id": "D",
+          "text": "Artificial leaves were developed to mimic the natural process of photosynthesis in plants in order to store energy for long-term commercial use."
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "Choice A is the best answer because it most accurately states the main idea of the text. According to the text, artificial leaves are a renewable energy technology that’s in development and generating interest. The text goes on to state that artificial-leaf technology \"is not yet commercially viable as a large-scale energy source\" and that scientists from several fields are doing additional research to refine the technology. Thus, the main idea is that continued research and development in artificial-leaf technology is needed before the devices can be widely used as an energy source.\n\nChoice B is incorrect. While the text does state that scientists from many fields are researching artificial leaves, they’re doing so to address the fact that the leaves are not yet commercially viable, rather than in response to an increase in commercial use. Choice C is incorrect. Although the text does explain that artificial leaves help split water molecules into oxygen and hydrogen gas using catalysts, it doesn’t argue that this process is more efficient than photosynthesis. This is merely a detail of the text and not the main idea, which is about the additional research needed to improve the cost and efficiency of these artificial leaves. Choice D is incorrect. Although the text indicates that artificial leaves mimic photosynthesis in plants, this is an incidental detail in support of the main idea that additional research is needed to make artificial leaves commercially viable.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27.pdf",
+          "sha256": "faeec7cfe9985315fd63575c02c7071864c120fc6a0e48d3bf4727c5e1f945b6",
+          "pages": [
+            10,
+            11
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27-with answers and explanations.pdf",
+          "sha256": "33d01b40e59c612652bf98e5430b8a3cd80457212d8e4eaba815d73672759a1f",
+          "pages": [
+            14,
+            15
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "A": "Choice A is the best answer because it most accurately states the main idea of the text. According to the text, artificial leaves are a renewable energy technology that’s in development and generating interest. The text goes on to state that artificial-leaf technology \"is not yet commercially viable as a large-scale energy source\" and that scientists from several fields are doing additional research to refine the technology. Thus, the main idea is that continued research and development in artificial-leaf technology is needed before the devices can be widely used as an energy source.",
+        "B": "Choice B is incorrect. While the text does state that scientists from many fields are researching artificial leaves, they’re doing so to address the fact that the leaves are not yet commercially viable, rather than in response to an increase in commercial use.",
+        "C": "Choice C is incorrect. Although the text does explain that artificial leaves help split water molecules into oxygen and hydrogen gas using catalysts, it doesn’t argue that this process is more efficient than photosynthesis. This is merely a detail of the text and not the main idea, which is about the additional research needed to improve the cost and efficiency of these artificial leaves.",
+        "D": "Choice D is incorrect. Although the text indicates that artificial leaves mimic photosynthesis in plants, this is an incidental detail in support of the main idea that additional research is needed to make artificial leaves commercially viable."
+      }
+    },
+    {
+      "id": "bf43e45f",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Information and Ideas",
+      "skill": "central idea and details",
+      "difficulty": "Hard",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Paleontologist Lucas E. Fiorelli and colleagues have reported the discovery at a mine in Brazil of several egg clutches, partially preserved single eggs, and egg shells from the Late Cretaceous period. The researchers have concluded that the area was once a nesting and breeding site for titanosaurs, a group of sauropod dinosaurs. The finding is significant given the previous lack of known nesting sites in northern regions of South America, which led many paleontologists to assume that titanosaurs migrated south to lay eggs."
+        }
+      ],
+      "prompt": "What does the text most strongly suggest about the site discovered by the researchers?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "It is the earliest known example of a titanosaur nesting and breeding site."
+        },
+        {
+          "id": "B",
+          "text": "It was very difficult to excavate given that it was discovered in a mine."
+        },
+        {
+          "id": "C",
+          "text": "It may have been occupied by other sauropods in addition to titanosaurs."
+        },
+        {
+          "id": "D",
+          "text": "It is farther north than any other nesting site discovered in South America."
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "Choice D is the best answer because it presents a statement about the site discovered by the researchers that is supported by the text. The text discusses Fiorelli and colleagues’ discovery of egg clutches, single eggs, and eggshells in a Brazilian mine. According to the text, the presence of these eggs, which are from the Late Cretaceous period, led the researchers to conclude that the location was once a nesting and breeding site for titanosaurs. The text then explains that the finding is important because of the “previous lack of known nesting sites in northern regions of South America.” If there haven’t been any other discoveries of a nesting site in South America’s northern regions and the site in the Brazilian mine is the first, then the text strongly suggests that the site is farther north than other nesting sites that have been discovered in South America.\n\nChoice A is incorrect because the text doesn’t suggest that the site discovered by Fiorelli and colleagues is the earliest titanosaur nesting and breeding site known to paleontologists but rather that it’s the first nesting site found in northern regions of South America. Moreover, the text doesn’t suggest how the timeline of the newly discovered site compares with that of other titanosaur nesting and breeding sites. Choice B is incorrect because there is no mention in the text about any difficulties that Fiorelli and colleagues faced when they were excavating the nesting and breeding site in the Brazilian mine. Choice C is incorrect because the text doesn’t support the idea that the nesting and breeding site in the Brazilian mine was occupied by sauropods other than titanosaurs. The text simply mentions that titanosaurs are sauropod dinosaurs and presents the researchers’ conclusion that the site they discovered was for titanosaurs.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27.pdf",
+          "sha256": "faeec7cfe9985315fd63575c02c7071864c120fc6a0e48d3bf4727c5e1f945b6",
+          "pages": [
+            11,
+            12
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27-with answers and explanations.pdf",
+          "sha256": "33d01b40e59c612652bf98e5430b8a3cd80457212d8e4eaba815d73672759a1f",
+          "pages": [
+            15,
+            16
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "D": "Choice D is the best answer because it presents a statement about the site discovered by the researchers that is supported by the text. The text discusses Fiorelli and colleagues’ discovery of egg clutches, single eggs, and eggshells in a Brazilian mine. According to the text, the presence of these eggs, which are from the Late Cretaceous period, led the researchers to conclude that the location was once a nesting and breeding site for titanosaurs. The text then explains that the finding is important because of the “previous lack of known nesting sites in northern regions of South America.” If there haven’t been any other discoveries of a nesting site in South America’s northern regions and the site in the Brazilian mine is the first, then the text strongly suggests that the site is farther north than other nesting sites that have been discovered in South America.",
+        "A": "Choice A is incorrect because the text doesn’t suggest that the site discovered by Fiorelli and colleagues is the earliest titanosaur nesting and breeding site known to paleontologists but rather that it’s the first nesting site found in northern regions of South America. Moreover, the text doesn’t suggest how the timeline of the newly discovered site compares with that of other titanosaur nesting and breeding sites.",
+        "B": "Choice B is incorrect because there is no mention in the text about any difficulties that Fiorelli and colleagues faced when they were excavating the nesting and breeding site in the Brazilian mine.",
+        "C": "Choice C is incorrect because the text doesn’t support the idea that the nesting and breeding site in the Brazilian mine was occupied by sauropods other than titanosaurs. The text simply mentions that titanosaurs are sauropod dinosaurs and presents the researchers’ conclusion that the site they discovered was for titanosaurs."
+      }
+    },
+    {
+      "id": "497015e1",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Information and Ideas",
+      "skill": "central idea and details",
+      "difficulty": "Hard",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "For centuries, the widespread acknowledgment of the involvement of the cerebellum—a dense brain structure in vertebrates—in coordinating motor control in humans has hindered recognition of other possible functions of the structure. Neuroscience research from the last two decades now suggests that the cerebellum regulates emotion and social behavior, and recent research by Ilaria Carta and colleagues has identified a pathway connecting the cerebellum to a center for motivation and reward processing known as the ventral tegmental area (VTA)."
+        }
+      ],
+      "prompt": "Which choice best states the main idea of the text?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "The recent verification of a pathway between the VTA and the cerebellum confirms the cerebellum’s long-suspected role in motor coordination."
+        },
+        {
+          "id": "B",
+          "text": "Recent advances in the field of neuroscience have challenged widely accepted claims about the function of a pathway connecting the VTA and the cerebellum."
+        },
+        {
+          "id": "C",
+          "text": "The cerebellum has primarily been thought to regulate motor functioning, but in recent years neuroscience researchers have been uncovering additional functions."
+        },
+        {
+          "id": "D",
+          "text": "Technological limitations have historically hindered the study of the cerebellum, but the recent development of new technologies has led to greater insights into its functions."
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Choice C is the best answer. The text says that the cerebellum has long been thought to regulate motor functioning, but new research shows that it may also have other functions—including regulating emotion and social behavior and some connection to motivation and rewards processing.\n\nChoice A is incorrect. The VTA is described as “a center for motivation and reward processing,” and the discovery of the pathway between the VTA and the cerebellum supports the theory that the cerebellum is involved in functions other than motor coordination. Choice B is incorrect. The text says that recent research has identified this pathway, but it doesn’t discuss any previous “widely accepted claims” about the pathway’s function. The “widespread acknowledgement” mentioned early in the passage is about the cerebellum alone, not its connection to the VTA. Choice D is incorrect. The text never discusses any technological limitations or any new technologies.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27.pdf",
+          "sha256": "faeec7cfe9985315fd63575c02c7071864c120fc6a0e48d3bf4727c5e1f945b6",
+          "pages": [
+            12,
+            13
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27-with answers and explanations.pdf",
+          "sha256": "33d01b40e59c612652bf98e5430b8a3cd80457212d8e4eaba815d73672759a1f",
+          "pages": [
+            16,
+            17
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "C": "Choice C is the best answer. The text says that the cerebellum has long been thought to regulate motor functioning, but new research shows that it may also have other functions—including regulating emotion and social behavior and some connection to motivation and rewards processing.",
+        "A": "Choice A is incorrect. The VTA is described as “a center for motivation and reward processing,” and the discovery of the pathway between the VTA and the cerebellum supports the theory that the cerebellum is involved in functions other than motor coordination.",
+        "B": "Choice B is incorrect. The text says that recent research has identified this pathway, but it doesn’t discuss any previous “widely accepted claims” about the pathway’s function. The “widespread acknowledgement” mentioned early in the passage is about the cerebellum alone, not its connection to the VTA.",
+        "D": "Choice D is incorrect. The text never discusses any technological limitations or any new technologies."
+      }
+    },
+    {
+      "id": "57fb41c0",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Information and Ideas",
+      "skill": "central idea and details",
+      "difficulty": "Hard",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The following text is adapted from William Shakespeare’s 1609 poem “Sonnet 27.” The poem is addressed to a close friend as if he were physically present. Weary with toil, I [hurry] to my bed, The dear repose for limbs with travel tired; But then begins a journey in my head To work my mind, when body’s work’s expired: For then my thoughts—from far where I abide— [Begin] a zealous pilgrimage to thee, And keep my drooping eyelids open wide,"
+        }
+      ],
+      "prompt": "What is the main idea of the text?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "The speaker is asleep and dreaming about traveling to see the friend."
+        },
+        {
+          "id": "B",
+          "text": "The speaker is planning an upcoming trip to the friend’s house."
+        },
+        {
+          "id": "C",
+          "text": "The speaker is too fatigued to continue a discussion with the friend."
+        },
+        {
+          "id": "D",
+          "text": "The speaker is thinking about the friend instead of immediately falling asleep."
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "Choice D is the best answer it most accurately states the main idea of the text. The speaker describes going to bed for “repose” (rest) but finding that his thoughts are focused on the friend the speaker is addressing, and the thoughts are keeping the speaker awake.\n\nChoice A is incorrect because the speaker isn’t asleep; the thoughts about the friend are keeping the speaker awake. Choice B is incorrect because the speaker isn’t talking about taking a literal trip; rather, the speaker uses the metaphor of a journey to describe internal thoughts. Choice C is incorrect because the speaker isn’t having a discussion with the friend.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27.pdf",
+          "sha256": "faeec7cfe9985315fd63575c02c7071864c120fc6a0e48d3bf4727c5e1f945b6",
+          "pages": [
+            13,
+            14
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27-with answers and explanations.pdf",
+          "sha256": "33d01b40e59c612652bf98e5430b8a3cd80457212d8e4eaba815d73672759a1f",
+          "pages": [
+            17,
+            18
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "D": "Choice D is the best answer it most accurately states the main idea of the text. The speaker describes going to bed for “repose” (rest) but finding that his thoughts are focused on the friend the speaker is addressing, and the thoughts are keeping the speaker awake.",
+        "A": "Choice A is incorrect because the speaker isn’t asleep; the thoughts about the friend are keeping the speaker awake.",
+        "B": "Choice B is incorrect because the speaker isn’t talking about taking a literal trip; rather, the speaker uses the metaphor of a journey to describe internal thoughts.",
+        "C": "Choice C is incorrect because the speaker isn’t having a discussion with the friend."
+      }
+    },
+    {
+      "id": "c1f1a631",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Information and Ideas",
+      "skill": "central idea and details",
+      "difficulty": "Hard",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Modern dog breeds are largely the result of 160 years of owners crossbreeding certain dogs in order to select for particular physical appearances. Owners often say that some breeds are also more likely than others to have particular personality traits—basset hounds are affectionate; boxers are easy to train—but Kathleen Morrill and colleagues found through a combination of owner surveys and DNA sequencing of 2,000 dogs that while physical traits are predictably heritable among purebred dogs, behavior varies widely among dogs of the same breed."
+        }
+      ],
+      "prompt": "Which choice best states the main idea of the text?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Dog breeds would not exist without many years of human intervention in dogs’ reproduction."
+        },
+        {
+          "id": "B",
+          "text": "Research fails to confirm a commonly held belief about dog breeds and behavior."
+        },
+        {
+          "id": "C",
+          "text": "The dog breeds most popular among owners have often changed over the past 160 years."
+        },
+        {
+          "id": "D",
+          "text": "A study of dog breeds is notable for its usage of both opinion surveys and DNA sequencing."
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Choice B is the best answer because it most accurately states the main idea of the text. The text indicates that dog owners typically claim that some dog breeds are “more likely than others to have particular personality traits.” In other words, the text points out that a commonly held belief about dog breeds is that their personality traits are heritable. The text then states that Kathleen Morrill and colleagues undertook research about dog trait heritability and found that “behavior varies widely among dogs of the same breed.” Because Morrill and colleagues found evidence for variability rather than consistency in the behavior of dogs of the same breed, the statement that research fails to uphold a commonly held belief about dog breeds and behavior accurately reflects the main idea of the text.\n\nChoice A is incorrect. Although the text mentions that humans have long intervened in dogs’ reproduction by intentionally crossbreeding certain dogs, it doesn’t argue that such intervention is essential to the existence of dog breeds. Choice C is incorrect because the text doesn’t discuss the popularity of any dog breeds; breeds are mentioned as having certain traits, but the text says nothing about the popularity of these breeds or traits. Choice D is incorrect. Although the text briefly mentions that Morrill and colleagues conducted a study about dog traits using both surveys and DNA sequencing, this is not the main focus of the text. The text concerns the study’s results about the heritability of dog traits, not the particular methodology used by Morrill and colleagues.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27.pdf",
+          "sha256": "faeec7cfe9985315fd63575c02c7071864c120fc6a0e48d3bf4727c5e1f945b6",
+          "pages": [
+            14,
+            15
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27-with answers and explanations.pdf",
+          "sha256": "33d01b40e59c612652bf98e5430b8a3cd80457212d8e4eaba815d73672759a1f",
+          "pages": [
+            18,
+            19
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "B": "Choice B is the best answer because it most accurately states the main idea of the text. The text indicates that dog owners typically claim that some dog breeds are “more likely than others to have particular personality traits.” In other words, the text points out that a commonly held belief about dog breeds is that their personality traits are heritable. The text then states that Kathleen Morrill and colleagues undertook research about dog trait heritability and found that “behavior varies widely among dogs of the same breed.” Because Morrill and colleagues found evidence for variability rather than consistency in the behavior of dogs of the same breed, the statement that research fails to uphold a commonly held belief about dog breeds and behavior accurately reflects the main idea of the text.",
+        "A": "Choice A is incorrect. Although the text mentions that humans have long intervened in dogs’ reproduction by intentionally crossbreeding certain dogs, it doesn’t argue that such intervention is essential to the existence of dog breeds.",
+        "C": "Choice C is incorrect because the text doesn’t discuss the popularity of any dog breeds; breeds are mentioned as having certain traits, but the text says nothing about the popularity of these breeds or traits.",
+        "D": "Choice D is incorrect. Although the text briefly mentions that Morrill and colleagues conducted a study about dog traits using both surveys and DNA sequencing, this is not the main focus of the text. The text concerns the study’s results about the heritability of dog traits, not the particular methodology used by Morrill and colleagues."
+      }
+    },
+    {
+      "id": "68bef552",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Information and Ideas",
+      "skill": "central idea and details",
+      "difficulty": "Hard",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Many literary theorists distinguish between fabula, a narrative’s content, and syuzhet, a narrative’s arrangement and presentation of events. In the film The Godfather Part II, the fabula is the story of the Corleone family, and the syuzhet is the presentation of the story as it alternates between two timelines in 1901 and 1958. But literary theorist Mikhail Bakhtin maintained that fabula and syuzhet are insufficient to completely describe a narrative—he held that systematic categorizations of artistic phenomena discount the subtle way in which meaning is created by interactions between the artist, the work, and the audience."
+        }
+      ],
+      "prompt": "Which choice best states the main idea of the text?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Literary theorist Mikhail Bakhtin argued that there are important characteristics of narratives that are not fully encompassed by two concepts that other theorists have used to analyze narratives."
+        },
+        {
+          "id": "B",
+          "text": "Literary theorist Mikhail Bakhtin claimed that meaning is not inherent in a narrative but is created when an audience encounters a narrative so that narratives are interpreted differently by different people."
+        },
+        {
+          "id": "C",
+          "text": "The storytelling methods used in The Godfather Part II may seem unusually complicated, but they can be easily understood when two concepts from literary theory are utilized."
+        },
+        {
+          "id": "D",
+          "text": "Narratives that are told out of chronological order are more difficult for audiences to understand than are narratives presented chronologically."
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "Choice A is the best answer because it most accurately states the main idea of the text. The text begins by explaining that many literary theorists rely on the concepts of fabula (a narrative’s content) and syuzhet (a narrative’s arrangement and presentation of events) and illustrates these concepts by explaining how they can be applied to the film The Godfather Part II. The text then discusses how Mikhail Bakhtin, a literary theorist, argued that fabula and syuzhet can’t fully describe a narrative, since systematic categorizations such as these fail to account for all the ways in which interactions between the artist, the work, and the audience produce meaning. Thus, the main idea is that Bakhtin argued that there are important characteristics of narratives that are not fully encompassed by two concepts that other theorists have used to analyze narratives.\n\nChoice B is incorrect because according to the text, Mikhail Bakhtin believed that meaning was created through the interactions of the artist, narrative, and audience, not simply through the interaction between the audience and narrative; moreover, the text doesn’t address whether Bakhtin focused on the ways in which different people interpret narratives differently. Choice C is incorrect. Although the text implies that the storytelling methods used in The Godfather Part II are complicated, it discusses the film only to illustrate how the concepts of fabula and syuzhet may be applied to a narrative. The film’s storytelling methods aren’t the primary focus of the text. Choice D is incorrect. The text discusses The Godfather Part II, whose narrative doesn’t adhere to a single chronological order, only to illustrate the concepts of fabula (a narrative’s content) and syuzhet (a narrative’s arrangement and presentation of events). The primary focus of this text isn’t the structure of this film or of other narratives that are told out of chronological order; moreover, the text doesn’t consider whether such structures make it harder for audiences to understand narratives.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27.pdf",
+          "sha256": "faeec7cfe9985315fd63575c02c7071864c120fc6a0e48d3bf4727c5e1f945b6",
+          "pages": [
+            15,
+            16
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27-with answers and explanations.pdf",
+          "sha256": "33d01b40e59c612652bf98e5430b8a3cd80457212d8e4eaba815d73672759a1f",
+          "pages": [
+            19,
+            20,
+            21
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "A": "Choice A is the best answer because it most accurately states the main idea of the text. The text begins by explaining that many literary theorists rely on the concepts of fabula (a narrative’s content) and syuzhet (a narrative’s arrangement and presentation of events) and illustrates these concepts by explaining how they can be applied to the film The Godfather Part II. The text then discusses how Mikhail Bakhtin, a literary theorist, argued that fabula and syuzhet can’t fully describe a narrative, since systematic categorizations such as these fail to account for all the ways in which interactions between the artist, the work, and the audience produce meaning. Thus, the main idea is that Bakhtin argued that there are important characteristics of narratives that are not fully encompassed by two concepts that other theorists have used to analyze narratives.",
+        "B": "Choice B is incorrect because according to the text, Mikhail Bakhtin believed that meaning was created through the interactions of the artist, narrative, and audience, not simply through the interaction between the audience and narrative; moreover, the text doesn’t address whether Bakhtin focused on the ways in which different people interpret narratives differently.",
+        "C": "Choice C is incorrect. Although the text implies that the storytelling methods used in The Godfather Part II are complicated, it discusses the film only to illustrate how the concepts of fabula and syuzhet may be applied to a narrative. The film’s storytelling methods aren’t the primary focus of the text.",
+        "D": "Choice D is incorrect. The text discusses The Godfather Part II, whose narrative doesn’t adhere to a single chronological order, only to illustrate the concepts of fabula (a narrative’s content) and syuzhet (a narrative’s arrangement and presentation of events). The primary focus of this text isn’t the structure of this film or of other narratives that are told out of chronological order; moreover, the text doesn’t consider whether such structures make it harder for audiences to understand narratives."
+      }
+    },
+    {
+      "id": "2d77d2b7",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Information and Ideas",
+      "skill": "central idea and details",
+      "difficulty": "Hard",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "For many years, the only existing fossil evidence of mixopterid eurypterids—an extinct family of large aquatic arthropods known as sea scorpions and related to modern arachnids and horseshoe crabs—came from four species living on the paleocontinent of Laurussia. In a discovery that expands our understanding of the geographical distribution of mixopterids, paleontologist Bo Wang and others have identified fossilized remains of a new mixopterid species, Terropterus xiushanensis, that lived over 400 million years ago on the paleocontinent of Gondwana."
+        }
+      ],
+      "prompt": "According to the text, why was Wang and his team’s discovery of the Terropterus xiushanensis fossil significant?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "The fossil constitutes the first evidence found by scientists that mixopterids lived more than 400 million years ago."
+        },
+        {
+          "id": "B",
+          "text": "The fossil helps establish that mixopterids are more closely related to modern arachnids and horseshoe crabs than previously thought."
+        },
+        {
+          "id": "C",
+          "text": "The fossil helps establish a more accurate timeline of the evolution of mixopterids on the paleocontinents of Laurussia and Gondwana."
+        },
+        {
+          "id": "D",
+          "text": "The fossil constitutes the first evidence found by scientists that mixopterids existed outside the paleocontinent of Laurussia."
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "Choice D is the best answer because it states why Wang and his team’s discovery of the Terropterus xiushanensis fossil was significant. The text explains that up until Wang and his team’s discovery, the only fossil evidence of mixopterids came from the paleocontinent of Laurussia. Wang and his team, however, identified fossil remains of a mixopterid species from the paleocontinent Gondwana. Therefore, the team’s discovery was significant because the fossil remains of a mixopterid species were outside of the paleocontinent Laurussia.\n\nChoice A is incorrect. Although the text states that Wang and his team identified fossilized remains of a mixopterid species that lived more than 400 million years ago, it doesn’t indicate that mixopterid fossils previously found by scientists dated to a more recent period than that. Choice B is incorrect. Although the text states that mixopterids are related to modern arachnids and horseshoe crabs, it doesn’t suggest that the fossil discovered by Wang and his team confirmed that this relationship is closer than scientists had previously thought. Choice C is incorrect because the team’s fossil established the presence of mixopterids on Gondwana, not on Laurussia. Moreover, the text only discusses the fossil in relation to the geographical distribution of mixopterids, not in relation to their evolution.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27.pdf",
+          "sha256": "faeec7cfe9985315fd63575c02c7071864c120fc6a0e48d3bf4727c5e1f945b6",
+          "pages": [
+            16,
+            17
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27-with answers and explanations.pdf",
+          "sha256": "33d01b40e59c612652bf98e5430b8a3cd80457212d8e4eaba815d73672759a1f",
+          "pages": [
+            21,
+            22
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "D": "Choice D is the best answer because it states why Wang and his team’s discovery of the Terropterus xiushanensis fossil was significant. The text explains that up until Wang and his team’s discovery, the only fossil evidence of mixopterids came from the paleocontinent of Laurussia. Wang and his team, however, identified fossil remains of a mixopterid species from the paleocontinent Gondwana. Therefore, the team’s discovery was significant because the fossil remains of a mixopterid species were outside of the paleocontinent Laurussia.",
+        "A": "Choice A is incorrect. Although the text states that Wang and his team identified fossilized remains of a mixopterid species that lived more than 400 million years ago, it doesn’t indicate that mixopterid fossils previously found by scientists dated to a more recent period than that.",
+        "B": "Choice B is incorrect. Although the text states that mixopterids are related to modern arachnids and horseshoe crabs, it doesn’t suggest that the fossil discovered by Wang and his team confirmed that this relationship is closer than scientists had previously thought.",
+        "C": "Choice C is incorrect because the team’s fossil established the presence of mixopterids on Gondwana, not on Laurussia. Moreover, the text only discusses the fossil in relation to the geographical distribution of mixopterids, not in relation to their evolution."
+      }
+    },
+    {
+      "id": "f37f0c11",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Information and Ideas",
+      "skill": "central idea and details",
+      "difficulty": "Hard",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In a paper about p-i-n planar perovskite solar cells (one of several perovskite cell architectures designed to collect and store solar power), Lyndsey McMillon-Brown et al. describe a method for fabricating the cell’s electronic transport layer (ETL) using a spray coating. Conventional ETL fabrication is accomplished using a solution of nanoparticles. The process can result in a loss of up to 80% of the solution, increasing the cost of manufacturing at scale—an issue that may be obviated by spray coating fabrication, which the researchers describe as “highly reproducible, concise, and practical.”"
+        }
+      ],
+      "prompt": "What does the text most strongly suggest about conventional ETL fabrication?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "It is less suitable for manufacturing large volumes of planar p-i-n perovskite solar cells than an alternative fabrication method may be."
+        },
+        {
+          "id": "B",
+          "text": "It is more expensive when manufacturing at scale than are processes for fabricating ETLs used in other perovskite solar cell architectures."
+        },
+        {
+          "id": "C",
+          "text": "It typically entails a greater loss of nanoparticle solution than do other established approaches for ETL fabrication."
+        },
+        {
+          "id": "D",
+          "text": "It is somewhat imprecise and therefore limits the potential effectiveness of p-i-n planar perovskite solar cells at capturing and storing solar power."
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "Choice A is the best answer. Conventional solar cell fabrication increases “the cost of manufacturing at scale,” but spray coating might get rid of that problem.\n\nChoice B is incorrect. This is not completely supported by the text. While it’s true that conventional ETL fabrication is expensive at scale, there’s nothing in the text that mentions other perovskite solar cell architectures. Choice C is incorrect. This choice does not match the text. Only one conventional method of ETL fabrication is described, so we can’t compare the solution loss in this method to that of other conventional methods. Choice D is incorrect. This choice isn’t supported by the text. The text never suggests that the effectiveness of solar cells changes based on their method of fabrication.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27.pdf",
+          "sha256": "faeec7cfe9985315fd63575c02c7071864c120fc6a0e48d3bf4727c5e1f945b6",
+          "pages": [
+            17,
+            18
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27-with answers and explanations.pdf",
+          "sha256": "33d01b40e59c612652bf98e5430b8a3cd80457212d8e4eaba815d73672759a1f",
+          "pages": [
+            22,
+            23
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "A": "Choice A is the best answer. Conventional solar cell fabrication increases “the cost of manufacturing at scale,” but spray coating might get rid of that problem.",
+        "B": "Choice B is incorrect. This is not completely supported by the text. While it’s true that conventional ETL fabrication is expensive at scale, there’s nothing in the text that mentions other perovskite solar cell architectures.",
+        "C": "Choice C is incorrect. This choice does not match the text. Only one conventional method of ETL fabrication is described, so we can’t compare the solution loss in this method to that of other conventional methods.",
+        "D": "Choice D is incorrect. This choice isn’t supported by the text. The text never suggests that the effectiveness of solar cells changes based on their method of fabrication."
+      }
+    },
+    {
+      "id": "e7b2ca56",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Information and Ideas",
+      "skill": "central idea and details",
+      "difficulty": "Hard",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Optical tweezers are specialized scientific tools—particularly useful in biology and medicine—that use high-powered beams of light to trap and manipulate minuscule particles for study. Use of the tool has led to several scientific and medical breakthroughs over the last few decades, but the particles are often under prolonged exposure to the intense heat of the light beams. To overcome the risk of overheating, and thereby damage, researchers sometimes attach nano-sized glass beads to particles, allowing the light to focus on the beads instead of the particles."
+        }
+      ],
+      "prompt": "Based on the text, what is one advantage of attaching glass beads to particles when using optical tweezers?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "It decreases the time it takes for the optical tweezers to locate and capture the particles."
+        },
+        {
+          "id": "B",
+          "text": "It facilitates the maneuvering of particles without directly heating the particles themselves."
+        },
+        {
+          "id": "C",
+          "text": "It allows researchers to use weaker light beams to manipulate particles."
+        },
+        {
+          "id": "D",
+          "text": "It adds a material to which particles can transfer any heat absorbed from the optical tweezers’ light beam."
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Choice B is the best answer. The text says that the glass beads get the \"focus\" of the light beams so that the particles don’t overheat. From this, we can infer that the beads allow the particles to be manipulated without being directly heated by the light beams.\n\nChoice A is incorrect. The text never says that attaching the glass beads saves time in any way. Choice C is incorrect. The text never says that attaching the glass beads allows researchers to use weaker light beams. Choice D is incorrect. The text doesn’t say that the particles can transfer heat to the glass beads—rather, it says the heat from the light focuses on the glass beads instead of the particles.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27.pdf",
+          "sha256": "faeec7cfe9985315fd63575c02c7071864c120fc6a0e48d3bf4727c5e1f945b6",
+          "pages": [
+            18,
+            19
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27-with answers and explanations.pdf",
+          "sha256": "33d01b40e59c612652bf98e5430b8a3cd80457212d8e4eaba815d73672759a1f",
+          "pages": [
+            23,
+            24
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "B": "Choice B is the best answer. The text says that the glass beads get the \"focus\" of the light beams so that the particles don’t overheat. From this, we can infer that the beads allow the particles to be manipulated without being directly heated by the light beams.",
+        "A": "Choice A is incorrect. The text never says that attaching the glass beads saves time in any way.",
+        "C": "Choice C is incorrect. The text never says that attaching the glass beads allows researchers to use weaker light beams.",
+        "D": "Choice D is incorrect. The text doesn’t say that the particles can transfer heat to the glass beads—rather, it says the heat from the light focuses on the glass beads instead of the particles."
+      }
+    },
+    {
+      "id": "260f8d93",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Information and Ideas",
+      "skill": "central idea and details",
+      "difficulty": "Hard",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Some astronomers searching for extraterrestrial life have proposed that atmospheric NH3 (ammonia) can serve as a biosignature gas—an indication that a planet harbors life. Jingcheng Huang, Sara Seager, and colleagues evaluated this possibility, finding that on rocky planets, atmospheric NH3 likely couldn’t reach detectably high levels in the absence of biological activity. But the team also found that on so-called mini- Neptunes—gas planets smaller than Neptune but with atmospheres similar to Neptune’s—atmospheric pressure and temperature can be high enough to produce atmospheric NH3."
+        }
+      ],
+      "prompt": "Based on the text, Huang, Seager, and colleagues would most likely agree with which statement about atmospheric NH3?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Its presence is more likely to indicate that a planet is a mini-Neptune than that the planet is a rocky planet that could support life."
+        },
+        {
+          "id": "B",
+          "text": "Its absence from a planet that’s not a mini-Neptune indicates that the planet probably doesn’t have life."
+        },
+        {
+          "id": "C",
+          "text": "It should be treated as a biosignature gas if detected in the atmosphere of a rocky planet but not if detected in the atmosphere of a mini-Neptune."
+        },
+        {
+          "id": "D",
+          "text": "It doesn’t reliably reach high enough concentrations in the atmospheres of rocky planets or mini- Neptunes to be treated as a biosignature gas."
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Choice C is the best answer because it states a conclusion the researchers likely agree with, given the details in the text. The text explains that a biosignature gas is a gas that can be used as an indicator that a planet harbors some form of life and some astronomers have proposed that NH3 could serve as a biosignature gas. The researchers evaluating this claim found that the atmosphere of rocky planets would be unlikely to reach \"detectably high levels\" of NH3 without biological activity, which would support the proposal of NH3 serving as a biosignature gas. However, the text also states that mini- Neptune planets can produce NH3 in the absence of biological activity. Thus, the text is structured to lead to the conclusion that detectable levels of NH3 in the atmospheres of rocky planets could constitute a biosignature, but that is not the case for detectable levels of the gas in the atmospheres of mini-Neptune planets.\n\nChoice A is incorrect because the text indicates that biological activity likely accounts for detectable levels of NH3 in the atmospheres of rocky planets but mini-Neptune planets can have detectable levels of NH3 in their atmospheres in the absence of biological activity. Therefore, both rocky planets and mini-Neptune planets can have detectable levels of atmospheric NH3. Choice B is incorrect because the text states that for NH3 to reach detectable levels in the atmospheres of rocky planets likely means they harbor biological activity, meaning that rocky planets with detectable NH3 usually harbor biological activity. However, that does not entail that every rocky planet with biological activity will have detectable levels of NH3 in their atmospheres. Choice D is incorrect because the text claims only that some astronomers have proposed using NH3 as a biosignature gas without mentioning a minimum concentration of atmospheric NH3 that must be met for it to function as a biosignature gas.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27.pdf",
+          "sha256": "faeec7cfe9985315fd63575c02c7071864c120fc6a0e48d3bf4727c5e1f945b6",
+          "pages": [
+            19,
+            20
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27-with answers and explanations.pdf",
+          "sha256": "33d01b40e59c612652bf98e5430b8a3cd80457212d8e4eaba815d73672759a1f",
+          "pages": [
+            24,
+            25,
+            26
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "C": "Choice C is the best answer because it states a conclusion the researchers likely agree with, given the details in the text. The text explains that a biosignature gas is a gas that can be used as an indicator that a planet harbors some form of life and some astronomers have proposed that NH3 could serve as a biosignature gas. The researchers evaluating this claim found that the atmosphere of rocky planets would be unlikely to reach \"detectably high levels\" of NH3 without biological activity, which would support the proposal of NH3 serving as a biosignature gas. However, the text also states that mini- Neptune planets can produce NH3 in the absence of biological activity. Thus, the text is structured to lead to the conclusion that detectable levels of NH3 in the atmospheres of rocky planets could constitute a biosignature, but that is not the case for detectable levels of the gas in the atmospheres of mini-Neptune planets.",
+        "A": "Choice A is incorrect because the text indicates that biological activity likely accounts for detectable levels of NH3 in the atmospheres of rocky planets but mini-Neptune planets can have detectable levels of NH3 in their atmospheres in the absence of biological activity. Therefore, both rocky planets and mini-Neptune planets can have detectable levels of atmospheric NH3.",
+        "B": "Choice B is incorrect because the text states that for NH3 to reach detectable levels in the atmospheres of rocky planets likely means they harbor biological activity, meaning that rocky planets with detectable NH3 usually harbor biological activity. However, that does not entail that every rocky planet with biological activity will have detectable levels of NH3 in their atmospheres.",
+        "D": "Choice D is incorrect because the text claims only that some astronomers have proposed using NH3 as a biosignature gas without mentioning a minimum concentration of atmospheric NH3 that must be met for it to function as a biosignature gas."
+      }
+    },
+    {
+      "id": "eb5814a5",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Information and Ideas",
+      "skill": "central idea and details",
+      "difficulty": "Hard",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "To understand how temperature change affects microorganism-mediated cycling of soil nutrients in alpine ecosystems, Eva Kaštovská et al. collected plant-soil cores in the Tatra Mountains at elevations around 2,100 meters and transplanted them to elevations of 1,700–1,800 meters, where the mean air temperature was warmer by 2°C. Microorganism-mediated nutrient cycling was accelerated in the transplanted cores; crucially, microorganism community composition was unchanged, allowing Kaštovská et al. to attribute the acceleration to temperature-induced increases in microorganism activity."
+        }
+      ],
+      "prompt": "It can most reasonably be inferred from the text that the finding about the microorganism community composition was important for which reason?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "It provided preliminary evidence that microorganism-mediated nutrient cycling was accelerated in the transplanted cores."
+        },
+        {
+          "id": "B",
+          "text": "It suggested that temperature-induced changes in microorganism activity may be occurring at increasingly high elevations."
+        },
+        {
+          "id": "C",
+          "text": "It ruled out a potential alternative explanation for the acceleration in microorganism-mediated nutrient cycling."
+        },
+        {
+          "id": "D",
+          "text": "It clarified that microorganism activity levels in the plant-soil cores varied depending on which microorganisms comprised the community."
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Choice C is the best answer because it accurately describes why the finding about the microorganism community composition was important. The text describes an experiment by Eva Kaštovská and her team in which they collected plant-soil cores at one elevation and transplanted them to sites at a lower elevation, where the mean air temperature was warmer. Kaštovská and her team observed that microorganism-mediated nutrient cycling was accelerated in the transplanted cores and that \"crucially, microorganism community composition was unchanged,\" which allowed the team to attribute the acceleration to changes in microorganism activity brought about by the difference in temperature. This strongly implies that the team wouldn’t have been able to make that attribution otherwise, meaning that a change in microorganism composition represented another possible explanation for the acceleration that had to be ruled out.\n\nChoice A is incorrect. Although the text says microorganism-mediated cycling of soil nutrients increased in the transplanted cores, this is unrelated to what’s important about the finding that the microorganism composition didn’t change—that it allowed the team to attribute the change in activity solely to the change in temperature. Choice B is incorrect. Although the text compares activity in one core at two different elevations, the text doesn’t address changes in activity at various elevations over time. Choice D is incorrect. Although different microorganisms likely exhibit different levels of activity, the text indicates that there was no change in microorganism composition, and there is nothing in the text about different microorganisms having different activity levels.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27.pdf",
+          "sha256": "faeec7cfe9985315fd63575c02c7071864c120fc6a0e48d3bf4727c5e1f945b6",
+          "pages": [
+            20,
+            21
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27-with answers and explanations.pdf",
+          "sha256": "33d01b40e59c612652bf98e5430b8a3cd80457212d8e4eaba815d73672759a1f",
+          "pages": [
+            26,
+            27,
+            28
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "C": "Choice C is the best answer because it accurately describes why the finding about the microorganism community composition was important. The text describes an experiment by Eva Kaštovská and her team in which they collected plant-soil cores at one elevation and transplanted them to sites at a lower elevation, where the mean air temperature was warmer. Kaštovská and her team observed that microorganism-mediated nutrient cycling was accelerated in the transplanted cores and that \"crucially, microorganism community composition was unchanged,\" which allowed the team to attribute the acceleration to changes in microorganism activity brought about by the difference in temperature. This strongly implies that the team wouldn’t have been able to make that attribution otherwise, meaning that a change in microorganism composition represented another possible explanation for the acceleration that had to be ruled out.",
+        "A": "Choice A is incorrect. Although the text says microorganism-mediated cycling of soil nutrients increased in the transplanted cores, this is unrelated to what’s important about the finding that the microorganism composition didn’t change—that it allowed the team to attribute the change in activity solely to the change in temperature.",
+        "B": "Choice B is incorrect. Although the text compares activity in one core at two different elevations, the text doesn’t address changes in activity at various elevations over time.",
+        "D": "Choice D is incorrect. Although different microorganisms likely exhibit different levels of activity, the text indicates that there was no change in microorganism composition, and there is nothing in the text about different microorganisms having different activity levels."
+      }
+    },
+    {
+      "id": "a61a35f5",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Information and Ideas",
+      "skill": "central idea and details",
+      "difficulty": "Hard",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In 2019, 20 previously unknown moons were confirmed to be orbiting Saturn. Three of the moons have prograde orbits (orbiting in the direction the planet spins), and the other 17 have retrograde orbits (orbiting in the opposite direction of the planet’s spin). All but one of the 20 moons are thought to be remnants of bodies that orbited Saturn until they broke apart in collisions. Although the one exceptional moon orbits in the same direction as the planet’s spin, its orbit is highly eccentric compared to the rest, which may suggest that it has a different origin than the other 19 moons."
+        }
+      ],
+      "prompt": "Based on the text, which choice best describes the moon with the eccentric orbit?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "It doesn’t have a retrograde orbit, but it likely has the same origin as the moons with retrograde orbits."
+        },
+        {
+          "id": "B",
+          "text": "Its orbit is so tilted with respect to the other moons’ orbits that it’s neither prograde nor retrograde."
+        },
+        {
+          "id": "C",
+          "text": "It has a prograde orbit that is likely the result of having collided with another body orbiting Saturn."
+        },
+        {
+          "id": "D",
+          "text": "It has a prograde orbit and may not be a remnant of an earlier body that orbited Saturn."
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "Choice D is the best answer because it most accurately describes the moon with the eccentric orbit. The text indicates that three of the 20 newly discovered moons have prograde orbits, meaning that they orbit Saturn in the same direction as the planet’s spin, while the other 17 moons have retrograde orbits, meaning that they orbit Saturn in the opposite direction of the planet’s spin. The text then states that 19 of the 20 moons appear to be the remains of earlier bodies that orbited Saturn but were broken apart in collisions. The one exception is a moon that orbits Saturn in the same direction as the planet’s spin, meaning that the exceptional moon’s orbit is prograde. The text goes on to state that the exceptional moon’s orbit is so eccentric that the moon may have formed through a different process than the other 19 moons. The moon with the eccentric orbit, therefore, has a prograde orbit and may not be a remnant of an earlier body that orbited Saturn.\n\nChoice A is incorrect because nothing in the text supports the idea that the moon with the eccentric orbit likely has the same origin as the moons with retrograde orbits. Although it’s true that the moon has a prograde orbit (and thus doesn’t have a retrograde orbit), the only information the text provides about the moon’s origin is that it may be different than the origin of the other 19 moons. Choice B is incorrect because the text states that the moon in question orbits Saturn in the same direction as the planet’s spin, meaning that the moon’s orbit is prograde, not that its orbit is neither prograde nor retrograde. Choice C is incorrect because the text merely notes that the moon in question has a prograde orbit without giving any indication of what likely caused that orbit.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27.pdf",
+          "sha256": "faeec7cfe9985315fd63575c02c7071864c120fc6a0e48d3bf4727c5e1f945b6",
+          "pages": [
+            21,
+            22
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27-with answers and explanations.pdf",
+          "sha256": "33d01b40e59c612652bf98e5430b8a3cd80457212d8e4eaba815d73672759a1f",
+          "pages": [
+            28,
+            29
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "D": "Choice D is the best answer because it most accurately describes the moon with the eccentric orbit. The text indicates that three of the 20 newly discovered moons have prograde orbits, meaning that they orbit Saturn in the same direction as the planet’s spin, while the other 17 moons have retrograde orbits, meaning that they orbit Saturn in the opposite direction of the planet’s spin. The text then states that 19 of the 20 moons appear to be the remains of earlier bodies that orbited Saturn but were broken apart in collisions. The one exception is a moon that orbits Saturn in the same direction as the planet’s spin, meaning that the exceptional moon’s orbit is prograde. The text goes on to state that the exceptional moon’s orbit is so eccentric that the moon may have formed through a different process than the other 19 moons. The moon with the eccentric orbit, therefore, has a prograde orbit and may not be a remnant of an earlier body that orbited Saturn.",
+        "A": "Choice A is incorrect because nothing in the text supports the idea that the moon with the eccentric orbit likely has the same origin as the moons with retrograde orbits. Although it’s true that the moon has a prograde orbit (and thus doesn’t have a retrograde orbit), the only information the text provides about the moon’s origin is that it may be different than the origin of the other 19 moons.",
+        "B": "Choice B is incorrect because the text states that the moon in question orbits Saturn in the same direction as the planet’s spin, meaning that the moon’s orbit is prograde, not that its orbit is neither prograde nor retrograde.",
+        "C": "Choice C is incorrect because the text merely notes that the moon in question has a prograde orbit without giving any indication of what likely caused that orbit."
+      }
+    },
+    {
+      "id": "4e66210f",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Information and Ideas",
+      "skill": "central idea and details",
+      "difficulty": "Hard",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The following text is adapted from María Cristina Mena’s 1914 short story “The Vine-Leaf.”"
+        },
+        {
+          "type": "quote",
+          "text": "It is a saying in the capital of Mexico that Dr. Malsufrido carries more family secrets under his hat than any archbishop. The doctor’s hat is, appropriately enough, uncommonly capacious, rising very high, and sinking so low that it seems to be supported by his ears and eyebrows, and it has a furry look, as if it had been brushed the wrong way, which is perhaps what happens to it if it is ever brushed at all. When the doctor takes it off, the family secrets do not fly out like a flock of parrots, but remain nicely bottled up beneath a dome of old and highly polished ivory."
+        }
+      ],
+      "prompt": "Based on the text, how do people in the capital of Mexico most likely regard Dr. Malsufrido?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Many have come to tolerate him despite his disheveled appearance."
+        },
+        {
+          "id": "B",
+          "text": "Few feel concerned that he will divulge their confidences."
+        },
+        {
+          "id": "C",
+          "text": "Some dislike how freely he discusses his own family."
+        },
+        {
+          "id": "D",
+          "text": "Most would be unimpressed by him were it not for his professional expertise."
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Choice B is the best answer. The text describes a saying in the capital that Malsufrido keeps more secrets than an archbishop. It also says that when he takes off his hat, “the family secrets do not fly out… but remain nicely bottled up,” suggesting that he will not betray his confidences.\n\nChoice A is incorrect. This choice doesn’t reflect the text. While his hat is large and appears to have been brushed in the wrong direction, Dr. Malsufrido does not seem to be regarded as ill-dressed or disheveled. Choice C is incorrect. This choice is the opposite of what the text says. The secrets of families (his and others’) remain “bottled up” in his head. Choice D is incorrect. This choice isn’t supported by the text. His professional expertise is not discussed in the passage.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27.pdf",
+          "sha256": "faeec7cfe9985315fd63575c02c7071864c120fc6a0e48d3bf4727c5e1f945b6",
+          "pages": [
+            22,
+            23
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27-with answers and explanations.pdf",
+          "sha256": "33d01b40e59c612652bf98e5430b8a3cd80457212d8e4eaba815d73672759a1f",
+          "pages": [
+            29,
+            30
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "B": "Choice B is the best answer. The text describes a saying in the capital that Malsufrido keeps more secrets than an archbishop. It also says that when he takes off his hat, “the family secrets do not fly out… but remain nicely bottled up,” suggesting that he will not betray his confidences.",
+        "A": "Choice A is incorrect. This choice doesn’t reflect the text. While his hat is large and appears to have been brushed in the wrong direction, Dr. Malsufrido does not seem to be regarded as ill-dressed or disheveled.",
+        "C": "Choice C is incorrect. This choice is the opposite of what the text says. The secrets of families (his and others’) remain “bottled up” in his head.",
+        "D": "Choice D is incorrect. This choice isn’t supported by the text. His professional expertise is not discussed in the passage."
+      }
+    },
+    {
+      "id": "e67a5268",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Information and Ideas",
+      "skill": "central idea and details",
+      "difficulty": "Hard",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Having written the impassioned call to arms “Letter to the Spanish Americans” in 1791, Peruvian intellectual Juan Pablo Viscardo y Guzmán is often considered a forerunner for the independence movements in Latin America. But Viscardo’s role in history would have remained insignificant were it not for Venezuelan revolutionary Francisco de Miranda, who was handed the unpublished letter after Viscardo’s death. Miranda not only helped circulate the letter, but his edits and footnotes to the text position Miranda as a central figure in the text’s creation."
+        }
+      ],
+      "prompt": "Which choice best states the main idea of the text?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "The original authorship of “Letter to the Spanish Americans” is disputed by contemporary historians."
+        },
+        {
+          "id": "B",
+          "text": "The majority of the most eloquently stated arguments in “Letter to the Spanish Americans” were written by Miranda."
+        },
+        {
+          "id": "C",
+          "text": "Miranda played a crucial role in influencing the content and distribution of “Letter to the Spanish Americans.”"
+        },
+        {
+          "id": "D",
+          "text": "“Letter to the Spanish Americans” persuaded many people in Latin America to pursue national independence."
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Choice C is the best answer. The text describes how Miranda circulated, edited, and added footnotes to “Letter to the Spanish Americans,” and it claims that the letter and its author would have “remained insignificant” if it weren’t for Miranda’s efforts.\n\nChoice A is incorrect. The text only says that Viscardo wrote the letter and that Miranda edited it: it never suggests that the original authorship of the letter is up for debate. Choice B is incorrect. This contradicts the text. The text says that Miranda edited and footnoted the letter, but it identifies Viscardo as the letter’s author. It also never identifies certain arguments as more eloquent than others. Choice D is incorrect. This is outside the scope of the text. The paragraph describes Miranda’s role in the creation and distribution of the letter, but it doesn’t get into the effects of the letter on other people.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27.pdf",
+          "sha256": "faeec7cfe9985315fd63575c02c7071864c120fc6a0e48d3bf4727c5e1f945b6",
+          "pages": [
+            23,
+            24
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27-with answers and explanations.pdf",
+          "sha256": "33d01b40e59c612652bf98e5430b8a3cd80457212d8e4eaba815d73672759a1f",
+          "pages": [
+            30,
+            31
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "C": "Choice C is the best answer. The text describes how Miranda circulated, edited, and added footnotes to “Letter to the Spanish Americans,” and it claims that the letter and its author would have “remained insignificant” if it weren’t for Miranda’s efforts.",
+        "A": "Choice A is incorrect. The text only says that Viscardo wrote the letter and that Miranda edited it: it never suggests that the original authorship of the letter is up for debate.",
+        "B": "Choice B is incorrect. This contradicts the text. The text says that Miranda edited and footnoted the letter, but it identifies Viscardo as the letter’s author. It also never identifies certain arguments as more eloquent than others.",
+        "D": "Choice D is incorrect. This is outside the scope of the text. The paragraph describes Miranda’s role in the creation and distribution of the letter, but it doesn’t get into the effects of the letter on other people."
+      }
+    },
+    {
+      "id": "bea987a6",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Information and Ideas",
+      "skill": "central idea and details",
+      "difficulty": "Hard",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Several scholars have argued that conditions in England in the late ninth through early eleventh centuries —namely, burgeoning literacy amid running conflicts between England’s Anglo-Saxon kingdoms and Danish invaders—were especially conducive to the production of the Old English epic poem Beowulf, and they have dated the poem’s composition accordingly. It is not inconceivable that Beowulf emerged from such a context, but privileging contextual fit over the linguistic evidence of an eighth- or even seventh-century composition requires a level of justification that thus far has not been presented."
+        }
+      ],
+      "prompt": "Which choice best states the main idea of the text?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Although there are some grounds for believing that Beowulf was composed between the late ninth and early eleventh centuries, advocates for that view tend to rely on evidence that has been called into question by advocates for an earlier date."
+        },
+        {
+          "id": "B",
+          "text": "Although several scholars have dated Beowulf to the late ninth through early eleventh centuries, others have argued that doing so privileges a controversial interpretation of the social conditions of the period."
+        },
+        {
+          "id": "C",
+          "text": "Although Beowulf fits well with the historical context of England in the late ninth through early eleventh centuries, it fits equally well with the historical context of England in the seventh and eighth centuries."
+        },
+        {
+          "id": "D",
+          "text": "Although the claim of a late ninth- through early eleventh-century composition date for Beowulf has some plausibility, advocates for the claim have not compellingly addressed evidence suggesting an earlier date."
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "Choice D is the best answer because it most accurately states the main idea of the text. The text states that some scholars have dated the composition of Beowulf to the late ninth through early eleventh centuries due to the poem’s fit with that period’s historical context. The text goes on to say that while it is “not inconceivable that Beowulf emerged from such a context”—that is, it is possible that Beowulf was composed during the late ninth through eleventh centuries—there is linguistic evidence that the poem was composed earlier, in the seventh or eighth century. According to the text, favoring the historical context over the linguistic evidence requires justification that scholars have not yet supplied. In other words, the text suggests that scholars who favor the later composition date need to explain why the poem’s fit with historical context should take precedence over the linguistic evidence, but they have not yet done so. Thus, the main idea of the text is that while there is some plausibility to the later composition date, advocates for the later date have not compellingly addressed evidence suggestive of an earlier date.\n\nChoice A is incorrect because the text says that scholars who date the poem to the late ninth through early eleventh centuries have failed to account for the linguistic evidence that the poem may have been composed earlier, not that the evidence those scholars cite in favor of their view is unreliable or that anyone has cast doubt on that evidence. In other words, the text does not suggest that there are problems with the evidence cited by advocates of the later composition date, only that there is other evidence of an earlier composition date that those advocates need to consider. Choice B is incorrect because nothing in the text suggests that those scholars who date the poem to the late ninth through early eleventh centuries are giving priority to a controversial view of the social conditions at that time. The text makes no reference to any controversy about how scholars interpret that historical period. Instead, the text suggests that scholars who date the poem on the basis of its fit with the historical context of England in the late ninth through early eleventh centuries have failed to account for linguistic evidence that the poem may have been composed earlier. Choice C is incorrect because the text says nothing about how well the poem fits the historical context of England in the seventh and eighth centuries, let alone that it fits that historical context as well as it fits the historical context of the late ninth through early eleventh centuries. Rather, the text says that there is linguistic evidence that the poem may have been composed in the seventh or eighth century.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27.pdf",
+          "sha256": "faeec7cfe9985315fd63575c02c7071864c120fc6a0e48d3bf4727c5e1f945b6",
+          "pages": [
+            24,
+            25
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27-with answers and explanations.pdf",
+          "sha256": "33d01b40e59c612652bf98e5430b8a3cd80457212d8e4eaba815d73672759a1f",
+          "pages": [
+            31,
+            32,
+            33
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "D": "Choice D is the best answer because it most accurately states the main idea of the text. The text states that some scholars have dated the composition of Beowulf to the late ninth through early eleventh centuries due to the poem’s fit with that period’s historical context. The text goes on to say that while it is “not inconceivable that Beowulf emerged from such a context”—that is, it is possible that Beowulf was composed during the late ninth through eleventh centuries—there is linguistic evidence that the poem was composed earlier, in the seventh or eighth century. According to the text, favoring the historical context over the linguistic evidence requires justification that scholars have not yet supplied. In other words, the text suggests that scholars who favor the later composition date need to explain why the poem’s fit with historical context should take precedence over the linguistic evidence, but they have not yet done so. Thus, the main idea of the text is that while there is some plausibility to the later composition date, advocates for the later date have not compellingly addressed evidence suggestive of an earlier date.",
+        "A": "Choice A is incorrect because the text says that scholars who date the poem to the late ninth through early eleventh centuries have failed to account for the linguistic evidence that the poem may have been composed earlier, not that the evidence those scholars cite in favor of their view is unreliable or that anyone has cast doubt on that evidence. In other words, the text does not suggest that there are problems with the evidence cited by advocates of the later composition date, only that there is other evidence of an earlier composition date that those advocates need to consider.",
+        "B": "Choice B is incorrect because nothing in the text suggests that those scholars who date the poem to the late ninth through early eleventh centuries are giving priority to a controversial view of the social conditions at that time. The text makes no reference to any controversy about how scholars interpret that historical period. Instead, the text suggests that scholars who date the poem on the basis of its fit with the historical context of England in the late ninth through early eleventh centuries have failed to account for linguistic evidence that the poem may have been composed earlier.",
+        "C": "Choice C is incorrect because the text says nothing about how well the poem fits the historical context of England in the seventh and eighth centuries, let alone that it fits that historical context as well as it fits the historical context of the late ninth through early eleventh centuries. Rather, the text says that there is linguistic evidence that the poem may have been composed in the seventh or eighth century."
+      }
+    },
+    {
+      "id": "18d2dfab",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Information and Ideas",
+      "skill": "central idea and details",
+      "difficulty": "Hard",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Elizabeth Asiedu has identified a negative correlation between the share of developing countries’ economies derived from natural-resource extraction and those countries’ receipts of foreign investment. This may appear counterintuitive—resource extraction requires initial investments (in extractive technology, for instance) at scales best met by multinational corporations—but Asiedu notes that natural-resource industries’ boom-bust cycle can destabilize local currencies and increase developing countries’ vulnerability to external shocks, creating levels of uncertainty to which foreign investors are typically averse."
+        }
+      ],
+      "prompt": "Which choice best states the main idea of the text?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Although it may seem surprising that foreign investment declines in developing countries as natural-resource extraction makes up a larger share of those countries’ economies, that decline happens because resource extraction requires initial investments too large for foreign investors to supply."
+        },
+        {
+          "id": "B",
+          "text": "Although developing countries tend to become less dependent on foreign investment as natural-resource industries make up a larger share of their economies, this change may not occur if the boom-bust cycle of those industries destabilizes local currencies or increases countries’ vulnerability to external shocks."
+        },
+        {
+          "id": "C",
+          "text": "Although one might expect that foreign investment would increase as natural-resource extraction makes up a larger share of developing countries’ economies, the opposite happens because heavy reliance on natural resources can lead to unattractive conditions for investors."
+        },
+        {
+          "id": "D",
+          "text": "Although foreign investors tend to avoid initial investments in natural-resource industries in developing countries, foreign investment may increase significantly as those industries stabilize and the risks associated with them decline."
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Choice C is the best answer because it accurately states the main idea of the text. According to the text, contrary to what some might expect, foreign investment is typically lower in developing countries whose economies are more dependent on natural-resource extraction. The text explains that high reliance on natural-resource extraction can subject a developing country to economic shocks that can destabilize the local currency and introduce economic uncertainty that tends to keep investors away. In other words, although we may think otherwise, foreign investors are less willing to invest in projects in developing countries whose economies are heavily dependent on natural-resource extraction because those economies tend to exhibit instability that investors want to avoid.\n\nChoice A is incorrect. The text does indicate that foreign investment is typically lower in developing countries whose economies are more dependent on natural-resource extraction; the text further indicates that natural-resource extraction requires substantial initial investments (to acquire things like required technologies) for which there are fewer investors willing to participate at this stage than one might think. But the text does not implicate the cost of these initial investments as a reason why foreign investment is less widely available than some might think. Choice B is incorrect. The text indicates that greater dependence on natural-resource extraction makes a developing country less appealing to foreign investors because of associated economic instability. Rather than arguing that the goal of developing countries is to become less dependent on foreign investment, as the phrasing of choice B suggests, the text focuses only on why foreign investors become less involved with such countries, which suggests that more investment would be preferable. Choice D is incorrect. Although the text indicates that natural-resource extraction requires substantial initial investments (to acquire things like required technologies) and that there are fewer likely investors willing to participate at this stage than one might think, the text does not address what investors are likely to do over time as the industry stabilizes itself.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27.pdf",
+          "sha256": "faeec7cfe9985315fd63575c02c7071864c120fc6a0e48d3bf4727c5e1f945b6",
+          "pages": [
+            25,
+            26
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27-with answers and explanations.pdf",
+          "sha256": "33d01b40e59c612652bf98e5430b8a3cd80457212d8e4eaba815d73672759a1f",
+          "pages": [
+            33,
+            34,
+            35
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "C": "Choice C is the best answer because it accurately states the main idea of the text. According to the text, contrary to what some might expect, foreign investment is typically lower in developing countries whose economies are more dependent on natural-resource extraction. The text explains that high reliance on natural-resource extraction can subject a developing country to economic shocks that can destabilize the local currency and introduce economic uncertainty that tends to keep investors away. In other words, although we may think otherwise, foreign investors are less willing to invest in projects in developing countries whose economies are heavily dependent on natural-resource extraction because those economies tend to exhibit instability that investors want to avoid.",
+        "A": "Choice A is incorrect. The text does indicate that foreign investment is typically lower in developing countries whose economies are more dependent on natural-resource extraction; the text further indicates that natural-resource extraction requires substantial initial investments (to acquire things like required technologies) for which there are fewer investors willing to participate at this stage than one might think. But the text does not implicate the cost of these initial investments as a reason why foreign investment is less widely available than some might think.",
+        "B": "Choice B is incorrect. The text indicates that greater dependence on natural-resource extraction makes a developing country less appealing to foreign investors because of associated economic instability. Rather than arguing that the goal of developing countries is to become less dependent on foreign investment, as the phrasing of choice B suggests, the text focuses only on why foreign investors become less involved with such countries, which suggests that more investment would be preferable.",
+        "D": "Choice D is incorrect. Although the text indicates that natural-resource extraction requires substantial initial investments (to acquire things like required technologies) and that there are fewer likely investors willing to participate at this stage than one might think, the text does not address what investors are likely to do over time as the industry stabilizes itself."
+      }
+    },
+    {
+      "id": "5544272f",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Information and Ideas",
+      "skill": "central idea and details",
+      "difficulty": "Hard",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In a study of new technology adoption, Davit Marikyan et al. examined negative disconfirmation (which occurs when experiences fall short of one’s expectations) to determine whether it could lead to positive outcomes for users. The team focused on established users of “smart home” technology, which presents inherent utilization challenges but tends to attract users with high expectations, often leading to feelings of dissonance. The researchers found that many users employed cognitive mechanisms to mitigate those feelings, ultimately reversing their initial sense of disappointment."
+        }
+      ],
+      "prompt": "Which choice best states the main idea of the text?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Research suggests that most users of smart home technology will not achieve a feeling of satisfaction given the utilization challenges of such technology."
+        },
+        {
+          "id": "B",
+          "text": "Although most smart home technology is aimed at meeting or exceeding users’ high expectations, those expectations in general remain poorly understood."
+        },
+        {
+          "id": "C",
+          "text": "Research suggests that users with high expectations for a new technology can feel content with that technology even after experiencing negative disconfirmation."
+        },
+        {
+          "id": "D",
+          "text": "Although negative disconfirmation has often been studied, little is known about the cognitive mechanisms shaping users’ reactions to it in the context of new technology adoption."
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Choice C is the best answer. The passage begins by describing the study, and concludes with its results: \"many users employed cognitive mechanisms to mitigate those feelings [of negative disconfirmation].\"\n\nChoice A is incorrect. This is the opposite of what the text claims. Rather, the researchers found that \"many users\" reversed \"their initial sense of disappointment.\" Choice B is incorrect. This choice doesn’t reflect the text. What the expectations of smart home tech users are is not discussed. Choice D is incorrect. This choice doesn’t reflect the text. How often these topics have been studied is not mentioned.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27.pdf",
+          "sha256": "faeec7cfe9985315fd63575c02c7071864c120fc6a0e48d3bf4727c5e1f945b6",
+          "pages": [
+            26,
+            27
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27-with answers and explanations.pdf",
+          "sha256": "33d01b40e59c612652bf98e5430b8a3cd80457212d8e4eaba815d73672759a1f",
+          "pages": [
+            35,
+            36
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "C": "Choice C is the best answer. The passage begins by describing the study, and concludes with its results: \"many users employed cognitive mechanisms to mitigate those feelings [of negative disconfirmation].\"",
+        "A": "Choice A is incorrect. This is the opposite of what the text claims. Rather, the researchers found that \"many users\" reversed \"their initial sense of disappointment.\"",
+        "B": "Choice B is incorrect. This choice doesn’t reflect the text. What the expectations of smart home tech users are is not discussed.",
+        "D": "Choice D is incorrect. This choice doesn’t reflect the text. How often these topics have been studied is not mentioned."
+      }
+    },
+    {
+      "id": "ba29d116",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Information and Ideas",
+      "skill": "central idea and details",
+      "difficulty": "Hard",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Electronic music pioneer Wendy Carlos is credited with the music for three feature films: A Clockwork Orange (1971), The Shining (1980), and Tron (1982). However, her musical score for A Clockwork Orange is mostly made up of her arrangements of Ludwig van Beethoven’s work. Also, almost all the music that she and Rachel Elkind composed for The Shining was unused by director Stanley Kubrick. It did not appear in the film. Of the three films, Tron is the one in which audiences can hear the most of Carlos’s original compositions."
+        }
+      ],
+      "prompt": "Which choice best states the main idea of the text?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Of the three films for which Carlos is credited, Tron features the most original music from her."
+        },
+        {
+          "id": "B",
+          "text": "The director of The Shining used most of the music that Carlos composed for it."
+        },
+        {
+          "id": "C",
+          "text": "Beethoven is widely considered to be a more important composer than Carlos."
+        },
+        {
+          "id": "D",
+          "text": "Carlos is a notable innovator among film composers in the 1970s and 1980s."
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "Choice A is the best answer because it best states the main idea of the text. The text indicates that Wendy Carlos scored three feature films: A Clockwork Orange, The Shining, and Tron. It also indicates that Carlos’s work on A Clockwork Orange consisted primarily of electronic arrangements of Beethoven compositions and that very little of what she and Rachel Elkind composed for The Shining was used in the film. But the soundtrack for Tron consists largely of music composed by Carlos, so it contains more of her original music than do the soundtracks for the other two films. Thus, the main idea of the text is that of the three films for which Carlos is credited, Tron features the most original music from her.\n\nChoice B is incorrect because it directly contradicts the text’s claim that \"very little of what she and Rachel Elkind composed for The Shining was used in the film.\" Choice C is incorrect because the text doesn’t address the perceived quality of different composers, instead, it discusses how much of Carlos’s original work was used in each of the three films she scored. Choice D is incorrect because it doesn’t relate to any of the major themes of the text: the work Wendy Carlos did for three feature films, how much of that work was composed by Carlos, and how much of her original work was ultimately used in the film.",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27.pdf",
+          "sha256": "faeec7cfe9985315fd63575c02c7071864c120fc6a0e48d3bf4727c5e1f945b6",
+          "pages": [
+            27,
+            28
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "Information and Ideas/central idea and details/Hard-central idea and details-27-with answers and explanations.pdf",
+          "sha256": "33d01b40e59c612652bf98e5430b8a3cd80457212d8e4eaba815d73672759a1f",
+          "pages": [
+            36,
+            37
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "choiceRationales": {
+        "A": "Choice A is the best answer because it best states the main idea of the text. The text indicates that Wendy Carlos scored three feature films: A Clockwork Orange, The Shining, and Tron. It also indicates that Carlos’s work on A Clockwork Orange consisted primarily of electronic arrangements of Beethoven compositions and that very little of what she and Rachel Elkind composed for The Shining was used in the film. But the soundtrack for Tron consists largely of music composed by Carlos, so it contains more of her original music than do the soundtracks for the other two films. Thus, the main idea of the text is that of the three films for which Carlos is credited, Tron features the most original music from her.",
+        "B": "Choice B is incorrect because it directly contradicts the text’s claim that \"very little of what she and Rachel Elkind composed for The Shining was used in the film.\"",
+        "C": "Choice C is incorrect because the text doesn’t address the perceived quality of different composers, instead, it discusses how much of Carlos’s original work was used in each of the three films she scored.",
+        "D": "Choice D is incorrect because it doesn’t relate to any of the major themes of the text: the work Wendy Carlos did for three feature films, how much of that work was composed by Carlos, and how much of her original work was ultimately used in the film."
+      }
+    }
+  ]
+}
