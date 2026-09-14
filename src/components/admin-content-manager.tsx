@@ -9,7 +9,6 @@ import { AdminEntitlementManager } from "@/components/admin-entitlement-manager"
 import { AdminSiteChromeEditor } from "@/components/admin-site-chrome-editor";
 import { AdminJuniorHighQuestionEditor } from "@/components/admin-junior-high-question-editor";
 import { AdminSeniorHighQuestionEditor } from "@/components/admin-senior-high-question-editor";
-import { AdminTvSpeakingEditor } from "@/components/admin-tv-speaking-editor";
 import { GuidePostAdmin } from "@/components/guide-post-admin";
 import { supabase } from "@/lib/supabase/client";
 
@@ -22,8 +21,7 @@ type AdminView =
   | "guide"
   | "bbc-vocabulary"
   | "junior-high-questions"
-  | "senior-high-questions"
-  | "tv-speaking";
+  | "senior-high-questions";
 
 export function AdminContentManager() {
   const [activeView, setActiveView] = useState<AdminView>("analytics");
@@ -238,13 +236,6 @@ export function AdminContentManager() {
           BBC内容
         </button>
         <button
-          className={activeView === "tv-speaking" ? "active" : ""}
-          type="button"
-          onClick={() => setActiveView("tv-speaking")}
-        >
-          美剧口语
-        </button>
-        <button
           className={activeView === "junior-high-questions" ? "active" : ""}
           type="button"
           onClick={() => setActiveView("junior-high-questions")}
@@ -278,10 +269,6 @@ export function AdminContentManager() {
 
       {activeView === "bbc-vocabulary" && adminUserId ? (
         <AdminBbcArticleEditor adminUserId={adminUserId} />
-      ) : null}
-
-      {activeView === "tv-speaking" && adminUserId ? (
-        <AdminTvSpeakingEditor />
       ) : null}
 
       {activeView === "junior-high-questions" && adminUserId ? (
