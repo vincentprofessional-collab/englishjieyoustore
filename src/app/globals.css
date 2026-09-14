@@ -20469,21 +20469,20 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
 }
 
 .guide-editor-body {
+  align-content: start;
   display: grid;
   gap: 10px;
   margin-top: 26px;
-  min-height: 430px;
 }
 
 .guide-editor-block {
-  border-left: 2px solid transparent;
   display: grid;
   gap: 8px;
-  padding: 10px 0 10px 12px;
+  padding: 0;
 }
 
 .guide-editor-block.active {
-  border-left-color: var(--gold);
+  border-left-color: transparent;
 }
 
 .guide-editor-text-input,
@@ -20513,12 +20512,12 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
 }
 
 .guide-editor-text-input {
-  min-height: 132px;
+  min-height: 1.9em;
 }
 
 .guide-editor-heading-input {
   font-weight: 700;
-  min-height: 58px;
+  min-height: 1.4em;
 }
 
 .guide-editor-text-input::placeholder,
@@ -20532,7 +20531,6 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
 .guide-editor-asset-preview {
   border: 1px solid #dfe5e2;
   border-radius: 8px;
-  max-height: 240px;
   max-width: 100%;
   object-fit: contain;
 }
@@ -20549,13 +20547,61 @@ audio.guide-editor-asset-preview {
 }
 
 .guide-editor-inline-media {
+  display: inline-block;
   margin: 0;
+  max-width: 100%;
+  position: relative;
+}
+
+.guide-editor-inline-media .guide-editor-asset-preview {
+  display: block;
+  height: 100%;
+  max-width: 100%;
+  object-fit: fill;
+  width: 100%;
+}
+
+.guide-editor-inline-media video.guide-editor-asset-preview {
+  background: #111;
+  height: 240px;
+  min-height: 180px;
+}
+
+.guide-editor-inline-media audio.guide-editor-asset-preview {
+  height: 42px;
+}
+
+.guide-editor-video-media,
+.guide-editor-audio-media {
+  width: min(100%, 860px);
+}
+
+.guide-editor-inline-media > a {
+  color: var(--accent-dark);
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 800;
+  margin-top: 6px;
+  text-decoration: underline;
 }
 
 .guide-editor-inline-media figcaption {
   color: var(--muted);
   font-size: 12px;
   margin-top: 4px;
+}
+
+.guide-editor-resize-handle {
+  background: var(--gold);
+  border: 2px solid #fffdf8;
+  border-radius: 4px;
+  bottom: -5px;
+  cursor: nwse-resize;
+  height: 14px;
+  padding: 0;
+  position: absolute;
+  right: -5px;
+  width: 14px;
 }
 
 .guide-admin-card {

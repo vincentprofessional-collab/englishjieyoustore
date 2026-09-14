@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, KeyboardEvent, PointerEvent, useEffect, useRef, useState } from "react";
 import {
   createGuideBlock,
   GuideBlockType,
@@ -184,6 +184,72 @@ function splitEditorHtml(html: string, offset: number) {
   const after = document.createElement("div");
   after.appendChild(afterRange.cloneContents());
   return { after: after.innerHTML, before: before.innerHTML };
+}
+
+function ResizableImagePreview({
+  block,
+  onResize,
+}: {
+  block: GuideContentBlock;
+  onResize: (width: number, height: number) => void;
+}) {
+  const [width, setWidth] = useState(block.width ?? 640);
+  const [height, setHeight] = useState(block.height ?? 360);
+  const sizeRef = useRef({ height: block.height ?? 360, width: block.width ?? 640 });
+  const dragRef = useRef<{ startHeight: number; startWidth: number; startX: number; startY: number } | null>(null);
+
+  useEffect(() => {
+    const nextWidth = block.width ?? 640;
+    const nextHeight = block.height ?? 360;
+    sizeRef.current = { height: nextHeight, width: nextWidth };
+    setWidth(nextWidth);
+    setHeight(nextHeight);
+  }, [block.height, block.width]);
+
+  function startResize(event: PointerEvent<HTMLButtonElement>) {
+    event.preventDefault();
+    event.stopPropagation();
+    event.currentTarget.setPointerCapture(event.pointerId);
+    dragRef.current = {
+      startHeight: sizeRef.current.height,
+      startWidth: sizeRef.current.width,
+      startX: event.clientX,
+      startY: event.clientY,
+    };
+  }
+
+  function resize(event: PointerEvent<HTMLButtonElement>) {
+    const drag = dragRef.current;
+    if (!drag) return;
+    const nextWidth = Math.min(1400, Math.max(120, Math.round(drag.startWidth + event.clientX - drag.startX)));
+    const nextHeight = Math.min(1000, Math.max(80, Math.round(drag.startHeight + event.clientY - drag.startY)));
+    sizeRef.current = { height: nextHeight, width: nextWidth };
+    setWidth(nextWidth);
+    setHeight(nextHeight);
+  }
+
+  function finishResize(event: PointerEvent<HTMLButtonElement>) {
+    if (!dragRef.current) return;
+    dragRef.current = null;
+    event.currentTarget.releasePointerCapture(event.pointerId);
+    onResize(sizeRef.current.width, sizeRef.current.height);
+  }
+
+  return (
+    <figure className="guide-editor-inline-media guide-editor-resizable-media" style={{ height, width }}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img className="guide-editor-asset-preview" alt={block.caption || "图片预览"} src={block.url} />
+      {block.caption ? <figcaption>{block.caption}</figcaption> : null}
+      <button
+        aria-label="拖动调整图片大小"
+        className="guide-editor-resize-handle"
+        onPointerDown={startResize}
+        onPointerMove={resize}
+        onPointerUp={finishResize}
+        type="button"
+      />
+    </figure>
+  );
 }
 
 export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
@@ -589,6 +655,48 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
     setMessage("");
   }
 
+  function handleTextKeyDown(
+    block: GuideContentBlock,
+    blockIndex: number,
+    event: KeyboardEvent<HTMLDivElement>,
+  ) {
+    if (event.key !== "Backspace" && event.key !== "Delete") {
+      return;
+    }
+
+    const selection = window.getSelection();
+    if (!selection?.isCollapsed || !selection.anchorNode) {
+      return;
+    }
+
+    const element = event.currentTarget;
+    const text = element.innerText.replace(/\u00a0/g, " ");
+    const cursorOffset = textOffsetInElement(element, selection.anchorNode, selection.anchorOffset);
+
+    if (!text.trim()) {
+      event.preventDefault();
+      removeBlock(block.id);
+      return;
+    }
+
+    if (event.key === "Backspace" && cursorOffset === 0) {
+      const previousBlock = draft.blocks[blockIndex - 1];
+      if (previousBlock && previousBlock.type !== "paragraph" && previousBlock.type !== "heading") {
+        event.preventDefault();
+        removeBlock(previousBlock.id);
+      }
+      return;
+    }
+
+    if (event.key === "Delete" && cursorOffset >= text.length) {
+      const nextBlock = draft.blocks[blockIndex + 1];
+      if (nextBlock && nextBlock.type !== "paragraph" && nextBlock.type !== "heading") {
+        event.preventDefault();
+        removeBlock(nextBlock.id);
+      }
+    }
+  }
+
   function handleBlockKeyDown(block: GuideContentBlock, event: KeyboardEvent<HTMLElement>) {
     if ((event.key === "Backspace" || event.key === "Delete") && block.type !== "paragraph" && block.type !== "heading") {
       event.preventDefault();
@@ -832,7 +940,7 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
                 </label>
                 <div className="guide-editor-body">
                   {draft.blocks.map((block, index) => (
-                    <article className={`guide-editor-block ${activeBlockId === block.id ? "active" : ""}`} key={block.id} onClick={() => setActiveBlockId(block.id)} onKeyDown={(event) => handleBlockKeyDown(block, event)} tabIndex={block.type === "paragraph" || block.type === "heading" ? -1 : 0}>
+                    <article className={`guide-editor-block ${activeBlockId === block.id ? "active" : ""}`} key={block.id} onClick={() => setActiveBlockId(block.id)} onKeyDown={(event) => handleBlockKeyDown(block, event)} onMouseDown={(event) => { if (block.type !== "paragraph" && block.type !== "heading") event.currentTarget.focus(); }} tabIndex={block.type === "paragraph" || block.type === "heading" ? -1 : 0}>
                       {block.type === "paragraph" || block.type === "heading" ? (
                         <div
                           aria-label={`${BLOCK_LABELS[block.type]}内容`}
@@ -842,21 +950,26 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
                           onClick={(event) => rememberTextCursor(block.id, event.currentTarget)}
                           onFocus={(event) => rememberTextCursor(block.id, event.currentTarget)}
                           onInput={(event) => syncEditableBlock(block.id, event.currentTarget)}
+                          onKeyDown={(event) => handleTextKeyDown(block, index, event)}
                           onKeyUp={(event) => rememberTextCursor(block.id, event.currentTarget)}
                           onMouseUp={(event) => rememberTextCursor(block.id, event.currentTarget)}
                           onSelect={(event) => rememberTextCursor(block.id, event.currentTarget)}
-                          ref={(element) => { editableRefs.current[block.id] = element; }}
                           role="textbox"
                           spellCheck
                           style={editorBlockStyle(block)}
                           suppressContentEditableWarning
-                          dangerouslySetInnerHTML={{ __html: editorHtml(block) }}
+                          ref={(element) => {
+                            editableRefs.current[block.id] = element;
+                            if (element && element.innerHTML !== editorHtml(block)) {
+                              element.innerHTML = editorHtml(block);
+                            }
+                          }}
                         />
                       ) : null}
                       {block.type === "link" && block.url ? <a className="guide-editor-link-preview" href={block.url} rel="noreferrer" target="_blank">{block.text || block.url} ↗</a> : null}
-                      {block.type === "image" && block.url ? <figure className="guide-editor-inline-media"><img className="guide-editor-asset-preview" alt={block.caption || "图片预览"} src={block.url} />{block.caption ? <figcaption>{block.caption}</figcaption> : null}</figure> : null}
-                      {block.type === "video" && block.url ? <figure className="guide-editor-inline-media"><video className="guide-editor-asset-preview" controls playsInline preload="metadata" src={block.url} />{block.caption ? <figcaption>{block.caption}</figcaption> : null}</figure> : null}
-                      {block.type === "audio" && block.url ? <figure className="guide-editor-inline-media"><audio className="guide-editor-asset-preview" controls preload="metadata" src={block.url} />{block.caption ? <figcaption>{block.caption}</figcaption> : null}</figure> : null}
+                      {block.type === "image" && block.url ? <ResizableImagePreview block={block} onResize={(width, height) => updateBlock(block.id, { height, width }, true)} /> : null}
+                      {block.type === "video" && block.url ? <figure className="guide-editor-inline-media guide-editor-video-media"><video className="guide-editor-asset-preview" controls playsInline preload="metadata" src={block.url} />{block.caption ? <figcaption>{block.caption}</figcaption> : null}<a href={block.url} rel="noreferrer" target="_blank">在新窗口打开视频 ↗</a></figure> : null}
+                      {block.type === "audio" && block.url ? <figure className="guide-editor-inline-media guide-editor-audio-media"><audio className="guide-editor-asset-preview" controls preload="metadata" src={block.url} />{block.caption ? <figcaption>{block.caption}</figcaption> : null}<a href={block.url} rel="noreferrer" target="_blank">打开音频 ↗</a></figure> : null}
                     </article>
                   ))}
                 </div>

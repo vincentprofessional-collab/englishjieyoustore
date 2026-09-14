@@ -93,7 +93,7 @@ function GuideBlock({ block }: { block: GuideContentBlock }) {
       <figure className="guide-post-media" style={{ textAlign: block.align }}>
         {/* Admin-controlled public media URLs are intentionally rendered without image optimization. */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img alt={block.caption || ""} decoding="async" loading="lazy" src={block.url} />
+        <img alt={block.caption || ""} decoding="async" loading="lazy" src={block.url} style={{ height: block.height ? `${block.height}px` : undefined, objectFit: block.height ? "fill" : undefined, width: block.width ? `${block.width}px` : undefined }} />
         {block.caption ? <figcaption>{block.caption}</figcaption> : null}
       </figure>
     ) : null;
