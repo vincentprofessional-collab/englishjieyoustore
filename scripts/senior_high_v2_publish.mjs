@@ -8,11 +8,11 @@ import path from "node:path";
 import { validateSeniorHighV2Publishability, validateSeniorHighV2Set } from "./senior_high_v2_schema.mjs";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
-const SOURCE_ROOT = "/Users/shidianjin/Documents/高考英语";
+const SOURCE_ROOT = process.env.SENIOR_HIGH_SOURCE_ROOT || "/Volumes/My HDD3/备课/高考";
 const GOLD_DIR = path.join(ROOT, "data", "senior-high", "v2", "gold");
 const PUBLIC_ROOT = path.join(ROOT, "public", "senior-high");
 const ASSET_DIR = path.join(PUBLIC_ROOT, "assets");
-const MEDIA_LIMIT = 12 * 1024 * 1024;
+const MEDIA_LIMIT = 50 * 1024 * 1024;
 
 const MIME_EXTENSIONS = {
   "audio/mpeg": ".mp3",
@@ -49,11 +49,14 @@ function cleanAssetDirectory(directory, preservedNames = new Set()) {
   for (const name of fs.readdirSync(directory)) if (!preservedNames.has(name)) fs.unlinkSync(path.join(directory, name));
 }
 
-function localAssetNames() {
+function publishedAssetNames() {
   const names = new Set();
-  for (const name of fs.readdirSync(GOLD_DIR).filter((value) => value.endsWith(".json"))) {
-    const set = JSON.parse(fs.readFileSync(path.join(GOLD_DIR, name), "utf8"));
-    for (const asset of set.assetRefs || []) if (!asset.url.startsWith("source://")) names.add(path.basename(asset.url));
+  for (const directoryName of ["papers", "practice"]) {
+    const directory = path.join(PUBLIC_ROOT, directoryName);
+    for (const name of fs.readdirSync(directory).filter((value) => value.endsWith(".json"))) {
+      const set = JSON.parse(fs.readFileSync(path.join(directory, name), "utf8"));
+      for (const asset of set.assetRefs || []) if (asset.url.startsWith("/senior-high/assets/")) names.add(path.basename(asset.url));
+    }
   }
   return names;
 }
@@ -64,6 +67,27 @@ function sha256(buffer) {
 
 function extensionFor(asset, sourcePath) {
   return path.extname(sourcePath) || MIME_EXTENSIONS[asset.mimeType] || "";
+}
+
+function audioFileIsPlayable(filePath) {
+  try {
+    const duration = execFileSync("ffprobe", ["-v", "error", "-show_entries", "format=duration", "-of", "default=noprint_wrappers=1:nokey=1", filePath], { encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] }).trim();
+    return Number.isFinite(Number(duration)) && Number(duration) > 0;
+  } catch (error) {
+    if (error?.code === "ENOENT") return true;
+    return false;
+  }
+}
+
+function audioBufferIsPlayable(buffer, extension = ".mp3") {
+  const temporaryDirectory = fs.mkdtempSync(path.join(os.tmpdir(), "senior-high-audio-"));
+  const temporaryFile = path.join(temporaryDirectory, `audio${extension || ".mp3"}`);
+  try {
+    fs.writeFileSync(temporaryFile, buffer);
+    return audioFileIsPlayable(temporaryFile);
+  } finally {
+    fs.rmSync(temporaryDirectory, { recursive: true, force: true });
+  }
 }
 
 function sourceAssetParts(asset) {
@@ -79,9 +103,9 @@ function sourceAssetParts(asset) {
 function materializeAsset(asset) {
   if (!asset.url.startsWith("source://")) {
     const publicPath = path.join(ROOT, "public", asset.url.replace(/^\//, ""));
-    return fs.existsSync(publicPath) && fs.statSync(publicPath).size > 0
-      ? { asset, unavailableReason: "" }
-      : { asset: null, unavailableReason: "public_asset_missing" };
+    if (!fs.existsSync(publicPath) || fs.statSync(publicPath).size === 0) return { asset: null, unavailableReason: "public_asset_missing" };
+    if (asset.kind === "audio" && !audioFileIsPlayable(publicPath)) return { asset: null, unavailableReason: "audio_unplayable" };
+    return { asset, unavailableReason: "" };
   }
   const { relativePath, packagePath, currentRelativePath } = sourceAssetParts(asset);
   const sourcePath = path.join(SOURCE_ROOT, currentRelativePath || relativePath);
@@ -100,6 +124,7 @@ function materializeAsset(asset) {
     if (sha256(buffer) !== asset.sha256) return { asset: null, unavailableReason: "sha256_mismatch" };
     let extension = extensionFor(asset, sourceName).toLowerCase();
     let mimeType = asset.mimeType;
+    if (asset.kind === "audio" && !audioBufferIsPlayable(buffer, extension)) return { asset: null, unavailableReason: "audio_unplayable" };
     if (extension === ".wmf") {
       const temporaryDirectory = fs.mkdtempSync(path.join(os.tmpdir(), "senior-high-wmf-"));
       try {
@@ -175,6 +200,51 @@ function listeningSectionHasAvailableAudio(section, assets) {
   return false;
 }
 
+function blocksReferenceAsset(blocks, assetIds) {
+  for (const block of blocks || []) {
+    if (block.type === "audio" && assetIds.has(block.assetId)) return true;
+    if (block.type === "table") {
+      if (blocksReferenceAsset(block.headers, assetIds)) return true;
+      for (const row of block.rows || []) for (const cell of row.cells || []) if (blocksReferenceAsset(cell, assetIds)) return true;
+    }
+    if (block.type === "dialogue") for (const turn of block.turns || []) if (blocksReferenceAsset(turn.blocks, assetIds)) return true;
+  }
+  return false;
+}
+
+function removeUnavailableAudioGroups(set, unavailableAudioIds) {
+  if (unavailableAudioIds.size === 0) return;
+  for (const section of set.sections || []) {
+    const isListeningSection = section.id.toLowerCase().includes("listening") || section.title.includes("听力");
+    if (!isListeningSection) continue;
+    section.groups = (section.groups || []).filter((group) => {
+      if (blocksReferenceAsset(group.instructions, unavailableAudioIds)) return false;
+      if (blocksReferenceAsset(group.stimulusBlocks, unavailableAudioIds)) return false;
+      if ((group.sharedOptions || []).some((option) => blocksReferenceAsset(option.blocks, unavailableAudioIds))) return false;
+      if ((group.questions || []).some((question) => blocksReferenceAsset(question.promptBlocks, unavailableAudioIds) || blocksReferenceAsset(question.explanationBlocks, unavailableAudioIds) || (question.options || []).some((option) => blocksReferenceAsset(option.blocks, unavailableAudioIds)))) return false;
+      return true;
+    });
+  }
+}
+
+function removeErrorCorrectionContent(set) {
+  set.sections = (set.sections || []).flatMap((section) => {
+    if (/短文改错/.test(`${section.title || ""} ${section.id || ""}`)) return [];
+    const groups = (section.groups || []).flatMap((group) => {
+      if (/短文改错/.test(group.title || "")) return [];
+      const questions = (group.questions || []).filter((question) => {
+        if (question.type === "error_correction") return false;
+        const prompt = (question.promptBlocks || []).map(blockText).join(" ");
+        return !/短文改错|error\s+correction|改正所给短文中的错误|每行只有一个错误|多一个词|缺一个词|错一个词|在错的词下划一横线/i.test(prompt);
+      });
+      if ((group.questions || []).length > 0 && questions.length === 0) return [];
+      return questions.length === (group.questions || []).length ? [group] : [{ ...group, questions }];
+    });
+    if (groups.length > 0) return [{ ...section, groups }];
+    return (section.groups || []).length === 0 ? [section] : [];
+  });
+}
+
 function blockText(block) {
   if (!block) return "";
   if (block.type === "heading" || block.type === "notice") return block.text || "";
@@ -186,6 +256,91 @@ function blockText(block) {
 
 function normalizedText(value) {
   return value.replace(/\s+/g, " ").trim();
+}
+
+const WRITING_CONTAMINATION_PATTERNS = [
+  /参考答案|选择题答案|答案及解析|答案解析|听力原文|短文改错答案/i,
+  /(?:^|\n)\s*\d{1,3}\s*[~～—-]\s*\d{1,3}\s+[A-H]+/m,
+  /(?:^|\n)\s*\d{1,3}\s*[.．、]\s*(?:√|去掉|删去|[A-Za-z]+\s*→)/m,
+  /(?:^|\n)\s*(?:解析|答案)\s*[：:]/im,
+];
+
+function writingContaminationIndex(text) {
+  return WRITING_CONTAMINATION_PATTERNS.reduce((earliest, pattern) => {
+    const match = pattern.exec(text);
+    return match && match.index < earliest ? match.index : earliest;
+  }, Number.POSITIVE_INFINITY);
+}
+
+function truncateWritingBlock(block, markerIndex) {
+  if (block.type !== "paragraph" && block.type !== "richText") return null;
+  const runs = [];
+  let offset = 0;
+  for (const run of block.runs || []) {
+    const runLength = run.type === "text" ? run.text.length : 4;
+    if (markerIndex <= offset) break;
+    if (markerIndex < offset + runLength) {
+      if (run.type === "text") {
+        const prefix = run.text.slice(0, markerIndex - offset);
+        if (prefix) runs.push({ ...run, text: prefix });
+      }
+      break;
+    }
+    runs.push(run);
+    offset += runLength;
+  }
+  return runs.length > 0 ? { ...block, runs } : null;
+}
+
+function sanitizeWritingBlocks(blocks) {
+  const output = [];
+  for (const block of blocks || []) {
+    const markerIndex = writingContaminationIndex(blockText(block));
+    if (markerIndex === Number.POSITIVE_INFINITY) {
+      output.push(block);
+      continue;
+    }
+    const prefix = truncateWritingBlock(block, markerIndex);
+    if (prefix) output.push(prefix);
+    break;
+  }
+  return output.filter((block) => {
+    const text = normalizedText(blockText(block));
+    return !/^\d{4}年.*高考英语.*真题(?:及答案)?$/.test(text) && !/^\d{4}年.*参考答案$/.test(text);
+  });
+}
+
+function isWritingSupportGroup(group) {
+  return /内容要点|说明|one\s+possible\s+version|参考答案|答案|解析|听力|短文改错|单项|完形|阅读|语法|填空|单词|拼写|词汇|词语|完成句子|任务型读写/i.test(group.title || "");
+}
+
+function isNonWritingQuestion(question) {
+  const text = normalizedText((question.promptBlocks || []).map(blockText).join(" "));
+  return /(?:^|\s)填空(?:[。．:：]|\s|$)|在每个空格内填入|每空不超过\d+个单词|将该词完整地写在右边|单词拼写|完成句子|任务型读写|短文改错|改正所给短文中的错误|每行只有一个错误|多一个词|缺一个词|错一个词|在错的词下划一横线|单项填空|完形填空|阅读理解|听力原文|听力理解/i.test(text)
+    || /(?:^|\s)\d{1,3}\s*[.．、]\s*(?:√|去掉|删去|[A-Za-z]+\s*→)/i.test(text);
+}
+
+function writingQuestionFingerprint(question) {
+  const prompt = normalizedText((question.promptBlocks || []).map(blockText).join(" "));
+  return prompt ? sha256(Buffer.from(prompt)) : "";
+}
+
+function dedupeWritingGroups(set) {
+  const seen = new Set();
+  set.sections = set.sections.map((section) => {
+    const groups = [];
+    for (const group of section.groups || []) {
+      const questions = [];
+      for (const question of group.questions || []) {
+        const fingerprint = writingQuestionFingerprint(question);
+        if (fingerprint && seen.has(fingerprint)) continue;
+        if (fingerprint) seen.add(fingerprint);
+        questions.push(question);
+      }
+      if (questions.length > 0) groups.push({ ...group, questions });
+    }
+    return { ...section, groups };
+  });
 }
 
 function structuredBlockTexts(set) {
@@ -239,12 +394,23 @@ function makePublicSet(source) {
   const set = normalizeSeniorHighText(structuredClone(source));
   const availableAssets = new Map();
   const unavailable = [];
+  const unavailableAudioSourceIds = new Set();
   for (const sourceAsset of set.assetRefs || []) {
     const result = materializeAsset(sourceAsset);
     if (result.asset) availableAssets.set(result.asset.assetId, result.asset);
-    else unavailable.push({ assetId: sourceAsset.assetId, kind: sourceAsset.kind, reason: result.unavailableReason });
+    else {
+      unavailable.push({ assetId: sourceAsset.assetId, kind: sourceAsset.kind, reason: result.unavailableReason });
+      if (sourceAsset.kind === "audio") for (const sourceRef of sourceAsset.sourceRefs || []) unavailableAudioSourceIds.add(sourceRef.sourceDocumentId);
+    }
   }
   set.assetRefs = [...availableAssets.values()];
+  if (unavailableAudioSourceIds.size > 0) {
+    const keepSourceRef = (sourceRef) => !unavailableAudioSourceIds.has(sourceRef.sourceDocumentId);
+    set.sourceRefs = (set.sourceRefs || []).filter(keepSourceRef);
+    for (const section of set.sections || []) for (const group of section.groups || []) for (const question of group.questions || []) question.sourceRefs = (question.sourceRefs || []).filter(keepSourceRef);
+  }
+  removeErrorCorrectionContent(set);
+  removeUnavailableAudioGroups(set, new Set(unavailable.filter((asset) => asset.kind === "audio").map((asset) => asset.assetId)));
   set.sections = set.sections.filter((section) => {
     const isListeningSection = section.id.toLowerCase().includes("listening") || section.title.includes("听力");
     return !isListeningSection || listeningSectionHasAvailableAudio(section, availableAssets);
@@ -307,8 +473,182 @@ function libraryEntry(set) {
   };
 }
 
+const TYPE_PRACTICE_DEFINITIONS = [
+  { key: "listening", label: "听力" },
+  { key: "grammar-fill", label: "语法填空" },
+  { key: "single-choice", label: "单项填空" },
+  { key: "seven-choice", label: "七选五" },
+  { key: "cloze", label: "完形填空" },
+  { key: "reading", label: "阅读理解" },
+  { key: "writing", label: "书面表达／写作" },
+  { key: "continuation-writing", label: "读后续写" },
+  { key: "application-writing", label: "应用文写作" },
+  { key: "short-answer", label: "短文回答／阅读表达" },
+];
+
+function questionTypeKey(section, group, question, stimulusText = "") {
+  const context = `${section.title} ${group.title || ""}`;
+  const compactContext = context.replace(/\s+/g, "");
+  const listeningContext = `${context} ${stimulusText}`;
+  if (/听力|listening comprehension|short conversation|you will hear|listen carefully|听下面|听第\s*\d*\s*段材料/i.test(listeningContext)) return "listening";
+  if (/完形|完型|cloze/i.test(context)) return "cloze";
+  if (question.type === "shared_option_matching" || context.includes("七选五") || context.includes("六选五")) return "seven-choice";
+  if (question.type === "inline_fill" || context.includes("语法填空")) return "grammar-fill";
+  if (context.includes("应用文")) return "application-writing";
+  if (context.includes("读后续写")) return "continuation-writing";
+  if (question.type === "short_answer" || context.includes("短文回答") || context.includes("阅读表达")) return "short-answer";
+  if (/阅读理解|阅读/.test(compactContext) || question.type === "translation") return "reading";
+  if (/语音知识|发音知识|pronunciation|phonetics/i.test(context)) return null;
+  if (/单项填空|单项选择|单选填空|单选选择|语法和词汇知识|词汇知识|单词填空/.test(compactContext)) return "single-choice";
+  if (/^[A-E]$/i.test((group.title || "").trim()) && question.type === "single_choice") return "reading";
+  if (question.type === "essay") return "writing";
+  if (stimulusText.length >= 120) {
+    if (question.promptBlocks.length === 0 || (question.blanks || []).length > 0) return "cloze";
+    return "reading";
+  }
+  if (/第一节|第二节/.test(group.title || "") && question.options.length <= 3 && question.promptBlocks.length > 0) return "listening";
+  if (question.type === "single_choice" || question.type === "multi_choice") return "single-choice";
+  return null;
+}
+
+function namespaceBlocks(blocks, prefix) {
+  return (blocks || []).map((block) => {
+    const value = structuredClone(block);
+    if (value.type === "paragraph" || value.type === "richText") {
+      value.runs = value.runs.map((run) => run.type === "blank" ? { ...run, blankId: `${prefix}${run.blankId}` } : run);
+    } else if (value.type === "table") {
+      value.headers = namespaceBlocks(value.headers, prefix);
+      value.rows = value.rows.map((row) => ({ cells: row.cells.map((cell) => namespaceBlocks(cell, prefix)) }));
+    } else if (value.type === "dialogue") {
+      value.turns = value.turns.map((turn) => ({ ...turn, blocks: namespaceBlocks(turn.blocks, prefix) }));
+    }
+    return value;
+  });
+}
+
+function namespaceQuestion(question, prefix, displayNumber) {
+  const value = structuredClone(question);
+  value.id = `${prefix}${question.id}`;
+  value.displayNumber = displayNumber;
+  value.promptBlocks = namespaceBlocks(value.promptBlocks, prefix);
+  value.options = (value.options || []).map((option) => ({ ...option, blocks: namespaceBlocks(option.blocks, prefix) }));
+  value.explanationBlocks = namespaceBlocks(value.explanationBlocks, prefix);
+  value.blanks = (value.blanks || []).map((blank) => ({ ...blank, blankId: `${prefix}${blank.blankId}` }));
+  if (value.placement?.blankIds) value.placement.blankIds = value.placement.blankIds.map((blankId) => `${prefix}${blankId}`);
+  if (value.answerSpec?.perBlankAnswers) {
+    value.answerSpec.perBlankAnswers = Object.fromEntries(Object.entries(value.answerSpec.perBlankAnswers).map(([blankId, answers]) => [`${prefix}${blankId}`, answers]));
+  }
+  return value;
+}
+
+function uniqueById(values) {
+  const seen = new Set();
+  return values.filter((value) => {
+    if (seen.has(value.assetId || `${value.sourceDocumentId}|${value.relativePath}`)) return false;
+    seen.add(value.assetId || `${value.sourceDocumentId}|${value.relativePath}`);
+    return true;
+  });
+}
+
+function practicePaperTitle(paper) {
+  const title = (paper.title || "").trim();
+  if (title && !/^(?:第[一二三四五六七八九十]+部分|试卷题目|绝密)/.test(title)) return title;
+  return `${paper.year}年${paper.region || "高考"}高考英语真题`;
+}
+
+function buildTypePracticeSets(papers) {
+  const byKey = new Map();
+  for (const paper of papers) {
+    const listeningAudio = (paper.assetRefs || []).find((asset) => asset.kind === "audio");
+    let listeningPresentationAdded = false;
+    for (const section of paper.sections || []) {
+      for (const group of section.groups || []) {
+        const stimulusText = (group.stimulusBlocks || []).map(blockText).join(" ").replace(/\s+/g, " ").trim();
+        const hasArticle = stimulusText.length >= 120 && !/^例\s*[:：]/.test(stimulusText);
+        const groupedQuestions = new Map();
+        for (const question of group.questions || []) {
+          if (question.type === "instruction_only") continue;
+          const key = questionTypeKey(section, group, question, stimulusText);
+          if (!key) continue;
+          const hasPrompt = (question.promptBlocks || []).length > 0;
+          if (["cloze", "reading", "seven-choice", "grammar-fill"].includes(key) && !hasArticle) continue;
+          if (!hasPrompt && !hasArticle && key !== "listening") continue;
+          if (!groupedQuestions.has(key)) groupedQuestions.set(key, []);
+          groupedQuestions.get(key).push(question);
+        }
+        for (const [key, questions] of groupedQuestions) {
+          if (key === "listening" && !listeningAudio) continue;
+          if (["writing", "application-writing", "continuation-writing"].includes(key) && isWritingSupportGroup(group)) continue;
+          const definition = TYPE_PRACTICE_DEFINITIONS.find((item) => item.key === key);
+          if (!definition) continue;
+          if (!byKey.has(key)) {
+            byKey.set(key, {
+              schemaVersion: 2,
+              id: `practice-gaokao-${key}-2000-2019`,
+              kind: "practice",
+              title: `高考英语 · ${definition.label}（2000-2019真题）`,
+              year: "2000-2019",
+              region: "历年真题",
+              variant: "题型汇编",
+              instructions: [],
+              sections: [{ id: `section-${key}`, title: definition.label, instructions: [], layout: "flow", groups: [] }],
+              assetRefs: [],
+              sourceRefs: [],
+              quality: { structureStatus: "approved", structureConfidence: 0.9, issueCount: 0, issues: [] },
+              submissionMode: "whole-paper",
+            });
+          }
+          const target = byKey.get(key);
+          const prefix = `${key}-${paper.id}-${section.id}-${group.id}-`;
+          const writingKey = ["writing", "application-writing", "continuation-writing"].includes(key);
+          const selectedQuestions = writingKey ? questions.filter((question) => !isNonWritingQuestion(question)) : questions;
+          if (selectedQuestions.length === 0) continue;
+          const clonedGroup = structuredClone(group);
+          clonedGroup.id = `${prefix}group`;
+          const firstListeningGroup = key === "listening" && !listeningPresentationAdded;
+          clonedGroup.title = key === "listening" && !firstListeningGroup ? "" : practicePaperTitle(paper);
+          clonedGroup.instructions = namespaceBlocks(clonedGroup.instructions, prefix);
+          clonedGroup.stimulusBlocks = namespaceBlocks(clonedGroup.stimulusBlocks, prefix);
+          if (key === "listening" && listeningAudio) {
+            clonedGroup.stimulusBlocks = [
+              ...(firstListeningGroup ? [{ type: "audio", assetId: listeningAudio.assetId, label: "听力音频" }] : []),
+              ...clonedGroup.stimulusBlocks.filter((block) => block.type !== "audio"),
+            ];
+            listeningPresentationAdded = true;
+          }
+          clonedGroup.sharedOptions = (clonedGroup.sharedOptions || []).map((option) => ({ ...option, blocks: namespaceBlocks(option.blocks, prefix) }));
+          let displayNumber = target.sections[0].groups.reduce((sum, item) => sum + item.questions.length, 0) + 1;
+          clonedGroup.questions = selectedQuestions
+            .map((question) => {
+              const value = namespaceQuestion(question, prefix, displayNumber++);
+              if (["writing", "application-writing", "continuation-writing"].includes(key)) {
+                value.promptBlocks = sanitizeWritingBlocks(value.promptBlocks);
+                if (value.answerSpec?.referenceAnswer) {
+                  value.answerSpec.referenceAnswer = sanitizeWritingBlocks(value.answerSpec.referenceAnswer);
+                }
+              }
+              return value;
+            })
+            .filter((question) => question.promptBlocks.length > 0 || question.type !== "essay");
+          if (clonedGroup.questions.length === 0) continue;
+          target.sections[0].groups.push(clonedGroup);
+          target.assetRefs.push(...(paper.assetRefs || []));
+          target.sourceRefs.push(...(paper.sourceRefs || []));
+        }
+      }
+    }
+  }
+  return [...byKey.values()].map((set) => {
+    if (/^practice-gaokao-(?:writing|application-writing|continuation-writing)-/.test(set.id)) dedupeWritingGroups(set);
+    let displayNumber = 1;
+    for (const section of set.sections) for (const group of section.groups) for (const question of group.questions) question.displayNumber = displayNumber++;
+    set.assetRefs = uniqueById(set.assetRefs);
+    set.sourceRefs = uniqueById(set.sourceRefs);
+    return set;
+  });
+}
+
 function main() {
-  cleanAssetDirectory(ASSET_DIR, localAssetNames());
   const paperDirectory = path.join(PUBLIC_ROOT, "papers");
   const practiceDirectory = path.join(PUBLIC_ROOT, "practice");
   cleanJsonDirectory(paperDirectory);
@@ -316,8 +656,14 @@ function main() {
   const entries = [];
   const published = [];
   const rejected = [];
+  const legacyPapers = [];
+  const archivedPaperIds = [];
   for (const name of fs.readdirSync(GOLD_DIR).filter((value) => value.endsWith(".json")).sort()) {
     const source = JSON.parse(fs.readFileSync(path.join(GOLD_DIR, name), "utf8"));
+    if (typeof source.title === "string" && source.title.includes("【未上传】")) {
+      rejected.push({ id: source.id, errors: ["unpublished_placeholder"], structureStatus: source.quality?.structureStatus || "unknown" });
+      continue;
+    }
     const sourceValidation = validateSeniorHighV2Set(source);
     if (!sourceValidation.ok || source.quality.structureStatus !== "approved") {
       rejected.push({ id: source.id, errors: [...sourceValidation.errors, ...(source.quality.structureStatus === "approved" ? [] : source.quality.issues || [])], structureStatus: source.quality.structureStatus });
@@ -329,9 +675,14 @@ function main() {
       continue;
     }
     const { set, unavailable } = makePublicSet(source);
+    if (set.kind === "paper" && Number(set.year) < 2020) legacyPapers.push(set);
     const publicValidation = validateSeniorHighV2Set(set, { publicData: true });
     if (!publicValidation.ok) {
       rejected.push({ id: source.id, errors: publicValidation.errors, structureStatus: source.quality.structureStatus });
+      continue;
+    }
+    if (set.kind === "paper" && Number(set.year) < 2020) {
+      archivedPaperIds.push(set.id);
       continue;
     }
     const directory = set.kind === "paper" ? paperDirectory : practiceDirectory;
@@ -339,6 +690,18 @@ function main() {
     entries.push(libraryEntry(set));
     published.push({ id: set.id, kind: set.kind, questions: publicValidation.questionCount, unavailableAssets: unavailable });
   }
+  const typePracticeSets = buildTypePracticeSets(legacyPapers);
+  for (const set of typePracticeSets) {
+    const validation = validateSeniorHighV2Set(set);
+    if (!validation.ok) {
+      rejected.push({ id: set.id, errors: validation.errors, structureStatus: set.quality.structureStatus });
+      continue;
+    }
+    fs.writeFileSync(path.join(practiceDirectory, `${set.id}.json`), JSON.stringify(set));
+    entries.push(libraryEntry(set));
+    published.push({ id: set.id, kind: set.kind, questions: validation.questionCount, unavailableAssets: [] });
+  }
+  cleanAssetDirectory(ASSET_DIR, publishedAssetNames());
   entries.sort((a, b) => b.year.localeCompare(a.year, "zh-CN") || a.region.localeCompare(b.region, "zh-CN") || a.title.localeCompare(b.title, "zh-CN"));
   const index = { schemaVersion: 2, generatedAt: new Date().toISOString(), entries };
   fs.writeFileSync(path.join(PUBLIC_ROOT, "index.json"), JSON.stringify(index));
@@ -359,7 +722,10 @@ function main() {
       questions: published.reduce((sum, value) => sum + value.questions, 0),
       unavailableAssets: published.reduce((sum, value) => sum + value.unavailableAssets.length, 0),
       rejected: rejected.length,
+      archivedPapers: archivedPaperIds.length,
+      typePracticeSets: typePracticeSets.length,
     },
+    archivedPaperIds,
   };
   fs.writeFileSync(path.join(ROOT, "data", "senior-high", "v2", "publish-report.json"), JSON.stringify(report, null, 2));
   console.log(JSON.stringify(report.totals));

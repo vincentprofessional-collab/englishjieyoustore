@@ -40,6 +40,7 @@ const CLOZE_SOURCE_INSTRUCTION_PATTERN = /^\s*(?:阅读|通读|根据短文内�
 const CLOZE_SOURCE_NUMBERED_BLANK_PATTERN = /[_＿]{2,}\s*\d{1,3}\s*[_＿]{2,}|[_＿]{2,}|(?:^|[\s])\d{1,3}(?=\s*(?:[.,，。!?;；]|$))/g;
 const ENGLISH_WORD_PATTERN = /\b[A-Za-z][A-Za-z'’-]*\b/g;
 const ANSWER_REVIEW_FLAGS = new Set(["missing-answer", "answer-not-in-options", "bundled-answer", "analysis-scope-mismatch", "blank-position-unmapped"]);
+const QUESTION_NAV_PAGE_SIZE = 50;
 
 function cleanAnalysisText(text: string) {
   return text.replace(/^\s*(?:第\s*)?\d{1,3}\s*(?:题)?\s*[.．、:：]\s*/, "").trim();
@@ -83,16 +84,27 @@ function juniorHighAttemptStorageKey(paper: JuniorHighPaper, source?: JuniorHigh
 }
 
 function QuestionNavigation({ answers, writingAnswers, paper, current, onSelect, resultVisible = true }: { answers: Record<string, string>; writingAnswers: Record<string, string>; paper: JuniorHighPaper; current: number; onSelect: (index: number) => void; resultVisible?: boolean }) {
+  const [openRange, setOpenRange] = useState<number | null>(null);
   const visibleQuestions = renderableQuestionsForPaper(paper);
   const writingTasks = paper.writingTasks ?? [];
-  return <nav aria-label="试卷题号导航" className="junior-high-paper-nav">{visibleQuestions.map((question) => {
-    const answerState = resultVisible ? questionAnswerState(question, answers) : answers[question.id] ? "answered" : "";
-    const className = [
-      paper.questions[current]?.id === question.id ? "selected" : "",
-      answerState,
-    ].filter(Boolean).join(" ");
-    return <button className={className} key={question.id} onClick={() => onSelect(paper.questions.findIndex((item) => item.id === question.id))} type="button"><span>{questionDisplayNumber(question)}</span></button>;
-  })}{writingTasks.map((task) => <button className={writingAnswers[task.id]?.trim() ? "answered" : ""} key={task.id} onClick={() => document.getElementById(`junior-high-question-${task.id}`)?.scrollIntoView({ behavior: "smooth", block: "center" })} type="button"><span>{task.displayNumber ?? task.number}</span></button>)}</nav>;
+  const items = [
+    ...visibleQuestions.map((question) => ({ id: question.id, number: questionDisplayNumber(question), questionIndex: paper.questions.findIndex((item) => item.id === question.id), state: resultVisible ? questionAnswerState(question, answers) : answers[question.id] ? "answered" : "" })),
+    ...writingTasks.map((task) => ({ id: task.id, number: task.displayNumber ?? task.number, questionIndex: -1, state: writingAnswers[task.id]?.trim() ? "answered" : "" })),
+  ];
+  const itemClassName = (item: typeof items[number]) => [paper.questions[current]?.id === item.id ? "selected" : "", item.state].filter(Boolean).join(" ");
+  const selectItem = (item: typeof items[number]) => {
+    if (item.questionIndex >= 0) onSelect(item.questionIndex);
+    else document.getElementById(`junior-high-question-${item.id}`)?.scrollIntoView({ behavior: "smooth", block: "center" });
+  };
+  const renderItem = (item: typeof items[number]) => <button aria-current={paper.questions[current]?.id === item.id ? "step" : undefined} className={itemClassName(item)} key={item.id} onClick={() => selectItem(item)} type="button"><span>{item.number}</span></button>;
+  if (items.length < 100) return <nav aria-label="试卷题号导航" className="junior-high-paper-nav direct">{items.map(renderItem)}</nav>;
+  const ranges = [];
+  for (let start = 0; start < items.length; start += QUESTION_NAV_PAGE_SIZE) {
+    const end = Math.min(start + QUESTION_NAV_PAGE_SIZE, items.length);
+    ranges.push({ start, end, first: items[start].number, last: items[end - 1].number });
+  }
+  const expandedRange = openRange === null ? null : ranges[openRange];
+  return <nav aria-label="试卷题号导航" className="junior-high-paper-nav"><div className="junior-high-paper-nav-groups">{ranges.map((range, rangeIndex) => { const expanded = openRange === rangeIndex; return <button aria-expanded={expanded} className="junior-high-paper-nav-group-toggle" key={`${range.start}-${range.end}`} onClick={() => setOpenRange((currentRange) => currentRange === rangeIndex ? null : rangeIndex)} type="button">{range.first}-{range.last}</button>; })}</div>{expandedRange ? <div aria-label={`${expandedRange.first}-${expandedRange.last}题号`} className="junior-high-paper-nav-group-items">{items.slice(expandedRange.start, expandedRange.end).map(renderItem)}</div> : null}</nav>;
 }
 
 function questionDisplayNumber(question: PaperQuestion) {

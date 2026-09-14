@@ -8,13 +8,30 @@ import { SeniorHighKnowledge } from "./senior-high-knowledge";
 type Entry = "knowledge" | "practice" | "papers";
 
 const ENTRY_LABELS: Record<Entry, string> = { knowledge: "知识点", practice: "题型训练", papers: "历年真题" };
+const PRACTICE_FAMILY_ORDER = ["听力", "语法填空／语言运用", "单项填空", "完形填空", "七选五／阅读补全", "阅读理解", "写作／书面表达", "读后续写", "应用文写作"];
+const PRACTICE_AGGREGATE_IDS: Record<string, string> = {
+  "听力": "practice-gaokao-listening-2000-2019",
+  "语法填空／语言运用": "practice-gaokao-grammar-fill-2000-2019",
+  "单项填空": "practice-gaokao-single-choice-2000-2019",
+  "完形填空": "practice-gaokao-cloze-2000-2019",
+  "七选五／阅读补全": "practice-gaokao-seven-choice-2000-2019",
+  "阅读理解": "practice-gaokao-reading-2000-2019",
+  "读后续写": "practice-gaokao-continuation-writing-2000-2019",
+  "应用文写作": "practice-gaokao-application-writing-2000-2019",
+  "写作／书面表达": "practice-gaokao-writing-2000-2019",
+  "短文回答／阅读表达": "practice-gaokao-short-answer-2000-2019",
+};
 
 function practiceFamily(entry: SeniorHighLibraryEntry) {
+  if (entry.title.includes("听力")) return "听力";
+  if (entry.title.includes("单项填空")) return "单项填空";
   if (entry.title.includes("七选五")) return "七选五／阅读补全";
   if (entry.title.includes("完形")) return "完形填空";
   if (entry.title.includes("语法填空")) return "语法填空／语言运用";
+  if (entry.title.includes("短文回答") || entry.title.includes("阅读表达")) return "短文回答／阅读表达";
   if (entry.title.includes("应用文")) return "应用文写作";
   if (entry.title.includes("读后续写")) return "读后续写";
+  if (entry.title.includes("书面表达") || entry.title.includes("写作")) return "写作／书面表达";
   if (entry.title.includes("概要")) return "概要写作";
   if (entry.questionTypes.includes("oral_response")) return "广东等地区听说考试";
   return "综合题型";
@@ -30,7 +47,6 @@ function answerStatusLabel(entry: SeniorHighLibraryEntry) {
 export function SeniorHighLibrary() {
   const [index, setIndex] = useState<SeniorHighLibraryIndex | null>(null);
   const [entry, setEntry] = useState<Entry>("practice");
-  const [family, setFamily] = useState<string | null>(null);
   const [year, setYear] = useState("全部");
   const [region, setRegion] = useState("全部");
   const [answerStatus, setAnswerStatus] = useState("全部");
@@ -57,8 +73,14 @@ export function SeniorHighLibrary() {
 
   const papers = index?.entries.filter((item) => item.kind === "paper") || [];
   const practice = index?.entries.filter((item) => item.kind === "practice") || [];
-  const families = useMemo(() => [...new Set(practice.map(practiceFamily))], [practice]);
-  const selectedPractice = practice.filter((item) => practiceFamily(item) === family);
+  const aggregatePractice = useMemo(() => new Map(practice.map((item) => [item.id, item])), [practice]);
+  const families = useMemo(() => {
+    const available = new Set<string>(practice.map(practiceFamily));
+    const isAvailable = (name: string) => available.has(name) && aggregatePractice.has(PRACTICE_AGGREGATE_IDS[name]);
+    const ordered = PRACTICE_FAMILY_ORDER.filter(isAvailable);
+    const extras = Object.keys(PRACTICE_AGGREGATE_IDS).filter((name) => !PRACTICE_FAMILY_ORDER.includes(name) && isAvailable(name));
+    return [...ordered, ...extras];
+  }, [aggregatePractice, practice]);
   const years = [...new Set(papers.map((item) => item.year))].sort((a, b) => b.localeCompare(a));
   const regions = [...new Set(papers.map((item) => item.region))].sort((a, b) => a.localeCompare(b, "zh-CN"));
   const filteredPapers = papers.filter((item) => (year === "全部" || item.year === year) && (region === "全部" || item.region === region) && (answerStatus === "全部" || item.answerStatus === answerStatus));
@@ -69,9 +91,9 @@ export function SeniorHighLibrary() {
 
   return <section className="senior-high-page">
     <div className="senior-high-hero"><div><div className="senior-high-eyebrow">SENIOR HIGH · ENGLISH</div><h1>高考英语学习中心</h1><p>文章、题目、选项按原资料题组分开保存；作答前不显示答案，提交后再判题并显示来源中已有的解析。</p></div><div className="senior-high-stats"><strong>{papers.length}</strong><span>套真实试卷</span><strong>{practice.reduce((sum, item) => sum + item.questionCount, 0)}</strong><span>道专项题</span></div></div>
-    <nav className="senior-high-entry-tabs" aria-label="高考英语资料入口">{(Object.keys(ENTRY_LABELS) as Entry[]).map((key) => <button className={entry === key ? "selected" : ""} key={key} onClick={() => { setEntry(key); setFamily(null); }} type="button">{ENTRY_LABELS[key]}<small>{key === "knowledge" ? 349 : key === "practice" ? practice.length : papers.length}</small></button>)}</nav>
+    <nav className="senior-high-entry-tabs" aria-label="高考英语资料入口">{(Object.keys(ENTRY_LABELS) as Entry[]).map((key) => <button className={entry === key ? "selected" : ""} key={key} onClick={() => setEntry(key)} type="button">{ENTRY_LABELS[key]}<small>{key === "knowledge" ? 349 : key === "practice" ? practice.length : papers.length}</small></button>)}</nav>
     {entry === "knowledge" ? <SeniorHighKnowledge /> : null}
-    {entry === "practice" ? <div className="senior-high-section">{family === null ? <><h2>题型训练</h2><p className="senior-high-muted">先选择题型，再选择真实来源题组。完形、七选五和语法填空的文章只显示一次，正文空格与题号一一对应。</p><div className="senior-high-practice-family-grid">{families.map((name) => { const sets = practice.filter((item) => practiceFamily(item) === name); return <button className="senior-high-practice-family-card" key={name} onClick={() => setFamily(name)} type="button"><strong>{name}</strong><span>{sets.reduce((sum, item) => sum + item.questionCount, 0)} 题 · {sets.length} 组</span><small>已完成 {sets.filter((item) => completed.has(item.id)).length} 组 · 未完成 {sets.filter((item) => !completed.has(item.id)).length} 组</small></button>; })}</div></> : <><button className="senior-high-back" onClick={() => setFamily(null)} type="button">← 返回题型训练</button><h2>{family}</h2><p className="senior-high-muted">进入后专项题号从 1 连续排列，同时保留原资料题号；提交后有答案的自动判分，无答案的不误判。</p><div className="senior-high-practice-source-grid">{selectedPractice.map((item) => <Link className="senior-high-library-card" href={item.href} key={item.id}><strong>{item.title}</strong><span>{item.questionCount} 题 · {completed.has(item.id) ? "已完成" : "未完成"}</span><small>{item.year} · {item.region} · {answerStatusLabel(item)}</small></Link>)}</div></>}</div> : null}
+    {entry === "practice" ? <div className="senior-high-section"><h2>题型训练</h2><p className="senior-high-muted">按题型进入统一做题页，相关真题已整合到同一页；完形、七选五和语法填空的文章只显示一次，听力题组仅保留有音频的来源且音频置于题目前。</p><div className="senior-high-practice-family-grid">{families.map((name) => { const aggregate = aggregatePractice.get(PRACTICE_AGGREGATE_IDS[name]); if (!aggregate) return null; return <Link className="senior-high-practice-family-card" href={aggregate.href} key={name}><strong>{name}</strong><span>{aggregate.questionCount} 题 · 1 组汇编</span><small>{completed.has(aggregate.id) ? "已完成" : "开始作答"} · 答案与解析按题目显示</small></Link>; })}</div></div> : null}
     {entry === "papers" ? <div className="senior-high-section"><h2>历年真题</h2><p className="senior-high-muted">完整卷保留原卷分区、篇章和题号；空白卷与解析卷在导入阶段合并为同一套试卷。</p><div className="senior-high-v2-filters"><label>年份<select onChange={(event) => setYear(event.target.value)} value={year}><option>全部</option>{years.map((value) => <option key={value}>{value}</option>)}</select></label><label>地区／卷型<select onChange={(event) => setRegion(event.target.value)} value={region}><option>全部</option>{regions.map((value) => <option key={value}>{value}</option>)}</select></label><label>答案状态<select onChange={(event) => setAnswerStatus(event.target.value)} value={answerStatus}><option value="全部">全部</option><option value="answered">答案完整</option><option value="partial">部分有答案</option><option value="none">无标准答案</option><option value="conflict">答案待复核</option></select></label></div>{groupedPapers.map(([paperYear, entries]) => <div className="senior-high-group" key={paperYear}><h3>{paperYear} 年</h3><div className="senior-high-paper-grid">{entries.map((item) => <Link className="senior-high-paper-card" href={item.href} key={item.id}><strong>{item.region} · {item.variant}</strong><span>{item.title}</span><small>{item.questionCount} 题 · {answerStatusLabel(item)} · {completed.has(item.id) ? "已完成" : "开始作答"}</small></Link>)}</div></div>)}</div> : null}
   </section>;
 }
