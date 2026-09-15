@@ -185,7 +185,7 @@ const FAVORITE_QUESTIONS_STORAGE_KEY = "ielts-platform.favoriteQuestions";
 const FAVORITE_WORDS_STORAGE_KEY = "ielts-platform.favoriteWords";
 const LISTENING_REVIEW_ANSWERS_STORAGE_PREFIX = "ielts-platform.listeningReviewAnswers";
 const LISTENING_ATTEMPT_STORAGE_PREFIX = "ielts-platform.listeningAttempt";
-const LISTENING_REVIEW_DEFAULT_LEFT_PERCENT = 58;
+const LISTENING_REVIEW_DEFAULT_LEFT_PERCENT = 100 / 3;
 const LISTENING_REVIEW_MIN_LEFT_PX = 320;
 const LISTENING_REVIEW_MIN_RIGHT_PX = 360;
 const LISTENING_REVIEW_HANDLE_PX = 14;
@@ -3240,7 +3240,7 @@ export function ListeningPractice({
 
     event.preventDefault();
     setReviewLeftPercent((current) =>
-      Math.min(70, Math.max(40, current + (event.key === "ArrowLeft" ? -2 : 2))),
+      Math.min(70, Math.max(25, current + (event.key === "ArrowLeft" ? -2 : 2))),
     );
   }
 
@@ -5254,7 +5254,7 @@ export function ListeningPractice({
             aria-label="拖动调整原文和题目宽度"
             aria-orientation="vertical"
             aria-valuemax={70}
-            aria-valuemin={40}
+            aria-valuemin={25}
             aria-valuenow={Math.round(reviewLeftPercent)}
             className="listening-review-split-handle"
             onKeyDown={handleReviewSplitKeyDown}
