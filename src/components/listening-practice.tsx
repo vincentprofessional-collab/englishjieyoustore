@@ -4584,6 +4584,15 @@ export function ListeningPractice({
   }, [isFullscreen]);
 
   useEffect(() => {
+    const appContent = pageRef.current?.closest(".app-content");
+    appContent?.classList.add("listening-exam-content");
+
+    return () => {
+      appContent?.classList.remove("listening-exam-content");
+    };
+  }, []);
+
+  useEffect(() => {
     if (!selectedText || !selectionActionPosition) return;
 
     scheduleHideSelectionAction();

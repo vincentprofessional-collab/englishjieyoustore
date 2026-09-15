@@ -9187,7 +9187,7 @@ h1 {
   width: 100%;
 }
 
-.app-content:has(.listening-exam-page) {
+.app-content.listening-exam-content {
   max-width: none;
 }
 
