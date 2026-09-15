@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { GuideBoard } from "@/components/guide-board";
 import {
   getManagedPageItemClassName,
   type ManagedPageContent,
@@ -56,8 +55,6 @@ export function HomeStyleLab({ content }: { content: ManagedPageContent }) {
           </p>
         </div>
       </section>
-
-      <GuideBoard compact hideHeading hidePostChrome postLimit={3} />
 
       {items.length ? (
         <section className="managed-page-grid" aria-label="学习模块">

@@ -43,7 +43,7 @@ function answerStatusLabel(entry: SeniorHighLibraryEntry) {
   return "暂无标准答案";
 }
 
-export function SeniorHighLibrary() {
+export function SeniorHighLibrary({ initialEntry }: { initialEntry?: string }) {
   const [index, setIndex] = useState<SeniorHighLibraryIndex | null>(null);
   const [entry, setEntry] = useState<Entry>("practice");
   const [year, setYear] = useState("全部");
@@ -53,7 +53,12 @@ export function SeniorHighLibrary() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    if (new URLSearchParams(window.location.search).get("entry") === "papers") setEntry("papers");
+    if (initialEntry === "knowledge" || initialEntry === "practice" || initialEntry === "papers") {
+      setEntry(initialEntry);
+    }
+  }, [initialEntry]);
+
+  useEffect(() => {
     fetch("/senior-high/index.json").then((response) => {
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       return response.json() as Promise<SeniorHighLibraryIndex>;

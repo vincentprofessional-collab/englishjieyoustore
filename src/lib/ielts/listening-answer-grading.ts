@@ -1,4 +1,5 @@
 import runtimeAnswerGroupRegistry from "./generated-listening-answer-groups.json" with { type: "json" };
+import jiufenRuntimeAnswerGroupRegistry from "./jiufen-listening-answer-groups.json" with { type: "json" };
 import { normalizeListeningChoiceSelection } from "./listening-choice-selection.mjs";
 import { fingerprintListeningQuestions } from "./listening-runtime-fingerprint.mjs";
 
@@ -131,9 +132,13 @@ export function parseListeningRuntimeRegistry(value: unknown) {
   ) as Record<string, ListeningRuntimeRegistryMetadata>;
 }
 
-const RUNTIME_ANSWER_GROUPS = parseListeningRuntimeRegistry(runtimeAnswerGroupRegistry);
+const RUNTIME_ANSWER_GROUPS = {
+  ...parseListeningRuntimeRegistry(runtimeAnswerGroupRegistry),
+  ...parseListeningRuntimeRegistry(jiufenRuntimeAnswerGroupRegistry),
+};
 const RUNTIME_REGISTRY_SCHEMA_SUPPORTED =
-  (runtimeAnswerGroupRegistry as { schemaVersion?: unknown }).schemaVersion === 2;
+  (runtimeAnswerGroupRegistry as { schemaVersion?: unknown }).schemaVersion === 2 &&
+  (jiufenRuntimeAnswerGroupRegistry as { schemaVersion?: unknown }).schemaVersion === 2;
 
 export function getListeningRuntimeGroupMetadata(
   bookCode: string,

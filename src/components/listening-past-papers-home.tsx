@@ -30,14 +30,6 @@ export function ListeningPastPapersHome({
 
   return (
     <section className="stack bbc-home-page listening-past-papers-home">
-      <div className="page-heading bbc-hero">
-        <div className="eyebrow">IELTS LISTENING · PAST PAPERS</div>
-        <h1>IELTS LISTENING</h1>
-        <p className="lead">
-          历年真题中英文听力原文。页面只保留音频与文本，按照 BBC 文章的阅读、播放与显示逻辑呈现。
-        </p>
-      </div>
-
       <div className="bbc-year-panel">
         <div className="bbc-player-top">
           <strong>历年真题 · 中英文本</strong>

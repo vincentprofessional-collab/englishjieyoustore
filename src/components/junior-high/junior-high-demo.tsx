@@ -127,7 +127,7 @@ function paperForSourceCard(paper: JuniorHighPaper, card: SourcePracticeCard) {
   return createJuniorHighSourcePracticePaper(paper, card) as JuniorHighPaper;
 }
 
-export function JuniorHighDemo() {
+export function JuniorHighDemo({ initialMode }: { initialMode?: string }) {
   const [mode, setMode] = useState<Mode>("practice-select");
   const [practiceCategory, setPracticeCategory] = useState<JuniorHighPracticeCategory>("topic");
   const [practicePaper, setPracticePaper] = useState<JuniorHighPaper | null>(null);
@@ -143,6 +143,26 @@ export function JuniorHighDemo() {
   const [sourceAttempt, setSourceAttempt] = useState<StoredPracticeAttempt>({ answers: {}, writingAnswers: {} });
   const [sourceSelectionFilter, setSourceSelectionFilter] = useState<"all" | "completed" | "incomplete">("all");
   const [practiceProgress, setPracticeProgress] = useState<Record<string, PracticeProgress>>({});
+
+  useEffect(() => {
+    if (initialMode === "topic" || initialMode === "type") {
+      setPracticeCategory(initialMode);
+      setPracticePaper(null);
+      setSourcePaper(null);
+      setMockPaper(null);
+      setPracticeSourceItem(null);
+      setPracticeError("");
+      setSourceSelectionFilter("all");
+      setMode("practice-select");
+    } else if (initialMode === "mock-select") {
+      setPracticePaper(null);
+      setSourcePaper(null);
+      setMockPaper(null);
+      setPracticeSourceItem(null);
+      setPracticeError("");
+      setMode("mock-select");
+    }
+  }, [initialMode]);
 
   useEffect(() => {
     void (async () => {

@@ -36,11 +36,13 @@ export function ListeningPracticeLibrary({
   bookScope = "all",
   showBookLabels = true,
   showBookMarker = false,
+  showDraftStatus = false,
 }: {
   sections: ListeningSectionSummary[];
-  bookScope?: "all" | "jiufen";
+  bookScope?: "all" | "cambridge" | "jiufen";
   showBookLabels?: boolean;
   showBookMarker?: boolean;
+  showDraftStatus?: boolean;
 }) {
   const [selectedSection, setSelectedSection] = useState<ListeningSectionSummary | null>(null);
   const sectionsByBook = useMemo(() => {
@@ -55,9 +57,11 @@ export function ListeningPracticeLibrary({
 
   const visibleBooks = useMemo(
     () =>
-      bookScope === "jiufen"
-        ? LISTENING_BOOKS.filter((book) => isJiufenBook(book.code))
-        : LISTENING_BOOKS,
+      bookScope === "all"
+        ? LISTENING_BOOKS
+        : LISTENING_BOOKS.filter((book) =>
+            bookScope === "jiufen" ? isJiufenBook(book.code) : !isJiufenBook(book.code),
+          ),
     [bookScope],
   );
 
@@ -149,11 +153,15 @@ export function ListeningPracticeLibrary({
                               onClick={() => setSelectedSection(partSection)}
                               type="button"
                             >
-                              Part {partNo}
+                              <b>Part {partNo}</b>
+                              {showDraftStatus && partSection.contentStatus !== "source_verified" ? (
+                                <small>待编辑</small>
+                              ) : null}
                             </button>
                           ) : (
                             <span className="listening-part-box locked" key={partNo}>
-                              Part {partNo}
+                              <b>Part {partNo}</b>
+                              {isJiufenBook(book.code) ? <small>待编辑</small> : null}
                             </span>
                           );
                         })}

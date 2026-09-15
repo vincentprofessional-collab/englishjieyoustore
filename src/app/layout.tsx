@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { GlobalStudyInteractions } from "@/components/global-study-interactions";
+import { FrontendPageAdmin } from "@/components/frontend-page-admin";
 import { GlobalVocabularySearch } from "@/components/global-vocabulary-search";
-import { IeltsSectionShell } from "@/components/ielts-section-shell";
 import { SiteAnalyticsTracker } from "@/components/site-analytics-tracker";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteNav } from "@/components/site-nav";
 import { getCachedPublishedSiteChromeConfig } from "@/lib/content/site-chrome-server";
 import { getLegacySessionMigrationScript } from "@/lib/supabase/legacy-session-migration";
 import "./globals.css";
-import "./ielts-section-shell.css";
 
 export const metadata: Metadata = {
   title: "英文解忧杂货铺",
@@ -35,14 +34,18 @@ export default async function RootLayout({
       </head>
       <body>
         <main className="shell">
-          <SiteNav config={siteChromeConfig} />
-          <Suspense fallback={null}>
-            <GlobalVocabularySearch />
-          </Suspense>
-          <SiteAnalyticsTracker />
-          <GlobalStudyInteractions />
-          <IeltsSectionShell>{children}</IeltsSectionShell>
-          <SiteFooter config={siteChromeConfig} />
+          <aside className="app-sidebar">
+            <SiteNav config={siteChromeConfig} />
+            <SiteFooter config={siteChromeConfig} />
+          </aside>
+          <div className="app-content">
+            <Suspense fallback={null}>
+              <GlobalVocabularySearch />
+            </Suspense>
+            <SiteAnalyticsTracker />
+            <GlobalStudyInteractions />
+            <FrontendPageAdmin>{children}</FrontendPageAdmin>
+          </div>
         </main>
       </body>
     </html>

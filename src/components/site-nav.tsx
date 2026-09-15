@@ -3,6 +3,7 @@
 import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import type {
   SiteChromeConfig,
@@ -16,54 +17,63 @@ type SiteNavStyle = CSSProperties & {
   "--nav-tab-size": string;
 };
 
-function renderNavChild(child: SiteChromeNavItem, onNavigate: () => void) {
-  const enabledChildren = child.children.filter((nestedChild) => nestedChild.enabled);
+function getNavPath(href: string) {
+  return href.split(/[?#]/, 1)[0];
+}
 
-  if (child.id === "ielts") {
-    return (
-      <Link
-        href="/listening/practice"
-        key={child.id}
-        onClick={onNavigate}
-      >
-        <strong>{child.label}</strong>
-      </Link>
-    );
-  }
+function isNavItemActive(item: SiteChromeNavItem, pathname: string): boolean {
+  const itemPath = getNavPath(item.href);
+  const isDirectMatch = itemPath === "/"
+    ? pathname === "/"
+    : Boolean(itemPath && (pathname === itemPath || pathname.startsWith(`${itemPath}/`)));
 
-  if (enabledChildren.length) {
-    return (
-      <div className="nav-dropdown-branch" key={child.id}>
-        <button className="nav-dropdown-branch-trigger" type="button">
-          <strong>{child.label}</strong>
-          <em aria-hidden="true">›</em>
-        </button>
-        <div className="nav-submenu">
-          {enabledChildren.map((nestedChild) => renderNavChild(nestedChild, onNavigate))}
-        </div>
-      </div>
-    );
-  }
+  return isDirectMatch || item.children.some((child) => isNavItemActive(child, pathname));
+}
 
-  if (!child.href) {
-    return (
-      <div className="nav-dropdown-static" key={child.id}>
-        <strong>{child.label}</strong>
-      </div>
-    );
-  }
+function renderNavItem(item: SiteChromeNavItem, pathname: string, depth = 0) {
+  const enabledChildren = item.children.filter((child) => child.enabled);
+  const isActive = isNavItemActive(item, pathname);
+  const itemClassName = [
+    "nav-sidebar-item",
+    `nav-sidebar-level-${Math.min(depth, 2)}`,
+    enabledChildren.length ? "has-children" : "",
+    isActive ? "active" : "",
+  ].filter(Boolean).join(" ");
+  const label = (
+    <>
+      <span className="nav-sidebar-marker" aria-hidden="true" />
+      <strong>{item.label}</strong>
+      {item.note ? <small>{item.note}</small> : null}
+    </>
+  );
 
   return (
-    <Link href={child.href} key={child.id} onClick={onNavigate}>
-      <strong>{child.label}</strong>
-    </Link>
+    <div className={itemClassName} key={item.id}>
+      {item.href ? (
+        <Link
+          aria-current={isActive && !enabledChildren.length ? "page" : undefined}
+          className="nav-sidebar-link"
+          href={item.href}
+        >
+          {label}
+        </Link>
+      ) : (
+        <div className="nav-sidebar-link nav-sidebar-heading">{label}</div>
+      )}
+
+      {enabledChildren.length ? (
+        <div className="nav-sidebar-children">
+          {enabledChildren.map((child) => renderNavItem(child, pathname, depth + 1))}
+        </div>
+      ) : null}
+    </div>
   );
 }
 
 export function SiteNav({ config: initialConfig }: { config: SiteChromeConfig }) {
   const [config, setConfig] = useState(initialConfig);
-  const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [canAccessAdmin, setCanAccessAdmin] = useState(false);
+  const pathname = usePathname();
   const navStyle: SiteNavStyle = {
     "--brand-mark-size": `${config.brand.markFontSize}px`,
     "--brand-subtitle-size": `${config.brand.subtitleFontSize}px`,
@@ -134,13 +144,10 @@ export function SiteNav({ config: initialConfig }: { config: SiteChromeConfig })
       unsubscribe = () => subscription.unsubscribe();
     }
 
-    const adminCheckTimer = window.setTimeout(() => {
-      void setupAdminAccess();
-    }, 5_000);
+    void setupAdminAccess();
 
     return () => {
       isMounted = false;
-      window.clearTimeout(adminCheckTimer);
       unsubscribe();
     };
   }, []);
@@ -180,53 +187,7 @@ export function SiteNav({ config: initialConfig }: { config: SiteChromeConfig })
       </div>
 
       <nav className="nav-main" aria-label="主导航">
-        {navItems.map((item) => {
-          const isOpen = openMenu === item.id;
-          const enabledChildren = item.children.filter((child) => child.enabled);
-          const hasDropdown = Boolean(enabledChildren.length);
-
-          if (!hasDropdown && item.href) {
-            return (
-              <div className="nav-menu" key={item.id}>
-                <Link className="nav-tab nav-link-tab" href={item.href}>
-                  {item.label}
-                </Link>
-              </div>
-            );
-          }
-
-          return (
-            <div
-              className={`nav-menu ${item.dropdownAlign === "left" ? "open-left" : ""}`}
-              key={item.id}
-              onMouseEnter={() => setOpenMenu(item.id)}
-              onMouseLeave={() => setOpenMenu(null)}
-            >
-              <button
-                aria-expanded={isOpen}
-                className={`nav-tab ${isOpen ? "active" : ""}`}
-                type="button"
-                onKeyDown={(event) => {
-                  if (event.key === "Escape") {
-                    setOpenMenu(null);
-                  }
-                }}
-                onClick={() => setOpenMenu(isOpen ? null : item.id)}
-              >
-                {item.label}
-                <span className="nav-caret">{isOpen ? "▲" : "▼"}</span>
-              </button>
-              <div className={`nav-dropdown ${isOpen ? "open" : ""}`}>
-                {item.note ? <div className="nav-dropdown-note">{item.note}</div> : null}
-                <div className="nav-dropdown-grid">
-                  {enabledChildren.map((child) =>
-                    renderNavChild(child, () => setOpenMenu(null)),
-                  )}
-                </div>
-              </div>
-            </div>
-          );
-        })}
+        {navItems.map((item) => renderNavItem(item, pathname))}
       </nav>
     </header>
   );

@@ -2,6 +2,7 @@ import type { ChangeEvent, CSSProperties } from "react";
 
 export type RuntimeListeningQuestion = {
   answers: string[];
+  explanation?: string;
   id: string;
   promptText: string | null;
   questionNo: number;
@@ -97,6 +98,7 @@ type RuntimeListeningQuestionGroupsProps = {
   questionImageRefs?: string[];
   questionImageUrls: string[];
   questions: RuntimeListeningQuestion[];
+  sectionLabel?: "PART" | "SECTION";
   sectionNo: number;
   submitted: boolean;
 };
@@ -148,10 +150,13 @@ function cleanQuestionPrompt(
       .trim();
   const instructions = new Set(group.instructions.map(normalizeInstruction));
   const title = normalizeInstruction(group.title ?? "");
+  const groupTitle = group.title?.trim();
   return parsePrompt(question.promptText).stem
     .split(/\r?\n/)
     .map((line) =>
-      line
+      (groupTitle && line.toLocaleLowerCase().startsWith(`${groupTitle.toLocaleLowerCase()}:`)
+        ? line.slice(groupTitle.length + 1).trim()
+        : line)
         .replace(/^_+\s*/, "")
         .split(/(?<=[.!?])\s+/)
         .map((fragment) => fragment.trim())
@@ -352,6 +357,9 @@ function AnswerControl({
         />
       )}
       {answerSuffix ? <span className="paper-runtime-answer-affix">{answerSuffix}</span> : null}
+      {submitted && question.explanation ? (
+        <span className="listening-answer-explanation">解析：{question.explanation}</span>
+      ) : null}
     </span>
   );
 }
@@ -915,6 +923,7 @@ export function RuntimeListeningQuestionGroups({
   questionImageRefs = [],
   questionImageUrls,
   questions,
+  sectionLabel = "SECTION",
   sectionNo,
   submitted,
 }: RuntimeListeningQuestionGroupsProps) {
@@ -923,7 +932,7 @@ export function RuntimeListeningQuestionGroups({
   return (
     <div className="paper-sheet runtime-paper-sheet">
       <div className="paper-section-heading">
-        <h2>SECTION {sectionNo}</h2>
+        <h2>{sectionLabel} {sectionNo}</h2>
         <h2>Questions {(sectionNo - 1) * 10 + 1}-{sectionNo * 10}</h2>
       </div>
 

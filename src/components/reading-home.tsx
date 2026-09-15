@@ -9,13 +9,6 @@ export function ReadingHome({ content }: { content: ManagedPageContent }) {
 
   return (
     <section className="stack writing-home-page reading-home-page">
-      <div className="writing-hero-panel reading-hero-panel ielts-module-hero">
-        <div className="writing-hero-copy">
-          <h1>{content.title}</h1>
-          {content.summary ? <p>{content.summary}</p> : null}
-        </div>
-      </div>
-
       <div className="writing-mode-panel reading-mode-panel">
         <div className="writing-mode-grid">
           {items.map((item, index) => (

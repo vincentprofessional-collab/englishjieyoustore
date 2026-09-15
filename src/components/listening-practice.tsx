@@ -243,11 +243,17 @@ function formatBookCode(bookCode: string) {
     return `CI${cambridgeMatch[1]}`;
   }
 
+  const jiufenMatch = bookCode.match(/^jiufen-(\d+)$/);
+  if (jiufenMatch) {
+    return `9FDR${jiufenMatch[1]}`;
+  }
+
   return bookCode.toUpperCase();
 }
 
 function formatListeningSectionTitle(section: ListeningSectionDetail) {
-  return `${formatBookCode(section.bookCode)}-Test${section.testNo}-Section${section.sectionNo}`;
+  const partLabel = section.bookCode.startsWith("jiufen-") ? "Part" : "Section";
+  return `${formatBookCode(section.bookCode)}-Test${section.testNo}-${partLabel}${section.sectionNo}`;
 }
 
 function getListeningCountdownSeconds(section: ListeningSectionDetail) {
@@ -2724,6 +2730,7 @@ function CambridgeFourPaperSheet({
   onAnswerChange,
   questionImageUrls,
   questions,
+  sectionLabel = "SECTION",
   sectionNo,
   submitted,
   testNo,
@@ -2733,6 +2740,7 @@ function CambridgeFourPaperSheet({
   onAnswerChange: (questionId: string, value: string) => void;
   questionImageUrls: string[];
   questions: ListeningQuestion[];
+  sectionLabel?: "PART" | "SECTION";
   sectionNo: number;
   submitted: boolean;
   testNo: number;
@@ -2778,7 +2786,7 @@ function CambridgeFourPaperSheet({
       {sectionNo === 1 ? <div className="paper-listening-badge">LISTENING</div> : null}
 
       <div className="paper-section-heading">
-        <h2>SECTION {sectionNo}</h2>
+        <h2>{sectionLabel} {sectionNo}</h2>
         <h2>
           Questions {(sectionNo - 1) * 10 + 1}-{sectionNo * 10}
         </h2>
@@ -2935,23 +2943,28 @@ export function ListeningPractice({
   useEffect(() => {
     if (pageRef.current) restoreInlineHighlights(pageRef.current, highlightStorageKey);
   }, [highlightStorageKey]);
+  const hasAdminAuthoredQuestions = section.questions.some((question) =>
+    question.id.startsWith("admin-question-"),
+  );
   const shouldUseTestOnePaperLayout =
+    !hasAdminAuthoredQuestions &&
     section.bookCode === "cambridge-4" &&
     section.testNo === 1 &&
     section.sectionNo >= 1 &&
     section.sectionNo <= 4;
   const structuredPaperKey = `${section.bookCode}:${section.testNo}`;
   const hasLegacyStructuredPaperLayout =
+    !hasAdminAuthoredQuestions &&
     !!structuredPaperGroups[structuredPaperKey] &&
     section.sectionNo >= 1 &&
     section.sectionNo <= 4;
   const hasSectionSpecificPaperLayout =
-    shouldUseTestOnePaperLayout ||
+    !hasAdminAuthoredQuestions && (shouldUseTestOnePaperLayout ||
     (section.bookCode === "cambridge-4" &&
       section.testNo === 2 &&
       Boolean(CAMBRIDGE_FOUR_TEST_TWO_CUSTOM_SHEETS[section.sectionNo])) ||
     (section.bookCode === "cambridge-6" &&
-      Boolean(CAMBRIDGE_SIX_CUSTOM_SHEETS[`${section.testNo}:${section.sectionNo}`]));
+      Boolean(CAMBRIDGE_SIX_CUSTOM_SHEETS[`${section.testNo}:${section.sectionNo}`])));
   const runtimeGroupMetadata = getListeningRuntimeGroupMetadata(
     section.bookCode,
     section.testNo,
@@ -2987,6 +3000,9 @@ export function ListeningPractice({
     shouldUseStructuredPaperLayout ||
     shouldUseRuntimePaperLayout;
   const practiceTitle = formatListeningSectionTitle(section);
+  const listeningLibraryHref = section.bookCode.startsWith("jiufen-")
+    ? "/listening/jiufen"
+    : "/listening";
   const questionImageUrls =
     section.questionImageUrls.length > 0
       ? section.questionImageUrls
@@ -4801,7 +4817,7 @@ export function ListeningPractice({
           <Link
             aria-label="返回听力书目"
             className="listening-back-button"
-            href={`/listening/books/${section.bookCode}`}
+            href={listeningLibraryHref}
           >
             ← 返回
           </Link>
@@ -4981,7 +4997,7 @@ export function ListeningPractice({
         <Link
           aria-label="返回听力书目"
           className="listening-back-button"
-          href={`/listening/books/${section.bookCode}`}
+          href={listeningLibraryHref}
         >
           ← 返回
         </Link>
@@ -5334,6 +5350,7 @@ export function ListeningPractice({
                 onAnswerChange={updateAnswer}
                 questionImageUrls={questionImageUrls}
                 questions={section.questions}
+                sectionLabel={section.bookCode.startsWith("jiufen-") ? "PART" : "SECTION"}
                 sectionNo={section.sectionNo}
                 submitted={submitted}
                 testNo={section.testNo}
@@ -5446,6 +5463,9 @@ export function ListeningPractice({
                         placeholder="输入你的答案"
                       />
                     )}
+                    {submitted && question.explanation ? (
+                      <p className="listening-answer-explanation">解析：{question.explanation}</p>
+                    ) : null}
                   </article>
                 );
               })

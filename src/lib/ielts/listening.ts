@@ -1,5 +1,11 @@
 import { supabase } from "@/lib/supabase/client";
 import { getPublicStorageUrl } from "@/lib/supabase/storage";
+import {
+  applyListeningDetailOverride,
+  applyListeningSummaryOverride,
+  loadListeningContentOverrides,
+} from "@/lib/ielts/listening-content-overrides";
+import jiufenContentBundle from "../../../data/jiufen/listening-content.json";
 
 type MaybeArray<T> = T | T[] | null;
 
@@ -73,6 +79,8 @@ export type ListeningSectionSummary = {
   fullAudioUrl: string | null;
   questionImageUrl: string | null;
   isPublished: boolean;
+  isHidden?: boolean;
+  contentStatus?: "source_verified" | "source_consensus" | "ocr_candidate" | "review_required";
 };
 
 export type ListeningQuestion = {
@@ -82,6 +90,8 @@ export type ListeningQuestion = {
   promptText: string | null;
   points: number;
   answers: string[];
+  explanation?: string;
+  isHidden?: boolean;
 };
 
 export type ListeningTranscriptSentence = {
@@ -93,6 +103,7 @@ export type ListeningTranscriptSentence = {
   audioUrl: string | null;
   startMs: number | null;
   endMs: number | null;
+  isHidden?: boolean;
 };
 
 export type ListeningPartLink = {
@@ -143,13 +154,104 @@ function mapSection(row: SectionRow): ListeningSectionSummary {
   };
 }
 
+type JiufenBook = (typeof jiufenContentBundle.books)[number];
+type JiufenTest = JiufenBook["tests"][number];
+type JiufenPart = JiufenTest["parts"][number];
+
+function findJiufenPart(sectionId: string) {
+  for (const book of jiufenContentBundle.books) {
+    for (const test of book.tests) {
+      const part = test.parts.find((item) => item.id === sectionId);
+      if (part) return { book, test, part };
+    }
+  }
+  return null;
+}
+
+function getJiufenQuestionImageUrl(path: string | null | undefined) {
+  if (!path) return null;
+  if (path.startsWith("/")) return path;
+  return getPublicStorageUrl("images", path);
+}
+
+function mapJiufenSummary(
+  book: JiufenBook,
+  test: JiufenTest,
+  part: JiufenPart,
+): ListeningSectionSummary {
+  return {
+    id: part.id,
+    title: part.title,
+    bookCode: book.code,
+    bookTitle: book.title,
+    testNo: test.testNo,
+    testTitle: test.title,
+    sectionNo: part.sectionNo,
+    questionCount: part.questionCount,
+    timeLimitSeconds: part.timeLimitSeconds,
+    fullAudioUrl: getPublicStorageUrl("audio", part.fullAudioPath),
+    questionImageUrl: getJiufenQuestionImageUrl(part.questionImagePaths[0]),
+    isPublished: part.contentStatus === "source_verified",
+    contentStatus: part.contentStatus as ListeningSectionSummary["contentStatus"],
+  };
+}
+
+function getJiufenSummaries() {
+  return jiufenContentBundle.books.flatMap((book) =>
+    book.tests.flatMap((test) =>
+      test.parts.map((part) => mapJiufenSummary(book, test, part)),
+    ),
+  );
+}
+
+function mapJiufenDetail(
+  book: JiufenBook,
+  test: JiufenTest,
+  part: JiufenPart,
+): ListeningSectionDetail {
+  return {
+    ...mapJiufenSummary(book, test, part),
+    partLinks: test.parts.map((item) => ({
+      id: item.id,
+      sectionNo: item.sectionNo,
+      title: item.title,
+      questionCount: item.questionCount,
+    })),
+    questionImageUrls: part.questionImagePaths
+      .map((path) => getJiufenQuestionImageUrl(path))
+      .filter((url): url is string => Boolean(url)),
+    questions: part.questions.map((question) => ({
+      id: question.id,
+      questionNo: question.questionNo,
+      questionType: question.questionType,
+      promptText: question.promptText,
+      points: question.points,
+      answers: question.answers,
+    })),
+    transcriptSentences: part.transcriptSentences.map((sentence) => ({
+      id: `${part.id}:sentence:${sentence.sentenceNo}`,
+      sentenceNo: sentence.sentenceNo,
+      speaker: sentence.speaker,
+      englishText: sentence.englishText,
+      chineseText: sentence.chineseText,
+      audioUrl: getPublicStorageUrl("audio", sentence.audioPath),
+      startMs: sentence.startMs,
+      endMs: sentence.endMs,
+    })),
+  };
+}
+
 async function getQuestionImageUrls(questionImagePath: string | null) {
   return splitQuestionImagePaths(questionImagePath)
     .map((path) => getPublicStorageUrl("images", path))
     .filter((url): url is string => Boolean(url));
 }
 
-export async function getListeningSections() {
+export async function getListeningSections({ includeDrafts = false } = {}) {
+  const overrides = await loadListeningContentOverrides();
+  const jiufenSections = getJiufenSummaries()
+    .map((section) => applyListeningSummaryOverride(section, overrides))
+    .filter((section) => includeDrafts || (section.isPublished && !section.isHidden));
   const { data, error } = await supabase
     .from("test_sections")
     .select(
@@ -181,11 +283,16 @@ export async function getListeningSections() {
     .order("section_no", { ascending: true });
 
   if (error) {
-    return { sections: [] as ListeningSectionSummary[], error: error.message };
+    return {
+      sections: jiufenSections,
+      error: jiufenSections.length > 0 ? null : error.message,
+    };
   }
 
   const sections = ((data ?? []) as SectionRow[])
     .map(mapSection)
+    .map((section) => applyListeningSummaryOverride(section, overrides))
+    .filter((section) => includeDrafts || (section.isPublished && !section.isHidden))
     .sort((a, b) => {
       const bookSort = a.bookCode.localeCompare(b.bookCode);
       if (bookSort !== 0) return bookSort;
@@ -193,10 +300,30 @@ export async function getListeningSections() {
       return a.sectionNo - b.sectionNo;
     });
 
-  return { sections, error: null };
+  return { sections: [...sections, ...jiufenSections], error: null };
 }
 
-export async function getListeningSection(sectionId: string) {
+export async function getListeningSection(
+  sectionId: string,
+  { includeDrafts = false } = {},
+) {
+  const jiufenSection = findJiufenPart(sectionId);
+  if (jiufenSection) {
+    const overrides = await loadListeningContentOverrides();
+    const mappedSection = applyListeningDetailOverride(
+      mapJiufenDetail(jiufenSection.book, jiufenSection.test, jiufenSection.part),
+      overrides,
+      includeDrafts,
+    );
+    if (!includeDrafts && (!mappedSection.isPublished || mappedSection.isHidden)) {
+      return { section: null, error: null };
+    }
+    return {
+      section: mappedSection,
+      error: null,
+    };
+  }
+
   const { data: section, error: sectionError } = await supabase
     .from("test_sections")
     .select(
@@ -340,5 +467,15 @@ export async function getListeningSection(sectionId: string) {
     })),
   };
 
-  return { section: mappedSection, error: null };
+  const overrides = await loadListeningContentOverrides();
+  const overriddenSection = applyListeningDetailOverride(
+    mappedSection,
+    overrides,
+    includeDrafts,
+  );
+  if (!includeDrafts && (!overriddenSection.isPublished || overriddenSection.isHidden)) {
+    return { section: null, error: null };
+  }
+
+  return { section: overriddenSection, error: null };
 }

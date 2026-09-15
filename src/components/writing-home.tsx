@@ -30,13 +30,6 @@ export function WritingHome({ content }: { content: ManagedPageContent }) {
 
   return (
     <section className="stack writing-home-page">
-      <div className="writing-hero-panel ielts-module-hero">
-        <div className="writing-hero-copy">
-          <h1>{content.title}</h1>
-          {content.summary ? <p>{content.summary}</p> : null}
-        </div>
-      </div>
-
       <div className="writing-mode-panel">
         <div className="writing-mode-grid">
           {primaryItems.map((item, index) => (

@@ -21,12 +21,6 @@ export default async function SpeakingPage() {
 
   return (
     <section className="stack ielts-module-page speaking-home-page">
-      <div className="writing-hero-panel ielts-module-hero speaking-hero-panel">
-        <div className="writing-hero-copy">
-          <h1>{content.title}</h1>
-        </div>
-      </div>
-
       <section className="speaking-index-panel" aria-labelledby="speaking-index-title">
         <header className="speaking-section-heading">
           <h2 className="speaking-section-total" id="speaking-index-title">

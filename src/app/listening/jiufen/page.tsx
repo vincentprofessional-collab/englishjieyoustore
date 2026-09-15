@@ -1,10 +1,12 @@
 import { ListeningPracticeLibrary } from "@/components/listening-practice-library";
 import { getListeningSections } from "@/lib/ielts/listening";
+import { isCurrentUserAdmin } from "@/lib/supabase/is-current-user-admin";
 
 export const dynamic = "force-dynamic";
 
 export default async function JiufenListeningPage() {
-  const { sections, error } = await getListeningSections();
+  const isAdmin = await isCurrentUserAdmin();
+  const { sections, error } = await getListeningSections({ includeDrafts: isAdmin });
   const jiufenSections = sections.filter((section) => section.bookCode.startsWith("jiufen-"));
 
   return (
@@ -16,6 +18,7 @@ export default async function JiufenListeningPage() {
           sections={jiufenSections}
           showBookLabels={false}
           showBookMarker
+          showDraftStatus={isAdmin}
         />
       </div>
     </section>

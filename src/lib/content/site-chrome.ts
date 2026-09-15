@@ -2,7 +2,7 @@ import { supabase } from "@/lib/supabase/client";
 import { ensureJuniorHighExamMenu, ensureSatExamMenu, ensureSeniorHighExamMenu } from "@/lib/content/site-chrome-nav";
 
 export const SITE_CHROME_SLUG = "site-chrome";
-export const SITE_CHROME_VERSION = 1;
+export const SITE_CHROME_VERSION = 2;
 
 export type SiteChromeNavItem = {
   children: SiteChromeNavItem[];
@@ -129,8 +129,8 @@ export const DEFAULT_SITE_CHROME_CONFIG: SiteChromeConfig = {
     ],
   },
   nav: {
-    adminHref: "/admin",
-    adminLabel: "内容后台",
+    adminHref: "/admin?view=chrome",
+    adminLabel: "编辑导航",
     fontSize: 16,
     items: [
       {
@@ -177,7 +177,7 @@ export const DEFAULT_SITE_CHROME_CONFIG: SiteChromeConfig = {
         href: "",
         id: "memorize",
         label: "背单词",
-        note: "暂时未开发",
+        note: "",
       },
       {
         children: [
@@ -212,7 +212,35 @@ export const DEFAULT_SITE_CHROME_CONFIG: SiteChromeConfig = {
           {
             children: [
               {
-                children: [],
+                children: [
+                  {
+                    children: [],
+                    dropdownAlign: "right",
+                    enabled: true,
+                    href: "/listening",
+                    id: "ielts-listening-cambridge",
+                    label: "剑桥雅思",
+                    note: "",
+                  },
+                  {
+                    children: [],
+                    dropdownAlign: "right",
+                    enabled: true,
+                    href: "/listening/jiufen",
+                    id: "ielts-listening-jiufen",
+                    label: "九分达人",
+                    note: "",
+                  },
+                  {
+                    children: [],
+                    dropdownAlign: "right",
+                    enabled: true,
+                    href: "/listening/past-papers",
+                    id: "ielts-listening-past-papers",
+                    label: "历年真题",
+                    note: "",
+                  },
+                ],
                 dropdownAlign: "right",
                 enabled: true,
                 href: "/listening",
@@ -221,7 +249,35 @@ export const DEFAULT_SITE_CHROME_CONFIG: SiteChromeConfig = {
                 note: "",
               },
               {
-                children: [],
+                children: [
+                  {
+                    children: [],
+                    dropdownAlign: "right",
+                    enabled: true,
+                    href: "/speaking/part-1",
+                    id: "ielts-speaking-part-1",
+                    label: "Part 1",
+                    note: "",
+                  },
+                  {
+                    children: [],
+                    dropdownAlign: "right",
+                    enabled: true,
+                    href: "/speaking/part-2",
+                    id: "ielts-speaking-part-2",
+                    label: "Part 2",
+                    note: "",
+                  },
+                  {
+                    children: [],
+                    dropdownAlign: "right",
+                    enabled: true,
+                    href: "/speaking/part-3",
+                    id: "ielts-speaking-part-3",
+                    label: "Part 3",
+                    note: "",
+                  },
+                ],
                 dropdownAlign: "right",
                 enabled: true,
                 href: "/speaking",
@@ -239,7 +295,35 @@ export const DEFAULT_SITE_CHROME_CONFIG: SiteChromeConfig = {
                 note: "",
               },
               {
-                children: [],
+                children: [
+                  {
+                    children: [],
+                    dropdownAlign: "right",
+                    enabled: true,
+                    href: "/writing/task2",
+                    id: "ielts-writing-task-2",
+                    label: "大作文",
+                    note: "",
+                  },
+                  {
+                    children: [],
+                    dropdownAlign: "right",
+                    enabled: true,
+                    href: "/writing/practice?task=task1",
+                    id: "ielts-writing-task-1",
+                    label: "小作文",
+                    note: "",
+                  },
+                  {
+                    children: [],
+                    dropdownAlign: "right",
+                    enabled: true,
+                    href: "/writing/task1-vocabulary",
+                    id: "ielts-writing-training",
+                    label: "专项训练",
+                    note: "",
+                  },
+                ],
                 dropdownAlign: "right",
                 enabled: true,
                 href: "/writing",
@@ -256,7 +340,35 @@ export const DEFAULT_SITE_CHROME_CONFIG: SiteChromeConfig = {
             note: "",
           },
           {
-            children: [],
+            children: [
+              {
+                children: [],
+                dropdownAlign: "right",
+                enabled: true,
+                href: "/junior-high?mode=topic",
+                id: "junior-high-topic",
+                label: "专项学习",
+                note: "",
+              },
+              {
+                children: [],
+                dropdownAlign: "right",
+                enabled: true,
+                href: "/junior-high?mode=type",
+                id: "junior-high-type",
+                label: "题型训练",
+                note: "",
+              },
+              {
+                children: [],
+                dropdownAlign: "right",
+                enabled: true,
+                href: "/junior-high?mode=mock-select",
+                id: "junior-high-mock",
+                label: "模考真题",
+                note: "",
+              },
+            ],
             dropdownAlign: "right",
             enabled: true,
             href: "/junior-high",
@@ -265,7 +377,35 @@ export const DEFAULT_SITE_CHROME_CONFIG: SiteChromeConfig = {
             note: "",
           },
           {
-            children: [],
+            children: [
+              {
+                children: [],
+                dropdownAlign: "right",
+                enabled: true,
+                href: "/senior-high?entry=knowledge",
+                id: "senior-high-knowledge",
+                label: "专项学习",
+                note: "",
+              },
+              {
+                children: [],
+                dropdownAlign: "right",
+                enabled: true,
+                href: "/senior-high?entry=practice",
+                id: "senior-high-practice",
+                label: "题型训练",
+                note: "",
+              },
+              {
+                children: [],
+                dropdownAlign: "right",
+                enabled: true,
+                href: "/senior-high?entry=papers",
+                id: "senior-high-papers",
+                label: "模考真题",
+                note: "",
+              },
+            ],
             dropdownAlign: "right",
             enabled: true,
             href: "/senior-high",
@@ -279,7 +419,7 @@ export const DEFAULT_SITE_CHROME_CONFIG: SiteChromeConfig = {
             enabled: true,
             href: "/sat",
             id: "sat-reading-writing",
-            label: "SAT Reading and Writing",
+            label: "SAT",
             note: "",
           },
         ],
@@ -315,7 +455,7 @@ export const DEFAULT_SITE_CHROME_CONFIG: SiteChromeConfig = {
         enabled: true,
         href: "",
         id: "skill-training",
-        label: "英语专项技能训练",
+        label: "专项训练",
         note: "",
       },
       {
@@ -455,6 +595,48 @@ function mergeLinks(value: unknown, fallback: SiteChromeLink[]): SiteChromeLink[
     .filter((item) => item.id && item.label);
 }
 
+function findDefaultNavItem(id: string, items: SiteChromeNavItem[]): SiteChromeNavItem | undefined {
+  for (const item of items) {
+    if (item.id === id) return item;
+    const child = findDefaultNavItem(id, item.children);
+    if (child) return child;
+  }
+}
+
+function normalizeVisibleNavItems(
+  items: SiteChromeNavItem[],
+  migrateLegacyConfig: boolean,
+): SiteChromeNavItem[] {
+  return items
+    .filter((item) => !migrateLegacyConfig || (
+      item.id !== "other-exams" && item.label !== "其他考试正在开发中"
+    ))
+    .map((item) => {
+      const fallbackItem = findDefaultNavItem(item.id, DEFAULT_SITE_CHROME_CONFIG.nav.items);
+      const fixedChildren = migrateLegacyConfig && [
+        "ielts",
+        "ielts-listening",
+        "ielts-speaking",
+        "ielts-writing",
+        "junior-high-english",
+        "senior-high-english",
+      ].includes(item.id)
+        ? fallbackItem?.children ?? item.children
+        : item.children;
+
+      return {
+        ...item,
+        children: normalizeVisibleNavItems(fixedChildren, migrateLegacyConfig),
+        label: migrateLegacyConfig && item.id === "skill-training"
+          ? "专项训练"
+          : migrateLegacyConfig && item.id === "sat-reading-writing"
+            ? "SAT"
+            : item.label,
+        note: migrateLegacyConfig && item.id === "memorize" ? "" : item.note,
+      };
+    });
+}
+
 export function mergeSiteChromeConfig(value: unknown): SiteChromeConfig {
   const fallback = DEFAULT_SITE_CHROME_CONFIG;
   const source = value && typeof value === "object" ? (value as Record<string, unknown>) : {};
@@ -470,6 +652,8 @@ export function mergeSiteChromeConfig(value: unknown): SiteChromeConfig {
   const promo = footer.promo && typeof footer.promo === "object"
     ? (footer.promo as Record<string, unknown>)
     : {};
+  const sourceVersion = typeof source.version === "number" ? source.version : 1;
+  const migrateLegacyConfig = sourceVersion < SITE_CHROME_VERSION;
   const mergedNavItems = mergeNavItems(nav.items, fallback.nav.items);
   const examsFallback = fallback.nav.items.find((item) => item.id === "exams");
   const juniorHighFallback = fallback.nav.items
@@ -491,8 +675,8 @@ export function mergeSiteChromeConfig(value: unknown): SiteChromeConfig {
     ? ensureSatExamMenu(navWithSeniorHigh, examsFallback, satFallback)
     : navWithSeniorHigh;
 
-  const normalizedNavItems = navItems.map((item) => {
-    if (item.id === "dictionary") {
+  const normalizedNavItems = normalizeVisibleNavItems(navItems, migrateLegacyConfig).map((item) => {
+    if (migrateLegacyConfig && item.id === "dictionary") {
       return {
         ...item,
         href: item.href === "/" || !item.href ? "/vocabulary" : item.href,
@@ -500,7 +684,7 @@ export function mergeSiteChromeConfig(value: unknown): SiteChromeConfig {
       };
     }
 
-    if (item.id === "guide") {
+    if (migrateLegacyConfig && item.id === "guide") {
       return {
         ...item,
         children: [],
@@ -509,7 +693,7 @@ export function mergeSiteChromeConfig(value: unknown): SiteChromeConfig {
       };
     }
 
-    if (item.id === "home") {
+    if (migrateLegacyConfig && item.id === "home") {
       return {
         ...item,
         children: [],
@@ -520,7 +704,7 @@ export function mergeSiteChromeConfig(value: unknown): SiteChromeConfig {
 
     return item;
   });
-  const visibleNavItems = [
+  const visibleNavItems = migrateLegacyConfig ? [
     {
       children: [],
       dropdownAlign: "right" as const,
@@ -533,7 +717,7 @@ export function mergeSiteChromeConfig(value: unknown): SiteChromeConfig {
     ...normalizedNavItems.filter(
       (item) => item.id !== "home" && item.label !== "公告栏" && item.label !== "使用说明",
     ),
-  ];
+  ] : normalizedNavItems;
   const visibleFooterLinks = mergeLinks(footer.links, fallback.footer.links).filter(
     (item) => item.id !== "contact" && item.label !== "公告栏",
   );
@@ -608,8 +792,12 @@ export function mergeSiteChromeConfig(value: unknown): SiteChromeConfig {
       socials: mergeLinks(footer.socials, fallback.footer.socials),
     },
     nav: {
-      adminHref: readString(nav.adminHref, fallback.nav.adminHref),
-      adminLabel: readString(nav.adminLabel, fallback.nav.adminLabel),
+      adminHref: migrateLegacyConfig
+        ? fallback.nav.adminHref
+        : readString(nav.adminHref, fallback.nav.adminHref),
+      adminLabel: migrateLegacyConfig
+        ? fallback.nav.adminLabel
+        : readString(nav.adminLabel, fallback.nav.adminLabel),
       fontSize: readNumber(nav.fontSize, fallback.nav.fontSize, 12, 28),
       items: visibleNavItems,
       loginHref: readString(nav.loginHref, fallback.nav.loginHref),
