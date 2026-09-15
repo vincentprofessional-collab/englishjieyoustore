@@ -90,3 +90,30 @@ export function ensureSatExamMenu<T extends SiteChromeNavNode>(
       : item,
   );
 }
+
+export function ensureCet4ExamMenu<T extends SiteChromeNavNode>(
+  items: T[],
+  exams: T,
+  cet4: T,
+): T[] {
+  const existingExams = items.find((item) => item.id === exams.id);
+
+  if (!existingExams) {
+    return [
+      ...items,
+      {
+        ...exams,
+        children: ensureJuniorHighExamLink(exams.children, cet4),
+      },
+    ];
+  }
+
+  return items.map((item) =>
+    item.id === exams.id
+      ? {
+          ...item,
+          children: ensureJuniorHighExamLink(item.children, cet4),
+        }
+      : item,
+  );
+}
