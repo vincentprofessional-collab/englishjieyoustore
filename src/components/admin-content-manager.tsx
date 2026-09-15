@@ -3,12 +3,9 @@
 import Link from "next/link";
 import { FormEvent, useEffect, useState } from "react";
 import { AdminAnalyticsPanel } from "@/components/admin-analytics-panel";
-import { AdminBbcArticleEditor } from "@/components/admin-bbc-article-editor";
 import { AdminHomeEditor } from "@/components/admin-home-editor";
 import { AdminEntitlementManager } from "@/components/admin-entitlement-manager";
 import { AdminSiteChromeEditor } from "@/components/admin-site-chrome-editor";
-import { AdminJuniorHighQuestionEditor } from "@/components/admin-junior-high-question-editor";
-import { AdminSeniorHighQuestionEditor } from "@/components/admin-senior-high-question-editor";
 import { GuidePostAdmin } from "@/components/guide-post-admin";
 import { GuideCommentsAdmin } from "@/components/guide-comments-admin";
 import { supabase } from "@/lib/supabase/client";
@@ -19,10 +16,7 @@ type AdminView =
   | "access"
   | "home"
   | "chrome"
-  | "guide"
-  | "bbc-vocabulary"
-  | "junior-high-questions"
-  | "senior-high-questions";
+  | "guide";
 
 export function AdminContentManager() {
   const [activeView, setActiveView] = useState<AdminView>("analytics");
@@ -229,27 +223,6 @@ export function AdminContentManager() {
         >
           首页发帖
         </button>
-        <button
-          className={activeView === "bbc-vocabulary" ? "active" : ""}
-          type="button"
-          onClick={() => setActiveView("bbc-vocabulary")}
-        >
-          BBC内容
-        </button>
-        <button
-          className={activeView === "junior-high-questions" ? "active" : ""}
-          type="button"
-          onClick={() => setActiveView("junior-high-questions")}
-        >
-          中考题目
-        </button>
-        <button
-          className={activeView === "senior-high-questions" ? "active" : ""}
-          type="button"
-          onClick={() => setActiveView("senior-high-questions")}
-        >
-          高考题目
-        </button>
       </div>
 
       {activeView === "analytics" ? <AdminAnalyticsPanel /> : null}
@@ -271,17 +244,6 @@ export function AdminContentManager() {
         </>
       ) : null}
 
-      {activeView === "bbc-vocabulary" && adminUserId ? (
-        <AdminBbcArticleEditor adminUserId={adminUserId} />
-      ) : null}
-
-      {activeView === "junior-high-questions" && adminUserId ? (
-        <AdminJuniorHighQuestionEditor adminUserId={adminUserId} />
-      ) : null}
-
-      {activeView === "senior-high-questions" && adminUserId ? (
-        <AdminSeniorHighQuestionEditor adminUserId={adminUserId} />
-      ) : null}
     </section>
   );
 }
