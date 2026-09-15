@@ -97,13 +97,16 @@ export function ensureCet4ExamMenu<T extends SiteChromeNavNode>(
   cet4: T,
 ): T[] {
   const ensureCet4Link = (children: SiteChromeNavNode[]): SiteChromeNavNode[] => {
-    const existingCet4 = children.find((item) => item.id === cet4.id);
+    const cleanedChildren = children.filter(
+      (item) => item.id !== "other-exams" && item.label !== "其他考试正在开发中",
+    );
+    const existingCet4 = cleanedChildren.find((item) => item.id === cet4.id);
 
     if (!existingCet4) {
-      return [...children, cet4];
+      return [...cleanedChildren, cet4];
     }
 
-    return children.map((item) =>
+    return cleanedChildren.map((item) =>
       item.id === cet4.id ? { ...item, ...cet4, children: item.children } : item,
     );
   };
