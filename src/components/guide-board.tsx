@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { FormEvent, useEffect, useState, type CSSProperties } from "react";
 import {
-  DEFAULT_GUIDE_POSTS,
   GuideContentBlock,
   GuidePost,
   GuidePostRow,
@@ -17,7 +16,6 @@ type GuideBoardProps = {
   compact?: boolean;
   hideHeading?: boolean;
   hidePostChrome?: boolean;
-  postLimit?: number;
   title?: string;
 };
 
@@ -490,10 +488,9 @@ export function GuideBoard({
   eyebrow = "GUIDE · 使用说明",
   hideHeading = false,
   hidePostChrome = false,
-  postLimit,
   title = "使用说明",
 }: GuideBoardProps) {
-  const [posts, setPosts] = useState<GuidePost[]>(DEFAULT_GUIDE_POSTS);
+  const [posts, setPosts] = useState<GuidePost[]>([]);
 
   useEffect(() => {
     let active = true;
@@ -527,8 +524,6 @@ export function GuideBoard({
     };
   }, []);
 
-  const visiblePosts = postLimit ? posts.slice(0, postLimit) : posts;
-
   return (
     <section
       className={`stack guide-board-page ${compact ? "guide-board-compact" : ""} ${hidePostChrome ? "guide-board-home" : ""}`}
@@ -543,7 +538,7 @@ export function GuideBoard({
       ) : null}
 
       <div className="guide-post-list">
-        {visiblePosts.map((post) => (
+        {posts.map((post) => (
           <GuidePostCard hidePostChrome={hidePostChrome} key={post.id} post={post} />
         ))}
       </div>
