@@ -9,6 +9,7 @@ import {
   type Task2ModelEssay,
   type Task2VocabularyItem,
 } from "@/data/writing/task2-model-essays";
+import { WRITING_QUESTIONS, getWritingCategories } from "@/lib/ielts/writing";
 
 type Task2FoldProps = {
   children: ReactNode;
@@ -163,6 +164,7 @@ function Task2StageTitle({ index, title }: { index: string; title: string }) {
 }
 
 export function WritingTask2Library() {
+  const writingCategories = getWritingCategories("task2");
   const groupedEssays = useMemo(
     () =>
       TASK2_TYPE_ORDER.map((type) => ({
@@ -178,6 +180,70 @@ export function WritingTask2Library() {
         <Link className="back-link" href="/writing">
           ← 返回雅思写作
         </Link>
+      </div>
+
+      <div className="writing-mode-panel task2-top-category-panel">
+        <div className="writing-practice-tree writing-practice-index-tree" id="writing-task2-category-library">
+          <div className="writing-task-grid">
+            <section className="writing-task-column">
+              <div className="writing-task-card">
+                <strong><span>TASK 2</span>议论文写作</strong>
+              </div>
+
+              <div className="writing-category-list">
+                {writingCategories.map((category, categoryIndex) => {
+                  const questions = WRITING_QUESTIONS.filter(
+                    (question) => question.task === "task2" && question.category === category.id,
+                  );
+
+                  return (
+                    <details className="writing-category-item" key={category.id}>
+                      <summary className="writing-category-banner">
+                        <span className="writing-category-number">
+                          {String(categoryIndex + 1).padStart(2, "0")}
+                        </span>
+                        {category.id === "advantages" ? (
+                          <span className="writing-category-copy advantages-row">
+                            <strong>
+                              <span>ADVANTAGES</span>
+                              <span>DISADVANTAGES</span>
+                            </strong>
+                            <small>{category.label}</small>
+                          </span>
+                        ) : (
+                          <span className="writing-category-copy">
+                            <strong>{category.labelEnglish.toUpperCase()}</strong>
+                            <small>{category.label}</small>
+                          </span>
+                        )}
+                        <span className="writing-category-count">{questions.length}</span>
+                        <i>
+                          <span className="disclosure-label-closed">▸</span>
+                          <span className="disclosure-label-open">▾</span>
+                        </i>
+                      </summary>
+
+                      <div className="writing-question-list">
+                        {questions.map((question) => (
+                          <Link
+                            className="writing-question-card"
+                            href={`/writing/practice/${question.id}`}
+                            key={question.id}
+                          >
+                            <span>{question.book} · {question.test}</span>
+                            <strong>{question.title}</strong>
+                            <small>{question.shortTitle}</small>
+                            <i>START →</i>
+                          </Link>
+                        ))}
+                      </div>
+                    </details>
+                  );
+                })}
+              </div>
+            </section>
+          </div>
+        </div>
       </div>
 
       {groupedEssays.map((group) => {

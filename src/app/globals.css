@@ -21805,7 +21805,25 @@ audio.guide-editor-asset-preview {
     height: auto;
     max-height: none;
     min-height: 0;
+    min-width: 0;
     overflow: visible;
+    width: 100%;
+  }
+
+  .exam-workspace.submitted.review .question-list,
+  .exam-workspace.submitted.review .paper-sheet {
+    box-sizing: border-box;
+    max-width: none;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .exam-workspace.submitted.review .question-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .exam-workspace.submitted.review .paper-sheet {
+    --paper-block-max: 100%;
   }
 
   .listening-exam-page.fullscreen.submitted .exam-workspace.submitted.review .practice-main {
