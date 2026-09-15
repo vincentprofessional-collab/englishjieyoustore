@@ -96,6 +96,17 @@ export function ensureCet4ExamMenu<T extends SiteChromeNavNode>(
   exams: T,
   cet4: T,
 ): T[] {
+  const ensureCet4Link = (children: SiteChromeNavNode[]): SiteChromeNavNode[] => {
+    const existingCet4 = children.find((item) => item.id === cet4.id);
+
+    if (!existingCet4) {
+      return [...children, cet4];
+    }
+
+    return children.map((item) =>
+      item.id === cet4.id ? { ...item, ...cet4, children: item.children } : item,
+    );
+  };
   const existingExams = items.find((item) => item.id === exams.id);
 
   if (!existingExams) {
@@ -103,7 +114,7 @@ export function ensureCet4ExamMenu<T extends SiteChromeNavNode>(
       ...items,
       {
         ...exams,
-        children: ensureJuniorHighExamLink(exams.children, cet4),
+        children: ensureCet4Link(exams.children),
       },
     ];
   }
@@ -112,7 +123,7 @@ export function ensureCet4ExamMenu<T extends SiteChromeNavNode>(
     item.id === exams.id
       ? {
           ...item,
-          children: ensureJuniorHighExamLink(item.children, cet4),
+          children: ensureCet4Link(item.children),
         }
       : item,
   );
