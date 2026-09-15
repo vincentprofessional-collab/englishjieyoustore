@@ -1,0 +1,2199 @@
+{
+  "schemaVersion": 2,
+  "id": "mock-ffd3b36ac394",
+  "kind": "paper",
+  "title": "2013年12月四级模拟试卷",
+  "year": "2013",
+  "region": "全国",
+  "variant": "",
+  "submissionMode": "whole-paper",
+  "instructions": [
+    {
+      "type": "notice",
+      "tone": "info",
+      "text": "按原卷分区作答。提交整卷后显示可用答案与原资料参考内容。"
+    }
+  ],
+  "sections": [
+    {
+      "id": "mock-ffd3b36ac394-part-1-writing",
+      "title": "Writing 写作",
+      "layout": "flow",
+      "instructions": [
+        {
+          "type": "audio",
+          "assetId": "mock-ffd3b36ac394-audio",
+          "label": "听力音频"
+        }
+      ],
+      "groups": [
+        {
+          "id": "mock-ffd3b36ac394-part-1-writing-group",
+          "title": "写作题",
+          "presentation": "writing",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "mock-ffd3b36ac394-part-1-q-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "essay",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "relativePath": "2013年12月四级模拟试卷",
+                  "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mock-ffd3b36ac394-part-2",
+      "title": "Part II Listening Comprehension          (30 minutes)",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "mock-ffd3b36ac394-part-2-section-1-group-1",
+          "title": "题目",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "mock-ffd3b36ac394-part-2-section-1-group-1-q-1-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "[A] Dr. Smith's waiting room isn't tidy. [B] Dr. Smith enjoys reading magazines. [C] Dr. Smith has left a good impression on her. [D] Dr. Smith may not be a good choice."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "relativePath": "2013年12月四级模拟试卷",
+                  "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "mock-ffd3b36ac394-part-2-section-1-group-1-q-2-2",
+              "displayNumber": 2,
+              "sourceQuestionNumber": 2,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "[A] The man thinks travelling by air is quite safe. [B] The woman never travels by plane. [C] Both speakers feel nervous when flying. [D] The speakers feel sad about the serious loss of life."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "relativePath": "2013年12月四级模拟试卷",
+                  "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "mock-ffd3b36ac394-part-2-section-1-group-1-q-3-3",
+              "displayNumber": 3,
+              "sourceQuestionNumber": 3,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "[A] At the information desk. [B] At a hotel reception. [C] In a restaurant. [D] In a barbershop."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "relativePath": "2013年12月四级模拟试卷",
+                  "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "mock-ffd3b36ac394-part-2-section-1-group-1-q-4-4",
+              "displayNumber": 4,
+              "sourceQuestionNumber": 4,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "[A] Mary has a keen eye for style. [B] Nancy regrets buying the dress. [C] Nancy and Mary went shopping together in Rome. [D] Nancy and Mary like to follow the latest fashion."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "relativePath": "2013年12月四级模拟试卷",
+                  "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "mock-ffd3b36ac394-part-2-section-1-group-1-q-5-5",
+              "displayNumber": 5,
+              "sourceQuestionNumber": 5,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "[A] Wash the dishes. [B] Go to the theatre. [C] Pick up George and Martha. [D] Take her daughter to hospital."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "relativePath": "2013年12月四级模拟试卷",
+                  "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "mock-ffd3b36ac394-part-2-section-1-group-1-q-6-6",
+              "displayNumber": 6,
+              "sourceQuestionNumber": 6,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "[A] He has left his position in the government. [B] He has already reached the retirement age. [C] He made a stupid decision at the cabinet meeting. [D]He has been successfully elected prime minister."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "relativePath": "2013年12月四级模拟试卷",
+                  "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "mock-ffd3b36ac394-part-2-section-1-group-1-q-7-7",
+              "displayNumber": 7,
+              "sourceQuestionNumber": 7,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "[A] They have known each other since their schooldays. [B] They were both chairpersons of the Students’ Union. [C] They have been in close touch by email. [D]They are going to hold a reunion party."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "relativePath": "2013年12月四级模拟试卷",
+                  "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "mock-ffd3b36ac394-part-2-section-1-group-1-q-8-8",
+              "displayNumber": 8,
+              "sourceQuestionNumber": 8,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "[A]Fixing some furniture [B]Repairing the toy train [C]Reading the instructions [D]Assembling the bookcase"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "relativePath": "2013年12月四级模拟试卷",
+                  "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "mock-ffd3b36ac394-part-2-section-1-group-2",
+          "title": "Questions 9 to 12 are based on the conversation you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "mock-ffd3b36ac394-part-2-section-1-group-2-q-9-1",
+              "displayNumber": 9,
+              "sourceQuestionNumber": 9,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "[A] In a studio. [B] In a clothing store [C] At a beach resort. [D] At a fashion show."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "relativePath": "2013年12月四级模拟试卷",
+                  "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "mock-ffd3b36ac394-part-2-section-1-group-2-q-10-2",
+              "displayNumber": 10,
+              "sourceQuestionNumber": 10,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "[A] To live there permanently. [B] To stay there for half a year. [C] To find a better job to support herself. [D] To sell leather goods for a British company."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "relativePath": "2013年12月四级模拟试卷",
+                  "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "mock-ffd3b36ac394-part-2-section-1-group-2-q-11-3",
+              "displayNumber": 11,
+              "sourceQuestionNumber": 11,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "[A] Designing fashion items for several companies. [B] Modeling for a world-famous Italian company. [C] Working as an employee for Ferragamo. [D] Serving as a sales agent for Burberrys."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "relativePath": "2013年12月四级模拟试卷",
+                  "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "mock-ffd3b36ac394-part-2-section-1-group-2-q-12-4",
+              "displayNumber": 12,
+              "sourceQuestionNumber": 12,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "[A] It has seen a steady decline in its profits. [B] It has become much more competitive. [C] It has lost many customers to foreign companies. [D] It has attracted a lot more designers from abroad."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "relativePath": "2013年12月四级模拟试卷",
+                  "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "mock-ffd3b36ac394-part-2-section-1-group-3",
+          "title": "Questions 13 to 15 are based on the conversation you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "mock-ffd3b36ac394-part-2-section-1-group-3-q-13-1",
+              "displayNumber": 13,
+              "sourceQuestionNumber": 13,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "[A] Organizing protests [B] Recruiting members [C] Acting as its spokesman. [D] Saving endangered animals."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "relativePath": "2013年12月四级模拟试卷",
+                  "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "mock-ffd3b36ac394-part-2-section-1-group-3-q-14-2",
+              "displayNumber": 14,
+              "sourceQuestionNumber": 14,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "[A] Anti-animal-abuse demonstrations [B] Anti-nuclear campaigns [C] Surveying the Atlantic Ocean floor [D] Removing industrial waste."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "relativePath": "2013年12月四级模拟试卷",
+                  "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "mock-ffd3b36ac394-part-2-section-1-group-3-q-15-3",
+              "displayNumber": 15,
+              "sourceQuestionNumber": 15,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "[A] Doubtful [B] Indifferent [C] Reserved [D] Supportive"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "relativePath": "2013年12月四级模拟试卷",
+                  "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "mock-ffd3b36ac394-part-2-section-2-group-1",
+          "title": "Questions 16 to 19 are based on the passage you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "mock-ffd3b36ac394-part-2-section-2-group-1-q-16-1",
+              "displayNumber": 16,
+              "sourceQuestionNumber": 16,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "[A] To win over the majority of passengers from airlines in twenty years. [B] To reform railroad management in western European countries. [C] To electrify the railway lines between major European cities. [D] To set up an express train network throughout Europe."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "relativePath": "2013年12月四级模拟试卷",
+                  "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "mock-ffd3b36ac394-part-2-section-2-group-1-q-17-2",
+              "displayNumber": 17,
+              "sourceQuestionNumber": 17,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "[A] Major European airlines will go bankrupt. [B] Europeans will pay much less for traveling. [C] Traveling time by train between major European cities will be cut by half. [D] Trains will become the safest and most efficient means of travel in Europe."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "relativePath": "2013年12月四级模拟试卷",
+                  "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "mock-ffd3b36ac394-part-2-section-2-group-1-q-18-3",
+              "displayNumber": 18,
+              "sourceQuestionNumber": 18,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "[A] Train travel will prove much more comfortable than air travel. [B] Passengers will feel much safer on board a train than on a plane. [C] Rail transport will be environmentally friendlier than air transport. [D] Traveling by train may be as quick as,or even quicker than, by air."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "relativePath": "2013年12月四级模拟试卷",
+                  "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "mock-ffd3b36ac394-part-2-section-2-group-1-q-19-4",
+              "displayNumber": 19,
+              "sourceQuestionNumber": 19,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "[A] In 1981. [B] In 1989. [C] In 1990. [D] In 2000. Passage Two"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "relativePath": "2013年12月四级模拟试卷",
+                  "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "mock-ffd3b36ac394-part-2-section-2-group-2",
+          "title": "Questions 20 to 22 are based on the passage you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "mock-ffd3b36ac394-part-2-section-2-group-2-q-20-1",
+              "displayNumber": 20,
+              "sourceQuestionNumber": 20,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "[A] The rescue operations have not been very effective. [B] More than 300 injured passengers were hospitalized. [C] The cause of the tragic accident remains unknown. [D] The exact casualty figures are not yet available."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "relativePath": "2013年12月四级模拟试卷",
+                  "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "mock-ffd3b36ac394-part-2-section-2-group-2-q-21-2",
+              "displayNumber": 21,
+              "sourceQuestionNumber": 21,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "[A] There was a bomb scare. [B] There was a terrorist attack. [C] A fire alarm was set off by mistake. [D] 50 pounds of explosives were found."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "relativePath": "2013年12月四级模拟试卷",
+                  "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "mock-ffd3b36ac394-part-2-section-2-group-2-q-22-3",
+              "displayNumber": 22,
+              "sourceQuestionNumber": 22,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "[A] Follow policemen’s directions. [B] Keep an eye on the weather. [C] Avoid snow-covered roads. [D] Drive with special care. Passage Three"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "relativePath": "2013年12月四级模拟试卷",
+                  "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "mock-ffd3b36ac394-part-2-section-2-group-3",
+          "title": "Questions 23 to 25 are based on the passage you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "mock-ffd3b36ac394-part-2-section-2-group-3-q-23-1",
+              "displayNumber": 23,
+              "sourceQuestionNumber": 23,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "[A] It may produce an increasing number of idle youngsters. [B] It may affect the quality of higher education in America. [C] It may cause many schools to go out of operation. [D] It may lead to a lack of properly educated workers."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "relativePath": "2013年12月四级模拟试卷",
+                  "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "mock-ffd3b36ac394-part-2-section-2-group-3-q-24-2",
+              "displayNumber": 24,
+              "sourceQuestionNumber": 24,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "[A] It is less serious in cities than in rural areas. [B] It affects both junior and senior high schools. [C] It results from a worsening economic climate. [D] It is a new challenge facing American educators."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "relativePath": "2013年12月四级模拟试卷",
+                  "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "mock-ffd3b36ac394-part-2-section-2-group-3-q-25-3",
+              "displayNumber": 25,
+              "sourceQuestionNumber": 25,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "[A] Allowing them to choose their favorite teachers. [B] Creating a more relaxed learning environment. [C] Rewarding excellent academic performance. [D] Helping them to develop better study habits."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "relativePath": "2013年12月四级模拟试卷",
+                  "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mock-ffd3b36ac394-part-3",
+      "title": "Part III Reading Comprehension (40 minutes)",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "mock-ffd3b36ac394-part-3-section-2-group-1",
+          "title": "题目",
+          "presentation": "reading",
+          "instructions": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Highways"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "•\tEarly in the 20th century, most of the streets and roads in the U.S. were made of dirt, brick, and cedar wood blocks. Built for horse, carriage, and foot traffic, they were usually poorly cared for and too narrow to accommodate(容纳)automobiles."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "(B)With the increase in auto production, private turnpike(收费公路)companies under local  authorities began to spring up, and by 1921 there were 387,000 miles of paved roads. Many were built using specifications of 19th century Scottish engineers Thomas Telford and John Mac Adam(for whom the macadam surface is named), whose specifications stressed the importance of adequate drainage. Beyond that, there were no national standards for size, weight restrictions, or commercial signs. During World War I, roads throughout the country were nearly destroyed by the weight of trucks. When General Eisenhower returned from Germany in 1919, after serving in the U.S. Army’s first transcontinental motor convoy(车队)，he noted: “The old convoy had started me thinking about good, two-lane highways, but Germany’s Autobahn or motorway had made me see the wisdom of broader ribbons across the land.”"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "(C)It would take another war before the federal government would act on a national highway system. During World War II, a tremendous increase in trucks and new roads were required. The war demonstrates how critical highways were to the defense effort. Thirteen per cent of defense plants received all their supplies by truck, and almost all other plants shipped more than half of their products by vehicle. The war also revealed that local control of highways had led to a confusing variety of design standards. Even federal and state highways did not follow basic standards. Some states allowed trucks up to 36,000 pounds, while others restricted anything over 7,000 pounds."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "(D) A government study recommended a national highway system of 33,920 miles, and Congress soon passed the Federal-Aid Highway Act of 1944, which called for strict, centrally controlled design criteria."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "(E)The interstate highway system was finally launched in 1956 and has been hailed as one of the greatest public works projects of the century. To build its 44,000-mile web of highways, bridge, and tunnels, hundreds of unique engineering designs and solutions had to be worked out. Consider the many geographic features of the country: mountains, steep grades, wetlands, rivers, desserts, and plains. Variables included the slope of the land, the ability of the pavement to support the load, the intensity of road use, and the nature of the underlying soil. Urban areas were another problem. Innovative designs of roadways, tunnels, bridges, overpasses, and interchanges that could run through or bypass urban areas soon began to weave their way across the country, forever altering the face of America."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "(F)Long-span, segmented-concrete, cable-stayed bridges such as Hale Boggs in Louisiana and"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "the Sunshine Skyway in Florida, and remarkable tunnels like Fort McHenry in Maryland and Mt, Baker in Washington, met many of the nation’s physical challenges. Traffic control systems and methods of construction developed under the interstate program soon influenced highway construction around the world, and were invaluable in improving the condition of urban streets and traffic patterns."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "(G)Today, the interstate system links every major city in the U.S. and the U.S. with Canada and Mexico. Built with safety in mind, the highways have wide lanes and shoulders, dividing medians or barriers, long entry and exit lanes, curves engineered for safe turns, and limited access. The death rate on highways is half that of all other U.S. roads (0.86 deaths per 100 million passenger miles compared to 1.99 deaths per 100 million on all other roads). By opening the North American continent, highways have enabled consumer goods and services to reach people in remote and rural areas of the country, spurred the growth of suburbs, and provide people with greater options in terms of jobs, access to cultural programs, health care, and other benefits. Above all, the interstate system provides individuals with what they cherish most personal freedom of mobility."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "(H)The interstate system has been an essential element of the nation’s economic growth in terms of shipping and job creation: more than 75 percent of the nation’s freight deliveries arrive by truck; and most products that arrive by rail or air use interstates for the last leg of the journey by vehicle. Not only has the highway system affected the American economy by providing shipping routes, it has led to the growth of spin-off industries like service stations, motels, restaurants, and shopping centers. It has allowed the relocation of manufacturing plants and other industries from urban areas to rural."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "(I)By the end of the century there was an immense network of paved roads, residential streets, expressways, and freeways built to support millions of vehicles. The highway system was officially renamed for Eisenhower to honor his vision and leadership. The year construction began he said: Together, the united forces of our communication and transportation systems are dynamic elements in the very name we bear—United States. Without them, we would be a mere alliance of many separate parts.”"
+                }
+              ]
+            }
+          ],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "mock-ffd3b36ac394-part-3-section-2-group-1-q-46-1",
+              "displayNumber": 46,
+              "sourceQuestionNumber": 46,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "The development of the interstate highway system promoted industries like Service stations, motels and restaurants."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "relativePath": "2013年12月四级模拟试卷",
+                  "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "mock-ffd3b36ac394-part-3-section-2-group-1-q-47-2",
+              "displayNumber": 47,
+              "sourceQuestionNumber": 47,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Many of the problems presented by the country’s geographical features found solutions in innovative engineering projects."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "relativePath": "2013年12月四级模拟试卷",
+                  "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "mock-ffd3b36ac394-part-3-section-2-group-1-q-48-3",
+              "displayNumber": 48,
+              "sourceQuestionNumber": 48,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Many paved roads were in place by 1921."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "relativePath": "2013年12月四级模拟试卷",
+                  "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "mock-ffd3b36ac394-part-3-section-2-group-1-q-49-4",
+              "displayNumber": 49,
+              "sourceQuestionNumber": 49,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "General Eisenhower felt that the broad German motorways made more sense than the two-lane highways of America."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "relativePath": "2013年12月四级模拟试卷",
+                  "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "mock-ffd3b36ac394-part-3-section-2-group-1-q-50-5",
+              "displayNumber": 50,
+              "sourceQuestionNumber": 50,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Equipped with safety considerations, the death rate on interstate highways is still lower than that of other American roads."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "relativePath": "2013年12月四级模拟试卷",
+                  "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "mock-ffd3b36ac394-part-3-section-2-group-1-q-51-6",
+              "displayNumber": 51,
+              "sourceQuestionNumber": 51,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "The greatest benefit brought about by the interstate system was personal freedom of mobility."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "relativePath": "2013年12月四级模拟试卷",
+                  "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "mock-ffd3b36ac394-part-3-section-2-group-1-q-52-7",
+              "displayNumber": 52,
+              "sourceQuestionNumber": 52,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Early roads and streets were usually maintained and extremely narrow."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "relativePath": "2013年12月四级模拟试卷",
+                  "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "mock-ffd3b36ac394-part-3-section-2-group-1-q-53-8",
+              "displayNumber": 53,
+              "sourceQuestionNumber": 53,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Trucks using the interstate highways deliver more than 75 percent."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "relativePath": "2013年12月四级模拟试卷",
+                  "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "mock-ffd3b36ac394-part-3-section-2-group-1-q-54-9",
+              "displayNumber": 54,
+              "sourceQuestionNumber": 54,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "The interstate system was renamed after Eisenhower in recognition of his vision and leadership."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "relativePath": "2013年12月四级模拟试卷",
+                  "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "mock-ffd3b36ac394-part-3-section-2-group-1-q-55-10",
+              "displayNumber": 55,
+              "sourceQuestionNumber": 55,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "It was in the 1950s that the American government finally took action to build a national high way system."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "relativePath": "2013年12月四级模拟试卷",
+                  "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "mock-ffd3b36ac394-part-3-section-3-group-1",
+          "title": "Questions 56 to 60 are based on the following passage.",
+          "presentation": "reading",
+          "instructions": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "The rise of multinational corporations (跨国公司), global marketing, new communications technologies, and shrinking cultural differences have led to an unparalleled increase in global public relations or PR."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Surprisingly, since modern PR was largely an American invention, the U.S. leadership in public relations is being threatened by PR efforts in other countries. Ten years ago, for example, the world’s top five public relations agencies were American-owned. In 1991, only one was. The British in particular are becoming more sophisticated and creative. A recent survey found that more than half of all British companies include PR as part of their corporate (公司的) planning activities, compared to about one-third of U.S. companies. It may not be long before London replaces New York as the capital of PR."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Why is America lagging behind in the global PR race? First, Americans as a whole tend to be fairly provincial and take more of an interest in local affairs. Knowledge of world geography, for example, has never been strong in this country. Secondly, Americans lag behind their European and Asian counterparts (相对应的人) in knowing a second language. Less than 5 percent of Burson—Marshall’s U.S. employees know two languages. Ogilvy and Mather has about the same percentage. Conversely, some European firms have half or more of their employees fluent in a second language. Finally, people involved in PR abroad tend to keep a closer eye on international affairs. In the financial PR area, for instance, most Americans read the Wall Street Journal. Overseas, their counterparts read the Journal as well as the Financial Times of London and The Economist, publications not often read in this country."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Perhaps the PR industry might take a lesson from Ted Turner of CNN (Cable News Network). Turner recently announced that the word “foreign” would no longer be used on CNN news broadcasts. According to Turner, global communications have made the nations of the world so interdependent that there is no longer any such things as foreign."
+                }
+              ]
+            }
+          ],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "mock-ffd3b36ac394-part-3-section-3-group-1-q-56-1",
+              "displayNumber": 56,
+              "sourceQuestionNumber": 56,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "According to the passage, U.S. leadership in public relations is being threatened because of ________. [A]an unparalleled increase in the number of public relations companies [B]shrinking cultural differences and new communications technologies [C]the decreasing number of multinational corporations in the U.S. [D]increased efforts of other countries in public relations（D）"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "relativePath": "2013年12月四级模拟试卷",
+                  "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "mock-ffd3b36ac394-part-3-section-3-group-1-q-57-2",
+              "displayNumber": 57,
+              "sourceQuestionNumber": 57,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "London could soon replace New York as the center of PR because ________. [A] British companies are more ambitious than U.S. companies [B] British companies place more importance on PR than U.S. companies [C] British companies are heavily involved in planning activities [D]four of the world’s top public relations agencies are British-owned（B）"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "relativePath": "2013年12月四级模拟试卷",
+                  "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "mock-ffd3b36ac394-part-3-section-3-group-1-q-58-3",
+              "displayNumber": 58,
+              "sourceQuestionNumber": 58,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "The word “provincial” (Line 2, Para. 3) most probably means “________”. [A]limited in outlook [B]like people from the provinces [C]rigid in thinking [D]interested in world financial affairs（A）"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "relativePath": "2013年12月四级模拟试卷",
+                  "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "mock-ffd3b36ac394-part-3-section-3-group-1-q-59-4",
+              "displayNumber": 59,
+              "sourceQuestionNumber": 59,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "We learn from the third paragraph that employees in the American PR industry ________. [A]speak at least one foreign language fluently [B]are ignorant about world geography [C]are not as sophisticated as their European counterparts [D]enjoy reading a great variety of English business publications（B）"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "relativePath": "2013年12月四级模拟试卷",
+                  "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "mock-ffd3b36ac394-part-3-section-3-group-1-q-60-5",
+              "displayNumber": 60,
+              "sourceQuestionNumber": 60,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What lesson might the PR industry take from Ted Turner of CNN? [A] American PR companies should be more internationally-minded. [B] The American PR industry should develop global communications technologies. [C] People working in PR should be more fluent in foreign languages. [D] People involved in PR should avoid using the word “foreign”.（A） Passage Two"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "relativePath": "2013年12月四级模拟试卷",
+                  "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "mock-ffd3b36ac394-part-3-section-3-group-2",
+          "title": "Questions 61 to 65 are based on the following passage.",
+          "presentation": "reading",
+          "instructions": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Amtrak (美国铁路客运公司) was experiencing a downswing in ridership (客运量) along the lines comprising its rail system. Of major concern to Amtrak and its advertising agency DDB Needham, were the long-distance western routes where ridership had been declining significantly."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "At one time, trains were the only practical way to cross the vast areas of the west. Trains were fast, very luxurious, and quite convenient compared to other forms of transportation existing at the time. However, times change and the automobile became America’s standard of convenience. Also, air travel had easily established itself as the fastest method of traveling great distances. Therefore, the task for DDB Needham was to encourage consumers to consider other aspects of train travel in order to change their attitudes and increase the likelihood that trains would be considered for travel in the west."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Two portions of the total market were targeted: 1) anxious fliers—those concerned with safety, relaxation, and cleanliness and 2) travel-lovers—those viewing themselves as relaxed, casual, and interested in the travel experience as part of their vacation. The agency then developed a campaign that focused on travel experiences such as freedom, escape, relaxation, and enjoyment of the great western outdoors. It stressed experiences gained by using the trains and portrayed western train trips as wonderful adventures."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Advertisements showed pictures of the beautiful scenery that could be enjoyed along some of the more famous western routes and emphasized the romantic names of some of these trains (Empire Builder, etc.). These ads were strategically placed among family-oriented TV shows and programs involving nature and America in order to most effectively reach target audiences. Results were impressive. The Empire Builder, which was focused on in one ad, enjoyed a 15 percent increase in profits on its Chicago to Seattle route."
+                }
+              ]
+            }
+          ],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "mock-ffd3b36ac394-part-3-section-3-group-2-q-61-1",
+              "displayNumber": 61,
+              "sourceQuestionNumber": 61,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What’s the author’s purpose in writing this passage? [A] To show the inability of trains to compete with planes with respect to speed and convenience. [B] To stress the influence of the automobile on America’s standard of convenience. [C] To emphasize the function of travel agencies in market promotion. [D] To illustrate the important role of persuasive communication in changing consumer attitudes.（D）"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "relativePath": "2013年12月四级模拟试卷",
+                  "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "mock-ffd3b36ac394-part-3-section-3-group-2-q-62-2",
+              "displayNumber": 62,
+              "sourceQuestionNumber": 62,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "It can be inferred from the passage that the drop in Amtrak ridership was due to the fact that ________. [A]trains were not suitable for short distance passenger transportation [B]trains were not the fastest and most convenient form of transportation [C]trains were not as fast and convenient as they used to be [D]trains could not compete with planes in terms of luxury and convenience（B）"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "relativePath": "2013年12月四级模拟试卷",
+                  "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "mock-ffd3b36ac394-part-3-section-3-group-2-q-63-3",
+              "displayNumber": 63,
+              "sourceQuestionNumber": 63,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "To encourage consumers to travel by train, DDB Needham emphasized ________. [A]the freedom and convenience provided on trains [B]the practical aspects of train travel [C]the adventurous aspects of train trips [D]the safety and cleanliness of train trips（C）"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "relativePath": "2013年12月四级模拟试卷",
+                  "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "mock-ffd3b36ac394-part-3-section-3-group-2-q-64-4",
+              "displayNumber": 64,
+              "sourceQuestionNumber": 64,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "The train ads were placed among family-oriented TV programs involving nature and America because ________. [A]they could focus on meaningful travel experiences [B]they could increase the effectiveness of the TV programs [C]their profits could be increased by some 15 percent [D]most travel-lovers and nervous fliers were believed to be among the audiences（D）"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "relativePath": "2013年12月四级模拟试卷",
+                  "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "mock-ffd3b36ac394-part-3-section-3-group-2-q-65-5",
+              "displayNumber": 65,
+              "sourceQuestionNumber": 65,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "According to the passage, the Empire Builder enjoyed an increase in ridership and profits because ________. [A]the attractiveness of its name and route was effectively advertised [B]it provided an exciting travel experience [C]its passengers could enjoy the great western outdoors [D]it was widely advertised in newspapers and magazines in Chicago and Seattle（A）"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "relativePath": "2013年12月四级模拟试卷",
+                  "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mock-ffd3b36ac394-part-4-translation",
+      "title": "Translation 翻译",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "mock-ffd3b36ac394-part-4-translation-group",
+          "title": "翻译题",
+          "presentation": "writing",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "mock-ffd3b36ac394-part-4-q-1-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "translation",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "北京是座有三千年历史的古城。早在公元前十一世纪，北京就是燕国的国都，因此北京有燕京之称。在以后的几千年里，北京又成为金、元、明、清各朝的国都。北京是中国的六大古都之一，其他五个是西安、南京、洛阳、开封和杭州。北京是座既古老又年轻的城市，有许多名胜古迹。从故宫、天坛到颐和园，你们可以看到北京保留了许多昔日的风采。"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "relativePath": "2013年12月四级模拟试卷",
+                  "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "assetRefs": [
+    {
+      "assetId": "mock-ffd3b36ac394-audio",
+      "kind": "audio",
+      "url": "/cet4/audio/mock-ffd3b36ac394.mp3",
+      "mimeType": "audio/mpeg",
+      "sha256": "",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+          "relativePath": "2013年12月四级模拟试卷",
+          "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+          "locator": {},
+          "extractionMethod": "manual-review",
+          "confidence": 0.86
+        }
+      ]
+    }
+  ],
+  "sourceRefs": [
+    {
+      "sourceDocumentId": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+      "relativePath": "2013年12月四级模拟试卷",
+      "sha256": "8837a786e870bb5d28910dd59fe2101224ca8c1d441a248460f9c174e24650ed",
+      "locator": {},
+      "extractionMethod": "manual-review",
+      "confidence": 0.86
+    }
+  ],
+  "quality": {
+    "structureStatus": "approved",
+    "structureConfidence": 0.86,
+    "issueCount": 0,
+    "issues": []
+  }
+}

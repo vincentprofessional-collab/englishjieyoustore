@@ -1,0 +1,978 @@
+{
+  "schemaVersion": 2,
+  "id": "mock-9979c092fc5d",
+  "kind": "paper",
+  "title": "13年四级模拟题听力",
+  "year": "",
+  "region": "全国",
+  "variant": "",
+  "submissionMode": "whole-paper",
+  "instructions": [
+    {
+      "type": "notice",
+      "tone": "info",
+      "text": "按原卷分区作答。提交整卷后显示可用答案与原资料参考内容。"
+    }
+  ],
+  "sections": [
+    {
+      "id": "mock-9979c092fc5d-part-1",
+      "title": "13年四级模拟题听力",
+      "layout": "flow",
+      "instructions": [
+        {
+          "type": "audio",
+          "assetId": "mock-9979c092fc5d-audio",
+          "label": "听力音频"
+        }
+      ],
+      "groups": [
+        {
+          "id": "mock-9979c092fc5d-part-1-section-1-group-1",
+          "title": "题目",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "mock-9979c092fc5d-part-1-section-1-group-1-q-26-1",
+              "displayNumber": 26,
+              "sourceQuestionNumber": 26,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is an intemational organization．"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It only exists in poor countries．"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "People always think highly of it．"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Anyone can join the group easily．"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "367b05062d4f934cb9b9815f30089e5ff694a6409f96adf9c4345ed1a7ac0035",
+                  "relativePath": "13年四级模拟题听力",
+                  "sha256": "367b05062d4f934cb9b9815f30089e5ff694a6409f96adf9c4345ed1a7ac0035",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "mock-9979c092fc5d-part-1-section-1-group-1-q-27-2",
+              "displayNumber": 27,
+              "sourceQuestionNumber": 27,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To try to stop the war in Italy．"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To help the wounded in the battle．"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To form all international treaty．"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To aid the injured in the earthquake．"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "367b05062d4f934cb9b9815f30089e5ff694a6409f96adf9c4345ed1a7ac0035",
+                  "relativePath": "13年四级模拟题听力",
+                  "sha256": "367b05062d4f934cb9b9815f30089e5ff694a6409f96adf9c4345ed1a7ac0035",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "mock-9979c092fc5d-part-1-section-1-group-1-q-28-3",
+              "displayNumber": 28,
+              "sourceQuestionNumber": 28,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Protecting the prisoners of war．"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Teaching first aid to the public．"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Raising money for public fund．"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Publicizing the idea of charity． Passage Two"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "367b05062d4f934cb9b9815f30089e5ff694a6409f96adf9c4345ed1a7ac0035",
+                  "relativePath": "13年四级模拟题听力",
+                  "sha256": "367b05062d4f934cb9b9815f30089e5ff694a6409f96adf9c4345ed1a7ac0035",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "mock-9979c092fc5d-part-1-section-1-group-1-q-29-4",
+              "displayNumber": 29,
+              "sourceQuestionNumber": 29,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are offered for those with all interest in the courses．"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Employers and employees in a company areboth welcome．"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "People who will retire in a few years arethe target students．"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Students from a normal university canattend the courses．"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "367b05062d4f934cb9b9815f30089e5ff694a6409f96adf9c4345ed1a7ac0035",
+                  "relativePath": "13年四级模拟题听力",
+                  "sha256": "367b05062d4f934cb9b9815f30089e5ff694a6409f96adf9c4345ed1a7ac0035",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "mock-9979c092fc5d-part-1-section-1-group-1-q-30-5",
+              "displayNumber": 30,
+              "sourceQuestionNumber": 30,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Specialist speakers．"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Retired people．"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Employers．"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Senior citizens．"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "367b05062d4f934cb9b9815f30089e5ff694a6409f96adf9c4345ed1a7ac0035",
+                  "relativePath": "13年四级模拟题听力",
+                  "sha256": "367b05062d4f934cb9b9815f30089e5ff694a6409f96adf9c4345ed1a7ac0035",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "mock-9979c092fc5d-part-1-section-1-group-1-q-31-6",
+              "displayNumber": 31,
+              "sourceQuestionNumber": 31,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They can attend any courses for free．"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They arrange discussion groups for people．"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They learn how to communicate with others．"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They want to be carpenters or craftsmen．"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "367b05062d4f934cb9b9815f30089e5ff694a6409f96adf9c4345ed1a7ac0035",
+                  "relativePath": "13年四级模拟题听力",
+                  "sha256": "367b05062d4f934cb9b9815f30089e5ff694a6409f96adf9c4345ed1a7ac0035",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "mock-9979c092fc5d-part-1-section-1-group-1-q-32-7",
+              "displayNumber": 32,
+              "sourceQuestionNumber": 32,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It charges at a reduced rate．"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is available every day．"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is open to all people．"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is provided only in the evening． Passage Three"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "367b05062d4f934cb9b9815f30089e5ff694a6409f96adf9c4345ed1a7ac0035",
+                  "relativePath": "13年四级模拟题听力",
+                  "sha256": "367b05062d4f934cb9b9815f30089e5ff694a6409f96adf9c4345ed1a7ac0035",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "mock-9979c092fc5d-part-1-section-1-group-1-q-33-8",
+              "displayNumber": 33,
+              "sourceQuestionNumber": 33,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They have to learn basics of English．"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They know clearly what they want to learn．"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is good for them to learn generalEnglish skills．"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They want to have an up-to-date knowledgeof English．"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "367b05062d4f934cb9b9815f30089e5ff694a6409f96adf9c4345ed1a7ac0035",
+                  "relativePath": "13年四级模拟题听力",
+                  "sha256": "367b05062d4f934cb9b9815f30089e5ff694a6409f96adf9c4345ed1a7ac0035",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "mock-9979c092fc5d-part-1-section-1-group-1-q-34-9",
+              "displayNumber": 34,
+              "sourceQuestionNumber": 34,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The knowledge of teachers．"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The behaviors of students．"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The principles of schools．"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The introduction of books．"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "367b05062d4f934cb9b9815f30089e5ff694a6409f96adf9c4345ed1a7ac0035",
+                  "relativePath": "13年四级模拟题听力",
+                  "sha256": "367b05062d4f934cb9b9815f30089e5ff694a6409f96adf9c4345ed1a7ac0035",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "mock-9979c092fc5d-part-1-section-1-group-1-q-35-10",
+              "displayNumber": 35,
+              "sourceQuestionNumber": 35,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "English for doctors．"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "English for lawyers．"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "English for reporters．"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "English for businessman． INCLUDEPICTURE \\d \"http://pic.kekenet.com/2013/0608/61981370682065.jpg\" \\* MERGEFORMATINET INCLUDEPICTURE \\d \"http://pic.kekenet.com/2013/0608/92211370682122.jpg\" \\* MERGEFORMATINET INCLUDEPICTURE \\d \"http://pic.kekenet.com/2013/0608/87831370682122.jpg\" \\* MERGEFORMATINET INCLUDEPICTURE \\d \"http://pic.kekenet.com/2013/0608/17731370682122.jpg\" \\* MERGEFORMATINET INCLUDEPICTURE \\d \"http://pic.kekenet.com/2013/0608/85031370682122.jpg\" \\* MERGEFORMATINET INCLUDEPICTURE \\d \"http://pic.kekenet.com/2013/0608/36851370682188.jpg\" \\* MERGEFORMATINET INCLUDEPICTURE \\d \"http://pic.kekenet.com/2013/0608/69261370682189.jpg\" \\* MERGEFORMATINET INCLUDEPICTURE \\d \"http://pic.kekenet.com/2013/0608/62831370682189.jpg\" \\* MERGEFORMATINET INCLUDEPICTURE \\d \"http://pic.kekenet.com/2013/0608/95961370682328.jpg\" \\* MERGEFORMATINET INCLUDEPICTURE \\d \"http://pic.kekenet.com/2013/0608/48151370682390.jpg\" \\* MERGEFORMATINET INCLUDEPICTURE \\d \"http://pic.kekenet.com/2013/0608/35151370682391.jpg\" \\* MERGEFORMATINET INCLUDEPICTURE \\d \"http://pic.kekenet.com/2013/0608/14471370682436.jpg\" \\* MERGEFORMATINET"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "367b05062d4f934cb9b9815f30089e5ff694a6409f96adf9c4345ed1a7ac0035",
+                  "relativePath": "13年四级模拟题听力",
+                  "sha256": "367b05062d4f934cb9b9815f30089e5ff694a6409f96adf9c4345ed1a7ac0035",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "assetRefs": [
+    {
+      "assetId": "mock-9979c092fc5d-audio",
+      "kind": "audio",
+      "url": "/cet4/audio/mock-9979c092fc5d.mp3",
+      "mimeType": "audio/mpeg",
+      "sha256": "",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "367b05062d4f934cb9b9815f30089e5ff694a6409f96adf9c4345ed1a7ac0035",
+          "relativePath": "13年四级模拟题听力",
+          "sha256": "367b05062d4f934cb9b9815f30089e5ff694a6409f96adf9c4345ed1a7ac0035",
+          "locator": {},
+          "extractionMethod": "manual-review",
+          "confidence": 0.86
+        }
+      ]
+    }
+  ],
+  "sourceRefs": [
+    {
+      "sourceDocumentId": "367b05062d4f934cb9b9815f30089e5ff694a6409f96adf9c4345ed1a7ac0035",
+      "relativePath": "13年四级模拟题听力",
+      "sha256": "367b05062d4f934cb9b9815f30089e5ff694a6409f96adf9c4345ed1a7ac0035",
+      "locator": {},
+      "extractionMethod": "manual-review",
+      "confidence": 0.86
+    }
+  ],
+  "quality": {
+    "structureStatus": "approved",
+    "structureConfidence": 0.86,
+    "issueCount": 0,
+    "issues": []
+  }
+}

@@ -3,6 +3,7 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 const library = JSON.parse(await readFile(new URL("../src/data/cet4/library.json", import.meta.url), "utf8"));
+const setIndex = JSON.parse(await readFile(new URL("../public/cet4/index.json", import.meta.url), "utf8"));
 
 test("CET-4 library keeps all three requested sections separate", () => {
   const sections = new Set(library.entries.map((entry) => entry.section));
@@ -26,5 +27,17 @@ test("published entries contain source text and traceability", () => {
     assert.ok(entry.body.length >= 80, entry.id);
     assert.ok(entry.sourceFiles.length >= 1, entry.id);
     assert.match(entry.sourceHash, /^[a-f0-9]{64}$/);
+  }
+});
+
+test("CET-4 sets use the high-school question-group contract", async () => {
+  assert.ok(setIndex.entries.length > 0);
+  for (const summary of setIndex.entries) {
+    const set = JSON.parse(await readFile(new URL(`../public/cet4/${summary.kind === "paper" ? "papers" : "practice"}/${summary.id}.json`, import.meta.url), "utf8"));
+    assert.equal(set.schemaVersion, 2, summary.id);
+    assert.ok(set.sections.length > 0, summary.id);
+    assert.equal(set.sections.reduce((total, section) => total + section.groups.reduce((count, group) => count + group.questions.length, 0), 0), summary.questionCount, summary.id);
+    assert.ok(set.sections.every((section) => section.groups.every((group) => group.questions.every((question) => question.promptBlocks && question.options && question.answerSpec))), summary.id);
+    if (summary.kind === "paper") assert.equal(set.submissionMode, "whole-paper", summary.id);
   }
 });

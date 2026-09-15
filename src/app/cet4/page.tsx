@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Cet4Library } from "@/components/cet4/cet4-library";
-import { getCet4Entries } from "@/lib/cet4/library";
+import { getCet4Entries, getCet4SetIndex } from "@/lib/cet4/library";
 
 export const metadata: Metadata = {
   title: "大学英语四级｜英文解忧杂货铺",
@@ -8,6 +8,6 @@ export const metadata: Metadata = {
 };
 
 export default function Cet4Page() {
-  const entries = getCet4Entries().map(({ id, title, section, topic, excerpt }) => ({ id, title, section, topic, excerpt }));
-  return <Cet4Library entries={entries} />;
+  const knowledge = getCet4Entries().filter((entry) => entry.section === "知识点").map(({ id, title, topic, excerpt }) => ({ id, title, topic, excerpt }));
+  return <Cet4Library knowledge={knowledge} sets={getCet4SetIndex().entries} />;
 }
