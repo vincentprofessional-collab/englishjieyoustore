@@ -3,11 +3,19 @@ import type { SpeakingPartId } from "@/lib/ielts/speaking";
 
 export type SpeakingAnswerBand = "band-7" | "band-8";
 
+export type SpeakingAudioSegment = {
+  audioUrl: string;
+  chinese: string;
+  english: string;
+  sentenceNo: number;
+};
+
 export type SpeakingEditableContent = {
   answer: string[];
   answerHeading: string;
   answerTranslation: string[];
   approach: string;
+  audioSegments?: SpeakingAudioSegment[];
   audioUrl: string;
   band: SpeakingAnswerBand;
   followUp: string;
@@ -92,6 +100,36 @@ function cleanVocabulary(value: unknown) {
     .slice(0, 16);
 }
 
+function cleanAudioSegments(value: unknown) {
+  if (!Array.isArray(value)) {
+    return [];
+  }
+
+  return value
+    .map((item) => {
+      if (!isRecord(item)) {
+        return null;
+      }
+
+      const sentenceNo = Number(item.sentenceNo);
+      if (!Number.isInteger(sentenceNo) || sentenceNo < 1 || sentenceNo > 100) {
+        return null;
+      }
+
+      const segment = {
+        audioUrl: cleanText(item.audioUrl, 2000),
+        chinese: cleanText(item.chinese, 2200),
+        english: cleanText(item.english, 2200),
+        sentenceNo,
+      };
+
+      return segment.audioUrl && segment.chinese && segment.english ? segment : null;
+    })
+    .filter((item): item is SpeakingAudioSegment => Boolean(item))
+    .sort((left, right) => left.sentenceNo - right.sentenceNo)
+    .slice(0, 100);
+}
+
 function readString(section: unknown, key: string, maxLength: number) {
   if (!isRecord(section) || typeof section[key] !== "string") {
     return null;
@@ -116,6 +154,15 @@ function readVocabulary(section: unknown) {
   }
 
   const value = cleanVocabulary(section.items);
+  return value.length ? value : null;
+}
+
+function readAudioSegments(section: unknown) {
+  if (!isRecord(section)) {
+    return null;
+  }
+
+  const value = cleanAudioSegments(section.segments);
   return value.length ? value : null;
 }
 
@@ -192,7 +239,10 @@ export function buildSpeakingManagedSections(
       title: "中文翻译",
     },
     {
-      contentJson: { url: content.audioUrl },
+      contentJson: {
+        segments: content.audioSegments ?? [],
+        url: content.audioUrl,
+      },
       sectionKey: "audio",
       sortOrder: 80,
       title: "音频",
@@ -242,6 +292,8 @@ export function applySpeakingManagedContent(
     readStringList(sectionsByKey.get("translation"), "paragraphs", 12, 2200) ??
     next.answerTranslation;
   next.audioUrl = readString(sectionsByKey.get("audio"), "url", 2000) ?? next.audioUrl;
+  next.audioSegments =
+    readAudioSegments(sectionsByKey.get("audio")) ?? initialContent.audioSegments;
 
   return next;
 }
@@ -277,6 +329,7 @@ export function normalizeSpeakingEditableContent(value: unknown): SpeakingEditab
     answerHeading,
     answerTranslation: cleanStringList(value.answerTranslation, 12, 2200),
     approach: cleanText(value.approach, 2600),
+    audioSegments: cleanAudioSegments(value.audioSegments),
     audioUrl: cleanText(value.audioUrl, 2000),
     band,
     followUp: cleanText(value.followUp, 900),

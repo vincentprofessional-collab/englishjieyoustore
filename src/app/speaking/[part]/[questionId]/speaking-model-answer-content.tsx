@@ -1,7 +1,14 @@
 "use client";
 
-import type { ChangeEvent, FormEvent } from "react";
-import { useEffect, useState } from "react";
+import type { ChangeEvent, FormEvent, ReactNode } from "react";
+import { useEffect, useRef, useState } from "react";
+import {
+  AudioPlayer,
+  DEFAULT_AUDIO_PLAYER_SETTINGS,
+  type AudioPlayerSettings,
+  type AudioSpeakingMode,
+} from "@/components/audio-player";
+import { BbcSentencePractice } from "@/components/bbc-sentence-practice";
 import type {
   SpeakingScoreNote,
   SpeakingVocabulary,
@@ -11,7 +18,13 @@ import {
   applySpeakingManagedContent,
   type SpeakingEditableContent,
   type SpeakingManagedContentResponse,
+  type SpeakingAudioSegment,
 } from "@/lib/ielts/speaking-managed-content";
+import {
+  getActiveWordIndex,
+  getNextSentenceNo,
+  getSpeakingPracticeDelayMs,
+} from "@/lib/articles/bbc-speaking-training.mjs";
 import { supabase } from "@/lib/supabase/client";
 import styles from "./speaking-model-answer.module.css";
 
@@ -33,6 +46,77 @@ type AdminStatus = {
   tone: "info" | "error" | "success";
   text: string;
 };
+
+type ActiveSpeakingMode = Exclude<AudioSpeakingMode, "none">;
+
+type SpeakingTrainingState = {
+  mode: ActiveSpeakingMode;
+  remainingSeconds: number;
+  sentenceNo: number;
+};
+
+const SPEAKING_PHASE_LABELS: Record<ActiveSpeakingMode, string> = {
+  imitation: "轮到你模仿朗读",
+  shadowing: "影子练习缓冲",
+  "sight-translation": "请看中文视译成英文",
+};
+
+const SPEAKING_MODE_LABELS: Record<ActiveSpeakingMode, string> = {
+  imitation: "模仿朗读",
+  shadowing: "影子练习",
+  "sight-translation": "视译训练",
+};
+
+const SPEAKING_PLAYING_HINTS: Record<ActiveSpeakingMode, string> = {
+  imitation: "播放结束后自动进入练习计时",
+  shadowing: "建议佩戴耳机，一边听一边模仿跟读",
+  "sight-translation": "播放结束后自动进入练习计时",
+};
+
+function escapeRegExp(value: string) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function renderHighlightedText(
+  text: string,
+  terms: string[],
+  language: "english" | "chinese",
+  className: string,
+): ReactNode {
+  const cleanTerms = [...new Set(terms.map((term) => term.trim()).filter(Boolean))].sort(
+    (left, right) => right.length - left.length,
+  );
+
+  if (!cleanTerms.length) {
+    return text;
+  }
+
+  const pattern = new RegExp(
+    `(${cleanTerms
+      .map((term) => {
+        const escaped = escapeRegExp(term);
+        return language === "english"
+          ? `(?<![A-Za-z])${escaped}(?![A-Za-z])`
+          : escaped;
+      })
+      .join("|")})`,
+    language === "english" ? "gi" : "g",
+  );
+  const termSet = new Set(
+    cleanTerms.map((term) => (language === "english" ? term.toLowerCase() : term)),
+  );
+
+  return text.split(pattern).map((part, index) => {
+    const comparable = language === "english" ? part.toLowerCase() : part;
+    return termSet.has(comparable) ? (
+      <span className={className} key={`${language}-highlight-${index}`}>
+        {part}
+      </span>
+    ) : (
+      <span key={`${language}-text-${index}`}>{part}</span>
+    );
+  });
+}
 
 function paragraphText(paragraphs: string[]) {
   return paragraphs.join("\n\n");
@@ -92,6 +176,164 @@ export default function SpeakingModelAnswerContent({
   const [isSaving, setIsSaving] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const [status, setStatus] = useState<AdminStatus | null>(null);
+  const [audioSettings, setAudioSettings] = useState<AudioPlayerSettings>(() => ({
+    ...DEFAULT_AUDIO_PLAYER_SETTINGS,
+    subtitleMode: "bilingual",
+  }));
+  const [sentenceAutoPlaySignals, setSentenceAutoPlaySignals] = useState<
+    Record<number, number>
+  >({});
+  const [activeSentenceNo, setActiveSentenceNo] = useState<number | null>(null);
+  const [activeSentencePosition, setActiveSentencePosition] = useState(0);
+  const [isSentenceAudioPlaying, setIsSentenceAudioPlaying] = useState(false);
+  const [sentenceDurations, setSentenceDurations] = useState<Record<number, number>>({});
+  const [speakingTraining, setSpeakingTraining] = useState<SpeakingTrainingState | null>(null);
+  const audioSettingsRef = useRef(audioSettings);
+  const activeSentenceNoRef = useRef<number | null>(null);
+  const speakingCountdownRef = useRef<number | null>(null);
+  const speakingAdvanceRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    audioSettingsRef.current = audioSettings;
+  }, [audioSettings]);
+
+  function clearSpeakingPracticeTimers(resetState = true) {
+    if (speakingCountdownRef.current != null) {
+      window.clearInterval(speakingCountdownRef.current);
+      speakingCountdownRef.current = null;
+    }
+    if (speakingAdvanceRef.current != null) {
+      window.clearTimeout(speakingAdvanceRef.current);
+      speakingAdvanceRef.current = null;
+    }
+    if (resetState) {
+      setSpeakingTraining(null);
+    }
+  }
+
+  useEffect(
+    () => () => {
+      clearSpeakingPracticeTimers(false);
+    },
+    [],
+  );
+
+  function updateAudioSettings(nextSettings: Partial<AudioPlayerSettings>) {
+    setAudioSettings((current) => ({ ...current, ...nextSettings }));
+  }
+
+  function getAudioSegments() {
+    return [...(content.audioSegments ?? [])].sort(
+      (left, right) => left.sentenceNo - right.sentenceNo,
+    );
+  }
+
+  function centerSentenceCard(sentenceNo: number) {
+    window.requestAnimationFrame(() => {
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      document
+        .getElementById(`speaking-sentence-${content.questionId}-${sentenceNo}`)
+        ?.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" });
+    });
+  }
+
+  function playSentenceByMode(sentenceNo: number) {
+    const segments = getAudioSegments();
+    const nextSentenceNo = getNextSentenceNo(
+      segments.map((sentence) => sentence.sentenceNo),
+      sentenceNo,
+      audioSettingsRef.current.playMode,
+    );
+
+    if (nextSentenceNo == null) {
+      activeSentenceNoRef.current = null;
+      setActiveSentenceNo(null);
+      return;
+    }
+
+    activeSentenceNoRef.current = nextSentenceNo;
+    setActiveSentenceNo(nextSentenceNo);
+    setActiveSentencePosition(0);
+    setSentenceAutoPlaySignals((current) => ({
+      ...current,
+      [nextSentenceNo]: (current[nextSentenceNo] ?? 0) + 1,
+    }));
+    centerSentenceCard(nextSentenceNo);
+  }
+
+  function startSpeakingPractice(sentence: SpeakingAudioSegment, mode: ActiveSpeakingMode) {
+    const durationSeconds = Math.max(
+      sentenceDurations[sentence.sentenceNo] ?? sentence.english.split(/\s+/).length / 2.5,
+      0.1,
+    );
+    const delayMs = getSpeakingPracticeDelayMs(mode, durationSeconds);
+    const deadline = Date.now() + delayMs;
+
+    clearSpeakingPracticeTimers(false);
+    setSpeakingTraining({
+      mode,
+      remainingSeconds: Math.ceil(delayMs / 1_000),
+      sentenceNo: sentence.sentenceNo,
+    });
+    centerSentenceCard(sentence.sentenceNo);
+
+    speakingCountdownRef.current = window.setInterval(() => {
+      setSpeakingTraining((current) =>
+        current?.sentenceNo === sentence.sentenceNo
+          ? {
+              ...current,
+              remainingSeconds: Math.max(0, Math.ceil((deadline - Date.now()) / 1_000)),
+            }
+          : current,
+      );
+    }, 250);
+
+    speakingAdvanceRef.current = window.setTimeout(() => {
+      if (speakingCountdownRef.current != null) {
+        window.clearInterval(speakingCountdownRef.current);
+        speakingCountdownRef.current = null;
+      }
+      speakingAdvanceRef.current = null;
+      setSpeakingTraining(null);
+      playSentenceByMode(sentence.sentenceNo);
+    }, delayMs);
+  }
+
+  function handleSentencePlayingChange(sentenceNo: number, isPlaying: boolean) {
+    if (isPlaying) {
+      clearSpeakingPracticeTimers();
+      activeSentenceNoRef.current = sentenceNo;
+      setActiveSentenceNo(sentenceNo);
+      setIsSentenceAudioPlaying(true);
+      centerSentenceCard(sentenceNo);
+      return;
+    }
+
+    if (activeSentenceNoRef.current === sentenceNo) {
+      setIsSentenceAudioPlaying(false);
+    }
+  }
+
+  function handleSentenceEnded(sentence: SpeakingAudioSegment) {
+    setIsSentenceAudioPlaying(false);
+    const speakingMode = audioSettingsRef.current.speakingMode;
+
+    if (speakingMode === "none") {
+      playSentenceByMode(sentence.sentenceNo);
+      return;
+    }
+
+    startSpeakingPractice(sentence, speakingMode);
+  }
+
+  function handleFullAudioPlayingChange(isPlaying: boolean) {
+    if (isPlaying) {
+      clearSpeakingPracticeTimers();
+      activeSentenceNoRef.current = null;
+      setActiveSentenceNo(null);
+      setIsSentenceAudioPlaying(false);
+    }
+  }
 
   useEffect(() => {
     let isMounted = true;
@@ -551,7 +793,14 @@ export default function SpeakingModelAnswerContent({
         <h2>{content.answerHeading}</h2>
         <div className={styles.answer}>
           {content.answer.map((paragraph, index) => (
-            <p key={`${paragraph}-${index}`}>{paragraph}</p>
+            <p key={`${paragraph}-${index}`}>
+              {renderHighlightedText(
+                paragraph,
+                content.vocabulary.map((item) => item.phrase),
+                "english",
+                styles.vocabularyHighlight,
+              )}
+            </p>
           ))}
         </div>
 
@@ -560,7 +809,14 @@ export default function SpeakingModelAnswerContent({
             <h3>中文翻译</h3>
             <div className={styles.translation}>
               {content.answerTranslation.map((paragraph, index) => (
-                <p key={`${paragraph}-${index}`}>{paragraph}</p>
+                <p key={`${paragraph}-${index}`}>
+                  {renderHighlightedText(
+                    paragraph,
+                    content.vocabulary.map((item) => item.translation),
+                    "chinese",
+                    styles.vocabularyHighlight,
+                  )}
+                </p>
               ))}
             </div>
           </div>
@@ -569,9 +825,114 @@ export default function SpeakingModelAnswerContent({
         {content.audioUrl ? (
           <div className={styles.audioBlock}>
             <h3>范文音频</h3>
-            <audio controls preload="none" src={content.audioUrl}>
-              您的浏览器暂不支持音频播放。
-            </audio>
+            <AudioPlayer
+              hasSelectedRate
+              html5={false}
+              onPlayingChange={handleFullAudioPlayingChange}
+              onSettingsChange={updateAudioSettings}
+              settings={audioSettings}
+              src={content.audioUrl}
+              title={`${content.question} 完整范文音频`}
+            />
+          </div>
+        ) : null}
+
+        {content.audioSegments?.length ? (
+          <div className={styles.speakingSentencePractice}>
+            <div className={styles.speakingSentenceHeading}>
+              <h3>逐句训练</h3>
+              <p>点击句子音频，使用播放器中的“口语模式”或“写作模式”进行练习。</p>
+            </div>
+            <div className="sentence-list bbc-listening-sentence-list">
+              {content.audioSegments.map((sentence) => (
+                <article
+                  className={`sentence-card bbc-listening-sentence-card ${
+                    activeSentenceNo === sentence.sentenceNo ? "active" : ""
+                  }`}
+                  id={`speaking-sentence-${content.questionId}-${sentence.sentenceNo}`}
+                  key={`${content.questionId}-${sentence.sentenceNo}`}
+                >
+                  <div className="sentence-meta">
+                    <div className="sentence-meta-copy">
+                      <span>#{sentence.sentenceNo}</span>
+                    </div>
+                  </div>
+                  <div className="sentence-copy bbc-listening-sentence-copy">
+                    <BbcSentencePractice
+                      activeWordIndex={
+                        isSentenceAudioPlaying && activeSentenceNo === sentence.sentenceNo
+                          ? getActiveWordIndex(
+                              sentence.english,
+                              activeSentencePosition,
+                              Math.max(sentenceDurations[sentence.sentenceNo] ?? 0.1, 0.1),
+                            )
+                          : null
+                      }
+                      isAudioPlaying={
+                        isSentenceAudioPlaying && activeSentenceNo === sentence.sentenceNo
+                      }
+                      sentence={{
+                        chinese: sentence.chinese,
+                        chineseUnderlinedTerms: content.vocabulary.map(
+                          (item) => item.translation,
+                        ),
+                        english: sentence.english,
+                        sentenceNo: sentence.sentenceNo,
+                        underlinedTerms: content.vocabulary.map((item) => item.phrase),
+                      }}
+                      settings={audioSettings}
+                    />
+                  </div>
+                  {speakingTraining?.sentenceNo === sentence.sentenceNo ? (
+                    <div aria-live="polite" className="bbc-speaking-training-status practicing">
+                      <span>{SPEAKING_PHASE_LABELS[speakingTraining.mode]}</span>
+                      <strong>{speakingTraining.remainingSeconds} 秒</strong>
+                      <small>
+                        后
+                        {audioSettings.playMode === "sentence-loop"
+                          ? "重播本句"
+                          : sentence.sentenceNo === content.audioSegments?.at(-1)?.sentenceNo
+                            ? "结束本轮训练"
+                            : "播放下一句"}
+                      </small>
+                    </div>
+                  ) : activeSentenceNo === sentence.sentenceNo &&
+                    isSentenceAudioPlaying &&
+                    audioSettings.speakingMode !== "none" ? (
+                    <div className="bbc-speaking-training-status playing">
+                      <span>{SPEAKING_MODE_LABELS[audioSettings.speakingMode]}</span>
+                      <strong>正在播放</strong>
+                      <small>{SPEAKING_PLAYING_HINTS[audioSettings.speakingMode]}</small>
+                    </div>
+                  ) : null}
+                  <AudioPlayer
+                    autoPlaySignal={sentenceAutoPlaySignals[sentence.sentenceNo] ?? 0}
+                    deferSentenceLoop={audioSettings.speakingMode !== "none"}
+                    hasSelectedRate
+                    html5={false}
+                    onDurationChange={(durationSeconds) =>
+                      setSentenceDurations((current) => ({
+                        ...current,
+                        [sentence.sentenceNo]: durationSeconds,
+                      }))
+                    }
+                    onEnded={() => handleSentenceEnded(sentence)}
+                    onPlayingChange={(isPlaying) =>
+                      handleSentencePlayingChange(sentence.sentenceNo, isPlaying)
+                    }
+                    onSettingsChange={updateAudioSettings}
+                    onTimeChange={(positionSeconds) => {
+                      if (activeSentenceNoRef.current === sentence.sentenceNo) {
+                        setActiveSentencePosition(positionSeconds);
+                      }
+                    }}
+                    settings={audioSettings}
+                    src={sentence.audioUrl}
+                    title={`第 ${sentence.sentenceNo} 句音频`}
+                  />
+                </article>
+              ))}
+            </div>
           </div>
         ) : null}
       </section>
