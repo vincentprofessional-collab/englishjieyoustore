@@ -140,6 +140,10 @@ function splitLines(text: string) {
     .filter(Boolean);
 }
 
+function normalizeTranscript(text: string) {
+  return text.replace(/\s+/g, " ").trim();
+}
+
 function cloneVocabulary(vocabulary: SpeakingVocabulary[]) {
   return vocabulary.map((item) => ({ ...item }));
 }
@@ -493,8 +497,28 @@ export default function SpeakingModelAnswerContent({
       nextContent.audioSegments?.length &&
         nextContent.audioSegments.every((segment) => segment.audioUrl === nextContent.audioUrl),
     );
+    const hasEstimatedSegmentsForAudio = Boolean(
+      hasSegmentsForAudio &&
+        nextContent.audioSegments?.some(
+          (segment) => segment.startSeconds != null && segment.endSeconds != null,
+        ),
+    );
+    const transcriptChanged = Boolean(
+      hasEstimatedSegmentsForAudio &&
+        nextContent.audioSegments &&
+        (normalizeTranscript(nextContent.answer.join(" ")) !==
+          normalizeTranscript(nextContent.audioSegments.map((segment) => segment.english).join(" ")) ||
+          normalizeTranscript(nextContent.answerTranslation.join(" ")) !==
+            normalizeTranscript(
+              nextContent.audioSegments.map((segment) => segment.chinese).join(" "),
+            )),
+    );
 
-    if (audioChanged && nextContent.audioSegments?.length && !hasSegmentsForAudio) {
+    if (
+      (audioChanged || transcriptChanged) &&
+      nextContent.audioSegments?.length &&
+      (!hasSegmentsForAudio || transcriptChanged)
+    ) {
       nextContent.audioSegments = [];
     }
 
@@ -505,7 +529,9 @@ export default function SpeakingModelAnswerContent({
       let generatedSegmentCount = 0;
       if (
         nextContent.audioUrl &&
-        (!nextContent.audioSegments?.length || (audioChanged && !hasSegmentsForAudio))
+        (!nextContent.audioSegments?.length ||
+          (audioChanged && !hasSegmentsForAudio) ||
+          transcriptChanged)
       ) {
         setStatus({ tone: "info", text: "正在读取音频时长并生成逐句训练卡片..." });
         const durationSeconds = await readAudioDuration(nextContent.audioUrl);
