@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 2,
+  "id": "cet4-paper-2016063",
+  "kind": "paper",
+  "title": "2016年6月大学英语四级真题 · 第3套",
+  "year": "2016",
+  "region": "全国",
+  "variant": "第3套",
+  "submissionMode": "whole-paper",
+  "instructions": [
+    {
+      "type": "notice",
+      "tone": "info",
+      "text": "按原卷分区作答。提交整卷后显示可用答案与原资料参考内容。"
+    }
+  ],
+  "sections": [
+    {
+      "id": "cet4-paper-2016063-part-4-translation",
+      "title": "Translation 翻译",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet4-paper-2016063-part-4-translation-group",
+          "title": "翻译题",
+          "presentation": "writing",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet4-paper-2016063-part-4-q-1-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "translation",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "乌镇是浙江的一座古老水镇，坐落在京杭大运河畔。这是一处迷人的地方，有许多古桥、中式旅店和 餐馆。在过去一千年里，乌镇的水系和生活方式并未经历多少变化,是一座展现古文明的博物馆。乌镇所 有房屋都用石木建造。数百年来，当地人沿着河边建起了住宅和集市。无数宽敞美丽的庭院藏身于屋舍 之间，游客们每到一处都会有惊喜的发现。 四级2016年6月 54"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": "5 )70 4           + 1,;.5,*,-£& ;.5,-17 231)+.1 :5 /+2,1+ .28/5,7 <=¡¢íN],$XÙ,-ç\\Ù’/ûºDµ#($k=]"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "828c3eb2d15afb5c6ffe8b8a43e59eb0e37cc12725cf151cc08c859f2aea5bd1",
+                  "relativePath": "2016年06月四级真题第3套.docx；2016年06月四级解析第3套.pdf",
+                  "sha256": "828c3eb2d15afb5c6ffe8b8a43e59eb0e37cc12725cf151cc08c859f2aea5bd1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "assetRefs": [],
+  "sourceRefs": [
+    {
+      "sourceDocumentId": "828c3eb2d15afb5c6ffe8b8a43e59eb0e37cc12725cf151cc08c859f2aea5bd1",
+      "relativePath": "2016年06月四级真题第3套.docx；2016年06月四级解析第3套.pdf",
+      "sha256": "828c3eb2d15afb5c6ffe8b8a43e59eb0e37cc12725cf151cc08c859f2aea5bd1",
+      "locator": {},
+      "extractionMethod": "manual-review",
+      "confidence": 0.86
+    }
+  ],
+  "quality": {
+    "structureStatus": "approved",
+    "structureConfidence": 0.86,
+    "issueCount": 0,
+    "issues": []
+  }
+}

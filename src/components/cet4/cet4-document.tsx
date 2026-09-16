@@ -6,9 +6,10 @@ import styles from "./cet4.module.css";
 import type { Cet4Entry } from "@/lib/cet4/library";
 
 type PublicEntry = Omit<Cet4Entry, "answers" | "sourceHash">;
+type CetExam = "cet4" | "cet6";
 
 function lineKind(line: string) {
-  if (/^(?:Part|Section|Directions|Unit|Passage|Questions?\s+\d|大学英语四级)/i.test(line)) return "heading";
+  if (/^(?:Part|Section|Directions|Unit|Passage|Questions?\s+\d|大学英语(?:四|六)级)/i.test(line)) return "heading";
   if (/^\s*\d{1,3}[.、．)]\s*/.test(line)) return "question";
   if (/^\s*[A-O][.、．)]\s*/.test(line)) return "option";
   return "paragraph";
@@ -23,7 +24,8 @@ function TextLine({ line, lineIndex, values, setValue }: { line: string; lineInd
   })}</>;
 }
 
-export function Cet4Document({ entry }: { entry: PublicEntry }) {
+export function Cet4Document({ entry, exam = "cet4" }: { entry: PublicEntry; exam?: CetExam }) {
+  const examLabel = exam === "cet6" ? "六级" : "四级";
   const [values, setValues] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
   const [answers, setAnswers] = useState("");
@@ -44,7 +46,7 @@ export function Cet4Document({ entry }: { entry: PublicEntry }) {
 
   return <main className={styles.document}>
     <header className={styles.documentHeader}>
-      <Link href="/cet4">← 返回四级目录</Link>
+      <Link href={`/${exam}`}>← 返回{examLabel}目录</Link>
       <span>{entry.section} · {entry.topic}</span>
       <h1>{entry.title}</h1>
       <p>来源：{entry.sourceFiles.join("；")}</p>
@@ -61,7 +63,7 @@ export function Cet4Document({ entry }: { entry: PublicEntry }) {
 
       {interactive ? <section className={styles.responseBox}>
         <label htmlFor="cet4-notes">补充作答区</label>
-        <textarea id="cet4-notes" onChange={(event) => setValue("notes", event.target.value)} placeholder="翻译、写作或未能在题面内填写的答案可写在这里" value={values.notes || ""} />
+        <textarea id={`${exam}-notes`} onChange={(event) => setValue("notes", event.target.value)} placeholder="翻译、写作或未能在题面内填写的答案可写在这里" value={values.notes || ""} />
         <button onClick={() => void submit()} type="button">提交本页</button>
         {submitted && answerChecked && !answers ? <p className={styles.saved}>作答已保留。本页源资料未提供可可靠自动判分的标准答案，因此不伪判对错。</p> : null}
       </section> : null}

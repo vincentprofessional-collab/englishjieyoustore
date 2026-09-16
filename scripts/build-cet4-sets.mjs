@@ -1,10 +1,11 @@
 import { createHash } from "node:crypto";
-import { mkdir, readdir, rm, writeFile } from "node:fs/promises";
+import { mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 
-import libraryData from "../src/data/cet4/library.json" with { type: "json" };
-
-const ROOT = path.resolve("public/cet4");
+const EXAM = process.env.CET_EXAM === "cet6" ? "cet6" : "cet4";
+const EXAM_LABEL = EXAM === "cet6" ? "大学英语六级" : "大学英语四级";
+const ROOT = path.resolve("public", EXAM);
+const libraryData = JSON.parse(await readFile(path.resolve("src/data", EXAM, "library.json"), "utf8"));
 const entries = libraryData.entries;
 const PART_RE = /^\s*Part\s+(?:[IVX]+|[ⅠⅡⅢⅣⅤⅥ]+|\d+)\b/i;
 const SECTION_RE = /^\s*Section\s+[A-C]\b/i;
@@ -42,7 +43,7 @@ function cleanLines(text) {
     .replace(/[\u00a0\u200b]/g, " ")
     .replace(/\s+$/g, "").trim()).filter((line) => {
     if (!line) return false;
-    if (/^英语四级考试网\b|^www\.CET4V\.com\b/i.test(line)) return false;
+    if (/^英语(?:四|六)级考试网\b|^www\.CET[46]V\.com\b/i.test(line)) return false;
     if (/尊重劳动尊重版权|文档发布，只好用PDF格式/i.test(line)) return false;
     if (/真题试卷及答案解析考后第一时间发布|预测卷三套含答案解析及听力/i.test(line)) return false;
     if (/^\d+\s*$/.test(line)) return false;
@@ -256,7 +257,7 @@ function writingSection(lines, answerText, ref, prefix) {
   const partOneReference = answerText.match(/(?:^|\n)\s*Part\s+I\s+Writing\b([\s\S]*?)(?=\n\s*Part\s+II\b|$)/i)?.[1] || "";
   const labeledReference = answerText.match(/(?:^|\n)\s*(?:参考范文|范文|Possible Version|Sample)\s*[:：]?([\s\S]*)/im)?.[1] || "";
   const usablePartOneReference = /(?:^|\n)\s*Directions?\b/i.test(partOneReference.slice(0, 220)) ? "" : partOneReference;
-  const reference = (usablePartOneReference || labeledReference).replace(/^\s*(?:参考答案|四级英语参考范文|参考范文)\s*[:：]?/i, "").trim();
+  const reference = (usablePartOneReference || labeledReference).replace(/^\s*(?:参考答案|(?:四|六)级英语参考范文|参考范文)\s*[:：]?/i, "").trim();
   return { id: `${prefix}-writing`, title: "Writing 写作", layout: "flow", instructions: [], groups: [{ id: `${prefix}-writing-group`, title: "写作题", presentation: "writing", instructions: [], stimulusBlocks: [], sharedOptions: [], questions: [{ id: `${prefix}-q-1`, displayNumber: 1, sourceQuestionNumber: 1, type: "essay", promptBlocks: paragraphBlocks(prompt), placement: { kind: "standalone" }, options: [], blanks: [], answerSpec: reference ? { availability: "answered", gradingMode: "manual", kind: "reference", referenceAnswer: reference } : { availability: "none", gradingMode: "none", kind: "none" }, explanationBlocks: [], sourceRefs: [ref], reviewStatus: reference ? "approved" : "review_required" }] }] };
 }
 
@@ -346,7 +347,7 @@ for (const entry of entries.filter((item) => item.section !== "知识点")) {
   }
   await writeFile(path.join(ROOT, "papers", `${entry.id}.json`), `${JSON.stringify(set, null, 2)}\n`);
   const questionCount = set.sections.reduce((sum, section) => sum + section.groups.reduce((groupSum, group) => groupSum + group.questions.length, 0), 0);
-  indexEntries.push({ id: entry.id, kind, title: entry.title, year: set.year, region: set.region, variant: set.variant, questionCount, answeredCount: set.sections.flatMap((section) => section.groups.flatMap((group) => group.questions)).filter((question) => question.answerSpec.availability === "answered").length, explanationCount: 0, answerStatus: "partial", questionTypes: [...new Set(set.sections.flatMap((section) => section.groups.flatMap((group) => group.questions.map((question) => question.type))))], href: `/cet4/${entry.id}`, quality: { structureStatus: set.quality.structureStatus, structureConfidence: set.quality.structureConfidence, issueCount: set.quality.issueCount } });
+  indexEntries.push({ id: entry.id, kind, title: entry.title, year: set.year, region: set.region, variant: set.variant, questionCount, answeredCount: set.sections.flatMap((section) => section.groups.flatMap((group) => group.questions)).filter((question) => question.answerSpec.availability === "answered").length, explanationCount: 0, answerStatus: "partial", questionTypes: [...new Set(set.sections.flatMap((section) => section.groups.flatMap((group) => group.questions.map((question) => question.type))))], href: `/${EXAM}/${entry.id}`, quality: { structureStatus: set.quality.structureStatus, structureConfidence: set.quality.structureConfidence, issueCount: set.quality.issueCount } });
 }
 const groupedPractice = new Map();
 for (const set of practiceSets) {
@@ -359,11 +360,11 @@ for (const set of practiceSets) {
 }
 for (const group of groupedPractice.values()) {
   const familySlug = { "听力": "listening", "翻译": "translation", "选词填空": "cloze", "阅读": "reading", "综合题型": "mixed" }[group.name] || "mixed";
-  const id = `practice-cet4-${familySlug}`;
-  const set = { schemaVersion: 2, id, kind: "practice", title: `大学英语四级${group.name}专项训练`, year: "历年", region: "全国", variant: "", instructions: [{ type: "notice", tone: "info", text: "同一题型的专项资料集中在本页；按题组提交后显示可用答案。" }], sections: group.sections, assetRefs: group.assetRefs, sourceRefs: group.sourceRefs, quality: { structureStatus: "approved", structureConfidence: 0.84, issueCount: 0, issues: [] } };
+  const id = `practice-${EXAM}-${familySlug}`;
+  const set = { schemaVersion: 2, id, kind: "practice", title: `${EXAM_LABEL}${group.name}专项训练`, year: "历年", region: "全国", variant: "", instructions: [{ type: "notice", tone: "info", text: "同一题型的专项资料集中在本页；按题组提交后显示可用答案。" }], sections: group.sections, assetRefs: group.assetRefs, sourceRefs: group.sourceRefs, quality: { structureStatus: "approved", structureConfidence: 0.84, issueCount: 0, issues: [] } };
   await writeFile(path.join(ROOT, "practice", `${id}.json`), `${JSON.stringify(set, null, 2)}\n`);
   const questions = set.sections.flatMap((section) => section.groups.flatMap((questionGroup) => questionGroup.questions));
-  indexEntries.unshift({ id, kind: "practice", title: set.title, year: set.year, region: set.region, variant: set.variant, questionCount: questions.length, answeredCount: questions.filter((question) => question.answerSpec.availability === "answered").length, explanationCount: 0, answerStatus: "partial", questionTypes: [...new Set(questions.map((question) => question.type))], href: `/cet4/${id}`, quality: { structureStatus: set.quality.structureStatus, structureConfidence: set.quality.structureConfidence, issueCount: set.quality.issueCount } });
+  indexEntries.unshift({ id, kind: "practice", title: set.title, year: set.year, region: set.region, variant: set.variant, questionCount: questions.length, answeredCount: questions.filter((question) => question.answerSpec.availability === "answered").length, explanationCount: 0, answerStatus: "partial", questionTypes: [...new Set(questions.map((question) => question.type))], href: `/${EXAM}/${id}`, quality: { structureStatus: set.quality.structureStatus, structureConfidence: set.quality.structureConfidence, issueCount: set.quality.issueCount } });
 }
 indexEntries.sort((left, right) => (left.kind === right.kind ? right.title.localeCompare(left.title, "zh-CN", { numeric: true }) : left.kind === "practice" ? -1 : 1));
 await writeFile(path.join(ROOT, "index.json"), `${JSON.stringify({ schemaVersion: 2, generatedAt: new Date().toISOString(), entries: indexEntries }, null, 2)}\n`);

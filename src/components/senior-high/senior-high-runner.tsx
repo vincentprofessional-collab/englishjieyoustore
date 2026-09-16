@@ -674,7 +674,7 @@ export function SeniorHighRunner({ kind, setId, basePath = "/senior-high", backH
 
   return <section className="senior-high-page senior-high-v2-runner" data-paper-mode={data.submissionMode}>
     <header className="senior-high-v2-runner-header">
-      <Link className="senior-high-back" href={backHref || (data.kind === "paper" ? "/senior-high?entry=papers" : "/senior-high")}>← 返回{basePath === "/senior-high" ? "高考英语" : "大学英语四级"}</Link>
+      <Link className="senior-high-back" href={backHref || (data.kind === "paper" ? "/senior-high?entry=papers" : "/senior-high")}>← 返回{basePath === "/senior-high" ? "高考英语" : basePath === "/cet6" ? "大学英语六级" : "大学英语四级"}</Link>
       <div className="senior-high-v2-runner-title"><h1>{data.title}</h1></div>
       <div className="senior-high-v2-progress"><strong>{answeredCount}/{questions.length}</strong><span>已作答</span></div>
     </header>

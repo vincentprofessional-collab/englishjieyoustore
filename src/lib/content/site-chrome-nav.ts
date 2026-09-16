@@ -131,3 +131,42 @@ export function ensureCet4ExamMenu<T extends SiteChromeNavNode>(
       : item,
   );
 }
+
+export function ensureCet6ExamMenu<T extends SiteChromeNavNode>(
+  items: T[],
+  exams: T,
+  cet6: T,
+): T[] {
+  const ensureCet6Link = (children: SiteChromeNavNode[]): SiteChromeNavNode[] => {
+    const cleanedChildren = children.filter(
+      (item) => item.id !== "other-exams" && item.label !== "其他考试正在开发中",
+    );
+    const existingCet6 = cleanedChildren.find((item) => item.id === cet6.id);
+
+    if (!existingCet6) return [...cleanedChildren, cet6];
+
+    return cleanedChildren.map((item) =>
+      item.id === cet6.id ? { ...item, ...cet6, children: item.children } : item,
+    );
+  };
+  const existingExams = items.find((item) => item.id === exams.id);
+
+  if (!existingExams) {
+    return [
+      ...items,
+      {
+        ...exams,
+        children: ensureCet6Link(exams.children),
+      },
+    ];
+  }
+
+  return items.map((item) =>
+    item.id === exams.id
+      ? {
+          ...item,
+          children: ensureCet6Link(item.children),
+        }
+      : item,
+  );
+}

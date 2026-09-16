@@ -1,0 +1,140 @@
+{
+  "schemaVersion": 2,
+  "id": "cet4-paper-2015121",
+  "kind": "paper",
+  "title": "2015年12月大学英语四级真题 · 第1套",
+  "year": "2015",
+  "region": "全国",
+  "variant": "第1套",
+  "submissionMode": "whole-paper",
+  "instructions": [
+    {
+      "type": "notice",
+      "tone": "info",
+      "text": "按原卷分区作答。提交整卷后显示可用答案与原资料参考内容。"
+    }
+  ],
+  "sections": [
+    {
+      "id": "cet4-paper-2015121-part-1-writing",
+      "title": "Writing 写作",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet4-paper-2015121-part-1-writing-group",
+          "title": "写作题",
+          "presentation": "writing",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet4-paper-2015121-part-1-q-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "essay",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "23ddb65f84e045c8911e3b78d1d9c88e357535a282e5e7b96c8f3c9edd2cdd7b",
+                  "relativePath": "2015年12月四级真题第1套.docx；2015.12英语四级解析第1套.pdf",
+                  "sha256": "23ddb65f84e045c8911e3b78d1d9c88e357535a282e5e7b96c8f3c9edd2cdd7b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cet4-paper-2015121-part-4-translation",
+      "title": "Translation 翻译",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet4-paper-2015121-part-4-translation-group",
+          "title": "翻译题",
+          "presentation": "writing",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet4-paper-2015121-part-4-q-1-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "translation",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Section A 中国父母往往过于关注孩子的学习，以至于不要他们帮忙做家务。他们对孩子 的首要要求就是努力学习，考得好，能上名牌大学。他们相信这是为孩子好，因为 在中国这样竞争激烈的社会里，只有成绩好才能保证前途光明。中国父母还认为， 如果孩子能在社会上取得大的成就，父母就会受到尊敬。因此，他们愿意牺牲自己 的时间、爱好和兴趣，为孩子提供更好的条件。"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "23ddb65f84e045c8911e3b78d1d9c88e357535a282e5e7b96c8f3c9edd2cdd7b",
+                  "relativePath": "2015年12月四级真题第1套.docx；2015.12英语四级解析第1套.pdf",
+                  "sha256": "23ddb65f84e045c8911e3b78d1d9c88e357535a282e5e7b96c8f3c9edd2cdd7b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "assetRefs": [],
+  "sourceRefs": [
+    {
+      "sourceDocumentId": "23ddb65f84e045c8911e3b78d1d9c88e357535a282e5e7b96c8f3c9edd2cdd7b",
+      "relativePath": "2015年12月四级真题第1套.docx；2015.12英语四级解析第1套.pdf",
+      "sha256": "23ddb65f84e045c8911e3b78d1d9c88e357535a282e5e7b96c8f3c9edd2cdd7b",
+      "locator": {},
+      "extractionMethod": "manual-review",
+      "confidence": 0.86
+    }
+  ],
+  "quality": {
+    "structureStatus": "approved",
+    "structureConfidence": 0.86,
+    "issueCount": 0,
+    "issues": []
+  }
+}

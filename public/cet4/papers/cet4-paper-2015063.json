@@ -1,0 +1,140 @@
+{
+  "schemaVersion": 2,
+  "id": "cet4-paper-2015063",
+  "kind": "paper",
+  "title": "2015年6月大学英语四级真题 · 第3套",
+  "year": "2015",
+  "region": "全国",
+  "variant": "第3套",
+  "submissionMode": "whole-paper",
+  "instructions": [
+    {
+      "type": "notice",
+      "tone": "info",
+      "text": "按原卷分区作答。提交整卷后显示可用答案与原资料参考内容。"
+    }
+  ],
+  "sections": [
+    {
+      "id": "cet4-paper-2015063-part-1-writing",
+      "title": "Writing 写作",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet4-paper-2015063-part-1-writing-group",
+          "title": "写作题",
+          "presentation": "writing",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet4-paper-2015063-part-1-q-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "essay",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "488c13f9d9791f89692063a2a154ae37675a53c4d7d001e8e358525b8caf514d",
+                  "relativePath": "2015年06月四级真题第3套.docx；2015.06英语四级解析第3套.pdf",
+                  "sha256": "488c13f9d9791f89692063a2a154ae37675a53c4d7d001e8e358525b8caf514d",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cet4-paper-2015063-part-4-translation",
+      "title": "Translation 翻译",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet4-paper-2015063-part-4-translation-group",
+          "title": "翻译题",
+          "presentation": "writing",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet4-paper-2015063-part-4-q-1-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "translation",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Section A 在西方人心目中，和中国联系最为密切的基本食物是大米。长期以来，大米在中国人的饮食中占据很重要的地位，以至于有谚语说“巧妇难为无米之炊”。中国南方大多种植水稻，人们通常以大米为主食；而华北大部分地区因为过于寒冷或过于干燥，无法种植水稻，那里的主要作物是小麦。在中国，有些人用面粉做面包，但大多数人用面粉做馒头和面条。"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "488c13f9d9791f89692063a2a154ae37675a53c4d7d001e8e358525b8caf514d",
+                  "relativePath": "2015年06月四级真题第3套.docx；2015.06英语四级解析第3套.pdf",
+                  "sha256": "488c13f9d9791f89692063a2a154ae37675a53c4d7d001e8e358525b8caf514d",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "assetRefs": [],
+  "sourceRefs": [
+    {
+      "sourceDocumentId": "488c13f9d9791f89692063a2a154ae37675a53c4d7d001e8e358525b8caf514d",
+      "relativePath": "2015年06月四级真题第3套.docx；2015.06英语四级解析第3套.pdf",
+      "sha256": "488c13f9d9791f89692063a2a154ae37675a53c4d7d001e8e358525b8caf514d",
+      "locator": {},
+      "extractionMethod": "manual-review",
+      "confidence": 0.86
+    }
+  ],
+  "quality": {
+    "structureStatus": "approved",
+    "structureConfidence": 0.86,
+    "issueCount": 0,
+    "issues": []
+  }
+}

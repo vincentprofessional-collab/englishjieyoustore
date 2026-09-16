@@ -1,0 +1,150 @@
+{
+  "schemaVersion": 2,
+  "id": "cet4-paper-2015062",
+  "kind": "paper",
+  "title": "2015年6月大学英语四级真题 · 第2套",
+  "year": "2015",
+  "region": "全国",
+  "variant": "第2套",
+  "submissionMode": "whole-paper",
+  "instructions": [
+    {
+      "type": "notice",
+      "tone": "info",
+      "text": "按原卷分区作答。提交整卷后显示可用答案与原资料参考内容。"
+    }
+  ],
+  "sections": [
+    {
+      "id": "cet4-paper-2015062-part-1-writing",
+      "title": "Writing 写作",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet4-paper-2015062-part-1-writing-group",
+          "title": "写作题",
+          "presentation": "writing",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet4-paper-2015062-part-1-q-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "essay",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "“Why am I going to school if my phone already knows everything?”"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "35aabdf68deb274db007ce9af5d762f41ab235d4826b7b9a648eac8235942350",
+                  "relativePath": "2015年06月四级真题第2套.docx；2015.06英语四级解析第2套.pdf",
+                  "sha256": "35aabdf68deb274db007ce9af5d762f41ab235d4826b7b9a648eac8235942350",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cet4-paper-2015062-part-4-translation",
+      "title": "Translation 翻译",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet4-paper-2015062-part-4-translation-group",
+          "title": "翻译题",
+          "presentation": "writing",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet4-paper-2015062-part-4-q-1-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "translation",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Section A 据报道，今年中国快递服务(courier services)将递送大约 120 亿件包裹。这将使中国有可能超越美国成为世界上最大的快递市场。大多数包裹里装着网上订购的物 品。中国给数百万在线零售商以极具竞争力的价格销售商品的机会。仅在11月11日,中国消费者就从国内最大的购物平台购买了价值 90 亿美元的商品。中国有不少这样的特殊购物日。因此,快递业在中国扩展就不足为奇了。"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "35aabdf68deb274db007ce9af5d762f41ab235d4826b7b9a648eac8235942350",
+                  "relativePath": "2015年06月四级真题第2套.docx；2015.06英语四级解析第2套.pdf",
+                  "sha256": "35aabdf68deb274db007ce9af5d762f41ab235d4826b7b9a648eac8235942350",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "assetRefs": [],
+  "sourceRefs": [
+    {
+      "sourceDocumentId": "35aabdf68deb274db007ce9af5d762f41ab235d4826b7b9a648eac8235942350",
+      "relativePath": "2015年06月四级真题第2套.docx；2015.06英语四级解析第2套.pdf",
+      "sha256": "35aabdf68deb274db007ce9af5d762f41ab235d4826b7b9a648eac8235942350",
+      "locator": {},
+      "extractionMethod": "manual-review",
+      "confidence": 0.86
+    }
+  ],
+  "quality": {
+    "structureStatus": "approved",
+    "structureConfidence": 0.86,
+    "issueCount": 0,
+    "issues": []
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "schemaVersion": 2,
+  "id": "cet6-paper-2023033",
+  "kind": "paper",
+  "title": "2023年3月大学英语六级真题 · 第3套",
+  "year": "2023",
+  "region": "全国",
+  "variant": "第3套",
+  "submissionMode": "whole-paper",
+  "instructions": [
+    {
+      "type": "notice",
+      "tone": "info",
+      "text": "按原卷分区作答。提交整卷后显示可用答案与原资料参考内容。"
+    }
+  ],
+  "sections": [
+    {
+      "id": "cet6-paper-2023033-part-1-writing",
+      "title": "Writing 写作",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet6-paper-2023033-part-1-writing-group",
+          "title": "写作题",
+          "presentation": "writing",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2023033-part-1-q-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "essay",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "91bc25cb51d521e9633ded060977e48c7e6e0be58d1ad6511600ae0733b5ea79",
+                  "relativePath": "2023.03英语六级真题第3套.docx",
+                  "sha256": "91bc25cb51d521e9633ded060977e48c7e6e0be58d1ad6511600ae0733b5ea79",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cet6-paper-2023033-part-2-translation",
+      "title": "Translation 翻译",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet6-paper-2023033-part-2-translation-group",
+          "title": "翻译题",
+          "presentation": "writing",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2023033-part-2-q-1-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "translation",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "徐霞客是中国明代的著名地理学家。他花费了三十多年的时间游遍了大半个中国。他主要靠徒步跋涉,寻访了许多荒远偏僻的地区。他把自己的见闻和考察结果详细记录下来,为后人留下了珍贵的考察资料。他通过对许多河流的实地调查,纠正了文献中关于水源的错误。他还详细地描述了地形、气候等因素对植物的影响，生动地描绘了各地的名胜古迹和风土人情。他的考察记录由后人整理成了《徐霞客游记》,在国内外产生了广泛的影响。"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "91bc25cb51d521e9633ded060977e48c7e6e0be58d1ad6511600ae0733b5ea79",
+                  "relativePath": "2023.03英语六级真题第3套.docx",
+                  "sha256": "91bc25cb51d521e9633ded060977e48c7e6e0be58d1ad6511600ae0733b5ea79",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "assetRefs": [],
+  "sourceRefs": [
+    {
+      "sourceDocumentId": "91bc25cb51d521e9633ded060977e48c7e6e0be58d1ad6511600ae0733b5ea79",
+      "relativePath": "2023.03英语六级真题第3套.docx",
+      "sha256": "91bc25cb51d521e9633ded060977e48c7e6e0be58d1ad6511600ae0733b5ea79",
+      "locator": {},
+      "extractionMethod": "manual-review",
+      "confidence": 0.86
+    }
+  ],
+  "quality": {
+    "structureStatus": "approved",
+    "structureConfidence": 0.86,
+    "issueCount": 0,
+    "issues": []
+  }
+}

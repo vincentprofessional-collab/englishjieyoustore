@@ -14,7 +14,7 @@ test("CET-4 library keeps all three requested sections separate", () => {
 test("CET-4 routes and IDs are unique", () => {
   const ids = library.entries.map((entry) => entry.id);
   assert.equal(new Set(ids).size, ids.length);
-  assert.ok(ids.every((id) => /^(knowledge|practice|paper|mock)-/.test(id)));
+  assert.ok(ids.every((id) => /^(knowledge|practice|paper|mock|cet4)-/.test(id)));
 });
 
 test("misfiled CET-6 source is not published in CET-4", () => {
