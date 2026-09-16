@@ -13,13 +13,22 @@ const RANGE_RE = /^\s*Questions?\s+(\d{1,3})\s*(?:to|[-–])\s*(\d{1,3})/i;
 const NUMBER_RE = /^\s*(\d{1,3})\s*[.．、)]\s*(.*)$/;
 const OPTION_RE = /(?:^|\s{1,3})([A-O])\s*[).．、:：]\s*/g;
 const ANSWER_LINE_RE = /^\s*(\d{1,3})\s*[.．、):：]\s*(.*)$/;
+const SOLUTION_LINE_RE = /^\s*(?:(?:参考)?答案(?:解析|详解|及解析|与解析)?|解析|以下答案|Part\s+[^\n]*答案|(?:快速解题|正确项分析|干扰项分析|语法判断|词义判断|篇章分析|全文精译|难句解析|试题详解|要点解析|精析|题干意为|注意抓住|由此可知|正确答案|正确项|对应原文|文章段落|该段|段出现)|(?:【(?:答案|解析)】))/i;
+
+function isSolutionLine(line) {
+  const trimmed = line.trim();
+  return SOLUTION_LINE_RE.test(trimmed) || /^(?:\d{1,3}\s*[.．、):：]\s*)?(?:[［\[]\s*[A-O]\s*[］\]]\s*[。．、:：)]*\s*)?(?:【)?(?:答案|解析|快速解题|正确项分析|干扰项分析|语法判断|词义判断|篇章分析|全文精译|难句解析|试题详解|要点解析|精析|题干意为|注意抓住|由此可知|正确答案|正确项|对应原文|文章段落|该段|段出现)/i.test(trimmed);
+}
 
 function idFor(prefix, value) {
   return `${prefix}-${createHash("sha256").update(value).digest("hex").slice(0, 12)}`;
 }
 
 function paragraphBlocks(lines) {
-  return lines.filter(Boolean).map((line) => ({ type: "paragraph", runs: [{ type: "text", text: line }] }));
+  return lines.map((line) => {
+    const cutoff = line.search(/(?:参考答案|答案(?:解析|详解|及解析|与解析)?|解析(?=\s|$|[：:，。)）])|答案\s*[：：:（(]|答案为|正确答案|听音指导|正确项分析|干扰项分析|语法判断|词义判断|篇章分析|全文精译|难句解析|试题详解|要点解析|精析|题干意为|注意抓住|由此可知)/i);
+    return cutoff >= 0 ? line.slice(0, cutoff).trim() : line;
+  }).filter(Boolean).map((line) => ({ type: "paragraph", runs: [{ type: "text", text: line }] }));
 }
 
 function sourceRef(entry) {
@@ -43,7 +52,7 @@ function cleanLines(text) {
     .replace(/[\u00a0\u200b]/g, " ")
     .replace(/\s+$/g, "").trim()).filter((line) => {
     if (!line) return false;
-    if (/^英语(?:四|六)级考试网\b|^www\.CET[46]V\.com\b/i.test(line)) return false;
+    if (/^英语(?:四|六)级考试网\b|^www\.CET[46]V\.com\b|CET[46]V\.com|经典奉献|鼎力帮助考生/i.test(line)) return false;
     if (/尊重劳动尊重版权|文档发布，只好用PDF格式/i.test(line)) return false;
     if (/真题试卷及答案解析考后第一时间发布|预测卷三套含答案解析及听力/i.test(line)) return false;
     if (/^\d+\s*$/.test(line)) return false;
@@ -55,10 +64,10 @@ function answerStart(text) {
   const lines = text.split(/[\n\u2028\u2029]+/);
   let offset = 0;
   for (const line of lines) {
-    const strongMarker = /参考答案\s*[（(]|(?:19|20)\d{2}年.*参考答案/i.test(line);
+    const strongMarker = /参考答案\s*[（(]|(?:19|20)\d{2}\s*年.*参考答案/i.test(line);
     const marker = strongMarker
       || /^(?:\s*(?:参考答案(?:与解析|及解析)?|答案解析|答案|Key)\s*[：:]?\s*)$/i.test(line)
-      || /^(?:\s*\d{4}年.*)\s*[—-]{1,2}\s*答案\s*$/i.test(line);
+      || /^(?:\s*\d{4}\s*年.*)\s*[—-]{1,2}\s*答案(?:\s*[（(].*)?$/i.test(line);
     if (marker && (offset > text.length * 0.35 || (strongMarker && offset > text.length * 0.2))) return offset;
     offset += line.length + 1;
   }
@@ -100,15 +109,18 @@ function parseAnswerMap(text) {
 function parseOptions(lines) {
   const options = [];
   for (const line of lines) {
-    const matches = [...line.matchAll(OPTION_RE)];
-    if (matches.length === 0 || (matches.length === 1 && !/^\s*[A-O]\s*[).．、:：]/i.test(line))) {
+    const matches = [
+      ...[...line.matchAll(OPTION_RE)].map((match) => ({ index: match.index, length: match[0].length, label: match[1].toUpperCase() })),
+      ...[...line.matchAll(/[［\[]([A-O])[］\]]\s*/gi)].map((match) => ({ index: match.index, length: match[0].length, label: match[1].toUpperCase() })),
+    ].sort((left, right) => left.index - right.index).filter((match, index, all) => index === 0 || match.index !== all[index - 1].index);
+    if (matches.length === 0 || (matches.length === 1 && !/^\s*(?:[A-O]\s*[).．、:：]|[［\[][A-O][］\]])/i.test(line))) {
       if (options.length && line.trim()) options[options.length - 1].text += ` ${line.trim()}`;
       continue;
     }
     matches.forEach((match, index) => {
-      const start = match.index + match[0].length;
+      const start = match.index + match.length;
       const end = index + 1 < matches.length ? matches[index + 1].index : line.length;
-      options.push({ label: match[1].toUpperCase(), text: line.slice(start, end).trim() });
+      options.push({ label: match.label, text: line.slice(start, end).trim() });
     });
   }
   return options.filter((option) => option.text);
@@ -116,12 +128,35 @@ function parseOptions(lines) {
 
 function numberedRecords(lines) {
   const records = [];
+  let suppress = false;
   for (const line of lines) {
+    if (isSolutionLine(line)) { suppress = true; continue; }
     const match = line.match(NUMBER_RE);
-    if (match) records.push({ number: Number(match[1]), lines: [match[2]] });
-    else if (records.length && line.trim()) records[records.length - 1].lines.push(line.trim());
+    if (match) {
+      if (isSolutionLine(match[2])) { suppress = true; continue; }
+      suppress = false;
+      records.push({ number: Number(match[1]), lines: [match[2]] });
+    } else if (!suppress && records.length && line.trim()) records[records.length - 1].lines.push(line.trim());
   }
   return records;
+}
+
+function clozeMatches(text, title) {
+  const underscored = [...text.matchAll(/[_＿]{2,}\s*(\d{1,3})\s*[_＿]{2,}/g)];
+  if (underscored.length) return underscored;
+  const range = title.match(/Questions?\s+(\d{1,3})\s*(?:to|[-–])\s*(\d{1,3})/i);
+  if (!range) return [];
+  const first = Number(range[1]);
+  const last = Number(range[2]);
+  const matches = [];
+  let cursor = 0;
+  for (let number = first; number <= last; number += 1) {
+    const found = new RegExp(`\\b${number}\\b`).exec(text.slice(cursor));
+    if (!found) return [];
+    matches.push({ index: cursor + found.index, 0: found[0], 1: String(number), length: found[0].length });
+    cursor += found.index + found[0].length;
+  }
+  return matches;
 }
 
 function questionFromRecord(record, index, context, answerMap, ref, prefix) {
@@ -168,15 +203,16 @@ function splitByStarts(lines, predicate) {
 }
 
 function clozeGroup(lines, answerMap, ref, prefix, title) {
+  lines = lines.filter((line) => !isSolutionLine(line));
   const textLines = [];
   const optionLines = [];
   let optionStarted = false;
   for (const line of lines) {
-    if (/^\s*[A-O]\s*[).．、:：]/i.test(line) || (optionStarted && /^[A-O]\s/.test(line))) optionStarted = true;
+    if (/^\s*(?:[A-O]\s*[).．、:：]|[［\[][A-O][］\]])/i.test(line) || /[［\[][A-O][］\]]/i.test(line) || (optionStarted && /^[A-O]\s/.test(line))) optionStarted = true;
     if (optionStarted) optionLines.push(line); else textLines.push(line);
   }
   const text = textLines.join(" ").replace(/\s+/g, " ").trim();
-  const matches = [...text.matchAll(/[_＿]{2,}\s*(\d{1,3})\s*[_＿]{2,}/g)];
+  const matches = clozeMatches(text, title);
   if (!matches.length) return null;
   const runs = [];
   let cursor = 0;
@@ -233,7 +269,7 @@ function makeGroups(lines, context, answerMap, ref, prefix) {
       continue;
     }
     const firstRecordIndex = source.findIndex((line) => NUMBER_RE.test(line));
-    const stimulusLines = context === "listening" ? [] : firstRecordIndex > 0 ? source.slice(0, firstRecordIndex).filter((line) => !/^Directions?\b/i.test(line) && !SECTION_RE.test(line) && !/^注意[：:]/.test(line)) : [];
+    const stimulusLines = context === "listening" ? [] : firstRecordIndex > 0 ? source.slice(0, firstRecordIndex).filter((line) => !/^Directions?\b/i.test(line) && !SECTION_RE.test(line) && !/^注意[：:]/.test(line) && !isSolutionLine(line)) : [];
     const questions = records.map((record, index) => questionFromRecord(record, index, context, answerMap, ref, `${prefix}-group-${groupIndex + 1}`));
     groups.push({
       id: `${prefix}-group-${groupIndex + 1}`,
@@ -253,7 +289,7 @@ function makeGroups(lines, context, answerMap, ref, prefix) {
 }
 
 function writingSection(lines, answerText, ref, prefix) {
-  const prompt = lines.filter((line) => !/^Directions?\b/i.test(line) && !/^注意[：:]/.test(line) && !/^[_＿-]{5,}$/.test(line));
+  const prompt = lines.filter((line) => !/^Directions?\b/i.test(line) && !/^注意[：:]/.test(line) && !/^[_＿-]{5,}$/.test(line) && !isSolutionLine(line));
   const partOneReference = answerText.match(/(?:^|\n)\s*Part\s+I\s+Writing\b([\s\S]*?)(?=\n\s*Part\s+II\b|$)/i)?.[1] || "";
   const labeledReference = answerText.match(/(?:^|\n)\s*(?:参考范文|范文|Possible Version|Sample)\s*[:：]?([\s\S]*)/im)?.[1] || "";
   const usablePartOneReference = /(?:^|\n)\s*Directions?\b/i.test(partOneReference.slice(0, 220)) ? "" : partOneReference;

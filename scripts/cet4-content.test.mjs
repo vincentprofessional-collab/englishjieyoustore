@@ -41,3 +41,22 @@ test("CET-4 sets use the high-school question-group contract", async () => {
     if (summary.kind === "paper") assert.equal(set.submissionMode, "whole-paper", summary.id);
   }
 });
+
+test("CET-4 practice keeps answer explanations out of the question surface", async () => {
+  let readingGroups = 0;
+  let clozeGroups = 0;
+  for (const summary of setIndex.entries.filter((entry) => entry.kind === "practice")) {
+    const set = JSON.parse(await readFile(new URL(`../public/cet4/practice/${summary.id}.json`, import.meta.url), "utf8"));
+    for (const section of set.sections) for (const group of section.groups) {
+      const questionSurface = JSON.stringify({ stimulusBlocks: group.stimulusBlocks, questions: group.questions.map((question) => ({ promptBlocks: question.promptBlocks, options: question.options })) });
+      assert.doesNotMatch(questionSurface, /该空需|答案解析|答案详解|语法判断|词义判断/);
+      if (group.presentation === "reading" && group.stimulusBlocks.length && group.questions.length) readingGroups += 1;
+      if (group.questions.some((question) => ["shared_option_matching", "inline_fill"].includes(question.type))) {
+        clozeGroups += 1;
+        assert.ok(group.stimulusBlocks.some((block) => block.runs?.some((run) => run.type === "blank")), `${summary.id}:${group.id}`);
+      }
+    }
+  }
+  assert.ok(readingGroups > 0);
+  assert.ok(clozeGroups > 0);
+});

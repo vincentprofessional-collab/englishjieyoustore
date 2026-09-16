@@ -54,9 +54,24 @@ function cleanText(text) {
     .replace(/大家网是大家的学习好帮手\s*/g, "")
     .split(/[\n\u2028\u2029]+/)
     .map((line) => line.replace(/[\u00a0\u200b]/g, " ").replace(/\s+$/g, "").trim())
-    .filter((line) => line && !/^\d+\s*$/.test(line) && !/尊重劳动尊重版权|文档发布，只好用PDF格式/i.test(line))
+    .filter((line) => line && !/^\d+\s*$/.test(line) && !/尊重劳动尊重版权|文档发布，只好用PDF格式/i.test(line) && !/https?:\/\/|下载|电子书|资料大全|预测卷|MP3|大家论坛|大家网|汇总|讲义|复习手册|在线题库|真题新书|专题集|答案解析|答案详解|答案及解析|真题解析|打印版|更新文件|考试流程|作文类型|版主建议|备考方案|内部培训资料|四级词汇|四级阅读|四级写作|标准分换算|冲刺讲义|押题|长喜|新东方|星火|真题与解析|首发|原创/i.test(line))
     .join("\n")
     .trim();
+}
+
+function isPracticeAnswerStart(line) {
+  const trimmed = line.trim();
+  if (/^(?:ANSWERS?|参考答案|答案(?:解析|详析|及解析|与解析)?|详解详析)\s*[：:]?/i.test(trimmed)) return true;
+  if (trimmed.length < 160 && /(?:答案|解析)/.test(trimmed) && /(?:专项训练|试题|考试|真题|Part|Unit)/i.test(trimmed)) return true;
+  if (/^\d{1,3}\s*[.．、)]\s*(?:[A-O](?:[)）])?\s*)?[\u4e00-\u9fff【]/.test(trimmed)) return true;
+  return /^\d{1,3}\s*[.．、)]\s*[A-Za-z][A-Za-z'-]*(?:\s+\d{1,3}\s*[.．、)]\s*[A-Za-z]){2,}/.test(trimmed);
+}
+
+function splitPracticeSource(text) {
+  const lines = text.split("\n");
+  const start = lines.findIndex((line, index) => index > 3 && isPracticeAnswerStart(line));
+  if (start < 0) return { body: text, answers: "" };
+  return { body: lines.slice(0, start).join("\n").trim(), answers: lines.slice(start).join("\n").trim() };
 }
 
 function sha256(filePath) {
@@ -181,13 +196,14 @@ async function buildPractice(exam, root, limit = 45) {
   const entries = [];
   for (const filePath of files.sort((a, b) => a.localeCompare(b, "zh-CN"))) {
     const name = path.basename(filePath);
-    if (/(听力音频|字幕|答案卡|技巧总结)/.test(name)) continue;
-    const body = cleanText(extractText(filePath));
+    if (/(听力音频|字幕|答案卡|技巧总结|答案|解析)/.test(name)) continue;
+    const split = splitPracticeSource(cleanText(extractText(filePath)));
+    const body = split.body;
     const looksLikePractice = /(\d{1,3}[.．、)]|Questions?\s+\d|Part\s+[IVX]+)/i.test(body) || /(练习|训练|专项|模拟)/.test(name);
     if (body.length < 240 || !looksLikePractice) continue;
     const topic = /听力/.test(filePath) ? "听力" : /翻译/.test(filePath) ? "翻译" : /选词|完形/.test(filePath) ? "选词填空" : /阅读|匹配/.test(filePath) ? "阅读" : "综合题型";
     const sourceHash = await sha256(filePath);
-    entries.push({ id: `${exam}-practice-${sourceHash.slice(0, 12)}`, title: path.basename(filePath, path.extname(filePath)), section: "题型", topic, sourceFiles: [path.relative(root, filePath)], sourceHash, excerpt: body.slice(0, 180), body, answers: "", audioUrl: "" });
+    entries.push({ id: `${exam}-practice-${sourceHash.slice(0, 12)}`, title: path.basename(filePath, path.extname(filePath)), section: "题型", topic, sourceFiles: [path.relative(root, filePath)], sourceHash, excerpt: body.slice(0, 180), body, answers: split.answers, audioUrl: "" });
     if (entries.length >= limit) break;
   }
   return entries;
@@ -201,12 +217,16 @@ async function main() {
     const oldEntries = exam === "cet4"
       ? existing.entries
         .filter((entry) => !/^cet4-paper-/.test(entry.id))
-        .map((entry) => ({
+        .filter((entry) => !(entry.section === "题型" && /答案|解析/.test(entry.title || "")))
+        .map((entry) => {
+          const cleanBody = cleanText(entry.body || "");
+          const split = entry.section === "题型" ? splitPracticeSource(cleanBody) : { body: cleanBody, answers: "" };
+          return {
           ...entry,
-          excerpt: cleanText(entry.excerpt || ""),
-          body: cleanText(entry.body || ""),
-          answers: cleanText(entry.answers || ""),
-        }))
+          excerpt: cleanText(entry.excerpt || "").slice(0, 180),
+          body: split.body,
+          answers: [split.answers, cleanText(entry.answers || "")].filter(Boolean).join("\n"),
+        }; })
       : [];
     const papers = await buildPapers(exam, path.join(root, "试卷", "真题"));
     const oldTitles = new Set(oldEntries.map((entry) => entry.title));

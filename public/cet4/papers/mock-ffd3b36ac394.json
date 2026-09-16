@@ -86,22 +86,73 @@
               "id": "mock-ffd3b36ac394-part-2-section-1-group-1-q-1-1",
               "displayNumber": 1,
               "sourceQuestionNumber": 1,
-              "type": "short_answer",
-              "promptBlocks": [
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
                 {
-                  "type": "paragraph",
-                  "runs": [
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
                     {
-                      "type": "text",
-                      "text": "[A] Dr. Smith's waiting room isn't tidy. [B] Dr. Smith enjoys reading magazines. [C] Dr. Smith has left a good impression on her. [D] Dr. Smith may not be a good choice."
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Dr. Smith's waiting room isn't tidy."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Dr. Smith enjoys reading magazines."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Dr. Smith has left a good impression on her."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Dr. Smith may not be a good choice."
+                        }
+                      ]
                     }
                   ]
                 }
               ],
-              "placement": {
-                "kind": "standalone"
-              },
-              "options": [],
               "blanks": [],
               "answerSpec": {
                 "availability": "none",
@@ -125,22 +176,73 @@
               "id": "mock-ffd3b36ac394-part-2-section-1-group-1-q-2-2",
               "displayNumber": 2,
               "sourceQuestionNumber": 2,
-              "type": "short_answer",
-              "promptBlocks": [
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
                 {
-                  "type": "paragraph",
-                  "runs": [
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
                     {
-                      "type": "text",
-                      "text": "[A] The man thinks travelling by air is quite safe. [B] The woman never travels by plane. [C] Both speakers feel nervous when flying. [D] The speakers feel sad about the serious loss of life."
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The man thinks travelling by air is quite safe."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The woman never travels by plane."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Both speakers feel nervous when flying."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The speakers feel sad about the serious loss of life."
+                        }
+                      ]
                     }
                   ]
                 }
               ],
-              "placement": {
-                "kind": "standalone"
-              },
-              "options": [],
               "blanks": [],
               "answerSpec": {
                 "availability": "none",
@@ -164,22 +266,73 @@
               "id": "mock-ffd3b36ac394-part-2-section-1-group-1-q-3-3",
               "displayNumber": 3,
               "sourceQuestionNumber": 3,
-              "type": "short_answer",
-              "promptBlocks": [
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
                 {
-                  "type": "paragraph",
-                  "runs": [
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
                     {
-                      "type": "text",
-                      "text": "[A] At the information desk. [B] At a hotel reception. [C] In a restaurant. [D] In a barbershop."
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "At the information desk."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "At a hotel reception."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "In a restaurant."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "In a barbershop."
+                        }
+                      ]
                     }
                   ]
                 }
               ],
-              "placement": {
-                "kind": "standalone"
-              },
-              "options": [],
               "blanks": [],
               "answerSpec": {
                 "availability": "none",
@@ -203,22 +356,73 @@
               "id": "mock-ffd3b36ac394-part-2-section-1-group-1-q-4-4",
               "displayNumber": 4,
               "sourceQuestionNumber": 4,
-              "type": "short_answer",
-              "promptBlocks": [
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
                 {
-                  "type": "paragraph",
-                  "runs": [
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
                     {
-                      "type": "text",
-                      "text": "[A] Mary has a keen eye for style. [B] Nancy regrets buying the dress. [C] Nancy and Mary went shopping together in Rome. [D] Nancy and Mary like to follow the latest fashion."
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Mary has a keen eye for style."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Nancy regrets buying the dress."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Nancy and Mary went shopping together in Rome."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Nancy and Mary like to follow the latest fashion."
+                        }
+                      ]
                     }
                   ]
                 }
               ],
-              "placement": {
-                "kind": "standalone"
-              },
-              "options": [],
               "blanks": [],
               "answerSpec": {
                 "availability": "none",
@@ -242,22 +446,73 @@
               "id": "mock-ffd3b36ac394-part-2-section-1-group-1-q-5-5",
               "displayNumber": 5,
               "sourceQuestionNumber": 5,
-              "type": "short_answer",
-              "promptBlocks": [
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
                 {
-                  "type": "paragraph",
-                  "runs": [
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
                     {
-                      "type": "text",
-                      "text": "[A] Wash the dishes. [B] Go to the theatre. [C] Pick up George and Martha. [D] Take her daughter to hospital."
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Wash the dishes."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Go to the theatre."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Pick up George and Martha."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Take her daughter to hospital."
+                        }
+                      ]
                     }
                   ]
                 }
               ],
-              "placement": {
-                "kind": "standalone"
-              },
-              "options": [],
               "blanks": [],
               "answerSpec": {
                 "availability": "none",
@@ -281,22 +536,73 @@
               "id": "mock-ffd3b36ac394-part-2-section-1-group-1-q-6-6",
               "displayNumber": 6,
               "sourceQuestionNumber": 6,
-              "type": "short_answer",
-              "promptBlocks": [
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
                 {
-                  "type": "paragraph",
-                  "runs": [
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
                     {
-                      "type": "text",
-                      "text": "[A] He has left his position in the government. [B] He has already reached the retirement age. [C] He made a stupid decision at the cabinet meeting. [D]He has been successfully elected prime minister."
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "He has left his position in the government."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "He has already reached the retirement age."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "He made a stupid decision at the cabinet meeting."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "He has been successfully elected prime minister."
+                        }
+                      ]
                     }
                   ]
                 }
               ],
-              "placement": {
-                "kind": "standalone"
-              },
-              "options": [],
               "blanks": [],
               "answerSpec": {
                 "availability": "none",
@@ -320,22 +626,73 @@
               "id": "mock-ffd3b36ac394-part-2-section-1-group-1-q-7-7",
               "displayNumber": 7,
               "sourceQuestionNumber": 7,
-              "type": "short_answer",
-              "promptBlocks": [
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
                 {
-                  "type": "paragraph",
-                  "runs": [
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
                     {
-                      "type": "text",
-                      "text": "[A] They have known each other since their schooldays. [B] They were both chairpersons of the Students’ Union. [C] They have been in close touch by email. [D]They are going to hold a reunion party."
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They have known each other since their schooldays."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They were both chairpersons of the Students’ Union."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They have been in close touch by email."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are going to hold a reunion party."
+                        }
+                      ]
                     }
                   ]
                 }
               ],
-              "placement": {
-                "kind": "standalone"
-              },
-              "options": [],
               "blanks": [],
               "answerSpec": {
                 "availability": "none",
@@ -359,22 +716,73 @@
               "id": "mock-ffd3b36ac394-part-2-section-1-group-1-q-8-8",
               "displayNumber": 8,
               "sourceQuestionNumber": 8,
-              "type": "short_answer",
-              "promptBlocks": [
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
                 {
-                  "type": "paragraph",
-                  "runs": [
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
                     {
-                      "type": "text",
-                      "text": "[A]Fixing some furniture [B]Repairing the toy train [C]Reading the instructions [D]Assembling the bookcase"
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Fixing some furniture"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Repairing the toy train"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Reading the instructions"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Assembling the bookcase"
+                        }
+                      ]
                     }
                   ]
                 }
               ],
-              "placement": {
-                "kind": "standalone"
-              },
-              "options": [],
               "blanks": [],
               "answerSpec": {
                 "availability": "none",
@@ -408,22 +816,73 @@
               "id": "mock-ffd3b36ac394-part-2-section-1-group-2-q-9-1",
               "displayNumber": 9,
               "sourceQuestionNumber": 9,
-              "type": "short_answer",
-              "promptBlocks": [
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
                 {
-                  "type": "paragraph",
-                  "runs": [
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
                     {
-                      "type": "text",
-                      "text": "[A] In a studio. [B] In a clothing store [C] At a beach resort. [D] At a fashion show."
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "In a studio."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "In a clothing store"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "At a beach resort."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "At a fashion show."
+                        }
+                      ]
                     }
                   ]
                 }
               ],
-              "placement": {
-                "kind": "standalone"
-              },
-              "options": [],
               "blanks": [],
               "answerSpec": {
                 "availability": "none",
@@ -447,22 +906,73 @@
               "id": "mock-ffd3b36ac394-part-2-section-1-group-2-q-10-2",
               "displayNumber": 10,
               "sourceQuestionNumber": 10,
-              "type": "short_answer",
-              "promptBlocks": [
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
                 {
-                  "type": "paragraph",
-                  "runs": [
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
                     {
-                      "type": "text",
-                      "text": "[A] To live there permanently. [B] To stay there for half a year. [C] To find a better job to support herself. [D] To sell leather goods for a British company."
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To live there permanently."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To stay there for half a year."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To find a better job to support herself."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To sell leather goods for a British company."
+                        }
+                      ]
                     }
                   ]
                 }
               ],
-              "placement": {
-                "kind": "standalone"
-              },
-              "options": [],
               "blanks": [],
               "answerSpec": {
                 "availability": "none",
@@ -486,22 +996,73 @@
               "id": "mock-ffd3b36ac394-part-2-section-1-group-2-q-11-3",
               "displayNumber": 11,
               "sourceQuestionNumber": 11,
-              "type": "short_answer",
-              "promptBlocks": [
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
                 {
-                  "type": "paragraph",
-                  "runs": [
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
                     {
-                      "type": "text",
-                      "text": "[A] Designing fashion items for several companies. [B] Modeling for a world-famous Italian company. [C] Working as an employee for Ferragamo. [D] Serving as a sales agent for Burberrys."
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Designing fashion items for several companies."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Modeling for a world-famous Italian company."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Working as an employee for Ferragamo."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Serving as a sales agent for Burberrys."
+                        }
+                      ]
                     }
                   ]
                 }
               ],
-              "placement": {
-                "kind": "standalone"
-              },
-              "options": [],
               "blanks": [],
               "answerSpec": {
                 "availability": "none",
@@ -525,22 +1086,73 @@
               "id": "mock-ffd3b36ac394-part-2-section-1-group-2-q-12-4",
               "displayNumber": 12,
               "sourceQuestionNumber": 12,
-              "type": "short_answer",
-              "promptBlocks": [
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
                 {
-                  "type": "paragraph",
-                  "runs": [
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
                     {
-                      "type": "text",
-                      "text": "[A] It has seen a steady decline in its profits. [B] It has become much more competitive. [C] It has lost many customers to foreign companies. [D] It has attracted a lot more designers from abroad."
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It has seen a steady decline in its profits."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It has become much more competitive."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It has lost many customers to foreign companies."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It has attracted a lot more designers from abroad."
+                        }
+                      ]
                     }
                   ]
                 }
               ],
-              "placement": {
-                "kind": "standalone"
-              },
-              "options": [],
               "blanks": [],
               "answerSpec": {
                 "availability": "none",
@@ -574,22 +1186,73 @@
               "id": "mock-ffd3b36ac394-part-2-section-1-group-3-q-13-1",
               "displayNumber": 13,
               "sourceQuestionNumber": 13,
-              "type": "short_answer",
-              "promptBlocks": [
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
                 {
-                  "type": "paragraph",
-                  "runs": [
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
                     {
-                      "type": "text",
-                      "text": "[A] Organizing protests [B] Recruiting members [C] Acting as its spokesman. [D] Saving endangered animals."
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Organizing protests"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Recruiting members"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Acting as its spokesman."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Saving endangered animals."
+                        }
+                      ]
                     }
                   ]
                 }
               ],
-              "placement": {
-                "kind": "standalone"
-              },
-              "options": [],
               "blanks": [],
               "answerSpec": {
                 "availability": "none",
@@ -613,22 +1276,73 @@
               "id": "mock-ffd3b36ac394-part-2-section-1-group-3-q-14-2",
               "displayNumber": 14,
               "sourceQuestionNumber": 14,
-              "type": "short_answer",
-              "promptBlocks": [
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
                 {
-                  "type": "paragraph",
-                  "runs": [
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
                     {
-                      "type": "text",
-                      "text": "[A] Anti-animal-abuse demonstrations [B] Anti-nuclear campaigns [C] Surveying the Atlantic Ocean floor [D] Removing industrial waste."
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Anti-animal-abuse demonstrations"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Anti-nuclear campaigns"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Surveying the Atlantic Ocean floor"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Removing industrial waste."
+                        }
+                      ]
                     }
                   ]
                 }
               ],
-              "placement": {
-                "kind": "standalone"
-              },
-              "options": [],
               "blanks": [],
               "answerSpec": {
                 "availability": "none",
@@ -652,22 +1366,73 @@
               "id": "mock-ffd3b36ac394-part-2-section-1-group-3-q-15-3",
               "displayNumber": 15,
               "sourceQuestionNumber": 15,
-              "type": "short_answer",
-              "promptBlocks": [
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
                 {
-                  "type": "paragraph",
-                  "runs": [
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
                     {
-                      "type": "text",
-                      "text": "[A] Doubtful [B] Indifferent [C] Reserved [D] Supportive"
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Doubtful"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Indifferent"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Reserved"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Supportive"
+                        }
+                      ]
                     }
                   ]
                 }
               ],
-              "placement": {
-                "kind": "standalone"
-              },
-              "options": [],
               "blanks": [],
               "answerSpec": {
                 "availability": "none",
@@ -701,22 +1466,73 @@
               "id": "mock-ffd3b36ac394-part-2-section-2-group-1-q-16-1",
               "displayNumber": 16,
               "sourceQuestionNumber": 16,
-              "type": "short_answer",
-              "promptBlocks": [
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
                 {
-                  "type": "paragraph",
-                  "runs": [
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
                     {
-                      "type": "text",
-                      "text": "[A] To win over the majority of passengers from airlines in twenty years. [B] To reform railroad management in western European countries. [C] To electrify the railway lines between major European cities. [D] To set up an express train network throughout Europe."
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To win over the majority of passengers from airlines in twenty years."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To reform railroad management in western European countries."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To electrify the railway lines between major European cities."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To set up an express train network throughout Europe."
+                        }
+                      ]
                     }
                   ]
                 }
               ],
-              "placement": {
-                "kind": "standalone"
-              },
-              "options": [],
               "blanks": [],
               "answerSpec": {
                 "availability": "none",
@@ -740,22 +1556,73 @@
               "id": "mock-ffd3b36ac394-part-2-section-2-group-1-q-17-2",
               "displayNumber": 17,
               "sourceQuestionNumber": 17,
-              "type": "short_answer",
-              "promptBlocks": [
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
                 {
-                  "type": "paragraph",
-                  "runs": [
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
                     {
-                      "type": "text",
-                      "text": "[A] Major European airlines will go bankrupt. [B] Europeans will pay much less for traveling. [C] Traveling time by train between major European cities will be cut by half. [D] Trains will become the safest and most efficient means of travel in Europe."
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Major European airlines will go bankrupt."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Europeans will pay much less for traveling."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Traveling time by train between major European cities will be cut by half."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Trains will become the safest and most efficient means of travel in Europe."
+                        }
+                      ]
                     }
                   ]
                 }
               ],
-              "placement": {
-                "kind": "standalone"
-              },
-              "options": [],
               "blanks": [],
               "answerSpec": {
                 "availability": "none",
@@ -779,22 +1646,73 @@
               "id": "mock-ffd3b36ac394-part-2-section-2-group-1-q-18-3",
               "displayNumber": 18,
               "sourceQuestionNumber": 18,
-              "type": "short_answer",
-              "promptBlocks": [
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
                 {
-                  "type": "paragraph",
-                  "runs": [
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
                     {
-                      "type": "text",
-                      "text": "[A] Train travel will prove much more comfortable than air travel. [B] Passengers will feel much safer on board a train than on a plane. [C] Rail transport will be environmentally friendlier than air transport. [D] Traveling by train may be as quick as,or even quicker than, by air."
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Train travel will prove much more comfortable than air travel."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Passengers will feel much safer on board a train than on a plane."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Rail transport will be environmentally friendlier than air transport."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Traveling by train may be as quick as,or even quicker than, by air."
+                        }
+                      ]
                     }
                   ]
                 }
               ],
-              "placement": {
-                "kind": "standalone"
-              },
-              "options": [],
               "blanks": [],
               "answerSpec": {
                 "availability": "none",
@@ -818,22 +1736,73 @@
               "id": "mock-ffd3b36ac394-part-2-section-2-group-1-q-19-4",
               "displayNumber": 19,
               "sourceQuestionNumber": 19,
-              "type": "short_answer",
-              "promptBlocks": [
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
                 {
-                  "type": "paragraph",
-                  "runs": [
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
                     {
-                      "type": "text",
-                      "text": "[A] In 1981. [B] In 1989. [C] In 1990. [D] In 2000. Passage Two"
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "In 1981."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "In 1989."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "In 1990."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "In 2000. Passage Two"
+                        }
+                      ]
                     }
                   ]
                 }
               ],
-              "placement": {
-                "kind": "standalone"
-              },
-              "options": [],
               "blanks": [],
               "answerSpec": {
                 "availability": "none",
@@ -867,22 +1836,73 @@
               "id": "mock-ffd3b36ac394-part-2-section-2-group-2-q-20-1",
               "displayNumber": 20,
               "sourceQuestionNumber": 20,
-              "type": "short_answer",
-              "promptBlocks": [
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
                 {
-                  "type": "paragraph",
-                  "runs": [
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
                     {
-                      "type": "text",
-                      "text": "[A] The rescue operations have not been very effective. [B] More than 300 injured passengers were hospitalized. [C] The cause of the tragic accident remains unknown. [D] The exact casualty figures are not yet available."
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The rescue operations have not been very effective."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "More than 300 injured passengers were hospitalized."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The cause of the tragic accident remains unknown."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The exact casualty figures are not yet available."
+                        }
+                      ]
                     }
                   ]
                 }
               ],
-              "placement": {
-                "kind": "standalone"
-              },
-              "options": [],
               "blanks": [],
               "answerSpec": {
                 "availability": "none",
@@ -906,22 +1926,73 @@
               "id": "mock-ffd3b36ac394-part-2-section-2-group-2-q-21-2",
               "displayNumber": 21,
               "sourceQuestionNumber": 21,
-              "type": "short_answer",
-              "promptBlocks": [
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
                 {
-                  "type": "paragraph",
-                  "runs": [
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
                     {
-                      "type": "text",
-                      "text": "[A] There was a bomb scare. [B] There was a terrorist attack. [C] A fire alarm was set off by mistake. [D] 50 pounds of explosives were found."
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "There was a bomb scare."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "There was a terrorist attack."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "A fire alarm was set off by mistake."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "50 pounds of explosives were found."
+                        }
+                      ]
                     }
                   ]
                 }
               ],
-              "placement": {
-                "kind": "standalone"
-              },
-              "options": [],
               "blanks": [],
               "answerSpec": {
                 "availability": "none",
@@ -945,22 +2016,73 @@
               "id": "mock-ffd3b36ac394-part-2-section-2-group-2-q-22-3",
               "displayNumber": 22,
               "sourceQuestionNumber": 22,
-              "type": "short_answer",
-              "promptBlocks": [
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
                 {
-                  "type": "paragraph",
-                  "runs": [
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
                     {
-                      "type": "text",
-                      "text": "[A] Follow policemen’s directions. [B] Keep an eye on the weather. [C] Avoid snow-covered roads. [D] Drive with special care. Passage Three"
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Follow policemen’s directions."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Keep an eye on the weather."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Avoid snow-covered roads."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Drive with special care. Passage Three"
+                        }
+                      ]
                     }
                   ]
                 }
               ],
-              "placement": {
-                "kind": "standalone"
-              },
-              "options": [],
               "blanks": [],
               "answerSpec": {
                 "availability": "none",
@@ -994,22 +2116,73 @@
               "id": "mock-ffd3b36ac394-part-2-section-2-group-3-q-23-1",
               "displayNumber": 23,
               "sourceQuestionNumber": 23,
-              "type": "short_answer",
-              "promptBlocks": [
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
                 {
-                  "type": "paragraph",
-                  "runs": [
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
                     {
-                      "type": "text",
-                      "text": "[A] It may produce an increasing number of idle youngsters. [B] It may affect the quality of higher education in America. [C] It may cause many schools to go out of operation. [D] It may lead to a lack of properly educated workers."
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It may produce an increasing number of idle youngsters."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It may affect the quality of higher education in America."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It may cause many schools to go out of operation."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It may lead to a lack of properly educated workers."
+                        }
+                      ]
                     }
                   ]
                 }
               ],
-              "placement": {
-                "kind": "standalone"
-              },
-              "options": [],
               "blanks": [],
               "answerSpec": {
                 "availability": "none",
@@ -1033,22 +2206,73 @@
               "id": "mock-ffd3b36ac394-part-2-section-2-group-3-q-24-2",
               "displayNumber": 24,
               "sourceQuestionNumber": 24,
-              "type": "short_answer",
-              "promptBlocks": [
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
                 {
-                  "type": "paragraph",
-                  "runs": [
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
                     {
-                      "type": "text",
-                      "text": "[A] It is less serious in cities than in rural areas. [B] It affects both junior and senior high schools. [C] It results from a worsening economic climate. [D] It is a new challenge facing American educators."
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is less serious in cities than in rural areas."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It affects both junior and senior high schools."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It results from a worsening economic climate."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is a new challenge facing American educators."
+                        }
+                      ]
                     }
                   ]
                 }
               ],
-              "placement": {
-                "kind": "standalone"
-              },
-              "options": [],
               "blanks": [],
               "answerSpec": {
                 "availability": "none",
@@ -1072,22 +2296,73 @@
               "id": "mock-ffd3b36ac394-part-2-section-2-group-3-q-25-3",
               "displayNumber": 25,
               "sourceQuestionNumber": 25,
-              "type": "short_answer",
-              "promptBlocks": [
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
                 {
-                  "type": "paragraph",
-                  "runs": [
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
                     {
-                      "type": "text",
-                      "text": "[A] Allowing them to choose their favorite teachers. [B] Creating a more relaxed learning environment. [C] Rewarding excellent academic performance. [D] Helping them to develop better study habits."
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Allowing them to choose their favorite teachers."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Creating a more relaxed learning environment."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Rewarding excellent academic performance."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Helping them to develop better study habits."
+                        }
+                      ]
                     }
                   ]
                 }
               ],
-              "placement": {
-                "kind": "standalone"
-              },
-              "options": [],
               "blanks": [],
               "answerSpec": {
                 "availability": "none",
@@ -1666,14 +2941,14 @@
               "id": "mock-ffd3b36ac394-part-3-section-3-group-1-q-56-1",
               "displayNumber": 56,
               "sourceQuestionNumber": 56,
-              "type": "short_answer",
+              "type": "single_choice",
               "promptBlocks": [
                 {
                   "type": "paragraph",
                   "runs": [
                     {
                       "type": "text",
-                      "text": "According to the passage, U.S. leadership in public relations is being threatened because of ________. [A]an unparalleled increase in the number of public relations companies [B]shrinking cultural differences and new communications technologies [C]the decreasing number of multinational corporations in the U.S. [D]increased efforts of other countries in public relations（D）"
+                      "text": "According to the passage, U.S. leadership in public relations is being threatened because of ________."
                     }
                   ]
                 }
@@ -1681,7 +2956,68 @@
               "placement": {
                 "kind": "standalone"
               },
-              "options": [],
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "an unparalleled increase in the number of public relations companies"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "shrinking cultural differences and new communications technologies"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "the decreasing number of multinational corporations in the U.S."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "increased efforts of other countries in public relations（D）"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
               "blanks": [],
               "answerSpec": {
                 "availability": "none",
@@ -1705,14 +3041,14 @@
               "id": "mock-ffd3b36ac394-part-3-section-3-group-1-q-57-2",
               "displayNumber": 57,
               "sourceQuestionNumber": 57,
-              "type": "short_answer",
+              "type": "single_choice",
               "promptBlocks": [
                 {
                   "type": "paragraph",
                   "runs": [
                     {
                       "type": "text",
-                      "text": "London could soon replace New York as the center of PR because ________. [A] British companies are more ambitious than U.S. companies [B] British companies place more importance on PR than U.S. companies [C] British companies are heavily involved in planning activities [D]four of the world’s top public relations agencies are British-owned（B）"
+                      "text": "London could soon replace New York as the center of PR because ________."
                     }
                   ]
                 }
@@ -1720,7 +3056,68 @@
               "placement": {
                 "kind": "standalone"
               },
-              "options": [],
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "British companies are more ambitious than U.S. companies"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "British companies place more importance on PR than U.S. companies"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "British companies are heavily involved in planning activities"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "four of the world’s top public relations agencies are British-owned（B）"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
               "blanks": [],
               "answerSpec": {
                 "availability": "none",
@@ -1744,14 +3141,14 @@
               "id": "mock-ffd3b36ac394-part-3-section-3-group-1-q-58-3",
               "displayNumber": 58,
               "sourceQuestionNumber": 58,
-              "type": "short_answer",
+              "type": "single_choice",
               "promptBlocks": [
                 {
                   "type": "paragraph",
                   "runs": [
                     {
                       "type": "text",
-                      "text": "The word “provincial” (Line 2, Para. 3) most probably means “________”. [A]limited in outlook [B]like people from the provinces [C]rigid in thinking [D]interested in world financial affairs（A）"
+                      "text": "The word “provincial” (Line 2, Para. 3) most probably means “________”."
                     }
                   ]
                 }
@@ -1759,7 +3156,68 @@
               "placement": {
                 "kind": "standalone"
               },
-              "options": [],
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "limited in outlook"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "like people from the provinces"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "rigid in thinking"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "interested in world financial affairs（A）"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
               "blanks": [],
               "answerSpec": {
                 "availability": "none",
@@ -1783,14 +3241,14 @@
               "id": "mock-ffd3b36ac394-part-3-section-3-group-1-q-59-4",
               "displayNumber": 59,
               "sourceQuestionNumber": 59,
-              "type": "short_answer",
+              "type": "single_choice",
               "promptBlocks": [
                 {
                   "type": "paragraph",
                   "runs": [
                     {
                       "type": "text",
-                      "text": "We learn from the third paragraph that employees in the American PR industry ________. [A]speak at least one foreign language fluently [B]are ignorant about world geography [C]are not as sophisticated as their European counterparts [D]enjoy reading a great variety of English business publications（B）"
+                      "text": "We learn from the third paragraph that employees in the American PR industry ________."
                     }
                   ]
                 }
@@ -1798,7 +3256,68 @@
               "placement": {
                 "kind": "standalone"
               },
-              "options": [],
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "speak at least one foreign language fluently"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "are ignorant about world geography"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "are not as sophisticated as their European counterparts"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "enjoy reading a great variety of English business publications（B）"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
               "blanks": [],
               "answerSpec": {
                 "availability": "none",
@@ -1822,14 +3341,14 @@
               "id": "mock-ffd3b36ac394-part-3-section-3-group-1-q-60-5",
               "displayNumber": 60,
               "sourceQuestionNumber": 60,
-              "type": "short_answer",
+              "type": "single_choice",
               "promptBlocks": [
                 {
                   "type": "paragraph",
                   "runs": [
                     {
                       "type": "text",
-                      "text": "What lesson might the PR industry take from Ted Turner of CNN? [A] American PR companies should be more internationally-minded. [B] The American PR industry should develop global communications technologies. [C] People working in PR should be more fluent in foreign languages. [D] People involved in PR should avoid using the word “foreign”.（A） Passage Two"
+                      "text": "What lesson might the PR industry take from Ted Turner of CNN?"
                     }
                   ]
                 }
@@ -1837,7 +3356,68 @@
               "placement": {
                 "kind": "standalone"
               },
-              "options": [],
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "American PR companies should be more internationally-minded."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The American PR industry should develop global communications technologies."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "People working in PR should be more fluent in foreign languages."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "People involved in PR should avoid using the word “foreign”.（A） Passage Two"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
               "blanks": [],
               "answerSpec": {
                 "availability": "none",
@@ -1908,14 +3488,14 @@
               "id": "mock-ffd3b36ac394-part-3-section-3-group-2-q-61-1",
               "displayNumber": 61,
               "sourceQuestionNumber": 61,
-              "type": "short_answer",
+              "type": "single_choice",
               "promptBlocks": [
                 {
                   "type": "paragraph",
                   "runs": [
                     {
                       "type": "text",
-                      "text": "What’s the author’s purpose in writing this passage? [A] To show the inability of trains to compete with planes with respect to speed and convenience. [B] To stress the influence of the automobile on America’s standard of convenience. [C] To emphasize the function of travel agencies in market promotion. [D] To illustrate the important role of persuasive communication in changing consumer attitudes.（D）"
+                      "text": "What’s the author’s purpose in writing this passage?"
                     }
                   ]
                 }
@@ -1923,7 +3503,68 @@
               "placement": {
                 "kind": "standalone"
               },
-              "options": [],
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To show the inability of trains to compete with planes with respect to speed and convenience."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To stress the influence of the automobile on America’s standard of convenience."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To emphasize the function of travel agencies in market promotion."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To illustrate the important role of persuasive communication in changing consumer attitudes.（D）"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
               "blanks": [],
               "answerSpec": {
                 "availability": "none",
@@ -1947,14 +3588,14 @@
               "id": "mock-ffd3b36ac394-part-3-section-3-group-2-q-62-2",
               "displayNumber": 62,
               "sourceQuestionNumber": 62,
-              "type": "short_answer",
+              "type": "single_choice",
               "promptBlocks": [
                 {
                   "type": "paragraph",
                   "runs": [
                     {
                       "type": "text",
-                      "text": "It can be inferred from the passage that the drop in Amtrak ridership was due to the fact that ________. [A]trains were not suitable for short distance passenger transportation [B]trains were not the fastest and most convenient form of transportation [C]trains were not as fast and convenient as they used to be [D]trains could not compete with planes in terms of luxury and convenience（B）"
+                      "text": "It can be inferred from the passage that the drop in Amtrak ridership was due to the fact that ________."
                     }
                   ]
                 }
@@ -1962,7 +3603,68 @@
               "placement": {
                 "kind": "standalone"
               },
-              "options": [],
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "trains were not suitable for short distance passenger transportation"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "trains were not the fastest and most convenient form of transportation"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "trains were not as fast and convenient as they used to be"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "trains could not compete with planes in terms of luxury and convenience（B）"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
               "blanks": [],
               "answerSpec": {
                 "availability": "none",
@@ -1986,14 +3688,14 @@
               "id": "mock-ffd3b36ac394-part-3-section-3-group-2-q-63-3",
               "displayNumber": 63,
               "sourceQuestionNumber": 63,
-              "type": "short_answer",
+              "type": "single_choice",
               "promptBlocks": [
                 {
                   "type": "paragraph",
                   "runs": [
                     {
                       "type": "text",
-                      "text": "To encourage consumers to travel by train, DDB Needham emphasized ________. [A]the freedom and convenience provided on trains [B]the practical aspects of train travel [C]the adventurous aspects of train trips [D]the safety and cleanliness of train trips（C）"
+                      "text": "To encourage consumers to travel by train, DDB Needham emphasized ________."
                     }
                   ]
                 }
@@ -2001,7 +3703,68 @@
               "placement": {
                 "kind": "standalone"
               },
-              "options": [],
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "the freedom and convenience provided on trains"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "the practical aspects of train travel"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "the adventurous aspects of train trips"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "the safety and cleanliness of train trips（C）"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
               "blanks": [],
               "answerSpec": {
                 "availability": "none",
@@ -2025,14 +3788,14 @@
               "id": "mock-ffd3b36ac394-part-3-section-3-group-2-q-64-4",
               "displayNumber": 64,
               "sourceQuestionNumber": 64,
-              "type": "short_answer",
+              "type": "single_choice",
               "promptBlocks": [
                 {
                   "type": "paragraph",
                   "runs": [
                     {
                       "type": "text",
-                      "text": "The train ads were placed among family-oriented TV programs involving nature and America because ________. [A]they could focus on meaningful travel experiences [B]they could increase the effectiveness of the TV programs [C]their profits could be increased by some 15 percent [D]most travel-lovers and nervous fliers were believed to be among the audiences（D）"
+                      "text": "The train ads were placed among family-oriented TV programs involving nature and America because ________."
                     }
                   ]
                 }
@@ -2040,7 +3803,68 @@
               "placement": {
                 "kind": "standalone"
               },
-              "options": [],
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "they could focus on meaningful travel experiences"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "they could increase the effectiveness of the TV programs"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "their profits could be increased by some 15 percent"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "most travel-lovers and nervous fliers were believed to be among the audiences（D）"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
               "blanks": [],
               "answerSpec": {
                 "availability": "none",
@@ -2064,14 +3888,14 @@
               "id": "mock-ffd3b36ac394-part-3-section-3-group-2-q-65-5",
               "displayNumber": 65,
               "sourceQuestionNumber": 65,
-              "type": "short_answer",
+              "type": "single_choice",
               "promptBlocks": [
                 {
                   "type": "paragraph",
                   "runs": [
                     {
                       "type": "text",
-                      "text": "According to the passage, the Empire Builder enjoyed an increase in ridership and profits because ________. [A]the attractiveness of its name and route was effectively advertised [B]it provided an exciting travel experience [C]its passengers could enjoy the great western outdoors [D]it was widely advertised in newspapers and magazines in Chicago and Seattle（A）"
+                      "text": "According to the passage, the Empire Builder enjoyed an increase in ridership and profits because ________."
                     }
                   ]
                 }
@@ -2079,7 +3903,68 @@
               "placement": {
                 "kind": "standalone"
               },
-              "options": [],
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "the attractiveness of its name and route was effectively advertised"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "it provided an exciting travel experience"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "its passengers could enjoy the great western outdoors"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "it was widely advertised in newspapers and magazines in Chicago and Seattle（A）"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
               "blanks": [],
               "answerSpec": {
                 "availability": "none",

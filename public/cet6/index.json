@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-16T02:48:45.056Z",
+  "generatedAt": "2026-09-16T03:43:24.185Z",
   "entries": [
     {
       "id": "practice-cet6-reading",
@@ -9,7 +9,7 @@
       "year": "历年",
       "region": "全国",
       "variant": "",
-      "questionCount": 196,
+      "questionCount": 84,
       "answeredCount": 0,
       "explanationCount": 0,
       "answerStatus": "partial",
@@ -31,7 +31,7 @@
       "year": "历年",
       "region": "全国",
       "variant": "",
-      "questionCount": 22,
+      "questionCount": 1,
       "answeredCount": 0,
       "explanationCount": 0,
       "answerStatus": "partial",
@@ -1035,12 +1035,13 @@
       "year": "2020",
       "region": "全国",
       "variant": "第2套",
-      "questionCount": 22,
+      "questionCount": 32,
       "answeredCount": 0,
       "explanationCount": 0,
       "answerStatus": "partial",
       "questionTypes": [
         "essay",
+        "inline_fill",
         "short_answer",
         "single_choice",
         "translation"
@@ -1059,12 +1060,13 @@
       "year": "2020",
       "region": "全国",
       "variant": "第1套",
-      "questionCount": 46,
+      "questionCount": 56,
       "answeredCount": 0,
       "explanationCount": 0,
       "answerStatus": "partial",
       "questionTypes": [
         "single_choice",
+        "inline_fill",
         "short_answer",
         "translation"
       ],
@@ -1131,13 +1133,14 @@
       "year": "2019",
       "region": "全国",
       "variant": "第1套",
-      "questionCount": 47,
-      "answeredCount": 26,
+      "questionCount": 57,
+      "answeredCount": 36,
       "explanationCount": 0,
       "answerStatus": "partial",
       "questionTypes": [
         "essay",
         "single_choice",
+        "shared_option_matching",
         "short_answer",
         "translation"
       ],
@@ -1155,12 +1158,13 @@
       "year": "2019",
       "region": "全国",
       "variant": "第3套",
-      "questionCount": 22,
+      "questionCount": 32,
       "answeredCount": 0,
       "explanationCount": 0,
       "answerStatus": "partial",
       "questionTypes": [
         "essay",
+        "inline_fill",
         "short_answer",
         "single_choice",
         "translation"
@@ -1179,13 +1183,14 @@
       "year": "2019",
       "region": "全国",
       "variant": "第2套",
-      "questionCount": 47,
+      "questionCount": 57,
       "answeredCount": 0,
       "explanationCount": 0,
       "answerStatus": "partial",
       "questionTypes": [
         "essay",
         "single_choice",
+        "inline_fill",
         "short_answer",
         "translation"
       ],
@@ -1203,13 +1208,14 @@
       "year": "2019",
       "region": "全国",
       "variant": "第1套",
-      "questionCount": 47,
+      "questionCount": 57,
       "answeredCount": 0,
       "explanationCount": 0,
       "answerStatus": "partial",
       "questionTypes": [
         "essay",
         "single_choice",
+        "inline_fill",
         "short_answer",
         "translation"
       ],
@@ -1227,12 +1233,13 @@
       "year": "2018",
       "region": "全国",
       "variant": "第3套",
-      "questionCount": 3,
+      "questionCount": 13,
       "answeredCount": 0,
       "explanationCount": 0,
       "answerStatus": "partial",
       "questionTypes": [
         "essay",
+        "inline_fill",
         "single_choice",
         "translation"
       ],
@@ -1274,13 +1281,14 @@
       "year": "2018",
       "region": "全国",
       "variant": "第1套",
-      "questionCount": 30,
+      "questionCount": 40,
       "answeredCount": 0,
       "explanationCount": 0,
       "answerStatus": "partial",
       "questionTypes": [
         "essay",
         "single_choice",
+        "inline_fill",
         "short_answer",
         "translation"
       ],
@@ -1518,11 +1526,12 @@
       "year": "2016",
       "region": "全国",
       "variant": "第3套",
-      "questionCount": 20,
+      "questionCount": 30,
       "answeredCount": 0,
       "explanationCount": 0,
       "answerStatus": "partial",
       "questionTypes": [
+        "inline_fill",
         "short_answer",
         "single_choice"
       ],
@@ -1540,13 +1549,14 @@
       "year": "2016",
       "region": "全国",
       "variant": "第2套",
-      "questionCount": 38,
+      "questionCount": 48,
       "answeredCount": 0,
       "explanationCount": 0,
       "answerStatus": "partial",
       "questionTypes": [
         "essay",
         "single_choice",
+        "inline_fill",
         "short_answer"
       ],
       "href": "/cet6/cet6-paper-2016122",
@@ -1563,13 +1573,14 @@
       "year": "2016",
       "region": "全国",
       "variant": "第1套",
-      "questionCount": 38,
+      "questionCount": 48,
       "answeredCount": 0,
       "explanationCount": 0,
       "answerStatus": "partial",
       "questionTypes": [
         "essay",
         "single_choice",
+        "inline_fill",
         "short_answer"
       ],
       "href": "/cet6/cet6-paper-2016121",
@@ -1586,11 +1597,12 @@
       "year": "2016",
       "region": "全国",
       "variant": "第3套",
-      "questionCount": 20,
+      "questionCount": 30,
       "answeredCount": 0,
       "explanationCount": 0,
       "answerStatus": "partial",
       "questionTypes": [
+        "inline_fill",
         "short_answer",
         "single_choice"
       ],
@@ -1630,12 +1642,13 @@
       "year": "2016",
       "region": "全国",
       "variant": "第1套",
-      "questionCount": 45,
+      "questionCount": 55,
       "answeredCount": 0,
       "explanationCount": 0,
       "answerStatus": "partial",
       "questionTypes": [
         "single_choice",
+        "inline_fill",
         "short_answer"
       ],
       "href": "/cet6/cet6-paper-2016061",
