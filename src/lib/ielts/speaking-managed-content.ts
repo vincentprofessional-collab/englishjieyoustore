@@ -6,8 +6,10 @@ export type SpeakingAnswerBand = "band-7" | "band-8";
 export type SpeakingAudioSegment = {
   audioUrl: string;
   chinese: string;
+  endSeconds?: number;
   english: string;
   sentenceNo: number;
+  startSeconds?: number;
 };
 
 export type SpeakingEditableContent = {
@@ -116,11 +118,25 @@ function cleanAudioSegments(value: unknown) {
         return null;
       }
 
+      const startSeconds = item.startSeconds == null ? undefined : Number(item.startSeconds);
+      const endSeconds = item.endSeconds == null ? undefined : Number(item.endSeconds);
+
+      if (
+        (startSeconds != null &&
+          (!Number.isFinite(startSeconds) || startSeconds < 0)) ||
+        (endSeconds != null && (!Number.isFinite(endSeconds) || endSeconds <= 0)) ||
+        (startSeconds != null && endSeconds != null && endSeconds <= startSeconds)
+      ) {
+        return null;
+      }
+
       const segment = {
         audioUrl: cleanText(item.audioUrl, 2000),
         chinese: cleanText(item.chinese, 2200),
+        ...(endSeconds != null ? { endSeconds: Number(endSeconds.toFixed(3)) } : {}),
         english: cleanText(item.english, 2200),
         sentenceNo,
+        ...(startSeconds != null ? { startSeconds: Number(startSeconds.toFixed(3)) } : {}),
       };
 
       return segment.audioUrl && segment.chinese && segment.english ? segment : null;

@@ -25,6 +25,10 @@ import {
   getNextSentenceNo,
   getSpeakingPracticeDelayMs,
 } from "@/lib/articles/bbc-speaking-training.mjs";
+import {
+  buildEstimatedSpeakingAudioSegments,
+  readAudioDuration,
+} from "@/lib/ielts/speaking-audio";
 import { supabase } from "@/lib/supabase/client";
 import styles from "./speaking-model-answer.module.css";
 
@@ -228,6 +232,21 @@ export default function SpeakingModelAnswerContent({
     );
   }
 
+  function getSentencePlaybackDuration(sentence: SpeakingAudioSegment) {
+    if (
+      sentence.startSeconds != null &&
+      sentence.endSeconds != null &&
+      sentence.endSeconds > sentence.startSeconds
+    ) {
+      return Math.max(sentence.endSeconds - sentence.startSeconds, 0.1);
+    }
+
+    return Math.max(
+      sentenceDurations[sentence.sentenceNo] ?? sentence.english.split(/\s+/).length / 2.5,
+      0.1,
+    );
+  }
+
   function centerSentenceCard(sentenceNo: number) {
     window.requestAnimationFrame(() => {
       const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -262,10 +281,7 @@ export default function SpeakingModelAnswerContent({
   }
 
   function startSpeakingPractice(sentence: SpeakingAudioSegment, mode: ActiveSpeakingMode) {
-    const durationSeconds = Math.max(
-      sentenceDurations[sentence.sentenceNo] ?? sentence.english.split(/\s+/).length / 2.5,
-      0.1,
-    );
+    const durationSeconds = getSentencePlaybackDuration(sentence);
     const delayMs = getSpeakingPracticeDelayMs(mode, durationSeconds);
     const deadline = Date.now() + delayMs;
 
@@ -472,10 +488,41 @@ export default function SpeakingModelAnswerContent({
     }
 
     const nextContent = createContentFromDraft(editorDraft);
+    const audioChanged = nextContent.audioUrl !== content.audioUrl;
+    const hasSegmentsForAudio = Boolean(
+      nextContent.audioSegments?.length &&
+        nextContent.audioSegments.every((segment) => segment.audioUrl === nextContent.audioUrl),
+    );
+
+    if (audioChanged && nextContent.audioSegments?.length && !hasSegmentsForAudio) {
+      nextContent.audioSegments = [];
+    }
+
     setIsSaving(true);
     setStatus({ tone: "info", text: "正在保存..." });
 
     try {
+      let generatedSegmentCount = 0;
+      if (
+        nextContent.audioUrl &&
+        (!nextContent.audioSegments?.length || (audioChanged && !hasSegmentsForAudio))
+      ) {
+        setStatus({ tone: "info", text: "正在读取音频时长并生成逐句训练卡片..." });
+        const durationSeconds = await readAudioDuration(nextContent.audioUrl);
+        if (durationSeconds) {
+          const generatedSegments = buildEstimatedSpeakingAudioSegments({
+            answer: nextContent.answer,
+            answerTranslation: nextContent.answerTranslation,
+            audioUrl: nextContent.audioUrl,
+            durationSeconds,
+          });
+          if (generatedSegments.length) {
+            nextContent.audioSegments = generatedSegments;
+            generatedSegmentCount = generatedSegments.length;
+          }
+        }
+      }
+
       const {
         data: { session },
       } = await supabase.auth.getSession();
@@ -500,7 +547,12 @@ export default function SpeakingModelAnswerContent({
 
       setContent(nextContent);
       setEditorDraft(createEditorDraft(nextContent));
-      setStatus({ tone: "success", text: "已保存，前台用户刷新后会读取最新内容。" });
+      setStatus({
+        tone: "success",
+        text: generatedSegmentCount
+          ? `已保存，并自动生成 ${generatedSegmentCount} 个逐句训练卡片。`
+          : "已保存，前台用户刷新后会读取最新内容。",
+      });
     } catch (error) {
       setStatus({
         tone: "error",
@@ -523,12 +575,30 @@ export default function SpeakingModelAnswerContent({
     setStatus({ tone: "info", text: "正在上传音频..." });
 
     try {
+      const localPreviewUrl = URL.createObjectURL(file);
+      const localDurationSeconds = await readAudioDuration(localPreviewUrl);
+      URL.revokeObjectURL(localPreviewUrl);
       const publicUrl = await uploadAdminAudio(
         file,
         `speaking/${editorDraft.partId}/${editorDraft.questionId}/${editorDraft.band}`,
       );
-      updateDraft({ audioUrl: publicUrl });
-      setStatus({ tone: "success", text: "音频已上传并填入 URL，请保存本页。" });
+      setStatus({ tone: "info", text: "音频已上传，正在自动生成逐句训练卡片..." });
+      const durationSeconds = localDurationSeconds ?? (await readAudioDuration(publicUrl));
+      const audioSegments = durationSeconds
+        ? buildEstimatedSpeakingAudioSegments({
+            answer: splitParagraphs(editorDraft.answerText),
+            answerTranslation: splitParagraphs(editorDraft.answerTranslationText),
+            audioUrl: publicUrl,
+            durationSeconds,
+          })
+        : [];
+      updateDraft({ audioSegments, audioUrl: publicUrl });
+      setStatus({
+        tone: audioSegments.length ? "success" : "info",
+        text: audioSegments.length
+          ? `音频已上传，已自动生成 ${audioSegments.length} 个逐句训练卡片，请保存本页。`
+          : "音频已上传并填入 URL；暂时无法读取时长，请先保存整段音频，稍后可重新上传生成逐句卡片。",
+      });
     } catch (error) {
       setStatus({
         tone: "error",
@@ -725,6 +795,9 @@ export default function SpeakingModelAnswerContent({
                     onChange={uploadAudio}
                   />
                 </label>
+                <p className={`${styles.adminHint} ${styles.adminWideField}`}>
+                  上传整段范文后会自动按句子生成逐句训练卡片；后续新增音频也会沿用这一流程。
+                </p>
               </div>
 
               {editorDraft.audioUrl ? (
@@ -864,7 +937,7 @@ export default function SpeakingModelAnswerContent({
                           ? getActiveWordIndex(
                               sentence.english,
                               activeSentencePosition,
-                              Math.max(sentenceDurations[sentence.sentenceNo] ?? 0.1, 0.1),
+                              getSentencePlaybackDuration(sentence),
                             )
                           : null
                       }
@@ -920,14 +993,19 @@ export default function SpeakingModelAnswerContent({
                     onPlayingChange={(isPlaying) =>
                       handleSentencePlayingChange(sentence.sentenceNo, isPlaying)
                     }
+                    onStopAtEnd={() => handleSentenceEnded(sentence)}
                     onSettingsChange={updateAudioSettings}
                     onTimeChange={(positionSeconds) => {
                       if (activeSentenceNoRef.current === sentence.sentenceNo) {
-                        setActiveSentencePosition(positionSeconds);
+                        setActiveSentencePosition(
+                          Math.max(positionSeconds - (sentence.startSeconds ?? 0), 0),
+                        );
                       }
                     }}
                     settings={audioSettings}
                     src={sentence.audioUrl}
+                    startAtSeconds={sentence.startSeconds}
+                    stopAtSeconds={sentence.endSeconds}
                     title={`第 ${sentence.sentenceNo} 句音频`}
                   />
                 </article>
