@@ -4818,6 +4818,7 @@ export function ListeningPractice({
         }`}
         data-local-selection-actions="true"
         ref={pageRef}
+        style={{ justifySelf: "stretch", maxWidth: "none", width: "100%" }}
         onPointerUp={handleQuestionSelection}
         onMouseLeave={() => setActiveWordTooltip(null)}
         onMouseMove={handleEnglishWordHover}
@@ -4998,6 +4999,7 @@ export function ListeningPractice({
       }`}
       data-local-selection-actions="true"
       ref={pageRef}
+      style={{ justifySelf: "stretch", maxWidth: "none", width: "100%" }}
       onPointerUp={handleQuestionSelection}
       onMouseLeave={() => setActiveWordTooltip(null)}
       onMouseMove={handleEnglishWordHover}
