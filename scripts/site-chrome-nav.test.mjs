@@ -5,6 +5,7 @@ import {
   ensureCet6ExamMenu,
   ensureJuniorHighExamLink,
   ensureJuniorHighExamMenu,
+  ensureSatExamMenu,
   orderLanguageExamMenu,
 } from "../src/lib/content/site-chrome-nav.ts";
 
@@ -125,4 +126,19 @@ test("published language-exam menu follows the requested order", () => {
     "ielts",
     "sat-reading-writing",
   ]);
+});
+
+test("published nav normalizes the SAT label", () => {
+  const source = [{
+    id: "exams",
+    label: "语言考试",
+    children: [{ id: "sat-reading-writing", label: "SAT Reading and Writing", children: [] }],
+  }];
+  const exams = { id: "exams", label: "语言考试", children: [] };
+  const sat = { id: "sat-reading-writing", label: "SAT", href: "/sat", children: [] };
+
+  const normalized = ensureSatExamMenu(source, exams, sat);
+
+  assert.equal(normalized[0].children[0].label, "SAT");
+  assert.equal(normalized[0].children[0].href, "/sat");
 });

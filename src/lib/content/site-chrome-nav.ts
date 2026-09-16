@@ -78,6 +78,15 @@ export function ensureSatExamMenu<T extends SiteChromeNavNode>(
   exams: T,
   sat: T,
 ): T[] {
+  const ensureSatLink = (children: SiteChromeNavNode[]): SiteChromeNavNode[] => {
+    const existingSat = children.find((item) => item.id === sat.id);
+
+    if (!existingSat) return [...children, sat];
+
+    return children.map((item) =>
+      item.id === sat.id ? { ...item, ...sat, children: item.children } : item,
+    );
+  };
   const existingExams = items.find((item) => item.id === exams.id);
 
   if (!existingExams) {
@@ -85,7 +94,7 @@ export function ensureSatExamMenu<T extends SiteChromeNavNode>(
       ...items,
       {
         ...exams,
-        children: ensureJuniorHighExamLink(exams.children, sat),
+        children: ensureSatLink(exams.children),
       },
     ];
   }
@@ -94,7 +103,7 @@ export function ensureSatExamMenu<T extends SiteChromeNavNode>(
     item.id === exams.id
       ? {
           ...item,
-          children: ensureJuniorHighExamLink(item.children, sat),
+          children: ensureSatLink(item.children),
         }
       : item,
   );

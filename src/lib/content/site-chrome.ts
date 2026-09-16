@@ -297,7 +297,7 @@ export const DEFAULT_SITE_CHROME_CONFIG: SiteChromeConfig = {
             enabled: true,
             href: "/sat",
             id: "sat-reading-writing",
-            label: "SAT Reading and Writing",
+            label: "SAT",
             note: "",
           },
         ],
