@@ -289,12 +289,6 @@ export function WritingTask2EssayDetail({ essay }: { essay: Task2ModelEssay }) {
 
   return (
     <section className="stack writing-home-page writing-task2-page task2-detail-page">
-      <div className="task2-backbar">
-        <Link className="back-link" href="/writing/task2">
-          ← 返回大作文题目
-        </Link>
-      </div>
-
       <article className="task2-detail-shell">
         <header className="task2-detail-head">
           <span className="task2-essay-number">01</span>

@@ -27,19 +27,7 @@ export default async function ListeningMockIndexPage() {
 
   return (
     <section className="stack ielts-module-page listening-library-page">
-      <div className="writing-hero-panel ielts-module-hero">
-        <div className="writing-hero-copy">
-          <h1>IELTS LISTENING</h1>
-        </div>
-      </div>
-
       <div className="listening-library-panel">
-        <div className="listening-library-head">
-          <Link className="back-link" href="/listening">
-            ← 返回
-          </Link>
-        </div>
-
         {error ? <div className="notice danger">读取听力题库失败：{error}</div> : null}
 
         <div className="listening-mock-book-grid">
