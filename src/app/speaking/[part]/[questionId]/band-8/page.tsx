@@ -10,9 +10,11 @@ import {
 import { getPaidContentKey } from "@/lib/access-control";
 import { getSpeakingPart } from "@/lib/ielts/speaking";
 import {
+  applySpeakingManagedContent,
   getSpeakingContentSlug,
   type SpeakingEditableContent,
 } from "@/lib/ielts/speaking-managed-content";
+import { getPublishedSpeakingManagedContent } from "@/lib/ielts/speaking-managed-content-server";
 import SpeakingModelAnswerContent from "../speaking-model-answer-content";
 import styles from "../speaking-model-answer.module.css";
 
@@ -68,7 +70,7 @@ export default async function SpeakingBand8Page({ params }: SpeakingBand8PagePro
   const scoreNotes = getSpeakingScoreNotes(part.id);
   const band8Approach = modelAnswer.band8Approach ?? modelAnswer.approach;
   const band8Frames = modelAnswer.band8Frames ?? modelAnswer.frames;
-  const initialContent: SpeakingEditableContent = {
+  const baseContent: SpeakingEditableContent = {
     answer: modelAnswer.band8Answer,
     answerHeading: "8 分范文",
     answerTranslation: modelAnswer.band8AnswerTranslation ?? [],
@@ -88,6 +90,8 @@ export default async function SpeakingBand8Page({ params }: SpeakingBand8PagePro
     vocabulary: modelAnswer.band8Vocabulary ?? modelAnswer.vocabulary,
     year: question.year,
   };
+  const managedContent = await getPublishedSpeakingManagedContent(baseContent.slug);
+  const initialContent = applySpeakingManagedContent(baseContent, managedContent);
 
   return (
     <ProjectAccessGate
