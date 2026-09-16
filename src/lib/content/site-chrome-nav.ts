@@ -4,6 +4,15 @@ export type SiteChromeNavNode = {
   label: string;
 };
 
+const LANGUAGE_EXAM_ORDER = [
+  "junior-high-english",
+  "senior-high-english",
+  "cet4",
+  "cet6",
+  "ielts",
+  "sat-reading-writing",
+];
+
 export function ensureJuniorHighExamLink<T extends SiteChromeNavNode>(items: T[], juniorHigh: T): T[] {
   return items.some((item) => item.id === juniorHigh.id) ? items : [...items, juniorHigh];
 }
@@ -167,6 +176,27 @@ export function ensureCet6ExamMenu<T extends SiteChromeNavNode>(
           ...item,
           children: ensureCet6Link(item.children),
         }
+      : item,
+  );
+}
+
+export function orderLanguageExamMenu<T extends SiteChromeNavNode>(items: T[]): T[] {
+  const order = new Map(LANGUAGE_EXAM_ORDER.map((id, index) => [id, index]));
+  const examsIndex = items.findIndex((item) => item.id === "exams");
+
+  if (examsIndex < 0) return items;
+
+  const exams = items[examsIndex];
+  const indexedChildren = exams.children.map((child, index) => ({ child, index }));
+  indexedChildren.sort((left, right) => {
+    const leftRank = order.get(left.child.id) ?? LANGUAGE_EXAM_ORDER.length;
+    const rightRank = order.get(right.child.id) ?? LANGUAGE_EXAM_ORDER.length;
+    return leftRank - rightRank || left.index - right.index;
+  });
+
+  return items.map((item, index) =>
+    index === examsIndex
+      ? { ...item, children: indexedChildren.map(({ child }) => child) }
       : item,
   );
 }

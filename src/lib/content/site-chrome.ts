@@ -1,5 +1,5 @@
 import { supabase } from "@/lib/supabase/client";
-import { ensureCet4ExamMenu, ensureCet6ExamMenu, ensureJuniorHighExamMenu, ensureSatExamMenu, ensureSeniorHighExamMenu } from "@/lib/content/site-chrome-nav";
+import { ensureCet4ExamMenu, ensureCet6ExamMenu, ensureJuniorHighExamMenu, ensureSatExamMenu, ensureSeniorHighExamMenu, orderLanguageExamMenu } from "@/lib/content/site-chrome-nav";
 
 export const SITE_CHROME_SLUG = "site-chrome";
 export const SITE_CHROME_VERSION = 1;
@@ -210,6 +210,42 @@ export const DEFAULT_SITE_CHROME_CONFIG: SiteChromeConfig = {
       {
         children: [
           {
+            children: [],
+            dropdownAlign: "right",
+            enabled: true,
+            href: "/junior-high",
+            id: "junior-high-english",
+            label: "中考英语",
+            note: "",
+          },
+          {
+            children: [],
+            dropdownAlign: "right",
+            enabled: true,
+            href: "/senior-high",
+            id: "senior-high-english",
+            label: "高考英语",
+            note: "",
+          },
+          {
+            children: [],
+            dropdownAlign: "right",
+            enabled: true,
+            href: "/cet4",
+            id: "cet4",
+            label: "大学英语四级",
+            note: "",
+          },
+          {
+            children: [],
+            dropdownAlign: "right",
+            enabled: true,
+            href: "/cet6",
+            id: "cet6",
+            label: "大学英语六级",
+            note: "",
+          },
+          {
             children: [
               {
                 children: [],
@@ -259,45 +295,9 @@ export const DEFAULT_SITE_CHROME_CONFIG: SiteChromeConfig = {
             children: [],
             dropdownAlign: "right",
             enabled: true,
-            href: "/junior-high",
-            id: "junior-high-english",
-            label: "中考英语",
-            note: "",
-          },
-          {
-            children: [],
-            dropdownAlign: "right",
-            enabled: true,
-            href: "/senior-high",
-            id: "senior-high-english",
-            label: "高考英语",
-            note: "",
-          },
-          {
-            children: [],
-            dropdownAlign: "right",
-            enabled: true,
             href: "/sat",
             id: "sat-reading-writing",
             label: "SAT Reading and Writing",
-            note: "",
-          },
-          {
-            children: [],
-            dropdownAlign: "right",
-            enabled: true,
-            href: "/cet4",
-            id: "cet4",
-            label: "大学英语四级",
-            note: "",
-          },
-          {
-            children: [],
-            dropdownAlign: "right",
-            enabled: true,
-            href: "/cet6",
-            id: "cet6",
-            label: "大学英语六级",
             note: "",
           },
         ],
@@ -520,8 +520,9 @@ export function mergeSiteChromeConfig(value: unknown): SiteChromeConfig {
   const navItems = examsFallback && cet6Fallback
     ? ensureCet6ExamMenu(navWithCet4, examsFallback, cet6Fallback)
     : navWithCet4;
+  const orderedNavItems = orderLanguageExamMenu(navItems);
 
-  const normalizedNavItems = navItems.map((item) => {
+  const normalizedNavItems = orderedNavItems.map((item) => {
     if (item.id === "dictionary") {
       return {
         ...item,

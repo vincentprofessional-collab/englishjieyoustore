@@ -5,6 +5,7 @@ import {
   ensureCet6ExamMenu,
   ensureJuniorHighExamLink,
   ensureJuniorHighExamMenu,
+  orderLanguageExamMenu,
 } from "../src/lib/content/site-chrome-nav.ts";
 
 test("published exam menu keeps the junior-high link when an older config omits it", () => {
@@ -96,4 +97,32 @@ test("published nav adds CET-6 beside CET-4 and removes the stale placeholder", 
 
   assert.deepEqual(merged[0].children.map((item) => item.id), ["cet4", "cet6"]);
   assert.equal(merged[0].children[1].href, "/cet6");
+});
+
+test("published language-exam menu follows the requested order", () => {
+  const source = [
+    {
+      id: "exams",
+      label: "语言考试",
+      children: [
+        { id: "sat-reading-writing", label: "SAT Reading and Writing", children: [] },
+        { id: "ielts", label: "雅思", children: [] },
+        { id: "cet6", label: "大学英语六级", children: [] },
+        { id: "junior-high-english", label: "中考英语", children: [] },
+        { id: "cet4", label: "大学英语四级", children: [] },
+        { id: "senior-high-english", label: "高考英语", children: [] },
+      ],
+    },
+  ];
+
+  const ordered = orderLanguageExamMenu(source);
+
+  assert.deepEqual(ordered[0].children.map((item) => item.id), [
+    "junior-high-english",
+    "senior-high-english",
+    "cet4",
+    "cet6",
+    "ielts",
+    "sat-reading-writing",
+  ]);
 });
