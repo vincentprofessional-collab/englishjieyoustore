@@ -379,9 +379,6 @@ export function AdminEntitlementManager() {
       return "项目标识只能使用小写字母、数字、点、横线或下划线。";
     }
     if (!draft.title.trim()) return "请填写项目名称。";
-    if (PLAN_ORDER.some((plan) => !draft.planLabels[plan].trim() || !draft.planDurations[plan].trim())) {
-      return "请填写每个套餐的名称和周期。";
-    }
     if (PLAN_ORDER.some((plan) => !Number.isFinite(draft.planPrices[plan]) || draft.planPrices[plan] < 0)) {
       return "价格必须是大于或等于 0 的数字。";
     }
@@ -409,9 +406,9 @@ export function AdminEntitlementManager() {
       _gate_title: draft.gateTitle.trim() || null,
       _is_enabled: draft.isEnabled,
       _plans: PROJECT_ACCESS_PLANS.map((plan, index) => ({
-        duration_label: draft.planDurations[plan.plan].trim(),
+        duration_label: draft.planDurations[plan.plan].trim() || plan.durationLabel,
         is_enabled: draft.planEnabled[plan.plan],
-        label: draft.planLabels[plan.plan].trim(),
+        label: draft.planLabels[plan.plan].trim() || plan.label,
         plan: plan.plan,
         price_cny: draft.planPrices[plan.plan],
         sort_order: (index + 1) * 10,
