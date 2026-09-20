@@ -47,6 +47,7 @@ type AudioPlayerProps = {
   seekRequest?: { id: number; play?: boolean; positionSeconds: number } | null;
   showRate?: boolean;
   src: string;
+  startAtSeconds?: number | null;
   stopAtSeconds?: number | null;
   title?: string;
 };
@@ -173,6 +174,7 @@ export function AudioPlayer({
   settings,
   settingsPlacement = "inside",
   src,
+  startAtSeconds = null,
   stopAtSeconds = null,
   showRate = true,
   title = "音频",
@@ -185,6 +187,7 @@ export function AudioPlayer({
   const onTimeChangeRef = useRef(onTimeChange);
   const loopSegmentRef = useRef(loopSegment);
   const deferSentenceLoopRef = useRef(deferSentenceLoop);
+  const startAtSecondsRef = useRef(startAtSeconds);
   const playModeRef = useRef<AudioPlayMode>(settings?.playMode ?? DEFAULT_AUDIO_PLAYER_SETTINGS.playMode);
   const stopAtSecondsRef = useRef(stopAtSeconds);
   const [isReady, setIsReady] = useState(false);
@@ -244,6 +247,10 @@ export function AudioPlayer({
   }, [deferSentenceLoop]);
 
   useEffect(() => {
+    startAtSecondsRef.current = startAtSeconds;
+  }, [startAtSeconds]);
+
+  useEffect(() => {
     stopAtSecondsRef.current = stopAtSeconds;
   }, [stopAtSeconds]);
 
@@ -281,6 +288,15 @@ export function AudioPlayer({
         const loadedDuration = sound.duration();
         setDuration(loadedDuration);
         onDurationChangeRef.current?.(loadedDuration);
+        const clipStart = startAtSecondsRef.current;
+        const initialPosition =
+          clipStart != null && Number.isFinite(clipStart)
+            ? Math.min(Math.max(clipStart, 0), loadedDuration)
+            : 0;
+        sound.seek(initialPosition);
+        setPosition(initialPosition);
+        setDraftPosition(initialPosition);
+        onTimeChangeRef.current?.(initialPosition);
         setIsReady(true);
       },
       onloaderror: () => {
@@ -373,9 +389,13 @@ export function AudioPlayer({
         setIsPlaying(false);
         setIsPlayRequested(false);
         onPlayingChangeRef.current?.(false);
-        onTimeChangeRef.current?.(0);
-        setPosition(0);
-        setDraftPosition(0);
+        const clipStart = startAtSecondsRef.current;
+        const resetPosition =
+          clipStart != null && Number.isFinite(clipStart) ? Math.max(clipStart, 0) : 0;
+        sound.seek(resetPosition);
+        onTimeChangeRef.current?.(resetPosition);
+        setPosition(resetPosition);
+        setDraftPosition(resetPosition);
         onEndedRef.current?.();
       },
     });
@@ -406,7 +426,7 @@ export function AudioPlayer({
       }
       sound.unload();
     };
-  }, [html5, src]);
+  }, [html5, src, startAtSeconds]);
 
   useEffect(() => {
     const sound = soundRef.current;
@@ -432,7 +452,15 @@ export function AudioPlayer({
       return;
     }
 
-    const boundedPosition = Math.min(Math.max(seekRequest.positionSeconds, 0), duration || seekRequest.positionSeconds);
+    const minimumPosition = Math.max(startAtSecondsRef.current ?? 0, 0);
+    const maximumPosition = Math.min(
+      (stopAtSecondsRef.current ?? duration) || seekRequest.positionSeconds,
+      duration || seekRequest.positionSeconds,
+    );
+    const boundedPosition = Math.min(
+      Math.max(seekRequest.positionSeconds, minimumPosition),
+      Math.max(maximumPosition, minimumPosition),
+    );
     soundRef.current.seek(boundedPosition);
     setPosition(boundedPosition);
     setDraftPosition(boundedPosition);
@@ -486,7 +514,15 @@ export function AudioPlayer({
   }, [isPlaying, isScrubbing]);
 
   function seekTo(nextPosition: number) {
-    const boundedPosition = Math.min(Math.max(nextPosition, 0), duration || nextPosition);
+    const minimumPosition = Math.max(startAtSecondsRef.current ?? 0, 0);
+    const maximumPosition = Math.min(
+      (stopAtSecondsRef.current ?? duration) || nextPosition,
+      duration || nextPosition,
+    );
+    const boundedPosition = Math.min(
+      Math.max(nextPosition, minimumPosition),
+      Math.max(maximumPosition, minimumPosition),
+    );
     soundRef.current?.seek(boundedPosition);
     setPosition(boundedPosition);
     setDraftPosition(boundedPosition);
@@ -511,6 +547,18 @@ export function AudioPlayer({
     if (sound.state() === "unloaded") {
       sound.load();
     }
+
+    const clipStart = startAtSecondsRef.current;
+    const clipEnd = stopAtSecondsRef.current;
+    const currentPosition = sound.seek();
+    if (
+      clipStart != null &&
+      typeof currentPosition === "number" &&
+      (currentPosition < clipStart || (clipEnd != null && currentPosition >= clipEnd))
+    ) {
+      seekTo(clipStart);
+    }
+
     requestAudioPlayback(sound);
   }
 
