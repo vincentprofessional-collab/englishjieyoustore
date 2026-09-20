@@ -30,44 +30,27 @@ function isNavItemActive(item: SiteChromeNavItem, pathname: string): boolean {
   return isDirectMatch || item.children.some((child) => isNavItemActive(child, pathname));
 }
 
-function renderNavItem(item: SiteChromeNavItem, pathname: string, depth = 0) {
-  const enabledChildren = item.children.filter((child) => child.enabled);
-  const isActive = isNavItemActive(item, pathname);
-  const itemClassName = [
-    "nav-sidebar-item",
-    `nav-sidebar-level-${Math.min(depth, 2)}`,
-    enabledChildren.length ? "has-children" : "",
-    isActive ? "active" : "",
-  ].filter(Boolean).join(" ");
-  const label = (
-    <>
-      <span className="nav-sidebar-marker" aria-hidden="true" />
-      <strong>{item.label}</strong>
-      {item.note ? <small>{item.note}</small> : null}
-    </>
-  );
+function isTopLevelItemActive(item: SiteChromeNavItem, pathname: string) {
+  if (item.id === "home") return pathname === "/";
+  if (item.id === "dictionary") return pathname.startsWith("/vocabulary") && !pathname.startsWith("/vocabulary/books");
+  if (item.id === "memorize") return pathname.startsWith("/vocabulary/books");
+  if (item.id === "articles") return pathname.startsWith("/articles");
+  if (item.id === "exams") {
+    return ["/junior-high", "/senior-high", "/exams", "/listening", "/speaking", "/reading", "/writing", "/sat"]
+      .some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`));
+  }
+  if (item.id === "skill-training") return pathname.startsWith("/training");
+  if (item.id === "me") return pathname.startsWith("/me");
+  return isNavItemActive(item, pathname);
+}
 
-  return (
-    <div className={itemClassName} key={item.id}>
-      {item.href ? (
-        <Link
-          aria-current={isActive && !enabledChildren.length ? "page" : undefined}
-          className="nav-sidebar-link"
-          href={item.href}
-        >
-          {label}
-        </Link>
-      ) : (
-        <div className="nav-sidebar-link nav-sidebar-heading">{label}</div>
-      )}
+function getFirstLeafHref(item: SiteChromeNavItem): string {
+  for (const child of item.children.filter((candidate) => candidate.enabled)) {
+    const href = getFirstLeafHref(child);
+    if (href) return href;
+  }
 
-      {enabledChildren.length ? (
-        <div className="nav-sidebar-children">
-          {enabledChildren.map((child) => renderNavItem(child, pathname, depth + 1))}
-        </div>
-      ) : null}
-    </div>
-  );
+  return item.href;
 }
 
 export function SiteNav({ config: initialConfig }: { config: SiteChromeConfig }) {
@@ -187,7 +170,23 @@ export function SiteNav({ config: initialConfig }: { config: SiteChromeConfig })
       </div>
 
       <nav className="nav-main" aria-label="主导航">
-        {navItems.map((item) => renderNavItem(item, pathname))}
+        {navItems.map((item) => {
+          const children = item.children.filter((child) => child.enabled);
+          const isActive = isTopLevelItemActive(item, pathname);
+
+          return (
+            <div className="nav-menu" key={item.id}>
+              <Link
+                aria-current={isActive ? "page" : undefined}
+                className={`nav-tab nav-link-tab ${isActive ? "active" : ""}`}
+                href={getFirstLeafHref(item) || item.href || "/"}
+              >
+                {item.label}
+                {children.length ? <span className="nav-caret" aria-hidden="true">▼</span> : null}
+              </Link>
+            </div>
+          );
+        })}
       </nav>
     </header>
   );

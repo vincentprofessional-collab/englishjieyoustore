@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { VocabularySearchAutocomplete } from "@/components/vocabulary-search-autocomplete";
 import { getVocabularyRootAffixDirectory } from "@/lib/vocabulary/local-vocabulary";
 
 export const dynamic = "force-dynamic";
@@ -7,26 +6,29 @@ export const dynamic = "force-dynamic";
 export default async function VocabularyPage({
   searchParams,
 }: {
-  searchParams: Promise<{ q?: string }>;
+  searchParams: Promise<{ kind?: string; q?: string }>;
 }) {
-  const { q } = await searchParams;
-  const query = q?.trim() ?? "";
+  const { kind } = await searchParams;
   const directory = getVocabularyRootAffixDirectory();
+  const selectedKind = kind === "prefix" || kind === "suffix" ? kind : "root";
+  const visibleDirectory = directory.filter((item) => {
+    const label = item.label.trim();
+    const isSuffix = /\bsuffix\b|后缀/i.test(label) || /^(?:Latin\s+)?-[a-z]+\b/i.test(label);
+    const isPrefix = !isSuffix && !/PIE root/i.test(label) && (
+      /\bprefix\b|前缀/i.test(label) ||
+      /(?:^|\s)\*?[a-z]+-(?=\s|,|$)/i.test(label)
+    );
+
+    return selectedKind === "suffix" ? isSuffix : selectedKind === "prefix" ? isPrefix : !isPrefix && !isSuffix;
+  });
+  const selectedLabel = selectedKind === "root" ? "词根" : selectedKind === "prefix" ? "前缀" : "后缀";
 
   return (
     <section className="stack vocabulary-page">
-      <div className="vocabulary-hero">
-        <VocabularySearchAutocomplete initialQuery={query} />
-      </div>
       <section className="vocabulary-root-affix-directory" aria-labelledby="vocabulary-directory-title">
-        <div className="vocabulary-directory-heading">
-          <div>
-            <h1 id="vocabulary-directory-title">词根词缀词典</h1>
-          </div>
-          <span className="vocabulary-directory-count">{directory.length} 个词根/词缀</span>
-        </div>
+        <h1 className="sr-only" id="vocabulary-directory-title">{selectedLabel}</h1>
         <div className="vocabulary-root-affix-grid">
-          {directory.map((item) => (
+          {visibleDirectory.map((item) => (
             <Link className="vocabulary-root-affix-card" href={item.href} key={`${item.kind}-${item.key}`}>
               <strong>{item.label}</strong>
               <span>{item.kind} · {item.count} 个相关词</span>

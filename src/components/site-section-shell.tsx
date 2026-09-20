@@ -1,0 +1,204 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname, useSearchParams, type ReadonlyURLSearchParams } from "next/navigation";
+import type { ReactNode } from "react";
+import type { SiteChromeConfig, SiteChromeNavItem } from "@/lib/content/site-chrome";
+
+const DICTIONARY_COUNTS: Record<string, string> = {
+  "dictionary-roots": "982",
+  "dictionary-prefixes": "503",
+  "dictionary-suffixes": "11",
+};
+
+function enabledChildren(item: SiteChromeNavItem) {
+  return item.children.filter((child) => child.enabled);
+}
+
+function firstLeafHref(item: SiteChromeNavItem): string {
+  for (const child of enabledChildren(item)) {
+    const href = firstLeafHref(child);
+    if (href) return href;
+  }
+
+  return item.href;
+}
+
+function hrefMatchesLocation(href: string, pathname: string, searchParams: ReadonlyURLSearchParams) {
+  if (!href) return false;
+  const [path, query = ""] = href.split("?", 2);
+  if (pathname !== path && !pathname.startsWith(`${path}/`)) return false;
+  const expected = new URLSearchParams(query);
+
+  for (const [key, value] of expected) {
+    const currentValue = searchParams.get(key);
+    if (currentValue !== null && currentValue !== value) return false;
+  }
+
+  return true;
+}
+
+function flattenLeafLinks(item: SiteChromeNavItem): SiteChromeNavItem[] {
+  const children = enabledChildren(item);
+  if (!children.length) return item.href ? [item] : [];
+  return children.flatMap(flattenLeafLinks);
+}
+
+function findBestActiveLeaf(item: SiteChromeNavItem, pathname: string, searchParams: ReadonlyURLSearchParams) {
+  return flattenLeafLinks(item)
+    .filter((candidate) => hrefMatchesLocation(candidate.href, pathname, searchParams))
+    .sort((left, right) => right.href.length - left.href.length)[0];
+}
+
+function findActiveTopItem(items: SiteChromeNavItem[], pathname: string, searchParams: ReadonlyURLSearchParams) {
+  return items
+    .filter((item) => item.enabled)
+    .map((item) => ({ item, leaf: findBestActiveLeaf(item, pathname, searchParams) }))
+    .filter((entry) => entry.leaf)
+    .sort((left, right) => (right.leaf?.href.length ?? 0) - (left.leaf?.href.length ?? 0))[0]?.item;
+}
+
+function SectionLeaf({ activeId, item }: { activeId?: string; item: SiteChromeNavItem }) {
+  if (!item.href) return null;
+
+  const count = DICTIONARY_COUNTS[item.id];
+
+  return (
+    <Link
+      aria-current={activeId === item.id ? "page" : undefined}
+      className={`${activeId === item.id ? "active " : ""}${count ? "dictionary-leaf" : ""}`}
+      href={item.href}
+    >
+      <span aria-hidden="true" />
+      <span className="section-side-label">{item.label}</span>
+      {count ? <small>{count} 项</small> : null}
+    </Link>
+  );
+}
+
+function ExpandedBranch({
+  activeId,
+  depth = 0,
+  item,
+}: {
+  activeId?: string;
+  depth?: number;
+  item: SiteChromeNavItem;
+}) {
+  const children = enabledChildren(item);
+  if (!children.length) return <SectionLeaf activeId={activeId} item={item} />;
+
+  return (
+    <div className={`section-side-branch depth-${Math.min(depth, 2)}`}>
+      <Link className="section-side-group-title" href={firstLeafHref(item)}>
+        <span className="section-side-mark" aria-hidden="true">
+          {item.label.slice(0, 1)}
+        </span>
+        <strong>{item.label}</strong>
+      </Link>
+      <div className="section-side-secondary">
+        {children.map((child) => (
+          <ExpandedBranch activeId={activeId} depth={depth + 1} item={child} key={child.id} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ExamNavigation({
+  activeLeafId,
+  exams,
+  pathname,
+  searchParams,
+}: {
+  activeLeafId?: string;
+  exams: SiteChromeNavItem[];
+  pathname: string;
+  searchParams: ReadonlyURLSearchParams;
+}) {
+  const activeExam = exams.find((exam) => findBestActiveLeaf(exam, pathname, searchParams));
+
+  return (
+    <nav aria-label="语言考试目录">
+      {exams.map((exam) => {
+        const isActive = exam.id === activeExam?.id;
+        const children = enabledChildren(exam);
+
+        return (
+          <div className={`section-side-exam ${isActive ? "active" : ""}`} key={exam.id}>
+            <Link className="section-side-primary" href={firstLeafHref(exam) || exam.href || "/"}>
+              <span className="section-side-dot" aria-hidden="true" />
+              <strong>{exam.label}</strong>
+              <span aria-hidden="true">{isActive ? "▾" : "›"}</span>
+            </Link>
+
+            {isActive && children.length ? (
+              <div className="section-side-exam-children">
+                {exam.id === "ielts"
+                  ? children.map((child) => (
+                      <ExpandedBranch activeId={activeLeafId} item={child} key={child.id} />
+                    ))
+                  : children.map((child) => (
+                      <SectionLeaf activeId={activeLeafId} item={child} key={child.id} />
+                    ))}
+              </div>
+            ) : null}
+          </div>
+        );
+      })}
+    </nav>
+  );
+}
+
+export function SiteSectionShell({
+  children,
+  config,
+}: {
+  children: ReactNode;
+  config: SiteChromeConfig;
+}) {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const navItems = config.nav.items.filter(
+    (item) => item.enabled && item.label !== "公告栏" && item.label !== "使用说明",
+  );
+  const activeTopItem = findActiveTopItem(navItems, pathname, searchParams);
+  const activeLeaf = activeTopItem
+    ? findBestActiveLeaf(activeTopItem, pathname, searchParams)
+    : undefined;
+  const hideSidebar = !activeTopItem || ["home", "me"].includes(activeTopItem.id);
+
+  if (hideSidebar) {
+    return <div className="section-page-content section-page-content-wide">{children}</div>;
+  }
+
+  const topChildren = enabledChildren(activeTopItem);
+
+  return (
+    <div className="site-section-shell">
+      <aside className="section-side-nav" aria-label={`${activeTopItem.label}目录`}>
+        <Link className="section-side-brand" href={firstLeafHref(activeTopItem) || activeTopItem.href || "/"}>
+          <span>DIRECTORY</span>
+          <strong>{activeTopItem.label}</strong>
+        </Link>
+
+        {activeTopItem.id === "exams" ? (
+          <ExamNavigation
+            activeLeafId={activeLeaf?.id}
+            exams={topChildren}
+            pathname={pathname}
+            searchParams={searchParams}
+          />
+        ) : (
+          <nav aria-label={`${activeTopItem.label}下级目录`}>
+            {topChildren.map((item) => (
+              <ExpandedBranch activeId={activeLeaf?.id} item={item} key={item.id} />
+            ))}
+          </nav>
+        )}
+      </aside>
+
+      <div className="section-page-content">{children}</div>
+    </div>
+  );
+}

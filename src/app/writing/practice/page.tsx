@@ -19,17 +19,8 @@ const taskCopy = {
 export default function WritingPracticeIndexPage() {
   return (
     <section className="stack writing-home-page writing-practice-index-page">
-      <div className="writing-hero-panel ielts-module-hero">
-        <div className="writing-hero-copy">
-          <h1>IELTS WRITING</h1>
-        </div>
-      </div>
-
       <div className="writing-mode-panel">
         <div className="listening-library-head">
-          <Link className="back-link" href="/writing">
-            ← 返回
-          </Link>
           <div>
             <span>Practice</span>
             <strong>选择写作题型</strong>

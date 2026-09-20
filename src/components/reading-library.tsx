@@ -16,17 +16,8 @@ export function ReadingLibrary({ mode }: { mode: "mock" | "practice" }) {
 
   return (
     <section className="stack ielts-module-page listening-library-page reading-library-page">
-      <div className="writing-hero-panel ielts-module-hero">
-        <div className="writing-hero-copy">
-          <h1>IELTS READING</h1>
-        </div>
-      </div>
-
       <div className="listening-library-panel reading-library-panel">
         <div className="listening-library-head">
-          <Link className="back-link" href="/reading">
-            ← 返回
-          </Link>
           <div>
             <span>{mode === "mock" ? "mock test" : "practice"}</span>
             <strong>{mode === "mock" ? "阅读模考题库" : "阅读逐篇练习"}</strong>

@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
 import type { ManagedPageContent } from "@/lib/content/page-content";
 
 export type BbcArticleListGroup = {
@@ -15,62 +14,41 @@ export type BbcArticleListGroup = {
 
 export function ArticlesHome({
   content,
+  selectedYear,
   yearGroups,
 }: {
   content: ManagedPageContent;
+  selectedYear: number;
   yearGroups: BbcArticleListGroup[];
 }) {
-  const [openYears, setOpenYears] = useState<number[]>([]);
-
-  function toggleYear(year: number) {
-    setOpenYears((current) =>
-      current.includes(year) ? current.filter((item) => item !== year) : [...current, year],
-    );
-  }
+  const selectedGroup = yearGroups.find((group) => group.year === selectedYear);
 
   return (
     <section className="stack bbc-home-page">
-      <div className="page-heading bbc-hero">
+      <header className="directory-page-heading">
         <div className="eyebrow">{content.eyebrow}</div>
-        <h1>{content.title}</h1>
+        <h1>BBC随身英语 · {selectedYear}</h1>
         {content.summary ? <p className="lead">{content.summary}</p> : null}
-      </div>
+      </header>
 
       <div className="bbc-year-panel">
         <div className="bbc-year-list">
-          {yearGroups.map((group) => {
-            const isOpen = openYears.includes(group.year);
-
-            return (
-              <div className="bbc-year-item" key={group.year}>
-                <button
-                  aria-expanded={isOpen}
-                  className="bbc-year-banner"
-                  type="button"
-                  onClick={() => toggleYear(group.year)}
+          <div className="bbc-year-item">
+            <div className="bbc-article-list bbc-article-list-visible">
+              {selectedGroup?.articles.map((article) => (
+                <Link
+                  className="bbc-article-card"
+                  href={`/articles/${article.id}`}
+                  key={article.id}
                 >
-                  <span>{group.year}</span>
-                  <i>{isOpen ? "▾" : "▸"}</i>
-                </button>
-                <div className="bbc-article-list">
-                  {isOpen
-                    ? group.articles.map((article) => (
-                        <Link
-                          className="bbc-article-card"
-                          href={`/articles/${article.id}`}
-                          key={article.id}
-                        >
-                          <strong>
-                            {article.id}-{article.title}
-                            {article.titleChinese ? ` ${article.titleChinese}` : ""}
-                          </strong>
-                        </Link>
-                      ))
-                    : null}
-                </div>
-              </div>
-            );
-          })}
+                  <strong>
+                    {article.id}-{article.title}
+                    {article.titleChinese ? ` ${article.titleChinese}` : ""}
+                  </strong>
+                </Link>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

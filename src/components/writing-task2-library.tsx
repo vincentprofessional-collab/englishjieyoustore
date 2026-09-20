@@ -176,12 +176,6 @@ export function WritingTask2Library() {
 
   return (
     <section className="stack writing-home-page writing-task2-page task2-index-page">
-      <div className="task2-backbar">
-        <Link className="back-link" href="/writing">
-          ← 返回雅思写作
-        </Link>
-      </div>
-
       <div className="writing-mode-panel task2-top-category-panel">
         <div className="writing-practice-tree writing-practice-index-tree" id="writing-task2-category-library">
           <div className="writing-task-grid">

@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { ListeningPracticeLibrary } from "@/components/listening-practice-library";
 import { getListeningSections } from "@/lib/ielts/listening";
 
@@ -10,12 +9,6 @@ export default async function ListeningPage() {
   return (
     <section className="stack ielts-module-page listening-library-page">
       <div className="listening-library-panel">
-        <div className="listening-library-head">
-          <Link className="back-link" href="/">
-            ← 返回
-          </Link>
-        </div>
-
         {error ? <div className="notice danger">读取听力题库失败：{error}</div> : null}
 
         <ListeningPracticeLibrary bookScope="cambridge" sections={sections} />

@@ -6,6 +6,7 @@ import { GlobalVocabularySearch } from "@/components/global-vocabulary-search";
 import { SiteAnalyticsTracker } from "@/components/site-analytics-tracker";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteNav } from "@/components/site-nav";
+import { SiteSectionShell } from "@/components/site-section-shell";
 import { getCachedPublishedSiteChromeConfig } from "@/lib/content/site-chrome-server";
 import { getLegacySessionMigrationScript } from "@/lib/supabase/legacy-session-migration";
 import "./globals.css";
@@ -34,18 +35,18 @@ export default async function RootLayout({
       </head>
       <body>
         <main className="shell">
-          <aside className="app-sidebar">
-            <SiteNav config={siteChromeConfig} />
-            <SiteFooter config={siteChromeConfig} />
-          </aside>
-          <div className="app-content">
-            <Suspense fallback={null}>
-              <GlobalVocabularySearch />
-            </Suspense>
-            <SiteAnalyticsTracker />
-            <GlobalStudyInteractions />
-            <FrontendPageAdmin>{children}</FrontendPageAdmin>
-          </div>
+          <SiteNav config={siteChromeConfig} />
+          <Suspense fallback={null}>
+            <GlobalVocabularySearch />
+          </Suspense>
+          <SiteAnalyticsTracker />
+          <GlobalStudyInteractions />
+          <Suspense fallback={<div className="section-page-content section-page-content-wide" />}>
+            <SiteSectionShell config={siteChromeConfig}>
+              <FrontendPageAdmin>{children}</FrontendPageAdmin>
+            </SiteSectionShell>
+          </Suspense>
+          <SiteFooter config={siteChromeConfig} />
         </main>
       </body>
     </html>

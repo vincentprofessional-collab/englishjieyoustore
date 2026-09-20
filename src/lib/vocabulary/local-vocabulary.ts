@@ -989,6 +989,12 @@ export function getVocabularyRootAffixDirectory() {
     if (labelKey && label) {
       addItem(label, "词根/词缀", `/vocabulary/etymologies/${labelKey}`, entry.normalizedWord);
     }
+
+    for (const formationLabel of getFormationLabels(entry.formation)) {
+      if (!/\bsuffix\b|后缀/i.test(formationLabel)) continue;
+      const formationKey = normalizeDirectoryKey(formationLabel);
+      addItem(formationLabel, "词缀", `/vocabulary/etymologies/${formationKey}`, entry.normalizedWord);
+    }
   }
 
   const collator = new Intl.Collator("en", { sensitivity: "base" });
@@ -1691,6 +1697,12 @@ export async function getDatabaseVocabularyAutocompleteItems({
 
 export function getFeaturedVocabularyEntries(limit = 9) {
   return loadVocabularyEntries().slice(0, limit);
+}
+
+export function getVocabularyEntriesByLevel(level: string, limit = 120) {
+  return loadVocabularyEntries()
+    .filter((entry) => entry.level === level)
+    .slice(0, limit);
 }
 
 export function getVocabularySearchResults(query: string, limit = 20) {

@@ -4,7 +4,14 @@ import { getPublishedPageContent } from "@/lib/content/page-content";
 
 export const revalidate = 60;
 
-export default async function ArticlesPage() {
+export default async function ArticlesPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ year?: string }>;
+}) {
+  const { year } = await searchParams;
+  const requestedYear = Number(year);
+  const selectedYear = BBC_YEARS.includes(requestedYear) ? requestedYear : 2026;
   const content = await getPublishedPageContent("articles");
   const yearGroups = BBC_YEARS.map((year) => ({
     articles: getBbcArticlesByYear(year).map((article) => ({
@@ -15,5 +22,5 @@ export default async function ArticlesPage() {
     year,
   }));
 
-  return <ArticlesHome content={content} yearGroups={yearGroups} />;
+  return <ArticlesHome content={content} selectedYear={selectedYear} yearGroups={yearGroups} />;
 }
