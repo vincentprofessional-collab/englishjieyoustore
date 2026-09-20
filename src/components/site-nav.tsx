@@ -66,6 +66,9 @@ export function SiteNav({ config: initialConfig }: { config: SiteChromeConfig })
   const navItems = config.nav.items.filter(
     (item) => item.enabled && item.label !== "公告栏" && item.label !== "使用说明",
   );
+  const adminHref = config.nav.adminHref === "/admin?view=chrome"
+    ? "/admin"
+    : config.nav.adminHref || "/admin";
 
   useEffect(() => {
     setConfig((current) => ({
@@ -159,7 +162,7 @@ export function SiteNav({ config: initialConfig }: { config: SiteChromeConfig })
         </Link>
         <div className="nav-actions">
           {canAccessAdmin ? (
-            <Link className="nav-admin-link" href={config.nav.adminHref || "/admin"}>
+            <Link className="nav-admin-link" href={adminHref}>
               {config.nav.adminLabel}
             </Link>
           ) : null}

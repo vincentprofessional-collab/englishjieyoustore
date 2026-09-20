@@ -6,6 +6,7 @@ import { AdminAnalyticsPanel } from "@/components/admin-analytics-panel";
 import { AdminHomeEditor } from "@/components/admin-home-editor";
 import { AdminEntitlementManager } from "@/components/admin-entitlement-manager";
 import { AdminSiteChromeEditor } from "@/components/admin-site-chrome-editor";
+import { GuidePostAdmin } from "@/components/guide-post-admin";
 import { supabase } from "@/lib/supabase/client";
 
 type AdminState = "checking" | "signed-out" | "forbidden" | "ready" | "error";
@@ -13,11 +14,12 @@ type AdminView =
   | "analytics"
   | "access"
   | "home"
-  | "chrome";
+  | "chrome"
+  | "posts";
 
 export function AdminContentManager({ initialView }: { initialView?: string }) {
   const [activeView, setActiveView] = useState<AdminView>(
-    initialView === "chrome" || initialView === "home" || initialView === "access"
+    initialView === "chrome" || initialView === "home" || initialView === "access" || initialView === "posts"
       ? initialView
       : "analytics",
   );
@@ -208,6 +210,13 @@ export function AdminContentManager({ initialView }: { initialView?: string }) {
           首页
         </button>
         <button
+          className={activeView === "posts" ? "active" : ""}
+          type="button"
+          onClick={() => setActiveView("posts")}
+        >
+          首页发帖
+        </button>
+        <button
           className={activeView === "chrome" ? "active" : ""}
           type="button"
           onClick={() => setActiveView("chrome")}
@@ -222,6 +231,10 @@ export function AdminContentManager({ initialView }: { initialView?: string }) {
 
       {activeView === "home" && adminUserId ? (
         <AdminHomeEditor adminUserId={adminUserId} />
+      ) : null}
+
+      {activeView === "posts" && adminUserId ? (
+        <GuidePostAdmin adminUserId={adminUserId} />
       ) : null}
 
       {activeView === "chrome" && adminUserId ? (

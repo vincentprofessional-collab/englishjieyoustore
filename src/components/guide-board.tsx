@@ -140,11 +140,13 @@ export function GuidePostContent({ blocks }: { blocks: GuideContentBlock[] }) {
 }
 
 function GuidePostCard({
+  hideExcerpt = false,
   hidePostChrome = false,
   initialExpanded = false,
   linkTitle = true,
   post,
 }: {
+  hideExcerpt?: boolean;
   hidePostChrome?: boolean;
   initialExpanded?: boolean;
   linkTitle?: boolean;
@@ -392,7 +394,7 @@ function GuidePostCard({
               <h2>{post.title}</h2>
             )
           )}
-          {!hidePostChrome ? <p>{post.excerpt}</p> : null}
+          {!hidePostChrome && !hideExcerpt ? <p>{post.excerpt}</p> : null}
           {post.author ? <small className="guide-post-author">作者：{post.author}</small> : null}
         </div>
         <time className="guide-post-date" dateTime={post.publishedAt}>
@@ -484,7 +486,7 @@ function GuidePostCard({
 export function GuidePostDetail({ post }: { post: GuidePost }) {
   return (
     <section className="stack guide-post-detail-page">
-      <GuidePostCard initialExpanded linkTitle={false} post={post} />
+      <GuidePostCard hideExcerpt initialExpanded linkTitle={false} post={post} />
     </section>
   );
 }
