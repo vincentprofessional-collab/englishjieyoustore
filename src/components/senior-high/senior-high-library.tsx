@@ -44,9 +44,11 @@ function answerStatusLabel(entry: SeniorHighLibraryEntry) {
   return "暂无标准答案";
 }
 
-export function SeniorHighLibrary() {
+export function SeniorHighLibrary({ initialEntry }: { initialEntry?: string } = {}) {
   const [index, setIndex] = useState<SeniorHighLibraryIndex | null>(null);
-  const [entry, setEntry] = useState<Entry>("practice");
+  const [entry, setEntry] = useState<Entry>(
+    initialEntry === "knowledge" || initialEntry === "papers" ? initialEntry : "practice",
+  );
   const [year, setYear] = useState("全部");
   const [region, setRegion] = useState("全部");
   const [answerStatus, setAnswerStatus] = useState("全部");
