@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname, useSearchParams, type ReadonlyURLSearchParams } from "next/navigation";
 import type { ReactNode } from "react";
+import { useEffect, useState } from "react";
 import type { SiteChromeConfig, SiteChromeNavItem } from "@/lib/content/site-chrome";
 
 const DICTIONARY_COUNTS: Record<string, string> = {
@@ -32,10 +33,26 @@ function hrefMatchesLocation(href: string, pathname: string, searchParams: Reado
 
   for (const [key, value] of expected) {
     const currentValue = searchParams.get(key);
-    if (currentValue !== null && currentValue !== value) return false;
+    if (currentValue !== value) return false;
   }
 
   return true;
+}
+
+function hrefPathMatches(href: string, pathname: string) {
+  const path = href.split("?", 1)[0];
+  return Boolean(path) && (pathname === path || pathname.startsWith(`${path}/`));
+}
+
+function findPathMatch(item: SiteChromeNavItem, pathname: string): SiteChromeNavItem | undefined {
+  const candidates = [
+    ...(item.href && hrefPathMatches(item.href, pathname) ? [item] : []),
+    ...enabledChildren(item).flatMap((child) => {
+      const match = findPathMatch(child, pathname);
+      return match ? [match] : [];
+    }),
+  ];
+  return candidates.sort((left, right) => right.href.length - left.href.length)[0];
 }
 
 function flattenLeafLinks(item: SiteChromeNavItem): SiteChromeNavItem[] {
@@ -53,9 +70,12 @@ function findBestActiveLeaf(item: SiteChromeNavItem, pathname: string, searchPar
 function findActiveTopItem(items: SiteChromeNavItem[], pathname: string, searchParams: ReadonlyURLSearchParams) {
   return items
     .filter((item) => item.enabled)
-    .map((item) => ({ item, leaf: findBestActiveLeaf(item, pathname, searchParams) }))
-    .filter((entry) => entry.leaf)
-    .sort((left, right) => (right.leaf?.href.length ?? 0) - (left.leaf?.href.length ?? 0))[0]?.item;
+    .map((item) => {
+      const leaf = findBestActiveLeaf(item, pathname, searchParams);
+      return { item, match: leaf ?? findPathMatch(item, pathname) };
+    })
+    .filter((entry) => entry.match)
+    .sort((left, right) => (right.match?.href.length ?? 0) - (left.match?.href.length ?? 0))[0]?.item;
 }
 
 function SectionLeaf({ activeId, item }: { activeId?: string; item: SiteChromeNavItem }) {
@@ -116,7 +136,11 @@ function ExamNavigation({
   pathname: string;
   searchParams: ReadonlyURLSearchParams;
 }) {
-  const activeExam = exams.find((exam) => findBestActiveLeaf(exam, pathname, searchParams));
+  const activeExam = exams.find(
+    (exam) => findBestActiveLeaf(exam, pathname, searchParams) ||
+      (exam.href && hrefMatchesLocation(exam.href, pathname, searchParams)) ||
+      findPathMatch(exam, pathname),
+  );
 
   return (
     <nav aria-label="语言考试目录">
@@ -167,6 +191,24 @@ export function SiteSectionShell({
     ? findBestActiveLeaf(activeTopItem, pathname, searchParams)
     : undefined;
   const hideSidebar = !activeTopItem || ["home", "me"].includes(activeTopItem.id);
+  const [sidebarHidden, setSidebarHidden] = useState(false);
+
+  useEffect(() => {
+    try {
+      setSidebarHidden(window.localStorage.getItem("site-section-sidebar-hidden") === "1");
+    } catch {
+      setSidebarHidden(false);
+    }
+  }, []);
+
+  function updateSidebarVisibility(hidden: boolean) {
+    setSidebarHidden(hidden);
+    try {
+      window.localStorage.setItem("site-section-sidebar-hidden", hidden ? "1" : "0");
+    } catch {
+      // Keep the control usable when storage is unavailable.
+    }
+  }
 
   if (hideSidebar) {
     return <div className="section-page-content section-page-content-wide">{children}</div>;
@@ -175,8 +217,17 @@ export function SiteSectionShell({
   const topChildren = enabledChildren(activeTopItem);
 
   return (
-    <div className="site-section-shell">
+    <>
+    <div className={`site-section-shell${sidebarHidden ? " sidebar-hidden" : ""}`}>
       <aside className="section-side-nav" aria-label={`${activeTopItem.label}目录`}>
+        <button
+          aria-label="隐藏目录侧栏"
+          className="section-side-toggle"
+          onClick={() => updateSidebarVisibility(true)}
+          type="button"
+        >
+          隐藏
+        </button>
         <Link className="section-side-brand" href={firstLeafHref(activeTopItem) || activeTopItem.href || "/"}>
           <span>DIRECTORY</span>
           <strong>{activeTopItem.label}</strong>
@@ -200,5 +251,16 @@ export function SiteSectionShell({
 
       <div className="section-page-content">{children}</div>
     </div>
+    {sidebarHidden ? (
+      <button
+        aria-label="显示目录侧栏"
+        className="section-side-reveal"
+        onClick={() => updateSidebarVisibility(false)}
+        type="button"
+      >
+        显示
+      </button>
+    ) : null}
+    </>
   );
 }

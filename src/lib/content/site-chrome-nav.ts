@@ -13,6 +13,61 @@ const LANGUAGE_EXAM_ORDER = [
   "sat-reading-writing",
 ];
 
+const LANGUAGE_EXAM_KEYS: Record<string, string> = {
+  "junior-high-english": "junior-high-english",
+  "中考英语": "junior-high-english",
+  "senior-high-english": "senior-high-english",
+  "高考英语": "senior-high-english",
+  cet4: "cet4",
+  "cet4-english": "cet4",
+  "大学英语四级": "cet4",
+  "大学四级": "cet4",
+  cet6: "cet6",
+  "cet6-english": "cet6",
+  "大学英语六级": "cet6",
+  "大学六级": "cet6",
+  ielts: "ielts",
+  雅思: "ielts",
+  "sat-reading-writing": "sat-reading-writing",
+  SAT: "sat-reading-writing",
+};
+
+function languageExamKey(item: SiteChromeNavNode) {
+  return LANGUAGE_EXAM_KEYS[item.id] ?? LANGUAGE_EXAM_KEYS[item.label] ?? item.id;
+}
+
+/**
+ * Older published navigation records can contain the same exam twice: once
+ * as a legacy leaf and once as the newer expandable item. Keep one entry and
+ * merge its children so the sidebar remains editable without duplicate rows.
+ */
+export function dedupeLanguageExamMenu<T extends SiteChromeNavNode>(items: T[]): T[] {
+  const exams = items.find((item) => item.id === "exams");
+  if (!exams) return items;
+
+  const merged = new Map<string, T>();
+  for (const item of exams.children) {
+    const key = languageExamKey(item);
+    const current = merged.get(key);
+    if (!current) {
+      merged.set(key, item as T);
+      continue;
+    }
+
+    const preferIncoming = item.children.length > current.children.length;
+    const preferred = preferIncoming ? item : current;
+    const fallback = preferIncoming ? current : item;
+    const children = [...preferred.children, ...fallback.children].filter(
+      (child, index, list) => list.findIndex((candidate) => candidate.id === child.id) === index,
+    );
+    merged.set(key, { ...preferred, children } as T);
+  }
+
+  return items.map((item) =>
+    item.id === "exams" ? { ...item, children: [...merged.values()] } : item,
+  );
+}
+
 export function ensureJuniorHighExamLink<T extends SiteChromeNavNode>(items: T[], juniorHigh: T): T[] {
   return items.some((item) => item.id === juniorHigh.id) ? items : [...items, juniorHigh];
 }

@@ -1253,6 +1253,7 @@ export default function ArticleDetailPage({ article }: ArticlePageProps) {
               </button>
               <StudyAnnotationTools
                 buttonClassName="annotation-toggle ielts-exam-action bbc-annotation-toggle"
+                enableVocabularyHover
                 sourceHref={`/articles/${article.id}`}
                 sourceId={`bbc:${article.id}`}
                 sourceTitle={`BBC ${article.id} ${article.title}`}

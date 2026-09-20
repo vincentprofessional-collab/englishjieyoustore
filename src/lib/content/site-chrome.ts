@@ -1,5 +1,5 @@
 import { supabase } from "@/lib/supabase/client";
-import { ensureCet4ExamMenu, ensureCet6ExamMenu, ensureJuniorHighExamMenu, ensureSatExamMenu, ensureSeniorHighExamMenu, orderLanguageExamMenu } from "@/lib/content/site-chrome-nav";
+import { dedupeLanguageExamMenu, ensureCet4ExamMenu, ensureCet6ExamMenu, ensureJuniorHighExamMenu, ensureSatExamMenu, ensureSeniorHighExamMenu, orderLanguageExamMenu } from "@/lib/content/site-chrome-nav";
 
 export const SITE_CHROME_SLUG = "site-chrome";
 export const SITE_CHROME_VERSION = 3;
@@ -303,42 +303,6 @@ export const DEFAULT_SITE_CHROME_CONFIG: SiteChromeConfig = {
       {
         children: [
           {
-            children: [],
-            dropdownAlign: "right",
-            enabled: true,
-            href: "/junior-high",
-            id: "junior-high-english",
-            label: "中考英语",
-            note: "",
-          },
-          {
-            children: [],
-            dropdownAlign: "right",
-            enabled: true,
-            href: "/senior-high",
-            id: "senior-high-english",
-            label: "高考英语",
-            note: "",
-          },
-          {
-            children: [],
-            dropdownAlign: "right",
-            enabled: true,
-            href: "/cet4",
-            id: "cet4",
-            label: "大学英语四级",
-            note: "",
-          },
-          {
-            children: [],
-            dropdownAlign: "right",
-            enabled: true,
-            href: "/cet6",
-            id: "cet6",
-            label: "大学英语六级",
-            note: "",
-          },
-          {
             children: [
               {
                 children: [],
@@ -355,7 +319,7 @@ export const DEFAULT_SITE_CHROME_CONFIG: SiteChromeConfig = {
                 enabled: true,
                 href: "/junior-high?mode=type",
                 id: "junior-high-type",
-                label: "题型",
+                label: "题型训练",
                 note: "",
               },
               {
@@ -392,7 +356,7 @@ export const DEFAULT_SITE_CHROME_CONFIG: SiteChromeConfig = {
                 enabled: true,
                 href: "/senior-high?entry=practice",
                 id: "senior-high-practice",
-                label: "题型",
+                label: "题型训练",
                 note: "",
               },
               {
@@ -429,7 +393,7 @@ export const DEFAULT_SITE_CHROME_CONFIG: SiteChromeConfig = {
                 enabled: true,
                 href: "/exams/cet4?section=types",
                 id: "cet4-types",
-                label: "题型",
+                label: "题型训练",
                 note: "",
               },
               {
@@ -466,7 +430,7 @@ export const DEFAULT_SITE_CHROME_CONFIG: SiteChromeConfig = {
                 enabled: true,
                 href: "/exams/cet6?section=types",
                 id: "cet6-types",
-                label: "题型",
+                label: "题型训练",
                 note: "",
               },
               {
@@ -652,7 +616,7 @@ export const DEFAULT_SITE_CHROME_CONFIG: SiteChromeConfig = {
                 enabled: true,
                 href: "/sat?view=types",
                 id: "sat-types",
-                label: "题型",
+                label: "题型训练",
                 note: "",
               },
               {
@@ -853,6 +817,14 @@ function findDefaultNavItem(id: string, items: SiteChromeNavItem[]): SiteChromeN
   }
 }
 
+const NAV_LABEL_OVERRIDES: Record<string, string> = {
+  "junior-high-type": "题型训练",
+  "senior-high-practice": "题型训练",
+  "cet4-types": "题型训练",
+  "cet6-types": "题型训练",
+  "sat-types": "题型训练",
+};
+
 function normalizeVisibleNavItems(
   items: SiteChromeNavItem[],
   migrateLegacyConfig: boolean,
@@ -884,11 +856,11 @@ function normalizeVisibleNavItems(
       return {
         ...item,
         children: normalizeVisibleNavItems(fixedChildren, migrateLegacyConfig),
-        label: migrateLegacyConfig && item.id === "skill-training"
+        label: NAV_LABEL_OVERRIDES[item.id] ?? (migrateLegacyConfig && item.id === "skill-training"
           ? "专项训练"
           : migrateLegacyConfig && item.id === "sat-reading-writing"
             ? "SAT"
-            : item.label,
+            : item.label),
         note: migrateLegacyConfig && item.id === "memorize" ? "" : item.note,
       };
     });
@@ -943,9 +915,11 @@ export function mergeSiteChromeConfig(value: unknown): SiteChromeConfig {
   const navItems = examsFallback && cet6Fallback
     ? ensureCet6ExamMenu(navWithCet4, examsFallback, cet6Fallback)
     : navWithCet4;
-  const orderedNavItems = orderLanguageExamMenu(navItems);
+  const orderedNavItems = orderLanguageExamMenu(dedupeLanguageExamMenu(navItems));
 
-  const normalizedNavItems = normalizeVisibleNavItems(navItems, migrateLegacyConfig).map((item) => {
+  const normalizedNavItems = dedupeLanguageExamMenu(
+    normalizeVisibleNavItems(orderedNavItems, migrateLegacyConfig),
+  ).map((item) => {
     if (migrateLegacyConfig && item.id === "dictionary") {
       return {
         ...item,
