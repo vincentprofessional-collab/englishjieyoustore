@@ -1,0 +1,4845 @@
+{
+  "schemaVersion": 2,
+  "id": "cet4-paper-2023062",
+  "kind": "paper",
+  "title": "2023年6月大学英语四级真题 · 第2套",
+  "year": "2023",
+  "region": "全国",
+  "variant": "第2套",
+  "submissionMode": "whole-paper",
+  "instructions": [
+    {
+      "type": "notice",
+      "tone": "info",
+      "text": "按原卷分区作答。提交整卷后显示可用答案与原资料参考内容。"
+    }
+  ],
+  "sections": [
+    {
+      "id": "cet4-paper-2023062-part-1-writing",
+      "title": "Writing 写作",
+      "layout": "flow",
+      "instructions": [
+        {
+          "type": "audio",
+          "assetId": "cet4-paper-2023062-audio",
+          "label": "听力音频"
+        }
+      ],
+      "groups": [
+        {
+          "id": "cet4-paper-2023062-part-1-writing-group",
+          "title": "写作题",
+          "presentation": "writing",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet4-paper-2023062-part-1-q-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "essay",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cet4-paper-2023062-part-2",
+      "title": "Part II   Listening Comprehension           (25 minutes)",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet4-paper-2023062-part-2-section-1-group-1",
+          "title": "题目",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet4-paper-2023062-part-2-section-1-group-1-q-1-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "A man was bitten by a snake."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "A man kept a 4-foot snake as a pet."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "A man was taken to a hospital."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "A man fell off his toilet seat."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2023062-part-2-section-1-group-1-q-2-2",
+              "displayNumber": 2,
+              "sourceQuestionNumber": 2,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Where the snake had been taken."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "How the snake was captured."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Whether the snake was infected."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Who owned the snake. Questions 3 and 4 are based on the news report you have just heard."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2023062-part-2-section-1-group-1-q-3-3",
+              "displayNumber": 3,
+              "sourceQuestionNumber": 3,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Taking her trash out in fancy dresses."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Sharing her photos with famous movie stars."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Amusing herself by going to ball parties."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Posting her daughter's photos on social media."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2023062-part-2-section-1-group-1-q-4-4",
+              "displayNumber": 4,
+              "sourceQuestionNumber": 4,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To make herself popular."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To please her daughter."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To amuse people."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To record her achievements."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet4-paper-2023062-part-2-section-1-group-2",
+          "title": "Questions 5 to 7 are based on the news report you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet4-paper-2023062-part-2-section-1-group-2-q-5-1",
+              "displayNumber": 5,
+              "sourceQuestionNumber": 5,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Eat as much as they want for $10."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Have a meal even if they have no money."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Have a chance of winning a $ 100 prize."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Get a free meal after answering some questions."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2023062-part-2-section-1-group-2-q-6-2",
+              "displayNumber": 6,
+              "sourceQuestionNumber": 6,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It was brought up by two staffers."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It originated from a donation to her staff."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It helped to popularize her restaurant."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It was suggested by some of her customers."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2023062-part-2-section-1-group-2-q-7-3",
+              "displayNumber": 7,
+              "sourceQuestionNumber": 7,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Fifty customers have offered donations."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Many people have come to eat at the restaurant."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "More people have been giving than taking."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Most staffers have received messages of kindness."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet4-paper-2023062-part-2-section-2-group-1",
+          "title": "Questions 8 to 11 are based on the conversation you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet4-paper-2023062-part-2-section-2-group-1-q-8-1",
+              "displayNumber": 8,
+              "sourceQuestionNumber": 8,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "He is a psychologist."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "He is a host for a TV program."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "He is a famous writer."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "He is a primary school teacher."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2023062-part-2-section-2-group-1-q-9-2",
+              "displayNumber": 9,
+              "sourceQuestionNumber": 9,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Why social media accounts vanish without a trace."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Why parents raise their children in different ways."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Why people fail to respond to emails promptly."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Why friends break off contact all of a sudden."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2023062-part-2-section-2-group-1-q-10-3",
+              "displayNumber": 10,
+              "sourceQuestionNumber": 10,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They simply shut themselves down."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They scream to get their parents back."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They avoid showing their emotions."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They attempt to ignore the whole situation."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2023062-part-2-section-2-group-1-q-11-4",
+              "displayNumber": 11,
+              "sourceQuestionNumber": 11,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They may regard any difference as the end of a relationship."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are on better terms with friends and romantic partners."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They try to express their feelings and thoughts effectively."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They attach more value to their relationships with others."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet4-paper-2023062-part-2-section-2-group-2",
+          "title": "Questions 12 to 15 are based on the conversation you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet4-paper-2023062-part-2-section-2-group-2-q-12-1",
+              "displayNumber": 12,
+              "sourceQuestionNumber": 12,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Their price."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Their quality."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Their color."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Their design."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2023062-part-2-section-2-group-2-q-13-2",
+              "displayNumber": 13,
+              "sourceQuestionNumber": 13,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Jeans are a typical American garment."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": ". America makes the best-known brands of jeans."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "America has the best weaving tools in the world."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Jeans are available in a greater variety in America."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2023062-part-2-section-2-group-2-q-14-3",
+              "displayNumber": 14,
+              "sourceQuestionNumber": 14,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are artificial."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are unique."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are natural."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are special."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2023062-part-2-section-2-group-2-q-15-4",
+              "displayNumber": 15,
+              "sourceQuestionNumber": 15,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are for casual wearing."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are much too pricey."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are popular with boys."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are worth the price."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet4-paper-2023062-part-2-section-3-group-1",
+          "title": "Questions 16 to 18 are based on the passage you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet4-paper-2023062-part-2-section-3-group-1-q-16-1",
+              "displayNumber": 16,
+              "sourceQuestionNumber": 16,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "He desires more in life."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "He feels as inspired as other audience members."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "He wants to see it again."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "He longs to become a superstar himself."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2023062-part-2-section-3-group-1-q-17-2",
+              "displayNumber": 17,
+              "sourceQuestionNumber": 17,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is rather unrealistic."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is somewhat complicated."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is extremely artistic."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is relatively predictable."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2023062-part-2-section-3-group-1-q-18-3",
+              "displayNumber": 18,
+              "sourceQuestionNumber": 18,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are biased against women."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are full of shootings."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are basically misleading."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are too simple."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet4-paper-2023062-part-2-section-3-group-2",
+          "title": "Questions 19 to 21 are based on the passage you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet4-paper-2023062-part-2-section-3-group-2-q-19-1",
+              "displayNumber": 19,
+              "sourceQuestionNumber": 19,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It can highlight leadership."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is a means to inspire creative thinking."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It can help connect people."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is an intuitive way to solidify friendship."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2023062-part-2-section-3-group-2-q-20-2",
+              "displayNumber": 20,
+              "sourceQuestionNumber": 20,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Allow them to recite data points."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Enable them to remember the main idea."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Make them more open to learning."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Stimulate them to engage in discussions."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2023062-part-2-section-3-group-2-q-21-3",
+              "displayNumber": 21,
+              "sourceQuestionNumber": 21,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Inspire listeners' imagination."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Convey fundamental values."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Enrich their own experience."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Explain insightful ideas."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet4-paper-2023062-part-2-section-3-group-3",
+          "title": "Questions 22 to 25 are based on the passage you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet4-paper-2023062-part-2-section-3-group-3-q-22-1",
+              "displayNumber": 22,
+              "sourceQuestionNumber": 22,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Immigrants outnumber U.S.-born Americans."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Immigrants have been contributing to the U.S."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Another wave of immigrants is hitting the U.S."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The number of immigrants to the U.S. is declining."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2023062-part-2-section-3-group-3-q-23-2",
+              "displayNumber": 23,
+              "sourceQuestionNumber": 23,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "More of them expect their children to succeed in business."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They have fewer chances to be hired by U.S. companies."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They have founded most Fortune 500 companies."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "More of them are successful business people."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2023062-part-2-section-3-group-3-q-24-3",
+              "displayNumber": 24,
+              "sourceQuestionNumber": 24,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They have higher installment loan debt than native-born Americans."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Nineteen percent of them borrow money from friends and family."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Their level of debt is lower than that of native-born Americans."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Thirty-four percent of them use credit for their daily purchases."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2023062-part-2-section-3-group-3-q-25-4",
+              "displayNumber": 25,
+              "sourceQuestionNumber": 25,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Keep their traditional values and old habits."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Borrow money from financial institutions."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Find employment in competitive businesses."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Collaborate with native-born Americans."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cet4-paper-2023062-part-3",
+      "title": "Part III    Reading Comprehension          (40 minutes)",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet4-paper-2023062-part-3-section-1-group-1",
+          "title": "题目",
+          "presentation": "reading",
+          "instructions": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Directions: In this section, there is a passage with ten blanks. You are required to select one word for each blank from a list of choices given in a word bank following the passage. Read the passage through carefully before making your choices. Each choice in the bank is identified by a letter. Please mark the corresponding letter for each item on Answer Sheet 2 with a single line through the centre. You may not use any of the words in the bank more than once. Morocco is responding to increasing energy demands by setting up one of the largest solar plants in the world. The Noor solar power station is "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet4-paper-2023062-part-3-section-1-group-1-blank-26"
+                },
+                {
+                  "type": "text",
+                  "text": " in the city of Ouarzazate and, once completed, will generate 580 million watts of electricity. The World Bank estimates it will serve 1.1 million people. It's "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet4-paper-2023062-part-3-section-1-group-1-blank-27"
+                },
+                {
+                  "type": "text",
+                  "text": " to be completed soon. Morocco's current energy comes "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet4-paper-2023062-part-3-section-1-group-1-blank-28"
+                },
+                {
+                  "type": "text",
+                  "text": " from imports. The nation hopes to get 50 percent of its energy from renewable sources by 2030. With demand for energy "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet4-paper-2023062-part-3-section-1-group-1-blank-29"
+                },
+                {
+                  "type": "text",
+                  "text": " at an annual rate of 7 percent, the new solar plant could be a "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet4-paper-2023062-part-3-section-1-group-1-blank-30"
+                },
+                {
+                  "type": "text",
+                  "text": " part of that goal. \"This makes Morocco a big "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet4-paper-2023062-part-3-section-1-group-1-blank-31"
+                },
+                {
+                  "type": "text",
+                  "text": " in the field of solar energy in the Arab region and the African continent. It could also be a forerunner for many other countries in the world that "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet4-paper-2023062-part-3-section-1-group-1-blank-32"
+                },
+                {
+                  "type": "text",
+                  "text": " on foreign imports of energy,\" said Ali Hajji, a solar energy specialist and engineering professor. Experts believe that the Middle East and North Africa have huge "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet4-paper-2023062-part-3-section-1-group-1-blank-33"
+                },
+                {
+                  "type": "text",
+                  "text": " for solar energy projects. This is partly because of adequate sunlight and partly because technology has become more "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet4-paper-2023062-part-3-section-1-group-1-blank-34"
+                },
+                {
+                  "type": "text",
+                  "text": " in the region. \"The last few years have seen a realization of "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet4-paper-2023062-part-3-section-1-group-1-blank-35"
+                },
+                {
+                  "type": "text",
+                  "text": " how competitive solar technologies can be,\" said Michael Taylor, a senior analyst at the International Renewable Energy Agency."
+                }
+              ]
+            }
+          ],
+          "sharedOptions": [
+            {
+              "id": "A",
+              "label": "A",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "affordable"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "I",
+              "label": "I",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "mostly"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "B",
+              "label": "B",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "ancestor"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "J",
+              "label": "J",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "operating"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "C",
+              "label": "C",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "crucial"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "K",
+              "label": "K",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "perhaps"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "D",
+              "label": "D",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "depend"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "L",
+              "label": "L",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "pioneer"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "E",
+              "label": "E",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "initial"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "M",
+              "label": "M",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "potential"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "F",
+              "label": "F",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "insist"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "N",
+              "label": "N",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "rising"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "G",
+              "label": "G",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "just"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "O",
+              "label": "O",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "scheduled"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "H",
+              "label": "H",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "located"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "sharedOptionsReusable": false,
+          "questions": [
+            {
+              "id": "cet4-paper-2023062-part-3-section-1-group-1-q-26",
+              "displayNumber": 26,
+              "sourceQuestionNumber": 26,
+              "type": "inline_fill",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet4-paper-2023062-part-3-section-1-group-1-blank-26"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet4-paper-2023062-part-3-section-1-group-1-blank-26",
+                  "label": "第 26 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "per_blank"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2023062-part-3-section-1-group-1-q-27",
+              "displayNumber": 27,
+              "sourceQuestionNumber": 27,
+              "type": "inline_fill",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet4-paper-2023062-part-3-section-1-group-1-blank-27"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet4-paper-2023062-part-3-section-1-group-1-blank-27",
+                  "label": "第 27 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "per_blank"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2023062-part-3-section-1-group-1-q-28",
+              "displayNumber": 28,
+              "sourceQuestionNumber": 28,
+              "type": "inline_fill",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet4-paper-2023062-part-3-section-1-group-1-blank-28"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet4-paper-2023062-part-3-section-1-group-1-blank-28",
+                  "label": "第 28 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "per_blank"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2023062-part-3-section-1-group-1-q-29",
+              "displayNumber": 29,
+              "sourceQuestionNumber": 29,
+              "type": "inline_fill",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet4-paper-2023062-part-3-section-1-group-1-blank-29"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet4-paper-2023062-part-3-section-1-group-1-blank-29",
+                  "label": "第 29 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "per_blank"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2023062-part-3-section-1-group-1-q-30",
+              "displayNumber": 30,
+              "sourceQuestionNumber": 30,
+              "type": "inline_fill",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet4-paper-2023062-part-3-section-1-group-1-blank-30"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet4-paper-2023062-part-3-section-1-group-1-blank-30",
+                  "label": "第 30 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "per_blank"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2023062-part-3-section-1-group-1-q-31",
+              "displayNumber": 31,
+              "sourceQuestionNumber": 31,
+              "type": "inline_fill",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet4-paper-2023062-part-3-section-1-group-1-blank-31"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet4-paper-2023062-part-3-section-1-group-1-blank-31",
+                  "label": "第 31 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "per_blank"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2023062-part-3-section-1-group-1-q-32",
+              "displayNumber": 32,
+              "sourceQuestionNumber": 32,
+              "type": "inline_fill",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet4-paper-2023062-part-3-section-1-group-1-blank-32"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet4-paper-2023062-part-3-section-1-group-1-blank-32",
+                  "label": "第 32 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "per_blank"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2023062-part-3-section-1-group-1-q-33",
+              "displayNumber": 33,
+              "sourceQuestionNumber": 33,
+              "type": "inline_fill",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet4-paper-2023062-part-3-section-1-group-1-blank-33"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet4-paper-2023062-part-3-section-1-group-1-blank-33",
+                  "label": "第 33 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "per_blank"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2023062-part-3-section-1-group-1-q-34",
+              "displayNumber": 34,
+              "sourceQuestionNumber": 34,
+              "type": "inline_fill",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet4-paper-2023062-part-3-section-1-group-1-blank-34"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet4-paper-2023062-part-3-section-1-group-1-blank-34",
+                  "label": "第 34 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "per_blank"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2023062-part-3-section-1-group-1-q-35",
+              "displayNumber": 35,
+              "sourceQuestionNumber": 35,
+              "type": "inline_fill",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet4-paper-2023062-part-3-section-1-group-1-blank-35"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet4-paper-2023062-part-3-section-1-group-1-blank-35",
+                  "label": "第 35 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "per_blank"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet4-paper-2023062-part-3-section-2-group-1",
+          "title": "题目",
+          "presentation": "reading",
+          "instructions": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "New Formula One Chief Hopes to Grab Americans' Attention"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "A) For the past four decades, the leader of Formula One car racing, one of the biggest annual sporting series in the world, was Bernie Ecclestone, a former motorcycle parts dealer who built it into an international presence essentially on his own."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "B) A skilled backroom operator who speaks without a filter, Ecclestone said often that in his opinion, the sport was at its best when he was allowed to act as \"a dictator.”"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "C) Yet now the dictator is gone. After an American company, Liberty Media, acquired the Formula One competition recently, Chase Carey—a former executive with Fox Broadcasting Company and DirecTV who by his own admission is not a fierce racing fan—was named to replace Ecclestone and to try to renovate the organization's management, reach and ambition."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "D) Among the goals, Carey said in an interview on Tuesday, is one that just about every global sport seems interested in chasing: increasing interest in the United States. \"People have said we're going to \"Americanize' it,\" Carey said. \"And we're not going to do that totally. But realistically, there are some elements of Americanization that the sport could use.\""
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "E) While Formula One commands enormous audiences throughout much of the world, many American sports fans know it as that other motorsport, the one that is not Nascar (纳斯卡车赛). Formula One teams race far more technologically advanced vehicles around tracks all over the world-in magnificent events in places like Malaysia, Monaco, Singapore and the United Arab Emirates, and on tradition-rich tracks like Silverstone in England and Monza in Italy too."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "F) The series has an annual race in Austin, Texas. But within \"a few years,\" Carey said, he plans to bring another to a destination American city, like New York, Los Angeles, Miami or Las Vegas. Carey's ambitious plan is two-fold: first, change the business model of Formula One, which he said was a \"one-man show\" under Ecclestone that had a largely narrow vision when it came to negotiating partnership deals; and second, alter the way fans experience the sport, both in person and remotely, so that connections between the audience and people within the series are easier to make."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "G) Increased digital access for fans, a more behind-the-scenes experience for broadcast viewers and innovation in areas like virtual reality-what is it like to speed around a track inside a Ferrari?-are among the possibilities. \"The sport has clearly been underserved,\" Carey said. \"It doesn't do anything digitally. There's no marketing. It doesn't tell any stories. The goal in this is to make the fans connect to the live experience as much as possible, and the tools you have to do that, we're not using at all.\""
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "H) The larger question, though, is a familiar one: Is there room for Formula One in the ever-crowded sports landscape of the United States? Opinions vary, particularly because viewing habits among consumers continue to evolve. John Bloom, a professor at Shippensburg University who has studied American sports history, said the biggest challenge for any sport trying to increase its presence in the United States was framing itself in a way that had lasting appeal. \"Sports generally become popular in some way because they establish a narrative,\" Bloom said. \"When I think of motorsports in the U.S., what we all think of is Nascar, and the narrative of Nascar is sort of rural, white, working-class Americans, mostly in the South, connecting with the atmosphere of those races. That's the narrative. When I think of the narrative of Formula One, it's a very different kind of audience.\""
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "I) That difference, Carey said, is significant. While some might immediately link Formula One to Nascar in terms of American growth, Carey said Formula One's brand research had indicated there was very little crossover; rather, Formula One fans generally cite other so-called elite events, like Wimbledon or the Ryder Cup, as competitions they enjoy. \"Other than they're both cars, the Nascar fan base is a very different fan base,\" Carey said. \"It's a very regional fan base. Formula One is a global, famous brand of stars. These are machines that shock and awe you.\""
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "J) Carey's background is in deal making and innovation. At Fox Broadcasting Company, he was a top advisor for years, known for his skill in helping to lead the launch of the company into sports, as well as the start of Fox News Channel. After going to DirecTV, he positioned the satellite provider as a mainstream option in millions of households."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "K) Now, after Liberty Media paid $4.4 billion to acquire Formula One, he is charged with making the investment pay off. \"I think they can build Formula One in the U.S.,\" said Patrick Crakes, an executive at In Vivo Media Group who spent 25 years at Fox Broadcasting Company before leaving in 2016 as a senior manager at Fox Sports. \"People don't work on their cars anymore. They don't want that connection anymore. It's about technology and pushing the limits. It's about speed, danger and risk. And Formula One has that more than any other racing series.\""
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "L) That is what hooked Carey, and he said he thought his experience was not unusual. He recalled attending Formula One's Monaco race last year and being overwhelmed by the ceremony leading up to the event, the way the race charmed the city for days ahead of the start. In his mind, it felt like a Super Bowl （超级碗橄榄球赛)."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "M) Then, on race day, he watched as the cars rocketed out of a tunnel and went screaming toward a tight turn with the city's harbor and the Mediterranean Sea in the background framing the scene. He was fascinated. \"You can't help but be awed,\" he said, \"and I think that feeling can be translated to the viewer.\""
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "N) He added: \"The broader sport is a little too inward-looking, and we need to be more open. In some ways, I'm glad to be coming from the outside. The guys who are in the sport forever are sitting there saying: 'We can't do that. We can't do that because it's never been done that way.\"\""
+                }
+              ]
+            }
+          ],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet4-paper-2023062-part-3-section-2-group-1-q-36-1",
+              "displayNumber": 36,
+              "sourceQuestionNumber": 36,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Chase Carey believes greater use should be made of digital technology to make Formula One more accessible to its fans."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2023062-part-3-section-2-group-1-q-37-2",
+              "displayNumber": 37,
+              "sourceQuestionNumber": 37,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Chase Carey was deeply impressed by the ceremony preceding last year's Monaco race."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2023062-part-3-section-2-group-1-q-38-3",
+              "displayNumber": 38,
+              "sourceQuestionNumber": 38,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "One of Chase Carey's goals is to make Formula One more appealing to Americans."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2023062-part-3-section-2-group-1-q-39-4",
+              "displayNumber": 39,
+              "sourceQuestionNumber": 39,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "A former motorbike parts dealer led Formula One for the past forty years."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2023062-part-3-section-2-group-1-q-40-5",
+              "displayNumber": 40,
+              "sourceQuestionNumber": 40,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Chase Carey thought the audience of Formula One could be made to share his feeling about the race."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2023062-part-3-section-2-group-1-q-41-6",
+              "displayNumber": 41,
+              "sourceQuestionNumber": 41,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Chase Carey used to serve as a top advisor for a major broadcasting company."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2023062-part-3-section-2-group-1-q-42-7",
+              "displayNumber": 42,
+              "sourceQuestionNumber": 42,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Chase Carey intends to make connections easier between the audience and the Formula One racers."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2023062-part-3-section-2-group-1-q-43-8",
+              "displayNumber": 43,
+              "sourceQuestionNumber": 43,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "The new leader of Formula One admitted he was not super interested in car racing."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2023062-part-3-section-2-group-1-q-44-9",
+              "displayNumber": 44,
+              "sourceQuestionNumber": 44,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "People's opinions differ as to whether Formula One can be promoted in the U.S."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2023062-part-3-section-2-group-1-q-45-10",
+              "displayNumber": 45,
+              "sourceQuestionNumber": 45,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Compared with other racing series, Formula One focuses more on speed and involves more danger."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet4-paper-2023062-part-3-section-3-group-1",
+          "title": "Questions 46 to 50 are based on the following passage.",
+          "presentation": "reading",
+          "instructions": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Supermarkets have long been suffering as one of the thinnest-margined businesses in existence and one of the least-looked-forward-to places to work or visit. For more than a decade, they have been under attack from e-commerce giants, blamed for making Americans fat, and accused of contributing to climate change."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Supermarkets can technically be defined as giants housing 15,000 to 60,000 different products. The revolutionary idea of a self-service grocery, where people could hunt and gather food from aisles rather than asking a clerk to fetch items from behind a counter, first came about in America. There is some debate about which was the very first, but over the years a consensus has built around King Kullen Supermarket, founded in New York in 1930."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "For some 300 years, Americans had fed themselves from small stores and public markets. Shopping for food involved mud, noisy chickens, clouds of flies, nasty smells, bargaining, and getting short-changed. The supermarket imitated the Fordist factory, with its emphasis on efficiency and standardization, and reimagined it as a place to buy food. Supermarkets may not feel cutting-edge now, but they were a revolution in distribution at the time. They were such strange marvels that, on her first official state visit to the United States in 1957, Queen Elizabeth II insisted on an impromptu (即兴的)tour of a suburban-Maryland Giant Food."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "The typical supermarket layout has barely changed over the past 90 years. Most stores open with flowers, fruit and vegetables at the front as a breath of freshness to arouse our appetite. Meanwhile, they keep the milk, eggs, and other daily basics all the way back so you'll travel through as much of the store as possible, and be tempted along the way."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "In the early days, as the supermarket multiplied, so did our suspicion of it. We have long feared that this \"revolution in distribution\" uses corporate black magic on our appetite. The book The Hidden Persuaders, published in 1957, warned that supermarkets were putting women in a \"hypnoidal trance (催眠恍惚状态),\" causing them to wander aisles bumping into boxes and \"picking things off shelves at random.\""
+                }
+              ]
+            }
+          ],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet4-paper-2023062-part-3-section-3-group-1-q-46-1",
+              "displayNumber": 46,
+              "sourceQuestionNumber": 46,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What problem have supermarkets been facing?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are actually on the way to bankruptcy."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are forced to use e-commerce strategies."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They have been losing customers and profits."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They have difficulty adapting to climate change."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2023062-part-3-section-3-group-1-q-47-2",
+              "displayNumber": 47,
+              "sourceQuestionNumber": 47,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What does the passage say about the idea of a self-service grocery?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It was put forward by King Kullen."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It has been under constant debate."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It originated in the United States."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It proves revolutionary even today."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2023062-part-3-section-3-group-1-q-48-3",
+              "displayNumber": 48,
+              "sourceQuestionNumber": 48,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What did supermarkets do by adopting the Fordist factory approach?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They modernized traditional groceries in many ways."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They introduced cutting-edge layout of their stores."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They improved the quality of the food they sold."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They revolutionized the distribution of goods."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2023062-part-3-section-3-group-1-q-49-4",
+              "displayNumber": 49,
+              "sourceQuestionNumber": 49,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What is the typical supermarket layout intended to do?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Arouse customers' appetite to buy flowers, fruit and vegetables."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Provide customers easy access to items they want to buy."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Induce customers to make more unplanned purchases."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Enable customers to have a more enjoyable shopping experience."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2023062-part-3-section-3-group-1-q-50-5",
+              "displayNumber": 50,
+              "sourceQuestionNumber": 50,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What have people long feared about supermarkets?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They use tricky strategies to promote their business."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are going to replace the local groceries entirely."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They apply corporate black magic to the goods on display."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They take advantage of the weaknesses of women shoppers. Passage Two"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet4-paper-2023062-part-3-section-3-group-2",
+          "title": "Questions 51 to 55 are based on the following passage.",
+          "presentation": "reading",
+          "instructions": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "The traditional school year, with three months of vacation every summer, was first implemented when America was an agricultural society and the summer months were needed for farm work. Since then, we've completely changed as a nation. Students no longer spend summers farming, but they aren't in school, either. The average American student receives 13 weeks off from school each calendar year-with about 11 of those during the summer. Few other countries have more than seven weeks off in a school calendar."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "With the U.S. lagging behind other countries in academics, it's time to consider year-round schooling. One benefit of this change is that students will not fall victim to the \"summer slide,\" or the well-documented phenomenon where students forget some of the knowledge they have acquired when too much time is taken off from school. Decades of research shows that it can take from 8 to 13 weeks at the beginning of every school year for students to get back to where they were before the summer holiday."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "But year-round schooling isn't just about academics. Teachers and students experience a closer relationship in year-round schools than they do in traditional schools and, in the absence of any long-term break, students do not feel detached from the school environment. These closer bonds and greater attachment pay off. Research shows that students in year-round schools are more self-confident and feel more positive about their schooling experience."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "But don't kids need time to relax? Some childhood development experts believe that time off from school is vital to healthy development as kids are not designed to spend so much of their time inside classrooms and the summer break provides a perfect opportunity to get outside. The problem with this argument is that most children aren't playing outside or even spending time with other kids. While some children visit summer camps, most stay at home, watching TV or playing games on electronic devices, which hardly benefits them."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "The U.S. has changed from a farming economy to a knowledge- and innovation-based economy, so it makes sense for the school year to change as well."
+                }
+              ]
+            }
+          ],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet4-paper-2023062-part-3-section-3-group-2-q-51-1",
+              "displayNumber": 51,
+              "sourceQuestionNumber": 51,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Why did America's traditional school year have a three-month summer vacation?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Students needed to help with farm work."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Students needed time to learn necessary farming skills."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The agricultural society then attached less importance to academics."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "America lagged behind other countries in making a scientific school calendar."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2023062-part-3-section-3-group-2-q-52-2",
+              "displayNumber": 52,
+              "sourceQuestionNumber": 52,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What benefit will year-round schooling bring students in addition to improving their learning?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It will help them get back to where their lessons started."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It will enable them to absorb what they have learned."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It will familiarize them with the school environment."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It will strengthen their relationship with teachers."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2023062-part-3-section-3-group-2-q-53-3",
+              "displayNumber": 53,
+              "sourceQuestionNumber": 53,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What do some childhood development experts believe about the long summer vacation?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It meets students' need to study on their own."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It enables students to learn about the outside world."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It satisfies students' desire to stay longer at home."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It contributes to students' healthy growth."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2023062-part-3-section-3-group-2-q-54-4",
+              "displayNumber": 54,
+              "sourceQuestionNumber": 54,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What is the argument against the experts' idea of a long summer vacation?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It does little good to most students."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It benefits few students playing outside."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It leads students to neglect their studies."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It makes students addicted to computer games."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2023062-part-3-section-3-group-2-q-55-5",
+              "displayNumber": 55,
+              "sourceQuestionNumber": 55,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What does the author think of the traditional school year in the U.S. today?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Well-grounded."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Outdated."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Culture-bound."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Welcomed."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cet4-paper-2023062-part-4-translation",
+      "title": "Translation 翻译",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet4-paper-2023062-part-4-translation-group",
+          "title": "翻译题",
+          "presentation": "writing",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet4-paper-2023062-part-4-q-1-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "translation",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "改革开放40多年以来,中国政府对高等教育越来越重视,高等教育已经进入稳步发展阶段。高校学生总数已接近4,700万人,位居世界第一。随着我国经济的快速发展,人民生活水平不断提高,越来越多的人渴望接受高等教育。我国高校的数量和学科专业持续增加,招生人数逐年上升,教学质量也在不断改进,为更多年轻人创造了接受高等教育的机会。"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+                  "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "assetRefs": [
+    {
+      "assetId": "cet4-paper-2023062-audio",
+      "kind": "audio",
+      "url": "/cet4/audio/cet4-paper-2023062.mp3",
+      "mimeType": "audio/mpeg",
+      "sha256": "",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+          "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+          "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+          "locator": {},
+          "extractionMethod": "manual-review",
+          "confidence": 0.86
+        }
+      ]
+    }
+  ],
+  "sourceRefs": [
+    {
+      "sourceDocumentId": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+      "relativePath": "2023.06英语四级真题第2套.docx；2023年06月四级仔细阅读解析第2套.pdf",
+      "sha256": "6bf7ba56ead52fdde0b12acede0c231bb25d62bb7da4181f58a2a935f8e9e269",
+      "locator": {},
+      "extractionMethod": "manual-review",
+      "confidence": 0.86
+    }
+  ],
+  "quality": {
+    "structureStatus": "approved",
+    "structureConfidence": 0.86,
+    "issueCount": 0,
+    "issues": []
+  }
+}

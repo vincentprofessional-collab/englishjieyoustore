@@ -1,5 +1,5 @@
 import { supabase } from "@/lib/supabase/client";
-import { ensureJuniorHighExamMenu, ensureSatExamMenu, ensureSeniorHighExamMenu } from "@/lib/content/site-chrome-nav";
+import { ensureCet4ExamMenu, ensureCet6ExamMenu, ensureJuniorHighExamMenu, ensureSatExamMenu, ensureSeniorHighExamMenu, orderLanguageExamMenu } from "@/lib/content/site-chrome-nav";
 
 export const SITE_CHROME_SLUG = "site-chrome";
 export const SITE_CHROME_VERSION = 3;
@@ -302,6 +302,42 @@ export const DEFAULT_SITE_CHROME_CONFIG: SiteChromeConfig = {
       },
       {
         children: [
+          {
+            children: [],
+            dropdownAlign: "right",
+            enabled: true,
+            href: "/junior-high",
+            id: "junior-high-english",
+            label: "中考英语",
+            note: "",
+          },
+          {
+            children: [],
+            dropdownAlign: "right",
+            enabled: true,
+            href: "/senior-high",
+            id: "senior-high-english",
+            label: "高考英语",
+            note: "",
+          },
+          {
+            children: [],
+            dropdownAlign: "right",
+            enabled: true,
+            href: "/cet4",
+            id: "cet4",
+            label: "大学英语四级",
+            note: "",
+          },
+          {
+            children: [],
+            dropdownAlign: "right",
+            enabled: true,
+            href: "/cet6",
+            id: "cet6",
+            label: "大学英语六级",
+            note: "",
+          },
           {
             children: [
               {
@@ -886,15 +922,28 @@ export function mergeSiteChromeConfig(value: unknown): SiteChromeConfig {
   const satFallback = fallback.nav.items
     .find((item) => item.id === "exams")
     ?.children.find((item) => item.id === "sat-reading-writing");
+  const cet4Fallback = fallback.nav.items
+    .find((item) => item.id === "exams")
+    ?.children.find((item) => item.id === "cet4");
+  const cet6Fallback = fallback.nav.items
+    .find((item) => item.id === "exams")
+    ?.children.find((item) => item.id === "cet6");
   const navWithJuniorHigh = examsFallback && juniorHighFallback
     ? ensureJuniorHighExamMenu(mergedNavItems, examsFallback, juniorHighFallback)
     : mergedNavItems;
   const navWithSeniorHigh = examsFallback && seniorHighFallback
     ? ensureSeniorHighExamMenu(navWithJuniorHigh, examsFallback, seniorHighFallback)
     : navWithJuniorHigh;
-  const navItems = examsFallback && satFallback
+  const navWithSat = examsFallback && satFallback
     ? ensureSatExamMenu(navWithSeniorHigh, examsFallback, satFallback)
     : navWithSeniorHigh;
+  const navWithCet4 = examsFallback && cet4Fallback
+    ? ensureCet4ExamMenu(navWithSat, examsFallback, cet4Fallback)
+    : navWithSat;
+  const navItems = examsFallback && cet6Fallback
+    ? ensureCet6ExamMenu(navWithCet4, examsFallback, cet6Fallback)
+    : navWithCet4;
+  const orderedNavItems = orderLanguageExamMenu(navItems);
 
   const normalizedNavItems = normalizeVisibleNavItems(navItems, migrateLegacyConfig).map((item) => {
     if (migrateLegacyConfig && item.id === "dictionary") {

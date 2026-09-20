@@ -1,0 +1,5109 @@
+{
+  "schemaVersion": 2,
+  "id": "cet6-paper-2019061",
+  "kind": "paper",
+  "title": "2019年6月大学英语六级真题 · 第1套",
+  "year": "2019",
+  "region": "全国",
+  "variant": "第1套",
+  "submissionMode": "whole-paper",
+  "instructions": [
+    {
+      "type": "notice",
+      "tone": "info",
+      "text": "按原卷分区作答。提交整卷后显示可用答案与原资料参考内容。"
+    }
+  ],
+  "sections": [
+    {
+      "id": "cet6-paper-2019061-part-1-writing",
+      "title": "Writing 写作",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet6-paper-2019061-part-1-writing-group",
+          "title": "写作题",
+          "presentation": "writing",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019061-part-1-q-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "essay",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cet6-paper-2019061-part-2",
+      "title": "Part II         Listening Comprehension       (30 minutes)",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet6-paper-2019061-part-2-section-1-group-1",
+          "title": "题目",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019061-part-2-section-1-group-1-q-1-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "A six- month-long negotiation."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "A project with a troublesome client."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Preparations for the party."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Gift wrapping for the colleagues."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019061-part-2-section-1-group-1-q-2-2",
+              "displayNumber": 2,
+              "sourceQuestionNumber": 2,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Take wedding photos."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Start a small business."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Advertise her company."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Throw a celebration party."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019061-part-2-section-1-group-1-q-3-3",
+              "displayNumber": 3,
+              "sourceQuestionNumber": 3,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Hesitant."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Flattered."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Nervous."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Surprised."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019061-part-2-section-1-group-1-q-4-4",
+              "displayNumber": 4,
+              "sourceQuestionNumber": 4,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Start her own bakery."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Share her cooking experience."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Improve her baking skill."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Prepare for the wedding"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2019061-part-2-section-1-group-2",
+          "title": "Questions 5 to 8 are based on the conversation you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019061-part-2-section-1-group-2-q-5-1",
+              "displayNumber": 5,
+              "sourceQuestionNumber": 5,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They have to spend more time studying."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They have to participate in club activities."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They have to be more responsible for what they do."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They have to choose a specific academic discipline."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019061-part-2-section-1-group-2-q-6-2",
+              "displayNumber": 6,
+              "sourceQuestionNumber": 6,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Get ready for a career."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Set a long-term goal."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Make a lot of friends."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Behave like adults."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019061-part-2-section-1-group-2-q-7-3",
+              "displayNumber": 7,
+              "sourceQuestionNumber": 7,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Those who share her academic interests."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Those who respect her student commitments."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Those who can help her when she is in need."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Those who go to the same clubs as she does."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019061-part-2-section-1-group-2-q-8-4",
+              "displayNumber": 8,
+              "sourceQuestionNumber": 8,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Those helpful for tapping their potential."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Those conducive to improving their social skills."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Those helpful for cultivating individual interests."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Those conducive to their academic studies."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2019061-part-2-section-2-group-1",
+          "title": "Questions 9 to 11 are based on the passage you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019061-part-2-section-2-group-1-q-9-1",
+              "displayNumber": 9,
+              "sourceQuestionNumber": 9,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They break away from traditional ways of thinking."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are prepared to work harder than anyone else."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are good at refining old formulas."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They bring their potential into full play."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019061-part-2-section-2-group-1-q-10-2",
+              "displayNumber": 10,
+              "sourceQuestionNumber": 10,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They contributed to the popularity of skiing worldwide."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They resulted in a brand-new style of skiing techniques."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They promoted the scientific use of skiing poles."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They made explosive news in the sports world."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019061-part-2-section-2-group-1-q-11-3",
+              "displayNumber": 11,
+              "sourceQuestionNumber": 11,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "He was recognized as a genius in the world of sports."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "He competed in all major skiing events in the world."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "He won three gold medals in one Winter Olympics."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "He broke three world skiing records in three years"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2019061-part-2-section-2-group-2",
+          "title": "Questions 12 to 15 are based on the passage you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019061-part-2-section-2-group-2-q-12-1",
+              "displayNumber": 12,
+              "sourceQuestionNumber": 12,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They appear restless."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They become upset."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They lose consciousness."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They die almost instantly."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019061-part-2-section-2-group-2-q-13-2",
+              "displayNumber": 13,
+              "sourceQuestionNumber": 13,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It has an instant effect on your body chemistry."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It keeps returning to you every now and then."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It leaves you with a long lasting impression."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It contributes to the shaping of you mind."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019061-part-2-section-2-group-2-q-14-3",
+              "displayNumber": 14,
+              "sourceQuestionNumber": 14,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To succeed while feeling irritated."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To feel happy without good health."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To be free from frustration and failure."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To enjoy good health while in dark moods."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019061-part-2-section-2-group-2-q-15-4",
+              "displayNumber": 15,
+              "sourceQuestionNumber": 15,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are closely connected."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They function in a similar way."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are too complex to understand."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They reinforce each other constantly."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2019061-part-2-section-3-group-1",
+          "title": "Questions 16 to 18 are based on the recording you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019061-part-2-section-3-group-1-q-16-1",
+              "displayNumber": 16,
+              "sourceQuestionNumber": 16,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They differ in their appreciation of music."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They focus their attention on different things."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They finger the piano keys in different ways."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They choose different pieces of music to play."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019061-part-2-section-3-group-1-q-17-2",
+              "displayNumber": 17,
+              "sourceQuestionNumber": 17,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They manage to cooperate well with their teammates."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They use effective tactics to defeat their competitors."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They try hard to meet the spectators’ expectations."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They attach great importance to high performance."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019061-part-2-section-3-group-1-q-18-3",
+              "displayNumber": 18,
+              "sourceQuestionNumber": 18,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It marks a breakthrough in behavioral science."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It adopts a conventional approach to research."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It supports a piece of conventional wisdom."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It gives rise to controversy among experts."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2019061-part-2-section-3-group-2",
+          "title": "Questions 19 to 21 are based on the recording you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019061-part-2-section-3-group-2-q-19-1",
+              "displayNumber": 19,
+              "sourceQuestionNumber": 19,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "People’s envy of slim models."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The increasing range of fancy products."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "People’s craze for good health."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The great variety of slimming products."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019061-part-2-section-3-group-2-q-20-2",
+              "displayNumber": 20,
+              "sourceQuestionNumber": 20,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They appear vigorous."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They look charming."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They appear strange."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They look unhealthy."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019061-part-2-section-3-group-2-q-21-3",
+              "displayNumber": 21,
+              "sourceQuestionNumber": 21,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Culture and upbringing."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Peer pressure."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Wealth and social status."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Media influence."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2019061-part-2-section-3-group-3",
+          "title": "Questions 22 to 25 are based on the recording you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019061-part-2-section-3-group-3-q-22-1",
+              "displayNumber": 22,
+              "sourceQuestionNumber": 22,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The relation between hair and skin."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The color of human skin."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The growing interest in skin studies."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The need of skin protection."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019061-part-2-section-3-group-3-q-23-2",
+              "displayNumber": 23,
+              "sourceQuestionNumber": 23,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The necessity to save energy."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The need to breathe with ease."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Adaptation to the hot environment."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Dramatic climate changes on earth."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019061-part-2-section-3-group-3-q-24-3",
+              "displayNumber": 24,
+              "sourceQuestionNumber": 24,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Leaves and grass."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Their skin coloring."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Man-made shelter."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Hair on their skin."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019061-part-2-section-3-group-3-q-25-4",
+              "displayNumber": 25,
+              "sourceQuestionNumber": 25,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Their genetic makeup began to change."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Their communities began to grow steadily."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Their children began to mix with each other."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Their pace of evolution began to quicken"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cet6-paper-2019061-part-3",
+      "title": "Part III         Reading Comprehension      (40 minutes)",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet6-paper-2019061-part-3-section-1-group-1",
+          "title": "Questions 26 to 35 are based on the following passage.",
+          "presentation": "reading",
+          "instructions": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Pasta is no longer off the menu, after a new review of studies suggested that the carbohydrate can form part of a healthy diet, and even help people lose weight. For years, nutritionists have recommended that pasta be kept to a "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet6-paper-2019061-part-3-section-1-group-1-blank-26"
+                },
+                {
+                  "type": "text",
+                  "text": ", to cut calories, prevent fat build-up and stop blood sugar "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet6-paper-2019061-part-3-section-1-group-1-blank-27"
+                },
+                {
+                  "type": "text",
+                  "text": " up. The low-carbohydrate food movement gave birth to such diets as the Atkins, Paleo and Keto, which advised swapping foods like bread, pasta and potatoes for vegetables, fish and meat. More recently the trend of swapping spaghetti for vegetables has been "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet6-paper-2019061-part-3-section-1-group-1-blank-28"
+                },
+                {
+                  "type": "text",
+                  "text": " by clean-eating experts. But now a "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet6-paper-2019061-part-3-section-1-group-1-blank-29"
+                },
+                {
+                  "type": "text",
+                  "text": " review and analysis of "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet6-paper-2019061-part-3-section-1-group-1-blank-30"
+                },
+                {
+                  "type": "text",
+                  "text": " studies by Canadian researchers found that not only does pasta not cause weight gain, but three meals a week can help people drop more than half a kilogram over four months. The reviewers found that pasta had been unfairly demonized (妖魔化) because it had been 30 in with other, more ft-promoting carbohydrates. “The study found that pasta didn’t "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet6-paper-2019061-part-3-section-1-group-1-blank-31"
+                },
+                {
+                  "type": "text",
+                  "text": " to weight gain or increase in body fat,” said lead author Dr. John Sievenpiper. “In "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet6-paper-2019061-part-3-section-1-group-1-blank-32"
+                },
+                {
+                  "type": "text",
+                  "text": " the evidence, we can now say with some confidence that pasta does not have an "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet6-paper-2019061-part-3-section-1-group-1-blank-33"
+                },
+                {
+                  "type": "text",
+                  "text": " effect on body weigh outcomes when it is consumed as part of a healthy dietary pattern.” In fact, analysis actually showed a small weigh loss "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet6-paper-2019061-part-3-section-1-group-1-blank-34"
+                },
+                {
+                  "type": "text",
+                  "text": " to concerns. Perhaps pasta can be part of a healthy diet. Those involved in the "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet6-paper-2019061-part-3-section-1-group-1-blank-35"
+                },
+                {
+                  "type": "text",
+                  "text": " trials on average ate 3.3 servings of pasta a week instead of other carbohydrates, one serving equaling around half a cup. They lost around half a kilogram over an average follow-up of 12 weeks."
+                }
+              ]
+            }
+          ],
+          "sharedOptions": [
+            {
+              "id": "I",
+              "label": "I",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "minimum"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "J",
+              "label": "J",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "radiating"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "K",
+              "label": "K",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "ration"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "L",
+              "label": "L",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "shooting"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "M",
+              "label": "M",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "subscribe"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "N",
+              "label": "N",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "systematic"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "O",
+              "label": "O",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "weighing"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "A",
+              "label": "A",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "adverse"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "B",
+              "label": "B",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "championed"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "C",
+              "label": "C",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "clinical"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "D",
+              "label": "D",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "contrary"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "E",
+              "label": "E",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "contribute"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "F",
+              "label": "F",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "intimate"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "G",
+              "label": "G",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "lumped"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "H",
+              "label": "H",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "magnified •\texclusively •\tinnovated"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "I",
+              "label": "I",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "minimum"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "J",
+              "label": "J",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "radiating"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "K",
+              "label": "K",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "ration"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "L",
+              "label": "L",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "shooting"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "M",
+              "label": "M",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "subscribe"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "N",
+              "label": "N",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "systematic"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "O",
+              "label": "O",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "weighing"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "A",
+              "label": "A",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "adverse"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "B",
+              "label": "B",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "championed"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "C",
+              "label": "C",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "clinical"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "D",
+              "label": "D",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "contrary"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "E",
+              "label": "E",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "contribute"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "F",
+              "label": "F",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "intimate"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "G",
+              "label": "G",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "lumped"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "H",
+              "label": "H",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "magnified •\texclusively •\tinnovated"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "sharedOptionsReusable": false,
+          "questions": [
+            {
+              "id": "cet6-paper-2019061-part-3-section-1-group-1-q-26",
+              "displayNumber": 26,
+              "sourceQuestionNumber": 26,
+              "type": "inline_fill",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2019061-part-3-section-1-group-1-blank-26"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2019061-part-3-section-1-group-1-blank-26",
+                  "label": "第 26 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "per_blank"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019061-part-3-section-1-group-1-q-27",
+              "displayNumber": 27,
+              "sourceQuestionNumber": 27,
+              "type": "inline_fill",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2019061-part-3-section-1-group-1-blank-27"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2019061-part-3-section-1-group-1-blank-27",
+                  "label": "第 27 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "per_blank"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019061-part-3-section-1-group-1-q-28",
+              "displayNumber": 28,
+              "sourceQuestionNumber": 28,
+              "type": "inline_fill",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2019061-part-3-section-1-group-1-blank-28"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2019061-part-3-section-1-group-1-blank-28",
+                  "label": "第 28 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "per_blank"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019061-part-3-section-1-group-1-q-29",
+              "displayNumber": 29,
+              "sourceQuestionNumber": 29,
+              "type": "inline_fill",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2019061-part-3-section-1-group-1-blank-29"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2019061-part-3-section-1-group-1-blank-29",
+                  "label": "第 29 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "per_blank"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019061-part-3-section-1-group-1-q-30",
+              "displayNumber": 30,
+              "sourceQuestionNumber": 30,
+              "type": "inline_fill",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2019061-part-3-section-1-group-1-blank-30"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2019061-part-3-section-1-group-1-blank-30",
+                  "label": "第 30 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "per_blank"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019061-part-3-section-1-group-1-q-31",
+              "displayNumber": 31,
+              "sourceQuestionNumber": 31,
+              "type": "inline_fill",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2019061-part-3-section-1-group-1-blank-31"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2019061-part-3-section-1-group-1-blank-31",
+                  "label": "第 31 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "per_blank"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019061-part-3-section-1-group-1-q-32",
+              "displayNumber": 32,
+              "sourceQuestionNumber": 32,
+              "type": "inline_fill",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2019061-part-3-section-1-group-1-blank-32"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2019061-part-3-section-1-group-1-blank-32",
+                  "label": "第 32 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "per_blank"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019061-part-3-section-1-group-1-q-33",
+              "displayNumber": 33,
+              "sourceQuestionNumber": 33,
+              "type": "inline_fill",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2019061-part-3-section-1-group-1-blank-33"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2019061-part-3-section-1-group-1-blank-33",
+                  "label": "第 33 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "per_blank"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019061-part-3-section-1-group-1-q-34",
+              "displayNumber": 34,
+              "sourceQuestionNumber": 34,
+              "type": "inline_fill",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2019061-part-3-section-1-group-1-blank-34"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2019061-part-3-section-1-group-1-blank-34",
+                  "label": "第 34 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "per_blank"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019061-part-3-section-1-group-1-q-35",
+              "displayNumber": 35,
+              "sourceQuestionNumber": 35,
+              "type": "inline_fill",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2019061-part-3-section-1-group-1-blank-35"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2019061-part-3-section-1-group-1-blank-35",
+                  "label": "第 35 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "per_blank"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2019061-part-3-section-2-group-1",
+          "title": "题目",
+          "presentation": "reading",
+          "instructions": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "The Best Retailers Combine Bricks and Clicks"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "A) Retail profits are falling sharply. Stores are closing. Malls are emptying. The depressing stories just keep coming. Reading the earnings announcements of large retail stores like Macy’s, Nordstrom, and Target is about as uplifting as a tour of an intensive care unit. The interact is apparently taking down yet another industry. Brick and mortar stores (实体店) seem to be going the way of the yellow pages. Sure enough, the Census Bureau just released data showing that online retail sales surged 15.2 percent between the first quarter of 2015 and the first quarter of 2016."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "B) But before you dump all of your retail stocks, there are more facts you should consider. Looking only at that 15.2 percent “surge” would be misleading. It was an increase that was on a small base of 6.9 percent. Even when a tiny number grows by a large percentage terms, it is often still tiny."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "C) More than 20 years after the internet was opened to commerce, the Census Bureau tells us that brick and mortar sales accounted for 92.3 percent of retail sales in the first quarter of 2016. Their data show that only 0.8 percent of retail sales shifted from offline to online between the beginning of 2015 and 2016."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "D) So, despite all the talk about drone (无人机) deliveries to your doorstep, all the retail executives expressing anxiety over consumers going online, and even a Presidential candidate exclaiming that Amazon has a “huge antitrust problem,” the Census data suggest that physical retail is thriving. Of course, the closed stores, depressed executives, and sinking stocks suggest otherwise. What’s the real story?"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "E) Many firms operating brick and mortar stores are in trouble. The retail industry is getting reinvented, as we describe in our new book Matchmakers. It’s standing in the Path of what Schumpeter called a gale (大风) of creative destruction. That storm has been brewing for some time, and as it has reached gale force, most large retailers are searching for a response. As the CFO of Macy’s put it recently, “We’re frankly scratching our heads.”"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "F) But it’s not happening as experts predicted. In the peak of the dot. com bubble, brick and mortar retail was one of those industries the internet was going to kill-and quickly. The dot.com bust discredited most predictions of that sort and in the years that followed, conventional retailers’ confidence in the future increased as Census continued to report weak online sales. And then the gale hit."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "G) It is becoming increasingly clear that retail reinvention isn’t a simple battle to the death between bricks and clicks. It is about devising retail models that work for people who are making increasing use of a growing array of internet-connected tools to change how they search, shop, and buy. Creative retailers are using the new technologies to innovate just about everything stores do from managing inventory, to marketing, to getting paid."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "H) More than drones dropping a new supply of underwear on your doorstep, Apple’s massively successful brick-and-mortar-and-glass retail stores and Amazon’s small steps in the same direction are what should keep old-fashioned retailers awake at night. Not to mention the large number of creative new retailers, like Bonobos, that are blending online and offline experiences in creative ways."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "I) Retail reinvention is not a simple process, and it’s also not happening on what used to be called “Internet Time.” Some internet-driven changes have happened quickly, of course. Craigslist quickly overtook newspaper classified ads and turned newspaper economics upside down. But many widely anticipated changes weren’t quick, and some haven’t really started. With the benefit of hindsight (后见之明), it looks like the interact will transform the economy at something like the pace of other great inventions like electricity. B2B commerce, for example, didn’t move mainly online by 2005 as many had predicted in 2000, nor even by 2016, but that doesn’t mean it won’t do so over the next few decades."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "J) But the gale is still blowing. The sudden decline in foot traffic in recent years, even though it hasn’t been accompanied by a massive decline in physical sales, is a critical warning. People can shop more efficiently online and therefore don’t need to go to as many stores to find what they want. There’s a surplus of physical shopping space for the crowds, which is one reason why stores are downsizing and closing."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "K) The rise of the mobile phone has recently added a new level of complexity to the process of retail reinvention. Even five years ago most people faced a choice. Sit at your computer, probably at home or at the office, search and browse, and buy. Or head out to the mall, or Main Street, look and shop, and buy. Now, just about everyone has a smartphone, connected to the internet almost everywhere almost all the time. Even when a retailer gets a customer to walk in the store, she can easily see if there’s a better deal online or at another store nearby."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "L) So far, the main thing many large retailers have done in response to all this is to open online stores, so people will come to them directly rather than to Amazon and its smaller online rivals. Many are having the same problem that newspapers have. Even if they get online traffic, they struggle to make enough money online to compensate for what they are losing offline."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "M) A few seem to be making this work. Among large traditional retailers, Walmart recently reported the best results, leading its stock price to surge, while Macy’s, Target, and Nordstrom’s dropped. Yet Walmart’s year-over-year online sales only grew 7 percent, leading its CEO to lament (哀叹), “Growth here is too slow.” Part of the problem is that almost two decades after Amazon filed the one. Click patent, the online retail shopping and buying experience is filled with frictions. A recent study graded more than 600 internet retailers on how easy it was for consumers to shop, buy, and pay. Almost half of the sites didn’t get a passing grade and only 18 percent got an A or B."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "N) The turmoil on the ground in physical retail is hard to square with the Census data. Unfortunately, part of the explanation is that the Census retail data are unreliable. Our deep 100k into those data and their preparation revealed serious problems. It seems likely that Census simply misclassifies a large chunk of online sales. It is certain that the Census procedures, which lump the online sales of major traditional retailers like Walmart with “non-store retailers” 1ike food trucks can mask major changes in individual retail categories. The bureau could easily present their data in more useful ways. But they have chosen not to."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "O) Despite the turmoil, brick and mortar won’t disappear any time soon. The big questions are which, if any, of the large traditional retailers will still be on the scene in a decade or two because they have successfully reinvented themselves, which new players will operate busy stores on Main Streets and maybe even in shopping malls, and how the shopping and buying experience will have changed in each retail category. Investors shouldn’t write off brick and mortar. Whether they should bet on the traditional players who run those stores now is another matter."
+                }
+              ]
+            }
+          ],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019061-part-3-section-2-group-1-q-36-1",
+              "displayNumber": 36,
+              "sourceQuestionNumber": 36,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Although online retailing has existed for some twenty years, nearly half of the internet retailers still fail to receive satisfactory feedback from consumers, according to a recent survey."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019061-part-3-section-2-group-1-q-37-2",
+              "displayNumber": 37,
+              "sourceQuestionNumber": 37,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Innovative retailers integrate internet technologies with conventional retailing to create new retail models."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019061-part-3-section-2-group-1-q-38-3",
+              "displayNumber": 38,
+              "sourceQuestionNumber": 38,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Despite what the Census data suggest, the value of physical retail’s stocks has been dropping."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019061-part-3-section-2-group-1-q-39-4",
+              "displayNumber": 39,
+              "sourceQuestionNumber": 39,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Innovative—driven changes in the retail industry didn’t take place as quickly as widely anticipated."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019061-part-3-section-2-group-1-q-40-5",
+              "displayNumber": 40,
+              "sourceQuestionNumber": 40,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Statistics indicate that brick and mortar sales still made up the lion’s share of the retail business."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019061-part-3-section-2-group-1-q-41-6",
+              "displayNumber": 41,
+              "sourceQuestionNumber": 41,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Companies that successfully combine online and offline business models may prove to be a big concern for traditional retailers."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019061-part-3-section-2-group-1-q-42-7",
+              "displayNumber": 42,
+              "sourceQuestionNumber": 42,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Brick and mortar retailers’ faith in their business was strengthened when the dot com bubble burst."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019061-part-3-section-2-group-1-q-43-8",
+              "displayNumber": 43,
+              "sourceQuestionNumber": 43,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Despite the tremendous challenges from online retailing, traditional retailing will be here to stay for quite some time."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019061-part-3-section-2-group-1-q-44-9",
+              "displayNumber": 44,
+              "sourceQuestionNumber": 44,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "With the rise of online commerce, physical retail stores are likely to suffer the same fate as the yellow pages."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019061-part-3-section-2-group-1-q-45-10",
+              "displayNumber": 45,
+              "sourceQuestionNumber": 45,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "The wide use of smartphones has made it more complex for traditional retailers to reinvent their business."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2019061-part-3-section-3-group-1",
+          "title": "Questions 46 to 50 are based on the following passage.",
+          "presentation": "reading",
+          "instructions": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Professor Stephen Hawking has warned that the creation of powerful artificial intelligence (AI) will be “either the best, or the worst thing, ever to happen to humanity”, and praised the creation of an academic institute dedicated to researching the future of intelligence as “ crucial to the future of our civilisation and our species”."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Hawking was speaking at the opening of the Leverhulme Centre for the Future of Intelligence (LCFI) at Cambridge University, a multi-disciplinary institute that will attempt to tackle some of the open-ended questions raised by the rapid pace of development in AI research. “We spend a great deal of time study in history,” Hawking said, “which, let’s face it, is mostly the history of stupidity. So it’s a welcome change that people are studying instead the future of intelligence.”"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "While the world-renowned physicist has often been cautious about AI, raising concerns that humanity could be the architect of its own destruction if it creates a super-intelligence with a will of its own, he was also quick to highlight the positives that AI research can bring. “The potential benefits of creating intelligence are huge,” he said. “We cannot predict what we might achieve when our own minds are amplified by AI. Perhaps with the tools of this new technological revolution, we will be able to undo some of the damage done to the natural world by the last one —industrialisation. And surely we will aim to finally eradicate disease and poverty. And every aspect of our lives will be transformed. In short, success in creating AI could be the biggest event in the history of our civilisation.”"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Huw Price, the centre’s academic director and the Bertrand Russell professor of philosophy at Cambridge University, where Hawking is also an academic, said that the centre came about partially as a result of the university’s Centre for Existential Risk. That institute examined a wider range of potential problems for humanity, while the LCFI has a narrow focus."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "AI pioneer Margaret Boden, professor of cognitive science at the University of Sussex, praised the progress of such discussions. As recently as 2009, she said, the topic wasn’t taken seriously, even among AI researchers. “AI is hugely exciting,” she said, “but it has limitations, which present grave dangers given uncritical use.”"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "The academic community is not alone in warning about the potential dangers of AI as well as the potential benefits. A number of pioneers from the technology industry, most famously the entrepreneur Elon Musk, have also expressed their concerns about the damage that a super-intelligent AI could do to humanity."
+                }
+              ]
+            }
+          ],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019061-part-3-section-3-group-1-q-46-1",
+              "displayNumber": 46,
+              "sourceQuestionNumber": 46,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What did Stephen Hawking think of artificial intelligence?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It would be vital to the progress of human civilisation."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It might be a blessing or a disaster in the making."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It might present challenges as well as opportunities."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It would be a significant expansion of human intelligence."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019061-part-3-section-3-group-1-q-47-2",
+              "displayNumber": 47,
+              "sourceQuestionNumber": 47,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What did Hawking say about the creation of the LCFI?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It would accelerate the progress of AI research."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It would mark a step forward in the AI industry."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It was extremely important to the destiny of humankind."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It was an achievement of multi-disciplinary collaboration."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019061-part-3-section-3-group-1-q-48-3",
+              "displayNumber": 48,
+              "sourceQuestionNumber": 48,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What did Hawking say was a welcome change in AI research?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The shift of research focus from the past to the future."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The shift of research from theory to implementation."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The greater emphasis on the negative impact of AI."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The increasing awareness of mankind’s past stupidity."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019061-part-3-section-3-group-1-q-49-4",
+              "displayNumber": 49,
+              "sourceQuestionNumber": 49,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What concerns did Hawking raise about AI?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It may exceed human intelligence sooner or later."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It may ultimately over-amplify the human mind."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Super-intelligence may cause its own destruction."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Super-intelligence may eventually ruin mankind."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019061-part-3-section-3-group-1-q-50-5",
+              "displayNumber": 50,
+              "sourceQuestionNumber": 50,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What do we learn about some entrepreneurs from the technology industry?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are much influenced by the academic community."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are most likely to benefit from AI development."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They share the same concerns about AI as academics."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They believe they can keep AI under human control. Passage Two"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2019061-part-3-section-3-group-2",
+          "title": "Questions 51 to 55 are based on the following passage.",
+          "presentation": "reading",
+          "instructions": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "The market for products designed specifically for older adults could reach $30 billion by next year, and startups (初创公司) want in on the action. What they sometimes lack is feedback from the people who they hope will use their products. So Brookdale, the country’s largest owner of retirement communities, has been inviting a few select entrepreneurs just to move in for a few days, show off their products and hear what the residents have to say."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "That’s what brought Dayle Rodriguez, 28, all the way from England to the dining room of Brookdale South Bay in Torrance, California. Rodriguez is the community and marketing manager for a company called Sentab. The startup’s product, SentabTV, enables older adults who may not be comfortable with computers to access email, video chat and social media using just their televisions and a remote control."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "“It’s nothing new, it’s nothing too complicated and it’s natural because lots of people haveTV remotes,” says Rodriguez."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "But none of that is the topic of conversation in the Brookdale dining room. Instead, Rodriguez solicits residents’ advice on what he should get on his cheeseburger and how he should spend the afternoon. Playing cards was on the agenda, as well as learning to play mahjong (麻将)."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Rodriguez says it’s important that residents here don’t feel like he’s selling them something. “I’ve had more feedback in a passive approach,” he says. “Playing pool, playing cards, having dinner, having lunch,” all work better “than going through a survey of questions. When they get to know me and to trust me, knowing for sure I’m not selling them something—there’ll be more honest feedback from them.”"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Rodriguez is just the seventh entrepreneur to move into one of Brookdale’s 1,100 senior living communities. Other new products in the program have included a kind of full-body blow dryer and specially designed clothing that allows people with disabilities to dress and undress themselves."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Mary Lou Busch, 93, agreed to try the Sentab system. She tells Rodriguez that it might be good for someone, but not for her. “I have the computer and FaceTime, which I talk with my family on, ”she explains. She also has an iPad and a smartphone. “So I do pretty much everything I need to do.”"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "To be fair, if Rodriguez had wanted feedback from some more technophobic (害怕技术的) seniors, he might have ended up in the wrong Brookdale community. This one is located in the heart of Southern California’s aerospace corridor. Many residents have backgrounds in engineering, business and academic circles."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "But Rodriguez says he’s still learning something important by moving into this Brookdale community: “People are more tech-proficient than we thought.”"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "And besides, where else would he learn to play mahjong?"
+                }
+              ]
+            }
+          ],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019061-part-3-section-3-group-2-q-51-1",
+              "displayNumber": 51,
+              "sourceQuestionNumber": 51,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What does the passage say about the startups?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They never lose time in upgrading products for seniors."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They want to have a share of the seniors’ goods market."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They invite seniors to their companies to try their products."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They try to profit from promoting digital products to seniors."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019061-part-3-section-3-group-2-q-52-2",
+              "displayNumber": 52,
+              "sourceQuestionNumber": 52,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Some entrepreneurs have been invited to Brookdale to"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "have an interview with potential customers"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "conduct a survey of retirement communities"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "collect residents’ feedback on their products"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "show senior residents how to use IT products"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019061-part-3-section-3-group-2-q-53-3",
+              "displayNumber": 53,
+              "sourceQuestionNumber": 53,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What do we know about SentabTV?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is a TV program catering to the interest of the elderly."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is a digital TV which enjoys popularity among seniors."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is a TV specially designed for seniors to view programs."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is a communication system via TV instead of a computer."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019061-part-3-section-3-group-2-q-54-4",
+              "displayNumber": 54,
+              "sourceQuestionNumber": 54,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What does Rodriguez say is important in promoting products?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Winning trust from prospective customers."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Knowing the likes and dislikes of customers."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Demonstrating their superiority on the spot."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Responding promptly to customer feedback."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019061-part-3-section-3-group-2-q-55-5",
+              "displayNumber": 55,
+              "sourceQuestionNumber": 55,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What do we learn about the seniors in the Brookdale community?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Most of them are interested in using the Sentab."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are quite at ease with high-tech products."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They have much in common with seniors elsewhere."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Most of them enjoy a longer life than average people."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cet6-paper-2019061-part-4-translation",
+      "title": "Translation 翻译",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet6-paper-2019061-part-4-translation-group",
+          "title": "翻译题",
+          "presentation": "writing",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019061-part-4-q-1-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "translation",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "成语（Chinese idioms）是汉语中的一种独特的表达方式，大多由四个汉字组成。它们高度简练且形式固定，但通常能形象地表达深刻的含义。成语大多数来源于中国古代的文学作品，通常与某些神话、传说或者历史事件有关。如果不知道某个成语的出处，就很难理解其确切含义。因为，学习成语有助于人们更好地理解中国传统文化。成语在日常会话和文学创作中广泛使用。恰当使用成语可以使一个人的语言更具表现力，交流更有效。"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "relativePath": "2019年06月六级真题（第1套）.docx",
+                  "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "assetRefs": [],
+  "sourceRefs": [
+    {
+      "sourceDocumentId": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+      "relativePath": "2019年06月六级真题（第1套）.docx",
+      "sha256": "129daedf283acd327e3e74a145ee8b53f239f603cb914e3cfdbef2fbe1e42402",
+      "locator": {},
+      "extractionMethod": "manual-review",
+      "confidence": 0.86
+    }
+  ],
+  "quality": {
+    "structureStatus": "approved",
+    "structureConfidence": 0.86,
+    "issueCount": 0,
+    "issues": []
+  }
+}

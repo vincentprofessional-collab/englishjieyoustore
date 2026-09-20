@@ -1,0 +1,168 @@
+{
+  "schemaVersion": 2,
+  "id": "cet4-paper-2022063",
+  "kind": "paper",
+  "title": "2022年6月大学英语四级真题 · 第3套",
+  "year": "2022",
+  "region": "全国",
+  "variant": "第3套",
+  "submissionMode": "whole-paper",
+  "instructions": [
+    {
+      "type": "notice",
+      "tone": "info",
+      "text": "按原卷分区作答。提交整卷后显示可用答案与原资料参考内容。"
+    }
+  ],
+  "sections": [
+    {
+      "id": "cet4-paper-2022063-part-1-writing",
+      "title": "Writing 写作",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet4-paper-2022063-part-1-writing-group",
+          "title": "写作题",
+          "presentation": "writing",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet4-paper-2022063-part-1-q-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "essay",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "service. You are to write about its current problems and possible solutions to these problems."
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "You will have 30 minutes to write the proposal. You should write at least 120 words but no more"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "than 180 words."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "2c81d410f92c9fc7ca1eff920fc5782a5f4ac8e64595b58808d13ac4ef04ccbf",
+                  "relativePath": "2022年6月英语四级真题 第三套.docx；2022.06英语四级解析第3套.pdf",
+                  "sha256": "2c81d410f92c9fc7ca1eff920fc5782a5f4ac8e64595b58808d13ac4ef04ccbf",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cet4-paper-2022063-part-2-translation",
+      "title": "Translation 翻译",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet4-paper-2022063-part-2-translation-group",
+          "title": "翻译题",
+          "presentation": "writing",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet4-paper-2022063-part-2-q-1-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "translation",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "English. You should write your answer on Answer Sheet 2. 从前，有个农夫正在地里耕作，突然看见一只兔子飞奔而过，撞在一棵大树上死了。农夫毫不费力就吃到了兔肉，心里非常高兴。他想，“如果总是这样该多好啊厂'于是，他不再耕作,每天守候在那棵树旁，等待着能再捡到撞死在树上的兔子。他等呀等，等了一天又一天，田地也荒芜了，却再也没有等到第二只兔子。人们因而都嘲笑他把偶然当成了必然。"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "2c81d410f92c9fc7ca1eff920fc5782a5f4ac8e64595b58808d13ac4ef04ccbf",
+                  "relativePath": "2022年6月英语四级真题 第三套.docx；2022.06英语四级解析第3套.pdf",
+                  "sha256": "2c81d410f92c9fc7ca1eff920fc5782a5f4ac8e64595b58808d13ac4ef04ccbf",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "assetRefs": [],
+  "sourceRefs": [
+    {
+      "sourceDocumentId": "2c81d410f92c9fc7ca1eff920fc5782a5f4ac8e64595b58808d13ac4ef04ccbf",
+      "relativePath": "2022年6月英语四级真题 第三套.docx；2022.06英语四级解析第3套.pdf",
+      "sha256": "2c81d410f92c9fc7ca1eff920fc5782a5f4ac8e64595b58808d13ac4ef04ccbf",
+      "locator": {},
+      "extractionMethod": "manual-review",
+      "confidence": 0.86
+    }
+  ],
+  "quality": {
+    "structureStatus": "approved",
+    "structureConfidence": 0.86,
+    "issueCount": 0,
+    "issues": []
+  }
+}

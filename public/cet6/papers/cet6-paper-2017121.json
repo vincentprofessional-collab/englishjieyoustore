@@ -1,0 +1,4151 @@
+{
+  "schemaVersion": 2,
+  "id": "cet6-paper-2017121",
+  "kind": "paper",
+  "title": "2017年12月大学英语六级真题 · 第1套",
+  "year": "2017",
+  "region": "全国",
+  "variant": "第1套",
+  "submissionMode": "whole-paper",
+  "instructions": [
+    {
+      "type": "notice",
+      "tone": "info",
+      "text": "按原卷分区作答。提交整卷后显示可用答案与原资料参考内容。"
+    }
+  ],
+  "sections": [
+    {
+      "id": "cet6-paper-2017121-part-1-writing",
+      "title": "Writing 写作",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet6-paper-2017121-part-1-writing-group",
+          "title": "写作题",
+          "presentation": "writing",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2017121-part-1-q-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "essay",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+                  "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cet6-paper-2017121-part-2",
+      "title": "Part II                 Listening comprehension            (30miutes)",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet6-paper-2017121-part-2-section-1-group-1",
+          "title": "题目",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2017121-part-2-section-1-group-1-q-1-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "they reward businesses that eliminate food waste"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "they prohibit the sale of foods that have gone stale"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "they facilitate the donation of unsold foods to the needy"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "they forbid businesses to produce more foods than needed"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+                  "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017121-part-2-section-1-group-1-q-2-2",
+              "displayNumber": 2,
+              "sourceQuestionNumber": 2,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "it imposed penalties on businesses that waste food"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "it passed a law aiming to stop overproduction"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "it voted against food import from outside Europe"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "it prohibited the promotion of bulk food sales."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+                  "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017121-part-2-section-1-group-1-q-3-3",
+              "displayNumber": 3,
+              "sourceQuestionNumber": 3,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "it has warmed its people against possible food shortages."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "it has penalized businesses that keep overproducing foods"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "it has started a nationwide campaign against food waste."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "it has banned supermarkets from dumping edible foods."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+                  "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017121-part-2-section-1-group-1-q-4-4",
+              "displayNumber": 4,
+              "sourceQuestionNumber": 4,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "the confusion over food expiration labels."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "the surplus resulting from overproduction"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "American’s habit of buying food in bulk"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "a lack of regulation on food consumption"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+                  "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2017121-part-2-section-1-group-2",
+          "title": "Questions 5 to 8 are based on the conversation you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2017121-part-2-section-1-group-2-q-5-1",
+              "displayNumber": 5,
+              "sourceQuestionNumber": 5,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "it has started a week-long promotion campaign."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "it has just launched its annual anniversary sales"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "it offers regular weekend sales all the year round"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "it specializes in the sale of ladies’ designer dresses"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+                  "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017121-part-2-section-1-group-2-q-6-2",
+              "displayNumber": 6,
+              "sourceQuestionNumber": 6,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "price reductions for its frequent customers."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "coupons for customers with bulk purchases."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "free delivery of purchases for senior customers."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "price adjustments within seven days of purchase."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+                  "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017121-part-2-section-1-group-2-q-7-3",
+              "displayNumber": 7,
+              "sourceQuestionNumber": 7,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Mail a gift card to her."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Allow her to buy on credit"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Credit it to her account"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Give her some coupons."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+                  "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017121-part-2-section-1-group-2-q-8-4",
+              "displayNumber": 8,
+              "sourceQuestionNumber": 8,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "refunding for goods returned"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "free installing of appliances."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "prolonged goods warranty."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "complimentary tailoring"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+                  "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2017121-part-2-section-2-group-1",
+          "title": "Questions 9 to 11 are based on the passage you have just heard",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2017121-part-2-section-2-group-1-q-9-1",
+              "displayNumber": 9,
+              "sourceQuestionNumber": 9,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "they are thin, tall, and unlike real human beings."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "they have more than twenty different hair textures"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "they have twenty-four different body shapes in total"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "they represent people from virtually all walks of life."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+                  "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017121-part-2-section-2-group-1-q-10-2",
+              "displayNumber": 10,
+              "sourceQuestionNumber": 10,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "they do not reflect young girls aspirations"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "they are not sold together with the original"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "their flat feet do not appeal to adolescents"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "their body shapes have not changed much"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+                  "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017121-part-2-section-2-group-1-q-11-3",
+              "displayNumber": 11,
+              "sourceQuestionNumber": 11,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "in toy stores"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "in shopping malls."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "on the internet"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "at barbie shops"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+                  "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2017121-part-2-section-2-group-2",
+          "title": "Questions 12 to 15 are based on the passage you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2017121-part-2-section-2-group-2-q-12-1",
+              "displayNumber": 12,
+              "sourceQuestionNumber": 12,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "moveable metal type began to be used in printing"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Chinese printing technology was first introduced"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "the earliest known book was published"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "metal type was imported from Korea"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+                  "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017121-part-2-section-2-group-2-q-13-2",
+              "displayNumber": 13,
+              "sourceQuestionNumber": 13,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "it had more than a hundred printing presses."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "it was the biggest printer in the 16th century."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "it helped the German people become literate."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "it produced some 20 million volumes in total"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+                  "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017121-part-2-section-2-group-2-q-14-3",
+              "displayNumber": 14,
+              "sourceQuestionNumber": 14,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "it pushed handwritten books out of circulation."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "it boosted the circulation of popular works."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "it made writing a very profitable career."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "it provided readers with more choices."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+                  "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017121-part-2-section-2-group-2-q-15-4",
+              "displayNumber": 15,
+              "sourceQuestionNumber": 15,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "it accelerated the extinction of the Latin language."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "it standardized the publication of grammar books."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "turned translation into a welcome profession."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "it promoted the growth of national languages"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+                  "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2017121-part-2-section-3-group-1",
+          "title": "Questions 16 to 18 are based on the recording you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2017121-part-2-section-3-group-1-q-16-1",
+              "displayNumber": 16,
+              "sourceQuestionNumber": 16,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "they get bored after working for a period of time."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "they spend an average of one year finding a job."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "they become stuck in the same job for decades."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "they choose a job without thinking it through."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+                  "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017121-part-2-section-3-group-1-q-17-2",
+              "displayNumber": 17,
+              "sourceQuestionNumber": 17,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "see if there will be chances for promotion."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "find out what job choices are available."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "watch a film about ways of job hunting."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "decide which job is most attractive to you."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+                  "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017121-part-2-section-3-group-1-q-18-3",
+              "displayNumber": 18,
+              "sourceQuestionNumber": 18,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "the qualifications you have."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "the pay you are going to get."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "the culture of your target company."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "the work environment you will be in."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+                  "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2017121-part-2-section-3-group-2",
+          "title": "Questions 19 to 22 are based on the recording you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2017121-part-2-section-3-group-2-q-19-1",
+              "displayNumber": 19,
+              "sourceQuestionNumber": 19,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "it is as important as Christmas for African-Americans."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "it is a cultural festival founded for African-Americans."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "it is an ancient festival celebrated by African-Americans."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "it is a religious festival celebrated by African-Americans"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+                  "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017121-part-2-section-3-group-2-q-20-2",
+              "displayNumber": 20,
+              "sourceQuestionNumber": 20,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "to urge African-Americans to do more for society."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "to call on African-Americans to worship their gods"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "to help African-Americans to realize their goals."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "to remind African-Americans of their sufferings."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+                  "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017121-part-2-section-3-group-2-q-21-3",
+              "displayNumber": 21,
+              "sourceQuestionNumber": 21,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "faith in self-determination"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "the first fruits of the harvest"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "unity and cooperative economics"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "creative work and achievement."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+                  "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017121-part-2-section-3-group-2-q-22-4",
+              "displayNumber": 22,
+              "sourceQuestionNumber": 22,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "they recite a principle"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "they take a solemn oath"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "they drink wine from the unity cup"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "they call out their ancestors' names."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+                  "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2017121-part-2-section-3-group-3",
+          "title": "Questions 23 to 25 are based on the recording you have just heard",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2017121-part-2-section-3-group-3-q-23-1",
+              "displayNumber": 23,
+              "sourceQuestionNumber": 23,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "it is one of the world's most healthy diets."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "it contains large amounts of dairy products."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "it began to impact the world in recent years."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "it consists mainly of various kinds of seafood."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+                  "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017121-part-2-section-3-group-3-q-24-2",
+              "displayNumber": 24,
+              "sourceQuestionNumber": 24,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "it involved 13, 000 researchers from Asia, Europe and America."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "it was conducted in seven mid-eastern countries in the 1950s"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "it is regarded as one of the greatest researches of its kind."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "it has drawn the attention of medical doctors the world over."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+                  "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017121-part-2-section-3-group-3-q-25-3",
+              "displayNumber": 25,
+              "sourceQuestionNumber": 25,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "they care much about their health."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "they eat foods with little fat."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "they use little oil in cooking"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "they have lower mortality rates"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+                  "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cet6-paper-2017121-part-3",
+      "title": "Part III           Reading Comprehension                (40 minutes)",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet6-paper-2017121-part-3-section-2-group-1",
+          "title": "题目",
+          "presentation": "reading",
+          "instructions": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Who's really addicting you to Technology?"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "A.\"Nearly everyone i know is addicted in some measure to the internet, \"wrote tony Schwartz in The New York Times. it's a common complaint these days. A steady stream of similar headlines accuse the net and its offspring apps, social media sites and online games of addicting us to distraction."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "B. There's little doubt that nearly everyone who comes in contact with the Net has difficulty disconnecting.Many of us,like Schwartz,struggle to stay focused on tasks that require more concentration than it takes to post a status update.As one person ironically put it in the comments section of Schwartz's online article,\"As I was reading this very excellent article, I stopped at least half a dozen times to check my email.\""
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "C.There's something different about this technology: it is both invasive and persuasive. but who's at fault for its overuse？ To find solutions, it's important to understand what we’re dealing with.There are four parties conspiring to keep you connected the tech, your boss, your friends and you."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "D.The technologies themselves and their makers, are the easiest suspects to blame for our diminishing attention spans. Nicholas Carr,author of The Shallows： what the internet is doing Our brains, wrote, The net is designed to be an interruption system, a machine geared to dividing attention."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "E.Online services like Facebook, twitter and the like, are called out of manipulation--making, products so good that people can't stop using them. after studying these products for several years, I wrote a book about how they do it. I learned it all starts with the business model. since these services rely on advertising revenue, The more frequently you use money they make.It’s no winder these companies employ teams of people focused on engineering their services to be as engaging as possible. these products aren't habit-forming by chance; it's by design. they have an incentive to keep us hooked."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "F.However, as good as these services are, there are simple steps we can take to keep them at bay.For example, we can change how often we receive the distracting notifications that trigger our urge to check.According to Adam Marchick, CEO of mobile marketing company kahuna, less than 15 percent of smartphone users ever bother to adjust their notification setlings--meaning the remaining 85 percent of us default to the app makers' every preset trigger.Google and Apple have made it far too difficult to adjust these settings so it's up to us to take steps ensure we set these triggers to suit our own needs, not the needs of the app makers."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "G.While companies like Facebook harvest attention to generate revenue from advertisers, other technologies have no such agenda. take email, for example. this system couldn't care less how often you use it. Yet to many, email is the most habit-forming medium of all.We check email at all hours of the day--we're obsessed, but why? Because that's what the boss wants.For almost all white-collar jobs, email is the primary tool of corporate communication. A slow response to a message could hurt not only your reputation but also your livelihood."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "H.Your friends are also responsible.Think about this familiar scene.People gathered around a table, enjoying food and each others company. there's laughter and a bit of kidding. Then, during an interval in the conversation, someone takes out their phone to check who knows what.Barely anyone notices and no one says a thing."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "I.Now imagine the same dinner,but instead of checking their phone, the person belches(打嗝）-loudly.Everyone notices. unless the meal takes place in a beer house, this is considered bad manners. The impolite act violates the basic rules of etiquette. one has to wonder why don’t we apply the same social norms to checking phones during meals, meetings and conversations as we do to other antisocial behaviors somehow, we accept it and say nothing when someone offends."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "J.The reality is taking one's phone out at the wrong time is worse than belching because, unlike other minor offense, checking tech is contagious. once one person looks at their phone,other people feel compelled to do the same, starting a chain reaction. the more people are on their phones, the fewer people are talking until finally you are the only one left not reading email or checking twitter. from a societal perspective, phone checking is less like belching in public and more like another bad habit. our phones are like cigarettes-something to do when were bored or when our fingers need something to toy with seeing others enjoy a smoke,or sneak a quick glance, is too tempting to resist and soon everyone is doing it."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "K.The technology, your boss, and your friends, all influence how often you find yourself using (or overusing )these gadgets. but there's still someone who deserves scrutiny--the person holding the phone."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "L. I have a confession. even though i study habit-forming technology for a living, disconnecting is not easy for me.I'm online far more than I'd like like Schwartz and so many others, I often find myself distracted and off tack.I wanted to know why so i began self-monitoring to  try to understand my behavior. that's when i discovered an uncomfortable truth. i use technology as an escape. when I'm doing something I'd rather not do, or when I'm someplace I'd rather not attention was often a good thing, like when passing time on public transportation, but frequently my tech use was not so benign. when i faced difficult work, like thinking through an article idea or editing the same draft for the hundredth time, for example, a more sinister screen would draw me in. i could easily escape discomfort.temporarlly.by answering email or browsing ing the web under the pretense of so-called\"research. \"though I desperately wanted to lay blame elsewhere, i finally had to admit that my bad habits had less to do with new-age.technology and more to do with old-fashioned procrastination(拖延）."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "M. It's easy to blame technology for being so distracting, but distraction is nothing new. Aristotle and Socrates debated nature of “akrasia”--our tendency to do things against our interests. If we're honest with ourselves, tech is just another way to occupy our time and minds,if we weren’t on our devices. We’d likely do similarly unproductive."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "N.Personal technology is indeed more engaging than ever, and there's no doubt companies are engineering their products and services to be more compelling and attractive but would want it any other way the intended result of making something better is that people use it more. that's not necessarily a problem, that's progress."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "O.These improvements don't mean we shouldn't attempt to control our use of technology. In order to make sure it doesn't control us, we should come to terms with the fact that it's more than the technology itself that’s responsible for our habits. our workplace culture, social norns and individual behaviors all play a part to put technology in its place, we must be conscious not only of how technology is changing, but also of how it is changing us."
+                }
+              ]
+            }
+          ],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2017121-part-3-section-2-group-1-q-36-1",
+              "displayNumber": 36,
+              "sourceQuestionNumber": 36,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Online services are so designed that the more they are used, the more profit they generate."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+                  "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017121-part-3-section-2-group-1-q-37-2",
+              "displayNumber": 37,
+              "sourceQuestionNumber": 37,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "The author admits using technology as an escape from the task at hand."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+                  "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017121-part-3-section-2-group-1-q-38-3",
+              "displayNumber": 38,
+              "sourceQuestionNumber": 38,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Checking phones at dinners is now accepted as normal but not belching."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+                  "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017121-part-3-section-2-group-1-q-39-4",
+              "displayNumber": 39,
+              "sourceQuestionNumber": 39,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "To make proper use of technology, we should not only increase our awareness of how it is changing but also how it is impacting us."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+                  "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017121-part-3-section-2-group-1-q-40-5",
+              "displayNumber": 40,
+              "sourceQuestionNumber": 40,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Most of us find it hard to focus on our immediate tasks because of internet distractions."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+                  "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017121-part-3-section-2-group-1-q-41-6",
+              "displayNumber": 41,
+              "sourceQuestionNumber": 41,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "when one person starts checking their phone, the others will follow suit."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+                  "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017121-part-3-section-2-group-1-q-42-7",
+              "displayNumber": 42,
+              "sourceQuestionNumber": 42,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "The great majority of smartphone users don' t take the trouble to adjust their settings to suit their own purposes."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+                  "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017121-part-3-section-2-group-1-q-43-8",
+              "displayNumber": 43,
+              "sourceQuestionNumber": 43,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "The internet is regarded by some as designed to distract our attention."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+                  "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017121-part-3-section-2-group-1-q-44-9",
+              "displayNumber": 44,
+              "sourceQuestionNumber": 44,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "The author attributes his tech addiction chiefly to his habit of putting off doing what he should do right away."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+                  "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017121-part-3-section-2-group-1-q-45-10",
+              "displayNumber": 45,
+              "sourceQuestionNumber": 45,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "White-collar workers check email round the clock because it is required by their employers."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+                  "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2017121-part-3-section-3-group-1",
+          "title": "Questions 46 to 50 are based on the following passage.",
+          "presentation": "reading",
+          "instructions": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "You may have heard that Coca-Cola once contained an ingredient capable of sparking particular devotion in consumers: cocaine. The \"Coca\" in the name referred to the extracts of coca leaf that the drink's originator, chemist John Pemberton, mixed with his sugary syrup (浆汁). At the time, coca leaf extract mixed with wine was a common tonic (滋补品), and Pemberton's sweet brew was a way to get around local laws prohibiting the sale of alcohol. But the other half of the name presents another ingredient, less infamous (名声不好的), perhaps, but also strangely potent: the kola nut."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "In West Africa, people have long chewed kola nuts as stimulants, because they contain caffeine that also occurs naturally in tea, coffee, and chocolate. They also have heart stimulants."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Historian Paul Lovejoy relates that the cultivation of kola nuts in West Africa is hundreds of years old. The leafy, spreading trees were planted on graves and as part of traditional rituals. Even though the nuts, which need to stay moist, can be somewhat delicate to transport, traders carried them hundreds of miles throughout the forests and grasslands."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Europeans did not know of them until the 1500s, when Portuguese ships arrived on the coast of what is now Sierra Leone. And while the Portuguese took part in the trade, ferrying nuts down the coast along with other goods, by 1620, when English explorer Richard Jobson made his way up the Gambia, the nuts were still peculiar to his eyes."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "By the late 19th century, kola nuts were being shipped by the tonne to Europe and the US. Many made their way into medicines, intended as a kind of energy boost. One such popular medicinal drink was Vin Mariani, a French product consisting of coca extract mixed with red wine. It was created by a French chemist, Angelo Mariani, in 1863. So when Pemberton created his drink, it represented an ongoing trend. When cocaine eventually fell from grace as a beverage ingredient, kola-extract colas became popular."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "The first year it was available, Coca-Cola averaged nine servings a day across all the Atlanta soda fountains where it was sold. As it grew more popular, the company sold rights to bottle the soda, so it could travel easily. Today about 1.9 billion Cokes are purchased daily. It's become so iconic that attempts to change its taste in 1985—sweetening it in a move projected to boost sales—proved disastrous, with widespread anger from consumers. \"Coca-Cola Classic\" returned to store shelves just three months after the \"New Coke\" was released."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "These days, the Coca-Cola recipe is a closely guarded secret. But it's said to no longer contain kola nut extract, relying instead on artificial imitations to achieve the flavour."
+                }
+              ]
+            }
+          ],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2017121-part-3-section-3-group-1-q-46-1",
+              "displayNumber": 46,
+              "sourceQuestionNumber": 46,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What do we learn about chemist John Pemberton?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "He used a strangely potent ingredient in a food supplement."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "He created a drink containing alcohol without breaking law."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "He became notorious because of the coca drink he developed."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "He risked breaking local law to make a drink with coca leaves."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+                  "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017121-part-3-section-3-group-1-q-47-2",
+              "displayNumber": 47,
+              "sourceQuestionNumber": 47,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What does the passage say about kola nuts?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Their commercial value was first discovered by Portuguese settlers."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They contain some kind of energy boost not found in any other food."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Many were shipped to Europe in the late 19th century for medicinal use."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They were strange to the Europeans when first imported from West Africa."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+                  "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017121-part-3-section-3-group-1-q-48-3",
+              "displayNumber": 48,
+              "sourceQuestionNumber": 48,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "How come kola-extract colas became popular?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Cocaine had become notorious."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Alcoholic drinks were prohibited."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Fountains were set up to sell them."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Rights were sold to bottle the soda."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+                  "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017121-part-3-section-3-group-1-q-49-4",
+              "displayNumber": 49,
+              "sourceQuestionNumber": 49,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What is known about the taste of Coca-Cola?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It was so designed as to create addiction in consumers."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It still relies on traditional kola nut extract."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It has become more popular among the old."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It has remained virtually unchanged since its creation."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+                  "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017121-part-3-section-3-group-1-q-50-5",
+              "displayNumber": 50,
+              "sourceQuestionNumber": 50,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What is the passage mainly about?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The evolution of Coca-Cola."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The success story of Coca-Cola."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The medicinal value of Coca-Cola."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The business strategy of Coca-Cola. Passage two"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+                  "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2017121-part-3-section-3-group-2",
+          "title": "Questions 51 to 55 are based on the following passage.",
+          "presentation": "reading",
+          "instructions": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Twenty years ago, the Urban Land Institute defined the two types of cities that dominated the US landscape: smaller cities that operated around standard 9-5 business hours and large metropolitan areas that ran all 24 hours of the day. Analyzing and comparing cities using the lens of this basic divide gives interesting context to how investment capital flows and housing prices have shifted."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "In recent years, many mid-sized cities have begun to adopt a middle-of-the-road approach incorporating the excitement and opportunity of large cities with small cities' quiet after midnight. These 18-hour cities are beginning to make waves in real estate rankings and attract more real estate investment. What is underlying this new movement in real estate, and why do these cities have so much appeal?"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "18-hour cities combine the best of 24-hour and 9-5 cities, which contributes to downtown revitalization. For decades, many downtown cores in small to mid-sized cities were abandoned after work hours by workers who lived in the suburbs. Movement out of city centers was widespread, and downtown tenants were predominantly made up of the working poor. This generated little commerce for downtown businesses in the evenings, which made business and generating tax revenue for municipal upkeep difficult. With the rise of a new concept in urban planning that aims to make life easier and more convenient, however, increasing popularity for urban areas that cased the real estate pushes, in major cities like San Francisco or New York, has inspired a type of forward thinking urbanity and in smaller cities."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Transforming downtown areas so that they incorporate modern housing and improved walkability to local restaurants, retail, and entertainment—especially when combined with improved infrastructure for cyclists and public transit—makes them appeal to a more affluent demographic. These adjustments encourage employers in the knowledge and talent industries to keep their offices downtown. Access to foot traffic and proximity to transit allow the type of entertainment-oriented businesses such as bars and restaurants to stay open later, which attracts both younger, creative workers and baby boomers nearing retirement alike. Because of their smaller size, most keep hours that allow people to enjoy themselves, then have some quiet after midnight, as opposed to large major cities like New York, where the buzz of activity is ongoing."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "These 18-hour cities are rapidly on the rise and offer great opportunities for homeowner investment. In many of these cities such as Denver, a diverse and vigorous economy attracted to the urban core has offered stable employment for residents. The right urban mix has propped up home occupancy, increased property values, and attracted significant investment capital."
+                }
+              ]
+            }
+          ],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2017121-part-3-section-3-group-2-q-51-1",
+              "displayNumber": 51,
+              "sourceQuestionNumber": 51,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What do we learn about American cities twenty years ago?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They were divided into residential and business areas."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Their housing prices were linked with their prosperity."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "There was a clear divide between large and small cities."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They were places where large investment capital flowed."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+                  "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017121-part-3-section-3-group-2-q-52-2",
+              "displayNumber": 52,
+              "sourceQuestionNumber": 52,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What can be inferred from the passage about 18-hour cities?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They especially appeal to small businesses."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They have seen a rise in property prices."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They have replaced quiet with excitement."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They have changed America's landscape."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+                  "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017121-part-3-section-3-group-2-q-53-3",
+              "displayNumber": 53,
+              "sourceQuestionNumber": 53,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Years ago, many downtown cores in small to mid-sized cities ."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "had hardly any business activity"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "were crowded in business hours"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "exhibited no signs of prosperity"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "looked deserted in the evenings"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+                  "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017121-part-3-section-3-group-2-q-54-4",
+              "displayNumber": 54,
+              "sourceQuestionNumber": 54,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What characterizes the new downtown areas in 18-hour cities?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "A sudden emergence of the knowledge industry."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Flooding in of large crowds of migrant workers."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Modernized housing and improved infrastructure."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "More comfortable life and greater upward mobility."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+                  "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017121-part-3-section-3-group-2-q-55-5",
+              "displayNumber": 55,
+              "sourceQuestionNumber": 55,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What have 18-hour cities brought to the local residents?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "More chances for promotion."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Healthier living environment."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Greater cultural diversity."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Better job opportunities."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+                  "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cet6-paper-2017121-part-4-translation",
+      "title": "Translation 翻译",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet6-paper-2017121-part-4-translation-group",
+          "title": "翻译题",
+          "presentation": "writing",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2017121-part-4-q-1-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "translation",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "太湖是中国东部的一个淡水湖,占地面积2250平方公里,是中国第三大淡水湖,仅次于鄱阳和洞庭。太湖约有90个岛屿,大小从几平方米到几平方公里不等。太湖以其独特的“太湖石”而闻名,太湖石常用于装饰中国传统园林。太湖也以高产的捕鱼业闻名。自上世纪70年代后期以来,捕捞鱼蟹对沿湖的居民来说极为重要,并对周边地区的经济作出了重大贡献。太湖地区是中国陶瓷( ceramics)业基地之一,其中宜兴的陶瓷厂家生产举世闻名的宜兴紫砂壶( clay teapot,)"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+                  "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "assetRefs": [],
+  "sourceRefs": [
+    {
+      "sourceDocumentId": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+      "relativePath": "2017年12月六级真题（第1套）.docx；2017.12英语六级考试第1套解析.pdf",
+      "sha256": "82ea5315506de921bc0f89f4200ac65880ac4978720cf2790f5ff0692a64f8d1",
+      "locator": {},
+      "extractionMethod": "manual-review",
+      "confidence": 0.86
+    }
+  ],
+  "quality": {
+    "structureStatus": "approved",
+    "structureConfidence": 0.86,
+    "issueCount": 0,
+    "issues": []
+  }
+}

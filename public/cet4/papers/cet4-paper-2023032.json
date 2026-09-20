@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 2,
+  "id": "cet4-paper-2023032",
+  "kind": "paper",
+  "title": "2023年3月大学英语四级真题 · 第2套",
+  "year": "2023",
+  "region": "全国",
+  "variant": "第2套",
+  "submissionMode": "whole-paper",
+  "instructions": [
+    {
+      "type": "notice",
+      "tone": "info",
+      "text": "按原卷分区作答。提交整卷后显示可用答案与原资料参考内容。"
+    }
+  ],
+  "sections": [
+    {
+      "id": "cet4-paper-2023032-part-1-writing",
+      "title": "Writing 写作",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet4-paper-2023032-part-1-writing-group",
+          "title": "写作题",
+          "presentation": "writing",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet4-paper-2023032-part-1-q-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "essay",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "81bc82e23f4512f885514223b146d05d3ddec58032ec372877d442173343877d",
+                  "relativePath": "2023.03英语四级真题第2套.docx；2023.03英语四级详解第2套.pdf",
+                  "sha256": "81bc82e23f4512f885514223b146d05d3ddec58032ec372877d442173343877d",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cet4-paper-2023032-part-2-translation",
+      "title": "Translation 翻译",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet4-paper-2023032-part-2-translation-group",
+          "title": "翻译题",
+          "presentation": "writing",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet4-paper-2023032-part-2-q-1-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "translation",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "随着生活水平的提高，更多人开始加入到自驾游的行列之中。自驾游者既可驾驶自家车也可借车或租车出游。司机可能是车主或结伴出游者。自驾游与传统的组团旅游不同,它能够更好地满足旅游者的个性化需求，使他们更好地享受旅游的过程。自驾游尤其受到年轻出游者的欢迎。年轻人追求独立自由的生活,而自驾游恰好满足了他们的这一需求。"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "81bc82e23f4512f885514223b146d05d3ddec58032ec372877d442173343877d",
+                  "relativePath": "2023.03英语四级真题第2套.docx；2023.03英语四级详解第2套.pdf",
+                  "sha256": "81bc82e23f4512f885514223b146d05d3ddec58032ec372877d442173343877d",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "assetRefs": [],
+  "sourceRefs": [
+    {
+      "sourceDocumentId": "81bc82e23f4512f885514223b146d05d3ddec58032ec372877d442173343877d",
+      "relativePath": "2023.03英语四级真题第2套.docx；2023.03英语四级详解第2套.pdf",
+      "sha256": "81bc82e23f4512f885514223b146d05d3ddec58032ec372877d442173343877d",
+      "locator": {},
+      "extractionMethod": "manual-review",
+      "confidence": 0.86
+    }
+  ],
+  "quality": {
+    "structureStatus": "review_required",
+    "structureConfidence": 0.72,
+    "issueCount": 1,
+    "issues": [
+      "原始资料注明部分题目与其他套相同，未重复列出"
+    ]
+  }
+}

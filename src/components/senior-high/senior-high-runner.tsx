@@ -20,7 +20,13 @@ import {
 import { focusNextSeniorHighInlineAnswer } from "@/lib/senior-high/inline-navigation";
 import "./senior-high-paper.css";
 
-type RunnerProps = { kind: "paper" | "practice"; setId: string };
+type RunnerProps = {
+  kind: "paper" | "practice";
+  setId: string;
+  basePath?: string;
+  backHref?: string;
+  storageNamespace?: string;
+};
 type BlankBinding = { options: SeniorHighOption[]; question: SeniorHighQuestion };
 type OptionDropHandler = (targetQuestionId: string | null, optionId: string, sourceQuestionId?: string) => void;
 
@@ -374,14 +380,14 @@ function QuestionCard({
   </article>;
 }
 
-export function SeniorHighRunner({ kind, setId }: RunnerProps) {
+export function SeniorHighRunner({ kind, setId, basePath = "/senior-high", backHref, storageNamespace = "senior-high:v2:2" }: RunnerProps) {
   const [data, setData] = useState<SeniorHighSet | null>(null);
   const [answers, setAnswers] = useState<SeniorHighV2Answers>({});
   const [submittedGroups, setSubmittedGroups] = useState<Record<string, boolean>>({});
   const [restored, setRestored] = useState(false);
   const [error, setError] = useState("");
   const [openQuestionGroup, setOpenQuestionGroup] = useState<number | null>(null);
-  const storageKey = `senior-high:v2:2:${kind}:${setId}`;
+  const storageKey = `${storageNamespace}:${kind}:${setId}`;
 
   useEffect(() => {
     fetch(`/senior-high/${kind === "paper" ? "papers" : "practice"}/${setId}.json`)
@@ -480,7 +486,7 @@ export function SeniorHighRunner({ kind, setId }: RunnerProps) {
 
   return <section className="senior-high-page senior-high-v2-runner" data-paper-mode={data.submissionMode}>
     <header className="senior-high-v2-runner-header">
-      <Link className="senior-high-back" href={data.kind === "paper" ? "/senior-high?entry=papers" : "/senior-high"}>← 返回高考英语</Link>
+      <Link className="senior-high-back" href={backHref || (data.kind === "paper" ? "/senior-high?entry=papers" : "/senior-high")}>← 返回{basePath === "/senior-high" ? "高考英语" : basePath === "/cet6" ? "大学英语六级" : "大学英语四级"}</Link>
       <div className="senior-high-v2-runner-title"><h1>{data.title}</h1></div>
       <div className="senior-high-v2-progress"><strong>{answeredCount}/{questions.length}</strong><span>已作答</span></div>
     </header>

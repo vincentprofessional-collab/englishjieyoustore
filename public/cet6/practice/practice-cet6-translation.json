@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 2,
+  "id": "practice-cet6-translation",
+  "kind": "practice",
+  "title": "大学英语六级翻译专项训练",
+  "year": "历年",
+  "region": "全国",
+  "variant": "",
+  "instructions": [
+    {
+      "type": "notice",
+      "tone": "info",
+      "text": "同一题型的专项资料集中在本页；按题组提交后显示可用答案。"
+    }
+  ],
+  "sections": [
+    {
+      "id": "cet6-practice-a4493769fc19-cet6-practice-a4493769fc19-part-1-translation",
+      "title": "四六级考试翻译新题型专项练习  · Translation 翻译",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet6-practice-a4493769fc19-cet6-practice-a4493769fc19-part-1-translation-group",
+          "title": "翻译题",
+          "presentation": "writing",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-practice-a4493769fc19-part-1-q-1-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "translation",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "狮舞（Lion Dance）是中国最广为流传的民间舞蹈之一。狮为百兽之首，在 中国传统中，狮子被视为是能带来好运的吉祥物（mascot）。古人将狮子视作是 勇敢和力量的化身，能驱赶邪恶、保护人类。据记载，狮舞已拥有了 2,000 多年 的历史。在唐代（the Tang Dynasty），狮舞就已经被引入了皇室。因此，舞狮成 为元宵节（the Lantern Festival）和其他节日的习俗，人们以此来祈祷好运、平安 和幸福。 The Lion Dance is one of the most widespread folk dances in China.The lion is the king of animals. In Chinese tradition, the lion is regarded as a mascot, which can bring good luck.Ancient people regarded the lion as a symbol of braveness and strength, which could drive away evil and protect humans. The dance has a recorded history of more than 2,000 years. During the Tang Dynasty, the Lion Dance was already introduced into the royal family of the dynasty. Therefore, performing the lion dance at the Lantern Festival and other festive occasions became a custom where people could pray for good luck, safety and happiness."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "a4493769fc198a650b571ea97cc475a0f7eb6811f90f423eb9b99f4941b0a409",
+                  "relativePath": "题型/翻译/四六级考试翻译新题型专项练习 .pdf",
+                  "sha256": "a4493769fc198a650b571ea97cc475a0f7eb6811f90f423eb9b99f4941b0a409",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "assetRefs": [],
+  "sourceRefs": [
+    {
+      "sourceDocumentId": "a4493769fc198a650b571ea97cc475a0f7eb6811f90f423eb9b99f4941b0a409",
+      "relativePath": "题型/翻译/四六级考试翻译新题型专项练习 .pdf",
+      "sha256": "a4493769fc198a650b571ea97cc475a0f7eb6811f90f423eb9b99f4941b0a409",
+      "locator": {},
+      "extractionMethod": "manual-review",
+      "confidence": 0.86
+    }
+  ],
+  "quality": {
+    "structureStatus": "approved",
+    "structureConfidence": 0.84,
+    "issueCount": 0,
+    "issues": []
+  }
+}

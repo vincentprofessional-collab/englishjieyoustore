@@ -1,0 +1,3853 @@
+{
+  "schemaVersion": 2,
+  "id": "cet4-paper-2020122",
+  "kind": "paper",
+  "title": "2020年12月大学英语四级真题 · 第2套",
+  "year": "2020",
+  "region": "全国",
+  "variant": "第2套",
+  "submissionMode": "whole-paper",
+  "instructions": [
+    {
+      "type": "notice",
+      "tone": "info",
+      "text": "按原卷分区作答。提交整卷后显示可用答案与原资料参考内容。"
+    }
+  ],
+  "sections": [
+    {
+      "id": "cet4-paper-2020122-part-1-writing",
+      "title": "Writing 写作",
+      "layout": "flow",
+      "instructions": [
+        {
+          "type": "audio",
+          "assetId": "cet4-paper-2020122-audio",
+          "label": "听力音频"
+        }
+      ],
+      "groups": [
+        {
+          "id": "cet4-paper-2020122-part-1-writing-group",
+          "title": "写作题",
+          "presentation": "writing",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet4-paper-2020122-part-1-q-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "essay",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+                  "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cet4-paper-2020122-part-2",
+      "title": "Part II   Listening Comprehension          (25 minutes)",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet4-paper-2020122-part-2-section-1-group-1",
+          "title": "题目",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet4-paper-2020122-part-2-section-1-group-1-q-1-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "He wanted to buy a home."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "He lost a huge sum of money."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "He suffered from a shock."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "He did an unusual good deed."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+                  "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2020122-part-2-section-1-group-1-q-2-2",
+              "displayNumber": 2,
+              "sourceQuestionNumber": 2,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Invite the waiter to a fancy dinner."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Give some money to the waiter."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Tell her story to the Daily News."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Pay the waiter’s school tuition. Questions 3 and 4 are based on the news report you have just heard."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+                  "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2020122-part-2-section-1-group-1-q-3-3",
+              "displayNumber": 3,
+              "sourceQuestionNumber": 3,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Whether or not to move to the state’s mainland."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "How to keep the village from sinking into the sea."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Where to get the funds for rebuilding their village."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "What to do about the rising level of the seawater."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+                  "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2020122-part-2-section-1-group-1-q-4-4",
+              "displayNumber": 4,
+              "sourceQuestionNumber": 4,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It takes too long a time."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It has to wait for the state’s final approval."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It costs too much money."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It faces strong opposition from many villagers."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+                  "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet4-paper-2020122-part-2-section-1-group-2",
+          "title": "Questions 5 to 7 are based on the news report you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet4-paper-2020122-part-2-section-1-group-2-q-5-1",
+              "displayNumber": 5,
+              "sourceQuestionNumber": 5,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To investigate whether people are grateful for help. •\tTo see whether people hold doors open for strangers."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To explore ways of inducing gratitude in people."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To find out how people express gratitude."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+                  "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2020122-part-2-section-1-group-2-q-6-2",
+              "displayNumber": 6,
+              "sourceQuestionNumber": 6,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They induced strangers to talk with them."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They helped 15 to 20 people in a bad mood."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They held doors open for people at various places."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They interviewed people who didn’t say thank you."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+                  "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2020122-part-2-section-1-group-2-q-7-3",
+              "displayNumber": 7,
+              "sourceQuestionNumber": 7,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "People can be educated to be grateful."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Most people have bad days now and then."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Most people express gratitude for help."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "People are ungrateful when in a bad mood."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+                  "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet4-paper-2020122-part-2-section-2-group-1",
+          "title": "Questions 8 to 11 are based on the conversation you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet4-paper-2020122-part-2-section-2-group-1-q-8-1",
+              "displayNumber": 8,
+              "sourceQuestionNumber": 8,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To order a solar panel installation."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To enquire about solar panel installations."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To report a serious leak in his roof."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To complain about the faulty solar panels."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+                  "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2020122-part-2-section-2-group-1-q-9-2",
+              "displayNumber": 9,
+              "sourceQuestionNumber": 9,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "He plans to install solar panels.\tC） He saves $ 300 a year."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": ") He owns a four-bedroom house."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "He has a large family."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+                  "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2020122-part-2-section-2-group-1-q-10-3",
+              "displayNumber": 10,
+              "sourceQuestionNumber": 10,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The service of the solar panel company."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The maintenance of the solar panels."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The cost of a solar panel installation."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The quality of the solar panels."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+                  "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2020122-part-2-section-2-group-1-q-11-4",
+              "displayNumber": 11,
+              "sourceQuestionNumber": 11,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "One year and a half."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Roughly six years."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Less than four years."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "About five years."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+                  "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet4-paper-2020122-part-2-section-2-group-2",
+          "title": "Questions 12 to 15 are based on the conversation you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet4-paper-2020122-part-2-section-2-group-2-q-12-1",
+              "displayNumber": 12,
+              "sourceQuestionNumber": 12,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "At a travel agency."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "At an airline transfer service."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "At an Australian airport."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "At a local transportation authority."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+                  "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2020122-part-2-section-2-group-2-q-13-2",
+              "displayNumber": 13,
+              "sourceQuestionNumber": 13,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "She would be able to visit more scenic spots."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "She wanted to save as much money as possible."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "She would like to have everything taken care of."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "She wanted to spend more time with her family."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+                  "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2020122-part-2-section-2-group-2-q-14-3",
+              "displayNumber": 14,
+              "sourceQuestionNumber": 14,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Four days."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "One week."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Five days."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Two weeks."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+                  "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2020122-part-2-section-2-group-2-q-15-4",
+              "displayNumber": 15,
+              "sourceQuestionNumber": 15,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Choosing some activities herself."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Driving along the Great Ocean Road."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Spending Christmas with Australians."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Learning more about wine making."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+                  "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet4-paper-2020122-part-2-section-3-group-1",
+          "title": "Questions 16 to 18 are based on the passage you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet4-paper-2020122-part-2-section-3-group-1-q-16-1",
+              "displayNumber": 16,
+              "sourceQuestionNumber": 16,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Bring their own bags when shopping."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Dispose of their trash properly."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Use public transport when traveling."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Pay a green tax upon arrival ."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+                  "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2020122-part-2-section-3-group-1-q-17-2",
+              "displayNumber": 17,
+              "sourceQuestionNumber": 17,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It has not been doing a good job in recycling."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It has witnessed a rise in accidental drowning."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It has not attracted many tourists in recent years."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It has experienced an overall decline in air quality."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+                  "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2020122-part-2-section-3-group-1-q-18-3",
+              "displayNumber": 18,
+              "sourceQuestionNumber": 18,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To charge a small fee on plastic products in supermarkets."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To ban single-use plastic bags and straws on Bali Island."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To promote the use of paper bags for shopping."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To impose a penalty on anyone caught littering."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+                  "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet4-paper-2020122-part-2-section-3-group-2",
+          "title": "Questions 19 to 21 are based on the passage you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet4-paper-2020122-part-2-section-3-group-2-q-19-1",
+              "displayNumber": 19,
+              "sourceQuestionNumber": 19,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It gives birth to several babies at a time."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is the least protected mammal species."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Its breeding grounds are now better preserved."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Its population is now showing signs of increase."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+                  "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2020122-part-2-section-3-group-2-q-20-2",
+              "displayNumber": 20,
+              "sourceQuestionNumber": 20,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Global warming."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Commercial hunting."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Polluted seawaters."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Decreasing birthrates."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+                  "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2020122-part-2-section-3-group-2-q-21-3",
+              "displayNumber": 21,
+              "sourceQuestionNumber": 21,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To mate."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To escape hunters."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To look for food ."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To seek breeding grounds."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+                  "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet4-paper-2020122-part-2-section-3-group-3",
+          "title": "Questions 22 to 25 are based on the passage you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet4-paper-2020122-part-2-section-3-group-3-q-22-1",
+              "displayNumber": 22,
+              "sourceQuestionNumber": 22,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They prefer to drink low-fat milk."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They consume less milk these days."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They think milk is good for health."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They buy more milk than the British."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+                  "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2020122-part-2-section-3-group-3-q-23-2",
+              "displayNumber": 23,
+              "sourceQuestionNumber": 23,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is not as healthy as once thought."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It benefits the elderly more."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is not easy to stay fresh for long."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It tends to make people fat."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+                  "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2020122-part-2-section-3-group-3-q-24-3",
+              "displayNumber": 24,
+              "sourceQuestionNumber": 24,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They drink too many pints every day."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They lack the necessary proteins to digest it."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are sensitive to certain minerals."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They have eaten food incompatible with milk ."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is easier for sick people to digest."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is healthier than other animal products."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It provides some necessary nutrients."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It supplies the body with enough calories. Part Ⅲ    Reading Comprehension      (40 minutes)"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+                  "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet4-paper-2020122-part-2-section-5-group-1",
+          "title": "题目",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet4-paper-2020122-part-2-section-5-group-1-q-36-1",
+              "displayNumber": 36,
+              "sourceQuestionNumber": 36,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "One legislative staffer assumed that a woman of color who advocated affordable childcare must be a single mother."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+                  "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2020122-part-2-section-5-group-1-q-37-2",
+              "displayNumber": 37,
+              "sourceQuestionNumber": 37,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "People from different races, genders and regions all suffer from a lack of financial security."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+                  "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2020122-part-2-section-5-group-1-q-38-3",
+              "displayNumber": 38,
+              "sourceQuestionNumber": 38,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "According to a survey, while the majority believe too little assistance is given to the poor, more than a third believe too much is spent on welfare.,"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+                  "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2020122-part-2-section-5-group-1-q-39-4",
+              "displayNumber": 39,
+              "sourceQuestionNumber": 39,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "A research group has found that Americans who are struggling are thought to be lazy and to have made the wrong decisions."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+                  "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2020122-part-2-section-5-group-1-q-40-5",
+              "displayNumber": 40,
+              "sourceQuestionNumber": 40,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Under the old system in America, a mother was supposed to stay home and take care of her children."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+                  "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2020122-part-2-section-5-group-1-q-41-6",
+              "displayNumber": 41,
+              "sourceQuestionNumber": 41,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "It was found that nearly 50% of Americans are poor or receive low pay."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+                  "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2020122-part-2-section-5-group-1-q-42-7",
+              "displayNumber": 42,
+              "sourceQuestionNumber": 42,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Americans usually overestimate the number of blacks receiving welfare benefits."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+                  "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2020122-part-2-section-5-group-1-q-43-8",
+              "displayNumber": 43,
+              "sourceQuestionNumber": 43,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "It is impossible for Americans to lift themselves out of poverty entirely on their own."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+                  "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2020122-part-2-section-5-group-1-q-44-9",
+              "displayNumber": 44,
+              "sourceQuestionNumber": 44,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Nowadays, it seems none of us can get away from income inequality."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+                  "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2020122-part-2-section-5-group-1-q-45-10",
+              "displayNumber": 45,
+              "sourceQuestionNumber": 45,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Assumptions about poor people become even more negative when they live on welfare."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+                  "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet4-paper-2020122-part-2-section-6-group-1",
+          "title": "Questions 46 to 50 are based on the following passage.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet4-paper-2020122-part-2-section-6-group-1-q-46-1",
+              "displayNumber": 46,
+              "sourceQuestionNumber": 46,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "When are people likely to experience boredom, according to an accepted psychological definition?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "When they don’t have the chance to do what they want."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "When they don’t enjoy the materials they are studying."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "When they experience something unpleasant."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "When they engage in some routine activities."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+                  "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2020122-part-2-section-6-group-1-q-47-2",
+              "displayNumber": 47,
+              "sourceQuestionNumber": 47,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What does the author say boredom can lead to?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Determination."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Mental deterioration."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Concentration."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Harmful conduct."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+                  "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2020122-part-2-section-6-group-1-q-48-3",
+              "displayNumber": 48,
+              "sourceQuestionNumber": 48,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What is the finding of one team of psychologists in their experiment?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Volunteers prefer watching a boring movie to sitting alone deliberating."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Many volunteers choose to hurt themselves rather than endure boredom."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Male volunteers are more immune to the effects of boredom than females."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Many volunteers are unable to resist boredom longer than fifteen minutes."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+                  "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2020122-part-2-section-6-group-1-q-49-4",
+              "displayNumber": 49,
+              "sourceQuestionNumber": 49,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Why does the author say boredom isn’t all bad?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It stimulates memorization."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It may promote creative thinking."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It allows time for relaxation."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It may facilitate independent learning."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+                  "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2020122-part-2-section-6-group-1-q-50-5",
+              "displayNumber": 50,
+              "sourceQuestionNumber": 50,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What does the author suggest one do when faced with a challenging problem?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Stop idling and think big."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Look around oneself for stimulation."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Unlock one’s smartphone."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Allow oneself some time to be bored. Passage Two"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+                  "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet4-paper-2020122-part-2-section-6-group-2",
+          "title": "Questions 51 to 55 are based on the following passage.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet4-paper-2020122-part-2-section-6-group-2-q-51-1",
+              "displayNumber": 51,
+              "sourceQuestionNumber": 51,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What is catching environmentalists’ attention nowadays?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Rich countries are stripping poor ones of their resources."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Forests are fast shrinking in many developing countries."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Forests are eating away the fertile farmland worldwide."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Rich countries are doing little to address deforestation."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+                  "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2020122-part-2-section-6-group-2-q-52-2",
+              "displayNumber": 52,
+              "sourceQuestionNumber": 52,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Which countries have the fastest forest growth?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Those that have newly achieved independence."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Those that have the greatest demand for timber."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Those that used to have the lowest forest coverage."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Those that provide enormous government subsidies."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+                  "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2020122-part-2-section-6-group-2-q-53-3",
+              "displayNumber": 53,
+              "sourceQuestionNumber": 53,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What has encouraged forest growth historically?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The government’s advocacy."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The favourable climate."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The use of wood for fuel."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The green movement."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+                  "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2020122-part-2-section-6-group-2-q-54-4",
+              "displayNumber": 54,
+              "sourceQuestionNumber": 54,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What accounts for our increasing desire for forests?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Their unique scenic beauty."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Their capability of improving air quality."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Their use as fruit plantations."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Their stable supply of building materials."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+                  "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet4-paper-2020122-part-2-section-6-group-2-q-55-5",
+              "displayNumber": 55,
+              "sourceQuestionNumber": 55,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What does the author conclude about the prospects of forestation?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Deserts in sub-Saharan Africa will diminish gradually."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It will play a more and more important role in people’s lives."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Forest destruction in the developing world will quickly slow down."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Developed and developing countries are moving in opposite directions."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+                  "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cet4-paper-2020122-part-3-translation",
+      "title": "Translation 翻译",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet4-paper-2020122-part-3-translation-group",
+          "title": "翻译题",
+          "presentation": "writing",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet4-paper-2020122-part-3-q-1-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "translation",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "春节前夕吃团圆饭是中国人的传统。团圆饭是一年中最重要的晚餐,也是家庭团聚的最佳时机,家人生活在不同地方的家庭尤其如此。团圆饭上的菜肴丰富多样,其中有些菜肴有特殊含义。例如,鱼是不可缺少的一道菜,因为汉语中的“鱼”字和“余”字听上去一样。在中国的许多地方,饺子也是一道重要的佳肴,因为饺子象征着财富和好运。"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": "第一句中的“做某事是某人的传统”可译为I     ti s/ha sbeenat rad iti onf orsb.t odosth.句型; “春节”可译为t heSpr ingFe sti val Ch 或 ine seNew Ye ar,因此“春节前夕”  可译为 ont heeveo f t heSpr ingFe sti val或 onCh ine seNew Ye arsEve。 􀆳"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+                  "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "assetRefs": [
+    {
+      "assetId": "cet4-paper-2020122-audio",
+      "kind": "audio",
+      "url": "/cet4/audio/cet4-paper-2020122.mp3",
+      "mimeType": "audio/mpeg",
+      "sha256": "",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+          "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+          "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+          "locator": {},
+          "extractionMethod": "manual-review",
+          "confidence": 0.86
+        }
+      ]
+    }
+  ],
+  "sourceRefs": [
+    {
+      "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+      "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+      "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+      "locator": {},
+      "extractionMethod": "manual-review",
+      "confidence": 0.86
+    }
+  ],
+  "quality": {
+    "structureStatus": "approved",
+    "structureConfidence": 0.86,
+    "issueCount": 0,
+    "issues": []
+  }
+}

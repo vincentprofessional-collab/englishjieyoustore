@@ -1,0 +1,4178 @@
+{
+  "schemaVersion": 2,
+  "id": "cet6-paper-2017122",
+  "kind": "paper",
+  "title": "2017年12月大学英语六级真题 · 第2套",
+  "year": "2017",
+  "region": "全国",
+  "variant": "第2套",
+  "submissionMode": "whole-paper",
+  "instructions": [
+    {
+      "type": "notice",
+      "tone": "info",
+      "text": "按原卷分区作答。提交整卷后显示可用答案与原资料参考内容。"
+    }
+  ],
+  "sections": [
+    {
+      "id": "cet6-paper-2017122-part-1-writing",
+      "title": "Writing 写作",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet6-paper-2017122-part-1-writing-group",
+          "title": "写作题",
+          "presentation": "writing",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2017122-part-1-q-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "essay",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+                  "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cet6-paper-2017122-part-2",
+      "title": "Part II                  Listening comprehension            (30miutes)",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet6-paper-2017122-part-2-section-1-group-1",
+          "title": "Questions 1 to 4 are based on the conversation you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2017122-part-2-section-1-group-1-q-1-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Say a few words to thank the speaker."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Introduce the speaker to the audience."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Give a lecture on the history of the town."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Host a talk on how to give a good speech."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+                  "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017122-part-2-section-1-group-1-q-2-2",
+              "displayNumber": 2,
+              "sourceQuestionNumber": 2,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "He was the founder of the local history society."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "He has worked with Miss Bligh for 20 years."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "He has published a book on public speaking."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "He joined the local history society when young."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+                  "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017122-part-2-section-1-group-1-q-3-3",
+              "displayNumber": 3,
+              "sourceQuestionNumber": 3,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "She was obviously better at talking than writing."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "She had a good knowledge of the town's history."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Her speech was so funny as to amuse the audience."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Her ancestors came to the town in the 18th century."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+                  "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017122-part-2-section-1-group-1-q-4-4",
+              "displayNumber": 4,
+              "sourceQuestionNumber": 4,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "He read exactly what was written in his notes."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "He kept forgetting what he was going to say."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "He made an embarrassing remark."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "He was too nervous to speak up"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+                  "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2017122-part-2-section-1-group-2",
+          "title": "Questions 5 to 8 are based on the conversation you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2017122-part-2-section-1-group-2-q-5-1",
+              "displayNumber": 5,
+              "sourceQuestionNumber": 5,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "What their retailers demand."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "What their rivals are doing."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "How they are going to beat their rivals."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "How dramatically the market is changing."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+                  "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017122-part-2-section-1-group-2-q-6-2",
+              "displayNumber": 6,
+              "sourceQuestionNumber": 6,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They should be taken seriously."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are rapidly catching up."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Their business strategy is quite effective."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Their potential has been underestimated."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+                  "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017122-part-2-section-1-group-2-q-7-3",
+              "displayNumber": 7,
+              "sourceQuestionNumber": 7,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "She had given it to Tom."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It simply made her go frantic."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "She had not seen it yet."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It was not much of a big concern."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+                  "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017122-part-2-section-1-group-2-q-8-4",
+              "displayNumber": 8,
+              "sourceQuestionNumber": 8,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Restructuring the whole company."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Employing more forwarding agents."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Promoting cooperation with Jayal Motors."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Exporting their motorbikes to Indonesia"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+                  "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2017122-part-2-section-2-group-1",
+          "title": "Questions 9 to 11 are based on the passage you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2017122-part-2-section-2-group-1-q-9-1",
+              "displayNumber": 9,
+              "sourceQuestionNumber": 9,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It makes claims in conflict with the existing research."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It focuses on the link between bedtime and nutrition."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It cautions against the overuse of coffee and alcohol."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It shows that \"night owls\" work much less efficiently."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+                  "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017122-part-2-section-2-group-1-q-10-2",
+              "displayNumber": 10,
+              "sourceQuestionNumber": 10,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They pay greater attention to food choice."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They tend to achieve less than their peers."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They run a higher risk of gaining weight."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They stand a greater chance to fall sick."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+                  "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017122-part-2-section-2-group-1-q-11-3",
+              "displayNumber": 11,
+              "sourceQuestionNumber": 11,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Get up late."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Sleep 8 hours a day."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Exercise more."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Go to bed earlier"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+                  "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2017122-part-2-section-2-group-2",
+          "title": "Questions 12 to 15 are based on the passage you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2017122-part-2-section-2-group-2-q-12-1",
+              "displayNumber": 12,
+              "sourceQuestionNumber": 12,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "All of the acting nominees are white."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It has got too much publicity on TV."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is prejudiced against foreign films."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Only 7% of the nominees are female."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+                  "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017122-part-2-section-2-group-2-q-13-2",
+              "displayNumber": 13,
+              "sourceQuestionNumber": 13,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "22 percent of movie directors were people of color."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Half of the TV programs were ethnically balanced."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Only one-fifth of TV shows had black characters."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Only 3.4 percent of film directors were women."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+                  "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017122-part-2-section-2-group-2-q-14-3",
+              "displayNumber": 14,
+              "sourceQuestionNumber": 14,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Non-white males."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Program creators."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Females of color over 40."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Asian speaking characters."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+                  "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017122-part-2-section-2-group-2-q-15-4",
+              "displayNumber": 15,
+              "sourceQuestionNumber": 15,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They constitute 17% of Hollywood movie characters."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are most underrepresented across TV and film."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They contribute little to the U. S. film industry."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They account for 8.5% of the U. S. population"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+                  "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2017122-part-2-section-3-group-1",
+          "title": "Questions 16 to 18 are based on the recording you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2017122-part-2-section-3-group-1-q-16-1",
+              "displayNumber": 16,
+              "sourceQuestionNumber": 16,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "One that can provide for emergency needs."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "One that can pay for their medical expenses."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "One that covers their debts and burial expenses."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "One that ensures a healthy life for their later years."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+                  "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017122-part-2-section-3-group-1-q-17-2",
+              "displayNumber": 17,
+              "sourceQuestionNumber": 17,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Purchase insurance for their children."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Save sufficient money for a rainy day."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Buy a home with a small down payment."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Add more insurance on the breadwinner."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+                  "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017122-part-2-section-3-group-1-q-18-3",
+              "displayNumber": 18,
+              "sourceQuestionNumber": 18,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "When their children grow up and leave home."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "When they have saved enough for retirement."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "When their family move to a different place."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "When they have found better-paying jobs."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+                  "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2017122-part-2-section-3-group-2",
+          "title": "Questions 19 to 22 are based on the recording you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2017122-part-2-section-3-group-2-q-19-1",
+              "displayNumber": 19,
+              "sourceQuestionNumber": 19,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They do more harm than good."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They have often been ignored."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They do not help build friendship."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They may not always be negative."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+                  "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017122-part-2-section-3-group-2-q-20-2",
+              "displayNumber": 20,
+              "sourceQuestionNumber": 20,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Biased sources of information."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Ignorance of cultural differences."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Misinterpretation of Shakespeare."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Tendency to jump to conclusions."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+                  "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017122-part-2-section-3-group-2-q-21-3",
+              "displayNumber": 21,
+              "sourceQuestionNumber": 21,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are hard to dismiss once attached to a certain group."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They may have a negative impact on people they apply to."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They persist even when circumstances have changed."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are often applied to minorities and ethnic people."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+                  "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017122-part-2-section-3-group-2-q-22-4",
+              "displayNumber": 22,
+              "sourceQuestionNumber": 22,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They impact people more or less in the same way."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Some people are more sensitive to them than others."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "A positive stereotype may help one achieve better results."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "A negative stereotype sticks while a positive one does not"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+                  "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2017122-part-2-section-3-group-3",
+          "title": "Questions 23 to 25 are based on the recording you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2017122-part-2-section-3-group-3-q-23-1",
+              "displayNumber": 23,
+              "sourceQuestionNumber": 23,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Use some over-the-counter medicine instead."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Quit taking the medicine immediately."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Take some drug to relieve the side effect."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Ask your pharmacist to explain why it occurs."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+                  "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017122-part-2-section-3-group-3-q-24-2",
+              "displayNumber": 24,
+              "sourceQuestionNumber": 24,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It may help patients fall asleep."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It may lead to mental problems."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It may cause serious harm to one's liver."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It may increase the effect of certain drugs."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+                  "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017122-part-2-section-3-group-3-q-25-3",
+              "displayNumber": 25,
+              "sourceQuestionNumber": 25,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Tell their children to treat medicines with respect."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Keep medicines out of the reach of their children."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Make sure their children use quality medicines."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Ask their children to use legitimate medicines."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+                  "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cet6-paper-2017122-part-3",
+      "title": "Part III                 Reading Comprehension           (40 minutes)",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet6-paper-2017122-part-3-section-2-group-1",
+          "title": "题目",
+          "presentation": "reading",
+          "instructions": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Data sharing: An open mind on open date"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "[A] It is a movement building steady momentum: a call to make research data, software code and experimental methods publicly available and transparent. A spirit of openness is gaining acceptance in the science community, and is the only way, say advocates, to address a 'crisis' in science whereby too few findings are successfully reproduced. Furthermore, they say, it is the best way for researchers to gather the range of observations that are necessary to speed up discoveries or to identify large-scale trends."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "[B] The open-data shift poses a confusing problem for junior researchers. On the one hand, the drive to share is gathering official steam. Since 2013, global scientific bodies have begun to back politics that support increased public access to research. On the other hand, scientists disagree about how much and when they should share date, and they debate whether sharing it is more likely to accelerate science and make it more robust, or to introduce vulnerabilities and problems. As more journals and make it more robust, or to introduce vulnerabilities and problems. As more journal and funders adopt data-sharing requirements, and as a growing number of enthusiasts call for more openness, junior researchers must find their place between adopters and those who continue to hold out, even as they strive to launch their own careers."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "[C] One key challenge facing young scientists is how to be open without becoming scientifically vulnerable. They must determine the risk of jeopardizing a job offer or a collaboration proposal from those who are wary of—or unfamiliar with—open science. And they must learn how to capitalize on the movement's benefits, such as opportunities for more citations and a way to build a reputation without the need for conventional metrics, such as publication in high-impact journals."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "[D] Some fields have embraced open data more than others. Researchers in psychology, a field rocked by findings of irreproducibility in the past few years, have been especially vocal supporters of the drive for more-open science. A few psychology journals have created incentives to increase interest in reproducible science—for example, by affixing an 'open-data' badge to articles that clearly state where data are available. According to social psychologist Brian Nosek, executive director of the Center for Open Science, the average data-sharing rate for the journal Psychological Science, which uses the badges, increased tenfold to 38% from 2013 to 2015."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "[E] Funders, too, are increasingly adopting an open-data policy. Several strongly encourage, and some require, a date-management plan that makes data available. The US National Science Foundation is among these, some philanthropic (慈善的) funders, including the Bill&amp;Melinda Gates Foundation in Seattle, Washington, and the Wellcome Trust in London, also mandate open data from their grant recipients."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "[F] But many young researchers, especially those who have not been mentored in open science, are uncertain about whether to share or to stay private. Graduate students and postdocs, who often are working on their lab head's grant, may have no choice if their supervisor or another senior colleague opposes sharing."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "[G] Some fear that the potential impact of sharing is too high, especially at the early stages of a career. \"Everybody has a scary story about someone getting scooped (被抢先),\" says New York University astronomer David Hogg. Those fears may be a factor in a lingering hesitation to share data even when publishing in journals that mandate it."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "[H] Researchers at small labs or at institutions focused on teaching arguably have the most to lose when sharing hard-won data. \"With my institution and teaching load, I don't have postdocs and grad students,\" says Terry McGlynn, a tropical biologist at California State University, Dominguez Hills. \"The stakes are higher to share data because it's a bigger fraction of what's happening in my lab.\""
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "[I] Researchers also point to the time sink that is involved in preparing data for others to view. Once the data and associated materials appear in a repository (存储库 ), answering questions and handling complaints can take many hours."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "[J] The time investment can present other problems. In some cases, says data scientist Karthik Ram, it may be difficult for junior researchers to embrace openness when senior colleagues—many of whom head selection and promotion committees—might ridicule what they may view as misplaced energies. \"I've heard this recently—that embracing the idea of open data and code makes traditional academics uncomfortable,\" says Ram. \"The concern seems to be that open advocates don't spend their time being as productive as possible.\""
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "[K] An open-science stance can also add complexity to a collaboration. Kate Ratliff, who studies social attitudes at the University of Florida, Gainesville, says that it can seem as if there are two camps in a field—those who care about open science and those who don't. \"There's a new area to navigate—'Are you cool with the fact that I'll want to make the data open?'—when talking with somebody about an interesting research idea,\" she says."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "[L] Despite complications and concerns, the upsides of sharing can be significant. For example, when information is uploaded to a repository, a digital object identifier (DOI) is assigned. Scientists can use a DOI to publish each step of the research life cycle, not just the final paper. In so doing, they can potentially get three citations—one each for the data and software, in addition to the paper itself. And although some say that citations for software or data have little currency in academia, they can have other benefits."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "[M] Many advocates think that transparent data procedures with a date and time stamp will protect scientists from being scooped. \"This is the sweet spot between sharing and getting credit for it, while discouraging plagiarism (剽窃),\" says Ivo Grigorov, a project coordinator at the National Institute of Aquatic Resources Research Secretariat in Charlottenlund, Denmark. Hogg says that scooping is less of a problem than many think. \"The two cases I'm familiar with didn't involve open data or code,\" he says."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "[N] Open science also offers junior researchers the chance to level the playing field by gaining better access to crucial date. Ross Mounce, a postdoc studying evolutionary biology at the University of Cambridge, UK, is a vocal champion of open science, partly because his fossil-based research depends on access to others' data. He says that more openness in science could help to discourage what some perceive as a common practice of shutting out early-career scientists' requests for data."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "[O] Communication also helps for those who worry about jeopardizing a collaboration, he says. Concerns about open science should be discussed at the outset of a study. \"Whenever you start a project with someone, you have to establish a clear understanding of expectations for who owns the data, at what point they go public and who can do what with them,\" he says."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "[P] In the end, sharing data, software and materials with colleagues can help an early-career researcher to gain recognition—a crucial component of success. \"The thing you are searching for is reputation,\" says Titus Brown, a genomics (基因组学) researcher at the University of California, Davis. \"To get grants and jobs, you have to be relevant and achieve some level of public recognition. Anything you do that advances your presence—especially in a larger sphere, outside the communities you know—is a net win.\""
+                }
+              ]
+            }
+          ],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2017122-part-3-section-2-group-1-q-36-1",
+              "displayNumber": 36,
+              "sourceQuestionNumber": 36,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Astronomer David Hogg doesn't think scooping is as serious a problem as generally thought."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+                  "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017122-part-3-section-2-group-1-q-37-2",
+              "displayNumber": 37,
+              "sourceQuestionNumber": 37,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Some researchers are hesitant to make their data public for fear that others might publish something similar before them."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+                  "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017122-part-3-section-2-group-1-q-38-3",
+              "displayNumber": 38,
+              "sourceQuestionNumber": 38,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Some psychology journals have offered incentives to encourage authors to share their data."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+                  "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017122-part-3-section-2-group-1-q-39-4",
+              "displayNumber": 39,
+              "sourceQuestionNumber": 39,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "There is a growing demand in the science community that research data be open to the public."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+                  "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017122-part-3-section-2-group-1-q-40-5",
+              "displayNumber": 40,
+              "sourceQuestionNumber": 40,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Sharing data offers early-career researchers the chance to build a certain level of reputation."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+                  "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017122-part-3-section-2-group-1-q-41-6",
+              "displayNumber": 41,
+              "sourceQuestionNumber": 41,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Data sharing enables scientists to publish each step of their research work, thus leading to more citations."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+                  "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017122-part-3-section-2-group-1-q-42-7",
+              "displayNumber": 42,
+              "sourceQuestionNumber": 42,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Scientists hold different opinions about the extent and timing of data sharing."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+                  "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017122-part-3-section-2-group-1-q-43-8",
+              "displayNumber": 43,
+              "sourceQuestionNumber": 43,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Potential problems related to data sharing should be made known to and discussed by all participants at the beginning of a joint research project."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+                  "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017122-part-3-section-2-group-1-q-44-9",
+              "displayNumber": 44,
+              "sourceQuestionNumber": 44,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Sharing data and handling data-related issues can be time-consuming."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+                  "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017122-part-3-section-2-group-1-q-45-10",
+              "displayNumber": 45,
+              "sourceQuestionNumber": 45,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Junior researchers may have no say when it comes to sharing data."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+                  "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2017122-part-3-section-3-group-1",
+          "title": "Questions 46 to 50 are based on the following passage.",
+          "presentation": "reading",
+          "instructions": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "In the beginning of the movie I, Robot, a robot has to decide whom to save after two cars plunge into the water—Del Spooner or a child. Even though Spooner screams \"Save her! Save her!\" the robot rescues him because it calculates that he has a 45 percent chance of survival compared to Sarah's 11 percent. The robot's decision and its calculated approach raise an important question: would humans make the same choice? And which choice would we want our robotic counterparts to make?"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Isaac Asimov evaded the whole notion of morality in devising his three laws of robotics, which hold that 1. Robots cannot harm humans or allow humans to come to harm; 2. Robots must obey humans, except where the order would conflict with law 1; and 3. Robots must act in self-preservation, unless doing so conflicts with laws 1 or 2. These laws are programmed into Asimov's robots—they don't have to think, judge, or value. They don't have to like humans or believe that hurting them is wrong or bad. They simply don't do it."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "The robot who rescues Spooner's life in I, Robot follows Asimov's zeroth law: robots cannot harm humanity (as opposed to individual humans) or allow humanity to come to harm—an expansion of the first law that allows robots to determine what's in the greater good. Under the first law, a robot could not harm a dangerous gunman, but under the zeroth law, a robot could kill the gunman to save others."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Whether it's possible to program a robot with safeguards such as Asimov's laws is debatable. A word such as \"harm\" is vague (what about emotional harm? Is replacing a human employee harm?), and abstract concepts present coding problems. The robots in Asimov's fiction expose complications and loopholes in the three laws, and even when the laws work, robots still have to assess situations."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Assessing situations can be complicated. A robot has to identify the players, conditions, and possible outcomes for various scenarios. It's doubtful that a computer program can do that—at least, not without some undesirable results. A roboticist at the Bristol Robotics Laboratory programmed a robot to save human proxies (替身) called \"H-bots\" from danger. When one H-bot headed for danger, the robot successfully pushed it out of the way. But when two H-bots became imperiled, the robot chocked 42 percent of the time, unable to decide which to save and letting them both \"die.\" The experiment highlights the importance of morality: without it, how can a robot decide whom to save or what's best for humanity, especially if it can't calculate survival odds?"
+                }
+              ]
+            }
+          ],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2017122-part-3-section-3-group-1-q-46-1",
+              "displayNumber": 46,
+              "sourceQuestionNumber": 46,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What question does the example in the movie raise?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Whether robots can reach better decisions."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Whether robots follow Asimov's zeroth law."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "How robots may make bad judgments."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "How robots should be programmed."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+                  "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017122-part-3-section-3-group-1-q-47-2",
+              "displayNumber": 47,
+              "sourceQuestionNumber": 47,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What does the author think of Asimov's three laws of robotics?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are apparently divorced from reality."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They did not follow the coding system of robotics."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They laid a solid foundation for robotics."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They did not take moral issues into consideration."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+                  "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017122-part-3-section-3-group-1-q-48-3",
+              "displayNumber": 48,
+              "sourceQuestionNumber": 48,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What does the author say about Asimov's robots?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They know what is good or bad for human beings."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are programmed not to hurt human beings."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They perform duties in their owners' best interest."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They stop working when a moral issue is involved."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+                  "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017122-part-3-section-3-group-1-q-49-4",
+              "displayNumber": 49,
+              "sourceQuestionNumber": 49,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What does the author want to say by mentioning the word \"harm\" in Asimov's laws?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Abstract concepts are hard to program."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is hard for robots to make decisions."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Robots may do harm in certain situations."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Asimov's laws use too many vague terms."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+                  "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017122-part-3-section-3-group-1-q-50-5",
+              "displayNumber": 50,
+              "sourceQuestionNumber": 50,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What has the roboticist at the Bristol Robotics Laboratory found in his experiment?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Robots can be made as intelligent as human beings some day."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Robots can have moral issues encoded into their programs."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Robots can have trouble making decisions in complex scenarios."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Robots can be programmed to perceive potential perils. Passage Two"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+                  "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2017122-part-3-section-3-group-2",
+          "title": "Questions 51 to 55 are based on the following passage.",
+          "presentation": "reading",
+          "instructions": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Our world now moves so fast that we seldom stop to see just how far we have come in just a few years. The latest iPhone 6s, for example, has a dual-core processor and fits nicely into your pocket. By comparison, you would expect to find a technological specification like this on your standard laptop in an office anywhere in the world."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "It's no wonder that new applications for the Internet of Things are moving ahead fast when almost every new device we buy has a plug on the end of it or a wireless connection to the internet. Soon, our current smartphone lifestyle will expand to create our own smart home lifestyle too."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "All researches agree that close to 25 billion devices, things and sensors will be connected by 2020 which incidentally is also the moment that Millennials (千禧一代) are expected to make up 75 percent of our overall workforce, and the fully connected home will become a reality for large numbers of people worldwide."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "However, this is just the tip of the proverbial iceberg as smart buildings and even cities increasingly become the norm as leaders and business owners begin to wake up to the massive savings that technology can deliver through connected sensors and new forms of automation coupled with intelligent energy and facilities management."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Online security cameras, intelligent lighting and a wealth of sensors that control both temperature and air quality are offering an unprecedented level of control, efficiency, and improvements to what were once classed necessary costs when running a business or managing a large building."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "We can expect that the ever-growing list of devices, systems and environments remain connected, always online and talking to each other. The big benefit will not only be in the housing of this enormous and rapidly growing amount of data, but will also be in the ability to run real time data analytics to extract actionable and ongoing knowledge."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "The biggest and most exciting challenge of this technology is how to creatively leverage this ever-growing amount of data to deliver cost savings, improvements and tangible benefits to both businesses and citizens of these smart cities."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "The good news is that most of this technology is already invented. Let's face it, it wasn't too long ago that the idea of working from anywhere and at anytime was some form of a distant Utopian (乌托邦式的) dream, and yet now we can perform almost any office-based task from any location in the world as long as we have access to the internet."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "It's time to wake up to the fact that making smart buildings, cities and homes will dramatically improve our quality of life in the years ahead."
+                }
+              ]
+            }
+          ],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2017122-part-3-section-3-group-2-q-51-1",
+              "displayNumber": 51,
+              "sourceQuestionNumber": 51,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What does the example of iPhone 6s serve to show?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The huge capacity of the smartphones people now use."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The widespread use of smartphones all over the world."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The huge impact of new technology on people's everyday life."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The rapid technological progress in a very short period of time."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+                  "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017122-part-3-section-3-group-2-q-52-2",
+              "displayNumber": 52,
+              "sourceQuestionNumber": 52,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What can we expect to see by the year 2020?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Apps for the Internet of Things."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The popularization of smart homes."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The emergence of Millennials."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Total globalization of the world."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+                  "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017122-part-3-section-3-group-2-q-53-3",
+              "displayNumber": 53,
+              "sourceQuestionNumber": 53,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What will business owners do when they become aware of the benefits of the Internet of Things?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Employ fewer workers in their operations."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Gain automatic control of their businesses."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Invest in more smart buildings and cities."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Embrace whatever new technology there is."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+                  "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017122-part-3-section-3-group-2-q-54-4",
+              "displayNumber": 54,
+              "sourceQuestionNumber": 54,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What is the most exciting challenge when we possess more and more data?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "How to turn it to profitable use."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "How to do real time data analysis."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "How to link the actionable systems."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "How to devise new ways to store it."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+                  "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2017122-part-3-section-3-group-2-q-55-5",
+              "displayNumber": 55,
+              "sourceQuestionNumber": 55,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What does the author think about working from anywhere and at anytime?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is feasible with a connection to the internet."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It will thrive in smart buildings, cities and homes."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is still a distant Utopian dream for ordinary workers."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It will deliver tangible benefits to both boss and worker."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+                  "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cet6-paper-2017122-part-4-translation",
+      "title": "Translation 翻译",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet6-paper-2017122-part-4-translation-group",
+          "title": "翻译题",
+          "presentation": "writing",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2017122-part-4-q-1-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "translation",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "青海湖位于海拔3,205米、青海省省会西宁以西约100公里处，是中国最大的咸水湖，面积4,317平方公里，最深处25.5米。有23条河注入湖中，其中大部分是季节性的。百分之八十的湖水源于五条主要河流。青海湖位于跨越亚洲的几条候鸟迁徙路线的交叉处。许多鸟类把青海湖作为迁徙过程中的暂息地。湖的西侧是著名的“鸟岛”，吸引着来自世界各地的观鸟者。每年夏天，游客们也来这里观看国际自行车比赛。"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+                  "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "assetRefs": [],
+  "sourceRefs": [
+    {
+      "sourceDocumentId": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+      "relativePath": "2017年12月六级真题（第2套）.docx；2017.12英语六级考试第2套解析.pdf",
+      "sha256": "4ddbeaa0f7fa5128f60ea283d7967598ba7bab62fc87cb62afec78d3935479f5",
+      "locator": {},
+      "extractionMethod": "manual-review",
+      "confidence": 0.86
+    }
+  ],
+  "quality": {
+    "structureStatus": "approved",
+    "structureConfidence": 0.86,
+    "issueCount": 0,
+    "issues": []
+  }
+}

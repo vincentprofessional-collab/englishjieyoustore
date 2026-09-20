@@ -1,0 +1,4577 @@
+{
+  "schemaVersion": 2,
+  "id": "cet6-paper-2020122",
+  "kind": "paper",
+  "title": "2020年12月大学英语六级真题 · 第2套",
+  "year": "2020",
+  "region": "全国",
+  "variant": "第2套",
+  "submissionMode": "whole-paper",
+  "instructions": [
+    {
+      "type": "notice",
+      "tone": "info",
+      "text": "按原卷分区作答。提交整卷后显示可用答案与原资料参考内容。"
+    }
+  ],
+  "sections": [
+    {
+      "id": "cet6-paper-2020122-part-1-writing",
+      "title": "Writing 写作",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet6-paper-2020122-part-1-writing-group",
+          "title": "写作题",
+          "presentation": "writing",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2020122-part-1-q-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "essay",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cet6-paper-2020122-part-2",
+      "title": "Part II                 Listening Comprehension           (30 minutes)",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet6-paper-2020122-part-2-section-1-group-1",
+          "title": "Questions 1 to 4 are based on the conversation you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2020122-part-2-section-1-group-1-q-1-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "A driving test."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Traffic routes."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "A video game."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Cargo logistics."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2020122-part-2-section-1-group-1-q-2-2",
+              "displayNumber": 2,
+              "sourceQuestionNumber": 2,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "He found it instructive and realistic."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "He bought it when touring Europe."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "He was really drawn to its other versions."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "He introduced it to his brother last year."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2020122-part-2-section-1-group-1-q-3-3",
+              "displayNumber": 3,
+              "sourceQuestionNumber": 3,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Traveling all over the country."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Driving from one city to another."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The details in the driving simulator."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The key role of the logistics industry."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "I"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2020122-part-2-section-1-group-1-q-4-4",
+              "displayNumber": 4,
+              "sourceQuestionNumber": 4,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Clearer road signs."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "More people driving safely."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Stricter traffic rules."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "More self-driving trucks on the road."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2020122-part-2-section-1-group-2",
+          "title": "Questions 5 to 8 are based on the conversation you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2020122-part-2-section-1-group-2-q-5-1",
+              "displayNumber": 5,
+              "sourceQuestionNumber": 5,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It isn’t so enjoyable as he expected."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It isn’t so motivating as he believed."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It doesn’t enable him to earn as much money as he used to."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It doesn’t seem to offer as much freedom as he anticipated."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2020122-part-2-section-1-group-2-q-6-2",
+              "displayNumber": 6,
+              "sourceQuestionNumber": 6,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Not all of them care about their employees’ behaviors."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Few of them are aware of their employees’ feelings."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Few of them offer praise and reward to their employees."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Not all of them know how to motivate their employees."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2020122-part-2-section-1-group-2-q-7-3",
+              "displayNumber": 7,
+              "sourceQuestionNumber": 7,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Job satisfaction."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Autonomy."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Self-awareness."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Money."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2020122-part-2-section-1-group-2-q-8-4",
+              "displayNumber": 8,
+              "sourceQuestionNumber": 8,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The importance of cultivating close relationships with clients."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The need for getting recommendations from their managers."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The advantages of permanent full-time employment."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The way to explore employees’ interests and talents."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2020122-part-2-section-2-group-1",
+          "title": "Questions 9 to 11 are based on the passage you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2020122-part-2-section-2-group-1-q-9-1",
+              "displayNumber": 9,
+              "sourceQuestionNumber": 9,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Consumers visualize their activities in different weather."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Good weather triggers consumers’ desire to go shopping."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "weather conditions influence consumers’ buying behavior."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Consumers’ mental states change with the prices of goods."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2020122-part-2-section-2-group-1-q-10-2",
+              "displayNumber": 10,
+              "sourceQuestionNumber": 10,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Active consumption."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Individual association."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Direct correlation."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Mental visualization."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2020122-part-2-section-2-group-1-q-11-3",
+              "displayNumber": 11,
+              "sourceQuestionNumber": 11,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Enabling them to simplify their mathematical formulas."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Helping them determine what to sell and at what price."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Enabling them to sell their products at a higher price."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Helping them advertise a greater variety of products."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2020122-part-2-section-2-group-2",
+          "title": "Questions 12 to 15 are based on the passage you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2020122-part-2-section-2-group-2-q-12-1",
+              "displayNumber": 12,
+              "sourceQuestionNumber": 12,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "A naturally ventilated office is more comfortable."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "A cool office will boost employees’ productivity."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Office air-conditioning should follow guidebooks."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Air-conditioning improves ventilation in the office."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2020122-part-2-section-2-group-2-q-13-2",
+              "displayNumber": 13,
+              "sourceQuestionNumber": 13,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "People in their comfort zone of temperature are more satisfied with their productivity."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "People in different countries vary in their tolerance to uncomfortable temperatures."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Twenty-two degrees is the optimal temperature for office workers."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "There is a range of temperatures for people to feel comfortable."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2020122-part-2-section-2-group-2-q-14-3",
+              "displayNumber": 14,
+              "sourceQuestionNumber": 14,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It will have no negative impact on work."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It will be immediately noticeable."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It will sharply decrease work efficiency."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It will cause a lot of discomfort."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2020122-part-2-section-2-group-2-q-15-4",
+              "displayNumber": 15,
+              "sourceQuestionNumber": 15,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They tend to favor lower temperatures."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They suffer from rapid temperature changes."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are not bothered by temperature extremes."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They become less sensitive to high temperatures."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2020122-part-2-section-3-group-1",
+          "title": "Questions 16 to 18 are based on the recording you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2020122-part-2-section-3-group-1-q-16-1",
+              "displayNumber": 16,
+              "sourceQuestionNumber": 16,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It overlooked the possibility that emotions may be controlled."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It ignored the fact that emotions are personal and subjective."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It classified emotions simply as either positive or negative."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It measured positive and negative emotions independently."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2020122-part-2-section-3-group-1-q-17-2",
+              "displayNumber": 17,
+              "sourceQuestionNumber": 17,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Sitting alone without doing anything seemed really distressing."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Solitude adversely affected the participants’ mental well-being."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Sitting alone for 15 minutes made the participants restless."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Solitude had a reductive effect on high-arousal emotions."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2020122-part-2-section-3-group-1-q-18-3",
+              "displayNumber": 18,
+              "sourceQuestionNumber": 18,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It proved hard to depict objectively."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It went hand in hand with sadness."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It helped increase low-arousal emotions."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It tended to intensify negative emotions."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2020122-part-2-section-3-group-2",
+          "title": "Questions 19 to 22 are based on the recording you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2020122-part-2-section-3-group-2-q-19-1",
+              "displayNumber": 19,
+              "sourceQuestionNumber": 19,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It uses up much less energy than it does in deep thinking."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It remains inactive without burning calories noticeably."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It continues to burn up calories to help us stay in shape."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It consumes almost a quarter of the body’s total energy."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2020122-part-2-section-3-group-2-q-20-2",
+              "displayNumber": 20,
+              "sourceQuestionNumber": 20,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Much of the consumption has nothing to do with conscious activities."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It has something to do with the difficulty of the activities in question."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Energy usage devoted to active learning accounts for a big part of it."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "A significant amount of it is for performing difficult cognitive tasks."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2020122-part-2-section-3-group-2-q-21-3",
+              "displayNumber": 21,
+              "sourceQuestionNumber": 21,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is believed to remain basically constant."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is a prerequisite for any mental activity."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is conducive to relieving mental exhaustion."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is thought to be related to food consumption."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2020122-part-2-section-3-group-3",
+          "title": "Questions 23 to 25 are based on the recording you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2020122-part-2-section-3-group-3-q-22-1",
+              "displayNumber": 22,
+              "sourceQuestionNumber": 22,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Job candidates rarely take it seriously."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Job seekers tend to have a ready answer."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Job seekers often feel at a loss where to start in answering it."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Job candidates can respond freely due to its open-ended nature."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2020122-part-2-section-3-group-3-q-23-2",
+              "displayNumber": 23,
+              "sourceQuestionNumber": 23,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Follow their career coaches’ guidelines."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Strive to take control of their narrative."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Do their best to impress the interviewer."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Repeat the information on their resume."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2020122-part-2-section-3-group-3-q-24-3",
+              "displayNumber": 24,
+              "sourceQuestionNumber": 24,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To reflect on their past achievements as well as failures."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To produce examples for different interview questions."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To discuss important details they are going to present."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To identify a broad general strength to elaborate on."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2020122-part-2-section-3-group-3-q-25-4",
+              "displayNumber": 25,
+              "sourceQuestionNumber": 25,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Getting acquainted with the human resources personnel."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Finding out why the company provides the job opening."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Figuring out what benefits the company is able to offer them."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Tailoring their expectations to the company’s long-term goal."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cet6-paper-2020122-part-3",
+      "title": "Part III          Reading Comprehension                  (40 minutes)",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet6-paper-2020122-part-3-section-2-group-1",
+          "title": "题目",
+          "presentation": "reading",
+          "instructions": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Slow Hope"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "A) Our world is full of—mostly untold—stories of slow hope, driven by the idea that change is possible. They are ‘slow’ in their unfolding, and they are slow because they come with setbacks."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "B) At the beginning of time—so goes the myth—humans suffered, shivering in the cold and dark until the titan (巨人)Prometheus stole fire from the gods. Just as in the myth, technology—first fire and stone tools, and later farming, the steam engine and industry, fossil fuels, chemicals and nuclear power—has allowed us to alter and control the natural world. The myth also reminds us that these advances have come at a price: as a punishment for Prometheus’ crime, the gods created Pandora, and they gave her a box filled with evils and curses. When Pandora’s box was opened, it unleashed swarms of diseases and disasters upon humankind."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "C) Today we can no longer ignore the ecological curses that we have released in our search for warmth and comfort. In engineering and exploiting and transforming our habitat, we have opened tens of thousands of Pandora’s boxes. In recent decades, environmental threats have expanded beyond regional boundaries to have global reach and, most hauntingly, are multiplying at a dizzying rate. On a regular basis, we are reminded that we are running out of time. Year after year, faster and faster, consumption outpaces the biological capacity of our planet. Stories of accelerated catastrophe multiply. We fear the breakdown of the electric grid, the end of non-renewable resources, the expansion of deserts, the loss of islands, and the pollution of our air and water."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "D) Acceleration is the signature of our time. Populations and economic activity grew slowly for much of human history. For thousands of years and well into early modern times, world economies saw no growth at all, but from around the mid-19th century and again, in particular, since the mid-20th, the real GDP has increased at an enormous speed, and so has human consumption. In the Middle Ages, households in Central Europe might have owned fewer than 30 objects on average; in 1900, this number had increased to 400, and in 2020 to 15,000. The acceleration of human production, consumption and travel has changed the animate and inanimate spheres. It has echoed through natural processes on which humans depend. Species extinction, deforestation, damming of rivers, occurrence of floods, the depletion of ozone, the degradation of ocean systems and many other areas are all experiencing acceleration. If represented graphically, the curve for all these changes looks rather like that well-known hockey stick: with little change over millennia (数千年) and a dramatic upswing over the past decades."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "E) Some of today’s narratives about the future seem to suggest that we too, like Prometheus, will be saved by a new Hercules, a divine engineer, someone who will mastermind, manoeuvre and manipulate our planet. They suggest that geoengineering, cold fusion or faster-than-light spaceships might transcend once and for all the terrestrial constraints of rising temperatures, lack of energy, scarcity of food, lack of space, mountains of waste, polluted water—you name it."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "F) Yet, if we envisage our salvation to come from a deus ex machina (解围之神)，from a divine engineer or a tech solutionist who will miraculously conjure up a new source of energy or another cure-all with revolutionary potency, we might be looking in the wrong place. The fact that we now imagine our planet as a whole does not mean that the ‘rescue’ of our planet will come with one big global stroke of genius and technology. It will more likely come by many small acts. Global heating and environmental degradation are not technological problems. They are highly political issues that are informed by powerful interests. Moreover, if history is a guide, then we can assume that any major transformations will once again be followed by a huge set of unintended consequences. So what do we do?"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "G) This much is clear: we need to find ways that help us flatten the hockey-stick curves that reflect our ever-faster pace of ecological destruction and social acceleration. If we acknowledge that human manipulation of the Earth has been a destructive force, we can also imagine that human endeavours can help us build a less destructive world in the centuries to come. We might keep making mistakes. But we will also keep learning from our mistakes."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "H) To counter the fears of disaster, we need to identify stories, visions and actions that work quietly towards a more hopeful future. Instead of one big narrative, a story of unexpected rescue by a larger-than-life hero, we need multiple stories: we need stories, not only of what Rob Nixon of Princeton University has called the ‘slow violence’ of environmental degradation (that is, the damage that is often invisible at first and develops slowly and gradually), but also stories of what I call ‘slow hope’."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "I) We need an acknowledgement of our present ecological plight but also a language of positive change, visions of a better future. In The Principle of Hope (1954-1959), Ernst Bloch, one of the leading philosophers of the future, wrote that ‘the most tragic form of loss...is the loss of the capacity to imagine that things could be different’. We need to identify visions and paths that will help us imagine a different, more just and more ecological world. Hope, for Bloch, has its starting point in fear, in uncertainty, and in crisis: it is a creative force that goes hand in hand with utopian (乌托邦的)‘wishful images’. It can be found in cultural products of the past — in fairy tales, in fiction, in architecture, in music, in the movie — in products of the human mind that contain ‘the outlines of a better world’. What makes us ‘authentic’ as humans are visions of our ‘potential’. In other words: living in hope makes us human."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "J) The power of small, grassroots movements to make changes that spread beyond their place of"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "origin can be seen with the Slow Food movement, which began in Italy in the 1980s. The rise of fast-food restaurants after the Second World War produced a society full of cheap, industrially made foodstuffs. Under the leadership of Carlo Petrini, the Slow Food movement began in Piedmont, a region of Italy with a long history of poverty, violence and resistance to oppression. The movement transformed it into a region hospitable to traditional food cultures — based on native plants and breeds of animals. Today, Slow Food operates in more than 160 countries, poor and rich. It has given rise to thousands of projects around the globe, representing democratic politics, food sovereignty, biodiversity and sustainable agriculture."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "K) The unscrupulous (无所顾忌的)commodification of food and the destruction of foodstuffs will continue to devastate soils, livelihoods and ecologies. Slow Food cannot undo the irresistible developments of the global food economy, but it can upset its theorists, it can‘speak differently’, and it can allow people and their local food traditions and environments to flourish. Even in the United States—the fast-food nation—small farms and urban gardens are on the rise. The US Department of Agriculture provides an Urban Agriculture Toolkit and, according to a recent report, American millennials (千禧一代)are changing their diets. In 2017, 6 per cent of US consumers claimed to be strictly vegetarian, up from 1 per cent in 2014. As more people realise that ‘eating is an agricultural act’, as the US poet and environmental activist Wendell Berry put it in 1989, slow hope advances."
+                }
+              ]
+            }
+          ],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2020122-part-3-section-2-group-1-q-36-1",
+              "displayNumber": 36,
+              "sourceQuestionNumber": 36,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "It seems some people today dream that a cutting-edge new technology might save them from the present ecological disaster."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2020122-part-3-section-2-group-1-q-37-2",
+              "displayNumber": 37,
+              "sourceQuestionNumber": 37,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "According to one great thinker, it is most unfortunate if we lose the ability to think differently."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2020122-part-3-section-2-group-1-q-38-3",
+              "displayNumber": 38,
+              "sourceQuestionNumber": 38,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Urgent attention should be paid to the ecological problems we have created in our pursuit of a comfortable life."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2020122-part-3-section-2-group-1-q-39-4",
+              "displayNumber": 39,
+              "sourceQuestionNumber": 39,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Even in the fast-food nation America, the number of vegetarians is on the rise."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2020122-part-3-section-2-group-1-q-40-5",
+              "displayNumber": 40,
+              "sourceQuestionNumber": 40,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "The deterioration of the ecological system is accelerating because of the dramatic increase of human production and consumption."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2020122-part-3-section-2-group-1-q-41-6",
+              "displayNumber": 41,
+              "sourceQuestionNumber": 41,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "It is obvious that solutions must be found to curb the fast worsening environment and social acceleration."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2020122-part-3-section-2-group-1-q-42-7",
+              "displayNumber": 42,
+              "sourceQuestionNumber": 42,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Many people believe changing the world is possible, though it may take time and involve setbacks."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2020122-part-3-section-2-group-1-q-43-8",
+              "displayNumber": 43,
+              "sourceQuestionNumber": 43,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "It might be wrong to expect that our world would be saved at one stroke with some miraculous technology."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2020122-part-3-section-2-group-1-q-44-9",
+              "displayNumber": 44,
+              "sourceQuestionNumber": 44,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "It is human nature to cherish hopes for a better world."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2020122-part-3-section-2-group-1-q-45-10",
+              "displayNumber": 45,
+              "sourceQuestionNumber": 45,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Technology has given us humans the power to change the natural world, but we have paid a price for the change."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2020122-part-3-section-3-group-1",
+          "title": "Questions 46 to 50 are based on the following passage.",
+          "presentation": "reading",
+          "instructions": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Vegetarians would prefer not to be compelled to eat meat. Yet the reverse compulsion (强迫)is hidden in the proposals for a new plant-based “planetary diet.” Nowhere is this more visible than in India."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Earlier this year, the EAT-Lancet Commission released its global report on nutrition and called for a global shift to a more plant-based diet and for “substantially reducing consumption of animal source foods.” In countries like India, that call could become a tool to aggravate an already tense political situation and stress already undernourished populations."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "The EAT report presumes that “traditional diets” in countries like India include little red meat, which might be consumed only on special occasions or as minor ingredients in mixed dishes."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "In India, however, there is a vast difference between what people would wish to consume and what they have to consume because of innumerable barriers around class, religion, culture, cost, geography, etc. Policymakers in India have traditionally pushed for a cereal-heavy “vegetarian diet” on a meat-eating population as a way of providing the cheapest sources of food."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Currently, under an aggressive Hindu nationalist government, Muslims, Christians, disadvantaged classes and indigenous communities are being compelled to give up their traditional foods."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "None of these concerns seem to have been appreciated by the EAT-Lancet Commission’s representative, Brent Loken, who said “India has got such a great example” in sourcing protein from plants."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "But how much of a model for the world is India’s vegetarianism? In the Global Hunger Index 2019, the country ranks 102nd out of 117. Data from the National Family Health Survey indicate that only 10 percent of infants of 6 to 23 months are adequately fed."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Which is why calls for a plant-based diet modeled on India risk offering another whip with which to beat already vulnerable communities in developing countries."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "A diet directed at the affluent West fails to recognize that in low-income countries undernourished children are known to benefit from the consumption of milk and other animal source foods, improving cognitive functions, while reducing the prevalence of nutritional deficiencies as well as mortality."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "EAT-Lancet claimed its intention was to “spark conversations” among all Indian stakeholders. Yet vocal critics of the food processing industry and food fortification strategies have been left out of the debate. But the most conspicuous omission may well be the absence of India’s farmers."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "The government, however, seems to have given the report a thumbs-up. Rather than addressing chronic hunger and malnutrition through an improved access to wholesome and nutrient-dense foods, the government is opening the door for company-dependent solutions, ignoring the environmental and economic cost, which will destroy local food systems. It’s a model full of danger for future generations."
+                }
+              ]
+            }
+          ],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2020122-part-3-section-3-group-1-q-46-1",
+              "displayNumber": 46,
+              "sourceQuestionNumber": 46,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What is more visible in India than anywhere else according to the passage?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "People’s positive views on the proposals for a “planetary diet”."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "People’s reluctance to be compelled to eat plant-based food."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "People’s preferences for the kind of food they consume."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "People’s unwillingness to give up their eating habits."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2020122-part-3-section-3-group-1-q-47-2",
+              "displayNumber": 47,
+              "sourceQuestionNumber": 47,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What would the EAT-Lancet Commission’s report do to many people in countries like India?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Radically change their dietary habits."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Keep them further away from politics."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Make them even more undernourished."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Substantially reduce their food choices."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2020122-part-3-section-3-group-1-q-48-3",
+              "displayNumber": 48,
+              "sourceQuestionNumber": 48,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What do we learn from the passage about food consumption in India?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "People’s diet will not change due to the EAT-Lancet report."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Many people simply do not have access to foods they prefer."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "There is a growing popularity of a cereal-heavy vegetarian diet."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Policymakers help remove the barriers to people’s choice of food."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2020122-part-3-section-3-group-1-q-49-4",
+              "displayNumber": 49,
+              "sourceQuestionNumber": 49,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What does the passage say about a plant-based diet modeled on India?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It may benefit populations whose traditional diet is meat-based."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It may be another blow to the economy in developing countries."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It may help narrow the gap between the rich and poor countries."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It may worsen the nourishment problem in low-income countries."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2020122-part-3-section-3-group-1-q-50-5",
+              "displayNumber": 50,
+              "sourceQuestionNumber": 50,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "How does the Indian government respond to the EAT-Lancet Commission’s proposals?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It accepts them at the expense of the long-term interests of its people."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It intends them to spark conversations among all Indian stakeholders."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It gives them approval regardless of opposition from nutrition experts."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It welcomes them as a tool to address chronic hunger and malnutrition. Passage Two"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2020122-part-3-section-3-group-2",
+          "title": "Questions 51 to 55 are based on the following passage.",
+          "presentation": "reading",
+          "instructions": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Back in 1964, in his book Games People Play, psychiatrist Eric Berne described a pattern of conversation he called “ Why Don’t You——Yes But”，which remains one of the most irritating aspects"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "of everyday social life. The person adopting the strategy is usually a chronic complainer. Something is terrible about their relationship, job, or other situation, and they moan about it ceaselessly, but find some excuse to dismiss any solution that’s proposed. The reason, of course, is that on some level they don’t want a solution; they want to be validated in their position that the world is out to get them. If they can  “win” the game—dismissing every suggestion until their interlocutor(对话者)gives up in annoyance—they get to feel pleasurably righteous (正当的)in their resentments and excused from any obligation to change."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Part of the trouble here is the so-called responsibility/fault fallacy (谬误). When you’re feeling hard done by—taken for granted by your partner, say, or obliged to work for a half-witted boss—it’s easy to become attached to the position that it’s not your job to address the matter, and that doing so would be an admission of fault. But there’s a confusion here. For example, if I were to discover a newborn at my front door, it wouldn’t be my fault, but it most certainly would be my responsibility. There would be choices to make, and no possibility of avoiding them, since trying to ignore the matter would be a choice. The point is that what goes for the baby on the doorstep is true in all cases: even if the other person is 100% in the wrong, there’s nothing to be gained, long-term, from using this as a justification to evade responsibility."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Should you find yourself on the receiving end of this kind of complaining, there’s an ingenious way to shut it down—which is to agree with it, ardently. Psychotherapist Lori Gottlieb describes this as “ over-validation ”. For one thing, you’ll be spared further moaning, since the other person’s motivation was to confirm her beliefs, and now you’re confirming them. But for another, as Gottlieb notes, people confronted with over-validation often hear their complaints afresh and start arguing back. The notion that they’re utterly powerless suddenly seems unrealistic—not to mention rather annoying—so they’re prompted instead to generate ideas about how they might change things."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "“And then, sometimes, something magical might happen,” Gottlieb writes. The other person “might realise she’s not as trapped as you are saying she is, or as she feels.” Which illustrates the irony of the responsibility/fault fallacy: evading responsibility feels comfortable, but turns out to be a prison; whereas assuming responsibility feels unpleasant, but ends up being freeing."
+                }
+              ]
+            }
+          ],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2020122-part-3-section-3-group-2-q-51-1",
+              "displayNumber": 51,
+              "sourceQuestionNumber": 51,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What is characteristic of a chronic complainer, according to psychiatrist Eric Berne?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They only feel angry about their ill treatment and resent whoever tries to help."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are chronically unhappy and ceaselessly find fault with people around them."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They constantly dismiss others，proposals while taking no responsibility for tackling the problem."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They lack the knowledge and basic skills required for successful conversations with their interlocutors."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2020122-part-3-section-3-group-2-q-52-2",
+              "displayNumber": 52,
+              "sourceQuestionNumber": 52,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What does the author try to illustrate with the example of the newborn on one’s doorstep?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "People tend to think that one should not be held responsible for others’ mistakes."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is easy to become attached to the position of overlooking one’s own fault."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "People are often at a loss when confronted with a number of choices."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "A distinction should be drawn between responsibility and fault."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2020122-part-3-section-3-group-2-q-53-3",
+              "displayNumber": 53,
+              "sourceQuestionNumber": 53,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What does the author advise people to do to chronic complainers?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Stop them from going further by agreeing with them."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Listen to their complaints ardently and sympathetically."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Ask them to validate their beliefs with further evidence."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Persuade them to clarify the confusion they have caused."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2020122-part-3-section-3-group-2-q-54-4",
+              "displayNumber": 54,
+              "sourceQuestionNumber": 54,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What happens when chronic complainers receive over-validation?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are motivated to find ingenious ways to persuade their interlocutor."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are prompted to come up with ideas for making possible changes."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are stimulated to make more complaints."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are encouraged to start arguing back."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2020122-part-3-section-3-group-2-q-55-5",
+              "displayNumber": 55,
+              "sourceQuestionNumber": 55,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "How can one stop being a chronic complainer according to the author?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Analysing the so-called responsibility/fault fallacy."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Avoiding hazardous traps in everyday social life."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Assuming responsibility to free oneself."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Awaiting something magical to happen."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cet6-paper-2020122-part-4-translation",
+      "title": "Translation 翻译",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet6-paper-2020122-part-4-translation-group",
+          "title": "翻译题",
+          "presentation": "writing",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2020122-part-4-q-1-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "translation",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "B\t\t2. A\t\t3.C\t\t4. B\t\t5. D\t\t6. D\t\t7. C\t\t8. A Section B"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": "第一句中的第一小句描述桥梁 的 特 征,为 次 要 说 明 信 息;第 二 小 句 对 桥 梁 作 出 评 价,应 为 全 句 语 义 重 点,故将第二小 句 确 定 为 句 子 的 主 句 或 主 干。 第 二 小 句 “是 …… 工 程 壮 举 ”可 对 应 译 为 系 表 结 构 i                             sa remarkable/ma rvelousfe atofengineeri ngi nCh i na。第一小句中的“全长55 公里”有两种译法:(                        1)处理为后置 定语,译为分词短语 spann         ing55k ilometers、介词短语 wi      that  ot all engtho  f55k ilome t e s,或定语从 句 wh r                 ich spans/ste rtches...、( wh ichis)...long/inlengt h;(2)处理为前置定语,译为 55              -k ilome ter- long。"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2020122-part-4-q-9-2",
+              "displayNumber": 9,
+              "sourceQuestionNumber": 9,
+              "type": "translation",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "C\t\t10. D\t11. B\t12. B\t13. D\t14. A\t15. A Section C"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": "A)Con sumersvis ual izethei racti vit iesindif fere ntwe ather.   A)消费者会设想他们在不同天气下的活动。 􀪋􀪋􀪋􀪋􀪋􀪋 B)Go o dwe  a thertr igger sc ons ume r s􀆳desi ret ogos h o  i ppng. B)好天气会激发消费者的购物欲望。 C)We athercond it ionsinf luenc ec onsumers 􀆳bu i yngb ehav ior. C)天气情况会影响消费者的购买行为。 D)Consume rs 􀆳me nt alstat esc a hngew it ht hepri cesofg oods. D)消费者的心理状态随商品价格的变化而变化。 [预测]选项均为带有结论性质的陈述句,结合 听 力 篇 章 常 见 类 型 “研 究 说 明 型 文 章”可 初 步 推 测 题 目 询 问 某 项研究 的 发 现/结 论,再 结 合 复 现 词 Consume        rs/consume s、we r   a the r/We athe r以及因果逻辑词t rigge rs、 i nfl uenc 、 echange   可推知该研究涉及消费者(           的行为/    心态)  与天气情况的关系。 [问题]Wha   tdowel earnaboutthefindingsofthenews  tudy? (关于这项新研究的发现,我们能了解到什么?) [解析]题干 +C 契合首段信息“一项新研究揭示了晴天和雪天是如何影响消费者行为的”。"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2020122-part-4-q-16-3",
+              "displayNumber": 16,
+              "sourceQuestionNumber": 16,
+              "type": "translation",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "C\t17. D\t18. C\t19. D\t20. A\t21. A\t22. C\t23. D\t24. B \t25. B Part Ⅲ  Reading Comprehension Section  A"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": "A)Itov erloo kedthep oss ibil it yt hatemo t ionsma yb econtr oll e d. A)它们忽视了情绪能被控制的可能性。 􀪋􀪋􀪋􀪋􀪋􀪋 ) BItignor edt hef actthatemo ti o nsareperson ala ndsubjec tive. B)   它们忽视了情绪是个人的、   主观的。 ) CItclass if iedemotionssimp l ya se i therposi tiveorn egat iv        ) e. C 它们将情绪简单地分为积极和消极两种。 D)Itmeasure dpo s it ivea ndn egati veemo ti onsi ndepend ently. D)它们单独衡量积极和消极情绪。 [预测]根据各项谓语动词“忽视(可能性/事实)”“分类”“测量”及复现词 emo                          ti ons可推测 I t指代与情绪相关的 心理学研究/实验,又因 o      v erlooked、ignord、 e simplya s...均含贬义,推测本题询问该研究/实验的不足之处。 [问题]Wha  tisoneoft hecritic ismsd irectedatt hee a rlyresea r chons  o liude? (以下哪项是早期关于独处的 t 研究所受到的一种批评?) [解析]C 项是对第二段 ② 句i       tc ategori zedemo tionsa ssimplypo  s iti veornega t ive的同义转述,正确。"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2020122-part-4-q-26-4",
+              "displayNumber": 26,
+              "sourceQuestionNumber": 26,
+              "type": "translation",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "N\t27.\tI\t28.\tF\t29.\tJ\t30.\tG\t31.\tD\t32.\tB\t33.\tH\t34.\tM\t35.\tE Section B"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": "N)vacancy。[确定词性]空格词位于a            r eexpe r iencing(谓语)和r    ates之间,应为r    ates的修饰限定成分,可 能是形容词、名词、       - e d 分词或-  ng分词。[锁定答案]空格句指出,旧金山酒店 现在 正在 经历 70%~ 80% i 的       率。结合上文“疫情暴发浇灭 了 美 国 人 的 旅 行 愿 望”“美 铁 订 票 量 下 降/退 票 量 上 升”可 知,空 格 句应意在说明“旅游业萧条导致酒店经营惨淡”,再结合 70and80pe                          r c ent这一 较高 占比 可知空 格词 应传 递“空房/退订/下滑/亏损”等负面语义,故 N 正确。"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2020122-part-4-q-36-5",
+              "displayNumber": 36,
+              "sourceQuestionNumber": 36,
+              "type": "translation",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "E\t37.\tI\t38.\tC\t39.\tK\t40.\tD\t41.\tG\t42.\tA\t43.\tF\t44.\tI\t45.\tB Section C"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": " Its eemss omepeopl et odaydr eam t hatac utt ing-e dgenew 如今,有 些 人 似 乎 幻 想 着 能 有 一 项 尖 端 technology mi ghtsave them f rom the p resente coog l i ca􀪋􀪋􀪋􀪋􀪋 l 新技术将他们 从 当 前 的 生 态 灾 难 中 拯 救 disaste r.                                           出来。 [答案]E [精解]由定位词定位 至 E 段(         acutt ing-edgenewt e chnol ogy 可 看 作 ge oengi neering,c oldf usi on orf aster- than-l igh tspac eshi ps  的上义词) ,该段介绍当下某些       人 的 技 术 拯 救 论“地 球 工 程、 超 光 速飞船等技术 能拯救人类,助其摆脱全球变暖等种种问题”。试题是对该段内容的同义概括。"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2020122-part-4-q-46-6",
+              "displayNumber": 46,
+              "sourceQuestionNumber": 46,
+              "type": "translation",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "B\t47.\tC\t48.\tB\t49.\tD\t50.\tA\t51.\tC\t52.\tD\t53.\tA\t54.\tB\t55.\tC Part Ⅳ Translation 见"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": "根据文章所述,什么事情在印度比在其他国家更明显? A)人们对“行星饮食”倡议的积极看法。                 C)人们对其摄入的食物种类的偏好。 B)人们不愿被迫食用植物性食品。                    D)人们不愿放弃自己的饮食习惯。 [锁定答案]首段末句指出,这一点(       thi s )在印度最为明显。  th is回指前一句中t      hereve rsec ompulson,即与首 i 句“强迫素食者吃肉”相反的“强迫肉食者吃素”,可见 B 正确。 [排除干扰]文中未明确提及人们对“行星饮食”倡议的看法,只谈及作者 的看 法“有 强迫 人们吃 素之 意”,                      A错 误。C 利用首句中 p refer一词设置干扰,      但它的对象为“  被他人强迫吃肉的行       为” ,并非“ 自己   所摄入   的食 物种 。 类” D 利用首句中 pr efernott obec ompe l ledtoet设置干扰,但它实指“不愿被迫改变自己的饮食习惯”,并 a 不等于“主动放弃自己的饮食习惯”       。此外,  C D 两项均非题干所问“印度的突出之处”。 、"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+                  "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "assetRefs": [],
+  "sourceRefs": [
+    {
+      "sourceDocumentId": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+      "relativePath": "2020年12月六级真题（第2套）.docx；2020.12英语六级考试第2套解析.pdf",
+      "sha256": "eef6c9b7ec4bf2582192ee05ef5bcfa78a09cf33c6c31fb79b712ca799cafea0",
+      "locator": {},
+      "extractionMethod": "manual-review",
+      "confidence": 0.86
+    }
+  ],
+  "quality": {
+    "structureStatus": "approved",
+    "structureConfidence": 0.86,
+    "issueCount": 0,
+    "issues": []
+  }
+}

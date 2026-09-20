@@ -1,0 +1,4722 @@
+{
+  "schemaVersion": 2,
+  "id": "cet6-paper-2019122",
+  "kind": "paper",
+  "title": "2019年12月大学英语六级真题 · 第2套",
+  "year": "2019",
+  "region": "全国",
+  "variant": "第2套",
+  "submissionMode": "whole-paper",
+  "instructions": [
+    {
+      "type": "notice",
+      "tone": "info",
+      "text": "按原卷分区作答。提交整卷后显示可用答案与原资料参考内容。"
+    }
+  ],
+  "sections": [
+    {
+      "id": "cet6-paper-2019122-part-1-writing",
+      "title": "Writing 写作",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet6-paper-2019122-part-1-writing-group",
+          "title": "写作题",
+          "presentation": "writing",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019122-part-1-q-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "essay",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cet6-paper-2019122-part-2",
+      "title": "Part II         Listening Comprehension       (30 minutes)",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet6-paper-2019122-part-2-section-1-group-1",
+          "title": "题目",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019122-part-2-section-1-group-1-q-1-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It focuses exclusively on jazz."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It sponsors major jazz concerts."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It has several branches in London."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It displays albums by new music talents."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019122-part-2-section-1-group-1-q-2-2",
+              "displayNumber": 2,
+              "sourceQuestionNumber": 2,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It originated with cowboys."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Its market has now shrunk."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Its listeners are mostly young people."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It remains as widespread as hip hop music."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019122-part-2-section-1-group-1-q-3-3",
+              "displayNumber": 3,
+              "sourceQuestionNumber": 3,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Its definition is varied and complicated."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is still going through experimentation."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is frequently accompanied by singing."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Its style has remained largely unchanged"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019122-part-2-section-1-group-1-q-4-4",
+              "displayNumber": 4,
+              "sourceQuestionNumber": 4,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Learn to play them."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Take music lessons."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Listen to them yourself."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Consul jazz musicians."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2019122-part-2-section-1-group-2",
+          "title": "Questions 5 to 8 are based on the conversation you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019122-part-2-section-1-group-2-q-5-1",
+              "displayNumber": 5,
+              "sourceQuestionNumber": 5,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "She paid her mortgage."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "She called on the man."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "She made a business plan."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "She went to the bank."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019122-part-2-section-1-group-2-q-6-2",
+              "displayNumber": 6,
+              "sourceQuestionNumber": 6,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Her previous debt hadn’t been cleared yet."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Her credit history was considered poor."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "She had apparently asked for too much."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "She didn’t pay her mortgage in time."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019122-part-2-section-1-group-2-q-7-3",
+              "displayNumber": 7,
+              "sourceQuestionNumber": 7,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Pay a debt long overdue"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Buy a piece of property"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Start her own business"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Check her credit history"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019122-part-2-section-1-group-2-q-8-4",
+              "displayNumber": 8,
+              "sourceQuestionNumber": 8,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Seek advice from an expert about fundraising."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Ask for smaller loans from different lenders."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Build up her own finances step by step."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Revise her business proposal carefully."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2019122-part-2-section-2-group-1",
+          "title": "Questions 9 to 11 are based on the passage you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019122-part-2-section-2-group-1-q-9-1",
+              "displayNumber": 9,
+              "sourceQuestionNumber": 9,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is profitable and environmentally friendly."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is well located and completely automated."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is small and unconventional."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is fertile and productive."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019122-part-2-section-2-group-1-q-10-2",
+              "displayNumber": 10,
+              "sourceQuestionNumber": 10,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Their urge to make farming more enjoyable."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Their desire to improve farming equipment."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Their hope to revitalize traditional farming."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Their wish to set a new farming standard."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019122-part-2-section-2-group-1-q-11-3",
+              "displayNumber": 11,
+              "sourceQuestionNumber": 11,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It saves a lot of electricity."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It needs little maintenance."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It causes hardly any pollution."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It loosens soil while weeding."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2019122-part-2-section-2-group-2",
+          "title": "Questions 12 to 15 are based on the passage you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019122-part-2-section-2-group-2-q-12-1",
+              "displayNumber": 12,
+              "sourceQuestionNumber": 12,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It has turned certain insects into a new food source."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It has started on expand business outside the UK."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It has imported some exotic foods from overseas."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It has joined hands with Sainsbury’s to sell pet insects."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019122-part-2-section-2-group-2-q-13-2",
+              "displayNumber": 13,
+              "sourceQuestionNumber": 13,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It was really unforgettable."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It was a pleasant surprise."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It hurt his throat slightly."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It made him feel strange."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019122-part-2-section-2-group-2-q-14-3",
+              "displayNumber": 14,
+              "sourceQuestionNumber": 14,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are more tasty than beef, chicken or pork."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are more nutritious than soups and salads."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They contain more protein than conventional meats."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They will soon gain popularity throughout the world."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019122-part-2-section-2-group-2-q-15-4",
+              "displayNumber": 15,
+              "sourceQuestionNumber": 15,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is environmentally friendly."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is a promising industry."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It requires new technology."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It saves huge amounts of labour."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2019122-part-2-section-3-group-1",
+          "title": "Questions 16 to 18 are based on the recording you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019122-part-2-section-3-group-1-q-16-1",
+              "displayNumber": 16,
+              "sourceQuestionNumber": 16,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To categorize different types of learners."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To find out what students prefer to learn."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To understand the mechanism of the human brain."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To see if they are inherent traits affecting learning."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019122-part-2-section-3-group-1-q-17-2",
+              "displayNumber": 17,
+              "sourceQuestionNumber": 17,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It was defective."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It was misguided."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It was original in design."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It was thought-provoking."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019122-part-2-section-3-group-1-q-18-3",
+              "displayNumber": 18,
+              "sourceQuestionNumber": 18,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Auditory aids are as important as visual aids."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Visual aids are helpful to all types of learners."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Reading plain texts is more effective than viewing pictures."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Scientific concepts are hard to understand without visual app."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2019122-part-2-section-3-group-2",
+          "title": "Questions 19 to 21 are based on the recording you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019122-part-2-section-3-group-2-q-19-1",
+              "displayNumber": 19,
+              "sourceQuestionNumber": 19,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Not playing a role in a workplace revolution."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Not benefiting from free-market capitalism."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Not earning enough money to provide for the family."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Not spending enough time on family life and leisure."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019122-part-2-section-3-group-2-q-20-2",
+              "displayNumber": 20,
+              "sourceQuestionNumber": 20,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "People would be working only fifteen hours a week now."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The balance of power in the workplace would change."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Technological advances would create many new jobs."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Most workers could afford to have house of their own"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019122-part-2-section-3-group-2-q-21-3",
+              "displayNumber": 21,
+              "sourceQuestionNumber": 21,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Loss of workers’ personal dignity."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Deprivation of workers’ creativity."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Deterioration of workers’ mental health."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Unequal distribution of working hours."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2019122-part-2-section-3-group-3",
+          "title": "Questions 22 to 25 are based on the recording you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019122-part-2-section-3-group-3-q-22-1",
+              "displayNumber": 22,
+              "sourceQuestionNumber": 22,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is the worst managed airport in German history."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is now the biggest and busiest airport in Europe."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It has become something of a joke among Germans."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It has become a typical symbol of German efficiency."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019122-part-2-section-3-group-3-q-23-2",
+              "displayNumber": 23,
+              "sourceQuestionNumber": 23,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The city’s airports are outdated."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The city had just been reunified."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The city wanted to boost its economy."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The city wanted to attract more tourists."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019122-part-2-section-3-group-3-q-24-3",
+              "displayNumber": 24,
+              "sourceQuestionNumber": 24,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The municipal government kept changing hands."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The construction firm breached the contract."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Shortage of funding delayed is construction."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Problems of different kinds kept popping up."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019122-part-2-section-3-group-3-q-25-4",
+              "displayNumber": 25,
+              "sourceQuestionNumber": 25,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Tourism industry in Berlin suffers."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "All kinds of equipment gets rusted."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Huge maintenance costs accumulate."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Complaints by local residents increase."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cet6-paper-2019122-part-3",
+      "title": "Part III         Reading Comprehension      (40 minutes)",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet6-paper-2019122-part-3-section-1-group-1",
+          "title": "Questions 26 to 35 are based on the following passage.",
+          "presentation": "cloze",
+          "instructions": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "The persistent haze over many of our cities is a reminder of the polluted air that we breathe. Over 80% of the worlds urban population is breathing air that fails to meet World Health Organisation sidelines, and an estimated 4.5 million people died "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet6-paper-2019122-part-3-section-1-group-1-blank-26"
+                },
+                {
+                  "type": "text",
+                  "text": " from outdoor air pollution in 2015. Globally, urban populations are expected to double in the next 40 years, and an extra 2 billion people will need new places to live, as well as services and ways to move around their cities. What is more important, the decisions that we make now about the design of our cities will "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet6-paper-2019122-part-3-section-1-group-1-blank-27"
+                },
+                {
+                  "type": "text",
+                  "text": " the everyday lives and health of the coming generations. So what would a smog-free, or at least low-pollution, city be like? Traffic has become "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet6-paper-2019122-part-3-section-1-group-1-blank-28"
+                },
+                {
+                  "type": "text",
+                  "text": " with air pollution, and many countries intend to ban the sale of petrol and diesel cars in the next two decades. But simply "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet6-paper-2019122-part-3-section-1-group-1-blank-29"
+                },
+                {
+                  "type": "text",
+                  "text": " to electric cars will not mean pollution-free cities. The level of emissions they cause will depend on how the electricity to run them is "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet6-paper-2019122-part-3-section-1-group-1-blank-30"
+                },
+                {
+                  "type": "text",
+                  "text": ", while brakes, tyres and roads all create tiny airborne "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet6-paper-2019122-part-3-section-1-group-1-blank-31"
+                },
+                {
+                  "type": "text",
+                  "text": " as they wear out. prematurely • simply • switching • synonymous • trend • alternate • crown • determine • generated • locating • merged • miniatures • opting • particles • peak • prematurely • simply • switching • synonymous • trend • alternate • crown • determine • generated • locating • merged • miniatures • opting • particles • peak"
+                }
+              ]
+            }
+          ],
+          "sharedOptions": [],
+          "sharedOptionsReusable": false,
+          "questions": [
+            {
+              "id": "cet6-paper-2019122-part-3-section-1-group-1-q-26",
+              "displayNumber": 26,
+              "sourceQuestionNumber": 26,
+              "type": "shared_option_matching",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2019122-part-3-section-1-group-1-blank-26"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2019122-part-3-section-1-group-1-blank-26",
+                  "label": "第 26 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "K"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019122-part-3-section-1-group-1-q-27",
+              "displayNumber": 27,
+              "sourceQuestionNumber": 27,
+              "type": "shared_option_matching",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2019122-part-3-section-1-group-1-blank-27"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2019122-part-3-section-1-group-1-blank-27",
+                  "label": "第 27 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "C"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019122-part-3-section-1-group-1-q-28",
+              "displayNumber": 28,
+              "sourceQuestionNumber": 28,
+              "type": "shared_option_matching",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2019122-part-3-section-1-group-1-blank-28"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2019122-part-3-section-1-group-1-blank-28",
+                  "label": "第 28 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "N"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019122-part-3-section-1-group-1-q-29",
+              "displayNumber": 29,
+              "sourceQuestionNumber": 29,
+              "type": "shared_option_matching",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2019122-part-3-section-1-group-1-blank-29"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2019122-part-3-section-1-group-1-blank-29",
+                  "label": "第 29 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "M"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019122-part-3-section-1-group-1-q-30",
+              "displayNumber": 30,
+              "sourceQuestionNumber": 30,
+              "type": "shared_option_matching",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2019122-part-3-section-1-group-1-blank-30"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2019122-part-3-section-1-group-1-blank-30",
+                  "label": "第 30 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "D"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019122-part-3-section-1-group-1-q-31",
+              "displayNumber": 31,
+              "sourceQuestionNumber": 31,
+              "type": "shared_option_matching",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2019122-part-3-section-1-group-1-blank-31"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2019122-part-3-section-1-group-1-blank-31",
+                  "label": "第 31 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "I"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2019122-part-3-section-2-group-1",
+          "title": "题目",
+          "presentation": "reading",
+          "instructions": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "How Much Protein Do You Really Need?"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "A) The marketing is enticing: Get stronger muscles and healthier bodies with minimal effort by adding protein powder to your morning shake or juice drink. Or grab a protein bar at lunch or for a quick snack. Today, you can find protein supplements everywhere-online, at the pharmacy grocery store, or health food store. They come in powders, pills, and bars. With more than $12 billion in sales this year, the industry is booming and, according to the market research company, Grand View Research, is on track to sell billions more by 2025. But do we really need all this supplemental protein? It depends. There are pros, cons and some ho-hums to consider."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "B) For starters, protein is critical for every cell in our body. It helps build nails, hair, bones, and muscles. It can also help you feel fuller longer than eating foods without protein. And, unlike nutrients that are found only in a few foods, protein is pretty much ubiquitous. “The typical American diet is a lot higher in protein than a lot of us think,” says registered dietitian Angela Pipitone with Johns Hopkins McKusick-Nathans Institute of Genetic Medicine. She says it's in foods many of us expect, such as beef, chicken, and other types of meat and dairy. But it's also in foods that may not come immediately to mind like vegetables, fruit, beans and grains."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "C) The U.S. government’s recommended daily allowance (RDA) for the average adult is 50 to 60 grams of protein a day. This may sound like a lot, but Pipitone says: “We get bits of protein here and there and that really adds up throughout the day.” Take, for example, breakfast. If you ate two eggs topped with a little bit of cheese and an orange on the side, you already have 22 grams of protein. Each egg gives you 7 grams; the cheese gives you around 6 grams and the orange - about 2 grams. Add a lunch of chicken, rice, and broccoli, and you are already over the recommended 50 grams. “You can get enough protein and meet the RDA before you even get to dinner,” says Pipitone."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "D) So if it’s so easy to get your protein in food, why add more in the form of powders, snack bars or a boost at your local juice bar? No need to, says Pipitone because, in fact, most of us already get enough protein in our diet. “Whole foods are always the best option rather than adding supplements,” she says, noting the FDA does not regulate supplements as stringently as foods or drugs, so there could be less protein, more sugar, and some additives you wouldn’t expect, such as caffeine and even steroids."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "E) If you are considering a supplement, read the list of ingredients, she says although this is not always foolproof. “I’ve seen very expensive protein supplements that claim to be high quality but they might not really be beneficial for the average healthy adult,” she says. “It could just be a waste of money.”"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "F) But there are certain situations that do warrant extra protein. “Anytime you’re in an anabolic state or building muscle,” Pipitone says, such as if you’re an extreme endurance athlete, training for a marathon, or you’re a body builder. If you’re moderately exercising for 150 minutes a week, as the Centers for Disease Control and Prevention recommends, or less than that, you’re probably not an extreme athlete. Extreme athletes expend lots of energy breaking down and repairing and building muscles. Protein can give them the edge they need to speed along that process."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "G) Vegans can benefit from protein supplements since they do not eat animal-based protein sources like meat, dairy, or eggs. And, for someone always on-the-go who may not have time for a meal, a protein snack bar can be a good option for occasional meal replacement. Also, individuals recovering from surgery or an injury can also benefit from extra protein. So, too, can older people. At around age 60, “muscles really start to break down,” says Kathryn Starr, an aging researcher at Duke University School of Medicine, “and because of that, in addition to the fact that as we get older our body's ability to break down protein is reduced, the protein needs of an older adult actually increases.”"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "H) In fact, along with her colleague Connie Bales, Starr recently conducted a small study that found that adding extra protein foods to the diet of obese older individuals who were trying to lose weight strengthened their muscles. Participants in the study were separated into two groups—one group was asked to eat 30 grams of protein per meal in the form of whole foods. That meant they were eating 90 grams of protein a day. The other group—the control group—was put on a typical low-calorie diet with about 50 to 60 grams of protein a day."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "I) After six months, researchers found the high protein group had significantly improved their muscle function —almost twice as much as the control group. “They were able to walk faster, had improved balance, and were also able to get up out of a chair faster than the control group,” Starr says. All 67 participants were over 60 years of age, and both groups lost about the same amount of weight. Starr is now looking into whether high-protein diets also improve the quality of the muscle itself in seniors. She's using CT scans to measure muscle size and fat, and comparing seniors on a high-protein diet to those on regular diets. She says her findings should be available in a couple of months."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "J) In the meantime, 70-year-old Corliss Keith, who was in the high protein group in Starr’s latest study, says she feels a big difference. “I feel excellent,” she says, “I feel like I have a different body, I have more energy, I'm stronger.” She says she is able to take Zumba exercise classes three times a week, work out on the treadmill and take long, brisk walks. Keith also lost more than 15 pounds. “I'm a fashionable person, so now I'm back in my three-inch heels,” she says."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "K) As people age, researcher Starr says muscle strength is key to helping them stay strong and continue living on their own in their own home. “I feel very much alive now,” says Keith, “I feel like I could stay by myself until I'm 100.”"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "L) But can people overdo protein? Pipitone says you do have to be careful. Too much protein can cause nausea, cramps, headaches, fatigue, and bloating. Dehydration is also a risk when you eat too much protein. Pipitone says if you increase protein, you also have to increase your fluid intake. “I always tell people to make sure they're drinking enough fluids,” which for the average person is 60 to 70 ounces a day, which translates into eight 8-ounce glasses of water or liquid per day."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "M) There have been some indications that extra protein makes the kidneys work harder which could be problematic for individuals with a history of kidney disease and for them, the supplements may increase the risk of kidney stones, she says."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "N) Bottom Line: if you think you need more protein in your diet, consider these questions: Are you are an extreme athlete; are you recovering from injury or surgery; or are you are 60 years or older? If so, adding high protein foods like eggs and meat products to your diet can be beneficial. And, if you're not sure, it is always a good idea to check with your primary care provide."
+                }
+              ]
+            }
+          ],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019122-part-3-section-2-group-1-q-36-1",
+              "displayNumber": 36,
+              "sourceQuestionNumber": 36,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "It is quite easy for one to take in the recommended amount of protein."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019122-part-3-section-2-group-1-q-37-2",
+              "displayNumber": 37,
+              "sourceQuestionNumber": 37,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Pipitone claims that healthy adults need not spend money on protein supplements."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019122-part-3-section-2-group-1-q-38-3",
+              "displayNumber": 38,
+              "sourceQuestionNumber": 38,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "The protein supplement business is found to be thriving."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019122-part-3-section-2-group-1-q-39-4",
+              "displayNumber": 39,
+              "sourceQuestionNumber": 39,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Protein can speed the repairing of damaged muscles."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019122-part-3-section-2-group-1-q-40-5",
+              "displayNumber": 40,
+              "sourceQuestionNumber": 40,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Protein supplements may overburden some internal organ, thus leading to its malfunctioning."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019122-part-3-section-2-group-1-q-41-6",
+              "displayNumber": 41,
+              "sourceQuestionNumber": 41,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Older adults need to take in more protein to keep their muscles strong."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019122-part-3-section-2-group-1-q-42-7",
+              "displayNumber": 42,
+              "sourceQuestionNumber": 42,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Protein is found in more foods than people might realize."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019122-part-3-section-2-group-1-q-43-8",
+              "displayNumber": 43,
+              "sourceQuestionNumber": 43,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Additional protein was found to help strengthen the muscles of overweight seniors seeking weight loss."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019122-part-3-section-2-group-1-q-44-9",
+              "displayNumber": 44,
+              "sourceQuestionNumber": 44,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Pipitone believes that whole foods provide the best source of protein."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019122-part-3-section-2-group-1-q-45-10",
+              "displayNumber": 45,
+              "sourceQuestionNumber": 45,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "People are advised to drink more liquid when they take in more protein."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2019122-part-3-section-3-group-1",
+          "title": "Questions 46 to 50 are based on the following passage.",
+          "presentation": "reading",
+          "instructions": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Last year, a child was born at a hospital in the UK with her heart outside her body. Few babies survive this rare condition, and those who do must endure numerous operations and are likely to have complex needs. When her mother was interviewed, three weeks after her daughter’s birth, she was asked if she was prepared for what might be a daunting(令人生畏的) task caring for her. She answered without hesitation that, as far as she was concerned, this would be a “privilege”."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Rarely has there been a better example of the power of attitude, one of our most powerful psychological tools. Our attitudes allow us to turn mistakes into opportunities, and loss into the chance for new beginnings. An attitude is a settled way of thinking, feeling and/ or behaving towards particular objects, people, events or ideologies. We use our attitudes to filter, interpret and react to the world around us. You weren’t born with attitudes; rather they are all learned, and this happens in a number of ways."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "The most powerful influences occur during early childhood and include both what happened to you directly, and what those around you did and said in your presence. As you acquire a distinctive identity your attitudes are further refined by the behavior of those with whom you identify—your family, those of your gender and culture, and the people you admire, even though you may not know them personally. Friendships and other important relationships become increasingly important, particularly during adolescence. About that same time and throughout adulthood, the information you receive, especially when ideas are repeated in association with goals and achievements you find attractive, also refines your attitudes."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Many people assume that our attitudes are internally consistent, that is, the way you think and feel about someone or something predicts your behavior towards them. However, many studies have found that feelings and thoughts don't necessarily predict behavior. In general, your attitudes will be internally consistent only when the behavior is easy, and when those around you hold similar beliefs. That’s why, for example, many say they believe in the benefits of recycling or exercise, but don't behave in line with their views, because it takes awareness, effort and courage to go beyond merely stating that you believe something is a good idea."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "One of the most effective ways to change an attitude is to start behaving as if you already feel and think the way you’d prefer to. Take some time to reflect on your attitudes, to think about what you believe and why. Is there anything you consider a burden rather than a privilege? If so, start behaving-right now-as if the latter is the case."
+                }
+              ]
+            }
+          ],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019122-part-3-section-3-group-1-q-46-1",
+              "displayNumber": 46,
+              "sourceQuestionNumber": 46,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What do we learn from the passage about attitude?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It shapes our beliefs and ideologies."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It improves our psychological wellbeing."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It determines how we respond to our immediate environment."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It changes the way we think, feel and interact with one another."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019122-part-3-section-3-group-1-q-47-2",
+              "displayNumber": 47,
+              "sourceQuestionNumber": 47,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What can contribute to the refinement of one’s attitude, according to the passage?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Their idols’ behaviors."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Their educational level."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Their contact with the opposite gender."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Their interaction with different cultures."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019122-part-3-section-3-group-1-q-48-3",
+              "displayNumber": 48,
+              "sourceQuestionNumber": 48,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What do many studies find about people’s feelings and thoughts?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They may not suggest how a person is going to behave."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are in a way consistent with a person’s mentality."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They may not find expression in interpersonal relations."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are in line with a person’s behavior no matter what."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019122-part-3-section-3-group-1-q-49-4",
+              "displayNumber": 49,
+              "sourceQuestionNumber": 49,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "How come many people don’t do what they believe is good?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They can’t afford the time."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They have no idea how to."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are hypocritical."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They lack willpower."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019122-part-3-section-3-group-1-q-50-5",
+              "displayNumber": 50,
+              "sourceQuestionNumber": 50,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What is proposed as a strategy to change attitude?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Changing things that require one’s immediate attention."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Starting to act in a way that embodies one’s aspirations."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Adjusting one’s behavior gradually over a period of time."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Considering ways of reducing one’s psychological burdens. Passage Two"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2019122-part-3-section-3-group-2",
+          "title": "Questions 51 to 55 are based on the following passage.",
+          "presentation": "reading",
+          "instructions": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Industrial fishing for krill(磷虾) in the unspoilt waters around Antarctica is threatening the future of one of the world’s last great wildernesses, according to a new report."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "The study by Greenpeace analysed the movements of krill fishing vessels in the region and found they were increasingly operating & quot; in the immediate vicinity of penguin colonies and whale-feeding grounds & quot; It also highlights incidents of fishing boats being involved in groundings, oil spills and accidents, which posed a serious threat to the Antarctic ecosystem."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "The report, published on Tuesday, comes amid growing concern about the impact of fishing and climate change on the Antarctic. A global campaign has been launched to create a network of ocean sanctuaries to protect the seas in the region and Greenpeace is calling for an immediate halt to fishing in areas being considered for sanctuary status."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Frida Bengtsson from Greenpeace’s Protect the Antarctic campaign said: “If the krill industry wants to show it’s a responsible player, then it should be voluntarily getting out of any area which is being proposed as an ocean sanctuary, and should instead be backing the protection of these huge tracts of the Antarctic.”"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "A global campaign has been launched to turn a huge tract of Antarctic seas into ocean sanctuaries protecting wildlife and banning not just krill fishing, but all fishing. One was created in the Ross Sea in 2016, another reserve is being proposed in a vast area of the Weddell Sea, and a third sanctuary is under consideration in the area west of the Antarctic Peninsula--a key krill fishing area."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "The Commission for the Conservation of Antarctic Marine Living Resources (CCAMLR) manages the seas around Antarctica. It will decide on the Weddell Sea sanctuary proposal at a conference in Australia in October, although a decision on the peninsula sanctuary is not expected until later."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Keith Reid, a science manager at CCAMLR, said that the organisation sought “a balance between protection, conservation and sustainable fishing in the Southern Ocean.” He said although more fishing was taking place nearer penguin colonies it was often happening later in the season when these colonies were empty."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "“The creation of a system of marine protected areas is a key part of ongoing scientific and policy discussions in CCAMLR,” he added. “Our long-term operation in the region depends on a healthy and thriving Antarctic marine ecosystem, which is why we have always had an open dialogue with the environmental non-governmental organisations. We strongly intend to continue this dialogue, including talks with Greenpeace, to discuss improvements based on the latest scientific data. We are not the ones to decide on the establishment of marine protected areas, but we hope to contribute positively with our knowledge and experience.”"
+                }
+              ]
+            }
+          ],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019122-part-3-section-3-group-2-q-51-1",
+              "displayNumber": 51,
+              "sourceQuestionNumber": 51,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What does Greenpeace’s study find about krill fishing?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It caused a great many penguins and whales to migrate."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It was depriving penguins and whales of their habitats."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It was carried out too close to the habitats of penguins and whales."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It posed an unprecedented threat to the wildlife around Antarctica."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019122-part-3-section-3-group-2-q-52-2",
+              "displayNumber": 52,
+              "sourceQuestionNumber": 52,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "For what purpose has a global campaign been launched?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To reduce the impact of climate change on Antarctica."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To establish conservation areas in the Antarctic region."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To regulate krill fishing operations in the Antarctic seas."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To publicise the concern about the impact of krill fishing."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019122-part-3-section-3-group-2-q-53-3",
+              "displayNumber": 53,
+              "sourceQuestionNumber": 53,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What is Greenpeace’s recommendation to the krill industry?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Opting to operate away from the suggested conservation areas."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Volunteering to protect the endangered species in the Antarctic."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Refraining from krill fishing throughout the breeding season."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Showing its sense of responsibility by leading the global campaign."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019122-part-3-section-3-group-2-q-54-4",
+              "displayNumber": 54,
+              "sourceQuestionNumber": 54,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What did CCAMLR aim to do according to its science manager?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Raise public awareness of the vulnerability of Antarctic species."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Ban all commercial fishing operations in the Southern Ocean."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Keep the penguin colonies from all fishing interference."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Sustain fishing without damaging the Antarctic ecosystem."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019122-part-3-section-3-group-2-q-55-5",
+              "displayNumber": 55,
+              "sourceQuestionNumber": 55,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "How does CCAMLR define its role in the conservation of the Antarctic environment?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "A coordinator in policy discussions."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "An authority on big data analysis."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "A provider of the needed expertise."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "An initiator of marine sanctuaries."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cet6-paper-2019122-part-4-translation",
+      "title": "Translation 翻译",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet6-paper-2019122-part-4-translation-group",
+          "title": "翻译题",
+          "presentation": "writing",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019122-part-4-q-1-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "translation",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "梅花位居中国十大名花之首，源于中国南方，已有三千多年的栽培历史和种植历史。隆冬时节，五颜六色的梅花不畏严寒，迎着风雪傲然绽放。在中国传统文化中，梅花象征着坚强、纯洁、高雅，激励人们不畏艰难、砥砺前行。自古以来，许多诗人和画家从梅花中获取灵感，创作了无数不朽的作品。普通大众也都喜爱梅花，春节期间常用于家庭装饰。南京市已将梅花定为市花，每年举办梅花节，成千上万的人冒着严寒到梅花山踏雪赏梅。"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": "第一句中三组动词短语分别聚焦梅花的地位、起 源、历 史(地 位 为 评 价 信 息,起 源 和 历 史 为 事 实 细 节), 翻译时可作主次区分,除按参考译文,将起源和历史译 为 主 干,地 位 译 为“梅 花”的 补 充 说 明 成 分 之 外,可 将 地 位译为主干,起源和历史译为补充说明成分(非限制性定语从句)。“位居……之首”可用r                                ankfir stamong...、be thekingof...(k ing表示同类中的首屈一指者)等短语;            “栽培”和“种植”同义,     plan ting 、 cult iva tion 择一即可。"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+                  "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "assetRefs": [],
+  "sourceRefs": [
+    {
+      "sourceDocumentId": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+      "relativePath": "2019年12月六级真题（第2套）.docx；2019.12英语六级考试解析第2套.pdf",
+      "sha256": "88c03a886f7524840634f94008e3b745f6592c00ea5b1fab0c63080cebb9667b",
+      "locator": {},
+      "extractionMethod": "manual-review",
+      "confidence": 0.86
+    }
+  ],
+  "quality": {
+    "structureStatus": "approved",
+    "structureConfidence": 0.86,
+    "issueCount": 0,
+    "issues": []
+  }
+}

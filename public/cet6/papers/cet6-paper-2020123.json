@@ -1,0 +1,1940 @@
+{
+  "schemaVersion": 2,
+  "id": "cet6-paper-2020123",
+  "kind": "paper",
+  "title": "2020年12月大学英语六级真题 · 第3套",
+  "year": "2020",
+  "region": "全国",
+  "variant": "第3套",
+  "submissionMode": "whole-paper",
+  "instructions": [
+    {
+      "type": "notice",
+      "tone": "info",
+      "text": "按原卷分区作答。提交整卷后显示可用答案与原资料参考内容。"
+    }
+  ],
+  "sections": [
+    {
+      "id": "cet6-paper-2020123-part-1-writing",
+      "title": "Writing 写作",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet6-paper-2020123-part-1-writing-group",
+          "title": "写作题",
+          "presentation": "writing",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2020123-part-1-q-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "essay",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "relativePath": "2020年12月六级真题（第3套）.docx；2020.12英语六级考试第3套解析.pdf",
+                  "sha256": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cet6-paper-2020123-part-3",
+      "title": "Part III          Reading Comprehension                  (40 minutes)",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet6-paper-2020123-part-3-section-2-group-1",
+          "title": "题目",
+          "presentation": "reading",
+          "instructions": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Why Lifelong Learning Is the International Passport to Success"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "A) Picture yourself at a college graduation day, with a fresh cohort (一群)of students about to set sail for new horizons. What are they thinking while they throw their caps in the air? What is it with this thin sheet of paper that makes it so precious? It’s not only the proof of acquired knowledge but plays into the reputation game of where you were trained. Being a graduate from Harvard Law School carries that extra glamour, doesn’t it? Yet take a closer look, and the diploma is the perfect ending to the modern tragedy of education."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "B) Why? Because universities and curricula are designed along the three unities of French classical tragedy: time, action, and place. Students meet at the university campus (unity of place) for classes (unity of action) during their 20s (unity of time). This classical model has traditionally produced prestigious universities, but it is now challenged by the digitalisation of society—which allows everybody who is connected to the internet to access learning — and by the need to acquire skills in step with a fast-changing world. Universities must realise that learning in your 20s won’t be enough. If technological diffusion and implementation develop faster, workers will have to constantly refresh their skills."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "C) The university model needs to evolve. It must equip students with the right skills and knowledge to compete in a world ‘where value will be derived largely from human interaction and the ability to invent and interpret things that machines cannot’，as the English futurist Richard Watson puts it. By teaching foundational knowledge and up-to-date skills, universities will provide students with the future-proof skills of lifelong learning, not just get them ‘job-ready’."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "D)\tSome universities already play a critical role in lifelong learning as they want to keep the value of their diplomas. This new role comes with a huge set of challenges, and needs largely to be invented. One way to start this transformation process could be to go beyond the ‘five-year diploma model’ to adapt curricula to lifelong learning. We call this model the lifelong passport."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "E) The Bachelor’s degree could be your passport to lifelong learning. For the first few years, students would ‘learn to learn’ and get endowed with reasoning skills that remain with them for the rest of their lives. For instance, physics allows you to observe and rationalise the world, but also to integrate observations into models and, sometimes, models into theories or laws that can be used to make predictions. Mathematics is the language used to formulate the laws of physics or economy, and to make rigorous computations that turn into predictions. These two disciplines naturally form the foundational pillars of education in technical universities."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "F) Recent advances in computational methods and data science push us into rethinking science and engineering. Computers increasingly become principal actors in leveraging data to formulate questions, which requires radically new ways of reasoning. Therefore, a new discipline blending computer science, programming, statistics and machine learning should be added to the traditional foundational topics of mathematics and physics. These three pillars would allow you to keep learning complex technical subjects all your life because numeracy (计算)is the foundation upon which everything else is eventually built."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "G) According to this new model, the Master of Science (MSc) would become the first stamp in the lifelong learning journey. The MSc curriculum should prepare students for their professional career by allowing them to focus on acquiring practical skills through projects."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "H) Those projects are then interwoven with fast-paced technical modules (模块)learned ‘on-the-fly ’ and ‘at will’ depending on the nature of the project. If, for instance, your project is developing an integrated circuit, you will have to take a module on advanced concepts in microelectronics. The most critical skills will be developed before the project even starts, in the form of boot camps (短期强化训练)，while the rest can be fostered along with the project, putting them to immediate use and thus providing a rich learning context."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "I) In addition to technical capabilities, the very nature of projects develops social and entrepreneurial skills, such as design thinking, initiative taking, team leading, activity reporting or resource planning. Not only will those skills be actually integrated into the curriculum but they will be very important to have in the future because they are difficult to automate."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "J) After the MSc diploma is earned, there would be many more stamps of lifelong learning over the years. If universities decide to engage in this learning model, they will have to cope with many organisational challenges that might shake their unity of place and action. First, the number of students would be unpredictable. If all of a university’s alumni (往届毕业生)were to become students again, the student body would be much bigger than it is now, and it could become unsustainable for the campus in terms of both size and resources. Second, freshly graduated students would mix with professionally experienced ones. This would change the classroom dynamics, perhaps for the best. Project-based learning with a mixed team reflects the reality of the professional world and could therefore be a better preparation for it."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "K) Sound like science fiction? In many countries, part-time studying is not exceptional: on average across OECD countries, part-time students in 2016 represented 20 per cent of enrolment in tertiary education. In many countries, this share is higher and can exceed 40 per cent in Australia, New Zealand and Sweden."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "L) If lifelong learning were to become a priority and the new norm, diplomas, just like passports, could be revalidated periodically. A time-determined revalidation would ease administration for everybody. Universities as well as employers and employees would know when they have to retrain. For instance, graduates from the year 2000 would have to come back in 2005."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "M) This could fix the main organisational challenges for the university, but not for the learners, due to lack of time, family obligations or funds. Here, online learning might be an option because it allows you to save your ‘travel time’, but it has its limits. So far, none of the major employers associated with online learning platforms such as Coursera and Udacity has committed to hire or even interview graduates of their new online programmes."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "N) Even if time were not an issue, who will pay for lifelong learning? That’s the eternal debate: should it be the learner’s responsibility, that of his employer, or of the state? For example, in Massachusetts, the healthcare professions require continuing education credits, which are carefully evidenced and documented. Yet the same state’s lawyers don’t require continuing legal education, although most lawyers do participate in it informally. One explanation is that technology is less of a factor in law than it is in healthcare."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "O) Europe has many scenarios, but the French and Swiss ones are interesting to compare. In France, every individual has a right to lifelong learning organised via a personal learning account that is credited as you work. In Switzerland, lifelong learning is a personal responsibility and not a government one. However, employers and the state encourage continuing education either by funding parts of it or by allowing employees to attend it."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "P) Universities have a fundamental role to play in this journey, and higher education is in for a change. Just like classical theatre, the old university model produced talent and value for society. We are not advocating its abolition but rather calling for the adaptation of its characteristics to meet the needs of today."
+                }
+              ]
+            }
+          ],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2020123-part-3-section-2-group-1-q-36-1",
+              "displayNumber": 36,
+              "sourceQuestionNumber": 36,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Students should develop the key skills before they start a project."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "relativePath": "2020年12月六级真题（第3套）.docx；2020.12英语六级考试第3套解析.pdf",
+                  "sha256": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2020123-part-3-section-2-group-1-q-37-2",
+              "displayNumber": 37,
+              "sourceQuestionNumber": 37,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "By acquiring reasoning skills in the first few years of college, students can lay a foundation for lifelong learning."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "relativePath": "2020年12月六级真题（第3套）.docx；2020.12英语六级考试第3套解析.pdf",
+                  "sha256": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2020123-part-3-section-2-group-1-q-38-3",
+              "displayNumber": 38,
+              "sourceQuestionNumber": 38,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "The easy access to learning and rapid technological changes have brought the traditional model of education under challenge."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "relativePath": "2020年12月六级真题（第3套）.docx；2020.12英语六级考试第3套解析.pdf",
+                  "sha256": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2020123-part-3-section-2-group-1-q-39-4",
+              "displayNumber": 39,
+              "sourceQuestionNumber": 39,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Unbelievable as it may seem, part-time students constitute a considerable portion of the student body in many universities across the world."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "relativePath": "2020年12月六级真题（第3套）.docx；2020.12英语六级考试第3套解析.pdf",
+                  "sha256": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2020123-part-3-section-2-group-1-q-40-5",
+              "displayNumber": 40,
+              "sourceQuestionNumber": 40,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Some social and managerial skills, which are not easily automated, will be of great importance to students’ future careers."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "relativePath": "2020年12月六级真题（第3套）.docx；2020.12英语六级考试第3套解析.pdf",
+                  "sha256": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2020123-part-3-section-2-group-1-q-41-6",
+              "displayNumber": 41,
+              "sourceQuestionNumber": 41,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "A new model of college education should provide students with the knowledge and skills that will make them more inventive and capable of lifelong learning."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "relativePath": "2020年12月六级真题（第3套）.docx；2020.12英语六级考试第3套解析.pdf",
+                  "sha256": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2020123-part-3-section-2-group-1-q-42-7",
+              "displayNumber": 42,
+              "sourceQuestionNumber": 42,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "A mixed student body may change the classroom dynamics and benefit learning."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "relativePath": "2020年12月六级真题（第3套）.docx；2020.12英语六级考试第3套解析.pdf",
+                  "sha256": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2020123-part-3-section-2-group-1-q-43-8",
+              "displayNumber": 43,
+              "sourceQuestionNumber": 43,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "The question of who will bear the cost of lifelong learning is a topic of constant debate."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "relativePath": "2020年12月六级真题（第3套）.docx；2020.12英语六级考试第3套解析.pdf",
+                  "sha256": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2020123-part-3-section-2-group-1-q-44-9",
+              "displayNumber": 44,
+              "sourceQuestionNumber": 44,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "To the traditional subjects of math and physics should be added a new discipline which combines computer science with statistics and other components."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "relativePath": "2020年12月六级真题（第3套）.docx；2020.12英语六级考试第3套解析.pdf",
+                  "sha256": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2020123-part-3-section-2-group-1-q-45-10",
+              "displayNumber": 45,
+              "sourceQuestionNumber": 45,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Students who are burdened with family duties might choose to take online courses."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "relativePath": "2020年12月六级真题（第3套）.docx；2020.12英语六级考试第3套解析.pdf",
+                  "sha256": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2020123-part-3-section-3-group-1",
+          "title": "Questions 46 to 50 are based on the following passage.",
+          "presentation": "reading",
+          "instructions": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Why does social media trigger feelings of loneliness and inadequacy? Because instead of being real life, it is, for the most part, impression management, a way of marketing yourself, carefully choosing and filtering the pictures and words to put your best face forward."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Online “friends” made through social media do not follow the normal psychological progression of an interpersonal relationship. You share neither physical time nor emotional conversations over the Internet. You simply communicate photographs and catchy posts to a diverse group of people whom you have “friended” or “followed” based on an accidental interaction. This is not to say that your social media friends can’t be real friends. They absolutely can, but the two are not synonymous."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Generally speaking, there are no unfiltered comments or casually taken photos on our social media pages. And, rightfully so, because it wouldn’t feel safe to be completely authentic and vulnerable with some of our “ friends ” whom we don’t actually know or with whom trust has yet to be built."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Social media can certainly be an escape from the daily grind, but we must be cautioned against the negative effects, such as addiction, on a person’s overall psychological well-being."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "As humans, we yearn for social connection. Scrolling (滚动)through pages of pictures and comments, however, does not provide the same degree of fulfillment as face-to-face interactions do. Also, we tend to idealize others’ lives and compare our downfalls to their greatest accomplishments, ending in feelings of loneliness and inadequacy."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Social media can lead people on the unhealthy quest for perfection. Some people begin to attend certain events or travel to different places so that they can snap that “ perfect ” photo. They begin to seek validation through the number of people who “ like ” their posts. In order for it to play a psychologically healthy role in your social life, social media should supplement an already healthy social network. Pictures and posts should be byproducts of life’s treasured moments and fun times, not the planned and calculated image that one is putting out into cyberspace in an attempt to fill insecurities or unmet needs."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Ultimately, social media has increased our ability to connect with various types of people all over the globe. It has opened doors for businesses and allowed us to stay connected to people whom we may not otherwise get to follow. However, social media should feel like a fun experience, not one that contributes to negative thoughts and feelings. If the latter is the case, increasing face-to-face time with trusted friends, and minimizing time scrolling online, will prove to be a reminder that your social network is much more rewarding than any “ like,” “ follow ” or “ share ” can be."
+                }
+              ]
+            }
+          ],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2020123-part-3-section-3-group-1-q-46-1",
+              "displayNumber": 46,
+              "sourceQuestionNumber": 46,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What does the author imply social media may do to our life?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It may facilitate our interpersonal relationships."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It may filter our negative impressions of others."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It may make us feel isolated and incompetent."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It may render us vulnerable and inauthentic."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "relativePath": "2020年12月六级真题（第3套）.docx；2020.12英语六级考试第3套解析.pdf",
+                  "sha256": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2020123-part-3-section-3-group-1-q-47-2",
+              "displayNumber": 47,
+              "sourceQuestionNumber": 47,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Why do people post comments selectively on social media?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They do not find all their online friends trustworthy."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They want to avoid offending any of their audience."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They do not want to lose their followers."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are eager to boost their popularity."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "relativePath": "2020年12月六级真题（第3套）.docx；2020.12英语六级考试第3套解析.pdf",
+                  "sha256": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2020123-part-3-section-3-group-1-q-48-3",
+              "displayNumber": 48,
+              "sourceQuestionNumber": 48,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What are humans inclined to do according to the passage?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Exaggerate their life’s accomplishments."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Strive for perfection regardless of the cost."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Paint a rosy picture of other people’s lives."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Learn lessons from other people’s downfalls."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "relativePath": "2020年12月六级真题（第3套）.docx；2020.12英语六级考试第3套解析.pdf",
+                  "sha256": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2020123-part-3-section-3-group-1-q-49-4",
+              "displayNumber": 49,
+              "sourceQuestionNumber": 49,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What is the author’s view of pictures and posts on social media?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They should record the memorable moments in people’s lives."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They should be carefully edited so as to present the best image."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They should be shown in a way that meets one’s security needs."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They should keep people from the unhealthy quest for perfection."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "relativePath": "2020年12月六级真题（第3套）.docx；2020.12英语六级考试第3套解析.pdf",
+                  "sha256": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2020123-part-3-section-3-group-1-q-50-5",
+              "displayNumber": 50,
+              "sourceQuestionNumber": 50,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What does the author advise people to do when they find their online experience unconstructive?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Use social media to increase their ability to connect with various types of people."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Stay connected to those whom they may not otherwise get to know and befriend."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Try to prevent negative thoughts and feelings from getting into the online pages."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Strengthen ties with real-life friends instead of caring about their online image. Passage Two"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "relativePath": "2020年12月六级真题（第3套）.docx；2020.12英语六级考试第3套解析.pdf",
+                  "sha256": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2020123-part-3-section-3-group-2",
+          "title": "Questions 51 to 55 are based on the following passage.",
+          "presentation": "reading",
+          "instructions": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Imagine that an alien species landed on Earth and, through their mere presence, those aliens caused our art to vanish, our music to homogenize, and our technological know-how to disappear. That is effectively what humans have been doing to our closest relatives — chimps (大猩猩)."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Back in 1999, a team of scientists led by Andrew Whiten showed that chimps from different parts of Africa behave very differently from one another. Some groups would get each other’s attention by rapping branches with their knuckles (指关节)，while others did it by loudly ripping leaves with their teeth. The team identified 39 of these traditions that are practiced by some communities but not   others — a pattern that, at the time, hadn’t been seen in any animal except humans. It was evidence, the team said, that chimps have their own cultures."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "It took a long time to convince skeptics that such cultures exist, but now we have plenty of examples of animals learning local traditions from one another."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "But just when many scientists have come to accept the existence of animal cultures, many of those cultures might vanish. Ammie Kalan and her colleagues have shown, through years of intensive fieldwork, that the very presence of humans has eroded the diversity of chimp behavior. Where we flourish, their cultures wither. It is a bitterly ironic thing to learn on the 20th anniversary of Whiten’s classic study."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "“ It’s amazing to think that just 60 years ago, we knew next to nothing of the behavior of our sister species in the wild,” Whiten says. “ But now, just as we are truly getting to know our primate(灵长类)cousins, the actions of humans are closing the window on all we have discovered.”"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "“ Sometimes in the rush to conserve the species, I think we forget about the individuals,” says Cat Hobaiter, a professor at the University of St. Andrews. “ Each population, each community, even each generation of chimps is unique. An event might only have a small impact on the total population of chimps, but it may wipe out an entire community — an entire culture. No matter what we do to restore habitat or support population growth, we may never be able to restore that culture.”"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "No one knows whether the destruction of chimp culture is getting worse. Few places have tracked chimp behavior over long periods, and those that have are also more likely to have protected their animals from human influence."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Obviously, conservationists need to think about saving species in a completely new way—by preserving animal traditions as well as bodies and genes. “ Instead of focusing only on the conservation of genetically based entities like species, we now need to also consider culturally based entities,” says Andrew Whiten."
+                }
+              ]
+            }
+          ],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2020123-part-3-section-3-group-2-q-51-1",
+              "displayNumber": 51,
+              "sourceQuestionNumber": 51,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What does the author say we humans have been doing to chimps?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Ruining their culture."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Treating them as alien species."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Accelerating their extinction."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Homogenizing their living habits."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "relativePath": "2020年12月六级真题（第3套）.docx；2020.12英语六级考试第3套解析.pdf",
+                  "sha256": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2020123-part-3-section-3-group-2-q-52-2",
+              "displayNumber": 52,
+              "sourceQuestionNumber": 52,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What is the finding of Andrew Whiten’s team?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Chimps demonstrate highly developed skills of communication."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Chimps rely heavily upon their body language to communicate."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Chimps behave in ways quite similar to those of human beings."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Different chimp groups differ in their way of communication."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "relativePath": "2020年12月六级真题（第3套）.docx；2020.12英语六级考试第3套解析.pdf",
+                  "sha256": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2020123-part-3-section-3-group-2-q-53-3",
+              "displayNumber": 53,
+              "sourceQuestionNumber": 53,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What did Ammie Kalan and her colleagues find through their intensive fieldwork?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Whiten’s classic study has little impact on the diversity of chimp behavior."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Chimp behavior becomes less varied with the increase of human activity."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Chimps alter their culture to quickly adapt to the changed environment."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It might already be too late to prevent animal cultures from extinction."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "relativePath": "2020年12月六级真题（第3套）.docx；2020.12英语六级考试第3套解析.pdf",
+                  "sha256": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2020123-part-3-section-3-group-2-q-54-4",
+              "displayNumber": 54,
+              "sourceQuestionNumber": 54,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What does Cat Hobaiter think we should do for chimp conservation?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Try to understand our sister species’ behavior in the wild."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Make efforts to preserve each individual chimp community."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Study the unique characteristics of each generation of chimps."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Endeavor to restore chimp habitats to expand its total population."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "relativePath": "2020年12月六级真题（第3套）.docx；2020.12英语六级考试第3套解析.pdf",
+                  "sha256": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2020123-part-3-section-3-group-2-q-55-5",
+              "displayNumber": 55,
+              "sourceQuestionNumber": 55,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What does the author suggest conservationists do?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Focus entirely on culturally-based entities rather than genetically-based ones."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Place more stress on animal traditions than on their physical conservation."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Conserve animal species in a novel and all-round way."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Explore the cultures of species before they vanish."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "relativePath": "2020年12月六级真题（第3套）.docx；2020.12英语六级考试第3套解析.pdf",
+                  "sha256": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cet6-paper-2020123-part-4-translation",
+      "title": "Translation 翻译",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet6-paper-2020123-part-4-translation-group",
+          "title": "翻译题",
+          "presentation": "writing",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2020123-part-4-q-26-1",
+              "displayNumber": 26,
+              "sourceQuestionNumber": 26,
+              "type": "translation",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "C\t27.\tO\t28.\tE\t29.\tN\t30.\tH\t31.\tK\t32.\tA\t33.\tD\t34.\tJ\t35.\tB Section B"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": "riv en。[确定词性]空格所在部分I tha sbe en                         byf ear构成典型的被动语态,空格词应为- ed 分词。 [锁定答案]① 句说明社交隔离造 成 的 一 系 列 社 会 问 题。 ② 句 指 出,它/社 交 隔 离 由 恐 惧                                 ,且 正 在 制 造 出 更多的恐惧。结合两句时态变换(                  ispu t ting... hasbe en...isc  r e a tinge venmo  e...)可知该句形成时间线条, r 说明“社交隔离由(对新冠传播 的)恐 惧 造 成 → 造 成 诸 多 问 题 → 将 会 造 成 更 多 恐 惧/问 题 (                         c rea tingev en mo r e fear 回应 pu   tti ng... canceling...andt ank ng...)”的过程。空格词应表“造成/驱动”等, i                                           C 正确。"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "relativePath": "2020年12月六级真题（第3套）.docx；2020.12英语六级考试第3套解析.pdf",
+                  "sha256": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2020123-part-4-q-36-2",
+              "displayNumber": 36,
+              "sourceQuestionNumber": 36,
+              "type": "translation",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "H\t37.\tE\t38.\tB\t39.\tK\t40. I\t41.\tC\t42.\tJ\t43.\tN\t44.\tF\t45.\tM Section C"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": "tud ent sshou ldd eve lopt h e ek k ysil lsb efo r h eteys tar tap roe jct. 学生应当在开展项目之前学会关键技能。 􀪋 [答案]H [精解]由定位词定位至 H 段 ③ 句。该句指出,学生必须在项目开始之前学会最关键的技能(其他技 能则可在项目推进期间加以培养),试题是对此处信息的复现,          theke ysk il ls对应原文的 Themo s r tcit ica lsk il ls。 Bya"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "relativePath": "2020年12月六级真题（第3套）.docx；2020.12英语六级考试第3套解析.pdf",
+                  "sha256": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2020123-part-4-q-46-3",
+              "displayNumber": 46,
+              "sourceQuestionNumber": 46,
+              "type": "translation",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "C\t47.\tA\t48.\tC\t49.\tA\t50. D\t51.\tA\t52.\tD\t53.\tB\t54.\tB\t55.\tC Part Ⅳ Translation 见"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": "作者暗示社交媒体可能会对我们的生活产生什么影响? A)它可以促进我们的人际关系。                         C)它可能使我们感到孤独和无能为力。 B)它可以筛除我们对他人的负面印象。                      D)它可能使我们变得脆弱和不真实。 [锁定答案]首段 ① 句以设问形式暗示作者的观点:社交媒体会让人们感到孤独和无能为力。C 正确。 [排除干 扰 ]A 借 常 识 设 置 干 扰,且 符 合 末 段 ① ② 句 让 步 信 息,但 与 作 者 整 体 观 点 相 悖。B 将 首 段 ② 句 impre ssi onmanagemen t和f i lte ring 糅杂设置干扰,原文指“筛选展示自己的内容,以给他人留下好印象”,而非 “筛除他人留给自己的不好印象”。D 曲解第二段 ⑦ 句 au          thent i candvul nerabe,原文指“在社交媒体上完 全展 l 示自己真实、脆弱的一面会让我们感到不安(即我们不会在社交媒体上完全展示自己真实、脆弱的一面)”。"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "relativePath": "2020年12月六级真题（第3套）.docx；2020.12英语六级考试第3套解析.pdf",
+                  "sha256": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "assetRefs": [],
+  "sourceRefs": [
+    {
+      "sourceDocumentId": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+      "relativePath": "2020年12月六级真题（第3套）.docx；2020.12英语六级考试第3套解析.pdf",
+      "sha256": "85488b02ca7d7dacae8feec8b5c9b56bb0f13c337a8247ee2c2bcd7add59d945",
+      "locator": {},
+      "extractionMethod": "manual-review",
+      "confidence": 0.86
+    }
+  ],
+  "quality": {
+    "structureStatus": "approved",
+    "structureConfidence": 0.86,
+    "issueCount": 0,
+    "issues": []
+  }
+}

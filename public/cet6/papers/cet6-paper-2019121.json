@@ -1,0 +1,5335 @@
+{
+  "schemaVersion": 2,
+  "id": "cet6-paper-2019121",
+  "kind": "paper",
+  "title": "2019年12月大学英语六级真题 · 第1套",
+  "year": "2019",
+  "region": "全国",
+  "variant": "第1套",
+  "submissionMode": "whole-paper",
+  "instructions": [
+    {
+      "type": "notice",
+      "tone": "info",
+      "text": "按原卷分区作答。提交整卷后显示可用答案与原资料参考内容。"
+    }
+  ],
+  "sections": [
+    {
+      "id": "cet6-paper-2019121-part-1-writing",
+      "title": "Writing 写作",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet6-paper-2019121-part-1-writing-group",
+          "title": "写作题",
+          "presentation": "writing",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019121-part-1-q-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "essay",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cet6-paper-2019121-part-2",
+      "title": "Part II         Listening Comprehension       (30 minutes)",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet6-paper-2019121-part-2-section-1-group-1",
+          "title": "题目",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019121-part-2-section-1-group-1-q-1-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Magazine reporter"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Fashion designer"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Website designer"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Features editor"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019121-part-2-section-1-group-1-q-2-2",
+              "displayNumber": 2,
+              "sourceQuestionNumber": 2,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Designing sports clothing"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Consulting fashion experts"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Answering daily emails"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Interviewing job-seekers"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019121-part-2-section-1-group-1-q-3-3",
+              "displayNumber": 3,
+              "sourceQuestionNumber": 3,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is challenging."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is fascinating."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is tiresome."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is fashionable."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019121-part-2-section-1-group-1-q-4-4",
+              "displayNumber": 4,
+              "sourceQuestionNumber": 4,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Her persistence"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Her experience"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Her competence"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Her confidence"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2019121-part-2-section-1-group-2",
+          "title": "Questions 5 to 8 are based on the conversation you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019121-part-2-section-1-group-2-q-5-1",
+              "displayNumber": 5,
+              "sourceQuestionNumber": 5,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is enjoyable."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is educational."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is divorced from real life."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is adapted from a drama."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019121-part-2-section-1-group-2-q-6-2",
+              "displayNumber": 6,
+              "sourceQuestionNumber": 6,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "All the roles are played by famous actors and actresses."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is based on the real-life experiences of some celebrities."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Its plots and events reveal a lot about Frankie’s actual life."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is written, directed, edited and produced by Frankie himself"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019121-part-2-section-1-group-2-q-7-3",
+              "displayNumber": 7,
+              "sourceQuestionNumber": 7,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Go to the theater and enjoy it."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Recommend it to her friends."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Watch it with the man."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Download and watch it."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019121-part-2-section-1-group-2-q-8-4",
+              "displayNumber": 8,
+              "sourceQuestionNumber": 8,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It has drawn criticisms from scientists."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It has been showing for over a decade."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is a ridiculous piece of satire."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is against common sense."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2019121-part-2-section-2-group-1",
+          "title": "Questions 9 to 11 are based on the passage you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019121-part-2-section-2-group-1-q-9-1",
+              "displayNumber": 9,
+              "sourceQuestionNumber": 9,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are likely to get injured when moving too fast."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They believe in team spirit for good performance."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They need to keep moving to avoid getting hurt."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They have to learn how to avoid body contact."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019121-part-2-section-2-group-1-q-10-2",
+              "displayNumber": 10,
+              "sourceQuestionNumber": 10,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They do not have many years to live after retirement."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They tend to live a longer life with early retirement."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They do not start enjoying life until full retirement."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They keep themselves busy even after retirement."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019121-part-2-section-2-group-1-q-11-3",
+              "displayNumber": 11,
+              "sourceQuestionNumber": 11,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It prevents us from worrying."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It slows down our aging process."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It enables us to accomplish more in life."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It provides us with more chances to learn."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2019121-part-2-section-2-group-2",
+          "title": "Questions 12 to 15 are based on the passage you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019121-part-2-section-2-group-2-q-12-1",
+              "displayNumber": 12,
+              "sourceQuestionNumber": 12,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It tends to dwell upon their joyous experiences."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It wanders for almost half of their waking time."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It has trouble concentrating after a brain injury."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It tends to be affected by their negative feelings."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019121-part-2-section-2-group-2-q-13-2",
+              "displayNumber": 13,
+              "sourceQuestionNumber": 13,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To find how happiness relates to daydreaming."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To observe how one’s mind affects one’s behavior."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To see why daydreaming impacts what one is doing."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To study the relation between health and daydreaming."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019121-part-2-section-2-group-2-q-14-3",
+              "displayNumber": 14,
+              "sourceQuestionNumber": 14,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It helps them make good decisions."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It helps them tap their potentials."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It contributes to their creativity."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It contributes to clear thinking"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019121-part-2-section-2-group-2-q-15-4",
+              "displayNumber": 15,
+              "sourceQuestionNumber": 15,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Subjects with clear goals in mind outperformed those without clear goals."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The difference in performance between the two groups was insignificant."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Non-daydreamers were more focused on their tasks than daydreamers."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Daydreamers did better than non-daydreamers in task performance."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2019121-part-2-section-3-group-1",
+          "title": "Questions 16 to 18 are based on the recording you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019121-part-2-section-3-group-1-q-16-1",
+              "displayNumber": 16,
+              "sourceQuestionNumber": 16,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are the oldest buildings in Europe."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are part of the Christian tradition."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are renovated to attract tourists."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are in worsening condition."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019121-part-2-section-3-group-1-q-17-2",
+              "displayNumber": 17,
+              "sourceQuestionNumber": 17,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They have a history of 14 centuries."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are 40 metres tall on average."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are without foundations."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They consist of several storeys."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019121-part-2-section-3-group-1-q-18-3",
+              "displayNumber": 18,
+              "sourceQuestionNumber": 18,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Wood was harmonious with nature."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Wooden buildings kept the cold out."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Timber was abundant in Scandinavia."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The Vikings liked wooden structures."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2019121-part-2-section-3-group-2",
+          "title": "Questions 19 to 21 are based on the recording you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019121-part-2-section-3-group-2-q-19-1",
+              "displayNumber": 19,
+              "sourceQuestionNumber": 19,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Similarities between human babies and baby animals."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Cognitive features of different newly born mammals."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Adults influence on children."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Abilities of human babies."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019121-part-2-section-3-group-2-q-20-2",
+              "displayNumber": 20,
+              "sourceQuestionNumber": 20,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They can distinguish a happy tune from a sad one."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They love happy melodies more than sad ones."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They fall asleep easily while listening to music."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are already sensitive to beats and rhythms."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019121-part-2-section-3-group-2-q-21-3",
+              "displayNumber": 21,
+              "sourceQuestionNumber": 21,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Infants’ facial expressions."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Babies’ emotions."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Babies’ interaction with adult."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Infants’ behaviors."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2019121-part-2-section-3-group-3",
+          "title": "Questions 22 to 25 are based on the recording you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019121-part-2-section-3-group-3-q-22-1",
+              "displayNumber": 22,
+              "sourceQuestionNumber": 22,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It may harm the culture of today’s workplace."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It may hinder individual career advancement."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It may result in unwillingness to take risks."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It may put too much pressure on team members."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019121-part-2-section-3-group-3-q-23-2",
+              "displayNumber": 23,
+              "sourceQuestionNumber": 23,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They can hardly give expression to their original views."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They can become less motivated to do projects of their own."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They may find it hard to get their contributions recognized."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They may eventually lose their confidence and creativity"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019121-part-2-section-3-group-3-q-24-3",
+              "displayNumber": 24,
+              "sourceQuestionNumber": 24,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They can enlarge their professional circle."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They can get chances to engage in research."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They can make the best use of their expertise."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They can complete the project more easily."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019121-part-2-section-3-group-3-q-25-4",
+              "displayNumber": 25,
+              "sourceQuestionNumber": 25,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It may cause lots of arguments in a team."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It may prevent making a timely decision."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It may give rise to a lot of unnecessary expenses."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It may deprive a team of business opportunities."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cet6-paper-2019121-part-3",
+      "title": "Part III         Reading Comprehension      (40 minutes)",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet6-paper-2019121-part-3-section-1-group-1",
+          "title": "Questions 26 to 35 are based on the following passage.",
+          "presentation": "reading",
+          "instructions": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "When considering risk factors associated with serious chronic diseases, we often think about health indicators such as cholesterol, blood pressure, and body weight. But poor diet and physical inactivity also each increase the risk of heart disease and have a role to play in the development of some cancers. Perhaps worse, the "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet6-paper-2019121-part-3-section-1-group-1-blank-26"
+                },
+                {
+                  "type": "text",
+                  "text": " effects of an unhealthy diet and insufficient exercise are not limited to your body. Recent research has also shown that "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet6-paper-2019121-part-3-section-1-group-1-blank-27"
+                },
+                {
+                  "type": "text",
+                  "text": " in a high-fat and high-sugar diet may have negative effects on your brain, causing learning and memory "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet6-paper-2019121-part-3-section-1-group-1-blank-28"
+                },
+                {
+                  "type": "text",
+                  "text": ". Studies have found obesity is associated with impairments in cognitive functioning, as "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet6-paper-2019121-part-3-section-1-group-1-blank-29"
+                },
+                {
+                  "type": "text",
+                  "text": " by a range of learning and memory tests, such as the ability to remember a list of words presented some minutes or hours earlier. There is also a growing body of evidence that diet-induced cognitive impairments can emerge "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet6-paper-2019121-part-3-section-1-group-1-blank-30"
+                },
+                {
+                  "type": "text",
+                  "text": "—within weeks or even days. For example, one study found healthy adults "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet6-paper-2019121-part-3-section-1-group-1-blank-31"
+                },
+                {
+                  "type": "text",
+                  "text": " to a high-fat diet for five days showed impaired attention, memory, and mood compared with a low-fat diet control group. Another study also found eating a high-fat and highsugar breakfast each day for as little as four days resulted in problems with learning and memory "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet6-paper-2019121-part-3-section-1-group-1-blank-32"
+                },
+                {
+                  "type": "text",
+                  "text": " to those observed in overweight and obese individuals. Body weight was not hugely different between the groups eating a healthy diet and those on high fat and sugar diets. So this shows negative "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet6-paper-2019121-part-3-section-1-group-1-blank-33"
+                },
+                {
+                  "type": "text",
+                  "text": " of poor dietary intake can occur even when body weight has not changed "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet6-paper-2019121-part-3-section-1-group-1-blank-34"
+                },
+                {
+                  "type": "text",
+                  "text": ". Thus, body weight is not always the best indicator of health and a thin person still needs to eat well and exercise "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet6-paper-2019121-part-3-section-1-group-1-blank-35"
+                },
+                {
+                  "type": "text",
+                  "text": "."
+                }
+              ]
+            }
+          ],
+          "sharedOptions": [
+            {
+              "id": "I",
+              "label": "I",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "excelling"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "J",
+              "label": "J",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "indulging"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "K",
+              "label": "K",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "loopholes"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "L",
+              "label": "L",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "rapidly"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "M",
+              "label": "M",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "redundant"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "N",
+              "label": "N",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "regularly"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "O",
+              "label": "O",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "similar"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "A",
+              "label": "A",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "assessed"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "B",
+              "label": "B",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "assigned"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "C",
+              "label": "C",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "consequences"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "D",
+              "label": "D",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "conspicuously"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "E",
+              "label": "E",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "deficits"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "F",
+              "label": "F",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "designated"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "G",
+              "label": "G",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "detrimental"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "H",
+              "label": "H",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "digestion •\texclusively •\tinnovated"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "I",
+              "label": "I",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "excelling"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "J",
+              "label": "J",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "indulging"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "K",
+              "label": "K",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "loopholes"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "L",
+              "label": "L",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "rapidly"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "M",
+              "label": "M",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "redundant"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "N",
+              "label": "N",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "regularly"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "O",
+              "label": "O",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "similar"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "A",
+              "label": "A",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "assessed"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "B",
+              "label": "B",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "assigned"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "C",
+              "label": "C",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "consequences"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "D",
+              "label": "D",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "conspicuously"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "E",
+              "label": "E",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "deficits"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "F",
+              "label": "F",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "designated"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "G",
+              "label": "G",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "detrimental"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "H",
+              "label": "H",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "digestion •\texclusively •\tinnovated"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "sharedOptionsReusable": false,
+          "questions": [
+            {
+              "id": "cet6-paper-2019121-part-3-section-1-group-1-q-26",
+              "displayNumber": 26,
+              "sourceQuestionNumber": 26,
+              "type": "shared_option_matching",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2019121-part-3-section-1-group-1-blank-26"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2019121-part-3-section-1-group-1-blank-26",
+                  "label": "第 26 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "G"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019121-part-3-section-1-group-1-q-27",
+              "displayNumber": 27,
+              "sourceQuestionNumber": 27,
+              "type": "shared_option_matching",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2019121-part-3-section-1-group-1-blank-27"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2019121-part-3-section-1-group-1-blank-27",
+                  "label": "第 27 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "J"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019121-part-3-section-1-group-1-q-28",
+              "displayNumber": 28,
+              "sourceQuestionNumber": 28,
+              "type": "shared_option_matching",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2019121-part-3-section-1-group-1-blank-28"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2019121-part-3-section-1-group-1-blank-28",
+                  "label": "第 28 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "E"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019121-part-3-section-1-group-1-q-29",
+              "displayNumber": 29,
+              "sourceQuestionNumber": 29,
+              "type": "shared_option_matching",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2019121-part-3-section-1-group-1-blank-29"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2019121-part-3-section-1-group-1-blank-29",
+                  "label": "第 29 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "A"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019121-part-3-section-1-group-1-q-30",
+              "displayNumber": 30,
+              "sourceQuestionNumber": 30,
+              "type": "shared_option_matching",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2019121-part-3-section-1-group-1-blank-30"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2019121-part-3-section-1-group-1-blank-30",
+                  "label": "第 30 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "L"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019121-part-3-section-1-group-1-q-31",
+              "displayNumber": 31,
+              "sourceQuestionNumber": 31,
+              "type": "shared_option_matching",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2019121-part-3-section-1-group-1-blank-31"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2019121-part-3-section-1-group-1-blank-31",
+                  "label": "第 31 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "B"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019121-part-3-section-1-group-1-q-32",
+              "displayNumber": 32,
+              "sourceQuestionNumber": 32,
+              "type": "shared_option_matching",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2019121-part-3-section-1-group-1-blank-32"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2019121-part-3-section-1-group-1-blank-32",
+                  "label": "第 32 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "O"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019121-part-3-section-1-group-1-q-33",
+              "displayNumber": 33,
+              "sourceQuestionNumber": 33,
+              "type": "shared_option_matching",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2019121-part-3-section-1-group-1-blank-33"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2019121-part-3-section-1-group-1-blank-33",
+                  "label": "第 33 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "C"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019121-part-3-section-1-group-1-q-34",
+              "displayNumber": 34,
+              "sourceQuestionNumber": 34,
+              "type": "shared_option_matching",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2019121-part-3-section-1-group-1-blank-34"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2019121-part-3-section-1-group-1-blank-34",
+                  "label": "第 34 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "D"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cet6-paper-2019121-part-3-section-1-group-1-q-35",
+              "displayNumber": 35,
+              "sourceQuestionNumber": 35,
+              "type": "shared_option_matching",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2019121-part-3-section-1-group-1-blank-35"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2019121-part-3-section-1-group-1-blank-35",
+                  "label": "第 35 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "auto",
+                "kind": "choice",
+                "acceptedAnswers": [
+                  "N"
+                ],
+                "normalization": {
+                  "unicodeNfkc": true,
+                  "trim": true,
+                  "collapseSpaces": true,
+                  "caseSensitive": false
+                }
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2019121-part-3-section-2-group-1",
+          "title": "题目",
+          "presentation": "reading",
+          "instructions": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Increased Screen Time and Wellbeing Decline in Youth"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "A) Have young people never had it so good? Or do they face more challenges than any previous generation? Our current era in the West is one of high wealth. This means minors enjoy material benefits and legal protections that would have been the envy of those living in the past. But there is an increasing suspicion that all is not well for our youth. And one of the most popular explanations, among some experts and the popular media, is that excessive & quote; screen time & quote; is to blame. (This refers to all the attention young people devote to their phones, tablets and laptops.) However, this is a contentious theory and such claims have been treated skeptically by some scholars based on their reading of the relevant data."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "B) Now a new study has provided another contribution to the debate, uncovering strong evidence that adolescent wellbeing in the United States really is experiencing a decline and arguing that the most likely cause is the electronic riches we have given them. The background to this is that from the 1960s into the early 2000s, measures of average wellbeing went up in the US. This was especially true for younger people. It reflected the fact that these decades saw a climb in general standards of living and avoidance of mass societal traumas like full-scale war or economic deprivation. However, the & quote; screen time & quote; hypothesis, advanced by researchers such as Jean Twenge, is that electronic devices and excessive time spent online may have reversed these trends in recent years, causing problems for young people's psychological health."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "C) To investigate, Twenge and her colleagues dived into the & quote; Monitoring the Future & quot; dataset based on annual surveys of American school students from grades 8, 10, and 12 that started in 1991. In total, 1.1 million young people answered various questions related to their wellbeing. Twenge’s team’s analysis of the answers confirmed the earlier, well-established wellbeing climb, with scores rising across the 1990s, and into the later 2000s. This was found across measures like self-esteem, life satisfaction, happiness and satisfaction with individual domains like job, neighborhood, or friends. But around 2012 these measures started to decline. This continued through 2016, the most recent year for which data is available."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "D) Twenge and her colleagues wanted to understand why this change in average wellbeing occurred. However, it is very hard to demonstrate causes using non-experimental data such as this. In fact, when Twenge previously used this data to suggest a screen time effect, some commentators were quick to raise this problem. They argued that her causal-sounding claims rested on correlational data, and that she had not adequately accounted for other potential causal factors. This time around, Twenge and her team make a point of saying that they are not trying to establish causes as such, but that they are assessing the plausibility of potential causes."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "E) First, they explain that if a given variable is playing a role in affecting wellbeing, then we should expect any change in that variable to correlate with the observed changes in wellbeing. If not, it is not plausible that the variable is a causal factor. So the researchers looked at time spent in a number of activities that could plausibly be driving the wellbeing decline. Less sport, and fewer meetings with peers correlated with lower wellbeing, as did less time reading print media(newspapers) and, surprisingly, less time doing homework .(This last finding would appear to contradict another popular hypothesis that it is our burdening of students with assignments that is causing all the problems.) In addition, more TV watching and more electronic communication both correlated with lower wellbeing. All these effects held true for measures of happiness, life satisfaction and self-esteem, with the effects stronger in the 8th and 10th-graders."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "F) Next, Twenge’s team dug a little deeper into the data on screen time. They found that adolescents who spent a very small amount of time on digital devices—a couple of hours a week—had the highest wellbeing. Their wellbeing was even higher than those who never used such devices. However, higher doses of screen time were clearly associated with lower happiness. Those spending 10-19 hours per week on their devices were 41 percent more likely to be unhappy than lower-frequency users. Those who used such devices 40 hours a week or more (one in ten teenagers) were twice as likely to be unhappy. The data was slightly complicated by the fact that there was a tendency for kids who were social in the real world to also use more online communication, but by bracketing out different cases it became clear that the real-world sociality component correlated with greater wellbeing, whereas greater time on screens or online only correlated with poorer wellbeing."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "G) So far, so plausible. But the next question is, are the drops in average wellbeing happening at the same time strands toward increased electronic device usage? It looks like it-after all, 2012 was the tipping point when more than half of Americans began owning smartphones. Twenge and her colleagues also found that across the key years of 2013-16, wellbeing was indeed lowest in years where adolescents spent more time online, on social media, and reading news online, and when more youth in the United States had smartphones. And in a second analysis, they found that where technology went, dips in wellbeing followed. For instance, years with a larger increase in online usage were followed by years with lower wellbeing, rather than the other way around. This does not prove causality, but is consistent with it. Meanwhile, TV use did not show this tracking. TV might make you less happy, but this is not what seems to be driving the recent declines in young people's average happiness."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "H) A similar but reversed pattern was found for the activities associated with greater wellbeing. For example, years when people spent more time with friends were better years for wellbeing (and followed by better years). Sadly, the data also showed face-to-face socializing and sports activity had declined over the period covered by the survey."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "I) There is another explanation that Twenge and her colleagues wanted to address: the impact of the the great recession of 2007-2009, which hit a great number of American families and might be affecting adolescents. The dataset they used did not include economic data, so instead the researchers looked at whether the 2013-16 wellbeing decline was tracking economic indicators. They found some evidence that some crude measures, like income inequality, correlated with changes in wellbeing, but economic measures with a more direct impact, like family income and unemployment rates (which put families into difficulties), had no relationship with wellbeing. The researchers also note that the recession hit some years before we see the beginning of the wellbeing drop, and before the steepest wellbeing decline, which occurred in 2013."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "J) The researchers conclude that electronic communication was the only adolescent activity that increased at the same time psychological wellbeing declined. I suspect that some experts in the field will be keen to address alternative explanations, such as unassessed variables playing a role in the wellbeing decline. But the new work does go further than previous research and suggests that screen time should still be considered a potential barrier to young people’s flourishing."
+                }
+              ]
+            }
+          ],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019121-part-3-section-2-group-1-q-36-1",
+              "displayNumber": 36,
+              "sourceQuestionNumber": 36,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "The year when most Americans began using smartphones was identified as a turning point in young Americans' level of happiness."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019121-part-3-section-2-group-1-q-37-2",
+              "displayNumber": 37,
+              "sourceQuestionNumber": 37,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Scores in various wellbeing measures began to go downward among young Americans in recent years."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019121-part-3-section-2-group-1-q-38-3",
+              "displayNumber": 38,
+              "sourceQuestionNumber": 38,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Unfortunately, activities involving direct contact with people, which contributed to better wellbeing, were found to be on the decline."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019121-part-3-section-2-group-1-q-39-4",
+              "displayNumber": 39,
+              "sourceQuestionNumber": 39,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "In response to past critics, Twenge and her co-researchers stress they are not trying to prove that the use of digital devices reduces young people’s wellbeing."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019121-part-3-section-2-group-1-q-40-5",
+              "displayNumber": 40,
+              "sourceQuestionNumber": 40,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "In the last few decades of the 20th century, living standards went up and economic depressions were largely averted in the US."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019121-part-3-section-2-group-1-q-41-6",
+              "displayNumber": 41,
+              "sourceQuestionNumber": 41,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Contrary to popular belief, doing homework might add to students’ wellbeing."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019121-part-3-section-2-group-1-q-42-7",
+              "displayNumber": 42,
+              "sourceQuestionNumber": 42,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "The author believes the researchers’ new study has gone a step further regarding the impact of screen time on wellbeing."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019121-part-3-section-2-group-1-q-43-8",
+              "displayNumber": 43,
+              "sourceQuestionNumber": 43,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "The researchers found that extended screen time makes young people less happy."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019121-part-3-section-2-group-1-q-44-9",
+              "displayNumber": 44,
+              "sourceQuestionNumber": 44,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Data reveals that economic inequality rather than family income might affect people’s wellbeing."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019121-part-3-section-2-group-1-q-45-10",
+              "displayNumber": 45,
+              "sourceQuestionNumber": 45,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Too much screen time is widely believed to be the cause of unhappiness among today’s young people."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2019121-part-3-section-3-group-1",
+          "title": "Questions 46 to 50 are based on the following passage.",
+          "presentation": "reading",
+          "instructions": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "“The dangerous thing about lying is people don't understand how the act changes us.” says Dan Ariely behavioural psychologist at Duke University. Psychologists have documented children lying as early as the age of two. Some experts even consider lying a developmental milestone, like crawling and walking, because it requires sophisticated planning, attention and the ability to see a situation from someone else’s perspective to manipulate then. But, for most people, lying gets limited as we develop a sense of morality and the ability to self-regulate."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Harvard cognitive neuroscientist Joshua Greene says, for most of us, lying takes work. In studies, he gave subjects a chance to deceive for monetary gain while examining their brains in a functional MRI machine, which maps blood flow to active parts of the brain. Some people told the truth instantly and instinctively. But others opted to lie, and they showed increased activity in their frontal parietal (颅腔壁的) control network, which is involved in difficult or complex thinking. This suggests that they were deciding between truth and dishonesty—and ultimately opting for the letter. For a follow-up analysis, he found that people whose neural (神经的) reward centers were more active when they won money were also more likely to be among the group of liars – suggesting that lying may have to do with the inability to resist temptation."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "External conditions also matter in terms of when and how often we lie. We are more likely to lie, when we are able to rationalise it, when we are stressed and fatigued or see others being dishonest. And we are less likely to lie when we have moral reminders or when we think others are watching. “We as a society need to understand that, when we don’t punish lying, we increase the probability it will happen again.” Ariely says."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "In a 2016 study published in the journal Nature Neuroscience, Ariely and colleagues showed how dishonesty alters people’s brains, making it easier to tell ties in the future. When people uttered a falsehood, the scientists notice a burst of activity in their amygdala. The amygdala is crucial part of the brain that produces fear, anxiety and emotional responses— including that sinking, guilty feeling you get when you lie. But when scientists had their subjects play a game in which they won money by deceiving their partner, they noticed the negative signals from the amygdala began to decrease. Not only that, but when people faced no consequences for dishonesty, their falsehood tended to get even more sensational. This means that if you give people multiple opportunities to lie for their own benefit, they start with little lies which get bigger over time."
+                }
+              ]
+            }
+          ],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019121-part-3-section-3-group-1-q-46-1",
+              "displayNumber": 46,
+              "sourceQuestionNumber": 46,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Why do some experts consider lying a milestone in a child’s development?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It shows they have the ability to view complex situations from different angles."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It indicates they have an ability more remarkable than crawling and walking."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It represents their ability to actively interact with people around them."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It involves the coordination of both their mental and physical abilities."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019121-part-3-section-3-group-1-q-47-2",
+              "displayNumber": 47,
+              "sourceQuestionNumber": 47,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Why does the Harvard neuroscientist say that lying takes work?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is hard to choose from several options."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is difficult to sound natural or plausible."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It requires speedy blood flow into one’s brain."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It involves lots of sophisticated mental activity."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019121-part-3-section-3-group-1-q-48-3",
+              "displayNumber": 48,
+              "sourceQuestionNumber": 48,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Under what circumstances do people tend to lie?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "When they become too emotional."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "When they face too much peer pressure."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "When the temptation is too strong."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "When the consequences are not imminent."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019121-part-3-section-3-group-1-q-49-4",
+              "displayNumber": 49,
+              "sourceQuestionNumber": 49,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "When are people less likely to lie?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "When they are worn out and stressed."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "When they are under watchful eyes."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "When they think in a rational way"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "When they have a clear conscience."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019121-part-3-section-3-group-1-q-50-5",
+              "displayNumber": 50,
+              "sourceQuestionNumber": 50,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What does the author say will happen when a liar does not get punished?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They may feel justified."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They will tell bigger lies."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They will become complacent."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They may mix lies and truths. Passage Two"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2019121-part-3-section-3-group-2",
+          "title": "Questions 51 to 55 are based on the following passage.",
+          "presentation": "reading",
+          "instructions": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Here’s how the Pacific Northwest is preparing for “The Big One”. It’s the mother of all disaster drills for what could be the worst disaster in American history. California has spent years preparing for “The Big One”—the inevitable earthquake that will undoubtedly unleash all kinds of havoc along the famous San Andreas fault (断层). But what if the fault that runs along the Pacific Northwest delivers a gigantic earthquake of its own? If the people of the Cascadia region have anything to do with it, they won’t be caught unawares."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "The region is engaged in a multi-day earthquake-and-tsunami (海啸) drill involving around 20,000 people. The Cascadia Rising drill gives area residents and emergency responders a chance to practice what to do in case of a 9.0 magnitude earthquake and tsunami along one of the nation’s dangerous—and underestimated—faults."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "The Cascadia Earthquake Zone is big enough to compete with San Andreas (it’s been called the most dangerous fault in America), but it’s much lesser known than its California cousin. Nearly 700 miles long, the earthquake zone is located by the North American Plate off the coast of Pacific British Columbia, Washington, Oregon and Northern California."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Cascadia is what’s known as a “megathrust” fault. Megathrusts are created in earthquake zones—land plate boundaries where two plates converge. In the areas where one plate is beneath another, stress builds up over time. During a megathrust event, all of that stress releases and some of the world’s most powerful earthquakes occur. Remember the 9.1 earthquake and tsunami in the Indian Ocean off Sumatra in 2004? It was caused by megathrust event as the India plate moved beneath the Burma micro-plate."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "The last time a major earthquake occurred along the Cascadia fault was in 1700, so officials worry that another event could occur any time. To prevent that event from becoming a catastrophe, first responders will join members of the public in rehearsals that involve communication, evacuation, search and rescue, and other scenarios."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Thousands of casualties are expected if a 9.0 earthquake were to occur. Fist, the earthquake would shake metropolitan areas including Seattle and Portland. This could trigger a tsunami that would create havoc along the coast. Not all casualties can necessarily be prevented—but by coordinating across local, state, and even national borders, officials hope that the worst-case scenario can be averted. On the exercise’s website, officials explain that the report they prepare during this rehearsal will inform disaster management for years to come."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "For hundreds of thousands of Cascadia residents. “The Big One” isn’t a question of if, only when. And it’s never too early to get ready for the inevitable."
+                }
+              ]
+            }
+          ],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019121-part-3-section-3-group-2-q-51-1",
+              "displayNumber": 51,
+              "sourceQuestionNumber": 51,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What does “The Big One” refer to?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "A gigantic geological fault."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "A large-scale exercise to prepare for disasters."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "A massive natural catastrophe."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "A huge tsunami on the Caledonia coast."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019121-part-3-section-3-group-2-q-52-2",
+              "displayNumber": 52,
+              "sourceQuestionNumber": 52,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What is the purpose of the Cascadia Rising drill?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To prepare people for a major earthquake and tsunami."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To increase residents’ awareness of imminent disasters."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To teach people how to adapt to post-disaster life."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To cope with the aftermath of a possible earthquake."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019121-part-3-section-3-group-2-q-53-3",
+              "displayNumber": 53,
+              "sourceQuestionNumber": 53,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What happens in case of a megathrust earthquake according to the passage?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Two plates merge into one."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "A variety of forces converge."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Boundaries blur between plates."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Enormous stress is released."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019121-part-3-section-3-group-2-q-54-4",
+              "displayNumber": 54,
+              "sourceQuestionNumber": 54,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What do the officials hope to achieve through the drills?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Coordinating various disaster-relief efforts."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Reducing casualties in the event of a disaster."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Minimizing property loss caused by disaster."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Establishing disaster and emergency management."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019121-part-3-section-3-group-2-q-55-5",
+              "displayNumber": 55,
+              "sourceQuestionNumber": 55,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What does the author say about “The Big One” ?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Whether it will occur remains to be seen."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "How it will arrive is too early to predict."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Its occurrence is just a matter of time."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It keeps haunting Cascadia residents."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cet6-paper-2019121-part-4-translation",
+      "title": "Translation 翻译",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet6-paper-2019121-part-4-translation-group",
+          "title": "翻译题",
+          "presentation": "writing",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019121-part-4-q-1-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "translation",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "牡丹花色艳丽，形象高雅，象征着和平与繁荣，因而在中国被称为“花中之王”。中国许多地方都培育和种植牡丹。千百年来，创造了许多诗歌和绘画赞美牡丹。唐代时期，牡丹在皇家园林普遍种植并被誉为国花，因而特别风行。十世纪时，洛阳古城成为牡丹栽培中心，而且这一地位一直保持到今天。现在，成千上万的国内游客蜂拥到洛阳参加一年一度的牡丹节，欣赏洛阳牡丹独特之美，同时探索九朝古都的历史。"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": "第一句的四小句分别描述牡丹的颜色、外观、象征意义、地位;前两者是事实细节(常为 次要 信息),后两 者是评价内容(常为主要信息)。次要信息可译为主语“牡丹”的修饰成分(要与主干以逗号隔开),译法有二:可 采用“  wi th+ 名词短语”结构译作 w        it hb ri ghtc o lorsandane  le gantappearance,也可将“牡丹”与“颜色/外观”之间 隐含的谓语“拥有”以分词的形式译出 bo              a stingbri ght coo l r s andanele ga n t apper aa n ce,boas t意为“有(值得自豪的 东西)”。主要信息译为主干,两个谓语动词“象征着……”和“被称为……”通过“因而”相连,整体既可译为 s                                      o(连 词)连接的两个分句,也可译为“谓语 1+and+t              heref o r/ et hu  (            ” s 副词)+ 谓语 2 的并列谓语结构。"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+                  "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "approved"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "assetRefs": [],
+  "sourceRefs": [
+    {
+      "sourceDocumentId": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+      "relativePath": "2019年12月六级真题（第1套）.docx；2019.12英语六级考试解析第1套.pdf",
+      "sha256": "e8797f7735c6fc830d9c0648a6d7e739995d0cca161db863fb092191b0fc5791",
+      "locator": {},
+      "extractionMethod": "manual-review",
+      "confidence": 0.86
+    }
+  ],
+  "quality": {
+    "structureStatus": "approved",
+    "structureConfidence": 0.86,
+    "issueCount": 0,
+    "issues": []
+  }
+}

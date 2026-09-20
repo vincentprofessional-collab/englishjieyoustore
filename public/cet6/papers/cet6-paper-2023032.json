@@ -1,0 +1,140 @@
+{
+  "schemaVersion": 2,
+  "id": "cet6-paper-2023032",
+  "kind": "paper",
+  "title": "2023年3月大学英语六级真题 · 第2套",
+  "year": "2023",
+  "region": "全国",
+  "variant": "第2套",
+  "submissionMode": "whole-paper",
+  "instructions": [
+    {
+      "type": "notice",
+      "tone": "info",
+      "text": "按原卷分区作答。提交整卷后显示可用答案与原资料参考内容。"
+    }
+  ],
+  "sections": [
+    {
+      "id": "cet6-paper-2023032-part-1-writing",
+      "title": "Writing 写作",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet6-paper-2023032-part-1-writing-group",
+          "title": "写作题",
+          "presentation": "writing",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2023032-part-1-q-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "essay",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "d39a3cd74d99ed4230ed782003c77c24e69d1406008000334686cc8f0db6417a",
+                  "relativePath": "2023.03英语六级真题第2套.docx",
+                  "sha256": "d39a3cd74d99ed4230ed782003c77c24e69d1406008000334686cc8f0db6417a",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cet6-paper-2023032-part-2-translation",
+      "title": "Translation 翻译",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet6-paper-2023032-part-2-translation-group",
+          "title": "翻译题",
+          "presentation": "writing",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2023032-part-2-q-1-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "translation",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "郑和是中国历史上最杰出的航海家,在航海、外交、军事等诸多领域都表现出非凡的智慧和卓越的才能。他曾七次率领庞大的船队远航,访问了西太平洋和印度洋的许多国家和地区,加深了中国同东南亚、东非的相互了解。 郑和下西洋对中外的经济和文化交流起到了十分积极的推进作用,也为维护区域和平做出了巨大贡献。为了永远铭记郑和及其丰功伟绩，7月11日，即郑和首次率船队远航启程的日子，被定为中国的航海节。"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "d39a3cd74d99ed4230ed782003c77c24e69d1406008000334686cc8f0db6417a",
+                  "relativePath": "2023.03英语六级真题第2套.docx",
+                  "sha256": "d39a3cd74d99ed4230ed782003c77c24e69d1406008000334686cc8f0db6417a",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "assetRefs": [],
+  "sourceRefs": [
+    {
+      "sourceDocumentId": "d39a3cd74d99ed4230ed782003c77c24e69d1406008000334686cc8f0db6417a",
+      "relativePath": "2023.03英语六级真题第2套.docx",
+      "sha256": "d39a3cd74d99ed4230ed782003c77c24e69d1406008000334686cc8f0db6417a",
+      "locator": {},
+      "extractionMethod": "manual-review",
+      "confidence": 0.86
+    }
+  ],
+  "quality": {
+    "structureStatus": "approved",
+    "structureConfidence": 0.86,
+    "issueCount": 0,
+    "issues": []
+  }
+}

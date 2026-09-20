@@ -1,0 +1,5091 @@
+{
+  "schemaVersion": 2,
+  "id": "cet6-paper-2019062",
+  "kind": "paper",
+  "title": "2019年6月大学英语六级真题 · 第2套",
+  "year": "2019",
+  "region": "全国",
+  "variant": "第2套",
+  "submissionMode": "whole-paper",
+  "instructions": [
+    {
+      "type": "notice",
+      "tone": "info",
+      "text": "按原卷分区作答。提交整卷后显示可用答案与原资料参考内容。"
+    }
+  ],
+  "sections": [
+    {
+      "id": "cet6-paper-2019062-part-1-writing",
+      "title": "Writing 写作",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet6-paper-2019062-part-1-writing-group",
+          "title": "写作题",
+          "presentation": "writing",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019062-part-1-q-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "essay",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cet6-paper-2019062-part-2",
+      "title": "Part II         Listening Comprehension       (30 minutes)",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet6-paper-2019062-part-2-section-1-group-1",
+          "title": "题目",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019062-part-2-section-1-group-1-q-1-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Why Roman Holiday was more famous than Breakfast at Tiffany’s."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Why Audrey Hepburn had more female fans than male ones."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Why the woman wanted to be like Audrey Hepburn."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Why so many girls adored Audrey Hepburn."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019062-part-2-section-1-group-1-q-2-2",
+              "displayNumber": 2,
+              "sourceQuestionNumber": 2,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Her unique personality."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Her physical condition."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Her shift of interest to performing arts."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Her family’s suspension of financial aid."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019062-part-2-section-1-group-1-q-3-3",
+              "displayNumber": 3,
+              "sourceQuestionNumber": 3,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "She was not an outgoing person."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "She was modest and hardworking"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "She was easy-going on the whole."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "She was usually not very optimistic."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019062-part-2-section-1-group-1-q-4-4",
+              "displayNumber": 4,
+              "sourceQuestionNumber": 4,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "She was influenced by the roles she played in the films."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Her parents taught her to sympathize with the needy."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "She learned to volunteer when she was a child."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Her family benefited from other people’s help."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2019062-part-2-section-1-group-2",
+          "title": "Questions 5 to 8 are based on the conversation you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019062-part-2-section-1-group-2-q-5-1",
+              "displayNumber": 5,
+              "sourceQuestionNumber": 5,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Give a presentation."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Rise some questions."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Start a new company."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Attend a board meeting."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019062-part-2-section-1-group-2-q-6-2",
+              "displayNumber": 6,
+              "sourceQuestionNumber": 6,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It will cut production costs."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It will raise productivity."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "No staff will be dismissed."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "No new staff will be hired."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019062-part-2-section-1-group-2-q-7-3",
+              "displayNumber": 7,
+              "sourceQuestionNumber": 7,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The timeline of restructuring."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The reasons for restructuring."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The communication channels."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The company’s new missions."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019062-part-2-section-1-group-2-q-8-4",
+              "displayNumber": 8,
+              "sourceQuestionNumber": 8,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "By consulting their own department managers."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "By emailing questions to the man or the woman."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "By exploring various channels of communication."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "By visiting the company’s own computer network."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2019062-part-2-section-2-group-1",
+          "title": "Questions 9 to 11 are based on the passage you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019062-part-2-section-2-group-1-q-9-1",
+              "displayNumber": 9,
+              "sourceQuestionNumber": 9,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It helps passengers to take care of their pet animals."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It has animals to help passengers carry their language."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It uses therapy animals to soothe nervous passengers."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It allows passengers to have animal travel with them."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019062-part-2-section-2-group-1-q-10-2",
+              "displayNumber": 10,
+              "sourceQuestionNumber": 10,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Avoiding possible dangers."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Finding their way around."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Identifying drug smugglers."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Looking after sick passengers."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019062-part-2-section-2-group-1-q-11-3",
+              "displayNumber": 11,
+              "sourceQuestionNumber": 11,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Schedule their flights around the animal visits."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Photograph the therapy animals at the airport."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Keep some animals for therapeutic purposes."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Bring their animals on board their plane."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2019062-part-2-section-2-group-2",
+          "title": "Questions 12 to 15 are based on the passage you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019062-part-2-section-2-group-2-q-12-1",
+              "displayNumber": 12,
+              "sourceQuestionNumber": 12,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Beside a beautifully painted wall in Arles."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Beside the gate of an ancient Roman city."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "At the site of an ancient Roman mansion."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "At the entrance to a reception hall in Rome."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019062-part-2-section-2-group-2-q-13-2",
+              "displayNumber": 13,
+              "sourceQuestionNumber": 13,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "A number of different images."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "A number of mythological heroes."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Various musical instruments."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Paintings by famous French artists."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019062-part-2-section-2-group-2-q-14-3",
+              "displayNumber": 14,
+              "sourceQuestionNumber": 14,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The originality and expertise shown."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The worldly sophistication displayed."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The stunning images vividly depicted."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The impressive skills and costly dyes."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019062-part-2-section-2-group-2-q-15-4",
+              "displayNumber": 15,
+              "sourceQuestionNumber": 15,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "His artistic taste is superb."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "His identity remains unclear."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "He was a collector of antiques."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "He was a rich Italian merchant."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2019062-part-2-section-3-group-1",
+          "title": "Questions 16 to 18 are based on the recording you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019062-part-2-section-3-group-1-q-16-1",
+              "displayNumber": 16,
+              "sourceQuestionNumber": 16,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They encourage international cooperation."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They lay stress on basic scientific research."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They place great emphasis on empirical studies."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They favour scientists from its member countries."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019062-part-2-section-3-group-1-q-17-2",
+              "displayNumber": 17,
+              "sourceQuestionNumber": 17,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Many of them wish to win international recognition."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They believe that more hands will make light work."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They want to follow closely the international trend."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Many of their projects have become complicated."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019062-part-2-section-3-group-1-q-18-3",
+              "displayNumber": 18,
+              "sourceQuestionNumber": 18,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It requires mathematicians to work independently."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is faced with many unprecedented challenges."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It lags behind other disciplines in collaboration."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It calls for more research funding to catch up."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2019062-part-2-section-3-group-2",
+          "title": "Questions 19 to 21 are based on the recording you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019062-part-2-section-3-group-2-q-19-1",
+              "displayNumber": 19,
+              "sourceQuestionNumber": 19,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Scientists tried to send a balloon to Venus."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Scientists discovered water on Venus."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Scientists found Venus had atmosphere."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Scientists observed Venus from a space vehicle."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019062-part-2-section-3-group-2-q-20-2",
+              "displayNumber": 20,
+              "sourceQuestionNumber": 20,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It resembles Earth in many aspects."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is the same as fiction has portrayed."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It is a paradise of romance for alien life."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It undergoes geological changes like Earth."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019062-part-2-section-3-group-2-q-21-3",
+              "displayNumber": 21,
+              "sourceQuestionNumber": 21,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It might have been hotter than it is today."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It might have been a cozy habitat for life."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It used to have more water than Earth."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It used to be covered with rainforests."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2019062-part-2-section-3-group-3",
+          "title": "Questions 22 to 25 are based on the recording you have just heard.",
+          "presentation": "inline",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019062-part-2-section-3-group-3-q-22-1",
+              "displayNumber": 22,
+              "sourceQuestionNumber": 22,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Causes of sleeplessness."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Cross-cultural communication."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Cultural psychology."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Motivation and positive feelings."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019062-part-2-section-3-group-3-q-23-2",
+              "displayNumber": 23,
+              "sourceQuestionNumber": 23,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They attach great importance to sleep."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They often have trouble falling asleep."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They pay more attention to sleep efficiency."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They generally sleep longer than East Asians."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019062-part-2-section-3-group-3-q-24-3",
+              "displayNumber": 24,
+              "sourceQuestionNumber": 24,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "By asking people to report their sleep habits."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "By observing people’s sleep patterns in labs."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "By having people wear motion-detecting watches."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "By videotaping people’s daily sleeping processes."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019062-part-2-section-3-group-3-q-25-4",
+              "displayNumber": 25,
+              "sourceQuestionNumber": 25,
+              "type": "single_choice",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It has made remarkable progress in the past few decades."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It has not yet explored the cross-cultural aspect of sleep."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It has not yet produced anything conclusive."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It has attached attention all over the world."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cet6-paper-2019062-part-3",
+      "title": "Part III         Reading Comprehension      (40 minutes)",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet6-paper-2019062-part-3-section-1-group-1",
+          "title": "Questions 26 to 35 are based on the following passage.",
+          "presentation": "reading",
+          "instructions": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "The dream of personalised flight is still vivid in the minds of many inventors, some developing cycle-powered craft, others "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet6-paper-2019062-part-3-section-1-group-1-blank-26"
+                },
+                {
+                  "type": "text",
+                  "text": " money into jetpacks (喷气飞行背包). However, the flying car has always remained the "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet6-paper-2019062-part-3-section-1-group-1-blank-27"
+                },
+                {
+                  "type": "text",
+                  "text": " symbol of personal transport freedom. Several companies around the world have produced "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet6-paper-2019062-part-3-section-1-group-1-blank-28"
+                },
+                {
+                  "type": "text",
+                  "text": " that can drive on roads and fly. Airbus has a futuristic modular (组件式的) concept involving a passenger capsule that can be "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet6-paper-2019062-part-3-section-1-group-1-blank-29"
+                },
+                {
+                  "type": "text",
+                  "text": " from the road-going chassis (底盘) and picked up by a helicopter-type machine. But all these concepts are massively expensive, require safety certification standards for road and air, need "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet6-paper-2019062-part-3-section-1-group-1-blank-30"
+                },
+                {
+                  "type": "text",
+                  "text": " controls, involve complex folding wings and propellers, and have to be flown from air-strips. So they are likely to remain rich people’s playthings rather than practical transport solutions for the masses. “A car that takes off from some London street and lands in another "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet6-paper-2019062-part-3-section-1-group-1-blank-31"
+                },
+                {
+                  "type": "text",
+                  "text": " street is unlikely to happen,” says Prof. Gray, a leading aeronautical engineer. “Sky taxis are much more likely.” But that won’t stop inventors from dreaming up new ways to fly and trying to persuade investors to back their sometimes "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet6-paper-2019062-part-3-section-1-group-1-blank-32"
+                },
+                {
+                  "type": "text",
+                  "text": " schemes. Civilian aviation is being disrupted, not by the age-old desires for speed, romanticism and "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet6-paper-2019062-part-3-section-1-group-1-blank-33"
+                },
+                {
+                  "type": "text",
+                  "text": ", but by the pressing need to respond to a changing climate. New electric engines coupled with artificial intelligence and "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet6-paper-2019062-part-3-section-1-group-1-blank-34"
+                },
+                {
+                  "type": "text",
+                  "text": " systems will contribute to a more efficient, integrated transport system that is less polluting and less noisy. That may sound simple, but as Prof. Gray says, “When I travel somewhere I like this notion that when I finish my journey I feel better than when I started it. That’s completely at "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet6-paper-2019062-part-3-section-1-group-1-blank-35"
+                },
+                {
+                  "type": "text",
+                  "text": " with how I feel today.” Now that would be progress."
+                }
+              ]
+            }
+          ],
+          "sharedOptions": [
+            {
+              "id": "I",
+              "label": "I",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "pouring"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "J",
+              "label": "J",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "prototypes"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "K",
+              "label": "K",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "random"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "L",
+              "label": "L",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "repressing"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "M",
+              "label": "M",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "segmented"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "N",
+              "label": "N",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "spectrum"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "O",
+              "label": "O",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "ultimate"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "A",
+              "label": "A",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "autonomous"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "B",
+              "label": "B",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "detached"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "C",
+              "label": "C",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "dual"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "D",
+              "label": "D",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "glamour"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "E",
+              "label": "E",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "imminent"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "F",
+              "label": "F",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "odds"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "G",
+              "label": "G",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "opposites"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "H",
+              "label": "H",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "outrageous •\texclusively •\tinnovated"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "I",
+              "label": "I",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "pouring"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "J",
+              "label": "J",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "prototypes"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "K",
+              "label": "K",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "random"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "L",
+              "label": "L",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "repressing"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "M",
+              "label": "M",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "segmented"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "N",
+              "label": "N",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "spectrum"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "O",
+              "label": "O",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "ultimate"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "A",
+              "label": "A",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "autonomous"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "B",
+              "label": "B",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "detached"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "C",
+              "label": "C",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "dual"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "D",
+              "label": "D",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "glamour"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "E",
+              "label": "E",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "imminent"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "F",
+              "label": "F",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "odds"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "G",
+              "label": "G",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "opposites"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "H",
+              "label": "H",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "outrageous •\texclusively •\tinnovated"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "sharedOptionsReusable": false,
+          "questions": [
+            {
+              "id": "cet6-paper-2019062-part-3-section-1-group-1-q-26",
+              "displayNumber": 26,
+              "sourceQuestionNumber": 26,
+              "type": "inline_fill",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2019062-part-3-section-1-group-1-blank-26"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2019062-part-3-section-1-group-1-blank-26",
+                  "label": "第 26 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "per_blank"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019062-part-3-section-1-group-1-q-27",
+              "displayNumber": 27,
+              "sourceQuestionNumber": 27,
+              "type": "inline_fill",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2019062-part-3-section-1-group-1-blank-27"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2019062-part-3-section-1-group-1-blank-27",
+                  "label": "第 27 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "per_blank"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019062-part-3-section-1-group-1-q-28",
+              "displayNumber": 28,
+              "sourceQuestionNumber": 28,
+              "type": "inline_fill",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2019062-part-3-section-1-group-1-blank-28"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2019062-part-3-section-1-group-1-blank-28",
+                  "label": "第 28 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "per_blank"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019062-part-3-section-1-group-1-q-29",
+              "displayNumber": 29,
+              "sourceQuestionNumber": 29,
+              "type": "inline_fill",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2019062-part-3-section-1-group-1-blank-29"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2019062-part-3-section-1-group-1-blank-29",
+                  "label": "第 29 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "per_blank"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019062-part-3-section-1-group-1-q-30",
+              "displayNumber": 30,
+              "sourceQuestionNumber": 30,
+              "type": "inline_fill",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2019062-part-3-section-1-group-1-blank-30"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2019062-part-3-section-1-group-1-blank-30",
+                  "label": "第 30 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "per_blank"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019062-part-3-section-1-group-1-q-31",
+              "displayNumber": 31,
+              "sourceQuestionNumber": 31,
+              "type": "inline_fill",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2019062-part-3-section-1-group-1-blank-31"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2019062-part-3-section-1-group-1-blank-31",
+                  "label": "第 31 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "per_blank"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019062-part-3-section-1-group-1-q-32",
+              "displayNumber": 32,
+              "sourceQuestionNumber": 32,
+              "type": "inline_fill",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2019062-part-3-section-1-group-1-blank-32"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2019062-part-3-section-1-group-1-blank-32",
+                  "label": "第 32 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "per_blank"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019062-part-3-section-1-group-1-q-33",
+              "displayNumber": 33,
+              "sourceQuestionNumber": 33,
+              "type": "inline_fill",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2019062-part-3-section-1-group-1-blank-33"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2019062-part-3-section-1-group-1-blank-33",
+                  "label": "第 33 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "per_blank"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019062-part-3-section-1-group-1-q-34",
+              "displayNumber": 34,
+              "sourceQuestionNumber": 34,
+              "type": "inline_fill",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2019062-part-3-section-1-group-1-blank-34"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2019062-part-3-section-1-group-1-blank-34",
+                  "label": "第 34 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "per_blank"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019062-part-3-section-1-group-1-q-35",
+              "displayNumber": 35,
+              "sourceQuestionNumber": 35,
+              "type": "inline_fill",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2019062-part-3-section-1-group-1-blank-35"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2019062-part-3-section-1-group-1-blank-35",
+                  "label": "第 35 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "per_blank"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2019062-part-3-section-2-group-1",
+          "title": "题目",
+          "presentation": "reading",
+          "instructions": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Companies Are Working with Consumers to Reduce Waste"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "A) As consumers, we are very wasteful. Annually, the world generates 1.3 billion tons of solid waste. This is expected to go up to 2.2 billion by 2025. The developed countries are responsible for 44% of waste, and in the U.S. alone, the average person throws away their body weight in rubbish every month."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "B) Conventional wisdom would seem to suggest that companies have no incentive to lengthen the life cycle of their products and reduce the revenue they would get from selling new goods. Yet, more and more businesses are thinking about how to reduce consumer waste. This is partly driven by the rising price of raw materials and metals. It is also partly due to both consumers and companies becoming more aware of the need to protect our environment."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "C) When choosing what products to buy and which brands to buy from, more and more consumers are looking into sustainability. This is opposed to just price and performance they were concerned about in the past. In a survey of 54 of the world’s leading brands, almost all of them reported that consumers are showing increasing care about sustainable lifestyles. At the same time, surveys on consumers in the U.S. and the U.K. show that they also care about minimizing energy use and reducing waste."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "D) For the most part, consumers control what happens to a product. But some companies are realizing that placing the burden of recycling entirely on the consumer is not an effective strategy, especially when tossing something away seems like the easiest and most convenient option."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "E) Some retailers and manufacturers in the clothing, footwear, and electronics industries have launched environmental programs. They want to make their customers interested in preserving their products and preventing things that still have value from going to the garbage dump. By offering services to help expand the longevity of their products, they’re promising quality and durability to consumers, and receiving the reputational gains for being environmentally friendly."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "F) For example, the Swedish jeans company Nudie Jeans offers free repair at twenty of their shops. Instead of discarding their old worn-out jeans, customers bring them in to be renewed. The company even provides mail-order repair kits and online videos, so that customers can learn how to fix a pair of jeans at home. Their philosophy is that extending the life of a pair of jeans is not only great for the environment, but allows the consumer to get more value out of their product. When customers do want to toss their pair, they can give them back to the store, which will repurpose and resell them. Another clothing company, Patagonia, a high-end outdoor clothing store, follows the same principle. It has partnered with DIY website iFixit to teach consumers how to repair their clothing, such as waterproof outerwear, at home. The company also offers a repair program for their customers for a modest fee. Currently, Patagonia repairs about 40,000 garments a year in their Reno, Nevada, service center. According to the company’s CEO, Rose Marcario, this is about building a company that cares about the environment. At the same time, offering repair supports the perceived quality of its products."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "G) In Brazil, the multinational corporation Adidas has been running a shoe-recycling program called “Sustainable Footprint” since 2012. Customers can bring shoes of any brand into an Adidas store to be shredded and turned into alternative fuels for energy creation instead of being burned as trash. They are used to fuel cement ovens. To motivate visitors to bring in more old shoes, Adidas Brazil promotes the program in stores by showing videos to educate customers, and it even offers a discount each time a customer brings in an old pair of shoes. This boosts the reputation and image of Adidas by making people more aware of the company’s values."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "H) Enormous opportunities also lie with e-waste. It is estimated that in 2014 the world produced some 42 million metric tons of e-waste (discarded electrical and electronic equipment and its parts) with North America and Europe accounting for 8 and 12 million metric tons respectively. The materials from e-waste include iron, copper, gold, silver, and aluminum materials that could be reused, resold, salvaged, or recycled. Together, the value of these metals is estimated to be about $52 billion. Electronics giants like Best Buy and Samsung have provided e-waste take-back programs over the past few years, which aim to refurbish (翻新) old electronic components and parts into new products."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "I) For other companies interested in reducing waste, helping the environment, and providing the sustainable lifestyles that consumers seek, here are some first steps for building a relationship with customers that focuses on recycling and restoring value to products."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "J) Find partners. If you are a manufacturer who relies on outside distributors, then retailers are the ideal partner for collecting old products. Power tool maker DeWalt partners with companies, such as Lowes and Napa Auto Parts, to collect old tools at their stores for recycling. The partnership benefits both sides by allowing unconventional partners (for example, two companies from two different industries) to work together on a specific aspect of the value chain, like, in this example, an engine firm with an accessory one."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "K) Create incentives. Environmental conscientiousness isn’t always enough to make customers recycle old goods. For instance, DeWalt discovered that many contractors were holding on to their old tools, even if they no longer worked, because they were expensive purchases and it was hard to justify bringing them in to recycle. By offering instant discounts worth as much as $100, DeWalt launched a trade-in program to encourage people to bring back tools. As a result, DeWalt now reuses those materials to create new products."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "L) Start with a trial program, and expect to change the details as you go. Any take-back program will likely change over time, depending on what works for your customers and company goals. Maybe you see low customer participation at first, or conversely, so much success that the cost of recycling becomes too high. Best Buy, for instance, has been bearing the lion’s share of e-waste volume since two of its largest competitors, Amazon and Wal-mart, do not have their own recycling programs. Since the launch of its program, Best Buy changed its policy to add a $25 fee for recycling old televisions in order to keep the program going."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "M) Build a culture of collective values with customers. A stronger relationship between the retailer/producer and the consumer isn’t just about financial incentives. By creating more awareness around your efforts to reduce waste, and by developing a culture of responsibility, repair, and reuse, you can build customer loyalty based on shared values and responsibilities."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "N) These examples are just the tip of the iceberg, but they demonstrate how helping customers get more use of their materials can transform value chains and operations. Reducing waste by incorporating used materials into production can cut costs and decrease the price of procurement (采购): less to be procured from the outside and more to be re-utilized from the inside."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "O) Companies play a big role in creating a circular economy, in which value is generating less from extracting new resources and more from getting better use out of the resources we already have--but they must also get customers engaged in the process."
+                }
+              ]
+            }
+          ],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019062-part-3-section-2-group-1-q-36-1",
+              "displayNumber": 36,
+              "sourceQuestionNumber": 36,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Some companies believe that products’ prolonged lifespan benefits both the environment and customers."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019062-part-3-section-2-group-1-q-37-2",
+              "displayNumber": 37,
+              "sourceQuestionNumber": 37,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "A survey shows shoppers today are getting more concerned about energy conservation and environmental protection when deciding what to buy."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019062-part-3-section-2-group-1-q-38-3",
+              "displayNumber": 38,
+              "sourceQuestionNumber": 38,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Companies can build customer loyalty by creating a positive culture of environmental awareness."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019062-part-3-section-2-group-1-q-39-4",
+              "displayNumber": 39,
+              "sourceQuestionNumber": 39,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "When companies launch environmental programs, they will have their brand reputation enhanced."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019062-part-3-section-2-group-1-q-40-5",
+              "displayNumber": 40,
+              "sourceQuestionNumber": 40,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "One multinational company offers discounts to customers who bring in old footwear to be used as fuel."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019062-part-3-section-2-group-1-q-41-6",
+              "displayNumber": 41,
+              "sourceQuestionNumber": 41,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Recycling used products can help manufacturers reduce production costs."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019062-part-3-section-2-group-1-q-42-7",
+              "displayNumber": 42,
+              "sourceQuestionNumber": 42,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Electronic products contain valuable metals that could be recovered."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019062-part-3-section-2-group-1-q-43-8",
+              "displayNumber": 43,
+              "sourceQuestionNumber": 43,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "It seems commonly believed that companies are not motivated to prolong their products’ lifespan."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019062-part-3-section-2-group-1-q-44-9",
+              "displayNumber": 44,
+              "sourceQuestionNumber": 44,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "It is advisable for companies to partner with each other in product recycling."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019062-part-3-section-2-group-1-q-45-10",
+              "displayNumber": 45,
+              "sourceQuestionNumber": 45,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Some businesses have begun to realize it may not be effective to let consumers take full responsibility for recycling."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2019062-part-3-section-3-group-1",
+          "title": "Questions 46 to 50 are based on the following passage.",
+          "presentation": "reading",
+          "instructions": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Effective Friday, Screen Actors Guild-American Federation of Television and Radio Artists (SAG-AFTRA) has declared a strike against 11 video game publishers over games that went into production after Feb. 17, 2015. The companies include some of the heavyweights of the industry, like Electronic Arts Productions, Insomniac Games, Activision and Disney."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "The strike comes in light of an unsuccessful 19 months of negotiations after the existing labor contract known as the Interactive Media Agreement expired in late 2014. overall, the strike is an effort to provide more secondary compensation along with other concerns, such as transparency upon hiring talent and on-set (制作中) safety precautions."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "The video gaming industry has ballooned in recent years. The Los Angeles Times reports that the industry is in the midst of an intense increase in cash flow. In 2015, gaming produced $23.5 billion in domestic revenue."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "But SAG-AFTRA says voice actors don’t receive residuals (追加酬金) for their gaming work. Instead, they receive a fixed rate, which is typically about $825 for a standard four-hour vocal session. So the voice actors are pushing for the idea of secondary compensation—a performance bonus every time a game sells 2 million copies or downloads, or reaches 2 million subscribers, with a cap at 8 million."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "“It’s a very small number of games that would trigger this secondary compensation issue,”said voice actor Crispin Freeman, who’s a member of the union’s negotiating committee. “This is an important aspect of what it means to be a freelance (从事自由职业的) performer, who isn’t regularly employed every single day working on projects.”"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Another major complaint from the actors is the secrecy of the industry. “I can’t imagine if there’s any other acting job in the world where you don’t know what show you’re in, when you’re hired,” says voice actor Keythe Farley, who chairs the SAG-AFTRA negotiating committee."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "“And yet that happens every day in the video game world,” Farley told reporters during a press conference Friday. “I was a main character in Fallout 4, a character by the name of Kellogg, and I never knew that I was doing vocal recording for that game throughout the year and a half.”"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Scott Witlin, the lawyer representing the video game companies, says voice actors “represent less than one tenth of 1 percent of the work that goes into making a video game.” So “even though they’re the top craftsmen in their field,” Witlin says, “if we pay them under a vastly different system than the people who do the 99.9 percent of the work, that’s going to create far more problems for the video game companies.”"
+                }
+              ]
+            }
+          ],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019062-part-3-section-3-group-1-q-46-1",
+              "displayNumber": 46,
+              "sourceQuestionNumber": 46,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Why did SAG-AFTRA declare a strike against some video game publishers?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The labor contract between them had been violated."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Its appeal to renegotiate the contract had been rejected."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It had been cheated repeatedly in the 19 months of talks."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The negotiations between them had broken down."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019062-part-3-section-3-group-1-q-47-2",
+              "displayNumber": 47,
+              "sourceQuestionNumber": 47,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What do we learn from the passage about the video gaming industry?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It has reaped huge profits in recent years."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It has become more open and transparent."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It has attracted many famous voice actors."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It has invested a lot in its domestic market."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019062-part-3-section-3-group-1-q-48-3",
+              "displayNumber": 48,
+              "sourceQuestionNumber": 48,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What are the voice actors demanding?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "More regular employment."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "A non-discriminatory contract."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Extra pay based on sales revenues."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "A limit on the maximum work hours."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019062-part-3-section-3-group-1-q-49-4",
+              "displayNumber": 49,
+              "sourceQuestionNumber": 49,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What does Keythe Farley say about voice actors?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are kept in the dark about many details of their job."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are discriminated against in the gaming industry."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are not paid on a regular basis."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They are not employed full-time."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019062-part-3-section-3-group-1-q-50-5",
+              "displayNumber": 50,
+              "sourceQuestionNumber": 50,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What is the argument of lawyer Scott Witlin?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Voice actors should have a pay raise if they prove to be top craftsmen."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Changing the pay system would cause the industry more problems."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Voice actors are mere craftsmen, not professional performers."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Paying voice actors on an hourly basis is in line with the law. Passage Two"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2019062-part-3-section-3-group-2",
+          "title": "Questions 51 to 55 are based on the following passage.",
+          "presentation": "reading",
+          "instructions": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Officials at the White House announced a new space policy focused on managing the increasing number of satellites that companies and governments are launching into space. Space Policy Directive-3 lays out general guidelines for the United States to mitigate (缓解) the effects of space debris and track and manage traffic in space."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "This policy sets the stage for the Department of Commerce to take over the management of traffic in space. The department will make sure that newly launched satellites don’t use radio frequencies that would interfere with existing satellites, and schedule when such new satellites can be launched. This only applies to American space activities, but the hope is that it will help standardize a set of norms in the dawning commercial spaceflight industry throughout the world."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Space, especially the space directly around our planet, is getting more crowded as more governments and companies launch satellites. One impetus for the policy is that companies are already starting to build massive constellations ( 星 座 ), comprising hundreds or thousands of satellites with many moving parts among them. With so much stuff in space, and a limited area around our planet, the government wants to reduce the chances of a collision. Two or more satellites slamming into each other could create many more out-of-control bits that would pose even more hazards to the growing collection of satellites in space."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "And it’s not like this hasn’t happened before. In 2009 an old Russian craft slammed into a communications satellite, creating a cloud of hundreds of pieces of debris and putting other hardware at risk. Journalist Sarah Scoles reports that NASA currently tracks about 24,000 objects in space, and in 2016 the Air Force had to issue 3,995,874 warnings to satellite owners alerting them to a potential nearby threat from another satellite or bit of debris."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "That’s why this new policy also includes directions to update the current U.S. Government Orbital Debris Mitigation Standard Practices, which already require any entity that launches a satellite or spacecraft to vigorously analyze the likelihood that any of their actions, from an unexpected failure or normal operations, will create more space debris. It includes accounting for any piece of debris they plan to release over 5mm that might stay in orbit for 25 years or more. It might seem surprising to think about an item staying in space for that long, but the oldest satellite still in orbit-Vanguard 1-turned 60 in 2018."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Agencies and companies throughout the world are working on developing technology that would dispose of or capture space debris before it causes serious damage. But for now, the U.S. government is more focused on preventing new debris from forming than taking the trash out of orbit."
+                }
+              ]
+            }
+          ],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019062-part-3-section-3-group-2-q-51-1",
+              "displayNumber": 51,
+              "sourceQuestionNumber": 51,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What is the purpose of the new U.S. space policy?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To lay out general guidelines for space exploration."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To encourage companies to join in space programs."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To make the best use of satellites in space."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "To improve traffic conditions in space."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019062-part-3-section-3-group-2-q-52-2",
+              "displayNumber": 52,
+              "sourceQuestionNumber": 52,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What is the Department of Commerce expected to do under the new policy?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Reduce debris in space."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Monitor satellite operations."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Regulate the launching of new satellites."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Update satellite communications technology."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019062-part-3-section-3-group-2-q-53-3",
+              "displayNumber": 53,
+              "sourceQuestionNumber": 53,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What does the U.S. government hope to do with the new space policy?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Set international standards for the space flight industry."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Monopolize space industry by developing a set of norms."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Facilitate commercial space flights throughout the world."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Promote international collaboration in space exploration."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019062-part-3-section-3-group-2-q-54-4",
+              "displayNumber": 54,
+              "sourceQuestionNumber": 54,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What is a space vehicle launching entity required to do according to the current U.S. Government Orbital Debris Mitigation Standard Practices?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Give an estimate of how long its debris will stay in space."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Account for the debris it has released into space at any time."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Provide a detailed plan for managing the space debris it creates."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Make a thorough analysis of any possible addition to space debris."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2019062-part-3-section-3-group-2-q-55-5",
+              "displayNumber": 55,
+              "sourceQuestionNumber": 55,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What are space agencies and companies aiming to do at present?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Recycle used space vehicles before they turn into debris."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Develop technology to address the space debris problem."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Limit the amount of debris entering space."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Cooperate closely to retrieve space debris."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cet6-paper-2019062-part-4-translation",
+      "title": "Translation 翻译",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet6-paper-2019062-part-4-translation-group",
+          "title": "翻译题",
+          "presentation": "writing",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2019062-part-4-q-1-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "translation",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "中国幅员辽阔，人口众多，很多地方人们都说自己的方言。方言在发音上差别很大，词汇和语法差别较小。有些方言，特别是北方和南方的方言，差异很大，以致于说不同方言的人常常很难听懂彼此的讲话。方言被认为是当地文化的一个组成部分，但近年来能说方言的人数不断减少。为了鼓励人们更多说本地语言，一些地方政府已经采取措施，如在学校开设方言课，在广播和电视上播放方言节目，以期保存本地的文化遗产。"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "relativePath": "2019年06月六级真题（第2套）.docx",
+                  "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "assetRefs": [],
+  "sourceRefs": [
+    {
+      "sourceDocumentId": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+      "relativePath": "2019年06月六级真题（第2套）.docx",
+      "sha256": "bda0f9f525e301bd43041b2e5e2c60d73a3796327ba92bd13a9ff66b6afb8d2f",
+      "locator": {},
+      "extractionMethod": "manual-review",
+      "confidence": 0.86
+    }
+  ],
+  "quality": {
+    "structureStatus": "approved",
+    "structureConfidence": 0.86,
+    "issueCount": 0,
+    "issues": []
+  }
+}

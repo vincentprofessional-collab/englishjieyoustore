@@ -1,8 +1,12 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {
+  ensureCet4ExamMenu,
+  ensureCet6ExamMenu,
   ensureJuniorHighExamLink,
   ensureJuniorHighExamMenu,
+  ensureSatExamMenu,
+  orderLanguageExamMenu,
 } from "../src/lib/content/site-chrome-nav.ts";
 
 test("published exam menu keeps the junior-high link when an older config omits it", () => {
@@ -52,4 +56,89 @@ test("published nav normalizes an older exam label while preserving its children
 
   assert.equal(merged[0].label, "语言考试");
   assert.deepEqual(merged[0].children.map((item) => item.id), ["ielts", "junior-high-english"]);
+});
+
+test("published nav repairs a CET-4 placeholder that reused the CET-4 id", () => {
+  const source = [{
+    id: "exams",
+    label: "语言考试",
+    children: [
+      { id: "other-exams", label: "其他考试正在开发中", href: "", children: [] },
+      { id: "cet4", label: "其他考试正在开发中", href: "", children: [] },
+    ],
+  }];
+  const exams = { id: "exams", label: "语言考试", children: [] };
+  const cet4 = {
+    id: "cet4",
+    label: "大学英语四级",
+    href: "/cet4",
+    children: [],
+  };
+
+  const merged = ensureCet4ExamMenu(source, exams, cet4);
+
+  assert.deepEqual(merged[0].children.map((item) => item.id), ["cet4"]);
+  assert.equal(merged[0].children[0].label, "大学英语四级");
+  assert.equal(merged[0].children[0].href, "/cet4");
+});
+
+test("published nav adds CET-6 beside CET-4 and removes the stale placeholder", () => {
+  const source = [{
+    id: "exams",
+    label: "语言考试",
+    children: [
+      { id: "cet4", label: "大学英语四级", href: "/cet4", children: [] },
+      { id: "other-exams", label: "其他考试正在开发中", href: "", children: [] },
+    ],
+  }];
+  const exams = { id: "exams", label: "语言考试", children: [] };
+  const cet6 = { id: "cet6", label: "大学英语六级", href: "/cet6", children: [] };
+
+  const merged = ensureCet6ExamMenu(source, exams, cet6);
+
+  assert.deepEqual(merged[0].children.map((item) => item.id), ["cet4", "cet6"]);
+  assert.equal(merged[0].children[1].href, "/cet6");
+});
+
+test("published language-exam menu follows the requested order", () => {
+  const source = [
+    {
+      id: "exams",
+      label: "语言考试",
+      children: [
+        { id: "sat-reading-writing", label: "SAT Reading and Writing", children: [] },
+        { id: "ielts", label: "雅思", children: [] },
+        { id: "cet6", label: "大学英语六级", children: [] },
+        { id: "junior-high-english", label: "中考英语", children: [] },
+        { id: "cet4", label: "大学英语四级", children: [] },
+        { id: "senior-high-english", label: "高考英语", children: [] },
+      ],
+    },
+  ];
+
+  const ordered = orderLanguageExamMenu(source);
+
+  assert.deepEqual(ordered[0].children.map((item) => item.id), [
+    "junior-high-english",
+    "senior-high-english",
+    "cet4",
+    "cet6",
+    "ielts",
+    "sat-reading-writing",
+  ]);
+});
+
+test("published nav normalizes the SAT label", () => {
+  const source = [{
+    id: "exams",
+    label: "语言考试",
+    children: [{ id: "sat-reading-writing", label: "SAT Reading and Writing", children: [] }],
+  }];
+  const exams = { id: "exams", label: "语言考试", children: [] };
+  const sat = { id: "sat-reading-writing", label: "SAT", href: "/sat", children: [] };
+
+  const normalized = ensureSatExamMenu(source, exams, sat);
+
+  assert.equal(normalized[0].children[0].label, "SAT");
+  assert.equal(normalized[0].children[0].href, "/sat");
 });

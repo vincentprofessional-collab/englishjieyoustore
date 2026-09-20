@@ -1,0 +1,2593 @@
+{
+  "schemaVersion": 2,
+  "id": "cet6-paper-2024063",
+  "kind": "paper",
+  "title": "2024年6月大学英语六级真题 · 第3套",
+  "year": "2024",
+  "region": "全国",
+  "variant": "第3套",
+  "submissionMode": "whole-paper",
+  "instructions": [
+    {
+      "type": "notice",
+      "tone": "info",
+      "text": "按原卷分区作答。提交整卷后显示可用答案与原资料参考内容。"
+    }
+  ],
+  "sections": [
+    {
+      "id": "cet6-paper-2024063-part-1-writing",
+      "title": "Writing 写作",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet6-paper-2024063-part-1-writing-group",
+          "title": "写作题",
+          "presentation": "writing",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2024063-part-1-q-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "essay",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "You should copy the sentence given in quotes at the beginning of your essay."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cet6-paper-2024063-part-3",
+      "title": "Part III              Reading Comprehension             (40 minutes)",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet6-paper-2024063-part-3-section-1-group-1",
+          "title": "题目",
+          "presentation": "reading",
+          "instructions": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Directions: In this section, there is a passage with ten blanks. You are required to select one word for each blank from a list of choices given in a word bank following the passage. Read the passage through carefully before making your choices. Each choice in the bank is identified by a letter. Please mark the corresponding letter for each item on Answer Sheet 2 with a single line through the centre. You may not use any of the words in the bank more than once. A rainbow is a multi-colored, arc-shaped phenomenon that can appear in the sky. The colors of a rainbow are produced by the reflection and "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet6-paper-2024063-part-3-section-1-group-1-blank-26"
+                },
+                {
+                  "type": "text",
+                  "text": " of light through water droplets (小滴) present in the atmosphere. An observer may "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet6-paper-2024063-part-3-section-1-group-1-blank-27"
+                },
+                {
+                  "type": "text",
+                  "text": " a rainbow to be located either near or far away, but this phenomenon is not actually located at any specific spot. Instead, the appearance of a rainbow depends entirely upon the position of the observer in "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet6-paper-2024063-part-3-section-1-group-1-blank-28"
+                },
+                {
+                  "type": "text",
+                  "text": " to the direction of light. In essence, a rainbow is an "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet6-paper-2024063-part-3-section-1-group-1-blank-29"
+                },
+                {
+                  "type": "text",
+                  "text": " illusion. Rainbows present a "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet6-paper-2024063-part-3-section-1-group-1-blank-30"
+                },
+                {
+                  "type": "text",
+                  "text": " made up of seven colors in a specific order. In fact, school children in many English-speaking countries are taught to remember the name \"Roy G. Biv\" as an aid for remembering the colors of a rainbow and their order. \"Roy G. Biv\" "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet6-paper-2024063-part-3-section-1-group-1-blank-31"
+                },
+                {
+                  "type": "text",
+                  "text": " for: red, orange, yellow, green, blue, indigo, and violet. The outer edge of the rainbow arc is red, while the inner edge is violet. A rainbow is formed when light (generally sunlight) passes through water droplets "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet6-paper-2024063-part-3-section-1-group-1-blank-32"
+                },
+                {
+                  "type": "text",
+                  "text": " in the atmosphere. The light waves change direction as they pass through the water droplets, resulting in two processes: reflection and refraction (折射). When light reflects off a water droplet, it simply "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet6-paper-2024063-part-3-section-1-group-1-blank-33"
+                },
+                {
+                  "type": "text",
+                  "text": " back in the opposite direction from where it "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet6-paper-2024063-part-3-section-1-group-1-blank-34"
+                },
+                {
+                  "type": "text",
+                  "text": ". When light refracts, it takes a different direction. Some individuals refer to refracted light as \"bent light waves.\" A rainbow is formed because white light enters the water droplet, where it bends in several different directions. When these bent light waves reach the other side of the water droplet, they reflect back out of the droplet instead of "
+                },
+                {
+                  "type": "blank",
+                  "blankId": "cet6-paper-2024063-part-3-section-1-group-1-blank-35"
+                },
+                {
+                  "type": "text",
+                  "text": " passing through the water. Since the white light is separated inside of the water, the refracted light appears as separate colors to the human eye."
+                }
+              ]
+            }
+          ],
+          "sharedOptions": [
+            {
+              "id": "A",
+              "label": "A",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "bounces"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "I",
+              "label": "I",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "permeates"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "B",
+              "label": "B",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "completely"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "J",
+              "label": "J",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "ponder"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "C",
+              "label": "C",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "dispersion"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "K",
+              "label": "K",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "preceding"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "D",
+              "label": "D",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "eccentric"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "L",
+              "label": "L",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "recklessly"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "E",
+              "label": "E",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "hanging"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "M",
+              "label": "M",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "relation"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "F",
+              "label": "F",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "optical"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "N",
+              "label": "N",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "spectrum"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "G",
+              "label": "G",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "originates"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "O",
+              "label": "O",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "stands"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "H",
+              "label": "H",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "perceive"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "sharedOptionsReusable": false,
+          "questions": [
+            {
+              "id": "cet6-paper-2024063-part-3-section-1-group-1-q-26",
+              "displayNumber": 26,
+              "sourceQuestionNumber": 26,
+              "type": "inline_fill",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2024063-part-3-section-1-group-1-blank-26"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2024063-part-3-section-1-group-1-blank-26",
+                  "label": "第 26 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "per_blank"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2024063-part-3-section-1-group-1-q-27",
+              "displayNumber": 27,
+              "sourceQuestionNumber": 27,
+              "type": "inline_fill",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2024063-part-3-section-1-group-1-blank-27"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2024063-part-3-section-1-group-1-blank-27",
+                  "label": "第 27 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "per_blank"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2024063-part-3-section-1-group-1-q-28",
+              "displayNumber": 28,
+              "sourceQuestionNumber": 28,
+              "type": "inline_fill",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2024063-part-3-section-1-group-1-blank-28"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2024063-part-3-section-1-group-1-blank-28",
+                  "label": "第 28 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "per_blank"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2024063-part-3-section-1-group-1-q-29",
+              "displayNumber": 29,
+              "sourceQuestionNumber": 29,
+              "type": "inline_fill",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2024063-part-3-section-1-group-1-blank-29"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2024063-part-3-section-1-group-1-blank-29",
+                  "label": "第 29 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "per_blank"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2024063-part-3-section-1-group-1-q-30",
+              "displayNumber": 30,
+              "sourceQuestionNumber": 30,
+              "type": "inline_fill",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2024063-part-3-section-1-group-1-blank-30"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2024063-part-3-section-1-group-1-blank-30",
+                  "label": "第 30 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "per_blank"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2024063-part-3-section-1-group-1-q-31",
+              "displayNumber": 31,
+              "sourceQuestionNumber": 31,
+              "type": "inline_fill",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2024063-part-3-section-1-group-1-blank-31"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2024063-part-3-section-1-group-1-blank-31",
+                  "label": "第 31 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "per_blank"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2024063-part-3-section-1-group-1-q-32",
+              "displayNumber": 32,
+              "sourceQuestionNumber": 32,
+              "type": "inline_fill",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2024063-part-3-section-1-group-1-blank-32"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2024063-part-3-section-1-group-1-blank-32",
+                  "label": "第 32 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "per_blank"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2024063-part-3-section-1-group-1-q-33",
+              "displayNumber": 33,
+              "sourceQuestionNumber": 33,
+              "type": "inline_fill",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2024063-part-3-section-1-group-1-blank-33"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2024063-part-3-section-1-group-1-blank-33",
+                  "label": "第 33 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "per_blank"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2024063-part-3-section-1-group-1-q-34",
+              "displayNumber": 34,
+              "sourceQuestionNumber": 34,
+              "type": "inline_fill",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2024063-part-3-section-1-group-1-blank-34"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2024063-part-3-section-1-group-1-blank-34",
+                  "label": "第 34 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "per_blank"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2024063-part-3-section-1-group-1-q-35",
+              "displayNumber": 35,
+              "sourceQuestionNumber": 35,
+              "type": "inline_fill",
+              "promptBlocks": [],
+              "placement": {
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2024063-part-3-section-1-group-1-blank-35"
+                ]
+              },
+              "options": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2024063-part-3-section-1-group-1-blank-35",
+                  "label": "第 35 题"
+                }
+              ],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "per_blank"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2024063-part-3-section-2-group-1",
+          "title": "题目",
+          "presentation": "reading",
+          "instructions": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Blame your worthless workdays on meeting recovery syndrome"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "A) Phyllis Hartman knows what it's like to make one's way through the depths of office meeting hell. Managers at one of her former human resources jobs arranged so many meetings that attendees would fall asleep at the table or intentionally arrive late. With hours of her day blocked up with unnecessary meetings, she was often forced to make up her work during overtime. \"I was actually working more hours than I probably would have needed to get the work done,\" says Hartman, who is founder and president of PGHR Consulting in Pittsburgh, Pennsylvania."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "B) She isn't alone in her frustration. Between 11 million and 55 million meetings are held each day in the United States, costing most organisations between 7% and 15% of their personnel budgets. Every week, employees spend about six hours in meetings, while the average manager meets for a staggering 23 hours."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "C) And though experts agree that traditional meetings are essential for making certain decisions and developing strategy, some employees view them as one of the most unnecessary parts of the workday. The result is not only hundreds of billions of wasted dollars, but an annoyance of what organisational psychologists call \"meeting recovery syndrome (MRS)\": time spent cooling off and regaining focus after a useless meeting. If you run to the office kitchen to get some relief with colleagues after a frustrating meeting, you're likely experiencing meeting recovery syndrome."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "D) Meeting recovery syndrome is a concept that should be familiar to almost anyone who has held a formal job. It isn't ground-breaking to say workers feel fatigued after a meeting, but only in recent decades have scientists deemed the condition worthy of further investigation. With its links to organisational efficiency and employee wellbeing, MRS has attracted the attention of psychologists aware of the need to understand its precise causes and cures."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "E) Today, in so far as researchers can hypothesise, MRS is most easily understood as a slow renewal of finite mental and physical resources. When an employee sits through an ineffective meeting their brain power is essentially being drained away. Meetings drain vitality if they last too long, fail to engage employees or turn into one-sided lectures. The conservation of resources theory, originally proposed in 1989 by Dr Stevan Hobfoll, states that psychological stress occurs when a person's resources are threatened or lost. When resources are low, a person will shift into defence to conserve their remaining supply. In the case of office meetings, where some of employees' most valuable resources are their focus, alertness and motivation, this can mean an abrupt halt in productivity as they take time to recover."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "F) As humans, when we transition from one task to another on the job-say from sitting in a meeting to doing normal work-it takes an effortful cognitive switch. We must detach ourselves from the previous task and expend significant mental energy to move on. If we are already drained to dangerous levels, then making the mental switch to the next thing is extra tough. It's common to see people cyber-loafing after a frustrating meeting, going and getting coffee, interrupting a colleague and telling them about the meeting, and so on."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "G) Each person's ability to recover from horrible meetings is different. Some can bounce back quickly, while others carry their fatigue until the end of the workday. Yet while no formal MRS studies are currently underway, one can loosely speculate on the length of an average employee's lag time. Switching tasks in a non-MRS condition takes about 10 to 15 minutes. With MRS, it may take as long as 45 minutes on average. It's even worse when a worker has several meetings that are separated by 30 minutes. \"Not enough time to transition in a non-MRS situation to get anything done, and in an MRS situation, not quite enough time to recover for the next meeting,\" says researcher Joseph Allen. \"Then, add the compounding of back-to-back bad meetings and we may have an epidemic on our hands.\""
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "H) In an effort to combat the side effects of MRS, Allen, along with researcher Joseph Mroz and colleagues at the University of Nebraska-Omaha, published a study detailing the best ways to avoid common traps, including a concise checklist of do's and don'ts applicable to any workplace. Drawing from around 200 papers to compile their comprehensive list, Mroz and his team may now hold a remedy to the largely undefined problem of MRS."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "I) Mroz says a good place to start is asking ourselves if our meetings are even necessary in the first place. If all that's on the agenda is a quick catch-up, or some non-urgent information sharing, it may better suit the group to send around an email instead. \"The second thing I would always recommend is keep the meeting as small as possible,\" says Mroz. \"If they don't actually have some kind of immediate input, then they can follow up later. They don't need to be sitting in this hour-long meeting.\" Less time in meetings would ultimately lead to more employee engagement in the meetings they do attend, which experts agree is a proven remedy for MRS."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "J) Employees also feel taxed when they are invited together to meetings that don't inspire participation, says Cliff Scott, professor of organisational science. It takes precious time for them to vent their emotions, complain and try to regain focus after a pointless meeting—one of the main traps of MRS. Over time as employees find themselves tied up in more and more unnecessary meetings—and thus dealing with increasing lag times from MRS—the waste of workday hours can feel insulting."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "K) Despite the relative scarcity of research behind the subject, Hartman has taught herself many of the same tricks suggested in Mroz's study, and has come a long way since her days of being stuck with unnecessary meetings. The people she invites to meetings today include not just the essential employees, but also representatives from every department that might have a stake in the issue at hand. Managers like her, who seek input even from non-experts to shape their decisions, can find greater support and cooperation from their workforce, she says."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "L) If an organisation were to apply all 22 suggestions from Mroz and Allen's findings, the most noticeable difference would be a stark decrease in the total number of meetings on the schedule, Mroz says. Less time in meetings would ultimately lead to increased productivity, which is the ultimate objective of convening a meeting. While none of the counter-MRS ideas have been tested empirically yet, Allen says one trick with promise is for employees to identify things that quickly change their mood from negative to positive. As simple as it sounds, finding a personal happy place, going there and then coming straight back to work might be key to facilitating recovery."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "M) Leaders should see also themselves as \"stewards of everyone else's valuable time\", adds Steven Rogelberg, author of The Surprising Science of Meetings. Having the skills to foresee potential traps and treat employees' endurance with care allows leaders to provide effective short-term deterrents to MRS."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "N) Most important, however, is for organisations to awaken to the concept of meetings being flexible, says Allen. By reshaping the way they prioritise employees' time, companies can eliminate the very sources of MRS in their tracks."
+                }
+              ]
+            }
+          ],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2024063-part-3-section-2-group-1-q-36-1",
+              "displayNumber": 36,
+              "sourceQuestionNumber": 36,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Although employees are said to be fatigued by meetings, the condition has not been considered worthy of further research until recently."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2024063-part-3-section-2-group-1-q-37-2",
+              "displayNumber": 37,
+              "sourceQuestionNumber": 37,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Mroz and his team compiled a list of what to do and what not to do to remedy the problem of MRS."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2024063-part-3-section-2-group-1-q-38-3",
+              "displayNumber": 38,
+              "sourceQuestionNumber": 38,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Companies can get rid of the root cause of MRS if they give priority to workers' time."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2024063-part-3-section-2-group-1-q-39-4",
+              "displayNumber": 39,
+              "sourceQuestionNumber": 39,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "If workers are exhausted to a dangerous degree, it is extremely hard for them to transition to the next task."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2024063-part-3-section-2-group-1-q-40-5",
+              "displayNumber": 40,
+              "sourceQuestionNumber": 40,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Employees in America spend a lot of time attending meetings while the number of hours managers meet is several times more."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2024063-part-3-section-2-group-1-q-41-6",
+              "displayNumber": 41,
+              "sourceQuestionNumber": 41,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Phyllis Hartman has learned by herself many of the ways Mroz suggested in his study and made remarkable success in freeing herself from unnecessary meetings."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2024063-part-3-section-2-group-1-q-42-7",
+              "displayNumber": 42,
+              "sourceQuestionNumber": 42,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "When meetings continue too long or don't engage employees, they deplete vitality."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2024063-part-3-section-2-group-1-q-43-8",
+              "displayNumber": 43,
+              "sourceQuestionNumber": 43,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "When the time of meetings is reduced, employees will be more engaged in the meetings they do participate in."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2024063-part-3-section-2-group-1-q-44-9",
+              "displayNumber": 44,
+              "sourceQuestionNumber": 44,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Some employees consider meetings one of the most dispensable parts of the workday."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2024063-part-3-section-2-group-1-q-45-10",
+              "displayNumber": 45,
+              "sourceQuestionNumber": 45,
+              "type": "short_answer",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "According to Mroz, if all his suggestions were applied, a very obvious change would be a steep decrease in the number of meetings scheduled."
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2024063-part-3-section-3-group-1",
+          "title": "Questions 46 to 50 are based on the following passage.",
+          "presentation": "reading",
+          "instructions": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Sarcasm and jazz have something surprisingly in common: You know them when you hear them. Sarcasm is mostly understood through tone of voice, which is used to portray the opposite of the literal words. For example, when someone says, \"Well, that's exactly what I need right now,\" their tone can tell you it's not what they need at all."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Most frequently, sarcasm highlights an irritation or is, quite simply, mean."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "If you want to be happier and improve your relationships, cut out sarcasm. Why? Because sarcasm is actually hostility disguised as humor."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Despite smiling outwardly, many people who receive sarcastic comments feel put down and often think the sarcastic person is rude, or contemptible. Indeed, it's not surprising that the origin of the word sarcasm derives from the Greek word \"sarkazein\" which literally means \"to tear or strip the flesh off.\" Hence, it's no wonder that sarcasm is often preceded by the word \"cutting\" and that it hurts."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "What's more, since actions strongly determine thoughts and feelings, when a person consistently acts sarcastically it may only serve to heighten their underlying hostility and insecurity. After all, when you come right down to it, sarcasm can be used as a subtle form of bullying-and most bullies are angry, insecure, or cowardly."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Alternatively, when a person stops voicing negative comments, especially sarcastic ones, they may soon start to feel happier and more self-confident. Also, other people in their life benefit even more because they no longer have to hear the emotionally hurtful language of sarcasm."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Now, I'm not saying all sarcasm is bad. It may just be better used sparingly—like a potent spice in cooking. Too much of the spice, and the dish will be overwhelmed by it. Similarly, an occasional dash of sarcastic wit can spice up a chat and add an element of humor to it. But a big or steady serving of sarcasm will overwhelm the emotional flavor of any conversation and can taste very bitter to its recipient."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "So, tone down the sarcasm and work on clever wit instead, which is usually without any hostility and thus more appreciated by those you're communicating with. In essence, sarcasm is easy while true, harmless wit takes"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Thus, the main difference between wit and sarcasm is that, as already stated, sarcasm is often hostility disguised as humor. It can be intended to hurt and is often bitter and biting. Witty statements are usually in response to someone's unhelpful remarks or behaviors, and the intent is to untangle and clarify the issue by emphasizing its absurdities. Sarcastic statements are expressed in a cutting manner; witty remarks are delivered with undisguised and harmless humor."
+                }
+              ]
+            }
+          ],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2024063-part-3-section-3-group-1-q-46-1",
+              "displayNumber": 46,
+              "sourceQuestionNumber": 46,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Why does the author say sarcasm and jazz have something surprisingly in common?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Both are recognized when heard."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Both mean the opposite of what they appear to."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Both have exactly the same tone."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Both have hidden in them an evident irritation."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2024063-part-3-section-3-group-1-q-47-2",
+              "displayNumber": 47,
+              "sourceQuestionNumber": 47,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "How do many people feel when they hear sarcastic comments?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They feel hostile towards the sarcastic person."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They feel a strong urge to retaliate."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They feel belittled and disrespected."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They feel incapable of disguising their irritation."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2024063-part-3-section-3-group-1-q-48-3",
+              "displayNumber": 48,
+              "sourceQuestionNumber": 48,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What happens when a person consistently acts sarcastically?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They feel their dignity greatly heightened."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They feel increasingly insecure and hostile."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They endure hostility under the disguise of humor."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They taste bitterness even in pleasant interactions."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2024063-part-3-section-3-group-1-q-49-4",
+              "displayNumber": 49,
+              "sourceQuestionNumber": 49,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What does the author say about people quitting sarcastic comments?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It makes others happier and more self-confident."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It restrains them from being irritating and bullying."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It benefits not only themselves but also those around them."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "It shields them from negative comments and outright hostility."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2024063-part-3-section-3-group-1-q-50-5",
+              "displayNumber": 50,
+              "sourceQuestionNumber": 50,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What is the chief difference between a speaker's wit and sarcasm?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Their clarity."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Their emphasis."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Their appreciation."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Their intention. Passage Two"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        },
+        {
+          "id": "cet6-paper-2024063-part-3-section-3-group-2",
+          "title": "Questions 51 to 55 are based on the following passage.",
+          "presentation": "reading",
+          "instructions": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Variability is crucially important for learning new skills. Consider learning how to serve in tennis. Should you always practise serving from the exactly same location on the court, aiming at the same spot? Although practising in more variable conditions will be slower at first, it will likely make you a better tennis player in the end. This is because variability leads to better generalisation of what is learned."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "This principle is found in many domains, including speech perception and learning categories. For instance, infants will struggle to learn the category \"dog\" if they are only exposed to Chihuahuas, instead of many different kinds of dogs."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "\"There are over ten different names for this basic principle,\" says Limor Raviv, the senior investigator of a recent study. \"Learning from less variable input is often fast, but may fail to generalise to new stimuli.\""
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "To identify key patterns and understand the underlying principles of variability effects, Raviv and her colleagues reviewed over 150 studies on variability and generalisation across fields, including computer science, linguistics, categorisation, visual perception and formal education."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "The researchers discovered that, across studies, the term variability can refer to at least four different kinds of variability, such as set size and scheduling. \"These four kinds of variability have never been directly compared—which means that we currently don't know which is most effective for learning,\" says Raviv."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "The impact of variability depends on whether it is relevant to the task or not. But according to the Mr. Miyagi principle', practising seemingly unrelated skills may actually benefit learning of other skills."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "But why does variability impact learning and generalisation? One theory is that more variable input can highlight which aspects of a task are relevant and which are not."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Another theory is that greater variability leads to broader generalisations. This is because variability will represent the real world better, including atypical (非典型的) examples."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "A third reason has to do with the way memory works: when training is variable, learners are forced to actively reconstruct their memories."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "\"Understanding the impact of variability is important for literally every aspect of our daily life. Beyond affecting the way we learn language, motor skills, and categories, it even has an impact on our social lives,\" explains Raviv. \"For example, face recognition is affected by whether people grew up in a small community or in a larger community. Exposure to fewer faces during childhood is associated with diminished face memory.\""
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "\"We hope this work will spark people' s curiosity and generate more work on the topic,\" concludes Raviv. \"Our paper raises a lot of open questions. Can we find similar effects of variability beyond the brain, for instance, in the immune system?\""
+                }
+              ]
+            }
+          ],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2024063-part-3-section-3-group-2-q-51-1",
+              "displayNumber": 51,
+              "sourceQuestionNumber": 51,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What does the passage say about infants learning the category \"dog\" if they are exposed to Chihuahuas only?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They will encounter some degree of difficulty."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They will try to categorise other objects first."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They will prefer Chihuahuas to other dog species."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They will imagine Chihuahuas in various conditions."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2024063-part-3-section-3-group-2-q-52-2",
+              "displayNumber": 52,
+              "sourceQuestionNumber": 52,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What does Raviv say about the four different kinds of variability?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Which of them is most relevant to the task at hand is to be confirmed."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Why they have an impact on learning is far from being understood."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Why they have never been directly compared remains a mystery."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Which of them is most conducive to learning is yet to be identified."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2024063-part-3-section-3-group-2-q-53-3",
+              "displayNumber": 53,
+              "sourceQuestionNumber": 53,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "How does one of the theories explain the importance of variability for learning new skills?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Learners regard variable training as typical of what happens in the real world."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Learners receiving variable training are compelled to reorganise their memories."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Learners pay attention to the relevant aspects of a task and ignore those irrelevant."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Learners focus on related skills instead of wasting time and effort on unrelated ones."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2024063-part-3-section-3-group-2-q-54-4",
+              "displayNumber": 54,
+              "sourceQuestionNumber": 54,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What does the passage say about face recognition?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "People growing up in a small community may find it easy to remember familiar faces."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Face recognition has a significant impact on literally every aspect of our social lives."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "People growing up in a large community can readily recognise any individual faces."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "The size of the community people grow up in impacts their face recognition ability."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            },
+            {
+              "id": "cet6-paper-2024063-part-3-section-3-group-2-q-55-5",
+              "displayNumber": 55,
+              "sourceQuestionNumber": 55,
+              "type": "single_choice",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "What does Raviv hope to do with their research work?"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [
+                {
+                  "id": "A",
+                  "label": "A",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Highlight which aspects of a task are relevant and which are not to learning a skill."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "B",
+                  "label": "B",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Use the principle of variability in teaching seemingly unrelated skills in education."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Arouse people's interest in variability and stimulate more research on the topic."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "D",
+                  "label": "D",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Apply the principle of variability to such fields of study as the immune system."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cet6-paper-2024063-part-4-translation",
+      "title": "Translation 翻译",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet6-paper-2024063-part-4-translation-group",
+          "title": "翻译题",
+          "presentation": "writing",
+          "instructions": [],
+          "stimulusBlocks": [],
+          "sharedOptions": [],
+          "questions": [
+            {
+              "id": "cet6-paper-2024063-part-4-q-1-1",
+              "displayNumber": 1,
+              "sourceQuestionNumber": 1,
+              "type": "translation",
+              "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "扇子自古以来就深受中国人喜爱，但现在已不只是消暑纳凉的工具，而更多地作为艺术品供人欣赏。许多扇子造型优美、做工精良，并绘有山水、花鸟、人物等精美图案，具有很高的艺术价值。中国许多著名画家和书法家喜欢在扇子上作诗绘画，展示其艺术品味。扇子常作为礼物赠予他人，表达美好的祝福和真挚的情感。如今，扇子的实用功能已大为减弱，但作为一种文化符号和艺术形式，扇子仍然在中国传统文化中扮演着重要角色。"
+                    }
+                  ]
+                }
+              ],
+              "placement": {
+                "kind": "standalone"
+              },
+              "options": [],
+              "blanks": [],
+              "answerSpec": {
+                "availability": "none",
+                "gradingMode": "none",
+                "kind": "none"
+              },
+              "explanationBlocks": [],
+              "sourceRefs": [
+                {
+                  "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+                  "locator": {},
+                  "extractionMethod": "manual-review",
+                  "confidence": 0.86
+                }
+              ],
+              "reviewStatus": "review_required"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "assetRefs": [],
+  "sourceRefs": [
+    {
+      "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+      "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+      "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
+      "locator": {},
+      "extractionMethod": "manual-review",
+      "confidence": 0.86
+    }
+  ],
+  "quality": {
+    "structureStatus": "approved",
+    "structureConfidence": 0.86,
+    "issueCount": 0,
+    "issues": []
+  }
+}
