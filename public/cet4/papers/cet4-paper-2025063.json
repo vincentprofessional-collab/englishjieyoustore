@@ -82,21 +82,634 @@
       ]
     },
     {
-      "id": "cet4-paper-2025063-part-2",
-      "title": "Part II                                  Listening Comprehension                                       （",
+      "id": "cet4-paper-2025063-part-3",
+      "title": "Part III                                  Reading Comprehension                                         (40 minutes)",
       "layout": "flow",
       "instructions": [],
       "groups": [
         {
-          "id": "cet4-paper-2025063-part-2-section-2-group-1",
+          "id": "cet4-paper-2025063-part-3-section-2-group-1",
           "title": "题目",
-          "presentation": "inline",
+          "presentation": "reading",
           "instructions": [],
-          "stimulusBlocks": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "contains information given in one o f the paragraphs. Identify the paragraph from which the information is"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "derived. You may choose a paragraph more than once. Each paragraph is marked with a letter. Answer the"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "questions by marking the corresponding letter on Answer Sheet 2."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "“Phantom” Traffic Jams Are Real- And Scientists Know How to Stop Them"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "A) Traffic jams are a common problem of most big cities, either in developed or in developing countries, but one"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "kind of traffic jams in particular can be especially frustrating. These are generally known as “phantom” traffic"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "jams, in which dense traffic crawls to a halt for no apparent reason at all."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "B) “When caught in such a traffic jam, it is common for drivers to assume that there must be an accident, or"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "construction or something,said Massachusetts Institute of Technology (MIT) computer science professor"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Berthold Hom. \"And then you drive and drive and drive... and there isn't anything there.^^"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "C) The exact cause of these phantom traffic jams has long remained a mystery. But now, new research has found"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "the cause and researchers may have come up with a solution fbr this frustrating traffic pattern: maintaining"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "equal spacing between cars on the road, rather than driving so closely behind another vehicle that a collision"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "(碰撞)is likely if that vehicle brakes suddenly."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "D) Hom said phantom traffic jams are an emergent property of the flow of vehicles down a highway. A phantom"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "jam begins when a car in dense traffic slows down even slightly, which causes the car behind that vehicle to"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "slow even more- and the slowing action spreads backward through the lane of traffic like a wave, getting"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "worse the farther it spreads. Eventually, the cars far behind are forced to stop completely or risk hitting the"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "slower vehicles ahead- and so the traffic grinds to a halt over nothing, Hom said."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "E) Hom has been working on the problem of phantom traffic jams fbr years, and he has come up with a solution:"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "By splitting the difference between the cars in front and the cars behind, the spacing of cars in a stream of"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "traffic can act as a damper (抑制)on phantom traffic jams. That is, it can prevent the slow-down effect from"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "being amplified (增强)by the cars that follow behind, he said. In essence, each driver would constantly make"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "adjustments to keep their car roughly halfway between the car in front and the car behind."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "F) Hom calls this method of vehicle spacing bilateral (双边的)control, and he said it could be achieved with"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "relatively simple modifications to the adaptive cruise control that many new cars already have. Adaptive"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "cruise control is a driver assistance technology that sets a maximum speed fbr vehicles and automatically"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "slows the speed of the car when traffic is sensed in front of the vehicle. The technology is also known as"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "autonomous cruise control. Such modifications, Hom said, could help fight phantom jams within a few years,"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "・2025 年 6 月四级真题（第三套）・                                    20"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "maybe decades before an alternative solution, such as networked self^driving cars, becomes a reality on the"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "roads."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "G) Traffic jams are caused by a number of factors, such as roads that are poorly designed or over-capacity,"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "localized factors like city traffic-lighting patterns, and events like accidents and construction. But phantom"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "traffic jams can make all those problems worse, Horn said. And the researchers in the new study have"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "calculated that solving phantom jams could save at least some of the estimated $121 billion per year that"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "traffic jams are estimated to cost the U.S. economy, Hom told Live Science."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "H) New research by Horn and MIT postdoctoral associate Liang Wang, published in the journal IEEE"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Transactions on Intelligent Transportation Systems, shows how bilateral control can fight the problem. The"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "researchers made computer models of real-world traffic conditions, showing how a typical U.S. freeway"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "could benefit from cars using bilateral control. That would be in place when human drivers fail to slow down,"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "thus avoiding tailgating (紧足艮)the car in front, Hom said. 4tUnder reasonable conditions today, you might get"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "1,800 cars per lane per hour throughput (the volume of traffic passing through),he added. \"But with bilateral"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "control, you could almost double that.^^"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "I) The main alternative to increasing traffic throughput per lane has been to build more lanes and more"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "highways, and putting in new roads is very expensive, he said. \"If we can increase the throughput on major"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "highways, even if ifs only by 50 percent, that would be a big deal,“ Hom said."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "J) With the help of engineering students at high schools in Maine, Hom and Wang have also built a robot"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "simulation (模寸以)that shows how bilateral control can suppress phantom traffic jams. Increasing the spacing"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "of vehicles dampens the effect of slowdowns by cars in front of a given car, so that the slowing is not"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "worsened until it becomes a phantom jam, the researchers said."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "K) A video from the project shows a train of autonomous robots running along a track without bilateral control;"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "they eventually back up in phantom jams. But when the robots are switched over to bilateral control (by"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "flashing the lights in the room), each autonomous robot tries to keep itself halfway between the robot in front"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "and the one behind; the phantom jams disappear as a result, Hom said."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "L) Since starting his research on phantom traffic jams, Hom has learned that schools of fish and flocks of birds"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "and bats use similar spacing strategies to avoid hitting each other while swimming or flying in densely packed"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "groups. In particular, studies of millions of bats emerging at dusk from caves in Southeast Asia showed that"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "each bat used a form of bilateral control to reduce the likelihood of collisions with other bats in the densely"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "packed swarm (一 大 群 )，Hom said."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "M) Unlike bats, birds and fish, however, humans have difficulty judging distances behind them. To address"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "that weakness, Hom is now working with the car company Toyota to enable a form of bilateral control via"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "modifications to existing adaptive cruise control systems, which use forward-facing sensors to judge the"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "distance to the vehicle ahead. The bilateral control approach would include adding rear-facing sensors to"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "determine the distance to the vehicle following a car."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "N) But until those systems become standard, human drivers can help reduce phantom traffic jams simply by not"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "following the car in front so closely. As Hom argues, “There's absolutely no advantage of tailgating the car in"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "front of you.”"
+                }
+              ]
+            }
+          ],
           "sharedOptions": [],
           "questions": [
             {
-              "id": "cet4-paper-2025063-part-2-section-2-group-1-q-36-1",
+              "id": "cet4-paper-2025063-part-3-section-2-group-1-q-36-1",
               "displayNumber": 36,
               "sourceQuestionNumber": 36,
               "type": "short_answer",
@@ -135,7 +748,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025063-part-2-section-2-group-1-q-37-2",
+              "id": "cet4-paper-2025063-part-3-section-2-group-1-q-37-2",
               "displayNumber": 37,
               "sourceQuestionNumber": 37,
               "type": "short_answer",
@@ -174,7 +787,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025063-part-2-section-2-group-1-q-38-3",
+              "id": "cet4-paper-2025063-part-3-section-2-group-1-q-38-3",
               "displayNumber": 38,
               "sourceQuestionNumber": 38,
               "type": "short_answer",
@@ -213,7 +826,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025063-part-2-section-2-group-1-q-39-4",
+              "id": "cet4-paper-2025063-part-3-section-2-group-1-q-39-4",
               "displayNumber": 39,
               "sourceQuestionNumber": 39,
               "type": "short_answer",
@@ -252,7 +865,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025063-part-2-section-2-group-1-q-40-5",
+              "id": "cet4-paper-2025063-part-3-section-2-group-1-q-40-5",
               "displayNumber": 40,
               "sourceQuestionNumber": 40,
               "type": "short_answer",
@@ -291,7 +904,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025063-part-2-section-2-group-1-q-41-6",
+              "id": "cet4-paper-2025063-part-3-section-2-group-1-q-41-6",
               "displayNumber": 41,
               "sourceQuestionNumber": 41,
               "type": "short_answer",
@@ -330,7 +943,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025063-part-2-section-2-group-1-q-42-7",
+              "id": "cet4-paper-2025063-part-3-section-2-group-1-q-42-7",
               "displayNumber": 42,
               "sourceQuestionNumber": 42,
               "type": "short_answer",
@@ -369,7 +982,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025063-part-2-section-2-group-1-q-43-8",
+              "id": "cet4-paper-2025063-part-3-section-2-group-1-q-43-8",
               "displayNumber": 43,
               "sourceQuestionNumber": 43,
               "type": "short_answer",
@@ -408,7 +1021,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025063-part-2-section-2-group-1-q-44-9",
+              "id": "cet4-paper-2025063-part-3-section-2-group-1-q-44-9",
               "displayNumber": 44,
               "sourceQuestionNumber": 44,
               "type": "short_answer",
@@ -447,7 +1060,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025063-part-2-section-2-group-1-q-45-10",
+              "id": "cet4-paper-2025063-part-3-section-2-group-1-q-45-10",
               "displayNumber": 45,
               "sourceQuestionNumber": 45,
               "type": "short_answer",
@@ -488,15 +1101,223 @@
           ]
         },
         {
-          "id": "cet4-paper-2025063-part-2-section-3-group-1",
+          "id": "cet4-paper-2025063-part-3-section-3-group-1",
           "title": "Questions 46 to 50 are based on the following passage.",
-          "presentation": "inline",
+          "presentation": "reading",
           "instructions": [],
-          "stimulusBlocks": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Our society places a high value on physical beauty. Americans spend an average of over $722 each year on"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "their appearance. One in ten Americans has tried to look like a star."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "There 9s nothing wrong with trying to look our best, but excessive focus on physical appearance misses the"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "soulful aspects of what it means to be beautiful. Trying to look like the magazine pictures can take us on a long"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "ride away from what beauty is really about."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Many of us spend far too much time, energy, and money trying to polish an image of what we think will"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "bring attention, love, and connection. In the process, we may fail to attend to ourselves in a way that would move"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "us toward deeper intimacy, fulfillment, and meaning."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "It may sound trite (老生常谈的)，but beauty is only skin deep; ifs not what brings love toward us. Just read"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "about the latest Hollywood starlets whose seeming love turns into resentment and bitter court battles."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Outer beauty can be as much of a curse as a blessing. We may develop a habit of being so focused on"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "maintaining a perfect appearance that we never cultivate the inner qualities necessary to sustain and deepen"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "intimacy and connection. As I describe in my book, The Authentic Heart, it is the courage to be authentic that"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "connects us in a deeper way."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "While our initial attraction may be based, in part, on physical chemistry, it is the meeting of our inner worlds"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "that creates the lasting intimacy and spiritual connection for which we long. If we redirect our attention toward"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "cultivating inner qualities, we might find a magnetic attraction that moves us from something superficial to"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "something that connects us to our depths."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "The path toward cultivating inner beauty is really simple. But what is simple is not always easy. Not"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "everyone will see us and appreciate us as we take the courageous risk to allow ourselves to be seen as we really"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "・2025 年 6 月四级真题（第三套）・                                   22"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "are. But if they don't, it is their loss, not ours. Eventually we'll find those compatible souls who appreciate us as"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "we are."
+                }
+              ]
+            }
+          ],
           "sharedOptions": [],
           "questions": [
             {
-              "id": "cet4-paper-2025063-part-2-section-3-group-1-q-46-1",
+              "id": "cet4-paper-2025063-part-3-section-3-group-1-q-46-1",
               "displayNumber": 46,
               "sourceQuestionNumber": 46,
               "type": "single_choice",
@@ -596,7 +1417,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025063-part-2-section-3-group-1-q-47-2",
+              "id": "cet4-paper-2025063-part-3-section-3-group-1-q-47-2",
               "displayNumber": 47,
               "sourceQuestionNumber": 47,
               "type": "single_choice",
@@ -696,7 +1517,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025063-part-2-section-3-group-1-q-48-3",
+              "id": "cet4-paper-2025063-part-3-section-3-group-1-q-48-3",
               "displayNumber": 48,
               "sourceQuestionNumber": 48,
               "type": "single_choice",
@@ -796,7 +1617,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025063-part-2-section-3-group-1-q-49-4",
+              "id": "cet4-paper-2025063-part-3-section-3-group-1-q-49-4",
               "displayNumber": 49,
               "sourceQuestionNumber": 49,
               "type": "single_choice",
@@ -896,7 +1717,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025063-part-2-section-3-group-1-q-50-5",
+              "id": "cet4-paper-2025063-part-3-section-3-group-1-q-50-5",
               "displayNumber": 50,
               "sourceQuestionNumber": 50,
               "type": "single_choice",
@@ -998,15 +1819,232 @@
           ]
         },
         {
-          "id": "cet4-paper-2025063-part-2-section-3-group-2",
+          "id": "cet4-paper-2025063-part-3-section-3-group-2",
           "title": "Questions 51 to 55 are based on the following passage.",
-          "presentation": "inline",
+          "presentation": "reading",
           "instructions": [],
-          "stimulusBlocks": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Plant-based meats are coming soon to a dinner table near you, but do they deserve a spot on your plate?"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "If you tried a vegetable burger years ago and dismissed it as rubbery and flavorless, ifs a good time to give"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "meatless meat another chance. Newer varieties imitate the look, flavor, and texture of meat. Analysts don't expect"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "the meat-free movement to slow anytime soon; a 2021 report predicts the market will skyrocket to $74 billion by"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "2030— a 957 percent surge."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Plant-based meats are no longer just for vegetarians. Companies such as Impossible Foods and Beyond"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Meat- the current superstars of the alternative protein sector- are pursuing consumers who enjoy meat but"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "want to reduce their meat consumption for animal rights, health, or environmental reasons. So far, it's a winning"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "strategy: More than nine out of ten consumers who buy Beyond Burger and Impossible Foods products also eat"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "meat."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Many vegetarians don't actually care for food that resembles meat. When reporter Joan Solsman, a longtime"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "vegetarian, tried a dish from Impossible Foods, she felt so sick that she couldn't finish it. \"Maybe the best sign that"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Impossible Foods has cracked the code to realistic fake meat is that I couldn't stand to take another bite,^^ she wrote."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Meatless meats are generally a healthier choice than beef because they are cholesterol-free, plus they're a"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "good source of vitamins, minerals, protein, and fiber."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "23                         ・2025年 6 月四级真题（第三套）・"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "If meatless meat can help you stick to a plant-based diet, that in itself can lead to better health. Not only has"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "red meat been linked to cancer, but studies show that people who ditch meat have lower blood pressure, lower"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "average blood sugar, and lower cholesterol levels."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "However, just because ifs plant-based doesn't mean ifs health food. Most imitation meats are highly"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "processed and contain high amounts of sodium ( 钠 ) compared to traditional beef."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "These new generations of alternate meat get all the attention, but don't forget about whole grains and"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "vegetables. Beans are an especially excellent protein substitute. They're nutritious, inexpensive, and far more"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "sustainable than any of the processed meatless substitutes on the market today."
+                }
+              ]
+            }
+          ],
           "sharedOptions": [],
           "questions": [
             {
-              "id": "cet4-paper-2025063-part-2-section-3-group-2-q-51-1",
+              "id": "cet4-paper-2025063-part-3-section-3-group-2-q-51-1",
               "displayNumber": 51,
               "sourceQuestionNumber": 51,
               "type": "single_choice",
@@ -1106,7 +2144,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025063-part-2-section-3-group-2-q-52-2",
+              "id": "cet4-paper-2025063-part-3-section-3-group-2-q-52-2",
               "displayNumber": 52,
               "sourceQuestionNumber": 52,
               "type": "single_choice",
@@ -1206,7 +2244,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025063-part-2-section-3-group-2-q-53-3",
+              "id": "cet4-paper-2025063-part-3-section-3-group-2-q-53-3",
               "displayNumber": 53,
               "sourceQuestionNumber": 53,
               "type": "single_choice",
@@ -1306,7 +2344,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025063-part-2-section-3-group-2-q-54-4",
+              "id": "cet4-paper-2025063-part-3-section-3-group-2-q-54-4",
               "displayNumber": 54,
               "sourceQuestionNumber": 54,
               "type": "single_choice",
@@ -1406,7 +2444,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025063-part-2-section-3-group-2-q-55-5",
+              "id": "cet4-paper-2025063-part-3-section-3-group-2-q-55-5",
               "displayNumber": 55,
               "sourceQuestionNumber": 55,
               "type": "single_choice",
@@ -1510,13 +2548,13 @@
       ]
     },
     {
-      "id": "cet4-paper-2025063-part-3-translation",
+      "id": "cet4-paper-2025063-part-4-translation",
       "title": "Translation 翻译",
       "layout": "flow",
       "instructions": [],
       "groups": [
         {
-          "id": "cet4-paper-2025063-part-3-translation-group",
+          "id": "cet4-paper-2025063-part-4-translation-group",
           "title": "翻译题",
           "presentation": "writing",
           "instructions": [],
@@ -1524,7 +2562,7 @@
           "sharedOptions": [],
           "questions": [
             {
-              "id": "cet4-paper-2025063-part-3-q-1-1",
+              "id": "cet4-paper-2025063-part-4-q-1-1",
               "displayNumber": 1,
               "sourceQuestionNumber": 1,
               "type": "translation",
@@ -1579,9 +2617,11 @@
     }
   ],
   "quality": {
-    "structureStatus": "approved",
-    "structureConfidence": 0.86,
-    "issueCount": 0,
-    "issues": []
+    "structureStatus": "review_required",
+    "structureConfidence": 0.72,
+    "issueCount": 1,
+    "issues": [
+      "原始资料注明部分题目与其他套相同，未重复列出"
+    ]
   }
 }

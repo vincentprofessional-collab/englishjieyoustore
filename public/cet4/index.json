@@ -1,142 +1,7 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-16T03:43:23.471Z",
+  "generatedAt": "2026-09-20T03:51:12.308Z",
   "entries": [
-    {
-      "id": "practice-cet4-mixed",
-      "kind": "practice",
-      "title": "大学英语四级综合题型专项训练",
-      "year": "历年",
-      "region": "全国",
-      "variant": "",
-      "questionCount": 11,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "essay",
-        "single_choice",
-        "translation"
-      ],
-      "href": "/cet4/practice-cet4-mixed",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.84,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "practice-cet4-reading",
-      "kind": "practice",
-      "title": "大学英语四级阅读专项训练",
-      "year": "历年",
-      "region": "全国",
-      "variant": "",
-      "questionCount": 49,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "short_answer"
-      ],
-      "href": "/cet4/practice-cet4-reading",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.84,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "practice-cet4-cloze",
-      "kind": "practice",
-      "title": "大学英语四级选词填空专项训练",
-      "year": "历年",
-      "region": "全国",
-      "variant": "",
-      "questionCount": 30,
-      "answeredCount": 30,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "shared_option_matching"
-      ],
-      "href": "/cet4/practice-cet4-cloze",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.84,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "practice-cet4-listening",
-      "kind": "practice",
-      "title": "大学英语四级听力专项训练",
-      "year": "历年",
-      "region": "全国",
-      "variant": "",
-      "questionCount": 222,
-      "answeredCount": 25,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "single_choice",
-        "short_answer",
-        "essay",
-        "translation"
-      ],
-      "href": "/cet4/practice-cet4-listening",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.84,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "practice-cet4-translation",
-      "kind": "practice",
-      "title": "大学英语四级翻译专项训练",
-      "year": "历年",
-      "region": "全国",
-      "variant": "",
-      "questionCount": 3,
-      "answeredCount": 2,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "translation"
-      ],
-      "href": "/cet4/practice-cet4-translation",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.84,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "mock-c708b35f9158",
-      "kind": "paper",
-      "title": "四级样卷",
-      "year": "",
-      "region": "全国",
-      "variant": "",
-      "questionCount": 81,
-      "answeredCount": 50,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "essay",
-        "single_choice",
-        "shared_option_matching",
-        "short_answer",
-        "translation"
-      ],
-      "href": "/cet4/mock-c708b35f9158",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
     {
       "id": "cet4-paper-2026063",
       "kind": "paper",
@@ -155,6 +20,55 @@
         "translation"
       ],
       "href": "/cet4/cet4-paper-2026063",
+      "quality": {
+        "structureStatus": "review_required",
+        "structureConfidence": 0.72,
+        "issueCount": 1
+      }
+    },
+    {
+      "id": "cet4-paper-2026062",
+      "kind": "paper",
+      "title": "2026年6月大学英语四级真题 · 第2套",
+      "year": "2026",
+      "region": "全国",
+      "variant": "第2套",
+      "questionCount": 48,
+      "answeredCount": 3,
+      "explanationCount": 0,
+      "answerStatus": "partial",
+      "questionTypes": [
+        "essay",
+        "single_choice",
+        "inline_fill",
+        "short_answer",
+        "translation"
+      ],
+      "href": "/cet4/cet4-paper-2026062",
+      "quality": {
+        "structureStatus": "approved",
+        "structureConfidence": 0.86,
+        "issueCount": 0
+      }
+    },
+    {
+      "id": "cet4-paper-2026061",
+      "kind": "paper",
+      "title": "2026年6月大学英语四级真题 · 第1套",
+      "year": "2026",
+      "region": "全国",
+      "variant": "第1套",
+      "questionCount": 43,
+      "answeredCount": 3,
+      "explanationCount": 0,
+      "answerStatus": "partial",
+      "questionTypes": [
+        "essay",
+        "single_choice",
+        "short_answer",
+        "translation"
+      ],
+      "href": "/cet4/cet4-paper-2026061",
       "quality": {
         "structureStatus": "approved",
         "structureConfidence": 0.86,
@@ -180,9 +94,9 @@
       ],
       "href": "/cet4/cet4-paper-2025123",
       "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
+        "structureStatus": "review_required",
+        "structureConfidence": 0.72,
+        "issueCount": 1
       }
     },
     {
@@ -216,12 +130,14 @@
       "year": "2025",
       "region": "全国",
       "variant": "第1套",
-      "questionCount": 2,
+      "questionCount": 47,
       "answeredCount": 0,
       "explanationCount": 0,
       "answerStatus": "partial",
       "questionTypes": [
         "essay",
+        "single_choice",
+        "short_answer",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2025121",
@@ -250,9 +166,9 @@
       ],
       "href": "/cet4/cet4-paper-2025063",
       "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
+        "structureStatus": "review_required",
+        "structureConfidence": 0.72,
+        "issueCount": 1
       }
     },
     {
@@ -262,12 +178,14 @@
       "year": "2025",
       "region": "全国",
       "variant": "第2套",
-      "questionCount": 2,
+      "questionCount": 47,
       "answeredCount": 0,
       "explanationCount": 0,
       "answerStatus": "partial",
       "questionTypes": [
         "essay",
+        "single_choice",
+        "short_answer",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2025062",
@@ -320,9 +238,9 @@
       ],
       "href": "/cet4/cet4-paper-2024123",
       "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
+        "structureStatus": "review_required",
+        "structureConfidence": 0.72,
+        "issueCount": 1
       }
     },
     {
@@ -393,9 +311,9 @@
       ],
       "href": "/cet4/cet4-paper-2024063",
       "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
+        "structureStatus": "review_required",
+        "structureConfidence": 0.72,
+        "issueCount": 1
       }
     },
     {
@@ -468,9 +386,9 @@
       ],
       "href": "/cet4/cet4-paper-2023123",
       "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
+        "structureStatus": "review_required",
+        "structureConfidence": 0.72,
+        "issueCount": 1
       }
     },
     {
@@ -543,9 +461,9 @@
       ],
       "href": "/cet4/cet4-paper-2023063",
       "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
+        "structureStatus": "review_required",
+        "structureConfidence": 0.72,
+        "issueCount": 1
       }
     },
     {
@@ -615,9 +533,9 @@
       ],
       "href": "/cet4/cet4-paper-2023033",
       "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
+        "structureStatus": "review_required",
+        "structureConfidence": 0.72,
+        "issueCount": 1
       }
     },
     {
@@ -637,9 +555,9 @@
       ],
       "href": "/cet4/cet4-paper-2023032",
       "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
+        "structureStatus": "review_required",
+        "structureConfidence": 0.72,
+        "issueCount": 1
       }
     },
     {
@@ -687,9 +605,9 @@
       ],
       "href": "/cet4/cet4-paper-2022123",
       "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
+        "structureStatus": "review_required",
+        "structureConfidence": 0.72,
+        "issueCount": 1
       }
     },
     {
@@ -750,7 +668,7 @@
       "region": "全国",
       "variant": "第3套",
       "questionCount": 2,
-      "answeredCount": 0,
+      "answeredCount": 1,
       "explanationCount": 0,
       "answerStatus": "partial",
       "questionTypes": [
@@ -772,7 +690,7 @@
       "region": "全国",
       "variant": "第2套",
       "questionCount": 2,
-      "answeredCount": 0,
+      "answeredCount": 1,
       "explanationCount": 0,
       "answerStatus": "partial",
       "questionTypes": [
@@ -794,7 +712,7 @@
       "region": "全国",
       "variant": "第1套",
       "questionCount": 2,
-      "answeredCount": 0,
+      "answeredCount": 2,
       "explanationCount": 0,
       "answerStatus": "partial",
       "questionTypes": [
@@ -862,15 +780,14 @@
       "year": "2022",
       "region": "全国",
       "variant": "第1套",
-      "questionCount": 32,
-      "answeredCount": 7,
+      "questionCount": 47,
+      "answeredCount": 2,
       "explanationCount": 0,
       "answerStatus": "partial",
       "questionTypes": [
         "essay",
-        "inline_fill",
-        "short_answer",
         "single_choice",
+        "short_answer",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2022061",
@@ -964,7 +881,7 @@
       "region": "全国",
       "variant": "第3套",
       "questionCount": 22,
-      "answeredCount": 0,
+      "answeredCount": 1,
       "explanationCount": 0,
       "answerStatus": "partial",
       "questionTypes": [
@@ -988,7 +905,7 @@
       "region": "全国",
       "variant": "第2套",
       "questionCount": 55,
-      "answeredCount": 0,
+      "answeredCount": 3,
       "explanationCount": 0,
       "answerStatus": "partial",
       "questionTypes": [
@@ -1012,7 +929,7 @@
       "region": "全国",
       "variant": "第1套",
       "questionCount": 58,
-      "answeredCount": 3,
+      "answeredCount": 4,
       "explanationCount": 0,
       "answerStatus": "partial",
       "questionTypes": [
@@ -1116,9 +1033,9 @@
       ],
       "href": "/cet4/cet4-paper-2020093",
       "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
+        "structureStatus": "review_required",
+        "structureConfidence": 0.72,
+        "issueCount": 1
       }
     },
     {
@@ -1170,1216 +1087,24 @@
       }
     },
     {
-      "id": "cet4-paper-2019123",
+      "id": "cet4-paper-2020071",
       "kind": "paper",
-      "title": "2019年12月大学英语四级真题 · 第3套",
-      "year": "2019",
-      "region": "全国",
-      "variant": "第3套",
-      "questionCount": 21,
-      "answeredCount": 3,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "essay",
-        "inline_fill",
-        "single_choice",
-        "translation"
-      ],
-      "href": "/cet4/cet4-paper-2019123",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "cet4-paper-2019122",
-      "kind": "paper",
-      "title": "2019年12月大学英语四级真题 · 第2套",
-      "year": "2019",
-      "region": "全国",
-      "variant": "第2套",
-      "questionCount": 57,
-      "answeredCount": 1,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "essay",
-        "single_choice",
-        "inline_fill",
-        "short_answer",
-        "translation"
-      ],
-      "href": "/cet4/cet4-paper-2019122",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "cet4-paper-2019121",
-      "kind": "paper",
-      "title": "2019年12月大学英语四级真题 · 第1套",
-      "year": "2019",
-      "region": "全国",
-      "variant": "第1套",
-      "questionCount": 46,
-      "answeredCount": 1,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "essay",
-        "single_choice",
-        "inline_fill",
-        "translation"
-      ],
-      "href": "/cet4/cet4-paper-2019121",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "cet4-paper-2019063",
-      "kind": "paper",
-      "title": "2019年6月大学英语四级真题 · 第3套",
-      "year": "2019",
-      "region": "全国",
-      "variant": "第3套",
-      "questionCount": 21,
-      "answeredCount": 1,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "essay",
-        "short_answer",
-        "single_choice"
-      ],
-      "href": "/cet4/cet4-paper-2019063",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "cet4-paper-2019062",
-      "kind": "paper",
-      "title": "2019年6月大学英语四级真题 · 第2套",
-      "year": "2019",
-      "region": "全国",
-      "variant": "第2套",
-      "questionCount": 31,
-      "answeredCount": 8,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "essay",
-        "inline_fill",
-        "short_answer",
-        "single_choice"
-      ],
-      "href": "/cet4/cet4-paper-2019062",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "cet4-paper-2019061",
-      "kind": "paper",
-      "title": "2019年6月大学英语四级真题 · 第1套",
-      "year": "2019",
-      "region": "全国",
-      "variant": "第1套",
-      "questionCount": 31,
-      "answeredCount": 9,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "essay",
-        "inline_fill",
-        "short_answer",
-        "single_choice"
-      ],
-      "href": "/cet4/cet4-paper-2019061",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "cet4-paper-2018063",
-      "kind": "paper",
-      "title": "2018年6月大学英语四级真题 · 第3套",
-      "year": "2018",
-      "region": "全国",
-      "variant": "第3套",
-      "questionCount": 22,
-      "answeredCount": 2,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "essay",
-        "short_answer",
-        "single_choice",
-        "translation"
-      ],
-      "href": "/cet4/cet4-paper-2018063",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "cet4-paper-2018062",
-      "kind": "paper",
-      "title": "2018年6月大学英语四级真题 · 第2套",
-      "year": "2018",
-      "region": "全国",
-      "variant": "第2套",
-      "questionCount": 57,
-      "answeredCount": 12,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "essay",
-        "single_choice",
-        "inline_fill",
-        "short_answer",
-        "translation"
-      ],
-      "href": "/cet4/cet4-paper-2018062",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "cet4-paper-2018061",
-      "kind": "paper",
-      "title": "2018年6月大学英语四级真题 · 第1套",
-      "year": "2018",
-      "region": "全国",
-      "variant": "第1套",
-      "questionCount": 56,
-      "answeredCount": 12,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "essay",
-        "single_choice",
-        "inline_fill",
-        "short_answer",
-        "translation"
-      ],
-      "href": "/cet4/cet4-paper-2018061",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "cet4-paper-2017123",
-      "kind": "paper",
-      "title": "2017年12月大学英语四级真题 · 第3套",
-      "year": "2017",
-      "region": "全国",
-      "variant": "第3套",
-      "questionCount": 31,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "essay",
-        "inline_fill",
-        "short_answer",
-        "single_choice"
-      ],
-      "href": "/cet4/cet4-paper-2017123",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "cet4-paper-2017122",
-      "kind": "paper",
-      "title": "2017年12月大学英语四级真题 · 第2套",
-      "year": "2017",
-      "region": "全国",
-      "variant": "第2套",
-      "questionCount": 56,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "essay",
-        "single_choice",
-        "inline_fill",
-        "short_answer"
-      ],
-      "href": "/cet4/cet4-paper-2017122",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "cet4-paper-2017121",
-      "kind": "paper",
-      "title": "2017年12月大学英语四级真题 · 第1套",
-      "year": "2017",
-      "region": "全国",
-      "variant": "第1套",
-      "questionCount": 56,
-      "answeredCount": 11,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "essay",
-        "single_choice",
-        "inline_fill",
-        "short_answer"
-      ],
-      "href": "/cet4/cet4-paper-2017121",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "cet4-paper-2017063",
-      "kind": "paper",
-      "title": "2017年6月大学英语四级真题 · 第3套",
-      "year": "2017",
-      "region": "全国",
-      "variant": "第3套",
-      "questionCount": 31,
-      "answeredCount": 1,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "essay",
-        "inline_fill",
-        "short_answer",
-        "single_choice",
-        "translation"
-      ],
-      "href": "/cet4/cet4-paper-2017063",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "cet4-paper-2017062",
-      "kind": "paper",
-      "title": "2017年6月大学英语四级真题 · 第2套",
-      "year": "2017",
-      "region": "全国",
-      "variant": "第2套",
-      "questionCount": 57,
-      "answeredCount": 4,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "essay",
-        "single_choice",
-        "inline_fill",
-        "short_answer",
-        "translation"
-      ],
-      "href": "/cet4/cet4-paper-2017062",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "cet4-paper-2017061",
-      "kind": "paper",
-      "title": "2017年6月大学英语四级真题 · 第1套",
-      "year": "2017",
-      "region": "全国",
-      "variant": "第1套",
-      "questionCount": 44,
-      "answeredCount": 3,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "essay",
-        "single_choice",
-        "short_answer",
-        "translation"
-      ],
-      "href": "/cet4/cet4-paper-2017061",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "cet4-paper-2016063",
-      "kind": "paper",
-      "title": "2016年6月大学英语四级真题 · 第3套",
-      "year": "2016",
-      "region": "全国",
-      "variant": "第3套",
-      "questionCount": 11,
-      "answeredCount": 3,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "inline_fill",
-        "translation"
-      ],
-      "href": "/cet4/cet4-paper-2016063",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "cet4-paper-2016062",
-      "kind": "paper",
-      "title": "2016年6月大学英语四级真题 · 第2套",
-      "year": "2016",
-      "region": "全国",
-      "variant": "第2套",
-      "questionCount": 56,
-      "answeredCount": 1,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "single_choice",
-        "inline_fill",
-        "short_answer",
-        "translation"
-      ],
-      "href": "/cet4/cet4-paper-2016062",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "cet4-paper-2016061",
-      "kind": "paper",
-      "title": "2016年6月大学英语四级真题 · 第1套",
-      "year": "2016",
+      "title": "2020年7月大学英语四级真题 · 第1套",
+      "year": "2020",
       "region": "全国",
       "variant": "第1套",
       "questionCount": 45,
-      "answeredCount": 2,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "single_choice",
-        "short_answer"
-      ],
-      "href": "/cet4/cet4-paper-2016061",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "cet4-paper-2015123",
-      "kind": "paper",
-      "title": "2015年12月大学英语四级真题 · 第3套",
-      "year": "2015",
-      "region": "全国",
-      "variant": "第3套",
-      "questionCount": 3,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "essay",
-        "single_choice",
-        "translation"
-      ],
-      "href": "/cet4/cet4-paper-2015123",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "cet4-paper-2015122",
-      "kind": "paper",
-      "title": "2015年12月大学英语四级真题 · 第2套",
-      "year": "2015",
-      "region": "全国",
-      "variant": "第2套",
-      "questionCount": 13,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "essay",
-        "inline_fill",
-        "translation"
-      ],
-      "href": "/cet4/cet4-paper-2015122",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "cet4-paper-2015121",
-      "kind": "paper",
-      "title": "2015年12月大学英语四级真题 · 第1套",
-      "year": "2015",
-      "region": "全国",
-      "variant": "第1套",
-      "questionCount": 2,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "essay",
-        "translation"
-      ],
-      "href": "/cet4/cet4-paper-2015121",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "cet4-paper-2015063",
-      "kind": "paper",
-      "title": "2015年6月大学英语四级真题 · 第3套",
-      "year": "2015",
-      "region": "全国",
-      "variant": "第3套",
-      "questionCount": 12,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "essay",
-        "inline_fill",
-        "translation"
-      ],
-      "href": "/cet4/cet4-paper-2015063",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "cet4-paper-2015062",
-      "kind": "paper",
-      "title": "2015年6月大学英语四级真题 · 第2套",
-      "year": "2015",
-      "region": "全国",
-      "variant": "第2套",
-      "questionCount": 12,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "essay",
-        "inline_fill",
-        "translation"
-      ],
-      "href": "/cet4/cet4-paper-2015062",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "cet4-paper-2015061",
-      "kind": "paper",
-      "title": "2015年6月大学英语四级真题 · 第1套",
-      "year": "2015",
-      "region": "全国",
-      "variant": "第1套",
-      "questionCount": 20,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "essay",
-        "single_choice",
-        "translation"
-      ],
-      "href": "/cet4/cet4-paper-2015061",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "paper-2014-12-set3",
-      "kind": "paper",
-      "title": "2014年12月大学英语四级真题 · 第3套",
-      "year": "2014",
-      "region": "全国",
-      "variant": "第3套",
-      "questionCount": 68,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "essay",
-        "single_choice",
-        "inline_fill",
-        "short_answer",
-        "translation"
-      ],
-      "href": "/cet4/paper-2014-12-set3",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "paper-2014-12-set2",
-      "kind": "paper",
-      "title": "2014年12月大学英语四级真题 · 第2套",
-      "year": "2014",
-      "region": "全国",
-      "variant": "第2套",
-      "questionCount": 67,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "essay",
-        "single_choice",
-        "inline_fill",
-        "short_answer",
-        "translation"
-      ],
-      "href": "/cet4/paper-2014-12-set2",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "paper-2014-12-set1",
-      "kind": "paper",
-      "title": "2014年12月大学英语四级真题 · 第1套",
-      "year": "2014",
-      "region": "全国",
-      "variant": "第1套",
-      "questionCount": 68,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "essay",
-        "single_choice",
-        "inline_fill",
-        "short_answer",
-        "translation"
-      ],
-      "href": "/cet4/paper-2014-12-set1",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "paper-2014-06",
-      "kind": "paper",
-      "title": "2014年6月大学英语四级真题",
-      "year": "2014",
-      "region": "全国",
-      "variant": "",
-      "questionCount": 46,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "essay",
-        "single_choice",
-        "short_answer"
-      ],
-      "href": "/cet4/paper-2014-06",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "mock-ffd3b36ac394",
-      "kind": "paper",
-      "title": "2013年12月四级模拟试卷",
-      "year": "2013",
-      "region": "全国",
-      "variant": "",
-      "questionCount": 47,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "essay",
-        "single_choice",
-        "short_answer",
-        "translation"
-      ],
-      "href": "/cet4/mock-ffd3b36ac394",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "paper-2013-06-set3",
-      "kind": "paper",
-      "title": "2013年6月大学英语四级真题 · 第3套",
-      "year": "2013",
-      "region": "全国",
-      "variant": "第3套",
-      "questionCount": 83,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "essay",
-        "single_choice",
-        "short_answer",
-        "inline_fill",
-        "translation"
-      ],
-      "href": "/cet4/paper-2013-06-set3",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "paper-2013-06-set2",
-      "kind": "paper",
-      "title": "2013年6月大学英语四级真题 · 第2套",
-      "year": "2013",
-      "region": "全国",
-      "variant": "第2套",
-      "questionCount": 81,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "essay",
-        "single_choice",
-        "short_answer",
-        "inline_fill",
-        "translation"
-      ],
-      "href": "/cet4/paper-2013-06-set2",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "paper-2013-06-set1",
-      "kind": "paper",
-      "title": "2013年6月大学英语四级真题 · 第1套",
-      "year": "2013",
-      "region": "全国",
-      "variant": "第1套",
-      "questionCount": 81,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "essay",
-        "single_choice",
-        "short_answer",
-        "inline_fill",
-        "translation"
-      ],
-      "href": "/cet4/paper-2013-06-set1",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "paper-2012-12-set1",
-      "kind": "paper",
-      "title": "2012年12月大学英语四级真题 · 第1套",
-      "year": "2012",
-      "region": "全国",
-      "variant": "第1套",
-      "questionCount": 82,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "essay",
-        "single_choice",
-        "short_answer",
-        "inline_fill",
-        "translation"
-      ],
-      "href": "/cet4/paper-2012-12-set1",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "paper-2012-06",
-      "kind": "paper",
-      "title": "2012年6月大学英语四级真题",
-      "year": "2012",
-      "region": "全国",
-      "variant": "",
-      "questionCount": 25,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "single_choice",
-        "short_answer"
-      ],
-      "href": "/cet4/paper-2012-06",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "paper-2011-12",
-      "kind": "paper",
-      "title": "2011年12月大学英语四级真题",
-      "year": "2011",
-      "region": "全国",
-      "variant": "",
-      "questionCount": 69,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "single_choice",
-        "inline_fill",
-        "short_answer"
-      ],
-      "href": "/cet4/paper-2011-12",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "paper-2011-06",
-      "kind": "paper",
-      "title": "2011年6月大学英语四级真题",
-      "year": "2011",
-      "region": "全国",
-      "variant": "",
-      "questionCount": 72,
-      "answeredCount": 58,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "essay",
-        "single_choice",
-        "short_answer",
-        "inline_fill",
-        "translation"
-      ],
-      "href": "/cet4/paper-2011-06",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "paper-2010-12",
-      "kind": "paper",
-      "title": "2010年12月大学英语四级真题",
-      "year": "2010",
-      "region": "全国",
-      "variant": "",
-      "questionCount": 157,
-      "answeredCount": 32,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "essay",
-        "single_choice",
-        "short_answer",
-        "inline_fill",
-        "translation"
-      ],
-      "href": "/cet4/paper-2010-12",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "paper-2010-06",
-      "kind": "paper",
-      "title": "2010年6月大学英语四级真题",
-      "year": "2010",
-      "region": "全国",
-      "variant": "",
-      "questionCount": 142,
       "answeredCount": 5,
       "explanationCount": 0,
       "answerStatus": "partial",
       "questionTypes": [
         "essay",
         "single_choice",
-        "short_answer",
         "inline_fill",
-        "translation"
-      ],
-      "href": "/cet4/paper-2010-06",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "paper-2009-12-new",
-      "kind": "paper",
-      "title": "2009年12月大学英语四级真题 · 新题型卷",
-      "year": "2009",
-      "region": "全国",
-      "variant": "",
-      "questionCount": 81,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "essay",
-        "single_choice",
-        "short_answer",
-        "inline_fill",
-        "translation"
-      ],
-      "href": "/cet4/paper-2009-12-new",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "paper-2009-12",
-      "kind": "paper",
-      "title": "2009年12月大学英语四级真题",
-      "year": "2009",
-      "region": "全国",
-      "variant": "",
-      "questionCount": 116,
-      "answeredCount": 9,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "translation",
-        "short_answer",
-        "single_choice"
-      ],
-      "href": "/cet4/paper-2009-12",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "paper-2009-06",
-      "kind": "paper",
-      "title": "2009年6月大学英语四级真题",
-      "year": "2009",
-      "region": "全国",
-      "variant": "",
-      "questionCount": 81,
-      "answeredCount": 77,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "essay",
-        "single_choice",
-        "short_answer",
         "shared_option_matching",
         "translation"
       ],
-      "href": "/cet4/paper-2009-06",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "paper-2008-12",
-      "kind": "paper",
-      "title": "2008年12月大学英语四级真题",
-      "year": "2008",
-      "region": "全国",
-      "variant": "",
-      "questionCount": 58,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "essay",
-        "single_choice",
-        "short_answer",
-        "inline_fill"
-      ],
-      "href": "/cet4/paper-2008-12",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "paper-2008-06",
-      "kind": "paper",
-      "title": "2008年6月大学英语四级真题",
-      "year": "2008",
-      "region": "全国",
-      "variant": "",
-      "questionCount": 132,
-      "answeredCount": 126,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "essay",
-        "single_choice",
-        "short_answer",
-        "translation"
-      ],
-      "href": "/cet4/paper-2008-06",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "paper-2007-12-b",
-      "kind": "paper",
-      "title": "2007年12月大学英语四级真题 · B卷",
-      "year": "2007",
-      "region": "全国",
-      "variant": "",
-      "questionCount": 172,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "essay",
-        "single_choice",
-        "short_answer",
-        "inline_fill",
-        "translation"
-      ],
-      "href": "/cet4/paper-2007-12-b",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "paper-2007-12",
-      "kind": "paper",
-      "title": "2007年12月大学英语四级真题",
-      "year": "2007",
-      "region": "全国",
-      "variant": "",
-      "questionCount": 91,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "short_answer",
-        "single_choice"
-      ],
-      "href": "/cet4/paper-2007-12",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "paper-2007-06",
-      "kind": "paper",
-      "title": "2007年6月大学英语四级真题",
-      "year": "2007",
-      "region": "全国",
-      "variant": "",
-      "questionCount": 87,
-      "answeredCount": 70,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "essay",
-        "short_answer",
-        "single_choice",
-        "shared_option_matching",
-        "translation"
-      ],
-      "href": "/cet4/paper-2007-06",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "paper-2006-12-new",
-      "kind": "paper",
-      "title": "2006年12月大学英语四级真题 · 新题型卷",
-      "year": "2006",
-      "region": "全国",
-      "variant": "",
-      "questionCount": 87,
-      "answeredCount": 71,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "essay",
-        "short_answer",
-        "single_choice",
-        "shared_option_matching",
-        "translation"
-      ],
-      "href": "/cet4/paper-2006-12-new",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "paper-2006-06",
-      "kind": "paper",
-      "title": "2006年6月大学英语四级真题",
-      "year": "2006",
-      "region": "全国",
-      "variant": "",
-      "questionCount": 91,
-      "answeredCount": 90,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "single_choice",
-        "essay"
-      ],
-      "href": "/cet4/paper-2006-06",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "paper-2005-12",
-      "kind": "paper",
-      "title": "2005年12月大学英语四级真题",
-      "year": "2005",
-      "region": "全国",
-      "variant": "",
-      "questionCount": 91,
-      "answeredCount": 90,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "single_choice",
-        "essay"
-      ],
-      "href": "/cet4/paper-2005-12",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "paper-2005-06",
-      "kind": "paper",
-      "title": "2005年6月大学英语四级真题",
-      "year": "2005",
-      "region": "全国",
-      "variant": "",
-      "questionCount": 75,
-      "answeredCount": 70,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "single_choice",
-        "short_answer",
-        "essay"
-      ],
-      "href": "/cet4/paper-2005-06",
-      "quality": {
-        "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
-    },
-    {
-      "id": "mock-9979c092fc5d",
-      "kind": "paper",
-      "title": "13年四级模拟题听力",
-      "year": "",
-      "region": "全国",
-      "variant": "",
-      "questionCount": 10,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
-      "questionTypes": [
-        "single_choice"
-      ],
-      "href": "/cet4/mock-9979c092fc5d",
+      "href": "/cet4/cet4-paper-2020071",
       "quality": {
         "structureStatus": "approved",
         "structureConfidence": 0.86,

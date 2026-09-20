@@ -19,7 +19,13 @@
       "id": "cet4-paper-2023121-part-1-writing",
       "title": "Writing 写作",
       "layout": "flow",
-      "instructions": [],
+      "instructions": [
+        {
+          "type": "audio",
+          "assetId": "cet4-paper-2023121-audio",
+          "label": "听力音频"
+        }
+      ],
       "groups": [
         {
           "id": "cet4-paper-2023121-part-1-writing-group",
@@ -4801,7 +4807,25 @@
       ]
     }
   ],
-  "assetRefs": [],
+  "assetRefs": [
+    {
+      "assetId": "cet4-paper-2023121-audio",
+      "kind": "audio",
+      "url": "/cet4/audio/cet4-paper-2023121.mp3",
+      "mimeType": "audio/mpeg",
+      "sha256": "",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "58c17c131ad0ac1d18782e712d1fbbf22a1a26c79da6c869d7744e5ac4248b8e",
+          "relativePath": "2023.12四级真题第1套.docx",
+          "sha256": "58c17c131ad0ac1d18782e712d1fbbf22a1a26c79da6c869d7744e5ac4248b8e",
+          "locator": {},
+          "extractionMethod": "manual-review",
+          "confidence": 0.86
+        }
+      ]
+    }
+  ],
   "sourceRefs": [
     {
       "sourceDocumentId": "58c17c131ad0ac1d18782e712d1fbbf22a1a26c79da6c869d7744e5ac4248b8e",

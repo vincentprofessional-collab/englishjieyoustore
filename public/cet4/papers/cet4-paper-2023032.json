@@ -49,7 +49,7 @@
               "sourceRefs": [
                 {
                   "sourceDocumentId": "81bc82e23f4512f885514223b146d05d3ddec58032ec372877d442173343877d",
-                  "relativePath": "2023.03英语四级真题第2套.docx",
+                  "relativePath": "2023.03英语四级真题第2套.docx；2023.03英语四级详解第2套.pdf",
                   "sha256": "81bc82e23f4512f885514223b146d05d3ddec58032ec372877d442173343877d",
                   "locator": {},
                   "extractionMethod": "manual-review",
@@ -106,7 +106,7 @@
               "sourceRefs": [
                 {
                   "sourceDocumentId": "81bc82e23f4512f885514223b146d05d3ddec58032ec372877d442173343877d",
-                  "relativePath": "2023.03英语四级真题第2套.docx",
+                  "relativePath": "2023.03英语四级真题第2套.docx；2023.03英语四级详解第2套.pdf",
                   "sha256": "81bc82e23f4512f885514223b146d05d3ddec58032ec372877d442173343877d",
                   "locator": {},
                   "extractionMethod": "manual-review",
@@ -124,7 +124,7 @@
   "sourceRefs": [
     {
       "sourceDocumentId": "81bc82e23f4512f885514223b146d05d3ddec58032ec372877d442173343877d",
-      "relativePath": "2023.03英语四级真题第2套.docx",
+      "relativePath": "2023.03英语四级真题第2套.docx；2023.03英语四级详解第2套.pdf",
       "sha256": "81bc82e23f4512f885514223b146d05d3ddec58032ec372877d442173343877d",
       "locator": {},
       "extractionMethod": "manual-review",
@@ -132,9 +132,11 @@
     }
   ],
   "quality": {
-    "structureStatus": "approved",
-    "structureConfidence": 0.86,
-    "issueCount": 0,
-    "issues": []
+    "structureStatus": "review_required",
+    "structureConfidence": 0.72,
+    "issueCount": 1,
+    "issues": [
+      "原始资料注明部分题目与其他套相同，未重复列出"
+    ]
   }
 }

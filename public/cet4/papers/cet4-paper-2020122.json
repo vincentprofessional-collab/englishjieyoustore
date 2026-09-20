@@ -19,7 +19,13 @@
       "id": "cet4-paper-2020122-part-1-writing",
       "title": "Writing 写作",
       "layout": "flow",
-      "instructions": [],
+      "instructions": [
+        {
+          "type": "audio",
+          "assetId": "cet4-paper-2020122-audio",
+          "label": "听力音频"
+        }
+      ],
       "groups": [
         {
           "id": "cet4-paper-2020122-part-1-writing-group",
@@ -3809,7 +3815,25 @@
       ]
     }
   ],
-  "assetRefs": [],
+  "assetRefs": [
+    {
+      "assetId": "cet4-paper-2020122-audio",
+      "kind": "audio",
+      "url": "/cet4/audio/cet4-paper-2020122.mp3",
+      "mimeType": "audio/mpeg",
+      "sha256": "",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+          "relativePath": "2020年12月四级真题第2套.docx；2020.12英语四级解析第2套.pdf",
+          "sha256": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",
+          "locator": {},
+          "extractionMethod": "manual-review",
+          "confidence": 0.86
+        }
+      ]
+    }
+  ],
   "sourceRefs": [
     {
       "sourceDocumentId": "f75077069a9fa51d2dd6cdd1b91e027afbead6fb928bad3c41754ec1b0678fda",

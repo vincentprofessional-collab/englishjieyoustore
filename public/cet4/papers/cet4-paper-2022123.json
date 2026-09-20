@@ -2530,9 +2530,11 @@
     }
   ],
   "quality": {
-    "structureStatus": "approved",
-    "structureConfidence": 0.86,
-    "issueCount": 0,
-    "issues": []
+    "structureStatus": "review_required",
+    "structureConfidence": 0.72,
+    "issueCount": 1,
+    "issues": [
+      "原始资料注明部分题目与其他套相同，未重复列出"
+    ]
   }
 }

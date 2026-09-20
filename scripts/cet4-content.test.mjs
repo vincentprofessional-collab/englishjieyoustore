@@ -5,10 +5,11 @@ import test from "node:test";
 const library = JSON.parse(await readFile(new URL("../src/data/cet4/library.json", import.meta.url), "utf8"));
 const setIndex = JSON.parse(await readFile(new URL("../public/cet4/index.json", import.meta.url), "utf8"));
 
-test("CET-4 library keeps all three requested sections separate", () => {
+test("CET-4 library contains only the requested 2020-2026 true-paper section", () => {
   const sections = new Set(library.entries.map((entry) => entry.section));
-  assert.deepEqual([...sections].sort(), ["知识点", "试卷", "题型"]);
-  for (const section of sections) assert.ok(library.entries.filter((entry) => entry.section === section).length > 0);
+  assert.deepEqual([...sections], ["试卷"]);
+  assert.equal(library.entries.length, 46);
+  assert.ok(library.entries.every((entry) => /^cet4-paper-20(?:20|21|22|23|24|25|26)/.test(entry.id)));
 });
 
 test("CET-4 routes and IDs are unique", () => {
@@ -42,21 +43,14 @@ test("CET-4 sets use the high-school question-group contract", async () => {
   }
 });
 
-test("CET-4 practice keeps answer explanations out of the question surface", async () => {
-  let readingGroups = 0;
-  let clozeGroups = 0;
-  for (const summary of setIndex.entries.filter((entry) => entry.kind === "practice")) {
-    const set = JSON.parse(await readFile(new URL(`../public/cet4/practice/${summary.id}.json`, import.meta.url), "utf8"));
+test("CET-4 true-paper question surfaces keep answer explanations out", async () => {
+  assert.equal(setIndex.entries.filter((entry) => entry.kind === "practice").length, 0);
+  assert.equal(setIndex.entries.filter((entry) => entry.kind === "paper").length, 46);
+  for (const summary of setIndex.entries) {
+    const set = JSON.parse(await readFile(new URL(`../public/cet4/papers/${summary.id}.json`, import.meta.url), "utf8"));
     for (const section of set.sections) for (const group of section.groups) {
       const questionSurface = JSON.stringify({ stimulusBlocks: group.stimulusBlocks, questions: group.questions.map((question) => ({ promptBlocks: question.promptBlocks, options: question.options })) });
       assert.doesNotMatch(questionSurface, /该空需|答案解析|答案详解|语法判断|词义判断/);
-      if (group.presentation === "reading" && group.stimulusBlocks.length && group.questions.length) readingGroups += 1;
-      if (group.questions.some((question) => ["shared_option_matching", "inline_fill"].includes(question.type))) {
-        clozeGroups += 1;
-        assert.ok(group.stimulusBlocks.some((block) => block.runs?.some((run) => run.type === "blank")), `${summary.id}:${group.id}`);
-      }
     }
   }
-  assert.ok(readingGroups > 0);
-  assert.ok(clozeGroups > 0);
 });

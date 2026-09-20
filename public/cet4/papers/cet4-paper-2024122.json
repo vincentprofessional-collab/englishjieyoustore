@@ -19,7 +19,13 @@
       "id": "cet4-paper-2024122-part-1-writing",
       "title": "Writing 写作",
       "layout": "flow",
-      "instructions": [],
+      "instructions": [
+        {
+          "type": "audio",
+          "assetId": "cet4-paper-2024122-audio",
+          "label": "听力音频"
+        }
+      ],
       "groups": [
         {
           "id": "cet4-paper-2024122-part-1-writing-group",
@@ -2379,7 +2385,7 @@
                       "runs": [
                         {
                           "type": "text",
-                          "text": "Some students may lack adequate access. ・2024年 12 月四级真题（第二套）•                                    12 Part in                                 Reading Comprehension                                           (40 minutes)"
+                          "text": "Some students may lack adequate access. ・2024年 12 月四级真题（第二套）•                                    12"
                         }
                       ]
                     }
@@ -2406,17 +2412,638 @@
               "reviewStatus": "review_required"
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "id": "cet4-paper-2024122-part-3",
+      "title": "Part III                                 Reading Comprehension                                           (40 minutes)",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
         {
-          "id": "cet4-paper-2024122-part-2-section-5-group-1",
+          "id": "cet4-paper-2024122-part-3-section-2-group-1",
           "title": "题目",
-          "presentation": "inline",
+          "presentation": "reading",
           "instructions": [],
-          "stimulusBlocks": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "contains information given in one o f the paragraphs. Identify the paragraph from which the information is"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "derived. You may choose a paragraph more than once. Each paragraph is marked with a letter. Answer the"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "questions by marking the corresponding letter on Answer Sheet 2."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "13                              • 2024 年 12 月 四 级 真 题 （第 二 套 ）・"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "If we care about plastic waste, why won't we stop drinking bottled water?"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "We have all seen the damage plastic waste is doing around the world, but sales o f bottled water have"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "continued to grow."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "A) For all the innovation and choice that define the food and drink industries, if you want to make money, you"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "could do a lot worse than fill a bottle with water and sell it. A litre of tap water, the stuff we have cleverly"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "piped into our homes, costs less than half a penny. A litre of bottled water can cost well over a pound,"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "especially for something fancy that has been sucked through a mountain."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "B) Yet the bottled water market is livelier than ever. It defies our increasing awareness of the harm plastics do"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "to the environment and a broader, growing sense that something has to change. Sales in the UK were worth"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "a record £558.4 million this past year, an increase of 7%, according to the latest figures from the market"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "analyst Kantar. Separate data from other analysts show that last year the British consumed more than 2.2"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "billion litres o f bottled water, including “take-home\" and “on-the-go\" products. T hafs an annual rise in"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "volume of 8.5%."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "C) Environmental campaigners are struggling to understand why nations blessed with clean tap water grow only"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "fonder of the bottle. \"It's very surprising to me,“ says Sam Chetan-Walsh, a political adviser at Greenpeace"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "and campaigner against ocean plastic. <cPublic awareness has never been higher, but the message is not quite"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "reaching all the people it needs to.\" Where it is heard, the message is causing concern. Plastic water bottles"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "require oceans of fossil fuels to make and ship. Additionally, single-use plastics of all types are polluting our"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "cities and seas. Numerous documentaries have shown how plastic is ultimately killing wildlife."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "D) Moves against various plastics have gathered pace, from shopping bags to straws and plastic-lined coffee"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "cups. Chetan-Walsh argues that bottled water is different because the alternatives are so obvious. u If a product"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "that is so nakedly unnecessary can exist, then the whole system is fa ilin g ,h e says."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "E) Hope is not entirely out of reach. The rate of growth has begun to ease (sales were up 7% in the year,"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "compared with 8% the previous year)."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "F) But even if large numbers of people are quitting bottled water because of care fbr the environment, others are"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "taking it up. The introduction of the \"sugar tax“ on juices and soda drinks has pushed more people to bottled"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "water, while health awareness has boosted its desirability. Tap water consumption is growing at roughly the"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "same pace (UK consumers still drink almost three times as much tap water as bottled water)."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "G) So the plastic tide only creeps higher. The industry is quick to point out that all its bottles are recyclable."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "“But collection rates are, at the most generous estimates, 56%, so the actual recycling rate will be lower than"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "that,“ Chetan-Walsh says. And while bottles may be recyclable, very few are made of recycled plastic. One"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "water bottle company launched recycled half-litre \"eco\" bottles alongside its standard bottles. Another has"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "pledged to use only recycled plastic across its range by 2025. Chetan-Walsh believes in a ban on single-use"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "bottles. Bans do exist in some places. Organisers of a famous music festival announced that water bottles will"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "not be sold this summer. San Francisco has banned them from city property and events. Last year, the UK"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "government set out plans to ban single-use plastic from its estate."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "H) Water bottlers, unsurprisingly, don't support bans. But they raise concerns about health rather than profit"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "margins. Last month one chief executive of a water bottling company said that bans would “result in greater"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "・2024 年 12 月四级真题（第二套）•                                   14"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "consumption of sugary drinks, adding to all the health dangers of obesity, diabetes and tooth decay”. Kinvara"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Carey, general manager of an association of the biggest bottled water manufacturers, cites a survey in which"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "people were asked what they would do if bottled water were not available. ^Forty-four per cent would buy"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "another drink, which is not great, 14% would go without and 4.5% said they would find a fountain,she says."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "“The choice is important.^^"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "I) What if fountains were more numerous, and tap water more clearly available in cafes, restaurants and"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "elsewhere? Dozens of fountains are being installed in London. There are similar initiatives elsewhere. Before"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "plastic and the marketing that made people think they needed bottled water in the first place, fountains were"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "an urban fixture. Greenpeace, among others, is also pushing for a “deposit return“ scheme. This would mean"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "tax on bottled water would be refunded to customers who returned the plastic for recycling."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "J) Even if bottled water sales are growing slightly more slowly, the industry is racing to adapt to changing"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "concerns and tastes. Flavoured water is booming: sales of the sparkling variety shot up by 20%, according"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "to the latest analyst data. Meanwhile, international water brands, as well as a range of new companies, are"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "selling high-end reusable bottles. And if you must fill them with tap water, why not add flavouring?"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "K) As the owner of multiple sugary drink brands and bottled water, PepsiCo is facing challenges on health and"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "environmental fronts. Last year, the company bought SodaStream (a drinks company that sells machines for"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "making tap water bubbly and then consumers add flavours) for $3.2 billion. It also launched a range of fancy"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "bottles that work with tap water and flavour packets. The bottle is reusable. The packets? Not so much, and,"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "yes, they are made of plastic, although the company invites users to post them back for recycling."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "L) As is so often the case, clever marketing can beat reason; awareness is rarely enough. u There is always this"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "kind of slip between concern, intent and changed behaviour,says Giles Quick, an analyst of bottled water."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "“The best example is five a day, the recommendation to have at least five portions of fruit and vegetables"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "every day. Almost everyone is aware of this, but something like 15% of us achieve it.\" Unless a far-"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "reaching bottle ban does come into force, it will be up to consumers to not only demand change- but to act"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "themselves."
+                }
+              ]
+            }
+          ],
           "sharedOptions": [],
           "questions": [
             {
-              "id": "cet4-paper-2024122-part-2-section-5-group-1-q-36-1",
+              "id": "cet4-paper-2024122-part-3-section-2-group-1-q-36-1",
               "displayNumber": 36,
               "sourceQuestionNumber": 36,
               "type": "short_answer",
@@ -2455,7 +3082,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2024122-part-2-section-5-group-1-q-37-2",
+              "id": "cet4-paper-2024122-part-3-section-2-group-1-q-37-2",
               "displayNumber": 37,
               "sourceQuestionNumber": 37,
               "type": "short_answer",
@@ -2494,7 +3121,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2024122-part-2-section-5-group-1-q-38-3",
+              "id": "cet4-paper-2024122-part-3-section-2-group-1-q-38-3",
               "displayNumber": 38,
               "sourceQuestionNumber": 38,
               "type": "short_answer",
@@ -2533,7 +3160,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2024122-part-2-section-5-group-1-q-39-4",
+              "id": "cet4-paper-2024122-part-3-section-2-group-1-q-39-4",
               "displayNumber": 39,
               "sourceQuestionNumber": 39,
               "type": "short_answer",
@@ -2572,7 +3199,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2024122-part-2-section-5-group-1-q-40-5",
+              "id": "cet4-paper-2024122-part-3-section-2-group-1-q-40-5",
               "displayNumber": 40,
               "sourceQuestionNumber": 40,
               "type": "short_answer",
@@ -2611,7 +3238,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2024122-part-2-section-5-group-1-q-41-6",
+              "id": "cet4-paper-2024122-part-3-section-2-group-1-q-41-6",
               "displayNumber": 41,
               "sourceQuestionNumber": 41,
               "type": "short_answer",
@@ -2650,7 +3277,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2024122-part-2-section-5-group-1-q-42-7",
+              "id": "cet4-paper-2024122-part-3-section-2-group-1-q-42-7",
               "displayNumber": 42,
               "sourceQuestionNumber": 42,
               "type": "short_answer",
@@ -2689,7 +3316,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2024122-part-2-section-5-group-1-q-43-8",
+              "id": "cet4-paper-2024122-part-3-section-2-group-1-q-43-8",
               "displayNumber": 43,
               "sourceQuestionNumber": 43,
               "type": "short_answer",
@@ -2728,7 +3355,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2024122-part-2-section-5-group-1-q-44-9",
+              "id": "cet4-paper-2024122-part-3-section-2-group-1-q-44-9",
               "displayNumber": 44,
               "sourceQuestionNumber": 44,
               "type": "short_answer",
@@ -2767,7 +3394,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2024122-part-2-section-5-group-1-q-45-10",
+              "id": "cet4-paper-2024122-part-3-section-2-group-1-q-45-10",
               "displayNumber": 45,
               "sourceQuestionNumber": 45,
               "type": "short_answer",
@@ -2808,15 +3435,232 @@
           ]
         },
         {
-          "id": "cet4-paper-2024122-part-2-section-6-group-1",
+          "id": "cet4-paper-2024122-part-3-section-3-group-1",
           "title": "Questions 46 to 50 are based on the following passage.",
-          "presentation": "inline",
+          "presentation": "reading",
           "instructions": [],
-          "stimulusBlocks": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "As a university student, Fve come to realise just how little I know about money. I've come to the brutal"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "realisation that Australia's youth are being done a great disservice by not receiving any consistent financial"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "education."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Diving headfirst into the crash course of starting university, I've quickly tried to get myself up to speed with"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "the financial terms of the modem era to help manage my personal finances."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Fve read some financial education books, done some online learning, and have spoken to my nearest and"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "dearest for their pearls of financial wisdom."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "There are undoubtedly hundreds of great resources out there for those wishing to improve their financial"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "literacy, but while I was researching, I still kept wishing that I didn't have to play catch-up with the money"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "world. I felt that I was sailing the financial seas with no skills and no life jacket!"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "However, after talking to my friends who felt the same, I quickly realised that it wasn't my ignorance but the"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "lack of financial education in our schooling system that is leaving high schoolers seriously behind in the modem"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "world of money."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Lefs compare a theoretical financial education subject to the standard compulsory English class. On"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "average, English may not be the most popular subject, but ifs consistently on the schedule throughout high"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "school, with all students graduating fluent in English."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "A financial education subject should do just the same. It shouldn't be just a one-day event but a course"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "integrated throughout the whole of high school that would allow students to gradually expand their financial"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "literacy, and would prevent the need for a \"catch up' phase once we're out on our own after graduation."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "In the same way that learning a language or new skills takes time, building financial skills requires practice"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "and years to gradually accumulate bits and pieces of knowledge."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Giving young people the opportunity to become familiar with the world of money would provide them with"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "a great advantage to enter adulthood with confidence and security so that they are able to manage their own"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "money and look after themselves."
+                }
+              ]
+            }
+          ],
           "sharedOptions": [],
           "questions": [
             {
-              "id": "cet4-paper-2024122-part-2-section-6-group-1-q-46-1",
+              "id": "cet4-paper-2024122-part-3-section-3-group-1-q-46-1",
               "displayNumber": 46,
               "sourceQuestionNumber": 46,
               "type": "single_choice",
@@ -2916,7 +3760,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2024122-part-2-section-6-group-1-q-47-2",
+              "id": "cet4-paper-2024122-part-3-section-3-group-1-q-47-2",
               "displayNumber": 47,
               "sourceQuestionNumber": 47,
               "type": "single_choice",
@@ -3016,7 +3860,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2024122-part-2-section-6-group-1-q-51-3",
+              "id": "cet4-paper-2024122-part-3-section-3-group-1-q-51-3",
               "displayNumber": 51,
               "sourceQuestionNumber": 51,
               "type": "single_choice",
@@ -3116,7 +3960,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2024122-part-2-section-6-group-1-q-52-4",
+              "id": "cet4-paper-2024122-part-3-section-3-group-1-q-52-4",
               "displayNumber": 52,
               "sourceQuestionNumber": 52,
               "type": "single_choice",
@@ -3216,7 +4060,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2024122-part-2-section-6-group-1-q-53-5",
+              "id": "cet4-paper-2024122-part-3-section-3-group-1-q-53-5",
               "displayNumber": 53,
               "sourceQuestionNumber": 53,
               "type": "single_choice",
@@ -3316,7 +4160,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2024122-part-2-section-6-group-1-q-54-6",
+              "id": "cet4-paper-2024122-part-3-section-3-group-1-q-54-6",
               "displayNumber": 54,
               "sourceQuestionNumber": 54,
               "type": "single_choice",
@@ -3416,7 +4260,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2024122-part-2-section-6-group-1-q-55-7",
+              "id": "cet4-paper-2024122-part-3-section-3-group-1-q-55-7",
               "displayNumber": 55,
               "sourceQuestionNumber": 55,
               "type": "single_choice",
@@ -3520,13 +4364,13 @@
       ]
     },
     {
-      "id": "cet4-paper-2024122-part-3-translation",
+      "id": "cet4-paper-2024122-part-4-translation",
       "title": "Translation 翻译",
       "layout": "flow",
       "instructions": [],
       "groups": [
         {
-          "id": "cet4-paper-2024122-part-3-translation-group",
+          "id": "cet4-paper-2024122-part-4-translation-group",
           "title": "翻译题",
           "presentation": "writing",
           "instructions": [],
@@ -3534,7 +4378,7 @@
           "sharedOptions": [],
           "questions": [
             {
-              "id": "cet4-paper-2024122-part-3-q-48-1",
+              "id": "cet4-paper-2024122-part-4-q-48-1",
               "displayNumber": 48,
               "sourceQuestionNumber": 48,
               "type": "translation",
@@ -3573,7 +4417,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2024122-part-3-q-49-2",
+              "id": "cet4-paper-2024122-part-4-q-49-2",
               "displayNumber": 49,
               "sourceQuestionNumber": 49,
               "type": "translation",
@@ -3612,7 +4456,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2024122-part-3-q-50-3",
+              "id": "cet4-paper-2024122-part-4-q-50-3",
               "displayNumber": 50,
               "sourceQuestionNumber": 50,
               "type": "translation",
@@ -3655,7 +4499,25 @@
       ]
     }
   ],
-  "assetRefs": [],
+  "assetRefs": [
+    {
+      "assetId": "cet4-paper-2024122-audio",
+      "kind": "audio",
+      "url": "/cet4/audio/cet4-paper-2024122.mp3",
+      "mimeType": "audio/mpeg",
+      "sha256": "",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "c3856d273a11a0cb0143a4d4daff2e47b50aceee010d9584033df9151be6babd",
+          "relativePath": "2024.12四级真题第2套.pdf",
+          "sha256": "c3856d273a11a0cb0143a4d4daff2e47b50aceee010d9584033df9151be6babd",
+          "locator": {},
+          "extractionMethod": "manual-review",
+          "confidence": 0.86
+        }
+      ]
+    }
+  ],
   "sourceRefs": [
     {
       "sourceDocumentId": "c3856d273a11a0cb0143a4d4daff2e47b50aceee010d9584033df9151be6babd",

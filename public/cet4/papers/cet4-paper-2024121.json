@@ -19,7 +19,13 @@
       "id": "cet4-paper-2024121-part-1-writing",
       "title": "Writing 写作",
       "layout": "flow",
-      "instructions": [],
+      "instructions": [
+        {
+          "type": "audio",
+          "assetId": "cet4-paper-2024121-audio",
+          "label": "听力音频"
+        }
+      ],
       "groups": [
         {
           "id": "cet4-paper-2024121-part-1-writing-group",
@@ -2373,7 +2379,7 @@
                       "runs": [
                         {
                           "type": "text",
-                          "text": "Associating with dogs. Part in                               Reading Comprehension                                           (40 minutes)"
+                          "text": "Associating with dogs."
                         }
                       ]
                     }
@@ -2400,17 +2406,80 @@
               "reviewStatus": "review_required"
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "id": "cet4-paper-2024121-part-3",
+      "title": "Part III                               Reading Comprehension                                           (40 minutes)",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
         {
-          "id": "cet4-paper-2024121-part-2-section-4-group-1",
+          "id": "cet4-paper-2024121-part-3-section-1-group-1",
           "title": "题目",
-          "presentation": "inline",
+          "presentation": "reading",
           "instructions": [],
-          "stimulusBlocks": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "from a list o f choices given in a word bank fallowing the passage. Read the passage through carefully before"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "making your choices. Each choice in the bank is identified by a letter. Please mark the corresponding letter for"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "each item on Answer Sheet 2 with a single line through the centre. You may not use any o f the words in the bank"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "more than once."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "When Toni Morrison died in 2019, the world lost one of its most influential authors. But Morrison was"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "not an early success. Her first novel was not published until she was 39, and her last appeared when she was"
+                }
+              ]
+            }
+          ],
           "sharedOptions": [],
           "questions": [
             {
-              "id": "cet4-paper-2024121-part-2-section-4-group-1-q-84-1",
+              "id": "cet4-paper-2024121-part-3-section-1-group-1-q-84-1",
               "displayNumber": 84,
               "sourceQuestionNumber": 84,
               "type": "single_choice",
@@ -2677,15 +2746,655 @@
           ]
         },
         {
-          "id": "cet4-paper-2024121-part-2-section-5-group-1",
+          "id": "cet4-paper-2024121-part-3-section-2-group-1",
           "title": "题目",
-          "presentation": "inline",
+          "presentation": "reading",
           "instructions": [],
-          "stimulusBlocks": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "contains information given in one o f the paragraphs. Identify the paragraph from which the information is"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "derived. You may choose a paragraph more than once. Each paragraph is marked with a letter Answer the"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "questions by marking the corresponding letter on Answer Sheet 2."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Why it's wrong to look at work-life balance as an achievement"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "A) Few topics have been so endlessly analysed as work-life balance. The quest to attain this mysterious state"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "has dominated discussion around careers fbr years- especially fbr working parents. The concept is often"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "presented as something to achieve, or a goal to reach. And once you've reached it, congratulations: you've"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "made it; you're a successful human being of the 21st century."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "B) But the problem is that we often tell ourselves: \"I'm going to put in eight hours' worth of work, and then I'm"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "going to put in eight hours' worth of 'me time', which will include my family, my hobbies, my workout, my"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "everything,says Anat Lechner, clinical associate professor of management at New York University. UI don't"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "think ifs such a simple formula.^^"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "C) And, according to new findings, it may not be. Some researchers are now encouraging us to stop thinking"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "about work-life balance as an achievement that you either hit or don't. Instead, they suggest it may be"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "more of a lifelong process- a continuous, never-ending exercise that requires self-awareness and timely"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "adjustments. Researchers loana Lupu and Mayra Rujz-Castro argue that work-life balance is “a cycle, not"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "an achievemenf, . In their 2020 study, the researchers interviewed nearly 80 employees at two London-based"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "firms- an equal number of men and women between the ages of 30 and 50, all with at least one dependent"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "child- who worked in middle or senior management roles."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "D) Although it sounds like the respondents had a lot in common, here's what separated them: about 30% of the"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "• 2024 年 12 月四级真题（第一套）­                                  4"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "men and 50% of the women reported resisting working long hours. The other respondents, meanwhile, all"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "worked long hours because they thought thafs what successful professionals should do."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "E) Lupu and Ruiz-Castro looked at those who rejected the long hours and they found that those workers actually"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "had strikingly similar strategies for maintaining their work-life balance. They had a tendency to reflect and"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "question assumptions in the name of self-awareness and regularly took steps to adjust the things standing in"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "their way to work-life balance."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "F) Lupu and Ruiz-Castro identified five steps that the respondents in the study who had better work-life balance"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "used in their jobs. First, they paused and reconsidered beliefs such as 'T m a professional, so I should work,"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "work, work”, and asked themselves questions like, \"What's currently causing me stress?55 Second, after"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "identifying the cause, they zeroed in on their resultant emotions. Did they feel angry, sad, energised? Third,"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "they reprioritised, asking “Is working long hours really worth cutting back on family time?”，for example."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Fourth, they considered their alternatives: is there anything at work that could be changed to accommodate"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "these new priorities? And finally, they implemented changes, like asking their supervisor for greater"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "flexibility, or deciding not to take on every project that comes their way."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "G) This five-step process is something anyone can adopt. Going through the steps, and constantly checking in"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "with yourself, can help you shift and adapt your professional life to something that will better harmonise with"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "your personal one. ''Awareness of your emotional state is essential in order to determine the changes you"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "want to make in your work and in your          says Lupu."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "H) New York University's Lechner agrees that finding that balance is an ongoing pursuit. Ifs not simply about"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "dividing up the hours in your day between work, the gym, kids and chores. If the underlying emotional"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "sources of stress are still there, then the time you actually spend at home may not be enjoyable. \"We come"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "home and even though physically we are there, mentally we still may be processing things that happened at"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "work. We're not present,n she says. What we call “work-life balance” is actually just a substitute to having a"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "sense of fulfillment and contentment."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "I) Of course, finding that balance probably shouldn't be something you have to do by yourself. Research by"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Erin Kelly, professor of work and organisation studies at MIT, shows companies and managers can play a"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "key role in creating a better environment for workers. For her book Overload: How Good Jobs Went Bad"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "and What to Do about It, she and co-author Phyllis Moen split more than 1,000 employees at a Fortune 500"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "company into two groups, one that worked under a management redesign and one that continued working"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "within the existing management structure."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "J) Under the management redesign, many steps were taken to ensure better work-life balance and prevent"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "burnout (精 疲 力 竭 ). Managers were regularly reminded to explicitly support their employees. Workers were"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "allowed to make changes, like cancelling 9 am meetings. All of this was done in the name of increasing job"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "satisfaction and giving workers greater flexibility, and to assure workers that it was something management"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "was committed to. Unsurprisingly, Kelly and Moen found that employees in the redesign group reported less"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "stress and less burnout. They were less likely to quit their jobs; indeed, over the next four years, they were"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "40% less likely to quit than those who kept working under the old policies."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "K) “Work-life balance is understood to be an individuaFs response, so people think 'it's up to me to manage the"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "5                        ♦2024年 12月四级真题(第一套)・"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "craziness of my work          says Kelly. But organisations need to examine the demands they're placing on"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "employees. u The root problem is not how the two pieces of work and life come together. Ifs that we have"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "unrealistic expectations of what we're asked to do on the work side.\" If your workplace isn't an environment"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "where work-life balance is possible in the first place, any effort you attempt to make toward it on a personal"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "level will be in vain."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "L) Thafs a conversation that appears to be gathering pace. The new prevalence of remote and flexible working"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "models will likely all play important roles in how we balance our professional and personal lives. And if"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "it seems like finding that perfect balance remains difficult to achieve, the experts say that keeping some"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "perspective can help. For millions of people, work is about being able to put food on the table. Talking about"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "work-life balance “is a very privileged conversation\"，says Lechner. t4If we're reflecting, maybe we should"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "also reflect on that.”"
+                }
+              ]
+            }
+          ],
           "sharedOptions": [],
           "questions": [
             {
-              "id": "cet4-paper-2024121-part-2-section-5-group-1-q-36-1",
+              "id": "cet4-paper-2024121-part-3-section-2-group-1-q-36-1",
               "displayNumber": 36,
               "sourceQuestionNumber": 36,
               "type": "short_answer",
@@ -2724,7 +3433,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2024121-part-2-section-5-group-1-q-37-2",
+              "id": "cet4-paper-2024121-part-3-section-2-group-1-q-37-2",
               "displayNumber": 37,
               "sourceQuestionNumber": 37,
               "type": "short_answer",
@@ -2763,7 +3472,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2024121-part-2-section-5-group-1-q-38-3",
+              "id": "cet4-paper-2024121-part-3-section-2-group-1-q-38-3",
               "displayNumber": 38,
               "sourceQuestionNumber": 38,
               "type": "short_answer",
@@ -2802,7 +3511,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2024121-part-2-section-5-group-1-q-39-4",
+              "id": "cet4-paper-2024121-part-3-section-2-group-1-q-39-4",
               "displayNumber": 39,
               "sourceQuestionNumber": 39,
               "type": "short_answer",
@@ -2841,7 +3550,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2024121-part-2-section-5-group-1-q-40-5",
+              "id": "cet4-paper-2024121-part-3-section-2-group-1-q-40-5",
               "displayNumber": 40,
               "sourceQuestionNumber": 40,
               "type": "short_answer",
@@ -2880,7 +3589,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2024121-part-2-section-5-group-1-q-41-6",
+              "id": "cet4-paper-2024121-part-3-section-2-group-1-q-41-6",
               "displayNumber": 41,
               "sourceQuestionNumber": 41,
               "type": "short_answer",
@@ -2919,7 +3628,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2024121-part-2-section-5-group-1-q-42-7",
+              "id": "cet4-paper-2024121-part-3-section-2-group-1-q-42-7",
               "displayNumber": 42,
               "sourceQuestionNumber": 42,
               "type": "short_answer",
@@ -2958,7 +3667,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2024121-part-2-section-5-group-1-q-43-8",
+              "id": "cet4-paper-2024121-part-3-section-2-group-1-q-43-8",
               "displayNumber": 43,
               "sourceQuestionNumber": 43,
               "type": "short_answer",
@@ -2997,7 +3706,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2024121-part-2-section-5-group-1-q-44-9",
+              "id": "cet4-paper-2024121-part-3-section-2-group-1-q-44-9",
               "displayNumber": 44,
               "sourceQuestionNumber": 44,
               "type": "short_answer",
@@ -3036,7 +3745,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2024121-part-2-section-5-group-1-q-45-10",
+              "id": "cet4-paper-2024121-part-3-section-2-group-1-q-45-10",
               "displayNumber": 45,
               "sourceQuestionNumber": 45,
               "type": "short_answer",
@@ -3077,15 +3786,214 @@
           ]
         },
         {
-          "id": "cet4-paper-2024121-part-2-section-6-group-1",
+          "id": "cet4-paper-2024121-part-3-section-3-group-1",
           "title": "Questions 46 to 50 are based on the following passage.",
-          "presentation": "inline",
+          "presentation": "reading",
           "instructions": [],
-          "stimulusBlocks": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "The weakening of the human connection to nature might be good for economic growth but is bad for"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "people. A tipping point was reached in 2020 when human-made materials-such as steel, concrete and plastic一"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "・2024年 12 月四级真题(第一套)・                                 6"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "were found to weigh more than all life on Earth. Continuing to grow concrete forests rather than real ones is"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "shortsighted. Simply being in the nearest wood has such health benefits that the Woodland Trust successfully"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "lobbied fbr it to be prescribed by doctors."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Yet slipping from popular culture is the wonder and beauty of the natural world. For every three nature-"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "related words in hit songs of the 1950s, researchers found, there was only slightly more than one 50 years later. It"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "is not a moment too soon that teenagers will be able to take a natural history test, given that for decades children"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "have been able to name more video game characters than wildlife species."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Part of remedying this social disease would be fbr parliament to pass a “right to grow\" law, allowing anyone"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "to turn underused public spaces into vegetable and fruit gardens. The idea is fbr people to get back in touch with"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "the soil- while producing food sustainably."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Vegetable planting has a respectable tradition. In April 1649, locals responded to high prices and food"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "shortages by cultivating vegetables on common land in Southern England. The practice of throwing seed bombs"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "to turn vacant plots of land green took off in 1970s New York, and has been revived (使 复 活 ) by green-thumbed"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "(有 园 艺 才 能 的 ) social media influencers who defy local US regulations in a war on ugly spots in cities."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Apart from the urgent task of providing more healthy nutrients to those who increasingly can't afford them,"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "publicly accessible fruit and vegetable gardens connect what we eat to where it comes from- the means of"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "production, if you will. They can make unlovely spaces lovely, and marry use and beauty as well as help promote"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "a sense of community. Plants are also, of course, our first defence against species loss and climate change. Such"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "planting is a small step for humanity- in the right direction."
+                }
+              ]
+            }
+          ],
           "sharedOptions": [],
           "questions": [
             {
-              "id": "cet4-paper-2024121-part-2-section-6-group-1-q-46-1",
+              "id": "cet4-paper-2024121-part-3-section-3-group-1-q-46-1",
               "displayNumber": 46,
               "sourceQuestionNumber": 46,
               "type": "single_choice",
@@ -3185,7 +4093,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2024121-part-2-section-6-group-1-q-47-2",
+              "id": "cet4-paper-2024121-part-3-section-3-group-1-q-47-2",
               "displayNumber": 47,
               "sourceQuestionNumber": 47,
               "type": "single_choice",
@@ -3285,7 +4193,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2024121-part-2-section-6-group-1-q-48-3",
+              "id": "cet4-paper-2024121-part-3-section-3-group-1-q-48-3",
               "displayNumber": 48,
               "sourceQuestionNumber": 48,
               "type": "single_choice",
@@ -3385,7 +4293,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2024121-part-2-section-6-group-1-q-49-4",
+              "id": "cet4-paper-2024121-part-3-section-3-group-1-q-49-4",
               "displayNumber": 49,
               "sourceQuestionNumber": 49,
               "type": "single_choice",
@@ -3485,7 +4393,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2024121-part-2-section-6-group-1-q-50-5",
+              "id": "cet4-paper-2024121-part-3-section-3-group-1-q-50-5",
               "displayNumber": 50,
               "sourceQuestionNumber": 50,
               "type": "single_choice",
@@ -3587,15 +4495,232 @@
           ]
         },
         {
-          "id": "cet4-paper-2024121-part-2-section-6-group-2",
+          "id": "cet4-paper-2024121-part-3-section-3-group-2",
           "title": "Questions 51 to 55 are based on the following passage.",
-          "presentation": "inline",
+          "presentation": "reading",
           "instructions": [],
-          "stimulusBlocks": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Engineering in the U.S. has long been a male-dominated profession. Fifty years ago, it looked like that might"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "change."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "In 1970, the percentage of women majoring in engineering was less than 1%. In 1979, that number was 9%."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Many hoped women would continue to enter the field at the same rate. But thafs not what happened. Today, only"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "21% of engineering majors are women, a number largely unchanged since 2000."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "I am a historian who, along with my colleagues, surveyed 251 women engineers who graduated from college"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "in the 1970s. These pioneers reflected on the challenges they faced- and had advice for women entering the field"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "today."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "One survey taker explained, <4The greatest challenge for me was continuing to believe in myself when all"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "the messages I was getting were that I would never be taken seriously or promoted or given raises at the same"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "rate as men, who were clearly less qualified and not as smart as I was.”"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "A chemical engineer who worked in manufacturing agreed, 4<You have to prove yourself just because you are"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "female. And you have to work twice as hard!^^"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "A civil engineer said, 4<We are 'women engineers/ People don't refer to a man as a 4man engineer?- he's"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "an engineer. We are constantly reminded that we don't truly belong.^^ Another civil engineer stated, t4On many"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "levels, you're never quite one of the groups/5"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Women also talked about family caregiving responsibilities. A retired vice president from a major chemical"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "company stated, 4tYoung women engineers are on an equal footing until they have children, then they struggle to"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "balance work and family- and compete with men who don't have the same household responsibilities.^^"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "But over the years things have changed a lot. Young women engineers are more accepted mostly because"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "there are just more of them."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Many women engineers hailed the benefits of their chosen career. A program manager in manufacturing"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "stated that engineering is the best degree. A mechanical engineer said, u It will give you the flexibility to do"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "almost anything. It is also satisfying to see the effects of what you have done.^^"
+                }
+              ]
+            }
+          ],
           "sharedOptions": [],
           "questions": [
             {
-              "id": "cet4-paper-2024121-part-2-section-6-group-2-q-51-1",
+              "id": "cet4-paper-2024121-part-3-section-3-group-2-q-51-1",
               "displayNumber": 51,
               "sourceQuestionNumber": 51,
               "type": "single_choice",
@@ -3695,7 +4820,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2024121-part-2-section-6-group-2-q-52-2",
+              "id": "cet4-paper-2024121-part-3-section-3-group-2-q-52-2",
               "displayNumber": 52,
               "sourceQuestionNumber": 52,
               "type": "single_choice",
@@ -3795,7 +4920,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2024121-part-2-section-6-group-2-q-53-3",
+              "id": "cet4-paper-2024121-part-3-section-3-group-2-q-53-3",
               "displayNumber": 53,
               "sourceQuestionNumber": 53,
               "type": "single_choice",
@@ -3895,7 +5020,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2024121-part-2-section-6-group-2-q-54-4",
+              "id": "cet4-paper-2024121-part-3-section-3-group-2-q-54-4",
               "displayNumber": 54,
               "sourceQuestionNumber": 54,
               "type": "single_choice",
@@ -3995,7 +5120,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2024121-part-2-section-6-group-2-q-55-5",
+              "id": "cet4-paper-2024121-part-3-section-3-group-2-q-55-5",
               "displayNumber": 55,
               "sourceQuestionNumber": 55,
               "type": "single_choice",
@@ -4099,13 +5224,13 @@
       ]
     },
     {
-      "id": "cet4-paper-2024121-part-3-translation",
+      "id": "cet4-paper-2024121-part-4-translation",
       "title": "Translation 翻译",
       "layout": "flow",
       "instructions": [],
       "groups": [
         {
-          "id": "cet4-paper-2024121-part-3-translation-group",
+          "id": "cet4-paper-2024121-part-4-translation-group",
           "title": "翻译题",
           "presentation": "writing",
           "instructions": [],
@@ -4113,7 +5238,7 @@
           "sharedOptions": [],
           "questions": [
             {
-              "id": "cet4-paper-2024121-part-3-q-1-1",
+              "id": "cet4-paper-2024121-part-4-q-1-1",
               "displayNumber": 1,
               "sourceQuestionNumber": 1,
               "type": "translation",
@@ -4156,7 +5281,25 @@
       ]
     }
   ],
-  "assetRefs": [],
+  "assetRefs": [
+    {
+      "assetId": "cet4-paper-2024121-audio",
+      "kind": "audio",
+      "url": "/cet4/audio/cet4-paper-2024121.mp3",
+      "mimeType": "audio/mpeg",
+      "sha256": "",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "472cbf7061e6e302d63281bc284d0b91b5160af3e7f6a278d4fbdbc8f667b8d4",
+          "relativePath": "2024.12四级真题第1套.pdf",
+          "sha256": "472cbf7061e6e302d63281bc284d0b91b5160af3e7f6a278d4fbdbc8f667b8d4",
+          "locator": {},
+          "extractionMethod": "manual-review",
+          "confidence": 0.86
+        }
+      ]
+    }
+  ],
   "sourceRefs": [
     {
       "sourceDocumentId": "472cbf7061e6e302d63281bc284d0b91b5160af3e7f6a278d4fbdbc8f667b8d4",

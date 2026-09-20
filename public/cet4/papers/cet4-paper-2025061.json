@@ -19,7 +19,13 @@
       "id": "cet4-paper-2025061-part-1-writing",
       "title": "Writing 写作",
       "layout": "flow",
-      "instructions": [],
+      "instructions": [
+        {
+          "type": "audio",
+          "assetId": "cet4-paper-2025061-audio",
+          "label": "听力音频"
+        }
+      ],
       "groups": [
         {
           "id": "cet4-paper-2025061-part-1-writing-group",
@@ -2379,7 +2385,7 @@
                       "runs": [
                         {
                           "type": "text",
-                          "text": "It was the first public exhibit of animals. Part in                                   Reading Comprehension                                  (40 minutes)"
+                          "text": "It was the first public exhibit of animals."
                         }
                       ]
                     }
@@ -2406,17 +2412,683 @@
               "reviewStatus": "review_required"
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "id": "cet4-paper-2025061-part-3",
+      "title": "Part III                                   Reading Comprehension                                  (40 minutes)",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
         {
-          "id": "cet4-paper-2025061-part-2-section-5-group-1",
+          "id": "cet4-paper-2025061-part-3-section-2-group-1",
           "title": "题目",
-          "presentation": "inline",
+          "presentation": "reading",
           "instructions": [],
-          "stimulusBlocks": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "contains information given in one o f the paragraphs. Identify the paragraph from which the information is"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "derived. You may choose a paragraph more than once. Each paragraph is marked with a letter. Answer the"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "questions by marking the corresponding letter on Answer Sheet 2."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Getting young minds into design"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "A) Recently, a leading design federation in the UK warned that the UK could face a creative skills shortage,"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "after the latest figures revealed a drop of almost 10 percent in students studying Design and Technology."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "These figures showed that the number of pupils that sat exams in Design and Technology fell 10 percent from"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "204,788 to 185,279 last year."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "B) Chief executive John Kampfher of the Creative Industries Federation thinks that this drop in figures has"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "worrying implications fbr the skills pipeline in Britain's hugely successful arts and creative industries. He said,"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "“We already have skills shortages in many jobs such as animation (动画制作)and special effects.\" He added:"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "''Engineering, which requires a similar mix of creative and technical skills, also has recruitment problems.^^"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "C) Many other designers and architects have expressed concern over the future supply of home-grown talent"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "for UK firms, and industry bodies have pointed out that there has been a lack of roots-level support."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "However, if these designers had visited the Design Museum shop in London earlier this year their fears"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "may have been eased. With £10 to spend, they could have bought a fascinating children's toy called"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "•202 5 年 6 月四级真题（第一套）・                                    4"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "“Dazzle Racer”. An automotive cylinder ( ®]           it included a wind-up, elastic (有弹，"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "性的)-band-powered"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "mechanism, minimal parts, all 100 percent recycled, and lots of stickers. It was good fun, simple, eye­"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "catching and very original."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "D) Well, you'd expect the Design Museum to commission and make some interesting items, but this one"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "was different. Designed by a group of six Year 9 and Year 10 boys from Finchley Catholic High School,"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "the toy was the winning entry in the m useum 's 2015 Design Ventura competition, which brings the"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "business o f design to life for students aged 13 to 16 by challenging them to develop a new creative,"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "sustainable and commercially feasible product for the Design Museum shop and attracts hundreds of"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "entries nationwide."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "E) “We did Design Ventura in my previous s c h o o l,s a y s Liam Hourican, Finchley Catholic High School's"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "design technology curriculum leader. u Then when I changed schools four years ago, I introduced it here"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "because it helps to develop so many skills.^^"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "F) The theme for last year's competition was “Move\"，and Hourican began with three groups working in lunch"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "breaks and after school before selecting the group with the most innovative idea. Each participating school"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "may submit just one proposal. t4Ifs the taking part and doing the work which is im p ortant,he says. \"And I"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "never dreamt we'd win.^^"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "G) Catherine Ritman Smith, head of learning at the Design Museum, is expecting around 10,000 participants"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "aged 13 to 16 to take part this year and says that the project- funded by Deutsche Bank as part of its youth"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "engagement programme Bom To Be— is the biggest event in the museum's calendar. u We started Design"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Ventura with around 800 young people in 2010 and it has grown steadily since,“ she says. \"Teachers like it"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "because the skills are all transferable and it helps to validate the value of design as a subject/5 she explains,"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "telling me that nearly 600 schools have taken part so far."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "H) So how does the competition work? A single-word theme is announced in the summer. This year it is “Change”."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Schools work with groups to produce imaginative design ideas for a product in simple materials that could"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "sell for £10 in the Design Museum shop. Participating schools then register by November and eventually"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "submit their design idea. Along the way there is training and support for teachers and tutoring for students from"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "designers. An additional bonus is when the winners see their design on sale in the spring of the following year."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "I) Hourican and his pupils have happy memories of spending a whole day at the museum, having been selected"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "as one of 10 shortlisted schools to present their idea to a panel of judges, including designer Jasper Conran."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Then they worked with the Kin Design Studio in Shoreditch, met designers at their school and attended"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "a lunch with Deutsche Bank employees. The students helped to make decisions and there were plenty of"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "discussions- they changed the producfs name, for example."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "J) “One of the really useful things about this competition,n says Hourican, u is that there 5s a commercial element"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "because the product is going on sale for real and the boys had to learn about budgeting and marketing, as"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "well as designing their game.^^ Profits go to charity. \"The winning team chooses where it wants the profits to"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "go,\" says Ritman Smith. u The Finchley Catholic High School product raised about £1,000 for Great Ormond"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Street Hospital? Winning entries in past years have included a make-your-own cloth kit called Dove Bunting"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "and a threefold, wallet-sized travel game with goals at each end, called Badoiiing."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "5                           ・2025年 6 月四级真题（第一套）。"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "K) It costs the schools nothing to participate in Design Ventura; the professional designers provide their services"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "for free. Among them are architect Asif Khan, a Design Museum trustee who has worked as designer-in-"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "residence at the museum, helping emerging architects. He has recently been commissioned to design the new"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Museum of London building in Smithfield."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "L) Another is television presenter and interior designer Naomi Cleaver, who is one o f the competition's"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "judges. 'T m very keen to encourage young people/5 she says, observing that design brings together other"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "subjects such as literature, art, history, geography and science. u Now that design education is limited in the"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "curriculum, I'm all in favour of competitions such as Design Ventura, which helps to bring the standard"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "curriculum to life,“ says Cleaver. \"And the judging day is terrific fun. Some of these students are very"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "imaginative. One group presented their idea in the form of a puppet show and we see some marvelous"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "demonstration models. I'm always impressed by the levels of confidence and the support the students get"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "from their teachers.,,"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "M) Ritman Smith adds: \"Design technology has become a tricky subject to make a case for, and we've heard of"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "departments closing in some schools. We find that if pupils take Part III Design Ventura in Year Nine it can be"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "the trigger which leads them to opt for it at General Certificate of Secondary Education, so we are helping to"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "keep alive something which is crucial to industry and entrepreneurship.^^"
+                }
+              ]
+            }
+          ],
           "sharedOptions": [],
           "questions": [
             {
-              "id": "cet4-paper-2025061-part-2-section-5-group-1-q-36-1",
+              "id": "cet4-paper-2025061-part-3-section-2-group-1-q-36-1",
               "displayNumber": 36,
               "sourceQuestionNumber": 36,
               "type": "short_answer",
@@ -2455,7 +3127,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025061-part-2-section-5-group-1-q-37-2",
+              "id": "cet4-paper-2025061-part-3-section-2-group-1-q-37-2",
               "displayNumber": 37,
               "sourceQuestionNumber": 37,
               "type": "short_answer",
@@ -2494,7 +3166,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025061-part-2-section-5-group-1-q-38-3",
+              "id": "cet4-paper-2025061-part-3-section-2-group-1-q-38-3",
               "displayNumber": 38,
               "sourceQuestionNumber": 38,
               "type": "short_answer",
@@ -2533,7 +3205,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025061-part-2-section-5-group-1-q-39-4",
+              "id": "cet4-paper-2025061-part-3-section-2-group-1-q-39-4",
               "displayNumber": 39,
               "sourceQuestionNumber": 39,
               "type": "short_answer",
@@ -2572,7 +3244,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025061-part-2-section-5-group-1-q-40-5",
+              "id": "cet4-paper-2025061-part-3-section-2-group-1-q-40-5",
               "displayNumber": 40,
               "sourceQuestionNumber": 40,
               "type": "short_answer",
@@ -2611,7 +3283,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025061-part-2-section-5-group-1-q-41-6",
+              "id": "cet4-paper-2025061-part-3-section-2-group-1-q-41-6",
               "displayNumber": 41,
               "sourceQuestionNumber": 41,
               "type": "short_answer",
@@ -2650,7 +3322,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025061-part-2-section-5-group-1-q-42-7",
+              "id": "cet4-paper-2025061-part-3-section-2-group-1-q-42-7",
               "displayNumber": 42,
               "sourceQuestionNumber": 42,
               "type": "short_answer",
@@ -2660,7 +3332,7 @@
                   "runs": [
                     {
                       "type": "text",
-                      "text": "The schools don't have to pay anything to take part in the Design Ventura competition."
+                      "text": "The schools don't have to pay anything to take Part III the Design Ventura competition."
                     }
                   ]
                 }
@@ -2689,7 +3361,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025061-part-2-section-5-group-1-q-43-8",
+              "id": "cet4-paper-2025061-part-3-section-2-group-1-q-43-8",
               "displayNumber": 43,
               "sourceQuestionNumber": 43,
               "type": "short_answer",
@@ -2728,7 +3400,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025061-part-2-section-5-group-1-q-44-9",
+              "id": "cet4-paper-2025061-part-3-section-2-group-1-q-44-9",
               "displayNumber": 44,
               "sourceQuestionNumber": 44,
               "type": "short_answer",
@@ -2767,7 +3439,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025061-part-2-section-5-group-1-q-45-10",
+              "id": "cet4-paper-2025061-part-3-section-2-group-1-q-45-10",
               "displayNumber": 45,
               "sourceQuestionNumber": 45,
               "type": "short_answer",
@@ -2808,15 +3480,232 @@
           ]
         },
         {
-          "id": "cet4-paper-2025061-part-2-section-6-group-1",
+          "id": "cet4-paper-2025061-part-3-section-3-group-1",
           "title": "Questions 46 to 50 are based on the following passage.",
-          "presentation": "inline",
+          "presentation": "reading",
           "instructions": [],
-          "stimulusBlocks": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "New research suggests that pandas may be at risk of dying out because they are too comfortable. Experts say"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "too much happiness can stop the bears from searching for new mates."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Environmentalists have long believed that building roads or homes near the bears may threaten their survival"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "by \"\"reducing or fragmenting their natural: habitats”, The Times reported. But the new research suggests that a"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "“modest degree of discomfort and fragmentation” may actually help preserve panda populations."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "The research was conducted by scientists from Michigan State University. It concluded that pandas fail to"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "wander off in search of new mates if they find their habitat too comfortable, resulting in a lack of vital genetic"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "diversity."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "For their study— outlined in a paper in the journal Conservation Biology— the team looked at genetic"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "diversity and spread among a Chinese panda population. The ideal level of perfectly livable habitat was found to"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "be only 80% of an area, with the remainder either too harsh or too affected by human activity."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "The experts concluded that pandas should ideally “be happy enough to thrive, but not so content that they"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "don't want to move around and find new mates”."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Their conclusions about what The Guardian described as this “sweet spot“ are in line with the so-called"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Goldilocks principle: that there can be just the right amount of something. The concept has been applied to a"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "wide range of disciplines, from developmental psychology to economics and engineering."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Claudio Sillero, a professor of conservation biology at Oxford University, told the newspaper that the new"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "findings could have implications beyond panda conservation."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "“Most large animals that eat meat live in increasingly fragmented landscapes,said Sillero, who was not"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "involved in the research, <4It may well be that the messy nature of their relationship with human efforts induces"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "more animals to scatter or travel further, and might result in greater genetic connectivity and enhanced population"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "persistence.^^"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "The most recent count of pandas found that there were more than 1,800 left in the wild, putting them on the"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "list of vulnerable, but not endangered, species."
+                }
+              ]
+            }
+          ],
           "sharedOptions": [],
           "questions": [
             {
-              "id": "cet4-paper-2025061-part-2-section-6-group-1-q-46-1",
+              "id": "cet4-paper-2025061-part-3-section-3-group-1-q-46-1",
               "displayNumber": 46,
               "sourceQuestionNumber": 46,
               "type": "single_choice",
@@ -2916,7 +3805,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025061-part-2-section-6-group-1-q-47-2",
+              "id": "cet4-paper-2025061-part-3-section-3-group-1-q-47-2",
               "displayNumber": 47,
               "sourceQuestionNumber": 47,
               "type": "single_choice",
@@ -3016,7 +3905,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025061-part-2-section-6-group-1-q-48-3",
+              "id": "cet4-paper-2025061-part-3-section-3-group-1-q-48-3",
               "displayNumber": 48,
               "sourceQuestionNumber": 48,
               "type": "single_choice",
@@ -3116,7 +4005,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025061-part-2-section-6-group-1-q-49-4",
+              "id": "cet4-paper-2025061-part-3-section-3-group-1-q-49-4",
               "displayNumber": 49,
               "sourceQuestionNumber": 49,
               "type": "single_choice",
@@ -3216,7 +4105,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025061-part-2-section-6-group-1-q-50-5",
+              "id": "cet4-paper-2025061-part-3-section-3-group-1-q-50-5",
               "displayNumber": 50,
               "sourceQuestionNumber": 50,
               "type": "single_choice",
@@ -3318,15 +4207,205 @@
           ]
         },
         {
-          "id": "cet4-paper-2025061-part-2-section-6-group-2",
+          "id": "cet4-paper-2025061-part-3-section-3-group-2",
           "title": "Questions 51 to 55 are based on the following passage.",
-          "presentation": "inline",
+          "presentation": "reading",
           "instructions": [],
-          "stimulusBlocks": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "With those bom with natural talents, it feels as if they excel without really trying. But what about those of"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "us who don't have a natural talent? We've been told all our lives that if you work hard, you too can succeed. But"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "with the release of Angela Duckworth's Grit, we are given a new key to success."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "“As much as talent counts, effort counts twice,“ says Duckworth in Grit. She introduces a new concept that"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "talent may be overrated, and if you want real success, what you need is grit, the perfect combination of passion"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "and persistence. Even if you have natural talent, ifs nothing without grit."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Duckworth says grit is the difference between success and failure. A person who has grit is more likely to"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "succeed than a person who does not. When we think about attaining success—whether it's landing that job or"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "learning that new skill- our thoughts are immediately burdened by all the things we must first learn. If you want"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "that new job, you have to learn the job skills, then the interview skills, then the dress part- and you must be"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "perfect at all of them. Grit is different because it tells us that perfection isn't the goal."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Grit lifts the unreasonable expectations off our shoulders. Grit tells us that the door is open wider than"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "we first thought possible. Grit allows us to redefine our goals. Think about it: whafs something you've always"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "wanted to do, but gave up because you \"don't have the skills for it\"? Whafs something you love but aren't good"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "at?"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "The real workings of grit are to have sustainable passion and continue to try. Effort means more than your"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "natural ability. Even if you haven, t mastered a skill, grit tells you that you can still succeed if you can transform"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "your passion into action. In a way, Duckworth is giving new hope to people who have shut the doors on their"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "dreams. She is saying it is possible that you can accomplish anything. If at first you fail, then try one more time"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "with grit."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "・2025年 6 月四级真题（第一套）・                                         8"
+                }
+              ]
+            }
+          ],
           "sharedOptions": [],
           "questions": [
             {
-              "id": "cet4-paper-2025061-part-2-section-6-group-2-q-51-1",
+              "id": "cet4-paper-2025061-part-3-section-3-group-2-q-51-1",
               "displayNumber": 51,
               "sourceQuestionNumber": 51,
               "type": "single_choice",
@@ -3426,7 +4505,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025061-part-2-section-6-group-2-q-52-2",
+              "id": "cet4-paper-2025061-part-3-section-3-group-2-q-52-2",
               "displayNumber": 52,
               "sourceQuestionNumber": 52,
               "type": "single_choice",
@@ -3526,7 +4605,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025061-part-2-section-6-group-2-q-53-3",
+              "id": "cet4-paper-2025061-part-3-section-3-group-2-q-53-3",
               "displayNumber": 53,
               "sourceQuestionNumber": 53,
               "type": "single_choice",
@@ -3626,7 +4705,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025061-part-2-section-6-group-2-q-54-4",
+              "id": "cet4-paper-2025061-part-3-section-3-group-2-q-54-4",
               "displayNumber": 54,
               "sourceQuestionNumber": 54,
               "type": "single_choice",
@@ -3726,7 +4805,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025061-part-2-section-6-group-2-q-55-5",
+              "id": "cet4-paper-2025061-part-3-section-3-group-2-q-55-5",
               "displayNumber": 55,
               "sourceQuestionNumber": 55,
               "type": "single_choice",
@@ -3830,13 +4909,13 @@
       ]
     },
     {
-      "id": "cet4-paper-2025061-part-3-translation",
+      "id": "cet4-paper-2025061-part-4-translation",
       "title": "Translation 翻译",
       "layout": "flow",
       "instructions": [],
       "groups": [
         {
-          "id": "cet4-paper-2025061-part-3-translation-group",
+          "id": "cet4-paper-2025061-part-4-translation-group",
           "title": "翻译题",
           "presentation": "writing",
           "instructions": [],
@@ -3844,7 +4923,7 @@
           "sharedOptions": [],
           "questions": [
             {
-              "id": "cet4-paper-2025061-part-3-q-1-1",
+              "id": "cet4-paper-2025061-part-4-q-1-1",
               "displayNumber": 1,
               "sourceQuestionNumber": 1,
               "type": "translation",
@@ -3887,7 +4966,25 @@
       ]
     }
   ],
-  "assetRefs": [],
+  "assetRefs": [
+    {
+      "assetId": "cet4-paper-2025061-audio",
+      "kind": "audio",
+      "url": "/cet4/audio/cet4-paper-2025061.mp3",
+      "mimeType": "audio/mpeg",
+      "sha256": "",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "9beb0a7b2778f0eea6e3051b31e965d74e2cf3a3aa817c30b3d1525da07e144b",
+          "relativePath": "2025.06四级真题第1套【可复制可检索】.pdf",
+          "sha256": "9beb0a7b2778f0eea6e3051b31e965d74e2cf3a3aa817c30b3d1525da07e144b",
+          "locator": {},
+          "extractionMethod": "manual-review",
+          "confidence": 0.86
+        }
+      ]
+    }
+  ],
   "sourceRefs": [
     {
       "sourceDocumentId": "9beb0a7b2778f0eea6e3051b31e965d74e2cf3a3aa817c30b3d1525da07e144b",

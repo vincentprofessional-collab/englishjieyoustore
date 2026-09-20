@@ -19,7 +19,13 @@
       "id": "cet4-paper-2025122-part-1-writing",
       "title": "Writing 写作",
       "layout": "flow",
-      "instructions": [],
+      "instructions": [
+        {
+          "type": "audio",
+          "assetId": "cet4-paper-2025122-audio",
+          "label": "听力音频"
+        }
+      ],
       "groups": [
         {
           "id": "cet4-paper-2025122-part-1-writing-group",
@@ -2364,7 +2370,7 @@
                       "runs": [
                         {
                           "type": "text",
-                          "text": "They may feel helpless when called on by the instructor. Part HI                               Reading Comprehension                                       (40 minutes)"
+                          "text": "They may feel helpless when called on by the instructor."
                         }
                       ]
                     }
@@ -2391,17 +2397,656 @@
               "reviewStatus": "review_required"
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "id": "cet4-paper-2025122-part-3",
+      "title": "Part III                               Reading Comprehension                                       (40 minutes)",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
         {
-          "id": "cet4-paper-2025122-part-2-section-5-group-1",
+          "id": "cet4-paper-2025122-part-3-section-2-group-1",
           "title": "题目",
-          "presentation": "inline",
+          "presentation": "reading",
           "instructions": [],
-          "stimulusBlocks": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "contains information given in one o f the paragraphs. Identify the paragraph from which the information is"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "derived. You may choose a paragraph more than once. Each paragraph is marked with a letter. Answer the"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "questions by marking the corresponding letter on Answer Sheet 2."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Can playing video games help you get a better job?"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "A) The gaming industry is larger than films and music combined, yet few of us are likely to list our achievements"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "in playing computer games as work experience in our resume. But why not? Businesses are waking up to the"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "skills gamers can bring to the workplace."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "B) One start-up is convinced that the skills learned by playing games- hard-won through years of training"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "and battle- can be applied to real-life work situations. And Game Academy reckons its belief is backed up"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "by hard data. Do you enjoy unusual puzzle games like Portal, or tower defence games like Defense Grid?"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "The team has found that IT workers play those more than average. But if you prefer Civilization, Total War,"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "or X-Com, where strategy and resource management are key, then you might have more in common with"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "managers."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "C) Game Academy's idea is simple: analyse gamers5 habits from their online gaming profile, and offer courses"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "in valuable skills that reflect their aptitudes- skills they can practise and refine in-game. And there is already"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "a growing acceptance that gaming skills are transferable."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "D) Even the military is hiring gamers. u The ability to absorb information, react swiftly and coordinate actions"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "13                         • 2025年 12月四级真题（第二套）•"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "whilst remaining calm under pressure are often attributes of people that are good at gaming,“ according to a"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Royal Air Force spokesperson. Those skills are part of what the Royal Air Force is looking for “in a variety"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "of roles\". \"Skills acquired through gaming can be very relevant to certain areas.^^"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "E) “There are plenty of soft skills that gamers can utilise in a professional setting, such as teamwork, problem"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "solving and strategic planning/5 says Ryan Gardner, a regional director with Hays recruitment. But does"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "that really mean your top 100 ranking in Overwatch should go down in your resume? \"It's about how you"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "either make it relevant to the job you are applying for, or how it makes you more interesting as a potential"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "employee,\" Mr. Gardner says."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "F) Two years ago, a Glasgow University study made headlines for suggesting gaming could make students"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "more successful. But “the research hasn't really changed minds, at least not yet,“ says one of the authors of"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "the study, Dr. Matthew Barr. He's now writing a book on the topic. 4tFor now, I think the negative reputation"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "around games means that telling someone you're a determined gamer is more likely to harm your chances of"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "getting a job. But if someone can explain how they've led a team in an online game, for example, they may"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "be able to persuade an employer that this is useful,says Dr Barr."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "G) Playing games casually is unlikely to help your career prospects. But part of Game Academy's suggestion is"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "to transform casual gamers into “conscious\" ones, applying critical thinking to developing their skills. 4tWe"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "see gameplay as a resource of talent,5, says co-founder David Barrie. \"Why can5t we put in our resume our"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "gaming victories and achievements?^^ he asks. \"If they say they want leadership- why can't I point to my"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "years of leading World of Warcraft raids?\""
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "H) There are already plenty of gamers out there who know that their hobby has made them who they are. Earlier"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "this year, Matthew Ricci told gaming site Kotaku: \"If you're playing EVE Online you basically already"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "have an           Often made fun of in gaming circles as a spreadsheet simulator (电子表格模拟器),"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "the economy of the fictional EVE universe is driven by real market principles. If you want to build a new"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "spaceship, the raw material has to be mined by another player. Manufacturing costs come into effect, and"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "commodities fluctuate in price based on demand and the distance to haul the commodity."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "I) Mr. Ricci, who had always dreamed of being the boss of his own company, ran an in-game corporation"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "comprising hundreds of players. Eventually, he realised he could transfer his skills to real-life business一"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "instead of doing it for free. He restructured Zentech, once a taxation vehicle fbr his father *s business, and"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "it is now in its fourth year helping international brands enter the Canadian market. EVE teaches skills like"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "creativity, leadership, organisation, and conflict resolution, he maintains. He credits his success to his family,"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "his strong desire to run his own business- and \"a damn good company in Iceland that made a damn good"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "game^^."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "J) Digital entrepreneur and business consultant Mia Bennett says: \"In more traditional settings, gaming is"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "still imagined to be the pursuit of teenage boys- a waste of time.^^ But there are some links to skills like"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "\"\"decision-making, the ability to anticipate and future planning,55 she says. \"It also helps with meta-skills一"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "learning how to learn, experimentation, and creative thinking.^^"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "K) Twelve years into his career, Mark Long, a radiotherapy physicist with the NHS in Surrey, doesn't get as"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "much gaming time as he used to. tl I would love to say that my gaming skills allow me to destroy cancer"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "• 2025 年 1 2 月四级真题（第二套）•                                14"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "using linear accelerators like photon (光子)blasters, but that's not quite the reality?5 Instead, he credits old-"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "school games like Palace of Magic with exposing him to computers. Every new gaming upgrade improved"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "his knowledge o f how they worked. Gaming also encouraged a competitive spirit- and that, he believes,"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "translates. 4iWhen creating treatment plans, the aim is to optimise the radiation dose to the tumour and restrict"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "it as much as possible to healthy surrounding tissues and organs,\" he says. Ifs about \"\"repeating the process,"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "but each time doing something slightly different to improve the result”. Not unlike achieving a high score or"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "a perfect run. \"Most videogames are essentially puzzles to solve,“ he says. \"And problem-solving is a big part"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "ofmyjob.^^"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "L) Over at Game Academy, Mr. Barrie is aware they still have a mountain to climb. \"The employer community"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "will need the science,5, he says, but confesses he only became a true believer when he started asking players"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "about their biggest in-game achievements. t4The scale and scope of their answers were amazing,5, he says. \"But"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "ask them the same about their work, and they don't know.” \"The engagement and powerfill skills that people"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "get playing a game—why can't work be like that?” he asks."
+                }
+              ]
+            }
+          ],
           "sharedOptions": [],
           "questions": [
             {
-              "id": "cet4-paper-2025122-part-2-section-5-group-1-q-36-1",
+              "id": "cet4-paper-2025122-part-3-section-2-group-1-q-36-1",
               "displayNumber": 36,
               "sourceQuestionNumber": 36,
               "type": "short_answer",
@@ -2440,7 +3085,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025122-part-2-section-5-group-1-q-37-2",
+              "id": "cet4-paper-2025122-part-3-section-2-group-1-q-37-2",
               "displayNumber": 37,
               "sourceQuestionNumber": 37,
               "type": "short_answer",
@@ -2479,7 +3124,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025122-part-2-section-5-group-1-q-38-3",
+              "id": "cet4-paper-2025122-part-3-section-2-group-1-q-38-3",
               "displayNumber": 38,
               "sourceQuestionNumber": 38,
               "type": "short_answer",
@@ -2518,7 +3163,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025122-part-2-section-5-group-1-q-39-4",
+              "id": "cet4-paper-2025122-part-3-section-2-group-1-q-39-4",
               "displayNumber": 39,
               "sourceQuestionNumber": 39,
               "type": "short_answer",
@@ -2557,7 +3202,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025122-part-2-section-5-group-1-q-40-5",
+              "id": "cet4-paper-2025122-part-3-section-2-group-1-q-40-5",
               "displayNumber": 40,
               "sourceQuestionNumber": 40,
               "type": "short_answer",
@@ -2596,7 +3241,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025122-part-2-section-5-group-1-q-41-6",
+              "id": "cet4-paper-2025122-part-3-section-2-group-1-q-41-6",
               "displayNumber": 41,
               "sourceQuestionNumber": 41,
               "type": "short_answer",
@@ -2635,7 +3280,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025122-part-2-section-5-group-1-q-42-7",
+              "id": "cet4-paper-2025122-part-3-section-2-group-1-q-42-7",
               "displayNumber": 42,
               "sourceQuestionNumber": 42,
               "type": "short_answer",
@@ -2674,7 +3319,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025122-part-2-section-5-group-1-q-43-8",
+              "id": "cet4-paper-2025122-part-3-section-2-group-1-q-43-8",
               "displayNumber": 43,
               "sourceQuestionNumber": 43,
               "type": "short_answer",
@@ -2713,7 +3358,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025122-part-2-section-5-group-1-q-44-9",
+              "id": "cet4-paper-2025122-part-3-section-2-group-1-q-44-9",
               "displayNumber": 44,
               "sourceQuestionNumber": 44,
               "type": "short_answer",
@@ -2752,7 +3397,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025122-part-2-section-5-group-1-q-45-10",
+              "id": "cet4-paper-2025122-part-3-section-2-group-1-q-45-10",
               "displayNumber": 45,
               "sourceQuestionNumber": 45,
               "type": "short_answer",
@@ -2793,15 +3438,232 @@
           ]
         },
         {
-          "id": "cet4-paper-2025122-part-2-section-6-group-1",
+          "id": "cet4-paper-2025122-part-3-section-3-group-1",
           "title": "Questions 46 to 50 are based on the following passage.",
-          "presentation": "inline",
+          "presentation": "reading",
           "instructions": [],
-          "stimulusBlocks": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Junk food is now a staple of many Americans5 diets. Advertising campaigns from the snack food companies,"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "often featuring sports stars, send the message that we can neutralize any negative effects of consuming their"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "products simply by getting more physical exercise. But recent studies show a lack of exercise is not to blame fbr"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "rising obesity rates. Bad diets are."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Interventions (干预) to help reduce junk food consumption are especially important for children and"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "15                         • 2025 年 12 月四级真题（第二套）•"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "teenagers. Prevention is better than cure because obesity is so difficult to treat. Unfortunately, while health"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "education has shown some success among young children, teens have been harder to reach."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Now a large-scale study has tried an innovative approach to change teenagers5 attitudes towards healthy"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "eating, and the results are promising. The researchers argued that previous interventions have probably been"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "unsuccessful because of a major flaw: they focused on a future, healthier you and assumed that this would"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "be enough motivation for teenagers. In contrast, the new intervention cleverly exploits teenagers5 instinct for"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "rebelliousness and autonomy, and the value they place on social justice."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "To do this, researchers had students read an article on the food industry. It revealed a secret about the"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "manipulative and deceptive strategies used to make junk food more addictive and characterize the products as"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "healthy. The article also explained how advertising campaigns specifically target very young and poor people,"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "causing harm for these vulnerable groups. Afterwards, the participants read a fictional survey of teens who"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "wanted to “fight back against the companies by buying and eating less processed food^^."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "After the intervention, participants associated healthy eating with autonomy and social justice. The teenagers"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "also rated healthy eating as being more appealing. Importantly, there were also some promising effects of the"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "new intervention on actual behavior. A day later the students were offered a choice of snacks and drinks in a"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "seemingly unrelated context. The teens chose healthy snacks and drinks (such as fruit or water) more often over"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "unhealthy options (like biscuits and soda). Apparently associating a healthy diet with teenagers5 own values"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "seems to be a promising avenue to prevent obesity."
+                }
+              ]
+            }
+          ],
           "sharedOptions": [],
           "questions": [
             {
-              "id": "cet4-paper-2025122-part-2-section-6-group-1-q-46-1",
+              "id": "cet4-paper-2025122-part-3-section-3-group-1-q-46-1",
               "displayNumber": 46,
               "sourceQuestionNumber": 46,
               "type": "single_choice",
@@ -2901,7 +3763,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025122-part-2-section-6-group-1-q-47-2",
+              "id": "cet4-paper-2025122-part-3-section-3-group-1-q-47-2",
               "displayNumber": 47,
               "sourceQuestionNumber": 47,
               "type": "single_choice",
@@ -3001,7 +3863,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025122-part-2-section-6-group-1-q-48-3",
+              "id": "cet4-paper-2025122-part-3-section-3-group-1-q-48-3",
               "displayNumber": 48,
               "sourceQuestionNumber": 48,
               "type": "single_choice",
@@ -3101,7 +3963,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025122-part-2-section-6-group-1-q-49-4",
+              "id": "cet4-paper-2025122-part-3-section-3-group-1-q-49-4",
               "displayNumber": 49,
               "sourceQuestionNumber": 49,
               "type": "single_choice",
@@ -3201,7 +4063,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025122-part-2-section-6-group-1-q-50-5",
+              "id": "cet4-paper-2025122-part-3-section-3-group-1-q-50-5",
               "displayNumber": 50,
               "sourceQuestionNumber": 50,
               "type": "single_choice",
@@ -3303,15 +4165,223 @@
           ]
         },
         {
-          "id": "cet4-paper-2025122-part-2-section-6-group-2",
+          "id": "cet4-paper-2025122-part-3-section-3-group-2",
           "title": "Questions 51 to 55 are based on the following passage.",
-          "presentation": "inline",
+          "presentation": "reading",
           "instructions": [],
-          "stimulusBlocks": [],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Adults dream during REM (rapid eye movement) sleep and infants have loads of REM. So, it might be fair"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "to assume that babies have tons of dreams."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "But scientists believe REM serves a completely different purpose for newborns and infants than dreaming."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "When babies are in REM, it allows their brain to develop pathways, connections, and eventually, learn languages."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Since your baby doesn't dream at this stage of brain development, ifs safe to assume babies do not have"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "nightmares, either. Nightmares stem from exposure to trauma (创伤)，an overactive imagination, and the nonnal"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "stresses of everyday life."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Are you wondering, what do babies dream about? Good question, but the answer is nothing!"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "So, when do babies start dreaming? The general consensus is that they start dreaming around the age of two."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Psychologist David Foulkes studies children (from very small kids to teens) to bring the secrets of their dreams to"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "the light of day. In his lab, he lets kids fall asleep and then wakes them 3 times a night and asks them to describe"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "what they recall."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Foulkes' findings are unsurprising. Basically, little kids have little dreams. But exactly what kids see while"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "dreaming depends on their age. As children develop and grow, their dreams do too."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Dreams of very small kids are usually just snapshots (/快照)，looking much more like a slideshow than a"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "movie, when compared to the dreams of adults. They heavily feature animals and other familiar sights, like"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "images o f people eating. According to Foulkes, “Children's dream life...seems to be similar to their waking"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "imagination and narration.^^ Kids ages 5—9 begin seeing moving images and characters in action. Dreams"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "now include multiple events strung together, one after the other. They also start developing greater ability to"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "remember dreams. Still, thafs not always the case: When roused during REM sleep, 25% of the kids in Foulkes5"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "studies had no recollection of dreaming, a trend that continues through age 9."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "So, if your baby seems to be in a stressful state while sleeping or is upset upon waking, there may be other"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "factors at play."
+                }
+              ]
+            }
+          ],
           "sharedOptions": [],
           "questions": [
             {
-              "id": "cet4-paper-2025122-part-2-section-6-group-2-q-51-1",
+              "id": "cet4-paper-2025122-part-3-section-3-group-2-q-51-1",
               "displayNumber": 51,
               "sourceQuestionNumber": 51,
               "type": "single_choice",
@@ -3411,7 +4481,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025122-part-2-section-6-group-2-q-52-2",
+              "id": "cet4-paper-2025122-part-3-section-3-group-2-q-52-2",
               "displayNumber": 52,
               "sourceQuestionNumber": 52,
               "type": "single_choice",
@@ -3511,7 +4581,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025122-part-2-section-6-group-2-q-53-3",
+              "id": "cet4-paper-2025122-part-3-section-3-group-2-q-53-3",
               "displayNumber": 53,
               "sourceQuestionNumber": 53,
               "type": "single_choice",
@@ -3611,7 +4681,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025122-part-2-section-6-group-2-q-54-4",
+              "id": "cet4-paper-2025122-part-3-section-3-group-2-q-54-4",
               "displayNumber": 54,
               "sourceQuestionNumber": 54,
               "type": "single_choice",
@@ -3711,7 +4781,7 @@
               "reviewStatus": "review_required"
             },
             {
-              "id": "cet4-paper-2025122-part-2-section-6-group-2-q-55-5",
+              "id": "cet4-paper-2025122-part-3-section-3-group-2-q-55-5",
               "displayNumber": 55,
               "sourceQuestionNumber": 55,
               "type": "single_choice",
@@ -3815,13 +4885,13 @@
       ]
     },
     {
-      "id": "cet4-paper-2025122-part-3-translation",
+      "id": "cet4-paper-2025122-part-4-translation",
       "title": "Translation 翻译",
       "layout": "flow",
       "instructions": [],
       "groups": [
         {
-          "id": "cet4-paper-2025122-part-3-translation-group",
+          "id": "cet4-paper-2025122-part-4-translation-group",
           "title": "翻译题",
           "presentation": "writing",
           "instructions": [],
@@ -3829,7 +4899,7 @@
           "sharedOptions": [],
           "questions": [
             {
-              "id": "cet4-paper-2025122-part-3-q-1-1",
+              "id": "cet4-paper-2025122-part-4-q-1-1",
               "displayNumber": 1,
               "sourceQuestionNumber": 1,
               "type": "translation",
@@ -3872,7 +4942,25 @@
       ]
     }
   ],
-  "assetRefs": [],
+  "assetRefs": [
+    {
+      "assetId": "cet4-paper-2025122-audio",
+      "kind": "audio",
+      "url": "/cet4/audio/cet4-paper-2025122.mp3",
+      "mimeType": "audio/mpeg",
+      "sha256": "",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "984a094b9ccc0c98ada396621c690452231c17be97b87c3fa1709fc51ac263ca",
+          "relativePath": "2025.12四级真题第2套【可复制可检索】.pdf",
+          "sha256": "984a094b9ccc0c98ada396621c690452231c17be97b87c3fa1709fc51ac263ca",
+          "locator": {},
+          "extractionMethod": "manual-review",
+          "confidence": 0.86
+        }
+      ]
+    }
+  ],
   "sourceRefs": [
     {
       "sourceDocumentId": "984a094b9ccc0c98ada396621c690452231c17be97b87c3fa1709fc51ac263ca",

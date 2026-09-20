@@ -347,6 +347,7 @@ function buildSet(entry, kind) {
   }
   const questionCount = sections.reduce((sum, section) => sum + section.groups.reduce((groupSum, group) => groupSum + group.questions.length, 0), 0);
   if (!questionCount) return null;
+  const sourceOmission = /不再重复列出|不再提供|未重复列出|其余(?:听力|阅读)[^\n]{0,30}(?:相同|重复)/.test(body);
   const assetRefs = entry.audioUrl ? [{ assetId: `${entry.id}-audio`, kind: "audio", url: entry.audioUrl, mimeType: "audio/mpeg", sha256: "", sourceRefs: [ref] }] : [];
   if (assetRefs.length && sections[0]) sections[0].instructions = [{ type: "audio", assetId: assetRefs[0].assetId, label: "听力音频" }];
   return {
@@ -362,7 +363,9 @@ function buildSet(entry, kind) {
     sections,
     assetRefs,
     sourceRefs: [ref],
-    quality: { structureStatus: "approved", structureConfidence: 0.86, issueCount: 0, issues: [] },
+    quality: sourceOmission
+      ? { structureStatus: "review_required", structureConfidence: 0.72, issueCount: 1, issues: ["原始资料注明部分题目与其他套相同，未重复列出"] }
+      : { structureStatus: "approved", structureConfidence: 0.86, issueCount: 0, issues: [] },
   };
 }
 
