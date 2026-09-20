@@ -4,6 +4,7 @@ const requiredFiles = [
   "src/app/globals.css",
   "src/app/layout.tsx",
   "src/components/site-nav.tsx",
+  "src/components/site-section-shell.tsx",
   "src/components/site-footer.tsx",
   "src/components/listening-practice-library.tsx",
   "src/components/listening-practice.tsx",
@@ -27,13 +28,19 @@ const requiredFiles = [
 ];
 
 const requiredMarkers = {
-  "src/app/globals.css": [".app-sidebar", ".nav-sidebar-children"],
+  "src/app/globals.css": [".site-section-shell", ".section-side-nav", ".section-side-reveal"],
   "src/app/layout.tsx": [
-    'className="app-sidebar"',
+    "<SiteSectionShell config={siteChromeConfig}>",
     "<SiteFooter config={siteChromeConfig} />",
     "<FrontendPageAdmin>{children}</FrontendPageAdmin>",
   ],
-  "src/components/site-nav.tsx": ["nav-sidebar-children", "renderNavItem"],
+  "src/components/site-nav.tsx": ["getFirstLeafHref", 'className="nav-main"'],
+  "src/components/site-section-shell.tsx": [
+    "site-section-shell",
+    "section-side-nav",
+    "ExamNavigation",
+    "ExpandedBranch",
+  ],
   "src/lib/content/site-chrome.ts": ["sat-reading-writing", 'label: "SAT"', 'label: "专项训练"'],
   "src/app/listening/page.tsx": ['bookScope="cambridge"', "ListeningPracticeLibrary"],
   "src/app/listening/practice/page.tsx": ['redirect("/listening")'],
