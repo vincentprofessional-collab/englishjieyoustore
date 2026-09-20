@@ -86,6 +86,23 @@ function isClozeOptionLabelBlock(block: SeniorHighBlock) {
   return /^(?:[A-H]\s*[.．、:：]?\s*){2,}$/i.test(text);
 }
 
+function clozeTextWithoutSourceLines(text: string) {
+  return text.replace(/[_＿]+\s*\d{1,3}\s*[_＿]+/g, "").replace(/[_＿]+/g, "");
+}
+
+function clozeRunsWithoutSourceLines(
+  runs: Extract<SeniorHighBlock, { type: "paragraph" | "richText" }>["runs"],
+) {
+  return runs.map((run, index) => {
+    if (run.type !== "text") return run;
+    let text = clozeTextWithoutSourceLines(run.text);
+    const original = run.text;
+    if (runs[index + 1]?.type === "blank" && /[_＿]\s*\d{1,3}\s*$/.test(original)) text = text.replace(/\d{1,3}\s*$/, "");
+    if (runs[index - 1]?.type === "blank" && /^\s*\d{1,3}\s*[_＿]/.test(original)) text = text.replace(/^\s*\d{1,3}/, "");
+    return { ...run, text };
+  });
+}
+
 function solutionMarkerIndex(text: string) {
   const markerIndex = text.search(SOLUTION_MARKER);
   return markerIndex >= 0 || NUMBERED_ANSWER_LINE.test(text) ? Math.max(markerIndex, 0) : -1;
