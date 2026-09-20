@@ -502,25 +502,33 @@ export function GuideBoard({
     let active = true;
 
     async function loadPosts() {
-      const { data, error } = await supabase
-        .from("managed_content_pages")
-        .select("id,slug,title,summary,meta_json,published_at,created_at")
-        .like("slug", "guide-%")
-        .eq("status", "published")
-        .order("published_at", { ascending: false })
-        .limit(50);
+      const pageSize = 1000;
+      const rows: GuidePostRow[] = [];
+
+      for (let page = 0; active; page += 1) {
+        const { data, error } = await supabase
+          .from("managed_content_pages")
+          .select("id,slug,title,summary,meta_json,published_at,created_at")
+          .like("slug", "guide-%")
+          .eq("status", "published")
+          .order("published_at", { ascending: false })
+          .range(page * pageSize, (page + 1) * pageSize - 1);
+
+        if (error) {
+          return;
+        }
+
+        rows.push(...((data ?? []) as GuidePostRow[]));
+        if ((data?.length ?? 0) < pageSize) {
+          break;
+        }
+      }
 
       if (!active) {
         return;
       }
 
-      if (error) {
-        return;
-      }
-
-      if (data?.length) {
-        setPosts((data as GuidePostRow[]).map(parseGuidePostRow));
-      }
+      setPosts(rows.map(parseGuidePostRow));
     }
 
     void loadPosts();
