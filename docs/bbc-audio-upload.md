@@ -38,7 +38,13 @@ bbc/
 
 3. 让 Bucket 可以公开读取。
 
-推荐后期绑定自定义音频域名：
+当前可用的公开 R2 地址：
+
+```text
+https://pub-7bfe84037a4b43d693b7799b8bf2025c.r2.dev
+```
+
+推荐后期绑定自定义音频域名（自定义域名恢复后再切换）：
 
 ```text
 https://audio.englishjieyou.cn
@@ -49,7 +55,7 @@ https://audio.englishjieyou.cn
 4. Vercel 环境变量：
 
 ```text
-NEXT_PUBLIC_BBC_AUDIO_BASE_URL=https://audio.englishjieyou.cn/bbc
+NEXT_PUBLIC_BBC_AUDIO_BASE_URL=https://pub-7bfe84037a4b43d693b7799b8bf2025c.r2.dev/bbc
 ```
 
 如果先使用 Cloudflare 的公开 R2 地址，则把前半段换成 Cloudflare 给出的公开地址，例如：
@@ -92,5 +98,6 @@ node scripts/upload-bbc-audio-to-r2.mjs
 
 `src/lib/articles/bbc.ts` 会读取 `NEXT_PUBLIC_BBC_AUDIO_BASE_URL`：
 
-- 没有设置时：只使用当前已经随网站发布的 2015 年音频。
-- 设置后：启用 2015–2025 全部 BBC 文章，并把音频地址指向外部存储。
+- 没有设置时：使用当前可用的 R2 公共地址，并启用 2015–2026 全部 BBC 文章。
+- 设置后：启用全部 BBC 文章，并把音频地址指向指定的外部存储。
+- 旧的 `audio.englishjieyou.cn/bbc` 地址已停用，代码会自动回退到当前可用的 R2 地址。

@@ -74,7 +74,13 @@ const allGeneratedBbcArticles = [
   ...bbc2026Articles,
 ];
 
-const bbcAudioBaseUrl = process.env.NEXT_PUBLIC_BBC_AUDIO_BASE_URL?.replace(/\/+$/, "");
+const defaultBbcAudioBaseUrl = "https://pub-7bfe84037a4b43d693b7799b8bf2025c.r2.dev/bbc";
+const legacyBbcAudioBaseUrl = "https://audio.englishjieyou.cn/bbc";
+const configuredBbcAudioBaseUrl = process.env.NEXT_PUBLIC_BBC_AUDIO_BASE_URL?.trim().replace(/\/+$/, "");
+const bbcAudioBaseUrl =
+  configuredBbcAudioBaseUrl && configuredBbcAudioBaseUrl !== legacyBbcAudioBaseUrl
+    ? configuredBbcAudioBaseUrl
+    : defaultBbcAudioBaseUrl;
 
 const generatedBbcArticles = bbcAudioBaseUrl ? allGeneratedBbcArticles : [...bbc2015Articles, ...bbc2026Articles];
 
