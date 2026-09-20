@@ -15,6 +15,8 @@ export type GuideContentBlock = {
   id: string;
   italic?: boolean;
   html?: string;
+  height?: number;
+  width?: number;
   text: string;
   type: GuideBlockType;
   underline?: boolean;
@@ -81,6 +83,8 @@ function readBlock(value: unknown, index: number): GuideContentBlock | null {
       : "serif";
   const requestedFontSize =
     typeof block.fontSize === "number" ? block.fontSize : DEFAULT_BLOCK.fontSize;
+  const requestedWidth = typeof block.width === "number" ? block.width : undefined;
+  const requestedHeight = typeof block.height === "number" ? block.height : undefined;
 
   return {
     align,
@@ -91,6 +95,10 @@ function readBlock(value: unknown, index: number): GuideContentBlock | null {
     fontFamily,
     fontSize: Math.min(42, Math.max(14, requestedFontSize)),
     html: readString(block.html) || undefined,
+    height:
+      requestedHeight && requestedHeight > 0
+        ? Math.min(1000, Math.max(80, requestedHeight))
+        : undefined,
     id: readString(block.id) || `block-${index + 1}`,
     italic: block.italic === true,
     text: readString(block.text),
@@ -98,6 +106,10 @@ function readBlock(value: unknown, index: number): GuideContentBlock | null {
     underline: block.underline === true,
     strike: block.strike === true,
     url: readString(block.url),
+    width:
+      requestedWidth && requestedWidth > 0
+        ? Math.min(1400, Math.max(120, requestedWidth))
+        : undefined,
   };
 }
 
