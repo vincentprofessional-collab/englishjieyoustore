@@ -83,12 +83,10 @@
 .questionNav.top { border-block: 1px solid var(--sat-line); padding: 12px 0; }
 .questionNav button { background: #fff; border: 1px solid var(--sat-line); border-radius: 8px; color: var(--sat-muted); cursor: pointer; min-height: 44px; min-width: 0; padding: 7px 9px; }
 .questionNav.direct button { width: 100%; padding-inline: 4px; }
-.questionNavGroups { display: grid; gap: 8px; width: 100%; }
-.questionNavGroupRow { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 8px; }
-.sparse { justify-content: flex-start; }
-.questionNavGroupToggle { flex: 0 1 calc((100% - 64px) / 9); max-width: 180px; min-width: 104px !important; font-weight: 800; }
+.questionNavGroups { align-items: start; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; width: 100%; }
+.questionNavGroupToggle { min-width: 104px !important; font-weight: 800; }
 .questionNavGroupItems { display: grid; grid-template-columns: repeat(25, minmax(0, 1fr)); gap: 7px; border: 1px solid var(--sat-line); border-radius: 9px; background: #faf8f1; padding: 7px; }
-.questionNavGroupItems button { width: 100%; padding-inline: 4px; font-size: clamp(9px, 1.2vw, 16px); font-variant-numeric: tabular-nums; letter-spacing: -.04em; line-height: 1; overflow: hidden; text-overflow: clip; white-space: nowrap; }
+.questionNavGroupItems button { width: 100%; padding-inline: 4px; }
 .questionNav button.current { box-shadow: 0 0 0 2px rgba(31, 91, 77, .18); color: var(--sat-green); }
 .questionNav button.answered { background: var(--sat-gold-soft); border-color: #d6b66d; color: var(--sat-gold); }
 .questionNav button.correct { background: var(--sat-green-soft); border-color: var(--sat-green); color: var(--sat-green); }
@@ -152,7 +150,6 @@
   .toolbarActions { justify-content: start; }
   .content p, .content blockquote, .prompt, .feedback p { font-size: 16px; }
   .questionNav.direct { gap: 3px; }
-  .questionNav.direct button { font-size: 11px; padding-inline: 1px; }
-  .questionNavGroupItems button { font-size: 8px; padding-inline: 1px; }
+  .questionNav.direct button, .questionNavGroupItems button { font-size: 11px; padding-inline: 1px; }
   .questionNavGroupItems { gap: 3px; padding: 4px; }
 }

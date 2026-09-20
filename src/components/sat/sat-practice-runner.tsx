@@ -6,7 +6,6 @@ import styles from "./sat.module.css";
 import type { SatContentBlock, SatProgress, SatQuestion, SatSet } from "@/lib/sat/types";
 
 const PROGRESS_PREFIX = "sat-progress:v1:";
-const QUESTION_NAV_GROUPS_PER_ROW = 9;
 
 function emptyProgress(): SatProgress {
   return { answers: {}, graded: {}, submitted: {}, currentIndex: 0, expanded: {} };
@@ -57,14 +56,13 @@ function QuestionNavigation({ questions, answers, submitted, focusedQuestionId, 
     return <button aria-current={question.id === focusedQuestionId ? "step" : undefined} className={`${question.id === focusedQuestionId ? styles.current : ""} ${answer ? styles.answered : ""} ${result}`} key={question.id} onClick={() => onSelect(question.id)} type="button">{index + 1}</button>;
   };
   if (questions.length < 100) return <nav aria-label="题号导航" className={`${styles.questionNav} ${styles.direct} ${styles.top}`}>{questions.map(renderQuestion)}</nav>;
-  const ranges: Array<{ start: number; end: number; first: number; last: number }> = [];
+  const ranges = [];
   for (let start = 0; start < questions.length; start += 50) {
     const end = Math.min(start + 50, questions.length);
     ranges.push({ start, end, first: start + 1, last: end });
   }
   const expandedRange = openRange === null ? null : ranges[openRange];
-  const rangeRows = Array.from({ length: Math.ceil(ranges.length / QUESTION_NAV_GROUPS_PER_ROW) }, (_, rowIndex) => ranges.slice(rowIndex * QUESTION_NAV_GROUPS_PER_ROW, (rowIndex + 1) * QUESTION_NAV_GROUPS_PER_ROW));
-  return <nav aria-label="题号导航" className={`${styles.questionNav} ${styles.top}`}><div className={styles.questionNavGroups}>{rangeRows.map((row, rowIndex) => <div className={`${styles.questionNavGroupRow} ${row.length < QUESTION_NAV_GROUPS_PER_ROW ? styles.sparse : ""}`} key={`range-row-${rowIndex}`}>{row.map((range) => { const rangeIndex = ranges.indexOf(range); const expanded = openRange === rangeIndex; return <button aria-expanded={expanded} className={styles.questionNavGroupToggle} key={`${range.start}-${range.end}`} onClick={() => setOpenRange((current) => current === rangeIndex ? null : rangeIndex)} type="button">{range.first}-{range.last}</button>; })}</div>)}</div>{expandedRange ? <div aria-label={`${expandedRange.first}-${expandedRange.last}题号`} className={styles.questionNavGroupItems}>{questions.slice(expandedRange.start, expandedRange.end).map((question, index) => renderQuestion(question, expandedRange.start + index))}</div> : null}</nav>;
+  return <nav aria-label="题号导航" className={`${styles.questionNav} ${styles.top}`}><div className={styles.questionNavGroups}>{ranges.map((range, rangeIndex) => { const expanded = openRange === rangeIndex; return <button aria-expanded={expanded} className={styles.questionNavGroupToggle} key={`${range.start}-${range.end}`} onClick={() => setOpenRange((current) => current === rangeIndex ? null : rangeIndex)} type="button">{range.first}-{range.last}</button>; })}</div>{expandedRange ? <div aria-label={`${expandedRange.first}-${expandedRange.last}题号`} className={styles.questionNavGroupItems}>{questions.slice(expandedRange.start, expandedRange.end).map((question, index) => renderQuestion(question, expandedRange.start + index))}</div> : null}</nav>;
 }
 
 function Feedback({ question, answer, submitted }: { question: SatQuestion; answer?: string; submitted: boolean }) {
