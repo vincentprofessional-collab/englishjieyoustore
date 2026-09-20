@@ -91,6 +91,10 @@ export function getProjectAccessRule(projectKey: ProjectAccessKey) {
   };
 }
 
+export function getPaidPageContentSlug(projectKey: ProjectAccessKey) {
+  return `access-${projectKey.trim().toLowerCase().replace(/[^a-z0-9._-]+/g, "-")}`;
+}
+
 export function formatProjectPrice(priceCny: number) {
   return `${new Intl.NumberFormat("zh-CN", { maximumFractionDigits: 2 }).format(priceCny)}元`;
 }

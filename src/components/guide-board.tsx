@@ -129,6 +129,16 @@ function GuideBlock({ block }: { block: GuideContentBlock }) {
   return block.text ? <p style={style}>{renderBlockText(block)}</p> : null;
 }
 
+export function GuidePostContent({ blocks }: { blocks: GuideContentBlock[] }) {
+  return (
+    <div className="guide-post-content">
+      {blocks.map((block) => (
+        <GuideBlock block={block} key={block.id} />
+      ))}
+    </div>
+  );
+}
+
 function GuidePostCard({
   hidePostChrome = false,
   initialExpanded = false,
@@ -391,11 +401,7 @@ function GuidePostCard({
       </header>
 
       {expanded ? (
-        <div className="guide-post-content">
-          {post.blocks.map((block) => (
-            <GuideBlock block={block} key={block.id} />
-          ))}
-        </div>
+        <GuidePostContent blocks={post.blocks} />
       ) : null}
 
       {!hidePostChrome ? (

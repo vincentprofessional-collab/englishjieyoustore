@@ -1,6 +1,7 @@
 "use client";
 
 import { type FormEvent, useEffect, useMemo, useState } from "react";
+import { GuidePostAdmin } from "@/components/guide-post-admin";
 import {
   formatProjectPrice,
   PROJECT_ACCESS_PLANS,
@@ -202,7 +203,7 @@ function getUserLabel(profile: ProfileRow) {
   return profile.email ?? profile.display_name ?? profile.id;
 }
 
-export function AdminEntitlementManager() {
+export function AdminEntitlementManager({ adminUserId }: { adminUserId: string }) {
   const [users, setUsers] = useState<ProfileRow[]>([]);
   const [entitlements, setEntitlements] = useState<EntitlementRow[]>([]);
   const [paymentRequests, setPaymentRequests] = useState<PaymentRequestRow[]>([]);
@@ -218,6 +219,7 @@ export function AdminEntitlementManager() {
   const [isSaving, setIsSaving] = useState(false);
   const [isAccessCatalogExpanded, setIsAccessCatalogExpanded] = useState(false);
   const [isPendingPaymentRequestsExpanded, setIsPendingPaymentRequestsExpanded] = useState(true);
+  const [expandedPaidContentProjectKeys, setExpandedPaidContentProjectKeys] = useState<Record<string, boolean>>({});
 
   const entitlementByUserId = useMemo(() => {
     const groupedEntitlements = new Map<string, EntitlementRow[]>();
@@ -682,6 +684,35 @@ export function AdminEntitlementManager() {
                     {isSaving ? "保存中..." : "保存内容与价格"}
                   </button>
                 </div>
+
+                <section className="admin-paid-content-editor">
+                  <header className="admin-compact-heading admin-section-heading">
+                    <div>
+                      <h4>前台说明内容</h4>
+                      <p>默认隐藏；打开后可像首页发帖一样编辑正文、图片、视频、链接和音频。</p>
+                    </div>
+                    <button
+                      aria-expanded={Boolean(expandedPaidContentProjectKeys[project.project_key])}
+                      className="admin-list-actions-button"
+                      type="button"
+                      onClick={() =>
+                        setExpandedPaidContentProjectKeys((current) => ({
+                          ...current,
+                          [project.project_key]: !current[project.project_key],
+                        }))
+                      }
+                    >
+                      {expandedPaidContentProjectKeys[project.project_key] ? "收起编辑" : "打开编辑"}
+                    </button>
+                  </header>
+                  {expandedPaidContentProjectKeys[project.project_key] ? (
+                    <GuidePostAdmin
+                      adminUserId={adminUserId}
+                      projectKey={project.project_key}
+                      projectTitle={draft.title || project.title}
+                    />
+                  ) : null}
+                </section>
               </article>
             );
           })}

@@ -3,15 +3,18 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { GuidePostContent } from "@/components/guide-board";
 import {
   formatProjectPrice,
   PROJECT_ACCESS_PLANS,
   getProjectAccessRule,
+  getPaidPageContentSlug,
   type ProjectAccessKey,
   type ProjectAccessPlan,
   type ProjectAccessPlanOption,
   type ProjectAccessRule,
 } from "@/lib/access-control";
+import { parseGuidePostRow, type GuidePost } from "@/lib/guide/posts";
 import { supabase } from "@/lib/supabase/client";
 
 type ProjectAccessPaywallProps = {
@@ -56,6 +59,7 @@ export function ProjectAccessPaywall({
   const [paymentMessage, setPaymentMessage] = useState("");
   const [paymentRequest, setPaymentRequest] = useState<PaymentRequest | null>(null);
   const [userEmail, setUserEmail] = useState("");
+  const [paidPageContent, setPaidPageContent] = useState<GuidePost | null>(null);
   const loginHref = currentPath ? "/login?redirect=" + encodeURIComponent(currentPath) : "/login";
 
   useEffect(() => {
@@ -67,9 +71,10 @@ export function ProjectAccessPaywall({
     const nextFallbackProject = getProjectAccessRule(projectKey);
     setProject(nextFallbackProject);
     setPlans(PROJECT_ACCESS_PLANS);
+    setPaidPageContent(null);
 
     async function loadCatalog() {
-      const [projectResult, plansResult] = await Promise.all([
+      const [projectResult, plansResult, contentResult] = await Promise.all([
         supabase
           .from("access_projects")
           .select("project_key,title,short_title,gate_title,description")
@@ -82,6 +87,12 @@ export function ProjectAccessPaywall({
           .eq("project_key", projectKey)
           .eq("is_enabled", true)
           .order("sort_order", { ascending: true }),
+        supabase
+          .from("managed_content_pages")
+          .select("id,slug,title,summary,meta_json,published_at,created_at")
+          .eq("slug", getPaidPageContentSlug(projectKey))
+          .eq("status", "published")
+          .maybeSingle(),
       ]);
 
       if (!isMounted) return;
@@ -111,6 +122,20 @@ export function ProjectAccessPaywall({
         setPlans(nextPlans);
         setSelectedPlan((current) =>
           nextPlans.some((plan) => plan.plan === current) ? current : nextPlans[0].plan,
+        );
+      }
+
+      if (!contentResult.error && contentResult.data) {
+        setPaidPageContent(
+          parseGuidePostRow({
+            created_at: contentResult.data.created_at,
+            id: contentResult.data.id,
+            meta_json: contentResult.data.meta_json,
+            published_at: contentResult.data.published_at,
+            slug: contentResult.data.slug,
+            summary: contentResult.data.summary,
+            title: contentResult.data.title,
+          }),
         );
       }
     }
@@ -198,6 +223,12 @@ export function ProjectAccessPaywall({
           </button>
         ))}
       </div>
+
+      {paidPageContent?.blocks.some((block) => block.text.trim() || block.url.trim()) ? (
+        <section className="project-access-managed-content" aria-label="收费页面说明">
+          <GuidePostContent blocks={paidPageContent.blocks} />
+        </section>
+      ) : null}
 
       <div className="project-access-actions">
         {userEmail ? (

@@ -218,7 +218,7 @@ export function AdminContentManager({ initialView }: { initialView?: string }) {
 
       {activeView === "analytics" ? <AdminAnalyticsPanel /> : null}
 
-      {activeView === "access" ? <AdminEntitlementManager /> : null}
+      {activeView === "access" && adminUserId ? <AdminEntitlementManager adminUserId={adminUserId} /> : null}
 
       {activeView === "home" && adminUserId ? (
         <AdminHomeEditor adminUserId={adminUserId} />
