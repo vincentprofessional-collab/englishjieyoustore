@@ -32,7 +32,7 @@ const LANGUAGE_EXAM_KEYS: Record<string, string> = {
   SAT: "sat-reading-writing",
 };
 
-function languageExamKey(item: SiteChromeNavNode) {
+export function languageExamKey(item: SiteChromeNavNode) {
   return LANGUAGE_EXAM_KEYS[item.id] ?? LANGUAGE_EXAM_KEYS[item.label] ?? item.id;
 }
 
@@ -173,14 +173,14 @@ export function ensureCet4ExamMenu<T extends SiteChromeNavNode>(
     const cleanedChildren = children.filter(
       (item) => item.id !== "other-exams" && item.label !== "其他考试正在开发中",
     );
-    const existingCet4 = cleanedChildren.find((item) => item.id === cet4.id);
+    const existingCet4 = cleanedChildren.find((item) => languageExamKey(item) === languageExamKey(cet4));
 
     if (!existingCet4) {
       return [...cleanedChildren, cet4];
     }
 
     return cleanedChildren.map((item) =>
-      item.id === cet4.id ? { ...item, ...cet4, children: item.children } : item,
+      languageExamKey(item) === languageExamKey(cet4) ? { ...item, ...cet4, children: item.children } : item,
     );
   };
   const existingExams = items.find((item) => item.id === exams.id);
@@ -214,12 +214,12 @@ export function ensureCet6ExamMenu<T extends SiteChromeNavNode>(
     const cleanedChildren = children.filter(
       (item) => item.id !== "other-exams" && item.label !== "其他考试正在开发中",
     );
-    const existingCet6 = cleanedChildren.find((item) => item.id === cet6.id);
+    const existingCet6 = cleanedChildren.find((item) => languageExamKey(item) === languageExamKey(cet6));
 
     if (!existingCet6) return [...cleanedChildren, cet6];
 
     return cleanedChildren.map((item) =>
-      item.id === cet6.id ? { ...item, ...cet6, children: item.children } : item,
+      languageExamKey(item) === languageExamKey(cet6) ? { ...item, ...cet6, children: item.children } : item,
     );
   };
   const existingExams = items.find((item) => item.id === exams.id);

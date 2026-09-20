@@ -19323,7 +19323,9 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
 
 .bbc-vocabulary-highlight {
   color: var(--gold);
+  font-size: inherit;
   font-weight: 1000;
+  line-height: inherit;
   text-decoration-color: var(--gold);
   text-decoration-line: underline;
   text-decoration-style: solid;
@@ -19338,9 +19340,14 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
   cursor: pointer;
   display: inline;
   font: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
   margin: 0;
   padding: 0;
   text-align: inherit;
+  vertical-align: baseline;
 }
 
 .bbc-vocabulary-word-button:focus-visible {
@@ -20177,6 +20184,58 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
 }
 
 @media (max-width: 760px) {
+  .word-detail-title-row {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .word-detail-title-row .word-title-primary {
+    align-items: flex-start;
+    border-bottom: 0;
+    display: grid;
+    gap: 12px;
+    padding-bottom: 0;
+    width: 100%;
+  }
+
+  .word-detail-title-row h1 {
+    border-bottom: 1px solid rgba(228, 216, 189, 0.9);
+    border-right: 0;
+    padding: 0 0 10px;
+    width: 100%;
+  }
+
+  .word-detail-title-row .word-title-meta {
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 0;
+  }
+
+  .word-detail-title-row .word-title-meta > * + * {
+    border-left: 0;
+    margin-left: 0;
+    padding-left: 0;
+  }
+
+  .word-detail-title-row .inline-pronunciation {
+    align-items: center;
+    gap: 8px;
+    max-width: 100%;
+  }
+
+  .word-detail-title-row .inline-pronunciation-side {
+    flex: 0 1 auto;
+  }
+
+  .word-detail-title-row .vocabulary-level-badge {
+    margin-bottom: 0;
+  }
+
+  .word-detail-title-row .word-title-tools {
+    align-self: flex-end;
+  }
+
   .vocabulary-hero,
   .word-detail-grid {
     grid-template-columns: 1fr;

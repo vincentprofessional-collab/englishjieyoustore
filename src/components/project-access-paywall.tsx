@@ -89,10 +89,13 @@ export function ProjectAccessPaywall({
           .order("sort_order", { ascending: true }),
         supabase
           .from("managed_content_pages")
-          .select("id,slug,title,summary,meta_json,published_at,created_at")
+          .select("id,slug,title,summary,meta_json,published_at,created_at,updated_at")
           .eq("slug", getPaidPageContentSlug(projectKey))
+          .eq("module", "site")
+          .eq("template_key", "site_announcement_page")
           .eq("status", "published")
-          .maybeSingle(),
+          .order("updated_at", { ascending: false })
+          .limit(1),
       ]);
 
       if (!isMounted) return;
@@ -125,16 +128,17 @@ export function ProjectAccessPaywall({
         );
       }
 
-      if (!contentResult.error && contentResult.data) {
+      const contentRow = contentResult.data?.[0];
+      if (!contentResult.error && contentRow) {
         setPaidPageContent(
           parseGuidePostRow({
-            created_at: contentResult.data.created_at,
-            id: contentResult.data.id,
-            meta_json: contentResult.data.meta_json,
-            published_at: contentResult.data.published_at,
-            slug: contentResult.data.slug,
-            summary: contentResult.data.summary,
-            title: contentResult.data.title,
+            created_at: contentRow.created_at,
+            id: contentRow.id,
+            meta_json: contentRow.meta_json,
+            published_at: contentRow.published_at,
+            slug: contentRow.slug,
+            summary: contentRow.summary,
+            title: contentRow.title,
           }),
         );
       }

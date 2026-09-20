@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import type { Cet4SetSummary } from "@/lib/cet4/library";
 
 type KnowledgeSummary = { id: string; title: string; topic: string; excerpt: string };
@@ -28,12 +29,20 @@ function answerLabel(entry: Cet4SetSummary) {
   return "提交后查看可用答案";
 }
 
-export function Cet4Library({ knowledge, sets, exam = "cet4" }: { knowledge: KnowledgeSummary[]; sets: Cet4SetSummary[]; exam?: CetExam }) {
+export function Cet4Library({ knowledge, sets, exam = "cet4", initialEntry }: { knowledge: KnowledgeSummary[]; sets: Cet4SetSummary[]; exam?: CetExam; initialEntry?: Entry }) {
   const copy = examCopy[exam];
-  const [entry, setEntry] = useState<Entry>(() => sets.some((item) => item.kind === "practice") ? "practice" : knowledge.length ? "knowledge" : "papers");
+  const searchParams = useSearchParams();
+  const requestedEntry = searchParams.get("entry");
+  const [entry, setEntry] = useState<Entry>(() => initialEntry ?? (sets.some((item) => item.kind === "practice") ? "practice" : knowledge.length ? "knowledge" : "papers"));
   const [topic, setTopic] = useState("全部");
   const [year, setYear] = useState("全部");
   const [region, setRegion] = useState("全部");
+
+  useEffect(() => {
+    if (requestedEntry === "knowledge" || requestedEntry === "practice" || requestedEntry === "papers") {
+      setEntry(requestedEntry);
+    }
+  }, [requestedEntry]);
   const practice = sets.filter((item) => item.kind === "practice");
   const papers = sets.filter((item) => item.kind === "paper");
   const topics = useMemo(() => ["全部", ...practiceOrder.filter((name) => practice.some((item) => family(item.title) === name))], [practice]);

@@ -5,9 +5,17 @@ import {
   createGuideBlock,
   GuideBlockType,
   GuideContentBlock,
+  GuideMenuPlacement,
   GuidePostRow,
   parseGuidePostRow,
 } from "@/lib/guide/posts";
+import {
+  cloneSiteChromeConfig,
+  DEFAULT_SITE_CHROME_CONFIG,
+  mergeSiteChromeConfig,
+  type SiteChromeConfig,
+} from "@/lib/content/site-chrome";
+import { guidePostMenuPlacementOptions } from "@/lib/content/guide-post-navigation";
 import { getPaidPageContentSlug } from "@/lib/access-control";
 import { uploadAdminImage } from "@/lib/admin/upload-image";
 import { supabase } from "@/lib/supabase/client";
@@ -30,6 +38,7 @@ type GuideDraft = {
   blocks: GuideContentBlock[];
   excerpt: string;
   id: string | null;
+  menuPlacement: GuideMenuPlacement | null;
   publishedAt: string | null;
   slug: string | null;
   status: AdminGuidePostRow["status"];
@@ -59,6 +68,7 @@ const EMPTY_DRAFT: GuideDraft = {
   blocks: [createGuideBlock()],
   excerpt: "",
   id: null,
+  menuPlacement: null,
   publishedAt: null,
   slug: null,
   status: "draft",
@@ -89,6 +99,7 @@ function rowToDraft(row: AdminGuidePostRow): GuideDraft {
     blocks: post.blocks.map((block) => ({ ...block })),
     excerpt: post.excerpt,
     id: row.id,
+    menuPlacement: post.menuPlacement ?? null,
     publishedAt: row.published_at,
     slug: row.slug,
     status: row.status,
@@ -102,6 +113,10 @@ function firstText(blocks: GuideContentBlock[]) {
 
 function firstImage(blocks: GuideContentBlock[]) {
   return blocks.find((block) => block.type === "image" && block.url)?.url ?? null;
+}
+
+function menuPlacementKey(placement: GuideMenuPlacement | null) {
+  return placement ? `${placement.kind}:${placement.parentId ?? "top"}` : "";
 }
 
 const EDITOR_FONT_FAMILIES: Record<GuideContentBlock["fontFamily"], string> = {
@@ -263,6 +278,9 @@ export function GuidePostAdmin({ adminUserId, projectKey, projectTitle }: GuideP
   const [isSaving, setIsSaving] = useState(false);
   const [message, setMessage] = useState("");
   const [rows, setRows] = useState<AdminGuidePostRow[]>([]);
+  const [siteChromeConfig, setSiteChromeConfig] = useState<SiteChromeConfig>(() =>
+    cloneSiteChromeConfig(DEFAULT_SITE_CHROME_CONFIG),
+  );
   const [uploadingBlockId, setUploadingBlockId] = useState<string | null>(null);
   const [textCursorTarget, setTextCursorTarget] = useState<TextCursorTarget | null>(null);
   const [activeBlockId, setActiveBlockId] = useState<string | null>(null);
@@ -274,6 +292,7 @@ export function GuidePostAdmin({ adminUserId, projectKey, projectTitle }: GuideP
 
   useEffect(() => {
     void loadPosts();
+    void loadSiteChromeConfig();
   }, []);
 
   async function getAdminAccessToken() {
@@ -328,6 +347,15 @@ export function GuidePostAdmin({ adminUserId, projectKey, projectTitle }: GuideP
     }
 
     setIsLoading(false);
+  }
+
+  async function loadSiteChromeConfig() {
+    const { data } = await supabase
+      .from("managed_content_pages")
+      .select("meta_json")
+      .eq("slug", "site-chrome")
+      .maybeSingle();
+    setSiteChromeConfig(cloneSiteChromeConfig(mergeSiteChromeConfig(data?.meta_json)));
   }
 
   function startNewPost() {
@@ -795,6 +823,7 @@ export function GuidePostAdmin({ adminUserId, projectKey, projectTitle }: GuideP
         blocks: draft.blocks,
         excerpt,
         kind: "guide-post",
+        menuPlacement: draft.menuPlacement,
       },
       module: "site",
       published_at:
@@ -816,7 +845,7 @@ export function GuidePostAdmin({ adminUserId, projectKey, projectTitle }: GuideP
 
     const response = await fetch("/api/guide-posts", {
       body: JSON.stringify({
-        post: { ...payload, id: draft.id },
+        post: { ...payload, id: draft.id, menuPlacement: draft.menuPlacement },
         projectKey: isPaidPage ? projectKey : undefined,
         scope: isPaidPage ? "paid" : "guide",
       }),
@@ -837,7 +866,19 @@ export function GuidePostAdmin({ adminUserId, projectKey, projectTitle }: GuideP
       return;
     }
 
-    setMessage(status === "published" ? "帖子已发布到首页。" : "草稿已保存。");
+    const placementLabel = draft.menuPlacement
+      ? guidePostMenuPlacementOptions(siteChromeConfig).find((option) =>
+          option.placement.kind === draft.menuPlacement?.kind &&
+          option.placement.parentId === draft.menuPlacement?.parentId,
+        )?.label
+      : "";
+    setMessage(
+      status === "published"
+        ? placementLabel
+          ? `帖子已发布，并已加入${placementLabel}。`
+          : "帖子已发布到首页。"
+        : "草稿已保存。",
+    );
     await loadPosts(responseBody.post.id);
     setIsSaving(false);
   }
@@ -901,7 +942,7 @@ export function GuidePostAdmin({ adminUserId, projectKey, projectTitle }: GuideP
           <p>
             {isPaidPage
               ? "内容默认隐藏；打开前台显示后，用户会在收费页面的套餐下方看到这里的正文。"
-              : "组合正文、链接、图片和视频区块，设置字体、字号与对齐方式后直接发布。"}
+              : "组合正文、链接、图片和视频区块；可仅发布到首页，也可自动加入顶部导航或左侧栏。"}
           </p>
         </div>
         {!isPaidPage ? (
@@ -1055,6 +1096,30 @@ export function GuidePostAdmin({ adminUserId, projectKey, projectTitle }: GuideP
                   rows={3}
                   value={draft.excerpt}
                 />
+              </label>
+              <label className="wide">
+                <span>发布菜单位置</span>
+                <select
+                  aria-label="发布菜单位置"
+                  onChange={(event) => {
+                    const selected = guidePostMenuPlacementOptions(siteChromeConfig).find(
+                      (option) => menuPlacementKey(option.placement) === event.target.value,
+                    );
+                    setDraft((current) => ({
+                      ...current,
+                      menuPlacement: selected?.placement ?? null,
+                    }));
+                  }}
+                  value={menuPlacementKey(draft.menuPlacement)}
+                >
+                  <option value="">仅发布到首页</option>
+                  {guidePostMenuPlacementOptions(siteChromeConfig).map((option) => (
+                    <option key={menuPlacementKey(option.placement)} value={menuPlacementKey(option.placement)}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+                <small>发布后会自动新增菜单，点击菜单直接进入这篇帖子详情页。</small>
               </label>
             </div>
           </section> : null}

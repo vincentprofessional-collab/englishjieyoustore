@@ -30,10 +30,15 @@ export type GuidePost = {
   createdAt: string;
   excerpt: string;
   id: string;
+  menuPlacement?: GuideMenuPlacement | null;
   publishedAt: string;
   slug: string;
   title: string;
 };
+
+export type GuideMenuPlacement =
+  | { kind: "sidebar"; parentId: string }
+  | { kind: "top"; parentId: null };
 
 export type GuidePostRow = {
   created_at: string | null;
@@ -57,6 +62,21 @@ const DEFAULT_BLOCK: Omit<GuideContentBlock, "id"> = {
 
 function readString(value: unknown) {
   return typeof value === "string" ? value : "";
+}
+
+function readMenuPlacement(value: unknown): GuideMenuPlacement | null {
+  if (!value || typeof value !== "object") return null;
+  const placement = value as Record<string, unknown>;
+
+  if (placement.kind === "top") {
+    return { kind: "top", parentId: null };
+  }
+
+  if (placement.kind === "sidebar" && typeof placement.parentId === "string" && placement.parentId) {
+    return { kind: "sidebar", parentId: placement.parentId };
+  }
+
+  return null;
 }
 
 function readBlock(value: unknown, index: number): GuideContentBlock | null {
@@ -139,6 +159,7 @@ export function parseGuidePostRow(row: GuidePostRow): GuidePost {
     createdAt: row.created_at ?? row.published_at ?? new Date().toISOString(),
     excerpt: readString(meta.excerpt) || row.summary || "",
     id: row.id,
+    menuPlacement: readMenuPlacement(meta.menuPlacement),
     publishedAt: row.published_at ?? row.created_at ?? new Date().toISOString(),
     slug: row.slug,
     title: row.title,

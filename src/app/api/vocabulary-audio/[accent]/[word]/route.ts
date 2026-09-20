@@ -40,6 +40,33 @@ function parseRange(rangeHeader: string, totalBytes: number) {
   return { end, start };
 }
 
+async function getRemoteAudio(word: string, accent: string, rangeHeader: string | null) {
+  const type = accent === "uk" ? "1" : "2";
+  let response: Response;
+  try {
+    response = await fetch(
+      `https://dict.youdao.com/dictvoice?audio=${encodeURIComponent(word)}&type=${type}`,
+      rangeHeader ? { headers: { Range: rangeHeader }, cache: "force-cache" } : { cache: "force-cache" },
+    );
+  } catch {
+    return null;
+  }
+
+  if (!response.ok || !response.body) return null;
+
+  const headers = new Headers({
+    "Accept-Ranges": response.headers.get("accept-ranges") || "bytes",
+    "Cache-Control": "public, max-age=31536000, immutable",
+    "Content-Type": response.headers.get("content-type") || "audio/mpeg",
+  });
+  const contentLength = response.headers.get("content-length");
+  const contentRange = response.headers.get("content-range");
+  if (contentLength) headers.set("Content-Length", contentLength);
+  if (contentRange) headers.set("Content-Range", contentRange);
+
+  return new Response(response.body, { headers, status: response.status });
+}
+
 export async function GET(
   request: Request,
   { params }: { params: Promise<{ accent: string; word: string }> },
@@ -98,6 +125,7 @@ export async function GET(
       headers: { ...commonHeaders, "Content-Length": String(audioStats.size) },
     });
   } catch {
-    return NextResponse.json({ error: "Audio not found" }, { status: 404 });
+    const remoteAudio = await getRemoteAudio(word, accent, request.headers.get("range"));
+    return remoteAudio || NextResponse.json({ error: "Audio not found" }, { status: 404 });
   }
 }

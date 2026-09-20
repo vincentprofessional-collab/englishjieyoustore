@@ -1,5 +1,5 @@
 import { supabase } from "@/lib/supabase/client";
-import { dedupeLanguageExamMenu, ensureCet4ExamMenu, ensureCet6ExamMenu, ensureJuniorHighExamMenu, ensureSatExamMenu, ensureSeniorHighExamMenu, orderLanguageExamMenu } from "@/lib/content/site-chrome-nav";
+import { dedupeLanguageExamMenu, ensureCet4ExamMenu, ensureCet6ExamMenu, ensureJuniorHighExamMenu, ensureSatExamMenu, ensureSeniorHighExamMenu, languageExamKey, orderLanguageExamMenu } from "@/lib/content/site-chrome-nav";
 
 export const SITE_CHROME_SLUG = "site-chrome";
 export const SITE_CHROME_VERSION = 3;
@@ -382,7 +382,7 @@ export const DEFAULT_SITE_CHROME_CONFIG: SiteChromeConfig = {
                 children: [],
                 dropdownAlign: "right",
                 enabled: true,
-                href: "/exams/cet4?section=knowledge",
+                href: "/cet4?entry=knowledge",
                 id: "cet4-knowledge",
                 label: "知识点",
                 note: "",
@@ -391,7 +391,7 @@ export const DEFAULT_SITE_CHROME_CONFIG: SiteChromeConfig = {
                 children: [],
                 dropdownAlign: "right",
                 enabled: true,
-                href: "/exams/cet4?section=types",
+                href: "/cet4?entry=practice",
                 id: "cet4-types",
                 label: "题型训练",
                 note: "",
@@ -400,7 +400,7 @@ export const DEFAULT_SITE_CHROME_CONFIG: SiteChromeConfig = {
                 children: [],
                 dropdownAlign: "right",
                 enabled: true,
-                href: "/exams/cet4?section=papers",
+                href: "/cet4?entry=papers",
                 id: "cet4-papers",
                 label: "历年真题",
                 note: "",
@@ -408,7 +408,7 @@ export const DEFAULT_SITE_CHROME_CONFIG: SiteChromeConfig = {
             ],
             dropdownAlign: "right",
             enabled: true,
-            href: "/exams/cet4",
+            href: "/cet4",
             id: "cet4-english",
             label: "大学四级",
             note: "",
@@ -419,7 +419,7 @@ export const DEFAULT_SITE_CHROME_CONFIG: SiteChromeConfig = {
                 children: [],
                 dropdownAlign: "right",
                 enabled: true,
-                href: "/exams/cet6?section=knowledge",
+                href: "/cet6?entry=knowledge",
                 id: "cet6-knowledge",
                 label: "知识点",
                 note: "",
@@ -428,7 +428,7 @@ export const DEFAULT_SITE_CHROME_CONFIG: SiteChromeConfig = {
                 children: [],
                 dropdownAlign: "right",
                 enabled: true,
-                href: "/exams/cet6?section=types",
+                href: "/cet6?entry=practice",
                 id: "cet6-types",
                 label: "题型训练",
                 note: "",
@@ -437,7 +437,7 @@ export const DEFAULT_SITE_CHROME_CONFIG: SiteChromeConfig = {
                 children: [],
                 dropdownAlign: "right",
                 enabled: true,
-                href: "/exams/cet6?section=papers",
+                href: "/cet6?entry=papers",
                 id: "cet6-papers",
                 label: "历年真题",
                 note: "",
@@ -445,7 +445,7 @@ export const DEFAULT_SITE_CHROME_CONFIG: SiteChromeConfig = {
             ],
             dropdownAlign: "right",
             enabled: true,
-            href: "/exams/cet6",
+            href: "/cet6",
             id: "cet6-english",
             label: "大学六级",
             note: "",
@@ -896,10 +896,10 @@ export function mergeSiteChromeConfig(value: unknown): SiteChromeConfig {
     ?.children.find((item) => item.id === "sat-reading-writing");
   const cet4Fallback = fallback.nav.items
     .find((item) => item.id === "exams")
-    ?.children.find((item) => item.id === "cet4");
+    ?.children.find((item) => languageExamKey(item) === "cet4");
   const cet6Fallback = fallback.nav.items
     .find((item) => item.id === "exams")
-    ?.children.find((item) => item.id === "cet6");
+    ?.children.find((item) => languageExamKey(item) === "cet6");
   const navWithJuniorHigh = examsFallback && juniorHighFallback
     ? ensureJuniorHighExamMenu(mergedNavItems, examsFallback, juniorHighFallback)
     : mergedNavItems;

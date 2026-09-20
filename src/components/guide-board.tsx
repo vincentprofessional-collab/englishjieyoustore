@@ -555,7 +555,12 @@ export function GuideBoard({
 
       <div className="guide-post-list">
         {posts.map((post) => (
-          <GuidePostCard hidePostChrome={hidePostChrome} key={post.id} post={post} />
+          <GuidePostCard
+            hidePostChrome={hidePostChrome}
+            initialExpanded={hidePostChrome}
+            key={post.id}
+            post={post}
+          />
         ))}
       </div>
     </section>

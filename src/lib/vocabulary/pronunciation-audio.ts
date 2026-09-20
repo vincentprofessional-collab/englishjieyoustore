@@ -57,7 +57,16 @@ export function playVocabularyPronunciation({
     }
 
     hasFallenBack = true;
-    speakWithBrowser(word, locale);
+    const generatedAudioUrl = audioUrl?.trim() ? getVocabularyAudioUrl(word, accent) : "";
+    if (!generatedAudioUrl || generatedAudioUrl === resolvedAudioUrl) {
+      speakWithBrowser(word, locale);
+      return;
+    }
+
+    const generatedAudio = new Audio(generatedAudioUrl);
+    const speakFallback = () => speakWithBrowser(word, locale);
+    generatedAudio.addEventListener("error", speakFallback, { once: true });
+    void generatedAudio.play().catch(speakFallback);
   };
 
   audio.addEventListener("error", fallback, { once: true });

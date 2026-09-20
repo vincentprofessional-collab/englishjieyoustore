@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import type { SeniorHighLibraryEntry, SeniorHighLibraryIndex } from "@/lib/senior-high/v2-types";
 import { SeniorHighKnowledge } from "./senior-high-knowledge";
 
@@ -45,6 +46,8 @@ function answerStatusLabel(entry: SeniorHighLibraryEntry) {
 }
 
 export function SeniorHighLibrary({ initialEntry }: { initialEntry?: string } = {}) {
+  const searchParams = useSearchParams();
+  const requestedEntry = searchParams.get("entry");
   const [index, setIndex] = useState<SeniorHighLibraryIndex | null>(null);
   const [entry, setEntry] = useState<Entry>(
     initialEntry === "knowledge" || initialEntry === "papers" ? initialEntry : "practice",
@@ -56,7 +59,12 @@ export function SeniorHighLibrary({ initialEntry }: { initialEntry?: string } = 
   const [error, setError] = useState("");
 
   useEffect(() => {
-    if (new URLSearchParams(window.location.search).get("entry") === "papers") setEntry("papers");
+    if (requestedEntry === "knowledge" || requestedEntry === "practice" || requestedEntry === "papers") {
+      setEntry(requestedEntry);
+    }
+  }, [requestedEntry]);
+
+  useEffect(() => {
     fetch("/senior-high/index.json").then((response) => {
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       return response.json() as Promise<SeniorHighLibraryIndex>;
