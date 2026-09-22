@@ -8,6 +8,8 @@ public/audio/**
 node_modules/
 tmp/
 .git/
+.env.local
+.env.*.local
 .venv-listening-align/
 data/senior-high/
 data/phrase-videos/
