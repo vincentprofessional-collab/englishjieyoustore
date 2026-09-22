@@ -720,10 +720,18 @@ export function VocabularyLearning({ bookCounts, books }: VocabularyLearningProp
 
   const handleRecognitionOutcome = useCallback(
     (outcome: Familiarity) => {
+      if (modeIndex === 2) {
+        if (oralScoreFeedback === null) return;
+        const scoredOutcome = familiarityFromScore(oralScoreFeedback);
+        if (outcome !== scoredOutcome) return;
+        commitOutcome(scoredOutcome, undefined, oralScoreFeedback);
+        return;
+      }
+
       if (modeIndex > 1) return;
       commitOutcome(outcome);
     },
-    [commitOutcome, modeIndex],
+    [commitOutcome, modeIndex, oralScoreFeedback],
   );
 
   const spellingCorrect = currentWord ? answer.trim().toLowerCase() === currentWord.word.trim().toLowerCase() : false;
@@ -733,7 +741,7 @@ export function VocabularyLearning({ bookCounts, books }: VocabularyLearningProp
       if (!currentWord || modeIndex !== 3 || phase === "recording") return;
       const correct = answer.trim().toLowerCase() === currentWord.word.trim().toLowerCase();
       if (correct && !roundHadSpellingError) {
-        commitOutcome("familiar", {
+        commitOutcome(requestedOutcome, {
           correct: true,
           hadError: false,
           unanswered: false,
@@ -755,16 +763,6 @@ export function VocabularyLearning({ bookCounts, books }: VocabularyLearningProp
     },
     [answer, commitOutcome, currentWord, modeIndex, phase, roundHadSpellingError, spellingAnswerShown],
   );
-
-  useEffect(() => {
-    if (!currentWord || modeIndex !== 3 || !answer.trim() || revealed || roundHadSpellingError) return;
-    if (answer.trim().toLowerCase() !== currentWord.word.trim().toLowerCase()) return;
-    commitOutcome("familiar", {
-      correct: true,
-      hadError: false,
-      unanswered: false,
-    });
-  }, [answer, commitOutcome, currentWord, modeIndex, revealed, roundHadSpellingError]);
 
   const finishRecording = useCallback(() => {
     if (recordingFinishedRef.current || oralOutcomeLockedRef.current) return;
@@ -794,12 +792,12 @@ export function VocabularyLearning({ bookCounts, books }: VocabularyLearningProp
       }
 
       const score = scoreSpokenWord(oralTranscriptRef.current, currentWord.word);
-      const outcome = familiarityFromScore(score);
       oralOutcomeLockedRef.current = true;
       setRevealed(true);
-      commitOutcome(outcome, undefined, score);
+      setOralScoreFeedback(score);
+      setPhase("awaiting");
     }, 500);
-  }, [commitOutcome, currentWord]);
+  }, [currentWord]);
 
   const startRecording = useCallback(async () => {
     if (!currentWord || modeIndex !== 2 || phase === "recording" || phase === "scoring" || advancePending || oralOutcomeLockedRef.current) return;
@@ -1117,19 +1115,19 @@ export function VocabularyLearning({ bookCounts, books }: VocabularyLearningProp
                 <div className="vocabulary-learning-bottom-actions">
                   <button
                     className="vocabulary-learning-category-button familiar"
-                    disabled={advancePending || modeIndex === 2 || (modeIndex === 3 && (!spellingCorrect || roundHadSpellingError))}
+                    disabled={advancePending || (modeIndex === 2 && (oralScoreFeedback === null || familiarityFromScore(oralScoreFeedback) !== "familiar")) || (modeIndex === 3 && (!spellingCorrect || roundHadSpellingError))}
                     onClick={() => modeIndex === 3 ? submitSpelling("familiar") : handleRecognitionOutcome("familiar")}
                     type="button"
                   >熟悉</button>
                   <button
                     className="vocabulary-learning-category-button vague"
-                    disabled={advancePending || modeIndex === 2}
+                    disabled={advancePending || (modeIndex === 2 && (oralScoreFeedback === null || familiarityFromScore(oralScoreFeedback) !== "vague"))}
                     onClick={() => modeIndex === 3 ? submitSpelling("vague") : handleRecognitionOutcome("vague")}
                     type="button"
                   >模糊</button>
                   <button
                     className="vocabulary-learning-category-button unfamiliar"
-                    disabled={advancePending || modeIndex === 2}
+                    disabled={advancePending || (modeIndex === 2 && (oralScoreFeedback === null || familiarityFromScore(oralScoreFeedback) !== "unfamiliar"))}
                     onClick={() => modeIndex === 3 ? submitSpelling("unfamiliar") : handleRecognitionOutcome("unfamiliar")}
                     type="button"
                   >生僻</button>

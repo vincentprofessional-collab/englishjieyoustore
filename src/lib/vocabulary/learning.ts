@@ -68,7 +68,13 @@ export function getLearningBookEntries(entries: LocalVocabularyEntry[], book: Le
     return entries.filter((entry) => getLearningLevelKey(entry.level) === "未分级");
   }
 
-  return entries.filter((entry) => getLearningLevelKey(entry.level) === book);
+  const selectedRank = LEARNING_BOOKS.find((candidate) => candidate.key === book)?.rank ?? 0;
+
+  return entries.filter((entry) => {
+    const entryKey = getLearningLevelKey(entry.level);
+    const entryRank = LEARNING_BOOKS.find((candidate) => candidate.key === entryKey)?.rank ?? 0;
+    return entryRank > 0 && entryRank <= selectedRank;
+  });
 }
 
 export function getLearningBookCounts(entries: LocalVocabularyEntry[]) {
