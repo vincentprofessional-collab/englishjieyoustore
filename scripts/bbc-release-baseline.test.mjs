@@ -44,7 +44,7 @@ test("BBC 2026 remains wired into the article catalog and learning modules", () 
 
   assert.match(catalogSource, /import bbc2026Articles from "@\/data\/bbc\/2026\/index\.json"/);
   assert.match(catalogSource, /\.\.\.bbc2026Articles/);
-  assert.match(catalogSource, /Array\.from\(\{ length: 12 \}, \(_, index\) => 2015 \+ index\)/);
+  assert.match(catalogSource, /Array\.from\(\{ length: 12 \}, \(_, index\) => 2026 - index\)/);
   assert.match(detailSource, /BbcArticleQuiz/);
   assert.match(detailSource, /BbcSentencePractice/);
   assert.match(detailSource, /getBbcArticleContentOverride/);

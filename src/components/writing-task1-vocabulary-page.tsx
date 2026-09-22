@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import {
   type DragEvent as ReactDragEvent,
   useEffect,
@@ -487,8 +486,7 @@ export function WritingTask1VocabularyPage({
     <section className="stack writing-practice-page writing-task1-vocab-page">
       <div className="writing-resource-panel writing-task1-vocab-panel">
         <div className="writing-task1-vocab-heading">
-          <Link href="/writing">← IELTS WRITING</Link>
-          <h1><span>TASK 1</span><small>必备词汇及翻译训练</small></h1>
+          <h1><span>TASK 1</span><small>专项训练 · 小作文词汇及翻译</small></h1>
         </div>
 
         <div className="writing-task1-vocab-accordion">

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { Cet4Library } from "@/components/cet4/cet4-library";
 import { getCetExamEntries, getCetExamSetIndex } from "@/lib/cet4/library";
 
@@ -11,5 +12,9 @@ export default function Cet6Page() {
   const knowledge = getCetExamEntries("cet6")
     .filter((entry) => entry.section === "知识点")
     .map(({ id, title, topic, excerpt }) => ({ id, title, topic, excerpt }));
-  return <Cet4Library exam="cet6" knowledge={knowledge} sets={getCetExamSetIndex("cet6").entries} />;
+  return (
+    <Suspense fallback={null}>
+      <Cet4Library exam="cet6" knowledge={knowledge} sets={getCetExamSetIndex("cet6").entries} />
+    </Suspense>
+  );
 }

@@ -1,8 +1,13 @@
 import { supabase } from "@/lib/supabase/client";
-import { dedupeLanguageExamMenu, ensureCet4ExamMenu, ensureCet6ExamMenu, ensureJuniorHighExamMenu, ensureSatExamMenu, ensureSeniorHighExamMenu, languageExamKey, orderLanguageExamMenu } from "@/lib/content/site-chrome-nav";
+import {
+  ensureJuniorHighExamMenu,
+  ensureNewConceptMenu,
+  ensureSatExamMenu,
+  ensureSeniorHighExamMenu,
+} from "@/lib/content/site-chrome-nav";
 
 export const SITE_CHROME_SLUG = "site-chrome";
-export const SITE_CHROME_VERSION = 3;
+export const SITE_CHROME_VERSION = 1;
 
 export type SiteChromeNavItem = {
   children: SiteChromeNavItem[];
@@ -94,7 +99,7 @@ export const DEFAULT_SITE_CHROME_CONFIG: SiteChromeConfig = {
     brandImageUrl: "",
     brandMark: "英",
     brandMarkFontSize: 30,
-    brandSubtitle: "IELTS · 外刊 · 词典 · 专项训练",
+    brandSubtitle: "IELTS · 外刊 · 词典",
     brandSubtitleColor: "#dbeee7",
     brandSubtitleFontSize: 13,
     brandTitle: "英文解忧杂货铺",
@@ -106,7 +111,6 @@ export const DEFAULT_SITE_CHROME_CONFIG: SiteChromeConfig = {
       { enabled: true, href: "/contact", id: "contact", imageUrl: "", label: "公告栏", mark: "" },
       { enabled: true, href: "/listening", id: "listening", imageUrl: "", label: "雅思听力", mark: "" },
       { enabled: true, href: "/speaking", id: "speaking", imageUrl: "", label: "雅思口语", mark: "" },
-      { enabled: true, href: "/training", id: "training", imageUrl: "", label: "英语专项训练", mark: "" },
       { enabled: true, href: "/me/favorites", id: "favorites", imageUrl: "", label: "我的收藏", mark: "" },
     ],
     promo: {
@@ -129,8 +133,8 @@ export const DEFAULT_SITE_CHROME_CONFIG: SiteChromeConfig = {
     ],
   },
   nav: {
-    adminHref: "/admin?view=chrome",
-    adminLabel: "编辑导航",
+    adminHref: "/admin",
+    adminLabel: "内容后台",
     fontSize: 16,
     items: [
       {
@@ -143,35 +147,7 @@ export const DEFAULT_SITE_CHROME_CONFIG: SiteChromeConfig = {
         note: "",
       },
       {
-        children: [
-          {
-            children: [],
-            dropdownAlign: "right",
-            enabled: true,
-            href: "/vocabulary?kind=root",
-            id: "dictionary-roots",
-            label: "词根",
-            note: "",
-          },
-          {
-            children: [],
-            dropdownAlign: "right",
-            enabled: true,
-            href: "/vocabulary?kind=prefix",
-            id: "dictionary-prefixes",
-            label: "前缀",
-            note: "",
-          },
-          {
-            children: [],
-            dropdownAlign: "right",
-            enabled: true,
-            href: "/vocabulary?kind=suffix",
-            id: "dictionary-suffixes",
-            label: "后缀",
-            note: "",
-          },
-        ],
+        children: [],
         dropdownAlign: "right",
         enabled: true,
         href: "/vocabulary",
@@ -185,81 +161,18 @@ export const DEFAULT_SITE_CHROME_CONFIG: SiteChromeConfig = {
             children: [],
             dropdownAlign: "right",
             enabled: true,
-            href: "/vocabulary/books?level=小学",
-            id: "word-book-primary",
-            label: "小学词汇",
+            href: "/vocabulary/books",
+            id: "word-books",
+            label: "词汇书",
             note: "",
           },
           {
             children: [],
             dropdownAlign: "right",
             enabled: true,
-            href: "/vocabulary/books?level=初中",
-            id: "word-book-junior",
-            label: "初中词汇",
-            note: "",
-          },
-          {
-            children: [],
-            dropdownAlign: "right",
-            enabled: true,
-            href: "/vocabulary/books?level=高中",
-            id: "word-book-senior",
-            label: "高中词汇",
-            note: "",
-          },
-          {
-            children: [],
-            dropdownAlign: "right",
-            enabled: true,
-            href: "/vocabulary/books?level=四级",
-            id: "word-book-cet4",
-            label: "大学四级词汇",
-            note: "",
-          },
-          {
-            children: [],
-            dropdownAlign: "right",
-            enabled: true,
-            href: "/vocabulary/books?level=六级",
-            id: "word-book-cet6",
-            label: "大学六级词汇",
-            note: "",
-          },
-          {
-            children: [],
-            dropdownAlign: "right",
-            enabled: true,
-            href: "/vocabulary/books?level=考研",
-            id: "word-book-postgraduate",
-            label: "考研词汇",
-            note: "",
-          },
-          {
-            children: [],
-            dropdownAlign: "right",
-            enabled: true,
-            href: "/vocabulary/books?level=托雅",
-            id: "word-book-ielts-toefl",
-            label: "托福雅思词汇",
-            note: "",
-          },
-          {
-            children: [],
-            dropdownAlign: "right",
-            enabled: true,
-            href: "/vocabulary/books?level=SAT",
-            id: "word-book-sat",
-            label: "SAT词汇",
-            note: "",
-          },
-          {
-            children: [],
-            dropdownAlign: "right",
-            enabled: true,
-            href: "/vocabulary/books?level=GRE",
-            id: "word-book-gre",
-            label: "GRE词汇",
+            href: "/vocabulary/books",
+            id: "srs",
+            label: "SRS 复习",
             note: "",
           },
         ],
@@ -268,7 +181,7 @@ export const DEFAULT_SITE_CHROME_CONFIG: SiteChromeConfig = {
         href: "",
         id: "memorize",
         label: "背单词",
-        note: "",
+        note: "词汇书与间隔复习",
       },
       {
         children: [
@@ -292,12 +205,21 @@ export const DEFAULT_SITE_CHROME_CONFIG: SiteChromeConfig = {
             label: "BBC随身英语",
             note: "",
           },
+          {
+            children: [],
+            dropdownAlign: "right",
+            enabled: true,
+            href: "/new-concept",
+            id: "new-concept",
+            label: "新概念英语",
+            note: "第一册美音版",
+          },
         ],
         dropdownAlign: "right",
         enabled: true,
         href: "",
         id: "articles",
-        label: "外刊学习",
+        label: "综合英语",
         note: "",
       },
       {
@@ -308,285 +230,34 @@ export const DEFAULT_SITE_CHROME_CONFIG: SiteChromeConfig = {
                 children: [],
                 dropdownAlign: "right",
                 enabled: true,
-                href: "/junior-high?mode=topic",
-                id: "junior-high-topic",
-                label: "知识点",
-                note: "",
-              },
-              {
-                children: [],
-                dropdownAlign: "right",
-                enabled: true,
-                href: "/junior-high?mode=type",
-                id: "junior-high-type",
-                label: "题型训练",
-                note: "",
-              },
-              {
-                children: [],
-                dropdownAlign: "right",
-                enabled: true,
-                href: "/junior-high?mode=mock-select",
-                id: "junior-high-mock",
-                label: "历年真题",
-                note: "",
-              },
-            ],
-            dropdownAlign: "right",
-            enabled: true,
-            href: "/junior-high",
-            id: "junior-high-english",
-            label: "中考英语",
-            note: "",
-          },
-          {
-            children: [
-              {
-                children: [],
-                dropdownAlign: "right",
-                enabled: true,
-                href: "/senior-high?entry=knowledge",
-                id: "senior-high-knowledge",
-                label: "知识点",
-                note: "",
-              },
-              {
-                children: [],
-                dropdownAlign: "right",
-                enabled: true,
-                href: "/senior-high?entry=practice",
-                id: "senior-high-practice",
-                label: "题型训练",
-                note: "",
-              },
-              {
-                children: [],
-                dropdownAlign: "right",
-                enabled: true,
-                href: "/senior-high?entry=papers",
-                id: "senior-high-papers",
-                label: "历年真题",
-                note: "",
-              },
-            ],
-            dropdownAlign: "right",
-            enabled: true,
-            href: "/senior-high",
-            id: "senior-high-english",
-            label: "高考英语",
-            note: "",
-          },
-          {
-            children: [
-              {
-                children: [],
-                dropdownAlign: "right",
-                enabled: true,
-                href: "/cet4?entry=knowledge",
-                id: "cet4-knowledge",
-                label: "知识点",
-                note: "",
-              },
-              {
-                children: [],
-                dropdownAlign: "right",
-                enabled: true,
-                href: "/cet4?entry=practice",
-                id: "cet4-types",
-                label: "题型训练",
-                note: "",
-              },
-              {
-                children: [],
-                dropdownAlign: "right",
-                enabled: true,
-                href: "/cet4?entry=papers",
-                id: "cet4-papers",
-                label: "历年真题",
-                note: "",
-              },
-            ],
-            dropdownAlign: "right",
-            enabled: true,
-            href: "/cet4",
-            id: "cet4-english",
-            label: "大学四级",
-            note: "",
-          },
-          {
-            children: [
-              {
-                children: [],
-                dropdownAlign: "right",
-                enabled: true,
-                href: "/cet6?entry=knowledge",
-                id: "cet6-knowledge",
-                label: "知识点",
-                note: "",
-              },
-              {
-                children: [],
-                dropdownAlign: "right",
-                enabled: true,
-                href: "/cet6?entry=practice",
-                id: "cet6-types",
-                label: "题型训练",
-                note: "",
-              },
-              {
-                children: [],
-                dropdownAlign: "right",
-                enabled: true,
-                href: "/cet6?entry=papers",
-                id: "cet6-papers",
-                label: "历年真题",
-                note: "",
-              },
-            ],
-            dropdownAlign: "right",
-            enabled: true,
-            href: "/cet6",
-            id: "cet6-english",
-            label: "大学六级",
-            note: "",
-          },
-          {
-            children: [
-              {
-                children: [
-                  {
-                    children: [],
-                    dropdownAlign: "right",
-                    enabled: true,
-                    href: "/listening",
-                    id: "ielts-listening-cambridge",
-                    label: "剑桥雅思",
-                    note: "",
-                  },
-                  {
-                    children: [],
-                    dropdownAlign: "right",
-                    enabled: true,
-                    href: "/listening/jiufen",
-                    id: "ielts-listening-jiufen",
-                    label: "九分达人",
-                    note: "",
-                  },
-                  {
-                    children: [],
-                    dropdownAlign: "right",
-                    enabled: true,
-                    href: "/listening/past-papers",
-                    id: "ielts-listening-past-papers",
-                    label: "历年真题",
-                    note: "",
-                  },
-                ],
-                dropdownAlign: "right",
-                enabled: true,
-                href: "",
+                href: "/listening",
                 id: "ielts-listening",
                 label: "听力",
                 note: "",
               },
               {
-                children: [
-                  {
-                    children: [],
-                    dropdownAlign: "right",
-                    enabled: true,
-                    href: "/speaking/part-1",
-                    id: "ielts-speaking-part-1",
-                    label: "Part 1",
-                    note: "",
-                  },
-                  {
-                    children: [],
-                    dropdownAlign: "right",
-                    enabled: true,
-                    href: "/speaking/part-2",
-                    id: "ielts-speaking-part-2",
-                    label: "Part 2",
-                    note: "",
-                  },
-                  {
-                    children: [],
-                    dropdownAlign: "right",
-                    enabled: true,
-                    href: "/speaking/part-3",
-                    id: "ielts-speaking-part-3",
-                    label: "Part 3",
-                    note: "",
-                  },
-                ],
+                children: [],
                 dropdownAlign: "right",
                 enabled: true,
-                href: "",
+                href: "/speaking",
                 id: "ielts-speaking",
                 label: "口语",
                 note: "",
               },
               {
-                children: [
-                  {
-                    children: [],
-                    dropdownAlign: "right",
-                    enabled: true,
-                    href: "/reading/practice",
-                    id: "ielts-reading-cambridge",
-                    label: "剑桥雅思",
-                    note: "",
-                  },
-                  {
-                    children: [],
-                    dropdownAlign: "right",
-                    enabled: true,
-                    href: "/reading/mock",
-                    id: "ielts-reading-mock",
-                    label: "完整模考",
-                    note: "",
-                  },
-                ],
+                children: [],
                 dropdownAlign: "right",
                 enabled: true,
-                href: "",
+                href: "/reading",
                 id: "ielts-reading",
                 label: "阅读",
                 note: "",
               },
               {
-                children: [
-                  {
-                    children: [],
-                    dropdownAlign: "right",
-                    enabled: true,
-                    href: "/writing/task2",
-                    id: "ielts-writing-task-2",
-                    label: "大作文",
-                    note: "",
-                  },
-                  {
-                    children: [],
-                    dropdownAlign: "right",
-                    enabled: true,
-                    href: "/writing/practice?task=task1",
-                    id: "ielts-writing-task-1",
-                    label: "小作文",
-                    note: "",
-                  },
-                  {
-                    children: [],
-                    dropdownAlign: "right",
-                    enabled: true,
-                    href: "/writing/task1-vocabulary",
-                    id: "ielts-writing-training",
-                    label: "专项训练",
-                    note: "",
-                  },
-                ],
+                children: [],
                 dropdownAlign: "right",
                 enabled: true,
-                href: "",
+                href: "/writing",
                 id: "ielts-writing",
                 label: "写作",
                 note: "",
@@ -600,40 +271,30 @@ export const DEFAULT_SITE_CHROME_CONFIG: SiteChromeConfig = {
             note: "",
           },
           {
-            children: [
-              {
-                children: [],
-                dropdownAlign: "right",
-                enabled: true,
-                href: "/sat?view=knowledge",
-                id: "sat-knowledge",
-                label: "知识点",
-                note: "",
-              },
-              {
-                children: [],
-                dropdownAlign: "right",
-                enabled: true,
-                href: "/sat?view=types",
-                id: "sat-types",
-                label: "题型训练",
-                note: "",
-              },
-              {
-                children: [],
-                dropdownAlign: "right",
-                enabled: true,
-                href: "/sat?view=papers",
-                id: "sat-papers",
-                label: "历年真题",
-                note: "",
-              },
-            ],
+            children: [],
+            dropdownAlign: "right",
+            enabled: true,
+            href: "/junior-high",
+            id: "junior-high-english",
+            label: "中考英语",
+            note: "",
+          },
+          {
+            children: [],
+            dropdownAlign: "right",
+            enabled: true,
+            href: "/senior-high",
+            id: "senior-high-english",
+            label: "高考英语",
+            note: "",
+          },
+          {
+            children: [],
             dropdownAlign: "right",
             enabled: true,
             href: "/sat",
             id: "sat-reading-writing",
-            label: "SAT",
+            label: "SAT Reading and Writing",
             note: "",
           },
         ],
@@ -650,18 +311,18 @@ export const DEFAULT_SITE_CHROME_CONFIG: SiteChromeConfig = {
             children: [],
             dropdownAlign: "right",
             enabled: true,
-            href: "/training?task=task2",
-            id: "writing-task2-training",
-            label: "大作文写作训练",
+            href: "/training",
+            id: "translation-training",
+            label: "写作翻译训练",
             note: "",
           },
           {
             children: [],
             dropdownAlign: "right",
             enabled: true,
-            href: "/training?task=task1",
-            id: "writing-task1-training",
-            label: "小作文写作训练",
+            href: "/training",
+            id: "training-library",
+            label: "专项训练库",
             note: "",
           },
         ],
@@ -669,7 +330,7 @@ export const DEFAULT_SITE_CHROME_CONFIG: SiteChromeConfig = {
         enabled: true,
         href: "",
         id: "skill-training",
-        label: "专项训练",
+        label: "英语专项技能训练",
         note: "",
       },
       {
@@ -809,63 +470,6 @@ function mergeLinks(value: unknown, fallback: SiteChromeLink[]): SiteChromeLink[
     .filter((item) => item.id && item.label);
 }
 
-function findDefaultNavItem(id: string, items: SiteChromeNavItem[]): SiteChromeNavItem | undefined {
-  for (const item of items) {
-    if (item.id === id) return item;
-    const child = findDefaultNavItem(id, item.children);
-    if (child) return child;
-  }
-}
-
-const NAV_LABEL_OVERRIDES: Record<string, string> = {
-  "junior-high-type": "题型训练",
-  "senior-high-practice": "题型训练",
-  "cet4-types": "题型训练",
-  "cet6-types": "题型训练",
-  "sat-types": "题型训练",
-};
-
-function normalizeVisibleNavItems(
-  items: SiteChromeNavItem[],
-  migrateLegacyConfig: boolean,
-): SiteChromeNavItem[] {
-  return items
-    .filter((item) => !migrateLegacyConfig || (
-      item.id !== "other-exams" && item.label !== "其他考试正在开发中"
-    ))
-    .map((item) => {
-      const fallbackItem = findDefaultNavItem(item.id, DEFAULT_SITE_CHROME_CONFIG.nav.items);
-      const fixedChildren = migrateLegacyConfig && [
-        "dictionary",
-        "memorize",
-        "articles",
-        "exams",
-        "ielts",
-        "ielts-listening",
-        "ielts-speaking",
-        "ielts-reading",
-        "ielts-writing",
-        "junior-high-english",
-        "senior-high-english",
-        "sat-reading-writing",
-        "skill-training",
-      ].includes(item.id)
-        ? fallbackItem?.children ?? item.children
-        : item.children;
-
-      return {
-        ...item,
-        children: normalizeVisibleNavItems(fixedChildren, migrateLegacyConfig),
-        label: NAV_LABEL_OVERRIDES[item.id] ?? (migrateLegacyConfig && item.id === "skill-training"
-          ? "专项训练"
-          : migrateLegacyConfig && item.id === "sat-reading-writing"
-            ? "SAT"
-            : item.label),
-        note: migrateLegacyConfig && item.id === "memorize" ? "" : item.note,
-      };
-    });
-}
-
 export function mergeSiteChromeConfig(value: unknown): SiteChromeConfig {
   const fallback = DEFAULT_SITE_CHROME_CONFIG;
   const source = value && typeof value === "object" ? (value as Record<string, unknown>) : {};
@@ -881,8 +485,6 @@ export function mergeSiteChromeConfig(value: unknown): SiteChromeConfig {
   const promo = footer.promo && typeof footer.promo === "object"
     ? (footer.promo as Record<string, unknown>)
     : {};
-  const sourceVersion = typeof source.version === "number" ? source.version : 1;
-  const migrateLegacyConfig = sourceVersion < SITE_CHROME_VERSION;
   const mergedNavItems = mergeNavItems(nav.items, fallback.nav.items);
   const examsFallback = fallback.nav.items.find((item) => item.id === "exams");
   const juniorHighFallback = fallback.nav.items
@@ -894,33 +496,80 @@ export function mergeSiteChromeConfig(value: unknown): SiteChromeConfig {
   const satFallback = fallback.nav.items
     .find((item) => item.id === "exams")
     ?.children.find((item) => item.id === "sat-reading-writing");
-  const cet4Fallback = fallback.nav.items
-    .find((item) => item.id === "exams")
-    ?.children.find((item) => languageExamKey(item) === "cet4");
-  const cet6Fallback = fallback.nav.items
-    .find((item) => item.id === "exams")
-    ?.children.find((item) => languageExamKey(item) === "cet6");
   const navWithJuniorHigh = examsFallback && juniorHighFallback
     ? ensureJuniorHighExamMenu(mergedNavItems, examsFallback, juniorHighFallback)
     : mergedNavItems;
   const navWithSeniorHigh = examsFallback && seniorHighFallback
     ? ensureSeniorHighExamMenu(navWithJuniorHigh, examsFallback, seniorHighFallback)
     : navWithJuniorHigh;
-  const navWithSat = examsFallback && satFallback
+  const navItems = examsFallback && satFallback
     ? ensureSatExamMenu(navWithSeniorHigh, examsFallback, satFallback)
     : navWithSeniorHigh;
-  const navWithCet4 = examsFallback && cet4Fallback
-    ? ensureCet4ExamMenu(navWithSat, examsFallback, cet4Fallback)
-    : navWithSat;
-  const navItems = examsFallback && cet6Fallback
-    ? ensureCet6ExamMenu(navWithCet4, examsFallback, cet6Fallback)
-    : navWithCet4;
-  const orderedNavItems = orderLanguageExamMenu(dedupeLanguageExamMenu(navItems));
+  const newConceptFallback = fallback.nav.items
+    .find((item) => item.id === "articles")
+    ?.children.find((item) => item.id === "new-concept");
+  const navWithNewConcept = newConceptFallback
+    ? ensureNewConceptMenu(navItems, newConceptFallback)
+    : navItems;
+  const lookupItem: SiteChromeNavItem = {
+    children: [],
+    dropdownAlign: "right",
+    enabled: true,
+    href: "/vocabulary/etymology",
+    id: "lookup",
+    label: "查单词",
+    note: "",
+  };
+  const navWithLookup = navWithNewConcept.some((item) => item.id === "lookup")
+    ? navWithNewConcept
+    : [
+        ...navWithNewConcept.slice(0, 1),
+        lookupItem,
+        ...navWithNewConcept.slice(1),
+      ];
 
-  const normalizedNavItems = dedupeLanguageExamMenu(
-    normalizeVisibleNavItems(orderedNavItems, migrateLegacyConfig),
-  ).map((item) => {
-    if (migrateLegacyConfig && item.id === "dictionary") {
+  const normalizedNavItems = navWithLookup.map((item) => {
+    if (item.id === "articles") {
+      const bbcYearChildren = Array.from({ length: 12 }, (_, index) => {
+        const year = 2026 - index;
+        return {
+          children: [],
+          dropdownAlign: "right" as const,
+          enabled: true,
+          href: `/articles?year=${year}`,
+          id: `bbc-${year}`,
+          label: String(year),
+          note: "",
+        };
+      });
+
+      return {
+        ...item,
+        children: item.children
+          .filter((child) => child.id !== "american" && !child.label.includes("专辑"))
+          .map((child) =>
+            child.id === "bbc"
+              ? {
+                  ...child,
+                  children: child.children.length > 0 ? child.children : bbcYearChildren,
+                  href: child.href || "",
+                }
+              : child,
+          ),
+        label: item.label === "外刊学习" ? item.label : "综合英语",
+      };
+    }
+
+    if (item.id === "lookup") {
+        return {
+        ...item,
+        children: [],
+        href: "/vocabulary/etymology",
+        label: "查单词",
+      };
+    }
+
+    if (item.id === "dictionary") {
       return {
         ...item,
         href: item.href === "/" || !item.href ? "/vocabulary" : item.href,
@@ -928,7 +577,7 @@ export function mergeSiteChromeConfig(value: unknown): SiteChromeConfig {
       };
     }
 
-    if (migrateLegacyConfig && item.id === "guide") {
+    if (item.id === "guide") {
       return {
         ...item,
         children: [],
@@ -937,7 +586,7 @@ export function mergeSiteChromeConfig(value: unknown): SiteChromeConfig {
       };
     }
 
-    if (migrateLegacyConfig && item.id === "home") {
+    if (item.id === "home") {
       return {
         ...item,
         children: [],
@@ -948,7 +597,7 @@ export function mergeSiteChromeConfig(value: unknown): SiteChromeConfig {
 
     return item;
   });
-  const visibleNavItems = migrateLegacyConfig ? [
+  const visibleNavItems = [
     {
       children: [],
       dropdownAlign: "right" as const,
@@ -959,11 +608,21 @@ export function mergeSiteChromeConfig(value: unknown): SiteChromeConfig {
       note: "",
     },
     ...normalizedNavItems.filter(
-      (item) => item.id !== "home" && item.label !== "公告栏" && item.label !== "使用说明",
+      (item) =>
+        item.id !== "home" &&
+        item.id !== "dictionary" &&
+        item.id !== "skill-training" &&
+        item.label !== "英语专项技能训练" &&
+        item.label !== "公告栏" &&
+        item.label !== "使用说明",
     ),
-  ] : normalizedNavItems;
+  ];
   const visibleFooterLinks = mergeLinks(footer.links, fallback.footer.links).filter(
-    (item) => item.id !== "contact" && item.label !== "公告栏",
+    (item) =>
+      item.id !== "contact" &&
+      item.id !== "training" &&
+      item.label !== "英语专项训练" &&
+      item.label !== "公告栏",
   );
 
   return {
@@ -1036,12 +695,8 @@ export function mergeSiteChromeConfig(value: unknown): SiteChromeConfig {
       socials: mergeLinks(footer.socials, fallback.footer.socials),
     },
     nav: {
-      adminHref: migrateLegacyConfig
-        ? fallback.nav.adminHref
-        : readString(nav.adminHref, fallback.nav.adminHref),
-      adminLabel: migrateLegacyConfig
-        ? fallback.nav.adminLabel
-        : readString(nav.adminLabel, fallback.nav.adminLabel),
+      adminHref: readString(nav.adminHref, fallback.nav.adminHref),
+      adminLabel: readString(nav.adminLabel, fallback.nav.adminLabel),
       fontSize: readNumber(nav.fontSize, fallback.nav.fontSize, 12, 28),
       items: visibleNavItems,
       loginHref: readString(nav.loginHref, fallback.nav.loginHref),
@@ -1064,7 +719,7 @@ export async function getPublishedSiteChromeConfig() {
     .maybeSingle();
 
   if (error || !data) {
-    return DEFAULT_SITE_CHROME_CONFIG;
+    return mergeSiteChromeConfig(DEFAULT_SITE_CHROME_CONFIG);
   }
 
   return mergeSiteChromeConfig(data.meta_json);

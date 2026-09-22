@@ -1,18 +1,7 @@
-import { ListeningPracticeLibrary } from "@/components/listening-practice-library";
-import { getListeningSections } from "@/lib/ielts/listening";
+import { redirect } from "next/navigation";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
-export default async function ListeningPage() {
-  const { sections, error } = await getListeningSections();
-
-  return (
-    <section className="stack ielts-module-page listening-library-page">
-      <div className="listening-library-panel">
-        {error ? <div className="notice danger">读取听力题库失败：{error}</div> : null}
-
-        <ListeningPracticeLibrary bookScope="cambridge" sections={sections} />
-      </div>
-    </section>
-  );
+export default function ListeningPage() {
+  redirect("/listening/practice");
 }

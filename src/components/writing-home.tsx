@@ -52,7 +52,7 @@ export function WritingHome({ content }: { content: ManagedPageContent }) {
       </div>
 
       {visibleSecondaryItems.length ? (
-        <div className="writing-resource-panel">
+        <div className="writing-resource-panel" id="writing-special-training">
           <h2 className="writing-special-training-title">专项训练</h2>
           <div className="writing-resource-grid">
             {visibleSecondaryItems.map((item, index) => (

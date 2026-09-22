@@ -135,7 +135,7 @@ const homeItems: ManagedPageItem[] = [
     actionLabel: "进入专项训练",
     boxed: false,
     description: "针对写作、翻译与薄弱技能进行短时高频训练。",
-    enabled: true,
+    enabled: false,
     eyebrow: "Skill Training",
     href: "/training",
     id: "training",
@@ -446,7 +446,7 @@ export const MANAGED_PAGE_DEFINITIONS: ManagedPageDefinition[] = [
       theme: "editorial",
       title: "BBC TAKE AWAY ENGLISH",
     },
-    label: "外刊学习",
+    label: "综合英语",
     module: "articles",
     path: "/articles",
     slug: "articles",
@@ -645,7 +645,12 @@ export function mergeManagedPageContent(
 
       return normalizeManagedPageItem(item, fallbackItem);
     })
-    .filter((item) => item.id && item.title);
+    .filter(
+      (item) =>
+        item.id &&
+        item.title &&
+        !(slug === "home" && (item.id === "training" || item.href === "/training")),
+    );
 
   if (hasUsableSourceItems && !isCurrentContent) {
     const existingIds = new Set(items.map((item) => item.id));

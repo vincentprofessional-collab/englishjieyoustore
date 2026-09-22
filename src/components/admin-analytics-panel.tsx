@@ -44,6 +44,8 @@ type AnalyticsState = {
   anonymousPageViewCount: number;
   anonymousSessionCount: number;
   eventRows: ActivityEventRow[];
+  ipVisitorMetricsAvailable: boolean;
+  ipVisitorMetrics: IpVisitorMetricsRow | null;
   profileCount: number;
   registeredToday: number;
   profileRows: ProfileRow[];
@@ -55,6 +57,8 @@ const initialAnalyticsState: AnalyticsState = {
   anonymousPageViewCount: 0,
   anonymousSessionCount: 0,
   eventRows: [],
+  ipVisitorMetricsAvailable: false,
+  ipVisitorMetrics: null,
   profileCount: 0,
   registeredToday: 0,
   profileRows: [],
@@ -113,12 +117,21 @@ type AnonymousMetricsRow = {
   anonymous_visitors_total?: number;
 };
 
-function uniqueVisitorKey(row: {
+type IpVisitorMetricsRow = {
+  first_time_visitors_today?: number;
+  returning_anonymous_visitors_today?: number;
+  returning_registered_visitors_today?: number;
+  returning_visitors_today?: number;
+  visitors_today?: number;
+};
+
+function ipVisitorKey(row: {
   session_id?: string | null;
   user_id: string | null;
   visitor_key?: string | null;
+  ip_hash?: string | null;
 }) {
-  return row.user_id ?? row.visitor_key ?? row.session_id ?? "";
+  return row.ip_hash ?? row.visitor_key ?? row.session_id ?? "";
 }
 
 function isModelAnswerPath(path: string) {
@@ -242,6 +255,7 @@ export function AdminAnalyticsPanel() {
       anonymousSessionsResult,
       anonymousPageViewsResult,
       anonymousMetricsResult,
+      ipVisitorMetricsResult,
       registeredTodayResult,
     ] = await Promise.all([
       supabase.from("profiles").select("id").eq("role", "admin"),
@@ -266,6 +280,7 @@ export function AdminAnalyticsPanel() {
         .eq("event_type", "page_view")
         .is("user_id", null),
       supabase.rpc("get_admin_anonymous_visitor_metrics"),
+      supabase.rpc("get_admin_ip_visitor_metrics"),
       supabase
         .from("profiles")
         .select("id", { count: "exact", head: true })
@@ -282,8 +297,16 @@ export function AdminAnalyticsPanel() {
       anonymousPageViewsResult.error ??
       registeredTodayResult.error;
 
-    if (firstError) {
-      const firstErrorMessage = firstError.message ?? "未知错误";
+    const ipVisitorMetricsError = ipVisitorMetricsResult.error;
+    const isMissingIpVisitorMetrics = Boolean(
+      ipVisitorMetricsError &&
+        (ipVisitorMetricsError.code === "42883" ||
+          ipVisitorMetricsError.message?.includes("get_admin_ip_visitor_metrics")),
+    );
+
+    if (firstError || (ipVisitorMetricsError && !isMissingIpVisitorMetrics)) {
+      const analyticsError = firstError ?? ipVisitorMetricsError;
+      const firstErrorMessage = analyticsError?.message ?? "未知错误";
       setMessage(
         firstErrorMessage.includes("site_activity") ||
           firstErrorMessage.includes("visitor_key")
@@ -304,11 +327,15 @@ export function AdminAnalyticsPanel() {
         anonymousMetrics?.anonymous_page_views_total,
         anonymousPageViewsResult.count ?? 0,
       ),
+      ipVisitorMetrics: Array.isArray(ipVisitorMetricsResult.data)
+        ? (ipVisitorMetricsResult.data[0] as IpVisitorMetricsRow | undefined) ?? null
+        : null,
       anonymousSessionCount: readMetricValue(
         anonymousMetrics?.anonymous_visitors_total,
         anonymousSessionsResult.count ?? 0,
       ),
       eventRows: (eventsResult.data ?? []) as ActivityEventRow[],
+      ipVisitorMetricsAvailable: !isMissingIpVisitorMetrics,
       profileCount: profilesResult.count ?? profilesResult.data?.length ?? 0,
       registeredToday: registeredTodayResult.count ?? 0,
       profileRows: (profilesResult.data ?? []) as ProfileRow[],
@@ -340,11 +367,11 @@ export function AdminAnalyticsPanel() {
     );
     const pageViewEvents = eventRows.filter((event) => event.event_type === "page_view");
     const todayPageViewEvents = pageViewEvents.filter((event) => isAfter(event.created_at, today));
-    const todayVisitorKeys = new Set(todayPageViewEvents.map(uniqueVisitorKey).filter(Boolean));
+    const todayVisitorKeys = new Set(todayPageViewEvents.map(ipVisitorKey).filter(Boolean));
     const firstSeenByVisitor = new Map<string, number>();
 
     pageViewEvents.forEach((event) => {
-      const visitorKey = uniqueVisitorKey(event);
+      const visitorKey = ipVisitorKey(event);
       const timestamp = new Date(event.created_at).getTime();
 
       if (!visitorKey || !Number.isFinite(timestamp)) {
@@ -358,31 +385,33 @@ export function AdminAnalyticsPanel() {
       }
     });
 
-    const anonymousTodayCounts = new Map<string, number>();
-    todayPageViewEvents
-      .filter((event) => !event.user_id)
-      .forEach((event) => {
-        const visitorKey = uniqueVisitorKey(event);
-
-        if (visitorKey) {
-          anonymousTodayCounts.set(visitorKey, (anonymousTodayCounts.get(visitorKey) ?? 0) + 1);
-        }
-      });
     const firstTimeVisitorKeys = new Set(
       todayPageViewEvents
-        .map(uniqueVisitorKey)
+        .map(ipVisitorKey)
         .filter((visitorKey) => visitorKey && firstSeenByVisitor.get(visitorKey) !== undefined)
         .filter((visitorKey) => (firstSeenByVisitor.get(visitorKey) ?? 0) >= today.getTime()),
     );
-    const returningAnonymousVisitorKeys = new Set(
-      [...anonymousTodayCounts.keys()].filter((visitorKey) => {
+    const returningVisitorKeys = new Set(
+      [...todayVisitorKeys].filter((visitorKey) => {
         const firstSeen = firstSeenByVisitor.get(visitorKey);
-        return (anonymousTodayCounts.get(visitorKey) ?? 0) >= 2 && firstSeen !== undefined && firstSeen < today.getTime();
+        return firstSeen !== undefined && firstSeen < today.getTime();
       }),
     );
-    const registeredVisitorsToday = new Set(
-      todayPageViewEvents.map((event) => event.user_id).filter(Boolean),
+    const registeredVisitorKeysToday = new Set(
+      todayPageViewEvents
+        .filter((event) => Boolean(event.user_id))
+        .map(ipVisitorKey)
+        .filter(Boolean),
     );
+    const returningRegisteredVisitorKeys = new Set(
+      [...returningVisitorKeys].filter((visitorKey) => registeredVisitorKeysToday.has(visitorKey)),
+    );
+    const returningAnonymousVisitorKeys = new Set(
+      [...returningVisitorKeys].filter(
+        (visitorKey) => !registeredVisitorKeysToday.has(visitorKey),
+      ),
+    );
+    const serverIpMetrics = analytics.ipVisitorMetrics;
     const activeNow = sessionRows.filter((session) =>
       isAfter(session.last_seen_at, fiveMinutesAgo),
     );
@@ -495,18 +524,31 @@ export function AdminAnalyticsPanel() {
       activeNow: activeNow.length,
       averageDuration,
       pageViewsToday: todayPageViewEvents.length,
-      firstTimeVisitorsToday: firstTimeVisitorKeys.size,
+      firstTimeVisitorsToday: readMetricValue(
+        serverIpMetrics?.first_time_visitors_today,
+        firstTimeVisitorKeys.size,
+      ),
       modelAnswerPage: modelAnswerPage ? toPageStat(modelAnswerPage) : null,
       popularPages,
       registeredAverageDuration: averageDurationForSessions(registeredSessions),
       registeredAveragePageViews: averagePageViewsForSessions(registeredSessions),
       registeredToday: analytics.registeredToday,
-      registeredVisitorsToday: registeredVisitorsToday.size,
+      registeredVisitorsToday: readMetricValue(
+        serverIpMetrics?.returning_registered_visitors_today,
+        returningRegisteredVisitorKeys.size,
+      ),
       anonymousAverageDuration: averageDurationForSessions(anonymousSessions),
       anonymousAveragePageViews: averagePageViewsForSessions(anonymousSessions),
-      returningAnonymousVisitorsToday: returningAnonymousVisitorKeys.size,
+      returningAnonymousVisitorsToday: readMetricValue(
+        serverIpMetrics?.returning_anonymous_visitors_today,
+        returningAnonymousVisitorKeys.size,
+      ),
+      returningVisitorsToday: readMetricValue(
+        serverIpMetrics?.returning_visitors_today,
+        returningVisitorKeys.size,
+      ),
       totalKnownVisitors: analytics.profileCount + analytics.anonymousSessionCount,
-      visitorsToday: todayVisitorKeys.size,
+      visitorsToday: readMetricValue(serverIpMetrics?.visitors_today, todayVisitorKeys.size),
     };
   }, [analytics]);
 
@@ -562,23 +604,32 @@ export function AdminAnalyticsPanel() {
         <section className="admin-analytics-group">
           <header className="admin-analytics-group-heading">
             <h3>今日访客行为</h3>
-            <span>今日访问、回访与首次访客</span>
+            <span>
+              {analytics.ipVisitorMetricsAvailable
+                ? "按去重 IP 统计；回访可识别登录用户"
+                : "IP 统计函数未应用，当前使用已加载记录估算"}
+            </span>
           </header>
-          <div className="admin-stat-grid admin-analytics-stat-row-5">
+          <div className="admin-stat-grid admin-analytics-stat-row-6">
             <div>
               <span>今日打开网站人数</span>
               <strong>{metrics.visitorsToday}</strong>
-              <small>今日去重访问人数</small>
+              <small>今日去重 IP 数</small>
+            </div>
+            <div>
+              <span>今日二次打开</span>
+              <strong>{metrics.returningVisitorsToday}</strong>
+              <small>历史上曾访问过的 IP</small>
             </div>
             <div>
               <span>今日注册用户回访</span>
               <strong>{metrics.registeredVisitorsToday}</strong>
-              <small>今日有页面访问的已注册用户</small>
+              <small>回访 IP 中识别到已登录账号</small>
             </div>
             <div>
               <span>今日匿名回访用户</span>
               <strong>{metrics.returningAnonymousVisitorsToday}</strong>
-              <small>此前未注册，今日再次打开</small>
+              <small>回访 IP 中未识别到登录账号</small>
             </div>
             <div>
               <span>今日注册人数</span>

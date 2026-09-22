@@ -77,7 +77,7 @@ export function ListeningPastPaperPage({
   return (
     <section className="stack bbc-article-page">
       <div className="page-heading bbc-article-hero">
-        <div className="bbc-article-hero-top past-paper-hero-top">
+        <div className={`bbc-article-hero-top past-paper-hero-top ${styles.heroTop}`}>
           <Link className="bbc-detail-back-link" href="/listening/past-papers">
             ← 返回
           </Link>

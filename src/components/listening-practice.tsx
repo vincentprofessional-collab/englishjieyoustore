@@ -185,7 +185,7 @@ const FAVORITE_QUESTIONS_STORAGE_KEY = "ielts-platform.favoriteQuestions";
 const FAVORITE_WORDS_STORAGE_KEY = "ielts-platform.favoriteWords";
 const LISTENING_REVIEW_ANSWERS_STORAGE_PREFIX = "ielts-platform.listeningReviewAnswers";
 const LISTENING_ATTEMPT_STORAGE_PREFIX = "ielts-platform.listeningAttempt";
-const LISTENING_REVIEW_DEFAULT_LEFT_PERCENT = 100 / 3;
+const LISTENING_REVIEW_DEFAULT_LEFT_PERCENT = 58;
 const LISTENING_REVIEW_MIN_LEFT_PX = 320;
 const LISTENING_REVIEW_MIN_RIGHT_PX = 360;
 const LISTENING_REVIEW_HANDLE_PX = 14;
@@ -2730,7 +2730,6 @@ function CambridgeFourPaperSheet({
   onAnswerChange,
   questionImageUrls,
   questions,
-  sectionLabel = "SECTION",
   sectionNo,
   submitted,
   testNo,
@@ -2740,7 +2739,6 @@ function CambridgeFourPaperSheet({
   onAnswerChange: (questionId: string, value: string) => void;
   questionImageUrls: string[];
   questions: ListeningQuestion[];
-  sectionLabel?: "PART" | "SECTION";
   sectionNo: number;
   submitted: boolean;
   testNo: number;
@@ -2786,7 +2784,7 @@ function CambridgeFourPaperSheet({
       {sectionNo === 1 ? <div className="paper-listening-badge">LISTENING</div> : null}
 
       <div className="paper-section-heading">
-        <h2>{sectionLabel} {sectionNo}</h2>
+        <h2>SECTION {sectionNo}</h2>
         <h2>
           Questions {(sectionNo - 1) * 10 + 1}-{sectionNo * 10}
         </h2>
@@ -2943,28 +2941,23 @@ export function ListeningPractice({
   useEffect(() => {
     if (pageRef.current) restoreInlineHighlights(pageRef.current, highlightStorageKey);
   }, [highlightStorageKey]);
-  const hasAdminAuthoredQuestions = section.questions.some((question) =>
-    question.id.startsWith("admin-question-"),
-  );
   const shouldUseTestOnePaperLayout =
-    !hasAdminAuthoredQuestions &&
     section.bookCode === "cambridge-4" &&
     section.testNo === 1 &&
     section.sectionNo >= 1 &&
     section.sectionNo <= 4;
   const structuredPaperKey = `${section.bookCode}:${section.testNo}`;
   const hasLegacyStructuredPaperLayout =
-    !hasAdminAuthoredQuestions &&
     !!structuredPaperGroups[structuredPaperKey] &&
     section.sectionNo >= 1 &&
     section.sectionNo <= 4;
   const hasSectionSpecificPaperLayout =
-    !hasAdminAuthoredQuestions && (shouldUseTestOnePaperLayout ||
+    shouldUseTestOnePaperLayout ||
     (section.bookCode === "cambridge-4" &&
       section.testNo === 2 &&
       Boolean(CAMBRIDGE_FOUR_TEST_TWO_CUSTOM_SHEETS[section.sectionNo])) ||
     (section.bookCode === "cambridge-6" &&
-      Boolean(CAMBRIDGE_SIX_CUSTOM_SHEETS[`${section.testNo}:${section.sectionNo}`])));
+      Boolean(CAMBRIDGE_SIX_CUSTOM_SHEETS[`${section.testNo}:${section.sectionNo}`]));
   const runtimeGroupMetadata = getListeningRuntimeGroupMetadata(
     section.bookCode,
     section.testNo,
@@ -3002,7 +2995,7 @@ export function ListeningPractice({
   const practiceTitle = formatListeningSectionTitle(section);
   const listeningLibraryHref = section.bookCode.startsWith("jiufen-")
     ? "/listening/jiufen"
-    : "/listening";
+    : "/listening/practice";
   const questionImageUrls =
     section.questionImageUrls.length > 0
       ? section.questionImageUrls
@@ -3240,7 +3233,7 @@ export function ListeningPractice({
 
     event.preventDefault();
     setReviewLeftPercent((current) =>
-      Math.min(70, Math.max(25, current + (event.key === "ArrowLeft" ? -2 : 2))),
+      Math.min(70, Math.max(40, current + (event.key === "ArrowLeft" ? -2 : 2))),
     );
   }
 
@@ -4584,15 +4577,6 @@ export function ListeningPractice({
   }, [isFullscreen]);
 
   useEffect(() => {
-    const appContent = pageRef.current?.closest(".app-content");
-    appContent?.classList.add("listening-exam-content");
-
-    return () => {
-      appContent?.classList.remove("listening-exam-content");
-    };
-  }, []);
-
-  useEffect(() => {
     if (!selectedText || !selectionActionPosition) return;
 
     scheduleHideSelectionAction();
@@ -4818,7 +4802,6 @@ export function ListeningPractice({
         }`}
         data-local-selection-actions="true"
         ref={pageRef}
-        style={{ justifySelf: "stretch", maxWidth: "none", width: "100%" }}
         onPointerUp={handleQuestionSelection}
         onMouseLeave={() => setActiveWordTooltip(null)}
         onMouseMove={handleEnglishWordHover}
@@ -4999,7 +4982,6 @@ export function ListeningPractice({
       }`}
       data-local-selection-actions="true"
       ref={pageRef}
-      style={{ justifySelf: "stretch", maxWidth: "none", width: "100%" }}
       onPointerUp={handleQuestionSelection}
       onMouseLeave={() => setActiveWordTooltip(null)}
       onMouseMove={handleEnglishWordHover}
@@ -5265,7 +5247,7 @@ export function ListeningPractice({
             aria-label="拖动调整原文和题目宽度"
             aria-orientation="vertical"
             aria-valuemax={70}
-            aria-valuemin={25}
+            aria-valuemin={40}
             aria-valuenow={Math.round(reviewLeftPercent)}
             className="listening-review-split-handle"
             onKeyDown={handleReviewSplitKeyDown}
@@ -5361,7 +5343,6 @@ export function ListeningPractice({
                 onAnswerChange={updateAnswer}
                 questionImageUrls={questionImageUrls}
                 questions={section.questions}
-                sectionLabel={section.bookCode.startsWith("jiufen-") ? "PART" : "SECTION"}
                 sectionNo={section.sectionNo}
                 submitted={submitted}
                 testNo={section.testNo}
@@ -5386,6 +5367,7 @@ export function ListeningPractice({
                 questionImageRefs={runtimeGroupMetadata.questionImageRefs}
                 questionImageUrls={questionImageUrls}
                 questions={section.questions}
+                sectionLabel={section.bookCode.startsWith("jiufen-") ? "PART" : "SECTION"}
                 sectionNo={section.sectionNo}
                 submitted={submitted}
               />
@@ -5474,9 +5456,6 @@ export function ListeningPractice({
                         placeholder="输入你的答案"
                       />
                     )}
-                    {submitted && question.explanation ? (
-                      <p className="listening-answer-explanation">解析：{question.explanation}</p>
-                    ) : null}
                   </article>
                 );
               })

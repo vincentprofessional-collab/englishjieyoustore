@@ -4,9 +4,8 @@ import { VocabularyExampleAudioButton, VocabularyExampleFavoriteButton } from "@
 import { VocabularyExampleArticleLink } from "@/components/vocabulary-example-article-link";
 import { VocabularyAutoplay } from "@/components/vocabulary-autoplay";
 import { ContentShareButton } from "@/components/content-share-button";
-import { VocabularyFavoriteButton } from "@/components/vocabulary-favorite-button";
-import { VocabularyInlinePronunciation } from "@/components/vocabulary-pronunciation";
-import { VocabularyShareButton } from "@/components/vocabulary-share-button";
+import { VocabularyDetailShell } from "@/components/vocabulary-detail-shell";
+import { VocabularyDetailContent } from "@/components/vocabulary-detail-content";
 import {
   getExtendedVocabularyEntry,
   getVocabularyFormationParts,
@@ -324,58 +323,23 @@ export default async function VocabularyWordPage({
         entry.inflections.map((inflection) => inflection.value),
       );
   const phrases = getVocabularyPhraseMatches(entry.word);
-  const formationParts = getVocabularyFormationParts(entry);
+  const formationParts = getVocabularyFormationParts(entry).map((part) => ({
+    ...part,
+    href: part.href ? `${part.href}${part.href.includes("?") ? "&" : "?"}from=lookup` : part.href,
+  }));
   const hasEtymologyContent = Boolean(entry.etymologyStory || formationParts.length);
 
   return (
     <section className="stack vocabulary-word-page">
       <VocabularyAutoplay ukAudioUrl={entry.ukAudioUrl} usAudioUrl={entry.usAudioUrl} word={entry.word} />
-      <div className="word-page-head">
-        <Link className="back-link" href="/vocabulary">
-          ← 返回
-        </Link>
-        <div className="word-title-row word-detail-title-row">
-          <div className="word-title-primary">
-            <h1>{entry.word}</h1>
-            <div className="word-title-meta">
-              <VocabularyInlinePronunciation
-                ukAudioUrl={entry.ukAudioUrl}
-                ukPhonetic={entry.ukPhonetic}
-                usAudioUrl={entry.usAudioUrl}
-                usPhonetic={entry.usPhonetic}
-                word={entry.word}
-              />
-              {entry.level ? <span className="vocabulary-level-badge">{entry.level}</span> : null}
-            </div>
-          </div>
-          <div className="word-title-tools word-title-actions">
-            <VocabularyFavoriteButton entry={entry} />
-            <VocabularyShareButton entry={entry} />
-          </div>
-        </div>
-      </div>
-
-      <div className="word-detail-grid">
-        <section className="word-detail-main" aria-label="词条内容">
-          <section className="word-detail-section">
-            <h2>中文释义</h2>
-            <DefinitionRows entry={entry} />
-          </section>
-          <EnglishDefinitionSection entry={entry} />
-          <WordInflectionSection entry={entry} />
-          <WordDetailListSection items={entry.reviewNotes} title="温故知新" />
-          <UsageExamplesSection englishExamples={entry.englishExamples} examples={usageExamples} />
-          <PhraseSection phrases={phrases} />
-          <WordDetailTagSection items={entry.synonyms} title="同义词" />
-          <WordDetailTagSection items={entry.antonyms} title="反义词" />
-          {hasEtymologyContent ? (
-            <>
-              <EtymologyStorySection story={entry.etymologyStory} />
-              <WordFormationSection parts={formationParts} />
-            </>
-          ) : null}
-        </section>
-      </div>
+      <VocabularyDetailShell entry={entry}>
+        <VocabularyDetailContent
+          entry={entry}
+          formationParts={formationParts}
+          phrases={phrases}
+          usageExamples={usageExamples}
+        />
+      </VocabularyDetailShell>
     </section>
   );
 }

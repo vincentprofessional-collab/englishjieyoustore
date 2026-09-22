@@ -9,7 +9,6 @@ import {
   type Task2ModelEssay,
   type Task2VocabularyItem,
 } from "@/data/writing/task2-model-essays";
-import { WRITING_QUESTIONS, getWritingCategories } from "@/lib/ielts/writing";
 
 type Task2FoldProps = {
   children: ReactNode;
@@ -164,7 +163,6 @@ function Task2StageTitle({ index, title }: { index: string; title: string }) {
 }
 
 export function WritingTask2Library() {
-  const writingCategories = getWritingCategories("task2");
   const groupedEssays = useMemo(
     () =>
       TASK2_TYPE_ORDER.map((type) => ({
@@ -176,57 +174,56 @@ export function WritingTask2Library() {
 
   return (
     <section className="stack writing-home-page writing-task2-page task2-index-page">
-      <div className="writing-mode-panel task2-top-category-panel">
-        <div className="writing-practice-tree writing-practice-index-tree" id="writing-task2-category-library">
+      <div className="writing-mode-panel">
+        <div className="writing-practice-tree writing-practice-index-tree">
           <div className="writing-task-grid">
-            <section className="writing-task-column">
+            <section className="writing-task-column" id="task2">
               <div className="writing-task-card">
-                <strong><span>TASK 2</span>议论文写作</strong>
+                <strong>
+                  <span>TASK 2</span>
+                  议论文写作
+                </strong>
               </div>
 
               <div className="writing-category-list">
-                {writingCategories.map((category, categoryIndex) => {
-                  const questions = WRITING_QUESTIONS.filter(
-                    (question) => question.task === "task2" && question.category === category.id,
-                  );
+                {groupedEssays.map((group, groupIndex) => {
+                  const label = TASK2_TYPE_LABELS[group.type];
 
                   return (
-                    <details className="writing-category-item" key={category.id}>
+                    <details className="writing-category-item" key={group.type}>
                       <summary className="writing-category-banner">
-                        <span className="writing-category-number">
-                          {String(categoryIndex + 1).padStart(2, "0")}
-                        </span>
-                        {category.id === "advantages" ? (
+                        <span className="writing-category-number">{formatNumber(groupIndex)}</span>
+                        {group.type === "advantages" ? (
                           <span className="writing-category-copy advantages-row">
                             <strong>
                               <span>ADVANTAGES</span>
                               <span>DISADVANTAGES</span>
                             </strong>
-                            <small>{category.label}</small>
+                            <small>{label.cn}</small>
                           </span>
                         ) : (
                           <span className="writing-category-copy">
-                            <strong>{category.labelEnglish.toUpperCase()}</strong>
-                            <small>{category.label}</small>
+                            <strong>{label.en.toUpperCase()}</strong>
+                            <small>{label.cn}</small>
                           </span>
                         )}
-                        <span className="writing-category-count">{questions.length}</span>
-                        <i>
+                        <span className="writing-category-count">{group.essays.length}</span>
+                        <i aria-hidden="true">
                           <span className="disclosure-label-closed">▸</span>
                           <span className="disclosure-label-open">▾</span>
                         </i>
                       </summary>
 
                       <div className="writing-question-list">
-                        {questions.map((question) => (
+                        {group.essays.map((essay) => (
                           <Link
                             className="writing-question-card"
-                            href={`/writing/practice/${question.id}`}
-                            key={question.id}
+                            href={`/writing/task2/${essay.id}`}
+                            key={essay.id}
                           >
-                            <span>{question.book} · {question.test}</span>
-                            <strong>{question.title}</strong>
-                            <small>{question.shortTitle}</small>
+                            <span>{label.en} · {essay.categoryCn}</span>
+                            <strong>{essay.shortTitleCn}</strong>
+                            <small>{countWords(essay.essay)} words</small>
                             <i>START →</i>
                           </Link>
                         ))}
@@ -239,36 +236,6 @@ export function WritingTask2Library() {
           </div>
         </div>
       </div>
-
-      {groupedEssays.map((group) => {
-        const label = TASK2_TYPE_LABELS[group.type];
-
-        return (
-          <section className="task2-type-section" id={`task2-${group.type}`} key={group.type}>
-            <header className="task2-type-head task2-type-head-simple">
-              <div>
-                <span>{label.en}</span>
-                <h2>{label.cn}</h2>
-              </div>
-            </header>
-
-            <div className="task2-topic-list">
-              {group.essays.map((essay, index) => (
-                <Link className="task2-topic-link" href={`/writing/task2/${essay.id}`} key={essay.id}>
-                  <span className="task2-essay-number">{formatNumber(index)}</span>
-                  <span>
-                    <strong>{essay.shortTitleCn}</strong>
-                    <small>
-                      {label.en} · {essay.categoryCn} · {countWords(essay.essay)} words
-                    </small>
-                  </span>
-                  <i aria-hidden="true">+</i>
-                </Link>
-              ))}
-            </div>
-          </section>
-        );
-      })}
     </section>
   );
 }

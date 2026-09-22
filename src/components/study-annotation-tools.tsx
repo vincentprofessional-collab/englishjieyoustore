@@ -281,7 +281,6 @@ export function StudyAnnotationTools({
     useState<StudySelectionActionPosition | null>(null);
   const hintCacheRef = useRef(new Map<string, LocalVocabularyHint | null>());
   const hoverWordTimerRef = useRef<number | null>(null);
-  const touchWordTimerRef = useRef<number | null>(null);
   const hideWordTimerRef = useRef<number | null>(null);
   const notesPanelRef = useRef<HTMLElement | null>(null);
   const pendingHoverWordRef = useRef("");
@@ -409,13 +408,6 @@ export function StudyAnnotationTools({
       }
     }
 
-    function clearTouchTimer() {
-      if (touchWordTimerRef.current != null) {
-        window.clearTimeout(touchWordTimerRef.current);
-        touchWordTimerRef.current = null;
-      }
-    }
-
     function clearHideTimer() {
       if (hideWordTimerRef.current != null) {
         window.clearTimeout(hideWordTimerRef.current);
@@ -520,70 +512,12 @@ export function StudyAnnotationTools({
       scheduleHide();
     }
 
-    let touchStart: { rect: DOMRect; word: string; x: number; y: number } | null = null;
-    let touchLongPressActive = false;
-
-    function handlePointerDown(event: PointerEvent) {
-      if (event.pointerType === "mouse") return;
-      const target = event.target as HTMLElement | null;
-      if (target?.closest(".word-tooltip-floating, button, input, textarea, select, [contenteditable='true']")) {
-        return;
-      }
-
-      const wordAtPoint = getEnglishWordAtPoint(event.clientX, event.clientY);
-      if (!wordAtPoint || !surface?.contains(wordAtPoint.textNode)) return;
-
-      clearTouchTimer();
-      clearHideTimer();
-      touchStart = {
-        rect: wordAtPoint.rect,
-        word: wordAtPoint.word,
-        x: event.clientX,
-        y: event.clientY,
-      };
-      touchLongPressActive = false;
-      touchWordTimerRef.current = window.setTimeout(() => {
-        if (!touchStart) return;
-        touchLongPressActive = true;
-        void showHint(touchStart.word, touchStart.rect);
-        touchWordTimerRef.current = null;
-      }, 550);
-    }
-
-    function handlePointerMove(event: PointerEvent) {
-      if (event.pointerType === "mouse" || !touchStart) return;
-      if (Math.hypot(event.clientX - touchStart.x, event.clientY - touchStart.y) > 12) {
-        clearTouchTimer();
-        touchStart = null;
-        touchLongPressActive = false;
-      } else if (touchLongPressActive) {
-        event.preventDefault();
-      }
-    }
-
-    function handlePointerEnd(event: PointerEvent) {
-      if (event.pointerType === "mouse") return;
-      if (touchLongPressActive) event.preventDefault();
-      clearTouchTimer();
-      touchStart = null;
-      touchLongPressActive = false;
-    }
-
     surface.addEventListener("mousemove", handleMouseMove);
     surface.addEventListener("mouseleave", handleMouseLeave);
-    surface.addEventListener("pointerdown", handlePointerDown);
-    surface.addEventListener("pointermove", handlePointerMove, { passive: false });
-    surface.addEventListener("pointerup", handlePointerEnd);
-    surface.addEventListener("pointercancel", handlePointerEnd);
     return () => {
       surface.removeEventListener("mousemove", handleMouseMove);
       surface.removeEventListener("mouseleave", handleMouseLeave);
-      surface.removeEventListener("pointerdown", handlePointerDown);
-      surface.removeEventListener("pointermove", handlePointerMove);
-      surface.removeEventListener("pointerup", handlePointerEnd);
-      surface.removeEventListener("pointercancel", handlePointerEnd);
       clearHoverTimer();
-      clearTouchTimer();
       clearHideTimer();
     };
   }, [activeWordTooltip, enableVocabularyHover, selectedText, surfaceRef]);

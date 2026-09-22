@@ -3,7 +3,6 @@
 import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import type {
   SiteChromeConfig,
@@ -17,58 +16,81 @@ type SiteNavStyle = CSSProperties & {
   "--nav-tab-size": string;
 };
 
-function getNavPath(href: string) {
-  return href.split(/[?#]/, 1)[0];
-}
+function renderNavChild(child: SiteChromeNavItem, onNavigate: () => void) {
+  const enabledChildren = child.children.filter((nestedChild) => nestedChild.enabled);
 
-function isNavItemActive(item: SiteChromeNavItem, pathname: string): boolean {
-  const itemPath = getNavPath(item.href);
-  const isDirectMatch = itemPath === "/"
-    ? pathname === "/"
-    : Boolean(itemPath && (pathname === itemPath || pathname.startsWith(`${itemPath}/`)));
-
-  return isDirectMatch || item.children.some((child) => isNavItemActive(child, pathname));
-}
-
-function isTopLevelItemActive(item: SiteChromeNavItem, pathname: string) {
-  if (item.id === "home") return pathname === "/";
-  if (item.id === "dictionary") return pathname.startsWith("/vocabulary") && !pathname.startsWith("/vocabulary/books");
-  if (item.id === "memorize") return pathname.startsWith("/vocabulary/books");
-  if (item.id === "articles") return pathname.startsWith("/articles");
-  if (item.id === "exams") {
-    return ["/junior-high", "/senior-high", "/exams", "/listening", "/speaking", "/reading", "/writing", "/sat"]
-      .some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`));
-  }
-  if (item.id === "skill-training") return pathname.startsWith("/training");
-  if (item.id === "me") return pathname.startsWith("/me");
-  return isNavItemActive(item, pathname);
-}
-
-function getFirstLeafHref(item: SiteChromeNavItem): string {
-  for (const child of item.children.filter((candidate) => candidate.enabled)) {
-    const href = getFirstLeafHref(child);
-    if (href) return href;
+  if (child.id === "ielts") {
+    return (
+      <Link
+        href="/listening/practice"
+        key={child.id}
+        onClick={onNavigate}
+      >
+        <strong>{child.label}</strong>
+      </Link>
+    );
   }
 
-  return item.href;
+  if (enabledChildren.length) {
+    return (
+      <div className="nav-dropdown-branch" key={child.id}>
+        <button className="nav-dropdown-branch-trigger" type="button">
+          <strong>{child.label}</strong>
+          <em aria-hidden="true">›</em>
+        </button>
+        <div className="nav-submenu">
+          {enabledChildren.map((nestedChild) => renderNavChild(nestedChild, onNavigate))}
+        </div>
+      </div>
+    );
+  }
+
+  if (!child.href) {
+    return (
+      <div className="nav-dropdown-static" key={child.id}>
+        <strong>{child.label}</strong>
+      </div>
+    );
+  }
+
+  return (
+    <Link href={child.href} key={child.id} onClick={onNavigate}>
+      <strong>{child.label}</strong>
+    </Link>
+  );
 }
 
 export function SiteNav({ config: initialConfig }: { config: SiteChromeConfig }) {
   const [config, setConfig] = useState(initialConfig);
+  const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [canAccessAdmin, setCanAccessAdmin] = useState(false);
-  const pathname = usePathname();
   const navStyle: SiteNavStyle = {
     "--brand-mark-size": `${config.brand.markFontSize}px`,
     "--brand-subtitle-size": `${config.brand.subtitleFontSize}px`,
     "--brand-title-size": `${config.brand.titleFontSize}px`,
     "--nav-tab-size": `${config.nav.fontSize}px`,
   };
-  const navItems = config.nav.items.filter(
-    (item) => item.enabled && item.label !== "公告栏" && item.label !== "使用说明",
-  );
-  const adminHref = config.nav.adminHref === "/admin?view=chrome"
-    ? "/admin"
-    : config.nav.adminHref || "/admin";
+  const navItems = config.nav.items
+    .filter(
+      (item) =>
+        item.enabled &&
+        item.id !== "dictionary" &&
+        item.id !== "skill-training" &&
+        item.label !== "英语专项技能训练" &&
+        item.label !== "公告栏" &&
+        item.label !== "使用说明",
+    )
+    .map((item) =>
+      item.id === "articles"
+        ? {
+            ...item,
+            children: item.children.filter(
+              (child) => child.id !== "american" && !child.label.includes("专辑"),
+            ),
+            label: "综合英语",
+          }
+        : item,
+    );
 
   useEffect(() => {
     setConfig((current) => ({
@@ -130,10 +152,13 @@ export function SiteNav({ config: initialConfig }: { config: SiteChromeConfig })
       unsubscribe = () => subscription.unsubscribe();
     }
 
-    void setupAdminAccess();
+    const adminCheckTimer = window.setTimeout(() => {
+      void setupAdminAccess();
+    }, 5_000);
 
     return () => {
       isMounted = false;
+      window.clearTimeout(adminCheckTimer);
       unsubscribe();
     };
   }, []);
@@ -162,7 +187,7 @@ export function SiteNav({ config: initialConfig }: { config: SiteChromeConfig })
         </Link>
         <div className="nav-actions">
           {canAccessAdmin ? (
-            <Link className="nav-admin-link" href={adminHref}>
+            <Link className="nav-admin-link" href={config.nav.adminHref || "/admin"}>
               {config.nav.adminLabel}
             </Link>
           ) : null}
@@ -174,19 +199,49 @@ export function SiteNav({ config: initialConfig }: { config: SiteChromeConfig })
 
       <nav className="nav-main" aria-label="主导航">
         {navItems.map((item) => {
-          const children = item.children.filter((child) => child.enabled);
-          const isActive = isTopLevelItemActive(item, pathname);
+          const isOpen = openMenu === item.id;
+          const enabledChildren = item.children.filter((child) => child.enabled);
+          const hasDropdown = Boolean(enabledChildren.length);
+
+          if (!hasDropdown && item.href) {
+            return (
+              <div className="nav-menu" key={item.id}>
+                <Link className="nav-tab nav-link-tab" href={item.href}>
+                  {item.label}
+                </Link>
+              </div>
+            );
+          }
 
           return (
-            <div className="nav-menu" key={item.id}>
-              <Link
-                aria-current={isActive ? "page" : undefined}
-                className={`nav-tab nav-link-tab ${isActive ? "active" : ""}`}
-                href={getFirstLeafHref(item) || item.href || "/"}
+            <div
+              className={`nav-menu ${item.dropdownAlign === "left" ? "open-left" : ""}`}
+              key={item.id}
+              onMouseEnter={() => setOpenMenu(item.id)}
+              onMouseLeave={() => setOpenMenu(null)}
+            >
+              <button
+                aria-expanded={isOpen}
+                className={`nav-tab ${isOpen ? "active" : ""}`}
+                type="button"
+                onKeyDown={(event) => {
+                  if (event.key === "Escape") {
+                    setOpenMenu(null);
+                  }
+                }}
+                onClick={() => setOpenMenu(isOpen ? null : item.id)}
               >
                 {item.label}
-                {children.length ? <span className="nav-caret" aria-hidden="true">▼</span> : null}
-              </Link>
+                <span className="nav-caret">{isOpen ? "▲" : "▼"}</span>
+              </button>
+              <div className={`nav-dropdown ${isOpen ? "open" : ""}`}>
+                {item.note ? <div className="nav-dropdown-note">{item.note}</div> : null}
+                <div className="nav-dropdown-grid">
+                  {enabledChildren.map((child) =>
+                    renderNavChild(child, () => setOpenMenu(null)),
+                  )}
+                </div>
+              </div>
             </div>
           );
         })}

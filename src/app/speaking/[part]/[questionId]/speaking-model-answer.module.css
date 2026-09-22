@@ -222,11 +222,6 @@
   margin: 0;
 }
 
-.vocabularyHighlight {
-  color: #ff7468;
-  font-weight: 900;
-}
-
 .translationBlock,
 .audioBlock {
   border-top: 1px solid rgba(246, 232, 194, 0.26);
@@ -257,62 +252,6 @@
 .audioBlock audio {
   display: block;
   width: 100%;
-}
-
-.audioBlock :global(.howler-player) {
-  background: rgba(255, 253, 248, 0.94);
-}
-
-.speakingSentencePractice {
-  border-top: 1px solid rgba(246, 232, 194, 0.26);
-  margin-top: 28px;
-  padding-top: 24px;
-}
-
-.speakingSentenceHeading {
-  align-items: baseline;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px 16px;
-  justify-content: space-between;
-  margin-bottom: 14px;
-}
-
-.speakingSentenceHeading h3 {
-  color: #f6e8c2;
-  font-size: 15px;
-  letter-spacing: 0.08em;
-  margin: 0;
-}
-
-.speakingSentenceHeading p {
-  color: rgba(247, 244, 234, 0.72);
-  font-size: 13px;
-  line-height: 1.6;
-  margin: 0;
-}
-
-.speakingSentencePractice :global(.bbc-listening-sentence-list) {
-  gap: 14px;
-}
-
-.speakingSentencePractice :global(.bbc-listening-sentence-card) {
-  background: #fffdf8;
-  border-color: rgba(228, 216, 189, 0.96);
-}
-
-.speakingSentencePractice :global(.bbc-listening-sentence-card.active) {
-  background: #f6fff8;
-  border-color: rgba(31, 123, 91, 0.5);
-  box-shadow:
-    inset 4px 0 0 #86cda0,
-    0 16px 38px rgba(31, 123, 91, 0.13);
-}
-
-.speakingSentencePractice :global(.bbc-wave-term),
-.speakingSentencePractice :global(.bbc-wave-term-word) {
-  color: #d94a45;
-  text-decoration-color: #d94a45;
 }
 
 .scoreNotes {

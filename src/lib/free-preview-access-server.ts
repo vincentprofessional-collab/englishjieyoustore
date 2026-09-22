@@ -7,7 +7,7 @@ import {
 } from "@/lib/free-preview-visitor";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 
-export async function claimPaidContentAccess(projectKey: string, contentKey: string) {
+export async function claimPaidContentAccess(projectKey: string, contentKey: string, freeLimit = 1) {
   const cookieStore = await cookies();
   const visitorId = cookieStore.get(FREE_PREVIEW_VISITOR_COOKIE)?.value;
 
@@ -18,7 +18,7 @@ export async function claimPaidContentAccess(projectKey: string, contentKey: str
   const supabase = await createServerSupabaseClient();
   const { data, error } = await supabase.rpc("claim_paid_content_access", {
     _content_key: contentKey,
-    _free_limit: 1,
+    _free_limit: Math.max(0, Math.floor(freeLimit)),
     _project_key: projectKey,
     _visitor_id: visitorId,
   });
