@@ -413,10 +413,13 @@
 }
 
 .study-directory-year-list {
-  max-height: 530px;
-  overflow-y: auto;
-  scrollbar-color: rgba(15, 107, 79, 0.34) transparent;
-  scrollbar-width: thin;
+  max-height: none;
+  overflow: visible;
+  scrollbar-width: none;
+}
+
+.study-directory-year-list::-webkit-scrollbar {
+  display: none;
 }
 
 .study-directory-book-title {

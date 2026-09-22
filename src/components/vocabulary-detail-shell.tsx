@@ -15,6 +15,7 @@ type VocabularyDetailShellProps = {
   contentClassName?: string;
   entry: LocalVocabularyEntry;
   headerActions?: ReactNode;
+  showBack?: boolean;
   showHeader?: boolean;
   showWord?: boolean;
 };
@@ -26,6 +27,7 @@ export function VocabularyDetailShell({
   contentClassName = "",
   entry,
   headerActions,
+  showBack = true,
   showHeader = true,
   showWord = true,
 }: VocabularyDetailShellProps) {
@@ -40,7 +42,7 @@ export function VocabularyDetailShell({
     <div className={`vocabulary-detail-shell ${className}`.trim()}>
       {showHeader ? (
         <div className="word-page-head vocabulary-detail-shell-head vocabulary-learning-detail-head">
-          <Link className="back-link" href={backHref}>← 返回</Link>
+          {showBack ? <Link className="back-link" href={backHref}>← 返回</Link> : null}
           <div className="word-title-row word-detail-title-row vocabulary-detail-shell-title-row vocabulary-learning-detail-title-row">
             <div className={`word-title-primary ${showWord ? "" : "is-hidden"}`}>
               {showWord ? (

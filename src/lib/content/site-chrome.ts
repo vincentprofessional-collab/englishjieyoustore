@@ -1,5 +1,6 @@
 import { supabase } from "@/lib/supabase/client";
 import {
+  ensureCompleteExamMenu,
   ensureJuniorHighExamMenu,
   ensureNewConceptMenu,
   ensureSatExamMenu,
@@ -505,12 +506,15 @@ export function mergeSiteChromeConfig(value: unknown): SiteChromeConfig {
   const navItems = examsFallback && satFallback
     ? ensureSatExamMenu(navWithSeniorHigh, examsFallback, satFallback)
     : navWithSeniorHigh;
+  const navWithExams = examsFallback
+    ? ensureCompleteExamMenu(navItems, examsFallback)
+    : navItems;
   const newConceptFallback = fallback.nav.items
     .find((item) => item.id === "articles")
     ?.children.find((item) => item.id === "new-concept");
   const navWithNewConcept = newConceptFallback
-    ? ensureNewConceptMenu(navItems, newConceptFallback)
-    : navItems;
+    ? ensureNewConceptMenu(navWithExams, newConceptFallback)
+    : navWithExams;
   const lookupItem: SiteChromeNavItem = {
     children: [],
     dropdownAlign: "right",

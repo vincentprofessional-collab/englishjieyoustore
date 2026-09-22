@@ -160,24 +160,24 @@ function IeltsSectionShellContent({ children }: { children: ReactNode }) {
   }
 
   const isIntegratedEnglish = activeGroup.id === "integrated-english";
+  const examGroups = STUDY_NAV_GROUPS.filter((group) => group.id !== "integrated-english");
   const isBbcPage = pathname === "/articles" || pathname.startsWith("/articles/");
   const isNewConceptPage = pathname === "/new-concept" || pathname.startsWith("/new-concept/");
   const activeNewConceptUnit = getNewConceptUnitFromPath(pathname);
 
   return (
     <div className="ielts-section-shell">
-      <aside className={`ielts-side-nav study-directory-side-nav ${isIntegratedEnglish ? "integrated-english-side-nav" : ""}`} aria-label={isIntegratedEnglish ? "综合英语导航" : "雅思学习导航"}>
+      <aside className={`ielts-side-nav study-directory-side-nav ${isIntegratedEnglish ? "integrated-english-side-nav" : "language-exams-side-nav"}`} aria-label={isIntegratedEnglish ? "综合英语导航" : "语言考试导航（雅思学习）"}>
         <header className="study-directory-head">
           <div>
             <span>Directory</span>
-            <strong>{isIntegratedEnglish ? "综合英语" : activeGroup.label}</strong>
+            <strong>{isIntegratedEnglish ? "综合英语" : "语言考试"}</strong>
           </div>
-          <button aria-label="隐藏菜单" className="study-directory-hide" type="button">隐藏</button>
         </header>
 
         <nav className="study-directory-nav">
-          {[activeGroup].map((group) => {
-            const isActive = true;
+          {(isIntegratedEnglish ? [activeGroup] : examGroups).map((group) => {
+            const isActive = group.id === activeGroup.id;
 
             if (isIntegratedEnglish) {
               const bbcChild = group.children[0];

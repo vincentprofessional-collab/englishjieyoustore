@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {
+  ensureCompleteExamMenu,
   ensureJuniorHighExamLink,
   ensureJuniorHighExamMenu,
 } from "../src/lib/content/site-chrome-nav.ts";
@@ -52,4 +53,33 @@ test("published nav normalizes an older exam label while preserving its children
 
   assert.equal(merged[0].label, "语言考试");
   assert.deepEqual(merged[0].children.map((item) => item.id), ["ielts", "junior-high-english"]);
+});
+
+test("published language-exam menu restores every missing exam group", () => {
+  const source = [{
+    id: "exams",
+    label: "英语考试",
+    enabled: false,
+    children: [{ id: "ielts", label: "雅思", enabled: true, children: [] }],
+  }];
+  const exams = {
+    id: "exams",
+    label: "语言考试",
+    enabled: true,
+    children: [
+      { id: "ielts", label: "雅思", enabled: true, children: [] },
+      { id: "junior-high-english", label: "中考英语", enabled: true, children: [] },
+      { id: "senior-high-english", label: "高考英语", enabled: true, children: [] },
+      { id: "sat-reading-writing", label: "SAT Reading and Writing", enabled: true, children: [] },
+    ],
+  };
+
+  const merged = ensureCompleteExamMenu(source, exams);
+
+  assert.equal(merged[0].enabled, true);
+  assert.equal(merged[0].label, "语言考试");
+  assert.deepEqual(
+    merged[0].children.map((item) => item.id),
+    ["ielts", "junior-high-english", "senior-high-english", "sat-reading-writing"],
+  );
 });

@@ -1018,6 +1018,7 @@ export function VocabularyLearning({ bookCounts, books }: VocabularyLearningProp
                   className="vocabulary-learning-detail-shell"
                   entry={detailEntry ?? toLookupEntry(currentWord)}
                   headerActions={learningHeaderActions}
+                  showBack={false}
                   showWord={modeIndex === 0 || revealed}
                 >
                   {revealed ? (

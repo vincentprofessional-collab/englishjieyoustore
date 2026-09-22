@@ -91,6 +91,31 @@ export function ensureSatExamMenu<T extends SiteChromeNavNode>(
   );
 }
 
+export function ensureCompleteExamMenu<T extends SiteChromeNavNode & { enabled: boolean }>(
+  items: T[],
+  exams: T,
+): T[] {
+  const existingExams = items.find((item) => item.id === exams.id);
+
+  if (!existingExams) {
+    return [...items, { ...exams, enabled: true }];
+  }
+
+  return items.map((item) => item.id === exams.id
+    ? {
+        ...item,
+        enabled: true,
+        label: exams.label,
+        children: exams.children.reduce(
+          (children, fallbackChild) => children.some((child) => child.id === fallbackChild.id)
+            ? children
+            : [...children, fallbackChild],
+          item.children,
+        ),
+      }
+    : item);
+}
+
 export function ensureNewConceptMenu<T extends SiteChromeNavNode>(
   items: T[],
   newConcept: T,
