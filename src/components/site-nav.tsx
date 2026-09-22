@@ -16,53 +16,27 @@ type SiteNavStyle = CSSProperties & {
   "--nav-tab-size": string;
 };
 
-function renderNavChild(child: SiteChromeNavItem, onNavigate: () => void) {
-  const enabledChildren = child.children.filter((nestedChild) => nestedChild.enabled);
-
-  if (child.id === "ielts") {
-    return (
-      <Link
-        href="/listening/practice"
-        key={child.id}
-        onClick={onNavigate}
-      >
-        <strong>{child.label}</strong>
-      </Link>
-    );
+function firstEnabledHref(item: SiteChromeNavItem): string {
+  if (item.href) {
+    return item.href;
   }
 
-  if (enabledChildren.length) {
-    return (
-      <div className="nav-dropdown-branch" key={child.id}>
-        <button className="nav-dropdown-branch-trigger" type="button">
-          <strong>{child.label}</strong>
-          <em aria-hidden="true">›</em>
-        </button>
-        <div className="nav-submenu">
-          {enabledChildren.map((nestedChild) => renderNavChild(nestedChild, onNavigate))}
-        </div>
-      </div>
-    );
+  for (const child of item.children) {
+    if (!child.enabled) {
+      continue;
+    }
+
+    const href = firstEnabledHref(child);
+    if (href) {
+      return href;
+    }
   }
 
-  if (!child.href) {
-    return (
-      <div className="nav-dropdown-static" key={child.id}>
-        <strong>{child.label}</strong>
-      </div>
-    );
-  }
-
-  return (
-    <Link href={child.href} key={child.id} onClick={onNavigate}>
-      <strong>{child.label}</strong>
-    </Link>
-  );
+  return "/";
 }
 
 export function SiteNav({ config: initialConfig }: { config: SiteChromeConfig }) {
   const [config, setConfig] = useState(initialConfig);
-  const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [canAccessAdmin, setCanAccessAdmin] = useState(false);
   const navStyle: SiteNavStyle = {
     "--brand-mark-size": `${config.brand.markFontSize}px`,
@@ -198,53 +172,13 @@ export function SiteNav({ config: initialConfig }: { config: SiteChromeConfig })
       </div>
 
       <nav className="nav-main" aria-label="主导航">
-        {navItems.map((item) => {
-          const isOpen = openMenu === item.id;
-          const enabledChildren = item.children.filter((child) => child.enabled);
-          const hasDropdown = Boolean(enabledChildren.length);
-
-          if (!hasDropdown && item.href) {
-            return (
-              <div className="nav-menu" key={item.id}>
-                <Link className="nav-tab nav-link-tab" href={item.href}>
-                  {item.label}
-                </Link>
-              </div>
-            );
-          }
-
-          return (
-            <div
-              className={`nav-menu ${item.dropdownAlign === "left" ? "open-left" : ""}`}
-              key={item.id}
-              onMouseEnter={() => setOpenMenu(item.id)}
-              onMouseLeave={() => setOpenMenu(null)}
-            >
-              <button
-                aria-expanded={isOpen}
-                className={`nav-tab ${isOpen ? "active" : ""}`}
-                type="button"
-                onKeyDown={(event) => {
-                  if (event.key === "Escape") {
-                    setOpenMenu(null);
-                  }
-                }}
-                onClick={() => setOpenMenu(isOpen ? null : item.id)}
-              >
-                {item.label}
-                <span className="nav-caret">{isOpen ? "▲" : "▼"}</span>
-              </button>
-              <div className={`nav-dropdown ${isOpen ? "open" : ""}`}>
-                {item.note ? <div className="nav-dropdown-note">{item.note}</div> : null}
-                <div className="nav-dropdown-grid">
-                  {enabledChildren.map((child) =>
-                    renderNavChild(child, () => setOpenMenu(null)),
-                  )}
-                </div>
-              </div>
-            </div>
-          );
-        })}
+        {navItems.map((item) => (
+          <div className="nav-menu" key={item.id}>
+            <Link className="nav-tab nav-link-tab" href={firstEnabledHref(item)}>
+              {item.label}
+            </Link>
+          </div>
+        ))}
       </nav>
     </header>
   );

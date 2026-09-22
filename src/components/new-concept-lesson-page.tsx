@@ -179,32 +179,8 @@ function LessonVocabulary({ vocabulary }: { vocabulary: NewConceptVocabularyItem
   );
 }
 
-function escapeNewConceptRegExp(value: string) {
-  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-}
-
-function renderNewConceptArticleEnglish(text: string, vocabulary: NewConceptVocabularyItem[]) {
-  const terms = [...new Set(
-    vocabulary
-      .map((item) => item.word.trim())
-      .filter((word) => /[A-Za-z]/.test(word)),
-  )].sort((left, right) => right.length - left.length);
-  const normalizedTerms = new Set(terms.map((term) => term.toLowerCase().replace(/’/g, "'")));
-  const pattern = terms.length
-    ? new RegExp(
-        `(${terms.map((term) => `(?<![A-Za-z])${escapeNewConceptRegExp(term)}(?![A-Za-z])`).join("|")})`,
-        "gi",
-      )
-    : null;
-
-  return (pattern ? text.split(pattern) : [text]).map((part, index) => {
-    const isVocabularyTerm = normalizedTerms.has(part.toLowerCase().replace(/’/g, "'"));
-    return isVocabularyTerm ? (
-      <span className="bbc-vocabulary-highlight" key={`${text}-${index}`}>{part}</span>
-    ) : (
-      <span key={`${text}-${index}`}>{part}</span>
-    );
-  });
+function renderNewConceptArticleEnglish(text: string) {
+  return <span>{text}</span>;
 }
 
 function getNewConceptArticleTextBlocks(lesson: NewConceptLesson) {
@@ -233,12 +209,10 @@ function NewConceptArticleCopy({
   displayMode,
   isOriginalVisible,
   lesson,
-  vocabulary,
 }: {
   displayMode: OriginalDisplayMode;
   isOriginalVisible: boolean;
   lesson: NewConceptLesson;
-  vocabulary: NewConceptVocabularyItem[];
 }) {
   if (!isOriginalVisible) {
     return null;
@@ -254,7 +228,7 @@ function NewConceptArticleCopy({
         return (
           <div className="bbc-original-text-block" key={`${lesson.id}-article-line-${index}`}>
             {displayMode !== "chinese" ? (
-              <p lang="en">{renderNewConceptArticleEnglish(english, vocabulary)}</p>
+              <p lang="en">{renderNewConceptArticleEnglish(english)}</p>
             ) : null}
             {displayMode !== "english" && chinese ? (
               <p className="bbc-original-chinese" lang="zh-CN">{chinese}</p>
@@ -723,7 +697,6 @@ export function NewConceptLessonPage({
               displayMode={displayMode}
               isOriginalVisible={isOriginalVisible}
               lesson={lesson}
-              vocabulary={vocabulary}
             />
           </section>
           {isVocabularyVisible && vocabulary.length ? <LessonVocabulary vocabulary={vocabulary} /> : null}

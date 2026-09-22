@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
 import type { ManagedPageContent } from "@/lib/content/page-content";
 
 export type BbcArticleListGroup = {
@@ -15,18 +14,14 @@ export type BbcArticleListGroup = {
 
 export function ArticlesHome({
   content,
+  selectedYear,
   yearGroups,
 }: {
   content: ManagedPageContent;
+  selectedYear: number;
   yearGroups: BbcArticleListGroup[];
 }) {
-  const [openYears, setOpenYears] = useState<number[]>([]);
-
-  function toggleYear(year: number) {
-    setOpenYears((current) =>
-      current.includes(year) ? current.filter((item) => item !== year) : [...current, year],
-    );
-  }
+  const activeGroup = yearGroups.find((group) => group.year === selectedYear) ?? yearGroups[0];
 
   return (
     <section className="stack bbc-home-page">
@@ -36,43 +31,42 @@ export function ArticlesHome({
         {content.summary ? <p className="lead">{content.summary}</p> : null}
       </div>
 
-      <div className="bbc-year-panel">
+      <div className="bbc-year-panel bbc-year-browser">
         <div className="bbc-year-list">
-          {yearGroups.map((group) => {
-            const isOpen = openYears.includes(group.year);
-
-            return (
-              <div className="bbc-year-item" key={group.year}>
-                <button
-                  aria-expanded={isOpen}
-                  className="bbc-year-banner"
-                  type="button"
-                  onClick={() => toggleYear(group.year)}
-                >
-                  <span>{group.year}</span>
-                  <i>{isOpen ? "▾" : "▸"}</i>
-                </button>
-                <div className="bbc-article-list">
-                  {isOpen
-                    ? group.articles.map((article) => (
-                        <Link
-                          className="bbc-article-card"
-                          href={`/articles/${article.id}`}
-                          key={article.id}
-                        >
-                          <strong>
-                            {article.id}-{article.title}
-                            {article.titleChinese ? ` ${article.titleChinese}` : ""}
-                          </strong>
-                        </Link>
-                      ))
-                    : null}
-                </div>
-              </div>
-            );
-          })}
+          {yearGroups.map((group) => (
+            <Link
+              aria-current={group.year === activeGroup?.year ? "page" : undefined}
+              className={`bbc-year-banner ${group.year === activeGroup?.year ? "active" : ""}`}
+              href={`/articles?year=${group.year}`}
+              key={group.year}
+            >
+              <span>{group.year}</span>
+              <i>›</i>
+            </Link>
+          ))}
         </div>
-      </div>
+
+        <section className="bbc-selected-year" aria-label={`${activeGroup?.year ?? selectedYear} 年文章`}>
+          <header>
+            <strong>{activeGroup?.year ?? selectedYear}</strong>
+            <span>文章列表</span>
+          </header>
+          <div className="bbc-article-list">
+            {activeGroup?.articles.map((article) => (
+              <Link
+                className="bbc-article-card"
+                href={`/articles/${article.id}`}
+                key={article.id}
+              >
+                <strong>
+                  {article.id}-{article.title}
+                  {article.titleChinese ? ` ${article.titleChinese}` : ""}
+                </strong>
+              </Link>
+            ))}
+          </div>
+        </section>
+        </div>
     </section>
   );
 }
