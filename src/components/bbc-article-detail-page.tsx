@@ -1237,7 +1237,7 @@ export default function ArticleDetailPage({ article }: ArticlePageProps) {
             <div className="bbc-full-audio">
               <AudioPlayer
                 hasSelectedRate
-                html5={false}
+                html5
                 onPlayingChange={handleFullAudioPlayingChange}
                 onSettingsChange={updateAudioSettings}
                 onTimeChange={setFullAudioPosition}
@@ -1522,7 +1522,7 @@ export default function ArticleDetailPage({ article }: ArticlePageProps) {
                     autoPlaySignal={sentenceAutoPlaySignals[sentence.sentenceNo] ?? 0}
                     deferSentenceLoop={audioSettings.speakingMode !== "none"}
                     hasSelectedRate
-                    html5={false}
+                    html5
                     onEnded={() => handleSentenceEnded(sentence)}
                     onPlayingChange={(isPlaying) =>
                       handleSentencePlayingChange(sentence.sentenceNo, isPlaying)
