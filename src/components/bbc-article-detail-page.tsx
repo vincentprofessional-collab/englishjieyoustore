@@ -1453,6 +1453,7 @@ export default function ArticleDetailPage({ article }: ArticlePageProps) {
                     deferSentenceLoop={audioSettings.speakingMode !== "none"}
                     hasSelectedRate
                     html5
+                    preload={false}
                     onEnded={() => handleSentenceEnded(sentence)}
                     onPlayingChange={(isPlaying) =>
                       handleSentencePlayingChange(sentence.sentenceNo, isPlaying)

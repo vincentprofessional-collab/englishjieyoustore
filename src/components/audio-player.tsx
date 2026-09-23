@@ -35,6 +35,7 @@ type AudioPlayerProps = {
   deferSentenceLoop?: boolean;
   hasSelectedRate?: boolean;
   html5?: boolean;
+  preload?: boolean;
   loopSegment?: { endSeconds: number; startSeconds: number } | null;
   onDurationChange?: (durationSeconds: number) => void;
   onEnded?: () => void;
@@ -162,6 +163,7 @@ export function AudioPlayer({
   deferSentenceLoop = false,
   hasSelectedRate,
   html5 = true,
+  preload = true,
   loopSegment = null,
   onDurationChange,
   onEnded,
@@ -268,6 +270,7 @@ export function AudioPlayer({
     const sound = new Howl({
       src: [src],
       html5,
+      preload,
       rate: playerSettings.rate,
       volume: 1,
       onload: () => {
@@ -406,7 +409,7 @@ export function AudioPlayer({
       }
       sound.unload();
     };
-  }, [html5, src]);
+  }, [html5, preload, src]);
 
   useEffect(() => {
     const sound = soundRef.current;
