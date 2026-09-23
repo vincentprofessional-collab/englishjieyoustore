@@ -42,8 +42,11 @@ type ActivityEventRow = {
 type AnalyticsState = {
   adminUserIds: string[];
   anonymousPageViewCount: number;
+  anonymousMetricsAvailable: boolean;
   anonymousSessionCount: number;
   eventRows: ActivityEventRow[];
+  ipVisitorMetricsAvailable: boolean;
+  ipVisitorMetrics: IpVisitorMetricsRow | null;
   profileCount: number;
   registeredToday: number;
   profileRows: ProfileRow[];
@@ -53,8 +56,11 @@ type AnalyticsState = {
 const initialAnalyticsState: AnalyticsState = {
   adminUserIds: [],
   anonymousPageViewCount: 0,
+  anonymousMetricsAvailable: false,
   anonymousSessionCount: 0,
   eventRows: [],
+  ipVisitorMetricsAvailable: false,
+  ipVisitorMetrics: null,
   profileCount: 0,
   registeredToday: 0,
   profileRows: [],
@@ -119,12 +125,21 @@ type AnonymousMetricsRow = {
   anonymous_visitors_total?: number;
 };
 
-function uniqueVisitorKey(row: {
+type IpVisitorMetricsRow = {
+  first_time_visitors_today?: number;
+  returning_anonymous_visitors_today?: number;
+  returning_registered_visitors_today?: number;
+  returning_visitors_today?: number;
+  visitors_today?: number;
+};
+
+function ipVisitorKey(row: {
   session_id?: string | null;
   user_id: string | null;
   visitor_key?: string | null;
+  ip_hash?: string | null;
 }) {
-  return row.user_id ?? row.visitor_key ?? row.session_id ?? "";
+  return row.ip_hash ?? row.visitor_key ?? row.session_id ?? "";
 }
 
 function isModelAnswerPath(path: string) {
@@ -249,6 +264,7 @@ export function AdminAnalyticsPanel() {
       anonymousSessionsResult,
       anonymousPageViewsResult,
       anonymousMetricsResult,
+      ipVisitorMetricsResult,
       registeredTodayResult,
     ] = await Promise.all([
       supabase.from("profiles").select("id").eq("role", "admin"),
@@ -273,6 +289,7 @@ export function AdminAnalyticsPanel() {
         .eq("event_type", "page_view")
         .is("user_id", null),
       supabase.rpc("get_admin_anonymous_visitor_metrics"),
+      supabase.rpc("get_admin_ip_visitor_metrics"),
       supabase
         .from("profiles")
         .select("id", { count: "exact", head: true })
@@ -290,8 +307,16 @@ export function AdminAnalyticsPanel() {
       anonymousPageViewsResult.error ??
       registeredTodayResult.error;
 
-    if (firstError) {
-      const firstErrorMessage = firstError.message ?? "未知错误";
+    const ipVisitorMetricsError = ipVisitorMetricsResult.error;
+    const isMissingIpVisitorMetrics = Boolean(
+      ipVisitorMetricsError &&
+        (ipVisitorMetricsError.code === "42883" ||
+          ipVisitorMetricsError.message?.includes("get_admin_ip_visitor_metrics")),
+    );
+
+    if (firstError || (ipVisitorMetricsError && !isMissingIpVisitorMetrics)) {
+      const analyticsError = firstError ?? ipVisitorMetricsError;
+      const firstErrorMessage = analyticsError?.message ?? "未知错误";
       setMessage(
         firstErrorMessage.includes("site_activity") ||
           firstErrorMessage.includes("visitor_key")
@@ -312,11 +337,16 @@ export function AdminAnalyticsPanel() {
         anonymousMetrics?.anonymous_page_views_total,
         anonymousPageViewsResult.count ?? 0,
       ),
+      anonymousMetricsAvailable: Boolean(anonymousMetrics && !anonymousMetricsResult.error),
+      ipVisitorMetrics: Array.isArray(ipVisitorMetricsResult.data)
+        ? (ipVisitorMetricsResult.data[0] as IpVisitorMetricsRow | undefined) ?? null
+        : null,
       anonymousSessionCount: readMetricValue(
         anonymousMetrics?.anonymous_visitors_total,
         anonymousSessionsResult.count ?? 0,
       ),
       eventRows: (eventsResult.data ?? []) as ActivityEventRow[],
+      ipVisitorMetricsAvailable: !isMissingIpVisitorMetrics,
       profileCount: profilesResult.count ?? profilesResult.data?.length ?? 0,
       registeredToday: registeredTodayResult.count ?? 0,
       profileRows: (profilesResult.data ?? []) as ProfileRow[],
@@ -357,11 +387,11 @@ export function AdminAnalyticsPanel() {
         .map((event) => event.user_id)
         .filter(Boolean),
     );
-    const todayVisitorKeys = new Set(todayPageViewEvents.map(uniqueVisitorKey).filter(Boolean));
+    const todayVisitorKeys = new Set(todayPageViewEvents.map(ipVisitorKey).filter(Boolean));
     const firstSeenByVisitor = new Map<string, number>();
 
     pageViewEvents.forEach((event) => {
-      const visitorKey = uniqueVisitorKey(event);
+      const visitorKey = ipVisitorKey(event);
       const timestamp = new Date(event.created_at).getTime();
 
       if (!visitorKey || !Number.isFinite(timestamp)) {
@@ -377,25 +407,34 @@ export function AdminAnalyticsPanel() {
 
     const firstTimeVisitorKeys = new Set(
       todayPageViewEvents
-        .map(uniqueVisitorKey)
+        .map(ipVisitorKey)
         .filter((visitorKey) => visitorKey && firstSeenByVisitor.get(visitorKey) !== undefined)
         .filter((visitorKey) => (firstSeenByVisitor.get(visitorKey) ?? 0) >= today.getTime()),
     );
-    const todayAnonymousVisitorKeys = new Set(
-      todayPageViewEvents
-        .filter((event) => !event.user_id)
-        .map(uniqueVisitorKey)
-        .filter(Boolean),
-    );
-    const returningAnonymousVisitorKeys = new Set(
-      [...todayAnonymousVisitorKeys].filter((visitorKey) => {
+    const returningVisitorKeys = new Set(
+      [...todayVisitorKeys].filter((visitorKey) => {
         const firstSeen = firstSeenByVisitor.get(visitorKey);
         return firstSeen !== undefined && firstSeen < today.getTime();
       }),
     );
-    const registeredVisitorsToday = new Set(
+    const registeredVisitorKeysToday = new Set(
+      todayPageViewEvents
+        .filter((event) => Boolean(event.user_id))
+        .map(ipVisitorKey)
+        .filter(Boolean),
+    );
+    const registeredAccountsToday = new Set(
       todayPageViewEvents.map((event) => event.user_id).filter(Boolean),
     );
+    const returningRegisteredVisitorKeys = new Set(
+      [...returningVisitorKeys].filter((visitorKey) => registeredVisitorKeysToday.has(visitorKey)),
+    );
+    const returningAnonymousVisitorKeys = new Set(
+      [...returningVisitorKeys].filter(
+        (visitorKey) => !registeredVisitorKeysToday.has(visitorKey),
+      ),
+    );
+    const serverIpMetrics = analytics.ipVisitorMetrics;
     const activeNow = sessionRows.filter((session) =>
       isAfter(session.last_seen_at, fiveMinutesAgo),
     );
@@ -481,18 +520,32 @@ export function AdminAnalyticsPanel() {
       activeNow: activeNow.length,
       averageDuration,
       pageViewsToday: todayPageViewEvents.length,
-      firstTimeVisitorsToday: firstTimeVisitorKeys.size,
       loginUsersToday: todayLoginUsers.size,
+      firstTimeVisitorsToday: readMetricValue(
+        serverIpMetrics?.first_time_visitors_today,
+        firstTimeVisitorKeys.size,
+      ),
       modelAnswerPage: modelAnswerPage ? toPageStat(modelAnswerPage) : null,
       popularPages,
       registeredAverageDuration: averageDurationForSessions(registeredSessions),
       registeredAveragePageViews: averagePageViewsForSessions(registeredSessions),
       registeredToday: analytics.registeredToday,
-      registeredVisitorsToday: registeredVisitorsToday.size,
+      registeredVisitorsToday: readMetricValue(
+        serverIpMetrics?.returning_registered_visitors_today,
+        returningRegisteredVisitorKeys.size,
+      ),
+      registeredAccountsToday: registeredAccountsToday.size,
       anonymousAverageDuration: averageDurationForSessions(anonymousSessions),
       anonymousAveragePageViews: averagePageViewsForSessions(anonymousSessions),
-      returningAnonymousVisitorsToday: returningAnonymousVisitorKeys.size,
-      visitorsToday: todayVisitorKeys.size,
+      returningAnonymousVisitorsToday: readMetricValue(
+        serverIpMetrics?.returning_anonymous_visitors_today,
+        returningAnonymousVisitorKeys.size,
+      ),
+      returningVisitorsToday: readMetricValue(
+        serverIpMetrics?.returning_visitors_today,
+        returningVisitorKeys.size,
+      ),
+      visitorsToday: readMetricValue(serverIpMetrics?.visitors_today, todayVisitorKeys.size),
     };
   }, [analytics]);
 
@@ -533,9 +586,13 @@ export function AdminAnalyticsPanel() {
               <small>不含管理员，以 profiles 表为准</small>
             </div>
             <div>
-              <span>累计匿名访客标识</span>
+              <span>{analytics.anonymousMetricsAvailable ? "累计匿名访客标识" : "累计匿名会话记录"}</span>
               <strong>{analytics.anonymousSessionCount}</strong>
-              <small>按 IP 哈希或浏览器会话去重，不等于自然人数</small>
+              <small>
+                {analytics.anonymousMetricsAvailable
+                  ? "按 IP 哈希或访客字段去重，不等于自然人数"
+                  : "匿名 session 表行数，未按访客去重"}
+              </small>
             </div>
             <div>
               <span>匿名页面浏览量</span>
@@ -548,13 +605,22 @@ export function AdminAnalyticsPanel() {
         <section className="admin-analytics-group">
           <header className="admin-analytics-group-heading">
             <h3>今日访客行为</h3>
-            <span>上海时区；访客按账号/IP 标识估算；事件最多读取最近 50,000 条</span>
+            <span>
+              {analytics.ipVisitorMetricsAvailable
+                ? "上海时区；IP 按全历史 page_view 汇总；页面和登录明细最多读取近 50,000 条事件"
+                : "上海时区；页面、登录与访客标识按近 50,000 条事件估算，标识可能退化为会话去重"}
+            </span>
           </header>
-          <div className="admin-stat-grid admin-analytics-stat-row-5">
+          <div className="admin-stat-grid admin-analytics-stat-row-6">
             <div>
-              <span>今日识别访客</span>
+              <span>{analytics.ipVisitorMetricsAvailable ? "今日识别 IP" : "今日访客标识估算"}</span>
               <strong>{metrics.visitorsToday}</strong>
-              <small>账号 ID 与匿名 IP / 会话标识去重</small>
+              <small>{analytics.ipVisitorMetricsAvailable ? "共享网络会合并多人" : "数据不等于自然人数"}</small>
+            </div>
+            <div>
+              <span>{analytics.ipVisitorMetricsAvailable ? "今日 IP 回访" : "今日历史标识回访估算"}</span>
+              <strong>{metrics.returningVisitorsToday}</strong>
+              <small>历史已有记录且今天再次访问</small>
             </div>
             <div>
               <span>今日登录账号</span>
@@ -563,13 +629,18 @@ export function AdminAnalyticsPanel() {
             </div>
             <div>
               <span>今日有访问的注册账号</span>
-              <strong>{metrics.registeredVisitorsToday}</strong>
+              <strong>{metrics.registeredAccountsToday}</strong>
               <small>今日 page_view 中已识别到的账号</small>
             </div>
             <div>
-              <span>今日匿名 IP 回访</span>
+              <span>{analytics.ipVisitorMetricsAvailable ? "今日注册账号 IP 回访" : "今日注册账号关联回访估算"}</span>
+              <strong>{metrics.registeredVisitorsToday}</strong>
+              <small>回访标识的页面访问中出现已登录账号</small>
+            </div>
+            <div>
+              <span>{analytics.ipVisitorMetricsAvailable ? "今日匿名 IP 回访" : "今日未关联账号回访估算"}</span>
               <strong>{metrics.returningAnonymousVisitorsToday}</strong>
-              <small>历史已有记录且今天再次访问的匿名标识</small>
+              <small>回访标识的页面访问中未识别到账号</small>
             </div>
             <div>
               <span>今日注册账号</span>
@@ -577,9 +648,9 @@ export function AdminAnalyticsPanel() {
               <small>profiles 创建时间，上海时区</small>
             </div>
             <div>
-              <span>今日首次识别标识</span>
+              <span>{analytics.ipVisitorMetricsAvailable ? "今日首次识别 IP" : "今日首次识别标识估算"}</span>
               <strong>{metrics.firstTimeVisitorsToday}</strong>
-              <small>最多读取最近 50,000 条事件</small>
+              <small>{analytics.ipVisitorMetricsAvailable ? "按现存 IP 历史记录判断" : "受最多 50,000 条近期事件限制"}</small>
             </div>
             <div>
               <span>今日页面浏览量</span>
@@ -680,7 +751,9 @@ export function AdminAnalyticsPanel() {
             )}
           </div>
           <p className="admin-card-note">
-            IP 哈希或访客字段可用时按该标识去重；字段缺失时按匿名浏览器会话兜底。共享网络可能把多人合并。
+            {analytics.anonymousMetricsAvailable
+              ? "IP 哈希或访客字段可用时按该标识去重；共享网络可能把多人合并。"
+              : "匿名统计汇总函数不可用时，顶部显示匿名 session 行数，可能重复计算同一访客。"}
             修复前缺失账号 ID 的历史记录无法还原，匿名累计数可能包含当时已登录的用户。累计匿名浏览 {analytics.anonymousPageViewCount} 次。
           </p>
         </section>
@@ -688,7 +761,7 @@ export function AdminAnalyticsPanel() {
         <section className="admin-editor-card">
           <header className="admin-compact-heading">
             <h3>热门页面</h3>
-            <span>最近 7 天 · 页面浏览量</span>
+            <span>最近 7 天 · 最多读取 50,000 条事件</span>
           </header>
           <div className="admin-table">
             {metrics.popularPages.length ? (

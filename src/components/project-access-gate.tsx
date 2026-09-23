@@ -7,6 +7,7 @@ type ProjectAccessGateProps = {
   children: ReactNode;
   contentKey: string;
   description?: string;
+  freePreviewLimit?: number;
   projectKey: ProjectAccessKey;
   title?: string;
 };
@@ -15,10 +16,11 @@ export async function ProjectAccessGate({
   children,
   contentKey,
   description,
+  freePreviewLimit,
   projectKey,
   title,
 }: ProjectAccessGateProps) {
-  const canAccess = await claimPaidContentAccess(projectKey, contentKey);
+  const canAccess = await claimPaidContentAccess(projectKey, contentKey, freePreviewLimit);
 
   if (canAccess) {
     return <>{children}</>;

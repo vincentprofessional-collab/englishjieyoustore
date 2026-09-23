@@ -1,9 +1,7 @@
 import { notFound } from "next/navigation";
 import { ListeningPractice } from "@/components/listening-practice";
-import { ListeningContentAdminEditor } from "@/components/listening-content-admin-editor";
 import { getListeningSection } from "@/lib/ielts/listening";
 import { getVocabularyHintsForTexts } from "@/lib/vocabulary/local-vocabulary";
-import { isCurrentUserAdmin } from "@/lib/supabase/is-current-user-admin";
 
 export const dynamic = "force-dynamic";
 
@@ -16,8 +14,7 @@ export default async function ListeningSectionPage({
 }) {
   const { sectionId } = await params;
   const { attempt, mode, review } = await searchParams;
-  const isAdmin = await isCurrentUserAdmin();
-  const { section, error } = await getListeningSection(sectionId, { includeDrafts: isAdmin });
+  const { section, error } = await getListeningSection(sectionId);
 
   if (error) {
     return (
@@ -37,7 +34,7 @@ export default async function ListeningSectionPage({
     section.partLinks.map((partLink) =>
       partLink.id === section.id
         ? Promise.resolve({ section, error: null })
-        : getListeningSection(partLink.id, { includeDrafts: isAdmin }),
+        : getListeningSection(partLink.id),
     ),
   );
   const testSections = siblingResults
@@ -56,17 +53,14 @@ export default async function ListeningSectionPage({
   const initialSubmitted = !isTranscriptOnlySection && review === "1";
 
   return (
-    <>
-      {isAdmin ? <ListeningContentAdminEditor initialSection={section} /> : null}
-      <ListeningPractice
-        key={`${section.id}:${normalizedMode}:${initialSubmitted ? "review" : "answer"}`}
-        initialAttemptId={attempt}
-        initialSubmitted={initialSubmitted}
-        initialMode={normalizedMode}
-        section={section}
-        testSections={testSections}
-        vocabularyHints={vocabularyHints}
-      />
-    </>
+    <ListeningPractice
+      key={`${section.id}:${normalizedMode}:${initialSubmitted ? "review" : "answer"}`}
+      initialAttemptId={attempt}
+      initialSubmitted={initialSubmitted}
+      initialMode={normalizedMode}
+      section={section}
+      testSections={testSections}
+      vocabularyHints={vocabularyHints}
+    />
   );
 }

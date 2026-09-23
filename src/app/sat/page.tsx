@@ -6,11 +6,6 @@ export const metadata: Metadata = {
   description: "SAT 题组练习。",
 };
 
-export default async function SatPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ view?: string }>;
-}) {
-  const { view } = await searchParams;
-  return <SatHome view={view === "types" || view === "papers" ? view : "knowledge"} />;
+export default function SatPage() {
+  return <SatHome />;
 }

@@ -262,9 +262,11 @@ function NavItemEditor({
           >
             ↓
           </button>
-          <button type="button" onClick={() => onAddChild(path)}>
-            增加下级
-          </button>
+          {depth < 2 ? (
+            <button type="button" onClick={() => onAddChild(path)}>
+              增加下级
+            </button>
+          ) : null}
           <button className="admin-delete-module" type="button" onClick={() => onRemove(path)}>
             删除
           </button>

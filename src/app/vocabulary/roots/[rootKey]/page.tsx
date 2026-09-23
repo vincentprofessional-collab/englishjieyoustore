@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ProjectAccessGate } from "@/components/project-access-gate";
-import { getPaidContentKey } from "@/lib/access-control";
+import { getPaidContentKey, isFreeVocabularyEtymology } from "@/lib/access-control";
 import { VocabularyDirectoryPronunciation } from "@/components/vocabulary-directory-pronunciation";
 import { getVocabularyRootDirectory } from "@/lib/vocabulary/local-vocabulary";
 
@@ -9,10 +9,13 @@ export const dynamic = "force-dynamic";
 
 export default async function VocabularyRootPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ rootKey: string }>;
+  searchParams: Promise<{ from?: string; sourceKey?: string }>;
 }) {
   const { rootKey } = await params;
+  const { from, sourceKey } = await searchParams;
   const directory = getVocabularyRootDirectory(decodeURIComponent(rootKey));
 
   if (!directory) {
@@ -20,11 +23,14 @@ export default async function VocabularyRootPage({
   }
 
   const totalWords = directory.groups.reduce((total, group) => total + group.entries.length, 0);
+  const backHref = from === "lookup" && sourceKey
+    ? `/vocabulary/etymologies/${encodeURIComponent(sourceKey)}`
+    : "/vocabulary";
 
   return (
     <section className="stack vocabulary-etymology-page vocabulary-root-page">
       <div className="root-page-head">
-        <Link className="back-link" href="/vocabulary">
+        <Link className="back-link" href={backHref}>
           ← 返回
         </Link>
         <div className="etymology-title-row">
@@ -36,11 +42,7 @@ export default async function VocabularyRootPage({
         </div>
       </div>
 
-      <ProjectAccessGate
-        contentKey={getPaidContentKey("vocabulary-root", rootKey)}
-        projectKey="vocabulary.etymology"
-        title="词源词根目录需要单独开通"
-      >
+      {isFreeVocabularyEtymology(decodeURIComponent(rootKey)) ? (
         <section className="etymology-hierarchy-panel" aria-label="词源词根词汇层级">
           {directory.groups.map((group) => (
             <article
@@ -85,7 +87,59 @@ export default async function VocabularyRootPage({
             </article>
           ))}
         </section>
-      </ProjectAccessGate>
+      ) : (
+        <ProjectAccessGate
+          contentKey={getPaidContentKey("vocabulary-root", rootKey)}
+          freePreviewLimit={0}
+          projectKey="vocabulary.etymology"
+          title="词源词根目录需要单独开通"
+        >
+          <section className="etymology-hierarchy-panel" aria-label="词源词根词汇层级">
+            {directory.groups.map((group) => (
+              <article
+                className={`${group.rootKey === "ungrouped" ? "ungrouped" : ""} ${
+                  group.rootKey === directory.selectedRootKey ? "active" : ""
+                }`}
+                id={`root-${group.rootKey}`}
+                key={group.rootKey}
+              >
+                <h2>
+                  <span className="etymology-root-label">
+                    {group.rootKey === "ungrouped" ? "二级关系" : "二级词根"}
+                  </span>
+                  <strong>{group.rootKey === "ungrouped" ? "直接来自词源（未分词根）" : group.rootLabel}</strong>
+                  <em>
+                    <b className="stat-number">{group.entries.length}</b> 个同根词
+                  </em>
+                </h2>
+                <div className="etymology-word-panel">
+                  {group.entries.map((entry) => (
+                    <div className="etymology-word-row" key={entry.normalizedWord}>
+                      <Link
+                        className="etymology-word-term"
+                        href={`/vocabulary/${encodeURIComponent(entry.normalizedWord)}`}
+                      >
+                        {entry.word}
+                      </Link>
+                      <VocabularyDirectoryPronunciation
+                        ukAudioUrl={entry.ukAudioUrl}
+                        ukPhonetic={entry.ukPhonetic}
+                        usAudioUrl={entry.usAudioUrl}
+                        usPhonetic={entry.usPhonetic}
+                        word={entry.word}
+                      />
+                      <span className="etymology-word-level">{entry.level || ""}</span>
+                      <small className="etymology-word-definition">
+                        <span>{entry.definitionLines[0] ?? entry.definitionCn}</span>
+                      </small>
+                    </div>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </section>
+        </ProjectAccessGate>
+      )}
     </section>
   );
 }

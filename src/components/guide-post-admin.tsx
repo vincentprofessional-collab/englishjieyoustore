@@ -5,18 +5,9 @@ import {
   createGuideBlock,
   GuideBlockType,
   GuideContentBlock,
-  GuideMenuPlacement,
   GuidePostRow,
   parseGuidePostRow,
 } from "@/lib/guide/posts";
-import {
-  cloneSiteChromeConfig,
-  DEFAULT_SITE_CHROME_CONFIG,
-  mergeSiteChromeConfig,
-  type SiteChromeConfig,
-} from "@/lib/content/site-chrome";
-import { guidePostMenuPlacementOptions } from "@/lib/content/guide-post-navigation";
-import { getPaidPageContentSlug } from "@/lib/access-control";
 import { uploadAdminImage } from "@/lib/admin/upload-image";
 import { supabase } from "@/lib/supabase/client";
 import { uploadAdminAudio } from "@/lib/admin/upload-audio";
@@ -24,8 +15,6 @@ import { uploadAdminVideo } from "@/lib/admin/upload-video";
 
 type GuidePostAdminProps = {
   adminUserId: string;
-  projectKey?: string;
-  projectTitle?: string;
 };
 
 type AdminGuidePostRow = GuidePostRow & {
@@ -38,7 +27,6 @@ type GuideDraft = {
   blocks: GuideContentBlock[];
   excerpt: string;
   id: string | null;
-  menuPlacement: GuideMenuPlacement | null;
   publishedAt: string | null;
   slug: string | null;
   status: AdminGuidePostRow["status"];
@@ -68,7 +56,6 @@ const EMPTY_DRAFT: GuideDraft = {
   blocks: [createGuideBlock()],
   excerpt: "",
   id: null,
-  menuPlacement: null,
   publishedAt: null,
   slug: null,
   status: "draft",
@@ -99,7 +86,6 @@ function rowToDraft(row: AdminGuidePostRow): GuideDraft {
     blocks: post.blocks.map((block) => ({ ...block })),
     excerpt: post.excerpt,
     id: row.id,
-    menuPlacement: post.menuPlacement ?? null,
     publishedAt: row.published_at,
     slug: row.slug,
     status: row.status,
@@ -113,10 +99,6 @@ function firstText(blocks: GuideContentBlock[]) {
 
 function firstImage(blocks: GuideContentBlock[]) {
   return blocks.find((block) => block.type === "image" && block.url)?.url ?? null;
-}
-
-function menuPlacementKey(placement: GuideMenuPlacement | null) {
-  return placement ? `${placement.kind}:${placement.parentId ?? "top"}` : "";
 }
 
 const EDITOR_FONT_FAMILIES: Record<GuideContentBlock["fontFamily"], string> = {
@@ -270,17 +252,12 @@ function ResizableImagePreview({
   );
 }
 
-export function GuidePostAdmin({ adminUserId, projectKey, projectTitle }: GuidePostAdminProps) {
-  const isPaidPage = Boolean(projectKey);
-  const paidPageTitle = projectTitle?.trim() || "收费页面说明";
+export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
   const [draft, setDraft] = useState<GuideDraft>(createEmptyDraft);
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const [message, setMessage] = useState("");
   const [rows, setRows] = useState<AdminGuidePostRow[]>([]);
-  const [siteChromeConfig, setSiteChromeConfig] = useState<SiteChromeConfig>(() =>
-    cloneSiteChromeConfig(DEFAULT_SITE_CHROME_CONFIG),
-  );
   const [uploadingBlockId, setUploadingBlockId] = useState<string | null>(null);
   const [textCursorTarget, setTextCursorTarget] = useState<TextCursorTarget | null>(null);
   const [activeBlockId, setActiveBlockId] = useState<string | null>(null);
@@ -292,51 +269,24 @@ export function GuidePostAdmin({ adminUserId, projectKey, projectTitle }: GuideP
 
   useEffect(() => {
     void loadPosts();
-    void loadSiteChromeConfig();
   }, []);
-
-  async function getAdminAccessToken() {
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
-    return session?.access_token ?? null;
-  }
 
   async function loadPosts(preferredId?: string) {
     setIsLoading(true);
-    const accessToken = await getAdminAccessToken();
-    if (!accessToken) {
-      setMessage("管理员登录已失效，请重新登录。");
+    const { data, error } = await supabase
+      .from("managed_content_pages")
+      .select("id,slug,title,summary,status,meta_json,published_at,created_at,updated_at")
+      .like("slug", "guide-%")
+      .order("updated_at", { ascending: false });
+
+    if (error) {
+      setMessage(`无法读取帖子：${error.message}`);
       setIsLoading(false);
       return;
     }
 
-    const query = isPaidPage
-      ? `?scope=paid&projectKey=${encodeURIComponent(projectKey ?? "")}`
-      : "";
-    const response = await fetch(`/api/guide-posts${query}`, {
-      cache: "no-store",
-      headers: { Authorization: `Bearer ${accessToken}` },
-    });
-    const responseBody = (await response.json().catch(() => null)) as {
-      error?: string;
-      posts?: AdminGuidePostRow[];
-    } | null;
-
-    if (!response.ok) {
-      setMessage(`无法读取帖子：${responseBody?.error ?? "请稍后再试。"}`);
-      setIsLoading(false);
-      return;
-    }
-
-    const nextRows = responseBody?.posts ?? [];
+    const nextRows = (data ?? []) as AdminGuidePostRow[];
     setRows(nextRows);
-
-    if (isPaidPage && !nextRows.length) {
-      setDraft({ ...createEmptyDraft(), title: paidPageTitle });
-      setIsLoading(false);
-      return;
-    }
 
     const selectedRow =
       nextRows.find((row) => row.id === preferredId) ??
@@ -349,17 +299,8 @@ export function GuidePostAdmin({ adminUserId, projectKey, projectTitle }: GuideP
     setIsLoading(false);
   }
 
-  async function loadSiteChromeConfig() {
-    const { data } = await supabase
-      .from("managed_content_pages")
-      .select("meta_json")
-      .eq("slug", "site-chrome")
-      .maybeSingle();
-    setSiteChromeConfig(cloneSiteChromeConfig(mergeSiteChromeConfig(data?.meta_json)));
-  }
-
   function startNewPost() {
-    setDraft(isPaidPage ? { ...createEmptyDraft(), title: paidPageTitle } : createEmptyDraft());
+    setDraft(createEmptyDraft());
     setActiveBlockId(null);
     historyRef.current = [];
     futureRef.current = [];
@@ -810,9 +751,7 @@ export function GuidePostAdmin({ adminUserId, projectKey, projectTitle }: GuideP
     setIsSaving(true);
     setMessage("");
     const now = new Date().toISOString();
-    const slug = isPaidPage
-      ? getPaidPageContentSlug(projectKey ?? "")
-      : draft.slug ?? `guide-${Date.now().toString(36)}`;
+    const slug = draft.slug ?? `guide-${Date.now().toString(36)}`;
     const payload = {
       access_feature_key: null,
       cover_image_url: firstImage(draft.blocks),
@@ -823,7 +762,6 @@ export function GuidePostAdmin({ adminUserId, projectKey, projectTitle }: GuideP
         blocks: draft.blocks,
         excerpt,
         kind: "guide-post",
-        menuPlacement: draft.menuPlacement,
       },
       module: "site",
       published_at:
@@ -836,50 +774,43 @@ export function GuidePostAdmin({ adminUserId, projectKey, projectTitle }: GuideP
       updated_at: now,
     };
 
-    const accessToken = await getAdminAccessToken();
-    if (!accessToken) {
-      setMessage("管理员登录已失效，请重新登录。");
-      setIsSaving(false);
-      return;
+    let savedPostId = draft.id;
+
+    if (draft.id) {
+      const { count, error } = await supabase
+        .from("managed_content_pages")
+        .update(payload, { count: "exact" })
+        .eq("id", draft.id);
+
+      if (error) {
+        setMessage(`保存失败：${error.message}`);
+        setIsSaving(false);
+        return;
+      }
+
+      if (count === 0) {
+        setMessage("保存失败：没有找到当前帖子，请刷新后重试。");
+        setIsSaving(false);
+        return;
+      }
+    } else {
+      const { data, error } = await supabase
+        .from("managed_content_pages")
+        .insert(payload)
+        .select("id,slug,title,summary,status,meta_json,published_at,created_at,updated_at")
+        .maybeSingle();
+
+      if (error || !data) {
+        setMessage(`保存失败：${error?.message ?? "未返回帖子数据"}`);
+        setIsSaving(false);
+        return;
+      }
+
+      savedPostId = data.id;
     }
 
-    const response = await fetch("/api/guide-posts", {
-      body: JSON.stringify({
-        post: { ...payload, id: draft.id, menuPlacement: draft.menuPlacement },
-        projectKey: isPaidPage ? projectKey : undefined,
-        scope: isPaidPage ? "paid" : "guide",
-      }),
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-    });
-    const responseBody = (await response.json().catch(() => null)) as {
-      error?: string;
-      post?: AdminGuidePostRow;
-    } | null;
-
-    if (!response.ok || !responseBody?.post) {
-      setMessage(`保存失败：${responseBody?.error ?? "未返回帖子数据"}`);
-      setIsSaving(false);
-      return;
-    }
-
-    const placementLabel = draft.menuPlacement
-      ? guidePostMenuPlacementOptions(siteChromeConfig).find((option) =>
-          option.placement.kind === draft.menuPlacement?.kind &&
-          option.placement.parentId === draft.menuPlacement?.parentId,
-        )?.label
-      : "";
-    setMessage(
-      status === "published"
-        ? placementLabel
-          ? `帖子已发布，并已加入${placementLabel}。`
-          : "帖子已发布到首页。"
-        : "草稿已保存。",
-    );
-    await loadPosts(responseBody.post.id);
+    setMessage(status === "published" ? "帖子已发布到首页。" : "草稿已保存。");
+    await loadPosts(savedPostId ?? undefined);
     setIsSaving(false);
   }
 
@@ -899,34 +830,20 @@ export function GuidePostAdmin({ adminUserId, projectKey, projectTitle }: GuideP
     setIsSaving(true);
     setMessage("");
     const deletedId = draft.id;
-    const accessToken = await getAdminAccessToken();
-    if (!accessToken) {
-      setMessage("管理员登录已失效，请重新登录。");
-      setIsSaving(false);
-      return;
-    }
+    const { error } = await supabase
+      .from("managed_content_pages")
+      .delete()
+      .eq("id", deletedId);
 
-    const response = await fetch(`/api/guide-posts?id=${encodeURIComponent(deletedId)}`, {
-      headers: { Authorization: `Bearer ${accessToken}` },
-      method: "DELETE",
-    });
-    const responseBody = (await response.json().catch(() => null)) as { error?: string } | null;
-
-    if (!response.ok) {
-      setMessage(`删除失败：${responseBody?.error ?? "请稍后再试。"}`);
+    if (error) {
+      setMessage(`删除失败：${error.message}`);
       setIsSaving(false);
       return;
     }
 
     const remainingRows = rows.filter((row) => row.id !== deletedId);
     setRows(remainingRows);
-    setDraft(
-      remainingRows.length
-        ? rowToDraft(remainingRows[0])
-        : isPaidPage
-          ? { ...createEmptyDraft(), title: paidPageTitle }
-          : createEmptyDraft(),
-    );
+    setDraft(remainingRows.length ? rowToDraft(remainingRows[0]) : createEmptyDraft());
     setMessage("帖子已删除。");
     setIsSaving(false);
   }
@@ -937,24 +854,17 @@ export function GuidePostAdmin({ adminUserId, projectKey, projectTitle }: GuideP
     <section className="guide-admin">
       <header className="guide-admin-heading">
         <div>
-          <span>{isPaidPage ? "PAID PAGE CONTENT · 收费页内容" : "HOME POSTS · 首页发帖"}</span>
-          <h2>{isPaidPage ? `${paidPageTitle}前台内容` : "首页发帖后台"}</h2>
-          <p>
-            {isPaidPage
-              ? "内容默认隐藏；打开前台显示后，用户会在收费页面的套餐下方看到这里的正文。"
-              : "组合正文、链接、图片和视频区块；可仅发布到首页，也可自动加入顶部导航或左侧栏。"}
-          </p>
+          <span>HOME POSTS · 首页发帖</span>
+          <h2>首页发帖后台</h2>
+          <p>组合正文、链接、图片和视频区块，设置字体、字号与对齐方式后直接发布。</p>
         </div>
-        {!isPaidPage ? (
-          <button className="button secondary" onClick={startNewPost} type="button">
-            ＋ 新建帖子
-          </button>
-        ) : null}
+        <button className="button secondary" onClick={startNewPost} type="button">
+          ＋ 新建帖子
+        </button>
       </header>
 
       <div className="guide-admin-layout">
-        {!isPaidPage ? (
-          <aside className="guide-admin-posts">
+        <aside className="guide-admin-posts">
           <header>
             <strong>帖子</strong>
             <span>{rows.length}</span>
@@ -976,8 +886,7 @@ export function GuidePostAdmin({ adminUserId, projectKey, projectTitle }: GuideP
               <small>{row.updated_at ? new Date(row.updated_at).toLocaleDateString("zh-CN") : ""}</small>
             </button>
           ))}
-          </aside>
-        ) : null}
+        </aside>
 
         <div className="guide-admin-editor">
           <section className="guide-rich-editor">
@@ -1021,18 +930,14 @@ export function GuidePostAdmin({ adminUserId, projectKey, projectTitle }: GuideP
 
             <div className="guide-editor-workspace">
               <div className="guide-editor-paper">
-                {!isPaidPage ? (
-                  <>
-                    <label className="guide-editor-title-field">
-                      <input aria-label="文章标题" maxLength={64} onChange={(event) => setDraft((current) => ({ ...current, title: event.target.value }))} placeholder="请在这里输入标题" value={draft.title} />
-                      <span>{draft.title.length}/64</span>
-                    </label>
-                    <label className="guide-editor-author-field">
-                      <input aria-label="文章作者" maxLength={8} onChange={(event) => setDraft((current) => ({ ...current, author: event.target.value }))} placeholder="请输入作者" value={draft.author} />
-                      <span>{draft.author.length}/8</span>
-                    </label>
-                  </>
-                ) : null}
+                <label className="guide-editor-title-field">
+                  <input aria-label="文章标题" maxLength={64} onChange={(event) => setDraft((current) => ({ ...current, title: event.target.value }))} placeholder="请在这里输入标题" value={draft.title} />
+                  <span>{draft.title.length}/64</span>
+                </label>
+                <label className="guide-editor-author-field">
+                  <input aria-label="文章作者" maxLength={8} onChange={(event) => setDraft((current) => ({ ...current, author: event.target.value }))} placeholder="请输入作者" value={draft.author} />
+                  <span>{draft.author.length}/8</span>
+                </label>
                 <div className="guide-editor-body">
                   {draft.blocks.map((block, index) => (
                     <article className={`guide-editor-block ${activeBlockId === block.id ? "active" : ""}`} key={block.id} onClick={() => setActiveBlockId(block.id)} onKeyDown={(event) => handleBlockKeyDown(block, event)} onMouseDown={(event) => { if (block.type !== "paragraph" && block.type !== "heading") event.currentTarget.focus(); }} tabIndex={block.type === "paragraph" || block.type === "heading" ? -1 : 0}>
@@ -1072,7 +977,7 @@ export function GuidePostAdmin({ adminUserId, projectKey, projectTitle }: GuideP
             </div>
           </section>
 
-          {!isPaidPage ? <section className="guide-admin-card guide-admin-legacy-meta">
+          <section className="guide-admin-card guide-admin-legacy-meta">
             <div className="guide-admin-field-grid">
               <label className="wide">
                 <span>帖子标题</span>
@@ -1097,32 +1002,8 @@ export function GuidePostAdmin({ adminUserId, projectKey, projectTitle }: GuideP
                   value={draft.excerpt}
                 />
               </label>
-              <label className="wide">
-                <span>发布菜单位置</span>
-                <select
-                  aria-label="发布菜单位置"
-                  onChange={(event) => {
-                    const selected = guidePostMenuPlacementOptions(siteChromeConfig).find(
-                      (option) => menuPlacementKey(option.placement) === event.target.value,
-                    );
-                    setDraft((current) => ({
-                      ...current,
-                      menuPlacement: selected?.placement ?? null,
-                    }));
-                  }}
-                  value={menuPlacementKey(draft.menuPlacement)}
-                >
-                  <option value="">仅发布到首页</option>
-                  {guidePostMenuPlacementOptions(siteChromeConfig).map((option) => (
-                    <option key={menuPlacementKey(option.placement)} value={menuPlacementKey(option.placement)}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
-                <small>发布后会自动新增菜单，点击菜单直接进入这篇帖子详情页。</small>
-              </label>
             </div>
-          </section> : null}
+          </section>
 
           <section className="guide-admin-card guide-admin-legacy-blocks">
             <header className="guide-blocks-heading">
@@ -1348,21 +1229,6 @@ export function GuidePostAdmin({ adminUserId, projectKey, projectTitle }: GuideP
                 {message ? ` · ${message}` : ""}
               </span>
             </div>
-            {isPaidPage ? (
-              <label className="guide-paid-visibility-toggle">
-                <input
-                  checked={draft.status === "published"}
-                  onChange={(event) =>
-                    setDraft((current) => ({
-                      ...current,
-                      status: event.target.checked ? "published" : "draft",
-                    }))
-                  }
-                  type="checkbox"
-                />
-                <span>前台显示内容</span>
-              </label>
-            ) : null}
             {draft.id ? (
               <button
                 className="button danger guide-delete-post"
@@ -1373,35 +1239,22 @@ export function GuidePostAdmin({ adminUserId, projectKey, projectTitle }: GuideP
                 删除帖子
               </button>
             ) : null}
-            {isPaidPage ? (
-              <button
-                className="button primary"
-                disabled={isSaving}
-                onClick={() => void savePost(draft.status === "published" ? "published" : "draft")}
-                type="button"
-              >
-                {isSaving ? "保存中…" : "保存收费页内容"}
-              </button>
-            ) : (
-              <>
-                <button
-                  className="button secondary"
-                  disabled={isSaving}
-                  onClick={() => void savePost("draft")}
-                  type="button"
-                >
-                  保存草稿
-                </button>
-                <button
-                  className="button primary"
-                  disabled={isSaving}
-                  onClick={() => void savePost("published")}
-                  type="button"
-                >
-                  {isSaving ? "保存中…" : "发布到首页"}
-                </button>
-              </>
-            )}
+            <button
+              className="button secondary"
+              disabled={isSaving}
+              onClick={() => void savePost("draft")}
+              type="button"
+            >
+              保存草稿
+            </button>
+            <button
+              className="button primary"
+              disabled={isSaving}
+              onClick={() => void savePost("published")}
+              type="button"
+            >
+              {isSaving ? "保存中…" : "发布到首页"}
+            </button>
           </footer>
         </div>
       </div>

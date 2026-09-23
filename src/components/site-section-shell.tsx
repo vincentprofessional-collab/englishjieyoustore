@@ -186,7 +186,11 @@ export function SiteSectionShell({
   const navItems = config.nav.items.filter(
     (item) => item.enabled && item.label !== "公告栏" && item.label !== "使用说明",
   );
-  const activeTopItem = findActiveTopItem(navItems, pathname, searchParams);
+  const activeTopItem =
+    findActiveTopItem(navItems, pathname, searchParams) ??
+    (pathname.startsWith("/vocabulary") && !pathname.startsWith("/vocabulary/books")
+      ? navItems.find((item) => item.id === "lookup")
+      : undefined);
   const activeLeaf = activeTopItem
     ? findBestActiveLeaf(activeTopItem, pathname, searchParams)
     : undefined;

@@ -49,7 +49,8 @@ values
   ('vocabulary.books',            'vocabulary', '词汇书',            '词汇书学习入口；第一阶段免费，后期可单独付费',    'free', 63),
   ('vocabulary.entry_detail',     'vocabulary', '词汇详情页',        '音标、释义、例句、词源树、视频和图片等',          'free', 64),
   ('vocabulary.media',            'vocabulary', '词汇拓展素材',      '词源树、视频、图片、相关词等拓展内容',            'free', 65),
-  ('articles.foreign_article',    'articles',   '外刊精读',          '外刊文章、音频、逐句中英、句子音频和高亮',        'free', 68),
+  ('vocabulary.etymology',        'vocabulary', '词源词根',          '词源故事、词根词缀和词源目录；前三个免费',        'paid', 66),
+  ('articles.foreign_article',    'articles',   '外刊精读',          '外刊文章、音频、逐句中英、句子音频和高亮；前三个免费', 'paid', 68),
   ('site.announcements',          'site',       '信息发布',          '最新消息、公告、文章内容',                        'free', 70),
   ('site.contact',                'site',       '联系我们',          '联系方式、表单、二维码、地图等内容',              'free', 80)
 on conflict (feature_key) do nothing;
@@ -1265,10 +1266,6 @@ as $$
       and (
         role = 'admin'
         or membership_status = 'lifetime'
-        or (
-          membership_status = 'paid'
-          and (membership_expires_at is null or membership_expires_at > now())
-        )
       )
   );
 $$;

@@ -16,7 +16,16 @@ const taskCopy = {
   },
 };
 
-export default function WritingPracticeIndexPage() {
+export default async function WritingPracticeIndexPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ task?: string }>;
+}) {
+  const { task: requestedTask } = await searchParams;
+  const visibleTasks = (Object.keys(taskCopy) as WritingTask[]).filter(
+    (task) => requestedTask !== "task1" || task === "task1",
+  );
+
   return (
     <section className="stack writing-home-page writing-practice-index-page">
       <div className="writing-mode-panel">
@@ -29,12 +38,12 @@ export default function WritingPracticeIndexPage() {
 
         <div className="writing-practice-tree writing-practice-index-tree" id="writing-practice-library">
           <div className="writing-task-grid">
-            {(Object.keys(taskCopy) as WritingTask[]).map((task) => {
+            {visibleTasks.map((task) => {
               const item = taskCopy[task];
               const categories = getWritingCategories(task);
 
               return (
-                <section className="writing-task-column" key={task}>
+                <section className="writing-task-column" id={task} key={task}>
                   <div className="writing-task-card">
                     <strong><span>{item.label}</span>{item.title}</strong>
                   </div>

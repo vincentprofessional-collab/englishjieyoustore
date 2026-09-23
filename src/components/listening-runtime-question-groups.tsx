@@ -2,7 +2,6 @@ import type { ChangeEvent, CSSProperties } from "react";
 
 export type RuntimeListeningQuestion = {
   answers: string[];
-  explanation?: string;
   id: string;
   promptText: string | null;
   questionNo: number;
@@ -357,9 +356,6 @@ function AnswerControl({
         />
       )}
       {answerSuffix ? <span className="paper-runtime-answer-affix">{answerSuffix}</span> : null}
-      {submitted && question.explanation ? (
-        <span className="listening-answer-explanation">解析：{question.explanation}</span>
-      ) : null}
     </span>
   );
 }

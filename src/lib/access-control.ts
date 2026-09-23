@@ -82,6 +82,19 @@ export function getPaidContentKey(type: PaidContentType, stableId: string) {
   return contentKey;
 }
 
+const FREE_VOCABULARY_ETYMOLOGY_KEYS = new Set([
+  "greek-eteos-true",
+  "root--greek-eteos-true",
+  "logy-branch-of-knowledge-science",
+  "suffix--logy-branch-of-knowledge-science",
+  "pie-set-be-stable",
+  "root--pie-set-be-stable",
+]);
+
+export function isFreeVocabularyEtymology(sourceKey: string) {
+  return FREE_VOCABULARY_ETYMOLOGY_KEYS.has(sourceKey.trim().toLowerCase());
+}
+
 export function getProjectAccessRule(projectKey: ProjectAccessKey) {
   return PROJECT_ACCESS_RULES[projectKey] ?? {
     description: "",

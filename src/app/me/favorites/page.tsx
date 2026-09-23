@@ -68,7 +68,7 @@ type FavoriteQuestionItem = {
   id: string;
   knowledgePoint?: string;
   options?: string[];
-  origin?: "bbc" | "junior-high";
+  origin?: "bbc" | "junior-high" | "senior-high";
   prompt?: string;
   questionNumber?: string;
   questionType?: string;
@@ -125,6 +125,12 @@ const favoriteQuestionModuleOrder: Record<string, number> = {
   speaking: 2,
   reading: 3,
   writing: 4,
+};
+
+type FavoriteQuestionCategory = {
+  key: string;
+  label: string;
+  order: number;
 };
 
 function readStorageList<T>(key: string) {
@@ -388,6 +394,43 @@ function getFavoriteQuestionSourceDetails(question: FavoriteQuestionItem) {
   };
 }
 
+function getFavoriteQuestionCategory(question: FavoriteQuestionItem): FavoriteQuestionCategory {
+  const sourceText = [question.origin, question.id, question.href, question.sourceTitle, question.title]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+
+  if (question.origin === "bbc" || /(?:^|[^a-z])bbc(?:[^a-z]|$)|\/articles\//i.test(sourceText)) {
+    return { key: "bbc", label: "BBC", order: 0 };
+  }
+
+  if (
+    question.origin === "junior-high" ||
+    /中考|junior[- ]?high|juniorhigh|middle[- ]?school/.test(sourceText)
+  ) {
+    return { key: "junior-high", label: "中考英语", order: 2 };
+  }
+
+  if (
+    question.origin === "senior-high" ||
+    /高考|senior[- ]?high|seniorhigh|gaokao/.test(sourceText)
+  ) {
+    return { key: "senior-high", label: "高考英语", order: 1 };
+  }
+
+  const ieltsDetails = getFavoriteQuestionSourceDetails(question);
+
+  if (ieltsDetails) {
+    return {
+      key: `ielts-${ieltsDetails.moduleKey}`,
+      label: `雅思${favoriteQuestionModuleLabels[ieltsDetails.moduleKey] ?? ""}`,
+      order: 10 + (favoriteQuestionModuleOrder[ieltsDetails.moduleKey] ?? 99),
+    };
+  }
+
+  return { key: "other", label: "其他题型", order: 99 };
+}
+
 function isGeneratedFavoriteQuestionTitle(title: string) {
   return /^(?:listening|reading)\s+(?:ci|cambridge)[-\s\d]/i.test(title.trim());
 }
@@ -627,6 +670,7 @@ export default function FavoritesPage() {
   const [activeTab, setActiveTab] = useState<FavoriteTab>("words");
   const [annotations, setAnnotations] = useState<FavoriteAnnotationItem[]>([]);
   const [articles, setArticles] = useState<FavoriteArticleItem[]>([]);
+  const [expandedQuestionCategories, setExpandedQuestionCategories] = useState<Record<string, boolean>>({});
   const [questions, setQuestions] = useState<FavoriteQuestionItem[]>([]);
   const [randomSeed, setRandomSeed] = useState(1);
   const [sentences, setSentences] = useState<FavoriteSentenceItem[]>([]);
@@ -710,6 +754,24 @@ export default function FavoritesPage() {
       ),
     [questions, randomSeed, sortMode],
   );
+  const groupedQuestions = useMemo(() => {
+    const groups = new Map<string, { category: FavoriteQuestionCategory; questions: FavoriteQuestionItem[] }>();
+
+    for (const question of sortedQuestions) {
+      const category = getFavoriteQuestionCategory(question);
+      const group = groups.get(category.key);
+
+      if (group) {
+        group.questions.push(question);
+      } else {
+        groups.set(category.key, { category, questions: [question] });
+      }
+    }
+
+    return [...groups.values()].sort(
+      (left, right) => left.category.order - right.category.order || left.category.label.localeCompare(right.category.label, "zh-CN"),
+    );
+  }, [sortedQuestions]);
   const sortedAnnotations = useMemo(
     () =>
       sortFavoriteItems(
@@ -911,31 +973,56 @@ export default function FavoritesPage() {
               <span>提交后做错的题会自动出现在这里；点击题号可以回到对应页面的原题位置。</span>
             </div>
           ) : (
-            <div className="favorite-library-table">
-              {sortedQuestions.map((question) => {
-                const sourceDetails = getFavoriteQuestionSourceDetails(question);
-                const isJuniorHighWrongQuestion = question.origin === "junior-high";
-                const isBbcWrongQuestion = question.origin === "bbc";
-                const showQuestionTitle = !isJuniorHighWrongQuestion && !isBbcWrongQuestion && !isGeneratedFavoriteQuestionTitle(question.title);
+            <div className="favorite-question-groups">
+              {groupedQuestions.map(({ category, questions: categoryQuestions }) => {
+                const expanded = expandedQuestionCategories[category.key] ?? false;
 
                 return (
-                  <article className="favorite-library-row question-row" key={question.id}>
-                    <Link className={`favorite-library-title question ${isJuniorHighWrongQuestion || isBbcWrongQuestion ? "junior-high-wrong-question-link" : ""}`} href={question.href ?? "/training"}>
-                      {isJuniorHighWrongQuestion ? (
-                        <FavoriteJuniorHighQuestionMeta question={question} />
-                      ) : isBbcWrongQuestion ? (
-                        <FavoriteBbcQuestionMeta question={question} />
-                      ) : sourceDetails ? (
-                        <FavoriteQuestionSource details={sourceDetails} />
-                      ) : null}
-                      {showQuestionTitle ? (
-                        <span className="favorite-library-title-text">{question.title}</span>
-                      ) : null}
-                    </Link>
-                    <div className="favorite-share-actions">
-                      <FavoriteRemoveButton label={`取消收藏 ${question.title}`} onRemove={() => removeQuestion(question.id)} />
-                    </div>
-                  </article>
+                  <section className={`favorite-question-group ${expanded ? "expanded" : ""}`} key={category.key}>
+                    <button
+                      aria-controls={`favorite-question-group-${category.key}`}
+                      aria-expanded={expanded}
+                      className="favorite-question-group-trigger"
+                      onClick={() => setExpandedQuestionCategories((current) => ({ ...current, [category.key]: !expanded }))}
+                      type="button"
+                    >
+                      <span className="favorite-question-group-heading">
+                        <strong>{category.label}</strong>
+                        <small>{categoryQuestions.length} 道错题</small>
+                      </span>
+                      <span aria-hidden="true" className="favorite-question-group-chevron">{expanded ? "−" : "+"}</span>
+                    </button>
+                    {expanded ? (
+                      <div className="favorite-library-table" id={`favorite-question-group-${category.key}`}>
+                        {categoryQuestions.map((question) => {
+                          const sourceDetails = getFavoriteQuestionSourceDetails(question);
+                          const isJuniorHighWrongQuestion = question.origin === "junior-high";
+                          const isBbcWrongQuestion = question.origin === "bbc";
+                          const showQuestionTitle = !isJuniorHighWrongQuestion && !isBbcWrongQuestion && !isGeneratedFavoriteQuestionTitle(question.title);
+
+                          return (
+                            <article className="favorite-library-row question-row" key={question.id}>
+                              <Link className={`favorite-library-title question ${isJuniorHighWrongQuestion || isBbcWrongQuestion ? "junior-high-wrong-question-link" : ""}`} href={question.href ?? "/training"}>
+                                {isJuniorHighWrongQuestion ? (
+                                  <FavoriteJuniorHighQuestionMeta question={question} />
+                                ) : isBbcWrongQuestion ? (
+                                  <FavoriteBbcQuestionMeta question={question} />
+                                ) : sourceDetails ? (
+                                  <FavoriteQuestionSource details={sourceDetails} />
+                                ) : null}
+                                {showQuestionTitle ? (
+                                  <span className="favorite-library-title-text">{question.title}</span>
+                                ) : null}
+                              </Link>
+                              <div className="favorite-share-actions">
+                                <FavoriteRemoveButton label={`取消收藏 ${question.title}`} onRemove={() => removeQuestion(question.id)} />
+                              </div>
+                            </article>
+                          );
+                        })}
+                      </div>
+                    ) : null}
+                  </section>
                 );
               })}
             </div>

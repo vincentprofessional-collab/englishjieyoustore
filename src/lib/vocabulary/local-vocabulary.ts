@@ -3,6 +3,7 @@ import { resolve } from "node:path";
 
 import { supabase } from "@/lib/supabase/client";
 import excelLeftmostRootAffix from "@/data/vocabulary/excel-leftmost-root-affix.json";
+import excelRootAffixCatalog from "@/data/vocabulary/excel-root-affix-catalog.json";
 import { sortVocabularyFamilyItems } from "@/lib/vocabulary/autocomplete-ranking";
 
 export type LocalVocabularyHint = {
@@ -157,6 +158,27 @@ type ExcelLeftmostRootAffixIndex = {
   words: Record<string, string>;
 };
 
+export type VocabularyRootAffixCategory = "root" | "prefix" | "suffix";
+
+export type VocabularyRootAffixCatalogItem = {
+  category: VocabularyRootAffixCategory;
+  formNote: string;
+  key: string;
+  label: string;
+  meaning: string;
+  occurrenceCount: number;
+  relatedWordCount: number;
+  sourceKey: string;
+};
+
+type ExcelRootAffixCatalog = {
+  categories: Record<
+    VocabularyRootAffixCategory,
+    { items: VocabularyRootAffixCatalogItem[]; label: string }
+  >;
+  relatedWords: Record<string, string[]>;
+};
+
 export type VocabularySearchMatchType = "exact" | "prefix" | "fuzzy";
 
 export type VocabularySearchResult = {
@@ -191,21 +213,30 @@ export type VocabularyRootDirectory = {
 };
 
 export type VocabularyEtymologyDirectory = {
+  category?: VocabularyRootAffixCategory;
   entries: LocalVocabularyEntry[];
   etymologySource: string;
   etymologySourceKey: string;
   groups: VocabularyRootGroup[];
+  meaning?: string;
+  formNote?: string;
 };
 
 export type VocabularyRootAffixDirectoryItem = {
+  category: VocabularyRootAffixCategory;
   count: number;
   href: string;
   key: string;
-  kind: "词根" | "词缀" | "词根/词缀";
+  kind: "词根" | "前缀" | "后缀";
   label: string;
+  meaning: string;
 };
 
 const BUNDLED_VOCABULARY_SOURCE_PATH = resolve(process.cwd(), "src/data/vocabulary/flat-vocabulary.json");
+const BUNDLED_PRIMARY_SCHOOL_SOURCE_PATH = resolve(
+  process.cwd(),
+  "src/data/vocabulary/primary-school-vocabulary.json",
+);
 const LOCAL_VOCABULARY_SOURCE_PATH =
   "/Users/shidianjin/Desktop/词源词根背单词/词源词根_平铺数据.json";
 const VOCABULARY_SOURCE_PATH =
@@ -214,12 +245,26 @@ const VOCABULARY_SOURCE_PATH =
 const ECDICT_SOURCE_PATH =
   process.env.ECDICT_SOURCE_PATH?.trim() || "/Users/shidianjin/Desktop/未命名文件夹/ecdict.csv";
 const EXCEL_LEFTMOST_ROOT_AFFIX_INDEX = excelLeftmostRootAffix as ExcelLeftmostRootAffixIndex;
+const EXCEL_ROOT_AFFIX_CATALOG = excelRootAffixCatalog as ExcelRootAffixCatalog;
 
 let cachedVocabularyMap: Map<string, LocalVocabularyEntry> | null = null;
 let cachedVocabularyEntries: LocalVocabularyEntry[] | null = null;
 let cachedEcdictMap: Map<string, EcdictEntry> | null = null;
 let cachedFormationTargetMap: Map<string, string> | null = null;
 let cachedRootAffixDirectory: VocabularyRootAffixDirectoryItem[] | null = null;
+let cachedRootAffixCatalogItems: Map<string, VocabularyRootAffixCatalogItem> | null = null;
+
+function loadVocabularySourceEntries() {
+  const sourcePaths = [VOCABULARY_SOURCE_PATH, BUNDLED_PRIMARY_SCHOOL_SOURCE_PATH];
+
+  return sourcePaths.flatMap((sourcePath) => {
+    if (!existsSync(sourcePath)) {
+      return [];
+    }
+
+    return JSON.parse(readFileSync(sourcePath, "utf8")) as FlatVocabularyEntry[];
+  });
+}
 
 export function normalizeLookupWord(value: string) {
   return value.toLowerCase().replace(/^[^a-z]+|[^a-z]+$/gi, "");
@@ -630,11 +675,11 @@ function loadVocabularyEntries() {
 
   cachedVocabularyEntries = [];
 
-  if (!existsSync(VOCABULARY_SOURCE_PATH)) {
+  const rawEntries = loadVocabularySourceEntries();
+
+  if (rawEntries.length === 0) {
     return cachedVocabularyEntries;
   }
-
-  const rawEntries = JSON.parse(readFileSync(VOCABULARY_SOURCE_PATH, "utf8")) as FlatVocabularyEntry[];
   const ecdictMap = loadEcdictMap();
   const vocabularyMap = new Map<string, VocabularyAccumulator>();
 
@@ -936,73 +981,58 @@ function loadFormationTargetMap() {
   return cachedFormationTargetMap;
 }
 
-export function getVocabularyRootAffixDirectory() {
-  if (cachedRootAffixDirectory) {
+function getRootAffixCatalogItems() {
+  if (cachedRootAffixCatalogItems) {
+    return cachedRootAffixCatalogItems;
+  }
+
+  cachedRootAffixCatalogItems = new Map();
+
+  for (const category of ["root", "prefix", "suffix"] as VocabularyRootAffixCategory[]) {
+    for (const item of EXCEL_ROOT_AFFIX_CATALOG.categories[category]?.items ?? []) {
+      if (/IFERROR|MATCH\(/i.test(item.label)) {
+        continue;
+      }
+
+      cachedRootAffixCatalogItems.set(item.key, item);
+    }
+  }
+
+  return cachedRootAffixCatalogItems;
+}
+
+function getRootAffixKind(category: VocabularyRootAffixCategory): VocabularyRootAffixDirectoryItem["kind"] {
+  return category === "root" ? "词根" : category === "prefix" ? "前缀" : "后缀";
+}
+
+export function getVocabularyRootAffixDirectory(category?: VocabularyRootAffixCategory) {
+  if (!category && cachedRootAffixDirectory) {
     return cachedRootAffixDirectory;
   }
 
-  const directoryMap = new Map<
-    string,
-    VocabularyRootAffixDirectoryItem & { entryKeys: Set<string>; hasRoot: boolean; hasAffix: boolean }
-  >();
-
-  function addItem(
-    label: string,
-    kind: "词根" | "词缀" | "词根/词缀",
-    href: string,
-    entryKey: string,
-  ) {
-    const key = normalizeDirectoryKey(label);
-
-    if (!key) {
-      return;
-    }
-
-    const current = directoryMap.get(key) ?? {
-      count: 0,
-      entryKeys: new Set<string>(),
-      hasAffix: false,
-      hasRoot: false,
-      href,
-      key,
-      kind,
-      label,
-    };
-
-    current.entryKeys.add(entryKey);
-    current.count = current.entryKeys.size;
-    current.hasRoot = current.hasRoot || kind === "词根" || kind === "词根/词缀";
-    current.hasAffix = current.hasAffix || kind === "词缀" || kind === "词根/词缀";
-    current.kind = current.hasRoot && current.hasAffix ? "词根/词缀" : current.hasRoot ? "词根" : "词缀";
-
-    if (kind === "词根") {
-      current.href = href;
-    }
-
-    directoryMap.set(key, current);
-  }
-
-  for (const entry of loadVocabularyEntries()) {
-    const labelKey = getExcelLeftmostRootAffixKey(entry.normalizedWord);
-    const label = getExcelLeftmostRootAffixLabel(labelKey);
-
-    if (labelKey && label) {
-      addItem(label, "词根/词缀", `/vocabulary/etymologies/${labelKey}`, entry.normalizedWord);
-    }
-
-    for (const formationLabel of getFormationLabels(entry.formation)) {
-      if (!/\bsuffix\b|后缀/i.test(formationLabel)) continue;
-      const formationKey = normalizeDirectoryKey(formationLabel);
-      addItem(formationLabel, "词缀", `/vocabulary/etymologies/${formationKey}`, entry.normalizedWord);
-    }
-  }
-
+  const categories = category ? [category] : (["root", "prefix", "suffix"] as VocabularyRootAffixCategory[]);
   const collator = new Intl.Collator("en", { sensitivity: "base" });
-  cachedRootAffixDirectory = [...directoryMap.values()]
-    .map(({ entryKeys: _entryKeys, hasAffix: _hasAffix, hasRoot: _hasRoot, ...item }) => item)
-    .sort((left, right) => collator.compare(left.label, right.label));
+  const directory = categories.flatMap((categoryKey) =>
+    (EXCEL_ROOT_AFFIX_CATALOG.categories[categoryKey]?.items ?? [])
+      .filter((item) => !/IFERROR|MATCH\(/i.test(item.label))
+      .map((item) => ({
+        category: categoryKey,
+        count: item.relatedWordCount || item.occurrenceCount || 0,
+        href: `/vocabulary/etymologies/${encodeURIComponent(item.key)}`,
+        key: item.key,
+        kind: getRootAffixKind(categoryKey),
+        label: item.label,
+        meaning: item.meaning,
+      })),
+  );
 
-  return cachedRootAffixDirectory;
+  directory.sort((left, right) => collator.compare(left.label, right.label));
+
+  if (!category) {
+    cachedRootAffixDirectory = directory;
+  }
+
+  return directory;
 }
 
 export function getVocabularyFormationParts(entry: LocalVocabularyEntry): VocabularyFormationPart[] {
@@ -1016,10 +1046,19 @@ export function getVocabularyFormationParts(entry: LocalVocabularyEntry): Vocabu
     .split(/\s+\+\s+/)
     .map((label) => normalizeDefinitionText(label))
     .filter(Boolean)
-    .map((label) => ({
-      href: targetMap.get(normalizeDirectoryKey(label)),
+    .map((label) => {
+      const normalizedLabel = normalizeDirectoryKey(label);
+      const catalogItem = [...getRootAffixCatalogItems().values()].find(
+        (item) => item.sourceKey === normalizedLabel || normalizeDirectoryKey(item.label) === normalizedLabel,
+      );
+
+      return {
+      href: catalogItem
+        ? `/vocabulary/etymologies/${encodeURIComponent(catalogItem.sourceKey)}`
+        : targetMap.get(normalizedLabel),
       label,
-    }));
+      };
+    });
 }
 
 function loadVocabularyMap() {
@@ -1392,7 +1431,7 @@ function getVocabularyLookupCandidates(value: string) {
   const candidates = new Set<string>();
   const addCandidate = (candidate: string) => {
     const normalizedCandidate = normalizeLookupWord(candidate);
-    if (normalizedCandidate.length > 1) {
+    if (normalizedCandidate.length > 0) {
       candidates.add(normalizedCandidate);
     }
   };
@@ -1699,10 +1738,8 @@ export function getFeaturedVocabularyEntries(limit = 9) {
   return loadVocabularyEntries().slice(0, limit);
 }
 
-export function getVocabularyEntriesByLevel(level: string, limit = 120) {
-  return loadVocabularyEntries()
-    .filter((entry) => entry.level === level)
-    .slice(0, limit);
+export function getAllVocabularyEntries() {
+  return loadVocabularyEntries();
 }
 
 export function getVocabularySearchResults(query: string, limit = 20) {
@@ -1811,6 +1848,37 @@ export function getVocabularyEtymologyDirectory(sourceKey: string): VocabularyEt
 
   if (!normalizedSourceKey) {
     return null;
+  }
+
+  const catalogItem = [...getRootAffixCatalogItems().values()].find(
+    (item) =>
+      item.key === sourceKey ||
+      item.sourceKey === normalizedSourceKey ||
+      normalizeDirectoryKey(item.label) === normalizedSourceKey,
+  );
+
+  if (catalogItem) {
+    const entryMap = loadVocabularyMap();
+    const entries = (EXCEL_ROOT_AFFIX_CATALOG.relatedWords[catalogItem.key] ?? [])
+      .map((word) => entryMap.get(normalizeLookupWord(word)))
+      .filter((entry): entry is LocalVocabularyEntry => Boolean(entry));
+    const uniqueEntries = [...new Map(entries.map((entry) => [entry.normalizedWord, entry])).values()];
+
+    return {
+      category: catalogItem.category,
+      entries: uniqueEntries,
+      etymologySource: catalogItem.label,
+      etymologySourceKey: catalogItem.key,
+      formNote: catalogItem.formNote,
+      groups: [
+        {
+          entries: uniqueEntries,
+          rootKey: "ungrouped",
+          rootLabel: "相关词汇",
+        },
+      ],
+      meaning: catalogItem.meaning,
+    };
   }
 
   const entries = loadVocabularyEntries();

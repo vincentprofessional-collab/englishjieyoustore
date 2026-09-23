@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { FormEvent, useEffect, useState, type CSSProperties } from "react";
 import {
+  DEFAULT_GUIDE_POSTS,
   GuideContentBlock,
   GuidePost,
   GuidePostRow,
@@ -16,6 +17,8 @@ type GuideBoardProps = {
   compact?: boolean;
   hideHeading?: boolean;
   hidePostChrome?: boolean;
+  initialExpanded?: boolean;
+  postLimit?: number;
   title?: string;
 };
 
@@ -129,24 +132,12 @@ function GuideBlock({ block }: { block: GuideContentBlock }) {
   return block.text ? <p style={style}>{renderBlockText(block)}</p> : null;
 }
 
-export function GuidePostContent({ blocks }: { blocks: GuideContentBlock[] }) {
-  return (
-    <div className="guide-post-content">
-      {blocks.map((block) => (
-        <GuideBlock block={block} key={block.id} />
-      ))}
-    </div>
-  );
-}
-
 function GuidePostCard({
-  hideExcerpt = false,
   hidePostChrome = false,
   initialExpanded = false,
   linkTitle = true,
   post,
 }: {
-  hideExcerpt?: boolean;
   hidePostChrome?: boolean;
   initialExpanded?: boolean;
   linkTitle?: boolean;
@@ -394,7 +385,7 @@ function GuidePostCard({
               <h2>{post.title}</h2>
             )
           )}
-          {!hidePostChrome && !hideExcerpt ? <p>{post.excerpt}</p> : null}
+          {!hidePostChrome ? <p>{post.excerpt}</p> : null}
           {post.author ? <small className="guide-post-author">作者：{post.author}</small> : null}
         </div>
         <time className="guide-post-date" dateTime={post.publishedAt}>
@@ -403,7 +394,11 @@ function GuidePostCard({
       </header>
 
       {expanded ? (
-        <GuidePostContent blocks={post.blocks} />
+        <div className="guide-post-content">
+          {post.blocks.map((block) => (
+            <GuideBlock block={block} key={block.id} />
+          ))}
+        </div>
       ) : null}
 
       {!hidePostChrome ? (
@@ -486,7 +481,7 @@ function GuidePostCard({
 export function GuidePostDetail({ post }: { post: GuidePost }) {
   return (
     <section className="stack guide-post-detail-page">
-      <GuidePostCard hideExcerpt initialExpanded linkTitle={false} post={post} />
+      <GuidePostCard initialExpanded linkTitle={false} post={post} />
     </section>
   );
 }
@@ -496,41 +491,35 @@ export function GuideBoard({
   eyebrow = "GUIDE · 使用说明",
   hideHeading = false,
   hidePostChrome = false,
+  initialExpanded = false,
+  postLimit,
   title = "使用说明",
 }: GuideBoardProps) {
-  const [posts, setPosts] = useState<GuidePost[]>([]);
+  const [posts, setPosts] = useState<GuidePost[]>(DEFAULT_GUIDE_POSTS);
 
   useEffect(() => {
     let active = true;
 
     async function loadPosts() {
-      const pageSize = 1000;
-      const rows: GuidePostRow[] = [];
-
-      for (let page = 0; active; page += 1) {
-        const { data, error } = await supabase
-          .from("managed_content_pages")
-          .select("id,slug,title,summary,meta_json,published_at,created_at")
-          .like("slug", "guide-%")
-          .eq("status", "published")
-          .order("published_at", { ascending: false })
-          .range(page * pageSize, (page + 1) * pageSize - 1);
-
-        if (error) {
-          return;
-        }
-
-        rows.push(...((data ?? []) as GuidePostRow[]));
-        if ((data?.length ?? 0) < pageSize) {
-          break;
-        }
-      }
+      const { data, error } = await supabase
+        .from("managed_content_pages")
+        .select("id,slug,title,summary,meta_json,published_at,created_at")
+        .like("slug", "guide-%")
+        .eq("status", "published")
+        .order("published_at", { ascending: false })
+        .limit(50);
 
       if (!active) {
         return;
       }
 
-      setPosts(rows.map(parseGuidePostRow));
+      if (error) {
+        return;
+      }
+
+      if (data?.length) {
+        setPosts((data as GuidePostRow[]).map(parseGuidePostRow));
+      }
     }
 
     void loadPosts();
@@ -539,6 +528,8 @@ export function GuideBoard({
       active = false;
     };
   }, []);
+
+  const visiblePosts = postLimit ? posts.slice(0, postLimit) : posts;
 
   return (
     <section
@@ -554,10 +545,10 @@ export function GuideBoard({
       ) : null}
 
       <div className="guide-post-list">
-        {posts.map((post) => (
+        {visiblePosts.map((post) => (
           <GuidePostCard
             hidePostChrome={hidePostChrome}
-            initialExpanded={hidePostChrome}
+            initialExpanded={initialExpanded}
             key={post.id}
             post={post}
           />

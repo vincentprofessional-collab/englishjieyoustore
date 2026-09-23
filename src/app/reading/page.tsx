@@ -1,10 +1,5 @@
-import { ReadingHome } from "@/components/reading-home";
-import { getPublishedPageContent } from "@/lib/content/page-content";
+import { redirect } from "next/navigation";
 
-export const revalidate = 60;
-
-export default async function ReadingPage() {
-  const content = await getPublishedPageContent("reading");
-
-  return <ReadingHome content={content} />;
+export default function ReadingPage() {
+  redirect("/reading/practice");
 }

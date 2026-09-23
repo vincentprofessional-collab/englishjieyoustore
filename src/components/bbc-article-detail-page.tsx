@@ -12,7 +12,6 @@ import { BbcSentencePractice } from "@/components/bbc-sentence-practice";
 import { BbcArticleQuiz } from "@/components/bbc-article-quiz";
 import { ContentShareButton } from "@/components/content-share-button";
 import { StudyAnnotationTools } from "@/components/study-annotation-tools";
-import { VocabularyPronunciation } from "@/components/vocabulary-pronunciation";
 import { supabase } from "@/lib/supabase/client";
 import type {
   BbcArticle,
@@ -279,12 +278,9 @@ function parseBbcVocabularyItem(item: BbcVocabularyItem) {
     phonetic: formatBbcPhonetic(cleanBbcVocabularyText(item.phonetic ?? "") || phonetic),
     ukPhonetic: formatBbcPhonetic(item.ukPhonetic ?? "") || formatBbcPhonetic(cleanBbcVocabularyText(item.phonetic ?? "") || phonetic),
     usPhonetic: formatBbcPhonetic(item.usPhonetic ?? "") || formatBbcPhonetic(cleanBbcVocabularyText(item.phonetic ?? "") || phonetic),
-    translation: cleanBbcVocabularyDisplayText(item.translation ?? ""),
     word,
   };
 }
-
-type ParsedBbcVocabulary = ReturnType<typeof parseBbcVocabularyItem>;
 
 function MouseClickIcon() {
   return (
@@ -558,8 +554,6 @@ function renderHighlightedEnglish(
   wordOffset: number,
   activeGlobalWordIndex: number | null,
   vocabularyHighlightWordIndexes: Set<number>,
-  vocabularyByWordIndex: Map<number, ParsedBbcVocabulary> = new Map(),
-  onVocabularyClick?: (vocabulary: ParsedBbcVocabulary) => void,
   waveTerms: string[] = [],
 ) {
   let wordIndex = wordOffset;
@@ -595,7 +589,6 @@ function renderHighlightedEnglish(
 
       const isVocabularyHighlight =
         currentWordIndex != null && vocabularyHighlightWordIndexes.has(currentWordIndex);
-      const vocabularyItem = currentWordIndex == null ? undefined : vocabularyByWordIndex.get(currentWordIndex);
       const classNames = [
         isVocabularyHighlight ? "bbc-vocabulary-highlight" : "",
         currentWordIndex != null && currentWordIndex === activeGlobalWordIndex
@@ -605,9 +598,9 @@ function renderHighlightedEnglish(
         .filter(Boolean)
         .join(" ");
 
-      return { classNames, isVocabularyHighlight, isWord, token, vocabularyItem };
+      return { classNames, isVocabularyHighlight, isWord, token };
     });
-    const groupedTokens: { classNames: string; text: string; vocabularyItem?: ParsedBbcVocabulary }[] = [];
+    const groupedTokens: { classNames: string; text: string }[] = [];
 
     tokenStates.forEach((state, tokenIndex) => {
       const previousState = tokenStates[tokenIndex - 1];
@@ -616,49 +609,24 @@ function renderHighlightedEnglish(
         !state.isWord && /^[\s]+$/.test(state.token) && previousState?.isVocabularyHighlight && nextState?.isVocabularyHighlight
           ? "bbc-vocabulary-highlight"
           : state.classNames;
-      const vocabularyItem =
-        !state.isWord && /^[\s]+$/.test(state.token) && previousState?.vocabularyItem === nextState?.vocabularyItem
-          ? previousState?.vocabularyItem
-          : state.vocabularyItem;
       const previousGroup = groupedTokens.at(-1);
 
-      if (
-        previousGroup &&
-        previousGroup.classNames === classNames &&
-        previousGroup.vocabularyItem === vocabularyItem
-      ) {
+      if (previousGroup && previousGroup.classNames === classNames) {
         previousGroup.text += state.token;
         return;
       }
 
-      groupedTokens.push({ classNames, text: state.token, vocabularyItem });
+      groupedTokens.push({ classNames, text: state.token });
     });
 
-    const content = groupedTokens.map((group, tokenIndex) => {
-      const className = `${group.classNames || ""}${
-        group.vocabularyItem && onVocabularyClick ? " bbc-vocabulary-word-button" : ""
-      }`.trim();
-
-      if (group.vocabularyItem && onVocabularyClick) {
-        return (
-          <button
-            aria-label={`查看 ${group.vocabularyItem.word} 释义`}
-            className={className || undefined}
-            key={`${wordOffset}-${partIndex}-${tokenIndex}`}
-            onClick={() => onVocabularyClick(group.vocabularyItem as ParsedBbcVocabulary)}
-            type="button"
-          >
-            {group.text}
-          </button>
-        );
-      }
-
-      return (
-        <span className={className || undefined} key={`${wordOffset}-${partIndex}-${tokenIndex}`}>
-          {group.text}
-        </span>
-      );
-    });
+    const content = groupedTokens.map((group, tokenIndex) => (
+      <span
+        className={group.classNames || undefined}
+        key={`${wordOffset}-${partIndex}-${tokenIndex}`}
+      >
+        {group.text}
+      </span>
+    ));
     const isWaveTerm = waveTermSet.has(part.toLowerCase().replace(/’/g, "'"));
 
     return isWaveTerm ? (
@@ -775,7 +743,6 @@ export default function ArticleDetailPage({ article }: ArticlePageProps) {
   const [isReadingTimerRunning, setIsReadingTimerRunning] = useState(false);
   const [readingSeconds, setReadingSeconds] = useState(0);
   const [isOriginalFullscreen, setIsOriginalFullscreen] = useState(false);
-  const [selectedVocabulary, setSelectedVocabulary] = useState<ParsedBbcVocabulary | null>(null);
   const pageRef = useRef<HTMLElement | null>(null);
   const studyWorkspaceRef = useRef<HTMLDivElement | null>(null);
   const activeSentenceNoRef = useRef<number | null>(null);
@@ -792,7 +759,6 @@ export default function ArticleDetailPage({ article }: ArticlePageProps) {
     setArticleTitleChinese(article?.titleChinese ?? "");
     setArticleChineseParagraphs(article?.chineseParagraphs ?? []);
     setArticleVocabulary(article?.vocabulary ?? []);
-    setSelectedVocabulary(null);
 
     if (!article) {
       return () => {
@@ -1145,15 +1111,6 @@ export default function ArticleDetailPage({ article }: ArticlePageProps) {
   const vocabularyHighlightWordIndexes = new Set(
     vocabularyMatches.flatMap((match) => match.indexes),
   );
-  const vocabularyByWordIndex = new Map<number, ParsedBbcVocabulary>();
-  visibleArticleVocabulary.forEach((item, index) => {
-    const parsedVocabulary = parseBbcVocabularyItem(item);
-    for (const wordIndex of vocabularyMatches[index]?.indexes ?? []) {
-      if (!vocabularyByWordIndex.has(wordIndex)) {
-        vocabularyByWordIndex.set(wordIndex, parsedVocabulary);
-      }
-    }
-  });
   const orderedArticleVocabulary = visibleArticleVocabulary
     .map((item, index) => ({
       firstIndex: vocabularyMatches[index]?.firstIndex ?? Number.MAX_SAFE_INTEGER,
@@ -1296,7 +1253,6 @@ export default function ArticleDetailPage({ article }: ArticlePageProps) {
               </button>
               <StudyAnnotationTools
                 buttonClassName="annotation-toggle ielts-exam-action bbc-annotation-toggle"
-                enableVocabularyHover
                 sourceHref={`/articles/${article.id}`}
                 sourceId={`bbc:${article.id}`}
                 sourceTitle={`BBC ${article.id} ${article.title}`}
@@ -1319,8 +1275,6 @@ export default function ArticleDetailPage({ article }: ArticlePageProps) {
                         textBlock.wordOffset,
                         activeFullGlobalWordIndex,
                         vocabularyHighlightWordIndexes,
-                        vocabularyByWordIndex,
-                        setSelectedVocabulary,
                         [],
                       )}
                     </p>
@@ -1333,36 +1287,6 @@ export default function ArticleDetailPage({ article }: ArticlePageProps) {
                 </div>
               ))}
             </div>
-          ) : null}
-
-          {selectedVocabulary ? (
-            <aside
-              aria-label={`${selectedVocabulary.word} 简明释义`}
-              className="bbc-mobile-vocabulary-popover"
-              role="dialog"
-            >
-              <div className="bbc-mobile-vocabulary-popover-head">
-                <strong>{selectedVocabulary.word}</strong>
-                <button
-                  aria-label="关闭释义"
-                  className="bbc-mobile-vocabulary-popover-close"
-                  onClick={() => setSelectedVocabulary(null)}
-                  type="button"
-                >
-                  ×
-                </button>
-              </div>
-              <p className="bbc-mobile-vocabulary-definition">
-                {selectedVocabulary.translation || selectedVocabulary.definition || "暂无简明释义"}
-              </p>
-              {selectedVocabulary.ukPhonetic || selectedVocabulary.usPhonetic ? (
-                <VocabularyPronunciation
-                  ukPhonetic={selectedVocabulary.ukPhonetic}
-                  usPhonetic={selectedVocabulary.usPhonetic}
-                  word={selectedVocabulary.word}
-                />
-              ) : null}
-            </aside>
           ) : null}
 
         </section>
@@ -1414,11 +1338,11 @@ export default function ArticleDetailPage({ article }: ArticlePageProps) {
                     </div>
                     <div className="bbc-vocabulary-details">
                       {parsedVocabulary.ukPhonetic || parsedVocabulary.usPhonetic ? (
-                        <VocabularyPronunciation
-                          ukPhonetic={parsedVocabulary.ukPhonetic}
-                          usPhonetic={parsedVocabulary.usPhonetic}
-                          word={parsedVocabulary.word}
-                        />
+                        <p>
+                          {parsedVocabulary.ukPhonetic ? `英 ${parsedVocabulary.ukPhonetic}` : null}
+                          {parsedVocabulary.ukPhonetic && parsedVocabulary.usPhonetic ? "　" : null}
+                          {parsedVocabulary.usPhonetic ? `美 ${parsedVocabulary.usPhonetic}` : null}
+                        </p>
                       ) : null}
                       {parsedVocabulary.definitionLines.map((definitionLine, index) => (
                         <p key={`${item.number}-definition-${index}`}>{definitionLine}</p>

@@ -23,7 +23,7 @@ function setProgress(set: SatSetSummary) {
   return { answered, completed: answered === set.expectedCount };
 }
 
-export function SatHome({ view = "knowledge" }: { view?: "knowledge" | "types" | "papers" }) {
+export function SatHome() {
   const [catalog, setCatalog] = useState<SatCatalogIndex | null>(null);
   const [error, setError] = useState("");
   const [progressVersion, setProgressVersion] = useState(0);
@@ -59,37 +59,10 @@ export function SatHome({ view = "knowledge" }: { view?: "knowledge" | "types" |
 
   const domains = catalog.domains.map((item) => ({ ...item, sets: catalog.sets.filter((set) => set.domain === item.label) })).filter((item) => item.sets.length);
   return <section className={`${styles.root} ${styles.home}`}>
-    <header className="directory-page-heading">
-      <span>SAT READING AND WRITING</span>
-      <h1>{view === "knowledge" ? "知识点" : view === "types" ? "题型" : "历年真题"}</h1>
-    </header>
-    {view === "papers" ? (
-      <div className="directory-empty-state">当前仓库尚未导入经过校验的完整 SAT 真题。已有题组请从“题型”进入。</div>
-    ) : view === "knowledge" ? (
-      domains.map((domain) => (
-        <section className={styles.section} key={domain.id}>
-          <header className={styles.sectionHeader}><h2>{domain.label}</h2></header>
-          <div className={styles.setGrid}>
-            {domain.skills.map((skill) => {
-              const sets = domain.sets.filter((set) => set.skill === skill.label.replace(/, /g, ",").toLowerCase() || set.skill === skill.label);
-              const firstSet = sets[0];
-              return firstSet ? (
-                <Link className={styles.setCard} href={`/sat/practice/${firstSet.id}`} key={skill.id}>
-                  <strong>{skill.label}</strong>
-                  <span>{sets.reduce((total, set) => total + set.expectedCount, 0)} 题</span>
-                  <small>进入相关题组 →</small>
-                </Link>
-              ) : null;
-            })}
-          </div>
-        </section>
-      ))
-    ) : <>
     <div className={styles.summary} aria-label="SAT 题库总览"><div className={styles.summaryItem}><strong>{catalog.totalQuestionCount}</strong><span>总题数</span></div><div className={styles.summaryItem}><strong>{overall.completed}</strong><span>已完成题组</span></div><div className={styles.summaryItem}><strong>{overall.incomplete}</strong><span>未完成题组</span></div></div>
     {domains.length === 0 ? <p className={styles.empty}>没有符合当前筛选条件的题组。</p> : domains.map((item) => {
       const grouped = item.skills.map((skillItem) => ({ ...skillItem, sets: item.sets.filter((set) => set.skill === skillItem.label.replace(/, /g, ",").toLowerCase() || set.skill === skillItem.label) })).filter((group) => group.sets.length);
       return <section className={styles.section} key={item.id}><header className={styles.sectionHeader}><h2>{item.label}</h2><span>{item.sets.reduce((sum, set) => sum + set.expectedCount, 0)} 题</span></header>{grouped.map((group) => <div className={styles.skillGroup} key={group.id}><h3>{group.label}</h3><div className={styles.setGrid}>{group.sets.slice().sort((a, b) => DIFFICULTY_ORDER.indexOf(a.difficulty) - DIFFICULTY_ORDER.indexOf(b.difficulty)).map((set) => { const status = setProgress(set); const percent = set.expectedCount ? Math.round(status.answered / set.expectedCount * 100) : 0; return <Link className={styles.setCard} href={`/sat/practice/${set.id}`} key={set.id}><span className={styles.meta}>{set.difficulty}</span><div className={styles.bar} aria-label={`${status.answered}/${set.expectedCount} 已作答`}><span style={{ width: `${percent}%` }} /></div><div className={styles.setCardStats}><span>{set.expectedCount} 题</span><span>已完成 {status.answered} / 未完成 {set.expectedCount - status.answered}</span></div></Link>; })}</div></div>)}</section>;
     })}
-    </>}
   </section>;
 }

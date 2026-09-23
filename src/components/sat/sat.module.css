@@ -83,10 +83,12 @@
 .questionNav.top { border-block: 1px solid var(--sat-line); padding: 12px 0; }
 .questionNav button { background: #fff; border: 1px solid var(--sat-line); border-radius: 8px; color: var(--sat-muted); cursor: pointer; min-height: 44px; min-width: 0; padding: 7px 9px; }
 .questionNav.direct button { width: 100%; padding-inline: 4px; }
-.questionNavGroups { align-items: start; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; width: 100%; }
-.questionNavGroupToggle { min-width: 104px !important; font-weight: 800; }
+.questionNavGroups { display: grid; gap: 8px; width: 100%; }
+.questionNavGroupRow { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 8px; }
+.sparse { justify-content: flex-start; }
+.questionNavGroupToggle { flex: 0 1 calc((100% - 64px) / 9); max-width: 180px; min-width: 104px !important; font-weight: 800; }
 .questionNavGroupItems { display: grid; grid-template-columns: repeat(25, minmax(0, 1fr)); gap: 7px; border: 1px solid var(--sat-line); border-radius: 9px; background: #faf8f1; padding: 7px; }
-.questionNavGroupItems button { width: 100%; padding-inline: 4px; }
+.questionNavGroupItems button { width: 100%; padding-inline: 4px; font-size: clamp(9px, 1.2vw, 16px); font-variant-numeric: tabular-nums; letter-spacing: -.04em; line-height: 1; overflow: hidden; text-overflow: clip; white-space: nowrap; }
 .questionNav button.current { box-shadow: 0 0 0 2px rgba(31, 91, 77, .18); color: var(--sat-green); }
 .questionNav button.answered { background: var(--sat-gold-soft); border-color: #d6b66d; color: var(--sat-gold); }
 .questionNav button.correct { background: var(--sat-green-soft); border-color: var(--sat-green); color: var(--sat-green); }
@@ -96,6 +98,17 @@
 .questionCard { display: grid; gap: 19px; min-width: 0; padding: clamp(19px, 4vw, 34px); }
 .questionMeta { align-items: baseline; display: flex; flex-wrap: wrap; gap: 8px 12px; }
 .questionMeta strong { color: var(--sat-green); font-size: 18px; }
+.adminEditButton { background: transparent; border: 1px solid var(--sat-green); border-radius: 6px; color: var(--sat-green); cursor: pointer; font: inherit; padding: 3px 9px; }
+.adminEditor { background: var(--sat-green-soft); border: 1px solid #b9d6c7; border-radius: 10px; display: grid; gap: 10px; grid-column: 1 / -1; margin-top: 4px; padding: 14px; width: 100%; }
+.adminEditor label { display: grid; gap: 4px; color: var(--sat-green); font-size: 14px; }
+.adminEditor input, .adminEditor textarea { background: #fff; border: 1px solid #b9cfc4; border-radius: 6px; color: var(--sat-ink); font: inherit; padding: 8px 10px; width: 100%; }
+.adminEditor textarea { min-height: 64px; resize: vertical; }
+.adminEditorActions { display: flex; gap: 8px; }
+.adminEditorActions button { background: var(--sat-green); border: 0; border-radius: 6px; color: #fff; cursor: pointer; font: inherit; padding: 7px 14px; }
+.adminEditorActions button:nth-child(2) { background: var(--sat-danger); }
+.adminEditorActions button:nth-child(3) { background: #71847a; }
+.adminEditorActions button:disabled { cursor: wait; opacity: .6; }
+.adminEditor small[role="alert"] { color: var(--sat-danger); }
 .meta { color: var(--sat-muted); letter-spacing: .04em; }
 .content { display: grid; gap: 14px; min-width: 0; }
 .content p,
@@ -150,6 +163,7 @@
   .toolbarActions { justify-content: start; }
   .content p, .content blockquote, .prompt, .feedback p { font-size: 16px; }
   .questionNav.direct { gap: 3px; }
-  .questionNav.direct button, .questionNavGroupItems button { font-size: 11px; padding-inline: 1px; }
+  .questionNav.direct button { font-size: 11px; padding-inline: 1px; }
+  .questionNavGroupItems button { font-size: 8px; padding-inline: 1px; }
   .questionNavGroupItems { gap: 3px; padding: 4px; }
 }

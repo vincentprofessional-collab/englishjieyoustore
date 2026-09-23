@@ -11,6 +11,6 @@
   border-color: var(--accent-dark) !important;
 }
 
-:global(.past-paper-hero-top) {
+.heroTop {
   grid-template-columns: minmax(0, 1fr) auto;
 }

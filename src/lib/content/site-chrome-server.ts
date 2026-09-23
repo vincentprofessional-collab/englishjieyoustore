@@ -6,5 +6,5 @@ import { getPublishedSiteChromeConfig } from "@/lib/content/site-chrome";
 export const getCachedPublishedSiteChromeConfig = unstable_cache(
   getPublishedSiteChromeConfig,
   ["published-site-chrome"],
-  { revalidate: 60, tags: ["published-site-chrome"] },
+  { revalidate: 60 },
 );

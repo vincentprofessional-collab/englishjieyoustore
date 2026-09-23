@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { GlobalStudyInteractions } from "@/components/global-study-interactions";
-import { FrontendPageAdmin } from "@/components/frontend-page-admin";
 import { GlobalVocabularySearch } from "@/components/global-vocabulary-search";
+import { IeltsSectionShell } from "@/components/ielts-section-shell";
 import { SiteAnalyticsTracker } from "@/components/site-analytics-tracker";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteNav } from "@/components/site-nav";
-import { SiteSectionShell } from "@/components/site-section-shell";
 import { getCachedPublishedSiteChromeConfig } from "@/lib/content/site-chrome-server";
 import { getLegacySessionMigrationScript } from "@/lib/supabase/legacy-session-migration";
 import "./globals.css";
+import "./ielts-section-shell.css";
 
 export const metadata: Metadata = {
   title: "英文解忧杂货铺",
@@ -43,11 +43,7 @@ export default async function RootLayout({
             <SiteAnalyticsTracker />
           </Suspense>
           <GlobalStudyInteractions />
-          <Suspense fallback={<div className="section-page-content section-page-content-wide" />}>
-            <SiteSectionShell config={siteChromeConfig}>
-              <FrontendPageAdmin>{children}</FrontendPageAdmin>
-            </SiteSectionShell>
-          </Suspense>
+          <IeltsSectionShell>{children}</IeltsSectionShell>
           <SiteFooter config={siteChromeConfig} />
         </main>
       </body>

@@ -1,7 +1,6 @@
 "use client";
 
 import { type FormEvent, useEffect, useMemo, useState } from "react";
-import { GuidePostAdmin } from "@/components/guide-post-admin";
 import {
   formatProjectPrice,
   PROJECT_ACCESS_PLANS,
@@ -65,9 +64,7 @@ type CatalogDraft = {
   description: string;
   gateTitle: string;
   isEnabled: boolean;
-  planDurations: Record<ProjectAccessPlan, string>;
   planEnabled: Record<ProjectAccessPlan, boolean>;
-  planLabels: Record<ProjectAccessPlan, string>;
   planPrices: Record<ProjectAccessPlan, number>;
   projectKey: string;
   shortTitle: string;
@@ -91,28 +88,12 @@ function createDefaultPlanEnabled() {
   >;
 }
 
-function createDefaultPlanLabels() {
-  return Object.fromEntries(PROJECT_ACCESS_PLANS.map((plan) => [plan.plan, plan.label])) as Record<
-    ProjectAccessPlan,
-    string
-  >;
-}
-
-function createDefaultPlanDurations() {
-  return Object.fromEntries(PROJECT_ACCESS_PLANS.map((plan) => [plan.plan, plan.durationLabel])) as Record<
-    ProjectAccessPlan,
-    string
-  >;
-}
-
 function createEmptyCatalogDraft(): CatalogDraft {
   return {
     description: "",
     gateTitle: "",
     isEnabled: true,
-    planDurations: createDefaultPlanDurations(),
     planEnabled: createDefaultPlanEnabled(),
-    planLabels: createDefaultPlanLabels(),
     planPrices: createDefaultPrices(),
     projectKey: "",
     shortTitle: "",
@@ -149,16 +130,12 @@ function createFallbackPlans(projects: AccessProjectRow[]): AccessProjectPlanRow
 
 function createCatalogDraft(project: AccessProjectRow, plans: AccessProjectPlanRow[]): CatalogDraft {
   const planPrices = createDefaultPrices();
-  const planDurations = createDefaultPlanDurations();
   const planEnabled = createDefaultPlanEnabled();
-  const planLabels = createDefaultPlanLabels();
 
   for (const plan of plans) {
     if (plan.project_key === project.project_key) {
-      planDurations[plan.plan] = plan.duration_label;
       planPrices[plan.plan] = Number(plan.price_cny);
       planEnabled[plan.plan] = plan.is_enabled;
-      planLabels[plan.plan] = plan.label;
     }
   }
 
@@ -166,9 +143,7 @@ function createCatalogDraft(project: AccessProjectRow, plans: AccessProjectPlanR
     description: project.description ?? "",
     gateTitle: project.gate_title ?? "",
     isEnabled: project.is_enabled,
-    planDurations,
     planEnabled,
-    planLabels,
     planPrices,
     projectKey: project.project_key,
     shortTitle: project.short_title ?? project.title,
@@ -203,7 +178,7 @@ function getUserLabel(profile: ProfileRow) {
   return profile.email ?? profile.display_name ?? profile.id;
 }
 
-export function AdminEntitlementManager({ adminUserId }: { adminUserId: string }) {
+export function AdminEntitlementManager() {
   const [users, setUsers] = useState<ProfileRow[]>([]);
   const [entitlements, setEntitlements] = useState<EntitlementRow[]>([]);
   const [paymentRequests, setPaymentRequests] = useState<PaymentRequestRow[]>([]);
@@ -219,7 +194,6 @@ export function AdminEntitlementManager({ adminUserId }: { adminUserId: string }
   const [isSaving, setIsSaving] = useState(false);
   const [isAccessCatalogExpanded, setIsAccessCatalogExpanded] = useState(false);
   const [isPendingPaymentRequestsExpanded, setIsPendingPaymentRequestsExpanded] = useState(true);
-  const [expandedPaidContentProjectKeys, setExpandedPaidContentProjectKeys] = useState<Record<string, boolean>>({});
 
   const entitlementByUserId = useMemo(() => {
     const groupedEntitlements = new Map<string, EntitlementRow[]>();
@@ -365,17 +339,6 @@ export function AdminEntitlementManager({ adminUserId }: { adminUserId: string }
     });
   }
 
-  function updateCatalogPlanText(
-    projectKey: string,
-    plan: ProjectAccessPlan,
-    field: "planLabels" | "planDurations",
-    value: string,
-  ) {
-    const draft = catalogDrafts[projectKey];
-    if (!draft) return;
-    updateCatalogDraft(projectKey, { [field]: { ...draft[field], [plan]: value } });
-  }
-
   function validateCatalogDraft(draft: CatalogDraft) {
     if (!/^[a-z0-9]+([._-][a-z0-9]+)*$/.test(draft.projectKey.trim().toLowerCase())) {
       return "项目标识只能使用小写字母、数字、点、横线或下划线。";
@@ -408,9 +371,9 @@ export function AdminEntitlementManager({ adminUserId }: { adminUserId: string }
       _gate_title: draft.gateTitle.trim() || null,
       _is_enabled: draft.isEnabled,
       _plans: PROJECT_ACCESS_PLANS.map((plan, index) => ({
-        duration_label: draft.planDurations[plan.plan].trim() || plan.durationLabel,
+        duration_label: plan.durationLabel,
         is_enabled: draft.planEnabled[plan.plan],
-        label: draft.planLabels[plan.plan].trim() || plan.label,
+        label: plan.label,
         plan: plan.plan,
         price_cny: draft.planPrices[plan.plan],
         sort_order: (index + 1) * 10,
@@ -433,7 +396,7 @@ export function AdminEntitlementManager({ adminUserId }: { adminUserId: string }
 
     await loadAccessData();
     if (isNew) setNewCatalogDraft(createEmptyCatalogDraft());
-    setMessage(isNew ? "前台付费内容已增加，套餐已同步。" : "前台页面内容与套餐已保存。");
+    setMessage(isNew ? "单项已增加，价格已同步到前台。" : "项目内容与价格已保存。");
     setIsSaving(false);
   }
 
@@ -540,8 +503,8 @@ export function AdminEntitlementManager({ adminUserId }: { adminUserId: string }
       <section className="admin-editor-card admin-access-catalog">
         <header className="admin-compact-heading admin-section-heading">
           <div>
-            <h3>前台付费页面与套餐</h3>
-            <p>这里的名称、说明和套餐卡会直接显示在前台开通页面；可新增其他付费内容，修改后立即用于购买和续期。</p>
+            <h3>网站单项与价格</h3>
+            <p>每个周期可单独启用；修改后，用户购买页和开通 / 续期会自动使用最新配置。</p>
           </div>
           <div className="admin-section-heading-actions">
             <span>{accessProjects.length} 个单项</span>
@@ -597,7 +560,7 @@ export function AdminEntitlementManager({ adminUserId }: { adminUserId: string }
                     />
                   </label>
                   <label>
-                    <span>前台页面标题（可选）</span>
+                    <span>购买页标题（可选）</span>
                     <input
                       value={draft.gateTitle}
                       onChange={(event) => updateCatalogDraft(project.project_key, { gateTitle: event.target.value })}
@@ -617,7 +580,7 @@ export function AdminEntitlementManager({ adminUserId }: { adminUserId: string }
                 </div>
 
                 <label className="admin-access-description">
-                  <span>前台内容说明</span>
+                  <span>内容说明</span>
                   <textarea
                     rows={2}
                     value={draft.description}
@@ -636,21 +599,11 @@ export function AdminEntitlementManager({ adminUserId }: { adminUserId: string }
                           onChange={(event) =>
                             updateCatalogPlanEnabled(project.project_key, plan.plan, event.target.checked)
                           }
-                          />
-                        {plan.label}（{plan.plan}）
+                        />
+                        {plan.label}
                       </span>
-                      <input
-                        aria-label={`${plan.label}名称`}
-                        placeholder="套餐名称"
-                        type="text"
-                        value={draft.planLabels[plan.plan]}
-                        onChange={(event) =>
-                          updateCatalogPlanText(project.project_key, plan.plan, "planLabels", event.target.value)
-                        }
-                      />
                       <div>
                         <input
-                          aria-label={`${plan.label}价格`}
                           min="0"
                           step="0.01"
                           type="number"
@@ -661,15 +614,7 @@ export function AdminEntitlementManager({ adminUserId }: { adminUserId: string }
                         />
                         <em>元</em>
                       </div>
-                      <input
-                        aria-label={`${plan.label}周期`}
-                        placeholder="周期，例如：一个月"
-                        type="text"
-                        value={draft.planDurations[plan.plan]}
-                        onChange={(event) =>
-                          updateCatalogPlanText(project.project_key, plan.plan, "planDurations", event.target.value)
-                        }
-                      />
+                      <small>{plan.durationLabel}</small>
                     </label>
                   ))}
                 </div>
@@ -684,65 +629,34 @@ export function AdminEntitlementManager({ adminUserId }: { adminUserId: string }
                     {isSaving ? "保存中..." : "保存内容与价格"}
                   </button>
                 </div>
-
-                <section className="admin-paid-content-editor">
-                  <header className="admin-compact-heading admin-section-heading">
-                    <div>
-                      <h4>前台说明内容</h4>
-                      <p>默认隐藏；打开后可像首页发帖一样编辑正文、图片、视频、链接和音频。</p>
-                    </div>
-                    <button
-                      aria-expanded={Boolean(expandedPaidContentProjectKeys[project.project_key])}
-                      className="admin-list-actions-button"
-                      type="button"
-                      onClick={() =>
-                        setExpandedPaidContentProjectKeys((current) => ({
-                          ...current,
-                          [project.project_key]: !current[project.project_key],
-                        }))
-                      }
-                    >
-                      {expandedPaidContentProjectKeys[project.project_key] ? "收起编辑" : "打开编辑"}
-                    </button>
-                  </header>
-                  {expandedPaidContentProjectKeys[project.project_key] ? (
-                    <GuidePostAdmin
-                      adminUserId={adminUserId}
-                      projectKey={project.project_key}
-                      projectTitle={draft.title || project.title}
-                    />
-                  ) : null}
-                </section>
               </article>
             );
           })}
             </div>
 
             <form
-              className="admin-access-catalog-item admin-access-new-item"
-              onSubmit={(event) => {
-                event.preventDefault();
-                void saveCatalogProject(newCatalogDraft, true);
-              }}
-            >
-              <header>
-                <div>
-                  <strong>增加前台付费内容</strong>
-                  <small>保存后会生成同样的开通背景框，可在前台按项目标识接入。</small>
-                </div>
-                <label className="admin-access-toggle">
-                  <input
-                    checked={newCatalogDraft.isEnabled}
-                    type="checkbox"
-                    onChange={(event) =>
-                      setNewCatalogDraft((draft) => ({ ...draft, isEnabled: event.target.checked }))
-                    }
-                  />
-                  <span>启用</span>
-                </label>
-              </header>
+          className="admin-access-catalog-item admin-access-new-item"
+          onSubmit={(event) => {
+            event.preventDefault();
+            void saveCatalogProject(newCatalogDraft, true);
+          }}
+        >
+          <header>
+            <div>
+              <strong>增加网站单项</strong>
+              <small>创建后可以像现有项目一样单独定价和开通。</small>
+            </div>
+            <label className="admin-access-toggle">
+              <input
+                checked={newCatalogDraft.isEnabled}
+                type="checkbox"
+                onChange={(event) => setNewCatalogDraft((draft) => ({ ...draft, isEnabled: event.target.checked }))}
+              />
+              <span>启用</span>
+            </label>
+          </header>
 
-              <div className="admin-access-field-grid">
+          <div className="admin-access-field-grid">
             <label>
               <span>项目标识</span>
               <input
@@ -768,28 +682,26 @@ export function AdminEntitlementManager({ adminUserId }: { adminUserId: string }
               />
             </label>
             <label>
-              <span>前台页面标题（可选）</span>
+              <span>购买页标题（可选）</span>
               <input
                 value={newCatalogDraft.gateTitle}
                 onChange={(event) => setNewCatalogDraft((draft) => ({ ...draft, gateTitle: event.target.value }))}
               />
             </label>
-              </div>
+          </div>
 
-              <label className="admin-access-description">
-                <span>前台内容说明</span>
-                <textarea
-                  rows={2}
-                  value={newCatalogDraft.description}
-                  onChange={(event) =>
-                    setNewCatalogDraft((draft) => ({ ...draft, description: event.target.value }))
-                  }
-                />
-              </label>
+          <label className="admin-access-description">
+            <span>内容说明</span>
+            <textarea
+              rows={2}
+              value={newCatalogDraft.description}
+              onChange={(event) => setNewCatalogDraft((draft) => ({ ...draft, description: event.target.value }))}
+            />
+          </label>
 
-              <div className="admin-access-price-grid">
-                {PROJECT_ACCESS_PLANS.map((plan) => (
-                  <label key={plan.plan}>
+          <div className="admin-access-price-grid">
+            {PROJECT_ACCESS_PLANS.map((plan) => (
+              <label key={plan.plan}>
                 <span className="admin-access-plan-heading">
                   <input
                     checked={newCatalogDraft.planEnabled[plan.plan]}
@@ -798,27 +710,14 @@ export function AdminEntitlementManager({ adminUserId }: { adminUserId: string }
                     onChange={(event) =>
                       setNewCatalogDraft((draft) => ({
                         ...draft,
-                      planEnabled: { ...draft.planEnabled, [plan.plan]: event.target.checked },
+                        planEnabled: { ...draft.planEnabled, [plan.plan]: event.target.checked },
                       }))
                     }
                   />
-                  {plan.label}（{plan.plan}）
-                    </span>
-                    <input
-                  aria-label={`${plan.label}名称`}
-                  placeholder="套餐名称"
-                  type="text"
-                  value={newCatalogDraft.planLabels[plan.plan]}
-                  onChange={(event) =>
-                    setNewCatalogDraft((draft) => ({
-                      ...draft,
-                      planLabels: { ...draft.planLabels, [plan.plan]: event.target.value },
-                    }))
-                  }
-                    />
-                    <div>
-                      <input
-                    aria-label={`${plan.label}价格`}
+                  {plan.label}
+                </span>
+                <div>
+                  <input
                     min="0"
                     step="0.01"
                     type="number"
@@ -829,30 +728,19 @@ export function AdminEntitlementManager({ adminUserId }: { adminUserId: string }
                         planPrices: { ...draft.planPrices, [plan.plan]: Number(event.target.value) },
                       }))
                     }
-                      />
-                      <em>元</em>
-                    </div>
-                    <input
-                  aria-label={`${plan.label}周期`}
-                  placeholder="周期，例如：一个月"
-                  type="text"
-                  value={newCatalogDraft.planDurations[plan.plan]}
-                  onChange={(event) =>
-                    setNewCatalogDraft((draft) => ({
-                      ...draft,
-                      planDurations: { ...draft.planDurations, [plan.plan]: event.target.value },
-                    }))
-                  }
-                    />
-                  </label>
-                ))}
-              </div>
+                  />
+                  <em>元</em>
+                </div>
+                <small>{plan.durationLabel}</small>
+              </label>
+            ))}
+          </div>
 
-              <div className="admin-access-actions">
-                <button className="button primary" disabled={isSaving} type="submit">
-                  {isSaving ? "增加中..." : "增加单项"}
-                </button>
-              </div>
+          <div className="admin-access-actions">
+            <button className="button primary" disabled={isSaving} type="submit">
+              {isSaving ? "增加中..." : "增加单项"}
+            </button>
+          </div>
             </form>
           </div>
         ) : null}

@@ -41,6 +41,7 @@ const CLOZE_SOURCE_NUMBERED_BLANK_PATTERN = /[_＿]{2,}\s*\d{1,3}\s*[_＿]{2,}|[
 const ENGLISH_WORD_PATTERN = /\b[A-Za-z][A-Za-z'’-]*\b/g;
 const ANSWER_REVIEW_FLAGS = new Set(["missing-answer", "answer-not-in-options", "bundled-answer", "analysis-scope-mismatch", "blank-position-unmapped"]);
 const QUESTION_NAV_PAGE_SIZE = 50;
+const QUESTION_NAV_GROUPS_PER_ROW = 9;
 
 function cleanAnalysisText(text: string) {
   return text.replace(/^\s*(?:第\s*)?\d{1,3}\s*(?:题)?\s*[.．、:：]\s*/, "").trim();
@@ -83,7 +84,7 @@ function juniorHighAttemptStorageKey(paper: JuniorHighPaper, source?: JuniorHigh
   return `${JUNIOR_HIGH_ATTEMPT_STORAGE_PREFIX}:${identity}`;
 }
 
-function QuestionNavigation({ answers, writingAnswers, paper, current, onSelect, resultVisible = true }: { answers: Record<string, string>; writingAnswers: Record<string, string>; paper: JuniorHighPaper; current: number; onSelect: (index: number) => void; resultVisible?: boolean }) {
+function QuestionNavigation({ answers, writingAnswers, paper, current, onSelect, resultVisible = true, showGrouped = true }: { answers: Record<string, string>; writingAnswers: Record<string, string>; paper: JuniorHighPaper; current: number; onSelect: (index: number) => void; resultVisible?: boolean; showGrouped?: boolean }) {
   const [openRange, setOpenRange] = useState<number | null>(null);
   const visibleQuestions = renderableQuestionsForPaper(paper);
   const writingTasks = paper.writingTasks ?? [];
@@ -98,13 +99,15 @@ function QuestionNavigation({ answers, writingAnswers, paper, current, onSelect,
   };
   const renderItem = (item: typeof items[number]) => <button aria-current={paper.questions[current]?.id === item.id ? "step" : undefined} className={itemClassName(item)} key={item.id} onClick={() => selectItem(item)} type="button"><span>{item.number}</span></button>;
   if (items.length < 100) return <nav aria-label="试卷题号导航" className="junior-high-paper-nav direct">{items.map(renderItem)}</nav>;
-  const ranges = [];
+  if (!showGrouped) return null;
+  const ranges: Array<{ start: number; end: number; first: string | number | undefined; last: string | number | undefined }> = [];
   for (let start = 0; start < items.length; start += QUESTION_NAV_PAGE_SIZE) {
     const end = Math.min(start + QUESTION_NAV_PAGE_SIZE, items.length);
     ranges.push({ start, end, first: items[start].number, last: items[end - 1].number });
   }
   const expandedRange = openRange === null ? null : ranges[openRange];
-  return <nav aria-label="试卷题号导航" className="junior-high-paper-nav"><div className="junior-high-paper-nav-groups">{ranges.map((range, rangeIndex) => { const expanded = openRange === rangeIndex; return <button aria-expanded={expanded} className="junior-high-paper-nav-group-toggle" key={`${range.start}-${range.end}`} onClick={() => setOpenRange((currentRange) => currentRange === rangeIndex ? null : rangeIndex)} type="button">{range.first}-{range.last}</button>; })}</div>{expandedRange ? <div aria-label={`${expandedRange.first}-${expandedRange.last}题号`} className="junior-high-paper-nav-group-items">{items.slice(expandedRange.start, expandedRange.end).map(renderItem)}</div> : null}</nav>;
+  const rangeRows = Array.from({ length: Math.ceil(ranges.length / QUESTION_NAV_GROUPS_PER_ROW) }, (_, rowIndex) => ranges.slice(rowIndex * QUESTION_NAV_GROUPS_PER_ROW, (rowIndex + 1) * QUESTION_NAV_GROUPS_PER_ROW));
+  return <nav aria-label="试卷题号导航" className="junior-high-paper-nav"><div className="junior-high-paper-nav-groups">{rangeRows.map((row, rowIndex) => <div className={`junior-high-paper-nav-group-row${row.length < QUESTION_NAV_GROUPS_PER_ROW ? " sparse" : ""}`} key={`range-row-${rowIndex}`}>{row.map((range) => { const rangeIndex = ranges.indexOf(range); const expanded = openRange === rangeIndex; return <button aria-expanded={expanded} className="junior-high-paper-nav-group-toggle" key={`${range.start}-${range.end}`} onClick={() => setOpenRange((currentRange) => currentRange === rangeIndex ? null : rangeIndex)} type="button">{range.first}-{range.last}</button>; })}</div>)}</div>{expandedRange ? <div aria-label={`${expandedRange.first}-${expandedRange.last}题号`} className="junior-high-paper-nav-group-items">{items.slice(expandedRange.start, expandedRange.end).map(renderItem)}</div> : null}</nav>;
 }
 
 function questionDisplayNumber(question: PaperQuestion) {
@@ -1314,7 +1317,7 @@ export function JuniorHighPaperWorkbench({ paper, onBack, autoStart = true, time
       <section className="junior-high-paper-section"><h2>{displayPaper.writing.title ?? "五、文段表达（10分）"}</h2><div className="junior-high-paper-writing"><WritingTask label="A." closing={displayPaper.writing.closingA} opening={displayPaper.writing.openingA} prompt={displayPaper.writing.promptA} requirements={displayPaper.writing.requirementsA} value={writingA} onChange={setWritingA}>{displayPaper.writing.tableA?.length ? <table className="junior-high-writing-table"><tbody>{displayPaper.writing.tableA.map(([label, value]) => <tr key={label}><th scope="row">{label}</th><td>{value}</td></tr>)}</tbody></table> : null}</WritingTask><WritingTask label="B." closing={displayPaper.writing.closingB} opening={displayPaper.writing.openingB} prompt={displayPaper.writing.promptB} requirements={`${displayPaper.writing.contentPointsB ? `${displayPaper.writing.contentPointsB}\n` : ""}${displayPaper.writing.requirementsB}`} value={writingB} onChange={setWritingB}>{displayPaper.writing.diagram ? <img alt="写作任务图示" className="junior-high-writing-diagram" src={displayPaper.writing.diagram} /> : null}</WritingTask>{submitted ? <div className="junior-high-feedback"><span>作文：已提交</span><span className="manual">人工评分</span></div> : null}</div></section>
       </>}
     </div>
-    <div className="junior-high-bottom-nav-row"><QuestionNavigation answers={answers} writingAnswers={writingAnswers} paper={displayPaper} current={current} onSelect={selectQuestion} resultVisible={displayPaper.questionType !== "完形填空" || clozeAnalysisMode === "show" || clozeSubmitted} /><button className="junior-high-bottom-submit-button" type="button" onClick={() => displayPaper.questionType === "完形填空" ? setClozeSubmitted(true) : setSubmitted(true)}>{(displayPaper.questionType === "完形填空" ? clozeSubmitted : submitted) ? "已提交" : "提交"}</button>{submitted || clozeSubmitted ? <button className="junior-high-bottom-submit-button junior-high-bottom-reset-button" type="button" onClick={resetAttempt}>重做</button> : null}</div>
+    <div className="junior-high-bottom-nav-row"><QuestionNavigation answers={answers} writingAnswers={writingAnswers} paper={displayPaper} current={current} onSelect={selectQuestion} resultVisible={displayPaper.questionType !== "完形填空" || clozeAnalysisMode === "show" || clozeSubmitted} showGrouped={false} /><button className="junior-high-bottom-submit-button" type="button" onClick={() => displayPaper.questionType === "完形填空" ? setClozeSubmitted(true) : setSubmitted(true)}>{(displayPaper.questionType === "完形填空" ? clozeSubmitted : submitted) ? "已提交" : "提交"}</button>{submitted || clozeSubmitted ? <button className="junior-high-bottom-submit-button junior-high-bottom-reset-button" type="button" onClick={resetAttempt}>重做</button> : null}</div>
   </section></ClozeAnalysisContext.Provider></JuniorHighAdminContext.Provider>;
 }
 

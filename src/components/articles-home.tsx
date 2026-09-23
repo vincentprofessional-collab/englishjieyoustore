@@ -21,36 +21,52 @@ export function ArticlesHome({
   selectedYear: number;
   yearGroups: BbcArticleListGroup[];
 }) {
-  const selectedGroup = yearGroups.find((group) => group.year === selectedYear);
+  const activeGroup = yearGroups.find((group) => group.year === selectedYear) ?? yearGroups[0];
 
   return (
     <section className="stack bbc-home-page">
-      <header className="directory-page-heading">
+      <div className="page-heading bbc-hero">
         <div className="eyebrow">{content.eyebrow}</div>
-        <h1>BBC随身英语 · {selectedYear}</h1>
+        <h1>{content.title}</h1>
         {content.summary ? <p className="lead">{content.summary}</p> : null}
-      </header>
-
-      <div className="bbc-year-panel">
-        <div className="bbc-year-list">
-          <div className="bbc-year-item">
-            <div className="bbc-article-list bbc-article-list-visible">
-              {selectedGroup?.articles.map((article) => (
-                <Link
-                  className="bbc-article-card"
-                  href={`/articles/${article.id}`}
-                  key={article.id}
-                >
-                  <strong>
-                    {article.id}-{article.title}
-                    {article.titleChinese ? ` ${article.titleChinese}` : ""}
-                  </strong>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </div>
       </div>
+
+      <div className="bbc-year-panel bbc-year-browser">
+        <div className="bbc-year-list">
+          {yearGroups.map((group) => (
+            <Link
+              aria-current={group.year === activeGroup?.year ? "page" : undefined}
+              className={`bbc-year-banner ${group.year === activeGroup?.year ? "active" : ""}`}
+              href={`/articles?year=${group.year}`}
+              key={group.year}
+            >
+              <span>{group.year}</span>
+              <i>›</i>
+            </Link>
+          ))}
+        </div>
+
+        <section className="bbc-selected-year" aria-label={`${activeGroup?.year ?? selectedYear} 年文章`}>
+          <header>
+            <strong>{activeGroup?.year ?? selectedYear}</strong>
+            <span>文章列表</span>
+          </header>
+          <div className="bbc-article-list">
+            {activeGroup?.articles.map((article) => (
+              <Link
+                className="bbc-article-card"
+                href={`/articles/${article.id}`}
+                key={article.id}
+              >
+                <strong>
+                  {article.id}-{article.title}
+                  {article.titleChinese ? ` ${article.titleChinese}` : ""}
+                </strong>
+              </Link>
+            ))}
+          </div>
+        </section>
+        </div>
     </section>
   );
 }

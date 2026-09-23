@@ -10,11 +10,9 @@ import {
 import { getPaidContentKey } from "@/lib/access-control";
 import { getSpeakingPart } from "@/lib/ielts/speaking";
 import {
-  applySpeakingManagedContent,
   getSpeakingContentSlug,
   type SpeakingEditableContent,
 } from "@/lib/ielts/speaking-managed-content";
-import { getPublishedSpeakingManagedContent } from "@/lib/ielts/speaking-managed-content-server";
 import SpeakingModelAnswerContent from "./speaking-model-answer-content";
 import styles from "./speaking-model-answer.module.css";
 
@@ -62,7 +60,7 @@ export default async function SpeakingModelAnswerPage({
   }
 
   const scoreNotes = getSpeakingScoreNotes(part.id);
-  const baseContent: SpeakingEditableContent = {
+  const initialContent: SpeakingEditableContent = {
     answer: modelAnswer.answer,
     answerHeading: "7 分范文",
     answerTranslation: modelAnswer.answerTranslation,
@@ -82,8 +80,6 @@ export default async function SpeakingModelAnswerPage({
     vocabulary: modelAnswer.vocabulary,
     year: question.year,
   };
-  const managedContent = await getPublishedSpeakingManagedContent(baseContent.slug);
-  const initialContent = applySpeakingManagedContent(baseContent, managedContent);
 
   return (
     <ProjectAccessGate

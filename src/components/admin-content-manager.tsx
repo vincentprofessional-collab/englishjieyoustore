@@ -7,6 +7,7 @@ import { AdminHomeEditor } from "@/components/admin-home-editor";
 import { AdminEntitlementManager } from "@/components/admin-entitlement-manager";
 import { AdminSiteChromeEditor } from "@/components/admin-site-chrome-editor";
 import { GuidePostAdmin } from "@/components/guide-post-admin";
+import { GuideCommentsAdmin } from "@/components/guide-comments-admin";
 import { supabase } from "@/lib/supabase/client";
 
 type AdminState = "checking" | "signed-out" | "forbidden" | "ready" | "error";
@@ -15,14 +16,10 @@ type AdminView =
   | "access"
   | "home"
   | "chrome"
-  | "posts";
+  | "guide"
 
-export function AdminContentManager({ initialView }: { initialView?: string }) {
-  const [activeView, setActiveView] = useState<AdminView>(
-    initialView === "chrome" || initialView === "home" || initialView === "access" || initialView === "posts"
-      ? initialView
-      : "analytics",
-  );
+export function AdminContentManager() {
+  const [activeView, setActiveView] = useState<AdminView>("analytics");
   const [adminState, setAdminState] = useState<AdminState>("checking");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -175,11 +172,14 @@ export function AdminContentManager({ initialView }: { initialView?: string }) {
         <div>
           <span>CONTENT ADMIN · V2</span>
           <h1>网站后台</h1>
-          <p>打开任意前台页面，即可修改、增加、删除、隐藏或显示页面内容。</p>
+          <p>查看网站数据，维护导航底部，并发布首页帖子。</p>
         </div>
         <div className="admin-header-actions">
           <Link className="button secondary" href="/" target="_blank">
-            打开前台编辑 ↗
+            查看首页帖子 ↗
+          </Link>
+          <Link className="button secondary" href="/" target="_blank">
+            打开首页 ↗
           </Link>
           <button className="button secondary" type="button" onClick={handleSignOut}>
             退出
@@ -210,35 +210,38 @@ export function AdminContentManager({ initialView }: { initialView?: string }) {
           首页
         </button>
         <button
-          className={activeView === "posts" ? "active" : ""}
-          type="button"
-          onClick={() => setActiveView("posts")}
-        >
-          首页发帖
-        </button>
-        <button
           className={activeView === "chrome" ? "active" : ""}
           type="button"
           onClick={() => setActiveView("chrome")}
         >
           导航底部
         </button>
+        <button
+          className={activeView === "guide" ? "active" : ""}
+          type="button"
+          onClick={() => setActiveView("guide")}
+        >
+          首页发帖
+        </button>
       </div>
 
       {activeView === "analytics" ? <AdminAnalyticsPanel /> : null}
 
-      {activeView === "access" && adminUserId ? <AdminEntitlementManager adminUserId={adminUserId} /> : null}
+      {activeView === "access" ? <AdminEntitlementManager /> : null}
 
       {activeView === "home" && adminUserId ? (
         <AdminHomeEditor adminUserId={adminUserId} />
       ) : null}
 
-      {activeView === "posts" && adminUserId ? (
-        <GuidePostAdmin adminUserId={adminUserId} />
-      ) : null}
-
       {activeView === "chrome" && adminUserId ? (
         <AdminSiteChromeEditor adminUserId={adminUserId} />
+      ) : null}
+
+      {activeView === "guide" && adminUserId ? (
+        <>
+          <GuidePostAdmin adminUserId={adminUserId} />
+          <GuideCommentsAdmin />
+        </>
       ) : null}
 
     </section>
