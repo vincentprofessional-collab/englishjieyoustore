@@ -12,7 +12,10 @@ const automatedUserAgent = /bot\b|crawl|spider|slurp|headlesschrome|googleother|
 
 export async function proxy(request: NextRequest) {
   const path = request.nextUrl.pathname;
-  const isBbcAsset = path.startsWith("/subtitles/bbc/") || path.startsWith("/audio/bbc/");
+  const isBbcAsset =
+    path.startsWith("/subtitles/bbc/") ||
+    path.startsWith("/audio/bbc/") ||
+    path.startsWith("/api/bbc-audio/");
 
   if (
     path !== "/robots.txt" &&
@@ -89,6 +92,7 @@ export async function proxy(request: NextRequest) {
 export const config = {
   matcher: [
     "/audio/bbc/:path*",
+    "/api/bbc-audio/:path*",
     "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|mp3|ico)$).*)",
   ],
 };

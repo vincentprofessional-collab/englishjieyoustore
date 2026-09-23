@@ -74,18 +74,10 @@ const allGeneratedBbcArticles = [
   ...bbc2026Articles,
 ];
 
-const bbcAudioBaseUrl = process.env.NEXT_PUBLIC_BBC_AUDIO_BASE_URL?.replace(/\/+$/, "");
-
 const generatedBbcArticles = allGeneratedBbcArticles;
 
 function getBbcAudioUrl(year: number, articleId: string, audioFile: string) {
-  const path = `${year}/${articleId}/${audioFile}`;
-
-  if (bbcAudioBaseUrl) {
-    return `${bbcAudioBaseUrl}/${path}`;
-  }
-
-  return `/audio/bbc/${path}`;
+  return `/api/bbc-audio/${year}/${articleId}/${audioFile}`;
 }
 
 function mapGeneratedArticle(article: (typeof generatedBbcArticles)[number]): BbcArticle {
