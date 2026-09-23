@@ -8,8 +8,22 @@ import {
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const automatedUserAgent = /bot\b|crawl|spider|slurp|headlesschrome|googleother|lighthouse/i;
 
 export async function proxy(request: NextRequest) {
+  const path = request.nextUrl.pathname;
+  const isBbcAsset = path.startsWith("/subtitles/bbc/") || path.startsWith("/audio/bbc/");
+
+  if (
+    path !== "/robots.txt" &&
+    automatedUserAgent.test(request.headers.get("user-agent") ?? "")
+  ) {
+    return new NextResponse("Automated access is not allowed.", {
+      status: 403,
+      headers: { "Cache-Control": "private, no-store", "X-Robots-Tag": "noindex, nofollow" },
+    });
+  }
+
   const existingVisitorId = request.cookies.get(FREE_PREVIEW_VISITOR_COOKIE)?.value;
   const visitorId = isFreePreviewVisitorId(existingVisitorId)
     ? existingVisitorId
@@ -39,6 +53,24 @@ export async function proxy(request: NextRequest) {
     });
 
     await supabase.auth.getClaims();
+
+    if (isBbcAsset) {
+      const { data: hasAccess, error } = await supabase.rpc("can_access_project", {
+        _project_key: "bbc",
+      });
+
+      if (error || hasAccess !== true) {
+        return new NextResponse("BBC membership required.", {
+          status: 403,
+          headers: { "Cache-Control": "private, no-store" },
+        });
+      }
+    }
+  } else if (isBbcAsset) {
+    return new NextResponse("BBC membership check unavailable.", {
+      status: 503,
+      headers: { "Cache-Control": "private, no-store" },
+    });
   }
 
   if (!isFreePreviewVisitorId(existingVisitorId)) {
@@ -56,6 +88,7 @@ export async function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
+    "/audio/bbc/:path*",
     "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|mp3|ico)$).*)",
   ],
 };

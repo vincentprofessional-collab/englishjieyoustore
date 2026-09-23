@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 import ArticleDetailPage from "@/components/bbc-article-detail-page";
-import { ProjectAccessGate } from "@/components/project-access-gate";
+import { ProjectAccessPaywall } from "@/components/project-access-paywall";
 import { BBC_ARTICLES, getBbcArticleById } from "@/lib/articles/bbc";
-import { getPaidContentKey } from "@/lib/access-control";
+import { createServerSupabaseClient } from "@/lib/supabase/server";
 
 export const dynamicParams = false;
 export const dynamic = "force-dynamic";
@@ -23,12 +23,14 @@ export default async function ArticlePage({
     notFound();
   }
 
-  return (
-    <ProjectAccessGate
-      contentKey={getPaidContentKey("bbc-article", article.id)}
-      projectKey="bbc"
-    >
-      <ArticleDetailPage article={article} />
-    </ProjectAccessGate>
-  );
+  const supabase = await createServerSupabaseClient();
+  const { data: hasAccess, error } = await supabase.rpc("can_access_project", {
+    _project_key: "bbc",
+  });
+
+  if (error || hasAccess !== true) {
+    return <ProjectAccessPaywall projectKey="bbc" />;
+  }
+
+  return <ArticleDetailPage article={article} />;
 }

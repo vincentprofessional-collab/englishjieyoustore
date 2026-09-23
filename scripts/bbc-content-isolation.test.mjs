@@ -9,6 +9,8 @@ const articleRouteSource = fs.readFileSync(
   path.join(root, "src", "app", "articles", "[articleId]", "page.tsx"),
   "utf8",
 );
+const proxySource = fs.readFileSync(path.join(root, "src", "proxy.ts"), "utf8");
+const robotsSource = fs.readFileSync(path.join(root, "src", "app", "robots.ts"), "utf8");
 
 const articleIds = new Set();
 for (const year of fs.readdirSync(dataRoot).filter((entry) => /^20\d{2}$/.test(entry))) {
@@ -24,7 +26,13 @@ for (const year of fs.readdirSync(dataRoot).filter((entry) => /^20\d{2}$/.test(e
 }
 
 assert.doesNotMatch(bbcSource, /BBC_ARTICLES\.findIndex\(/);
-assert.match(articleRouteSource, /getPaidContentKey\("bbc-article", article\.id\)/);
+assert.match(articleRouteSource, /rpc\("can_access_project"/);
+assert.match(articleRouteSource, /hasAccess !== true/);
+assert.doesNotMatch(articleRouteSource, /ProjectAccessGate|claimPaidContentAccess|freePreviewLimit/);
+assert.match(proxySource, /isBbcAsset/);
+assert.match(proxySource, /"\/subtitles\/bbc\/"/);
+assert.match(proxySource, /"\/audio\/bbc\/"/);
+assert.match(robotsSource, /disallow: "\/"/);
 assert.doesNotMatch(articleRouteSource, /findIndex\(|articleIndex/);
 
-console.log(`BBC 内容隔离校验通过：${articleIds.size} 篇文章，访问权限按稳定文章 ID 判断。`);
+console.log(`BBC 内容隔离校验通过：${articleIds.size} 篇文章，正文需要服务器核验会员权限。`);

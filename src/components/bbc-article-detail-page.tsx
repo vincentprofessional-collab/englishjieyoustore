@@ -1147,7 +1147,13 @@ export default function ArticleDetailPage({ article }: ArticlePageProps) {
         activeFullWordIndex
       : null;
   return (
-    <section className="stack bbc-article-page" ref={pageRef}>
+    <section
+      className="stack bbc-article-page"
+      onCopy={(event) => event.preventDefault()}
+      onCut={(event) => event.preventDefault()}
+      onDragStart={(event) => event.preventDefault()}
+      ref={pageRef}
+    >
         <div className="page-heading bbc-article-hero">
           <div className="bbc-article-hero-top">
             <Link className="bbc-detail-back-link" href="/articles">
