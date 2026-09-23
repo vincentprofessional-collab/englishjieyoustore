@@ -8,6 +8,7 @@ type AuthMode = "login" | "register";
 const AUTH_REDIRECT_URL = "https://www.englishjieyou.cn/login";
 const SESSION_ID_KEY = "ielts-platform.analytics.sessionId";
 const SESSION_STARTED_KEY = "ielts-platform.analytics.startedAt";
+const SESSION_FIRST_PATH_KEY = "ielts-platform.analytics.firstPath";
 
 function getSafeRedirectPath() {
   const searchParams = new URLSearchParams(window.location.search);
@@ -59,38 +60,53 @@ function getStartedAt() {
   return nextValue;
 }
 
+function getFirstPath(path: string) {
+  const existingPath = window.sessionStorage.getItem(SESSION_FIRST_PATH_KEY);
+
+  if (existingPath) {
+    return existingPath;
+  }
+
+  window.sessionStorage.setItem(SESSION_FIRST_PATH_KEY, path);
+  return path;
+}
+
 function getDurationSeconds(startedAt: string) {
   return Math.max(0, Math.round((Date.now() - new Date(startedAt).getTime()) / 1000));
 }
 
-async function recordAuthEvent(eventType: "registration") {
-  const startedAt = getStartedAt();
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
-  const headers: HeadersInit = {
-    "Content-Type": "application/json",
-  };
+async function recordAuthEvent(eventType: "login" | "registration") {
+  try {
+    const startedAt = getStartedAt();
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+    const headers: HeadersInit = {
+      "Content-Type": "application/json",
+    };
 
-  if (session?.access_token) {
-    headers.Authorization = `Bearer ${session.access_token}`;
+    if (session?.access_token) {
+      headers.Authorization = `Bearer ${session.access_token}`;
+    }
+
+    await fetch("/api/site-activity", {
+      body: JSON.stringify({
+        durationSeconds: getDurationSeconds(startedAt),
+        eventType,
+        firstPath: getFirstPath("/login"),
+        pageTitle: document.title,
+        path: "/login",
+        referrer: document.referrer || null,
+        sessionId: getSessionId(),
+        startedAt,
+      }),
+      headers,
+      method: "POST",
+      signal: AbortSignal.timeout(5_000),
+    });
+  } catch {
+    // 统计失败不能影响登录或注册。
   }
-
-  await fetch("/api/site-activity", {
-    body: JSON.stringify({
-      durationSeconds: getDurationSeconds(startedAt),
-      eventType,
-      pageTitle: document.title,
-      path: "/login",
-      referrer: document.referrer || null,
-      sessionId: getSessionId(),
-      startedAt,
-    }),
-    headers,
-    method: "POST",
-  }).catch(() => {
-    // 统计失败不能影响注册。
-  });
 }
 
 async function uploadProfileAvatar(file: File, accessToken: string) {
@@ -144,6 +160,8 @@ export default function LoginPage() {
       return;
     }
 
+    await recordAuthEvent("login");
+
     const redirectPath = getSafeRedirectPath();
 
     if (redirectPath) {
@@ -195,7 +213,7 @@ export default function LoginPage() {
       return;
     }
 
-    if (data.user) {
+    if (data.user && data.session) {
       await recordAuthEvent("registration");
     }
 

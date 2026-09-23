@@ -7,6 +7,7 @@ type ActivityEventType = "login" | "logout" | "page_view" | "registration";
 type ActivityPayload = {
   durationSeconds?: number;
   eventType?: ActivityEventType;
+  firstPath?: string;
   pageTitle?: string;
   path?: string;
   referrer?: string;
@@ -65,21 +66,29 @@ export async function POST(request: NextRequest) {
 
   const payload = (await request.json().catch(() => ({}))) as ActivityPayload;
   const authorization = request.headers.get("authorization") ?? "";
-  const supabase = createClient(supabaseUrl, supabaseServiceKey ?? supabaseAnonKey, {
-    global: {
-      headers: authorization ? { Authorization: authorization } : {},
-    },
-  });
+  const bearerToken = /^Bearer\s+(.+)$/i.exec(authorization)?.[1]?.trim() ?? "";
+  const authClient = createClient(supabaseUrl, supabaseAnonKey);
   const {
     data: { user },
-  } = await supabase.auth.getUser();
+    error: authError,
+  } = bearerToken
+    ? await authClient.auth.getUser(bearerToken)
+    : { data: { user: null }, error: null };
+  const userId = authError ? null : (user?.id ?? null);
+  const supabase = createClient(supabaseUrl, supabaseServiceKey ?? supabaseAnonKey, {
+    global: {
+      headers:
+        !supabaseServiceKey && bearerToken && userId
+          ? { Authorization: `Bearer ${bearerToken}` }
+          : {},
+    },
+  });
 
   const path = readString(payload.path, "/");
   const sessionId = readString(payload.sessionId);
   const startedAt = readString(payload.startedAt, new Date().toISOString());
   const durationSeconds = readDuration(payload.durationSeconds);
   const eventType = payload.eventType;
-  const userId = user?.id ?? null;
   const ipHash = hashValue(readClientIp(request));
   const visitorKey = ipHash;
   const now = new Date().toISOString();
@@ -106,7 +115,7 @@ export async function POST(request: NextRequest) {
 
   const sessionPayload = {
     duration_seconds: durationSeconds,
-    first_path: path,
+    first_path: readString(payload.firstPath, path),
     id: sessionId,
     ip_hash: ipHash,
     last_path: path,

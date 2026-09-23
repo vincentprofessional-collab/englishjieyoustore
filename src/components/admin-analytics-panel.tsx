@@ -99,13 +99,19 @@ function formatAveragePageViews(value: number) {
 }
 
 function startOfToday() {
-  const date = new Date();
-  date.setHours(0, 0, 0, 0);
-  return date;
+  const shanghaiOffset = 8 * 60 * 60 * 1000;
+  const shanghaiNow = new Date(Date.now() + shanghaiOffset);
+  shanghaiNow.setUTCHours(0, 0, 0, 0);
+  return new Date(shanghaiNow.getTime() - shanghaiOffset);
 }
 
 function isAfter(value: string | null, date: Date) {
   return Boolean(value && new Date(value).getTime() >= date.getTime());
+}
+
+function isWithin(value: string | null, start: Date, end: Date) {
+  const timestamp = value ? new Date(value).getTime() : Number.NaN;
+  return Number.isFinite(timestamp) && timestamp >= start.getTime() && timestamp < end.getTime();
 }
 
 type AnonymousMetricsRow = {
@@ -232,7 +238,8 @@ export function AdminAnalyticsPanel() {
   async function loadAnalytics() {
     setIsLoading(true);
     setMessage("");
-    const today = startOfToday().toISOString();
+    const today = startOfToday();
+    const tomorrow = new Date(today.getTime() + 24 * 60 * 60 * 1000);
 
     const [
       adminProfilesResult,
@@ -270,7 +277,8 @@ export function AdminAnalyticsPanel() {
         .from("profiles")
         .select("id", { count: "exact", head: true })
         .neq("role", "admin")
-        .gte("created_at", today),
+        .gte("created_at", today.toISOString())
+        .lt("created_at", tomorrow.toISOString()),
     ]);
 
     const firstError =
@@ -329,6 +337,7 @@ export function AdminAnalyticsPanel() {
 
   const metrics = useMemo(() => {
     const today = startOfToday();
+    const tomorrow = new Date(today.getTime() + 24 * 60 * 60 * 1000);
     const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);
     const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
     const adminUserIds = new Set(analytics.adminUserIds);
@@ -339,7 +348,15 @@ export function AdminAnalyticsPanel() {
       (session) => !session.user_id || !adminUserIds.has(session.user_id),
     );
     const pageViewEvents = eventRows.filter((event) => event.event_type === "page_view");
-    const todayPageViewEvents = pageViewEvents.filter((event) => isAfter(event.created_at, today));
+    const todayPageViewEvents = pageViewEvents.filter((event) =>
+      isWithin(event.created_at, today, tomorrow),
+    );
+    const todayLoginUsers = new Set(
+      eventRows
+        .filter((event) => event.event_type === "login" && isWithin(event.created_at, today, tomorrow))
+        .map((event) => event.user_id)
+        .filter(Boolean),
+    );
     const todayVisitorKeys = new Set(todayPageViewEvents.map(uniqueVisitorKey).filter(Boolean));
     const firstSeenByVisitor = new Map<string, number>();
 
@@ -358,26 +375,22 @@ export function AdminAnalyticsPanel() {
       }
     });
 
-    const anonymousTodayCounts = new Map<string, number>();
-    todayPageViewEvents
-      .filter((event) => !event.user_id)
-      .forEach((event) => {
-        const visitorKey = uniqueVisitorKey(event);
-
-        if (visitorKey) {
-          anonymousTodayCounts.set(visitorKey, (anonymousTodayCounts.get(visitorKey) ?? 0) + 1);
-        }
-      });
     const firstTimeVisitorKeys = new Set(
       todayPageViewEvents
         .map(uniqueVisitorKey)
         .filter((visitorKey) => visitorKey && firstSeenByVisitor.get(visitorKey) !== undefined)
         .filter((visitorKey) => (firstSeenByVisitor.get(visitorKey) ?? 0) >= today.getTime()),
     );
+    const todayAnonymousVisitorKeys = new Set(
+      todayPageViewEvents
+        .filter((event) => !event.user_id)
+        .map(uniqueVisitorKey)
+        .filter(Boolean),
+    );
     const returningAnonymousVisitorKeys = new Set(
-      [...anonymousTodayCounts.keys()].filter((visitorKey) => {
+      [...todayAnonymousVisitorKeys].filter((visitorKey) => {
         const firstSeen = firstSeenByVisitor.get(visitorKey);
-        return (anonymousTodayCounts.get(visitorKey) ?? 0) >= 2 && firstSeen !== undefined && firstSeen < today.getTime();
+        return firstSeen !== undefined && firstSeen < today.getTime();
       }),
     );
     const registeredVisitorsToday = new Set(
@@ -432,7 +445,7 @@ export function AdminAnalyticsPanel() {
           ) / sessionsWithDuration.length;
     const pageStats = new Map<
       string,
-      { durationTotal: number; durationCount: number; path: string; title: string; views: number }
+      { path: string; title: string; views: number }
     >();
 
     pageViewEvents
@@ -440,8 +453,6 @@ export function AdminAnalyticsPanel() {
       .forEach((event) => {
         const path = event.path ?? "未知页面";
         const current = pageStats.get(path) ?? {
-          durationCount: 0,
-          durationTotal: 0,
           path,
           title: event.page_title?.trim() || path,
           views: 0,
@@ -453,36 +464,11 @@ export function AdminAnalyticsPanel() {
         pageStats.set(path, current);
       });
 
-    sessionRows
-      .filter((session) => isAfter(session.last_seen_at, sevenDaysAgo))
-      .forEach((session) => {
-        const path = session.last_path ?? session.first_path;
-        const duration = session.duration_seconds ?? 0;
-
-        if (!path || duration <= 0) {
-          return;
-        }
-
-        const current = pageStats.get(path) ?? {
-          durationCount: 0,
-          durationTotal: 0,
-          path,
-          title: path,
-          views: 0,
-        };
-        current.durationCount += 1;
-        current.durationTotal += duration;
-        pageStats.set(path, current);
-      });
-
     const toPageStat = (page: {
-      durationCount: number;
-      durationTotal: number;
       path: string;
       title: string;
       views: number;
     }) => ({
-      averageDuration: page.durationCount ? page.durationTotal / page.durationCount : 0,
       path: page.path,
       title: page.title,
       views: page.views,
@@ -496,6 +482,7 @@ export function AdminAnalyticsPanel() {
       averageDuration,
       pageViewsToday: todayPageViewEvents.length,
       firstTimeVisitorsToday: firstTimeVisitorKeys.size,
+      loginUsersToday: todayLoginUsers.size,
       modelAnswerPage: modelAnswerPage ? toPageStat(modelAnswerPage) : null,
       popularPages,
       registeredAverageDuration: averageDurationForSessions(registeredSessions),
@@ -505,7 +492,6 @@ export function AdminAnalyticsPanel() {
       anonymousAverageDuration: averageDurationForSessions(anonymousSessions),
       anonymousAveragePageViews: averagePageViewsForSessions(anonymousSessions),
       returningAnonymousVisitorsToday: returningAnonymousVisitorKeys.size,
-      totalKnownVisitors: analytics.profileCount + analytics.anonymousSessionCount,
       visitorsToday: todayVisitorKeys.size,
     };
   }, [analytics]);
@@ -537,24 +523,24 @@ export function AdminAnalyticsPanel() {
       <div className="admin-analytics-groups">
         <section className="admin-analytics-group">
           <header className="admin-analytics-group-heading">
-            <h3>访问规模</h3>
-            <span>累计访问人数与用户构成</span>
+            <h3>账号与匿名访问</h3>
+            <span>账号和匿名访问标识分别统计，可能来自同一人</span>
           </header>
           <div className="admin-stat-grid admin-analytics-stat-row-3">
             <div>
-              <span>累计访问人数</span>
-              <strong>{metrics.totalKnownVisitors}</strong>
-              <small>注册用户 + 匿名访客去重估算</small>
-            </div>
-            <div>
-              <span>已注册用户</span>
+              <span>累计注册账号</span>
               <strong>{analytics.profileCount}</strong>
-              <small>当前普通注册用户</small>
+              <small>不含管理员，以 profiles 表为准</small>
             </div>
             <div>
-              <span>未注册用户</span>
+              <span>累计匿名访客标识</span>
               <strong>{analytics.anonymousSessionCount}</strong>
-              <small>累计匿名访客会话</small>
+              <small>按 IP 哈希或浏览器会话去重，不等于自然人数</small>
+            </div>
+            <div>
+              <span>匿名页面浏览量</span>
+              <strong>{analytics.anonymousPageViewCount}</strong>
+              <small>累计匿名 page_view 事件</small>
             </div>
           </div>
         </section>
@@ -562,33 +548,43 @@ export function AdminAnalyticsPanel() {
         <section className="admin-analytics-group">
           <header className="admin-analytics-group-heading">
             <h3>今日访客行为</h3>
-            <span>今日访问、回访与首次访客</span>
+            <span>上海时区；访客按账号/IP 标识估算；事件最多读取最近 50,000 条</span>
           </header>
           <div className="admin-stat-grid admin-analytics-stat-row-5">
             <div>
-              <span>今日打开网站人数</span>
+              <span>今日识别访客</span>
               <strong>{metrics.visitorsToday}</strong>
-              <small>今日去重访问人数</small>
+              <small>账号 ID 与匿名 IP / 会话标识去重</small>
             </div>
             <div>
-              <span>今日注册用户回访</span>
+              <span>今日登录账号</span>
+              <strong>{metrics.loginUsersToday}</strong>
+              <small>有 login 事件的去重账号；修复后开始累计</small>
+            </div>
+            <div>
+              <span>今日有访问的注册账号</span>
               <strong>{metrics.registeredVisitorsToday}</strong>
-              <small>今日有页面访问的已注册用户</small>
+              <small>今日 page_view 中已识别到的账号</small>
             </div>
             <div>
-              <span>今日匿名回访用户</span>
+              <span>今日匿名 IP 回访</span>
               <strong>{metrics.returningAnonymousVisitorsToday}</strong>
-              <small>此前未注册，今日再次打开</small>
+              <small>历史已有记录且今天再次访问的匿名标识</small>
             </div>
             <div>
-              <span>今日注册人数</span>
+              <span>今日注册账号</span>
               <strong>{metrics.registeredToday}</strong>
-              <small>按 profiles 创建时间</small>
+              <small>profiles 创建时间，上海时区</small>
             </div>
             <div>
-              <span>今日首次打开网站访客</span>
+              <span>今日首次识别标识</span>
               <strong>{metrics.firstTimeVisitorsToday}</strong>
-              <small>历史首次识别到的访客</small>
+              <small>最多读取最近 50,000 条事件</small>
+            </div>
+            <div>
+              <span>今日页面浏览量</span>
+              <strong>{metrics.pageViewsToday}</strong>
+              <small>已记录的 page_view 事件数</small>
             </div>
           </div>
         </section>
@@ -596,13 +592,13 @@ export function AdminAnalyticsPanel() {
         <section className="admin-analytics-group">
           <header className="admin-analytics-group-heading">
             <h3>停留与浏览</h3>
-            <span>平均会话表现</span>
+            <span>最多读取最近 50,000 个会话；会话经过时间含浏览器后台闲置</span>
           </header>
           <div className="admin-stat-grid admin-analytics-stat-row-5">
             <div>
-              <span>平均停留时间</span>
+              <span>平均会话经过时间</span>
               <strong>{formatDuration(metrics.averageDuration)}</strong>
-              <small>全部已记录会话</small>
+              <small>从会话开始到最近一次记录，可能包含后台闲置</small>
             </div>
             <div>
               <span>注册用户平均浏览页数</span>
@@ -610,9 +606,9 @@ export function AdminAnalyticsPanel() {
               <small>按有页面访问的会话计算</small>
             </div>
             <div>
-              <span>注册用户平均停留时间</span>
+              <span>注册账号平均会话时间</span>
               <strong>{formatDuration(metrics.registeredAverageDuration)}</strong>
-              <small>注册用户已记录会话</small>
+              <small>可能包含浏览器后台闲置</small>
             </div>
             <div>
               <span>访客平均浏览页数</span>
@@ -620,9 +616,9 @@ export function AdminAnalyticsPanel() {
               <small>按有页面访问的匿名会话计算</small>
             </div>
             <div>
-              <span>访客平均停留时间</span>
+              <span>匿名访问平均会话时间</span>
               <strong>{formatDuration(metrics.anonymousAverageDuration)}</strong>
-              <small>匿名访客已记录会话</small>
+              <small>可能包含浏览器后台闲置</small>
             </div>
           </div>
         </section>
@@ -668,7 +664,7 @@ export function AdminAnalyticsPanel() {
         <section className="admin-editor-card">
           <header className="admin-compact-heading">
             <h3>未注册访问</h3>
-            <span>累计 {analytics.anonymousSessionCount} 个匿名会话</span>
+            <span>累计 {analytics.anonymousSessionCount} 个匿名访问标识估算</span>
           </header>
           <div className="admin-table">
             {anonymousSessions.length ? (
@@ -684,15 +680,15 @@ export function AdminAnalyticsPanel() {
             )}
           </div>
           <p className="admin-card-note">
-            有 IP 统计字段时优先按 IP 哈希去重；字段缺失时先按匿名浏览器会话兜底。
-            累计匿名浏览 {analytics.anonymousPageViewCount} 次。
+            IP 哈希或访客字段可用时按该标识去重；字段缺失时按匿名浏览器会话兜底。共享网络可能把多人合并。
+            修复前缺失账号 ID 的历史记录无法还原，匿名累计数可能包含当时已登录的用户。累计匿名浏览 {analytics.anonymousPageViewCount} 次。
           </p>
         </section>
 
         <section className="admin-editor-card">
           <header className="admin-compact-heading">
             <h3>热门页面</h3>
-            <span>最近 7 天 · 浏览量 / 平均停留</span>
+            <span>最近 7 天 · 页面浏览量</span>
           </header>
           <div className="admin-table">
             {metrics.popularPages.length ? (
@@ -704,7 +700,6 @@ export function AdminAnalyticsPanel() {
                     </Link>
                   </div>
                   <small>{page.views} 次浏览</small>
-                  <small>平均 {formatDuration(page.averageDuration)}</small>
                 </div>
               ))
             ) : (
@@ -722,9 +717,7 @@ export function AdminAnalyticsPanel() {
             <div className="admin-featured-page-stat">
               <strong>{metrics.modelAnswerPage.title}</strong>
               <span>{metrics.modelAnswerPage.path}</span>
-              <small>
-                {metrics.modelAnswerPage.views} 次浏览 · 平均停留 {formatDuration(metrics.modelAnswerPage.averageDuration)}
-              </small>
+              <small>{metrics.modelAnswerPage.views} 次浏览</small>
             </div>
           ) : (
             <p className="admin-empty-text">暂无范文页面访问记录。</p>

@@ -39,7 +39,9 @@ export default async function RootLayout({
           <Suspense fallback={null}>
             <GlobalVocabularySearch />
           </Suspense>
-          <SiteAnalyticsTracker />
+          <Suspense fallback={null}>
+            <SiteAnalyticsTracker />
+          </Suspense>
           <GlobalStudyInteractions />
           <Suspense fallback={<div className="section-page-content section-page-content-wide" />}>
             <SiteSectionShell config={siteChromeConfig}>

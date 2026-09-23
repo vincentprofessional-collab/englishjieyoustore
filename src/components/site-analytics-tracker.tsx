@@ -1,11 +1,12 @@
 "use client";
 
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { getFirstOpenedAt } from "@/lib/visitor-identity";
 
 const SESSION_ID_KEY = "ielts-platform.analytics.sessionId";
 const SESSION_STARTED_KEY = "ielts-platform.analytics.startedAt";
+const SESSION_FIRST_PATH_KEY = "ielts-platform.analytics.firstPath";
 const LOCAL_STUDY_SECONDS_KEY = "ielts-platform.analytics.studySeconds";
 const LOCAL_SESSION_REPORTED_KEY = "ielts-platform.analytics.reportedSeconds";
 
@@ -47,6 +48,17 @@ function getStartedAt() {
   return nextValue;
 }
 
+function getFirstPath(path: string) {
+  const existingPath = window.sessionStorage.getItem(SESSION_FIRST_PATH_KEY);
+
+  if (existingPath) {
+    return existingPath;
+  }
+
+  window.sessionStorage.setItem(SESSION_FIRST_PATH_KEY, path);
+  return path;
+}
+
 function getDurationSeconds(startedAt: string) {
   return Math.max(0, Math.round((Date.now() - new Date(startedAt).getTime()) / 1000));
 }
@@ -76,6 +88,7 @@ async function updateSessionActivity(path: string) {
     await fetch("/api/site-activity", {
       body: JSON.stringify({
         durationSeconds,
+        firstPath: getFirstPath(path),
         path,
         referrer: document.referrer || null,
         sessionId,
@@ -115,6 +128,7 @@ async function recordActivity(
       body: JSON.stringify({
         durationSeconds,
         eventType,
+        firstPath: getFirstPath(path),
         pageTitle: document.title,
         path,
         referrer: document.referrer || null,
@@ -133,13 +147,15 @@ async function recordActivity(
 
 export function SiteAnalyticsTracker() {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const queryString = searchParams.toString();
   const lastTrackedPathRef = useRef("");
 
   useEffect(() => {
     getFirstOpenedAt();
 
     async function trackPageView() {
-      const path = `${pathname}${window.location.search}`;
+      const path = `${pathname}${queryString ? `?${queryString}` : ""}`;
 
       if (shouldSkipAnalyticsPath(path)) {
         return;
@@ -154,7 +170,7 @@ export function SiteAnalyticsTracker() {
     }
 
     void trackPageView();
-  }, [pathname]);
+  }, [pathname, queryString]);
 
   useEffect(() => {
     const updateCurrentSession = () => {
