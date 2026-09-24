@@ -5,6 +5,7 @@ import {
   isSpeakingContentSlug,
   normalizeSpeakingEditableContent,
 } from "@/lib/ielts/speaking-managed-content";
+import { getPublicStorageUrl } from "@/lib/supabase/storage";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseServiceKey =
@@ -18,6 +19,38 @@ function createServiceClient() {
   return createClient(supabaseUrl, supabaseServiceKey, {
     auth: { autoRefreshToken: false, persistSession: false },
   });
+}
+
+function routeStoredAudioUrl(value: unknown) {
+  if (typeof value !== "string" || !/^https?:\/\//i.test(value)) {
+    return value;
+  }
+
+  return getPublicStorageUrl("audio", value) ?? value;
+}
+
+function routeManagedAudioSection(value: unknown) {
+  if (!value || typeof value !== "object" || Array.isArray(value)) {
+    return value;
+  }
+
+  const content = value as Record<string, unknown>;
+  const next = { ...content };
+  if (typeof content.url === "string") {
+    next.url = routeStoredAudioUrl(content.url);
+  }
+  if (Array.isArray(content.segments)) {
+    next.segments = content.segments.map((segment) => {
+      if (!segment || typeof segment !== "object" || Array.isArray(segment)) {
+        return segment;
+      }
+      const audioSegment = segment as Record<string, unknown>;
+      return typeof audioSegment.audioUrl === "string"
+        ? { ...audioSegment, audioUrl: routeStoredAudioUrl(audioSegment.audioUrl) }
+        : segment;
+    });
+  }
+  return next;
 }
 
 async function requireAdminUser(request: NextRequest, supabase: SupabaseClient) {
@@ -103,7 +136,9 @@ export async function GET(request: NextRequest) {
       title: page.title,
     },
     sections: (sections ?? []).map((section) => ({
-      contentJson: section.content_json,
+      contentJson: section.section_key === "audio"
+        ? routeManagedAudioSection(section.content_json)
+        : section.content_json,
       sectionKey: section.section_key,
       sortOrder: section.sort_order,
       title: section.title,
