@@ -4,6 +4,10 @@ const supabaseHostname = process.env.NEXT_PUBLIC_SUPABASE_URL
   ? new URL(process.env.NEXT_PUBLIC_SUPABASE_URL).hostname
   : null;
 
+if (process.env.VERCEL === "1" && process.env.COS_MEDIA_ENABLED !== "true") {
+  throw new Error("Set COS_MEDIA_ENABLED=true before deploying; public media files are excluded from the deployment bundle.");
+}
+
 const nextConfig: NextConfig = {
   allowedDevOrigins: ["127.0.0.1"],
   images: {

@@ -5,6 +5,7 @@ import {
   FREE_PREVIEW_VISITOR_MAX_AGE,
   isFreePreviewVisitorId,
 } from "@/lib/free-preview-visitor";
+import { getManagedMediaUrl, getStaticMediaAddress } from "@/lib/media/url";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
@@ -12,10 +13,19 @@ const automatedUserAgent = /bot\b|crawl|spider|slurp|headlesschrome|googleother|
 
 export async function proxy(request: NextRequest) {
   const path = request.nextUrl.pathname;
+  const staticMedia = getStaticMediaAddress(path);
   const isBbcAsset =
     path.startsWith("/subtitles/bbc/") ||
     path.startsWith("/audio/bbc/") ||
     path.startsWith("/api/bbc-audio/");
+
+  if (staticMedia && !isBbcAsset) {
+    if (process.env.COS_MEDIA_ENABLED !== "true") {
+      return NextResponse.next({ request });
+    }
+    const target = new URL(getManagedMediaUrl(staticMedia.bucket, staticMedia.path), request.url);
+    return NextResponse.rewrite(target);
+  }
 
   if (
     path !== "/robots.txt" &&
@@ -93,6 +103,6 @@ export const config = {
   matcher: [
     "/audio/bbc/:path*",
     "/api/bbc-audio/:path*",
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|mp3|ico)$).*)",
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:ico)$).*)",
   ],
 };

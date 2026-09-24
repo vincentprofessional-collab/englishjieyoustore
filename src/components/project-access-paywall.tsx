@@ -232,7 +232,7 @@ export function ProjectAccessPaywall({
             </p>
             <p>付款后20分钟内开通权限，如有问题，请联系我的微信号：13432086750</p>
           </div>
-          <Image alt="微信支付收款码" height={894} priority src="/payment/wechat-pay.jpg" width={640} />
+          <Image alt="微信支付收款码" height={894} priority src="/payment/wechat-pay.jpg" unoptimized width={640} />
         </section>
       ) : null}
     </section>

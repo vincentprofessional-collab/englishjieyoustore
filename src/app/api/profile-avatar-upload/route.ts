@@ -1,6 +1,8 @@
 import { randomUUID } from "node:crypto";
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
+import { uploadPrivateCosMedia } from "@/lib/cos/storage";
+import { getManagedMediaUrl } from "@/lib/media/url";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY ?? process.env.SUPABASE_SECRET_KEY;
@@ -47,16 +49,26 @@ export async function POST(request: Request) {
   const extension = file.type === "image/png" ? "png" : file.type === "image/webp" ? "webp" : "jpg";
   const objectPath = `profiles/${user.id}/avatar-${randomUUID()}.${extension}`;
   const bytes = new Uint8Array(await file.arrayBuffer());
-  const { error: uploadError } = await supabase.storage
-    .from("images")
-    .upload(objectPath, bytes, { contentType: file.type, upsert: false });
+  let avatarUrl: string;
+  if (process.env.COS_MEDIA_ENABLED === "true") {
+    try {
+      await uploadPrivateCosMedia("images", objectPath, Buffer.from(bytes), file.type);
+      avatarUrl = getManagedMediaUrl("images", objectPath);
+    } catch (error) {
+      return jsonError(`头像上传失败：${error instanceof Error ? error.message : "COS upload failed."}`, 500);
+    }
+  } else {
+    const { error: uploadError } = await supabase.storage
+      .from("images")
+      .upload(objectPath, bytes, { contentType: file.type, upsert: false });
 
-  if (uploadError) {
-    return jsonError(`头像上传失败：${uploadError.message}`, 500);
+    if (uploadError) {
+      return jsonError(`头像上传失败：${uploadError.message}`, 500);
+    }
+    const { data: publicUrlData } = supabase.storage.from("images").getPublicUrl(objectPath);
+    avatarUrl = publicUrlData.publicUrl;
   }
 
-  const { data: publicUrlData } = supabase.storage.from("images").getPublicUrl(objectPath);
-  const avatarUrl = publicUrlData.publicUrl;
   const { error: profileError } = await supabase
     .from("profiles")
     .update({ avatar_url: avatarUrl, updated_at: new Date().toISOString() })

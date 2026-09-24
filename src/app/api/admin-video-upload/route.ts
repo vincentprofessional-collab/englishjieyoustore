@@ -1,6 +1,8 @@
 import { randomUUID } from "crypto";
 import { NextRequest, NextResponse } from "next/server";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import { uploadPrivateCosMedia } from "@/lib/cos/storage";
+import { getManagedMediaUrl } from "@/lib/media/url";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseServiceKey =
@@ -131,15 +133,23 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "视频不能超过 200MB。" }, { status: 400 });
   }
 
-  const bucketError = await ensureVideoBucket(supabase);
-  if (bucketError) {
-    return NextResponse.json({ error: bucketError }, { status: 500 });
+  const objectPath = `${safeFolder(formData.get("folder"))}/${Date.now()}-${randomUUID()}-${safeFilename(file.name)}`;
+  const contentType = getContentType(file);
+  if (process.env.COS_MEDIA_ENABLED === "true") {
+    try {
+      await uploadPrivateCosMedia("video", objectPath, Buffer.from(await file.arrayBuffer()), contentType);
+    } catch (error) {
+      return NextResponse.json({ error: error instanceof Error ? error.message : "COS upload failed." }, { status: 500 });
+    }
+    return NextResponse.json({ publicUrl: getManagedMediaUrl("video", objectPath) });
   }
 
-  const objectPath = `${safeFolder(formData.get("folder"))}/${Date.now()}-${randomUUID()}-${safeFilename(file.name)}`;
+  const bucketError = await ensureVideoBucket(supabase);
+  if (bucketError) return NextResponse.json({ error: bucketError }, { status: 500 });
+
   const { error: uploadError } = await supabase.storage.from("video").upload(objectPath, file, {
     cacheControl: "31536000",
-    contentType: getContentType(file),
+    contentType,
     upsert: false,
   });
 
