@@ -156,22 +156,6 @@ export function VocabularyVideoPlayer({
     <section aria-label="单词视频" className="vocabulary-video-panel" ref={(element) => { playerRef.current = element; }}>
       <header className="vocabulary-video-panel-head">
         <h2>看语境，记单词，学用法</h2>
-        {currentVideo ? (
-          <div className="vocabulary-video-actions">
-            <button
-              aria-label={`点赞当前视频，${currentVideo.likes} 个赞`}
-              aria-pressed={currentVideo.likedByMe}
-              className={`vocabulary-video-action-button vocabulary-video-like-button ${currentVideo.likedByMe ? "is-liked" : ""}`}
-              disabled={(!votesEnabled && !previewMode) || currentVideo.likedByMe}
-              onClick={toggleLike}
-              title={!votesEnabled && !previewMode ? "点赞功能将在数据表启用后开放" : undefined}
-              type="button"
-            >
-              <span aria-hidden="true">{currentVideo.likedByMe ? "♥" : "♡"}</span>
-              <span>{currentVideo.likes}</span>
-            </button>
-          </div>
-        ) : null}
       </header>
 
       {currentVideo ? (
@@ -289,6 +273,18 @@ export function VocabularyVideoPlayer({
               type="button"
             >
               <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6" /></svg>
+            </button>
+            <button
+              aria-label={`点赞当前视频，${currentVideo.likes} 个赞`}
+              aria-pressed={currentVideo.likedByMe}
+              className={`vocabulary-video-action-button vocabulary-video-like-button ${currentVideo.likedByMe ? "is-liked" : ""}`}
+              disabled={(!votesEnabled && !previewMode) || currentVideo.likedByMe}
+              onClick={toggleLike}
+              title={!votesEnabled && !previewMode ? "点赞功能将在数据表启用后开放" : undefined}
+              type="button"
+            >
+              <span aria-hidden="true">{currentVideo.likedByMe ? "♥" : "♡"}</span>
+              <span>{currentVideo.likes}</span>
             </button>
           </div>
         </>

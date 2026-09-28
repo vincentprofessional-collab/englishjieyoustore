@@ -13,21 +13,26 @@ export function generateStaticParams() {
 
 export default async function NewConceptLessonRoute({
   params,
+  searchParams,
 }: {
   params: Promise<{ lessonId: string }>;
+  searchParams: Promise<{ edition?: string }>;
 }) {
   const { lessonId } = await params;
+  const { edition: requestedEdition } = await searchParams;
+  const audioEdition = requestedEdition === "uk" ? "uk" : "us";
   const lesson = getNewConceptLessonById(lessonId);
 
   if (!lesson) {
     notFound();
   }
 
-  const media = getNewConceptMediaUrls(lesson);
+  const media = getNewConceptMediaUrls(lesson, audioEdition);
 
   return (
     <NewConceptLessonPage
       audioUrl={media.audioUrl}
+      audioEdition={audioEdition}
       lesson={lesson}
       sentenceAudioUrls={media.sentenceAudioUrls}
       vocabulary={getNewConceptVocabularyItems(lesson)}

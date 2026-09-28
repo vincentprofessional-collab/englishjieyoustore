@@ -55,54 +55,13 @@ for (const entry of getAllVocabularyEntries()) {
   }
 }
 
-const easyWordExclusions = new Set(
-  `a an the and or but if as at by for from in into of on onto out over per to up via with without about above after against along among around before behind below beneath beside between beyond during except inside near off outside past since through toward under until upon within across`.split(
-    " ",
-  ),
-);
-
 function wordsInFilename(filename: string) {
   return filename.match(/[a-z]+(?:['’][a-z]+)?/gi)?.map((word) => word.toLowerCase()) ?? [];
 }
 
-function filenameDifficultyScore(filename: string, entry: LocalVocabularyEntry) {
-  const targetRank = levelRank(entry.level);
-  if (targetRank === null) return 0;
-  const words = wordsInFilename(filename);
-  const targetForms = new Set([
-    entry.normalizedWord.toLowerCase(),
-    ...entry.inflections.map((inflection) => inflection.value.toLowerCase()),
-  ]);
-  let advancedWordCount = 0;
-  let levelGap = 0;
-  let unknownLongWordCount = 0;
-
-  for (const word of new Set(words)) {
-    if (targetForms.has(word) || easyWordExclusions.has(word)) continue;
-    const wordRank = levelByWord.get(word);
-    if (wordRank !== undefined && wordRank > targetRank) {
-      advancedWordCount += 1;
-      levelGap += wordRank - targetRank;
-    } else if (wordRank === undefined && word.length >= 9) {
-      unknownLongWordCount += 1;
-    }
-  }
-
-  const lengthPenalty = targetRank <= 2 ? Math.max(0, words.length - 8) * 0.2 : 0;
-  return advancedWordCount * 100 + levelGap * 10 + unknownLongWordCount * 5 + lengthPenalty;
-}
-
-function filenameLength(filename: string) {
-  return filename.replace(/\.mp4$/i, "").length;
-}
-
-function stableHash(value: string) {
-  let hash = 2166136261;
-  for (let index = 0; index < value.length; index += 1) {
-    hash ^= value.charCodeAt(index);
-    hash = Math.imul(hash, 16777619);
-  }
-  return hash >>> 0;
+function containsAboveCet4Word(filename: string) {
+  return wordsInFilename(filename.replace(/\.mp4$/i, ""))
+    .some((word) => (levelByWord.get(word) ?? 0) > 4);
 }
 
 function hasWholeWord(filename: string, forms: string[]) {
@@ -131,11 +90,11 @@ function getCandidatePool(entry: LocalVocabularyEntry) {
       return hasWholeWord(item.name.replace(/\.mp4$/i, ""), forms);
     })
     .sort((left, right) => {
-      const difficultyDifference = filenameDifficultyScore(left.name, entry) - filenameDifficultyScore(right.name, entry);
-      if (difficultyDifference !== 0) return difficultyDifference;
-      const filenameLengthDifference = filenameLength(left.name) - filenameLength(right.name);
+      const levelDifference = Number(containsAboveCet4Word(left.name)) - Number(containsAboveCet4Word(right.name));
+      if (levelDifference !== 0) return levelDifference;
+      const filenameLengthDifference = left.name.replace(/\.mp4$/i, "").length - right.name.replace(/\.mp4$/i, "").length;
       if (filenameLengthDifference !== 0) return filenameLengthDifference;
-      return stableHash(left.name) - stableHash(right.name) || left.name.localeCompare(right.name);
+      return left.name.localeCompare(right.name);
     })
     .map((item) => ({ path: item.name, src: getVocabularyVideoMediaUrl(item.name) }));
 }
@@ -169,7 +128,8 @@ function pickVisibleCandidates<T extends { path: string; likes: number }>(items:
   );
 
   if (cycle >= 4) {
-    return rankByLikes(items).slice(0, MAX_VISIBLE_VIDEOS);
+    return rankByLikes(items).slice(0, MAX_VISIBLE_VIDEOS)
+      .sort((left, right) => (originalOrder.get(left.path) ?? 0) - (originalOrder.get(right.path) ?? 0));
   }
 
   let visible = items.slice(0, MAX_VISIBLE_VIDEOS);
@@ -183,7 +143,7 @@ function pickVisibleCandidates<T extends { path: string; likes: number }>(items:
     visible = [...retained, ...additions.slice(0, replaceCount)];
   }
 
-  return visible;
+  return visible.sort((left, right) => (originalOrder.get(left.path) ?? 0) - (originalOrder.get(right.path) ?? 0));
 }
 
 export async function getVocabularyVideos(entry: LocalVocabularyEntry) {

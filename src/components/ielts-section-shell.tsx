@@ -2,14 +2,14 @@
 
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-import { Suspense, type ReactNode } from "react";
+import { Suspense, useState, type ReactNode } from "react";
 import type { SiteChromeConfig } from "@/lib/content/site-chrome";
 import { GuidePostsOnNavigationPage } from "@/components/guide-board";
 import { BBC_DEFAULT_YEAR } from "@/lib/articles/bbc";
 
 type StudyNavGroup = {
   href: string;
-  id: "integrated-english" | "junior-high" | "senior-high" | "cet4" | "cet6" | "postgraduate" | "ielts" | "sat";
+  id: "integrated-english" | "junior-high" | "senior-high" | "cet4" | "cet6" | "postgraduate" | "ielts" | "sat" | "gmat" | "gre";
   label: string;
   mark: string;
   disabled?: boolean;
@@ -52,8 +52,16 @@ const STUDY_NAV_GROUPS: StudyNavGroup[] = [
     label: "高考英语",
     mark: "高",
   },
-  { children: [], href: "/cet4", id: "cet4", label: "四级英语", mark: "四" },
-  { children: [], href: "/cet6", id: "cet6", label: "六级英语", mark: "六" },
+  { children: [
+    { href: "/cet4?entry=knowledge", label: "知识点" },
+    { href: "/cet4?entry=practice", label: "题型训练" },
+    { href: "/cet4?entry=papers", label: "历年试卷" },
+  ], href: "/cet4", id: "cet4", label: "四级英语", mark: "四" },
+  { children: [
+    { href: "/cet6?entry=knowledge", label: "知识点" },
+    { href: "/cet6?entry=practice", label: "题型训练" },
+    { href: "/cet6?entry=papers", label: "历年试卷" },
+  ], href: "/cet6", id: "cet6", label: "六级英语", mark: "六" },
   { children: [], disabled: true, href: "", id: "postgraduate", label: "考研英语", mark: "研" },
   {
     children: [
@@ -74,6 +82,8 @@ const STUDY_NAV_GROUPS: StudyNavGroup[] = [
     label: "SAT",
     mark: "S",
   },
+  { children: [], disabled: true, href: "", id: "gmat", label: "GMAT", mark: "G" },
+  { children: [], disabled: true, href: "", id: "gre", label: "GRE", mark: "G" },
 ];
 
 function getPathSegments(pathname: string) {
@@ -166,6 +176,7 @@ function IeltsSectionShellContent({
 }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const [expandedExamGroupId, setExpandedExamGroupId] = useState<StudyNavGroup["id"] | null>(null);
   const requestedBbcYear = Number(searchParams.get("year"));
   const activeBbcYear = BBC_DIRECTORY_YEARS.includes(requestedBbcYear)
     ? requestedBbcYear
@@ -195,7 +206,7 @@ function IeltsSectionShellContent({
   const activeNewConceptBookCode = isBookTwoLessonRoute || searchParams.get("book") === "new-concept-2"
     ? "new-concept-2"
     : "new-concept-1";
-  const activeNewConceptBookTitle = activeNewConceptBookCode === "new-concept-2" ? "新概念2" : "新概念1";
+  const activeNewConceptEdition = searchParams.get("edition") === "uk" ? "uk" : "us";
   const activeNewConceptUnitCount = activeNewConceptBookCode === "new-concept-2" ? 4 : 6;
   const requestedNewConceptUnit = Number(searchParams.get("unit"));
   const activeNewConceptUnit = isNewConceptPage && pathname === "/new-concept" &&
@@ -263,18 +274,32 @@ function IeltsSectionShellContent({
                     </Link>
                     {isNewConceptPage ? (
                       <div className="study-directory-secondary study-directory-new-concept-list">
-                        <strong className="study-directory-book-title">{activeNewConceptBookTitle}</strong>
-                        <div aria-label="新概念英语单元" className="study-directory-unit-list">
-                          {Array.from({ length: activeNewConceptUnitCount }, (_, index) => index + 1).map((unit) => (
+                        {(["new-concept-1", "new-concept-2"] as const).flatMap((bookCode) =>
+                          (["us", "uk"] as const).map((edition) => (
+                          <div className="study-directory-new-concept-book" key={`${bookCode}-${edition}`}>
                             <Link
-                              className={unit === activeNewConceptUnit ? "active" : ""}
-                              href={`/new-concept?book=${activeNewConceptBookCode}&unit=${unit}`}
-                              key={unit}
+                              aria-current={bookCode === activeNewConceptBookCode && edition === activeNewConceptEdition ? "page" : undefined}
+                              className={bookCode === activeNewConceptBookCode && edition === activeNewConceptEdition ? "active" : ""}
+                              href={`/new-concept?book=${bookCode}&edition=${edition}&unit=1`}
                             >
-                              <span>Unit {unit}</span>
+                              <span aria-hidden="true" />新概念{bookCode === "new-concept-1" ? "1" : "2"}{edition === "uk" ? "英音" : "美音"}
                             </Link>
-                          ))}
-                        </div>
+                            {bookCode === activeNewConceptBookCode && edition === activeNewConceptEdition ? (
+                              <div aria-label={`新概念${bookCode === "new-concept-1" ? "1" : "2"}${edition === "uk" ? "英音" : "美音"}单元`} className="study-directory-unit-list">
+                                {Array.from({ length: activeNewConceptUnitCount }, (_, index) => index + 1).map((unit) => (
+                                  <Link
+                                    aria-current={unit === activeNewConceptUnit ? "page" : undefined}
+                                    className={unit === activeNewConceptUnit ? "active" : ""}
+                                    href={`/new-concept?book=${bookCode}&edition=${edition}&unit=${unit}`}
+                                    key={unit}
+                                  >
+                                    <span aria-hidden="true" />Unit {unit}
+                                  </Link>
+                                ))}
+                              </div>
+                            ) : null}
+                          </div>
+                        ))) }
                       </div>
                     ) : null}
                   </div>
@@ -283,20 +308,29 @@ function IeltsSectionShellContent({
             }
 
             return (
-              <div className={`study-directory-source-group ${isActive ? "active" : ""} ${group.disabled ? "disabled" : ""}`} key={group.id}>
+              <div className={`study-directory-source-group ${isActive ? "active" : ""} ${group.disabled ? "disabled" : ""} ${group.id === "gmat" || group.id === "gre" ? "visible-placeholder" : ""}`} key={group.id}>
                 {group.disabled ? (
                   <div aria-disabled="true" className="study-directory-source-link">
-                    <span className="study-directory-source-mark" aria-hidden="true">{group.mark}</span>
                     <strong>{group.label}</strong>
                   </div>
+                ) : group.children.length ? (
+                  <button
+                    aria-controls={`study-directory-${group.id}-children`}
+                    aria-expanded={expandedExamGroupId === group.id}
+                    className="study-directory-source-link study-directory-expand-button"
+                    onClick={() => setExpandedExamGroupId((current) => current === group.id ? null : group.id)}
+                    type="button"
+                  >
+                    <strong>{group.label}</strong>
+                    <span aria-hidden="true" className="study-directory-chevron">{expandedExamGroupId === group.id ? "−" : "+"}</span>
+                  </button>
                 ) : (
                   <Link aria-current={isActive ? "page" : undefined} className="study-directory-source-link" href={group.href}>
-                    <span className="study-directory-source-mark" aria-hidden="true">{group.mark}</span>
                     <strong>{group.label}</strong>
                   </Link>
                 )}
 
-                {group.children.length ? <div className="study-directory-secondary">
+                {group.children.length && expandedExamGroupId === group.id ? <div className="study-directory-secondary" id={`study-directory-${group.id}-children`}>
                   {group.children.map((child) => {
                     const defaultEntry = group.id === "junior-high" ? "knowledge" : group.id === "senior-high" ? "practice" : undefined;
                     const isCurrent = isStudyChildCurrent(child.href, pathname, searchParams, defaultEntry);

@@ -117,7 +117,7 @@ export function SeniorHighKnowledge() {
 
   if (error) return <div className="senior-high-alert">{error}</div>;
   if (!items) return <div className="senior-high-loading">正在按语法主题载入知识点…</div>;
-  if (!topic) return <div className="senior-high-section"><h2>知识点</h2><p className="senior-high-muted">点击“名词、冠词、代词”等主题后进入连续题目；填空直接写在原句虚线上，不再显示多余的下方输入框。</p><div className="senior-high-topic-grid">{groups.map(([name, topicItems]) => <button className="senior-high-topic-card" key={name} onClick={() => openTopic(name)} type="button"><strong>{name}</strong><span>{topicItems.length} 题</span></button>)}</div></div>;
+  if (!topic) return <div className="senior-high-section"><div className="senior-high-topic-grid">{groups.map(([name, topicItems]) => <button className="senior-high-topic-card" key={name} onClick={() => openTopic(name)} type="button"><strong>{name}</strong><span>{topicItems.length} 题</span></button>)}</div></div>;
 
   const answered = questions.filter((item) => Boolean(answers[item.id]?.trim())).length;
   const correctCount = submitted ? questions.filter((item) => correct(item, answers[item.id] || "")).length : 0;

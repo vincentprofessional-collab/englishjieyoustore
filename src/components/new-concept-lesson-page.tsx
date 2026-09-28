@@ -30,6 +30,7 @@ import {
 } from "@/lib/articles/vocabulary-study-return";
 import type { NewConceptLesson } from "@/lib/new-concept";
 import { getNewConceptNextLesson, getNewConceptPreviousLesson } from "@/lib/new-concept";
+import { alignNewConceptParagraph } from "@/lib/new-concept-bilingual";
 import type { NewConceptVocabularyItem } from "@/lib/new-concept-vocabulary";
 import type { ArticleInlineAnnotation } from "@/lib/article-inline-annotations";
 
@@ -236,6 +237,20 @@ function getNewConceptArticleTextBlocks(lesson: NewConceptLesson) {
   const englishLines = lesson.kind === "dialogue" ? lesson.english : lesson.exercise;
   const blocks: { chinese: string; endLineIndex: number; english: string; startLineIndex: number }[] = [];
 
+  if (lesson.bookCode === "new-concept-2") {
+    const chineseLines = alignNewConceptParagraph(
+      englishLines,
+      lesson.fullChineseTranslation ?? lesson.chinese[0] ?? "",
+      lesson.lessonNo,
+    );
+    return englishLines.map((english, index) => ({
+      chinese: chineseLines[index] ?? "",
+      endLineIndex: index,
+      english,
+      startLineIndex: index,
+    }));
+  }
+
   const speakerLabel = /(^|\s)([A-Z][A-Z .'-]{0,25}:)(?=\s|$|["'“”‘’])/g;
   const hasSpeakerLabels = lesson.kind === "dialogue" && englishLines.some((line) => {
     speakerLabel.lastIndex = 0;
@@ -337,28 +352,9 @@ function NewConceptArticleCopy({
   }
 
   const textBlocks = getNewConceptArticleTextBlocks(lesson);
-  const bookTwoTranslation = lesson.bookCode === "new-concept-2"
-    ? lesson.fullChineseTranslation ?? lesson.chinese[0] ?? ""
-    : "";
-  const bookTwoEnglish = textBlocks.map((textBlock) => textBlock.english).join(" ");
-
   return (
     <div className={`bbc-original-copy new-concept-article-copy ${displayMode === "bilingual" ? "bilingual" : ""}`}>
-      {lesson.bookCode === "new-concept-2" ? (
-        <div className="bbc-original-text-block">
-          {displayMode !== "chinese" ? (
-            <p lang="en"><ArticleInlineAnnotatedParagraph
-              annotations={annotations}
-              paragraphId="paragraph-0"
-              text={bookTwoEnglish}
-              renderText={(text) => renderNewConceptArticleEnglish(text, [], pronunciations)}
-            /></p>
-          ) : null}
-          {displayMode !== "english" && bookTwoTranslation ? (
-            <p className="bbc-original-chinese" lang="zh-CN">{bookTwoTranslation}</p>
-          ) : null}
-        </div>
-      ) : textBlocks.map((textBlock, index) => {
+      {textBlocks.map((textBlock, index) => {
           const { chinese, english } = textBlock;
 
           return (
@@ -418,10 +414,14 @@ function LessonTranscript({
     );
   }
 
+  const alignedBookTwoChinese = lesson.bookCode === "new-concept-2"
+    ? alignNewConceptParagraph(lesson.english, lesson.fullChineseTranslation ?? lesson.chinese[0] ?? "", lesson.lessonNo)
+    : null;
+
   return (
     <div className="new-concept-sentence-list">
       {lesson.english.map((english, index) => {
-        const chinese = lesson.chinese[index] ?? "";
+        const chinese = alignedBookTwoChinese?.[index] ?? lesson.chinese[index] ?? "";
         const sentenceAudioUrl = sentenceAudioUrls[index] ?? null;
 
         return (
@@ -499,11 +499,13 @@ function LessonTranscript({
 }
 
 export function NewConceptLessonPage({
+  audioEdition,
   audioUrl,
   lesson,
   sentenceAudioUrls,
   vocabulary,
 }: {
+  audioEdition: "us" | "uk";
   audioUrl: string | null;
   lesson: NewConceptLesson;
   sentenceAudioUrls: (string | null)[];
@@ -532,6 +534,7 @@ export function NewConceptLessonPage({
   const [speakingTraining, setSpeakingTraining] = useState<SpeakingTrainingState | null>(null);
   const [audioSettings, setAudioSettings] = useState<AudioPlayerSettings>({
     ...DEFAULT_AUDIO_PLAYER_SETTINGS,
+    pronunciationMode: audioEdition,
     subtitleMode: "bilingual",
   });
   const pageRef = useRef<HTMLElement | null>(null);
@@ -545,6 +548,12 @@ export function NewConceptLessonPage({
   useEffect(() => {
     audioSettingsRef.current = audioSettings;
   }, [audioSettings]);
+
+  useEffect(() => {
+    setAudioSettings((current) => current.pronunciationMode === audioEdition
+      ? current
+      : { ...current, pronunciationMode: audioEdition });
+  }, [audioEdition]);
 
   useEffect(() => {
     setSentenceDurations({});
@@ -601,6 +610,7 @@ export function NewConceptLessonPage({
     const restoredAudioSettings = {
       ...DEFAULT_AUDIO_PLAYER_SETTINGS,
       ...(returnState.audioSettings ?? {}),
+      pronunciationMode: audioEdition,
     };
     const restoredMode = validModes.includes(returnState.studyMode) ? returnState.studyMode : "general";
 
@@ -634,7 +644,7 @@ export function NewConceptLessonPage({
         vocabularyList.scrollTop = Math.max(0, returnState.vocabularyScrollTop ?? 0);
       }
     });
-  }, [lesson.id, lesson.english.length]);
+  }, [audioEdition, lesson.id, lesson.english.length]);
 
   useEffect(() => {
     function handleFullscreenChange() {
@@ -939,12 +949,10 @@ export function NewConceptLessonPage({
   const previousStudyTextBlock = studyTextBlocks[activeStudyTextBlockIndex - 1];
   const nextStudyTextBlock = studyTextBlocks[activeStudyTextBlockIndex + 1];
   const activeStudyEnglish = activeStudyTextBlock?.english ?? lesson.english[activeStudySentenceIndex] ?? lesson.english[0] ?? "";
-  const activeStudyChinese = lesson.bookCode === "new-concept-2"
-    ? lesson.fullChineseTranslation ?? lesson.chinese[0] ?? ""
-    : activeStudyTextBlock?.chinese
-      ?? lesson.chinese[activeStudySentenceIndex]
-      ?? lesson.chinese[0]
-      ?? "";
+  const activeStudyChinese = activeStudyTextBlock?.chinese
+    ?? lesson.chinese[activeStudySentenceIndex]
+    ?? lesson.chinese[0]
+    ?? "";
   const activeStudySentenceAudio = sentenceAudioUrls[activeStudySentenceIndex] ?? null;
   const fullLessonEnglish = studyTextBlocks.map((block) => block.english).join(" ");
   const dictionaryPronunciations = useArticlePronunciations(
@@ -978,7 +986,7 @@ export function NewConceptLessonPage({
     <section className="stack bbc-article-page new-concept-lesson-page" ref={pageRef}>
       <div className="page-heading bbc-article-hero new-concept-lesson-hero">
         <div className="bbc-article-hero-top">
-          <Link className="bbc-detail-back-link" href={`/new-concept?book=${lesson.bookCode ?? "new-concept-1"}`}>
+          <Link className="bbc-detail-back-link" href={`/new-concept?book=${lesson.bookCode ?? "new-concept-1"}&edition=${audioEdition}&unit=${Math.ceil(lesson.lessonNo / 24)}`}>
             ← 返回{lesson.bookCode === "new-concept-2" ? "新概念2" : "新概念1"}
           </Link>
           <span className="bbc-article-title-id">Lesson {lesson.lessonNo}</span>
@@ -1012,13 +1020,13 @@ export function NewConceptLessonPage({
           <section className="bbc-full-audio-panel new-concept-audio-panel">
             <div className="new-concept-audio-heading">
               <div>
-                <span className="new-concept-kicker">American English audio</span>
+                <span className="new-concept-kicker">{audioEdition === "uk" ? "British English audio" : "American English audio"}</span>
                 <strong>本课整段播放</strong>
               </div>
               <span>Lesson {lesson.lessonNo}</span>
             </div>
             <AudioPlayer
-              key={`new-concept-full-${modeSelectionVersion}`}
+              key={`new-concept-full-${audioEdition}-${modeSelectionVersion}`}
               hasSelectedRate
               // Native media playback supports pitch-preserving rate changes.
               html5
@@ -1232,15 +1240,15 @@ export function NewConceptLessonPage({
           {isVocabularyVisible ? (
             <LessonVocabulary
               onVocabularyOpen={saveVocabularyReturnState}
-              returnTo={`/new-concept/${lesson.id}`}
+              returnTo={`/new-concept/${lesson.id}?edition=${audioEdition}`}
               vocabulary={vocabularyForDisplay}
             />
           ) : null}
         </div>
 
         <nav aria-label="课次导航" className="new-concept-lesson-nav">
-          {previousLesson ? <Link href={`/new-concept/${previousLesson.id}`}>← Lesson {previousLesson.lessonNo} {previousLesson.title}</Link> : <span />}
-          {nextLesson ? <Link href={`/new-concept/${nextLesson.id}`}>Lesson {nextLesson.lessonNo} {nextLesson.title} →</Link> : <span />}
+          {previousLesson ? <Link href={`/new-concept/${previousLesson.id}?edition=${audioEdition}`}>← Lesson {previousLesson.lessonNo} {previousLesson.title}</Link> : <span />}
+          {nextLesson ? <Link href={`/new-concept/${nextLesson.id}?edition=${audioEdition}`}>Lesson {nextLesson.lessonNo} {nextLesson.title} →</Link> : <span />}
         </nav>
       </div>
     </section>

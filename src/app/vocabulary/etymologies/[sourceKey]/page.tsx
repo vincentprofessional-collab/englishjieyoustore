@@ -33,7 +33,7 @@ export default async function VocabularyEtymologyPage({
     directory.category === "prefix" ||
     directory.category === "suffix" ||
     directory.etymologySource.trimStart().startsWith("/");
-  const backHref = from === "lookup" ? "/vocabulary/etymology" : "/vocabulary";
+  const backHref = from === "lookup" ? "/vocabulary/surprise" : "/vocabulary";
   const content = isAffixDirectory ? (
     <section className="etymology-word-panel suffix-related-words" aria-label="前后缀相关词汇">
       {directory.entries.map((entry) => (

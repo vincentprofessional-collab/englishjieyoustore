@@ -122,6 +122,7 @@ type ProgressStore = Record<string, ProgressEntry>;
 type VocabularyLearningProps = {
   bookCounts: Record<LearningBookKey, { added: number; total: number }>;
   books: Array<{ description: string; key: LearningBookKey; label: string }>;
+  initialBook: BookSelectionKey;
   sourceCount: number;
 };
 
@@ -161,7 +162,7 @@ const DEFAULT_STUDY_SETTINGS: StudySettings = {
   modes: [],
   reviewFamiliarities: [],
   reviewView: null,
-  scope: "all",
+  scope: "core",
   voice: "us",
   order: "sequential",
   definitionLanguage: "zh",
@@ -921,23 +922,30 @@ function chooseNextWord(
   excludeId: string | null,
   settings: StudySettings,
   browseKey: string,
-) {
+  preferredBook: BookSelectionKey,
+): LearningWord | null {
+  const preferredWords = preferredBook === "生词本" ? words : words.filter((word) => word.level === preferredBook);
+  const earlierWords = settings.scope === "all" && preferredBook !== "生词本"
+    ? words.filter((word) => word.level !== preferredBook)
+    : [];
   if (settings.method === "browse") {
     if (settings.reviewView !== null || settings.reviewFamiliarities.length > 0) {
       if (settings.reviewView !== null
         && (settings.reviewFamiliarities.length === 0 || settings.modes.length === 0)) return null;
       const selected = filterBrowseReviewWords(
-        words, store, browseKey, settings.reviewView, settings.reviewFamiliarities, now, settings.modes,
+        preferredWords, store, browseKey, settings.reviewView, settings.reviewFamiliarities, now, settings.modes,
       );
       const nextId = nextBrowseLoopId(selected.map((word) => word.id), excludeId, order);
-      return selected.find((word) => word.id === nextId) ?? null;
+      return selected.find((word) => word.id === nextId) ?? (earlierWords.length
+        ? chooseNextWord(earlierWords, store, now, order, excludeId, { ...settings, scope: "core" }, browseKey, "生词本")
+        : null);
     }
-    const todayIds = words
+    const todayIds = preferredWords
       .filter((word) => isReviewedToday(store[word.id]?.browseByBook?.[browseKey]?.browseLastSeenAt ?? null, now))
       .map((word) => word.id);
     if (todayIds.length < settings.dailyNew) {
       const todaySet = new Set(todayIds);
-      const candidates = words.filter((word) => !todaySet.has(word.id) && word.id !== excludeId);
+      const candidates = preferredWords.filter((word) => !todaySet.has(word.id) && word.id !== excludeId);
       const neverBrowsed = candidates.filter((word) => {
         const entry = store[word.id];
         return !entry?.lastReviewedAt && !entry?.browseByBook?.[browseKey]?.browseFirstSeenAt;
@@ -951,15 +959,17 @@ function chooseNextWord(
         - (store[right]?.browseByBook?.[browseKey]?.browseLastSeenAt ?? 0))
       .slice(0, settings.dailyNew);
     const loopId = nextBrowseLoopId(loopIds, excludeId, order);
-    return words.find((word) => word.id === loopId) ?? null;
+    return preferredWords.find((word) => word.id === loopId) ?? (earlierWords.length
+      ? chooseNextWord(earlierWords, store, now, order, excludeId, { ...settings, scope: "core" }, browseKey, "生词本")
+      : null);
   }
-  const newToday = words.filter((word) => {
+  const newToday = preferredWords.filter((word) => {
     const entry = progressFor(store, word.id);
     return isReviewedToday(entry.firstLearnedAt ?? null, now);
   }).length;
   const due: LearningWord[] = [];
   const fresh: LearningWord[] = [];
-  for (const word of words) {
+  for (const word of preferredWords) {
     if (word.id === excludeId) continue;
     const entry = progressFor(store, word.id);
     if (entry.completed) continue;
@@ -970,7 +980,9 @@ function chooseNextWord(
     }
   }
   const pool = due.length > 0 ? due : fresh;
-  if (pool.length === 0) return null;
+  if (pool.length === 0) return earlierWords.length && preferredWords.every((word) => progressFor(store, word.id).completed)
+    ? chooseNextWord(earlierWords, store, now, order, excludeId, { ...settings, scope: "core" }, browseKey, "生词本")
+    : null;
   if (order === "random") return shuffle(pool)[0];
   if (due.length > 0) return due.reduce((earliest, word) =>
     (progressFor(store, word.id).nextReviewAt ?? now) < (progressFor(store, earliest.id).nextReviewAt ?? now)
@@ -979,8 +991,9 @@ function chooseNextWord(
   return fresh[0];
 }
 
-export function VocabularyLearning({ bookCounts, books }: VocabularyLearningProps) {
-  const [selectedBook, setSelectedBook] = useState<BookSelectionKey>("初中");
+export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount }: VocabularyLearningProps) {
+  const [selectedBook, setSelectedBook] = useState<BookSelectionKey>(initialBook);
+  useEffect(() => setSelectedBook(initialBook), [initialBook]);
   const [settingsByBook, setSettingsByBook] = useState<Partial<Record<BookSelectionKey, StudySettings>>>({});
   const [settingsHydrated, setSettingsHydrated] = useState(false);
   const [settingsOpenFor, setSettingsOpenFor] = useState<BookSelectionKey | null>(null);
@@ -1147,7 +1160,7 @@ export function VocabularyLearning({ bookCounts, books }: VocabularyLearningProp
           reviewFamiliarities: reviewView && restoredFamiliarities.length === 0
             ? COLLECTIONS.map((collection) => collection.key) : restoredFamiliarities,
           reviewView,
-          scope: item.scope === "core" ? "core" : "all",
+          scope: item.scope === "all" ? "all" : "core",
           voice: item.voice === "uk" ? "uk" : "us",
           order: item.order === "random" ? "random" : "sequential",
           definitionLanguage: item.definitionLanguage === "en" ? "en" : "zh",
@@ -1247,7 +1260,9 @@ export function VocabularyLearning({ bookCounts, books }: VocabularyLearningProp
         if (!response.ok) throw new Error("词库加载失败");
         return (await response.json()) as { words: LearningWord[] };
       })
-      .then((payload) => setWords(Array.isArray(payload.words) ? payload.words : []))
+      .then((payload) => {
+        if (!controller.signal.aborted) setWords(Array.isArray(payload.words) ? payload.words : []);
+      })
       .catch((error: unknown) => {
         if (controller.signal.aborted || (error instanceof DOMException && error.name === "AbortError")) return;
         setLoadError(error instanceof Error ? error.message : "词库加载失败");
@@ -1320,6 +1335,7 @@ export function VocabularyLearning({ bookCounts, books }: VocabularyLearningProp
       null,
       currentSettings,
       `${selectedBook}:${currentSettings.scope}`,
+      selectedBook,
     );
     if (next) {
       setSessionDepleted(false);
@@ -1462,11 +1478,16 @@ export function VocabularyLearning({ bookCounts, books }: VocabularyLearningProp
 
   const selectWord = useCallback((nextSelection: BookSelectionKey) => {
     if (advancePending) return;
+    if (nextSelection === selectedBook) return;
     setOralScoreFeedback(null);
     setBrowseSpellingMistakes({});
+    setSettingsOpenFor(null);
     setCurrentWordId(null);
+    setWords([]);
+    setLoading(true);
+    window.history.replaceState(null, "", `/vocabulary/books?level=${encodeURIComponent(nextSelection)}`);
     setSelectedBook(nextSelection);
-  }, [advancePending]);
+  }, [advancePending, selectedBook]);
 
   const openStudySettings = useCallback(() => {
     setSettingsDraft(toSettingsDraft(settingsByBook[selectedBook] ?? { ...DEFAULT_STUDY_SETTINGS, voice, order }));
@@ -1580,6 +1601,7 @@ export function VocabularyLearning({ bookCounts, books }: VocabularyLearningProp
         currentWord.id,
         currentSettings,
         `${selectedBook}:${currentSettings.scope}`,
+        selectedBook,
       );
       if (next) chooseBrowseMode(currentSettings);
       setCurrentWordId(next?.id ?? null);
@@ -1718,9 +1740,13 @@ export function VocabularyLearning({ bookCounts, books }: VocabularyLearningProp
   );
 
   useEffect(() => {
-    if (!currentWord || modeIndex !== 3 || browseMode) return;
+    if (!studyReady || !pageVisible || loading || advancePending || !currentWord || browseMode) return;
 
-    const handleSpellingKeyboard = (event: KeyboardEvent) => {
+    const handleClassificationKeyboard = (event: KeyboardEvent) => {
+      if (event.isComposing || event.repeat || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
+      const target = event.target;
+      const editable = target instanceof HTMLElement && (target.isContentEditable || ["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName));
+      if (editable && modeIndex !== 3) return;
       if (event.key === "ArrowLeft" || event.key === "ArrowDown" || event.key === "ArrowRight") {
         event.preventDefault();
         const requestedOutcome = event.key === "ArrowLeft"
@@ -1728,19 +1754,23 @@ export function VocabularyLearning({ bookCounts, books }: VocabularyLearningProp
           : event.key === "ArrowDown"
             ? "vague"
             : "unfamiliar";
-        if (requestedOutcome === "familiar" && !spellingCorrect) return;
-        submitSpelling(requestedOutcome);
+        if (modeIndex === 3) {
+          if (requestedOutcome === "familiar" && !spellingCorrect) return;
+          submitSpelling(requestedOutcome);
+        } else {
+          handleRecognitionOutcome(requestedOutcome);
+        }
         return;
       }
 
-      if (event.key !== "Enter" || event.isComposing || event.repeat) return;
+      if (event.key !== "Enter" || modeIndex !== 3) return;
       event.preventDefault();
       revealSpellingAnswer();
     };
 
-    document.addEventListener("keydown", handleSpellingKeyboard);
-    return () => document.removeEventListener("keydown", handleSpellingKeyboard);
-  }, [browseMode, currentWord, modeIndex, revealSpellingAnswer, spellingCorrect, submitSpelling]);
+    document.addEventListener("keydown", handleClassificationKeyboard);
+    return () => document.removeEventListener("keydown", handleClassificationKeyboard);
+  }, [advancePending, browseMode, currentWord, handleRecognitionOutcome, loading, modeIndex, pageVisible, revealSpellingAnswer, spellingCorrect, studyReady, submitSpelling]);
 
   const finishRecording = useCallback(() => {
     if (recordingFinishedRef.current || oralOutcomeLockedRef.current) return;
@@ -1912,18 +1942,24 @@ export function VocabularyLearning({ bookCounts, books }: VocabularyLearningProp
       <div className="vocabulary-learning-bottom-actions">
         <button
           className="vocabulary-learning-category-button familiar"
+          aria-keyshortcuts="ArrowLeft"
+          title="左方向键：熟悉"
           disabled={advancePending || (modeIndex === 2 && (oralScoreFeedback === null || familiarityFromScore(oralScoreFeedback) !== "familiar")) || (modeIndex === 3 && !spellingCorrect)}
           onClick={() => modeIndex === 3 ? submitSpelling("familiar") : handleRecognitionOutcome("familiar")}
           type="button"
         >熟悉</button>
         <button
           className="vocabulary-learning-category-button vague"
+          aria-keyshortcuts="ArrowDown"
+          title="下方向键：模糊"
           disabled={advancePending || (modeIndex === 2 && (oralScoreFeedback === null || familiarityFromScore(oralScoreFeedback) !== "vague"))}
           onClick={() => modeIndex === 3 ? submitSpelling("vague") : handleRecognitionOutcome("vague")}
           type="button"
         >模糊</button>
         <button
           className="vocabulary-learning-category-button unfamiliar"
+          aria-keyshortcuts="ArrowRight"
+          title="右方向键：生僻"
           disabled={advancePending || (modeIndex === 2 && (oralScoreFeedback === null || familiarityFromScore(oralScoreFeedback) !== "unfamiliar"))}
           onClick={() => modeIndex === 3 ? submitSpelling("unfamiliar") : handleRecognitionOutcome("unfamiliar")}
           type="button"
@@ -1973,7 +2009,9 @@ export function VocabularyLearning({ bookCounts, books }: VocabularyLearningProp
                 <span aria-hidden="true" className="vocabulary-learning-nav-dot" />
                 <span className="vocabulary-learning-nav-label">{book.label}</span>
                 <strong>
-                  {bookCounts[book.key].added === bookCounts[book.key].total
+                  {book.key === "未分级"
+                    ? `${bookCounts[book.key].total.toLocaleString()}/${sourceCount.toLocaleString()}`
+                    : bookCounts[book.key].added === bookCounts[book.key].total
                     ? bookCounts[book.key].total.toLocaleString()
                     : `${bookCounts[book.key].added.toLocaleString()}/${bookCounts[book.key].total.toLocaleString()}`}
                 </strong>

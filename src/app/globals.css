@@ -10534,9 +10534,18 @@ body.share-sheet-open {
   border-radius: 22px;
   display: grid;
   gap: 10px;
-  margin: 0 24px;
+  margin: 0;
   min-height: 220px;
   padding: 24px;
+}
+
+.favorite-library-panel:has(.favorite-empty) {
+  padding-top: 0;
+}
+
+.favorite-library-panel:has(.favorite-empty) .favorite-sort-control {
+  right: 16px;
+  top: 14px;
 }
 
 .favorite-empty.full {
@@ -28536,6 +28545,42 @@ body *:not(.bbc-vocabulary-highlight):not(.bbc-active-word) {
 .vocabulary-learning-settings-reaction-options label:hover,
 .vocabulary-learning-settings-reaction-options label:focus-within {
   background: linear-gradient(115deg, #e6f0ff 0%, #d5e6ff 100%) !important;
+}
+
+/* Only the reading-mode control row has the pale blue background. */
+.bbc-audio-toolbar {
+  background: #edf6ff !important;
+  border: 1px solid #bed8f3;
+  border-radius: 18px;
+  padding: 12px;
+}
+
+.bbc-vocabulary-highlight,
+.bbc-vocabulary-highlight.bbc-active-word {
+  color: #7329a9 !important;
+  text-decoration-color: #7329a9 !important;
+}
+
+.bbc-vocabulary-highlight.bbc-active-word {
+  background: #eadcff !important;
+}
+
+.vocabulary-learning-page .vocabulary-learning-content-grid > .vocabulary-learning-empty {
+  margin-top: 0;
+}
+
+.vocabulary-word-page .word-detail-grid.without-side-panel {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.vocabulary-video-controls {
+  background: #e8f6ff;
+  border-color: #b5def7;
+}
+
+.vocabulary-video-control-button.is-play-pause {
+  background: #8bd0f7;
+  border-color: #6bbfeb;
 }
 
 .vocabulary-learning-settings-options label:has(input:checked) {

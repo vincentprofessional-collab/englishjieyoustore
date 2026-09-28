@@ -470,16 +470,14 @@
 }
 
 .study-directory-unit-list a {
-  grid-template-columns: minmax(0, 1fr);
+  grid-template-columns: 12px minmax(0, 1fr);
   min-width: 0;
   white-space: nowrap;
 }
 
-.study-directory-unit-list a > span,
-.study-directory-unit-list a.active > span {
-  background: transparent;
-  height: auto;
-  width: auto;
+.study-directory-new-concept-book {
+  display: grid;
+  gap: 4px;
 }
 
 /* Match the final vocabulary directory: white card, blue outline, gold selection. */
@@ -538,6 +536,20 @@
 .study-directory-source-link strong {
   color: #17231d;
   font-size: 18px;
+}
+
+.study-directory-expand-button {
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+  width: 100%;
+}
+
+.study-directory-chevron {
+  font-size: 22px;
+  font-weight: 700;
+  margin-left: auto;
 }
 
 .study-directory-secondary {

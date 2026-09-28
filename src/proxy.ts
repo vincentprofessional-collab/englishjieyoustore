@@ -20,7 +20,7 @@ export async function proxy(request: NextRequest) {
     path.startsWith("/api/bbc-audio/");
 
   if (staticMedia && !isBbcAsset) {
-    if (process.env.NODE_ENV === "development" && /^\/audio\/new-concept(?:-sentences)?\/book2\//.test(path)) {
+    if (process.env.NODE_ENV === "development" && /^\/audio\/(?:new-concept\/(?:book2|book1-uk|book2-uk)|new-concept-sentences\/book2)\//.test(path)) {
       return NextResponse.next({ request });
     }
     if (process.env.COS_MEDIA_ENABLED !== "true") {

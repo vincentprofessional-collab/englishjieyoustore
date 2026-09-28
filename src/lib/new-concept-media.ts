@@ -32,20 +32,25 @@ function resolveAudioUrl(storagePath: string, localPath: string) {
   return getPublicStorageUrl("audio", storagePath);
 }
 
-export function getNewConceptMediaUrls(lesson: NewConceptLesson) {
+export type NewConceptAudioEdition = "us" | "uk";
+
+export function getNewConceptMediaUrls(lesson: NewConceptLesson, edition: NewConceptAudioEdition = "us") {
   if (!lesson.audioPath) {
     return { audioUrl: null, sentenceAudioUrls: [] as (string | null)[] };
   }
 
-  const fullAudioLocalPath = `audio/${lesson.audioPath}`;
-  const isImportedBookTwo = lesson.bookCode === "new-concept-2";
-  const audioUrl = isImportedBookTwo && hasPublicFile(fullAudioLocalPath)
-    ? `/${encodePath(fullAudioLocalPath)}`
-    : resolveAudioUrl(lesson.audioPath, fullAudioLocalPath);
-  const lessonCode = String(lesson.lessonNo).padStart(3, "0");
   const bookFolder = lesson.bookCode === "new-concept-2" ? "book2" : "book1";
+  const lessonCode = String(lesson.lessonNo).padStart(3, "0");
+  const audioPath = edition === "uk"
+    ? `new-concept/${bookFolder}-uk/lesson-${lessonCode}.mp3`
+    : lesson.audioPath;
+  const fullAudioLocalPath = `audio/${audioPath}`;
+  const isImportedBookTwo = lesson.bookCode === "new-concept-2";
+  const audioUrl = (isImportedBookTwo || edition === "uk") && hasPublicFile(fullAudioLocalPath)
+    ? `/${encodePath(fullAudioLocalPath)}`
+    : resolveAudioUrl(audioPath, fullAudioLocalPath);
   const sentenceAudioUrls = lesson.english.map((_, index) => {
-    if (lesson.kind !== "dialogue") return null;
+    if (lesson.kind !== "dialogue" || edition === "uk") return null;
 
     const sentenceCode = String(index + 1).padStart(2, "0");
     const path = `new-concept-sentences/${bookFolder}/${lessonCode}/${sentenceCode}.mp3`;

@@ -14,7 +14,7 @@ export const LEARNING_BOOKS = [
   { key: "四级", label: "四级", rank: 4, description: "大学英语四级" },
   { key: "六级", label: "六级", rank: 5, description: "大学英语六级" },
   { key: "考研", label: "考研", rank: 6, description: "考研核心词" },
-  { key: "托雅", label: "托福 / 雅思", rank: 7, description: "托福与雅思词汇" },
+  { key: "托雅", label: "托雅", rank: 7, description: "托福与雅思词汇" },
   { key: "SAT", label: "SAT", rank: 8, description: "SAT 词汇" },
   { key: "GMAT", label: "GMAT", rank: 9, description: "GMAT 词汇" },
   { key: "GRE", label: "GRE", rank: 10, description: "GRE 词汇" },

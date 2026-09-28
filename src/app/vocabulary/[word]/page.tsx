@@ -345,7 +345,7 @@ export default async function VocabularyWordPage({
       <VocabularyDetailShell
         backHref={backHref}
         entry={entry}
-        sidePanel={<VocabularyVideoPlayer entryWord={entry.normalizedWord} videos={videos} votesEnabled={votesEnabled} />}
+        sidePanel={videos.length > 0 ? <VocabularyVideoPlayer entryWord={entry.normalizedWord} videos={videos} votesEnabled={votesEnabled} /> : null}
       >
         <VocabularyDetailContent
           entry={entry}

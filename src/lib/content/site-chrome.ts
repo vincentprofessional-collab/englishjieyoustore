@@ -519,7 +519,7 @@ export function mergeSiteChromeConfig(value: unknown): SiteChromeConfig {
     children: [],
     dropdownAlign: "right",
     enabled: true,
-    href: "/vocabulary/etymology",
+    href: "/vocabulary/surprise",
     id: "lookup",
     label: "查单词",
     note: "",
@@ -568,7 +568,7 @@ export function mergeSiteChromeConfig(value: unknown): SiteChromeConfig {
         return {
         ...item,
         children: [],
-        href: "/vocabulary/etymology",
+        href: "/vocabulary/surprise",
         label: "查单词",
       };
     }

@@ -346,8 +346,6 @@ export function JuniorHighDemo() {
   if (mode === "practice-select") return (
     <section className="stack junior-high-page">
       <div className="junior-high-selection">
-        <button className="junior-high-back" onClick={() => openPracticeCategory("topic")} type="button">← 返回中考英语</button>
-        <h1>{CATEGORY_LABEL[practiceCategory]}</h1>
         {practiceCategory === "type" ? (
           <>
             <div className="junior-high-type-progress" aria-label="题型训练完成进度">
@@ -384,12 +382,9 @@ export function JuniorHighDemo() {
     <section className="stack junior-high-page">
       <div className="junior-high-selection">
         <button className="junior-high-back" onClick={() => openPracticeCategory("type")} type="button">← 返回题型训练</button>
-        <h1>{selectedFamily.title}</h1>
         <div className="junior-high-practice-subtype-tabs" aria-label="细分题型筛选">
           {selectedFamilyItems.map((item) => <button className={item.id === practiceSourceItem.id ? "selected" : ""} disabled={practiceLoadingId === item.id} key={item.id} onClick={() => void openPracticePaper(item)} type="button">{item.title}</button>)}
         </div>
-        <h2 className="junior-high-source-list-title">{practiceSourceItem.title}</h2>
-        <p className="junior-high-selection-lead">按真实来源选择一套练习；每套题按页面顺序从 1 连续编号。</p>
         {(() => {
           const questionsById = new Map(sourcePaper.questions.map((question) => [question.id, question]));
           const writingTasksById = new Map((sourcePaper.writingTasks ?? []).map((task) => [task.id, task]));
@@ -427,8 +422,6 @@ export function JuniorHighDemo() {
   if (mode === "mock-select") return (
     <section className="stack junior-high-page">
       <div className="junior-high-selection">
-        <button className="junior-high-back" onClick={() => openPracticeCategory("topic")} type="button">← 返回中考英语</button>
-        <h1>历年真题</h1>
         <div className="junior-high-mock-paper-groups">
           {mockPaperGroups.map((group) => (
             <section className="junior-high-practice-group junior-high-mock-paper-group" key={group.year}>

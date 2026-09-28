@@ -73,7 +73,7 @@ export function VocabularyDetailShell({
       ) : null}
 
       {children || sidePanel ? (
-        <div className="word-detail-grid vocabulary-detail-shell-grid vocabulary-learning-detail-grid">
+        <div className={`word-detail-grid vocabulary-detail-shell-grid vocabulary-learning-detail-grid${sidePanel ? "" : " without-side-panel"}`}>
           {children ? (
             <section aria-label="词条内容" className={`word-detail-main vocabulary-detail-shell-main vocabulary-learning-detail-main ${contentClassName}`.trim()}>
               {children}
