@@ -371,6 +371,16 @@
   font-size: 17px;
 }
 
+.study-directory-source-link[aria-disabled="true"] {
+  cursor: default;
+  opacity: 0.58;
+}
+
+.study-directory-source-link[aria-disabled="true"]:hover {
+  background: transparent;
+  color: #292721;
+}
+
 .study-directory-secondary {
   border-left: 2px solid rgba(15, 107, 79, 0.16);
   display: grid;
@@ -470,6 +480,10 @@
   background: transparent;
   height: auto;
   width: auto;
+}
+
+.study-directory-source-group.disabled {
+  opacity: 0.62;
 }
 
 @media (max-width: 820px) {

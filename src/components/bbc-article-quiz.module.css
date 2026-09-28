@@ -6,6 +6,13 @@
   background: #fffaf0;
   color: #171d19;
 }
+.collapsible { margin: 24px 0 0; }
+.summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; color: #174f40; font-size: clamp(22px, 2vw, 30px); font-weight: 800; cursor: pointer; list-style: none; }
+.summary::-webkit-details-marker { display: none; }
+.summary::after { content: "+"; display: inline-grid; place-items: center; flex: 0 0 34px; height: 34px; border: 1px solid #e5d8b9; border-radius: 50%; color: #174f40; font-size: 24px; }
+.collapsible[open] > .summary::after { content: "−"; }
+.summary small { margin-left: auto; color: #6c786e; font-size: 14px; font-weight: 500; }
+.quizContent { padding-top: 6px; }
 .group h3 { margin: 0 0 8px; color: #174f40; }
 .group h3 { font-size: clamp(20px, 1.7vw, 25px); }
 .group { margin-top: 30px; }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { JuniorHighPaperWorkbench } from "@/components/junior-high/beijing-paper-workbench";
 import { JUNIOR_HIGH_PAPER_CATALOG } from "@/lib/junior-high/paper-catalog";
 import type { JuniorHighPaper } from "@/lib/junior-high/paper-types";
@@ -19,7 +20,6 @@ import {
 import { supabase } from "@/lib/supabase/client";
 
 type Mode = "mock-select" | "mock" | "practice-select" | "source-select" | "practice";
-type JuniorHighTab = JuniorHighPracticeCategory | "mock";
 type PracticeProgress = { answered: number; completed: boolean; completedAt?: string };
 type SourcePracticeCard = ReturnType<typeof buildJuniorHighSourcePracticeCards>[number];
 type StoredPracticeAttempt = {
@@ -33,13 +33,8 @@ type StoredPracticeAttempt = {
 const AVAILABLE_JUNIOR_HIGH_PAPERS = JUNIOR_HIGH_PAPER_CATALOG.filter((paper) => paper.questions.length > 0);
 
 const CATEGORY_LABEL: Record<JuniorHighPracticeCategory, string> = {
-  topic: "专项学习",
+  topic: "知识点",
   type: "题型训练",
-};
-const TAB_LABEL: Record<JuniorHighTab, string> = {
-  topic: "专项学习",
-  type: "题型训练",
-  mock: "模考真题",
 };
 
 const TOPIC_ITEM_ORDER = ["名词", "冠词", "代词", "数词", "形容词和副词", "连词", "构词法", "介词", "情态动词", "动词时态", "被动语态", "非谓语动词", "词汇辨析", "动词短语", "短语辨析", "介词短语", "宾语从句", "定语从句", "状语从句", "名词性从句", "主谓一致", "句子成分和基本句型", "句子种类和特殊句式", "并列复合句", "综合语法"];
@@ -118,7 +113,11 @@ function practiceAnswerIsCorrect(question: JuniorHighPaper["questions"][number],
 }
 
 function practicePaperUrl(item: JuniorHighPracticeCatalogItem, groupId?: string) {
-  const search = new URLSearchParams({ mode: "practice", id: item.id });
+  const search = new URLSearchParams({
+    entry: item.category === "topic" ? "knowledge" : "practice",
+    mode: "practice",
+    id: item.id,
+  });
   if (groupId) search.set("group", groupId);
   return `/junior-high?${search.toString()}`;
 }
@@ -128,6 +127,8 @@ function paperForSourceCard(paper: JuniorHighPaper, card: SourcePracticeCard) {
 }
 
 export function JuniorHighDemo() {
+  const searchParams = useSearchParams();
+  const requestedEntry = searchParams.get("entry");
   const [mode, setMode] = useState<Mode>("practice-select");
   const [practiceCategory, setPracticeCategory] = useState<JuniorHighPracticeCategory>("topic");
   const [practicePaper, setPracticePaper] = useState<JuniorHighPaper | null>(null);
@@ -143,6 +144,24 @@ export function JuniorHighDemo() {
   const [sourceAttempt, setSourceAttempt] = useState<StoredPracticeAttempt>({ answers: {}, writingAnswers: {} });
   const [sourceSelectionFilter, setSourceSelectionFilter] = useState<"all" | "completed" | "incomplete">("all");
   const [practiceProgress, setPracticeProgress] = useState<Record<string, PracticeProgress>>({});
+
+  useEffect(() => {
+    if (requestedEntry !== "knowledge" && requestedEntry !== "practice" && requestedEntry !== "papers") return;
+    setDeepLinkApplied(false);
+    setPracticePaper(null);
+    setSourcePaper(null);
+    setMockPaper(null);
+    setPracticeSourceItem(null);
+    setPracticeError("");
+    setSourceSelectionFilter("all");
+    if (requestedEntry === "papers") {
+      setPracticeCategory("topic");
+      setMode("mock-select");
+    } else {
+      setPracticeCategory(requestedEntry === "practice" ? "type" : "topic");
+      setMode("practice-select");
+    }
+  }, [requestedEntry]);
 
   useEffect(() => {
     let active = true;
@@ -210,7 +229,8 @@ export function JuniorHighDemo() {
   const sourceCards = useMemo(() => sourcePaper ? buildJuniorHighSourcePracticeCards(sourcePaper) : [], [sourcePaper]);
 
   const openPracticeCategory = (category: JuniorHighPracticeCategory) => {
-    window.history.replaceState(null, "", "/junior-high");
+    const entry = category === "topic" ? "knowledge" : "practice";
+    window.history.replaceState(null, "", `/junior-high?entry=${entry}`);
     setPracticeCategory(category);
     setPracticePaper(null);
     setSourcePaper(null);
@@ -222,7 +242,7 @@ export function JuniorHighDemo() {
   };
 
   const openMockSelect = () => {
-    window.history.replaceState(null, "", "/junior-high");
+    window.history.replaceState(null, "", "/junior-high?entry=papers");
     setPracticePaper(null);
     setSourcePaper(null);
     setMockPaper(null);
@@ -308,20 +328,6 @@ export function JuniorHighDemo() {
     }
   }, [deepLinkApplied]);
 
-  const tabs = (
-    <div className="junior-high-practice-tabs">
-      {(["topic", "type", "mock"] as JuniorHighTab[]).map((tab) => (
-        <button
-          className={(tab === "mock" ? mode === "mock-select" : mode === "practice-select" && practiceCategory === tab) ? "selected" : ""}
-          key={tab}
-          onClick={() => tab === "mock" ? openMockSelect() : openPracticeCategory(tab)}
-          type="button"
-        >
-          {TAB_LABEL[tab]}
-        </button>
-      ))}
-    </div>
-  );
   const renderPracticeItem = (item: JuniorHighPracticeCatalogItem) => (
     <button
       className={`junior-high-practice-item ${practiceCategory === "topic" ? "junior-high-topic-practice-item" : "junior-high-type-practice-item"}`}
@@ -331,7 +337,9 @@ export function JuniorHighDemo() {
       type="button"
     >
       <strong>{item.title.replace(/\s*[·•]\s*(可审计样本|待复核批次|已复核样本)/g, "")}</strong>
-      <span>{practiceQuestionCount(item)} 题{practiceProgress[item.id]?.completed ? " · 已完成" : practiceProgress[item.id]?.answered ? " · 未完成" : ""}</span>
+      <span>{practiceCategory === "topic"
+        ? `已完成 ${Math.min(practiceQuestionCount(item), practiceProgress[item.id]?.answered ?? 0)} 题 / 共 ${practiceQuestionCount(item)} 题`
+        : `${practiceQuestionCount(item)} 题${practiceProgress[item.id]?.completed ? " · 已完成" : practiceProgress[item.id]?.answered ? " · 未完成" : ""}`}</span>
     </button>
   );
 
@@ -340,7 +348,6 @@ export function JuniorHighDemo() {
       <div className="junior-high-selection">
         <button className="junior-high-back" onClick={() => openPracticeCategory("topic")} type="button">← 返回中考英语</button>
         <h1>{CATEGORY_LABEL[practiceCategory]}</h1>
-        <div className="junior-high-practice-toolbar junior-high-practice-toolbar-tabs-only">{tabs}</div>
         {practiceCategory === "type" ? (
           <>
             <div className="junior-high-type-progress" aria-label="题型训练完成进度">
@@ -421,8 +428,7 @@ export function JuniorHighDemo() {
     <section className="stack junior-high-page">
       <div className="junior-high-selection">
         <button className="junior-high-back" onClick={() => openPracticeCategory("topic")} type="button">← 返回中考英语</button>
-        <h1>模考真题</h1>
-        <div className="junior-high-practice-toolbar junior-high-practice-toolbar-tabs-only">{tabs}</div>
+        <h1>历年真题</h1>
         <div className="junior-high-mock-paper-groups">
           {mockPaperGroups.map((group) => (
             <section className="junior-high-practice-group junior-high-mock-paper-group" key={group.year}>
@@ -461,7 +467,8 @@ export function JuniorHighDemo() {
           window.history.replaceState(null, "", practicePaperUrl(practiceSourceItem));
           setMode("source-select");
         } else {
-          window.history.replaceState(null, "", "/junior-high");
+          window.history.replaceState(null, "", `/junior-high?entry=${practiceSourceItem?.category === "topic" ? "knowledge" : "practice"}`);
+          setDeepLinkApplied(false);
           setMode("practice-select");
         }
       }}
@@ -501,7 +508,7 @@ export function JuniorHighDemo() {
       <div className="junior-high-selection junior-high-selection-empty">
         <button className="junior-high-back" onClick={() => openPracticeCategory("topic")} type="button">← 返回选择</button>
         <h1>暂未找到对应内容</h1>
-        <p>{mode === "mock" ? "模考真题" : CATEGORY_LABEL[practiceCategory]}</p>
+        <p>{mode === "mock" ? "历年真题" : CATEGORY_LABEL[practiceCategory]}</p>
       </div>
     </section>
   );

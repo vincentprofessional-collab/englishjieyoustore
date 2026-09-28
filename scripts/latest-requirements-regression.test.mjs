@@ -21,15 +21,13 @@ test("BBC archive defaults to 2026 and renders the selected year article list", 
   assert.match(articlesPage, /BBC_DEFAULT_YEAR/);
   assert.match(articlesPage, /right\.id\.localeCompare\(left\.id\)/);
   assert.match(articlesHome, /className="bbc-selected-year"/);
-  assert.match(articlesHome, /href=\{`\/articles\?year=\$\{group\.year\}`\}/);
+  assert.match(articlesHome, /yearGroups\.find\(\(group\) => group\.year === selectedYear\)/);
+  assert.match(articlesHome, /activeGroup\?\.articles\.map\(\(article\) =>/);
 });
 
 test("New Concept original copy remains plain and the mobile navigation stays on one row", () => {
-  assert.match(newConceptLesson, /function renderNewConceptArticleEnglish\(text: string\)/);
-  assert.doesNotMatch(
-    newConceptLesson.match(/function renderNewConceptArticleEnglish[\s\S]*?\n\}/)?.[0] ?? "",
-    /bbc-vocabulary-highlight/,
-  );
+  assert.match(newConceptLesson, /function renderNewConceptArticleEnglish\(\s*text: string,/);
+  assert.match(newConceptLesson, /renderNewConceptArticleEnglish\(text, \[\], pronunciations\)/);
   assert.match(globalCss, /\.nav-main\s*\{[\s\S]*?flex-wrap:\s*nowrap;[\s\S]*?overflow-x:\s*auto;/);
   assert.match(globalCss, /\.nav-actions\s*\{[\s\S]*?flex-wrap:\s*nowrap;/);
 });

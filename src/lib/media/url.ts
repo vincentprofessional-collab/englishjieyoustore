@@ -37,6 +37,10 @@ export function getManagedMediaUrl(bucket: ManagedMediaBucket, path: string) {
   return `/api/media?${params.toString()}`;
 }
 
+export function getVocabularyVideoMediaUrl(filename: string) {
+  return `/api/vocabulary-video-media?name=${encodeURIComponent(filename)}`;
+}
+
 export function getStaticMediaAddress(pathname: string): StaticMediaAddress | null {
   const encodedSegments = pathname.replace(/^\/+|\/+$/g, "").split("/");
   if (!encodedSegments.length || encodedSegments[0] === "api" || encodedSegments[0] === "_next") {

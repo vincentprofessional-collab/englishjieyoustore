@@ -1,5 +1,6 @@
 import { createHash, createHmac } from "node:crypto";
 import { getBbcArticleById } from "@/lib/articles/bbc";
+import { localBbcAudioResponse, resolveLocalBbcAudio } from "@/lib/articles/bbc-local-audio";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 
 export const runtime = "nodejs";
@@ -111,6 +112,20 @@ export async function GET(
 
   if (range && (range.length > 80 || !/^bytes=(?:\d+-\d*|-\d+)$/.test(range))) {
     return new Response(null, { status: 416 });
+  }
+
+  // Local preview reads the user's BBC archive only after the usual membership check.
+  // Production continues to use the private R2 path below.
+  if (process.env.NODE_ENV === "development" && process.env.BBC_LOCAL_AUDIO_ROOT) {
+    try {
+      const localPath = await resolveLocalBbcAudio(article, audioFile);
+      if (localPath) {
+        const localResponse = await localBbcAudioResponse(localPath, range);
+        if (localResponse) return localResponse;
+      }
+    } catch {
+      // A missing/unmounted local archive may still fall back to configured R2.
+    }
   }
 
   const signed = signedR2Request(`bbc/${year}/${articleId}/${audioFile}`, range);

@@ -14,7 +14,9 @@ type VocabularyDetailShellProps = {
   className?: string;
   contentClassName?: string;
   entry: LocalVocabularyEntry;
+  headerContent?: ReactNode;
   headerActions?: ReactNode;
+  sidePanel?: ReactNode;
   showBack?: boolean;
   showHeader?: boolean;
   showWord?: boolean;
@@ -26,7 +28,9 @@ export function VocabularyDetailShell({
   className = "",
   contentClassName = "",
   entry,
+  headerContent,
   headerActions,
+  sidePanel,
   showBack = true,
   showHeader = true,
   showWord = true,
@@ -44,8 +48,8 @@ export function VocabularyDetailShell({
         <div className="word-page-head vocabulary-detail-shell-head vocabulary-learning-detail-head">
           {showBack ? <Link className="back-link" href={backHref}>← 返回</Link> : null}
           <div className="word-title-row word-detail-title-row vocabulary-detail-shell-title-row vocabulary-learning-detail-title-row">
-            <div className={`word-title-primary ${showWord ? "" : "is-hidden"}`}>
-              {showWord ? (
+            <div className={`word-title-primary ${showWord || headerContent ? "" : "is-hidden"}`}>
+              {headerContent ?? (showWord ? (
                 <>
                   <h1>{entry.word}</h1>
                   <div className="word-title-meta">
@@ -59,7 +63,7 @@ export function VocabularyDetailShell({
                     {entry.level ? <span className="vocabulary-level-badge">{entry.level}</span> : null}
                   </div>
                 </>
-              ) : null}
+              ) : null)}
             </div>
             <div className="word-title-tools word-title-actions vocabulary-detail-shell-actions vocabulary-learning-word-header-actions">
               {actions}
@@ -68,11 +72,14 @@ export function VocabularyDetailShell({
         </div>
       ) : null}
 
-      {children ? (
+      {children || sidePanel ? (
         <div className="word-detail-grid vocabulary-detail-shell-grid vocabulary-learning-detail-grid">
-          <section aria-label="词条内容" className={`word-detail-main vocabulary-detail-shell-main vocabulary-learning-detail-main ${contentClassName}`.trim()}>
-            {children}
-          </section>
+          {children ? (
+            <section aria-label="词条内容" className={`word-detail-main vocabulary-detail-shell-main vocabulary-learning-detail-main ${contentClassName}`.trim()}>
+              {children}
+            </section>
+          ) : null}
+          {sidePanel ? <aside className="word-side-panel vocabulary-detail-shell-side-panel">{sidePanel}</aside> : null}
         </div>
       ) : null}
     </div>

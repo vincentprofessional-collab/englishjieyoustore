@@ -31,6 +31,7 @@ export type GuidePost = {
   excerpt: string;
   id: string;
   menuPlacement?: GuideMenuPlacement | null;
+  pagePlacement?: string | null;
   publishedAt: string;
   slug: string;
   title: string;
@@ -160,6 +161,7 @@ export function parseGuidePostRow(row: GuidePostRow): GuidePost {
     excerpt: readString(meta.excerpt) || row.summary || "",
     id: row.id,
     menuPlacement: readMenuPlacement(meta.menuPlacement),
+    pagePlacement: readString(meta.pagePlacement) || null,
     publishedAt: row.published_at ?? row.created_at ?? new Date().toISOString(),
     slug: row.slug,
     title: row.title,

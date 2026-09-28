@@ -1,29 +1,80 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import {
   AudioPlayer,
+  AudioReadingMenu,
+  AudioPronunciationMenu,
+  AudioSettingsMenus,
   DEFAULT_AUDIO_PLAYER_SETTINGS,
+  formatArticlePhonetic,
   type AudioPlayerSettings,
   type AudioSpeakingMode,
+  useArticlePronunciations,
 } from "@/components/audio-player";
 import { BbcSentencePractice } from "@/components/bbc-sentence-practice";
+import { ArticleInlineAnnotatedParagraph } from "@/components/article-inline-annotated-text";
+import { useArticleInlineAnnotations } from "@/components/use-article-inline-annotations";
 import { ContentShareButton } from "@/components/content-share-button";
 import { StudyAnnotationTools } from "@/components/study-annotation-tools";
 import { VocabularyInlinePronunciation } from "@/components/vocabulary-pronunciation";
-import type { NewConceptLesson } from "@/lib/new-concept";
+import newConceptZhTranslations from "@/data/new-concept/translations-zh.json";
+import newConceptZhTurnTranslations from "@/data/new-concept/translations-zh-turns.json";
+import { getLikelyProperNounWords, shouldShowAudioPronunciation } from "@/lib/audio-pronunciation";
+import { getSpeakingPracticeDelayMs } from "@/lib/articles/bbc-speaking-training.mjs";
 import {
-  getNewConceptAudioUrl,
-  getNewConceptNextLesson,
-  getNewConceptPreviousLesson,
-  getNewConceptSentenceAudioUrl,
-} from "@/lib/new-concept";
+  consumeVocabularyStudyReturn,
+  getVocabularyDetailHref,
+  saveVocabularyStudyReturn,
+} from "@/lib/articles/vocabulary-study-return";
+import type { NewConceptLesson } from "@/lib/new-concept";
+import { getNewConceptNextLesson, getNewConceptPreviousLesson } from "@/lib/new-concept";
 import type { NewConceptVocabularyItem } from "@/lib/new-concept-vocabulary";
+import type { ArticleInlineAnnotation } from "@/lib/article-inline-annotations";
 
 type OriginalDisplayMode = "english" | "bilingual" | "chinese";
-type OriginalVisibilityMode = "show-original" | "hide-original" | "hide-vocabulary";
+type LessonStudyMode = "general" | "intensive" | "listening" | "speaking" | "writing";
 type ActiveSpeakingMode = Exclude<AudioSpeakingMode, "none">;
+
+const NEW_CONCEPT_ZH_TRANSLATIONS = newConceptZhTranslations as Record<string, string[]>;
+const NEW_CONCEPT_ZH_TURN_TRANSLATIONS = newConceptZhTurnTranslations as Record<string, string[]>;
+
+function getNewConceptChineseTranslation(lessonNo: number, blockIndex: number, sourceChinese: string) {
+  const translation = NEW_CONCEPT_ZH_TRANSLATIONS[String(lessonNo)]?.[blockIndex] ?? sourceChinese;
+  return removeEnglishOcrNoise(translation);
+}
+
+function removeEnglishOcrNoise(value: string) {
+  return value
+    .replace(/[A-Za-z][A-Za-z.'’\-]*/g, "")
+    .replace(/\s+/g, " ")
+    .replace(/^([\u3400-\u9fff·]+)\s*:\s*/, "$1：")
+    .replace(/\s*([，。！？；：、])\s*/g, "$1")
+    .replace(/^[\s'‘’，。！？；：、]+|[\s'‘’，。！？；：、]+$/g, "")
+    .trim();
+}
+
+type NewConceptVocabularyStudyReturn = {
+  activeSentenceNo: number | null;
+  activeSentencePosition: number;
+  audioSettings: AudioPlayerSettings;
+  displayMode: OriginalDisplayMode;
+  isOriginalVisible: boolean;
+  isReadingTimerRunning: boolean;
+  isReadingTimerVisible: boolean;
+  isVocabularyVisible: boolean;
+  readingSeconds: number;
+  scrollY: number;
+  studyMode: LessonStudyMode;
+  vocabularyScrollTop: number;
+};
+
+type SentenceRestoreSeekRequest = {
+  id: number;
+  positionSeconds: number;
+  sentenceNo: number;
+};
 
 type SpeakingTrainingState = {
   mode: ActiveSpeakingMode;
@@ -31,28 +82,17 @@ type SpeakingTrainingState = {
   sentenceNo: number;
 };
 
-const ORIGINAL_DISPLAY_MODES: { label: string; mode: OriginalDisplayMode }[] = [
-  { label: "英文", mode: "english" },
-  { label: "中文", mode: "chinese" },
-  { label: "中英", mode: "bilingual" },
-];
-
-const ORIGINAL_VISIBILITY_MODES: { label: string; mode: OriginalVisibilityMode }[] = [
-  { label: "显示原文", mode: "show-original" },
-  { label: "隐藏原文", mode: "hide-original" },
-  { label: "隐藏词汇", mode: "hide-vocabulary" },
-];
-
 const FAVORITE_SENTENCES_STORAGE_KEY = "ielts-platform.favoriteSentences";
+const FAVORITE_ARTICLES_STORAGE_KEY = "ielts-platform.favoriteArticles";
 
 const SPEAKING_MODE_LABELS: Record<ActiveSpeakingMode, string> = {
-  imitation: "模仿朗读",
+  imitation: "口语模式",
   shadowing: "影子练习",
   "sight-translation": "视译训练",
 };
 
 const SPEAKING_PHASE_LABELS: Record<ActiveSpeakingMode, string> = {
-  imitation: "轮到你模仿朗读",
+  imitation: "轮到你开口练习",
   shadowing: "影子练习",
   "sight-translation": "请看中文视译成英文",
 };
@@ -63,81 +103,25 @@ const SPEAKING_PLAYING_HINTS: Record<ActiveSpeakingMode, string> = {
   "sight-translation": "播放结束后根据中文复述英文",
 };
 
+function formatReadingTime(totalSeconds: number) {
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+  return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+}
+
 function favoriteSentenceId(lessonId: string, sentenceNo: number) {
   return `new-concept:${lessonId}:sentence:${sentenceNo}`;
 }
 
-function OriginalDisplayMenu({
-  mode,
-  onChange,
+function LessonVocabulary({
+  onVocabularyOpen,
+  returnTo,
+  vocabulary,
 }: {
-  mode: OriginalDisplayMode;
-  onChange: (mode: OriginalDisplayMode) => void;
+  onVocabularyOpen: () => void;
+  returnTo: string;
+  vocabulary: NewConceptVocabularyItem[];
 }) {
-  const selectedMode = ORIGINAL_DISPLAY_MODES.find((displayMode) => displayMode.mode === mode) ??
-    ORIGINAL_DISPLAY_MODES[0];
-
-  return (
-    <div className="player-menu bbc-original-display-dropdown">
-      <button aria-label="原文显示模式" className="player-menu-trigger" type="button">
-        <span>{selectedMode.label}</span>
-      </button>
-      <div className="player-menu-panel">
-        {ORIGINAL_DISPLAY_MODES.map((displayMode) => (
-          <button
-            aria-pressed={mode === displayMode.mode}
-            className={mode === displayMode.mode ? "active" : ""}
-            key={displayMode.mode}
-            onClick={() => onChange(displayMode.mode)}
-            type="button"
-          >
-            {displayMode.label}
-          </button>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function OriginalVisibilityMenu({
-  isOriginalVisible,
-  isVocabularyVisible,
-  onChange,
-}: {
-  isOriginalVisible: boolean;
-  isVocabularyVisible: boolean;
-  onChange: (mode: OriginalVisibilityMode) => void;
-}) {
-  const selectedMode = !isOriginalVisible
-    ? "hide-original"
-    : !isVocabularyVisible
-      ? "hide-vocabulary"
-      : "show-original";
-  const selectedLabel = ORIGINAL_VISIBILITY_MODES.find((item) => item.mode === selectedMode)?.label ?? "显示原文";
-
-  return (
-    <div className="player-menu bbc-original-visibility-dropdown">
-      <button aria-label="原文和词汇显示设置" className="player-menu-trigger" type="button">
-        <span>{selectedLabel}</span>
-      </button>
-      <div className="player-menu-panel">
-        {ORIGINAL_VISIBILITY_MODES.map((item) => (
-          <button
-            aria-pressed={selectedMode === item.mode}
-            className={selectedMode === item.mode ? "active" : ""}
-            key={item.mode}
-            onClick={() => onChange(item.mode)}
-            type="button"
-          >
-            {item.label}
-          </button>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function LessonVocabulary({ vocabulary }: { vocabulary: NewConceptVocabularyItem[] }) {
   return (
     <section className="bbc-vocabulary-panel new-concept-vocabulary-panel">
       <header className="bbc-vocabulary-head">
@@ -153,7 +137,8 @@ function LessonVocabulary({ vocabulary }: { vocabulary: NewConceptVocabularyItem
               <strong>
                 <Link
                   className="bbc-vocabulary-term-link"
-                  href={`/vocabulary/${encodeURIComponent(item.normalizedWord)}`}
+                  href={getVocabularyDetailHref(item.normalizedWord, returnTo)}
+                  onClick={onVocabularyOpen}
                 >
                   {index + 1}. {item.word}
                 </Link>
@@ -179,16 +164,141 @@ function LessonVocabulary({ vocabulary }: { vocabulary: NewConceptVocabularyItem
   );
 }
 
-function renderNewConceptArticleEnglish(text: string) {
-  return <span>{text}</span>;
+function normalizeVocabularyWord(word: string) {
+  return word.toLowerCase().replace(/’/g, "'").replace(/'s$/i, "");
+}
+
+function vocabularyTermAppearsInSentence(sentence: string, term: string) {
+  const sentenceWords = (sentence.match(/[A-Za-z]+(?:['’][A-Za-z]+)*/g) ?? []).map(normalizeVocabularyWord);
+  const termWords = (term.match(/[A-Za-z]+(?:['’][A-Za-z]+)*/g) ?? []).map(normalizeVocabularyWord);
+
+  if (!termWords.length || termWords.length > sentenceWords.length) {
+    return false;
+  }
+
+  return sentenceWords.some((_, start) =>
+    termWords.every((termWord, offset) => sentenceWords[start + offset] === termWord),
+  );
+}
+
+function renderNewConceptArticleEnglish(
+  text: string,
+  terms: string[] = [],
+  pronunciations: Map<string, string> = new Map(),
+) {
+  const wordPattern = /[A-Za-z]+(?:['’][A-Za-z]+)*/g;
+  const words = [...text.matchAll(wordPattern)];
+  const normalizedWords = words.map((match) => normalizeVocabularyWord(match[0]));
+  const highlightedWordIndexes = new Set<number>();
+
+  for (const term of terms) {
+    const termWords = (term.match(wordPattern) ?? []).map(normalizeVocabularyWord);
+    if (!termWords.length || termWords.length > normalizedWords.length) {
+      continue;
+    }
+
+    for (let start = 0; start <= normalizedWords.length - termWords.length; start += 1) {
+      if (termWords.every((termWord, offset) => normalizedWords[start + offset] === termWord)) {
+        for (let offset = 0; offset < termWords.length; offset += 1) {
+          highlightedWordIndexes.add(start + offset);
+        }
+      }
+    }
+  }
+
+  const parts: ReactNode[] = [];
+  let cursor = 0;
+  words.forEach((word, index) => {
+    if (cursor < word.index!) {
+      parts.push(text.slice(cursor, word.index));
+    }
+    const normalizedWord = normalizedWords[index];
+    const phonetic = pronunciations.get(normalizedWord);
+    const wordContent = phonetic ? (
+      <span className="article-word-with-pronunciation" key={`pronunciation-${index}`}>
+        <span className="article-word-pronunciation">{formatArticlePhonetic(phonetic)}</span>
+        {word[0]}
+      </span>
+    ) : word[0];
+    parts.push(highlightedWordIndexes.has(index) ? (
+      <span className="bbc-vocabulary-highlight" key={`vocabulary-${index}`}>{wordContent}</span>
+    ) : wordContent);
+    cursor = word.index! + word[0].length;
+  });
+  if (cursor < text.length) {
+    parts.push(text.slice(cursor));
+  }
+
+  return <span>{parts}</span>;
 }
 
 function getNewConceptArticleTextBlocks(lesson: NewConceptLesson) {
   const englishLines = lesson.kind === "dialogue" ? lesson.english : lesson.exercise;
+  const blocks: { chinese: string; endLineIndex: number; english: string; startLineIndex: number }[] = [];
+
+  const speakerLabel = /(^|\s)([A-Z][A-Z .'-]{0,25}:)(?=\s|$|["'“”‘’])/g;
+  const hasSpeakerLabels = lesson.kind === "dialogue" && englishLines.some((line) => {
+    speakerLabel.lastIndex = 0;
+    return speakerLabel.test(line);
+  });
+
+  if (hasSpeakerLabels) {
+    let turn: { endLineIndex: number; english: string; startLineIndex: number } | null = null;
+    const turns: { endLineIndex: number; english: string; startLineIndex: number }[] = [];
+    const finishTurn = () => {
+      if (turn) turns.push(turn);
+      turn = null;
+    };
+
+    englishLines.forEach((line, lineIndex) => {
+      speakerLabel.lastIndex = 0;
+      const matches = Array.from(line.matchAll(speakerLabel));
+      if (matches.length === 0) {
+        if (!turn) turn = { endLineIndex: lineIndex, english: "", startLineIndex: lineIndex };
+        turn.english = [turn.english, line.trim()].filter(Boolean).join(" ");
+        turn.endLineIndex = lineIndex;
+        return;
+      }
+
+      const firstMatch = matches[0];
+      const firstStart = firstMatch.index! + (firstMatch[1] ? 1 : 0);
+      const leadingText = line.slice(0, firstStart).trim();
+      if (leadingText) {
+        if (!turn) turn = { endLineIndex: lineIndex, english: "", startLineIndex: lineIndex };
+        turn.english = [turn.english, leadingText].filter(Boolean).join(" ");
+        turn.endLineIndex = lineIndex;
+      }
+
+      matches.forEach((match, matchIndex) => {
+        finishTurn();
+        const start = match.index! + (match[1] ? 1 : 0);
+        const textStart = start + match[2].length;
+        const nextMatch = matches[matchIndex + 1];
+        const textEnd = nextMatch ? nextMatch.index! + (nextMatch[1] ? 1 : 0) : line.length;
+        turn = {
+          endLineIndex: lineIndex,
+          english: line.slice(start, textEnd).trim(),
+          startLineIndex: lineIndex,
+        };
+        if (textStart > textEnd) turn.english = line.slice(start).trim();
+      });
+    });
+    finishTurn();
+
+    const turnTranslations = NEW_CONCEPT_ZH_TURN_TRANSLATIONS[String(lesson.lessonNo)];
+    return turns.map((item, index) => {
+      const sourceTranslation = lesson.chinese[index] ?? "";
+      const chinese = turnTranslations?.[index]
+        ?? removeEnglishOcrNoise(sourceTranslation);
+
+      return { ...item, chinese };
+    });
+  }
+
   const chineseLines = lesson.kind === "dialogue" ? lesson.chinese : [];
-  const blocks: { chinese: string; english: string }[] = [];
   let english = "";
   let chinese = "";
+  let startLineIndex = 0;
 
   englishLines.forEach((line, index) => {
     english = [english, line.trim()].filter(Boolean).join(" ");
@@ -196,46 +306,77 @@ function getNewConceptArticleTextBlocks(lesson: NewConceptLesson) {
     const endsWithSentencePunctuation = /[.!?。！？]["'’”’」』)\]]*$/.test(line.trim());
 
     if (endsWithSentencePunctuation || index === englishLines.length - 1) {
-      blocks.push({ chinese, english });
+      blocks.push({ chinese, english, startLineIndex, endLineIndex: index });
       english = "";
       chinese = "";
+      startLineIndex = index + 1;
     }
   });
 
-  return blocks;
+  return blocks.map((block, index) => ({
+    ...block,
+    chinese: getNewConceptChineseTranslation(lesson.lessonNo, index, block.chinese),
+  }));
 }
 
 function NewConceptArticleCopy({
   displayMode,
+  annotations,
   isOriginalVisible,
   lesson,
+  pronunciations,
 }: {
+  annotations: ArticleInlineAnnotation[];
   displayMode: OriginalDisplayMode;
   isOriginalVisible: boolean;
   lesson: NewConceptLesson;
+  pronunciations: Map<string, string>;
 }) {
   if (!isOriginalVisible) {
     return null;
   }
 
   const textBlocks = getNewConceptArticleTextBlocks(lesson);
+  const bookTwoTranslation = lesson.bookCode === "new-concept-2"
+    ? lesson.fullChineseTranslation ?? lesson.chinese[0] ?? ""
+    : "";
+  const bookTwoEnglish = textBlocks.map((textBlock) => textBlock.english).join(" ");
 
   return (
     <div className={`bbc-original-copy new-concept-article-copy ${displayMode === "bilingual" ? "bilingual" : ""}`}>
-      {textBlocks.map((textBlock, index) => {
-        const { chinese, english } = textBlock;
+      {lesson.bookCode === "new-concept-2" ? (
+        <div className="bbc-original-text-block">
+          {displayMode !== "chinese" ? (
+            <p lang="en"><ArticleInlineAnnotatedParagraph
+              annotations={annotations}
+              paragraphId="paragraph-0"
+              text={bookTwoEnglish}
+              renderText={(text) => renderNewConceptArticleEnglish(text, [], pronunciations)}
+            /></p>
+          ) : null}
+          {displayMode !== "english" && bookTwoTranslation ? (
+            <p className="bbc-original-chinese" lang="zh-CN">{bookTwoTranslation}</p>
+          ) : null}
+        </div>
+      ) : textBlocks.map((textBlock, index) => {
+          const { chinese, english } = textBlock;
 
-        return (
-          <div className="bbc-original-text-block" key={`${lesson.id}-article-line-${index}`}>
-            {displayMode !== "chinese" ? (
-              <p lang="en">{renderNewConceptArticleEnglish(english)}</p>
-            ) : null}
-            {displayMode !== "english" && chinese ? (
-              <p className="bbc-original-chinese" lang="zh-CN">{chinese}</p>
-            ) : null}
-          </div>
-        );
-      })}
+          return (
+            <div className="bbc-original-text-block" key={`${lesson.id}-article-line-${index}`}>
+              {displayMode !== "chinese" ? (
+                <p lang="en"><ArticleInlineAnnotatedParagraph
+                  annotations={annotations}
+                  paragraphId={`paragraph-${index}`}
+                  text={english}
+                  renderText={(text) => renderNewConceptArticleEnglish(text, [], pronunciations)}
+                /></p>
+              ) : null}
+              {displayMode !== "english" && chinese ? (
+                <p className="bbc-original-chinese" lang="zh-CN">{chinese}</p>
+              ) : null}
+            </div>
+          );
+        })}
     </div>
   );
 }
@@ -252,6 +393,7 @@ function LessonTranscript({
   onSentenceTimeChange,
   onToggleFavorite,
   sentenceAutoPlaySignals,
+  sentenceAudioUrls,
   speakingTraining,
 }: {
   activeSentenceNo: number | null;
@@ -265,6 +407,7 @@ function LessonTranscript({
   onSentenceTimeChange: (sentenceNo: number, positionSeconds: number) => void;
   onToggleFavorite: (sentenceNo: number, english: string, chinese: string, audioUrl?: string) => void;
   sentenceAutoPlaySignals: Record<number, number>;
+  sentenceAudioUrls: (string | null)[];
   speakingTraining: SpeakingTrainingState | null;
 }) {
   if (lesson.kind === "written-exercise") {
@@ -279,7 +422,7 @@ function LessonTranscript({
     <div className="new-concept-sentence-list">
       {lesson.english.map((english, index) => {
         const chinese = lesson.chinese[index] ?? "";
-        const sentenceAudioUrl = getNewConceptSentenceAudioUrl(lesson, index);
+        const sentenceAudioUrl = sentenceAudioUrls[index] ?? null;
 
         return (
           <article
@@ -356,22 +499,34 @@ function LessonTranscript({
 }
 
 export function NewConceptLessonPage({
+  audioUrl,
   lesson,
+  sentenceAudioUrls,
   vocabulary,
 }: {
+  audioUrl: string | null;
   lesson: NewConceptLesson;
+  sentenceAudioUrls: (string | null)[];
   vocabulary: NewConceptVocabularyItem[];
 }) {
-  const audioUrl = getNewConceptAudioUrl(lesson);
+  const inlineTextAnnotations = useArticleInlineAnnotations("new-concept", lesson.id);
   const previousLesson = getNewConceptPreviousLesson(lesson);
   const nextLesson = getNewConceptNextLesson(lesson);
   const [displayMode, setDisplayMode] = useState<OriginalDisplayMode>("bilingual");
   const [isOriginalVisible, setIsOriginalVisible] = useState(true);
   const [isVocabularyVisible, setIsVocabularyVisible] = useState(true);
+  const [studyMode, setStudyMode] = useState<LessonStudyMode>("general");
+  const [modeSelectionVersion, setModeSelectionVersion] = useState(0);
+  const [isReadingTimerRunning, setIsReadingTimerRunning] = useState(false);
+  const [readingSeconds, setReadingSeconds] = useState(0);
+  const [isReadingTimerVisible, setIsReadingTimerVisible] = useState(false);
   const [isOriginalFullscreen, setIsOriginalFullscreen] = useState(false);
   const [favoriteSentenceIds, setFavoriteSentenceIds] = useState<string[]>([]);
+  const [isLessonFavorite, setIsLessonFavorite] = useState(false);
   const [activeSentenceNo, setActiveSentenceNo] = useState<number | null>(null);
   const [activeSentencePosition, setActiveSentencePosition] = useState(0);
+  const [sentenceRestoreSeekRequest, setSentenceRestoreSeekRequest] = useState<SentenceRestoreSeekRequest | null>(null);
+  const [sentenceDurations, setSentenceDurations] = useState<Record<number, number>>({});
   const [isSentenceAudioPlaying, setIsSentenceAudioPlaying] = useState(false);
   const [sentenceAutoPlaySignals, setSentenceAutoPlaySignals] = useState<Record<number, number>>({});
   const [speakingTraining, setSpeakingTraining] = useState<SpeakingTrainingState | null>(null);
@@ -382,6 +537,7 @@ export function NewConceptLessonPage({
   const pageRef = useRef<HTMLElement | null>(null);
   const studyWorkspaceRef = useRef<HTMLDivElement | null>(null);
   const activeSentenceNoRef = useRef<number | null>(null);
+  const sentenceAutoPlayRequestIdRef = useRef(0);
   const audioSettingsRef = useRef(audioSettings);
   const speakingCountdownRef = useRef<number | null>(null);
   const speakingAdvanceRef = useRef<number | null>(null);
@@ -389,6 +545,10 @@ export function NewConceptLessonPage({
   useEffect(() => {
     audioSettingsRef.current = audioSettings;
   }, [audioSettings]);
+
+  useEffect(() => {
+    setSentenceDurations({});
+  }, [lesson.id]);
 
   useEffect(() => {
     return () => {
@@ -400,6 +560,16 @@ export function NewConceptLessonPage({
       }
     };
   }, []);
+
+  useEffect(() => {
+    try {
+      const rawValue = window.localStorage.getItem(FAVORITE_ARTICLES_STORAGE_KEY);
+      const storedItems = rawValue ? (JSON.parse(rawValue) as Array<{ id?: unknown }>) : [];
+      setIsLessonFavorite(storedItems.some((item) => item.id === `new-concept:${lesson.id}`));
+    } catch {
+      setIsLessonFavorite(false);
+    }
+  }, [lesson.id]);
 
   useEffect(() => {
     try {
@@ -416,6 +586,57 @@ export function NewConceptLessonPage({
   }, []);
 
   useEffect(() => {
+    const returnState = consumeVocabularyStudyReturn<NewConceptVocabularyStudyReturn>(`/new-concept/${lesson.id}`);
+    if (!returnState) {
+      return;
+    }
+
+    const validModes: LessonStudyMode[] = ["general", "intensive", "listening", "speaking", "writing"];
+    const restoredSentenceNo =
+      typeof returnState.activeSentenceNo === "number" &&
+      returnState.activeSentenceNo >= 1 &&
+      returnState.activeSentenceNo <= lesson.english.length
+        ? returnState.activeSentenceNo
+        : null;
+    const restoredAudioSettings = {
+      ...DEFAULT_AUDIO_PLAYER_SETTINGS,
+      ...(returnState.audioSettings ?? {}),
+    };
+    const restoredMode = validModes.includes(returnState.studyMode) ? returnState.studyMode : "general";
+
+    setStudyMode(restoredMode);
+    setAudioSettings(restoredAudioSettings);
+    audioSettingsRef.current = restoredAudioSettings;
+    setDisplayMode(returnState.displayMode ?? "bilingual");
+    setIsOriginalVisible(restoredMode === "general" ? returnState.isOriginalVisible ?? true : true);
+    setIsVocabularyVisible(restoredMode === "general" ? returnState.isVocabularyVisible ?? true : true);
+    setActiveSentenceNo(restoredMode === "general" ? null : restoredSentenceNo ?? 1);
+    activeSentenceNoRef.current = restoredMode === "general" ? null : restoredSentenceNo ?? 1;
+    setActiveSentencePosition(Math.max(0, returnState.activeSentencePosition ?? 0));
+    setIsSentenceAudioPlaying(false);
+    setSentenceAutoPlaySignals({});
+    setSentenceRestoreSeekRequest(
+      restoredSentenceNo == null
+        ? null
+        : {
+            id: Date.now(),
+            positionSeconds: Math.max(0, returnState.activeSentencePosition ?? 0),
+            sentenceNo: restoredSentenceNo,
+          },
+    );
+    setReadingSeconds(Math.max(0, returnState.readingSeconds ?? 0));
+    setIsReadingTimerVisible(returnState.isReadingTimerVisible ?? false);
+    setIsReadingTimerRunning(returnState.isReadingTimerRunning ?? false);
+    window.requestAnimationFrame(() => {
+      window.scrollTo(0, Math.max(0, returnState.scrollY ?? 0));
+      const vocabularyList = document.querySelector<HTMLElement>(".new-concept-vocabulary-list");
+      if (vocabularyList) {
+        vocabularyList.scrollTop = Math.max(0, returnState.vocabularyScrollTop ?? 0);
+      }
+    });
+  }, [lesson.id, lesson.english.length]);
+
+  useEffect(() => {
     function handleFullscreenChange() {
       setIsOriginalFullscreen(document.fullscreenElement === studyWorkspaceRef.current);
     }
@@ -423,6 +644,17 @@ export function NewConceptLessonPage({
     document.addEventListener("fullscreenchange", handleFullscreenChange);
     return () => document.removeEventListener("fullscreenchange", handleFullscreenChange);
   }, []);
+
+  useEffect(() => {
+    if (!isReadingTimerRunning) {
+      return;
+    }
+
+    const timerId = window.setInterval(() => {
+      setReadingSeconds((current) => current + 1);
+    }, 1000);
+    return () => window.clearInterval(timerId);
+  }, [isReadingTimerRunning]);
 
   async function toggleOriginalFullscreen() {
     if (!studyWorkspaceRef.current) {
@@ -445,6 +677,113 @@ export function NewConceptLessonPage({
     if (nextSettings.subtitleMode) {
       setDisplayMode(nextSettings.subtitleMode);
     }
+  }
+
+  function saveVocabularyReturnState() {
+    saveVocabularyStudyReturn(`/new-concept/${lesson.id}`, {
+      activeSentenceNo,
+      activeSentencePosition,
+      audioSettings,
+      displayMode,
+      isOriginalVisible,
+      isReadingTimerRunning,
+      isReadingTimerVisible,
+      isVocabularyVisible,
+      readingSeconds,
+      scrollY: window.scrollY,
+      studyMode,
+      vocabularyScrollTop:
+        document.querySelector<HTMLElement>(".new-concept-vocabulary-list")?.scrollTop ?? 0,
+    } satisfies NewConceptVocabularyStudyReturn);
+  }
+
+  function selectStudyMode(mode: LessonStudyMode) {
+    clearSpeakingPracticeTimers();
+    setStudyMode(mode);
+    setIsOriginalVisible(true);
+    setIsVocabularyVisible(true);
+    setSentenceAutoPlaySignals({});
+    setSentenceRestoreSeekRequest(null);
+    setActiveSentencePosition(0);
+    setIsSentenceAudioPlaying(false);
+    if (mode === "general" || mode === "intensive") {
+      const isLeavingPractice =
+        audioSettings.dictationMode !== "none" || audioSettings.speakingMode !== "none";
+      updateAudioSettings({
+        dictationMode: "none",
+        playMode: "sequential",
+        speakingMode: "none",
+        ...(isLeavingPractice ? { subtitleMode: "bilingual" as const } : {}),
+      });
+    }
+    if (mode === "general") {
+      activeSentenceNoRef.current = null;
+      setActiveSentenceNo(null);
+    } else {
+      setModeSelectionVersion((current) => current + 1);
+      activeSentenceNoRef.current = 1;
+      setActiveSentenceNo(1);
+      if (mode === "listening" && sentenceAudioUrls[0]) requestSentenceAutoPlay(1);
+    }
+  }
+
+  function selectStudySentence(sentenceNo: number) {
+    const shouldContinuePlayback = isSentenceAudioPlaying;
+    clearSpeakingPracticeTimers();
+    activeSentenceNoRef.current = sentenceNo;
+    setActiveSentenceNo(sentenceNo);
+    setActiveSentencePosition(0);
+    setIsSentenceAudioPlaying(false);
+    if (shouldContinuePlayback) {
+      requestSentenceAutoPlay(sentenceNo);
+    } else {
+      setSentenceAutoPlaySignals((current) => ({ ...current, [sentenceNo]: 0 }));
+    }
+    setSentenceRestoreSeekRequest(null);
+  }
+
+  function requestSentenceAutoPlay(sentenceNo: number) {
+    sentenceAutoPlayRequestIdRef.current += 1;
+    const requestId = sentenceAutoPlayRequestIdRef.current;
+    setSentenceAutoPlaySignals((current) => ({ ...current, [sentenceNo]: requestId }));
+  }
+
+  function toggleFavoriteLesson() {
+    const id = `new-concept:${lesson.id}`;
+    type FavoriteArticle = {
+      excerpt?: string;
+      href?: string;
+      id: string;
+      savedAt: string;
+      sourceTitle?: string;
+      title: string;
+    };
+    let currentItems: FavoriteArticle[] = [];
+
+    try {
+      const rawValue = window.localStorage.getItem(FAVORITE_ARTICLES_STORAGE_KEY);
+      currentItems = rawValue ? (JSON.parse(rawValue) as FavoriteArticle[]) : [];
+    } catch {
+      currentItems = [];
+    }
+
+    const exists = currentItems.some((item) => item.id === id);
+    const nextItems = exists
+      ? currentItems.filter((item) => item.id !== id)
+      : [
+          {
+            excerpt: lesson.english[0] ?? lesson.exercise[0],
+            href: `/new-concept/${lesson.id}`,
+            id,
+            savedAt: new Date().toISOString(),
+            sourceTitle: lesson.bookCode === "new-concept-2" ? "新概念英语第二册" : "新概念英语第一册",
+            title: `新概念英语${lesson.bookCode === "new-concept-2" ? "第二册" : "第一册"} Lesson ${lesson.lessonNo} ${lesson.title}`,
+          },
+          ...currentItems,
+        ];
+
+    window.localStorage.setItem(FAVORITE_ARTICLES_STORAGE_KEY, JSON.stringify(nextItems));
+    setIsLessonFavorite(!exists);
   }
 
   function clearSpeakingPracticeTimers(resetState = true) {
@@ -474,14 +813,13 @@ export function NewConceptLessonPage({
     activeSentenceNoRef.current = nextSentenceNo;
     setActiveSentenceNo(nextSentenceNo);
     setActiveSentencePosition(0);
-    setSentenceAutoPlaySignals((current) => ({
-      ...current,
-      [nextSentenceNo]: (current[nextSentenceNo] ?? 0) + 1,
-    }));
+    requestSentenceAutoPlay(nextSentenceNo);
+    setSentenceRestoreSeekRequest(null);
   }
 
   function startSpeakingPractice(sentenceNo: number, mode: ActiveSpeakingMode) {
-    const delayMs = mode === "shadowing" ? 2_500 : mode === "sight-translation" ? 3_000 : 4_000;
+    const durationSeconds = Math.max(sentenceDurations[sentenceNo] ?? 0.1, 0.1);
+    const delayMs = getSpeakingPracticeDelayMs(mode, durationSeconds);
     const deadline = Date.now() + delayMs;
 
     clearSpeakingPracticeTimers(false);
@@ -510,10 +848,7 @@ export function NewConceptLessonPage({
       if (audioSettingsRef.current.playMode === "sentence-loop") {
         activeSentenceNoRef.current = sentenceNo;
         setActiveSentenceNo(sentenceNo);
-        setSentenceAutoPlaySignals((current) => ({
-          ...current,
-          [sentenceNo]: (current[sentenceNo] ?? 0) + 1,
-        }));
+        requestSentenceAutoPlay(sentenceNo);
       } else {
         playSentenceByMode(sentenceNo);
       }
@@ -579,13 +914,13 @@ export function NewConceptLessonPage({
       : [
           {
             audioUrl: sentenceAudioUrl,
-            bookCode: "NEW_CONCEPT_1",
+            bookCode: lesson.bookCode === "new-concept-2" ? "NEW_CONCEPT_2" : "NEW_CONCEPT_1",
             chineseText: chinese,
             englishText: english,
             href: `/new-concept/${lesson.id}#new-concept-sentence-${sentenceNo}`,
             id,
             savedAt: new Date().toISOString(),
-            sectionTitle: `新概念英语 Lesson ${lesson.lessonNo} ${lesson.title}`,
+            sectionTitle: `新概念英语${lesson.bookCode === "new-concept-2" ? "第二册" : "第一册"} Lesson ${lesson.lessonNo} ${lesson.title}`,
             sentenceNo,
           },
           ...currentItems,
@@ -595,15 +930,76 @@ export function NewConceptLessonPage({
     setFavoriteSentenceIds(nextItems.map((item) => item.id));
   }
 
+  const studyTextBlocks = getNewConceptArticleTextBlocks(lesson);
+  const activeStudySentenceIndex = Math.max(0, (activeSentenceNo ?? 1) - 1);
+  const activeStudyTextBlockIndex = studyTextBlocks.findIndex(
+    (block) => activeStudySentenceIndex >= block.startLineIndex && activeStudySentenceIndex <= block.endLineIndex,
+  );
+  const activeStudyTextBlock = studyTextBlocks[activeStudyTextBlockIndex];
+  const previousStudyTextBlock = studyTextBlocks[activeStudyTextBlockIndex - 1];
+  const nextStudyTextBlock = studyTextBlocks[activeStudyTextBlockIndex + 1];
+  const activeStudyEnglish = activeStudyTextBlock?.english ?? lesson.english[activeStudySentenceIndex] ?? lesson.english[0] ?? "";
+  const activeStudyChinese = lesson.bookCode === "new-concept-2"
+    ? lesson.fullChineseTranslation ?? lesson.chinese[0] ?? ""
+    : activeStudyTextBlock?.chinese
+      ?? lesson.chinese[activeStudySentenceIndex]
+      ?? lesson.chinese[0]
+      ?? "";
+  const activeStudySentenceAudio = sentenceAudioUrls[activeStudySentenceIndex] ?? null;
+  const fullLessonEnglish = studyTextBlocks.map((block) => block.english).join(" ");
+  const dictionaryPronunciations = useArticlePronunciations(
+    fullLessonEnglish,
+    audioSettings.pronunciationMode,
+    true,
+  );
+  const vocabularyForDisplay = vocabulary.filter((item) =>
+    vocabularyTermAppearsInSentence(fullLessonEnglish, item.word),
+  );
+  const likelyProperNounWords = getLikelyProperNounWords(fullLessonEnglish);
+  const articlePronunciations = new Map<string, string>();
+  if (audioSettings.pronunciationMode === "us" || audioSettings.pronunciationMode === "uk") {
+    for (const item of vocabularyForDisplay) {
+      const normalizedTerm = item.word.trim().toLowerCase().replace(/[’]/g, "'");
+      if (
+        likelyProperNounWords.has(normalizedTerm) ||
+        !shouldShowAudioPronunciation(item.level, normalizedTerm)
+      ) continue;
+      const phonetic = audioSettings.pronunciationMode === "us"
+        ? item.usPhonetic || item.phonetic
+        : item.ukPhonetic || item.phonetic;
+      if (phonetic && /^[a-z]+(?:'[a-z]+)?$/.test(normalizedTerm)) {
+        articlePronunciations.set(normalizedTerm, phonetic);
+      }
+    }
+  }
+  dictionaryPronunciations.forEach((phonetic, word) => articlePronunciations.set(word, phonetic));
+
   return (
     <section className="stack bbc-article-page new-concept-lesson-page" ref={pageRef}>
       <div className="page-heading bbc-article-hero new-concept-lesson-hero">
         <div className="bbc-article-hero-top">
-          <Link className="bbc-detail-back-link" href="/new-concept">
-            ← 返回新概念1
+          <Link className="bbc-detail-back-link" href={`/new-concept?book=${lesson.bookCode ?? "new-concept-1"}`}>
+            ← 返回{lesson.bookCode === "new-concept-2" ? "新概念2" : "新概念1"}
           </Link>
           <span className="bbc-article-title-id">Lesson {lesson.lessonNo}</span>
-          <span className="new-concept-edition-mark">美音版</span>
+          <div className="bbc-article-actions new-concept-article-actions">
+            <button
+              aria-label={isLessonFavorite ? "取消收藏文章" : "收藏文章"}
+              aria-pressed={isLessonFavorite}
+              className={`favorite-star ${isLessonFavorite ? "active" : ""}`}
+              onClick={toggleFavoriteLesson}
+              title={isLessonFavorite ? "取消收藏文章" : "收藏文章"}
+              type="button"
+            >
+              {isLessonFavorite ? "★" : "☆"}
+            </button>
+            <ContentShareButton
+              label="分享文章"
+              text={`${lesson.title}\n${lesson.titleChinese ?? ""}`.trim()}
+              title={`新概念英语 Lesson ${lesson.lessonNo} ${lesson.title}`}
+              url={`/new-concept/${lesson.id}`}
+            />
+          </div>
         </div>
         <h1>
           <span className="bbc-article-title-line" lang="en">{lesson.title}</span>
@@ -622,6 +1018,7 @@ export function NewConceptLessonPage({
               <span>Lesson {lesson.lessonNo}</span>
             </div>
             <AudioPlayer
+              key={`new-concept-full-${modeSelectionVersion}`}
               hasSelectedRate
               // Native media playback supports pitch-preserving rate changes.
               html5
@@ -636,44 +1033,70 @@ export function NewConceptLessonPage({
               }}
               onSettingsChange={updateAudioSettings}
               settings={audioSettings}
+              settingsPlacement="none"
               src={audioUrl}
               title={`新概念英语第 ${lesson.lessonNo} 课整段音频`}
             />
-          </section>
-        ) : null}
-
-        <div
-          className={`bbc-article-columns new-concept-columns ${isVocabularyVisible && vocabulary.length ? "" : "without-vocabulary"} ${!isOriginalVisible ? "original-hidden" : ""}`}
-        >
-          <section className="bbc-original-panel new-concept-original-panel">
-            <header className="bbc-original-head new-concept-section-head">
-              <div>
-                <span className="new-concept-kicker">New Concept · Original</span>
-                <h2>课文原文</h2>
-              </div>
-              <div className="bbc-original-actions">
-                <OriginalDisplayMenu
-                  mode={displayMode}
-                  onChange={(nextMode) => {
-                    setDisplayMode(nextMode);
-                    updateAudioSettings({ subtitleMode: nextMode });
-                  }}
-                />
-                <OriginalVisibilityMenu
+            <div className="bbc-audio-toolbar">
+              <div className="bbc-audio-toolbar-settings bbc-audio-toolbar-modes">
+                <AudioReadingMenu
+                  isActive={studyMode === "general"}
                   isOriginalVisible={isOriginalVisible}
                   isVocabularyVisible={isVocabularyVisible}
-                  onChange={(nextMode) => {
-                    if (nextMode === "show-original") {
-                      setIsOriginalVisible(true);
-                      setIsVocabularyVisible(true);
-                    } else if (nextMode === "hide-original") {
-                      setIsOriginalVisible(false);
-                      setIsVocabularyVisible(true);
-                    } else {
-                      setIsOriginalVisible(true);
-                      setIsVocabularyVisible(false);
-                    }
+                  onActivate={() => selectStudyMode("general")}
+                  onOriginalVisibilityChange={setIsOriginalVisible}
+                  onVocabularyVisibilityChange={setIsVocabularyVisible}
+                />
+                <button
+                  aria-pressed={studyMode === "intensive"}
+                  className={`bbc-fullscreen-toggle ${studyMode === "intensive" ? "active" : ""}`}
+                  onClick={() => selectStudyMode(studyMode === "intensive" ? "general" : "intensive")}
+                  type="button"
+                >
+                  精读模式
+                </button>
+                <AudioSettingsMenus
+                  onChange={updateAudioSettings}
+                  onModeSelect={(mode) => selectStudyMode(mode)}
+                  playModeLabel="精听模式"
+                  settings={audioSettings}
+                  variant="listening-only"
+                />
+                <AudioSettingsMenus
+                  onChange={updateAudioSettings}
+                  onModeSelect={(mode) => selectStudyMode(mode)}
+                  settings={audioSettings}
+                  variant="speaking-writing"
+                />
+              </div>
+              <div className="bbc-audio-toolbar-utilities">
+                <button
+                  aria-label={isReadingTimerRunning ? "暂停计时" : "开始计时"}
+                  aria-pressed={isReadingTimerRunning}
+                  className={`bbc-reading-timer ${isReadingTimerRunning ? "active" : ""}`}
+                  onClick={() => {
+                    setIsReadingTimerVisible(true);
+                    setIsReadingTimerRunning((current) => !current);
                   }}
+                  title={isReadingTimerRunning ? "点击暂停计时" : "点击开始计时"}
+                  type="button"
+                >
+                  <span>{isReadingTimerVisible ? formatReadingTime(readingSeconds) : "计时"}</span>
+                </button>
+                <AudioPronunciationMenu
+                  onChange={(pronunciationMode) => updateAudioSettings({ pronunciationMode })}
+                  value={audioSettings.pronunciationMode}
+                />
+                <AudioSettingsMenus
+                  hasSelectedRate
+                  onChange={updateAudioSettings}
+                  settings={audioSettings}
+                  variant="rate-only"
+                />
+                <AudioSettingsMenus
+                  onChange={updateAudioSettings}
+                  settings={audioSettings}
+                  variant="subtitle-only"
                 />
                 <button
                   aria-pressed={isOriginalFullscreen}
@@ -692,38 +1115,128 @@ export function NewConceptLessonPage({
                   surfaceRef={pageRef}
                 />
               </div>
-            </header>
-            <NewConceptArticleCopy
-              displayMode={displayMode}
-              isOriginalVisible={isOriginalVisible}
-              lesson={lesson}
-            />
-          </section>
-          {isVocabularyVisible && vocabulary.length ? <LessonVocabulary vocabulary={vocabulary} /> : null}
-        </div>
-
-        <section className="new-concept-sentence-audio-panel">
-          <header className="new-concept-sentence-audio-heading">
-            <div>
-              <span className="new-concept-kicker">Dialogue · Sentence audio</span>
-              <h2>单句音频播放</h2>
             </div>
-          </header>
-          <LessonTranscript
-            activeSentenceNo={activeSentenceNo}
-            audioSettings={audioSettings}
-            favoriteSentenceIds={favoriteSentenceIds}
-            isSentenceAudioPlaying={isSentenceAudioPlaying}
-            lesson={lesson}
-            onAudioSettingsChange={updateAudioSettings}
-            onSentenceEnded={handleSentenceEnded}
-            onSentencePlayingChange={handleSentencePlayingChange}
-            onSentenceTimeChange={handleSentenceTimeChange}
-            onToggleFavorite={toggleFavoriteSentence}
-            sentenceAutoPlaySignals={sentenceAutoPlaySignals}
-            speakingTraining={speakingTraining}
-          />
-        </section>
+          </section>
+        ) : null}
+
+        <div
+          className={`bbc-article-columns new-concept-columns ${!isVocabularyVisible ? "without-vocabulary" : ""} ${!isOriginalVisible ? "original-hidden" : ""}`}
+        >
+          <section className={`bbc-original-panel new-concept-original-panel ${studyMode !== "general" ? "bbc-intensive-original-panel" : ""}`}>
+            {isOriginalVisible ? studyMode === "general" ? (
+              <NewConceptArticleCopy annotations={inlineTextAnnotations} displayMode={displayMode} isOriginalVisible lesson={lesson} pronunciations={articlePronunciations} />
+            ) : activeStudyEnglish ? (
+                <div className="bbc-intensive-reading">
+                  <div className="bbc-intensive-reading-actions">
+                    <button
+                      aria-label={favoriteSentenceIds.includes(favoriteSentenceId(lesson.id, activeStudyTextBlock ? activeStudyTextBlock.startLineIndex + 1 : activeStudySentenceIndex + 1)) ? "取消收藏本句" : "收藏本句"}
+                      aria-pressed={favoriteSentenceIds.includes(favoriteSentenceId(lesson.id, activeStudyTextBlock ? activeStudyTextBlock.startLineIndex + 1 : activeStudySentenceIndex + 1))}
+                      className={`favorite-star ${favoriteSentenceIds.includes(favoriteSentenceId(lesson.id, activeStudyTextBlock ? activeStudyTextBlock.startLineIndex + 1 : activeStudySentenceIndex + 1)) ? "active" : ""}`}
+                      onClick={() => toggleFavoriteSentence(
+                        activeStudyTextBlock ? activeStudyTextBlock.startLineIndex + 1 : activeStudySentenceIndex + 1,
+                        activeStudyEnglish,
+                        activeStudyChinese,
+                        activeStudySentenceAudio ?? undefined,
+                      )}
+                      title={favoriteSentenceIds.includes(favoriteSentenceId(lesson.id, activeStudyTextBlock ? activeStudyTextBlock.startLineIndex + 1 : activeStudySentenceIndex + 1)) ? "取消收藏本句" : "收藏本句"}
+                      type="button"
+                    >
+                      {favoriteSentenceIds.includes(favoriteSentenceId(lesson.id, activeStudyTextBlock ? activeStudyTextBlock.startLineIndex + 1 : activeStudySentenceIndex + 1)) ? "★" : "☆"}
+                    </button>
+                    <ContentShareButton
+                      label="分享本句"
+                      text={`${activeStudyEnglish}\n${activeStudyChinese}`.trim()}
+                      title={`新概念英语 Lesson ${lesson.lessonNo} 第 ${activeStudyTextBlock ? activeStudyTextBlock.startLineIndex + 1 : activeStudySentenceIndex + 1} 句`}
+                      url={`/new-concept/${lesson.id}#new-concept-sentence-${activeStudyTextBlock ? activeStudyTextBlock.startLineIndex + 1 : activeStudySentenceIndex + 1}`}
+                    />
+                  </div>
+                  {studyMode !== "speaking" && studyMode !== "writing" ? (
+                    <>
+                      <p className="bbc-intensive-english" lang="en">
+                        {renderNewConceptArticleEnglish(activeStudyEnglish, vocabularyForDisplay.map((item) => item.word), articlePronunciations)}
+                      </p>
+                      {activeStudyChinese ? <p className="bbc-intensive-chinese" lang="zh-CN">{activeStudyChinese}</p> : null}
+                    </>
+                  ) : null}
+                  {studyMode === "speaking" || studyMode === "writing" ? (
+                    <BbcSentencePractice
+                      key={`${activeStudySentenceIndex + 1}:${activeStudyEnglish}`}
+                      activeWordIndex={null}
+                      englishContent={renderNewConceptArticleEnglish(activeStudyEnglish, vocabularyForDisplay.map((item) => item.word), articlePronunciations)}
+                      isAudioPlaying={isSentenceAudioPlaying && activeSentenceNo === activeStudySentenceIndex + 1}
+                      sentence={{ chinese: activeStudyChinese, english: activeStudyEnglish, sentenceNo: activeStudySentenceIndex + 1 }}
+                      settings={audioSettings}
+                      translationContent={activeStudyChinese}
+                    />
+                  ) : null}
+                  {speakingTraining?.sentenceNo === activeStudySentenceIndex + 1 ? (
+                    <div aria-live="polite" className="bbc-speaking-training-status practicing">
+                      <span>{SPEAKING_PHASE_LABELS[speakingTraining.mode]}</span>
+                      <strong>{speakingTraining.remainingSeconds} 秒</strong>
+                      <small>之后继续播放</small>
+                    </div>
+                  ) : activeSentenceNo === activeStudySentenceIndex + 1 && isSentenceAudioPlaying && audioSettings.speakingMode !== "none" ? (
+                    <div className="bbc-speaking-training-status playing">
+                      <span>{SPEAKING_MODE_LABELS[audioSettings.speakingMode]}</span>
+                      <strong>正在播放</strong>
+                      <small>{SPEAKING_PLAYING_HINTS[audioSettings.speakingMode]}</small>
+                    </div>
+                  ) : null}
+                  {activeStudySentenceAudio ? (
+                    <AudioPlayer
+                      key={`${modeSelectionVersion}-${activeStudySentenceIndex + 1}`}
+                      autoPlaySignal={sentenceAutoPlaySignals[activeStudySentenceIndex + 1] ?? 0}
+                      compactControls
+                      deferSentenceLoop={audioSettings.speakingMode !== "none"}
+                      hasSelectedRate
+                      html5
+                      onDurationChange={(durationSeconds) => {
+                        setSentenceDurations((current) => ({
+                          ...current,
+                          [activeStudySentenceIndex + 1]: durationSeconds,
+                        }));
+                      }}
+                      leadingControls={(
+                        <button
+                          aria-label="上一句"
+                          className="bbc-sentence-navigation-button"
+                          disabled={!previousStudyTextBlock}
+                          onClick={() => previousStudyTextBlock && selectStudySentence(previousStudyTextBlock.startLineIndex + 1)}
+                          type="button"
+                        >上一句</button>
+                      )}
+                      onEnded={() => handleSentenceEnded(activeStudySentenceIndex + 1)}
+                      onPlayingChange={(isPlaying) => handleSentencePlayingChange(activeStudySentenceIndex + 1, isPlaying)}
+                      onSettingsChange={updateAudioSettings}
+                      onTimeChange={(positionSeconds) => handleSentenceTimeChange(activeStudySentenceIndex + 1, positionSeconds)}
+                      seekRequest={sentenceRestoreSeekRequest?.sentenceNo === activeStudySentenceIndex + 1 ? sentenceRestoreSeekRequest : null}
+                      settings={audioSettings}
+                      settingsPlacement="none"
+                      skipSeconds={3}
+                      src={activeStudySentenceAudio}
+                      title={`新概念英语第 ${lesson.lessonNo} 课第 ${activeStudySentenceIndex + 1} 句音频`}
+                      trailingControls={(
+                        <button
+                          aria-label="下一句"
+                          className="bbc-sentence-navigation-button"
+                          disabled={!nextStudyTextBlock}
+                          onClick={() => nextStudyTextBlock && selectStudySentence(nextStudyTextBlock.startLineIndex + 1)}
+                          type="button"
+                        >下一句</button>
+                      )}
+                    />
+                  ) : null}
+                </div>
+              ) : null : null}
+          </section>
+          {isVocabularyVisible ? (
+            <LessonVocabulary
+              onVocabularyOpen={saveVocabularyReturnState}
+              returnTo={`/new-concept/${lesson.id}`}
+              vocabulary={vocabularyForDisplay}
+            />
+          ) : null}
+        </div>
 
         <nav aria-label="课次导航" className="new-concept-lesson-nav">
           {previousLesson ? <Link href={`/new-concept/${previousLesson.id}`}>← Lesson {previousLesson.lessonNo} {previousLesson.title}</Link> : <span />}

@@ -4,6 +4,7 @@ import { useState, type DragEvent, type FormEvent, type PointerEvent } from "rea
 
 import quizCatalog from "@/data/bbc/quiz-index.json";
 import { syncWrongBbcQuizFavorite } from "@/lib/bbc-quiz-favorites";
+import { BbcArticleComments } from "@/components/bbc-article-comments";
 
 import styles from "./bbc-article-quiz.module.css";
 
@@ -613,13 +614,19 @@ export function BbcArticleQuiz({ articleId, articleTitle }: { articleId: string;
   const record = (quizCatalog as QuizRecord[]).find(
     (item) => item.articleId === articleId && item.status !== "review_required",
   );
-  if (!record) return null;
+  if (!record) return <BbcArticleComments articleId={articleId} />;
 
   const title = articleTitle ?? record.articleTitle;
   const matching = record.matching ?? [];
 
   return (
-    <section className={styles.panel} id="bbc-article-quiz" aria-label="文章练习">
+    <>
+      <details className={`${styles.panel} ${styles.collapsible}`} id="bbc-article-quiz">
+        <summary className={styles.summary}>
+          <span>文章练习</span>
+          <small>点击展开或收起</small>
+        </summary>
+        <div className={styles.quizContent}>
       {matching.length ? (
         <section className={styles.group} aria-labelledby={`${articleId}-matching-heading`}>
           <h3 id={`${articleId}-matching-heading`}>一、将标题和段落配对</h3>
@@ -640,6 +647,9 @@ export function BbcArticleQuiz({ articleId, articleTitle }: { articleId: string;
           record.exercise.map((question) => <FillBlankQuestion key={`exercise-${question.number}`} articleId={articleId} articleTitle={title} displayNumber={question.number} question={question} />)
         )}
       </section>
-    </section>
+        </div>
+      </details>
+      <BbcArticleComments articleId={articleId} />
+    </>
   );
 }

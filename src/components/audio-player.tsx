@@ -1,7 +1,9 @@
 "use client";
 
 import { Howl } from "howler";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
+import { getLikelyProperNounWords } from "@/lib/audio-pronunciation";
+import type { AudioPronunciationScope } from "@/lib/audio-pronunciation";
 
 export type AudioPlayMode = "sequential" | "sentence-loop";
 export type AudioSubtitleMode = "english" | "bilingual" | "chinese";
@@ -12,10 +14,14 @@ export type AudioDictationMode =
   | "sentence-dictation"
   | "sentence-order"
   | "translation-training";
+export type AudioPronunciationMode = "hidden" | "us" | "uk";
+export type { AudioPronunciationScope } from "@/lib/audio-pronunciation";
 
 export type AudioPlayerSettings = {
   dictationMode: AudioDictationMode;
   playMode: AudioPlayMode;
+  pronunciationMode: AudioPronunciationMode;
+  pronunciationScope: AudioPronunciationScope;
   rate: number;
   speakingMode: AudioSpeakingMode;
   subtitleMode: AudioSubtitleMode;
@@ -24,18 +30,74 @@ export type AudioPlayerSettings = {
 export const DEFAULT_AUDIO_PLAYER_SETTINGS: AudioPlayerSettings = {
   dictationMode: "none",
   playMode: "sequential",
+  pronunciationMode: "hidden",
+  pronunciationScope: "high-school-plus",
   rate: 1,
   speakingMode: "none",
   subtitleMode: "chinese",
 };
 
+export function useArticlePronunciations(
+  text: string,
+  pronunciationMode: AudioPronunciationMode,
+  enabled = true,
+) {
+  const [pronunciations, setPronunciations] = useState<Map<string, string>>(() => new Map());
+
+  useEffect(() => {
+    if (!enabled || pronunciationMode === "hidden" || !text.trim()) {
+      setPronunciations(new Map());
+      return;
+    }
+
+    const controller = new AbortController();
+    const properNounWords = getLikelyProperNounWords(text);
+    const words = [...new Set(
+      (text.match(/[A-Za-z]+(?:['’][A-Za-z]+)*/g) ?? [])
+        .map((word) => word.toLowerCase().replace(/[’]/g, "'")),
+    )].slice(0, 1200);
+    const lookupWords = words.filter((word) => !properNounWords.has(word));
+
+    setPronunciations(new Map());
+    void fetch("/api/vocabulary-pronunciations", {
+      body: JSON.stringify({ pronunciationMode, words: lookupWords }),
+      headers: { "Content-Type": "application/json" },
+      method: "POST",
+      signal: controller.signal,
+    })
+      .then(async (response) => {
+        if (!response.ok) return null;
+        return (await response.json()) as { pronunciations?: Record<string, string> };
+      })
+      .then((payload) => {
+        if (!controller.signal.aborted && payload?.pronunciations) {
+          const nextPronunciations = new Map(Object.entries(payload.pronunciations));
+          properNounWords.forEach((word) => nextPronunciations.set(word, ""));
+          setPronunciations(nextPronunciations);
+        }
+      })
+      .catch(() => undefined);
+
+    return () => controller.abort();
+  }, [enabled, pronunciationMode, text]);
+
+  return pronunciations;
+}
+
+export function formatArticlePhonetic(value?: string) {
+  const phonetic = (value ?? "").trim().replace(/^[\[\s/]+|[\]\s/]+$/g, "").trim();
+  return phonetic ? `[${phonetic}]` : "";
+}
+
 type AudioPlayerProps = {
   autoPlaySignal?: number;
+  compactControls?: boolean;
   controls?: "full" | "hidden";
   deferSentenceLoop?: boolean;
   hasSelectedRate?: boolean;
   html5?: boolean;
   preload?: boolean;
+  leadingControls?: ReactNode;
   loopSegment?: { endSeconds: number; startSeconds: number } | null;
   onDurationChange?: (durationSeconds: number) => void;
   onEnded?: () => void;
@@ -43,9 +105,11 @@ type AudioPlayerProps = {
   onSettingsChange?: (nextSettings: Partial<AudioPlayerSettings>) => void;
   onStopAtEnd?: () => void;
   onTimeChange?: (positionSeconds: number) => void;
+  trailingControls?: ReactNode;
   settings?: AudioPlayerSettings;
   settingsPlacement?: "inside" | "none";
   seekRequest?: { id: number; play?: boolean; positionSeconds: number } | null;
+  skipSeconds?: number;
   showRate?: boolean;
   src: string;
   stopAtSeconds?: number | null;
@@ -60,6 +124,12 @@ function formatTime(seconds: number) {
   const minutes = Math.floor(seconds / 60);
   const remainingSeconds = Math.floor(seconds % 60);
   return `${String(minutes).padStart(2, "0")}:${String(remainingSeconds).padStart(2, "0")}`;
+}
+
+function inferAudioFormat(src: string) {
+  const pathname = src.split(/[?#]/, 1)[0] ?? src;
+  const extension = pathname.match(/\.([a-z0-9]+)$/i)?.[1]?.toLowerCase();
+  return [extension || "mp3"];
 }
 
 const rateOptions = [
@@ -80,9 +150,9 @@ const subtitleModeOptions = [
 ] satisfies { label: string; value: AudioSubtitleMode }[];
 
 const dictationModeOptions = [
+  { label: "语序排列", value: "sentence-order" },
   { label: "听写填空", value: "blank-dictation" },
   { label: "整句听写", value: "sentence-dictation" },
-  { label: "语序排列", value: "sentence-order" },
   { label: "翻译训练", value: "translation-training" },
 ] satisfies { label: string; value: AudioDictationMode }[];
 
@@ -91,6 +161,12 @@ const speakingModeOptions = [
   { label: "视译训练", value: "sight-translation" },
   { label: "影子练习", value: "shadowing" },
 ] satisfies { label: string; value: Exclude<AudioSpeakingMode, "none"> }[];
+
+const pronunciationModeOptions = [
+  { label: "隐藏", value: "hidden" },
+  { label: "美音", value: "us" },
+  { label: "英音", value: "uk" },
+] satisfies { label: string; value: AudioPronunciationMode }[];
 
 const activeAudioPlayers = new Set<Howl>();
 const pendingAudioPlaybackRequests = new WeakMap<Howl, number>();
@@ -159,11 +235,13 @@ function currentLabel<T extends string | number>(options: { label: string; value
 
 export function AudioPlayer({
   autoPlaySignal = 0,
+  compactControls = false,
   controls = "full",
   deferSentenceLoop = false,
   hasSelectedRate,
   html5 = true,
   preload = true,
+  leadingControls,
   loopSegment = null,
   onDurationChange,
   onEnded,
@@ -171,9 +249,11 @@ export function AudioPlayer({
   onSettingsChange,
   onStopAtEnd,
   onTimeChange,
+  trailingControls,
   seekRequest = null,
   settings,
   settingsPlacement = "inside",
+  skipSeconds = 5,
   src,
   stopAtSeconds = null,
   showRate = true,
@@ -271,6 +351,7 @@ export function AudioPlayer({
       src: [src],
       html5,
       preload,
+      format: inferAudioFormat(src),
       rate: playerSettings.rate,
       volume: 1,
       onload: () => {
@@ -428,7 +509,7 @@ export function AudioPlayer({
 
     setIsPlayRequested(true);
     requestAudioPlayback(soundRef.current);
-  }, [autoPlaySignal]);
+  }, [autoPlaySignal, src]);
 
   useEffect(() => {
     if (!seekRequest || !soundRef.current) {
@@ -496,16 +577,13 @@ export function AudioPlayer({
     onTimeChangeRef.current?.(boundedPosition);
   }
 
-  function togglePlay() {
+  function startPlayback() {
     const sound = soundRef.current;
     if (!sound) {
       return;
     }
 
     if (sound.playing() || isPlayRequested) {
-      clearAudioPlaybackRequest(sound);
-      sound.pause();
-      setIsPlayRequested(false);
       return;
     }
 
@@ -517,7 +595,44 @@ export function AudioPlayer({
     requestAudioPlayback(sound);
   }
 
+  function pausePlayback() {
+    const sound = soundRef.current;
+    if (!sound) {
+      return;
+    }
+
+    clearAudioPlaybackRequest(sound);
+    sound.pause();
+    setIsPlayRequested(false);
+  }
+
+  function togglePlay() {
+    if (isPlaying || isPlayRequested) {
+      pausePlayback();
+    } else {
+      startPlayback();
+    }
+  }
+
   const displayPosition = isScrubbing ? draftPosition : position;
+  const mainPlayerControls = (
+    <div className={`player-main-controls ${compactControls ? "compact-player-controls" : ""}`} aria-label={`${title} 控制`}>
+      <button aria-label={`倒退 ${skipSeconds} 秒`} className="icon-button" type="button" onClick={() => seekTo(position - skipSeconds)}>
+        <span className="player-skip-icon backward" aria-hidden="true" />
+      </button>
+      <button aria-label={!compactControls && isPlaying ? "暂停" : "播放"} className="play-button" type="button" onClick={compactControls ? startPlayback : togglePlay}>
+        <span className={`player-play-icon ${!compactControls && isPlaying ? "pause" : "play"}`} aria-hidden="true" />
+      </button>
+      {compactControls ? (
+        <button aria-label="暂停" className="compact-pause-button" type="button" onClick={pausePlayback}>
+          <span className="player-play-icon pause" aria-hidden="true" />
+        </button>
+      ) : null}
+      <button aria-label={`前进 ${skipSeconds} 秒`} className="icon-button" type="button" onClick={() => seekTo(position + skipSeconds)}>
+        <span className="player-skip-icon forward" aria-hidden="true" />
+      </button>
+    </div>
+  );
 
   if (controls === "hidden") {
     return null;
@@ -525,18 +640,13 @@ export function AudioPlayer({
 
   return (
     <div className="howler-player">
-      <div className="player-main-controls" aria-label={`${title} 控制`}>
-        <button aria-label="倒退 5 秒" className="icon-button" type="button" onClick={() => seekTo(position - 5)}>
-          <span className="player-skip-icon backward" aria-hidden="true" />
-        </button>
-        <button className="play-button" type="button" onClick={togglePlay}>
-          <span className={`player-play-icon ${isPlaying || isPlayRequested ? "pause" : "play"}`} aria-hidden="true" />
-          <span className="sr-only">{isPlaying || isPlayRequested ? "暂停" : "播放"}</span>
-        </button>
-        <button aria-label="前进 5 秒" className="icon-button" type="button" onClick={() => seekTo(position + 5)}>
-          <span className="player-skip-icon forward" aria-hidden="true" />
-        </button>
-      </div>
+      {leadingControls || trailingControls ? (
+        <div className="player-controls-row">
+          <div className="player-controls-leading">{leadingControls}</div>
+          {mainPlayerControls}
+          <div className="player-controls-trailing">{trailingControls}</div>
+        </div>
+      ) : mainPlayerControls}
 
       {loadError ? <p className="audio-load-error">{loadError}</p> : null}
 
@@ -574,6 +684,8 @@ export function AudioSettingsMenus({
   className = "",
   hasSelectedRate = true,
   onChange,
+  onModeSelect,
+  playModeLabel = "听力模式",
   settings,
   showRate = true,
   variant = "full",
@@ -581,34 +693,43 @@ export function AudioSettingsMenus({
   className?: string;
   hasSelectedRate?: boolean;
   onChange: (nextSettings: Partial<AudioPlayerSettings>) => void;
+  onModeSelect?: (mode: "listening" | "speaking" | "writing") => void;
+  playModeLabel?: string;
   settings: AudioPlayerSettings;
   showRate?: boolean;
-  variant?: "basic" | "full" | "rate-only";
+  variant?: "basic" | "full" | "rate-only" | "subtitle-only" | "listening-only" | "speaking-writing";
 }) {
-  function exitWritingMode(nextSettings: Partial<AudioPlayerSettings> = {}) {
-    if (settings.dictationMode === "none") {
+  function exitPracticeMode(nextSettings: Partial<AudioPlayerSettings> = {}) {
+    const isLeavingPractice =
+      settings.dictationMode !== "none" || settings.speakingMode !== "none";
+    if (!isLeavingPractice) {
       return nextSettings;
     }
 
     return {
       dictationMode: "none" as const,
+      speakingMode: "none" as const,
       subtitleMode: "bilingual" as const,
       ...nextSettings,
     };
   }
 
   const menuItems = [
-    ...(showRate
+    ...(showRate && variant !== "subtitle-only" && variant !== "listening-only" && variant !== "speaking-writing"
       ? [
           {
-            selectedLabel: hasSelectedRate ? currentLabel(rateOptions, settings.rate) : "倍速",
+            selectedLabel: hasSelectedRate
+              ? variant === "rate-only" && settings.rate === 1
+                ? "速度"
+                : currentLabel(rateOptions, settings.rate)
+              : "倍速",
             selectedValue: settings.rate,
             options: rateOptions,
             onSelect: (value: string | number) => onChange({ rate: Number(value) }),
           },
         ]
       : []),
-    ...(variant !== "rate-only"
+    ...(variant === "basic" || variant === "full" || variant === "subtitle-only"
       ? [
           {
             selectedLabel: currentLabel(subtitleModeOptions, settings.subtitleMode),
@@ -617,42 +738,80 @@ export function AudioSettingsMenus({
             onSelect: (value: string | number) =>
               onChange({ subtitleMode: String(value) as AudioSubtitleMode }),
           },
+        ]
+      : []),
+    ...(variant === "basic" || variant === "full" || variant === "listening-only"
+      ? [
           {
-            selectedLabel: "听力模式",
+            selectedLabel: playModeLabel,
             selectedValue: settings.playMode,
             options: playModeOptions,
-            onSelect: (value: string | number) =>
-              onChange(exitWritingMode({ playMode: String(value) as AudioPlayMode })),
+            onOpen: onModeSelect
+              ? () => {
+                  onChange(exitPracticeMode({ subtitleMode: "bilingual" }));
+                  onModeSelect("listening");
+                }
+              : undefined,
+            onSelect: (value: string | number) => {
+              onChange(exitPracticeMode({ playMode: String(value) as AudioPlayMode }));
+              onModeSelect?.("listening");
+            },
           },
         ]
       : []),
-    ...(variant === "full"
+    ...(variant === "full" || variant === "speaking-writing"
       ? [
           {
-            selectedLabel:
-              settings.speakingMode === "none"
-                ? "口语模式"
-                : currentLabel(speakingModeOptions, settings.speakingMode),
+            selectedLabel: "口语模式",
             selectedValue: settings.speakingMode,
             options: speakingModeOptions,
+            onOpen: onModeSelect
+              ? () => {
+                  const speakingMode = settings.speakingMode === "none" ? "imitation" : settings.speakingMode;
+                  onChange({
+                    dictationMode: "none",
+                    playMode: "sequential",
+                    speakingMode,
+                    subtitleMode: speakingMode === "sight-translation" ? "chinese" : "bilingual",
+                  });
+                  onModeSelect("speaking");
+                }
+              : undefined,
             onSelect: (value: string | number) => {
               const speakingMode = String(value) as Exclude<AudioSpeakingMode, "none">;
               onChange({
                 dictationMode: "none",
+                playMode: "sequential",
                 speakingMode,
                 subtitleMode: speakingMode === "sight-translation" ? "chinese" : "bilingual",
               });
+              onModeSelect?.("speaking");
             },
           },
           {
             selectedLabel: "写作模式",
             selectedValue: settings.dictationMode,
             options: dictationModeOptions,
-            onSelect: (value: string | number) =>
+            onOpen: onModeSelect
+              ? () => {
+                  onChange({
+                    dictationMode: settings.dictationMode === "none" ? "sentence-order" : settings.dictationMode,
+                    playMode: "sequential",
+                    speakingMode: "none",
+                    subtitleMode: "bilingual",
+                  });
+                  onModeSelect("writing");
+                }
+              : undefined,
+            onSelect: (value: string | number) => {
               onChange({
                 dictationMode: String(value) as AudioDictationMode,
+                playMode: "sequential",
                 speakingMode: "none",
-              }),
+                subtitleMode: "bilingual",
+              });
+              onModeSelect?.("writing");
+            },
           },
         ]
       : []),
@@ -660,9 +819,142 @@ export function AudioSettingsMenus({
 
   return (
     <div className={`player-settings exam-player-settings ${className}`}>
-      {menuItems.map((menu) => (
-        <PlayerMenu key={`${menu.selectedLabel}-${String(menu.selectedValue)}`} menu={menu} />
+      {menuItems.map((menu, index) => (
+        <PlayerMenu key={`${variant}-${index}`} menu={menu} />
       ))}
+    </div>
+  );
+}
+
+export function AudioChoiceMenu({
+  className = "",
+  label,
+  onSelect,
+  options,
+  selectedValue,
+}: {
+  className?: string;
+  label: string;
+  onSelect: (value: string) => void;
+  options: { label: string; value: string }[];
+  selectedValue: string;
+}) {
+  return (
+    <div className={`player-menu ${className}`}>
+      <button aria-label={`${label}显示设置`} className="player-menu-trigger" type="button">
+        <span>{label}</span>
+      </button>
+      <div className="player-menu-panel">
+        {options.map((option) => (
+          <button
+            aria-pressed={selectedValue === option.value}
+            className={selectedValue === option.value ? "active" : ""}
+            key={option.value}
+            onClick={() => onSelect(option.value)}
+            type="button"
+          >
+            <span>{option.label}</span>
+            <span aria-hidden="true" className="player-menu-option-radio" />
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export function AudioReadingMenu({
+  className = "",
+  isActive,
+  isOriginalVisible,
+  isVocabularyVisible,
+  onActivate,
+  onOriginalVisibilityChange,
+  onVocabularyVisibilityChange,
+}: {
+  className?: string;
+  isActive: boolean;
+  isOriginalVisible: boolean;
+  isVocabularyVisible: boolean;
+  onActivate?: () => void;
+  onOriginalVisibilityChange: (visible: boolean) => void;
+  onVocabularyVisibilityChange: (visible: boolean) => void;
+}) {
+  const groups = [
+    {
+      label: "原文",
+      isVisible: isOriginalVisible,
+      onToggle: (visible: boolean) => onOriginalVisibilityChange(visible),
+    },
+    {
+      label: "词汇",
+      isVisible: isVocabularyVisible,
+      onToggle: (visible: boolean) => onVocabularyVisibilityChange(visible),
+    },
+  ];
+
+  return (
+    <div className={`player-menu audio-reading-mode-menu ${className}`}>
+      <button
+        aria-haspopup="true"
+        aria-pressed={isActive}
+        className={`player-menu-trigger bbc-fullscreen-toggle ${isActive ? "active" : ""}`}
+        onClick={onActivate}
+        type="button"
+      >
+        <span>泛读模式</span>
+      </button>
+      <div className="player-menu-panel audio-reading-mode-panel">
+        {groups.map((group) => (
+          <div aria-label={group.label} className="audio-reading-menu-group" key={group.label} role="group">
+            <button
+              aria-pressed={group.isVisible}
+              className={group.isVisible ? "active" : ""}
+              onClick={() => group.onToggle(!group.isVisible)}
+              type="button"
+            >
+              <span>{group.label}</span>
+              <span aria-hidden="true" className="player-menu-option-radio" />
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export function AudioPronunciationMenu({
+  className = "",
+  onChange,
+  value,
+}: {
+  className?: string;
+  onChange: (pronunciationMode: AudioPronunciationMode) => void;
+  value: AudioPronunciationMode;
+}) {
+  return (
+    <div className={`player-settings audio-pronunciation-control ${className}`}>
+      <div className="player-menu audio-pronunciation-menu">
+        <button aria-haspopup="true" className="player-menu-trigger" type="button">
+          <span>音标</span>
+        </button>
+        <div className="player-menu-panel audio-pronunciation-menu-panel">
+          <div aria-label="音标类型" className="audio-pronunciation-menu-group" role="group">
+            <strong>音标类型</strong>
+            {pronunciationModeOptions.map((option) => (
+              <button
+                aria-pressed={(value ?? "hidden") === option.value}
+                className={(value ?? "hidden") === option.value ? "active" : ""}
+                key={option.value}
+                onClick={() => onChange(option.value)}
+                type="button"
+              >
+                <span>{option.label}</span>
+                <span aria-hidden="true" className="player-menu-option-radio" />
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
@@ -674,23 +966,26 @@ function PlayerMenu({
     selectedLabel: string;
     selectedValue: string | number;
     options: { label: string; value: string | number }[];
+    onOpen?: () => void;
     onSelect: (value: string | number) => void;
   };
 }) {
   return (
     <div className="player-menu">
-      <button className="player-menu-trigger" type="button">
+      <button className="player-menu-trigger" onClick={menu.onOpen} type="button">
         <span>{menu.selectedLabel}</span>
       </button>
       <div className="player-menu-panel">
         {menu.options.map((option) => (
           <button
+            aria-pressed={String(option.value) === String(menu.selectedValue)}
             className={String(option.value) === String(menu.selectedValue) ? "active" : ""}
             key={String(option.value)}
             type="button"
             onClick={() => menu.onSelect(option.value)}
           >
-            {option.label}
+            <span>{option.label}</span>
+            <span aria-hidden="true" className="player-menu-option-radio" />
           </button>
         ))}
       </div>

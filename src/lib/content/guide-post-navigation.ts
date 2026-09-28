@@ -6,6 +6,11 @@ export type GuideMenuPlacementOption = {
   placement: GuideMenuPlacement;
 };
 
+export type GuidePagePlacementOption = {
+  label: string;
+  path: string;
+};
+
 export const GUIDE_POST_NAV_PREFIX = "guide-post-";
 
 export function guidePostNavId(slug: string) {
@@ -37,6 +42,70 @@ export function guidePostMenuPlacementOptions(config: SiteChromeConfig): GuideMe
       placement: { kind: "sidebar", parentId: item.id },
     });
   });
+
+  return options;
+}
+
+export function normalizeGuidePagePath(value: string) {
+  try {
+    const url = new URL(value, "https://guide-page.local");
+    if (url.origin !== "https://guide-page.local") return "";
+    const pathname = url.pathname === "/" ? "/" : url.pathname.replace(/\/+$/, "");
+    const searchEntries = [...url.searchParams.entries()].sort(([leftKey, leftValue], [rightKey, rightValue]) =>
+      leftKey.localeCompare(rightKey) || leftValue.localeCompare(rightValue),
+    );
+    const query = new URLSearchParams(searchEntries).toString();
+    return `${pathname}${query ? `?${query}` : ""}`;
+  } catch {
+    return "";
+  }
+}
+
+export function guidePostPagePlacementOptions(config: SiteChromeConfig): GuidePagePlacementOption[] {
+  const options: GuidePagePlacementOption[] = [{ label: "主页", path: "/" }];
+  const seenPaths = new Set(options.map((option) => option.path));
+
+  const addOption = (label: string, href: string) => {
+    const normalizedPath = normalizeGuidePagePath(href);
+    if (!normalizedPath || seenPaths.has(normalizedPath)) return;
+    seenPaths.add(normalizedPath);
+    options.push({ label, path: normalizedPath });
+  };
+
+  walkNavItems(config.nav.items, (item, path) => {
+    if (!item.enabled || item.id.startsWith(GUIDE_POST_NAV_PREFIX) || !item.href || item.href.startsWith("#")) return;
+    addOption(path.join(" / "), item.href);
+  });
+
+  for (const year of Array.from({ length: 12 }, (_, index) => 2026 - index)) {
+    addOption(`左侧菜单：BBC随身英语 / ${year}`, `/articles?year=${year}`);
+  }
+  addOption("左侧菜单：新概念英语", "/new-concept");
+  for (let unit = 1; unit <= 6; unit += 1) {
+    addOption(`左侧菜单：新概念英语 / Unit ${unit}`, `/new-concept?unit=${unit}`);
+  }
+
+  const directoryPages = [
+    ["左侧菜单：听力", "/listening"],
+    ["左侧菜单：听力 / 剑桥雅思", "/listening/practice"],
+    ["左侧菜单：听力 / 九分达人", "/listening/jiufen"],
+    ["左侧菜单：听力 / 历年真题", "/listening/past-papers"],
+    ["左侧菜单：口语", "/speaking"],
+    ["左侧菜单：口语 / Part 1", "/speaking/part-1"],
+    ["左侧菜单：口语 / Part 2", "/speaking/part-2"],
+    ["左侧菜单：口语 / Part 3", "/speaking/part-3"],
+    ["左侧菜单：阅读", "/reading"],
+    ["左侧菜单：阅读 / 剑桥雅思", "/reading/practice"],
+    ["左侧菜单：阅读 / 完整模考", "/reading/mock"],
+    ["左侧菜单：写作", "/writing"],
+    ["左侧菜单：写作 / 小作文", "/writing/practice?task=task1"],
+    ["左侧菜单：写作 / 大作文", "/writing/task2"],
+    ["左侧菜单：写作 / 专项训练", "/writing/task1-vocabulary"],
+    ["左侧菜单：中考英语", "/junior-high"],
+    ["左侧菜单：高考英语", "/senior-high"],
+    ["左侧菜单：SAT", "/sat"],
+  ] as const;
+  directoryPages.forEach(([label, href]) => addOption(label, href));
 
   return options;
 }

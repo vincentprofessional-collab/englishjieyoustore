@@ -6,6 +6,7 @@ import { AdminAnalyticsPanel } from "@/components/admin-analytics-panel";
 import { AdminHomeEditor } from "@/components/admin-home-editor";
 import { AdminEntitlementManager } from "@/components/admin-entitlement-manager";
 import { AdminSiteChromeEditor } from "@/components/admin-site-chrome-editor";
+import { ArticleInlineAnnotationAdmin } from "@/components/article-inline-annotation-admin";
 import { GuidePostAdmin } from "@/components/guide-post-admin";
 import { GuideCommentsAdmin } from "@/components/guide-comments-admin";
 import { supabase } from "@/lib/supabase/client";
@@ -17,6 +18,7 @@ type AdminView =
   | "home"
   | "chrome"
   | "guide"
+  | "article-annotations"
 
 export function AdminContentManager() {
   const [activeView, setActiveView] = useState<AdminView>("analytics");
@@ -221,7 +223,14 @@ export function AdminContentManager() {
           type="button"
           onClick={() => setActiveView("guide")}
         >
-          首页发帖
+          帖子管理
+        </button>
+        <button
+          className={activeView === "article-annotations" ? "active" : ""}
+          type="button"
+          onClick={() => setActiveView("article-annotations")}
+        >
+          文章词汇标注
         </button>
       </div>
 
@@ -243,6 +252,8 @@ export function AdminContentManager() {
           <GuideCommentsAdmin />
         </>
       ) : null}
+
+      {activeView === "article-annotations" && adminUserId ? <ArticleInlineAnnotationAdmin /> : null}
 
     </section>
   );

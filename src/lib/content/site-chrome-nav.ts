@@ -81,14 +81,16 @@ export function ensureSatExamMenu<T extends SiteChromeNavNode>(
     ];
   }
 
-  return items.map((item) =>
-    item.id === exams.id
-      ? {
-          ...item,
-          children: ensureJuniorHighExamLink(item.children, sat),
-        }
-      : item,
-  );
+  return items.map((item) => {
+    if (item.id !== exams.id) return item;
+    const satLabelledChildren = item.children.map((child) =>
+      child.id === sat.id ? { ...child, label: sat.label } : child,
+    );
+    return {
+      ...item,
+      children: ensureJuniorHighExamLink(satLabelledChildren, sat),
+    };
+  });
 }
 
 export function ensureCompleteExamMenu<T extends SiteChromeNavNode & { enabled: boolean }>(

@@ -1,0 +1,17 @@
+.page { background: #f7f3ea; color: #1f1b16; min-height: 100vh; padding: 32px 16px 80px; }
+.content { margin: 0 auto; max-width: 1200px; }
+.header { margin-bottom: 28px; }
+.eyebrow { color: #1e5b3e; font: 600 12px/1.4 system-ui, sans-serif; letter-spacing: .1em; }
+.header h1 { font: 600 clamp(26px, 3vw, 40px)/1.25 Georgia, serif; margin: 12px 0; }
+.header p { color: #716a60; }
+.note { font-size: 13px; }
+.header a { color: #1e5b3e; display: inline-block; margin-top: 16px; }
+.selectRow { align-items: center; display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
+.selectRow label { font-size: 13px; }
+.selectRow select { background: #fffdf8; border: 1px solid #d9d1c2; border-radius: 8px; color: #1f1b16; flex: 1 1 280px; font: inherit; min-width: 0; padding: 10px; }
+.selectRow button { background: #1e5b3e; border: 0; border-radius: 8px; color: #fffdf8; cursor: pointer; font: 600 14px system-ui, sans-serif; padding: 12px 20px; }
+.navigation { align-items: center; display: flex; gap: 16px; justify-content: center; margin-top: 22px; }
+.navigation a, .navigation .disabled { background: #fffdf8; border: 1px solid #d9d1c2; border-radius: 999px; color: #1e5b3e; font: 600 14px/1.4 system-ui, sans-serif; padding: 10px 18px; text-decoration: none; }
+.navigation a:hover { background: #edf5ee; }
+.navigation .disabled { color: #a9a095; opacity: .65; }
+.navigation > span:not(.disabled) { color: #716a60; font: 13px/1.4 system-ui, sans-serif; white-space: nowrap; }

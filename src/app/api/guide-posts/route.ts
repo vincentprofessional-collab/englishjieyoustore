@@ -26,6 +26,7 @@ type GuidePostPayload = {
   excerpt: string;
   id: string | null;
   menuPlacement: GuideMenuPlacement | null;
+  pagePlacement: string | null;
   publishedAt: string | null;
   slug: string;
   status: GuidePostStatus;
@@ -119,6 +120,10 @@ function readPostPayload(value: unknown): GuidePostPayload | null {
         : "",
     id: typeof post.id === "string" && post.id ? post.id : null,
     menuPlacement: readMenuPlacement(meta.menuPlacement ?? post.menuPlacement),
+    pagePlacement:
+      typeof meta.pagePlacement === "string" && meta.pagePlacement.trim()
+        ? meta.pagePlacement.trim()
+        : null,
     publishedAt: typeof post.publishedAt === "string"
       ? post.publishedAt
       : typeof post.published_at === "string"
@@ -287,6 +292,7 @@ export async function POST(request: NextRequest) {
       excerpt: post.excerpt,
       kind: "guide-post",
       menuPlacement: post.menuPlacement,
+      pagePlacement: post.pagePlacement,
     },
     module: "site",
     published_at: post.status === "published" ? post.publishedAt ?? now : post.publishedAt,

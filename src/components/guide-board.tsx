@@ -1,7 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname, useSearchParams } from "next/navigation";
 import { FormEvent, useEffect, useState, type CSSProperties } from "react";
+import type { SiteChromeConfig } from "@/lib/content/site-chrome";
+import { guidePostPagePlacementOptions, normalizeGuidePagePath } from "@/lib/content/guide-post-navigation";
 import {
   DEFAULT_GUIDE_POSTS,
   GuideContentBlock,
@@ -18,7 +21,10 @@ type GuideBoardProps = {
   hideHeading?: boolean;
   hidePostChrome?: boolean;
   initialExpanded?: boolean;
+  hideWhenEmpty?: boolean;
+  emptyMessage?: string;
   postLimit?: number;
+  placementPath?: string;
   title?: string;
 };
 
@@ -491,35 +497,54 @@ export function GuideBoard({
   eyebrow = "GUIDE · 使用说明",
   hideHeading = false,
   hidePostChrome = false,
+  hideWhenEmpty = false,
   initialExpanded = false,
+  emptyMessage = "当前没有帖子。",
   postLimit,
+  placementPath,
   title = "使用说明",
 }: GuideBoardProps) {
-  const [posts, setPosts] = useState<GuidePost[]>(DEFAULT_GUIDE_POSTS);
+  const [posts, setPosts] = useState<GuidePost[]>(() =>
+    placementPath ? [] : DEFAULT_GUIDE_POSTS,
+  );
+  const [currentPage, setCurrentPage] = useState(0);
+  const [totalPosts, setTotalPosts] = useState(DEFAULT_GUIDE_POSTS.length);
+  const [isLoading, setIsLoading] = useState(true);
+  const pageSize = postLimit ?? 50;
 
   useEffect(() => {
     let active = true;
 
     async function loadPosts() {
-      const { data, error } = await supabase
+      setIsLoading(true);
+      let query = supabase
         .from("managed_content_pages")
-        .select("id,slug,title,summary,meta_json,published_at,created_at")
+        .select("id,slug,title,summary,meta_json,published_at,created_at", { count: "exact" })
         .like("slug", "guide-%")
         .eq("status", "published")
-        .order("published_at", { ascending: false })
-        .limit(50);
+        .order("published_at", { ascending: false });
+
+      if (placementPath === "/") {
+        query = query.is("meta_json->>pagePlacement", null);
+      } else if (placementPath) {
+        query = query.eq("meta_json->>pagePlacement", placementPath);
+      }
+
+      const { data, error, count } = await query.range(currentPage * pageSize, (currentPage + 1) * pageSize - 1);
 
       if (!active) {
         return;
       }
 
       if (error) {
+        setIsLoading(false);
         return;
       }
 
-      if (data?.length) {
-        setPosts((data as GuidePostRow[]).map(parseGuidePostRow));
-      }
+      const nextRows = (data ?? []) as GuidePostRow[];
+      setPosts(nextRows.map(parseGuidePostRow));
+      setTotalPosts(count ?? data?.length ?? 0);
+      setIsLoading(false);
     }
 
     void loadPosts();
@@ -527,9 +552,11 @@ export function GuideBoard({
     return () => {
       active = false;
     };
-  }, []);
+  }, [currentPage, pageSize, placementPath]);
 
-  const visiblePosts = postLimit ? posts.slice(0, postLimit) : posts;
+  if (hideWhenEmpty && (!posts.length || isLoading)) {
+    return null;
+  }
 
   return (
     <section
@@ -545,7 +572,7 @@ export function GuideBoard({
       ) : null}
 
       <div className="guide-post-list">
-        {visiblePosts.map((post) => (
+        {posts.map((post) => (
           <GuidePostCard
             hidePostChrome={hidePostChrome}
             initialExpanded={initialExpanded}
@@ -553,7 +580,65 @@ export function GuideBoard({
             post={post}
           />
         ))}
+        {!isLoading && posts.length === 0 ? (
+          <p className="guide-post-empty">{emptyMessage}</p>
+        ) : null}
       </div>
+      {postLimit && totalPosts > pageSize ? (
+        <nav aria-label="帖子分页" className="guide-home-pagination">
+          <button
+            disabled={currentPage === 0}
+            onClick={() => setCurrentPage((page) => Math.max(0, page - 1))}
+            type="button"
+          >
+            上一页
+          </button>
+          <span>第 {currentPage + 1} 页 · 每页 {pageSize} 篇</span>
+          <button
+            disabled={(currentPage + 1) * pageSize >= totalPosts}
+            onClick={() => setCurrentPage((page) => page + 1)}
+            type="button"
+          >
+            下一页
+          </button>
+        </nav>
+      ) : null}
     </section>
+  );
+}
+
+export function GuidePostsOnNavigationPage({
+  config,
+}: {
+  config: SiteChromeConfig;
+}) {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const query = searchParams.toString();
+  const currentPath = normalizeGuidePagePath(`${pathname}${query ? `?${query}` : ""}`);
+  const isHandledByDedicatedBoard =
+    currentPath === "/" || currentPath === "/contact" || currentPath.startsWith("/contact/");
+  const isAdminRoute = currentPath === "/admin" || currentPath.startsWith("/admin/");
+  const isNavigationPage = config?.nav?.items?.length
+    ? guidePostPagePlacementOptions(config).some(
+    (option) => option.path === currentPath,
+      )
+    : false;
+
+  if (!currentPath || isHandledByDedicatedBoard || isAdminRoute || !isNavigationPage) {
+    return null;
+  }
+
+  return (
+    <div className="guide-posts-under-page">
+      <GuideBoard
+        compact
+        eyebrow="PAGE POSTS · 页面帖子"
+        hideWhenEmpty
+        initialExpanded
+        placementPath={currentPath}
+        title="页面帖子"
+      />
+    </div>
   );
 }

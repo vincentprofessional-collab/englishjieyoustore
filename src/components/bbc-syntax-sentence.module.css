@@ -1,0 +1,55 @@
+.card {
+  --subject: #1e5b3e;
+  --predicate: #a32c1e;
+  --object: #1f5c8b;
+  --predicative: #6b3fa0;
+  --adverbial: #0f6e7a;
+  --attributive: #8a6a2f;
+  --other: #6e6a63;
+  background: #fffdf8;
+  border: 1px solid #e3dccb;
+  border-radius: 16px;
+  color: #1f1b16;
+  padding: clamp(20px, 3vw, 32px);
+  max-width: 100%;
+}
+.embedded { background: transparent; border: 0; border-radius: 0; padding: 0; }
+.meta {
+  align-items: center;
+  color: #8a8175;
+  display: flex;
+  font: 12px/1.4 system-ui, sans-serif;
+  justify-content: space-between;
+  letter-spacing: .05em;
+  margin-bottom: 24px;
+}
+.sentence { align-items: flex-start; display: flex; flex-wrap: wrap; row-gap: 26px; }
+.segment { --role: var(--other); align-items: stretch; display: inline-flex; flex-direction: column; max-width: 100%; }
+.segment:not(.plain) { margin-right: clamp(10px, 1.2vw, 16px); }
+.subject { --role: var(--subject); }
+.predicate { --role: var(--predicate); }
+.object { --role: var(--object); }
+.predicative { --role: var(--predicative); }
+.adverbial { --role: var(--adverbial); }
+.attributive { --role: var(--attributive); }
+.other { --role: var(--other); }
+.inner, .words { align-items: flex-start; display: inline-flex; flex-wrap: wrap; justify-content: flex-start; }
+.word { align-items: center; display: inline-flex; flex-direction: column; font: clamp(22px, 2.1vw, 30px)/1.55 Georgia, "Times New Roman", "Noto Serif SC", serif; padding: 0 1px; white-space: nowrap; }
+.wordText { white-space: pre; }
+.pos { color: #111; font: 11px/1.4 system-ui, sans-serif; margin-top: 4px; }
+.label { border-top: 3px solid var(--role); color: var(--role); font: 600 14px/1.4 system-ui, "PingFang SC", sans-serif; margin-top: 8px; padding-top: 5px; text-align: center; white-space: nowrap; }
+.plain { margin-right: 0; }
+.nested { align-items: stretch; display: inline-flex; flex-direction: column; }
+.nestedLabel { border-top: 1px dashed #8a8175; color: #8a8175; font: 12px/1.4 system-ui, "PingFang SC", sans-serif; margin-top: 5px; padding-top: 3px; text-align: center; }
+.translation { border-top: 1px solid #e3dccb; color: inherit; font: clamp(22px, 2.1vw, 30px)/1.55 Georgia, "Times New Roman", "Noto Serif SC", serif; margin: 20px 0 0; padding-top: 16px; }
+.highlight > span:first-child { background: #ffe2df; border-radius: 4px; }
+.wave > span:first-child { text-decoration: underline wavy #8a6a2f 1px; text-underline-offset: 4px; }
+.screenReader { clip: rect(0, 0, 0, 0); clip-path: inset(50%); height: 1px; overflow: hidden; position: absolute; white-space: nowrap; width: 1px; }
+@media (max-width: 640px) {
+  .card { padding: 18px 14px; }
+  .meta { margin-bottom: 18px; }
+  .word { font-size: 20px; padding: 0 3px; }
+  .segment:not(.plain) { margin-right: 10px; }
+  .translation { font-size: 20px; }
+  .label { font-size: 12px; }
+}

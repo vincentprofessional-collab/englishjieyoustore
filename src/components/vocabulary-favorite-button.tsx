@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { FAVORITE_WORDS_CHANGED_EVENT, FAVORITE_WORDS_STORAGE_KEY } from "@/lib/vocabulary/learning";
 import type { LocalVocabularyEntry } from "@/lib/vocabulary/local-vocabulary";
 
 type FavoriteWordItem = {
@@ -25,8 +26,6 @@ type VocabularyFavoriteButtonProps = {
   entry: LocalVocabularyEntry;
 };
 
-const FAVORITE_WORDS_STORAGE_KEY = "ielts-platform.favoriteWords";
-
 function readFavoriteWords() {
   try {
     const rawValue = window.localStorage.getItem(FAVORITE_WORDS_STORAGE_KEY);
@@ -42,6 +41,7 @@ function writeFavoriteWords(items: FavoriteWordItem[]) {
   );
 
   window.localStorage.setItem(FAVORITE_WORDS_STORAGE_KEY, JSON.stringify(sortedItems));
+  window.dispatchEvent(new Event(FAVORITE_WORDS_CHANGED_EVENT));
 }
 
 export function VocabularyFavoriteButton({ entry }: VocabularyFavoriteButtonProps) {

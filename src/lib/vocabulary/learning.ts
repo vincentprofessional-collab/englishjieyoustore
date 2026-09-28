@@ -4,6 +4,9 @@ import type {
   VocabularyInflection,
 } from "@/lib/vocabulary/local-vocabulary";
 
+export const FAVORITE_WORDS_STORAGE_KEY = "ielts-platform.favoriteWords";
+export const FAVORITE_WORDS_CHANGED_EVENT = "vocabulary-favorite-words-changed";
+
 export const LEARNING_BOOKS = [
   { key: "小学", label: "小学", rank: 1, description: "基础高频词" },
   { key: "初中", label: "初中", rank: 2, description: "初中核心词" },
@@ -45,6 +48,18 @@ export type LearningWord = {
   word: string;
 };
 
+export type FavoriteLearningWord = {
+  definitionCn?: string;
+  definitionLines?: string[];
+  id: string;
+  level?: string;
+  partOfSpeech?: string;
+  phonetic?: string;
+  ukPhonetic?: string;
+  usPhonetic?: string;
+  word: string;
+};
+
 export function getLearningLevelKey(level: string): LearningBookKey {
   const normalizedLevel = level.trim();
 
@@ -78,18 +93,19 @@ export function getLearningBookEntries(entries: LocalVocabularyEntry[], book: Le
 }
 
 export function getLearningBookCounts(entries: LocalVocabularyEntry[]) {
-  let cumulativeCount = 0;
+  let previousTotal = 0;
 
   return Object.fromEntries(
     LEARNING_BOOKS.map((book) => {
-      const directCount = getLearningBookEntries(entries, book.key).length;
+      const total = getLearningBookEntries(entries, book.key).length;
 
       if (book.rank > 0) {
-        cumulativeCount += directCount;
-        return [book.key, { added: directCount, total: cumulativeCount }];
+        const added = total - previousTotal;
+        previousTotal = total;
+        return [book.key, { added, total }];
       }
 
-      return [book.key, { added: directCount, total: cumulativeCount + directCount }];
+      return [book.key, { added: total, total }];
     }),
   ) as Record<LearningBookKey, { added: number; total: number }>;
 }
@@ -118,5 +134,36 @@ export function toLearningWord(entry: LocalVocabularyEntry): LearningWord {
     usAudioUrl: entry.usAudioUrl ?? "",
     usPhonetic: entry.usPhonetic ?? entry.phonetic,
     word: entry.word,
+  };
+}
+
+export function toLearningWordFromFavorite(favorite: FavoriteLearningWord): LearningWord {
+  const definitionCn = typeof favorite.definitionCn === "string" ? favorite.definitionCn : "";
+  const phonetic = typeof favorite.phonetic === "string" ? favorite.phonetic : "";
+  return {
+    antonyms: [],
+    definitionCn,
+    definitionGroups: [],
+    definitionLines: Array.isArray(favorite.definitionLines) && favorite.definitionLines.length
+      ? favorite.definitionLines.filter((line): line is string => typeof line === "string")
+      : definitionCn ? [definitionCn] : [],
+    englishDefinitions: [],
+    englishExamples: [],
+    etymologySource: "",
+    etymologyStory: "",
+    formation: "",
+    id: favorite.id,
+    inflections: [],
+    level: typeof favorite.level === "string" ? favorite.level : "生词本",
+    partOfSpeech: typeof favorite.partOfSpeech === "string" ? favorite.partOfSpeech : "",
+    phonetic,
+    reviewNotes: [],
+    root: "",
+    synonyms: [],
+    ukAudioUrl: "",
+    ukPhonetic: typeof favorite.ukPhonetic === "string" ? favorite.ukPhonetic : phonetic,
+    usAudioUrl: "",
+    usPhonetic: typeof favorite.usPhonetic === "string" ? favorite.usPhonetic : phonetic,
+    word: favorite.word,
   };
 }

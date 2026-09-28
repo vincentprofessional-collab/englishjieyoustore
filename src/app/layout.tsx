@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Suspense } from "react";
 import { GlobalStudyInteractions } from "@/components/global-study-interactions";
 import { GlobalVocabularySearch } from "@/components/global-vocabulary-search";
@@ -22,6 +23,9 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const siteChromeConfig = await getCachedPublishedSiteChromeConfig();
+  const renderedSiteChromeConfig = process.env.VOCABULARY_VIDEO_PREVIEW === "true"
+    ? { ...siteChromeConfig, brand: { ...siteChromeConfig.brand, imageUrl: "" } }
+    : siteChromeConfig;
   const legacySessionMigrationScript = getLegacySessionMigrationScript(
     process.env.NEXT_PUBLIC_SUPABASE_URL,
   );
@@ -30,12 +34,14 @@ export default async function RootLayout({
     <html lang="zh-CN">
       <head>
         {legacySessionMigrationScript ? (
-          <script dangerouslySetInnerHTML={{ __html: legacySessionMigrationScript }} />
+          <Script id="legacy-session-migration" strategy="beforeInteractive">
+            {legacySessionMigrationScript}
+          </Script>
         ) : null}
       </head>
       <body>
         <main className="shell">
-          <SiteNav config={siteChromeConfig} />
+          <SiteNav config={renderedSiteChromeConfig} />
           <Suspense fallback={null}>
             <GlobalVocabularySearch />
           </Suspense>
@@ -43,7 +49,7 @@ export default async function RootLayout({
             <SiteAnalyticsTracker />
           </Suspense>
           <GlobalStudyInteractions />
-          <IeltsSectionShell>{children}</IeltsSectionShell>
+          <IeltsSectionShell siteChromeConfig={siteChromeConfig}>{children}</IeltsSectionShell>
           <SiteFooter config={siteChromeConfig} />
         </main>
       </body>

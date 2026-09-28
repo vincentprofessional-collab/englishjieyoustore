@@ -21,6 +21,9 @@ import {
   type ReadingPartId,
   type ReadingTest,
 } from "@/lib/ielts/reading";
+import { getRawReadingParagraphs } from "@/lib/ielts/reading-article-text";
+import { ArticleInlineAnnotatedParagraph } from "@/components/article-inline-annotated-text";
+import { useArticleInlineAnnotations } from "@/components/use-article-inline-annotations";
 import {
   getStudySelectionActionPosition,
   hasStudySelectionText,
@@ -205,88 +208,6 @@ function formatFillCorrectAnswer(question: ReadingFillQuestion) {
     return `${groups.map((group) => group.join(" / ")).join(" + ")}（顺序不限，全部需要）`;
   }
   return groups[0].join(" / ");
-}
-
-function cleanRawReadingLine(value: string) {
-  return value.replace(/[|]+/g, " ").replace(/\s+/g, " ").trim();
-}
-
-function joinRawReadingLines(lines: string[]) {
-  return lines.reduce((paragraph, line) => {
-    if (!paragraph) return line;
-    if (/[A-Za-z]-$/.test(paragraph) && /^[a-z]/.test(line)) {
-      return `${paragraph.slice(0, -1)}${line}`;
-    }
-    return `${paragraph} ${line}`;
-  }, "");
-}
-
-function isRawReadingInstructionLine(value: string) {
-  return (
-    /^READING\s+PASSAGE\s+\d/i.test(value) ||
-    /^R\s*E\s*A\s*D\s*I\s*N\s*G$/i.test(value) ||
-    /^Reading$/i.test(value) ||
-    /^Test\s+\d$/i.test(value) ||
-    /^You should spend about 20 minutes/i.test(value) ||
-    /^should spend about 20 minutes/i.test(value) ||
-    /^Reading Passage \d below\.?$/i.test(value) ||
-    /^Passage\s+\d\s+(?:below|on\s+(?:the\s+)?(?:following|fo\s*llowing)\s+pages?|on\s+pages?\s+\d{1,3})/i.test(value) ||
-    /^below\.[\s·]*$/i.test(value) ||
-    /^on the following pages?\.?$/i.test(value) ||
-    /^=== (?:PDF|OCR) PAGE \d+ ===$/i.test(value)
-  );
-}
-
-function getRawReadingParagraphs(value: string, title: string, subtitle?: string) {
-  const titleLine = cleanRawReadingLine(title).toLowerCase();
-  const subtitleLine = cleanRawReadingLine(subtitle ?? "").toLowerCase();
-  const paragraphs: string[] = [];
-  let current: string[] = [];
-  let skippedTitle = false;
-  let skippedSubtitle = false;
-
-  function flush() {
-    if (current.length > 0) {
-      paragraphs.push(joinRawReadingLines(current));
-      current = [];
-    }
-  }
-
-  for (const rawLine of value.split("\n")) {
-    const line = cleanRawReadingLine(rawLine);
-
-    if (!line) {
-      flush();
-      continue;
-    }
-
-    if (isRawReadingInstructionLine(line)) {
-      continue;
-    }
-
-    if (!skippedTitle && titleLine && line.toLowerCase() === titleLine) {
-      skippedTitle = true;
-      continue;
-    }
-
-    if (!skippedSubtitle && subtitleLine && line.toLowerCase() === subtitleLine) {
-      skippedSubtitle = true;
-      continue;
-    }
-
-    if (/^[A-Z]$/.test(line) && current.length > 0) {
-      flush();
-    }
-
-    if (/^\s{2,4}\S/.test(rawLine) && current.length > 0 && /^[A-Z'"]/.test(line)) {
-      flush();
-    }
-
-    current.push(line);
-  }
-
-  flush();
-  return paragraphs.length > 0 ? paragraphs : [value];
 }
 
 function cleanRawQuestionLine(value: string) {
@@ -1025,6 +946,7 @@ function ReadingChoiceBlock({
 }
 
 export function ReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: ReadingPracticeProps) {
+  const inlineTextAnnotations = useArticleInlineAnnotations("ielts-reading", test.id);
   const parts = test.parts;
   const firstPart = parts[0];
   const firstQuestion = getReadingQuestionNumbers(firstPart)[0];
@@ -1740,22 +1662,46 @@ export function ReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: 
                           <small>{selectedHeadingId ? "点击放置所选标题" : "拖入标题"}</small>
                         )}
                       </div>
-                      {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                      {section.paragraphs.map((paragraph, paragraphIndex) => {
+                        const displayParagraphs = section.format === "pre"
+                          ? getRawReadingParagraphs(paragraph, activePart.title, activePart.subtitle)
+                          : [paragraph];
+                        return displayParagraphs.map((displayParagraph, displayIndex) => {
+                          const displayedParagraphIndex = section.format === "pre" ? displayIndex : paragraphIndex;
+                          return (
+                            <p key={`${section.id}-${displayedParagraphIndex}`}>
+                              <ArticleInlineAnnotatedParagraph
+                                annotations={inlineTextAnnotations}
+                                paragraphId={`${activePart.id}:${section.id}:${paragraphIndex}:${displayedParagraphIndex}`}
+                                text={displayParagraph}
+                              />
+                            </p>
+                          );
+                        });
+                      })}
                     </section>
                   );
                 }
 
                 return (
                   <section className="reading-passage-section" key={section.id}>
-                    {section.paragraphs.map((paragraph) =>
-                      section.format === "pre" ? (
-                        getRawReadingParagraphs(paragraph, activePart.title, activePart.subtitle).map((rawParagraph, index) => (
-                          <p key={`${section.id}-${index}`}>{rawParagraph}</p>
-                        ))
-                      ) : (
-                        <p key={paragraph}>{paragraph}</p>
-                      ),
-                    )}
+                    {section.paragraphs.map((paragraph, paragraphIndex) => {
+                      const displayParagraphs = section.format === "pre"
+                        ? getRawReadingParagraphs(paragraph, activePart.title, activePart.subtitle)
+                        : [paragraph];
+                      return displayParagraphs.map((displayParagraph, displayIndex) => {
+                        const displayedParagraphIndex = section.format === "pre" ? displayIndex : paragraphIndex;
+                        return (
+                          <p key={`${section.id}-${displayedParagraphIndex}`}>
+                            <ArticleInlineAnnotatedParagraph
+                              annotations={inlineTextAnnotations}
+                              paragraphId={`${activePart.id}:${section.id}:${paragraphIndex}:${displayedParagraphIndex}`}
+                              text={displayParagraph}
+                            />
+                          </p>
+                        );
+                      });
+                    })}
                   </section>
                 );
               })}

@@ -8,6 +8,12 @@ import {
   GuidePostRow,
   parseGuidePostRow,
 } from "@/lib/guide/posts";
+import {
+  DEFAULT_SITE_CHROME_CONFIG,
+  mergeSiteChromeConfig,
+  SITE_CHROME_SLUG,
+} from "@/lib/content/site-chrome";
+import { guidePostPagePlacementOptions, type GuidePagePlacementOption } from "@/lib/content/guide-post-navigation";
 import { uploadAdminImage } from "@/lib/admin/upload-image";
 import { supabase } from "@/lib/supabase/client";
 import { uploadAdminAudio } from "@/lib/admin/upload-audio";
@@ -27,6 +33,7 @@ type GuideDraft = {
   blocks: GuideContentBlock[];
   excerpt: string;
   id: string | null;
+  pagePlacement: string;
   publishedAt: string | null;
   slug: string | null;
   status: AdminGuidePostRow["status"];
@@ -56,6 +63,7 @@ const EMPTY_DRAFT: GuideDraft = {
   blocks: [createGuideBlock()],
   excerpt: "",
   id: null,
+  pagePlacement: "/",
   publishedAt: null,
   slug: null,
   status: "draft",
@@ -86,6 +94,7 @@ function rowToDraft(row: AdminGuidePostRow): GuideDraft {
     blocks: post.blocks.map((block) => ({ ...block })),
     excerpt: post.excerpt,
     id: row.id,
+    pagePlacement: post.pagePlacement ?? "/",
     publishedAt: row.published_at,
     slug: row.slug,
     status: row.status,
@@ -258,6 +267,9 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
   const [isSaving, setIsSaving] = useState(false);
   const [message, setMessage] = useState("");
   const [rows, setRows] = useState<AdminGuidePostRow[]>([]);
+  const [pagePlacementOptions, setPagePlacementOptions] = useState<GuidePagePlacementOption[]>(
+    () => guidePostPagePlacementOptions(mergeSiteChromeConfig(DEFAULT_SITE_CHROME_CONFIG)),
+  );
   const [uploadingBlockId, setUploadingBlockId] = useState<string | null>(null);
   const [textCursorTarget, setTextCursorTarget] = useState<TextCursorTarget | null>(null);
   const [activeBlockId, setActiveBlockId] = useState<string | null>(null);
@@ -269,7 +281,19 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
 
   useEffect(() => {
     void loadPosts();
+    void loadPagePlacementOptions();
   }, []);
+
+  async function loadPagePlacementOptions() {
+    const { data } = await supabase
+      .from("managed_content_pages")
+      .select("meta_json")
+      .eq("slug", SITE_CHROME_SLUG)
+      .eq("status", "published")
+      .maybeSingle();
+    const config = mergeSiteChromeConfig(data?.meta_json ?? DEFAULT_SITE_CHROME_CONFIG);
+    setPagePlacementOptions(guidePostPagePlacementOptions(config));
+  }
 
   async function loadPosts(preferredId?: string) {
     setIsLoading(true);
@@ -762,6 +786,7 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
         blocks: draft.blocks,
         excerpt,
         kind: "guide-post",
+        pagePlacement: draft.pagePlacement === "/" ? null : draft.pagePlacement,
       },
       module: "site",
       published_at:
@@ -809,7 +834,8 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
       savedPostId = data.id;
     }
 
-    setMessage(status === "published" ? "帖子已发布到首页。" : "草稿已保存。");
+    const selectedPage = pagePlacementOptions.find((option) => option.path === draft.pagePlacement);
+    setMessage(status === "published" ? `帖子已发布到${selectedPage?.label ?? "所选页面"}下方。` : "草稿已保存。");
     await loadPosts(savedPostId ?? undefined);
     setIsSaving(false);
   }
@@ -854,9 +880,9 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
     <section className="guide-admin">
       <header className="guide-admin-heading">
         <div>
-          <span>HOME POSTS · 首页发帖</span>
-          <h2>首页发帖后台</h2>
-          <p>组合正文、链接、图片和视频区块，设置字体、字号与对齐方式后直接发布。</p>
+          <span>PAGE POSTS · 站内发帖</span>
+          <h2>帖子管理后台</h2>
+          <p>首页与导航页面共用这套发帖管理；可以选择帖子显示在哪个页面内容下方。</p>
         </div>
         <button className="button secondary" onClick={startNewPost} type="button">
           ＋ 新建帖子
@@ -870,22 +896,28 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
             <span>{rows.length}</span>
           </header>
           {isLoading ? <p>正在读取帖子…</p> : null}
-          {!isLoading && !rows.length ? <p>还没有首页帖子，可以先新建一篇。</p> : null}
-          {rows.map((row) => (
-            <button
-              className={draft.id === row.id ? "active" : ""}
-              key={row.id}
-              onClick={() => {
-                setDraft(rowToDraft(row));
-                setMessage("");
-              }}
-              type="button"
-            >
-              <span>{row.status === "published" ? "已发布" : "草稿"}</span>
-              <strong>{row.title}</strong>
-              <small>{row.updated_at ? new Date(row.updated_at).toLocaleDateString("zh-CN") : ""}</small>
-            </button>
-          ))}
+          {!isLoading && !rows.length ? <p>还没有帖子，可以先新建一篇。</p> : null}
+          {rows.map((row) => {
+            const savedPlacement = parseGuidePostRow(row).pagePlacement ?? "/";
+            const placementLabel = pagePlacementOptions.find((option) => option.path === savedPlacement)?.label ?? "主页";
+
+            return (
+              <button
+                className={draft.id === row.id ? "active" : ""}
+                key={row.id}
+                onClick={() => {
+                  setDraft(rowToDraft(row));
+                  setMessage("");
+                }}
+                type="button"
+              >
+                <span>{row.status === "published" ? "已发布" : "草稿"}</span>
+                <strong>{row.title}</strong>
+                <small>显示：{placementLabel}</small>
+                <small>{row.updated_at ? new Date(row.updated_at).toLocaleDateString("zh-CN") : ""}</small>
+              </button>
+            );
+          })}
         </aside>
 
         <div className="guide-admin-editor">
@@ -1229,6 +1261,21 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
                 {message ? ` · ${message}` : ""}
               </span>
             </div>
+            <label className="guide-admin-page-placement">
+              <span>发布页面</span>
+              <select
+                onChange={(event) =>
+                  setDraft((current) => ({ ...current, pagePlacement: event.target.value }))
+                }
+                value={draft.pagePlacement}
+              >
+                {pagePlacementOptions.map((option) => (
+                  <option key={option.path} value={option.path}>
+                    {option.path === "/" ? "主页（首页帖子区）" : option.label}
+                  </option>
+                ))}
+              </select>
+            </label>
             {draft.id ? (
               <button
                 className="button danger guide-delete-post"
@@ -1253,7 +1300,7 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
               onClick={() => void savePost("published")}
               type="button"
             >
-              {isSaving ? "保存中…" : "发布到首页"}
+              {isSaving ? "保存中…" : "发布到所选页面"}
             </button>
           </footer>
         </div>

@@ -6,6 +6,7 @@ import { VocabularyAutoplay } from "@/components/vocabulary-autoplay";
 import { ContentShareButton } from "@/components/content-share-button";
 import { VocabularyDetailShell } from "@/components/vocabulary-detail-shell";
 import { VocabularyDetailContent } from "@/components/vocabulary-detail-content";
+import { VocabularyVideoPlayer } from "@/components/vocabulary-video-player";
 import {
   getExtendedVocabularyEntry,
   getVocabularyFormationParts,
@@ -15,6 +16,7 @@ import {
 import { getVocabularyUsageExamples, type VocabularyUsageExample } from "@/lib/vocabulary/examples";
 import { getVocabularyPhraseMatches, type VocabularyPhraseMatch } from "@/lib/vocabulary/phrases";
 import { getBbcVocabularyDetail } from "@/lib/articles/bbc-vocabulary";
+import { getVocabularyVideos } from "@/lib/vocabulary/videos";
 
 export const dynamic = "force-dynamic";
 
@@ -301,10 +303,17 @@ function UsageExamplesSection({
 
 export default async function VocabularyWordPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ word: string }>;
+  searchParams?: Promise<{ returnTo?: string | string[] }>;
 }) {
   const { word } = await params;
+  const query = searchParams ? await searchParams : {};
+  const requestedReturnTo = Array.isArray(query.returnTo) ? query.returnTo[0] : query.returnTo;
+  const backHref = requestedReturnTo && /^\/(?:articles|new-concept)\/[A-Za-z0-9_-]+$/.test(requestedReturnTo)
+    ? requestedReturnTo
+    : "/vocabulary";
   const decodedWord = decodeURIComponent(word);
   const bbcVocabularyDetail = getBbcVocabularyDetail(decodedWord);
   const entry = /\s/.test(decodedWord) && bbcVocabularyDetail
@@ -328,11 +337,16 @@ export default async function VocabularyWordPage({
     href: part.href ? `${part.href}${part.href.includes("?") ? "&" : "?"}from=lookup` : part.href,
   }));
   const hasEtymologyContent = Boolean(entry.etymologyStory || formationParts.length);
+  const { videos, votesEnabled } = await getVocabularyVideos(entry);
 
   return (
     <section className="stack vocabulary-word-page">
       <VocabularyAutoplay ukAudioUrl={entry.ukAudioUrl} usAudioUrl={entry.usAudioUrl} word={entry.word} />
-      <VocabularyDetailShell entry={entry}>
+      <VocabularyDetailShell
+        backHref={backHref}
+        entry={entry}
+        sidePanel={<VocabularyVideoPlayer entryWord={entry.normalizedWord} videos={videos} votesEnabled={votesEnabled} />}
+      >
         <VocabularyDetailContent
           entry={entry}
           formationParts={formationParts}

@@ -17,13 +17,18 @@ import {
 } from "react";
 import {
   AudioPlayer,
+  AudioReadingMenu,
+  AudioPronunciationMenu,
   AudioSettingsMenus,
   DEFAULT_AUDIO_PLAYER_SETTINGS,
+  formatArticlePhonetic,
   type AudioPlayerSettings,
   type AudioSpeakingMode,
+  useArticlePronunciations,
 } from "@/components/audio-player";
 import { BbcSentencePractice } from "@/components/bbc-sentence-practice";
 import { ContentShareButton } from "@/components/content-share-button";
+import { shouldShowAudioPronunciation } from "@/lib/audio-pronunciation";
 import {
   VocabularyHoverDefinitionLine,
   VocabularyHoverPronunciation,
@@ -177,6 +182,9 @@ type DictationTarget = {
 type SentenceOrderAnswer = {
   token: string;
   tokenIndex: number;
+};
+type SentenceOrderDragPayload = SentenceOrderAnswer & {
+  sourceSlot: string | null;
 };
 
 const FAVORITE_SENTENCES_STORAGE_KEY = "ielts-platform.favoriteSentences";
@@ -2880,6 +2888,13 @@ export function ListeningPractice({
   );
   const [originalDisplayMode, setOriginalDisplayMode] =
     useState<ListeningOriginalDisplayMode>("bilingual");
+  const [isTranscriptVisible, setIsTranscriptVisible] = useState(true);
+  const [isVocabularyVisible, setIsVocabularyVisible] = useState(true);
+  const dictionaryPronunciations = useArticlePronunciations(
+    section.transcriptSentences.map((sentence) => sentence.englishText).join(" "),
+    audioSettings.pronunciationMode,
+    submitted,
+  );
   const [isNotesOpen, setIsNotesOpen] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isPracticeTimerRunning, setIsPracticeTimerRunning] = useState(false);
@@ -3543,6 +3558,10 @@ export function ListeningPractice({
   }
 
   function scheduleWordTooltip(word: string, rect: DOMRect) {
+    if (!isVocabularyVisible) {
+      return;
+    }
+
     const normalizedWord = normalizeWord(word);
     if (!normalizedWord) {
       return;
@@ -3584,7 +3603,7 @@ export function ListeningPractice({
   }
 
   function handleEnglishWordHover(event: ReactMouseEvent<HTMLElement>) {
-    if (!submitted) {
+    if (!submitted || !isVocabularyVisible) {
       scheduleHideWordTooltip(0);
       return;
     }
@@ -3928,16 +3947,20 @@ export function ListeningPractice({
     const isWrong = hasTyped && !isCorrect;
 
     return (
-      <input
-        aria-label={`听写 ${target.normalizedWord}`}
-        className={`dictation-blank-input ${isCorrect ? "correct" : ""} ${isWrong ? "wrong" : ""}`}
-        key={`${sentence.id}-dictation-${target.tokenIndex}`}
-        style={{ width: `${Math.max(62, target.token.length * 15)}px` }}
-        value={userAnswer}
-        onClick={(event) => event.stopPropagation()}
-        onChange={(event) => updateDictationAnswer(sentence, target.tokenIndex, event.target.value)}
-        onKeyDown={handleDictationBlankKeyDown}
-      />
+      <span className="dictation-blank-wrap" key={`${sentence.id}-dictation-${target.tokenIndex}`}>
+        <span aria-hidden="true" className="dictation-blank-measure">
+          {userAnswer || "....."}
+        </span>
+        <input
+          aria-label={`听写 ${target.normalizedWord}`}
+          className={`dictation-blank-input ${isCorrect ? "correct" : ""} ${isWrong ? "wrong" : ""}`}
+          size={1}
+          value={userAnswer}
+          onClick={(event) => event.stopPropagation()}
+          onChange={(event) => updateDictationAnswer(sentence, target.tokenIndex, event.target.value)}
+          onKeyDown={handleDictationBlankKeyDown}
+        />
+      </span>
     );
   }
 
@@ -3966,18 +3989,49 @@ export function ListeningPractice({
     return `${sentence.id}:${tokenIndex}`;
   }
 
-  function updateSentenceOrderAnswer(
+  function moveSentenceOrderAnswer(
     sentence: ListeningSentence,
-    tokenIndex: number,
-    answer: SentenceOrderAnswer,
+    payload: SentenceOrderDragPayload,
+    targetTokenIndex: number | null,
   ) {
-    setSentenceOrderAnswers((current) => ({
-      ...current,
-      [getSentenceOrderAnswerKey(sentence, tokenIndex)]: answer,
-    }));
+    setSentenceOrderAnswers((current) => {
+      const next = { ...current };
+      const movingAnswer = payload.sourceSlot ? next[payload.sourceSlot] ?? payload : payload;
+
+      if (targetTokenIndex == null) {
+        if (payload.sourceSlot) {
+          delete next[payload.sourceSlot];
+        }
+        return next;
+      }
+
+      const targetKey = getSentenceOrderAnswerKey(sentence, targetTokenIndex);
+      if (payload.sourceSlot === targetKey) {
+        return current;
+      }
+
+      const replacedAnswer = next[targetKey];
+      if (payload.sourceSlot) {
+        delete next[payload.sourceSlot];
+        if (replacedAnswer) {
+          next[payload.sourceSlot] = replacedAnswer;
+        }
+      }
+      next[targetKey] = {
+        token: movingAnswer.token,
+        tokenIndex: movingAnswer.tokenIndex,
+      };
+      return next;
+    });
   }
 
   function getSentenceOrderWordBank(sentence: ListeningSentence) {
+    const usedTokenIndexes = new Set(
+      Object.entries(sentenceOrderAnswers)
+        .filter(([key]) => key.startsWith(`${sentence.id}:`))
+        .map(([, answer]) => answer.tokenIndex),
+    );
+
     return [...getSentenceWordTargets(sentence)].sort((left, right) => {
       const leftHash = stableHash(`${sentence.id}:${left.tokenIndex}:${left.token.toLowerCase()}`);
       const rightHash = stableHash(`${sentence.id}:${right.tokenIndex}:${right.token.toLowerCase()}`);
@@ -3987,7 +4041,7 @@ export function ListeningPractice({
       }
 
       return left.tokenIndex - right.tokenIndex;
-    });
+    }).filter((target) => !usedTokenIndexes.has(target.tokenIndex));
   }
 
   function renderSentenceOrderBlank(sentence: ListeningSentence, target: DictationTarget) {
@@ -4001,9 +4055,19 @@ export function ListeningPractice({
       <span
         aria-label={`语序排列 ${target.normalizedWord}`}
         className={`sentence-order-dropzone ${isCorrect ? "correct" : ""} ${isWrong ? "wrong" : ""}`}
+        draggable={hasAnswer}
         key={`${sentence.id}-order-${target.tokenIndex}`}
         role="button"
         tabIndex={0}
+        onDragStart={(event) => {
+          if (!placedAnswer) return;
+          const payload: SentenceOrderDragPayload = {
+            ...placedAnswer,
+            sourceSlot: answerKey,
+          };
+          event.dataTransfer.setData("application/json", JSON.stringify(payload));
+          event.dataTransfer.setData("text/plain", placedAnswer.token);
+        }}
         onDragOver={(event) => {
           event.preventDefault();
         }}
@@ -4013,19 +4077,24 @@ export function ListeningPractice({
 
           try {
             const rawValue = event.dataTransfer.getData("application/json");
-            const payload = JSON.parse(rawValue) as SentenceOrderAnswer;
+            const parsedPayload = JSON.parse(rawValue) as Partial<SentenceOrderDragPayload>;
 
-            if (payload.token) {
-              updateSentenceOrderAnswer(sentence, target.tokenIndex, payload);
+            if (typeof parsedPayload.token === "string") {
+              moveSentenceOrderAnswer(sentence, {
+                token: parsedPayload.token,
+                tokenIndex: typeof parsedPayload.tokenIndex === "number" ? parsedPayload.tokenIndex : -1,
+                sourceSlot: typeof parsedPayload.sourceSlot === "string" ? parsedPayload.sourceSlot : null,
+              }, target.tokenIndex);
             }
           } catch {
             const fallbackToken = event.dataTransfer.getData("text/plain");
 
             if (fallbackToken) {
-              updateSentenceOrderAnswer(sentence, target.tokenIndex, {
+              moveSentenceOrderAnswer(sentence, {
                 token: fallbackToken,
                 tokenIndex: -1,
-              });
+                sourceSlot: null,
+              }, target.tokenIndex);
             }
           }
         }}
@@ -4058,7 +4127,26 @@ export function ListeningPractice({
 
   function renderSentenceOrderWordBank(sentence: ListeningSentence) {
     return (
-      <div className="sentence-order-word-bank">
+      <div
+        className="sentence-order-word-bank"
+        data-sentence-order-bank
+        onDragOver={(event) => event.preventDefault()}
+        onDrop={(event) => {
+          event.preventDefault();
+          try {
+            const payload = JSON.parse(event.dataTransfer.getData("application/json")) as Partial<SentenceOrderDragPayload>;
+            if (typeof payload.token === "string" && typeof payload.sourceSlot === "string") {
+              moveSentenceOrderAnswer(sentence, {
+                token: payload.token,
+                tokenIndex: typeof payload.tokenIndex === "number" ? payload.tokenIndex : -1,
+                sourceSlot: payload.sourceSlot,
+              }, null);
+            }
+          } catch {
+            // A word dragged out of the bank is already available there.
+          }
+        }}
+      >
         {getSentenceOrderWordBank(sentence).map((target) => (
           <button
             className="sentence-order-chip"
@@ -4067,9 +4155,10 @@ export function ListeningPractice({
             type="button"
             onClick={(event) => event.stopPropagation()}
             onDragStart={(event) => {
-              const payload: SentenceOrderAnswer = {
+              const payload: SentenceOrderDragPayload = {
                 token: target.token,
                 tokenIndex: target.tokenIndex,
+                sourceSlot: null,
               };
 
               event.dataTransfer.setData("application/json", JSON.stringify(payload));
@@ -4341,10 +4430,11 @@ export function ListeningPractice({
 
           wordIndex += 1;
           const normalizedWord = normalizeWord(token);
+          const phonetic = phoneticForWord(normalizedWord);
 
           return (
             <span
-              className={`subtitle-word ${wordIndex === activeWordIndex ? "current-word" : ""}`}
+              className={`subtitle-word ${wordIndex === activeWordIndex ? "current-word" : ""} ${phonetic ? "article-word-with-pronunciation" : ""}`}
               key={`${sentence.id}-word-${tokenIndex}`}
               tabIndex={0}
               onBlur={() => {
@@ -4356,12 +4446,26 @@ export function ListeningPractice({
               }}
               onFocus={(event) => scheduleWordTooltip(token, event.currentTarget.getBoundingClientRect())}
             >
+              {phonetic ? <span className="article-word-pronunciation">{formatArticlePhonetic(phonetic)}</span> : null}
               {token}
             </span>
           );
         })}
       </p>
     );
+  }
+
+  function phoneticForWord(normalizedWord: string) {
+    if (audioSettings.pronunciationMode === "hidden") return undefined;
+    if (dictionaryPronunciations.has(normalizedWord) && !dictionaryPronunciations.get(normalizedWord)) return undefined;
+    const hint = vocabularyHints[normalizedWord] ?? VOCABULARY_HINTS[normalizedWord];
+    if (!shouldShowAudioPronunciation(hint?.level, normalizedWord)) return undefined;
+    const phonetic = hint
+      ? audioSettings.pronunciationMode === "us"
+        ? hint.usPhonetic || hint.phonetic || hint.ukPhonetic
+        : hint.ukPhonetic || hint.phonetic || hint.usPhonetic
+      : dictionaryPronunciations.get(normalizedWord);
+    return phonetic && !phonetic.includes("待补充") ? phonetic : undefined;
   }
 
   function addAnnotation(kind: AnnotationItem["kind"]) {
@@ -5031,13 +5135,19 @@ export function ListeningPractice({
 
         <div className="exam-toolbar-actions">
           {submitted ? (
-            <AudioSettingsMenus
-              className="toolbar-audio-settings"
-              settings={audioSettings}
-              showRate={false}
-              variant="basic"
-              onChange={updateAudioSettings}
-            />
+            <>
+              <AudioSettingsMenus
+                className="toolbar-audio-settings"
+                settings={audioSettings}
+                showRate={false}
+                variant="basic"
+                onChange={updateAudioSettings}
+              />
+                <AudioPronunciationMenu
+                  onChange={(pronunciationMode) => updateAudioSettings({ pronunciationMode })}
+                  value={audioSettings.pronunciationMode}
+                />
+            </>
           ) : null}
           {mode === "mock" && !submitted ? (
             section.fullAudioUrl ? (
@@ -5177,9 +5287,35 @@ export function ListeningPractice({
                 <div className="notice">还没有上传音频。</div>
               )}
 
+              <div className="bbc-audio-toolbar listening-review-transcript-controls">
+                <AudioReadingMenu
+                  isActive
+                  isOriginalVisible={isTranscriptVisible}
+                  isVocabularyVisible={isVocabularyVisible}
+                  onOriginalVisibilityChange={setIsTranscriptVisible}
+                  onVocabularyVisibilityChange={(visible) => {
+                    setIsVocabularyVisible(visible);
+                    if (!visible) setActiveWordTooltip(null);
+                  }}
+                />
+                <div aria-label="原文显示模式" className="bbc-original-display-menu" role="group">
+                  {LISTENING_ORIGINAL_DISPLAY_MODES.map((displayMode) => (
+                    <button
+                      aria-pressed={originalDisplayMode === displayMode.mode}
+                      className={originalDisplayMode === displayMode.mode ? "active" : ""}
+                      key={displayMode.mode}
+                      onClick={() => setOriginalDisplayMode(displayMode.mode)}
+                      type="button"
+                    >
+                      {displayMode.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
               {section.transcriptSentences.length === 0 ? (
                 <p className="muted">还没有逐句原文。导入 transcript_sentences 后会显示中英字幕。</p>
-              ) : (
+              ) : isTranscriptVisible ? (
                 <div className="practice-subtitle-list" ref={subtitleListRef}>
                   {section.transcriptSentences.map((sentence) => (
                     <article
@@ -5237,7 +5373,7 @@ export function ListeningPractice({
                     </article>
                   ))}
                 </div>
-              )}
+              ) : null}
             </section>
           </aside>
         ) : null}

@@ -57,7 +57,7 @@ export function HomeStyleLab({ content }: { content: ManagedPageContent }) {
         </div>
       </section>
 
-      <GuideBoard compact hideHeading hidePostChrome initialExpanded={false} postLimit={3} />
+      <GuideBoard compact hideHeading hidePostChrome initialExpanded={false} placementPath="/" postLimit={50} />
 
       {items.length ? (
         <section className="managed-page-grid" aria-label="学习模块">

@@ -1,0 +1,236 @@
+.admin {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+  padding: clamp(1rem, 2vw, 1.6rem);
+  border: 1px solid #e8dfcf;
+  border-radius: 18px;
+  background: #fffdf8;
+}
+
+.header,
+.sourcePicker,
+.documentTitle,
+.annotationList li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.header h2,
+.documentTitle h3,
+.editor h3 {
+  margin: .2rem 0 .35rem;
+}
+
+.header p,
+.hint,
+.empty {
+  margin: 0;
+  color: #746d60;
+}
+
+.kicker,
+.unitLabel,
+.selectionPreview span {
+  color: #8d806c;
+  font-size: .78rem;
+  letter-spacing: .04em;
+}
+
+.sourceTypes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem;
+}
+
+.sourceTypes button,
+.annotationList button,
+.clearSelection {
+  padding: .55rem .8rem;
+  border: 1px solid #ddd2bf;
+  border-radius: 999px;
+  background: #fff;
+  color: #403a31;
+  cursor: pointer;
+}
+
+.sourceTypes .active {
+  border-color: #276c61;
+  background: #e9f4ef;
+  color: #16584f;
+}
+
+.sourcePicker {
+  align-items: end;
+  flex-wrap: wrap;
+}
+
+.sourcePicker label,
+.editor label {
+  display: grid;
+  flex: 1 1 260px;
+  gap: .4rem;
+}
+
+.sourcePicker label span,
+.editor label span {
+  color: #766e62;
+  font-size: .83rem;
+}
+
+.sourcePicker input,
+.sourcePicker select,
+.editor input,
+.editor select,
+.editor textarea {
+  width: 100%;
+  padding: .7rem .75rem;
+  border: 1px solid #d8d0c1;
+  border-radius: 9px;
+  background: #fff;
+  color: #29251f;
+  font: inherit;
+}
+
+.sourcePicker > a {
+  padding: .7rem .2rem;
+  color: #23685c;
+  white-space: nowrap;
+}
+
+.message {
+  margin: 0;
+  color: #28665c;
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(270px, .75fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+.units,
+.editor {
+  display: grid;
+  gap: .85rem;
+  min-width: 0;
+}
+
+.unit,
+.editor {
+  padding: 1rem;
+  border: 1px solid #e7dfd1;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.unit p {
+  margin: .5rem 0;
+  color: #29251f;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.13rem;
+  line-height: 1.9;
+  user-select: text;
+}
+
+.unit p::selection {
+  background: #d6e9dc;
+}
+
+.selectedUnit {
+  text-decoration: underline dotted #2c776b 1px;
+  text-underline-offset: 5px;
+}
+
+.documentTitle span {
+  color: #887d6c;
+  font-size: .8rem;
+  white-space: nowrap;
+}
+
+.annotationList {
+  display: grid;
+  gap: .45rem;
+  margin: .75rem 0 0;
+  padding: .7rem 0 0;
+  border-top: 1px solid #eee9df;
+  list-style: none;
+}
+
+.annotationList li {
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  font-size: .86rem;
+}
+
+.annotationList li span {
+  flex: 1 1 220px;
+}
+
+.annotationList button {
+  padding: .3rem .6rem;
+  font-size: .78rem;
+}
+
+.editor {
+  position: sticky;
+  top: 1rem;
+}
+
+.editor .hint {
+  font-size: .9rem;
+  line-height: 1.6;
+}
+
+.selectionPreview {
+  display: grid;
+  gap: .3rem;
+  padding: .7rem;
+  border-radius: 9px;
+  background: #edf5ef;
+}
+
+.selectionPreview strong {
+  overflow-wrap: anywhere;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.clearSelection {
+  justify-self: start;
+  border-color: transparent;
+  background: transparent;
+  color: #746d60;
+}
+
+.preview {
+  display: grid;
+  justify-items: center;
+  gap: .15rem;
+  min-height: 5.5rem;
+  padding: 1rem .6rem .5rem;
+  border-radius: 10px;
+  background: #faf8f2;
+  text-align: center;
+}
+
+.preview > span {
+  padding: 0 .3rem .2rem;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.preview-solid { border-bottom: 2px solid #307d71; }
+.preview-dashed { border-bottom: 2px dashed #307d71; }
+.preview-wavy { text-decoration: underline wavy #307d71 1.5px; text-underline-offset: 4px; }
+.preview-thick { border-bottom: 4px solid #307d71; }
+
+.preview small { color: #7b735f; font-size: .72rem; }
+.preview em { color: #28665c; font-size: .84rem; font-style: normal; }
+
+@media (max-width: 850px) {
+  .workspace { grid-template-columns: 1fr; }
+  .editor { position: static; }
+  .header { align-items: flex-start; flex-direction: column; }
+}

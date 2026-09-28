@@ -4,7 +4,9 @@ import {
   type DragEvent as ReactDragEvent,
   type KeyboardEvent as ReactKeyboardEvent,
   type PointerEvent as ReactPointerEvent,
+  type ReactNode,
   useEffect,
+  useRef,
   useState,
 } from "react";
 import type { AudioPlayerSettings } from "@/components/audio-player";
@@ -154,12 +156,16 @@ function renderUnderlinedChinese(sentence: BbcPracticeSentence) {
 
 export function BbcSentencePractice({
   activeWordIndex = null,
+  englishContent,
   isAudioPlaying = false,
+  translationContent,
   sentence,
   settings,
 }: {
   activeWordIndex?: number | null;
+  englishContent?: ReactNode;
   isAudioPlaying?: boolean;
+  translationContent?: ReactNode;
   sentence: BbcPracticeSentence;
   settings: AudioPlayerSettings;
 }) {
@@ -169,6 +175,20 @@ export function BbcSentencePractice({
   >({});
   const [sentenceOrderDrag, setSentenceOrderDrag] = useState<SentenceOrderDrag | null>(null);
   const [sentenceOrderHover, setSentenceOrderHover] = useState<SentenceOrderDropTarget | null>(null);
+  const sentenceKey = `${sentence.sentenceNo}:${sentence.english}`;
+  const previousSentenceKeyRef = useRef(sentenceKey);
+
+  useEffect(() => {
+    if (previousSentenceKeyRef.current === sentenceKey) {
+      return;
+    }
+
+    previousSentenceKeyRef.current = sentenceKey;
+    setDictationAnswers({});
+    setSentenceOrderAnswers({});
+    setSentenceOrderDrag(null);
+    setSentenceOrderHover(null);
+  }, [sentenceKey]);
 
   useEffect(() => {
     if (!sentenceOrderDrag) {
@@ -276,6 +296,11 @@ export function BbcSentencePractice({
   }
 
   function handleDictationBlankKeyDown(event: ReactKeyboardEvent<HTMLInputElement>) {
+    if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+      event.stopPropagation();
+      return;
+    }
+
     if (event.key === "Enter") {
       event.preventDefault();
       focusNextDictationBlank(event.currentTarget);
@@ -349,22 +374,31 @@ export function BbcSentencePractice({
 
   function renderDictationBlank(target: DictationTarget) {
     const answerKey = getDictationAnswerKey(target.tokenIndex);
+    const blankNumber =
+      getDictationTargets().findIndex((item) => item.tokenIndex === target.tokenIndex) + 1;
     const userAnswer = dictationAnswers[answerKey] ?? "";
     const hasTyped = userAnswer.trim().length > 0;
     const isCorrect = hasTyped && normalizeAnswer(userAnswer) === normalizeAnswer(target.token);
     const isWrong = hasTyped && !isCorrect;
 
     return (
-      <input
-        aria-label={`听写 ${target.normalizedWord}`}
-        className={`dictation-blank-input ${isCorrect ? "correct" : ""} ${isWrong ? "wrong" : ""}`}
+      <span
+        className="dictation-blank-wrap"
         key={`${sentence.sentenceNo}-dictation-${target.tokenIndex}`}
-        onChange={(event) => updateDictationAnswer(target.tokenIndex, event.target.value)}
-        onClick={(event) => event.stopPropagation()}
-        onKeyDown={handleDictationBlankKeyDown}
-        style={{ width: `${Math.max(62, target.token.length * 15)}px` }}
-        value={userAnswer}
-      />
+      >
+        <span aria-hidden="true" className="dictation-blank-measure">
+          {userAnswer || "....."}
+        </span>
+        <input
+          aria-label={`听写第 ${blankNumber} 个空`}
+          className={`dictation-blank-input ${isCorrect ? "correct" : ""} ${isWrong ? "wrong" : ""}`}
+          onChange={(event) => updateDictationAnswer(target.tokenIndex, event.target.value)}
+          onClick={(event) => event.stopPropagation()}
+          onKeyDown={handleDictationBlankKeyDown}
+          size={1}
+          value={userAnswer}
+        />
+      </span>
     );
   }
 
@@ -602,7 +636,9 @@ export function BbcSentencePractice({
 
   function renderTranslation(className = "") {
     return (
-      <p className={`translation ${className}`.trim()}>{renderUnderlinedChinese(sentence)}</p>
+      <p className={`translation ${className}`.trim()}>
+        {translationContent ?? renderUnderlinedChinese(sentence)}
+      </p>
     );
   }
 
@@ -614,7 +650,7 @@ export function BbcSentencePractice({
     return (
       <>
         <p className="bbc-sentence-english">
-          {renderUnderlinedEnglish(sentence, activeWordIndex)}
+          {englishContent ?? renderUnderlinedEnglish(sentence, activeWordIndex)}
         </p>
         {renderTranslation("primary-translation bbc-sight-translation")}
       </>
@@ -651,7 +687,7 @@ export function BbcSentencePractice({
     <>
       {settings.subtitleMode !== "chinese" ? (
         <p className="bbc-sentence-english">
-          {renderUnderlinedEnglish(sentence, activeWordIndex)}
+          {englishContent ?? renderUnderlinedEnglish(sentence, activeWordIndex)}
         </p>
       ) : null}
       {settings.subtitleMode !== "english" ? (

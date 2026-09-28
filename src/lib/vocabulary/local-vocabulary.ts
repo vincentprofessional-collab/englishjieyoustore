@@ -5,6 +5,7 @@ import { supabase } from "@/lib/supabase/client";
 import excelLeftmostRootAffix from "@/data/vocabulary/excel-leftmost-root-affix.json";
 import excelRootAffixCatalog from "@/data/vocabulary/excel-root-affix-catalog.json";
 import { sortVocabularyFamilyItems } from "@/lib/vocabulary/autocomplete-ranking";
+import { shouldShowAudioPronunciation } from "@/lib/audio-pronunciation";
 
 export type LocalVocabularyHint = {
   definitionCn: string;
@@ -1471,10 +1472,12 @@ function getVocabularyLookupCandidates(value: string) {
     const stem = normalizedWord.slice(0, -3);
     if (stem.at(-1) === stem.at(-2)) {
       addCandidate(stem.slice(0, -1));
+    } else if (stem.endsWith("y")) {
+      addCandidate(stem);
     }
-    if (/[^aeiou][aeiou][^aeiou]$/i.test(stem)) {
+    if (!stem.endsWith("y") && /[^aeiou][aeiou][^aeiou]$/i.test(stem)) {
       addCandidate(`${stem}e`);
-    } else {
+    } else if (!stem.endsWith("y")) {
       addCandidate(stem);
       addCandidate(`${stem}e`);
     }
@@ -1586,6 +1589,114 @@ export function getVocabularyHint(word: string): LocalVocabularyHint | null {
   return findVocabularyEntry(word);
 }
 
+const irregularVocabularyBaseForms: Record<string, string> = {
+  am: "be",
+  is: "be",
+  are: "be",
+  was: "be",
+  were: "be",
+  been: "be",
+  being: "be",
+  does: "do",
+  did: "do",
+  done: "do",
+  doing: "do",
+  has: "have",
+  had: "have",
+  having: "have",
+  went: "go",
+  gone: "go",
+  bought: "buy",
+  ate: "eat",
+  eaten: "eat",
+  got: "get",
+  gotten: "get",
+  made: "make",
+  took: "take",
+  taken: "take",
+  came: "come",
+  saw: "see",
+  seen: "see",
+  said: "say",
+  told: "tell",
+  thought: "think",
+  wrote: "write",
+  written: "write",
+  ran: "run",
+  gave: "give",
+  given: "give",
+  found: "find",
+  knew: "know",
+  known: "know",
+  left: "leave",
+  felt: "feel",
+  spoke: "speak",
+  spoken: "speak",
+  paid: "pay",
+  taught: "teach",
+  brought: "bring",
+  caught: "catch",
+  stood: "stand",
+  sat: "sit",
+  met: "meet",
+  sold: "sell",
+  sent: "send",
+  built: "build",
+  chose: "choose",
+  chosen: "choose",
+  broke: "break",
+  broken: "break",
+  drove: "drive",
+  driven: "drive",
+  fell: "fall",
+  fallen: "fall",
+  flew: "fly",
+  flown: "fly",
+  forgot: "forget",
+  forgotten: "forget",
+  heard: "hear",
+  held: "hold",
+  kept: "keep",
+  lost: "lose",
+  slept: "sleep",
+  spent: "spend",
+  won: "win",
+  understood: "understand",
+  wore: "wear",
+  worn: "wear",
+  became: "become",
+  began: "begin",
+  begun: "begin",
+  drank: "drink",
+  drunk: "drink",
+  drew: "draw",
+  drawn: "draw",
+  swam: "swim",
+  swum: "swim",
+  woke: "wake",
+  woken: "wake",
+  showed: "show",
+  shown: "show",
+};
+
+export function getVocabularyLevelForWordForm(word: string) {
+  const normalizedWord = normalizeLookupWord(word);
+  if (!normalizedWord) return null;
+
+  const baseWord = irregularVocabularyBaseForms[normalizedWord];
+  if (baseWord) {
+    const baseEntry = getVocabularyEntryForWordForm(baseWord) ?? getVocabularyBaseEntryForWordForm(baseWord);
+    if (baseEntry?.level) return baseEntry.level;
+  }
+
+  const baseEntry = getVocabularyBaseEntryForWordForm(normalizedWord);
+  if (baseEntry?.level && normalizeLookupWord(baseEntry.word) !== normalizedWord) {
+    return baseEntry.level;
+  }
+
+  return getVocabularyHint(normalizedWord)?.level ?? baseEntry?.level ?? null;
+}
+
 function getBoundedLevenshteinDistance(a: string, b: string, maxDistance: number) {
   if (Math.abs(a.length - b.length) > maxDistance) {
     return maxDistance + 1;
@@ -1629,11 +1740,106 @@ export function getVocabularyHintsForTexts(texts: string[]) {
     const hint = getVocabularyHint(word);
 
     if (hint) {
-      hints[word] = hint;
+      hints[word] = {
+        ...hint,
+        level: getVocabularyLevelForWordForm(word) ?? hint.level,
+      };
     }
   }
 
   return hints;
+}
+
+const articlePronunciationFallbacks: Record<string, string> = {
+  a: "ə",
+  bought: "bɔt",
+  "can't": "kænt",
+  did: "dɪd",
+  forgot: "fərˈɡɑt",
+};
+
+export async function getVocabularyPronunciationsForWords(
+  words: string[],
+  accent: "uk" | "us",
+) {
+  const requestedWords = [...new Set(
+    words
+      .map((value) => normalizeLookupWord(value.replace(/[’]/g, "'")))
+      .filter((word) => /^[a-z]+(?:'[a-z]+)?$/.test(word)),
+  )];
+  const pronunciations: Record<string, string> = {};
+
+  for (const word of requestedWords) {
+    const hint = getVocabularyHint(word);
+    const level = getVocabularyLevelForWordForm(word) ?? hint?.level;
+    if (!shouldShowAudioPronunciation(level, word)) {
+      pronunciations[word] = "";
+      continue;
+    }
+    if (hint) {
+      const phonetic = accent === "us"
+        ? hint.usPhonetic || hint.phonetic || hint.ukPhonetic
+        : hint.ukPhonetic || hint.phonetic || hint.usPhonetic;
+      if (phonetic) pronunciations[word] = phonetic;
+    }
+  }
+
+  if (requestedWords.length > 0) {
+    const { data, error } = await supabase
+      .from("vocabulary_entries")
+      .select("word, phonetic, uk_phonetic, us_phonetic, level")
+      .in("word", requestedWords)
+      .abortSignal(AbortSignal.timeout(1500));
+
+    if (!error && data) {
+      for (const row of data as Array<{
+        phonetic: string | null;
+        uk_phonetic: string | null;
+        us_phonetic: string | null;
+        word: string;
+        level: string | null;
+      }>) {
+        const word = normalizeLookupWord(row.word);
+        const level = getVocabularyLevelForWordForm(word) ?? row.level;
+        if (!shouldShowAudioPronunciation(level, word)) {
+          pronunciations[word] = "";
+          continue;
+        }
+        const phonetic = accent === "us"
+          ? row.us_phonetic || row.phonetic || row.uk_phonetic
+          : row.uk_phonetic || row.phonetic || row.us_phonetic;
+        if (phonetic) pronunciations[word] = formatHintPhonetic(phonetic);
+      }
+    }
+  }
+
+  for (const word of requestedWords) {
+    if (Object.hasOwn(pronunciations, word)) continue;
+    if (!shouldShowAudioPronunciation(getVocabularyLevelForWordForm(word) ?? getVocabularyHint(word)?.level, word)) {
+      pronunciations[word] = "";
+      continue;
+    }
+    if (articlePronunciationFallbacks[word]) {
+      pronunciations[word] = articlePronunciationFallbacks[word];
+    }
+  }
+
+  const missingWords = requestedWords.filter((word) => !Object.hasOwn(pronunciations, word));
+  let nextWordIndex = 0;
+  const workers = Array.from({ length: Math.min(10, missingWords.length) }, async () => {
+    while (nextWordIndex < missingWords.length) {
+      const word = missingWords[nextWordIndex];
+      nextWordIndex += 1;
+      const entry = await getFreeDictionaryVocabularyEntry([word]);
+      const phonetic = accent === "us"
+        ? entry?.usPhonetic || entry?.phonetic || entry?.ukPhonetic
+        : entry?.ukPhonetic || entry?.phonetic || entry?.usPhonetic;
+      if (phonetic) pronunciations[word] = phonetic;
+    }
+  });
+
+  await Promise.all(workers);
+  return pronunciations;
 }
 
 export function getVocabularyEntry(word: string) {

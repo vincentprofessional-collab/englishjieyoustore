@@ -4,6 +4,7 @@ import COS from "cos-nodejs-sdk-v5";
 import type { ManagedMediaBucket } from "@/lib/media/url";
 
 let client: COS | null = null;
+export const VOCABULARY_VIDEO_COS_FOLDER = "腾讯云待上传-词汇视频-小于20MB";
 
 function getClient() {
   const secretId = process.env.TENCENT_SECRET_ID;
@@ -45,6 +46,23 @@ export function getSignedCosMediaUrl(bucket: ManagedMediaBucket, path: string) {
     Sign: true,
     Method: "GET",
     Expires: 300,
+    Protocol: "https:",
+  });
+}
+
+export function getSignedVocabularyVideoUrl(filename: string) {
+  const settings = getBucketSettings();
+  const cleanFilename = filename.trim();
+  if (!cleanFilename || cleanFilename.includes("/") || cleanFilename.includes("\\") || !/\.mp4$/i.test(cleanFilename)) {
+    throw new Error("Invalid vocabulary video filename.");
+  }
+  return getClient().getObjectUrl({
+    Bucket: settings.bucket,
+    Region: settings.region,
+    Key: `${VOCABULARY_VIDEO_COS_FOLDER}/${cleanFilename}`,
+    Sign: true,
+    Method: "GET",
+    Expires: 3600,
     Protocol: "https:",
   });
 }

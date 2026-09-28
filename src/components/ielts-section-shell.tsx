@@ -3,13 +3,16 @@
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { Suspense, type ReactNode } from "react";
+import type { SiteChromeConfig } from "@/lib/content/site-chrome";
+import { GuidePostsOnNavigationPage } from "@/components/guide-board";
 import { BBC_DEFAULT_YEAR } from "@/lib/articles/bbc";
 
 type StudyNavGroup = {
   href: string;
-  id: "integrated-english" | "listening" | "speaking" | "reading" | "writing" | "junior-high" | "senior-high" | "sat";
+  id: "integrated-english" | "junior-high" | "senior-high" | "cet4" | "cet6" | "postgraduate" | "ielts" | "sat";
   label: string;
   mark: string;
+  disabled?: boolean;
   children: Array<{
     href: string;
     label: string;
@@ -29,63 +32,43 @@ const STUDY_NAV_GROUPS: StudyNavGroup[] = [
   },
   {
     children: [
-      { href: "/listening/practice", label: "剑桥雅思" },
-      { href: "/listening/jiufen", label: "九分达人" },
-      { href: "/listening/past-papers", label: "历年真题" },
+      { href: "/junior-high?entry=knowledge", label: "知识点" },
+      { href: "/junior-high?entry=practice", label: "题型训练" },
+      { href: "/junior-high?entry=papers", label: "历年真题" },
     ],
-    href: "/listening",
-    id: "listening",
-    label: "听力",
-    mark: "听",
-  },
-  {
-    children: [
-      { href: "/speaking/part-1", label: "Part 1" },
-      { href: "/speaking/part-2", label: "Part 2" },
-      { href: "/speaking/part-3", label: "Part 3" },
-    ],
-    href: "/speaking",
-    id: "speaking",
-    label: "口语",
-    mark: "说",
-  },
-  {
-    children: [
-      { href: "/reading/practice", label: "剑桥雅思" },
-      { href: "/reading/mock", label: "完整模考" },
-    ],
-    href: "/reading",
-    id: "reading",
-    label: "阅读",
-    mark: "读",
-  },
-  {
-    children: [
-      { href: "/writing/practice?task=task1", label: "小作文" },
-      { href: "/writing/task2", label: "大作文" },
-      { href: "/writing/task1-vocabulary", label: "专项训练" },
-    ],
-    href: "/writing",
-    id: "writing",
-    label: "写作",
-    mark: "写",
-  },
-  {
-    children: [{ href: "/junior-high", label: "中考英语" }],
-    href: "/junior-high",
+    href: "/junior-high?entry=knowledge",
     id: "junior-high",
     label: "中考英语",
     mark: "中",
   },
   {
-    children: [{ href: "/senior-high", label: "高考英语" }],
-    href: "/senior-high",
+    children: [
+      { href: "/senior-high?entry=knowledge", label: "知识点" },
+      { href: "/senior-high?entry=practice", label: "题型训练" },
+      { href: "/senior-high?entry=papers", label: "历年真题" },
+    ],
+    href: "/senior-high?entry=practice",
     id: "senior-high",
     label: "高考英语",
     mark: "高",
   },
+  { children: [], href: "/cet4", id: "cet4", label: "四级英语", mark: "四" },
+  { children: [], href: "/cet6", id: "cet6", label: "六级英语", mark: "六" },
+  { children: [], disabled: true, href: "", id: "postgraduate", label: "考研英语", mark: "研" },
   {
-    children: [{ href: "/sat", label: "SAT Reading and Writing" }],
+    children: [
+      { href: "/listening", label: "听力" },
+      { href: "/speaking", label: "口语" },
+      { href: "/reading", label: "阅读" },
+      { href: "/writing", label: "写作" },
+    ],
+    href: "/listening",
+    id: "ielts",
+    label: "雅思",
+    mark: "雅",
+  },
+  {
+    children: [],
     href: "/sat",
     id: "sat",
     label: "SAT",
@@ -126,48 +109,103 @@ function getLinkPath(href: string) {
   return href.split(/[?#]/, 1)[0];
 }
 
+function isGroupPath(pathname: string, group: StudyNavGroup) {
+  if (group.disabled) return false;
+  if (group.id === "ielts") {
+    return group.children.some(({ href }) => {
+      const path = getLinkPath(href);
+      return pathname === path || pathname.startsWith(`${path}/`);
+    });
+  }
+  const path = getLinkPath(group.href);
+  return pathname === path || pathname.startsWith(`${path}/`);
+}
+
+function isStudyChildCurrent(
+  href: string,
+  pathname: string,
+  searchParams: ReturnType<typeof useSearchParams>,
+  defaultEntry?: string,
+) {
+  const path = getLinkPath(href);
+  if (pathname !== path && !pathname.startsWith(`${path}/`)) return false;
+  const query = href.split("?")[1]?.split("#")[0] ?? "";
+  const requested = new URLSearchParams(query);
+  if (requested.has("entry")) {
+    const requestedEntry = requested.get("entry");
+    const activeEntry = searchParams.get("entry");
+    if (activeEntry) return activeEntry === requestedEntry;
+    const routeSection = pathname.slice(path.length).split("/").filter(Boolean)[0];
+    if (routeSection === "knowledge" || routeSection === "practice" || routeSection === "papers") {
+      return routeSection === requestedEntry;
+    }
+    return defaultEntry === requestedEntry;
+  }
+  return [...requested.entries()].every(([key, value]) => searchParams.get(key) === value);
+}
+
 function getDirectoryMark(label: string, fallback: string) {
   return label.match(/[A-Za-z]/)?.[0]?.toUpperCase() ?? fallback;
 }
 
 const BBC_DIRECTORY_YEARS = Array.from({ length: 12 }, (_, index) => 2026 - index);
 
-function getNewConceptUnitFromPath(pathname: string) {
-  const lessonMatch = pathname.match(/\/new-concept\/lesson-(\d+)/);
+function getNewConceptUnitFromPath(pathname: string, unitCount: number) {
+  const lessonMatch = pathname.match(/\/new-concept\/(?:book2-)?lesson-(\d+)/);
   const lessonNo = lessonMatch ? Number(lessonMatch[1]) : 1;
 
-  return Math.min(6, Math.max(1, Math.floor((lessonNo - 1) / 24) + 1));
+  return Math.min(unitCount, Math.max(1, Math.floor((lessonNo - 1) / 24) + 1));
 }
 
-function IeltsSectionShellContent({ children }: { children: ReactNode }) {
+function IeltsSectionShellContent({
+  children,
+  siteChromeConfig,
+}: {
+  children: ReactNode;
+  siteChromeConfig: SiteChromeConfig;
+}) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const requestedBbcYear = Number(searchParams.get("year"));
   const activeBbcYear = BBC_DIRECTORY_YEARS.includes(requestedBbcYear)
     ? requestedBbcYear
     : BBC_DEFAULT_YEAR;
-  const activeGroup = STUDY_NAV_GROUPS.find(
-    (group) =>
-      group.id === "integrated-english"
-        ? pathname === "/articles" || pathname.startsWith("/articles/") || pathname === "/new-concept" || pathname.startsWith("/new-concept/")
-        : pathname === group.href || pathname.startsWith(`${group.href}/`),
+  const activeGroup = STUDY_NAV_GROUPS.find((group) =>
+    group.id === "integrated-english"
+      ? pathname === "/articles" || pathname.startsWith("/articles/") || pathname === "/new-concept" || pathname.startsWith("/new-concept/")
+      : isGroupPath(pathname, group),
   );
 
   // The New Concept home owns its content list. Every integrated-English page
   // uses the same source-aware directory shell below.
   if (!activeGroup || (activeGroup.id !== "integrated-english" && isImmersiveIeltsPage(pathname))) {
-    return children;
+    return (
+      <>
+        {children}
+        <GuidePostsOnNavigationPage config={siteChromeConfig} />
+      </>
+    );
   }
 
   const isIntegratedEnglish = activeGroup.id === "integrated-english";
   const examGroups = STUDY_NAV_GROUPS.filter((group) => group.id !== "integrated-english");
   const isBbcPage = pathname === "/articles" || pathname.startsWith("/articles/");
   const isNewConceptPage = pathname === "/new-concept" || pathname.startsWith("/new-concept/");
-  const activeNewConceptUnit = getNewConceptUnitFromPath(pathname);
+  const isBookTwoLessonRoute = /\/new-concept\/book2-lesson-\d+/.test(pathname);
+  const activeNewConceptBookCode = isBookTwoLessonRoute || searchParams.get("book") === "new-concept-2"
+    ? "new-concept-2"
+    : "new-concept-1";
+  const activeNewConceptBookTitle = activeNewConceptBookCode === "new-concept-2" ? "新概念2" : "新概念1";
+  const activeNewConceptUnitCount = activeNewConceptBookCode === "new-concept-2" ? 4 : 6;
+  const requestedNewConceptUnit = Number(searchParams.get("unit"));
+  const activeNewConceptUnit = isNewConceptPage && pathname === "/new-concept" &&
+    requestedNewConceptUnit >= 1 && requestedNewConceptUnit <= activeNewConceptUnitCount
+    ? requestedNewConceptUnit
+    : getNewConceptUnitFromPath(pathname, activeNewConceptUnitCount);
 
   return (
     <div className="ielts-section-shell">
-      <aside className={`ielts-side-nav study-directory-side-nav ${isIntegratedEnglish ? "integrated-english-side-nav" : "language-exams-side-nav"}`} aria-label={isIntegratedEnglish ? "综合英语导航" : "语言考试导航（雅思学习）"}>
+      <aside className={`ielts-side-nav study-directory-side-nav ${isIntegratedEnglish ? "integrated-english-side-nav" : "language-exams-side-nav"}`} aria-label={isIntegratedEnglish ? "综合英语导航" : "语言考试导航"}>
         <header className="study-directory-head">
           <div>
             <span>Directory</span>
@@ -225,12 +263,12 @@ function IeltsSectionShellContent({ children }: { children: ReactNode }) {
                     </Link>
                     {isNewConceptPage ? (
                       <div className="study-directory-secondary study-directory-new-concept-list">
-                        <strong className="study-directory-book-title">新概念1</strong>
+                        <strong className="study-directory-book-title">{activeNewConceptBookTitle}</strong>
                         <div aria-label="新概念英语单元" className="study-directory-unit-list">
-                          {Array.from({ length: 6 }, (_, index) => index + 1).map((unit) => (
+                          {Array.from({ length: activeNewConceptUnitCount }, (_, index) => index + 1).map((unit) => (
                             <Link
                               className={unit === activeNewConceptUnit ? "active" : ""}
-                              href={`/new-concept?unit=${unit}`}
+                              href={`/new-concept?book=${activeNewConceptBookCode}&unit=${unit}`}
                               key={unit}
                             >
                               <span>Unit {unit}</span>
@@ -245,24 +283,23 @@ function IeltsSectionShellContent({ children }: { children: ReactNode }) {
             }
 
             return (
-              <div className={`study-directory-source-group ${isActive ? "active" : ""}`} key={group.id}>
-                <Link
-                  aria-current={isActive ? "page" : undefined}
-                  className="study-directory-source-link"
-                  href={group.href}
-                >
-                  <span className="study-directory-source-mark" aria-hidden="true">
-                    {group.mark}
-                  </span>
-                  <strong>{group.label}</strong>
-                </Link>
+              <div className={`study-directory-source-group ${isActive ? "active" : ""} ${group.disabled ? "disabled" : ""}`} key={group.id}>
+                {group.disabled ? (
+                  <div aria-disabled="true" className="study-directory-source-link">
+                    <span className="study-directory-source-mark" aria-hidden="true">{group.mark}</span>
+                    <strong>{group.label}</strong>
+                  </div>
+                ) : (
+                  <Link aria-current={isActive ? "page" : undefined} className="study-directory-source-link" href={group.href}>
+                    <span className="study-directory-source-mark" aria-hidden="true">{group.mark}</span>
+                    <strong>{group.label}</strong>
+                  </Link>
+                )}
 
-                <div className="study-directory-secondary">
+                {group.children.length ? <div className="study-directory-secondary">
                   {group.children.map((child) => {
-                    const childPath = getLinkPath(child.href);
-                    const isCurrent =
-                      !child.href.includes("#") &&
-                      (pathname === childPath || pathname.startsWith(`${childPath}/`));
+                    const defaultEntry = group.id === "junior-high" ? "knowledge" : group.id === "senior-high" ? "practice" : undefined;
+                    const isCurrent = isStudyChildCurrent(child.href, pathname, searchParams, defaultEntry);
 
                     return (
                       <Link
@@ -276,22 +313,33 @@ function IeltsSectionShellContent({ children }: { children: ReactNode }) {
                       </Link>
                     );
                   })}
-                </div>
+                </div> : null}
               </div>
             );
           })}
         </nav>
       </aside>
 
-      <div className="ielts-section-content">{children}</div>
+      <div className="ielts-section-content">
+        {children}
+        <GuidePostsOnNavigationPage config={siteChromeConfig} />
+      </div>
     </div>
   );
 }
 
-export function IeltsSectionShell({ children }: { children: ReactNode }) {
+export function IeltsSectionShell({
+  children,
+  siteChromeConfig,
+}: {
+  children: ReactNode;
+  siteChromeConfig: SiteChromeConfig;
+}) {
   return (
     <Suspense fallback={children}>
-      <IeltsSectionShellContent>{children}</IeltsSectionShellContent>
+      <IeltsSectionShellContent siteChromeConfig={siteChromeConfig}>
+        {children}
+      </IeltsSectionShellContent>
     </Suspense>
   );
 }

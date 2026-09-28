@@ -5,6 +5,8 @@ import {
 import {
   getLearningBookEntries,
   toLearningWord,
+  toLearningWordFromFavorite,
+  type FavoriteLearningWord,
   type LearningBookKey,
 } from "@/lib/vocabulary/learning";
 
@@ -44,5 +46,30 @@ export function GET(request: Request) {
         "Cache-Control": "no-store",
       },
     },
+  );
+}
+
+export async function POST(request: Request) {
+  const payload: unknown = await request.json().catch(() => null);
+  const rawFavorites: unknown = payload && typeof payload === "object" && "favorites" in payload
+    ? payload.favorites
+    : null;
+  const favorites = (Array.isArray(rawFavorites) ? rawFavorites as unknown[] : [])
+    .filter((item): item is FavoriteLearningWord => item !== null && typeof item === "object" && "id" in item && "word" in item && typeof item.id === "string" && typeof item.word === "string");
+  const entriesById = new Map(
+    getAllVocabularyEntries().map((entry) => [entry.normalizedWord.toLowerCase(), entry]),
+  );
+  const seen = new Set<string>();
+  const words = favorites.flatMap((favorite) => {
+    const id = favorite.id.trim().toLowerCase();
+    if (!id || seen.has(id)) return [];
+    seen.add(id);
+    const entry = entriesById.get(id);
+    return [entry ? toLearningWord(entry) : toLearningWordFromFavorite({ ...favorite, id })];
+  });
+
+  return NextResponse.json(
+    { book: "生词本", sourceCount: words.length, words },
+    { headers: { "Cache-Control": "no-store" } },
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 import type { ManagedPageContent } from "@/lib/content/page-content";
 
 export type BbcArticleListGroup = {
@@ -22,6 +23,15 @@ export function ArticlesHome({
   yearGroups: BbcArticleListGroup[];
 }) {
   const activeGroup = yearGroups.find((group) => group.year === selectedYear) ?? yearGroups[0];
+  const [selectedArticles, setSelectedArticles] = useState<string[]>([]);
+
+  function toggleArticleSelection(articleId: string) {
+    setSelectedArticles((current) =>
+      current.includes(articleId)
+        ? current.filter((id) => id !== articleId)
+        : [...current, articleId],
+    );
+  }
 
   return (
     <section className="stack bbc-home-page">
@@ -32,41 +42,37 @@ export function ArticlesHome({
       </div>
 
       <div className="bbc-year-panel bbc-year-browser">
-        <div className="bbc-year-list">
-          {yearGroups.map((group) => (
-            <Link
-              aria-current={group.year === activeGroup?.year ? "page" : undefined}
-              className={`bbc-year-banner ${group.year === activeGroup?.year ? "active" : ""}`}
-              href={`/articles?year=${group.year}`}
-              key={group.year}
-            >
-              <span>{group.year}</span>
-              <i>›</i>
-            </Link>
-          ))}
-        </div>
-
         <section className="bbc-selected-year" aria-label={`${activeGroup?.year ?? selectedYear} 年文章`}>
           <header>
-            <strong>{activeGroup?.year ?? selectedYear}</strong>
             <span>文章列表</span>
           </header>
           <div className="bbc-article-list">
-            {activeGroup?.articles.map((article) => (
-              <Link
-                className="bbc-article-card"
-                href={`/articles/${article.id}`}
-                key={article.id}
-              >
-                <strong>
-                  {article.id}-{article.title}
-                  {article.titleChinese ? ` ${article.titleChinese}` : ""}
-                </strong>
-              </Link>
-            ))}
+            {activeGroup?.articles.map((article) => {
+              const isSelected = selectedArticles.includes(article.id);
+
+              return (
+                <div className="bbc-article-card" key={article.id}>
+                  <Link className="bbc-article-card-link" href={`/articles/${article.id}`}>
+                    <strong>
+                      {article.id}-{article.title}
+                      {article.titleChinese ? ` ${article.titleChinese}` : ""}
+                    </strong>
+                  </Link>
+                  <button
+                    aria-label={`${isSelected ? "取消选择" : "选择"}文章 ${article.title}`}
+                    aria-pressed={isSelected}
+                    className="bbc-article-select"
+                    onClick={() => toggleArticleSelection(article.id)}
+                    type="button"
+                  >
+                    <span aria-hidden="true" className={isSelected ? "choice-dot selected" : "choice-dot"} />
+                  </button>
+                </div>
+              );
+            })}
           </div>
         </section>
-        </div>
+      </div>
     </section>
   );
 }
