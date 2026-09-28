@@ -482,6 +482,87 @@
   width: auto;
 }
 
+/* Match the final vocabulary directory: white card, blue outline, gold selection. */
+.study-directory-side-nav {
+  background: #fff;
+  border: 2px solid #3048d6;
+  border-radius: 28px;
+  box-shadow: none;
+}
+
+.study-directory-head {
+  border-bottom: 0;
+  padding: 28px 34px 18px;
+}
+
+.study-directory-head span {
+  display: none;
+}
+
+.study-directory-head strong {
+  color: #17231d;
+  font-size: 31px;
+}
+
+.study-directory-nav {
+  gap: 4px;
+  padding: 10px 28px 24px !important;
+}
+
+.study-directory-source-link {
+  background: #fff;
+  border-radius: 16px;
+  color: #17231d;
+  min-height: 64px;
+  padding: 10px 12px 10px 16px;
+}
+
+.study-directory-source-link::before {
+  display: none;
+}
+
+.study-directory-source-link:hover,
+.study-directory-source-link:focus-visible,
+.study-directory-source-group.active > .study-directory-source-link,
+.study-directory-source-link.active {
+  background: #dbad3d;
+  color: #17231d;
+}
+
+.study-directory-source-mark {
+  background: #eef9dd;
+  border-color: #a9d6bd;
+  color: #0a4737;
+}
+
+.study-directory-source-link strong {
+  color: #17231d;
+  font-size: 18px;
+}
+
+.study-directory-secondary {
+  border-left-color: rgba(169, 214, 189, .5);
+}
+
+.study-directory-secondary a {
+  color: #6f6a5d;
+}
+
+.study-directory-secondary a:hover,
+.study-directory-secondary a:focus-visible,
+.study-directory-secondary a.active {
+  background: #f7edcf;
+  color: #17231d;
+}
+
+.study-directory-secondary a > span {
+  background: #c4f35b;
+}
+
+.study-directory-secondary a.active > span {
+  background: #17231d;
+}
+
 .study-directory-source-group.disabled {
   opacity: 0.62;
 }

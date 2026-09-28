@@ -28263,6 +28263,407 @@ audio.guide-editor-asset-preview {
   }
 }
 
+/* Final appearance from the vocabulary learning preview. */
+/* Outer frame only: keep the restored inner green-and-gold page untouched. */
+html {
+  background: #fff;
+}
+
+body {
+  background:
+    radial-gradient(circle at 5% 8%, rgba(196, 243, 91, .22) 0 7px, transparent 8px),
+    radial-gradient(circle at 94% 90%, rgba(45, 71, 214, .78) 0 44px, transparent 45px),
+    linear-gradient(135deg, #7432ef 0%, #3f55e9 48%, #f04fa6 100%);
+  min-height: 100dvh;
+  padding: 12px;
+  position: relative;
+}
+
+body::before {
+  background:
+    linear-gradient(115deg, transparent 0 22%, rgba(255, 255, 255, .16) 22.2%, transparent 22.5% 76%, rgba(255, 255, 255, .11) 76.2%, transparent 76.5%),
+    radial-gradient(circle at 88% 10%, rgba(255, 255, 255, .18), transparent 18rem);
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: fixed;
+  z-index: 0;
+}
+
+body::after {
+  border: 1px solid rgba(255, 255, 255, .38);
+  border-radius: 25px;
+  content: "";
+  inset: 18px;
+  pointer-events: none;
+  position: fixed;
+  z-index: 0;
+}
+
+/* Keep the vocabulary directory aligned with the shared exam directory menu. */
+.vocabulary-learning-page .vocabulary-learning-sidebar {
+  background: #fffaf0;
+  border: 1px solid rgba(228, 216, 189, .95);
+  border-radius: 28px;
+  box-shadow: 0 14px 34px rgba(50, 58, 39, .08);
+  padding: 0 12px 18px;
+}
+
+.vocabulary-learning-page .vocabulary-learning-book-heading {
+  align-items: flex-end;
+  border-bottom: 1px solid rgba(228, 216, 189, .95);
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  margin: 0 -12px;
+  padding: 22px 24px 20px;
+}
+
+.vocabulary-learning-book-heading-copy {
+  display: grid;
+  gap: 5px;
+}
+
+.vocabulary-learning-book-heading-copy small {
+  color: var(--gold);
+  font-size: 11px;
+  font-weight: 1000;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+.vocabulary-learning-book-heading-copy span {
+  color: var(--accent-dark);
+  font-family: Georgia, "Times New Roman", "Noto Serif SC", serif;
+  font-size: 27px;
+  font-weight: 900;
+  letter-spacing: -.04em;
+}
+
+.vocabulary-learning-page .vocabulary-learning-book-heading button {
+  background: #fffdf8;
+  border: 1px solid rgba(171, 209, 191, .95);
+  border-radius: 999px;
+  color: var(--accent-dark);
+  font-size: 13px;
+  font-weight: 900;
+  padding: 9px 14px;
+}
+
+.vocabulary-learning-page .vocabulary-learning-book-list {
+  gap: 8px;
+  padding: 20px 10px 0;
+}
+
+.vocabulary-learning-page .vocabulary-learning-nav-button {
+  align-items: center;
+  background: transparent;
+  border-radius: 14px;
+  color: #6f6a5d;
+  gap: 12px;
+  min-height: 48px;
+  padding: 8px 12px;
+  transition: background 160ms ease, color 160ms ease;
+}
+
+.vocabulary-learning-page .vocabulary-learning-nav-button:hover,
+.vocabulary-learning-page .vocabulary-learning-nav-button:focus-visible {
+  background: rgba(223, 244, 231, .62);
+  color: var(--accent-dark);
+}
+
+.vocabulary-learning-page .vocabulary-learning-nav-button.active {
+  background: rgba(248, 233, 181, .62);
+  color: var(--accent-dark);
+  font-weight: 900;
+}
+
+.vocabulary-learning-page .vocabulary-learning-nav-dot {
+  background: #a9d6bd;
+  box-shadow: none;
+  height: 8px;
+  width: 8px;
+}
+
+.vocabulary-learning-page .vocabulary-learning-nav-button.active .vocabulary-learning-nav-dot {
+  background: var(--gold);
+  box-shadow: none;
+}
+
+.vocabulary-learning-page .vocabulary-learning-nav-label {
+  font-family: Georgia, "Times New Roman", "Noto Serif SC", serif;
+  font-size: 17px;
+  font-weight: 900;
+}
+
+.vocabulary-learning-page .vocabulary-learning-nav-button strong {
+  color: #756d5c;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.vocabulary-learning-page .vocabulary-learning-nav-button.active strong {
+  color: var(--accent-dark);
+}
+
+.vocabulary-learning-page .vocabulary-learning-nav-arrow {
+  color: #8c887c;
+}
+
+.vocabulary-learning-page .vocabulary-learning-nav-button.active .vocabulary-learning-nav-arrow,
+.vocabulary-learning-page .vocabulary-learning-nav-button:hover .vocabulary-learning-nav-arrow,
+.vocabulary-learning-page .vocabulary-learning-nav-button:focus-visible .vocabulary-learning-nav-arrow {
+  color: var(--accent-dark);
+}
+
+@media (max-width: 780px) {
+  .vocabulary-learning-page .vocabulary-learning-sidebar {
+    padding: 0 10px 14px;
+  }
+
+  .vocabulary-learning-page .vocabulary-learning-book-heading {
+    margin: 0 -10px;
+    padding: 18px 18px 16px;
+  }
+
+  .vocabulary-learning-page .vocabulary-learning-book-list {
+    padding: 14px 4px 0;
+  }
+}
+
+.shell {
+  background:
+    linear-gradient(135deg, #f8f1df 0%, #f7f1e5 42%, #eaf2ea 100%) padding-box,
+    linear-gradient(135deg, #8f2ce9 0%, #b437e5 28%, #f14d9f 61%, #ed6298 74%, #3046f0 100%) border-box;
+  border: 24px solid transparent;
+  border-radius: 32px;
+  box-shadow: 0 22px 58px rgba(53, 42, 112, .2), 0 0 0 1px rgba(22, 28, 49, .08);
+  position: relative;
+  z-index: 1;
+}
+
+/* The left accent arcs are intentionally removed from all three menus. */
+.vocabulary-learning-page .vocabulary-learning-nav-button::before,
+.study-directory-side-nav .study-directory-source-link::before {
+  display: none;
+}
+
+.vocabulary-learning-page .vocabulary-learning-nav-button {
+  padding-left: 12px;
+}
+
+/* Final shared reference: white menus with a thin blue frame and no side arcs. */
+.vocabulary-learning-page .vocabulary-learning-sidebar,
+.study-directory-side-nav {
+  background: #fff;
+  border: 3px solid #3048d6;
+  border-radius: 28px;
+  box-shadow: none;
+}
+
+.vocabulary-learning-page .vocabulary-learning-book-heading {
+  border-bottom: 0;
+  padding: 26px 30px 18px;
+}
+
+.study-directory-head {
+  border-bottom: 0;
+  padding: 28px 34px 18px;
+}
+
+.study-directory-head span {
+  display: none;
+}
+
+.vocabulary-learning-page .vocabulary-learning-book-heading-copy span,
+.study-directory-head strong {
+  color: #17231d;
+}
+
+.vocabulary-learning-page .vocabulary-learning-nav-button,
+.study-directory-source-link {
+  background: #fff;
+  color: #17231d;
+}
+
+.vocabulary-learning-page .vocabulary-learning-nav-button.active,
+.study-directory-source-group.active > .study-directory-source-link,
+.study-directory-source-link.active {
+  background: #dbad3d;
+  color: #17231d;
+}
+
+.vocabulary-learning-page .vocabulary-learning-nav-button::before,
+.study-directory-side-nav .study-directory-source-link::before {
+  display: none;
+}
+
+/* Final requested text and vocabulary-menu accents. */
+body,
+body *:not(.bbc-vocabulary-highlight):not(.bbc-active-word) {
+  color: #000 !important;
+}
+
+.vocabulary-learning-page .vocabulary-learning-nav-dot,
+.vocabulary-learning-page .vocabulary-learning-nav-button.active .vocabulary-learning-nav-dot,
+.study-directory-secondary a > span,
+.study-directory-secondary a.active > span {
+  background: #c4f35b !important;
+}
+
+.vocabulary-learning-page .vocabulary-learning-empty {
+  background: #fff !important;
+}
+
+.shell:has(.vocabulary-learning-page) {
+  background:
+    linear-gradient(135deg, #f8f1df 0%, #f7f1e5 100%) padding-box,
+    linear-gradient(135deg, #8f2ce9 0%, #b437e5 28%, #f14d9f 61%, #ed6298 74%, #3046f0 100%) border-box;
+}
+
+.global-vocabulary-search-strip .vocabulary-search-row .button.primary,
+.nav-cta,
+.vocabulary-learning-list-display-menu > button,
+.vocabulary-learning-settings-fields input,
+.vocabulary-learning-settings-reaction-options,
+.vocabulary-learning-settings-options label,
+.vocabulary-learning-settings-actions button {
+  background: linear-gradient(115deg, #f2f7ff 0%, #e1edff 100%) !important;
+  border-color: #a9c3f1 !important;
+  color: #000 !important;
+}
+
+.vocabulary-learning-settings-reaction-options label:hover,
+.vocabulary-learning-settings-reaction-options label:focus-within {
+  background: linear-gradient(115deg, #e6f0ff 0%, #d5e6ff 100%) !important;
+}
+
+.vocabulary-learning-settings-options label:has(input:checked) {
+  background: linear-gradient(115deg, #dceaff 0%, #c6dcff 100%) !important;
+  border-color: #86a8e9 !important;
+}
+
+.vocabulary-learning-settings-options input {
+  accent-color: #6689df;
+}
+
+.vocabulary-learning-settings-review-range button {
+  background: linear-gradient(115deg, #f2f7ff 0%, #e1edff 100%) !important;
+  border-color: #a9c3f1 !important;
+  color: #000 !important;
+}
+
+.vocabulary-learning-settings-review-range button:hover,
+.vocabulary-learning-settings-review-range button:focus-visible {
+  background: linear-gradient(115deg, #e6f0ff 0%, #d5e6ff 100%) !important;
+  border-color: #8faee8 !important;
+}
+
+.vocabulary-learning-settings-review-range button.active,
+.vocabulary-learning-settings-review-range button.active:hover,
+.vocabulary-learning-settings-review-range button.active:focus-visible {
+  background: linear-gradient(115deg, #d6e7ff 0%, #bcd6ff 100%) !important;
+  border-color: #8faee8 !important;
+  color: #000 !important;
+}
+
+.vocabulary-learning-settings-review-dot {
+  border-color: #93a2b7;
+}
+
+.vocabulary-learning-settings-review-range button.active .vocabulary-learning-settings-review-dot {
+  background: #6689df;
+  border-color: #6689df;
+  box-shadow: inset 0 0 0 3px #dceaff;
+}
+
+.global-vocabulary-search-strip .vocabulary-search-row .button.primary,
+.vocabulary-learning-settings-actions button.primary {
+  background: linear-gradient(115deg, #d6e7ff 0%, #bcd6ff 100%) !important;
+  border-color: #8faee8 !important;
+}
+
+.global-vocabulary-search-strip .vocabulary-search-row .button.primary:hover,
+.global-vocabulary-search-strip .vocabulary-search-row .button.primary:focus-visible,
+.nav-cta:hover,
+.nav-cta:focus-visible,
+.vocabulary-learning-list-display-menu > button:hover,
+.vocabulary-learning-list-display-menu > button[aria-expanded="true"],
+.vocabulary-learning-settings-actions button:hover:not(:disabled),
+.vocabulary-learning-settings-actions button:focus-visible {
+  background: linear-gradient(115deg, #c8deff 0%, #aecbfa 100%) !important;
+}
+
+/* Restore the site's green-and-gold footer, with gradients on both bands. */
+.site-footer {
+  background: linear-gradient(120deg, var(--accent) 0%, var(--gold) 100%) !important;
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.site-footer .footer-brand-band {
+  background:
+    linear-gradient(115deg, var(--accent) 0%, rgba(255, 255, 255, 0.16) 100%),
+    var(--accent) !important;
+}
+
+.site-footer .footer-action-band {
+  background:
+    linear-gradient(115deg, var(--gold) 0%, rgba(255, 255, 255, 0.2) 100%),
+    var(--gold) !important;
+}
+
+.site-footer .footer-bottom {
+  background: var(--bg) !important;
+}
+
+/* Keep navigation hover light blue across page themes. */
+.nav-tab:hover,
+.nav-tab:focus-visible {
+  background: linear-gradient(115deg, #dceaff 0%, #c2dbff 100%) !important;
+}
+
+/* Match the login action to the global search button's size and typography. */
+.nav-cta {
+  align-items: center;
+  background: linear-gradient(115deg, #f1ca64 0%, #d9a82e 100%) !important;
+  border: 1px solid #c99720;
+  box-shadow: none;
+  color: #000 !important;
+  display: inline-flex;
+  font-size: 18px;
+  justify-content: center;
+  min-height: 58px;
+  min-width: 124px;
+  padding: 0 24px;
+}
+
+.nav-cta:hover,
+.nav-cta:focus-visible {
+  background: linear-gradient(115deg, #f6d47d 0%, #e4b747 100%) !important;
+}
+
+.auth-mode-tabs button.active,
+.auth-form .button.primary {
+  background: linear-gradient(115deg, #dceaff 0%, #c2dbff 100%) !important;
+  border-color: #8faee8 !important;
+  color: #000 !important;
+}
+
+.auth-mode-tabs button.active {
+  box-shadow: inset 0 -4px 0 var(--gold);
+}
+
+.auth-form .button.primary:hover,
+.auth-form .button.primary:focus-visible {
+  background: linear-gradient(115deg, #c8deff 0%, #aecbfa 100%) !important;
+}
+
+.auth-form input:focus {
+  border-color: #8faee8;
+  box-shadow: 0 0 0 4px #dceaff;
+}
+
 .article-inline-mark {
   display: inline-grid;
   grid-template-columns: minmax(0, auto);
