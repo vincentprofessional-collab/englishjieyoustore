@@ -15,15 +15,21 @@ const requiredMarkers = {
   "src/app/layout.tsx": [
     'import { IeltsSectionShell } from "@/components/ielts-section-shell";',
     'import "./ielts-section-shell.css";',
-    "<IeltsSectionShell>{children}</IeltsSectionShell>",
   ],
   "src/components/ielts-section-shell.tsx": [
     "ielts-section-shell",
     "ielts-side-nav",
-    "雅思学习",
+    'id: "ielts"',
+    "语言考试导航",
     "剑桥雅思",
     "九分达人",
     "历年真题",
+    '/listening/practice?source=cambridge',
+    '/listening/jiufen',
+    '/listening/past-papers',
+    '/speaking/part-1',
+    '/writing/practice?task=task1',
+    '/writing/task2',
   ],
 };
 
@@ -43,6 +49,11 @@ for (const [file, markers] of Object.entries(requiredMarkers)) {
       failures.push(`missing marker in ${file}: ${marker}`);
     }
   }
+}
+
+const layout = readFileSync("src/app/layout.tsx", "utf8");
+if (!/<IeltsSectionShell\s+siteChromeConfig=\{siteChromeConfig\}>\s*\{children\}\s*<\/IeltsSectionShell>/.test(layout)) {
+  failures.push("src/app/layout.tsx must wrap the page content in the configured IELTS section shell");
 }
 
 if (failures.length) {
