@@ -128,8 +128,7 @@ function pickVisibleCandidates<T extends { path: string; likes: number }>(items:
   );
 
   if (cycle >= 4) {
-    return rankByLikes(items).slice(0, MAX_VISIBLE_VIDEOS)
-      .sort((left, right) => (originalOrder.get(left.path) ?? 0) - (originalOrder.get(right.path) ?? 0));
+    return rankByLikes(items).slice(0, MAX_VISIBLE_VIDEOS);
   }
 
   let visible = items.slice(0, MAX_VISIBLE_VIDEOS);
@@ -143,7 +142,7 @@ function pickVisibleCandidates<T extends { path: string; likes: number }>(items:
     visible = [...retained, ...additions.slice(0, replaceCount)];
   }
 
-  return visible.sort((left, right) => (originalOrder.get(left.path) ?? 0) - (originalOrder.get(right.path) ?? 0));
+  return rankByLikes(visible);
 }
 
 export async function getVocabularyVideos(entry: LocalVocabularyEntry) {

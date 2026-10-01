@@ -768,6 +768,29 @@ export function AudioSettingsMenus({
     ...(variant === "full" || variant === "speaking-writing"
       ? [
           {
+            selectedLabel: "写作模式",
+            selectedValue: settings.dictationMode,
+            options: dictationModeOptions,
+            onOpen: onModeSelect
+              ? () => {
+                  onChange({
+                    ...(!preserveModeSettings ? { playMode: "sequential" as const, speakingMode: "none" as const } : {}),
+                    dictationMode: settings.dictationMode === "none" ? "sentence-order" : settings.dictationMode,
+                    subtitleMode: "bilingual",
+                  });
+                  onModeSelect("writing");
+                }
+              : undefined,
+            onSelect: (value: string | number) => {
+              onChange({
+                ...(!preserveModeSettings ? { playMode: "sequential" as const, speakingMode: "none" as const } : {}),
+                dictationMode: String(value) as AudioDictationMode,
+                subtitleMode: "bilingual",
+              });
+              onModeSelect?.("writing");
+            },
+          },
+          {
             selectedLabel: "口语模式",
             selectedValue: settings.speakingMode,
             options: speakingModeOptions,
@@ -790,29 +813,6 @@ export function AudioSettingsMenus({
                 subtitleMode: speakingMode === "sight-translation" ? "chinese" : "bilingual",
               });
               onModeSelect?.("speaking");
-            },
-          },
-          {
-            selectedLabel: "写作模式",
-            selectedValue: settings.dictationMode,
-            options: dictationModeOptions,
-            onOpen: onModeSelect
-              ? () => {
-                  onChange({
-                    ...(!preserveModeSettings ? { playMode: "sequential" as const, speakingMode: "none" as const } : {}),
-                    dictationMode: settings.dictationMode === "none" ? "sentence-order" : settings.dictationMode,
-                    subtitleMode: "bilingual",
-                  });
-                  onModeSelect("writing");
-                }
-              : undefined,
-            onSelect: (value: string | number) => {
-              onChange({
-                ...(!preserveModeSettings ? { playMode: "sequential" as const, speakingMode: "none" as const } : {}),
-                dictationMode: String(value) as AudioDictationMode,
-                subtitleMode: "bilingual",
-              });
-              onModeSelect?.("writing");
             },
           },
         ]
@@ -856,7 +856,7 @@ export function AudioChoiceMenu({
             type="button"
           >
             <span>{option.label}</span>
-            <span aria-hidden="true" className="player-menu-option-radio" />
+            <span aria-hidden="true" className="player-menu-option-switch" />
           </button>
         ))}
       </div>
@@ -909,13 +909,14 @@ export function AudioReadingMenu({
         {groups.map((group) => (
           <div aria-label={group.label} className="audio-reading-menu-group" key={group.label} role="group">
             <button
-              aria-pressed={group.isVisible}
+              aria-checked={group.isVisible}
               className={group.isVisible ? "active" : ""}
               onClick={() => group.onToggle(!group.isVisible)}
+              role="switch"
               type="button"
             >
               <span>{group.label}</span>
-              <span aria-hidden="true" className="player-menu-option-radio" />
+              <span aria-hidden="true" className="player-menu-option-switch" />
             </button>
           </div>
         ))}
@@ -951,7 +952,7 @@ export function AudioPronunciationMenu({
                 type="button"
               >
                 <span>{option.label}</span>
-                <span aria-hidden="true" className="player-menu-option-radio" />
+                <span aria-hidden="true" className="player-menu-option-switch" />
               </button>
             ))}
           </div>
@@ -987,7 +988,7 @@ function PlayerMenu({
             onClick={() => menu.onSelect(option.value)}
           >
             <span>{option.label}</span>
-            <span aria-hidden="true" className="player-menu-option-radio" />
+            <span aria-hidden="true" className="player-menu-option-switch" />
           </button>
         ))}
       </div>

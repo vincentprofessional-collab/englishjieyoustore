@@ -31,8 +31,10 @@ import { ContentShareButton } from "@/components/content-share-button";
 import { shouldShowAudioPronunciation } from "@/lib/audio-pronunciation";
 import {
   VocabularyHoverDefinitionLine,
+  VocabularyHoverPopup,
   VocabularyHoverPronunciation,
 } from "@/components/vocabulary-hover-details";
+import { loadVocabularyHoverHint } from "@/lib/vocabulary/hover-hint";
 import {
   getListeningRuntimeGroupMetadata,
   isListeningQuestionCorrect,
@@ -3492,18 +3494,9 @@ export function ListeningPractice({
       return cachedHint;
     }
 
-    try {
-      const response = await fetch(
-        `/api/vocabulary-hint?word=${encodeURIComponent(normalizedWord)}`,
-      );
-      const payload = (await response.json()) as { hint?: LocalVocabularyHint | null };
-      const hint = response.ok ? payload.hint ?? null : null;
-      fetchedVocabularyHintsRef.current.set(normalizedWord, hint);
-      return hint;
-    } catch {
-      fetchedVocabularyHintsRef.current.set(normalizedWord, null);
-      return null;
-    }
+    const hint = await loadVocabularyHoverHint(normalizedWord);
+    if (hint) fetchedVocabularyHintsRef.current.set(normalizedWord, hint);
+    return hint;
   }
 
   async function showWordTooltipFromRect(word: string, rect: DOMRect, requestId: number) {
@@ -3525,15 +3518,10 @@ export function ListeningPractice({
       }
       return;
     }
+    pendingHoverWordRef.current = "";
 
-    const viewportPadding = 16;
-    const tooltipMaxWidth = Math.min(420, window.innerWidth - viewportPadding * 2);
     const estimatedTooltipHeight = 270;
-    const preferredCenter = rect.left + rect.width / 2;
-    const left = Math.min(
-      window.innerWidth - viewportPadding - tooltipMaxWidth / 2,
-      Math.max(viewportPadding + tooltipMaxWidth / 2, preferredCenter),
-    );
+    const left = rect.left + rect.width / 2;
     const shouldOpenAbove =
       rect.bottom + estimatedTooltipHeight + 12 > window.innerHeight &&
       rect.top > estimatedTooltipHeight + 12;
@@ -3599,13 +3587,13 @@ export function ListeningPractice({
     }
 
     pendingHoverWordRef.current = normalizedWord;
+    hoverRequestIdRef.current += 1;
+    const requestId = hoverRequestIdRef.current;
     clearHoverWordTimer();
     hoverWordTimerRef.current = window.setTimeout(() => {
-      hoverRequestIdRef.current += 1;
-      void showWordTooltipFromRect(word, rect, hoverRequestIdRef.current);
-      pendingHoverWordRef.current = "";
+      void showWordTooltipFromRect(word, rect, requestId);
       hoverWordTimerRef.current = null;
-    }, 250);
+    }, 120);
   }
 
   function scheduleHideWordTooltip(delay = 1500) {
@@ -5057,7 +5045,7 @@ export function ListeningPractice({
         ) : null}
 
         {activeWordTooltip ? (
-          <div
+          <VocabularyHoverPopup
             className={`word-tooltip-floating ${
               activeWordTooltip.placement === "above" ? "above" : ""
             }`}
@@ -5097,7 +5085,7 @@ export function ListeningPractice({
               definitionCn={activeWordTooltip.hint.definitionCn}
               partOfSpeech={activeWordTooltip.hint.partOfSpeech}
             />
-          </div>
+          </VocabularyHoverPopup>
         ) : null}
       </section>
     );
@@ -5888,7 +5876,7 @@ export function ListeningPractice({
 
       {!submitted ? partNavigation : null}
       {activeWordTooltip ? (
-        <div
+        <VocabularyHoverPopup
           className={`word-tooltip-floating ${
             activeWordTooltip.placement === "above" ? "above" : ""
           }`}
@@ -5949,7 +5937,7 @@ export function ListeningPractice({
               <button type="button" onClick={() => addAnnotation("highlight")}>Highlight</button>
             </div>
           ) : null}
-        </div>
+        </VocabularyHoverPopup>
       ) : null}
     </section>
   );

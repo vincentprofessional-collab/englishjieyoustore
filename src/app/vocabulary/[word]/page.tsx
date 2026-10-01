@@ -332,15 +332,17 @@ export default async function VocabularyWordPage({
         5,
         entry.inflections.map((inflection) => inflection.value),
       );
-  let isSignedIn = false;
+  let canAccessBbcExamples = false;
   try {
     const supabase = await createServerSupabaseClient();
-    const { data } = await supabase.auth.getUser();
-    isSignedIn = Boolean(data.user);
+    const { data, error } = await supabase.rpc("can_access_project", {
+      _project_key: "bbc",
+    });
+    canAccessBbcExamples = !error && data === true;
   } catch {
-    // Treat an unavailable auth check as a visitor and keep BBC examples hidden.
+    // Treat an unavailable membership check as a visitor and hide BBC examples.
   }
-  const usageExamples = isSignedIn
+  const usageExamples = canAccessBbcExamples
     ? fetchedUsageExamples
     : fetchedUsageExamples.filter((example) => example.bookCode !== "BBC");
   const phrases = getVocabularyPhraseMatches(entry.word);

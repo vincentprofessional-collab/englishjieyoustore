@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import { ContentShareButton } from "@/components/content-share-button";
 import {
   VocabularyHoverDefinitionLine,
+  VocabularyHoverPopup,
   VocabularyHoverPronunciation,
 } from "@/components/vocabulary-hover-details";
 import {
@@ -16,6 +17,7 @@ import {
   type StudySelectionActionPosition,
 } from "@/lib/study-selection";
 import { cleanVocabularyDefinition } from "@/lib/vocabulary/display";
+import { loadVocabularyHoverHint } from "@/lib/vocabulary/hover-hint";
 import type { LocalVocabularyHint } from "@/lib/vocabulary/local-vocabulary";
 
 type AnnotationItem = {
@@ -270,6 +272,11 @@ export function StudyAnnotationTools({
   surfaceRef,
 }: StudyAnnotationToolsProps) {
   const [activeWordTooltip, setActiveWordTooltip] = useState<ActiveWordTooltip | null>(null);
+  const activeWordTooltipRef = useRef<ActiveWordTooltip | null>(null);
+
+  useEffect(() => {
+    activeWordTooltipRef.current = activeWordTooltip;
+  }, [activeWordTooltip]);
   const [annotations, setAnnotations] = useState<AnnotationItem[]>([]);
   const [favoriteWordIds, setFavoriteWordIds] = useState<string[]>([]);
   const [isDraggingNotes, setIsDraggingNotes] = useState(false);
@@ -433,29 +440,19 @@ export function StudyAnnotationTools({
       let hint = hintCacheRef.current.get(normalizedWord);
 
       if (hint === undefined) {
-        try {
-          const response = await fetch(`/api/vocabulary-hint?word=${encodeURIComponent(normalizedWord)}`);
-          const payload = (await response.json()) as { hint?: LocalVocabularyHint | null };
-          hint = response.ok ? payload.hint ?? null : null;
-        } catch {
-          hint = null;
-        }
-        hintCacheRef.current.set(normalizedWord, hint);
+        hint = await loadVocabularyHoverHint(normalizedWord);
+        if (hint) hintCacheRef.current.set(normalizedWord, hint);
       }
 
+      if (pendingHoverWordRef.current !== normalizedWord) return;
+      pendingHoverWordRef.current = "";
       if (!hint) {
         setActiveWordTooltip(null);
         return;
       }
 
-      const viewportPadding = 16;
-      const tooltipMaxWidth = Math.min(420, window.innerWidth - viewportPadding * 2);
       const estimatedTooltipHeight = 250;
-      const preferredCenter = rect.left + rect.width / 2;
-      const left = Math.min(
-        window.innerWidth - viewportPadding - tooltipMaxWidth / 2,
-        Math.max(viewportPadding + tooltipMaxWidth / 2, preferredCenter),
-      );
+      const left = rect.left + rect.width / 2;
       const shouldOpenAbove =
         rect.bottom + estimatedTooltipHeight + 12 > window.innerHeight &&
         rect.top > estimatedTooltipHeight + 12;
@@ -489,11 +486,11 @@ export function StudyAnnotationTools({
       const normalizedWord = normalizeWord(wordAtPoint.word);
       clearHideTimer();
 
-      if (activeWordTooltip?.word === normalizedWord || pendingHoverWordRef.current === normalizedWord) {
+      if (activeWordTooltipRef.current?.word === normalizedWord || pendingHoverWordRef.current === normalizedWord) {
         return;
       }
 
-      if (activeWordTooltip && activeWordTooltip.word !== normalizedWord) {
+      if (activeWordTooltipRef.current && activeWordTooltipRef.current.word !== normalizedWord) {
         setActiveWordTooltip(null);
       }
 
@@ -501,9 +498,8 @@ export function StudyAnnotationTools({
       clearHoverTimer();
       hoverWordTimerRef.current = window.setTimeout(() => {
         void showHint(wordAtPoint.word, wordAtPoint.rect);
-        pendingHoverWordRef.current = "";
         hoverWordTimerRef.current = null;
-      }, 250);
+      }, 120);
     }
 
     function handleMouseLeave() {
@@ -517,8 +513,9 @@ export function StudyAnnotationTools({
       surface.removeEventListener("mouseleave", handleMouseLeave);
       clearHoverTimer();
       clearHideTimer();
+      pendingHoverWordRef.current = "";
     };
-  }, [activeWordTooltip, enableVocabularyHover, selectedText, surfaceRef]);
+  }, [enableVocabularyHover, selectedText, surfaceRef]);
 
   function clearSelectionHideTimer() {
     if (selectionHideTimerRef.current != null) {
@@ -804,7 +801,7 @@ export function StudyAnnotationTools({
       ) : null}
 
       {activeWordTooltip ? (
-        <div
+        <VocabularyHoverPopup
           className={`word-tooltip-floating study-word-tooltip ${
             activeWordTooltip.placement === "above" ? "above" : ""
           }`}
@@ -853,7 +850,7 @@ export function StudyAnnotationTools({
             definitionCn={activeWordTooltip.hint.definitionCn}
             partOfSpeech={activeWordTooltip.hint.partOfSpeech}
           />
-        </div>
+        </VocabularyHoverPopup>
       ) : null}
     </>
   );

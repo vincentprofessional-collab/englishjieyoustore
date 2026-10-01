@@ -1036,7 +1036,7 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
     const nextSentenceNo = getNextSentenceNo(
       article.sentences.map((sentence) => sentence.sentenceNo),
       sentenceNo,
-      studyMode === "listening" ? audioSettingsRef.current.playMode : "sequential",
+      audioSettingsRef.current.playMode,
     );
     if (nextSentenceNo == null) {
       return;
@@ -1411,25 +1411,18 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
                         type="button"
                       >
                         <span>词性</span>
-                        <span aria-hidden="true" className="bbc-intensive-syntax-switch" />
+                        <span aria-hidden="true" className="player-menu-option-switch" />
                       </button>
-                      <div aria-label="句子成分范围" className="bbc-intensive-syntax-mode-group" role="radiogroup">
-                        {([
-                        { label: "成分", value: "all" },
-                        ] as const).map((option) => (
-                          <button
-                            aria-checked={syntaxDisplayMode === option.value}
-                            className={syntaxDisplayMode === option.value ? "active" : ""}
-                            key={option.value}
-                            onClick={() => setSyntaxDisplayMode(option.value)}
-                            role="radio"
-                            type="button"
-                          >
-                            <span>{option.label}</span>
-                            <span aria-hidden="true" className="bbc-intensive-syntax-switch" />
-                          </button>
-                        ))}
-                      </div>
+                      <button
+                        aria-checked={syntaxDisplayMode !== "none"}
+                        className={syntaxDisplayMode !== "none" ? "active" : ""}
+                        onClick={() => setSyntaxDisplayMode((mode) => mode === "none" ? "all" : "none")}
+                        role="switch"
+                        type="button"
+                      >
+                        <span>成分</span>
+                        <span aria-hidden="true" className="player-menu-option-switch" />
+                      </button>
                     </div>
                   ) : null}
                 </div>
@@ -1591,6 +1584,7 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
                                 articlePronunciations,
                               )}
                               showPartOfSpeech={syntaxPosVisible}
+                              showComponents={syntaxDisplayMode !== "none"}
                               text={sentence.english}
                               unitId={inlineUnit.id}
                             />
@@ -1640,7 +1634,7 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
                       <div aria-live="polite" className="bbc-speaking-training-status practicing">
                         <span>{SPEAKING_PHASE_LABELS[speakingTraining.mode]}</span>
                         <strong>{speakingTraining.remainingSeconds} 秒</strong>
-                        <small>之后播放下一句</small>
+                        <small>{audioSettings.playMode === "sentence-loop" ? "之后重播本句" : "之后播放下一句"}</small>
                       </div>
                     ) : studyMode === "speaking" && activeSentenceNo === sentence.sentenceNo && isSentenceAudioPlaying && audioSettings.speakingMode !== "none" ? (
                       <div className="bbc-speaking-training-status playing">

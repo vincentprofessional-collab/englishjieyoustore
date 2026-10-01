@@ -1419,12 +1419,8 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
         void playWordAudio(currentWord, voice, 1);
         await new Promise<void>((resolve) => window.setTimeout(resolve, reactionDelay));
         if (roundTokenRef.current !== token) return;
-        stopLearningAudio();
         setRevealed(true);
-        setPhase("playing");
-        void playWordAudio(currentWord, voice, 1).finally(() => {
-          if (roundTokenRef.current === token) setPhase("awaiting");
-        });
+        setPhase("awaiting");
         return;
       }
 

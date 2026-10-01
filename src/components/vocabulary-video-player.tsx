@@ -10,6 +10,13 @@ type VocabularyVideoItem = {
   src: string;
 };
 
+function rankVocabularyVideos(items: VocabularyVideoItem[], demotedPaths: ReadonlySet<string>) {
+  return [...items].sort((left, right) =>
+    Number(demotedPaths.has(left.path)) - Number(demotedPaths.has(right.path)) ||
+    right.likes - left.likes,
+  );
+}
+
 function formatVideoTime(value: number) {
   if (!Number.isFinite(value) || value < 0) return "00:00";
   const totalSeconds = Math.floor(value);
@@ -45,16 +52,38 @@ export function VocabularyVideoPlayer({
   const videoRef = useRef<HTMLVideoElement>(null);
   const playerRef = useRef<HTMLElement | null>(null);
   const activePathRef = useRef(initialVideos[0]?.path ?? null);
+  const demotedPathsRef = useRef(new Set<string>());
   const currentVideo = videos[activeIndex] ?? null;
 
+  function setRankedVideos(items: VocabularyVideoItem[]) {
+    const ranked = rankVocabularyVideos(items, demotedPathsRef.current);
+    const preservedIndex = ranked.findIndex((video) => video.path === activePathRef.current);
+    setVideos(ranked);
+    if (preservedIndex >= 0) setActiveIndex(preservedIndex);
+  }
+
+  function activateVideo(path: string, orderedVideos: VocabularyVideoItem[], autoplay: boolean) {
+    const nextIndex = orderedVideos.findIndex((video) => video.path === path);
+    if (nextIndex < 0) return;
+    activePathRef.current = path;
+    setVideos(orderedVideos);
+    setActiveIndex(nextIndex);
+    setIsPlaying(false);
+    setCurrentTime(0);
+    setDuration(0);
+    setNotice("");
+    setAutoplayOnChange(autoplay);
+  }
+
   useEffect(() => {
-    const preservedIndex = initialVideos.findIndex((video) => video.path === activePathRef.current);
+    const rankedVideos = rankVocabularyVideos(initialVideos, demotedPathsRef.current);
+    const preservedIndex = rankedVideos.findIndex((video) => video.path === activePathRef.current);
     const nextIndex = preservedIndex >= 0 ? preservedIndex : 0;
     const activeVideoWasRemoved = preservedIndex < 0;
 
-    setVideos(initialVideos);
+    setVideos(rankedVideos);
     setActiveIndex(nextIndex);
-    activePathRef.current = initialVideos[nextIndex]?.path ?? null;
+    activePathRef.current = rankedVideos[nextIndex]?.path ?? null;
     if (activeVideoWasRemoved) {
       setIsPlaying(false);
       setCurrentTime(0);
@@ -75,13 +104,8 @@ export function VocabularyVideoPlayer({
   function selectVideo(index: number, autoplay = false) {
     if (videos.length === 0) return;
     const nextIndex = (index + videos.length) % videos.length;
-    activePathRef.current = videos[nextIndex]?.path ?? null;
-    setActiveIndex(nextIndex);
-    setIsPlaying(false);
-    setCurrentTime(0);
-    setDuration(0);
-    setNotice("");
-    setAutoplayOnChange(autoplay);
+    const nextVideo = videos[nextIndex];
+    if (nextVideo) activateVideo(nextVideo.path, videos, autoplay);
   }
 
   async function togglePlayback() {
@@ -106,7 +130,7 @@ export function VocabularyVideoPlayer({
     setNotice("");
 
     if (previewMode) {
-      setVideos((current) => current.map((video) => video.path === currentVideo.path
+      setRankedVideos(videos.map((video) => video.path === currentVideo.path
         ? { ...video, likedByMe: true, likes: video.likes + 1 }
         : video));
       return;
@@ -123,13 +147,27 @@ export function VocabularyVideoPlayer({
         setNotice(result.error ?? "点赞未成功，请登录后重试。");
         return;
       }
-      setVideos((current) => current.map((video) => video.path === currentVideo.path
+      setRankedVideos(videos.map((video) => video.path === currentVideo.path
         ? { ...video, likedByMe: Boolean(result.liked), likes: Number(result.likes ?? video.likes + 1) }
         : video));
       router.refresh();
     } catch {
       setNotice("点赞未成功，请检查网络后重试。");
     }
+  }
+
+  function dislikeAndPlayNext() {
+    if (!currentVideo) return;
+    if (videos.length < 2) {
+      setNotice("这个词条只有一个视频，暂时无法切换到下一个。");
+      return;
+    }
+
+    demotedPathsRef.current.add(currentVideo.path);
+    const reorderedVideos = rankVocabularyVideos(videos, demotedPathsRef.current);
+    const currentIndex = reorderedVideos.findIndex((video) => video.path === currentVideo.path);
+    const nextVideo = reorderedVideos[(currentIndex + 1) % reorderedVideos.length];
+    if (nextVideo) activateVideo(nextVideo.path, reorderedVideos, true);
   }
 
   async function toggleFullscreen() {
@@ -167,7 +205,9 @@ export function VocabularyVideoPlayer({
     <section aria-label="单词视频" className="vocabulary-video-panel" ref={(element) => { playerRef.current = element; }}>
       <header className="vocabulary-video-panel-head">
         <h2>看语境，记单词，学用法</h2>
-        <span className="vocabulary-video-count">共 {totalVideos} 个视频</span>
+        <span className="vocabulary-video-count" aria-label={`第 ${activeIndex + 1} 个，共 ${totalVideos} 个视频`}>
+          {activeIndex + 1}/{totalVideos}
+        </span>
       </header>
 
       {currentVideo ? (
@@ -286,18 +326,29 @@ export function VocabularyVideoPlayer({
             >
               <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6" /></svg>
             </button>
-            <button
-              aria-label={`点赞当前视频，${currentVideo.likes} 个赞`}
-              aria-pressed={currentVideo.likedByMe}
-              className={`vocabulary-video-action-button vocabulary-video-like-button ${currentVideo.likedByMe ? "is-liked" : ""}`}
-              disabled={(!votesEnabled && !previewMode) || currentVideo.likedByMe}
-              onClick={toggleLike}
-              title={!votesEnabled && !previewMode ? "点赞功能将在数据表启用后开放" : undefined}
-              type="button"
-            >
-              <span aria-hidden="true">{currentVideo.likedByMe ? "♥" : "♡"}</span>
-              <span>{currentVideo.likes}</span>
-            </button>
+            <div aria-label="视频评价" className="vocabulary-video-vote-actions">
+              <button
+                aria-label={`赞当前视频，${currentVideo.likes} 个赞`}
+                aria-pressed={currentVideo.likedByMe}
+                className={`vocabulary-video-action-button vocabulary-video-like-button ${currentVideo.likedByMe ? "is-liked" : ""}`}
+                disabled={(!votesEnabled && !previewMode) || currentVideo.likedByMe}
+                onClick={toggleLike}
+                title={!votesEnabled && !previewMode ? "点赞功能将在数据表启用后开放" : undefined}
+                type="button"
+              >
+                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 10v11H3V10h4Zm0 10h9.2a2 2 0 0 0 1.9-1.4l2-6A2 2 0 0 0 18.2 10H14l.7-3.1A2.4 2.4 0 0 0 12.4 4L7 10v10Z" /></svg>
+                <span>{currentVideo.likes}</span>
+              </button>
+              <button
+                aria-label="不喜欢当前视频并播放下一个"
+                className="vocabulary-video-action-button vocabulary-video-dislike-button"
+                onClick={dislikeAndPlayNext}
+                title="不喜欢，移到后面并播放下一个"
+                type="button"
+              >
+                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M17 14V3h4v11h-4Zm0-10H7.8a2 2 0 0 0-1.9 1.4l-2 6A2 2 0 0 0 5.8 14H10l-.7 3.1a2.4 2.4 0 0 0 2.3 2.9l5.4-6V4Z" /></svg>
+              </button>
+            </div>
           </div>
         </>
       ) : (

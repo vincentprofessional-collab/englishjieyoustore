@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { ContentShareButton } from "@/components/content-share-button";
 import {
   VocabularyHoverDefinitionLine,
+  VocabularyHoverPopup,
   VocabularyHoverPronunciation,
 } from "@/components/vocabulary-hover-details";
 import {
@@ -13,6 +14,7 @@ import {
   STUDY_SELECTION_ACTION_TIMEOUT_MS,
 } from "@/lib/study-selection";
 import { cleanPartOfSpeech, cleanVocabularyDefinition } from "@/lib/vocabulary/display";
+import { loadVocabularyHoverHint } from "@/lib/vocabulary/hover-hint";
 
 type VocabularyHint = {
   definitionCn: string;
@@ -176,6 +178,7 @@ export function GlobalStudyInteractions() {
   const [selectionMode, setSelectionMode] = useState<"actions" | "note">("actions");
   const [selectionPopover, setSelectionPopover] = useState<SelectionPopover | null>(null);
   const [wordTooltip, setWordTooltip] = useState<WordTooltip | null>(null);
+  const wordTooltipRef = useRef<WordTooltip | null>(null);
   const hideSelectionTimerRef = useRef<number | null>(null);
   const hideWordTimerRef = useRef<number | null>(null);
   const hintCacheRef = useRef(new Map<string, VocabularyHint>());
@@ -189,6 +192,10 @@ export function GlobalStudyInteractions() {
   useEffect(() => {
     setFavoriteWordIds(readFavoriteWords().map((item) => item.id));
   }, []);
+
+  useEffect(() => {
+    wordTooltipRef.current = wordTooltip;
+  }, [wordTooltip]);
 
   useEffect(() => {
     function clearHoverTimer() {
@@ -229,17 +236,10 @@ export function GlobalStudyInteractions() {
       const cachedHint = hintCacheRef.current.get(normalizedWord);
       if (cachedHint) return cachedHint;
 
-      let hint: VocabularyHint | null = null;
-      try {
-        const response = await fetch(`/api/vocabulary-hint?word=${encodeURIComponent(normalizedWord)}`);
-        const payload = (await response.json()) as { hint?: VocabularyHint | null };
-        hint = response.ok ? payload.hint ?? null : null;
-      } catch {
-        hint = null;
-      }
+      const hint = await loadVocabularyHoverHint(normalizedWord);
 
       const resolvedHint = hint ?? { definitionCn: "词库暂无释义，可结合上下文理解。", partOfSpeech: "" };
-      hintCacheRef.current.set(normalizedWord, resolvedHint);
+      if (hint) hintCacheRef.current.set(normalizedWord, hint);
       return resolvedHint;
     }
 
@@ -248,13 +248,9 @@ export function GlobalStudyInteractions() {
       if (!normalizedWord) return;
 
       const hint = await loadHint(normalizedWord);
-      const viewportPadding = 16;
-      const tooltipMaxWidth = Math.min(420, window.innerWidth - viewportPadding * 2);
-      const preferredCenter = rect.left + rect.width / 2;
-      const left = Math.min(
-        window.innerWidth - viewportPadding - tooltipMaxWidth / 2,
-        Math.max(viewportPadding + tooltipMaxWidth / 2, preferredCenter),
-      );
+      if (pendingWordRef.current !== normalizedWord) return;
+      pendingWordRef.current = "";
+      const left = rect.left + rect.width / 2;
       const shouldOpenAbove = rect.bottom + 170 > window.innerHeight && rect.top > 170;
 
       setWordTooltip({
@@ -281,12 +277,12 @@ export function GlobalStudyInteractions() {
       }
 
       const normalizedWord = normalizeWord(wordAtPoint.word);
-      if (!normalizedWord || pendingWordRef.current === normalizedWord || wordTooltip?.word === normalizedWord) {
+      if (!normalizedWord || pendingWordRef.current === normalizedWord || wordTooltipRef.current?.word === normalizedWord) {
         clearHideWordTimer();
         return;
       }
 
-      if (wordTooltip && wordTooltip.word !== normalizedWord) {
+      if (wordTooltipRef.current && wordTooltipRef.current.word !== normalizedWord) {
         setWordTooltip(null);
       }
 
@@ -295,9 +291,8 @@ export function GlobalStudyInteractions() {
       pendingWordRef.current = normalizedWord;
       hoverWordTimerRef.current = window.setTimeout(() => {
         void showHint(wordAtPoint.word, wordAtPoint.rect);
-        pendingWordRef.current = "";
         hoverWordTimerRef.current = null;
-      }, 250);
+      }, 120);
     }
 
     function handlePointerDown(event: PointerEvent) {
@@ -307,7 +302,7 @@ export function GlobalStudyInteractions() {
 
       const wordAtPoint = getEnglishWordAtPoint(event.clientX, event.clientY);
       if (!wordAtPoint) {
-        if (wordTooltip) scheduleHideWord();
+        if (wordTooltipRef.current) scheduleHideWord();
         return;
       }
 
@@ -318,6 +313,7 @@ export function GlobalStudyInteractions() {
       longPressPointRef.current = { x: event.clientX, y: event.clientY };
       longPressTimerRef.current = window.setTimeout(() => {
         longPressTriggeredRef.current = true;
+        pendingWordRef.current = normalizeWord(wordAtPoint.word);
         void showHint(wordAtPoint.word, wordAtPoint.rect);
         longPressTimerRef.current = null;
       }, 650);
@@ -358,8 +354,9 @@ export function GlobalStudyInteractions() {
       clearHoverTimer();
       clearHideWordTimer();
       clearLongPressTimer();
+      pendingWordRef.current = "";
     };
-  }, [selectionPopover, wordTooltip]);
+  }, [selectionPopover]);
 
   useEffect(() => {
     function handlePointerUp(event: PointerEvent) {
@@ -498,7 +495,7 @@ export function GlobalStudyInteractions() {
       <span aria-hidden="true" className="global-study-interactions-root" hidden />
 
       {wordTooltip ? (
-        <div
+        <VocabularyHoverPopup
           className={`word-tooltip-floating global-word-tooltip ${wordTooltip.placement === "above" ? "above" : ""}`}
           style={{ left: wordTooltip.left, top: wordTooltip.top }}
           onMouseEnter={() => {
@@ -543,7 +540,7 @@ export function GlobalStudyInteractions() {
             definitionGroups={wordTooltip.hint.definitionGroups}
             partOfSpeech={wordTooltip.hint.partOfSpeech}
           />
-        </div>
+        </VocabularyHoverPopup>
       ) : null}
 
       {selectionPopover ? (

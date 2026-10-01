@@ -12,7 +12,7 @@ export type BbcSyntaxSentenceData = {
   level2: BbcSyntaxSpan[];
   status: "reviewed" | "draft";
 };
-export type BbcSyntaxDisplayMode = "all" | "main";
+export type BbcSyntaxDisplayMode = "all" | "main" | "none";
 export type BbcSyntaxTokenRange = { start: number; end: number };
 
 const POS_LABELS: Record<string, string> = {
@@ -49,6 +49,7 @@ function makeTracks(spans: BbcSyntaxSpan[]) {
 }
 
 function syntaxTracks(data: BbcSyntaxSentenceData, displayMode: BbcSyntaxDisplayMode) {
+  if (displayMode === "none") return [];
   const nestedSpans = displayMode === "main"
     ? data.level2.filter((candidate) => !data.level1.some((span) =>
         span.label.includes("从句") && candidate.start >= span.start && candidate.end <= span.end))
@@ -260,7 +261,7 @@ export function BbcSyntaxSentence({
             </span>
           </span>
         ) : null}
-        {hasSentenceInlineAnnotations ? (
+        {hasSentenceInlineAnnotations && displayMode !== "none" ? (
           <span
             aria-hidden="true"
             className={`${styles.annotationLine} ${inlineAnnotation ? `${role(inlineAnnotation.label)} ${INLINE_STYLE_CLASSES[inlineAnnotation.style]}` : styles.annotationLinePlaceholder} ${onInlineAnnotationClick && inlineAnnotation ? styles.editableMark : ""}`}
@@ -270,7 +271,7 @@ export function BbcSyntaxSentence({
               : undefined}
           />
         ) : null}
-        {hasSentenceInlineAnnotations ? (
+        {hasSentenceInlineAnnotations && displayMode !== "none" ? (
           <span
             className={`${styles.annotationDetails} ${inlineAnnotation ? role(inlineAnnotation.label) : ""} ${onInlineAnnotationClick && inlineAnnotation ? styles.editableMark : ""} ${!hasInlineLabel ? styles.annotationDetailsPlaceholder : ""}`}
             onClick={() => inlineAnnotation && onInlineAnnotationClick?.(inlineAnnotation)}

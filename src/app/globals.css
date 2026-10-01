@@ -9727,9 +9727,10 @@ h1 {
   color: #1d2527;
   display: grid;
   gap: 9px;
+  grid-template-columns: minmax(0, 1fr);
   box-sizing: border-box;
   max-height: none;
-  max-width: min(420px, calc(100vw - 32px));
+  max-width: calc(100vw - 32px);
   min-width: min(260px, calc(100vw - 32px));
   overflow: visible;
   padding: 16px;
@@ -9753,6 +9754,7 @@ h1 {
   color: inherit;
   min-width: 0;
   overflow: hidden;
+  overflow-wrap: anywhere;
   text-decoration: none;
   text-overflow: ellipsis;
 }
@@ -13898,26 +13900,7 @@ body.share-sheet-open {
   width: 100%;
 }
 
-.player-menu-option-radio {
-  align-items: center;
-  border: 1.5px solid rgba(255, 255, 255, 0.88);
-  border-radius: 50%;
-  display: inline-flex;
-  flex: 0 0 12px;
-  height: 12px;
-  justify-content: center;
-  width: 12px;
-}
-
-.player-menu-panel button[aria-pressed="true"] .player-menu-option-radio::after {
-  background: var(--gold-soft);
-  border-radius: 50%;
-  content: "";
-  height: 6px;
-  width: 6px;
-}
-
-.bbc-intensive-syntax-switch {
+.player-menu-option-switch {
   align-items: center;
   border: 1.5px solid rgba(255, 255, 255, 0.88);
   border-radius: 999px;
@@ -13929,7 +13912,7 @@ body.share-sheet-open {
   width: 34px;
 }
 
-.bbc-intensive-syntax-switch::after {
+.player-menu-option-switch::after {
   background: #fff;
   border-radius: 50%;
   content: "";
@@ -13941,16 +13924,13 @@ body.share-sheet-open {
   width: 12px;
 }
 
-.bbc-intensive-syntax-mode-group {
-  display: grid;
-  gap: 6px;
-}
-
-.player-menu-panel button[aria-checked="true"] .bbc-intensive-syntax-switch {
+.player-menu-panel button[aria-pressed="true"] .player-menu-option-switch,
+.player-menu-panel button[aria-checked="true"] .player-menu-option-switch {
   background: var(--gold-soft);
 }
 
-.player-menu-panel button[aria-checked="true"] .bbc-intensive-syntax-switch::after {
+.player-menu-panel button[aria-pressed="true"] .player-menu-option-switch::after,
+.player-menu-panel button[aria-checked="true"] .player-menu-option-switch::after {
   background: #0d6b52;
   left: 18px;
 }
@@ -17912,6 +17892,27 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
   padding-inline: 9px;
 }
 
+.vocabulary-video-vote-actions {
+  align-items: center;
+  display: flex;
+  flex: 0 0 auto;
+  gap: 5px;
+}
+
+.vocabulary-video-vote-actions svg {
+  fill: none;
+  height: 18px;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+  width: 18px;
+}
+
+.vocabulary-video-like-button.is-liked svg {
+  fill: currentColor;
+}
+
 .vocabulary-video-like-button:disabled {
   cursor: default;
   opacity: 0.72;
@@ -19421,19 +19422,29 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
   margin: 0;
 }
 
-/* Keep both accents together in the shared vocabulary popup across the site. */
+/* Size to both accents when space permits; wrap complete content on narrow screens. */
 .word-tooltip-floating .word-tooltip-pronunciation .inline-pronunciation {
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   gap: clamp(4px, 1.2vw, 7px);
   max-width: 100%;
-  white-space: nowrap;
+  width: max-content;
 }
 
 .word-tooltip-floating .word-tooltip-pronunciation .inline-pronunciation-side {
-  flex: 1 1 0;
+  flex: 0 1 auto;
   gap: clamp(3px, 0.8vw, 6px);
   min-width: 0;
   padding-inline: clamp(6px, 2vw, 11px);
+}
+
+.word-tooltip-pronunciation .inline-pronunciation-side > span {
+  overflow: visible;
+  white-space: normal;
+}
+
+.word-tooltip-pronunciation .inline-pronunciation-side b,
+.word-tooltip-pronunciation .pronunciation-wave {
+  flex-shrink: 0;
 }
 
 .bbc-admin-article-picker {
@@ -19837,6 +19848,10 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
     padding: 5px;
   }
 
+  .vocabulary-video-controls {
+    flex-wrap: wrap;
+  }
+
   .vocabulary-video-control-button {
     height: 34px;
     width: 34px;
@@ -19845,6 +19860,10 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
   .vocabulary-video-time {
     font-size: 11px;
     min-width: 35px;
+  }
+
+  .vocabulary-video-seek {
+    flex: 1 1 70px;
   }
 
   .vocabulary-video-empty {
@@ -28661,10 +28680,10 @@ body *:not(.bbc-vocabulary-highlight):not(.bbc-active-word) {
   background: linear-gradient(115deg, #e6f0ff 0%, #d5e6ff 100%) !important;
 }
 
-/* Reading controls sit on the article cream; each control carries the blue accent. */
+/* Shared reading menu bars use the same light-blue surface across article pages. */
 .bbc-audio-toolbar {
-  background: rgba(255, 250, 240, 0.96) !important;
-  border: 1px solid rgba(228, 216, 189, 0.95);
+  background: linear-gradient(115deg, #f2f7ff 0%, #e1edff 100%) !important;
+  border: 1px solid #bed8f3;
   border-radius: 18px;
   padding: 12px;
 }

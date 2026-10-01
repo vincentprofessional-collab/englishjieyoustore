@@ -19,6 +19,7 @@ export function ArticleInlineAnnotatedText({
   matchSyntaxRoleColors = false,
   renderText,
   showPartOfSpeech = true,
+  showComponents = true,
   text,
   unitId,
 }: {
@@ -26,6 +27,7 @@ export function ArticleInlineAnnotatedText({
   matchSyntaxRoleColors?: boolean;
   renderText?: (text: string, characterOffset: number) => ReactNode;
   showPartOfSpeech?: boolean;
+  showComponents?: boolean;
   text: string;
   unitId: string;
 }) {
@@ -33,7 +35,7 @@ export function ArticleInlineAnnotatedText({
     .filter((item) => item.unitId === unitId && item.start >= 0 && item.end <= text.length && text.slice(item.start, item.end) === item.selectedText)
     .sort((left, right) => left.start - right.start);
 
-  if (!matches.length) return renderText ? renderText(text, 0) : text;
+  if (!matches.length || (!showComponents && !showPartOfSpeech)) return renderText ? renderText(text, 0) : text;
 
   const parts: ReactNode[] = [];
   let cursor = 0;
@@ -52,7 +54,7 @@ export function ArticleInlineAnnotatedText({
     const selectedText = text.slice(item.start, item.end);
     parts.push(
       <span
-        className={`article-inline-mark article-inline-mark--${item.style}`}
+        className={`article-inline-mark${showComponents ? ` article-inline-mark--${item.style}` : ""}`}
         key={item.id || `${unitId}-${index}`}
         style={matchSyntaxRoleColors
           ? { "--article-inline-role-color": annotationRoleColor(item.label) } as CSSProperties
@@ -62,7 +64,7 @@ export function ArticleInlineAnnotatedText({
         <span className="article-inline-mark-text">
           {renderText ? renderText(selectedText, item.start) : selectedText}
         </span>
-        <span aria-label={`注释：${item.label}`} className="article-inline-mark-label">{item.label}</span>
+        {showComponents ? <span aria-label={`注释：${item.label}`} className="article-inline-mark-label">{item.label}</span> : null}
       </span>,
     );
     cursor = item.end;

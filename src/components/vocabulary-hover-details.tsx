@@ -1,7 +1,34 @@
 "use client";
 
+import { useLayoutEffect, useRef, type ComponentProps } from "react";
 import { VocabularyInlinePronunciation } from "@/components/vocabulary-pronunciation";
 import { cleanPartOfSpeech, cleanVocabularyDefinition } from "@/lib/vocabulary/display";
+
+export function VocabularyHoverPopup({ style, ...props }: ComponentProps<"div">) {
+  const popupRef = useRef<HTMLDivElement>(null);
+  const preferredCenter = style?.left;
+
+  useLayoutEffect(() => {
+    const popup = popupRef.current;
+    if (!popup || typeof preferredCenter !== "number") return;
+
+    const positionPopup = () => {
+      const halfWidth = popup.getBoundingClientRect().width / 2;
+      popup.style.left = `${Math.max(16 + halfWidth, Math.min(window.innerWidth - 16 - halfWidth, preferredCenter))}px`;
+    };
+
+    positionPopup();
+    const observer = new ResizeObserver(positionPopup);
+    observer.observe(popup);
+    window.addEventListener("resize", positionPopup);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", positionPopup);
+    };
+  }, [preferredCenter]);
+
+  return <div {...props} ref={popupRef} style={style} />;
+}
 
 type VocabularyHoverHint = {
   definitionCn: string;
