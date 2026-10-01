@@ -42,6 +42,7 @@ export function VocabularyVideoPlayer({
   videos: VocabularyVideoItem[];
 }) {
   const [videos, setVideos] = useState(initialVideos);
+  const [dislikesByPath, setDislikesByPath] = useState<Record<string, number>>({});
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -158,8 +159,10 @@ export function VocabularyVideoPlayer({
 
   function dislikeAndPlayNext() {
     if (!currentVideo) return;
+    const dislikeCount = (dislikesByPath[currentVideo.path] ?? 0) + 1;
+    setDislikesByPath((counts) => ({ ...counts, [currentVideo.path]: (counts[currentVideo.path] ?? 0) + 1 }));
     if (videos.length < 2) {
-      setNotice("这个词条只有一个视频，暂时无法切换到下一个。");
+      setNotice(`已踩该视频（踩数：${dislikeCount}），但这个词条只有一个视频，暂时无法切换。`);
       return;
     }
 
@@ -168,6 +171,7 @@ export function VocabularyVideoPlayer({
     const currentIndex = reorderedVideos.findIndex((video) => video.path === currentVideo.path);
     const nextVideo = reorderedVideos[(currentIndex + 1) % reorderedVideos.length];
     if (nextVideo) activateVideo(nextVideo.path, reorderedVideos, true);
+    setNotice(`已踩该视频（踩数：${dislikeCount}），已将它移到后面并播放下一条。`);
   }
 
   async function toggleFullscreen() {
@@ -340,13 +344,14 @@ export function VocabularyVideoPlayer({
                 <span>{currentVideo.likes}</span>
               </button>
               <button
-                aria-label="不喜欢当前视频并播放下一个"
+                aria-label={`踩当前视频，${dislikesByPath[currentVideo.path] ?? 0} 次，并播放下一个`}
                 className="vocabulary-video-action-button vocabulary-video-dislike-button"
                 onClick={dislikeAndPlayNext}
                 title="不喜欢，移到后面并播放下一个"
                 type="button"
               >
                 <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M17 14V3h4v11h-4Zm0-10H7.8a2 2 0 0 0-1.9 1.4l-2 6A2 2 0 0 0 5.8 14H10l-.7 3.1a2.4 2.4 0 0 0 2.3 2.9l5.4-6V4Z" /></svg>
+                <span>{dislikesByPath[currentVideo.path] ?? 0}</span>
               </button>
             </div>
           </div>
