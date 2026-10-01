@@ -17633,7 +17633,9 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
   gap: 9px;
   min-height: 58px;
   min-width: 0;
+  margin-inline: auto;
   padding: 8px 10px;
+  width: min(100%, 960px);
 }
 
 .vocabulary-video-control-button {
@@ -17927,6 +17929,16 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
 .vocabulary-video-action-button {
   justify-content: center;
   min-width: 38px;
+}
+
+.vocabulary-video-like-button,
+.vocabulary-video-dislike-button {
+  box-sizing: border-box;
+  flex: 0 0 56px;
+  gap: 5px;
+  min-width: 56px;
+  padding-inline: 0;
+  width: 56px;
 }
 
 .vocabulary-video-action-button:focus-visible,
