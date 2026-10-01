@@ -1,17 +1,31 @@
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import {
   splitArticleSentences,
   type ArticleInlineAnnotation,
 } from "@/lib/article-inline-annotations";
 
+function annotationRoleColor(label: string) {
+  if (label.includes("主语")) return "var(--bbc-syntax-role-subject, #1e5b3e)";
+  if (label.includes("谓语")) return "var(--bbc-syntax-role-predicate, #a32c1e)";
+  if (label.includes("宾语")) return "var(--bbc-syntax-role-object, #1f5c8b)";
+  if (label.includes("表语")) return "var(--bbc-syntax-role-predicative, #6b3fa0)";
+  if (label.includes("状语")) return "var(--bbc-syntax-role-adverbial, #0f6e7a)";
+  if (label.includes("定语")) return "var(--bbc-syntax-role-attributive, #8a6a2f)";
+  return "var(--bbc-syntax-role-other, #6e6a63)";
+}
+
 export function ArticleInlineAnnotatedText({
   annotations,
+  matchSyntaxRoleColors = false,
   renderText,
+  showPartOfSpeech = true,
   text,
   unitId,
 }: {
   annotations: ArticleInlineAnnotation[];
+  matchSyntaxRoleColors?: boolean;
   renderText?: (text: string, characterOffset: number) => ReactNode;
+  showPartOfSpeech?: boolean;
   text: string;
   unitId: string;
 }) {
@@ -37,8 +51,14 @@ export function ArticleInlineAnnotatedText({
 
     const selectedText = text.slice(item.start, item.end);
     parts.push(
-      <span className={`article-inline-mark article-inline-mark--${item.style}`} key={item.id || `${unitId}-${index}`}>
-        {item.partOfSpeech ? <span className="article-inline-mark-pos">{item.partOfSpeech}</span> : null}
+      <span
+        className={`article-inline-mark article-inline-mark--${item.style}`}
+        key={item.id || `${unitId}-${index}`}
+        style={matchSyntaxRoleColors
+          ? { "--article-inline-role-color": annotationRoleColor(item.label) } as CSSProperties
+          : undefined}
+      >
+        {showPartOfSpeech && item.partOfSpeech ? <span className="article-inline-mark-pos">{item.partOfSpeech}</span> : null}
         <span className="article-inline-mark-text">
           {renderText ? renderText(selectedText, item.start) : selectedText}
         </span>

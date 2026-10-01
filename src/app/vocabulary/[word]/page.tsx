@@ -17,6 +17,7 @@ import { getVocabularyUsageExamples, type VocabularyUsageExample } from "@/lib/v
 import { getVocabularyPhraseMatches, type VocabularyPhraseMatch } from "@/lib/vocabulary/phrases";
 import { getBbcVocabularyDetail } from "@/lib/articles/bbc-vocabulary";
 import { getVocabularyVideos } from "@/lib/vocabulary/videos";
+import { createServerSupabaseClient } from "@/lib/supabase/server";
 
 export const dynamic = "force-dynamic";
 
@@ -324,20 +325,31 @@ export default async function VocabularyWordPage({
     notFound();
   }
 
-  const usageExamples = bbcVocabularyDetail?.examples.length
+  const fetchedUsageExamples = bbcVocabularyDetail?.examples.length
     ? bbcVocabularyDetail.examples.slice(0, 5)
     : await getVocabularyUsageExamples(
         entry.word,
         5,
         entry.inflections.map((inflection) => inflection.value),
       );
+  let isSignedIn = false;
+  try {
+    const supabase = await createServerSupabaseClient();
+    const { data } = await supabase.auth.getUser();
+    isSignedIn = Boolean(data.user);
+  } catch {
+    // Treat an unavailable auth check as a visitor and keep BBC examples hidden.
+  }
+  const usageExamples = isSignedIn
+    ? fetchedUsageExamples
+    : fetchedUsageExamples.filter((example) => example.bookCode !== "BBC");
   const phrases = getVocabularyPhraseMatches(entry.word);
   const formationParts = getVocabularyFormationParts(entry).map((part) => ({
     ...part,
     href: part.href ? `${part.href}${part.href.includes("?") ? "&" : "?"}from=lookup` : part.href,
   }));
   const hasEtymologyContent = Boolean(entry.etymologyStory || formationParts.length);
-  const { videos, votesEnabled } = await getVocabularyVideos(entry);
+  const { totalVideos, videos, votesEnabled } = await getVocabularyVideos(entry);
 
   return (
     <section className="stack vocabulary-word-page">
@@ -345,7 +357,7 @@ export default async function VocabularyWordPage({
       <VocabularyDetailShell
         backHref={backHref}
         entry={entry}
-        sidePanel={videos.length > 0 ? <VocabularyVideoPlayer entryWord={entry.normalizedWord} videos={videos} votesEnabled={votesEnabled} /> : null}
+        sidePanel={videos.length > 0 ? <VocabularyVideoPlayer entryWord={entry.normalizedWord} totalVideos={totalVideos} videos={videos} votesEnabled={votesEnabled} /> : null}
       >
         <VocabularyDetailContent
           entry={entry}

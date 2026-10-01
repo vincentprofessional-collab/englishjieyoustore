@@ -6,6 +6,7 @@ import excelLeftmostRootAffix from "@/data/vocabulary/excel-leftmost-root-affix.
 import excelRootAffixCatalog from "@/data/vocabulary/excel-root-affix-catalog.json";
 import { sortVocabularyFamilyItems } from "@/lib/vocabulary/autocomplete-ranking";
 import { shouldShowAudioPronunciation } from "@/lib/audio-pronunciation";
+import { getAdjectiveBaseFormCandidates } from "./adjective-base-forms";
 
 export type LocalVocabularyHint = {
   definitionCn: string;
@@ -1439,6 +1440,9 @@ function getVocabularyLookupCandidates(value: string) {
 
   addCandidate(normalizedWord);
 
+  for (const candidate of getAdjectiveBaseFormCandidates(normalizedWord)) {
+    addCandidate(candidate);
+  }
   if (normalizedWord.endsWith("ies") && normalizedWord.length > 4) {
     addCandidate(`${normalizedWord.slice(0, -3)}y`);
   }
@@ -1447,8 +1451,18 @@ function getVocabularyLookupCandidates(value: string) {
     addCandidate(`${normalizedWord.slice(0, -3)}fe`);
   }
   if (normalizedWord.endsWith("es") && normalizedWord.length > 3) {
-    addCandidate(normalizedWord.slice(0, -2));
-    addCandidate(normalizedWord.slice(0, -1));
+    const esStem = normalizedWord.slice(0, -2);
+    if (/(?:x|z|ch|sh|o)$/i.test(esStem)) {
+      addCandidate(esStem);
+      addCandidate(normalizedWord.slice(0, -1));
+    } else {
+      // Prefer regular -s forms (hopes → hope); only allow a final -s stem
+      // as the alternate -es form (buses → bus).
+      addCandidate(normalizedWord.slice(0, -1));
+      if (/s$/i.test(esStem)) {
+        addCandidate(esStem);
+      }
+    }
   }
   if (normalizedWord.endsWith("s") && !normalizedWord.endsWith("ss")) {
     addCandidate(normalizedWord.slice(0, -1));
@@ -1862,20 +1876,16 @@ export async function getExtendedVocabularyEntry(word: string) {
   const candidates = getVocabularyLookupCandidates(normalizedWord);
   const localEntry = getVocabularyEntry(normalizedWord);
   const databaseEntry = await getDatabaseVocabularyEntry(candidates);
+  const primaryEntry = localEntry && databaseEntry
+    ? mergeVocabularyEntries(localEntry, databaseEntry)
+    : localEntry ?? databaseEntry;
 
-  if (localEntry && databaseEntry) {
-    return mergeVocabularyEntries(localEntry, databaseEntry);
+  if (primaryEntry?.englishDefinitions.length && (primaryEntry.ukAudioUrl || primaryEntry.usAudioUrl)) {
+    return primaryEntry;
   }
-
-  if (localEntry) {
-    return localEntry;
-  }
-
-  if (databaseEntry) {
-    return databaseEntry;
-  }
-
-  return getFreeDictionaryVocabularyEntry(candidates);
+  const dictionaryEntry = await getFreeDictionaryVocabularyEntry(candidates);
+  if (primaryEntry && dictionaryEntry) return mergeVocabularyEntries(primaryEntry, dictionaryEntry);
+  return primaryEntry ?? dictionaryEntry;
 }
 
 export function getVocabularyAutocompleteItems(): VocabularyAutocompleteItem[] {

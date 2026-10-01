@@ -575,6 +575,56 @@
   background: #17231d;
 }
 
+.study-directory-secondary .study-directory-secondary-toggle {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  border-radius: 10px;
+  color: #6f6a5d;
+  cursor: pointer;
+  display: flex;
+  font-family: Georgia, "Times New Roman", "Noto Serif SC", serif;
+  font-size: 14px;
+  font-weight: 900;
+  gap: 8px;
+  min-height: 38px;
+  padding: 0 10px;
+  text-align: left;
+  width: 100%;
+}
+
+.study-directory-secondary-group {
+  display: grid;
+  gap: 6px;
+}
+
+.study-directory-secondary .study-directory-secondary-toggle > span:first-child {
+  background: #c4f35b;
+  border-radius: 999px;
+  flex: 0 0 auto;
+  height: 7px;
+  width: 7px;
+}
+
+.study-directory-secondary .study-directory-secondary-toggle:hover,
+.study-directory-secondary .study-directory-secondary-toggle:focus-visible,
+.study-directory-secondary .study-directory-secondary-toggle.active {
+  background: #f7edcf;
+  color: #17231d;
+}
+
+.study-directory-secondary .study-directory-tertiary {
+  border-left: 2px solid rgba(169, 214, 189, .5);
+  display: grid;
+  gap: 6px;
+  margin-left: 12px;
+  padding-left: 10px;
+}
+
+.study-directory-secondary .study-directory-tertiary a {
+  min-height: 34px;
+}
+
 .study-directory-source-group.disabled {
   opacity: 0.62;
 }

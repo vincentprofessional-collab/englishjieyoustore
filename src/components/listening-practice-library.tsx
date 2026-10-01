@@ -38,7 +38,7 @@ export function ListeningPracticeLibrary({
   showBookMarker = false,
 }: {
   sections: ListeningSectionSummary[];
-  bookScope?: "all" | "jiufen";
+  bookScope?: "all" | "cambridge" | "jiufen";
   showBookLabels?: boolean;
   showBookMarker?: boolean;
 }) {
@@ -57,7 +57,9 @@ export function ListeningPracticeLibrary({
     () =>
       bookScope === "jiufen"
         ? LISTENING_BOOKS.filter((book) => isJiufenBook(book.code))
-        : LISTENING_BOOKS,
+        : bookScope === "cambridge"
+          ? LISTENING_BOOKS.filter((book) => !isJiufenBook(book.code))
+          : LISTENING_BOOKS,
     [bookScope],
   );
 
@@ -112,7 +114,7 @@ export function ListeningPracticeLibrary({
                 <div className="listening-book-label">
                   <strong>{book.shortTitle}</strong>
                   <span>{book.title}</span>
-                  <small>{bookSections.length > 0 ? "可练习" : "待导入"}</small>
+                  {bookSections.length === 0 ? <small>待导入</small> : null}
                 </div>
               ) : null}
 

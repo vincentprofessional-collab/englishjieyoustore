@@ -686,6 +686,7 @@ export function AudioSettingsMenus({
   onChange,
   onModeSelect,
   playModeLabel = "听力模式",
+  preserveModeSettings = false,
   settings,
   showRate = true,
   variant = "full",
@@ -695,6 +696,7 @@ export function AudioSettingsMenus({
   onChange: (nextSettings: Partial<AudioPlayerSettings>) => void;
   onModeSelect?: (mode: "listening" | "speaking" | "writing") => void;
   playModeLabel?: string;
+  preserveModeSettings?: boolean;
   settings: AudioPlayerSettings;
   showRate?: boolean;
   variant?: "basic" | "full" | "rate-only" | "subtitle-only" | "listening-only" | "speaking-writing";
@@ -748,12 +750,16 @@ export function AudioSettingsMenus({
             options: playModeOptions,
             onOpen: onModeSelect
               ? () => {
-                  onChange(exitPracticeMode({ subtitleMode: "bilingual" }));
+                  if (!preserveModeSettings) {
+                    onChange(exitPracticeMode({ subtitleMode: "bilingual" }));
+                  }
                   onModeSelect("listening");
                 }
               : undefined,
             onSelect: (value: string | number) => {
-              onChange(exitPracticeMode({ playMode: String(value) as AudioPlayMode }));
+              onChange(preserveModeSettings
+                ? { playMode: String(value) as AudioPlayMode }
+                : exitPracticeMode({ playMode: String(value) as AudioPlayMode }));
               onModeSelect?.("listening");
             },
           },
@@ -769,8 +775,7 @@ export function AudioSettingsMenus({
               ? () => {
                   const speakingMode = settings.speakingMode === "none" ? "imitation" : settings.speakingMode;
                   onChange({
-                    dictationMode: "none",
-                    playMode: "sequential",
+                    ...(!preserveModeSettings ? { dictationMode: "none" as const, playMode: "sequential" as const } : {}),
                     speakingMode,
                     subtitleMode: speakingMode === "sight-translation" ? "chinese" : "bilingual",
                   });
@@ -780,8 +785,7 @@ export function AudioSettingsMenus({
             onSelect: (value: string | number) => {
               const speakingMode = String(value) as Exclude<AudioSpeakingMode, "none">;
               onChange({
-                dictationMode: "none",
-                playMode: "sequential",
+                ...(!preserveModeSettings ? { dictationMode: "none" as const, playMode: "sequential" as const } : {}),
                 speakingMode,
                 subtitleMode: speakingMode === "sight-translation" ? "chinese" : "bilingual",
               });
@@ -795,9 +799,8 @@ export function AudioSettingsMenus({
             onOpen: onModeSelect
               ? () => {
                   onChange({
+                    ...(!preserveModeSettings ? { playMode: "sequential" as const, speakingMode: "none" as const } : {}),
                     dictationMode: settings.dictationMode === "none" ? "sentence-order" : settings.dictationMode,
-                    playMode: "sequential",
-                    speakingMode: "none",
                     subtitleMode: "bilingual",
                   });
                   onModeSelect("writing");
@@ -805,9 +808,8 @@ export function AudioSettingsMenus({
               : undefined,
             onSelect: (value: string | number) => {
               onChange({
+                ...(!preserveModeSettings ? { playMode: "sequential" as const, speakingMode: "none" as const } : {}),
                 dictationMode: String(value) as AudioDictationMode,
-                playMode: "sequential",
-                speakingMode: "none",
                 subtitleMode: "bilingual",
               });
               onModeSelect?.("writing");

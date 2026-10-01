@@ -1,4 +1,6 @@
+import { ProjectAccessGate } from "@/components/project-access-gate";
 import { WritingTask1VocabularyPage } from "@/components/writing-task1-vocabulary-page";
+import { getPaidContentKey } from "@/lib/access-control";
 import {
   WRITING_TASK1_VOCABULARY_CATEGORIES,
   type WritingTask1VocabularyEntry,
@@ -24,5 +26,13 @@ export default function Task1VocabularyPage() {
     entries: category.entries.map(enrichEntry),
   }));
 
-  return <WritingTask1VocabularyPage categories={categories} />;
+  return (
+    <ProjectAccessGate
+      contentKey={getPaidContentKey("writing-practice", "task1-vocabulary")}
+      projectKey="writing"
+      title="雅思写作词汇训练需要单独开通"
+    >
+      <WritingTask1VocabularyPage categories={categories} />
+    </ProjectAccessGate>
+  );
 }

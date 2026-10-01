@@ -100,6 +100,7 @@ type ProgressEntry = {
   browseModeIndex?: number;
   completed?: boolean;
   consecutiveFamiliar?: number;
+  consecutiveFamiliarMode?: number;
   familiarity: Familiarity | null;
   firstLearnedAt?: number | null;
   lastOutcome: Outcome | null;
@@ -150,7 +151,7 @@ const REACTION_TIME_OPTIONS: Array<{ category: ProgressCategory; label: string }
   { category: "writing", label: "写作" },
 ];
 const DEFAULT_REACTION_SECONDS: Record<ProgressCategory, number> = {
-  reading: 4,
+  reading: 2,
   speaking: 4,
   listening: 4,
   writing: 10,
@@ -181,7 +182,7 @@ function emptyProgress(): ProgressEntry {
     familiarity: null,
     lastOutcome: null,
     lastReviewedAt: null,
-    modeIndex: 0,
+    modeIndex: 1,
     nextReviewAt: null,
     plan: "short-term",
     spellingCorrectStreak: 0,
@@ -831,19 +832,24 @@ function getStoredVocabularyAudioUrls(word: string) {
 
 async function playAudioOnce(word: LearningWord, voice: Voice, generation: number) {
   const preferredAudioUrl = voice === "us" ? word.usAudioUrl : word.ukAudioUrl;
-  const storedAudioUrl = preferredAudioUrl?.trim()
-    ? ""
-    : (await getStoredVocabularyAudioUrls(word.word))[voice];
+  const storedAudioUrlRequest = preferredAudioUrl?.trim()
+    ? Promise.resolve("")
+    : getStoredVocabularyAudioUrls(word.word).then((urls) => urls[voice]);
   if (generation !== learningAudioGeneration) return false;
-  const siteAudioUrls = Array.from(new Set([
-    preferredAudioUrl?.trim(),
-    storedAudioUrl,
+  const immediateAudioUrls = Array.from(new Set([
     getVocabularyAudioUrl(word.word, voice),
+    preferredAudioUrl?.trim(),
   ].filter((url): url is string => Boolean(url))));
 
-  for (const audioUrl of siteAudioUrls) {
+  for (const audioUrl of immediateAudioUrls) {
     if (generation !== learningAudioGeneration) return false;
     if (await playSiteAudio(audioUrl)) return false;
+  }
+
+  if (generation !== learningAudioGeneration) return false;
+  const storedAudioUrl = await storedAudioUrlRequest;
+  if (storedAudioUrl && !immediateAudioUrls.includes(storedAudioUrl)) {
+    if (await playSiteAudio(storedAudioUrl)) return false;
   }
 
   if (generation !== learningAudioGeneration) return false;
@@ -1298,7 +1304,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
   const browseMode = currentSettings.method === "browse";
   const canRunRound = !browseMode || pageVisible;
   const modeIndex = selectEnabledMode(
-    browseMode ? browseChoiceRef.current ?? 0 : currentProgress.modeIndex,
+    browseMode ? browseChoiceRef.current ?? 0 : currentProgress.lastReviewedAt === null ? 1 : currentProgress.modeIndex,
     enabledModeIndices(currentSettings),
   );
 
@@ -1408,6 +1414,20 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
 
     const startRound = async () => {
       const reactionDelay = currentSettings.reactionSeconds[progressCategoryForMode(modeIndex)] * 1000;
+      if (modeIndex === 1) {
+        setPhase("playing");
+        void playWordAudio(currentWord, voice, 1);
+        await new Promise<void>((resolve) => window.setTimeout(resolve, reactionDelay));
+        if (roundTokenRef.current !== token) return;
+        stopLearningAudio();
+        setRevealed(true);
+        setPhase("playing");
+        void playWordAudio(currentWord, voice, 1).finally(() => {
+          if (roundTokenRef.current === token) setPhase("awaiting");
+        });
+        return;
+      }
+
       if (browseMode) {
         if (modeIndex === 3) {
           setPhase("awaiting");
@@ -1429,27 +1449,9 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
           return;
         }
         setPhase("awaiting");
-        if (modeIndex === 1) void playWordAudio(currentWord, voice, 1);
         await new Promise<void>((resolve) => window.setTimeout(resolve, reactionDelay));
         if (roundTokenRef.current !== token) return;
-        if (modeIndex === 1) stopLearningAudio();
         setRevealed(true);
-        if (modeIndex === 1) setPhase("playing");
-        void playWordAudio(currentWord, voice, 1).finally(() => {
-          if (roundTokenRef.current === token) setPhase("awaiting");
-        });
-        return;
-      }
-
-      if (modeIndex === 1) {
-        setPhase("playing");
-        void playWordAudio(currentWord, voice, 1);
-        await new Promise<void>((resolve) => window.setTimeout(resolve, reactionDelay));
-        if (roundTokenRef.current !== token) return;
-        stopLearningAudio();
-        setRevealed(true);
-        setPhase("awaiting");
-        void playWordAudio(currentWord, voice, 1);
         return;
       }
 
@@ -1652,9 +1654,11 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
       const timestamp = Date.now();
       const previous = progressFor(progress, currentWord.id);
       const spellingError = Boolean(spellingDetails && (!spellingDetails.correct || spellingDetails.hadError));
+      const scheduledReview = scheduleReview({ ...previous, modeIndex }, outcome, timestamp, spellingError, enabledModeIndices(currentSettings));
       const next: ProgressEntry = {
         ...previous,
-        ...scheduleReview({ ...previous, modeIndex }, outcome, timestamp, spellingError, enabledModeIndices(currentSettings)),
+        ...scheduledReview,
+        modeIndex: scheduledReview.modeIndex,
         familiarity: outcome,
         lastCategory: progressCategoryForMode(modeIndex),
         lastOutcome: outcome,
@@ -1687,18 +1691,18 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
 
   const handleRecognitionOutcome = useCallback(
     (outcome: Familiarity) => {
+      if (modeIndex < 2 && !revealed) return;
       if (modeIndex === 2) {
         if (oralScoreFeedback === null) return;
-        const scoredOutcome = familiarityFromScore(oralScoreFeedback);
-        if (outcome !== scoredOutcome) return;
-        commitOutcome(scoredOutcome, undefined, oralScoreFeedback);
+        if (outcome === "familiar" && oralScoreFeedback < ORAL_FAMILIAR_SCORE) return;
+        commitOutcome(outcome, undefined, oralScoreFeedback);
         return;
       }
 
       if (modeIndex > 1) return;
       commitOutcome(outcome);
     },
-    [commitOutcome, modeIndex, oralScoreFeedback],
+    [commitOutcome, modeIndex, oralScoreFeedback, revealed],
   );
 
   const spellingCorrect = currentWord ? answer.trim().toLowerCase() === currentWord.word.trim().toLowerCase() : false;
@@ -1944,7 +1948,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
           className="vocabulary-learning-category-button familiar"
           aria-keyshortcuts="ArrowLeft"
           title="左方向键：熟悉"
-          disabled={advancePending || (modeIndex === 2 && (oralScoreFeedback === null || familiarityFromScore(oralScoreFeedback) !== "familiar")) || (modeIndex === 3 && !spellingCorrect)}
+          disabled={advancePending || (modeIndex < 2 && !revealed) || (modeIndex === 2 && (oralScoreFeedback === null || oralScoreFeedback < ORAL_FAMILIAR_SCORE)) || (modeIndex === 3 && !spellingCorrect)}
           onClick={() => modeIndex === 3 ? submitSpelling("familiar") : handleRecognitionOutcome("familiar")}
           type="button"
         >熟悉</button>
@@ -1952,7 +1956,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
           className="vocabulary-learning-category-button vague"
           aria-keyshortcuts="ArrowDown"
           title="下方向键：模糊"
-          disabled={advancePending || (modeIndex === 2 && (oralScoreFeedback === null || familiarityFromScore(oralScoreFeedback) !== "vague"))}
+          disabled={advancePending || (modeIndex < 2 && !revealed) || (modeIndex === 2 && oralScoreFeedback === null)}
           onClick={() => modeIndex === 3 ? submitSpelling("vague") : handleRecognitionOutcome("vague")}
           type="button"
         >模糊</button>
@@ -1960,7 +1964,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
           className="vocabulary-learning-category-button unfamiliar"
           aria-keyshortcuts="ArrowRight"
           title="右方向键：生僻"
-          disabled={advancePending || (modeIndex === 2 && (oralScoreFeedback === null || familiarityFromScore(oralScoreFeedback) !== "unfamiliar"))}
+          disabled={advancePending || (modeIndex < 2 && !revealed) || (modeIndex === 2 && oralScoreFeedback === null)}
           onClick={() => modeIndex === 3 ? submitSpelling("unfamiliar") : handleRecognitionOutcome("unfamiliar")}
           type="button"
         >生僻</button>

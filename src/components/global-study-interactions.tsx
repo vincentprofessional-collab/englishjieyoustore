@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { ContentShareButton } from "@/components/content-share-button";
 import {
@@ -33,7 +34,6 @@ type WordTooltip = {
   left: number;
   placement: "above" | "below";
   top: number;
-  width: number;
   word: string;
 };
 
@@ -249,11 +249,11 @@ export function GlobalStudyInteractions() {
 
       const hint = await loadHint(normalizedWord);
       const viewportPadding = 16;
-      const tooltipWidth = Math.min(260, window.innerWidth - viewportPadding * 2);
-      const preferredLeft = rect.left + rect.width / 2 - tooltipWidth / 2;
+      const tooltipMaxWidth = Math.min(420, window.innerWidth - viewportPadding * 2);
+      const preferredCenter = rect.left + rect.width / 2;
       const left = Math.min(
-        window.innerWidth - tooltipWidth - viewportPadding,
-        Math.max(viewportPadding, preferredLeft),
+        window.innerWidth - viewportPadding - tooltipMaxWidth / 2,
+        Math.max(viewportPadding + tooltipMaxWidth / 2, preferredCenter),
       );
       const shouldOpenAbove = rect.bottom + 170 > window.innerHeight && rect.top > 170;
 
@@ -262,7 +262,6 @@ export function GlobalStudyInteractions() {
         left,
         placement: shouldOpenAbove ? "above" : "below",
         top: shouldOpenAbove ? rect.top - 10 : rect.bottom + 10,
-        width: tooltipWidth,
         word: normalizedWord,
       });
     }
@@ -298,7 +297,7 @@ export function GlobalStudyInteractions() {
         void showHint(wordAtPoint.word, wordAtPoint.rect);
         pendingWordRef.current = "";
         hoverWordTimerRef.current = null;
-      }, 1500);
+      }, 250);
     }
 
     function handlePointerDown(event: PointerEvent) {
@@ -501,7 +500,7 @@ export function GlobalStudyInteractions() {
       {wordTooltip ? (
         <div
           className={`word-tooltip-floating global-word-tooltip ${wordTooltip.placement === "above" ? "above" : ""}`}
-          style={{ left: wordTooltip.left, top: wordTooltip.top, width: wordTooltip.width }}
+          style={{ left: wordTooltip.left, top: wordTooltip.top }}
           onMouseEnter={() => {
             if (hideWordTimerRef.current != null) {
               window.clearTimeout(hideWordTimerRef.current);
@@ -517,7 +516,9 @@ export function GlobalStudyInteractions() {
           }}
         >
           <div className="word-tooltip-title-row">
-            <strong>{wordTooltip.word}</strong>
+            <Link href={`/vocabulary/${encodeURIComponent(wordTooltip.word)}`}>
+              <strong>{wordTooltip.word}</strong>
+            </Link>
             <div className="word-tooltip-favorite-share-actions favorite-share-actions">
               <button
                 aria-label={`${favoriteWordIds.includes(wordTooltip.word) ? "取消收藏" : "收藏"} ${wordTooltip.word}`}

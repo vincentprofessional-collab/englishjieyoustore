@@ -6,6 +6,7 @@ import { ProjectAccessPaywall } from "@/components/project-access-paywall";
 import { BBC_ARTICLES, getBbcArticleById } from "@/lib/articles/bbc";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import syntax2026 from "@/data/bbc/2026-syntax.json";
+import { normalizeBbcSyntaxSentenceEdits } from "@/lib/bbc-syntax-annotation-edits";
 import type { BbcSyntaxSentenceData } from "@/components/bbc-syntax-sentence";
 
 export const dynamicParams = false;
@@ -51,9 +52,20 @@ export default async function ArticlePage({
     );
   }
 
-  const syntaxSentences = process.env.NODE_ENV === "development" && article.year === 2026
+  const canonicalSyntaxSentences = article.year === 2026
     ? (syntax2026 as Record<string, BbcSyntaxSentenceData[]>)[article.id]
     : undefined;
+  let syntaxSentences = canonicalSyntaxSentences;
+  if (canonicalSyntaxSentences) {
+    const { data: syntaxOverride } = await supabase
+      .from("bbc_article_syntax_overrides")
+      .select("sentences")
+      .eq("article_id", article.id)
+      .maybeSingle();
+    if (syntaxOverride) {
+      syntaxSentences = normalizeBbcSyntaxSentenceEdits(syntaxOverride.sentences, canonicalSyntaxSentences) ?? canonicalSyntaxSentences;
+    }
+  }
 
   return <ArticleDetailPage article={article} syntaxSentences={syntaxSentences} />;
 }

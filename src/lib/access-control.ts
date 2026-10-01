@@ -3,6 +3,7 @@ export type PaidContentType =
   | "speaking-question"
   | "vocabulary-etymology"
   | "vocabulary-root"
+  | "writing-practice"
   | "writing-task2";
 
 export type ProjectAccessKey = string;

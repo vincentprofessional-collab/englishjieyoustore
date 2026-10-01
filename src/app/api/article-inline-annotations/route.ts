@@ -20,6 +20,11 @@ function createServiceClient() {
   });
 }
 
+function missingArticleInlineAnnotationsTable(error: { code?: string; message?: string }) {
+  return error.code === "PGRST205" || error.code === "42P01" ||
+    /could not find the table ['"]?public\.article_inline_annotations['"]? in the schema cache/i.test(error.message ?? "");
+}
+
 async function requireAdmin(request: NextRequest, supabase: SupabaseClient) {
   const token = request.headers.get("authorization")?.replace(/^Bearer\s+/i, "");
   if (!token) return { response: NextResponse.json({ error: "请先登录管理员账号。" }, { status: 401 }) };
@@ -116,6 +121,11 @@ export async function POST(request: NextRequest) {
       updated_at: new Date().toISOString(),
     }, { onConflict: "source_type,source_id" });
 
-  if (error) return NextResponse.json({ error: `保存失败：${error.message}` }, { status: 500 });
+  if (error) {
+    const message = missingArticleInlineAnnotationsTable(error)
+      ? "保存失败：Supabase 尚未识别 article_inline_annotations 表（表未创建或缓存未刷新）。请先执行 supabase/022_article_inline_annotations.sql，再重新保存。"
+      : `保存失败：${error.message}`;
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
   return NextResponse.json({ ok: true, annotations });
 }

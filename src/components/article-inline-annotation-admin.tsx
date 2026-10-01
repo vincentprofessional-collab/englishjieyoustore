@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useState, type MouseEvent } from "react";
 import styles from "@/components/article-inline-annotation-admin.module.css";
 import { supabase } from "@/lib/supabase/client";
+import { notifyArticleInlineAnnotationsUpdated } from "@/components/use-article-inline-annotations";
 import type {
   ArticleInlineAnnotation,
   ArticleInlineLineStyle,
@@ -14,7 +15,6 @@ import type {
 } from "@/lib/article-inline-annotations";
 
 const SOURCE_TYPES: { id: ArticleInlineSourceType; label: string }[] = [
-  { id: "bbc", label: "BBC 随身英语" },
   { id: "new-concept", label: "新概念英语" },
   { id: "ielts-reading", label: "雅思阅读文章" },
 ];
@@ -41,7 +41,7 @@ function selectionOffset(unit: HTMLElement, node: Node, nodeOffset: number) {
 }
 
 export function ArticleInlineAnnotationAdmin() {
-  const [sourceType, setSourceType] = useState<ArticleInlineSourceType>("bbc");
+  const [sourceType, setSourceType] = useState<ArticleInlineSourceType>("new-concept");
   const [sources, setSources] = useState<ArticleInlineSourceSummary[]>([]);
   const [sourceId, setSourceId] = useState("");
   const [documentSource, setDocumentSource] = useState<ArticleInlineSourceDocument | null>(null);
@@ -270,6 +270,7 @@ export function ArticleInlineAnnotationAdmin() {
       }
       setAnnotations(payload.annotations);
       setSavedAnnotations(payload.annotations);
+      notifyArticleInlineAnnotationsUpdated(sourceType, sourceId);
       setMessage("已保存，前台文章页已更新这些词汇标注和词性。");
     } catch {
       setMessage("保存时连接中断，请确认网络后重试。");

@@ -24,11 +24,13 @@ function formatVideoTime(value: number) {
 export function VocabularyVideoPlayer({
   entryWord,
   previewMode = false,
+  totalVideos,
   votesEnabled,
   videos: initialVideos,
 }: {
   entryWord: string;
   previewMode?: boolean;
+  totalVideos: number;
   votesEnabled: boolean;
   videos: VocabularyVideoItem[];
 }) {
@@ -42,14 +44,22 @@ export function VocabularyVideoPlayer({
   const router = useRouter();
   const videoRef = useRef<HTMLVideoElement>(null);
   const playerRef = useRef<HTMLElement | null>(null);
+  const activePathRef = useRef(initialVideos[0]?.path ?? null);
   const currentVideo = videos[activeIndex] ?? null;
 
   useEffect(() => {
+    const preservedIndex = initialVideos.findIndex((video) => video.path === activePathRef.current);
+    const nextIndex = preservedIndex >= 0 ? preservedIndex : 0;
+    const activeVideoWasRemoved = preservedIndex < 0;
+
     setVideos(initialVideos);
-    setActiveIndex(0);
-    setIsPlaying(false);
-    setCurrentTime(0);
-    setDuration(0);
+    setActiveIndex(nextIndex);
+    activePathRef.current = initialVideos[nextIndex]?.path ?? null;
+    if (activeVideoWasRemoved) {
+      setIsPlaying(false);
+      setCurrentTime(0);
+      setDuration(0);
+    }
   }, [initialVideos]);
 
   useEffect(() => {
@@ -65,6 +75,7 @@ export function VocabularyVideoPlayer({
   function selectVideo(index: number, autoplay = false) {
     if (videos.length === 0) return;
     const nextIndex = (index + videos.length) % videos.length;
+    activePathRef.current = videos[nextIndex]?.path ?? null;
     setActiveIndex(nextIndex);
     setIsPlaying(false);
     setCurrentTime(0);
@@ -156,6 +167,7 @@ export function VocabularyVideoPlayer({
     <section aria-label="单词视频" className="vocabulary-video-panel" ref={(element) => { playerRef.current = element; }}>
       <header className="vocabulary-video-panel-head">
         <h2>看语境，记单词，学用法</h2>
+        <span className="vocabulary-video-count">共 {totalVideos} 个视频</span>
       </header>
 
       {currentVideo ? (

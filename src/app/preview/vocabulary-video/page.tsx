@@ -32,6 +32,7 @@ export default function VocabularyVideoPreviewPage() {
         sidePanel={(
           <VocabularyVideoPlayer
             entryWord={entry.normalizedWord}
+            totalVideos={videos.length}
             videos={videos}
             votesEnabled={false}
           />

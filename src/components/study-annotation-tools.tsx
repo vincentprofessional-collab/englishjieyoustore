@@ -49,7 +49,6 @@ type ActiveWordTooltip = {
   left: number;
   placement: "above" | "below";
   top: number;
-  width: number;
   word: string;
 };
 
@@ -450,12 +449,12 @@ export function StudyAnnotationTools({
       }
 
       const viewportPadding = 16;
-      const tooltipWidth = Math.min(300, window.innerWidth - viewportPadding * 2);
+      const tooltipMaxWidth = Math.min(420, window.innerWidth - viewportPadding * 2);
       const estimatedTooltipHeight = 250;
-      const preferredLeft = rect.left + rect.width / 2 - tooltipWidth / 2;
+      const preferredCenter = rect.left + rect.width / 2;
       const left = Math.min(
-        window.innerWidth - tooltipWidth - viewportPadding,
-        Math.max(viewportPadding, preferredLeft),
+        window.innerWidth - viewportPadding - tooltipMaxWidth / 2,
+        Math.max(viewportPadding + tooltipMaxWidth / 2, preferredCenter),
       );
       const shouldOpenAbove =
         rect.bottom + estimatedTooltipHeight + 12 > window.innerHeight &&
@@ -466,7 +465,6 @@ export function StudyAnnotationTools({
         left,
         placement: shouldOpenAbove ? "above" : "below",
         top: shouldOpenAbove ? rect.top - 10 : rect.bottom + 10,
-        width: tooltipWidth,
         word: normalizedWord,
       });
     }
@@ -505,7 +503,7 @@ export function StudyAnnotationTools({
         void showHint(wordAtPoint.word, wordAtPoint.rect);
         pendingHoverWordRef.current = "";
         hoverWordTimerRef.current = null;
-      }, 1500);
+      }, 250);
     }
 
     function handleMouseLeave() {
@@ -813,7 +811,6 @@ export function StudyAnnotationTools({
           style={{
             left: activeWordTooltip.left,
             top: activeWordTooltip.top,
-            width: activeWordTooltip.width,
           }}
           onMouseEnter={() => {
             if (hideWordTimerRef.current != null) {

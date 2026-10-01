@@ -438,7 +438,6 @@ export function JuniorHighDemo() {
                     type="button"
                   >
                     <strong>{mockPaperTitle(paper)}</strong>
-                    <span>{paper.questions.length} 题</span>
                   </button>
                 ))}
               </div>

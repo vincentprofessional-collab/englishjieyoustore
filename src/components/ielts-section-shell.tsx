@@ -7,17 +7,29 @@ import type { SiteChromeConfig } from "@/lib/content/site-chrome";
 import { GuidePostsOnNavigationPage } from "@/components/guide-board";
 import { BBC_DEFAULT_YEAR } from "@/lib/articles/bbc";
 
+type StudyNavNode = {
+  href: string;
+  label: string;
+  children?: StudyNavNode[];
+};
+
 type StudyNavGroup = {
   href: string;
   id: "integrated-english" | "junior-high" | "senior-high" | "cet4" | "cet6" | "postgraduate" | "ielts" | "sat" | "gmat" | "gre";
   label: string;
   mark: string;
   disabled?: boolean;
-  children: Array<{
-    href: string;
-    label: string;
-  }>;
+  children: StudyNavNode[];
 };
+
+function getExpandableStudyNavIds(nodes: StudyNavNode[], parentId: string): string[] {
+  return nodes.flatMap((node) => {
+    const nodeId = `${parentId}:${node.label}`;
+    return node.children?.length
+      ? [nodeId, ...getExpandableStudyNavIds(node.children, nodeId)]
+      : [];
+  });
+}
 
 const STUDY_NAV_GROUPS: StudyNavGroup[] = [
   {
@@ -65,10 +77,34 @@ const STUDY_NAV_GROUPS: StudyNavGroup[] = [
   { children: [], disabled: true, href: "", id: "postgraduate", label: "考研英语", mark: "研" },
   {
     children: [
-      { href: "/listening", label: "听力" },
-      { href: "/speaking", label: "口语" },
+      {
+        children: [
+          { href: "/listening/practice?source=cambridge", label: "剑桥雅思" },
+          { href: "/listening/jiufen", label: "九分达人" },
+          { href: "/listening/past-papers", label: "历年真题" },
+        ],
+        href: "/listening",
+        label: "听力",
+      },
+      {
+        children: [
+          { href: "/speaking/part-1", label: "Part 1" },
+          { href: "/speaking/part-2", label: "Part 2" },
+          { href: "/speaking/part-3", label: "Part 3" },
+        ],
+        href: "/speaking",
+        label: "口语",
+      },
       { href: "/reading", label: "阅读" },
-      { href: "/writing", label: "写作" },
+      {
+        children: [
+          { href: "/writing/practice?task=task1", label: "小作文" },
+          { href: "/writing/task2", label: "大作文" },
+          { href: "/writing/task1-vocabulary", label: "专项训练" },
+        ],
+        href: "/writing",
+        label: "写作",
+      },
     ],
     href: "/listening",
     id: "ielts",
@@ -154,6 +190,18 @@ function isStudyChildCurrent(
   return [...requested.entries()].every(([key, value]) => searchParams.get(key) === value);
 }
 
+function isStudyNavNodeCurrent(
+  node: StudyNavNode,
+  pathname: string,
+  searchParams: ReturnType<typeof useSearchParams>,
+  defaultEntry?: string,
+): boolean {
+  return (
+    Boolean(node.children?.some((child) => isStudyNavNodeCurrent(child, pathname, searchParams, defaultEntry))) ||
+    isStudyChildCurrent(node.href, pathname, searchParams, defaultEntry)
+  );
+}
+
 function getDirectoryMark(label: string, fallback: string) {
   return label.match(/[A-Za-z]/)?.[0]?.toUpperCase() ?? fallback;
 }
@@ -177,6 +225,7 @@ function IeltsSectionShellContent({
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [expandedExamGroupId, setExpandedExamGroupId] = useState<StudyNavGroup["id"] | null>(null);
+  const [expandedStudyNavChildIds, setExpandedStudyNavChildIds] = useState<Set<string>>(() => new Set());
   const requestedBbcYear = Number(searchParams.get("year"));
   const activeBbcYear = BBC_DIRECTORY_YEARS.includes(requestedBbcYear)
     ? requestedBbcYear
@@ -186,6 +235,67 @@ function IeltsSectionShellContent({
       ? pathname === "/articles" || pathname.startsWith("/articles/") || pathname === "/new-concept" || pathname.startsWith("/new-concept/")
       : isGroupPath(pathname, group),
   );
+
+  function renderStudyDirectoryNodes(
+    nodes: StudyNavNode[],
+    parentId: string,
+    defaultEntry?: string,
+  ): ReactNode {
+    return nodes.map((node) => {
+      const nodeId = `${parentId}:${node.label}`;
+      const isCurrent = isStudyNavNodeCurrent(node, pathname, searchParams, defaultEntry);
+
+      if (node.children?.length) {
+        const isExpanded = expandedStudyNavChildIds.has(nodeId);
+        const nestedId = `study-directory-${nodeId.replace(/[^a-z0-9_-]/gi, "-")}`;
+
+        return (
+          <div className="study-directory-secondary-group" key={nodeId}>
+            <button
+              aria-controls={nestedId}
+              aria-expanded={isExpanded}
+              className={`study-directory-secondary-toggle ${isCurrent ? "active" : ""}`}
+              onClick={() => {
+                setExpandedStudyNavChildIds((current) => {
+                  const next = new Set(current);
+                  if (next.has(nodeId)) {
+                    next.delete(nodeId);
+                    getExpandableStudyNavIds(node.children!, nodeId).forEach((descendantId) => next.delete(descendantId));
+                  } else {
+                    next.add(nodeId);
+                    getExpandableStudyNavIds(node.children!, nodeId).forEach((descendantId) => next.add(descendantId));
+                  }
+                  return next;
+                });
+              }}
+              type="button"
+            >
+              <span aria-hidden="true" />
+              {node.label}
+              <span aria-hidden="true" className="study-directory-chevron">{isExpanded ? "−" : "+"}</span>
+            </button>
+            {isExpanded ? (
+              <div className="study-directory-tertiary" id={nestedId}>
+                {renderStudyDirectoryNodes(node.children, nodeId, defaultEntry)}
+              </div>
+            ) : null}
+          </div>
+        );
+      }
+
+      return (
+        <Link
+          aria-current={isCurrent ? "page" : undefined}
+          className={isCurrent ? "active" : ""}
+          href={node.href}
+          key={nodeId}
+        >
+          <span aria-hidden="true" />
+          {node.label}
+        </Link>
+      );
+    });
+  }
 
   // The New Concept home owns its content list. Every integrated-English page
   // uses the same source-aware directory shell below.
@@ -318,7 +428,15 @@ function IeltsSectionShellContent({
                     aria-controls={`study-directory-${group.id}-children`}
                     aria-expanded={expandedExamGroupId === group.id}
                     className="study-directory-source-link study-directory-expand-button"
-                    onClick={() => setExpandedExamGroupId((current) => current === group.id ? null : group.id)}
+                    onClick={() => {
+                      const shouldExpand = expandedExamGroupId !== group.id;
+                      setExpandedExamGroupId(shouldExpand ? group.id : null);
+                      setExpandedStudyNavChildIds(
+                        shouldExpand
+                          ? new Set(getExpandableStudyNavIds(group.children, group.id))
+                          : new Set(),
+                      );
+                    }}
                     type="button"
                   >
                     <strong>{group.label}</strong>
@@ -331,22 +449,11 @@ function IeltsSectionShellContent({
                 )}
 
                 {group.children.length && expandedExamGroupId === group.id ? <div className="study-directory-secondary" id={`study-directory-${group.id}-children`}>
-                  {group.children.map((child) => {
-                    const defaultEntry = group.id === "junior-high" ? "knowledge" : group.id === "senior-high" ? "practice" : undefined;
-                    const isCurrent = isStudyChildCurrent(child.href, pathname, searchParams, defaultEntry);
-
-                    return (
-                      <Link
-                        aria-current={isCurrent ? "page" : undefined}
-                        className={isCurrent ? "active" : ""}
-                        href={child.href}
-                        key={child.href}
-                      >
-                        <span aria-hidden="true" />
-                        {child.label}
-                      </Link>
-                    );
-                  })}
+                  {renderStudyDirectoryNodes(
+                    group.children,
+                    group.id,
+                    group.id === "junior-high" ? "knowledge" : group.id === "senior-high" ? "practice" : undefined,
+                  )}
                 </div> : null}
               </div>
             );

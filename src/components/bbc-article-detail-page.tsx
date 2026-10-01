@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   AudioPlayer,
   AudioReadingMenu,
@@ -14,14 +14,16 @@ import {
   useArticlePronunciations,
 } from "@/components/audio-player";
 import { BbcSentencePractice } from "@/components/bbc-sentence-practice";
-import { ArticleInlineAnnotatedParagraph } from "@/components/article-inline-annotated-text";
+import { ArticleInlineAnnotatedText } from "@/components/article-inline-annotated-text";
 import { useArticleInlineAnnotations } from "@/components/use-article-inline-annotations";
 import { BbcArticleQuiz } from "@/components/bbc-article-quiz";
 import { BbcArticleComments } from "@/components/bbc-article-comments";
-import { BbcSyntaxSentence, type BbcSyntaxSentenceData } from "@/components/bbc-syntax-sentence";
+import { type BbcSyntaxDisplayMode, type BbcSyntaxSentenceData } from "@/components/bbc-syntax-sentence";
+import { BbcSyntaxInlineEditor } from "@/components/bbc-syntax-inline-editor";
 import { ContentShareButton } from "@/components/content-share-button";
 import { StudyAnnotationTools } from "@/components/study-annotation-tools";
 import { getLikelyProperNounWords, shouldShowAudioPronunciation } from "@/lib/audio-pronunciation";
+import { splitArticleSentences } from "@/lib/article-inline-annotations";
 import { supabase } from "@/lib/supabase/client";
 import type {
   BbcArticle,
@@ -668,6 +670,16 @@ function renderWaveHighlightedChinese(text: string, terms: string[] = []) {
 
 export default function ArticleDetailPage({ article, syntaxSentences }: ArticlePageProps) {
   const inlineTextAnnotations = useArticleInlineAnnotations("bbc", article.id);
+  const [editableInlineAnnotations, setEditableInlineAnnotations] = useState(inlineTextAnnotations);
+  const inlineAnnotationUnits = useMemo(
+    () => article.body.flatMap((paragraph, paragraphIndex) =>
+      splitArticleSentences(paragraph).map((sentence) => ({
+        id: `paragraph-${paragraphIndex}:sentence-${sentence.index}`,
+        text: sentence.text,
+      })),
+    ),
+    [article.body],
+  );
   const [audioSettings, setAudioSettings] = useState<AudioPlayerSettings>(() => ({
     ...DEFAULT_AUDIO_PLAYER_SETTINGS,
     subtitleMode: "bilingual",
@@ -680,6 +692,9 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
   const [isOriginalVisible, setIsOriginalVisible] = useState(true);
   const [isVocabularyVisible, setIsVocabularyVisible] = useState(true);
   const [studyMode, setStudyMode] = useState<ArticleStudyMode>("general");
+  const [syntaxPosVisible, setSyntaxPosVisible] = useState(true);
+  const [syntaxDisplayMode, setSyntaxDisplayMode] = useState<BbcSyntaxDisplayMode>("all");
+  const [editableSyntaxSentences, setEditableSyntaxSentences] = useState(syntaxSentences ?? []);
   const [modeSelectionVersion, setModeSelectionVersion] = useState(0);
   const [articleTitleChinese, setArticleTitleChinese] = useState(article?.titleChinese ?? "");
   const [articleChineseParagraphs, setArticleChineseParagraphs] = useState<string[]>(
@@ -713,6 +728,14 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
   const audioSettingsRef = useRef(audioSettings);
   const speakingCountdownRef = useRef<number | null>(null);
   const speakingAdvanceRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    setEditableSyntaxSentences(syntaxSentences ?? []);
+  }, [article.id, syntaxSentences]);
+
+  useEffect(() => {
+    setEditableInlineAnnotations(inlineTextAnnotations);
+  }, [article.id, inlineTextAnnotations]);
 
   useEffect(() => {
     audioSettingsRef.current = audioSettings;
@@ -881,7 +904,28 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
     }
   }
 
+  function currentStudySentenceNo() {
+    const sentences = article.sentences ?? [];
+    const activeSentenceNo = activeSentenceNoRef.current;
+    if (activeSentenceNo != null && sentences.some((sentence) => sentence.sentenceNo === activeSentenceNo)) {
+      return activeSentenceNo;
+    }
+
+    if (!isFullAudioPlaying) {
+      const hashSentenceNo = Number(window.location.hash.match(/bbc-sentence-(\d+)/)?.[1]);
+      if (Number.isInteger(hashSentenceNo) && sentences.some((sentence) => sentence.sentenceNo === hashSentenceNo)) {
+        return hashSentenceNo;
+      }
+    }
+
+    const currentAudioSentence = sentences.find((sentence) =>
+      fullAudioPosition * 1_000 >= sentence.startMs && fullAudioPosition * 1_000 < sentence.endMs,
+    );
+    return currentAudioSentence?.sentenceNo ?? sentences[0]?.sentenceNo ?? 1;
+  }
+
   function selectStudyMode(mode: ArticleStudyMode) {
+    const sentenceNo = currentStudySentenceNo();
     clearSpeakingPracticeTimers();
     setStudyMode(mode);
     setIsOriginalVisible(true);
@@ -890,24 +934,13 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
     setSentenceRestoreSeekRequest(null);
     setActiveSentencePosition(0);
     setIsSentenceAudioPlaying(false);
-    if (mode === "general" || mode === "intensive") {
-      const isLeavingPractice =
-        audioSettings.dictationMode !== "none" || audioSettings.speakingMode !== "none";
-      updateAudioSettings({
-        dictationMode: "none",
-        playMode: "sequential",
-        speakingMode: "none",
-        ...(isLeavingPractice ? { subtitleMode: "bilingual" as const } : {}),
-      });
-    }
     if (mode === "general") {
-      activeSentenceNoRef.current = null;
       setActiveSentenceNo(null);
     } else {
       setModeSelectionVersion((current) => current + 1);
-      activeSentenceNoRef.current = 1;
-      setActiveSentenceNo(1);
-      if (mode === "listening") requestSentenceAutoPlay(1);
+      activeSentenceNoRef.current = sentenceNo;
+      setActiveSentenceNo(sentenceNo);
+      if (mode === "listening") requestSentenceAutoPlay(sentenceNo);
     }
   }
 
@@ -1003,7 +1036,7 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
     const nextSentenceNo = getNextSentenceNo(
       article.sentences.map((sentence) => sentence.sentenceNo),
       sentenceNo,
-      audioSettingsRef.current.playMode,
+      studyMode === "listening" ? audioSettingsRef.current.playMode : "sequential",
     );
     if (nextSentenceNo == null) {
       return;
@@ -1078,7 +1111,7 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
     setIsSentenceAudioPlaying(false);
     const speakingMode = audioSettingsRef.current.speakingMode;
 
-    if (speakingMode === "none") {
+    if (studyMode !== "speaking" || speakingMode === "none") {
       playSentenceByMode(sentence.sentenceNo);
       return;
     }
@@ -1333,14 +1366,16 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
         {article.fullAudioUrl ? (
           <section className="bbc-full-audio-panel">
             <div className="bbc-full-audio">
-              <AudioPlayer
+                      <AudioPlayer
                 key={`bbc-full-${modeSelectionVersion}`}
                 hasSelectedRate
                 html5
                 onPlayingChange={handleFullAudioPlayingChange}
                 onSettingsChange={updateAudioSettings}
                 onTimeChange={setFullAudioPosition}
-                settings={audioSettings}
+                        settings={studyMode === "listening"
+                          ? audioSettings
+                          : { ...audioSettings, playMode: "sequential" }}
                 settingsPlacement="none"
                 src={article.fullAudioUrl}
                 title={`${article.title} 完整音频`}
@@ -1356,24 +1391,60 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
                   onOriginalVisibilityChange={setIsOriginalVisible}
                   onVocabularyVisibilityChange={setIsVocabularyVisible}
                 />
-                <button
-                  aria-pressed={studyMode === "intensive"}
-                  className={`bbc-fullscreen-toggle ${studyMode === "intensive" ? "active" : ""}`}
-                  onClick={() => selectStudyMode(studyMode === "intensive" ? "general" : "intensive")}
-                  type="button"
-                >
-                  精读模式
-                </button>
+                <div className="player-menu bbc-intensive-mode-menu">
+                  <button
+                    aria-haspopup="true"
+                    aria-pressed={studyMode === "intensive"}
+                    className={`player-menu-trigger bbc-fullscreen-toggle ${studyMode === "intensive" ? "active" : ""}`}
+                    onClick={() => selectStudyMode(studyMode === "intensive" ? "general" : "intensive")}
+                    type="button"
+                  >
+                    精读模式
+                  </button>
+                  {studyMode === "intensive" ? (
+                    <div aria-label="精读标注显示" className="player-menu-panel" role="group">
+                      <button
+                        aria-checked={syntaxPosVisible}
+                        className={syntaxPosVisible ? "active" : ""}
+                        onClick={() => setSyntaxPosVisible((visible) => !visible)}
+                        role="switch"
+                        type="button"
+                      >
+                        <span>词性</span>
+                        <span aria-hidden="true" className="bbc-intensive-syntax-switch" />
+                      </button>
+                      <div aria-label="句子成分范围" className="bbc-intensive-syntax-mode-group" role="radiogroup">
+                        {([
+                        { label: "成分", value: "all" },
+                        ] as const).map((option) => (
+                          <button
+                            aria-checked={syntaxDisplayMode === option.value}
+                            className={syntaxDisplayMode === option.value ? "active" : ""}
+                            key={option.value}
+                            onClick={() => setSyntaxDisplayMode(option.value)}
+                            role="radio"
+                            type="button"
+                          >
+                            <span>{option.label}</span>
+                            <span aria-hidden="true" className="bbc-intensive-syntax-switch" />
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  ) : null}
+                </div>
                 <AudioSettingsMenus
                   onChange={updateAudioSettings}
                   onModeSelect={(mode) => selectStudyMode(mode)}
                   playModeLabel="精听模式"
+                  preserveModeSettings
                   settings={audioSettings}
                   variant="listening-only"
                 />
                 <AudioSettingsMenus
                   onChange={updateAudioSettings}
                   onModeSelect={(mode) => selectStudyMode(mode)}
+                  preserveModeSettings
                   settings={audioSettings}
                   variant="speaking-writing"
                 />
@@ -1428,7 +1499,7 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
           </section>
         ) : null}
         <div
-          className={`bbc-article-columns ${!isVocabularyVisible ? "without-vocabulary" : ""} ${
+          className={`bbc-article-columns ${!isVocabularyVisible || studyMode === "intensive" ? "without-vocabulary" : ""} ${
             !isOriginalVisible ? "original-hidden" : ""
           }`}
         >
@@ -1439,19 +1510,14 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
                 <div className="bbc-original-text-block" key={`${article.id}-paragraph-${index}`}>
                   {originalDisplayMode !== "chinese" ? (
                     <p lang="en">
-                      <ArticleInlineAnnotatedParagraph
-                        annotations={inlineTextAnnotations}
-                        paragraphId={`paragraph-${index}`}
-                        text={textBlock.english}
-                        renderText={(text, characterOffset) => renderHighlightedEnglish(
-                          text,
-                          textBlock.wordOffset + getWordCount(textBlock.english.slice(0, characterOffset)),
-                          activeFullGlobalWordIndex,
-                          vocabularyHighlightWordIndexes,
-                          articlePhraseWaveTerms,
-                          articlePronunciations,
-                        )}
-                      />
+                      {renderHighlightedEnglish(
+                        textBlock.english,
+                        textBlock.wordOffset,
+                        activeFullGlobalWordIndex,
+                        vocabularyHighlightWordIndexes,
+                        articlePhraseWaveTerms,
+                        articlePronunciations,
+                      )}
                     </p>
                   ) : null}
                   {originalDisplayMode !== "english" && textBlock.chinese ? (
@@ -1460,55 +1526,92 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
                 </div>
               )) : activeStudySentence ? (() => {
                 const sentence = activeStudySentence;
+                const syntaxSentence = editableSyntaxSentences[activeStudySentenceIndex];
+                const inlineUnit = inlineAnnotationUnits[activeStudySentenceIndex];
+                const sentenceAnnotations = studyMode === "intensive" && inlineUnit?.text === sentence.english
+                  ? editableInlineAnnotations.filter((annotation) => annotation.unitId === inlineUnit.id)
+                  : [];
+                const hasBackendGrammarAnnotations = sentenceAnnotations.length > 0;
+                const hasReviewedSyntax = studyMode === "intensive"
+                  && syntaxSentence?.status === "reviewed"
+                  && syntaxSentence.text === sentence.english;
 
                 return (
                   <div className={`bbc-intensive-reading ${studyMode === "intensive" ? "bbc-syntax-reading" : ""}`} key={`${article.id}-intensive-sentence`}>
                     <div className="bbc-intensive-reading-actions">
-                      <button
-                        aria-label={favoriteSentenceIds.includes(favoriteSentenceId(article.id, sentence.sentenceNo)) ? "取消收藏本句" : "收藏本句"}
-                        aria-pressed={favoriteSentenceIds.includes(favoriteSentenceId(article.id, sentence.sentenceNo))}
-                        className={`favorite-star ${favoriteSentenceIds.includes(favoriteSentenceId(article.id, sentence.sentenceNo)) ? "active" : ""}`}
-                        onClick={() => toggleFavoriteSentence(sentence)}
-                        title={favoriteSentenceIds.includes(favoriteSentenceId(article.id, sentence.sentenceNo)) ? "取消收藏本句" : "收藏本句"}
-                        type="button"
-                      >
-                        {favoriteSentenceIds.includes(favoriteSentenceId(article.id, sentence.sentenceNo)) ? "★" : "☆"}
-                      </button>
-                      <ContentShareButton
-                        label="分享本句"
-                        text={`${sentence.english}\n${sentence.chinese}`.trim()}
-                        title={`${article.id} ${article.title} 第 ${sentence.sentenceNo} 句`}
-                        url={`/articles/${article.id}#bbc-sentence-${sentence.sentenceNo}`}
-                      />
+                      {hasReviewedSyntax || hasBackendGrammarAnnotations ? <span className="bbc-intensive-sentence-number">#{sentence.sentenceNo}</span> : null}
+                      <div className="bbc-intensive-sentence-controls">
+                        <button
+                          aria-label={favoriteSentenceIds.includes(favoriteSentenceId(article.id, sentence.sentenceNo)) ? "取消收藏本句" : "收藏本句"}
+                          aria-pressed={favoriteSentenceIds.includes(favoriteSentenceId(article.id, sentence.sentenceNo))}
+                          className={`favorite-star ${favoriteSentenceIds.includes(favoriteSentenceId(article.id, sentence.sentenceNo)) ? "active" : ""}`}
+                          onClick={() => toggleFavoriteSentence(sentence)}
+                          title={favoriteSentenceIds.includes(favoriteSentenceId(article.id, sentence.sentenceNo)) ? "取消收藏本句" : "收藏本句"}
+                          type="button"
+                        >
+                          {favoriteSentenceIds.includes(favoriteSentenceId(article.id, sentence.sentenceNo)) ? "★" : "☆"}
+                        </button>
+                        <ContentShareButton
+                          label="分享本句"
+                          text={`${sentence.english}\n${sentence.chinese}`.trim()}
+                          title={`${article.id} ${article.title} 第 ${sentence.sentenceNo} 句`}
+                          url={`/articles/${article.id}#bbc-sentence-${sentence.sentenceNo}`}
+                        />
+                      </div>
                     </div>
                     {studyMode !== "speaking" && studyMode !== "writing" ? (
                       <>
-                        {studyMode === "intensive" && syntaxSentences?.[activeStudySentenceIndex]?.text === sentence.english ? (
-                          <BbcSyntaxSentence
-                            data={syntaxSentences[activeStudySentenceIndex]}
-                            embedded
+                        {hasReviewedSyntax ? (
+                          <BbcSyntaxInlineEditor
+                            allInlineAnnotations={editableInlineAnnotations}
+                            allSentences={editableSyntaxSentences}
+                            articleId={article.id}
+                            data={syntaxSentence}
+                            displayMode={syntaxDisplayMode}
+                            inlineAnnotations={sentenceAnnotations}
+                            onInlineAnnotationsChange={setEditableInlineAnnotations}
+                            onSentenceChange={(updated) => setEditableSyntaxSentences((current) => current.map((item, index) => index === activeStudySentenceIndex ? updated : item))}
                             sentenceNo={sentence.sentenceNo}
-                            translation={renderWaveHighlightedChinese(sentence.chinese, sentence.chineseUnderlinedTerms)}
-                            vocabularyWordIndexes={activeSentenceVocabularyHighlightWordIndexes}
-                            waveTerms={sentence.underlinedTerms ?? []}
+                            showPos={syntaxPosVisible}
+                            translation={studyMode === "intensive"
+                              ? sentence.chinese
+                              : renderWaveHighlightedChinese(sentence.chinese, sentence.chineseUnderlinedTerms)}
                           />
+                        ) : hasBackendGrammarAnnotations && inlineUnit ? (
+                          <p className="bbc-intensive-english" lang="en">
+                            <ArticleInlineAnnotatedText
+                              annotations={sentenceAnnotations}
+                              matchSyntaxRoleColors
+                              renderText={(text, characterOffset) => renderHighlightedEnglish(
+                                text,
+                                getWordCount(sentence.english.slice(0, characterOffset)),
+                                null,
+                                new Set<number>(),
+                                [],
+                                articlePronunciations,
+                              )}
+                              showPartOfSpeech={syntaxPosVisible}
+                              text={sentence.english}
+                              unitId={inlineUnit.id}
+                            />
+                          </p>
                         ) : (
                           <p className="bbc-intensive-english" lang="en">
                             {renderHighlightedEnglish(
                               sentence.english,
                               studyMode === "intensive" ? 0 : activeStudySentenceWordOffset,
                               null,
-                              studyMode === "intensive"
-                                ? activeSentenceVocabularyHighlightWordIndexes
-                                : vocabularyHighlightWordIndexes,
-                              sentence.underlinedTerms ?? [],
+                              studyMode === "intensive" ? new Set<number>() : vocabularyHighlightWordIndexes,
+                              studyMode === "intensive" ? [] : sentence.underlinedTerms ?? [],
                               articlePronunciations,
                             )}
                           </p>
                         )}
-                        {sentence.chinese && !(studyMode === "intensive" && syntaxSentences?.[activeStudySentenceIndex]?.text === sentence.english) ? (
+                        {sentence.chinese && !hasReviewedSyntax ? (
                           <p className="bbc-intensive-chinese" lang="zh-CN">
-                            {renderWaveHighlightedChinese(sentence.chinese, sentence.chineseUnderlinedTerms)}
+                            {studyMode === "intensive"
+                              ? sentence.chinese
+                              : renderWaveHighlightedChinese(sentence.chinese, sentence.chineseUnderlinedTerms)}
                           </p>
                         ) : null}
                       </>
@@ -1527,17 +1630,19 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
                         )}
                         isAudioPlaying={isSentenceAudioPlaying && activeSentenceNo === sentence.sentenceNo}
                         sentence={sentence}
-                        settings={audioSettings}
+                        settings={studyMode === "speaking"
+                          ? { ...audioSettings, dictationMode: "none" }
+                          : { ...audioSettings, speakingMode: "none" }}
                         translationContent={renderWaveHighlightedChinese(sentence.chinese, sentence.chineseUnderlinedTerms)}
                       />
                     ) : null}
-                    {speakingTraining?.sentenceNo === sentence.sentenceNo ? (
+                    {studyMode === "speaking" && speakingTraining?.sentenceNo === sentence.sentenceNo ? (
                       <div aria-live="polite" className="bbc-speaking-training-status practicing">
                         <span>{SPEAKING_PHASE_LABELS[speakingTraining.mode]}</span>
                         <strong>{speakingTraining.remainingSeconds} 秒</strong>
-                        <small>{audioSettings.playMode === "sentence-loop" ? "之后重播本句" : "之后播放下一句"}</small>
+                        <small>之后播放下一句</small>
                       </div>
-                    ) : activeSentenceNo === sentence.sentenceNo && isSentenceAudioPlaying && audioSettings.speakingMode !== "none" ? (
+                    ) : studyMode === "speaking" && activeSentenceNo === sentence.sentenceNo && isSentenceAudioPlaying && audioSettings.speakingMode !== "none" ? (
                       <div className="bbc-speaking-training-status playing">
                         <span>{SPEAKING_MODE_LABELS[audioSettings.speakingMode]}</span>
                         <strong>正在播放</strong>
@@ -1548,7 +1653,7 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
                       key={`${modeSelectionVersion}-${sentence.sentenceNo}`}
                       autoPlaySignal={sentenceAutoPlaySignals[sentence.sentenceNo] ?? 0}
                       compactControls
-                      deferSentenceLoop={audioSettings.speakingMode !== "none"}
+                      deferSentenceLoop={studyMode === "speaking" && audioSettings.speakingMode !== "none"}
                       hasSelectedRate
                       html5
                       preload={false}
@@ -1594,7 +1699,7 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
 
         </section>
 
-        {isVocabularyVisible ? (
+        {isVocabularyVisible && studyMode !== "intensive" ? (
           <section className="bbc-vocabulary-panel">
             <header className="bbc-vocabulary-head">
               <h2>词汇、短语、地道表达</h2>

@@ -25,3 +25,5 @@ create policy "管理员改文章词汇标注" on public.article_inline_annotati
 drop policy if exists "管理员删文章词汇标注" on public.article_inline_annotations;
 create policy "管理员删文章词汇标注" on public.article_inline_annotations
   for delete using (is_admin());
+
+notify pgrst, 'reload schema';

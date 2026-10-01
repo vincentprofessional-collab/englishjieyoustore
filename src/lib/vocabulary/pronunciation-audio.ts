@@ -42,24 +42,52 @@ export function playVocabularyPronunciation({
   word: string;
 }) {
   const locale = accent === "uk" ? "en-GB" : "en-US";
-  const resolvedAudioUrl = audioUrl?.trim() || getVocabularyAudioUrl(word, accent);
+  const audioUrls = [...new Set([
+    audioUrl?.trim(),
+    getVocabularyAudioUrl(word, accent),
+  ].filter((url): url is string => Boolean(url)))];
 
-  if (typeof window === "undefined" || !resolvedAudioUrl) {
+  if (typeof window === "undefined" || audioUrls.length === 0) {
     speakWithBrowser(word, locale);
     return;
   }
 
-  const audio = new Audio(resolvedAudioUrl);
-  let hasFallenBack = false;
-  const fallback = () => {
-    if (hasFallenBack) {
+  let audioIndex = 0;
+  const playNext = () => {
+    const resolvedAudioUrl = audioUrls[audioIndex];
+    if (!resolvedAudioUrl) {
+      speakWithBrowser(word, locale);
       return;
     }
+    audioIndex += 1;
 
-    hasFallenBack = true;
-    speakWithBrowser(word, locale);
+    const audio = new Audio(resolvedAudioUrl);
+    let settled = false;
+    let started = false;
+    let timeout = 0;
+    const finish = () => {
+      if (settled) return;
+      settled = true;
+      window.clearTimeout(timeout);
+    };
+    const fallback = () => {
+      if (settled) return;
+      finish();
+      audio.pause();
+      playNext();
+    };
+
+    audio.addEventListener("playing", () => {
+      started = true;
+      window.clearTimeout(timeout);
+    }, { once: true });
+    audio.addEventListener("ended", () => {
+      if (!started || audio.currentTime < 0.05 || audio.duration === 0) fallback();
+      else finish();
+    }, { once: true });
+    audio.addEventListener("error", fallback, { once: true });
+    timeout = window.setTimeout(fallback, 5000);
+    void audio.play().catch(fallback);
   };
-
-  audio.addEventListener("error", fallback, { once: true });
-  void audio.play().catch(fallback);
+  playNext();
 }

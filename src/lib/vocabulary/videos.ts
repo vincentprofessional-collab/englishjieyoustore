@@ -148,7 +148,7 @@ function pickVisibleCandidates<T extends { path: string; likes: number }>(items:
 
 export async function getVocabularyVideos(entry: LocalVocabularyEntry) {
   const candidates = getCandidatePool(entry);
-  if (candidates.length === 0) return { videos: [] as VocabularyVideo[], votesEnabled: false };
+  if (candidates.length === 0) return { totalVideos: 0, videos: [] as VocabularyVideo[], votesEnabled: false };
 
   let startedAt = new Date().toISOString();
   let counts = new Map<string, number>();
@@ -191,6 +191,7 @@ export async function getVocabularyVideos(entry: LocalVocabularyEntry) {
   const visible = pickVisibleCandidates(scored, rotationCycle(startedAt, new Date()));
 
   return {
+    totalVideos: candidates.length,
     videos: visible.map((candidate) => ({
       ...candidate,
       likedByMe: likedPaths.has(candidate.path),

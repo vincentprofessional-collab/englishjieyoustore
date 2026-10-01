@@ -1,11 +1,14 @@
 .card {
-  --subject: #1e5b3e;
-  --predicate: #a32c1e;
-  --object: #1f5c8b;
-  --predicative: #6b3fa0;
-  --adverbial: #0f6e7a;
-  --attributive: #8a6a2f;
-  --other: #6e6a63;
+  --syntax-row-space: 12px;
+  --syntax-word-font-size: clamp(22px, 2.1vw, 30px);
+  --syntax-component-font-size: 14px;
+  --subject: var(--bbc-syntax-role-subject, #1e5b3e);
+  --predicate: var(--bbc-syntax-role-predicate, #a32c1e);
+  --object: var(--bbc-syntax-role-object, #1f5c8b);
+  --predicative: var(--bbc-syntax-role-predicative, #6b3fa0);
+  --adverbial: var(--bbc-syntax-role-adverbial, #0f6e7a);
+  --attributive: var(--bbc-syntax-role-attributive, #8a6a2f);
+  --other: var(--bbc-syntax-role-other, #6e6a63);
   background: #fffdf8;
   border: 1px solid #e3dccb;
   border-radius: 16px;
@@ -23,9 +26,8 @@
   letter-spacing: .05em;
   margin-bottom: 24px;
 }
-.sentence { align-items: flex-start; display: flex; flex-wrap: wrap; row-gap: 26px; }
-.segment { --role: var(--other); align-items: stretch; display: inline-flex; flex-direction: column; max-width: 100%; }
-.segment:not(.plain) { margin-right: clamp(10px, 1.2vw, 16px); }
+.embeddedMeta { display: none; }
+.sentence { align-items: flex-start; display: flex; flex-wrap: wrap; row-gap: var(--syntax-row-space); }
 .subject { --role: var(--subject); }
 .predicate { --role: var(--predicate); }
 .object { --role: var(--object); }
@@ -33,23 +35,45 @@
 .adverbial { --role: var(--adverbial); }
 .attributive { --role: var(--attributive); }
 .other { --role: var(--other); }
-.inner, .words { align-items: flex-start; display: inline-flex; flex-wrap: wrap; justify-content: flex-start; }
-.word { align-items: center; display: inline-flex; flex-direction: column; font: clamp(22px, 2.1vw, 30px)/1.55 Georgia, "Times New Roman", "Noto Serif SC", serif; padding: 0 1px; white-space: nowrap; }
-.wordText { white-space: pre; }
-.pos { color: #111; font: 11px/1.4 system-ui, sans-serif; margin-top: 4px; }
-.label { border-top: 3px solid var(--role); color: var(--role); font: 600 14px/1.4 system-ui, "PingFang SC", sans-serif; margin-top: 8px; padding-top: 5px; text-align: center; white-space: nowrap; }
-.plain { margin-right: 0; }
-.nested { align-items: stretch; display: inline-flex; flex-direction: column; }
-.nestedLabel { border-top: 1px dashed #8a8175; color: #8a8175; font: 12px/1.4 system-ui, "PingFang SC", sans-serif; margin-top: 5px; padding-top: 3px; text-align: center; }
-.translation { border-top: 1px solid #e3dccb; color: inherit; font: clamp(22px, 2.1vw, 30px)/1.55 Georgia, "Times New Roman", "Noto Serif SC", serif; margin: 20px 0 0; padding-top: 16px; }
+.word { align-items: center; display: inline-flex; flex-direction: column; font: var(--syntax-word-font-size)/1.55 Georgia, "Times New Roman", "Noto Serif SC", serif; padding: 0 1px; row-gap: var(--syntax-row-space); white-space: nowrap; }
+.wordText { white-space: normal; }
+.posPlaceholder { visibility: hidden; }
+.annotationLine { align-self: stretch; border-top: 3px solid var(--role); box-sizing: border-box; width: 100%; }
+.annotationSolid { border-top-style: solid; }
+.annotationDashed { border-top-style: dashed; }
+.annotationWavy { background: var(--role); border: 0; height: 4px; -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='4' viewBox='0 0 8 4'%3E%3Cpath d='M-2 2 Q0 0 2 2 T6 2 T10 2' fill='none' stroke='black' stroke-width='1.5'/%3E%3C/svg%3E"); -webkit-mask-repeat: repeat-x; -webkit-mask-size: 8px 4px; mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='4' viewBox='0 0 8 4'%3E%3Cpath d='M-2 2 Q0 0 2 2 T6 2 T10 2' fill='none' stroke='black' stroke-width='1.5'/%3E%3C/svg%3E"); mask-repeat: repeat-x; mask-size: 8px 4px; }
+.annotationThick { border-top-width: 5px; }
+.annotationLinePlaceholder { border-color: transparent; }
+.annotationDetails { color: var(--role); font: 600 var(--syntax-component-font-size)/1.4 system-ui, "PingFang SC", sans-serif; height: calc(var(--syntax-component-font-size) * 1.4); position: relative; text-align: center; width: 100%; }
+.annotationDetailsPlaceholder { visibility: hidden; }
+.annotationPosTrack { height: 1.4em; position: relative; width: 100%; }
+.annotationPos { color: #111; font: 11px/1.4 system-ui, sans-serif; left: 50%; position: absolute; transform: translateX(-50%); white-space: nowrap; }
+.annotationPosPlaceholder { visibility: hidden; }
+.annotationLabel { left: 50%; position: absolute; transform: translateX(-50%); white-space: nowrap; }
+.pos { color: #111; font: 11px/1.4 system-ui, sans-serif; }
+.syntaxTrack { align-self: stretch; height: calc(var(--syntax-component-font-size) * 1.4 + var(--syntax-row-space)); position: relative; width: 100%; }
+.word:not([data-nested-row-active="true"]) .syntaxTrackNested { display: none; }
+.syntaxLine { border-top: 3px solid var(--role); box-sizing: border-box; left: -1px; position: absolute; top: 0; width: 100%; }
+.syntaxNestedLine { border-top-style: dashed; border-top-width: 2px; }
+.syntaxLinePlaceholder { border-color: transparent; }
+.syntaxLabel { color: var(--role); font: 600 var(--syntax-component-font-size)/1.4 system-ui, "PingFang SC", sans-serif; left: calc(50% + var(--syntax-label-offset, 0px)); position: absolute; text-align: center; top: var(--syntax-row-space); transform: translateX(-50%); white-space: nowrap; }
+.syntaxNestedLabel { color: var(--role); }
+.syntaxLabelPlaceholder { visibility: hidden; }
+.editableMark { cursor: pointer; }
+.translation {
+  --translation-row-pitch: calc(1.55em + var(--syntax-row-space));
+  color: inherit;
+  font: calc(var(--syntax-word-font-size) + 2px)/1.55 Georgia, "Times New Roman", "Noto Serif SC", serif;
+  line-height: calc(var(--translation-row-pitch) + 3px);
+  margin: calc(var(--translation-row-pitch) - 15.4px) 0 0;
+  padding-top: var(--translation-row-pitch);
+}
 .highlight > span:first-child { background: #ffe2df; border-radius: 4px; }
 .wave > span:first-child { text-decoration: underline wavy #8a6a2f 1px; text-underline-offset: 4px; }
 .screenReader { clip: rect(0, 0, 0, 0); clip-path: inset(50%); height: 1px; overflow: hidden; position: absolute; white-space: nowrap; width: 1px; }
 @media (max-width: 640px) {
-  .card { padding: 18px 14px; }
+  .card { --syntax-word-font-size: 20px; padding: 18px 14px; }
   .meta { margin-bottom: 18px; }
-  .word { font-size: 20px; padding: 0 3px; }
-  .segment:not(.plain) { margin-right: 10px; }
-  .translation { font-size: 20px; }
-  .label { font-size: 12px; }
+  .word { padding: 0 3px; }
+  .card { --syntax-component-font-size: 12px; }
 }

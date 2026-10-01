@@ -3,7 +3,12 @@ import { getListeningSections } from "@/lib/ielts/listening";
 
 export const dynamic = "force-dynamic";
 
-export default async function ListeningPracticeIndexPage() {
+export default async function ListeningPracticeIndexPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ source?: string }>;
+}) {
+  const { source } = await searchParams;
   const { sections, error } = await getListeningSections();
 
   return (
@@ -11,7 +16,10 @@ export default async function ListeningPracticeIndexPage() {
       <div className="listening-library-panel">
         {error ? <div className="notice danger">读取听力题库失败：{error}</div> : null}
 
-        <ListeningPracticeLibrary sections={sections} />
+        <ListeningPracticeLibrary
+          bookScope={source === "cambridge" ? "cambridge" : "all"}
+          sections={sections}
+        />
       </div>
     </section>
   );

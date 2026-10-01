@@ -77,6 +77,7 @@ type ListeningPracticeProps = {
 };
 
 type ListeningMode = "mock" | "practice";
+type ListeningStudyMode = "general" | "intensive" | "listening" | "speaking" | "writing";
 type ListeningOriginalDisplayMode = "english" | "bilingual" | "chinese";
 type ListeningQuestion = ListeningSectionDetail["questions"][number];
 type ListeningSentence = ListeningSectionDetail["transcriptSentences"][number];
@@ -171,7 +172,6 @@ type ActiveWordTooltip = {
   left: number;
   placement: "above" | "below";
   top: number;
-  width: number;
   word: string;
 };
 type DictationTarget = {
@@ -193,7 +193,7 @@ const FAVORITE_QUESTIONS_STORAGE_KEY = "ielts-platform.favoriteQuestions";
 const FAVORITE_WORDS_STORAGE_KEY = "ielts-platform.favoriteWords";
 const LISTENING_REVIEW_ANSWERS_STORAGE_PREFIX = "ielts-platform.listeningReviewAnswers";
 const LISTENING_ATTEMPT_STORAGE_PREFIX = "ielts-platform.listeningAttempt";
-const LISTENING_REVIEW_DEFAULT_LEFT_PERCENT = 58;
+const LISTENING_REVIEW_DEFAULT_LEFT_PERCENT = 40;
 const LISTENING_REVIEW_MIN_LEFT_PX = 320;
 const LISTENING_REVIEW_MIN_RIGHT_PX = 360;
 const LISTENING_REVIEW_HANDLE_PX = 14;
@@ -222,11 +222,6 @@ const VOCABULARY_HINTS: Record<string, WordHint> = {
 
 const IELTS_LISTENING_PARTS = [1, 2, 3, 4];
 const QUESTIONS_PER_PART = 10;
-const LISTENING_ORIGINAL_DISPLAY_MODES: { label: string; mode: ListeningOriginalDisplayMode }[] = [
-  { label: "英文", mode: "english" },
-  { label: "中英", mode: "bilingual" },
-  { label: "中文", mode: "chinese" },
-];
 const LISTENING_ORIGINAL_DISPLAY_TITLES: Record<ListeningOriginalDisplayMode, string> = {
   bilingual: "中英原文",
   chinese: "中文原文",
@@ -276,6 +271,12 @@ function getListeningMockCountdownSeconds(sections: ListeningSectionDetail[]) {
 }
 
 function formatExamCountdown(totalSeconds: number) {
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+  return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+}
+
+function formatReadingTime(totalSeconds: number) {
   const minutes = Math.floor(totalSeconds / 60);
   const seconds = totalSeconds % 60;
   return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
@@ -2886,6 +2887,7 @@ export function ListeningPractice({
   const [audioSettings, setAudioSettings] = useState<AudioPlayerSettings>(
     LISTENING_DEFAULT_AUDIO_SETTINGS,
   );
+  const [reviewStudyMode, setReviewStudyMode] = useState<ListeningStudyMode>("general");
   const [originalDisplayMode, setOriginalDisplayMode] =
     useState<ListeningOriginalDisplayMode>("bilingual");
   const [isTranscriptVisible, setIsTranscriptVisible] = useState(true);
@@ -2898,6 +2900,9 @@ export function ListeningPractice({
   const [isNotesOpen, setIsNotesOpen] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isPracticeTimerRunning, setIsPracticeTimerRunning] = useState(false);
+  const [readingSeconds, setReadingSeconds] = useState(0);
+  const [isReadingTimerVisible, setIsReadingTimerVisible] = useState(false);
+  const [isReadingTimerRunning, setIsReadingTimerRunning] = useState(false);
   const [selectedText, setSelectedText] = useState("");
   const [annotations, setAnnotations] = useState<AnnotationItem[]>([]);
   const [mockStarted, setMockStarted] = useState(mode === "practice");
@@ -3047,6 +3052,23 @@ export function ListeningPractice({
       audioSettingsRef.current = next;
       return next;
     });
+    if (nextSettings.subtitleMode) {
+      setOriginalDisplayMode(nextSettings.subtitleMode);
+    }
+  }
+
+  function selectReviewStudyMode(nextMode: ListeningStudyMode) {
+    setReviewStudyMode(nextMode);
+    if (nextMode === "general" || nextMode === "intensive") {
+      const isLeavingPractice =
+        audioSettings.dictationMode !== "none" || audioSettings.speakingMode !== "none";
+      updateAudioSettings({
+        dictationMode: "none",
+        playMode: "sequential",
+        speakingMode: "none",
+        ...(isLeavingPractice ? { subtitleMode: "bilingual" as const } : {}),
+      });
+    }
   }
 
   function clearSpeakingPracticeTimers(resetState = true) {
@@ -3505,12 +3527,12 @@ export function ListeningPractice({
     }
 
     const viewportPadding = 16;
-    const tooltipWidth = Math.min(300, window.innerWidth - viewportPadding * 2);
+    const tooltipMaxWidth = Math.min(420, window.innerWidth - viewportPadding * 2);
     const estimatedTooltipHeight = 270;
-    const preferredLeft = rect.left + rect.width / 2 - tooltipWidth / 2;
+    const preferredCenter = rect.left + rect.width / 2;
     const left = Math.min(
-      window.innerWidth - tooltipWidth - viewportPadding,
-      Math.max(viewportPadding, preferredLeft),
+      window.innerWidth - viewportPadding - tooltipMaxWidth / 2,
+      Math.max(viewportPadding + tooltipMaxWidth / 2, preferredCenter),
     );
     const shouldOpenAbove =
       rect.bottom + estimatedTooltipHeight + 12 > window.innerHeight &&
@@ -3521,7 +3543,6 @@ export function ListeningPractice({
       left,
       placement: shouldOpenAbove ? "above" : "below",
       top: shouldOpenAbove ? rect.top - 10 : rect.bottom + 10,
-      width: tooltipWidth,
       word: normalizedWord,
     };
 
@@ -3584,7 +3605,7 @@ export function ListeningPractice({
       void showWordTooltipFromRect(word, rect, hoverRequestIdRef.current);
       pendingHoverWordRef.current = "";
       hoverWordTimerRef.current = null;
-    }, 1500);
+    }, 250);
   }
 
   function scheduleHideWordTooltip(delay = 1500) {
@@ -4257,19 +4278,6 @@ export function ListeningPractice({
               <MouseClickIcon />
             </button>
             <div className="bbc-original-actions">
-              <div aria-label="原文显示模式" className="bbc-original-display-menu" role="group">
-                {LISTENING_ORIGINAL_DISPLAY_MODES.map((displayMode) => (
-                  <button
-                    aria-pressed={originalDisplayMode === displayMode.mode}
-                    className={originalDisplayMode === displayMode.mode ? "active" : ""}
-                    key={displayMode.mode}
-                    onClick={() => setOriginalDisplayMode(displayMode.mode)}
-                    type="button"
-                  >
-                    {displayMode.label}
-                  </button>
-                ))}
-              </div>
               <AudioSettingsMenus
                 className="toolbar-audio-settings"
                 settings={audioSettings}
@@ -4378,6 +4386,7 @@ export function ListeningPractice({
                 {sentence.audioUrl ? (
                   <AudioPlayer
                     autoPlaySignal={sentenceAutoPlaySignals[sentence.id] ?? 0}
+                    controls="hidden"
                     hasSelectedRate
                     html5={false}
                     onEnded={() => handleSentenceAudioEnded(sentence)}
@@ -4570,8 +4579,13 @@ export function ListeningPractice({
     );
     setAudioSettings(LISTENING_DEFAULT_AUDIO_SETTINGS);
     audioSettingsRef.current = LISTENING_DEFAULT_AUDIO_SETTINGS;
+    setReviewStudyMode("general");
+    setOriginalDisplayMode("bilingual");
     setIsNotesOpen(false);
     setIsPracticeTimerRunning(false);
+    setReadingSeconds(0);
+    setIsReadingTimerVisible(false);
+    setIsReadingTimerRunning(false);
     setSelectedText("");
     setAnnotations([]);
     setMockStarted(mode === "practice" || restoredSubmitted);
@@ -4648,6 +4662,15 @@ export function ListeningPractice({
       version: 1,
     });
   }, [answers, attemptHydrated, attemptId, mode, seconds, submitted]);
+
+  useEffect(() => {
+    if (!isReadingTimerRunning) {
+      return;
+    }
+
+    const timer = window.setInterval(() => setReadingSeconds((current) => current + 1), 1000);
+    return () => window.clearInterval(timer);
+  }, [isReadingTimerRunning]);
 
   useEffect(() => {
     if (
@@ -5041,7 +5064,6 @@ export function ListeningPractice({
             style={{
               left: activeWordTooltip.left,
               top: activeWordTooltip.top,
-              width: activeWordTooltip.width,
             }}
             onClick={(event) => event.stopPropagation()}
             onMouseEnter={() => {
@@ -5051,7 +5073,9 @@ export function ListeningPractice({
             onMouseLeave={() => scheduleHideWordTooltip(1500)}
           >
             <div className="word-tooltip-title-row">
-              <strong>{activeWordTooltip.word}</strong>
+              <Link href={`/vocabulary/${encodeURIComponent(activeWordTooltip.word)}`}>
+                <strong>{activeWordTooltip.word}</strong>
+              </Link>
               <div className="word-tooltip-favorite-share-actions favorite-share-actions">
                 <button
                   aria-label={`收藏 ${activeWordTooltip.word}`}
@@ -5134,21 +5158,6 @@ export function ListeningPractice({
         ) : null}
 
         <div className="exam-toolbar-actions">
-          {submitted ? (
-            <>
-              <AudioSettingsMenus
-                className="toolbar-audio-settings"
-                settings={audioSettings}
-                showRate={false}
-                variant="basic"
-                onChange={updateAudioSettings}
-              />
-                <AudioPronunciationMenu
-                  onChange={(pronunciationMode) => updateAudioSettings({ pronunciationMode })}
-                  value={audioSettings.pronunciationMode}
-                />
-            </>
-          ) : null}
           {mode === "mock" && !submitted ? (
             section.fullAudioUrl ? (
               <AudioPlayer
@@ -5174,23 +5183,27 @@ export function ListeningPractice({
               <strong>{formatExamCountdown(seconds)}</strong>
             </div>
           ) : null}
-          <button
-            className={`annotation-toggle ielts-exam-action ielts-fullscreen-toggle listening-fullscreen-toggle ${
-              isFullscreen ? "active" : ""
-            }`}
-            type="button"
-            onClick={toggleListeningFullscreen}
-          >
-            {isFullscreen ? "退出全屏" : "全屏"}
-          </button>
-          <button
-            className={`annotation-toggle ielts-exam-action ${isNotesOpen ? "active" : ""}`}
-            data-study-annotation-toggle
-            type="button"
-            onClick={() => setIsNotesOpen((value) => !value)}
-          >
-            批注
-          </button>
+          {!submitted ? (
+            <>
+              <button
+                className={`annotation-toggle ielts-exam-action ielts-fullscreen-toggle listening-fullscreen-toggle ${
+                  isFullscreen ? "active" : ""
+                }`}
+                type="button"
+                onClick={toggleListeningFullscreen}
+              >
+                {isFullscreen ? "退出全屏" : "全屏"}
+              </button>
+              <button
+                className={`annotation-toggle ielts-exam-action ${isNotesOpen ? "active" : ""}`}
+                data-study-annotation-toggle
+                type="button"
+                onClick={() => setIsNotesOpen((value) => !value)}
+              >
+                批注
+              </button>
+            </>
+          ) : null}
         </div>
       </div>
 
@@ -5251,16 +5264,8 @@ export function ListeningPractice({
           </div>
         ) : null}
         {submitted ? (
-          <aside
-            className={`practice-audio-study-panel ${
-              mobileReviewPane === "transcript" ? "mobile-pane-active" : "mobile-pane-hidden"
-            }`}
-          >
-            <section
-              className="practice-listening-card"
-              onPointerUp={handleQuestionSelection}
-              onWheel={handleSubtitlePanelWheel}
-            >
+          <section className="bbc-full-audio-panel listening-review-audio-panel">
+            <div className="bbc-full-audio">
               {section.fullAudioUrl ? (
                 <AudioPlayer
                   loopSegment={activeLoopSegment}
@@ -5286,33 +5291,103 @@ export function ListeningPractice({
               ) : (
                 <div className="notice">还没有上传音频。</div>
               )}
+            </div>
 
-              <div className="bbc-audio-toolbar listening-review-transcript-controls">
+            <div className="bbc-audio-toolbar listening-review-transcript-controls">
+              <div className="bbc-audio-toolbar-settings bbc-audio-toolbar-modes">
                 <AudioReadingMenu
-                  isActive
+                  isActive={reviewStudyMode === "general"}
                   isOriginalVisible={isTranscriptVisible}
                   isVocabularyVisible={isVocabularyVisible}
+                  onActivate={() => selectReviewStudyMode("general")}
                   onOriginalVisibilityChange={setIsTranscriptVisible}
                   onVocabularyVisibilityChange={(visible) => {
                     setIsVocabularyVisible(visible);
                     if (!visible) setActiveWordTooltip(null);
                   }}
                 />
-                <div aria-label="原文显示模式" className="bbc-original-display-menu" role="group">
-                  {LISTENING_ORIGINAL_DISPLAY_MODES.map((displayMode) => (
-                    <button
-                      aria-pressed={originalDisplayMode === displayMode.mode}
-                      className={originalDisplayMode === displayMode.mode ? "active" : ""}
-                      key={displayMode.mode}
-                      onClick={() => setOriginalDisplayMode(displayMode.mode)}
-                      type="button"
-                    >
-                      {displayMode.label}
-                    </button>
-                  ))}
-                </div>
+                <button
+                  aria-pressed={reviewStudyMode === "intensive"}
+                  className={`bbc-fullscreen-toggle ${reviewStudyMode === "intensive" ? "active" : ""}`}
+                  onClick={() => selectReviewStudyMode(reviewStudyMode === "intensive" ? "general" : "intensive")}
+                  type="button"
+                >
+                  精读模式
+                </button>
+                <AudioSettingsMenus
+                  onChange={updateAudioSettings}
+                  onModeSelect={(nextMode) => selectReviewStudyMode(nextMode)}
+                  playModeLabel="精听模式"
+                  settings={audioSettings}
+                  variant="listening-only"
+                />
+                <AudioSettingsMenus
+                  onChange={updateAudioSettings}
+                  onModeSelect={(nextMode) => selectReviewStudyMode(nextMode)}
+                  settings={audioSettings}
+                  variant="speaking-writing"
+                />
               </div>
-
+              <div className="bbc-audio-toolbar-utilities">
+                <button
+                  aria-label={isReadingTimerRunning ? "暂停计时" : "开始计时"}
+                  aria-pressed={isReadingTimerRunning}
+                  className={`bbc-reading-timer ${isReadingTimerRunning ? "active" : ""}`}
+                  onClick={() => {
+                    setIsReadingTimerVisible(true);
+                    setIsReadingTimerRunning((current) => !current);
+                  }}
+                  title={isReadingTimerRunning ? "点击暂停计时" : "点击开始计时"}
+                  type="button"
+                >
+                  <span>{isReadingTimerVisible ? formatReadingTime(readingSeconds) : "计时"}</span>
+                </button>
+                <AudioPronunciationMenu
+                  onChange={(pronunciationMode) => updateAudioSettings({ pronunciationMode })}
+                  value={audioSettings.pronunciationMode}
+                />
+                <AudioSettingsMenus
+                  hasSelectedRate
+                  onChange={updateAudioSettings}
+                  settings={audioSettings}
+                  variant="rate-only"
+                />
+                <AudioSettingsMenus
+                  onChange={updateAudioSettings}
+                  settings={audioSettings}
+                  variant="subtitle-only"
+                />
+                <button
+                  aria-pressed={isFullscreen}
+                  className="bbc-fullscreen-toggle"
+                  onClick={toggleListeningFullscreen}
+                  type="button"
+                >
+                  {isFullscreen ? "退出全屏" : "全屏"}
+                </button>
+                <button
+                  className={`bbc-annotation-toggle ${isNotesOpen ? "active" : ""}`}
+                  data-study-annotation-toggle
+                  onClick={() => setIsNotesOpen((value) => !value)}
+                  type="button"
+                >
+                  批注
+                </button>
+              </div>
+            </div>
+          </section>
+        ) : null}
+        {submitted ? (
+          <aside
+            className={`practice-audio-study-panel ${
+              mobileReviewPane === "transcript" ? "mobile-pane-active" : "mobile-pane-hidden"
+            }`}
+          >
+            <section
+              className="practice-listening-card"
+              onPointerUp={handleQuestionSelection}
+              onWheel={handleSubtitlePanelWheel}
+            >
               {section.transcriptSentences.length === 0 ? (
                 <p className="muted">还没有逐句原文。导入 transcript_sentences 后会显示中英字幕。</p>
               ) : isTranscriptVisible ? (
@@ -5358,17 +5433,8 @@ export function ListeningPractice({
                           />
                         </div>
                       </div>
-                      <div>
-                        {audioSettings.subtitleMode !== "chinese" ? renderEnglishSubtitle(sentence) : null}
-                        {audioSettings.subtitleMode !== "english" && sentence.chineseText ? (
-                          <small
-                            className={
-                              audioSettings.subtitleMode === "chinese" ? "primary-translation" : ""
-                            }
-                          >
-                            {sentence.chineseText}
-                          </small>
-                        ) : null}
+                      <div className={reviewStudyMode === "intensive" ? "listening-intensive-sentence" : ""}>
+                        {renderTranscriptSentenceContent(sentence)}
                       </div>
                     </article>
                   ))}
@@ -5703,7 +5769,7 @@ export function ListeningPractice({
           </div>
 
           {section.transcriptSentences.length === 0 ? (
-            <p className="muted">还没有逐句原文。导入 transcript_sentences 后会显示英文、中文和单句音频。</p>
+            <p className="muted">还没有逐句原文。导入 transcript_sentences 后会显示中英字幕。</p>
           ) : (
             <div className="sentence-list">
               {section.transcriptSentences.map((sentence) => {
@@ -5792,6 +5858,7 @@ export function ListeningPractice({
                   {sentence.audioUrl ? (
                     <AudioPlayer
                       autoPlaySignal={sentenceAutoPlaySignals[sentence.id] ?? 0}
+                      controls="hidden"
                       deferSentenceLoop={audioSettings.speakingMode !== "none"}
                       hasSelectedRate
                       html5={false}
@@ -5828,7 +5895,6 @@ export function ListeningPractice({
           style={{
             left: activeWordTooltip.left,
             top: activeWordTooltip.top,
-            width: activeWordTooltip.width,
           }}
           onClick={(event) => event.stopPropagation()}
           onMouseEnter={() => {
@@ -5838,7 +5904,9 @@ export function ListeningPractice({
           onMouseLeave={() => scheduleHideWordTooltip(1500)}
         >
           <div className="word-tooltip-title-row">
-            <strong>{activeWordTooltip.word}</strong>
+            <Link href={`/vocabulary/${encodeURIComponent(activeWordTooltip.word)}`}>
+              <strong>{activeWordTooltip.word}</strong>
+            </Link>
             <div className="word-tooltip-favorite-share-actions favorite-share-actions">
               <button
                 aria-label={`收藏 ${activeWordTooltip.word}`}

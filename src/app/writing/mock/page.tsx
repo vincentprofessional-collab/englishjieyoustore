@@ -1,4 +1,6 @@
+import { ProjectAccessGate } from "@/components/project-access-gate";
 import { WritingWorkspace } from "@/components/writing-workspace";
+import { getPaidContentKey } from "@/lib/access-control";
 import { getWritingQuestion } from "@/lib/ielts/writing";
 
 export default function WritingMockPage() {
@@ -9,5 +11,13 @@ export default function WritingMockPage() {
     return null;
   }
 
-  return <WritingWorkspace mode="mock" questions={[task1, task2]} />;
+  return (
+    <ProjectAccessGate
+      contentKey={getPaidContentKey("writing-practice", "full-mock")}
+      projectKey="writing"
+      title="雅思写作模考需要单独开通"
+    >
+      <WritingWorkspace mode="mock" questions={[task1, task2]} />
+    </ProjectAccessGate>
+  );
 }
