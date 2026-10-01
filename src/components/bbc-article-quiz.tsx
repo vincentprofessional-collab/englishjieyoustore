@@ -402,11 +402,13 @@ function SummaryFillBlankQuestion({
           const number = questions[Math.floor(index / 2)]?.number ?? Math.floor(index / 2) + 1;
           const value = values[number] ?? "";
           const question = questions.find((item) => item.number === number);
-          const wrong = submitted && question?.answer !== value;
+          const hasReferenceAnswer = Boolean(question?.answer);
+          const correct = submitted && hasReferenceAnswer && question?.answer === value;
+          const wrong = submitted && hasReferenceAnswer && !correct;
           return (
             <button
               aria-label={value ? `第 ${number} 空已填入 ${value}` : `第 ${number} 空`}
-              className={`${styles.dropZone} ${hovering === number ? styles.dropZoneHover : ""} ${wrong ? styles.wrongDropZone : ""}`}
+              className={`${styles.dropZone} ${hovering === number ? styles.dropZoneHover : ""} ${correct ? styles.correctDropZone : ""} ${wrong ? styles.wrongDropZone : ""}`}
               data-bbc-blank-number={number}
               draggable={Boolean(value)}
               onClick={() => {

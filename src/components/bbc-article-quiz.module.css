@@ -24,8 +24,8 @@
 .choiceGrid { display: grid; gap: 10px; }
 .choice { display: grid; grid-template-columns: 30px minmax(0, 1fr) 24px; align-items: start; gap: 8px; width: 100%; border: 1px solid #d8d0c2; border-radius: 12px; padding: 12px 14px; background: #fff; color: #171d19; text-align: left; font: inherit; font-size: 17px; line-height: 1.5; cursor: pointer; }
 .choice:hover, .choice[aria-checked="true"] { border-color: #b78926; background: #fff8e5; }
-.correctChoice { border-color: #3e8b63 !important; background: #edf6f1 !important; }
-.wrongChoice { border-color: #b44b3e !important; background: #fff0ed !important; }
+.correctChoice { border-color: #3e8b63 !important; background: #edf6f1 !important; color: #174f40 !important; }
+.wrongChoice { border-color: #b44b3e !important; background: #fff0ed !important; color: #8a332d !important; }
 .textarea { display: block; width: 100%; max-width: 100%; min-height: 92px; box-sizing: border-box; resize: vertical; border: 1px solid #d8d0c2; border-radius: 10px; padding: 12px 16px; background: #fff; color: #171d19; font: inherit; font-size: 18px; line-height: 1.6; }
 .matchingRow { display: grid; grid-template-columns: minmax(130px, .35fr) minmax(0, 1fr); align-items: center; gap: 14px; font-size: 18px; line-height: 1.5; }
 .matchingForm { min-width: 0; }
@@ -34,7 +34,8 @@
 .answerBlank { display: inline-block; min-width: 125px; margin: 0 5px; border-bottom: 2px solid #b78926; border-radius: 4px 4px 0 0; padding: 2px 8px; background: #fff8e5; color: #174f40; font: inherit; font-weight: 700; vertical-align: baseline; }
 .dropZone { display: inline-block; min-width: 125px; margin: 0 5px; border: 0; border-bottom: 2px solid #b78926; border-radius: 4px 4px 0 0; padding: 2px 8px; background: #fff8e5; color: #174f40; font: inherit; font-weight: 700; cursor: pointer; vertical-align: baseline; }
 .dropZoneHover, .dropZone:focus-visible { outline: 2px solid #b78926; outline-offset: 2px; background: #f9edc5; }
-.wrongDropZone { border-bottom-color: #b44b3e; background: #fff0ed; }
+.correctDropZone { border-bottom-color: #3e8b63; background: #edf6f1; color: #174f40; }
+.wrongDropZone { border-bottom-color: #b44b3e; background: #fff0ed; color: #8a332d; }
 .wordBank { display: flex; flex-wrap: wrap; align-items: center; gap: 9px; margin: 4px 0 0 34px; font-size: clamp(18px, 1.4vw, 22px); }
 .wordBankDropHover { outline: 2px solid #b78926; outline-offset: 3px; border-radius: 10px; }
 .word { border: 1px solid #cda94e; border-radius: 999px; padding: 7px 13px; background: #fff8e5; color: #684c11; font: inherit; font-size: inherit; line-height: 1.35; cursor: grab; touch-action: none; }

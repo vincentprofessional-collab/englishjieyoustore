@@ -417,11 +417,11 @@ function VocabularyEntryCard({
           {isAnswerVisible ? (
             <div className="writing-vocab-translation-review" aria-label={`${entry.term} translation review`}>
               {reviewSegments.length > 0 ? (
-                reviewSegments.map((segment) =>
-                  segment.isWrong ? (
-                    <span className="wrong" key={segment.key}>{segment.text}</span>
-                  ) : segment.text
-                )
+                reviewSegments.map((segment) => (
+                  <span className={segment.isWrong ? "wrong" : "correct"} key={segment.key}>
+                    {segment.text}
+                  </span>
+                ))
               ) : (
                 <span className="wrong">Write the English sentence here...</span>
               )}

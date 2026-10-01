@@ -3422,6 +3422,11 @@
   display: block;
 }
 
+.writing-vocab-translation-review .correct {
+  color: var(--success);
+  font-weight: 1000;
+}
+
 .writing-vocab-translation-review .wrong {
   color: var(--danger);
   font-weight: 1000;
