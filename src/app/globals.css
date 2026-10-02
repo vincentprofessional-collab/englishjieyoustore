@@ -31338,6 +31338,9 @@ body .mobile-bottom-nav a.active { color: #126d52 !important; }
 
   .mobile-exam-list {
     align-content: start;
+    display: grid;
+    gap: 3px;
+    grid-template-columns: minmax(0, 1fr);
     max-height: none;
     overflow: visible;
   }
@@ -31348,6 +31351,7 @@ body .mobile-bottom-nav a.active { color: #126d52 !important; }
     border-radius: 0;
     color: #64736a;
     min-height: 42px;
+    min-width: 0;
     text-align: left;
   }
 
