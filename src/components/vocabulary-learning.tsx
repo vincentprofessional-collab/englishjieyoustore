@@ -2488,8 +2488,10 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
           ) : null}
           {!loading && !loadError && entryGate === "select-book" ? (
             <div className="vocabulary-learning-empty vocabulary-learning-plan-empty">
-              <strong>请选择左侧词汇书</strong>
-              <p>选择后会自动打开这本词汇书的学习设置。</p>
+              <strong className="vocabulary-learning-book-select-desktop">请选择左侧词汇书</strong>
+              <p className="vocabulary-learning-book-select-desktop">选择后会自动打开这本词汇书的学习设置。</p>
+              <strong className="vocabulary-learning-book-select-mobile">请点击右上角设置</strong>
+              <p className="vocabulary-learning-book-select-mobile">在设置中选择词汇书并完成学习设置。</p>
             </div>
           ) : null}
           {!loading && !loadError && entryGate === "continue" ? (
@@ -2755,6 +2757,19 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
             <div className="vocabulary-learning-settings-head">
               <button aria-label="关闭设置并暂停学习" className="vocabulary-learning-settings-close" onClick={closeStudySettings} type="button">×</button>
             </div>
+            <label className="vocabulary-learning-settings-book-select">
+              <span>词汇书</span>
+              <select
+                aria-label="选择词汇书"
+                onChange={(event) => selectWord(event.target.value as BookSelectionKey)}
+                value={settingsOpenFor}
+              >
+                <option value="生词本">生词本（{favoriteWords.length.toLocaleString()}）</option>
+                {books.map((book) => (
+                  <option key={book.key} value={book.key}>{book.label}</option>
+                ))}
+              </select>
+            </label>
             <div className="vocabulary-learning-settings-fields">
               <label className="vocabulary-learning-settings-daily-new">
                 <span>每日新词</span>
