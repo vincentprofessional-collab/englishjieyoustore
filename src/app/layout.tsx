@@ -6,7 +6,7 @@ import { GlobalVocabularySearch } from "@/components/global-vocabulary-search";
 import { IeltsSectionShell } from "@/components/ielts-section-shell";
 import { SiteAnalyticsTracker } from "@/components/site-analytics-tracker";
 import { SiteFooter } from "@/components/site-footer";
-import { SiteNav } from "@/components/site-nav";
+import { MobileBottomNav, SiteNav } from "@/components/site-nav";
 import { getCachedPublishedSiteChromeConfig } from "@/lib/content/site-chrome-server";
 import { getLegacySessionMigrationScript } from "@/lib/supabase/legacy-session-migration";
 import "./globals.css";
@@ -42,6 +42,7 @@ export default async function RootLayout({
       <body>
         <main className="shell">
           <SiteNav config={renderedSiteChromeConfig} />
+          <MobileBottomNav />
           <Suspense fallback={null}>
             <GlobalVocabularySearch />
           </Suspense>

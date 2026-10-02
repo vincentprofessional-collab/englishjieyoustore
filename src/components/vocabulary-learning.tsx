@@ -11,6 +11,7 @@ import {
   type FormEvent,
   type PointerEvent,
 } from "react";
+import Link from "next/link";
 
 import { VocabularyDetailShell } from "@/components/vocabulary-detail-shell";
 import { VocabularyDetailContent } from "@/components/vocabulary-detail-content";
@@ -1649,6 +1650,8 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
     [currentWordId, visibleWords],
   );
   const currentProgress = currentWord ? progressFor(progress, currentWord.id) : emptyProgress();
+  const reviewedTodayCount = visibleWords.filter((word) => isReviewedToday(progressFor(progress, word.id).lastReviewedAt, Date.now())).length;
+  const dailyGoal = currentSettings.dailyNew;
   const browseMode = currentSettings.method === "browse";
   const canRunRound = !browseMode || pageVisible;
   const modeIndex = selectEnabledMode(
@@ -2424,6 +2427,15 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
 
   return (
     <section className="stack vocabulary-learning-page">
+      <header className="mobile-learning-header">
+        <Link href="/vocabulary">‹ 单词</Link>
+        <h1>背单词</h1>
+        <button aria-label="背单词设置" disabled={!settingsHydrated || advancePending} onClick={openStudySettings} type="button">⚙</button>
+      </header>
+      <section aria-label="今日学习进度" className="mobile-learning-progress">
+        <div><strong>今日学习</strong><span>已完成 {Math.min(reviewedTodayCount, dailyGoal)} / {dailyGoal}</span></div>
+        <div aria-valuemax={dailyGoal} aria-valuemin={0} aria-valuenow={Math.min(reviewedTodayCount, dailyGoal)} className="mobile-learning-progress-track" role="progressbar"><span style={{ width: `${dailyGoal ? Math.min(100, reviewedTodayCount / dailyGoal * 100) : 0}%` }} /></div>
+      </section>
       <div className="vocabulary-learning-layout">
         <aside className="vocabulary-learning-sidebar" ref={sidebarRef}>
           <div className="vocabulary-learning-book-heading">
@@ -2522,6 +2534,15 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
                     <div className="vocabulary-learning-complete-detail vocabulary-detail-content">
                       <div className="vocabulary-learning-complete-detail-header">
                         <h1>{currentWord.word}</h1>
+                        <div className="vocabulary-learning-complete-detail-meta">
+                          <VocabularyInlinePronunciation
+                            ukAudioUrl={currentWord.ukAudioUrl}
+                            ukPhonetic={currentWord.ukPhonetic || currentWord.phonetic}
+                            usAudioUrl={currentWord.usAudioUrl}
+                            usPhonetic={currentWord.usPhonetic || currentWord.phonetic}
+                            word={currentWord.word}
+                          />
+                        </div>
                       </div>
                     </div>
                   ) : null}

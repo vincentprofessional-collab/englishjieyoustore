@@ -2,6 +2,7 @@
 
 import { Fragment, useEffect, useMemo, useState } from "react";
 import type { ReactNode } from "react";
+import { useSearchParams } from "next/navigation";
 import { focusNextSeniorHighInlineAnswer } from "@/lib/senior-high/inline-navigation";
 import type { SeniorHighItem } from "@/lib/senior-high/types";
 
@@ -67,6 +68,8 @@ function InlineStem({ item, onChange, stem, value }: { item: SeniorHighItem; onC
 }
 
 export function SeniorHighKnowledge() {
+  const searchParams = useSearchParams();
+  const requestedTopic = searchParams.get("topic");
   const [items, setItems] = useState<SeniorHighItem[] | null>(null);
   const [topic, setTopic] = useState<string | null>(null);
   const [answers, setAnswers] = useState<Record<string, string>>({});
@@ -105,6 +108,11 @@ export function SeniorHighKnowledge() {
       setSubmitted(false);
     }
   };
+
+  useEffect(() => {
+    if (!requestedTopic || !groups.some(([name]) => name === requestedTopic)) return;
+    openTopic(requestedTopic);
+  }, [groups, requestedTopic]);
   const updateAnswer = (id: string, value: string) => {
     setAnswers((current) => ({ ...current, [id]: value }));
     setSubmitted(false);

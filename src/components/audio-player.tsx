@@ -683,6 +683,7 @@ export function AudioPlayer({
 export function AudioSettingsMenus({
   className = "",
   hasSelectedRate = true,
+  modeLabels,
   onChange,
   onModeSelect,
   playModeLabel = "听力模式",
@@ -693,6 +694,7 @@ export function AudioSettingsMenus({
 }: {
   className?: string;
   hasSelectedRate?: boolean;
+  modeLabels?: { listening?: string; speaking?: string; writing?: string };
   onChange: (nextSettings: Partial<AudioPlayerSettings>) => void;
   onModeSelect?: (mode: "listening" | "speaking" | "writing") => void;
   playModeLabel?: string;
@@ -768,7 +770,7 @@ export function AudioSettingsMenus({
     ...(variant === "full" || variant === "speaking-writing"
       ? [
           {
-            selectedLabel: "写作模式",
+            selectedLabel: modeLabels?.writing ?? "写作模式",
             selectedValue: settings.dictationMode,
             options: dictationModeOptions,
             onOpen: onModeSelect
@@ -791,7 +793,7 @@ export function AudioSettingsMenus({
             },
           },
           {
-            selectedLabel: "口语模式",
+            selectedLabel: modeLabels?.speaking ?? "口语模式",
             selectedValue: settings.speakingMode,
             options: speakingModeOptions,
             onOpen: onModeSelect
@@ -866,6 +868,7 @@ export function AudioChoiceMenu({
 
 export function AudioReadingMenu({
   className = "",
+  label = "泛读模式",
   isActive,
   isOriginalVisible,
   isVocabularyVisible,
@@ -874,6 +877,7 @@ export function AudioReadingMenu({
   onVocabularyVisibilityChange,
 }: {
   className?: string;
+  label?: string;
   isActive: boolean;
   isOriginalVisible: boolean;
   isVocabularyVisible: boolean;
@@ -903,7 +907,7 @@ export function AudioReadingMenu({
         onClick={onActivate}
         type="button"
       >
-        <span>泛读模式</span>
+        <span>{label}</span>
       </button>
       <div className="player-menu-panel audio-reading-mode-panel">
         {groups.map((group) => (

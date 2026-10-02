@@ -218,19 +218,9 @@ export function VocabularyVideoPlayer({
         <>
           <div className="vocabulary-video-frame">
             {previewMode ? (
-              <div className={`vocabulary-video-preview-scene ${isPlaying ? "is-playing" : ""}`}>
-                <span className="vocabulary-video-preview-label">播放器效果预览</span>
+              <div aria-label="视频画面预览" className={`vocabulary-video-preview-scene ${isPlaying ? "is-playing" : ""}`}>
                 <div className="vocabulary-video-preview-orbit vocabulary-video-preview-orbit-one" />
                 <div className="vocabulary-video-preview-orbit vocabulary-video-preview-orbit-two" />
-                <button
-                  aria-label={isPlaying ? "暂停预览" : "播放预览"}
-                  className="vocabulary-video-preview-play"
-                  onClick={togglePlayback}
-                  type="button"
-                >
-                  {isPlaying ? "Ⅱ" : "▶"}
-                </button>
-                <span className="vocabulary-video-preview-caption">视频上传完成后在这里播放</span>
               </div>
             ) : (
               <video
@@ -256,103 +246,53 @@ export function VocabularyVideoPlayer({
                 src={currentVideo.src}
               />
             )}
-            {!previewMode ? (
-              <div aria-label="画面显示方式" className="vocabulary-video-frame-actions">
-                <button
-                  aria-label="小窗播放"
-                  className="vocabulary-video-frame-action-button"
-                  onClick={togglePictureInPicture}
-                  title="小窗播放"
-                  type="button"
-                >
-                  <svg aria-hidden="true" viewBox="0 0 24 24">
-                    <rect height="14" rx="2" width="18" x="3" y="4" />
-                    <path d="M12 12h7v5h-7z" />
-                  </svg>
-                </button>
-                <button
-                  aria-label="全屏播放"
-                  className="vocabulary-video-frame-action-button"
-                  onClick={toggleFullscreen}
-                  title="全屏播放"
-                  type="button"
-                >
-                  <svg aria-hidden="true" viewBox="0 0 24 24">
-                    <path d="M8 3H5a2 2 0 0 0-2 2v3m13-5h3a2 2 0 0 1 2 2v3M3 16v3a2 2 0 0 0 2 2h3m13-5v3a2 2 0 0 1-2 2h-3" />
-                  </svg>
-                </button>
-              </div>
-            ) : null}
           </div>
           <div aria-label="视频控制条" className="vocabulary-video-controls">
-            <button
-              aria-label="播放上一个视频"
-              className="vocabulary-video-control-button"
-              onClick={() => selectVideo(activeIndex - 1, true)}
-              type="button"
-            >
-              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6" /></svg>
-            </button>
-            <button
-              aria-label={isPlaying ? "暂停视频" : "播放视频"}
-              className="vocabulary-video-control-button is-play-pause"
-              onClick={togglePlayback}
-              type="button"
-            >
-              {isPlaying ? (
-                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14" /></svg>
-              ) : (
-                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m8 5 12 7-12 7z" /></svg>
-              )}
-            </button>
-            <time className="vocabulary-video-time">{formatVideoTime(currentTime)}</time>
-            <input
-              aria-label="视频时间进度条"
-              className="vocabulary-video-seek"
-              disabled={duration <= 0 || previewMode}
-              max={duration || 0}
-              min={0}
-              onChange={(event) => {
-                const nextTime = Number(event.currentTarget.value);
-                if (videoRef.current) videoRef.current.currentTime = nextTime;
-                setCurrentTime(nextTime);
-              }}
-              step={0.1}
-              type="range"
-              value={Math.min(currentTime, duration)}
-            />
-            <time className="vocabulary-video-time">{formatVideoTime(duration)}</time>
-            <button
-              aria-label="播放下一个视频"
-              className="vocabulary-video-control-button"
-              onClick={() => selectVideo(activeIndex + 1, true)}
-              type="button"
-            >
-              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6" /></svg>
-            </button>
-            <div aria-label="视频评价" className="vocabulary-video-vote-actions">
-              <button
-                aria-label={`赞当前视频，${currentVideo.likes} 个赞`}
-                aria-pressed={currentVideo.likedByMe}
-                className={`vocabulary-video-action-button vocabulary-video-like-button ${currentVideo.likedByMe ? "is-liked" : ""}`}
-                disabled={(!votesEnabled && !previewMode) || currentVideo.likedByMe}
-                onClick={toggleLike}
-                title={!votesEnabled && !previewMode ? "点赞功能将在数据表启用后开放" : undefined}
-                type="button"
-              >
-                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 10v11H3V10h4Zm0 10h9.2a2 2 0 0 0 1.9-1.4l2-6A2 2 0 0 0 18.2 10H14l.7-3.1A2.4 2.4 0 0 0 12.4 4L7 10v10Z" /></svg>
-                <span>{currentVideo.likes}</span>
+            <div className="vocabulary-video-progress-row">
+              <time className="vocabulary-video-time">{formatVideoTime(currentTime)}</time>
+              <input
+                aria-label="视频时间进度条"
+                className="vocabulary-video-seek"
+                disabled={duration <= 0 || previewMode}
+                max={duration || 0}
+                min={0}
+                onChange={(event) => {
+                  const nextTime = Number(event.currentTarget.value);
+                  if (videoRef.current) videoRef.current.currentTime = nextTime;
+                  setCurrentTime(nextTime);
+                }}
+                step={0.1}
+                type="range"
+                value={Math.min(currentTime, duration)}
+              />
+              <time className="vocabulary-video-time">{formatVideoTime(duration)}</time>
+            </div>
+            <div aria-label="视频播放与评价" className="vocabulary-video-action-row">
+              <div aria-label="画面显示方式" className="vocabulary-video-tools">
+                <button aria-label="小窗播放" className="vocabulary-video-frame-action-button" onClick={togglePictureInPicture} title="小窗播放" type="button">
+                  <svg aria-hidden="true" viewBox="0 0 24 24"><rect height="14" rx="2" width="18" x="3" y="4" /><path d="M12 12h7v5h-7z" /></svg>
+                </button>
+                <button aria-label="全屏播放" className="vocabulary-video-frame-action-button" onClick={toggleFullscreen} title="全屏播放" type="button">
+                  <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m13-5h3a2 2 0 0 1 2 2v3M3 16v3a2 2 0 0 0 2 2h3m13-5v3a2 2 0 0 1-2 2h-3" /></svg>
+                </button>
+              </div>
+              <button aria-label="播放上一个视频" className="vocabulary-video-control-button" onClick={() => selectVideo(activeIndex - 1, true)} type="button">
+                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6" /></svg>
               </button>
-              <button
-                aria-label={`踩当前视频，${dislikesByPath[currentVideo.path] ?? 0} 次，并播放下一个`}
-                className="vocabulary-video-action-button vocabulary-video-dislike-button"
-                onClick={dislikeAndPlayNext}
-                title="不喜欢，移到后面并播放下一个"
-                type="button"
-              >
-                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M17 14V3h4v11h-4Zm0-10H7.8a2 2 0 0 0-1.9 1.4l-2 6A2 2 0 0 0 5.8 14H10l-.7 3.1a2.4 2.4 0 0 0 2.3 2.9l5.4-6V4Z" /></svg>
-                <span>{dislikesByPath[currentVideo.path] ?? 0}</span>
+              <button aria-label={isPlaying ? "暂停视频" : "播放视频"} className="vocabulary-video-control-button is-play-pause" onClick={togglePlayback} type="button">
+                {isPlaying ? <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14" /></svg> : <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m8 5 12 7-12 7z" /></svg>}
               </button>
+              <button aria-label="播放下一个视频" className="vocabulary-video-control-button" onClick={() => selectVideo(activeIndex + 1, true)} type="button">
+                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6" /></svg>
+              </button>
+              <div aria-label="视频评价" className="vocabulary-video-vote-actions">
+                <button aria-label={`赞当前视频，${currentVideo.likes} 个赞`} aria-pressed={currentVideo.likedByMe} className={`vocabulary-video-action-button vocabulary-video-like-button ${currentVideo.likedByMe ? "is-liked" : ""}`} disabled={(!votesEnabled && !previewMode) || currentVideo.likedByMe} onClick={toggleLike} title={!votesEnabled && !previewMode ? "点赞功能将在数据表启用后开放" : undefined} type="button">
+                  <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 10v11H3V10h4Zm0 10h9.2a2 2 0 0 0 1.9-1.4l2-6A2 2 0 0 0 18.2 10H14l.7-3.1A2.4 2.4 0 0 0 12.4 4L7 10v10Z" /></svg><span>{currentVideo.likes}</span>
+                </button>
+                <button aria-label={`踩当前视频，${dislikesByPath[currentVideo.path] ?? 0} 次，并播放下一个`} className="vocabulary-video-action-button vocabulary-video-dislike-button" onClick={dislikeAndPlayNext} title="不喜欢，移到后面并播放下一个" type="button">
+                  <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M17 14V3h4v11h-4Zm0-10H7.8a2 2 0 0 0-1.9 1.4l-2 6A2 2 0 0 0 5.8 14H10l-.7 3.1a2.4 2.4 0 0 0 2.3 2.9l5.4-6V4Z" /></svg><span>{dislikesByPath[currentVideo.path] ?? 0}</span>
+                </button>
+              </div>
             </div>
           </div>
         </>

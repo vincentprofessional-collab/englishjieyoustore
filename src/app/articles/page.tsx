@@ -12,10 +12,11 @@ export default async function ArticlesPage({
   const content = await getPublishedPageContent("articles");
   const requestedYear = Number((await searchParams).year);
   const selectedYear = BBC_YEARS.includes(requestedYear) ? requestedYear : BBC_DEFAULT_YEAR;
-  const yearGroups = BBC_YEARS.map((year) => ({
+  const yearGroups = [...BBC_YEARS].sort((left, right) => right - left).map((year) => ({
     articles: [...getBbcArticlesByYear(year)]
       .sort((left, right) => right.id.localeCompare(left.id))
       .map((article) => ({
+        date: article.date,
         id: article.id,
         title: article.title,
         titleChinese: article.titleChinese,

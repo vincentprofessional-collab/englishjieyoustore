@@ -9,7 +9,10 @@ if (process.env.VERCEL === "1" && process.env.COS_MEDIA_ENABLED !== "true") {
 }
 
 const nextConfig: NextConfig = {
-  allowedDevOrigins: ["127.0.0.1"],
+  allowedDevOrigins: [
+    "127.0.0.1",
+    ...(process.env.NEXT_ALLOWED_DEV_ORIGIN ? [process.env.NEXT_ALLOWED_DEV_ORIGIN] : []),
+  ],
   images: {
     remotePatterns: supabaseHostname
       ? [

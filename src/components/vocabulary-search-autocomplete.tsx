@@ -10,6 +10,7 @@ import type { VocabularyAutocompleteItem } from "@/lib/vocabulary/local-vocabula
 type VocabularySearchAutocompleteProps = {
   initialQuery: string;
   suggestions?: VocabularyAutocompleteItem[];
+  autoFocus?: boolean;
 };
 
 function normalizeSearchInput(value: string) {
@@ -31,6 +32,7 @@ function isInteractiveTarget(target: EventTarget | null) {
 export function VocabularySearchAutocomplete({
   initialQuery,
   suggestions = [],
+  autoFocus = true,
 }: VocabularySearchAutocompleteProps) {
   const pathname = usePathname();
   const router = useRouter();
@@ -121,7 +123,7 @@ export function VocabularySearchAutocomplete({
         <div className="vocabulary-search-row">
           <input
             autoComplete="off"
-            autoFocus
+            autoFocus={autoFocus}
             id="word-search"
             name="q"
             onChange={(event) => setQuery(event.target.value)}

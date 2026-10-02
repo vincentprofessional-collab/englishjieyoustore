@@ -18,14 +18,25 @@ export function generateStaticParams() {
 
 export default async function ArticlePage({
   params,
+  searchParams,
 }: {
   params: Promise<{ articleId: string }>;
+  searchParams: Promise<{ preview?: string }>;
 }) {
   const { articleId } = await params;
+  const { preview } = await searchParams;
   const article = getBbcArticleById(articleId);
 
   if (!article) {
     notFound();
+  }
+
+  const canonicalSyntaxSentences = article.year === 2026
+    ? (syntax2026 as Record<string, BbcSyntaxSentenceData[]>)[article.id]
+    : undefined;
+
+  if (process.env.NODE_ENV === "development" && preview === "mobile") {
+    return <ArticleDetailPage article={article} syntaxSentences={canonicalSyntaxSentences} />;
   }
 
   const supabase = await createServerSupabaseClient();
@@ -52,9 +63,6 @@ export default async function ArticlePage({
     );
   }
 
-  const canonicalSyntaxSentences = article.year === 2026
-    ? (syntax2026 as Record<string, BbcSyntaxSentenceData[]>)[article.id]
-    : undefined;
   let syntaxSentences = canonicalSyntaxSentences;
   if (canonicalSyntaxSentences) {
     const { data: syntaxOverride } = await supabase
