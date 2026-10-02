@@ -58,9 +58,11 @@ export function HomeStyleLab({ content }: { content: ManagedPageContent }) {
         </div>
       </section>
 
-      <section aria-label="帖子专区" className="home-mobile-posts-heading">
-        <h2>帖子专区</h2>
+      <section aria-labelledby="home-updates-title" className="home-mobile-updates-heading">
+        <span>ANNOUNCEMENTS · POSTS</span>
+        <h2 id="home-updates-title">网站公告与帖子</h2>
       </section>
+
       <GuideBoard compact hideHeading hidePostChrome homeLanding initialExpanded={false} placementPath="/" postLimit={50} />
 
       {items.length ? (

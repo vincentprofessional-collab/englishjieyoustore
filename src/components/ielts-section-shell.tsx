@@ -432,7 +432,7 @@ function IeltsSectionShellContent({
                       const shouldExpand = expandedExamGroupId !== group.id;
                       setExpandedExamGroupId(shouldExpand ? group.id : null);
                       setExpandedStudyNavChildIds(
-                        shouldExpand
+                        shouldExpand && !window.matchMedia("(max-width: 820px)").matches
                           ? new Set(getExpandableStudyNavIds(group.children, group.id))
                           : new Set(),
                       );

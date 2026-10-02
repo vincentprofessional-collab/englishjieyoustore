@@ -16439,6 +16439,55 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
     font-size: clamp(42px, 13vw, 62px);
   }
 
+  .home-simple .home-hero-panel {
+    padding: 20px 16px;
+  }
+
+  .home-simple .home-kicker {
+    font-size: 10px !important;
+    letter-spacing: .12em;
+    margin-bottom: 14px;
+  }
+
+  .home-simple .home-hero-copy h1 {
+    font-size: clamp(36px, 10vw, 48px) !important;
+    letter-spacing: -.045em;
+    line-height: 1.18;
+  }
+
+  .home-simple .managed-page-grid {
+    gap: 10px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .home-simple .managed-page-grid .writing-mode-card {
+    border-radius: 16px;
+    min-height: 174px;
+    padding: 15px 13px 18px;
+  }
+
+  .home-simple .managed-page-grid .writing-mode-card::after {
+    display: none;
+  }
+
+  .home-simple .managed-page-grid .writing-mode-card > span {
+    font-size: 9px !important;
+    letter-spacing: .06em;
+  }
+
+  .home-simple .managed-page-grid .writing-mode-card > strong {
+    font-size: 20px !important;
+  }
+
+  .home-simple .managed-page-grid .writing-mode-card > p {
+    font-size: 12px !important;
+    line-height: 1.45;
+  }
+
+  .home-simple .managed-page-grid .writing-mode-card > em {
+    font-size: 12px !important;
+  }
+
   .home-hero-copy > p {
     font-size: 15px;
     line-height: 1.75;
@@ -29130,6 +29179,36 @@ body *:not(.bbc-vocabulary-highlight):not(.bbc-active-word) {
   padding: 0 24px;
 }
 
+.home-mobile-updates-heading {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .site-footer {
+    display: none;
+  }
+
+  .home-mobile-updates-heading {
+    display: grid;
+    gap: 4px;
+    margin: 16px 4px 0;
+  }
+
+  .home-mobile-updates-heading > span {
+    color: var(--accent-dark);
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+  }
+
+  .home-mobile-updates-heading h2 {
+    color: var(--ink);
+    font-size: 22px;
+    line-height: 1.25;
+    margin: 0;
+  }
+}
+
 .nav-cta:hover,
 .nav-cta:focus-visible {
   background: linear-gradient(115deg, #f6d47d 0%, #e4b747 100%) !important;
@@ -30468,7 +30547,10 @@ body *:not(.bbc-vocabulary-highlight):not(.bbc-active-word) {
   html,
   body {
     min-width: 320px;
-    overflow-x: hidden;
+  }
+
+  body {
+    padding: 0;
   }
 
   .shell {
@@ -30524,7 +30606,9 @@ body *:not(.bbc-vocabulary-highlight):not(.bbc-active-word) {
   .global-vocabulary-search-strip { display: none !important; }
 
   body:has(.home-style-lab) .global-vocabulary-search-strip {
-    display: none !important;
+    display: block !important;
+    margin: 6px 14px 12px;
+    width: auto;
   }
 
   .global-vocabulary-search-strip .vocabulary-search,
@@ -30953,22 +31037,39 @@ body .mobile-bottom-nav a.active { color: #126d52 !important; }
 
   .mobile-exam-layout {
     gap: 10px;
-    grid-template-columns: 76px minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
+    height: min(72dvh, calc(100dvh - 250px));
+    min-height: 320px;
   }
 
   .mobile-exam-list {
+    align-items: center;
     background: transparent;
     border: 0;
     border-radius: 0;
-    gap: 3px;
-    padding: 0;
+    display: flex;
+    gap: 6px;
+    height: auto;
+    max-height: none;
+    min-width: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 2px 0 6px;
+    position: static;
+    scrollbar-width: none;
   }
 
+  .mobile-exam-list::-webkit-scrollbar { display: none; }
+
   .mobile-exam-list button {
+    flex: 0 0 auto;
     border-radius: 8px;
     font-size: 11px;
     min-height: 44px;
-    padding: 6px 2px;
+    min-width: 64px;
+    padding: 6px 12px;
+    white-space: nowrap;
   }
 
   .mobile-exam-list button.active {
@@ -30980,6 +31081,7 @@ body .mobile-bottom-nav a.active { color: #126d52 !important; }
     background: #fffdf8;
     border-color: #e8dfce;
     border-radius: 14px;
+    min-height: 0;
   }
 
   .mobile-exam-workspace-head {
@@ -31338,10 +31440,6 @@ body .mobile-bottom-nav a.active { color: #126d52 !important; }
   display: none;
 }
 
-.home-mobile-posts-heading {
-  display: none;
-}
-
 .home-announcement-label {
   display: none;
 }
@@ -31602,17 +31700,6 @@ body .mobile-bottom-nav a.active { color: #126d52 !important; }
 
   .vocabulary-learning-book-select-mobile {
     display: block;
-  }
-
-  .home-mobile-posts-heading {
-    display: block;
-    margin: 0 1px -4px;
-  }
-
-  .home-mobile-posts-heading h2 {
-    color: #24473b;
-    font-size: 18px !important;
-    margin: 0;
   }
 
   .home-style-lab .home-announcement-panel {
