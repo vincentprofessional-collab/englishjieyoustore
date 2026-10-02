@@ -49,9 +49,15 @@ export function scheduleReview(
   now: number,
   hadInputError = false,
   enabledModes: readonly number[] = ALL_MODES,
+  advanceToModeOnFamiliar?: number,
 ) {
   const modes = classifiedModes(enabledModes);
   const currentMode = modes.includes(previous.modeIndex) ? previous.modeIndex : modes[0];
+  const forcedFamiliarMode = outcome === "familiar"
+    && advanceToModeOnFamiliar !== undefined
+    && modes.includes(advanceToModeOnFamiliar)
+    ? advanceToModeOnFamiliar
+    : null;
   const priorMistakes = previous.mistakeCount
     ?? (previous.spellingHadError || previous.lastOutcome === "vague" || previous.lastOutcome === "unfamiliar" ? 1 : 0);
   const isFamiliar = outcome === "familiar" && !hadInputError;
@@ -60,9 +66,11 @@ export function scheduleReview(
   const previousStep = previous.reviewStep
     ?? (previous.completed || previous.plan === "done" ? LONG_TERM_DAYS.length : previous.plan === "long-term" ? 1 : 0);
   const isLongTerm = previousStep > 0 || previous.plan === "long-term" || previous.plan === "done" || previous.completed;
-  const recoveryRequired = previous.recoveryRequired === true
+  const recoveryRequired = forcedFamiliarMode === null && (
+    previous.recoveryRequired === true
     || previous.lastOutcome === "vague"
-    || previous.lastOutcome === "unfamiliar";
+    || previous.lastOutcome === "unfamiliar"
+  );
   const recoveryFamiliarStreak = previous.recoveryFamiliarStreak ?? 0;
 
   if (!isLongTerm) {
@@ -100,7 +108,7 @@ export function scheduleReview(
     }
 
     const completedMode = currentMode === modes[modes.length - 1];
-    const nextReviewMode = nextMode(currentMode, modes);
+    const nextReviewMode = forcedFamiliarMode ?? nextMode(currentMode, modes);
     const reviewStep = completedMode ? 1 : 0;
     const intervalMs = completedMode ? LONG_TERM_DAYS[0] * DAY : MINUTE;
     return {
@@ -156,10 +164,10 @@ export function scheduleReview(
   return {
     completed: false,
     consecutiveFamiliar: 0,
-    consecutiveFamiliarMode: nextMode(currentMode, modes),
+    consecutiveFamiliarMode: forcedFamiliarMode ?? nextMode(currentMode, modes),
     firstLearnedAt,
     mistakeCount,
-    modeIndex: nextMode(currentMode, modes),
+    modeIndex: forcedFamiliarMode ?? nextMode(currentMode, modes),
     nextReviewAt: now + LONG_TERM_DAYS[nextStep - 1] * DAY,
     plan: "long-term" as const,
     recoveryFamiliarStreak: 0,

@@ -2078,7 +2078,15 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
       const timestamp = Date.now();
       const previous = progressFor(progress, currentWord.id);
       const spellingError = Boolean(spellingDetails && (!spellingDetails.correct || spellingDetails.hadError));
-      const scheduledReview = scheduleReview({ ...previous, modeIndex }, outcome, timestamp, spellingError, enabledModeIndices(currentSettings));
+      const oralFamiliarNextMode = modeIndex === 2 && outcome === "familiar" ? 3 : undefined;
+      const scheduledReview = scheduleReview(
+        { ...previous, modeIndex },
+        outcome,
+        timestamp,
+        spellingError,
+        enabledModeIndices(currentSettings),
+        oralFamiliarNextMode,
+      );
       const next: ProgressEntry = {
         ...previous,
         ...scheduledReview,
@@ -2120,7 +2128,6 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
       if (modeIndex < 2 && !currentRoundRevealed) return;
       if (modeIndex === 2) {
         if (oralScoreFeedback === null) return;
-        if (outcome === "familiar" && oralScoreFeedback < ORAL_FAMILIAR_SCORE) return;
         commitOutcome(outcome, undefined, oralScoreFeedback);
         return;
       }
@@ -2421,7 +2428,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
           className="vocabulary-learning-category-button familiar"
           aria-keyshortcuts="ArrowLeft"
           title="左方向键：熟悉"
-          disabled={advancePending || (modeIndex < 2 && !currentRoundRevealed) || (modeIndex === 2 && (oralScoreFeedback === null || oralScoreFeedback < ORAL_FAMILIAR_SCORE)) || (modeIndex === 3 && !spellingCorrect)}
+          disabled={advancePending || (modeIndex < 2 && !currentRoundRevealed) || (modeIndex === 2 && oralScoreFeedback === null) || (modeIndex === 3 && !spellingCorrect)}
           onClick={() => modeIndex === 3 ? submitSpelling("familiar") : handleRecognitionOutcome("familiar")}
           type="button"
         >熟悉</button>

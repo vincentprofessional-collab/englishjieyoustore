@@ -61,6 +61,21 @@ test("旧进度的熟悉次数不会阻止答熟悉后立即切换", () => {
   assert.equal(next.nextReviewAt, 2 * minute);
 });
 
+test("口语模式选择熟悉后直接进入已启用的写作模式，即使之前有错题记录", () => {
+  const next = scheduleReview({
+    lastOutcome: "unfamiliar",
+    lastReviewedAt: 0,
+    modeIndex: 2,
+    plan: "short-term",
+    recoveryFamiliarStreak: 2,
+    recoveryRequired: true,
+  }, "familiar", minute, false, [1, 0, 2, 3], 3);
+
+  assert.equal(next.modeIndex, 3);
+  assert.equal(next.recoveryRequired, false);
+  assert.equal(next.recoveryFamiliarStreak, 0);
+});
+
 test("阅读、听力、口语、写作各答熟悉一次后进入三天后的长期复习", () => {
   let previous = { lastReviewedAt: null, modeIndex: 1, plan: "short-term" };
   let now = 0;
