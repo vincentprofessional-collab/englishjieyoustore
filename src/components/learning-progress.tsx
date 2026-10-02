@@ -34,6 +34,91 @@ function formatDuration(seconds: number) {
   return hours ? `${hours} 小时 ${minutes} 分` : `${minutes} 分钟`;
 }
 
+type TrendRange = "7d" | "30d" | "1y" | "3y" | "5y";
+type LearningTrendPoint = { articles: number; date: string; label: string; lookups: number; minutes: number; words: number };
+const TREND_RANGES: Array<{ key: TrendRange; label: string }> = [
+  { key: "7d", label: "7 天" },
+  { key: "30d", label: "30 天" },
+  { key: "1y", label: "1 年" },
+  { key: "3y", label: "3 年" },
+  { key: "5y", label: "5 年" },
+];
+
+function buildLearningTrend(range: TrendRange, siteHistory: SiteStudyHistory, vocabularyHistory: Record<string, DailySummary>, today: string) {
+  if (range === "7d" || range === "30d") {
+    const days = range === "7d" ? 7 : 30;
+    return Array.from({ length: days }, (_, index) => {
+      const date = dayAtOffset(today, index - days + 1);
+      const site = siteHistory[date] ?? { lookedUpWords: [], seconds: 0, studyItems: [] };
+      return {
+        articles: site.studyItems.length,
+        date,
+        label: date.slice(5),
+        lookups: site.lookedUpWords.length,
+        minutes: Math.round(site.seconds / 60),
+        words: vocabularyHistory[date]?.studiedWords ?? 0,
+      } satisfies LearningTrendPoint;
+    });
+  }
+
+  const months = range === "1y" ? 12 : range === "3y" ? 36 : 60;
+  const todayDate = new Date(`${today}T12:00:00`);
+  return Array.from({ length: months }, (_, index) => {
+    const month = new Date(todayDate.getFullYear(), todayDate.getMonth() - months + index + 1, 1);
+    const year = month.getFullYear();
+    const monthNumber = month.getMonth() + 1;
+    const date = `${year}-${String(monthNumber).padStart(2, "0")}`;
+    const prefix = `${date}-`;
+    const siteDays = Object.entries(siteHistory).filter(([day]) => day.startsWith(prefix)).map(([, value]) => value);
+    const vocabularyDays = Object.entries(vocabularyHistory).filter(([day]) => day.startsWith(prefix)).map(([, value]) => value);
+    return {
+      articles: siteDays.reduce((sum, day) => sum + day.studyItems.length, 0),
+      date,
+      label: months > 12 ? `${String(year).slice(-2)}年${monthNumber}月` : `${monthNumber}月`,
+      lookups: siteDays.reduce((sum, day) => sum + day.lookedUpWords.length, 0),
+      minutes: Math.round(siteDays.reduce((sum, day) => sum + day.seconds, 0) / 60),
+      words: vocabularyDays.reduce((sum, day) => sum + day.studiedWords, 0),
+    } satisfies LearningTrendPoint;
+  });
+}
+
+function LearningTrendChart({
+  color,
+  points,
+  title,
+  unit,
+  valueKey,
+}: {
+  color: string;
+  points: LearningTrendPoint[];
+  title: string;
+  unit: string;
+  valueKey: "articles" | "lookups" | "minutes" | "words";
+}) {
+  const maxValue = Math.max(1, ...points.map((point) => point[valueKey]));
+  const total = points.reduce((sum, point) => sum + point[valueKey], 0);
+  const slotWidth = 660 / points.length;
+  const barWidth = Math.min(24, Math.max(3, slotWidth * 0.62));
+  const labelStep = Math.max(1, Math.ceil(points.length / 7));
+
+  return <article className="learning-progress-trend-chart">
+    <div className="learning-progress-trend-chart-heading"><strong>{title}</strong><span>{total.toLocaleString()} {unit}</span></div>
+    {total > 0 ? <svg aria-label={`${title}趋势图，总计${total}${unit}`} className="learning-progress-trend-chart-svg" role="img" viewBox="0 0 720 190">
+      {[30, 78, 126].map((y) => <line key={y} x1="30" x2="690" y1={y} y2={y} />)}
+      {points.map((point, index) => {
+        const value = point[valueKey];
+        const height = value > 0 ? Math.max(2, value / maxValue * 112) : 0;
+        const x = 30 + index * slotWidth + (slotWidth - barWidth) / 2;
+        const label = valueKey === "minutes" ? `${value} 分钟` : `${value} ${unit}`;
+        return <g key={point.date}>
+          {height > 0 ? <rect fill={color} height={height} rx={Math.min(5, barWidth / 2)} width={barWidth} x={x} y={138 - height}><title>{point.date}：{label}</title></rect> : null}
+          {(index % labelStep === 0 || index === points.length - 1) ? <text x={x + barWidth / 2} y="164" textAnchor="middle">{point.label}</text> : null}
+        </g>;
+      })}
+    </svg> : <p className="learning-progress-trend-empty">该时间范围还没有记录。</p>}
+  </article>;
+}
+
 function LearningActivityOverview({
   siteHistory,
   vocabularyHistory,
@@ -45,6 +130,7 @@ function LearningActivityOverview({
 }) {
   const today = localStudyDate();
   const [selectedDate, setSelectedDate] = useState(today);
+  const [trendRange, setTrendRange] = useState<TrendRange>("30d");
   const [shownMonth, setShownMonth] = useState(() => {
     const now = new Date();
     return new Date(now.getFullYear(), now.getMonth(), 1);
@@ -56,22 +142,14 @@ function LearningActivityOverview({
   let streak = 0;
   while (siteHistory[dayAtOffset(streakStart, -streak)]) streak += 1;
 
-  const selectedSite = siteHistory[selectedDate] ?? { seconds: 0, studyItems: [] };
+  const selectedSite = siteHistory[selectedDate] ?? { lookedUpWords: [], seconds: 0, studyItems: [] };
   const selectedVocabulary = vocabularyHistory[selectedDate];
   const allTimeItems = new Set(Object.values(siteHistory).flatMap((day) => day.studyItems));
+  const allTimeLookups = new Set(Object.values(siteHistory).flatMap((day) => day.lookedUpWords));
   const trackedWordCount = Object.values(vocabularyProgress).filter((entry) => Object.keys(entry.modeOutcomes ?? {}).length > 0 || Boolean(entry.lastCategory)).length;
-  const recentDays = Array.from({ length: 14 }, (_, index) => {
-    const date = dayAtOffset(today, index - 13);
-    const site = siteHistory[date] ?? { seconds: 0, studyItems: [] };
-    return { date, minutes: Math.round(site.seconds / 60), articles: site.studyItems.length, words: vocabularyHistory[date]?.studiedWords ?? 0, outcomes: vocabularyHistory[date]?.modeOutcomes };
-  });
-  const maxMinutes = Math.max(30, ...recentDays.map((day) => day.minutes));
-  const chartPoints = recentDays.map((day, index) => ({
-    ...day,
-    x: recentDays.length === 1 ? 45 : 42 + (index * 646) / (recentDays.length - 1),
-    y: 190 - (day.minutes / maxMinutes) * 150,
-  }));
-  const linePoints = chartPoints.map((point) => `${point.x},${point.y}`).join(" ");
+  const checkedInDays = Object.keys(siteHistory).length;
+  const totalLearningSeconds = Object.values(siteHistory).reduce((sum, day) => sum + day.seconds, 0);
+  const trendPoints = buildLearningTrend(trendRange, siteHistory, vocabularyHistory, today);
   const modes: Array<[DailyMode, string]> = [["reading", "阅读"], ["listening", "听力"], ["speaking", "口语"], ["writing", "写作"]];
   const mastery = Object.fromEntries(modes.map(([mode]) => [mode, { familiar: 0, vague: 0, unfamiliar: 0 }])) as Record<DailyMode, Record<DailyOutcome, number>>;
   for (const entry of Object.values(vocabularyProgress)) {
@@ -84,17 +162,23 @@ function LearningActivityOverview({
   }
 
   return <section className="learning-progress-overview">
-    <div className="learning-progress-overview-heading"><div><p className="eyebrow">你的学习足迹</p><h2>每天一点，持续进步</h2></div><span>近 365 天记录</span></div>
+    <div className="learning-progress-overview-heading"><div><p className="eyebrow">你的学习足迹</p><h2>每天一点，持续进步</h2></div><span>学习记录最多保留 5 年</span></div>
     <div className="learning-progress-overview-stats">
       <article><span>连续学习</span><strong>{streak}<small> 天</small></strong></article>
-      <article><span>所选日期 · 学习时长</span><strong>{formatDuration(selectedSite.seconds)}</strong></article>
-      <article><span>所选日期 · 背过单词</span><strong>{selectedVocabulary?.studiedWords ?? 0}<small> 个</small></strong></article>
-      <article><span>所选日期 · 阅读内容</span><strong>{selectedSite.studyItems.length}<small> 篇</small></strong></article>
-      <article><span>累计学习词汇</span><strong>{trackedWordCount}<small> 个</small></strong></article>
-      <article><span>累计阅读内容</span><strong>{allTimeItems.size}<small> 篇</small></strong></article>
+      <article><span>累计学习天数</span><strong>{checkedInDays}<small> 天</small></strong></article>
+      <article><span>累计学习时长</span><strong>{formatDuration(totalLearningSeconds)}</strong></article>
+      <article><span>累计阅读文章</span><strong>{allTimeItems.size}<small> 篇</small></strong></article>
+      <article><span>累计背过词汇</span><strong>{trackedWordCount}<small> 个</small></strong></article>
+      <article><span>查过不同单词</span><strong>{allTimeLookups.size}<small> 个</small></strong></article>
     </div>
     <section className="learning-progress-card learning-progress-today-vocabulary">
       <div className="learning-progress-card-heading"><div><p className="eyebrow">所选日期的词汇记录</p><h2>熟悉程度与学习模式</h2></div><span>{selectedDate}</span></div>
+      <div className="learning-progress-selected-day-stats">
+        <article><span>学习时间</span><strong>{formatDuration(selectedSite.seconds)}</strong></article>
+        <article><span>背过词汇</span><strong>{selectedVocabulary?.studiedWords ?? 0}<small> 个</small></strong></article>
+        <article><span>阅读文章</span><strong>{selectedSite.studyItems.length}<small> 篇</small></strong></article>
+        <article><span>查过单词</span><strong>{selectedSite.lookedUpWords.length}<small> 个</small></strong></article>
+      </div>
       <div className="learning-progress-today-outcomes">
         <article><span>熟悉</span><strong className="success">{selectedVocabulary?.familiar ?? 0}</strong></article>
         <article><span>模糊</span><strong>{selectedVocabulary?.vague ?? 0}</strong></article>
@@ -128,19 +212,22 @@ function LearningActivityOverview({
         </div>
         <p className="learning-progress-calendar-note">访问或学习网站当天即记录打卡；学习时长按页面在前台显示的时间累计。</p>
       </section>
-      <section className="learning-progress-card learning-progress-trend-card">
-        <div className="learning-progress-card-heading"><div><p className="eyebrow">近两周</p><h2>每日学习时长</h2></div><span>单位：分钟</span></div>
-        <div aria-label="近14天每日学习时长曲线图" className="learning-progress-activity-chart" role="img">
-          <svg viewBox="0 0 720 230" preserveAspectRatio="none">
-            {[40, 90, 140, 190].map((y) => <line key={y} x1="42" x2="688" y1={y} y2={y} />)}
-            <polyline points={linePoints} />
-            {chartPoints.map((point) => <g key={point.date}><circle cx={point.x} cy={point.y} r="4"><title>{point.date}：{point.minutes}分钟，词汇{point.words}个，文章/课文{point.articles}篇；阅读熟悉{point.outcomes?.reading.familiar ?? 0}、听力熟悉{point.outcomes?.listening.familiar ?? 0}、口语熟悉{point.outcomes?.speaking.familiar ?? 0}、写作熟悉{point.outcomes?.writing.familiar ?? 0}</title></circle></g>)}
-            {chartPoints.filter((_, index) => index % 2 === 0 || index === 13).map((point) => <text key={`label-${point.date}`} x={point.x} y="220" textAnchor="middle">{point.date.slice(5)}</text>)}
-          </svg>
-        </div>
-        <div className="learning-progress-trend-totals"><span>词汇练习 <strong>{recentDays.reduce((sum, day) => sum + day.words, 0)}</strong> 个</span><span>文章/课文 <strong>{recentDays.reduce((sum, day) => sum + day.articles, 0)}</strong> 篇</span></div>
-      </section>
     </div>
+    <section className="learning-progress-card learning-progress-trend-card">
+      <div className="learning-progress-card-heading">
+        <div><p className="eyebrow">学习趋势</p><h2>学习活动变化</h2></div>
+        <div aria-label="学习进度时间范围" className="learning-progress-range-controls" role="group">
+          {TREND_RANGES.map(({ key, label }) => <button aria-pressed={trendRange === key} className={trendRange === key ? "selected" : ""} key={key} onClick={() => setTrendRange(key)} type="button">{label}</button>)}
+        </div>
+      </div>
+      <div className="learning-progress-trend-charts">
+        <LearningTrendChart color="#23795b" points={trendPoints} title="学习时长" unit="分钟" valueKey="minutes" />
+        <LearningTrendChart color="#c8952e" points={trendPoints} title="阅读文章" unit="篇次" valueKey="articles" />
+        <LearningTrendChart color="#4c91bd" points={trendPoints} title="背词练习" unit="词次" valueKey="words" />
+        <LearningTrendChart color="#8870b8" points={trendPoints} title="查词" unit="词次" valueKey="lookups" />
+      </div>
+      <p className="learning-progress-calendar-note">7 天、30 天按日统计；1 年、3 年、5 年按月汇总。时长按页面在前台显示的时间累计，背词和查词会累计每日记录。</p>
+    </section>
     <section className="learning-progress-card learning-progress-mastery-card">
       <div className="learning-progress-card-heading"><div><p className="eyebrow">词汇掌握情况</p><h2>按记忆模式查看熟悉程度</h2></div><span>按每个单词各模式最近记录统计</span></div>
       <div className="learning-progress-table learning-progress-mastery-table">

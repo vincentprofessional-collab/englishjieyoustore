@@ -40,6 +40,10 @@ export function localStudyDate(date = new Date()) {
   return `${year}-${month}-${day}`;
 }
 
+export function shouldOpenDailySummary(dailyTaskComplete: boolean, alreadyShownToday: boolean) {
+  return dailyTaskComplete && !alreadyShownToday;
+}
+
 export function summarizeDailyStudy(
   activity: DailyActivityStore,
   progress: Record<string, { completed?: boolean }>,
