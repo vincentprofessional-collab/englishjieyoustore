@@ -34,7 +34,7 @@ import type { VocabularyPhraseMatch } from "@/lib/vocabulary/phrases";
 import { getVocabularyAudioUrl } from "@/lib/vocabulary/pronunciation-audio";
 import { getSpellingCharacterFeedback } from "@/lib/vocabulary/spelling-feedback";
 import { scheduleReview, selectEnabledMode } from "@/lib/vocabulary/review-scheduler";
-import { localStudyDate, summarizeDailyStudy, type DailyActivityStore, type DailyMode, type DailyOutcome } from "@/lib/vocabulary/daily-summary";
+import { localStudyDate, shouldOpenDailySummary, summarizeDailyStudy, type DailyActivityStore, type DailyMode, type DailyOutcome } from "@/lib/vocabulary/daily-summary";
 import { filterProgressWordIds, type VocabularyMode, type VocabularyOutcome } from "@/lib/vocabulary/progress-filters";
 
 type CollectionKey = "familiar" | "vague" | "unfamiliar";
@@ -149,7 +149,8 @@ const STORAGE_KEY = "ielts-vocabulary-learning-v1";
 const SETTINGS_STORAGE_KEY = "ielts-vocabulary-learning-settings-v1";
 const STUDY_PAUSED_STORAGE_KEY = "ielts-vocabulary-learning-paused-v1";
 const DAILY_ACTIVITY_STORAGE_KEY = "ielts-vocabulary-daily-activity-v1";
-const PENDING_DAILY_SUMMARY_KEY = "ielts-vocabulary-pending-daily-summary-v1";
+const LEGACY_PENDING_DAILY_SUMMARY_KEY = "ielts-vocabulary-pending-daily-summary-v1";
+const DAILY_SUMMARY_SHOWN_KEY = "ielts-vocabulary-daily-summary-shown-v1";
 const DAILY_ENCOURAGEMENTS = ["又是元气满满的一天", "不积跬步，无以至千里", "今天的坚持，会成为明天的底气", "每记住一个词，世界就多开一扇窗"];
 const STUDY_MODE_OPTIONS: Array<{ category: ProgressCategory; index: number; label: string }> = [
   { category: "reading", index: 1, label: "阅读词汇" },
@@ -242,28 +243,60 @@ async function createDailySummaryImage(summary: ReturnType<typeof summarizeDaily
 
   context.fillStyle = "#111";
   context.font = '700 30px "Songti SC", "Noto Serif SC", serif';
-  context.fillText("总进度", 86, 666);
+  context.fillText("今日背词统计", 86, 642);
+  const wordBars = [
+    ["今日学习", summary.studiedWords, "#0b604c"],
+    ["新学词汇", summary.newWords, "#4c91bd"],
+    ["复习词汇", summary.reviewedWords, "#c8952e"],
+  ] as const;
+  const maxWordCount = Math.max(1, ...wordBars.map(([, count]) => count));
+  wordBars.forEach(([label, count, color], index) => {
+    const y = 680 + index * 48;
+    context.fillStyle = "#4e554f";
+    context.font = '24px "Songti SC", "Noto Serif SC", serif';
+    context.fillText(label, 86, y + 18);
+    context.fillStyle = "#e8e8e1";
+    context.beginPath();
+    context.roundRect(260, y, 650, 18, 9);
+    context.fill();
+    const barWidth = 650 * count / maxWordCount;
+    if (barWidth > 0) {
+      context.fillStyle = color;
+      context.beginPath();
+      context.roundRect(260, y, barWidth, 18, 9);
+      context.fill();
+    }
+    context.fillStyle = "#111";
+    context.font = '700 24px "Songti SC", "Noto Serif SC", serif';
+    context.textAlign = "right";
+    context.fillText(String(count), 994, y + 18);
+    context.textAlign = "left";
+  });
+
+  context.fillStyle = "#111";
+  context.font = '700 30px "Songti SC", "Noto Serif SC", serif';
+  context.fillText("总进度", 86, 858);
   const completion = summary.sourceCount > 0 ? Math.min(1, summary.completedWords / summary.sourceCount) : 0;
   context.fillStyle = "#e2e2dc";
   context.beginPath();
-  context.roundRect(86, 694, 908, 18, 9);
+  context.roundRect(86, 886, 908, 18, 9);
   context.fill();
   context.fillStyle = "#0b604c";
   context.beginPath();
-  context.roundRect(86, 694, 908 * completion, 18, 9);
+  context.roundRect(86, 886, 908 * completion, 18, 9);
   context.fill();
   context.fillStyle = "#555";
   context.font = '24px "Songti SC", "Noto Serif SC", serif';
-  context.fillText(`${summary.completedWords.toLocaleString()} / ${summary.sourceCount.toLocaleString()} 个 · ${Math.round(completion * 100)}%`, 86, 754);
+  context.fillText(`${summary.completedWords.toLocaleString()} / ${summary.sourceCount.toLocaleString()} 个 · ${Math.round(completion * 100)}%`, 86, 946);
 
   const modes: Array<[DailyMode, string]> = [["reading", "阅读"], ["listening", "听力"], ["speaking", "口语"], ["writing", "写作"]];
   context.fillStyle = "#111";
   context.font = '700 30px "Songti SC", "Noto Serif SC", serif';
-  context.fillText("今日练习", 86, 834);
+  context.fillText("今日练习", 86, 1014);
   context.font = '26px "Songti SC", "Noto Serif SC", serif';
   context.fillStyle = "#3f4843";
-  context.fillText(modes.map(([key, label]) => `${label} ${summary.modes[key]}`).join("　 ·　 "), 86, 884);
-  context.fillText(`熟悉 ${summary.familiar}　·　模糊 ${summary.vague}　·　生僻 ${summary.unfamiliar}`, 86, 956);
+  context.fillText(modes.map(([key, label]) => `${label} ${summary.modes[key]}`).join("　 ·　 "), 86, 1062);
+  context.fillText(`熟悉 ${summary.familiar}　·　模糊 ${summary.vague}　·　生僻 ${summary.unfamiliar}`, 86, 1110);
 
   context.fillStyle = "#0b604c";
   context.font = '700 34px "Songti SC", "Noto Serif SC", serif';
@@ -276,10 +309,10 @@ async function createDailySummaryImage(summary: ReturnType<typeof summarizeDaily
     } else line += character;
   }
   if (line) lines.push(line);
-  lines.slice(0, 2).forEach((value, index) => context.fillText(value, 86, 1080 + index * 50));
+  lines.slice(0, 2).forEach((value, index) => context.fillText(value, 86, 1190 + index * 42));
   context.fillStyle = "#777064";
   context.font = '22px "Songti SC", "Noto Serif SC", serif';
-  context.fillText("今天的每一步，都在靠近更好的自己。", 86, 1240);
+  context.fillText("今天的每一步，都在靠近更好的自己。", 86, 1280);
 
   const blob = await new Promise<Blob>((resolve, reject) => canvas.toBlob((value) => value ? resolve(value) : reject(new Error("图片生成失败，请重试。")), "image/png"));
   return new File([blob], `每日词汇记录-${summary.date}.png`, { type: "image/png" });
@@ -811,7 +844,14 @@ function SpellingColoredAnswer({ answer, feedbackVisible, target }: { answer: st
   return (
     <span aria-hidden="true" className="vocabulary-learning-spelling-colored-answer">
       {feedback.map(({ letter, correct }, index) => (
-        <span className={correct ? "is-correct" : "is-wrong"} key={`${index}-${letter}`}>{letter}</span>
+        <span
+          className={correct ? "is-correct" : "is-wrong"}
+          key={`${index}-${letter}`}
+          style={{
+            color: correct ? "#19804e" : "#c84c4c",
+            WebkitTextFillColor: correct ? "#19804e" : "#c84c4c",
+          }}
+        >{letter}</span>
       ))}
     </span>
   );
@@ -1198,7 +1238,6 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
   const [dailyActivity, setDailyActivity] = useState<DailyActivityStore>({ date: "", events: [], bookGoals: {} });
   const [dailyActivityHydrated, setDailyActivityHydrated] = useState(false);
   const [dailySummaryOpen, setDailySummaryOpen] = useState(false);
-  const [pendingNavigation, setPendingNavigation] = useState<string | null>(null);
   const [selectedEncouragement, setSelectedEncouragement] = useState(DAILY_ENCOURAGEMENTS[0]);
   const [customEncouragement, setCustomEncouragement] = useState("");
   const [sharingSummary, setSharingSummary] = useState(false);
@@ -1244,7 +1283,6 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
   const oralOutcomeLockedRef = useRef(false);
   const recordingAudioUrlRef = useRef<string | null>(null);
   const advanceTimerRef = useRef<number | null>(null);
-  const suppressExitPromptRef = useRef(false);
   const browseModeBagRef = useRef<{ key: string; remaining: number[] }>({ key: "", remaining: [] });
   const browseChoiceRef = useRef<number | null>(null);
 
@@ -1357,7 +1395,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
         if (saved.date && saved.date !== today && oldEvents.length) {
           history[saved.date] = summarizeDailyStudy({ date: saved.date, events: oldEvents, bookGoals: oldGoals }, learningState.progress ?? {}, sourceCount);
         }
-        const compactHistory = Object.fromEntries(Object.entries(history).sort(([left], [right]) => left.localeCompare(right)).slice(-365));
+        const compactHistory = Object.fromEntries(Object.entries(history).sort(([left], [right]) => left.localeCompare(right)).slice(-1826));
         const events = saved.date === today ? oldEvents.filter((event) => event && typeof event.wordId === "string" && Number.isFinite(event.at)) : [];
         const goals = saved.date === today ? oldGoals : {};
         setDailyActivity({ date: today, events, bookGoals: goals, history: compactHistory });
@@ -1520,6 +1558,12 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
     () => summarizeDailyStudy(dailyActivity, progress, sourceCount),
     [dailyActivity, progress, sourceCount],
   );
+  const dailyWordChartData = [
+    { label: "今日学习", value: dailySummary.studiedWords, color: "studied" },
+    { label: "新学词汇", value: dailySummary.newWords, color: "new" },
+    { label: "复习词汇", value: dailySummary.reviewedWords, color: "reviewed" },
+  ];
+  const dailyWordChartMaximum = Math.max(1, ...dailyWordChartData.map((item) => item.value));
   const recordDailyActivity = useCallback((wordId: string, category: DailyMode, outcome: DailyOutcome | null, isReview: boolean, at: number) => {
     const date = localStudyDate(new Date(at));
     setDailyActivity((current) => {
@@ -1527,7 +1571,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
       if (current.date && current.date !== date && current.events.length > 0) {
         history[current.date] = summarizeDailyStudy(current, progress, sourceCount);
       }
-      const compactHistory = Object.fromEntries(Object.entries(history).sort(([left], [right]) => left.localeCompare(right)).slice(-365));
+      const compactHistory = Object.fromEntries(Object.entries(history).sort(([left], [right]) => left.localeCompare(right)).slice(-1826));
       const base = current.date === date ? current : { date, events: [], bookGoals: {}, history: compactHistory };
       return {
         ...base,
@@ -1556,68 +1600,23 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
   const studyReady = hydrated && settingsHydrated && entryGate === "active" && !studyPaused && settingsOpenFor === null && Boolean(settingsByBook[selectedBook]);
 
   useEffect(() => {
-    if (!dailyActivityHydrated) return;
-    const showPendingSummary = () => {
-      try {
-      const pendingDate = window.localStorage.getItem(PENDING_DAILY_SUMMARY_KEY);
-      if (pendingDate === dailyActivity.date && dailySummary.studiedWords > 0) setDailySummaryOpen(true);
-      window.localStorage.removeItem(PENDING_DAILY_SUMMARY_KEY);
-      } catch {
-        // The page remains usable if browser storage is disabled.
-      }
-    };
-    showPendingSummary();
-    window.addEventListener("focus", showPendingSummary);
-    window.addEventListener("pageshow", showPendingSummary);
-    return () => {
-      window.removeEventListener("focus", showPendingSummary);
-      window.removeEventListener("pageshow", showPendingSummary);
-    };
-  }, [dailyActivity.date, dailyActivityHydrated, dailySummary.studiedWords]);
-
-  useEffect(() => {
-    if (!dailyActivityHydrated || dailySummary.studiedWords === 0 || dailySummaryOpen) return;
-    const handleNavigation = (event: MouseEvent) => {
-      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-      const target = event.target;
-      if (!(target instanceof Element)) return;
-      const link = target.closest<HTMLAnchorElement>("a[href]");
-      if (!link || link.target === "_blank" || link.hasAttribute("download")) return;
-      let destination: URL;
-      try { destination = new URL(link.href); } catch { return; }
-      if (destination.origin !== window.location.origin
-        || (destination.pathname === window.location.pathname && destination.search === window.location.search)) return;
-      event.preventDefault();
-      setPendingNavigation(destination.href);
-      setDailySummaryOpen(true);
-    };
-    document.addEventListener("click", handleNavigation, true);
-    return () => document.removeEventListener("click", handleNavigation, true);
-  }, [dailyActivityHydrated, dailySummary.studiedWords, dailySummaryOpen]);
-
-  useEffect(() => {
-    if (!dailyActivityHydrated || dailySummary.studiedWords === 0) return;
-    const warnBeforeExit = (event: BeforeUnloadEvent) => {
-      if (suppressExitPromptRef.current) return;
-      try { window.localStorage.setItem(PENDING_DAILY_SUMMARY_KEY, dailyActivity.date); } catch { /* Browser storage may be disabled. */ }
-      event.preventDefault();
-      event.returnValue = "";
-    };
-    window.addEventListener("beforeunload", warnBeforeExit);
-    return () => window.removeEventListener("beforeunload", warnBeforeExit);
-  }, [dailyActivity.date, dailyActivityHydrated, dailySummary.studiedWords]);
-
-  const closeDailySummary = useCallback(() => {
-    setDailySummaryOpen(false);
-    if (pendingNavigation) {
-      const destination = pendingNavigation;
-      setPendingNavigation(null);
-      suppressExitPromptRef.current = true;
-      window.location.assign(destination);
+    if (!dailyActivityHydrated || !dailyActivity.date) return;
+    let shouldShowSummary = dailySummary.dailyTaskComplete;
+    try {
+      // Ignore a stale prompt written by the previous any-activity behavior.
+      window.localStorage.removeItem(LEGACY_PENDING_DAILY_SUMMARY_KEY);
+      shouldShowSummary = shouldOpenDailySummary(
+        dailySummary.dailyTaskComplete,
+        window.localStorage.getItem(DAILY_SUMMARY_SHOWN_KEY) === dailyActivity.date,
+      );
+      if (shouldShowSummary) window.localStorage.setItem(DAILY_SUMMARY_SHOWN_KEY, dailyActivity.date);
+    } catch {
+      // Storage can be disabled; the completed task should still show its summary.
     }
-  }, [pendingNavigation]);
+    if (shouldShowSummary) setDailySummaryOpen(true);
+  }, [dailyActivity.date, dailyActivityHydrated, dailySummary.dailyTaskComplete]);
+
   const continueStudying = useCallback(() => {
-    setPendingNavigation(null);
     setDailySummaryOpen(false);
   }, []);
 
@@ -2695,6 +2694,23 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
               <div><span>复习词汇</span><strong>{dailySummary.reviewedWords}<small> 个</small></strong></div>
               <div><span>每日任务</span><strong className={dailySummary.dailyTaskComplete ? "is-complete" : ""}>{dailySummary.dailyTaskComplete ? "已完成" : `${dailySummary.newWords}/${dailySummary.dailyGoal}`}</strong></div>
             </div>
+            <div
+              aria-label={`今日背词数量图表：今日学习 ${dailySummary.studiedWords} 个，新学 ${dailySummary.newWords} 个，复习 ${dailySummary.reviewedWords} 个`}
+              className="vocabulary-daily-summary-chart"
+              role="img"
+            >
+              <strong>今日背词统计</strong>
+              <div className="vocabulary-daily-summary-chart-rows">
+                {dailyWordChartData.map((item) => (
+                  <div aria-hidden="true" className="vocabulary-daily-summary-chart-row" key={item.color}>
+                    <span>{item.label}</span>
+                    <div><i className={item.color} style={{ width: `${item.value / dailyWordChartMaximum * 100}%` }} /></div>
+                    <b>{item.value}</b>
+                  </div>
+                ))}
+              </div>
+              <small>新学与复习按词汇分别统计，同一个词当天可能同时计入两项。</small>
+            </div>
             <div className="vocabulary-daily-summary-progress">
               <div><strong>总进度</strong><span>{dailySummary.completedWords.toLocaleString()} / {dailySummary.sourceCount.toLocaleString()} 个（{dailySummary.sourceCount ? Math.round(Math.min(1, dailySummary.completedWords / dailySummary.sourceCount) * 100) : 0}%）</span></div>
               <div aria-label="总词汇完成进度" className="vocabulary-daily-summary-progress-track"><span style={{ width: `${dailySummary.sourceCount ? Math.min(100, dailySummary.completedWords / dailySummary.sourceCount * 100) : 0}%` }} /></div>
@@ -2719,8 +2735,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
             </div>
             <div className="vocabulary-daily-summary-actions">
               <button className="vocabulary-daily-summary-share-button" disabled={sharingSummary} onClick={() => void shareDailySummary()} type="button">{sharingSummary ? "正在生成图片…" : "生成分享图片"}</button>
-              {pendingNavigation ? <button onClick={closeDailySummary} type="button">继续访问</button> : null}
-              <button onClick={continueStudying} type="button">{pendingNavigation ? "返回继续学习" : "继续学习"}</button>
+              <button onClick={continueStudying} type="button">继续学习</button>
             </div>
           </section>
         </div>

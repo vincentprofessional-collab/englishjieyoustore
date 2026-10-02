@@ -1713,8 +1713,9 @@
 .learning-progress-overview-stats article > span, .learning-progress-today-outcomes article > span { color: #766f62; font-size: 12px; }
 .learning-progress-overview-stats strong { color: #1f5b4d; font-size: clamp(17px, 2vw, 24px); overflow-wrap: anywhere; }
 .learning-progress-overview-stats small { font-size: 12px; }
-.learning-progress-overview-grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 14px; align-items: stretch; }
+.learning-progress-overview-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; align-items: stretch; }
 .learning-progress-calendar-card, .learning-progress-trend-card, .learning-progress-today-vocabulary { min-width: 0; }
+.learning-progress-calendar-card { max-width: 720px; width: 100%; }
 .learning-progress-month-controls { color: #315e51; }
 .learning-progress-month-controls button { width: 32px; height: 32px; border: 1px solid #d7e4dd; border-radius: 50%; background: #f3faf6; color: #1f5b4d; cursor: pointer; font-size: 22px; line-height: 1; }
 .learning-progress-month-controls button:disabled { cursor: default; opacity: .4; }
@@ -1728,14 +1729,24 @@
 .learning-progress-calendar-grid > .selected { box-shadow: 0 0 0 2px #1f5b4d; }
 .learning-progress-calendar-grid > .empty-day { visibility: hidden; }
 .learning-progress-calendar-note { margin: 0; color: #817b70; font-size: 12px; line-height: 1.5; }
-.learning-progress-activity-chart { min-width: 0; }
-.learning-progress-activity-chart svg { display: block; width: 100%; height: 220px; overflow: visible; }
-.learning-progress-activity-chart line { stroke: #e9e2d5; stroke-width: 1; }
-.learning-progress-activity-chart polyline { fill: none; stroke: #1f7b54; stroke-linecap: round; stroke-linejoin: round; stroke-width: 3; }
-.learning-progress-activity-chart circle { fill: #1f7b54; stroke: #fffdf7; stroke-width: 2; }
-.learning-progress-activity-chart text { fill: #766f62; font-size: 10px; }
-.learning-progress-trend-totals { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; color: #766f62; font-size: 13px; }
-.learning-progress-trend-totals strong { color: #1f5b4d; }
+.learning-progress-selected-day-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.learning-progress-selected-day-stats article { display: grid; gap: 6px; border: 1px solid #eee7da; border-radius: 10px; background: #fffefa; padding: 12px; }
+.learning-progress-selected-day-stats span { color: #766f62; font-size: 12px; }
+.learning-progress-selected-day-stats strong { color: #1f5b4d; font-size: 17px; overflow-wrap: anywhere; }
+.learning-progress-selected-day-stats small { font-size: 11px; }
+.learning-progress-range-controls { display: flex; flex-wrap: wrap; gap: 6px; }
+.learning-progress-range-controls button { border: 1px solid #d7e4dd; border-radius: 999px; background: #f3faf6; color: #315e51; cursor: pointer; font: inherit; font-size: 13px; padding: 7px 12px; }
+.learning-progress-range-controls button.selected { border-color: #1f7b54; background: #1f7b54; color: #fff; }
+.learning-progress-range-controls button:focus-visible { outline: 3px solid #77a995; outline-offset: 2px; }
+.learning-progress-trend-charts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.learning-progress-trend-chart { display: grid; gap: 6px; min-width: 0; border: 1px solid #eee7da; border-radius: 12px; background: #fffefa; padding: 14px; }
+.learning-progress-trend-chart-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+.learning-progress-trend-chart-heading strong { color: #173f35; font-size: 15px; }
+.learning-progress-trend-chart-heading span { color: #766f62; font-size: 12px; white-space: nowrap; }
+.learning-progress-trend-chart-svg { display: block; height: 150px; overflow: visible; width: 100%; }
+.learning-progress-trend-chart-svg line { stroke: #e9e2d5; stroke-width: 1; }
+.learning-progress-trend-chart-svg text { fill: #766f62; font-size: 10px; }
+.learning-progress-trend-empty { align-content: center; color: #9b9282; display: grid; font-size: 13px; height: 130px; margin: 0; text-align: center; }
 .learning-progress-today-outcomes { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px; }
 .learning-progress-today-outcomes article { display: grid; justify-items: center; gap: 4px; border: 1px solid #eee7da; border-radius: 10px; padding: 10px 4px; }
 .learning-progress-today-outcomes strong { color: #315e51; font-size: 18px; }
@@ -1745,7 +1756,8 @@
 .learning-progress-day-modes .learning-progress-table-row { grid-template-columns: 1.4fr repeat(3, 1fr); }
 @media (max-width: 760px) { .learning-progress-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); } .learning-progress-summary article:last-child { grid-column: span 2; } .learning-progress-card-heading { align-items: start; flex-direction: column; } .learning-progress-table-row { min-width: 560px; } }
 @media (max-width: 900px) { .learning-progress-overview-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); } .learning-progress-overview-grid { grid-template-columns: 1fr; } }
-@media (max-width: 560px) { .learning-progress-overview-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } .learning-progress-today-outcomes { grid-template-columns: repeat(4, minmax(0, 1fr)); } .learning-progress-today-outcomes article:last-child { grid-column: auto; } }
+@media (max-width: 760px) { .learning-progress-trend-charts { grid-template-columns: 1fr; } }
+@media (max-width: 560px) { .learning-progress-overview-stats, .learning-progress-selected-day-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } .learning-progress-today-outcomes { grid-template-columns: repeat(4, minmax(0, 1fr)); } .learning-progress-today-outcomes article:last-child { grid-column: auto; } }
 .junior-high-dialogue-line { display: block; }
 .junior-high-source-image { display: block; width: min(100%, 380px); max-height: 240px; height: auto; margin: 4px auto; border: 1px solid #e4dccd; border-radius: 9px; object-fit: contain; background: #fffdf7; }
 .junior-high-source-audio { width: min(100%, 620px); }
@@ -26181,6 +26193,16 @@ audio.guide-editor-asset-preview {
   color: #b33d3d;
 }
 
+.vocabulary-learning-page .vocabulary-learning-spelling-detail-main .vocabulary-learning-spelling-colored-answer > .is-correct {
+  color: #19804e !important;
+  -webkit-text-fill-color: #19804e !important;
+}
+
+.vocabulary-learning-page .vocabulary-learning-spelling-detail-main .vocabulary-learning-spelling-colored-answer > .is-wrong {
+  color: #c84c4c !important;
+  -webkit-text-fill-color: #c84c4c !important;
+}
+
 .vocabulary-learning-bottom-bar {
   align-items: center;
   background: rgba(250, 253, 251, .96);
@@ -29276,8 +29298,77 @@ body *:not(.bbc-vocabulary-highlight):not(.bbc-active-word) {
   color: #0b604c !important;
 }
 
+.vocabulary-daily-summary-chart {
+  background: #fffdf8;
+  border: 1px solid #e9ddc8;
+  border-radius: 16px;
+  margin-top: 16px;
+  padding: 14px 16px 12px;
+}
+
+.vocabulary-daily-summary-chart > strong {
+  color: #111 !important;
+  display: block;
+  font-size: 15px;
+  margin-bottom: 11px;
+}
+
+.vocabulary-daily-summary-chart-rows {
+  display: grid;
+  gap: 8px;
+}
+
+.vocabulary-daily-summary-chart-row {
+  align-items: center;
+  color: #4e554f;
+  display: grid;
+  font-size: 13px;
+  gap: 10px;
+  grid-template-columns: 68px minmax(0, 1fr) 30px;
+}
+
+.vocabulary-daily-summary-chart-row > div {
+  background: #edede7;
+  border-radius: 99px;
+  height: 10px;
+  overflow: hidden;
+}
+
+.vocabulary-daily-summary-chart-row i {
+  border-radius: inherit;
+  display: block;
+  height: 100%;
+  min-width: 0;
+}
+
+.vocabulary-daily-summary-chart-row i.studied {
+  background: #0b604c;
+}
+
+.vocabulary-daily-summary-chart-row i.new {
+  background: #4c91bd;
+}
+
+.vocabulary-daily-summary-chart-row i.reviewed {
+  background: #c8952e;
+}
+
+.vocabulary-daily-summary-chart-row b {
+  color: #222;
+  font-size: 13px;
+  text-align: right;
+}
+
+.vocabulary-daily-summary-chart > small {
+  color: #777064;
+  display: block;
+  font-size: 11px;
+  line-height: 1.4;
+  margin-top: 8px;
+}
+
 .vocabulary-daily-summary-progress {
-  margin: 22px 0 18px;
+  margin: 16px 0 18px;
 }
 
 .vocabulary-daily-summary-progress > div:first-child,

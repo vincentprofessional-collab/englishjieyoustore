@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { summarizeDailyStudy } from "../src/lib/vocabulary/daily-summary.ts";
+import { shouldOpenDailySummary, summarizeDailyStudy } from "../src/lib/vocabulary/daily-summary.ts";
 
 test("daily summary counts unique words, latest mode outcomes, task goal, and overall completion", () => {
   const summary = summarizeDailyStudy({
@@ -25,4 +25,22 @@ test("daily summary counts unique words, latest mode outcomes, task goal, and ov
   });
   assert.deepEqual(summary.modeOutcomes.reading, { familiar: 0, vague: 1, unfamiliar: 0 });
   assert.deepEqual(summary.modeOutcomes.writing, { familiar: 0, vague: 0, unfamiliar: 1 });
+});
+
+test("daily summary opens only after the task is complete and at most once that day", () => {
+  const partial = summarizeDailyStudy({
+    date: "2026-10-02",
+    bookGoals: { CET4: 400 },
+    events: [{ at: 1, book: "CET4", category: "reading", wordId: "one", isReview: false, outcome: null }],
+  }, {}, 100);
+  assert.equal(partial.studiedWords, 1);
+  assert.equal(shouldOpenDailySummary(partial.dailyTaskComplete, false), false);
+
+  const complete = summarizeDailyStudy({
+    date: "2026-10-02",
+    bookGoals: { CET4: 1 },
+    events: [{ at: 1, book: "CET4", category: "reading", wordId: "one", isReview: false, outcome: null }],
+  }, {}, 100);
+  assert.equal(shouldOpenDailySummary(complete.dailyTaskComplete, false), true);
+  assert.equal(shouldOpenDailySummary(complete.dailyTaskComplete, true), false);
 });

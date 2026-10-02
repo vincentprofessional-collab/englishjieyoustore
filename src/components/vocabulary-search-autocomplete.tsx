@@ -5,6 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useDeferredValue, useEffect, useMemo, useState, type KeyboardEvent, type MouseEvent } from "react";
 import { VocabularyDirectoryPronunciation } from "@/components/vocabulary-directory-pronunciation";
 import { sortVocabularyAutocompleteItems } from "@/lib/vocabulary/autocomplete-ranking";
+import { recordVocabularyLookup } from "@/lib/learning/site-progress";
 import type { VocabularyAutocompleteItem } from "@/lib/vocabulary/local-vocabulary";
 
 type VocabularySearchAutocompleteProps = {
@@ -118,7 +119,7 @@ export function VocabularySearchAutocomplete({
   }, [deferredQuery, shouldUseRemoteSuggestions]);
 
   return (
-    <form action="/vocabulary" className="vocabulary-search" role="search">
+    <form action="/vocabulary" className="vocabulary-search" onSubmit={() => recordVocabularyLookup(query)} role="search">
       <div className="vocabulary-search-shell">
         <div className="vocabulary-search-row">
           <input
@@ -153,6 +154,7 @@ export function VocabularySearchAutocomplete({
                   }
 
                   setQuery("");
+                  recordVocabularyLookup(item.word);
                   router.push(detailHref);
                 }
 
@@ -163,6 +165,7 @@ export function VocabularySearchAutocomplete({
 
                   event.preventDefault();
                   setQuery("");
+                  recordVocabularyLookup(item.word);
                   router.push(detailHref);
                 }
 
@@ -176,7 +179,10 @@ export function VocabularySearchAutocomplete({
                     role="link"
                     tabIndex={0}
                   >
-                    <Link className="autocomplete-word-link" href={detailHref} onClick={() => setQuery("")}>
+                    <Link className="autocomplete-word-link" href={detailHref} onClick={() => {
+                      setQuery("");
+                      recordVocabularyLookup(item.word);
+                    }}>
                       {item.word}
                     </Link>
                     <VocabularyDirectoryPronunciation
