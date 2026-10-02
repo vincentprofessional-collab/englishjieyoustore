@@ -10,64 +10,64 @@ function advance(previous, outcome, now, hadInputError = false) {
   return { ...previous, ...next, lastOutcome: outcome, lastReviewedAt: now };
 }
 
-test("每种短期考察方式都要求连续三次熟悉，模糊或生僻后一分钟重考", () => {
+test("熟悉一次切换模式；模糊或生僻后当前模式连续熟悉三次才恢复", () => {
   let previous = { lastReviewedAt: null, modeIndex: 1, plan: "short-term" };
   previous = advance(previous, "familiar", 0);
-  assert.equal(previous.modeIndex, 1);
-  assert.equal(previous.consecutiveFamiliar, 1);
+  assert.equal(previous.modeIndex, 0);
   assert.equal(previous.nextReviewAt, minute);
 
-  previous = advance(previous, "familiar", minute);
-  assert.equal(previous.modeIndex, 1);
-  assert.equal(previous.consecutiveFamiliar, 2);
-  assert.equal(previous.nextReviewAt, 2 * minute);
+  previous = advance(previous, "vague", minute);
+  assert.equal(previous.modeIndex, 0);
+  assert.equal(previous.recoveryRequired, true);
 
-  previous = advance(previous, "vague", 2 * minute);
-  assert.equal(previous.modeIndex, 1);
-  assert.equal(previous.consecutiveFamiliar, 0);
-  assert.equal(previous.nextReviewAt, 3 * minute);
-
+  previous = advance(previous, "familiar", 2 * minute);
+  assert.equal(previous.modeIndex, 0);
+  assert.equal(previous.recoveryFamiliarStreak, 1);
   previous = advance(previous, "familiar", 3 * minute);
-  previous = advance(previous, "familiar", 4 * minute);
-  previous = advance(previous, "familiar", 5 * minute);
   assert.equal(previous.modeIndex, 0);
-  assert.equal(previous.consecutiveFamiliar, 0);
-  assert.equal(previous.nextReviewAt, 6 * minute);
+  assert.equal(previous.recoveryFamiliarStreak, 2);
 
-  previous = advance(previous, "unfamiliar", 6 * minute);
+  previous = advance(previous, "unfamiliar", 4 * minute);
   assert.equal(previous.modeIndex, 0);
-  assert.equal(previous.nextReviewAt, 7 * minute);
+  assert.equal(previous.recoveryFamiliarStreak, 0);
+  previous = advance(previous, "familiar", 5 * minute);
+  previous = advance(previous, "familiar", 6 * minute);
+  previous = advance(previous, "familiar", 7 * minute);
+  assert.equal(previous.modeIndex, 2);
+  assert.equal(previous.recoveryRequired, false);
 });
 
-test("拼写错误打断连续熟悉次数", () => {
-  let previous = { lastReviewedAt: null, modeIndex: 3, plan: "short-term", consecutiveFamiliar: 2 };
+test("拼写错误也会留在写作模式，之后连续三次熟悉才切换", () => {
+  let previous = { lastReviewedAt: null, modeIndex: 3, plan: "short-term" };
   previous = advance(previous, "familiar", 0, true);
   assert.equal(previous.modeIndex, 3);
-  assert.equal(previous.consecutiveFamiliar, 0);
-  assert.equal(previous.nextReviewAt, minute);
+  assert.equal(previous.recoveryRequired, true);
+
+  previous = advance(previous, "familiar", minute);
+  previous = advance(previous, "familiar", 2 * minute);
+  assert.equal(previous.modeIndex, 3);
+  previous = advance(previous, "familiar", 3 * minute);
+  assert.equal(previous.modeIndex, 1);
 });
 
-test("旧进度中的熟悉次数不会跨考察方式沿用", () => {
+test("旧进度的熟悉次数不会阻止答熟悉后立即切换", () => {
   const next = scheduleReview({
     consecutiveFamiliar: 2,
     lastReviewedAt: 0,
     modeIndex: 0,
     plan: "short-term",
   }, "familiar", minute);
-  assert.equal(next.modeIndex, 0);
-  assert.equal(next.consecutiveFamiliar, 1);
+  assert.equal(next.modeIndex, 2);
   assert.equal(next.nextReviewAt, 2 * minute);
 });
 
-test("四种方式各连续熟悉三次后进入三天后的长期复习", () => {
+test("阅读、听力、口语、写作各答熟悉一次后进入三天后的长期复习", () => {
   let previous = { lastReviewedAt: null, modeIndex: 1, plan: "short-term" };
   let now = 0;
   for (const mode of [1, 0, 2, 3]) {
     assert.equal(previous.modeIndex, mode);
-    for (let streak = 0; streak < 3; streak += 1) {
-      previous = advance(previous, "familiar", now);
-      now += minute;
-    }
+    previous = advance(previous, "familiar", now);
+    now += minute;
   }
   assert.equal(previous.plan, "long-term");
   assert.equal(previous.reviewStep, 1);
@@ -75,40 +75,30 @@ test("四种方式各连续熟悉三次后进入三天后的长期复习", () =>
   assert.equal(previous.nextReviewAt, now - minute + 3 * day);
 });
 
-test("长期复习依次拉长到七天，未熟悉时同一方式每两分钟重试", () => {
+test("长期复习仍按三、七、十四、三十天推进；出错后同模式连续熟悉三次", () => {
   let previous = { lastReviewedAt: 0, modeIndex: 1, plan: "long-term", reviewStep: 1 };
   previous = advance(previous, "familiar", 3 * day);
   assert.equal(previous.modeIndex, 0);
   assert.equal(previous.reviewStep, 2);
-  assert.equal(previous.nextReviewAt, 3 * day + 7 * day);
+  assert.equal(previous.nextReviewAt, 10 * day);
 
   previous = advance(previous, "vague", previous.nextReviewAt);
   assert.equal(previous.modeIndex, 0);
-  assert.equal(previous.recoveryRequired, true);
-  assert.equal(previous.nextReviewAt, 10 * day + 2 * minute);
-
-  previous = advance(previous, "unfamiliar", previous.nextReviewAt);
+  previous = advance(previous, "familiar", previous.nextReviewAt);
+  previous = advance(previous, "familiar", previous.nextReviewAt);
   assert.equal(previous.modeIndex, 0);
-  assert.equal(previous.nextReviewAt, 10 * day + 4 * minute);
-
   previous = advance(previous, "familiar", previous.nextReviewAt);
   assert.equal(previous.modeIndex, 2);
-  assert.equal(previous.recoveryRequired, false);
-  assert.equal(previous.nextReviewAt, 24 * day + 4 * minute);
+  assert.equal(previous.reviewStep, 3);
+  assert.equal(previous.nextReviewAt, 24 * day + 6 * minute);
 });
 
-test("关闭的考察方式会跳过，单一方式也能进入长期复习", () => {
+test("关闭的考察方式会跳过，单一方式答熟悉后进入长期复习", () => {
   assert.equal(selectEnabledMode(2, [0, 1, 3]), 3);
-  const previous = { lastReviewedAt: null, modeIndex: 1, plan: "short-term" };
-  const first = scheduleReview(previous, "familiar", 0, false, [1]);
+  const first = scheduleReview({ lastReviewedAt: null, modeIndex: 1, plan: "short-term" }, "familiar", 0, false, [1]);
   assert.equal(first.modeIndex, 1);
-  assert.equal(first.nextReviewAt, minute);
-  assert.equal(first.plan, "short-term");
-  const second = scheduleReview({ ...previous, ...first, lastReviewedAt: 0 }, "familiar", minute, false, [1]);
-  const third = scheduleReview({ ...previous, ...second, lastReviewedAt: minute }, "familiar", 2 * minute, false, [1]);
-  assert.equal(third.modeIndex, 1);
-  assert.equal(third.nextReviewAt, 2 * minute + 3 * day);
-  assert.equal(third.plan, "long-term");
+  assert.equal(first.nextReviewAt, 3 * day);
+  assert.equal(first.plan, "long-term");
 });
 
 test("分类记忆按阅读、听力、口语、写作循环", () => {

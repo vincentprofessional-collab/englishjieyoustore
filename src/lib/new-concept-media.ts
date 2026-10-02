@@ -21,11 +21,7 @@ function resolveAudioUrl(storagePath: string, localPath: string) {
     return `${configuredBaseUrl}/${encodePath(storagePath)}`;
   }
 
-  if (process.env.COS_MEDIA_ENABLED === "true") {
-    return getPublicStorageUrl("audio", storagePath);
-  }
-
-  if (hasPublicFile(localPath)) {
+  if (process.env.NODE_ENV === "development" && hasPublicFile(localPath)) {
     return `/${encodePath(localPath)}`;
   }
 
@@ -46,7 +42,7 @@ export function getNewConceptMediaUrls(lesson: NewConceptLesson, edition: NewCon
     : lesson.audioPath;
   const fullAudioLocalPath = `audio/${audioPath}`;
   const isImportedBookTwo = lesson.bookCode === "new-concept-2";
-  const audioUrl = (isImportedBookTwo || edition === "uk") && hasPublicFile(fullAudioLocalPath)
+  const audioUrl = process.env.NODE_ENV === "development" && (isImportedBookTwo || edition === "uk") && hasPublicFile(fullAudioLocalPath)
     ? `/${encodePath(fullAudioLocalPath)}`
     : resolveAudioUrl(audioPath, fullAudioLocalPath);
   const sentenceAudioUrls = lesson.english.map((_, index) => {
@@ -54,7 +50,7 @@ export function getNewConceptMediaUrls(lesson: NewConceptLesson, edition: NewCon
 
     const sentenceCode = String(index + 1).padStart(2, "0");
     const path = `new-concept-sentences/${bookFolder}/${lessonCode}/${sentenceCode}.mp3`;
-    if (isImportedBookTwo && hasPublicFile(`audio/${path}`)) {
+    if (process.env.NODE_ENV === "development" && isImportedBookTwo && hasPublicFile(`audio/${path}`)) {
       return `/${encodePath(`audio/${path}`)}`;
     }
     return resolveAudioUrl(path, `audio/${path}`);

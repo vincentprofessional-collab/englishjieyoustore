@@ -3,12 +3,15 @@
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { getFirstOpenedAt } from "@/lib/visitor-identity";
+import { recordDailyLearningSeconds, recordStudyPage } from "@/lib/learning/site-progress";
 
 const SESSION_ID_KEY = "ielts-platform.analytics.sessionId";
 const SESSION_STARTED_KEY = "ielts-platform.analytics.startedAt";
 const SESSION_FIRST_PATH_KEY = "ielts-platform.analytics.firstPath";
 const LOCAL_STUDY_SECONDS_KEY = "ielts-platform.analytics.studySeconds";
 const LOCAL_SESSION_REPORTED_KEY = "ielts-platform.analytics.reportedSeconds";
+const DAILY_TICK_AT_KEY = "ielts-platform.analytics.dailyTickAt";
+const DAILY_TICK_VISIBLE_KEY = "ielts-platform.analytics.dailyTickVisible";
 
 function recordLocalStudySeconds(durationSeconds: number) {
   const previousDuration = Number(window.sessionStorage.getItem(LOCAL_SESSION_REPORTED_KEY) ?? "0");
@@ -166,6 +169,7 @@ export function SiteAnalyticsTracker() {
       }
 
       lastTrackedPathRef.current = path;
+      recordStudyPage(path.split("?")[0]);
       await recordActivity("page_view", path);
     }
 
@@ -182,15 +186,40 @@ export function SiteAnalyticsTracker() {
 
       void updateSessionActivity(path);
     };
-    const intervalId = window.setInterval(updateCurrentSession, 60_000);
+    const updateDailyLearningTime = (forceHidden = false) => {
+      const now = Date.now();
+      const previousAt = Number(window.sessionStorage.getItem(DAILY_TICK_AT_KEY) ?? "0");
+      const wasVisible = window.sessionStorage.getItem(DAILY_TICK_VISIBLE_KEY) === "true";
+      if (wasVisible && previousAt > 0) recordDailyLearningSeconds((now - previousAt) / 1000);
+      const visible = !forceHidden && document.visibilityState === "visible";
+      window.sessionStorage.setItem(DAILY_TICK_AT_KEY, visible ? String(now) : "0");
+      window.sessionStorage.setItem(DAILY_TICK_VISIBLE_KEY, String(visible));
+    };
+    const updateVisibleActivity = () => {
+      updateDailyLearningTime();
+      updateCurrentSession();
+    };
+    const updateOnPageHide = () => {
+      updateDailyLearningTime(true);
+      updateCurrentSession();
+    };
+    const resumeVisibleActivity = () => updateDailyLearningTime();
 
-    document.addEventListener("visibilitychange", updateCurrentSession);
-    window.addEventListener("pagehide", updateCurrentSession);
+    window.sessionStorage.setItem(DAILY_TICK_AT_KEY, document.visibilityState === "visible" ? String(Date.now()) : "0");
+    window.sessionStorage.setItem(DAILY_TICK_VISIBLE_KEY, String(document.visibilityState === "visible"));
+    const intervalId = window.setInterval(updateCurrentSession, 60_000);
+    const dailyIntervalId = window.setInterval(updateDailyLearningTime, 30_000);
+
+    document.addEventListener("visibilitychange", updateVisibleActivity);
+    window.addEventListener("pagehide", updateOnPageHide);
+    window.addEventListener("pageshow", resumeVisibleActivity);
 
     return () => {
       window.clearInterval(intervalId);
-      document.removeEventListener("visibilitychange", updateCurrentSession);
-      window.removeEventListener("pagehide", updateCurrentSession);
+      window.clearInterval(dailyIntervalId);
+      document.removeEventListener("visibilitychange", updateVisibleActivity);
+      window.removeEventListener("pagehide", updateOnPageHide);
+      window.removeEventListener("pageshow", resumeVisibleActivity);
     };
   }, []);
 

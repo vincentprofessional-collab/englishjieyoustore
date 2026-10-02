@@ -1,8 +1,6 @@
 import { randomUUID } from "crypto";
 import { NextRequest, NextResponse } from "next/server";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
-import { uploadPrivateCosMedia } from "@/lib/cos/storage";
-import { getManagedMediaUrl } from "@/lib/media/url";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseServiceKey =
@@ -20,6 +18,7 @@ const audioMimeTypes = [
   "audio/x-m4a",
   "audio/x-wav",
 ];
+const maxAudioUploadBytes = 50_000_000;
 const audioExtensions = new Set(["aac", "flac", "m4a", "mp3", "mp4", "ogg", "wav", "webm"]);
 
 function safeFilename(filename: string) {
@@ -90,7 +89,7 @@ function getContentType(file: File) {
 async function ensureAudioBucket(supabase: SupabaseClient) {
   const { error } = await supabase.storage.createBucket("audio", {
     allowedMimeTypes: audioMimeTypes,
-    fileSizeLimit: 80 * 1024 * 1024,
+    fileSizeLimit: maxAudioUploadBytes,
     public: true,
   });
 
@@ -98,7 +97,7 @@ async function ensureAudioBucket(supabase: SupabaseClient) {
     if (error) {
       const { error: updateError } = await supabase.storage.updateBucket("audio", {
         allowedMimeTypes: audioMimeTypes,
-        fileSizeLimit: 80 * 1024 * 1024,
+        fileSizeLimit: maxAudioUploadBytes,
         public: true,
       });
 
@@ -158,23 +157,14 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  if (file.size > 80 * 1024 * 1024) {
-    return NextResponse.json({ error: "音频不能超过 80MB。" }, { status: 400 });
+  if (file.size > maxAudioUploadBytes) {
+    return NextResponse.json({ error: "音频不能超过 50MB。" }, { status: 400 });
   }
 
   const objectPath = `${safeFolder(formData.get("folder"))}/${Date.now()}-${randomUUID()}-${safeFilename(
     file.name,
   )}`;
   const contentType = getContentType(file);
-  if (process.env.COS_MEDIA_ENABLED === "true") {
-    try {
-      await uploadPrivateCosMedia("audio", objectPath, Buffer.from(await file.arrayBuffer()), contentType);
-    } catch (error) {
-      return NextResponse.json({ error: error instanceof Error ? error.message : "COS upload failed." }, { status: 500 });
-    }
-    return NextResponse.json({ publicUrl: getManagedMediaUrl("audio", objectPath) });
-  }
-
   const bucketError = await ensureAudioBucket(supabase);
   if (bucketError) return NextResponse.json({ error: bucketError }, { status: 500 });
 

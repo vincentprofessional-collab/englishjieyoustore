@@ -1,8 +1,7 @@
 import { randomUUID } from "crypto";
 import { NextRequest, NextResponse } from "next/server";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
-import { uploadPrivateCosMedia } from "@/lib/cos/storage";
-import { getManagedMediaUrl } from "@/lib/media/url";
+import { getSupabaseStorageUrl } from "@/lib/media/url";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseServiceKey =
@@ -17,6 +16,7 @@ const videoMimeTypes = [
   "video/x-m4v",
   "video/x-msvideo",
 ];
+const maxVideoUploadBytes = 50_000_000;
 const videoExtensions = new Set(["avi", "m4v", "mkv", "mov", "mp4", "ogv", "webm"]);
 
 function safeFilename(filename: string) {
@@ -64,17 +64,17 @@ function getContentType(file: File) {
 }
 
 async function ensureVideoBucket(supabase: SupabaseClient) {
-  const { error } = await supabase.storage.createBucket("video", {
+  const { error } = await supabase.storage.createBucket("videos", {
     allowedMimeTypes: videoMimeTypes,
-    fileSizeLimit: 200 * 1024 * 1024,
+    fileSizeLimit: maxVideoUploadBytes,
     public: true,
   });
 
   if (!error || error.message.toLowerCase().includes("already exists")) {
     if (error) {
-      const { error: updateError } = await supabase.storage.updateBucket("video", {
+      const { error: updateError } = await supabase.storage.updateBucket("videos", {
         allowedMimeTypes: videoMimeTypes,
-        fileSizeLimit: 200 * 1024 * 1024,
+        fileSizeLimit: maxVideoUploadBytes,
         public: true,
       });
 
@@ -129,25 +129,16 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "只支持 MP4、WebM、MOV、AVI、MKV 或 OGV 视频。" }, { status: 400 });
   }
 
-  if (file.size > 200 * 1024 * 1024) {
-    return NextResponse.json({ error: "视频不能超过 200MB。" }, { status: 400 });
+  if (file.size > maxVideoUploadBytes) {
+    return NextResponse.json({ error: "视频不能超过 50MB。" }, { status: 400 });
   }
 
   const objectPath = `${safeFolder(formData.get("folder"))}/${Date.now()}-${randomUUID()}-${safeFilename(file.name)}`;
   const contentType = getContentType(file);
-  if (process.env.COS_MEDIA_ENABLED === "true") {
-    try {
-      await uploadPrivateCosMedia("video", objectPath, Buffer.from(await file.arrayBuffer()), contentType);
-    } catch (error) {
-      return NextResponse.json({ error: error instanceof Error ? error.message : "COS upload failed." }, { status: 500 });
-    }
-    return NextResponse.json({ publicUrl: getManagedMediaUrl("video", objectPath) });
-  }
-
   const bucketError = await ensureVideoBucket(supabase);
   if (bucketError) return NextResponse.json({ error: bucketError }, { status: 500 });
 
-  const { error: uploadError } = await supabase.storage.from("video").upload(objectPath, file, {
+  const { error: uploadError } = await supabase.storage.from("videos").upload(objectPath, file, {
     cacheControl: "31536000",
     contentType,
     upsert: false,
@@ -157,6 +148,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: uploadError.message }, { status: 500 });
   }
 
-  const { data } = supabase.storage.from("video").getPublicUrl(objectPath);
-  return NextResponse.json({ publicUrl: data.publicUrl });
+  const publicUrl = getSupabaseStorageUrl("videos", objectPath);
+  return publicUrl
+    ? NextResponse.json({ publicUrl })
+    : NextResponse.json({ error: "Supabase storage URL is not configured." }, { status: 500 });
 }

@@ -2,6 +2,7 @@ import { createHmac } from "node:crypto";
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { getBbcArticleById } from "@/lib/articles/bbc";
+import { resolveCurrentMembership, type MembershipEntitlement, type MembershipProfile } from "@/lib/membership/current-membership";
 
 export const runtime = "nodejs";
 
@@ -18,20 +19,7 @@ type CurrentMemberProfile = {
   membership_status: string | null;
   membership_expires_at: string | null;
 };
-type MembershipEntitlement = {
-  created_at: string | null;
-  expires_at: string;
-  plan: string;
-  starts_at: string;
-  status: string;
-  user_id: string;
-};
-
-function readMemberPlan(value: unknown): MemberPlan | null {
-  return value === "monthly" || value === "quarterly" || value === "yearly" || value === "lifetime"
-    ? value
-    : null;
-}
+type UserMembershipEntitlement = MembershipEntitlement & { user_id: string };
 
 export const dynamic = "force-dynamic";
 
@@ -78,8 +66,7 @@ export async function GET(request: NextRequest) {
   const profiles = new Map(
     ((profilesResult.data ?? []) as CurrentMemberProfile[]).map((profile) => [profile.id, profile]),
   );
-  const now = new Date();
-  const nowIso = now.toISOString();
+  const now = Date.now();
   const entitlementsResult = await supabase
     .from("user_project_entitlements")
     .select("user_id,plan,status,starts_at,expires_at,created_at")
@@ -89,7 +76,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "会员状态暂时无法读取。" }, { status: 503 });
   }
   const entitlementsByUser = new Map<string, MembershipEntitlement[]>();
-  for (const entitlement of (entitlementsResult.data ?? []) as MembershipEntitlement[]) {
+  for (const entitlement of (entitlementsResult.data ?? []) as UserMembershipEntitlement[]) {
     const group = entitlementsByUser.get(entitlement.user_id) ?? [];
     group.push(entitlement);
     entitlementsByUser.set(entitlement.user_id, group);
@@ -100,34 +87,13 @@ export async function GET(request: NextRequest) {
     const profile = profiles.get(comment.user_id);
     if (!profile) return { ...comment, member_number: null, member_plan: null, membership_state: "guest" as const };
     const userEntitlements = entitlementsByUser.get(comment.user_id) ?? [];
-    const activeEntitlement = userEntitlements.find((entitlement) =>
-      entitlement.status === "active" &&
-      new Date(entitlement.starts_at).getTime() <= now.getTime() &&
-      new Date(entitlement.expires_at).getTime() > now.getTime(),
-    );
-    let memberPlan = activeEntitlement ? readMemberPlan(activeEntitlement.plan) : null;
-    const legacyLifetime = profile.membership_status === "lifetime";
-    const legacyPaid = profile.membership_status === "paid";
-    const legacyPaidActive = legacyPaid &&
-      (!profile.membership_expires_at || new Date(profile.membership_expires_at).getTime() > now.getTime());
-    if (!memberPlan && legacyLifetime) memberPlan = "lifetime";
-    else if (!memberPlan && legacyPaid) memberPlan = "yearly";
-    if (!memberPlan) {
-      memberPlan = userEntitlements
-        .map((entitlement) => readMemberPlan(entitlement.plan))
-        .find((plan): plan is MemberPlan => Boolean(plan)) ?? null;
-    }
-    const membershipState = activeEntitlement || legacyLifetime || legacyPaidActive
-      ? "active"
-      : memberPlan || profile.member_number != null
-        ? "expired"
-        : "guest";
+    const membership = resolveCurrentMembership(profile, userEntitlements, now);
     return {
       ...comment,
       avatar_url: profile.avatar_url ?? comment.avatar_url,
-      member_number: membershipState !== "guest" ? profile.member_number : null,
-      member_plan: memberPlan,
-      membership_state: membershipState,
+      member_number: membership.state !== "guest" ? profile.member_number : null,
+      member_plan: membership.plan,
+      membership_state: membership.state,
     };
   });
 
@@ -215,43 +181,19 @@ export async function POST(request: NextRequest) {
       ? profileMemberNumber
       : null;
 
-    const now = new Date();
-    const nowIso = now.toISOString();
-    const { data: entitlements } = await supabase
+    const now = Date.now();
+    const { data: entitlements, error: entitlementsError } = await supabase
       .from("user_project_entitlements")
       .select("plan,status,starts_at,expires_at,created_at")
       .eq("user_id", user.id)
       .order("created_at", { ascending: false });
+    if (entitlementsError) {
+      return NextResponse.json({ error: "会员状态暂时无法读取，请稍后再试。" }, { status: 503 });
+    }
     const records = (entitlements ?? []) as Omit<MembershipEntitlement, "user_id">[];
-    const activeEntitlement = records.find((entitlement) =>
-      entitlement.status === "active" &&
-      new Date(entitlement.starts_at).getTime() <= now.getTime() &&
-      new Date(entitlement.expires_at).getTime() > now.getTime(),
-    );
-    memberPlan = activeEntitlement ? readMemberPlan(activeEntitlement.plan) : null;
-    if (!memberPlan && profile?.membership_status === "lifetime") {
-      memberPlan = "lifetime";
-    } else if (
-      !memberPlan &&
-      profile?.membership_status === "paid" &&
-      (!profile.membership_expires_at || new Date(profile.membership_expires_at).getTime() > now.getTime())
-    ) {
-      memberPlan = "yearly";
-    }
-    if (!memberPlan) {
-      memberPlan = records
-        .map((entitlement) => readMemberPlan(entitlement.plan))
-        .find((plan): plan is MemberPlan => Boolean(plan)) ??
-        (profile?.membership_status === "paid" ? "yearly" : null);
-    }
-    const legacyLifetime = profile?.membership_status === "lifetime";
-    const legacyPaidActive = profile?.membership_status === "paid" &&
-      (!profile.membership_expires_at || new Date(profile.membership_expires_at).getTime() > now.getTime());
-    membershipState = activeEntitlement || legacyLifetime || legacyPaidActive
-      ? "active"
-      : memberPlan || memberNumber != null
-        ? "expired"
-        : "guest";
+    const membership = resolveCurrentMembership(profile, records, now);
+    memberPlan = membership.plan;
+    membershipState = membership.state;
     if (membershipState === "guest") memberNumber = null;
   }
 

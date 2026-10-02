@@ -1,8 +1,19 @@
-import { getManagedMediaUrl } from "@/lib/media/url";
+import { getManagedMediaUrl, getSupabaseStorageUrl, isLegacyCosOnlyMediaPath } from "@/lib/media/url";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 
 type PublicBucket = "audio" | "images";
+
+function isBbcAudioPath(path: string) {
+  return /^bbc(?:\/|$)/i.test(path.replace(/^\/+/, ""));
+}
+
+function getManagedOrSupabaseUrl(bucket: PublicBucket, path: string, cosEnabled: boolean) {
+  if (cosEnabled && (bucket !== "audio" || isBbcAudioPath(path) || isLegacyCosOnlyMediaPath(bucket, path))) {
+    return getManagedMediaUrl(bucket, path);
+  }
+  return getSupabaseStorageUrl(bucket, path);
+}
 
 export function getPublicStorageUrl(bucket: PublicBucket, path?: string | null) {
   if (!path) return null;
@@ -32,25 +43,18 @@ export function getPublicStorageUrl(bucket: PublicBucket, path?: string | null) 
         .split("/")
         .map((part) => decodeURIComponent(part))
         .join("/");
-      return cosEnabled ? getManagedMediaUrl(bucket, decoded) : input;
+      // COS keys that Supabase rejects are stored under a deterministic flat alias.
+      if (/^u-[A-Za-z0-9_-]+$/.test(decoded)) return input;
+      return getManagedOrSupabaseUrl(bucket, decoded, cosEnabled) ?? input;
     } catch {
       return input;
     }
   }
 
-  if (!supabaseUrl && !cosEnabled) return null;
   const cleanPath = input.replace(/^\/+/, "");
   const pathWithoutBucket = cleanPath.startsWith(`${bucket}/`)
     ? cleanPath.slice(bucket.length + 1)
     : cleanPath;
 
-  if (cosEnabled) return getManagedMediaUrl(bucket, pathWithoutBucket);
-  if (!supabaseUrl) return null;
-
-  const encodedPath = pathWithoutBucket
-    .split("/")
-    .map((part) => encodeURIComponent(part))
-    .join("/");
-
-  return `${supabaseUrl}/storage/v1/object/public/${bucket}/${encodedPath}`;
+  return getManagedOrSupabaseUrl(bucket, pathWithoutBucket, cosEnabled);
 }

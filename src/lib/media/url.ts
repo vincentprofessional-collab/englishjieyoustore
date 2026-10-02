@@ -5,6 +5,30 @@ export type StaticMediaAddress = {
   path: string;
 };
 
+const legacyCosOnlyPaths = new Set(["static/cet4/audio/cet4-paper-2023121.mp3"]);
+const supabaseSafePathSegment = /^[A-Za-z0-9_.,!&$@=;:+?() *'\-]+$/;
+const encodedPathAlias = /^u-[A-Za-z0-9_-]+$/;
+
+export function toSupabaseSafeStoragePath(path: string) {
+  const normalizedPath = path.trim().replace(/^\/+|\/+$/g, "");
+  const segments = normalizedPath.split("/");
+  if (
+    segments.every((segment) => segment && segment !== "." && segment !== ".." && supabaseSafePathSegment.test(segment))
+    && !encodedPathAlias.test(normalizedPath)
+  ) return normalizedPath;
+
+  const bytes = new TextEncoder().encode(normalizedPath);
+  let binary = "";
+  for (const byte of bytes) binary += String.fromCharCode(byte);
+  const encoded = btoa(binary).replaceAll("+", "-").replaceAll("/", "_").replace(/=+$/g, "");
+  return `u-${encoded}`;
+}
+
+export function isLegacyCosOnlyMediaPath(bucket: ManagedMediaBucket, path: string) {
+  const normalizedPath = path.trim().replace(/^\/+|\/+$/g, "").toLowerCase();
+  return bucket === "audio" && legacyCosOnlyPaths.has(normalizedPath);
+}
+
 const bucketByExtension: Record<string, ManagedMediaBucket> = {
   aac: "audio",
   flac: "audio",
@@ -35,6 +59,21 @@ export function getManagedMediaUrl(bucket: ManagedMediaBucket, path: string) {
   const normalizedPath = path.trim().replace(/^\/+|\/+$/g, "");
   const params = new URLSearchParams({ bucket, path: normalizedPath });
   return `/api/media?${params.toString()}`;
+}
+
+export function getSupabaseStorageUrl(
+  bucket: ManagedMediaBucket,
+  path: string,
+  supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL,
+) {
+  const normalizedPath = path.trim().replace(/^\/+|\/+$/g, "");
+  if (!supabaseUrl || !normalizedPath || normalizedPath.split("/").some((part) =>
+    !part || part === "." || part === ".." || /[\\\u0000-\u001f]/.test(part)
+  )) return null;
+  const targetBucket = bucket === "video" ? "videos" : bucket;
+  const storagePath = toSupabaseSafeStoragePath(normalizedPath);
+  const encodedPath = storagePath.split("/").map(encodeURIComponent).join("/");
+  return `${supabaseUrl.replace(/\/+$/, "")}/storage/v1/object/public/${targetBucket}/${encodedPath}`;
 }
 
 export function getVocabularyVideoMediaUrl(filename: string) {

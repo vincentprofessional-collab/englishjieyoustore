@@ -18,7 +18,6 @@ export type ReviewHistory = {
 
 const MINUTE = 60_000;
 const DAY = 24 * 60 * MINUTE;
-const FAMILIAR_STREAK_TO_ADVANCE = 3;
 const LONG_TERM_DAYS = [3, 7, 14, 30];
 const ALL_MODES = [0, 1, 2, 3] as const;
 const CLASSIFIED_MODE_SEQUENCE = [1, 0, 2, 3] as const;
@@ -61,14 +60,16 @@ export function scheduleReview(
   const previousStep = previous.reviewStep
     ?? (previous.completed || previous.plan === "done" ? LONG_TERM_DAYS.length : previous.plan === "long-term" ? 1 : 0);
   const isLongTerm = previousStep > 0 || previous.plan === "long-term" || previous.plan === "done" || previous.completed;
+  const recoveryRequired = previous.recoveryRequired === true
+    || previous.lastOutcome === "vague"
+    || previous.lastOutcome === "unfamiliar";
+  const recoveryFamiliarStreak = previous.recoveryFamiliarStreak ?? 0;
 
   if (!isLongTerm) {
-    const previousModeStreak = previous.consecutiveFamiliarMode === currentMode ? previous.consecutiveFamiliar ?? 0 : 0;
-    const consecutiveFamiliar = isFamiliar ? previousModeStreak + 1 : 0;
-    if (consecutiveFamiliar < FAMILIAR_STREAK_TO_ADVANCE) {
+    if (!isFamiliar) {
       return {
         completed: false,
-        consecutiveFamiliar,
+        consecutiveFamiliar: 0,
         consecutiveFamiliarMode: currentMode,
         firstLearnedAt,
         mistakeCount,
@@ -76,7 +77,24 @@ export function scheduleReview(
         nextReviewAt: now + MINUTE,
         plan: "short-term" as const,
         recoveryFamiliarStreak: 0,
-        recoveryRequired: false,
+        recoveryRequired: true,
+        reviewStep: 0,
+      };
+    }
+
+    const nextRecoveryStreak = recoveryRequired ? recoveryFamiliarStreak + 1 : 0;
+    if (recoveryRequired && nextRecoveryStreak < 3) {
+      return {
+        completed: false,
+        consecutiveFamiliar: 0,
+        consecutiveFamiliarMode: currentMode,
+        firstLearnedAt,
+        mistakeCount,
+        modeIndex: currentMode,
+        nextReviewAt: now + MINUTE,
+        plan: "short-term" as const,
+        recoveryFamiliarStreak: nextRecoveryStreak,
+        recoveryRequired: true,
         reviewStep: 0,
       };
     }
@@ -112,6 +130,23 @@ export function scheduleReview(
       nextReviewAt: now + 2 * MINUTE,
       plan: "long-term" as const,
       recoveryFamiliarStreak: 0,
+      recoveryRequired: true,
+      reviewStep,
+    };
+  }
+
+  const nextRecoveryStreak = recoveryRequired ? recoveryFamiliarStreak + 1 : 0;
+  if (recoveryRequired && nextRecoveryStreak < 3) {
+    return {
+      completed: false,
+      consecutiveFamiliar: 0,
+      consecutiveFamiliarMode: currentMode,
+      firstLearnedAt,
+      mistakeCount,
+      modeIndex: currentMode,
+      nextReviewAt: now + 2 * MINUTE,
+      plan: "long-term" as const,
+      recoveryFamiliarStreak: nextRecoveryStreak,
       recoveryRequired: true,
       reviewStep,
     };

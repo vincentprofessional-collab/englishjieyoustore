@@ -5,7 +5,7 @@ import {
   FREE_PREVIEW_VISITOR_MAX_AGE,
   isFreePreviewVisitorId,
 } from "@/lib/free-preview-visitor";
-import { getManagedMediaUrl, getStaticMediaAddress } from "@/lib/media/url";
+import { getManagedMediaUrl, getStaticMediaAddress, getSupabaseStorageUrl, isLegacyCosOnlyMediaPath } from "@/lib/media/url";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
@@ -21,6 +21,14 @@ export async function proxy(request: NextRequest) {
 
   if (staticMedia && !isBbcAsset) {
     if (process.env.NODE_ENV === "development" && /^\/audio\/(?:new-concept\/(?:book2|book1-uk|book2-uk)|new-concept-sentences\/book2)\//.test(path)) {
+      return NextResponse.next({ request });
+    }
+    if (staticMedia.bucket === "audio" || staticMedia.bucket === "video" || staticMedia.bucket === "videos") {
+      if (isLegacyCosOnlyMediaPath(staticMedia.bucket, staticMedia.path)) {
+        return NextResponse.rewrite(new URL(getManagedMediaUrl(staticMedia.bucket, staticMedia.path), request.url));
+      }
+      const directUrl = getSupabaseStorageUrl(staticMedia.bucket, staticMedia.path);
+      if (directUrl) return NextResponse.rewrite(new URL(directUrl));
       return NextResponse.next({ request });
     }
     if (process.env.COS_MEDIA_ENABLED !== "true") {

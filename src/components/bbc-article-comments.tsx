@@ -2,6 +2,7 @@
 
 import { useEffect, useState, type FormEvent } from "react";
 import { supabase } from "@/lib/supabase/client";
+import { resolveCurrentMembership, type MembershipEntitlement } from "@/lib/membership/current-membership";
 import styles from "./bbc-article-comments.module.css";
 
 type ArticleComment = {
@@ -34,14 +35,6 @@ type CommentProfile = {
   membership_expires_at?: string | null;
   membership_status?: string | null;
   role?: string | null;
-};
-
-type CommentEntitlement = {
-  created_at?: string | null;
-  expires_at: string;
-  plan: string;
-  starts_at: string;
-  status: string;
 };
 
 const MAX_COMMENTS = 100;
@@ -229,44 +222,21 @@ export function BbcArticleComments({ articleId }: { articleId: string }) {
             .maybeSingle()).data
         : profileResult.data) as CommentProfile | null;
       const now = new Date();
-      const { data: entitlements } = await supabase
+      const { data: entitlements, error: entitlementsError } = await supabase
         .from("user_project_entitlements")
         .select("plan,status,starts_at,expires_at,created_at")
         .eq("user_id", user.id)
         .order("created_at", { ascending: false });
       if (cancelled) return;
 
-      const planRank: Record<string, number> = { monthly: 1, quarterly: 2, yearly: 3, lifetime: 4 };
-      const knownEntitlements = (entitlements ?? []) as CommentEntitlement[];
-      const activeEntitlements = knownEntitlements.filter((entitlement) =>
-        entitlement.status === "active" &&
-        new Date(entitlement.starts_at).getTime() <= now.getTime() &&
-        new Date(entitlement.expires_at).getTime() > now.getTime(),
-      );
-      const entitlementPlan = activeEntitlements
-        .map((entitlement) => entitlement.plan as NonNullable<ArticleComment["member_plan"]>)
-        .sort((left, right) => (planRank[right] ?? 0) - (planRank[left] ?? 0))[0] ?? null;
-      const historicalPlan = knownEntitlements
-        .map((entitlement) => entitlement.plan as NonNullable<ArticleComment["member_plan"]>)
-        .sort((left, right) => (planRank[right] ?? 0) - (planRank[left] ?? 0))[0] ?? null;
-      const legacyPlan = profile?.membership_status === "lifetime"
-        ? "lifetime"
-        : profile?.membership_status === "paid"
-          ? "yearly"
-          : null;
+      const knownEntitlements = (entitlements ?? []) as MembershipEntitlement[];
       const displayName = String(
         profile?.display_name || user.user_metadata?.display_name || user.email?.split("@")[0] || "注册用户",
       ).trim().slice(0, 40) || "注册用户";
       const profileMemberNumber = profile?.member_number;
-      const memberPlan = entitlementPlan ?? legacyPlan ?? historicalPlan;
-      const membershipState: NonNullable<ArticleComment["membership_state"]> = entitlementPlan ||
-        profile?.membership_status === "lifetime" ||
-        (profile?.membership_status === "paid" &&
-          (!profile.membership_expires_at || new Date(profile.membership_expires_at).getTime() > now.getTime()))
-        ? "active"
-        : memberPlan || profile?.member_number != null
-          ? "expired"
-          : "guest";
+      const membership = resolveCurrentMembership(profile, knownEntitlements, now.getTime(), !entitlementsError);
+      const memberPlan = membership.plan;
+      const membershipState = membership.state;
       setIsAdmin(profile?.role === "admin");
       const memberNumber = membershipState !== "guest" && typeof profileMemberNumber === "number" && Number.isInteger(profileMemberNumber)
         ? profileMemberNumber
@@ -494,11 +464,9 @@ export function BbcArticleComments({ articleId }: { articleId: string }) {
   }
 
   function renderCommentHeader(comment: ArticleComment) {
-    const membershipState = comment.membership_state ?? (
-      comment.member_plan ? "active" : comment.member_number != null ? "expired" : "guest"
-    );
+    const membershipState = comment.membership_state ?? (comment.member_number != null ? "expired" : "guest");
     const number = membershipState !== "guest" ? formatMemberNumber(comment.member_number) : null;
-    const plan = memberPlanLabel(comment.member_plan);
+    const plan = membershipState === "active" ? memberPlanLabel(comment.member_plan) : null;
     const avatarTone = membershipAvatarClass(membershipState);
     return (
       <div className={styles.commentHeader}>
@@ -509,8 +477,8 @@ export function BbcArticleComments({ articleId }: { articleId: string }) {
             <span aria-hidden="true" className={`${styles.avatarFallback} ${avatarTone}`}>{membershipState === "guest" ? "客" : "V"}</span>
           )}
         </span>
-        {plan || number ? (
-          <span className={`${styles.memberBadge} ${membershipState === "expired" ? styles.memberBadgeExpired : styles.memberBadgeActive}`}>
+        {membershipState === "active" && (plan || number) ? (
+          <span className={`${styles.memberBadge} ${styles.memberBadgeActive}`}>
             {number ? `${number}号` : ""}{plan ?? "会员"}
           </span>
         ) : null}
@@ -567,8 +535,8 @@ export function BbcArticleComments({ articleId }: { articleId: string }) {
                 </span>
               )}
             </span>
-            {identity.membershipState !== "guest" ? (
-              <span className={`${styles.memberBadge} ${identity.membershipState === "expired" ? styles.memberBadgeExpired : styles.memberBadgeActive}`}>
+            {identity.membershipState === "active" ? (
+              <span className={`${styles.memberBadge} ${styles.memberBadgeActive}`}>
                 {identity.memberNumber != null ? `${identity.memberNumber}号` : ""}{memberPlanLabel(identity.memberPlan) ?? "会员"}
               </span>
             ) : null}
