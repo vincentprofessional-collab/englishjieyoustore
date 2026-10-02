@@ -30747,13 +30747,19 @@ body .mobile-bottom-nav a.active { color: #126d52 !important; }
   }
 }
 
-/* Mobile refinement: keep the hubs navigable and let study pages use the full screen. */
+/* Mobile refinement: use the approved phone layouts without desktop framing. */
 @media (max-width: 820px) {
+  html,
+  body {
+    background: #f7f4ea !important;
+  }
+
   body::after {
     display: none !important;
   }
 
   .shell {
+    background: #f7f4ea !important;
     border: 0 !important;
     border-radius: 0 !important;
     box-shadow: none !important;
@@ -30764,10 +30770,6 @@ body .mobile-bottom-nav a.active { color: #126d52 !important; }
     width: 100%;
   }
 
-  .shell:not(:has(.home-style-lab)) {
-    background: #fffdf8 !important;
-  }
-
   .shell:has(.mobile-bottom-nav) {
     padding-bottom: calc(74px + env(safe-area-inset-bottom)) !important;
   }
@@ -30776,7 +30778,7 @@ body .mobile-bottom-nav a.active { color: #126d52 !important; }
     display: none !important;
   }
 
-  .shell:has(.mobile-bottom-nav) > .site-header {
+  :is(.shell:has(.home-style-lab), .shell:has(.mobile-hub)) > .site-header {
     background: transparent !important;
     border: 0 !important;
     border-radius: 0 !important;
@@ -30786,12 +30788,12 @@ body .mobile-bottom-nav a.active { color: #126d52 !important; }
     padding: 0;
   }
 
-  .shell:has(.mobile-bottom-nav) > .site-header .nav-topbar {
+  :is(.shell:has(.home-style-lab), .shell:has(.mobile-hub)) > .site-header .nav-topbar {
     min-height: 46px;
     padding: calc(7px + env(safe-area-inset-top)) 18px 7px;
   }
 
-  .shell:has(.mobile-bottom-nav) > .site-header .brand {
+  :is(.shell:has(.home-style-lab), .shell:has(.mobile-hub)) > .site-header .brand {
     padding: 0;
   }
 
@@ -30802,7 +30804,29 @@ body .mobile-bottom-nav a.active { color: #126d52 !important; }
   }
 
   .study-directory-side-nav,
-  .ielts-section-shell > .ielts-side-nav {
+  .ielts-side-nav,
+  .section-side-nav,
+  .section-side-reveal,
+  .practice-sidebar,
+  .vocabulary-learning-sidebar {
+    display: none !important;
+  }
+
+  .site-section-shell {
+    display: block !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .section-page-content {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .practice-shell {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .site-footer {
     display: none !important;
   }
 
@@ -30948,7 +30972,53 @@ body .mobile-bottom-nav a.active { color: #126d52 !important; }
     padding-bottom: 96px;
   }
 
+  .bbc-home-page,
+  .bbc-article-page {
+    box-sizing: border-box;
+    margin-inline: 0;
+    max-width: 100%;
+    min-width: 0;
+    padding-inline: 12px;
+    width: 100%;
+  }
+
+  .bbc-home-page > *,
+  .bbc-article-page > *,
+  .bbc-article-columns > * {
+    box-sizing: border-box;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .bbc-article-columns {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .bbc-article-hero,
+  .bbc-original-panel,
+  .bbc-vocabulary-panel {
+    box-sizing: border-box;
+    max-width: 100%;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .bbc-article-hero h1,
+  .bbc-article-title-line,
+  .bbc-original-copy {
+    max-width: 100%;
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
   .shell:not(:has(.mobile-bottom-nav)) .bbc-full-audio-panel {
     bottom: calc(8px + env(safe-area-inset-bottom));
+    box-sizing: border-box;
+    left: 12px;
+    max-width: none;
+    right: 12px;
+    transform: none;
+    width: auto;
   }
 }

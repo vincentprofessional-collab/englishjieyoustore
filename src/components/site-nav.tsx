@@ -210,10 +210,6 @@ function isFocusedPracticeRoute(pathname: string) {
   return false;
 }
 
-function isMobileNavigationHub(pathname: string) {
-  return ["/", "/vocabulary", "/textbooks", "/exams", "/me"].includes(pathname);
-}
-
 function MobileNavIcon({ id }: { id: (typeof mobileNavItems)[number]["id"] }) {
   if (id === "word") return <span aria-hidden="true" className="mobile-bottom-nav-aa">Aa</span>;
 
@@ -230,7 +226,7 @@ function MobileNavIcon({ id }: { id: (typeof mobileNavItems)[number]["id"] }) {
 export function MobileBottomNav() {
   const pathname = usePathname();
 
-  if (isFocusedPracticeRoute(pathname) || !isMobileNavigationHub(pathname)) return null;
+  if (isFocusedPracticeRoute(pathname)) return null;
 
   return (
     <nav aria-label="手机主导航" className="mobile-bottom-nav">
