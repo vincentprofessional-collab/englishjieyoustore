@@ -24040,6 +24040,44 @@ audio.guide-editor-asset-preview {
   padding-left: 16px;
 }
 
+.bbc-desktop-audio-utilities { display: none; }
+
+@media (min-width: 821px) {
+  .bbc-article-mobile-back,
+  .bbc-article-date {
+    display: none !important;
+  }
+
+  .bbc-article-settings-trigger,
+  .bbc-article-settings-panel {
+    display: none !important;
+  }
+
+  .bbc-article-study {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .bbc-article-study > .bbc-full-audio-panel {
+    order: -1;
+    width: 100%;
+  }
+
+  .bbc-article-study > .bbc-article-columns {
+    order: 0;
+    width: 100%;
+  }
+
+  .bbc-desktop-audio-utilities {
+    border-left: 0;
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 0;
+    padding-left: 0;
+    width: 100%;
+  }
+}
+
 .bbc-audio-toolbar-utilities > .bbc-reading-timer,
 .bbc-audio-toolbar-utilities > .player-settings,
 .bbc-audio-toolbar-utilities > .bbc-fullscreen-toggle,

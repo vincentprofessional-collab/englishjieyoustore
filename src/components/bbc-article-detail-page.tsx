@@ -1339,8 +1339,10 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
         <div className="page-heading bbc-article-hero">
           <div className="bbc-article-hero-top">
             <Link className="bbc-detail-back-link" href="/articles">
-              ← BBC 随身英语
+              <span className="bbc-article-desktop-back">← 返回</span>
+              <span className="bbc-article-mobile-back">← BBC 随身英语</span>
             </Link>
+            <span className="bbc-article-title-id">{article.id}</span>
             <div className="bbc-article-actions">
               <button
                 aria-label={isArticleFavorite ? "取消收藏文章" : "收藏文章"}
@@ -1802,6 +1804,53 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
                 src={article.fullAudioUrl}
                 title={`${article.title} 完整音频`}
               />
+            </div>
+            <div className="bbc-audio-toolbar-utilities bbc-desktop-audio-utilities">
+              <button
+                aria-label={isReadingTimerRunning ? "暂停计时" : "开始计时"}
+                aria-pressed={isReadingTimerRunning}
+                className={`bbc-reading-timer ${isReadingTimerRunning ? "active" : ""}`}
+                onClick={() => {
+                  setIsReadingTimerVisible(true);
+                  setIsReadingTimerRunning((current) => !current);
+                }}
+                title={isReadingTimerRunning ? "点击暂停计时" : "点击开始计时"}
+                type="button"
+              >
+                <span>{isReadingTimerVisible ? formatReadingTime(readingSeconds) : "计时"}</span>
+              </button>
+              <AudioPronunciationMenu
+                onChange={(pronunciationMode) => updateAudioSettings({ pronunciationMode })}
+                value={audioSettings.pronunciationMode}
+              />
+              <AudioSettingsMenus
+                hasSelectedRate
+                onChange={updateAudioSettings}
+                settings={audioSettings}
+                variant="rate-only"
+              />
+              <AudioSettingsMenus
+                onChange={updateAudioSettings}
+                settings={audioSettings}
+                variant="subtitle-only"
+              />
+              <button
+                aria-pressed={isOriginalFullscreen}
+                className="bbc-fullscreen-toggle"
+                onClick={toggleOriginalFullscreen}
+                title={isOriginalFullscreen ? "退出全屏" : "全屏显示原文、词汇和音频"}
+                type="button"
+              >
+                {isOriginalFullscreen ? "退出全屏" : "全屏"}
+              </button>
+              <button
+                aria-label="打开批注"
+                className="annotation-toggle ielts-exam-action bbc-annotation-toggle"
+                onClick={() => pageRef.current?.querySelector<HTMLButtonElement>(".bbc-annotation-hidden-trigger")?.click()}
+                type="button"
+              >
+                批注
+              </button>
             </div>
           </section>
         ) : null}
