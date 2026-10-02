@@ -1562,7 +1562,7 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
                   && syntaxSentence.text === sentence.english;
 
                 return (
-                  <div className={`bbc-intensive-reading ${studyMode === "intensive" ? "bbc-syntax-reading" : ""}`} key={`${article.id}-intensive-sentence`}>
+                  <div className={`bbc-intensive-reading ${studyMode === "intensive" ? "bbc-syntax-reading" : ""} ${studyMode === "writing" ? "bbc-writing-mode" : ""}`} key={`${article.id}-intensive-sentence`}>
                     <div className="bbc-intensive-reading-actions">
                       {hasReviewedSyntax || hasBackendGrammarAnnotations ? <span className="bbc-intensive-sentence-number">#{sentence.sentenceNo}</span> : null}
                       <div className="bbc-intensive-sentence-controls">

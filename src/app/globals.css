@@ -13390,8 +13390,8 @@ body.share-sheet-open {
   z-index: 1;
 }
 
-.dictation-answer-char.correct { color: var(--success); }
-.dictation-answer-char.wrong { color: var(--danger); }
+.dictation-answer-char.is-correct { color: #19804e; }
+.dictation-answer-char.is-wrong { color: #c84c4c; }
 
 .writing-mode-translation {
   color: #000;
@@ -13419,6 +13419,22 @@ body.share-sheet-open {
   width: 100%;
   z-index: 2;
   -webkit-text-fill-color: transparent;
+}
+
+.bbc-writing-mode .dictation-blank-measure {
+  color: transparent;
+  text-decoration-color: var(--ink);
+  text-decoration-line: underline;
+  text-decoration-skip-ink: none;
+  text-decoration-style: dotted;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 0.1em;
+  visibility: visible;
+  -webkit-text-fill-color: transparent;
+}
+
+.bbc-writing-mode .dictation-blank-input {
+  border-bottom-color: transparent;
 }
 
 .sentence-order-line {
@@ -27111,14 +27127,6 @@ audio.guide-editor-asset-preview {
   position: absolute;
   text-shadow: none !important;
   width: 100%;
-}
-
-.vocabulary-learning-spelling-inline-input.correct input {
-  border-bottom-color: #68a67d !important;
-}
-
-.vocabulary-learning-spelling-inline-input.wrong input {
-  border-bottom-color: #cf7770 !important;
 }
 
 .vocabulary-learning-spelling-answer-line {

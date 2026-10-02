@@ -878,7 +878,6 @@ function SpellingTitleInput({
   onSubmit: () => void;
   target: string;
 }) {
-  const answerMatchesTarget = answer.trim().toLowerCase() === target.trim().toLowerCase();
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
@@ -890,7 +889,7 @@ function SpellingTitleInput({
   return (
     <div className={`vocabulary-learning-spelling-title ${feedbackVisible ? "is-revealed" : ""}`}>
       <div aria-live="polite" className="vocabulary-learning-spelling-target" />
-      <div className={`vocabulary-spelling-input vocabulary-learning-spelling-inline-input ${feedbackVisible ? "has-feedback" : ""} ${feedbackVisible ? (answerMatchesTarget ? "correct" : "wrong") : ""}`}>
+      <div className={`vocabulary-spelling-input vocabulary-learning-spelling-inline-input ${feedbackVisible ? "has-feedback" : ""}`}>
         <span className="sr-only">拼写英文</span>
         <span className="vocabulary-learning-spelling-answer-line">
           <span aria-hidden="true" className="vocabulary-learning-spelling-width-sizer">{feedbackVisible ? (answer.length > target.length ? answer : target) : answer || "\u00a0"}</span>

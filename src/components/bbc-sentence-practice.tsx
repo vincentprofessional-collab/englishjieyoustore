@@ -391,7 +391,7 @@ export function BbcSentencePractice({
       return (
         <span
           aria-hidden="true"
-          className={`dictation-answer-char ${normalizedCharacter ? (isCorrect ? "correct" : "wrong") : ""}`}
+          className={`dictation-answer-char ${normalizedCharacter ? (isCorrect ? "is-correct" : "is-wrong") : ""}`}
           key={`${index}-${character}`}
         >
           {character}
