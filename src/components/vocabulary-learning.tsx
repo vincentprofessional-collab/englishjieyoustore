@@ -17,6 +17,7 @@ import { VocabularyDetailContent } from "@/components/vocabulary-detail-content"
 import { VocabularyFavoriteButton } from "@/components/vocabulary-favorite-button";
 import { VocabularyInlinePronunciation } from "@/components/vocabulary-pronunciation";
 import { VocabularyShareButton } from "@/components/vocabulary-share-button";
+import { VocabularyVideoPlayer } from "@/components/vocabulary-video-player";
 import { drawBrowseMode, filterBrowseReviewWords, nextBrowseLoopId, scheduleBrowseReview } from "@/lib/vocabulary/browse-review";
 import { updateBrowseSpellingMistakes, type BrowseSpellingMistakeStore } from "@/lib/vocabulary/browse-spelling";
 import type { VocabularyUsageExample } from "@/lib/vocabulary/examples";
@@ -135,6 +136,11 @@ type VocabularyDetailPayload = {
   formationParts: VocabularyFormationPart[];
   phrases: VocabularyPhraseMatch[];
   usageExamples: VocabularyUsageExample[];
+};
+type VocabularyVideoPayload = {
+  totalVideos: number;
+  videos: Array<{ likedByMe: boolean; likes: number; path: string; src: string }>;
+  votesEnabled: boolean;
 };
 
 const STORAGE_KEY = "ielts-vocabulary-learning-v1";
@@ -921,28 +927,64 @@ function LearningVocabularyDetails({
   detailPayload: VocabularyDetailPayload | null;
   entry: LocalVocabularyEntry;
 }) {
+  const detailedEntry = detailPayload?.entry ?? entry;
+
   return (
     <div className="vocabulary-learning-complete-detail vocabulary-detail-content">
       <div className="vocabulary-learning-complete-detail-header">
-        <h1>{(detailPayload?.entry ?? entry).word}</h1>
+        <h1>{detailedEntry.word}</h1>
         <div className="vocabulary-learning-complete-detail-meta">
           <VocabularyInlinePronunciation
-            ukAudioUrl={(detailPayload?.entry ?? entry).ukAudioUrl}
-            ukPhonetic={(detailPayload?.entry ?? entry).ukPhonetic || (detailPayload?.entry ?? entry).phonetic}
-            usAudioUrl={(detailPayload?.entry ?? entry).usAudioUrl}
-            usPhonetic={(detailPayload?.entry ?? entry).usPhonetic || (detailPayload?.entry ?? entry).phonetic}
-            word={(detailPayload?.entry ?? entry).word}
+            ukAudioUrl={detailedEntry.ukAudioUrl}
+            ukPhonetic={detailedEntry.ukPhonetic || detailedEntry.phonetic}
+            usAudioUrl={detailedEntry.usAudioUrl}
+            usPhonetic={detailedEntry.usPhonetic || detailedEntry.phonetic}
+            word={detailedEntry.word}
           />
-          {(detailPayload?.entry ?? entry).level ? <span className="vocabulary-learning-complete-detail-level">{(detailPayload?.entry ?? entry).level}</span> : null}
+          {detailedEntry.level ? <span className="vocabulary-learning-complete-detail-level">{detailedEntry.level}</span> : null}
         </div>
       </div>
       <VocabularyDetailContent
-        entry={detailPayload?.entry ?? entry}
+        entry={detailedEntry}
         formationParts={detailPayload?.formationParts ?? []}
         phrases={detailPayload?.phrases ?? []}
         usageExamples={detailPayload?.usageExamples ?? []}
       />
+      <VocabularyLearningVideoSection word={detailedEntry.normalizedWord} />
     </div>
+  );
+}
+
+function VocabularyLearningVideoSection({ word }: { word: string }) {
+  const [payload, setPayload] = useState<VocabularyVideoPayload | null>(null);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    setPayload(null);
+    void fetch(`/api/vocabulary-videos?word=${encodeURIComponent(word)}`, { signal: controller.signal })
+      .then(async (response) => {
+        if (!response.ok) throw new Error("词汇视频加载失败");
+        return (await response.json()) as VocabularyVideoPayload;
+      })
+      .then((result) => {
+        if (Array.isArray(result.videos) && typeof result.totalVideos === "number") setPayload(result);
+      })
+      .catch(() => {
+        if (!controller.signal.aborted) setPayload(null);
+      });
+
+    return () => controller.abort();
+  }, [word]);
+
+  if (!payload?.videos.length) return null;
+
+  return (
+    <VocabularyVideoPlayer
+      entryWord={word}
+      totalVideos={payload.totalVideos}
+      videos={payload.videos}
+      votesEnabled={payload.votesEnabled}
+    />
   );
 }
 
