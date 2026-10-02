@@ -24,7 +24,7 @@ function cetSections(exam: CetExam) {
   }));
   const sets = getCetExamSetIndex(exam).entries;
   return [
-    { id: "knowledge", title: "知识点", href: `/exams/${exam}`, items: knowledge },
+    { id: "knowledge", title: "知识点", items: knowledge },
     { id: "practice", title: "题型训练", items: sets.filter((item) => item.kind === "practice").map((item) => ({ title: item.title, description: `${item.questionCount} 题 · ${item.answerStatus === "answered" ? "答案完整" : "含可用答案"}`, href: item.href, meta: item.questionTypes.join("、") })) },
     { id: "papers", title: "历年试卷", items: sets.filter((item) => item.kind === "paper").map((item) => ({ title: item.title, description: `${item.year} · ${item.region} · ${item.questionCount} 题`, href: item.href, meta: item.answerStatus === "answered" ? "答案完整" : "查看试卷" })) },
   ].map((section) => ({ ...section, items: section.items.length ? section.items : [{ title: `${prefix}目录`, description: "进入现有题库目录", href: `/${exam}?entry=${section.id}` }] }));
@@ -49,12 +49,12 @@ export default function ExamsPage() {
   const satIndex = readJson<{ domains: { id: string; label: string }[]; sets: { id: string; domain: string; skill: string; difficulty: string; expectedCount: number }[] }>("sat/index.json");
   const exams: MobileExam[] = [
     { id: "junior", title: "中考", sections: [
-      { id: "knowledge", title: "知识点", href: "/junior-high?entry=knowledge", items: juniorTopics },
+      { id: "knowledge", title: "知识点", items: juniorTopics },
       { id: "practice", title: "题型训练", items: juniorTypes },
       { id: "papers", title: "历年试卷", items: juniorPapers },
     ] },
     { id: "senior", title: "高考", sections: [
-      { id: "knowledge", title: "知识点", href: "/senior-high?entry=knowledge", items: seniorTopics },
+      { id: "knowledge", title: "知识点", items: seniorTopics },
       { id: "practice", title: "题型训练", items: seniorIndex.entries.filter((item) => item.kind === "practice").map((item) => ({ title: item.title, description: `${item.questionCount} 题 · ${item.year}`, href: item.href, meta: item.region })) },
       { id: "papers", title: "历年试卷", items: seniorIndex.entries.filter((item) => item.kind === "paper").map((item) => ({ title: item.title, description: `${item.year} · ${item.region} · ${item.questionCount} 题`, href: item.href, meta: item.variant })) },
     ] },

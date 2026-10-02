@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { VocabularySearchAutocomplete } from "@/components/vocabulary-search-autocomplete";
 
 type HubItem = { title: string; description?: string; href: string; meta?: string; featured?: boolean };
@@ -62,19 +62,10 @@ export function MobileMeHub() {
 
 export function MobileExamHub({ exams }: { exams: MobileExam[] }) {
   const [selectedExamId, setSelectedExamId] = useState(exams[0]?.id ?? "");
-  const [isMobile, setIsMobile] = useState(false);
   const selectedExam = exams.find((exam) => exam.id === selectedExamId) ?? exams[0];
   const [selectedSectionId, setSelectedSectionId] = useState(selectedExam?.sections[0]?.id ?? "");
   const section = selectedExam?.sections.find((item) => item.id === selectedSectionId) ?? selectedExam?.sections[0];
   const filteredItems = useMemo(() => section?.items ?? [], [section]);
-
-  useEffect(() => {
-    const media = window.matchMedia("(max-width: 820px)");
-    const update = () => setIsMobile(media.matches);
-    update();
-    media.addEventListener("change", update);
-    return () => media.removeEventListener("change", update);
-  }, []);
 
   function selectExam(id: string) {
     const nextExam = exams.find((exam) => exam.id === id);
@@ -90,19 +81,16 @@ export function MobileExamHub({ exams }: { exams: MobileExam[] }) {
       </nav>
       <section aria-label={`${selectedExam?.title ?? "考试"}目录`} className="mobile-exam-workspace">
         <header className="mobile-exam-workspace-head"><h2>{selectedExam?.title}</h2></header>
-        {isMobile ? (
-          <nav aria-label="考试下属菜单" className="mobile-exam-sections">
+        <nav aria-label="考试下属菜单" className="mobile-exam-sections mobile-exam-sections-mobile">
             {selectedExam?.sections.map((item) => item.href ? (
               <Link aria-current={item.id === section?.id ? "page" : undefined} className={item.id === section?.id ? "active" : ""} href={item.href} key={item.id}>{item.title}</Link>
             ) : (
               <button aria-pressed={item.id === section?.id} className={item.id === section?.id ? "active" : ""} key={item.id} onClick={() => setSelectedSectionId(item.id)} type="button">{item.title}</button>
             ))}
-          </nav>
-        ) : (
-          <div aria-label="考试下属菜单" className="mobile-exam-sections" role="tablist">
+        </nav>
+        <div aria-label="考试下属菜单" className="mobile-exam-sections mobile-exam-sections-desktop" role="tablist">
             {selectedExam?.sections.map((item) => <button aria-selected={item.id === section?.id} className={item.id === section?.id ? "active" : ""} key={item.id} onClick={() => setSelectedSectionId(item.id)} role="tab" type="button">{item.title}</button>)}
-          </div>
-        )}
+        </div>
         <div className="mobile-exam-items" role="tabpanel">
           {filteredItems.length ? filteredItems.map((item) => <HubLink item={item} key={item.href} />) : <p className="mobile-exam-empty">这个栏目目前没有可用内容。</p>}
         </div>

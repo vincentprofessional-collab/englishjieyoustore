@@ -90,7 +90,7 @@ export function ArticlesHome({
             {activeGroup?.articles.map((article) => (
                 <div className="bbc-article-card" key={article.id}>
                   <Link className="bbc-article-card-link" href={`/articles/${article.id}`}>
-                    <span className="bbc-article-list-meta">{article.date.replaceAll("-", ".")} <span>·</span> {article.id}</span>
+                    <span className="bbc-article-list-meta">{article.date.replaceAll("-", ".")} <span aria-hidden="true">·</span> <span className="bbc-article-list-id">{article.id}</span></span>
                     <strong>{article.title}</strong>
                     {article.titleChinese ? <span className="bbc-article-list-translation">{article.titleChinese}</span> : null}
                   </Link>

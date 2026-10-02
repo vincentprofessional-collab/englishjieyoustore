@@ -129,8 +129,8 @@ function paperForSourceCard(paper: JuniorHighPaper, card: SourcePracticeCard) {
 export function JuniorHighDemo() {
   const searchParams = useSearchParams();
   const requestedEntry = searchParams.get("entry");
-  const [mode, setMode] = useState<Mode>("practice-select");
-  const [practiceCategory, setPracticeCategory] = useState<JuniorHighPracticeCategory>("topic");
+  const [mode, setMode] = useState<Mode>(() => requestedEntry === "papers" ? "mock-select" : "practice-select");
+  const [practiceCategory, setPracticeCategory] = useState<JuniorHighPracticeCategory>(() => requestedEntry === "practice" ? "type" : "topic");
   const [practicePaper, setPracticePaper] = useState<JuniorHighPaper | null>(null);
   const [sourcePaper, setSourcePaper] = useState<JuniorHighPaper | null>(null);
   const [mockPaper, setMockPaper] = useState<JuniorHighPaper | null>(null);

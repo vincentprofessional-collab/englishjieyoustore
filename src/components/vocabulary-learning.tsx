@@ -1230,6 +1230,12 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
   const [studyPaused, setStudyPaused] = useState(false);
   const [settingsDraft, setSettingsDraft] = useState<StudySettingsDraft>(() => toSettingsDraft(DEFAULT_STUDY_SETTINGS));
   const reactionOptionsRef = useRef<HTMLDivElement | null>(null);
+  const dailyNewInputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    if (!settingsOpenFor || window.matchMedia("(max-width: 820px)").matches) return;
+    dailyNewInputRef.current?.focus({ preventScroll: true });
+  }, [settingsOpenFor]);
   const [favoriteWords, setFavoriteWords] = useState<FavoriteLearningWord[]>([]);
   const [voice, setVoice] = useState<Voice>("us");
   const [order, setOrder] = useState<SortOrder>("sequential");
@@ -2773,11 +2779,11 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
               <label className="vocabulary-learning-settings-daily-new">
                 <span>每日新词</span>
                 <input
-                  autoFocus
                   inputMode="numeric"
                   max="9999"
                   min="1"
                   onChange={(event) => setSettingsDraft((current) => ({ ...current, dailyNew: event.target.value }))}
+                  ref={dailyNewInputRef}
                   step="1"
                   type="number"
                   value={settingsDraft.dailyNew}

@@ -27,7 +27,7 @@ function answerLabel(entry: Cet4SetSummary) {
 export function Cet4Library({ knowledge, sets, exam = "cet4", initialEntry }: { knowledge: KnowledgeSummary[]; sets: Cet4SetSummary[]; exam?: CetExam; initialEntry?: Entry }) {
   const searchParams = useSearchParams();
   const requestedEntry = searchParams.get("entry");
-  const [entry, setEntry] = useState<Entry>(() => initialEntry ?? (sets.some((item) => item.kind === "practice") ? "practice" : knowledge.length ? "knowledge" : "papers"));
+  const [entry, setEntry] = useState<Entry>(() => initialEntry ?? (requestedEntry === "knowledge" || requestedEntry === "practice" || requestedEntry === "papers" ? requestedEntry : sets.some((item) => item.kind === "practice") ? "practice" : knowledge.length ? "knowledge" : "papers"));
   const [topic, setTopic] = useState("全部");
   const [year, setYear] = useState("全部");
   const [region, setRegion] = useState("全部");
