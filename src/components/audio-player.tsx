@@ -272,7 +272,6 @@ export function AudioPlayer({
   const [isReady, setIsReady] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
-  const [loadError, setLoadError] = useState<string | null>(null);
   const [isPlayRequested, setIsPlayRequested] = useState(false);
   const [position, setPosition] = useState(0);
   const [draftPosition, setDraftPosition] = useState(0);
@@ -341,7 +340,6 @@ export function AudioPlayer({
     setIsReady(false);
     setIsPlaying(false);
     setIsPlayRequested(false);
-    setLoadError(null);
     onPlayingChangeRef.current?.(false);
     onTimeChangeRef.current?.(0);
     setPosition(0);
@@ -361,7 +359,6 @@ export function AudioPlayer({
 
         enablePitchPreservation(sound);
         loadRetryCount = 0;
-        setLoadError(null);
         const loadedDuration = sound.duration();
         setDuration(loadedDuration);
         onDurationChangeRef.current?.(loadedDuration);
@@ -375,7 +372,6 @@ export function AudioPlayer({
         if (loadRetryCount < 2) {
           const retryDelay = loadRetryCount === 0 ? 350 : 900;
           loadRetryCount += 1;
-          setLoadError(null);
           loadRetryTimer = window.setTimeout(() => {
             if (!isDisposed && soundRef.current === sound) {
               sound.load();
@@ -388,7 +384,6 @@ export function AudioPlayer({
         setIsReady(false);
         setIsPlaying(false);
         setIsPlayRequested(false);
-        setLoadError("音频暂时未能加载，请点击播放按钮重试。");
         onPlayingChangeRef.current?.(false);
       },
       onplay: () => {
@@ -402,7 +397,6 @@ export function AudioPlayer({
         }
 
         clearAudioPlaybackRequest(sound);
-        setLoadError(null);
         setIsPlayRequested(false);
         setIsPlaying(true);
         onPlayingChangeRef.current?.(true);
@@ -415,7 +409,6 @@ export function AudioPlayer({
         clearAudioPlaybackRequest(sound);
         setIsPlaying(false);
         setIsPlayRequested(false);
-        setLoadError("浏览器暂时阻止播放，请再点击一次播放按钮。");
         onPlayingChangeRef.current?.(false);
       },
       onpause: () => {
@@ -587,7 +580,6 @@ export function AudioPlayer({
       return;
     }
 
-    setLoadError(null);
     setIsPlayRequested(true);
     if (sound.state() === "unloaded") {
       sound.load();
@@ -647,8 +639,6 @@ export function AudioPlayer({
           <div className="player-controls-trailing">{trailingControls}</div>
         </div>
       ) : mainPlayerControls}
-
-      {loadError ? <p className="audio-load-error">{loadError}</p> : null}
 
       <div className="player-progress-row" aria-label={title}>
         <span>{formatTime(displayPosition)}</span>

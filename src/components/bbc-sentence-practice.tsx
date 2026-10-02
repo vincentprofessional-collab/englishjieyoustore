@@ -377,9 +377,27 @@ export function BbcSentencePractice({
     const blankNumber =
       getDictationTargets().findIndex((item) => item.tokenIndex === target.tokenIndex) + 1;
     const userAnswer = dictationAnswers[answerKey] ?? "";
-    const hasTyped = userAnswer.trim().length > 0;
-    const isCorrect = hasTyped && normalizeAnswer(userAnswer) === normalizeAnswer(target.token);
-    const isWrong = hasTyped && !isCorrect;
+    const normalizedTarget = Array.from(normalizeAnswer(target.token));
+    let answerCharacterIndex = 0;
+    const answerCharacters = Array.from(userAnswer).map((character, index) => {
+      const normalizedCharacter = normalizeAnswer(character);
+      const isCorrect = normalizedCharacter.length > 0 &&
+        normalizedTarget.slice(
+          answerCharacterIndex,
+          answerCharacterIndex + normalizedCharacter.length,
+        ).join("") === normalizedCharacter;
+      answerCharacterIndex += normalizedCharacter.length;
+
+      return (
+        <span
+          aria-hidden="true"
+          className={`dictation-answer-char ${normalizedCharacter ? (isCorrect ? "correct" : "wrong") : ""}`}
+          key={`${index}-${character}`}
+        >
+          {character}
+        </span>
+      );
+    });
 
     return (
       <span
@@ -389,9 +407,12 @@ export function BbcSentencePractice({
         <span aria-hidden="true" className="dictation-blank-measure">
           {userAnswer || "....."}
         </span>
+        <span aria-hidden="true" className="dictation-blank-display">
+          {answerCharacters}
+        </span>
         <input
           aria-label={`听写第 ${blankNumber} 个空`}
-          className={`dictation-blank-input ${isCorrect ? "correct" : ""} ${isWrong ? "wrong" : ""}`}
+          className="dictation-blank-input"
           onChange={(event) => updateDictationAnswer(target.tokenIndex, event.target.value)}
           onClick={(event) => event.stopPropagation()}
           onKeyDown={handleDictationBlankKeyDown}

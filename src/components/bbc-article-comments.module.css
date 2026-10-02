@@ -132,6 +132,7 @@
 
 @media (max-width: 600px) {
   .section { border-radius: 17px; padding: 18px 14px; }
+  .headingRow h2 { font-size: var(--mobile-content-font-size, 15px); }
   .commentHeader { column-gap: 7px; row-gap: 5px; }
   .memberBadge { padding-inline: 7px; }
   .replyList { margin-left: 2ch; padding-inline: 9px; }

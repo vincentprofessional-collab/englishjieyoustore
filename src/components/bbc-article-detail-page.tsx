@@ -1328,6 +1328,71 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
           .reduce((total, sentence) => total + getWordCount(sentence.english), 0) +
         activeFullWordIndex
       : null;
+  const articleModeControls = (
+    <>
+      <AudioReadingMenu
+        isActive={studyMode === "general"}
+        isOriginalVisible={isOriginalVisible}
+        isVocabularyVisible={isVocabularyVisible}
+        label="泛读"
+        onActivate={() => selectStudyMode("general")}
+        onOriginalVisibilityChange={setIsOriginalVisible}
+        onVocabularyVisibilityChange={setIsVocabularyVisible}
+      />
+      <div className="player-menu bbc-intensive-mode-menu">
+        <button
+          aria-haspopup="true"
+          aria-pressed={studyMode === "intensive"}
+          className={`player-menu-trigger bbc-fullscreen-toggle ${studyMode === "intensive" ? "active" : ""}`}
+          onClick={() => selectStudyMode(studyMode === "intensive" ? "general" : "intensive")}
+          type="button"
+        >
+          精读
+        </button>
+        {studyMode === "intensive" ? (
+          <div aria-label="精读标注显示" className="player-menu-panel" role="group">
+            <button
+              aria-checked={syntaxPosVisible}
+              className={syntaxPosVisible ? "active" : ""}
+              onClick={() => setSyntaxPosVisible((visible) => !visible)}
+              role="switch"
+              type="button"
+            >
+              <span>词性</span>
+              <span aria-hidden="true" className="player-menu-option-switch" />
+            </button>
+            <button
+              aria-checked={syntaxDisplayMode !== "none"}
+              className={syntaxDisplayMode !== "none" ? "active" : ""}
+              onClick={() => setSyntaxDisplayMode((mode) => mode === "none" ? "all" : "none")}
+              role="switch"
+              type="button"
+            >
+              <span>成分</span>
+              <span aria-hidden="true" className="player-menu-option-switch" />
+            </button>
+          </div>
+        ) : null}
+      </div>
+      <AudioSettingsMenus
+        modeLabels={{ listening: "精听", speaking: "口语", writing: "写作" }}
+        onChange={updateAudioSettings}
+        onModeSelect={(mode) => selectStudyMode(mode)}
+        playModeLabel="精听"
+        preserveModeSettings
+        settings={audioSettings}
+        variant="listening-only"
+      />
+      <AudioSettingsMenus
+        modeLabels={{ speaking: "口语", writing: "写作" }}
+        onChange={updateAudioSettings}
+        onModeSelect={(mode) => selectStudyMode(mode)}
+        preserveModeSettings
+        settings={audioSettings}
+        variant="speaking-writing"
+      />
+    </>
+  );
   return (
     <section
       className="stack bbc-article-page"
@@ -1452,67 +1517,7 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
         {article.fullAudioUrl ? (
         <nav aria-label="文章学习模式" className="bbc-audio-toolbar bbc-article-mode-bar">
           <div className="bbc-audio-toolbar-settings bbc-audio-toolbar-modes">
-            <AudioReadingMenu
-              isActive={studyMode === "general"}
-              isOriginalVisible={isOriginalVisible}
-              isVocabularyVisible={isVocabularyVisible}
-              label="泛读"
-              onActivate={() => selectStudyMode("general")}
-              onOriginalVisibilityChange={setIsOriginalVisible}
-              onVocabularyVisibilityChange={setIsVocabularyVisible}
-            />
-            <div className="player-menu bbc-intensive-mode-menu">
-              <button
-                aria-haspopup="true"
-                aria-pressed={studyMode === "intensive"}
-                className={`player-menu-trigger bbc-fullscreen-toggle ${studyMode === "intensive" ? "active" : ""}`}
-                onClick={() => selectStudyMode(studyMode === "intensive" ? "general" : "intensive")}
-                type="button"
-              >
-                精读
-              </button>
-              {studyMode === "intensive" ? (
-                <div aria-label="精读标注显示" className="player-menu-panel" role="group">
-                  <button
-                    aria-checked={syntaxPosVisible}
-                    className={syntaxPosVisible ? "active" : ""}
-                    onClick={() => setSyntaxPosVisible((visible) => !visible)}
-                    role="switch"
-                    type="button"
-                  >
-                    <span>词性</span>
-                    <span aria-hidden="true" className="player-menu-option-switch" />
-                  </button>
-                  <button
-                    aria-checked={syntaxDisplayMode !== "none"}
-                    className={syntaxDisplayMode !== "none" ? "active" : ""}
-                    onClick={() => setSyntaxDisplayMode((mode) => mode === "none" ? "all" : "none")}
-                    role="switch"
-                    type="button"
-                  >
-                    <span>成分</span>
-                    <span aria-hidden="true" className="player-menu-option-switch" />
-                  </button>
-                </div>
-              ) : null}
-            </div>
-            <AudioSettingsMenus
-              modeLabels={{ listening: "精听", speaking: "口语", writing: "写作" }}
-              onChange={updateAudioSettings}
-              onModeSelect={(mode) => selectStudyMode(mode)}
-              playModeLabel="精听"
-              preserveModeSettings
-              settings={audioSettings}
-              variant="listening-only"
-            />
-            <AudioSettingsMenus
-              modeLabels={{ speaking: "口语", writing: "写作" }}
-              onChange={updateAudioSettings}
-              onModeSelect={(mode) => selectStudyMode(mode)}
-              preserveModeSettings
-              settings={audioSettings}
-              variant="speaking-writing"
-            />
+            {articleModeControls}
           </div>
         </nav>
         ) : null}
@@ -1805,52 +1810,57 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
                 title={`${article.title} 完整音频`}
               />
             </div>
-            <div className="bbc-audio-toolbar-utilities bbc-desktop-audio-utilities">
-              <button
-                aria-label={isReadingTimerRunning ? "暂停计时" : "开始计时"}
-                aria-pressed={isReadingTimerRunning}
-                className={`bbc-reading-timer ${isReadingTimerRunning ? "active" : ""}`}
-                onClick={() => {
-                  setIsReadingTimerVisible(true);
-                  setIsReadingTimerRunning((current) => !current);
-                }}
-                title={isReadingTimerRunning ? "点击暂停计时" : "点击开始计时"}
-                type="button"
-              >
-                <span>{isReadingTimerVisible ? formatReadingTime(readingSeconds) : "计时"}</span>
-              </button>
-              <AudioPronunciationMenu
-                onChange={(pronunciationMode) => updateAudioSettings({ pronunciationMode })}
-                value={audioSettings.pronunciationMode}
-              />
-              <AudioSettingsMenus
-                hasSelectedRate
-                onChange={updateAudioSettings}
-                settings={audioSettings}
-                variant="rate-only"
-              />
-              <AudioSettingsMenus
-                onChange={updateAudioSettings}
-                settings={audioSettings}
-                variant="subtitle-only"
-              />
-              <button
-                aria-pressed={isOriginalFullscreen}
-                className="bbc-fullscreen-toggle"
-                onClick={toggleOriginalFullscreen}
-                title={isOriginalFullscreen ? "退出全屏" : "全屏显示原文、词汇和音频"}
-                type="button"
-              >
-                {isOriginalFullscreen ? "退出全屏" : "全屏"}
-              </button>
-              <button
-                aria-label="打开批注"
-                className="annotation-toggle ielts-exam-action bbc-annotation-toggle"
-                onClick={() => pageRef.current?.querySelector<HTMLButtonElement>(".bbc-annotation-hidden-trigger")?.click()}
-                type="button"
-              >
-                批注
-              </button>
+            <div className="bbc-audio-toolbar bbc-desktop-audio-toolbar">
+              <nav aria-label="文章学习模式" className="bbc-audio-toolbar-settings bbc-audio-toolbar-modes bbc-desktop-mode-buttons">
+                {articleModeControls}
+              </nav>
+              <div className="bbc-audio-toolbar-utilities bbc-desktop-audio-utilities">
+                <button
+                  aria-label={isReadingTimerRunning ? "暂停计时" : "开始计时"}
+                  aria-pressed={isReadingTimerRunning}
+                  className={`bbc-reading-timer ${isReadingTimerRunning ? "active" : ""}`}
+                  onClick={() => {
+                    setIsReadingTimerVisible(true);
+                    setIsReadingTimerRunning((current) => !current);
+                  }}
+                  title={isReadingTimerRunning ? "点击暂停计时" : "点击开始计时"}
+                  type="button"
+                >
+                  <span>{isReadingTimerVisible ? formatReadingTime(readingSeconds) : "计时"}</span>
+                </button>
+                <AudioPronunciationMenu
+                  onChange={(pronunciationMode) => updateAudioSettings({ pronunciationMode })}
+                  value={audioSettings.pronunciationMode}
+                />
+                <AudioSettingsMenus
+                  hasSelectedRate
+                  onChange={updateAudioSettings}
+                  settings={audioSettings}
+                  variant="rate-only"
+                />
+                <AudioSettingsMenus
+                  onChange={updateAudioSettings}
+                  settings={audioSettings}
+                  variant="subtitle-only"
+                />
+                <button
+                  aria-pressed={isOriginalFullscreen}
+                  className="bbc-fullscreen-toggle"
+                  onClick={toggleOriginalFullscreen}
+                  title={isOriginalFullscreen ? "退出全屏" : "全屏显示原文、词汇和音频"}
+                  type="button"
+                >
+                  {isOriginalFullscreen ? "退出全屏" : "全屏"}
+                </button>
+                <button
+                  aria-label="打开批注"
+                  className="annotation-toggle ielts-exam-action bbc-annotation-toggle"
+                  onClick={() => pageRef.current?.querySelector<HTMLButtonElement>(".bbc-annotation-hidden-trigger")?.click()}
+                  type="button"
+                >
+                  批注
+                </button>
+              </div>
             </div>
           </section>
         ) : null}

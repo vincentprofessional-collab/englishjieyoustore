@@ -52,6 +52,15 @@
 .answerItem { display: block; }
 @media (max-width: 600px) {
   .panel { border-radius: 18px; padding: 20px 16px; }
+  .summary,
+  .group h3 { font-size: var(--mobile-content-font-size, 15px); }
+  .summary::after { flex-basis: 28px; height: 28px; font-size: 18px; }
+  .prompt,
+  .wordBank,
+  .matchingRow,
+  .choice,
+  .answer { font-size: var(--mobile-content-font-size, 15px); }
+  .textarea { font-size: 16px; }
   .prompt { gap: 7px; }
   .matchingRow { grid-template-columns: 1fr; gap: 8px; }
   .wordBank { margin-left: 0; }

@@ -13360,6 +13360,7 @@ body.share-sheet-open {
 }
 
 .dictation-blank-measure,
+.dictation-blank-display,
 .dictation-blank-input {
   grid-area: 1 / 1;
 }
@@ -13367,11 +13368,30 @@ body.share-sheet-open {
 .dictation-blank-measure {
   box-sizing: border-box;
   font: inherit;
+  font-weight: 900;
   min-width: 0;
   padding: 0 4px 2px;
   visibility: hidden;
   white-space: pre;
 }
+
+.dictation-blank-display {
+  align-self: center;
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 900;
+  line-height: inherit;
+  min-width: 0;
+  padding: 0 4px 2px;
+  pointer-events: none;
+  text-align: center;
+  white-space: pre;
+  z-index: 1;
+}
+
+.dictation-answer-char.correct { color: var(--success); }
+.dictation-answer-char.wrong { color: var(--danger); }
 
 .writing-mode-translation {
   color: #000;
@@ -13381,10 +13401,11 @@ body.share-sheet-open {
 .dictation-blank-input {
   background: transparent;
   border: 0;
-  border-bottom: 3px dotted currentColor;
+  border-bottom: 3px dotted var(--ink);
   border-radius: 0;
   box-sizing: border-box;
-  color: var(--ink);
+  caret-color: var(--accent-dark);
+  color: transparent;
   display: inline-block;
   font-family: inherit;
   font-size: inherit;
@@ -13396,21 +13417,8 @@ body.share-sheet-open {
   text-align: center;
   vertical-align: baseline;
   width: 100%;
-}
-
-.dictation-blank-input:focus {
-  color: var(--accent-dark);
-  border-bottom-style: solid;
-}
-
-.dictation-blank-input.correct {
-  border-bottom-color: var(--success);
-  color: var(--success);
-}
-
-.dictation-blank-input.wrong {
-  border-bottom-color: var(--danger);
-  color: var(--danger);
+  z-index: 2;
+  -webkit-text-fill-color: transparent;
 }
 
 .sentence-order-line {
@@ -13716,14 +13724,6 @@ body.share-sheet-open {
   opacity: 0.55;
 }
 
-.audio-load-error {
-  color: #b34235;
-  font-size: 12px;
-  font-weight: 800;
-  margin: -4px 0 0;
-  text-align: center;
-}
-
 .player-main-controls {
   align-items: center;
   background: transparent;
@@ -14003,6 +14003,10 @@ body.share-sheet-open {
 }
 
 @media (max-width: 820px) {
+  :root {
+    --mobile-content-font-size: clamp(14px, 3.8vw, 16px);
+  }
+
   .shell {
     padding: 10px 10px 80px;
   }
@@ -24041,6 +24045,7 @@ audio.guide-editor-asset-preview {
 }
 
 .bbc-desktop-audio-utilities { display: none; }
+.bbc-desktop-audio-toolbar { display: none; }
 
 @media (min-width: 821px) {
   .bbc-article-mobile-back,
@@ -24051,6 +24056,10 @@ audio.guide-editor-asset-preview {
   .bbc-article-settings-trigger,
   .bbc-article-settings-panel {
     display: none !important;
+  }
+
+  .bbc-article-mode-bar {
+    display: none;
   }
 
   .bbc-article-study {
@@ -24071,10 +24080,104 @@ audio.guide-editor-asset-preview {
   .bbc-desktop-audio-utilities {
     border-left: 0;
     display: flex;
-    justify-content: flex-start;
+    flex: 0 1 auto;
+    justify-content: flex-end;
     margin-left: 0;
     padding-left: 0;
+    width: auto;
+  }
+
+  .bbc-desktop-audio-toolbar {
+    align-items: center;
+    background: rgba(226, 238, 255, 0.92);
+    border: 1px solid rgba(176, 207, 246, 0.92);
+    border-radius: 16px;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 16px;
+    justify-content: space-between;
+    margin-top: 12px;
+    padding: 10px 12px;
     width: 100%;
+  }
+
+  .bbc-desktop-audio-toolbar.bbc-audio-toolbar {
+    border-top: 1px solid rgba(176, 207, 246, 0.92);
+    padding-top: 10px;
+  }
+
+  .bbc-desktop-audio-toolbar > .bbc-desktop-mode-buttons {
+    flex: 0 1 auto;
+    gap: 8px;
+    width: auto;
+  }
+
+  .bbc-desktop-audio-toolbar .bbc-audio-toolbar-utilities > .player-settings,
+  .bbc-desktop-audio-toolbar .bbc-audio-toolbar-utilities > .audio-pronunciation-control {
+    flex: 0 0 var(--bbc-toolbar-utility-control-width);
+    max-width: var(--bbc-toolbar-utility-control-width);
+    min-width: var(--bbc-toolbar-utility-control-width);
+    width: var(--bbc-toolbar-utility-control-width);
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1300px) {
+  .bbc-desktop-audio-toolbar {
+    flex-wrap: nowrap;
+    gap: 6px;
+    padding: 8px;
+  }
+
+  .bbc-desktop-audio-toolbar > .bbc-desktop-mode-buttons {
+    flex: 0 0 auto;
+    flex-wrap: nowrap;
+    gap: 4px;
+  }
+
+  .bbc-desktop-mode-buttons .exam-player-settings {
+    display: contents;
+  }
+
+  .bbc-desktop-mode-buttons .player-menu {
+    flex: 0 0 58px;
+    width: 58px;
+  }
+
+  .bbc-desktop-mode-buttons .player-menu-trigger {
+    font-size: 12px;
+    min-height: 34px;
+    min-width: 58px;
+    padding-inline: 3px;
+  }
+
+  .bbc-desktop-audio-toolbar .bbc-desktop-audio-utilities {
+    --bbc-toolbar-utility-control-width: 58px;
+    flex: 0 0 auto;
+    flex-wrap: nowrap;
+    gap: 4px;
+  }
+
+  .bbc-desktop-audio-utilities > .player-settings {
+    display: contents;
+  }
+
+  .bbc-desktop-audio-utilities .player-menu {
+    flex: 0 0 58px;
+    width: 58px;
+  }
+
+  .bbc-desktop-audio-utilities .player-menu-trigger,
+  .bbc-desktop-audio-utilities > button:not(.bbc-reading-timer) {
+    font-size: 12px;
+    min-height: 34px;
+    padding-inline: 3px;
+  }
+
+  .bbc-desktop-audio-utilities > .bbc-reading-timer span {
+    font-size: 12px;
+    min-height: 32px;
+    padding-inline: 2px;
   }
 }
 
@@ -24334,9 +24437,11 @@ audio.guide-editor-asset-preview {
 
 .bbc-intensive-reading .dictation-blank-input,
 .bbc-intensive-reading .dictation-blank-measure,
+.bbc-intensive-reading .dictation-blank-display,
 .bbc-intensive-reading .sentence-order-dropzone,
 .new-concept-sentence-copy .dictation-blank-input,
 .new-concept-sentence-copy .dictation-blank-measure,
+.new-concept-sentence-copy .dictation-blank-display,
 .new-concept-sentence-copy .sentence-order-dropzone {
   font-family: inherit;
   font-size: inherit;
@@ -29945,11 +30050,19 @@ body *:not(.bbc-vocabulary-highlight):not(.bbc-active-word) {
     margin-bottom: 20px;
   }
 
+  .bbc-original-copy p {
+    font-size: var(--mobile-content-font-size);
+  }
+
+  .bbc-article-columns > .bbc-vocabulary-panel .bbc-vocabulary-head h2 {
+    font-size: var(--mobile-content-font-size);
+  }
+
   .bbc-full-audio-panel {
     background: rgba(231, 241, 235, 0.98);
     border: 1px solid rgba(15, 107, 79, 0.14);
     border-radius: 18px;
-    bottom: calc(68px + env(safe-area-inset-bottom) + 7px);
+    bottom: calc(62px + env(safe-area-inset-bottom));
     box-shadow: 0 9px 28px rgba(28, 69, 53, 0.14);
     left: 50%;
     margin: 0;
