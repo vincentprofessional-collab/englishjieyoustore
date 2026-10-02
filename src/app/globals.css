@@ -29920,17 +29920,6 @@ body *:not(.bbc-vocabulary-highlight):not(.bbc-active-word) {
   margin: 0 0 18px;
 }
 
-.mobile-hub-heading > span,
-.mobile-word-search-card > div > span,
-.mobile-exam-workspace-head > span {
-  color: #8d7b59;
-  display: block;
-  font-size: 10px;
-  font-weight: 850;
-  letter-spacing: .12em;
-  margin-bottom: 5px;
-}
-
 .mobile-hub-heading h1 {
   color: #173f35;
   font-family: Georgia, "Noto Serif SC", serif;
@@ -30010,11 +29999,6 @@ body *:not(.bbc-vocabulary-highlight):not(.bbc-active-word) {
   margin: 0 1px 10px;
 }
 
-.mobile-hub-section-title > span {
-  color: #928a7d;
-  font-size: 11px;
-}
-
 .mobile-hub-grid {
   display: grid;
   gap: 9px;
@@ -30049,19 +30033,6 @@ body *:not(.bbc-vocabulary-highlight):not(.bbc-active-word) {
   transform: translateY(-1px);
 }
 
-.mobile-hub-link-index {
-  align-items: center;
-  background: #e8f1eb;
-  border-radius: 50%;
-  color: #1b7257;
-  display: inline-flex;
-  flex: 0 0 30px;
-  font-size: 9px;
-  font-weight: 850;
-  height: 30px;
-  justify-content: center;
-}
-
 .mobile-hub-link-copy {
   display: grid;
   gap: 3px;
@@ -30090,21 +30061,6 @@ body *:not(.bbc-vocabulary-highlight):not(.bbc-active-word) {
   font-family: Georgia, serif;
   font-size: 24px;
   margin-left: auto;
-}
-
-.mobile-hub-login {
-  align-items: center;
-  background: #edf3e9;
-  border-radius: 13px;
-  color: #35654f;
-  display: flex;
-  font-size: 12px;
-  font-weight: 750;
-  justify-content: space-between;
-  margin-top: 18px;
-  min-height: 48px;
-  padding: 0 14px;
-  text-decoration: none;
 }
 
 .mobile-exam-layout {
@@ -30216,14 +30172,6 @@ body *:not(.bbc-vocabulary-highlight):not(.bbc-active-word) {
   gap: 7px;
   min-height: 63px;
   padding: 9px 8px;
-}
-
-.mobile-exam-items .mobile-hub-link-index {
-  background: #f3f0e7;
-  flex-basis: 24px;
-  height: 24px;
-  margin-top: 1px;
-  width: 24px;
 }
 
 .mobile-exam-items .mobile-hub-link-copy strong { font-size: 12px; }
@@ -30511,26 +30459,6 @@ body *:not(.bbc-vocabulary-highlight):not(.bbc-active-word) {
   .mobile-exam-items .mobile-hub-link-copy strong { font-size: 11px; }
 }
 
-body .mobile-hub,
-body .mobile-hub * {
-  color: #233d33 !important;
-}
-
-body .mobile-hub-heading h1,
-body .mobile-hub-section-title h2,
-body .mobile-word-search-card h2,
-body .mobile-exam-workspace-head h2 { color: #173f35 !important; }
-
-body .mobile-hub-heading > span,
-body .mobile-word-search-card > div > span,
-body .mobile-exam-workspace-head > span { color: #8d7b59 !important; }
-
-body .mobile-hub-link-copy small,
-body .mobile-hub-link-copy em,
-body .mobile-hub-heading p,
-body .mobile-word-search-card p,
-body .mobile-hub-section-title > span { color: #748078 !important; }
-
 body .mobile-exam-list button.active,
 body .mobile-exam-list button.active * { color: #fff !important; }
 
@@ -30546,10 +30474,275 @@ body .bbc-full-audio .play-button { color: #fff !important; }
 
 @media (max-width: 820px) {
   body .mobile-bottom-nav a { color: #85877e !important; }
-  body .mobile-bottom-nav a.active { color: #126d52 !important; }
-  .mobile-exam-layout { height: min(72dvh, calc(100dvh - 220px)); }
-  .mobile-exam-list,
-  .mobile-exam-workspace { height: 100%; max-height: 100%; min-height: 0; }
-  .mobile-exam-items { flex: 1 1 auto; }
-  .mobile-word-search-card .vocabulary-search-row .button.primary { color: #fff !important; }
+body .mobile-bottom-nav a.active { color: #126d52 !important; }
+.mobile-exam-layout { height: min(72dvh, calc(100dvh - 220px)); }
+.mobile-exam-list,
+.mobile-exam-workspace { height: 100%; max-height: 100%; min-height: 0; }
+.mobile-exam-items { flex: 1 1 auto; }
+.mobile-word-search-card .vocabulary-search-row .button.primary { color: #fff !important; }
+}
+
+/* Mobile polish: let the learning sections read as one product, not a stack of widgets. */
+@media (max-width: 820px) {
+  .mobile-hub {
+    padding: 18px 16px 28px;
+  }
+
+  .mobile-hub-heading {
+    margin-bottom: 18px;
+  }
+
+  .mobile-hub-heading h1 {
+    color: #183f34;
+    font-family: Arial, "Noto Sans SC", sans-serif;
+    font-size: 28px;
+    font-weight: 750;
+    letter-spacing: -.025em;
+    line-height: 1.18;
+  }
+
+  .mobile-hub-heading p {
+    color: #69766e;
+    font-size: 13px;
+    line-height: 1.6;
+    margin-top: 5px;
+  }
+
+  .mobile-hub-section-title {
+    margin: 0 1px 9px;
+  }
+
+  .mobile-hub-section-title h2 {
+    color: #28483c;
+    font-family: Arial, "Noto Sans SC", sans-serif;
+    font-size: 15px;
+    font-weight: 750;
+    letter-spacing: 0;
+  }
+
+  .mobile-hub-link:hover {
+    background: #f1f5f0;
+    transform: none;
+  }
+
+  .mobile-hub-link:focus-visible {
+    background: #eef4ef;
+    outline: 2px solid var(--accent);
+    outline-offset: -3px;
+    transform: none;
+  }
+
+  .mobile-word-search-card {
+    background: #e7f0e9;
+    border: 0;
+    border-left: 3px solid var(--accent);
+    border-radius: 0 15px 15px 0;
+    box-shadow: none;
+    gap: 11px;
+    margin-bottom: 22px;
+    padding: 14px 14px 15px;
+  }
+
+  .mobile-word-search-card h2 {
+    color: #1c493a;
+    font-family: Arial, "Noto Sans SC", sans-serif;
+    font-size: 16px;
+    font-weight: 750;
+  }
+
+  .mobile-word-search-card p {
+    color: #63756a;
+    font-size: 12px;
+  }
+
+  .mobile-hub-grid {
+    background: #fffdf8;
+    border: 1px solid #e8dfce;
+    border-radius: 14px;
+    gap: 0;
+    overflow: hidden;
+  }
+
+  .mobile-hub-grid .mobile-hub-link {
+    align-items: flex-start;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    min-height: 98px;
+    padding: 14px 12px 24px;
+    position: relative;
+    transition: background .14s ease;
+  }
+
+  .mobile-hub-grid .mobile-hub-link:nth-child(even) {
+    border-left: 1px solid #e8dfce;
+  }
+
+  .mobile-hub-grid .mobile-hub-link:nth-child(n + 3) {
+    border-top: 1px solid #e8dfce;
+  }
+
+  .mobile-hub-grid .mobile-hub-link.featured {
+    background: #eaf2ec;
+  }
+
+  .mobile-hub-grid .mobile-hub-link-copy strong {
+    color: #24493b;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .mobile-hub-grid .mobile-hub-link-copy small {
+    color: #718078;
+    font-size: 11px;
+    line-height: 1.45;
+    padding: 0;
+  }
+
+  .mobile-hub-grid .mobile-hub-chevron {
+    bottom: 9px;
+    color: #719080;
+    font-size: 19px;
+    right: 12px;
+  }
+
+  .mobile-hub-feature-list {
+    background: #fffdf8;
+    border: 1px solid #e8dfce;
+    border-radius: 14px;
+    gap: 0;
+    overflow: hidden;
+  }
+
+  .mobile-hub-feature-list .mobile-hub-link {
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid #e8dfce;
+    border-radius: 0;
+    min-height: 78px;
+    padding: 14px 15px;
+    transition: background .14s ease;
+  }
+
+  .mobile-hub-feature-list .mobile-hub-link:last-child {
+    border-bottom: 0;
+  }
+
+  .mobile-hub-feature-list .mobile-hub-link-copy strong {
+    color: #24493b;
+    font-size: 15px;
+  }
+
+  .mobile-hub-feature-list .mobile-hub-link-copy small,
+  .mobile-hub-feature-list .mobile-hub-link-copy em {
+    color: #748078;
+    font-size: 12px;
+  }
+
+  .mobile-hub-feature-list .mobile-hub-chevron {
+    color: #7f9689;
+    font-size: 21px;
+  }
+
+  .mobile-exam-layout {
+    gap: 10px;
+    grid-template-columns: 76px minmax(0, 1fr);
+  }
+
+  .mobile-exam-list {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    gap: 3px;
+    padding: 0;
+  }
+
+  .mobile-exam-list button {
+    border-radius: 8px;
+    font-size: 11px;
+    min-height: 44px;
+    padding: 6px 2px;
+  }
+
+  .mobile-exam-list button.active {
+    background: var(--accent);
+    box-shadow: none;
+  }
+
+  .mobile-exam-workspace {
+    background: #fffdf8;
+    border-color: #e8dfce;
+    border-radius: 14px;
+  }
+
+  .mobile-exam-workspace-head {
+    padding: 13px 12px 9px;
+  }
+
+  .mobile-exam-workspace-head h2 {
+    color: #21483b;
+    font-family: Arial, "Noto Sans SC", sans-serif;
+    font-size: 17px;
+    font-weight: 750;
+  }
+
+  .mobile-exam-items {
+    gap: 0;
+    padding: 0 12px 10px;
+  }
+
+  .mobile-exam-items .mobile-hub-link {
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid #eee8dc;
+    border-radius: 0;
+    min-height: 62px;
+    padding: 11px 1px;
+    transition: background .14s ease;
+  }
+
+  .mobile-exam-items .mobile-hub-link:last-child {
+    border-bottom: 0;
+  }
+
+  .mobile-exam-items .mobile-hub-link-copy strong {
+    color: #29483c;
+    font-size: 13px;
+  }
+
+  .mobile-exam-items .mobile-hub-link-copy small,
+  .mobile-exam-items .mobile-hub-link-copy em {
+    color: #768178;
+    font-size: 11px;
+  }
+
+  .mobile-bottom-nav {
+    background: #fffdf8;
+    border-top-color: #e8dfce;
+    box-shadow: none;
+    min-height: 62px;
+    padding-top: 3px;
+  }
+
+  .mobile-bottom-nav a {
+    gap: 4px;
+    min-height: 52px;
+    position: relative;
+  }
+
+  .mobile-bottom-nav a.active::after {
+    background: currentColor;
+    border-radius: 99px;
+    bottom: 0;
+    content: "";
+    height: 2px;
+    position: absolute;
+    width: 18px;
+  }
+
+  .mobile-bottom-nav a.active .mobile-bottom-nav-icon,
+  .mobile-bottom-nav a.active .mobile-bottom-nav-aa {
+    background: transparent;
+    border-radius: 0;
+  }
 }
