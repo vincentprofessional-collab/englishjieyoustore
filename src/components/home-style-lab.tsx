@@ -27,8 +27,9 @@ export function HomeStyleLab({ content }: { content: ManagedPageContent }) {
 
   return (
     <div className="home-style-lab home-simple">
-      <section className="home-hero-panel" aria-label="英文解忧杂货铺首页介绍">
+      <section className="home-hero-panel home-announcement-panel" aria-label="英文解忧杂货铺首页介绍">
         <div className="home-hero-copy">
+          <span className="home-announcement-label">公告栏</span>
           <span
             className="home-kicker"
             style={{
@@ -57,7 +58,10 @@ export function HomeStyleLab({ content }: { content: ManagedPageContent }) {
         </div>
       </section>
 
-      <GuideBoard compact hideHeading hidePostChrome initialExpanded={false} placementPath="/" postLimit={50} />
+      <section aria-label="帖子专区" className="home-mobile-posts-heading">
+        <h2>帖子专区</h2>
+      </section>
+      <GuideBoard compact hideHeading hidePostChrome homeLanding initialExpanded={false} placementPath="/" postLimit={50} />
 
       {items.length ? (
         <section className="managed-page-grid" aria-label="学习模块">

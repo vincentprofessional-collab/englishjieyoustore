@@ -1,11 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { VocabularySearchAutocomplete } from "@/components/vocabulary-search-autocomplete";
 
 type HubItem = { title: string; description?: string; href: string; meta?: string; featured?: boolean };
-export type MobileExamSection = { id: string; title: string; items: HubItem[] };
+export type MobileExamSection = { id: string; title: string; items: HubItem[]; href?: string };
 export type MobileExam = { id: string; title: string; sections: MobileExamSection[] };
 
 function HubHeading({ title, description }: { title: string; description: string }) {
@@ -23,14 +23,12 @@ export function MobileWordHub() {
   const modules: HubItem[] = [
     { title: "背单词", description: "继续今天的词汇复习", href: "/vocabulary/books", featured: true },
     { title: "词源词根字典", description: "按词根和词源理解词义", href: "/vocabulary/etymology" },
-    { title: "口语表达", description: "雅思口语 Part 1–3", href: "/speaking/part-1" },
     { title: "俚语俗语", description: "在 BBC 文章里学真实用法", href: "/articles" },
   ];
 
   return <section className="mobile-hub mobile-word-hub">
     <HubHeading title="单词" description="查单词，整理词汇和表达。" />
     <section aria-label="查单词" className="mobile-word-search-card">
-      <div><h2>查单词</h2><p>搜索释义、发音、例句和视频。</p></div>
       <VocabularySearchAutocomplete initialQuery="" autoFocus={false} />
     </section>
     <div className="mobile-hub-section-title"><h2>词汇与表达</h2></div>
@@ -64,10 +62,19 @@ export function MobileMeHub() {
 
 export function MobileExamHub({ exams }: { exams: MobileExam[] }) {
   const [selectedExamId, setSelectedExamId] = useState(exams[0]?.id ?? "");
+  const [isMobile, setIsMobile] = useState(false);
   const selectedExam = exams.find((exam) => exam.id === selectedExamId) ?? exams[0];
   const [selectedSectionId, setSelectedSectionId] = useState(selectedExam?.sections[0]?.id ?? "");
   const section = selectedExam?.sections.find((item) => item.id === selectedSectionId) ?? selectedExam?.sections[0];
   const filteredItems = useMemo(() => section?.items ?? [], [section]);
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 820px)");
+    const update = () => setIsMobile(media.matches);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
 
   function selectExam(id: string) {
     const nextExam = exams.find((exam) => exam.id === id);
@@ -83,9 +90,19 @@ export function MobileExamHub({ exams }: { exams: MobileExam[] }) {
       </nav>
       <section aria-label={`${selectedExam?.title ?? "考试"}目录`} className="mobile-exam-workspace">
         <header className="mobile-exam-workspace-head"><h2>{selectedExam?.title}</h2></header>
-        <div aria-label="考试下属菜单" className="mobile-exam-sections" role="tablist">
-          {selectedExam?.sections.map((item) => <button aria-selected={item.id === section?.id} className={item.id === section?.id ? "active" : ""} key={item.id} onClick={() => setSelectedSectionId(item.id)} role="tab" type="button">{item.title}</button>)}
-        </div>
+        {isMobile ? (
+          <nav aria-label="考试下属菜单" className="mobile-exam-sections">
+            {selectedExam?.sections.map((item) => item.href ? (
+              <Link aria-current={item.id === section?.id ? "page" : undefined} className={item.id === section?.id ? "active" : ""} href={item.href} key={item.id}>{item.title}</Link>
+            ) : (
+              <button aria-pressed={item.id === section?.id} className={item.id === section?.id ? "active" : ""} key={item.id} onClick={() => setSelectedSectionId(item.id)} type="button">{item.title}</button>
+            ))}
+          </nav>
+        ) : (
+          <div aria-label="考试下属菜单" className="mobile-exam-sections" role="tablist">
+            {selectedExam?.sections.map((item) => <button aria-selected={item.id === section?.id} className={item.id === section?.id ? "active" : ""} key={item.id} onClick={() => setSelectedSectionId(item.id)} role="tab" type="button">{item.title}</button>)}
+          </div>
+        )}
         <div className="mobile-exam-items" role="tabpanel">
           {filteredItems.length ? filteredItems.map((item) => <HubLink item={item} key={item.href} />) : <p className="mobile-exam-empty">这个栏目目前没有可用内容。</p>}
         </div>

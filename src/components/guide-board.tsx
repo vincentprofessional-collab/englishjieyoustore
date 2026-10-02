@@ -18,6 +18,7 @@ import { getVisitorNumber } from "@/lib/visitor-identity";
 type GuideBoardProps = {
   eyebrow?: string;
   compact?: boolean;
+  homeLanding?: boolean;
   hideHeading?: boolean;
   hidePostChrome?: boolean;
   initialExpanded?: boolean;
@@ -495,6 +496,7 @@ export function GuidePostDetail({ post }: { post: GuidePost }) {
 export function GuideBoard({
   compact = false,
   eyebrow = "GUIDE · 使用说明",
+  homeLanding = false,
   hideHeading = false,
   hidePostChrome = false,
   hideWhenEmpty = false,
@@ -510,7 +512,20 @@ export function GuideBoard({
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPosts, setTotalPosts] = useState(DEFAULT_GUIDE_POSTS.length);
   const [isLoading, setIsLoading] = useState(true);
+  const [loadError, setLoadError] = useState(false);
+  const [isMobileHome, setIsMobileHome] = useState(false);
   const pageSize = postLimit ?? 50;
+
+  useEffect(() => {
+    if (!homeLanding) return;
+    const media = window.matchMedia("(max-width: 820px)");
+    const update = () => setIsMobileHome(media.matches);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, [homeLanding]);
+
+  const effectiveHidePostChrome = homeLanding ? !isMobileHome : hidePostChrome;
 
   useEffect(() => {
     let active = true;
@@ -537,6 +552,7 @@ export function GuideBoard({
       }
 
       if (error) {
+        setLoadError(true);
         setIsLoading(false);
         return;
       }
@@ -544,6 +560,7 @@ export function GuideBoard({
       const nextRows = (data ?? []) as GuidePostRow[];
       setPosts(nextRows.map(parseGuidePostRow));
       setTotalPosts(count ?? data?.length ?? 0);
+      setLoadError(false);
       setIsLoading(false);
     }
 
@@ -560,7 +577,7 @@ export function GuideBoard({
 
   return (
     <section
-      className={`stack guide-board-page ${compact ? "guide-board-compact" : ""} ${hidePostChrome ? "guide-board-home" : ""}`}
+      className={`stack guide-board-page ${compact ? "guide-board-compact" : ""} ${hidePostChrome ? "guide-board-home" : ""} ${homeLanding ? "guide-board-home-live" : ""}`}
     >
       {!hideHeading ? (
         <section className="guide-board-heading">
@@ -574,14 +591,19 @@ export function GuideBoard({
       <div className="guide-post-list">
         {posts.map((post) => (
           <GuidePostCard
-            hidePostChrome={hidePostChrome}
+            hidePostChrome={effectiveHidePostChrome}
             initialExpanded={initialExpanded}
             key={post.id}
             post={post}
           />
         ))}
+        {isLoading && isMobileHome ? (
+          <p aria-live="polite" className="guide-post-empty">正在载入网站帖子…</p>
+        ) : null}
         {!isLoading && posts.length === 0 ? (
-          <p className="guide-post-empty">{emptyMessage}</p>
+          <p className="guide-post-empty">
+            {loadError && isMobileHome ? "帖子暂时无法载入，请刷新重试。" : emptyMessage}
+          </p>
         ) : null}
       </div>
       {postLimit && totalPosts > pageSize ? (
