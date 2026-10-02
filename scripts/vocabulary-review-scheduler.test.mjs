@@ -76,6 +76,13 @@ test("口语模式选择熟悉后直接进入已启用的写作模式，即使�
   assert.equal(next.recoveryFamiliarStreak, 0);
 });
 
+test("口语模式选择模糊或生僻后仍留在口语模式", () => {
+  for (const outcome of ["vague", "unfamiliar"]) {
+    const next = scheduleReview({ lastOutcome: "familiar", lastReviewedAt: 0, modeIndex: 2, plan: "short-term" }, outcome, minute);
+    assert.equal(next.modeIndex, 2);
+  }
+});
+
 test("阅读、听力、口语、写作各答熟悉一次后进入三天后的长期复习", () => {
   let previous = { lastReviewedAt: null, modeIndex: 1, plan: "short-term" };
   let now = 0;

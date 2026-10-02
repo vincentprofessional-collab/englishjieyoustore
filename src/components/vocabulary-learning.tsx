@@ -31,6 +31,7 @@ import {
 import type { LocalVocabularyEntry, VocabularyFormationPart } from "@/lib/vocabulary/local-vocabulary";
 import type { VocabularyPhraseMatch } from "@/lib/vocabulary/phrases";
 import { getVocabularyAudioUrl } from "@/lib/vocabulary/pronunciation-audio";
+import { getSpellingCharacterFeedback } from "@/lib/vocabulary/spelling-feedback";
 import { scheduleReview, selectEnabledMode } from "@/lib/vocabulary/review-scheduler";
 import { localStudyDate, summarizeDailyStudy, type DailyActivityStore, type DailyMode, type DailyOutcome } from "@/lib/vocabulary/daily-summary";
 import { filterProgressWordIds, type VocabularyMode, type VocabularyOutcome } from "@/lib/vocabulary/progress-filters";
@@ -804,47 +805,7 @@ function LookupDetails({ word }: { word: LearningWord }) {
 }
 
 function SpellingColoredAnswer({ answer, feedbackVisible, target }: { answer: string; feedbackVisible: boolean; target: string }) {
-  const letters = Array.from(answer);
-  const expected = Array.from(target);
-  const distances = Array.from({ length: letters.length + 1 }, () => Array<number>(expected.length + 1).fill(0));
-  for (let letterIndex = 0; letterIndex <= letters.length; letterIndex += 1) distances[letterIndex][0] = letterIndex;
-  for (let targetIndex = 0; targetIndex <= expected.length; targetIndex += 1) distances[0][targetIndex] = targetIndex;
-  for (let letterIndex = 1; letterIndex <= letters.length; letterIndex += 1) {
-    for (let targetIndex = 1; targetIndex <= expected.length; targetIndex += 1) {
-      distances[letterIndex][targetIndex] = Math.min(
-        distances[letterIndex - 1][targetIndex] + 1,
-        distances[letterIndex][targetIndex - 1] + 1,
-        distances[letterIndex - 1][targetIndex - 1]
-          + (letters[letterIndex - 1].toLowerCase() === expected[targetIndex - 1].toLowerCase() ? 0 : 1),
-      );
-    }
-  }
-
-  const feedback: Array<{ letter: string; correct: boolean }> = [];
-  let letterIndex = letters.length;
-  let targetIndex = expected.length;
-  while (letterIndex > 0 || targetIndex > 0) {
-    const typedLetter = letters[letterIndex - 1];
-    const targetLetter = expected[targetIndex - 1];
-    const matches = typedLetter !== undefined && targetLetter !== undefined
-      && typedLetter.toLowerCase() === targetLetter.toLowerCase();
-    if (matches && distances[letterIndex][targetIndex] === distances[letterIndex - 1][targetIndex - 1]) {
-      feedback.push({ letter: typedLetter, correct: true });
-      letterIndex -= 1;
-      targetIndex -= 1;
-    } else if (letterIndex > 0 && distances[letterIndex][targetIndex] === distances[letterIndex - 1][targetIndex] + 1) {
-      feedback.push({ letter: typedLetter, correct: false });
-      letterIndex -= 1;
-    } else if (targetIndex > 0 && distances[letterIndex][targetIndex] === distances[letterIndex][targetIndex - 1] + 1) {
-      if (feedbackVisible) feedback.push({ letter: targetLetter, correct: false });
-      targetIndex -= 1;
-    } else if (letterIndex > 0 && targetIndex > 0) {
-      feedback.push({ letter: typedLetter, correct: false });
-      letterIndex -= 1;
-      targetIndex -= 1;
-    }
-  }
-  feedback.reverse();
+  const feedback = getSpellingCharacterFeedback(answer, target, feedbackVisible);
 
   return (
     <span aria-hidden="true" className="vocabulary-learning-spelling-colored-answer">
