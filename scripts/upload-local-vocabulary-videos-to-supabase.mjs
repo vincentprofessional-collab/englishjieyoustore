@@ -105,6 +105,22 @@ if (existsSync(manifestPath)) {
 if (pending.some((entry) => !entry.localPath.toLowerCase().endsWith(".mp4"))) throw new Error("The source folder contains a non-MP4 file; refusing to upload it as vocabulary video.");
 
 const totalBytes = pending.reduce((sum, entry) => sum + entry.bytes, 0);
+const entryByDestination = new Map(pending.map((entry) => [`${entry.bucket}/${entry.storagePath}`, entry]));
+const journaled = new Set();
+if (existsSync(journalPath)) {
+  for (const line of readFileSync(journalPath, "utf8").split(/\r?\n/).filter(Boolean)) {
+    const record = JSON.parse(line);
+    if (record.bucket !== "videos" || typeof record.path !== "string"
+      || !Number.isSafeInteger(record.bytes) || record.bytes < 0
+      || !/^[a-f0-9]{64}$/.test(record.sha256 ?? "")) {
+      throw new Error("The local upload checkpoint is invalid; refusing to continue.");
+    }
+    const destination = `${record.bucket}/${toSupabaseSafeStoragePath(record.path)}`;
+    const entry = entryByDestination.get(destination);
+    if (!entry || entry.bytes !== record.bytes) throw new Error(`Local upload checkpoint does not match source: ${destination}`);
+    journaled.add(destination);
+  }
+}
 console.log(`Local source check passed: ${pending.length} vocabulary videos, ${(totalBytes / 1024 ** 3).toFixed(2)} GiB; every filename and size matches the reviewed manifest.`);
 console.log(`Destination: Supabase Storage bucket videos; BBC remains excluded. Source: ${sourceRoot}`);
 console.log(`Mode: ${execute ? "upload enabled" : "dry run only"}; concurrency ${concurrency}; files over 20 MB are rejected.`);
@@ -127,6 +143,13 @@ const supabase = createClient(supabaseUrl, serviceRoleKey, {
   auth: { autoRefreshToken: false, persistSession: false },
 });
 mkdirSync(dirname(journalPath), { recursive: true });
+
+function recordVerified(entry, sha256) {
+  const destination = `${entry.bucket}/${entry.storagePath}`;
+  if (journaled.has(destination)) return;
+  appendFileSync(journalPath, `${JSON.stringify({ bucket: entry.bucket, path: entry.path, bytes: entry.bytes, sha256, verifiedAt: new Date().toISOString() })}\n`);
+  journaled.add(destination);
+}
 
 async function retry(operation, label) {
   for (let attempt = 1; attempt <= 4; attempt += 1) {
@@ -176,6 +199,7 @@ const worker = async () => {
       if (Number(info.size) !== bytes.length || info.metadata?.sha256 !== sha256) {
         throw new Error(`Existing Supabase file differs from the local source; refusing to overwrite ${destination}.`);
       }
+      recordVerified(entry, sha256);
       reused += 1;
     } else {
       const missing = Number(infoError?.status ?? infoError?.cause?.status) === 404
@@ -196,7 +220,7 @@ const worker = async () => {
         throw new Error(`Supabase size/hash verification failed for ${destination}.`);
       }
       uploaded += 1;
-      appendFileSync(journalPath, `${JSON.stringify({ bucket: entry.bucket, path: entry.path, bytes: bytes.length, sha256, verifiedAt: new Date().toISOString() })}\n`);
+      recordVerified(entry, sha256);
     }
     const completed = uploaded + reused;
     if (completed % 25 === 0) console.log(`Checkpoint: ${completed}/${pending.length} checked; ${uploaded} uploaded, ${reused} already verified.`);

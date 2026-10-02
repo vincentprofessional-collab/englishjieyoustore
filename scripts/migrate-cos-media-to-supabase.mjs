@@ -40,6 +40,7 @@ if (missing.length) throw new Error(`Missing local setting(s): ${missing.join(",
 const manifestPath = resolve(projectRoot, "outputs/cos-supabase-media-manifest.json");
 const existingPath = resolve(projectRoot, "outputs/supabase-existing-audio-video.json");
 const journalPath = resolve(projectRoot, "outputs/cos-to-supabase-progress.jsonl");
+const localVideoJournalPath = resolve(projectRoot, "outputs/local-vocabulary-videos-to-supabase-progress.jsonl");
 const manifest = JSON.parse(readFileSync(manifestPath, "utf8"));
 const existingInventory = JSON.parse(readFileSync(existingPath, "utf8"));
 if (manifest.excluded !== "BBC" || !Array.isArray(manifest.entries)) {
@@ -94,6 +95,26 @@ if (existsSync(journalPath)) {
   }
 }
 
+const eligibleByDestination = new Map(eligibleEntries.map((entry) => [`${entry.bucket}/${entry.storagePath}`, entry]));
+let locallyVerifiedVideos = 0;
+if (existsSync(localVideoJournalPath)) {
+  for (const line of readFileSync(localVideoJournalPath, "utf8").split(/\r?\n/).filter(Boolean)) {
+    const record = JSON.parse(line);
+    if (record.bucket !== "videos" || typeof record.path !== "string"
+      || !Number.isSafeInteger(record.bytes) || record.bytes < 0
+      || !/^[a-f0-9]{64}$/.test(record.sha256 ?? "")) {
+      throw new Error("The local video upload checkpoint is invalid; refusing to skip any file.");
+    }
+    const destination = `${record.bucket}/${toSupabaseSafeStoragePath(record.path)}`;
+    const sourceEntry = eligibleByDestination.get(destination);
+    if (!sourceEntry || sourceEntry.bytes !== record.bytes) {
+      throw new Error(`Local video checkpoint does not match the reviewed migration manifest: ${destination}`);
+    }
+    completed.set(destination, { ...record, bucket: "videos", path: sourceEntry.path });
+    locallyVerifiedVideos += 1;
+  }
+}
+
 const pending = eligibleEntries.filter((entry) => {
   const key = `${entry.bucket}/${entry.storagePath}`;
   if (verifiedExisting.has(key)) return false;
@@ -104,6 +125,7 @@ const pending = eligibleEntries.filter((entry) => {
 });
 const pendingBytes = pending.reduce((sum, entry) => sum + entry.bytes, 0);
 console.log(`Plan: ${entries.length} non-BBC objects; ${verifiedExisting.size} exact existing objects; ${pending.length} remaining (${pendingBytes} bytes).`);
+if (locallyVerifiedVideos) console.log(`Skipping ${locallyVerifiedVideos} video(s) already verified from the local drive.`);
 console.log(`Skipped ${oversized.length} object(s) larger than ${maxUploadBytes} bytes; their Tencent COS copies stay in service.`);
 console.log(`Mode: ${execute ? "upload enabled; source COS objects will be retained" : "dry run"}.`);
 if (!execute) process.exit(0);
