@@ -393,6 +393,10 @@ export function BbcSentencePractice({
           aria-hidden="true"
           className={`dictation-answer-char ${normalizedCharacter ? (isCorrect ? "is-correct" : "is-wrong") : ""}`}
           key={`${index}-${character}`}
+          style={normalizedCharacter ? {
+            color: isCorrect ? "#19804e" : "#c84c4c",
+            WebkitTextFillColor: isCorrect ? "#19804e" : "#c84c4c",
+          } : undefined}
         >
           {character}
         </span>
