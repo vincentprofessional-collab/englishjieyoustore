@@ -28483,9 +28483,74 @@ audio.guide-editor-asset-preview {
   width: 100%;
 }
 
+/* Reduce unused vertical space around the speaking prompt and its controls. */
+.vocabulary-learning-page .vocabulary-learning-detail-main.vocabulary-learning-speaking-detail-main {
+  padding: 38px 56px !important;
+}
+
+.vocabulary-learning-page .vocabulary-learning-speaking-detail-main > .vocabulary-learning-speaking-row {
+  gap: 22px !important;
+  padding: 20px 0 28px !important;
+}
+
+.vocabulary-learning-page .vocabulary-learning-speaking-detail-main > .vocabulary-learning-speaking-row > .vocabulary-learning-speaking-controls {
+  margin-top: 0 !important;
+  padding: 18px 28px 20px !important;
+}
+
+.vocabulary-learning-page .vocabulary-learning-speaking-shortcuts {
+  color: #728078;
+  font-size: 13px;
+  line-height: 1.4;
+  margin: 0;
+  text-align: center;
+}
+
+.vocabulary-learning-page .vocabulary-learning-speaking-detail-main > .vocabulary-learning-speaking-row > .vocabulary-card-definition {
+  padding: 14px 28px 34px !important;
+}
+
+.vocabulary-learning-page .vocabulary-learning-speaking-detail-main > .vocabulary-learning-speaking-row > .vocabulary-learning-complete-detail {
+  padding: 18px 28px 34px !important;
+}
+
+@media (max-width: 780px) {
+  .vocabulary-learning-page .vocabulary-learning-detail-main.vocabulary-learning-speaking-detail-main {
+    padding: 24px 20px !important;
+  }
+
+  .vocabulary-learning-page .vocabulary-learning-speaking-detail-main > .vocabulary-learning-speaking-row {
+    padding: 12px 0 20px !important;
+  }
+
+  .vocabulary-learning-page .vocabulary-learning-speaking-detail-main > .vocabulary-learning-speaking-row > .vocabulary-learning-speaking-controls {
+    padding: 12px 12px 14px !important;
+  }
+
+  .vocabulary-learning-page .vocabulary-learning-speaking-detail-main > .vocabulary-card-definition,
+  .vocabulary-learning-page .vocabulary-learning-speaking-detail-main > .vocabulary-learning-speaking-row > .vocabulary-card-definition,
+  .vocabulary-learning-page .vocabulary-learning-speaking-detail-main > .vocabulary-learning-speaking-row > .vocabulary-learning-complete-detail {
+    padding: 10px 20px 24px !important;
+  }
+}
+
+/* Keep the input's caret, but show the colored overlay only once. */
+.vocabulary-learning-page .vocabulary-learning-spelling-detail-main .vocabulary-learning-spelling-answer-line input {
+  background: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+  -webkit-text-stroke: 0 transparent !important;
+  color: transparent !important;
+  text-shadow: none !important;
+  z-index: 2;
+}
+
+.vocabulary-learning-page .vocabulary-learning-spelling-detail-main .vocabulary-learning-spelling-colored-answer {
+  z-index: 1;
+}
+
 @media (max-width: 780px) {
   .vocabulary-learning-page .vocabulary-learning-speaking-detail-main > .vocabulary-learning-speaking-row > .vocabulary-learning-complete-detail {
-    padding: 26px 22px 64px;
+    padding: 10px 20px 24px !important;
   }
 }
 

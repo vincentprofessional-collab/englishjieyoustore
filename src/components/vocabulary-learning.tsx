@@ -800,19 +800,51 @@ function LookupDetails({ word }: { word: LearningWord }) {
 function SpellingColoredAnswer({ answer, feedbackVisible, target }: { answer: string; feedbackVisible: boolean; target: string }) {
   const letters = Array.from(answer);
   const expected = Array.from(target);
-  const length = feedbackVisible ? Math.max(letters.length, expected.length) : letters.length;
+  const distances = Array.from({ length: letters.length + 1 }, () => Array<number>(expected.length + 1).fill(0));
+  for (let letterIndex = 0; letterIndex <= letters.length; letterIndex += 1) distances[letterIndex][0] = letterIndex;
+  for (let targetIndex = 0; targetIndex <= expected.length; targetIndex += 1) distances[0][targetIndex] = targetIndex;
+  for (let letterIndex = 1; letterIndex <= letters.length; letterIndex += 1) {
+    for (let targetIndex = 1; targetIndex <= expected.length; targetIndex += 1) {
+      distances[letterIndex][targetIndex] = Math.min(
+        distances[letterIndex - 1][targetIndex] + 1,
+        distances[letterIndex][targetIndex - 1] + 1,
+        distances[letterIndex - 1][targetIndex - 1]
+          + (letters[letterIndex - 1].toLowerCase() === expected[targetIndex - 1].toLowerCase() ? 0 : 1),
+      );
+    }
+  }
+
+  const feedback: Array<{ letter: string; correct: boolean }> = [];
+  let letterIndex = letters.length;
+  let targetIndex = expected.length;
+  while (letterIndex > 0 || targetIndex > 0) {
+    const typedLetter = letters[letterIndex - 1];
+    const targetLetter = expected[targetIndex - 1];
+    const matches = typedLetter !== undefined && targetLetter !== undefined
+      && typedLetter.toLowerCase() === targetLetter.toLowerCase();
+    if (matches && distances[letterIndex][targetIndex] === distances[letterIndex - 1][targetIndex - 1]) {
+      feedback.push({ letter: typedLetter, correct: true });
+      letterIndex -= 1;
+      targetIndex -= 1;
+    } else if (letterIndex > 0 && distances[letterIndex][targetIndex] === distances[letterIndex - 1][targetIndex] + 1) {
+      feedback.push({ letter: typedLetter, correct: false });
+      letterIndex -= 1;
+    } else if (targetIndex > 0 && distances[letterIndex][targetIndex] === distances[letterIndex][targetIndex - 1] + 1) {
+      if (feedbackVisible) feedback.push({ letter: targetLetter, correct: false });
+      targetIndex -= 1;
+    } else if (letterIndex > 0 && targetIndex > 0) {
+      feedback.push({ letter: typedLetter, correct: false });
+      letterIndex -= 1;
+      targetIndex -= 1;
+    }
+  }
+  feedback.reverse();
 
   return (
-    <span aria-label="拼写逐字反馈" className="vocabulary-learning-spelling-colored-answer">
-      {Array.from({ length }, (_, index) => {
-        const typedLetter = letters[index];
-        const expectedLetter = expected[index];
-        const isCorrect = typedLetter !== undefined
-          && expectedLetter !== undefined
-          && typedLetter.toLowerCase() === expectedLetter.toLowerCase();
-        const displayLetter = typedLetter ?? expectedLetter ?? "";
-        return <span className={isCorrect ? "is-correct" : "is-wrong"} key={`${index}-${displayLetter}`}>{displayLetter}</span>;
-      })}
+    <span aria-hidden="true" className="vocabulary-learning-spelling-colored-answer">
+      {feedback.map(({ letter, correct }, index) => (
+        <span className={correct ? "is-correct" : "is-wrong"} key={`${index}-${letter}`}>{letter}</span>
+      ))}
     </span>
   );
 }
@@ -1199,6 +1231,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
   const recordingStreamRef = useRef<MediaStream | null>(null);
   const recordingChunksRef = useRef<Blob[]>([]);
   const holdingMicRef = useRef(false);
+  const spaceKeyRecordingRef = useRef(false);
   const stopRequestedRef = useRef(false);
   const recordingFinishedRef = useRef(false);
   const speechRecognitionRef = useRef<SpeechRecognitionLike | null>(null);
@@ -2271,6 +2304,52 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
     void playWordAudio(currentWord, voice, 1);
   }, [currentWord, voice]);
 
+  useEffect(() => {
+    if (!studyReady || !pageVisible || loading || !currentWord || browseMode || modeIndex !== 2) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.isComposing || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
+      const element = event.target instanceof HTMLElement ? event.target : null;
+      const editable = element?.isContentEditable || Boolean(element && ["INPUT", "TEXTAREA", "SELECT"].includes(element.tagName));
+      const isSpace = event.code === "Space" || event.key === " ";
+      if (editable) return;
+
+      if (isSpace) {
+        if (element?.closest("button:not(.vocabulary-mic-button)")) return;
+        event.preventDefault();
+        if (event.repeat || phase === "recording" || phase === "scoring" || advancePending) return;
+        spaceKeyRecordingRef.current = true;
+        holdingMicRef.current = true;
+        void startRecording();
+        return;
+      }
+
+      if (event.repeat || phase === "recording" || phase === "scoring") return;
+      if (event.key === "1") {
+        event.preventDefault();
+        playRecordedAudio();
+      } else if (event.key === "2") {
+        event.preventDefault();
+        playCorrectPronunciation();
+      }
+    };
+
+    const handleKeyUp = (event: KeyboardEvent) => {
+      if ((event.code !== "Space" && event.key !== " ") || !spaceKeyRecordingRef.current) return;
+      event.preventDefault();
+      spaceKeyRecordingRef.current = false;
+      holdingMicRef.current = false;
+      stopRecording();
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("keyup", handleKeyUp);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("keyup", handleKeyUp);
+    };
+  }, [advancePending, browseMode, currentWord, loading, modeIndex, pageVisible, phase, playCorrectPronunciation, playRecordedAudio, startRecording, stopRecording, studyReady]);
+
   const updateSpelling = (event: ChangeEvent<HTMLInputElement>) => {
     const nextAnswer = event.target.value;
     answerRef.current = nextAnswer;
@@ -2458,21 +2537,10 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
                       <div className="vocabulary-learning-speaking-actions">
                       <button
                         aria-label={phase === "recording" ? "松开结束录音" : "录音"}
+                        aria-keyshortcuts="Space"
                         className={`vocabulary-mic-button ${phase === "recording" ? "recording" : ""}`}
                         disabled={advancePending || phase === "scoring"}
-                        onKeyDown={(event) => {
-                          if (event.code === "Space" && !event.repeat) {
-                            event.preventDefault();
-                            holdingMicRef.current = true;
-                            void startRecording();
-                          }
-                        }}
-                        onKeyUp={(event) => {
-                          if (event.code === "Space") {
-                            event.preventDefault();
-                            stopRecording();
-                          }
-                        }}
+                        title="按住空格录音"
                         onPointerDown={(event: PointerEvent<HTMLButtonElement>) => {
                           event.currentTarget.setPointerCapture(event.pointerId);
                           holdingMicRef.current = true;
@@ -2489,17 +2557,18 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
                           </svg>
                         </span>
                       </button>
-                        <button aria-label="重听录音" className="button vocabulary-learning-play-button" disabled={!recordingAudioUrl} onClick={playRecordedAudio} title="重听录音" type="button">
+                        <button aria-label="重听录音" aria-keyshortcuts="1" className="button vocabulary-learning-play-button" disabled={!recordingAudioUrl} onClick={playRecordedAudio} title="数字 1：重听录音" type="button">
                           <span aria-hidden="true" className="vocabulary-audio-button-icon">
                             <svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4Z" /><path d="M16 9.5a4 4 0 0 1 0 5M18.5 7a7.5 7.5 0 0 1 0 10" /></svg>
                           </span>
                         </button>
-                        <button aria-label="播放正确发音" className="button vocabulary-learning-correct-pronunciation-button" disabled={advancePending} onClick={playCorrectPronunciation} title="播放正确发音" type="button">
+                      <button aria-label="播放正确发音" aria-keyshortcuts="2" className="button vocabulary-learning-correct-pronunciation-button" disabled={advancePending} onClick={playCorrectPronunciation} title="数字 2：播放正确读音" type="button">
                           <span aria-hidden="true" className="vocabulary-audio-button-icon">
                             <svg viewBox="0 0 24 24"><path d="m9 5 10 7-10 7V5Z" /></svg>
                           </span>
                         </button>
                       </div>
+                      <p className="vocabulary-learning-speaking-shortcuts">按住空格录音 · 数字 1 重听 · 数字 2 播放正确读音</p>
                       <div aria-live="polite" className="vocabulary-learning-score-slot">
                         {oralScoreFeedback !== null ? (
                           <div
