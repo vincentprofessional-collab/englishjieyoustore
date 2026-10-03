@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { cookies, headers } from "next/headers";
 import { VocabularyExampleAudioButton, VocabularyExampleFavoriteButton } from "@/components/vocabulary-example-actions";
 import { VocabularyExampleArticleLink } from "@/components/vocabulary-example-article-link";
 import { VocabularyAutoplay } from "@/components/vocabulary-autoplay";
@@ -7,6 +8,7 @@ import { VocabularyBbcExampleStrip } from "@/components/vocabulary-bbc-example-s
 import { ContentShareButton } from "@/components/content-share-button";
 import { VocabularyDetailShell } from "@/components/vocabulary-detail-shell";
 import { VocabularyDetailContent } from "@/components/vocabulary-detail-content";
+import { VocabularyLookupDisplaySection } from "@/components/vocabulary-lookup-display-section";
 import { VocabularyVideoPlayer } from "@/components/vocabulary-video-player";
 import {
   getExtendedVocabularyEntry,
@@ -16,8 +18,10 @@ import {
 } from "@/lib/vocabulary/local-vocabulary";
 import { getVocabularyUsageExamples, prioritizeVocabularyUsageExamples, type VocabularyUsageExample } from "@/lib/vocabulary/examples";
 import { getVocabularyPhraseMatches, type VocabularyPhraseMatch } from "@/lib/vocabulary/phrases";
+import { getVocabularyLookupEtymology } from "@/lib/vocabulary/lookup-etymology";
+import { VOCABULARY_LOOKUP_VIDEO_COOKIE } from "@/lib/vocabulary/lookup-display-preferences";
 import { getBbcVocabularyDetail } from "@/lib/articles/bbc-vocabulary";
-import { getVocabularyVideos } from "@/lib/vocabulary/videos";
+import { getVocabularyVideoCandidates, getVocabularyVideos } from "@/lib/vocabulary/videos";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 
 export const dynamic = "force-dynamic";
@@ -352,8 +356,25 @@ export default async function VocabularyWordPage({
     ...part,
     href: part.href ? `${part.href}${part.href.includes("?") ? "&" : "?"}from=lookup` : part.href,
   }));
-  const hasEtymologyContent = Boolean(entry.etymologyStory || formationParts.length);
-  const { totalVideos, videos, votesEnabled } = await getVocabularyVideos(entry);
+  const [requestHeaders, cookieStore] = await Promise.all([headers(), cookies()]);
+  const isMobileRequest = /android|iphone|ipad|ipod|mobile/i.test(requestHeaders.get("user-agent") ?? "");
+  const etymology = isMobileRequest ? getVocabularyLookupEtymology(entry.word) : null;
+  const videoVisible = cookieStore.get(VOCABULARY_LOOKUP_VIDEO_COOKIE)?.value === "1";
+  const videoCandidates = getVocabularyVideoCandidates(entry);
+  const shouldLoadVideos = videoVisible;
+  const videoData = shouldLoadVideos ? await getVocabularyVideos(entry) : null;
+  const videoSection = videoCandidates.length > 0 ? (
+    <VocabularyLookupDisplaySection controlsEnabled id="video" initialVisible={videoVisible} title="视频">
+      {videoData?.videos.length ? (
+        <VocabularyVideoPlayer
+          entryWord={entry.normalizedWord}
+          totalVideos={videoData.totalVideos}
+          videos={videoData.videos}
+          votesEnabled={videoData.votesEnabled}
+        />
+      ) : null}
+    </VocabularyLookupDisplaySection>
+  ) : null;
 
   return (
     <section className="stack vocabulary-word-page">
@@ -362,11 +383,15 @@ export default async function VocabularyWordPage({
         backHref={backHref}
         entry={entry}
         headerAfterActions={<VocabularyBbcExampleStrip examples={usageExamples} />}
-        sidePanel={videos.length > 0 ? <VocabularyVideoPlayer entryWord={entry.normalizedWord} totalVideos={totalVideos} videos={videos} votesEnabled={votesEnabled} /> : null}
+        sidePanel={!isMobileRequest ? videoSection : null}
       >
         <VocabularyDetailContent
           entry={entry}
+          etymologyChinese={etymology?.chinese}
+          etymologyEnglish={etymology?.english}
           formationParts={formationParts}
+          inlineVideo={videoSection}
+          mobileLayout={isMobileRequest}
           phrases={phrases}
           usageExamples={usageExamples}
         />

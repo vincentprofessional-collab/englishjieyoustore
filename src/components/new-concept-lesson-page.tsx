@@ -13,7 +13,7 @@ import {
   type AudioSpeakingMode,
   useArticlePronunciations,
 } from "@/components/audio-player";
-import { BbcSentencePractice } from "@/components/bbc-sentence-practice";
+import { BbcSentencePractice, useBbcAnswerShortcut } from "@/components/bbc-sentence-practice";
 import { ArticleInlineAnnotatedParagraph } from "@/components/article-inline-annotated-text";
 import { useArticleInlineAnnotations } from "@/components/use-article-inline-annotations";
 import { ContentShareButton } from "@/components/content-share-button";
@@ -518,6 +518,7 @@ export function NewConceptLessonPage({
   const [isOriginalVisible, setIsOriginalVisible] = useState(true);
   const [isVocabularyVisible, setIsVocabularyVisible] = useState(true);
   const [studyMode, setStudyMode] = useState<LessonStudyMode>("general");
+  const [showWritingAnswers, setShowWritingAnswers] = useState(false);
   const [modeSelectionVersion, setModeSelectionVersion] = useState(0);
   const [isReadingTimerRunning, setIsReadingTimerRunning] = useState(false);
   const [readingSeconds, setReadingSeconds] = useState(0);
@@ -537,6 +538,10 @@ export function NewConceptLessonPage({
     pronunciationMode: audioEdition,
     subtitleMode: "bilingual",
   });
+  useBbcAnswerShortcut(
+    studyMode === "writing" && audioSettings.dictationMode !== "none",
+    () => setShowWritingAnswers((visible) => !visible),
+  );
   const pageRef = useRef<HTMLElement | null>(null);
   const studyWorkspaceRef = useRef<HTMLDivElement | null>(null);
   const activeSentenceNoRef = useRef<number | null>(null);
@@ -1135,8 +1140,20 @@ export function NewConceptLessonPage({
               <NewConceptArticleCopy annotations={inlineTextAnnotations} displayMode={displayMode} isOriginalVisible lesson={lesson} pronunciations={articlePronunciations} />
             ) : activeStudyEnglish ? (
                 <div className="bbc-intensive-reading">
-                  <div className="bbc-intensive-reading-actions">
+                <div className="bbc-intensive-reading-actions">
+                  {studyMode === "writing" && audioSettings.dictationMode !== "none" ? (
                     <button
+                      aria-keyshortcuts="Shift"
+                      aria-pressed={showWritingAnswers}
+                      className={`bbc-show-writing-answers ${showWritingAnswers ? "active" : ""}`}
+                      onClick={() => setShowWritingAnswers((visible) => !visible)}
+                      title="点击切换答案，也可单独按 Shift"
+                      type="button"
+                    >
+                      {showWritingAnswers ? "隐藏答案" : "显示答案"}
+                    </button>
+                  ) : null}
+                  <button
                       aria-label={favoriteSentenceIds.includes(favoriteSentenceId(lesson.id, activeStudyTextBlock ? activeStudyTextBlock.startLineIndex + 1 : activeStudySentenceIndex + 1)) ? "取消收藏本句" : "收藏本句"}
                       aria-pressed={favoriteSentenceIds.includes(favoriteSentenceId(lesson.id, activeStudyTextBlock ? activeStudyTextBlock.startLineIndex + 1 : activeStudySentenceIndex + 1))}
                       className={`favorite-star ${favoriteSentenceIds.includes(favoriteSentenceId(lesson.id, activeStudyTextBlock ? activeStudyTextBlock.startLineIndex + 1 : activeStudySentenceIndex + 1)) ? "active" : ""}`}
@@ -1174,6 +1191,7 @@ export function NewConceptLessonPage({
                       isAudioPlaying={isSentenceAudioPlaying && activeSentenceNo === activeStudySentenceIndex + 1}
                       sentence={{ chinese: activeStudyChinese, english: activeStudyEnglish, sentenceNo: activeStudySentenceIndex + 1 }}
                       settings={audioSettings}
+                      showAnswers={showWritingAnswers}
                       translationContent={activeStudyChinese}
                     />
                   ) : null}

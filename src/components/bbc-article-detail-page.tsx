@@ -13,7 +13,7 @@ import {
   type AudioSpeakingMode,
   useArticlePronunciations,
 } from "@/components/audio-player";
-import { BbcSentencePractice } from "@/components/bbc-sentence-practice";
+import { BbcSentencePractice, useBbcAnswerShortcut } from "@/components/bbc-sentence-practice";
 import { ArticleInlineAnnotatedText } from "@/components/article-inline-annotated-text";
 import { useArticleInlineAnnotations } from "@/components/use-article-inline-annotations";
 import { BbcArticleQuiz } from "@/components/bbc-article-quiz";
@@ -175,6 +175,22 @@ function cleanBbcVocabularyDisplayText(value: string) {
     .trim();
 }
 
+const BBC_PART_OF_SPEECH_LABELS = new Set([
+  "abbr", "adj", "adv", "art", "aux", "conj", "det", "int", "interj",
+  "modal", "n", "num", "pl", "prep", "pron", "v", "vi", "vt",
+]);
+
+function normalizeBbcPartOfSpeech(value: string) {
+  const labels = value
+    .split(/[、,\/\s]+/)
+    .map((label) => label.trim().replace(/\.+$/, "").toLowerCase())
+    .filter(Boolean);
+
+  return labels.length > 0 && labels.every((label) => BBC_PART_OF_SPEECH_LABELS.has(label))
+    ? value.trim()
+    : "";
+}
+
 function extractBbcVocabularyHeadword(value: string) {
   const normalized = cleanBbcVocabularyText(value).replace(/\.{3}|…/g, " ");
   return normalized.match(/^[A-Za-z]+(?:['’][A-Za-z]+)?(?:[-\s]+[A-Za-z]+(?:['’][A-Za-z]+)?)*/)?.[0]?.trim() ?? "";
@@ -193,13 +209,13 @@ function isPartOfSpeechHint(value: string) {
 
   return (
     tokens.length > 0 &&
-    tokens.every((token) => /^(?:[a-z]{1,8}\.?|[a-z]{1,5}\.[a-z]{1,5}\.)$/i.test(token))
+    tokens.every((token) => Boolean(normalizeBbcPartOfSpeech(token)))
   );
 }
 
 function extractBbcDefinitionGroups(value: string) {
   const text = cleanBbcVocabularyDisplayText(value);
-  const markerPattern = /(?:^|[；;]\s*)((?:[a-z]{1,8})\.)(?=\s|[\u4e00-\u9fff])/gi;
+  const markerPattern = /(?:^|[；;]\s*)((?:interj|modal|abbr|prep|pron|conj|adj|adv|aux|det|num|art|int|vi|vt|pl|n|v)\.)(?=\s|[\u4e00-\u9fff])/gi;
   const matches = [...text.matchAll(markerPattern)];
 
   if (!matches.length) {
@@ -272,7 +288,7 @@ function parseBbcVocabularyItem(item: BbcVocabularyItem) {
     partOfSpeech = entryDefinitionGroups.map((group) => group.partOfSpeech).join(" / ");
     rest = formatBbcDefinitionGroups(entryDefinitionGroups);
   } else {
-    const plainPosMatch = rest.match(/^([a-z]{1,8})\.?(?:\s+|(?=[\u4e00-\u9fff]))/i);
+    const plainPosMatch = rest.match(/^(interj|modal|abbr|prep|pron|conj|adj|adv|aux|det|num|art|int|vi|vt|pl|n|v)\.?(?:\s+|(?=[\u4e00-\u9fff]))/i);
     if (plainPosMatch) {
       partOfSpeech = plainPosMatch[1].trim();
       rest = rest.slice(plainPosMatch[0].length).trim();
@@ -301,7 +317,7 @@ function parseBbcVocabularyItem(item: BbcVocabularyItem) {
     definitionLines,
     lemma: cleanBbcVocabularyDisplayText(item.lemma ?? item.term),
     normalizedWord,
-    partOfSpeech: cleanBbcVocabularyText(item.partOfSpeech ?? "") || partOfSpeech,
+    partOfSpeech: normalizeBbcPartOfSpeech(cleanBbcVocabularyText(item.partOfSpeech ?? "")) || partOfSpeech,
     phonetic: formatBbcPhonetic(cleanBbcVocabularyText(item.phonetic ?? "") || phonetic),
     ukPhonetic: formatBbcPhonetic(item.ukPhonetic ?? "") || formatBbcPhonetic(cleanBbcVocabularyText(item.phonetic ?? "") || phonetic),
     usPhonetic: formatBbcPhonetic(item.usPhonetic ?? "") || formatBbcPhonetic(cleanBbcVocabularyText(item.phonetic ?? "") || phonetic),
@@ -692,6 +708,11 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
   const [isOriginalVisible, setIsOriginalVisible] = useState(true);
   const [isVocabularyVisible, setIsVocabularyVisible] = useState(true);
   const [studyMode, setStudyMode] = useState<ArticleStudyMode>("general");
+  const [showWritingAnswers, setShowWritingAnswers] = useState(false);
+  useBbcAnswerShortcut(
+    studyMode === "writing" && audioSettings.dictationMode !== "none",
+    () => setShowWritingAnswers((visible) => !visible),
+  );
   const [syntaxPosVisible, setSyntaxPosVisible] = useState(true);
   const [syntaxDisplayMode, setSyntaxDisplayMode] = useState<BbcSyntaxDisplayMode>("all");
   const [editableSyntaxSentences, setEditableSyntaxSentences] = useState(syntaxSentences ?? []);
@@ -1264,12 +1285,42 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
   const vocabularyHighlightWordIndexes = new Set(
     vocabularyMatches.flatMap((match) => match.indexes),
   );
-  const orderedArticleVocabulary = visibleArticleVocabulary
-    .map((item, index) => ({
-      firstIndex: vocabularyMatches[index]?.firstIndex ?? Number.MAX_SAFE_INTEGER,
+  const articleWordTokens = article.body.flatMap((paragraph) =>
+    (paragraph.match(/[A-Za-z]+(?:['’-][A-Za-z]+)*/g) ?? []).map(normalizeBbcVocabularyToken),
+  );
+  const vocabularyCandidates = visibleArticleVocabulary.map((item, index) => {
+    const match = vocabularyMatches[index] ?? { firstIndex: null, indexes: [] };
+    const displayTerm = extractBbcVocabularyHeadword(item.term || item.lemma || item.entry);
+    const displayPattern = (displayTerm.match(/[A-Za-z]+(?:['’-][A-Za-z]+)*/g) ?? []).map(normalizeBbcVocabularyToken);
+
+    return {
+      displayPattern,
+      exactSurfaceMatch: match.indexes.length === displayPattern.length &&
+        displayPattern.every((word, patternIndex) => articleWordTokens[match.indexes[patternIndex]] === word),
+      firstIndex: match.firstIndex ?? Number.MAX_SAFE_INTEGER,
+      indexes: match.indexes,
       item,
       originalIndex: index,
-    }))
+    };
+  });
+  const vocabularyByOccurrence = new Map<string, (typeof vocabularyCandidates)[number]>();
+  const unmatchedVocabulary = [] as typeof vocabularyCandidates;
+  for (const candidate of vocabularyCandidates) {
+    if (!candidate.indexes.length) {
+      unmatchedVocabulary.push(candidate);
+      continue;
+    }
+    const occurrence = candidate.indexes.join(",");
+    const existing = vocabularyByOccurrence.get(occurrence);
+    const isInflectionPair = existing && candidate.displayPattern.length === 1 && existing.displayPattern.length === 1 &&
+      candidate.displayPattern[0] !== existing.displayPattern[0] &&
+      (getBbcVocabularyTokenForms(candidate.displayPattern[0]).has(existing.displayPattern[0]) ||
+        getBbcVocabularyTokenForms(existing.displayPattern[0]).has(candidate.displayPattern[0]));
+    if (!existing || (isInflectionPair && candidate.exactSurfaceMatch && !existing.exactSurfaceMatch)) {
+      vocabularyByOccurrence.set(occurrence, candidate);
+    }
+  }
+  const orderedArticleVocabulary = [...vocabularyByOccurrence.values(), ...unmatchedVocabulary]
     .sort((left, right) => left.firstIndex - right.firstIndex || left.originalIndex - right.originalIndex)
     .map(({ item }, index) => ({ ...item, number: index + 1 }));
   const activeSentenceVocabularyMatches = activeStudySentence
@@ -1566,6 +1617,18 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
                     <div className="bbc-intensive-reading-actions">
                       {hasReviewedSyntax || hasBackendGrammarAnnotations ? <span className="bbc-intensive-sentence-number">#{sentence.sentenceNo}</span> : null}
                       <div className="bbc-intensive-sentence-controls">
+                        {studyMode === "writing" && audioSettings.dictationMode !== "none" ? (
+                          <button
+                            aria-keyshortcuts="Shift"
+                            aria-pressed={showWritingAnswers}
+                            className={`bbc-show-writing-answers ${showWritingAnswers ? "active" : ""}`}
+                            onClick={() => setShowWritingAnswers((visible) => !visible)}
+                            title="点击切换答案，也可单独按 Shift"
+                            type="button"
+                          >
+                            {showWritingAnswers ? "隐藏答案" : "显示答案"}
+                          </button>
+                        ) : null}
                         <button
                           aria-label={favoriteSentenceIds.includes(favoriteSentenceId(article.id, sentence.sentenceNo)) ? "取消收藏本句" : "收藏本句"}
                           aria-pressed={favoriteSentenceIds.includes(favoriteSentenceId(article.id, sentence.sentenceNo))}
@@ -1656,6 +1719,7 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
                         )}
                         isAudioPlaying={isSentenceAudioPlaying && activeSentenceNo === sentence.sentenceNo}
                         sentence={sentence}
+                        showAnswers={showWritingAnswers}
                         settings={studyMode === "speaking"
                           ? { ...audioSettings, dictationMode: "none" }
                           : { ...audioSettings, speakingMode: "none" }}

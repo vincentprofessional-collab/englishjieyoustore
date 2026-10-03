@@ -28,7 +28,10 @@ const nextConfig: NextConfig = {
     "/api/vocabulary-audio/*": ["public/**/*.mp3"],
   },
   outputFileTracingIncludes: {
-    "/*": ["./src/data/vocabulary/flat-vocabulary.json"],
+    "/*": [
+      "./src/data/vocabulary/flat-vocabulary.json",
+      "./src/data/vocabulary/lookup-etymology/*.json.gz",
+    ],
   },
   reactStrictMode: true,
   turbopack: {

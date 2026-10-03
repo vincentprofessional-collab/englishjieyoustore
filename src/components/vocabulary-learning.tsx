@@ -17,6 +17,7 @@ import { VocabularyDetailShell } from "@/components/vocabulary-detail-shell";
 import { VocabularyDetailContent } from "@/components/vocabulary-detail-content";
 import { VocabularyFavoriteButton } from "@/components/vocabulary-favorite-button";
 import { VocabularyInlinePronunciation } from "@/components/vocabulary-pronunciation";
+import { VocabularyLookupDisplaySection } from "@/components/vocabulary-lookup-display-section";
 import { VocabularyShareButton } from "@/components/vocabulary-share-button";
 import { VocabularyVideoPlayer } from "@/components/vocabulary-video-player";
 import { drawBrowseMode, filterBrowseReviewWords, nextBrowseLoopId, scheduleBrowseReview } from "@/lib/vocabulary/browse-review";
@@ -166,7 +167,7 @@ const REACTION_TIME_OPTIONS: Array<{ category: ProgressCategory; label: string }
   { category: "writing", label: "写作" },
 ];
 const DEFAULT_REACTION_SECONDS: Record<ProgressCategory, number> = {
-  reading: 2,
+  reading: 4,
   speaking: 4,
   listening: 4,
   writing: 10,
@@ -958,7 +959,9 @@ function LearningVocabularyDetails({
         phrases={detailPayload?.phrases ?? []}
         usageExamples={detailPayload?.usageExamples ?? []}
       />
-      <VocabularyLearningVideoSection word={detailedEntry.normalizedWord} />
+      <VocabularyLookupDisplaySection controlsEnabled id="video" title="视频">
+        <VocabularyLearningVideoSection word={detailedEntry.normalizedWord} />
+      </VocabularyLookupDisplaySection>
     </div>
   );
 }
@@ -1147,6 +1150,7 @@ function playSpellingFeedbackSound(correct: boolean) {
   oscillator.addEventListener("ended", () => {
     void context.close();
   }, { once: true });
+  void context.resume();
   oscillator.start(start);
   oscillator.stop(end);
 }

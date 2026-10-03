@@ -37,6 +37,50 @@ type SentenceOrderDrag = SentenceOrderAnswer & {
 
 type SentenceOrderDropTarget = number | "bank";
 
+export function useBbcAnswerShortcut(enabled: boolean, onToggle: () => void) {
+  const onToggleRef = useRef(onToggle);
+  const shiftPressedRef = useRef(false);
+  const shiftUsedWithOtherKeyRef = useRef(false);
+  onToggleRef.current = onToggle;
+
+  useEffect(() => {
+    if (!enabled) {
+      shiftPressedRef.current = false;
+      shiftUsedWithOtherKeyRef.current = false;
+      return;
+    }
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Shift") {
+        shiftPressedRef.current = true;
+        shiftUsedWithOtherKeyRef.current = false;
+        return;
+      }
+      if (shiftPressedRef.current) shiftUsedWithOtherKeyRef.current = true;
+    }
+
+    function handleKeyUp(event: KeyboardEvent) {
+      if (event.key !== "Shift") return;
+      shiftPressedRef.current = false;
+      if (!shiftUsedWithOtherKeyRef.current) onToggleRef.current();
+    }
+
+    function handleWindowBlur() {
+      shiftPressedRef.current = false;
+      shiftUsedWithOtherKeyRef.current = false;
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
+    window.addEventListener("blur", handleWindowBlur);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keyup", handleKeyUp);
+      window.removeEventListener("blur", handleWindowBlur);
+    };
+  }, [enabled]);
+}
+
 function normalizeAnswer(value: string) {
   return value
     .trim()
@@ -158,13 +202,17 @@ export function BbcSentencePractice({
   activeWordIndex = null,
   englishContent,
   isAudioPlaying = false,
+  dictationTargetTokenIndexes,
+  showAnswers = false,
   translationContent,
   sentence,
   settings,
 }: {
   activeWordIndex?: number | null;
+  dictationTargetTokenIndexes?: number[];
   englishContent?: ReactNode;
   isAudioPlaying?: boolean;
+  showAnswers?: boolean;
   translationContent?: ReactNode;
   sentence: BbcPracticeSentence;
   settings: AudioPlayerSettings;
@@ -175,7 +223,7 @@ export function BbcSentencePractice({
   >({});
   const [sentenceOrderDrag, setSentenceOrderDrag] = useState<SentenceOrderDrag | null>(null);
   const [sentenceOrderHover, setSentenceOrderHover] = useState<SentenceOrderDropTarget | null>(null);
-  const sentenceKey = `${sentence.sentenceNo}:${sentence.english}`;
+  const sentenceKey = `${sentence.sentenceNo}:${sentence.english}:${settings.dictationMode}`;
   const previousSentenceKeyRef = useRef(sentenceKey);
 
   useEffect(() => {
@@ -360,6 +408,11 @@ export function BbcSentencePractice({
       return [];
     }
 
+    if (dictationTargetTokenIndexes) {
+      const selected = new Set(dictationTargetTokenIndexes);
+      return wordTargets.filter((target) => selected.has(target.tokenIndex));
+    }
+
     return [...wordTargets]
       .sort((left, right) => {
         if (left.normalizedWord.length !== right.normalizedWord.length) {
@@ -378,6 +431,9 @@ export function BbcSentencePractice({
       getDictationTargets().findIndex((item) => item.tokenIndex === target.tokenIndex) + 1;
     const userAnswer = dictationAnswers[answerKey] ?? "";
     const normalizedTarget = Array.from(normalizeAnswer(target.token));
+    const normalizedUserAnswer = normalizeAnswer(userAnswer);
+    const shouldRevealAnswer = showAnswers && normalizedUserAnswer !== normalizeAnswer(target.token);
+    const displayedAnswer = userAnswer || (shouldRevealAnswer ? target.token : ".....");
     let answerCharacterIndex = 0;
     const answerCharacters = Array.from(userAnswer).map((character, index) => {
       const normalizedCharacter = normalizeAnswer(character);
@@ -409,10 +465,16 @@ export function BbcSentencePractice({
         key={`${sentence.sentenceNo}-dictation-${target.tokenIndex}`}
       >
         <span aria-hidden="true" className="dictation-blank-measure">
-          {userAnswer || "....."}
+          {`${displayedAnswer}${shouldRevealAnswer && userAnswer ? ` / ${target.token}` : ""}`}
         </span>
         <span aria-hidden="true" className="dictation-blank-display">
-          {answerCharacters}
+          {userAnswer ? answerCharacters : null}
+          {shouldRevealAnswer ? (
+            <span className="dictation-answer-correction">
+              {userAnswer ? " / " : ""}{target.token}
+            </span>
+          ) : null}
+          {!userAnswer && !shouldRevealAnswer ? "....." : null}
         </span>
         <input
           aria-label={`听写第 ${blankNumber} 个空`}
@@ -420,6 +482,7 @@ export function BbcSentencePractice({
           onChange={(event) => updateDictationAnswer(target.tokenIndex, event.target.value)}
           onClick={(event) => event.stopPropagation()}
           onKeyDown={handleDictationBlankKeyDown}
+          spellCheck={false}
           size={1}
           value={userAnswer}
         />
@@ -552,11 +615,12 @@ export function BbcSentencePractice({
     const hasAnswer = Boolean(placedAnswer);
     const isCorrect = hasAnswer && normalizeAnswer(placedAnswer?.token ?? "") === normalizeAnswer(target.token);
     const isWrong = hasAnswer && !isCorrect;
+    const shouldRevealAnswer = showAnswers && !isCorrect;
 
     return (
       <span
         aria-label={`语序排列 ${target.normalizedWord}`}
-        className={`sentence-order-dropzone ${hasAnswer ? "filled" : ""} ${
+        className={`sentence-order-dropzone ${hasAnswer || shouldRevealAnswer ? "filled" : ""} ${
           sentenceOrderDrag?.sourceSlot === target.tokenIndex ? "sentence-order-dragging" : ""
         } ${sentenceOrderHover === target.tokenIndex ? "hover" : ""} ${isCorrect ? "correct" : ""} ${isWrong ? "wrong" : ""}`}
         data-sentence-order-drop-target={target.tokenIndex}
@@ -589,7 +653,10 @@ export function BbcSentencePractice({
         role="button"
         tabIndex={0}
       >
-        {placedAnswer?.token ?? ""}
+        {placedAnswer?.token ?? (shouldRevealAnswer ? target.token : "")}
+        {isWrong && shouldRevealAnswer ? (
+          <span className="sentence-order-answer-correction"> / {target.token}</span>
+        ) : null}
       </span>
     );
   }

@@ -1,17 +1,23 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { ContentShareButton } from "@/components/content-share-button";
 import { VocabularyExampleArticleLink } from "@/components/vocabulary-example-article-link";
 import { VocabularyExampleAudioButton, VocabularyExampleFavoriteButton } from "@/components/vocabulary-example-actions";
 import { VocabularyFormationPart as VocabularyFormationPartLink } from "@/components/vocabulary-formation-part";
+import { VocabularyLookupDisplaySection } from "@/components/vocabulary-lookup-display-section";
 import type { VocabularyUsageExample } from "@/lib/vocabulary/examples";
 import type { VocabularyPhraseMatch } from "@/lib/vocabulary/phrases";
 import type { LocalVocabularyEntry, VocabularyFormationPart } from "@/lib/vocabulary/local-vocabulary";
 
 type VocabularyDetailContentProps = {
   entry: LocalVocabularyEntry;
+  etymologyChinese?: string;
+  etymologyEnglish?: string;
   formationUnlocked?: boolean;
   formationParts: VocabularyFormationPart[];
+  inlineVideo?: ReactNode;
+  mobileLayout?: boolean;
   phrases: VocabularyPhraseMatch[];
   usageExamples: VocabularyUsageExample[];
 };
@@ -33,12 +39,11 @@ function DefinitionRows({ entry }: { entry: LocalVocabularyEntry }) {
   );
 }
 
-function WordInflectionSection({ entry }: { entry: LocalVocabularyEntry }) {
+function WordInflectionSection({ entry, mobileLayout }: { entry: LocalVocabularyEntry; mobileLayout: boolean }) {
   if (entry.inflections.length === 0) return null;
 
   return (
-    <section className="word-detail-section">
-      <h2>词形变化</h2>
+    <VocabularyLookupDisplaySection controlsEnabled id="inflections" title="词性变化">
       <div className="word-inflection-grid">
         {entry.inflections.map((item) => (
           <span key={`${item.label}-${item.value}`}>
@@ -47,7 +52,7 @@ function WordInflectionSection({ entry }: { entry: LocalVocabularyEntry }) {
           </span>
         ))}
       </div>
-    </section>
+    </VocabularyLookupDisplaySection>
   );
 }
 
@@ -68,7 +73,7 @@ function parseEnglishDefinitionLine(definition: string) {
   return match ? { definition: match[2], partOfSpeech: match[1] } : { definition: normalizedDefinition, partOfSpeech: "" };
 }
 
-function EnglishDefinitionSection({ entry }: { entry: LocalVocabularyEntry }) {
+function EnglishDefinitionSection({ entry, mobileLayout }: { entry: LocalVocabularyEntry; mobileLayout: boolean }) {
   const definitions = entry.englishDefinitions
     .flatMap((definition) => definition.replace(/\\n/g, "\n").split(/\n+/))
     .map((line) => line.replace(/\s+/g, " ").trim())
@@ -76,8 +81,7 @@ function EnglishDefinitionSection({ entry }: { entry: LocalVocabularyEntry }) {
   if (definitions.length === 0) return null;
 
   return (
-    <section className="word-detail-section">
-      <h2>英文释义</h2>
+    <VocabularyLookupDisplaySection controlsEnabled id="englishDefinition" title="英文释义">
       <div className="english-definition-list">
         {definitions.map((definition, index) => {
           const parsed = parseEnglishDefinitionLine(definition);
@@ -89,7 +93,7 @@ function EnglishDefinitionSection({ entry }: { entry: LocalVocabularyEntry }) {
           );
         })}
       </div>
-    </section>
+    </VocabularyLookupDisplaySection>
   );
 }
 
@@ -98,11 +102,10 @@ function FormationPart({ part, unlocked }: { part: VocabularyFormationPart; unlo
   return <VocabularyFormationPartLink href={part.href} label={part.label} unlocked={unlocked} />;
 }
 
-function WordFormationSection({ parts, unlocked }: { parts: VocabularyFormationPart[]; unlocked: boolean }) {
+function WordFormationSection({ mobileLayout, parts, title, unlocked }: { mobileLayout: boolean; parts: VocabularyFormationPart[]; title: string; unlocked: boolean }) {
   if (parts.length === 0) return null;
   return (
-    <section className="word-detail-section word-formation-section">
-      <h2>词根词缀</h2>
+    <VocabularyLookupDisplaySection className="word-formation-section" controlsEnabled id="rootTree" title={title}>
       <div className="word-formation-card">
         <div className="word-formation-line">
           {parts.map((part, index) => (
@@ -113,7 +116,7 @@ function WordFormationSection({ parts, unlocked }: { parts: VocabularyFormationP
           ))}
         </div>
       </div>
-    </section>
+    </VocabularyLookupDisplaySection>
   );
 }
 
@@ -137,9 +140,26 @@ function WordDetailTagSection({ items, title }: { items: string[]; title: string
   );
 }
 
+function EtymologySection({ chinese, english, story }: { chinese: string; english: string; story: string }) {
+  if (!chinese && !english && !story) return null;
+  return (
+    <VocabularyLookupDisplaySection controlsEnabled id="etymology" title="词源">
+      <div className="word-lookup-etymology-card">
+        {english ? <div><strong>英文词源</strong><p>{english}</p></div> : null}
+        {chinese ? <div><strong>中文词源</strong><p>{chinese}</p></div> : null}
+        {!english && !chinese && story ? <div><strong>词源说明</strong><p>{story}</p></div> : null}
+      </div>
+    </VocabularyLookupDisplaySection>
+  );
+}
+
 function EtymologyStorySection({ story }: { story: string }) {
   if (!story) return null;
-  return <section className="word-detail-section"><h2>词源故事</h2><div className="word-detail-story-card">{story}</div></section>;
+  return (
+    <VocabularyLookupDisplaySection controlsEnabled id="etymology" title="词源">
+      <div className="word-detail-story-card">{story}</div>
+    </VocabularyLookupDisplaySection>
+  );
 }
 
 function PhraseSection({ phrases }: { phrases: VocabularyPhraseMatch[] }) {
@@ -160,11 +180,11 @@ function PhraseSection({ phrases }: { phrases: VocabularyPhraseMatch[] }) {
   );
 }
 
-function UsageExamplesSection({ entry, examples }: { entry: LocalVocabularyEntry; examples: VocabularyUsageExample[] }) {
+function UsageExamplesSection({ entry, examples, mobileLayout }: { entry: LocalVocabularyEntry; examples: VocabularyUsageExample[]; mobileLayout: boolean }) {
   if (examples.length === 0 && entry.englishExamples.length === 0) return null;
   return (
-    <section className="word-detail-section vocabulary-usage-examples" data-has-non-bbc-examples={entry.englishExamples.length > 0 || examples.some((example) => example.bookCode !== "BBC") ? "true" : "false"}>
-      <h2>例句</h2>
+    <VocabularyLookupDisplaySection className="vocabulary-usage-examples" controlsEnabled id="examples" title="例句">
+      <div data-has-non-bbc-examples={entry.englishExamples.length > 0 || examples.some((example) => example.bookCode !== "BBC") ? "true" : "false"}>
       {entry.englishExamples.length > 0 ? <div className="english-example-list">{entry.englishExamples.map((example) => <blockquote key={example}>{example}</blockquote>)}</div> : null}
       {examples.length > 0 ? (
         <div className="vocabulary-usage-example-list">
@@ -186,29 +206,47 @@ function UsageExamplesSection({ entry, examples }: { entry: LocalVocabularyEntry
           ))}
         </div>
       ) : null}
-    </section>
+      </div>
+    </VocabularyLookupDisplaySection>
   );
 }
 
 export function VocabularyDetailContent({
   entry,
+  etymologyChinese = "",
+  etymologyEnglish = "",
   formationParts,
   formationUnlocked = false,
+  inlineVideo,
+  mobileLayout = false,
   phrases,
   usageExamples,
 }: VocabularyDetailContentProps) {
-  const hasEtymologyContent = Boolean(entry.etymologyStory || formationParts.length);
+  const hasEtymologyContent = Boolean(etymologyEnglish || etymologyChinese || entry.etymologyStory || formationParts.length);
+  const wordTreeAndEtymology = hasEtymologyContent ? mobileLayout ? (
+    <>
+      <WordFormationSection mobileLayout={mobileLayout} parts={formationParts} title="词根树" unlocked={formationUnlocked} />
+      <EtymologySection chinese={etymologyChinese} english={etymologyEnglish} story={entry.etymologyStory} />
+    </>
+  ) : (
+    <>
+      <EtymologyStorySection story={entry.etymologyStory} />
+      <WordFormationSection mobileLayout={mobileLayout} parts={formationParts} title="词根词缀" unlocked={formationUnlocked} />
+    </>
+  ) : null;
   return (
     <>
-      <section className="word-detail-section"><h2>中文释义</h2><DefinitionRows entry={entry} /></section>
-      <EnglishDefinitionSection entry={entry} />
-      <WordInflectionSection entry={entry} />
+      <VocabularyLookupDisplaySection controlsEnabled id="chineseDefinition" title="中文释义"><DefinitionRows entry={entry} /></VocabularyLookupDisplaySection>
+      <EnglishDefinitionSection entry={entry} mobileLayout={mobileLayout} />
+      {mobileLayout ? inlineVideo : null}
+      {mobileLayout ? wordTreeAndEtymology : null}
+      <WordInflectionSection entry={entry} mobileLayout={mobileLayout} />
       <WordDetailListSection items={entry.reviewNotes} title="温故知新" />
-      <UsageExamplesSection entry={entry} examples={usageExamples} />
+      <UsageExamplesSection entry={entry} examples={usageExamples} mobileLayout={mobileLayout} />
       <PhraseSection phrases={phrases} />
       <WordDetailTagSection items={entry.synonyms} title="同义词" />
       <WordDetailTagSection items={entry.antonyms} title="反义词" />
-      {hasEtymologyContent ? <><EtymologyStorySection story={entry.etymologyStory} /><WordFormationSection parts={formationParts} unlocked={formationUnlocked} /></> : null}
+      {!mobileLayout ? wordTreeAndEtymology : null}
     </>
   );
 }

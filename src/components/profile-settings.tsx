@@ -1,6 +1,7 @@
 "use client";
 
 import { VocabularyAutoplaySettings } from "@/components/vocabulary-autoplay-settings";
+import { VocabularyLookupDisplaySettings } from "@/components/vocabulary-lookup-display-settings";
 
 export function ProfileSettings() {
   return (
@@ -18,6 +19,9 @@ export function ProfileSettings() {
       <div className="profile-settings-grid">
         <section className="profile-settings-card profile-autoplay-card" aria-label="自动发音">
           <VocabularyAutoplaySettings />
+        </section>
+        <section className="profile-settings-card vocabulary-lookup-settings-card" aria-label="查单词设置">
+          <VocabularyLookupDisplaySettings />
         </section>
       </div>
     </section>

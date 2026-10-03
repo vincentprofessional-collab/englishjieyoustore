@@ -248,7 +248,7 @@ export function VocabularyVideoPlayer({
                   if (event.currentTarget === videoRef.current) setCurrentTime(event.currentTarget.currentTime);
                 }}
                 playsInline
-                preload="metadata"
+                preload="none"
                 ref={videoRef}
                 src={currentVideoSrc}
               />

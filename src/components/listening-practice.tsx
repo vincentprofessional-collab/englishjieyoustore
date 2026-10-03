@@ -4,7 +4,6 @@ import Link from "next/link";
 import {
   type ComponentType,
   type CSSProperties,
-  type DragEvent as ReactDragEvent,
   type KeyboardEvent as ReactKeyboardEvent,
   type MouseEvent as ReactMouseEvent,
   type PointerEvent as ReactPointerEvent,
@@ -26,7 +25,7 @@ import {
   type AudioSpeakingMode,
   useArticlePronunciations,
 } from "@/components/audio-player";
-import { BbcSentencePractice } from "@/components/bbc-sentence-practice";
+import { BbcSentencePractice, useBbcAnswerShortcut } from "@/components/bbc-sentence-practice";
 import { ContentShareButton } from "@/components/content-share-button";
 import { shouldShowAudioPronunciation } from "@/lib/audio-pronunciation";
 import {
@@ -177,19 +176,6 @@ type ActiveWordTooltip = {
   top: number;
   word: string;
 };
-type DictationTarget = {
-  normalizedWord: string;
-  token: string;
-  tokenIndex: number;
-};
-type SentenceOrderAnswer = {
-  token: string;
-  tokenIndex: number;
-};
-type SentenceOrderDragPayload = SentenceOrderAnswer & {
-  sourceSlot: string | null;
-};
-
 const FAVORITE_SENTENCES_STORAGE_KEY = "ielts-platform.favoriteSentences";
 const FAVORITE_ANNOTATIONS_STORAGE_KEY = "ielts-platform.favoriteAnnotations";
 const FAVORITE_QUESTIONS_STORAGE_KEY = "ielts-platform.favoriteQuestions";
@@ -523,16 +509,6 @@ function getVocabularyLevelScore(level?: string) {
 
   const numericLevel = Number(normalizedLevel.match(/\d+/)?.[0]);
   return Number.isFinite(numericLevel) ? numericLevel : Number.MAX_SAFE_INTEGER - 1;
-}
-
-function stableHash(value: string) {
-  let hash = 0;
-
-  for (let index = 0; index < value.length; index += 1) {
-    hash = (hash * 31 + value.charCodeAt(index)) >>> 0;
-  }
-
-  return hash;
 }
 
 function pointIsInsideRect(rect: DOMRect, clientX: number, clientY: number) {
@@ -2891,6 +2867,11 @@ export function ListeningPractice({
     LISTENING_DEFAULT_AUDIO_SETTINGS,
   );
   const [reviewStudyMode, setReviewStudyMode] = useState<ListeningStudyMode>("general");
+  const [showWritingAnswers, setShowWritingAnswers] = useState(false);
+  useBbcAnswerShortcut(
+    reviewStudyMode === "writing" && audioSettings.dictationMode !== "none",
+    () => setShowWritingAnswers((visible) => !visible),
+  );
   const [originalDisplayMode, setOriginalDisplayMode] =
     useState<ListeningOriginalDisplayMode>("bilingual");
   const [isTranscriptVisible, setIsTranscriptVisible] = useState(true);
@@ -2918,8 +2899,6 @@ export function ListeningPractice({
   const [favoriteSentenceIds, setFavoriteSentenceIds] = useState<string[]>([]);
   const [favoriteWordIds, setFavoriteWordIds] = useState<string[]>([]);
   const [sentenceAutoPlaySignals, setSentenceAutoPlaySignals] = useState<Record<string, number>>({});
-  const [dictationAnswers, setDictationAnswers] = useState<Record<string, string>>({});
-  const [sentenceOrderAnswers, setSentenceOrderAnswers] = useState<Record<string, SentenceOrderAnswer>>({});
   const [activeSentenceClipId, setActiveSentenceClipId] = useState<string | null>(null);
   const [activeSentenceClipPosition, setActiveSentenceClipPosition] = useState(0);
   const [isSentenceClipPlaying, setIsSentenceClipPlaying] = useState(false);
@@ -3795,465 +3774,44 @@ export function ListeningPractice({
     window.addEventListener("mouseup", handleMouseUp);
   }
 
-  function getDictationAnswerKey(sentence: ListeningSentence, tokenIndex: number) {
-    return `${audioSettings.dictationMode}:${sentence.id}:${tokenIndex}`;
-  }
-
-  function updateDictationAnswer(sentence: ListeningSentence, tokenIndex: number, value: string) {
-    setDictationAnswers((current) => ({
-      ...current,
-      [getDictationAnswerKey(sentence, tokenIndex)]: value,
-    }));
-  }
-
-  function shouldAdvanceDictationOnSubmitKey() {
-    return (
-      audioSettings.dictationMode === "blank-dictation" ||
-      audioSettings.dictationMode === "sentence-dictation" ||
-      audioSettings.dictationMode === "translation-training"
-    );
-  }
-
-  function getSiblingDictationBlanks(currentInput: HTMLInputElement) {
-    const sentenceCard = currentInput.closest(".sentence-card");
-    return Array.from(
-      (sentenceCard ?? document).querySelectorAll<HTMLInputElement>(".dictation-blank-input"),
-    );
-  }
-
-  function getTranscriptDictationBlanks(currentInput: HTMLInputElement) {
-    const transcriptPanel = currentInput.closest(".transcript-panel");
-    return Array.from(
-      (transcriptPanel ?? document).querySelectorAll<HTMLInputElement>(".dictation-blank-input"),
-    );
-  }
-
-  function focusDictationBlank(input: HTMLInputElement | null | undefined) {
-    if (!input) {
-      return;
-    }
-
-    input.focus();
-    input.select();
-  }
-
-  function focusNextDictationBlank(currentInput: HTMLInputElement, scope: "sentence" | "transcript") {
-    const inputs =
-      scope === "transcript"
-        ? getTranscriptDictationBlanks(currentInput)
-        : getSiblingDictationBlanks(currentInput);
-    const currentIndex = inputs.indexOf(currentInput);
-    const nextInput = currentIndex >= 0 ? inputs[currentIndex + 1] : null;
-
-    focusDictationBlank(nextInput);
-  }
-
-  function focusPreviousDictationBlank(currentInput: HTMLInputElement) {
-    const inputs = getTranscriptDictationBlanks(currentInput);
-    const currentIndex = inputs.indexOf(currentInput);
-    const previousInput = currentIndex > 0 ? inputs[currentIndex - 1] : null;
-
-    if (!previousInput) {
-      return;
-    }
-
-    const cursorPosition = previousInput.value.length;
-    previousInput.focus();
-    previousInput.setSelectionRange(cursorPosition, cursorPosition);
-  }
-
-  function handleDictationBlankKeyDown(event: ReactKeyboardEvent<HTMLInputElement>) {
-    if (!shouldAdvanceDictationOnSubmitKey()) {
-      return;
-    }
-
-    if (event.key === "Enter") {
-      event.preventDefault();
-      focusNextDictationBlank(event.currentTarget, "transcript");
-      return;
-    }
-
-    if (event.key === " " && event.currentTarget.value.trim()) {
-      event.preventDefault();
-      focusNextDictationBlank(event.currentTarget, "transcript");
-      return;
-    }
-
-    if (
-      (event.key === "Backspace" || event.key === "Delete") &&
-      event.currentTarget.value.length === 0
-    ) {
-      event.preventDefault();
-      focusPreviousDictationBlank(event.currentTarget);
-    }
-  }
-
-  function getSentenceWordTargets(sentence: ListeningSentence) {
-    return splitEnglishTokens(sentence.englishText)
-      .map((token, tokenIndex) => {
-        if (!isWordToken(token)) {
-          return null;
-        }
-
-        const normalizedWord = normalizeWord(token);
-        const hint = vocabularyHints[normalizedWord] ?? VOCABULARY_HINTS[normalizedWord];
-
-        return {
-          normalizedWord,
-          score: getVocabularyLevelScore(hint?.level),
-          token,
-          tokenIndex,
-        };
-      })
-      .filter((target): target is DictationTarget & { score: number } => Boolean(target));
-  }
-
-  function getSortedWordTargets(sentence: ListeningSentence) {
-    return [...getSentenceWordTargets(sentence)].sort((left, right) => {
-      if (left.score !== right.score) {
-        return right.score - left.score;
-      }
-
-      if (left.normalizedWord.length !== right.normalizedWord.length) {
-        return right.normalizedWord.length - left.normalizedWord.length;
-      }
-
-      return left.tokenIndex - right.tokenIndex;
-    });
-  }
-
-  function getBlankDictationTargetCount(wordCount: number) {
-    if (wordCount <= 0) {
-      return 0;
-    }
-
-    return Math.max(1, Math.floor((wordCount - 1) / 5));
-  }
-
-  function getDictationTargets(sentence: ListeningSentence) {
-    const wordTargets = getSentenceWordTargets(sentence);
-
-    if (
-      audioSettings.dictationMode === "sentence-dictation" ||
-      audioSettings.dictationMode === "translation-training"
-    ) {
-      return wordTargets;
-    }
-
-    if (audioSettings.dictationMode !== "blank-dictation" || wordTargets.length === 0) {
-      return [];
-    }
-
-    return getSortedWordTargets(sentence)
-      .slice(0, getBlankDictationTargetCount(wordTargets.length))
-      .sort((left, right) => left.tokenIndex - right.tokenIndex);
-  }
-
-  function renderDictationBlank(sentence: ListeningSentence, target: DictationTarget) {
-    const answerKey = getDictationAnswerKey(sentence, target.tokenIndex);
-    const userAnswer = dictationAnswers[answerKey] ?? "";
-    const normalizedTarget = Array.from(normalizeAnswer(target.token));
-    let answerCharacterIndex = 0;
-    const answerCharacters = Array.from(userAnswer).map((character, index) => {
-      const normalizedCharacter = normalizeAnswer(character);
-      const isCorrect = normalizedCharacter.length > 0 &&
-        normalizedTarget.slice(
-          answerCharacterIndex,
-          answerCharacterIndex + normalizedCharacter.length,
-        ).join("") === normalizedCharacter;
-      answerCharacterIndex += normalizedCharacter.length;
-
-      return (
-        <span
-          aria-hidden="true"
-          className={`dictation-answer-char ${normalizedCharacter ? (isCorrect ? "correct" : "wrong") : ""}`}
-          key={`${index}-${character}`}
-        >
-          {character}
-        </span>
-      );
-    });
-
-    return (
-      <span className="dictation-blank-wrap" key={`${sentence.id}-dictation-${target.tokenIndex}`}>
-        <span aria-hidden="true" className="dictation-blank-measure">
-          {userAnswer || "....."}
-        </span>
-        <span aria-hidden="true" className="dictation-blank-display">
-          {answerCharacters}
-        </span>
-        <input
-          aria-label={`听写 ${target.normalizedWord}`}
-          className="dictation-blank-input"
-          size={1}
-          value={userAnswer}
-          onClick={(event) => event.stopPropagation()}
-          onChange={(event) => updateDictationAnswer(sentence, target.tokenIndex, event.target.value)}
-          onKeyDown={handleDictationBlankKeyDown}
-        />
-      </span>
-    );
-  }
-
-  function renderDictationSentence(sentence: ListeningSentence) {
-    const tokens = splitEnglishTokens(sentence.englishText);
-    const targetMap = new Map(
-      getDictationTargets(sentence).map((target) => [target.tokenIndex, target]),
-    );
-
-    return (
-      <p className="subtitle-english-line dictation-line">
-        {tokens.map((token, tokenIndex) => {
-          const target = targetMap.get(tokenIndex);
-
-          if (target) {
-            return renderDictationBlank(sentence, target);
-          }
-
-          return <span key={`${sentence.id}-dictation-token-${tokenIndex}`}>{token}</span>;
-        })}
-      </p>
-    );
-  }
-
-  function getSentenceOrderAnswerKey(sentence: ListeningSentence, tokenIndex: number) {
-    return `${sentence.id}:${tokenIndex}`;
-  }
-
-  function moveSentenceOrderAnswer(
-    sentence: ListeningSentence,
-    payload: SentenceOrderDragPayload,
-    targetTokenIndex: number | null,
-  ) {
-    setSentenceOrderAnswers((current) => {
-      const next = { ...current };
-      const movingAnswer = payload.sourceSlot ? next[payload.sourceSlot] ?? payload : payload;
-
-      if (targetTokenIndex == null) {
-        if (payload.sourceSlot) {
-          delete next[payload.sourceSlot];
-        }
-        return next;
-      }
-
-      const targetKey = getSentenceOrderAnswerKey(sentence, targetTokenIndex);
-      if (payload.sourceSlot === targetKey) {
-        return current;
-      }
-
-      const replacedAnswer = next[targetKey];
-      if (payload.sourceSlot) {
-        delete next[payload.sourceSlot];
-        if (replacedAnswer) {
-          next[payload.sourceSlot] = replacedAnswer;
-        }
-      }
-      next[targetKey] = {
-        token: movingAnswer.token,
-        tokenIndex: movingAnswer.tokenIndex,
-      };
-      return next;
-    });
-  }
-
-  function getSentenceOrderWordBank(sentence: ListeningSentence) {
-    const usedTokenIndexes = new Set(
-      Object.entries(sentenceOrderAnswers)
-        .filter(([key]) => key.startsWith(`${sentence.id}:`))
-        .map(([, answer]) => answer.tokenIndex),
-    );
-
-    return [...getSentenceWordTargets(sentence)].sort((left, right) => {
-      const leftHash = stableHash(`${sentence.id}:${left.tokenIndex}:${left.token.toLowerCase()}`);
-      const rightHash = stableHash(`${sentence.id}:${right.tokenIndex}:${right.token.toLowerCase()}`);
-
-      if (leftHash !== rightHash) {
-        return leftHash - rightHash;
-      }
-
-      return left.tokenIndex - right.tokenIndex;
-    }).filter((target) => !usedTokenIndexes.has(target.tokenIndex));
-  }
-
-  function renderSentenceOrderBlank(sentence: ListeningSentence, target: DictationTarget) {
-    const answerKey = getSentenceOrderAnswerKey(sentence, target.tokenIndex);
-    const placedAnswer = sentenceOrderAnswers[answerKey] ?? null;
-    const hasAnswer = Boolean(placedAnswer);
-    const isCorrect = hasAnswer && normalizeAnswer(placedAnswer?.token ?? "") === normalizeAnswer(target.token);
-    const isWrong = hasAnswer && !isCorrect;
-
-    return (
-      <span
-        aria-label={`语序排列 ${target.normalizedWord}`}
-        className={`sentence-order-dropzone ${isCorrect ? "correct" : ""} ${isWrong ? "wrong" : ""}`}
-        draggable={hasAnswer}
-        key={`${sentence.id}-order-${target.tokenIndex}`}
-        role="button"
-        tabIndex={0}
-        onDragStart={(event) => {
-          if (!placedAnswer) return;
-          const payload: SentenceOrderDragPayload = {
-            ...placedAnswer,
-            sourceSlot: answerKey,
-          };
-          event.dataTransfer.setData("application/json", JSON.stringify(payload));
-          event.dataTransfer.setData("text/plain", placedAnswer.token);
-        }}
-        onDragOver={(event) => {
-          event.preventDefault();
-        }}
-        onDrop={(event: ReactDragEvent<HTMLSpanElement>) => {
-          event.preventDefault();
-          event.stopPropagation();
-
-          try {
-            const rawValue = event.dataTransfer.getData("application/json");
-            const parsedPayload = JSON.parse(rawValue) as Partial<SentenceOrderDragPayload>;
-
-            if (typeof parsedPayload.token === "string") {
-              moveSentenceOrderAnswer(sentence, {
-                token: parsedPayload.token,
-                tokenIndex: typeof parsedPayload.tokenIndex === "number" ? parsedPayload.tokenIndex : -1,
-                sourceSlot: typeof parsedPayload.sourceSlot === "string" ? parsedPayload.sourceSlot : null,
-              }, target.tokenIndex);
-            }
-          } catch {
-            const fallbackToken = event.dataTransfer.getData("text/plain");
-
-            if (fallbackToken) {
-              moveSentenceOrderAnswer(sentence, {
-                token: fallbackToken,
-                tokenIndex: -1,
-                sourceSlot: null,
-              }, target.tokenIndex);
-            }
-          }
-        }}
-      >
-        {placedAnswer?.token ?? ""}
-      </span>
-    );
-  }
-
-  function renderSentenceOrderLine(sentence: ListeningSentence) {
-    const tokens = splitEnglishTokens(sentence.englishText);
-    const targetMap = new Map(
-      getSentenceWordTargets(sentence).map((target) => [target.tokenIndex, target]),
-    );
-
-    return (
-      <p className="subtitle-english-line dictation-line sentence-order-line">
-        {tokens.map((token, tokenIndex) => {
-          const target = targetMap.get(tokenIndex);
-
-          if (target) {
-            return renderSentenceOrderBlank(sentence, target);
-          }
-
-          return <span key={`${sentence.id}-order-token-${tokenIndex}`}>{token}</span>;
-        })}
-      </p>
-    );
-  }
-
-  function renderSentenceOrderWordBank(sentence: ListeningSentence) {
-    return (
-      <div
-        className="sentence-order-word-bank"
-        data-sentence-order-bank
-        onDragOver={(event) => event.preventDefault()}
-        onDrop={(event) => {
-          event.preventDefault();
-          try {
-            const payload = JSON.parse(event.dataTransfer.getData("application/json")) as Partial<SentenceOrderDragPayload>;
-            if (typeof payload.token === "string" && typeof payload.sourceSlot === "string") {
-              moveSentenceOrderAnswer(sentence, {
-                token: payload.token,
-                tokenIndex: typeof payload.tokenIndex === "number" ? payload.tokenIndex : -1,
-                sourceSlot: payload.sourceSlot,
-              }, null);
-            }
-          } catch {
-            // A word dragged out of the bank is already available there.
-          }
-        }}
-      >
-        {getSentenceOrderWordBank(sentence).map((target) => (
-          <button
-            className="sentence-order-chip"
-            draggable
-            key={`${sentence.id}-word-bank-${target.tokenIndex}`}
-            type="button"
-            onClick={(event) => event.stopPropagation()}
-            onDragStart={(event) => {
-              const payload: SentenceOrderDragPayload = {
-                token: target.token,
-                tokenIndex: target.tokenIndex,
-                sourceSlot: null,
-              };
-
-              event.dataTransfer.setData("application/json", JSON.stringify(payload));
-              event.dataTransfer.setData("text/plain", target.token);
-            }}
-          >
-            {target.token}
-          </button>
-        ))}
-      </div>
-    );
-  }
-
-  function renderTranslation(sentence: ListeningSentence, className = "") {
-    if (!sentence.chineseText) {
-      return null;
-    }
-
-    return (
-      <p className={`translation ${className}`.trim()}>
-        {sentence.chineseText}
-      </p>
-    );
-  }
-
   function renderTranscriptSentenceContent(sentence: ListeningSentence) {
-    if (audioSettings.dictationMode === "sentence-order") {
-      return (
-        <>
-          {renderSentenceOrderLine(sentence)}
-          {renderSentenceOrderWordBank(sentence)}
-        </>
-      );
-    }
-
-    if (audioSettings.dictationMode === "translation-training") {
-      return (
-        <>
-          {renderTranslation(sentence, "primary-translation writing-mode-translation")}
-          {renderDictationSentence(sentence)}
-        </>
-      );
-    }
-
-    if (audioSettings.dictationMode !== "none") {
-      return (
-        <>
-          {renderDictationSentence(sentence)}
-        </>
-      );
-    }
+    const wordTargets = splitEnglishTokens(sentence.englishText).flatMap((token, tokenIndex) => {
+      if (!isWordToken(token)) return [];
+      const normalizedWord = normalizeWord(token);
+      const hint = vocabularyHints[normalizedWord] ?? VOCABULARY_HINTS[normalizedWord];
+      return [{ normalizedWord, score: getVocabularyLevelScore(hint?.level), tokenIndex }];
+    });
+    const dictationTargetTokenIndexes =
+      audioSettings.dictationMode === "blank-dictation"
+        ? [...wordTargets]
+            .sort(
+              (left, right) =>
+                right.score - left.score ||
+                right.normalizedWord.length - left.normalizedWord.length ||
+                left.tokenIndex - right.tokenIndex,
+            )
+            .slice(
+              0,
+              wordTargets.length > 0 ? Math.max(1, Math.floor((wordTargets.length - 1) / 5)) : 0,
+            )
+            .map((target) => target.tokenIndex)
+        : undefined;
 
     return (
-      <>
-        {audioSettings.subtitleMode !== "chinese"
-          ? renderEnglishSubtitle(sentence, { onWordClick: playSentenceAudioClip })
-          : null}
-        {audioSettings.subtitleMode !== "english"
-          ? renderTranslation(
-              sentence,
-              audioSettings.subtitleMode === "chinese" ? "primary-translation" : "",
-            )
-          : null}
-      </>
+      <BbcSentencePractice
+        activeWordIndex={null}
+        dictationTargetTokenIndexes={dictationTargetTokenIndexes}
+        englishContent={renderEnglishSubtitle(sentence, { onWordClick: playSentenceAudioClip })}
+        isAudioPlaying={isSentenceClipPlaying && activeSentenceClipId === sentence.id}
+        sentence={{
+          chinese: sentence.chineseText ?? "",
+          english: sentence.englishText,
+          sentenceNo: sentence.sentenceNo,
+        }}
+        settings={audioSettings}
+        showAnswers={showWritingAnswers}
+        translationContent={sentence.chineseText ?? ""}
+      />
     );
   }
 
@@ -4369,6 +3927,21 @@ export function ListeningPractice({
                     {sentence.speaker ? <span>{sentence.speaker}</span> : null}
                   </div>
                   <div className="favorite-share-actions">
+                    {reviewStudyMode === "writing" && audioSettings.dictationMode !== "none" ? (
+                      <button
+                        aria-keyshortcuts="Shift"
+                        aria-pressed={showWritingAnswers}
+                        className={`bbc-show-writing-answers ${showWritingAnswers ? "active" : ""}`}
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          setShowWritingAnswers((visible) => !visible);
+                        }}
+                        title="点击切换答案，也可单独按 Shift"
+                        type="button"
+                      >
+                        {showWritingAnswers ? "隐藏答案" : "显示答案"}
+                      </button>
+                    ) : null}
                     <button
                       aria-label={`收藏第 ${sentence.sentenceNo} 句`}
                       className={`favorite-star ${
@@ -4602,8 +4175,6 @@ export function ListeningPractice({
     setIsFullAudioPlaying(false);
     setFullAudioPositionMs(0);
     setSentenceAutoPlaySignals({});
-    setDictationAnswers({});
-    setSentenceOrderAnswers({});
     activeSentenceClipIdRef.current = null;
     setActiveSentenceClipId(null);
     setActiveSentenceClipPosition(0);
@@ -4793,11 +4364,6 @@ export function ListeningPractice({
       setActiveWordTooltip(null);
     }
   }, [submitted]);
-
-  useEffect(() => {
-    setDictationAnswers({});
-    setSentenceOrderAnswers({});
-  }, [audioSettings.dictationMode]);
 
   useEffect(() => {
     clearSpeakingPracticeTimers();
@@ -5437,6 +5003,21 @@ export function ListeningPractice({
                       <div className="practice-subtitle-line-head">
                         <span>#{sentence.sentenceNo}</span>
                         <div className="favorite-share-actions">
+                          {reviewStudyMode === "writing" && audioSettings.dictationMode !== "none" ? (
+                            <button
+                              aria-keyshortcuts="Shift"
+                              aria-pressed={showWritingAnswers}
+                              className={`bbc-show-writing-answers ${showWritingAnswers ? "active" : ""}`}
+                              onClick={(event) => {
+                                event.stopPropagation();
+                                setShowWritingAnswers((visible) => !visible);
+                              }}
+                              title="点击切换答案，也可单独按 Shift"
+                              type="button"
+                            >
+                              {showWritingAnswers ? "隐藏答案" : "显示答案"}
+                            </button>
+                          ) : null}
                           <button
                             aria-label={`收藏第 ${sentence.sentenceNo} 句`}
                             className={`favorite-star ${
