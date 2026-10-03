@@ -809,6 +809,11 @@ export function StudyAnnotationTools({
             left: activeWordTooltip.left,
             top: activeWordTooltip.top,
           }}
+          onClose={() => {
+            if (hideWordTimerRef.current != null) window.clearTimeout(hideWordTimerRef.current);
+            hideWordTimerRef.current = null;
+            setActiveWordTooltip(null);
+          }}
           onMouseEnter={() => {
             if (hideWordTimerRef.current != null) {
               window.clearTimeout(hideWordTimerRef.current);

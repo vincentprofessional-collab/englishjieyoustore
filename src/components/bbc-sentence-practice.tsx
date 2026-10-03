@@ -617,45 +617,48 @@ export function BbcSentencePractice({
 
   function renderSentenceOrderWordBank() {
     return (
-      <div
-        className={`sentence-order-word-bank ${sentenceOrderHover === "bank" ? "hover" : ""}`}
-        data-sentence-order-bank
-        onDragOver={(event) => event.preventDefault()}
-        onDrop={(event: ReactDragEvent<HTMLDivElement>) => {
-          event.preventDefault();
-          const payload = readSentenceOrderDragPayload(event);
-          if (payload) {
-            moveSentenceOrderAnswer(payload, "bank");
-          }
-        }}
-      >
-        {getSentenceOrderWordBank().map((target) => (
-          <button
-            className={`sentence-order-chip ${
-              sentenceOrderDrag?.tokenIndex === target.tokenIndex ? "sentence-order-dragging" : ""
-            }`}
-            draggable
-            key={`${sentence.sentenceNo}-word-bank-${target.tokenIndex}`}
-            onClick={(event) => event.stopPropagation()}
-            onDragStart={(event) => {
-              const payload = {
-                sourceSlot: null,
-                token: target.token,
-                tokenIndex: target.tokenIndex,
-              };
-
-              event.dataTransfer.setData("application/json", JSON.stringify(payload));
-              event.dataTransfer.setData("text/plain", target.token);
-            }}
-            onPointerDown={(event) =>
-              startSentenceOrderPointerDrag(event, target, null)
+      <>
+        <p className="sentence-order-touch-hint">按住词块，拖到句中对应虚线处后松开</p>
+        <div
+          className={`sentence-order-word-bank ${sentenceOrderHover === "bank" ? "hover" : ""}`}
+          data-sentence-order-bank
+          onDragOver={(event) => event.preventDefault()}
+          onDrop={(event: ReactDragEvent<HTMLDivElement>) => {
+            event.preventDefault();
+            const payload = readSentenceOrderDragPayload(event);
+            if (payload) {
+              moveSentenceOrderAnswer(payload, "bank");
             }
-            type="button"
-          >
-            {target.token}
-          </button>
-        ))}
-      </div>
+          }}
+        >
+          {getSentenceOrderWordBank().map((target) => (
+            <button
+              className={`sentence-order-chip ${
+                sentenceOrderDrag?.tokenIndex === target.tokenIndex ? "sentence-order-dragging" : ""
+              }`}
+              draggable
+              key={`${sentence.sentenceNo}-word-bank-${target.tokenIndex}`}
+              onClick={(event) => event.stopPropagation()}
+              onDragStart={(event) => {
+                const payload = {
+                  sourceSlot: null,
+                  token: target.token,
+                  tokenIndex: target.tokenIndex,
+                };
+
+                event.dataTransfer.setData("application/json", JSON.stringify(payload));
+                event.dataTransfer.setData("text/plain", target.token);
+              }}
+              onPointerDown={(event) =>
+                startSentenceOrderPointerDrag(event, target, null)
+              }
+              type="button"
+            >
+              {target.token}
+            </button>
+          ))}
+        </div>
+      </>
     );
   }
 

@@ -4,6 +4,7 @@ import {
   getManagedPageItemClassName,
   type ManagedPageContent,
 } from "@/lib/content/page-content";
+import type { GuidePost } from "@/lib/guide/posts";
 
 function renderHomeTitle(title: string) {
   const highlight = "打开";
@@ -22,7 +23,15 @@ function renderHomeTitle(title: string) {
   );
 }
 
-export function HomeStyleLab({ content }: { content: ManagedPageContent }) {
+export function HomeStyleLab({
+  content,
+  initialPosts,
+  initialPostCount,
+}: {
+  content: ManagedPageContent;
+  initialPosts?: GuidePost[];
+  initialPostCount?: number;
+}) {
   const items = content.items.filter((item) => item.enabled);
 
   return (
@@ -63,7 +72,7 @@ export function HomeStyleLab({ content }: { content: ManagedPageContent }) {
         <h2 id="home-updates-title">网站公告与帖子</h2>
       </section>
 
-      <GuideBoard compact hideHeading hidePostChrome homeLanding initialExpanded={false} placementPath="/" postLimit={50} />
+      <GuideBoard compact hideHeading hidePostChrome homeLanding initialExpanded={false} initialPostCount={initialPostCount} initialPosts={initialPosts} placementPath="/" postLimit={50} />
 
       {items.length ? (
         <section className="managed-page-grid" aria-label="学习模块">

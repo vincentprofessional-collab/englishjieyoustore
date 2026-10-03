@@ -4,7 +4,13 @@ import { useLayoutEffect, useRef, type ComponentProps } from "react";
 import { VocabularyInlinePronunciation } from "@/components/vocabulary-pronunciation";
 import { cleanPartOfSpeech, cleanVocabularyDefinition } from "@/lib/vocabulary/display";
 
-export function VocabularyHoverPopup({ style, ...props }: ComponentProps<"div">) {
+export function VocabularyHoverPopup({
+  children,
+  className,
+  onClose,
+  style,
+  ...props
+}: ComponentProps<"div"> & { onClose?: () => void }) {
   const popupRef = useRef<HTMLDivElement>(null);
   const preferredCenter = style?.left;
 
@@ -27,7 +33,14 @@ export function VocabularyHoverPopup({ style, ...props }: ComponentProps<"div">)
     };
   }, [preferredCenter]);
 
-  return <div {...props} ref={popupRef} style={style} />;
+  return (
+    <div {...props} className={`${className ?? ""}${onClose ? " word-tooltip-has-close" : ""}`.trim()} ref={popupRef} style={style}>
+      {onClose ? (
+        <button aria-label="关闭单词简明释义" className="word-tooltip-close" onClick={(event) => { event.stopPropagation(); onClose(); }} type="button">×</button>
+      ) : null}
+      {children}
+    </div>
+  );
 }
 
 type VocabularyHoverHint = {

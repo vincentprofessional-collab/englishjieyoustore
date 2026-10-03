@@ -24,6 +24,8 @@ type GuideBoardProps = {
   initialExpanded?: boolean;
   hideWhenEmpty?: boolean;
   emptyMessage?: string;
+  initialPosts?: GuidePost[];
+  initialPostCount?: number;
   postLimit?: number;
   placementPath?: string;
   title?: string;
@@ -502,16 +504,16 @@ export function GuideBoard({
   hideWhenEmpty = false,
   initialExpanded = false,
   emptyMessage = "当前没有帖子。",
+  initialPosts,
+  initialPostCount,
   postLimit,
   placementPath,
   title = "使用说明",
 }: GuideBoardProps) {
-  const [posts, setPosts] = useState<GuidePost[]>(() =>
-    placementPath ? [] : DEFAULT_GUIDE_POSTS,
-  );
+  const [posts, setPosts] = useState<GuidePost[]>(() => initialPosts ?? (placementPath ? [] : DEFAULT_GUIDE_POSTS));
   const [currentPage, setCurrentPage] = useState(0);
-  const [totalPosts, setTotalPosts] = useState(DEFAULT_GUIDE_POSTS.length);
-  const [isLoading, setIsLoading] = useState(true);
+  const [totalPosts, setTotalPosts] = useState(initialPostCount ?? initialPosts?.length ?? DEFAULT_GUIDE_POSTS.length);
+  const [isLoading, setIsLoading] = useState(initialPosts === undefined);
   const [loadError, setLoadError] = useState(false);
   const [isMobileHome, setIsMobileHome] = useState(false);
   const pageSize = postLimit ?? 50;
@@ -540,7 +542,7 @@ export function GuideBoard({
         .order("published_at", { ascending: false });
 
       if (placementPath === "/") {
-        query = query.is("meta_json->>pagePlacement", null);
+        query = query.or("meta_json->>pagePlacement.is.null,meta_json->>pagePlacement.eq./");
       } else if (placementPath) {
         query = query.eq("meta_json->>pagePlacement", placementPath);
       }

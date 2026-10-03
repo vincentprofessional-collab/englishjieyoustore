@@ -190,6 +190,8 @@ function enablePitchPreservation(sound: Howl) {
     media.preservesPitch = true;
     media.mozPreservesPitch = true;
     media.webkitPreservesPitch = true;
+    media.setAttribute("playsinline", "true");
+    media.setAttribute("webkit-playsinline", "true");
   });
 }
 
@@ -345,10 +347,12 @@ export function AudioPlayer({
     setPosition(0);
     setDraftPosition(0);
 
+    const isMobilePlayback = window.matchMedia("(max-width: 820px)").matches;
+    const shouldPreload = preload || isMobilePlayback;
     const sound = new Howl({
       src: [src],
-      html5,
-      preload,
+      html5: html5 || isMobilePlayback,
+      preload: shouldPreload,
       format: inferAudioFormat(src),
       rate: playerSettings.rate,
       volume: 1,

@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { VocabularyExampleAudioButton, VocabularyExampleFavoriteButton } from "@/components/vocabulary-example-actions";
 import { VocabularyExampleArticleLink } from "@/components/vocabulary-example-article-link";
 import { VocabularyAutoplay } from "@/components/vocabulary-autoplay";
+import { VocabularyBbcExampleStrip } from "@/components/vocabulary-bbc-example-strip";
 import { ContentShareButton } from "@/components/content-share-button";
 import { VocabularyDetailShell } from "@/components/vocabulary-detail-shell";
 import { VocabularyDetailContent } from "@/components/vocabulary-detail-content";
@@ -359,6 +360,7 @@ export default async function VocabularyWordPage({
       <VocabularyDetailShell
         backHref={backHref}
         entry={entry}
+        headerAfterActions={<VocabularyBbcExampleStrip examples={usageExamples} />}
         sidePanel={videos.length > 0 ? <VocabularyVideoPlayer entryWord={entry.normalizedWord} totalVideos={totalVideos} videos={videos} votesEnabled={votesEnabled} /> : null}
       >
         <VocabularyDetailContent

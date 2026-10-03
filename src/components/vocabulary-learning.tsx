@@ -1010,6 +1010,7 @@ function stopLearningAudio() {
 async function playSiteAudio(audioUrl: string) {
   return await new Promise<boolean>((resolve) => {
     const audio = new Audio(audioUrl);
+    audio.preload = "auto";
     let settled = false;
     let timeout = 0;
     const stop = () => finish(false);
@@ -2151,12 +2152,14 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
       if (event.isComposing || event.repeat || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
       const target = event.target;
       const editable = target instanceof HTMLElement && (target.isContentEditable || ["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName));
-      if (editable && modeIndex !== 3) return;
-      if (event.key === "ArrowLeft" || event.key === "ArrowDown" || event.key === "ArrowRight") {
+      const key = event.key.toLowerCase();
+      const letterShortcut = key === "j" || key === "k" || key === "l";
+      if (editable && (modeIndex !== 3 || letterShortcut)) return;
+      if (event.key === "ArrowLeft" || event.key === "ArrowDown" || event.key === "ArrowRight" || letterShortcut) {
         event.preventDefault();
-        const requestedOutcome = event.key === "ArrowLeft"
+        const requestedOutcome = event.key === "ArrowLeft" || key === "j"
           ? "familiar"
-          : event.key === "ArrowDown"
+          : event.key === "ArrowDown" || key === "k"
             ? "vague"
             : "unfamiliar";
         if (modeIndex === 3) {
@@ -2394,28 +2397,28 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
       <div className="vocabulary-learning-bottom-actions">
         <button
           className="vocabulary-learning-category-button familiar"
-          aria-keyshortcuts="ArrowLeft"
-          title="左方向键：熟悉"
+          aria-keyshortcuts="J ArrowLeft"
+          title="按 J 或 ←：熟悉"
           disabled={advancePending || (modeIndex < 2 && !currentRoundRevealed) || (modeIndex === 2 && oralScoreFeedback === null) || (modeIndex === 3 && !spellingCorrect)}
           onClick={() => modeIndex === 3 ? submitSpelling("familiar") : handleRecognitionOutcome("familiar")}
           type="button"
-        >熟悉</button>
+        ><span>熟悉</span><small aria-hidden="true">J</small></button>
         <button
           className="vocabulary-learning-category-button vague"
-          aria-keyshortcuts="ArrowDown"
-          title="下方向键：模糊"
+          aria-keyshortcuts="K ArrowDown"
+          title="按 K 或 ↓：模糊"
           disabled={advancePending || (modeIndex < 2 && !currentRoundRevealed) || (modeIndex === 2 && oralScoreFeedback === null)}
           onClick={() => modeIndex === 3 ? submitSpelling("vague") : handleRecognitionOutcome("vague")}
           type="button"
-        >模糊</button>
+        ><span>模糊</span><small aria-hidden="true">K</small></button>
         <button
           className="vocabulary-learning-category-button unfamiliar"
-          aria-keyshortcuts="ArrowRight"
-          title="右方向键：生僻"
+          aria-keyshortcuts="L ArrowRight"
+          title="按 L 或 →：生僻"
           disabled={advancePending || (modeIndex < 2 && !currentRoundRevealed) || (modeIndex === 2 && oralScoreFeedback === null)}
           onClick={() => modeIndex === 3 ? submitSpelling("unfamiliar") : handleRecognitionOutcome("unfamiliar")}
           type="button"
-        >生僻</button>
+        ><span>生僻</span><small aria-hidden="true">L</small></button>
       </div>
     </div>
   );

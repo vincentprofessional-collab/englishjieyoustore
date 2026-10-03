@@ -14,6 +14,7 @@ type VocabularyDetailShellProps = {
   className?: string;
   contentClassName?: string;
   entry: LocalVocabularyEntry;
+  headerAfterActions?: ReactNode;
   headerContent?: ReactNode;
   headerActions?: ReactNode;
   sidePanel?: ReactNode;
@@ -28,6 +29,7 @@ export function VocabularyDetailShell({
   className = "",
   contentClassName = "",
   entry,
+  headerAfterActions,
   headerContent,
   headerActions,
   sidePanel,
@@ -71,6 +73,8 @@ export function VocabularyDetailShell({
           </div>
         </div>
       ) : null}
+
+      {headerAfterActions ? <div className="vocabulary-detail-shell-header-after-actions">{headerAfterActions}</div> : null}
 
       {children || sidePanel ? (
         <div className={`word-detail-grid vocabulary-detail-shell-grid vocabulary-learning-detail-grid${sidePanel ? "" : " without-side-panel"}`}>

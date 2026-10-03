@@ -163,13 +163,13 @@ function PhraseSection({ phrases }: { phrases: VocabularyPhraseMatch[] }) {
 function UsageExamplesSection({ entry, examples }: { entry: LocalVocabularyEntry; examples: VocabularyUsageExample[] }) {
   if (examples.length === 0 && entry.englishExamples.length === 0) return null;
   return (
-    <section className="word-detail-section">
+    <section className="word-detail-section vocabulary-usage-examples" data-has-non-bbc-examples={entry.englishExamples.length > 0 || examples.some((example) => example.bookCode !== "BBC") ? "true" : "false"}>
       <h2>例句</h2>
       {entry.englishExamples.length > 0 ? <div className="english-example-list">{entry.englishExamples.map((example) => <blockquote key={example}>{example}</blockquote>)}</div> : null}
       {examples.length > 0 ? (
         <div className="vocabulary-usage-example-list">
           {examples.map((example, index) => (
-            <article className="vocabulary-usage-example-card" id={`vocabulary-example-${index + 1}`} key={example.id}>
+            <article className="vocabulary-usage-example-card" data-book-code={example.bookCode} id={`vocabulary-example-${index + 1}`} key={example.id}>
               {example.sourceType === "article" ? (
                 <VocabularyExampleArticleLink example={example}>
                   <div className="vocabulary-usage-example-main"><p>{example.englishText}</p>{example.chineseText ? <span>{example.chineseText}</span> : null}<small>{example.sourceTitle}</small></div>

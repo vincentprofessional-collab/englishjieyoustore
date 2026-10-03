@@ -62,6 +62,7 @@ export function playVocabularyPronunciation({
     audioIndex += 1;
 
     const audio = new Audio(resolvedAudioUrl);
+    audio.preload = "auto";
     let settled = false;
     let started = false;
     let timeout = 0;

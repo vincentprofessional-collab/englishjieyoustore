@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import type { ReactNode } from "react";
 import { VocabularySearchAutocomplete } from "@/components/vocabulary-search-autocomplete";
 
 type HubItem = { title: string; description?: string; href: string; meta?: string; featured?: boolean };
@@ -19,20 +20,23 @@ function HubLink({ item }: { item: HubItem }) {
   </Link>;
 }
 
-export function MobileWordHub() {
+export function MobileWordHub({ detailPreview }: { detailPreview?: ReactNode }) {
   const modules: HubItem[] = [
+    { title: "查单词", href: "/vocabulary" },
     { title: "背单词", description: "继续今天的词汇复习", href: "/vocabulary/books", featured: true },
     { title: "词源词根字典", description: "按词根和词源理解词义", href: "/vocabulary/etymology" },
     { title: "俚语俗语", description: "在 BBC 文章里学真实用法", href: "/articles" },
   ];
 
   return <section className="mobile-hub mobile-word-hub">
-    <HubHeading title="单词" description="查单词，整理词汇和表达。" />
+    <header className="mobile-word-heading"><h1>单词</h1></header>
+    <nav aria-label="单词功能" className="mobile-word-tabs">
+      {modules.map((item, index) => <Link aria-current={index === 0 ? "page" : undefined} className={index === 0 ? "active" : ""} href={item.href} key={item.href}>{item.title}</Link>)}
+    </nav>
     <section aria-label="查单词" className="mobile-word-search-card">
       <VocabularySearchAutocomplete initialQuery="" autoFocus={false} />
     </section>
-    <div className="mobile-hub-section-title"><h2>词汇与表达</h2></div>
-    <div className="mobile-hub-grid">{modules.map((item) => <HubLink item={item} key={item.href} />)}</div>
+    {detailPreview ? <div className="mobile-word-preview-slot">{detailPreview}</div> : null}
   </section>;
 }
 

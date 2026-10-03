@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 type VocabularyVideoItem = {
   likedByMe: boolean;
   likes: number;
+  mobileSrc?: string;
   path: string;
   src: string;
 };
@@ -49,12 +50,22 @@ export function VocabularyVideoPlayer({
   const [duration, setDuration] = useState(0);
   const [notice, setNotice] = useState("");
   const [autoplayOnChange, setAutoplayOnChange] = useState(false);
+  const [isMobileViewport, setIsMobileViewport] = useState(false);
   const router = useRouter();
   const videoRef = useRef<HTMLVideoElement>(null);
   const playerRef = useRef<HTMLElement | null>(null);
   const activePathRef = useRef(initialVideos[0]?.path ?? null);
   const demotedPathsRef = useRef(new Set<string>());
   const currentVideo = videos[activeIndex] ?? null;
+  const currentVideoSrc = currentVideo?.mobileSrc && isMobileViewport ? currentVideo.mobileSrc : currentVideo?.src;
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 820px)");
+    const update = () => setIsMobileViewport(media.matches);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
 
   function setRankedVideos(items: VocabularyVideoItem[]) {
     const ranked = rankVocabularyVideos(items, demotedPathsRef.current);
@@ -224,8 +235,11 @@ export function VocabularyVideoPlayer({
               </div>
             ) : (
               <video
-                key={currentVideo.path}
+                key={`${currentVideo.path}:${currentVideoSrc}`}
                 aria-label="单词例句视频"
+                controlsList="nodownload"
+                draggable={false}
+                onContextMenu={(event) => event.preventDefault()}
                 onDurationChange={(event) => {
                   if (event.currentTarget === videoRef.current) setDuration(event.currentTarget.duration);
                 }}
@@ -243,7 +257,7 @@ export function VocabularyVideoPlayer({
                 playsInline
                 preload="metadata"
                 ref={videoRef}
-                src={currentVideo.src}
+                src={currentVideoSrc}
               />
             )}
           </div>

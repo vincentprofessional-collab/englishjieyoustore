@@ -1,7 +1,7 @@
 import "server-only";
 
 import catalogData from "@/data/vocabulary/video-catalog.json";
-import { getVocabularyVideoMediaUrl } from "@/lib/media/url";
+import { getVocabularyVideoDirectMediaUrl, getVocabularyVideoMediaUrl } from "@/lib/media/url";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import type { LocalVocabularyEntry } from "@/lib/vocabulary/local-vocabulary";
 import { getAllVocabularyEntries } from "@/lib/vocabulary/local-vocabulary";
@@ -15,6 +15,7 @@ type CatalogItem = {
 export type VocabularyVideo = {
   likedByMe: boolean;
   likes: number;
+  mobileSrc?: string;
   path: string;
   src: string;
 };
@@ -96,7 +97,11 @@ function getCandidatePool(entry: LocalVocabularyEntry) {
       if (filenameLengthDifference !== 0) return filenameLengthDifference;
       return left.name.localeCompare(right.name);
     })
-    .map((item) => ({ path: item.name, src: getVocabularyVideoMediaUrl(item.name) }));
+    .map((item) => ({
+      mobileSrc: getVocabularyVideoDirectMediaUrl(item.name),
+      path: item.name,
+      src: getVocabularyVideoMediaUrl(item.name),
+    }));
 }
 
 export function getVocabularyVideoCandidates(entry: LocalVocabularyEntry) {

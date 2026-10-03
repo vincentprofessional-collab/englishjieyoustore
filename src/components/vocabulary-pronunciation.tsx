@@ -89,32 +89,28 @@ export function VocabularyInlinePronunciation({
   return (
     <div className="inline-pronunciation" aria-label={`${word} 音标和发音`}>
       {shouldShowUk ? (
-        <span className="inline-pronunciation-side">
+        <button
+          aria-label={`播放 ${word} 英音`}
+          className="inline-pronunciation-side"
+          onClick={() => playVocabularyPronunciation({ accent: "uk", audioUrl: ukAudioUrl, word })}
+          type="button"
+        >
           <b aria-hidden="true">英</b>
           <span>{formatPhonetic(ukPhonetic)}</span>
-          <button
-            aria-label={`播放 ${word} 英音`}
-            className="pronunciation-wave"
-            onClick={() => playVocabularyPronunciation({ accent: "uk", audioUrl: ukAudioUrl, word })}
-            type="button"
-          >
-            <SoundWaveIcon />
-          </button>
-        </span>
+          <SoundWaveIcon />
+        </button>
       ) : null}
       {shouldShowUs ? (
-        <span className="inline-pronunciation-side">
+        <button
+          aria-label={`播放 ${word} 美音`}
+          className="inline-pronunciation-side"
+          onClick={() => playVocabularyPronunciation({ accent: "us", audioUrl: usAudioUrl, word })}
+          type="button"
+        >
           <b aria-hidden="true">美</b>
           <span>{formatPhonetic(usPhonetic)}</span>
-          <button
-            aria-label={`播放 ${word} 美音`}
-            className="pronunciation-wave"
-            onClick={() => playVocabularyPronunciation({ accent: "us", audioUrl: usAudioUrl, word })}
-            type="button"
-          >
-            <SoundWaveIcon />
-          </button>
-        </span>
+          <SoundWaveIcon />
+        </button>
       ) : null}
     </div>
   );

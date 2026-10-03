@@ -5905,6 +5905,11 @@ export function ListeningPractice({
             left: activeWordTooltip.left,
             top: activeWordTooltip.top,
           }}
+          onClose={() => {
+            clearHoverWordTimer();
+            clearHideWordTimer();
+            setActiveWordTooltip(null);
+          }}
           onClick={(event) => event.stopPropagation()}
           onMouseEnter={() => {
             clearHoverWordTimer();

@@ -498,6 +498,11 @@ export function GlobalStudyInteractions() {
         <VocabularyHoverPopup
           className={`word-tooltip-floating global-word-tooltip ${wordTooltip.placement === "above" ? "above" : ""}`}
           style={{ left: wordTooltip.left, top: wordTooltip.top }}
+          onClose={() => {
+            if (hideWordTimerRef.current != null) window.clearTimeout(hideWordTimerRef.current);
+            hideWordTimerRef.current = null;
+            setWordTooltip(null);
+          }}
           onMouseEnter={() => {
             if (hideWordTimerRef.current != null) {
               window.clearTimeout(hideWordTimerRef.current);
