@@ -14,6 +14,7 @@ import {
   useArticlePronunciations,
 } from "@/components/audio-player";
 import { BbcSentencePractice, useBbcAnswerShortcut } from "@/components/bbc-sentence-practice";
+import { ArticleRetellingPractice, buildRetellingTermGroups } from "@/components/article-retelling-practice";
 import { ArticleInlineAnnotatedParagraph } from "@/components/article-inline-annotated-text";
 import { useArticleInlineAnnotations } from "@/components/use-article-inline-annotations";
 import { ContentShareButton } from "@/components/content-share-button";
@@ -518,6 +519,8 @@ export function NewConceptLessonPage({
   const [isOriginalVisible, setIsOriginalVisible] = useState(true);
   const [isVocabularyVisible, setIsVocabularyVisible] = useState(true);
   const [studyMode, setStudyMode] = useState<LessonStudyMode>("general");
+  const [isRetellingPractice, setIsRetellingPractice] = useState(false);
+  const retellingVocabularyVisibilityRef = useRef(true);
   const [showWritingAnswers, setShowWritingAnswers] = useState(false);
   const [modeSelectionVersion, setModeSelectionVersion] = useState(0);
   const [isReadingTimerRunning, setIsReadingTimerRunning] = useState(false);
@@ -714,6 +717,7 @@ export function NewConceptLessonPage({
 
   function selectStudyMode(mode: LessonStudyMode) {
     clearSpeakingPracticeTimers();
+    setIsRetellingPractice(false);
     setStudyMode(mode);
     setIsOriginalVisible(true);
     setIsVocabularyVisible(true);
@@ -740,6 +744,17 @@ export function NewConceptLessonPage({
       setActiveSentenceNo(1);
       if (mode === "listening" && sentenceAudioUrls[0]) requestSentenceAutoPlay(1);
     }
+  }
+
+  function enterRetellingPractice() {
+    retellingVocabularyVisibilityRef.current = isVocabularyVisible;
+    setIsVocabularyVisible(false);
+    setIsRetellingPractice(true);
+  }
+
+  function exitRetellingPractice() {
+    setIsRetellingPractice(false);
+    setIsVocabularyVisible(retellingVocabularyVisibilityRef.current);
   }
 
   function selectStudySentence(sentenceNo: number) {
@@ -968,6 +983,7 @@ export function NewConceptLessonPage({
   const vocabularyForDisplay = vocabulary.filter((item) =>
     vocabularyTermAppearsInSentence(fullLessonEnglish, item.word),
   );
+  const retellingTermGroups = buildRetellingTermGroups(vocabularyForDisplay.map((item) => item.word));
   const likelyProperNounWords = getLikelyProperNounWords(fullLessonEnglish);
   const articlePronunciations = new Map<string, string>();
   if (audioSettings.pronunciationMode === "us" || audioSettings.pronunciationMode === "uk") {
@@ -988,7 +1004,7 @@ export function NewConceptLessonPage({
   dictionaryPronunciations.forEach((phonetic, word) => articlePronunciations.set(word, phonetic));
 
   return (
-    <section className="stack bbc-article-page new-concept-lesson-page" ref={pageRef}>
+    <section className={`stack bbc-article-page new-concept-lesson-page ${isRetellingPractice ? "article-retelling-active" : ""}`} ref={pageRef}>
       <div className="page-heading bbc-article-hero new-concept-lesson-hero">
         <div className="bbc-article-hero-top">
           <Link className="bbc-detail-back-link" href={`/new-concept?book=${lesson.bookCode ?? "new-concept-1"}&edition=${audioEdition}&unit=${Math.ceil(lesson.lessonNo / 24)}`}>
@@ -1081,6 +1097,11 @@ export function NewConceptLessonPage({
                   settings={audioSettings}
                   variant="speaking-writing"
                 />
+                {studyMode === "speaking" && !isRetellingPractice ? (
+                  <button className="bbc-fullscreen-toggle article-retelling-mode-button" onClick={enterRetellingPractice} type="button">
+                    复述练习
+                  </button>
+                ) : null}
               </div>
               <div className="bbc-audio-toolbar-utilities">
                 <button
@@ -1133,10 +1154,18 @@ export function NewConceptLessonPage({
         ) : null}
 
         <div
-          className={`bbc-article-columns new-concept-columns ${!isVocabularyVisible ? "without-vocabulary" : ""} ${!isOriginalVisible ? "original-hidden" : ""}`}
+          className={`bbc-article-columns new-concept-columns ${!isVocabularyVisible || isRetellingPractice ? "without-vocabulary" : ""} ${isRetellingPractice ? "article-retelling-columns" : ""} ${!isOriginalVisible ? "original-hidden" : ""}`}
         >
-          <section className={`bbc-original-panel new-concept-original-panel ${studyMode !== "general" ? "bbc-intensive-original-panel" : ""}`}>
-            {isOriginalVisible ? studyMode === "general" ? (
+          <section className={`bbc-original-panel new-concept-original-panel ${studyMode !== "general" ? "bbc-intensive-original-panel" : ""} ${isRetellingPractice ? "article-retelling-parent" : ""}`}>
+            {isRetellingPractice ? (
+              <ArticleRetellingPractice
+                groups={retellingTermGroups}
+                onExit={exitRetellingPractice}
+                sourceId={lesson.id}
+                sourceType="new-concept"
+                title={lesson.title}
+              />
+            ) : isOriginalVisible ? studyMode === "general" ? (
               <NewConceptArticleCopy annotations={inlineTextAnnotations} displayMode={displayMode} isOriginalVisible lesson={lesson} pronunciations={articlePronunciations} />
             ) : activeStudyEnglish ? (
                 <div className="bbc-intensive-reading">
@@ -1255,7 +1284,7 @@ export function NewConceptLessonPage({
                 </div>
               ) : null : null}
           </section>
-          {isVocabularyVisible ? (
+          {isVocabularyVisible && !isRetellingPractice ? (
             <LessonVocabulary
               onVocabularyOpen={saveVocabularyReturnState}
               returnTo={`/new-concept/${lesson.id}?edition=${audioEdition}`}

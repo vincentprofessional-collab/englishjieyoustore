@@ -15,6 +15,7 @@ import Link from "next/link";
 
 import { VocabularyDetailShell } from "@/components/vocabulary-detail-shell";
 import { VocabularyDetailContent } from "@/components/vocabulary-detail-content";
+import { isPhoneUserAgent } from "@/lib/vocabulary/lookup-display-preferences";
 import { VocabularyFavoriteButton } from "@/components/vocabulary-favorite-button";
 import { VocabularyInlinePronunciation } from "@/components/vocabulary-pronunciation";
 import { VocabularyLookupDisplaySection } from "@/components/vocabulary-lookup-display-section";
@@ -136,6 +137,7 @@ type VocabularyLearningProps = {
 
 type VocabularyDetailPayload = {
   entry: LocalVocabularyEntry;
+  etymology?: { chinese?: string; english?: string } | null;
   formationParts: VocabularyFormationPart[];
   phrases: VocabularyPhraseMatch[];
   usageExamples: VocabularyUsageExample[];
@@ -801,7 +803,7 @@ function LookupDetails({ word }: { word: LearningWord }) {
 
       {word.formation || word.root ? (
         <section className="word-detail-section vocabulary-lookup-section">
-          <h2>词根词缀</h2>
+          <h2>词根树</h2>
           <div className="vocabulary-lookup-lines">
             {word.formation ? <p><b>构词</b>{word.formation}</p> : null}
             {word.root ? <p><b>词根</b>{word.root}</p> : null}
@@ -937,6 +939,11 @@ function LearningVocabularyDetails({
   entry: LocalVocabularyEntry;
 }) {
   const detailedEntry = detailPayload?.entry ?? entry;
+  const [showVideo, setShowVideo] = useState(false);
+
+  useEffect(() => {
+    setShowVideo(!isPhoneUserAgent(navigator.userAgent));
+  }, []);
 
   return (
     <div className="vocabulary-learning-complete-detail vocabulary-detail-content">
@@ -955,13 +962,17 @@ function LearningVocabularyDetails({
       </div>
       <VocabularyDetailContent
         entry={detailedEntry}
+        etymologyChinese={detailPayload?.etymology?.chinese}
+        etymologyEnglish={detailPayload?.etymology?.english}
         formationParts={detailPayload?.formationParts ?? []}
+        inlineVideo={showVideo ? (
+          <VocabularyLookupDisplaySection controlsEnabled id="video" title="视频">
+            <VocabularyLearningVideoSection word={detailedEntry.normalizedWord} />
+          </VocabularyLookupDisplaySection>
+        ) : null}
         phrases={detailPayload?.phrases ?? []}
         usageExamples={detailPayload?.usageExamples ?? []}
       />
-      <VocabularyLookupDisplaySection controlsEnabled id="video" title="视频">
-        <VocabularyLearningVideoSection word={detailedEntry.normalizedWord} />
-      </VocabularyLookupDisplaySection>
     </div>
   );
 }

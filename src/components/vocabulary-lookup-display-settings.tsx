@@ -25,7 +25,7 @@ export function VocabularyLookupDisplaySettings() {
           <span>查单词</span>
           <h2>内容显示</h2>
         </div>
-        <p>控制词汇详情中各部分的显示状态</p>
+        <p>控制词汇详情显示；视频仅在桌面和平板显示</p>
       </header>
       <div className="vocabulary-lookup-settings-list">
         {VOCABULARY_LOOKUP_SECTIONS.map(({ key, label }) => (

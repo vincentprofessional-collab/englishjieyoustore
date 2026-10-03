@@ -433,7 +433,7 @@ export function BbcSentencePractice({
     const normalizedTarget = Array.from(normalizeAnswer(target.token));
     const normalizedUserAnswer = normalizeAnswer(userAnswer);
     const shouldRevealAnswer = showAnswers && normalizedUserAnswer !== normalizeAnswer(target.token);
-    const displayedAnswer = userAnswer || (shouldRevealAnswer ? target.token : ".....");
+    const displayedAnswer = userAnswer || (shouldRevealAnswer ? target.token : "\u00a0\u00a0\u00a0\u00a0\u00a0");
     let answerCharacterIndex = 0;
     const answerCharacters = Array.from(userAnswer).map((character, index) => {
       const normalizedCharacter = normalizeAnswer(character);
@@ -474,7 +474,6 @@ export function BbcSentencePractice({
               {userAnswer ? " / " : ""}{target.token}
             </span>
           ) : null}
-          {!userAnswer && !shouldRevealAnswer ? "....." : null}
         </span>
         <input
           aria-label={`听写第 ${blankNumber} 个空`}

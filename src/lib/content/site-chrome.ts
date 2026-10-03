@@ -369,7 +369,7 @@ export const DEFAULT_SITE_CHROME_CONFIG: SiteChromeConfig = {
             enabled: true,
             href: "/me/settings",
             id: "settings",
-            label: "个人设置",
+            label: "设置",
             note: "",
           },
         ],

@@ -19,7 +19,7 @@ import {
 import { getVocabularyUsageExamples, prioritizeVocabularyUsageExamples, type VocabularyUsageExample } from "@/lib/vocabulary/examples";
 import { getVocabularyPhraseMatches, type VocabularyPhraseMatch } from "@/lib/vocabulary/phrases";
 import { getVocabularyLookupEtymology } from "@/lib/vocabulary/lookup-etymology";
-import { VOCABULARY_LOOKUP_VIDEO_COOKIE } from "@/lib/vocabulary/lookup-display-preferences";
+import { DEFAULT_VOCABULARY_LOOKUP_DISPLAY_PREFERENCES, isPhoneUserAgent, VOCABULARY_LOOKUP_VIDEO_COOKIE } from "@/lib/vocabulary/lookup-display-preferences";
 import { getBbcVocabularyDetail } from "@/lib/articles/bbc-vocabulary";
 import { getVocabularyVideoCandidates, getVocabularyVideos } from "@/lib/vocabulary/videos";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
@@ -160,7 +160,7 @@ function WordFormationSection({ parts }: { parts: VocabularyFormationPart[] }) {
 
   return (
     <section className="word-detail-section word-formation-section">
-      <h2>词根词缀</h2>
+      <h2>词根树</h2>
       <div className="word-formation-card">
         <div className="word-formation-line">
           {parts.map((part, index) => (
@@ -357,11 +357,12 @@ export default async function VocabularyWordPage({
     href: part.href ? `${part.href}${part.href.includes("?") ? "&" : "?"}from=lookup` : part.href,
   }));
   const [requestHeaders, cookieStore] = await Promise.all([headers(), cookies()]);
-  const isMobileRequest = /android|iphone|ipad|ipod|mobile/i.test(requestHeaders.get("user-agent") ?? "");
-  const etymology = isMobileRequest ? getVocabularyLookupEtymology(entry.word) : null;
-  const videoVisible = cookieStore.get(VOCABULARY_LOOKUP_VIDEO_COOKIE)?.value === "1";
-  const videoCandidates = getVocabularyVideoCandidates(entry);
-  const shouldLoadVideos = videoVisible;
+  const isPhoneRequest = isPhoneUserAgent(requestHeaders.get("user-agent") ?? "");
+  const etymology = getVocabularyLookupEtymology(entry.word);
+  const videoPreference = cookieStore.get(VOCABULARY_LOOKUP_VIDEO_COOKIE)?.value;
+  const videoVisible = videoPreference === undefined ? DEFAULT_VOCABULARY_LOOKUP_DISPLAY_PREFERENCES.video : videoPreference === "1";
+  const videoCandidates = isPhoneRequest ? [] : getVocabularyVideoCandidates(entry);
+  const shouldLoadVideos = videoVisible && !isPhoneRequest;
   const videoData = shouldLoadVideos ? await getVocabularyVideos(entry) : null;
   const videoSection = videoCandidates.length > 0 ? (
     <VocabularyLookupDisplaySection controlsEnabled id="video" initialVisible={videoVisible} title="视频">
@@ -383,15 +384,13 @@ export default async function VocabularyWordPage({
         backHref={backHref}
         entry={entry}
         headerAfterActions={<VocabularyBbcExampleStrip examples={usageExamples} />}
-        sidePanel={!isMobileRequest ? videoSection : null}
       >
         <VocabularyDetailContent
           entry={entry}
           etymologyChinese={etymology?.chinese}
           etymologyEnglish={etymology?.english}
           formationParts={formationParts}
-          inlineVideo={videoSection}
-          mobileLayout={isMobileRequest}
+          inlineVideo={!isPhoneRequest ? videoSection : null}
           phrases={phrases}
           usageExamples={usageExamples}
         />

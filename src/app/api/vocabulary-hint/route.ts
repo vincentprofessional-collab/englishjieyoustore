@@ -5,6 +5,7 @@ import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { getVocabularyUsageExamples, prioritizeVocabularyUsageExamples } from "@/lib/vocabulary/examples";
 import { getVocabularyPhraseMatches } from "@/lib/vocabulary/phrases";
 import { getExtendedVocabularyEntry, getVocabularyEntry, getVocabularyFormationParts } from "@/lib/vocabulary/local-vocabulary";
+import { getVocabularyLookupEtymology } from "@/lib/vocabulary/lookup-etymology";
 
 export const dynamic = "force-dynamic";
 
@@ -47,7 +48,13 @@ export async function GET(request: Request) {
     }));
 
     return NextResponse.json(
-      { entry, formationParts, phrases: getVocabularyPhraseMatches(entry.word), usageExamples },
+      {
+        entry,
+        etymology: getVocabularyLookupEtymology(entry.word),
+        formationParts,
+        phrases: getVocabularyPhraseMatches(entry.word),
+        usageExamples,
+      },
       { headers: { "Cache-Control": "no-store" } },
     );
   }

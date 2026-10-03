@@ -7,7 +7,7 @@ import { VocabularyLookupDisplaySection } from "@/components/vocabulary-lookup-d
 import { VocabularyVideoPlayer } from "@/components/vocabulary-video-player";
 import { getExtendedVocabularyEntry, getVocabularyEntry, getVocabularyFormationParts } from "@/lib/vocabulary/local-vocabulary";
 import { getVocabularyLookupEtymology } from "@/lib/vocabulary/lookup-etymology";
-import { VOCABULARY_LOOKUP_VIDEO_COOKIE } from "@/lib/vocabulary/lookup-display-preferences";
+import { DEFAULT_VOCABULARY_LOOKUP_DISPLAY_PREFERENCES, isPhoneUserAgent, VOCABULARY_LOOKUP_VIDEO_COOKIE } from "@/lib/vocabulary/lookup-display-preferences";
 import { getVocabularyPhraseMatches } from "@/lib/vocabulary/phrases";
 import { getVocabularyVideoCandidates } from "@/lib/vocabulary/videos";
 
@@ -18,10 +18,12 @@ async function MobileSurpriseWordPreview() {
   if (!entry) return null;
 
   const [requestHeaders, cookieStore] = await Promise.all([headers(), cookies()]);
-  const isMobileRequest = /android|iphone|ipad|ipod|mobile/i.test(requestHeaders.get("user-agent") ?? "");
-  const videoVisible = cookieStore.get(VOCABULARY_LOOKUP_VIDEO_COOKIE)?.value === "1";
+  const isPhoneRequest = isPhoneUserAgent(requestHeaders.get("user-agent") ?? "");
+  const etymology = getVocabularyLookupEtymology(entry.word);
+  const videoPreference = cookieStore.get(VOCABULARY_LOOKUP_VIDEO_COOKIE)?.value;
+  const videoVisible = videoPreference === undefined ? DEFAULT_VOCABULARY_LOOKUP_DISPLAY_PREFERENCES.video : videoPreference === "1";
   const candidates = getVocabularyVideoCandidates(entry);
-  const videos = videoVisible
+  const videos = videoVisible && !isPhoneRequest
     ? candidates.map((item) => ({ ...item, likedByMe: false, likes: 0 }))
     : [];
   const formationParts = getVocabularyFormationParts(entry);
@@ -30,7 +32,6 @@ async function MobileSurpriseWordPreview() {
       {videos.length ? <VocabularyVideoPlayer entryWord={entry.normalizedWord} totalVideos={videos.length} videos={videos} votesEnabled={false} /> : null}
     </VocabularyLookupDisplaySection>
   ) : null;
-  const etymology = isMobileRequest ? getVocabularyLookupEtymology(entry.word) : null;
 
   return (
     <section className="mobile-word-preview">
@@ -41,12 +42,10 @@ async function MobileSurpriseWordPreview() {
           etymologyChinese={etymology?.chinese}
           etymologyEnglish={etymology?.english}
           formationParts={formationParts}
-          inlineVideo={isMobileRequest ? videoPlayer : undefined}
-          mobileLayout={isMobileRequest}
+          inlineVideo={!isPhoneRequest ? videoPlayer : null}
           phrases={getVocabularyPhraseMatches(entry.word)}
           usageExamples={[]}
         />
-        {!isMobileRequest ? videoPlayer : null}
       </VocabularyDetailShell>
     </section>
   );

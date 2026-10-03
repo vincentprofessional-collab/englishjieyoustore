@@ -6,7 +6,7 @@ export const VOCABULARY_LOOKUP_SECTIONS = [
   { key: "chineseDefinition", label: "中文释义", defaultVisible: true },
   { key: "englishDefinition", label: "英文释义", defaultVisible: true },
   { key: "inflections", label: "词性变化", defaultVisible: true },
-  { key: "video", label: "视频", defaultVisible: false },
+  { key: "video", label: "视频", defaultVisible: true },
   { key: "examples", label: "例句", defaultVisible: true },
   { key: "rootTree", label: "词根树", defaultVisible: true },
   { key: "etymology", label: "词源", defaultVisible: true },
@@ -18,6 +18,12 @@ export type VocabularyLookupDisplayPreferences = Record<VocabularyLookupSectionK
 export const DEFAULT_VOCABULARY_LOOKUP_DISPLAY_PREFERENCES = Object.fromEntries(
   VOCABULARY_LOOKUP_SECTIONS.map(({ key, defaultVisible }) => [key, defaultVisible]),
 ) as VocabularyLookupDisplayPreferences;
+
+export function isPhoneUserAgent(userAgent: string) {
+  const normalized = userAgent.toLowerCase();
+  if (/ipad|tablet|macintosh.*mobile/.test(normalized)) return false;
+  return /iphone|ipod|android.*mobile|windows phone|\bmobile\b/.test(normalized);
+}
 
 export function getVocabularyLookupDisplayPreferences(): VocabularyLookupDisplayPreferences {
   if (typeof window === "undefined") return DEFAULT_VOCABULARY_LOOKUP_DISPLAY_PREFERENCES;

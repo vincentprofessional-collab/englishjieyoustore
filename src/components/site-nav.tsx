@@ -18,6 +18,10 @@ type SiteNavStyle = CSSProperties & {
 };
 
 function firstEnabledHref(item: SiteChromeNavItem): string {
+  if (item.id === "me") {
+    return "/me";
+  }
+
   if (item.href) {
     return item.href;
   }
@@ -74,7 +78,7 @@ export function SiteNav({ config: initialConfig }: { config: SiteChromeConfig })
         ...current.nav,
         items: current.nav.items.map((item) => item.id === "me" ? {
           ...item,
-          children: item.children.map((child) => child.id === "learning-records" ? { ...child, href: "/me/progress", label: "学习进度" } : child),
+          children: item.children.map((child) => child.id === "learning-records" ? { ...child, href: "/me/progress", label: "学习进度" } : child.id === "settings" ? { ...child, label: "设置" } : child),
         } : item),
       },
     }));

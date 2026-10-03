@@ -26,6 +26,7 @@ import {
   useArticlePronunciations,
 } from "@/components/audio-player";
 import { BbcSentencePractice, useBbcAnswerShortcut } from "@/components/bbc-sentence-practice";
+import { ArticleRetellingPractice, buildRetellingTermGroups } from "@/components/article-retelling-practice";
 import { ContentShareButton } from "@/components/content-share-button";
 import { shouldShowAudioPronunciation } from "@/lib/audio-pronunciation";
 import {
@@ -186,6 +187,13 @@ const LISTENING_REVIEW_DEFAULT_LEFT_PERCENT = 40;
 const LISTENING_REVIEW_MIN_LEFT_PX = 320;
 const LISTENING_REVIEW_MIN_RIGHT_PX = 360;
 const LISTENING_REVIEW_HANDLE_PX = 14;
+const RETELLING_LISTENING_EXPRESSIONS = [
+  "according to", "as a result", "be able to", "carry out", "come across", "deal with",
+  "depend on", "find out", "focus on", "get along with", "give up", "go through",
+  "in addition", "in advance", "in charge of", "in terms of", "look after", "look forward to",
+  "make up", "pay attention to", "pick up", "point out", "put off", "run out of",
+  "set up", "take part in", "take place", "turn out", "work out",
+];
 const SPEAKING_MODE_LABELS: Record<ActiveSpeakingMode, string> = {
   imitation: "模仿朗读",
   shadowing: "影子练习",
@@ -2876,6 +2884,8 @@ export function ListeningPractice({
     useState<ListeningOriginalDisplayMode>("bilingual");
   const [isTranscriptVisible, setIsTranscriptVisible] = useState(true);
   const [isVocabularyVisible, setIsVocabularyVisible] = useState(true);
+  const [isRetellingPractice, setIsRetellingPractice] = useState(false);
+  const retellingVocabularyVisibilityRef = useRef(true);
   const dictionaryPronunciations = useArticlePronunciations(
     section.transcriptSentences.map((sentence) => sentence.englishText).join(" "),
     audioSettings.pronunciationMode,
@@ -2939,6 +2949,26 @@ export function ListeningPractice({
   const [checkSecondsLeft, setCheckSecondsLeft] = useState<number | null>(null);
   const pageRef = useRef<HTMLElement | null>(null);
   const highlightStorageKey = inlineHighlightKey(`listening:${section.bookCode}:${section.testNo}:${section.sectionNo}`);
+  const transcriptEnglish = section.transcriptSentences.map((sentence) => sentence.englishText).join(" ");
+  const transcriptWords = [...new Set(
+    section.transcriptSentences.flatMap((sentence) => splitEnglishTokens(sentence.englishText)
+      .filter(isWordToken)
+      .map(normalizeWord)
+      .filter((word) => word.length >= 5)),
+  )];
+  const dictionaryRetellingWords = transcriptWords.filter((word) => {
+    const hint = vocabularyHints[word] ?? VOCABULARY_HINTS[word];
+    return Boolean(hint) && getVocabularyLevelScore(hint?.level) <= 8;
+  });
+  const retellingWords = (dictionaryRetellingWords.length > 0
+    ? dictionaryRetellingWords
+    : transcriptWords.filter((word) => word.length >= 7)).slice(0, 80);
+  const retellingExpressions = RETELLING_LISTENING_EXPRESSIONS.filter((expression) =>
+    new RegExp(`(^|[^a-z])${expression}(?=$|[^a-z])`, "i").test(transcriptEnglish),
+  );
+  const retellingTermGroups = buildRetellingTermGroups(retellingWords, retellingExpressions);
+  const sectionEnglishTitle = section.title.replace(/[\u3400-\u9fff]/g, " ").replace(/\s+/g, " ").trim();
+  const retellingTitle = sectionEnglishTitle || formatListeningSectionTitle(section);
 
   useEffect(() => {
     if (pageRef.current) restoreInlineHighlights(pageRef.current, highlightStorageKey);
@@ -3040,6 +3070,7 @@ export function ListeningPractice({
   }
 
   function selectReviewStudyMode(nextMode: ListeningStudyMode) {
+    if (nextMode !== "speaking") setIsRetellingPractice(false);
     setReviewStudyMode(nextMode);
     if (nextMode === "general" || nextMode === "intensive") {
       const isLeavingPractice =
@@ -3051,6 +3082,21 @@ export function ListeningPractice({
         ...(isLeavingPractice ? { subtitleMode: "bilingual" as const } : {}),
       });
     }
+  }
+
+  function enterRetellingPractice() {
+    retellingVocabularyVisibilityRef.current = isVocabularyVisible;
+    setIsVocabularyVisible(false);
+    setActiveWordTooltip(null);
+    setSelectedText("");
+    setSelectionActionPosition(null);
+    setMobileReviewPane("transcript");
+    setIsRetellingPractice(true);
+  }
+
+  function exitRetellingPractice() {
+    setIsRetellingPractice(false);
+    setIsVocabularyVisible(retellingVocabularyVisibilityRef.current);
   }
 
   function clearSpeakingPracticeTimers(resetState = true) {
@@ -4691,7 +4737,7 @@ export function ListeningPractice({
 
   return (
     <section
-      className={`stack listening-exam-page ${mode} ${submitted ? "submitted" : "answering"} ${
+      className={`stack listening-exam-page ${mode} ${submitted ? "submitted" : "answering"} ${isRetellingPractice ? "article-retelling-active" : ""} ${
         isFullscreen ? "fullscreen" : ""
       }`}
       data-local-selection-actions="true"
@@ -4794,7 +4840,7 @@ export function ListeningPractice({
       </div>
 
       <div
-        className={`exam-workspace ${mode} ${submitted ? "submitted review" : "answering"} ${
+        className={`exam-workspace ${mode} ${submitted ? "submitted review" : "answering"} ${isRetellingPractice ? "retelling-active" : ""} ${
           isReviewSplitDragging ? "resizing" : ""
         } ${
           isNotesOpen ? "notes-open" : ""
@@ -4827,7 +4873,7 @@ export function ListeningPractice({
             <button type="button" onClick={() => addAnnotation("highlight")}>Highlight</button>
           </div>
         ) : null}
-        {submitted ? (
+        {submitted && !isRetellingPractice ? (
           <div className="listening-review-mobile-switch" role="tablist" aria-label="复盘内容">
             <button
               aria-selected={mobileReviewPane === "transcript"}
@@ -4913,6 +4959,11 @@ export function ListeningPractice({
                   settings={audioSettings}
                   variant="speaking-writing"
                 />
+                {reviewStudyMode === "speaking" && !isRetellingPractice ? (
+                  <button className="bbc-fullscreen-toggle article-retelling-mode-button" onClick={enterRetellingPractice} type="button">
+                    复述练习
+                  </button>
+                ) : null}
               </div>
               <div className="bbc-audio-toolbar-utilities">
                 <button
@@ -4965,16 +5016,24 @@ export function ListeningPractice({
         ) : null}
         {submitted ? (
           <aside
-            className={`practice-audio-study-panel ${
+            className={`practice-audio-study-panel ${isRetellingPractice ? "article-retelling-listening-panel" : ""} ${
               mobileReviewPane === "transcript" ? "mobile-pane-active" : "mobile-pane-hidden"
             }`}
           >
             <section
-              className="practice-listening-card"
+              className={`practice-listening-card ${isRetellingPractice ? "article-retelling-parent" : ""}`}
               onPointerUp={handleQuestionSelection}
               onWheel={handleSubtitlePanelWheel}
             >
-              {section.transcriptSentences.length === 0 ? (
+              {isRetellingPractice ? (
+                <ArticleRetellingPractice
+                  groups={retellingTermGroups}
+                  onExit={exitRetellingPractice}
+                  sourceId={section.id}
+                  sourceType="ielts-listening"
+                  title={retellingTitle}
+                />
+              ) : section.transcriptSentences.length === 0 ? (
                 <p className="muted">还没有逐句原文。导入 transcript_sentences 后会显示中英字幕。</p>
               ) : isTranscriptVisible ? (
                 <div
@@ -5050,7 +5109,7 @@ export function ListeningPractice({
           </aside>
         ) : null}
 
-        {submitted ? (
+        {submitted && !isRetellingPractice ? (
           <button
             aria-label="拖动调整原文和题目宽度"
             aria-orientation="vertical"
@@ -5069,7 +5128,7 @@ export function ListeningPractice({
 
         <div
           className={`practice-main exam-question-surface ${
-            submitted && mobileReviewPane !== "questions" ? "mobile-pane-hidden" : "mobile-pane-active"
+            isRetellingPractice ? "retelling-question-hidden" : submitted && mobileReviewPane !== "questions" ? "mobile-pane-hidden" : "mobile-pane-active"
           }`}
           ref={questionSurfaceRef}
           onPointerUp={handleQuestionSelection}

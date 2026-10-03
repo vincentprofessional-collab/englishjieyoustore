@@ -29,13 +29,52 @@ export function VocabularyAutoplaySettings({ variant = "panel" }: VocabularyAuto
     setVocabularyAutoplayAccent(selectedAccent === accent ? null : accent);
   }
 
+  if (variant === "panel") {
+    const rows: Array<{ label: string; accent?: VocabularyAccent }> = [
+      { label: "自动发音" },
+      { label: "英音", accent: "uk" },
+      { label: "美音", accent: "us" },
+    ];
+
+    return (
+      <section className="vocabulary-autoplay-settings panel" aria-label="自动发音设置">
+        <header className="vocabulary-lookup-settings-heading">
+          <div>
+            <span>背单词</span>
+            <h2>发音设置</h2>
+          </div>
+          <p>进入词汇详情页时自动播放</p>
+        </header>
+        <div className="vocabulary-autoplay-settings-list">
+          {rows.map(({ accent, label }) => {
+            const enabled = accent ? selectedAccent === accent : selectedAccent !== null;
+            return (
+              <div className="vocabulary-lookup-settings-row" key={label}>
+                <strong>{label}</strong>
+                <button
+                  aria-checked={enabled}
+                  aria-label={`${label}${enabled ? "开启" : "关闭"}`}
+                  className={`vocabulary-lookup-switch ${enabled ? "is-on" : ""}`}
+                  onClick={() => accent
+                    ? toggleAccent(accent)
+                    : setVocabularyAutoplayAccent(selectedAccent ? null : "uk")}
+                  role="switch"
+                  type="button"
+                >
+                  <span />
+                </button>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className={`vocabulary-autoplay-settings ${variant}`} aria-label="自动发音设置">
       <div>
         <strong>自动发音</strong>
-        {variant === "panel" ? (
-          <span>{selectedAccent ? `已选择${selectedAccent === "uk" ? "英音" : "美音"}` : "进入词汇详情页时自动播放"}</span>
-        ) : null}
       </div>
       <div className="vocabulary-autoplay-toggle" role="group" aria-label="选择自动发音口音">
         {accentLabels.map((item) => (
