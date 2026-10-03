@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 import { getBbcVocabularyDetail } from "@/lib/articles/bbc-vocabulary";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
-import { getVocabularyUsageExamples } from "@/lib/vocabulary/examples";
+import { getVocabularyUsageExamples, prioritizeVocabularyUsageExamples } from "@/lib/vocabulary/examples";
 import { getVocabularyPhraseMatches } from "@/lib/vocabulary/phrases";
 import { getExtendedVocabularyEntry, getVocabularyEntry, getVocabularyFormationParts } from "@/lib/vocabulary/local-vocabulary";
 
@@ -21,12 +21,13 @@ export async function GET(request: Request) {
   if (isDetailed) {
     const bbcVocabularyDetail = getBbcVocabularyDetail(word);
     const entry = /\s/.test(word) && bbcVocabularyDetail ? bbcVocabularyDetail.entry : hint;
-    const fetchedUsageExamples = bbcVocabularyDetail?.examples.length
-      ? bbcVocabularyDetail.examples.slice(0, 5)
-      : await Promise.race([
-          getVocabularyUsageExamples(entry.word, 5, entry.inflections.map((inflection) => inflection.value)),
-          new Promise<Awaited<ReturnType<typeof getVocabularyUsageExamples>>>((resolve) => setTimeout(() => resolve([]), 1500)),
-        ]);
+    const fetchedUsageExamples = prioritizeVocabularyUsageExamples(
+      await Promise.race([
+        getVocabularyUsageExamples(entry.word, 5, entry.inflections.map((inflection) => inflection.value)),
+        new Promise<Awaited<ReturnType<typeof getVocabularyUsageExamples>>>((resolve) => setTimeout(() => resolve([]), 1500)),
+      ]),
+      bbcVocabularyDetail?.examples ?? [],
+    ).slice(0, 5);
     let canAccessBbcExamples = false;
     try {
       const supabase = await createServerSupabaseClient();

@@ -30,7 +30,7 @@ function copyContent(content: ManagedPageContent): ManagedPageContent {
 function createModule(): ManagedPageItem {
   return {
     actionLabel: "进入模块",
-    actionLabelColor: "#0f6b4f",
+    actionLabelColor: "#245d7b",
     actionLabelFontSize: 15,
     boxed: false,
     description: "",
@@ -274,7 +274,7 @@ export function AdminHomeEditor({ adminUserId }: { adminUserId: string }) {
             />
           </label>
           <TextStyleFields
-            color={draft.eyebrowColor ?? "#0f6b4f"}
+            color={draft.eyebrowColor ?? "#245d7b"}
             fontSize={draft.eyebrowFontSize ?? 13}
             label="顶部小标题"
             onColorChange={(value) => updateDraft("eyebrowColor", value)}
@@ -456,7 +456,7 @@ export function AdminHomeEditor({ adminUserId }: { adminUserId: string }) {
                   />
                 </label>
                 <TextStyleFields
-                  color={item.actionLabelColor ?? "#0f6b4f"}
+                  color={item.actionLabelColor ?? "#245d7b"}
                   fontSize={item.actionLabelFontSize ?? 15}
                   label="入口文字"
                   onColorChange={(value) =>

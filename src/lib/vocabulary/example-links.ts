@@ -1,6 +1,10 @@
 import type { VocabularyUsageExample } from "./examples";
 
 export function getVocabularyExampleHref(example: VocabularyUsageExample) {
+  if (example.sourceType === "new-concept") {
+    return `/new-concept/${encodeURIComponent(example.sourceId)}#new-concept-sentence-${example.sentenceNo}`;
+  }
+
   if (example.sourceType === "article") {
     return `/articles/${encodeURIComponent(example.sourceId)}#bbc-sentence-${example.sentenceNo}`;
   }

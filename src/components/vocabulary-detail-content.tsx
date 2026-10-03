@@ -170,7 +170,7 @@ function UsageExamplesSection({ entry, examples }: { entry: LocalVocabularyEntry
         <div className="vocabulary-usage-example-list">
           {examples.map((example, index) => (
             <article className="vocabulary-usage-example-card" data-book-code={example.bookCode} id={`vocabulary-example-${index + 1}`} key={example.id}>
-              {example.sourceType === "article" ? (
+              {example.sourceType === "article" || example.sourceType === "new-concept" ? (
                 <VocabularyExampleArticleLink example={example}>
                   <div className="vocabulary-usage-example-main"><p>{example.englishText}</p>{example.chineseText ? <span>{example.chineseText}</span> : null}<small>{example.sourceTitle}</small></div>
                 </VocabularyExampleArticleLink>

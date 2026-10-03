@@ -1,4 +1,7 @@
 import { BBC_ARTICLES } from "@/lib/articles/bbc";
+import { NEW_CONCEPT_LESSONS } from "@/lib/new-concept";
+import { alignNewConceptParagraph } from "@/lib/new-concept-bilingual";
+import { getNewConceptMediaUrls } from "@/lib/new-concept-media";
 import { supabase } from "@/lib/supabase/client";
 import { getPublicStorageUrl } from "@/lib/supabase/storage";
 import { normalizeLookupWord } from "@/lib/vocabulary/local-vocabulary";
@@ -12,7 +15,7 @@ export type VocabularyUsageExample = {
   sentenceNo: number;
   sourceId: string;
   sourceTitle: string;
-  sourceType: "listening" | "reading" | "article" | "manual";
+  sourceType: "new-concept" | "listening" | "reading" | "article" | "manual";
   testNo: number;
 };
 
@@ -153,6 +156,72 @@ function getBbcUsageExamples(wordForms: Set<string>, limit: number) {
   return examples;
 }
 
+function getNewConceptUsageExamples(wordForms: Set<string>, limit: number) {
+  const examples: VocabularyUsageExample[] = [];
+  const seenSentences = new Set<string>();
+
+  for (const lesson of NEW_CONCEPT_LESSONS) {
+    if (examples.length >= limit || lesson.kind !== "dialogue" || !lesson.audioPath) continue;
+
+    const matchingIndexes = lesson.english.flatMap((line, index) =>
+      matchesUsageExampleWord(line, wordForms) ? [index] : [],
+    );
+    if (!matchingIndexes.length) continue;
+
+    const { sentenceAudioUrls } = getNewConceptMediaUrls(lesson);
+    const chineseLines = lesson.bookCode === "new-concept-2"
+      ? alignNewConceptParagraph(
+          lesson.english,
+          lesson.fullChineseTranslation ?? lesson.chinese[0] ?? "",
+          lesson.lessonNo,
+        )
+      : lesson.chinese;
+
+    for (const sentenceIndex of matchingIndexes) {
+      const englishText = lesson.english[sentenceIndex]?.trim() ?? "";
+      const normalizedText = englishText.toLowerCase().replace(/\s+/g, " ");
+      const audioUrl = sentenceAudioUrls[sentenceIndex] ?? null;
+      if (!englishText || !audioUrl || seenSentences.has(normalizedText)) continue;
+
+      seenSentences.add(normalizedText);
+      examples.push({
+        audioUrl,
+        bookCode: lesson.bookCode === "new-concept-2" ? "NEW_CONCEPT_2" : "NEW_CONCEPT_1",
+        chineseText: chineseLines[sentenceIndex] ?? "",
+        englishText,
+        id: `new-concept:${lesson.id}:sentence:${sentenceIndex + 1}`,
+        sentenceNo: sentenceIndex + 1,
+        sourceId: lesson.id,
+        sourceTitle: `新概念英语${lesson.bookCode === "new-concept-2" ? "第二册" : "第一册"} · Lesson ${lesson.lessonNo}${lesson.title ? ` ${lesson.title}` : ""}`,
+        sourceType: "new-concept",
+        testNo: 0,
+      });
+
+      if (examples.length >= limit) break;
+    }
+  }
+
+  return examples;
+}
+
+export function prioritizeVocabularyUsageExamples(...groups: VocabularyUsageExample[][]) {
+  const examples: VocabularyUsageExample[] = [];
+  const seen = new Set<string>();
+
+  for (const group of groups) {
+    for (const example of group) {
+      if (example.bookCode === "BBC" && !example.audioUrl) continue;
+      const normalizedText = example.englishText.toLowerCase().replace(/\s+/g, " ").trim();
+      const key = normalizedText || example.id;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      examples.push(example);
+    }
+  }
+
+  return examples;
+}
+
 export async function getVocabularyUsageExamples(
   word: string,
   limit = 5,
@@ -166,12 +235,10 @@ export async function getVocabularyUsageExamples(
     return [];
   }
 
-  const bbcExamples = getBbcUsageExamples(wordForms, maximumExamples);
-  const listeningLimit = maximumExamples - bbcExamples.length;
+  const newConceptExamples = getNewConceptUsageExamples(wordForms, maximumExamples);
+  const listeningLimit = maximumExamples - newConceptExamples.length;
 
-  if (listeningLimit === 0) {
-    return bbcExamples;
-  }
+  if (listeningLimit === 0) return newConceptExamples;
 
   const { data: transcriptRows, error: transcriptError } = await supabase
     .from("transcript_sentences")
@@ -186,15 +253,21 @@ export async function getVocabularyUsageExamples(
     .limit(listeningLimit * 6);
 
   if (transcriptError || !transcriptRows?.length) {
-    return bbcExamples;
+    return prioritizeVocabularyUsageExamples(
+      newConceptExamples,
+      getBbcUsageExamples(wordForms, listeningLimit),
+    ).slice(0, maximumExamples);
   }
 
   const sentences = (transcriptRows as TranscriptSentenceRow[])
-    .filter((sentence) => matchesUsageExampleWord(sentence.english_text, wordForms))
+    .filter((sentence) => sentence.audio_path && matchesUsageExampleWord(sentence.english_text, wordForms))
     .slice(0, listeningLimit);
 
   if (sentences.length === 0) {
-    return bbcExamples;
+    return prioritizeVocabularyUsageExamples(
+      newConceptExamples,
+      getBbcUsageExamples(wordForms, listeningLimit),
+    ).slice(0, maximumExamples);
   }
 
   const sectionIds = [...new Set(sentences.map((sentence) => sentence.section_id).filter(Boolean))];
@@ -244,5 +317,9 @@ export async function getVocabularyUsageExamples(
     };
   });
 
-  return [...bbcExamples, ...listeningExamples].slice(0, maximumExamples);
+  const prioritizedExamples = prioritizeVocabularyUsageExamples(newConceptExamples, listeningExamples);
+  return prioritizeVocabularyUsageExamples(
+    prioritizedExamples,
+    getBbcUsageExamples(wordForms, maximumExamples - prioritizedExamples.length),
+  ).slice(0, maximumExamples);
 }

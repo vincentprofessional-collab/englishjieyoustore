@@ -210,7 +210,7 @@ async function createDailySummaryImage(summary: ReturnType<typeof summarizeDaily
   context.stroke();
 
   const date = new Date(`${summary.date}T12:00:00`).toLocaleDateString("zh-CN", { year: "numeric", month: "long", day: "numeric" });
-  context.fillStyle = "#0b604c";
+  context.fillStyle = "#367aa0";
   context.font = '700 30px "Songti SC", "Noto Serif SC", serif';
   context.fillText("每日词汇记录", 86, 112);
   context.fillStyle = "#777064";
@@ -245,7 +245,7 @@ async function createDailySummaryImage(summary: ReturnType<typeof summarizeDaily
   context.font = '700 30px "Songti SC", "Noto Serif SC", serif';
   context.fillText("今日背词统计", 86, 642);
   const wordBars = [
-    ["今日学习", summary.studiedWords, "#0b604c"],
+    ["今日学习", summary.studiedWords, "#367aa0"],
     ["新学词汇", summary.newWords, "#4c91bd"],
     ["复习词汇", summary.reviewedWords, "#c8952e"],
   ] as const;
@@ -281,7 +281,7 @@ async function createDailySummaryImage(summary: ReturnType<typeof summarizeDaily
   context.beginPath();
   context.roundRect(86, 886, 908, 18, 9);
   context.fill();
-  context.fillStyle = "#0b604c";
+  context.fillStyle = "#367aa0";
   context.beginPath();
   context.roundRect(86, 886, 908 * completion, 18, 9);
   context.fill();
@@ -298,7 +298,7 @@ async function createDailySummaryImage(summary: ReturnType<typeof summarizeDaily
   context.fillText(modes.map(([key, label]) => `${label} ${summary.modes[key]}`).join("　 ·　 "), 86, 1062);
   context.fillText(`熟悉 ${summary.familiar}　·　模糊 ${summary.vague}　·　生僻 ${summary.unfamiliar}`, 86, 1110);
 
-  context.fillStyle = "#0b604c";
+  context.fillStyle = "#367aa0";
   context.font = '700 34px "Songti SC", "Noto Serif SC", serif';
   const lines: string[] = [];
   let line = "";
@@ -585,7 +585,7 @@ function VocabularyWordListPanel({
         <table>
           <colgroup><col className="pdf-word" /><col className="pdf-phonetic" /><col className="pdf-definition" />{Array.from({ length: 5 }, (_, index) => <col className="pdf-answer" key={index} />)}</colgroup>
           <thead><tr><th>英文</th><th>{voice === "us" ? "美音音标" : "英音音标"}</th><th>简明中文释义</th>{Array.from({ length: 5 }, (_, index) => <th key={index}>练习</th>)}</tr></thead>
-          <tbody>{displayedWords.map((word) => <tr key={`pdf-${word.id}`}><td>{word.word}</td><td>{voice === "us" ? word.usPhonetic || word.phonetic : word.ukPhonetic || word.phonetic}</td><td>{briefLearningDefinition(word)}</td>{Array.from({ length: 5 }, (_, index) => <td className="pdf-answer-cell" key={index}>（　　　）</td>)}</tr>)}</tbody>
+          <tbody>{displayedWords.map((word) => <tr key={`pdf-${word.id}`}><td>{word.word}</td><td>{voice === "us" ? word.usPhonetic || word.phonetic : word.ukPhonetic || word.phonetic}</td><td>{briefLearningDefinition(word)}</td>{Array.from({ length: 5 }, (_, index) => <td className="pdf-answer-cell" key={index}>　　　</td>)}</tr>)}</tbody>
         </table>
       </div>
     </aside>
@@ -859,6 +859,7 @@ function SpellingColoredAnswer({ answer, feedbackVisible, target }: { answer: st
 
 function SpellingTitleInput({
   answer,
+  autoFocus,
   disabled,
   feedbackVisible,
   focusOnReady,
@@ -869,6 +870,7 @@ function SpellingTitleInput({
   target,
 }: {
   answer: string;
+  autoFocus: boolean;
   disabled: boolean;
   feedbackVisible: boolean;
   focusOnReady?: boolean;
@@ -895,7 +897,7 @@ function SpellingTitleInput({
           <span aria-hidden="true" className="vocabulary-learning-spelling-width-sizer">{feedbackVisible ? (answer.length > target.length ? answer : target) : answer || "\u00a0"}</span>
           <input
             autoComplete="off"
-            autoFocus={onEnter === undefined}
+            autoFocus={autoFocus}
             disabled={disabled}
             onChange={onChange}
             onKeyDown={onEnter ? (event) => {
@@ -915,7 +917,12 @@ function SpellingTitleInput({
           onClick={onSubmit}
           type="button"
         >提交</button>
-        {history ? <span className="vocabulary-learning-spelling-inline-history">{history}</span> : null}
+        {history ? (
+          <span className="vocabulary-learning-spelling-inline-history">
+            <span className="vocabulary-learning-spelling-submit-hint">敲击回车 完成提交</span>
+            <span>{history}</span>
+          </span>
+        ) : null}
       </div>
     </div>
   );
@@ -2154,7 +2161,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
       const editable = target instanceof HTMLElement && (target.isContentEditable || ["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName));
       const key = event.key.toLowerCase();
       const letterShortcut = key === "j" || key === "k" || key === "l";
-      if (editable && (modeIndex !== 3 || letterShortcut)) return;
+      if (editable && (modeIndex !== 3 || (letterShortcut && !spellingAnswerShown))) return;
       if (event.key === "ArrowLeft" || event.key === "ArrowDown" || event.key === "ArrowRight" || letterShortcut) {
         event.preventDefault();
         const requestedOutcome = event.key === "ArrowLeft" || key === "j"
@@ -2178,7 +2185,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
 
     document.addEventListener("keydown", handleClassificationKeyboard);
     return () => document.removeEventListener("keydown", handleClassificationKeyboard);
-  }, [advancePending, browseMode, currentWord, handleRecognitionOutcome, loading, modeIndex, pageVisible, revealSpellingAnswer, spellingCorrect, studyReady, submitSpelling]);
+  }, [advancePending, browseMode, currentWord, handleRecognitionOutcome, loading, modeIndex, pageVisible, revealSpellingAnswer, spellingAnswerShown, spellingCorrect, studyReady, submitSpelling]);
 
   const finishRecording = useCallback(() => {
     if (recordingFinishedRef.current || oralOutcomeLockedRef.current) return;
@@ -2652,13 +2659,14 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
                     {learningCategoryBar}
                     <SpellingTitleInput
                       answer={answer}
-                      disabled={phase === "recording" || currentRoundRevealed || advancePending}
+                      autoFocus={!browseMode}
+                      disabled={phase === "recording" || currentRoundRevealed || spellingAnswerShown || advancePending}
                       feedbackVisible={spellingAnswerShown}
                       focusOnReady={browseMode && studyReady && pageVisible}
                       history={browseMode ? "" : `曾经错过 ${currentProgress.spellingErrorCount} 次 · 连续正确 ${currentProgress.spellingCorrectStreak}/3`}
                       key={`${currentWord.id}:${roundNonce}`}
                       onChange={updateSpelling}
-                      onEnter={browseMode ? () => revealBrowseSpelling() : undefined}
+                      onEnter={browseMode ? () => revealBrowseSpelling() : revealSpellingAnswer}
                       onSubmit={browseMode ? () => revealBrowseSpelling() : revealSpellingAnswer}
                       target={currentWord.word}
                     />

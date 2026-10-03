@@ -15,12 +15,12 @@
   margin-bottom: 16px;
 }
 
-.headingRow h2 { margin: 0; color: #174f40; font-size: clamp(20px, 1.7vw, 25px); }
+.headingRow h2 { margin: 0; color: #245d7b; font-size: clamp(20px, 1.7vw, 25px); }
 .headingRow span, .formFooter span { color: #66736a; font-size: 14px; }
 .form { display: grid; gap: 12px; }
 .honeypot { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-.nameField, .bodyField { display: grid; gap: 6px; color: #174f40; font-weight: 700; }
-.identityPreview { display: flex; align-items: center; gap: 10px; min-height: 42px; color: #174f40; }
+.nameField, .bodyField { display: grid; gap: 6px; color: #245d7b; font-weight: 700; }
+.identityPreview { display: flex; align-items: center; gap: 10px; min-height: 42px; color: #245d7b; }
 .previewAvatar { display: inline-flex; align-items: center; flex: 0 0 auto; }
 .previewAvatar .avatar { width: 38px; height: 38px; flex-basis: 38px; }
 .previewAvatar .avatarFallback { min-width: 38px; height: 38px; }
@@ -28,7 +28,7 @@
 .nameField input, .bodyField textarea, .replyForm textarea { box-sizing: border-box; width: 100%; border: 1px solid #d8d0c2; border-radius: 10px; padding: 10px 12px; background: #fff; color: #171d19; font: inherit; }
 .bodyField textarea { min-height: 96px; resize: vertical; line-height: 1.6; }
 .formFooter { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
-.formFooter button, .replyForm button[type="submit"] { border: 1px solid #174f40; border-radius: 999px; padding: 9px 20px; background: #174f40; color: #fff; font: inherit; font-weight: 700; cursor: pointer; }
+.formFooter button, .replyForm button[type="submit"] { border: 1px solid #a9d4ea; border-radius: 999px; padding: 9px 20px; background: #c0dbed; color: #245d7b; font: inherit; font-weight: 700; cursor: pointer; }
 .formFooter button:disabled, .replyForm button:disabled { opacity: .5; cursor: not-allowed; }
 .list { display: grid; gap: 10px; margin: 18px 0 0; padding: 0; list-style: none; }
 .comment { border-top: 1px solid #e5d8b9; padding: 12px 0 2px; }
@@ -59,7 +59,7 @@
   flex: 0 0 auto;
   box-sizing: border-box;
   padding: 0 4px;
-  background: #174f40;
+  background: #c0dbed;
   color: #fffaf0;
   border-radius: 999px;
   font-size: 14px;
@@ -67,7 +67,7 @@
   white-space: nowrap;
 }
 
-.avatarFallbackGuest { background: #174f40; color: #fffaf0; }
+.avatarFallbackGuest { background: #c0dbed; color: #fffaf0; }
 .avatarFallbackActive { background: #f4d579; color: #76551a; }
 .avatarFallbackExpired { background: #e6e8e6; color: #929993; }
 
@@ -85,11 +85,11 @@
 .memberBadgeActive { border-color: #d6be82; background: #fff3ce; color: #76551a; }
 .memberBadgeExpired { border-color: #d7dbd8; background: #eff1ef; color: #929993; }
 
-.authorName { color: #174f40; }
+.authorName { color: #245d7b; }
 .commentHeader time { color: #778078; font-size: 13px; }
 .comment > p, .replyComment > p { margin: 8px 0 0; line-height: 1.7; overflow-wrap: anywhere; white-space: pre-wrap; }
 .commentActions { display: flex; align-items: center; gap: 14px; margin-top: 7px; }
-.commentActions button, .replyAction { border: 0; padding: 0; background: transparent; color: #28775d; font: inherit; font-size: 13px; cursor: pointer; }
+.commentActions button, .replyAction { border: 0; padding: 0; background: transparent; color: #245d7b; font: inherit; font-size: 13px; cursor: pointer; }
 .commentActions button:hover, .replyAction:hover { text-decoration: underline; }
 
 .replyForm {
@@ -105,7 +105,7 @@
 .replyForm > span { color: #66736a; font-size: 13px; }
 .replyForm textarea { min-height: 60px; resize: vertical; line-height: 1.5; }
 .replyForm > div { display: flex; justify-content: flex-end; gap: 8px; }
-.replyForm button { border: 1px solid #d8d0c2; border-radius: 999px; padding: 6px 12px; background: #fff; color: #174f40; font: inherit; cursor: pointer; }
+.replyForm button { border: 1px solid #d8d0c2; border-radius: 999px; padding: 6px 12px; background: #fff; color: #245d7b; font: inherit; cursor: pointer; }
 .replyForm button[type="submit"] { padding: 6px 14px; }
 
 .replyList {

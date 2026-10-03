@@ -16,7 +16,7 @@
 }
 
 .breadcrumb a {
-  color: #0f6b4f;
+  color: #245d7b;
   text-decoration: none;
 }
 
@@ -29,7 +29,7 @@
   background: #fffdf8;
   border: 1px solid rgba(228, 216, 189, 0.96);
   border-radius: 24px;
-  box-shadow: 0 16px 36px rgba(34, 54, 43, 0.08);
+  box-shadow: 0 16px 36px rgba(54, 122, 160, 0.08);
 }
 
 .hero {
@@ -41,7 +41,7 @@
 }
 
 .hero > span {
-  color: #0f6b4f;
+  color: #245d7b;
   display: block;
   font-size: 12px;
   font-weight: 900;
@@ -49,7 +49,7 @@
 }
 
 .hero h1 {
-  color: #1e3126;
+  color: #245d7b;
   font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(30px, 5vw, 52px);
   letter-spacing: -0.045em;
@@ -79,7 +79,7 @@
 }
 
 .hero dd {
-  color: #203529;
+  color: #245d7b;
   font-size: 14px;
   font-weight: 900;
   margin: 4px 0 0;
@@ -110,7 +110,7 @@
 }
 
 .questionPrompt strong {
-  color: #2b3a31;
+  color: #245d7b;
   font-size: 15px;
   line-height: 1.55;
 }
@@ -120,7 +120,7 @@
 }
 
 .section h2 {
-  color: #173f2f;
+  color: #245d7b;
   font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(23px, 3vw, 30px);
   letter-spacing: -0.035em;
@@ -143,9 +143,9 @@
 }
 
 .frames li {
-  background: #f3f6f0;
+  background: #eaf1f5;
   border-left: 3px solid #d0a64d;
-  color: #274837;
+  color: #245d7b;
   font-family: Georgia, "Times New Roman", serif;
   font-size: 16px;
   line-height: 1.55;
@@ -177,7 +177,7 @@
 }
 
 .vocabulary dt {
-  color: #174d39;
+  color: #245d7b;
   font-family: Georgia, "Times New Roman", serif;
   font-size: 17px;
   font-weight: 800;
@@ -201,8 +201,8 @@
 }
 
 .answerSection {
-  background: linear-gradient(145deg, #173f2f 0%, #245542 100%);
-  border-color: #173f2f;
+  background: linear-gradient(145deg, #c3dae9 0%, #c6dae7 100%);
+  border-color: #a9d4ea;
 }
 
 .answerSection h2 {
@@ -276,7 +276,7 @@
 }
 
 .scoreNotes strong {
-  color: #1e4d39;
+  color: #245d7b;
   display: block;
   font-size: 14px;
   margin-top: 5px;
@@ -290,10 +290,10 @@
 }
 
 .adminInlinePanel {
-  background: #f7fbf6;
-  border: 1px solid rgba(15, 107, 79, 0.2);
+  background: #eaf1f6;
+  border: 1px solid rgba(169, 212, 234, 0.2);
   border-radius: 22px;
-  box-shadow: 0 14px 30px rgba(15, 107, 79, 0.08);
+  box-shadow: 0 14px 30px rgba(54, 122, 160, 0.08);
   padding: clamp(18px, 3vw, 26px);
 }
 
@@ -313,7 +313,7 @@
 }
 
 .adminInlineHeader h2 {
-  color: #173f2f;
+  color: #245d7b;
   font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(22px, 3vw, 28px);
   letter-spacing: -0.035em;
@@ -342,14 +342,14 @@
 }
 
 .adminPrimaryButton {
-  background: #0f6b4f;
-  color: #fffdf8;
+  background: #b8dcf4;
+  color: #245d7b;
 }
 
 .adminSecondaryButton,
 .adminVocabularyHeader button {
   background: #f3ead1;
-  color: #173f2f;
+  color: #245d7b;
 }
 
 .adminVocabularyRow button {
@@ -378,8 +378,8 @@
 }
 
 .success {
-  background: #e7f5ed;
-  color: #0f6b4f;
+  background: #e9f1f6;
+  color: #245d7b;
 }
 
 .error {
@@ -406,7 +406,7 @@
 
 .adminField span,
 .adminAudioPreview span {
-  color: #274837;
+  color: #245d7b;
   font-size: 13px;
   font-weight: 900;
 }
@@ -417,7 +417,7 @@
   background: #fffdf8;
   border: 1px solid #d9cfb4;
   border-radius: 12px;
-  color: #203529;
+  color: #245d7b;
   font: inherit;
   font-size: 14px;
   line-height: 1.5;
@@ -450,7 +450,7 @@
 }
 
 .adminVocabularyHeader h3 {
-  color: #173f2f;
+  color: #245d7b;
   font-size: 16px;
   margin: 0;
 }

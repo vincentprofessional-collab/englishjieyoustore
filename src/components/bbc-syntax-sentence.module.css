@@ -2,7 +2,7 @@
   --syntax-row-space: 12px;
   --syntax-word-font-size: clamp(22px, 2.1vw, 30px);
   --syntax-component-font-size: 14px;
-  --subject: var(--bbc-syntax-role-subject, #1e5b3e);
+  --subject: var(--bbc-syntax-role-subject, #245d7b);
   --predicate: var(--bbc-syntax-role-predicate, #a32c1e);
   --object: var(--bbc-syntax-role-object, #1f5c8b);
   --predicative: var(--bbc-syntax-role-predicative, #6b3fa0);

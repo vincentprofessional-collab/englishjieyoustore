@@ -6,7 +6,8 @@ import { VocabularyDetailShell } from "@/components/vocabulary-detail-shell";
 import { getBbcVocabularyDetail } from "@/lib/articles/bbc-vocabulary";
 import { getExtendedVocabularyEntry, getVocabularyFormationParts } from "@/lib/vocabulary/local-vocabulary";
 import { getVocabularyPhraseMatches } from "@/lib/vocabulary/phrases";
-import { getVocabularyUsageExamples } from "@/lib/vocabulary/examples";
+import { getVocabularyUsageExamples, prioritizeVocabularyUsageExamples } from "@/lib/vocabulary/examples";
+import { createServerSupabaseClient } from "@/lib/supabase/server";
 
 export const dynamic = "force-dynamic";
 
@@ -19,13 +20,25 @@ export default async function VocabularyEtymologyLookupPage() {
     notFound();
   }
 
-  const usageExamples = bbcVocabularyDetail?.examples.length
-    ? bbcVocabularyDetail.examples.slice(0, 5)
-    : await getVocabularyUsageExamples(
-        entry.word,
-        5,
-        entry.inflections.map((inflection) => inflection.value),
-      );
+  const fetchedUsageExamples = prioritizeVocabularyUsageExamples(
+    await getVocabularyUsageExamples(
+      entry.word,
+      5,
+      entry.inflections.map((inflection) => inflection.value),
+    ),
+    bbcVocabularyDetail?.examples ?? [],
+  ).slice(0, 5);
+  let canAccessBbcExamples = false;
+  try {
+    const supabase = await createServerSupabaseClient();
+    const { data, error } = await supabase.rpc("can_access_project", { _project_key: "bbc" });
+    canAccessBbcExamples = !error && data === true;
+  } catch {
+    // Hide BBC examples when the membership check is unavailable.
+  }
+  const usageExamples = canAccessBbcExamples
+    ? fetchedUsageExamples
+    : fetchedUsageExamples.filter((example) => example.bookCode !== "BBC");
   const formationParts = getVocabularyFormationParts(entry).map((part) => ({
     ...part,
     href: part.href ? `${part.href}${part.href.includes("?") ? "&" : "?"}from=lookup` : part.href,

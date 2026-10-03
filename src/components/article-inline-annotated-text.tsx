@@ -5,7 +5,7 @@ import {
 } from "@/lib/article-inline-annotations";
 
 function annotationRoleColor(label: string) {
-  if (label.includes("主语")) return "var(--bbc-syntax-role-subject, #1e5b3e)";
+  if (label.includes("主语")) return "var(--bbc-syntax-role-subject, #245d7b)";
   if (label.includes("谓语")) return "var(--bbc-syntax-role-predicate, #a32c1e)";
   if (label.includes("宾语")) return "var(--bbc-syntax-role-object, #1f5c8b)";
   if (label.includes("表语")) return "var(--bbc-syntax-role-predicative, #6b3fa0)";

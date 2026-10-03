@@ -1,11 +1,11 @@
 .root { min-width: 0; }
-.editor { background: #eff6f4; border: 1px solid #c6ddd4; border-radius: 12px; margin-top: 24px; padding: 16px; }
+.editor { background: #eaf1f5; border: 1px solid #a9d4ea; border-radius: 12px; margin-top: 24px; padding: 16px; }
 .editorHeader { align-items: center; display: flex; justify-content: flex-end; gap: 12px; }
 .editorHeader strong { font: 700 16px/1.4 system-ui, sans-serif; }
 .editor button, .controls select, .controls input { background: #fffdf8; border: 1px solid #d8cfbd; border-radius: 8px; color: #24201a; font: 500 14px/1.4 system-ui, sans-serif; padding: 8px 10px; }
 .editor button { cursor: pointer; white-space: nowrap; }
 .editor button:disabled { cursor: not-allowed; opacity: .45; }
-.editor button.active, .editor button.save { background: #0e7658; border-color: #0e7658; color: white; }
+.editor button.active, .editor button.save { background: #b8dcf4; border-color: #a9d4ea; color: #245d7b; }
 .hint { color: #625b50; font: 13px/1.6 system-ui, sans-serif; margin: 10px 0; }
 .selection { background: #fffdf8; border: 1px solid #d8cfbd; border-radius: 8px; display: grid; gap: 4px; margin-top: 12px; padding: 10px 12px; }
 .selection span, .controls label > span { color: #675f52; font: 12px/1.4 system-ui, sans-serif; }
@@ -21,7 +21,7 @@
 .spanText { align-items: flex-start; background: transparent !important; border: 0 !important; display: grid; gap: 3px; min-width: 0; padding: 0 !important; text-align: left; white-space: normal !important; }
 .spanText span { color: #625b50; font: 12px/1.4 system-ui, sans-serif; }
 .spanText strong { font: 600 14px/1.5 Georgia, "Times New Roman", serif; overflow-wrap: anywhere; }
-.message { color: #275e48; font: 13px/1.5 system-ui, sans-serif; margin: 12px 0 0; }
+.message { color: #245d7b; font: 13px/1.5 system-ui, sans-serif; margin: 12px 0 0; }
 @media (max-width: 640px) {
   .editor { padding: 12px; }
   .controls > button { flex: 1 1 auto; }

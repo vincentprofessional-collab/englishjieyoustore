@@ -35,11 +35,24 @@ export function VocabularyHoverPopup({
 
   return (
     <div {...props} className={`${className ?? ""}${onClose ? " word-tooltip-has-close" : ""}`.trim()} ref={popupRef} style={style}>
-      {onClose ? (
-        <button aria-label="关闭单词简明释义" className="word-tooltip-close" onClick={(event) => { event.stopPropagation(); onClose(); }} type="button">×</button>
-      ) : null}
       {children}
     </div>
+  );
+}
+
+export function VocabularyHoverCloseButton({ onClose }: { onClose: () => void }) {
+  return (
+    <button
+      aria-label="关闭单词简明释义"
+      className="word-tooltip-close"
+      onClick={(event) => {
+        event.stopPropagation();
+        onClose();
+      }}
+      type="button"
+    >
+      ×
+    </button>
   );
 }
 

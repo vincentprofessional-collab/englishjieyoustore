@@ -563,7 +563,7 @@ function normalizeManagedPageItem(
     actionLabel: readString(candidate.actionLabel, fallbackItem.actionLabel),
     actionLabelColor: readString(
       candidate.actionLabelColor,
-      fallbackItem.actionLabelColor ?? (isGreen ? "#ffffff" : "#0f6b4f"),
+      fallbackItem.actionLabelColor ?? "#245d7b",
     ),
     actionLabelFontSize: readNumber(
       candidate.actionLabelFontSize,
@@ -573,7 +573,7 @@ function normalizeManagedPageItem(
     description: readString(candidate.description, fallbackItem.description),
     descriptionColor: readString(
       candidate.descriptionColor,
-      fallbackItem.descriptionColor ?? (isGreen ? "#e0f0e8" : "#706855"),
+      fallbackItem.descriptionColor ?? (isGreen ? "#e7f4fb" : "#706855"),
     ),
     descriptionFontSize: readNumber(
       candidate.descriptionFontSize,
@@ -665,7 +665,7 @@ export function mergeManagedPageContent(
   return {
     contentVersion,
     eyebrow: readString(source.eyebrow, fallback.eyebrow),
-    eyebrowColor: readString(source.eyebrowColor, fallback.eyebrowColor ?? "#0f6b4f"),
+    eyebrowColor: readString(source.eyebrowColor, fallback.eyebrowColor ?? "#245d7b"),
     eyebrowFontSize: readNumber(
       source.eyebrowFontSize,
       fallback.eyebrowFontSize ?? 13,

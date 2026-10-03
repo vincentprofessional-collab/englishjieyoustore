@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { ContentShareButton } from "@/components/content-share-button";
 import {
+  VocabularyHoverCloseButton,
   VocabularyHoverDefinitionLine,
   VocabularyHoverPopup,
   VocabularyHoverPronunciation,
@@ -845,6 +846,11 @@ export function StudyAnnotationTools({
                 title={`${activeWordTooltip.word} 词汇`}
                 url={`/vocabulary/${encodeURIComponent(activeWordTooltip.word)}`}
               />
+              <VocabularyHoverCloseButton onClose={() => {
+                if (hideWordTimerRef.current != null) window.clearTimeout(hideWordTimerRef.current);
+                hideWordTimerRef.current = null;
+                setActiveWordTooltip(null);
+              }} />
             </div>
           </div>
           <VocabularyHoverPronunciation

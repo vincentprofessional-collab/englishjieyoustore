@@ -30,6 +30,7 @@ import { BbcSentencePractice } from "@/components/bbc-sentence-practice";
 import { ContentShareButton } from "@/components/content-share-button";
 import { shouldShowAudioPronunciation } from "@/lib/audio-pronunciation";
 import {
+  VocabularyHoverCloseButton,
   VocabularyHoverDefinitionLine,
   VocabularyHoverPopup,
   VocabularyHoverPronunciation,
@@ -5070,11 +5071,16 @@ export function ListeningPractice({
             className={`word-tooltip-floating ${
               activeWordTooltip.placement === "above" ? "above" : ""
             }`}
-            style={{
-              left: activeWordTooltip.left,
-              top: activeWordTooltip.top,
-            }}
-            onClick={(event) => event.stopPropagation()}
+          style={{
+            left: activeWordTooltip.left,
+            top: activeWordTooltip.top,
+          }}
+          onClose={() => {
+            clearHoverWordTimer();
+            clearHideWordTimer();
+            setActiveWordTooltip(null);
+          }}
+          onClick={(event) => event.stopPropagation()}
             onMouseEnter={() => {
               clearHoverWordTimer();
               clearHideWordTimer();
@@ -5097,9 +5103,14 @@ export function ListeningPractice({
                     toggleFavoriteWord(activeWordTooltip.word);
                   }}
                 >
-                  {favoriteWordIds.includes(activeWordTooltip.word) ? "★" : "☆"}
-                </button>
-              </div>
+                {favoriteWordIds.includes(activeWordTooltip.word) ? "★" : "☆"}
+              </button>
+              <VocabularyHoverCloseButton onClose={() => {
+                clearHoverWordTimer();
+                clearHideWordTimer();
+                setActiveWordTooltip(null);
+              }} />
+            </div>
             </div>
             <VocabularyHoverPronunciation hint={activeWordTooltip.hint} word={activeWordTooltip.word} />
             <VocabularyHoverDefinitionLine
@@ -5400,7 +5411,12 @@ export function ListeningPractice({
               {section.transcriptSentences.length === 0 ? (
                 <p className="muted">还没有逐句原文。导入 transcript_sentences 后会显示中英字幕。</p>
               ) : isTranscriptVisible ? (
-                <div className="practice-subtitle-list" ref={subtitleListRef}>
+                <div
+                  className={`practice-subtitle-list ${
+                    reviewStudyMode === "general" ? "reading-mode" : "sentence-mode"
+                  }`}
+                  ref={subtitleListRef}
+                >
                   {section.transcriptSentences.map((sentence) => (
                     <article
                       className={`practice-subtitle-line ${
@@ -5768,133 +5784,6 @@ export function ListeningPractice({
 
       {submitted ? <div className="submitted-review-nav">{partNavigation}</div> : null}
 
-      {submitted ? (
-        <section className="transcript-panel">
-          <div className="section-title-row">
-            <div>
-              <div className="eyebrow">Transcript</div>
-              <h2>听力原文</h2>
-            </div>
-          </div>
-
-          {section.transcriptSentences.length === 0 ? (
-            <p className="muted">还没有逐句原文。导入 transcript_sentences 后会显示中英字幕。</p>
-          ) : (
-            <div className="sentence-list">
-              {section.transcriptSentences.map((sentence) => {
-                const isActiveSentenceClip = activeSentenceClipId === sentence.id;
-                const boundaryDurationSeconds =
-                  sentence.startMs != null && sentence.endMs != null
-                    ? Math.max((sentence.endMs - sentence.startMs) / 1_000, 0.1)
-                    : 0.1;
-                const activeWordIndex =
-                  isActiveSentenceClip && isSentenceClipPlaying
-                    ? getActiveWordIndex(
-                        sentence.englishText,
-                        activeSentenceClipPosition,
-                        sentenceDurationsRef.current[sentence.id] ?? boundaryDurationSeconds,
-                      )
-                    : null;
-
-                return (
-                  <article
-                    className={`sentence-card bbc-listening-sentence-card ${
-                      isActiveSentenceClip ? "active" : ""
-                    }`}
-                    id={`transcript-sentence-${sentence.sentenceNo}`}
-                    key={sentence.id}
-                  >
-                  <div className="sentence-meta">
-                    <div className="sentence-meta-copy">
-                      <span>#{sentence.sentenceNo}</span>
-                      {sentence.speaker ? <span>{sentence.speaker}</span> : null}
-                    </div>
-                    <div className="favorite-share-actions">
-                      <button
-                        aria-label={`收藏第 ${sentence.sentenceNo} 句`}
-                        className={`favorite-star ${
-                          favoriteSentenceIds.includes(favoriteSentenceId(sentence)) ? "active" : ""
-                        }`}
-                        type="button"
-                        onClick={(event) => {
-                          event.stopPropagation();
-                          toggleFavoriteSentence(sentence);
-                        }}
-                      >
-                        {favoriteSentenceIds.includes(favoriteSentenceId(sentence)) ? "★" : "☆"}
-                      </button>
-                      <ContentShareButton
-                        label={`分享第 ${sentence.sentenceNo} 句`}
-                        text={`${sentence.englishText}\n${sentence.chineseText ?? ""}`.trim()}
-                        title={`${practiceTitle} 第 ${sentence.sentenceNo} 句`}
-                        url={`/listening/${section.id}?mode=practice#transcript-sentence-${sentence.sentenceNo}`}
-                      />
-                    </div>
-                  </div>
-                  <div className="sentence-copy bbc-listening-sentence-copy">
-                    <BbcSentencePractice
-                      activeWordIndex={activeWordIndex}
-                      isAudioPlaying={isActiveSentenceClip && isSentenceClipPlaying}
-                      sentence={{
-                        chinese: sentence.chineseText,
-                        english: sentence.englishText,
-                        sentenceNo: sentence.sentenceNo,
-                      }}
-                      settings={audioSettings}
-                    />
-                  </div>
-                  {speakingTraining?.sentenceId === sentence.id ? (
-                    <div aria-live="polite" className="bbc-speaking-training-status practicing">
-                      <span>{SPEAKING_PHASE_LABELS[speakingTraining.mode]}</span>
-                      <strong>{speakingTraining.remainingSeconds} 秒</strong>
-                      <small>
-                        后
-                        {audioSettings.playMode === "sentence-loop"
-                          ? "重播本句"
-                          : sentence.sentenceNo === section.transcriptSentences.at(-1)?.sentenceNo
-                            ? "结束本轮训练"
-                            : "播放下一句"}
-                      </small>
-                    </div>
-                  ) : isActiveSentenceClip &&
-                    isSentenceClipPlaying &&
-                    audioSettings.speakingMode !== "none" ? (
-                    <div className="bbc-speaking-training-status playing">
-                      <span>{SPEAKING_MODE_LABELS[audioSettings.speakingMode]}</span>
-                      <strong>正在播放</strong>
-                    </div>
-                  ) : null}
-                  {sentence.audioUrl ? (
-                    <AudioPlayer
-                      autoPlaySignal={sentenceAutoPlaySignals[sentence.id] ?? 0}
-                      controls="hidden"
-                      deferSentenceLoop={audioSettings.speakingMode !== "none"}
-                      hasSelectedRate
-                      html5={false}
-                      onDurationChange={(durationSeconds) => {
-                        sentenceDurationsRef.current[sentence.id] = durationSeconds;
-                      }}
-                      onEnded={() => handleSentenceAudioEnded(sentence)}
-                      onPlayingChange={(isPlaying) =>
-                        handleReviewSentencePlayingChange(sentence, isPlaying)
-                      }
-                      onSettingsChange={updateAudioSettings}
-                      onTimeChange={(positionSeconds) =>
-                        handleReviewSentenceTimeChange(sentence, positionSeconds)
-                      }
-                      settings={audioSettings}
-                      src={sentence.audioUrl}
-                      title="单句音频"
-                    />
-                  ) : null}
-                  </article>
-                );
-              })}
-            </div>
-          )}
-        </section>
-      ) : null}
-
       {!submitted ? partNavigation : null}
       {activeWordTooltip ? (
         <VocabularyHoverPopup
@@ -5941,6 +5830,11 @@ export function ListeningPractice({
                 title={`${activeWordTooltip.word} 词汇`}
                 url={`/vocabulary/${encodeURIComponent(activeWordTooltip.word)}`}
               />
+              <VocabularyHoverCloseButton onClose={() => {
+                clearHoverWordTimer();
+                clearHideWordTimer();
+                setActiveWordTooltip(null);
+              }} />
             </div>
           </div>
           <VocabularyHoverPronunciation

@@ -14,7 +14,7 @@ import {
   type LocalVocabularyEntry,
   type VocabularyFormationPart,
 } from "@/lib/vocabulary/local-vocabulary";
-import { getVocabularyUsageExamples, type VocabularyUsageExample } from "@/lib/vocabulary/examples";
+import { getVocabularyUsageExamples, prioritizeVocabularyUsageExamples, type VocabularyUsageExample } from "@/lib/vocabulary/examples";
 import { getVocabularyPhraseMatches, type VocabularyPhraseMatch } from "@/lib/vocabulary/phrases";
 import { getBbcVocabularyDetail } from "@/lib/articles/bbc-vocabulary";
 import { getVocabularyVideos } from "@/lib/vocabulary/videos";
@@ -268,7 +268,7 @@ function UsageExamplesSection({
               id={`vocabulary-example-${index + 1}`}
               key={example.id}
             >
-              {example.sourceType === "article" ? (
+              {example.sourceType === "article" || example.sourceType === "new-concept" ? (
                 <VocabularyExampleArticleLink
                   example={example}
                 >
@@ -326,13 +326,14 @@ export default async function VocabularyWordPage({
     notFound();
   }
 
-  const fetchedUsageExamples = bbcVocabularyDetail?.examples.length
-    ? bbcVocabularyDetail.examples.slice(0, 5)
-    : await getVocabularyUsageExamples(
-        entry.word,
-        5,
-        entry.inflections.map((inflection) => inflection.value),
-      );
+  const fetchedUsageExamples = prioritizeVocabularyUsageExamples(
+    await getVocabularyUsageExamples(
+      entry.word,
+      5,
+      entry.inflections.map((inflection) => inflection.value),
+    ),
+    bbcVocabularyDetail?.examples ?? [],
+  ).slice(0, 5);
   let canAccessBbcExamples = false;
   try {
     const supabase = await createServerSupabaseClient();

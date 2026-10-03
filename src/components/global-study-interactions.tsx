@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { ContentShareButton } from "@/components/content-share-button";
 import {
+  VocabularyHoverCloseButton,
   VocabularyHoverDefinitionLine,
   VocabularyHoverPopup,
   VocabularyHoverPronunciation,
@@ -537,6 +538,11 @@ export function GlobalStudyInteractions() {
                 title={`${wordTooltip.word} 词汇`}
                 url={`/vocabulary/${encodeURIComponent(wordTooltip.word)}`}
               />
+              <VocabularyHoverCloseButton onClose={() => {
+                if (hideWordTimerRef.current != null) window.clearTimeout(hideWordTimerRef.current);
+                hideWordTimerRef.current = null;
+                setWordTooltip(null);
+              }} />
             </div>
           </div>
           <VocabularyHoverPronunciation hint={wordTooltip.hint} word={wordTooltip.word} />
