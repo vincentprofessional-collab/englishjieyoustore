@@ -25,6 +25,21 @@ type QuizRecord = {
   status: "ready" | "partial" | "review_required";
 };
 
+export function getBbcArticleMatchingParagraphGists(articleId: string) {
+  const record = (quizCatalog as QuizRecord[]).find(
+    (item) => item.articleId === articleId && item.status !== "review_required",
+  );
+  const gists: Record<number, string> = {};
+
+  for (const question of record?.matching ?? []) {
+    const paragraphNumber = Number(question.prompt.match(/\bparagraph\s*(\d+)\b/i)?.[1]);
+    const gist = question.answer.trim();
+    if (paragraphNumber > 0 && gist) gists[paragraphNumber] = gist;
+  }
+
+  return gists;
+}
+
 type QuestionKind = "matching" | "quiz" | "exercise";
 
 function optionLabel(question: Question) {

@@ -16,11 +16,11 @@ import {
 import { BbcSentencePractice, useBbcAnswerShortcut } from "@/components/bbc-sentence-practice";
 import { ArticleInlineAnnotatedText } from "@/components/article-inline-annotated-text";
 import { useArticleInlineAnnotations } from "@/components/use-article-inline-annotations";
-import { BbcArticleQuiz } from "@/components/bbc-article-quiz";
+import { BbcArticleQuiz, getBbcArticleMatchingParagraphGists } from "@/components/bbc-article-quiz";
 import { BbcArticleComments } from "@/components/bbc-article-comments";
 import { type BbcSyntaxDisplayMode, type BbcSyntaxSentenceData } from "@/components/bbc-syntax-sentence";
 import { BbcSyntaxInlineEditor } from "@/components/bbc-syntax-inline-editor";
-import { ArticleRetellingPractice, buildRetellingTermGroups } from "@/components/article-retelling-practice";
+import { ArticleRetellingPractice, buildRetellingParagraphs } from "@/components/article-retelling-practice";
 import { ContentShareButton } from "@/components/content-share-button";
 import { StudyAnnotationTools } from "@/components/study-annotation-tools";
 import { getLikelyProperNounWords, shouldShowAudioPronunciation } from "@/lib/audio-pronunciation";
@@ -710,7 +710,6 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
   const [isVocabularyVisible, setIsVocabularyVisible] = useState(true);
   const [studyMode, setStudyMode] = useState<ArticleStudyMode>("general");
   const [isRetellingPractice, setIsRetellingPractice] = useState(false);
-  const retellingVocabularyVisibilityRef = useRef(true);
   const [showWritingAnswers, setShowWritingAnswers] = useState(false);
   useBbcAnswerShortcut(
     studyMode === "writing" && audioSettings.dictationMode !== "none",
@@ -984,14 +983,8 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
   }
 
   function enterRetellingPractice() {
-    retellingVocabularyVisibilityRef.current = isVocabularyVisible;
     setIsVocabularyVisible(false);
     setIsRetellingPractice(true);
-  }
-
-  function exitRetellingPractice() {
-    setIsRetellingPractice(false);
-    setIsVocabularyVisible(retellingVocabularyVisibilityRef.current);
   }
 
   function selectStudySentence(sentenceNo: number) {
@@ -1345,9 +1338,11 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
     activeSentenceVocabularyMatches.flatMap((match) => match.indexes),
   );
   const articleVocabularyForDisplay = orderedArticleVocabulary;
-  const retellingTermGroups = buildRetellingTermGroups(
+  const retellingParagraphs = buildRetellingParagraphs(
+    article.body,
     articleVocabularyForDisplay.map((item) => extractBbcVocabularyHeadword(item.term || item.lemma || item.entry)),
     articlePhraseWaveTerms,
+    getBbcArticleMatchingParagraphGists(article.id),
   );
   const likelyProperNounWords = getLikelyProperNounWords(article.body.join(" "));
   const articlePronunciations = new Map<string, string>();
@@ -1602,11 +1597,9 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
         <section className={`bbc-original-panel ${studyMode !== "general" ? "bbc-intensive-original-panel" : ""} ${isRetellingPractice ? "article-retelling-parent" : ""}`}>
           {isRetellingPractice ? (
             <ArticleRetellingPractice
-              groups={retellingTermGroups}
-              onExit={exitRetellingPractice}
+              paragraphs={retellingParagraphs}
               sourceId={article.id}
               sourceType="bbc"
-              title={article.title}
             />
           ) : isOriginalVisible ? (
             <div className={`bbc-original-copy ${originalDisplayMode === "bilingual" || studyMode !== "general" ? "bilingual" : ""}`}>

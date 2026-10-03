@@ -26,7 +26,7 @@ import {
   useArticlePronunciations,
 } from "@/components/audio-player";
 import { BbcSentencePractice, useBbcAnswerShortcut } from "@/components/bbc-sentence-practice";
-import { ArticleRetellingPractice, buildRetellingTermGroups } from "@/components/article-retelling-practice";
+import { ArticleRetellingPractice, buildRetellingParagraphs } from "@/components/article-retelling-practice";
 import { ContentShareButton } from "@/components/content-share-button";
 import { shouldShowAudioPronunciation } from "@/lib/audio-pronunciation";
 import {
@@ -2885,7 +2885,6 @@ export function ListeningPractice({
   const [isTranscriptVisible, setIsTranscriptVisible] = useState(true);
   const [isVocabularyVisible, setIsVocabularyVisible] = useState(true);
   const [isRetellingPractice, setIsRetellingPractice] = useState(false);
-  const retellingVocabularyVisibilityRef = useRef(true);
   const dictionaryPronunciations = useArticlePronunciations(
     section.transcriptSentences.map((sentence) => sentence.englishText).join(" "),
     audioSettings.pronunciationMode,
@@ -2966,9 +2965,11 @@ export function ListeningPractice({
   const retellingExpressions = RETELLING_LISTENING_EXPRESSIONS.filter((expression) =>
     new RegExp(`(^|[^a-z])${expression}(?=$|[^a-z])`, "i").test(transcriptEnglish),
   );
-  const retellingTermGroups = buildRetellingTermGroups(retellingWords, retellingExpressions);
-  const sectionEnglishTitle = section.title.replace(/[\u3400-\u9fff]/g, " ").replace(/\s+/g, " ").trim();
-  const retellingTitle = sectionEnglishTitle || formatListeningSectionTitle(section);
+  const retellingParagraphs = buildRetellingParagraphs(
+    [transcriptEnglish],
+    retellingWords,
+    retellingExpressions,
+  );
 
   useEffect(() => {
     if (pageRef.current) restoreInlineHighlights(pageRef.current, highlightStorageKey);
@@ -3085,18 +3086,12 @@ export function ListeningPractice({
   }
 
   function enterRetellingPractice() {
-    retellingVocabularyVisibilityRef.current = isVocabularyVisible;
     setIsVocabularyVisible(false);
     setActiveWordTooltip(null);
     setSelectedText("");
     setSelectionActionPosition(null);
     setMobileReviewPane("transcript");
     setIsRetellingPractice(true);
-  }
-
-  function exitRetellingPractice() {
-    setIsRetellingPractice(false);
-    setIsVocabularyVisible(retellingVocabularyVisibilityRef.current);
   }
 
   function clearSpeakingPracticeTimers(resetState = true) {
@@ -5023,11 +5018,9 @@ export function ListeningPractice({
             >
               {isRetellingPractice ? (
                 <ArticleRetellingPractice
-                  groups={retellingTermGroups}
-                  onExit={exitRetellingPractice}
+                  paragraphs={retellingParagraphs}
                   sourceId={section.id}
                   sourceType="ielts-listening"
-                  title={retellingTitle}
                 />
               ) : section.transcriptSentences.length === 0 ? (
                 <p className="muted">还没有逐句原文。导入 transcript_sentences 后会显示中英字幕。</p>

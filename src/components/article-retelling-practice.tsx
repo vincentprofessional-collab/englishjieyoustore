@@ -2,45 +2,99 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
-export type RetellingTermGroup = {
+export type RetellingParagraph = {
+  gist?: string;
   label: string;
   terms: string[];
 };
 
 export type RetellingSourceType = "bbc" | "new-concept" | "ielts-listening";
 
-export function buildRetellingTermGroups(terms: string[], expressions: string[] = []): RetellingTermGroup[] {
-  const uniqueTerms = (values: string[]) => {
-    const seen = new Set<string>();
-    return values
-      .map((value) => value.trim().replace(/^[\s.,;:!?“”‘’"'()]+|[\s.,;:!?“”‘’"'()]+$/g, ""))
-      .filter((value) => {
-        const key = value.toLowerCase();
-        if (!value || seen.has(key)) return false;
-        seen.add(key);
-        return true;
-      });
-  };
-  const cleanTerms = uniqueTerms(terms);
-  const phraseTerms = uniqueTerms([
-    ...cleanTerms.filter((term) => /\s/.test(term)),
-    ...expressions.filter((term) => /\s/.test(term)),
-  ]);
-  const phraseSet = new Set(phraseTerms.map((term) => term.toLowerCase()));
-  const vocabularyTerms = cleanTerms.filter((term) => !/\s/.test(term) && !phraseSet.has(term.toLowerCase()));
+function cleanRetellingTerms(values: string[]) {
+  const seen = new Set<string>();
+  return values
+    .map((value) => value.trim().replace(/^[\s.,;:!?“”‘’"'()]+|[\s.,;:!?“”‘’"'()]+$/g, ""))
+    .filter((value) => {
+      const key = value.toLowerCase();
+      if (!value || seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+}
 
-  return [
-    { label: "词汇", terms: vocabularyTerms },
-    { label: "短语与地道表达", terms: phraseTerms },
-  ];
+function escapeRegExp(value: string) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function getTermSearchForms(term: string) {
+  const forms = new Set([term]);
+  if (/^[a-z]+$/i.test(term)) {
+    const word = term.toLowerCase();
+    forms.add(`${word}s`);
+    forms.add(`${word}es`);
+    forms.add(`${word}ed`);
+    forms.add(`${word}ing`);
+    if (word.endsWith("y") && word.length > 2) {
+      forms.add(`${word.slice(0, -1)}ies`);
+      forms.add(`${word.slice(0, -1)}ied`);
+    }
+    if (word.endsWith("e") && word.length > 2) {
+      forms.add(`${word.slice(0, -1)}ing`);
+      forms.add(`${word.slice(0, -1)}ed`);
+    }
+  }
+  return [...forms];
+}
+
+function findTermPosition(text: string, term: string) {
+  const searchableText = text.replace(/[’‘]/g, "'");
+  const searchForms = getTermSearchForms(term.replace(/[’‘]/g, "'"));
+  let firstPosition = -1;
+
+  for (const form of searchForms) {
+    const pattern = escapeRegExp(form).replace(/\s+/g, "\\s+");
+    const match = new RegExp(`(^|[^a-z0-9])(${pattern})(?=$|[^a-z0-9])`, "i").exec(searchableText);
+    if (match) {
+      const position = match.index + match[1].length;
+      if (firstPosition < 0 || position < firstPosition) firstPosition = position;
+    }
+  }
+
+  return firstPosition;
+}
+
+export function buildRetellingParagraphs(
+  textBlocks: string[],
+  terms: string[],
+  expressions: string[] = [],
+  gists: Record<number, string> = {},
+): RetellingParagraph[] {
+  const allTerms = cleanRetellingTerms([...terms, ...expressions]);
+  const paragraphTerms = textBlocks.map((): { position: number; order: number; term: string }[] => []);
+
+  allTerms.forEach((term, order) => {
+    const firstMatch = textBlocks
+      .map((text, index) => ({ index, position: findTermPosition(text, term) }))
+      .filter((match) => match.position >= 0)
+      .sort((left, right) => left.index - right.index || left.position - right.position)[0];
+    if (firstMatch) paragraphTerms[firstMatch.index].push({ position: firstMatch.position, order, term });
+  });
+
+  return textBlocks.flatMap((_, index) => {
+    const paragraphNumber = index + 1;
+    const paragraphGist = gists[paragraphNumber]?.trim();
+    const sortedTerms = paragraphTerms[index]
+      .sort((left, right) => left.position - right.position || left.order - right.order)
+      .map(({ term }) => term);
+    if (!paragraphGist && sortedTerms.length === 0) return [];
+    return [{ gist: paragraphGist, label: `第${paragraphNumber}段`, terms: sortedTerms }];
+  });
 }
 
 type ArticleRetellingPracticeProps = {
-  groups: RetellingTermGroup[];
-  onExit: () => void;
+  paragraphs: RetellingParagraph[];
   sourceId: string;
   sourceType: RetellingSourceType;
-  title: string;
 };
 
 type PracticePhase = "idle" | "preparing" | "recording" | "finished" | "error";
@@ -62,11 +116,9 @@ function getAudioExtension(mimeType: string) {
 }
 
 export function ArticleRetellingPractice({
-  groups,
-  onExit,
+  paragraphs,
   sourceId,
   sourceType,
-  title,
 }: ArticleRetellingPracticeProps) {
   const [phase, setPhase] = useState<PracticePhase>("idle");
   const [secondsLeft, setSecondsLeft] = useState(10);
@@ -269,24 +321,15 @@ export function ArticleRetellingPractice({
     };
   }, [clearTimers, sourceId, sourceType]);
 
-  const isRunning = phase === "preparing" || phase === "recording" || saveState === "uploading";
-
   return (
-    <section aria-labelledby="article-retelling-title" className="article-retelling-practice" role="region">
-      <header className="article-retelling-heading">
-        <button className="article-retelling-exit" disabled={isRunning} onClick={onExit} type="button">
-          ← 返回口语模式
-        </button>
-        <span className="article-retelling-kicker">复述练习</span>
-        <h2 id="article-retelling-title" lang="en">{title}</h2>
-      </header>
-
-      <div aria-label="文章词汇与表达" className="article-retelling-groups">
-        {groups.filter((group) => group.terms.length > 0).map((group) => (
-          <section className="article-retelling-group" key={group.label}>
-            <h3>{group.label}</h3>
+    <section aria-label="复述练习" className="article-retelling-practice" role="region">
+      <div aria-label="按段落整理的段落大意、词汇和短语" className="article-retelling-paragraphs">
+        {paragraphs.map((paragraph) => (
+          <section className="article-retelling-paragraph" key={paragraph.label}>
+            <h3>{paragraph.label}</h3>
+            {paragraph.gist ? <p className="article-retelling-gist">{paragraph.gist}</p> : null}
             <ul>
-              {group.terms.map((term) => <li key={`${group.label}-${term}`}>{term}</li>)}
+              {paragraph.terms.map((term) => <li key={`${paragraph.label}-${term}`}>{term}</li>)}
             </ul>
           </section>
         ))}
