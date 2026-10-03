@@ -4956,14 +4956,10 @@ export function ListeningPractice({
                 <AudioSettingsMenus
                   onChange={updateAudioSettings}
                   onModeSelect={(nextMode) => selectReviewStudyMode(nextMode)}
+                  onRetellingSelect={enterRetellingPractice}
                   settings={audioSettings}
                   variant="speaking-writing"
                 />
-                {reviewStudyMode === "speaking" && !isRetellingPractice ? (
-                  <button className="bbc-fullscreen-toggle article-retelling-mode-button" onClick={enterRetellingPractice} type="button">
-                    复述练习
-                  </button>
-                ) : null}
               </div>
               <div className="bbc-audio-toolbar-utilities">
                 <button

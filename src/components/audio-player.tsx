@@ -680,6 +680,7 @@ export function AudioSettingsMenus({
   modeLabels,
   onChange,
   onModeSelect,
+  onRetellingSelect,
   playModeLabel = "听力模式",
   preserveModeSettings = false,
   settings,
@@ -691,6 +692,7 @@ export function AudioSettingsMenus({
   modeLabels?: { listening?: string; speaking?: string; writing?: string };
   onChange: (nextSettings: Partial<AudioPlayerSettings>) => void;
   onModeSelect?: (mode: "listening" | "speaking" | "writing") => void;
+  onRetellingSelect?: () => void;
   playModeLabel?: string;
   preserveModeSettings?: boolean;
   settings: AudioPlayerSettings;
@@ -789,7 +791,9 @@ export function AudioSettingsMenus({
           {
             selectedLabel: modeLabels?.speaking ?? "口语模式",
             selectedValue: settings.speakingMode,
-            options: speakingModeOptions,
+            options: onRetellingSelect
+              ? [...speakingModeOptions, { label: "复述练习", value: "retelling" }]
+              : speakingModeOptions,
             onOpen: onModeSelect
               ? () => {
                   const speakingMode = settings.speakingMode === "none" ? "imitation" : settings.speakingMode;
@@ -802,6 +806,10 @@ export function AudioSettingsMenus({
                 }
               : undefined,
             onSelect: (value: string | number) => {
+              if (value === "retelling") {
+                onRetellingSelect?.();
+                return;
+              }
               const speakingMode = String(value) as Exclude<AudioSpeakingMode, "none">;
               onChange({
                 ...(!preserveModeSettings ? { dictationMode: "none" as const, playMode: "sequential" as const } : {}),

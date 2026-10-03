@@ -1457,15 +1457,11 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
         modeLabels={{ speaking: "口语", writing: "写作" }}
         onChange={updateAudioSettings}
         onModeSelect={(mode) => selectStudyMode(mode)}
+        onRetellingSelect={enterRetellingPractice}
         preserveModeSettings
         settings={audioSettings}
         variant="speaking-writing"
       />
-      {studyMode === "speaking" && !isRetellingPractice ? (
-        <button className="bbc-fullscreen-toggle article-retelling-mode-button" onClick={enterRetellingPractice} type="button">
-          复述练习
-        </button>
-      ) : null}
     </>
   );
   return (

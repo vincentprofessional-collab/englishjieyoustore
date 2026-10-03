@@ -1094,14 +1094,10 @@ export function NewConceptLessonPage({
                 <AudioSettingsMenus
                   onChange={updateAudioSettings}
                   onModeSelect={(mode) => selectStudyMode(mode)}
+                  onRetellingSelect={enterRetellingPractice}
                   settings={audioSettings}
                   variant="speaking-writing"
                 />
-                {studyMode === "speaking" && !isRetellingPractice ? (
-                  <button className="bbc-fullscreen-toggle article-retelling-mode-button" onClick={enterRetellingPractice} type="button">
-                    复述练习
-                  </button>
-                ) : null}
               </div>
               <div className="bbc-audio-toolbar-utilities">
                 <button
