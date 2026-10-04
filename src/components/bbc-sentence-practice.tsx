@@ -312,9 +312,11 @@ export function BbcSentencePractice({
   }
 
   function getTranscriptDictationBlanks(currentInput: HTMLInputElement) {
-    const transcriptPanel = currentInput.closest(".bbc-transcript-panel");
+    const practicePanel = currentInput.closest(
+      ".bbc-transcript-panel, .practice-audio-study-panel",
+    );
     return Array.from(
-      (transcriptPanel ?? document).querySelectorAll<HTMLInputElement>(".dictation-blank-input"),
+      (practicePanel ?? document).querySelectorAll<HTMLInputElement>(".dictation-blank-input"),
     );
   }
 
@@ -461,7 +463,7 @@ export function BbcSentencePractice({
 
     return (
       <span
-        className="dictation-blank-wrap"
+        className={`dictation-blank-wrap ${userAnswer ? "has-answer" : ""}`}
         key={`${sentence.sentenceNo}-dictation-${target.tokenIndex}`}
       >
         <span aria-hidden="true" className="dictation-blank-measure">

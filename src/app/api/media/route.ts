@@ -7,7 +7,57 @@ export const runtime = "nodejs";
 
 const mediaBuckets = new Set<ManagedMediaBucket>(["audio", "images", "video", "videos", "documents"]);
 
-export async function GET(request: NextRequest) {
+const forwardedAudioHeaders = [
+  "accept-ranges",
+  "content-length",
+  "content-range",
+  "content-type",
+  "etag",
+  "last-modified",
+] as const;
+
+async function streamListeningAudio(request: NextRequest, path: string) {
+  const sourceUrl = getSupabaseStorageUrl("audio", path);
+  if (!sourceUrl) return new NextResponse("Media unavailable", { status: 404 });
+
+  const upstreamRequestHeaders = new Headers();
+  for (const header of ["range", "if-range"] as const) {
+    const value = request.headers.get(header);
+    if (value) upstreamRequestHeaders.set(header, value);
+  }
+
+  let upstream: Response;
+  try {
+    upstream = await fetch(sourceUrl, {
+      cache: "no-store",
+      headers: upstreamRequestHeaders,
+      method: request.method,
+      signal: request.signal,
+    });
+  } catch {
+    return new NextResponse("Audio unavailable", { status: 502 });
+  }
+
+  if (![200, 206, 304, 404, 416].includes(upstream.status)) {
+    return new NextResponse("Audio unavailable", { status: 502 });
+  }
+
+  const responseHeaders = new Headers({
+    "Cache-Control": "public, max-age=600, stale-while-revalidate=3600",
+    "X-Content-Type-Options": "nosniff",
+  });
+  for (const header of forwardedAudioHeaders) {
+    const value = upstream.headers.get(header);
+    if (value) responseHeaders.set(header, value);
+  }
+
+  return new Response(request.method === "HEAD" ? null : upstream.body, {
+    headers: responseHeaders,
+    status: upstream.status,
+  });
+}
+
+async function handleMediaRequest(request: NextRequest) {
   const bucket = request.nextUrl.searchParams.get("bucket") as ManagedMediaBucket | null;
   const path = request.nextUrl.searchParams.get("path");
   if (!bucket || !mediaBuckets.has(bucket) || !path) {
@@ -16,6 +66,10 @@ export async function GET(request: NextRequest) {
 
   const cleanPath = path.replace(/^\/+|\/+$/g, "");
   const isBbcAudio = bucket === "audio" && /^bbc(?:\/|$)/i.test(cleanPath);
+  if (bucket === "audio" && /^listening\//i.test(cleanPath)) {
+    return streamListeningAudio(request, cleanPath);
+  }
+
   if (((bucket === "audio" && !isBbcAudio) || bucket === "video" || bucket === "videos")
     && !isLegacyCosOnlyMediaPath(bucket, cleanPath)) {
     const directUrl = getSupabaseStorageUrl(bucket, cleanPath);
@@ -35,4 +89,12 @@ export async function GET(request: NextRequest) {
   } catch {
     return NextResponse.json({ error: "Media is unavailable." }, { status: 404 });
   }
+}
+
+export async function GET(request: NextRequest) {
+  return handleMediaRequest(request);
+}
+
+export async function HEAD(request: NextRequest) {
+  return handleMediaRequest(request);
 }

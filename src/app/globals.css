@@ -13527,6 +13527,10 @@ body.share-sheet-open {
   -webkit-text-fill-color: transparent;
 }
 
+.dictation-blank-wrap.has-answer .dictation-blank-input {
+  border-bottom-color: transparent;
+}
+
 .sentence-order-line {
   line-height: 2.1;
   overflow-wrap: anywhere;
@@ -13584,6 +13588,10 @@ body.share-sheet-open {
 .sentence-order-dropzone.wrong {
   border-bottom-color: var(--ink);
   color: var(--danger);
+}
+
+.sentence-order-dropzone.filled {
+  border-bottom-color: transparent;
 }
 
 .sentence-order-word-bank {

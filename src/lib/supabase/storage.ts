@@ -9,6 +9,9 @@ function isBbcAudioPath(path: string) {
 }
 
 function getManagedOrSupabaseUrl(bucket: PublicBucket, path: string, cosEnabled: boolean) {
+  if (bucket === "audio" && /^listening\//i.test(path.replace(/^\/+/, ""))) {
+    return getManagedMediaUrl(bucket, path);
+  }
   if (cosEnabled && (bucket !== "audio" || isBbcAudioPath(path) || isLegacyCosOnlyMediaPath(bucket, path))) {
     return getManagedMediaUrl(bucket, path);
   }
