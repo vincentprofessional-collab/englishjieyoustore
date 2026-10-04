@@ -22,10 +22,8 @@ const requiredMarkers = {
     'id: "ielts"',
     "语言考试导航",
     "剑桥雅思",
-    "九分达人",
     "历年真题",
     '/listening/practice?source=cambridge',
-    '/listening/jiufen',
     '/listening/past-papers',
     '/speaking/part-1',
     '/writing/practice?task=task1',
@@ -49,6 +47,21 @@ for (const [file, markers] of Object.entries(requiredMarkers)) {
       failures.push(`missing marker in ${file}: ${marker}`);
     }
   }
+}
+
+const ieltsNavigation = readFileSync("src/components/ielts-section-shell.tsx", "utf8");
+if (ieltsNavigation.includes("九分达人") || ieltsNavigation.includes("/listening/jiufen")) {
+  failures.push("the retired Jiufen collection must remain absent from IELTS navigation");
+}
+
+const jiufenRoute = readFileSync("src/app/listening/jiufen/page.tsx", "utf8");
+if (!/\bnotFound\(\)/.test(jiufenRoute)) {
+  failures.push("the retired Jiufen route must remain unavailable until its audio is restored");
+}
+
+const listeningCatalog = readFileSync("src/lib/ielts/listening.ts", "utf8");
+if (!/const JIUFEN_PUBLICATION_ENABLED = false/.test(listeningCatalog)) {
+  failures.push("the retired Jiufen collection must remain unpublished");
 }
 
 const layout = readFileSync("src/app/layout.tsx", "utf8");
