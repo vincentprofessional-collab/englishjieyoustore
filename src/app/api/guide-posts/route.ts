@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { revalidateTag } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { getPaidPageContentSlug } from "@/lib/access-control";
 import {
@@ -207,7 +207,7 @@ async function syncSiteChromeForPost(
     throw new Error(`更新导航配置失败：${result.error.message}`);
   }
 
-  revalidateTag("published-site-chrome", "max");
+  revalidateTag("published-site-chrome", { expire: 0 });
 }
 
 export async function GET(request: NextRequest) {
@@ -331,6 +331,9 @@ export async function POST(request: NextRequest) {
         { status: 500 },
       );
     }
+
+    revalidateTag("published-home-posts", { expire: 0 });
+    revalidatePath("/");
   }
 
   return NextResponse.json({ post: data });
@@ -377,6 +380,9 @@ export async function DELETE(request: NextRequest) {
         { status: 500 },
       );
     }
+
+    revalidateTag("published-home-posts", { expire: 0 });
+    revalidatePath("/");
   }
 
   return NextResponse.json({ ok: true });

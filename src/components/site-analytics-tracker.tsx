@@ -207,7 +207,7 @@ export function SiteAnalyticsTracker() {
 
     window.sessionStorage.setItem(DAILY_TICK_AT_KEY, document.visibilityState === "visible" ? String(Date.now()) : "0");
     window.sessionStorage.setItem(DAILY_TICK_VISIBLE_KEY, String(document.visibilityState === "visible"));
-    const intervalId = window.setInterval(updateCurrentSession, 60_000);
+    const intervalId = window.setInterval(updateCurrentSession, 5 * 60_000);
     const dailyIntervalId = window.setInterval(updateDailyLearningTime, 30_000);
 
     document.addEventListener("visibilitychange", updateVisibleActivity);

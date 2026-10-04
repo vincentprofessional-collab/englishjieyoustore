@@ -5,8 +5,6 @@ import { getNewConceptVocabularyItems } from "@/lib/new-concept-vocabulary";
 import { getNewConceptMediaUrls } from "@/lib/new-concept-media";
 
 export const dynamicParams = false;
-export const revalidate = 60;
-
 export function generateStaticParams() {
   return NEW_CONCEPT_LESSONS.map((lesson) => ({ lessonId: lesson.id }));
 }

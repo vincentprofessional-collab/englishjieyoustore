@@ -67,12 +67,11 @@ export async function POST(request: NextRequest) {
   const payload = (await request.json().catch(() => ({}))) as ActivityPayload;
   const authorization = request.headers.get("authorization") ?? "";
   const bearerToken = /^Bearer\s+(.+)$/i.exec(authorization)?.[1]?.trim() ?? "";
-  const authClient = createClient(supabaseUrl, supabaseAnonKey);
   const {
     data: { user },
     error: authError,
   } = bearerToken
-    ? await authClient.auth.getUser(bearerToken)
+    ? await createClient(supabaseUrl, supabaseAnonKey).auth.getUser(bearerToken)
     : { data: { user: null }, error: null };
   const userId = authError ? null : (user?.id ?? null);
   const supabase = createClient(supabaseUrl, supabaseServiceKey ?? supabaseAnonKey, {
