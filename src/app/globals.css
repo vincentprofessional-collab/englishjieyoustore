@@ -32419,6 +32419,24 @@ body .mobile-bottom-nav a.active { color: #245d7b !important; }
   white-space: pre-wrap;
 }
 
+.vocabulary-expression-scenario-card {
+  gap: 9px;
+}
+
+.vocabulary-expression-scenario-card p + p {
+  border-top: 1px solid rgba(228, 216, 189, 0.72);
+  padding-top: 9px;
+}
+
+.vocabulary-expression-scenario-translation {
+  color: var(--muted);
+}
+
+.vocabulary-expression-scenario-example {
+  color: var(--accent-dark);
+  font-weight: 750;
+}
+
 .vocabulary-lookup-display-settings {
   display: grid;
   gap: 16px;

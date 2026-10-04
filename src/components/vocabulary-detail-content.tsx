@@ -19,6 +19,7 @@ type VocabularyDetailContentProps = {
   formationParts: VocabularyFormationPart[];
   inlineVideo?: ReactNode;
   phrases: VocabularyPhraseMatch[];
+  usageScenario?: { context: string; translation: string; example: string } | null;
   usageExamples: VocabularyUsageExample[];
 };
 
@@ -211,6 +212,48 @@ function UsageExamplesSection({ entry, examples, englishExampleTranslations }: {
   );
 }
 
+function splitSupplementalReviewNotes(notes: string[]) {
+  const text = notes.join(" ").trim();
+  const scenarioMarker = /场景考察\s*[：:]\s*/u.exec(text);
+  if (!scenarioMarker) return { caution: text, scenario: null };
+
+  const scenarioText = text.slice(scenarioMarker.index + scenarioMarker[0].length)
+    .replace(/^(?:情景|场景)\s*[：:]\s*/u, "");
+  const exampleMarker = /(?:^|\s)例句\s*[：:]\s*/u.exec(scenarioText);
+  const translationMarker = /(?:^|\s)(?:翻译|译文)\s*[：:]\s*/u.exec(scenarioText);
+  const context = exampleMarker
+    ? scenarioText.slice(0, exampleMarker.index).trim()
+    : scenarioText.trim();
+  const example = exampleMarker
+    ? scenarioText.slice(
+      exampleMarker.index + exampleMarker[0].length,
+      translationMarker && translationMarker.index > exampleMarker.index ? translationMarker.index : undefined,
+    ).trim()
+    : "";
+  const translation = translationMarker && (!exampleMarker || translationMarker.index > exampleMarker.index)
+    ? scenarioText.slice(translationMarker.index + translationMarker[0].length).trim()
+    : "";
+
+  return {
+    caution: text.slice(0, scenarioMarker.index).trim(),
+    scenario: { context, translation, example },
+  };
+}
+
+function SupplementalUsageScenario({ context, translation, example }: { context: string; translation: string; example: string }) {
+  if (!context && !translation && !example) return null;
+  return (
+    <section className="word-detail-section">
+      <h2>使用场景</h2>
+      <div className="word-lookup-etymology-card vocabulary-expression-scenario-card">
+        {context ? <p>{context}</p> : null}
+        {translation ? <p className="vocabulary-expression-scenario-translation">{translation}</p> : null}
+        {example ? <p className="vocabulary-expression-scenario-example" lang="en">{example}</p> : null}
+      </div>
+    </section>
+  );
+}
+
 export function VocabularyDetailContent({
   entry,
   etymologyChinese = "",
@@ -220,8 +263,24 @@ export function VocabularyDetailContent({
   formationUnlocked = false,
   inlineVideo,
   phrases,
+  usageScenario,
   usageExamples,
 }: VocabularyDetailContentProps) {
+  if (entry.level === "地道表达" || entry.level === "俚语俗语") {
+    const { caution, scenario: noteScenario } = splitSupplementalReviewNotes(entry.reviewNotes);
+    const scenario = usageScenario ?? noteScenario;
+    return (
+      <>
+        <VocabularyLookupDisplaySection controlsEnabled id="chineseDefinition" title="中文释义"><DefinitionRows entry={entry} /></VocabularyLookupDisplaySection>
+        <EnglishDefinitionSection entry={entry} />
+        <UsageExamplesSection entry={entry} englishExampleTranslations={englishExampleTranslations} examples={usageExamples} />
+        {entry.etymologyStory ? <EtymologySection chinese="" english="" story={entry.etymologyStory} /> : null}
+        {caution ? <WordDetailListSection items={[caution]} title="注意事项" /> : null}
+        {scenario ? <SupplementalUsageScenario {...scenario} /> : null}
+      </>
+    );
+  }
+
   const hasEtymologyContent = Boolean(etymologyEnglish || etymologyChinese || entry.etymologyStory || formationParts.length);
   const wordTreeAndEtymology = hasEtymologyContent ? (
     <>

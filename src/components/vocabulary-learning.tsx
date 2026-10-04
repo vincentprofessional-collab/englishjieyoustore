@@ -945,6 +945,26 @@ function LearningVocabularyDetails({
   const isSupplementalBook = entry.level === "地道表达" || entry.level === "俚语俗语";
   const detailedEntry = !isSupplementalBook && detailPayload?.entry ? detailPayload.entry : entry;
   const [showVideo, setShowVideo] = useState(false);
+  const scenarioKey = entry.word.trim().toLowerCase();
+  const [loadedScenario, setLoadedScenario] = useState<{
+    word: string;
+    scenario: { context: string; translation: string; example: string } | null;
+  } | null>(null);
+  const idiomaticUsageScenario = entry.level === "地道表达" && loadedScenario?.word === scenarioKey
+    ? loadedScenario.scenario
+    : null;
+
+  useEffect(() => {
+    if (entry.level !== "地道表达") return;
+    let active = true;
+    void import("@/data/vocabulary/idiomatic-expression-scenarios.json").then(({ default: scenarios }) => {
+      const scenario = (scenarios as Record<string, { context: string; translation: string; example: string }>)[scenarioKey] ?? null;
+      if (active) setLoadedScenario({ word: scenarioKey, scenario });
+    }).catch(() => {
+      if (active) setLoadedScenario({ word: scenarioKey, scenario: null });
+    });
+    return () => { active = false; };
+  }, [entry.level, scenarioKey]);
 
   useEffect(() => {
     setShowVideo(!isPhoneUserAgent(navigator.userAgent));
@@ -971,12 +991,13 @@ function LearningVocabularyDetails({
         etymologyEnglish={detailPayload?.etymology?.english}
         englishExampleTranslations={exampleTranslations}
         formationParts={detailPayload?.formationParts ?? []}
-        inlineVideo={showVideo ? (
+        inlineVideo={!isSupplementalBook && showVideo ? (
           <VocabularyLookupDisplaySection controlsEnabled id="video" title="视频">
             <VocabularyLearningVideoSection word={detailedEntry.normalizedWord} />
           </VocabularyLookupDisplaySection>
         ) : null}
         phrases={detailPayload?.phrases ?? []}
+        usageScenario={idiomaticUsageScenario}
         usageExamples={detailPayload?.usageExamples ?? []}
       />
     </div>

@@ -1,10 +1,15 @@
-/** Split a paragraph translation into ordered fragments without changing its text. */
-function translationFragments(translation: string) {
+/** Split at sentence endings first, keeping punctuation and the original text. */
+function translationFragments(translation: string, pattern: RegExp) {
   const fragments: string[] = [];
   let start = 0;
 
   for (let index = 0; index < translation.length; index += 1) {
-    if (!/[，。！？；：]/.test(translation[index]!)) continue;
+    if (!pattern.test(translation[index]!)) continue;
+    if (
+      /[.!?]/.test(translation[index]!) &&
+      /\d/.test(translation[index - 1] ?? "") &&
+      /\d/.test(translation[index + 1] ?? "")
+    ) continue;
     while (index + 1 < translation.length && /[”’"'」』）)]/.test(translation[index + 1]!)) index += 1;
     fragments.push(translation.slice(start, index + 1));
     start = index + 1;
@@ -48,20 +53,12 @@ export function alignNewConceptParagraph(englishLines: string[], sourceTranslati
   const verified = lessonNo ? VERIFIED_SENTENCE_BOUNDARIES[lessonNo] : undefined;
   if (verified?.length === englishLines.length && verified.join("") === translation) return verified;
 
-  const fragments = translationFragments(translation);
-  while (fragments.length < englishLines.length) {
-    let longestIndex = -1;
-    let longestLength = 0;
-    fragments.forEach((fragment, index) => {
-      if (fragment.length > longestLength) {
-        longestLength = fragment.length;
-        longestIndex = index;
-      }
-    });
-    if (longestIndex < 0 || longestLength < 2) break;
-    const fragment = fragments[longestIndex]!;
-    const midpoint = Math.floor(fragment.length / 2);
-    fragments.splice(longestIndex, 1, fragment.slice(0, midpoint), fragment.slice(midpoint));
+  // Sentence-ending punctuation is the most reliable bilingual boundary. If
+  // Chinese has fewer sentences than the English source, fall back to clause
+  // punctuation rather than cutting a translation at an arbitrary midpoint.
+  let fragments = translationFragments(translation, /[。！？.!?]/);
+  if (fragments.length < englishLines.length) {
+    fragments = translationFragments(translation, /[，。！？；：.!?]/);
   }
 
   if (fragments.length < englishLines.length) {
@@ -89,7 +86,7 @@ export function alignNewConceptParagraph(englishLines: string[], sourceTranslati
         const actualLength = prefixLengths[end]! - prefixLengths[start]!;
         const lengthPenalty = Math.pow((actualLength - expectedLength) / Math.max(5, expectedLength), 2);
         const boundary = fragments[end - 1]!;
-        const punctuationPenalty = end === columnCount || /[，。！？；：][”’"'」』）)]*$/.test(boundary) ? 0 : 0.2;
+        const punctuationPenalty = end === columnCount || /[，。！？；：.!?][”’"'」』）)]*$/.test(boundary) ? 0 : 0.2;
         const score = costs[row - 1]![start]! + lengthPenalty + punctuationPenalty;
         if (score < costs[row]![end]!) {
           costs[row]![end] = score;
