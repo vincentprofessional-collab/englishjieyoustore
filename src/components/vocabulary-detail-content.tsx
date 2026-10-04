@@ -222,9 +222,9 @@ export function VocabularyDetailContent({
     <>
       <VocabularyLookupDisplaySection controlsEnabled id="chineseDefinition" title="中文释义"><DefinitionRows entry={entry} /></VocabularyLookupDisplaySection>
       <EnglishDefinitionSection entry={entry} />
-      {inlineVideo}
-      {wordTreeAndEtymology}
       <WordInflectionSection entry={entry} />
+      {wordTreeAndEtymology}
+      {inlineVideo}
       <WordDetailListSection items={entry.reviewNotes} title="温故知新" />
       <UsageExamplesSection entry={entry} examples={usageExamples} />
       <PhraseSection phrases={phrases} />

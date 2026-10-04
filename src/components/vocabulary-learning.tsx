@@ -848,11 +848,11 @@ function SpellingColoredAnswer({ answer, feedbackVisible, target }: { answer: st
     <span aria-hidden="true" className="vocabulary-learning-spelling-colored-answer">
       {feedback.map(({ letter, correct }, index) => (
         <span
-          className={correct ? "is-correct" : "is-wrong"}
+          className={!feedbackVisible ? "is-unsubmitted" : correct ? "is-correct" : "is-wrong"}
           key={`${index}-${letter}`}
           style={{
-            color: correct ? "#19804e" : "#c84c4c",
-            WebkitTextFillColor: correct ? "#19804e" : "#c84c4c",
+            color: !feedbackVisible ? "#171a17" : correct ? "#19804e" : "#c84c4c",
+            WebkitTextFillColor: !feedbackVisible ? "#171a17" : correct ? "#19804e" : "#c84c4c",
           }}
         >{letter}</span>
       ))}
@@ -1131,39 +1131,60 @@ async function playWordAudio(word: LearningWord, voice: Voice, repeats: number) 
   return usedBrowserVoice;
 }
 
-function playSpellingFeedbackSound(correct: boolean) {
-  if (typeof window === "undefined") return;
+function playSpellingFeedbackSound(correct: boolean): Promise<void> {
+  if (typeof window === "undefined") return Promise.resolve();
   const AudioContextConstructor = window.AudioContext
     ?? (window as Window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
-  if (!AudioContextConstructor) return;
+  if (!AudioContextConstructor) return Promise.resolve();
 
-  const context = new AudioContextConstructor();
-  const oscillator = context.createOscillator();
-  const gain = context.createGain();
-  const start = context.currentTime;
-  const end = start + (correct ? 0.42 : 0.3);
+  return new Promise<void>((resolve) => {
+    let context: AudioContext;
+    try {
+      context = new AudioContextConstructor();
+    } catch {
+      resolve();
+      return;
+    }
 
-  oscillator.type = correct ? "sine" : "square";
-  if (correct) {
-    oscillator.frequency.setValueAtTime(660, start);
-    oscillator.frequency.linearRampToValueAtTime(880, start + 0.16);
-    oscillator.frequency.linearRampToValueAtTime(1046, end);
-  } else {
-    oscillator.frequency.setValueAtTime(260, start);
-    oscillator.frequency.linearRampToValueAtTime(150, end);
-  }
+    let settled = false;
+    let fallbackTimer = 0;
+    const finish = () => {
+      if (settled) return;
+      settled = true;
+      window.clearTimeout(fallbackTimer);
+      void context.close().catch(() => undefined);
+      resolve();
+    };
 
-  gain.gain.setValueAtTime(0.0001, start);
-  gain.gain.exponentialRampToValueAtTime(0.12, start + 0.025);
-  gain.gain.exponentialRampToValueAtTime(0.0001, end);
-  oscillator.connect(gain);
-  gain.connect(context.destination);
-  oscillator.addEventListener("ended", () => {
-    void context.close();
-  }, { once: true });
-  void context.resume();
-  oscillator.start(start);
-  oscillator.stop(end);
+    fallbackTimer = window.setTimeout(finish, 1800);
+    void context.resume().then(() => {
+      if (settled) return;
+      const oscillator = context.createOscillator();
+      const gain = context.createGain();
+      const start = context.currentTime;
+      const end = start + (correct ? 0.42 : 0.3);
+
+      oscillator.type = correct ? "sine" : "square";
+      if (correct) {
+        oscillator.frequency.setValueAtTime(660, start);
+        oscillator.frequency.linearRampToValueAtTime(880, start + 0.16);
+        oscillator.frequency.linearRampToValueAtTime(1046, end);
+      } else {
+        oscillator.frequency.setValueAtTime(260, start);
+        oscillator.frequency.linearRampToValueAtTime(150, end);
+      }
+
+      gain.gain.setValueAtTime(0.0001, start);
+      gain.gain.exponentialRampToValueAtTime(0.12, start + 0.025);
+      gain.gain.exponentialRampToValueAtTime(0.0001, end);
+      oscillator.connect(gain);
+      gain.connect(context.destination);
+      oscillator.addEventListener("ended", finish, { once: true });
+      fallbackTimer = window.setTimeout(finish, correct ? 1000 : 900);
+      oscillator.start(start);
+      oscillator.stop(end);
+    }).catch(finish);
+  });
 }
 
 function chooseNextWord(
@@ -1278,6 +1299,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
   const [loadError, setLoadError] = useState("");
   const [loadNonce, setLoadNonce] = useState(0);
   const [currentWordId, setCurrentWordId] = useState<string | null>(null);
+  const [forcedSpellingWordId, setForcedSpellingWordId] = useState<string | null>(null);
   const [sessionDepleted, setSessionDepleted] = useState(false);
   const [wakeTick, setWakeTick] = useState(0);
   const [roundNonce, setRoundNonce] = useState(0);
@@ -1287,6 +1309,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
   const [answer, setAnswer] = useState("");
   const [roundHadSpellingError, setRoundHadSpellingError] = useState(false);
   const [spellingAnswerShown, setSpellingAnswerShown] = useState(false);
+  const [spellingPlaybackPending, setSpellingPlaybackPending] = useState(false);
   const [recordingError, setRecordingError] = useState("");
   const [oralScoreFeedback, setOralScoreFeedback] = useState<number | null>(null);
   const [recordingAudioUrl, setRecordingAudioUrl] = useState<string | null>(null);
@@ -1298,6 +1321,9 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
   const browseSpellingRevealedTokenRef = useRef(-1);
   const speakingDetailsRevealedTokenRef = useRef(-1);
   const answerRef = useRef("");
+  const spellingPlaybackPromiseRef = useRef<Promise<void> | null>(null);
+  const spellingClassificationPendingRef = useRef(false);
+  const forceNextSpellingWordRef = useRef(false);
   const recordingRef = useRef<MediaRecorder | null>(null);
   const recordingStreamRef = useRef<MediaStream | null>(null);
   const recordingChunksRef = useRef<Blob[]>([]);
@@ -1313,6 +1339,23 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
   const advanceTimerRef = useRef<number | null>(null);
   const browseModeBagRef = useRef<{ key: string; remaining: number[] }>({ key: "", remaining: [] });
   const browseChoiceRef = useRef<number | null>(null);
+
+  const playSpellingFeedbackThenWord = useCallback((word: LearningWord, correct: boolean, roundToken: number) => {
+    if (spellingPlaybackPromiseRef.current) return spellingPlaybackPromiseRef.current;
+    setSpellingPlaybackPending(true);
+    const playback = (async () => {
+      try {
+        await playSpellingFeedbackSound(correct);
+        if (roundToken === roundTokenRef.current) await playWordAudio(word, voice, 1);
+      } catch {
+        // Audio failures should not prevent the spelling result from being recorded.
+      } finally {
+        if (roundToken === roundTokenRef.current) setSpellingPlaybackPending(false);
+      }
+    })();
+    spellingPlaybackPromiseRef.current = playback;
+    return playback;
+  }, [voice]);
 
   const chooseBrowseMode = useCallback((settings: StudySettings) => {
     if (settings.method !== "browse") return;
@@ -1681,10 +1724,13 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
   const dailyGoal = currentSettings.dailyNew;
   const browseMode = currentSettings.method === "browse";
   const canRunRound = !browseMode || pageVisible;
-  const modeIndex = selectEnabledMode(
+  const savedModeIndex = selectEnabledMode(
     browseMode ? browseChoiceRef.current ?? 0 : currentProgress.lastReviewedAt === null ? 1 : currentProgress.modeIndex,
     enabledModeIndices(currentSettings),
   );
+  const modeIndex = forcedSpellingWordId === currentWordId && enabledModeIndices(currentSettings).includes(3)
+    ? 3
+    : savedModeIndex;
   const currentRoundKey = currentWord
     ? `${currentWord.id}:${modeIndex}:${roundNonce}:${browseMode ? "browse" : "classified"}`
     : null;
@@ -1764,7 +1810,6 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
     if (browseSpellingRevealedTokenRef.current === roundToken) return;
     browseSpellingRevealedTokenRef.current = roundToken;
     const correct = answerRef.current.trim().toLowerCase() === currentWord.word.trim().toLowerCase();
-    playSpellingFeedbackSound(correct);
     setSpellingAnswerShown(true);
     revealCurrentRound();
     if (!correct) setRoundHadSpellingError(true);
@@ -1775,8 +1820,8 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
       correct,
       Date.now(),
     ));
-    void playWordAudio(currentWord, voice, 1);
-  }, [browseMode, currentSettings.scope, currentWord, modeIndex, pageVisible, revealCurrentRound, selectedBook, studyReady, voice]);
+    void playSpellingFeedbackThenWord(currentWord, correct, roundToken);
+  }, [browseMode, currentSettings.scope, currentWord, modeIndex, pageVisible, playSpellingFeedbackThenWord, revealCurrentRound, selectedBook, studyReady]);
 
   const revealSpeakingDetails = useCallback((roundToken = roundTokenRef.current) => {
     if (!currentWord || !currentRoundKey || roundTokenRef.current !== roundToken) return;
@@ -1789,6 +1834,9 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
   useEffect(() => {
     const token = ++roundTokenRef.current;
     stopLearningAudio();
+    spellingPlaybackPromiseRef.current = null;
+    spellingClassificationPendingRef.current = false;
+    setSpellingPlaybackPending(false);
     setPhase("idle");
     setRevealedRoundKey(null);
     setAnswer("");
@@ -1876,6 +1924,8 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
     if (advancePending) return;
     roundTokenRef.current += 1;
     stopLearningAudio();
+    forceNextSpellingWordRef.current = false;
+    setForcedSpellingWordId(null);
     setOralScoreFeedback(null);
     setBrowseSpellingMistakes({});
     setCurrentWordId(null);
@@ -1892,6 +1942,8 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
   }, [advancePending, order, selectedBook, settingsByBook, voice]);
 
   const openStudySettings = useCallback(() => {
+    forceNextSpellingWordRef.current = false;
+    setForcedSpellingWordId(null);
     setSettingsDraft(toSettingsDraft(settingsByBook[selectedBook] ?? { ...DEFAULT_STUDY_SETTINGS, voice, order }));
     setSettingsOpenFor(selectedBook);
     setStudyPaused(true);
@@ -1935,6 +1987,8 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
     advanceTimerRef.current = null;
     setAdvancePending(false);
     setCurrentWordId(null);
+    forceNextSpellingWordRef.current = false;
+    setForcedSpellingWordId(null);
     setSessionDepleted(false);
     setStudyPaused(true);
     setSettingsOpenFor(null);
@@ -1947,6 +2001,8 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
     const settings = parseSettingsDraft(settingsDraft);
     if (!settings) return;
     setCurrentWordId(null);
+    forceNextSpellingWordRef.current = false;
+    setForcedSpellingWordId(null);
     setBrowseSpellingMistakes({});
     chooseBrowseMode(settings);
     setSettingsByBook((current) => ({ ...current, [settingsOpenFor]: settings }));
@@ -2019,11 +2075,17 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
         selectedBook,
       );
       if (next) chooseBrowseMode(currentSettings);
+      if (forceNextSpellingWordRef.current && next && enabledModeIndices(currentSettings).includes(3)) {
+        setForcedSpellingWordId(next.id);
+      } else if (!next || forcedSpellingWordId === currentWord.id) {
+        setForcedSpellingWordId(null);
+      }
+      forceNextSpellingWordRef.current = false;
       setCurrentWordId(next?.id ?? null);
       setSessionDepleted(next === null);
       setRoundNonce((value) => value + 1);
     },
-    [chooseBrowseMode, currentSettings, currentWord, selectedBook, visibleWords],
+    [chooseBrowseMode, currentSettings, currentWord, forcedSpellingWordId, selectedBook, visibleWords],
   );
 
   const commitBrowse = useCallback(() => {
@@ -2049,14 +2111,14 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
   }, [advancePending, browseMode, currentSettings, currentWord, modeIndex, moveToNextWord, pageVisible, progress, recordDailyActivity, selectedBook]);
 
   useEffect(() => {
-    if (!browseMode || !pageVisible || !studyReady || !currentWord || !currentRoundRevealed || advancePending
+    if (!browseMode || !pageVisible || !studyReady || !currentWord || !currentRoundRevealed || advancePending || spellingPlaybackPending
       || (modeIndex <= 1 && phase === "playing")) return;
     const token = roundTokenRef.current;
     const timer = window.setTimeout(() => {
       if (roundTokenRef.current === token) commitBrowse();
     }, 2000);
     return () => window.clearTimeout(timer);
-  }, [advancePending, browseMode, commitBrowse, currentRoundRevealed, currentWord, modeIndex, pageVisible, phase, roundNonce, studyReady]);
+  }, [advancePending, browseMode, commitBrowse, currentRoundRevealed, currentWord, modeIndex, pageVisible, phase, roundNonce, spellingPlaybackPending, studyReady]);
 
   const commitOutcome = useCallback(
     (
@@ -2134,16 +2196,25 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
   const revealSpellingAnswer = useCallback(() => {
     if (!currentWord || modeIndex !== 3 || phase === "recording" || spellingAnswerShown) return;
     const correct = currentWord.word.trim().toLowerCase() === answer.trim().toLowerCase();
-    playSpellingFeedbackSound(correct);
     setSpellingAnswerShown(true);
     if (!correct) setRoundHadSpellingError(true);
-  }, [answer, currentWord, modeIndex, phase, spellingAnswerShown]);
+    void playSpellingFeedbackThenWord(currentWord, correct, roundTokenRef.current);
+  }, [answer, currentWord, modeIndex, phase, playSpellingFeedbackThenWord, spellingAnswerShown]);
 
   const submitSpelling = useCallback(
-    (requestedOutcome: Familiarity) => {
+    async (requestedOutcome: Familiarity) => {
       if (!currentWord || modeIndex !== 3 || phase === "recording") return;
       const correct = answer.trim().toLowerCase() === currentWord.word.trim().toLowerCase();
+      if (!correct && requestedOutcome === "familiar") return;
+      if (spellingClassificationPendingRef.current) return;
+      spellingClassificationPendingRef.current = true;
+      const roundToken = roundTokenRef.current;
+      if (!spellingAnswerShown) revealSpellingAnswer();
+      await spellingPlaybackPromiseRef.current;
+      if (roundToken !== roundTokenRef.current) return;
+
       if (correct) {
+        forceNextSpellingWordRef.current = true;
         commitOutcome(requestedOutcome, {
           correct: true,
           hadError: false,
@@ -2152,19 +2223,19 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
         return;
       }
 
-      if (requestedOutcome === "familiar") return;
       if (!spellingAnswerShown) {
         revealCurrentRound();
         setSpellingAnswerShown(true);
       }
 
+      forceNextSpellingWordRef.current = true;
       commitOutcome(requestedOutcome, {
         correct,
         hadError: roundHadSpellingError,
         unanswered: answer.trim().length === 0,
       }, undefined, 2000);
     },
-    [answer, commitOutcome, currentWord, modeIndex, phase, revealCurrentRound, roundHadSpellingError, spellingAnswerShown],
+    [answer, commitOutcome, currentWord, modeIndex, phase, revealCurrentRound, revealSpellingAnswer, roundHadSpellingError, spellingAnswerShown],
   );
 
   useEffect(() => {
@@ -2677,7 +2748,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
                       autoFocus={!browseMode}
                       disabled={phase === "recording" || currentRoundRevealed || spellingAnswerShown || advancePending}
                       feedbackVisible={spellingAnswerShown}
-                      focusOnReady={browseMode && studyReady && pageVisible}
+                      focusOnReady={studyReady && pageVisible && (browseMode || modeIndex === 3)}
                       history={browseMode ? "" : `曾经错过 ${currentProgress.spellingErrorCount} 次 · 连续正确 ${currentProgress.spellingCorrectStreak}/3`}
                       key={`${currentWord.id}:${roundNonce}`}
                       onChange={updateSpelling}
