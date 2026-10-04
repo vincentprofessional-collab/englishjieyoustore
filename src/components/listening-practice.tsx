@@ -4296,7 +4296,7 @@ export function ListeningPractice({
 
   useEffect(() => {
     if (
-      (mode === "practice" && !isPracticeTimerRunning) ||
+      (mode === "practice" && (!isPracticeTimerRunning || submitted)) ||
       (mode === "mock" && (!mockStarted || submitted))
     ) {
       return;
@@ -4768,7 +4768,7 @@ export function ListeningPractice({
           ) : null}
         </div>
 
-        {mode === "practice" ? (
+        {mode === "practice" && !submitted ? (
           <button
             aria-label={isPracticeTimerRunning ? "暂停听力练习计时" : "开始听力练习计时"}
             aria-pressed={isPracticeTimerRunning}
@@ -5090,6 +5090,41 @@ export function ListeningPractice({
                       <div className={reviewStudyMode === "intensive" ? "listening-intensive-sentence" : ""}>
                         {renderTranscriptSentenceContent(sentence)}
                       </div>
+                      {sentence.audioUrl || section.fullAudioUrl ? (
+                        <div
+                          className="listening-sentence-audio"
+                          onClick={(event) => event.stopPropagation()}
+                          onKeyDown={(event) => event.stopPropagation()}
+                        >
+                          <AudioPlayer
+                            compactControls
+                            hasSelectedRate
+                            html5
+                            onEnded={() => handleSentenceAudioEnded(sentence)}
+                            onPlayingChange={(isPlaying) => {
+                              if (isPlaying) {
+                                activeSentenceClipIdRef.current = sentence.id;
+                                setActiveSentenceClipId(sentence.id);
+                                setIsSentenceClipPlaying(true);
+                              } else if (activeSentenceClipIdRef.current === sentence.id) {
+                                activeSentenceClipIdRef.current = null;
+                                setActiveSentenceClipId(null);
+                                setIsSentenceClipPlaying(false);
+                              }
+                            }}
+                            onSettingsChange={updateAudioSettings}
+                            onStopAtEnd={() => handleSentenceAudioEnded(sentence)}
+                            preload={false}
+                            settings={audioSettings}
+                            settingsPlacement="none"
+                            skipSeconds={3}
+                            src={sentence.audioUrl ?? section.fullAudioUrl ?? ""}
+                            startAtSeconds={sentence.audioUrl || sentence.startMs == null ? 0 : sentence.startMs / 1000}
+                            stopAtSeconds={sentence.audioUrl || sentence.endMs == null ? null : sentence.endMs / 1000}
+                            title={`第 ${sentence.sentenceNo} 句音频`}
+                          />
+                        </div>
+                      ) : null}
                     </article>
                   ))}
                 </div>

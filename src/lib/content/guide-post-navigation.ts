@@ -88,7 +88,6 @@ export function guidePostPagePlacementOptions(config: SiteChromeConfig): GuidePa
   const directoryPages = [
     ["左侧菜单：听力", "/listening"],
     ["左侧菜单：听力 / 剑桥雅思", "/listening/practice"],
-    ["左侧菜单：听力 / 九分达人", "/listening/jiufen"],
     ["左侧菜单：听力 / 历年真题", "/listening/past-papers"],
     ["左侧菜单：口语", "/speaking"],
     ["左侧菜单：口语 / Part 1", "/speaking/part-1"],

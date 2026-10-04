@@ -14,6 +14,7 @@ type VocabularyDetailContentProps = {
   entry: LocalVocabularyEntry;
   etymologyChinese?: string;
   etymologyEnglish?: string;
+  englishExampleTranslations?: string[];
   formationUnlocked?: boolean;
   formationParts: VocabularyFormationPart[];
   inlineVideo?: ReactNode;
@@ -170,12 +171,21 @@ function PhraseSection({ phrases }: { phrases: VocabularyPhraseMatch[] }) {
   );
 }
 
-function UsageExamplesSection({ entry, examples }: { entry: LocalVocabularyEntry; examples: VocabularyUsageExample[] }) {
+function UsageExamplesSection({ entry, examples, englishExampleTranslations }: { entry: LocalVocabularyEntry; examples: VocabularyUsageExample[]; englishExampleTranslations: string[] }) {
   if (examples.length === 0 && entry.englishExamples.length === 0) return null;
   return (
     <VocabularyLookupDisplaySection className="vocabulary-usage-examples" controlsEnabled id="examples" title="例句">
       <div data-has-non-bbc-examples={entry.englishExamples.length > 0 || examples.some((example) => example.bookCode !== "BBC") ? "true" : "false"}>
-      {entry.englishExamples.length > 0 ? <div className="english-example-list">{entry.englishExamples.map((example) => <blockquote key={example}>{example}</blockquote>)}</div> : null}
+      {entry.englishExamples.length > 0 ? (
+        <div className="english-example-list">
+          {entry.englishExamples.map((example, index) => (
+            <blockquote key={`${example}-${index}`}>
+              {example}
+              {englishExampleTranslations[index] ? <><br /><span className="muted">{englishExampleTranslations[index]}</span></> : null}
+            </blockquote>
+          ))}
+        </div>
+      ) : null}
       {examples.length > 0 ? (
         <div className="vocabulary-usage-example-list">
           {examples.map((example, index) => (
@@ -205,6 +215,7 @@ export function VocabularyDetailContent({
   entry,
   etymologyChinese = "",
   etymologyEnglish = "",
+  englishExampleTranslations = [],
   formationParts,
   formationUnlocked = false,
   inlineVideo,
@@ -226,7 +237,7 @@ export function VocabularyDetailContent({
       {wordTreeAndEtymology}
       {inlineVideo}
       <WordDetailListSection items={entry.reviewNotes} title="温故知新" />
-      <UsageExamplesSection entry={entry} examples={usageExamples} />
+      <UsageExamplesSection entry={entry} englishExampleTranslations={englishExampleTranslations} examples={usageExamples} />
       <PhraseSection phrases={phrases} />
       <WordDetailTagSection items={entry.synonyms} title="同义词" />
       <WordDetailTagSection items={entry.antonyms} title="反义词" />

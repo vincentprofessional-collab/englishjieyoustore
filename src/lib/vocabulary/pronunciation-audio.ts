@@ -1,7 +1,9 @@
+import { getSupabaseStorageUrl } from "@/lib/media/url";
+
 export type VocabularyAccent = "uk" | "us";
 
 function normalizeAudioWord(word: string) {
-  return word.trim().toLowerCase();
+  return word.trim().normalize("NFC").toLowerCase();
 }
 
 export function getVocabularyAudioUrl(word: string, accent: VocabularyAccent) {
@@ -11,8 +13,16 @@ export function getVocabularyAudioUrl(word: string, accent: VocabularyAccent) {
     return "";
   }
 
+  const audioKeyWord = normalizedWord === "café" ? "cafe-accent" : normalizedWord;
+
+  const supabaseUrl = getSupabaseStorageUrl(
+    "audio",
+    `word-audio/${accent}/${audioKeyWord}.mp3`,
+  );
+  if (supabaseUrl) return supabaseUrl;
+
   const configuredBaseUrl = process.env.NEXT_PUBLIC_VOCABULARY_AUDIO_BASE_URL?.trim().replace(/\/+$/, "");
-  const encodedWord = encodeURIComponent(normalizedWord);
+  const encodedWord = encodeURIComponent(audioKeyWord);
 
   if (configuredBaseUrl) {
     return `${configuredBaseUrl}/${accent}/${encodedWord}.mp3`;
@@ -43,8 +53,8 @@ export function playVocabularyPronunciation({
 }) {
   const locale = accent === "uk" ? "en-GB" : "en-US";
   const audioUrls = [...new Set([
-    audioUrl?.trim(),
     getVocabularyAudioUrl(word, accent),
+    audioUrl?.trim(),
   ].filter((url): url is string => Boolean(url)))];
 
   if (typeof window === "undefined" || audioUrls.length === 0) {

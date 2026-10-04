@@ -9774,6 +9774,27 @@ h1 {
   margin: 0;
 }
 
+.practice-subtitle-line .listening-sentence-audio {
+  margin-top: 4px;
+}
+
+.practice-subtitle-line .listening-sentence-audio .howler-player {
+  background: rgba(207, 231, 245, 0.32);
+  border: 1px solid rgba(169, 212, 234, 0.6);
+  border-radius: 14px;
+  padding: 8px 12px;
+}
+
+.practice-subtitle-line .listening-sentence-audio .player-main-controls {
+  justify-content: center;
+}
+
+.practice-subtitle-line .listening-sentence-audio .player-progress-row {
+  gap: 8px;
+  grid-template-columns: 42px minmax(80px, 1fr) 42px;
+  margin-top: 6px;
+}
+
 .subtitle-english-line {
   color: #000;
   display: block;

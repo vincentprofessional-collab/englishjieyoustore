@@ -4,34 +4,50 @@ import {
 } from "@/lib/vocabulary/local-vocabulary";
 import {
   getLearningBookEntries,
+  LEARNING_BOOKS,
   toLearningWord,
   toLearningWordFromFavorite,
   type FavoriteLearningWord,
   type LearningBookKey,
+  type LearningWord,
 } from "@/lib/vocabulary/learning";
+import { getSupplementalLearningWords } from "@/lib/vocabulary/supplemental-learning-books";
 
 export const dynamic = "force-dynamic";
 
 const validBookKeys = new Set<LearningBookKey | "全部">([
-  "小学",
-  "初中",
-  "高中",
-  "四级",
-  "六级",
-  "考研",
-  "托雅",
-  "SAT",
-  "GMAT",
-  "GRE",
-  "未分级",
+  ...LEARNING_BOOKS.map((book) => book.key),
   "全部",
 ]);
+
+let supplementalFavoriteIndex: Map<string, LearningWord> | null = null;
+
+function getSupplementalFavoriteIndex() {
+  if (supplementalFavoriteIndex) return supplementalFavoriteIndex;
+  const books = ["地道表达", "俚语俗语"] as const;
+  supplementalFavoriteIndex = new Map(books.flatMap((book) =>
+    (getSupplementalLearningWords(book) ?? []).map((word) => [
+      `${word.level}:${word.word.toLowerCase().replace(/^[^a-z]+|[^a-z]+$/gi, "")}`,
+      word,
+    ] as const),
+  ));
+  return supplementalFavoriteIndex;
+}
 
 export function GET(request: Request) {
   const requestedBook = new URL(request.url).searchParams.get("book") ?? "小学";
   const book = validBookKeys.has(requestedBook as LearningBookKey | "全部")
     ? (requestedBook as LearningBookKey | "全部")
     : "小学";
+  if (book !== "全部") {
+    const supplementalWords = getSupplementalLearningWords(book);
+    if (supplementalWords) {
+      return NextResponse.json(
+        { book, sourceCount: supplementalWords.length, words: supplementalWords },
+        { headers: { "Cache-Control": "no-store" } },
+      );
+    }
+  }
   const entries = getAllVocabularyEntries();
   const words = getLearningBookEntries(entries, book).map(toLearningWord);
 
@@ -59,13 +75,15 @@ export async function POST(request: Request) {
   const entriesById = new Map(
     getAllVocabularyEntries().map((entry) => [entry.normalizedWord.toLowerCase(), entry]),
   );
+  const supplementalFavorites = getSupplementalFavoriteIndex();
   const seen = new Set<string>();
   const words = favorites.flatMap((favorite) => {
     const id = favorite.id.trim().toLowerCase();
     if (!id || seen.has(id)) return [];
     seen.add(id);
     const entry = entriesById.get(id);
-    return [entry ? toLearningWord(entry) : toLearningWordFromFavorite({ ...favorite, id })];
+    const supplemental = supplementalFavorites.get(`${favorite.level ?? ""}:${id}`);
+    return [supplemental ?? (entry ? toLearningWord(entry) : toLearningWordFromFavorite({ ...favorite, id }))];
   });
 
   return NextResponse.json(

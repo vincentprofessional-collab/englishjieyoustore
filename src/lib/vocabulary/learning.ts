@@ -19,6 +19,8 @@ export const LEARNING_BOOKS = [
   { key: "GMAT", label: "GMAT", rank: 9, description: "GMAT 词汇" },
   { key: "GRE", label: "GRE", rank: 10, description: "GRE 词汇" },
   { key: "未分级", label: "未分级", rank: 0, description: "待归入等级的词" },
+  { key: "地道表达", label: "地道表达", rank: 0, description: "常用地道表达与搭配" },
+  { key: "俚语俗语", label: "俚语俗语", rank: 0, description: "英语俚语与常见俗语" },
 ] as const;
 
 export type LearningBookKey = (typeof LEARNING_BOOKS)[number]["key"];
@@ -30,6 +32,7 @@ export type LearningWord = {
   definitionLines: string[];
   englishDefinitions: string[];
   englishExamples: string[];
+  englishExampleTranslations?: string[];
   etymologySource: string;
   etymologyStory: string;
   formation: string;
@@ -92,12 +95,15 @@ export function getLearningBookEntries(entries: LocalVocabularyEntry[], book: Le
   });
 }
 
-export function getLearningBookCounts(entries: LocalVocabularyEntry[]) {
+export function getLearningBookCounts(
+  entries: LocalVocabularyEntry[],
+  supplementalCounts: Partial<Record<LearningBookKey, number>> = {},
+) {
   let previousTotal = 0;
 
   return Object.fromEntries(
     LEARNING_BOOKS.map((book) => {
-      const total = getLearningBookEntries(entries, book.key).length;
+      const total = supplementalCounts[book.key] ?? getLearningBookEntries(entries, book.key).length;
 
       if (book.rank > 0) {
         const added = total - previousTotal;

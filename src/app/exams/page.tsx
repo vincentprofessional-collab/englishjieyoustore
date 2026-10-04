@@ -66,7 +66,6 @@ export default function ExamsPage() {
     { id: "ielts", title: "雅思", sections: [
       { id: "listening", title: "听力", items: [
         { title: "剑桥雅思 CI4–CI21", description: "按册进入听力题目与音频", href: "/listening/books/ci4", meta: "剑桥雅思" },
-        { title: "九分达人 1–8", description: "九分达人听力资料", href: "/listening/jiufen", meta: "听力资料" },
         { title: "历年真题", description: "真题音频与中英文原文", href: "/listening/past-papers", meta: "真题" },
         { title: "听力练习", description: "继续听力训练", href: "/listening/practice", meta: "专项训练" },
       ] },

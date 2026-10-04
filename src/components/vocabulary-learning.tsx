@@ -723,7 +723,9 @@ function toLookupEntry(word: LearningWord): LocalVocabularyEntry {
     formation: word.formation,
     inflections: word.inflections,
     level: word.level,
-    normalizedWord: word.id,
+    normalizedWord: word.level === "地道表达" || word.level === "俚语俗语"
+      ? word.word.toLowerCase().replace(/^[^a-z]+|[^a-z]+$/gi, "")
+      : word.id,
     partOfSpeech: word.partOfSpeech,
     phonetic: word.phonetic,
     reviewNotes: word.reviewNotes,
@@ -933,12 +935,15 @@ function SpellingTitleInput({
 
 function LearningVocabularyDetails({
   detailPayload,
+  exampleTranslations,
   entry,
 }: {
   detailPayload: VocabularyDetailPayload | null;
+  exampleTranslations?: string[];
   entry: LocalVocabularyEntry;
 }) {
-  const detailedEntry = detailPayload?.entry ?? entry;
+  const isSupplementalBook = entry.level === "地道表达" || entry.level === "俚语俗语";
+  const detailedEntry = !isSupplementalBook && detailPayload?.entry ? detailPayload.entry : entry;
   const [showVideo, setShowVideo] = useState(false);
 
   useEffect(() => {
@@ -964,6 +969,7 @@ function LearningVocabularyDetails({
         entry={detailedEntry}
         etymologyChinese={detailPayload?.etymology?.chinese}
         etymologyEnglish={detailPayload?.etymology?.english}
+        englishExampleTranslations={exampleTranslations}
         formationParts={detailPayload?.formationParts ?? []}
         inlineVideo={showVideo ? (
           <VocabularyLookupDisplaySection controlsEnabled id="video" title="视频">
@@ -2651,6 +2657,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
                   {currentRoundRevealed ? (
                     <LearningVocabularyDetails
                       detailPayload={detailPayload}
+                      exampleTranslations={currentWord.englishExampleTranslations}
                       entry={detailEntry ?? toLookupEntry(currentWord)}
                     />
                   ) : null}
@@ -2717,6 +2724,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
                     {currentRoundRevealed ? (
                       <LearningVocabularyDetails
                         detailPayload={detailPayload}
+                        exampleTranslations={currentWord.englishExampleTranslations}
                         entry={detailEntry ?? toLookupEntry(currentWord)}
                       />
                     ) : (
@@ -2768,6 +2776,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
                     {(browseMode ? currentRoundRevealed : spellingAnswerShown) ? (
                       <LearningVocabularyDetails
                         detailPayload={detailPayload}
+                        exampleTranslations={currentWord.englishExampleTranslations}
                         entry={detailEntry ?? toLookupEntry(currentWord)}
                       />
                     ) : null}

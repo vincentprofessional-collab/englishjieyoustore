@@ -80,7 +80,6 @@ const STUDY_NAV_GROUPS: StudyNavGroup[] = [
       {
         children: [
           { href: "/listening/practice?source=cambridge", label: "剑桥雅思" },
-          { href: "/listening/jiufen", label: "九分达人" },
           { href: "/listening/past-papers", label: "历年真题" },
         ],
         href: "/listening",

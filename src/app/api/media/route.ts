@@ -26,7 +26,7 @@ async function streamListeningAudio(request: NextRequest, path: string) {
     if (value) upstreamRequestHeaders.set(header, value);
   }
 
-  let upstream: Response;
+  let upstream: Response | null = null;
   try {
     upstream = await fetch(sourceUrl, {
       cache: "no-store",
@@ -35,10 +35,33 @@ async function streamListeningAudio(request: NextRequest, path: string) {
       signal: request.signal,
     });
   } catch {
+    upstream = null;
+  }
+
+  if (!upstream || [403, 404].includes(upstream.status) || upstream.status >= 500) {
+    if (process.env.COS_MEDIA_ENABLED === "true") {
+      try {
+        const cosUrl = getSignedCosMediaUrl("audio", path);
+        const cosResponse = await fetch(cosUrl, {
+          cache: "no-store",
+          headers: upstreamRequestHeaders,
+          method: "GET",
+          signal: request.signal,
+        });
+        if ([200, 206, 304, 416].includes(cosResponse.status)) {
+          upstream = cosResponse;
+        }
+      } catch {
+        // Preserve the Supabase response if the legacy COS copy is also unavailable.
+      }
+    }
+  }
+
+  if (!upstream) {
     return new NextResponse("Audio unavailable", { status: 502 });
   }
 
-  if (![200, 206, 304, 404, 416].includes(upstream.status)) {
+  if (![200, 206, 304, 403, 404, 416].includes(upstream.status)) {
     return new NextResponse("Audio unavailable", { status: 502 });
   }
 

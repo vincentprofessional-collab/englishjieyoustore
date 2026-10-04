@@ -112,6 +112,7 @@ type AudioPlayerProps = {
   skipSeconds?: number;
   showRate?: boolean;
   src: string;
+  startAtSeconds?: number;
   stopAtSeconds?: number | null;
   title?: string;
 };
@@ -257,6 +258,7 @@ export function AudioPlayer({
   settingsPlacement = "inside",
   skipSeconds = 5,
   src,
+  startAtSeconds = 0,
   stopAtSeconds = null,
   showRate = true,
   title = "音频",
@@ -338,6 +340,7 @@ export function AudioPlayer({
     let isDisposed = false;
     let loadRetryCount = 0;
     let loadRetryTimer: number | null = null;
+    let startPositionApplied = false;
 
     setIsReady(false);
     setIsPlaying(false);
@@ -348,7 +351,7 @@ export function AudioPlayer({
     setDraftPosition(0);
 
     const isMobilePlayback = window.matchMedia("(max-width: 820px)").matches;
-    const shouldPreload = preload || isMobilePlayback;
+    const shouldPreload = preload;
     const sound = new Howl({
       src: [src],
       html5: html5 || isMobilePlayback,
@@ -366,6 +369,14 @@ export function AudioPlayer({
         const loadedDuration = sound.duration();
         setDuration(loadedDuration);
         onDurationChangeRef.current?.(loadedDuration);
+        if (!startPositionApplied && startAtSeconds > 0) {
+          const startPosition = Math.min(startAtSeconds, loadedDuration || startAtSeconds);
+          sound.seek(startPosition);
+          setPosition(startPosition);
+          setDraftPosition(startPosition);
+          onTimeChangeRef.current?.(startPosition);
+          startPositionApplied = true;
+        }
         setIsReady(true);
       },
       onloaderror: () => {
@@ -487,7 +498,7 @@ export function AudioPlayer({
       }
       sound.unload();
     };
-  }, [html5, preload, src]);
+  }, [html5, preload, src, startAtSeconds]);
 
   useEffect(() => {
     const sound = soundRef.current;

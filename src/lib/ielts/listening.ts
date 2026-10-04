@@ -158,6 +158,16 @@ type JiufenBook = (typeof jiufenContentBundle.books)[number];
 type JiufenTest = JiufenBook["tests"][number];
 type JiufenPart = JiufenTest["parts"][number];
 
+const JIUFEN_PUBLICATION_ENABLED = false;
+
+function isSectionVisible(section: ListeningSectionSummary, includeDrafts: boolean) {
+  return includeDrafts || (
+    section.isPublished &&
+    !section.isHidden &&
+    (JIUFEN_PUBLICATION_ENABLED || !section.bookCode.startsWith("jiufen-"))
+  );
+}
+
 function findJiufenPart(sectionId: string) {
   for (const book of jiufenContentBundle.books) {
     for (const test of book.tests) {
@@ -251,7 +261,7 @@ export async function getListeningSections({ includeDrafts = false } = {}) {
   const overrides = await loadListeningContentOverrides();
   const jiufenSections = getJiufenSummaries()
     .map((section) => applyListeningSummaryOverride(section, overrides))
-    .filter((section) => includeDrafts || (section.isPublished && !section.isHidden));
+    .filter((section) => isSectionVisible(section, includeDrafts));
   const { data, error } = await supabase
     .from("test_sections")
     .select(
@@ -292,7 +302,7 @@ export async function getListeningSections({ includeDrafts = false } = {}) {
   const sections = ((data ?? []) as SectionRow[])
     .map(mapSection)
     .map((section) => applyListeningSummaryOverride(section, overrides))
-    .filter((section) => includeDrafts || (section.isPublished && !section.isHidden))
+    .filter((section) => isSectionVisible(section, includeDrafts))
     .sort((a, b) => {
       const bookSort = a.bookCode.localeCompare(b.bookCode);
       if (bookSort !== 0) return bookSort;
@@ -315,13 +325,17 @@ export async function getListeningSection(
       overrides,
       includeDrafts,
     );
-    if (!includeDrafts && (!mappedSection.isPublished || mappedSection.isHidden)) {
+    if (!isSectionVisible(mappedSection, includeDrafts)) {
       return { section: null, error: null };
     }
     return {
       section: mappedSection,
       error: null,
     };
+  }
+
+  if (!includeDrafts && !JIUFEN_PUBLICATION_ENABLED && sectionId.startsWith("jiufen-")) {
+    return { section: null, error: null };
   }
 
   const { data: section, error: sectionError } = await supabase

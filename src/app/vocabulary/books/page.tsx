@@ -1,6 +1,7 @@
 import { VocabularyLearning } from "@/components/vocabulary-learning";
 import { getAllVocabularyEntries } from "@/lib/vocabulary/local-vocabulary";
 import { getLearningBookCounts, LEARNING_BOOKS, type LearningBookKey } from "@/lib/vocabulary/learning";
+import { getSupplementalLearningBookCounts } from "@/lib/vocabulary/supplemental-learning-book-counts";
 
 export const dynamic = "force-dynamic";
 
@@ -14,7 +15,7 @@ export default async function VocabularyBooksPage({
     ? "生词本"
     : LEARNING_BOOKS.find((book) => book.key === requestedLevel)?.key ?? "初中";
   const entries = getAllVocabularyEntries();
-  const counts = getLearningBookCounts(entries);
+  const counts = getLearningBookCounts(entries, getSupplementalLearningBookCounts());
 
   return (
     <VocabularyLearning
