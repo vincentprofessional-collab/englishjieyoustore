@@ -978,7 +978,9 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
       setModeSelectionVersion((current) => current + 1);
       activeSentenceNoRef.current = sentenceNo;
       setActiveSentenceNo(sentenceNo);
-      if (mode === "listening") requestSentenceAutoPlay(sentenceNo);
+      if (mode === "listening" && article.sentences?.find((sentence) => sentence.sentenceNo === sentenceNo)?.audioUrl) {
+        requestSentenceAutoPlay(sentenceNo);
+      }
     }
   }
 
@@ -995,7 +997,7 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
     setActiveSentencePosition(0);
     setIsSentenceAudioPlaying(false);
     setIsFullAudioPlaying(false);
-    if (shouldContinuePlayback) {
+    if (shouldContinuePlayback && article.sentences?.find((sentence) => sentence.sentenceNo === sentenceNo)?.audioUrl) {
       requestSentenceAutoPlay(sentenceNo);
     } else {
       setSentenceAutoPlaySignals((current) => ({ ...current, [sentenceNo]: 0 }));
@@ -1175,7 +1177,7 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
   }
 
   function toggleFavoriteSentence(sentence: {
-    audioUrl: string;
+    audioUrl?: string;
     chinese: string;
     english: string;
     sentenceNo: number;
@@ -1760,7 +1762,8 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
                         <small>{SPEAKING_PLAYING_HINTS[audioSettings.speakingMode]}</small>
                       </div>
                     ) : null}
-                    <AudioPlayer
+                    {sentence.audioUrl ? (
+                      <AudioPlayer
                       key={`${modeSelectionVersion}-${sentence.sentenceNo}`}
                       autoPlaySignal={sentenceAutoPlaySignals[sentence.sentenceNo] ?? 0}
                       compactControls
@@ -1796,7 +1799,26 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
                           type="button"
                         >下一句</button>
                       )}
-                    />
+                      />
+                    ) : (
+                      <div className="bbc-article-paragraph-navigation">
+                        <button
+                          aria-label="上一句"
+                          className="bbc-sentence-navigation-button"
+                          disabled={!previousStudySentence}
+                          onClick={() => previousStudySentence && selectStudySentence(previousStudySentence.sentenceNo)}
+                          type="button"
+                        >上一句</button>
+                        <span>第 {activeStudySentenceIndex + 1} / 共 {article.sentences?.length ?? 0} 句</span>
+                        <button
+                          aria-label="下一句"
+                          className="bbc-sentence-navigation-button"
+                          disabled={!nextStudySentence}
+                          onClick={() => nextStudySentence && selectStudySentence(nextStudySentence.sentenceNo)}
+                          type="button"
+                        >下一句</button>
+                      </div>
+                    )}
                   </div>
                 );
               })() : originalTextBlocksWithOffsets.slice(0, 1).map((textBlock, index) => (

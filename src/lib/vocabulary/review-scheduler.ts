@@ -18,7 +18,8 @@ export type ReviewHistory = {
 
 const MINUTE = 60_000;
 const DAY = 24 * 60 * MINUTE;
-const LONG_TERM_DAYS = [3, 7, 14, 30];
+const LONG_TERM_DAYS = [1, 3, 7, 15, 30];
+const RETRY_MINUTES = { vague: 5, unfamiliar: 2 } as const;
 const ALL_MODES = [0, 1, 2, 3] as const;
 const CLASSIFIED_MODE_SEQUENCE = [1, 0, 2, 3] as const;
 
@@ -28,9 +29,15 @@ export function nextClassifiedModeIndex(modeIndex: number) {
 }
 
 export function selectEnabledMode(modeIndex: number, enabledModes: readonly number[] = ALL_MODES) {
-  const modes = ALL_MODES.filter((mode) => enabledModes.includes(mode));
-  const current = Math.min(3, Math.max(0, modeIndex));
-  return modes.find((mode) => mode >= current) ?? modes[0] ?? 0;
+  const modes = CLASSIFIED_MODE_SEQUENCE.filter((mode) => enabledModes.includes(mode));
+  if (modes.length === 0) return 0;
+  const currentIndex = CLASSIFIED_MODE_SEQUENCE.indexOf(modeIndex as (typeof CLASSIFIED_MODE_SEQUENCE)[number]);
+  const startIndex = currentIndex < 0 ? 0 : currentIndex;
+  for (let offset = 0; offset < CLASSIFIED_MODE_SEQUENCE.length; offset += 1) {
+    const candidate = CLASSIFIED_MODE_SEQUENCE[(startIndex + offset) % CLASSIFIED_MODE_SEQUENCE.length];
+    if (modes.includes(candidate)) return candidate;
+  }
+  return modes[0];
 }
 
 function classifiedModes(enabledModes: readonly number[]): number[] {
@@ -65,68 +72,9 @@ export function scheduleReview(
   const firstLearnedAt = previous.firstLearnedAt ?? previous.lastReviewedAt ?? now;
   const previousStep = previous.reviewStep
     ?? (previous.completed || previous.plan === "done" ? LONG_TERM_DAYS.length : previous.plan === "long-term" ? 1 : 0);
-  const isLongTerm = previousStep > 0 || previous.plan === "long-term" || previous.plan === "done" || previous.completed;
-  const recoveryRequired = forcedFamiliarMode === null && (
-    previous.recoveryRequired === true
-    || previous.lastOutcome === "vague"
-    || previous.lastOutcome === "unfamiliar"
-  );
-  const recoveryFamiliarStreak = previous.recoveryFamiliarStreak ?? 0;
+  const reviewStep = Math.max(0, Math.min(LONG_TERM_DAYS.length, previousStep));
+  const isLongTerm = reviewStep > 0 || previous.plan === "long-term" || previous.plan === "done" || previous.completed;
 
-  if (!isLongTerm) {
-    if (!isFamiliar) {
-      return {
-        completed: false,
-        consecutiveFamiliar: 0,
-        consecutiveFamiliarMode: currentMode,
-        firstLearnedAt,
-        mistakeCount,
-        modeIndex: currentMode,
-        nextReviewAt: now + MINUTE,
-        plan: "short-term" as const,
-        recoveryFamiliarStreak: 0,
-        recoveryRequired: true,
-        reviewStep: 0,
-      };
-    }
-
-    const nextRecoveryStreak = recoveryRequired ? recoveryFamiliarStreak + 1 : 0;
-    if (recoveryRequired && nextRecoveryStreak < 3) {
-      return {
-        completed: false,
-        consecutiveFamiliar: 0,
-        consecutiveFamiliarMode: currentMode,
-        firstLearnedAt,
-        mistakeCount,
-        modeIndex: currentMode,
-        nextReviewAt: now + MINUTE,
-        plan: "short-term" as const,
-        recoveryFamiliarStreak: nextRecoveryStreak,
-        recoveryRequired: true,
-        reviewStep: 0,
-      };
-    }
-
-    const completedMode = currentMode === modes[modes.length - 1];
-    const nextReviewMode = forcedFamiliarMode ?? nextMode(currentMode, modes);
-    const reviewStep = completedMode ? 1 : 0;
-    const intervalMs = completedMode ? LONG_TERM_DAYS[0] * DAY : MINUTE;
-    return {
-      completed: false,
-      consecutiveFamiliar: 0,
-      consecutiveFamiliarMode: completedMode ? modes[0] : nextReviewMode,
-      firstLearnedAt,
-      mistakeCount,
-      modeIndex: completedMode ? modes[0] : nextReviewMode,
-      nextReviewAt: now + intervalMs,
-      plan: completedMode ? "long-term" as const : "short-term" as const,
-      recoveryFamiliarStreak: 0,
-      recoveryRequired: false,
-      reviewStep,
-    };
-  }
-
-  const reviewStep = Math.max(1, Math.min(LONG_TERM_DAYS.length, previousStep || 1));
   if (!isFamiliar) {
     return {
       completed: false,
@@ -135,39 +83,23 @@ export function scheduleReview(
       firstLearnedAt,
       mistakeCount,
       modeIndex: currentMode,
-      nextReviewAt: now + 2 * MINUTE,
-      plan: "long-term" as const,
+      nextReviewAt: now + RETRY_MINUTES[outcome === "unfamiliar" ? "unfamiliar" : "vague"] * MINUTE,
+      plan: isLongTerm ? "long-term" as const : "short-term" as const,
       recoveryFamiliarStreak: 0,
       recoveryRequired: true,
       reviewStep,
     };
   }
 
-  const nextRecoveryStreak = recoveryRequired ? recoveryFamiliarStreak + 1 : 0;
-  if (recoveryRequired && nextRecoveryStreak < 3) {
-    return {
-      completed: false,
-      consecutiveFamiliar: 0,
-      consecutiveFamiliarMode: currentMode,
-      firstLearnedAt,
-      mistakeCount,
-      modeIndex: currentMode,
-      nextReviewAt: now + 2 * MINUTE,
-      plan: "long-term" as const,
-      recoveryFamiliarStreak: nextRecoveryStreak,
-      recoveryRequired: true,
-      reviewStep,
-    };
-  }
-
   const nextStep = Math.min(LONG_TERM_DAYS.length, reviewStep + 1);
+  const nextReviewMode = forcedFamiliarMode ?? nextMode(currentMode, modes);
   return {
     completed: false,
     consecutiveFamiliar: 0,
-    consecutiveFamiliarMode: forcedFamiliarMode ?? nextMode(currentMode, modes),
+    consecutiveFamiliarMode: nextReviewMode,
     firstLearnedAt,
     mistakeCount,
-    modeIndex: forcedFamiliarMode ?? nextMode(currentMode, modes),
+    modeIndex: nextReviewMode,
     nextReviewAt: now + LONG_TERM_DAYS[nextStep - 1] * DAY,
     plan: "long-term" as const,
     recoveryFamiliarStreak: 0,

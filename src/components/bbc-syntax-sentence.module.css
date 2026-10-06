@@ -2,13 +2,15 @@
   --syntax-row-space: 12px;
   --syntax-word-font-size: clamp(22px, 2.1vw, 30px);
   --syntax-component-font-size: 14px;
-  --subject: var(--bbc-syntax-role-subject, #245d7b);
-  --predicate: var(--bbc-syntax-role-predicate, #a32c1e);
-  --object: var(--bbc-syntax-role-object, #1f5c8b);
-  --predicative: var(--bbc-syntax-role-predicative, #6b3fa0);
-  --adverbial: var(--bbc-syntax-role-adverbial, #0f6e7a);
-  --attributive: var(--bbc-syntax-role-attributive, #8a6a2f);
-  --other: var(--bbc-syntax-role-other, #6e6a63);
+  --subject: var(--bbc-syntax-role-subject, #1565c0);
+  --predicate: var(--bbc-syntax-role-predicate, #c62828);
+  --object: var(--bbc-syntax-role-object, #218838);
+  --predicative: var(--bbc-syntax-role-predicative, #7b1fa2);
+  --adverbial: var(--bbc-syntax-role-adverbial, #c45100);
+  --comparison: var(--bbc-syntax-role-comparison, #ad1457);
+  --temporal: var(--bbc-syntax-role-temporal, #007c83);
+  --attributive: var(--bbc-syntax-role-attributive, #8b6200);
+  --other: var(--bbc-syntax-role-other, #5f6670);
   background: #fffdf8;
   border: 1px solid #e3dccb;
   border-radius: 16px;
@@ -33,6 +35,8 @@
 .object { --role: var(--object); }
 .predicative { --role: var(--predicative); }
 .adverbial { --role: var(--adverbial); }
+.comparison { --role: var(--comparison); }
+.temporal { --role: var(--temporal); }
 .attributive { --role: var(--attributive); }
 .other { --role: var(--other); }
 .word { align-items: center; display: inline-flex; flex-direction: column; font: var(--syntax-word-font-size)/1.55 Georgia, "Times New Roman", "Noto Serif SC", serif; padding: 0 1px; row-gap: var(--syntax-row-space); white-space: nowrap; }
@@ -53,10 +57,10 @@
 .pos { color: #111; font: 11px/1.4 system-ui, sans-serif; }
 .syntaxTrack { align-self: stretch; height: calc(var(--syntax-component-font-size) * 1.4 + var(--syntax-row-space)); position: relative; width: 100%; }
 .word:not([data-nested-row-active="true"]) .syntaxTrackNested { display: none; }
-.syntaxLine { border-top: 3px solid var(--role); box-sizing: border-box; left: -1px; position: absolute; top: 0; width: 100%; }
+.syntaxLine { border-top: 3px solid var(--role); box-sizing: border-box; left: -1px; position: absolute; top: var(--syntax-line-extra-top, 0px); width: 100%; }
 .syntaxNestedLine { border-top-style: dashed; border-top-width: 2px; }
 .syntaxLinePlaceholder { border-color: transparent; }
-.syntaxLabel { color: var(--role); font: 600 var(--syntax-component-font-size)/1.4 system-ui, "PingFang SC", sans-serif; left: calc(50% + var(--syntax-label-offset, 0px)); position: absolute; text-align: center; top: var(--syntax-row-space); transform: translateX(-50%); white-space: nowrap; }
+.syntaxLabel { color: var(--role); font: 600 var(--syntax-component-font-size)/1.4 system-ui, "PingFang SC", sans-serif; left: calc(50% + var(--syntax-label-offset, 0px)); position: absolute; text-align: center; top: calc(var(--syntax-row-space) + var(--syntax-label-extra-top, 0px)); transform: translateX(-50%); white-space: nowrap; }
 .syntaxNestedLabel { color: var(--role); }
 .syntaxLabelPlaceholder { visibility: hidden; }
 .editableMark { cursor: pointer; }

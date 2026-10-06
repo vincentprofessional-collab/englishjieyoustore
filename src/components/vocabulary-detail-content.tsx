@@ -8,7 +8,9 @@ import { VocabularyFormationPart as VocabularyFormationPartLink } from "@/compon
 import { VocabularyLookupDisplaySection } from "@/components/vocabulary-lookup-display-section";
 import type { VocabularyUsageExample } from "@/lib/vocabulary/examples";
 import type { VocabularyPhraseMatch } from "@/lib/vocabulary/phrases";
+import type { VocabularySynonymDistinction } from "@/lib/vocabulary/synonym-distinctions";
 import type { LocalVocabularyEntry, VocabularyFormationPart } from "@/lib/vocabulary/local-vocabulary";
+import { isSupplementalLearningBook } from "@/lib/vocabulary/learning";
 
 type VocabularyDetailContentProps = {
   entry: LocalVocabularyEntry;
@@ -19,6 +21,7 @@ type VocabularyDetailContentProps = {
   formationParts: VocabularyFormationPart[];
   inlineVideo?: ReactNode;
   phrases: VocabularyPhraseMatch[];
+  synonymDistinctions?: VocabularySynonymDistinction[];
   usageScenario?: { context: string; translation: string; example: string } | null;
   usageExamples: VocabularyUsageExample[];
 };
@@ -138,6 +141,29 @@ function WordDetailTagSection({ items, title }: { items: string[]; title: string
       <h2>{title}</h2>
       <div className="word-detail-tag-list">{items.map((item) => <span key={item}>{item}</span>)}</div>
     </section>
+  );
+}
+
+function SynonymDistinctionSection({ groups }: { groups: VocabularySynonymDistinction[] }) {
+  if (groups.length === 0) return null;
+  return (
+    <VocabularyLookupDisplaySection controlsEnabled id="synonymDistinctions" title="同义词辨析">
+      <div className="vocabulary-synonym-distinction-list">
+        {groups.map((group, index) => (
+          <article className="vocabulary-synonym-distinction-card" key={`${group.terms.join("-")}-${index}`}>
+            <h3>{group.terms.join(" · ")}</h3>
+            {group.summary ? <p className="vocabulary-synonym-distinction-summary">{group.summary}</p> : null}
+            {group.entries.map((entry, entryIndex) => (
+              <div className="vocabulary-synonym-distinction-entry" key={`${entry.term}-${entryIndex}`}>
+                <p><strong>{entry.term}</strong>{entry.distinction ? `：${entry.distinction}` : null}</p>
+                {entry.details.map((detail, detailIndex) => <p className="vocabulary-synonym-distinction-detail" key={`${detailIndex}-${detail}`}>{detail}</p>)}
+              </div>
+            ))}
+            {group.notes.map((note, noteIndex) => <p className="vocabulary-synonym-distinction-note" key={`${noteIndex}-${note}`}>{note}</p>)}
+          </article>
+        ))}
+      </div>
+    </VocabularyLookupDisplaySection>
   );
 }
 
@@ -263,10 +289,11 @@ export function VocabularyDetailContent({
   formationUnlocked = false,
   inlineVideo,
   phrases,
+  synonymDistinctions = [],
   usageScenario,
   usageExamples,
 }: VocabularyDetailContentProps) {
-  if (entry.level === "地道表达" || entry.level === "俚语俗语") {
+  if (isSupplementalLearningBook(entry.level)) {
     const { caution, scenario: noteScenario } = splitSupplementalReviewNotes(entry.reviewNotes);
     const scenario = usageScenario ?? noteScenario;
     return (
@@ -274,6 +301,7 @@ export function VocabularyDetailContent({
         <VocabularyLookupDisplaySection controlsEnabled id="chineseDefinition" title="中文释义"><DefinitionRows entry={entry} /></VocabularyLookupDisplaySection>
         <EnglishDefinitionSection entry={entry} />
         <UsageExamplesSection entry={entry} englishExampleTranslations={englishExampleTranslations} examples={usageExamples} />
+        <SynonymDistinctionSection groups={synonymDistinctions} />
         {entry.etymologyStory ? <EtymologySection chinese="" english="" story={entry.etymologyStory} /> : null}
         {caution ? <WordDetailListSection items={[caution]} title="注意事项" /> : null}
         {scenario ? <SupplementalUsageScenario {...scenario} /> : null}
@@ -293,10 +321,11 @@ export function VocabularyDetailContent({
       <VocabularyLookupDisplaySection controlsEnabled id="chineseDefinition" title="中文释义"><DefinitionRows entry={entry} /></VocabularyLookupDisplaySection>
       <EnglishDefinitionSection entry={entry} />
       <WordInflectionSection entry={entry} />
+      <UsageExamplesSection entry={entry} englishExampleTranslations={englishExampleTranslations} examples={usageExamples} />
+      <SynonymDistinctionSection groups={synonymDistinctions} />
       {wordTreeAndEtymology}
       {inlineVideo}
       <WordDetailListSection items={entry.reviewNotes} title="温故知新" />
-      <UsageExamplesSection entry={entry} englishExampleTranslations={englishExampleTranslations} examples={usageExamples} />
       <PhraseSection phrases={phrases} />
       <WordDetailTagSection items={entry.synonyms} title="同义词" />
       <WordDetailTagSection items={entry.antonyms} title="反义词" />

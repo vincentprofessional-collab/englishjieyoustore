@@ -13,7 +13,9 @@ export default async function VocabularyBooksPage({
   const requestedLevel = (await searchParams).level;
   const initialBook: LearningBookKey | "生词本" = requestedLevel === "生词本"
     ? "生词本"
-    : LEARNING_BOOKS.find((book) => book.key === requestedLevel)?.key ?? "初中";
+    : requestedLevel === "未分级"
+      ? "其他词汇"
+      : LEARNING_BOOKS.find((book) => book.key === requestedLevel)?.key ?? "初中";
   const entries = getAllVocabularyEntries();
   const counts = getLearningBookCounts(entries, getSupplementalLearningBookCounts());
 

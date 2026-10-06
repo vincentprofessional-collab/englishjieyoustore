@@ -1,5 +1,6 @@
 import { createHash, createHmac } from "node:crypto";
 import { getBbcArticleById } from "@/lib/articles/bbc";
+import { getUploadedBbcArticle } from "@/lib/articles/bbc-uploaded-content";
 import { localBbcAudioResponse, resolveLocalBbcAudio } from "@/lib/articles/bbc-local-audio";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 
@@ -82,7 +83,7 @@ export async function GET(
   { params }: { params: Promise<{ year: string; articleId: string; file: string[] }> },
 ) {
   const { year, articleId, file } = await params;
-  const article = getBbcArticleById(articleId);
+  const article = getBbcArticleById(articleId) ?? await getUploadedBbcArticle(articleId);
   const audioFile = file.join("/");
 
   if (
@@ -90,7 +91,7 @@ export async function GET(
     String(article.year) !== year ||
     (article.fullAudioUrl?.split("/").pop() !== audioFile &&
       !article.sentences?.some((sentence) =>
-        sentence.audioUrl.endsWith(`/${audioFile}`),
+        sentence.audioUrl?.endsWith(`/${audioFile}`),
       ))
   ) {
     return new Response("Audio not found.", { status: 404 });

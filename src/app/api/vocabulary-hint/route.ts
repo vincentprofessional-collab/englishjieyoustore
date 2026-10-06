@@ -6,6 +6,7 @@ import { getVocabularyUsageExamples, prioritizeVocabularyUsageExamples } from "@
 import { getVocabularyPhraseMatches } from "@/lib/vocabulary/phrases";
 import { getExtendedVocabularyEntry, getVocabularyEntry, getVocabularyFormationParts } from "@/lib/vocabulary/local-vocabulary";
 import { getVocabularyLookupEtymology } from "@/lib/vocabulary/lookup-etymology";
+import { getVocabularySynonymDistinctions } from "@/lib/vocabulary/synonym-distinctions";
 
 export const dynamic = "force-dynamic";
 
@@ -46,6 +47,11 @@ export async function GET(request: Request) {
       ...part,
       href: part.href ? `${part.href}${part.href.includes("?") ? "&" : "?"}from=lookup` : part.href,
     }));
+    const synonymDistinctions = getVocabularySynonymDistinctions([
+      entry.word,
+      entry.normalizedWord,
+      ...entry.inflections.map((inflection) => inflection.value),
+    ]);
 
     return NextResponse.json(
       {
@@ -53,6 +59,7 @@ export async function GET(request: Request) {
         etymology: getVocabularyLookupEtymology(entry.word),
         formationParts,
         phrases: getVocabularyPhraseMatches(entry.word),
+        synonymDistinctions,
         usageExamples,
       },
       { headers: { "Cache-Control": "no-store" } },

@@ -1,0 +1,136 @@
+.panel {
+  background: var(--surface, #fffdf8);
+  border: 1px solid var(--line, #eadfc9);
+  border-radius: 22px;
+  box-shadow: var(--shadow-soft, 0 16px 40px rgba(53, 46, 30, 0.08));
+  display: grid;
+  gap: 24px;
+  padding: clamp(20px, 3vw, 34px);
+}
+
+.header span {
+  color: var(--accent-dark, #806319);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+}
+
+.header h2 {
+  margin: 8px 0;
+}
+
+.header p,
+.form small {
+  color: var(--muted, #77736b);
+  line-height: 1.6;
+}
+
+.form {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.form label {
+  align-content: start;
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+
+.form label > span,
+.progress > span {
+  color: var(--ink, #171717);
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.form input:not([type="file"]),
+.form textarea {
+  background: #fffefa;
+  border: 1px solid var(--line, #eadfc9);
+  border-radius: 12px;
+  color: var(--ink, #171717);
+  font: inherit;
+  min-height: 46px;
+  padding: 12px 14px;
+  width: 100%;
+}
+
+.form textarea {
+  line-height: 1.65;
+  resize: vertical;
+}
+
+.form input:focus,
+.form textarea:focus {
+  border-color: #8dc9e4;
+  outline: 3px solid rgba(141, 201, 228, 0.24);
+}
+
+.full {
+  grid-column: 1 / -1;
+}
+
+.file {
+  background: rgba(188, 224, 241, 0.18);
+  border: 1px dashed #a7d6eb;
+  border-radius: 14px;
+  padding: 16px;
+}
+
+.file input {
+  font: inherit;
+  max-width: 100%;
+}
+
+.progress {
+  align-items: center;
+  display: grid;
+  gap: 8px 16px;
+  grid-template-columns: 1fr auto;
+}
+
+.progress progress {
+  grid-column: 1 / -1;
+  height: 12px;
+  width: 100%;
+}
+
+.message {
+  background: rgba(126, 184, 137, 0.14);
+  border-radius: 12px;
+  color: #285d35;
+  margin: 0;
+  padding: 12px 14px;
+}
+
+.message.error {
+  background: rgba(196, 69, 69, 0.1);
+  color: #922d2d;
+}
+
+.publishedLink {
+  color: #126f95;
+  font-weight: 900;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media (max-width: 760px) {
+  .form {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .full {
+    grid-column: auto;
+  }
+
+  .actions,
+  .actions button {
+    width: 100%;
+  }
+}

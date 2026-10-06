@@ -7,6 +7,7 @@ import {
   LEARNING_BOOKS,
   toLearningWord,
   toLearningWordFromFavorite,
+  SUPPLEMENTAL_LEARNING_BOOK_KEYS,
   type FavoriteLearningWord,
   type LearningBookKey,
   type LearningWord,
@@ -24,7 +25,7 @@ let supplementalFavoriteIndex: Map<string, LearningWord> | null = null;
 
 function getSupplementalFavoriteIndex() {
   if (supplementalFavoriteIndex) return supplementalFavoriteIndex;
-  const books = ["地道表达", "俚语俗语"] as const;
+  const books = SUPPLEMENTAL_LEARNING_BOOK_KEYS;
   supplementalFavoriteIndex = new Map(books.flatMap((book) =>
     (getSupplementalLearningWords(book) ?? []).map((word) => [
       `${word.level}:${word.word.toLowerCase().replace(/^[^a-z]+|[^a-z]+$/gi, "")}`,

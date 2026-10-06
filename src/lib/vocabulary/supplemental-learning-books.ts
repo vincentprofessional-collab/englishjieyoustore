@@ -1,28 +1,40 @@
+import gradedPhrases from "@/data/vocabulary/graded-phrases.json";
 import idiomaticExpressions from "@/data/vocabulary/idiomatic-expressions.json";
 import slangProverbs from "@/data/vocabulary/slang-proverbs.json";
-import type { LearningBookKey, LearningWord } from "@/lib/vocabulary/learning";
+import {
+  isSupplementalLearningBook,
+  type LearningBookKey,
+  type LearningWord,
+} from "@/lib/vocabulary/learning";
 
 type SupplementalSourceEntry = {
   definitionCn: string;
   englishDefinition?: string;
-  example: string;
-  exampleTranslation: string;
-  note: string;
+  example?: string;
+  exampleTranslation?: string;
+  note?: string;
   origin?: string;
   partOfSpeech: string;
   phonetic: string;
   word: string;
 };
 
-function getSourceEntries(book: "地道表达" | "俚语俗语"): SupplementalSourceEntry[] {
+const gradedPhraseBooks: Partial<Record<LearningBookKey, SupplementalSourceEntry[]>> = {
+  小学短语: gradedPhrases.小学 as SupplementalSourceEntry[],
+  初中短语: gradedPhrases.初中 as SupplementalSourceEntry[],
+  高中短语: gradedPhrases.高中 as SupplementalSourceEntry[],
+};
+
+function getSourceEntries(book: LearningBookKey): SupplementalSourceEntry[] {
+  if (gradedPhraseBooks[book]) return gradedPhraseBooks[book] ?? [];
   return (book === "地道表达" ? idiomaticExpressions : slangProverbs) as SupplementalSourceEntry[];
 }
 
-const supplementalWords = new Map<"地道表达" | "俚语俗语", LearningWord[]>();
+const supplementalWords = new Map<LearningBookKey, LearningWord[]>();
 
-function toLearningWord(entry: SupplementalSourceEntry, book: "地道表达" | "俚语俗语", index: number): LearningWord {
+function toLearningWord(entry: SupplementalSourceEntry, book: LearningBookKey, index: number): LearningWord {
   const definitionCn = entry.definitionCn || entry.exampleTranslation || entry.englishDefinition || "暂无释义";
-  const partOfSpeech = entry.partOfSpeech || (book === "俚语俗语" ? "习语" : "短语");
+  const partOfSpeech = entry.partOfSpeech || (book === "俚语俗语" ? "习语" : "phr.");
 
   return {
     antonyms: [],
@@ -52,7 +64,7 @@ function toLearningWord(entry: SupplementalSourceEntry, book: "地道表达" | "
 }
 
 export function getSupplementalLearningWords(book: LearningBookKey): LearningWord[] | null {
-  if (book !== "地道表达" && book !== "俚语俗语") return null;
+  if (!isSupplementalLearningBook(book)) return null;
   const cached = supplementalWords.get(book);
   if (cached) return cached;
   const words = getSourceEntries(book).map((entry, index) => toLearningWord(entry, book, index));

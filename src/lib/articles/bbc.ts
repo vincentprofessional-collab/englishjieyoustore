@@ -33,7 +33,7 @@ export type BbcVocabularyItem = {
 };
 
 export type BbcArticleSentence = {
-  audioUrl: string;
+  audioUrl?: string;
   chinese: string;
   chineseUnderlinedTerms?: string[];
   endMs: number;

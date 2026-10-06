@@ -46,7 +46,7 @@ async function createSentenceClip(
   audioFile: string,
 ) {
   if (!/^sentences\/\d{6}-\d{3}\.mp3$/.test(audioFile)) return null;
-  const sentence = article.sentences?.find((item) => item.audioUrl.endsWith(`/${audioFile}`));
+  const sentence = article.sentences?.find((item) => item.audioUrl?.endsWith(`/${audioFile}`));
   if (!sentence || sentence.endMs <= sentence.startMs) return null;
 
   const output = resolve(process.cwd(), "tmp", "bbc-local-audio", String(article.year), article.id, audioFile);

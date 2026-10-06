@@ -44,7 +44,7 @@ export async function PUT(request: NextRequest) {
   const canonical = getCanonical(articleId);
   if (!canonical) return NextResponse.json({ error: "文章标识无效。" }, { status: 400 });
   const sentences = normalizeBbcSyntaxSentenceEdits(payload?.sentences, canonical.sentences);
-  if (!sentences) return NextResponse.json({ error: "标注范围无效：请检查标签、词汇范围和嵌套成分。" }, { status: 400 });
+  if (!sentences) return NextResponse.json({ error: "标注范围无效：请检查标签、词性和 1–5 级成分的嵌套范围。" }, { status: 400 });
 
   const { error } = await supabase.from("bbc_article_syntax_overrides").upsert({
     article_id: articleId,

@@ -4,12 +4,17 @@ import { useLayoutEffect, useRef, type CSSProperties, type MouseEvent, type Reac
 import type { ArticleInlineAnnotation, ArticleInlineLineStyle } from "@/lib/article-inline-annotations";
 import styles from "./bbc-syntax-sentence.module.css";
 
+export type BbcSyntaxLevel = 1 | 2 | 3 | 4 | 5;
+export type BbcSyntaxLayerKey = `level${BbcSyntaxLevel}`;
 export type BbcSyntaxSpan = { label: string; start: number; end: number };
 export type BbcSyntaxSentenceData = {
   text: string;
   tokens: { text: string; pos: string; start: number; end: number }[];
   level1: BbcSyntaxSpan[];
   level2: BbcSyntaxSpan[];
+  level3?: BbcSyntaxSpan[];
+  level4?: BbcSyntaxSpan[];
+  level5?: BbcSyntaxSpan[];
   status: "reviewed" | "draft";
 };
 export type BbcSyntaxDisplayMode = "all" | "main" | "none";
@@ -29,6 +34,8 @@ const INLINE_STYLE_CLASSES: Record<ArticleInlineLineStyle, string> = {
 };
 
 function role(label: string) {
+  if (label.includes("比较")) return styles.comparison;
+  if (label.includes("时间")) return styles.temporal;
   if (label.includes("主语")) return styles.subject;
   if (label.includes("谓语")) return styles.predicate;
   if (label.includes("宾语")) return styles.object;
@@ -36,6 +43,16 @@ function role(label: string) {
   if (label.includes("状语")) return styles.adverbial;
   if (label.includes("定语")) return styles.attributive;
   return styles.other;
+}
+
+const SYNTAX_LEVELS: BbcSyntaxLevel[] = [1, 2, 3, 4, 5];
+
+function layerKey(level: BbcSyntaxLevel): BbcSyntaxLayerKey {
+  return `level${level}` as BbcSyntaxLayerKey;
+}
+
+function spansAtLevel(data: BbcSyntaxSentenceData, level: BbcSyntaxLevel) {
+  return data[layerKey(level)] ?? [];
 }
 
 function makeTracks(spans: BbcSyntaxSpan[]) {
@@ -50,14 +67,15 @@ function makeTracks(spans: BbcSyntaxSpan[]) {
 
 function syntaxTracks(data: BbcSyntaxSentenceData, displayMode: BbcSyntaxDisplayMode) {
   if (displayMode === "none") return [];
-  const nestedSpans = displayMode === "main"
-    ? data.level2.filter((candidate) => !data.level1.some((span) =>
-        span.label.includes("从句") && candidate.start >= span.start && candidate.end <= span.end))
-    : data.level2;
-  return [
-    ...makeTracks(nestedSpans).map((spans) => ({ spans, nested: true })),
-    ...makeTracks(data.level1).map((spans) => ({ spans, nested: false })),
-  ];
+  const clauseSpans = data.level1.filter((span) => span.label.includes("从句"));
+  return [...SYNTAX_LEVELS].reverse().flatMap((level) => {
+    const candidates = spansAtLevel(data, level);
+    const spans = displayMode === "main" && level > 1
+      ? candidates.filter((candidate) => !clauseSpans.some((parent) =>
+          candidate.start >= parent.start && candidate.end <= parent.end))
+      : candidates;
+    return makeTracks(spans).map((trackSpans) => ({ level, spans: trackSpans, nested: level > 1 }));
+  });
 }
 
 function spanCenterIndex(tokens: BbcSyntaxSentenceData["tokens"], span: BbcSyntaxSpan) {
@@ -120,7 +138,7 @@ export function BbcSyntaxSentence({
   waveTerms: string[];
   onTokenRangeSelect?: (range: BbcSyntaxTokenRange) => void;
   onPosTokenClick?: (tokenIndex: number) => void;
-  onSyntaxSpanClick?: (level: "level1" | "level2", span: BbcSyntaxSpan) => void;
+  onSyntaxSpanClick?: (level: BbcSyntaxLevel, span: BbcSyntaxSpan) => void;
   onInlineAnnotationClick?: (annotation: ArticleInlineAnnotation) => void;
 }) {
   const waved = phraseIndexes(data.tokens, waveTerms);
@@ -174,6 +192,42 @@ export function BbcSyntaxSentence({
           label.style.setProperty("--syntax-label-offset", `${(left + right - anchor.left - anchor.right) / 2}px`);
         }
       }
+
+      sentence.querySelectorAll<HTMLElement>(`.${styles.syntaxLabelPlaceholder}`)
+        .forEach((label) => label.style.removeProperty("--syntax-label-extra-top"));
+      for (const [trackIndex, track] of tracks.entries()) {
+        const trackElements = Array.from(sentence.querySelectorAll<HTMLElement>(`[data-syntax-track-index="${trackIndex}"]`));
+        trackElements.forEach((element) => element.style.setProperty("--syntax-line-extra-top", "0px"));
+        const labels = track.spans.flatMap((span) => {
+          const key = `${trackIndex}:${span.start}:${span.end}`;
+          const label = sentence.querySelector<HTMLElement>(`[data-syntax-label-key="${key}"]`);
+          if (!label) return [];
+          const rect = label.getBoundingClientRect();
+          return [{ label, span, left: rect.left, right: rect.right }];
+        }).sort((left, right) => left.left - right.left);
+        if (!labels.length) {
+          trackElements.forEach((element) => element.style.removeProperty("height"));
+          continue;
+        }
+
+        const lineHeight = Number.parseFloat(window.getComputedStyle(labels[0].label).lineHeight) || 20;
+        const rowSpace = Number.parseFloat(window.getComputedStyle(sentence).getPropertyValue("--syntax-row-space")) || 12;
+        const laneEnds: number[] = [];
+        for (const item of labels) {
+          let lane = laneEnds.findIndex((right) => right + 4 <= item.left);
+          if (lane < 0) lane = laneEnds.length;
+          laneEnds[lane] = item.right;
+          const laneOffset = lane * (lineHeight + 2);
+          item.label.style.setProperty("--syntax-label-extra-top", `${laneOffset}px`);
+          for (let index = item.span.start; index < item.span.end; index += 1) {
+            words[index]?.querySelector<HTMLElement>(`[data-syntax-track-index="${trackIndex}"]`)
+              ?.style.setProperty("--syntax-line-extra-top", `${laneOffset}px`);
+          }
+        }
+
+        const trackHeight = rowSpace + laneEnds.length * lineHeight + (laneEnds.length - 1) * 2;
+        trackElements.forEach((element) => { element.style.height = `${trackHeight}px`; });
+      }
     };
 
     let frame = 0;
@@ -224,7 +278,7 @@ export function BbcSyntaxSentence({
     const inlineLabels = inlineLabelsByToken.get(index) ?? [];
     const inlineAnnotation = inlineMarks[0];
     const hasInlineLabel = inlineAnnotation ? inlineLabels.some((item) => item.id === inlineAnnotation.id) : false;
-    const syntaxMarks = staticTracks.map(({ spans, nested }, trackIndex) => {
+    const syntaxMarks = staticTracks.map(({ spans, nested, level }, trackIndex) => {
       const span = spans.find((candidate) => index >= candidate.start && index < candidate.end);
       if (!span) {
         return <span aria-hidden="true" className={`${styles.syntaxTrack} ${nested ? styles.syntaxTrackNested : ""}`} data-syntax-track-index={trackIndex} key={`syntax-${trackIndex}`}>
@@ -233,13 +287,14 @@ export function BbcSyntaxSentence({
         </span>;
       }
       const centerIndex = spanCenterIndex(data.tokens, span);
-      const spanLevel = nested ? "level2" : "level1";
+      const spanLevel = level;
       const gapWithinSpan = index + 1 < span.end ? gapAfter : 0;
+      const endGap = index + 1 === span.end && spans.some((candidate) => candidate.start === span.end) ? 0.32 : 0;
       return <span aria-hidden="true" className={`${styles.syntaxTrack} ${nested ? styles.syntaxTrackNested : ""} ${role(span.label)}`} data-syntax-track-index={trackIndex} key={`syntax-${trackIndex}`}>
         <span
           className={`${styles.syntaxLine} ${nested ? styles.syntaxNestedLine : ""} ${onSyntaxSpanClick ? styles.editableMark : ""}`}
           onClick={() => onSyntaxSpanClick?.(spanLevel, span)}
-          style={{ width: `calc(100% + ${gapWithinSpan}em + 2px)` } as CSSProperties}
+          style={{ width: `calc(100% + ${gapWithinSpan}em + 2px - ${endGap}em)` } as CSSProperties}
         />
         <span
           className={`${styles.syntaxLabel} ${nested ? styles.syntaxNestedLabel : ""} ${onSyntaxSpanClick ? styles.editableMark : ""}`}
@@ -253,7 +308,7 @@ export function BbcSyntaxSentence({
     return (
       <span className={`${styles.word} ${highlighted ? styles.highlight : ""} ${waved.has(index) ? styles.wave : ""}`} data-token-index={index} key={index} style={gapAfter ? { marginRight: `${gapAfter}em` } : undefined}>
         <span className={styles.wordText} data-word-text>{token.text}</span>
-        {showPos ? <span className={`${styles.pos} ${token.pos === "PUNCT" || lexical.length === 0 ? styles.posPlaceholder : ""} ${onPosTokenClick && token.pos !== "PUNCT" && lexical.length > 0 ? styles.editableMark : ""}`} onClick={() => onPosTokenClick?.(index)}>{token.pos === "PUNCT" || lexical.length === 0 ? "　" : POS_LABELS[token.pos] ?? "其他"}</span> : null}
+        {showPos ? <span className={`${styles.pos} ${token.pos === "PUNCT" || lexical.length === 0 ? styles.posPlaceholder : ""} ${onPosTokenClick && token.pos !== "PUNCT" && lexical.length > 0 ? styles.editableMark : ""}`} onClick={() => onPosTokenClick?.(index)}>{token.pos === "PUNCT" || lexical.length === 0 ? "　" : POS_LABELS[token.pos] ?? token.pos}</span> : null}
         {hasSentenceInlineAnnotations && showPos ? (
           <span className={styles.annotationPosTrack}>
             <span className={`${styles.annotationPos} ${inlineAnnotation?.partOfSpeech && hasInlineLabel ? "" : styles.annotationPosPlaceholder}`}>

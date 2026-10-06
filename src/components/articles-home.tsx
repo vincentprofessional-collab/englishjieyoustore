@@ -25,6 +25,37 @@ export function ArticlesHome({
 }) {
   const activeGroup = yearGroups.find((group) => group.year === selectedYear) ?? yearGroups[0];
   const [selectedArticles, setSelectedArticles] = useState<string[]>([]);
+  const monthGroups = new Map<string, BbcArticleListGroup["articles"]>();
+  for (const article of activeGroup?.articles ?? []) {
+    const month = article.date.slice(0, 7);
+    const articles = monthGroups.get(month) ?? [];
+    articles.push(article);
+    monthGroups.set(month, articles);
+  }
+
+  function renderArticleCard(article: BbcArticleListGroup["articles"][number], selectable: boolean) {
+    const isSelected = selectedArticles.includes(article.id);
+    return (
+      <div className="bbc-article-card" key={article.id}>
+        <Link className="bbc-article-card-link" href={`/articles/${article.id}`}>
+          <span className="bbc-article-list-meta">{article.date.replaceAll("-", ".")} <span aria-hidden="true">·</span> <span className="bbc-article-list-id">{article.id}</span></span>
+          <strong>{article.title}</strong>
+          {article.titleChinese ? <span className="bbc-article-list-translation">{article.titleChinese}</span> : null}
+        </Link>
+        {selectable ? (
+          <button
+            aria-label={`${isSelected ? "取消选择" : "选择"}文章 ${article.title}`}
+            aria-pressed={isSelected}
+            className="bbc-article-select"
+            onClick={() => toggleArticleSelection(article.id)}
+            type="button"
+          >
+            <span aria-hidden="true" className={isSelected ? "choice-dot selected" : "choice-dot"} />
+          </button>
+        ) : null}
+      </div>
+    );
+  }
 
   function toggleArticleSelection(articleId: string) {
     setSelectedArticles((current) =>
@@ -48,29 +79,12 @@ export function ArticlesHome({
             <span>文章列表</span>
           </header>
           <div className="bbc-article-list">
-            {activeGroup?.articles.map((article) => {
-              const isSelected = selectedArticles.includes(article.id);
-
-              return (
-                <div className="bbc-article-card" key={article.id}>
-                  <Link className="bbc-article-card-link" href={`/articles/${article.id}`}>
-                    <strong>
-                      {article.id}-{article.title}
-                      {article.titleChinese ? ` ${article.titleChinese}` : ""}
-                    </strong>
-                  </Link>
-                  <button
-                    aria-label={`${isSelected ? "取消选择" : "选择"}文章 ${article.title}`}
-                    aria-pressed={isSelected}
-                    className="bbc-article-select"
-                    onClick={() => toggleArticleSelection(article.id)}
-                    type="button"
-                  >
-                    <span aria-hidden="true" className={isSelected ? "choice-dot selected" : "choice-dot"} />
-                  </button>
-                </div>
-              );
-            })}
+            {[...monthGroups].map(([month, articles]) => (
+              <section className="bbc-article-month-group" key={month}>
+                <h2>{Number(month.slice(5, 7))} 月</h2>
+                {articles.map((article) => renderArticleCard(article, true))}
+              </section>
+            ))}
           </div>
         </section>
       </div>
@@ -87,14 +101,11 @@ export function ArticlesHome({
             <small>{activeGroup?.articles.length ?? 0} 篇</small>
           </header>
           <div className="bbc-article-list">
-            {activeGroup?.articles.map((article) => (
-                <div className="bbc-article-card" key={article.id}>
-                  <Link className="bbc-article-card-link" href={`/articles/${article.id}`}>
-                    <span className="bbc-article-list-meta">{article.date.replaceAll("-", ".")} <span aria-hidden="true">·</span> <span className="bbc-article-list-id">{article.id}</span></span>
-                    <strong>{article.title}</strong>
-                    {article.titleChinese ? <span className="bbc-article-list-translation">{article.titleChinese}</span> : null}
-                  </Link>
-                </div>
+            {[...monthGroups].map(([month, articles]) => (
+              <section className="bbc-article-month-group" key={month}>
+                <h2>{Number(month.slice(5, 7))} 月</h2>
+                {articles.map((article) => renderArticleCard(article, false))}
+              </section>
             ))}
           </div>
         </section>

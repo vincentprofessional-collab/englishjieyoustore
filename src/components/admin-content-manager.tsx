@@ -6,6 +6,7 @@ import { AdminAnalyticsPanel } from "@/components/admin-analytics-panel";
 import { AdminHomeEditor } from "@/components/admin-home-editor";
 import { AdminEntitlementManager } from "@/components/admin-entitlement-manager";
 import { AdminSiteChromeEditor } from "@/components/admin-site-chrome-editor";
+import { AdminBbcArticleUpload } from "@/components/admin-bbc-article-upload";
 import { ArticleInlineAnnotationAdmin } from "@/components/article-inline-annotation-admin";
 import { GuidePostAdmin } from "@/components/guide-post-admin";
 import { GuideCommentsAdmin } from "@/components/guide-comments-admin";
@@ -19,6 +20,7 @@ type AdminView =
   | "chrome"
   | "guide"
   | "article-annotations"
+  | "bbc-upload"
 
 export function AdminContentManager() {
   const [activeView, setActiveView] = useState<AdminView>("analytics");
@@ -232,6 +234,13 @@ export function AdminContentManager() {
         >
           文章词汇标注
         </button>
+        <button
+          className={activeView === "bbc-upload" ? "active" : ""}
+          type="button"
+          onClick={() => setActiveView("bbc-upload")}
+        >
+          BBC 文章上传
+        </button>
       </div>
 
       {activeView === "analytics" ? <AdminAnalyticsPanel /> : null}
@@ -254,6 +263,8 @@ export function AdminContentManager() {
       ) : null}
 
       {activeView === "article-annotations" && adminUserId ? <ArticleInlineAnnotationAdmin /> : null}
+
+      {activeView === "bbc-upload" && adminUserId ? <AdminBbcArticleUpload /> : null}
 
     </section>
   );

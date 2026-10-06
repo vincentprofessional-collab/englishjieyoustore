@@ -1,24 +1,51 @@
 #!/usr/bin/env python3
 """Apply manually written BBC 2026 phrase annotations after desktop-tool verification."""
 
-import importlib.util
 import json
 import sys
+import types
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "src/data/bbc/2026-syntax.json"
 TOOL = Path("/Users/shidianjin/Desktop/词性句法标注工具/build.py")
+LEVEL_KEYS = tuple(f"level{i}" for i in range(1, 6))
 
 
 def load_tool():
     if not TOOL.exists():
         raise FileNotFoundError(f"Annotation verifier not found: {TOOL}")
-    spec = importlib.util.spec_from_file_location("bbc_annotation_tool", TOOL)
-    module = importlib.util.module_from_spec(spec)
-    assert spec.loader
-    spec.loader.exec_module(module)
+    module = types.ModuleType("bbc_annotation_tool")
+    module.__file__ = str(TOOL)
+    exec(compile(TOOL.read_text(encoding="utf-8"), str(TOOL), "exec"), module.__dict__)
     return module
+
+
+def verify_annotation(tool, sentence, annotation):
+    """Normalize both verifier APIs to level-keyed spans.
+
+    The current verifier returns flat nodes with a `level`; older versions
+    returned separate level1/level2 lists. All indices belong to
+    `tool.tokens_of(sentence)`, which merges closed-up hyphen compounds.
+    """
+    result = tool.verify(sentence, annotation)
+    levels = {key: [] for key in LEVEL_KEYS}
+    if len(result) == 4:
+        nodes, errors, notes, coverage = result
+        for node in nodes:
+            level = node.get("level")
+            if not isinstance(level, int) or not 1 <= level <= len(LEVEL_KEYS):
+                raise ValueError(f"Verifier returned an invalid annotation level: {node}")
+            levels[f"level{level}"].append({
+                "label": node["label"], "start": node["start"], "end": node["end"]
+            })
+    elif len(result) == 5:
+        level1, level2, errors, notes, coverage = result
+        levels["level1"] = level1
+        levels["level2"] = level2
+    else:
+        raise ValueError(f"Unsupported annotation verifier response with {len(result)} fields")
+    return levels, errors, notes, coverage
 
 
 def main():
@@ -49,17 +76,24 @@ def main():
             sentence = sentences[sentence_no - 1]
             if item.get("text") != sentence["text"]:
                 raise ValueError(f"Source text mismatch: {article_id} #{sentence_no}")
-            if sentence.get("status") != "draft" or sentence.get("level1") or sentence.get("level2"):
+            if sentence.get("status") != "draft" or any(sentence.get(key) for key in LEVEL_KEYS):
                 raise ValueError(f"Refusing to overwrite an existing annotation: {article_id} #{sentence_no}")
 
-            l1, l2, errors, notes, coverage = tool.verify(sentence, item)
+            levels, errors, notes, coverage = verify_annotation(tool, sentence, item)
             checked += 1
             if errors:
                 raise ValueError(f"{article_id} #{sentence_no}: {'; '.join(errors)}")
             if notes:
                 raise ValueError(f"{article_id} #{sentence_no}: {'; '.join(notes)}")
-            sentence["level1"] = l1
-            sentence["level2"] = l2
+            # Keep website tokens in the same (hyphen-merged) index space the
+            # verifier used. Writing merged-token spans onto the older split
+            # token array silently shifted every annotation after a hyphen.
+            tokens = tool.tokens_of(sentence)
+            if tool.norm("".join(token["text"] for token in tokens)) != tool.norm(sentence["text"]):
+                raise ValueError(f"Token/source mismatch after normalization: {article_id} #{sentence_no}")
+            sentence["tokens"] = tokens
+            for key in LEVEL_KEYS:
+                sentence[key] = levels[key]
             sentence["status"] = "reviewed"
             updated += 1
             print(f"verified {article_id} #{sentence_no}: {coverage:.0%} core-token coverage")

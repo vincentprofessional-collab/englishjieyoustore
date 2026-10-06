@@ -4,12 +4,13 @@ import { BbcArticleComments } from "@/components/bbc-article-comments";
 import { GuideBoard } from "@/components/guide-board";
 import { ProjectAccessPaywall } from "@/components/project-access-paywall";
 import { BBC_ARTICLES, getBbcArticleById } from "@/lib/articles/bbc";
+import { getUploadedBbcArticle } from "@/lib/articles/bbc-uploaded-content";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import syntax2026 from "@/data/bbc/2026-syntax.json";
 import { normalizeBbcSyntaxSentenceEdits } from "@/lib/bbc-syntax-annotation-edits";
 import type { BbcSyntaxSentenceData } from "@/components/bbc-syntax-sentence";
 
-export const dynamicParams = false;
+export const dynamicParams = true;
 export const dynamic = "force-dynamic";
 
 export function generateStaticParams() {
@@ -25,7 +26,7 @@ export default async function ArticlePage({
 }) {
   const { articleId } = await params;
   const { preview } = await searchParams;
-  const article = getBbcArticleById(articleId);
+  const article = getBbcArticleById(articleId) ?? await getUploadedBbcArticle(articleId);
 
   if (!article) {
     notFound();

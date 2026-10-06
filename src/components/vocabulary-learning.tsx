@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  Fragment,
   useCallback,
   useEffect,
   useMemo,
@@ -27,11 +28,13 @@ import type { VocabularyUsageExample } from "@/lib/vocabulary/examples";
 import {
   FAVORITE_WORDS_CHANGED_EVENT,
   FAVORITE_WORDS_STORAGE_KEY,
+  isSupplementalLearningBook,
   type FavoriteLearningWord,
   type LearningBookKey,
   type LearningWord,
 } from "@/lib/vocabulary/learning";
 import type { LocalVocabularyEntry, VocabularyFormationPart } from "@/lib/vocabulary/local-vocabulary";
+import type { VocabularySynonymDistinction } from "@/lib/vocabulary/synonym-distinctions";
 import type { VocabularyPhraseMatch } from "@/lib/vocabulary/phrases";
 import { getVocabularyAudioUrl } from "@/lib/vocabulary/pronunciation-audio";
 import { getSpellingCharacterFeedback } from "@/lib/vocabulary/spelling-feedback";
@@ -140,6 +143,7 @@ type VocabularyDetailPayload = {
   etymology?: { chinese?: string; english?: string } | null;
   formationParts: VocabularyFormationPart[];
   phrases: VocabularyPhraseMatch[];
+  synonymDistinctions: VocabularySynonymDistinction[];
   usageExamples: VocabularyUsageExample[];
 };
 type VocabularyVideoPayload = {
@@ -178,7 +182,7 @@ const DEFAULT_STUDY_SETTINGS: StudySettings = {
   dailyNew: 200,
   reactionSeconds: DEFAULT_REACTION_SECONDS,
   method: "classified",
-  modes: [],
+  modes: [...ALL_STUDY_MODES],
   reviewFamiliarities: [],
   reviewView: null,
   scope: "core",
@@ -393,16 +397,15 @@ function parseSettingsDraft(draft: StudySettingsDraft): StudySettings | null {
     writing: Number(draft.reactionSeconds.writing),
   };
   if (Object.values(reactionSeconds).some((seconds) => !validReactionSeconds(seconds))) return null;
-  const browse = draft.method === "browse";
-  if (browse && draft.reviewView !== null
-    && (draft.reviewFamiliarities.length === 0 || draft.modes.length === 0)) return null;
+  if (draft.modes.length === 0
+    || (draft.reviewView !== null && draft.reviewFamiliarities.length === 0)) return null;
   return {
     dailyNew,
     reactionSeconds,
     method: draft.method,
-    modes: browse ? [...draft.modes] : [],
-    reviewFamiliarities: browse ? [...draft.reviewFamiliarities] : [],
-    reviewView: browse ? draft.reviewView : null,
+    modes: [...draft.modes],
+    reviewFamiliarities: [...draft.reviewFamiliarities],
+    reviewView: draft.reviewView,
     scope: draft.scope,
     voice: draft.voice,
     order: draft.order,
@@ -417,11 +420,11 @@ function restoreStudyModes(value: unknown): ProgressCategory[] {
 }
 
 function enabledModeIndices(settings: StudySettings) {
-  return STUDY_MODE_OPTIONS.filter((option) => settings.method === "classified"
-    || settings.modes.length === 0 || settings.modes.includes(option.category)).map((option) => option.index);
+  return STUDY_MODE_OPTIONS.filter((option) => settings.modes.length === 0 || settings.modes.includes(option.category))
+    .map((option) => option.index);
 }
 
-function restoreProgress(store: ProgressStore): ProgressStore {
+function restoreProgress(store: ProgressStore, migrateReviewSchedule = false): ProgressStore {
   return Object.fromEntries(Object.entries(store).map(([id, entry]) => {
     if (!entry) return [id, entry];
     // Earlier browse sessions used scored timestamps. Move browse-only history
@@ -437,14 +440,19 @@ function restoreProgress(store: ProgressStore): ProgressStore {
           nextReviewAt: null,
         }
       : entry;
-    if (!restored.completed || !restored.lastReviewedAt) return [id, restored];
-    return [id, {
+    const hadLegacyLongTermSchedule = restored.completed || restored.plan === "long-term" || restored.plan === "done";
+    let normalized: ProgressEntry = restored.completed && restored.lastReviewedAt ? {
       ...restored,
       completed: false,
       plan: "long-term",
       reviewStep: restored.reviewStep ?? 4,
       nextReviewAt: restored.nextReviewAt ?? restored.lastReviewedAt + 30 * 24 * 60 * 60 * 1000,
-    }];
+    } : restored;
+    if (migrateReviewSchedule && hadLegacyLongTermSchedule) {
+      const legacyStep = normalized.reviewStep ?? 1;
+      normalized = { ...normalized, plan: "long-term", reviewStep: Math.min(5, Math.max(1, legacyStep + 1)) };
+    }
+    return [id, normalized];
   })) as ProgressStore;
 }
 
@@ -466,10 +474,10 @@ function readFavoriteLearningWords(): FavoriteLearningWord[] {
 }
 
 const TODAY_PROGRESS_TABS: Array<{ key: ProgressCategory; label: string }> = [
-  { key: "reading", label: "阅读词汇" },
-  { key: "listening", label: "听力词汇" },
-  { key: "speaking", label: "口语词汇" },
-  { key: "writing", label: "写作词汇" },
+  { key: "reading", label: "阅读模式" },
+  { key: "listening", label: "听力模式" },
+  { key: "speaking", label: "口语模式" },
+  { key: "writing", label: "写作模式" },
 ];
 const PROGRESS_VIEWS: Array<{ key: ProgressView; label: string }> = [
   { key: "today", label: "今日进度" },
@@ -723,7 +731,7 @@ function toLookupEntry(word: LearningWord): LocalVocabularyEntry {
     formation: word.formation,
     inflections: word.inflections,
     level: word.level,
-    normalizedWord: word.level === "地道表达" || word.level === "俚语俗语"
+    normalizedWord: isSupplementalLearningBook(word.level)
       ? word.word.toLowerCase().replace(/^[^a-z]+|[^a-z]+$/gi, "")
       : word.id,
     partOfSpeech: word.partOfSpeech,
@@ -739,6 +747,19 @@ function toLookupEntry(word: LearningWord): LocalVocabularyEntry {
     usPhonetic: word.usPhonetic,
     word: word.word,
   };
+}
+
+function loadPhraseUsageScenarios(book: string) {
+  switch (book) {
+    case "小学短语":
+    case "初中短语":
+    case "高中短语":
+      return import("@/data/vocabulary/graded-phrase-scenarios.json");
+    case "地道表达":
+      return import("@/data/vocabulary/idiomatic-expression-scenarios.json");
+    default:
+      return null;
+  }
 }
 
 function LookupDetails({ word }: { word: LearningWord }) {
@@ -942,26 +963,34 @@ function LearningVocabularyDetails({
   exampleTranslations?: string[];
   entry: LocalVocabularyEntry;
 }) {
-  const isSupplementalBook = entry.level === "地道表达" || entry.level === "俚语俗语";
+  const isSupplementalBook = isSupplementalLearningBook(entry.level);
   const detailedEntry = !isSupplementalBook && detailPayload?.entry ? detailPayload.entry : entry;
   const [showVideo, setShowVideo] = useState(false);
   const scenarioKey = entry.word.trim().toLowerCase();
   const [loadedScenario, setLoadedScenario] = useState<{
+    book: string;
     word: string;
     scenario: { context: string; translation: string; example: string } | null;
   } | null>(null);
-  const idiomaticUsageScenario = entry.level === "地道表达" && loadedScenario?.word === scenarioKey
+  const usageScenario = loadedScenario?.book === entry.level && loadedScenario.word === scenarioKey
     ? loadedScenario.scenario
     : null;
 
   useEffect(() => {
-    if (entry.level !== "地道表达") return;
+    const scenariosPromise = loadPhraseUsageScenarios(entry.level);
+    if (!scenariosPromise) {
+      setLoadedScenario(null);
+      return;
+    }
     let active = true;
-    void import("@/data/vocabulary/idiomatic-expression-scenarios.json").then(({ default: scenarios }) => {
-      const scenario = (scenarios as Record<string, { context: string; translation: string; example: string }>)[scenarioKey] ?? null;
-      if (active) setLoadedScenario({ word: scenarioKey, scenario });
+    void scenariosPromise.then(({ default: scenarios }) => {
+      const scenarioBook = entry.level === "地道表达"
+        ? scenarios as unknown as Record<string, { context: string; translation: string; example: string }>
+        : (scenarios as unknown as Record<string, Record<string, { context: string; translation: string; example: string }>>)[entry.level] ?? {};
+      const scenario = scenarioBook[scenarioKey] ?? null;
+      if (active) setLoadedScenario({ book: entry.level, word: scenarioKey, scenario });
     }).catch(() => {
-      if (active) setLoadedScenario({ word: scenarioKey, scenario: null });
+      if (active) setLoadedScenario({ book: entry.level, word: scenarioKey, scenario: null });
     });
     return () => { active = false; };
   }, [entry.level, scenarioKey]);
@@ -997,7 +1026,8 @@ function LearningVocabularyDetails({
           </VocabularyLookupDisplaySection>
         ) : null}
         phrases={detailPayload?.phrases ?? []}
-        usageScenario={idiomaticUsageScenario}
+        synonymDistinctions={detailPayload?.synonymDistinctions ?? []}
+        usageScenario={usageScenario}
         usageExamples={detailPayload?.usageExamples ?? []}
       />
     </div>
@@ -1263,32 +1293,36 @@ function chooseNextWord(
       ? chooseNextWord(earlierWords, store, now, order, excludeId, { ...settings, scope: "core" }, browseKey, "生词本")
       : null);
   }
-  const newToday = preferredWords.filter((word) => {
+  const hasReviewFilter = settings.reviewView !== null || settings.reviewFamiliarities.length > 0;
+  const reviewedWordIds = hasReviewFilter
+    ? new Set(filterProgressWordIds(preferredWords, store, settings.modes, settings.reviewFamiliarities))
+    : null;
+  const classifiedWords = reviewedWordIds === null ? preferredWords : preferredWords.filter((word) => {
+    if (!reviewedWordIds.has(word.id)) return false;
+    const reviewedAt = progressFor(store, word.id).lastReviewedAt;
+    if (settings.reviewView === "today") return isReviewedToday(reviewedAt, now);
+    if (settings.reviewView === "overall") return reviewedAt !== null;
+    return true;
+  });
+  const newToday = classifiedWords.filter((word) => {
     const entry = progressFor(store, word.id);
     return isReviewedToday(entry.firstLearnedAt ?? null, now);
   }).length;
-  const due: LearningWord[] = [];
-  const fresh: LearningWord[] = [];
-  for (const word of preferredWords) {
+  const queue: LearningWord[] = [];
+  for (const word of classifiedWords) {
     if (word.id === excludeId) continue;
     const entry = progressFor(store, word.id);
     if (entry.completed) continue;
     if (entry.lastReviewedAt === null) {
-      if (newToday < settings.dailyNew) fresh.push(word);
+      if (newToday < settings.dailyNew) queue.push(word);
     } else if (entry.nextReviewAt === null || entry.nextReviewAt <= now) {
-      due.push(word);
+      queue.push(word);
     }
   }
-  const pool = due.length > 0 ? due : fresh;
-  if (pool.length === 0) return earlierWords.length && preferredWords.every((word) => progressFor(store, word.id).completed)
+  if (queue.length === 0) return earlierWords.length && preferredWords.every((word) => progressFor(store, word.id).completed)
     ? chooseNextWord(earlierWords, store, now, order, excludeId, { ...settings, scope: "core" }, browseKey, "生词本")
     : null;
-  if (order === "random") return shuffle(pool)[0];
-  if (due.length > 0) return due.reduce((earliest, word) =>
-    (progressFor(store, word.id).nextReviewAt ?? now) < (progressFor(store, earliest.id).nextReviewAt ?? now)
-      ? word
-      : earliest);
-  return fresh[0];
+  return order === "random" ? shuffle(queue)[0] : queue[0];
 }
 
 export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount }: VocabularyLearningProps) {
@@ -1460,17 +1494,20 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
         const saved = JSON.parse(raw) as {
           order?: SortOrder;
           progress?: ProgressStore;
+          reviewScheduleVersion?: number;
           selectedBook?: string;
           voice?: Voice;
         };
         const hasExplicitBook = new URLSearchParams(window.location.search).has("level");
-        const savedBook = saved.selectedBook;
+        const savedBook = saved.selectedBook === "未分级" ? "其他词汇" : saved.selectedBook;
         if (!hasExplicitBook && savedBook && (savedBook === "生词本" || books.some((book) => book.key === savedBook))) {
           setSelectedBook(savedBook as BookSelectionKey);
         }
         if (saved.voice === "us" || saved.voice === "uk") setVoice(saved.voice);
         if (saved.order === "sequential" || saved.order === "random") setOrder(saved.order);
-        if (saved.progress && typeof saved.progress === "object") setProgress(restoreProgress(saved.progress));
+        if (saved.progress && typeof saved.progress === "object") {
+          setProgress(restoreProgress(saved.progress, (saved.reviewScheduleVersion ?? 1) < 2));
+        }
       }
     } catch {
       // A corrupt anonymous cache should not prevent the vocabulary page from opening.
@@ -1512,21 +1549,21 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
       const saved = raw ? JSON.parse(raw) as Record<string, Partial<StudySettings>> : {};
       const restored: Partial<Record<BookSelectionKey, StudySettings>> = {};
       for (const key of ["生词本", ...books.map((book) => book.key)] as BookSelectionKey[]) {
-        const item = saved[key];
+        const item = saved[key] ?? (key === "其他词汇" ? saved["未分级"] : undefined);
         if (!item || !validDailyLimit(item.dailyNew)) continue;
         const method = item.method === "browse" ? "browse" : "classified";
         const legacyFamiliarity = (item as Partial<StudySettings> & { reviewFamiliarity?: CollectionKey | null }).reviewFamiliarity;
-        const reviewView = method === "browse" && (item.reviewView === "overall" || item.reviewView === "today") ? item.reviewView : null;
-        const restoredModes = method === "browse" ? restoreStudyModes(item.modes) : [];
-        const restoredFamiliarities = method === "browse" && Array.isArray(item.reviewFamiliarities)
+        const reviewView = item.reviewView === "overall" || item.reviewView === "today" ? item.reviewView : null;
+        const restoredModes = restoreStudyModes(item.modes);
+        const restoredFamiliarities = Array.isArray(item.reviewFamiliarities)
           ? COLLECTIONS.map((collection) => collection.key).filter((key) => item.reviewFamiliarities?.includes(key))
-          : method === "browse" && (legacyFamiliarity === "familiar" || legacyFamiliarity === "vague" || legacyFamiliarity === "unfamiliar")
+          : (legacyFamiliarity === "familiar" || legacyFamiliarity === "vague" || legacyFamiliarity === "unfamiliar")
             ? [legacyFamiliarity] : [];
         restored[key] = {
           dailyNew: item.dailyNew,
           reactionSeconds: restoreReactionSeconds(item.reactionSeconds),
           method,
-          modes: reviewView && restoredModes.length === 0 ? [...ALL_STUDY_MODES] : restoredModes,
+          modes: restoredModes.length === 0 ? [...ALL_STUDY_MODES] : restoredModes,
           reviewFamiliarities: reviewView && restoredFamiliarities.length === 0
             ? COLLECTIONS.map((collection) => collection.key) : restoredFamiliarities,
           reviewView,
@@ -1602,7 +1639,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
   useEffect(() => {
     if (!hydrated) return;
     try {
-      window.localStorage?.setItem(STORAGE_KEY, JSON.stringify({ order, progress, selectedBook, voice }));
+      window.localStorage?.setItem(STORAGE_KEY, JSON.stringify({ order, progress, reviewScheduleVersion: 2, selectedBook, voice }));
     } catch {
       // Private or embedded browsers may expose localStorage but reject writes.
     }
@@ -2567,7 +2604,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
         <aside className="vocabulary-learning-sidebar" ref={sidebarRef}>
           <div className="vocabulary-learning-book-heading">
             <div className="vocabulary-learning-book-heading-copy">
-              <span>词汇书</span>
+              <span>词汇</span>
             </div>
             <button disabled={!settingsHydrated || advancePending || entryGate === "select-book"} onClick={openStudySettings} type="button">设置</button>
           </div>
@@ -2583,24 +2620,26 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
               <span aria-hidden="true" className="vocabulary-learning-nav-arrow">›</span>
             </button>
             {books.map((book) => (
-              <button
-                className={`vocabulary-learning-nav-button ${selectedBook === book.key ? "active" : ""}`}
-                key={book.key}
-                onClick={() => selectWord(book.key)}
-                title={book.description}
-                type="button"
-              >
-                <span aria-hidden="true" className="vocabulary-learning-nav-dot" />
-                <span className="vocabulary-learning-nav-label">{book.label}</span>
-                <strong>
-                  {book.key === "未分级"
-                    ? `${bookCounts[book.key].total.toLocaleString()}/${sourceCount.toLocaleString()}`
-                    : bookCounts[book.key].added === bookCounts[book.key].total
-                    ? bookCounts[book.key].total.toLocaleString()
-                    : `${bookCounts[book.key].added.toLocaleString()}/${bookCounts[book.key].total.toLocaleString()}`}
-                </strong>
-                <span aria-hidden="true" className="vocabulary-learning-nav-arrow">›</span>
-              </button>
+              <Fragment key={book.key}>
+                {book.key === "小学短语" ? <h2 className="vocabulary-learning-phrase-heading">短语</h2> : null}
+                <button
+                  className={`vocabulary-learning-nav-button ${selectedBook === book.key ? "active" : ""}`}
+                  onClick={() => selectWord(book.key)}
+                  title={book.description}
+                  type="button"
+                >
+                  <span aria-hidden="true" className="vocabulary-learning-nav-dot" />
+                  <span className="vocabulary-learning-nav-label">{book.label}</span>
+                  <strong>
+                    {book.key === "其他词汇"
+                      ? `${bookCounts[book.key].total.toLocaleString()}/${sourceCount.toLocaleString()}`
+                      : bookCounts[book.key].added === bookCounts[book.key].total
+                      ? bookCounts[book.key].total.toLocaleString()
+                      : `${bookCounts[book.key].added.toLocaleString()}/${bookCounts[book.key].total.toLocaleString()}`}
+                  </strong>
+                  <span aria-hidden="true" className="vocabulary-learning-nav-arrow">›</span>
+                </button>
+              </Fragment>
             ))}
           </div>
         </aside>
@@ -2616,10 +2655,10 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
           ) : null}
           {!loading && !loadError && entryGate === "select-book" ? (
             <div className="vocabulary-learning-empty vocabulary-learning-plan-empty">
-              <strong className="vocabulary-learning-book-select-desktop">请选择左侧词汇书</strong>
-              <p className="vocabulary-learning-book-select-desktop">选择后会自动打开这本词汇书的学习设置。</p>
+              <strong className="vocabulary-learning-book-select-desktop">请选择左侧词汇</strong>
+              <p className="vocabulary-learning-book-select-desktop">选择后会自动打开该分类的学习设置。</p>
               <strong className="vocabulary-learning-book-select-mobile">请点击右上角设置</strong>
-              <p className="vocabulary-learning-book-select-mobile">在设置中选择词汇书并完成学习设置。</p>
+              <p className="vocabulary-learning-book-select-mobile">在设置中选择词汇并完成学习设置。</p>
             </div>
           ) : null}
           {!loading && !loadError && entryGate === "continue" ? (
@@ -2631,14 +2670,14 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
           ) : null}
           {!loading && !loadError && entryGate === "active" && visibleWords.length === 0 ? (
             <div className="vocabulary-learning-empty">
-              <strong>{selectedBook === "生词本" && favoriteWords.length === 0 ? "生词本还没有收藏的单词。" : "这本词汇书没有可处理的新词。"}</strong>
-              <p>{selectedBook === "生词本" && favoriteWords.length === 0 ? "在单词页面点击收藏，单词会自动加入这里。" : "可以切换其他词汇书，或等待已安排的复习时间到达。"}</p>
+              <strong>{selectedBook === "生词本" && favoriteWords.length === 0 ? "生词本还没有收藏的单词。" : "当前分类没有可处理的新词。"}</strong>
+              <p>{selectedBook === "生词本" && favoriteWords.length === 0 ? "在单词页面点击收藏，单词会自动加入这里。" : "可以切换其他分类，或等待已安排的复习时间到达。"}</p>
             </div>
           ) : null}
           {!loading && !loadError && entryGate === "active" && visibleWords.length > 0 && !currentWord && studyReady && sessionDepleted ? (
             <div className="vocabulary-learning-empty vocabulary-learning-plan-empty">
               <strong>当前没有可学习的词汇</strong>
-              <p>{browseMode && (currentSettings.reviewView !== null || currentSettings.reviewFamiliarities.length > 0)
+              <p>{currentSettings.reviewView !== null || currentSettings.reviewFamiliarities.length > 0
                 ? "当前复习范围没有符合条件的词汇，可调整筛选条件。"
                 : "今日数量已达上限，或下一轮复习尚未到时间；到期后会自动出现。"}</p>
               <button className="button" onClick={openStudySettings} type="button">调整设置</button>
@@ -2877,7 +2916,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
       {settingsOpenFor ? (
         <div className="vocabulary-learning-settings-backdrop">
           <form
-            aria-label="词汇书设置"
+            aria-label="词汇设置"
             aria-modal="true"
             className="vocabulary-learning-settings-dialog"
             onKeyDown={(event) => {
@@ -2890,9 +2929,9 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
               <button aria-label="关闭设置并暂停学习" className="vocabulary-learning-settings-close" onClick={closeStudySettings} type="button">×</button>
             </div>
             <label className="vocabulary-learning-settings-book-select">
-              <span>词汇书</span>
+              <span>词汇</span>
               <select
-                aria-label="选择词汇书"
+                aria-label="选择词汇"
                 onChange={(event) => selectWord(event.target.value as BookSelectionKey)}
                 value={settingsOpenFor}
               >
@@ -2945,7 +2984,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
             </div>
             <fieldset className="vocabulary-learning-settings-options vocabulary-learning-settings-method">
               <legend>记忆方式</legend>
-              <label><input checked={settingsDraft.method === "classified"} name="learning-method" onChange={() => setSettingsDraft((current) => ({ ...current, method: "classified", reviewView: null, reviewFamiliarities: [], modes: [] }))} type="radio" />分类记忆</label>
+              <label><input checked={settingsDraft.method === "classified"} name="learning-method" onChange={() => setSettingsDraft((current) => ({ ...current, method: "classified" }))} type="radio" />分类记忆</label>
               <label><input checked={settingsDraft.method === "browse"} name="learning-method" onChange={() => setSettingsDraft((current) => ({ ...current, method: "browse" }))} type="radio" />浏览模式</label>
             </fieldset>
             <fieldset className="vocabulary-learning-settings-options vocabulary-learning-settings-scope">
@@ -2959,20 +2998,19 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
                 <span>全部词汇<small>{scopeCounts.total.toLocaleString()}</small></span>
               </label>
             </fieldset>
-            <section aria-disabled={settingsDraft.method === "classified"} aria-label="复习范围" className={`vocabulary-learning-settings-review-range${settingsDraft.method === "classified" ? " is-disabled" : ""}`}>
-              <h3>复习范围</h3>
+            <section aria-label="模式选择" className="vocabulary-learning-settings-review-range">
+              <h3>模式选择</h3>
               <div aria-label="进度范围" className="vocabulary-learning-settings-review-progress" role="group">
                 {PROGRESS_VIEWS.map((tab) => (
                   <button
                     aria-pressed={settingsDraft.reviewView === tab.key}
                     className={settingsDraft.reviewView === tab.key ? "active" : ""}
-                    disabled={settingsDraft.method === "classified"}
                     key={tab.key}
                     onClick={() => setSettingsDraft((current) => ({
                       ...current,
                       reviewView: tab.key,
-                      reviewFamiliarities: COLLECTIONS.map((collection) => collection.key),
-                      modes: [...ALL_STUDY_MODES],
+                      reviewFamiliarities: current.reviewFamiliarities.length > 0
+                        ? current.reviewFamiliarities : COLLECTIONS.map((collection) => collection.key),
                     }))}
                     type="button"
                   >
@@ -2989,7 +3027,6 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
                   <button
                     aria-pressed={settingsDraft.reviewFamiliarities.includes(collection.key)}
                     className={settingsDraft.reviewFamiliarities.includes(collection.key) ? "active" : ""}
-                    disabled={settingsDraft.method === "classified"}
                     key={collection.key}
                     onClick={() => setSettingsDraft((current) => ({
                       ...current,
@@ -3005,12 +3042,11 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
                   </button>
                 ))}
               </div>
-              <div aria-label="复习词汇类型" className="vocabulary-learning-settings-review-categories" role="group">
+              <div aria-label="考察模式" className="vocabulary-learning-settings-review-categories" role="group">
                 {TODAY_PROGRESS_TABS.map((tab) => (
                   <button
                     aria-pressed={settingsDraft.modes.includes(tab.key)}
                     className={settingsDraft.modes.includes(tab.key) ? "active" : ""}
-                    disabled={settingsDraft.method === "classified"}
                     key={tab.key}
                     onClick={() => toggleStudyMode(tab.key)}
                     type="button"
@@ -3041,9 +3077,8 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
                 <label><input checked={settingsDraft.voice === "uk"} name="study-voice" onChange={() => setSettingsDraft((current) => ({ ...current, voice: "uk" }))} type="radio" />英音</label>
               </fieldset>
             </div>
-            {settingsDraft.method === "browse" && settingsDraft.reviewView !== null
-              && (settingsDraft.reviewFamiliarities.length === 0 || settingsDraft.modes.length === 0)
-              ? <p className="vocabulary-learning-settings-validation">请至少保留一种熟悉程度和一种词汇类型。</p>
+            {settingsDraft.modes.length === 0 || (settingsDraft.reviewView !== null && settingsDraft.reviewFamiliarities.length === 0)
+              ? <p className="vocabulary-learning-settings-validation">请至少选择一种考察模式；选择进度范围时，请保留一种熟悉程度。</p>
               : null}
             <div className="vocabulary-learning-settings-actions">
               {!settingsFirstOpen ? <button onClick={closeStudySettings} type="button">取消</button> : null}

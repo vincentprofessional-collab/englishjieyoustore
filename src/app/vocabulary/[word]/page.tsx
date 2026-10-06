@@ -19,6 +19,7 @@ import {
 import { getVocabularyUsageExamples, prioritizeVocabularyUsageExamples, type VocabularyUsageExample } from "@/lib/vocabulary/examples";
 import { getVocabularyPhraseMatches, type VocabularyPhraseMatch } from "@/lib/vocabulary/phrases";
 import { getVocabularyLookupEtymology } from "@/lib/vocabulary/lookup-etymology";
+import { getVocabularySynonymDistinctions } from "@/lib/vocabulary/synonym-distinctions";
 import { DEFAULT_VOCABULARY_LOOKUP_DISPLAY_PREFERENCES, isPhoneUserAgent, VOCABULARY_LOOKUP_VIDEO_COOKIE } from "@/lib/vocabulary/lookup-display-preferences";
 import { getBbcVocabularyDetail } from "@/lib/articles/bbc-vocabulary";
 import { getVocabularyVideoCandidates, getVocabularyVideos } from "@/lib/vocabulary/videos";
@@ -359,6 +360,11 @@ export default async function VocabularyWordPage({
   const [requestHeaders, cookieStore] = await Promise.all([headers(), cookies()]);
   const isPhoneRequest = isPhoneUserAgent(requestHeaders.get("user-agent") ?? "");
   const etymology = getVocabularyLookupEtymology(entry.word);
+  const synonymDistinctions = getVocabularySynonymDistinctions([
+    entry.word,
+    entry.normalizedWord,
+    ...entry.inflections.map((inflection) => inflection.value),
+  ]);
   const videoPreference = cookieStore.get(VOCABULARY_LOOKUP_VIDEO_COOKIE)?.value;
   const videoVisible = videoPreference === undefined ? DEFAULT_VOCABULARY_LOOKUP_DISPLAY_PREFERENCES.video : videoPreference === "1";
   const videoCandidates = isPhoneRequest ? [] : getVocabularyVideoCandidates(entry);
@@ -392,6 +398,7 @@ export default async function VocabularyWordPage({
           formationParts={formationParts}
           inlineVideo={!isPhoneRequest ? videoSection : null}
           phrases={phrases}
+          synonymDistinctions={synonymDistinctions}
           usageExamples={usageExamples}
         />
       </VocabularyDetailShell>

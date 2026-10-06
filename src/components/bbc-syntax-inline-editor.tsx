@@ -4,6 +4,8 @@ import { useEffect, useMemo, useState } from "react";
 import type { ReactNode } from "react";
 import {
   BbcSyntaxSentence,
+  type BbcSyntaxLevel,
+  type BbcSyntaxLayerKey,
   type BbcSyntaxDisplayMode,
   type BbcSyntaxSentenceData,
   type BbcSyntaxSpan,
@@ -14,11 +16,11 @@ import { supabase } from "@/lib/supabase/client";
 import { notifyArticleInlineAnnotationsUpdated } from "@/components/use-article-inline-annotations";
 import styles from "./bbc-syntax-inline-editor.module.css";
 
-const POS_OPTIONS = [
-  ["ADJ", "形容词"], ["ADP", "介词"], ["ADV", "副词"], ["AUX", "助动词"], ["CCONJ", "并列连词"],
-  ["DET", "限定词"], ["INTJ", "感叹词"], ["NOUN", "名词"], ["NUM", "数词"], ["PART", "小品词"],
-  ["PRON", "代词"], ["PROPN", "专有名词"], ["SCONJ", "从属连词"], ["SYM", "符号"], ["VERB", "动词"], ["X", "其他"],
-] as const;
+const SYNTAX_LEVELS = [1, 2, 3, 4, 5] as const;
+
+function layerKey(level: BbcSyntaxLevel): BbcSyntaxLayerKey {
+  return `level${level}` as BbcSyntaxLayerKey;
+}
 
 type Props = {
   allInlineAnnotations: ArticleInlineAnnotation[];
@@ -62,8 +64,8 @@ export function BbcSyntaxInlineEditor({
   const [isAdmin, setIsAdmin] = useState(false);
   const [editing, setEditing] = useState(false);
   const [selection, setSelection] = useState<BbcSyntaxTokenRange | null>(null);
-  const [level, setLevel] = useState<"level1" | "level2">("level1");
-  const [editingSpan, setEditingSpan] = useState<{ end: number; level: "level1" | "level2"; start: number } | null>(null);
+  const [level, setLevel] = useState<BbcSyntaxLevel>(1);
+  const [editingSpan, setEditingSpan] = useState<{ end: number; level: BbcSyntaxLevel; start: number } | null>(null);
   const [label, setLabel] = useState("主语");
   const [pos, setPos] = useState("");
   const [selectedInlineId, setSelectedInlineId] = useState("");
@@ -102,24 +104,20 @@ export function BbcSyntaxInlineEditor({
     const values = data.tokens.slice(selection.start, selection.end).filter((token) => token.pos !== "PUNCT").map((token) => token.pos);
     return values.length && values.every((value) => value === values[0]) ? values[0] : "";
   }, [data.tokens, selection]);
-  const allSpans = useMemo(() => ([
-    ...data.level1.map((span) => ({ level: "level1" as const, span })),
-    ...data.level2.map((span) => ({ level: "level2" as const, span })),
-  ]), [data.level1, data.level2]);
+  const allSpans = useMemo(() => SYNTAX_LEVELS.flatMap((spanLevel) =>
+    (data[layerKey(spanLevel)] ?? []).map((span) => ({ level: spanLevel, span }))), [data]);
 
   function selectRange(range: BbcSyntaxTokenRange) {
     setSelection(range);
     setPos("");
-    const exact = [
-      ...data.level1.map((span) => ({ level: "level1" as const, span })),
-      ...data.level2.map((span) => ({ level: "level2" as const, span })),
-    ].find(({ span }) => span.start === range.start && span.end === range.end);
+    const exact = allSpans.find(({ span }) => span.start === range.start && span.end === range.end);
     if (exact) {
       setLevel(exact.level);
       setLabel(exact.span.label);
       setEditingSpan({ end: exact.span.end, level: exact.level, start: exact.span.start });
     } else {
-      if (!editingSpan) setLabel(level === "level1" ? "主语" : "定语");
+      setEditingSpan(null);
+      setLabel(level === 1 ? "主语" : level === 2 ? "定语" : "中心成分");
     }
     setMessage("");
   }
@@ -131,7 +129,7 @@ export function BbcSyntaxInlineEditor({
     selectRange({ start: tokenIndex, end: tokenIndex + 1 });
   }
 
-  function selectComponent(spanLevel: "level1" | "level2", span: BbcSyntaxSpan) {
+  function selectComponent(spanLevel: BbcSyntaxLevel, span: BbcSyntaxSpan) {
     setEditing(true);
     setLevel(spanLevel);
     setLabel(span.label);
@@ -153,19 +151,24 @@ export function BbcSyntaxInlineEditor({
   }
 
   function changeSelectedPos(nextPos: string) {
-    if (!selection || !nextPos) return;
+    const normalizedPos = nextPos.trim().slice(0, 32);
+    if (!selection || !normalizedPos) return;
     const tokens = data.tokens.map((token, index) =>
-      index >= selection.start && index < selection.end && token.pos !== "PUNCT" ? { ...token, pos: nextPos } : token,
+      index >= selection.start && index < selection.end && token.pos !== "PUNCT" ? { ...token, pos: normalizedPos } : token,
     );
     onSentenceChange({ ...data, tokens });
-    setPos(nextPos);
+    setPos(normalizedPos);
     setMessage("词性已修改，点击“保存并更新文章”后生效。");
   }
 
   function applyComponent() {
     if (!selection || !label.trim()) return;
     const targetLevel = editingSpan?.level ?? level;
-    const spans = [...data[targetLevel]];
+    const targetKey = layerKey(targetLevel);
+    const spans = [...(data[targetKey] ?? [])];
+    const parentSpans = targetLevel > 1 ? data[layerKey((targetLevel - 1) as BbcSyntaxLevel)] ?? [] : [];
+    const hasParent = targetLevel === 1 || parentSpans.some((parent) =>
+      selection.start >= parent.start && selection.end <= parent.end);
     const originalIndex = editingSpan
       ? spans.findIndex((span) => span.start === editingSpan.start && span.end === editingSpan.end)
       : -1;
@@ -174,17 +177,24 @@ export function BbcSyntaxInlineEditor({
     }
     if (originalIndex >= 0) {
       const siblings = spans.filter((_, index) => index !== originalIndex);
-      if (targetLevel === "level1" && siblings.some((span) => selection.start < span.end && selection.end > span.start)) {
+      if (targetLevel === 1 && siblings.some((span) => selection.start < span.end && selection.end > span.start)) {
         setMessage("新范围与其他主句成分重叠，请调整选区。");
         return;
       }
-      if (targetLevel === "level2" && !data.level1.some((parent) => selection.start >= parent.start && selection.end <= parent.end)) {
-        setMessage("嵌套成分需要完整落在一个主句成分范围内。");
+      if (!hasParent) {
+        setMessage(`第 ${targetLevel} 级成分需要完整落在一个第 ${targetLevel - 1} 级成分范围内。`);
+        return;
+      }
+      const descendants = SYNTAX_LEVELS.filter((candidateLevel) => candidateLevel > targetLevel)
+        .flatMap((candidateLevel) => data[layerKey(candidateLevel)] ?? [])
+        .filter((child) => child.start >= spans[originalIndex].start && child.end <= spans[originalIndex].end);
+      if (descendants.some((child) => child.start < selection.start || child.end > selection.end)) {
+        setMessage("新范围必须完整包含所有下一级成分，请先调整或删除子成分。");
         return;
       }
       spans[originalIndex] = { ...spans[originalIndex], start: selection.start, end: selection.end, label: label.trim() };
       spans.sort((left, right) => left.start - right.start || left.end - right.end);
-      onSentenceChange({ ...data, [targetLevel]: spans });
+      onSentenceChange({ ...data, [targetKey]: spans });
       setEditingSpan(null);
       setMessage("语法成分范围/名称已更新，点击“保存并更新文章”后生效。");
       return;
@@ -193,23 +203,23 @@ export function BbcSyntaxInlineEditor({
     if (exactIndex >= 0) {
       spans[exactIndex] = { ...spans[exactIndex], label: label.trim() };
     } else {
-      if (targetLevel === "level1" && spans.some((span) => selection.start < span.end && selection.end > span.start)) {
+      if (targetLevel === 1 && spans.some((span) => selection.start < span.end && selection.end > span.start)) {
         setMessage("选区与已有主句成分重叠。请拖选原标注的完整范围进行修改，或先删除重叠标注。");
         return;
       }
-      if (targetLevel === "level2" && !data.level1.some((parent) => selection.start >= parent.start && selection.end <= parent.end)) {
-        setMessage("从属成分需要完整落在一个主句成分范围内。请先标注对应的主句成分。");
+      if (!hasParent) {
+        setMessage(`第 ${targetLevel} 级成分需要完整落在一个第 ${targetLevel - 1} 级成分范围内。请先标注上一级成分。`);
         return;
       }
       spans.push({ label: label.trim(), start: selection.start, end: selection.end });
       spans.sort((left, right) => left.start - right.start || left.end - right.end);
     }
-    onSentenceChange({ ...data, [targetLevel]: spans });
+    onSentenceChange({ ...data, [targetKey]: spans });
     setEditingSpan(null);
     setMessage("语法成分已更新，点击“保存并更新文章”后生效。");
   }
 
-  function loadSpan(spanLevel: "level1" | "level2", span: BbcSyntaxSpan) {
+  function loadSpan(spanLevel: BbcSyntaxLevel, span: BbcSyntaxSpan) {
     setLevel(spanLevel);
     setLabel(span.label);
     setSelection({ start: span.start, end: span.end });
@@ -218,14 +228,16 @@ export function BbcSyntaxInlineEditor({
     setMessage("已选中这条成分标注。也可以在原文中拖选新的范围。");
   }
 
-  function deleteSpan(spanLevel: "level1" | "level2", span: BbcSyntaxSpan) {
-    const nextLevel1 = spanLevel === "level1"
-      ? data.level1.filter((item) => item !== span)
-      : data.level1;
-    const nextLevel2 = spanLevel === "level2"
-      ? data.level2.filter((item) => item !== span)
-      : data.level2.filter((item) => !(item.start >= span.start && item.end <= span.end));
-    onSentenceChange({ ...data, level1: nextLevel1, level2: nextLevel2 });
+  function deleteSpan(spanLevel: BbcSyntaxLevel, span: BbcSyntaxSpan) {
+    const nextData: BbcSyntaxSentenceData = { ...data };
+    for (const currentLevel of SYNTAX_LEVELS) {
+      if (currentLevel < spanLevel) continue;
+      const key = layerKey(currentLevel);
+      nextData[key] = (data[key] ?? []).filter((item) => currentLevel === spanLevel
+        ? item !== span
+        : !(item.start >= span.start && item.end <= span.end));
+    }
+    onSentenceChange(nextData);
     setEditingSpan(null);
     setMessage("语法成分已删除，点击“保存并更新文章”后生效。");
   }
@@ -306,20 +318,31 @@ export function BbcSyntaxInlineEditor({
               <div className={styles.controls}>
                 <label>
                   <span>词性</span>
-                  <select disabled={!selection} onChange={(event) => setPos(event.target.value)} value={pos || selectedPos}>
-                    <option value="">选择词性</option>
-                    {POS_OPTIONS.map(([value, text]) => <option key={value} value={value}>{text}</option>)}
-                  </select>
+                  <input
+                    aria-label="输入词性"
+                    disabled={!selection}
+                    maxLength={32}
+                    onChange={(event) => setPos(event.target.value)}
+                    placeholder="输入词性"
+                    value={pos || selectedPos}
+                  />
                 </label>
                 <button disabled={!selection || !(pos || selectedPos)} onClick={() => changeSelectedPos(pos || selectedPos)} type="button">修改选中词性</button>
                 <label>
                   <span>成分层级</span>
-                  <select onChange={(event) => setLevel(event.target.value as "level1" | "level2")} value={level}>
-                    <option value="level1">主句成分</option>
-                    <option value="level2">嵌套成分</option>
+                  <select onChange={(event) => {
+                    const nextLevel = Number(event.target.value) as BbcSyntaxLevel;
+                    setLevel(nextLevel);
+                    setEditingSpan(null);
+                    if (selection) setLabel(nextLevel === 1 ? "主语" : nextLevel === 2 ? "定语" : "中心成分");
+                  }} value={level}>
+                    <option value={1}>一级成分</option>
+                    <option value={2}>二级嵌套</option>
+                    <option value={3}>三级嵌套</option>
+                    <option value={4}>四级嵌套</option>
+                    <option value={5}>五级嵌套</option>
                   </select>
                 </label>
-                <button onClick={() => { setEditingSpan(null); setMessage("新建成分：拖选原文范围后填写语法成分。"); }} type="button">新建成分</button>
                 <label className={styles.labelInput}>
                   <span>语法成分</span>
                   <input onChange={(event) => setLabel(event.target.value)} value={label} />
@@ -343,10 +366,10 @@ export function BbcSyntaxInlineEditor({
                 {allSpans.length ? allSpans.map(({ level: spanLevel, span }, index) => (
                   <div className={styles.spanItem} key={`${spanLevel}-${span.start}-${span.end}-${index}`}>
                     <button className={styles.spanText} onClick={() => loadSpan(spanLevel, span)} type="button">
-                      <span>{spanLevel === "level1" ? "主句" : "嵌套"} · {span.label}</span>
+                      <span>{spanLevel === 1 ? "一级成分" : `${spanLevel}级嵌套`} · {span.label}</span>
                       <strong>{spanText(data, span)}</strong>
                     </button>
-                    <button aria-label={`删除${span.label}`} onClick={() => deleteSpan(spanLevel, span)} type="button">删除</button>
+                    <button aria-label={`删除${spanLevel}级${span.label}`} onClick={() => deleteSpan(spanLevel, span)} type="button">删除</button>
                   </div>
                 )) : <p className={styles.hint}>本句暂无语法成分标注。</p>}
               </div>

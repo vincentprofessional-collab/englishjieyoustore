@@ -22,7 +22,9 @@ test("BBC archive defaults to 2026 and renders the selected year article list", 
   assert.match(articlesPage, /right\.id\.localeCompare\(left\.id\)/);
   assert.match(articlesHome, /className="bbc-selected-year"/);
   assert.match(articlesHome, /yearGroups\.find\(\(group\) => group\.year === selectedYear\)/);
-  assert.match(articlesHome, /activeGroup\?\.articles\.map\(\(article\) =>/);
+  assert.match(articlesHome, /for \(const article of activeGroup\?\.articles \?\? \[\]\)/);
+  assert.match(articlesHome, /\[\.\.\.monthGroups\]\.map\(\(\[month, articles\]\) =>/);
+  assert.match(articlesHome, /articles\.map\(\(article\) => renderArticleCard\(article, true\)\)/);
 });
 
 test("New Concept original copy remains plain and the mobile navigation stays on one row", () => {

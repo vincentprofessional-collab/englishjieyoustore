@@ -8,6 +8,7 @@ export const VOCABULARY_LOOKUP_SECTIONS = [
   { key: "inflections", label: "词性变化", defaultVisible: true },
   { key: "video", label: "视频", defaultVisible: true },
   { key: "examples", label: "例句", defaultVisible: true },
+  { key: "synonymDistinctions", label: "同义词辨析", defaultVisible: true },
   { key: "rootTree", label: "词根树", defaultVisible: true },
   { key: "etymology", label: "词源", defaultVisible: true },
 ] as const;

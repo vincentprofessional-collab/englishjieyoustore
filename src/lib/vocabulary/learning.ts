@@ -18,12 +18,22 @@ export const LEARNING_BOOKS = [
   { key: "SAT", label: "SAT", rank: 8, description: "SAT 词汇" },
   { key: "GMAT", label: "GMAT", rank: 9, description: "GMAT 词汇" },
   { key: "GRE", label: "GRE", rank: 10, description: "GRE 词汇" },
-  { key: "未分级", label: "未分级", rank: 0, description: "待归入等级的词" },
+  { key: "其他词汇", label: "其他词汇", rank: 0, description: "其他未归入等级的词汇" },
+  { key: "小学短语", label: "小学短语", rank: 0, description: "教学大纲小学短语" },
+  { key: "初中短语", label: "初中短语", rank: 0, description: "教学大纲初中短语" },
+  { key: "高中短语", label: "高中短语", rank: 0, description: "教学大纲高中短语" },
   { key: "地道表达", label: "地道表达", rank: 0, description: "常用地道表达与搭配" },
   { key: "俚语俗语", label: "俚语俗语", rank: 0, description: "英语俚语与常见俗语" },
 ] as const;
 
 export type LearningBookKey = (typeof LEARNING_BOOKS)[number]["key"];
+export const SUPPLEMENTAL_LEARNING_BOOK_KEYS = [
+  "小学短语", "初中短语", "高中短语", "地道表达", "俚语俗语",
+] as const satisfies readonly LearningBookKey[];
+
+export function isSupplementalLearningBook(book: string): book is (typeof SUPPLEMENTAL_LEARNING_BOOK_KEYS)[number] {
+  return (SUPPLEMENTAL_LEARNING_BOOK_KEYS as readonly string[]).includes(book);
+}
 
 export type LearningWord = {
   antonyms: string[];
@@ -70,11 +80,13 @@ export function getLearningLevelKey(level: string): LearningBookKey {
     return normalizedLevel as LearningBookKey;
   }
 
+  if (normalizedLevel === "未分级") return "其他词汇";
+
   if (/托福|雅思|托雅/.test(normalizedLevel)) {
     return "托雅";
   }
 
-  return "未分级";
+  return "其他词汇";
 }
 
 export function getLearningBookEntries(entries: LocalVocabularyEntry[], book: LearningBookKey | "全部") {
@@ -82,8 +94,8 @@ export function getLearningBookEntries(entries: LocalVocabularyEntry[], book: Le
     return entries;
   }
 
-  if (book === "未分级") {
-    return entries.filter((entry) => getLearningLevelKey(entry.level) === "未分级");
+  if (book === "其他词汇") {
+    return entries.filter((entry) => getLearningLevelKey(entry.level) === "其他词汇");
   }
 
   const selectedRank = LEARNING_BOOKS.find((candidate) => candidate.key === book)?.rank ?? 0;
