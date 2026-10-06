@@ -35,6 +35,35 @@ test("public index is metadata-only and every linked v2 set passes the public qu
   }
 });
 
+test("reading formats share one training entry and the reviewed Markdown set is downloadable", () => {
+  const reading = index.entries.find((entry) => entry.id === "practice-gaokao-reading-2000-2019");
+  assert.ok(reading);
+  assert.match(reading.title, /阅读理解.*七选五.*信息匹配/);
+  assert.equal(reading.questionCount, 1782);
+  assert.equal(index.entries.some((entry) => entry.id === "practice-gaokao-seven-choice-2000-2019"), false);
+  const readingSet = payload(reading);
+  assert.ok(readingSet.sections.flatMap((section) => section.groups).some((group) => group.questions.some((question) => question.type === "shared_option_matching")));
+  for (const filename of [
+    "阅读理解与七选五.md",
+    "任务型阅读与阅读填空.md",
+    "阅读简答与阅读表达.md",
+    "完形填空.md",
+    "语法填空.md",
+    "选词填空.md",
+    "情景对话.md",
+    "听力.md",
+    "语音知识.md",
+    "完成句子.md",
+    "书面表达与应用文写作.md",
+    "同义词辨析.md",
+    "整理说明.md",
+  ]) {
+    const materialPath = path.join(PUBLIC_ROOT, "materials", filename);
+    assert.ok(fs.existsSync(materialPath), `${filename}: missing downloadable material`);
+    assert.ok(fs.statSync(materialPath).size > 0, `${filename}: empty downloadable material`);
+  }
+});
+
 test("incomplete legacy and answerless sets are excluded from the public index", () => {
   assert.equal(index.entries.some((entry) => entry.id === "paper-2007-beijing-legacy"), false);
   assert.equal(index.entries.some((entry) => entry.id === "paper-2013-guangdong-02f567c00ac2"), false);

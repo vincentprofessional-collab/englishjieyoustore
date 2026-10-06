@@ -8,26 +8,41 @@ import { SeniorHighKnowledge } from "./senior-high-knowledge";
 
 type Entry = "knowledge" | "practice" | "papers";
 
-const PRACTICE_FAMILY_ORDER = ["听力", "语法填空／语言运用", "单项填空", "完形填空", "七选五／阅读补全", "阅读理解", "写作／书面表达", "读后续写"];
+const PRACTICE_FAMILY_ORDER = ["听力", "语法填空／语言运用", "单项填空", "完形填空", "阅读理解／七选五／信息匹配", "任务型阅读／阅读表达", "写作／书面表达", "读后续写"];
 const PRACTICE_AGGREGATE_IDS: Record<string, string> = {
   "听力": "practice-gaokao-listening-2000-2019",
   "语法填空／语言运用": "practice-gaokao-grammar-fill-2000-2019",
   "单项填空": "practice-gaokao-single-choice-2000-2019",
   "完形填空": "practice-gaokao-cloze-2000-2019",
-  "七选五／阅读补全": "practice-gaokao-seven-choice-2000-2019",
-  "阅读理解": "practice-gaokao-reading-2000-2019",
+  "阅读理解／七选五／信息匹配": "practice-gaokao-reading-2000-2019",
   "读后续写": "practice-gaokao-continuation-writing-2000-2019",
   "写作／书面表达": "practice-gaokao-writing-2000-2019",
-  "短文回答／阅读表达": "practice-gaokao-short-answer-2000-2019",
+  "任务型阅读／阅读表达": "practice-gaokao-short-answer-2000-2019",
 };
+
+const PRACTICE_MATERIALS = [
+  { title: "阅读理解（含七选五、信息匹配）", file: "阅读理解与七选五.md" },
+  { title: "任务型阅读与阅读填空", file: "任务型阅读与阅读填空.md" },
+  { title: "阅读简答与阅读表达", file: "阅读简答与阅读表达.md" },
+  { title: "完形填空", file: "完形填空.md" },
+  { title: "语法填空", file: "语法填空.md" },
+  { title: "选词填空", file: "选词填空.md" },
+  { title: "情景对话", file: "情景对话.md" },
+  { title: "听力", file: "听力.md" },
+  { title: "语音知识", file: "语音知识.md" },
+  { title: "完成句子", file: "完成句子.md" },
+  { title: "书面表达与应用文写作", file: "书面表达与应用文写作.md" },
+  { title: "同义词辨析（参考资料）", file: "同义词辨析.md" },
+  { title: "整理说明", file: "整理说明.md" },
+];
 
 function practiceFamily(entry: SeniorHighLibraryEntry) {
   if (entry.title.includes("听力")) return "听力";
   if (entry.title.includes("单项填空")) return "单项填空";
-  if (entry.title.includes("七选五")) return "七选五／阅读补全";
+  if (entry.title.includes("任务型阅读") || entry.title.includes("短文回答") || entry.title.includes("阅读表达")) return "任务型阅读／阅读表达";
+  if (entry.title.includes("七选五") || entry.title.includes("阅读理解")) return "阅读理解／七选五／信息匹配";
   if (entry.title.includes("完形")) return "完形填空";
   if (entry.title.includes("语法填空")) return "语法填空／语言运用";
-  if (entry.title.includes("短文回答") || entry.title.includes("阅读表达")) return "短文回答／阅读表达";
   if (entry.title.includes("应用文")) return "应用文写作";
   if (entry.title.includes("读后续写")) return "读后续写";
   if (entry.title.includes("书面表达") || entry.title.includes("写作")) return "写作／书面表达";
@@ -98,7 +113,7 @@ export function SeniorHighLibrary() {
 
   return <section className="senior-high-page">
     {entry === "knowledge" ? <SeniorHighKnowledge /> : null}
-    {entry === "practice" ? <div className="senior-high-section"><div className="senior-high-practice-family-grid">{families.map((name) => { const aggregate = aggregatePractice.get(PRACTICE_AGGREGATE_IDS[name]); if (!aggregate) return null; return <Link className="senior-high-practice-family-card" href={aggregate.href} key={name}><strong>{name}</strong><span>{aggregate.questionCount} 题 · 1 组汇编</span><small>{completed.has(aggregate.id) ? "已完成" : "开始作答"} · 答案与解析按题目显示</small></Link>; })}</div></div> : null}
+    {entry === "practice" ? <div className="senior-high-section"><div className="senior-high-practice-family-grid">{families.map((name) => { const aggregate = aggregatePractice.get(PRACTICE_AGGREGATE_IDS[name]); if (!aggregate) return null; return <Link className="senior-high-practice-family-card" href={aggregate.href} key={name}><strong>{name}</strong><span>{aggregate.questionCount} 题 · 1 组汇编</span><small>{completed.has(aggregate.id) ? "已完成" : "开始作答"} · 答案与解析按题目显示</small></Link>; })}</div><div className="senior-high-group"><h3>历年题型整理稿</h3><p>按年份、卷别及同类题型归档的历年题库资料，可下载留存或打印。</p><div className="senior-high-practice-family-grid">{PRACTICE_MATERIALS.map((material) => <a className="senior-high-practice-family-card" download href={`/senior-high/materials/${encodeURIComponent(material.file)}`} key={material.file}><strong>{material.title}</strong><span>校对版 Markdown</span><small>下载整理稿</small></a>)}</div></div></div> : null}
     {entry === "papers" ? <div className="senior-high-section"><div className="senior-high-v2-filters"><label>年份<select onChange={(event) => setYear(event.target.value)} value={year}><option>全部</option>{years.map((value) => <option key={value}>{value}</option>)}</select></label><label>地区／卷型<select onChange={(event) => setRegion(event.target.value)} value={region}><option>全部</option>{regions.map((value) => <option key={value}>{value}</option>)}</select></label><label>答案状态<select onChange={(event) => setAnswerStatus(event.target.value)} value={answerStatus}><option value="全部">全部</option><option value="answered">答案完整</option><option value="partial">部分有答案</option><option value="none">无标准答案</option><option value="conflict">答案待复核</option></select></label></div>{groupedPapers.map(([paperYear, entries]) => <div className="senior-high-group" key={paperYear}><h3>{paperYear} 年</h3><div className="senior-high-paper-grid">{entries.map((item) => <Link className="senior-high-paper-card" href={item.href} key={item.id}><strong>{item.region} · {item.variant}</strong><span>{item.title}</span><small>{item.questionCount} 题 · {answerStatusLabel(item)} · {completed.has(item.id) ? "已完成" : "开始作答"}</small></Link>)}</div></div>)}</div> : null}
   </section>;
 }
