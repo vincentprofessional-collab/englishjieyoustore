@@ -413,6 +413,21 @@ export function SeniorHighRunner({ kind, setId, basePath = "/senior-high", backH
   }, [answers, restored, storageKey, submittedGroups]);
 
   useEffect(() => {
+    if (!restored || !data?.answerAliases) return;
+    setAnswers((current) => {
+      const migrated = { ...current };
+      for (const [alias, canonical] of Object.entries(data.answerAliases || {})) {
+        for (const [key, value] of Object.entries(current)) {
+          if (key !== alias && !key.startsWith(alias + ":")) continue;
+          const target = canonical + key.slice(alias.length);
+          if (!(target in migrated)) migrated[target] = value;
+        }
+      }
+      return migrated;
+    });
+  }, [data, restored]);
+
+  useEffect(() => {
     if (!data || typeof ResizeObserver === "undefined") return;
     const groups = [...document.querySelectorAll<HTMLElement>(
       ".senior-high-v2-group[data-side-questions=\"true\"]",

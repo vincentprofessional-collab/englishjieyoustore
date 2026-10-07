@@ -170,6 +170,8 @@ export type SeniorHighSet = {
   assetRefs: SeniorHighAssetRef[];
   sourceRefs: SeniorHighSourceRef[];
   quality: SeniorHighSetQuality;
+  /** Maps IDs removed during exact duplicate consolidation to their retained question or blank IDs. */
+  answerAliases?: Record<string, string>;
   submissionMode?: "whole-paper";
 };
 

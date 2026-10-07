@@ -17618,7 +17618,7 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
   flex-wrap: wrap;
   gap: 0;
   min-width: 0;
-  padding-bottom: 1px;
+  padding-bottom: 0;
 }
 
 .word-title-meta > * + * {
@@ -17675,7 +17675,8 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
   align-self: flex-end;
   color: #245d7b;
   font-size: 17px;
-  margin-bottom: 1px;
+  line-height: 1;
+  margin-bottom: 0;
 }
 
 .word-detail-title-row .inline-pronunciation-side b,
@@ -17899,9 +17900,9 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
   grid-template-columns: minmax(0, 1fr);
   min-height: 58px;
   min-width: 0;
-  margin-inline: auto;
+  margin-inline: 0;
   padding: 8px 10px;
-  width: min(100%, 960px);
+  width: 100%;
 }
 
 .vocabulary-video-progress-row {
@@ -19516,6 +19517,10 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
   display: flex;
   min-height: 50px;
   padding: 7px 14px 7px 96px;
+}
+
+.bbc-article-list-item {
+  padding-left: 54px;
 }
 
 .bbc-article-card strong {
@@ -24236,14 +24241,44 @@ audio.guide-editor-asset-preview {
 .bbc-article-card-link {
   align-items: center;
   color: inherit;
-  display: flex;
+  display: grid;
   flex: 1 1 auto;
+  gap: 10px;
+  grid-template-columns: 58px minmax(0, 1fr);
   min-width: 0;
   text-decoration: none;
 }
 
+.bbc-article-list-id {
+  color: #62526f;
+  font-size: 13px;
+  font-weight: 750;
+  white-space: nowrap;
+}
+
+.bbc-article-title-pair {
+  align-items: baseline;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  min-width: 0;
+}
+
+.bbc-article-list-item .bbc-article-card-link strong {
+  width: auto;
+}
+
 .bbc-article-card-link strong {
   min-width: 0;
+}
+
+.bbc-article-list-translation {
+  color: #62526f;
+  flex: 1 1 14em;
+  font-size: 14px;
+  line-height: 1.35;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .bbc-article-select {
@@ -24262,7 +24297,7 @@ audio.guide-editor-asset-preview {
 }
 
 .bbc-article-select .choice-dot {
-  border-color: var(--accent);
+  border-color: #8a58c7;
   height: 20px;
   width: 20px;
 }
@@ -27127,15 +27162,16 @@ audio.guide-editor-asset-preview {
 
 .vocabulary-learning-page .vocabulary-learning-detail-title-row .word-title-primary,
 .vocabulary-learning-page .vocabulary-learning-detail-title-row .word-title-meta {
-  align-items: baseline !important;
+  align-items: flex-end !important;
 }
 
 .vocabulary-learning-page .vocabulary-learning-detail-title-row .inline-pronunciation {
-  align-items: baseline !important;
+  align-items: flex-end !important;
 }
 
 .vocabulary-learning-page .vocabulary-learning-detail-title-row .vocabulary-level-badge {
-  align-self: baseline !important;
+  align-self: flex-end !important;
+  line-height: 1;
   margin-bottom: 0 !important;
 }
 
@@ -29449,8 +29485,8 @@ body *:not(.bbc-vocabulary-highlight):not(.bbc-active-word) {
 /* Restore the site's green-and-gold footer, with gradients on both bands. */
 .site-footer {
   background: linear-gradient(120deg, var(--accent) 0%, var(--gold) 100%) !important;
-  border-radius: 30px;
-  overflow: hidden;
+  border-radius: 0;
+  overflow: visible;
 }
 
 .site-footer .footer-brand-band {
@@ -29466,7 +29502,8 @@ body *:not(.bbc-vocabulary-highlight):not(.bbc-active-word) {
 }
 
 .site-footer .footer-bottom {
-  background: var(--bg) !important;
+  background: transparent !important;
+  border-radius: 0;
 }
 
 /* Keep navigation hover light blue across page themes. */
@@ -31033,10 +31070,11 @@ body *:not(.bbc-vocabulary-highlight):not(.bbc-active-word) {
   .bbc-selected-year > header small { color: #8a897e; font-size: 11px; }
   .bbc-article-list { gap: 7px; }
   .bbc-article-card { border-radius: 13px; min-width: 0; }
-  .bbc-article-card-link { align-items: flex-start; display: flex; flex-direction: column; gap: 4px; min-width: 0; padding: 12px 13px; }
-  .bbc-article-list-meta { color: #938d80; font-size: 10px; font-weight: 650; }
+  .bbc-article-card-link { align-items: flex-start; gap: 7px; grid-template-columns: 48px minmax(0, 1fr); min-width: 0; padding: 10px 12px; }
+  .bbc-article-list-id { font-size: 10px; }
+  .bbc-article-title-pair { align-items: flex-start; flex-direction: column; gap: 3px; }
   .bbc-article-card-link strong { color: #245d7b; font-size: 14px; line-height: 1.35; overflow-wrap: anywhere; }
-  .bbc-article-list-translation { color: #758178; font-size: 12px; line-height: 1.4; }
+  .bbc-article-list-translation { color: #62526f; font-size: 12px; line-height: 1.4; }
 
   .bbc-article-page { padding-left: 10px; padding-right: 10px; }
   .bbc-article-hero { padding: 13px 13px 12px; }
@@ -31084,7 +31122,7 @@ body *:not(.bbc-vocabulary-highlight):not(.bbc-active-word) {
     grid-column: 2;
     grid-row: 1;
     justify-self: start;
-    margin: 0 0 2px;
+    margin: 0;
     padding: 0;
   }
   .vocabulary-word-page .vocabulary-detail-shell-title-row .inline-pronunciation {
@@ -31105,7 +31143,8 @@ body *:not(.bbc-vocabulary-highlight):not(.bbc-active-word) {
     align-self: end;
     font-size: 12px;
     letter-spacing: 0.02em;
-    margin: 0 0 2px;
+    line-height: 1;
+    margin: 0;
   }
   .vocabulary-word-page .vocabulary-detail-shell-actions {
     align-self: start;
@@ -32290,10 +32329,7 @@ body .mobile-bottom-nav a.active { color: #245d7b !important; }
     padding: 10px 12px;
   }
 
-  .bbc-mobile-article-list .bbc-article-list-id,
-  .bbc-mobile-article-list .bbc-article-list-meta > span[aria-hidden="true"] {
-    display: none;
-  }
+  .bbc-mobile-article-list .bbc-article-card { padding: 0; }
 
   .vocabulary-learning-settings-backdrop {
     align-items: flex-start;

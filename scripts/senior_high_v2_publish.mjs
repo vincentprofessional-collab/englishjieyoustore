@@ -6,6 +6,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { validateSeniorHighV2Publishability, validateSeniorHighV2Set } from "./senior_high_v2_schema.mjs";
+import { dedupeSeniorHighPracticeSet } from "./senior_high_v2_dedupe.mjs";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const SOURCE_ROOT = process.env.SENIOR_HIGH_SOURCE_ROOT || "/Volumes/My HDD3/备课/高考";
@@ -640,6 +641,7 @@ function buildTypePracticeSets(papers) {
   }
   return [...byKey.values()].map((set) => {
     if (/^practice-gaokao-(?:writing|application-writing|continuation-writing)-/.test(set.id)) dedupeWritingGroups(set);
+    if (set.id !== "practice-gaokao-listening-2000-2019") dedupeSeniorHighPracticeSet(set);
     let displayNumber = 1;
     for (const section of set.sections) for (const group of section.groups) for (const question of group.questions) question.displayNumber = displayNumber++;
     set.assetRefs = uniqueById(set.assetRefs);
@@ -692,6 +694,11 @@ function main() {
   }
   const typePracticeSets = buildTypePracticeSets(legacyPapers);
   for (const set of typePracticeSets) {
+    const questions = allQuestions(set).filter((question) => question.type !== "instruction_only");
+    if (!questions.some((question) => question.answerSpec?.availability === "answered")) {
+      rejected.push({ id: set.id, errors: ["publishability: no reliable answers"], structureStatus: set.quality.structureStatus });
+      continue;
+    }
     const validation = validateSeniorHighV2Set(set);
     if (!validation.ok) {
       rejected.push({ id: set.id, errors: validation.errors, structureStatus: set.quality.structureStatus });

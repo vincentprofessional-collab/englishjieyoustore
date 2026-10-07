@@ -268,13 +268,19 @@ function splitSupplementalReviewNotes(notes: string[]) {
 
 function SupplementalUsageScenario({ context, translation, example }: { context: string; translation: string; example: string }) {
   if (!context && !translation && !example) return null;
+  const splitDialogueLines = (value: string, language: "zh" | "en") => {
+    const marker = language === "zh" ? /(?=(?:朋友|你)\s*[：:])/gu : /(?=(?:friend|you)\s*[：:])/giu;
+    return value.split(marker).map((line) => line.trim()).filter(Boolean);
+  };
+  const translationLines = splitDialogueLines(translation, "zh");
+  const exampleLines = splitDialogueLines(example, "en");
   return (
     <section className="word-detail-section">
       <h2>使用场景</h2>
       <div className="word-lookup-etymology-card vocabulary-expression-scenario-card">
         {context ? <p>{context}</p> : null}
-        {translation ? <p className="vocabulary-expression-scenario-translation">{translation}</p> : null}
-        {example ? <p className="vocabulary-expression-scenario-example" lang="en">{example}</p> : null}
+        {translationLines.map((line, index) => <p className="vocabulary-expression-scenario-translation" key={`translation-${index}`}>{line}</p>)}
+        {exampleLines.map((line, index) => <p className="vocabulary-expression-scenario-example" key={`example-${index}`} lang="en">{line}</p>)}
       </div>
     </section>
   );
@@ -295,7 +301,9 @@ export function VocabularyDetailContent({
 }: VocabularyDetailContentProps) {
   if (isSupplementalLearningBook(entry.level)) {
     const { caution, scenario: noteScenario } = splitSupplementalReviewNotes(entry.reviewNotes);
-    const scenario = usageScenario ?? noteScenario;
+    const scenario = entry.level === "小学短语" || entry.level === "初中短语"
+      ? null
+      : usageScenario ?? noteScenario;
     return (
       <>
         <VocabularyLookupDisplaySection controlsEnabled id="chineseDefinition" title="中文释义"><DefinitionRows entry={entry} /></VocabularyLookupDisplaySection>

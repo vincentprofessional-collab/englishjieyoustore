@@ -36,11 +36,13 @@ export function ArticlesHome({
   function renderArticleCard(article: BbcArticleListGroup["articles"][number], selectable: boolean) {
     const isSelected = selectedArticles.includes(article.id);
     return (
-      <div className="bbc-article-card" key={article.id}>
+      <div className="bbc-article-card bbc-article-list-item" key={article.id}>
         <Link className="bbc-article-card-link" href={`/articles/${article.id}`}>
-          <span className="bbc-article-list-meta">{article.date.replaceAll("-", ".")} <span aria-hidden="true">·</span> <span className="bbc-article-list-id">{article.id}</span></span>
-          <strong>{article.title}</strong>
-          {article.titleChinese ? <span className="bbc-article-list-translation">{article.titleChinese}</span> : null}
+          <span className="bbc-article-list-id">{article.id}</span>
+          <span className="bbc-article-title-pair">
+            <strong>{article.title}</strong>
+            {article.titleChinese ? <span className="bbc-article-list-translation">{article.titleChinese}</span> : null}
+          </span>
         </Link>
         {selectable ? (
           <button

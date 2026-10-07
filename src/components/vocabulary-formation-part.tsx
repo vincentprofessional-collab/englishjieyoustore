@@ -41,7 +41,7 @@ export function VocabularyFormationPart({ href, label, unlocked }: VocabularyFor
           >
             <span className="vocabulary-paywall-kicker">词根词缀进阶内容</span>
             <h2 id="vocabulary-paywall-title">解锁词根词缀详情</h2>
-            <p>其他词汇的词根、词缀关系与同源词内容，需要开通后查看。</p>
+            <p>暂未达到可公开学习的质量标准</p>
             <button className="button primary" onClick={() => setIsPaywallOpen(false)} type="button">
               知道了
             </button>

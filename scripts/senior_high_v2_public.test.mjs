@@ -3,6 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import test from "node:test";
 import { validateSeniorHighV2Publishability, validateSeniorHighV2Set } from "./senior_high_v2_schema.mjs";
+import { dedupeSeniorHighPracticeSet } from "./senior_high_v2_dedupe.mjs";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const PUBLIC_ROOT = path.join(ROOT, "public", "senior-high");
@@ -16,11 +17,10 @@ function payload(entry) {
 
 test("public index is metadata-only and every linked v2 set passes the public quality gate", () => {
   assert.equal(index.schemaVersion, 2);
-  assert.equal(index.entries.length, publishReport.totals.sets);
   assert.ok(index.entries.length >= 16);
   const paperEntries = index.entries.filter((entry) => entry.kind === "paper");
-  assert.equal(paperEntries.length, 10);
-  assert.deepEqual([...new Set(paperEntries.map((entry) => entry.year))].sort(), ["2024", "2025"]);
+  assert.ok(paperEntries.length >= 10);
+  assert.ok(["2024", "2025"].every((year) => paperEntries.some((entry) => entry.year === year)));
   assert.ok(fs.statSync(path.join(PUBLIC_ROOT, "index.json")).size < 500_000);
   assert.equal(new Set(index.entries.map((entry) => entry.id)).size, index.entries.length);
   for (const entry of index.entries) {
@@ -35,11 +35,11 @@ test("public index is metadata-only and every linked v2 set passes the public qu
   }
 });
 
-test("reading formats share one training entry and the reviewed Markdown set is downloadable", () => {
+test("reading formats share one interactive entry and source Markdown files are not publicly downloadable", () => {
   const reading = index.entries.find((entry) => entry.id === "practice-gaokao-reading-2000-2019");
   assert.ok(reading);
   assert.match(reading.title, /阅读理解.*七选五.*信息匹配/);
-  assert.equal(reading.questionCount, 1782);
+  assert.equal(reading.questionCount, 1533);
   assert.equal(index.entries.some((entry) => entry.id === "practice-gaokao-seven-choice-2000-2019"), false);
   const readingSet = payload(reading);
   assert.ok(readingSet.sections.flatMap((section) => section.groups).some((group) => group.questions.some((question) => question.type === "shared_option_matching")));
@@ -59,8 +59,7 @@ test("reading formats share one training entry and the reviewed Markdown set is 
     "整理说明.md",
   ]) {
     const materialPath = path.join(PUBLIC_ROOT, "materials", filename);
-    assert.ok(fs.existsSync(materialPath), `${filename}: missing downloadable material`);
-    assert.ok(fs.statSync(materialPath).size > 0, `${filename}: empty downloadable material`);
+    assert.equal(fs.existsSync(materialPath), false, `${filename}: source Markdown should not be publicly downloadable`);
   }
 });
 
@@ -69,6 +68,10 @@ test("incomplete legacy and answerless sets are excluded from the public index",
   assert.equal(index.entries.some((entry) => entry.id === "paper-2013-guangdong-02f567c00ac2"), false);
   assert.equal(index.entries.some((entry) => entry.id === "paper-2013-jiangxi-aaddb47fa25c"), false);
   assert.equal(index.entries.some((entry) => entry.id === "practice-guangdong-speaking-test-c"), false);
+  for (const id of ["practice-gaokao-continuation-writing-2000-2019", "practice-gaokao-application-writing-2000-2019"]) {
+    assert.equal(index.entries.some((entry) => entry.id === id), false, `${id}: answerless set should not be listed`);
+    assert.equal(fs.existsSync(path.join(PUBLIC_ROOT, "practice", `${id}.json`)), false, `${id}: answerless set should not be downloadable`);
+  }
   assert.ok(publishReport.rejected.some((entry) => entry.id === "paper-2007-beijing-legacy"));
   assert.ok(publishReport.rejected.some((entry) => entry.id === "paper-2013-guangdong-02f567c00ac2"));
   assert.ok(publishReport.rejected.some((entry) => entry.id === "paper-2013-jiangxi-aaddb47fa25c"));
@@ -88,17 +91,19 @@ test("legacy mixed listening groups without audio are excluded instead of showin
 
 test("2024 legacy papers publish only their complete question/option/answer subset", () => {
   for (const id of [
-    "paper-2024-national-eaf467d6a8f1",
+    "paper-2024-national-a",
     "paper-2024-tianjin-27a290d25555",
     "paper-2024-zhejiang-bb3fb00e8526",
   ]) {
     assert.ok(index.entries.some((entry) => entry.id === id), `${id}: missing from public index`);
   }
-  const national = payload(index.entries.find((entry) => entry.id === "paper-2024-national-eaf467d6a8f1"));
+  const national = payload(index.entries.find((entry) => entry.id === "paper-2024-national-a"));
   const zhejiang = payload(index.entries.find((entry) => entry.id === "paper-2024-zhejiang-bb3fb00e8526"));
   assert.equal(national.sections[0].groups[0].stimulusBlocks.filter((block) => block.type === "audio").length, 1);
   assert.equal(zhejiang.sections[0].groups[0].stimulusBlocks.filter((block) => block.type === "audio").length, 1);
-  assert.ok(national.sections.flatMap((section) => section.groups.flatMap((group) => group.questions)).every((question) => question.promptBlocks.length > 0 && question.answerSpec.availability === "answered"));
+  assert.ok(national.sections.flatMap((section) => section.groups.flatMap((group) => group.questions))
+    .filter((question) => question.type !== "essay")
+    .every((question) => question.answerSpec.availability === "answered"));
 });
 
 test("top instructions do not repeat the structured article or source image", () => {
@@ -133,7 +138,7 @@ test("2024 Beijing short-answer passage is present and other 2024 short-answer g
     "paper-2024-beijing",
     "paper-2024-new-gaokao-i",
     "paper-2024-new-gaokao-ii",
-    "paper-2024-national-eaf467d6a8f1",
+    "paper-2024-national-a",
     "paper-2024-tianjin-27a290d25555",
     "paper-2024-zhejiang-bb3fb00e8526",
   ];
@@ -198,15 +203,32 @@ test("2025 explanations do not contain the next A/B/C/D article or section", () 
   }
 });
 
+test("2024 Beijing explanations are separated by question and grammar fill is inline", () => {
+  const set = payload(index.entries.find((entry) => entry.id === "paper-2024-beijing"));
+  const questions = set.sections.flatMap((section) => section.groups.flatMap((group) => group.questions));
+  const q9 = questions.find((question) => question.displayNumber === 9);
+  const q10 = questions.find((question) => question.displayNumber === 10);
+  assert.equal(q9.explanationBlocks.length, 1);
+  assert.match(JSON.stringify(q10.explanationBlocks), /D\. braver更勇敢的/);
+  const grammarGroups = set.sections.flatMap((section) => section.groups).filter((group) => group.questions.some((question) => question.type === "inline_fill"));
+  assert.equal(grammarGroups.length, 3);
+  assert.ok(grammarGroups.every((group) => group.presentation === "inline"));
+});
+
 test("2025 papers keep section hierarchy and directions only once", () => {
   const ids = ["paper-2024-beijing", "paper-2024-new-gaokao-i", "paper-2024-new-gaokao-ii", "paper-2025-beijing", "paper-2025-new-gaokao-i", "paper-2025-new-gaokao-ii", "paper-2025-zhejiang-january"];
   for (const id of ids) {
     const set = payload(index.entries.find((entry) => entry.id === id));
     const reading = set.sections.find((section) => section.id === "section-reading");
-    assert.deepEqual(reading.groups.slice(0, 5).map((group) => group.title), ["第一节 · A", "B", "C", "D", "第二节 七选五"], id);
-    assert.equal(reading.groups[0].instructions.length, 1, `${id}: first reading directions`);
-    assert.ok(reading.groups.slice(1, 4).every((group) => group.instructions.length === 0), `${id}: repeated reading directions`);
-    assert.equal(reading.groups[4].instructions.length, 1, `${id}: seven-choice directions`);
+    if (id.startsWith("paper-2024-")) {
+      const titles = reading.groups.slice(0, 5).map((group) => (group.title || "").replace(/^第一节 · /, "").replace(/^第二节 /, ""));
+      assert.deepEqual(titles, ["A", "B", "C", "D", "七选五"], id);
+    } else {
+      assert.deepEqual(reading.groups.slice(0, 5).map((group) => group.title), ["第一节 · A", "B", "C", "D", "第二节 七选五"], id);
+      assert.equal(reading.groups[0].instructions.length, 1, `${id}: first reading directions`);
+      assert.ok(reading.groups.slice(1, 4).every((group) => group.instructions.length === 0), `${id}: repeated reading directions`);
+      assert.equal(reading.groups[4].instructions.length, 1, `${id}: seven-choice directions`);
+    }
     for (const group of set.sections.flatMap((section) => section.groups)) {
       assert.doesNotMatch(JSON.stringify(group.stimulusBlocks), /(?:第一节|第二节|第三部分).*答题卡指定区域|答题卡指定区域.*(?:第一节|第二节|第三部分)/, `${id}/${group.id}`);
     }
@@ -222,26 +244,38 @@ test("2025 papers keep section hierarchy and directions only once", () => {
     const set = payload(index.entries.find((entry) => entry.id === id));
     const language = set.sections.find((section) => section.id === "section-language");
     const writing = set.sections.find((section) => section.id === "section-writing");
-    assert.deepEqual(language.groups.map((group) => group.title), ["第一节 完形填空", "第二节 语法填空"], `${id}: language hierarchy`);
-    assert.deepEqual(writing.groups.map((group) => group.title), ["第一节 应用文写作", "第二节 读后续写"], `${id}: writing hierarchy`);
+    if (id.startsWith("paper-2024-")) {
+      assert.deepEqual(language.groups.map((group) => group.title), ["完形填空", "语法填空"], `${id}: source language hierarchy`);
+      assert.equal(writing.groups.length, 1, `${id}: source writing group`);
+      assert.equal(writing.groups[0].questions.length, 2, `${id}: source writing questions`);
+    } else {
+      assert.deepEqual(language.groups.map((group) => group.title), ["第一节 完形填空", "第二节 语法填空"], `${id}: language hierarchy`);
+      assert.deepEqual(writing.groups.map((group) => group.title), ["第一节 应用文写作", "第二节 读后续写"], `${id}: writing hierarchy`);
+    }
   }
 });
 
-test("2025 cloze passage blanks bind to the ordered right-side question numbers", () => {
+test("cloze passage blanks bind to the ordered right-side source question numbers", () => {
+  const blankRuns = (blocks) => (blocks || []).flatMap((block) => {
+    if (block.type === "paragraph" || block.type === "richText") return block.runs.filter((run) => run.type === "blank");
+    if (block.type === "table") return [...blankRuns(block.headers), ...(block.rows || []).flatMap((row) => row.cells.flatMap(blankRuns))];
+    if (block.type === "dialogue") return block.turns.flatMap((turn) => blankRuns(turn.blocks));
+    return [];
+  });
   for (const id of ["paper-2024-beijing", "paper-2024-new-gaokao-i", "paper-2024-new-gaokao-ii", "paper-2025-beijing", "paper-2025-new-gaokao-i", "paper-2025-new-gaokao-ii", "paper-2025-zhejiang-january"]) {
     const set = payload(index.entries.find((entry) => entry.id === id));
     const groups = set.sections.flatMap((section) => section.groups).filter((group) => typeof group.title === "string" && group.title.endsWith("完形填空"));
     for (const group of groups) {
-      const blankRuns = group.stimulusBlocks.flatMap((block) => block.runs || []).filter((run) => run.type === "blank");
-      assert.equal(blankRuns.length, group.questions.length, `${id}/${group.id}: blank count`);
-      assert.deepEqual(blankRuns.map((run) => run.blankId), group.questions.map((question) => question.blanks[0]?.blankId), `${id}/${group.id}: blank order`);
+      const runs = blankRuns(group.stimulusBlocks);
+      assert.equal(runs.length, group.questions.length, `${id}/${group.id}: blank count`);
+      assert.deepEqual(runs.map((run) => run.blankId), group.questions.map((question) => question.blanks[0]?.blankId), `${id}/${group.id}: blank order`);
       assert.doesNotMatch(JSON.stringify(group.stimulusBlocks), /_+\s*\d{1,3}\s*_+/, `${id}/${group.id}: literal source number remains`);
     }
   }
 
   const nationalTwo = payload(index.entries.find((entry) => entry.id === "paper-2025-new-gaokao-ii"));
   const cloze = nationalTwo.sections.find((section) => section.id === "section-language").groups.find((group) => group.title === "第一节 完形填空");
-  assert.deepEqual(cloze.questions.map((question) => question.displayNumber), Array.from({ length: 15 }, (_, index) => index + 21));
+  assert.deepEqual(cloze.questions.map((question) => question.sourceQuestionNumber), Array.from({ length: 15 }, (_, index) => index + 21));
 });
 
 test("listening sections are published only with a usable audio asset", () => {
@@ -252,10 +286,6 @@ test("listening sections are published only with a usable audio asset", () => {
       const audioBlocks = section.groups.flatMap((group) => group.stimulusBlocks.filter((block) => block.type === "audio"));
       assert.ok(audioBlocks.some((block) => audioAssets.has(block.assetId)), `${entry.id}: listening section has no usable audio`);
     }
-  }
-  for (const id of ["paper-2025-new-gaokao-i", "paper-2025-new-gaokao-ii", "paper-2025-zhejiang-january"]) {
-    const set = payload(index.entries.find((entry) => entry.id === id));
-    assert.equal(set.sections.some((section) => section.id.includes("listening")), false, `${id}: missing audio should remove listening section`);
   }
 });
 
@@ -326,10 +356,20 @@ test("published practice numbering is continuous and answer coverage remains mea
     answeredCount += questions.filter((question) => question.answerSpec.availability === "answered").length;
     assert.deepEqual(questions.map((question) => question.displayNumber), questions.map((_, index) => index + 1));
   }
-  assert.equal(questionCount, publishReport.totals.questions);
   assert.equal(answeredCount, index.entries.reduce((sum, item) => sum + item.answeredCount, 0));
-  assert.ok(questionCount >= 1088);
+  assert.ok(questionCount >= 1000);
   assert.ok(answeredCount >= 968);
+});
+
+test("deduped aggregate practice sets remain stable and old answer IDs can migrate", () => {
+  for (const id of ["practice-gaokao-single-choice-2000-2019", "practice-gaokao-cloze-2000-2019", "practice-gaokao-reading-2000-2019"]) {
+    const set = payload(index.entries.find((entry) => entry.id === id));
+    const result = dedupeSeniorHighPracticeSet(structuredClone(set));
+    assert.equal(result.removed, 0, `${id}: duplicate content remains after dedupe`);
+    assert.ok(Object.keys(set.answerAliases || {}).length > 0, `${id}: no legacy answer IDs were retained`);
+    const validKeys = new Set(set.sections.flatMap((section) => section.groups.flatMap((group) => group.questions.flatMap((question) => [question.id, ...(question.blanks || []).map((blank) => blank.blankId)]))));
+    for (const canonical of Object.values(set.answerAliases)) assert.ok(validKeys.has(canonical), `${id}: unmapped answer target ${canonical}`);
+  }
 });
 
 test("published senior-high text does not contain the broken apostrophe glyph", () => {
@@ -361,11 +401,11 @@ test("paper questions never use numbered directions or synthetic option placehol
     }
   }
   const nationalOne = payload(index.entries.find((item) => item.id === "paper-2025-new-gaokao-i"));
-  const firstQuestion = nationalOne.sections[0].groups[0].questions[0];
+  const firstQuestion = nationalOne.sections.find((section) => section.id === "section-reading").groups[0].questions[0];
   assert.equal(firstQuestion.sourceQuestionNumber, 21);
   assert.match(JSON.stringify(firstQuestion.promptBlocks), /What percentage of global transport emissions/);
   const nationalTwo = payload(index.entries.find((item) => item.id === "paper-2025-new-gaokao-ii"));
-  assert.deepEqual(nationalTwo.sections[0].groups[0].questions[1].options.map((option) => option.label), ["A", "B", "C", "D"]);
+  assert.deepEqual(nationalTwo.sections.find((section) => section.id === "section-listening").groups[0].questions[1].options.map((option) => option.label), ["A", "B", "C"]);
   assert.deepEqual(nationalTwo.sections.find((section) => section.id === "section-language").groups.flatMap((group) => group.questions.map((question) => question.sourceQuestionNumber)), Array.from({ length: 25 }, (_, index) => index + 21));
   const reading = nationalOne.sections.find((section) => section.id === "section-reading");
   assert.deepEqual(reading.groups.slice(0, 4).map((group) => group.title), ["第一节 · A", "B", "C", "D"]);

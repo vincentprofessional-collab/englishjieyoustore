@@ -397,8 +397,7 @@ function parseSettingsDraft(draft: StudySettingsDraft): StudySettings | null {
     writing: Number(draft.reactionSeconds.writing),
   };
   if (Object.values(reactionSeconds).some((seconds) => !validReactionSeconds(seconds))) return null;
-  if (draft.modes.length === 0
-    || (draft.reviewView !== null && draft.reviewFamiliarities.length === 0)) return null;
+  if (draft.modes.length === 0) return null;
   return {
     dailyNew,
     reactionSeconds,
@@ -751,8 +750,6 @@ function toLookupEntry(word: LearningWord): LocalVocabularyEntry {
 
 function loadPhraseUsageScenarios(book: string) {
   switch (book) {
-    case "小学短语":
-    case "初中短语":
     case "高中短语":
       return import("@/data/vocabulary/graded-phrase-scenarios.json");
     case "地道表达":
@@ -1293,30 +1290,28 @@ function chooseNextWord(
       ? chooseNextWord(earlierWords, store, now, order, excludeId, { ...settings, scope: "core" }, browseKey, "生词本")
       : null);
   }
-  const hasReviewFilter = settings.reviewView !== null || settings.reviewFamiliarities.length > 0;
-  const reviewedWordIds = hasReviewFilter
-    ? new Set(filterProgressWordIds(preferredWords, store, settings.modes, settings.reviewFamiliarities))
-    : null;
-  const classifiedWords = reviewedWordIds === null ? preferredWords : preferredWords.filter((word) => {
-    if (!reviewedWordIds.has(word.id)) return false;
-    const reviewedAt = progressFor(store, word.id).lastReviewedAt;
-    if (settings.reviewView === "today") return isReviewedToday(reviewedAt, now);
-    if (settings.reviewView === "overall") return reviewedAt !== null;
-    return true;
-  });
-  const newToday = classifiedWords.filter((word) => {
+  const newToday = preferredWords.filter((word) => {
     const entry = progressFor(store, word.id);
     return isReviewedToday(entry.firstLearnedAt ?? null, now);
   }).length;
   const queue: LearningWord[] = [];
-  for (const word of classifiedWords) {
+  for (const word of preferredWords) {
     if (word.id === excludeId) continue;
     const entry = progressFor(store, word.id);
     if (entry.completed) continue;
     if (entry.lastReviewedAt === null) {
+      // New words always follow the daily-new limit, even when the selected
+      // review modes have no history yet.
       if (newToday < settings.dailyNew) queue.push(word);
     } else if (entry.nextReviewAt === null || entry.nextReviewAt <= now) {
-      queue.push(word);
+      const familiarity = familiarityForProgress(entry);
+      const matchesReviewView = settings.reviewView === null
+        || (settings.reviewView === "today"
+          ? isReviewedToday(entry.lastReviewedAt, now)
+          : entry.lastReviewedAt !== null);
+      const matchesFamiliarity = settings.reviewFamiliarities.length === 0
+        || (familiarity !== null && settings.reviewFamiliarities.includes(familiarity));
+      if (matchesReviewView && matchesFamiliarity) queue.push(word);
     }
   }
   if (queue.length === 0) return earlierWords.length && preferredWords.every((word) => progressFor(store, word.id).completed)
@@ -2207,6 +2202,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
       const next: ProgressEntry = {
         ...previous,
         ...scheduledReview,
+        firstLearnedAt: previous.firstLearnedAt ?? timestamp,
         modeIndex: scheduledReview.modeIndex,
         familiarity: outcome,
         lastCategory: progressCategoryForMode(modeIndex),
@@ -3077,8 +3073,8 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
                 <label><input checked={settingsDraft.voice === "uk"} name="study-voice" onChange={() => setSettingsDraft((current) => ({ ...current, voice: "uk" }))} type="radio" />英音</label>
               </fieldset>
             </div>
-            {settingsDraft.modes.length === 0 || (settingsDraft.reviewView !== null && settingsDraft.reviewFamiliarities.length === 0)
-              ? <p className="vocabulary-learning-settings-validation">请至少选择一种考察模式；选择进度范围时，请保留一种熟悉程度。</p>
+            {settingsDraft.modes.length === 0
+              ? <p className="vocabulary-learning-settings-validation">请至少选择一种考察模式。</p>
               : null}
             <div className="vocabulary-learning-settings-actions">
               {!settingsFirstOpen ? <button onClick={closeStudySettings} type="button">取消</button> : null}
