@@ -1,11 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { cookies, headers } from "next/headers";
-import { VocabularyExampleAudioButton, VocabularyExampleFavoriteButton } from "@/components/vocabulary-example-actions";
-import { VocabularyExampleArticleLink } from "@/components/vocabulary-example-article-link";
 import { VocabularyAutoplay } from "@/components/vocabulary-autoplay";
 import { VocabularyBbcExampleStrip } from "@/components/vocabulary-bbc-example-strip";
-import { ContentShareButton } from "@/components/content-share-button";
 import { VocabularyDetailShell } from "@/components/vocabulary-detail-shell";
 import { VocabularyDetailContent } from "@/components/vocabulary-detail-content";
 import { VocabularyLookupDisplaySection } from "@/components/vocabulary-lookup-display-section";
@@ -16,7 +13,7 @@ import {
   type LocalVocabularyEntry,
   type VocabularyFormationPart,
 } from "@/lib/vocabulary/local-vocabulary";
-import { getVocabularyUsageExamples, prioritizeVocabularyUsageExamples, type VocabularyUsageExample } from "@/lib/vocabulary/examples";
+import { getVocabularyUsageExamples, prioritizeVocabularyUsageExamples } from "@/lib/vocabulary/examples";
 import { getVocabularyPhraseMatches, type VocabularyPhraseMatch } from "@/lib/vocabulary/phrases";
 import { getVocabularyLookupEtymology } from "@/lib/vocabulary/lookup-etymology";
 import { getVocabularySynonymDistinctions } from "@/lib/vocabulary/synonym-distinctions";
@@ -240,70 +237,6 @@ function PhraseSection({ phrases }: { phrases: VocabularyPhraseMatch[] }) {
           </article>
         ))}
       </div>
-    </section>
-  );
-}
-
-function UsageExamplesSection({
-  englishExamples,
-  examples,
-}: {
-  englishExamples: string[];
-  examples: VocabularyUsageExample[];
-}) {
-  if (examples.length === 0 && englishExamples.length === 0) {
-    return null;
-  }
-
-  return (
-    <section className="word-detail-section">
-      <h2>例句</h2>
-      {englishExamples.length > 0 ? (
-        <div className="english-example-list">
-          {englishExamples.map((example) => (
-            <blockquote key={example}>{example}</blockquote>
-          ))}
-        </div>
-      ) : null}
-      {examples.length > 0 ? (
-        <div className="vocabulary-usage-example-list">
-          {examples.map((example, index) => (
-            <article
-              className="vocabulary-usage-example-card"
-              id={`vocabulary-example-${index + 1}`}
-              key={example.id}
-            >
-              {example.sourceType === "article" || example.sourceType === "new-concept" ? (
-                <VocabularyExampleArticleLink
-                  example={example}
-                >
-                  <div className="vocabulary-usage-example-main">
-                    <p>{example.englishText}</p>
-                    {example.chineseText ? <span>{example.chineseText}</span> : null}
-                    <small>{example.sourceTitle}</small>
-                  </div>
-                </VocabularyExampleArticleLink>
-              ) : (
-                <div className="vocabulary-usage-example-main">
-                  <p>{example.englishText}</p>
-                  {example.chineseText ? <span>{example.chineseText}</span> : null}
-                  <small>{example.sourceTitle}</small>
-                </div>
-              )}
-              <div className="vocabulary-usage-example-actions">
-                {example.audioUrl ? <VocabularyExampleAudioButton audioUrl={example.audioUrl} /> : null}
-                <VocabularyExampleFavoriteButton example={example} />
-                <ContentShareButton
-                  label="分享例句"
-                  text={`${example.englishText}\n${example.chineseText ?? ""}`.trim()}
-                  title="英文例句"
-                  url={`#vocabulary-example-${index + 1}`}
-                />
-              </div>
-            </article>
-          ))}
-        </div>
-      ) : null}
     </section>
   );
 }

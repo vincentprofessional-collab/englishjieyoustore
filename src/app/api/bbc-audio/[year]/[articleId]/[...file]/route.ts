@@ -2,7 +2,9 @@ import { createHash, createHmac } from "node:crypto";
 import { getBbcArticleById } from "@/lib/articles/bbc";
 import { getUploadedBbcArticle } from "@/lib/articles/bbc-uploaded-content";
 import { localBbcAudioResponse, resolveLocalBbcAudio } from "@/lib/articles/bbc-local-audio";
-import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { getPaidContentKey } from "@/lib/access-control";
+import { claimPaidContentAccess } from "@/lib/free-preview-access-server";
+import { isFreeBbc2015ArticleUnlocked } from "@/lib/articles/bbc-free-access.mjs";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -97,16 +99,19 @@ export async function GET(
     return new Response("Audio not found.", { status: 404 });
   }
 
-  const supabase = await createServerSupabaseClient();
-  const { data: hasAccess, error } = await supabase.rpc("can_access_project", {
-    _project_key: "bbc",
-  });
+  if (!(article.year === 2015 && isFreeBbc2015ArticleUnlocked(article.id))) {
+    const hasAccess = await claimPaidContentAccess(
+      "bbc",
+      getPaidContentKey("bbc-article", article.id),
+      1,
+    );
 
-  if (error || hasAccess !== true) {
-    return new Response("BBC membership required.", {
-      status: 403,
-      headers: { "Cache-Control": "private, no-store" },
-    });
+    if (!hasAccess) {
+      return new Response("BBC membership required.", {
+        status: 403,
+        headers: { "Cache-Control": "private, no-store" },
+      });
+    }
   }
 
   const range = request.headers.get("range");

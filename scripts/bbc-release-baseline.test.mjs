@@ -2,6 +2,13 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 import test from "node:test";
+import {
+  BBC_2015_FREE_ARTICLE_IDS,
+  BBC_2015_FREE_ARTICLE_START_DATE,
+  isFreeBbc2015ArticleUnlocked,
+  isFreeBbc2015AssetPath,
+  getBbcAssetArticle,
+} from "../src/lib/articles/bbc-free-access.mjs";
 
 const root = process.cwd();
 const read = (relativePath) => fs.readFileSync(path.join(root, relativePath), "utf8");
@@ -63,4 +70,20 @@ test("BBC source quiz and wrong-answer collection stay in the release", () => {
   assert.equal(quizCatalog.find((record) => record.articleId === "260727")?.status, "partial");
   assert.match(favoriteSource, /ielts-platform\.favoriteQuestions/);
   assert.match(favoriteSource, /bbc-wrong:\$\{articleId\}:\$\{kind\}-\$\{questionNumber\}/);
+});
+
+test("BBC 2015 articles unlock one each Monday from 150720, including audio assets", () => {
+  const articles = readJson("src/data/bbc/2015/index.json");
+  assert.deepEqual(BBC_2015_FREE_ARTICLE_IDS, articles.map((article) => article.id));
+  assert.equal(BBC_2015_FREE_ARTICLE_START_DATE, "2026-10-12");
+  assert.equal(isFreeBbc2015ArticleUnlocked("150720", new Date("2026-10-12T00:00:00Z")), true);
+  assert.equal(isFreeBbc2015ArticleUnlocked("150727", new Date("2026-10-18T15:59:59Z")), false);
+  assert.equal(isFreeBbc2015ArticleUnlocked("150727", new Date("2026-10-19T00:00:00Z")), true);
+  assert.equal(isFreeBbc2015ArticleUnlocked("160104", new Date("2027-01-01T00:00:00Z")), false);
+  assert.equal(isFreeBbc2015AssetPath("/api/bbc-audio/2015/150720/full-content.mp3", new Date("2026-10-12T00:00:00Z")), true);
+  assert.equal(isFreeBbc2015AssetPath("/subtitles/bbc/2015/150727-bilingual.srt", new Date("2026-10-12T00:00:00Z")), false);
+  assert.deepEqual(getBbcAssetArticle("/api/bbc-audio/2019/190101/full-content.mp3"), {
+    articleId: "190101",
+    year: 2019,
+  });
 });

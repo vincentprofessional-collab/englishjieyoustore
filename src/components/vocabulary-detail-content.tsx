@@ -16,7 +16,6 @@ type VocabularyDetailContentProps = {
   entry: LocalVocabularyEntry;
   etymologyChinese?: string;
   etymologyEnglish?: string;
-  englishExampleTranslations?: string[];
   formationUnlocked?: boolean;
   formationParts: VocabularyFormationPart[];
   inlineVideo?: ReactNode;
@@ -188,7 +187,7 @@ function EtymologySection({ chinese, english, story }: { chinese: string; englis
       <div className="word-lookup-etymology-card">
         {english ? <div><strong>英文词源</strong><p>{english}</p></div> : null}
         {chinese ? <div><strong>中文词源</strong><p>{chinese}</p></div> : null}
-        {!english && !chinese && story ? <div><strong>词源说明</strong><p>{story}</p></div> : null}
+        {!english && !chinese && story ? <div><p>{story}</p></div> : null}
       </div>
     </VocabularyLookupDisplaySection>
   );
@@ -212,24 +211,14 @@ function PhraseSection({ phrases }: { phrases: VocabularyPhraseMatch[] }) {
   );
 }
 
-function UsageExamplesSection({ entry, examples, englishExampleTranslations }: { entry: LocalVocabularyEntry; examples: VocabularyUsageExample[]; englishExampleTranslations: string[] }) {
-  if (examples.length === 0 && entry.englishExamples.length === 0) return null;
+function UsageExamplesSection({ examples }: { examples: VocabularyUsageExample[] }) {
+  const bilingualExamples = examples.filter((example) => example.englishText.trim() && example.chineseText.trim());
+  if (bilingualExamples.length === 0) return null;
   return (
     <VocabularyLookupDisplaySection className="vocabulary-usage-examples" controlsEnabled id="examples" title="例句">
-      <div data-has-non-bbc-examples={entry.englishExamples.length > 0 || examples.some((example) => example.bookCode !== "BBC") ? "true" : "false"}>
-      {entry.englishExamples.length > 0 ? (
-        <div className="english-example-list">
-          {entry.englishExamples.map((example, index) => (
-            <blockquote key={`${example}-${index}`}>
-              {example}
-              {englishExampleTranslations[index] ? <><br /><span className="muted">{englishExampleTranslations[index]}</span></> : null}
-            </blockquote>
-          ))}
-        </div>
-      ) : null}
-      {examples.length > 0 ? (
+      <div data-has-non-bbc-examples={bilingualExamples.some((example) => example.bookCode !== "BBC") ? "true" : "false"}>
         <div className="vocabulary-usage-example-list">
-          {examples.map((example, index) => (
+          {bilingualExamples.map((example, index) => (
             <article className="vocabulary-usage-example-card" data-book-code={example.bookCode} id={`vocabulary-example-${index + 1}`} key={example.id}>
               {example.sourceType === "article" || example.sourceType === "new-concept" ? (
                 <VocabularyExampleArticleLink example={example}>
@@ -246,7 +235,6 @@ function UsageExamplesSection({ entry, examples, englishExampleTranslations }: {
             </article>
           ))}
         </div>
-      ) : null}
       </div>
     </VocabularyLookupDisplaySection>
   );
@@ -288,13 +276,21 @@ function SupplementalUsageScenario({ context, translation, example }: { context:
   };
   const translationLines = splitDialogueLines(translation, "zh");
   const exampleLines = splitDialogueLines(example, "en");
+  const dialogueRows = Array.from({ length: Math.max(translationLines.length, exampleLines.length) }, (_, index) => ({
+    translation: translationLines[index] ?? "",
+    example: exampleLines[index] ?? "",
+  }));
   return (
     <section className="word-detail-section">
       <h2>使用场景</h2>
       <div className="word-lookup-etymology-card vocabulary-expression-scenario-card">
-        {context ? <p>{context}</p> : null}
-        {translationLines.map((line, index) => <p className="vocabulary-expression-scenario-translation" key={`translation-${index}`}>{line}</p>)}
-        {exampleLines.map((line, index) => <p className="vocabulary-expression-scenario-example" key={`example-${index}`} lang="en">{line}</p>)}
+        {context ? <p className="vocabulary-expression-scenario-context">{context}</p> : null}
+        {dialogueRows.map((row, index) => (
+          <div className="vocabulary-expression-scenario-row" key={`dialogue-${index}`}>
+            <p className="vocabulary-expression-scenario-translation">{row.translation}</p>
+            <p className="vocabulary-expression-scenario-example" lang="en">{row.example}</p>
+          </div>
+        ))}
       </div>
     </section>
   );
@@ -304,7 +300,6 @@ export function VocabularyDetailContent({
   entry,
   etymologyChinese = "",
   etymologyEnglish = "",
-  englishExampleTranslations = [],
   formationParts,
   formationUnlocked = false,
   inlineVideo,
@@ -322,10 +317,11 @@ export function VocabularyDetailContent({
       <>
         <VocabularyLookupDisplaySection controlsEnabled id="chineseDefinition" title="中文释义"><DefinitionRows entry={entry} /></VocabularyLookupDisplaySection>
         <EnglishDefinitionSection entry={entry} />
-        <UsageExamplesSection entry={entry} englishExampleTranslations={englishExampleTranslations} examples={usageExamples} />
+        <UsageExamplesSection examples={usageExamples} />
         <SynonymDistinctionSection groups={synonymDistinctions} />
         {entry.etymologyStory ? <EtymologySection chinese="" english="" story={entry.etymologyStory} /> : null}
         {caution ? <WordDetailListSection items={[caution]} title="注意事项" /> : null}
+        {entry.extension ? <WordDetailListSection items={[entry.extension]} title="延伸扩展" /> : null}
         {scenario ? <SupplementalUsageScenario {...scenario} /> : null}
       </>
     );
@@ -343,7 +339,7 @@ export function VocabularyDetailContent({
       <VocabularyLookupDisplaySection controlsEnabled id="chineseDefinition" title="中文释义"><DefinitionRows entry={entry} /></VocabularyLookupDisplaySection>
       <EnglishDefinitionSection entry={entry} />
       <WordInflectionSection entry={entry} />
-      <UsageExamplesSection entry={entry} englishExampleTranslations={englishExampleTranslations} examples={usageExamples} />
+      <UsageExamplesSection examples={usageExamples} />
       <SynonymDistinctionSection groups={synonymDistinctions} />
       {wordTreeAndEtymology}
       {inlineVideo}

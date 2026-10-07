@@ -30,9 +30,10 @@ for (const year of fs.readdirSync(dataRoot).filter((entry) => /^20\d{2}$/.test(e
 }
 
 assert.doesNotMatch(bbcSource, /BBC_ARTICLES\.findIndex\(/);
-assert.match(articleRouteSource, /rpc\("can_access_project"/);
-assert.match(articleRouteSource, /hasAccess !== true/);
-assert.doesNotMatch(articleRouteSource, /ProjectAccessGate|claimPaidContentAccess|freePreviewLimit/);
+assert.match(articleRouteSource, /claimPaidContentAccess/);
+assert.match(articleRouteSource, /getPaidContentKey\("bbc-article", article\.id\)/);
+assert.match(articleRouteSource, /isFreeBbc2015ArticleUnlocked/);
+assert.doesNotMatch(articleRouteSource, /ProjectAccessGate|freePreviewLimit/);
 assert.match(proxySource, /isBbcAsset/);
 assert.match(proxySource, /"\/subtitles\/bbc\/"/);
 assert.match(proxySource, /"\/audio\/bbc\/"/);
@@ -41,8 +42,8 @@ assert.match(robotsSource, /disallow: "\/"/);
 assert.doesNotMatch(articleRouteSource, /findIndex\(|articleIndex/);
 assert.match(bbcSource, /\/api\/bbc-audio\//);
 assert.doesNotMatch(bbcSource, /NEXT_PUBLIC_BBC_AUDIO_BASE_URL|r2\.dev/);
-assert.match(audioRouteSource, /rpc\("can_access_project"/);
-assert.match(audioRouteSource, /hasAccess !== true/);
+assert.match(audioRouteSource, /claimPaidContentAccess/);
+assert.match(audioRouteSource, /getPaidContentKey\("bbc-article", article\.id\)/);
 assert.match(audioRouteSource, /R2_BBC_AUDIO_ACCESS_KEY_ID/);
 
-console.log(`BBC 内容隔离校验通过：${articleIds.size} 篇文章，正文需要服务器核验会员权限。`);
+console.log(`BBC 内容隔离校验通过：${articleIds.size} 篇文章，访客试读与会员权限由服务器核验。`);

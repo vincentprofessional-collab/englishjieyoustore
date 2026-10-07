@@ -67,8 +67,8 @@ export function scheduleReview(
     : null;
   const priorMistakes = previous.mistakeCount
     ?? (previous.spellingHadError || previous.lastOutcome === "vague" || previous.lastOutcome === "unfamiliar" ? 1 : 0);
-  const isFamiliar = outcome === "familiar" && !hadInputError;
-  const mistakeCount = priorMistakes + (isFamiliar ? 0 : 1);
+  const isFamiliar = outcome === "familiar";
+  const mistakeCount = priorMistakes + (isFamiliar ? Number(hadInputError) : 1);
   const firstLearnedAt = previous.firstLearnedAt ?? previous.lastReviewedAt ?? now;
   const previousStep = previous.reviewStep
     ?? (previous.completed || previous.plan === "done" ? LONG_TERM_DAYS.length : previous.plan === "long-term" ? 1 : 0);

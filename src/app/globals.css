@@ -27877,6 +27877,7 @@ audio.guide-editor-asset-preview {
 
 .vocabulary-learning-settings-review-range button:disabled {
   cursor: not-allowed;
+  opacity: .45;
 }
 
 .vocabulary-learning-settings-review-range h3 {
@@ -32520,12 +32521,31 @@ body .mobile-bottom-nav a.active { color: #245d7b !important; }
 }
 
 .vocabulary-expression-scenario-card {
-  gap: 9px;
+  gap: 0;
 }
 
-.vocabulary-expression-scenario-card p + p {
-  border-top: 1px solid rgba(228, 216, 189, 0.72);
+.vocabulary-expression-scenario-context {
+  border-bottom: 1px solid rgba(228, 216, 189, 0.72);
+  padding-bottom: 9px;
+}
+
+.vocabulary-expression-scenario-row {
+  align-items: start;
+  border-bottom: 1px solid rgba(228, 216, 189, 0.72);
+  column-gap: 18px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  padding: 9px 0;
+}
+
+.vocabulary-expression-scenario-card > div + div {
+  border-top: 0;
   padding-top: 9px;
+}
+
+.vocabulary-expression-scenario-row:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
 }
 
 .vocabulary-expression-scenario-translation {

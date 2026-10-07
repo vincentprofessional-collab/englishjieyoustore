@@ -12,6 +12,7 @@ type SupplementalSourceEntry = {
   englishDefinition?: string;
   example?: string;
   exampleTranslation?: string;
+  extension?: string;
   note?: string;
   origin?: string;
   partOfSpeech: string;
@@ -44,6 +45,7 @@ function toLearningWord(entry: SupplementalSourceEntry, book: LearningBookKey, i
     englishDefinitions: entry.englishDefinition ? [entry.englishDefinition] : [],
     englishExamples: entry.example ? [entry.example] : [],
     englishExampleTranslations: entry.exampleTranslation ? [entry.exampleTranslation] : [],
+    extension: entry.extension ?? "",
     etymologySource: "",
     etymologyStory: entry.origin ?? "",
     formation: "",

@@ -5,6 +5,7 @@ import {
   FREE_PREVIEW_VISITOR_MAX_AGE,
   isFreePreviewVisitorId,
 } from "@/lib/free-preview-visitor";
+import { getBbcAssetArticle, isFreeBbc2015AssetPath } from "@/lib/articles/bbc-free-access.mjs";
 import { getManagedMediaUrl, getStaticMediaAddress, getSupabaseStorageUrl, isLegacyCosOnlyMediaPath } from "@/lib/media/url";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -18,6 +19,8 @@ export async function proxy(request: NextRequest) {
     path.startsWith("/subtitles/bbc/") ||
     path.startsWith("/audio/bbc/") ||
     path.startsWith("/api/bbc-audio/");
+  const isFreeBbcAsset = isBbcAsset && isFreeBbc2015AssetPath(path);
+  const bbcAssetArticle = isBbcAsset ? getBbcAssetArticle(path) : null;
 
   if (staticMedia && !isBbcAsset) {
     if (process.env.NODE_ENV === "development" && /^\/audio\/(?:new-concept\/(?:book2|book1-uk|book2-uk)|new-concept-sentences\/book2)\//.test(path)) {
@@ -78,19 +81,24 @@ export async function proxy(request: NextRequest) {
 
     await supabase.auth.getClaims();
 
-    if (isBbcAsset) {
-      const { data: hasAccess, error } = await supabase.rpc("can_access_project", {
-        _project_key: "bbc",
-      });
+    if (isBbcAsset && !isFreeBbcAsset) {
+      const result = bbcAssetArticle
+        ? await supabase.rpc("claim_paid_content_access", {
+            _content_key: `bbc-article:${bbcAssetArticle.articleId}`,
+            _free_limit: 1,
+            _project_key: "bbc",
+            _visitor_id: visitorId,
+          })
+        : await supabase.rpc("can_access_project", { _project_key: "bbc" });
 
-      if (error || hasAccess !== true) {
+      if (result.error || result.data !== true) {
         return new NextResponse("BBC membership required.", {
           status: 403,
           headers: { "Cache-Control": "private, no-store" },
         });
       }
     }
-  } else if (isBbcAsset) {
+  } else if (isBbcAsset && !isFreeBbcAsset) {
     return new NextResponse("BBC membership check unavailable.", {
       status: 503,
       headers: { "Cache-Control": "private, no-store" },

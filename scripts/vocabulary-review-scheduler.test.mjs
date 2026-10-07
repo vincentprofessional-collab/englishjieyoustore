@@ -37,16 +37,13 @@ test("熟悉后跨天换模式；模糊五分钟、生僻两分钟后仍考当�
   assert.equal(previous.recoveryRequired, false);
 });
 
-test("拼写有误时留在写作模式五分钟；熟悉后按一天间隔切换", () => {
+test("拼写有误但选择熟悉时仍跨天切换模式", () => {
   let previous = { lastReviewedAt: null, modeIndex: 3, plan: "short-term" };
   previous = advance(previous, "familiar", 0, true);
-  assert.equal(previous.modeIndex, 3);
-  assert.equal(previous.recoveryRequired, true);
-  assert.equal(previous.nextReviewAt, 5 * minute);
-
-  previous = advance(previous, "familiar", previous.nextReviewAt);
   assert.equal(previous.modeIndex, 1);
-  assert.equal(previous.nextReviewAt, 5 * minute + day);
+  assert.equal(previous.recoveryRequired, false);
+  assert.equal(previous.mistakeCount, 1);
+  assert.equal(previous.nextReviewAt, day);
 });
 
 test("旧进度的熟悉次数不会阻止答熟悉后立即切换", () => {

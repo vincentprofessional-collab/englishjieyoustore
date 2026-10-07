@@ -43,6 +43,7 @@ export type LearningWord = {
   englishDefinitions: string[];
   englishExamples: string[];
   englishExampleTranslations?: string[];
+  extension?: string;
   etymologySource: string;
   etymologyStory: string;
   formation: string;

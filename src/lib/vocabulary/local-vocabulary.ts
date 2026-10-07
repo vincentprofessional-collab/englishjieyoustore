@@ -99,6 +99,7 @@ export type LocalVocabularyEntry = LocalVocabularyHint & {
   definitionLines: string[];
   englishDefinitions: string[];
   englishExamples: string[];
+  extension?: string;
   etymologyStory: string;
   etymologyReferences: VocabularyEtymologyReference[];
   inflections: VocabularyInflection[];

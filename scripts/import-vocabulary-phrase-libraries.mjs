@@ -10,6 +10,8 @@ const gradedBooks = { 小学: [], 初中: [], 高中: [] };
 const gradedScenarios = { 小学短语: {}, 初中短语: {}, 高中短语: {} };
 const idiomaticEntries = [];
 const idiomaticScenarios = {};
+const idiomaticDetailsByWord = new Map(JSON.parse(await readFile("src/data/vocabulary/idiomatic-expressions.json", "utf8"))
+  .map((entry) => [entry.word.trim().toLowerCase(), { extension: entry.extension, note: entry.note }]));
 
 function parseSource(text, { sectioned, onEntry }) {
   let section = "";
@@ -69,7 +71,7 @@ const idiomaticCount = parseSource(await readFile(resolve(idiomaticSourcePath), 
   onEntry: ({ definitionCn, phonetic, scenario, word }) => {
     const key = word.toLowerCase();
     if (idiomaticScenarios[key]) throw new Error(`Duplicate phrase in 地道表达: ${word}`);
-    idiomaticEntries.push({ definitionCn, partOfSpeech: "phr.", phonetic, word });
+    idiomaticEntries.push({ ...idiomaticDetailsByWord.get(key), definitionCn, partOfSpeech: "phr.", phonetic, word });
     idiomaticScenarios[key] = scenario;
   },
 });

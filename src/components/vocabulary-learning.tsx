@@ -124,7 +124,6 @@ type ProgressEntry = {
   recoveryFamiliarStreak?: number;
   recoveryRequired?: boolean;
   reviewStep?: number;
-  spellingCorrectStreak: number;
   spellingErrorCount: number;
   spellingHadError: boolean;
   spellingUnansweredCount: number;
@@ -343,7 +342,6 @@ function emptyProgress(): ProgressEntry {
     modeIndex: 1,
     nextReviewAt: null,
     plan: "short-term",
-    spellingCorrectStreak: 0,
     spellingErrorCount: 0,
     spellingHadError: false,
     spellingUnansweredCount: 0,
@@ -403,8 +401,8 @@ function parseSettingsDraft(draft: StudySettingsDraft): StudySettings | null {
     reactionSeconds,
     method: draft.method,
     modes: [...draft.modes],
-    reviewFamiliarities: [...draft.reviewFamiliarities],
-    reviewView: draft.reviewView,
+    reviewFamiliarities: draft.method === "classified" ? [] : [...draft.reviewFamiliarities],
+    reviewView: draft.method === "classified" ? null : draft.reviewView,
     scope: draft.scope,
     voice: draft.voice,
     order: draft.order,
@@ -724,6 +722,7 @@ function toLookupEntry(word: LearningWord): LocalVocabularyEntry {
     definitionLines: word.definitionLines,
     englishDefinitions: word.englishDefinitions,
     englishExamples: word.englishExamples,
+    extension: word.extension,
     etymologyReferences: [],
     etymologySource: word.etymologySource,
     etymologyStory: word.etymologyStory,
@@ -840,15 +839,6 @@ function LookupDetails({ word }: { word: LearningWord }) {
         </section>
       ) : null}
 
-      {word.englishExamples.length > 0 ? (
-        <section className="word-detail-section vocabulary-lookup-section">
-          <h2>例句</h2>
-          <div className="english-example-list vocabulary-lookup-lines">
-            {word.englishExamples.map((example, index) => <blockquote className="vocabulary-lookup-example" key={`${example}-${index}`}>{example}</blockquote>)}
-          </div>
-        </section>
-      ) : null}
-
       {word.reviewNotes.length > 0 ? (
         <section className="word-detail-section vocabulary-lookup-section">
           <h2>温故知新</h2>
@@ -953,11 +943,9 @@ function SpellingTitleInput({
 
 function LearningVocabularyDetails({
   detailPayload,
-  exampleTranslations,
   entry,
 }: {
   detailPayload: VocabularyDetailPayload | null;
-  exampleTranslations?: string[];
   entry: LocalVocabularyEntry;
 }) {
   const isSupplementalBook = isSupplementalLearningBook(entry.level);
@@ -1015,7 +1003,6 @@ function LearningVocabularyDetails({
         entry={detailedEntry}
         etymologyChinese={detailPayload?.etymology?.chinese}
         etymologyEnglish={detailPayload?.etymology?.english}
-        englishExampleTranslations={exampleTranslations}
         formationParts={detailPayload?.formationParts ?? []}
         inlineVideo={!isSupplementalBook && showVideo ? (
           <VocabularyLearningVideoSection word={detailedEntry.normalizedWord} />
@@ -1304,14 +1291,7 @@ function chooseNextWord(
       // review modes have no history yet.
       if (newToday < settings.dailyNew) queue.push(word);
     } else if (entry.nextReviewAt === null || entry.nextReviewAt <= now) {
-      const familiarity = familiarityForProgress(entry);
-      const matchesReviewView = settings.reviewView === null
-        || (settings.reviewView === "today"
-          ? isReviewedToday(entry.lastReviewedAt, now)
-          : entry.lastReviewedAt !== null);
-      const matchesFamiliarity = settings.reviewFamiliarities.length === 0
-        || (familiarity !== null && settings.reviewFamiliarities.includes(familiarity));
-      if (matchesReviewView && matchesFamiliarity) queue.push(word);
+      queue.push(word);
     }
   }
   if (queue.length === 0) return earlierWords.length && preferredWords.every((word) => progressFor(store, word.id).completed)
@@ -1559,9 +1539,11 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
           reactionSeconds: restoreReactionSeconds(item.reactionSeconds),
           method,
           modes: restoredModes.length === 0 ? [...ALL_STUDY_MODES] : restoredModes,
-          reviewFamiliarities: reviewView && restoredFamiliarities.length === 0
-            ? COLLECTIONS.map((collection) => collection.key) : restoredFamiliarities,
-          reviewView,
+          reviewFamiliarities: method === "classified"
+            ? []
+            : reviewView && restoredFamiliarities.length === 0
+              ? COLLECTIONS.map((collection) => collection.key) : restoredFamiliarities,
+          reviewView: method === "classified" ? null : reviewView,
           scope: item.scope === "all" ? "all" : "core",
           voice: item.voice === "uk" ? "uk" : "us",
           order: item.order === "random" ? "random" : "sequential",
@@ -2091,15 +2073,11 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
     const todayRecords = allRecords.filter((entry) => isReviewedToday(entry.lastReviewedAt, now));
     const source = settingsDraft.reviewView === "today" ? todayRecords : allRecords;
     const familiarityCounts: Record<CollectionKey, number> = { familiar: 0, vague: 0, unfamiliar: 0 };
-    const categoryCounts: Record<ProgressCategory, number> = { reading: 0, listening: 0, speaking: 0, writing: 0 };
     for (const entry of source) {
       const familiarity = familiarityForProgress(entry);
       const category = entry.lastCategory ?? "reading";
       if (familiarity && (settingsDraft.reviewView === null || settingsDraft.modes.includes(category))) {
         familiarityCounts[familiarity] += 1;
-      }
-      if (settingsDraft.reviewView === null || settingsDraft.reviewFamiliarities.includes(familiarity as CollectionKey)) {
-        categoryCounts[entry.lastCategory ?? "reading"] += 1;
       }
     }
     return {
@@ -2107,9 +2085,8 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
       overall: allRecords.length,
       total: scopedWords.length,
       familiarity: familiarityCounts,
-      categories: categoryCounts,
     };
-  }, [progress, settingsDraft.modes, settingsDraft.reviewFamiliarities, settingsDraft.reviewView, settingsDraft.scope, settingsOpenFor, words]);
+  }, [progress, settingsDraft.modes, settingsDraft.reviewView, settingsDraft.scope, settingsOpenFor, words]);
 
   const toggleStudyMode = (category: ProgressCategory) => {
     setSettingsDraft((current) => ({
@@ -2216,9 +2193,6 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
         next.spellingHadError = previous.spellingHadError || wrong;
         next.spellingErrorCount = previous.spellingErrorCount + (wrong ? 1 : 0);
         next.spellingUnansweredCount = previous.spellingUnansweredCount + (spellingDetails.unanswered ? 1 : 0);
-        next.spellingCorrectStreak = spellingDetails.correct && !spellingDetails.hadError
-          ? previous.spellingCorrectStreak + 1
-          : 0;
       }
 
       setOralScoreFeedback(typeof oralScore === "number" ? oralScore : null);
@@ -2674,7 +2648,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
           {!loading && !loadError && entryGate === "active" && visibleWords.length > 0 && !currentWord && studyReady && sessionDepleted ? (
             <div className="vocabulary-learning-empty vocabulary-learning-plan-empty">
               <strong>当前没有可学习的词汇</strong>
-              <p>{currentSettings.reviewView !== null || currentSettings.reviewFamiliarities.length > 0
+              <p>{currentSettings.method === "browse" && (currentSettings.reviewView !== null || currentSettings.reviewFamiliarities.length > 0)
                 ? "当前复习范围没有符合条件的词汇，可调整筛选条件。"
                 : "今日数量已达上限，或下一轮复习尚未到时间；到期后会自动出现。"}</p>
               <button className="button" onClick={openStudySettings} type="button">调整设置</button>
@@ -2714,7 +2688,6 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
                   {currentRoundRevealed ? (
                     <LearningVocabularyDetails
                       detailPayload={detailPayload}
-                      exampleTranslations={currentWord.englishExampleTranslations}
                       entry={detailEntry ?? toLookupEntry(currentWord)}
                     />
                   ) : null}
@@ -2781,7 +2754,6 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
                     {currentRoundRevealed ? (
                       <LearningVocabularyDetails
                         detailPayload={detailPayload}
-                        exampleTranslations={currentWord.englishExampleTranslations}
                         entry={detailEntry ?? toLookupEntry(currentWord)}
                       />
                     ) : (
@@ -2814,7 +2786,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
                       disabled={phase === "recording" || currentRoundRevealed || spellingAnswerShown || advancePending}
                       feedbackVisible={spellingAnswerShown}
                       focusOnReady={studyReady && pageVisible && (browseMode || modeIndex === 3)}
-                      history={browseMode ? "" : `曾经错过 ${currentProgress.spellingErrorCount} 次 · 连续正确 ${currentProgress.spellingCorrectStreak}/3`}
+                      history={browseMode ? "" : `曾经错过 ${currentProgress.spellingErrorCount} 次`}
                       key={`${currentWord.id}:${roundNonce}`}
                       onChange={updateSpelling}
                       onEnter={browseMode ? () => revealBrowseSpelling() : revealSpellingAnswer}
@@ -2833,7 +2805,6 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
                     {(browseMode ? currentRoundRevealed : spellingAnswerShown) ? (
                       <LearningVocabularyDetails
                         detailPayload={detailPayload}
-                        exampleTranslations={currentWord.englishExampleTranslations}
                         entry={detailEntry ?? toLookupEntry(currentWord)}
                       />
                     ) : null}
@@ -2981,7 +2952,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
             </div>
             <fieldset className="vocabulary-learning-settings-options vocabulary-learning-settings-method">
               <legend>记忆方式</legend>
-              <label><input checked={settingsDraft.method === "classified"} name="learning-method" onChange={() => setSettingsDraft((current) => ({ ...current, method: "classified" }))} type="radio" />分类记忆</label>
+              <label><input checked={settingsDraft.method === "classified"} name="learning-method" onChange={() => setSettingsDraft((current) => ({ ...current, method: "classified", reviewView: null, reviewFamiliarities: [] }))} type="radio" />分类记忆</label>
               <label><input checked={settingsDraft.method === "browse"} name="learning-method" onChange={() => setSettingsDraft((current) => ({ ...current, method: "browse" }))} type="radio" />浏览模式</label>
             </fieldset>
             <fieldset className="vocabulary-learning-settings-options vocabulary-learning-settings-scope">
@@ -3002,6 +2973,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
                   <button
                     aria-pressed={settingsDraft.reviewView === tab.key}
                     className={settingsDraft.reviewView === tab.key ? "active" : ""}
+                    disabled={settingsDraft.method === "classified"}
                     key={tab.key}
                     onClick={() => setSettingsDraft((current) => ({
                       ...current,
@@ -3024,6 +2996,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
                   <button
                     aria-pressed={settingsDraft.reviewFamiliarities.includes(collection.key)}
                     className={settingsDraft.reviewFamiliarities.includes(collection.key) ? "active" : ""}
+                    disabled={settingsDraft.method === "classified"}
                     key={collection.key}
                     onClick={() => setSettingsDraft((current) => ({
                       ...current,
@@ -3050,7 +3023,6 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
                   >
                     <span aria-hidden="true" className="vocabulary-learning-settings-review-dot" />
                     <span>{tab.label}</span>
-                    <strong>{settingsReviewCounts?.categories[tab.key] ?? 0}</strong>
                   </button>
                 ))}
               </div>
