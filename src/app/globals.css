@@ -29484,7 +29484,7 @@ body *:not(.bbc-vocabulary-highlight):not(.bbc-active-word) {
 
 /* Restore the site's green-and-gold footer, with gradients on both bands. */
 .site-footer {
-  background: linear-gradient(120deg, var(--accent) 0%, var(--gold) 100%) !important;
+  background: transparent !important;
   border-radius: 0;
   overflow: visible;
 }

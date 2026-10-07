@@ -1018,9 +1018,7 @@ function LearningVocabularyDetails({
         englishExampleTranslations={exampleTranslations}
         formationParts={detailPayload?.formationParts ?? []}
         inlineVideo={!isSupplementalBook && showVideo ? (
-          <VocabularyLookupDisplaySection controlsEnabled id="video" title="视频">
-            <VocabularyLearningVideoSection word={detailedEntry.normalizedWord} />
-          </VocabularyLookupDisplaySection>
+          <VocabularyLearningVideoSection word={detailedEntry.normalizedWord} />
         ) : null}
         phrases={detailPayload?.phrases ?? []}
         synonymDistinctions={detailPayload?.synonymDistinctions ?? []}
@@ -1055,12 +1053,14 @@ function VocabularyLearningVideoSection({ word }: { word: string }) {
   if (!payload?.videos.length) return null;
 
   return (
-    <VocabularyVideoPlayer
-      entryWord={word}
-      totalVideos={payload.totalVideos}
-      videos={payload.videos}
-      votesEnabled={payload.votesEnabled}
-    />
+    <VocabularyLookupDisplaySection controlsEnabled id="video" title="视频">
+      <VocabularyVideoPlayer
+        entryWord={word}
+        totalVideos={payload.totalVideos}
+        videos={payload.videos}
+        votesEnabled={payload.votesEnabled}
+      />
+    </VocabularyLookupDisplaySection>
   );
 }
 
@@ -2255,16 +2255,17 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
 
   const revealSpellingAnswer = useCallback(() => {
     if (!currentWord || modeIndex !== 3 || phase === "recording" || spellingAnswerShown) return;
-    const correct = currentWord.word.trim().toLowerCase() === answer.trim().toLowerCase();
+    const correct = currentWord.word.trim().toLowerCase() === answerRef.current.trim().toLowerCase();
     setSpellingAnswerShown(true);
     if (!correct) setRoundHadSpellingError(true);
     void playSpellingFeedbackThenWord(currentWord, correct, roundTokenRef.current);
-  }, [answer, currentWord, modeIndex, phase, playSpellingFeedbackThenWord, spellingAnswerShown]);
+  }, [currentWord, modeIndex, phase, playSpellingFeedbackThenWord, spellingAnswerShown]);
 
   const submitSpelling = useCallback(
     async (requestedOutcome: Familiarity) => {
       if (!currentWord || modeIndex !== 3 || phase === "recording") return;
-      const correct = answer.trim().toLowerCase() === currentWord.word.trim().toLowerCase();
+      const currentAnswer = answerRef.current.trim();
+      const correct = currentAnswer.toLowerCase() === currentWord.word.trim().toLowerCase();
       if (!correct && requestedOutcome === "familiar") return;
       if (spellingClassificationPendingRef.current) return;
       spellingClassificationPendingRef.current = true;
@@ -2292,10 +2293,10 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
       commitOutcome(requestedOutcome, {
         correct,
         hadError: roundHadSpellingError,
-        unanswered: answer.trim().length === 0,
+        unanswered: currentAnswer.length === 0,
       }, undefined, 2000);
     },
-    [answer, commitOutcome, currentWord, modeIndex, phase, revealCurrentRound, revealSpellingAnswer, roundHadSpellingError, spellingAnswerShown],
+    [commitOutcome, currentWord, modeIndex, phase, revealCurrentRound, revealSpellingAnswer, roundHadSpellingError, spellingAnswerShown],
   );
 
   useEffect(() => {
@@ -2324,7 +2325,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
         return;
       }
 
-      if (event.key !== "Enter" || modeIndex !== 3) return;
+      if (event.key !== "Enter" || modeIndex !== 3 || editable) return;
       event.preventDefault();
       revealSpellingAnswer();
     };

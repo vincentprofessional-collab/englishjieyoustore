@@ -44,12 +44,26 @@ function DefinitionRows({ entry }: { entry: LocalVocabularyEntry }) {
 }
 
 function WordInflectionSection({ entry }: { entry: LocalVocabularyEntry }) {
-  if (entry.inflections.length === 0) return null;
+  const partsOfSpeech = [...entry.definitionGroups.map((group) => group.partOfSpeech), entry.partOfSpeech].join(" ");
+  const hasVerb = /(?:^|[^a-z])(?:v(?:t|i)?|aux)\./i.test(partsOfSpeech);
+  const hasNoun = /(?:^|[^a-z])n\./i.test(partsOfSpeech);
+  const hasAdjectiveOrAdverb = /(?:^|[^a-z])(?:adj|adv)\./i.test(partsOfSpeech);
+  const hasRecognizedPartOfSpeech = hasVerb || hasNoun || hasAdjectiveOrAdverb;
+  const verbForms = new Set(["三单", "过去式", "过去分词", "现在分词", "动名词"]);
+  const degreeForms = new Set(["比较级", "最高级"]);
+  const inflections = entry.inflections.filter((item) => {
+    if (!hasRecognizedPartOfSpeech) return true;
+    if (verbForms.has(item.label)) return hasVerb;
+    if (item.label === "复数") return hasNoun;
+    if (degreeForms.has(item.label)) return hasAdjectiveOrAdverb;
+    return true;
+  });
+  if (inflections.length === 0) return null;
 
   return (
     <VocabularyLookupDisplaySection controlsEnabled id="inflections" title="词性变化">
       <div className="word-inflection-grid">
-        {entry.inflections.map((item) => (
+        {inflections.map((item) => (
           <span key={`${item.label}-${item.value}`}>
             <b>{item.label}</b>
             <strong>{item.value}</strong>

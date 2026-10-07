@@ -370,7 +370,8 @@ export default async function VocabularyWordPage({
   const videoCandidates = isPhoneRequest ? [] : getVocabularyVideoCandidates(entry);
   const shouldLoadVideos = videoVisible && !isPhoneRequest;
   const videoData = shouldLoadVideos ? await getVocabularyVideos(entry) : null;
-  const videoSection = videoCandidates.length > 0 ? (
+  const hasVideoForVisibleSection = videoCandidates.length > 0 && (!shouldLoadVideos || Boolean(videoData?.videos.length));
+  const videoSection = hasVideoForVisibleSection ? (
     <VocabularyLookupDisplaySection controlsEnabled id="video" initialVisible={videoVisible} title="视频">
       {videoData?.videos.length ? (
         <VocabularyVideoPlayer

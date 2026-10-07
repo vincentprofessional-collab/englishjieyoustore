@@ -33,14 +33,12 @@ export function VocabularyFormationPart({ href, label, unlocked }: VocabularyFor
       {isPaywallOpen ? (
         <div className="vocabulary-paywall-overlay" onClick={() => setIsPaywallOpen(false)} role="presentation">
           <div
-            aria-labelledby="vocabulary-paywall-title"
+            aria-label="词根词缀提示"
             aria-modal="true"
             className="vocabulary-paywall-dialog"
             onClick={(event) => event.stopPropagation()}
             role="dialog"
           >
-            <span className="vocabulary-paywall-kicker">词根词缀进阶内容</span>
-            <h2 id="vocabulary-paywall-title">解锁词根词缀详情</h2>
             <p>暂未达到可公开学习的质量标准</p>
             <button className="button primary" onClick={() => setIsPaywallOpen(false)} type="button">
               知道了
