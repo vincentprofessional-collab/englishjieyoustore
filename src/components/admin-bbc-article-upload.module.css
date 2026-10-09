@@ -72,31 +72,6 @@
   grid-column: 1 / -1;
 }
 
-.file {
-  background: rgba(188, 224, 241, 0.18);
-  border: 1px dashed #a7d6eb;
-  border-radius: 14px;
-  padding: 16px;
-}
-
-.file input {
-  font: inherit;
-  max-width: 100%;
-}
-
-.progress {
-  align-items: center;
-  display: grid;
-  gap: 8px 16px;
-  grid-template-columns: 1fr auto;
-}
-
-.progress progress {
-  grid-column: 1 / -1;
-  height: 12px;
-  width: 100%;
-}
-
 .message {
   background: rgba(126, 184, 137, 0.14);
   border-radius: 12px;

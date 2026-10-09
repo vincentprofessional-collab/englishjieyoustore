@@ -27674,6 +27674,36 @@ audio.guide-editor-asset-preview {
   width: 100%;
 }
 
+.vocabulary-quality-notice-dialog {
+  display: grid;
+  gap: 20px;
+  max-width: 460px;
+  text-align: center;
+}
+
+.vocabulary-quality-notice-dialog h2 {
+  color: #171717;
+  font-size: 24px;
+  line-height: 1.5;
+  margin: 4px 0;
+}
+
+.vocabulary-quality-notice-dialog button {
+  background: #b8e0f4;
+  border: 1px solid #a9d4ea;
+  border-radius: 999px;
+  color: #17384b;
+  cursor: pointer;
+  font: inherit;
+  justify-self: center;
+  padding: 10px 28px;
+}
+
+.vocabulary-quality-notice-dialog button:focus-visible {
+  outline: 3px solid #367aa0;
+  outline-offset: 3px;
+}
+
 .vocabulary-learning-settings-head {
   align-items: flex-start;
   display: flex;

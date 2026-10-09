@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { splitArticleSentences } from "@/lib/article-inline-annotations";
 import { getBbcArticleById } from "@/lib/articles/bbc";
-import { parseBbcArticleDateFromTitle, splitBbcArticleParagraphs } from "@/lib/articles/bbc-article-upload";
+import { parseBbcArticleDateFromTitle, parseBbcArticlePaste, splitBbcArticleParagraphs } from "@/lib/articles/bbc-article-upload";
 import type { BbcArticle, BbcVocabularyItem } from "@/lib/articles/bbc";
 
 export const runtime = "nodejs";
@@ -91,6 +91,41 @@ function getPresignedPutUrl(objectPath: string) {
   return `https://${host}${uri}?${canonicalQuery}&X-Amz-Signature=${signature}`;
 }
 
+async function hasR2Object(objectPath: string) {
+  const accountId = process.env.R2_ACCOUNT_ID;
+  const accessKeyId = process.env.R2_BBC_AUDIO_ACCESS_KEY_ID;
+  const secretAccessKey = process.env.R2_BBC_AUDIO_SECRET_ACCESS_KEY;
+  if (!accountId || !accessKeyId || !secretAccessKey) return false;
+
+  const host = `${accountId}.r2.cloudflarestorage.com`;
+  const uri = `/${bucket}/${objectPath.split("/").map(encode).join("/")}`;
+  const amzDate = new Date().toISOString().replace(/[:-]|\.\d{3}/g, "");
+  const dateStamp = amzDate.slice(0, 8);
+  const scope = `${dateStamp}/auto/s3/aws4_request`;
+  const payloadHash = hash("");
+  const canonicalHeaders = `host:${host}\nx-amz-content-sha256:${payloadHash}\nx-amz-date:${amzDate}\n`;
+  const signedHeaders = "host;x-amz-content-sha256;x-amz-date";
+  const canonicalRequest = ["HEAD", uri, "", canonicalHeaders, signedHeaders, payloadHash].join("\n");
+  const stringToSign = ["AWS4-HMAC-SHA256", amzDate, scope, hash(canonicalRequest)].join("\n");
+  const signingKey = hmac(hmac(hmac(hmac(`AWS4${secretAccessKey}`, dateStamp), "auto"), "s3"), "aws4_request");
+  const signature = createHmac("sha256", signingKey).update(stringToSign).digest("hex");
+
+  try {
+    const response = await fetch(`https://${host}${uri}`, {
+      method: "HEAD",
+      headers: {
+        "x-amz-content-sha256": payloadHash,
+        "x-amz-date": amzDate,
+        Authorization: `AWS4-HMAC-SHA256 Credential=${accessKeyId}/${scope}, SignedHeaders=${signedHeaders}, Signature=${signature}`,
+      },
+      cache: "no-store",
+    });
+    return response.ok;
+  } catch {
+    return false;
+  }
+}
+
 function readText(value: unknown, field: string, maxLength: number) {
   if (typeof value !== "string" || !value.trim()) return { error: `${field}不能为空。` };
   if (value.length > maxLength) return { error: `${field}超出长度限制。` };
@@ -154,7 +189,8 @@ function buildArticle(payload: Record<string, unknown>, objectPath: string): Bbc
   const titleResult = readText(payload.title, "英文标题", 180);
   if (titleResult.error) return titleResult.error;
   const title = titleResult.value!;
-  const parsedDate = parseBbcArticleDateFromTitle(title);
+  const dateTitle = typeof payload.dateTitle === "string" ? payload.dateTitle : title;
+  const parsedDate = parseBbcArticleDateFromTitle(dateTitle);
   if (!parsedDate) return "标题中需要包含有效日期数字，例如 260727 或 20260727。";
 
   const titleChinese = typeof payload.titleChinese === "string" ? payload.titleChinese.trim().slice(0, 180) : "";
@@ -170,17 +206,22 @@ function buildArticle(payload: Record<string, unknown>, objectPath: string): Bbc
     return `英文原文有 ${body.length} 段，中文翻译有 ${chineseParagraphs.length} 段。请按段落一一对应，并用空行分隔段落。`;
   }
 
-  const vocabulary = parseVocabulary(payload.vocabulary);
+  const vocabulary = Array.isArray(payload.vocabulary)
+    ? payload.vocabulary as BbcVocabularyItem[]
+    : parseVocabulary(payload.vocabulary);
   if (typeof vocabulary === "string") return vocabulary;
-  if (objectPath !== `bbc/${parsedDate.year}/${parsedDate.id}/full.mp3`) return "音频存储路径与文章日期不匹配。";
+  if (vocabulary.length > 300 || vocabulary.some((item) => !item.term?.trim() || !item.entry?.trim())) {
+    return "词汇与短语内容格式无效或超过 300 条。";
+  }
+  const expectedObjectPath = `bbc/${parsedDate.year}/${parsedDate.id}/full.mp3`;
+  if (objectPath && objectPath !== expectedObjectPath) return "音频存储路径与文章日期不匹配。";
 
-  const fullAudioUrl = `/api/bbc-audio/${parsedDate.year}/${parsedDate.id}/full.mp3`;
+  const fullAudioUrl = objectPath ? `/api/bbc-audio/${parsedDate.year}/${parsedDate.id}/full.mp3` : undefined;
   return {
-    audioUrl: fullAudioUrl,
+    ...(fullAudioUrl ? { audioUrl: fullAudioUrl, fullAudioUrl } : {}),
     body,
     chineseParagraphs,
     date: parsedDate.date,
-    fullAudioUrl,
     id: parsedDate.id,
     lead: titleChinese,
     sentences: buildPracticeSentences(body, chineseParagraphs),
@@ -249,15 +290,25 @@ export async function PUT(request: NextRequest) {
 
   const payload = await request.json().catch(() => null) as Record<string, unknown> | null;
   if (!payload) return NextResponse.json({ error: "文章内容格式无效。" }, { status: 400 });
-  const title = typeof payload.title === "string" ? payload.title : "";
-  const articleDate = parseBbcArticleDateFromTitle(title);
+  if (typeof payload.text === "string" && payload.text.length > 700_000) {
+    return NextResponse.json({ error: "粘贴内容不能超过 700 KB。" }, { status: 413 });
+  }
+  const parsedPaste = typeof payload.text === "string" ? parseBbcArticlePaste(payload.text) : null;
+  if (typeof parsedPaste === "string") return NextResponse.json({ error: parsedPaste }, { status: 400 });
+  const articlePayload = parsedPaste ? { ...parsedPaste } : payload;
+  const title = typeof articlePayload.title === "string" ? articlePayload.title : "";
+  const dateTitle = typeof articlePayload.dateTitle === "string" ? articlePayload.dateTitle : title;
+  const articleDate = parseBbcArticleDateFromTitle(dateTitle);
   if (!articleDate) return NextResponse.json({ error: "标题中需要包含有效日期数字，例如 260727 或 20260727。" }, { status: 400 });
   if (getBbcArticleById(articleDate.id)) {
     return NextResponse.json({ error: `BBC 文章 ${articleDate.id} 已存在于内置文章库，不能从此处覆盖。` }, { status: 409 });
   }
 
-  const objectPath = typeof payload.objectPath === "string" ? payload.objectPath : "";
-  const article = buildArticle(payload, objectPath);
+  const expectedAudioPath = `bbc/${articleDate.year}/${articleDate.id}/full.mp3`;
+  const objectPath = typeof payload.objectPath === "string"
+    ? payload.objectPath
+    : parsedPaste && await hasR2Object(expectedAudioPath) ? expectedAudioPath : "";
+  const article = buildArticle(articlePayload, objectPath);
   if (typeof article === "string") return NextResponse.json({ error: article }, { status: 400 });
 
   const { error } = await supabase.from("bbc_uploaded_articles").upsert({
@@ -279,5 +330,14 @@ export async function PUT(request: NextRequest) {
 
   revalidatePath("/articles");
   revalidatePath(`/articles/${article.id}`);
-  return NextResponse.json({ articleId: article.id, href: `/articles/${article.id}`, ok: true });
+  return NextResponse.json({
+    articleId: article.id,
+    audioIncluded: Boolean(article.fullAudioUrl),
+    href: `/articles/${article.id}`,
+    month: articleDate.month,
+    ok: true,
+    paragraphCount: article.body.length,
+    vocabularyCount: article.vocabulary?.length ?? 0,
+    year: article.year,
+  });
 }

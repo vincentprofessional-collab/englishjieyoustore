@@ -158,6 +158,7 @@ const DAILY_ACTIVITY_STORAGE_KEY = "ielts-vocabulary-daily-activity-v1";
 const LEGACY_PENDING_DAILY_SUMMARY_KEY = "ielts-vocabulary-pending-daily-summary-v1";
 const DAILY_SUMMARY_SHOWN_KEY = "ielts-vocabulary-daily-summary-shown-v1";
 const DAILY_ENCOURAGEMENTS = ["又是元气满满的一天", "不积跬步，无以至千里", "今天的坚持，会成为明天的底气", "每记住一个词，世界就多开一扇窗"];
+const QUALITY_NOTICE_BOOKS = ["地道表达", "俚语俗语"] as const;
 const STUDY_MODE_OPTIONS: Array<{ category: ProgressCategory; index: number; label: string }> = [
   { category: "reading", index: 1, label: "阅读词汇" },
   { category: "listening", index: 0, label: "听力词汇" },
@@ -196,6 +197,10 @@ const COLLECTIONS: Array<{ key: CollectionKey; label: string }> = [
 ];
 const ORAL_FAMILIAR_SCORE = 80;
 const ORAL_VAGUE_SCORE = 50;
+
+function isQualityNoticeBook(book: string): boolean {
+  return QUALITY_NOTICE_BOOKS.some((item) => item === book);
+}
 
 async function createDailySummaryImage(summary: ReturnType<typeof summarizeDailyStudy>, message: string) {
   const canvas = document.createElement("canvas");
@@ -1302,7 +1307,11 @@ function chooseNextWord(
 
 export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount }: VocabularyLearningProps) {
   const [selectedBook, setSelectedBook] = useState<BookSelectionKey>(initialBook);
-  useEffect(() => setSelectedBook(initialBook), [initialBook]);
+  const [qualityNoticeOpen, setQualityNoticeOpen] = useState(() => isQualityNoticeBook(initialBook));
+  useEffect(() => {
+    setSelectedBook(initialBook);
+    setQualityNoticeOpen(isQualityNoticeBook(initialBook));
+  }, [initialBook]);
   const [entryGate, setEntryGate] = useState<"loading" | "select-book" | "continue" | "settings" | "active">("loading");
   const [settingsByBook, setSettingsByBook] = useState<Partial<Record<BookSelectionKey, StudySettings>>>({});
   const [settingsHydrated, setSettingsHydrated] = useState(false);
@@ -1963,6 +1972,11 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
 
   const selectWord = useCallback((nextSelection: BookSelectionKey) => {
     if (advancePending) return;
+    if (isQualityNoticeBook(nextSelection)) {
+      setSettingsOpenFor(null);
+      setQualityNoticeOpen(true);
+      return;
+    }
     roundTokenRef.current += 1;
     stopLearningAudio();
     forceNextSpellingWordRef.current = false;
@@ -2822,6 +2836,14 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
           </div>
         </main>
       </div>
+      {qualityNoticeOpen ? (
+        <div className="vocabulary-learning-settings-backdrop">
+          <section aria-labelledby="vocabulary-quality-notice-title" aria-modal="true" className="vocabulary-learning-settings-dialog vocabulary-quality-notice-dialog" role="dialog">
+            <h2 id="vocabulary-quality-notice-title">暂未达到可公开学习的质量标准</h2>
+            <button onClick={() => window.location.replace("/vocabulary/books")} type="button">确定</button>
+          </section>
+        </div>
+      ) : null}
       {dailySummaryOpen ? (
         <div className="vocabulary-daily-summary-backdrop">
           <section aria-labelledby="vocabulary-daily-summary-title" aria-modal="true" className="vocabulary-daily-summary-dialog" role="dialog">

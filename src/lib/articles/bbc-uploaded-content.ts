@@ -29,7 +29,7 @@ function normalizeRecord(value: unknown, createdAt: unknown): UploadedBbcArticle
     !Array.isArray(article.chineseParagraphs) ||
     !Array.isArray(article.sentences) ||
     !Array.isArray(article.vocabulary) ||
-    typeof article.fullAudioUrl !== "string"
+    (article.fullAudioUrl !== undefined && typeof article.fullAudioUrl !== "string")
   ) {
     return null;
   }
