@@ -19,6 +19,7 @@ type VocabularyDetailContentProps = {
   formationUnlocked?: boolean;
   formationParts: VocabularyFormationPart[];
   inlineVideo?: ReactNode;
+  showExamples?: boolean;
   phrases: VocabularyPhraseMatch[];
   synonymDistinctions?: VocabularySynonymDistinction[];
   usageScenario?: { context: string; translation: string; example: string } | null;
@@ -303,6 +304,7 @@ export function VocabularyDetailContent({
   formationParts,
   formationUnlocked = false,
   inlineVideo,
+  showExamples = true,
   phrases,
   synonymDistinctions = [],
   usageScenario,
@@ -317,12 +319,12 @@ export function VocabularyDetailContent({
       <>
         <VocabularyLookupDisplaySection controlsEnabled id="chineseDefinition" title="中文释义"><DefinitionRows entry={entry} /></VocabularyLookupDisplaySection>
         <EnglishDefinitionSection entry={entry} />
-        <UsageExamplesSection examples={usageExamples} />
+        {showExamples ? <UsageExamplesSection examples={usageExamples} /> : null}
         <SynonymDistinctionSection groups={synonymDistinctions} />
         {entry.etymologyStory ? <EtymologySection chinese="" english="" story={entry.etymologyStory} /> : null}
         {caution ? <WordDetailListSection items={[caution]} title="注意事项" /> : null}
         {entry.extension ? <WordDetailListSection items={[entry.extension]} title="延伸扩展" /> : null}
-        {scenario ? <SupplementalUsageScenario {...scenario} /> : null}
+        {scenario && showExamples ? <SupplementalUsageScenario {...scenario} /> : null}
       </>
     );
   }
@@ -339,7 +341,7 @@ export function VocabularyDetailContent({
       <VocabularyLookupDisplaySection controlsEnabled id="chineseDefinition" title="中文释义"><DefinitionRows entry={entry} /></VocabularyLookupDisplaySection>
       <EnglishDefinitionSection entry={entry} />
       <WordInflectionSection entry={entry} />
-      <UsageExamplesSection examples={usageExamples} />
+      {showExamples ? <UsageExamplesSection examples={usageExamples} /> : null}
       <SynonymDistinctionSection groups={synonymDistinctions} />
       {wordTreeAndEtymology}
       {inlineVideo}
