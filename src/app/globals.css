@@ -27939,6 +27939,35 @@ audio.guide-editor-asset-preview {
   opacity: .55;
 }
 
+.vocabulary-learning-book-heading-actions {
+  align-items: center;
+  display: flex;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+.vocabulary-learning-definition-note {
+  font-size: 12px;
+  line-height: 1.6;
+  margin: 8px 0 0;
+}
+
+@media (max-width: 820px) {
+  .vocabulary-learning-page .mobile-learning-header {
+    grid-template-columns: auto auto 1fr;
+    gap: 8px;
+  }
+
+  .mobile-learning-header button.vocabulary-learning-mobile-import {
+    border-radius: 999px;
+    font-size: 11px;
+    height: 34px;
+    padding: 0 8px;
+    white-space: nowrap;
+    width: auto;
+  }
+}
+
 .vocabulary-learning-settings-backdrop {
   align-items: center;
   background: rgba(207, 231, 245, .48);

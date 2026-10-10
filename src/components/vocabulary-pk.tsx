@@ -13,6 +13,8 @@ type PkState = {
   questionNo: number;
   totalQuestions: number;
   remainingMs: number;
+  startsInMs: number;
+  nextUpdateMs: number;
   question: { word: string; choices: string[]; correctIndex: number | null } | null;
   revealed: boolean;
   selectedIndex: number | null;
@@ -22,7 +24,7 @@ type PkState = {
 };
 
 type BoardRow = { rank: number; nickname: string; avatar: string | null; points: number; matches: number; wins: number; accuracy: number; tier?: string };
-type PlayerProfile = { loggedIn: boolean; nickname?: string; avatar?: string | null; points?: number; matches?: number; wins?: number; questions?: number; accuracy?: number; winRate?: number; name?: string };
+type PlayerProfile = { loggedIn: boolean; nickname?: string; avatar?: string | null; points?: number; matches?: number; wins?: number; questions?: number; accuracy?: number; winRate?: number; name?: string; highestName?: string };
 type Props = { initialBook: LearningBookKey; initialChallenge: string; initialMode: string; initialWordIds: string[] };
 
 async function authHeader() {
@@ -57,6 +59,8 @@ export function VocabularyPk({ initialBook, initialChallenge, initialMode, initi
   const [waitingSeconds, setWaitingSeconds] = useState(0);
   const [busy, setBusy] = useState(false);
   const [rankedConsent, setRankedConsent] = useState(false);
+  const [clockNow, setClockNow] = useState(0);
+  const answerDeadlineRef = useRef(0);
   const autoStarted = useRef(false);
   const title = `${initialBook}词汇 PK`;
 
@@ -139,9 +143,16 @@ export function VocabularyPk({ initialBook, initialChallenge, initialMode, initi
       });
     } else if (initialMode === "auto") {
       autoStarted.current = true;
-      void beginQueue();
+      void supabase.auth.getSession().then(({ data }) => {
+        if (data.session?.user) void beginQueue();
+        else void beginInvite();
+      });
     }
-  }, [beginQueue, initialChallenge, initialMode, joinChallenge]);
+  }, [beginInvite, beginQueue, initialChallenge, initialMode, joinChallenge]);
+
+  useEffect(() => {
+    if (stage === "queue" && queueToken && waitingSeconds >= 30 && !busy) void beginInvite();
+  }, [beginInvite, busy, queueToken, stage, waitingSeconds]);
 
   useEffect(() => {
     if (!queueToken || stage !== "queue") return;
@@ -175,18 +186,29 @@ export function VocabularyPk({ initialBook, initialChallenge, initialMode, initi
         const next = await pkPost<PkState>({ action: "state", playerToken });
         if (stopped) return;
         setGame(next);
+        answerDeadlineRef.current = performance.now() + next.remainingMs;
+        setClockNow(performance.now());
         if (next.status === "active") setStage("playing");
         else if (next.status === "completed") { setStage("result"); void loadBoard(); void loadProfile(); }
+        else if (next.status === "cancelled") { setPlayerToken(""); setStage("choose"); setError("挑战已结束，请重新开始。"); }
+        if (!stopped) timer = window.setTimeout(poll, Math.min(1500, Math.max(200, (next.nextUpdateMs ?? 1500) + 30)));
+        return;
       } catch (cause) {
         if (!stopped) setError(cause instanceof Error ? cause.message : "比赛状态读取失败。");
       }
-      if (!stopped) timer = window.setTimeout(poll, 850);
+      if (!stopped) timer = window.setTimeout(poll, 1500);
     };
     void poll();
     return () => { stopped = true; window.clearTimeout(timer); };
   }, [loadBoard, loadProfile, playerToken, stage]);
 
-  const remaining = Math.max(0, game?.remainingMs ?? 0);
+  useEffect(() => {
+    if (stage !== "playing") return;
+    const timer = window.setInterval(() => setClockNow(performance.now()), 100);
+    return () => window.clearInterval(timer);
+  }, [stage]);
+
+  const remaining = Math.max(0, answerDeadlineRef.current - clockNow);
   const timeLabel = (remaining / 1000).toFixed(1);
   const startAnswer = async (choiceIndex: number) => {
     if (!playerToken || !game || game.answered || game.revealed || busy || game.status !== "active") return;
@@ -209,7 +231,10 @@ export function VocabularyPk({ initialBook, initialChallenge, initialMode, initi
   };
 
   const leaveQueue = async () => {
-    if (queueToken) await pkPost({ action: "cancel-queue", queueToken }).catch(() => undefined);
+    if (queueToken) {
+      const result = await pkPost<{ status: string; playerToken?: string }>({ action: "cancel-queue", queueToken }).catch(() => null);
+      if (result?.status === "matched" && result.playerToken) { setQueueToken(""); setPlayerToken(result.playerToken); setStage("playing"); return; }
+    }
     setQueueToken(""); setStage("choose");
   };
 
@@ -291,10 +316,12 @@ export function VocabularyPk({ initialBook, initialChallenge, initialMode, initi
               <div className="vocabulary-pk-versus">
                 <div className="vocabulary-pk-player"><span className="vocabulary-pk-avatar">我</span><strong>我</strong><small>答对 {game.me.correct} 题</small></div>
                 <span className="vocabulary-pk-versus-mark">VS</span>
-                <div className="vocabulary-pk-player"><Avatar name={game.opponent?.name ?? "等待对手"} src={game.opponent?.avatar ?? null} /><strong>{game.opponent?.name ?? "等待对手"}</strong><small>{game.opponent ? `答题 ${game.opponent.count}/20 · 答对 ${game.opponent.correct}` : "等待对手进入"}</small><em>{game.opponent?.finished ? "已完成" : game.opponent?.answered ? `本题${game.opponent.currentCorrect ? "正确" : "错误"}` : "本题未答"}</em></div>
+                <div className="vocabulary-pk-player"><Avatar name={game.opponent?.name ?? "等待对手"} src={game.opponent?.avatar ?? null} /><strong>{game.opponent?.name ?? "等待对手"}</strong><small>{game.opponent ? `答题 ${game.opponent.count}/20 · 答对 ${game.opponent.correct}` : "等待对手进入"}</small><em>{game.opponent?.finished ? "已完成" : game.opponent?.answered ? game.revealed ? `本题${game.opponent.currentCorrect ? "正确" : "错误"}` : "本题已答" : "本题未答"}</em></div>
               </div>
               {game.status === "waiting" ? (
                 <div className="vocabulary-pk-wait-inline"><h2>挑战已创建，等待对手进入</h2>{inviteUrl ? <button className="primary" onClick={() => void copyInvite()} type="button">{copyLabel}</button> : null}</div>
+              ) : game.startsInMs > 0 ? (
+                <div className="vocabulary-pk-wait-inline"><h2>对手已就位，比赛即将开始</h2><p>每题 10 秒，两人同时作答。</p></div>
               ) : game.me.finished ? (
                 <div className="vocabulary-pk-wait-inline"><h2>你已完成 20 题</h2><p>答对 {game.me.correct} 题，正在等待对手完成。</p><p>答对 +20 分 · 超时不扣分</p></div>
               ) : (
@@ -322,7 +349,7 @@ export function VocabularyPk({ initialBook, initialChallenge, initialMode, initi
               <span className="vocabulary-pk-kicker">MATCH COMPLETE</span>
               <h2>{resultLine}</h2>
               <div className="vocabulary-pk-final-score"><div><span>我答对</span><strong>{game.me.correct}<small> / 20</small></strong></div><span>—</span><div><span>{game.opponent?.name ?? "对手"}答对</span><strong>{game.opponent?.correct ?? 0}<small> / 20</small></strong></div></div>
-              <p>{game.ranked ? `本场获得 ${game.me.points} 积分 · 已计入「${initialBook}」词汇书排名` : "访客友谊赛 · 本场只保留成绩统计，不累计积分和段位"}</p>
+              <p>{game.ranked ? `本场获得 ${game.me.points} 积分 · 已计入「${initialBook}」词汇书排名` : "友谊赛 · 本场只保留成绩统计，不累计积分和段位"}</p>
               <div className="vocabulary-pk-result-actions"><button className="primary" onClick={() => { setGame(null); setPlayerToken(""); setInviteUrl(""); setQueueToken(""); setStage("choose"); }} type="button">再来一场</button><Link href={`/vocabulary/books?level=${encodeURIComponent(initialBook)}`}>返回词汇书</Link></div>
             </div>
           ) : null}
@@ -332,7 +359,7 @@ export function VocabularyPk({ initialBook, initialChallenge, initialMode, initi
 
         <aside className="vocabulary-pk-board">
           <div className="vocabulary-pk-board-head"><div><span>本书荣誉榜</span><h2>{initialBook}积分榜</h2></div><span>TOP 100</span></div>
-          <div className="vocabulary-pk-my-rank">{profile?.loggedIn ? <><span>我的段位</span><strong>{profile.name ?? "青铜"}</strong><small>{Number(profile.points ?? 0).toLocaleString()} 积分 · 答题 {profile.questions ?? 0} 题</small><small>胜率 {profile.winRate ?? 0}% · 正确率 {profile.accuracy ?? 0}%</small></> : <><strong>登录后开启积分排位</strong><small>访客可参加挑战赛并查看本场成绩</small></>}</div>
+          <div className="vocabulary-pk-my-rank">{profile?.loggedIn ? <><span>我的段位</span><strong>{profile.name ?? "青铜"}</strong><small>{Number(profile.points ?? 0).toLocaleString()} 积分 · 答题 {profile.questions ?? 0} 题</small><small>胜率 {profile.winRate ?? 0}% · 正确率 {profile.accuracy ?? 0}%</small><small>历史最高：{profile.highestName ?? "青铜"}</small></> : <><strong>登录后开启积分排位</strong><small>访客可参加挑战赛并查看本场成绩</small></>}</div>
           <div aria-label="积分榜周期" className="vocabulary-pk-periods" role="tablist">
             {[['month', '月榜'], ['quarter', '季榜'], ['year', '年榜']].map(([key, label]) => <button aria-selected={period === key} className={period === key ? "active" : ""} key={key} onClick={() => setPeriod(key)} role="tab" type="button">{label}</button>)}
           </div>
@@ -341,14 +368,14 @@ export function VocabularyPk({ initialBook, initialChallenge, initialMode, initi
           </ol>
           <details className="vocabulary-pk-rank-rules">
             <summary>查看段位晋级条件</summary>
-            <p>积分、答题量、正确率、胜场和胜率需同时达标。</p>
+            <p>积分、答题量、正确率和胜率需同时达标；平局按半场胜利计算胜率。当前段位随累计成绩调整，并保留历史最高段位。</p>
             <ul>
-              <li><b>白银</b><span>200 题 · 2,500 分 · 正确率 55% · 40 胜 · 胜率 40%</span></li>
-              <li><b>黄金</b><span>400 题 · 6,500 分 · 正确率 60% · 45 胜 · 胜率 45%</span></li>
-              <li><b>铂金</b><span>800 题 · 13,000 分 · 正确率 65% · 50 胜 · 胜率 50%</span></li>
-              <li><b>钻石</b><span>1,200 题 · 24,000 分 · 正确率 70% · 55 胜 · 胜率 55%</span></li>
-              <li><b>至尊星耀</b><span>1,600 题 · 40,000 分 · 正确率 80% · 60 胜 · 胜率 60%</span></li>
-              <li><b>最强王者</b><span>2,000 题 · 60,000 分 · 正确率 95% · 70 胜 · 胜率 70%</span></li>
+              <li><b>白银</b><span>200 题 · 2,500 分 · 正确率 55% · 胜率 40%</span></li>
+              <li><b>黄金</b><span>400 题 · 6,500 分 · 正确率 60% · 胜率 45%</span></li>
+              <li><b>铂金</b><span>800 题 · 13,000 分 · 正确率 65% · 胜率 50%</span></li>
+              <li><b>钻石</b><span>1,200 题 · 24,000 分 · 正确率 70% · 胜率 55%</span></li>
+              <li><b>至尊星耀</b><span>1,600 题 · 40,000 分 · 正确率 80% · 胜率 60%</span></li>
+              <li><b>最强王者</b><span>2,000 题 · 60,000 分 · 正确率 95% · 胜率 70%</span></li>
             </ul>
           </details>
           <p className="vocabulary-pk-board-foot">只展示登录用户的排位赛成绩；月、季、年榜按本词汇书的比赛积分统计。</p>

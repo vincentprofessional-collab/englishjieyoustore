@@ -21,6 +21,7 @@ import { VocabularyFavoriteButton } from "@/components/vocabulary-favorite-butto
 import { VocabularyInlinePronunciation } from "@/components/vocabulary-pronunciation";
 import { VocabularyLookupDisplaySection } from "@/components/vocabulary-lookup-display-section";
 import { VocabularyShareButton } from "@/components/vocabulary-share-button";
+import { VocabularyExcelImport } from "@/components/vocabulary-excel-import";
 import { VocabularyVideoPlayer } from "@/components/vocabulary-video-player";
 import { drawBrowseMode, filterBrowseReviewWords, nextBrowseLoopId, scheduleBrowseReview } from "@/lib/vocabulary/browse-review";
 import { updateBrowseSpellingMistakes, type BrowseSpellingMistakeStore } from "@/lib/vocabulary/browse-spelling";
@@ -75,8 +76,8 @@ type StudySettingsDraft = Omit<StudySettings, "dailyNew" | "reactionSeconds" | "
   browseGroups: string;
   reactionSeconds: Record<ProgressCategory, string>;
 };
-type ClassificationGroupSession = { ids: string[]; index: number; startedAt: number; familiar: number; vague: number; unfamiliar: number; groupNo: number };
-type ClassificationGroupSummary = Omit<ClassificationGroupSession, "index"> & { endedAt: number; book: BookSelectionKey };
+type ClassificationGroupSession = { ids: string[]; remainingIds: string[]; firstOutcomes: Partial<Record<string, Familiarity>>; index: number; startedAt: number; familiar: number; vague: number; unfamiliar: number; groupNo: number };
+type ClassificationGroupSummary = Omit<ClassificationGroupSession, "index" | "remainingIds" | "firstOutcomes"> & { endedAt: number; book: BookSelectionKey };
 
 type SpeechRecognitionAlternativeLike = {
   transcript: string;
@@ -1340,6 +1341,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
   const [settingsDraft, setSettingsDraft] = useState<StudySettingsDraft>(() => toSettingsDraft(DEFAULT_STUDY_SETTINGS));
   const reactionOptionsRef = useRef<HTMLDivElement | null>(null);
   const [favoriteWords, setFavoriteWords] = useState<FavoriteLearningWord[]>([]);
+  const [customBookOpen, setCustomBookOpen] = useState(false);
   const [voice, setVoice] = useState<Voice>("us");
   const [order, setOrder] = useState<SortOrder>("sequential");
   const [progress, setProgress] = useState<ProgressStore>({});
@@ -1770,7 +1772,8 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
     setGroupBrowseIds(null);
     setGroupSummary(null);
     setSessionDepleted(false);
-    setGroupSession({ ids: orderedWords.map((word) => word.id), index: 0, startedAt: Date.now(), familiar: 0, vague: 0, unfamiliar: 0, groupNo });
+    const ids = orderedWords.map((word) => word.id);
+    setGroupSession({ ids, remainingIds: ids, firstOutcomes: {}, index: 0, startedAt: Date.now(), familiar: 0, vague: 0, unfamiliar: 0, groupNo });
     setCurrentWordId(orderedWords[0].id);
     setRoundNonce((value) => value + 1);
     return true;
@@ -2155,6 +2158,14 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
     }
   };
 
+  const openCustomBook = () => {
+    closeStudySettings();
+    setGroupSession(null);
+    setGroupSummary(null);
+    setGroupBrowseIds(null);
+    setCustomBookOpen(true);
+  };
+
   const validSettingsDraft = parseSettingsDraft(settingsDraft) !== null;
   const settingsFirstOpen = settingsOpenFor !== null && !settingsByBook[settingsOpenFor];
   const scopeBook = settingsOpenFor ?? selectedBook;
@@ -2201,14 +2212,16 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
     (updatedProgress: ProgressStore, outcome?: Outcome) => {
       if (!currentWord) return;
       if (groupSession && outcome && outcome !== "unscored") {
+        const firstClassification = !groupSession.firstOutcomes[currentWord.id];
         const counts = {
-          familiar: groupSession.familiar + (outcome === "familiar" ? 1 : 0),
-          vague: groupSession.vague + (outcome === "vague" ? 1 : 0),
-          unfamiliar: groupSession.unfamiliar + (outcome === "unfamiliar" ? 1 : 0),
+          familiar: groupSession.familiar + (firstClassification && outcome === "familiar" ? 1 : 0),
+          vague: groupSession.vague + (firstClassification && outcome === "vague" ? 1 : 0),
+          unfamiliar: groupSession.unfamiliar + (firstClassification && outcome === "unfamiliar" ? 1 : 0),
         };
-        const nextIndex = groupSession.index + 1;
+        const remainingIds = groupSession.remainingIds.filter((id) => id !== currentWord.id);
+        if (outcome !== "familiar") remainingIds.push(currentWord.id);
         setDefinitionChoice(null);
-        if (nextIndex >= groupSession.ids.length) {
+        if (remainingIds.length === 0) {
           const endedAt = Date.now();
           setGroupSession(null);
           setGroupSummary({ ids: groupSession.ids, startedAt: groupSession.startedAt, ...counts, groupNo: groupSession.groupNo, endedAt, book: selectedBook });
@@ -2218,8 +2231,8 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
           setSessionDepleted(true);
           return;
         }
-        setGroupSession({ ...groupSession, ...counts, index: nextIndex });
-        setCurrentWordId(groupSession.ids[nextIndex]);
+        setGroupSession({ ...groupSession, ...counts, remainingIds, firstOutcomes: { ...groupSession.firstOutcomes, [currentWord.id]: groupSession.firstOutcomes[currentWord.id] ?? outcome }, index: groupSession.ids.length - remainingIds.length });
+        setCurrentWordId(remainingIds[0]);
         setSessionDepleted(false);
         setRoundNonce((value) => value + 1);
         return;
@@ -2689,7 +2702,10 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
       <header className="mobile-learning-header">
         <Link href="/vocabulary">‹ 单词</Link>
         <h1>背单词</h1>
-        <button aria-label="背单词设置" disabled={!settingsHydrated || advancePending} onClick={openStudySettings} type="button">⚙</button>
+        <div className="vocabulary-learning-book-heading-actions">
+          <button className="vocabulary-learning-mobile-import" disabled={!settingsHydrated || advancePending} onClick={openCustomBook} type="button">自建生词本</button>
+          <button aria-label="背单词设置" disabled={!settingsHydrated || advancePending} onClick={openStudySettings} type="button">⚙</button>
+        </div>
       </header>
       <section aria-label="今日学习进度" className="mobile-learning-progress">
         <div><strong>今日学习</strong><span>已完成 {Math.min(reviewedTodayCount, dailyGoal)} / {dailyGoal}</span></div>
@@ -2701,7 +2717,10 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
             <div className="vocabulary-learning-book-heading-copy">
               <span>词汇</span>
             </div>
-            <button disabled={!settingsHydrated || advancePending || entryGate === "select-book"} onClick={openStudySettings} type="button">设置</button>
+            <div className="vocabulary-learning-book-heading-actions">
+              <button disabled={!settingsHydrated || advancePending} onClick={openCustomBook} type="button">自建生词本</button>
+              <button disabled={!settingsHydrated || advancePending || entryGate === "select-book"} onClick={openStudySettings} type="button">设置</button>
+            </div>
           </div>
           <div className="vocabulary-learning-book-list">
             <button
@@ -2786,7 +2805,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
                   <button disabled title="积分 PK 按共享词汇书分别排名；请从正式词汇书开始 PK。" type="button">收藏词汇无法计入书籍 PK 榜</button>
                 ) : (
                   <Link href={`/vocabulary/pk?book=${encodeURIComponent(selectedBook)}&mode=auto&wordIds=${encodeURIComponent(groupSummary.ids.join(","))}`}>
-                    PK 本组词汇{groupSummary.ids.length < GROUP_SIZE ? "（补足至20题）" : ""}
+                    PK 本组词汇{groupSummary.ids.length < GROUP_SIZE ? "（本组循环至20题）" : ""}
                   </Link>
                 )}
                 <button onClick={() => { setGroupSummary(null); setGroupSession(null); setGroupBrowseIds(null); setCurrentWordId(null); setStudyPaused(true); setEntryGate("continue"); }} type="button">结束任务</button>
@@ -3056,6 +3075,10 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
           </section>
         </div>
       ) : null}
+      {customBookOpen ? <VocabularyExcelImport
+        onClose={() => setCustomBookOpen(false)}
+        onStudy={() => { setCustomBookOpen(false); selectWord("生词本"); }}
+      /> : null}
       {settingsOpenFor ? (
         <div className="vocabulary-learning-settings-backdrop">
           <form
@@ -3221,8 +3244,9 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
                 </fieldset>
                 <fieldset className="vocabulary-learning-settings-options">
                   <legend>释义选择</legend>
-                  <label><input checked={settingsDraft.definitionLanguage === "zh"} name="study-definition-language" onChange={() => setSettingsDraft((current) => ({ ...current, definitionLanguage: "zh" }))} type="radio" />中文</label>
-                  <label><input checked={settingsDraft.definitionLanguage === "en"} name="study-definition-language" onChange={() => setSettingsDraft((current) => ({ ...current, definitionLanguage: "en" }))} type="radio" />英文</label>
+                  <label><input checked={settingsDraft.definitionLanguage === "zh"} name="study-definition-language" onChange={() => setSettingsDraft((current) => ({ ...current, definitionLanguage: "zh" }))} type="radio" />中英</label>
+                  <label><input checked={settingsDraft.definitionLanguage === "en"} name="study-definition-language" onChange={() => setSettingsDraft((current) => ({ ...current, definitionLanguage: "en" }))} type="radio" />英英</label>
+                  <p className="vocabulary-learning-definition-note">英英模式在口语和写作考察中使用英文释义提示。</p>
                 </fieldset>
               </div>
               <fieldset className="vocabulary-learning-settings-options">
