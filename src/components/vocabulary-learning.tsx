@@ -11,6 +11,7 @@ import {
   type CSSProperties,
   type FormEvent,
   type PointerEvent,
+  type ReactNode,
 } from "react";
 import Link from "next/link";
 
@@ -22,6 +23,7 @@ import { VocabularyInlinePronunciation } from "@/components/vocabulary-pronuncia
 import { VocabularyLookupDisplaySection } from "@/components/vocabulary-lookup-display-section";
 import { VocabularyShareButton } from "@/components/vocabulary-share-button";
 import { VocabularyExcelImport } from "@/components/vocabulary-excel-import";
+import { getConciseStudyDefinition, maskStudyExample } from "@/lib/vocabulary/study-definition";
 import { VocabularyVideoPlayer } from "@/components/vocabulary-video-player";
 import { drawBrowseMode, filterBrowseReviewWords, nextBrowseLoopId, scheduleBrowseReview } from "@/lib/vocabulary/browse-review";
 import { updateBrowseSpellingMistakes, type BrowseSpellingMistakeStore } from "@/lib/vocabulary/browse-spelling";
@@ -708,7 +710,7 @@ function DefinitionDisplay({
   // request is still loading. An empty English list therefore renders an
   // empty prompt for the moment instead of flashing the wrong language.
   const showEnglish = language === "en";
-  const lines = showEnglish ? englishLines : splitDefinitionLines(value);
+  const lines = showEnglish ? englishLines : splitDefinitionLines(getConciseStudyDefinition(value));
   const normalizedAnswer = (answer ?? "").trim().toLowerCase();
 
   return (
@@ -962,17 +964,37 @@ function SpellingTitleInput({
   );
 }
 
+function LearningRoundExamples({ word, examples, loading }: { word: LearningWord; examples: VocabularyUsageExample[]; loading: boolean }) {
+  const candidates = [
+    ...examples.map((example) => ({ english: example.englishText, chinese: example.chineseText })),
+    ...word.englishExamples.map((english, index) => ({ english, chinese: word.englishExampleTranslations?.[index] ?? "" })),
+  ];
+  const seen = new Set<string>();
+  const rows = candidates.map((example) => maskStudyExample(example.english, example.chinese, word.word, word.inflections.map((item) => item.value), word.definitionCn))
+    .filter((example) => {
+      if (!example.matched || seen.has(example.english)) return false;
+      seen.add(example.english); return true;
+    }).slice(0, 2);
+  return <section aria-label="语境例句" className="vocabulary-learning-round-examples">
+    <h3>语境例句</h3>
+    {rows.length ? rows.map((example) => <div key={example.english}><p lang="en">{example.english}</p><p lang="zh-CN">{example.chinese}</p></div>) : <p className="muted">{loading ? "正在加载语境例句……" : "暂无该词的双语例句。"}</p>}
+  </section>;
+}
+
 function LearningVocabularyDetails({
   detailPayload,
   entry,
   showExamples,
+  definitionPrefix,
 }: {
   detailPayload: VocabularyDetailPayload | null;
   entry: LocalVocabularyEntry;
   showExamples: boolean;
+  definitionPrefix?: ReactNode;
 }) {
   const isSupplementalBook = isSupplementalLearningBook(entry.level);
   const detailedEntry = !isSupplementalBook && detailPayload?.entry ? detailPayload.entry : entry;
+  const conciseEntry = { ...detailedEntry, definitionCn: getConciseStudyDefinition(detailedEntry.definitionCn), definitionGroups: detailedEntry.definitionGroups.map((group) => ({ ...group, definitions: group.definitions.slice(0, 2) })) };
   const [showVideo, setShowVideo] = useState(false);
   const scenarioKey = entry.word.trim().toLowerCase();
   const [loadedScenario, setLoadedScenario] = useState<{
@@ -1022,8 +1044,9 @@ function LearningVocabularyDetails({
           {detailedEntry.level ? <span className="vocabulary-learning-complete-detail-level">{detailedEntry.level}</span> : null}
         </div>
       </div>
+      {definitionPrefix}
       <VocabularyDetailContent
-        entry={detailedEntry}
+        entry={conciseEntry}
         etymologyChinese={detailPayload?.etymology?.chinese}
         etymologyEnglish={detailPayload?.etymology?.english}
         formationParts={detailPayload?.formationParts ?? []}
@@ -1357,6 +1380,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
   const [hydrated, setHydrated] = useState(false);
   const [words, setWords] = useState<LearningWord[]>([]);
   const [detailPayload, setDetailPayload] = useState<VocabularyDetailPayload | null>(null);
+  const [detailLoading, setDetailLoading] = useState(false);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState("");
   const [loadNonce, setLoadNonce] = useState(0);
@@ -1832,8 +1856,8 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
   );
   const definitionOptions = useMemo(() => {
     if (!currentWord?.definitionCn.trim()) return [];
-    const correct = currentWord.definitionCn.trim();
-    const distractors = [...new Set(visibleWords.map((word) => word.definitionCn.trim()).filter((definition) => definition && definition !== correct))];
+    const correct = getConciseStudyDefinition(currentWord.definitionCn);
+    const distractors = [...new Set(visibleWords.map((word) => getConciseStudyDefinition(word.definitionCn)).filter((definition) => definition && definition !== correct))];
     return shuffle([correct, ...shuffle(distractors).slice(0, 3)]);
   }, [currentWord?.id, currentWord?.definitionCn, visibleWords]);
   useEffect(() => setDefinitionChoice(null), [currentWordId]);
@@ -1859,6 +1883,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
 
   useEffect(() => {
     setDetailPayload(null);
+    setDetailLoading(Boolean(currentWord));
     if (!currentWord) return;
 
     const controller = new AbortController();
@@ -1874,7 +1899,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
       })
       .catch(() => {
         if (!controller.signal.aborted) setDetailPayload(null);
-      });
+      }).finally(() => { if (!controller.signal.aborted) setDetailLoading(false); });
 
     return () => controller.abort();
   }, [currentWord?.id]);
@@ -2699,6 +2724,21 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
   const detailPageStyle = assessmentStage && sidebarHeight !== null
     ? ({ "--vocabulary-learning-assessment-height": `${sidebarHeight}px` } as CSSProperties)
     : undefined;
+  const roundExamples = currentSettings.showExamples && currentWord ? <LearningRoundExamples
+    examples={detailPayload?.entry.word.trim().toLowerCase() === currentWord.word.trim().toLowerCase() ? detailPayload.usageExamples : []}
+    loading={detailLoading}
+    word={currentWord}
+  /> : null;
+  const definitionChoiceCards = currentSettings.showOptions && currentWord && modeIndex < 2 && definitionOptions.length >= 4 ? (
+    <div aria-label="释义选项" className="vocabulary-learning-definition-options" role="group">
+      <strong>{currentRoundRevealed ? "释义选项" : "选择这个词的中文释义"}</strong>
+      {definitionOptions.map((option, index) => {
+        const isCorrect = currentRoundRevealed && option === getConciseStudyDefinition(currentWord.definitionCn);
+        const isWrong = currentRoundRevealed && definitionChoice === index && !isCorrect;
+        return <button aria-pressed={definitionChoice === index} className={`${isCorrect ? "correct" : ""} ${isWrong ? "wrong" : ""}`} disabled={currentRoundRevealed} key={`${currentWord.id}-meaning-${index}`} onClick={() => { setDefinitionChoice(index); revealCurrentRound(); }} type="button"><span>{option}</span>{isCorrect ? <em>正确释义</em> : null}</button>;
+      })}
+    </div>
+  ) : null;
 
   return (
     <section className="stack vocabulary-learning-page">
@@ -2861,21 +2901,13 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
                       </div>
                     </div>
                   ) : null}
-                  {currentSettings.showOptions && modeIndex < 2 && definitionOptions.length >= 4 ? (
-                    <div aria-label="释义选项" className="vocabulary-learning-definition-options" role="group">
-                      <strong>选择这个词的中文释义</strong>
-                      {definitionOptions.map((option, index) => {
-                        const isCorrect = currentRoundRevealed && option === currentWord.definitionCn.trim();
-                        const isWrong = currentRoundRevealed && definitionChoice === index && !isCorrect;
-                        return <button className={`${isCorrect ? "correct" : ""} ${isWrong ? "wrong" : ""}`} disabled={currentRoundRevealed} key={`${currentWord.id}-meaning-${index}`} onClick={() => { setDefinitionChoice(index); revealCurrentRound(); }} type="button"><b>{String.fromCharCode(65 + index)}</b><span>{option}</span>{isCorrect ? <em>正确释义</em> : null}</button>;
-                      })}
-                    </div>
-                  ) : null}
+                  {!currentRoundRevealed ? <>{roundExamples}{definitionChoiceCards}</> : null}
                   {currentRoundRevealed ? (
                     <LearningVocabularyDetails
                       detailPayload={detailPayload}
+                      definitionPrefix={<>{roundExamples}{definitionChoiceCards}</>}
                       entry={detailEntry ?? toLookupEntry(currentWord)}
-                      showExamples={currentSettings.showExamples}
+                      showExamples={false}
                     />
                   ) : null}
                 </VocabularyDetailShell>

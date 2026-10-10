@@ -129,7 +129,7 @@ export function AdminBbcArticleUpload() {
             rows={24}
             value={text}
           />
-          <small>词汇条目可编号排列；词条间允许空行，也支持 Markdown 加粗。英文与中文正文按段落顺序对应。</small>
+          <small>首行是标题，之后英文段落与中文翻译逐段对应；编号词条、音标、释义、例句和翻译自动归入右侧词汇栏，无需另写“词汇表”标题。支持空行与 Markdown 加粗。</small>
         </label>
         <label className={styles.full}>
           <span>MP3 音频（可选）</span>

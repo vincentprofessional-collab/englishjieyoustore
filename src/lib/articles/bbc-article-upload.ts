@@ -57,10 +57,29 @@ function stripPasteMarkup(value: string) {
   return value.replace(/\*\*(.*?)\*\*/g, "$1").replace(/__([^_]+)__/g, "$1").trim();
 }
 
+const VOCABULARY_NUMBER = /^\s*(?:[-*]\s*)?(\d+)[.)、．]\s*(.*)$/;
+const VOCABULARY_HEADING = /^(?:#{1,6}\s*)?(?:重点\s*)?(?:词汇(?:表|与短语|和短语|及短语)?|短语|Vocabulary(?:\s+(?:and|&)\s+phrases)?)\s*[:：]?\s*$/i;
+const PART_OF_SPEECH = /^(phr\.\s*v\.|modal\s+v\.|phr\.|n\.|v\.|vt\.|vi\.|adj\.|adv\.|prep\.|pron\.|conj\.|det\.|num\.|interj\.|aux\.|abbr\.)\s*(.*)$/i;
+
+function parseVocabularyCore(value: string) {
+  const line = stripPasteMarkup(value);
+  const phoneticMatch = line.match(/^(.+?)\s*[/／]([^/／]+)[/／]\s*(.*)$/);
+  const plainMatch = phoneticMatch ? null : line.match(/^(.+?)\s+((?:[a-z]+\.)\s*.*[\u3400-\u9fff].*)$/i);
+  const term = (phoneticMatch?.[1] ?? plainMatch?.[1] ?? "").trim();
+  const tail = (phoneticMatch?.[3] ?? plainMatch?.[2] ?? "").trim();
+  const partOfSpeechMatch = tail.match(PART_OF_SPEECH);
+  return {
+    term,
+    phonetic: phoneticMatch?.[2]?.trim() ?? "",
+    partOfSpeech: partOfSpeechMatch?.[1] ?? "",
+    definition: partOfSpeechMatch?.[2]?.trim() ?? tail,
+  };
+}
+
 function parsePastedVocabulary(lines: string[]): BbcVocabularyItem[] | string {
   const entries: string[][] = [];
   for (const line of lines) {
-    const match = line.match(/^\s*(?:[-*]\s*)?(\d+)[.)、]\s*(.*)$/);
+    const match = stripPasteMarkup(line).match(VOCABULARY_NUMBER);
     if (match) entries.push([match[1], match[2]]);
     else if (line.trim() && entries.length) entries[entries.length - 1].push(line.trim());
   }
@@ -91,15 +110,8 @@ function parsePastedVocabulary(lines: string[]): BbcVocabularyItem[] | string {
       }
     }
 
-    const definitionLine = core.join(" ").trim();
-    const phoneticMatch = definitionLine.match(/^(.+?)\s+\/([^/]+)\/\s*(.*)$/);
-    const term = stripPasteMarkup(phoneticMatch?.[1] ?? "");
+    const { term, phonetic, partOfSpeech, definition } = parseVocabularyCore(core.join(" "));
     if (!term) return `第 ${fallbackNumber} 条词汇无法识别。`;
-    const phonetic = phoneticMatch?.[2]?.trim() ?? "";
-    const tail = phoneticMatch?.[3]?.trim() ?? definitionLine.slice(term.length).trim();
-    const partOfSpeechMatch = tail.match(/^(phr\.\s*v\.|phr\.|n\.|v\.|vt\.|vi\.|adj\.|adv\.|prep\.|pron\.|conj\.|det\.|num\.|interj\.|modal v\.)\s*(.*)$/i);
-    const partOfSpeech = partOfSpeechMatch?.[1] ?? "";
-    const definition = partOfSpeechMatch?.[2]?.trim() ?? tail;
     if (!definition) return `第 ${fallbackNumber} 条词汇缺少中文释义。`;
 
     items.push({
@@ -122,7 +134,7 @@ export function parseBbcArticlePaste(value: string): ParsedBbcArticlePaste | str
   const lines = value.replace(/^\uFEFF/, "").replace(/\r\n?/g, "\n").split("\n");
   const titleIndex = lines.findIndex((line) => line.trim());
   if (titleIndex < 0) return "请粘贴 BBC 文章全文。";
-  const dateTitle = lines[titleIndex].replace(/^\s*#{1,6}\s*/, "").trim();
+  const dateTitle = stripPasteMarkup(lines[titleIndex].replace(/^\s*#{1,6}\s*/, ""));
   if (!parseBbcArticleDateFromTitle(dateTitle)) return "标题行需包含有效日期，例如 260202 或 20260202。";
 
   let titleLine = dateTitle.replace(/\d{8}|\d{6}/, "").replace(/^[\s\-–—|:：·]+/, "").trim();
@@ -134,9 +146,14 @@ export function parseBbcArticlePaste(value: string): ParsedBbcArticlePaste | str
   if (!title) return "没有识别到英文标题。";
 
   const contentLines = lines.slice(titleIndex + 1);
-  const vocabularyIndex = contentLines.findIndex((line) =>
-    /^\s*(?:#{1,6}\s*)?(?:词汇表|词汇与短语|词汇和短语|Vocabulary(?:\s+(?:and|&)\s+phrases)?)\s*[:：]?\s*$/i.test(line.trim()),
-  );
+  const vocabularyIndex = contentLines.findIndex((line) => {
+    const text = stripPasteMarkup(line);
+    if (VOCABULARY_HEADING.test(text)) return true;
+    const numbered = text.match(VOCABULARY_NUMBER);
+    if (!numbered) return false;
+    const core = parseVocabularyCore(numbered[2]);
+    return Boolean(core.term && /[\u3400-\u9fff]/.test(core.definition) && (core.phonetic || core.partOfSpeech));
+  });
   const bodyLines = contentLines.slice(0, vocabularyIndex < 0 ? contentLines.length : vocabularyIndex)
     .filter((line) => !/^\s*(?:英文原文|英文正文|中文翻译|中文译文)\s*[:：]?\s*$/.test(line));
   const englishParagraphs: string[] = [];
@@ -169,7 +186,7 @@ export function parseBbcArticlePaste(value: string): ParsedBbcArticlePaste | str
 
   const vocabulary = vocabularyIndex < 0
     ? []
-    : parsePastedVocabulary(contentLines.slice(vocabularyIndex + 1));
+    : parsePastedVocabulary(contentLines.slice(vocabularyIndex + (VOCABULARY_HEADING.test(stripPasteMarkup(contentLines[vocabularyIndex])) ? 1 : 0)));
   if (typeof vocabulary === "string") return vocabulary;
 
   return {

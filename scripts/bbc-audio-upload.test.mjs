@@ -15,6 +15,59 @@ function loadFunctions(path, names, globals, prefix = "") {
   return runInNewContext(`${code}\n${names.at(-1)};`, globals);
 }
 
+function loadPasteParser() {
+  const exports = {};
+  const code = ts.transpileModule(readFileSync(new URL("../src/lib/articles/bbc-article-upload.ts", import.meta.url), "utf8"), {
+    compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 },
+  }).outputText;
+  runInNewContext(code, { exports });
+  return exports.parseBbcArticlePaste;
+}
+
+test("BBC pasted numbered vocabulary without a section heading stays out of bilingual body paragraphs", () => {
+  const parse = loadPasteParser();
+  const result = parse(`260803-Gen Z's love of the past 热衷怀旧的“Z世代”
+Today's youth are reinventing what it means to be cool.
+当今的年轻人正在重新定义“酷”的含义。
+
+1. **reinvent** /ˌriːɪnˈvent/ v. 重新定义，彻底改造
+例句：The company reinvented itself as a technology firm.
+翻译：该公司将自己重新打造成一家科技公司。
+
+2. romanticise /rəʊˈmæntɪsaɪz/ v. 浪漫化，理想化
+例句：We tend to romanticise the past.
+翻译：我们倾向于把过去浪漫化。`);
+  assert.equal(typeof result, "object");
+  assert.equal(result.title, "Gen Z's love of the past");
+  assert.equal(result.titleChinese, "热衷怀旧的“Z世代”");
+  assert.equal(result.english.split("\n\n").length, 1);
+  assert.equal(result.chinese.split("\n\n").length, 1);
+  assert.equal(result.vocabulary.length, 2);
+  assert.equal(result.vocabulary[0].term, "reinvent");
+  assert.equal(result.vocabulary[0].example, "The company reinvented itself as a technology firm.");
+  assert.equal(result.vocabulary[1].translation, "我们倾向于把过去浪漫化。");
+});
+
+test("BBC five bilingual paragraphs and 29 phonetic vocabulary entries remain five aligned body pairs", () => {
+  const body = Array.from({ length: 5 }, (_, i) => `English paragraph ${i + 1}.\n中文段落${i + 1}。`).join("\n\n");
+  const vocabulary = Array.from({ length: 29 }, (_, i) => `${i + 1}. term${i + 1}/tɜːm/ n. 词条${i + 1}\n例句：An example sentence.\n翻译：例句翻译。`).join("\n\n");
+  const result = loadPasteParser()(`260803-Example title 示例标题\n${body}\n\n${vocabulary}`);
+  assert.equal(typeof result, "object");
+  assert.equal(result.english.split("\n\n").length, 5);
+  assert.equal(result.chinese.split("\n\n").length, 5);
+  assert.equal(result.vocabulary.length, 29);
+});
+
+test("BBC explicit headings and vocabulary without IPA work; numbered prose remains prose", () => {
+  const parse = loadPasteParser();
+  const result = parse("260803-Test article 测试文章\n1. A numbered English paragraph.\n一个编号段落。\n\n**词汇与短语**\n1. mixed reactions n. 褒贬不一的反应\n例句：Mixed reactions followed.\n翻译：随后出现褒贬不一的反应。");
+  assert.equal(typeof result, "object");
+  assert.equal(result.english, "1. A numbered English paragraph.");
+  assert.equal(result.vocabulary[0].term, "mixed reactions");
+  assert.equal(result.vocabulary[0].partOfSpeech, "n.");
+  assert.match(parse("260803-Test 测试\nOnly English prose."), /中文翻译/);
+});
+
 test("PUT presigns require the upload credential pair and never use playback credentials", () => {
   const env = {
     R2_ACCOUNT_ID: "test-account",

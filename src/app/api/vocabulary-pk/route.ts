@@ -13,6 +13,7 @@ import {
   type LearningWord,
 } from "@/lib/vocabulary/learning";
 import { getSupplementalLearningWords } from "@/lib/vocabulary/supplemental-learning-books";
+import { getConciseStudyDefinition } from "@/lib/vocabulary/study-definition";
 
 export const dynamic = "force-dynamic";
 
@@ -85,10 +86,10 @@ function buildQuestions(bookKey: string, requestedIds?: unknown): PkQuestion[] |
     while (targets.length < QUESTION_COUNT) targets.push(group[targets.length % group.length]);
   }
 
-  const definitionPool = [...new Set(words.map((word) => word.definitionCn.trim()).filter(Boolean))];
+  const definitionPool = [...new Set(words.map((word) => getConciseStudyDefinition(word.definitionCn)).filter(Boolean))];
   if (definitionPool.length < 4) return null;
   return targets.map((word) => {
-    const correct = word.definitionCn.trim();
+    const correct = getConciseStudyDefinition(word.definitionCn);
     const distractors = shuffle(definitionPool.filter((definition) => definition !== correct)).slice(0, 3);
     const choices = shuffle([correct, ...distractors]);
     return { wordId: word.id, word: word.word, choices, correctIndex: choices.indexOf(correct) };

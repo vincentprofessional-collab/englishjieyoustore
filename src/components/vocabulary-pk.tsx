@@ -5,6 +5,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { supabase } from "@/lib/supabase/client";
 import type { LearningBookKey } from "@/lib/vocabulary/learning";
+import { createVocabularyPkAudio } from "@/lib/vocabulary/pk-audio";
 
 type PkState = {
   matchId: string;
@@ -60,9 +61,60 @@ export function VocabularyPk({ initialBook, initialChallenge, initialMode, initi
   const [busy, setBusy] = useState(false);
   const [rankedConsent, setRankedConsent] = useState(false);
   const [clockNow, setClockNow] = useState(0);
+  const [soundEnabled, setSoundEnabled] = useState(true);
+  const [audioReady, setAudioReady] = useState(false);
+  const audioRef = useRef<ReturnType<typeof createVocabularyPkAudio> | null>(null);
+  const pronouncedQuestion = useRef("");
+  const soundedAnswer = useRef("");
   const answerDeadlineRef = useRef(0);
   const autoStarted = useRef(false);
   const title = `${initialBook}词汇 PK`;
+
+  useEffect(() => {
+    const audio = createVocabularyPkAudio();
+    audioRef.current = audio;
+    let active = true;
+    setAudioReady(audio.ready);
+    const unlock = () => { void audio.unlock().then((ready) => { if (active) setAudioReady(ready); }); };
+    window.addEventListener("pointerdown", unlock, { once: true });
+    window.addEventListener("keydown", unlock, { once: true });
+    return () => {
+      active = false;
+      window.removeEventListener("pointerdown", unlock);
+      window.removeEventListener("keydown", unlock);
+      audio.close();
+      audioRef.current = null;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!audioReady || !soundEnabled || stage !== "playing" || !game?.question || game.status !== "active" || game.startsInMs > 0 || game.revealed || game.me.finished) {
+      audioRef.current?.stopWord();
+      return;
+    }
+    const key = `${game.matchId}:${game.questionNo}`;
+    if (pronouncedQuestion.current === key) return;
+    pronouncedQuestion.current = key;
+    void audioRef.current?.pronounce(game.question.word);
+  }, [audioReady, game, soundEnabled, stage]);
+
+  useEffect(() => {
+    if (!audioReady || !soundEnabled || stage !== "playing" || !game?.revealed || game.question?.correctIndex == null) return;
+    const key = `${game.matchId}:${game.questionNo}`;
+    if (soundedAnswer.current === key) return;
+    soundedAnswer.current = key;
+    audioRef.current?.feedback(game.selectedIndex === game.question.correctIndex);
+  }, [audioReady, game, soundEnabled, stage]);
+
+  const toggleSound = async () => {
+    if (soundEnabled && audioReady) {
+      setSoundEnabled(false); audioRef.current?.stop();
+    } else {
+      const ready = await audioRef.current?.unlock();
+      setAudioReady(Boolean(ready)); setSoundEnabled(true);
+      pronouncedQuestion.current = "";
+    }
+  };
 
   const loadBoard = useCallback(async () => {
     const response = await fetch(`/api/vocabulary-pk?action=leaderboard&book=${encodeURIComponent(initialBook)}&period=${period}`, { cache: "no-store" });
@@ -255,7 +307,7 @@ export function VocabularyPk({ initialBook, initialChallenge, initialMode, initi
       <header className="vocabulary-pk-header">
         <Link href={`/vocabulary/books?level=${encodeURIComponent(initialBook)}`}>‹ 返回背单词</Link>
         <div><span>词汇书对战</span><h1>{title}</h1></div>
-        <span className="vocabulary-pk-header-badge">20 题 · 每题 10 秒</span>
+        <div className="vocabulary-pk-header-controls"><span className="vocabulary-pk-header-badge">20 题 · 每题 10 秒</span><button aria-pressed={soundEnabled && audioReady} className="vocabulary-pk-sound-button" onClick={() => void toggleSound()} type="button">{soundEnabled && audioReady ? "声音已开启" : "开启声音"}</button></div>
       </header>
       <div className="vocabulary-pk-layout">
         <section className="vocabulary-pk-main">
@@ -334,7 +386,7 @@ export function VocabularyPk({ initialBook, initialChallenge, initialMode, initi
                       const correct = game.revealed && index === game.question?.correctIndex;
                       const wrong = game.revealed && index === game.selectedIndex && !correct;
                       const selected = index === game.selectedIndex;
-                      return <button aria-pressed={selected} className={`${correct ? "correct" : ""} ${wrong ? "wrong" : ""} ${selected ? "selected" : ""}`} disabled={game.answered || game.revealed || busy} key={`${game.questionNo}-${index}`} onClick={() => void startAnswer(index)} type="button"><b>{String.fromCharCode(65 + index)}</b><span>{choice}</span>{correct ? <strong>正确</strong> : selected && game.answered ? <strong>已提交</strong> : null}</button>;
+                      return <button aria-pressed={selected} className={`${correct ? "correct" : ""} ${wrong ? "wrong" : ""} ${selected ? "selected" : ""}`} disabled={game.answered || game.revealed || busy} key={`${game.questionNo}-${index}`} onClick={() => void startAnswer(index)} type="button"><span>{choice}</span>{correct ? <strong>正确</strong> : selected && game.answered ? <strong>已提交</strong> : null}</button>;
                     })}
                   </div>
                   <p className="vocabulary-pk-live-note">{game.revealed ? "正确释义已高亮，马上进入下一题。" : game.answered ? "已提交，等待本题 10 秒结束后公布释义。" : "答对 +20 分 · 超时 0 分"}</p>
