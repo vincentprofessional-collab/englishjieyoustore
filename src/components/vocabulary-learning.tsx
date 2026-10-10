@@ -2973,8 +2973,9 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
                     {currentRoundRevealed ? (
                       <LearningVocabularyDetails
                         detailPayload={detailPayload}
+                        definitionPrefix={roundExamples}
                         entry={detailEntry ?? toLookupEntry(currentWord)}
-                        showExamples={currentSettings.showExamples}
+                        showExamples={false}
                       />
                     ) : (
                       <DefinitionDisplay
@@ -2986,6 +2987,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
                       />
                     )}
                   </div>
+                  {!currentRoundRevealed ? roundExamples : null}
                   {recordingError ? <p className="vocabulary-learning-inline-error">{recordingError}</p> : null}
                 </VocabularyDetailShell>
               ) : null}
@@ -3022,11 +3024,13 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
                         value={currentWord.definitionCn}
                       />
                     ) : null}
+                    {!(browseMode ? currentRoundRevealed : spellingAnswerShown) ? roundExamples : null}
                     {(browseMode ? currentRoundRevealed : spellingAnswerShown) ? (
                       <LearningVocabularyDetails
                         detailPayload={detailPayload}
+                        definitionPrefix={roundExamples}
                         entry={detailEntry ?? toLookupEntry(currentWord)}
-                        showExamples={currentSettings.showExamples}
+                        showExamples={false}
                       />
                     ) : null}
                 </VocabularyDetailShell>
