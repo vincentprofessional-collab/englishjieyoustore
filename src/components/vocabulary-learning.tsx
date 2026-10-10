@@ -1337,6 +1337,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
   const [settingsHydrated, setSettingsHydrated] = useState(false);
   const [settingsOpenFor, setSettingsOpenFor] = useState<BookSelectionKey | null>(null);
   const [setupMode, setSetupMode] = useState<"single" | "pk">("single");
+  const [pkSetupBook, setPkSetupBook] = useState<LearningBookKey>(initialBook === "生词本" ? "小学" : initialBook);
   const [studyPaused, setStudyPaused] = useState(false);
   const [settingsDraft, setSettingsDraft] = useState<StudySettingsDraft>(() => toSettingsDraft(DEFAULT_STUDY_SETTINGS));
   const reactionOptionsRef = useRef<HTMLDivElement | null>(null);
@@ -1457,7 +1458,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
 
     options.addEventListener("wheel", handleWheel, { passive: false });
     return () => options.removeEventListener("wheel", handleWheel);
-  }, [settingsOpenFor]);
+  }, [settingsOpenFor, setupMode]);
 
   useEffect(() => {
     const updateVisibility = () => setPageVisible(document.visibilityState === "visible");
@@ -2056,6 +2057,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
     setGroupBrowseIds(null);
     setSetupMode("single");
     window.history.replaceState(null, "", `/vocabulary/books?level=${encodeURIComponent(nextSelection)}`);
+    setPkSetupBook(nextSelection === "生词本" ? "小学" : nextSelection);
     if (nextSelection !== selectedBook) {
       setWords([]);
       setLoading(true);
@@ -2072,6 +2074,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
     setForcedSpellingWordId(null);
     setSettingsDraft(toSettingsDraft(settingsByBook[selectedBook] ?? { ...DEFAULT_STUDY_SETTINGS, voice, order }));
     setSetupMode("single");
+    setPkSetupBook(selectedBook === "生词本" ? "小学" : selectedBook);
     setSettingsOpenFor(selectedBook);
     setStudyPaused(true);
     setEntryGate("settings");
@@ -2714,12 +2717,12 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
       <div className="vocabulary-learning-layout">
         <aside className="vocabulary-learning-sidebar" ref={sidebarRef}>
           <div className="vocabulary-learning-book-heading">
-            <div className="vocabulary-learning-book-heading-copy">
-              <span>词汇</span>
-            </div>
             <div className="vocabulary-learning-book-heading-actions">
               <button disabled={!settingsHydrated || advancePending} onClick={openCustomBook} type="button">自建生词本</button>
               <button disabled={!settingsHydrated || advancePending || entryGate === "select-book"} onClick={openStudySettings} type="button">设置</button>
+            </div>
+            <div className="vocabulary-learning-book-heading-copy">
+              <span>词汇</span>
             </div>
           </div>
           <div className="vocabulary-learning-book-list">
@@ -3094,7 +3097,8 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
             <div className="vocabulary-learning-settings-head">
               <button aria-label="关闭设置并暂停学习" className="vocabulary-learning-settings-close" onClick={closeStudySettings} type="button">×</button>
             </div>
-            <label className="vocabulary-learning-settings-book-select">
+            <div className="vocabulary-learning-settings-body">
+            {setupMode === "single" ? <label className="vocabulary-learning-settings-book-select">
               <span>词汇</span>
               <select
                 aria-label="选择词汇"
@@ -3106,19 +3110,24 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
                   <option key={book.key} value={book.key}>{book.label}</option>
                 ))}
               </select>
-            </label>
+            </label> : null}
             <div aria-label="学习模式" className="vocabulary-learning-setup-modes" role="tablist">
               <button aria-selected={setupMode === "single"} className={setupMode === "single" ? "active" : ""} onClick={() => setSetupMode("single")} role="tab" type="button">单人模式</button>
-              <button aria-selected={setupMode === "pk"} className={setupMode === "pk" ? "active" : ""} disabled={selectedBook === "生词本"} onClick={() => setSetupMode("pk")} role="tab" type="button">PK 模式</button>
+              <button aria-selected={setupMode === "pk"} className={setupMode === "pk" ? "active" : ""} onClick={() => setSetupMode("pk")} role="tab" type="button">PK 模式</button>
             </div>
-            {selectedBook === "生词本" ? <p className="vocabulary-learning-settings-note">积分榜按共享词汇书统计；收藏词汇仅供个人复习，请选择正式词汇书参加 PK。</p> : null}
             {setupMode === "pk" ? (
-              <section className="vocabulary-learning-pk-setup">
-                <span>词汇书积分赛</span>
-                <h2>从「{selectedBookLabel}」随机抽取 20 题</h2>
-                <p>每题 10 秒，从 4 个中文释义选项中作答；答对加 20 分，超时不扣分。本模式不显示语境例句。</p>
+              <section aria-label="PK 设置" className="vocabulary-learning-pk-setup">
+                <fieldset className="vocabulary-learning-settings-options vocabulary-learning-pk-books">
+                  <legend>词汇书</legend>
+                  {books.map((book) => (
+                    <label key={book.key}>
+                      <input checked={pkSetupBook === book.key} name="pk-study-book" onChange={() => setPkSetupBook(book.key)} type="radio" />
+                      <span>{book.label}</span>
+                    </label>
+                  ))}
+                </fieldset>
+                <p>每局随机抽取 20 题，每题 10 秒；从 4 个中文释义选项中作答，答对加 20 分，超时不扣分。</p>
                 <p>优先自动匹配同词汇书、同段位的在线用户；暂时没有对手时，可创建链接邀请访客参加。</p>
-                <Link className="primary" href={`/vocabulary/pk?book=${encodeURIComponent(selectedBook)}&mode=auto`}>进入 PK 模式</Link>
               </section>
             ) : null}
             {setupMode === "single" ? <>
@@ -3151,17 +3160,9 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
               </fieldset>
             </div>
             <fieldset className="vocabulary-learning-settings-options vocabulary-learning-settings-method">
-              <legend>记忆方式</legend>
+              <legend>学习模式</legend>
               <label><input checked={settingsDraft.method === "classified"} name="learning-method" onChange={() => setSettingsDraft((current) => ({ ...current, method: "classified", reviewView: null, reviewFamiliarities: [] }))} type="radio" />分类记忆</label>
               <label><input checked={settingsDraft.method === "browse"} name="learning-method" onChange={() => setSettingsDraft((current) => ({ ...current, method: "browse" }))} type="radio" />浏览模式</label>
-            </fieldset>
-            {settingsDraft.method === "browse" && settingsDraft.reviewView === null && settingsDraft.reviewFamiliarities.length === 0 ? (
-              <label className="vocabulary-learning-browse-groups"><span>今日浏览组数</span><input inputMode="numeric" max="100" min="1" onChange={(event) => setSettingsDraft((current) => ({ ...current, browseGroups: event.target.value }))} type="number" value={settingsDraft.browseGroups} /><small>每组 20 个词；也可在下方按熟悉程度与学习模式筛选旧词。</small></label>
-            ) : null}
-            <fieldset className="vocabulary-learning-settings-options vocabulary-learning-settings-display">
-              <legend>学习内容</legend>
-              <label><input checked={settingsDraft.showExamples} onChange={(event) => setSettingsDraft((current) => ({ ...current, showExamples: event.target.checked }))} type="checkbox" />显示语境例句</label>
-              <label><input checked={settingsDraft.showOptions} onChange={(event) => setSettingsDraft((current) => ({ ...current, showOptions: event.target.checked }))} type="checkbox" />显示释义选项</label>
             </fieldset>
             <fieldset className="vocabulary-learning-settings-options vocabulary-learning-settings-scope">
               <legend>词汇范围</legend>
@@ -3236,33 +3237,38 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
               </div>
             </section>
             <div className="vocabulary-learning-settings-paired-options">
-              <div className="vocabulary-learning-settings-option-column">
-                <fieldset className="vocabulary-learning-settings-options">
-                  <legend>记忆顺序</legend>
-                  <label><input checked={settingsDraft.order === "sequential"} name="study-order" onChange={() => setSettingsDraft((current) => ({ ...current, order: "sequential" }))} type="radio" />顺序</label>
-                  <label><input checked={settingsDraft.order === "random"} name="study-order" onChange={() => setSettingsDraft((current) => ({ ...current, order: "random" }))} type="radio" />乱序</label>
-                </fieldset>
-                <fieldset className="vocabulary-learning-settings-options">
-                  <legend>释义选择</legend>
-                  <label><input checked={settingsDraft.definitionLanguage === "zh"} name="study-definition-language" onChange={() => setSettingsDraft((current) => ({ ...current, definitionLanguage: "zh" }))} type="radio" />中英</label>
-                  <label><input checked={settingsDraft.definitionLanguage === "en"} name="study-definition-language" onChange={() => setSettingsDraft((current) => ({ ...current, definitionLanguage: "en" }))} type="radio" />英英</label>
-                  <p className="vocabulary-learning-definition-note">英英模式在口语和写作考察中使用英文释义提示。</p>
-                </fieldset>
-              </div>
+              <fieldset className="vocabulary-learning-settings-options">
+                <legend>记忆顺序</legend>
+                <label><input checked={settingsDraft.order === "sequential"} name="study-order" onChange={() => setSettingsDraft((current) => ({ ...current, order: "sequential" }))} type="radio" />顺序</label>
+                <label><input checked={settingsDraft.order === "random"} name="study-order" onChange={() => setSettingsDraft((current) => ({ ...current, order: "random" }))} type="radio" />乱序</label>
+              </fieldset>
               <fieldset className="vocabulary-learning-settings-options">
                 <legend>发音设置</legend>
                 <label><input checked={settingsDraft.voice === "us"} name="study-voice" onChange={() => setSettingsDraft((current) => ({ ...current, voice: "us" }))} type="radio" />美音</label>
                 <label><input checked={settingsDraft.voice === "uk"} name="study-voice" onChange={() => setSettingsDraft((current) => ({ ...current, voice: "uk" }))} type="radio" />英音</label>
               </fieldset>
+              <fieldset className="vocabulary-learning-settings-options">
+                <legend>释义选择</legend>
+                <label><input checked={settingsDraft.definitionLanguage === "zh"} name="study-definition-language" onChange={() => setSettingsDraft((current) => ({ ...current, definitionLanguage: "zh" }))} type="radio" />中文</label>
+                <label><input checked={settingsDraft.definitionLanguage === "en"} name="study-definition-language" onChange={() => setSettingsDraft((current) => ({ ...current, definitionLanguage: "en" }))} type="radio" />英文</label>
+              </fieldset>
+              <fieldset className="vocabulary-learning-settings-options">
+                <legend>记忆方式</legend>
+                <label><input checked={settingsDraft.showExamples} onChange={(event) => setSettingsDraft((current) => ({ ...current, showExamples: event.target.checked }))} type="checkbox" />语境例句</label>
+                <label><input checked={settingsDraft.showOptions} onChange={(event) => setSettingsDraft((current) => ({ ...current, showOptions: event.target.checked }))} type="checkbox" />释义选项</label>
+              </fieldset>
             </div>
             {settingsDraft.modes.length === 0
               ? <p className="vocabulary-learning-settings-validation">请至少选择一种考察模式。</p>
               : null}
+            </> : null}
+            </div>
             <div className="vocabulary-learning-settings-actions">
               {!settingsFirstOpen ? <button onClick={closeStudySettings} type="button">取消</button> : null}
-              <button className="primary" disabled={!validSettingsDraft} type="submit">开始背单词</button>
+              {setupMode === "single"
+                ? <button className="primary" disabled={!validSettingsDraft} type="submit">开始背单词</button>
+                : <Link className="primary" href={`/vocabulary/pk?book=${encodeURIComponent(pkSetupBook)}&mode=auto`}>进入 PK 模式</Link>}
             </div>
-            </> : null}
           </form>
         </div>
       ) : null}
