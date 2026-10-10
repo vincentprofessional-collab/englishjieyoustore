@@ -13,9 +13,9 @@ function uploadToR2(ticket: UploadTicket, file: File, onProgress: (value: number
     request.open("PUT", ticket.uploadUrl);
     Object.entries(ticket.headers).forEach(([name, value]) => request.setRequestHeader(name, value));
     request.upload.onprogress = (event) => {
-      if (event.lengthComputable) onProgress(Math.round((event.loaded / event.total) * 100));
+      if (event.lengthComputable) onProgress(Math.min(99, Math.round((event.loaded / event.total) * 100)));
     };
-    request.onerror = () => reject(new Error("无法连接 Cloudflare R2，请检查网络和 bucket 的 CORS 配置。"));
+    request.onerror = () => reject(new Error("音频上传未完成，可能是存储服务拒绝请求或传输中断。请重试或检查后台上传权限。"));
     request.onabort = () => reject(new Error("音频上传已取消。"));
     request.onload = () => {
       if (request.status >= 200 && request.status < 300) {
@@ -39,6 +39,7 @@ export function AdminBbcArticleUpload() {
   const [text, setText] = useState("");
   const [audioFile, setAudioFile] = useState<File | null>(null);
   const [audioProgress, setAudioProgress] = useState(0);
+  const [audioStatus, setAudioStatus] = useState<"waiting" | "uploading" | "uploaded" | "failed">("waiting");
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState(false);
@@ -67,6 +68,7 @@ export function AdminBbcArticleUpload() {
 
     setBusy(true);
     setAudioProgress(0);
+    setAudioStatus(audioFile ? "uploading" : "waiting");
     try {
       const { data, error: sessionError } = await supabase.auth.getSession();
       if (sessionError || !data.session?.access_token) throw new Error("管理员登录已失效，请重新登录后台。");
@@ -82,6 +84,7 @@ export function AdminBbcArticleUpload() {
         if (!presignResponse.ok) throw new Error(readApiError(presignPayload));
         const ticket = presignPayload as UploadTicket;
         await uploadToR2(ticket, audioFile, setAudioProgress);
+        setAudioStatus("uploaded");
         objectPath = ticket.objectPath;
       }
       const response = await fetch("/api/admin/bbc-articles", {
@@ -97,6 +100,7 @@ export function AdminBbcArticleUpload() {
         `已发布到 ${payload.year} 年 ${payload.month} 月，文章编号 ${payload.articleId}；识别 ${payload.paragraphCount} 段正文、${payload.vocabularyCount} 条词汇与短语。${payload.audioIncluded ? "已关联音频。" : "粘贴内容未包含 MP3，文章页面将不显示音频播放器。"}`,
       );
     } catch (uploadError) {
+      setAudioStatus((status) => status === "uploading" ? "failed" : status);
       setError(true);
       setMessage(uploadError instanceof Error ? uploadError.message : "发布失败，请稍后重试。");
     } finally {
@@ -129,12 +133,12 @@ export function AdminBbcArticleUpload() {
         </label>
         <label className={styles.full}>
           <span>MP3 音频（可选）</span>
-          <input accept=".mp3,audio/mpeg" disabled={busy} onChange={(event) => { setAudioFile(event.target.files?.[0] ?? null); setAudioProgress(0); }} type="file" />
+          <input accept=".mp3,audio/mpeg" disabled={busy} onChange={(event) => { setAudioFile(event.target.files?.[0] ?? null); setAudioProgress(0); setAudioStatus("waiting"); }} type="file" />
           <small>{audioFile ? `${audioFile.name} · ${(audioFile.size / 1024 / 1024).toFixed(1)} MB` : "最大 200 MB；浏览器直接上传到 Cloudflare R2，不经过文章接口传输音频内容。"}</small>
         </label>
         {audioFile ? (
           <div aria-label="MP3 音频上传进度" aria-valuemax={100} aria-valuemin={0} aria-valuenow={audioProgress} className={styles.progress} role="progressbar">
-            <span>{audioProgress >= 100 ? "音频已上传" : busy ? `音频上传中 ${audioProgress}%` : "等待上传"}</span>
+            <span>{audioStatus === "uploaded" ? "音频已上传" : audioStatus === "uploading" ? `音频上传中 ${audioProgress}%` : audioStatus === "failed" ? "音频上传失败，请重试" : "等待上传"}</span>
             <div className={styles.progressTrack}><i style={{ width: `${audioProgress}%` }} /></div>
           </div>
         ) : null}

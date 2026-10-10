@@ -54,8 +54,8 @@ function encode(value: string) {
 
 function getPresignedPutUrl(objectPath: string) {
   const accountId = process.env.R2_ACCOUNT_ID;
-  const accessKeyId = process.env.R2_BBC_AUDIO_ACCESS_KEY_ID;
-  const secretAccessKey = process.env.R2_BBC_AUDIO_SECRET_ACCESS_KEY;
+  const accessKeyId = process.env.R2_BBC_AUDIO_UPLOAD_ACCESS_KEY_ID;
+  const secretAccessKey = process.env.R2_BBC_AUDIO_UPLOAD_SECRET_ACCESS_KEY;
   if (!accountId || !accessKeyId || !secretAccessKey) return null;
 
   const host = `${accountId}.r2.cloudflarestorage.com`;
@@ -266,7 +266,7 @@ export async function POST(request: NextRequest) {
     const objectPath = `bbc/${articleDate.year}/${articleDate.id}/full.mp3`;
     const uploadUrl = getPresignedPutUrl(objectPath);
     if (!uploadUrl) {
-      return NextResponse.json({ error: "R2 上传密钥未配置：需要 R2_ACCOUNT_ID、R2_BBC_AUDIO_ACCESS_KEY_ID 和 R2_BBC_AUDIO_SECRET_ACCESS_KEY。" }, { status: 503 });
+      return NextResponse.json({ error: "音频上传服务尚未配置写入凭据，请联系管理员配置 BBC 音频上传权限。" }, { status: 503 });
     }
     return NextResponse.json({
       date: articleDate.date,
