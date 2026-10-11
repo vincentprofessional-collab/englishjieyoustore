@@ -55,6 +55,7 @@ export function MobileMeHub() {
     { title: "收藏夹", description: "单词、句子、文章、错题与批注", href: "/me/favorites" },
     { title: "设置", description: "自动发音与个人偏好", href: "/me/settings" },
     { title: "学习进度", description: "查看练习记录与阶段进展", href: "/me/progress" },
+    { title: "查看他人学习进度", description: "申请查看；对方同意后才能访问", href: "/me/learning-sharing" },
   ];
   return <section className="mobile-hub mobile-me-hub">
     <HubHeading title="我的" description="收藏内容、调整设置、查看学习进度。" />

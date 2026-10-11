@@ -83,7 +83,9 @@ type FavoriteAnnotationItem = {
   excerpt?: string;
   href?: string;
   id: string;
+  occurrence?: number;
   savedAt: string;
+  sourceId?: string;
   sourceTitle?: string;
   title: string;
 };
@@ -110,6 +112,13 @@ const favoriteSortOptions: Array<{ id: FavoriteSortMode; label: string }> = [
   { id: "type", label: "按题型" },
   { id: "random", label: "乱序" },
 ];
+
+function favoriteAnnotationHref(annotation: FavoriteAnnotationItem) {
+  const url = new URL(annotation.href ?? "/articles", "https://favorites.local");
+  url.searchParams.set("focusAnnotation", annotation.id);
+  if (typeof annotation.occurrence === "number") url.searchParams.set("focusOccurrence", String(annotation.occurrence));
+  return `${url.pathname}${url.search}${url.hash}`;
+}
 
 const favoriteQuestionModuleLabels: Record<string, string> = {
   bbc: "bbc",
@@ -1039,7 +1048,7 @@ export default function FavoritesPage() {
             <div className="favorite-library-table">
               {sortedAnnotations.map((annotation) => (
                 <article className="favorite-library-row annotation-row" key={annotation.id}>
-                  <Link className="favorite-library-title" href={annotation.href ?? "/articles"}>
+                  <Link className="favorite-library-title" href={favoriteAnnotationHref(annotation)}>
                     <span className="favorite-library-title-text">{annotation.title}</span>
                   </Link>
                   <small className="favorite-library-content">

@@ -56,7 +56,7 @@ import {
   STUDY_SELECTION_ACTION_TIMEOUT_MS,
   type StudySelectionActionPosition,
 } from "@/lib/study-selection";
-import { clearPersistedInlineHighlights, inlineHighlightKey, persistInlineHighlight, restoreInlineHighlights } from "@/lib/inline-highlights";
+import { clearPersistedInlineHighlights, focusInlineText, inlineHighlightKey, persistInlineHighlight, restoreInlineHighlights, textOccurrenceForRange } from "@/lib/inline-highlights";
 import { cleanVocabularyDefinition } from "@/lib/vocabulary/display";
 import type { LocalVocabularyHint } from "@/lib/vocabulary/local-vocabulary";
 import {
@@ -113,6 +113,7 @@ type StoredListeningAttempt = {
 type AnnotationItem = {
   id: number;
   kind: "note" | "highlight";
+  occurrence?: number;
   text: string;
   note: string;
 };
@@ -140,7 +141,9 @@ type FavoriteAnnotationItem = {
   excerpt: string;
   href: string;
   id: string;
+  occurrence?: number;
   savedAt: string;
+  sourceId?: string;
   sourceTitle: string;
   title: string;
 };
@@ -2974,6 +2977,35 @@ export function ListeningPractice({
   useEffect(() => {
     if (pageRef.current) restoreInlineHighlights(pageRef.current, highlightStorageKey);
   }, [highlightStorageKey]);
+
+  useEffect(() => {
+    const sourcePath = `/listening/${section.id}`;
+    const savedNotes = readFavoriteAnnotations().filter((item) => {
+      if (item.sourceId) return item.sourceId === highlightStorageKey;
+      try {
+        return new URL(item.href, window.location.origin).pathname === sourcePath;
+      } catch {
+        return item.id.startsWith(`listening:${section.id}:annotation:`);
+      }
+    });
+    const restoredNotes = savedNotes.map((item) => ({
+      id: Number(item.id.slice(item.id.lastIndexOf(":") + 1)) || new Date(item.savedAt).getTime(),
+      kind: "note" as const,
+      note: item.excerpt,
+      occurrence: item.occurrence ?? 0,
+      text: item.title,
+    }));
+    setAnnotations(restoredNotes);
+
+    const params = new URLSearchParams(window.location.search);
+    const focusedNote = savedNotes.find((item) => item.id === params.get("focusAnnotation"));
+    if (focusedNote) {
+      setIsNotesOpen(true);
+      window.requestAnimationFrame(() =>
+        focusInlineText(pageRef.current, focusedNote.title, focusedNote.occurrence ?? Number(params.get("focusOccurrence")) ?? 0),
+      );
+    }
+  }, [highlightStorageKey, section.id]);
   const shouldUseTestOnePaperLayout =
     section.bookCode === "cambridge-4" &&
     section.testNo === 1 &&
@@ -3380,7 +3412,9 @@ export function ListeningPractice({
       excerpt: noteText,
       href: `/listening/${section.id}?mode=practice&review=1`,
       id,
+      occurrence: item.occurrence ?? 0,
       savedAt: new Date(item.id).toISOString(),
+      sourceId: highlightStorageKey,
       sourceTitle: `listening ${formatFavoriteBookCode(section.bookCode)}-test${section.testNo}-part${section.sectionNo}`,
       title: sourceText,
     };
@@ -3898,7 +3932,7 @@ export function ListeningPractice({
                 className={`annotation-toggle ielts-exam-action bbc-annotation-toggle ${isNotesOpen ? "active" : ""}`}
                 data-study-annotation-toggle
                 type="button"
-                onClick={() => setIsNotesOpen((value) => !value)}
+                onClick={toggleNotesPanel}
               >
                 批注
               </button>
@@ -4131,12 +4165,17 @@ export function ListeningPractice({
       return;
     }
 
+    const selectedRange = selectedRangeRef.current;
+    const occurrence = pageRef.current && selectedRange
+      ? textOccurrenceForRange(pageRef.current, selectedRange, selectedText)
+      : 0;
     setAnnotations((current) => [
       {
         id: Date.now(),
         kind,
         text: selectedText,
         note: "",
+        occurrence,
       },
       ...current,
     ]);
@@ -4145,6 +4184,16 @@ export function ListeningPractice({
     selectedRangeRef.current = null;
     clearSelectionHideTimer();
     setIsNotesOpen(true);
+  }
+
+  function focusAnnotation(item: AnnotationItem) {
+    focusInlineText(pageRef.current, item.text, item.occurrence ?? 0);
+  }
+
+  function toggleNotesPanel() {
+    const opening = !isNotesOpen;
+    setIsNotesOpen(opening);
+    if (opening && annotations[0]) focusAnnotation(annotations[0]);
   }
 
   function clearAllInlineHighlights() {
@@ -4652,6 +4701,9 @@ export function ListeningPractice({
                       </button>
                     </div>
                     <strong>{item.text}</strong>
+                    <button className="note-source-focus" onClick={() => focusAnnotation(item)} type="button">
+                      定位原文
+                    </button>
                     {item.kind === "note" ? (
                       <textarea
                         placeholder="Start typing your note"
@@ -4825,7 +4877,7 @@ export function ListeningPractice({
                 className={`annotation-toggle ielts-exam-action ${isNotesOpen ? "active" : ""}`}
                 data-study-annotation-toggle
                 type="button"
-                onClick={() => setIsNotesOpen((value) => !value)}
+                onClick={toggleNotesPanel}
               >
                 批注
               </button>
@@ -4996,7 +5048,7 @@ export function ListeningPractice({
                 <button
                   className={`bbc-annotation-toggle ${isNotesOpen ? "active" : ""}`}
                   data-study-annotation-toggle
-                  onClick={() => setIsNotesOpen((value) => !value)}
+                  onClick={toggleNotesPanel}
                   type="button"
                 >
                   批注
@@ -5424,6 +5476,9 @@ export function ListeningPractice({
                       </button>
                     </div>
                     <strong>{item.text}</strong>
+                    <button className="note-source-focus" onClick={() => focusAnnotation(item)} type="button">
+                      定位原文
+                    </button>
                     {item.kind === "note" ? (
                       <textarea
                         placeholder="Start typing your note"

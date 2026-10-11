@@ -23,6 +23,7 @@ test("site study tracking records active time and unique articles per local day"
 
   const days = readSiteStudyHistory(storage);
   assert.deepEqual(days["2026-10-02"], {
+    activitySeconds: { articles: 0, vocabulary: 0, lookups: 0 },
     lookedUpWords: ["disappointment", "gap"],
     seconds: 120,
     studyItems: ["bbc:word-building", "new-concept:lesson-001"],

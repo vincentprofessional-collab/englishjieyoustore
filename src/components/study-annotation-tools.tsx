@@ -17,6 +17,7 @@ import {
   STUDY_SELECTION_ACTION_TIMEOUT_MS,
   type StudySelectionActionPosition,
 } from "@/lib/study-selection";
+import { focusInlineText, textOccurrenceForRange } from "@/lib/inline-highlights";
 import { cleanVocabularyDefinition } from "@/lib/vocabulary/display";
 import { loadVocabularyHoverHint } from "@/lib/vocabulary/hover-hint";
 import type { LocalVocabularyHint } from "@/lib/vocabulary/local-vocabulary";
@@ -25,6 +26,7 @@ type AnnotationItem = {
   id: number;
   kind: "note" | "highlight";
   note: string;
+  occurrence?: number;
   text: string;
 };
 
@@ -32,7 +34,9 @@ type FavoriteAnnotationItem = {
   excerpt: string;
   href: string;
   id: string;
+  occurrence?: number;
   savedAt: string;
+  sourceId?: string;
   sourceTitle: string;
   title: string;
 };
@@ -305,6 +309,25 @@ export function StudyAnnotationTools({
       saved = [];
     }
     saved.forEach((item) => wrapInlineHighlight(surface, item));
+
+    const sourceNotes = readStorageList<FavoriteAnnotationItem>(FAVORITE_ANNOTATIONS_STORAGE_KEY)
+      .filter((item) => item.sourceId === sourceId || item.id.startsWith(`${sourceId}:annotation:`))
+      .map((item) => ({
+        id: Number(item.id.slice(item.id.lastIndexOf(":") + 1)) || new Date(item.savedAt).getTime(),
+        kind: "note" as const,
+        note: item.excerpt,
+        occurrence: item.occurrence ?? 0,
+        text: item.title,
+      }));
+    setAnnotations(sourceNotes);
+
+    const focusId = new URLSearchParams(window.location.search).get("focusAnnotation");
+    const focusedNote = focusId ? readStorageList<FavoriteAnnotationItem>(FAVORITE_ANNOTATIONS_STORAGE_KEY)
+      .find((item) => item.id === focusId && (item.sourceId === sourceId || item.id.startsWith(`${sourceId}:annotation:`))) : null;
+    if (focusedNote) {
+      setIsNotesOpen(true);
+      window.requestAnimationFrame(() => focusInlineText(surface, focusedNote.title, focusedNote.occurrence ?? 0));
+    }
   }, [sourceId, surfaceRef]);
 
   useEffect(() => {
@@ -566,7 +589,9 @@ export function StudyAnnotationTools({
         excerpt: note,
         href: sourceHref,
         id,
+        occurrence: item.occurrence ?? 0,
         savedAt: new Date(item.id).toISOString(),
+        sourceId,
         sourceTitle,
         title: item.text,
       },
@@ -625,8 +650,11 @@ export function StudyAnnotationTools({
       return;
     }
 
+    const surface = surfaceRef.current;
+    const selectedRange = selectedRangeRef.current;
+    const occurrence = surface && selectedRange ? textOccurrenceForRange(surface, selectedRange, selectedText) : 0;
     setAnnotations((current) => [
-      { id: Date.now(), kind: "note", note: "", text: selectedText },
+      { id: Date.now(), kind: "note", note: "", occurrence, text: selectedText },
       ...current,
     ]);
     window.getSelection()?.removeAllRanges();
@@ -635,6 +663,10 @@ export function StudyAnnotationTools({
     setSelectionActionPosition(null);
     clearSelectionHideTimer();
     setIsNotesOpen(true);
+  }
+
+  function focusAnnotation(item: AnnotationItem) {
+    focusInlineText(surfaceRef.current, item.text, item.occurrence ?? 0);
   }
 
   function clearAllHighlights() {
@@ -710,7 +742,11 @@ export function StudyAnnotationTools({
       <button
         className={`${buttonClassName} ${isNotesOpen ? "active" : ""}`}
         data-study-annotation-toggle
-        onClick={() => setIsNotesOpen((current) => !current)}
+        onClick={() => {
+          const opening = !isNotesOpen;
+          setIsNotesOpen(opening);
+          if (opening && annotations[0]) focusAnnotation(annotations[0]);
+        }}
         type="button"
       >
         批注
@@ -780,7 +816,7 @@ export function StudyAnnotationTools({
                     <span>{item.kind === "note" ? "Note" : "Highlight"}</span>
                     <button type="button" onClick={() => removeAnnotation(item.id)}>Delete</button>
                   </div>
-                  <strong>{item.text}</strong>
+                  <button className="note-source-focus" onClick={() => focusAnnotation(item)} type="button">定位原文：{item.text}</button>
                   {item.kind === "note" ? (
                     <textarea
                       placeholder="Start typing your note"

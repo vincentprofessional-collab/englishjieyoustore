@@ -19,6 +19,7 @@ export type DailyActivityStore = {
 
 export type DailySummary = {
   date: string;
+  groupsStudied: number;
   studiedWords: number;
   newWords: number;
   reviewedWords: number;
@@ -40,16 +41,19 @@ export function localStudyDate(date = new Date()) {
   return `${year}-${month}-${day}`;
 }
 
-export function shouldOpenDailySummary(dailyTaskComplete: boolean, alreadyShownToday: boolean) {
-  return dailyTaskComplete && !alreadyShownToday;
-}
-
 export function summarizeDailyStudy(
   activity: DailyActivityStore,
   progress: Record<string, { completed?: boolean }>,
   sourceCount: number,
 ): DailySummary {
   const words = new Set(activity.events.map((event) => event.wordId));
+  const wordsByBook = new Map<string, Set<string>>();
+  for (const event of activity.events) {
+    const bookWords = wordsByBook.get(event.book) ?? new Set<string>();
+    bookWords.add(event.wordId);
+    wordsByBook.set(event.book, bookWords);
+  }
+  const groupsStudied = [...wordsByBook.values()].reduce((sum, bookWords) => sum + Math.ceil(bookWords.size / 20), 0);
   const newWords = new Set(activity.events.filter((event) => !event.isReview).map((event) => event.wordId));
   const reviewedWords = new Set(activity.events.filter((event) => event.isReview).map((event) => event.wordId));
   const latestByMode = new Map<string, DailyStudyEvent>();
@@ -78,6 +82,7 @@ export function summarizeDailyStudy(
   const completedWords = Object.values(progress).filter((entry) => entry.completed).length;
   return {
     date: activity.date,
+    groupsStudied,
     studiedWords: words.size,
     newWords: newWords.size,
     reviewedWords: reviewedWords.size,

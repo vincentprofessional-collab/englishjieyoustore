@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import { GlobalStudyInteractions } from "@/components/global-study-interactions";
 import { GlobalVocabularySearch } from "@/components/global-vocabulary-search";
 import { IeltsSectionShell } from "@/components/ielts-section-shell";
+import { LearningProgressConsentPrompt } from "@/components/learning-progress-consent-prompt";
 import { SiteAnalyticsTracker } from "@/components/site-analytics-tracker";
 import { SiteFooter } from "@/components/site-footer";
 import { MobileBottomNav, SiteNav } from "@/components/site-nav";
@@ -42,6 +43,7 @@ export default async function RootLayout({
       <body>
         <main className="shell">
           <SiteNav config={renderedSiteChromeConfig} />
+          <LearningProgressConsentPrompt />
           <MobileBottomNav />
           <Suspense fallback={null}>
             <GlobalVocabularySearch />

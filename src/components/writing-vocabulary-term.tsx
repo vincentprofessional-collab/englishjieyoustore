@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import type { WritingVocabularyItem } from "@/lib/ielts/writing";
 
 type FavoriteWordItem = {
@@ -20,6 +20,7 @@ type FavoriteAnnotationItem = {
   href: string;
   id: string;
   savedAt: string;
+  sourceId?: string;
   sourceTitle: string;
   title: string;
 };
@@ -77,7 +78,9 @@ export function WritingVocabularyTerm({
   const noteId = id.replace(":term:", ":note:");
   const [isFavorite, setIsFavorite] = useState(false);
   const [editingNote, setEditingNote] = useState(false);
+  const [isFocusedNote, setIsFocusedNote] = useState(false);
   const [noteDraft, setNoteDraft] = useState("");
+  const termRef = useRef<HTMLSpanElement | null>(null);
 
   useEffect(() => {
     function refreshStorageState() {
@@ -85,6 +88,11 @@ export function WritingVocabularyTerm({
       const favoriteNotes = readStorageList<FavoriteAnnotationItem>(FAVORITE_ANNOTATIONS_STORAGE_KEY);
       setIsFavorite(favoriteWords.some((favorite) => favorite.id === id));
       setNoteDraft(favoriteNotes.find((favorite) => favorite.id === noteId)?.excerpt ?? "");
+
+      if (new URLSearchParams(window.location.search).get("focusAnnotation") === noteId) {
+        setIsFocusedNote(true);
+        window.requestAnimationFrame(() => termRef.current?.scrollIntoView({ behavior: "smooth", block: "center" }));
+      }
     }
 
     refreshStorageState();
@@ -136,6 +144,7 @@ export function WritingVocabularyTerm({
           href: sourceHref,
           id: noteId,
           savedAt: new Date().toISOString(),
+          sourceId: `writing:${sourceKey}`,
           sourceTitle,
           title: item.term,
         },
@@ -149,7 +158,7 @@ export function WritingVocabularyTerm({
   }
 
   return (
-    <span className={`writing-vocabulary-term ${className}`.trim()} tabIndex={0}>
+    <span className={`writing-vocabulary-term ${isFocusedNote ? "favorite-note-focus" : ""} ${className}`.trim()} ref={termRef} tabIndex={0}>
       {children ?? item.term}
       <span className="writing-vocabulary-tooltip" role="tooltip">
         <span className="writing-vocabulary-tooltip-actions">

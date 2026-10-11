@@ -173,7 +173,7 @@ export function BbcSyntaxInlineEditor({
     const normalizedPos = nextPos.trim().slice(0, 32);
     if (!selection || !normalizedPos) return;
     const tokens = data.tokens.map((token, index) =>
-      index >= selection.start && index < selection.end && token.pos !== "PUNCT" ? { ...token, pos: normalizedPos } : token,
+      index >= selection.start && index < selection.end && token.pos !== "PUNCT" ? { ...token, pos: normalizedPos, posLabel: undefined } : token,
     );
     onSentenceChange({ ...data, tokens });
     setPos(normalizedPos);

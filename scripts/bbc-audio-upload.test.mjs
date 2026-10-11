@@ -15,12 +15,25 @@ function loadFunctions(path, names, globals, prefix = "") {
   return runInNewContext(`${code}\n${names.at(-1)};`, globals);
 }
 
-function loadPasteParser() {
+function loadPastedSyntaxModule() {
   const exports = {};
-  const code = ts.transpileModule(readFileSync(new URL("../src/lib/articles/bbc-article-upload.ts", import.meta.url), "utf8"), {
+  const code = ts.transpileModule(readFileSync(new URL("../src/lib/articles/bbc-pasted-syntax.ts", import.meta.url), "utf8"), {
     compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 },
   }).outputText;
   runInNewContext(code, { exports });
+  return exports;
+}
+
+function loadPasteParser() {
+  const exports = {};
+  const syntax = loadPastedSyntaxModule();
+  const code = ts.transpileModule(readFileSync(new URL("../src/lib/articles/bbc-article-upload.ts", import.meta.url), "utf8"), {
+    compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 },
+  }).outputText;
+  runInNewContext(code, { exports, require: (specifier) => {
+    if (specifier === "@/lib/articles/bbc-pasted-syntax") return syntax;
+    throw new Error(`Unexpected test dependency: ${specifier}`);
+  } });
   return exports.parseBbcArticlePaste;
 }
 
@@ -66,6 +79,44 @@ test("BBC explicit headings and vocabulary without IPA work; numbered prose rema
   assert.equal(result.vocabulary[0].term, "mixed reactions");
   assert.equal(result.vocabulary[0].partOfSpeech, "n.");
   assert.match(parse("260803-Test 测试\nOnly English prose."), /中文翻译/);
+});
+
+test("BBC upload removes appended sentence syntax notes and maps authored POS/components back to the source sentence", () => {
+  const input = `260803-Gen Z's love of the past 热衷怀旧的“Z世代”
+Today's youth are reinventing what it means to be cool.
+当今的年轻人正在重新定义“酷”的含义。
+
+# 全文逐句词性+句子成分标注
+## 句1
+Today's youth are reinventing what it means to be cool.
+Today's：形容词性物主代词（定语）
+youth：名词（主语）
+are：助动词（谓语一部分）
+reinventing：现在分词（谓语一部分）
+what：连接代词（宾语）
+>主干：youth【主】 are reinventing【谓】 what it means to be cool【宾语从句】
+
+词汇表
+1. cool adj. 酷的
+例句：That looks cool.`;
+  const result = loadPasteParser()(input);
+  assert.equal(typeof result, "object");
+  assert.equal(result.english, "Today's youth are reinventing what it means to be cool.");
+  assert.equal(result.vocabulary.length, 1);
+  assert.equal(result.syntaxAnnotations.length, 1);
+  assert.equal(result.syntaxAnnotations[0].items[0].term, "Today's");
+
+  const sentence = result.syntaxAnnotations[0].text;
+  const tokens = [...sentence.matchAll(/[A-Za-z0-9]+(?:['’-][A-Za-z0-9]+)*|[^\s]/g)].map((match) => ({
+    text: match[0], pos: /^[A-Za-z0-9]/.test(match[0]) ? "X" : "PUNCT", start: match.index, end: match.index + match[0].length,
+  }));
+  const applied = loadPastedSyntaxModule().applyPastedBbcSyntax({
+    text: sentence, tokens, level1: [], level2: [], level3: [], level4: [], level5: [], status: "draft",
+  }, result.syntaxAnnotations);
+  assert.equal(applied.status, "reviewed");
+  assert.equal(applied.tokens[0].pos, "DET");
+  assert.equal(applied.tokens[0].posLabel, "形容词性物主代词");
+  assert.equal(applied.level1.length, 3);
 });
 
 test("PUT presigns require the upload credential pair and never use playback credentials", () => {

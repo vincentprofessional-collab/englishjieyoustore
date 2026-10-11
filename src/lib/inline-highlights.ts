@@ -45,6 +45,35 @@ function rangeFor(root: HTMLElement, text: string, occurrence: number) {
   return range;
 }
 
+export function textOccurrenceForRange(root: HTMLElement, range: Range, text: string) {
+  const start = textOffset(root, range.startContainer, range.startOffset);
+  return Math.max(0, (root.textContent?.slice(0, start).split(text).length ?? 1) - 1);
+}
+
+export function focusInlineText(root: HTMLElement | null, text: string, occurrence = 0) {
+  if (!root || !text.trim()) return false;
+  root.querySelectorAll("mark.inline-annotation-focus").forEach((marker) => {
+    const parent = marker.parentNode;
+    if (!parent) return;
+    while (marker.firstChild) parent.insertBefore(marker.firstChild, marker);
+    parent.removeChild(marker);
+    parent.normalize();
+  });
+  const range = rangeFor(root, text, occurrence);
+  if (!range || range.collapsed) return false;
+  const marker = document.createElement("mark");
+  marker.className = "inline-user-highlight inline-annotation-focus";
+  try {
+    range.surroundContents(marker);
+  } catch {
+    const contents = range.extractContents();
+    marker.appendChild(contents);
+    range.insertNode(marker);
+  }
+  marker.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+  return true;
+}
+
 export function restoreInlineHighlights(root: HTMLElement, key: string) {
   let saved: PersistedInlineHighlight[] = [];
   try {

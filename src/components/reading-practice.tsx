@@ -30,7 +30,7 @@ import {
   STUDY_SELECTION_ACTION_TIMEOUT_MS,
   type StudySelectionActionPosition,
 } from "@/lib/study-selection";
-import { clearPersistedInlineHighlights, inlineHighlightKey, persistInlineHighlight, restoreInlineHighlights } from "@/lib/inline-highlights";
+import { clearPersistedInlineHighlights, focusInlineText, inlineHighlightKey, persistInlineHighlight, restoreInlineHighlights, textOccurrenceForRange } from "@/lib/inline-highlights";
 
 type AnswerMap = Record<number, string[]>;
 type FillMap = Record<number, string>;
@@ -44,13 +44,16 @@ type AnnotationItem = {
   id: number;
   kind: "note" | "highlight";
   note: string;
+  occurrence?: number;
   text: string;
 };
 type FavoriteAnnotationItem = {
   excerpt: string;
   href: string;
   id: string;
+  occurrence?: number;
   savedAt: string;
+  sourceId?: string;
   sourceTitle: string;
   title: string;
 };
@@ -982,6 +985,36 @@ export function ReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: 
     if (pageRef.current) restoreInlineHighlights(pageRef.current, highlightStorageKey);
   }, [highlightStorageKey]);
 
+  useEffect(() => {
+    const currentPath = getCurrentReadingHref();
+    const savedNotes = readFavoriteAnnotations().filter((item) => {
+      if (item.sourceId) return item.sourceId === highlightStorageKey;
+      try {
+        return new URL(item.href, window.location.origin).pathname === currentPath;
+      } catch {
+        return item.id.startsWith(`reading:${test.id}:annotation:`);
+      }
+    });
+    const restoredNotes = savedNotes.map((item) => ({
+      id: Number(item.id.slice(item.id.lastIndexOf(":") + 1)) || new Date(item.savedAt).getTime(),
+      kind: "note" as const,
+      note: item.excerpt,
+      occurrence: item.occurrence ?? 0,
+      text: item.title,
+    }));
+    setAnnotations(restoredNotes);
+
+    const params = new URLSearchParams(window.location.search);
+    const focusId = params.get("focusAnnotation");
+    const focusedNote = savedNotes.find((item) => item.id === focusId);
+    if (focusedNote) {
+      setIsNotesOpen(true);
+      window.requestAnimationFrame(() =>
+        focusInlineText(pageRef.current, focusedNote.title, focusedNote.occurrence ?? Number(params.get("focusOccurrence")) ?? 0),
+      );
+    }
+  }, [highlightStorageKey, mode, test.id]);
+
   const allChoiceQuestions = useMemo(
     () => parts.flatMap((part) =>
       part.questionBlocks.flatMap((block) => block.type === "choice" ? block.questions : []),
@@ -1340,7 +1373,9 @@ export function ReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: 
       excerpt: noteText,
       href: getCurrentReadingHref(),
       id,
+      occurrence: item.occurrence ?? 0,
       savedAt: new Date(item.id).toISOString(),
+      sourceId: highlightStorageKey,
       sourceTitle: `reading ${test.bookTitle} Test ${test.testNo} ${activePart.label}`,
       title: sourceText,
     };
@@ -1428,11 +1463,16 @@ export function ReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: 
       return;
     }
 
+    const selectedRange = selectedRangeRef.current;
+    const occurrence = pageRef.current && selectedRange
+      ? textOccurrenceForRange(pageRef.current, selectedRange, selectedText)
+      : 0;
     setAnnotations((current) => [
       {
         id: Date.now(),
         kind,
         note: "",
+        occurrence,
         text: selectedText,
       },
       ...current,
@@ -1442,6 +1482,16 @@ export function ReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: 
     selectedRangeRef.current = null;
     clearSelectionHideTimer();
     setIsNotesOpen(true);
+  }
+
+  function focusAnnotation(item: AnnotationItem) {
+    focusInlineText(pageRef.current, item.text, item.occurrence ?? 0);
+  }
+
+  function toggleNotesPanel() {
+    const opening = !isNotesOpen;
+    setIsNotesOpen(opening);
+    if (opening && annotations[0]) focusAnnotation(annotations[0]);
   }
 
   function clearAllInlineHighlights() {
@@ -1579,7 +1629,7 @@ export function ReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: 
             className={`annotation-toggle ielts-exam-action ${isNotesOpen ? "active" : ""}`}
             data-study-annotation-toggle
             type="button"
-            onClick={() => setIsNotesOpen((value) => !value)}
+            onClick={toggleNotesPanel}
           >
             批注
           </button>
@@ -1954,6 +2004,9 @@ export function ReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: 
                     </button>
                   </div>
                   <strong>{item.text}</strong>
+                  <button className="note-source-focus" onClick={() => focusAnnotation(item)} type="button">
+                    定位原文
+                  </button>
                   {item.kind === "note" ? (
                     <textarea
                       placeholder="Start typing your note"

@@ -5,6 +5,9 @@ import { getNewConceptMediaUrls } from "@/lib/new-concept-media";
 import { supabase } from "@/lib/supabase/client";
 import { getPublicStorageUrl } from "@/lib/supabase/storage";
 import { normalizeLookupWord } from "@/lib/vocabulary/local-vocabulary";
+import workbookUsageExamples from "@/data/vocabulary/workbook-usage-examples.json";
+
+const WORKBOOK_USAGE_EXAMPLES = workbookUsageExamples as Record<string, { englishText: string; chineseText: string }>;
 
 export type VocabularyUsageExample = {
   audioUrl: string | null;
@@ -15,7 +18,7 @@ export type VocabularyUsageExample = {
   sentenceNo: number;
   sourceId: string;
   sourceTitle: string;
-  sourceType: "new-concept" | "listening" | "reading" | "article" | "manual";
+  sourceType: "workbook" | "new-concept" | "listening" | "reading" | "article" | "manual";
   testNo: number;
 };
 
@@ -156,6 +159,24 @@ function getBbcUsageExamples(wordForms: Set<string>, limit: number) {
   return examples;
 }
 
+function getWorkbookUsageExample(word: string): VocabularyUsageExample | null {
+  const example = WORKBOOK_USAGE_EXAMPLES[word];
+  if (!example?.englishText.trim() || !example.chineseText.trim()) return null;
+
+  return {
+    audioUrl: null,
+    bookCode: "vocabulary-workbook",
+    chineseText: example.chineseText,
+    englishText: example.englishText,
+    id: `workbook:${word}`,
+    sentenceNo: 0,
+    sourceId: "词汇总表20240307",
+    sourceTitle: "词汇总表 · 双语例句",
+    sourceType: "workbook",
+    testNo: 0,
+  };
+}
+
 function getNewConceptUsageExamples(wordForms: Set<string>, limit: number) {
   const examples: VocabularyUsageExample[] = [];
   const seenSentences = new Set<string>();
@@ -222,6 +243,12 @@ export function prioritizeVocabularyUsageExamples(...groups: VocabularyUsageExam
   return examples;
 }
 
+function compareUsageExampleBrevity(left: VocabularyUsageExample, right: VocabularyUsageExample) {
+  return Number(!left.chineseText.trim()) - Number(!right.chineseText.trim())
+    || left.englishText.trim().split(/\s+/).filter(Boolean).length - right.englishText.trim().split(/\s+/).filter(Boolean).length
+    || left.englishText.length - right.englishText.length;
+}
+
 export async function getVocabularyUsageExamples(
   word: string,
   limit = 5,
@@ -235,10 +262,11 @@ export async function getVocabularyUsageExamples(
     return [];
   }
 
-  const newConceptExamples = getNewConceptUsageExamples(wordForms, maximumExamples);
-  const listeningLimit = maximumExamples - newConceptExamples.length;
+  const workbookExample = getWorkbookUsageExample(normalizedWord);
+  if (workbookExample) return [workbookExample];
 
-  if (listeningLimit === 0) return newConceptExamples;
+  const candidateLimit = maximumExamples * 6;
+  const newConceptExamples = getNewConceptUsageExamples(wordForms, candidateLimit);
 
   const { data: transcriptRows, error: transcriptError } = await supabase
     .from("transcript_sentences")
@@ -250,24 +278,24 @@ export async function getVocabularyUsageExamples(
         .join(","),
     )
     .order("sentence_no", { ascending: true })
-    .limit(listeningLimit * 6);
+    .limit(candidateLimit * 6);
 
   if (transcriptError || !transcriptRows?.length) {
     return prioritizeVocabularyUsageExamples(
       newConceptExamples,
-      getBbcUsageExamples(wordForms, listeningLimit),
-    ).slice(0, maximumExamples);
+      getBbcUsageExamples(wordForms, candidateLimit),
+    ).sort(compareUsageExampleBrevity).slice(0, maximumExamples);
   }
 
   const sentences = (transcriptRows as TranscriptSentenceRow[])
     .filter((sentence) => sentence.audio_path && matchesUsageExampleWord(sentence.english_text, wordForms))
-    .slice(0, listeningLimit);
+    .slice(0, candidateLimit);
 
   if (sentences.length === 0) {
     return prioritizeVocabularyUsageExamples(
       newConceptExamples,
-      getBbcUsageExamples(wordForms, listeningLimit),
-    ).slice(0, maximumExamples);
+      getBbcUsageExamples(wordForms, candidateLimit),
+    ).sort(compareUsageExampleBrevity).slice(0, maximumExamples);
   }
 
   const sectionIds = [...new Set(sentences.map((sentence) => sentence.section_id).filter(Boolean))];
@@ -317,9 +345,9 @@ export async function getVocabularyUsageExamples(
     };
   });
 
-  const prioritizedExamples = prioritizeVocabularyUsageExamples(newConceptExamples, listeningExamples);
   return prioritizeVocabularyUsageExamples(
-    prioritizedExamples,
-    getBbcUsageExamples(wordForms, maximumExamples - prioritizedExamples.length),
-  ).slice(0, maximumExamples);
+    newConceptExamples,
+    listeningExamples,
+    getBbcUsageExamples(wordForms, candidateLimit),
+  ).sort(compareUsageExampleBrevity).slice(0, maximumExamples);
 }

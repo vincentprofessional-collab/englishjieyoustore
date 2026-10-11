@@ -9,7 +9,7 @@ export type BbcSyntaxLayerKey = `level${BbcSyntaxLevel}`;
 export type BbcSyntaxSpan = { label: string; start: number; end: number };
 export type BbcSyntaxSentenceData = {
   text: string;
-  tokens: { text: string; pos: string; start: number; end: number }[];
+  tokens: { text: string; pos: string; posLabel?: string; start: number; end: number }[];
   level1: BbcSyntaxSpan[];
   level2: BbcSyntaxSpan[];
   level3?: BbcSyntaxSpan[];
@@ -38,7 +38,7 @@ function role(label: string) {
   if (label.includes("时间")) return styles.temporal;
   if (label.includes("主语")) return styles.subject;
   if (label.includes("谓语")) return styles.predicate;
-  if (label.includes("宾语")) return styles.object;
+  if (label.includes("宾语") || label.includes("宾补")) return styles.object;
   if (label.includes("表语")) return styles.predicative;
   if (label.includes("状语")) return styles.adverbial;
   if (label.includes("定语")) return styles.attributive;
@@ -310,7 +310,7 @@ export function BbcSyntaxSentence({
     return (
       <span className={`${styles.word} ${highlighted ? styles.highlight : ""} ${waved.has(index) ? styles.wave : ""}`} data-token-index={index} key={index} style={gapAfter ? { marginRight: `${gapAfter}em` } : undefined}>
         <span className={styles.wordText} data-word-text>{token.text}</span>
-        {showPos ? <span className={`${styles.pos} ${token.pos === "PUNCT" || lexical.length === 0 ? styles.posPlaceholder : ""} ${onPosTokenClick && token.pos !== "PUNCT" && lexical.length > 0 ? styles.editableMark : ""}`} onClick={() => onPosTokenClick?.(index)}>{token.pos === "PUNCT" || lexical.length === 0 ? "　" : POS_LABELS[token.pos] ?? token.pos}</span> : null}
+        {showPos ? <span className={`${styles.pos} ${token.pos === "PUNCT" || lexical.length === 0 ? styles.posPlaceholder : ""} ${onPosTokenClick && token.pos !== "PUNCT" && lexical.length > 0 ? styles.editableMark : ""}`} onClick={() => onPosTokenClick?.(index)}>{token.pos === "PUNCT" || lexical.length === 0 ? "　" : token.posLabel ?? POS_LABELS[token.pos] ?? token.pos}</span> : null}
         {hasSentenceInlineAnnotations && showPos ? (
           <span className={styles.annotationPosTrack}>
             <span className={`${styles.annotationPos} ${inlineAnnotation?.partOfSpeech && hasInlineLabel ? "" : styles.annotationPosPlaceholder}`}>

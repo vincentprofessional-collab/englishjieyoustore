@@ -8,6 +8,7 @@ import { parseBbcArticleDateFromTitle, parseBbcArticlePaste, splitBbcArticlePara
 import type { BbcArticle, BbcVocabularyItem } from "@/lib/articles/bbc";
 import { extractBbcWaveText } from "@/lib/articles/bbc-paste-markup";
 import { buildAutomaticBbcSyntax } from "@/lib/articles/bbc-automatic-syntax";
+import { applyPastedBbcSyntax, type PastedBbcSyntaxSentence } from "@/lib/articles/bbc-pasted-syntax";
 
 export const runtime = "nodejs";
 
@@ -167,6 +168,10 @@ function splitChineseSentences(paragraph: string) {
     .filter(Boolean);
 }
 
+function syntaxMatchKey(value: string) {
+  return value.replace(/[‘’]/g, "'").replace(/\s+/g, " ").trim().toLowerCase();
+}
+
 function buildPracticeSentences(body: string[], chineseParagraphs: string[]) {
   let sentenceNo = 0;
   return body.flatMap((paragraph, paragraphIndex) => {
@@ -236,6 +241,9 @@ function buildArticle(payload: Record<string, unknown>, objectPath: string): Bbc
 
   const fullAudioUrl = objectPath ? `/api/bbc-audio/${parsedDate.year}/${parsedDate.id}/${objectPath.slice(expectedPrefix.length)}` : undefined;
   const sentences = buildPracticeSentences(body, chineseParagraphs);
+  const syntaxAnnotations = Array.isArray(payload.syntaxAnnotations)
+    ? payload.syntaxAnnotations as PastedBbcSyntaxSentence[]
+    : [];
   return {
     ...(fullAudioUrl ? { audioUrl: fullAudioUrl, fullAudioUrl } : {}),
     body: body.map((paragraph) => extractBbcWaveText(paragraph).text),
@@ -245,7 +253,10 @@ function buildArticle(payload: Record<string, unknown>, objectPath: string): Bbc
     id: parsedDate.id,
     lead: titleChinese,
     sentences,
-    syntaxSentences: sentences.map((sentence) => buildAutomaticBbcSyntax(sentence.english)),
+    syntaxSentences: sentences.map((sentence) => applyPastedBbcSyntax(
+      buildAutomaticBbcSyntax(sentence.english),
+      syntaxAnnotations,
+    )),
     title,
     titleChinese: titleChinese || undefined,
     vocabulary,
@@ -268,7 +279,9 @@ export async function POST(request: NextRequest) {
       const article = buildArticle(parsed, "");
       if (typeof article === "string") return NextResponse.json({ error: article }, { status: 400 });
       if (getBbcArticleById(article.id)) return NextResponse.json({ error: "内置文章正文由原有内容库维护，语法标注请在前端精读页面修改。" }, { status: 409 });
-      return NextResponse.json({ article });
+      const annotatedSentences = new Set(parsed.syntaxAnnotations.map((item) => syntaxMatchKey(item.text)));
+      const pastedSyntaxCount = article.sentences?.filter((sentence) => annotatedSentences.has(syntaxMatchKey(sentence.english))).length ?? 0;
+      return NextResponse.json({ article, pastedSyntaxCount });
     } catch (cause) { return NextResponse.json({ error: cause instanceof Error ? cause.message : "文章分析失败。" }, { status: 400 }); }
   }
   const title = typeof payload?.title === "string" ? payload.title : "";

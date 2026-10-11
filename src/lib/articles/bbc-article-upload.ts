@@ -1,4 +1,5 @@
 import type { BbcVocabularyItem } from "@/lib/articles/bbc";
+import { parsePastedBbcSyntaxBlock, type PastedBbcSyntaxSentence } from "@/lib/articles/bbc-pasted-syntax";
 
 export type BbcArticleDateFromTitle = {
   date: string;
@@ -51,6 +52,7 @@ export type ParsedBbcArticlePaste = {
   english: string;
   chinese: string;
   vocabulary: BbcVocabularyItem[];
+  syntaxAnnotations: PastedBbcSyntaxSentence[];
 };
 
 function stripPasteMarkup(value: string) {
@@ -132,7 +134,8 @@ function parsePastedVocabulary(lines: string[]): BbcVocabularyItem[] | string {
 }
 
 export function parseBbcArticlePaste(value: string): ParsedBbcArticlePaste | string {
-  const lines = value.replace(/^\uFEFF/, "").replace(/\r\n?/g, "\n").split("\n");
+  const extracted = parsePastedBbcSyntaxBlock(value);
+  const lines = extracted.articleText.replace(/^\uFEFF/, "").replace(/\r\n?/g, "\n").split("\n");
   const titleIndex = lines.findIndex((line) => line.trim());
   if (titleIndex < 0) return "请粘贴 BBC 文章全文。";
   const dateTitle = stripPasteMarkup(lines[titleIndex].replace(/^\s*#{1,6}\s*/, ""));
@@ -197,5 +200,6 @@ export function parseBbcArticlePaste(value: string): ParsedBbcArticlePaste | str
     english: englishParagraphs.join("\n\n"),
     chinese: chineseParagraphs.join("\n\n"),
     vocabulary,
+    syntaxAnnotations: extracted.sentences,
   };
 }

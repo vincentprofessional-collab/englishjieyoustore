@@ -9,7 +9,8 @@ const code = ts.transpileModule(readFileSync(new URL("../src/lib/vocabulary/stud
   compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 },
 }).outputText;
 runInNewContext(code, { exports });
-const { getConciseStudyDefinition, maskStudyExample } = exports;
+const { compareStudyExamples, getConciseStudyDefinition, maskStudyExample } = exports;
+const workbookExamples = JSON.parse(readFileSync(new URL("../src/data/vocabulary/workbook-usage-examples.json", import.meta.url), "utf8"));
 
 test("study meanings preserve each part of speech and two concise senses without inflection notes", () => {
   assert.equal(getConciseStudyDefinition("adj. 持久的；永恒的 / n. [纺] 厚实斜纹织物 / v. 持续；维持（last的ing形式）；支持"), "adj. 持久的；永恒的\nn. 厚实斜纹织物\nv. 持续；维持");
@@ -27,4 +28,21 @@ test("bilingual cloze masks the inflected target and its Chinese meaning while r
 test("unmatched paraphrases never disclose Chinese answers and unrelated examples are rejected", () => {
   assert.equal(maskStudyExample("An aberrant result.", "这个结果与众不同。", "aberrant", [], "adj. 异常的；畸变的").chinese, "______");
   assert.equal(maskStudyExample("A different word.", "别的词。", "aberrant", [], "adj. 异常的").matched, false);
+});
+
+test("workbook examples take priority, then shorter bilingual examples", () => {
+  const workbook = { english: "A somewhat longer workbook sentence.", chinese: "Excel 翻译。", sourceType: "workbook" };
+  const shorterFallback = { english: "A book.", chinese: "一本书。", sourceType: "listening" };
+  const longerFallback = { english: "A much longer fallback sentence.", chinese: "更长的翻译。", sourceType: "manual" };
+  assert.ok(compareStudyExamples(workbook, shorterFallback) < 0);
+  assert.ok(compareStudyExamples(shorterFallback, longerFallback) < 0);
+});
+
+test("imported workbook examples are bilingual and available for vocabulary lookup", () => {
+  assert.ok(Object.keys(workbookExamples).length > 18000);
+  assert.deepEqual(workbookExamples.apple, {
+    englishText: "I eat an apple every day.",
+    chineseText: "我每天吃一个苹果。",
+  });
+  assert.ok(Object.values(workbookExamples).every((example) => example.englishText.trim() && example.chineseText.trim()));
 });

@@ -23,7 +23,7 @@ import { VocabularyInlinePronunciation } from "@/components/vocabulary-pronuncia
 import { VocabularyLookupDisplaySection } from "@/components/vocabulary-lookup-display-section";
 import { VocabularyShareButton } from "@/components/vocabulary-share-button";
 import { VocabularyExcelImport } from "@/components/vocabulary-excel-import";
-import { getConciseStudyDefinition, maskStudyExample } from "@/lib/vocabulary/study-definition";
+import { compareStudyExamples, getConciseStudyDefinition, maskStudyExample } from "@/lib/vocabulary/study-definition";
 import { VocabularyVideoPlayer } from "@/components/vocabulary-video-player";
 import { drawBrowseMode, filterBrowseReviewWords, nextBrowseLoopId, scheduleBrowseReview } from "@/lib/vocabulary/browse-review";
 import { updateBrowseSpellingMistakes, type BrowseSpellingMistakeStore } from "@/lib/vocabulary/browse-spelling";
@@ -42,7 +42,7 @@ import type { VocabularyPhraseMatch } from "@/lib/vocabulary/phrases";
 import { getVocabularyAudioUrl } from "@/lib/vocabulary/pronunciation-audio";
 import { getSpellingCharacterFeedback } from "@/lib/vocabulary/spelling-feedback";
 import { scheduleReview, selectEnabledMode } from "@/lib/vocabulary/review-scheduler";
-import { localStudyDate, shouldOpenDailySummary, summarizeDailyStudy, type DailyActivityStore, type DailyMode, type DailyOutcome } from "@/lib/vocabulary/daily-summary";
+import { localStudyDate, summarizeDailyStudy, type DailyActivityStore, type DailyMode, type DailyOutcome, type DailySummary } from "@/lib/vocabulary/daily-summary";
 import { filterProgressWordIds, type VocabularyMode, type VocabularyOutcome } from "@/lib/vocabulary/progress-filters";
 
 type CollectionKey = "familiar" | "vague" | "unfamiliar";
@@ -162,10 +162,9 @@ type VocabularyVideoPayload = {
 
 const STORAGE_KEY = "ielts-vocabulary-learning-v1";
 const SETTINGS_STORAGE_KEY = "ielts-vocabulary-learning-settings-v1";
+const REACTION_SETTINGS_MIGRATION_KEY = "ielts-vocabulary-reaction-defaults-10s-v1";
 const STUDY_PAUSED_STORAGE_KEY = "ielts-vocabulary-learning-paused-v1";
 const DAILY_ACTIVITY_STORAGE_KEY = "ielts-vocabulary-daily-activity-v1";
-const LEGACY_PENDING_DAILY_SUMMARY_KEY = "ielts-vocabulary-pending-daily-summary-v1";
-const DAILY_SUMMARY_SHOWN_KEY = "ielts-vocabulary-daily-summary-shown-v1";
 const GROUP_PROGRESS_KEY = "ielts-vocabulary-group-progress-v1";
 const GROUP_SIZE = 20;
 const DAILY_ENCOURAGEMENTS = ["又是元气满满的一天", "不积跬步，无以至千里", "今天的坚持，会成为明天的底气", "每记住一个词，世界就多开一扇窗"];
@@ -184,9 +183,9 @@ const REACTION_TIME_OPTIONS: Array<{ category: ProgressCategory; label: string }
   { category: "writing", label: "写作" },
 ];
 const DEFAULT_REACTION_SECONDS: Record<ProgressCategory, number> = {
-  reading: 4,
-  speaking: 4,
-  listening: 4,
+  reading: 10,
+  speaking: 10,
+  listening: 10,
   writing: 10,
 };
 const DEFAULT_STUDY_SETTINGS: StudySettings = {
@@ -216,7 +215,7 @@ function isQualityNoticeBook(book: string): boolean {
   return QUALITY_NOTICE_BOOKS.some((item) => item === book);
 }
 
-async function createDailySummaryImage(summary: ReturnType<typeof summarizeDailyStudy>, message: string) {
+async function createDailySummaryImage(summary: DailySummary, message: string, capturedAt: Date) {
   const canvas = document.createElement("canvas");
   canvas.width = 1080;
   canvas.height = 1350;
@@ -240,20 +239,18 @@ async function createDailySummaryImage(summary: ReturnType<typeof summarizeDaily
   context.fillText("每日词汇记录", 86, 112);
   context.fillStyle = "#777064";
   context.font = '24px "Songti SC", "Noto Serif SC", serif';
-  context.fillText(date, 86, 158);
+  context.fillText(`${date} · ${capturedAt.toLocaleTimeString("zh-CN", { hour: "2-digit", minute: "2-digit" })}`, 86, 158);
   context.fillStyle = "#111";
   context.font = '700 58px "Songti SC", "Noto Serif SC", serif';
   context.fillText("今天的努力，看得见", 86, 248);
 
   const metrics = [
-    ["今日学习", `${summary.studiedWords} 个`],
-    ["新学词汇", `${summary.newWords} 个`],
-    ["复习词汇", `${summary.reviewedWords} 个`],
-    ["每日任务", summary.dailyTaskComplete ? "已完成" : `${summary.newWords}/${summary.dailyGoal}`],
+    ["学习组数", `${summary.groupsStudied} 组`],
+    ["学习词汇", `${summary.studiedWords} 个`],
   ];
   metrics.forEach(([label, value], index) => {
-    const x = index % 2 === 0 ? 86 : 548;
-    const y = index < 2 ? 294 : 452;
+    const x = index === 0 ? 86 : 548;
+    const y = 294;
     context.fillStyle = "#f0f7f4";
     context.beginPath();
     context.roundRect(x, y, 446, 132, 22);
@@ -265,63 +262,45 @@ async function createDailySummaryImage(summary: ReturnType<typeof summarizeDaily
     context.font = '700 38px "Songti SC", "Noto Serif SC", serif';
     context.fillText(value, x + 28, y + 98);
   });
-
-  context.fillStyle = "#111";
-  context.font = '700 30px "Songti SC", "Noto Serif SC", serif';
-  context.fillText("今日背词统计", 86, 642);
-  const wordBars = [
-    ["今日学习", summary.studiedWords, "#367aa0"],
-    ["新学词汇", summary.newWords, "#4c91bd"],
-    ["复习词汇", summary.reviewedWords, "#c8952e"],
-  ] as const;
-  const maxWordCount = Math.max(1, ...wordBars.map(([, count]) => count));
-  wordBars.forEach(([label, count, color], index) => {
-    const y = 680 + index * 48;
-    context.fillStyle = "#4e554f";
-    context.font = '24px "Songti SC", "Noto Serif SC", serif';
-    context.fillText(label, 86, y + 18);
-    context.fillStyle = "#e8e8e1";
-    context.beginPath();
-    context.roundRect(260, y, 650, 18, 9);
-    context.fill();
-    const barWidth = 650 * count / maxWordCount;
-    if (barWidth > 0) {
-      context.fillStyle = color;
-      context.beginPath();
-      context.roundRect(260, y, barWidth, 18, 9);
-      context.fill();
-    }
-    context.fillStyle = "#111";
-    context.font = '700 24px "Songti SC", "Noto Serif SC", serif';
-    context.textAlign = "right";
-    context.fillText(String(count), 994, y + 18);
-    context.textAlign = "left";
-  });
-
-  context.fillStyle = "#111";
-  context.font = '700 30px "Songti SC", "Noto Serif SC", serif';
-  context.fillText("总进度", 86, 858);
-  const completion = summary.sourceCount > 0 ? Math.min(1, summary.completedWords / summary.sourceCount) : 0;
-  context.fillStyle = "#e2e2dc";
-  context.beginPath();
-  context.roundRect(86, 886, 908, 18, 9);
-  context.fill();
-  context.fillStyle = "#367aa0";
-  context.beginPath();
-  context.roundRect(86, 886, 908 * completion, 18, 9);
-  context.fill();
-  context.fillStyle = "#555";
-  context.font = '24px "Songti SC", "Noto Serif SC", serif';
-  context.fillText(`${summary.completedWords.toLocaleString()} / ${summary.sourceCount.toLocaleString()} 个 · ${Math.round(completion * 100)}%`, 86, 946);
+  context.fillStyle = "#777064";
+  context.font = '20px "Songti SC", "Noto Serif SC", serif';
+  context.fillText("每组按 20 个词统计，不足 20 个词也计为一组。", 86, 466);
 
   const modes: Array<[DailyMode, string]> = [["reading", "阅读"], ["listening", "听力"], ["speaking", "口语"], ["writing", "写作"]];
   context.fillStyle = "#111";
   context.font = '700 30px "Songti SC", "Noto Serif SC", serif';
-  context.fillText("今日练习", 86, 1014);
-  context.font = '26px "Songti SC", "Noto Serif SC", serif';
-  context.fillStyle = "#3f4843";
-  context.fillText(modes.map(([key, label]) => `${label} ${summary.modes[key]}`).join("　 ·　 "), 86, 1062);
-  context.fillText(`熟悉 ${summary.familiar}　·　模糊 ${summary.vague}　·　生僻 ${summary.unfamiliar}`, 86, 1110);
+  context.fillText("各项练习熟悉度", 86, 526);
+  const tableX = 86;
+  const tableY = 552;
+  const columnWidths = [282, 224, 224, 224];
+  const rowHeight = 78;
+  context.fillStyle = "#eaf1f5";
+  context.beginPath();
+  context.roundRect(tableX, tableY, 908, rowHeight * 5, 18);
+  context.fill();
+  context.fillStyle = "#245d7b";
+  context.font = '700 23px "Songti SC", "Noto Serif SC", serif';
+  ["练习方式", "熟悉", "模糊", "生僻"].forEach((label, column) => {
+    context.textAlign = column === 0 ? "left" : "center";
+    context.fillText(label, tableX + columnWidths.slice(0, column).reduce((sum, value) => sum + value, 0) + (column === 0 ? 24 : columnWidths[column] / 2), tableY + 48);
+  });
+  modes.forEach(([key, label], row) => {
+    const y = tableY + rowHeight * (row + 1);
+    context.strokeStyle = "#d5e3e9";
+    context.beginPath();
+    context.moveTo(tableX + 18, y);
+    context.lineTo(tableX + 890, y);
+    context.stroke();
+    context.fillStyle = "#3f4843";
+    context.font = '25px "Songti SC", "Noto Serif SC", serif';
+    context.textAlign = "left";
+    context.fillText(label, tableX + 24, y + 49);
+    ["familiar", "vague", "unfamiliar"].forEach((outcome, column) => {
+      const x = tableX + columnWidths[0] + columnWidths.slice(1, column + 1).reduce((sum, value) => sum + value, 0) + columnWidths[column + 1] / 2;
+      context.textAlign = "center";
+      context.fillText(String(summary.modeOutcomes[key][outcome as keyof DailySummary["modeOutcomes"][DailyMode]]), x, y + 49);
+    });
+  });
 
   context.fillStyle = "#367aa0";
   context.font = '700 34px "Songti SC", "Noto Serif SC", serif';
@@ -334,10 +313,10 @@ async function createDailySummaryImage(summary: ReturnType<typeof summarizeDaily
     } else line += character;
   }
   if (line) lines.push(line);
-  lines.slice(0, 2).forEach((value, index) => context.fillText(value, 86, 1190 + index * 42));
+  lines.slice(0, 2).forEach((value, index) => context.fillText(value, 86, 1050 + index * 42));
   context.fillStyle = "#777064";
   context.font = '22px "Songti SC", "Noto Serif SC", serif';
-  context.fillText("今天的每一步，都在靠近更好的自己。", 86, 1280);
+  context.fillText("今天的每一步，都在靠近更好的自己。", 86, 1190);
 
   const blob = await new Promise<Blob>((resolve, reject) => canvas.toBlob((value) => value ? resolve(value) : reject(new Error("图片生成失败，请重试。")), "image/png"));
   return new File([blob], `每日词汇记录-${summary.date}.png`, { type: "image/png" });
@@ -379,14 +358,20 @@ function validReactionSeconds(value: unknown): value is number {
   return typeof value === "number" && Number.isInteger(value) && value >= 1 && value <= 120;
 }
 
-function restoreReactionSeconds(value: unknown): Record<ProgressCategory, number> {
+function restoreReactionSeconds(value: unknown, migrateOldDefaults = false): Record<ProgressCategory, number> {
   const saved = value && typeof value === "object" ? value as Partial<Record<ProgressCategory, unknown>> : {};
-  return {
+  const restored = {
     reading: validReactionSeconds(saved.reading) ? saved.reading : DEFAULT_REACTION_SECONDS.reading,
     speaking: validReactionSeconds(saved.speaking) ? saved.speaking : DEFAULT_REACTION_SECONDS.speaking,
     listening: validReactionSeconds(saved.listening) ? saved.listening : DEFAULT_REACTION_SECONDS.listening,
     writing: validReactionSeconds(saved.writing) ? saved.writing : DEFAULT_REACTION_SECONDS.writing,
   };
+  if (migrateOldDefaults) {
+    if (restored.reading === 4) restored.reading = DEFAULT_REACTION_SECONDS.reading;
+    if (restored.speaking === 4) restored.speaking = DEFAULT_REACTION_SECONDS.speaking;
+    if (restored.listening === 4) restored.listening = DEFAULT_REACTION_SECONDS.listening;
+  }
+  return restored;
 }
 
 function toSettingsDraft(settings: StudySettings): StudySettingsDraft {
@@ -966,15 +951,23 @@ function SpellingTitleInput({
 
 function LearningRoundExamples({ word, examples, loading }: { word: LearningWord; examples: VocabularyUsageExample[]; loading: boolean }) {
   const candidates = [
-    ...examples.map((example) => ({ english: example.englishText, chinese: example.chineseText })),
-    ...word.englishExamples.map((english, index) => ({ english, chinese: word.englishExampleTranslations?.[index] ?? "" })),
+    ...examples.map((example) => ({ english: example.englishText, chinese: example.chineseText, sourceType: example.sourceType })),
+    ...word.englishExamples.map((english, index) => ({ english, chinese: word.englishExampleTranslations?.[index] ?? "", sourceType: "manual" })),
   ];
   const seen = new Set<string>();
-  const rows = candidates.map((example) => maskStudyExample(example.english, example.chinese, word.word, word.inflections.map((item) => item.value), word.definitionCn))
+  const rows = candidates
+    .map((example) => ({
+      ...maskStudyExample(example.english, example.chinese, word.word, word.inflections.map((item) => item.value), word.definitionCn),
+      sourceType: example.sourceType,
+    }))
     .filter((example) => {
-      if (!example.matched || seen.has(example.english)) return false;
-      seen.add(example.english); return true;
-    }).slice(0, 2);
+      const key = example.english.toLowerCase().replace(/\s+/g, " ").trim();
+      if (!example.matched || seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    })
+    .sort(compareStudyExamples)
+    .slice(0, 1);
   return <section aria-label="语境例句" className="vocabulary-learning-round-examples">
     <h3>语境例句</h3>
     {rows.length ? rows.map((example) => <div key={example.english}><p lang="en">{example.english}</p><p lang="zh-CN">{example.chinese}</p></div>) : <p className="muted">{loading ? "正在加载语境例句……" : "暂无该词的双语例句。"}</p>}
@@ -1360,6 +1353,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
     setQualityNoticeOpen(isQualityNoticeBook(initialBook));
   }, [initialBook]);
   const [entryGate, setEntryGate] = useState<"loading" | "select-book" | "continue" | "settings" | "active">("loading");
+  const [resumeBookPickerOpen, setResumeBookPickerOpen] = useState(false);
   const [settingsByBook, setSettingsByBook] = useState<Partial<Record<BookSelectionKey, StudySettings>>>({});
   const [settingsHydrated, setSettingsHydrated] = useState(false);
   const [settingsOpenFor, setSettingsOpenFor] = useState<BookSelectionKey | null>(null);
@@ -1375,7 +1369,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
   const [progress, setProgress] = useState<ProgressStore>({});
   const [dailyActivity, setDailyActivity] = useState<DailyActivityStore>({ date: "", events: [], bookGoals: {} });
   const [dailyActivityHydrated, setDailyActivityHydrated] = useState(false);
-  const [dailySummaryOpen, setDailySummaryOpen] = useState(false);
+  const [dailySummarySnapshot, setDailySummarySnapshot] = useState<{ summary: DailySummary; capturedAt: Date } | null>(null);
   const [selectedEncouragement, setSelectedEncouragement] = useState(DAILY_ENCOURAGEMENTS[0]);
   const [customEncouragement, setCustomEncouragement] = useState("");
   const [sharingSummary, setSharingSummary] = useState(false);
@@ -1582,6 +1576,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
       setStudyPaused(window.localStorage.getItem(STUDY_PAUSED_STORAGE_KEY) === "true");
       const raw = window.localStorage.getItem(SETTINGS_STORAGE_KEY);
       const saved = raw ? JSON.parse(raw) as Record<string, Partial<StudySettings>> : {};
+      const migrateOldReactionDefaults = window.localStorage.getItem(REACTION_SETTINGS_MIGRATION_KEY) !== "done";
       const restored: Partial<Record<BookSelectionKey, StudySettings>> = {};
       for (const key of ["生词本", ...books.map((book) => book.key)] as BookSelectionKey[]) {
         const item = saved[key] ?? (key === "其他词汇" ? saved["未分级"] : undefined);
@@ -1597,7 +1592,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
         restored[key] = {
           dailyNew: item.dailyNew,
           browseGroups: Number.isInteger(item.browseGroups) && Number(item.browseGroups) > 0 ? Number(item.browseGroups) : 1,
-          reactionSeconds: restoreReactionSeconds(item.reactionSeconds),
+          reactionSeconds: restoreReactionSeconds(item.reactionSeconds, migrateOldReactionDefaults),
           method,
           modes: restoredModes.length === 0 ? [...ALL_STUDY_MODES] : restoredModes,
           reviewFamiliarities: method === "classified"
@@ -1614,6 +1609,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
         };
       }
       setSettingsByBook(restored);
+      window.localStorage.setItem(REACTION_SETTINGS_MIGRATION_KEY, "done");
     } catch {
       setSettingsByBook({});
     } finally {
@@ -1749,12 +1745,6 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
     () => summarizeDailyStudy(dailyActivity, progress, sourceCount),
     [dailyActivity, progress, sourceCount],
   );
-  const dailyWordChartData = [
-    { label: "今日学习", value: dailySummary.studiedWords, color: "studied" },
-    { label: "新学词汇", value: dailySummary.newWords, color: "new" },
-    { label: "复习词汇", value: dailySummary.reviewedWords, color: "reviewed" },
-  ];
-  const dailyWordChartMaximum = Math.max(1, ...dailyWordChartData.map((item) => item.value));
   const recordDailyActivity = useCallback((wordId: string, category: DailyMode, outcome: DailyOutcome | null, isReview: boolean, at: number) => {
     const date = localStudyDate(new Date(at));
     setDailyActivity((current) => {
@@ -1775,6 +1765,8 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
   const selectedBookLabel = selectedBook === "生词本"
     ? "生词本"
     : books.find((book) => book.key === selectedBook)?.label ?? selectedBook;
+  const resumeBookOptions = (["生词本", ...books.map((book) => book.key)] as BookSelectionKey[])
+    .filter((book, index, all) => settingsByBook[book] && all.indexOf(book) === index);
   // Use the draft while the current book's settings dialog is open. This keeps
   // the definition language in sync with the user's selection before the
   // saved settings state is committed, so an old Chinese line cannot flash
@@ -1809,25 +1801,15 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
   }, [nextGroupByBook]);
   const studyReady = hydrated && settingsHydrated && entryGate === "active" && !studyPaused && settingsOpenFor === null && Boolean(settingsByBook[selectedBook]);
 
-  useEffect(() => {
-    if (!dailyActivityHydrated || !dailyActivity.date) return;
-    let shouldShowSummary = dailySummary.dailyTaskComplete;
-    try {
-      // Ignore a stale prompt written by the previous any-activity behavior.
-      window.localStorage.removeItem(LEGACY_PENDING_DAILY_SUMMARY_KEY);
-      shouldShowSummary = shouldOpenDailySummary(
-        dailySummary.dailyTaskComplete,
-        window.localStorage.getItem(DAILY_SUMMARY_SHOWN_KEY) === dailyActivity.date,
-      );
-      if (shouldShowSummary) window.localStorage.setItem(DAILY_SUMMARY_SHOWN_KEY, dailyActivity.date);
-    } catch {
-      // Storage can be disabled; the completed task should still show its summary.
-    }
-    if (shouldShowSummary) setDailySummaryOpen(true);
-  }, [dailyActivity.date, dailyActivityHydrated, dailySummary.dailyTaskComplete]);
+  const displayedDailySummary = dailySummarySnapshot?.summary ?? dailySummary;
+
+  const openDailySummary = useCallback(() => {
+    setDailySummarySnapshot({ summary: dailySummary, capturedAt: new Date() });
+    setShareError("");
+  }, [dailySummary]);
 
   const continueStudying = useCallback(() => {
-    setDailySummaryOpen(false);
+    setDailySummarySnapshot(null);
   }, []);
 
   const shareDailySummary = useCallback(async () => {
@@ -1835,8 +1817,9 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
     setShareError("");
     let file: File | null = null;
     try {
+      if (!dailySummarySnapshot) return;
       const message = customEncouragement.trim() || selectedEncouragement;
-      file = await createDailySummaryImage(dailySummary, message);
+      file = await createDailySummaryImage(dailySummarySnapshot.summary, message, dailySummarySnapshot.capturedAt);
       if (navigator.share && navigator.canShare?.({ files: [file] })) {
         await navigator.share({ files: [file], title: "每日词汇记录", text: message });
       } else {
@@ -1852,7 +1835,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
     } finally {
       setSharingSummary(false);
     }
-  }, [customEncouragement, dailySummary, selectedEncouragement]);
+  }, [customEncouragement, dailySummarySnapshot, selectedEncouragement]);
 
   const currentWord = useMemo(
     () => visibleWords.find((word) => word.id === currentWordId) ?? null,
@@ -2124,6 +2107,30 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
       startClassifiedGroup(settings, sourceWords, selectedBook);
     }
   }, [selectedBook, settingsByBook, startClassifiedGroup, words]);
+
+  const selectResumeBook = useCallback((nextBook: BookSelectionKey) => {
+    const settings = settingsByBook[nextBook];
+    if (!settings) return;
+    setResumeBookPickerOpen(false);
+    if (nextBook === selectedBook) return;
+
+    roundTokenRef.current += 1;
+    stopLearningAudio();
+    setSelectedBook(nextBook);
+    setVoice(settings.voice);
+    setOrder(settings.order);
+    setWords([]);
+    setLoading(true);
+    setCurrentWordId(null);
+    setGroupSession(null);
+    setGroupSummary(null);
+    setGroupBrowseIds(null);
+    setSessionDepleted(false);
+    setStudyPaused(true);
+    setSettingsOpenFor(null);
+    setEntryGate("loading");
+    window.history.replaceState(null, "", `/vocabulary/books?level=${encodeURIComponent(nextBook)}`);
+  }, [selectedBook, settingsByBook]);
 
   const closeStudySettings = useCallback(() => {
     roundTokenRef.current += 1;
@@ -2452,6 +2459,12 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
       const key = event.key.toLowerCase();
       const letterShortcut = key === "j" || key === "k" || key === "l";
       if (editable && (modeIndex !== 3 || (letterShortcut && !spellingAnswerShown))) return;
+      if (modeIndex < 2 && currentSettings.showOptions && definitionOptions.length >= 4 && !currentRoundRevealed && /^[a-d]$/.test(key)) {
+        event.preventDefault();
+        setDefinitionChoice(key.charCodeAt(0) - 97);
+        revealCurrentRound();
+        return;
+      }
       if (event.key === "ArrowLeft" || event.key === "ArrowDown" || event.key === "ArrowRight" || letterShortcut) {
         event.preventDefault();
         const requestedOutcome = event.key === "ArrowLeft" || key === "j"
@@ -2475,7 +2488,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
 
     document.addEventListener("keydown", handleClassificationKeyboard);
     return () => document.removeEventListener("keydown", handleClassificationKeyboard);
-  }, [advancePending, browseMode, currentWord, handleRecognitionOutcome, loading, modeIndex, pageVisible, revealSpellingAnswer, spellingAnswerShown, spellingCorrect, studyReady, submitSpelling]);
+  }, [advancePending, browseMode, currentRoundRevealed, currentSettings.showOptions, currentWord, definitionOptions.length, handleRecognitionOutcome, loading, modeIndex, pageVisible, revealCurrentRound, revealSpellingAnswer, spellingAnswerShown, spellingCorrect, studyReady, submitSpelling]);
 
   const finishRecording = useCallback(() => {
     if (recordingFinishedRef.current || oralOutcomeLockedRef.current) return;
@@ -2739,7 +2752,8 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
       {definitionOptions.map((option, index) => {
         const isCorrect = currentRoundRevealed && option === getConciseStudyDefinition(currentWord.definitionCn);
         const isWrong = currentRoundRevealed && definitionChoice === index && !isCorrect;
-        return <button aria-pressed={definitionChoice === index} className={`${isCorrect ? "correct" : ""} ${isWrong ? "wrong" : ""}`} disabled={currentRoundRevealed} key={`${currentWord.id}-meaning-${index}`} onClick={() => { setDefinitionChoice(index); revealCurrentRound(); }} type="button"><span>{option}</span>{isCorrect ? <em>正确释义</em> : null}</button>;
+        const shortcut = String.fromCharCode(65 + index);
+        return <button aria-keyshortcuts={shortcut} aria-pressed={definitionChoice === index} className={`${isCorrect ? "correct" : ""} ${isWrong ? "wrong" : ""}`} disabled={currentRoundRevealed} key={`${currentWord.id}-meaning-${index}`} onClick={() => { setDefinitionChoice(index); revealCurrentRound(); }} title={`按 ${shortcut} 选择`} type="button"><b aria-hidden="true">{shortcut}</b><span>{option}</span>{isCorrect ? <em>正确释义</em> : null}</button>;
       })}
     </div>
   ) : null;
@@ -2750,6 +2764,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
         <Link href="/vocabulary">‹ 单词</Link>
         <h1>背单词</h1>
         <div className="vocabulary-learning-book-heading-actions">
+          <button className="vocabulary-learning-mobile-summary" disabled={!dailyActivityHydrated || advancePending} onClick={openDailySummary} type="button">今日总结</button>
           <button className="vocabulary-learning-mobile-import" disabled={!settingsHydrated || advancePending} onClick={openCustomBook} type="button">自建生词本</button>
           <button aria-label="背单词设置" disabled={!settingsHydrated || advancePending} onClick={openStudySettings} type="button">⚙</button>
         </div>
@@ -2762,6 +2777,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
         <aside className="vocabulary-learning-sidebar" ref={sidebarRef}>
           <div className="vocabulary-learning-book-heading">
             <div className="vocabulary-learning-book-heading-actions">
+              <button className="vocabulary-learning-summary-trigger" disabled={!dailyActivityHydrated || advancePending} onClick={openDailySummary} type="button">今日总结</button>
               <button disabled={!settingsHydrated || advancePending} onClick={openCustomBook} type="button">自建生词本</button>
               <button disabled={!settingsHydrated || advancePending || entryGate === "select-book"} onClick={openStudySettings} type="button">设置</button>
             </div>
@@ -2825,7 +2841,19 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
           {!loading && !loadError && entryGate === "continue" ? (
             <div className="vocabulary-learning-empty vocabulary-learning-plan-empty">
               <strong>继续之前的进度</strong>
-              <p>将按照「{selectedBookLabel}」上次保存的设置继续学习，每组 20 个词。</p>
+              <div className="vocabulary-learning-resume-book-picker">
+                <p>将按照 {resumeBookOptions.length > 1 ? (
+                  <button aria-controls="vocabulary-learning-resume-books" aria-expanded={resumeBookPickerOpen} className="vocabulary-learning-resume-book-chip" onClick={() => setResumeBookPickerOpen((open) => !open)} type="button">{selectedBookLabel}<span aria-hidden="true">⌄</span></button>
+                ) : <span className="vocabulary-learning-resume-book-chip is-current">{selectedBookLabel}</span>} 上次保存的设置继续学习，每组 20 个词。</p>
+                {resumeBookPickerOpen && resumeBookOptions.length > 1 ? (
+                  <div aria-label="选择继续学习的词汇书" className="vocabulary-learning-resume-book-options" id="vocabulary-learning-resume-books" role="group">
+                    {resumeBookOptions.map((book) => {
+                      const label = book === "生词本" ? book : books.find((item) => item.key === book)?.label ?? book;
+                      return <button aria-pressed={book === selectedBook} className={book === selectedBook ? "active" : ""} key={book} onClick={() => selectResumeBook(book)} type="button"><span>{label}</span>{book === selectedBook ? <small>当前选择</small> : null}</button>;
+                    })}
+                  </div>
+                ) : null}
+              </div>
               <button className="button" onClick={continuePreviousStudy} type="button">继续背单词</button>
             </div>
           ) : null}
@@ -3042,43 +3070,30 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
           </section>
         </div>
       ) : null}
-      {dailySummaryOpen ? (
+      {dailySummarySnapshot ? (
         <div className="vocabulary-daily-summary-backdrop">
           <section aria-labelledby="vocabulary-daily-summary-title" aria-modal="true" className="vocabulary-daily-summary-dialog" role="dialog">
             <button aria-label="关闭今日总结" className="vocabulary-daily-summary-close" onClick={continueStudying} type="button">×</button>
-            <p className="vocabulary-daily-summary-date">{dailySummary.date}</p>
+            <p className="vocabulary-daily-summary-date">{new Date(`${displayedDailySummary.date}T12:00:00`).toLocaleDateString("zh-CN", { year: "numeric", month: "long", day: "numeric" })} · 截至 {dailySummarySnapshot.capturedAt.toLocaleTimeString("zh-CN", { hour: "2-digit", minute: "2-digit" })}</p>
             <h2 id="vocabulary-daily-summary-title">今天的努力，看得见</h2>
-            <p className="vocabulary-daily-summary-subtitle">背过的每个词，都在慢慢变成自己的。</p>
+            <p className="vocabulary-daily-summary-subtitle">背过的每一组、每一个词，都在慢慢变成自己的。</p>
             <div className="vocabulary-daily-summary-metrics">
-              <div><span>今日学习</span><strong>{dailySummary.studiedWords}<small> 个</small></strong></div>
-              <div><span>新学词汇</span><strong>{dailySummary.newWords}<small> 个</small></strong></div>
-              <div><span>复习词汇</span><strong>{dailySummary.reviewedWords}<small> 个</small></strong></div>
-              <div><span>每日任务</span><strong className={dailySummary.dailyTaskComplete ? "is-complete" : ""}>{dailySummary.dailyTaskComplete ? "已完成" : `${dailySummary.newWords}/${dailySummary.dailyGoal}`}</strong></div>
+              <div><span>学习组数</span><strong>{displayedDailySummary.groupsStudied}<small> 组</small></strong></div>
+              <div><span>学习词汇</span><strong>{displayedDailySummary.studiedWords}<small> 个</small></strong></div>
             </div>
-            <div
-              aria-label={`今日背词数量图表：今日学习 ${dailySummary.studiedWords} 个，新学 ${dailySummary.newWords} 个，复习 ${dailySummary.reviewedWords} 个`}
-              className="vocabulary-daily-summary-chart"
-              role="img"
-            >
-              <strong>今日背词统计</strong>
-              <div className="vocabulary-daily-summary-chart-rows">
-                {dailyWordChartData.map((item) => (
-                  <div aria-hidden="true" className="vocabulary-daily-summary-chart-row" key={item.color}>
-                    <span>{item.label}</span>
-                    <div><i className={item.color} style={{ width: `${item.value / dailyWordChartMaximum * 100}%` }} /></div>
-                    <b>{item.value}</b>
-                  </div>
-                ))}
+            <p className="vocabulary-daily-summary-group-note">按每组 20 个词统计，不足 20 个词也计为一组；多本词汇书分别计算。</p>
+            <div aria-label="各项练习的熟悉度统计" className="vocabulary-daily-summary-breakdown" role="table">
+              <div className="vocabulary-daily-summary-breakdown-head" role="row">
+                <strong role="columnheader">练习方式</strong><strong role="columnheader">熟悉</strong><strong role="columnheader">模糊</strong><strong role="columnheader">生僻</strong>
               </div>
-              <small>新学与复习按词汇分别统计，同一个词当天可能同时计入两项。</small>
-            </div>
-            <div className="vocabulary-daily-summary-progress">
-              <div><strong>总进度</strong><span>{dailySummary.completedWords.toLocaleString()} / {dailySummary.sourceCount.toLocaleString()} 个（{dailySummary.sourceCount ? Math.round(Math.min(1, dailySummary.completedWords / dailySummary.sourceCount) * 100) : 0}%）</span></div>
-              <div aria-label="总词汇完成进度" className="vocabulary-daily-summary-progress-track"><span style={{ width: `${dailySummary.sourceCount ? Math.min(100, dailySummary.completedWords / dailySummary.sourceCount * 100) : 0}%` }} /></div>
-            </div>
-            <div className="vocabulary-daily-summary-breakdown">
-              <div><strong>熟悉程度</strong><span>熟悉 {dailySummary.familiar} · 模糊 {dailySummary.vague} · 生僻 {dailySummary.unfamiliar}</span></div>
-              <div><strong>练习模式</strong><span>阅读 {dailySummary.modes.reading} · 听力 {dailySummary.modes.listening} · 口语 {dailySummary.modes.speaking} · 写作 {dailySummary.modes.writing}</span></div>
+              {([["reading", "阅读"], ["listening", "听力"], ["speaking", "口语"], ["writing", "写作"]] as Array<[DailyMode, string]>).map(([mode, label]) => (
+                <div className="vocabulary-daily-summary-mode-row" key={mode} role="row">
+                  <strong role="rowheader">{label}</strong>
+                  <span role="cell">{displayedDailySummary.modeOutcomes[mode].familiar}</span>
+                  <span role="cell">{displayedDailySummary.modeOutcomes[mode].vague}</span>
+                  <span role="cell">{displayedDailySummary.modeOutcomes[mode].unfamiliar}</span>
+                </div>
+              ))}
             </div>
             <div className="vocabulary-daily-summary-share">
               <strong>给今天的自己留句话</strong>
@@ -3091,11 +3106,11 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
                 <span>也可以输入自己的内容，生成时会替换上面的鼓励语</span>
                 <textarea maxLength={80} onChange={(event) => setCustomEncouragement(event.target.value)} placeholder="写下想出现在分享图片里的话" value={customEncouragement} />
               </label>
-              <p className="vocabulary-daily-summary-share-note">生成图片后可用系统分享菜单发送到朋友圈、小红书、QQ 空间或微博；当前设备不支持图片分享时会下载图片。</p>
+              <p className="vocabulary-daily-summary-share-note">分享图片可通过系统菜单发送给好友、分享到朋友圈、QQ 空间或小红书；当前设备不支持图片分享时会下载图片。</p>
               {shareError ? <p className="vocabulary-daily-summary-error" role="alert">{shareError}</p> : null}
             </div>
             <div className="vocabulary-daily-summary-actions">
-              <button className="vocabulary-daily-summary-share-button" disabled={sharingSummary} onClick={() => void shareDailySummary()} type="button">{sharingSummary ? "正在生成图片…" : "生成分享图片"}</button>
+              <button className="vocabulary-daily-summary-share-button" disabled={sharingSummary} onClick={() => void shareDailySummary()} type="button">{sharingSummary ? "正在生成图片…" : "分享今日总结"}</button>
               <button onClick={continueStudying} type="button">继续学习</button>
             </div>
           </section>

@@ -58,7 +58,7 @@ export function AdminBbcArticleUpload() {
       setEditingId(id); setAudioFile(null); setAudioProgress(0); setAudioStatus("waiting");
       setExistingAudio(result.audioReadUrl ? { url: result.audioReadUrl, objectPath: result.objectPath } : null);
       setPublishedHref(`/articles/${id}`);
-      setMessage("正在编辑已上传文章。修改正文后会自动重新分析时间轴；词性和句子成分可在前端精读页面直接修改。");
+      setMessage("正在编辑已上传文章。修改正文后会自动重新分析时间轴；语法标注可在下方追加后由系统识别，也可在前端精读页面直接修改。");
     } catch (cause) { setError(true); setMessage(cause instanceof Error ? cause.message : "文章无法读取。"); }
     finally { setBusy(false); }
   }
@@ -90,7 +90,7 @@ export function AdminBbcArticleUpload() {
     setAudioStatus(audioFile ? "uploading" : "waiting");
     try {
       setMessage("正在解析文章并生成词性、句子成分标注……");
-      const prepared = await adminRequest("/api/admin/bbc-articles", { method: "POST", body: JSON.stringify({ action: "prepare", text }) }) as { article: BbcArticle };
+      const prepared = await adminRequest("/api/admin/bbc-articles", { method: "POST", body: JSON.stringify({ action: "prepare", text }) }) as { article: BbcArticle; pastedSyntaxCount?: number };
       if (editingId && editingId !== prepared.article.id) throw new Error("编辑文章时请保留原日期编号。");
       let audioBlob: Blob = audioFile!;
       let objectPath: string | undefined = existingAudio?.objectPath;
@@ -119,7 +119,7 @@ export function AdminBbcArticleUpload() {
 
       setPublishedHref(payload.href);
       setMessage(
-        `已发布到 ${payload.year} 年 ${payload.month} 月；${payload.paragraphCount} 段正文、${payload.sentenceCount} 句、${payload.vocabularyCount} 条词汇。逐句原声、双语字幕和语法标注已生成。`,
+        `已发布到 ${payload.year} 年 ${payload.month} 月；${payload.paragraphCount} 段正文、${payload.sentenceCount} 句、${payload.vocabularyCount} 条词汇。${prepared.pastedSyntaxCount ? `已应用后台粘贴的 ${prepared.pastedSyntaxCount} 句语法标注；` : ""}其余句子已自动生成词性和句子成分，前端精读页面可继续修改。`,
       );
       void loadArticles().catch(() => undefined);
     } catch (uploadError) {
@@ -137,7 +137,7 @@ export function AdminBbcArticleUpload() {
         <div>
           <span>BBC · ARTICLE PUBLISHING</span>
           <h2>{editingId ? "修改 BBC 文章" : "上传 BBC 文章"}</h2>
-          <p>粘贴原文并选择 MP3，自动生成逐句音频时间轴、双语字幕、词性和句子成分标注。</p>
+          <p>粘贴原文并选择 MP3，自动生成逐句音频时间轴和双语字幕；附加逐句语法标注会自动匹配到前端精读页面。</p>
         </div>
       </header>
 
@@ -163,7 +163,7 @@ export function AdminBbcArticleUpload() {
             rows={24}
             value={text}
           />
-          <small>首行是标题，英文与中文逐段对应，编号词条自动归入右侧词汇栏。粘贴带格式的原文会保留波浪线；纯文本也可用 ~~词语~~ 标记波浪线。</small>
+          <small>首行是标题，英文与中文逐段对应，编号词条自动归入右侧词汇栏。粘贴带格式的原文会保留波浪线；纯文本也可用 ~~词语~~ 标记波浪线。可在文章内容后追加“# 全文逐句词性+句子成分标注”及“## 句1”格式的标注，系统按英文原句自动匹配；未匹配的句子仍会自动分析。</small>
         </label>
         <label className={styles.full}>
           <span>MP3 音频{existingAudio ? "（已有关联音频，可替换）" : ""}</span>

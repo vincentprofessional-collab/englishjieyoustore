@@ -3,7 +3,7 @@
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { getFirstOpenedAt } from "@/lib/visitor-identity";
-import { recordDailyLearningSeconds, recordStudyPage } from "@/lib/learning/site-progress";
+import { activityForLearningPath, recordDailyLearningSeconds, recordStudyPage } from "@/lib/learning/site-progress";
 
 const SESSION_ID_KEY = "ielts-platform.analytics.sessionId";
 const SESSION_STARTED_KEY = "ielts-platform.analytics.startedAt";
@@ -12,6 +12,7 @@ const LOCAL_STUDY_SECONDS_KEY = "ielts-platform.analytics.studySeconds";
 const LOCAL_SESSION_REPORTED_KEY = "ielts-platform.analytics.reportedSeconds";
 const DAILY_TICK_AT_KEY = "ielts-platform.analytics.dailyTickAt";
 const DAILY_TICK_VISIBLE_KEY = "ielts-platform.analytics.dailyTickVisible";
+const PROGRESS_SHARING_SYNCED_AT_KEY = "ielts-platform.progressSharingSyncedAt";
 
 function recordLocalStudySeconds(durationSeconds: number) {
   const previousDuration = Number(window.sessionStorage.getItem(LOCAL_SESSION_REPORTED_KEY) ?? "0");
@@ -148,6 +149,36 @@ async function recordActivity(
   }
 }
 
+async function syncProgressSnapshotIfAuthorized() {
+  try {
+    const now = Date.now();
+    const lastSync = Number(window.localStorage.getItem(PROGRESS_SHARING_SYNCED_AT_KEY) ?? "0");
+    if (now - lastSync < 5 * 60_000) return;
+
+    const { supabase } = await import("@/lib/supabase/client");
+    const { data: { user }, error } = await supabase.auth.getUser();
+    if (error || !user) return;
+    const access = await fetch("/api/learning-progress-sharing?mode=sharing", { cache: "no-store", signal: AbortSignal.timeout(5_000) });
+    if (!access.ok) return;
+    const overview = await access.json() as { sharing?: { approvedIncoming?: unknown[] } };
+    if (!overview.sharing?.approvedIncoming?.length) {
+      window.localStorage.setItem(PROGRESS_SHARING_SYNCED_AT_KEY, String(now));
+      return;
+    }
+
+    const { buildShareableLearningProgressSnapshot } = await import("@/lib/learning/shared-progress");
+    const response = await fetch("/api/learning-progress-sharing", {
+      body: JSON.stringify({ action: "sync", snapshot: buildShareableLearningProgressSnapshot() }),
+      headers: { "Content-Type": "application/json" },
+      method: "POST",
+      signal: AbortSignal.timeout(8_000),
+    });
+    if (response.ok) window.localStorage.setItem(PROGRESS_SHARING_SYNCED_AT_KEY, String(now));
+  } catch {
+    // Progress sharing must never interrupt the learning experience.
+  }
+}
+
 export function SiteAnalyticsTracker() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -177,6 +208,31 @@ export function SiteAnalyticsTracker() {
   }, [pathname, queryString]);
 
   useEffect(() => {
+    let active = true;
+    let unsubscribe: () => void = () => {};
+    const syncIfVisible = () => {
+      if (document.visibilityState === "visible") void syncProgressSnapshotIfAuthorized();
+    };
+    void import("@/lib/supabase/client").then(({ supabase }) => {
+      if (!active) return;
+      const { data: { subscription } } = supabase.auth.onAuthStateChange(() => {
+        window.localStorage.removeItem(PROGRESS_SHARING_SYNCED_AT_KEY);
+        window.setTimeout(syncIfVisible, 0);
+      });
+      unsubscribe = () => subscription.unsubscribe();
+    });
+    syncIfVisible();
+    const intervalId = window.setInterval(syncIfVisible, 5 * 60_000);
+    document.addEventListener("visibilitychange", syncIfVisible);
+    return () => {
+      window.clearInterval(intervalId);
+      document.removeEventListener("visibilitychange", syncIfVisible);
+      active = false;
+      unsubscribe();
+    };
+  }, []);
+
+  useEffect(() => {
     const updateCurrentSession = () => {
       const path = `${window.location.pathname}${window.location.search}`;
 
@@ -190,7 +246,9 @@ export function SiteAnalyticsTracker() {
       const now = Date.now();
       const previousAt = Number(window.sessionStorage.getItem(DAILY_TICK_AT_KEY) ?? "0");
       const wasVisible = window.sessionStorage.getItem(DAILY_TICK_VISIBLE_KEY) === "true";
-      if (wasVisible && previousAt > 0) recordDailyLearningSeconds((now - previousAt) / 1000);
+      if (wasVisible && previousAt > 0) {
+        recordDailyLearningSeconds((now - previousAt) / 1000, window.localStorage, new Date(), activityForLearningPath(window.location.pathname));
+      }
       const visible = !forceHidden && document.visibilityState === "visible";
       window.sessionStorage.setItem(DAILY_TICK_AT_KEY, visible ? String(now) : "0");
       window.sessionStorage.setItem(DAILY_TICK_VISIBLE_KEY, String(visible));
