@@ -92,6 +92,11 @@ type SpeakingTrainingState = {
   remainingSeconds: number;
   sentenceId: string;
 };
+const SPEAKING_PLAYING_HINTS: Record<ActiveSpeakingMode, string> = {
+  imitation: "播放结束后自动进入练习计时",
+  shadowing: "一边听一边模仿跟读，熟练后可尝试不看文本",
+  "sight-translation": "播放结束后请根据中文提示进行口头翻译",
+};
 type ListeningPartResult = {
   correctCount: number;
   total: number;
@@ -3072,6 +3077,11 @@ export function ListeningPractice({
       return null;
     }
 
+    const activeClipSentence = section.transcriptSentences.find(
+      (sentence) => sentence.id === activeSentenceClipId,
+    );
+    if (activeClipSentence) return activeClipSentence;
+
     return (
       section.transcriptSentences.find((sentence) => {
         if (sentence.startMs == null || sentence.endMs == null) {
@@ -3081,8 +3091,12 @@ export function ListeningPractice({
         return fullAudioPositionMs >= sentence.startMs && fullAudioPositionMs <= sentence.endMs;
       }) ?? null
     );
-  }, [effectiveMode, fullAudioPositionMs, section.transcriptSentences, submitted]);
+  }, [activeSentenceClipId, effectiveMode, fullAudioPositionMs, section.transcriptSentences, submitted]);
   const activeSentenceNo = activeSentence?.sentenceNo ?? null;
+  const fallbackSentenceAudio =
+    section.transcriptSentences.find((sentence) => sentence.id === activeSentenceClipId && sentence.audioUrl) ??
+    section.transcriptSentences.find((sentence) => sentence.audioUrl) ??
+    null;
   const activeLoopSegment =
     activeSentence?.startMs != null && activeSentence.endMs != null
       ? {
@@ -3106,6 +3120,10 @@ export function ListeningPractice({
     if (nextMode !== "speaking") setIsRetellingPractice(false);
     setReviewStudyMode(nextMode);
     if (nextMode === "general" || nextMode === "intensive") {
+      clearSpeakingPracticeTimers();
+      activeSentenceClipIdRef.current = null;
+      setActiveSentenceClipId(null);
+      setIsSentenceClipPlaying(false);
       const isLeavingPractice =
         audioSettings.dictationMode !== "none" || audioSettings.speakingMode !== "none";
       updateAudioSettings({
@@ -3143,9 +3161,17 @@ export function ListeningPractice({
   function centerReviewSentence(sentenceNo: number) {
     window.requestAnimationFrame(() => {
       const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const behavior = reduceMotion ? "auto" : "smooth";
+      const sentenceElement = document.getElementById(`practice-subtitle-${sentenceNo}`);
+      const list = subtitleListRef.current;
+      if (sentenceElement && list?.contains(sentenceElement)) {
+        const topOffset = sentenceElement.getBoundingClientRect().top - list.getBoundingClientRect().top;
+        list.scrollTo({ top: list.scrollTop + topOffset, behavior });
+        return;
+      }
       document.getElementById(`transcript-sentence-${sentenceNo}`)?.scrollIntoView({
-        behavior: reduceMotion ? "auto" : "smooth",
-        block: "center",
+        behavior,
+        block: "start",
       });
     });
   }
@@ -3774,6 +3800,10 @@ export function ListeningPractice({
       return;
     }
 
+    if (reviewStudyMode === "general" && !section.fullAudioUrl && sentence.audioUrl) {
+      playSentenceAudioClip(sentence);
+      return;
+    }
     playSentenceSegment(sentence);
   }
 
@@ -3788,6 +3818,10 @@ export function ListeningPractice({
       return;
     }
 
+    activeSentenceClipIdRef.current = sentence.id;
+    setActiveSentenceClipId(sentence.id);
+    setActiveSentenceClipPosition(0);
+    centerReviewSentence(sentence.sentenceNo);
     setSentenceAutoPlaySignals((current) => ({
       ...current,
       [sentence.id]: (current[sentence.id] ?? 0) + 1,
@@ -4113,7 +4147,7 @@ export function ListeningPractice({
               }}
               onFocus={(event) => scheduleWordTooltip(token, event.currentTarget.getBoundingClientRect())}
             >
-              {phonetic ? <span className="article-word-pronunciation">{formatArticlePhonetic(phonetic)}</span> : null}
+              {phonetic ? <span className="article-word-pronunciation">{formatArticlePhonetic(phonetic, audioSettings.pronunciationMode === "us" ? "us" : "uk")}</span> : null}
               {token}
             </span>
           );
@@ -4473,9 +4507,7 @@ export function ListeningPractice({
       return;
     }
 
-    document
-      .getElementById(`practice-subtitle-${activeSentenceNo}`)
-      ?.scrollIntoView({ behavior: "smooth", block: "center" });
+    centerReviewSentence(activeSentenceNo);
   }, [activeSentenceNo, mode, submitted]);
 
   useEffect(() => {
@@ -4947,6 +4979,7 @@ export function ListeningPractice({
             <div className="bbc-full-audio">
               {section.fullAudioUrl ? (
                 <AudioPlayer
+                  compactControls={reviewStudyMode === "general"}
                   loopSegment={activeLoopSegment}
                   onPlayingChange={(isPlaying) => {
                     setIsFullAudioPlaying(isPlaying);
@@ -4966,6 +4999,31 @@ export function ListeningPractice({
                   src={section.fullAudioUrl}
                   stopAtSeconds={stopAtSeconds}
                   title="Part audio"
+                />
+              ) : reviewStudyMode === "general" && fallbackSentenceAudio?.audioUrl ? (
+                <AudioPlayer
+                  autoPlaySignal={sentenceAutoPlaySignals[fallbackSentenceAudio.id] ?? 0}
+                  compactControls
+                  hasSelectedRate
+                  html5
+                  key={`general-sentence-${fallbackSentenceAudio.id}`}
+                  onEnded={() => handleSentenceAudioEnded(fallbackSentenceAudio)}
+                  onPlayingChange={(isPlaying) => {
+                    if (isPlaying) {
+                      activeSentenceClipIdRef.current = fallbackSentenceAudio.id;
+                      setActiveSentenceClipId(fallbackSentenceAudio.id);
+                      setIsSentenceClipPlaying(true);
+                    } else if (activeSentenceClipIdRef.current === fallbackSentenceAudio.id) {
+                      setIsSentenceClipPlaying(false);
+                    }
+                  }}
+                  onSettingsChange={updateAudioSettings}
+                  onTimeChange={setActiveSentenceClipPosition}
+                  preload={false}
+                  settings={audioSettings}
+                  settingsPlacement="none"
+                  src={fallbackSentenceAudio.audioUrl}
+                  title={`第 ${fallbackSentenceAudio.sentenceNo} 句音频`}
                 />
               ) : (
                 <div className="notice">还没有上传音频。</div>
@@ -5142,7 +5200,22 @@ export function ListeningPractice({
                       <div className={reviewStudyMode === "intensive" ? "listening-intensive-sentence" : ""}>
                         {renderTranscriptSentenceContent(sentence)}
                       </div>
-                      {sentence.audioUrl || section.fullAudioUrl ? (
+                      {reviewStudyMode === "speaking" && audioSettings.speakingMode !== "none" ? (
+                        speakingTraining?.sentenceId === sentence.id ? (
+                          <div aria-live="polite" className="bbc-speaking-training-status practicing">
+                            <span>{SPEAKING_PHASE_LABELS[speakingTraining.mode]}</span>
+                            <strong>{speakingTraining.remainingSeconds} 秒</strong>
+                            <small>{audioSettings.playMode === "sentence-loop" ? "之后重播本句" : "之后播放下一句"}</small>
+                          </div>
+                        ) : activeSentenceClipId === sentence.id && isSentenceClipPlaying ? (
+                          <div aria-live="polite" className="bbc-speaking-training-status playing">
+                            <span>{SPEAKING_MODE_LABELS[audioSettings.speakingMode]}</span>
+                            <strong>正在播放</strong>
+                            <small>{SPEAKING_PLAYING_HINTS[audioSettings.speakingMode]}</small>
+                          </div>
+                        ) : null
+                      ) : null}
+                      {reviewStudyMode !== "general" && (sentence.audioUrl || section.fullAudioUrl) ? (
                         <div
                           className="listening-sentence-audio"
                           onClick={(event) => event.stopPropagation()}

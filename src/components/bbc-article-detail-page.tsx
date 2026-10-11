@@ -594,6 +594,7 @@ function renderHighlightedEnglish(
   waveTerms: string[] = [],
   pronunciations: Map<string, string> = new Map(),
   waveRanges?: { start: number; end: number }[],
+  pronunciationAccent?: "uk" | "us",
 ) {
   let wordIndex = wordOffset;
   const parts = getBbcWaveSegments(text, waveTerms, waveRanges, true);
@@ -639,7 +640,7 @@ function renderHighlightedEnglish(
           className={`${classNames ?? ""}${state.pronunciation ? " article-word-with-pronunciation" : ""}`.trim() || undefined}
           key={`${wordOffset}-${partIndex}-${tokenIndex}`}
         >
-          {state.pronunciation ? <span className="article-word-pronunciation">{formatArticlePhonetic(state.pronunciation)}</span> : null}
+          {state.pronunciation ? <span className="article-word-pronunciation">{formatArticlePhonetic(state.pronunciation, pronunciationAccent)}</span> : null}
           {state.token}
         </span>
       );
@@ -1639,6 +1640,7 @@ export default function ArticleDetailPage({ article, isUploadedArticle = false, 
                         articlePhraseWaveTerms,
                         articlePronunciations,
                         article.paragraphUnderlines?.[index]?.english,
+                        audioSettings.pronunciationMode === "uk" || audioSettings.pronunciationMode === "us" ? audioSettings.pronunciationMode : undefined,
                       )}
                     </p>
                   ) : null}
@@ -1741,6 +1743,8 @@ export default function ArticleDetailPage({ article, isUploadedArticle = false, 
                                 new Set<number>(),
                                 [],
                                 articlePronunciations,
+                                undefined,
+                                audioSettings.pronunciationMode === "uk" || audioSettings.pronunciationMode === "us" ? audioSettings.pronunciationMode : undefined,
                               )}
                               showPartOfSpeech={syntaxPosVisible}
                               showComponents={syntaxDisplayMode !== "none"}
@@ -1758,6 +1762,7 @@ export default function ArticleDetailPage({ article, isUploadedArticle = false, 
                               sentence.underlinedTerms ?? [],
                               articlePronunciations,
                               sentence.englishUnderlinedRanges,
+                              audioSettings.pronunciationMode === "uk" || audioSettings.pronunciationMode === "us" ? audioSettings.pronunciationMode : undefined,
                             )}
                           </p>
                         )}
@@ -1780,6 +1785,7 @@ export default function ArticleDetailPage({ article, isUploadedArticle = false, 
                           sentence.underlinedTerms ?? [],
                           articlePronunciations,
                           sentence.englishUnderlinedRanges,
+                          audioSettings.pronunciationMode === "uk" || audioSettings.pronunciationMode === "us" ? audioSettings.pronunciationMode : undefined,
                         )}
                         isAudioPlaying={isSentenceAudioPlaying && activeSentenceNo === sentence.sentenceNo}
                         sentence={sentence}

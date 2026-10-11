@@ -84,9 +84,12 @@ export function useArticlePronunciations(
   return pronunciations;
 }
 
-export function formatArticlePhonetic(value?: string) {
+export function formatArticlePhonetic(value?: string, accent?: "uk" | "us") {
   const phonetic = (value ?? "").trim().replace(/^[\[\s/]+|[\]\s/]+$/g, "").trim();
-  return phonetic ? `[${phonetic}]` : "";
+  if (!phonetic) return "";
+  if (accent === "uk") return `英 /${phonetic}/`;
+  if (accent === "us") return `美 /${phonetic}/`;
+  return `[${phonetic}]`;
 }
 
 type AudioPlayerProps = {
