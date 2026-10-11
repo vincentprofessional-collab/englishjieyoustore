@@ -142,3 +142,6 @@
     width: 100%;
   }
 }
+.articleList { border-top: 1px solid #dce7e8; margin-top: 28px; padding-top: 18px; }
+.articleList > div { align-items: center; display: flex; flex-wrap: wrap; gap: 12px; padding: 12px 0; }
+.articleList > div > span { flex: 1; min-width: 200px; }

@@ -14,3 +14,5 @@ R2_BBC_AUDIO_SECRET_ACCESS_KEY=对应的 Secret Access Key
 不要配置或恢复 `NEXT_PUBLIC_BBC_AUDIO_BASE_URL`，也不要启用此存储桶的 R2 Public Development URL 或公共自定义域名。浏览器不应收到 R2 源站地址或凭据。变更存储权限时，先验证会员可以通过网站音频接口播放完整音频和逐句音频，再关闭旧的公开地址，最后验证旧地址拒绝匿名读取。
 
 上传新音频可继续使用 `scripts/upload-bbc-audio-to-r2.mjs`，但应使用单独的受限写入凭据。上传脚本的 `R2_ACCESS_KEY_ID` 和 `R2_SECRET_ACCESS_KEY` 不应复用网站运行时的只读凭据。上传后按文章清单抽样检查文件和 Range 播放。
+
+后台网页上传使用独立的 `R2_BBC_AUDIO_UPLOAD_ACCESS_KEY_ID` 和 `R2_BBC_AUDIO_UPLOAD_SECRET_ACCESS_KEY`，权限为仅限此桶的 Object Read & Write。音频读取继续使用上面的只读凭据；预签名上传地址不能由只读令牌签发。

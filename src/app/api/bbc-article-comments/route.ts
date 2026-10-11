@@ -2,6 +2,7 @@ import { createHmac } from "node:crypto";
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { getBbcArticleById } from "@/lib/articles/bbc";
+import { getUploadedBbcArticle } from "@/lib/articles/bbc-uploaded-content";
 import { resolveCurrentMembership, type MembershipEntitlement, type MembershipProfile } from "@/lib/membership/current-membership";
 
 export const runtime = "nodejs";
@@ -25,7 +26,7 @@ export const dynamic = "force-dynamic";
 
 export async function GET(request: NextRequest) {
   const articleId = request.nextUrl.searchParams.get("articleId")?.trim() ?? "";
-  if (!getBbcArticleById(articleId)) {
+  if (!getBbcArticleById(articleId) && !await getUploadedBbcArticle(articleId)) {
     return NextResponse.json({ error: "这篇 BBC 文章不存在。" }, { status: 404 });
   }
   if (!supabaseUrl || !serviceKey) {
@@ -114,7 +115,7 @@ export async function POST(request: NextRequest) {
   const replyToCommentId = typeof payload?.replyToCommentId === "string" ? payload.replyToCommentId.trim() : null;
 
   if (website) return NextResponse.json({ error: "无法提交留言。" }, { status: 400 });
-  if (!getBbcArticleById(articleId)) {
+  if (!getBbcArticleById(articleId) && !await getUploadedBbcArticle(articleId)) {
     return NextResponse.json({ error: "这篇 BBC 文章不存在。" }, { status: 404 });
   }
   if (!body || body.length > 1000) {

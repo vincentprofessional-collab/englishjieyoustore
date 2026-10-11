@@ -99,6 +99,7 @@ type AudioPlayerProps = {
   preload?: boolean;
   leadingControls?: ReactNode;
   loopSegment?: { endSeconds: number; startSeconds: number } | null;
+  playbackRange?: { startSeconds: number; endSeconds: number } | null;
   onDurationChange?: (durationSeconds: number) => void;
   onEnded?: () => void;
   onPlayingChange?: (isPlaying: boolean) => void;
@@ -246,6 +247,7 @@ export function AudioPlayer({
   preload = true,
   leadingControls,
   loopSegment = null,
+  playbackRange = null,
   onDurationChange,
   onEnded,
   onPlayingChange,
@@ -516,15 +518,20 @@ export function AudioPlayer({
     }
 
     setIsPlayRequested(true);
+    if (playbackRange) {
+      soundRef.current.seek(playbackRange.startSeconds);
+      setPosition(playbackRange.startSeconds);
+      setDraftPosition(playbackRange.startSeconds);
+    }
     requestAudioPlayback(soundRef.current);
-  }, [autoPlaySignal, src]);
+  }, [autoPlaySignal, src, playbackRange?.startSeconds]);
 
   useEffect(() => {
     if (!seekRequest || !soundRef.current) {
       return;
     }
 
-    const boundedPosition = Math.min(Math.max(seekRequest.positionSeconds, 0), duration || seekRequest.positionSeconds);
+    const boundedPosition = Math.min(Math.max(seekRequest.positionSeconds, playbackRange?.startSeconds ?? 0), playbackRange?.endSeconds ?? (duration || seekRequest.positionSeconds));
     soundRef.current.seek(boundedPosition);
     setPosition(boundedPosition);
     setDraftPosition(boundedPosition);
@@ -534,13 +541,14 @@ export function AudioPlayer({
       setIsPlayRequested(true);
       requestAudioPlayback(soundRef.current);
     }
-  }, [duration, seekRequest]);
+  }, [duration, seekRequest, playbackRange?.startSeconds, playbackRange?.endSeconds]);
 
   useEffect(() => {
     if (!isPlaying) {
       return;
     }
 
+    let lastProgressUpdate = 0;
     const interval = window.setInterval(() => {
       const currentPosition = soundRef.current?.seek();
       if (typeof currentPosition === "number" && !isScrubbing) {
@@ -568,17 +576,19 @@ export function AudioPlayer({
           return;
         }
 
+        if (playbackRange && Date.now() - lastProgressUpdate < 250) return;
+        lastProgressUpdate = Date.now();
         setPosition(currentPosition);
         setDraftPosition(currentPosition);
         onTimeChangeRef.current?.(currentPosition);
       }
-    }, 300);
+    }, playbackRange ? 40 : 300);
 
     return () => window.clearInterval(interval);
-  }, [isPlaying, isScrubbing]);
+  }, [isPlaying, isScrubbing, playbackRange?.startSeconds, playbackRange?.endSeconds]);
 
   function seekTo(nextPosition: number) {
-    const boundedPosition = Math.min(Math.max(nextPosition, 0), duration || nextPosition);
+    const boundedPosition = Math.min(Math.max(nextPosition, playbackRange?.startSeconds ?? 0), playbackRange?.endSeconds ?? (duration || nextPosition));
     soundRef.current?.seek(boundedPosition);
     setPosition(boundedPosition);
     setDraftPosition(boundedPosition);
@@ -596,6 +606,7 @@ export function AudioPlayer({
     }
 
     setIsPlayRequested(true);
+    if (playbackRange && (position >= playbackRange.endSeconds || position < playbackRange.startSeconds)) seekTo(playbackRange.startSeconds);
     if (sound.state() === "unloaded") {
       sound.load();
     }
@@ -656,21 +667,21 @@ export function AudioPlayer({
       ) : mainPlayerControls}
 
       <div className="player-progress-row" aria-label={title}>
-        <span>{formatTime(displayPosition)}</span>
+        <span>{formatTime(Math.max(0, displayPosition - (playbackRange?.startSeconds ?? 0)))}</span>
         <input
           type="range"
-          min="0"
-          max={duration || 0}
+          min={playbackRange?.startSeconds ?? 0}
+          max={playbackRange?.endSeconds ?? (duration || 0)}
           step="0.1"
           value={displayPosition}
-          onChange={(event) => setDraftPosition(Number(event.target.value))}
+          onChange={(event) => { const value = Number(event.target.value); setDraftPosition(value); if (!isScrubbing) seekTo(value); }}
           onPointerDown={() => setIsScrubbing(true)}
           onPointerUp={() => {
             setIsScrubbing(false);
             seekTo(draftPosition);
           }}
         />
-        <span>{formatTime(duration)}</span>
+        <span>{formatTime(playbackRange ? playbackRange.endSeconds - playbackRange.startSeconds : duration)}</span>
       </div>
 
       {settingsPlacement === "inside" ? (

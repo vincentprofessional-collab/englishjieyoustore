@@ -12,6 +12,7 @@ import { isFreeBbc2015ArticleUnlocked } from "@/lib/articles/bbc-free-access.mjs
 import syntax2026 from "@/data/bbc/2026-syntax.json";
 import { normalizeBbcSyntaxSentenceEdits } from "@/lib/bbc-syntax-annotation-edits";
 import type { BbcSyntaxSentenceData } from "@/components/bbc-syntax-sentence";
+import { buildAutomaticBbcSyntax } from "@/lib/articles/bbc-automatic-syntax";
 
 export const dynamicParams = true;
 export const dynamic = "force-dynamic";
@@ -29,18 +30,19 @@ export default async function ArticlePage({
 }) {
   const { articleId } = await params;
   const { preview } = await searchParams;
-  const article = getBbcArticleById(articleId) ?? await getUploadedBbcArticle(articleId);
+  const builtinArticle = getBbcArticleById(articleId);
+  const article = builtinArticle ?? await getUploadedBbcArticle(articleId);
 
   if (!article) {
     notFound();
   }
 
-  const canonicalSyntaxSentences = article.year === 2026
-    ? (syntax2026 as Record<string, BbcSyntaxSentenceData[]>)[article.id]
-    : undefined;
+  const canonicalSyntaxSentences = (article.year === 2026 ? (syntax2026 as Record<string, BbcSyntaxSentenceData[]>)[article.id] : undefined)
+    ?? article.syntaxSentences
+    ?? (!builtinArticle ? article.sentences?.map((sentence) => buildAutomaticBbcSyntax(sentence.english)) : undefined);
 
   if (process.env.NODE_ENV === "development" && preview === "mobile") {
-    return <ArticleDetailPage article={article} syntaxSentences={canonicalSyntaxSentences} />;
+    return <ArticleDetailPage article={article} isUploadedArticle={!builtinArticle} syntaxSentences={canonicalSyntaxSentences} />;
   }
 
   const hasPublicRelease = article.year === 2015 && isFreeBbc2015ArticleUnlocked(article.id);
@@ -82,5 +84,5 @@ export default async function ArticlePage({
     }
   }
 
-  return <ArticleDetailPage article={article} syntaxSentences={syntaxSentences} />;
+  return <ArticleDetailPage article={article} isUploadedArticle={!builtinArticle} syntaxSentences={syntaxSentences} />;
 }

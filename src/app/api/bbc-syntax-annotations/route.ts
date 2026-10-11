@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import syntax2026 from "@/data/bbc/2026-syntax.json";
 import { getBbcArticleById } from "@/lib/articles/bbc";
+import { getUploadedBbcArticle } from "@/lib/articles/bbc-uploaded-content";
+import { buildAutomaticBbcSyntax } from "@/lib/articles/bbc-automatic-syntax";
 import { normalizeBbcSyntaxSentenceEdits } from "@/lib/bbc-syntax-annotation-edits";
 import type { BbcSyntaxSentenceData } from "@/components/bbc-syntax-sentence";
 
@@ -27,10 +29,10 @@ async function requireAdmin(request: NextRequest, supabase: SupabaseClient) {
   return { user };
 }
 
-function getCanonical(articleId: string) {
-  const article = getBbcArticleById(articleId);
-  const sentences = sourceSentences[articleId];
-  return article?.year === 2026 && sentences ? { article, sentences } : null;
+async function getCanonical(articleId: string) {
+  const article = getBbcArticleById(articleId) ?? await getUploadedBbcArticle(articleId);
+  const sentences = sourceSentences[articleId] ?? article?.syntaxSentences ?? article?.sentences?.map((sentence) => buildAutomaticBbcSyntax(sentence.english));
+  return article && sentences?.length ? { article, sentences } : null;
 }
 
 export async function PUT(request: NextRequest) {
@@ -41,10 +43,12 @@ export async function PUT(request: NextRequest) {
 
   const payload = await request.json().catch(() => null) as Record<string, unknown> | null;
   const articleId = typeof payload?.articleId === "string" ? payload.articleId : "";
-  const canonical = getCanonical(articleId);
+  const canonical = await getCanonical(articleId);
   if (!canonical) return NextResponse.json({ error: "文章标识无效。" }, { status: 400 });
   const sentences = normalizeBbcSyntaxSentenceEdits(payload?.sentences, canonical.sentences);
   if (!sentences) return NextResponse.json({ error: "标注范围无效：请检查标签、词性和 1–5 级成分的嵌套范围。" }, { status: 400 });
+  const reviewedSentenceNo = Number(payload?.reviewedSentenceNo);
+  if (Number.isInteger(reviewedSentenceNo) && reviewedSentenceNo > 0 && reviewedSentenceNo <= sentences.length) sentences[reviewedSentenceNo - 1].status = "reviewed";
 
   const { error } = await supabase.from("bbc_article_syntax_overrides").upsert({
     article_id: articleId,
