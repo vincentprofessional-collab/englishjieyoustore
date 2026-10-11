@@ -3988,6 +3988,7 @@ export function ListeningPractice({
             isActive={reviewStudyMode === "general"}
             isOriginalVisible={isTranscriptVisible}
             isVocabularyVisible={isVocabularyVisible}
+            label="泛读"
             onActivate={() => selectReviewStudyMode("general")}
             onOriginalVisibilityChange={setIsTranscriptVisible}
             onVocabularyVisibilityChange={(visible) => {
@@ -4001,12 +4002,13 @@ export function ListeningPractice({
             onClick={() => selectReviewStudyMode(reviewStudyMode === "intensive" ? "general" : "intensive")}
             type="button"
           >
-            精读模式
+            精读
           </button>
           <AudioSettingsMenus
             onChange={updateAudioSettings}
             onModeSelect={(nextMode) => selectReviewStudyMode(nextMode)}
-            playModeLabel="精听模式"
+            modeLabels={{ speaking: "口语", writing: "写作" }}
+            playModeLabel="精听"
             settings={audioSettings}
             variant="listening-only"
           />
