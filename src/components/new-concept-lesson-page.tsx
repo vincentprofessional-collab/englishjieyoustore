@@ -526,6 +526,9 @@ export function NewConceptLessonPage({
   const [readingSeconds, setReadingSeconds] = useState(0);
   const [isReadingTimerVisible, setIsReadingTimerVisible] = useState(false);
   const [isOriginalFullscreen, setIsOriginalFullscreen] = useState(false);
+  const [isMobileAudioViewport, setIsMobileAudioViewport] = useState(false);
+  const [isArticleSettingsOpen, setIsArticleSettingsOpen] = useState(false);
+  const [mobileAnnotationNotice, setMobileAnnotationNotice] = useState(false);
   const [favoriteSentenceIds, setFavoriteSentenceIds] = useState<string[]>([]);
   const [isLessonFavorite, setIsLessonFavorite] = useState(false);
   const [activeSentenceNo, setActiveSentenceNo] = useState<number | null>(null);
@@ -555,6 +558,14 @@ export function NewConceptLessonPage({
   useEffect(() => {
     audioSettingsRef.current = audioSettings;
   }, [audioSettings]);
+
+  useEffect(() => {
+    const mobileQuery = window.matchMedia("(max-width: 820px)");
+    const updateMobileAudioViewport = () => setIsMobileAudioViewport(mobileQuery.matches);
+    updateMobileAudioViewport();
+    mobileQuery.addEventListener("change", updateMobileAudioViewport);
+    return () => mobileQuery.removeEventListener("change", updateMobileAudioViewport);
+  }, []);
 
   useEffect(() => {
     setAudioSettings((current) => current.pronunciationMode === audioEdition
@@ -672,6 +683,31 @@ export function NewConceptLessonPage({
     }, 1000);
     return () => window.clearInterval(timerId);
   }, [isReadingTimerRunning]);
+
+  useEffect(() => {
+    if (!isArticleSettingsOpen) return;
+
+    function closeSettings(event: KeyboardEvent) {
+      if (event.key === "Escape") setIsArticleSettingsOpen(false);
+    }
+
+    document.addEventListener("keydown", closeSettings);
+    return () => document.removeEventListener("keydown", closeSettings);
+  }, [isArticleSettingsOpen]);
+
+  useEffect(() => {
+    if (!isArticleSettingsOpen || !window.matchMedia("(max-width: 820px)").matches) return;
+
+    function closeSettingsOnOutsidePointer(event: PointerEvent) {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+      if (target.closest("#new-concept-article-settings, .new-concept-article-settings-trigger")) return;
+      setIsArticleSettingsOpen(false);
+    }
+
+    document.addEventListener("pointerdown", closeSettingsOnOutsidePointer);
+    return () => document.removeEventListener("pointerdown", closeSettingsOnOutsidePointer);
+  }, [isArticleSettingsOpen]);
 
   async function toggleOriginalFullscreen() {
     if (!studyWorkspaceRef.current) {
@@ -967,6 +1003,9 @@ export function NewConceptLessonPage({
     ?? lesson.chinese[0]
     ?? "";
   const activeStudySentenceAudio = sentenceAudioUrls[activeStudySentenceIndex] ?? null;
+  const mobileSentenceAudio = isMobileAudioViewport && studyMode !== "general" && activeStudySentenceAudio
+    ? { audioUrl: activeStudySentenceAudio, sentenceNo: activeStudySentenceIndex + 1 }
+    : null;
   const fullLessonEnglish = studyTextBlocks.map((block) => block.english).join(" ");
   const dictionaryPronunciations = useArticlePronunciations(
     fullLessonEnglish,
@@ -999,6 +1038,46 @@ export function NewConceptLessonPage({
   }
   dictionaryPronunciations.forEach((phonetic, word) => articlePronunciations.set(word, phonetic));
 
+  const articleModeControls = (
+    <>
+      <AudioReadingMenu
+        isActive={studyMode === "general"}
+        isOriginalVisible={isOriginalVisible}
+        isVocabularyVisible={isVocabularyVisible}
+        label="泛读"
+        onActivate={() => selectStudyMode("general")}
+        onOriginalVisibilityChange={setIsOriginalVisible}
+        onVocabularyVisibilityChange={setIsVocabularyVisible}
+      />
+      <button
+        aria-pressed={studyMode === "intensive"}
+        className={`bbc-fullscreen-toggle ${studyMode === "intensive" ? "active" : ""}`}
+        onClick={() => selectStudyMode(studyMode === "intensive" ? "general" : "intensive")}
+        type="button"
+      >
+        精读
+      </button>
+      <AudioSettingsMenus
+        modeLabels={{ listening: "精听", speaking: "口语", writing: "写作" }}
+        onChange={updateAudioSettings}
+        onModeSelect={(mode) => selectStudyMode(mode)}
+        playModeLabel="精听"
+        preserveModeSettings
+        settings={audioSettings}
+        variant="listening-only"
+      />
+      <AudioSettingsMenus
+        modeLabels={{ speaking: "口语", writing: "写作" }}
+        onChange={updateAudioSettings}
+        onModeSelect={(mode) => selectStudyMode(mode)}
+        onRetellingSelect={enterRetellingPractice}
+        preserveModeSettings
+        settings={audioSettings}
+        variant="speaking-writing"
+      />
+    </>
+  );
+
   return (
     <section className={`stack bbc-article-page new-concept-lesson-page ${isRetellingPractice ? "article-retelling-active" : ""}`} ref={pageRef}>
       <div className="page-heading bbc-article-hero new-concept-lesson-hero">
@@ -1008,6 +1087,22 @@ export function NewConceptLessonPage({
           </Link>
           <span className="bbc-article-title-id">Lesson {lesson.lessonNo}</span>
           <div className="bbc-article-actions new-concept-article-actions">
+            {audioUrl ? (
+              <button
+                aria-controls="new-concept-article-settings"
+                aria-expanded={isArticleSettingsOpen}
+                aria-label="文章学习设置"
+                className="bbc-article-settings-trigger new-concept-article-settings-trigger"
+                onClick={() => {
+                  setMobileAnnotationNotice(false);
+                  setIsArticleSettingsOpen((open) => !open);
+                }}
+                title="文章学习设置"
+                type="button"
+              >
+                <span aria-hidden="true">⚙</span>
+              </button>
+            ) : null}
             <button
               aria-label={isLessonFavorite ? "取消收藏文章" : "收藏文章"}
               aria-pressed={isLessonFavorite}
@@ -1024,6 +1119,77 @@ export function NewConceptLessonPage({
               title={`新概念英语 Lesson ${lesson.lessonNo} ${lesson.title}`}
               url={`/new-concept/${lesson.id}`}
             />
+            {isArticleSettingsOpen ? (
+              <section aria-label="文章学习设置" className="bbc-article-settings-panel new-concept-article-settings-panel" id="new-concept-article-settings">
+                <h2>播放与学习设置</h2>
+                <button
+                  aria-label={isReadingTimerRunning ? "暂停计时" : "开始计时"}
+                  aria-pressed={isReadingTimerRunning}
+                  className={`bbc-reading-timer ${isReadingTimerRunning ? "active" : ""}`}
+                  onClick={() => {
+                    setIsReadingTimerVisible(true);
+                    setIsReadingTimerRunning((current) => !current);
+                    setIsArticleSettingsOpen(false);
+                  }}
+                  type="button"
+                >
+                  <span>{isReadingTimerVisible ? formatReadingTime(readingSeconds) : "计时"}</span>
+                </button>
+                <AudioPronunciationMenu
+                  dismissOnSelect
+                  onChange={(pronunciationMode) => {
+                    updateAudioSettings({ pronunciationMode });
+                    setIsArticleSettingsOpen(false);
+                  }}
+                  value={audioSettings.pronunciationMode}
+                />
+                <AudioSettingsMenus
+                  className="bbc-settings-rate"
+                  dismissOnSelect
+                  hasSelectedRate
+                  onChange={(settings) => {
+                    updateAudioSettings(settings);
+                    setIsArticleSettingsOpen(false);
+                  }}
+                  settings={audioSettings}
+                  variant="rate-only"
+                />
+                <AudioSettingsMenus
+                  className="bbc-settings-subtitle"
+                  dismissOnSelect
+                  onChange={(settings) => {
+                    updateAudioSettings(settings);
+                    setIsArticleSettingsOpen(false);
+                  }}
+                  settings={audioSettings}
+                  variant="subtitle-only"
+                />
+                <button
+                  aria-pressed={isOriginalFullscreen}
+                  className="bbc-fullscreen-toggle"
+                  onClick={() => {
+                    void toggleOriginalFullscreen();
+                    setIsArticleSettingsOpen(false);
+                  }}
+                  type="button"
+                >
+                  {isOriginalFullscreen ? "退出全屏" : "全屏"}
+                </button>
+                <button
+                  aria-label="打开批注"
+                  className="annotation-toggle ielts-exam-action bbc-annotation-toggle"
+                  onClick={() => setMobileAnnotationNotice(true)}
+                  type="button"
+                >
+                  批注
+                </button>
+                {mobileAnnotationNotice ? (
+                  <p aria-live="polite" className="bbc-mobile-annotation-notice" role="status">
+                    手机端不支持此项功能
+                  </p>
+                ) : null}
+              </section>
+            ) : null}
           </div>
         </div>
         <h1>
@@ -1031,6 +1197,14 @@ export function NewConceptLessonPage({
           {lesson.titleChinese ? <span className="bbc-article-title-line" lang="zh-CN">{lesson.titleChinese}</span> : null}
         </h1>
       </div>
+
+      {audioUrl ? (
+        <nav aria-label="课程学习模式" className="bbc-audio-toolbar bbc-article-mode-bar new-concept-article-mode-bar">
+          <div className="bbc-audio-toolbar-settings bbc-audio-toolbar-modes">
+            {articleModeControls}
+          </div>
+        </nav>
+      ) : null}
 
       <div className="bbc-article-study new-concept-study" ref={studyWorkspaceRef}>
         {audioUrl ? (
@@ -1042,26 +1216,50 @@ export function NewConceptLessonPage({
               </div>
               <span>Lesson {lesson.lessonNo}</span>
             </div>
-            <AudioPlayer
-              key={`new-concept-full-${audioEdition}-${modeSelectionVersion}`}
-              hasSelectedRate
-              // Native media playback supports pitch-preserving rate changes.
-              html5
-              onPlayingChange={(isPlaying) => {
-                if (!isPlaying) {
-                  return;
-                }
-                clearSpeakingPracticeTimers();
-                activeSentenceNoRef.current = null;
-                setActiveSentenceNo(null);
-                setIsSentenceAudioPlaying(false);
-              }}
-              onSettingsChange={updateAudioSettings}
-              settings={audioSettings}
-              settingsPlacement="none"
-              src={audioUrl}
-              title={`新概念英语第 ${lesson.lessonNo} 课整段音频`}
-            />
+            <div className={isMobileAudioViewport ? "bbc-full-audio new-concept-full-audio" : undefined}>
+              <AudioPlayer
+                autoPlaySignal={mobileSentenceAudio ? sentenceAutoPlaySignals[mobileSentenceAudio.sentenceNo] ?? 0 : 0}
+                deferSentenceLoop={Boolean(mobileSentenceAudio && studyMode === "speaking" && audioSettings.speakingMode !== "none")}
+                key={isMobileAudioViewport
+                  ? `new-concept-mobile-${mobileSentenceAudio?.sentenceNo ?? "full"}-${audioEdition}-${modeSelectionVersion}`
+                  : `new-concept-full-${audioEdition}-${modeSelectionVersion}`}
+                hasSelectedRate
+                // Native media playback supports pitch-preserving rate changes, including on mobile Safari.
+                html5
+                onDurationChange={mobileSentenceAudio ? (durationSeconds) => {
+                  setSentenceDurations((current) => ({
+                    ...current,
+                    [mobileSentenceAudio.sentenceNo]: durationSeconds,
+                  }));
+                } : undefined}
+                onEnded={mobileSentenceAudio ? () => handleSentenceEnded(mobileSentenceAudio.sentenceNo) : undefined}
+                onPlayingChange={mobileSentenceAudio
+                  ? (isPlaying) => handleSentencePlayingChange(mobileSentenceAudio.sentenceNo, isPlaying)
+                  : (isPlaying) => {
+                    if (!isPlaying) return;
+                    clearSpeakingPracticeTimers();
+                    activeSentenceNoRef.current = null;
+                    setActiveSentenceNo(null);
+                    setIsSentenceAudioPlaying(false);
+                  }}
+                onSettingsChange={updateAudioSettings}
+                onTimeChange={mobileSentenceAudio
+                  ? (positionSeconds) => handleSentenceTimeChange(mobileSentenceAudio.sentenceNo, positionSeconds)
+                  : undefined}
+                preload={isMobileAudioViewport ? !mobileSentenceAudio : undefined}
+                settings={isMobileAudioViewport
+                  ? mobileSentenceAudio || studyMode === "listening"
+                    ? audioSettings
+                    : { ...audioSettings, playMode: "sequential" }
+                  : audioSettings}
+                settingsPlacement="none"
+                src={mobileSentenceAudio?.audioUrl ?? audioUrl}
+                startAtSeconds={mobileSentenceAudio ? activeSentencePosition : 0}
+                title={mobileSentenceAudio
+                  ? `新概念英语第 ${lesson.lessonNo} 课第 ${mobileSentenceAudio.sentenceNo} 句音频`
+                  : `新概念英语第 ${lesson.lessonNo} 课整段音频`}
+              />
+            </div>
             <div className="bbc-audio-toolbar">
               <div className="bbc-audio-toolbar-settings bbc-audio-toolbar-modes">
                 <AudioReadingMenu
@@ -1227,7 +1425,26 @@ export function NewConceptLessonPage({
                       <small>{SPEAKING_PLAYING_HINTS[audioSettings.speakingMode]}</small>
                     </div>
                   ) : null}
-                  {activeStudySentenceAudio ? (
+                  {isMobileAudioViewport ? (
+                    <nav aria-label="课文句子导航" className="bbc-article-paragraph-navigation new-concept-mobile-sentence-navigation">
+                      <button
+                        aria-label="上一句"
+                        className="bbc-sentence-navigation-button"
+                        disabled={!previousStudyTextBlock}
+                        onClick={() => previousStudyTextBlock && selectStudySentence(previousStudyTextBlock.startLineIndex + 1)}
+                        type="button"
+                      >上一句</button>
+                      <span>第 {activeStudySentenceIndex + 1} / 共 {lesson.english.length} 句</span>
+                      <button
+                        aria-label="下一句"
+                        className="bbc-sentence-navigation-button"
+                        disabled={!nextStudyTextBlock}
+                        onClick={() => nextStudyTextBlock && selectStudySentence(nextStudyTextBlock.startLineIndex + 1)}
+                        type="button"
+                      >下一句</button>
+                    </nav>
+                  ) : null}
+                  {activeStudySentenceAudio && !isMobileAudioViewport ? (
                     <AudioPlayer
                       key={`${modeSelectionVersion}-${activeStudySentenceIndex + 1}`}
                       autoPlaySignal={sentenceAutoPlaySignals[activeStudySentenceIndex + 1] ?? 0}

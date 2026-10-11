@@ -1968,13 +1968,23 @@ export default function ArticleDetailPage({ article, isUploadedArticle = false, 
                   : handleFullAudioPlayingChange(isPlaying)}
                 onSettingsChange={updateAudioSettings}
                 onTimeChange={(positionSeconds) => mobileSentenceAudio
-                  ? handleSentenceTimeChange(mobileSentenceAudio.sentenceNo, positionSeconds)
+                  ? handleSentenceTimeChange(mobileSentenceAudio.sentenceNo, Math.max(0, positionSeconds - mobileSentenceAudio.startMs / 1000))
                   : setFullAudioPosition(positionSeconds)}
+                onStopAtEnd={mobileSentenceAudio ? () => handleSentenceEnded(mobileSentenceAudio) : undefined}
                 preload={!mobileSentenceAudio}
+                playbackRange={mobileSentenceAudio ? {
+                  startSeconds: mobileSentenceAudio.startMs / 1000,
+                  endSeconds: mobileSentenceAudio.endMs / 1000,
+                } : null}
                 settings={mobileSentenceAudio ? audioSettings : studyMode === "listening" ? audioSettings : { ...audioSettings, playMode: "sequential" }}
                 settingsPlacement="none"
-                src={mobileSentenceAudio?.audioUrl ?? article.fullAudioUrl}
-                startAtSeconds={mobileSentenceAudio ? activeSentencePosition : fullAudioPosition}
+                src={article.fullAudioUrl}
+                startAtSeconds={mobileSentenceAudio ? mobileSentenceAudio.startMs / 1000 + activeSentencePosition : fullAudioPosition}
+                stopAtSeconds={mobileSentenceAudio ? mobileSentenceAudio.endMs / 1000 : null}
+                loopSegment={mobileSentenceAudio && !(studyMode === "speaking" && audioSettings.speakingMode !== "none") ? {
+                  startSeconds: mobileSentenceAudio.startMs / 1000,
+                  endSeconds: mobileSentenceAudio.endMs / 1000,
+                } : null}
                 title={mobileSentenceAudio ? `第 ${mobileSentenceAudio.sentenceNo} 句音频` : `${article.title} 完整音频`}
               />
             </div>

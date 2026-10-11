@@ -2761,7 +2761,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
   return (
     <section className="stack vocabulary-learning-page">
       <header className="mobile-learning-header">
-        <Link href="/vocabulary">‹ 单词</Link>
+        <Link aria-label="返回查单词" href="/vocabulary">‹</Link>
         <h1>背单词</h1>
         <div className="vocabulary-learning-book-heading-actions">
           <button className="vocabulary-learning-mobile-summary" disabled={!dailyActivityHydrated || advancePending} onClick={openDailySummary} type="button">今日总结</button>

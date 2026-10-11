@@ -41,6 +41,7 @@ function firstEnabledHref(item: SiteChromeNavItem): string {
 }
 
 export function SiteNav({ config: initialConfig }: { config: SiteChromeConfig }) {
+  const pathname = usePathname();
   const [config, setConfig] = useState(initialConfig);
   const [canAccessAdmin, setCanAccessAdmin] = useState(false);
   const navStyle: SiteNavStyle = {
@@ -143,7 +144,7 @@ export function SiteNav({ config: initialConfig }: { config: SiteChromeConfig })
   }, []);
 
   return (
-    <header className="site-header" style={navStyle}>
+    <header className={`site-header ${pathname === "/" ? "site-header-home" : "site-header-interior"}`} style={navStyle}>
       <div className="nav-topbar">
         <Link className="brand" href={config.brand.href || "/"}>
           <span className="brand-mark">
@@ -229,20 +230,49 @@ function MobileNavIcon({ id }: { id: (typeof mobileNavItems)[number]["id"] }) {
 
 export function MobileBottomNav() {
   const pathname = usePathname();
+  const [wordMenuOpen, setWordMenuOpen] = useState(false);
 
   if (isFocusedPracticeRoute(pathname)) return null;
 
   return (
-    <nav aria-label="手机主导航" className="mobile-bottom-nav">
-      {mobileNavItems.map((item) => {
-        const active = isMobileNavItemActive(item.id, pathname);
-        return (
-          <Link aria-current={active ? "page" : undefined} className={active ? "active" : ""} href={item.href} key={item.id}>
-            <MobileNavIcon id={item.id} />
-            <span>{item.label}</span>
-          </Link>
-        );
-      })}
-    </nav>
+    <>
+      {wordMenuOpen ? (
+        <div className="mobile-word-nav-layer">
+          <button aria-label="关闭单词菜单" className="mobile-word-nav-backdrop" onClick={() => setWordMenuOpen(false)} type="button" />
+          <div aria-label="单词功能" className="mobile-word-nav-menu" id="mobile-word-nav-menu" role="menu">
+            <Link href="/vocabulary" onClick={() => setWordMenuOpen(false)} role="menuitem">查单词</Link>
+            <Link href="/vocabulary/books" onClick={() => setWordMenuOpen(false)} role="menuitem">背单词</Link>
+          </div>
+        </div>
+      ) : null}
+      <nav aria-label="手机主导航" className="mobile-bottom-nav">
+        {mobileNavItems.map((item) => {
+          const active = isMobileNavItemActive(item.id, pathname);
+          if (item.id === "word") {
+            return (
+              <button
+                aria-controls="mobile-word-nav-menu"
+                aria-expanded={wordMenuOpen}
+                aria-haspopup="menu"
+                className={`${active ? "active" : ""}${wordMenuOpen ? " menu-open" : ""}`}
+                key={item.id}
+                onClick={() => setWordMenuOpen((open) => !open)}
+                type="button"
+              >
+                <MobileNavIcon id={item.id} />
+                <span>{item.label}</span>
+              </button>
+            );
+          }
+
+          return (
+            <Link aria-current={active ? "page" : undefined} className={active ? "active" : ""} href={item.href} key={item.id}>
+              <MobileNavIcon id={item.id} />
+              <span>{item.label}</span>
+            </Link>
+          );
+        })}
+      </nav>
+    </>
   );
 }
