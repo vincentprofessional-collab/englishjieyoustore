@@ -223,8 +223,17 @@ export function BbcSentencePractice({
   >({});
   const [sentenceOrderDrag, setSentenceOrderDrag] = useState<SentenceOrderDrag | null>(null);
   const [sentenceOrderHover, setSentenceOrderHover] = useState<SentenceOrderDropTarget | null>(null);
+  const [isMobilePointerViewport, setIsMobilePointerViewport] = useState(false);
   const sentenceKey = `${sentence.sentenceNo}:${sentence.english}:${settings.dictationMode}`;
   const previousSentenceKeyRef = useRef(sentenceKey);
+
+  useEffect(() => {
+    const mobileQuery = window.matchMedia("(max-width: 820px)");
+    const updateMobilePointerViewport = () => setIsMobilePointerViewport(mobileQuery.matches);
+    updateMobilePointerViewport();
+    mobileQuery.addEventListener("change", updateMobilePointerViewport);
+    return () => mobileQuery.removeEventListener("change", updateMobilePointerViewport);
+  }, []);
 
   useEffect(() => {
     if (previousSentenceKeyRef.current === sentenceKey) {
@@ -580,6 +589,9 @@ export function BbcSentencePractice({
 
     event.preventDefault();
     event.stopPropagation();
+    if (isMobilePointerViewport) {
+      event.currentTarget.setPointerCapture(event.pointerId);
+    }
     setSentenceOrderDrag({
       ...answer,
       pointerId: event.pointerId,
@@ -625,7 +637,7 @@ export function BbcSentencePractice({
           sentenceOrderDrag?.sourceSlot === target.tokenIndex ? "sentence-order-dragging" : ""
         } ${sentenceOrderHover === target.tokenIndex ? "hover" : ""} ${isCorrect ? "correct" : ""} ${isWrong ? "wrong" : ""}`}
         data-sentence-order-drop-target={target.tokenIndex}
-        draggable={hasAnswer}
+        draggable={!isMobilePointerViewport && hasAnswer}
         key={`${sentence.sentenceNo}-order-${target.tokenIndex}`}
         onDragOver={(event) => event.preventDefault()}
         onDrop={(event: ReactDragEvent<HTMLSpanElement>) => {
@@ -704,7 +716,7 @@ export function BbcSentencePractice({
               className={`sentence-order-chip ${
                 sentenceOrderDrag?.tokenIndex === target.tokenIndex ? "sentence-order-dragging" : ""
               }`}
-              draggable
+              draggable={!isMobilePointerViewport}
               key={`${sentence.sentenceNo}-word-bank-${target.tokenIndex}`}
               onClick={(event) => event.stopPropagation()}
               onDragStart={(event) => {

@@ -191,7 +191,7 @@ export function SiteNav({ config: initialConfig }: { config: SiteChromeConfig })
 
 const mobileNavItems = [
   { href: "/", id: "home", label: "主页" },
-  { href: "/vocabulary", id: "word", label: "单词" },
+  { href: "/vocabulary/books", id: "word", label: "单词" },
   { href: "/textbooks", id: "books", label: "教材" },
   { href: "/exams", id: "exams", label: "考试" },
   { href: "/me", id: "me", label: "我的" },

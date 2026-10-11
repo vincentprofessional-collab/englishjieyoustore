@@ -35,7 +35,6 @@ async function MobileSurpriseWordPreview() {
 
   return (
     <section className="mobile-word-preview">
-      <header><span>今日单词</span><strong>Surprise</strong></header>
       <VocabularyDetailShell backHref="/vocabulary" className="mobile-word-preview-shell" entry={entry} showBack={false}>
         <VocabularyDetailContent
           entry={entry}

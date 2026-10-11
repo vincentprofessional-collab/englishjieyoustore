@@ -687,6 +687,7 @@ export function AudioPlayer({
 
 export function AudioSettingsMenus({
   className = "",
+  dismissOnSelect = false,
   hasSelectedRate = true,
   modeLabels,
   onChange,
@@ -699,6 +700,7 @@ export function AudioSettingsMenus({
   variant = "full",
 }: {
   className?: string;
+  dismissOnSelect?: boolean;
   hasSelectedRate?: boolean;
   modeLabels?: { listening?: string; speaking?: string; writing?: string };
   onChange: (nextSettings: Partial<AudioPlayerSettings>) => void;
@@ -837,7 +839,7 @@ export function AudioSettingsMenus({
   return (
     <div className={`player-settings exam-player-settings ${className}`}>
       {menuItems.map((menu, index) => (
-        <PlayerMenu key={`${variant}-${index}`} menu={menu} />
+        <PlayerMenu dismissOnSelect={dismissOnSelect} key={`${variant}-${index}`} menu={menu} />
       ))}
     </div>
   );
@@ -944,17 +946,43 @@ export function AudioReadingMenu({
 
 export function AudioPronunciationMenu({
   className = "",
+  dismissOnSelect = false,
   onChange,
   value,
 }: {
   className?: string;
+  dismissOnSelect?: boolean;
   onChange: (pronunciationMode: AudioPronunciationMode) => void;
   value: AudioPronunciationMode;
 }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!dismissOnSelect || !isOpen) {
+      return;
+    }
+
+    function closeOnOutsidePointer(event: PointerEvent) {
+      if (!menuRef.current?.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    }
+
+    document.addEventListener("pointerdown", closeOnOutsidePointer);
+    return () => document.removeEventListener("pointerdown", closeOnOutsidePointer);
+  }, [dismissOnSelect, isOpen]);
+
   return (
     <div className={`player-settings audio-pronunciation-control ${className}`}>
-      <div className="player-menu audio-pronunciation-menu">
-        <button aria-haspopup="true" className="player-menu-trigger" type="button">
+      <div className={`player-menu audio-pronunciation-menu ${dismissOnSelect && isOpen ? "is-open" : ""}`} ref={menuRef}>
+        <button
+          aria-expanded={dismissOnSelect ? isOpen : undefined}
+          aria-haspopup="true"
+          className="player-menu-trigger"
+          onClick={dismissOnSelect ? () => setIsOpen((open) => !open) : undefined}
+          type="button"
+        >
           <span>音标</span>
         </button>
         <div className="player-menu-panel audio-pronunciation-menu-panel">
@@ -965,7 +993,13 @@ export function AudioPronunciationMenu({
                 aria-pressed={(value ?? "hidden") === option.value}
                 className={(value ?? "hidden") === option.value ? "active" : ""}
                 key={option.value}
-                onClick={() => onChange(option.value)}
+                onClick={(event) => {
+                  onChange(option.value);
+                  if (dismissOnSelect) {
+                    setIsOpen(false);
+                    event.currentTarget.blur();
+                  }
+                }}
                 type="button"
               >
                 <span>{option.label}</span>
@@ -980,8 +1014,10 @@ export function AudioPronunciationMenu({
 }
 
 function PlayerMenu({
+  dismissOnSelect = false,
   menu,
 }: {
+  dismissOnSelect?: boolean;
   menu: {
     selectedLabel: string;
     selectedValue: string | number;
@@ -990,9 +1026,41 @@ function PlayerMenu({
     onSelect: (value: string | number) => void;
   };
 }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!dismissOnSelect || !isOpen) {
+      return;
+    }
+
+    function closeOnOutsidePointer(event: PointerEvent) {
+      if (!menuRef.current?.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    }
+
+    document.addEventListener("pointerdown", closeOnOutsidePointer);
+    return () => document.removeEventListener("pointerdown", closeOnOutsidePointer);
+  }, [dismissOnSelect, isOpen]);
+
   return (
-    <div className="player-menu">
-      <button className="player-menu-trigger" onClick={menu.onOpen} type="button">
+    <div className={`player-menu ${dismissOnSelect && isOpen ? "is-open" : ""}`} ref={menuRef}>
+      <button
+        aria-expanded={dismissOnSelect ? isOpen : undefined}
+        aria-haspopup="true"
+        className="player-menu-trigger"
+        onClick={() => {
+          if (dismissOnSelect) {
+            const nextOpen = !isOpen;
+            setIsOpen(nextOpen);
+            if (nextOpen) menu.onOpen?.();
+          } else {
+            menu.onOpen?.();
+          }
+        }}
+        type="button"
+      >
         <span>{menu.selectedLabel}</span>
       </button>
       <div className="player-menu-panel">
@@ -1002,7 +1070,13 @@ function PlayerMenu({
             className={String(option.value) === String(menu.selectedValue) ? "active" : ""}
             key={String(option.value)}
             type="button"
-            onClick={() => menu.onSelect(option.value)}
+            onClick={(event) => {
+              menu.onSelect(option.value);
+              if (dismissOnSelect) {
+                setIsOpen(false);
+                event.currentTarget.blur();
+              }
+            }}
           >
             <span>{option.label}</span>
             <span aria-hidden="true" className="player-menu-option-switch" />

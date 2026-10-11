@@ -24,8 +24,6 @@ export function MobileWordHub({ detailPreview }: { detailPreview?: ReactNode }) 
   const modules: HubItem[] = [
     { title: "查单词", href: "/vocabulary" },
     { title: "背单词", description: "继续今天的词汇复习", href: "/vocabulary/books", featured: true },
-    { title: "词源词根字典", description: "按词根和词源理解词义", href: "/vocabulary/etymology" },
-    { title: "俚语俗语", description: "在 BBC 文章里学真实用法", href: "/articles" },
   ];
 
   return <section className="mobile-hub mobile-word-hub">

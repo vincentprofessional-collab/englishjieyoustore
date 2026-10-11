@@ -735,9 +735,11 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
   const [isSentenceAudioPlaying, setIsSentenceAudioPlaying] = useState(false);
   const [fullAudioPosition, setFullAudioPosition] = useState(0);
   const [isFullAudioPlaying, setIsFullAudioPlaying] = useState(false);
+  const [isMobileAudioViewport, setIsMobileAudioViewport] = useState(false);
   const [speakingTraining, setSpeakingTraining] = useState<SpeakingTrainingState | null>(null);
   const [isArticleFavorite, setIsArticleFavorite] = useState(false);
   const [isArticleSettingsOpen, setIsArticleSettingsOpen] = useState(false);
+  const [mobileAnnotationNotice, setMobileAnnotationNotice] = useState(false);
   const [favoriteSentenceIds, setFavoriteSentenceIds] = useState<string[]>([]);
   const [favoriteWordIds, setFavoriteWordIds] = useState<string[]>([]);
   const [isReadingTimerRunning, setIsReadingTimerRunning] = useState(false);
@@ -764,6 +766,14 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
   useEffect(() => {
     audioSettingsRef.current = audioSettings;
   }, [audioSettings]);
+
+  useEffect(() => {
+    const mobileQuery = window.matchMedia("(max-width: 820px)");
+    const updateMobileAudioViewport = () => setIsMobileAudioViewport(mobileQuery.matches);
+    updateMobileAudioViewport();
+    mobileQuery.addEventListener("change", updateMobileAudioViewport);
+    return () => mobileQuery.removeEventListener("change", updateMobileAudioViewport);
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -924,6 +934,20 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
   }, [isArticleSettingsOpen]);
 
   useEffect(() => {
+    if (!isArticleSettingsOpen || !window.matchMedia("(max-width: 820px)").matches) return;
+
+    function closeSettingsOnOutsidePointer(event: PointerEvent) {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+      if (target.closest("#bbc-article-settings, .bbc-article-settings-trigger")) return;
+      setIsArticleSettingsOpen(false);
+    }
+
+    document.addEventListener("pointerdown", closeSettingsOnOutsidePointer);
+    return () => document.removeEventListener("pointerdown", closeSettingsOnOutsidePointer);
+  }, [isArticleSettingsOpen]);
+
+  useEffect(() => {
     clearSpeakingPracticeTimers();
   }, [audioSettings.speakingMode, article?.id]);
 
@@ -939,6 +963,15 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
     if (nextSettings.subtitleMode) {
       setOriginalDisplayMode(nextSettings.subtitleMode);
     }
+  }
+
+  function handleArticleAnnotationClick() {
+    if (window.matchMedia("(max-width: 820px)").matches) {
+      setMobileAnnotationNotice(true);
+      return;
+    }
+
+    pageRef.current?.querySelector<HTMLButtonElement>(".bbc-annotation-hidden-trigger")?.click();
   }
 
   function currentStudySentenceNo() {
@@ -1282,6 +1315,9 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
     (article.sentences ?? []).findIndex((sentence) => sentence.sentenceNo === activeSentenceNo),
   );
   const activeStudySentence = article.sentences?.[activeStudySentenceIndex];
+  const mobileSentenceAudio = isMobileAudioViewport && studyMode !== "general" && activeStudySentence?.audioUrl
+    ? activeStudySentence
+    : null;
   const previousStudySentence = article.sentences?.[activeStudySentenceIndex - 1];
   const nextStudySentence = article.sentences?.[activeStudySentenceIndex + 1];
   const activeStudySentenceWordOffset = activeStudySentence
@@ -1492,7 +1528,10 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
                 aria-expanded={isArticleSettingsOpen}
                 aria-label="文章学习设置"
                 className="bbc-article-settings-trigger"
-                onClick={() => setIsArticleSettingsOpen((open) => !open)}
+                onClick={() => {
+                  setMobileAnnotationNotice(false);
+                  setIsArticleSettingsOpen((open) => !open);
+                }}
                 title="文章学习设置"
                 type="button"
               >
@@ -1520,11 +1559,13 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
                     <span>{isReadingTimerVisible ? formatReadingTime(readingSeconds) : "计时"}</span>
                   </button>
                   <AudioPronunciationMenu
+                    dismissOnSelect
                     onChange={(pronunciationMode) => updateAudioSettings({ pronunciationMode })}
                     value={audioSettings.pronunciationMode}
                   />
                   <AudioSettingsMenus
                     className="bbc-settings-rate"
+                    dismissOnSelect
                     hasSelectedRate
                     onChange={updateAudioSettings}
                     settings={audioSettings}
@@ -1532,6 +1573,7 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
                   />
                   <AudioSettingsMenus
                     className="bbc-settings-subtitle"
+                    dismissOnSelect
                     onChange={updateAudioSettings}
                     settings={audioSettings}
                     variant="subtitle-only"
@@ -1547,11 +1589,16 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
                   <button
                     aria-label="打开批注"
                     className="annotation-toggle ielts-exam-action bbc-annotation-toggle"
-                    onClick={() => pageRef.current?.querySelector<HTMLButtonElement>(".bbc-annotation-hidden-trigger")?.click()}
+                    onClick={handleArticleAnnotationClick}
                     type="button"
                   >
                     批注
                   </button>
+                  {mobileAnnotationNotice ? (
+                    <p aria-live="polite" className="bbc-mobile-annotation-notice" role="status">
+                      手机端不支持此项功能
+                    </p>
+                  ) : null}
                 </section>
               ) : null}
             </div>
@@ -1765,7 +1812,7 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
                     {sentence.audioUrl ? (
                       <AudioPlayer
                       key={`${modeSelectionVersion}-${sentence.sentenceNo}`}
-                      autoPlaySignal={sentenceAutoPlaySignals[sentence.sentenceNo] ?? 0}
+                      autoPlaySignal={isMobileAudioViewport ? 0 : sentenceAutoPlaySignals[sentence.sentenceNo] ?? 0}
                       compactControls
                       deferSentenceLoop={studyMode === "speaking" && audioSettings.speakingMode !== "none"}
                       hasSelectedRate
@@ -1905,16 +1952,25 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
           <section className="bbc-full-audio-panel">
             <div className="bbc-full-audio">
               <AudioPlayer
-                key={`bbc-full-${modeSelectionVersion}`}
+                autoPlaySignal={mobileSentenceAudio ? sentenceAutoPlaySignals[mobileSentenceAudio.sentenceNo] ?? 0 : 0}
+                deferSentenceLoop={Boolean(mobileSentenceAudio && studyMode === "speaking" && audioSettings.speakingMode !== "none")}
+                key={`bbc-mobile-mode-${isMobileAudioViewport ? "mobile" : "desktop"}-${mobileSentenceAudio?.sentenceNo ?? "full"}-${modeSelectionVersion}`}
                 hasSelectedRate
                 html5
-                onPlayingChange={handleFullAudioPlayingChange}
+                onEnded={mobileSentenceAudio ? () => handleSentenceEnded(mobileSentenceAudio) : undefined}
+                onPlayingChange={(isPlaying) => mobileSentenceAudio
+                  ? handleSentencePlayingChange(mobileSentenceAudio.sentenceNo, isPlaying)
+                  : handleFullAudioPlayingChange(isPlaying)}
                 onSettingsChange={updateAudioSettings}
-                onTimeChange={setFullAudioPosition}
-                settings={studyMode === "listening" ? audioSettings : { ...audioSettings, playMode: "sequential" }}
+                onTimeChange={(positionSeconds) => mobileSentenceAudio
+                  ? handleSentenceTimeChange(mobileSentenceAudio.sentenceNo, positionSeconds)
+                  : setFullAudioPosition(positionSeconds)}
+                preload={!mobileSentenceAudio}
+                settings={mobileSentenceAudio ? audioSettings : studyMode === "listening" ? audioSettings : { ...audioSettings, playMode: "sequential" }}
                 settingsPlacement="none"
-                src={article.fullAudioUrl}
-                title={`${article.title} 完整音频`}
+                src={mobileSentenceAudio?.audioUrl ?? article.fullAudioUrl}
+                startAtSeconds={mobileSentenceAudio ? activeSentencePosition : fullAudioPosition}
+                title={mobileSentenceAudio ? `第 ${mobileSentenceAudio.sentenceNo} 句音频` : `${article.title} 完整音频`}
               />
             </div>
             <div className="bbc-audio-toolbar bbc-desktop-audio-toolbar">
@@ -1962,7 +2018,7 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
                 <button
                   aria-label="打开批注"
                   className="annotation-toggle ielts-exam-action bbc-annotation-toggle"
-                  onClick={() => pageRef.current?.querySelector<HTMLButtonElement>(".bbc-annotation-hidden-trigger")?.click()}
+                  onClick={handleArticleAnnotationClick}
                   type="button"
                 >
                   批注

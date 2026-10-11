@@ -2973,7 +2973,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
               </fieldset>
             </div>
             <fieldset className="vocabulary-learning-settings-options vocabulary-learning-settings-method">
-              <legend>记忆方式</legend>
+              <legend><span className="vocabulary-learning-settings-method-desktop-label">记忆方式</span><span className="vocabulary-learning-settings-method-mobile-label">辅助记忆</span></legend>
               <label><input checked={settingsDraft.method === "classified"} name="learning-method" onChange={() => setSettingsDraft((current) => ({ ...current, method: "classified", reviewView: null, reviewFamiliarities: [] }))} type="radio" />分类记忆</label>
               <label><input checked={settingsDraft.method === "browse"} name="learning-method" onChange={() => setSettingsDraft((current) => ({ ...current, method: "browse" }))} type="radio" />浏览模式</label>
             </fieldset>
