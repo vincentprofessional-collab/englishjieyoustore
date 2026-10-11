@@ -3100,6 +3100,15 @@ export function ListeningPractice({
     section.transcriptSentences.find((sentence) => sentence.id === activeSentenceClipId && sentence.audioUrl) ??
     section.transcriptSentences.find((sentence) => sentence.audioUrl) ??
     null;
+  const reviewSentenceForPlayer = activeSentence ?? fallbackSentenceAudio ?? section.transcriptSentences.find(
+    (sentence) => sentence.startMs != null && sentence.endMs != null,
+  ) ?? null;
+  const reviewSentenceHasFullAudioRange = Boolean(
+    section.fullAudioUrl && reviewSentenceForPlayer?.startMs != null && reviewSentenceForPlayer.endMs != null,
+  );
+  const reviewSentenceAudioSource = reviewSentenceHasFullAudioRange
+    ? section.fullAudioUrl ?? ""
+    : reviewSentenceForPlayer?.audioUrl ?? "";
   const activeLoopSegment =
     activeSentence?.startMs != null && activeSentence.endMs != null
       ? {
@@ -3916,6 +3925,61 @@ export function ListeningPractice({
       : Math.min(wordCount - 1, Math.max(0, Math.floor(progress * wordCount)));
   }
 
+  function renderReviewAudioPlayer() {
+    if (section.fullAudioUrl) {
+      return (
+        <AudioPlayer
+          compactControls
+          loopSegment={activeLoopSegment}
+          onPlayingChange={(isPlaying) => {
+            setIsFullAudioPlaying(isPlaying);
+            if (isPlaying) {
+              clearSpeakingPracticeTimers();
+              activeSentenceClipIdRef.current = null;
+              setActiveSentenceClipId(null);
+              setIsSentenceClipPlaying(false);
+            }
+          }}
+          onStopAtEnd={handleSentenceStopAtEnd}
+          onTimeChange={(seconds) => setFullAudioPositionMs(Math.round(seconds * 1000))}
+          settings={audioSettings}
+          settingsPlacement="none"
+          seekRequest={seekRequest}
+          showRate={false}
+          src={section.fullAudioUrl}
+          stopAtSeconds={stopAtSeconds}
+          title="Part audio"
+        />
+      );
+    }
+
+    if (!fallbackSentenceAudio?.audioUrl) {
+      return <div className="notice">还没有上传音频。</div>;
+    }
+
+    return (
+      <AudioPlayer
+        autoPlaySignal={sentenceAutoPlaySignals[fallbackSentenceAudio.id] ?? 0}
+        compactControls
+        hasSelectedRate
+        html5
+        key={`review-sentence-${fallbackSentenceAudio.id}`}
+        onEnded={() => handleSentenceAudioEnded(fallbackSentenceAudio)}
+        onDurationChange={(duration) => {
+          sentenceDurationsRef.current[fallbackSentenceAudio.id] = duration;
+        }}
+        onPlayingChange={(isPlaying) => handleReviewSentencePlayingChange(fallbackSentenceAudio, isPlaying)}
+        onSettingsChange={updateAudioSettings}
+        onTimeChange={(seconds) => handleReviewSentenceTimeChange(fallbackSentenceAudio, seconds)}
+        preload={false}
+        settings={audioSettings}
+        settingsPlacement="none"
+        src={fallbackSentenceAudio.audioUrl}
+        title={`第 ${fallbackSentenceAudio.sentenceNo} 句音频`}
+      />
+    );
+  }
+
   function renderTranscriptSentenceContent(sentence: ListeningSentence) {
     const syntaxData = syntaxBySection[section.id]?.[sentence.sentenceNo - 1];
     if (reviewStudyMode === "intensive" && syntaxData) {
@@ -3923,6 +3987,7 @@ export function ListeningPractice({
       return (
         <BbcSyntaxSentence
           activeWordIndex={getSubtitleActiveWordIndex(sentence, wordCount)}
+          compact
           data={syntaxData}
           displayMode="all"
           embedded
@@ -5007,68 +5072,26 @@ export function ListeningPractice({
             </button>
           </div>
         ) : null}
+        {submitted && !isRetellingPractice ? (
+          <section
+            className={`bbc-full-audio-panel listening-review-audio-panel ${
+              mobileReviewPane === "transcript" ? "mobile-pane-active" : "mobile-pane-hidden"
+            }`}
+          >
+            <div className="bbc-full-audio">{renderReviewAudioPlayer()}</div>
+          </section>
+        ) : null}
         {submitted ? (
           <aside
             className={`practice-audio-study-panel ${isRetellingPractice ? "article-retelling-listening-panel" : ""} ${
               mobileReviewPane === "transcript" ? "mobile-pane-active" : "mobile-pane-hidden"
             }`}
           >
-            <section className="bbc-full-audio-panel listening-review-audio-panel">
-              <div className="bbc-full-audio">
-                {section.fullAudioUrl ? (
-                  <AudioPlayer
-                    compactControls
-                    loopSegment={activeLoopSegment}
-                    onPlayingChange={(isPlaying) => {
-                      setIsFullAudioPlaying(isPlaying);
-                      if (isPlaying) {
-                        clearSpeakingPracticeTimers();
-                        activeSentenceClipIdRef.current = null;
-                        setActiveSentenceClipId(null);
-                        setIsSentenceClipPlaying(false);
-                      }
-                    }}
-                    onStopAtEnd={handleSentenceStopAtEnd}
-                    onTimeChange={(seconds) => setFullAudioPositionMs(Math.round(seconds * 1000))}
-                    settings={audioSettings}
-                    settingsPlacement="none"
-                    seekRequest={seekRequest}
-                    showRate={false}
-                    src={section.fullAudioUrl}
-                    stopAtSeconds={stopAtSeconds}
-                    title="Part audio"
-                  />
-                ) : fallbackSentenceAudio?.audioUrl ? (
-                  <AudioPlayer
-                    autoPlaySignal={sentenceAutoPlaySignals[fallbackSentenceAudio.id] ?? 0}
-                    compactControls
-                    hasSelectedRate
-                    html5
-                    key={`review-sentence-${fallbackSentenceAudio.id}`}
-                    onEnded={() => handleSentenceAudioEnded(fallbackSentenceAudio)}
-                    onDurationChange={(duration) => {
-                      sentenceDurationsRef.current[fallbackSentenceAudio.id] = duration;
-                    }}
-                    onPlayingChange={(isPlaying) => handleReviewSentencePlayingChange(fallbackSentenceAudio, isPlaying)}
-                    onSettingsChange={updateAudioSettings}
-                    onTimeChange={(seconds) => handleReviewSentenceTimeChange(fallbackSentenceAudio, seconds)}
-                    preload={false}
-                    settings={audioSettings}
-                    settingsPlacement="none"
-                    src={fallbackSentenceAudio.audioUrl}
-                    title={`第 ${fallbackSentenceAudio.sentenceNo} 句音频`}
-                  />
-                ) : (
-                  <div className="notice">还没有上传音频。</div>
-                )}
-              </div>
-              {activeSentence && isTranscriptVisible ? (
-                <div className="listening-current-sentence" aria-live="polite">
-                  <span>第 {activeSentence.sentenceNo} 句</span>
-                  {renderTranscriptSentenceContent(activeSentence)}
-                </div>
-              ) : null}
-
+            {isRetellingPractice ? (
+              <section className="bbc-full-audio-panel listening-review-audio-panel">
+                <div className="bbc-full-audio">{renderReviewAudioPlayer()}</div>
+              </section>
+            ) : null}
               <div className="bbc-audio-toolbar listening-review-transcript-controls">
                 <div className="bbc-audio-toolbar-settings bbc-audio-toolbar-modes">
                   <AudioReadingMenu
@@ -5152,7 +5175,6 @@ export function ListeningPractice({
                   </button>
                 </div>
               </div>
-            </section>
             <section
               className={`practice-listening-card ${isRetellingPractice ? "article-retelling-parent" : ""}`}
               onPointerUp={handleQuestionSelection}
@@ -5173,9 +5195,7 @@ export function ListeningPractice({
                   }`}
                   ref={subtitleListRef}
                 >
-                  {section.transcriptSentences
-                    .filter((sentence) => sentence.sentenceNo !== activeSentenceNo)
-                    .map((sentence) => (
+                  {section.transcriptSentences.map((sentence) => (
                     <article
                       className="practice-subtitle-line"
                       id={`practice-subtitle-${sentence.sentenceNo}`}
@@ -5252,6 +5272,44 @@ export function ListeningPractice({
                 </div>
               ) : null}
             </section>
+            {!isRetellingPractice && reviewSentenceForPlayer && reviewSentenceAudioSource ? (
+              <section className="listening-sentence-player-dock" aria-label="单句音频">
+                <AudioPlayer
+                  compactControls
+                  hasSelectedRate
+                  html5
+                  key={`${reviewSentenceForPlayer.id}:${reviewSentenceAudioSource}`}
+                  onDurationChange={(duration) => {
+                    sentenceDurationsRef.current[reviewSentenceForPlayer.id] = duration;
+                  }}
+                  onPlayingChange={(isPlaying) => {
+                    if (reviewSentenceHasFullAudioRange) {
+                      setIsFullAudioPlaying(isPlaying);
+                    } else {
+                      handleReviewSentencePlayingChange(reviewSentenceForPlayer, isPlaying);
+                    }
+                  }}
+                  onTimeChange={(seconds) => {
+                    if (reviewSentenceHasFullAudioRange) {
+                      setFullAudioPositionMs(Math.round(seconds * 1000));
+                    } else {
+                      handleReviewSentenceTimeChange(reviewSentenceForPlayer, seconds);
+                    }
+                  }}
+                  settings={audioSettings}
+                  settingsPlacement="none"
+                  showRate={false}
+                  src={reviewSentenceAudioSource}
+                  startAtSeconds={reviewSentenceHasFullAudioRange ? (reviewSentenceForPlayer.startMs ?? 0) / 1000 : 0}
+                  stopAtSeconds={
+                    reviewSentenceHasFullAudioRange && reviewSentenceForPlayer.endMs != null
+                      ? reviewSentenceForPlayer.endMs / 1000
+                      : null
+                  }
+                  title={`第 ${reviewSentenceForPlayer.sentenceNo} 句音频`}
+                />
+              </section>
+            ) : null}
           </aside>
         ) : null}
 

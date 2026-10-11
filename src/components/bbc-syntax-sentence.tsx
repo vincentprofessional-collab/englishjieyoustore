@@ -117,6 +117,7 @@ export function BbcSyntaxSentence({
   data,
   displayMode = "all",
   embedded = false,
+  compact = false,
   inlineAnnotations = [],
   showPos = true,
   sentenceNo,
@@ -133,6 +134,7 @@ export function BbcSyntaxSentence({
   data: BbcSyntaxSentenceData;
   displayMode?: BbcSyntaxDisplayMode;
   embedded?: boolean;
+  compact?: boolean;
   inlineAnnotations?: ArticleInlineAnnotation[];
   showPos?: boolean;
   sentenceNo: number;
@@ -365,7 +367,7 @@ export function BbcSyntaxSentence({
   }
 
   return (
-    <div className={`${styles.card} ${embedded ? styles.embedded : ""}`} lang="en">
+    <div className={`${styles.card} ${embedded ? styles.embedded : ""} ${compact ? styles.compact : ""}`} lang="en">
       <div className={`${styles.meta} ${embedded ? styles.embeddedMeta : ""}`}><span>#{sentenceNo}</span></div>
       <span className={styles.screenReader}>{data.text}</span>
       <div aria-hidden="true" className={styles.sentence} onMouseUp={handleSelection} ref={sentenceRef}>{words}</div>

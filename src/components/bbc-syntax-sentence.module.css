@@ -19,6 +19,7 @@
   max-width: 100%;
 }
 .embedded { background: transparent; border: 0; border-radius: 0; padding: 0; }
+.compact { --syntax-row-space: 8px; --syntax-word-font-size: 16px; --syntax-component-font-size: 11px; }
 .meta {
   align-items: center;
   color: #8a8175;
