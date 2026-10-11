@@ -986,11 +986,15 @@ function LearningVocabularyDetails({
   entry,
   showExamples,
   definitionPrefix,
+  showDefinition = true,
+  showWord = true,
 }: {
   detailPayload: VocabularyDetailPayload | null;
   entry: LocalVocabularyEntry;
   showExamples: boolean;
   definitionPrefix?: ReactNode;
+  showDefinition?: boolean;
+  showWord?: boolean;
 }) {
   const isSupplementalBook = isSupplementalLearningBook(entry.level);
   const detailedEntry = !isSupplementalBook && detailPayload?.entry ? detailPayload.entry : entry;
@@ -1031,7 +1035,7 @@ function LearningVocabularyDetails({
 
   return (
     <div className="vocabulary-learning-complete-detail vocabulary-detail-content">
-      <div className="vocabulary-learning-complete-detail-header">
+      {showWord ? <div className="vocabulary-learning-complete-detail-header">
         <h1>{detailedEntry.word}</h1>
         <div className="vocabulary-learning-complete-detail-meta">
           <VocabularyInlinePronunciation
@@ -1043,9 +1047,9 @@ function LearningVocabularyDetails({
           />
           {detailedEntry.level ? <span className="vocabulary-learning-complete-detail-level">{detailedEntry.level}</span> : null}
         </div>
-      </div>
+      </div> : null}
       {definitionPrefix}
-      <VocabularyDetailContent
+      {showDefinition ? <VocabularyDetailContent
         entry={conciseEntry}
         etymologyChinese={detailPayload?.etymology?.chinese}
         etymologyEnglish={detailPayload?.etymology?.english}
@@ -1058,7 +1062,7 @@ function LearningVocabularyDetails({
         synonymDistinctions={detailPayload?.synonymDistinctions ?? []}
         usageScenario={usageScenario}
         usageExamples={detailPayload?.usageExamples ?? []}
-      />
+      /> : null}
     </div>
   );
 }
@@ -2731,7 +2735,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
   /> : null;
   const definitionChoiceCards = currentSettings.showOptions && currentWord && modeIndex < 2 && definitionOptions.length >= 4 ? (
     <div aria-label="释义选项" className="vocabulary-learning-definition-options" role="group">
-      <strong>{currentRoundRevealed ? "释义选项" : "选择这个词的中文释义"}</strong>
+      <strong>释义选项</strong>
       {definitionOptions.map((option, index) => {
         const isCorrect = currentRoundRevealed && option === getConciseStudyDefinition(currentWord.definitionCn);
         const isWrong = currentRoundRevealed && definitionChoice === index && !isCorrect;
@@ -2885,31 +2889,14 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
                   showHeader={false}
                 >
                   {learningCategoryBar}
-                  {!currentRoundRevealed && modeIndex === 1 ? (
-                    <div className="vocabulary-learning-complete-detail vocabulary-detail-content">
-                      <div className="vocabulary-learning-complete-detail-header">
-                        <h1>{currentWord.word}</h1>
-                        <div className="vocabulary-learning-complete-detail-meta">
-                          <VocabularyInlinePronunciation
-                            ukAudioUrl={currentWord.ukAudioUrl}
-                            ukPhonetic={currentWord.ukPhonetic || currentWord.phonetic}
-                            usAudioUrl={currentWord.usAudioUrl}
-                            usPhonetic={currentWord.usPhonetic || currentWord.phonetic}
-                            word={currentWord.word}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  ) : null}
-                  {!currentRoundRevealed ? <>{roundExamples}{definitionChoiceCards}</> : null}
-                  {currentRoundRevealed ? (
                     <LearningVocabularyDetails
-                      detailPayload={detailPayload}
+                      detailPayload={detailPayload?.entry.word.toLowerCase() === currentWord.word.toLowerCase() ? detailPayload : null}
                       definitionPrefix={<>{roundExamples}{definitionChoiceCards}</>}
-                      entry={detailEntry ?? toLookupEntry(currentWord)}
+                      entry={detailEntry?.word.toLowerCase() === currentWord.word.toLowerCase() ? detailEntry : toLookupEntry(currentWord)}
                       showExamples={false}
+                      showDefinition={currentRoundRevealed}
+                      showWord={currentRoundRevealed || modeIndex === 1}
                     />
-                  ) : null}
                 </VocabularyDetailShell>
               ) : null}
 

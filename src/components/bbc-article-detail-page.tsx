@@ -1,5 +1,7 @@
 "use client";
 
+import { getBbcWaveSegments } from "@/lib/articles/bbc-paste-markup";
+
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
@@ -47,6 +49,7 @@ import {
 
 type ArticlePageProps = {
   article: BbcArticle;
+  isUploadedArticle?: boolean;
   syntaxSentences?: BbcSyntaxSentenceData[];
 };
 
@@ -590,30 +593,11 @@ function renderHighlightedEnglish(
   vocabularyHighlightWordIndexes: Set<number>,
   waveTerms: string[] = [],
   pronunciations: Map<string, string> = new Map(),
+  waveRanges?: { start: number; end: number }[],
 ) {
   let wordIndex = wordOffset;
-  const normalizedWaveTerms = [
-    ...new Set(
-      waveTerms
-        .map((term) => term.trim())
-        .filter((term) => (term.match(/[A-Za-z]+(?:['’-][A-Za-z]+)*/g)?.length ?? 0) >= 2),
-    ),
-  ];
-  const wavePattern = normalizedWaveTerms.length
-    ? new RegExp(
-        `(${normalizedWaveTerms
-          .map((term) => {
-            const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-            return `(?<![A-Za-z])${escaped}(?![A-Za-z])`;
-          })
-          .join("|")})`,
-        "gi",
-      )
-    : null;
-  const waveTermSet = new Set(normalizedWaveTerms.map((term) => term.toLowerCase().replace(/’/g, "'")));
-  const parts = wavePattern ? text.split(wavePattern) : [text];
-
-  return parts.map((part, partIndex) => {
+  const parts = getBbcWaveSegments(text, waveTerms, waveRanges, true);
+  return parts.map(({ text: part, wave: isWaveTerm }, partIndex) => {
     const partTokens = part.match(/[A-Za-z]+(?:['’-][A-Za-z]+)*|[^A-Za-z]+/g) ?? [part];
     const tokenStates = partTokens.map((token) => {
       const isWord = /^[A-Za-z]/.test(token);
@@ -660,7 +644,6 @@ function renderHighlightedEnglish(
         </span>
       );
     });
-    const isWaveTerm = waveTermSet.has(part.toLowerCase().replace(/’/g, "'"));
 
     return isWaveTerm ? (
       <span className="bbc-wave-term" key={`${wordOffset}-wave-${partIndex}`}>
@@ -672,20 +655,12 @@ function renderHighlightedEnglish(
   });
 }
 
-function renderWaveHighlightedChinese(text: string, terms: string[] = []) {
-  const uniqueTerms = [...new Set(terms.filter(Boolean))].sort((left, right) => right.length - left.length);
-  if (!uniqueTerms.length) {
-    return text;
-  }
-
-  const pattern = new RegExp(`(${uniqueTerms.map((term) => term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")})`, "g");
-  const termSet = new Set(uniqueTerms);
-  return text.split(pattern).map((part, index) =>
-    termSet.has(part) ? <span className="bbc-wave-term" key={`zh-wave-${index}`}>{part}</span> : part,
-  );
+function renderWaveHighlightedChinese(text: string, terms: string[] = [], ranges?: { start: number; end: number }[]) {
+  return getBbcWaveSegments(text, terms, ranges).map((part, index) => part.wave
+    ? <span className="bbc-wave-term" key={`zh-wave-${index}`}>{part.text}</span> : part.text);
 }
 
-export default function ArticleDetailPage({ article, syntaxSentences }: ArticlePageProps) {
+export default function ArticleDetailPage({ article, isUploadedArticle = false, syntaxSentences }: ArticlePageProps) {
   const inlineTextAnnotations = useArticleInlineAnnotations("bbc", article.id);
   const [editableInlineAnnotations, setEditableInlineAnnotations] = useState(inlineTextAnnotations);
   const inlineAnnotationUnits = useMemo(
@@ -1616,11 +1591,12 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
                         vocabularyHighlightWordIndexes,
                         articlePhraseWaveTerms,
                         articlePronunciations,
+                        article.paragraphUnderlines?.[index]?.english,
                       )}
                     </p>
                   ) : null}
                   {originalDisplayMode !== "english" && textBlock.chinese ? (
-                    <p className="bbc-original-chinese" lang="zh-CN">{textBlock.chinese}</p>
+                    <p className="bbc-original-chinese" lang="zh-CN">{renderWaveHighlightedChinese(textBlock.chinese, article.sentences?.flatMap((sentence) => sentence.chineseUnderlinedTerms ?? []) ?? [], article.paragraphUnderlines?.[index]?.chinese)}</p>
                   ) : null}
                 </div>
               )) : activeStudySentence ? (() => {
@@ -1632,7 +1608,7 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
                   : [];
                 const hasBackendGrammarAnnotations = sentenceAnnotations.length > 0;
                 const hasReviewedSyntax = studyMode === "intensive"
-                  && syntaxSentence?.status === "reviewed"
+                  && (syntaxSentence?.status === "reviewed" || syntaxSentence?.status === "draft")
                   && syntaxSentence.text === sentence.english;
 
                 return (
@@ -1670,13 +1646,19 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
                         />
                       </div>
                     </div>
-                    {studyMode !== "speaking" && studyMode !== "writing" ? (
+                    {studyMode === "intensive" ? (
                       <>
                         {hasReviewedSyntax ? (
                           <BbcSyntaxInlineEditor
                             allInlineAnnotations={editableInlineAnnotations}
                             allSentences={editableSyntaxSentences}
                             articleId={article.id}
+                            isUploadedArticle={isUploadedArticle}
+                            timing={article.audioDurationMs ? {
+                              durationMs: article.audioDurationMs,
+                              endMs: sentence.endMs,
+                              startMs: sentence.startMs,
+                            } : undefined}
                             data={syntaxSentence}
                             displayMode={syntaxDisplayMode}
                             inlineAnnotations={sentenceAnnotations}
@@ -1684,9 +1666,9 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
                             onSentenceChange={(updated) => setEditableSyntaxSentences((current) => current.map((item, index) => index === activeStudySentenceIndex ? updated : item))}
                             sentenceNo={sentence.sentenceNo}
                             showPos={syntaxPosVisible}
-                            translation={studyMode === "intensive"
-                              ? sentence.chinese
-                              : renderWaveHighlightedChinese(sentence.chinese, sentence.chineseUnderlinedTerms)}
+                            waveTerms={sentence.underlinedTerms}
+                            waveRanges={sentence.englishUnderlinedRanges}
+                            translation={renderWaveHighlightedChinese(sentence.chinese, sentence.chineseUnderlinedTerms, sentence.chineseUnderlinedRanges)}
                           />
                         ) : hasBackendGrammarAnnotations && inlineUnit ? (
                           <p className="bbc-intensive-english" lang="en">
@@ -1714,21 +1696,20 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
                               studyMode === "intensive" ? 0 : activeStudySentenceWordOffset,
                               null,
                               studyMode === "intensive" ? new Set<number>() : vocabularyHighlightWordIndexes,
-                              studyMode === "intensive" ? [] : sentence.underlinedTerms ?? [],
+                              sentence.underlinedTerms ?? [],
                               articlePronunciations,
+                              sentence.englishUnderlinedRanges,
                             )}
                           </p>
                         )}
                         {sentence.chinese && !hasReviewedSyntax ? (
                           <p className="bbc-intensive-chinese" lang="zh-CN">
-                            {studyMode === "intensive"
-                              ? sentence.chinese
-                              : renderWaveHighlightedChinese(sentence.chinese, sentence.chineseUnderlinedTerms)}
+                            {renderWaveHighlightedChinese(sentence.chinese, sentence.chineseUnderlinedTerms, sentence.chineseUnderlinedRanges)}
                           </p>
                         ) : null}
                       </>
                     ) : null}
-                    {studyMode === "writing" || studyMode === "speaking" ? (
+                    {studyMode === "listening" || studyMode === "writing" || studyMode === "speaking" ? (
                       <BbcSentencePractice
                         key={`${sentence.sentenceNo}:${sentence.english}`}
                         activeWordIndex={null}
@@ -1739,6 +1720,7 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
                           vocabularyHighlightWordIndexes,
                           sentence.underlinedTerms ?? [],
                           articlePronunciations,
+                          sentence.englishUnderlinedRanges,
                         )}
                         isAudioPlaying={isSentenceAudioPlaying && activeSentenceNo === sentence.sentenceNo}
                         sentence={sentence}
@@ -1746,7 +1728,7 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
                         settings={studyMode === "speaking"
                           ? { ...audioSettings, dictationMode: "none" }
                           : { ...audioSettings, speakingMode: "none" }}
-                        translationContent={renderWaveHighlightedChinese(sentence.chinese, sentence.chineseUnderlinedTerms)}
+                        translationContent={renderWaveHighlightedChinese(sentence.chinese, sentence.chineseUnderlinedTerms, sentence.chineseUnderlinedRanges)}
                       />
                     ) : null}
                     {studyMode === "speaking" && speakingTraining?.sentenceNo === sentence.sentenceNo ? (
@@ -1783,12 +1765,17 @@ export default function ArticleDetailPage({ article, syntaxSentences }: ArticleP
                       onEnded={() => handleSentenceEnded(sentence)}
                       onPlayingChange={(isPlaying) => handleSentencePlayingChange(sentence.sentenceNo, isPlaying)}
                       onSettingsChange={updateAudioSettings}
-                      onTimeChange={(positionSeconds) => handleSentenceTimeChange(sentence.sentenceNo, positionSeconds)}
-                      seekRequest={sentenceRestoreSeekRequest?.sentenceNo === sentence.sentenceNo ? sentenceRestoreSeekRequest : null}
+                      onTimeChange={(positionSeconds) => handleSentenceTimeChange(sentence.sentenceNo, positionSeconds - (sentence.audioUrl === article.fullAudioUrl ? sentence.startMs / 1000 : 0))}
+                      seekRequest={sentenceRestoreSeekRequest?.sentenceNo === sentence.sentenceNo ? { ...sentenceRestoreSeekRequest, positionSeconds: sentenceRestoreSeekRequest.positionSeconds + (sentence.audioUrl === article.fullAudioUrl ? sentence.startMs / 1000 : 0) } : null}
                       settings={audioSettings}
                       settingsPlacement="none"
                       skipSeconds={3}
                       src={sentence.audioUrl}
+                      playbackRange={sentence.audioUrl === article.fullAudioUrl ? { startSeconds: sentence.startMs / 1000, endSeconds: sentence.endMs / 1000 } : null}
+                      startAtSeconds={sentence.audioUrl === article.fullAudioUrl ? sentence.startMs / 1000 : 0}
+                      stopAtSeconds={sentence.audioUrl === article.fullAudioUrl ? sentence.endMs / 1000 : null}
+                      loopSegment={sentence.audioUrl === article.fullAudioUrl && !(studyMode === "speaking" && audioSettings.speakingMode !== "none") ? { startSeconds: sentence.startMs / 1000, endSeconds: sentence.endMs / 1000 } : null}
+                      onStopAtEnd={sentence.audioUrl === article.fullAudioUrl ? () => handleSentenceEnded(sentence) : undefined}
                       title={`第 ${sentence.sentenceNo} 句音频`}
                       trailingControls={(
                         <button

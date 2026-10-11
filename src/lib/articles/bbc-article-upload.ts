@@ -65,8 +65,9 @@ function parseVocabularyCore(value: string) {
   const line = stripPasteMarkup(value);
   const phoneticMatch = line.match(/^(.+?)\s*[/／]([^/／]+)[/／]\s*(.*)$/);
   const plainMatch = phoneticMatch ? null : line.match(/^(.+?)\s+((?:[a-z]+\.)\s*.*[\u3400-\u9fff].*)$/i);
-  const term = (phoneticMatch?.[1] ?? plainMatch?.[1] ?? "").trim();
-  const tail = (phoneticMatch?.[3] ?? plainMatch?.[2] ?? "").trim();
+  const pipeMatch = line.match(/^(.+?)\s*\|\s*(.+)$/);
+  const term = (phoneticMatch?.[1] ?? plainMatch?.[1] ?? pipeMatch?.[1] ?? "").trim();
+  const tail = (phoneticMatch?.[3] ?? plainMatch?.[2] ?? pipeMatch?.[2] ?? "").trim();
   const partOfSpeechMatch = tail.match(PART_OF_SPEECH);
   return {
     term,

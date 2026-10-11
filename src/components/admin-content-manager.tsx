@@ -7,7 +7,7 @@ import { AdminHomeEditor } from "@/components/admin-home-editor";
 import { AdminEntitlementManager } from "@/components/admin-entitlement-manager";
 import { AdminSiteChromeEditor } from "@/components/admin-site-chrome-editor";
 import { AdminBbcArticleUpload } from "@/components/admin-bbc-article-upload";
-import { ArticleInlineAnnotationAdmin } from "@/components/article-inline-annotation-admin";
+import { AdminCommentInbox, AdminCommentNotice, useAdminCommentInbox } from "@/components/admin-comment-inbox";
 import { GuidePostAdmin } from "@/components/guide-post-admin";
 import { GuideCommentsAdmin } from "@/components/guide-comments-admin";
 import { supabase } from "@/lib/supabase/client";
@@ -19,8 +19,8 @@ type AdminView =
   | "home"
   | "chrome"
   | "guide"
-  | "article-annotations"
   | "bbc-upload"
+  | "comments"
 
 export function AdminContentManager() {
   const [activeView, setActiveView] = useState<AdminView>("analytics");
@@ -30,6 +30,7 @@ export function AdminContentManager() {
   const [authMessage, setAuthMessage] = useState("");
   const [isSigningIn, setIsSigningIn] = useState(false);
   const [adminUserId, setAdminUserId] = useState<string | null>(null);
+  const commentInbox = useAdminCommentInbox(adminUserId, activeView === "comments");
 
   useEffect(() => {
     void checkAdminAccess();
@@ -188,6 +189,7 @@ export function AdminContentManager() {
           <button className="button secondary" type="button" onClick={handleSignOut}>
             退出
           </button>
+          <AdminCommentNotice count={commentInbox.count} onOpen={() => { if (!commentInbox.unread.bbc && commentInbox.unread.guide) commentInbox.setSource("guide"); commentInbox.setPage(0); setActiveView("comments"); }} />
         </div>
       </header>
 
@@ -228,13 +230,6 @@ export function AdminContentManager() {
           帖子管理
         </button>
         <button
-          className={activeView === "article-annotations" ? "active" : ""}
-          type="button"
-          onClick={() => setActiveView("article-annotations")}
-        >
-          文章词汇标注
-        </button>
-        <button
           className={activeView === "bbc-upload" ? "active" : ""}
           type="button"
           onClick={() => setActiveView("bbc-upload")}
@@ -262,9 +257,9 @@ export function AdminContentManager() {
         </>
       ) : null}
 
-      {activeView === "article-annotations" && adminUserId ? <ArticleInlineAnnotationAdmin /> : null}
 
       {activeView === "bbc-upload" && adminUserId ? <AdminBbcArticleUpload /> : null}
+      {activeView === "comments" && adminUserId ? <AdminCommentInbox inbox={commentInbox} /> : null}
 
     </section>
   );

@@ -1,5 +1,7 @@
 "use client";
 
+import { getBbcWaveSegments } from "@/lib/articles/bbc-paste-markup";
+
 import {
   type DragEvent as ReactDragEvent,
   type KeyboardEvent as ReactKeyboardEvent,
@@ -17,6 +19,8 @@ type BbcPracticeSentence = {
   english: string;
   sentenceNo: number;
   underlinedTerms?: string[];
+  englishUnderlinedRanges?: { start: number; end: number }[];
+  chineseUnderlinedRanges?: { start: number; end: number }[];
 };
 
 type DictationTarget = {
@@ -110,37 +114,13 @@ function stableHash(value: string) {
   return hash;
 }
 
-function getWavePhrases(terms: string[] = []) {
-  return [
-    ...new Set(
-      terms
-        .map((term) => term.trim())
-        .filter((term) => (term.match(/[A-Za-z]+(?:['’-][A-Za-z]+)*/g)?.length ?? 0) >= 2),
-    ),
-  ].sort((left, right) => right.length - left.length);
-}
-
 function renderUnderlinedEnglish(
   sentence: BbcPracticeSentence,
   activeWordIndex: number | null = null,
 ) {
-  const terms = getWavePhrases(sentence.underlinedTerms);
-  const pattern = terms.length
-    ? new RegExp(
-        `(${terms
-          .map((term) => {
-            const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-            return `(?<![A-Za-z])${escaped}(?![A-Za-z])`;
-          })
-          .join("|")})`,
-        "gi",
-      )
-    : null;
-  const termSet = new Set(terms.map((term) => term.toLowerCase()));
+  const parts = getBbcWaveSegments(sentence.english, sentence.underlinedTerms, sentence.englishUnderlinedRanges, true);
   let wordIndex = 0;
-
-  return (pattern ? sentence.english.split(pattern) : [sentence.english]).map((part, partIndex) => {
-    const isWaveTerm = termSet.has(part.toLowerCase());
+  return parts.map(({ text: part, wave: isWaveTerm }, partIndex) => {
     const tokens = splitEnglishTokens(part).map((token, tokenIndex) => {
       const currentWordIndex = isWordToken(token) ? wordIndex : null;
       if (currentWordIndex != null) {
@@ -176,26 +156,8 @@ function renderUnderlinedEnglish(
 }
 
 function renderUnderlinedChinese(sentence: BbcPracticeSentence) {
-  const terms = [...(sentence.chineseUnderlinedTerms ?? [])]
-    .filter(Boolean)
-    .sort((left, right) => right.length - left.length);
-  if (terms.length === 0) {
-    return sentence.chinese;
-  }
-
-  const escapedTerms = terms.map((term) => term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
-  const pattern = new RegExp(`(${escapedTerms.join("|")})`, "g");
-  const termSet = new Set(terms);
-
-  return sentence.chinese.split(pattern).map((part, index) =>
-    termSet.has(part) ? (
-      <span className="bbc-wave-term" key={`${sentence.sentenceNo}-chinese-wave-${index}`}>
-        {part}
-      </span>
-    ) : (
-      <span key={`${sentence.sentenceNo}-chinese-text-${index}`}>{part}</span>
-    ),
-  );
+  return getBbcWaveSegments(sentence.chinese, sentence.chineseUnderlinedTerms, sentence.chineseUnderlinedRanges)
+    .map((part, index) => part.wave ? <span className="bbc-wave-term" key={`${sentence.sentenceNo}-chinese-${index}`}>{part.text}</span> : part.text);
 }
 
 export function BbcSentencePractice({
@@ -787,7 +749,7 @@ export function BbcSentencePractice({
         </p>
       ) : null}
       {settings.subtitleMode !== "english" ? (
-        <p className="translation bbc-sentence-chinese">{renderUnderlinedChinese(sentence)}</p>
+        <p className="translation bbc-sentence-chinese">{translationContent ?? renderUnderlinedChinese(sentence)}</p>
       ) : null}
     </>
   );

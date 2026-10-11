@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import { getUploadedBbcArticle } from "@/lib/articles/bbc-uploaded-content";
 import {
   getArticleInlineSourceCatalog,
   getArticleInlineSourceDocument,
@@ -7,6 +8,7 @@ import {
 import {
   isArticleInlineSourceType,
   normalizeArticleInlineAnnotations,
+  type ArticleInlineSourceType,
 } from "@/lib/article-inline-annotations";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -18,6 +20,13 @@ function createServiceClient() {
   return createClient(supabaseUrl, supabaseServiceKey, {
     auth: { autoRefreshToken: false, persistSession: false },
   });
+}
+
+async function resolveDocument(sourceType: ArticleInlineSourceType, sourceId: string) {
+  const document = getArticleInlineSourceDocument(sourceType, sourceId);
+  if (document || sourceType !== "bbc") return document;
+  const article = await getUploadedBbcArticle(sourceId);
+  return article ? getArticleInlineSourceDocument(sourceType, sourceId, article) : null;
 }
 
 function missingArticleInlineAnnotationsTable(error: { code?: string; message?: string }) {
@@ -62,7 +71,7 @@ export async function GET(request: NextRequest) {
     if (mode === "catalog") {
       return NextResponse.json({ sources: getArticleInlineSourceCatalog(sourceType) });
     }
-    const document = getArticleInlineSourceDocument(sourceType, sourceId);
+    const document = await resolveDocument(sourceType, sourceId);
     return document
       ? NextResponse.json({ document })
       : NextResponse.json({ error: "找不到这篇文章。" }, { status: 404 });
@@ -71,7 +80,8 @@ export async function GET(request: NextRequest) {
   if (!sourceId || !supabaseUrl || !supabaseAnonKey) {
     return NextResponse.json({ error: "文章标识无效。" }, { status: 400 });
   }
-  if (!getArticleInlineSourceDocument(sourceType, sourceId)) {
+  const document = await resolveDocument(sourceType, sourceId);
+  if (!document) {
     return NextResponse.json({ error: "找不到这篇文章。" }, { status: 404 });
   }
 
@@ -86,7 +96,6 @@ export async function GET(request: NextRequest) {
     .maybeSingle();
 
   if (error) return NextResponse.json({ error: "暂时无法读取文章标注。" }, { status: 500 });
-  const document = getArticleInlineSourceDocument(sourceType, sourceId)!;
   const annotations = normalizeArticleInlineAnnotations(data?.annotations ?? [], document.units);
   return NextResponse.json({ annotations: annotations ?? [] });
 }
@@ -104,7 +113,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "文章类型或标识无效。" }, { status: 400 });
   }
 
-  const document = getArticleInlineSourceDocument(sourceType, sourceId);
+  const document = await resolveDocument(sourceType, sourceId);
   if (!document) return NextResponse.json({ error: "找不到这篇文章。" }, { status: 404 });
   const annotations = normalizeArticleInlineAnnotations(payload?.annotations, document.units);
   if (!annotations) {

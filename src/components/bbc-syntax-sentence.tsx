@@ -122,6 +122,7 @@ export function BbcSyntaxSentence({
   translation,
   vocabularyWordIndexes,
   waveTerms,
+  waveRanges,
   onTokenRangeSelect,
   onPosTokenClick,
   onSyntaxSpanClick,
@@ -136,12 +137,13 @@ export function BbcSyntaxSentence({
   translation?: ReactNode;
   vocabularyWordIndexes: Set<number>;
   waveTerms: string[];
+  waveRanges?: { start: number; end: number }[];
   onTokenRangeSelect?: (range: BbcSyntaxTokenRange) => void;
   onPosTokenClick?: (tokenIndex: number) => void;
   onSyntaxSpanClick?: (level: BbcSyntaxLevel, span: BbcSyntaxSpan) => void;
   onInlineAnnotationClick?: (annotation: ArticleInlineAnnotation) => void;
 }) {
-  const waved = phraseIndexes(data.tokens, waveTerms);
+  const waved = waveRanges ? new Set(data.tokens.flatMap((token, index) => waveRanges.some((range) => range.start < token.end && range.end > token.start) ? [index] : [])) : phraseIndexes(data.tokens, waveTerms);
   const lexicalWords = [...data.text.matchAll(/[A-Za-z]+(?:['’-][A-Za-z]+)*/g)];
   const staticTracks = syntaxTracks(data, displayMode);
   const sentenceRef = useRef<HTMLDivElement>(null);

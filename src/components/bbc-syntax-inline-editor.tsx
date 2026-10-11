@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import type { ReactNode } from "react";
 import {
   BbcSyntaxSentence,
@@ -14,6 +15,7 @@ import {
 import type { ArticleInlineAnnotation, ArticleInlineLineStyle } from "@/lib/article-inline-annotations";
 import { supabase } from "@/lib/supabase/client";
 import { notifyArticleInlineAnnotationsUpdated } from "@/components/use-article-inline-annotations";
+import { adminRequest } from "@/lib/admin/request";
 import styles from "./bbc-syntax-inline-editor.module.css";
 
 const SYNTAX_LEVELS = [1, 2, 3, 4, 5] as const;
@@ -26,6 +28,8 @@ type Props = {
   allInlineAnnotations: ArticleInlineAnnotation[];
   allSentences: BbcSyntaxSentenceData[];
   articleId: string;
+  isUploadedArticle?: boolean;
+  timing?: { durationMs: number; endMs: number; startMs: number };
   data: BbcSyntaxSentenceData;
   displayMode: BbcSyntaxDisplayMode;
   inlineAnnotations: ArticleInlineAnnotation[];
@@ -34,6 +38,8 @@ type Props = {
   sentenceNo: number;
   showPos: boolean;
   translation: ReactNode;
+  waveTerms?: string[];
+  waveRanges?: { start: number; end: number }[];
 };
 
 function spanText(sentence: BbcSyntaxSentenceData, span: BbcSyntaxSpan) {
@@ -52,6 +58,8 @@ export function BbcSyntaxInlineEditor({
   allInlineAnnotations,
   allSentences,
   articleId,
+  isUploadedArticle = false,
+  timing,
   data,
   displayMode,
   inlineAnnotations,
@@ -60,7 +68,10 @@ export function BbcSyntaxInlineEditor({
   sentenceNo,
   showPos,
   translation,
+  waveTerms = [],
+  waveRanges,
 }: Props) {
+  const router = useRouter();
   const [isAdmin, setIsAdmin] = useState(false);
   const [editing, setEditing] = useState(false);
   const [selection, setSelection] = useState<BbcSyntaxTokenRange | null>(null);
@@ -72,6 +83,9 @@ export function BbcSyntaxInlineEditor({
   const [lineStyle, setLineStyle] = useState<ArticleInlineLineStyle>("solid");
   const [message, setMessage] = useState("");
   const [saving, setSaving] = useState(false);
+  const [timingStart, setTimingStart] = useState(timing ? (timing.startMs / 1_000).toFixed(3) : "");
+  const [timingEnd, setTimingEnd] = useState(timing ? (timing.endMs / 1_000).toFixed(3) : "");
+  const [savingTiming, setSavingTiming] = useState(false);
 
   useEffect(() => {
     let active = true;
@@ -98,6 +112,11 @@ export function BbcSyntaxInlineEditor({
     setSelectedInlineId("");
     setMessage("");
   }, [articleId, sentenceNo]);
+
+  useEffect(() => {
+    setTimingStart(timing ? (timing.startMs / 1_000).toFixed(3) : "");
+    setTimingEnd(timing ? (timing.endMs / 1_000).toFixed(3) : "");
+  }, [sentenceNo, timing?.startMs, timing?.endMs]);
 
   const selectedPos = useMemo(() => {
     if (!selection) return "";
@@ -262,7 +281,7 @@ export function BbcSyntaxInlineEditor({
         fetch("/api/bbc-syntax-annotations", {
           method: "PUT",
           headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
-          body: JSON.stringify({ articleId, sentences: allSentences }),
+          body: JSON.stringify({ articleId, sentences: allSentences, reviewedSentenceNo: sentenceNo }),
         }),
         fetch("/api/article-inline-annotations", {
           method: "POST",
@@ -278,12 +297,36 @@ export function BbcSyntaxInlineEditor({
         !inlineResponse.ok ? (inlinePayload?.error ?? "下划线保存失败") : "",
       ].filter(Boolean);
       if (errors.length) throw new Error(errors.join("；"));
+      onSentenceChange({ ...data, status: "reviewed" });
       notifyArticleInlineAnnotationsUpdated("bbc", articleId);
       setMessage("已保存。词性、语法成分和下划线标注已更新。");
     } catch (error) {
       setMessage(error instanceof Error ? error.message : "保存语法标注失败。");
     } finally {
       setSaving(false);
+    }
+  }
+
+  async function saveTiming() {
+    const startMs = Math.round(Number(timingStart) * 1_000);
+    const endMs = Math.round(Number(timingEnd) * 1_000);
+    if (!Number.isFinite(startMs) || !Number.isFinite(endMs) || endMs <= startMs) {
+      setMessage("请填写有效的起止时间，单位为秒。");
+      return;
+    }
+    setSavingTiming(true);
+    setMessage("");
+    try {
+      await adminRequest("/api/admin/bbc-articles", {
+        method: "PATCH",
+        body: JSON.stringify({ articleId, sentenceNo, startMs, endMs }),
+      });
+      setMessage("本句原声时间已保存，文章播放器已刷新。");
+      router.refresh();
+    } catch (error) {
+      setMessage(error instanceof Error ? error.message : "时间轴保存失败。");
+    } finally {
+      setSavingTiming(false);
     }
   }
 
@@ -302,11 +345,13 @@ export function BbcSyntaxInlineEditor({
         showPos={showPos}
         translation={translation}
         vocabularyWordIndexes={new Set<number>()}
-        waveTerms={[]}
+        waveTerms={waveTerms}
+        waveRanges={waveRanges}
       />
       {isAdmin ? (
         <div className={styles.editor}>
           {!editing ? <div className={styles.editorHeader}>
+            {data.status === "draft" ? <small>自动标注 · 可点击校改</small> : null}
             <button onClick={() => setEditing(true)} type="button">编辑本句</button>
           </div> : null}
           {editing ? (
@@ -362,6 +407,19 @@ export function BbcSyntaxInlineEditor({
                   <button aria-pressed="true" className={styles.active} onClick={() => setEditing(false)} type="button">退出编辑</button>
                 </div>
               </div>
+              {isUploadedArticle && timing ? (
+                <div className={styles.controls}>
+                  <label>
+                    <span>原声起点（秒）</span>
+                    <input aria-label="原声起点，秒" max={timing.durationMs / 1_000} min={0} onChange={(event) => setTimingStart(event.target.value)} step="0.001" type="number" value={timingStart} />
+                  </label>
+                  <label>
+                    <span>原声终点（秒）</span>
+                    <input aria-label="原声终点，秒" max={timing.durationMs / 1_000} min={0} onChange={(event) => setTimingEnd(event.target.value)} step="0.001" type="number" value={timingEnd} />
+                  </label>
+                  <button disabled={savingTiming || saving} onClick={() => void saveTiming()} type="button">{savingTiming ? "保存时间中…" : "保存本句时间"}</button>
+                </div>
+              ) : null}
               <div className={styles.spanList}>
                 {allSpans.length ? allSpans.map(({ level: spanLevel, span }, index) => (
                   <div className={styles.spanItem} key={`${spanLevel}-${span.start}-${span.end}-${index}`}>

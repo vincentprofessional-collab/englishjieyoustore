@@ -1,4 +1,4 @@
-import { BBC_ARTICLES, getBbcArticleById } from "@/lib/articles/bbc";
+import { BBC_ARTICLES, getBbcArticleById, type BbcArticle } from "@/lib/articles/bbc";
 import {
   getNewConceptArticleTextBlocks,
   getNewConceptLessonById,
@@ -45,9 +45,10 @@ export function getArticleInlineSourceCatalog(
 export function getArticleInlineSourceDocument(
   sourceType: ArticleInlineSourceType,
   sourceId: string,
+  uploadedBbcArticle?: BbcArticle,
 ): ArticleInlineSourceDocument | null {
   if (sourceType === "bbc") {
-    const article = getBbcArticleById(sourceId);
+    const article = getBbcArticleById(sourceId) ?? (uploadedBbcArticle?.id === sourceId ? uploadedBbcArticle : null);
     if (!article) return null;
     return {
       href: `/articles/${article.id}`,

@@ -1881,7 +1881,7 @@ export async function getExtendedVocabularyEntry(word: string) {
     ? mergeVocabularyEntries(localEntry, databaseEntry)
     : localEntry ?? databaseEntry;
 
-  if (primaryEntry?.englishDefinitions.length && (primaryEntry.ukAudioUrl || primaryEntry.usAudioUrl)) {
+  if (primaryEntry?.englishDefinitions.length) {
     return primaryEntry;
   }
   const dictionaryEntry = await getFreeDictionaryVocabularyEntry(candidates);

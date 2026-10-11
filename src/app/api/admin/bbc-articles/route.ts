@@ -1,4 +1,4 @@
-import { createHash, createHmac } from "node:crypto";
+import { createHash, createHmac, randomBytes } from "node:crypto";
 import { revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
@@ -6,6 +6,8 @@ import { splitArticleSentences } from "@/lib/article-inline-annotations";
 import { getBbcArticleById } from "@/lib/articles/bbc";
 import { parseBbcArticleDateFromTitle, parseBbcArticlePaste, splitBbcArticleParagraphs } from "@/lib/articles/bbc-article-upload";
 import type { BbcArticle, BbcVocabularyItem } from "@/lib/articles/bbc";
+import { extractBbcWaveText } from "@/lib/articles/bbc-paste-markup";
+import { buildAutomaticBbcSyntax } from "@/lib/articles/bbc-automatic-syntax";
 
 export const runtime = "nodejs";
 
@@ -52,7 +54,7 @@ function encode(value: string) {
   );
 }
 
-function getPresignedPutUrl(objectPath: string) {
+function getPresignedPutUrl(objectPath: string, method = "PUT") {
   const accountId = process.env.R2_ACCOUNT_ID;
   const accessKeyId = process.env.R2_BBC_AUDIO_UPLOAD_ACCESS_KEY_ID;
   const secretAccessKey = process.env.R2_BBC_AUDIO_UPLOAD_SECRET_ACCESS_KEY;
@@ -77,7 +79,7 @@ function getPresignedPutUrl(objectPath: string) {
     .join("&");
   const canonicalHeaders = `content-type:audio/mpeg\nhost:${host}\n`;
   const canonicalRequest = [
-    "PUT",
+    method,
     uri,
     canonicalQuery,
     canonicalHeaders,
@@ -168,20 +170,36 @@ function splitChineseSentences(paragraph: string) {
 function buildPracticeSentences(body: string[], chineseParagraphs: string[]) {
   let sentenceNo = 0;
   return body.flatMap((paragraph, paragraphIndex) => {
-    const englishSentences = splitArticleSentences(paragraph).map(({ text }) => text.trim()).filter(Boolean);
-    const chineseSentences = splitChineseSentences(chineseParagraphs[paragraphIndex] ?? "");
+    const englishWave = extractBbcWaveText(paragraph);
+    const chineseWave = extractBbcWaveText(chineseParagraphs[paragraphIndex] ?? "");
+    const englishSentences = splitArticleSentences(englishWave.text).map(({ text }) => text.trim()).filter(Boolean);
+    const chineseSentences = splitChineseSentences(chineseWave.text);
     const aligned = englishSentences.length === chineseSentences.length;
+    if (!aligned) throw new Error(`第 ${paragraphIndex + 1} 段有 ${englishSentences.length} 个英文句子、${chineseSentences.length} 个中文句子，请逐句对应后再发布。`);
     const units = aligned
       ? englishSentences.map((english, index) => ({ chinese: chineseSentences[index], english }))
-      : [{ chinese: chineseParagraphs[paragraphIndex] ?? "", english: paragraph }];
+      : [{ chinese: chineseWave.text, english: englishWave.text }];
 
-    return units.map(({ chinese, english }) => ({
+    let englishCursor = 0, chineseCursor = 0;
+    return units.map(({ chinese, english }) => {
+      const englishStart = englishWave.text.indexOf(english, englishCursor);
+      const chineseStart = chineseWave.text.indexOf(chinese, chineseCursor);
+      englishCursor = englishStart + english.length; chineseCursor = chineseStart + chinese.length;
+      const localRanges = (ranges: { start: number; end: number }[], start: number, length: number) => ranges
+        .filter((range) => range.start < start + length && range.end > start)
+        .map((range) => ({ start: Math.max(0, range.start - start), end: Math.min(length, range.end - start) }));
+      const englishUnderlinedRanges = localRanges(englishWave.ranges, englishStart, english.length);
+      const chineseUnderlinedRanges = localRanges(chineseWave.ranges, chineseStart, chinese.length);
+      return {
       chinese,
       endMs: 0,
       english,
       sentenceNo: ++sentenceNo,
       startMs: 0,
-    }));
+      underlinedTerms: englishUnderlinedRanges.map((range) => english.slice(range.start, range.end)),
+      chineseUnderlinedTerms: chineseUnderlinedRanges.map((range) => chinese.slice(range.start, range.end)),
+      englishUnderlinedRanges, chineseUnderlinedRanges,
+    }; });
   });
 }
 
@@ -213,18 +231,21 @@ function buildArticle(payload: Record<string, unknown>, objectPath: string): Bbc
   if (vocabulary.length > 300 || vocabulary.some((item) => !item.term?.trim() || !item.entry?.trim())) {
     return "词汇与短语内容格式无效或超过 300 条。";
   }
-  const expectedObjectPath = `bbc/${parsedDate.year}/${parsedDate.id}/full.mp3`;
-  if (objectPath && objectPath !== expectedObjectPath) return "音频存储路径与文章日期不匹配。";
+  const expectedPrefix = `bbc/${parsedDate.year}/${parsedDate.id}/`;
+  if (objectPath && (!objectPath.startsWith(expectedPrefix) || !/^full(?:-[a-f0-9]{16})?\.mp3$/.test(objectPath.slice(expectedPrefix.length)))) return "音频存储路径与文章日期不匹配。";
 
-  const fullAudioUrl = objectPath ? `/api/bbc-audio/${parsedDate.year}/${parsedDate.id}/full.mp3` : undefined;
+  const fullAudioUrl = objectPath ? `/api/bbc-audio/${parsedDate.year}/${parsedDate.id}/${objectPath.slice(expectedPrefix.length)}` : undefined;
+  const sentences = buildPracticeSentences(body, chineseParagraphs);
   return {
     ...(fullAudioUrl ? { audioUrl: fullAudioUrl, fullAudioUrl } : {}),
-    body,
-    chineseParagraphs,
+    body: body.map((paragraph) => extractBbcWaveText(paragraph).text),
+    chineseParagraphs: chineseParagraphs.map((paragraph) => extractBbcWaveText(paragraph).text),
+    paragraphUnderlines: body.map((paragraph, index) => ({ english: extractBbcWaveText(paragraph).ranges, chinese: extractBbcWaveText(chineseParagraphs[index]).ranges })),
     date: parsedDate.date,
     id: parsedDate.id,
     lead: titleChinese,
-    sentences: buildPracticeSentences(body, chineseParagraphs),
+    sentences,
+    syntaxSentences: sentences.map((sentence) => buildAutomaticBbcSyntax(sentence.english)),
     title,
     titleChinese: titleChinese || undefined,
     vocabulary,
@@ -239,6 +260,17 @@ export async function POST(request: NextRequest) {
   if ("response" in admin) return admin.response;
 
   const payload = await request.json().catch(() => null) as Record<string, unknown> | null;
+  if (payload?.action === "prepare") {
+    if (typeof payload.text !== "string" || payload.text.length > 700_000) return NextResponse.json({ error: "文章内容无效或超过长度限制。" }, { status: 400 });
+    const parsed = parseBbcArticlePaste(payload.text);
+    if (typeof parsed === "string") return NextResponse.json({ error: parsed }, { status: 400 });
+    try {
+      const article = buildArticle(parsed, "");
+      if (typeof article === "string") return NextResponse.json({ error: article }, { status: 400 });
+      if (getBbcArticleById(article.id)) return NextResponse.json({ error: "内置文章正文由原有内容库维护，语法标注请在前端精读页面修改。" }, { status: 409 });
+      return NextResponse.json({ article });
+    } catch (cause) { return NextResponse.json({ error: cause instanceof Error ? cause.message : "文章分析失败。" }, { status: 400 }); }
+  }
   const title = typeof payload?.title === "string" ? payload.title : "";
   const articleDate = parseBbcArticleDateFromTitle(title);
   if (!articleDate) return NextResponse.json({ error: "标题中需要包含有效日期数字，例如 260727 或 20260727。" }, { status: 400 });
@@ -263,7 +295,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "MP3 文件必须大于 0 且不超过 200 MB。" }, { status: 400 });
     }
 
-    const objectPath = `bbc/${articleDate.year}/${articleDate.id}/full.mp3`;
+    const objectPath = `bbc/${articleDate.year}/${articleDate.id}/full-${randomBytes(8).toString("hex")}.mp3`;
     const uploadUrl = getPresignedPutUrl(objectPath);
     if (!uploadUrl) {
       return NextResponse.json({ error: "音频上传服务尚未配置写入凭据，请联系管理员配置 BBC 音频上传权限。" }, { status: 503 });
@@ -308,8 +340,28 @@ export async function PUT(request: NextRequest) {
   const objectPath = typeof payload.objectPath === "string"
     ? payload.objectPath
     : parsedPaste && await hasR2Object(expectedAudioPath) ? expectedAudioPath : "";
-  const article = buildArticle(articlePayload, objectPath);
+  let article: BbcArticle | string;
+  try { article = buildArticle(articlePayload, objectPath); }
+  catch (cause) { return NextResponse.json({ error: cause instanceof Error ? cause.message : "文章分析失败。" }, { status: 400 }); }
   if (typeof article === "string") return NextResponse.json({ error: article }, { status: 400 });
+  if (!objectPath || !await hasR2Object(objectPath)) return NextResponse.json({ error: "请先上传本篇 MP3，完成时间轴分析后再发布。" }, { status: 400 });
+  const timings = payload.timings;
+  const durationMs = Number(payload.durationMs);
+  if (!Array.isArray(timings) || timings.length !== article.sentences!.length || !Number.isFinite(durationMs) || durationMs <= 0) {
+    return NextResponse.json({ error: "尚未生成完整的逐句原声时间轴。" }, { status: 400 });
+  }
+  let previousEnd = 0;
+  for (let index = 0; index < timings.length; index++) {
+    const timing = timings[index] as Record<string, unknown>;
+    const startMs = Number(timing.startMs), endMs = Number(timing.endMs);
+    if (Number(timing.sentenceNo) !== index + 1 || !Number.isInteger(startMs) || !Number.isInteger(endMs) || startMs < previousEnd || endMs <= startMs || endMs > durationMs) {
+      return NextResponse.json({ error: `第 ${index + 1} 句时间轴无效。` }, { status: 400 });
+    }
+    Object.assign(article.sentences![index], { startMs, endMs, audioUrl: article.fullAudioUrl });
+    previousEnd = endMs;
+  }
+  article.subtitleUrl = `/api/bbc-subtitles/${article.id}`;
+  article.audioDurationMs = durationMs;
 
   const { error } = await supabase.from("bbc_uploaded_articles").upsert({
     article,
@@ -338,6 +390,66 @@ export async function PUT(request: NextRequest) {
     ok: true,
     paragraphCount: article.body.length,
     vocabularyCount: article.vocabulary?.length ?? 0,
+    sentenceCount: article.sentences?.length ?? 0,
     year: article.year,
   });
+}
+
+export async function PATCH(request: NextRequest) {
+  const supabase = createServiceClient();
+  if (!supabase) return NextResponse.json({ error: "后台内容服务尚未配置。" }, { status: 500 });
+  const admin = await requireAdmin(request, supabase);
+  if ("response" in admin) return admin.response;
+
+  const payload = await request.json().catch(() => null) as Record<string, unknown> | null;
+  const articleId = typeof payload?.articleId === "string" ? payload.articleId : "";
+  const sentenceNo = Number(payload?.sentenceNo);
+  const startMs = Number(payload?.startMs);
+  const endMs = Number(payload?.endMs);
+  if (!/^\d{6}$/.test(articleId) || !Number.isInteger(sentenceNo) || sentenceNo < 1
+    || !Number.isInteger(startMs) || !Number.isInteger(endMs)) {
+    return NextResponse.json({ error: "句子编号或时间值无效。" }, { status: 400 });
+  }
+  if (getBbcArticleById(articleId)) return NextResponse.json({ error: "内置文章的原声时间轴不能在此处修改。" }, { status: 409 });
+
+  const result = await supabase.from("bbc_uploaded_articles").select("article").eq("id", articleId).maybeSingle();
+  if (result.error || !result.data) return NextResponse.json({ error: "上传文章不存在。" }, { status: 404 });
+  const article = result.data.article as BbcArticle;
+  const sentences = article.sentences;
+  const index = sentenceNo - 1;
+  const durationMs = article.audioDurationMs;
+  if (!article.fullAudioUrl || typeof durationMs !== "number" || !Number.isInteger(durationMs) || !sentences?.[index]) {
+    return NextResponse.json({ error: "这篇文章没有可编辑的原声时间轴。" }, { status: 400 });
+  }
+  const previous = sentences[index - 1];
+  const next = sentences[index + 1];
+  if (startMs < 0 || endMs <= startMs || endMs > durationMs
+    || (previous && startMs < previous.endMs) || (next && endMs > next.startMs)) {
+    return NextResponse.json({ error: "调整后的时间必须位于音频范围内，且不能与相邻句子重叠。" }, { status: 400 });
+  }
+  sentences[index] = { ...sentences[index], startMs, endMs, audioUrl: article.fullAudioUrl };
+  const { error } = await supabase.from("bbc_uploaded_articles").update({ article }).eq("id", articleId);
+  if (error) return NextResponse.json({ error: `时间轴保存失败：${error.message}` }, { status: 500 });
+  revalidatePath(`/articles/${articleId}`);
+  return NextResponse.json({ ok: true, sentenceNo, startMs, endMs });
+}
+
+export async function GET(request: NextRequest) {
+  const supabase = createServiceClient();
+  if (!supabase) return NextResponse.json({ error: "后台内容服务尚未配置。" }, { status: 503 });
+  const admin = await requireAdmin(request, supabase);
+  if ("response" in admin) return admin.response;
+  const id = request.nextUrl.searchParams.get("articleId");
+  if (id) {
+    const result = await supabase.from("bbc_uploaded_articles").select("article").eq("id", id).maybeSingle();
+    if (result.error || !result.data) return NextResponse.json({ error: "上传文章不存在。" }, { status: 404 });
+    const article = result.data.article as BbcArticle;
+    const filename = article.fullAudioUrl?.split("/").at(-1) ?? "full.mp3";
+    if (!/^full(?:-[a-f0-9]{16})?\.mp3$/.test(filename)) return NextResponse.json({ error: "文章音频路径无效。" }, { status: 400 });
+    const objectPath = `bbc/${article.year}/${article.id}/${filename}`;
+    return NextResponse.json({ article, objectPath, audioReadUrl: article.fullAudioUrl ? getPresignedPutUrl(objectPath, "GET") : null });
+  }
+  const result = await supabase.from("bbc_uploaded_articles").select("id,year,created_at,published,title:article->>title").order("created_at", { ascending: false }).limit(200);
+  if (result.error) return NextResponse.json({ error: "文章列表暂时无法读取。" }, { status: 503 });
+  return NextResponse.json({ articles: result.data });
 }

@@ -10,6 +10,7 @@ import bbc2023Articles from "@/data/bbc/2023/index.json";
 import bbc2024Articles from "@/data/bbc/2024/index.json";
 import bbc2025Articles from "@/data/bbc/2025/index.json";
 import bbc2026Articles from "@/data/bbc/2026/index.json";
+import type { BbcSyntaxSentenceData } from "@/components/bbc-syntax-sentence";
 export {
   mergeBbcVocabularyItems,
   normalizeBbcVocabularyTerm,
@@ -41,6 +42,8 @@ export type BbcArticleSentence = {
   sentenceNo: number;
   startMs: number;
   underlinedTerms?: string[];
+  englishUnderlinedRanges?: { start: number; end: number }[];
+  chineseUnderlinedRanges?: { start: number; end: number }[];
 };
 
 export type BbcArticle = {
@@ -53,6 +56,9 @@ export type BbcArticle = {
   lead: string;
   sentences?: BbcArticleSentence[];
   subtitleUrl?: string;
+  syntaxSentences?: BbcSyntaxSentenceData[];
+  audioDurationMs?: number;
+  paragraphUnderlines?: { english: { start: number; end: number }[]; chinese: { start: number; end: number }[] }[];
   title: string;
   titleChinese?: string;
   vocabulary?: BbcVocabularyItem[];
