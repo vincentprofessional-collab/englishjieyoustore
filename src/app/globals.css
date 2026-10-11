@@ -28214,6 +28214,22 @@ audio.guide-editor-asset-preview {
   margin: 0;
 }
 
+.vocabulary-learning-settings-memory-options input[type="checkbox"] {
+  appearance: none;
+  background: #fffdf8;
+  border: 1.5px solid #87968c;
+  border-radius: 50%;
+  box-sizing: border-box;
+  flex: 0 0 16px;
+  height: 16px;
+  width: 16px;
+}
+
+.vocabulary-learning-settings-memory-options input[type="checkbox"]:checked {
+  background: radial-gradient(circle, #6689df 0 38%, #fffdf8 42% 100%);
+  border-color: #6689df;
+}
+
 .vocabulary-learning-settings-options.vocabulary-learning-pk-books {
   display: grid;
   gap: 8px;

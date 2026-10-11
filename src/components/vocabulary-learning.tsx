@@ -3290,7 +3290,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
                 <label><input checked={settingsDraft.definitionLanguage === "zh"} name="study-definition-language" onChange={() => setSettingsDraft((current) => ({ ...current, definitionLanguage: "zh" }))} type="radio" />中文</label>
                 <label><input checked={settingsDraft.definitionLanguage === "en"} name="study-definition-language" onChange={() => setSettingsDraft((current) => ({ ...current, definitionLanguage: "en" }))} type="radio" />英文</label>
               </fieldset>
-              <fieldset className="vocabulary-learning-settings-options">
+              <fieldset className="vocabulary-learning-settings-options vocabulary-learning-settings-memory-options">
                 <legend>记忆方式</legend>
                 <label><input checked={settingsDraft.showExamples} onChange={(event) => setSettingsDraft((current) => ({ ...current, showExamples: event.target.checked }))} type="checkbox" />语境例句</label>
                 <label><input checked={settingsDraft.showOptions} onChange={(event) => setSettingsDraft((current) => ({ ...current, showOptions: event.target.checked }))} type="checkbox" />释义选项</label>
