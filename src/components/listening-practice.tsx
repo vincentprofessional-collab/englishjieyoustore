@@ -5073,11 +5073,7 @@ export function ListeningPractice({
           </div>
         ) : null}
         {submitted && !isRetellingPractice ? (
-          <section
-            className={`bbc-full-audio-panel listening-review-audio-panel ${
-              mobileReviewPane === "transcript" ? "mobile-pane-active" : "mobile-pane-hidden"
-            }`}
-          >
+          <section className="bbc-full-audio-panel listening-review-audio-panel">
             <div className="bbc-full-audio">{renderReviewAudioPlayer()}</div>
           </section>
         ) : null}
