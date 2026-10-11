@@ -9900,6 +9900,8 @@ h1 {
   align-self: stretch;
   display: grid;
   grid-column: 1;
+  gap: 14px;
+  grid-template-rows: auto minmax(0, 1fr);
   height: auto;
   min-height: 0;
   min-width: 0;
@@ -10008,11 +10010,23 @@ h1 {
 }
 
 .practice-subtitle-line.active {
-  background: #fff7df;
-  border-color: var(--gold);
-  box-shadow:
-    inset 4px 0 0 var(--gold),
-    0 10px 28px rgba(200, 148, 25, 0.16);
+  background: #fff;
+  border-color: var(--line);
+  box-shadow: none;
+}
+
+.listening-current-sentence {
+  border-bottom: 1px solid rgba(228, 216, 189, 0.75);
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+  padding: 2px 0 12px;
+}
+
+.listening-current-sentence > span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
 }
 
 .practice-subtitle-line:focus-visible {
@@ -30122,11 +30136,11 @@ body *:not(.bbc-vocabulary-highlight):not(.bbc-active-word) {
 }
 
 .listening-review-audio-panel {
-  grid-column: 1 / -1;
-  grid-row: 1;
-  margin-bottom: 20px;
+  grid-column: 1;
+  grid-row: auto;
+  margin-bottom: 0;
   min-width: 0;
-  padding: 22px 28px;
+  padding: 16px 18px;
 }
 
 .listening-review-audio-panel .bbc-full-audio {
@@ -30167,7 +30181,7 @@ body *:not(.bbc-vocabulary-highlight):not(.bbc-active-word) {
 @media (max-width: 820px) {
   .listening-review-audio-panel {
     grid-column: 1;
-    grid-row: 2;
+    grid-row: auto;
     margin-bottom: 0;
     padding: 16px;
   }

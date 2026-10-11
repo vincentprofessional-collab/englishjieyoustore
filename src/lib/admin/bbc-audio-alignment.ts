@@ -21,6 +21,6 @@ export async function analyzeBbcAudio(file: Blob, sentences: { sentenceNo: numbe
       };
       worker.postMessage({ audio }, [audio.buffer]);
     });
-    return { durationMs: Math.round(duration * 1000), timings: alignBbcAudioSentences(sentences, recognized, duration) };
+    return { durationMs: Math.round(duration * 1000), ...alignBbcAudioSentences(sentences, recognized, duration) };
   } finally { worker.terminate(); }
 }

@@ -36,7 +36,9 @@ export function AdminBbcArticleUpload() {
   const [text, setText] = useState("");
   const [audioFile, setAudioFile] = useState<File | null>(null);
   const [audioProgress, setAudioProgress] = useState(0);
-  const [audioStatus, setAudioStatus] = useState<"waiting" | "uploading" | "uploaded" | "failed">("waiting");
+  const [audioStatus, setAudioStatus] = useState<
+    "waiting" | "analyzing" | "analysis-failed" | "uploading" | "uploaded" | "failed"
+  >("waiting");
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState(false);
@@ -87,7 +89,7 @@ export function AdminBbcArticleUpload() {
 
     setBusy(true);
     setAudioProgress(0);
-    setAudioStatus(audioFile ? "uploading" : "waiting");
+    setAudioStatus(audioFile ? "analyzing" : "waiting");
     try {
       setMessage("正在解析文章并生成词性、句子成分标注……");
       const prepared = await adminRequest("/api/admin/bbc-articles", { method: "POST", body: JSON.stringify({ action: "prepare", text }) }) as { article: BbcArticle; pastedSyntaxCount?: number };
@@ -108,6 +110,7 @@ export function AdminBbcArticleUpload() {
           body: JSON.stringify({ action: "presign", filename: audioFile.name, size: audioFile.size, title }),
           method: "POST",
         }) as UploadTicket;
+        setAudioStatus("uploading");
         await uploadToR2(ticket, audioFile, setAudioProgress);
         setAudioStatus("uploaded");
         objectPath = ticket.objectPath;
@@ -119,11 +122,11 @@ export function AdminBbcArticleUpload() {
 
       setPublishedHref(payload.href);
       setMessage(
-        `已发布到 ${payload.year} 年 ${payload.month} 月；${payload.paragraphCount} 段正文、${payload.sentenceCount} 句、${payload.vocabularyCount} 条词汇。${prepared.pastedSyntaxCount ? `已应用后台粘贴的 ${prepared.pastedSyntaxCount} 句语法标注；` : ""}其余句子已自动生成词性和句子成分，前端精读页面可继续修改。`,
+        `已发布到 ${payload.year} 年 ${payload.month} 月；${payload.paragraphCount} 段正文、${payload.sentenceCount} 句、${payload.vocabularyCount} 条词汇。${prepared.pastedSyntaxCount ? `已应用后台粘贴的 ${prepared.pastedSyntaxCount} 句语法标注；` : ""}其余句子已自动生成词性和句子成分，前端精读页面可继续修改。${alignment.reviewSentenceNos.length ? `第 ${alignment.reviewSentenceNos.join("、")} 句为低置信度估时，请在前端试听并微调。` : ""}`,
       );
       void loadArticles().catch(() => undefined);
     } catch (uploadError) {
-      setAudioStatus((status) => status === "uploading" ? "failed" : status);
+      setAudioStatus((status) => status === "uploading" ? "failed" : status === "analyzing" ? "analysis-failed" : status);
       setError(true);
       setMessage(uploadError instanceof Error ? uploadError.message : "发布失败，请稍后重试。");
     } finally {
@@ -172,7 +175,7 @@ export function AdminBbcArticleUpload() {
         </label>
         {audioFile ? (
           <div aria-label="MP3 音频上传进度" aria-valuemax={100} aria-valuemin={0} aria-valuenow={audioProgress} className={styles.progress} role="progressbar">
-            <span>{audioStatus === "uploaded" ? "音频已上传" : audioStatus === "uploading" ? `音频上传中 ${audioProgress}%` : audioStatus === "failed" ? "音频上传失败，请重试" : "等待上传"}</span>
+            <span>{audioStatus === "uploaded" ? "音频已上传" : audioStatus === "analyzing" ? "正在识别并生成时间轴" : audioStatus === "analysis-failed" ? "时间轴生成失败，音频尚未上传" : audioStatus === "uploading" ? `音频上传中 ${audioProgress}%` : audioStatus === "failed" ? "R2 音频上传失败，请重试" : "等待上传"}</span>
             <div className={styles.progressTrack}><i style={{ width: `${audioProgress}%` }} /></div>
           </div>
         ) : null}

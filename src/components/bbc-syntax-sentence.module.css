@@ -41,6 +41,7 @@
 .other { --role: var(--other); }
 .word { align-items: center; display: inline-flex; flex-direction: column; font: var(--syntax-word-font-size)/1.55 Georgia, "Times New Roman", "Noto Serif SC", serif; padding: 0 1px; row-gap: var(--syntax-row-space); white-space: nowrap; }
 .wordText { white-space: normal; }
+.activePlaybackWord { background: rgba(200, 148, 25, 0.24); border-radius: 5px; box-shadow: inset 0 -2px 0 var(--gold); }
 .posPlaceholder { visibility: hidden; }
 .annotationLine { align-self: stretch; border-top: 3px solid var(--role); box-sizing: border-box; width: 100%; }
 .annotationSolid { border-top-style: solid; }

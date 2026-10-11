@@ -26,6 +26,7 @@ import {
   useArticlePronunciations,
 } from "@/components/audio-player";
 import { BbcSentencePractice, useBbcAnswerShortcut } from "@/components/bbc-sentence-practice";
+import { BbcSyntaxSentence, type BbcSyntaxSentenceData } from "@/components/bbc-syntax-sentence";
 import { ArticleRetellingPractice, buildRetellingParagraphs } from "@/components/article-retelling-practice";
 import { ContentShareButton } from "@/components/content-share-button";
 import { shouldShowAudioPronunciation } from "@/lib/audio-pronunciation";
@@ -75,6 +76,7 @@ type ListeningPracticeProps = {
   initialSubmitted?: boolean;
   initialMode?: ListeningMode;
   section: ListeningSectionDetail;
+  syntaxBySection?: Record<string, (BbcSyntaxSentenceData | null)[]>;
   testSections?: ListeningSectionDetail[];
   vocabularyHints?: Record<string, LocalVocabularyHint>;
 };
@@ -2856,6 +2858,7 @@ export function ListeningPractice({
   initialMode = "mock",
   initialSubmitted = false,
   section: initialSection,
+  syntaxBySection = {},
   testSections = [],
   vocabularyHints = {},
 }: ListeningPracticeProps) {
@@ -3179,7 +3182,9 @@ export function ListeningPractice({
   function playReviewSentenceByMode(sentence: ListeningSentence) {
     const nextSentenceNo = getNextSentenceNo(
       section.transcriptSentences
-        .filter((transcriptSentence) => transcriptSentence.audioUrl)
+        .filter((transcriptSentence) => section.fullAudioUrl
+          ? transcriptSentence.startMs != null && transcriptSentence.endMs != null
+          : Boolean(transcriptSentence.audioUrl))
         .map((transcriptSentence) => transcriptSentence.sentenceNo),
       sentence.sentenceNo,
       audioSettingsRef.current.playMode,
@@ -3189,6 +3194,11 @@ export function ListeningPractice({
     );
 
     if (!nextSentence?.audioUrl) {
+      if (!section.fullAudioUrl || nextSentence?.startMs == null) return;
+    }
+
+    if (section.fullAudioUrl) {
+      playSentenceSegment(nextSentence);
       return;
     }
 
@@ -3738,7 +3748,14 @@ export function ListeningPractice({
   }
 
   function handleSentenceStopAtEnd() {
+    const shouldAdvance = stopAtSeconds != null;
     setStopAtSeconds(null);
+    if (!shouldAdvance) return;
+    const sentence = section.transcriptSentences.find((item) => item.sentenceNo === activeSentenceNo);
+    if (!sentence) return;
+    const speakingMode = audioSettingsRef.current.speakingMode;
+    if (speakingMode !== "none") startSpeakingPractice(sentence, speakingMode);
+    else playReviewSentenceByMode(sentence);
   }
 
   function updateAnswer(questionId: string, value: string) {
@@ -3800,7 +3817,7 @@ export function ListeningPractice({
       return;
     }
 
-    if (reviewStudyMode === "general" && !section.fullAudioUrl && sentence.audioUrl) {
+    if (!section.fullAudioUrl && sentence.audioUrl) {
       playSentenceAudioClip(sentence);
       return;
     }
@@ -3813,7 +3830,7 @@ export function ListeningPractice({
       return;
     }
 
-    if (!sentence.audioUrl) {
+    if (section.fullAudioUrl || !sentence.audioUrl) {
       playSentenceSegment(sentence);
       return;
     }
@@ -3883,7 +3900,39 @@ export function ListeningPractice({
     window.addEventListener("mouseup", handleMouseUp);
   }
 
+  function getSubtitleActiveWordIndex(sentence: ListeningSentence, wordCount: number) {
+    let progress: number | null = null;
+    if (
+      section.fullAudioUrl && activeSentenceNo === sentence.sentenceNo
+      && sentence.startMs != null && sentence.endMs != null && sentence.endMs > sentence.startMs
+    ) {
+      progress = (fullAudioPositionMs - sentence.startMs) / (sentence.endMs - sentence.startMs);
+    } else if (activeSentenceClipId === sentence.id && isSentenceClipPlaying) {
+      const duration = sentenceDurationsRef.current[sentence.id] ?? 0;
+      if (duration > 0) progress = activeSentenceClipPosition / duration;
+    }
+    return progress == null || wordCount <= 0
+      ? -1
+      : Math.min(wordCount - 1, Math.max(0, Math.floor(progress * wordCount)));
+  }
+
   function renderTranscriptSentenceContent(sentence: ListeningSentence) {
+    const syntaxData = syntaxBySection[section.id]?.[sentence.sentenceNo - 1];
+    if (reviewStudyMode === "intensive" && syntaxData) {
+      const wordCount = splitEnglishTokens(sentence.englishText).filter(isWordToken).length;
+      return (
+        <BbcSyntaxSentence
+          activeWordIndex={getSubtitleActiveWordIndex(sentence, wordCount)}
+          data={syntaxData}
+          displayMode="all"
+          embedded
+          sentenceNo={sentence.sentenceNo}
+          translation={sentence.chineseText ?? ""}
+          vocabularyWordIndexes={new Set()}
+          waveTerms={[]}
+        />
+      );
+    }
     const wordTargets = splitEnglishTokens(sentence.englishText).flatMap((token, tokenIndex) => {
       if (!isWordToken(token)) return [];
       const normalizedWord = normalizeWord(token);
@@ -4103,23 +4152,7 @@ export function ListeningPractice({
     const tokens = splitEnglishTokens(sentence.englishText);
     const onWordClick = options.onWordClick ?? handleSubtitleClick;
     const wordCount = tokens.filter(isWordToken).length;
-    const activeWordIndex =
-      activeSentenceNo === sentence.sentenceNo &&
-      sentence.startMs != null &&
-      sentence.endMs != null &&
-      sentence.endMs > sentence.startMs &&
-      wordCount > 0
-        ? Math.min(
-            wordCount - 1,
-            Math.max(
-              0,
-              Math.floor(
-                ((fullAudioPositionMs - sentence.startMs) / (sentence.endMs - sentence.startMs)) *
-                  wordCount,
-              ),
-            ),
-          )
-        : -1;
+    const activeWordIndex = getSubtitleActiveWordIndex(sentence, wordCount);
     let wordIndex = -1;
 
     return (
@@ -4975,152 +5008,151 @@ export function ListeningPractice({
           </div>
         ) : null}
         {submitted ? (
-          <section className="bbc-full-audio-panel listening-review-audio-panel">
-            <div className="bbc-full-audio">
-              {section.fullAudioUrl ? (
-                <AudioPlayer
-                  compactControls={reviewStudyMode === "general"}
-                  loopSegment={activeLoopSegment}
-                  onPlayingChange={(isPlaying) => {
-                    setIsFullAudioPlaying(isPlaying);
-                    if (isPlaying) {
-                      clearSpeakingPracticeTimers();
-                      activeSentenceClipIdRef.current = null;
-                      setActiveSentenceClipId(null);
-                      setIsSentenceClipPlaying(false);
-                    }
-                  }}
-                  onStopAtEnd={handleSentenceStopAtEnd}
-                  onTimeChange={(seconds) => setFullAudioPositionMs(Math.round(seconds * 1000))}
-                  settings={audioSettings}
-                  settingsPlacement="none"
-                  seekRequest={seekRequest}
-                  showRate={false}
-                  src={section.fullAudioUrl}
-                  stopAtSeconds={stopAtSeconds}
-                  title="Part audio"
-                />
-              ) : reviewStudyMode === "general" && fallbackSentenceAudio?.audioUrl ? (
-                <AudioPlayer
-                  autoPlaySignal={sentenceAutoPlaySignals[fallbackSentenceAudio.id] ?? 0}
-                  compactControls
-                  hasSelectedRate
-                  html5
-                  key={`general-sentence-${fallbackSentenceAudio.id}`}
-                  onEnded={() => handleSentenceAudioEnded(fallbackSentenceAudio)}
-                  onPlayingChange={(isPlaying) => {
-                    if (isPlaying) {
-                      activeSentenceClipIdRef.current = fallbackSentenceAudio.id;
-                      setActiveSentenceClipId(fallbackSentenceAudio.id);
-                      setIsSentenceClipPlaying(true);
-                    } else if (activeSentenceClipIdRef.current === fallbackSentenceAudio.id) {
-                      setIsSentenceClipPlaying(false);
-                    }
-                  }}
-                  onSettingsChange={updateAudioSettings}
-                  onTimeChange={setActiveSentenceClipPosition}
-                  preload={false}
-                  settings={audioSettings}
-                  settingsPlacement="none"
-                  src={fallbackSentenceAudio.audioUrl}
-                  title={`第 ${fallbackSentenceAudio.sentenceNo} 句音频`}
-                />
-              ) : (
-                <div className="notice">还没有上传音频。</div>
-              )}
-            </div>
-
-            <div className="bbc-audio-toolbar listening-review-transcript-controls">
-              <div className="bbc-audio-toolbar-settings bbc-audio-toolbar-modes">
-                <AudioReadingMenu
-                  isActive={reviewStudyMode === "general"}
-                  isOriginalVisible={isTranscriptVisible}
-                  isVocabularyVisible={isVocabularyVisible}
-                  onActivate={() => selectReviewStudyMode("general")}
-                  onOriginalVisibilityChange={setIsTranscriptVisible}
-                  onVocabularyVisibilityChange={(visible) => {
-                    setIsVocabularyVisible(visible);
-                    if (!visible) setActiveWordTooltip(null);
-                  }}
-                />
-                <button
-                  aria-pressed={reviewStudyMode === "intensive"}
-                  className={`bbc-fullscreen-toggle ${reviewStudyMode === "intensive" ? "active" : ""}`}
-                  onClick={() => selectReviewStudyMode(reviewStudyMode === "intensive" ? "general" : "intensive")}
-                  type="button"
-                >
-                  精读模式
-                </button>
-                <AudioSettingsMenus
-                  onChange={updateAudioSettings}
-                  onModeSelect={(nextMode) => selectReviewStudyMode(nextMode)}
-                  playModeLabel="精听模式"
-                  settings={audioSettings}
-                  variant="listening-only"
-                />
-                <AudioSettingsMenus
-                  onChange={updateAudioSettings}
-                  onModeSelect={(nextMode) => selectReviewStudyMode(nextMode)}
-                  onRetellingSelect={enterRetellingPractice}
-                  settings={audioSettings}
-                  variant="speaking-writing"
-                />
-              </div>
-              <div className="bbc-audio-toolbar-utilities">
-                <button
-                  aria-label={isReadingTimerRunning ? "暂停计时" : "开始计时"}
-                  aria-pressed={isReadingTimerRunning}
-                  className={`bbc-reading-timer ${isReadingTimerRunning ? "active" : ""}`}
-                  onClick={() => {
-                    setIsReadingTimerVisible(true);
-                    setIsReadingTimerRunning((current) => !current);
-                  }}
-                  title={isReadingTimerRunning ? "点击暂停计时" : "点击开始计时"}
-                  type="button"
-                >
-                  <span>{isReadingTimerVisible ? formatReadingTime(readingSeconds) : "计时"}</span>
-                </button>
-                <AudioPronunciationMenu
-                  onChange={(pronunciationMode) => updateAudioSettings({ pronunciationMode })}
-                  value={audioSettings.pronunciationMode}
-                />
-                <AudioSettingsMenus
-                  hasSelectedRate
-                  onChange={updateAudioSettings}
-                  settings={audioSettings}
-                  variant="rate-only"
-                />
-                <AudioSettingsMenus
-                  onChange={updateAudioSettings}
-                  settings={audioSettings}
-                  variant="subtitle-only"
-                />
-                <button
-                  aria-pressed={isFullscreen}
-                  className="bbc-fullscreen-toggle"
-                  onClick={toggleListeningFullscreen}
-                  type="button"
-                >
-                  {isFullscreen ? "退出全屏" : "全屏"}
-                </button>
-                <button
-                  className={`bbc-annotation-toggle ${isNotesOpen ? "active" : ""}`}
-                  data-study-annotation-toggle
-                  onClick={toggleNotesPanel}
-                  type="button"
-                >
-                  批注
-                </button>
-              </div>
-            </div>
-          </section>
-        ) : null}
-        {submitted ? (
           <aside
             className={`practice-audio-study-panel ${isRetellingPractice ? "article-retelling-listening-panel" : ""} ${
               mobileReviewPane === "transcript" ? "mobile-pane-active" : "mobile-pane-hidden"
             }`}
           >
+            <section className="bbc-full-audio-panel listening-review-audio-panel">
+              <div className="bbc-full-audio">
+                {section.fullAudioUrl ? (
+                  <AudioPlayer
+                    compactControls
+                    loopSegment={activeLoopSegment}
+                    onPlayingChange={(isPlaying) => {
+                      setIsFullAudioPlaying(isPlaying);
+                      if (isPlaying) {
+                        clearSpeakingPracticeTimers();
+                        activeSentenceClipIdRef.current = null;
+                        setActiveSentenceClipId(null);
+                        setIsSentenceClipPlaying(false);
+                      }
+                    }}
+                    onStopAtEnd={handleSentenceStopAtEnd}
+                    onTimeChange={(seconds) => setFullAudioPositionMs(Math.round(seconds * 1000))}
+                    settings={audioSettings}
+                    settingsPlacement="none"
+                    seekRequest={seekRequest}
+                    showRate={false}
+                    src={section.fullAudioUrl}
+                    stopAtSeconds={stopAtSeconds}
+                    title="Part audio"
+                  />
+                ) : fallbackSentenceAudio?.audioUrl ? (
+                  <AudioPlayer
+                    autoPlaySignal={sentenceAutoPlaySignals[fallbackSentenceAudio.id] ?? 0}
+                    compactControls
+                    hasSelectedRate
+                    html5
+                    key={`review-sentence-${fallbackSentenceAudio.id}`}
+                    onEnded={() => handleSentenceAudioEnded(fallbackSentenceAudio)}
+                    onDurationChange={(duration) => {
+                      sentenceDurationsRef.current[fallbackSentenceAudio.id] = duration;
+                    }}
+                    onPlayingChange={(isPlaying) => handleReviewSentencePlayingChange(fallbackSentenceAudio, isPlaying)}
+                    onSettingsChange={updateAudioSettings}
+                    onTimeChange={(seconds) => handleReviewSentenceTimeChange(fallbackSentenceAudio, seconds)}
+                    preload={false}
+                    settings={audioSettings}
+                    settingsPlacement="none"
+                    src={fallbackSentenceAudio.audioUrl}
+                    title={`第 ${fallbackSentenceAudio.sentenceNo} 句音频`}
+                  />
+                ) : (
+                  <div className="notice">还没有上传音频。</div>
+                )}
+              </div>
+              {activeSentence && isTranscriptVisible ? (
+                <div className="listening-current-sentence" aria-live="polite">
+                  <span>第 {activeSentence.sentenceNo} 句</span>
+                  {renderTranscriptSentenceContent(activeSentence)}
+                </div>
+              ) : null}
+
+              <div className="bbc-audio-toolbar listening-review-transcript-controls">
+                <div className="bbc-audio-toolbar-settings bbc-audio-toolbar-modes">
+                  <AudioReadingMenu
+                    isActive={reviewStudyMode === "general"}
+                    isOriginalVisible={isTranscriptVisible}
+                    isVocabularyVisible={isVocabularyVisible}
+                    onActivate={() => selectReviewStudyMode("general")}
+                    onOriginalVisibilityChange={setIsTranscriptVisible}
+                    onVocabularyVisibilityChange={(visible) => {
+                      setIsVocabularyVisible(visible);
+                      if (!visible) setActiveWordTooltip(null);
+                    }}
+                  />
+                  <button
+                    aria-pressed={reviewStudyMode === "intensive"}
+                    className={`bbc-fullscreen-toggle ${reviewStudyMode === "intensive" ? "active" : ""}`}
+                    onClick={() => selectReviewStudyMode(reviewStudyMode === "intensive" ? "general" : "intensive")}
+                    type="button"
+                  >
+                    精读模式
+                  </button>
+                  <AudioSettingsMenus
+                    onChange={updateAudioSettings}
+                    onModeSelect={(nextMode) => selectReviewStudyMode(nextMode)}
+                    playModeLabel="精听模式"
+                    settings={audioSettings}
+                    variant="listening-only"
+                  />
+                  <AudioSettingsMenus
+                    onChange={updateAudioSettings}
+                    onModeSelect={(nextMode) => selectReviewStudyMode(nextMode)}
+                    onRetellingSelect={enterRetellingPractice}
+                    settings={audioSettings}
+                    variant="speaking-writing"
+                  />
+                </div>
+                <div className="bbc-audio-toolbar-utilities">
+                  <button
+                    aria-label={isReadingTimerRunning ? "暂停计时" : "开始计时"}
+                    aria-pressed={isReadingTimerRunning}
+                    className={`bbc-reading-timer ${isReadingTimerRunning ? "active" : ""}`}
+                    onClick={() => {
+                      setIsReadingTimerVisible(true);
+                      setIsReadingTimerRunning((current) => !current);
+                    }}
+                    title={isReadingTimerRunning ? "点击暂停计时" : "点击开始计时"}
+                    type="button"
+                  >
+                    <span>{isReadingTimerVisible ? formatReadingTime(readingSeconds) : "计时"}</span>
+                  </button>
+                  <AudioPronunciationMenu
+                    onChange={(pronunciationMode) => updateAudioSettings({ pronunciationMode })}
+                    value={audioSettings.pronunciationMode}
+                  />
+                  <AudioSettingsMenus
+                    hasSelectedRate
+                    onChange={updateAudioSettings}
+                    settings={audioSettings}
+                    variant="rate-only"
+                  />
+                  <AudioSettingsMenus
+                    onChange={updateAudioSettings}
+                    settings={audioSettings}
+                    variant="subtitle-only"
+                  />
+                  <button
+                    aria-pressed={isFullscreen}
+                    className="bbc-fullscreen-toggle"
+                    onClick={toggleListeningFullscreen}
+                    type="button"
+                  >
+                    {isFullscreen ? "退出全屏" : "全屏"}
+                  </button>
+                  <button
+                    className={`bbc-annotation-toggle ${isNotesOpen ? "active" : ""}`}
+                    data-study-annotation-toggle
+                    onClick={toggleNotesPanel}
+                    type="button"
+                  >
+                    批注
+                  </button>
+                </div>
+              </div>
+            </section>
             <section
               className={`practice-listening-card ${isRetellingPractice ? "article-retelling-parent" : ""}`}
               onPointerUp={handleQuestionSelection}
@@ -5141,11 +5173,11 @@ export function ListeningPractice({
                   }`}
                   ref={subtitleListRef}
                 >
-                  {section.transcriptSentences.map((sentence) => (
+                  {section.transcriptSentences
+                    .filter((sentence) => sentence.sentenceNo !== activeSentenceNo)
+                    .map((sentence) => (
                     <article
-                      className={`practice-subtitle-line ${
-                        activeSentenceNo === sentence.sentenceNo ? "active" : ""
-                      }`}
+                      className="practice-subtitle-line"
                       id={`practice-subtitle-${sentence.sentenceNo}`}
                       key={sentence.id}
                       role="button"
@@ -5214,41 +5246,6 @@ export function ListeningPractice({
                             <small>{SPEAKING_PLAYING_HINTS[audioSettings.speakingMode]}</small>
                           </div>
                         ) : null
-                      ) : null}
-                      {reviewStudyMode !== "general" && (sentence.audioUrl || section.fullAudioUrl) ? (
-                        <div
-                          className="listening-sentence-audio"
-                          onClick={(event) => event.stopPropagation()}
-                          onKeyDown={(event) => event.stopPropagation()}
-                        >
-                          <AudioPlayer
-                            compactControls
-                            hasSelectedRate
-                            html5
-                            onEnded={() => handleSentenceAudioEnded(sentence)}
-                            onPlayingChange={(isPlaying) => {
-                              if (isPlaying) {
-                                activeSentenceClipIdRef.current = sentence.id;
-                                setActiveSentenceClipId(sentence.id);
-                                setIsSentenceClipPlaying(true);
-                              } else if (activeSentenceClipIdRef.current === sentence.id) {
-                                activeSentenceClipIdRef.current = null;
-                                setActiveSentenceClipId(null);
-                                setIsSentenceClipPlaying(false);
-                              }
-                            }}
-                            onSettingsChange={updateAudioSettings}
-                            onStopAtEnd={() => handleSentenceAudioEnded(sentence)}
-                            preload={false}
-                            settings={audioSettings}
-                            settingsPlacement="none"
-                            skipSeconds={3}
-                            src={sentence.audioUrl ?? section.fullAudioUrl ?? ""}
-                            startAtSeconds={sentence.audioUrl || sentence.startMs == null ? 0 : sentence.startMs / 1000}
-                            stopAtSeconds={sentence.audioUrl || sentence.endMs == null ? null : sentence.endMs / 1000}
-                            title={`第 ${sentence.sentenceNo} 句音频`}
-                          />
-                        </div>
                       ) : null}
                     </article>
                   ))}

@@ -1,8 +1,9 @@
 export type BbcRecognizedWord = { text: string; timestamp: [number, number | null] };
 export type BbcSentenceTiming = { sentenceNo: number; startMs: number; endMs: number };
+export type BbcAudioAlignment = { timings: BbcSentenceTiming[]; reviewSentenceNos: number[] };
 const words = (text: string) => (text.toLowerCase().match(/[a-z0-9]+(?:['’][a-z]+)*/g) ?? []).map((word) => word.replace(/[’']/g, ""));
 
-export function alignBbcAudioSentences(sentences: { sentenceNo: number; english: string }[], input: BbcRecognizedWord[], duration: number): BbcSentenceTiming[] {
+export function alignBbcAudioSentences(sentences: { sentenceNo: number; english: string }[], input: BbcRecognizedWord[], duration: number): BbcAudioAlignment {
   if (!Number.isFinite(duration) || duration <= 0 || !sentences.length) throw new Error("音频时长或句子内容无效。");
   const source = sentences.flatMap((sentence) => words(sentence.english));
   const recognized = input.flatMap((item) => {
@@ -24,13 +25,58 @@ export function alignBbcAudioSentences(sentences: { sentenceNo: number; english:
   }
   if (anchors.size / source.length < 0.65) throw new Error("音频与英文原文的匹配度不足，请检查是否选错 MP3。");
   let offset = 0;
-  const timings = sentences.map((sentence) => {
+  const aligned = sentences.map((sentence) => {
     const count = words(sentence.english).length;
     const matches = Array.from({ length: count }, (_, index) => anchors.get(offset + index)).filter((anchor): anchor is typeof recognized[number] => !!anchor);
     offset += count;
-    if (!matches.length || matches.length / count < 0.45) throw new Error(`第 ${sentence.sentenceNo} 句没有可靠的原声时间，请检查音频或在前端微调。`);
-    return { sentenceNo: sentence.sentenceNo, startMs: Math.max(0, Math.round((matches[0].start - 0.08) * 1000)), endMs: Math.min(Math.round(duration * 1000), Math.round((matches.at(-1)!.end + 0.08) * 1000)) };
+    const review = !count || matches.length / count < 0.45;
+    return {
+      count: Math.max(count, 1),
+      matches,
+      review,
+      timing: matches.length
+        ? { sentenceNo: sentence.sentenceNo, startMs: Math.max(0, Math.round((matches[0].start - 0.06) * 1000)), endMs: Math.min(Math.round(duration * 1000), Math.round((matches.at(-1)!.end + 0.06) * 1000)) }
+        : null,
+    };
   });
+  const secondsPerWord = aligned
+    .filter((item) => item.matches.length && !item.review)
+    .map((item) => (item.matches.at(-1)!.end - item.matches[0].start) / item.matches.length)
+    .filter((seconds) => Number.isFinite(seconds) && seconds > 0)
+    .sort((left, right) => left - right);
+  const estimatedSecondsPerWord = Math.min(0.75, Math.max(0.12, secondsPerWord[Math.floor(secondsPerWord.length / 2)] ?? duration / source.length));
+
+  for (let index = 0; index < aligned.length;) {
+    if (aligned[index].timing) { index++; continue; }
+    const first = index;
+    while (index < aligned.length && !aligned[index].timing) index++;
+    const previous = aligned[first - 1]?.timing;
+    const next = aligned[index]?.timing;
+    const previousEnd = (previous?.endMs ?? 0) / 1000;
+    const nextStart = (next?.startMs ?? Math.round(duration * 1000)) / 1000;
+    const available = nextStart - previousEnd;
+    const missing = aligned.slice(first, index);
+    const expected = missing.map((item) => Math.max(0.16, item.count * estimatedSecondsPerWord));
+    const totalExpected = expected.reduce((sum, value) => sum + value, 0);
+    const minimumSpan = missing.length * 0.08;
+    if (available <= minimumSpan) {
+      throw new Error(`第 ${sentences[first].sentenceNo} 句时间无法自动估算，请检查分句或音频。`);
+    }
+    const isCompressed = totalExpected > available;
+    const durations = isCompressed
+      ? expected.map((seconds) => 0.08 + (available - minimumSpan) * (seconds / totalExpected))
+      : expected;
+    let cursor = previousEnd + (isCompressed ? 0 : (available - totalExpected) / 2);
+    missing.forEach((item, itemIndex) => {
+      const sentence = sentences[first + itemIndex];
+      const startMs = Math.max(0, Math.round(cursor * 1000));
+      cursor += durations[itemIndex];
+      const endMs = Math.min(Math.round(duration * 1000), next ? next.startMs : Math.round(duration * 1000), Math.max(startMs + 80, Math.round(cursor * 1000)));
+      item.timing = { sentenceNo: sentence.sentenceNo, startMs, endMs };
+    });
+  }
+
+  const timings = aligned.map((item) => item.timing!);
   for (let index = 1; index < timings.length; index++) {
     if (timings[index].startMs < timings[index - 1].endMs) {
       const boundary = Math.round((timings[index].startMs + timings[index - 1].endMs) / 2);
@@ -38,5 +84,5 @@ export function alignBbcAudioSentences(sentences: { sentenceNo: number; english:
     }
   }
   if (timings.some((timing) => timing.endMs <= timing.startMs)) throw new Error("句子时间轴无效，请重新分析音频。");
-  return timings;
+  return { timings, reviewSentenceNos: aligned.flatMap((item, index) => item.review ? [sentences[index].sentenceNo] : []) };
 }

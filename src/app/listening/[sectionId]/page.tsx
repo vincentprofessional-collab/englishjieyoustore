@@ -1,5 +1,7 @@
 import { notFound } from "next/navigation";
 import { ListeningPractice } from "@/components/listening-practice";
+import type { BbcSyntaxSentenceData } from "@/components/bbc-syntax-sentence";
+import { buildAutomaticBbcSyntax } from "@/lib/articles/bbc-automatic-syntax";
 import { getListeningSection } from "@/lib/ielts/listening";
 import { getVocabularyHintsForTexts } from "@/lib/vocabulary/local-vocabulary";
 
@@ -41,6 +43,12 @@ export default async function ListeningSectionPage({
     .map((result) => result.section)
     .filter((item): item is NonNullable<typeof item> => Boolean(item))
     .sort((left, right) => left.sectionNo - right.sectionNo);
+  const syntaxBySection: Record<string, (BbcSyntaxSentenceData | null)[]> = Object.fromEntries(
+    testSections.map((testSection) => [testSection.id, testSection.transcriptSentences.map((sentence) => {
+      try { return buildAutomaticBbcSyntax(sentence.englishText); }
+      catch { return null; }
+    })]),
+  );
   const vocabularyHints = getVocabularyHintsForTexts(
     testSections.flatMap((testSection) => [
       ...testSection.transcriptSentences.map((sentence) => sentence.englishText),
@@ -59,6 +67,7 @@ export default async function ListeningSectionPage({
       initialSubmitted={initialSubmitted}
       initialMode={normalizedMode}
       section={section}
+      syntaxBySection={syntaxBySection}
       testSections={testSections}
       vocabularyHints={vocabularyHints}
     />

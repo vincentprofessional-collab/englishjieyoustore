@@ -24,6 +24,15 @@ function loadPastedSyntaxModule() {
   return exports;
 }
 
+function loadAudioAlignment() {
+  const exports = {};
+  const code = ts.transpileModule(readFileSync(new URL("../src/lib/articles/bbc-audio-alignment.ts", import.meta.url), "utf8"), {
+    compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 },
+  }).outputText;
+  runInNewContext(code, { exports });
+  return exports.alignBbcAudioSentences;
+}
+
 function loadPasteParser() {
   const exports = {};
   const syntax = loadPastedSyntaxModule();
@@ -167,4 +176,27 @@ test("uploaded bytes stay below 100% until R2 confirms success; rejection stays 
     }
     assert.equal(sentFile, file);
   }
+});
+
+test("BBC audio alignment estimates an unrecognized opening sentence when the rest of the article matches", () => {
+  const align = loadAudioAlignment();
+  const sentences = [
+    { sentenceNo: 1, english: "The opening sentence is missing from recognition." },
+    { sentenceNo: 2, english: "This second sentence contains enough matching words." },
+    { sentenceNo: 3, english: "This final sentence also contains enough matching words." },
+  ];
+  const recognized = sentences.slice(1).flatMap((sentence, sentenceIndex) => {
+    const start = sentenceIndex === 0 ? 2.4 : 4.2;
+    return sentence.english.match(/[A-Za-z]+/g).map((word, wordIndex) => ({
+      text: word,
+      timestamp: [start + wordIndex * 0.25, start + wordIndex * 0.25 + 0.2],
+    }));
+  });
+  const result = align(sentences, recognized, 8);
+  assert.deepEqual(Array.from(result.reviewSentenceNos), [1]);
+  assert.equal(result.timings.length, sentences.length);
+  assert.equal(result.timings[0].sentenceNo, 1);
+  assert.ok(result.timings[0].endMs > result.timings[0].startMs);
+  assert.ok(result.timings[0].endMs <= result.timings[1].startMs);
+  assert.ok(result.timings.at(-1).endMs <= 8000);
 });
