@@ -92,7 +92,12 @@ export function AdminBbcArticleUpload() {
     setAudioStatus(audioFile ? "analyzing" : "waiting");
     try {
       setMessage("正在解析文章并生成词性、句子成分标注……");
-      const prepared = await adminRequest("/api/admin/bbc-articles", { method: "POST", body: JSON.stringify({ action: "prepare", text }) }) as { article: BbcArticle; pastedSyntaxCount?: number };
+      const prepared = await adminRequest("/api/admin/bbc-articles", { method: "POST", body: JSON.stringify({ action: "prepare", text }) }) as {
+        article: BbcArticle;
+        pastedSyntaxCount?: number;
+        pastedSyntaxTotalCount?: number;
+        unmatchedSyntaxSentenceNos?: number[];
+      };
       if (editingId && editingId !== prepared.article.id) throw new Error("编辑文章时请保留原日期编号。");
       let audioBlob: Blob = audioFile!;
       let objectPath: string | undefined = existingAudio?.objectPath;
@@ -121,8 +126,15 @@ export function AdminBbcArticleUpload() {
       });
 
       setPublishedHref(payload.href);
+      const pastedSyntaxTotalCount = prepared.pastedSyntaxTotalCount ?? 0;
+      const unmatchedSyntaxSentenceNos = prepared.unmatchedSyntaxSentenceNos ?? [];
+      const syntaxMessage = pastedSyntaxTotalCount
+        ? `已应用后台粘贴的 ${prepared.pastedSyntaxCount ?? 0}/${pastedSyntaxTotalCount} 句词性与成分标注。${unmatchedSyntaxSentenceNos.length ? `第 ${unmatchedSyntaxSentenceNos.join("、")} 句未匹配，将显示自动标注；请核对该句编号和英文原句。` : ""}`
+        : /全文逐句词性\s*[+＋]\s*句子成分标注/i.test(text)
+          ? "检测到语法标注标题，但没有解析到句子标注；请检查是否按“## 句1”单独分行。"
+          : "";
       setMessage(
-        `已发布到 ${payload.year} 年 ${payload.month} 月；${payload.paragraphCount} 段正文、${payload.sentenceCount} 句、${payload.vocabularyCount} 条词汇。${prepared.pastedSyntaxCount ? `已应用后台粘贴的 ${prepared.pastedSyntaxCount} 句语法标注；` : ""}其余句子已自动生成词性和句子成分，前端精读页面可继续修改。${alignment.reviewSentenceNos.length ? `第 ${alignment.reviewSentenceNos.join("、")} 句为低置信度估时，请在前端试听并微调。` : ""}`,
+        `已发布到 ${payload.year} 年 ${payload.month} 月；${payload.paragraphCount} 段正文、${payload.sentenceCount} 句、${payload.vocabularyCount} 条词汇。${syntaxMessage}其余句子已自动生成词性和句子成分，前端精读页面可继续修改。${alignment.reviewSentenceNos.length ? `第 ${alignment.reviewSentenceNos.join("、")} 句为低置信度估时，请在前端试听并微调。` : ""}`,
       );
       void loadArticles().catch(() => undefined);
     } catch (uploadError) {

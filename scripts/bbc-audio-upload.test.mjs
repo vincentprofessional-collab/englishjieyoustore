@@ -97,12 +97,12 @@ Today's youth are reinventing what it means to be cool.
 
 # 全文逐句词性+句子成分标注
 ## 句1
-Today's youth are reinventing what it means to be cool.
+Today’s youth are reinventing what it means to be cool
 Today's：形容词性物主代词（定语）
 youth：名词（主语）
 are：助动词（谓语一部分）
 reinventing：现在分词（谓语一部分）
-what：连接代词（宾语）
+what：连接代词（宾语从句）
 >主干：youth【主】 are reinventing【谓】 what it means to be cool【宾语从句】
 
 词汇表
@@ -119,13 +119,15 @@ what：连接代词（宾语）
   const tokens = [...sentence.matchAll(/[A-Za-z0-9]+(?:['’-][A-Za-z0-9]+)*|[^\s]/g)].map((match) => ({
     text: match[0], pos: /^[A-Za-z0-9]/.test(match[0]) ? "X" : "PUNCT", start: match.index, end: match.index + match[0].length,
   }));
+  assert.equal(result.syntaxAnnotations[0].sentenceNo, 1);
   const applied = loadPastedSyntaxModule().applyPastedBbcSyntax({
     text: sentence, tokens, level1: [], level2: [], level3: [], level4: [], level5: [], status: "draft",
-  }, result.syntaxAnnotations);
+  }, result.syntaxAnnotations, 1);
   assert.equal(applied.status, "reviewed");
   assert.equal(applied.tokens[0].pos, "DET");
   assert.equal(applied.tokens[0].posLabel, "形容词性物主代词");
   assert.equal(applied.level1.length, 3);
+  assert.deepEqual(Array.from(applied.level2, (span) => span.label), ["定语", "主语", "谓语", "宾语从句"]);
 });
 
 test("PUT presigns require the upload credential pair and never use playback credentials", () => {
@@ -178,6 +180,35 @@ test("uploaded bytes stay below 100% until R2 confirms success; rejection stays 
   }
 });
 
+test("uploaded BBC sentences reuse full audio when a valid timing range has no clip URL", () => {
+  const normalize = loadFunctions("../src/lib/articles/bbc-uploaded-content.ts", ["normalizeRecord"], {});
+  const fullAudioUrl = "/api/bbc-audio/2026/260803/full.mp3";
+  const article = {
+    id: "260803",
+    year: 2026,
+    date: "2026-08-03",
+    title: "Example",
+    body: ["A paragraph."],
+    chineseParagraphs: ["中文段落。"],
+    fullAudioUrl,
+    sentences: [
+      { sentenceNo: 1, english: "A sentence.", chinese: "一句话。", startMs: 100, endMs: 900 },
+      { sentenceNo: 2, english: "Another sentence.", chinese: "另一句话。", startMs: 900, endMs: 1800, audioUrl: "/sentence.mp3" },
+      { sentenceNo: 3, english: "No timing.", chinese: "没有时间轴。", startMs: 1800, endMs: 1800 },
+    ],
+    vocabulary: [],
+  };
+  const record = normalize(article, "2026-08-03T00:00:00Z");
+
+  assert.equal(record.article.sentences[0].audioUrl, fullAudioUrl);
+  assert.equal(record.article.sentences[1].audioUrl, "/sentence.mp3");
+  assert.equal(record.article.sentences[2].audioUrl, undefined);
+
+  const legacyRecord = normalize({ ...article, fullAudioUrl: undefined, audioUrl: fullAudioUrl }, "");
+  assert.equal(legacyRecord.article.fullAudioUrl, fullAudioUrl);
+  assert.equal(legacyRecord.article.sentences[0].audioUrl, fullAudioUrl);
+});
+
 test("BBC audio alignment estimates an unrecognized opening sentence when the rest of the article matches", () => {
   const align = loadAudioAlignment();
   const sentences = [
@@ -199,4 +230,43 @@ test("BBC audio alignment estimates an unrecognized opening sentence when the re
   assert.ok(result.timings[0].endMs > result.timings[0].startMs);
   assert.ok(result.timings[0].endMs <= result.timings[1].startMs);
   assert.ok(result.timings.at(-1).endMs <= 8000);
+});
+
+test("BBC audio alignment extends a sentence when recognition drops its final words", () => {
+  const align = loadAudioAlignment();
+  const sentences = [
+    { sentenceNo: 1, english: "She promised to return the completed report tomorrow." },
+    { sentenceNo: 2, english: "They will publish the final results next week." },
+  ];
+  const recognized = [
+    ...["She", "promised", "to", "return", "the"].map((text, index) => ({
+      text,
+      timestamp: [0.25 + index * 0.3, 0.43 + index * 0.3],
+    })),
+    ...["They", "will", "publish", "the", "final", "results", "next", "week"].map((text, index) => ({
+      text,
+      timestamp: [3 + index * 0.28, 3.2 + index * 0.28],
+    })),
+  ];
+  const result = align(sentences, recognized, 6);
+  assert.ok(result.timings[0].endMs > 2_500, `sentence 1 ended at ${result.timings[0].endMs}ms`);
+  assert.ok(result.timings[0].endMs < result.timings[1].startMs);
+  assert.ok(Array.from(result.reviewSentenceNos).includes(1));
+});
+
+test("BBC audio alignment retains the final recognized word when its end timestamp is missing", () => {
+  const align = loadAudioAlignment();
+  const result = align(
+    [{ sentenceNo: 1, english: "The final sentence ends here." }],
+    [
+      { text: "The", timestamp: [0.2, 0.4] },
+      { text: "final", timestamp: [0.45, 0.7] },
+      { text: "sentence", timestamp: [0.75, 1.1] },
+      { text: "ends", timestamp: [1.15, 1.4] },
+      { text: "here", timestamp: [1.45, null] },
+    ],
+    2,
+  );
+  assert.equal(result.timings[0].endMs, 2000);
+  assert.deepEqual(Array.from(result.reviewSentenceNos), []);
 });

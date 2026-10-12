@@ -34,8 +34,22 @@ function normalizeRecord(value: unknown, createdAt: unknown): UploadedBbcArticle
     return null;
   }
 
+  const fullAudioUrl = article.fullAudioUrl ?? article.audioUrl;
+  const normalizedArticle = fullAudioUrl
+    ? {
+        ...article,
+        fullAudioUrl,
+        sentences: article.sentences?.map((sentence) =>
+          !sentence.audioUrl && Number.isFinite(sentence.startMs) && Number.isFinite(sentence.endMs)
+            && sentence.startMs >= 0 && sentence.endMs > sentence.startMs
+            ? { ...sentence, audioUrl: fullAudioUrl }
+            : sentence,
+        ),
+      }
+    : article;
+
   return {
-    article,
+    article: normalizedArticle,
     createdAt: typeof createdAt === "string" ? createdAt : "",
   };
 }

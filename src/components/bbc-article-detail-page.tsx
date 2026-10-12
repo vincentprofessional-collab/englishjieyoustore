@@ -1665,18 +1665,6 @@ export default function ArticleDetailPage({ article, isUploadedArticle = false, 
                     <div className="bbc-intensive-reading-actions">
                       {hasReviewedSyntax || hasBackendGrammarAnnotations ? <span className="bbc-intensive-sentence-number">#{sentence.sentenceNo}</span> : null}
                       <div className="bbc-intensive-sentence-controls">
-                        {sentence.audioUrl ? (
-                          <button
-                            aria-label={`播放第 ${sentence.sentenceNo} 句原声`}
-                            className="bbc-sentence-mini-audio"
-                            onClick={() => requestSentenceAutoPlay(sentence.sentenceNo)}
-                            title="播放本句原声"
-                            type="button"
-                          >
-                            <span aria-hidden="true" className="bbc-sentence-mini-audio-icon" />
-                            <span>本句原声</span>
-                          </button>
-                        ) : null}
                         {studyMode === "writing" && audioSettings.dictationMode !== "none" ? (
                           <button
                             aria-keyshortcuts="Shift"

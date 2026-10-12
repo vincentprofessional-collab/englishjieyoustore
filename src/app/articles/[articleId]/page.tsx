@@ -42,7 +42,7 @@ export default async function ArticlePage({
     ?? (!builtinArticle ? article.sentences?.map((sentence) => buildAutomaticBbcSyntax(sentence.english)) : undefined);
 
   if (process.env.NODE_ENV === "development" && preview === "mobile") {
-    return <ArticleDetailPage article={article} isUploadedArticle={!builtinArticle} syntaxSentences={canonicalSyntaxSentences} />;
+    return <ArticleDetailPage key={article.id} article={article} isUploadedArticle={!builtinArticle} syntaxSentences={canonicalSyntaxSentences} />;
   }
 
   const hasPublicRelease = article.year === 2015 && isFreeBbc2015ArticleUnlocked(article.id);
@@ -84,5 +84,5 @@ export default async function ArticlePage({
     }
   }
 
-  return <ArticleDetailPage article={article} isUploadedArticle={!builtinArticle} syntaxSentences={syntaxSentences} />;
+  return <ArticleDetailPage key={article.id} article={article} isUploadedArticle={!builtinArticle} syntaxSentences={syntaxSentences} />;
 }

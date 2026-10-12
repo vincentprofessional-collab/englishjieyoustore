@@ -6,9 +6,23 @@ const words = (text: string) => (text.toLowerCase().match(/[a-z0-9]+(?:['’][a-
 export function alignBbcAudioSentences(sentences: { sentenceNo: number; english: string }[], input: BbcRecognizedWord[], duration: number): BbcAudioAlignment {
   if (!Number.isFinite(duration) || duration <= 0 || !sentences.length) throw new Error("音频时长或句子内容无效。");
   const source = sentences.flatMap((sentence) => words(sentence.english));
-  const recognized = input.flatMap((item) => {
-    if (!Number.isFinite(item.timestamp[0]) || item.timestamp[1] === null || !Number.isFinite(item.timestamp[1]) || item.timestamp[1] <= item.timestamp[0]) return [];
-    return words(item.text).map((word) => ({ word, start: item.timestamp[0], end: item.timestamp[1]! }));
+  const recognized = input.flatMap((item, index) => {
+    const start = item.timestamp?.[0];
+    if (!Number.isFinite(start) || start! < 0 || start! >= duration) return [];
+    const itemWords = words(item.text);
+    if (!itemWords.length) return [];
+
+    const suppliedEnd = item.timestamp[1];
+    const nextStart = suppliedEnd == null || !Number.isFinite(suppliedEnd) || suppliedEnd <= start!
+      ? input.slice(index + 1).map((next) => next.timestamp?.[0]).find((value) => Number.isFinite(value) && value! > start!)
+      : undefined;
+    const end = Math.min(duration, Math.max(start! + 0.08, suppliedEnd != null && Number.isFinite(suppliedEnd) && suppliedEnd > start! ? suppliedEnd : nextStart ?? duration));
+    const span = end - start!;
+    return itemWords.map((word, wordIndex) => ({
+      word,
+      start: start! + span * (wordIndex / itemWords.length),
+      end: start! + span * ((wordIndex + 1) / itemWords.length),
+    }));
   });
   if (!source.length || !recognized.length || source.length * recognized.length > 16_000_000) throw new Error("音频未识别出可对齐的英文，或文章过长。");
   const width = recognized.length + 1;
@@ -27,15 +41,20 @@ export function alignBbcAudioSentences(sentences: { sentenceNo: number; english:
   let offset = 0;
   const aligned = sentences.map((sentence) => {
     const count = words(sentence.english).length;
-    const matches = Array.from({ length: count }, (_, index) => anchors.get(offset + index)).filter((anchor): anchor is typeof recognized[number] => !!anchor);
+    const matchedOffsets = Array.from({ length: count }, (_, index) => index).filter((index) => anchors.has(offset + index));
+    const matches = matchedOffsets.map((index) => anchors.get(offset + index)!);
     offset += count;
-    const review = !count || matches.length / count < 0.45;
+    const missingAtStart = matchedOffsets[0] ?? 0;
+    const missingAtEnd = matches.length ? count - matchedOffsets.at(-1)! - 1 : count;
+    const review = !count || matches.length / count < 0.45 || missingAtStart > 1 || missingAtEnd > 1;
     return {
       count: Math.max(count, 1),
       matches,
+      missingAtStart,
+      missingAtEnd,
       review,
       timing: matches.length
-        ? { sentenceNo: sentence.sentenceNo, startMs: Math.max(0, Math.round((matches[0].start - 0.06) * 1000)), endMs: Math.min(Math.round(duration * 1000), Math.round((matches.at(-1)!.end + 0.06) * 1000)) }
+        ? { sentenceNo: sentence.sentenceNo, startMs: Math.max(0, Math.round((matches[0].start - 0.12) * 1000)), endMs: Math.min(Math.round(duration * 1000), Math.round((matches.at(-1)!.end + 0.28) * 1000)) }
         : null,
     };
   });
@@ -45,6 +64,12 @@ export function alignBbcAudioSentences(sentences: { sentenceNo: number; english:
     .filter((seconds) => Number.isFinite(seconds) && seconds > 0)
     .sort((left, right) => left - right);
   const estimatedSecondsPerWord = Math.min(0.75, Math.max(0.12, secondsPerWord[Math.floor(secondsPerWord.length / 2)] ?? duration / source.length));
+
+  aligned.forEach((item) => {
+    if (!item.timing || !item.matches.length) return;
+    item.timing.startMs = Math.max(0, Math.round((item.matches[0].start - 0.12 - item.missingAtStart * estimatedSecondsPerWord) * 1000));
+    item.timing.endMs = Math.min(Math.round(duration * 1000), Math.round((item.matches.at(-1)!.end + 0.28 + item.missingAtEnd * estimatedSecondsPerWord) * 1000));
+  });
 
   for (let index = 0; index < aligned.length;) {
     if (aligned[index].timing) { index++; continue; }

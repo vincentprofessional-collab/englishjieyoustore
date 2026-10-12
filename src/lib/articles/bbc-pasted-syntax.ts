@@ -1,6 +1,7 @@
 import type { BbcSyntaxSentenceData, BbcSyntaxSpan } from "@/components/bbc-syntax-sentence";
 
 export type PastedBbcSyntaxSentence = {
+  sentenceNo: number;
   text: string;
   items: { term: string; description: string }[];
   main: string;
@@ -25,10 +26,15 @@ function canonicalRole(value: string) {
 
 function rolesIn(description: string) {
   const found = new Set<string>();
+  const positiveDescription = description.replace(/非谓语/g, "");
   for (const role of ROLE_NAMES) {
-    if (description.includes(role)) found.add(canonicalRole(role));
+    if (positiveDescription.includes(role)) found.add(canonicalRole(role));
   }
-  return [...found];
+  return [...found].filter((role) => ![...found].some((other) => other !== role && other.includes(role)));
+}
+
+function sentenceWordKey(value: string) {
+  return (value.toLowerCase().replace(/[‘’]/g, "'").match(/[a-z0-9]+(?:'[a-z0-9]+)*/g) ?? []).join(" ");
 }
 
 function posCode(description: string) {
@@ -106,7 +112,8 @@ export function parsePastedBbcSyntaxBlock(value: string) {
   const sentences: PastedBbcSyntaxSentence[] = [];
   for (const section of sections) {
     const lines = section.split("\n");
-    if (!SECTION_HEADING.test(lines[0]?.trim() ?? "")) continue;
+    const sectionHeading = lines[0]?.trim().match(SECTION_HEADING);
+    if (!sectionHeading) continue;
     const textIndex = lines.findIndex((line, index) => index > 0 && line.trim());
     if (textIndex < 0) continue;
     const text = lines[textIndex].trim();
@@ -123,7 +130,7 @@ export function parsePastedBbcSyntaxBlock(value: string) {
       if (separator <= 0) continue;
       items.push({ term: line.slice(0, separator).trim().replace(/^[-*]\s*/, ""), description: line.slice(separator + 1).trim() });
     }
-    if (items.length) sentences.push({ text, items, main });
+    if (items.length) sentences.push({ sentenceNo: Number(sectionHeading[1]), text, items, main });
   }
   return sentences.length ? { articleText, sentences } : { articleText: value, sentences: [] as PastedBbcSyntaxSentence[] };
 }
@@ -131,17 +138,19 @@ export function parsePastedBbcSyntaxBlock(value: string) {
 export function applyPastedBbcSyntax(
   automatic: BbcSyntaxSentenceData,
   annotations: PastedBbcSyntaxSentence[],
+  sentenceNo?: number,
 ): BbcSyntaxSentenceData {
-  const target = normalizeText(automatic.text).toLowerCase();
-  const annotation = annotations.find((item) => normalizeText(item.text).toLowerCase() === target);
-  if (!annotation) return automatic;
+  const annotation = sentenceNo == null
+    ? annotations.find((item) => sentenceWordKey(item.text) === sentenceWordKey(automatic.text))
+    : annotations.find((item) => item.sentenceNo === sentenceNo);
+  if (!annotation || sentenceWordKey(annotation.text) !== sentenceWordKey(automatic.text)) return automatic;
 
   const tokens = automatic.tokens.map((token) => ({ ...token }));
   const componentRows: { label: string; start: number; end: number }[] = [];
   let cursor = 0;
   for (const item of annotation.items) {
     const range = findTermRange(automatic.text, item.term, cursor);
-    if (!range) continue;
+    if (!range) return automatic;
     cursor = range.end;
     const indexes = indexesForRange(tokens, range);
     if (!indexes.length) continue;
