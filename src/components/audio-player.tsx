@@ -1,6 +1,7 @@
 "use client";
 
 import { Howl } from "howler";
+import { NativeAudio } from "@/lib/native-audio";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { getLikelyProperNounWords } from "@/lib/audio-pronunciation";
 import type { AudioPronunciationScope } from "@/lib/audio-pronunciation";
@@ -173,9 +174,11 @@ const pronunciationModeOptions = [
   { label: "英音", value: "uk" },
 ] satisfies { label: string; value: AudioPronunciationMode }[];
 
-const activeAudioPlayers = new Set<Howl>();
-const pendingAudioPlaybackRequests = new WeakMap<Howl, number>();
-const audioPlayerStopHandlers = new WeakMap<Howl, () => void>();
+type PlayerSound = Howl | NativeAudio;
+const activeAudioPlayers = new Set<PlayerSound>();
+const pendingAudioPlaybackRequests = new WeakMap<PlayerSound, number>();
+const audioPlaybackRequests = new WeakMap<PlayerSound, number>();
+const audioPlayerStopHandlers = new WeakMap<PlayerSound, () => void>();
 let latestAudioPlaybackRequestId = 0;
 
 type PitchPreservingAudioElement = HTMLMediaElement & {
@@ -183,8 +186,8 @@ type PitchPreservingAudioElement = HTMLMediaElement & {
   webkitPreservesPitch?: boolean;
 };
 
-function enablePitchPreservation(sound: Howl) {
-  const sounds = (sound as Howl & { _sounds?: Array<{ _node?: unknown }> })._sounds ?? [];
+function enablePitchPreservation(sound: PlayerSound) {
+  const sounds = (sound as { _sounds?: Array<{ _node?: unknown }> })._sounds ?? [];
 
   sounds.forEach(({ _node }) => {
     if (typeof HTMLMediaElement === "undefined" || !(_node instanceof HTMLMediaElement)) {
@@ -200,20 +203,21 @@ function enablePitchPreservation(sound: Howl) {
   });
 }
 
-function stopOtherAudioPlayers(currentSound: Howl) {
+function stopOtherAudioPlayers(currentSound: PlayerSound) {
   activeAudioPlayers.forEach((sound) => {
     if (sound !== currentSound) {
-      pendingAudioPlaybackRequests.delete(sound);
+      clearAudioPlaybackRequest(sound, true);
       audioPlayerStopHandlers.get(sound)?.();
       sound.stop();
     }
   });
 }
 
-function requestAudioPlayback(sound: Howl) {
+function requestAudioPlayback(sound: PlayerSound) {
   const hadPendingRequest = pendingAudioPlaybackRequests.has(sound);
   latestAudioPlaybackRequestId += 1;
   pendingAudioPlaybackRequests.set(sound, latestAudioPlaybackRequestId);
+  audioPlaybackRequests.set(sound, latestAudioPlaybackRequestId);
   stopOtherAudioPlayers(sound);
 
   if (sound.playing()) {
@@ -222,18 +226,22 @@ function requestAudioPlayback(sound: Howl) {
   }
 
   if (hadPendingRequest) {
-    sound.stop();
+    return;
   }
 
+  if (sound.state() === "unloaded") sound.load();
   sound.play();
 }
 
-function isLatestAudioPlaybackRequest(sound: Howl) {
-  return pendingAudioPlaybackRequests.get(sound) === latestAudioPlaybackRequestId;
+function isLatestAudioPlaybackRequest(sound: PlayerSound) {
+  // Completing a pending start does not cancel its ownership. Mobile engines
+  // can deliver another play event after seeking or an earlier playerror.
+  return audioPlaybackRequests.get(sound) === latestAudioPlaybackRequestId;
 }
 
-function clearAudioPlaybackRequest(sound: Howl) {
+function clearAudioPlaybackRequest(sound: PlayerSound, cancel = false) {
   pendingAudioPlaybackRequests.delete(sound);
+  if (cancel) audioPlaybackRequests.delete(sound);
 }
 
 function currentLabel<T extends string | number>(options: { label: string; value: T }[], value: T) {
@@ -268,7 +276,7 @@ export function AudioPlayer({
   showRate = true,
   title = "音频",
 }: AudioPlayerProps) {
-  const soundRef = useRef<Howl | null>(null);
+  const soundRef = useRef<PlayerSound | null>(null);
   const onDurationChangeRef = useRef(onDurationChange);
   const onEndedRef = useRef(onEnded);
   const onPlayingChangeRef = useRef(onPlayingChange);
@@ -360,9 +368,10 @@ export function AudioPlayer({
     setPosition(0);
     setDraftPosition(0);
 
-    const isMobilePlayback = window.matchMedia("(max-width: 820px)").matches;
+    const isMobilePlayback = window.matchMedia("(max-width: 820px)").matches || /Android|iPhone|iPad/i.test(navigator.userAgent);
     const shouldPreload = preload;
-    const sound = new Howl({
+    const AudioBackend = isMobilePlayback && /baidu|bidubrowser/i.test(navigator.userAgent) ? NativeAudio : Howl;
+    const sound = new AudioBackend({
       src: [src],
       html5: html5 || isMobilePlayback,
       preload: shouldPreload,
@@ -406,7 +415,7 @@ export function AudioPlayer({
           return;
         }
 
-        clearAudioPlaybackRequest(sound);
+        clearAudioPlaybackRequest(sound, true);
         setIsReady(false);
         setIsPlaying(false);
         setIsPlayRequested(false);
@@ -432,6 +441,21 @@ export function AudioPlayer({
           return;
         }
 
+        const failedRequestId = audioPlaybackRequests.get(sound);
+        if (isMobilePlayback && failedRequestId != null) {
+          sound.once("unlock", () => {
+            if (
+              !isDisposed &&
+              soundRef.current === sound &&
+              audioPlaybackRequests.get(sound) === failedRequestId &&
+              isLatestAudioPlaybackRequest(sound) &&
+              !sound.playing()
+            ) {
+              requestAudioPlayback(sound);
+            }
+          });
+        }
+
         clearAudioPlaybackRequest(sound);
         setIsPlaying(false);
         setIsPlayRequested(false);
@@ -441,8 +465,9 @@ export function AudioPlayer({
         if (isDisposed || soundRef.current !== sound) {
           return;
         }
+        if (sound.playing() || pendingAudioPlaybackRequests.has(sound)) return;
 
-        clearAudioPlaybackRequest(sound);
+        clearAudioPlaybackRequest(sound, true);
         setIsPlaying(false);
         setIsPlayRequested(false);
         onPlayingChangeRef.current?.(false);
@@ -451,8 +476,9 @@ export function AudioPlayer({
         if (isDisposed || soundRef.current !== sound) {
           return;
         }
+        if (sound.playing() || pendingAudioPlaybackRequests.has(sound)) return;
 
-        clearAudioPlaybackRequest(sound);
+        clearAudioPlaybackRequest(sound, true);
         setIsPlaying(false);
         setIsPlayRequested(false);
         onPlayingChangeRef.current?.(false);
@@ -473,6 +499,7 @@ export function AudioPlayer({
           return;
         }
 
+        clearAudioPlaybackRequest(sound, true);
         setIsPlaying(false);
         setIsPlayRequested(false);
         onPlayingChangeRef.current?.(false);
@@ -502,7 +529,7 @@ export function AudioPlayer({
         window.clearTimeout(loadRetryTimer);
       }
       activeAudioPlayers.delete(sound);
-      clearAudioPlaybackRequest(sound);
+      clearAudioPlaybackRequest(sound, true);
       audioPlayerStopHandlers.delete(sound);
       if (soundRef.current === sound) {
         soundRef.current = null;
@@ -616,9 +643,6 @@ export function AudioPlayer({
 
     setIsPlayRequested(true);
     if (playbackRange && (position >= playbackRange.endSeconds || position < playbackRange.startSeconds)) seekTo(playbackRange.startSeconds);
-    if (sound.state() === "unloaded") {
-      sound.load();
-    }
     requestAudioPlayback(sound);
   }
 
@@ -628,7 +652,7 @@ export function AudioPlayer({
       return;
     }
 
-    clearAudioPlaybackRequest(sound);
+    clearAudioPlaybackRequest(sound, true);
     sound.pause();
     setIsPlayRequested(false);
   }
