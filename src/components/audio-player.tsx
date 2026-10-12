@@ -278,6 +278,7 @@ export function AudioPlayer({
   const deferSentenceLoopRef = useRef(deferSentenceLoop);
   const playModeRef = useRef<AudioPlayMode>(settings?.playMode ?? DEFAULT_AUDIO_PLAYER_SETTINGS.playMode);
   const stopAtSecondsRef = useRef(stopAtSeconds);
+  const startAtSecondsRef = useRef(startAtSeconds);
   const [isReady, setIsReady] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
@@ -342,6 +343,10 @@ export function AudioPlayer({
   }, [playerSettings.playMode]);
 
   useEffect(() => {
+    startAtSecondsRef.current = startAtSeconds;
+  }, [startAtSeconds]);
+
+  useEffect(() => {
     let isDisposed = false;
     let loadRetryCount = 0;
     let loadRetryTimer: number | null = null;
@@ -374,8 +379,9 @@ export function AudioPlayer({
         const loadedDuration = sound.duration();
         setDuration(loadedDuration);
         onDurationChangeRef.current?.(loadedDuration);
-        if (!startPositionApplied && startAtSeconds > 0) {
-          const startPosition = Math.min(startAtSeconds, loadedDuration || startAtSeconds);
+        const initialStartAtSeconds = startAtSecondsRef.current;
+        if (!startPositionApplied && initialStartAtSeconds > 0) {
+          const startPosition = Math.min(initialStartAtSeconds, loadedDuration || initialStartAtSeconds);
           sound.seek(startPosition);
           setPosition(startPosition);
           setDraftPosition(startPosition);
@@ -503,7 +509,7 @@ export function AudioPlayer({
       }
       sound.unload();
     };
-  }, [html5, preload, src, startAtSeconds]);
+  }, [html5, preload, src]);
 
   useEffect(() => {
     const sound = soundRef.current;
