@@ -1,4 +1,9 @@
 const PART_OF_SPEECH = /^(?:phr\.\s*v\.|modal\s+v\.|[a-z]+\.)\s*/i;
+const CHINESE_CLOZE_SYNONYMS: Record<string, string[]> = {
+  "害怕": ["怕"],
+  "恐怕": ["怕"],
+  "担心": ["怕"],
+};
 
 function cleanMeaning(value: string) {
   return value.replace(/\[[^\]]*\]/g, "")
@@ -26,7 +31,10 @@ export function maskStudyExample(english: string, chinese: string, word: string,
   const meanings = definition.replace(/\\n/g, "\n").split(/\n+|\s*\/\s*(?=[a-z]+\.)|[；;、，,]/i)
     .map((value) => cleanMeaning(value.trim().replace(PART_OF_SPEECH, "")).replace(/[（(][^）)]*[）)]/g, "").trim())
     .filter((value) => /^[\u3400-\u9fff]+$/.test(value));
-  const candidates = [...new Set(meanings.flatMap((value) => [value, value.replace(/[的地]$/, "")]).filter(Boolean))].sort((a, b) => b.length - a.length);
+  const candidates = [...new Set(meanings.flatMap((value) => {
+    const normalized = value.replace(/[的地]$/, "");
+    return [value, normalized, ...(CHINESE_CLOZE_SYNONYMS[normalized] ?? [])];
+  }).filter(Boolean))].sort((a, b) => b.length - a.length);
   const maskedChinese = candidates.length ? chinese.replace(new RegExp(candidates.map(escape).join("|"), "g"), "______") : chinese;
   return {
     english: maskedEnglish,

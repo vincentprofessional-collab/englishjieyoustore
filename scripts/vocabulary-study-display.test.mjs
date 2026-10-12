@@ -11,6 +11,7 @@ const code = ts.transpileModule(readFileSync(new URL("../src/lib/vocabulary/stud
 runInNewContext(code, { exports });
 const { compareStudyExamples, getConciseStudyDefinition, maskStudyExample } = exports;
 const workbookExamples = JSON.parse(readFileSync(new URL("../src/data/vocabulary/workbook-usage-examples.json", import.meta.url), "utf8"));
+const workbookDetails = JSON.parse(readFileSync(new URL("../src/data/vocabulary/workbook-vocabulary-details.json", import.meta.url), "utf8"));
 
 test("study meanings preserve each part of speech and two concise senses without inflection notes", () => {
   assert.equal(getConciseStudyDefinition("adj. 持久的；永恒的 / n. [纺] 厚实斜纹织物 / v. 持续；维持（last的ing形式）；支持"), "adj. 持久的；永恒的\nn. 厚实斜纹织物\nv. 持续；维持");
@@ -28,6 +29,16 @@ test("bilingual cloze masks the inflected target and its Chinese meaning while r
 test("unmatched paraphrases never disclose Chinese answers and unrelated examples are rejected", () => {
   assert.equal(maskStudyExample("An aberrant result.", "这个结果与众不同。", "aberrant", [], "adj. 异常的；畸变的").chinese, "______");
   assert.equal(maskStudyExample("A different word.", "别的词。", "aberrant", [], "adj. 异常的").matched, false);
+});
+
+test("Excel bilingual examples mask concise Chinese synonyms and provide the English definition", () => {
+  const example = workbookExamples.afraid;
+  const details = workbookDetails.afraid;
+  const masked = maskStudyExample(example.englishText, example.chineseText, "afraid", [], details.definitionCn);
+
+  assert.equal(masked.english, "Don't be ______ to make mistakes when learning a new language.");
+  assert.equal(masked.chinese, "学新语言时不要______犯错。");
+  assert.deepEqual(details.englishDefinitions, ["feeling fear; frightened because you think that you might be hurt or suffer"]);
 });
 
 test("workbook examples take priority, then shorter bilingual examples", () => {

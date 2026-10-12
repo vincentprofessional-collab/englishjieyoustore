@@ -14,7 +14,7 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const word = searchParams.get("word")?.trim() ?? "";
   const isDetailed = searchParams.get("detail") === "1";
-  const hint = (!isDetailed && getVocabularyEntry(word)) || await getExtendedVocabularyEntry(word);
+  const hint = getVocabularyEntry(word) ?? await getExtendedVocabularyEntry(word);
 
   if (!hint) {
     return NextResponse.json({ hint: null }, { status: 404 });
@@ -30,15 +30,18 @@ export async function GET(request: Request) {
       ]),
       bbcVocabularyDetail?.examples ?? [],
     ).slice(0, 5);
-    let canAccessBbcExamples = false;
-    try {
-      const supabase = await createServerSupabaseClient();
-      const { data, error } = await supabase.rpc("can_access_project", {
-        _project_key: "bbc",
-      });
-      canAccessBbcExamples = !error && data === true;
-    } catch {
-      // Treat an unavailable membership check as a visitor and hide BBC examples.
+    const hasBbcExamples = fetchedUsageExamples.some((example) => example.bookCode === "BBC");
+    let canAccessBbcExamples = !hasBbcExamples;
+    if (hasBbcExamples) {
+      try {
+        const supabase = await createServerSupabaseClient();
+        const { data, error } = await supabase.rpc("can_access_project", {
+          _project_key: "bbc",
+        });
+        canAccessBbcExamples = !error && data === true;
+      } catch {
+        // Treat an unavailable membership check as a visitor and hide BBC examples.
+      }
     }
     const usageExamples = canAccessBbcExamples
       ? fetchedUsageExamples

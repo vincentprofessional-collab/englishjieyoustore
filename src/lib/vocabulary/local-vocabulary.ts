@@ -250,6 +250,12 @@ const ECDICT_SOURCE_PATH =
   process.env.ECDICT_SOURCE_PATH?.trim() || "/Users/shidianjin/Desktop/未命名文件夹/ecdict.csv";
 const EXCEL_LEFTMOST_ROOT_AFFIX_INDEX = excelLeftmostRootAffix as ExcelLeftmostRootAffixIndex;
 const EXCEL_ROOT_AFFIX_CATALOG = excelRootAffixCatalog as ExcelRootAffixCatalog;
+const WORKBOOK_VOCABULARY_DETAILS = workbookVocabularyDetails as Record<string, {
+  definitionCn: string;
+  englishDefinitions: string[];
+  level: string;
+  phonetic: string;
+}>;
 
 let cachedVocabularyMap: Map<string, LocalVocabularyEntry> | null = null;
 let cachedVocabularyEntries: LocalVocabularyEntry[] | null = null;
@@ -287,6 +293,12 @@ function loadVocabularySourceEntries() {
 
 export function normalizeLookupWord(value: string) {
   return value.toLowerCase().replace(/^[^a-z]+|[^a-z]+$/gi, "");
+}
+
+function getWorkbookEnglishDefinitions(word: string) {
+  return (WORKBOOK_VOCABULARY_DETAILS[normalizeLookupWord(word)]?.englishDefinitions ?? [])
+    .map((definition) => definition.trim())
+    .filter(Boolean);
 }
 
 function compactDefinition(definition: string) {
@@ -923,7 +935,7 @@ function loadVocabularyEntries() {
         definitionGroups.length > 0
           ? definitionGroups.map((group) => group.text)
           : accumulator.definitionLines,
-      englishDefinitions: accumulator.englishDefinitions,
+      englishDefinitions: getWorkbookEnglishDefinitions(accumulator.normalizedWord),
       englishExamples: accumulator.englishExamples,
       etymologyStory: accumulator.etymologyStory,
       etymologyReferences: accumulator.etymologyReferences,
@@ -1236,10 +1248,7 @@ function mergeVocabularyEntries(
       ...primary.antonyms,
       ...supplemental.antonyms,
     ]),
-    englishDefinitions: uniqueNormalizedValues([
-      ...primary.englishDefinitions,
-      ...supplemental.englishDefinitions,
-    ]),
+    englishDefinitions: getWorkbookEnglishDefinitions(primary.normalizedWord),
     englishExamples: uniqueNormalizedValues([
       ...primary.englishExamples,
       ...supplemental.englishExamples,
@@ -1880,7 +1889,10 @@ export function getVocabularyEntry(word: string) {
     return null;
   }
 
-  return findVocabularyEntry(normalizedWord);
+  const entry = findVocabularyEntry(normalizedWord);
+  return entry
+    ? { ...entry, englishDefinitions: getWorkbookEnglishDefinitions(entry.normalizedWord) }
+    : null;
 }
 
 export async function getExtendedVocabularyEntry(word: string) {
@@ -1892,17 +1904,28 @@ export async function getExtendedVocabularyEntry(word: string) {
 
   const candidates = getVocabularyLookupCandidates(normalizedWord);
   const localEntry = getVocabularyEntry(normalizedWord);
+  // The imported workbook is the source of truth for English definitions and
+  // already contains the vocabulary metadata needed by the learning page.
+  // Use it directly instead of waiting on a dictionary/database request.
+  if (localEntry && getWorkbookEnglishDefinitions(localEntry.normalizedWord).length > 0) {
+    return localEntry;
+  }
+
   const databaseEntry = await getDatabaseVocabularyEntry(candidates);
   const primaryEntry = localEntry && databaseEntry
     ? mergeVocabularyEntries(localEntry, databaseEntry)
     : localEntry ?? databaseEntry;
 
   if (primaryEntry?.englishDefinitions.length) {
-    return primaryEntry;
+    return { ...primaryEntry, englishDefinitions: getWorkbookEnglishDefinitions(primaryEntry.normalizedWord) };
   }
   const dictionaryEntry = await getFreeDictionaryVocabularyEntry(candidates);
-  if (primaryEntry && dictionaryEntry) return mergeVocabularyEntries(primaryEntry, dictionaryEntry);
-  return primaryEntry ?? dictionaryEntry;
+  const combinedEntry = primaryEntry && dictionaryEntry
+    ? mergeVocabularyEntries(primaryEntry, dictionaryEntry)
+    : primaryEntry ?? dictionaryEntry;
+  return combinedEntry
+    ? { ...combinedEntry, englishDefinitions: getWorkbookEnglishDefinitions(combinedEntry.normalizedWord) }
+    : null;
 }
 
 export function getVocabularyAutocompleteItems(): VocabularyAutocompleteItem[] {
