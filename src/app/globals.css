@@ -13884,6 +13884,8 @@ body.share-sheet-open {
 .sentence-order-dropzone.filled,
 .sentence-order-chip {
   cursor: grab;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
   user-select: none;
 }
 
@@ -13923,6 +13925,11 @@ body.share-sheet-open {
   margin-top: 12px;
   min-height: 42px;
   padding: 4px;
+}
+
+.sentence-order-word-bank:empty {
+  border: 1px dashed var(--line);
+  border-radius: 8px;
 }
 
 .sentence-order-chip {
@@ -34521,23 +34528,24 @@ body .mobile-bottom-nav a.active { color: #245d7b !important; }
     font-size: clamp(13px, 3.7vw, 15px) !important;
   }
 
-  .sentence-order-drag-preview {
-    background: #fffdf7;
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    box-shadow: 0 6px 18px rgba(44, 61, 55, 0.2);
-    color: var(--accent-dark);
-    font-weight: 900;
-    max-width: calc(100vw - 24px);
-    overflow: hidden;
-    padding: 8px 13px;
-    pointer-events: none;
-    position: fixed;
-    text-overflow: ellipsis;
-    transform: translate(-50%, -125%);
-    white-space: nowrap;
-    z-index: 9999;
-  }
+}
+
+.sentence-order-drag-preview {
+  background: #fffdf7;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  box-shadow: 0 6px 18px rgba(44, 61, 55, 0.2);
+  color: var(--accent-dark);
+  font-weight: 900;
+  max-width: calc(100vw - 24px);
+  overflow: hidden;
+  padding: 8px 13px;
+  pointer-events: none;
+  position: fixed;
+  text-overflow: ellipsis;
+  transform: translate(-50%, -125%);
+  white-space: nowrap;
+  z-index: 9999;
 }
 
 /* Phone lookup: remove the redundant mode switch and keep the word header on one baseline. */

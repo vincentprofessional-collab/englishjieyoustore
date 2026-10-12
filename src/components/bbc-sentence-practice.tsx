@@ -7,8 +7,10 @@ import {
   type DragEvent as ReactDragEvent,
   type KeyboardEvent as ReactKeyboardEvent,
   type PointerEvent as ReactPointerEvent,
+  type TouchEvent as ReactTouchEvent,
   type ReactNode,
   useEffect,
+  useLayoutEffect,
   useRef,
   useState,
 } from "react";
@@ -37,6 +39,7 @@ type SentenceOrderAnswer = {
 
 type SentenceOrderDrag = SentenceOrderAnswer & {
   pointerId: number;
+  input: "pointer" | "touch";
   sourceSlot: number | null;
 };
 
@@ -190,13 +193,19 @@ export function BbcSentencePractice({
   const [isMobilePointerViewport, setIsMobilePointerViewport] = useState(false);
   const sentenceKey = `${sentence.sentenceNo}:${sentence.english}:${settings.dictationMode}`;
   const previousSentenceKeyRef = useRef(sentenceKey);
+  const sentenceOrderLineRef = useRef<HTMLParagraphElement | null>(null);
+  const sentenceOrderBankRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const mobileQuery = window.matchMedia("(max-width: 820px)");
+    const mobileQuery = window.matchMedia("(max-width: 820px), (pointer: coarse)");
     const updateMobilePointerViewport = () => setIsMobilePointerViewport(mobileQuery.matches);
     updateMobilePointerViewport();
-    mobileQuery.addEventListener("change", updateMobilePointerViewport);
-    return () => mobileQuery.removeEventListener("change", updateMobilePointerViewport);
+    if (typeof mobileQuery.addEventListener === "function") {
+      mobileQuery.addEventListener("change", updateMobilePointerViewport);
+      return () => mobileQuery.removeEventListener("change", updateMobilePointerViewport);
+    }
+    mobileQuery.addListener?.(updateMobilePointerViewport);
+    return () => mobileQuery.removeListener?.(updateMobilePointerViewport);
   }, []);
 
   useEffect(() => {
@@ -212,21 +221,22 @@ export function BbcSentencePractice({
     setSentenceOrderPointerPosition(null);
   }, [sentenceKey]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!sentenceOrderDrag) {
       return;
     }
     const activeDrag = sentenceOrderDrag;
 
     function getDropTarget(clientX: number, clientY: number): SentenceOrderDropTarget | null {
-      const element = document.elementFromPoint(clientX, clientY);
-      const dropZone = element?.closest<HTMLElement>("[data-sentence-order-drop-target]");
-      if (dropZone?.dataset.sentenceOrderDropTarget) {
-        return Number(dropZone.dataset.sentenceOrderDropTarget);
-      }
-
-      if (element?.closest("[data-sentence-order-bank]")) {
-        return "bank";
+      const elements = document.elementsFromPoint?.(clientX, clientY) ?? [document.elementFromPoint(clientX, clientY)];
+      for (const element of elements) {
+        const dropZone = element?.closest<HTMLElement>("[data-sentence-order-drop-target]");
+        if (dropZone?.dataset.sentenceOrderDropTarget != null && sentenceOrderLineRef.current?.contains(dropZone)) {
+          return Number(dropZone.dataset.sentenceOrderDropTarget);
+        }
+        if (element && sentenceOrderBankRef.current?.contains(element)) {
+          return "bank";
+        }
       }
 
       return null;
@@ -268,14 +278,45 @@ export function BbcSentencePractice({
       setSentenceOrderPointerPosition(null);
     }
 
-    window.addEventListener("pointermove", handlePointerMove, { passive: false });
-    window.addEventListener("pointerup", handlePointerUp);
-    window.addEventListener("pointercancel", handlePointerCancel);
+    function handleTouchMove(event: TouchEvent) {
+      const touch = Array.from(event.changedTouches).find((item) => item.identifier === activeDrag.pointerId);
+      if (!touch) return;
+      if (event.cancelable) event.preventDefault();
+      setSentenceOrderHover(getDropTarget(touch.clientX, touch.clientY));
+      setSentenceOrderPointerPosition({ x: touch.clientX, y: touch.clientY });
+    }
+
+    function handleTouchEnd(event: TouchEvent) {
+      const touch = Array.from(event.changedTouches).find((item) => item.identifier === activeDrag.pointerId);
+      if (!touch) return;
+      if (event.type !== "touchcancel") {
+        const target = getDropTarget(touch.clientX, touch.clientY);
+        if (target !== null) moveSentenceOrderAnswer(activeDrag, target);
+      }
+      setSentenceOrderDrag(null);
+      setSentenceOrderHover(null);
+      setSentenceOrderPointerPosition(null);
+    }
+
+    if (activeDrag.input === "touch") {
+      window.addEventListener("touchmove", handleTouchMove, { capture: true, passive: false });
+      window.addEventListener("touchend", handleTouchEnd, true);
+      window.addEventListener("touchcancel", handleTouchEnd, true);
+      return () => {
+        window.removeEventListener("touchmove", handleTouchMove, true);
+        window.removeEventListener("touchend", handleTouchEnd, true);
+        window.removeEventListener("touchcancel", handleTouchEnd, true);
+      };
+    }
+
+    window.addEventListener("pointermove", handlePointerMove, { capture: true, passive: false });
+    window.addEventListener("pointerup", handlePointerUp, true);
+    window.addEventListener("pointercancel", handlePointerCancel, true);
 
     return () => {
-      window.removeEventListener("pointermove", handlePointerMove);
-      window.removeEventListener("pointerup", handlePointerUp);
-      window.removeEventListener("pointercancel", handlePointerCancel);
+      window.removeEventListener("pointermove", handlePointerMove, true);
+      window.removeEventListener("pointerup", handlePointerUp, true);
+      window.removeEventListener("pointercancel", handlePointerCancel, true);
     };
   }, [isMobilePointerViewport, sentenceOrderDrag]);
 
@@ -553,6 +594,7 @@ export function BbcSentencePractice({
     answer: SentenceOrderAnswer,
     sourceSlot: number | null,
   ) {
+    if (typeof window.PointerEvent === "undefined") return;
     if (event.pointerType === "mouse" && event.button !== 0) {
       return;
     }
@@ -560,14 +602,33 @@ export function BbcSentencePractice({
     event.preventDefault();
     event.stopPropagation();
     if (isMobilePointerViewport) {
-      event.currentTarget.setPointerCapture(event.pointerId);
+      try {
+        event.currentTarget.setPointerCapture?.(event.pointerId);
+      } catch {
+        // Capture is optional; window capture listeners still track this finger.
+      }
       setSentenceOrderPointerPosition({ x: event.clientX, y: event.clientY });
     }
     setSentenceOrderDrag({
       ...answer,
       pointerId: event.pointerId,
+      input: "pointer",
       sourceSlot,
     });
+    setSentenceOrderHover(null);
+  }
+
+  function startSentenceOrderTouchDrag(
+    event: ReactTouchEvent<HTMLElement>,
+    answer: SentenceOrderAnswer,
+    sourceSlot: number | null,
+  ) {
+    if (typeof window.PointerEvent !== "undefined") return;
+    const touch = event.changedTouches[0];
+    if (!touch) return;
+    event.stopPropagation();
+    setSentenceOrderDrag({ ...answer, pointerId: touch.identifier, input: "touch", sourceSlot });
+    setSentenceOrderPointerPosition({ x: touch.clientX, y: touch.clientY });
     setSentenceOrderHover(null);
   }
 
@@ -634,6 +695,9 @@ export function BbcSentencePractice({
             startSentenceOrderPointerDrag(event, placedAnswer, target.tokenIndex);
           }
         }}
+        onTouchStart={(event) => {
+          if (placedAnswer) startSentenceOrderTouchDrag(event, placedAnswer, target.tokenIndex);
+        }}
         role="button"
         tabIndex={0}
       >
@@ -652,7 +716,7 @@ export function BbcSentencePractice({
     );
 
     return (
-      <p className="subtitle-english-line dictation-line sentence-order-line">
+      <p className="subtitle-english-line dictation-line sentence-order-line" ref={sentenceOrderLineRef}>
         {tokens.map((token, tokenIndex) => {
           const target = targetMap.get(tokenIndex);
 
@@ -669,10 +733,13 @@ export function BbcSentencePractice({
   function renderSentenceOrderWordBank() {
     return (
       <>
-        <p className="sentence-order-touch-hint">按住词块，拖到句中对应虚线处后松开</p>
+        <p className="sentence-order-touch-hint">按住词块拖到上方虚线；已放入的词块可移到其他虚线，或拖回下方词汇区</p>
         <div
           className={`sentence-order-word-bank ${sentenceOrderHover === "bank" ? "hover" : ""}`}
           data-sentence-order-bank
+          aria-label="词汇区域"
+          role="group"
+          ref={sentenceOrderBankRef}
           onDragOver={(event) => event.preventDefault()}
           onDrop={(event: ReactDragEvent<HTMLDivElement>) => {
             event.preventDefault();
@@ -703,6 +770,7 @@ export function BbcSentencePractice({
               onPointerDown={(event) =>
                 startSentenceOrderPointerDrag(event, target, null)
               }
+              onTouchStart={(event) => startSentenceOrderTouchDrag(event, target, null)}
               type="button"
             >
               {target.token}
