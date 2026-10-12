@@ -168,10 +168,6 @@ function splitChineseSentences(paragraph: string) {
     .filter(Boolean);
 }
 
-function syntaxMatchKey(value: string) {
-  return value.replace(/[‘’]/g, "'").replace(/\s+/g, " ").trim().toLowerCase();
-}
-
 function buildPracticeSentences(body: string[], chineseParagraphs: string[]) {
   let sentenceNo = 0;
   return body.flatMap((paragraph, paragraphIndex) => {
@@ -256,6 +252,7 @@ function buildArticle(payload: Record<string, unknown>, objectPath: string): Bbc
     syntaxSentences: sentences.map((sentence) => applyPastedBbcSyntax(
       buildAutomaticBbcSyntax(sentence.english),
       syntaxAnnotations,
+      sentence.sentenceNo,
     )),
     title,
     titleChinese: titleChinese || undefined,
@@ -279,9 +276,17 @@ export async function POST(request: NextRequest) {
       const article = buildArticle(parsed, "");
       if (typeof article === "string") return NextResponse.json({ error: article }, { status: 400 });
       if (getBbcArticleById(article.id)) return NextResponse.json({ error: "内置文章正文由原有内容库维护，语法标注请在前端精读页面修改。" }, { status: 409 });
-      const annotatedSentences = new Set(parsed.syntaxAnnotations.map((item) => syntaxMatchKey(item.text)));
-      const pastedSyntaxCount = article.sentences?.filter((sentence) => annotatedSentences.has(syntaxMatchKey(sentence.english))).length ?? 0;
-      return NextResponse.json({ article, pastedSyntaxCount });
+      const syntaxSentences = article.syntaxSentences ?? [];
+      const unmatchedSyntaxSentenceNos = parsed.syntaxAnnotations
+        .filter((annotation) => syntaxSentences[annotation.sentenceNo - 1]?.status !== "reviewed")
+        .map((annotation) => annotation.sentenceNo);
+      const pastedSyntaxCount = parsed.syntaxAnnotations.length - unmatchedSyntaxSentenceNos.length;
+      return NextResponse.json({
+        article,
+        pastedSyntaxCount,
+        pastedSyntaxTotalCount: parsed.syntaxAnnotations.length,
+        unmatchedSyntaxSentenceNos,
+      });
     } catch (cause) { return NextResponse.json({ error: cause instanceof Error ? cause.message : "文章分析失败。" }, { status: 400 }); }
   }
   const title = typeof payload?.title === "string" ? payload.title : "";
