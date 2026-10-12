@@ -27,7 +27,7 @@ function includesChinese(value: string) {
 }
 
 function isInteractiveTarget(target: EventTarget | null) {
-  return target instanceof HTMLElement && Boolean(target.closest("a, button, input, textarea, select"));
+  return target instanceof Element && Boolean(target.closest("a, button, input, textarea, select"));
 }
 
 export function VocabularySearchAutocomplete({

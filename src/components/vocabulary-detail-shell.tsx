@@ -48,7 +48,12 @@ export function VocabularyDetailShell({
     <div className={`vocabulary-detail-shell ${className}`.trim()}>
       {showHeader ? (
         <div className="word-page-head vocabulary-detail-shell-head vocabulary-learning-detail-head">
-          {showBack ? <Link className="back-link" href={backHref}>← 返回</Link> : null}
+          {showBack ? (
+            <Link aria-label="返回词汇列表" className="back-link" href={backHref}>
+              <span className="vocabulary-back-link-desktop-label">← 返回</span>
+              <span aria-hidden="true" className="vocabulary-back-link-mobile-arrow">←</span>
+            </Link>
+          ) : null}
           <div className="word-title-row word-detail-title-row vocabulary-detail-shell-title-row vocabulary-learning-detail-title-row">
             <div className={`word-title-primary ${showWord || headerContent ? "" : "is-hidden"}`}>
               {headerContent ?? (showWord ? (

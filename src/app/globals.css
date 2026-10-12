@@ -20480,6 +20480,10 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
   font-weight: 1000;
 }
 
+.vocabulary-back-link-mobile-arrow {
+  display: none;
+}
+
 @media (max-width: 760px) {
   .vocabulary-hero,
   .word-detail-grid {
@@ -20554,12 +20558,19 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
   .vocabulary-autocomplete-row {
     background: rgba(255, 254, 250, 0.98);
     border: 1px solid rgba(169, 212, 234, 0.9);
-    border-left: 8px solid var(--gold);
-    border-radius: 17px;
+    border-left: 5px solid var(--gold);
+    border-radius: 12px 17px 17px 12px;
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-areas:
+      "word level"
+      "pronunciation pronunciation"
+      "definition definition";
+    grid-template-columns: max-content max-content;
+    column-gap: 0.55em;
+    justify-content: start;
     overflow: hidden;
-    padding: 0;
+    padding: 6px 0;
+    row-gap: 10px;
   }
 
   .vocabulary-autocomplete-row > *,
@@ -20575,11 +20586,47 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
     width: auto;
   }
 
-  .vocabulary-autocomplete-row .etymology-word-pronunciation,
-  .vocabulary-autocomplete-row > small,
-  .autocomplete-word-definition {
-    border-top: 1px solid rgba(228, 216, 189, 0.75);
-    padding-top: 8px;
+  .vocabulary-autocomplete-row > :first-child {
+    grid-area: word;
+    line-height: 1.2;
+    justify-self: start;
+    max-width: min(16ch, calc(100vw - 160px));
+    padding-bottom: 0;
+    padding-top: 0;
+    width: auto;
+  }
+
+  .vocabulary-autocomplete-row .autocomplete-word-link {
+    font-weight: 400 !important;
+  }
+
+  .vocabulary-autocomplete-row .etymology-word-pronunciation {
+    grid-area: pronunciation;
+    line-height: 1.2;
+    max-width: 100%;
+    padding-bottom: 0;
+    padding-top: 0;
+    width: 100%;
+  }
+
+  .vocabulary-autocomplete-row .etymology-word-pronunciation-inner {
+    max-width: 100%;
+  }
+
+  .vocabulary-autocomplete-row > small {
+    align-self: center;
+    grid-area: level;
+    justify-self: start;
+    padding: 0;
+    text-align: right;
+    width: auto;
+  }
+
+  .vocabulary-autocomplete-row > .autocomplete-word-definition {
+    grid-area: definition;
+    line-height: 1.2;
+    padding-bottom: 0;
+    padding-top: 0;
   }
 
   .vocabulary-chip-grid {
@@ -30597,12 +30644,8 @@ body *:not(.bbc-vocabulary-highlight):not(.bbc-active-word) {
   }
 
   .vocabulary-daily-summary-actions {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .vocabulary-daily-summary-actions .vocabulary-daily-summary-share-button {
-    grid-column: 1 / -1;
+    display: flex;
+    justify-content: flex-end;
   }
 }
 
@@ -34315,16 +34358,19 @@ body .mobile-bottom-nav a.active { color: #245d7b !important; }
     font-size: clamp(12px, 3.2vw, 14px);
     gap: 2px;
     grid-template-columns: minmax(0, 1fr);
+    justify-items: start;
     line-height: 1.35;
     min-height: 58px;
     overflow-wrap: anywhere;
     padding: 6px 7px;
-    text-align: center;
+    text-align: left;
   }
 
   .vocabulary-learning-page .vocabulary-learning-definition-options button > span {
     line-height: 1.35;
     overflow-wrap: anywhere;
+    text-align: left;
+    width: 100%;
   }
 
   .vocabulary-learning-page .vocabulary-learning-definition-options button em {
@@ -34338,7 +34384,7 @@ body .mobile-bottom-nav a.active { color: #245d7b !important; }
   }
 
   .vocabulary-learning-page .vocabulary-learning-definition-options button.correct em {
-    color: #205f38;
+    display: none !important;
   }
 
   .vocabulary-lookup-section-toggle {
@@ -34456,5 +34502,420 @@ body .mobile-bottom-nav a.active { color: #245d7b !important; }
     transform: translate(-50%, -125%);
     white-space: nowrap;
     z-index: 9999;
+  }
+}
+
+/* Phone lookup: remove the redundant mode switch and keep the word header on one baseline. */
+@media (max-width: 820px) {
+  .vocabulary-word-page .vocabulary-detail-shell,
+  .vocabulary-word-page .vocabulary-detail-shell * {
+    font-weight: 400 !important;
+  }
+
+  .mobile-word-hub .mobile-word-tabs {
+    display: none !important;
+  }
+
+  .mobile-word-preview-shell .word-page-head {
+    box-sizing: border-box;
+    height: auto;
+    min-height: 0;
+    padding: 10px 12px 12px;
+  }
+
+  .vocabulary-word-page .vocabulary-detail-shell {
+    background: rgba(255, 254, 250, 0.96);
+    border: 1px solid rgba(169, 212, 234, 0.9);
+    border-radius: 24px;
+    box-shadow: 0 14px 34px rgba(50, 61, 49, 0.07);
+    box-sizing: border-box;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .vocabulary-word-page .word-page-head {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    box-sizing: border-box;
+    gap: 10px;
+    height: auto;
+    min-height: 0;
+    padding: 22px 14px 12px;
+  }
+
+  .vocabulary-word-page .vocabulary-detail-shell-grid {
+    background: transparent;
+    margin: 0;
+  }
+
+  .vocabulary-word-page .vocabulary-detail-shell-main {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    gap: 18px;
+    min-width: 0;
+    padding: 0 14px 20px;
+    width: 100%;
+  }
+
+  .vocabulary-word-page .vocabulary-detail-shell-main .word-detail-section {
+    gap: 12px;
+  }
+
+  .vocabulary-word-page .vocabulary-detail-shell-main .word-detail-section + .word-detail-section {
+    border-top: 0;
+    padding-top: 0;
+  }
+
+  .vocabulary-word-page .vocabulary-detail-shell-main .vocabulary-synonym-distinction-entry,
+  .vocabulary-word-page .vocabulary-detail-shell-main .vocabulary-synonym-distinction-note {
+    border-top: 0;
+    padding-top: 0;
+  }
+
+  .mobile-word-preview-shell .word-title-row,
+  .vocabulary-word-page .vocabulary-detail-shell-title-row {
+    align-items: end;
+    grid-template-columns: minmax(0, max-content) auto minmax(0, 1fr) auto;
+    row-gap: 10px;
+  }
+
+  .mobile-word-preview-shell .word-title-primary h1,
+  .vocabulary-word-page .vocabulary-detail-shell-title-row h1 {
+    align-self: end;
+    font-size: clamp(26px, 7vw, 30px) !important;
+    font-weight: 400 !important;
+    grid-column: 1;
+    grid-row: 1;
+    max-width: calc(100vw - 150px);
+    justify-self: start !important;
+    padding-left: 0 !important;
+    text-align: left !important;
+  }
+
+  .mobile-word-preview-shell .inline-pronunciation,
+  .vocabulary-word-page .vocabulary-detail-shell-title-row .inline-pronunciation {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-content: flex-start !important;
+    padding-inline-start: 0 !important;
+    text-align: left;
+  }
+
+  .mobile-word-preview-shell .vocabulary-level-badge,
+  .vocabulary-word-page .vocabulary-detail-shell-title-row .vocabulary-level-badge {
+    align-self: end;
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: start;
+    margin-bottom: 0;
+  }
+
+  .mobile-word-preview-shell .word-title-tools,
+  .vocabulary-word-page .vocabulary-detail-shell-actions {
+    align-self: end;
+    align-items: end;
+    grid-column: 4;
+    grid-row: 1;
+  }
+
+  .mobile-word-preview-shell .word-title-tools .vocabulary-favorite-star,
+  .mobile-word-preview-shell .word-title-tools .vocabulary-share-button,
+  .vocabulary-word-page .vocabulary-detail-shell-actions .vocabulary-favorite-star,
+  .vocabulary-word-page .vocabulary-detail-shell-actions .vocabulary-share-button {
+    transform: none !important;
+  }
+
+  .mobile-word-preview-shell .word-title-tools .vocabulary-favorite-star,
+  .vocabulary-word-page .vocabulary-detail-shell-actions .vocabulary-favorite-star {
+    align-items: center;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    box-sizing: border-box;
+    display: inline-flex;
+    flex: 0 0 24px;
+    font-size: 16px;
+    height: 24px;
+    justify-content: center;
+    line-height: 1;
+    min-height: 24px;
+    min-width: 24px;
+    padding: 0;
+    width: 24px;
+  }
+
+  .mobile-word-preview-shell .word-title-tools .vocabulary-share-button,
+  .vocabulary-word-page .vocabulary-detail-shell-actions .vocabulary-share-button {
+    display: none !important;
+  }
+
+  .vocabulary-learning-page .vocabulary-learning-definition-options button em {
+    display: none !important;
+  }
+
+  .vocabulary-word-page .word-detail-section .definition-rows.large p > span,
+  .mobile-word-preview .word-detail-section .definition-rows.large p > span {
+    color: #000 !important;
+  }
+
+  .vocabulary-word-page .word-formation-line,
+  .mobile-word-preview .word-formation-line {
+    font-size: 13px;
+    gap: 6px;
+    line-height: 1.4;
+  }
+
+  .vocabulary-word-page .word-formation-token,
+  .mobile-word-preview .word-formation-token {
+    gap: 6px;
+  }
+
+  .vocabulary-word-page .word-formation-part,
+  .mobile-word-preview .word-formation-part {
+    font-size: 13px;
+    padding: 5px 9px;
+  }
+
+  .vocabulary-word-page .vocabulary-detail-shell-head {
+    align-items: end;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: auto auto;
+    row-gap: 12px;
+  }
+
+  .vocabulary-word-page .vocabulary-detail-shell-head > .back-link {
+    align-self: end;
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+    margin: 0;
+  }
+
+  .vocabulary-word-page .vocabulary-back-link-desktop-label {
+    display: none !important;
+  }
+
+  .vocabulary-word-page .vocabulary-back-link-mobile-arrow {
+    display: inline-flex;
+    font-size: 22px;
+    line-height: 1;
+  }
+
+  .vocabulary-word-page .vocabulary-detail-shell-title-row {
+    display: contents;
+  }
+
+  .vocabulary-word-page .vocabulary-detail-shell-title-row .word-title-primary {
+    align-items: center;
+    display: grid;
+    gap: 20px 8px;
+    grid-column: 1 / -1;
+    grid-row: 2;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    justify-content: stretch;
+    min-width: 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  .vocabulary-word-page .vocabulary-detail-shell-title-row h1 {
+    align-self: center;
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: center !important;
+    line-height: 1.2;
+    margin: 0;
+    max-width: calc(100vw - 100px);
+    overflow-wrap: anywhere;
+    padding: 0 !important;
+    text-align: center !important;
+  }
+
+  .vocabulary-word-page .vocabulary-detail-shell-title-row .word-title-meta {
+    display: contents;
+  }
+
+  .vocabulary-word-page .vocabulary-detail-shell-title-row .vocabulary-level-badge {
+    display: none !important;
+  }
+
+  .vocabulary-word-page .vocabulary-detail-shell-title-row .inline-pronunciation {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-content: center !important;
+    justify-self: center;
+    margin: 0;
+    padding-inline: 0 !important;
+    text-align: center;
+    width: 100%;
+  }
+
+  .vocabulary-word-page .vocabulary-detail-shell-actions {
+    align-self: end;
+    display: flex;
+    grid-column: 2;
+    grid-row: 1;
+    justify-content: flex-end;
+    margin: 0;
+    padding: 0;
+  }
+
+  .vocabulary-word-page .vocabulary-detail-shell-main :is(
+    .definition-rows.large p,
+    .definition-rows.large p > *,
+    .english-definition-list p,
+    .english-definition-list p > *,
+    .word-inflection-grid strong,
+    .word-formation-part,
+    .word-lookup-etymology-card p,
+    .vocabulary-usage-example-main p,
+    .vocabulary-usage-example-main span,
+    .vocabulary-synonym-distinction-card h3,
+    .vocabulary-synonym-distinction-card p,
+    .word-detail-simple-list p,
+    .word-detail-tag-list span,
+    .word-phrase-card strong,
+    .word-phrase-card span,
+    .word-phrase-card small,
+    .vocabulary-expression-scenario-card p,
+    .vocabulary-lookup-lines p
+  ) {
+    font-family: Georgia, "Times New Roman", "Noto Serif SC", serif !important;
+    font-size: 13px !important;
+    line-height: 1.6;
+  }
+
+  .vocabulary-word-page .word-inflection-grid b,
+  .vocabulary-word-page .word-inflection-grid strong {
+    font-family: Georgia, "Times New Roman", "Noto Serif SC", serif !important;
+    font-size: 13px !important;
+    font-weight: 400 !important;
+    line-height: 1.6;
+  }
+
+  .vocabulary-word-page .vocabulary-usage-example-card {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 8px;
+  }
+
+  .vocabulary-word-page .vocabulary-usage-example-actions {
+    grid-column: 1;
+    justify-content: flex-end;
+  }
+
+  .vocabulary-word-page .vocabulary-favorite-star,
+  .vocabulary-word-page .vocabulary-example-star,
+  .vocabulary-word-page .content-share-button {
+    align-items: center;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    box-sizing: border-box;
+    display: inline-flex;
+    flex: 0 0 24px;
+    height: 24px;
+    justify-content: center;
+    min-height: 24px;
+    min-width: 24px;
+    padding: 0;
+    width: 24px;
+  }
+
+  .vocabulary-word-page .vocabulary-example-star {
+    font-size: 16px;
+    line-height: 1;
+  }
+
+  .vocabulary-word-page .vocabulary-usage-example-actions .content-share-icon {
+    height: 14px;
+    width: 14px;
+  }
+
+  .vocabulary-word-page .vocabulary-workbook-source-label,
+  .vocabulary-word-page .word-lookup-etymology-card > div > strong,
+  .mobile-word-preview .word-lookup-etymology-card > div > strong,
+  .vocabulary-learning-page .vocabulary-learning-complete-detail .word-lookup-etymology-card > div > strong {
+    display: none !important;
+  }
+}
+
+/* Keep study content typography consistent with the phone word-origin text. */
+@media (max-width: 820px) {
+  .vocabulary-daily-summary-group-note,
+  .vocabulary-daily-summary-breakdown,
+  .vocabulary-daily-summary-share,
+  .vocabulary-daily-summary-share-button {
+    display: none !important;
+  }
+
+  .vocabulary-learning-page .vocabulary-learning-stage-detail-main > .vocabulary-learning-bottom-bar {
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+
+  .vocabulary-learning-page .vocabulary-learning-category-button {
+    appearance: none;
+    box-shadow: none !important;
+  }
+
+  .vocabulary-learning-page .vocabulary-learning-category-button:focus:not(:focus-visible) {
+    outline: none;
+    box-shadow: none !important;
+  }
+
+  .mobile-word-preview-shell .word-title-primary h1,
+  .vocabulary-word-page .vocabulary-detail-shell-title-row h1 {
+    font-family: Georgia, "Times New Roman", "Noto Serif SC", serif !important;
+    font-size: 13px !important;
+    font-weight: 400 !important;
+    line-height: 1.6 !important;
+  }
+
+  .vocabulary-learning-page .vocabulary-card-definition,
+  .vocabulary-learning-page .vocabulary-card-definition *,
+  .vocabulary-learning-page .vocabulary-learning-definition-options button > span,
+  .vocabulary-learning-page .vocabulary-learning-round-examples p,
+  .vocabulary-learning-page .vocabulary-learning-round-examples p *,
+  .vocabulary-learning-page .vocabulary-learning-today-word strong,
+  .vocabulary-learning-page .vocabulary-learning-today-definition,
+  .vocabulary-learning-page .vocabulary-learning-complete-detail :is(
+    .definition-rows.large p,
+    .definition-rows.large p *,
+    .english-definition-list p,
+    .english-definition-list p *,
+    .vocabulary-lookup-lines p,
+    .vocabulary-lookup-lines p *,
+    .word-detail-simple-list p,
+    .word-detail-simple-list p *,
+    .word-detail-tag-list span,
+    .word-inflection-grid *,
+    .word-formation-part,
+    .word-lookup-etymology-card p,
+    .vocabulary-usage-example-main p,
+    .vocabulary-usage-example-main span,
+    .vocabulary-synonym-distinction-card h3,
+    .vocabulary-synonym-distinction-card p,
+    .word-phrase-card strong,
+    .word-phrase-card span,
+    .word-phrase-card small,
+    .vocabulary-expression-scenario-card p
+  ) {
+    font-family: Georgia, "Times New Roman", "Noto Serif SC", serif !important;
+    font-size: 13px !important;
+    font-weight: 400 !important;
+    line-height: 1.6;
+  }
+
+  .vocabulary-learning-page .vocabulary-learning-complete-detail .word-formation-line,
+  .vocabulary-learning-page .vocabulary-learning-complete-detail .word-formation-token,
+  .vocabulary-learning-page .vocabulary-learning-complete-detail .word-formation-part {
+    justify-content: flex-start !important;
+    text-align: left !important;
   }
 }

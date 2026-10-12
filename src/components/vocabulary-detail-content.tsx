@@ -223,10 +223,10 @@ function UsageExamplesSection({ examples }: { examples: VocabularyUsageExample[]
             <article className="vocabulary-usage-example-card" data-book-code={example.bookCode} id={`vocabulary-example-${index + 1}`} key={example.id}>
               {example.sourceType === "article" || example.sourceType === "new-concept" ? (
                 <VocabularyExampleArticleLink example={example}>
-                  <div className="vocabulary-usage-example-main"><p>{example.englishText}</p>{example.chineseText ? <span>{example.chineseText}</span> : null}<small>{example.sourceTitle}</small></div>
+                  <div className="vocabulary-usage-example-main"><p>{example.englishText}</p>{example.chineseText ? <span>{example.chineseText}</span> : null}<small className={example.sourceTitle === "词汇总表 · 双语例句" ? "vocabulary-workbook-source-label" : undefined}>{example.sourceTitle}</small></div>
                 </VocabularyExampleArticleLink>
               ) : (
-                <div className="vocabulary-usage-example-main"><p>{example.englishText}</p>{example.chineseText ? <span>{example.chineseText}</span> : null}<small>{example.sourceTitle}</small></div>
+                <div className="vocabulary-usage-example-main"><p>{example.englishText}</p>{example.chineseText ? <span>{example.chineseText}</span> : null}<small className={example.sourceTitle === "词汇总表 · 双语例句" ? "vocabulary-workbook-source-label" : undefined}>{example.sourceTitle}</small></div>
               )}
               <div className="vocabulary-usage-example-actions">
                 {example.audioUrl ? <VocabularyExampleAudioButton audioUrl={example.audioUrl} /> : null}
