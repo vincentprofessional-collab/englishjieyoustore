@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSignedCosMediaUrl } from "@/lib/cos/storage";
 import { getSupabaseStorageUrl, isLegacyCosOnlyMediaPath } from "@/lib/media/url";
+import { isPrimarySchoolVocabularyImagePath } from "@/lib/vocabulary/primary-school-vocabulary-images";
 import type { ManagedMediaBucket } from "@/lib/media/url";
 
 export const runtime = "nodejs";
@@ -91,6 +92,18 @@ async function handleMediaRequest(request: NextRequest) {
   const isBbcAudio = bucket === "audio" && /^bbc(?:\/|$)/i.test(cleanPath);
   if (bucket === "audio" && /^listening\//i.test(cleanPath)) {
     return streamListeningAudio(request, cleanPath);
+  }
+
+  if (bucket === "images" && (
+    process.env.COS_MEDIA_ENABLED !== "true" || isPrimarySchoolVocabularyImagePath(cleanPath)
+  )) {
+    const directUrl = getSupabaseStorageUrl("images", cleanPath);
+    return directUrl
+      ? NextResponse.redirect(directUrl, {
+          status: 307,
+          headers: { "Cache-Control": "public, max-age=60" },
+        })
+      : new NextResponse("Media unavailable", { status: 404 });
   }
 
   if (((bucket === "audio" && !isBbcAudio) || bucket === "video" || bucket === "videos")

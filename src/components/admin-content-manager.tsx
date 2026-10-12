@@ -7,6 +7,7 @@ import { AdminHomeEditor } from "@/components/admin-home-editor";
 import { AdminEntitlementManager } from "@/components/admin-entitlement-manager";
 import { AdminSiteChromeEditor } from "@/components/admin-site-chrome-editor";
 import { AdminBbcArticleUpload } from "@/components/admin-bbc-article-upload";
+import { PrimarySchoolVocabularyImageAdmin } from "@/components/primary-school-vocabulary-image-admin";
 import { AdminCommentInbox, AdminCommentNotice, useAdminCommentInbox } from "@/components/admin-comment-inbox";
 import { GuidePostAdmin } from "@/components/guide-post-admin";
 import { GuideCommentsAdmin } from "@/components/guide-comments-admin";
@@ -19,6 +20,7 @@ type AdminView =
   | "home"
   | "chrome"
   | "guide"
+  | "vocabulary-images"
   | "bbc-upload"
   | "comments"
 
@@ -230,6 +232,13 @@ export function AdminContentManager() {
           帖子管理
         </button>
         <button
+          className={activeView === "vocabulary-images" ? "active" : ""}
+          type="button"
+          onClick={() => setActiveView("vocabulary-images")}
+        >
+          小学词汇图片
+        </button>
+        <button
           className={activeView === "bbc-upload" ? "active" : ""}
           type="button"
           onClick={() => setActiveView("bbc-upload")}
@@ -257,6 +266,7 @@ export function AdminContentManager() {
         </>
       ) : null}
 
+      {activeView === "vocabulary-images" && adminUserId ? <PrimarySchoolVocabularyImageAdmin /> : null}
 
       {activeView === "bbc-upload" && adminUserId ? <AdminBbcArticleUpload /> : null}
       {activeView === "comments" && adminUserId ? <AdminCommentInbox inbox={commentInbox} /> : null}
