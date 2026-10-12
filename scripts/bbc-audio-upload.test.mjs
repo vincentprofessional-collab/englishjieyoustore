@@ -175,6 +175,26 @@ test("PUT presigns require the upload credential pair and never use playback cre
   assert.equal(url.searchParams.get("X-Amz-SignedHeaders"), "content-type;host");
 });
 
+test("editing unchanged BBC text reuses its saved audio timing without downloading MP3", () => {
+  const reuse = loadFunctions("../src/app/api/admin/bbc-articles/route.ts", ["reuseExistingBbcAudioTimings"], {});
+  const article = {
+    id: "260803", year: 2026,
+    sentences: [{ sentenceNo: 1, english: "Today's youth are here.", chinese: "年轻人来了。", startMs: 0, endMs: 1800 }],
+  };
+  const existing = {
+    id: "260803", year: 2026, fullAudioUrl: "/api/bbc-audio/2026/260803/full.mp3", audioDurationMs: 5000,
+    sentences: [{ sentenceNo: 1, english: "Today's youth are here.", chinese: "年轻人来了。", startMs: 400, endMs: 2200 }],
+  };
+  const reused = reuse(article, existing, "bbc/2026/260803/full.mp3");
+
+  assert.equal(reused.durationMs, 5000);
+  assert.deepEqual(Array.from(reused.timings, ({ sentenceNo, startMs, endMs }) => ({ sentenceNo, startMs, endMs })), [
+    { sentenceNo: 1, startMs: 400, endMs: 2200 },
+  ]);
+  assert.equal(reuse({ ...article, sentences: [{ ...article.sentences[0], english: "Today's young people are here." }] }, existing, "bbc/2026/260803/full.mp3"), null);
+  assert.equal(reuse(article, existing, "bbc/2026/260803/full-0123456789abcdef.mp3"), null);
+});
+
 test("uploaded bytes stay below 100% until R2 confirms success; rejection stays incomplete", async () => {
   for (const outcome of [200, 403, "network-error"]) {
     const progress = [];

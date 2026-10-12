@@ -348,6 +348,26 @@ export async function POST(request: NextRequest) {
   return NextResponse.json({ error: "请求类型不受支持。" }, { status: 400 });
 }
 
+function reuseExistingBbcAudioTimings(article: BbcArticle, existing: BbcArticle | null, objectPath: string) {
+  const filename = existing?.fullAudioUrl?.split("/").at(-1);
+  if (!existing || !filename || !/^full(?:-[a-f0-9]{16})?\.mp3$/.test(filename)) return null;
+  const existingObjectPath = `bbc/${existing.year}/${existing.id}/${filename}`;
+  const existingSentences = existing.sentences ?? [];
+  const currentSentences = article.sentences ?? [];
+  const durationMs = existing.audioDurationMs;
+  if (existingObjectPath !== objectPath || !Number.isInteger(durationMs) || !durationMs || existingSentences.length !== currentSentences.length) return null;
+  if (existingSentences.some((sentence, index) => sentence.english !== currentSentences[index]?.english)) return null;
+
+  return {
+    durationMs,
+    timings: existingSentences.map((sentence, index) => ({
+      endMs: sentence.endMs,
+      sentenceNo: index + 1,
+      startMs: sentence.startMs,
+    })),
+  };
+}
+
 export async function PUT(request: NextRequest) {
   const supabase = createServiceClient();
   if (!supabase) return NextResponse.json({ error: "后台服务尚未配置 Supabase 管理密钥。" }, { status: 500 });
@@ -379,8 +399,17 @@ export async function PUT(request: NextRequest) {
   catch (cause) { return NextResponse.json({ error: cause instanceof Error ? cause.message : "文章分析失败。" }, { status: 400 }); }
   if (typeof article === "string") return NextResponse.json({ error: article }, { status: 400 });
   if (!objectPath || !await hasR2Object(objectPath)) return NextResponse.json({ error: "请先上传本篇 MP3，完成时间轴分析后再发布。" }, { status: 400 });
-  const timings = payload.timings;
-  const durationMs = Number(payload.durationMs);
+  const existingArticleResult = await supabase.from("bbc_uploaded_articles").select("article,published").eq("id", article.id).maybeSingle();
+  if (existingArticleResult.error) return NextResponse.json({ error: `保存前无法读取文章状态：${existingArticleResult.error.message}` }, { status: 503 });
+  const existingArticle = existingArticleResult.data;
+  let timings = payload.timings;
+  let durationMs = Number(payload.durationMs);
+  if (!Array.isArray(timings)) {
+    const reused = reuseExistingBbcAudioTimings(article, (existingArticle?.article as BbcArticle | null | undefined) ?? null, objectPath);
+    if (!reused) return NextResponse.json({ error: "正文句子已变化，无法沿用原音频时间轴；请重新选择本篇 MP3 后保存。" }, { status: 400 });
+    timings = reused.timings;
+    durationMs = reused.durationMs;
+  }
   if (!Array.isArray(timings) || timings.length !== article.sentences!.length || !Number.isFinite(durationMs) || durationMs <= 0) {
     return NextResponse.json({ error: "尚未生成完整的逐句原声时间轴。" }, { status: 400 });
   }
@@ -397,9 +426,7 @@ export async function PUT(request: NextRequest) {
   article.subtitleUrl = `/api/bbc-subtitles/${article.id}`;
   article.audioDurationMs = durationMs;
 
-  const existingArticle = await supabase.from("bbc_uploaded_articles").select("published").eq("id", article.id).maybeSingle();
-  if (existingArticle.error) return NextResponse.json({ error: `保存前无法读取文章状态：${existingArticle.error.message}` }, { status: 503 });
-  const published = existingArticle.data?.published === true;
+  const published = existingArticle?.published === true;
 
   const { error } = await supabase.from("bbc_uploaded_articles").upsert({
     article,
@@ -500,7 +527,7 @@ export async function GET(request: NextRequest) {
     const filename = article.fullAudioUrl?.split("/").at(-1) ?? "full.mp3";
     if (!/^full(?:-[a-f0-9]{16})?\.mp3$/.test(filename)) return NextResponse.json({ error: "文章音频路径无效。" }, { status: 400 });
     const objectPath = `bbc/${article.year}/${article.id}/${filename}`;
-    return NextResponse.json({ article, objectPath, audioReadUrl: article.fullAudioUrl ? getPresignedPutUrl(objectPath, "GET") : null });
+    return NextResponse.json({ article, objectPath });
   }
   const result = await supabase.from("bbc_uploaded_articles").select("id,year,created_at,published,title:article->>title").order("created_at", { ascending: false }).limit(200);
   if (result.error) return NextResponse.json({ error: "文章列表暂时无法读取。" }, { status: 503 });

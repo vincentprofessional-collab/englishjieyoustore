@@ -44,7 +44,7 @@ export function AdminBbcArticleUpload() {
   const [error, setError] = useState(false);
   const [publishedHref, setPublishedHref] = useState("");
   const [editingId, setEditingId] = useState<string | null>(null);
-  const [existingAudio, setExistingAudio] = useState<{ url: string; objectPath: string } | null>(null);
+  const [existingAudio, setExistingAudio] = useState<{ objectPath: string } | null>(null);
   const [articles, setArticles] = useState<{ id: string; published: boolean; title: string; year: number }[]>([]);
 
   async function loadArticles() {
@@ -58,7 +58,7 @@ export function AdminBbcArticleUpload() {
       const result = await adminRequest(`/api/admin/bbc-articles?articleId=${encodeURIComponent(id)}`);
       setText(serializeBbcArticlePaste(result.article));
       setEditingId(id); setAudioFile(null); setAudioProgress(0); setAudioStatus("waiting");
-      setExistingAudio(result.audioReadUrl ? { url: result.audioReadUrl, objectPath: result.objectPath } : null);
+      setExistingAudio(result.article.fullAudioUrl ? { objectPath: result.objectPath } : null);
       setPublishedHref(`/articles/${id}`);
       setMessage("正在编辑已上传文章。修改正文后会自动重新分析时间轴；语法标注可在下方追加后由系统识别，也可在前端精读页面直接修改。");
     } catch (cause) { setError(true); setMessage(cause instanceof Error ? cause.message : "文章无法读取。"); }
@@ -91,7 +91,7 @@ export function AdminBbcArticleUpload() {
     setAudioProgress(0);
     setAudioStatus(audioFile ? "analyzing" : "waiting");
     try {
-      setMessage("正在解析文章并生成词性、句子成分标注……");
+      setMessage(audioFile ? "正在解析文章并生成词性、句子成分标注……" : "正在保存文章修改并保留原有音频时间轴……");
       const prepared = await adminRequest("/api/admin/bbc-articles", { method: "POST", body: JSON.stringify({ action: "prepare", text }) }) as {
         article: BbcArticle;
         pastedSyntaxCount?: number;
@@ -99,16 +99,10 @@ export function AdminBbcArticleUpload() {
         unmatchedSyntaxSentenceNos?: number[];
       };
       if (editingId && editingId !== prepared.article.id) throw new Error("编辑文章时请保留原日期编号。");
-      let audioBlob: Blob = audioFile!;
       let objectPath: string | undefined = existingAudio?.objectPath;
-      if (!audioFile && existingAudio) {
-        const current = await adminRequest(`/api/admin/bbc-articles?articleId=${encodeURIComponent(editingId!)}`);
-        objectPath = current.objectPath;
-        const response = await fetch(current.audioReadUrl, { headers: { "Content-Type": "audio/mpeg" } });
-        if (!response.ok) throw new Error("无法读取现有 MP3，请重新选择本篇音频。");
-        audioBlob = await response.blob();
-      }
-      const alignment = await analyzeBbcAudio(audioBlob, prepared.article.sentences ?? [], setMessage);
+      const alignment = audioFile
+        ? await analyzeBbcAudio(audioFile, prepared.article.sentences ?? [], setMessage)
+        : undefined;
       if (audioFile) {
         const title = text.replace(/^\uFEFF/, "").split(/\r?\n/).find((line) => line.trim())?.replace(/^\s*#{1,6}\s*/, "").trim() ?? "";
         const ticket = await adminRequest("/api/admin/bbc-articles", {
@@ -129,6 +123,7 @@ export function AdminBbcArticleUpload() {
       const isPublished = payload.published === true;
       setEditingId(articleId);
       setPublishedHref(`/articles/${articleId}${isPublished ? "" : "?preview=draft"}`);
+      const reviewSentenceNos = alignment?.reviewSentenceNos ?? [];
       const pastedSyntaxTotalCount = prepared.pastedSyntaxTotalCount ?? 0;
       const unmatchedSyntaxSentenceNos = prepared.unmatchedSyntaxSentenceNos ?? [];
       const syntaxMessage = pastedSyntaxTotalCount
@@ -137,7 +132,7 @@ export function AdminBbcArticleUpload() {
           ? "检测到语法标注标题，但没有解析到句子标注；请检查是否按“## 句1”单独分行。"
           : "";
       setMessage(
-        `${isPublished ? `已更新 ${payload.year} 年 ${payload.month} 月的已发布文章` : `已保存为 ${payload.year} 年 ${payload.month} 月的草稿，用户暂时看不到`}；${payload.paragraphCount} 段正文、${payload.sentenceCount} 句、${payload.vocabularyCount} 条词汇。${syntaxMessage}其余未提供标注的句子由系统自动分析；请先打开前端预览检查并修改。${alignment.reviewSentenceNos.length ? `第 ${alignment.reviewSentenceNos.join("、")} 句为低置信度估时，请在前端试听并微调。` : ""}`,
+        `${isPublished ? `已更新 ${payload.year} 年 ${payload.month} 月的已发布文章` : `已保存为 ${payload.year} 年 ${payload.month} 月的草稿，用户暂时看不到`}；${payload.paragraphCount} 段正文、${payload.sentenceCount} 句、${payload.vocabularyCount} 条词汇。${syntaxMessage}其余未提供标注的句子由系统自动分析；请先打开前端预览检查并修改。${reviewSentenceNos.length ? `第 ${reviewSentenceNos.join("、")} 句为低置信度估时，请在前端试听并微调。` : ""}`,
       );
       void loadArticles().catch(() => undefined);
     } catch (uploadError) {
@@ -186,7 +181,7 @@ export function AdminBbcArticleUpload() {
         <label className={styles.full}>
           <span>MP3 音频{existingAudio ? "（已有关联音频，可替换）" : ""}</span>
           <input accept=".mp3,audio/mpeg" disabled={busy} onChange={(event) => { setAudioFile(event.target.files?.[0] ?? null); setAudioProgress(0); setAudioStatus("waiting"); }} type="file" />
-          <small>{audioFile ? `${audioFile.name} · ${(audioFile.size / 1024 / 1024).toFixed(1)} MB` : "最大 200 MB；浏览器直接上传到 Cloudflare R2，不经过文章接口传输音频内容。"}</small>
+          <small>{audioFile ? `${audioFile.name} · ${(audioFile.size / 1024 / 1024).toFixed(1)} MB` : existingAudio ? "已关联原音频；未修改英文句子时会保留原时间轴。若修改英文正文，请重新选择 MP3。" : "最大 200 MB；浏览器直接上传到 Cloudflare R2，不经过文章接口传输音频内容。"}</small>
         </label>
         {audioFile ? (
           <div aria-label="MP3 音频上传进度" aria-valuemax={100} aria-valuemin={0} aria-valuenow={audioProgress} className={styles.progress} role="progressbar">
