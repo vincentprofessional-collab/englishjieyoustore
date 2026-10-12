@@ -36,8 +36,10 @@ function normalizeTokens(value: unknown, canonical: BbcSyntaxSentenceData["token
     const item = candidate as Record<string, unknown>;
     const base = canonical[index];
     const pos = typeof item.pos === "string" ? item.pos.trim() : "";
-    if (item.text !== base.text || item.start !== base.start || item.end !== base.end || !pos || pos.length > 32) return null;
-    tokens.push({ ...base, pos });
+    if (item.text !== base.text || item.start !== base.start || item.end !== base.end || pos.length > 32) return null;
+    const token = { ...base, pos };
+    if (base.pos !== pos) delete token.posLabel;
+    tokens.push(token);
   }
   return tokens;
 }
