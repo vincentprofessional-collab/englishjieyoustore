@@ -11,7 +11,9 @@ export default async function ListeningBookPage({
 }) {
   const { bookCode } = await params;
   const { sections, error } = await getListeningSections();
-  const bookSections = sections.filter((section) => section.bookCode === bookCode);
+  const normalizeBookCode = (value: string) => value.trim().toLowerCase().replace(/^ci(?=\d)/, "cambridge-");
+  const requestedBookCode = normalizeBookCode(bookCode);
+  const bookSections = sections.filter((section) => normalizeBookCode(section.bookCode) === requestedBookCode);
   const firstSection = bookSections[0];
   const firstMockSection = bookSections.find((section) => section.questionCount > 0);
   const sectionLabel = bookCode.startsWith("jiufen-") ? "Part" : "Section";

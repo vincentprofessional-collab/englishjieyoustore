@@ -1,6 +1,7 @@
 "use client";
 
 import { getBbcWaveSegments } from "@/lib/articles/bbc-paste-markup";
+import { createPortal } from "react-dom";
 
 import {
   type DragEvent as ReactDragEvent,
@@ -185,6 +186,7 @@ export function BbcSentencePractice({
   >({});
   const [sentenceOrderDrag, setSentenceOrderDrag] = useState<SentenceOrderDrag | null>(null);
   const [sentenceOrderHover, setSentenceOrderHover] = useState<SentenceOrderDropTarget | null>(null);
+  const [sentenceOrderPointerPosition, setSentenceOrderPointerPosition] = useState<{ x: number; y: number } | null>(null);
   const [isMobilePointerViewport, setIsMobilePointerViewport] = useState(false);
   const sentenceKey = `${sentence.sentenceNo}:${sentence.english}:${settings.dictationMode}`;
   const previousSentenceKeyRef = useRef(sentenceKey);
@@ -207,6 +209,7 @@ export function BbcSentencePractice({
     setSentenceOrderAnswers({});
     setSentenceOrderDrag(null);
     setSentenceOrderHover(null);
+    setSentenceOrderPointerPosition(null);
   }, [sentenceKey]);
 
   useEffect(() => {
@@ -236,6 +239,9 @@ export function BbcSentencePractice({
 
       event.preventDefault();
       setSentenceOrderHover(getDropTarget(event.clientX, event.clientY));
+      if (isMobilePointerViewport) {
+        setSentenceOrderPointerPosition({ x: event.clientX, y: event.clientY });
+      }
     }
 
     function handlePointerUp(event: PointerEvent) {
@@ -249,6 +255,7 @@ export function BbcSentencePractice({
       }
       setSentenceOrderDrag(null);
       setSentenceOrderHover(null);
+      setSentenceOrderPointerPosition(null);
     }
 
     function handlePointerCancel(event: PointerEvent) {
@@ -258,6 +265,7 @@ export function BbcSentencePractice({
 
       setSentenceOrderDrag(null);
       setSentenceOrderHover(null);
+      setSentenceOrderPointerPosition(null);
     }
 
     window.addEventListener("pointermove", handlePointerMove, { passive: false });
@@ -269,7 +277,7 @@ export function BbcSentencePractice({
       window.removeEventListener("pointerup", handlePointerUp);
       window.removeEventListener("pointercancel", handlePointerCancel);
     };
-  }, [sentenceOrderDrag]);
+  }, [isMobilePointerViewport, sentenceOrderDrag]);
 
   function getDictationAnswerKey(tokenIndex: number) {
     return `${settings.dictationMode}:${tokenIndex}`;
@@ -553,6 +561,7 @@ export function BbcSentencePractice({
     event.stopPropagation();
     if (isMobilePointerViewport) {
       event.currentTarget.setPointerCapture(event.pointerId);
+      setSentenceOrderPointerPosition({ x: event.clientX, y: event.clientY });
     }
     setSentenceOrderDrag({
       ...answer,
@@ -700,6 +709,18 @@ export function BbcSentencePractice({
             </button>
           ))}
         </div>
+        {isMobilePointerViewport && sentenceOrderDrag && sentenceOrderPointerPosition
+          ? createPortal(
+              <span
+                aria-hidden="true"
+                className="sentence-order-drag-preview"
+                style={{ left: sentenceOrderPointerPosition.x, top: sentenceOrderPointerPosition.y }}
+              >
+                {sentenceOrderDrag.token}
+              </span>,
+              document.body,
+            )
+          : null}
       </>
     );
   }
