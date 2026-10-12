@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { ReactNode } from "react";
 import {
@@ -78,9 +78,7 @@ export function BbcSyntaxInlineEditor({
   const [level, setLevel] = useState<BbcSyntaxLevel>(1);
   const [editingSpan, setEditingSpan] = useState<{ end: number; level: BbcSyntaxLevel; start: number } | null>(null);
   const [label, setLabel] = useState("主语");
-  const [pos, setPos] = useState<string | null>(null);
-  const [focusLabelInput, setFocusLabelInput] = useState(false);
-  const labelInputRef = useRef<HTMLInputElement | null>(null);
+  const [pos, setPos] = useState("");
   const [selectedInlineId, setSelectedInlineId] = useState("");
   const [lineStyle, setLineStyle] = useState<ArticleInlineLineStyle>("solid");
   const [message, setMessage] = useState("");
@@ -120,13 +118,6 @@ export function BbcSyntaxInlineEditor({
     setTimingEnd(timing ? (timing.endMs / 1_000).toFixed(3) : "");
   }, [sentenceNo, timing?.startMs, timing?.endMs]);
 
-  useEffect(() => {
-    if (!focusLabelInput) return;
-    labelInputRef.current?.focus();
-    labelInputRef.current?.select();
-    setFocusLabelInput(false);
-  }, [focusLabelInput]);
-
   const selectedPos = useMemo(() => {
     if (!selection) return "";
     const values = data.tokens.slice(selection.start, selection.end).filter((token) => token.pos !== "PUNCT").map((token) => token.pos);
@@ -137,7 +128,7 @@ export function BbcSyntaxInlineEditor({
 
   function selectRange(range: BbcSyntaxTokenRange) {
     setSelection(range);
-    setPos(null);
+    setPos("");
     const exact = allSpans.find(({ span }) => span.start === range.start && span.end === range.end);
     if (exact) {
       setLevel(exact.level);
@@ -159,13 +150,11 @@ export function BbcSyntaxInlineEditor({
 
   function selectComponent(spanLevel: BbcSyntaxLevel, span: BbcSyntaxSpan) {
     setEditing(true);
-    setPos(null);
     setLevel(spanLevel);
     setLabel(span.label);
     setSelection({ start: span.start, end: span.end });
     setEditingSpan({ end: span.end, level: spanLevel, start: span.start });
     setSelectedInlineId("");
-    setFocusLabelInput(true);
     setMessage("已选中语法成分，可修改名称、范围或删除。");
   }
 
@@ -174,7 +163,6 @@ export function BbcSyntaxInlineEditor({
       .filter(({ token }) => token.start < annotation.end && token.end > annotation.start);
     if (!matched.length) return;
     setEditing(true);
-    setPos(null);
     setSelection({ start: matched[0].index, end: matched[matched.length - 1].index + 1 });
     setSelectedInlineId(annotation.id);
     setLineStyle(annotation.style);
@@ -183,13 +171,13 @@ export function BbcSyntaxInlineEditor({
 
   function changeSelectedPos(nextPos: string) {
     const normalizedPos = nextPos.trim().slice(0, 32);
-    if (!selection) return;
+    if (!selection || !normalizedPos) return;
     const tokens = data.tokens.map((token, index) =>
       index >= selection.start && index < selection.end && token.pos !== "PUNCT" ? { ...token, pos: normalizedPos, posLabel: undefined } : token,
     );
     onSentenceChange({ ...data, tokens });
     setPos(normalizedPos);
-    setMessage(normalizedPos ? "词性已修改，点击“保存并更新文章”后生效。" : "选中词的词性已删除，点击“保存并更新文章”后生效。");
+    setMessage("词性已修改，点击“保存并更新文章”后生效。");
   }
 
   function applyComponent() {
@@ -251,13 +239,11 @@ export function BbcSyntaxInlineEditor({
   }
 
   function loadSpan(spanLevel: BbcSyntaxLevel, span: BbcSyntaxSpan) {
-    setPos(null);
     setLevel(spanLevel);
     setLabel(span.label);
     setSelection({ start: span.start, end: span.end });
     setEditingSpan({ end: span.end, level: spanLevel, start: span.start });
     setSelectedInlineId("");
-    setFocusLabelInput(true);
     setMessage("已选中这条成分标注。也可以在原文中拖选新的范围。");
   }
 
@@ -383,16 +369,10 @@ export function BbcSyntaxInlineEditor({
                     maxLength={32}
                     onChange={(event) => setPos(event.target.value)}
                     placeholder="输入词性"
-                    value={pos ?? selectedPos}
+                    value={pos || selectedPos}
                   />
                 </label>
-                <button
-                  disabled={!selection || (pos === null ? !selectedPos : !pos.trim() && !selectedPos)}
-                  onClick={() => changeSelectedPos(pos ?? selectedPos)}
-                  type="button"
-                >
-                  {pos !== null && !pos.trim() && selectedPos ? "删除选中词性" : "修改选中词性"}
-                </button>
+                <button disabled={!selection || !(pos || selectedPos)} onClick={() => changeSelectedPos(pos || selectedPos)} type="button">修改选中词性</button>
                 <label>
                   <span>成分层级</span>
                   <select onChange={(event) => {
@@ -410,7 +390,7 @@ export function BbcSyntaxInlineEditor({
                 </label>
                 <label className={styles.labelInput}>
                   <span>语法成分</span>
-                  <input onChange={(event) => setLabel(event.target.value)} ref={labelInputRef} value={label} />
+                  <input onChange={(event) => setLabel(event.target.value)} value={label} />
                 </label>
                 <button disabled={!selection || !label.trim()} onClick={applyComponent} type="button">{editingSpan ? "修改成分" : "添加 / 修改成分"}</button>
                 <label>

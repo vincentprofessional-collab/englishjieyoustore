@@ -84,3 +84,19 @@ export async function getUploadedBbcArticle(articleId: string): Promise<BbcArtic
   if (error || !data) return null;
   return normalizeRecord(data.article, data.created_at)?.article ?? null;
 }
+
+/** Call only after verifying the current viewer is an administrator. */
+export async function getUploadedBbcArticleForAdmin(articleId: string): Promise<{ article: BbcArticle; published: boolean } | null> {
+  const supabase = createServiceClient();
+  if (!supabase) return null;
+
+  const { data, error } = await supabase
+    .from("bbc_uploaded_articles")
+    .select("article, created_at, published")
+    .eq("id", articleId)
+    .maybeSingle();
+
+  if (error || !data) return null;
+  const record = normalizeRecord(data.article, data.created_at);
+  return record ? { article: record.article, published: data.published === true } : null;
+}

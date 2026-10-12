@@ -1,6 +1,7 @@
 import { createHash, createHmac } from "node:crypto";
 import { getBbcArticleById } from "@/lib/articles/bbc";
-import { getUploadedBbcArticle } from "@/lib/articles/bbc-uploaded-content";
+import { getUploadedBbcArticle, getUploadedBbcArticleForAdmin } from "@/lib/articles/bbc-uploaded-content";
+import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { localBbcAudioResponse, resolveLocalBbcAudio } from "@/lib/articles/bbc-local-audio";
 import { getPaidContentKey } from "@/lib/access-control";
 import { claimPaidContentAccess } from "@/lib/free-preview-access-server";
@@ -85,7 +86,25 @@ export async function GET(
   { params }: { params: Promise<{ year: string; articleId: string; file: string[] }> },
 ) {
   const { year, articleId, file } = await params;
-  const article = getBbcArticleById(articleId) ?? await getUploadedBbcArticle(articleId);
+  const builtinArticle = getBbcArticleById(articleId);
+  let article = builtinArticle ?? await getUploadedBbcArticle(articleId);
+  let adminDraftPreview = false;
+  if (!builtinArticle && !article) {
+    try {
+      const supabase = await createServerSupabaseClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).maybeSingle();
+        if (profile?.role === "admin") {
+          const record = await getUploadedBbcArticleForAdmin(articleId);
+          article = record?.article ?? null;
+          adminDraftPreview = Boolean(record && !record.published);
+        }
+      }
+    } catch {
+      article = null;
+    }
+  }
   const audioFile = file.join("/");
 
   if (
@@ -99,7 +118,7 @@ export async function GET(
     return new Response("Audio not found.", { status: 404 });
   }
 
-  if (!(article.year === 2015 && isFreeBbc2015ArticleUnlocked(article.id))) {
+  if (!adminDraftPreview && !(article.year === 2015 && isFreeBbc2015ArticleUnlocked(article.id))) {
     const hasAccess = await claimPaidContentAccess(
       "bbc",
       getPaidContentKey("bbc-article", article.id),

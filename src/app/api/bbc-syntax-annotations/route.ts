@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import syntax2026 from "@/data/bbc/2026-syntax.json";
 import { getBbcArticleById } from "@/lib/articles/bbc";
-import { getUploadedBbcArticle } from "@/lib/articles/bbc-uploaded-content";
+import { getUploadedBbcArticleForAdmin } from "@/lib/articles/bbc-uploaded-content";
 import { buildAutomaticBbcSyntax } from "@/lib/articles/bbc-automatic-syntax";
 import { normalizeBbcSyntaxSentenceEdits } from "@/lib/bbc-syntax-annotation-edits";
 import type { BbcSyntaxSentenceData } from "@/components/bbc-syntax-sentence";
@@ -30,7 +30,7 @@ async function requireAdmin(request: NextRequest, supabase: SupabaseClient) {
 }
 
 async function getCanonical(articleId: string) {
-  const article = getBbcArticleById(articleId) ?? await getUploadedBbcArticle(articleId);
+  const article = getBbcArticleById(articleId) ?? (await getUploadedBbcArticleForAdmin(articleId))?.article ?? null;
   const sentences = sourceSentences[articleId] ?? article?.syntaxSentences ?? article?.sentences?.map((sentence) => buildAutomaticBbcSyntax(sentence.english));
   return article && sentences?.length ? { article, sentences } : null;
 }

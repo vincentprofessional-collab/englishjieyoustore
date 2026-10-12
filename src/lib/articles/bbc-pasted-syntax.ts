@@ -10,7 +10,7 @@ export type PastedBbcSyntaxSentence = {
 const SECTION_HEADING = /^##\s*句\s*(\d+)\s*$/;
 const SYNTAX_TITLE = /^#\s*全文逐句词性\s*[+＋]\s*句子成分标注\s*$/im;
 const FOLLOWING_CONTENT_HEADING = /^(?:#{1,6}\s*)?(?:重点\s*)?(?:词汇(?:表|与短语|和短语|及短语)?|短语|Vocabulary(?:\s+(?:and|&)\s+phrases)?)\s*[:：]?\s*$/im;
-const ROLE_NAMES = ["主语", "谓语", "宾语从句", "宾语", "宾补", "宾语补足语", "表语从句", "表语", "定语从句", "定语", "状语", "同位语", "补语"];
+const ROLE_NAMES = ["主语从句", "主语", "谓语", "宾语从句", "宾语", "宾语补足语", "宾补", "表语从句", "表语", "定语从句", "定语", "状语从句", "状语", "同位语从句", "同位语", "补语", "独立主格"];
 
 function normalizeText(value: string) {
   return value.replace(/[‘’]/g, "'").replace(/[“”]/g, '"').replace(/\s+/g, " ").trim();
@@ -63,11 +63,16 @@ function posLabel(description: string) {
 }
 
 function findTermRange(text: string, term: string, from: number) {
-  const source = normalizeText(text).toLowerCase();
-  const target = normalizeText(term).toLowerCase();
+  // Curly and straight quotes occupy the same UTF-16 width, so replacing them
+  // keeps the offsets compatible with the tokens rendered by the editor.
+  const source = text.replace(/[‘’]/g, "'").replace(/[“”]/g, '"');
+  const target = term.replace(/[‘’]/g, "'").replace(/[“”]/g, '"').trim().replace(/\s+/g, " ");
   if (!target || target.includes("...") || target.includes("…")) return null;
-  const start = source.indexOf(target, from);
-  return start < 0 ? null : { start, end: start + target.length };
+  const pattern = target.split(" ").map((part) => part.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("\\s+");
+  const match = new RegExp(pattern, "i").exec(source.slice(from));
+  if (!match) return null;
+  const start = from + match.index;
+  return { start, end: start + match[0].length };
 }
 
 function indexesForRange(tokens: BbcSyntaxSentenceData["tokens"], range: { start: number; end: number }) {
@@ -78,7 +83,7 @@ function indexesForRange(tokens: BbcSyntaxSentenceData["tokens"], range: { start
   return indexes;
 }
 
-function appendSummarySpans(text: string, tokens: BbcSyntaxSentenceData["tokens"], main: string) {
+function appendSummarySpans(text: string, tokens: BbcSyntaxSentenceData["tokens"], main: string, sentenceNo: number) {
   const spans: BbcSyntaxSpan[] = [];
   const marked = /([^【】]+?)【([^】]+)】/g;
   let cursor = 0;
@@ -86,10 +91,11 @@ function appendSummarySpans(text: string, tokens: BbcSyntaxSentenceData["tokens"
     const phrase = match[1].trim();
     const role = rolesIn(match[2])[0] ?? canonicalRole(match[2].trim());
     const range = findTermRange(text, phrase, cursor);
-    if (!range) continue;
+    if (!range) throw new Error(`第 ${sentenceNo} 句的主干标注“${phrase}”无法匹配原句，请核对输入框中的句子成分。`);
     cursor = range.end;
     const indexes = indexesForRange(tokens, range);
-    if (indexes.length) spans.push({ label: role, start: indexes[0], end: indexes.at(-1)! + 1 });
+    if (!indexes.length) throw new Error(`第 ${sentenceNo} 句的主干标注“${phrase}”没有对应词语。`);
+    spans.push({ label: role, start: indexes[0], end: indexes.at(-1)! + 1 });
   }
   return spans;
 }
@@ -143,17 +149,20 @@ export function applyPastedBbcSyntax(
   const annotation = sentenceNo == null
     ? annotations.find((item) => sentenceWordKey(item.text) === sentenceWordKey(automatic.text))
     : annotations.find((item) => item.sentenceNo === sentenceNo);
-  if (!annotation || sentenceWordKey(annotation.text) !== sentenceWordKey(automatic.text)) return automatic;
+  if (!annotation) return automatic;
+  if (sentenceWordKey(annotation.text) !== sentenceWordKey(automatic.text)) {
+    throw new Error(`第 ${annotation.sentenceNo} 句语法标注中的英文原句与正文不一致，请核对输入框内容。`);
+  }
 
   const tokens = automatic.tokens.map((token) => ({ ...token }));
   const componentRows: { label: string; start: number; end: number }[] = [];
   let cursor = 0;
   for (const item of annotation.items) {
     const range = findTermRange(automatic.text, item.term, cursor);
-    if (!range) return automatic;
+    if (!range) throw new Error(`第 ${annotation.sentenceNo} 句的标注词语“${item.term}”无法匹配原句，请核对输入框中的语法标注。`);
     cursor = range.end;
     const indexes = indexesForRange(tokens, range);
-    if (!indexes.length) continue;
+    if (!indexes.length) throw new Error(`第 ${annotation.sentenceNo} 句的标注词语“${item.term}”没有对应词语。`);
     const code = posCode(item.description);
     if (code) indexes.forEach((index) => {
       tokens[index].pos = code;
@@ -164,7 +173,7 @@ export function applyPastedBbcSyntax(
     }
   }
 
-  const summarySpans = appendSummarySpans(automatic.text, tokens, annotation.main);
+  const summarySpans = appendSummarySpans(automatic.text, tokens, annotation.main, annotation.sentenceNo);
   const level2: BbcSyntaxSpan[] = [];
   for (const row of componentRows) {
     if (!level2.some((span) => span.label === row.label && span.end === row.start)) {
@@ -177,8 +186,10 @@ export function applyPastedBbcSyntax(
   return {
     ...automatic,
     tokens,
-    level1: summarySpans.length ? summarySpans : automatic.level1,
-    level2: level2.length ? level2 : automatic.level2,
+    // Uploaded annotations are the authority for annotated sentences. Never
+    // quietly mix them with the automatic parser when one supplied layer is empty.
+    level1: summarySpans,
+    level2,
     status: "reviewed",
   };
 }

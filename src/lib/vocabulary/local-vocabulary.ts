@@ -4,6 +4,7 @@ import { resolve } from "node:path";
 import { supabase } from "@/lib/supabase/client";
 import excelLeftmostRootAffix from "@/data/vocabulary/excel-leftmost-root-affix.json";
 import excelRootAffixCatalog from "@/data/vocabulary/excel-root-affix-catalog.json";
+import workbookVocabularyDetails from "@/data/vocabulary/workbook-vocabulary-details.json";
 import { sortVocabularyFamilyItems } from "@/lib/vocabulary/autocomplete-ranking";
 import { shouldShowAudioPronunciation } from "@/lib/audio-pronunciation";
 import { getAdjectiveBaseFormCandidates } from "./adjective-base-forms";
@@ -63,7 +64,7 @@ type FlatVocabularyEntry = {
   cambridgeExamples?: string[] | string;
   def?: string;
   definitionEn?: string;
-  englishDefinition?: string;
+  englishDefinition?: string[] | string;
   englishExamples?: string[] | string;
   enDef?: string;
   etymologyStory?: string;
@@ -260,13 +261,28 @@ let cachedRootAffixCatalogItems: Map<string, VocabularyRootAffixCatalogItem> | n
 function loadVocabularySourceEntries() {
   const sourcePaths = [VOCABULARY_SOURCE_PATH, BUNDLED_PRIMARY_SCHOOL_SOURCE_PATH];
 
-  return sourcePaths.flatMap((sourcePath) => {
+  const sourceEntries = sourcePaths.flatMap((sourcePath) => {
     if (!existsSync(sourcePath)) {
       return [];
     }
 
     return JSON.parse(readFileSync(sourcePath, "utf8")) as FlatVocabularyEntry[];
   });
+
+  const workbookEntries: FlatVocabularyEntry[] = Object.entries(workbookVocabularyDetails as Record<string, {
+    definitionCn: string;
+    englishDefinitions: string[];
+    level: string;
+    phonetic: string;
+  }>).map(([word, details]) => ({
+    def: details.definitionCn,
+    englishDefinition: details.englishDefinitions,
+    level: details.level,
+    pron: details.phonetic,
+    word,
+  }));
+
+  return [...sourceEntries, ...workbookEntries];
 }
 
 export function normalizeLookupWord(value: string) {

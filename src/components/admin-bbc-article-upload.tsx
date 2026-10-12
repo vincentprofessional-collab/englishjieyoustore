@@ -45,7 +45,7 @@ export function AdminBbcArticleUpload() {
   const [publishedHref, setPublishedHref] = useState("");
   const [editingId, setEditingId] = useState<string | null>(null);
   const [existingAudio, setExistingAudio] = useState<{ url: string; objectPath: string } | null>(null);
-  const [articles, setArticles] = useState<{ id: string; title: string; year: number }[]>([]);
+  const [articles, setArticles] = useState<{ id: string; published: boolean; title: string; year: number }[]>([]);
 
   async function loadArticles() {
     const result = await adminRequest("/api/admin/bbc-articles");
@@ -125,16 +125,19 @@ export function AdminBbcArticleUpload() {
         method: "PUT",
       });
 
-      setPublishedHref(payload.href);
+      const articleId = typeof payload.articleId === "string" ? payload.articleId : prepared.article.id;
+      const isPublished = payload.published === true;
+      setEditingId(articleId);
+      setPublishedHref(`/articles/${articleId}${isPublished ? "" : "?preview=draft"}`);
       const pastedSyntaxTotalCount = prepared.pastedSyntaxTotalCount ?? 0;
       const unmatchedSyntaxSentenceNos = prepared.unmatchedSyntaxSentenceNos ?? [];
       const syntaxMessage = pastedSyntaxTotalCount
-        ? `已应用后台粘贴的 ${prepared.pastedSyntaxCount ?? 0}/${pastedSyntaxTotalCount} 句词性与成分标注。${unmatchedSyntaxSentenceNos.length ? `第 ${unmatchedSyntaxSentenceNos.join("、")} 句未匹配，将显示自动标注；请核对该句编号和英文原句。` : ""}`
+        ? `已按输入框中的内容应用 ${prepared.pastedSyntaxCount ?? 0}/${pastedSyntaxTotalCount} 句词性与成分标注。${unmatchedSyntaxSentenceNos.length ? `第 ${unmatchedSyntaxSentenceNos.join("、")} 句未匹配；请核对后再继续。` : ""}`
         : /全文逐句词性\s*[+＋]\s*句子成分标注/i.test(text)
           ? "检测到语法标注标题，但没有解析到句子标注；请检查是否按“## 句1”单独分行。"
           : "";
       setMessage(
-        `已发布到 ${payload.year} 年 ${payload.month} 月；${payload.paragraphCount} 段正文、${payload.sentenceCount} 句、${payload.vocabularyCount} 条词汇。${syntaxMessage}其余句子已自动生成词性和句子成分，前端精读页面可继续修改。${alignment.reviewSentenceNos.length ? `第 ${alignment.reviewSentenceNos.join("、")} 句为低置信度估时，请在前端试听并微调。` : ""}`,
+        `${isPublished ? `已更新 ${payload.year} 年 ${payload.month} 月的已发布文章` : `已保存为 ${payload.year} 年 ${payload.month} 月的草稿，用户暂时看不到`}；${payload.paragraphCount} 段正文、${payload.sentenceCount} 句、${payload.vocabularyCount} 条词汇。${syntaxMessage}其余未提供标注的句子由系统自动分析；请先打开前端预览检查并修改。${alignment.reviewSentenceNos.length ? `第 ${alignment.reviewSentenceNos.join("、")} 句为低置信度估时，请在前端试听并微调。` : ""}`,
       );
       void loadArticles().catch(() => undefined);
     } catch (uploadError) {
@@ -152,7 +155,7 @@ export function AdminBbcArticleUpload() {
         <div>
           <span>BBC · ARTICLE PUBLISHING</span>
           <h2>{editingId ? "修改 BBC 文章" : "上传 BBC 文章"}</h2>
-          <p>粘贴原文并选择 MP3，自动生成逐句音频时间轴和双语字幕；附加逐句语法标注会自动匹配到前端精读页面。</p>
+          <p>新文章先保存为仅管理员可见的草稿。请在前端检查并修改词性、句子成分和音频时间，再从草稿预览页正式发布。</p>
         </div>
       </header>
 
@@ -178,7 +181,7 @@ export function AdminBbcArticleUpload() {
             rows={24}
             value={text}
           />
-          <small>首行是标题，英文与中文逐段对应，编号词条自动归入右侧词汇栏。粘贴带格式的原文会保留波浪线；纯文本也可用 ~~词语~~ 标记波浪线。可在文章内容后追加“# 全文逐句词性+句子成分标注”及“## 句1”格式的标注，系统按英文原句自动匹配；未匹配的句子仍会自动分析。</small>
+          <small>首行是标题，英文与中文逐段对应，编号词条自动归入右侧词汇栏。粘贴带格式的原文会保留波浪线；纯文本也可用 ~~词语~~ 标记波浪线。可在文章内容后追加“# 全文逐句词性+句子成分标注”及“## 句1”格式的标注。已提供的标注会严格按原文映射；词句匹配失败时会提示并阻止保存，避免退回错误的自动标注。未提供标注的句子才由系统自动分析。</small>
         </label>
         <label className={styles.full}>
           <span>MP3 音频{existingAudio ? "（已有关联音频，可替换）" : ""}</span>
@@ -192,15 +195,15 @@ export function AdminBbcArticleUpload() {
           </div>
         ) : null}
         {message ? <p aria-live="polite" className={`${styles.message} ${error ? styles.error : ""} ${styles.full}`}>{message}</p> : null}
-        {publishedHref ? <Link className={`${styles.publishedLink} ${styles.full}`} href={publishedHref} target="_blank">打开刚发布的文章 ↗</Link> : null}
+        {publishedHref ? <Link className={`${styles.publishedLink} ${styles.full}`} href={publishedHref} target="_blank">{publishedHref.includes("preview=draft") ? "打开草稿前端校改 ↗" : "打开文章前端 ↗"}</Link> : null}
         <div className={`${styles.actions} ${styles.full}`}>
           {editingId ? <button className="button secondary" disabled={busy} onClick={() => { setEditingId(null); setExistingAudio(null); setText(""); setAudioFile(null); setMessage(""); setPublishedHref(""); }} type="button">新建文章</button> : null}
           <button className="button primary" disabled={busy || !text.trim()} type="submit">
-            {busy ? "解析并发布中…" : "解析并发布文章"}
+            {busy ? "解析并保存中…" : editingId ? "解析并保存修改" : "解析并保存为草稿"}
           </button>
         </div>
       </form>
-      {articles.length ? <section className={styles.articleList}><h3>已上传文章</h3>{articles.map((article) => <div key={article.id}><span>{article.id} · {article.title}</span><button className="button secondary" disabled={busy} onClick={() => void editArticle(article.id)} type="button">修改</button><Link className="button secondary" href={`/articles/${article.id}`} target="_blank">打开前端 ↗</Link></div>)}</section> : null}
+      {articles.length ? <section className={styles.articleList}><h3>已上传文章</h3>{articles.map((article) => <div key={article.id}><span>{article.id} · {article.title} · {article.published ? "已发布" : "草稿"}</span><button className="button secondary" disabled={busy} onClick={() => void editArticle(article.id)} type="button">修改正文</button><Link className="button secondary" href={`/articles/${article.id}${article.published ? "" : "?preview=draft"}`} target="_blank">{article.published ? "打开前端 ↗" : "前端校改 ↗"}</Link></div>)}</section> : null}
     </section>
   );
 }

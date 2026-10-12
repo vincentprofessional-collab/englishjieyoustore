@@ -46,7 +46,7 @@ export function alignBbcAudioSentences(sentences: { sentenceNo: number; english:
     offset += count;
     const missingAtStart = matchedOffsets[0] ?? 0;
     const missingAtEnd = matches.length ? count - matchedOffsets.at(-1)! - 1 : count;
-    const review = !count || matches.length / count < 0.45 || missingAtStart > 1 || missingAtEnd > 1;
+    const review = !count || matches.length / count < 0.45 || missingAtStart > 0 || missingAtEnd > 0;
     return {
       count: Math.max(count, 1),
       matches,
@@ -54,7 +54,7 @@ export function alignBbcAudioSentences(sentences: { sentenceNo: number; english:
       missingAtEnd,
       review,
       timing: matches.length
-        ? { sentenceNo: sentence.sentenceNo, startMs: Math.max(0, Math.round((matches[0].start - 0.12) * 1000)), endMs: Math.min(Math.round(duration * 1000), Math.round((matches.at(-1)!.end + 0.28) * 1000)) }
+        ? { sentenceNo: sentence.sentenceNo, startMs: Math.max(0, Math.round((matches[0].start - 0.18) * 1000)), endMs: Math.min(Math.round(duration * 1000), Math.round((matches.at(-1)!.end + 0.45) * 1000)) }
         : null,
     };
   });
@@ -67,8 +67,22 @@ export function alignBbcAudioSentences(sentences: { sentenceNo: number; english:
 
   aligned.forEach((item) => {
     if (!item.timing || !item.matches.length) return;
-    item.timing.startMs = Math.max(0, Math.round((item.matches[0].start - 0.12 - item.missingAtStart * estimatedSecondsPerWord) * 1000));
-    item.timing.endMs = Math.min(Math.round(duration * 1000), Math.round((item.matches.at(-1)!.end + 0.28 + item.missingAtEnd * estimatedSecondsPerWord) * 1000));
+    item.timing.startMs = Math.max(0, Math.round((item.matches[0].start - 0.18 - item.missingAtStart * estimatedSecondsPerWord) * 1000));
+    item.timing.endMs = Math.min(Math.round(duration * 1000), Math.round((item.matches.at(-1)!.end + 0.45 + item.missingAtEnd * estimatedSecondsPerWord) * 1000));
+  });
+
+  // If Whisper misses the end of a sentence, estimated word duration alone is
+  // too optimistic for a slow phrase or clause. Keep the clip through the next
+  // sentence onset (or the end of the file for the final sentence), and flag it
+  // for the editor to review.
+  aligned.forEach((item, index) => {
+    if (!item.matches.length || !item.missingAtEnd) return;
+    const next = aligned[index + 1];
+    if (next?.matches.length && next.timing && item.timing) {
+      item.timing.endMs = Math.max(item.timing.endMs, next.timing.startMs);
+    } else if (!next && item.timing) {
+      item.timing.endMs = Math.round(duration * 1000);
+    }
   });
 
   for (let index = 0; index < aligned.length;) {
@@ -104,8 +118,21 @@ export function alignBbcAudioSentences(sentences: { sentenceNo: number; english:
   const timings = aligned.map((item) => item.timing!);
   for (let index = 1; index < timings.length; index++) {
     if (timings[index].startMs < timings[index - 1].endMs) {
-      const boundary = Math.round((timings[index].startMs + timings[index - 1].endMs) / 2);
+      const previousSpeechEnd = aligned[index - 1].matches.at(-1)?.end;
+      const nextSpeechStart = aligned[index].matches[0]?.start;
+      const previousMissedTail = aligned[index - 1].missingAtEnd > 0;
+      const boundary = Number.isFinite(previousSpeechEnd) && Number.isFinite(nextSpeechStart)
+        ? previousMissedTail
+          ? Math.max(Math.round(previousSpeechEnd! * 1_000), Math.min(timings[index].startMs, Math.round(nextSpeechStart! * 1_000)))
+          : previousSpeechEnd! <= nextSpeechStart!
+            ? Math.round((previousSpeechEnd! + nextSpeechStart!) * 500)
+            : Math.round(previousSpeechEnd! * 1_000)
+        : Math.round((timings[index].startMs + timings[index - 1].endMs) / 2);
       timings[index - 1].endMs = boundary; timings[index].startMs = boundary;
+      if (previousSpeechEnd != null && nextSpeechStart != null && previousSpeechEnd > nextSpeechStart) {
+        aligned[index - 1].review = true;
+        aligned[index].review = true;
+      }
     }
   }
   if (timings.some((timing) => timing.endMs <= timing.startMs)) throw new Error("句子时间轴无效，请重新分析音频。");

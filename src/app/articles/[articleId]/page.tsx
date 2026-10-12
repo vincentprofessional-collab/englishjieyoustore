@@ -4,7 +4,7 @@ import { BbcArticleComments } from "@/components/bbc-article-comments";
 import { GuideBoard } from "@/components/guide-board";
 import { ProjectAccessPaywall } from "@/components/project-access-paywall";
 import { BBC_ARTICLES, getBbcArticleById } from "@/lib/articles/bbc";
-import { getUploadedBbcArticle } from "@/lib/articles/bbc-uploaded-content";
+import { getUploadedBbcArticle, getUploadedBbcArticleForAdmin } from "@/lib/articles/bbc-uploaded-content";
 import { getPaidContentKey } from "@/lib/access-control";
 import { claimPaidContentAccess } from "@/lib/free-preview-access-server";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
@@ -31,7 +31,18 @@ export default async function ArticlePage({
   const { articleId } = await params;
   const { preview } = await searchParams;
   const builtinArticle = getBbcArticleById(articleId);
-  const article = builtinArticle ?? await getUploadedBbcArticle(articleId);
+  let adminDraftRecord: Awaited<ReturnType<typeof getUploadedBbcArticleForAdmin>> = null;
+  if (!builtinArticle && preview === "draft") {
+    const supabase = await createServerSupabaseClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (user) {
+      const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).maybeSingle();
+      if (profile?.role === "admin") adminDraftRecord = await getUploadedBbcArticleForAdmin(articleId);
+    }
+  }
+  const article = builtinArticle ?? adminDraftRecord?.article ?? await getUploadedBbcArticle(articleId);
+  const adminPreview = Boolean(adminDraftRecord);
+  const draftPreview = Boolean(adminDraftRecord && !adminDraftRecord.published);
 
   if (!article) {
     notFound();
@@ -52,7 +63,7 @@ export default async function ArticlePage({
     1,
   );
 
-  if (!hasAccess) {
+  if (!hasAccess && !adminPreview) {
     return (
       <>
         <ProjectAccessPaywall projectKey="bbc" />
@@ -84,5 +95,5 @@ export default async function ArticlePage({
     }
   }
 
-  return <ArticleDetailPage key={article.id} article={article} isUploadedArticle={!builtinArticle} syntaxSentences={syntaxSentences} />;
+  return <ArticleDetailPage key={article.id} adminPreview={adminPreview} article={article} draftPreview={draftPreview} isUploadedArticle={!builtinArticle} syntaxSentences={syntaxSentences} />;
 }

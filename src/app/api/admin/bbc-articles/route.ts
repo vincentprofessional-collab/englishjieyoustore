@@ -27,6 +27,14 @@ async function requireAdmin(request: NextRequest, supabase: SupabaseClient) {
   if (!token) return { response: NextResponse.json({ error: "请先登录管理员账号。" }, { status: 401 }) };
 
   const { data: { user }, error } = await supabase.auth.getUser(token);
+  if (error && (error.status === undefined || error.status === 0 || error.status >= 500)) {
+    return {
+      response: NextResponse.json(
+        { error: "后台登录验证服务暂时无法连接，请稍后重试。", retryable: true },
+        { status: 503 },
+      ),
+    };
+  }
   if (error || !user) return { response: NextResponse.json({ error: "管理员登录已失效，请重新登录。" }, { status: 401 }) };
 
   const { data: profile, error: profileError } = await supabase
@@ -240,6 +248,14 @@ function buildArticle(payload: Record<string, unknown>, objectPath: string): Bbc
   const syntaxAnnotations = Array.isArray(payload.syntaxAnnotations)
     ? payload.syntaxAnnotations as PastedBbcSyntaxSentence[]
     : [];
+  const annotatedSentenceNos = new Set<number>();
+  for (const annotation of syntaxAnnotations) {
+    if (!Number.isInteger(annotation.sentenceNo) || annotation.sentenceNo < 1 || annotation.sentenceNo > sentences.length) {
+      throw new Error(`语法标注的句号 ${annotation.sentenceNo} 超出正文范围，请核对输入框内容。`);
+    }
+    if (annotatedSentenceNos.has(annotation.sentenceNo)) throw new Error(`第 ${annotation.sentenceNo} 句存在重复语法标注。`);
+    annotatedSentenceNos.add(annotation.sentenceNo);
+  }
   return {
     ...(fullAudioUrl ? { audioUrl: fullAudioUrl, fullAudioUrl } : {}),
     body: body.map((paragraph) => extractBbcWaveText(paragraph).text),
@@ -381,12 +397,16 @@ export async function PUT(request: NextRequest) {
   article.subtitleUrl = `/api/bbc-subtitles/${article.id}`;
   article.audioDurationMs = durationMs;
 
+  const existingArticle = await supabase.from("bbc_uploaded_articles").select("published").eq("id", article.id).maybeSingle();
+  if (existingArticle.error) return NextResponse.json({ error: `保存前无法读取文章状态：${existingArticle.error.message}` }, { status: 503 });
+  const published = existingArticle.data?.published === true;
+
   const { error } = await supabase.from("bbc_uploaded_articles").upsert({
     article,
     created_at: new Date().toISOString(),
     id: article.id,
     month: articleDate.month,
-    published: true,
+    published,
     uploaded_by: admin.user.id,
     year: article.year,
   }, { onConflict: "id" });
@@ -404,6 +424,7 @@ export async function PUT(request: NextRequest) {
     articleId: article.id,
     audioIncluded: Boolean(article.fullAudioUrl),
     href: `/articles/${article.id}`,
+    published,
     month: articleDate.month,
     ok: true,
     paragraphCount: article.body.length,
@@ -420,6 +441,20 @@ export async function PATCH(request: NextRequest) {
   if ("response" in admin) return admin.response;
 
   const payload = await request.json().catch(() => null) as Record<string, unknown> | null;
+  if (payload?.action === "publish") {
+    const articleId = typeof payload.articleId === "string" ? payload.articleId : "";
+    if (!/^\d{6}$/.test(articleId)) return NextResponse.json({ error: "文章编号无效。" }, { status: 400 });
+    if (getBbcArticleById(articleId)) return NextResponse.json({ error: "内置文章不能通过上传后台发布。" }, { status: 409 });
+    const existing = await supabase.from("bbc_uploaded_articles").select("article").eq("id", articleId).maybeSingle();
+    if (existing.error || !existing.data) return NextResponse.json({ error: "草稿文章不存在。" }, { status: 404 });
+    const article = existing.data.article as BbcArticle;
+    if (!article.fullAudioUrl || !article.sentences?.length) return NextResponse.json({ error: "草稿缺少文章音频或逐句时间轴，暂时不能发布。" }, { status: 400 });
+    const { error } = await supabase.from("bbc_uploaded_articles").update({ published: true }).eq("id", articleId);
+    if (error) return NextResponse.json({ error: `发布失败：${error.message}` }, { status: 500 });
+    revalidatePath("/articles");
+    revalidatePath(`/articles/${articleId}`);
+    return NextResponse.json({ ok: true, published: true, articleId });
+  }
   const articleId = typeof payload?.articleId === "string" ? payload.articleId : "";
   const sentenceNo = Number(payload?.sentenceNo);
   const startMs = Number(payload?.startMs);

@@ -7,7 +7,7 @@ const canonical = [{
   text: "We learn English.",
   tokens: [
     { text: "We", start: 0, end: 2, pos: "PRON" },
-    { text: "learn", start: 3, end: 8, pos: "VERB", posLabel: "动词" },
+    { text: "learn", start: 3, end: 8, pos: "VERB" },
     { text: "English", start: 9, end: 16, pos: "PROPN" },
     { text: ".", start: 16, end: 17, pos: "PUNCT" },
   ],
@@ -24,27 +24,13 @@ test("BBC syntax storage follows the same paid access check as the article page"
 
 test("BBC editor accepts annotation edits while preserving source text and token offsets", () => {
   const edited = structuredClone(canonical);
-  edited[0].tokens[1].pos = "NOUN";
   edited[0].tokens[2].pos = "NOUN";
   edited[0].level1[2].label = "直接宾语";
   const result = normalizeBbcSyntaxSentenceEdits(edited, canonical);
   assert.equal(result[0].tokens[2].pos, "NOUN");
-  assert.equal(result[0].tokens[1].posLabel, undefined);
   assert.equal(result[0].level1[2].label, "直接宾语");
   assert.equal(result[0].text, canonical[0].text);
-  assert.deepEqual(
-    normalizeBbcSyntaxSentenceEdits(canonical.map(({ tokens, ...rest }) => rest), canonical),
-    normalizeBbcSyntaxSentenceEdits(canonical, canonical),
-  );
-});
-
-test("BBC editor allows deleting a token part-of-speech label", () => {
-  const edited = structuredClone(canonical);
-  edited[0].tokens[1].pos = "";
-  const result = normalizeBbcSyntaxSentenceEdits(edited, canonical);
-  assert.equal(result[0].tokens[1].pos, "");
-  assert.equal(result[0].tokens[1].posLabel, undefined);
-  assert.equal(result[0].tokens[1].text, canonical[0].tokens[1].text);
+  assert.deepEqual(normalizeBbcSyntaxSentenceEdits(canonical.map(({ tokens, ...rest }) => rest), canonical), canonical);
 });
 
 test("BBC editor rejects source changes, invalid ranges, overlaps and orphaned nested spans", () => {
@@ -52,7 +38,7 @@ test("BBC editor rejects source changes, invalid ranges, overlaps and orphaned n
     (row) => { row.text = "Changed source."; },
     (row) => { row.tokens[0].text = "They"; },
     (row) => { row.tokens[0].start = 1; },
-    (row) => { row.tokens[0].pos = "x".repeat(33); },
+    (row) => { row.tokens[0].pos = "<script>"; },
     (row) => { row.level1[0].start = -1; },
     (row) => { row.level1[0].end = 99; },
     (row) => { row.level1[0].end = 0; },

@@ -28,6 +28,7 @@ import { StudyAnnotationTools } from "@/components/study-annotation-tools";
 import { getLikelyProperNounWords, shouldShowAudioPronunciation } from "@/lib/audio-pronunciation";
 import { splitArticleSentences } from "@/lib/article-inline-annotations";
 import { supabase } from "@/lib/supabase/client";
+import { adminRequest } from "@/lib/admin/request";
 import type {
   BbcArticle,
   BbcArticleSentence,
@@ -49,6 +50,8 @@ import {
 
 type ArticlePageProps = {
   article: BbcArticle;
+  adminPreview?: boolean;
+  draftPreview?: boolean;
   isUploadedArticle?: boolean;
   syntaxSentences?: BbcSyntaxSentenceData[];
 };
@@ -661,7 +664,7 @@ function renderWaveHighlightedChinese(text: string, terms: string[] = [], ranges
     ? <span className="bbc-wave-term" key={`zh-wave-${index}`}>{part.text}</span> : part.text);
 }
 
-export default function ArticleDetailPage({ article, isUploadedArticle = false, syntaxSentences }: ArticlePageProps) {
+export default function ArticleDetailPage({ article, adminPreview = false, draftPreview = false, isUploadedArticle = false, syntaxSentences }: ArticlePageProps) {
   const inlineTextAnnotations = useArticleInlineAnnotations("bbc", article.id);
   const [editableInlineAnnotations, setEditableInlineAnnotations] = useState(inlineTextAnnotations);
   const inlineAnnotationUnits = useMemo(
@@ -723,6 +726,9 @@ export default function ArticleDetailPage({ article, isUploadedArticle = false, 
   const [isReadingTimerVisible, setIsReadingTimerVisible] = useState(false);
   const [sentenceRestoreSeekRequest, setSentenceRestoreSeekRequest] = useState<SentenceRestoreSeekRequest | null>(null);
   const [isOriginalFullscreen, setIsOriginalFullscreen] = useState(false);
+  const [publishingDraft, setPublishingDraft] = useState(false);
+  const [draftPublishMessage, setDraftPublishMessage] = useState("");
+  const [draftIsPublished, setDraftIsPublished] = useState(!draftPreview);
   const pageRef = useRef<HTMLElement | null>(null);
   const studyWorkspaceRef = useRef<HTMLDivElement | null>(null);
   const activeSentenceNoRef = useRef<number | null>(null);
@@ -730,6 +736,23 @@ export default function ArticleDetailPage({ article, isUploadedArticle = false, 
   const audioSettingsRef = useRef(audioSettings);
   const speakingCountdownRef = useRef<number | null>(null);
   const speakingAdvanceRef = useRef<number | null>(null);
+
+  async function publishDraft() {
+    setPublishingDraft(true);
+    setDraftPublishMessage("");
+    try {
+      await adminRequest("/api/admin/bbc-articles", {
+        method: "PATCH",
+        body: JSON.stringify({ action: "publish", articleId: article.id }),
+      });
+      setDraftIsPublished(true);
+      setDraftPublishMessage("文章已正式发布，用户现在可以看到。");
+    } catch (error) {
+      setDraftPublishMessage(error instanceof Error ? error.message : "发布失败，请重试。");
+    } finally {
+      setPublishingDraft(false);
+    }
+  }
 
   useEffect(() => {
     setEditableSyntaxSentences(syntaxSentences ?? []);
@@ -1481,6 +1504,18 @@ export default function ArticleDetailPage({ article, isUploadedArticle = false, 
       onDragStart={(event) => event.preventDefault()}
       ref={pageRef}
     >
+      {draftPreview && !draftIsPublished ? (
+        <aside className="bbc-draft-preview-banner" aria-label="BBC 草稿预览">
+          <div>
+            <strong>草稿预览 · 仅管理员可见</strong>
+            <span>请先在前端检查并修改词性、句子成分和音频时间；确认后再发布给用户。</span>
+            {draftPublishMessage ? <span aria-live="polite">{draftPublishMessage}</span> : null}
+          </div>
+          <button className="button primary" disabled={publishingDraft} onClick={() => void publishDraft()} type="button">
+            {publishingDraft ? "正在发布…" : "校改完成，发布文章"}
+          </button>
+        </aside>
+      ) : adminPreview && draftIsPublished && draftPublishMessage ? <p className="bbc-draft-publish-message" aria-live="polite">{draftPublishMessage}</p> : null}
         <div className="page-heading bbc-article-hero">
           <div className="bbc-article-hero-top">
             <Link className="bbc-detail-back-link" href="/articles">

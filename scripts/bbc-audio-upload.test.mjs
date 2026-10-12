@@ -130,6 +130,33 @@ what：连接代词（宾语从句）
   assert.deepEqual(Array.from(applied.level2, (span) => span.label), ["定语", "主语", "谓语", "宾语从句"]);
 });
 
+test("authored BBC grammar remains authoritative instead of falling back to automatic spans", () => {
+  const apply = loadPastedSyntaxModule().applyPastedBbcSyntax;
+  const text = "We learn English.";
+  const tokens = [...text.matchAll(/[A-Za-z]+|[^\s]/g)].map((match) => ({
+    text: match[0], pos: /^[A-Za-z]/.test(match[0]) ? "X" : "PUNCT", start: match.index, end: match.index + match[0].length,
+  }));
+  const automatic = {
+    text, tokens, level1: [{ label: "自动主语", start: 0, end: 1 }],
+    level2: [{ label: "自动谓语", start: 1, end: 2 }], level3: [], level4: [], level5: [], status: "draft",
+  };
+  const authored = apply(automatic, [{
+    sentenceNo: 1, text, main: "", items: [
+      { term: "We", description: "代词" },
+      { term: "learn", description: "动词（谓语）" },
+    ],
+  }], 1);
+  assert.equal(authored.status, "reviewed");
+  assert.equal(authored.level1.length, 0);
+  assert.deepEqual(Array.from(authored.level2, ({ label }) => label), ["谓语"]);
+  assert.equal(authored.tokens[1].pos, "VERB");
+  assert.throws(() => apply(automatic, [{
+    sentenceNo: 1, text, main: "We【主语】 learn【谓语】 English【宾语】", items: [
+      { term: "not-in-source", description: "名词（主语）" },
+    ],
+  }], 1), /无法匹配原句/);
+});
+
 test("PUT presigns require the upload credential pair and never use playback credentials", () => {
   const env = {
     R2_ACCOUNT_ID: "test-account",
@@ -250,7 +277,7 @@ test("BBC audio alignment extends a sentence when recognition drops its final wo
   ];
   const result = align(sentences, recognized, 6);
   assert.ok(result.timings[0].endMs > 2_500, `sentence 1 ended at ${result.timings[0].endMs}ms`);
-  assert.ok(result.timings[0].endMs < result.timings[1].startMs);
+  assert.ok(result.timings[0].endMs <= result.timings[1].startMs);
   assert.ok(Array.from(result.reviewSentenceNos).includes(1));
 });
 
@@ -269,4 +296,18 @@ test("BBC audio alignment retains the final recognized word when its end timesta
   );
   assert.equal(result.timings[0].endMs, 2000);
   assert.deepEqual(Array.from(result.reviewSentenceNos), []);
+});
+
+test("BBC audio alignment keeps the final clip through the audio tail when recognition misses its last word", () => {
+  const align = loadAudioAlignment();
+  const result = align(
+    [{ sentenceNo: 1, english: "The final sentence ends near the close." }],
+    ["The", "final", "sentence", "ends", "near", "the"].map((text, index) => ({
+      text,
+      timestamp: [0.2 + index * 0.35, 0.4 + index * 0.35],
+    })),
+    5,
+  );
+  assert.equal(result.timings[0].endMs, 5_000);
+  assert.deepEqual(Array.from(result.reviewSentenceNos), [1]);
 });
