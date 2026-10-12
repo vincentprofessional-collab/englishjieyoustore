@@ -38,9 +38,8 @@ export function maskStudyExample(english: string, chinese: string, word: string,
   const maskedChinese = candidates.length ? chinese.replace(new RegExp(candidates.map(escape).join("|"), "g"), "______") : chinese;
   return {
     english: maskedEnglish,
-    // A paraphrased translation has no reliable dictionary-span alignment.
-    // Hide it instead of leaking the answer or guessing which text to replace.
-    chinese: maskedChinese !== chinese ? maskedChinese : "______",
+    // Keep the source translation when its wording has no exact meaning span.
+    chinese: maskedChinese,
     matched: maskedEnglish !== english,
   };
 }

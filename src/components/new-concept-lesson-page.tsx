@@ -23,7 +23,7 @@ import { VocabularyInlinePronunciation } from "@/components/vocabulary-pronuncia
 import newConceptZhTranslations from "@/data/new-concept/translations-zh.json";
 import newConceptZhTurnTranslations from "@/data/new-concept/translations-zh-turns.json";
 import { getLikelyProperNounWords, shouldShowAudioPronunciation } from "@/lib/audio-pronunciation";
-import { getSpeakingPracticeDelayMs } from "@/lib/articles/bbc-speaking-training.mjs";
+import { getActiveWordIndex, getSpeakingPracticeDelayMs } from "@/lib/articles/bbc-speaking-training.mjs";
 import {
   consumeVocabularyStudyReturn,
   getVocabularyDetailHref,
@@ -187,8 +187,9 @@ function renderNewConceptArticleEnglish(
   text: string,
   terms: string[] = [],
   pronunciations: Map<string, string> = new Map(),
+  activeWordIndex: number | null = null,
 ) {
-  const wordPattern = /[A-Za-z]+(?:['’][A-Za-z]+)*/g;
+  const wordPattern = /[A-Za-z]+(?:['’-][A-Za-z]+)*/g;
   const words = [...text.matchAll(wordPattern)];
   const normalizedWords = words.map((match) => normalizeVocabularyWord(match[0]));
   const highlightedWordIndexes = new Set<number>();
@@ -222,9 +223,7 @@ function renderNewConceptArticleEnglish(
         {word[0]}
       </span>
     ) : word[0];
-    parts.push(highlightedWordIndexes.has(index) ? (
-      <span className="bbc-vocabulary-highlight" key={`vocabulary-${index}`}>{wordContent}</span>
-    ) : wordContent);
+    parts.push(<span className={[highlightedWordIndexes.has(index) ? "bbc-vocabulary-highlight" : "", index === activeWordIndex ? "current-word" : ""].filter(Boolean).join(" ") || undefined} key={`word-${index}`}>{wordContent}</span>);
     cursor = word.index! + word[0].length;
   });
   if (cursor < text.length) {
@@ -563,8 +562,12 @@ export function NewConceptLessonPage({
     const mobileQuery = window.matchMedia("(max-width: 820px)");
     const updateMobileAudioViewport = () => setIsMobileAudioViewport(mobileQuery.matches);
     updateMobileAudioViewport();
-    mobileQuery.addEventListener("change", updateMobileAudioViewport);
-    return () => mobileQuery.removeEventListener("change", updateMobileAudioViewport);
+    if (typeof mobileQuery.addEventListener === "function") {
+      mobileQuery.addEventListener("change", updateMobileAudioViewport);
+      return () => mobileQuery.removeEventListener("change", updateMobileAudioViewport);
+    }
+    mobileQuery.addListener?.(updateMobileAudioViewport);
+    return () => mobileQuery.removeListener?.(updateMobileAudioViewport);
   }, []);
 
   useEffect(() => {
@@ -786,8 +789,7 @@ export function NewConceptLessonPage({
     setIsRetellingPractice(true);
   }
 
-  function selectStudySentence(sentenceNo: number) {
-    const shouldContinuePlayback = isSentenceAudioPlaying;
+  function selectStudySentence(sentenceNo: number, shouldContinuePlayback = isSentenceAudioPlaying) {
     clearSpeakingPracticeTimers();
     activeSentenceNoRef.current = sentenceNo;
     setActiveSentenceNo(sentenceNo);
@@ -995,16 +997,19 @@ export function NewConceptLessonPage({
     (block) => activeStudySentenceIndex >= block.startLineIndex && activeStudySentenceIndex <= block.endLineIndex,
   );
   const activeStudyTextBlock = studyTextBlocks[activeStudyTextBlockIndex];
-  const previousStudyTextBlock = studyTextBlocks[activeStudyTextBlockIndex - 1];
-  const nextStudyTextBlock = studyTextBlocks[activeStudyTextBlockIndex + 1];
-  const activeStudyEnglish = activeStudyTextBlock?.english ?? lesson.english[activeStudySentenceIndex] ?? lesson.english[0] ?? "";
-  const activeStudyChinese = activeStudyTextBlock?.chinese
-    ?? lesson.chinese[activeStudySentenceIndex]
-    ?? lesson.chinese[0]
+  const previousStudySentenceNo = activeStudySentenceIndex > 0 ? activeStudySentenceIndex : null;
+  const nextStudySentenceNo = activeStudySentenceIndex + 1 < lesson.english.length ? activeStudySentenceIndex + 2 : null;
+  const activeStudyEnglish = lesson.english[activeStudySentenceIndex] ?? activeStudyTextBlock?.english ?? "";
+  const activeStudyChinese = activeStudyTextBlock?.startLineIndex === activeStudyTextBlock?.endLineIndex ? activeStudyTextBlock?.chinese ?? "" :
+    lesson.chinese[activeStudySentenceIndex]
+    ?? activeStudyTextBlock?.chinese
     ?? "";
   const activeStudySentenceAudio = sentenceAudioUrls[activeStudySentenceIndex] ?? null;
   const mobileSentenceAudio = isMobileAudioViewport && studyMode !== "general" && activeStudySentenceAudio
     ? { audioUrl: activeStudySentenceAudio, sentenceNo: activeStudySentenceIndex + 1 }
+    : null;
+  const activeStudyWordIndex = isSentenceAudioPlaying && activeSentenceNo === activeStudySentenceIndex + 1
+    ? getActiveWordIndex(activeStudyEnglish, activeSentencePosition, sentenceDurations[activeStudySentenceIndex + 1] ?? 0)
     : null;
   const fullLessonEnglish = studyTextBlocks.map((block) => block.english).join(" ");
   const dictionaryPronunciations = useArticlePronunciations(
@@ -1220,9 +1225,11 @@ export function NewConceptLessonPage({
               <AudioPlayer
                 autoPlaySignal={mobileSentenceAudio ? sentenceAutoPlaySignals[mobileSentenceAudio.sentenceNo] ?? 0 : 0}
                 deferSentenceLoop={Boolean(mobileSentenceAudio && studyMode === "speaking" && audioSettings.speakingMode !== "none")}
-                key={isMobileAudioViewport
-                  ? `new-concept-mobile-${mobileSentenceAudio?.sentenceNo ?? "full"}-${audioEdition}-${modeSelectionVersion}`
-                  : `new-concept-full-${audioEdition}-${modeSelectionVersion}`}
+                playbackId={`${audioEdition}:${modeSelectionVersion}:${mobileSentenceAudio?.sentenceNo ?? "full"}`}
+                onPrevious={mobileSentenceAudio ? () => selectStudySentence(activeStudySentenceIndex, true) : undefined}
+                onNext={mobileSentenceAudio ? () => selectStudySentence(activeStudySentenceIndex + 2, true) : undefined}
+                previousDisabled={activeStudySentenceIndex === 0}
+                nextDisabled={activeStudySentenceIndex + 1 >= lesson.english.length}
                 hasSelectedRate
                 // Native media playback supports pitch-preserving rate changes, including on mobile Safari.
                 html5
@@ -1246,13 +1253,14 @@ export function NewConceptLessonPage({
                 onTimeChange={mobileSentenceAudio
                   ? (positionSeconds) => handleSentenceTimeChange(mobileSentenceAudio.sentenceNo, positionSeconds)
                   : undefined}
-                preload={isMobileAudioViewport ? !mobileSentenceAudio : undefined}
+                preload
                 settings={isMobileAudioViewport
                   ? mobileSentenceAudio || studyMode === "listening"
                     ? audioSettings
                     : { ...audioSettings, playMode: "sequential" }
                   : audioSettings}
                 settingsPlacement="none"
+                seekRequest={mobileSentenceAudio && sentenceRestoreSeekRequest?.sentenceNo === mobileSentenceAudio.sentenceNo ? sentenceRestoreSeekRequest : null}
                 src={mobileSentenceAudio?.audioUrl ?? audioUrl}
                 startAtSeconds={mobileSentenceAudio ? activeSentencePosition : 0}
                 title={mobileSentenceAudio
@@ -1371,31 +1379,31 @@ export function NewConceptLessonPage({
                     </button>
                   ) : null}
                   <button
-                      aria-label={favoriteSentenceIds.includes(favoriteSentenceId(lesson.id, activeStudyTextBlock ? activeStudyTextBlock.startLineIndex + 1 : activeStudySentenceIndex + 1)) ? "取消收藏本句" : "收藏本句"}
-                      aria-pressed={favoriteSentenceIds.includes(favoriteSentenceId(lesson.id, activeStudyTextBlock ? activeStudyTextBlock.startLineIndex + 1 : activeStudySentenceIndex + 1))}
-                      className={`favorite-star ${favoriteSentenceIds.includes(favoriteSentenceId(lesson.id, activeStudyTextBlock ? activeStudyTextBlock.startLineIndex + 1 : activeStudySentenceIndex + 1)) ? "active" : ""}`}
+                      aria-label={favoriteSentenceIds.includes(favoriteSentenceId(lesson.id, activeStudySentenceIndex + 1)) ? "取消收藏本句" : "收藏本句"}
+                      aria-pressed={favoriteSentenceIds.includes(favoriteSentenceId(lesson.id, activeStudySentenceIndex + 1))}
+                      className={`favorite-star ${favoriteSentenceIds.includes(favoriteSentenceId(lesson.id, activeStudySentenceIndex + 1)) ? "active" : ""}`}
                       onClick={() => toggleFavoriteSentence(
-                        activeStudyTextBlock ? activeStudyTextBlock.startLineIndex + 1 : activeStudySentenceIndex + 1,
+                        activeStudySentenceIndex + 1,
                         activeStudyEnglish,
                         activeStudyChinese,
                         activeStudySentenceAudio ?? undefined,
                       )}
-                      title={favoriteSentenceIds.includes(favoriteSentenceId(lesson.id, activeStudyTextBlock ? activeStudyTextBlock.startLineIndex + 1 : activeStudySentenceIndex + 1)) ? "取消收藏本句" : "收藏本句"}
+                      title={favoriteSentenceIds.includes(favoriteSentenceId(lesson.id, activeStudySentenceIndex + 1)) ? "取消收藏本句" : "收藏本句"}
                       type="button"
                     >
-                      {favoriteSentenceIds.includes(favoriteSentenceId(lesson.id, activeStudyTextBlock ? activeStudyTextBlock.startLineIndex + 1 : activeStudySentenceIndex + 1)) ? "★" : "☆"}
+                      {favoriteSentenceIds.includes(favoriteSentenceId(lesson.id, activeStudySentenceIndex + 1)) ? "★" : "☆"}
                     </button>
                     <ContentShareButton
                       label="分享本句"
                       text={`${activeStudyEnglish}\n${activeStudyChinese}`.trim()}
-                      title={`新概念英语 Lesson ${lesson.lessonNo} 第 ${activeStudyTextBlock ? activeStudyTextBlock.startLineIndex + 1 : activeStudySentenceIndex + 1} 句`}
-                      url={`/new-concept/${lesson.id}#new-concept-sentence-${activeStudyTextBlock ? activeStudyTextBlock.startLineIndex + 1 : activeStudySentenceIndex + 1}`}
+                      title={`新概念英语 Lesson ${lesson.lessonNo} 第 ${activeStudySentenceIndex + 1} 句`}
+                      url={`/new-concept/${lesson.id}#new-concept-sentence-${activeStudySentenceIndex + 1}`}
                     />
                   </div>
                   {studyMode !== "speaking" && studyMode !== "writing" ? (
                     <>
                       <p className="bbc-intensive-english" lang="en">
-                        {renderNewConceptArticleEnglish(activeStudyEnglish, vocabularyForDisplay.map((item) => item.word), articlePronunciations)}
+                        {renderNewConceptArticleEnglish(activeStudyEnglish, vocabularyForDisplay.map((item) => item.word), articlePronunciations, activeStudyWordIndex)}
                       </p>
                       {activeStudyChinese ? <p className="bbc-intensive-chinese" lang="zh-CN">{activeStudyChinese}</p> : null}
                     </>
@@ -1403,8 +1411,8 @@ export function NewConceptLessonPage({
                   {studyMode === "speaking" || studyMode === "writing" ? (
                     <BbcSentencePractice
                       key={`${activeStudySentenceIndex + 1}:${activeStudyEnglish}`}
-                      activeWordIndex={null}
-                      englishContent={renderNewConceptArticleEnglish(activeStudyEnglish, vocabularyForDisplay.map((item) => item.word), articlePronunciations)}
+                      activeWordIndex={activeStudyWordIndex}
+                      englishContent={renderNewConceptArticleEnglish(activeStudyEnglish, vocabularyForDisplay.map((item) => item.word), articlePronunciations, activeStudyWordIndex)}
                       isAudioPlaying={isSentenceAudioPlaying && activeSentenceNo === activeStudySentenceIndex + 1}
                       sentence={{ chinese: activeStudyChinese, english: activeStudyEnglish, sentenceNo: activeStudySentenceIndex + 1 }}
                       settings={audioSettings}
@@ -1430,23 +1438,23 @@ export function NewConceptLessonPage({
                       <button
                         aria-label="上一句"
                         className="bbc-sentence-navigation-button"
-                        disabled={!previousStudyTextBlock}
-                        onClick={() => previousStudyTextBlock && selectStudySentence(previousStudyTextBlock.startLineIndex + 1)}
+                        disabled={!previousStudySentenceNo}
+                        onClick={() => previousStudySentenceNo && selectStudySentence(previousStudySentenceNo)}
                         type="button"
                       >上一句</button>
                       <span>第 {activeStudySentenceIndex + 1} / 共 {lesson.english.length} 句</span>
                       <button
                         aria-label="下一句"
                         className="bbc-sentence-navigation-button"
-                        disabled={!nextStudyTextBlock}
-                        onClick={() => nextStudyTextBlock && selectStudySentence(nextStudyTextBlock.startLineIndex + 1)}
+                        disabled={!nextStudySentenceNo}
+                        onClick={() => nextStudySentenceNo && selectStudySentence(nextStudySentenceNo)}
                         type="button"
                       >下一句</button>
                     </nav>
                   ) : null}
                   {activeStudySentenceAudio && !isMobileAudioViewport ? (
                     <AudioPlayer
-                      key={`${modeSelectionVersion}-${activeStudySentenceIndex + 1}`}
+                      playbackId={`${modeSelectionVersion}:${activeStudySentenceIndex + 1}`}
                       autoPlaySignal={sentenceAutoPlaySignals[activeStudySentenceIndex + 1] ?? 0}
                       compactControls
                       deferSentenceLoop={audioSettings.speakingMode !== "none"}
@@ -1462,8 +1470,8 @@ export function NewConceptLessonPage({
                         <button
                           aria-label="上一句"
                           className="bbc-sentence-navigation-button"
-                          disabled={!previousStudyTextBlock}
-                          onClick={() => previousStudyTextBlock && selectStudySentence(previousStudyTextBlock.startLineIndex + 1)}
+                          disabled={!previousStudySentenceNo}
+                          onClick={() => previousStudySentenceNo && selectStudySentence(previousStudySentenceNo)}
                           type="button"
                         >上一句</button>
                       )}
@@ -1481,8 +1489,8 @@ export function NewConceptLessonPage({
                         <button
                           aria-label="下一句"
                           className="bbc-sentence-navigation-button"
-                          disabled={!nextStudyTextBlock}
-                          onClick={() => nextStudyTextBlock && selectStudySentence(nextStudyTextBlock.startLineIndex + 1)}
+                          disabled={!nextStudySentenceNo}
+                          onClick={() => nextStudySentenceNo && selectStudySentence(nextStudySentenceNo)}
                           type="button"
                         >下一句</button>
                       )}

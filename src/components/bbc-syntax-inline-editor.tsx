@@ -25,6 +25,7 @@ function layerKey(level: BbcSyntaxLevel): BbcSyntaxLayerKey {
 }
 
 type Props = {
+  activeWordIndex?: number | null;
   allInlineAnnotations: ArticleInlineAnnotation[];
   allSentences: BbcSyntaxSentenceData[];
   articleId: string;
@@ -55,6 +56,7 @@ function tokenRangeText(sentence: BbcSyntaxSentenceData, range: BbcSyntaxTokenRa
 }
 
 export function BbcSyntaxInlineEditor({
+  activeWordIndex,
   allInlineAnnotations,
   allSentences,
   articleId,
@@ -333,6 +335,7 @@ export function BbcSyntaxInlineEditor({
   return (
     <div className={styles.root}>
       <BbcSyntaxSentence
+        activeWordIndex={activeWordIndex ?? undefined}
         data={data}
         displayMode={displayMode}
         embedded

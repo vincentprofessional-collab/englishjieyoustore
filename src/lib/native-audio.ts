@@ -10,8 +10,9 @@ export class NativeAudio {
   private disposed = false;
   readonly _sounds: Array<{ _node: HTMLAudioElement }>;
 
-  constructor(private options: HowlOptions) {
-    this.media = new Audio();
+  constructor(private options: HowlOptions, media?: HTMLAudioElement) {
+    // Keep the gesture-unlocked element when the next sentence changes src.
+    this.media = media ?? new Audio();
     this._sounds = [{ _node: this.media }];
     this.media.preload = options.preload === false ? "none" : "metadata";
     this.media.src = typeof options.src === "string" ? options.src : options.src[0];

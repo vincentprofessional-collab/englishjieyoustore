@@ -3091,7 +3091,7 @@ export function ListeningPractice({
           return false;
         }
 
-        return fullAudioPositionMs >= sentence.startMs && fullAudioPositionMs <= sentence.endMs;
+        return fullAudioPositionMs >= sentence.startMs && fullAudioPositionMs < sentence.endMs;
       }) ?? null
     );
   }, [activeSentenceClipId, effectiveMode, fullAudioPositionMs, section.transcriptSentences, submitted]);
@@ -3100,15 +3100,7 @@ export function ListeningPractice({
     section.transcriptSentences.find((sentence) => sentence.id === activeSentenceClipId && sentence.audioUrl) ??
     section.transcriptSentences.find((sentence) => sentence.audioUrl) ??
     null;
-  const reviewSentenceForPlayer = activeSentence ?? fallbackSentenceAudio ?? section.transcriptSentences.find(
-    (sentence) => sentence.startMs != null && sentence.endMs != null,
-  ) ?? null;
-  const reviewSentenceHasFullAudioRange = Boolean(
-    section.fullAudioUrl && reviewSentenceForPlayer?.startMs != null && reviewSentenceForPlayer.endMs != null,
-  );
-  const reviewSentenceAudioSource = reviewSentenceHasFullAudioRange
-    ? section.fullAudioUrl ?? ""
-    : reviewSentenceForPlayer?.audioUrl ?? "";
+  const playingSentenceSegmentRef = useRef<ListeningSentence | null>(null);
   const activeLoopSegment =
     activeSentence?.startMs != null && activeSentence.endMs != null
       ? {
@@ -3667,7 +3659,7 @@ export function ListeningPractice({
   }
 
   function scheduleWordTooltip(word: string, rect: DOMRect) {
-    if (!isVocabularyVisible) {
+    if (!isVocabularyVisible || window.matchMedia("(hover: none)").matches) {
       return;
     }
 
@@ -3696,7 +3688,7 @@ export function ListeningPractice({
     }, 120);
   }
 
-  function scheduleHideWordTooltip(delay = 1500) {
+  function scheduleHideWordTooltip(delay = 1000) {
     if (selectedText && delay > 0) {
       return;
     }
@@ -3747,6 +3739,7 @@ export function ListeningPractice({
     }
 
     const shouldLoop = modeOverride === "loop" || audioSettings.playMode === "sentence-loop";
+    playingSentenceSegmentRef.current = sentence;
     setFullAudioPositionMs(sentence.startMs);
     setStopAtSeconds(!shouldLoop && sentence.endMs != null ? sentence.endMs / 1000 : null);
     setSeekRequest({
@@ -3760,7 +3753,7 @@ export function ListeningPractice({
     const shouldAdvance = stopAtSeconds != null;
     setStopAtSeconds(null);
     if (!shouldAdvance) return;
-    const sentence = section.transcriptSentences.find((item) => item.sentenceNo === activeSentenceNo);
+    const sentence = playingSentenceSegmentRef.current;
     if (!sentence) return;
     const speakingMode = audioSettingsRef.current.speakingMode;
     if (speakingMode !== "none") startSpeakingPractice(sentence, speakingMode);
@@ -3963,7 +3956,7 @@ export function ListeningPractice({
         compactControls
         hasSelectedRate
         html5
-        key={`review-sentence-${fallbackSentenceAudio.id}`}
+        playbackId={fallbackSentenceAudio.id}
         onEnded={() => handleSentenceAudioEnded(fallbackSentenceAudio)}
         onDurationChange={(duration) => {
           sentenceDurationsRef.current[fallbackSentenceAudio.id] = duration;
@@ -3971,7 +3964,7 @@ export function ListeningPractice({
         onPlayingChange={(isPlaying) => handleReviewSentencePlayingChange(fallbackSentenceAudio, isPlaying)}
         onSettingsChange={updateAudioSettings}
         onTimeChange={(seconds) => handleReviewSentenceTimeChange(fallbackSentenceAudio, seconds)}
-        preload={false}
+        preload
         settings={audioSettings}
         settingsPlacement="none"
         src={fallbackSentenceAudio.audioUrl}
@@ -4113,10 +4106,10 @@ export function ListeningPractice({
 
     return (
       <BbcSentencePractice
-        activeWordIndex={null}
+        activeWordIndex={getSubtitleActiveWordIndex(sentence, splitEnglishTokens(sentence.englishText).filter(isWordToken).length)}
         dictationTargetTokenIndexes={dictationTargetTokenIndexes}
-        englishContent={renderEnglishSubtitle(sentence, { onWordClick: playSentenceAudioClip })}
-        isAudioPlaying={isSentenceClipPlaying && activeSentenceClipId === sentence.id}
+        englishContent={renderEnglishSubtitle(sentence, { inline: true, onWordClick: playSentenceAudioClip })}
+        isAudioPlaying={(isFullAudioPlaying && activeSentenceNo === sentence.sentenceNo) || (isSentenceClipPlaying && activeSentenceClipId === sentence.id)}
         sentence={{
           chinese: sentence.chineseText ?? "",
           english: sentence.englishText,
@@ -4280,19 +4273,7 @@ export function ListeningPractice({
                 <div className="bbc-listening-sentence-copy">
                   {renderTranscriptSentenceContent(sentence)}
                 </div>
-                {sentence.audioUrl ? (
-                  <AudioPlayer
-                    autoPlaySignal={sentenceAutoPlaySignals[sentence.id] ?? 0}
-                    controls="hidden"
-                    hasSelectedRate
-                    html5={false}
-                    onEnded={() => handleSentenceAudioEnded(sentence)}
-                    onSettingsChange={updateAudioSettings}
-                    settings={audioSettings}
-                    src={sentence.audioUrl}
-                    title="单句音频"
-                  />
-                ) : null}
+
               </article>
             ))}
           </div>
@@ -4303,16 +4284,17 @@ export function ListeningPractice({
 
   function renderEnglishSubtitle(
     sentence: ListeningSentence,
-    options: { onWordClick?: (sentence: ListeningSentence) => void } = {},
+    options: { inline?: boolean; onWordClick?: (sentence: ListeningSentence) => void } = {},
   ) {
     const tokens = splitEnglishTokens(sentence.englishText);
     const onWordClick = options.onWordClick ?? handleSubtitleClick;
     const wordCount = tokens.filter(isWordToken).length;
     const activeWordIndex = getSubtitleActiveWordIndex(sentence, wordCount);
     let wordIndex = -1;
+    const Container = options.inline ? "span" : "p";
 
     return (
-      <p className="subtitle-english-line">
+      <Container className="subtitle-english-line">
         {tokens.map((token, tokenIndex) => {
           if (!isWordToken(token)) {
             return <span key={`${sentence.id}-token-${tokenIndex}`}>{token}</span>;
@@ -4341,7 +4323,7 @@ export function ListeningPractice({
             </span>
           );
         })}
-      </p>
+      </Container>
     );
   }
 
@@ -4965,7 +4947,7 @@ export function ListeningPractice({
               clearHoverWordTimer();
               clearHideWordTimer();
             }}
-            onMouseLeave={() => scheduleHideWordTooltip(1500)}
+            onMouseLeave={() => scheduleHideWordTooltip(1000)}
           >
             <div className="word-tooltip-title-row">
               <Link href={`/vocabulary/${encodeURIComponent(activeWordTooltip.word)}`}>
@@ -5181,44 +5163,6 @@ export function ListeningPractice({
               </section>
             ) : null}
             {isRetellingPractice ? renderListeningReviewToolbar() : null}
-            {!isRetellingPractice && reviewSentenceForPlayer && reviewSentenceAudioSource ? (
-              <section className="listening-sentence-player-dock" aria-label="单句音频">
-                <AudioPlayer
-                  compactControls
-                  hasSelectedRate
-                  html5
-                  key={`${reviewSentenceForPlayer.id}:${reviewSentenceAudioSource}`}
-                  onDurationChange={(duration) => {
-                    sentenceDurationsRef.current[reviewSentenceForPlayer.id] = duration;
-                  }}
-                  onPlayingChange={(isPlaying) => {
-                    if (reviewSentenceHasFullAudioRange) {
-                      setIsFullAudioPlaying(isPlaying);
-                    } else {
-                      handleReviewSentencePlayingChange(reviewSentenceForPlayer, isPlaying);
-                    }
-                  }}
-                  onTimeChange={(seconds) => {
-                    if (reviewSentenceHasFullAudioRange) {
-                      setFullAudioPositionMs(Math.round(seconds * 1000));
-                    } else {
-                      handleReviewSentenceTimeChange(reviewSentenceForPlayer, seconds);
-                    }
-                  }}
-                  settings={audioSettings}
-                  settingsPlacement="none"
-                  showRate={false}
-                  src={reviewSentenceAudioSource}
-                  startAtSeconds={reviewSentenceHasFullAudioRange ? (reviewSentenceForPlayer.startMs ?? 0) / 1000 : 0}
-                  stopAtSeconds={
-                    reviewSentenceHasFullAudioRange && reviewSentenceForPlayer.endMs != null
-                      ? reviewSentenceForPlayer.endMs / 1000
-                      : null
-                  }
-                  title={`第 ${reviewSentenceForPlayer.sentenceNo} 句音频`}
-                />
-              </section>
-            ) : null}
             <section
               className={`practice-listening-card ${isRetellingPractice ? "article-retelling-parent" : ""}`}
               onPointerUp={handleQuestionSelection}
@@ -5246,9 +5190,12 @@ export function ListeningPractice({
                       key={sentence.id}
                       role="button"
                       tabIndex={0}
-                      onClick={() => handleSubtitleClick(sentence)}
+                      onClick={(event) => {
+                        if (event.target instanceof Element && event.target.closest("button, input, textarea, select, a, .sentence-order-dropzone, .sentence-order-word-bank")) return;
+                        handleSubtitleClick(sentence);
+                      }}
                       onKeyDown={(event) => {
-                        if (event.key === "Enter" || event.key === " ") {
+                        if (event.target === event.currentTarget && (event.key === "Enter" || event.key === " ")) {
                           event.preventDefault();
                           playSentenceSegment(sentence);
                         }
@@ -5657,7 +5604,7 @@ export function ListeningPractice({
             clearHoverWordTimer();
             clearHideWordTimer();
           }}
-          onMouseLeave={() => scheduleHideWordTooltip(1500)}
+          onMouseLeave={() => scheduleHideWordTooltip(1000)}
         >
           <div className="word-tooltip-title-row">
             <Link href={`/vocabulary/${encodeURIComponent(activeWordTooltip.word)}`}>

@@ -1,6 +1,6 @@
 "use client";
 
-import { Howl } from "howler";
+import { Howl, type HowlOptions } from "howler";
 import { NativeAudio } from "@/lib/native-audio";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { getLikelyProperNounWords } from "@/lib/audio-pronunciation";
@@ -104,9 +104,14 @@ type AudioPlayerProps = {
   leadingControls?: ReactNode;
   loopSegment?: { endSeconds: number; startSeconds: number } | null;
   playbackRange?: { startSeconds: number; endSeconds: number } | null;
+  playbackId?: string | number;
   onDurationChange?: (durationSeconds: number) => void;
   onEnded?: () => void;
   onPlayingChange?: (isPlaying: boolean) => void;
+  onPrevious?: () => void;
+  onNext?: () => void;
+  previousDisabled?: boolean;
+  nextDisabled?: boolean;
   onSettingsChange?: (nextSettings: Partial<AudioPlayerSettings>) => void;
   onStopAtEnd?: () => void;
   onTimeChange?: (positionSeconds: number) => void;
@@ -259,9 +264,14 @@ export function AudioPlayer({
   leadingControls,
   loopSegment = null,
   playbackRange = null,
+  playbackId,
   onDurationChange,
   onEnded,
   onPlayingChange,
+  onPrevious,
+  onNext,
+  previousDisabled = false,
+  nextDisabled = false,
   onSettingsChange,
   onStopAtEnd,
   onTimeChange,
@@ -277,6 +287,7 @@ export function AudioPlayer({
   title = "音频",
 }: AudioPlayerProps) {
   const soundRef = useRef<PlayerSound | null>(null);
+  const nativeMediaRef = useRef<HTMLAudioElement | null>(null);
   const onDurationChangeRef = useRef(onDurationChange);
   const onEndedRef = useRef(onEnded);
   const onPlayingChangeRef = useRef(onPlayingChange);
@@ -361,6 +372,7 @@ export function AudioPlayer({
     let startPositionApplied = false;
 
     setIsReady(false);
+    setDuration(0);
     setIsPlaying(false);
     setIsPlayRequested(false);
     onPlayingChangeRef.current?.(false);
@@ -370,8 +382,8 @@ export function AudioPlayer({
 
     const isMobilePlayback = window.matchMedia("(max-width: 820px)").matches || /Android|iPhone|iPad/i.test(navigator.userAgent);
     const shouldPreload = preload;
-    const AudioBackend = isMobilePlayback && /baidu|bidubrowser/i.test(navigator.userAgent) ? NativeAudio : Howl;
-    const sound = new AudioBackend({
+    const useNativeAudio = isMobilePlayback && /baidu|bidubrowser/i.test(navigator.userAgent);
+    const options: HowlOptions = {
       src: [src],
       html5: html5 || isMobilePlayback,
       preload: shouldPreload,
@@ -508,7 +520,11 @@ export function AudioPlayer({
         setDraftPosition(0);
         onEndedRef.current?.();
       },
-    });
+    };
+    const sound: PlayerSound = useNativeAudio
+      ? new NativeAudio(options, nativeMediaRef.current ?? undefined)
+      : new Howl(options);
+    if (useNativeAudio) nativeMediaRef.current = (sound as NativeAudio)._sounds[0]._node;
 
     soundRef.current = sound;
     enablePitchPreservation(sound);
@@ -549,18 +565,34 @@ export function AudioPlayer({
   }, [playerSettings.rate]);
 
   useEffect(() => {
+    if (playbackId == null || !soundRef.current) return;
+    const sound = soundRef.current;
+    clearAudioPlaybackRequest(sound, true);
+    sound.pause();
+    const start = playbackRange?.startSeconds ?? startAtSecondsRef.current;
+    sound.seek(start);
+    setPosition(start);
+    setDraftPosition(start);
+    setIsPlaying(false);
+    setIsPlayRequested(false);
+    onPlayingChangeRef.current?.(false);
+    onTimeChangeRef.current?.(start);
+  }, [playbackId, src]);
+
+  useEffect(() => {
     if (!autoPlaySignal || !soundRef.current) {
       return;
     }
 
     setIsPlayRequested(true);
+    stopAtSecondsRef.current = stopAtSeconds;
     if (playbackRange) {
       soundRef.current.seek(playbackRange.startSeconds);
       setPosition(playbackRange.startSeconds);
       setDraftPosition(playbackRange.startSeconds);
     }
     requestAudioPlayback(soundRef.current);
-  }, [autoPlaySignal, src, playbackRange?.startSeconds]);
+  }, [autoPlaySignal, src, playbackRange?.startSeconds, playbackId]);
 
   useEffect(() => {
     if (!seekRequest || !soundRef.current) {
@@ -603,6 +635,7 @@ export function AudioPlayer({
 
         const activeStopAtSeconds = stopAtSecondsRef.current;
         if (activeStopAtSeconds != null && currentPosition >= activeStopAtSeconds) {
+          stopAtSecondsRef.current = null;
           soundRef.current?.pause();
           soundRef.current?.seek(activeStopAtSeconds);
           setPosition(activeStopAtSeconds);
@@ -642,6 +675,7 @@ export function AudioPlayer({
     }
 
     setIsPlayRequested(true);
+    stopAtSecondsRef.current = stopAtSeconds;
     if (playbackRange && (position >= playbackRange.endSeconds || position < playbackRange.startSeconds)) seekTo(playbackRange.startSeconds);
     requestAudioPlayback(sound);
   }
@@ -668,7 +702,7 @@ export function AudioPlayer({
   const displayPosition = isScrubbing ? draftPosition : position;
   const mainPlayerControls = (
     <div className={`player-main-controls ${compactControls ? "compact-player-controls" : ""}`} aria-label={`${title} 控制`}>
-      <button aria-label={`倒退 ${skipSeconds} 秒`} className="icon-button" type="button" onClick={() => seekTo(position - skipSeconds)}>
+      <button aria-label={onPrevious ? "上一句" : `倒退 ${skipSeconds} 秒`} className="icon-button" disabled={onPrevious && previousDisabled} type="button" onClick={onPrevious ?? (() => seekTo(position - skipSeconds))}>
         <span className="player-skip-icon backward" aria-hidden="true" />
       </button>
       <button aria-label={!compactControls && isPlaying ? "暂停" : "播放"} className="play-button" type="button" onClick={compactControls ? startPlayback : togglePlay}>
@@ -679,7 +713,7 @@ export function AudioPlayer({
           <span className="player-play-icon pause" aria-hidden="true" />
         </button>
       ) : null}
-      <button aria-label={`前进 ${skipSeconds} 秒`} className="icon-button" type="button" onClick={() => seekTo(position + skipSeconds)}>
+      <button aria-label={onNext ? "下一句" : `前进 ${skipSeconds} 秒`} className="icon-button" disabled={onNext && nextDisabled} type="button" onClick={onNext ?? (() => seekTo(position + skipSeconds))}>
         <span className="player-skip-icon forward" aria-hidden="true" />
       </button>
     </div>

@@ -26,9 +26,20 @@ test("bilingual cloze masks the inflected target and its Chinese meaning while r
   assert.equal(maskStudyExample("A pineapple and apples.", "菠萝和苹果。", "apple", ["apples"], "n. 苹果").english, "A pineapple and ______.");
 });
 
-test("unmatched paraphrases never disclose Chinese answers and unrelated examples are rejected", () => {
-  assert.equal(maskStudyExample("An aberrant result.", "这个结果与众不同。", "aberrant", [], "adj. 异常的；畸变的").chinese, "______");
+test("paraphrased translations remain visible and unrelated examples are rejected", () => {
+  assert.equal(maskStudyExample("An aberrant result.", "这个结果与众不同。", "aberrant", [], "adj. 异常的；畸变的").chinese, "这个结果与众不同。");
   assert.equal(maskStudyExample("A different word.", "别的词。", "aberrant", [], "adj. 异常的").matched, false);
+});
+
+test("the reported SAT examples retain their Chinese sentence context", () => {
+  for (const word of ["abominable", "abbess"]) {
+    const example = workbookExamples[word];
+    const masked = maskStudyExample(example.englishText, example.chineseText, word, [], workbookDetails[word].definitionCn);
+    assert.ok(masked.english.includes("______"));
+    assert.ok(masked.chinese.length > 10);
+    if (word === "abominable") assert.equal(masked.chinese, example.chineseText);
+    else assert.equal(masked.chinese, "希尔德加德是本笃会的一位天主教______。");
+  }
 });
 
 test("Excel bilingual examples mask concise Chinese synonyms and provide the English definition", () => {

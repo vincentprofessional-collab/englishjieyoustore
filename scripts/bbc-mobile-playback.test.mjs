@@ -186,4 +186,14 @@ test("Baidu's native backend starts within the tap and reads duration from metad
   assert.equal(sound.duration(), 84);
   assert.equal(media.currentTime, 7);
   sound.unload();
+  const nextSound = new exports.NativeAudio({ src: ["/next-sentence.mp3"], onload: () => {} }, media);
+  nextSound.seek(0);
+  nextSound.play();
+  assert.equal(nextSound._sounds[0]._node, media, "changing sentences retains the gesture-unlocked element");
+  assert.equal(media.src, "/next-sentence.mp3");
+  assert.equal(media.currentTime, 0);
+  media.dispatchEvent(new Event("loadedmetadata"));
+  assert.equal(loaded, 1, "the previous sentence's event handlers were removed");
+  assert.equal(media.plays, 2);
+  nextSound.unload();
 });

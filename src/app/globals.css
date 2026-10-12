@@ -30240,34 +30240,16 @@ body *:not(.bbc-vocabulary-highlight):not(.bbc-active-word) {
   padding: 0;
 }
 
-.listening-sentence-player-dock {
-  align-self: start;
-  background: #fff6d9;
-  border: 1px solid rgba(200, 148, 25, 0.52);
-  border-radius: 16px;
-  justify-self: stretch;
-  min-width: 0;
-  padding: 8px 12px;
-  width: 100%;
-}
-
-.listening-sentence-player-dock .howler-player {
-  background: transparent;
-  border: 0;
-  border-radius: 0;
-  padding: 2px 0;
-}
-
 .exam-workspace.submitted.review .practice-audio-study-panel {
   grid-template-rows: auto minmax(0, 1fr);
 }
 
-.exam-workspace.submitted.review .practice-audio-study-panel:not(.article-retelling-listening-panel) .listening-sentence-player-dock {
-  grid-row: 1;
+.exam-workspace.submitted.review .practice-audio-study-panel:not(.article-retelling-listening-panel) {
+  grid-template-rows: minmax(0, 1fr);
 }
 
 .exam-workspace.submitted.review .practice-audio-study-panel:not(.article-retelling-listening-panel) .practice-listening-card {
-  grid-row: 2;
+  grid-row: 1;
   min-height: 0;
 }
 
@@ -35004,4 +34986,132 @@ body .mobile-bottom-nav a.active { color: #245d7b !important; }
     justify-content: flex-start !important;
     text-align: left !important;
   }
+}
+
+/* Study examples use the same type scale as their Chinese meaning. */
+.vocabulary-learning-page { --vocabulary-study-text-size: 20px; }
+.vocabulary-learning-page .vocabulary-card-definition,
+.vocabulary-learning-page .vocabulary-card-definition-line,
+.vocabulary-learning-page .vocabulary-card-definition-line > span,
+.vocabulary-learning-page .vocabulary-learning-detail-main .definition-rows.large p,
+.vocabulary-learning-page .vocabulary-learning-detail-main .definition-rows.large p > span,
+.vocabulary-learning-page .vocabulary-learning-round-examples p,
+.vocabulary-learning-page .vocabulary-learning-round-examples p * {
+  font-size: var(--vocabulary-study-text-size) !important;
+  line-height: 1.65;
+}
+
+.sentence-order-dropzone.current-word,
+.dictation-blank-wrap.current-word {
+  background: #fff0b8;
+  border-bottom-color: #b47712;
+  box-shadow: 0 2px 0 #b47712;
+}
+
+@media (max-width: 820px) {
+  .vocabulary-learning-page { --vocabulary-study-text-size: 13px; }
+
+  /* IELTS has one master player in the document, above its sentence cards. */
+  .listening-exam-page .listening-review-audio-panel {
+    background: #d5ebf6;
+    border: 1px solid #badbea;
+    border-radius: 16px;
+    bottom: auto !important;
+    box-shadow: none;
+    left: auto !important;
+    margin: 0;
+    max-width: none;
+    padding: 10px 12px;
+    position: static !important;
+    transform: none !important;
+    width: 100%;
+  }
+  .listening-exam-page .listening-review-audio-panel .howler-player { padding: 0; }
+  .listening-exam-page .bbc-original-panel > .bbc-full-audio { position: static; }
+  .exam-workspace.submitted.review .practice-audio-study-panel:not(.article-retelling-listening-panel) {
+    grid-template-rows: minmax(0, 1fr);
+  }
+  .exam-workspace.submitted.review .practice-audio-study-panel:not(.article-retelling-listening-panel) .practice-listening-card {
+    grid-row: 1;
+  }
+
+  :is(.bbc-article-page, .new-concept-lesson-page, .listening-exam-page) .bbc-audio-toolbar {
+    align-items: stretch;
+    gap: 10px;
+    grid-template-columns: minmax(0, 1fr);
+    min-width: 0;
+  }
+  :is(.bbc-article-page, .new-concept-lesson-page, .listening-exam-page) .bbc-audio-toolbar-modes {
+    display: grid !important;
+    gap: 5px;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    min-width: 0;
+    width: 100%;
+  }
+  :is(.bbc-article-page, .new-concept-lesson-page, .listening-exam-page) .bbc-audio-toolbar-modes > .player-settings {
+    display: contents;
+  }
+  :is(.bbc-article-page, .new-concept-lesson-page, .listening-exam-page) .bbc-audio-toolbar-modes :is(.player-menu, .player-settings) {
+    min-width: 0;
+  }
+  :is(.bbc-article-page, .new-concept-lesson-page, .listening-exam-page) .bbc-audio-toolbar-modes :is(.player-menu-trigger, .bbc-fullscreen-toggle) {
+    border-radius: 11px;
+    font-size: 14px !important;
+    justify-content: center;
+    min-height: 42px;
+    min-width: 0;
+    padding: 8px 3px;
+    width: 100%;
+  }
+  :is(.bbc-article-page, .new-concept-lesson-page, .listening-exam-page) .bbc-audio-toolbar-utilities {
+    display: grid !important;
+    gap: 6px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    min-width: 0;
+    width: 100%;
+  }
+  :is(.bbc-article-page, .new-concept-lesson-page, .listening-exam-page) .bbc-audio-toolbar-utilities > .player-settings { display: contents; }
+  :is(.bbc-article-page, .new-concept-lesson-page, .listening-exam-page) .bbc-audio-toolbar-utilities :is(button, .player-menu) {
+    min-height: 38px;
+    min-width: 0;
+    width: 100%;
+  }
+  :is(.bbc-article-page, .new-concept-lesson-page) .bbc-intensive-reading {
+    gap: 14px;
+    min-height: 0;
+    padding: 0;
+  }
+  :is(.bbc-article-page, .new-concept-lesson-page, .listening-exam-page) :is(.bbc-sentence-english, .subtitle-english-line, .bbc-intensive-english) {
+    font-size: 20px;
+    line-height: 1.8;
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
+  :is(.bbc-article-page, .new-concept-lesson-page, .listening-exam-page) :is(.bbc-sentence-chinese, .bbc-intensive-chinese, .bbc-sight-translation, .subtitle-chinese-line) {
+    color: #54645b;
+    font-size: 15px;
+    line-height: 1.8;
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
+  .practice-subtitle-list.sentence-mode { gap: 12px; }
+  .practice-subtitle-list.sentence-mode .practice-subtitle-line {
+    background: #fffdf7;
+    border: 1px solid #e6ddca;
+    border-radius: 15px;
+    padding: 14px;
+  }
+  .practice-subtitle-line-head { align-items: center; gap: 8px; margin-bottom: 12px; }
+  .bbc-speaking-training-status { flex-wrap: wrap; gap: 6px 12px; margin: 8px 0 0; padding: 10px 12px; }
+  .bbc-speaking-training-status small { flex-basis: 100%; }
+  .sentence-order-word-bank { gap: 8px; padding: 12px; }
+  .sentence-order-word { min-height: 40px; padding: 7px 12px; }
+  .sentence-order-dropzone { min-height: 36px; }
+  :is(.bbc-article-page, .new-concept-lesson-page) .bbc-full-audio :is(.play-button, .icon-button) {
+    min-height: 42px;
+    min-width: 42px;
+  }
+  :is(.bbc-article-page, .new-concept-lesson-page) .bbc-full-audio .player-progress-row span { font-size: 12px; }
+  .new-concept-mobile-sentence-navigation { display: none; }
+  :is(.bbc-article-page, .new-concept-lesson-page, .listening-exam-page) :is(.subtitle-word, .bbc-sentence-english, .bbc-intensive-english) { -webkit-touch-callout: none; }
 }

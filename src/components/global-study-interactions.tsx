@@ -77,7 +77,7 @@ function isInteractiveTarget(target: EventTarget | null) {
   return target instanceof HTMLElement
     ? Boolean(
         target.closest(
-          "button, input, textarea, select, [contenteditable='true'], .notes-panel, .selection-action-popover, .word-tooltip-floating",
+          "button, input, textarea, select, [contenteditable='true'], .notes-panel, .selection-action-popover, .word-tooltip-floating, .sentence-order-dropzone, .sentence-order-word-bank",
         ),
       )
     : false;
@@ -188,6 +188,9 @@ export function GlobalStudyInteractions() {
   const longPressTimerRef = useRef<number | null>(null);
   const longPressTriggeredRef = useRef(false);
   const pendingWordRef = useRef("");
+  const dismissedHoverWordRef = useRef("");
+  const lastHoveredWordRef = useRef("");
+  const suppressTouchClickUntilRef = useRef(0);
   const selectedRangeRef = useRef<Range | null>(null);
 
   useEffect(() => {
@@ -245,6 +248,7 @@ export function GlobalStudyInteractions() {
       clearHoverTimer();
       if (hideWordTimerRef.current == null) {
         hideWordTimerRef.current = window.setTimeout(() => {
+          dismissedHoverWordRef.current = wordTooltipRef.current?.word ?? "";
           setWordTooltip(null);
           hideWordTimerRef.current = null;
         }, 1000);
@@ -263,7 +267,7 @@ export function GlobalStudyInteractions() {
       return resolvedHint;
     }
 
-    async function showHint(word: string, rect: DOMRect) {
+    async function showHint(word: string, rect: DOMRect, fromTouch = false) {
       const normalizedWord = normalizeWord(word);
       if (!normalizedWord) return;
 
@@ -280,11 +284,18 @@ export function GlobalStudyInteractions() {
         top: shouldOpenAbove ? rect.top - 10 : rect.bottom + 10,
         word: normalizedWord,
       });
+      if (!fromTouch) scheduleHideWord();
     }
 
     function handleMouseMove(event: MouseEvent) {
       if (window.matchMedia("(hover: none)").matches) return;
-      if (selectionPopover || isInteractiveTarget(event.target)) {
+      if (event.target instanceof Element && event.target.closest(".word-tooltip-floating")) {
+        clearHideWordTimer();
+        return;
+      }
+      if (selectionPopover || isInteractiveTarget(event.target) || hasLocalSelectionHandler(event.target)) {
+        lastHoveredWordRef.current = "";
+        scheduleHideWord();
         return;
       }
 
@@ -293,13 +304,16 @@ export function GlobalStudyInteractions() {
         !wordAtPoint ||
         !wordAtPoint.textNode.parentElement?.closest("main, article, section, p, li, h1, h2, h3, h4, span")
       ) {
+        dismissedHoverWordRef.current = "";
+        lastHoveredWordRef.current = "";
         scheduleHideWord();
         return;
       }
 
       const normalizedWord = normalizeWord(wordAtPoint.word);
-      if (!normalizedWord || pendingWordRef.current === normalizedWord || wordTooltipRef.current?.word === normalizedWord) {
-        clearHideWordTimer();
+      if (lastHoveredWordRef.current !== normalizedWord) dismissedHoverWordRef.current = "";
+      lastHoveredWordRef.current = normalizedWord;
+      if (!normalizedWord || pendingWordRef.current === normalizedWord || wordTooltipRef.current?.word === normalizedWord || dismissedHoverWordRef.current === normalizedWord) {
         return;
       }
 
@@ -317,6 +331,7 @@ export function GlobalStudyInteractions() {
     }
 
     function handlePointerDown(event: PointerEvent) {
+      if (event.pointerType === "touch") suppressTouchClickUntilRef.current = 0;
       if (event.pointerType !== "touch" || selectionPopover || isInteractiveTarget(event.target)) {
         return;
       }
@@ -335,9 +350,9 @@ export function GlobalStudyInteractions() {
       longPressTimerRef.current = window.setTimeout(() => {
         longPressTriggeredRef.current = true;
         pendingWordRef.current = normalizeWord(wordAtPoint.word);
-        void showHint(wordAtPoint.word, wordAtPoint.rect);
+        void showHint(wordAtPoint.word, wordAtPoint.rect, true);
         longPressTimerRef.current = null;
-      }, 650);
+      }, 1500);
     }
 
     function handlePointerMove(event: PointerEvent) {
@@ -352,26 +367,70 @@ export function GlobalStudyInteractions() {
     function handlePointerEnd(event: PointerEvent) {
       if (event.pointerType !== "touch") return;
       clearLongPressTimer();
-      if (longPressTriggeredRef.current) event.preventDefault();
+      if (longPressTriggeredRef.current) {
+        suppressTouchClickUntilRef.current = Date.now() + 1000;
+        event.preventDefault();
+        event.stopPropagation();
+        window.getSelection()?.removeAllRanges();
+        longPressTriggeredRef.current = false;
+      }
     }
 
     function handleContextMenu(event: MouseEvent) {
-      if (longPressTriggeredRef.current) event.preventDefault();
+      if (longPressTimerRef.current != null || longPressTriggeredRef.current) event.preventDefault();
+    }
+
+    function handleClick(event: MouseEvent) {
+      if (Date.now() > suppressTouchClickUntilRef.current) return;
+      suppressTouchClickUntilRef.current = 0;
+      event.preventDefault();
+      event.stopImmediatePropagation();
+    }
+
+    function handleTouchStart(event: TouchEvent) {
+      if (typeof window.PointerEvent !== "undefined" || event.touches.length !== 1) return;
+      const touch = event.touches[0];
+      handlePointerDown({ ...touch, clientX: touch.clientX, clientY: touch.clientY, pointerType: "touch", target: event.target } as unknown as PointerEvent);
+    }
+    function handleTouchMove(event: TouchEvent) {
+      if (typeof window.PointerEvent !== "undefined") return;
+      const touch = event.touches[0];
+      if (touch) handlePointerMove({ clientX: touch.clientX, clientY: touch.clientY, pointerType: "touch" } as PointerEvent);
+    }
+    function handleTouchEnd(event: TouchEvent) {
+      if (typeof window.PointerEvent !== "undefined") return;
+      clearLongPressTimer();
+      if (longPressTriggeredRef.current) {
+        suppressTouchClickUntilRef.current = Date.now() + 1000;
+        if (event.cancelable) event.preventDefault();
+        window.getSelection()?.removeAllRanges();
+        longPressTriggeredRef.current = false;
+      }
     }
 
     document.addEventListener("mousemove", handleMouseMove);
     document.addEventListener("pointerdown", handlePointerDown);
     document.addEventListener("pointermove", handlePointerMove);
-    document.addEventListener("pointerup", handlePointerEnd);
-    document.addEventListener("pointercancel", handlePointerEnd);
+    document.addEventListener("pointerup", handlePointerEnd, true);
+    document.addEventListener("pointercancel", handlePointerEnd, true);
     document.addEventListener("contextmenu", handleContextMenu);
+    document.addEventListener("click", handleClick, true);
+    document.addEventListener("touchstart", handleTouchStart, { passive: true });
+    document.addEventListener("touchmove", handleTouchMove, { passive: true });
+    document.addEventListener("touchend", handleTouchEnd, { passive: false });
+    document.addEventListener("touchcancel", handleTouchEnd);
     return () => {
       document.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("pointerdown", handlePointerDown);
       document.removeEventListener("pointermove", handlePointerMove);
-      document.removeEventListener("pointerup", handlePointerEnd);
-      document.removeEventListener("pointercancel", handlePointerEnd);
+      document.removeEventListener("pointerup", handlePointerEnd, true);
+      document.removeEventListener("pointercancel", handlePointerEnd, true);
       document.removeEventListener("contextmenu", handleContextMenu);
+      document.removeEventListener("click", handleClick, true);
+      document.removeEventListener("touchstart", handleTouchStart);
+      document.removeEventListener("touchmove", handleTouchMove);
+      document.removeEventListener("touchend", handleTouchEnd);
+      document.removeEventListener("touchcancel", handleTouchEnd);
       clearHoverTimer();
       clearHideWordTimer();
       clearLongPressTimer();
@@ -533,6 +592,7 @@ export function GlobalStudyInteractions() {
           onMouseLeave={() => {
             if (hideWordTimerRef.current != null) window.clearTimeout(hideWordTimerRef.current);
             hideWordTimerRef.current = window.setTimeout(() => {
+              dismissedHoverWordRef.current = wordTooltipRef.current?.word ?? "";
               setWordTooltip(null);
               hideWordTimerRef.current = null;
             }, 1000);

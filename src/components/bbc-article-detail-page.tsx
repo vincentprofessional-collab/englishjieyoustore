@@ -770,8 +770,12 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
     const mobileQuery = window.matchMedia("(max-width: 820px)");
     const updateMobileAudioViewport = () => setIsMobileAudioViewport(mobileQuery.matches);
     updateMobileAudioViewport();
-    mobileQuery.addEventListener("change", updateMobileAudioViewport);
-    return () => mobileQuery.removeEventListener("change", updateMobileAudioViewport);
+    if (typeof mobileQuery.addEventListener === "function") {
+      mobileQuery.addEventListener("change", updateMobileAudioViewport);
+      return () => mobileQuery.removeEventListener("change", updateMobileAudioViewport);
+    }
+    mobileQuery.addListener?.(updateMobileAudioViewport);
+    return () => mobileQuery.removeListener?.(updateMobileAudioViewport);
   }, []);
 
   useEffect(() => {
@@ -1021,15 +1025,14 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
     setIsRetellingPractice(true);
   }
 
-  function selectStudySentence(sentenceNo: number) {
-    const shouldContinuePlayback = isSentenceAudioPlaying;
+  function selectStudySentence(sentenceNo: number, shouldContinuePlayback = isSentenceAudioPlaying) {
     clearSpeakingPracticeTimers();
     activeSentenceNoRef.current = sentenceNo;
     setActiveSentenceNo(sentenceNo);
     setActiveSentencePosition(0);
     setIsSentenceAudioPlaying(false);
     setIsFullAudioPlaying(false);
-    if (shouldContinuePlayback && article.sentences?.find((sentence) => sentence.sentenceNo === sentenceNo)?.audioUrl) {
+    if (shouldContinuePlayback && (article.fullAudioUrl || article.sentences?.find((sentence) => sentence.sentenceNo === sentenceNo)?.audioUrl)) {
       requestSentenceAutoPlay(sentenceNo);
     } else {
       setSentenceAutoPlaySignals((current) => ({ ...current, [sentenceNo]: 0 }));
@@ -1314,8 +1317,14 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
     (article.sentences ?? []).findIndex((sentence) => sentence.sentenceNo === activeSentenceNo),
   );
   const activeStudySentence = article.sentences?.[activeStudySentenceIndex];
-  const mobileSentenceAudio = isMobileAudioViewport && studyMode !== "general" && activeStudySentence?.audioUrl
-    ? activeStudySentence
+  const mobileSentenceAudio = isMobileAudioViewport && studyMode !== "general" && activeStudySentence && (activeStudySentence.audioUrl || article.fullAudioUrl)
+    ? { ...activeStudySentence, audioUrl: activeStudySentence.audioUrl || article.fullAudioUrl }
+    : null;
+  const mobileSentenceRange = mobileSentenceAudio?.audioUrl === article.fullAudioUrl && mobileSentenceAudio
+    ? { startSeconds: mobileSentenceAudio.startMs / 1000, endSeconds: mobileSentenceAudio.endMs / 1000 }
+    : null;
+  const activeStudyWordIndex = activeStudySentence && isSentenceAudioPlaying && activeSentenceNo === activeStudySentence.sentenceNo
+    ? getActiveWordIndex(activeStudySentence.english, activeSentencePosition, (activeStudySentence.endMs - activeStudySentence.startMs) / 1000)
     : null;
   const previousStudySentence = article.sentences?.[activeStudySentenceIndex - 1];
   const nextStudySentence = article.sentences?.[activeStudySentenceIndex + 1];
@@ -1734,6 +1743,7 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
                       <>
                         {hasReviewedSyntax ? (
                           <BbcSyntaxInlineEditor
+                            activeWordIndex={activeStudyWordIndex}
                             allInlineAnnotations={editableInlineAnnotations}
                             allSentences={editableSyntaxSentences}
                             articleId={article.id}
@@ -1762,7 +1772,7 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
                               renderText={(text, characterOffset) => renderHighlightedEnglish(
                                 text,
                                 getWordCount(sentence.english.slice(0, characterOffset)),
-                                null,
+                                activeStudyWordIndex,
                                 new Set<number>(),
                                 [],
                                 articlePronunciations,
@@ -1780,7 +1790,7 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
                             {renderHighlightedEnglish(
                               sentence.english,
                               studyMode === "intensive" ? 0 : activeStudySentenceWordOffset,
-                              null,
+                              activeStudyWordIndex,
                               studyMode === "intensive" ? new Set<number>() : vocabularyHighlightWordIndexes,
                               sentence.underlinedTerms ?? [],
                               articlePronunciations,
@@ -1799,11 +1809,11 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
                     {studyMode === "listening" || studyMode === "writing" || studyMode === "speaking" ? (
                       <BbcSentencePractice
                         key={`${sentence.sentenceNo}:${sentence.english}`}
-                        activeWordIndex={null}
+                        activeWordIndex={activeStudyWordIndex}
                         englishContent={renderHighlightedEnglish(
                           sentence.english,
                           activeStudySentenceWordOffset,
-                          null,
+                          activeStudyWordIndex == null ? null : activeStudySentenceWordOffset + activeStudyWordIndex,
                           vocabularyHighlightWordIndexes,
                           sentence.underlinedTerms ?? [],
                           articlePronunciations,
@@ -1832,7 +1842,7 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
                         <small>{SPEAKING_PLAYING_HINTS[audioSettings.speakingMode]}</small>
                       </div>
                     ) : null}
-                    {sentence.audioUrl ? (
+                    {!isMobileAudioViewport && (sentence.audioUrl ? (
                       <AudioPlayer
                       key={`${modeSelectionVersion}-${sentence.sentenceNo}`}
                       autoPlaySignal={isMobileAudioViewport ? 0 : sentenceAutoPlaySignals[sentence.sentenceNo] ?? 0}
@@ -1893,7 +1903,7 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
                           type="button"
                         >下一句</button>
                       </div>
-                    )}
+                    ))}
                   </div>
                 );
               })() : originalTextBlocksWithOffsets.slice(0, 1).map((textBlock, index) => (
@@ -1982,22 +1992,34 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
               <AudioPlayer
                 autoPlaySignal={mobileSentenceAudio ? sentenceAutoPlaySignals[mobileSentenceAudio.sentenceNo] ?? 0 : 0}
                 deferSentenceLoop={Boolean(mobileSentenceAudio && studyMode === "speaking" && audioSettings.speakingMode !== "none")}
-                key={`bbc-mobile-mode-${isMobileAudioViewport ? "mobile" : "desktop"}-${mobileSentenceAudio?.sentenceNo ?? "full"}-${modeSelectionVersion}`}
+                playbackId={`${modeSelectionVersion}:${mobileSentenceAudio?.sentenceNo ?? "full"}`}
+                playbackRange={mobileSentenceRange}
+                onPrevious={mobileSentenceAudio ? () => previousStudySentence && selectStudySentence(previousStudySentence.sentenceNo, true) : undefined}
+                onNext={mobileSentenceAudio ? () => nextStudySentence && selectStudySentence(nextStudySentence.sentenceNo, true) : undefined}
+                previousDisabled={!previousStudySentence}
+                nextDisabled={!nextStudySentence}
                 hasSelectedRate
                 html5
                 onEnded={mobileSentenceAudio ? () => handleSentenceEnded(mobileSentenceAudio) : undefined}
+                onStopAtEnd={mobileSentenceRange && mobileSentenceAudio ? () => handleSentenceEnded(mobileSentenceAudio) : undefined}
+                stopAtSeconds={mobileSentenceRange?.endSeconds}
+                loopSegment={mobileSentenceRange && !(studyMode === "speaking" && audioSettings.speakingMode !== "none") ? mobileSentenceRange : null}
                 onPlayingChange={(isPlaying) => mobileSentenceAudio
                   ? handleSentencePlayingChange(mobileSentenceAudio.sentenceNo, isPlaying)
                   : handleFullAudioPlayingChange(isPlaying)}
                 onSettingsChange={updateAudioSettings}
                 onTimeChange={(positionSeconds) => mobileSentenceAudio
-                  ? handleSentenceTimeChange(mobileSentenceAudio.sentenceNo, positionSeconds)
+                  ? handleSentenceTimeChange(mobileSentenceAudio.sentenceNo, positionSeconds - (mobileSentenceRange?.startSeconds ?? 0))
                   : setFullAudioPosition(positionSeconds)}
                 preload
                 settings={mobileSentenceAudio ? audioSettings : studyMode === "listening" ? audioSettings : { ...audioSettings, playMode: "sequential" }}
                 settingsPlacement="none"
+                seekRequest={mobileSentenceAudio && sentenceRestoreSeekRequest?.sentenceNo === mobileSentenceAudio.sentenceNo ? {
+                  ...sentenceRestoreSeekRequest,
+                  positionSeconds: sentenceRestoreSeekRequest.positionSeconds + (mobileSentenceRange?.startSeconds ?? 0),
+                } : null}
                 src={mobileSentenceAudio?.audioUrl ?? article.fullAudioUrl}
-                startAtSeconds={mobileSentenceAudio ? activeSentencePosition : fullAudioPosition}
+                startAtSeconds={mobileSentenceAudio ? (mobileSentenceRange?.startSeconds ?? 0) + activeSentencePosition : fullAudioPosition}
                 title={mobileSentenceAudio ? `第 ${mobileSentenceAudio.sentenceNo} 句音频` : `${article.title} 完整音频`}
               />
             </div>

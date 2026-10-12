@@ -192,6 +192,8 @@ export function BbcSentencePractice({
   const [sentenceOrderPointerPosition, setSentenceOrderPointerPosition] = useState<{ x: number; y: number } | null>(null);
   const [isMobilePointerViewport, setIsMobilePointerViewport] = useState(false);
   const sentenceKey = `${sentence.sentenceNo}:${sentence.english}:${settings.dictationMode}`;
+  const activeTokenIndex = activeWordIndex == null ? null : splitEnglishTokens(sentence.english)
+    .flatMap((token, index) => isWordToken(token) ? [index] : [])[activeWordIndex];
   const previousSentenceKeyRef = useRef(sentenceKey);
   const sentenceOrderLineRef = useRef<HTMLParagraphElement | null>(null);
   const sentenceOrderBankRef = useRef<HTMLDivElement | null>(null);
@@ -483,7 +485,7 @@ export function BbcSentencePractice({
 
     return (
       <span
-        className={`dictation-blank-wrap ${userAnswer ? "has-answer" : ""}`}
+        className={`dictation-blank-wrap ${userAnswer ? "has-answer" : ""} ${activeTokenIndex === target.tokenIndex ? "current-word" : ""}`}
         key={`${sentence.sentenceNo}-dictation-${target.tokenIndex}`}
       >
         <span aria-hidden="true" className="dictation-blank-measure">
@@ -524,7 +526,7 @@ export function BbcSentencePractice({
             return renderDictationBlank(target);
           }
 
-          return <span key={`${sentence.sentenceNo}-dictation-token-${tokenIndex}`}>{token}</span>;
+          return <span className={activeTokenIndex === tokenIndex ? "current-word" : undefined} key={`${sentence.sentenceNo}-dictation-token-${tokenIndex}`}>{token}</span>;
         })}
       </p>
     );
@@ -665,7 +667,7 @@ export function BbcSentencePractice({
     return (
       <span
         aria-label={`语序排列 ${target.normalizedWord}`}
-        className={`sentence-order-dropzone ${hasAnswer || shouldRevealAnswer ? "filled" : ""} ${
+        className={`sentence-order-dropzone ${activeTokenIndex === target.tokenIndex ? "current-word" : ""} ${hasAnswer || shouldRevealAnswer ? "filled" : ""} ${
           sentenceOrderDrag?.sourceSlot === target.tokenIndex ? "sentence-order-dragging" : ""
         } ${sentenceOrderHover === target.tokenIndex ? "hover" : ""} ${isCorrect ? "correct" : ""} ${isWrong ? "wrong" : ""}`}
         data-sentence-order-drop-target={target.tokenIndex}
