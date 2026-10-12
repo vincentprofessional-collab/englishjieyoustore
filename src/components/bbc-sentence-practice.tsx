@@ -9,6 +9,7 @@ import {
   type PointerEvent as ReactPointerEvent,
   type ReactNode,
   useEffect,
+  useLayoutEffect,
   useRef,
   useState,
 } from "react";
@@ -212,24 +213,25 @@ export function BbcSentencePractice({
     setSentenceOrderPointerPosition(null);
   }, [sentenceKey]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!sentenceOrderDrag) {
       return;
     }
     const activeDrag = sentenceOrderDrag;
 
     function getDropTarget(clientX: number, clientY: number): SentenceOrderDropTarget | null {
-      const element = document.elementFromPoint(clientX, clientY);
-      const dropZone = element?.closest<HTMLElement>("[data-sentence-order-drop-target]");
-      if (dropZone?.dataset.sentenceOrderDropTarget) {
-        return Number(dropZone.dataset.sentenceOrderDropTarget);
+      let overWordBank = false;
+      for (const element of document.elementsFromPoint(clientX, clientY)) {
+        const dropZone = element.closest<HTMLElement>("[data-sentence-order-drop-target]");
+        if (dropZone?.dataset.sentenceOrderDropTarget != null) {
+          return Number(dropZone.dataset.sentenceOrderDropTarget);
+        }
+        if (element.closest("[data-sentence-order-bank]")) {
+          overWordBank = true;
+        }
       }
 
-      if (element?.closest("[data-sentence-order-bank]")) {
-        return "bank";
-      }
-
-      return null;
+      return overWordBank ? "bank" : null;
     }
 
     function handlePointerMove(event: PointerEvent) {
@@ -268,14 +270,14 @@ export function BbcSentencePractice({
       setSentenceOrderPointerPosition(null);
     }
 
-    window.addEventListener("pointermove", handlePointerMove, { passive: false });
-    window.addEventListener("pointerup", handlePointerUp);
-    window.addEventListener("pointercancel", handlePointerCancel);
+    window.addEventListener("pointermove", handlePointerMove, { capture: true, passive: false });
+    window.addEventListener("pointerup", handlePointerUp, true);
+    window.addEventListener("pointercancel", handlePointerCancel, true);
 
     return () => {
-      window.removeEventListener("pointermove", handlePointerMove);
-      window.removeEventListener("pointerup", handlePointerUp);
-      window.removeEventListener("pointercancel", handlePointerCancel);
+      window.removeEventListener("pointermove", handlePointerMove, true);
+      window.removeEventListener("pointerup", handlePointerUp, true);
+      window.removeEventListener("pointercancel", handlePointerCancel, true);
     };
   }, [isMobilePointerViewport, sentenceOrderDrag]);
 
@@ -560,7 +562,11 @@ export function BbcSentencePractice({
     event.preventDefault();
     event.stopPropagation();
     if (isMobilePointerViewport) {
-      event.currentTarget.setPointerCapture(event.pointerId);
+      try {
+        event.currentTarget.setPointerCapture?.(event.pointerId);
+      } catch {
+        // Window-level pointer listeners still handle the drag if capture is unsupported.
+      }
       setSentenceOrderPointerPosition({ x: event.clientX, y: event.clientY });
     }
     setSentenceOrderDrag({

@@ -4016,6 +4016,7 @@ export function ListeningPractice({
             onChange={updateAudioSettings}
             onModeSelect={(nextMode) => selectReviewStudyMode(nextMode)}
             onRetellingSelect={enterRetellingPractice}
+            modeLabels={{ speaking: "口语", writing: "写作" }}
             settings={audioSettings}
             variant="speaking-writing"
           />
