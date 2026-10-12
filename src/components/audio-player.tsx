@@ -98,6 +98,7 @@ type AudioPlayerProps = {
   compactControls?: boolean;
   controls?: "full" | "hidden";
   deferSentenceLoop?: boolean;
+  sentenceLoopDelayMs?: number;
   hasSelectedRate?: boolean;
   html5?: boolean;
   preload?: boolean;
@@ -258,6 +259,7 @@ export function AudioPlayer({
   compactControls = false,
   controls = "full",
   deferSentenceLoop = false,
+  sentenceLoopDelayMs = 0,
   hasSelectedRate,
   html5 = true,
   preload = true,
@@ -295,6 +297,8 @@ export function AudioPlayer({
   const onTimeChangeRef = useRef(onTimeChange);
   const loopSegmentRef = useRef(loopSegment);
   const deferSentenceLoopRef = useRef(deferSentenceLoop);
+  const sentenceLoopDelayRef = useRef(sentenceLoopDelayMs);
+  const sentenceReplayRef = useRef<{ sound: PlayerSound; timer: number; complete: () => void } | null>(null);
   const playModeRef = useRef<AudioPlayMode>(settings?.playMode ?? DEFAULT_AUDIO_PLAYER_SETTINGS.playMode);
   const stopAtSecondsRef = useRef(stopAtSeconds);
   const startAtSecondsRef = useRef(startAtSeconds);
@@ -311,6 +315,37 @@ export function AudioPlayer({
   const [localHasSelectedRate, setLocalHasSelectedRate] = useState(false);
   const playerSettings = settings ?? internalSettings;
   const displayHasSelectedRate = hasSelectedRate ?? localHasSelectedRate;
+
+  function cancelSentenceReplay() {
+    if (sentenceReplayRef.current) window.clearTimeout(sentenceReplayRef.current.timer);
+    sentenceReplayRef.current = null;
+  }
+
+  function replaySentence(sound: PlayerSound, startSeconds: number, complete: () => void) {
+    cancelSentenceReplay();
+    if (sentenceLoopDelayRef.current > 0) {
+      const replay = { sound, timer: 0, complete };
+      sentenceReplayRef.current = replay;
+      sound.pause();
+      sound.seek(startSeconds);
+      setPosition(startSeconds);
+      setDraftPosition(startSeconds);
+      onTimeChangeRef.current?.(startSeconds);
+      replay.timer = window.setTimeout(() => {
+        if (sentenceReplayRef.current !== replay) return;
+        sentenceReplayRef.current = null;
+        if (soundRef.current === sound && playModeRef.current === "sentence-loop" && isLatestAudioPlaybackRequest(sound)) {
+          requestAudioPlayback(sound);
+        }
+      }, sentenceLoopDelayRef.current);
+      return;
+    }
+    sound.seek(startSeconds);
+    setPosition(startSeconds);
+    setDraftPosition(startSeconds);
+    onTimeChangeRef.current?.(startSeconds);
+    requestAudioPlayback(sound);
+  }
 
   function updatePlayerSettings(nextSettings: Partial<AudioPlayerSettings>) {
     if (nextSettings.rate != null) {
@@ -354,11 +389,22 @@ export function AudioPlayer({
   }, [deferSentenceLoop]);
 
   useEffect(() => {
+    sentenceLoopDelayRef.current = sentenceLoopDelayMs;
+  }, [sentenceLoopDelayMs]);
+
+  useEffect(() => {
     stopAtSecondsRef.current = stopAtSeconds;
   }, [stopAtSeconds]);
 
   useEffect(() => {
     playModeRef.current = playerSettings.playMode;
+    const replay = sentenceReplayRef.current;
+    if (replay && playerSettings.playMode !== "sentence-loop") {
+      cancelSentenceReplay();
+      setIsPlaying(false);
+      onPlayingChangeRef.current?.(false);
+      replay.complete();
+    }
   }, [playerSettings.playMode]);
 
   useEffect(() => {
@@ -477,7 +523,7 @@ export function AudioPlayer({
         if (isDisposed || soundRef.current !== sound) {
           return;
         }
-        if (sound.playing() || pendingAudioPlaybackRequests.has(sound)) return;
+        if (sentenceReplayRef.current?.sound === sound || sound.playing() || pendingAudioPlaybackRequests.has(sound)) return;
 
         clearAudioPlaybackRequest(sound, true);
         setIsPlaying(false);
@@ -502,12 +548,12 @@ export function AudioPlayer({
 
         if (
           playModeRef.current === "sentence-loop" &&
-          !loopSegmentRef.current &&
           !deferSentenceLoopRef.current
         ) {
-          pendingAudioPlaybackRequests.set(sound, latestAudioPlaybackRequestId);
-          sound.seek(0);
-          sound.play();
+          replaySentence(sound, loopSegmentRef.current?.startSeconds ?? 0, () => {
+            if (loopSegmentRef.current) onStopAtEndRef.current?.();
+            else onEndedRef.current?.();
+          });
           return;
         }
 
@@ -534,6 +580,7 @@ export function AudioPlayer({
         return;
       }
 
+      cancelSentenceReplay();
       setIsPlaying(false);
       setIsPlayRequested(false);
       onPlayingChangeRef.current?.(false);
@@ -541,6 +588,7 @@ export function AudioPlayer({
 
     return () => {
       isDisposed = true;
+      cancelSentenceReplay();
       if (loadRetryTimer != null) {
         window.clearTimeout(loadRetryTimer);
       }
@@ -566,6 +614,7 @@ export function AudioPlayer({
 
   useEffect(() => {
     if (playbackId == null || !soundRef.current) return;
+    cancelSentenceReplay();
     const sound = soundRef.current;
     clearAudioPlaybackRequest(sound, true);
     sound.pause();
@@ -585,6 +634,7 @@ export function AudioPlayer({
     }
 
     setIsPlayRequested(true);
+    cancelSentenceReplay();
     stopAtSecondsRef.current = stopAtSeconds;
     if (playbackRange) {
       soundRef.current.seek(playbackRange.startSeconds);
@@ -598,6 +648,7 @@ export function AudioPlayer({
     if (!seekRequest || !soundRef.current) {
       return;
     }
+    cancelSentenceReplay();
 
     const boundedPosition = Math.min(Math.max(seekRequest.positionSeconds, playbackRange?.startSeconds ?? 0), playbackRange?.endSeconds ?? (duration || seekRequest.positionSeconds));
     soundRef.current.seek(boundedPosition);
@@ -618,6 +669,7 @@ export function AudioPlayer({
 
     let lastProgressUpdate = 0;
     const interval = window.setInterval(() => {
+      if (sentenceReplayRef.current) return;
       const currentPosition = soundRef.current?.seek();
       if (typeof currentPosition === "number" && !isScrubbing) {
         const activeLoopSegment = loopSegmentRef.current;
@@ -626,10 +678,7 @@ export function AudioPlayer({
           activeLoopSegment &&
           currentPosition >= activeLoopSegment.endSeconds
         ) {
-          soundRef.current?.seek(activeLoopSegment.startSeconds);
-          setPosition(activeLoopSegment.startSeconds);
-          setDraftPosition(activeLoopSegment.startSeconds);
-          onTimeChangeRef.current?.(activeLoopSegment.startSeconds);
+          if (soundRef.current) replaySentence(soundRef.current, activeLoopSegment.startSeconds, () => onStopAtEndRef.current?.());
           return;
         }
 
@@ -657,11 +706,14 @@ export function AudioPlayer({
   }, [isPlaying, isScrubbing, playbackRange?.startSeconds, playbackRange?.endSeconds]);
 
   function seekTo(nextPosition: number) {
+    const wasWaiting = Boolean(sentenceReplayRef.current);
+    cancelSentenceReplay();
     const boundedPosition = Math.min(Math.max(nextPosition, playbackRange?.startSeconds ?? 0), playbackRange?.endSeconds ?? (duration || nextPosition));
     soundRef.current?.seek(boundedPosition);
     setPosition(boundedPosition);
     setDraftPosition(boundedPosition);
     onTimeChangeRef.current?.(boundedPosition);
+    if (wasWaiting && soundRef.current) requestAudioPlayback(soundRef.current);
   }
 
   function startPlayback() {
@@ -675,6 +727,7 @@ export function AudioPlayer({
     }
 
     setIsPlayRequested(true);
+    cancelSentenceReplay();
     stopAtSecondsRef.current = stopAtSeconds;
     if (playbackRange && (position >= playbackRange.endSeconds || position < playbackRange.startSeconds)) seekTo(playbackRange.startSeconds);
     requestAudioPlayback(sound);
@@ -686,8 +739,11 @@ export function AudioPlayer({
       return;
     }
 
+    cancelSentenceReplay();
     clearAudioPlaybackRequest(sound, true);
     sound.pause();
+    setIsPlaying(false);
+    onPlayingChangeRef.current?.(false);
     setIsPlayRequested(false);
   }
 
@@ -775,6 +831,8 @@ export function AudioSettingsMenus({
   preserveModeSettings = false,
   settings,
   showRate = true,
+  triggerContent,
+  triggerLabel,
   variant = "full",
 }: {
   className?: string;
@@ -788,6 +846,8 @@ export function AudioSettingsMenus({
   preserveModeSettings?: boolean;
   settings: AudioPlayerSettings;
   showRate?: boolean;
+  triggerContent?: ReactNode;
+  triggerLabel?: string;
   variant?: "basic" | "full" | "rate-only" | "subtitle-only" | "listening-only" | "speaking-writing";
 }) {
   function exitPracticeMode(nextSettings: Partial<AudioPlayerSettings> = {}) {
@@ -917,7 +977,7 @@ export function AudioSettingsMenus({
   return (
     <div className={`player-settings exam-player-settings ${className}`}>
       {menuItems.map((menu, index) => (
-        <PlayerMenu dismissOnSelect={dismissOnSelect} key={`${variant}-${index}`} menu={menu} />
+        <PlayerMenu dismissOnSelect={dismissOnSelect} key={`${variant}-${index}`} menu={menu} triggerContent={triggerContent} triggerLabel={triggerLabel} />
       ))}
     </div>
   );
@@ -1027,11 +1087,13 @@ export function AudioPronunciationMenu({
   dismissOnSelect = false,
   onChange,
   value,
+  triggerContent,
 }: {
   className?: string;
   dismissOnSelect?: boolean;
   onChange: (pronunciationMode: AudioPronunciationMode) => void;
   value: AudioPronunciationMode;
+  triggerContent?: ReactNode;
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -1055,13 +1117,14 @@ export function AudioPronunciationMenu({
     <div className={`player-settings audio-pronunciation-control ${className}`}>
       <div className={`player-menu audio-pronunciation-menu ${dismissOnSelect && isOpen ? "is-open" : ""}`} ref={menuRef}>
         <button
+          aria-label={triggerContent ? "音标" : undefined}
           aria-expanded={dismissOnSelect ? isOpen : undefined}
           aria-haspopup="true"
           className="player-menu-trigger"
           onClick={dismissOnSelect ? () => setIsOpen((open) => !open) : undefined}
           type="button"
         >
-          <span>音标</span>
+          <span>{triggerContent ?? "音标"}</span>
         </button>
         <div className="player-menu-panel audio-pronunciation-menu-panel">
           <div aria-label="音标类型" className="audio-pronunciation-menu-group" role="group">
@@ -1094,8 +1157,12 @@ export function AudioPronunciationMenu({
 function PlayerMenu({
   dismissOnSelect = false,
   menu,
+  triggerContent,
+  triggerLabel,
 }: {
   dismissOnSelect?: boolean;
+  triggerContent?: ReactNode;
+  triggerLabel?: string;
   menu: {
     selectedLabel: string;
     selectedValue: string | number;
@@ -1125,6 +1192,8 @@ function PlayerMenu({
   return (
     <div className={`player-menu ${dismissOnSelect && isOpen ? "is-open" : ""}`} ref={menuRef}>
       <button
+        aria-label={triggerContent ? triggerLabel ?? menu.selectedLabel : undefined}
+        title={triggerContent ? triggerLabel : undefined}
         aria-expanded={dismissOnSelect ? isOpen : undefined}
         aria-haspopup="true"
         className="player-menu-trigger"
@@ -1139,7 +1208,7 @@ function PlayerMenu({
         }}
         type="button"
       >
-        <span>{menu.selectedLabel}</span>
+        <span>{triggerContent ?? menu.selectedLabel}</span>
       </button>
       <div className="player-menu-panel">
         {menu.options.map((option) => (

@@ -7,8 +7,9 @@ import { getBbcArticleById } from "@/lib/articles/bbc";
 import { parseBbcArticleDateFromTitle, parseBbcArticlePaste, splitBbcArticleParagraphs } from "@/lib/articles/bbc-article-upload";
 import type { BbcArticle, BbcVocabularyItem } from "@/lib/articles/bbc";
 import { extractBbcWaveText } from "@/lib/articles/bbc-paste-markup";
+import { normalizeBbcSyntaxSentenceEdits } from "@/lib/bbc-syntax-annotation-edits";
 import { buildAutomaticBbcSyntax } from "@/lib/articles/bbc-automatic-syntax";
-import { applyPastedBbcSyntax, type PastedBbcSyntaxSentence } from "@/lib/articles/bbc-pasted-syntax";
+import { applyPastedBbcSyntax, retainReviewedBbcSyntax, type PastedBbcSyntaxSentence } from "@/lib/articles/bbc-pasted-syntax";
 
 export const runtime = "nodejs";
 
@@ -399,9 +400,18 @@ export async function PUT(request: NextRequest) {
   catch (cause) { return NextResponse.json({ error: cause instanceof Error ? cause.message : "文章分析失败。" }, { status: 400 }); }
   if (typeof article === "string") return NextResponse.json({ error: article }, { status: 400 });
   if (!objectPath || !await hasR2Object(objectPath)) return NextResponse.json({ error: "请先上传本篇 MP3，完成时间轴分析后再发布。" }, { status: 400 });
-  const existingArticleResult = await supabase.from("bbc_uploaded_articles").select("article,published").eq("id", article.id).maybeSingle();
+  const existingArticleResult = await supabase.from("bbc_uploaded_articles").select("article,published,created_at").eq("id", article.id).maybeSingle();
   if (existingArticleResult.error) return NextResponse.json({ error: `保存前无法读取文章状态：${existingArticleResult.error.message}` }, { status: 503 });
   const existingArticle = existingArticleResult.data;
+  let previousSyntax = (existingArticle?.article as BbcArticle | undefined)?.syntaxSentences ?? [];
+  if (existingArticle && previousSyntax.length) {
+    const overrides = await supabase.from("bbc_article_syntax_overrides").select("sentences,updated_at").eq("article_id", article.id).maybeSingle();
+    if (overrides.error && !["42P01", "PGRST205"].includes(overrides.error.code)) return NextResponse.json({ error: "暂时无法读取已保存的语法修改，请稍后重试，避免丢失标注。" }, { status: 503 });
+    if (overrides.data && Date.parse(overrides.data.updated_at) >= Date.parse(existingArticle.created_at)) {
+      previousSyntax = normalizeBbcSyntaxSentenceEdits(overrides.data.sentences, previousSyntax) ?? previousSyntax;
+    }
+  }
+  article.syntaxSentences = retainReviewedBbcSyntax(article.syntaxSentences ?? [], previousSyntax);
   let timings = payload.timings;
   let durationMs = Number(payload.durationMs);
   if (!Array.isArray(timings)) {

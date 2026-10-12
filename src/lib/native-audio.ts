@@ -27,7 +27,11 @@ export class NativeAudio {
       if (this.status === "loaded" && this.duration() > 0) options.onload?.(0);
     });
     this.listen("playing", () => options.onplay?.(0));
-    this.listen("pause", () => options.onpause?.(0));
+    this.listen("pause", () => {
+      // Natural completion also fires pause; the end handler owns the next
+      // sentence or delayed replay and must retain its playback request.
+      if (!this.media.ended) options.onpause?.(0);
+    });
     this.listen("ended", () => options.onend?.(0));
     this.listen("error", () => {
       this.status = "unloaded";

@@ -754,6 +754,12 @@ export function NewConceptLessonPage({
   }
 
   function selectStudyMode(mode: LessonStudyMode) {
+    const sentenceNo = activeSentenceNoRef.current ?? activeSentenceNo ?? 1;
+    if (mode === studyMode) {
+      if (mode === "listening" && !isSentenceAudioPlaying) requestSentenceAutoPlay(sentenceNo);
+      return;
+    }
+    const continuePlayback = isMobileAudioViewport && isSentenceAudioPlaying;
     clearSpeakingPracticeTimers();
     setIsRetellingPractice(false);
     setStudyMode(mode);
@@ -768,7 +774,6 @@ export function NewConceptLessonPage({
         audioSettings.dictationMode !== "none" || audioSettings.speakingMode !== "none";
       updateAudioSettings({
         dictationMode: "none",
-        playMode: "sequential",
         speakingMode: "none",
         ...(isLeavingPractice ? { subtitleMode: "bilingual" as const } : {}),
       });
@@ -778,9 +783,9 @@ export function NewConceptLessonPage({
       setActiveSentenceNo(null);
     } else {
       setModeSelectionVersion((current) => current + 1);
-      activeSentenceNoRef.current = 1;
-      setActiveSentenceNo(1);
-      if (mode === "listening" && sentenceAudioUrls[0]) requestSentenceAutoPlay(1);
+      activeSentenceNoRef.current = sentenceNo;
+      setActiveSentenceNo(sentenceNo);
+      if ((mode === "listening" || continuePlayback) && sentenceAudioUrls[sentenceNo - 1]) requestSentenceAutoPlay(sentenceNo);
     }
   }
 
@@ -940,7 +945,7 @@ export function NewConceptLessonPage({
     setIsSentenceAudioPlaying(false);
     const speakingMode = audioSettingsRef.current.speakingMode;
 
-    if (speakingMode === "none") {
+    if (isMobileAudioViewport || speakingMode === "none") {
       playSentenceByMode(sentenceNo);
       return;
     }
@@ -1084,7 +1089,7 @@ export function NewConceptLessonPage({
   );
 
   return (
-    <section className={`stack bbc-article-page new-concept-lesson-page ${isRetellingPractice ? "article-retelling-active" : ""}`} ref={pageRef}>
+    <section className={`stack bbc-article-page new-concept-lesson-page ${isRetellingPractice ? "article-retelling-active" : ""}`} data-study-mode={studyMode} ref={pageRef}>
       <div className="page-heading bbc-article-hero new-concept-lesson-hero">
         <div className="bbc-article-hero-top">
           <Link className="bbc-detail-back-link" href={`/new-concept?book=${lesson.bookCode ?? "new-concept-1"}&edition=${audioEdition}&unit=${Math.ceil(lesson.lessonNo / 24)}`}>
@@ -1224,7 +1229,7 @@ export function NewConceptLessonPage({
             <div className={isMobileAudioViewport ? "bbc-full-audio new-concept-full-audio" : undefined}>
               <AudioPlayer
                 autoPlaySignal={mobileSentenceAudio ? sentenceAutoPlaySignals[mobileSentenceAudio.sentenceNo] ?? 0 : 0}
-                deferSentenceLoop={Boolean(mobileSentenceAudio && studyMode === "speaking" && audioSettings.speakingMode !== "none")}
+                sentenceLoopDelayMs={mobileSentenceAudio ? 1000 : 0}
                 playbackId={`${audioEdition}:${modeSelectionVersion}:${mobileSentenceAudio?.sentenceNo ?? "full"}`}
                 onPrevious={mobileSentenceAudio ? () => selectStudySentence(activeStudySentenceIndex, true) : undefined}
                 onNext={mobileSentenceAudio ? () => selectStudySentence(activeStudySentenceIndex + 2, true) : undefined}
@@ -1430,7 +1435,7 @@ export function NewConceptLessonPage({
                     <div className="bbc-speaking-training-status playing">
                       <span>{SPEAKING_MODE_LABELS[audioSettings.speakingMode]}</span>
                       <strong>正在播放</strong>
-                      <small>{SPEAKING_PLAYING_HINTS[audioSettings.speakingMode]}</small>
+                      <small>{isMobileAudioViewport ? audioSettings.playMode === "sentence-loop" ? "每遍结束停 1 秒，重播本句" : "播完自动进入下一句" : SPEAKING_PLAYING_HINTS[audioSettings.speakingMode]}</small>
                     </div>
                   ) : null}
                   {isMobileAudioViewport ? (

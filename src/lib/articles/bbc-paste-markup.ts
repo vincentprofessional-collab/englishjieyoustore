@@ -81,6 +81,7 @@ export function serializeBbcArticlePaste(article: BbcArticle) {
   return [
     `${article.id}-${article.title}${article.titleChinese ? ` ${article.titleChinese}` : ""}`,
     ...article.body.map((paragraph, index) => `${marked(paragraph, englishTerms, article.paragraphUnderlines?.[index]?.english)}\n${marked(article.chineseParagraphs?.[index] ?? "", chineseTerms, article.paragraphUnderlines?.[index]?.chinese)}`),
+    ...(article.syntaxSentences ?? []).filter((sentence) => sentence.status === "reviewed" && sentence.sourceAnnotation).map((sentence) => sentence.sourceAnnotation!),
     "词汇表",
     ...(article.vocabulary ?? []).map((item, index) => {
       const entry = /[\u3400-\u9fff]/.test(item.entry) ? item.entry : item.partOfSpeech || item.phonetic

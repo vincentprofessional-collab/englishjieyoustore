@@ -13,6 +13,9 @@ const source = ts.transpileModule(
 
 function harness() {
   let effects = [];
+  let elapsed = 0;
+  let timerId = 0;
+  const timers = new Map();
   const sounds = [];
   class Sound {
     constructor(options) {
@@ -60,7 +63,11 @@ function harness() {
       if (name === "@/lib/audio-pronunciation") return {};
       throw new Error(`Unexpected import: ${name}`);
     },
-    window: { matchMedia: () => ({ matches: true }), setTimeout, clearTimeout },
+    window: {
+      matchMedia: () => ({ matches: true }),
+      setTimeout(callback, delay) { const id = ++timerId; timers.set(id, { callback, at: elapsed + delay }); return id; },
+      clearTimeout(id) { timers.delete(id); },
+    },
     navigator: { userAgent: "Android Chrome" },
   });
   vm.runInContext(source, context);
@@ -81,8 +88,49 @@ function harness() {
     }
     return { sound, changes, play: findButton(tree, "播放"), pause: findButton(tree, "暂停"), unmount: () => cleanup.forEach((fn) => fn()) };
   }
-  return { mount };
+  function advance(milliseconds) {
+    elapsed += milliseconds;
+    for (const [id, timer] of timers) {
+      if (timer.at <= elapsed) { timers.delete(id); timer.callback(); }
+    }
+  }
+  return { mount, advance };
 }
+
+test("a mobile sentence loop waits a full second before replaying the same audio", () => {
+  const { mount, advance } = harness();
+  let ended = 0;
+  const player = mount({ settings: { playMode: "sentence-loop" }, sentenceLoopDelayMs: 1000, onEnded: () => ended++ });
+  player.play(); player.sound.emit("play"); player.sound.emit("end");
+  assert.equal(player.sound.plays, 1);
+  advance(999);
+  assert.equal(player.sound.plays, 1);
+  advance(1);
+  assert.equal(player.sound.plays, 2);
+  assert.equal(ended, 0, "looping must not advance the sentence");
+  player.unmount();
+});
+
+test("pausing in the one-second loop gap cancels the queued replay", () => {
+  const { mount, advance } = harness();
+  const player = mount({ compactControls: true, settings: { playMode: "sentence-loop" }, sentenceLoopDelayMs: 1000 });
+  player.play(); player.sound.emit("play"); player.sound.emit("end");
+  player.pause(); advance(1000);
+  assert.equal(player.sound.plays, 1);
+  assert.equal(player.changes.at(-1), false);
+  player.unmount();
+});
+
+test("another player or an unmount cannot leave a stale sentence replay behind", () => {
+  const { mount, advance } = harness();
+  const first = mount({ settings: { playMode: "sentence-loop" }, sentenceLoopDelayMs: 1000 });
+  first.play(); first.sound.emit("play"); first.sound.emit("end");
+  const next = mount(); next.play(); advance(1000);
+  assert.equal(first.sound.plays, 1);
+  next.sound.emit("play"); next.unmount(); first.unmount();
+  advance(1000);
+  assert.equal(first.sound.plays, 1);
+});
 
 test("a second play event from the current audio is not mistaken for stale playback", () => {
   const { mount } = harness();
@@ -172,8 +220,8 @@ test("Baidu's native backend starts within the tap and reads duration from metad
     { compilerOptions: { module: ts.ModuleKind.CommonJS } },
   ).outputText;
   vm.runInNewContext(nativeSource, { exports, Audio: Media, document: new EventTarget() });
-  let loaded = 0;
-  const sound = new exports.NativeAudio({ src: ["/private-bbc.mp3"], onload: () => loaded++ });
+  let loaded = 0, paused = 0, ended = 0;
+  const sound = new exports.NativeAudio({ src: ["/private-bbc.mp3"], onload: () => loaded++, onpause: () => paused++, onend: () => ended++ });
   sound.seek(7);
   sound.play();
   const media = sound._sounds[0]._node;
@@ -185,6 +233,14 @@ test("Baidu's native backend starts within the tap and reads duration from metad
   assert.equal(loaded, 1, "canplaythrough is not required for the duration");
   assert.equal(sound.duration(), 84);
   assert.equal(media.currentTime, 7);
+  media.ended = true;
+  media.dispatchEvent(new Event("pause"));
+  media.dispatchEvent(new Event("ended"));
+  assert.equal(paused, 0, "natural completion must not cancel the loop playback request");
+  assert.equal(ended, 1);
+  media.ended = false;
+  media.dispatchEvent(new Event("pause"));
+  assert.equal(paused, 1, "explicit pause still stops playback");
   sound.unload();
   const nextSound = new exports.NativeAudio({ src: ["/next-sentence.mp3"], onload: () => {} }, media);
   nextSound.seek(0);

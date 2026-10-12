@@ -4,6 +4,9 @@ import { readFileSync } from "node:fs";
 import test from "node:test";
 import { runInNewContext } from "node:vm";
 import ts from "typescript";
+import React from "react";
+import * as jsxRuntime from "react/jsx-runtime";
+import { renderToStaticMarkup } from "react-dom/server";
 
 function loadFunctions(path, names, globals, prefix = "") {
   const source = ts.createSourceFile(path, readFileSync(new URL(path, import.meta.url), "utf8"), ts.ScriptTarget.Latest, true);
@@ -330,4 +333,26 @@ test("BBC audio alignment keeps the final clip through the audio tail when recog
   );
   assert.equal(result.timings[0].endMs, 5_000);
   assert.deepEqual(Array.from(result.reviewSentenceNos), [1]);
+});
+
+test("BBC word highlighting covers both pieces of spoken contractions", () => {
+  const exports = {};
+  const code = ts.transpileModule(readFileSync(new URL("../src/components/bbc-syntax-sentence.tsx", import.meta.url), "utf8"), {
+    compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022, jsx: ts.JsxEmit.ReactJSX },
+  }).outputText;
+  runInNewContext(code, { exports, require: (specifier) => {
+    if (specifier === "react") return React;
+    if (specifier === "react/jsx-runtime") return jsxRuntime;
+    if (specifier.endsWith(".css")) return { __esModule: true, default: new Proxy({}, { get: (_, key) => String(key) }) };
+    throw new Error(`Unexpected dependency: ${specifier}`);
+  } });
+  const data = { text: "It's a topic.", tokens: [
+    { text: "It", pos: "PRON", start: 0, end: 2 }, { text: "'s", pos: "AUX", start: 2, end: 4 },
+    { text: "a", pos: "DET", start: 5, end: 6 }, { text: "topic", pos: "NOUN", start: 7, end: 12 },
+    { text: ".", pos: "PUNCT", start: 12, end: 13 },
+  ], level1: [], level2: [], status: "reviewed" };
+  const render = (activeWordIndex) => renderToStaticMarkup(React.createElement(exports.BbcSyntaxSentence, { data, activeWordIndex, sentenceNo: 1, vocabularyWordIndexes: new Set(), waveTerms: [] }));
+  assert.equal((render(0).match(/wordText activePlaybackWord/g) ?? []).length, 2);
+  assert.equal((render(1).match(/wordText activePlaybackWord/g) ?? []).length, 1);
+  assert.equal((render(-1).match(/wordText activePlaybackWord/g) ?? []).length, 0);
 });

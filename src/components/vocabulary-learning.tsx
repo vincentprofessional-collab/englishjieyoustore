@@ -1360,6 +1360,9 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
   const [setupMode, setSetupMode] = useState<"single" | "pk">("single");
   const [pkSetupBook, setPkSetupBook] = useState<LearningBookKey>(initialBook === "生词本" ? "小学" : initialBook);
   const [studyPaused, setStudyPaused] = useState(false);
+  const [browseCountdownPaused, setBrowseCountdownPaused] = useState(false);
+  const [browseSecondsRemaining, setBrowseSecondsRemaining] = useState<number | null>(null);
+  const browseCountdownPausedRef = useRef(false);
   const [settingsDraft, setSettingsDraft] = useState<StudySettingsDraft>(() => toSettingsDraft(DEFAULT_STUDY_SETTINGS));
   const reactionOptionsRef = useRef<HTMLDivElement | null>(null);
   const [favoriteWords, setFavoriteWords] = useState<FavoriteLearningWord[]>([]);
@@ -1868,6 +1871,51 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
     if (currentRoundKey) setRevealedRoundKey(currentRoundKey);
   }, [currentRoundKey]);
 
+  const waitForBrowseTime = useCallback((milliseconds: number, token: number, signal: AbortSignal) => new Promise<void>((resolve) => {
+    let remaining = milliseconds;
+    let previous = performance.now();
+    setBrowseSecondsRemaining(Math.ceil(remaining / 1000));
+    const finish = () => {
+      window.clearInterval(timer);
+      signal.removeEventListener("abort", finish);
+      resolve();
+    };
+    const timer = window.setInterval(() => {
+      const now = performance.now();
+      if (!browseCountdownPausedRef.current) remaining = Math.max(0, remaining - (now - previous));
+      previous = now;
+      if (roundTokenRef.current !== token || signal.aborted) { finish(); return; }
+      setBrowseSecondsRemaining(Math.ceil(remaining / 1000));
+      if (remaining === 0 && !browseCountdownPausedRef.current) finish();
+    }, 100);
+    if (signal.aborted) finish();
+    else signal.addEventListener("abort", finish, { once: true });
+  }), []);
+
+  function toggleBrowseCountdown() {
+    browseCountdownPausedRef.current = !browseCountdownPausedRef.current;
+    setBrowseCountdownPaused(browseCountdownPausedRef.current);
+  }
+
+  useEffect(() => {
+    if (!browseMode) { browseCountdownPausedRef.current = false; setBrowseCountdownPaused(false); setBrowseSecondsRemaining(null); }
+  }, [browseMode]);
+
+  useEffect(() => {
+    if (!browseMode || !studyReady) return;
+    function handleBrowseKeyboard(event: KeyboardEvent) {
+      if (event.code !== "Space" && event.key !== " ") return;
+      const target = event.target;
+      if (event.isComposing || event.repeat || event.altKey || event.ctrlKey || event.metaKey
+        || (target instanceof HTMLElement && (target.isContentEditable || ["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName))
+          && !target.closest(".vocabulary-learning-spelling-inline-input"))) return;
+      event.preventDefault();
+      toggleBrowseCountdown();
+    }
+    document.addEventListener("keydown", handleBrowseKeyboard);
+    return () => document.removeEventListener("keydown", handleBrowseKeyboard);
+  }, [browseMode, studyReady]);
+
   useEffect(() => {
     setDetailPayload(null);
     setDetailLoading(Boolean(currentWord));
@@ -1963,6 +2011,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
 
   useEffect(() => {
     const token = ++roundTokenRef.current;
+    const countdownController = new AbortController();
     stopLearningAudio();
     spellingPlaybackPromiseRef.current = null;
     spellingClassificationPendingRef.current = false;
@@ -1988,8 +2037,9 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
       if (modeIndex === 1) {
         setPhase("playing");
         void playWordAudio(currentWord, voice, 1);
-        await new Promise<void>((resolve) => window.setTimeout(resolve, reactionDelay));
-        if (roundTokenRef.current !== token) return;
+        if (browseMode) await waitForBrowseTime(reactionDelay, token, countdownController.signal);
+        else await new Promise<void>((resolve) => window.setTimeout(resolve, reactionDelay));
+        if ((roundTokenRef.current !== token || countdownController.signal.aborted)) return;
         revealCurrentRound();
         void playWordAudio(currentWord, voice, 1);
         setPhase("awaiting");
@@ -1999,26 +2049,26 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
       if (browseMode) {
         if (modeIndex === 3) {
           setPhase("awaiting");
-          await new Promise<void>((resolve) => window.setTimeout(resolve, reactionDelay));
-          if (roundTokenRef.current === token) revealBrowseSpelling(token);
+          await waitForBrowseTime(reactionDelay, token, countdownController.signal);
+          if (roundTokenRef.current === token && !countdownController.signal.aborted) revealBrowseSpelling(token);
           return;
         }
         if (modeIndex === 0) {
           setPhase("playing");
           await playWordAudio(currentWord, voice, 1);
-          if (roundTokenRef.current !== token) return;
-          await new Promise<void>((resolve) => window.setTimeout(resolve, reactionDelay));
-          if (roundTokenRef.current !== token) return;
+          if ((roundTokenRef.current !== token || countdownController.signal.aborted)) return;
+          await waitForBrowseTime(reactionDelay, token, countdownController.signal);
+          if ((roundTokenRef.current !== token || countdownController.signal.aborted)) return;
           revealCurrentRound();
           setPhase("playing");
           void playWordAudio(currentWord, voice, 1).finally(() => {
-            if (roundTokenRef.current === token) setPhase("awaiting");
+            if (roundTokenRef.current === token && !countdownController.signal.aborted) setPhase("awaiting");
           });
           return;
         }
         setPhase("awaiting");
-        await new Promise<void>((resolve) => window.setTimeout(resolve, reactionDelay));
-        if (roundTokenRef.current !== token) return;
+        await waitForBrowseTime(reactionDelay, token, countdownController.signal);
+        if ((roundTokenRef.current !== token || countdownController.signal.aborted)) return;
         revealCurrentRound();
         return;
       }
@@ -2026,9 +2076,9 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
       if (modeIndex === 0) {
         setPhase("playing");
         await playWordAudio(currentWord, voice, 1);
-        if (roundTokenRef.current !== token) return;
+        if ((roundTokenRef.current !== token || countdownController.signal.aborted)) return;
         await new Promise<void>((resolve) => window.setTimeout(resolve, reactionDelay));
-        if (roundTokenRef.current !== token) return;
+        if ((roundTokenRef.current !== token || countdownController.signal.aborted)) return;
         revealCurrentRound();
         void playWordAudio(currentWord, voice, 1);
         setPhase("awaiting");
@@ -2038,17 +2088,18 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
       if (modeIndex === 2) {
         setPhase("awaiting");
         await new Promise<void>((resolve) => window.setTimeout(resolve, reactionDelay));
-        if (roundTokenRef.current !== token || recordingRef.current) return;
+        if ((roundTokenRef.current !== token || countdownController.signal.aborted) || recordingRef.current) return;
         revealSpeakingDetails(token);
         return;
       }
 
-      if (roundTokenRef.current !== token) return;
+      if ((roundTokenRef.current !== token || countdownController.signal.aborted)) return;
       setPhase("awaiting");
     };
 
     void startRound();
-  }, [browseMode, canRunRound, currentProgress.completed, currentSettings.reactionSeconds, currentWord, modeIndex, replaceRecordingAudio, revealBrowseSpelling, revealCurrentRound, revealSpeakingDetails, roundNonce, studyReady, voice]);
+    return () => countdownController.abort();
+  }, [browseMode, canRunRound, currentProgress.completed, currentSettings.reactionSeconds, currentWord, modeIndex, replaceRecordingAudio, revealBrowseSpelling, revealCurrentRound, revealSpeakingDetails, roundNonce, studyReady, voice, waitForBrowseTime]);
 
   const selectWord = useCallback((nextSelection: BookSelectionKey) => {
     if (advancePending) return;
@@ -2323,14 +2374,15 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
   }, [advancePending, browseMode, currentSettings, currentWord, modeIndex, moveToNextWord, pageVisible, progress, recordDailyActivity, selectedBook]);
 
   useEffect(() => {
-    if (!browseMode || !pageVisible || !studyReady || !currentWord || !currentRoundRevealed || advancePending || spellingPlaybackPending
+    if (!browseMode || !pageVisible || !studyReady || !currentWord || !currentRoundRevealed || detailLoading || advancePending || spellingPlaybackPending
       || (modeIndex <= 1 && phase === "playing")) return;
     const token = roundTokenRef.current;
-    const timer = window.setTimeout(() => {
-      if (roundTokenRef.current === token) commitBrowse();
-    }, 2000);
-    return () => window.clearTimeout(timer);
-  }, [advancePending, browseMode, commitBrowse, currentRoundRevealed, currentWord, modeIndex, pageVisible, phase, roundNonce, spellingPlaybackPending, studyReady]);
+    const controller = new AbortController();
+    void waitForBrowseTime(2000, token, controller.signal).then(() => {
+      if (!controller.signal.aborted && roundTokenRef.current === token) commitBrowse();
+    });
+    return () => controller.abort();
+  }, [advancePending, browseMode, commitBrowse, currentRoundRevealed, currentWord, detailLoading, modeIndex, pageVisible, phase, roundNonce, spellingPlaybackPending, studyReady, waitForBrowseTime]);
 
   const commitOutcome = useCallback(
     (
@@ -2702,7 +2754,9 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
       <VocabularyShareButton entry={detailEntry} />
     </>
   ) : null;
-  const learningCategoryBar = browseMode ? null : (
+  const learningCategoryBar = browseMode ? <button aria-keyshortcuts="Space" aria-pressed={browseCountdownPaused} className="vocabulary-browse-countdown" onClick={toggleBrowseCountdown} type="button">
+    {browseCountdownPaused ? "倒计时已暂停 · 空格继续" : `${currentRoundRevealed ? "详情停留" : "反应时间"} ${browseSecondsRemaining ?? (currentRoundRevealed ? 2 : currentSettings.reactionSeconds[progressCategoryForMode(modeIndex)])} 秒 · 空格暂停`}
+  </button> : (
     <div className="vocabulary-learning-bottom-bar">
       <div className="vocabulary-learning-bottom-actions">
         <button

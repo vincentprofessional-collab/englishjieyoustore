@@ -87,10 +87,11 @@ export default async function ArticlePage({
     const supabase = await createServerSupabaseClient();
     const { data: syntaxOverride } = await supabase
       .from("bbc_article_syntax_overrides")
-      .select("sentences")
+      .select("sentences,updated_at")
       .eq("article_id", article.id)
       .maybeSingle();
-    if (syntaxOverride) {
+    if (syntaxOverride && (builtinArticle || !article.contentUpdatedAt || !syntaxOverride.updated_at
+      || Date.parse(syntaxOverride.updated_at) >= Date.parse(article.contentUpdatedAt))) {
       syntaxSentences = normalizeBbcSyntaxSentenceEdits(syntaxOverride.sentences, canonicalSyntaxSentences) ?? canonicalSyntaxSentences;
     }
   }

@@ -16,6 +16,8 @@ export type BbcSyntaxSentenceData = {
   level4?: BbcSyntaxSpan[];
   level5?: BbcSyntaxSpan[];
   status: "reviewed" | "draft";
+  notes?: string[];
+  sourceAnnotation?: string;
 };
 export type BbcSyntaxDisplayMode = "all" | "main" | "none";
 export type BbcSyntaxTokenRange = { start: number; end: number };
@@ -150,9 +152,6 @@ export function BbcSyntaxSentence({
   const waved = waveRanges ? new Set(data.tokens.flatMap((token, index) => waveRanges.some((range) => range.start < token.end && range.end > token.start) ? [index] : [])) : phraseIndexes(data.tokens, waveTerms);
   const lexicalWords = [...data.text.matchAll(/[A-Za-z]+(?:['’-][A-Za-z]+)*/g)];
   const activeWordMatch = lexicalWords[activeWordIndex];
-  const activeTokenIndex = activeWordMatch
-    ? data.tokens.findIndex((token) => token.start < activeWordMatch.index! + activeWordMatch[0].length && token.end > activeWordMatch.index!)
-    : -1;
   const staticTracks = syntaxTracks(data, displayMode);
   const sentenceRef = useRef<HTMLDivElement>(null);
 
@@ -275,6 +274,7 @@ export function BbcSyntaxSentence({
   }
   const hasSentenceInlineAnnotations = inlineMarksByToken.size > 0;
   const words = data.tokens.map((token, index) => {
+    const activePlayback = Boolean(activeWordMatch && token.start < activeWordMatch.index! + activeWordMatch[0].length && token.end > activeWordMatch.index!);
     const nextToken = data.tokens[index + 1];
     const sourceGapAfter = nextToken ? data.text.slice(token.end, nextToken.start) : "";
     const gapAfter = Math.min((sourceGapAfter.match(/[\t ]/g) ?? []).length, 4) * 0.25;
@@ -317,7 +317,7 @@ export function BbcSyntaxSentence({
     });
     return (
       <span className={`${styles.word} ${highlighted ? styles.highlight : ""} ${waved.has(index) ? styles.wave : ""}`} data-token-index={index} key={index} style={gapAfter ? { marginRight: `${gapAfter}em` } : undefined}>
-        <span className={`${styles.wordText} ${activeTokenIndex === index ? styles.activePlaybackWord : ""}`} data-word-text>{token.text}</span>
+        <span className={`${styles.wordText} ${activePlayback ? styles.activePlaybackWord : ""}`} data-word-text>{token.text}</span>
         {showPos ? <span className={`${styles.pos} ${token.pos === "PUNCT" || lexical.length === 0 ? styles.posPlaceholder : ""} ${onPosTokenClick && token.pos !== "PUNCT" && lexical.length > 0 ? styles.editableMark : ""}`} onClick={() => onPosTokenClick?.(index)}>{token.pos === "PUNCT" || lexical.length === 0 ? "　" : token.posLabel ?? POS_LABELS[token.pos] ?? token.pos}</span> : null}
         {hasSentenceInlineAnnotations && showPos ? (
           <span className={styles.annotationPosTrack}>
@@ -371,6 +371,7 @@ export function BbcSyntaxSentence({
       <div className={`${styles.meta} ${embedded ? styles.embeddedMeta : ""}`}><span>#{sentenceNo}</span></div>
       <span className={styles.screenReader}>{data.text}</span>
       <div aria-hidden="true" className={styles.sentence} onMouseUp={handleSelection} ref={sentenceRef}>{words}</div>
+      {data.notes?.length && displayMode !== "none" ? <p className={styles.omissionNotes} lang="zh-CN">{data.notes.join("；")}</p> : null}
       {translation ? <p className={styles.translation} lang="zh-CN">{translation}</p> : null}
     </div>
   );

@@ -58,6 +58,7 @@ export type BbcArticle = {
   subtitleUrl?: string;
   syntaxSentences?: BbcSyntaxSentenceData[];
   audioDurationMs?: number;
+  contentUpdatedAt?: string;
   paragraphUnderlines?: { english: { start: number; end: number }[]; chinese: { start: number; end: number }[] }[];
   title: string;
   titleChinese?: string;

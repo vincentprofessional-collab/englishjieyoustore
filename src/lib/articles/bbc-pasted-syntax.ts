@@ -5,6 +5,8 @@ export type PastedBbcSyntaxSentence = {
   text: string;
   items: { term: string; description: string }[];
   main: string;
+  summaries?: { label: string; text: string }[];
+  source?: string;
 };
 
 const SECTION_HEADING = /^##\s*句\s*(\d+)\s*$/;
@@ -21,6 +23,9 @@ function canonicalRole(value: string) {
   if (value === "主") return "主语";
   if (value === "谓") return "谓语";
   if (value === "宾") return "宾语";
+  if (value === "系") return "系动词";
+  if (value === "表") return "表语";
+  if (value === "形式主") return "形式主语";
   return value;
 }
 
@@ -39,8 +44,8 @@ function sentenceWordKey(value: string) {
 
 function posCode(description: string) {
   const value = description.trim();
-  if (/助动词|情态动词/.test(value)) return "AUX";
-  if (/不定式符号|小品词/.test(value)) return "PART";
+  if (/助动词|情态动词|系动词/.test(value)) return "AUX";
+  if (/不定式符号|小品词|引导词/.test(value)) return "PART";
   if (/专有名词|头衔专有名词/.test(value)) return "PROPN";
   if (/物主代词/.test(value)) return "DET";
   if (/连接代词|疑问代词|代词/.test(value)) return "PRON";
@@ -102,6 +107,8 @@ function appendSummarySpans(text: string, tokens: BbcSyntaxSentenceData["tokens"
 
 export function parsePastedBbcSyntaxBlock(value: string) {
   const normalized = value.replace(/^\uFEFF/, "").replace(/\r\n?/g, "\n");
+  const numbered = parseNumberedSyntax(normalized);
+  if (numbered) return numbered;
   const title = SYNTAX_TITLE.exec(normalized);
   const heading = /^##\s*句\s*\d+\s*$/m.exec(normalized);
   const start = title?.index ?? heading?.index;
@@ -154,6 +161,8 @@ export function applyPastedBbcSyntax(
     throw new Error(`第 ${annotation.sentenceNo} 句语法标注中的英文原句与正文不一致，请核对输入框内容。`);
   }
 
+  if (annotation.summaries) return applyNumberedSyntax(automatic, annotation);
+
   const tokens = automatic.tokens.map((token) => ({ ...token }));
   const componentRows: { label: string; start: number; end: number }[] = [];
   let cursor = 0;
@@ -190,6 +199,188 @@ export function applyPastedBbcSyntax(
     // quietly mix them with the automatic parser when one supplied layer is empty.
     level1: summarySpans,
     level2,
+    level3: [], level4: [], level5: [],
     status: "reviewed",
   };
+}
+
+// Numbered uploads keep the teacher's wording, including contractions and
+// omitted words, instead of asking the automatic parser to reinterpret it.
+function wordParts(value: string): string[] {
+  return (normalizeText(value).toLowerCase().match(/[a-z0-9]+(?:'[a-z]+)?|'(?:s|ve|re|d|ll|m)\b/g) ?? []).flatMap((word) => {
+    if (word === "n't") return ["not"];
+    if (/n't$/.test(word)) return [word.slice(0, -3) === "ca" ? "can" : word.slice(0, -3) === "wo" ? "will" : word.slice(0, -3), "not"];
+    const contraction = /^(.*?)('(s|ve|re|d|ll|m))$/.exec(word);
+    return contraction ? [contraction[1], contraction[2]].filter(Boolean) : [word];
+  });
+}
+
+function sameWord(source: string, target: string) {
+  const aliases: Record<string, string[]> = { "'s": ["is", "has"], "'ve": ["have"], "'re": ["are"], "'d": ["had", "would"], "'ll": ["will"], "'m": ["am"] };
+  return source === target || aliases[source]?.includes(target) || aliases[target]?.includes(source);
+}
+
+type TokenRange = { start: number; end: number };
+type PhraseMatch = TokenRange & { indexes: number[]; gaps: number };
+
+function phraseMatches(tokens: BbcSyntaxSentenceData["tokens"], phrase: string, scope: TokenRange, gaps = false): PhraseMatch[] {
+  const target = wordParts(phrase.replace(/[（(][^）)]*[）)]/g, ""));
+  if (!target.length) return [];
+  const words = tokens.flatMap((token, index) => token.pos === "PUNCT" || index < scope.start || index >= scope.end
+    ? [] : wordParts(token.text).map((word) => ({ word, index })));
+  const matches: PhraseMatch[] = [];
+  for (let start = 0; start < words.length; start++) {
+    if (!sameWord(words[start].word, target[0])) continue;
+    let cursor = start;
+    const indexes: number[] = [];
+    for (const part of target) {
+      if (gaps) while (cursor < words.length && !sameWord(words[cursor].word, part)) cursor++;
+      if (cursor >= words.length || !sameWord(words[cursor].word, part)) break;
+      indexes.push(words[cursor++].index);
+    }
+    if (indexes.length === target.length) matches.push({ start: indexes[0], end: indexes.at(-1)! + 1, indexes: [...new Set(indexes)], gaps: cursor - start - target.length });
+  }
+  return matches.sort((a, b) => a.gaps - b.gaps || a.start - b.start);
+}
+
+function markedComponents(value: string) {
+  return [...value.matchAll(/([^【】]+?)【([^】]+)】/g)].map((match) => ({ phrase: match[1].trim(), label: canonicalRole(match[2].trim()) }));
+}
+
+function runsForMatch(match: PhraseMatch, tokens: BbcSyntaxSentenceData["tokens"], label: string): BbcSyntaxSpan[] {
+  // A clause is one enclosing span; separated verb forms stay separated so an
+  // intervening adverb can retain the teacher's own adverbial annotation.
+  if (/从句|真正主语/.test(label)) return [{ label, start: match.start, end: match.end }];
+  const runs: BbcSyntaxSpan[] = [];
+  for (const index of match.indexes) {
+    const previous = runs.at(-1);
+    if (previous && tokens.slice(previous.end, index).every((token) => token.pos === "PUNCT")) previous.end = index + 1;
+    else runs.push({ label, start: index, end: index + 1 });
+  }
+  return runs;
+}
+
+function applyNumberedSyntax(automatic: BbcSyntaxSentenceData, annotation: PastedBbcSyntaxSentence): BbcSyntaxSentenceData {
+  const tokens = automatic.tokens.map((token) => ({ ...token }));
+  const whole = { start: 0, end: tokens.length - (tokens.at(-1)?.pos === "PUNCT" ? 1 : 0) };
+  let cursor = 0;
+  const labelled = new Set<number>();
+  for (const item of annotation.items) {
+    const match = phraseMatches(tokens, item.term, { start: cursor, end: whole.end })[0];
+    const code = posCode(item.description);
+    if (!match || !code) throw new Error(`第 ${annotation.sentenceNo} 句的词性标注“${item.term}：${item.description}”无法匹配原句。`);
+    cursor = match.end;
+    for (const index of match.indexes) {
+      Object.assign(tokens[index], { pos: code, posLabel: posLabel(item.description) });
+      labelled.add(index);
+    }
+  }
+  if (tokens.some((token, index) => token.pos !== "PUNCT" && index < whole.end && !labelled.has(index))) {
+    throw new Error(`第 ${annotation.sentenceNo} 句的词性标注不完整，请逐词标注。`);
+  }
+  const summaries = annotation.summaries ?? [];
+  const layers: BbcSyntaxSpan[][] = [[], [], [], [], []];
+  const notes: string[] = [];
+  const contexts: { label: string; scope: TokenRange; depth: number }[] = [];
+  let mainStart = 0;
+  const leadingClause = summaries.map((summary) => summary.label.match(/^(While|if|whilst|when)/i)?.[1]).filter(Boolean)
+    .map((connective) => tokens.findIndex((token) => token.text.toLowerCase() === connective!.toLowerCase()))
+    .find((index) => index >= 0 && index <= 3);
+  const leadingEnd = leadingClause === undefined ? -1 : tokens.findIndex((token, index) => index > leadingClause && token.text === ",");
+
+  for (const summary of summaries) {
+    const components = markedComponents(summary.text);
+    const nested = !/^(?:主干|并列分句主干)$/.test(summary.label);
+    let scope = whole;
+    let depth = 0;
+    let clauseLabel = summary.label.replace(/主干$/, "").replace(/（省略）|\(省略\)/g, "");
+    if (nested) {
+      const kind = /主语从句/.test(clauseLabel) ? "真正主语" : /表语从句/.test(clauseLabel) ? "表语从句"
+        : /定语从句/.test(clauseLabel) ? "定语从句" : /宾语从句/.test(clauseLabel) ? "宾语从句" : clauseLabel;
+      const parent = layers.flatMap((spans, index) => spans.filter((span) => span.label === kind).map((span) => ({ span, depth: index + 1 })))
+        .find(({ span }) => !contexts.some((context) => context.label === clauseLabel && context.scope.start === span.start));
+      if (parent) { scope = parent.span; depth = parent.depth; }
+      else {
+        const connective = summary.label.match(/^(While|if|whilst|when)/i)?.[1];
+        const subject = components.find((component) => /主语|引导词/.test(component.label));
+        const anchor = summary.label.match(/^([a-z]+)(?:后|的)/i)?.[1];
+        const anchorIndex = anchor ? tokens.findIndex((token) => token.text.toLowerCase() === anchor.toLowerCase()) : -1;
+        const start = connective ? tokens.findIndex((token) => token.text.toLowerCase() === connective.toLowerCase())
+          : subject ? phraseMatches(tokens, subject.phrase, { start: Math.max(0, anchorIndex + 1), end: whole.end })
+            .find((match) => !contexts.some((context) => context.label === clauseLabel && context.scope.start === match.start))?.start : undefined;
+        if (start === undefined || start < 0) throw new Error(`第 ${annotation.sentenceNo} 句的“${summary.label}”无法定位。`);
+        const clauseStart = !connective && /^(that|which)$/i.test(tokens[start - 1]?.text ?? "") ? start - 1 : start;
+        scope = { start: clauseStart, end: start === leadingClause && leadingEnd > start ? leadingEnd : whole.end };
+        const enclosing = contexts.filter((context) => scope.start >= context.scope.start && scope.end <= context.scope.end)
+          .sort((a, b) => b.depth - a.depth)[0];
+        depth = enclosing?.depth ?? 0;
+        clauseLabel = /定语从句/.test(clauseLabel) ? "定语从句" : /宾语从句/.test(clauseLabel) ? "宾语从句" : clauseLabel.replace(/^(While|if|whilst|when)/i, "");
+        layers[depth].push({ label: clauseLabel, ...scope });
+        depth++;
+      }
+      contexts.push({ label: summary.label.replace(/主干$/, "").replace(/（省略）|\(省略\)/g, ""), scope, depth });
+    }
+    if (depth > 4) throw new Error(`第 ${annotation.sentenceNo} 句的标注嵌套超过五层。`);
+    let subjectStart = nested ? scope.start : mainStart;
+    for (const component of components) {
+      const omitted = [...component.phrase.matchAll(/[（(]([^）)]+)[）)]/g)].map((match) => match[1]);
+      for (const word of omitted) notes.push(`省略${/主语/.test(component.label) ? "主语" : "词语"}：${word}`);
+      if (!wordParts(component.phrase.replace(/[（(][^）)]*[）)]/g, "")).length) continue;
+      let matches = phraseMatches(tokens, component.phrase, scope, true);
+      if (!nested && leadingClause !== undefined && leadingEnd >= 0) matches = matches.filter((match) => match.end <= leadingClause || match.start > leadingEnd);
+      if (/主语|形式主语/.test(component.label)) matches = matches.filter((match) => match.start >= subjectStart);
+      else if (/谓语|系动词|宾语|宾补|表语|真正主语/.test(component.label)) {
+        const afterSubject = matches.filter((match) => match.start >= subjectStart);
+        if (afterSubject.length) matches = afterSubject;
+      }
+      const match = matches[0];
+      if (!match) throw new Error(`第 ${annotation.sentenceNo} 句的句子成分“${component.phrase}【${component.label}】”无法匹配原句。`);
+      if (/主语|形式主语/.test(component.label)) subjectStart = match.start;
+      layers[depth].push(...runsForMatch(match, tokens, component.label));
+      if (!nested) mainStart = Math.max(mainStart, match.end);
+    }
+  }
+  for (const spans of layers) spans.sort((a, b) => a.start - b.start || b.end - a.end);
+  return { ...automatic, tokens, level1: layers[0], level2: layers[1], level3: layers[2], level4: layers[3], level5: layers[4], notes: [...new Set(notes)], sourceAnnotation: annotation.source, status: "reviewed" };
+}
+
+function parseNumberedSyntax(normalized: string) {
+  const headers = [...normalized.matchAll(/^(\d+)[.．、]\s*([A-Za-z].+)$/gm)];
+  const marked = headers.map((header, index) => ({ header, section: normalized.slice(header.index, headers[index + 1]?.index ?? normalized.length) }))
+    .filter(({ section }) => /^(?:>\s*)?(?:主干|.*从句主干)\s*[:：]/m.test(section) && /【[^】]+】/.test(section));
+  if (!marked.length) return null;
+  const firstHeader = marked[0].header.index!;
+  const title = SYNTAX_TITLE.exec(normalized.slice(0, firstHeader));
+  const start = title && !normalized.slice(title.index + title[0].length, firstHeader).trim() ? title.index : firstHeader;
+  const remainder = normalized.slice(start);
+  const following = FOLLOWING_CONTENT_HEADING.exec(remainder);
+  const end = following ? start + following.index : normalized.length;
+  const sentences: PastedBbcSyntaxSentence[] = [];
+  for (const { header, section } of marked) {
+    if (header.index! >= end) continue;
+    const source = section.slice(0, Math.min(section.length, end - header.index!)).trim();
+    const items: PastedBbcSyntaxSentence["items"] = [];
+    const summaries: NonNullable<PastedBbcSyntaxSentence["summaries"]> = [];
+    for (const rawLine of source.split("\n").slice(1)) {
+      const line = rawLine.trim().replace(/^>\s*/, "");
+      if (!line || /^翻译\s*[:：]/.test(line)) continue;
+      for (const part of line.split(/[；;]/)) {
+        const separator = part.search(/[：:]/);
+        if (separator <= 0) continue;
+        const term = part.slice(0, separator).trim();
+        const description = part.slice(separator + 1).trim();
+        if (term.endsWith("主干")) summaries.push({ label: term, text: description });
+        else if (/[A-Za-z0-9]/.test(term) && posCode(description)) items.push({ term, description });
+      }
+    }
+    if (!items.length || !summaries.length) throw new Error(`第 ${header[1]} 句需要逐词词性和主干标注。`);
+    sentences.push({ sentenceNo: Number(header[1]), text: header[2].replace(/\s*\/\s*/g, " ").trim(), items, main: summaries.find((summary) => summary.label === "主干")?.text ?? "", summaries, source });
+  }
+  return { articleText: [normalized.slice(0, start).trim(), normalized.slice(end).trim()].filter(Boolean).join("\n\n"), sentences };
+}
+
+/** Editing body/vocabulary alone must not erase previously reviewed sentences. */
+export function retainReviewedBbcSyntax(next: BbcSyntaxSentenceData[], previous: BbcSyntaxSentenceData[] = []) {
+  return next.map((sentence, index) => sentence.status !== "reviewed" && previous[index]?.status === "reviewed"
+    && previous[index].text === sentence.text ? previous[index] : sentence);
 }

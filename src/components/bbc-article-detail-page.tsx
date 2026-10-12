@@ -56,6 +56,14 @@ type ArticlePageProps = {
   syntaxSentences?: BbcSyntaxSentenceData[];
 };
 
+function StudyPlayerIcon({ kind }: { kind: "timer" | "rate" | "subtitle" }) {
+  return <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    {kind === "timer" ? <><path d="M9 2h6M12 2v3M18 5l2 2" /><circle cx="12" cy="14" r="8" /><path d="M12 10v4l3 2" /></>
+      : kind === "rate" ? <><path d="M4 18a8 8 0 1 1 16 0M8 18h8M12 14l4-5M6 10l1 1M12 6v1" /></>
+        : <><path d="M3 5h9M7 3v2M4 8c1 4 4 6 7 7M10 5c0 4-3 8-7 10M13 21l4-11 4 11M14.5 17h5" /></>}
+  </svg>;
+}
+
 type FavoriteSentenceItem = {
   audioUrl?: string;
   bookCode?: string;
@@ -999,6 +1007,11 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
 
   function selectStudyMode(mode: ArticleStudyMode) {
     const sentenceNo = currentStudySentenceNo();
+    if (mode === studyMode) {
+      if (mode === "listening" && !isSentenceAudioPlaying) requestSentenceAutoPlay(sentenceNo);
+      return;
+    }
+    const continuePlayback = isMobileAudioViewport && (isSentenceAudioPlaying || isFullAudioPlaying);
     clearSpeakingPracticeTimers();
     setIsRetellingPractice(false);
     setStudyMode(mode);
@@ -1014,7 +1027,7 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
       setModeSelectionVersion((current) => current + 1);
       activeSentenceNoRef.current = sentenceNo;
       setActiveSentenceNo(sentenceNo);
-      if (mode === "listening" && article.sentences?.find((sentence) => sentence.sentenceNo === sentenceNo)?.audioUrl) {
+      if ((mode === "listening" || continuePlayback) && (article.fullAudioUrl || article.sentences?.find((sentence) => sentence.sentenceNo === sentenceNo)?.audioUrl)) {
         requestSentenceAutoPlay(sentenceNo);
       }
     }
@@ -1191,7 +1204,7 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
     setIsSentenceAudioPlaying(false);
     const speakingMode = audioSettingsRef.current.speakingMode;
 
-    if (studyMode !== "speaking" || speakingMode === "none") {
+    if (isMobileAudioViewport || studyMode !== "speaking" || speakingMode === "none") {
       playSentenceByMode(sentence.sentenceNo);
       return;
     }
@@ -1508,6 +1521,7 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
   return (
     <section
       className={`stack bbc-article-page ${isRetellingPractice ? "article-retelling-active" : ""}`}
+      data-study-mode={studyMode}
       onCopy={(event) => event.preventDefault()}
       onCut={(event) => event.preventDefault()}
       onDragStart={(event) => event.preventDefault()}
@@ -1566,6 +1580,7 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
               {isArticleSettingsOpen ? (
                 <section aria-label="文章学习设置" className="bbc-article-settings-panel" id="bbc-article-settings">
                   <h2>播放与学习设置</h2>
+                  {!isMobileAudioViewport ? <>
                   <button
                     aria-label={isReadingTimerRunning ? "暂停计时" : "开始计时"}
                     aria-pressed={isReadingTimerRunning}
@@ -1598,6 +1613,7 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
                     settings={audioSettings}
                     variant="subtitle-only"
                   />
+                  </> : null}
                   <button
                     aria-pressed={isOriginalFullscreen}
                     className="bbc-fullscreen-toggle"
@@ -1636,6 +1652,7 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
               {article.date.replaceAll("-", ".")}
             </time>
           </h1>
+          {article.contentUpdatedAt && syntaxSentences?.some((sentence) => sentence.sourceAnnotation) ? <p className="bbc-syntax-updated-note">语法已按上传标注更新 · {syntaxSentences.filter((sentence) => sentence.status === "reviewed").length}/{syntaxSentences.length} 句</p> : null}
           <div className="bbc-article-word-count">
             共 <b className="stat-number">{articleWordCount}</b> 词
           </div>
@@ -1839,7 +1856,7 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
                       <div className="bbc-speaking-training-status playing">
                         <span>{SPEAKING_MODE_LABELS[audioSettings.speakingMode]}</span>
                         <strong>正在播放</strong>
-                        <small>{SPEAKING_PLAYING_HINTS[audioSettings.speakingMode]}</small>
+                        <small>{isMobileAudioViewport ? audioSettings.playMode === "sentence-loop" ? "每遍结束停 1 秒，重播本句" : "播完自动进入下一句" : SPEAKING_PLAYING_HINTS[audioSettings.speakingMode]}</small>
                       </div>
                     ) : null}
                     {!isMobileAudioViewport && (sentence.audioUrl ? (
@@ -1991,9 +2008,24 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
             <div className="bbc-full-audio">
               <AudioPlayer
                 autoPlaySignal={mobileSentenceAudio ? sentenceAutoPlaySignals[mobileSentenceAudio.sentenceNo] ?? 0 : 0}
-                deferSentenceLoop={Boolean(mobileSentenceAudio && studyMode === "speaking" && audioSettings.speakingMode !== "none")}
+                sentenceLoopDelayMs={mobileSentenceAudio ? 1000 : 0}
                 playbackId={`${modeSelectionVersion}:${mobileSentenceAudio?.sentenceNo ?? "full"}`}
                 playbackRange={mobileSentenceRange}
+                leadingControls={isMobileAudioViewport ? <div className="bbc-mobile-player-shortcuts">
+                  <button
+                    aria-label={isReadingTimerRunning ? "暂停计时" : "开始计时"}
+                    aria-pressed={isReadingTimerRunning}
+                    className={`bbc-player-shortcut bbc-player-timer ${isReadingTimerRunning ? "active" : ""}`}
+                    onClick={() => { setIsReadingTimerVisible(true); setIsReadingTimerRunning((current) => !current); }}
+                    title={`计时 ${formatReadingTime(readingSeconds)}`}
+                    type="button"
+                  >{isReadingTimerVisible ? <span className="bbc-player-timer-value">{formatReadingTime(readingSeconds)}</span> : <StudyPlayerIcon kind="timer" />}</button>
+                  <AudioPronunciationMenu dismissOnSelect onChange={(pronunciationMode) => updateAudioSettings({ pronunciationMode })} triggerContent={<span aria-hidden="true" className="bbc-player-phonetic-symbol">/æ/</span>} value={audioSettings.pronunciationMode} />
+                </div> : undefined}
+                trailingControls={isMobileAudioViewport ? <div className="bbc-mobile-player-shortcuts">
+                  <AudioSettingsMenus dismissOnSelect hasSelectedRate onChange={updateAudioSettings} settings={audioSettings} triggerContent={<StudyPlayerIcon kind="rate" />} triggerLabel="播放速度" variant="rate-only" />
+                  <AudioSettingsMenus dismissOnSelect onChange={updateAudioSettings} settings={audioSettings} triggerContent={<StudyPlayerIcon kind="subtitle" />} triggerLabel="中英字幕" variant="subtitle-only" />
+                </div> : undefined}
                 onPrevious={mobileSentenceAudio ? () => previousStudySentence && selectStudySentence(previousStudySentence.sentenceNo, true) : undefined}
                 onNext={mobileSentenceAudio ? () => nextStudySentence && selectStudySentence(nextStudySentence.sentenceNo, true) : undefined}
                 previousDisabled={!previousStudySentence}
@@ -2003,7 +2035,7 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
                 onEnded={mobileSentenceAudio ? () => handleSentenceEnded(mobileSentenceAudio) : undefined}
                 onStopAtEnd={mobileSentenceRange && mobileSentenceAudio ? () => handleSentenceEnded(mobileSentenceAudio) : undefined}
                 stopAtSeconds={mobileSentenceRange?.endSeconds}
-                loopSegment={mobileSentenceRange && !(studyMode === "speaking" && audioSettings.speakingMode !== "none") ? mobileSentenceRange : null}
+                loopSegment={mobileSentenceRange}
                 onPlayingChange={(isPlaying) => mobileSentenceAudio
                   ? handleSentencePlayingChange(mobileSentenceAudio.sentenceNo, isPlaying)
                   : handleFullAudioPlayingChange(isPlaying)}

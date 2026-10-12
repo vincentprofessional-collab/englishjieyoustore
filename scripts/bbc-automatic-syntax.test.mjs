@@ -1,5 +1,9 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { readFileSync } from "node:fs";
+import { parsePastedBbcSyntaxBlock, applyPastedBbcSyntax, retainReviewedBbcSyntax } from "../src/lib/articles/bbc-pasted-syntax.ts";
+import { normalizeBbcSyntaxSentenceEdits } from "../src/lib/bbc-syntax-annotation-edits.ts";
+import { serializeBbcArticlePaste } from "../src/lib/articles/bbc-paste-markup.ts";
 import referenceData from "../src/data/bbc/2026-syntax.json" with { type: "json" };
 import { buildAutomaticBbcSyntax } from "../src/lib/articles/bbc-automatic-syntax.ts";
 
@@ -87,4 +91,47 @@ test("keeps generated token offsets aligned to the original text", () => {
   for (const token of result.tokens) assert.equal(result.text.slice(token.start, token.end), token.text);
   assert.equal(result.status, "draft");
   assert.deepEqual(spans(result, 2), [{ label: "定语从句", text: "that leaves every hour" }]);
+});
+
+const numberedSource = readFileSync(new URL("./fixtures/bbc-numbered-syntax-260810.txt", import.meta.url), "utf8");
+const numberedAnnotations = parsePastedBbcSyntaxBlock(numberedSource).sentences;
+const numberedAutomatic = numberedAnnotations.map((annotation) => buildAutomaticBbcSyntax(annotation.text));
+const numberedReviewed = numberedAutomatic.map((sentence, index) => applyPastedBbcSyntax(sentence, numberedAnnotations, index + 1));
+
+test("all 21 teacher-authored numbered BBC sentences retain POS, clauses, contractions and explicit omissions", () => {
+  assert.equal(numberedReviewed.length, 21);
+  for (const [index, sentence] of numberedReviewed.entries()) {
+    assert.equal(sentence.status, "reviewed");
+    assert.ok(sentence.sourceAnnotation.startsWith(`${index + 1}.`));
+    assert.ok(sentence.tokens.every((token) => token.pos === "PUNCT" || token.posLabel));
+  }
+  assert.equal(numberedReviewed[1].tokens.find((token) => token.text === "releasing").posLabel, "动名词");
+  assert.equal(numberedReviewed[2].tokens.find((token) => token.text === "Latin").pos, "ADJ");
+  assert.equal(numberedReviewed[7].tokens.find((token) => token.text === "only").pos, "ADJ");
+  assert.ok(numberedReviewed[9].notes.includes("省略主语：they"));
+  assert.deepEqual(numberedReviewed[20].level1, []);
+  assert.deepEqual(numberedReviewed[20].notes, ["省略主语：I"]);
+  assert.ok(normalizeBbcSyntaxSentenceEdits(numberedReviewed, numberedAutomatic), "all nested spans must be valid and contained by their authored parent");
+  assert.ok(spans(numberedReviewed[11], 1).some((span) => span.label === "主语" && span.text === "you"));
+  assert.ok(spans(numberedReviewed[15], 3).some((span) => span.label === "主语" && span.text === "predators"));
+});
+
+test("BBC edit clipboard round-trips every authored sentence and vocabulary-only edits retain reviewed annotations", () => {
+  const text = serializeBbcArticlePaste({ id: "260810", title: "The art of farts", body: [numberedAutomatic[0].text], chineseParagraphs: ["测试翻译。"], syntaxSentences: numberedReviewed, vocabulary: [] });
+  const parsed = parsePastedBbcSyntaxBlock(text);
+  assert.equal(parsed.sentences.length, 21);
+  assert.ok(!parsed.articleText.includes("主干"));
+  assert.deepEqual(parsed.sentences.map((item) => item.items), numberedAnnotations.map((item) => item.items));
+  assert.deepEqual(retainReviewedBbcSyntax(numberedAutomatic, numberedReviewed), numberedReviewed);
+  const changed = { ...numberedAutomatic[0], text: "Different source sentence." };
+  assert.equal(retainReviewedBbcSyntax([changed], numberedReviewed)[0], changed);
+  const explicit = { ...numberedReviewed[0], level1: [] };
+  assert.equal(retainReviewedBbcSyntax([explicit], numberedReviewed)[0], explicit);
+});
+
+test("numbered BBC annotations reject mismatched or missing words rather than silently publishing automatic syntax", () => {
+  const mismatched = { ...numberedAnnotations[0], items: [{ term: "missingword", description: "名词" }] };
+  assert.throws(() => applyPastedBbcSyntax(numberedAutomatic[0], [mismatched], 1), /无法匹配原句/);
+  const incomplete = { ...numberedAnnotations[0], items: numberedAnnotations[0].items.slice(0, -1) };
+  assert.throws(() => applyPastedBbcSyntax(numberedAutomatic[0], [incomplete], 1), /标注不完整/);
 });

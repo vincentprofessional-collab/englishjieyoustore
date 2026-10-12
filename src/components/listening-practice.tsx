@@ -2886,6 +2886,7 @@ export function ListeningPractice({
     LISTENING_DEFAULT_AUDIO_SETTINGS,
   );
   const [reviewStudyMode, setReviewStudyMode] = useState<ListeningStudyMode>("general");
+  const isMobileStudyViewport = typeof window !== "undefined" && window.matchMedia("(max-width: 820px)").matches;
   const [showWritingAnswers, setShowWritingAnswers] = useState(false);
   useBbcAnswerShortcut(
     reviewStudyMode === "writing" && audioSettings.dictationMode !== "none",
@@ -3101,13 +3102,10 @@ export function ListeningPractice({
     section.transcriptSentences.find((sentence) => sentence.audioUrl) ??
     null;
   const playingSentenceSegmentRef = useRef<ListeningSentence | null>(null);
-  const activeLoopSegment =
-    activeSentence?.startMs != null && activeSentence.endMs != null
-      ? {
-          endSeconds: activeSentence.endMs / 1000,
-          startSeconds: activeSentence.startMs / 1000,
-        }
-      : null;
+  const loopSentence = playingSentenceSegmentRef.current ?? activeSentence;
+  const activeLoopSegment = loopSentence?.startMs != null && loopSentence.endMs != null
+    ? { endSeconds: loopSentence.endMs / 1000, startSeconds: loopSentence.startMs / 1000 }
+    : null;
 
   function updateAudioSettings(nextSettings: Partial<AudioPlayerSettings>) {
     setAudioSettings((current) => {
@@ -3118,9 +3116,20 @@ export function ListeningPractice({
     if (nextSettings.subtitleMode) {
       setOriginalDisplayMode(nextSettings.subtitleMode);
     }
+    if (isMobileStudyViewport && nextSettings.playMode && !isFullAudioPlaying && !isSentenceClipPlaying) {
+      const sentence = playingSentenceSegmentRef.current ?? activeSentence ?? section.transcriptSentences[0];
+      if (sentence) playSentenceAudioClip(sentence);
+    }
   }
 
   function selectReviewStudyMode(nextMode: ListeningStudyMode) {
+    if (nextMode === "general") {
+      setStopAtSeconds(null);
+      playingSentenceSegmentRef.current = null;
+    }
+    if (nextMode === "listening") updateAudioSettings({ dictationMode: "none", speakingMode: "none" });
+    if (nextMode === "writing") updateAudioSettings({ speakingMode: "none" });
+    if (nextMode === "speaking") updateAudioSettings({ dictationMode: "none" });
     if (nextMode !== "speaking") setIsRetellingPractice(false);
     setReviewStudyMode(nextMode);
     if (nextMode === "general" || nextMode === "intensive") {
@@ -3132,7 +3141,7 @@ export function ListeningPractice({
         audioSettings.dictationMode !== "none" || audioSettings.speakingMode !== "none";
       updateAudioSettings({
         dictationMode: "none",
-        playMode: "sequential",
+        ...(isMobileStudyViewport ? {} : { playMode: "sequential" as const }),
         speakingMode: "none",
         ...(isLeavingPractice ? { subtitleMode: "bilingual" as const } : {}),
       });
@@ -3168,12 +3177,12 @@ export function ListeningPractice({
       const behavior = reduceMotion ? "auto" : "smooth";
       const sentenceElement = document.getElementById(`practice-subtitle-${sentenceNo}`);
       const list = subtitleListRef.current;
-      if (sentenceElement && list?.contains(sentenceElement)) {
+      if (sentenceElement && list?.contains(sentenceElement) && list.scrollHeight > list.clientHeight + 1) {
         const topOffset = sentenceElement.getBoundingClientRect().top - list.getBoundingClientRect().top;
         list.scrollTo({ top: list.scrollTop + topOffset, behavior });
         return;
       }
-      document.getElementById(`transcript-sentence-${sentenceNo}`)?.scrollIntoView({
+      (sentenceElement ?? document.getElementById(`transcript-sentence-${sentenceNo}`))?.scrollIntoView({
         behavior,
         block: "start",
       });
@@ -3200,6 +3209,7 @@ export function ListeningPractice({
 
     if (section.fullAudioUrl) {
       playSentenceSegment(nextSentence);
+      centerReviewSentence(nextSentence.sentenceNo);
       return;
     }
 
@@ -3733,15 +3743,14 @@ export function ListeningPractice({
     scheduleWordTooltip(wordAtPoint.word, wordAtPoint.rect);
   }
 
-  function playSentenceSegment(sentence: ListeningSentence, modeOverride?: "loop" | "once") {
+  function playSentenceSegment(sentence: ListeningSentence) {
     if (sentence.startMs == null) {
       return;
     }
 
-    const shouldLoop = modeOverride === "loop" || audioSettings.playMode === "sentence-loop";
     playingSentenceSegmentRef.current = sentence;
     setFullAudioPositionMs(sentence.startMs);
-    setStopAtSeconds(!shouldLoop && sentence.endMs != null ? sentence.endMs / 1000 : null);
+    setStopAtSeconds(sentence.endMs != null ? sentence.endMs / 1000 : null);
     setSeekRequest({
       id: Date.now() + sentence.sentenceNo,
       play: true,
@@ -3756,7 +3765,7 @@ export function ListeningPractice({
     const sentence = playingSentenceSegmentRef.current;
     if (!sentence) return;
     const speakingMode = audioSettingsRef.current.speakingMode;
-    if (speakingMode !== "none") startSpeakingPractice(sentence, speakingMode);
+    if (!isMobileStudyViewport && speakingMode !== "none") startSpeakingPractice(sentence, speakingMode);
     else playReviewSentenceByMode(sentence);
   }
 
@@ -3851,7 +3860,7 @@ export function ListeningPractice({
     setIsSentenceClipPlaying(false);
     const speakingMode = audioSettingsRef.current.speakingMode;
 
-    if (speakingMode !== "none") {
+    if (!isMobileStudyViewport && speakingMode !== "none") {
       startSpeakingPractice(sentence, speakingMode);
       return;
     }
@@ -3923,6 +3932,7 @@ export function ListeningPractice({
       return (
         <AudioPlayer
           compactControls
+          sentenceLoopDelayMs={isMobileStudyViewport ? 1000 : 0}
           loopSegment={activeLoopSegment}
           onPlayingChange={(isPlaying) => {
             setIsFullAudioPlaying(isPlaying);
@@ -3935,7 +3945,7 @@ export function ListeningPractice({
           }}
           onStopAtEnd={handleSentenceStopAtEnd}
           onTimeChange={(seconds) => setFullAudioPositionMs(Math.round(seconds * 1000))}
-          settings={audioSettings}
+          settings={reviewStudyMode === "general" ? { ...audioSettings, playMode: "sequential" } : audioSettings}
           settingsPlacement="none"
           seekRequest={seekRequest}
           showRate={false}
@@ -3954,6 +3964,7 @@ export function ListeningPractice({
       <AudioPlayer
         autoPlaySignal={sentenceAutoPlaySignals[fallbackSentenceAudio.id] ?? 0}
         compactControls
+        sentenceLoopDelayMs={isMobileStudyViewport ? 1000 : 0}
         hasSelectedRate
         html5
         playbackId={fallbackSentenceAudio.id}
@@ -4002,6 +4013,7 @@ export function ListeningPractice({
             onModeSelect={(nextMode) => selectReviewStudyMode(nextMode)}
             modeLabels={{ speaking: "口语", writing: "写作" }}
             playModeLabel="精听"
+            preserveModeSettings={isMobileStudyViewport}
             settings={audioSettings}
             variant="listening-only"
           />
@@ -4009,6 +4021,7 @@ export function ListeningPractice({
             onChange={updateAudioSettings}
             onModeSelect={(nextMode) => selectReviewStudyMode(nextMode)}
             onRetellingSelect={enterRetellingPractice}
+            preserveModeSettings={isMobileStudyViewport}
             modeLabels={{ speaking: "口语", writing: "写作" }}
             settings={audioSettings}
             variant="speaking-writing"
@@ -4175,6 +4188,7 @@ export function ListeningPractice({
             <div className="bbc-full-audio">
               <AudioPlayer
                 hasSelectedRate
+                sentenceLoopDelayMs={isMobileStudyViewport ? 1000 : 0}
                 loopSegment={activeLoopSegment}
                 onEnded={handleFullAudioEnded}
                 onPlayingChange={setIsFullAudioPlaying}
@@ -4797,6 +4811,7 @@ export function ListeningPractice({
           isNotesOpen ? "notes-open" : ""
         }`}
         data-local-selection-actions="true"
+        data-study-mode={reviewStudyMode}
         ref={pageRef}
         onPointerUp={handleQuestionSelection}
         onMouseLeave={() => setActiveWordTooltip(null)}
@@ -4991,6 +5006,7 @@ export function ListeningPractice({
         isFullscreen ? "fullscreen" : ""
       }`}
       data-local-selection-actions="true"
+      data-study-mode={reviewStudyMode}
       ref={pageRef}
       onPointerUp={handleQuestionSelection}
       onMouseLeave={() => setActiveWordTooltip(null)}
@@ -5254,7 +5270,7 @@ export function ListeningPractice({
                           <div aria-live="polite" className="bbc-speaking-training-status playing">
                             <span>{SPEAKING_MODE_LABELS[audioSettings.speakingMode]}</span>
                             <strong>正在播放</strong>
-                            <small>{SPEAKING_PLAYING_HINTS[audioSettings.speakingMode]}</small>
+                            <small>{isMobileStudyViewport ? audioSettings.playMode === "sentence-loop" ? "每遍结束停 1 秒，重播本句" : "播完自动进入下一句" : SPEAKING_PLAYING_HINTS[audioSettings.speakingMode]}</small>
                           </div>
                         ) : null
                       ) : null}

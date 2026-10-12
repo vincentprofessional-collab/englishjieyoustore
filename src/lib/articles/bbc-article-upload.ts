@@ -134,7 +134,9 @@ function parsePastedVocabulary(lines: string[]): BbcVocabularyItem[] | string {
 }
 
 export function parseBbcArticlePaste(value: string): ParsedBbcArticlePaste | string {
-  const extracted = parsePastedBbcSyntaxBlock(value);
+  let extracted: ReturnType<typeof parsePastedBbcSyntaxBlock>;
+  try { extracted = parsePastedBbcSyntaxBlock(value); }
+  catch (cause) { return cause instanceof Error ? cause.message : "语法标注格式无效。"; }
   const lines = extracted.articleText.replace(/^\uFEFF/, "").replace(/\r\n?/g, "\n").split("\n");
   const titleIndex = lines.findIndex((line) => line.trim());
   if (titleIndex < 0) return "请粘贴 BBC 文章全文。";

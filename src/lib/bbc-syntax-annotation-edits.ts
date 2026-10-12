@@ -37,7 +37,8 @@ function normalizeTokens(value: unknown, canonical: BbcSyntaxSentenceData["token
     const base = canonical[index];
     const pos = typeof item.pos === "string" ? item.pos.trim() : "";
     if (item.text !== base.text || item.start !== base.start || item.end !== base.end || !pos || pos.length > 32) return null;
-    tokens.push({ ...base, pos });
+    if (item.posLabel !== undefined && (typeof item.posLabel !== "string" || item.posLabel.length > 64)) return null;
+    tokens.push({ ...base, pos, posLabel: typeof item.posLabel === "string" ? item.posLabel.trim() : pos === base.pos ? base.posLabel : undefined });
   }
   return tokens;
 }
@@ -92,7 +93,7 @@ export function normalizeBbcSyntaxSentenceEdits(
       if (children.some((span) => !parents.some((parent) => span.start >= parent.start && span.end <= parent.end))) return null;
     }
 
-    result.push({ ...base, tokens, ...layers });
+    result.push({ ...base, tokens, ...layers, status: item.status === "reviewed" ? "reviewed" : base.status });
   }
 
   return result;

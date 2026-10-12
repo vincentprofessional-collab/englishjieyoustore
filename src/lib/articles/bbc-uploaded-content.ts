@@ -49,7 +49,7 @@ function normalizeRecord(value: unknown, createdAt: unknown): UploadedBbcArticle
     : article;
 
   return {
-    article: normalizedArticle,
+    article: { ...normalizedArticle, ...(typeof createdAt === "string" ? { contentUpdatedAt: createdAt } : {}) },
     createdAt: typeof createdAt === "string" ? createdAt : "",
   };
 }

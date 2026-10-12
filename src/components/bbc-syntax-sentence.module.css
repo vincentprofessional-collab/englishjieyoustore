@@ -83,3 +83,13 @@
   .word { padding: 0 3px; }
   .card { --syntax-component-font-size: 12px; }
 }
+
+@media (max-width: 820px) {
+  .card { --syntax-word-font-size: 18px; --syntax-row-space: 4px; --syntax-component-font-size: 11px; }
+  .word { line-height: 1.35; padding: 0 2px; }
+  .pos, .annotationPos { line-height: 1.25; }
+  .annotationPosTrack { height: 15px; }
+  .translation { font-size: 16px; line-height: 1.65; margin-top: 12px; padding-top: 0; }
+}
+
+.omissionNotes { margin: 8px 0 0; font-size: 12px; line-height: 1.4; color: #65727e; }
