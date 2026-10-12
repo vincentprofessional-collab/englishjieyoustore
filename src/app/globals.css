@@ -18917,6 +18917,55 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
   padding: 16px;
 }
 
+.vocabulary-usage-example-layout {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.vocabulary-usage-example-layout.has-primary-school-picture {
+  align-items: stretch;
+  grid-template-columns: minmax(0, 1fr) minmax(160px, 34%);
+}
+
+.vocabulary-primary-school-word-picture {
+  align-self: stretch;
+  aspect-ratio: 4 / 3;
+  background: linear-gradient(135deg, #e7f7ff, #fff3bd 52%, #e5f4d5);
+  border: 1px solid rgba(169, 212, 234, 0.82);
+  border-radius: 14px;
+  max-height: 230px;
+  object-fit: contain;
+  padding: 8px;
+  width: 100%;
+}
+
+.vocabulary-primary-school-picture-only {
+  align-items: center;
+  background: linear-gradient(135deg, #e7f7ff, #fff3bd 52%, #e5f4d5);
+  border: 1px solid rgba(169, 212, 234, 0.82);
+  border-radius: 18px;
+  display: flex;
+  justify-content: center;
+  min-height: 220px;
+  padding: 18px;
+}
+
+.vocabulary-primary-school-picture-only .vocabulary-primary-school-word-picture {
+  max-height: 300px;
+  max-width: 420px;
+}
+
+@media (max-width: 720px) {
+  .vocabulary-usage-example-layout.has-primary-school-picture {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .vocabulary-usage-example-layout.has-primary-school-picture .vocabulary-primary-school-word-picture {
+    max-height: 220px;
+  }
+}
+
 .vocabulary-usage-example-main {
   display: grid;
   gap: 8px;
