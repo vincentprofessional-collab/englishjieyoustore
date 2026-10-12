@@ -272,15 +272,18 @@ export default async function VocabularyWordPage({
     ),
     bbcVocabularyDetail?.examples ?? [],
   ).slice(0, 5);
-  let canAccessBbcExamples = false;
-  try {
-    const supabase = await createServerSupabaseClient();
-    const { data, error } = await supabase.rpc("can_access_project", {
-      _project_key: "bbc",
-    });
-    canAccessBbcExamples = !error && data === true;
-  } catch {
-    // Treat an unavailable membership check as a visitor and hide BBC examples.
+  const hasBbcExamples = fetchedUsageExamples.some((example) => example.bookCode === "BBC");
+  let canAccessBbcExamples = !hasBbcExamples;
+  if (hasBbcExamples) {
+    try {
+      const supabase = await createServerSupabaseClient();
+      const { data, error } = await supabase.rpc("can_access_project", {
+        _project_key: "bbc",
+      });
+      canAccessBbcExamples = !error && data === true;
+    } catch {
+      // Treat an unavailable membership check as a visitor and hide BBC examples.
+    }
   }
   const usageExamples = canAccessBbcExamples
     ? fetchedUsageExamples

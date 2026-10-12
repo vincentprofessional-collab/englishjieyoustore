@@ -191,6 +191,25 @@ export function GlobalStudyInteractions() {
   const selectedRangeRef = useRef<Range | null>(null);
 
   useEffect(() => {
+    function handleFullscreenOrientation() {
+      const orientation = window.screen.orientation;
+      if (!document.fullscreenElement) {
+        orientation?.unlock?.();
+        return;
+      }
+
+      if (!window.matchMedia("(max-width: 820px)").matches || typeof orientation?.lock !== "function") {
+        return;
+      }
+
+      void orientation.lock("landscape").catch(() => undefined);
+    }
+
+    document.addEventListener("fullscreenchange", handleFullscreenOrientation);
+    return () => document.removeEventListener("fullscreenchange", handleFullscreenOrientation);
+  }, []);
+
+  useEffect(() => {
     setFavoriteWordIds(readFavoriteWords().map((item) => item.id));
   }, []);
 
@@ -264,6 +283,7 @@ export function GlobalStudyInteractions() {
     }
 
     function handleMouseMove(event: MouseEvent) {
+      if (window.matchMedia("(hover: none)").matches) return;
       if (selectionPopover || isInteractiveTarget(event.target)) {
         return;
       }
