@@ -26,7 +26,7 @@ function encodePathPart(value: string) {
   );
 }
 
-function signedR2Request(key: string, range: string | null) {
+function signedR2Url(key: string) {
   const accountId = process.env.R2_ACCOUNT_ID;
   const accessKeyId = process.env.R2_BBC_AUDIO_ACCESS_KEY_ID;
   const secretAccessKey = process.env.R2_BBC_AUDIO_SECRET_ACCESS_KEY;
@@ -40,26 +40,25 @@ function signedR2Request(key: string, range: string | null) {
   const amzDate = new Date().toISOString().replace(/[:-]|\.\d{3}/g, "");
   const dateStamp = amzDate.slice(0, 8);
   const scope = `${dateStamp}/auto/s3/aws4_request`;
-  const payloadHash = sha256("");
-  const canonicalHeaders: Record<string, string> = {
-    host,
-    "x-amz-content-sha256": payloadHash,
-    "x-amz-date": amzDate,
-  };
-
-  if (range) {
-    canonicalHeaders.range = range;
-  }
-
-  const names = Object.keys(canonicalHeaders).sort();
-  const signedHeaders = names.join(";");
+  const query: [string, string][] = [
+    ["X-Amz-Algorithm", "AWS4-HMAC-SHA256"],
+    ["X-Amz-Credential", `${accessKeyId}/${scope}`],
+    ["X-Amz-Date", amzDate],
+    ["X-Amz-Expires", "3600"],
+    ["X-Amz-SignedHeaders", "host"],
+  ];
+  const canonicalQuery = query
+    .map(([name, value]) => [encodePathPart(name), encodePathPart(value)] as const)
+    .sort(([left], [right]) => left.localeCompare(right))
+    .map(([name, value]) => `${name}=${value}`)
+    .join("&");
   const canonicalRequest = [
     "GET",
     uri,
-    "",
-    names.map((name) => `${name}:${canonicalHeaders[name]}\n`).join(""),
-    signedHeaders,
-    payloadHash,
+    canonicalQuery,
+    `host:${host}\n`,
+    "host",
+    "UNSIGNED-PAYLOAD",
   ].join("\n");
   const stringToSign = ["AWS4-HMAC-SHA256", amzDate, scope, sha256(canonicalRequest)].join("\n");
   const signingKey = hmac(
@@ -68,17 +67,7 @@ function signedR2Request(key: string, range: string | null) {
   );
   const signature = createHmac("sha256", signingKey).update(stringToSign).digest("hex");
 
-  return {
-    url: `https://${host}${uri}`,
-    headers: {
-      ...(range ? { Range: range } : {}),
-      "x-amz-content-sha256": payloadHash,
-      "x-amz-date": amzDate,
-      Authorization:
-        `AWS4-HMAC-SHA256 Credential=${accessKeyId}/${scope}, ` +
-        `SignedHeaders=${signedHeaders}, Signature=${signature}`,
-    },
-  };
+  return `https://${host}${uri}?${canonicalQuery}&X-Amz-Signature=${signature}`;
 }
 
 export async function GET(
@@ -153,44 +142,18 @@ export async function GET(
     }
   }
 
-  const signed = signedR2Request(`bbc/${year}/${articleId}/${audioFile}`, range);
+  const url = signedR2Url(`bbc/${year}/${articleId}/${audioFile}`);
 
-  if (!signed) {
+  if (!url) {
     return new Response("Audio storage unavailable.", { status: 503 });
   }
 
-  try {
-    const upstream = await fetch(signed.url, {
-      method: "GET",
-      headers: signed.headers,
-      cache: "no-store",
-    });
-
-    if (upstream.status === 404) {
-      return new Response("Audio not found.", { status: 404 });
-    }
-
-    if (upstream.status !== 200 && upstream.status !== 206 && upstream.status !== 416) {
-      return new Response("Audio storage unavailable.", { status: 502 });
-    }
-
-    const headers = new Headers({
-      "Accept-Ranges": "bytes",
+  return new Response(null, {
+    status: 302,
+    headers: {
       "Cache-Control": "private, no-store",
-      "Content-Type": "audio/mpeg",
-      "X-Content-Type-Options": "nosniff",
-    });
-
-    for (const name of ["content-length", "content-range", "etag"]) {
-      const value = upstream.headers.get(name);
-      if (value) headers.set(name, value);
-    }
-
-    return new Response(upstream.status === 416 ? null : upstream.body, {
-      status: upstream.status,
-      headers,
-    });
-  } catch {
-    return new Response("Audio storage unavailable.", { status: 502 });
-  }
+      Location: url,
+      "Referrer-Policy": "no-referrer",
+    },
+  });
 }
