@@ -13,6 +13,7 @@ import {
   type ProjectAccessRule,
 } from "@/lib/access-control";
 import { supabase } from "@/lib/supabase/client";
+import { DEFAULT_PAYMENT_INSTRUCTIONS, loadPaymentInstructions, savePaymentInstructions } from "@/lib/content/payment-instructions";
 
 type ProjectAccessPaywallProps = {
   description?: string;
@@ -56,11 +57,47 @@ export function ProjectAccessPaywall({
   const [paymentMessage, setPaymentMessage] = useState("");
   const [paymentRequest, setPaymentRequest] = useState<PaymentRequest | null>(null);
   const [userEmail, setUserEmail] = useState("");
+  const [userId, setUserId] = useState("");
+  const [adminUserId, setAdminUserId] = useState("");
+  const [paymentCopy, setPaymentCopy] = useState(DEFAULT_PAYMENT_INSTRUCTIONS);
+  const [paymentCopyDraft, setPaymentCopyDraft] = useState(DEFAULT_PAYMENT_INSTRUCTIONS);
+  const [editingPaymentCopy, setEditingPaymentCopy] = useState(false);
+  const [savingPaymentCopy, setSavingPaymentCopy] = useState(false);
+  const [paymentCopyMessage, setPaymentCopyMessage] = useState("");
   const loginHref = currentPath ? "/login?redirect=" + encodeURIComponent(currentPath) : "/login";
 
   useEffect(() => {
     setCurrentPath(window.location.pathname + window.location.search);
   }, []);
+
+  useEffect(() => {
+    let active = true;
+    void loadPaymentInstructions().then((content) => { if (active) setPaymentCopy(content); });
+    return () => { active = false; };
+  }, []);
+
+  useEffect(() => {
+    let active = true;
+    setAdminUserId("");
+    setEditingPaymentCopy(false);
+    if (userId) void supabase.from("profiles").select("role").eq("id", userId).maybeSingle()
+      .then(({ data }) => { if (active && data?.role === "admin") setAdminUserId(userId); });
+    return () => { active = false; };
+  }, [userId]);
+
+  async function savePaymentCopy() {
+    if (!adminUserId || savingPaymentCopy) return;
+    setSavingPaymentCopy(true);
+    setPaymentCopyMessage("");
+    try {
+      const error = await savePaymentInstructions(adminUserId, paymentCopyDraft);
+      if (error) throw error;
+      setPaymentCopy(await loadPaymentInstructions());
+      setEditingPaymentCopy(false);
+      setPaymentCopyMessage("付款说明已更新。");
+    } catch { setPaymentCopyMessage("保存失败，请检查管理员登录状态后重试。"); }
+    finally { setSavingPaymentCopy(false); }
+  }
 
   useEffect(() => {
     let isMounted = true;
@@ -129,7 +166,7 @@ export function ProjectAccessPaywall({
         data: { session },
       } = await supabase.auth.getSession();
 
-      if (isMounted) setUserEmail(session?.user.email ?? "");
+      if (isMounted) { setUserEmail(session?.user.email ?? ""); setUserId(session?.user.id ?? ""); }
     }
 
     void loadUser();
@@ -137,7 +174,7 @@ export function ProjectAccessPaywall({
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
-      if (isMounted) setUserEmail(session?.user.email ?? "");
+      if (isMounted) { setUserEmail(session?.user.email ?? ""); setUserId(session?.user.id ?? ""); }
     });
 
     return () => {
@@ -220,17 +257,29 @@ export function ProjectAccessPaywall({
 
       {paymentMessage ? <p className="project-access-message">{paymentMessage}</p> : null}
 
-      {showPaymentCode && userEmail && paymentRequest && selectedPlanOption ? (
+      {adminUserId || (showPaymentCode && userEmail && paymentRequest && selectedPlanOption) ? (
         <section className="project-access-payment" aria-label="微信收款码">
           <div>
-            <strong>微信扫码支付</strong>
-            <p>订单号：{paymentRequest.order_no}</p>
-            <p>开通账号：{userEmail}</p>
+            {adminUserId ? <button className="button subtle" onClick={() => { setPaymentCopyDraft(paymentCopy); setEditingPaymentCopy((value) => !value); setPaymentCopyMessage(""); }} type="button">{editingPaymentCopy ? "取消编辑" : "编辑付款说明"}</button> : null}
+            {editingPaymentCopy ? <form className="project-access-copy-editor" onSubmit={(event) => { event.preventDefault(); void savePaymentCopy(); }}>
+              {([{ key: "heading", label: "标题" }, { key: "orderLabel", label: "订单号标签" }, { key: "accountLabel", label: "账号标签" }, { key: "selectionLabel", label: "项目标签" }, { key: "note", label: "说明文字" }] as const).map(({ key, label }) => <label key={key}>
+                <span>{label}</span>
+                {key === "note" ? <textarea maxLength={2000} onChange={(event) => setPaymentCopyDraft((current) => ({ ...current, [key]: event.target.value }))} required rows={5} value={paymentCopyDraft[key]} /> : <input maxLength={80} onChange={(event) => setPaymentCopyDraft((current) => ({ ...current, [key]: event.target.value }))} required value={paymentCopyDraft[key]} />}
+              </label>)}
+              <button className="button primary" disabled={savingPaymentCopy} type="submit">{savingPaymentCopy ? "保存中……" : "保存并发布"}</button>
+            </form> : <>
+            <strong>{paymentCopy.heading}</strong>
+            {paymentRequest && selectedPlanOption ? <>
+            <p>{paymentCopy.orderLabel}：{paymentRequest.order_no}</p>
+            <p>{paymentCopy.accountLabel}：{userEmail}</p>
             <p>
-              当前选择：{project.title} · {selectedPlanOption.label} · {selectedPlanOption.durationLabel} ·{" "}
+              {paymentCopy.selectionLabel}：{project.title} · {selectedPlanOption.label} · {selectedPlanOption.durationLabel} ·{" "}
               {formatProjectPrice(Number(paymentRequest.amount_cny))}
             </p>
-            <p>付款后20分钟内开通权限，如有问题，请联系我的微信号：13432086750</p>
+            </> : null}
+            <p className="project-access-payment-note">{paymentCopy.note}</p>
+            </>}
+            {paymentCopyMessage ? <p aria-live="polite">{paymentCopyMessage}</p> : null}
           </div>
           <Image alt="微信支付收款码" height={894} priority src="/payment/wechat-pay.jpg" unoptimized width={640} />
         </section>

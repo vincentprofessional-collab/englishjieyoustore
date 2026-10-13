@@ -17,10 +17,12 @@ function normalizeWord(value: string) {
   return value.normalize("NFKC").trim().toLowerCase();
 }
 
-async function toSmallWebp(file: File) {
+async function prepareImage(file: File) {
   if (!allowedImageTypes.has(file.type)) {
     throw new Error("请选用 JPG、PNG 或 WebP 图片。");
   }
+  // Small source files go straight to the server's format-aware encoder.
+  if (file.size <= 4 * 1024 * 1024) return file;
 
   const source = await createImageBitmap(file);
   const scale = Math.min(1, 512 / Math.max(source.width, source.height));
@@ -37,8 +39,9 @@ async function toSmallWebp(file: File) {
 
   const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, "image/webp", 0.78));
   if (!blob) throw new Error("图片压缩失败，请换一张图片再试。");
-  if (blob.size > 350 * 1024) throw new Error("图片压缩后仍超过 350 KB，请换一张更简单的图片。");
-  return new File([blob], "vocabulary.webp", { type: "image/webp", lastModified: file.lastModified });
+  if (!allowedImageTypes.has(blob.type) || blob.size > 4 * 1024 * 1024) throw new Error("图片处理后仍过大，请先缩小图片再上传。");
+  const extension = blob.type === "image/webp" ? "webp" : blob.type === "image/png" ? "png" : "jpg";
+  return new File([blob], `vocabulary.${extension}`, { type: blob.type, lastModified: file.lastModified });
 }
 
 async function getAdminToken() {
@@ -75,7 +78,7 @@ export function PrimarySchoolVocabularyImageAdmin() {
   }
 
   async function uploadOne(word: string, file: File, accessToken: string) {
-    const prepared = await toSmallWebp(file);
+    const prepared = await prepareImage(file);
     const body = new FormData();
     body.append("word", word);
     body.append("file", prepared);

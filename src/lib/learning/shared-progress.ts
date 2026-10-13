@@ -7,6 +7,7 @@ export const SHARED_PROGRESS_WRONG_QUESTIONS_KEY = "ielts-platform.favoriteQuest
 
 type ProgressOutcome = DailyOutcome | "unscored" | null;
 type ProgressEntry = {
+  sourceBooks?: string[];
   completed?: boolean;
   familiarity?: DailyOutcome | null;
   lastCategory?: DailyMode;
@@ -63,7 +64,8 @@ function sanitizeProgress(progress: Record<string, ProgressEntry>) {
     const lastOutcome = entry.lastOutcome === "unscored" || ["familiar", "vague", "unfamiliar"].includes(String(entry.lastOutcome))
       ? entry.lastOutcome
       : null;
-    return [String(index), { completed: Boolean(entry.completed), familiarity, lastCategory, lastOutcome, modeOutcomes }];
+    const sourceBooks = Array.isArray(entry.sourceBooks) ? entry.sourceBooks.filter((book) => typeof book === "string" && book.length <= 32) : undefined;
+    return [String(index), { completed: Boolean(entry.completed), familiarity, lastCategory, lastOutcome, modeOutcomes, ...(sourceBooks?.length ? { sourceBooks } : {}) }];
   }));
 }
 

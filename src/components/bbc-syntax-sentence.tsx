@@ -36,15 +36,20 @@ const INLINE_STYLE_CLASSES: Record<ArticleInlineLineStyle, string> = {
 };
 
 function role(label: string) {
-  if (label.includes("比较")) return styles.comparison;
-  if (label.includes("时间")) return styles.temporal;
+  if (label.includes("同位语")) return styles.appositive;
+  if (label.includes("补足语") || label.includes("宾补") || label === "补语") return styles.complement;
+  if (label.includes("系") || label.includes("谓语")) return styles.predicate;
   if (label.includes("主语")) return styles.subject;
-  if (label.includes("谓语")) return styles.predicate;
   if (label.includes("宾语") || label.includes("宾补")) return styles.object;
   if (label.includes("表语")) return styles.predicative;
   if (label.includes("状语")) return styles.adverbial;
   if (label.includes("定语")) return styles.attributive;
   return styles.other;
+}
+
+function componentLabel(label: string, phrase = "") {
+  const normalized = label.replace(/系动词/g, "系");
+  return /^usually$/i.test(phrase.trim()) ? normalized.replace("程度状语", "频率状语") : normalized;
 }
 
 const SYNTAX_LEVELS: BbcSyntaxLevel[] = [1, 2, 3, 4, 5];
@@ -202,18 +207,17 @@ export function BbcSyntaxSentence({
         }
       }
 
-      sentence.querySelectorAll<HTMLElement>(`.${styles.syntaxLabelPlaceholder}`)
-        .forEach((label) => label.style.removeProperty("--syntax-label-extra-top"));
       for (const [trackIndex, track] of tracks.entries()) {
         const trackElements = Array.from(sentence.querySelectorAll<HTMLElement>(`[data-syntax-track-index="${trackIndex}"]`));
-        trackElements.forEach((element) => element.style.setProperty("--syntax-line-extra-top", "0px"));
         const labels = track.spans.flatMap((span) => {
           const key = `${trackIndex}:${span.start}:${span.end}`;
           const label = sentence.querySelector<HTMLElement>(`[data-syntax-label-key="${key}"]`);
           if (!label) return [];
+          label.style.removeProperty("width");
+          label.style.removeProperty("white-space");
           const rect = label.getBoundingClientRect();
-          return [{ label, span, left: rect.left, right: rect.right }];
-        }).sort((left, right) => left.left - right.left);
+          return [{ label, span, center: (rect.left + rect.right) / 2, top: rowTops[spanCenterIndex(data.tokens, span)], width: rect.width }];
+        }).sort((left, right) => left.top - right.top || left.center - right.center);
         if (!labels.length) {
           trackElements.forEach((element) => element.style.removeProperty("height"));
           continue;
@@ -221,20 +225,24 @@ export function BbcSyntaxSentence({
 
         const lineHeight = Number.parseFloat(window.getComputedStyle(labels[0].label).lineHeight) || 20;
         const rowSpace = Number.parseFloat(window.getComputedStyle(sentence).getPropertyValue("--syntax-row-space")) || 12;
-        const laneEnds: number[] = [];
+        const bounds = sentence.getBoundingClientRect();
+        let maxLabelHeight = lineHeight;
         for (const item of labels) {
-          let lane = laneEnds.findIndex((right) => right + 4 <= item.left);
-          if (lane < 0) lane = laneEnds.length;
-          laneEnds[lane] = item.right;
-          const laneOffset = lane * (lineHeight + 2);
-          item.label.style.setProperty("--syntax-label-extra-top", `${laneOffset}px`);
-          for (let index = item.span.start; index < item.span.end; index += 1) {
-            words[index]?.querySelector<HTMLElement>(`[data-syntax-track-index="${trackIndex}"]`)
-              ?.style.setProperty("--syntax-line-extra-top", `${laneOffset}px`);
+          const rowLabels = labels.filter((other) => other.top === item.top);
+          const position = rowLabels.indexOf(item);
+          const left = position ? (rowLabels[position - 1].center + item.center) / 2 : bounds.left;
+          const right = position + 1 < rowLabels.length ? (item.center + rowLabels[position + 1].center) / 2 : bounds.right;
+          const available = Math.max(20, 2 * Math.min(item.center - left, right - item.center) - 6);
+          if (item.width > available) {
+            const fontSize = Number.parseFloat(window.getComputedStyle(item.label).fontSize) || 14;
+            // Keep narrow role names readable as two-character rows (形式 / 主语).
+            item.label.style.width = `${Math.max(available, fontSize * Math.min(2, item.label.textContent?.length ?? 2))}px`;
+            item.label.style.whiteSpace = "normal";
           }
+          maxLabelHeight = Math.max(maxLabelHeight, item.label.getBoundingClientRect().height);
         }
 
-        const trackHeight = rowSpace + laneEnds.length * lineHeight + (laneEnds.length - 1) * 2;
+        const trackHeight = rowSpace + maxLabelHeight;
         trackElements.forEach((element) => { element.style.height = `${trackHeight}px`; });
       }
     };
@@ -302,7 +310,7 @@ export function BbcSyntaxSentence({
       const endGap = index + 1 === span.end && spans.some((candidate) => candidate.start === span.end) ? 0.32 : 0;
       return <span aria-hidden="true" className={`${styles.syntaxTrack} ${nested ? styles.syntaxTrackNested : ""} ${role(span.label)}`} data-syntax-track-index={trackIndex} key={`syntax-${trackIndex}`}>
         <span
-          className={`${styles.syntaxLine} ${nested ? styles.syntaxNestedLine : ""} ${onSyntaxSpanClick ? styles.editableMark : ""}`}
+          className={`${styles.syntaxLine} ${level === 2 ? styles.syntaxNestedLine : level >= 3 ? styles.syntaxWavyLine : ""} ${onSyntaxSpanClick ? styles.editableMark : ""}`}
           onClick={() => onSyntaxSpanClick?.(spanLevel, span)}
           style={{ width: `calc(100% + ${gapWithinSpan}em + 2px - ${endGap}em)` } as CSSProperties}
         />
@@ -311,18 +319,18 @@ export function BbcSyntaxSentence({
           data-syntax-label-key={index === centerIndex ? `${trackIndex}:${span.start}:${span.end}` : undefined}
           onClick={() => onSyntaxSpanClick?.(spanLevel, span)}
         >
-          {index === centerIndex ? span.label : "　"}
+          {index === centerIndex ? componentLabel(span.label, data.tokens.slice(span.start, span.end).map((item) => item.text).join(" ")) : "　"}
         </span>
       </span>;
     });
     return (
       <span className={`${styles.word} ${highlighted ? styles.highlight : ""} ${waved.has(index) ? styles.wave : ""}`} data-token-index={index} key={index} style={gapAfter ? { marginRight: `${gapAfter}em` } : undefined}>
         <span className={`${styles.wordText} ${activePlayback ? styles.activePlaybackWord : ""}`} data-word-text>{token.text}</span>
-        {showPos ? <span className={`${styles.pos} ${token.pos === "PUNCT" || lexical.length === 0 ? styles.posPlaceholder : ""} ${onPosTokenClick && token.pos !== "PUNCT" && lexical.length > 0 ? styles.editableMark : ""}`} onClick={() => onPosTokenClick?.(index)}>{token.pos === "PUNCT" || lexical.length === 0 ? "　" : token.posLabel ?? POS_LABELS[token.pos] ?? token.pos}</span> : null}
+        {showPos ? <span className={`${styles.pos} ${token.pos === "PUNCT" || lexical.length === 0 ? styles.posPlaceholder : ""} ${onPosTokenClick && token.pos !== "PUNCT" && lexical.length > 0 ? styles.editableMark : ""}`} onClick={() => onPosTokenClick?.(index)}>{token.pos === "PUNCT" || lexical.length === 0 ? "　" : token.posLabel === "系动词" || staticTracks.some((track) => track.spans.some((span) => /^(系|系动词)$/.test(span.label) && index >= span.start && index < span.end)) ? "动词" : token.posLabel ?? POS_LABELS[token.pos] ?? token.pos}</span> : null}
         {hasSentenceInlineAnnotations && showPos ? (
           <span className={styles.annotationPosTrack}>
             <span className={`${styles.annotationPos} ${inlineAnnotation?.partOfSpeech && hasInlineLabel ? "" : styles.annotationPosPlaceholder}`}>
-              {inlineAnnotation?.partOfSpeech && hasInlineLabel ? inlineAnnotation.partOfSpeech : "　"}
+              {inlineAnnotation?.partOfSpeech && hasInlineLabel ? inlineAnnotation.partOfSpeech === "系动词" ? "动词" : inlineAnnotation.partOfSpeech : "　"}
             </span>
           </span>
         ) : null}
@@ -341,7 +349,7 @@ export function BbcSyntaxSentence({
             className={`${styles.annotationDetails} ${inlineAnnotation ? role(inlineAnnotation.label) : ""} ${onInlineAnnotationClick && inlineAnnotation ? styles.editableMark : ""} ${!hasInlineLabel ? styles.annotationDetailsPlaceholder : ""}`}
             onClick={() => inlineAnnotation && onInlineAnnotationClick?.(inlineAnnotation)}
           >
-            <span className={styles.annotationLabel}>{hasInlineLabel && inlineAnnotation ? inlineAnnotation.label : "　"}</span>
+            <span className={styles.annotationLabel}>{hasInlineLabel && inlineAnnotation ? componentLabel(inlineAnnotation.label) : "　"}</span>
           </span>
         ) : null}
         {syntaxMarks}
@@ -368,10 +376,8 @@ export function BbcSyntaxSentence({
 
   return (
     <div className={`${styles.card} ${embedded ? styles.embedded : ""} ${compact ? styles.compact : ""}`} lang="en">
-      <div className={`${styles.meta} ${embedded ? styles.embeddedMeta : ""}`}><span>#{sentenceNo}</span></div>
       <span className={styles.screenReader}>{data.text}</span>
       <div aria-hidden="true" className={styles.sentence} onMouseUp={handleSelection} ref={sentenceRef}>{words}</div>
-      {data.notes?.length && displayMode !== "none" ? <p className={styles.omissionNotes} lang="zh-CN">{data.notes.join("；")}</p> : null}
       {translation ? <p className={styles.translation} lang="zh-CN">{translation}</p> : null}
     </div>
   );

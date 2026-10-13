@@ -1,4 +1,5 @@
 "use client";
+import { recordPracticeAttempt } from "@/lib/learning/site-progress";
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -191,6 +192,7 @@ export function SatPracticeRunner({ setId }: { setId: string }) {
     const question = questions.find((item) => item.id === questionId);
     const answer = question && progress.answers[question.id];
     if (!question || !answer) return;
+    recordPracticeAttempt({ id: `sat:${question.id}`, title: `SAT · ${question.id}`, href: window.location.pathname + window.location.search, correct: isCorrect(question, answer) ? 1 : 0, total: 1 });
     updateProgress({ submitted: { ...progress.submitted, [question.id]: true }, graded: { ...progress.graded, [question.id]: isCorrect(question, answer) ? "correct" : "incorrect" }, expanded: { ...progress.expanded, [question.id]: true } });
     setFocusedQuestionId(question.id);
   };
@@ -206,6 +208,7 @@ export function SatPracticeRunner({ setId }: { setId: string }) {
       else delete nextGraded[question.id];
     });
     updateProgress({ submitted: nextSubmitted, graded: nextGraded, expanded: nextExpanded });
+    recordPracticeAttempt({ id: `sat:${window.location.pathname}:${new Date().toISOString().slice(0, 10)}`, title: "SAT · 题组练习", href: window.location.pathname + window.location.search, correct: questions.filter((question) => nextGraded[question.id] === "correct").length, total: questions.length });
   };
   const verifyAdmin = async () => {
     const { data: { user } } = await supabase.auth.getUser();

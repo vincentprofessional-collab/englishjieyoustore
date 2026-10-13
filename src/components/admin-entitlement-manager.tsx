@@ -1,6 +1,7 @@
 "use client";
 
-import { type FormEvent, useEffect, useMemo, useState } from "react";
+import Link from "next/link";
+import { type FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import {
   formatProjectPrice,
   PROJECT_ACCESS_PLANS,
@@ -180,6 +181,40 @@ function getUserLabel(profile: ProfileRow) {
 
 export function AdminEntitlementManager() {
   const [users, setUsers] = useState<ProfileRow[]>([]);
+  const [userSearch, setUserSearch] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+  const lastUserSearch = useRef("");
+  useEffect(() => {
+    if (isLoading) return;
+    const query = userSearch.trim().slice(0, 100);
+    if (!query && !lastUserSearch.current) return;
+    lastUserSearch.current = query;
+    let active = true;
+    const timer = window.setTimeout(() => { void (async () => {
+      const pattern = JSON.stringify(`%${query.replace(/[%_]/g, "\\$&")}%`);
+      const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(query);
+      let profileQuery = supabase.from("profiles").select("id,email,display_name,role,created_at")
+        .neq("role", "admin").order("created_at", { ascending: false }).limit(300);
+      if (query) profileQuery = profileQuery.or(`email.ilike.${pattern},display_name.ilike.${pattern}${uuid ? `,id.eq.${query}` : ""}`);
+      const { data, error } = await profileQuery;
+      if (!active) return;
+      if (error) { setMessage("搜索用户失败，请稍后重试。"); return; }
+      const matches = (data ?? []) as ProfileRow[];
+      const rights = matches.length ? await supabase.from("user_project_entitlements")
+        .select("id,user_id,project_key,plan,status,starts_at,expires_at,created_at")
+        .in("user_id", matches.map((user) => user.id)).order("expires_at", { ascending: false }).limit(1000) : null;
+      if (!active) return;
+      if (rights?.error) { setMessage("无法读取搜索用户的项目权限，请稍后重试。"); return; }
+      setUsers(matches);
+      setEntitlements((rights?.data ?? []) as EntitlementRow[]);
+      setSelectedUserId((current) => matches.some((user) => user.id === current) ? current : matches[0]?.id ?? "");
+    })(); }, 350);
+    return () => { active = false; window.clearTimeout(timer); };
+  }, [userSearch, isLoading]);
+  const filteredUsers = useMemo(() => {
+    const query = userSearch.trim().toLocaleLowerCase();
+    return query ? users.filter((user) => [user.email, user.display_name, user.id].some((value) => value?.toLocaleLowerCase().includes(query))) : users;
+  }, [users, userSearch]);
   const [entitlements, setEntitlements] = useState<EntitlementRow[]>([]);
   const [paymentRequests, setPaymentRequests] = useState<PaymentRequestRow[]>([]);
   const [accessProjects, setAccessProjects] = useState<AccessProjectRow[]>([]);
@@ -190,7 +225,6 @@ export function AdminEntitlementManager() {
   const [selectedProjectKey, setSelectedProjectKey] = useState("speaking");
   const [selectedPlan, setSelectedPlan] = useState<ProjectAccessPlan>("monthly");
   const [message, setMessage] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const [isAccessCatalogExpanded, setIsAccessCatalogExpanded] = useState(false);
   const [isPendingPaymentRequestsExpanded, setIsPendingPaymentRequestsExpanded] = useState(true);
@@ -493,9 +527,12 @@ export function AdminEntitlementManager() {
           <span>Project access</span>
           <h2>项目开通</h2>
         </div>
+        <div className="admin-section-heading-actions">
+        <Link className="button secondary" href="/payment">前台付款说明</Link>
         <button className="button secondary" disabled={isLoading} type="button" onClick={loadAccessData}>
           {isLoading ? "刷新中..." : "刷新数据"}
         </button>
+        </div>
       </header>
 
       {message ? <p className="admin-form-message">{message}</p> : null}
@@ -850,17 +887,20 @@ export function AdminEntitlementManager() {
       <section className="admin-editor-card admin-entitlement-table">
         <header className="admin-compact-heading">
           <h3>用户项目权限</h3>
-          <span>{users.length} 个用户</span>
+          <span>{filteredUsers.length} 个用户</span>
         </header>
 
+        <label className="admin-entitlement-user-search"><span>搜索用户</span><input maxLength={100} onChange={(event) => setUserSearch(event.target.value)} placeholder="输入邮箱、姓名或用户 ID" type="search" value={userSearch} /></label>
+
         <div className="admin-table">
-          {users.map((user) => {
+          {filteredUsers.length === 0 ? <p className="muted">{userSearch.trim() ? "未找到匹配用户。" : "暂无用户。"}</p> : null}
+          {filteredUsers.map((user) => {
             const userEntitlements = entitlementByUserId.get(user.id) ?? [];
             const activeEntitlements = userEntitlements.filter(isActiveEntitlement);
 
             return (
               <div className="admin-entitlement-row" key={user.id}>
-                <span>{getUserLabel(user)}</span>
+                <div className="admin-entitlement-user"><span>{getUserLabel(user)}</span><time dateTime={user.created_at ?? undefined}>注册时间：{formatDateTime(user.created_at)}</time></div>
                 <small>
                   {activeEntitlements.length
                     ? activeEntitlements.map((entitlement) => getProjectLabel(entitlement.project_key)).join(" / ")

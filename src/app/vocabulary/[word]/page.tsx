@@ -233,7 +233,6 @@ function PhraseSection({ phrases }: { phrases: VocabularyPhraseMatch[] }) {
           <article className="word-phrase-card" key={phrase.id}>
             <strong>{phrase.phrase}</strong>
             {phrase.chineseText ? <span>{phrase.chineseText}</span> : null}
-            {phrase.sourceTitle ? <small>{phrase.sourceTitle}</small> : null}
           </article>
         ))}
       </div>
@@ -311,6 +310,7 @@ export default async function VocabularyWordPage({
     <VocabularyLookupDisplaySection controlsEnabled id="video" initialVisible={videoVisible} title="视频">
       {videoData?.videos.length ? (
         <VocabularyVideoPlayer
+          canDelete={videoData.canDelete}
           entryWord={entry.normalizedWord}
           totalVideos={videoData.totalVideos}
           videos={videoData.videos}

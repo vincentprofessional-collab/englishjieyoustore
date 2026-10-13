@@ -1,5 +1,6 @@
 import "server-only";
 
+import { createClient } from "@supabase/supabase-js";
 import catalogData from "@/data/vocabulary/video-catalog.json";
 import { getVocabularyVideoMediaUrl } from "@/lib/media/url";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
@@ -106,6 +107,34 @@ export function getVocabularyVideoCandidates(entry: LocalVocabularyEntry) {
   return getCandidatePool(entry);
 }
 
+export function createVocabularyVideoStorageClient() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY ?? process.env.SUPABASE_SECRET_KEY;
+  return url && key ? createClient(url, key, { auth: { autoRefreshToken: false, persistSession: false } }) : null;
+}
+
+async function getStoredCandidates(entry: LocalVocabularyEntry) {
+  const candidates = getCandidatePool(entry);
+  if (!candidates.length) return candidates;
+  const storage = createVocabularyVideoStorageClient();
+  if (!storage) return [];
+
+  const searchTerms = new Set([entry.normalizedWord, ...entry.inflections.map((item) => item.value)]
+    .map((form) => wordsInFilename(form)[0]).filter(Boolean));
+  const storedNames = new Set<string>();
+  await Promise.all([...searchTerms].map(async (search) => {
+    for (let offset = 0; ; offset += 1000) {
+      const { data, error } = await storage.storage.from("videos").list("vocabulary", {
+        limit: 1000, offset, search, sortBy: { column: "name", order: "asc" },
+      });
+      if (error) throw error;
+      for (const file of data ?? []) if (file.id) storedNames.add(file.name);
+      if ((data?.length ?? 0) < 1000) break;
+    }
+  }));
+  return candidates.filter((candidate) => storedNames.has(candidate.path));
+}
+
 function addCalendarMonthsClamped(date: Date, months: number) {
   const target = new Date(date);
   const originalDay = target.getDate();
@@ -149,13 +178,16 @@ function pickVisibleCandidates<T extends { path: string; likes: number }>(items:
 }
 
 export async function getVocabularyVideos(entry: LocalVocabularyEntry) {
-  const candidates = getCandidatePool(entry);
-  if (candidates.length === 0) return { totalVideos: 0, videos: [] as VocabularyVideo[], votesEnabled: false };
+  let candidates: ReturnType<typeof getCandidatePool>;
+  try { candidates = await getStoredCandidates(entry); }
+  catch { candidates = []; }
+  if (candidates.length === 0) return { canDelete: false, totalVideos: 0, videos: [] as VocabularyVideo[], votesEnabled: false };
 
   let startedAt = new Date().toISOString();
   let counts = new Map<string, number>();
   let likedPaths = new Set<string>();
   let votesEnabled = false;
+  let canDelete = false;
 
   try {
     const supabase = await createServerSupabaseClient();
@@ -178,12 +210,12 @@ export async function getVocabularyVideos(entry: LocalVocabularyEntry) {
 
     const userId = userResult.data.user?.id;
     if (userId) {
-      const { data } = await supabase
-        .from("vocabulary_video_votes")
-        .select("video_path")
-        .eq("word", normalizedWord)
-        .eq("user_id", userId);
-      likedPaths = new Set((data ?? []).map((row: { video_path: string }) => row.video_path));
+      const [voteResult, profileResult] = await Promise.all([
+        supabase.from("vocabulary_video_votes").select("video_path").eq("word", normalizedWord).eq("user_id", userId),
+        supabase.from("profiles").select("role").eq("id", userId).maybeSingle(),
+      ]);
+      likedPaths = new Set((voteResult.data ?? []).map((row: { video_path: string }) => row.video_path));
+      canDelete = !profileResult.error && profileResult.data?.role === "admin";
     }
   } catch {
     // The player remains usable before the vote migration is applied.
@@ -193,6 +225,7 @@ export async function getVocabularyVideos(entry: LocalVocabularyEntry) {
   const visible = pickVisibleCandidates(scored, rotationCycle(startedAt, new Date()));
 
   return {
+    canDelete,
     totalVideos: candidates.length,
     videos: visible.map((candidate) => ({
       ...candidate,
@@ -208,5 +241,5 @@ export function isEligibleVocabularyVideo(entry: LocalVocabularyEntry, path: str
 
 export function isPlayableVocabularyVideoFilename(filename: string) {
   const item = catalogByName.get(filename);
-  return Boolean(item && item.bytes < MAX_FILE_BYTES && item.name.toLowerCase().endsWith(".mp4"));
+  return Boolean(item && !/[\\/]/.test(filename) && item.bytes < MAX_FILE_BYTES && item.name.toLowerCase().endsWith(".mp4"));
 }

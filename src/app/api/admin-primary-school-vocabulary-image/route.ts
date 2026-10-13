@@ -2,11 +2,12 @@ import { NextRequest, NextResponse } from "next/server";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import primarySchoolVocabulary from "@/data/vocabulary/primary-school-vocabulary.json";
 import { getPrimarySchoolVocabularyImagePath, normalizePrimarySchoolVocabularyWord } from "@/lib/vocabulary/primary-school-vocabulary-images";
+import { encodeVocabularyImage } from "@/lib/admin/vocabulary-image";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY ?? process.env.SUPABASE_SECRET_KEY;
 const imageMimeTypes = ["image/jpeg", "image/png", "image/webp"];
-const maxImageSize = 350 * 1024;
+const maxImageSize = 4 * 1024 * 1024;
 const primarySchoolWords = new Set(primarySchoolVocabulary.map(({ word }) => word.toLowerCase()));
 
 async function getAdminStorageClient(request: NextRequest) {
@@ -65,18 +66,17 @@ export async function POST(request: NextRequest) {
   const path = getImagePath(formData.get("word"));
   if (!path) return NextResponse.json({ error: "请选择小学词库中的词条。" }, { status: 400 });
   if (!(file instanceof File)) return NextResponse.json({ error: "请选择图片文件。" }, { status: 400 });
-  if (file.type !== "image/webp" || file.size > maxImageSize) {
-    return NextResponse.json({ error: "请上传压缩后的 WebP 图片（不超过 350 KB）。" }, { status: 400 });
+  if (!imageMimeTypes.includes(file.type) || file.size > maxImageSize) {
+    return NextResponse.json({ error: "请上传 JPG、PNG 或 WebP 图片（不超过 4 MB）。" }, { status: 400 });
   }
 
-  const bytes = Buffer.from(await file.arrayBuffer());
-  if (bytes.toString("ascii", 0, 4) !== "RIFF" || bytes.toString("ascii", 8, 12) !== "WEBP") {
-    return NextResponse.json({ error: "图片格式校验失败，请重新选择图片。" }, { status: 400 });
-  }
+  let bytes: Buffer;
+  try { bytes = await encodeVocabularyImage(Buffer.from(await file.arrayBuffer())); }
+  catch { return NextResponse.json({ error: "无法处理这张图片，请确认文件是有效的 JPG、PNG 或 WebP。" }, { status: 400 }); }
 
   try {
     await ensureImageBucket(authorization.supabase);
-    const { error } = await authorization.supabase.storage.from("images").upload(path, file, {
+    const { error } = await authorization.supabase.storage.from("images").upload(path, bytes, {
       cacheControl: "300",
       contentType: "image/webp",
       upsert: true,

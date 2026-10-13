@@ -1,4 +1,5 @@
 "use client";
+import { recordPracticeAttempt } from "@/lib/learning/site-progress";
 
 import { Fragment, useEffect, useMemo, useState } from "react";
 import type { ReactNode } from "react";
@@ -119,6 +120,7 @@ export function SeniorHighKnowledge() {
   };
   const submit = () => {
     if (!topic) return;
+    recordPracticeAttempt({ id: `senior-high:knowledge:${topic}`, title: `高考知识点 · ${topic}`, href: window.location.pathname + window.location.search });
     setSubmitted(true);
     window.localStorage.setItem(`senior-high:knowledge:${topic}`, JSON.stringify({ answers, submitted: true }));
   };

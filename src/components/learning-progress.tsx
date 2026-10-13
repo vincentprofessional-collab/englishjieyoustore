@@ -10,6 +10,7 @@ const MODES: Array<[DailyMode, string]> = [["reading", "阅读"], ["listening", 
 const OUTCOMES: Array<[DailyOutcome, string]> = [["familiar", "熟悉"], ["vague", "模糊"], ["unfamiliar", "生僻"]];
 
 export type SavedVocabularyProgress = Record<string, {
+  sourceBooks?: string[];
   completed?: boolean;
   familiarity?: DailyOutcome | null;
   lastCategory?: DailyMode;
@@ -164,11 +165,16 @@ export function LearningActivityOverview({
 
   const allTimeItems = [...new Set(Object.values(siteHistory).flatMap((day) => day.studyItems))].sort();
   const allTimeLookups = [...new Set(Object.values(siteHistory).flatMap((day) => day.lookedUpWords))].sort((left, right) => left.localeCompare(right));
+  const practiceAttempts = Object.values(siteHistory).flatMap((day) => day.practiceAttempts ?? []).sort((left, right) => Date.parse(right.completedAt) - Date.parse(left.completedAt));
   const trackedWordCount = Object.values(vocabularyProgress).filter((entry) => Object.keys(entry.modeOutcomes ?? {}).length > 0 || Boolean(entry.lastCategory)).length;
   const totalLearningSeconds = Object.values(siteHistory).reduce((sum, day) => sum + day.seconds, 0);
   const activitySeconds = (activity: LearningActivity) => Object.values(siteHistory).reduce((sum, day) => sum + (day.activitySeconds?.[activity] ?? 0), 0);
   const mastery = Object.fromEntries(MODES.map(([mode]) => [mode, { familiar: 0, vague: 0, unfamiliar: 0 }])) as Record<DailyMode, Record<DailyOutcome, number>>;
+  const wordsByStage = new Map<string, number>();
   for (const entry of Object.values(vocabularyProgress)) {
+    if (Object.keys(entry.modeOutcomes ?? {}).length || entry.lastCategory) {
+      for (const book of entry.sourceBooks?.length ? entry.sourceBooks : ["旧记录未标注阶段"]) wordsByStage.set(book, (wordsByStage.get(book) ?? 0) + 1);
+    }
     for (const [mode] of MODES) {
       const outcome = entry.modeOutcomes?.[mode] ?? (entry.lastCategory === mode
         ? entry.familiarity ?? (entry.lastOutcome && entry.lastOutcome !== "unscored" ? entry.lastOutcome : null)
@@ -232,11 +238,19 @@ export function LearningActivityOverview({
       <section className="learning-progress-category-card">
         <div className="learning-progress-category-heading"><div><p className="eyebrow">词汇记录</p><h2>背单词</h2></div></div>
         <div className="learning-progress-category-stats"><div><span>投入时间</span><strong>{formatDuration(activitySeconds("vocabulary"))}</strong></div><div><span>已记录词汇</span><strong>{trackedWordCount}<small> 个</small></strong></div></div>
+        <div aria-label="词汇阶段" className="learning-progress-vocabulary-stages">{[...wordsByStage].map(([stage, count]) => <span key={stage}>{stage} <strong>{count}</strong> 个</span>)}</div>
         <details className="learning-progress-details"><summary>查看各模式掌握情况</summary>
           <div className="learning-progress-table learning-progress-mastery-table">
             <div className="learning-progress-table-row learning-progress-table-head"><span>模式</span>{OUTCOMES.map(([outcome, label]) => <span key={outcome}>{label}</span>)}</div>
             {MODES.map(([mode, label]) => <div className="learning-progress-table-row" key={mode}><span>{label}</span>{OUTCOMES.map(([outcome]) => <span className={outcome === "familiar" ? "success" : outcome === "unfamiliar" ? "error" : ""} key={outcome}>{mastery[mode][outcome]}</span>)}</div>)}
           </div>
+        </details>
+      </section>
+      <section className="learning-progress-category-card">
+        <div className="learning-progress-category-heading"><div><p className="eyebrow">做题记录</p><h2>练习</h2></div></div>
+        <div className="learning-progress-category-stats"><div><span>投入时间</span><strong>{formatDuration(activitySeconds("practice"))}</strong></div><div><span>提交练习</span><strong>{practiceAttempts.length}<small> 次</small></strong></div></div>
+        <details className="learning-progress-details"><summary>查看做过的练习</summary>
+          {practiceAttempts.length ? <ul>{practiceAttempts.map((attempt) => <li key={`${attempt.id}:${attempt.completedAt}`}><a href={attempt.href}>{attempt.title}</a><small className="learning-progress-attempt-detail">{attempt.completedAt.slice(0, 10)}{attempt.total != null && attempt.correct != null ? ` · ${attempt.correct}/${attempt.total} 题` : ""}</small></li>)}</ul> : <p>还没有提交练习记录。</p>}
         </details>
       </section>
 
@@ -261,9 +275,13 @@ export function LearningProgress() {
     const refresh = () => {
       setSiteHistory(readSiteStudyHistory());
       const savedVocabulary = readJson<{ progress?: SavedVocabularyProgress }>(VOCABULARY_PROGRESS_KEY);
-      const currentProgress = savedVocabulary?.progress ?? {};
-      setVocabularyProgress(currentProgress);
+      const currentProgress = structuredClone(savedVocabulary?.progress ?? {});
       const activity = readJson<DailyActivityStore>(VOCABULARY_DAILY_ACTIVITY_KEY);
+      for (const event of activity?.events ?? []) {
+        const entry = currentProgress[event.wordId];
+        if (entry && !entry.sourceBooks?.length && event.book && event.book !== "生词本") entry.sourceBooks = [event.book];
+      }
+      setVocabularyProgress(currentProgress);
       const history = { ...(activity?.history ?? {}) };
       if (activity?.date === localStudyDate() && activity.events.length) {
         history[activity.date] = summarizeDailyStudy(activity, currentProgress, 0);
@@ -276,7 +294,7 @@ export function LearningProgress() {
   }, []);
 
   return <main className="stack learning-progress-page">
-    <section className="learning-progress-hero"><p className="eyebrow">学习轨迹</p><h1>学习进度</h1><p>查看打卡日历、学习趋势和三类学习记录。</p></section>
+    <section className="learning-progress-hero"><p className="eyebrow">学习轨迹</p><h1>学习进度</h1><p>查看打卡日历、学习趋势和四类学习记录。</p></section>
     <LearningActivityOverview siteHistory={siteHistory} vocabularyHistory={vocabularyHistory} vocabularyProgress={vocabularyProgress} />
   </main>;
 }

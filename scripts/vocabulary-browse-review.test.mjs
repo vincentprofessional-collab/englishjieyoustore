@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { drawBrowseMode, filterBrowseReviewWords, nextBrowseLoopId, scheduleBrowseReview } from "../src/lib/vocabulary/browse-review.ts";
+import { drawBrowseMode, drawWeightedBrowseWord, filterBrowseReviewWords, nextBrowseLoopId, scheduleBrowseReview } from "../src/lib/vocabulary/browse-review.ts";
 
 test("浏览复习范围可以不选、按今日或整体筛选，并组合多个熟悉程度", () => {
   const now = new Date(2026, 8, 27, 12).getTime();
@@ -25,6 +25,20 @@ test("浏览复习范围可以不选、按今日或整体筛选，并组合多�
   assert.deepEqual(ids("overall", ["vague", "unfamiliar"], ["reading", "listening", "speaking"]), ["unfamiliar"]);
   assert.deepEqual(ids(null, [], ["writing"]), ["familiar", "vague", "unfamiliar", "browsed", "fresh"]);
   assert.deepEqual(ids(null, ["familiar"]), ["familiar"]);
+});
+
+test("三项全选按每词 1:1.1:1.2 的权重随机抽取，不按分类人数分配机会", () => {
+  const words = ["familiar", "vague", "unfamiliar"].map((id) => ({ id }));
+  const progress = Object.fromEntries(words.map((word) => [word.id, { familiarity: word.id }]));
+  const counts = { familiar: 0, vague: 0, unfamiliar: 0 };
+  for (let i = 0; i < 3300; i++) counts[drawWeightedBrowseWord(words, progress, () => (i + 0.5) / 3300).id]++;
+  assert.deepEqual(counts, { familiar: 1000, vague: 1100, unfamiliar: 1200 });
+  const repeatedCounts = { familiar: 0, vague: 0, unfamiliar: 0 };
+  for (let i = 0; i < 3300; i++) repeatedCounts[drawWeightedBrowseWord([...words, words[0]], progress, () => (i + 0.5) / 3300).id]++;
+  assert.deepEqual(repeatedCounts, counts, "重复词条不能增加该词出现的机会");
+  assert.equal(drawWeightedBrowseWord([], progress), null);
+  assert.equal(drawWeightedBrowseWord([{ id: "single" }], progress).id, "single");
+  assert.deepEqual(filterBrowseReviewWords([...words, { id: "new" }], progress, "小学:all", null, ["familiar", "vague", "unfamiliar"], Date.now()).map((word) => word.id), ["familiar", "vague", "unfamiliar", "new"]);
 });
 
 test("浏览模式随机穿插已启用方式，一轮内每种方式各出现一次", () => {

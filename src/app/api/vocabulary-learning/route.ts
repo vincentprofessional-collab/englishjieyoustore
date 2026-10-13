@@ -13,6 +13,7 @@ import {
   type LearningWord,
 } from "@/lib/vocabulary/learning";
 import { getSupplementalLearningWords } from "@/lib/vocabulary/supplemental-learning-books";
+import { withExistingStudyExamples } from "@/lib/vocabulary/study-examples";
 
 export const dynamic = "force-dynamic";
 
@@ -44,13 +45,13 @@ export function GET(request: Request) {
     const supplementalWords = getSupplementalLearningWords(book);
     if (supplementalWords) {
       return NextResponse.json(
-        { book, sourceCount: supplementalWords.length, words: supplementalWords },
+        { book, sourceCount: supplementalWords.length, words: supplementalWords.map(withExistingStudyExamples) },
         { headers: { "Cache-Control": "no-store" } },
       );
     }
   }
   const entries = getAllVocabularyEntries();
-  const words = getLearningBookEntries(entries, book).map(toLearningWord);
+  const words = getLearningBookEntries(entries, book).map(toLearningWord).map(withExistingStudyExamples);
 
   return NextResponse.json(
     {
@@ -88,7 +89,7 @@ export async function POST(request: Request) {
   });
 
   return NextResponse.json(
-    { book: "生词本", sourceCount: words.length, words },
+    { book: "生词本", sourceCount: words.length, words: words.map(withExistingStudyExamples) },
     { headers: { "Cache-Control": "no-store" } },
   );
 }

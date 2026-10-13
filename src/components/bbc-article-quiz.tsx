@@ -4,6 +4,7 @@ import { useState, type DragEvent, type FormEvent, type PointerEvent } from "rea
 
 import quizCatalog from "@/data/bbc/quiz-index.json";
 import { syncWrongBbcQuizFavorite } from "@/lib/bbc-quiz-favorites";
+import { recordPracticeAttempt } from "@/lib/learning/site-progress";
 
 import styles from "./bbc-article-quiz.module.css";
 
@@ -85,6 +86,7 @@ function useQuestionSubmission({
   }
 
   function submitValue(nextValue: string) {
+    recordPracticeAttempt({ id: `bbc:${articleId}:${kind}:${question.number}`, title: `BBC · ${articleTitle} · 第 ${question.number} 题`, href: window.location.pathname, ...(hasReferenceAnswer ? { correct: nextValue === question.answer ? 1 : 0, total: 1 } : {}) });
     setSubmitted(true);
     if (!question.options?.length || !hasReferenceAnswer) return;
     const nextCorrect = nextValue === question.answer;
@@ -255,6 +257,7 @@ function MatchingQuestionGroup({
 
   function submitAnswer(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    recordPracticeAttempt({ id: `bbc:${articleId}:matching`, title: `BBC · ${articleTitle} · 匹配练习`, href: window.location.pathname });
     setSubmitted(true);
     let failed = false;
 
@@ -388,6 +391,7 @@ function SummaryFillBlankQuestion({
 
   function submitAnswer(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    recordPracticeAttempt({ id: `bbc:${articleId}:fill:${questions.map((question) => question.number).join(",")}`, title: `BBC · ${articleTitle} · 填空练习`, href: window.location.pathname });
     setSubmitted(true);
     let failed = false;
 

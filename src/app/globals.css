@@ -2028,7 +2028,7 @@
 .learning-progress-trend-chart-svg line { stroke: #e9e2d5; stroke-width: 1; }
 .learning-progress-trend-chart-svg text { fill: #766f62; font-size: 10px; }
 .learning-progress-trend-empty { align-content: center; color: #9b9282; display: grid; font-size: 13px; height: 130px; margin: 0; text-align: center; }
-.learning-progress-category-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; align-items: start; }
+.learning-progress-category-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; align-items: start; }
 .learning-progress-category-card { display: grid; align-content: start; gap: 16px; min-width: 0; border: 1px solid #e4dccd; border-radius: 14px; background: #fffdf7; padding: 20px; }
 .learning-progress-category-heading h2 { margin: 0; color: #245d7b; font-family: KaiTi, STKaiti, serif; }
 .learning-progress-category-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
@@ -2044,7 +2044,10 @@
 .learning-progress-details a { color: #245d7b; text-decoration-color: #a9d4ea; text-underline-offset: 3px; }
 .learning-progress-mastery-table .learning-progress-table-row { grid-template-columns: 1.4fr repeat(3, 1fr); min-width: 390px; }
 .learning-progress-data-note { margin: 0; color: #817b70; font-size: 12px; line-height: 1.5; }
-@media (max-width: 900px) { .learning-progress-category-grid { grid-template-columns: 1fr; } }
+@media (max-width: 560px) { .learning-progress-category-grid { gap: 8px; } .learning-progress-category-card { padding: 12px 8px; } }
+.learning-progress-vocabulary-stages { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.learning-progress-vocabulary-stages > span { background: #e5f2fa; border-radius: 8px; padding: 5px 8px; font-size: 13px; }
+.learning-progress-attempt-detail { display: block; color: var(--muted); font-size: 12px; margin-top: 3px; }
 @media (max-width: 760px) { .learning-progress-card-heading { align-items: start; flex-direction: column; } .learning-progress-table-row { min-width: 560px; } }
 @media (max-width: 760px) { .learning-progress-trend-charts { grid-template-columns: 1fr; } }
 @media (max-width: 560px) { .learning-progress-overview-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
@@ -5675,7 +5678,7 @@ html.reading-fullscreen-active .shell {
   background: #fff;
   display: grid;
   grid-template-columns: minmax(0, var(--reading-passage-width)) minmax(0, calc(100% - var(--reading-passage-width)));
-  height: clamp(400px, calc(100vh - 390px), 720px);
+  height: max(400px, calc(100dvh - 170px));
   min-height: 400px;
   position: relative;
 }
@@ -18134,6 +18137,19 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
   margin: 0;
 }
 
+.vocabulary-video-delete-button {
+  background: #fff1ed;
+  border: 1px solid #ec9a89;
+  border-radius: 12px;
+  color: #b72323;
+  flex-shrink: 0;
+  font-size: 14px;
+  min-height: 32px;
+  padding: 5px 10px;
+}
+
+.vocabulary-video-delete-button:disabled { cursor: wait; opacity: 0.65; }
+
 .vocabulary-video-count {
   color: var(--muted);
   font-size: 13px;
@@ -21591,7 +21607,7 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
   gap: 12px;
 }
 
-.guide-comment-list > article {
+.guide-comment-item {
   align-items: start;
   background: rgba(255, 255, 255, 0.78);
   border: 1px solid rgba(169, 212, 234, 0.9);
@@ -21614,6 +21630,15 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
   width: 36px;
 }
 
+.guide-comment-avatar.is-guest {
+  color: #fff;
+}
+
+.guide-comment-avatar.is-paid {
+  background: #f4d579;
+  color: #76551a;
+}
+
 .guide-comment-avatar img {
   border-radius: 50%;
   height: 100%;
@@ -21621,27 +21646,120 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
   width: 100%;
 }
 
-.guide-comment-list article header {
+.guide-comment-content {
+  min-width: 0;
+}
+
+.guide-comment-content header {
   align-items: center;
   display: flex;
   gap: 12px;
   justify-content: space-between;
 }
 
-.guide-comment-list article header strong {
+.guide-comment-content header strong {
   color: var(--ink);
 }
 
-.guide-comment-list article time {
+.guide-comment-content time {
   color: var(--muted);
   font-size: 11px;
 }
 
-.guide-comment-list article p {
+.guide-comment-content p {
   color: var(--ink);
   line-height: 1.65;
   margin: 6px 0 0;
   white-space: pre-wrap;
+}
+
+.guide-comment-replies {
+  background: rgba(255, 253, 248, 0.9);
+  border: 1px solid rgba(229, 216, 185, 0.95);
+  border-radius: 14px;
+  display: grid;
+  gap: 8px;
+  margin-left: 2ch;
+  min-width: 0;
+  padding: 10px;
+}
+
+.guide-comment-replies .guide-comment-item {
+  background: rgba(255, 255, 255, 0.88);
+  border-color: rgba(229, 216, 185, 0.75);
+}
+
+.guide-comment-reply-target {
+  color: var(--muted);
+  display: block;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.guide-comment-reply-button {
+  background: transparent;
+  border: 0;
+  color: var(--accent-dark);
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  margin-top: 7px;
+  padding: 0;
+}
+
+.guide-comment-reply-button:hover {
+  text-decoration: underline;
+}
+
+.guide-comment-reply-form {
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 9px;
+  padding-top: 10px;
+}
+
+.guide-comment-reply-form label {
+  display: grid;
+  gap: 7px;
+}
+
+.guide-comment-reply-form label > span {
+  color: var(--accent-dark);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.guide-comment-reply-form textarea {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: var(--ink);
+  font: inherit;
+  min-height: 64px;
+  outline: 0;
+  padding: 10px 12px;
+  resize: vertical;
+}
+
+.guide-comment-reply-form > div {
+  display: flex;
+  gap: 9px;
+  justify-content: flex-end;
+}
+
+.guide-comment-reply-form > div > button:not(.button) {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--accent-dark);
+  cursor: pointer;
+  font: inherit;
+  padding: 7px 14px;
+}
+
+.guide-comment-reply-form .button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
 }
 
 .guide-comment-form {
@@ -22824,6 +22942,15 @@ audio.guide-editor-asset-preview {
   max-width: 100%;
   width: min(100%, 260px);
 }
+
+.project-access-payment-note { white-space: pre-line; }
+.project-access-copy-editor { display: grid; gap: 10px; margin-top: 12px; }
+.project-access-copy-editor label { display: grid; gap: 4px; }
+.project-access-copy-editor input, .project-access-copy-editor textarea { box-sizing: border-box; width: 100%; }
+.admin-entitlement-user-search { display: grid; gap: 5px; margin: 12px 0; }
+.admin-entitlement-user-search input { max-width: 480px; width: 100%; }
+.admin-entitlement-user { display: grid; gap: 5px; min-width: 0; overflow-wrap: anywhere; }
+.admin-entitlement-user time { color: var(--muted); font-size: 12px; }
 
 .project-open-request-banner {
   align-items: center;
@@ -28389,6 +28516,28 @@ audio.guide-editor-asset-preview {
   justify-content: center;
 }
 
+.vocabulary-learning-scope-choice { position: relative; }
+.vocabulary-learning-scope-choice label { height: 100%; padding-right: 40px; }
+.vocabulary-learning-scope-choice label > span { flex-wrap: wrap; }
+.vocabulary-learning-scope-choice .vocabulary-study-group-label { flex-basis: 100%; font-size: 12px; }
+.vocabulary-study-group-select {
+  background: transparent;
+  border: 0;
+  color: var(--accent-dark);
+  cursor: pointer;
+  font-size: 0;
+  height: 34px;
+  padding: 0;
+  position: absolute;
+  right: 7px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+}
+.vocabulary-study-group-select option { color: #1c303b; font-size: 16px; }
+.vocabulary-study-group-select:disabled { cursor: wait; opacity: 0.5; }
+.vocabulary-study-group-arrow { color: var(--accent-dark); font-size: 22px; line-height: 1; pointer-events: none; position: absolute; right: 13px; top: 50%; transform: translateY(-50%); }
+
 .vocabulary-learning-settings-scope label span {
   align-items: center;
   display: inline-flex;
@@ -30232,12 +30381,14 @@ body *:not(.bbc-vocabulary-highlight):not(.bbc-active-word) {
 }
 
 .bbc-syntax-reading {
-  --bbc-syntax-role-subject: #245d7b;
-  --bbc-syntax-role-predicate: #a32c1e;
-  --bbc-syntax-role-object: #1f5c8b;
-  --bbc-syntax-role-predicative: #6b3fa0;
-  --bbc-syntax-role-adverbial: #0f6e7a;
-  --bbc-syntax-role-attributive: #8a6a2f;
+  --bbc-syntax-role-subject: #20b928;
+  --bbc-syntax-role-predicate: #ef2929;
+  --bbc-syntax-role-object: #1685ef;
+  --bbc-syntax-role-predicative: #923be8;
+  --bbc-syntax-role-adverbial: #e8ae00;
+  --bbc-syntax-role-attributive: #ff850c;
+  --bbc-syntax-role-appositive: #a56732;
+  --bbc-syntax-role-complement: #df36ad;
   --bbc-syntax-role-other: #6e6a63;
 }
 
@@ -34921,7 +35072,6 @@ body .mobile-bottom-nav a.active { color: #245d7b !important; }
     width: 14px;
   }
 
-  .vocabulary-word-page .vocabulary-workbook-source-label,
   .vocabulary-word-page .word-lookup-etymology-card > div > strong,
   .mobile-word-preview .word-lookup-etymology-card > div > strong,
   .vocabulary-learning-page .vocabulary-learning-complete-detail .word-lookup-etymology-card > div > strong {
@@ -35225,10 +35375,18 @@ body .mobile-bottom-nav a.active { color: #245d7b !important; }
   .bbc-player-timer-value { font-size: 13px; font-variant-numeric: tabular-nums; }
   .bbc-article-page .bbc-full-audio .player-main-controls { gap: 6px; }
   .bbc-article-page .bbc-mobile-player-shortcuts .player-menu-panel {
+    position: absolute;
+    width: max-content;
+    background: #cfe7f5;
+    border-radius: 14px;
     bottom: calc(100% + 10px);
+    max-height: min(50dvh, 340px);
     max-width: calc(100vw - 28px);
+    overflow-y: auto;
     top: auto;
   }
+  .bbc-article-page .bbc-mobile-player-shortcuts .player-menu:not(.is-open) .player-menu-panel { display: none; }
+  .bbc-article-page .bbc-mobile-player-shortcuts .player-menu.is-open .player-menu-panel { display: grid; gap: 6px; }
   .bbc-article-page .player-controls-leading .player-menu-panel { left: 0; right: auto; }
   .bbc-article-page .player-controls-trailing .player-menu-panel { left: auto; right: 0; }
   .bbc-article-page .bbc-mobile-player-shortcuts .player-menu-panel button { font-size: 14px; min-height: 40px; }
@@ -35271,3 +35429,15 @@ body .mobile-bottom-nav a.active { color: #245d7b !important; }
   .listening-exam-page .bbc-audio-toolbar-modes .player-menu-panel { position: absolute; top: calc(100% + 5px); min-width: 160px; width: max-content; max-width: calc(100vw - 28px); z-index: 130; }
   .listening-exam-page .bbc-audio-toolbar-modes > .player-settings:last-child .player-menu-panel { left: auto; right: 0; }
 }
+
+/* Compact definition choices while retaining the original study layout. */
+.vocabulary-learning-page .vocabulary-learning-definition-options { align-content: start; align-self: start; flex: 0 0 auto; height: auto !important; min-height: 0 !important; }
+.vocabulary-learning-page .vocabulary-learning-definition-options button { align-content: center; height: auto !important; min-height: 108px !important; padding: 38px 16px 14px; }
+.vocabulary-learning-page .vocabulary-learning-definition-options button > span { line-height: 1.45; }
+
+/* Place the selected accent's phonetic between the word and its short meaning. */
+.vocabulary-learning-page .vocabulary-learning-today-item { display: grid; grid-template-columns: 8px minmax(0, 0.85fr) minmax(0, 1fr) minmax(0, 0.85fr); }
+.vocabulary-learning-page .vocabulary-learning-today-word { max-width: none; }
+.vocabulary-learning-today-phonetic { color: #245d7b; font-size: 13px; line-height: 1.4; min-width: 0; overflow-wrap: anywhere; text-align: center; }
+.vocabulary-learning-today-phonetic.is-hidden { filter: blur(6px); user-select: none; }
+.vocabulary-learning-page .vocabulary-learning-today-definition { margin-left: 0; }

@@ -31,6 +31,7 @@ import {
   type StudySelectionActionPosition,
 } from "@/lib/study-selection";
 import { clearPersistedInlineHighlights, focusInlineText, inlineHighlightKey, persistInlineHighlight, restoreInlineHighlights, textOccurrenceForRange } from "@/lib/inline-highlights";
+import { recordPracticeAttempt } from "@/lib/learning/site-progress";
 
 type AnswerMap = Record<number, string[]>;
 type FillMap = Record<number, string>;
@@ -978,6 +979,7 @@ export function ReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: 
   const selectedRangeRef = useRef<Range | null>(null);
   const isResizingRef = useRef(false);
   const noticeTimerRef = useRef<number | null>(null);
+  const practiceAttemptStartedAt = useRef(Date.now());
   const selectionHideTimerRef = useRef<number | null>(null);
   const highlightStorageKey = inlineHighlightKey(`reading:${mode}:${test.id}`);
 
@@ -1566,6 +1568,7 @@ export function ReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: 
   }
 
   function submitAnswers() {
+    recordPracticeAttempt({ id: `reading:${test.id}:${practiceAttemptStartedAt.current}`, title: `雅思阅读 · ${test.title}`, href: getCurrentReadingHref(), correct: correctCount, total: reviewRows.length });
     syncWrongReadingQuestionFavorites(reviewRows);
     setIsSubmitted(true);
     if (isFullscreen) {

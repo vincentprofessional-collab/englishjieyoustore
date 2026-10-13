@@ -1,4 +1,5 @@
 "use client";
+import { recordPracticeAttempt } from "@/lib/learning/site-progress";
 
 import Link from "next/link";
 import {
@@ -3504,6 +3505,11 @@ export function ListeningPractice({
       timeSeconds: seconds,
       updatedAt: completedAt,
       version: 1,
+    });
+    recordPracticeAttempt({
+      id: `listening:${completedAttemptId}`,
+      title: `雅思听力 · ${formatBookCode(initialSection.bookCode)} Test ${initialSection.testNo}${mode === "practice" ? ` Section ${section.sectionNo}` : ""}`,
+      href: `/listening/${section.id}?mode=${mode}&review=1&attempt=${completedAttemptId}`,
     });
     setAttemptId(completedAttemptId);
     setSubmitted(true);

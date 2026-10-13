@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { recordDailyLearningSeconds, recordStudyPage, recordVocabularyLookup, readSiteStudyHistory, SITE_DAILY_PROGRESS_KEY } from "../src/lib/learning/site-progress.ts";
+import { activityForLearningPath, recordPracticeAttempt, recordDailyLearningSeconds, recordStudyPage, recordVocabularyLookup, readSiteStudyHistory, SITE_DAILY_PROGRESS_KEY } from "../src/lib/learning/site-progress.ts";
 
 function memoryStorage() {
   const values = new Map();
@@ -23,12 +23,28 @@ test("site study tracking records active time and unique articles per local day"
 
   const days = readSiteStudyHistory(storage);
   assert.deepEqual(days["2026-10-02"], {
-    activitySeconds: { articles: 0, vocabulary: 0, lookups: 0 },
+    activitySeconds: { articles: 0, vocabulary: 0, lookups: 0, practice: 0 },
     lookedUpWords: ["disappointment", "gap"],
     seconds: 120,
     studyItems: ["bbc:word-building", "new-concept:lesson-001"],
   });
   assert.equal(storage.getItem(SITE_DAILY_PROGRESS_KEY) !== null, true);
+});
+
+test("submitted practice is retained once per attempt and counted separately from reading", () => {
+  const storage = memoryStorage();
+  const today = new Date(2026, 9, 13, 12);
+  const attempt = { id: "reading:ci5:attempt1", title: "雅思阅读 · Cambridge 5 Test 1", href: "/reading/practice/cambridge-5-test-1", correct: 3, total: 40 };
+  recordPracticeAttempt(attempt, storage, today);
+  recordPracticeAttempt({ ...attempt, correct: 4 }, storage, today);
+  recordDailyLearningSeconds(60, storage, today, activityForLearningPath(attempt.href));
+  const day = readSiteStudyHistory(storage)["2026-10-13"];
+  assert.equal(day.practiceAttempts.length, 1);
+  assert.equal(day.practiceAttempts[0].correct, 4);
+  assert.equal(day.activitySeconds.practice, 60);
+  assert.equal(day.activitySeconds.articles, 0);
+  recordPracticeAttempt({ ...attempt, href: "//outside.invalid" }, storage, today);
+  assert.equal(readSiteStudyHistory(storage)["2026-10-13"].practiceAttempts.length, 1);
 });
 
 test("daily progress keeps five years of history and reads older entries without lookup data", () => {

@@ -26,5 +26,5 @@ test("category time adds to the existing daily total without changing old record
 
   const day = readSiteStudyHistory(storage)["2026-10-10"];
   assert.equal(day.seconds, 155);
-  assert.deepEqual(day.activitySeconds, { articles: 65, vocabulary: 90, lookups: 0 });
+  assert.deepEqual(day.activitySeconds, { articles: 65, vocabulary: 90, lookups: 0, practice: 0 });
 });

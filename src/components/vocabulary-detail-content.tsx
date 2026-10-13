@@ -12,6 +12,7 @@ import type { VocabularySynonymDistinction } from "@/lib/vocabulary/synonym-dist
 import type { LocalVocabularyEntry, VocabularyFormationPart } from "@/lib/vocabulary/local-vocabulary";
 import { isSupplementalLearningBook } from "@/lib/vocabulary/learning";
 import { getPrimarySchoolVocabularyImageUrl } from "@/lib/vocabulary/primary-school-vocabulary-images";
+import { getVocabularyLookupDisplayPreferences, subscribeToVocabularyLookupDisplayPreferences } from "@/lib/vocabulary/lookup-display-preferences";
 
 type VocabularyDetailContentProps = {
   entry: LocalVocabularyEntry;
@@ -205,7 +206,6 @@ function PhraseSection({ phrases }: { phrases: VocabularyPhraseMatch[] }) {
           <article className="word-phrase-card" key={phrase.id}>
             <strong>{phrase.phrase}</strong>
             {phrase.chineseText ? <span>{phrase.chineseText}</span> : null}
-            {phrase.sourceTitle ? <small>{phrase.sourceTitle}</small> : null}
           </article>
         ))}
       </div>
@@ -222,9 +222,15 @@ function UsageExamplesSection({
 }) {
   const bilingualExamples = examples.filter((example) => example.englishText.trim() && example.chineseText.trim());
   const imageUrl = illustrationWord ? getPrimarySchoolVocabularyImageUrl(illustrationWord) : null;
+  const [imagesVisible, setImagesVisible] = useState(true);
   const [imageState, setImageState] = useState<"loading" | "ready" | "missing">(imageUrl ? "loading" : "missing");
   useEffect(() => {
-    if (!imageUrl) {
+    const sync = () => setImagesVisible(getVocabularyLookupDisplayPreferences().images);
+    sync();
+    return subscribeToVocabularyLookupDisplayPreferences(sync);
+  }, []);
+  useEffect(() => {
+    if (!imageUrl || !imagesVisible) {
       setImageState("missing");
       return;
     }
@@ -237,9 +243,9 @@ function UsageExamplesSection({
       image.onload = null;
       image.onerror = null;
     };
-  }, [imageUrl]);
+  }, [imageUrl, imagesVisible]);
 
-  const illustration = imageUrl && imageState === "ready" ? (
+  const illustration = imagesVisible && imageUrl && imageState === "ready" ? (
     <img
       alt={`${illustrationWord} 的词汇插图`}
       className="vocabulary-primary-school-word-picture"
@@ -253,7 +259,7 @@ function UsageExamplesSection({
   if (bilingualExamples.length === 0) {
     if (!illustration || imageState === "missing") return null;
     return (
-      <VocabularyLookupDisplaySection controlsEnabled id="examples" title="词汇图片">
+      <VocabularyLookupDisplaySection controlsEnabled id="images" title="图片">
         <div className="vocabulary-primary-school-picture-only">{illustration}</div>
       </VocabularyLookupDisplaySection>
     );
@@ -262,7 +268,7 @@ function UsageExamplesSection({
   return (
     <VocabularyLookupDisplaySection className="vocabulary-usage-examples" controlsEnabled id="examples" title="例句">
       <div
-        className={`vocabulary-usage-example-layout${imageState === "ready" ? " has-primary-school-picture" : ""}`}
+        className={`vocabulary-usage-example-layout${illustration ? " has-primary-school-picture" : ""}`}
         data-has-non-bbc-examples={bilingualExamples.some((example) => example.bookCode !== "BBC") ? "true" : "false"}
       >
         <div className="vocabulary-usage-example-list">
@@ -270,10 +276,10 @@ function UsageExamplesSection({
             <article className="vocabulary-usage-example-card" data-book-code={example.bookCode} id={`vocabulary-example-${index + 1}`} key={example.id}>
               {example.sourceType === "article" || example.sourceType === "new-concept" ? (
                 <VocabularyExampleArticleLink example={example}>
-                  <div className="vocabulary-usage-example-main"><p>{example.englishText}</p>{example.chineseText ? <span>{example.chineseText}</span> : null}<small className={example.sourceTitle === "词汇总表 · 双语例句" ? "vocabulary-workbook-source-label" : undefined}>{example.sourceTitle}</small></div>
+                  <div className="vocabulary-usage-example-main"><p>{example.englishText}</p>{example.chineseText ? <span>{example.chineseText}</span> : null}</div>
                 </VocabularyExampleArticleLink>
               ) : (
-                <div className="vocabulary-usage-example-main"><p>{example.englishText}</p>{example.chineseText ? <span>{example.chineseText}</span> : null}<small className={example.sourceTitle === "词汇总表 · 双语例句" ? "vocabulary-workbook-source-label" : undefined}>{example.sourceTitle}</small></div>
+                <div className="vocabulary-usage-example-main"><p>{example.englishText}</p>{example.chineseText ? <span>{example.chineseText}</span> : null}</div>
               )}
               <div className="vocabulary-usage-example-actions">
                 {example.audioUrl ? <VocabularyExampleAudioButton audioUrl={example.audioUrl} /> : null}

@@ -909,7 +909,7 @@ export function AudioSettingsMenus({
               onChange(preserveModeSettings
                 ? { playMode: String(value) as AudioPlayMode }
                 : exitPracticeMode({ playMode: String(value) as AudioPlayMode }));
-              onModeSelect?.("listening");
+              if (!preserveModeSettings) onModeSelect?.("listening");
             },
           },
         ]

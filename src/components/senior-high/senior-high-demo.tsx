@@ -1,4 +1,5 @@
 "use client";
+import { recordPracticeAttempt } from "@/lib/learning/site-progress";
 
 import { Fragment, useEffect, useMemo, useState } from "react";
 import type { ReactNode } from "react";
@@ -172,6 +173,8 @@ export function SeniorHighDemo() {
   const submit = () => {
     if (!session) return;
     const completedAt = new Date().toISOString();
+    const title = session.kind === "topic" ? session.topic : session.kind === "practice-group" ? session.group.title : session.kind === "item" ? session.item.title : session.paper.title;
+    recordPracticeAttempt({ id: sessionKey(session), title: `高考英语 · ${title}`, href: window.location.pathname + window.location.search });
     window.localStorage.setItem(sessionKey(session), JSON.stringify({ answers, completedAt }));
     setCompleted((current) => ({ ...current, [completionKey(session)]: completedAt }));
     setSubmitted(true);

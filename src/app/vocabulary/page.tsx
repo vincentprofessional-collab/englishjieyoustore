@@ -9,12 +9,12 @@ import { getExtendedVocabularyEntry, getVocabularyEntry, getVocabularyFormationP
 import { getVocabularyLookupEtymology } from "@/lib/vocabulary/lookup-etymology";
 import { DEFAULT_VOCABULARY_LOOKUP_DISPLAY_PREFERENCES, isPhoneUserAgent, VOCABULARY_LOOKUP_VIDEO_COOKIE } from "@/lib/vocabulary/lookup-display-preferences";
 import { getVocabularyPhraseMatches } from "@/lib/vocabulary/phrases";
-import { getVocabularyVideoCandidates } from "@/lib/vocabulary/videos";
+import { getVocabularyVideos } from "@/lib/vocabulary/videos";
 
 export const dynamic = "force-dynamic";
 
-async function MobileSurpriseWordPreview() {
-  const entry = getVocabularyEntry("surprise") ?? await getExtendedVocabularyEntry("surprise");
+async function MobileDefaultWordPreview() {
+  const entry = getVocabularyEntry("baby") ?? await getExtendedVocabularyEntry("baby");
   if (!entry) return null;
 
   const [requestHeaders, cookieStore] = await Promise.all([headers(), cookies()]);
@@ -22,14 +22,11 @@ async function MobileSurpriseWordPreview() {
   const etymology = getVocabularyLookupEtymology(entry.word);
   const videoPreference = cookieStore.get(VOCABULARY_LOOKUP_VIDEO_COOKIE)?.value;
   const videoVisible = videoPreference === undefined ? DEFAULT_VOCABULARY_LOOKUP_DISPLAY_PREFERENCES.video : videoPreference === "1";
-  const candidates = getVocabularyVideoCandidates(entry);
-  const videos = videoVisible && !isPhoneRequest
-    ? candidates.map((item) => ({ ...item, likedByMe: false, likes: 0 }))
-    : [];
+  const videoData = videoVisible && !isPhoneRequest ? await getVocabularyVideos(entry) : null;
   const formationParts = getVocabularyFormationParts(entry);
-  const videoPlayer = candidates.length ? (
+  const videoPlayer = videoData?.videos.length ? (
     <VocabularyLookupDisplaySection controlsEnabled id="video" initialVisible={videoVisible} title="视频">
-      {videos.length ? <VocabularyVideoPlayer entryWord={entry.normalizedWord} totalVideos={videos.length} videos={videos} votesEnabled={false} /> : null}
+      <VocabularyVideoPlayer canDelete={videoData.canDelete} entryWord={entry.normalizedWord} totalVideos={videoData.totalVideos} videos={videoData.videos} votesEnabled={videoData.votesEnabled} />
     </VocabularyLookupDisplaySection>
   ) : null;
 
@@ -61,7 +58,7 @@ export default async function VocabularyPage({
 
   return (
     <>
-      {showMobileHub ? <div className="mobile-vocabulary-landing"><MobileWordHub detailPreview={<MobileSurpriseWordPreview />} /></div> : null}
+      {showMobileHub ? <div className="mobile-vocabulary-landing"><MobileWordHub detailPreview={<MobileDefaultWordPreview />} /></div> : null}
       <section className={`stack vocabulary-page ${showMobileHub ? "vocabulary-page-search-fallback" : ""}`}>
         <div className="vocabulary-hero">
           <VocabularySearchAutocomplete initialQuery={query} autoFocus={!showMobileHub} />

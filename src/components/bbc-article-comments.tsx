@@ -465,16 +465,20 @@ export function BbcArticleComments({ articleId }: { articleId: string }) {
 
   function renderCommentHeader(comment: ArticleComment) {
     const membershipState = comment.membership_state ?? (comment.member_number != null ? "expired" : "guest");
+    const isGuest = !comment.user_id;
+    const isPaidMember = membershipState === "active";
     const number = membershipState !== "guest" ? formatMemberNumber(comment.member_number) : null;
     const plan = membershipState === "active" ? memberPlanLabel(comment.member_plan) : null;
     const avatarTone = membershipAvatarClass(membershipState);
     return (
       <div className={styles.commentHeader}>
         <span className={styles.avatarWrap}>
-          {comment.avatar_url ? (
+          {!isGuest && !isPaidMember && comment.avatar_url ? (
             <img alt="" className={styles.avatar} loading="lazy" src={comment.avatar_url} />
           ) : (
-            <span aria-hidden="true" className={`${styles.avatarFallback} ${avatarTone}`}>{membershipState === "guest" ? "客" : "V"}</span>
+            <span aria-hidden="true" className={`${styles.avatarFallback} ${avatarTone}`}>
+              {isGuest ? "访" : isPaidMember ? "V" : comment.author_name.slice(0, 1).toUpperCase()}
+            </span>
           )}
         </span>
         {membershipState === "active" && (plan || number) ? (
@@ -529,9 +533,9 @@ export function BbcArticleComments({ articleId }: { articleId: string }) {
         {identity ? (
           <div className={styles.identityPreview}>
             <span className={styles.previewAvatar}>
-              {identity.avatarUrl ? <img alt="" className={styles.avatar} src={identity.avatarUrl} /> : (
+              {identity.membershipState !== "active" && identity.avatarUrl ? <img alt="" className={styles.avatar} src={identity.avatarUrl} /> : (
                 <span className={`${styles.avatarFallback} ${membershipAvatarClass(identity.membershipState)}`}>
-                  {identity.membershipState === "guest" ? "客" : "V"}
+                  {identity.membershipState === "active" ? "V" : identity.displayName.slice(0, 1).toUpperCase()}
                 </span>
               )}
             </span>
@@ -597,6 +601,7 @@ export function BbcArticleComments({ articleId }: { articleId: string }) {
                   <button
                     onClick={() => {
                       setReplyingTo({ rootId: comment.id, targetId: comment.id });
+                      setExpandedThreads((current) => new Set(current).add(comment.id));
                     }}
                     type="button"
                   >回复</button>
@@ -618,10 +623,9 @@ export function BbcArticleComments({ articleId }: { articleId: string }) {
                     >{isExpanded ? "收起回复" : `展开 ${replies.length} 条回复`}</button>
                   ) : null}
                 </div>
-                {renderReplyForm(comment.id, comment.id, comment.author_name)}
-                {isExpanded && replies.length ? (
+                {(isExpanded && replies.length > 0) || replyingTo?.rootId === comment.id ? (
                   <ol className={styles.replyList}>
-                    {replies.map((reply) => (
+                    {isExpanded ? replies.map((reply) => (
                       <li className={styles.replyComment} key={reply.id}>
                         {renderCommentHeader(reply)}
                         {reply.reply_to_comment_id && reply.reply_to_comment_id !== comment.id ? (
@@ -646,9 +650,13 @@ export function BbcArticleComments({ articleId }: { articleId: string }) {
                             type="button"
                           >{deletingCommentId === reply.id ? "删除中…" : "删除"}</button>
                         ) : null}
-                        {renderReplyForm(comment.id, reply.id, reply.author_name)}
                       </li>
-                    ))}
+                    )) : null}
+                    {replyingTo?.rootId === comment.id ? (
+                      <li className={styles.replyFormItem}>
+                        {renderReplyForm(comment.id, replyingTo.targetId, commentsById.get(replyingTo.targetId)?.author_name ?? comment.author_name)}
+                      </li>
+                    ) : null}
                   </ol>
                 ) : null}
               </li>

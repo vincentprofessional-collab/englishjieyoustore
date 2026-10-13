@@ -9,7 +9,7 @@ const code = ts.transpileModule(readFileSync(new URL("../src/lib/vocabulary/stud
   compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 },
 }).outputText;
 runInNewContext(code, { exports });
-const { compareStudyExamples, getConciseStudyDefinition, maskStudyExample } = exports;
+const { compareStudyExamples, getConciseStudyDefinition, getDefinitionOptionText, getStudyPhonetic, maskStudyExample } = exports;
 const workbookExamples = JSON.parse(readFileSync(new URL("../src/data/vocabulary/workbook-usage-examples.json", import.meta.url), "utf8"));
 const workbookDetails = JSON.parse(readFileSync(new URL("../src/data/vocabulary/workbook-vocabulary-details.json", import.meta.url), "utf8"));
 
@@ -67,4 +67,18 @@ test("imported workbook examples are bilingual and available for vocabulary look
     chineseText: "我每天吃一个苹果。",
   });
   assert.ok(Object.values(workbookExamples).every((example) => example.englishText.trim() && example.chineseText.trim()));
+});
+
+test("definition options retain two main parts of speech and one meaning per part", () => {
+  assert.equal(getDefinitionOptionText("n. 拉链；拉锁 / v. 拉上或拉开拉链 / vi. 拉上拉链 / vt. 用拉链扣上 / adj. 活泼的"), "n. 拉链\nv. 拉上或拉开拉链");
+  assert.equal(getDefinitionOptionText("vt. 运行；经营 / vi. 跑；奔跑 / n. 运行；奔跑 / adj. 运行的"), "v. 运行\nn. 运行");
+  assert.equal(getDefinitionOptionText("art. 一；任一"), "art. 一");
+});
+
+test("the word list selects the configured accent's phonetic without swapping accents", () => {
+  const word = { usPhonetic: " /US/ ", ukPhonetic: " /UK/ ", phonetic: " /fallback/ " };
+  assert.equal(getStudyPhonetic(word, "us"), "/US/");
+  assert.equal(getStudyPhonetic(word, "uk"), "/UK/");
+  assert.equal(getStudyPhonetic({ phonetic: "/legacy/" }, "uk"), "/legacy/");
+  assert.equal(getStudyPhonetic({}, "us"), "");
 });

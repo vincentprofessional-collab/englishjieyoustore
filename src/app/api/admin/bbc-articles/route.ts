@@ -12,6 +12,7 @@ import { buildAutomaticBbcSyntax } from "@/lib/articles/bbc-automatic-syntax";
 import { applyPastedBbcSyntax, retainReviewedBbcSyntax, type PastedBbcSyntaxSentence } from "@/lib/articles/bbc-pasted-syntax";
 
 export const runtime = "nodejs";
+export const maxDuration = 60;
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY ?? process.env.SUPABASE_SECRET_KEY;
@@ -278,6 +279,24 @@ function buildArticle(payload: Record<string, unknown>, objectPath: string): Bbc
   };
 }
 
+function sentenceAudioPath(objectPath: string, sentenceNo: number) {
+  const match = /^(bbc\/(\d{4})\/(\d{6}))\/full-([a-f0-9]{16})\.mp3$/.exec(objectPath);
+  if (!match || !Number.isInteger(sentenceNo) || sentenceNo < 1 || sentenceNo > 500) return null;
+  return `${match[1]}/sentences/${match[4]}/${match[3]}-${String(sentenceNo).padStart(3, "0")}.mp3`;
+}
+
+function validateSentenceAudioFiles(input: unknown, objectPath: string, count: number) {
+  if (!Array.isArray(input) || input.length !== count || count < 1 || count > 500) return null;
+  const files: { sentenceNo: number; objectPath: string }[] = [];
+  for (let index = 0; index < count; index++) {
+    const file = input[index];
+    const expected = sentenceAudioPath(objectPath, index + 1);
+    if (!expected || !file || typeof file !== "object" || file.sentenceNo !== index + 1 || typeof file.objectPath !== "string" || file.objectPath !== expected) return null;
+    files.push({ sentenceNo: index + 1, objectPath: file.objectPath });
+  }
+  return files;
+}
+
 export async function POST(request: NextRequest) {
   const supabase = createServiceClient();
   if (!supabase) return NextResponse.json({ error: "后台服务尚未配置 Supabase 管理密钥。" }, { status: 500 });
@@ -314,6 +333,29 @@ export async function POST(request: NextRequest) {
   }
 
   const action = payload?.action;
+  if (action === "presign-sentences") {
+    const objectPath = typeof payload?.objectPath === "string" ? payload.objectPath : "";
+    const expectedPrefix = `bbc/${articleDate.year}/${articleDate.id}/`;
+    const files = payload?.files;
+    if (!objectPath.startsWith(expectedPrefix) || !sentenceAudioPath(objectPath, 1) || !Array.isArray(files) || !files.length || files.length > 500) {
+      return NextResponse.json({ error: "小音频的文章编号、原声路径或句子数量无效。" }, { status: 400 });
+    }
+    let totalBytes = 0;
+    for (let index = 0; index < files.length; index++) {
+      const size = Number(files[index]?.size);
+      if (files[index]?.sentenceNo !== index + 1 || !Number.isInteger(size) || size < 128 || size > maxAudioBytes) {
+        return NextResponse.json({ error: `第 ${index + 1} 句小音频无效。` }, { status: 400 });
+      }
+      totalBytes += size;
+    }
+    if (totalBytes > maxAudioBytes || !await hasR2Object(objectPath)) return NextResponse.json({ error: "小音频总量超过 200 MB，或原声尚未上传完成。" }, { status: 400 });
+    const tickets = files.map((_, index) => {
+      const path = sentenceAudioPath(objectPath, index + 1)!;
+      return { sentenceNo: index + 1, objectPath: path, headers: { "Content-Type": "audio/mpeg" }, uploadUrl: getPresignedPutUrl(path) };
+    });
+    if (tickets.some((ticket) => !ticket.uploadUrl)) return NextResponse.json({ error: "音频上传服务尚未配置。" }, { status: 503 });
+    return NextResponse.json({ tickets });
+  }
   if (action === "presign") {
     const { error: tableError } = await supabase.from("bbc_uploaded_articles").select("id").limit(1);
     if (tableError) {
@@ -365,6 +407,7 @@ function reuseExistingBbcAudioTimings(article: BbcArticle, existing: BbcArticle 
       endMs: sentence.endMs,
       sentenceNo: index + 1,
       startMs: sentence.startMs,
+      audioUrl: sentence.audioUrl,
     })),
   };
 }
@@ -414,6 +457,7 @@ export async function PUT(request: NextRequest) {
   article.syntaxSentences = retainReviewedBbcSyntax(article.syntaxSentences ?? [], previousSyntax);
   let timings = payload.timings;
   let durationMs = Number(payload.durationMs);
+  const reusingAudio = !Array.isArray(timings);
   if (!Array.isArray(timings)) {
     const reused = reuseExistingBbcAudioTimings(article, (existingArticle?.article as BbcArticle | null | undefined) ?? null, objectPath);
     if (!reused) return NextResponse.json({ error: "正文句子已变化，无法沿用原音频时间轴；请重新选择本篇 MP3 后保存。" }, { status: 400 });
@@ -423,6 +467,17 @@ export async function PUT(request: NextRequest) {
   if (!Array.isArray(timings) || timings.length !== article.sentences!.length || !Number.isFinite(durationMs) || durationMs <= 0) {
     return NextResponse.json({ error: "尚未生成完整的逐句原声时间轴。" }, { status: 400 });
   }
+  const sentenceFiles = payload.sentenceAudioFiles === undefined ? undefined
+    : validateSentenceAudioFiles(payload.sentenceAudioFiles, objectPath, article.sentences!.length);
+  if (sentenceFiles === null) return NextResponse.json({ error: "独立小音频清单不完整或与本篇原声不匹配。" }, { status: 400 });
+  if (sentenceFiles) {
+    for (let first = 0; first < sentenceFiles.length; first += 8) {
+      const batch = sentenceFiles.slice(first, first + 8);
+      const complete = await Promise.all(batch.map((file) => hasR2Object(file.objectPath)));
+      const missing = complete.findIndex((exists) => !exists);
+      if (missing >= 0) return NextResponse.json({ error: `第 ${batch[missing].sentenceNo} 句小音频尚未上传完成，文章未保存。` }, { status: 400 });
+    }
+  }
   let previousEnd = 0;
   for (let index = 0; index < timings.length; index++) {
     const timing = timings[index] as Record<string, unknown>;
@@ -430,7 +485,10 @@ export async function PUT(request: NextRequest) {
     if (Number(timing.sentenceNo) !== index + 1 || !Number.isInteger(startMs) || !Number.isInteger(endMs) || startMs < previousEnd || endMs <= startMs || endMs > durationMs) {
       return NextResponse.json({ error: `第 ${index + 1} 句时间轴无效。` }, { status: 400 });
     }
-    Object.assign(article.sentences![index], { startMs, endMs, audioUrl: article.fullAudioUrl });
+    const audioUrl = sentenceFiles
+      ? sentenceFiles[index].objectPath.replace(/^bbc\//, "/api/bbc-audio/")
+      : reusingAudio && typeof timing.audioUrl === "string" ? timing.audioUrl : article.fullAudioUrl;
+    Object.assign(article.sentences![index], { startMs, endMs, audioUrl });
     previousEnd = endMs;
   }
   article.subtitleUrl = `/api/bbc-subtitles/${article.id}`;
@@ -467,6 +525,7 @@ export async function PUT(request: NextRequest) {
     paragraphCount: article.body.length,
     vocabularyCount: article.vocabulary?.length ?? 0,
     sentenceCount: article.sentences?.length ?? 0,
+    sentenceAudioCount: article.sentences?.filter((sentence) => sentence.audioUrl && sentence.audioUrl !== article.fullAudioUrl).length ?? 0,
     year: article.year,
   });
 }

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "prebuild": "node scripts/build-cet4-sets.mjs && CET_EXAM=cet6 node scripts/build-cet4-sets.mjs && node --experimental-strip-types --test scripts/bbc-automatic-syntax.test.mjs && node --test scripts/bbc-release-baseline.test.mjs scripts/bbc-content-isolation.test.mjs scripts/bbc-audio-upload.test.mjs scripts/bbc-mobile-playback.test.mjs scripts/bbc-sentence-order-drag.test.mjs scripts/cet4-content.test.mjs scripts/cet6-content.test.mjs scripts/site-chrome-nav.test.mjs scripts/latest-requirements-regression.test.mjs scripts/current-membership.test.mjs scripts/media-url.test.mjs scripts/site-study-progress.test.mjs scripts/vocabulary-review-scheduler.test.mjs scripts/vocabulary-spelling-feedback.test.mjs scripts/vocabulary-study-display.test.mjs scripts/vocabulary-daily-summary.test.mjs scripts/vocabulary-progress-filters.test.mjs scripts/new-concept-bilingual.test.mjs",
+    "prebuild": "node scripts/prepare-bbc-audio-encoder.mjs && node scripts/build-cet4-sets.mjs && CET_EXAM=cet6 node scripts/build-cet4-sets.mjs && node --experimental-strip-types --test scripts/bbc-automatic-syntax.test.mjs && node --test scripts/bbc-release-baseline.test.mjs scripts/bbc-content-isolation.test.mjs scripts/bbc-audio-upload.test.mjs scripts/bbc-mobile-playback.test.mjs scripts/bbc-sentence-order-drag.test.mjs scripts/cet4-content.test.mjs scripts/cet6-content.test.mjs scripts/site-chrome-nav.test.mjs scripts/latest-requirements-regression.test.mjs scripts/current-membership.test.mjs scripts/media-url.test.mjs scripts/site-study-progress.test.mjs scripts/vocabulary-review-scheduler.test.mjs scripts/vocabulary-spelling-feedback.test.mjs scripts/vocabulary-study-display.test.mjs scripts/vocabulary-browse-review.test.mjs scripts/vocabulary-image-upload.test.mjs scripts/vocabulary-video-delete.test.mjs scripts/vocabulary-study-groups.test.mjs scripts/payment-instructions.test.mjs scripts/vocabulary-examples-access.test.mjs scripts/vocabulary-daily-summary.test.mjs scripts/vocabulary-progress-filters.test.mjs scripts/new-concept-bilingual.test.mjs",
     "dev": "next dev --hostname 0.0.0.0 --experimental-https --experimental-https-key certificates/dev-localhost-key.pem --experimental-https-cert certificates/dev-localhost.pem",
     "dev:http": "next dev --hostname 0.0.0.0",
     "dev:local": "next dev",
@@ -52,9 +52,12 @@
     "media:cos-to-supabase": "node scripts/migrate-cos-media-to-supabase.mjs",
     "media:word-audio:supabase": "node scripts/upload-local-word-audio-to-supabase.mjs",
     "media:local-vocabulary-videos": "env -u HTTP_PROXY -u HTTPS_PROXY -u ALL_PROXY -u http_proxy -u https_proxy -u all_proxy -u NODE_USE_ENV_PROXY node scripts/upload-local-vocabulary-videos-to-supabase.mjs",
-    "types:supabase": "npx supabase gen types typescript --project-id ahecwiqjfrrxxjxazmre --schema public > src/lib/database.types.ts"
+    "types:supabase": "npx supabase gen types typescript --project-id ahecwiqjfrrxxjxazmre --schema public > src/lib/database.types.ts",
+    "bbc:audio:prepare": "node scripts/prepare-bbc-audio-encoder.mjs"
   },
   "dependencies": {
+    "@ffmpeg/core": "0.12.10",
+    "@ffmpeg/ffmpeg": "0.12.15",
     "@huggingface/transformers": "3.8.1",
     "@supabase/ssr": "^0.12.5",
     "@supabase/supabase-js": "latest",
@@ -64,6 +67,7 @@
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
+    "sharp": "0.34.5",
     "wink-eng-lite-web-model": "1.8.1",
     "wink-nlp": "2.4.0",
     "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"

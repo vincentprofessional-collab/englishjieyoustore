@@ -1,4 +1,5 @@
 "use client";
+import { recordPracticeAttempt } from "@/lib/learning/site-progress";
 
 import Link from "next/link";
 import { Fragment, useMemo, useState } from "react";
@@ -34,6 +35,7 @@ export function Cet4Document({ entry, exam = "cet4" }: { entry: PublicEntry; exa
   const interactive = entry.section !== "知识点";
   const setValue = (id: string, value: string) => setValues((current) => ({ ...current, [id]: value }));
   const submit = async () => {
+    recordPracticeAttempt({ id: `${exam}:${entry.id}:${new Date().toISOString().slice(0, 10)}`, title: `${examLabel} · ${entry.title}`, href: window.location.pathname + window.location.search });
     setSubmitted(true);
     try {
       const response = await fetch(`/api/cet4-answer?entryId=${encodeURIComponent(entry.id)}`, { method: "POST" });

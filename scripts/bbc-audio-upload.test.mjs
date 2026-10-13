@@ -12,7 +12,7 @@ function loadFunctions(path, names, globals, prefix = "") {
   const source = ts.createSourceFile(path, readFileSync(new URL(path, import.meta.url), "utf8"), ts.ScriptTarget.Latest, true);
   const functions = source.statements.filter((node) => ts.isFunctionDeclaration(node) && names.includes(node.name?.text));
   assert.equal(functions.length, names.length);
-  const code = ts.transpileModule(prefix + functions.map((node) => node.getText(source)).join("\n"), {
+  const code = ts.transpileModule(prefix + functions.map((node) => node.getText(source).replace(/^export\s+/, "")).join("\n"), {
     compilerOptions: { target: ts.ScriptTarget.ES2022 },
   }).outputText;
   return runInNewContext(`${code}\n${names.at(-1)};`, globals);
@@ -259,7 +259,7 @@ test("uploaded BBC sentences reuse full audio when a valid timing range has no c
   assert.equal(legacyRecord.article.sentences[0].audioUrl, fullAudioUrl);
 });
 
-test("BBC audio alignment estimates an unrecognized opening sentence when the rest of the article matches", () => {
+test("BBC audio alignment refuses to guess an unrecognized opening sentence", () => {
   const align = loadAudioAlignment();
   const sentences = [
     { sentenceNo: 1, english: "The opening sentence is missing from recognition." },
@@ -273,16 +273,10 @@ test("BBC audio alignment estimates an unrecognized opening sentence when the re
       timestamp: [start + wordIndex * 0.25, start + wordIndex * 0.25 + 0.2],
     }));
   });
-  const result = align(sentences, recognized, 8);
-  assert.deepEqual(Array.from(result.reviewSentenceNos), [1]);
-  assert.equal(result.timings.length, sentences.length);
-  assert.equal(result.timings[0].sentenceNo, 1);
-  assert.ok(result.timings[0].endMs > result.timings[0].startMs);
-  assert.ok(result.timings[0].endMs <= result.timings[1].startMs);
-  assert.ok(result.timings.at(-1).endMs <= 8000);
+  assert.throws(() => align(sentences, recognized, 8), /匹配度|未与原声完整对齐/);
 });
 
-test("BBC audio alignment extends a sentence when recognition drops its final words", () => {
+test("BBC audio alignment refuses to truncate or estimate unrecognized final words", () => {
   const align = loadAudioAlignment();
   const sentences = [
     { sentenceNo: 1, english: "She promised to return the completed report tomorrow." },
@@ -298,10 +292,7 @@ test("BBC audio alignment extends a sentence when recognition drops its final wo
       timestamp: [3 + index * 0.28, 3.2 + index * 0.28],
     })),
   ];
-  const result = align(sentences, recognized, 6);
-  assert.ok(result.timings[0].endMs > 2_500, `sentence 1 ended at ${result.timings[0].endMs}ms`);
-  assert.ok(result.timings[0].endMs <= result.timings[1].startMs);
-  assert.ok(Array.from(result.reviewSentenceNos).includes(1));
+  assert.throws(() => align(sentences, recognized, 6), /匹配度|未与原声完整对齐/);
 });
 
 test("BBC audio alignment retains the final recognized word when its end timestamp is missing", () => {
@@ -321,18 +312,139 @@ test("BBC audio alignment retains the final recognized word when its end timesta
   assert.deepEqual(Array.from(result.reviewSentenceNos), []);
 });
 
-test("BBC audio alignment keeps the final clip through the audio tail when recognition misses its last word", () => {
+test("BBC audio alignment blocks cutting when recognition misses the last word", () => {
   const align = loadAudioAlignment();
-  const result = align(
+  assert.throws(() => align(
     [{ sentenceNo: 1, english: "The final sentence ends near the close." }],
     ["The", "final", "sentence", "ends", "near", "the"].map((text, index) => ({
       text,
       timestamp: [0.2 + index * 0.35, 0.4 + index * 0.35],
     })),
     5,
-  );
-  assert.equal(result.timings[0].endMs, 5_000);
-  assert.deepEqual(Array.from(result.reviewSentenceNos), [1]);
+  ), /匹配度|未与原声完整对齐/);
+});
+
+test("BBC 260810 word alignment reproduces the original 21 standalone clip boundaries", () => {
+  const fixture = JSON.parse(readFileSync(new URL("./fixtures/bbc-audio-260810.json", import.meta.url), "utf8"));
+  const result = loadAudioAlignment()(fixture.sentences, fixture.recognized, fixture.duration, fixture.pauses);
+  assert.equal(result.timings.length, 21);
+  for (let index = 0; index < result.timings.length; index++) {
+    const actual = result.timings[index], expected = fixture.timings[index];
+    assert.ok(Math.abs(actual.startMs - expected.startMs) <= 15, `sentence ${actual.sentenceNo} start ${actual.startMs} != ${expected.startMs}`);
+    assert.ok(Math.abs(actual.endMs - expected.endMs) <= 15, `sentence ${actual.sentenceNo} end ${actual.endMs} != ${expected.endMs}`);
+  }
+  assert.equal(result.timings[0].endMs, 12_900);
+  assert.equal(result.timings[1].endMs, 20_100);
+  assert.equal(result.timings.at(-1).endMs, 167_082);
+});
+
+test("standalone clip paths belong to the same original recording revision", () => {
+  const path = "bbc/2026/260810/full-0123456789abcdef.mp3";
+  const validate = loadFunctions("../src/app/api/admin/bbc-articles/route.ts", ["sentenceAudioPath", "validateSentenceAudioFiles"], {});
+  const files = [{ sentenceNo: 1, objectPath: "bbc/2026/260810/sentences/0123456789abcdef/260810-001.mp3" }];
+  assert.equal(validate(files, path, 1).length, 1);
+  assert.equal(validate(files, "bbc/2026/260810/full-fedcba9876543210.mp3", 1), null);
+  assert.equal(validate(files, "bbc/2026/260803/full-0123456789abcdef.mp3", 1), null);
+  assert.equal(validate([], path, 1), null);
+  assert.equal(validate([{ ...files[0], sentenceNo: 2 }], path, 1), null);
+  assert.equal(validate([{ sentenceNo: 1, objectPath: null }], "bbc/2026/260810/full.mp3", 1), null);
+});
+
+test("editing vocabulary or syntax retains the original standalone sentence audio", () => {
+  const reuse = loadFunctions("../src/app/api/admin/bbc-articles/route.ts", ["reuseExistingBbcAudioTimings"], {});
+  const sentence = { sentenceNo: 1, english: "A sentence.", startMs: 400, endMs: 2200,
+    audioUrl: "/api/bbc-audio/2026/260810/sentences/0123456789abcdef/260810-001.mp3" };
+  const existing = { id: "260810", year: 2026, fullAudioUrl: "/api/bbc-audio/2026/260810/full-0123456789abcdef.mp3", audioDurationMs: 5000, sentences: [sentence] };
+  assert.equal(reuse({ sentences: [sentence] }, existing, "bbc/2026/260810/full-0123456789abcdef.mp3").timings[0].audioUrl, sentence.audioUrl);
+});
+
+test("automatic upload resumes after a clip failure without repeating recognition, cutting, or completed uploads", async () => {
+  const exports = {};
+  const fixture = JSON.parse(readFileSync(new URL("./fixtures/bbc-audio-260810.json", import.meta.url), "utf8"));
+  const original = new File([new Uint8Array(500)], "260810.mp3", { type: "audio/mpeg" });
+  const clips = fixture.sentences.map((sentence) => ({ sentenceNo: sentence.sentenceNo,
+    file: new File([new Uint8Array(200)], `sentence-${sentence.sentenceNo}.mp3`, { type: "audio/mpeg" }) }));
+  const objectPath = "bbc/2026/260810/full-0123456789abcdef.mp3";
+  const puts = [], requests = [];
+  let hook = 0, analyses = 0, failSecondClip = true;
+  const react = { useEffect() {}, useRef: () => ({ current: null }), useState(initial) {
+    const value = hook === 0 ? "260810-The art of farts 关于肠道排气的科学\nEnglish\n中文" : hook === 1 ? original : initial;
+    hook++; return [value, () => {}];
+  } };
+  class Request {
+    upload = {};
+    open(_method, url) { this.url = url; }
+    setRequestHeader() {}
+    send(file) {
+      puts.push(file.name);
+      this.upload.onprogress?.({ lengthComputable: true, loaded: file.size, total: file.size });
+      this.status = file.name === "sentence-2.mp3" && failSecondClip ? 403 : 200;
+      if (this.status === 403) failSecondClip = false;
+      this.onload();
+    }
+  }
+  const adminRequest = async (_url, options) => {
+    if (!options) return { articles: [] };
+    const body = JSON.parse(options.body); requests.push({ method: options.method, body });
+    if (body.action === "prepare") return { article: { id: "260810", sentences: fixture.sentences }, pastedSyntaxTotalCount: 21, pastedSyntaxCount: 21 };
+    if (body.action === "presign") return { objectPath, headers: {}, uploadUrl: "/original" };
+    if (body.action === "presign-sentences") return { tickets: clips.map((clip) => ({ sentenceNo: clip.sentenceNo, headers: {},
+      uploadUrl: `/clip/${clip.sentenceNo}`, objectPath: `${objectPath.slice(0, objectPath.lastIndexOf("/"))}/sentences/0123456789abcdef/260810-${String(clip.sentenceNo).padStart(3, "0")}.mp3` })) };
+    return { articleId: "260810", published: false, year: 2026, month: 8, sentenceCount: 21, paragraphCount: 5, vocabularyCount: 32, sentenceAudioCount: 21 };
+  };
+  const code = ts.transpileModule(readFileSync(new URL("../src/components/admin-bbc-article-upload.tsx", import.meta.url), "utf8"), {
+    compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022, jsx: ts.JsxEmit.ReactJSX },
+  }).outputText;
+  const jsx = (type, props) => ({ type, props });
+  runInNewContext(code, { exports, XMLHttpRequest: Request, File, require: (specifier) => {
+    if (specifier === "react") return react;
+    if (specifier === "react/jsx-runtime") return { jsx, jsxs: jsx };
+    if (specifier.includes("admin/request")) return { adminRequest };
+    if (specifier.includes("bbc-audio-alignment")) return { analyzeBbcAudio: async () => { analyses++; return { durationMs: 173418, timings: fixture.timings, reviewSentenceNos: [], clips }; } };
+    return {};
+  } });
+  const tree = exports.AdminBbcArticleUpload();
+  const form = tree.props.children.find((child) => child?.type === "form");
+  await form.props.onSubmit({ preventDefault() {} });
+  assert.equal(requests.filter((request) => request.method === "PUT").length, 0);
+  await form.props.onSubmit({ preventDefault() {} });
+  assert.equal(analyses, 1);
+  assert.equal(puts.filter((name) => name === "260810.mp3").length, 1);
+  assert.equal(puts.filter((name) => name === "sentence-1.mp3").length, 1);
+  assert.equal(puts.filter((name) => name === "sentence-2.mp3").length, 2);
+  const saved = requests.filter((request) => request.method === "PUT");
+  assert.equal(saved.length, 1);
+  assert.equal(saved[0].body.sentenceAudioFiles.length, 21);
+  assert.equal(new Set(saved[0].body.sentenceAudioFiles.map((file) => file.objectPath)).size, 21);
+  assert.equal(saved[0].body.clips, undefined);
+});
+
+test("article save waits for every standalone clip and keeps new articles in draft", async () => {
+  for (const missingClip of [2, null]) {
+    const saved = [];
+    const objectPath = "bbc/2026/260810/full-0123456789abcdef.mp3";
+    const files = [1, 2, 3].map((sentenceNo) => ({ sentenceNo, objectPath: `bbc/2026/260810/sentences/0123456789abcdef/260810-${String(sentenceNo).padStart(3, "0")}.mp3` }));
+    const article = { id: "260810", year: 2026, title: "Test", body: ["Test"], vocabulary: [], fullAudioUrl: "/api/bbc-audio/2026/260810/full-0123456789abcdef.mp3", syntaxSentences: [],
+      sentences: [1, 2, 3].map((sentenceNo) => ({ sentenceNo, english: `Sentence ${sentenceNo}.` })) };
+    const supabase = { from: () => ({ select() { return this; }, eq() { return this; }, maybeSingle: async () => ({ data: null, error: null }),
+      upsert: async (value) => { saved.push(value); return { error: null }; } }) };
+    const put = loadFunctions("../src/app/api/admin/bbc-articles/route.ts", ["sentenceAudioPath", "validateSentenceAudioFiles", "reuseExistingBbcAudioTimings", "PUT"], {
+      createServiceClient: () => supabase, requireAdmin: async () => ({ user: { id: "test-admin" } }),
+      parseBbcArticleDateFromTitle: () => ({ year: 2026, month: 8, id: "260810" }), getBbcArticleById: () => null,
+      buildArticle: () => structuredClone(article), retainReviewedBbcSyntax: (sentences) => sentences,
+      hasR2Object: async (path) => path !== files.find((file) => file.sentenceNo === missingClip)?.objectPath,
+      revalidatePath() {}, NextResponse: { json: (data, options) => ({ data, status: options?.status ?? 200 }) },
+    });
+    const result = await put({ json: async () => ({ title: "260810-Test", objectPath, durationMs: 6000,
+      sentenceAudioFiles: files, timings: [1, 2, 3].map((sentenceNo) => ({ sentenceNo, startMs: (sentenceNo - 1) * 1500, endMs: sentenceNo * 1500 })) }) });
+    assert.equal(result.status, missingClip ? 400 : 200);
+    assert.equal(saved.length, missingClip ? 0 : 1);
+    if (!missingClip) {
+      assert.equal(saved[0].published, false);
+      assert.equal(result.data.sentenceAudioCount, 3);
+      assert.equal(saved[0].article.sentences[1].audioUrl, "/api/bbc-audio/2026/260810/sentences/0123456789abcdef/260810-002.mp3");
+    }
+  }
 });
 
 test("BBC word highlighting covers both pieces of spoken contractions", () => {

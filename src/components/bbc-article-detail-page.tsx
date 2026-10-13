@@ -1501,7 +1501,10 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
       <AudioSettingsMenus
         modeLabels={{ listening: "精听", speaking: "口语", writing: "写作" }}
         onChange={updateAudioSettings}
-        onModeSelect={(mode) => selectStudyMode(mode)}
+        onModeSelect={(mode) => {
+          // Choosing playback order from a practice mode keeps its current view.
+          if (studyMode === "general" || studyMode === "intensive" || studyMode === "listening") selectStudyMode(mode);
+        }}
         playModeLabel="精听"
         preserveModeSettings
         settings={audioSettings}
@@ -1652,7 +1655,6 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
               {article.date.replaceAll("-", ".")}
             </time>
           </h1>
-          {article.contentUpdatedAt && syntaxSentences?.some((sentence) => sentence.sourceAnnotation) ? <p className="bbc-syntax-updated-note">语法已按上传标注更新 · {syntaxSentences.filter((sentence) => sentence.status === "reviewed").length}/{syntaxSentences.length} 句</p> : null}
           <div className="bbc-article-word-count">
             共 <b className="stat-number">{articleWordCount}</b> 词
           </div>

@@ -29,12 +29,14 @@ function formatVideoTime(value: number) {
 }
 
 export function VocabularyVideoPlayer({
+  canDelete = false,
   entryWord,
   previewMode = false,
   totalVideos,
   votesEnabled,
   videos: initialVideos,
 }: {
+  canDelete?: boolean;
   entryWord: string;
   previewMode?: boolean;
   totalVideos: number;
@@ -48,6 +50,8 @@ export function VocabularyVideoPlayer({
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [notice, setNotice] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [visibleTotal, setVisibleTotal] = useState(totalVideos);
   const [autoplayOnChange, setAutoplayOnChange] = useState(false);
   const router = useRouter();
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -84,6 +88,7 @@ export function VocabularyVideoPlayer({
     const activeVideoWasRemoved = preservedIndex < 0;
 
     setVideos(rankedVideos);
+    setVisibleTotal(totalVideos);
     setActiveIndex(nextIndex);
     activePathRef.current = rankedVideos[nextIndex]?.path ?? null;
     if (activeVideoWasRemoved) {
@@ -91,7 +96,7 @@ export function VocabularyVideoPlayer({
       setCurrentTime(0);
       setDuration(0);
     }
-  }, [initialVideos]);
+  }, [initialVideos, totalVideos]);
 
   useEffect(() => {
     if (!autoplayOnChange) return;
@@ -104,7 +109,7 @@ export function VocabularyVideoPlayer({
   }, [activeIndex, autoplayOnChange, previewMode]);
 
   function selectVideo(index: number, autoplay = false) {
-    if (videos.length === 0) return;
+    if (isDeleting || videos.length === 0) return;
     const nextIndex = (index + videos.length) % videos.length;
     const nextVideo = videos[nextIndex];
     if (nextVideo) activateVideo(nextVideo.path, videos, autoplay);
@@ -128,7 +133,7 @@ export function VocabularyVideoPlayer({
   }
 
   async function toggleLike() {
-    if (!currentVideo || currentVideo.likedByMe || (!votesEnabled && !previewMode)) return;
+    if (isDeleting || !currentVideo || currentVideo.likedByMe || (!votesEnabled && !previewMode)) return;
     setNotice("");
 
     if (previewMode) {
@@ -159,7 +164,7 @@ export function VocabularyVideoPlayer({
   }
 
   function dislikeAndPlayNext() {
-    if (!currentVideo) return;
+    if (isDeleting || !currentVideo) return;
     const dislikeCount = (dislikesByPath[currentVideo.path] ?? 0) + 1;
     setDislikesByPath((counts) => ({ ...counts, [currentVideo.path]: (counts[currentVideo.path] ?? 0) + 1 }));
     if (videos.length < 2) {
@@ -173,6 +178,37 @@ export function VocabularyVideoPlayer({
     const nextVideo = reorderedVideos[(currentIndex + 1) % reorderedVideos.length];
     if (nextVideo) activateVideo(nextVideo.path, reorderedVideos, true);
     setNotice(`已踩该视频（踩数：${dislikeCount}），已将它移到后面并播放下一条。`);
+  }
+
+  async function deleteCurrentVideo() {
+    if (!canDelete || !currentVideo || isDeleting || previewMode) return;
+    if (!window.confirm(`删除当前视频？这会同时删除存储文件，并从相关词汇页移除。\n${currentVideo.path}`)) return;
+    setIsDeleting(true);
+    setNotice("");
+    try {
+      const response = await fetch("/api/vocabulary-videos", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ path: currentVideo.path, word: entryWord }),
+      });
+      const result = await response.json() as { error?: string; ok?: boolean };
+      if (!response.ok || !result.ok) throw new Error(result.error ?? "视频删除失败。");
+      videoRef.current?.pause();
+      const remaining = videos.filter((video) => video.path !== currentVideo.path);
+      const nextIndex = Math.max(0, Math.min(activeIndex, remaining.length - 1));
+      activePathRef.current = remaining[nextIndex]?.path ?? null;
+      setVideos(remaining);
+      setActiveIndex(nextIndex);
+      setVisibleTotal((count) => Math.max(0, count - 1));
+      setIsPlaying(false);
+      setCurrentTime(0);
+      setDuration(0);
+      setAutoplayOnChange(false);
+      setNotice("视频已删除。");
+      router.refresh();
+    } catch (error) {
+      setNotice(error instanceof Error ? error.message : "视频删除失败，请稍后重试。");
+    } finally { setIsDeleting(false); }
   }
 
   async function toggleFullscreen() {
@@ -210,8 +246,9 @@ export function VocabularyVideoPlayer({
     <section aria-label="单词视频" className="vocabulary-video-panel" ref={(element) => { playerRef.current = element; }}>
       <header className="vocabulary-video-panel-head">
         <h2>看语境，记单词，学用法</h2>
-        <span className="vocabulary-video-count" aria-label={`第 ${activeIndex + 1} 个，共 ${totalVideos} 个视频`}>
-          {activeIndex + 1}/{totalVideos}
+        {canDelete && currentVideo && !previewMode ? <button className="vocabulary-video-delete-button" disabled={isDeleting} onClick={deleteCurrentVideo} type="button">{isDeleting ? "删除中……" : "删除视频"}</button> : null}
+        <span className="vocabulary-video-count" aria-label={`第 ${currentVideo ? activeIndex + 1 : 0} 个，共 ${visibleTotal} 个视频`}>
+          {currentVideo ? activeIndex + 1 : 0}/{visibleTotal}
         </span>
       </header>
 

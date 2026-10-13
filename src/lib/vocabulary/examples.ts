@@ -130,6 +130,7 @@ function getBbcUsageExamples(wordForms: Set<string>, limit: number) {
 
       if (
         !sentence.audioUrl ||
+        !sentence.chinese?.trim() ||
         seenSentences.has(sentenceKey) ||
         !matchesUsageExampleWord(sentence.english, wordForms)
       ) {
@@ -200,15 +201,16 @@ function getNewConceptUsageExamples(wordForms: Set<string>, limit: number) {
 
     for (const sentenceIndex of matchingIndexes) {
       const englishText = lesson.english[sentenceIndex]?.trim() ?? "";
+      const chineseText = chineseLines[sentenceIndex]?.trim() ?? "";
       const normalizedText = englishText.toLowerCase().replace(/\s+/g, " ");
       const audioUrl = sentenceAudioUrls[sentenceIndex] ?? null;
-      if (!englishText || !audioUrl || seenSentences.has(normalizedText)) continue;
+      if (!englishText || !chineseText.trim() || !audioUrl || seenSentences.has(normalizedText)) continue;
 
       seenSentences.add(normalizedText);
       examples.push({
         audioUrl,
         bookCode: lesson.bookCode === "new-concept-2" ? "NEW_CONCEPT_2" : "NEW_CONCEPT_1",
-        chineseText: chineseLines[sentenceIndex] ?? "",
+        chineseText,
         englishText,
         id: `new-concept:${lesson.id}:sentence:${sentenceIndex + 1}`,
         sentenceNo: sentenceIndex + 1,
@@ -236,7 +238,11 @@ export function prioritizeVocabularyUsageExamples(...groups: VocabularyUsageExam
       const key = normalizedText || example.id;
       if (seen.has(key)) continue;
       seen.add(key);
-      examples.push(example);
+      const article = example.bookCode === "BBC" ? BBC_ARTICLES.find((item) => item.id === example.sourceId) : null;
+      examples.push(article && example.sentenceNo > 0 ? {
+        ...example,
+        audioUrl: `/api/vocabulary-bbc-example-audio?article=${encodeURIComponent(article.id)}&year=${article.year}&sentence=${example.sentenceNo}`,
+      } : example);
     }
   }
 
@@ -247,6 +253,12 @@ function compareUsageExampleBrevity(left: VocabularyUsageExample, right: Vocabul
   return Number(!left.chineseText.trim()) - Number(!right.chineseText.trim())
     || left.englishText.trim().split(/\s+/).filter(Boolean).length - right.englishText.trim().split(/\s+/).filter(Boolean).length
     || left.englishText.length - right.englishText.length;
+}
+
+function pickLookupExamples(limit: number, ...groups: VocabularyUsageExample[][]) {
+  const sortedGroups = groups.map((group) => [...group].sort(compareUsageExampleBrevity));
+  const firstFromEach = sortedGroups.flatMap((group) => group.slice(0, 1));
+  return prioritizeVocabularyUsageExamples(firstFromEach, ...sortedGroups).slice(0, limit);
 }
 
 export async function getVocabularyUsageExamples(
@@ -263,7 +275,7 @@ export async function getVocabularyUsageExamples(
   }
 
   const workbookExample = getWorkbookUsageExample(normalizedWord);
-  if (workbookExample) return [workbookExample];
+  const workbookExamples = workbookExample ? [workbookExample] : [];
 
   const candidateLimit = maximumExamples * 6;
   const newConceptExamples = getNewConceptUsageExamples(wordForms, candidateLimit);
@@ -271,6 +283,8 @@ export async function getVocabularyUsageExamples(
   const { data: transcriptRows, error: transcriptError } = await supabase
     .from("transcript_sentences")
     .select("id,section_id,sentence_no,english_text,chinese_text,audio_path")
+    .not("audio_path", "is", null)
+    .not("chinese_text", "is", null)
     .or(
       [...wordForms]
         .slice(0, 12)
@@ -281,21 +295,23 @@ export async function getVocabularyUsageExamples(
     .limit(candidateLimit * 6);
 
   if (transcriptError || !transcriptRows?.length) {
-    return prioritizeVocabularyUsageExamples(
+    return pickLookupExamples(maximumExamples,
+      workbookExamples,
       newConceptExamples,
       getBbcUsageExamples(wordForms, candidateLimit),
-    ).sort(compareUsageExampleBrevity).slice(0, maximumExamples);
+    );
   }
 
   const sentences = (transcriptRows as TranscriptSentenceRow[])
-    .filter((sentence) => sentence.audio_path && matchesUsageExampleWord(sentence.english_text, wordForms))
+    .filter((sentence) => sentence.audio_path && sentence.chinese_text?.trim() && matchesUsageExampleWord(sentence.english_text, wordForms))
     .slice(0, candidateLimit);
 
   if (sentences.length === 0) {
-    return prioritizeVocabularyUsageExamples(
+    return pickLookupExamples(maximumExamples,
+      workbookExamples,
       newConceptExamples,
       getBbcUsageExamples(wordForms, candidateLimit),
-    ).sort(compareUsageExampleBrevity).slice(0, maximumExamples);
+    );
   }
 
   const sectionIds = [...new Set(sentences.map((sentence) => sentence.section_id).filter(Boolean))];
@@ -345,9 +361,10 @@ export async function getVocabularyUsageExamples(
     };
   });
 
-  return prioritizeVocabularyUsageExamples(
+  return pickLookupExamples(maximumExamples,
+    workbookExamples,
     newConceptExamples,
     listeningExamples,
     getBbcUsageExamples(wordForms, candidateLimit),
-  ).sort(compareUsageExampleBrevity).slice(0, maximumExamples);
+  );
 }

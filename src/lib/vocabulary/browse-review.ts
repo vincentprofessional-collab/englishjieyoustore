@@ -24,6 +24,7 @@ export function filterBrowseReviewWords<T extends { id: string }>(
   categories: readonly BrowseCategory[] = [],
 ) {
   if (view === null && familiarities.length === 0) return [...words];
+  if (view === null && (categories.length === 0 || (["reading", "listening", "speaking", "writing"] as const).every((value) => categories.includes(value))) && (["familiar", "vague", "unfamiliar"] as const).every((value) => familiarities.includes(value))) return [...words];
   const today = new Date(now).toDateString();
   return words.filter((word) => {
     const entry = progress[word.id];
@@ -38,6 +39,25 @@ export function filterBrowseReviewWords<T extends { id: string }>(
     if (view === "overall") return reviewedAt !== null;
     return reviewedAt !== null;
   });
+}
+
+export function drawWeightedBrowseWord<T extends { id: string }>(
+  words: readonly T[],
+  progress: Record<string, BrowseProgress>,
+  random: () => number = Math.random,
+): T | null {
+  const candidates = [...new Map(words.map((word) => [word.id, word])).values()];
+  const weight = (word: T) => {
+    const entry = progress[word.id];
+    const familiarity = entry?.familiarity ?? entry?.lastOutcome;
+    return familiarity === "unfamiliar" ? 1.2 : familiarity === "vague" ? 1.1 : 1;
+  };
+  let target = Math.max(0, Math.min(1, random())) * candidates.reduce((sum, word) => sum + weight(word), 0);
+  for (const word of candidates) {
+    target -= weight(word);
+    if (target < 0) return word;
+  }
+  return candidates.at(-1) ?? null;
 }
 
 export function nextBrowseLoopId(

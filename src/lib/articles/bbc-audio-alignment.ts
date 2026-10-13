@@ -3,7 +3,27 @@ export type BbcSentenceTiming = { sentenceNo: number; startMs: number; endMs: nu
 export type BbcAudioAlignment = { timings: BbcSentenceTiming[]; reviewSentenceNos: number[] };
 const words = (text: string) => (text.toLowerCase().match(/[a-z0-9]+(?:['’][a-z]+)*/g) ?? []).map((word) => word.replace(/[’']/g, ""));
 
-export function alignBbcAudioSentences(sentences: { sentenceNo: number; english: string }[], input: BbcRecognizedWord[], duration: number): BbcAudioAlignment {
+export function findBbcAudioPauses(audio: Float32Array, sampleRate: number): [number, number][] {
+  const pauses: [number, number][] = [];
+  const frame = Math.max(1, Math.round(sampleRate / 1000));
+  const threshold = 10 ** (-35 / 20);
+  let quietStart: number | null = null;
+  for (let offset = 0; offset < audio.length; offset += frame) {
+    let quiet = true;
+    for (let index = offset; index < Math.min(audio.length, offset + frame); index++) {
+      if (Math.abs(audio[index]) > threshold) { quiet = false; break; }
+    }
+    if (quiet && quietStart == null) quietStart = offset;
+    if (!quiet && quietStart != null) {
+      if ((offset - quietStart) / sampleRate >= 0.08) pauses.push([quietStart / sampleRate, offset / sampleRate]);
+      quietStart = null;
+    }
+  }
+  if (quietStart != null && (audio.length - quietStart) / sampleRate >= 0.08) pauses.push([quietStart / sampleRate, audio.length / sampleRate]);
+  return pauses;
+}
+
+export function alignBbcAudioSentences(sentences: { sentenceNo: number; english: string }[], input: BbcRecognizedWord[], duration: number, pauses?: [number, number][]): BbcAudioAlignment {
   if (!Number.isFinite(duration) || duration <= 0 || !sentences.length) throw new Error("音频时长或句子内容无效。");
   const source = sentences.flatMap((sentence) => words(sentence.english));
   const recognized = input.flatMap((item, index) => {
@@ -37,104 +57,46 @@ export function alignBbcAudioSentences(sentences: { sentenceNo: number; english:
     else if (matrix[(i - 1) * width + j] >= matrix[i * width + j - 1]) i--;
     else j--;
   }
-  if (anchors.size / source.length < 0.65) throw new Error("音频与英文原文的匹配度不足，请检查是否选错 MP3。");
+  if (2 * anchors.size / (source.length + recognized.length) < 0.88 || anchors.size / source.length < 0.88) {
+    throw new Error("音频与英文原文的匹配度不足，请检查是否选错 MP3，或原文与原声是否一致。");
+  }
   let offset = 0;
   const aligned = sentences.map((sentence) => {
     const count = words(sentence.english).length;
     const matchedOffsets = Array.from({ length: count }, (_, index) => index).filter((index) => anchors.has(offset + index));
     const matches = matchedOffsets.map((index) => anchors.get(offset + index)!);
     offset += count;
-    const missingAtStart = matchedOffsets[0] ?? 0;
+    const sentenceWords = words(sentence.english);
+    const missingAtStart = matchedOffsets[0] ?? count;
     const missingAtEnd = matches.length ? count - matchedOffsets.at(-1)! - 1 : count;
-    const review = !count || matches.length / count < 0.45 || missingAtStart > 0 || missingAtEnd > 0;
+    const leadingLaughter = missingAtStart > 0 && sentenceWords.slice(0, missingAtStart).every((word) => /^(?:ha)+$/.test(word));
+    if (!matches.length || missingAtEnd || (missingAtStart && !leadingLaughter)) {
+      throw new Error(`第 ${sentence.sentenceNo} 句的句首或句尾未与原声完整对齐，请核对原文与 MP3 后重试。`);
+    }
+    const review = matches.length / count < 0.88;
     return {
-      count: Math.max(count, 1),
       matches,
-      missingAtStart,
-      missingAtEnd,
       review,
-      timing: matches.length
-        ? { sentenceNo: sentence.sentenceNo, startMs: Math.max(0, Math.round((matches[0].start - 0.18) * 1000)), endMs: Math.min(Math.round(duration * 1000), Math.round((matches.at(-1)!.end + 0.45) * 1000)) }
-        : null,
+      timing: { sentenceNo: sentence.sentenceNo, startMs: Math.round(matches[0].start * 1000), endMs: Math.round(matches.at(-1)!.end * 1000) },
     };
   });
-  const secondsPerWord = aligned
-    .filter((item) => item.matches.length && !item.review)
-    .map((item) => (item.matches.at(-1)!.end - item.matches[0].start) / item.matches.length)
-    .filter((seconds) => Number.isFinite(seconds) && seconds > 0)
-    .sort((left, right) => left - right);
-  const estimatedSecondsPerWord = Math.min(0.75, Math.max(0.12, secondsPerWord[Math.floor(secondsPerWord.length / 2)] ?? duration / source.length));
-
-  aligned.forEach((item) => {
-    if (!item.timing || !item.matches.length) return;
-    item.timing.startMs = Math.max(0, Math.round((item.matches[0].start - 0.18 - item.missingAtStart * estimatedSecondsPerWord) * 1000));
-    item.timing.endMs = Math.min(Math.round(duration * 1000), Math.round((item.matches.at(-1)!.end + 0.45 + item.missingAtEnd * estimatedSecondsPerWord) * 1000));
-  });
-
-  // If Whisper misses the end of a sentence, estimated word duration alone is
-  // too optimistic for a slow phrase or clause. Keep the clip through the next
-  // sentence onset (or the end of the file for the final sentence), and flag it
-  // for the editor to review.
-  aligned.forEach((item, index) => {
-    if (!item.matches.length || !item.missingAtEnd) return;
-    const next = aligned[index + 1];
-    if (next?.matches.length && next.timing && item.timing) {
-      item.timing.endMs = Math.max(item.timing.endMs, next.timing.startMs);
-    } else if (!next && item.timing) {
-      item.timing.endMs = Math.round(duration * 1000);
-    }
-  });
-
-  for (let index = 0; index < aligned.length;) {
-    if (aligned[index].timing) { index++; continue; }
-    const first = index;
-    while (index < aligned.length && !aligned[index].timing) index++;
-    const previous = aligned[first - 1]?.timing;
-    const next = aligned[index]?.timing;
-    const previousEnd = (previous?.endMs ?? 0) / 1000;
-    const nextStart = (next?.startMs ?? Math.round(duration * 1000)) / 1000;
-    const available = nextStart - previousEnd;
-    const missing = aligned.slice(first, index);
-    const expected = missing.map((item) => Math.max(0.16, item.count * estimatedSecondsPerWord));
-    const totalExpected = expected.reduce((sum, value) => sum + value, 0);
-    const minimumSpan = missing.length * 0.08;
-    if (available <= minimumSpan) {
-      throw new Error(`第 ${sentences[first].sentenceNo} 句时间无法自动估算，请检查分句或音频。`);
-    }
-    const isCompressed = totalExpected > available;
-    const durations = isCompressed
-      ? expected.map((seconds) => 0.08 + (available - minimumSpan) * (seconds / totalExpected))
-      : expected;
-    let cursor = previousEnd + (isCompressed ? 0 : (available - totalExpected) / 2);
-    missing.forEach((item, itemIndex) => {
-      const sentence = sentences[first + itemIndex];
-      const startMs = Math.max(0, Math.round(cursor * 1000));
-      cursor += durations[itemIndex];
-      const endMs = Math.min(Math.round(duration * 1000), next ? next.startMs : Math.round(duration * 1000), Math.max(startMs + 80, Math.round(cursor * 1000)));
-      item.timing = { sentenceNo: sentence.sentenceNo, startMs, endMs };
-    });
-  }
-
-  const timings = aligned.map((item) => item.timing!);
+  const timings = aligned.map((item) => item.timing);
   for (let index = 1; index < timings.length; index++) {
-    if (timings[index].startMs < timings[index - 1].endMs) {
-      const previousSpeechEnd = aligned[index - 1].matches.at(-1)?.end;
-      const nextSpeechStart = aligned[index].matches[0]?.start;
-      const previousMissedTail = aligned[index - 1].missingAtEnd > 0;
-      const boundary = Number.isFinite(previousSpeechEnd) && Number.isFinite(nextSpeechStart)
-        ? previousMissedTail
-          ? Math.max(Math.round(previousSpeechEnd! * 1_000), Math.min(timings[index].startMs, Math.round(nextSpeechStart! * 1_000)))
-          : previousSpeechEnd! <= nextSpeechStart!
-            ? Math.round((previousSpeechEnd! + nextSpeechStart!) * 500)
-            : Math.round(previousSpeechEnd! * 1_000)
-        : Math.round((timings[index].startMs + timings[index - 1].endMs) / 2);
-      timings[index - 1].endMs = boundary; timings[index].startMs = boundary;
-      if (previousSpeechEnd != null && nextSpeechStart != null && previousSpeechEnd > nextSpeechStart) {
-        aligned[index - 1].review = true;
-        aligned[index].review = true;
-      }
+    const previousEnd = aligned[index - 1].matches.at(-1)!.end;
+    const nextStart = aligned[index].matches[0].start;
+    if (previousEnd > nextStart) throw new Error(`第 ${sentences[index].sentenceNo} 句与上一句原声重叠，请检查分句。`);
+    let boundary = (previousEnd + nextStart) / 2;
+    if (pauses) {
+      const pause = pauses.find(([start, end]) => start - 0.015 <= boundary && boundary <= end + 0.015);
+      if (!pause) throw new Error(`第 ${sentences[index].sentenceNo} 句前没有可确认的停顿，请核对原文与音频。`);
+      boundary = Math.max(pause[0], Math.min(pause[1], boundary));
     }
+    timings[index - 1].endMs = Math.round(boundary * 1000);
+    timings[index].startMs = Math.round(boundary * 1000);
   }
+  const speechEnd = aligned.at(-1)!.matches.at(-1)!.end;
+  const finalPause = pauses?.find(([start, end]) => start >= speechEnd && start - speechEnd < 1 && end - start > 0.2);
+  timings.at(-1)!.endMs = Math.min(Math.round(duration * 1000), Math.round((finalPause ? (finalPause[0] + finalPause[1]) / 2 : speechEnd + 0.3) * 1000));
   if (timings.some((timing) => timing.endMs <= timing.startMs)) throw new Error("句子时间轴无效，请重新分析音频。");
   return { timings, reviewSentenceNos: aligned.flatMap((item, index) => item.review ? [sentences[index].sentenceNo] : []) };
 }

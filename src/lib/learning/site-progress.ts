@@ -1,9 +1,19 @@
 export const SITE_DAILY_PROGRESS_KEY = "ielts-platform.analytics.dailyProgress";
 
-export type LearningActivity = "articles" | "vocabulary" | "lookups";
+export type LearningActivity = "articles" | "vocabulary" | "lookups" | "practice";
+
+export type PracticeAttempt = {
+  id: string;
+  title: string;
+  href: string;
+  completedAt: string;
+  correct?: number;
+  total?: number;
+};
 
 export type SiteStudyDay = {
-  activitySeconds?: Record<LearningActivity, number>;
+  activitySeconds?: Partial<Record<LearningActivity, number>>;
+  practiceAttempts?: PracticeAttempt[];
   lookedUpWords: string[];
   seconds: number;
   studyItems: string[];
@@ -28,7 +38,9 @@ export function readSiteStudyHistory(storage: Pick<Storage, "getItem"> = window.
         articles: Math.max(0, Number(day.activitySeconds?.articles) || 0),
         vocabulary: Math.max(0, Number(day.activitySeconds?.vocabulary) || 0),
         lookups: Math.max(0, Number(day.activitySeconds?.lookups) || 0),
+        practice: Math.max(0, Number(day.activitySeconds?.practice) || 0),
       },
+      ...(Array.isArray(day.practiceAttempts) ? { practiceAttempts: day.practiceAttempts.filter((item) => item && typeof item.id === "string" && typeof item.title === "string" && typeof item.href === "string" && item.href.startsWith("/") && !item.href.startsWith("//") && Number.isFinite(Date.parse(item.completedAt))) } : {}),
       lookedUpWords: Array.isArray(day.lookedUpWords) ? day.lookedUpWords.filter((value): value is string => typeof value === "string") : [],
       seconds: Number.isFinite(day.seconds) ? Math.max(0, Number(day.seconds)) : 0,
       studyItems: Array.isArray(day.studyItems) ? day.studyItems.filter((value): value is string => typeof value === "string") : [],
@@ -59,6 +71,7 @@ export function recordDailyLearningSeconds(seconds: number, storage: Pick<Storag
       articles: day.activitySeconds?.articles ?? 0,
       vocabulary: day.activitySeconds?.vocabulary ?? 0,
       lookups: day.activitySeconds?.lookups ?? 0,
+      practice: day.activitySeconds?.practice ?? 0,
       [activity]: (day.activitySeconds?.[activity] ?? 0) + delta,
     } : day.activitySeconds,
     seconds: day.seconds + delta,
@@ -67,11 +80,24 @@ export function recordDailyLearningSeconds(seconds: number, storage: Pick<Storag
 
 export function activityForLearningPath(path: string): LearningActivity | undefined {
   const normalizedPath = path.split("?")[0];
+  if (/^\/(reading\/(?:practice|mock)|listening\/|sat\/practice|junior-high|senior-high|cet[46])/.test(normalizedPath)) return "practice";
   if (normalizedPath === "/vocabulary" || normalizedPath === "/vocabulary/pk" || normalizedPath === "/vocabulary/books") return "vocabulary";
   if (normalizedPath.startsWith("/vocabulary/")) return "lookups";
   if (normalizedPath.startsWith("/articles/") || normalizedPath.startsWith("/new-concept/")) return "articles";
   if (normalizedPath === "/reading" || normalizedPath.startsWith("/reading/")) return "articles";
   return undefined;
+}
+
+export function recordPracticeAttempt(
+  attempt: Omit<PracticeAttempt, "completedAt">,
+  storage: Pick<Storage, "getItem" | "setItem"> = window.localStorage,
+  date = new Date(),
+) {
+  if (!attempt.id || !attempt.title || !attempt.href.startsWith("/") || attempt.href.startsWith("//")) return;
+  updateToday((day) => ({
+    ...day,
+    practiceAttempts: [...(day.practiceAttempts ?? []).filter((item) => item.id !== attempt.id), { ...attempt, completedAt: date.toISOString() }],
+  }), storage, date);
 }
 
 export function recordStudyPage(path: string, storage: Pick<Storage, "getItem" | "setItem"> = window.localStorage, date = new Date()) {

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import styles from "./admin-bbc-article-upload.module.css";
 import { readBbcRichPaste, serializeBbcArticlePaste } from "@/lib/articles/bbc-paste-markup";
 import { adminRequest } from "@/lib/admin/request";
@@ -9,6 +9,8 @@ import { analyzeBbcAudio } from "@/lib/admin/bbc-audio-alignment";
 import type { BbcArticle } from "@/lib/articles/bbc";
 
 type UploadTicket = { headers: Record<string, string>; objectPath: string; uploadUrl: string };
+type SentenceUploadTicket = UploadTicket & { sentenceNo: number };
+type AudioPreparation = Awaited<ReturnType<typeof analyzeBbcAudio>>;
 
 function uploadToR2(ticket: UploadTicket, file: File, onProgress: (value: number) => void) {
   return new Promise<void>((resolve, reject) => {
@@ -46,6 +48,7 @@ export function AdminBbcArticleUpload() {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [existingAudio, setExistingAudio] = useState<{ objectPath: string } | null>(null);
   const [articles, setArticles] = useState<{ id: string; published: boolean; title: string; year: number }[]>([]);
+  const audioJob = useRef<{ file: File; sentenceKey: string; preparation?: AudioPreparation; objectPath?: string; uploaded: Map<number, string> } | null>(null);
 
   async function loadArticles() {
     const result = await adminRequest("/api/admin/bbc-articles");
@@ -58,6 +61,7 @@ export function AdminBbcArticleUpload() {
       const result = await adminRequest(`/api/admin/bbc-articles?articleId=${encodeURIComponent(id)}`);
       setText(serializeBbcArticlePaste(result.article));
       setEditingId(id); setAudioFile(null); setAudioProgress(0); setAudioStatus("waiting");
+      audioJob.current = null;
       setExistingAudio(result.article.fullAudioUrl ? { objectPath: result.objectPath } : null);
       setPublishedHref(`/articles/${id}`);
       setMessage("正在编辑已上传文章。修改正文后会自动重新分析时间轴；语法标注可在下方追加后由系统识别，也可在前端精读页面直接修改。");
@@ -85,7 +89,7 @@ export function AdminBbcArticleUpload() {
       setMessage("MP3 文件不能超过 200 MB。");
       return;
     }
-    if (!audioFile && !existingAudio) { setError(true); setMessage("请选择本篇 MP3，以自动生成逐句原声时间轴。"); return; }
+    if (!audioFile && !existingAudio) { setError(true); setMessage("请选择本篇 MP3，以自动切分逐句小音频。"); return; }
 
     setBusy(true);
     setAudioProgress(0);
@@ -99,29 +103,62 @@ export function AdminBbcArticleUpload() {
         unmatchedSyntaxSentenceNos?: number[];
       };
       if (editingId && editingId !== prepared.article.id) throw new Error("编辑文章时请保留原日期编号。");
+      if (prepared.unmatchedSyntaxSentenceNos?.length) throw new Error(`第 ${prepared.unmatchedSyntaxSentenceNos.join("、")} 句的语法标注未匹配，请核对输入内容。`);
       let objectPath: string | undefined = existingAudio?.objectPath;
-      const alignment = audioFile
-        ? await analyzeBbcAudio(audioFile, prepared.article.sentences ?? [], setMessage)
-        : undefined;
+      let alignment: AudioPreparation | undefined;
+      let sentenceAudioFiles: { sentenceNo: number; objectPath: string }[] | undefined;
       if (audioFile) {
+        const sentenceKey = JSON.stringify((prepared.article.sentences ?? []).map((sentence) => sentence.english));
+        if (audioJob.current?.file !== audioFile || audioJob.current.sentenceKey !== sentenceKey) {
+          audioJob.current = { file: audioFile, sentenceKey, uploaded: new Map() };
+        }
+        const job = audioJob.current;
+        alignment = job.preparation ?? await analyzeBbcAudio(audioFile, prepared.article.sentences ?? [], setMessage);
+        job.preparation = alignment;
         const title = text.replace(/^\uFEFF/, "").split(/\r?\n/).find((line) => line.trim())?.replace(/^\s*#{1,6}\s*/, "").trim() ?? "";
-        const ticket = await adminRequest("/api/admin/bbc-articles", {
-          body: JSON.stringify({ action: "presign", filename: audioFile.name, size: audioFile.size, title }),
-          method: "POST",
-        }) as UploadTicket;
+        const totalBytes = audioFile.size + alignment.clips.reduce((total, clip) => total + clip.file.size, 0);
         setAudioStatus("uploading");
-        await uploadToR2(ticket, audioFile, setAudioProgress);
+        if (!job.objectPath) {
+          const ticket = await adminRequest("/api/admin/bbc-articles", {
+            body: JSON.stringify({ action: "presign", filename: audioFile.name, size: audioFile.size, title }), method: "POST",
+          }) as UploadTicket;
+          setMessage("正在上传完整原声……");
+          await uploadToR2(ticket, audioFile, (progress) => setAudioProgress(Math.round(progress * audioFile.size / totalBytes)));
+          job.objectPath = ticket.objectPath;
+        }
+        objectPath = job.objectPath;
+        const { tickets } = await adminRequest("/api/admin/bbc-articles", {
+          body: JSON.stringify({ action: "presign-sentences", title, objectPath, files: alignment.clips.map((clip) => ({ sentenceNo: clip.sentenceNo, size: clip.file.size })) }),
+          method: "POST",
+        }) as { tickets: SentenceUploadTicket[] };
+        if (tickets.length !== alignment.clips.length) throw new Error("独立小音频上传清单不完整，请重试。");
+        let completedBytes = audioFile.size + alignment.clips.filter((clip) => job.uploaded.has(clip.sentenceNo)).reduce((total, clip) => total + clip.file.size, 0);
+        for (let index = 0; index < alignment.clips.length; index++) {
+          const clip = alignment.clips[index];
+          const ticket = tickets[index];
+          if (ticket.sentenceNo !== clip.sentenceNo) throw new Error("小音频顺序与正文不一致，请重试。");
+          if (job.uploaded.get(clip.sentenceNo) === ticket.objectPath) continue;
+          setMessage(`正在上传小音频 ${index + 1}/${alignment.clips.length}……`);
+          await uploadToR2(ticket, clip.file, (progress) => setAudioProgress(Math.round((completedBytes + clip.file.size * progress / 100) / totalBytes * 100)));
+          completedBytes += clip.file.size;
+          job.uploaded.set(clip.sentenceNo, ticket.objectPath);
+        }
+        sentenceAudioFiles = alignment.clips.map((clip) => ({ sentenceNo: clip.sentenceNo, objectPath: job.uploaded.get(clip.sentenceNo)! }));
+        setAudioProgress(100);
         setAudioStatus("uploaded");
-        objectPath = ticket.objectPath;
       }
+      setMessage("正在核对小音频并保存文章与语法标注……");
       const payload = await adminRequest("/api/admin/bbc-articles", {
-        body: JSON.stringify({ text, objectPath, ...alignment }),
+        body: JSON.stringify({ text, objectPath, ...(alignment ? { durationMs: alignment.durationMs, timings: alignment.timings, sentenceAudioFiles } : {}) }),
         method: "PUT",
       });
 
       const articleId = typeof payload.articleId === "string" ? payload.articleId : prepared.article.id;
       const isPublished = payload.published === true;
       setEditingId(articleId);
+      if (objectPath) setExistingAudio({ objectPath });
+      setAudioFile(null);
+      audioJob.current = null;
       setPublishedHref(`/articles/${articleId}${isPublished ? "" : "?preview=draft"}`);
       const reviewSentenceNos = alignment?.reviewSentenceNos ?? [];
       const pastedSyntaxTotalCount = prepared.pastedSyntaxTotalCount ?? 0;
@@ -132,7 +169,7 @@ export function AdminBbcArticleUpload() {
           ? "检测到语法标注标题，但没有解析到句子标注；请检查是否按“## 句1”单独分行。"
           : "";
       setMessage(
-        `${isPublished ? `已更新 ${payload.year} 年 ${payload.month} 月的已发布文章` : `已保存为 ${payload.year} 年 ${payload.month} 月的草稿，用户暂时看不到`}；${payload.paragraphCount} 段正文、${payload.sentenceCount} 句、${payload.vocabularyCount} 条词汇。${syntaxMessage}其余未提供标注的句子由系统自动分析；请先打开前端预览检查并修改。${reviewSentenceNos.length ? `第 ${reviewSentenceNos.join("、")} 句为低置信度估时，请在前端试听并微调。` : ""}`,
+        `${isPublished ? `已更新 ${payload.year} 年 ${payload.month} 月的已发布文章` : `已保存为 ${payload.year} 年 ${payload.month} 月的草稿，用户暂时看不到`}；${payload.paragraphCount} 段正文、${payload.sentenceCount} 句、${payload.vocabularyCount} 条词汇、${payload.sentenceAudioCount ?? 0} 个独立小音频。${syntaxMessage}未提供标注的句子已自动分析；可打开前端预览检查。${reviewSentenceNos.length ? `第 ${reviewSentenceNos.join("、")} 句识别词与原文存在差异，请试听核对。` : ""}`,
       );
       void loadArticles().catch(() => undefined);
     } catch (uploadError) {
@@ -150,7 +187,7 @@ export function AdminBbcArticleUpload() {
         <div>
           <span>BBC · ARTICLE PUBLISHING</span>
           <h2>{editingId ? "修改 BBC 文章" : "上传 BBC 文章"}</h2>
-          <p>新文章先保存为仅管理员可见的草稿。请在前端检查并修改词性、句子成分和音频时间，再从草稿预览页正式发布。</p>
+          <p>上传后自动整理中英文与词汇、完成词性和语法成分标注，并按原声切分独立小音频。新文章先保存为草稿，可预览后发布。</p>
         </div>
       </header>
 
@@ -180,12 +217,12 @@ export function AdminBbcArticleUpload() {
         </label>
         <label className={styles.full}>
           <span>MP3 音频{existingAudio ? "（已有关联音频，可替换）" : ""}</span>
-          <input accept=".mp3,audio/mpeg" disabled={busy} onChange={(event) => { setAudioFile(event.target.files?.[0] ?? null); setAudioProgress(0); setAudioStatus("waiting"); }} type="file" />
-          <small>{audioFile ? `${audioFile.name} · ${(audioFile.size / 1024 / 1024).toFixed(1)} MB` : existingAudio ? "已关联原音频；未修改英文句子时会保留原时间轴。若修改英文正文，请重新选择 MP3。" : "最大 200 MB；浏览器直接上传到 Cloudflare R2，不经过文章接口传输音频内容。"}</small>
+          <input accept=".mp3,audio/mpeg" disabled={busy} onChange={(event) => { setAudioFile(event.target.files?.[0] ?? null); audioJob.current = null; setAudioProgress(0); setAudioStatus("waiting"); }} type="file" />
+          <small>{audioFile ? `${audioFile.name} · ${(audioFile.size / 1024 / 1024).toFixed(1)} MB` : existingAudio ? "已关联原音频；只改词汇、中文或语法时保留原有小音频。修改英文句子后请重新选择 MP3。" : "最大 200 MB；自动按句间停顿切分 MP3，并逐句上传。"}</small>
         </label>
         {audioFile ? (
           <div aria-label="MP3 音频上传进度" aria-valuemax={100} aria-valuemin={0} aria-valuenow={audioProgress} className={styles.progress} role="progressbar">
-            <span>{audioStatus === "uploaded" ? "音频已上传" : audioStatus === "analyzing" ? "正在识别并生成时间轴" : audioStatus === "analysis-failed" ? "时间轴生成失败，音频尚未上传" : audioStatus === "uploading" ? `音频上传中 ${audioProgress}%` : audioStatus === "failed" ? "R2 音频上传失败，请重试" : "等待上传"}</span>
+            <span>{audioStatus === "uploaded" ? "原声和独立小音频已上传" : audioStatus === "analyzing" ? "正在识别原声并切分小音频" : audioStatus === "analysis-failed" ? "音频处理失败，请核对原文与 MP3" : audioStatus === "uploading" ? `音频上传中 ${audioProgress}%` : audioStatus === "failed" ? "音频上传失败，请重试" : "等待上传"}</span>
             <div className={styles.progressTrack}><i style={{ width: `${audioProgress}%` }} /></div>
           </div>
         ) : null}

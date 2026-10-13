@@ -5,12 +5,14 @@ import {
 } from "@/lib/article-inline-annotations";
 
 function annotationRoleColor(label: string) {
-  if (label.includes("主语")) return "var(--bbc-syntax-role-subject, #245d7b)";
-  if (label.includes("谓语")) return "var(--bbc-syntax-role-predicate, #a32c1e)";
-  if (label.includes("宾语")) return "var(--bbc-syntax-role-object, #1f5c8b)";
-  if (label.includes("表语")) return "var(--bbc-syntax-role-predicative, #6b3fa0)";
-  if (label.includes("状语")) return "var(--bbc-syntax-role-adverbial, #0f6e7a)";
-  if (label.includes("定语")) return "var(--bbc-syntax-role-attributive, #8a6a2f)";
+  if (label.includes("同位语")) return "var(--bbc-syntax-role-appositive, #a56732)";
+  if (label.includes("补足语") || label.includes("宾补") || label === "补语") return "var(--bbc-syntax-role-complement, #df36ad)";
+  if (label.includes("主语")) return "var(--bbc-syntax-role-subject, #20b928)";
+  if (label.includes("系") || label.includes("谓语")) return "var(--bbc-syntax-role-predicate, #ef2929)";
+  if (label.includes("宾语")) return "var(--bbc-syntax-role-object, #1685ef)";
+  if (label.includes("表语")) return "var(--bbc-syntax-role-predicative, #923be8)";
+  if (label.includes("状语")) return "var(--bbc-syntax-role-adverbial, #e8ae00)";
+  if (label.includes("定语")) return "var(--bbc-syntax-role-attributive, #ff850c)";
   return "var(--bbc-syntax-role-other, #6e6a63)";
 }
 

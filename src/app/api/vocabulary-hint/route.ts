@@ -21,13 +21,11 @@ export async function GET(request: Request) {
   }
 
   if (isDetailed) {
+    const studyOnly = searchParams.get("study") === "1";
     const bbcVocabularyDetail = getBbcVocabularyDetail(word);
     const entry = /\s/.test(word) && bbcVocabularyDetail ? bbcVocabularyDetail.entry : hint;
-    const fetchedUsageExamples = prioritizeVocabularyUsageExamples(
-      await Promise.race([
-        getVocabularyUsageExamples(entry.word, 5, entry.inflections.map((inflection) => inflection.value)),
-        new Promise<Awaited<ReturnType<typeof getVocabularyUsageExamples>>>((resolve) => setTimeout(() => resolve([]), 1500)),
-      ]),
+    const fetchedUsageExamples = studyOnly ? [] : prioritizeVocabularyUsageExamples(
+      await getVocabularyUsageExamples(entry.word, 5, entry.inflections.map((inflection) => inflection.value)),
       bbcVocabularyDetail?.examples ?? [],
     ).slice(0, 5);
     const hasBbcExamples = fetchedUsageExamples.some((example) => example.bookCode === "BBC");
