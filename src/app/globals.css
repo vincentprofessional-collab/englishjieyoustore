@@ -25234,6 +25234,11 @@ audio.guide-editor-asset-preview {
   text-align: left !important;
 }
 
+.bbc-intensive-reading.bbc-listening-mode .bbc-intensive-chinese,
+.bbc-intensive-reading.bbc-listening-mode .bbc-sentence-chinese {
+  line-height: 2.325 !important;
+}
+
 .bbc-intensive-reading .dictation-blank-input,
 .bbc-intensive-reading .dictation-blank-measure,
 .bbc-intensive-reading .dictation-blank-display,
@@ -30412,6 +30417,8 @@ body *:not(.bbc-vocabulary-highlight):not(.bbc-active-word) {
 
 .listening-intensive-sentence .translation {
   border-left: 3px solid rgba(169, 212, 234, 0.35);
+  font-size: 1.08em;
+  line-height: 2.625;
   padding-left: 12px;
 }
 
@@ -31963,6 +31970,11 @@ body .mobile-bottom-nav a.active { color: #245d7b !important; }
   .bbc-article-page .bbc-intensive-reading .translation {
     font-size: 19px !important;
     line-height: 1.5 !important;
+  }
+
+  .bbc-article-page .bbc-intensive-reading.bbc-listening-mode .bbc-intensive-chinese,
+  .bbc-article-page .bbc-intensive-reading.bbc-listening-mode .bbc-sentence-chinese {
+    line-height: 2.25 !important;
   }
 
   .bbc-article-page .bbc-intensive-reading .sentence-order-chip {

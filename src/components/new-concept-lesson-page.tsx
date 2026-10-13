@@ -1369,7 +1369,7 @@ export function NewConceptLessonPage({
             ) : isOriginalVisible ? studyMode === "general" ? (
               <NewConceptArticleCopy annotations={inlineTextAnnotations} displayMode={displayMode} isOriginalVisible lesson={lesson} pronunciations={articlePronunciations} />
             ) : activeStudyEnglish ? (
-                <div className="bbc-intensive-reading">
+                <div className={`bbc-intensive-reading ${studyMode === "listening" ? "bbc-listening-mode" : ""}`}>
                 <div className="bbc-intensive-reading-actions">
                   {studyMode === "writing" && audioSettings.dictationMode !== "none" ? (
                     <button
