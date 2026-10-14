@@ -2,7 +2,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { cookies, headers } from "next/headers";
 import { VocabularyAutoplay } from "@/components/vocabulary-autoplay";
-import { VocabularyBbcExampleStrip } from "@/components/vocabulary-bbc-example-strip";
 import { VocabularyDetailShell } from "@/components/vocabulary-detail-shell";
 import { VocabularyDetailContent } from "@/components/vocabulary-detail-content";
 import { VocabularyLookupDisplaySection } from "@/components/vocabulary-lookup-display-section";
@@ -326,7 +325,6 @@ export default async function VocabularyWordPage({
       <VocabularyDetailShell
         backHref={backHref}
         entry={entry}
-        headerAfterActions={<VocabularyBbcExampleStrip examples={usageExamples} />}
       >
         <VocabularyDetailContent
           entry={entry}
@@ -334,6 +332,7 @@ export default async function VocabularyWordPage({
           etymologyEnglish={etymology?.english}
           formationParts={formationParts}
           inlineVideo={!isPhoneRequest ? videoSection : null}
+          lookupLayout
           phrases={phrases}
           synonymDistinctions={synonymDistinctions}
           usageExamples={usageExamples}

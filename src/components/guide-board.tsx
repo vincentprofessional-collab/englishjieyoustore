@@ -208,11 +208,13 @@ function GuidePostCard({
   initialExpanded = false,
   linkTitle = true,
   post,
+  titleOnly = false,
 }: {
   hidePostChrome?: boolean;
   initialExpanded?: boolean;
   linkTitle?: boolean;
   post: GuidePost;
+  titleOnly?: boolean;
 }) {
   const [comments, setComments] = useState<GuideComment[]>([]);
   const [commentBody, setCommentBody] = useState("");
@@ -558,11 +560,11 @@ function GuidePostCard({
             )
           )}
           {!hidePostChrome ? <p>{post.excerpt}</p> : null}
-          {post.author ? <small className="guide-post-author">作者：{post.author}</small> : null}
+          {!titleOnly && post.author ? <small className="guide-post-author">作者：{post.author}</small> : null}
         </div>
-        <time className="guide-post-date" dateTime={post.publishedAt}>
+        {!titleOnly ? <time className="guide-post-date" dateTime={post.publishedAt}>
           {formatGuideDate(post.publishedAt)}
-        </time>
+        </time> : null}
       </header>
 
       {expanded ? (
@@ -685,8 +687,6 @@ export function GuideBoard({
     return () => media.removeEventListener("change", update);
   }, [homeLanding]);
 
-  const effectiveHidePostChrome = homeLanding ? !isMobileHome : hidePostChrome;
-
   useEffect(() => {
     let active = true;
 
@@ -751,10 +751,11 @@ export function GuideBoard({
       <div className="guide-post-list">
         {posts.map((post) => (
           <GuidePostCard
-            hidePostChrome={effectiveHidePostChrome}
-            initialExpanded={initialExpanded}
+            hidePostChrome={homeLanding || hidePostChrome}
+            initialExpanded={homeLanding ? false : initialExpanded}
             key={post.id}
             post={post}
+            titleOnly={homeLanding}
           />
         ))}
         {isLoading && isMobileHome ? (

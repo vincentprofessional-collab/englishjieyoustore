@@ -77,7 +77,7 @@ function isInteractiveTarget(target: EventTarget | null) {
   return target instanceof HTMLElement
     ? Boolean(
         target.closest(
-          "button, input, textarea, select, [contenteditable='true'], .notes-panel, .selection-action-popover, .word-tooltip-floating, .sentence-order-dropzone, .sentence-order-word-bank",
+          "button, input, textarea, select, [contenteditable='true'], .notes-panel, .selection-action-popover, .word-tooltip-floating, .sentence-order-dropzone, .sentence-order-word-bank, .sentence-order-chip, .sentence-order-drag-preview",
         ),
       )
     : false;

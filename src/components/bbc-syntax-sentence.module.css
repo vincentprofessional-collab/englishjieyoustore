@@ -94,7 +94,9 @@
   .word { line-height: 1.35; padding: 0 2px; }
   .pos, .annotationPos { line-height: 1.25; }
   .annotationPosTrack { height: 15px; }
-  .translation { font-size: 16px; line-height: 1.65; margin-top: 12px; padding-top: 0; }
+  .translation { font-size: var(--syntax-word-font-size); line-height: 1.5; margin-top: 12px; padding-top: 0; }
+  :global(.bbc-article-page[data-study-mode="intensive"]) .translation { font-size: var(--syntax-word-font-size) !important; line-height: 1.5 !important; }
+  :global(.bbc-article-page:not([data-study-mode="general"])) .wave > span:first-child { text-decoration: none; }
 }
 
 .omissionNotes { margin: 8px 0 0; font-size: 12px; line-height: 1.4; color: #65727e; }

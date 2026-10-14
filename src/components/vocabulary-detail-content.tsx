@@ -21,6 +21,7 @@ type VocabularyDetailContentProps = {
   formationUnlocked?: boolean;
   formationParts: VocabularyFormationPart[];
   inlineVideo?: ReactNode;
+  lookupLayout?: boolean;
   showExamples?: boolean;
   phrases: VocabularyPhraseMatch[];
   synonymDistinctions?: VocabularySynonymDistinction[];
@@ -213,31 +214,24 @@ function PhraseSection({ phrases }: { phrases: VocabularyPhraseMatch[] }) {
   );
 }
 
-function UsageExamplesSection({
-  examples,
-  illustrationWord,
-}: {
-  examples: VocabularyUsageExample[];
-  illustrationWord?: string | null;
-}) {
-  const bilingualExamples = examples.filter((example) => example.englishText.trim() && example.chineseText.trim());
-  const imageUrl = illustrationWord ? getPrimarySchoolVocabularyImageUrl(illustrationWord) : null;
+function useVocabularyIllustration(word: string | null) {
+  const imageUrl = word ? getPrimarySchoolVocabularyImageUrl(word) : null;
   const [imagesVisible, setImagesVisible] = useState(true);
-  const [imageState, setImageState] = useState<"loading" | "ready" | "missing">(imageUrl ? "loading" : "missing");
+  const [loadedImageUrl, setLoadedImageUrl] = useState<string | null>(null);
   useEffect(() => {
     const sync = () => setImagesVisible(getVocabularyLookupDisplayPreferences().images);
     sync();
     return subscribeToVocabularyLookupDisplayPreferences(sync);
   }, []);
   useEffect(() => {
+    setLoadedImageUrl(null);
     if (!imageUrl || !imagesVisible) {
-      setImageState("missing");
       return;
     }
 
     const image = new window.Image();
-    image.onload = () => setImageState("ready");
-    image.onerror = () => setImageState("missing");
+    image.onload = () => setLoadedImageUrl(imageUrl);
+    image.onerror = () => setLoadedImageUrl(null);
     image.src = imageUrl;
     return () => {
       image.onload = null;
@@ -245,19 +239,29 @@ function UsageExamplesSection({
     };
   }, [imageUrl, imagesVisible]);
 
-  const illustration = imagesVisible && imageUrl && imageState === "ready" ? (
+  return imagesVisible && imageUrl && loadedImageUrl === imageUrl ? (
     <img
-      alt={`${illustrationWord} 的词汇插图`}
+      alt={`${word} 的词汇插图`}
       className="vocabulary-primary-school-word-picture"
       decoding="async"
       loading="lazy"
-      onError={() => setImageState("missing")}
+      onError={() => setLoadedImageUrl(null)}
       src={imageUrl}
     />
   ) : null;
+}
+
+function UsageExamplesSection({
+  examples,
+  illustration,
+}: {
+  examples: VocabularyUsageExample[];
+  illustration?: ReactNode;
+}) {
+  const bilingualExamples = examples.filter((example) => example.englishText.trim() && example.chineseText.trim());
 
   if (bilingualExamples.length === 0) {
-    if (!illustration || imageState === "missing") return null;
+    if (!illustration) return null;
     return (
       <VocabularyLookupDisplaySection controlsEnabled id="images" title="图片">
         <div className="vocabulary-primary-school-picture-only">{illustration}</div>
@@ -358,12 +362,17 @@ export function VocabularyDetailContent({
   formationParts,
   formationUnlocked = false,
   inlineVideo,
+  lookupLayout = false,
   showExamples = true,
   phrases,
   synonymDistinctions = [],
   usageScenario,
   usageExamples,
 }: VocabularyDetailContentProps) {
+  const illustration = useVocabularyIllustration(entry.level === "小学" ? entry.word : null);
+  const chineseDefinition = (
+    <VocabularyLookupDisplaySection controlsEnabled id="chineseDefinition" title="中文释义"><DefinitionRows entry={entry} /></VocabularyLookupDisplaySection>
+  );
   if (isSupplementalLearningBook(entry.level)) {
     const { caution, scenario: noteScenario } = splitSupplementalReviewNotes(entry.reviewNotes);
     const scenario = entry.level === "小学短语" || entry.level === "初中短语"
@@ -395,16 +404,27 @@ export function VocabularyDetailContent({
   ) : null;
   return (
     <>
-      <VocabularyLookupDisplaySection controlsEnabled id="chineseDefinition" title="中文释义"><DefinitionRows entry={entry} /></VocabularyLookupDisplaySection>
+      {lookupLayout && illustration ? (
+        <div className="vocabulary-definition-illustration-layout">
+          {chineseDefinition}
+          <div className="vocabulary-definition-illustration">{illustration}</div>
+        </div>
+      ) : chineseDefinition}
       <EnglishDefinitionSection entry={entry} />
-      <WordInflectionSection entry={entry} />
+      {lookupLayout && illustration ? (
+        <VocabularyLookupDisplaySection className="vocabulary-lookup-mobile-picture" controlsEnabled id="images" title="图片">
+          <div className="vocabulary-primary-school-picture-only">{illustration}</div>
+        </VocabularyLookupDisplaySection>
+      ) : null}
+      {!lookupLayout ? <WordInflectionSection entry={entry} /> : null}
       <UsageExamplesSection
         key={entry.normalizedWord}
         examples={showExamples ? usageExamples : []}
-        illustrationWord={entry.level === "小学" ? entry.word : null}
+        illustration={!lookupLayout ? illustration : null}
       />
       <SynonymDistinctionSection groups={synonymDistinctions} />
       {wordTreeAndEtymology}
+      {lookupLayout ? <WordInflectionSection entry={entry} /> : null}
       {inlineVideo}
       <WordDetailListSection items={entry.reviewNotes} title="温故知新" />
       <PhraseSection phrases={phrases} />

@@ -42,6 +42,7 @@ function firstEnabledHref(item: SiteChromeNavItem): string {
 
 export function SiteNav({ config: initialConfig }: { config: SiteChromeConfig }) {
   const pathname = usePathname();
+  const showMobileHeader = pathname === "/" || pathname === "/me";
   const [config, setConfig] = useState(initialConfig);
   const [canAccessAdmin, setCanAccessAdmin] = useState(false);
   const navStyle: SiteNavStyle = {
@@ -144,7 +145,7 @@ export function SiteNav({ config: initialConfig }: { config: SiteChromeConfig })
   }, []);
 
   return (
-    <header className={`site-header ${pathname === "/" ? "site-header-home" : "site-header-interior"}`} style={navStyle}>
+    <header className={`site-header ${pathname === "/" ? "site-header-home" : "site-header-interior"}${showMobileHeader ? " site-header-mobile-visible" : ""}`} style={navStyle}>
       <div className="nav-topbar">
         <Link className="brand" href={config.brand.href || "/"}>
           <span className="brand-mark">

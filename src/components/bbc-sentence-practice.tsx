@@ -742,6 +742,8 @@ export function BbcSentencePractice({
           aria-label="词汇区域"
           role="group"
           ref={sentenceOrderBankRef}
+          onContextMenu={(event) => { if (isMobilePointerViewport) event.preventDefault(); }}
+          onCopy={(event) => { if (isMobilePointerViewport) event.preventDefault(); }}
           onDragOver={(event) => event.preventDefault()}
           onDrop={(event: ReactDragEvent<HTMLDivElement>) => {
             event.preventDefault();
@@ -784,6 +786,7 @@ export function BbcSentencePractice({
               <span
                 aria-hidden="true"
                 className="sentence-order-drag-preview"
+                onContextMenu={(event) => event.preventDefault()}
                 style={{ left: sentenceOrderPointerPosition.x, top: sentenceOrderPointerPosition.y }}
               >
                 {sentenceOrderDrag.token}

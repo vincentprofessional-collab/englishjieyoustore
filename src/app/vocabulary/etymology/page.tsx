@@ -52,6 +52,7 @@ export default async function VocabularyEtymologyLookupPage() {
           entry={entry}
           formationUnlocked
           formationParts={formationParts}
+          lookupLayout
           phrases={getVocabularyPhraseMatches(entry.word)}
           usageExamples={usageExamples}
         />

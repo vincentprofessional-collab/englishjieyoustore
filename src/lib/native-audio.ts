@@ -16,7 +16,7 @@ export class NativeAudio {
     this._sounds = [{ _node: this.media }];
     this.media.preload = options.preload === false ? "none" : "metadata";
     this.media.src = typeof options.src === "string" ? options.src : options.src[0];
-    this.media.playbackRate = options.rate ?? 1;
+    this.rate(options.rate ?? 1);
     this.media.volume = options.volume ?? 1;
     this.listen("loadedmetadata", () => {
       this.status = "loaded";
@@ -95,7 +95,10 @@ export class NativeAudio {
   }
 
   rate(value?: number) {
-    if (value != null) this.media.playbackRate = value;
+    if (value != null) {
+      this.media.defaultPlaybackRate = value;
+      this.media.playbackRate = value;
+    }
     return this.media.playbackRate;
   }
 

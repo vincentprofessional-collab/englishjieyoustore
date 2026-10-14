@@ -32849,7 +32849,7 @@ body .mobile-bottom-nav a.active { color: #245d7b !important; }
   }
 
   body:has(.home-style-lab) .site-header .brand {
-    flex: 1 1 auto;
+    flex: 0 1 auto;
     gap: 0;
     min-width: 0;
   }
@@ -32942,7 +32942,7 @@ body .mobile-bottom-nav a.active { color: #245d7b !important; }
 
   .shell > .site-header .brand {
     align-items: center;
-    flex: 1 1 auto;
+    flex: 0 1 auto;
     gap: 0;
     min-width: 0;
     padding: 0;
@@ -34266,7 +34266,7 @@ body .mobile-bottom-nav a.active { color: #245d7b !important; }
 @media (max-width: 600px) { .learning-sharing-page { padding: 12px 0 28px; } .learning-sharing-search-card form > div { align-items: stretch; flex-direction: column; } .learning-sharing-search-results li, .progress-sharing-list-card li { align-items: flex-start; flex-direction: column; } .progress-sharing-list-card li > div { justify-content: flex-start; } .shared-learning-progress > header { align-items: flex-start; } .progress-consent-actions { display: grid; grid-template-columns: 1fr; } }
 /* Mobile layout refinements. Keep desktop pages unchanged. */
 @media (max-width: 820px) {
-  .shell > .site-header.site-header-interior {
+  .shell > .site-header:not(.site-header-mobile-visible) {
     display: none !important;
   }
 
@@ -35441,3 +35441,28 @@ body .mobile-bottom-nav a.active { color: #245d7b !important; }
 .vocabulary-learning-today-phonetic { color: #245d7b; font-size: 13px; line-height: 1.4; min-width: 0; overflow-wrap: anywhere; text-align: center; }
 .vocabulary-learning-today-phonetic.is-hidden { filter: blur(6px); user-select: none; }
 .vocabulary-learning-page .vocabulary-learning-today-definition { margin-left: 0; }
+
+/* Lookup pictures sit beside the Chinese meaning on larger screens. */
+.vocabulary-definition-illustration { display: none; }
+@media (min-width: 821px) {
+  .vocabulary-definition-illustration-layout { align-items: center; display: grid; gap: 24px; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); }
+  .vocabulary-definition-illustration-layout > .word-detail-section { min-width: 0; }
+  .vocabulary-definition-illustration-layout + .word-detail-section { border-top: 1px solid rgba(228, 216, 189, 0.72); padding-top: 22px; }
+  .vocabulary-definition-illustration { display: flex; justify-content: center; min-width: 0; }
+  .vocabulary-definition-illustration .vocabulary-primary-school-word-picture { aspect-ratio: 1; box-sizing: border-box; height: auto; max-height: 420px; width: 100%; }
+  .vocabulary-lookup-mobile-picture { display: none; }
+}
+
+@media (max-width: 820px) {
+  .bbc-article-page:not(.new-concept-lesson-page) .bbc-full-audio .player-progress-row input[type="range"] { touch-action: none; }
+  .bbc-article-page:not(.new-concept-lesson-page)[data-study-mode="intensive"] :is(.bbc-intensive-english, .bbc-intensive-chinese) { font-size: 18px !important; }
+  .bbc-article-page:not(.new-concept-lesson-page)[data-study-mode="intensive"] .bbc-intensive-chinese { line-height: 1.5 !important; }
+  .bbc-article-page:not(.new-concept-lesson-page):is([data-study-mode="intensive"], [data-study-mode="listening"], [data-study-mode="writing"], [data-study-mode="speaking"]) :is(.bbc-wave-term, .bbc-wave-term-word, .bbc-vocabulary-highlight) { text-decoration: none !important; }
+  .bbc-article-page[data-study-mode="writing"] .sentence-order-word-bank,
+  .bbc-article-page[data-study-mode="writing"] .sentence-order-word-bank *,
+  .sentence-order-drag-preview { -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; }
+  .bbc-article-page[data-mobile-writing-input] .bbc-article-mode-bar { background: #f7f4e9; border-radius: 0; box-sizing: border-box; left: 0; margin: 0; min-height: 54px; padding: 6px 10px; position: fixed; right: 0; top: var(--bbc-writing-viewport-top, 0px); width: 100%; z-index: 600; }
+  .bbc-article-page[data-mobile-writing-input] .bbc-original-panel.bbc-intensive-original-panel { background: #fffdf7; border: 0; border-radius: 0; box-sizing: border-box; height: calc(var(--bbc-writing-viewport-height, 100dvh) - 56px) !important; left: 0; margin: 0; min-height: 0 !important; overflow: auto; overscroll-behavior: contain; padding: 14px; position: fixed; right: 0; top: calc(var(--bbc-writing-viewport-top, 0px) + 56px); width: 100%; z-index: 550; }
+  .bbc-article-page[data-mobile-writing-input] .bbc-full-audio-panel,
+  body:has(.bbc-article-page[data-mobile-writing-input]) .mobile-bottom-nav { display: none !important; }
+}

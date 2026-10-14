@@ -745,6 +745,51 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
   const speakingCountdownRef = useRef<number | null>(null);
   const speakingAdvanceRef = useRef<number | null>(null);
 
+  useEffect(() => {
+    const page = pageRef.current;
+    if (!page) return;
+    const viewport = window.visualViewport;
+    let focusFrame = 0;
+    function syncWritingViewport() {
+      if (!page) return;
+      const input = document.activeElement;
+      const focused = isMobileAudioViewport && studyMode === "writing" && input instanceof HTMLInputElement
+        && page.contains(input) && input.matches(".dictation-blank-input");
+      page.toggleAttribute("data-mobile-writing-input", focused);
+      if (focused) {
+        page.style.setProperty("--bbc-writing-viewport-height", `${viewport?.height ?? window.innerHeight}px`);
+        page.style.setProperty("--bbc-writing-viewport-top", `${viewport?.offsetTop ?? 0}px`);
+      } else {
+        page.style.removeProperty("--bbc-writing-viewport-height");
+        page.style.removeProperty("--bbc-writing-viewport-top");
+      }
+    }
+    function focusWritingInput() {
+      window.cancelAnimationFrame(focusFrame);
+      focusFrame = window.requestAnimationFrame(() => {
+        syncWritingViewport();
+        if (page?.hasAttribute("data-mobile-writing-input")) document.activeElement?.scrollIntoView({ block: "nearest" });
+      });
+    }
+    page.addEventListener("focusin", focusWritingInput);
+    page.addEventListener("focusout", focusWritingInput);
+    viewport?.addEventListener("resize", focusWritingInput);
+    viewport?.addEventListener("scroll", syncWritingViewport);
+    window.addEventListener("resize", focusWritingInput);
+    syncWritingViewport();
+    return () => {
+      window.cancelAnimationFrame(focusFrame);
+      page.removeEventListener("focusin", focusWritingInput);
+      page.removeEventListener("focusout", focusWritingInput);
+      viewport?.removeEventListener("resize", focusWritingInput);
+      viewport?.removeEventListener("scroll", syncWritingViewport);
+      window.removeEventListener("resize", focusWritingInput);
+      page.removeAttribute("data-mobile-writing-input");
+      page.style.removeProperty("--bbc-writing-viewport-height");
+      page.style.removeProperty("--bbc-writing-viewport-top");
+    };
+  }, [isMobileAudioViewport, studyMode]);
+
   async function publishDraft() {
     setPublishingDraft(true);
     setDraftPublishMessage("");
@@ -970,7 +1015,12 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
   );
 
   function updateAudioSettings(nextSettings: Partial<AudioPlayerSettings>) {
+    audioSettingsRef.current = { ...audioSettingsRef.current, ...nextSettings };
     setAudioSettings((current) => ({ ...current, ...nextSettings }));
+    if (nextSettings.playMode && studyMode !== "general") {
+      clearSpeakingPracticeTimers();
+      requestSentenceAutoPlay(currentStudySentenceNo());
+    }
     if (nextSettings.subtitleMode) {
       setOriginalDisplayMode(nextSettings.subtitleMode);
     }
@@ -1201,10 +1251,11 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
   }
 
   function handleSentenceEnded(sentence: BbcArticleSentence) {
+    if (activeSentenceNoRef.current !== sentence.sentenceNo) return;
     setIsSentenceAudioPlaying(false);
     const speakingMode = audioSettingsRef.current.speakingMode;
 
-    if (isMobileAudioViewport || studyMode !== "speaking" || speakingMode === "none") {
+    if (studyMode !== "speaking" || speakingMode === "none") {
       playSentenceByMode(sentence.sentenceNo);
       return;
     }
@@ -1502,8 +1553,8 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
         modeLabels={{ listening: "精听", speaking: "口语", writing: "写作" }}
         onChange={updateAudioSettings}
         onModeSelect={(mode) => {
-          // Choosing playback order from a practice mode keeps its current view.
-          if (studyMode === "general" || studyMode === "intensive" || studyMode === "listening") selectStudyMode(mode);
+          // All sentence training views share this setting without switching views.
+          if (studyMode === "general") selectStudyMode(mode);
         }}
         playModeLabel="精听"
         preserveModeSettings
@@ -1858,7 +1909,7 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
                       <div className="bbc-speaking-training-status playing">
                         <span>{SPEAKING_MODE_LABELS[audioSettings.speakingMode]}</span>
                         <strong>正在播放</strong>
-                        <small>{isMobileAudioViewport ? audioSettings.playMode === "sentence-loop" ? "每遍结束停 1 秒，重播本句" : "播完自动进入下一句" : SPEAKING_PLAYING_HINTS[audioSettings.speakingMode]}</small>
+                        <small>{SPEAKING_PLAYING_HINTS[audioSettings.speakingMode]}</small>
                       </div>
                     ) : null}
                     {!isMobileAudioViewport && (sentence.audioUrl ? (
@@ -2011,8 +2062,10 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
               <AudioPlayer
                 autoPlaySignal={mobileSentenceAudio ? sentenceAutoPlaySignals[mobileSentenceAudio.sentenceNo] ?? 0 : 0}
                 sentenceLoopDelayMs={mobileSentenceAudio ? 1000 : 0}
+                deferSentenceLoop={studyMode === "speaking" && audioSettings.speakingMode !== "none"}
                 playbackId={`${modeSelectionVersion}:${mobileSentenceAudio?.sentenceNo ?? "full"}`}
                 playbackRange={mobileSentenceRange}
+                playOnSeek={isMobileAudioViewport}
                 leadingControls={isMobileAudioViewport ? <div className="bbc-mobile-player-shortcuts">
                   <button
                     aria-label={isReadingTimerRunning ? "暂停计时" : "开始计时"}
@@ -2037,7 +2090,7 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
                 onEnded={mobileSentenceAudio ? () => handleSentenceEnded(mobileSentenceAudio) : undefined}
                 onStopAtEnd={mobileSentenceRange && mobileSentenceAudio ? () => handleSentenceEnded(mobileSentenceAudio) : undefined}
                 stopAtSeconds={mobileSentenceRange?.endSeconds}
-                loopSegment={mobileSentenceRange}
+                loopSegment={studyMode === "speaking" && audioSettings.speakingMode !== "none" ? null : mobileSentenceRange}
                 onPlayingChange={(isPlaying) => mobileSentenceAudio
                   ? handleSentencePlayingChange(mobileSentenceAudio.sentenceNo, isPlaying)
                   : handleFullAudioPlayingChange(isPlaying)}

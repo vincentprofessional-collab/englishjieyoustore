@@ -31,8 +31,8 @@ function harness() {
     state() { return this.status; }
     duration() { return 60; }
     playing() { return this.active; }
-    seek(value) { return value ?? 0; }
-    rate() {}
+    seek(value) { if (value != null) this.position = value; return this.position ?? 0; }
+    rate(value) { if (value != null) this.playbackRate = value; return this.playbackRate; }
     load() { this.loads++; this.status = "loading"; }
     play() { this.plays++; }
     pause() { this.emit("pause"); }
@@ -86,7 +86,16 @@ function harness() {
       }
       return null;
     }
-    return { sound, changes, play: findButton(tree, "播放"), pause: findButton(tree, "暂停"), unmount: () => cleanup.forEach((fn) => fn()) };
+    function findProgress(node) {
+      if (!node || typeof node !== "object") return null;
+      if (node.type === "input" && node.props.type === "range") return node.props;
+      for (const child of [node.props?.children].flat(Infinity)) {
+        const found = findProgress(child);
+        if (found) return found;
+      }
+      return null;
+    }
+    return { sound, changes, progress: findProgress(tree), play: findButton(tree, "播放"), pause: findButton(tree, "暂停"), unmount: () => cleanup.forEach((fn) => fn()) };
   }
   function advance(milliseconds) {
     elapsed += milliseconds;
@@ -252,4 +261,99 @@ test("Baidu's native backend starts within the tap and reads duration from metad
   assert.equal(loaded, 1, "the previous sentence's event handlers were removed");
   assert.equal(media.plays, 2);
   nextSound.unload();
+});
+
+test("releasing or ending a touch drag uses the actual slider value and starts BBC playback", () => {
+  const player = harness().mount({ playOnSeek: true });
+  player.progress.onPointerDown();
+  player.progress.onPointerUp({ currentTarget: { value: "23.7" } });
+  assert.equal(player.sound.seek(), 23.7, "a stale React draft must not replace the final pointer position");
+  assert.equal(player.sound.plays, 1);
+  player.progress.onTouchEnd({ currentTarget: { value: "41.2" } });
+  assert.equal(player.sound.seek(), 41.2);
+  player.unmount();
+});
+
+test("seeking inside a sentence stays within its range without forcing playback for other players", () => {
+  const player = harness().mount({ playbackRange: { startSeconds: 5, endSeconds: 12 } });
+  player.progress.onPointerUp({ currentTarget: { value: "30" } });
+  assert.equal(player.sound.seek(), 12);
+  assert.equal(player.sound.plays, 0);
+  player.unmount();
+});
+
+test("0.75 and 1.25 rates survive native media loads and metadata reloads", () => {
+  class Media extends EventTarget {
+    defaultPlaybackRate = 1;
+    playbackRate = 1;
+    readyState = 1;
+    duration = 60;
+    currentTime = 0;
+    paused = true;
+    load() { this.playbackRate = this.defaultPlaybackRate; }
+    pause() { this.paused = true; }
+    removeAttribute() {}
+  }
+  const exports = {};
+  const code = ts.transpileModule(fs.readFileSync(new URL("../src/lib/native-audio.ts", import.meta.url), "utf8"), { compilerOptions: { module: ts.ModuleKind.CommonJS } }).outputText;
+  vm.runInNewContext(code, { exports, Audio: Media, document: new EventTarget() });
+  const sound = new exports.NativeAudio({ src: ["/bbc.mp3"], rate: 0.75 });
+  const media = sound._sounds[0]._node;
+  assert.equal(media.playbackRate, 0.75);
+  sound.rate(1.25); sound.load(); media.dispatchEvent(new Event("loadedmetadata"));
+  assert.equal(media.playbackRate, 1.25);
+  assert.equal(media.defaultPlaybackRate, 1.25);
+  sound.unload();
+});
+
+test("all mobile sentence training modes advance, repeat, and retain looping after Next", async () => {
+  const { getNextSentenceNo, getSpeakingPracticeDelayMs } = await import("../src/lib/articles/bbc-speaking-training.mjs");
+  const ast = ts.createSourceFile("article.tsx", fs.readFileSync(new URL("../src/components/bbc-article-detail-page.tsx", import.meta.url), "utf8"), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  const functions = [];
+  const names = new Set(["playSentenceByMode", "handleSentenceEnded", "selectStudySentence", "startSpeakingPractice", "clearSpeakingPracticeTimers"]);
+  function collect(node) {
+    if (ts.isFunctionDeclaration(node) && names.has(node.name?.text)) functions.push(node.getText(ast));
+    ts.forEachChild(node, collect);
+  }
+  collect(ast);
+  assert.equal(functions.length, names.size);
+  const code = ts.transpileModule(functions.join("\n"), { compilerOptions: { target: ts.ScriptTarget.ES2020 } }).outputText;
+  for (const studyMode of ["intensive", "listening", "writing", "speaking"]) {
+    const requests = [];
+    const current = { current: 1 };
+    const settings = { current: { playMode: "sequential", speakingMode: "imitation" } };
+    const timers = new Map();
+    let timerId = 0;
+    const context = vm.createContext({
+      studyMode, isMobileAudioViewport: true, isSentenceAudioPlaying: true,
+      article: { fullAudioUrl: "/full.mp3", sentences: [1, 2, 3].map(sentenceNo => ({ sentenceNo })) },
+      activeSentenceNoRef: current, audioSettingsRef: settings, getNextSentenceNo, getSpeakingPracticeDelayMs,
+      speakingCountdownRef: { current: null }, speakingAdvanceRef: { current: null },
+      window: { setTimeout(fn) { timers.set(++timerId, fn); return timerId; }, clearTimeout(id) { timers.delete(id); }, setInterval() { return ++timerId; }, clearInterval() {} },
+      setActiveSentenceNo() {}, setActiveSentencePosition() {}, setIsSentenceAudioPlaying() {}, setIsFullAudioPlaying() {},
+      setSentenceRestoreSeekRequest() {}, centerSentenceCard() {}, setSpeakingTraining() {},
+      requestSentenceAutoPlay: (sentenceNo) => requests.push(sentenceNo),
+    });
+    vm.runInContext(code, context);
+    function end(sentenceNo) {
+      context.handleSentenceEnded({ sentenceNo, startMs: 0, endMs: 2000 });
+      const id = context.speakingAdvanceRef.current;
+      if (id != null) { const callback = timers.get(id); timers.delete(id); callback(); }
+    }
+    end(1);
+    assert.equal(current.current, 2, studyMode);
+    assert.deepEqual(requests, [2]);
+    settings.current.playMode = "sentence-loop";
+    end(2);
+    assert.deepEqual(requests, [2, 2]);
+    context.selectStudySentence(3, true);
+    assert.equal(settings.current.playMode, "sentence-loop");
+    end(2);
+    assert.deepEqual(requests, [2, 2, 3], "an old sentence completion cannot undo Next");
+    end(3);
+    assert.deepEqual(requests, [2, 2, 3, 3]);
+    settings.current.playMode = "sequential";
+    end(3);
+    assert.deepEqual(requests, [2, 2, 3, 3], "the last sequential sentence stops");
+  }
 });

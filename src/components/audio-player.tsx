@@ -105,6 +105,7 @@ type AudioPlayerProps = {
   leadingControls?: ReactNode;
   loopSegment?: { endSeconds: number; startSeconds: number } | null;
   playbackRange?: { startSeconds: number; endSeconds: number } | null;
+  playOnSeek?: boolean;
   playbackId?: string | number;
   onDurationChange?: (durationSeconds: number) => void;
   onEnded?: () => void;
@@ -274,6 +275,7 @@ export function AudioPlayer({
   onNext,
   previousDisabled = false,
   nextDisabled = false,
+  playOnSeek = false,
   onSettingsChange,
   onStopAtEnd,
   onTimeChange,
@@ -314,6 +316,7 @@ export function AudioPlayer({
   );
   const [localHasSelectedRate, setLocalHasSelectedRate] = useState(false);
   const playerSettings = settings ?? internalSettings;
+  const rateRef = useRef(playerSettings.rate);
   const displayHasSelectedRate = hasSelectedRate ?? localHasSelectedRate;
 
   function cancelSentenceReplay() {
@@ -442,6 +445,7 @@ export function AudioPlayer({
         }
 
         enablePitchPreservation(sound);
+        sound.rate(rateRef.current);
         loadRetryCount = 0;
         const loadedDuration = sound.duration();
         setDuration(loadedDuration);
@@ -603,6 +607,7 @@ export function AudioPlayer({
   }, [html5, preload, src]);
 
   useEffect(() => {
+    rateRef.current = playerSettings.rate;
     const sound = soundRef.current;
     if (!sound) {
       return;
@@ -705,7 +710,7 @@ export function AudioPlayer({
     return () => window.clearInterval(interval);
   }, [isPlaying, isScrubbing, playbackRange?.startSeconds, playbackRange?.endSeconds]);
 
-  function seekTo(nextPosition: number) {
+  function seekTo(nextPosition: number, play = false) {
     const wasWaiting = Boolean(sentenceReplayRef.current);
     cancelSentenceReplay();
     const boundedPosition = Math.min(Math.max(nextPosition, playbackRange?.startSeconds ?? 0), playbackRange?.endSeconds ?? (duration || nextPosition));
@@ -713,7 +718,15 @@ export function AudioPlayer({
     setPosition(boundedPosition);
     setDraftPosition(boundedPosition);
     onTimeChangeRef.current?.(boundedPosition);
-    if (wasWaiting && soundRef.current) requestAudioPlayback(soundRef.current);
+    if ((play || wasWaiting) && soundRef.current) {
+      setIsPlayRequested(true);
+      requestAudioPlayback(soundRef.current);
+    }
+  }
+
+  function finishScrubbing(nextPosition: number) {
+    setIsScrubbing(false);
+    seekTo(nextPosition, playOnSeek);
   }
 
   function startPlayback() {
@@ -792,17 +805,17 @@ export function AudioPlayer({
       <div className="player-progress-row" aria-label={title}>
         <span>{formatTime(Math.max(0, displayPosition - (playbackRange?.startSeconds ?? 0)))}</span>
         <input
+          aria-label="音频进度"
           type="range"
           min={playbackRange?.startSeconds ?? 0}
           max={playbackRange?.endSeconds ?? (duration || 0)}
           step="0.1"
           value={displayPosition}
-          onChange={(event) => { const value = Number(event.target.value); setDraftPosition(value); if (!isScrubbing) seekTo(value); }}
+          onChange={(event) => { const value = Number(event.currentTarget.value); setDraftPosition(value); if (!isScrubbing) seekTo(value, playOnSeek); }}
           onPointerDown={() => setIsScrubbing(true)}
-          onPointerUp={() => {
-            setIsScrubbing(false);
-            seekTo(draftPosition);
-          }}
+          onPointerUp={(event) => finishScrubbing(Number(event.currentTarget.value))}
+          onPointerCancel={(event) => finishScrubbing(Number(event.currentTarget.value))}
+          onTouchEnd={(event) => finishScrubbing(Number(event.currentTarget.value))}
         />
         <span>{formatTime(playbackRange ? playbackRange.endSeconds - playbackRange.startSeconds : duration)}</span>
       </div>

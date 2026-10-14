@@ -10,14 +10,30 @@ import { getVocabularyLookupEtymology } from "@/lib/vocabulary/lookup-etymology"
 import { DEFAULT_VOCABULARY_LOOKUP_DISPLAY_PREFERENCES, isPhoneUserAgent, VOCABULARY_LOOKUP_VIDEO_COOKIE } from "@/lib/vocabulary/lookup-display-preferences";
 import { getVocabularyPhraseMatches } from "@/lib/vocabulary/phrases";
 import { getVocabularyVideos } from "@/lib/vocabulary/videos";
+import { getVocabularyUsageExamples } from "@/lib/vocabulary/examples";
+import { getVocabularySynonymDistinctions } from "@/lib/vocabulary/synonym-distinctions";
+import { createServerSupabaseClient } from "@/lib/supabase/server";
 
 export const dynamic = "force-dynamic";
 
 async function MobileDefaultWordPreview() {
-  const entry = getVocabularyEntry("baby") ?? await getExtendedVocabularyEntry("baby");
+  const entry = getVocabularyEntry("balloon") ?? await getExtendedVocabularyEntry("balloon");
   if (!entry) return null;
 
-  const [requestHeaders, cookieStore] = await Promise.all([headers(), cookies()]);
+  const [requestHeaders, cookieStore, fetchedUsageExamples] = await Promise.all([
+    headers(), cookies(), getVocabularyUsageExamples(entry.word, 5, entry.inflections.map((item) => item.value)),
+  ]);
+  let canAccessBbcExamples = false;
+  if (fetchedUsageExamples.some((example) => example.bookCode === "BBC")) {
+    try {
+      const supabase = await createServerSupabaseClient();
+      const { data, error } = await supabase.rpc("can_access_project", { _project_key: "bbc" });
+      canAccessBbcExamples = !error && data === true;
+    } catch {
+      // Hide member examples when access cannot be verified.
+    }
+  }
+  const usageExamples = canAccessBbcExamples ? fetchedUsageExamples : fetchedUsageExamples.filter((example) => example.bookCode !== "BBC");
   const isPhoneRequest = isPhoneUserAgent(requestHeaders.get("user-agent") ?? "");
   const etymology = getVocabularyLookupEtymology(entry.word);
   const videoPreference = cookieStore.get(VOCABULARY_LOOKUP_VIDEO_COOKIE)?.value;
@@ -39,8 +55,10 @@ async function MobileDefaultWordPreview() {
           etymologyEnglish={etymology?.english}
           formationParts={formationParts}
           inlineVideo={!isPhoneRequest ? videoPlayer : null}
+          lookupLayout
           phrases={getVocabularyPhraseMatches(entry.word)}
-          usageExamples={[]}
+          synonymDistinctions={getVocabularySynonymDistinctions(entry.word)}
+          usageExamples={usageExamples}
         />
       </VocabularyDetailShell>
     </section>
