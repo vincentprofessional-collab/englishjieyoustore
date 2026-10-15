@@ -13,6 +13,20 @@
   min-width: 0;
 }
 
+@media (min-width: 821px) {
+  .shell:has(.bbc-article-immersive) {
+    max-width: none;
+  }
+
+  .ielts-section-shell.bbc-article-immersive {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .bbc-article-immersive > .ielts-side-nav {
+    display: none;
+  }
+}
+
 .ielts-side-nav {
   background:
     radial-gradient(circle at 20% 0, rgba(200, 148, 25, 0.12), transparent 10rem),

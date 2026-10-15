@@ -81,6 +81,23 @@ async function streamListeningAudio(request: NextRequest, path: string) {
   });
 }
 
+async function streamVocabularyImage(request: NextRequest, path: string) {
+  const sourceUrl = getSupabaseStorageUrl("images", path);
+  if (!sourceUrl) return new NextResponse("Image unavailable", { status: 404 });
+  try {
+    const upstream = await fetch(sourceUrl, { cache: "no-store", method: request.method, signal: AbortSignal.any([request.signal, AbortSignal.timeout(15_000)]) });
+    if (!upstream.ok) return new NextResponse("Image unavailable", { status: upstream.status });
+    const headers = new Headers({ "Cache-Control": "public, max-age=60, stale-while-revalidate=3600", "X-Content-Type-Options": "nosniff" });
+    for (const header of ["content-type", "content-length", "etag", "last-modified"]) {
+      const value = upstream.headers.get(header);
+      if (value) headers.set(header, value);
+    }
+    return new NextResponse(request.method === "HEAD" ? null : upstream.body, { headers });
+  } catch {
+    return new NextResponse("Image unavailable", { status: 502 });
+  }
+}
+
 async function handleMediaRequest(request: NextRequest) {
   const bucket = request.nextUrl.searchParams.get("bucket") as ManagedMediaBucket | null;
   const path = request.nextUrl.searchParams.get("path");
@@ -94,9 +111,11 @@ async function handleMediaRequest(request: NextRequest) {
     return streamListeningAudio(request, cleanPath);
   }
 
-  if (bucket === "images" && (
-    process.env.COS_MEDIA_ENABLED !== "true" || isPrimarySchoolVocabularyImagePath(cleanPath)
-  )) {
+  if (bucket === "images" && isPrimarySchoolVocabularyImagePath(cleanPath)) {
+    return streamVocabularyImage(request, cleanPath);
+  }
+
+  if (bucket === "images" && process.env.COS_MEDIA_ENABLED !== "true") {
     const directUrl = getSupabaseStorageUrl("images", cleanPath);
     return directUrl
       ? NextResponse.redirect(directUrl, {

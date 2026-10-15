@@ -1,4 +1,7 @@
 .root { min-width: 0; }
+.withAudio { display: flex; flex: 1 1 auto; flex-direction: column; min-height: 0; }
+.withAudio > .editor { margin-top: auto; }
+.withAudio > :global(.howler-player) { margin-bottom: 24px; }
 .editor { background: #eaf1f5; border: 1px solid #a9d4ea; border-radius: 12px; margin-top: 24px; padding: 16px; }
 .editorHeader { align-items: center; display: flex; justify-content: flex-end; gap: 12px; }
 .editorHeader strong { font: 700 16px/1.4 system-ui, sans-serif; }

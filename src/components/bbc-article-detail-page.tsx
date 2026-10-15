@@ -1019,7 +1019,7 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
     setAudioSettings((current) => ({ ...current, ...nextSettings }));
     if (nextSettings.playMode && studyMode !== "general") {
       clearSpeakingPracticeTimers();
-      requestSentenceAutoPlay(currentStudySentenceNo());
+      if (!isRetellingPractice || isSentenceAudioPlaying) requestSentenceAutoPlay(currentStudySentenceNo());
     }
     if (nextSettings.subtitleMode) {
       setOriginalDisplayMode(nextSettings.subtitleMode);
@@ -1084,6 +1084,15 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
   }
 
   function enterRetellingPractice() {
+    clearSpeakingPracticeTimers();
+    setStudyMode("speaking");
+    updateAudioSettings({ speakingMode: "none" });
+    setSentenceAutoPlaySignals({});
+    setSentenceRestoreSeekRequest(null);
+    setActiveSentencePosition(0);
+    setIsSentenceAudioPlaying(false);
+    setIsFullAudioPlaying(false);
+    setModeSelectionVersion((current) => current + 1);
     setIsVocabularyVisible(false);
     setIsRetellingPractice(true);
   }
@@ -1381,7 +1390,7 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
     (article.sentences ?? []).findIndex((sentence) => sentence.sentenceNo === activeSentenceNo),
   );
   const activeStudySentence = article.sentences?.[activeStudySentenceIndex];
-  const mobileSentenceAudio = isMobileAudioViewport && studyMode !== "general" && activeStudySentence && (activeStudySentence.audioUrl || article.fullAudioUrl)
+  const mobileSentenceAudio = (isMobileAudioViewport || isRetellingPractice) && studyMode !== "general" && activeStudySentence && (activeStudySentence.audioUrl || article.fullAudioUrl)
     ? { ...activeStudySentence, audioUrl: activeStudySentence.audioUrl || article.fullAudioUrl }
     : null;
   const mobileSentenceRange = mobileSentenceAudio?.audioUrl === article.fullAudioUrl && mobileSentenceAudio
@@ -1452,7 +1461,7 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
     article.body,
     articleVocabularyForDisplay.map((item) => extractBbcVocabularyHeadword(item.term || item.lemma || item.entry)),
     articlePhraseWaveTerms,
-    getBbcArticleMatchingParagraphGists(article.id),
+    getBbcArticleMatchingParagraphGists(article.id, article.quiz),
   );
   const likelyProperNounWords = getLikelyProperNounWords(article.body.join(" "));
   const articlePronunciations = new Map<string, string>();
@@ -1564,7 +1573,7 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
       <AudioSettingsMenus
         modeLabels={{ speaking: "口语", writing: "写作" }}
         onChange={updateAudioSettings}
-        onModeSelect={(mode) => selectStudyMode(mode)}
+        onModeSelect={(mode) => { setIsRetellingPractice(false); selectStudyMode(mode); }}
         onRetellingSelect={enterRetellingPractice}
         preserveModeSettings
         settings={audioSettings}
@@ -1774,10 +1783,73 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
                   && (syntaxSentence?.status === "reviewed" || syntaxSentence?.status === "draft")
                   && syntaxSentence.text === sentence.english;
 
+                const sentencePlayer = !isMobileAudioViewport && (sentence.audioUrl ? (
+                      <AudioPlayer
+                      key={`${modeSelectionVersion}-${sentence.sentenceNo}`}
+                      autoPlaySignal={isMobileAudioViewport ? 0 : sentenceAutoPlaySignals[sentence.sentenceNo] ?? 0}
+                      compactControls
+                      deferSentenceLoop={studyMode === "speaking" && audioSettings.speakingMode !== "none"}
+                      hasSelectedRate
+                      html5
+                      preload={false}
+                      leadingControls={(
+                        <button
+                          aria-label="上一句"
+                          className="bbc-sentence-navigation-button"
+                          disabled={!previousStudySentence}
+                          onClick={() => previousStudySentence && selectStudySentence(previousStudySentence.sentenceNo)}
+                          type="button"
+                        >上一句</button>
+                      )}
+                      onEnded={() => handleSentenceEnded(sentence)}
+                      onPlayingChange={(isPlaying) => handleSentencePlayingChange(sentence.sentenceNo, isPlaying)}
+                      onSettingsChange={updateAudioSettings}
+                      onTimeChange={(positionSeconds) => handleSentenceTimeChange(sentence.sentenceNo, positionSeconds - (sentence.audioUrl === article.fullAudioUrl ? sentence.startMs / 1000 : 0))}
+                      seekRequest={sentenceRestoreSeekRequest?.sentenceNo === sentence.sentenceNo ? { ...sentenceRestoreSeekRequest, positionSeconds: sentenceRestoreSeekRequest.positionSeconds + (sentence.audioUrl === article.fullAudioUrl ? sentence.startMs / 1000 : 0) } : null}
+                      settings={audioSettings}
+                      settingsPlacement="none"
+                      skipSeconds={3}
+                      src={sentence.audioUrl}
+                      playbackRange={sentence.audioUrl === article.fullAudioUrl ? { startSeconds: sentence.startMs / 1000, endSeconds: sentence.endMs / 1000 } : null}
+                      startAtSeconds={sentence.audioUrl === article.fullAudioUrl ? sentence.startMs / 1000 : 0}
+                      stopAtSeconds={sentence.audioUrl === article.fullAudioUrl ? sentence.endMs / 1000 : null}
+                      loopSegment={sentence.audioUrl === article.fullAudioUrl && !(studyMode === "speaking" && audioSettings.speakingMode !== "none") ? { startSeconds: sentence.startMs / 1000, endSeconds: sentence.endMs / 1000 } : null}
+                      onStopAtEnd={sentence.audioUrl === article.fullAudioUrl ? () => handleSentenceEnded(sentence) : undefined}
+                      title={`第 ${sentence.sentenceNo} 句音频`}
+                      trailingControls={(
+                        <button
+                          aria-label="下一句"
+                          className="bbc-sentence-navigation-button"
+                          disabled={!nextStudySentence}
+                          onClick={() => nextStudySentence && selectStudySentence(nextStudySentence.sentenceNo)}
+                          type="button"
+                        >下一句</button>
+                      )}
+                      />
+                    ) : (
+                      <div className="bbc-article-paragraph-navigation">
+                        <button
+                          aria-label="上一句"
+                          className="bbc-sentence-navigation-button"
+                          disabled={!previousStudySentence}
+                          onClick={() => previousStudySentence && selectStudySentence(previousStudySentence.sentenceNo)}
+                          type="button"
+                        >上一句</button>
+                        <span>第 {activeStudySentenceIndex + 1} / 共 {article.sentences?.length ?? 0} 句</span>
+                        <button
+                          aria-label="下一句"
+                          className="bbc-sentence-navigation-button"
+                          disabled={!nextStudySentence}
+                          onClick={() => nextStudySentence && selectStudySentence(nextStudySentence.sentenceNo)}
+                          type="button"
+                        >下一句</button>
+                      </div>
+                    ));
+
                 return (
                   <div className={`bbc-intensive-reading ${studyMode === "listening" ? "bbc-listening-mode" : ""} ${studyMode === "intensive" ? "bbc-syntax-reading" : ""} ${studyMode === "writing" ? "bbc-writing-mode" : ""}`} key={`${article.id}-intensive-sentence`}>
                     <div className="bbc-intensive-reading-actions">
-                      {hasReviewedSyntax || hasBackendGrammarAnnotations ? <span className="bbc-intensive-sentence-number">#{sentence.sentenceNo}</span> : null}
+                      <span aria-label={`第 ${sentence.sentenceNo} 句`} className="bbc-intensive-sentence-number">#{sentence.sentenceNo}</span>
                       <div className="bbc-intensive-sentence-controls">
                         {studyMode === "writing" && audioSettings.dictationMode !== "none" ? (
                           <button
@@ -1813,6 +1885,7 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
                       <>
                         {hasReviewedSyntax ? (
                           <BbcSyntaxInlineEditor
+                            sentenceAudio={sentencePlayer}
                             activeWordIndex={activeStudyWordIndex}
                             allInlineAnnotations={editableInlineAnnotations}
                             allSentences={editableSyntaxSentences}
@@ -1912,68 +1985,7 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
                         <small>{SPEAKING_PLAYING_HINTS[audioSettings.speakingMode]}</small>
                       </div>
                     ) : null}
-                    {!isMobileAudioViewport && (sentence.audioUrl ? (
-                      <AudioPlayer
-                      key={`${modeSelectionVersion}-${sentence.sentenceNo}`}
-                      autoPlaySignal={isMobileAudioViewport ? 0 : sentenceAutoPlaySignals[sentence.sentenceNo] ?? 0}
-                      compactControls
-                      deferSentenceLoop={studyMode === "speaking" && audioSettings.speakingMode !== "none"}
-                      hasSelectedRate
-                      html5
-                      preload={false}
-                      leadingControls={(
-                        <button
-                          aria-label="上一句"
-                          className="bbc-sentence-navigation-button"
-                          disabled={!previousStudySentence}
-                          onClick={() => previousStudySentence && selectStudySentence(previousStudySentence.sentenceNo)}
-                          type="button"
-                        >上一句</button>
-                      )}
-                      onEnded={() => handleSentenceEnded(sentence)}
-                      onPlayingChange={(isPlaying) => handleSentencePlayingChange(sentence.sentenceNo, isPlaying)}
-                      onSettingsChange={updateAudioSettings}
-                      onTimeChange={(positionSeconds) => handleSentenceTimeChange(sentence.sentenceNo, positionSeconds - (sentence.audioUrl === article.fullAudioUrl ? sentence.startMs / 1000 : 0))}
-                      seekRequest={sentenceRestoreSeekRequest?.sentenceNo === sentence.sentenceNo ? { ...sentenceRestoreSeekRequest, positionSeconds: sentenceRestoreSeekRequest.positionSeconds + (sentence.audioUrl === article.fullAudioUrl ? sentence.startMs / 1000 : 0) } : null}
-                      settings={audioSettings}
-                      settingsPlacement="none"
-                      skipSeconds={3}
-                      src={sentence.audioUrl}
-                      playbackRange={sentence.audioUrl === article.fullAudioUrl ? { startSeconds: sentence.startMs / 1000, endSeconds: sentence.endMs / 1000 } : null}
-                      startAtSeconds={sentence.audioUrl === article.fullAudioUrl ? sentence.startMs / 1000 : 0}
-                      stopAtSeconds={sentence.audioUrl === article.fullAudioUrl ? sentence.endMs / 1000 : null}
-                      loopSegment={sentence.audioUrl === article.fullAudioUrl && !(studyMode === "speaking" && audioSettings.speakingMode !== "none") ? { startSeconds: sentence.startMs / 1000, endSeconds: sentence.endMs / 1000 } : null}
-                      onStopAtEnd={sentence.audioUrl === article.fullAudioUrl ? () => handleSentenceEnded(sentence) : undefined}
-                      title={`第 ${sentence.sentenceNo} 句音频`}
-                      trailingControls={(
-                        <button
-                          aria-label="下一句"
-                          className="bbc-sentence-navigation-button"
-                          disabled={!nextStudySentence}
-                          onClick={() => nextStudySentence && selectStudySentence(nextStudySentence.sentenceNo)}
-                          type="button"
-                        >下一句</button>
-                      )}
-                      />
-                    ) : (
-                      <div className="bbc-article-paragraph-navigation">
-                        <button
-                          aria-label="上一句"
-                          className="bbc-sentence-navigation-button"
-                          disabled={!previousStudySentence}
-                          onClick={() => previousStudySentence && selectStudySentence(previousStudySentence.sentenceNo)}
-                          type="button"
-                        >上一句</button>
-                        <span>第 {activeStudySentenceIndex + 1} / 共 {article.sentences?.length ?? 0} 句</span>
-                        <button
-                          aria-label="下一句"
-                          className="bbc-sentence-navigation-button"
-                          disabled={!nextStudySentence}
-                          onClick={() => nextStudySentence && selectStudySentence(nextStudySentence.sentenceNo)}
-                          type="button"
-                        >下一句</button>
-                      </div>
-                    ))}
+                    {hasReviewedSyntax ? null : sentencePlayer}
                   </div>
                 );
               })() : originalTextBlocksWithOffsets.slice(0, 1).map((textBlock, index) => (
@@ -2066,6 +2078,7 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
                 playbackId={`${modeSelectionVersion}:${mobileSentenceAudio?.sentenceNo ?? "full"}`}
                 playbackRange={mobileSentenceRange}
                 playOnSeek={isMobileAudioViewport}
+                nativeMobile
                 leadingControls={isMobileAudioViewport ? <div className="bbc-mobile-player-shortcuts">
                   <button
                     aria-label={isReadingTimerRunning ? "暂停计时" : "开始计时"}
@@ -2165,7 +2178,7 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
           </section>
         ) : null}
 
-          <BbcArticleQuiz key={article.id} articleId={article.id} articleTitle={article.title} />
+          <BbcArticleQuiz key={article.id} articleId={article.id} articleTitle={article.title} uploadedQuiz={article.quiz} />
           <BbcArticleComments articleId={article.id} />
 
 

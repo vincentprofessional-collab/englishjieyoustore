@@ -2,12 +2,13 @@
 
 import { VocabularyAutoplaySettings } from "@/components/vocabulary-autoplay-settings";
 import { VocabularyLookupDisplaySettings } from "@/components/vocabulary-lookup-display-settings";
+import { ProfileIdentitySettings } from "@/components/profile-identity-settings";
 
 export function ProfileSettings() {
   return (
     <section className="profile-settings-page stack" aria-label="个人设置">
       <div className="profile-settings-head">
-        <a className="back-link" href="/me/favorites">
+        <a className="back-link" href="/me">
           ← 返回
         </a>
         <div>
@@ -16,6 +17,7 @@ export function ProfileSettings() {
         </div>
       </div>
 
+      <ProfileIdentitySettings />
       <div className="profile-settings-grid">
         <section className="profile-settings-card profile-autoplay-card" aria-label="自动发音">
           <VocabularyAutoplaySettings />

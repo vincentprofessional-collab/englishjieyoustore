@@ -145,3 +145,16 @@
 .articleList { border-top: 1px solid #dce7e8; margin-top: 28px; padding-top: 18px; }
 .articleList > div { align-items: center; display: flex; flex-wrap: wrap; gap: 12px; padding: 12px 0; }
 .articleList > div > span { flex: 1; min-width: 200px; }
+
+.pdfPreview { background: #f0f7fb; border: 1px solid #b6d9e8; border-radius: 16px; display: grid; gap: 14px; padding: 18px; }
+.pdfPreview > header { align-items: center; display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; }
+.pdfPreview > header strong { overflow-wrap: anywhere; }
+.pdfPreview p { margin: 0; }
+.pdfPreview ul { line-height: 1.6; margin: 8px 0; padding-left: 22px; }
+.pdfQuestions summary { cursor: pointer; line-height: 1.6; padding: 8px 0; }
+.pdfQuestions fieldset { border: 1px solid #c8dce7; border-radius: 12px; margin-top: 16px; min-width: 0; padding: 12px; }
+.pdfQuestions legend { font-weight: 800; }
+.pdfQuestionFields { display: grid; gap: 12px; padding: 10px 0 16px; }
+.pdfQuestionFields input[type="number"] { max-width: 90px; }
+.pdfQuestionFields select { background: #fffefa; border: 1px solid #b6d9e8; border-radius: 10px; font: inherit; min-height: 44px; padding: 8px; max-width: 100%; }
+.pdfQuestionFields button { justify-self: start; }

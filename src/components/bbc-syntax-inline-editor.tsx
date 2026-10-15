@@ -26,6 +26,7 @@ function layerKey(level: BbcSyntaxLevel): BbcSyntaxLayerKey {
 
 type Props = {
   activeWordIndex?: number | null;
+  sentenceAudio?: ReactNode;
   allInlineAnnotations: ArticleInlineAnnotation[];
   allSentences: BbcSyntaxSentenceData[];
   articleId: string;
@@ -57,6 +58,7 @@ function tokenRangeText(sentence: BbcSyntaxSentenceData, range: BbcSyntaxTokenRa
 
 export function BbcSyntaxInlineEditor({
   activeWordIndex,
+  sentenceAudio,
   allInlineAnnotations,
   allSentences,
   articleId,
@@ -333,7 +335,7 @@ export function BbcSyntaxInlineEditor({
   }
 
   return (
-    <div className={styles.root}>
+    <div className={`${styles.root}${sentenceAudio ? ` ${styles.withAudio}` : ""}`}>
       <BbcSyntaxSentence
         activeWordIndex={activeWordIndex ?? undefined}
         data={data}
@@ -351,6 +353,7 @@ export function BbcSyntaxInlineEditor({
         waveTerms={waveTerms}
         waveRanges={waveRanges}
       />
+      {sentenceAudio}
       {isAdmin ? (
         <div className={styles.editor}>
           {!editing ? <div className={styles.editorHeader}>

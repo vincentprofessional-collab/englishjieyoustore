@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { AdminAnalyticsPanel } from "@/components/admin-analytics-panel";
 import { AdminHomeEditor } from "@/components/admin-home-editor";
 import { AdminEntitlementManager } from "@/components/admin-entitlement-manager";
@@ -12,6 +12,7 @@ import { AdminCommentInbox, AdminCommentNotice, useAdminCommentInbox } from "@/c
 import { GuidePostAdmin } from "@/components/guide-post-admin";
 import { GuideCommentsAdmin } from "@/components/guide-comments-admin";
 import { supabase } from "@/lib/supabase/client";
+import { getAuthErrorFeedback, reportAuthFailure } from "@/lib/supabase/auth-request";
 
 type AdminState = "checking" | "signed-out" | "forbidden" | "ready" | "error";
 type AdminView =
@@ -31,6 +32,7 @@ export function AdminContentManager() {
   const [password, setPassword] = useState("");
   const [authMessage, setAuthMessage] = useState("");
   const [isSigningIn, setIsSigningIn] = useState(false);
+  const signInPending = useRef(false);
   const [adminUserId, setAdminUserId] = useState<string | null>(null);
   const commentInbox = useAdminCommentInbox(adminUserId, activeView === "comments");
 
@@ -39,58 +41,64 @@ export function AdminContentManager() {
   }, []);
 
   async function checkAdminAccess() {
+    const startedAt = Date.now();
     setAdminState("checking");
     setAuthMessage("");
 
-    const {
-      data: { user },
-      error: userError,
-    } = await supabase.auth.getUser();
+    try {
+      const { data: { user }, error: userError } = await supabase.auth.getUser();
+      if (userError || !user) {
+        setAdminUserId(null);
+        if (userError && ["timeout", "network", "server", "storage"].includes(getAuthErrorFeedback(userError).kind)) {
+          throw userError;
+        }
+        setAdminState("signed-out");
+        return;
+      }
 
-    if (userError || !user) {
+      const { data: profile, error: profileError } = await supabase
+        .from("profiles")
+        .select("role")
+        .eq("id", user.id)
+        .single();
+      if (profileError) throw profileError;
+      if (profile.role !== "admin") {
+        setAdminUserId(null);
+        setAdminState("forbidden");
+        return;
+      }
+
+      setAdminUserId(user.id);
+      setAdminState("ready");
+    } catch (error) {
       setAdminUserId(null);
-      setAdminState("signed-out");
-      return;
-    }
-
-    const { data: profile, error: profileError } = await supabase
-      .from("profiles")
-      .select("role")
-      .eq("id", user.id)
-      .single();
-
-    if (profileError) {
-      setAuthMessage(`无法验证管理员身份：${profileError.message}`);
+      setAuthMessage(`无法验证管理员身份：${getAuthErrorFeedback(error).message}`);
       setAdminState("error");
-      return;
+      reportAuthFailure("admin-session-check", error, startedAt);
     }
-
-    if (profile.role !== "admin") {
-      setAdminUserId(null);
-      setAdminState("forbidden");
-      return;
-    }
-
-    setAdminUserId(user.id);
-    setAdminState("ready");
   }
 
   async function handleSignIn(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (signInPending.current) return;
+    signInPending.current = true;
+    const startedAt = Date.now();
     setIsSigningIn(true);
     setAuthMessage("");
 
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-
-    if (error) {
-      setAuthMessage(`登录失败：${error.message}`);
+    try {
+      const { error } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
+      if (error) throw error;
+      setPassword("");
+      await checkAdminAccess();
+    } catch (error) {
+      setAuthMessage(`登录失败：${getAuthErrorFeedback(error).message}`);
+      setAdminState("signed-out");
+      reportAuthFailure("admin-login", error, startedAt);
+    } finally {
+      signInPending.current = false;
       setIsSigningIn(false);
-      return;
     }
-
-    setPassword("");
-    await checkAdminAccess();
-    setIsSigningIn(false);
   }
 
   async function handleSignOut() {

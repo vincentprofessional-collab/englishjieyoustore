@@ -106,6 +106,7 @@ type AudioPlayerProps = {
   loopSegment?: { endSeconds: number; startSeconds: number } | null;
   playbackRange?: { startSeconds: number; endSeconds: number } | null;
   playOnSeek?: boolean;
+  nativeMobile?: boolean;
   playbackId?: string | number;
   onDurationChange?: (durationSeconds: number) => void;
   onEnded?: () => void;
@@ -276,6 +277,7 @@ export function AudioPlayer({
   previousDisabled = false,
   nextDisabled = false,
   playOnSeek = false,
+  nativeMobile = false,
   onSettingsChange,
   onStopAtEnd,
   onTimeChange,
@@ -431,7 +433,7 @@ export function AudioPlayer({
 
     const isMobilePlayback = window.matchMedia("(max-width: 820px)").matches || /Android|iPhone|iPad/i.test(navigator.userAgent);
     const shouldPreload = preload;
-    const useNativeAudio = isMobilePlayback && /baidu|bidubrowser/i.test(navigator.userAgent);
+    const useNativeAudio = isMobilePlayback && (nativeMobile || /baidu|bidubrowser/i.test(navigator.userAgent));
     const options: HowlOptions = {
       src: [src],
       html5: html5 || isMobilePlayback,
@@ -492,6 +494,8 @@ export function AudioPlayer({
           sound.stop();
           return;
         }
+
+        sound.rate(rateRef.current);
 
         clearAudioPlaybackRequest(sound);
         setIsPlayRequested(false);
@@ -604,7 +608,7 @@ export function AudioPlayer({
       }
       sound.unload();
     };
-  }, [html5, preload, src]);
+  }, [html5, nativeMobile, preload, src]);
 
   useEffect(() => {
     rateRef.current = playerSettings.rate;

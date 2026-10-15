@@ -16,7 +16,7 @@ import {
 import Link from "next/link";
 
 import { VocabularyDetailShell } from "@/components/vocabulary-detail-shell";
-import { VocabularyDetailContent } from "@/components/vocabulary-detail-content";
+import { VocabularyDetailContent, useVocabularyIllustration } from "@/components/vocabulary-detail-content";
 import { isPhoneUserAgent } from "@/lib/vocabulary/lookup-display-preferences";
 import { VocabularyFavoriteButton } from "@/components/vocabulary-favorite-button";
 import { VocabularyInlinePronunciation } from "@/components/vocabulary-pronunciation";
@@ -74,6 +74,7 @@ type StudySettings = {
   definitionLanguage: DefinitionLanguage;
   showExamples: boolean;
   showOptions: boolean;
+  showPicture: boolean;
 };
 type StudySettingsDraft = Omit<StudySettings, "dailyNew" | "reactionSeconds" | "browseGroups"> & {
   dailyNew: string;
@@ -181,8 +182,8 @@ const STUDY_MODE_OPTIONS: Array<{ category: ProgressCategory; index: number; lab
 const ALL_STUDY_MODES = STUDY_MODE_OPTIONS.map((option) => option.category);
 const REACTION_TIME_OPTIONS: Array<{ category: ProgressCategory; label: string }> = [
   { category: "reading", label: "阅读" },
-  { category: "speaking", label: "口语" },
   { category: "listening", label: "听力" },
+  { category: "speaking", label: "口语" },
   { category: "writing", label: "写作" },
 ];
 const DEFAULT_REACTION_SECONDS: Record<ProgressCategory, number> = {
@@ -206,6 +207,7 @@ const DEFAULT_STUDY_SETTINGS: StudySettings = {
   definitionLanguage: "zh",
   showExamples: true,
   showOptions: true,
+  showPicture: true,
 };
 const COLLECTIONS: Array<{ key: CollectionKey; label: string }> = [
   { key: "familiar", label: "熟悉" },
@@ -421,6 +423,7 @@ function parseSettingsDraft(draft: StudySettingsDraft): StudySettings | null {
     definitionLanguage: draft.definitionLanguage,
     showExamples: draft.showExamples,
     showOptions: draft.showOptions,
+    showPicture: draft.showPicture,
   };
 }
 
@@ -981,6 +984,14 @@ function LearningRoundExamples({ word }: { word: LearningWord }) {
   </section>;
 }
 
+function LearningRoundPicture({ word }: { word: LearningWord }) {
+  const picture = useVocabularyIllustration(word.level === "小学" ? word.word : null, false);
+  return picture ? <section aria-label="看图识词" className="vocabulary-learning-round-picture">
+    <h3>看图识词</h3>
+    {picture}
+  </section> : null;
+}
+
 function LearningVocabularyDetails({
   detailPayload,
   entry,
@@ -1058,6 +1069,7 @@ function LearningVocabularyDetails({
           <VocabularyLearningVideoSection word={detailedEntry.normalizedWord} />
         ) : null}
         showExamples={showExamples}
+        showIllustration={false}
         phrases={detailPayload?.phrases ?? []}
         synonymDistinctions={detailPayload?.synonymDistinctions ?? []}
         usageScenario={usageScenario}
@@ -1620,6 +1632,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
           definitionLanguage: item.definitionLanguage === "en" ? "en" : "zh",
           showExamples: item.showExamples !== false,
           showOptions: item.showOptions !== false,
+          showPicture: item.showPicture !== false,
         };
       }
       setSettingsByBook(restored);
@@ -2809,9 +2822,10 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
   const detailPageStyle = assessmentStage && sidebarHeight !== null
     ? ({ "--vocabulary-learning-assessment-height": `${sidebarHeight}px` } as CSSProperties)
     : undefined;
-  const roundExamples = currentSettings.showExamples && currentWord ? <LearningRoundExamples
-    word={currentWord}
-  /> : null;
+  const roundMemoryAids = currentWord ? <>
+    {currentSettings.showPicture ? <LearningRoundPicture key={currentWord.id} word={currentWord} /> : null}
+    {currentSettings.showExamples ? <LearningRoundExamples word={currentWord} /> : null}
+  </> : null;
   const definitionChoiceCards = currentSettings.showOptions && currentWord && modeIndex < 2 && definitionOptions.length >= 4 ? (
     <div aria-label="释义选项" className="vocabulary-learning-definition-options" role="group">
       <strong>释义选项</strong>
@@ -2993,7 +3007,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
                   {learningCategoryBar}
                     <LearningVocabularyDetails
                       detailPayload={detailPayload?.entry.word.toLowerCase() === currentWord.word.toLowerCase() ? detailPayload : null}
-                      definitionPrefix={<>{roundExamples}{definitionChoiceCards}</>}
+                      definitionPrefix={<>{roundMemoryAids}{definitionChoiceCards}</>}
                       entry={detailEntry?.word.toLowerCase() === currentWord.word.toLowerCase() ? detailEntry : toLookupEntry(currentWord)}
                       showExamples={false}
                       showDefinition={currentRoundRevealed}
@@ -3062,7 +3076,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
                     {currentRoundRevealed ? (
                       <LearningVocabularyDetails
                         detailPayload={detailPayload}
-                        definitionPrefix={roundExamples}
+                        definitionPrefix={roundMemoryAids}
                         entry={detailEntry ?? toLookupEntry(currentWord)}
                         showExamples={false}
                         />
@@ -3076,7 +3090,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
                       />
                     )}
                   </div>
-                  {!currentRoundRevealed ? roundExamples : null}
+                  {!currentRoundRevealed ? roundMemoryAids : null}
                   {recordingError ? <p className="vocabulary-learning-inline-error">{recordingError}</p> : null}
                 </VocabularyDetailShell>
               ) : null}
@@ -3113,11 +3127,11 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
                         value={currentWord.definitionCn}
                       />
                     ) : null}
-                    {!(browseMode ? currentRoundRevealed : spellingAnswerShown) ? roundExamples : null}
+                    {!(browseMode ? currentRoundRevealed : spellingAnswerShown) ? roundMemoryAids : null}
                     {(browseMode ? currentRoundRevealed : spellingAnswerShown) ? (
                       <LearningVocabularyDetails
                         detailPayload={detailPayload}
-                        definitionPrefix={roundExamples}
+                        definitionPrefix={roundMemoryAids}
                         entry={detailEntry ?? toLookupEntry(currentWord)}
                         showExamples={false}
                         />
@@ -3207,9 +3221,6 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
             role="dialog"
           >
             <div className="vocabulary-learning-settings-head">
-              <button aria-label="关闭设置并暂停学习" className="vocabulary-learning-settings-close" onClick={closeStudySettings} type="button">×</button>
-            </div>
-            <div className="vocabulary-learning-settings-body">
             {setupMode === "single" ? <label className="vocabulary-learning-settings-book-select">
               <span>词汇</span>
               <select
@@ -3223,6 +3234,9 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
                 ))}
               </select>
             </label> : null}
+              <button aria-label="关闭设置并暂停学习" className="vocabulary-learning-settings-close" onClick={closeStudySettings} type="button">×</button>
+            </div>
+            <div className="vocabulary-learning-settings-body">
             <div aria-label="学习模式" className="vocabulary-learning-setup-modes" role="tablist">
               <button aria-selected={setupMode === "single"} className={setupMode === "single" ? "active" : ""} onClick={() => setSetupMode("single")} role="tab" type="button">单人模式</button>
               <button aria-selected={setupMode === "pk"} className={setupMode === "pk" ? "active" : ""} onClick={() => setSetupMode("pk")} role="tab" type="button">PK 模式</button>
@@ -3243,36 +3257,8 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
               </section>
             ) : null}
             {setupMode === "single" ? <>
-            <div className="vocabulary-learning-settings-fields">
-              <fieldset className="vocabulary-learning-settings-reaction">
-                <legend>反应时间 <small>秒 · 滚轮可调</small></legend>
-                <div className="vocabulary-learning-settings-reaction-options" ref={reactionOptionsRef}>
-                  {REACTION_TIME_OPTIONS.map(({ category, label }) => (
-                    <label key={category}>
-                      <span>{label}</span>
-                      <input
-                        aria-label={`${label}反应时间（秒）`}
-                        data-reaction-category={category}
-                        enterKeyHint="done"
-                        inputMode="numeric"
-                        max="120"
-                        min="1"
-                        onChange={(event) => setSettingsDraft((current) => ({
-                          ...current,
-                          reactionSeconds: { ...current.reactionSeconds, [category]: event.target.value },
-                        }))}
-                        step="1"
-                        title="滚轮调整秒数，也可点击输入"
-                        type="number"
-                        value={settingsDraft.reactionSeconds[category]}
-                      />
-                    </label>
-                  ))}
-                </div>
-              </fieldset>
-            </div>
             <fieldset className="vocabulary-learning-settings-options vocabulary-learning-settings-method">
-              <legend><span className="vocabulary-learning-settings-method-desktop-label">学习模式</span><span className="vocabulary-learning-settings-method-mobile-label">辅助记忆</span></legend>
+              <legend>当前任务</legend>
               <label><input checked={settingsDraft.method === "classified"} name="learning-method" onChange={() => setSettingsDraft((current) => ({ ...current, method: "classified", reviewView: null, reviewFamiliarities: [] }))} type="radio" />记忆新词</label>
               <label><input checked={settingsDraft.method === "browse"} name="learning-method" onChange={() => setSettingsDraft((current) => ({ ...current, method: "browse" }))} type="radio" />复习旧词</label>
             </fieldset>
@@ -3297,6 +3283,37 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
                 </div>;
               })}
             </fieldset>
+            <div className="vocabulary-learning-settings-fields">
+              <fieldset className="vocabulary-learning-settings-reaction">
+                <legend>反应时间 <small>秒 · 滚轮可调</small></legend>
+                <div className="vocabulary-learning-settings-reaction-options" ref={reactionOptionsRef}>
+                  {REACTION_TIME_OPTIONS.map(({ category, label }) => (
+                    <div className={`vocabulary-learning-reaction-choice ${settingsDraft.modes.includes(category) ? "active" : ""}`} key={category}>
+                      <button aria-pressed={settingsDraft.modes.includes(category)} className="vocabulary-learning-reaction-mode" onClick={() => toggleStudyMode(category)} type="button">
+                        <span aria-hidden="true" className="vocabulary-learning-settings-review-dot" />
+                        <span>{label}模式</span>
+                      </button>
+                      <input
+                        aria-label={`${label}反应时间（秒）`}
+                        data-reaction-category={category}
+                        enterKeyHint="done"
+                        inputMode="numeric"
+                        max="120"
+                        min="1"
+                        onChange={(event) => setSettingsDraft((current) => ({
+                          ...current,
+                          reactionSeconds: { ...current.reactionSeconds, [category]: event.target.value },
+                        }))}
+                        step="1"
+                        title="滚轮调整秒数，也可点击输入"
+                        type="number"
+                        value={settingsDraft.reactionSeconds[category]}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </fieldset>
+            </div>
             <section aria-label="模式选择" className="vocabulary-learning-settings-review-range">
               <h3>模式选择</h3>
               <div aria-label="进度范围" className="vocabulary-learning-settings-review-progress" role="group">
@@ -3343,20 +3360,6 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
                   </button>
                 ))}
               </div>
-              <div aria-label="考察模式" className="vocabulary-learning-settings-review-categories" role="group">
-                {TODAY_PROGRESS_TABS.map((tab) => (
-                  <button
-                    aria-pressed={settingsDraft.modes.includes(tab.key)}
-                    className={settingsDraft.modes.includes(tab.key) ? "active" : ""}
-                    key={tab.key}
-                    onClick={() => toggleStudyMode(tab.key)}
-                    type="button"
-                  >
-                    <span aria-hidden="true" className="vocabulary-learning-settings-review-dot" />
-                    <span>{tab.label}</span>
-                  </button>
-                ))}
-              </div>
             </section>
             <div className="vocabulary-learning-settings-paired-options">
               <fieldset className="vocabulary-learning-settings-options">
@@ -3376,9 +3379,10 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
                 <label><input checked={settingsDraft.definitionLanguage === "en"} name="study-definition-language" onChange={() => setSettingsDraft((current) => ({ ...current, definitionLanguage: "en" }))} type="radio" />英文</label>
               </fieldset>
               <fieldset className="vocabulary-learning-settings-options vocabulary-learning-settings-memory-options">
-                <legend>记忆方式</legend>
+                <legend>辅助记忆</legend>
                 <label><input checked={settingsDraft.showExamples} onChange={(event) => setSettingsDraft((current) => ({ ...current, showExamples: event.target.checked }))} type="checkbox" />语境例句</label>
                 <label><input checked={settingsDraft.showOptions} onChange={(event) => setSettingsDraft((current) => ({ ...current, showOptions: event.target.checked }))} type="checkbox" />释义选项</label>
+                <label><input checked={settingsDraft.showPicture} onChange={(event) => setSettingsDraft((current) => ({ ...current, showPicture: event.target.checked }))} type="checkbox" />看图识词</label>
               </fieldset>
             </div>
             {settingsDraft.modes.length === 0

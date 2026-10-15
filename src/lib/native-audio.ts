@@ -8,6 +8,7 @@ export class NativeAudio {
   private pendingSeek: number | null = null;
   private cleanup: Array<() => void> = [];
   private disposed = false;
+  private selectedRate = 1;
   readonly _sounds: Array<{ _node: HTMLAudioElement }>;
 
   constructor(private options: HowlOptions, media?: HTMLAudioElement) {
@@ -20,13 +21,14 @@ export class NativeAudio {
     this.media.volume = options.volume ?? 1;
     this.listen("loadedmetadata", () => {
       this.status = "loaded";
+      this.applyRate();
       this.applySeek();
       options.onload?.(0);
     });
     this.listen("durationchange", () => {
       if (this.status === "loaded" && this.duration() > 0) options.onload?.(0);
     });
-    this.listen("playing", () => options.onplay?.(0));
+    this.listen("playing", () => { this.applyRate(); options.onplay?.(0); });
     this.listen("pause", () => {
       // Natural completion also fires pause; the end handler owns the next
       // sentence or delayed replay and must retain its playback request.
@@ -55,6 +57,11 @@ export class NativeAudio {
     }
   }
 
+  private applyRate() {
+    this.media.defaultPlaybackRate = this.selectedRate;
+    this.media.playbackRate = this.selectedRate;
+  }
+
   state() { return this.status; }
   duration() { return Number.isFinite(this.media.duration) ? this.media.duration : 0; }
   playing() { return !this.media.paused && !this.media.ended; }
@@ -68,10 +75,11 @@ export class NativeAudio {
   play() {
     if (this.disposed) return;
     this.applySeek();
+    this.applyRate();
     try {
       // Do not wait for metadata/canplaythrough: that loses the tap activation.
       const result = this.media.play();
-      result?.catch((error: unknown) => {
+      result?.then(() => { if (!this.disposed) this.applyRate(); }).catch((error: unknown) => {
         if (!this.disposed) this.options.onplayerror?.(0, String(error));
       });
     } catch (error) {
@@ -96,8 +104,8 @@ export class NativeAudio {
 
   rate(value?: number) {
     if (value != null) {
-      this.media.defaultPlaybackRate = value;
-      this.media.playbackRate = value;
+      this.selectedRate = value;
+      this.applyRate();
     }
     return this.media.playbackRate;
   }

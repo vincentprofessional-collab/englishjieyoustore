@@ -1,7 +1,8 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 import { supabase } from "@/lib/supabase/client";
+import { getAuthErrorFeedback, reportAuthFailure } from "@/lib/supabase/auth-request";
 
 type AuthMode = "login" | "register";
 
@@ -75,19 +76,13 @@ function getDurationSeconds(startedAt: string) {
   return Math.max(0, Math.round((Date.now() - new Date(startedAt).getTime()) / 1000));
 }
 
-async function recordAuthEvent(eventType: "login" | "registration") {
+async function recordAuthEvent(eventType: "login" | "registration", accessToken: string) {
   try {
     const startedAt = getStartedAt();
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
     const headers: HeadersInit = {
+      Authorization: `Bearer ${accessToken}`,
       "Content-Type": "application/json",
     };
-
-    if (session?.access_token) {
-      headers.Authorization = `Bearer ${session.access_token}`;
-    }
 
     await fetch("/api/site-activity", {
       body: JSON.stringify({
@@ -101,6 +96,7 @@ async function recordAuthEvent(eventType: "login" | "registration") {
         startedAt,
       }),
       headers,
+      keepalive: true,
       method: "POST",
       signal: AbortSignal.timeout(5_000),
     });
@@ -138,140 +134,153 @@ export default function LoginPage() {
   const [registerAvatarPreview, setRegisterAvatarPreview] = useState("");
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [showConfirmationResend, setShowConfirmationResend] = useState(false);
+  const authRequestPending = useRef(false);
 
   function switchMode(nextMode: AuthMode) {
+    if (authRequestPending.current) return;
     setAuthMode(nextMode);
     setMessage("");
+    setShowConfirmationResend(false);
   }
 
   async function handleLogin(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (authRequestPending.current) return;
+    authRequestPending.current = true;
+    const startedAt = Date.now();
     setIsLoading(true);
     setMessage("");
+    setShowConfirmationResend(false);
 
-    const { error } = await supabase.auth.signInWithPassword({
-      email: loginAccount.trim(),
-      password: loginPassword,
-    });
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: loginAccount.trim(),
+        password: loginPassword,
+      });
 
-    if (error) {
-      setMessage(`登录失败：${error.message}`);
-      setIsLoading(false);
-      return;
-    }
+      if (error) throw error;
 
-    await recordAuthEvent("login");
+      if (data.session) void recordAuthEvent("login", data.session.access_token);
 
-    const redirectPath = getSafeRedirectPath();
-
-    if (redirectPath) {
-      window.location.assign(redirectPath);
-      return;
-    }
-
-    setMessage("登录成功。");
-    setIsLoading(false);
-  }
-
-  async function handleRegister(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setIsLoading(true);
-    setMessage("");
-
-    if (registerPassword.length < 6) {
-      setMessage("密码至少需要 6 位。");
-      setIsLoading(false);
-      return;
-    }
-
-    const nickname = registerNickname.replace(/\s+/g, " ").trim();
-
-    if (!nickname) {
-      setMessage("请先填写昵称。 ");
-      setIsLoading(false);
-      return;
-    }
-
-    if (registerPassword !== registerPasswordConfirm) {
-      setMessage("两次输入的密码不一致。");
-      setIsLoading(false);
-      return;
-    }
-
-    const { data, error } = await supabase.auth.signUp({
-      email: registerEmail.trim(),
-      options: {
-        data: { display_name: nickname },
-        emailRedirectTo: getAuthRedirectUrl(),
-      },
-      password: registerPassword,
-    });
-
-    if (error) {
-      setMessage(`注册失败：${error.message}`);
-      setIsLoading(false);
-      return;
-    }
-
-    if (data.user && data.session) {
-      await recordAuthEvent("registration");
-    }
-
-    let avatarMessage = "";
-
-    if (data.session && registerAvatarFile) {
-      try {
-        await uploadProfileAvatar(registerAvatarFile, data.session.access_token);
-      } catch (avatarError) {
-        avatarMessage = `头像上传失败：${avatarError instanceof Error ? avatarError.message : "请登录后重试"}`;
-      }
-    }
-
-    if (data.session) {
       const redirectPath = getSafeRedirectPath();
 
       if (redirectPath) {
         window.location.assign(redirectPath);
         return;
       }
-    }
 
-    setMessage(
-      avatarMessage || (data.session
-        ? "注册成功，已自动登录。"
-        : "注册已提交。若系统开启邮箱确认，请先到邮箱里点击确认链接。"),
-    );
-    setRegisterPassword("");
-    setRegisterPasswordConfirm("");
-    setIsLoading(false);
+      setMessage("登录成功。");
+    } catch (error) {
+      const feedback = getAuthErrorFeedback(error);
+      setMessage(`登录失败：${feedback.message}`);
+      setShowConfirmationResend(feedback.kind === "unconfirmed");
+      reportAuthFailure("login", error, startedAt);
+    } finally {
+      authRequestPending.current = false;
+      setIsLoading(false);
+    }
+  }
+
+  async function handleRegister(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (authRequestPending.current) return;
+    authRequestPending.current = true;
+    const startedAt = Date.now();
+    setIsLoading(true);
+    setMessage("");
+
+    try {
+      if (registerPassword.length < 6) {
+        setMessage("密码至少需要 6 位。");
+        return;
+      }
+
+      const nickname = registerNickname.replace(/\s+/g, " ").trim();
+      if (!nickname) {
+        setMessage("请先填写昵称。");
+        return;
+      }
+      if (registerPassword !== registerPasswordConfirm) {
+        setMessage("两次输入的密码不一致。");
+        return;
+      }
+
+      const { data, error } = await supabase.auth.signUp({
+        email: registerEmail.trim(),
+        options: {
+          data: { display_name: nickname },
+          emailRedirectTo: getAuthRedirectUrl(),
+        },
+        password: registerPassword,
+      });
+      if (error) throw error;
+
+      if (data.user && data.session) {
+        void recordAuthEvent("registration", data.session.access_token);
+      }
+
+      let avatarMessage = "";
+      if (data.session && registerAvatarFile) {
+        try {
+          await uploadProfileAvatar(registerAvatarFile, data.session.access_token);
+        } catch (avatarError) {
+          avatarMessage = `头像上传失败：${avatarError instanceof Error ? avatarError.message : "请登录后重试"}`;
+        }
+      }
+
+      if (data.session) {
+        const redirectPath = getSafeRedirectPath();
+        if (redirectPath) {
+          window.location.assign(redirectPath);
+          return;
+        }
+      }
+
+      setMessage(
+        avatarMessage || (data.session
+          ? "注册成功，已自动登录。"
+          : "注册已提交。请先到邮箱里点击确认链接，再返回登录。"),
+      );
+      setRegisterPassword("");
+      setRegisterPasswordConfirm("");
+    } catch (error) {
+      setMessage(`注册失败：${getAuthErrorFeedback(error).message}`);
+      reportAuthFailure("registration", error, startedAt);
+    } finally {
+      authRequestPending.current = false;
+      setIsLoading(false);
+    }
   }
 
   async function handleResendConfirmation() {
-    const email = registerEmail.trim();
-
+    if (authRequestPending.current) return;
+    const email = (authMode === "login" ? loginAccount : registerEmail).trim();
     if (!email) {
       setMessage("请先填写邮箱，再重新发送确认邮件。");
       return;
     }
 
+    authRequestPending.current = true;
+    const startedAt = Date.now();
     setIsLoading(true);
     setMessage("");
-
-    const { error } = await supabase.auth.resend({
-      email,
-      options: {
-        emailRedirectTo: getAuthRedirectUrl(),
-      },
-      type: "signup",
-    });
-
-    if (error) {
-      setMessage(`发送失败：${error.message}`);
-    } else {
-      setMessage("确认邮件已重新发送。请检查收件箱、垃圾邮件或推广邮件。");
+    try {
+      const { error } = await supabase.auth.resend({
+        email,
+        options: { emailRedirectTo: getAuthRedirectUrl() },
+        type: "signup",
+      });
+      if (error) throw error;
+      setShowConfirmationResend(false);
+      setMessage("确认邮件已重新发送。请检查收件箱、垃圾邮件或推广邮件，点击确认链接后再登录。");
+    } catch (error) {
+      setMessage(`发送失败：${getAuthErrorFeedback(error).message}`);
+      reportAuthFailure("confirmation-email", error, startedAt);
+    } finally {
+      authRequestPending.current = false;
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
   }
 
   return (
@@ -280,6 +289,7 @@ export default function LoginPage() {
         <div className="auth-mode-tabs" role="tablist" aria-label="登录注册">
           <button
             className={authMode === "login" ? "active" : ""}
+            disabled={isLoading}
             type="button"
             onClick={() => switchMode("login")}
           >
@@ -287,6 +297,7 @@ export default function LoginPage() {
           </button>
           <button
             className={authMode === "register" ? "active" : ""}
+            disabled={isLoading}
             type="button"
             onClick={() => switchMode("register")}
           >
@@ -320,6 +331,11 @@ export default function LoginPage() {
             <button className="button primary" disabled={isLoading} type="submit">
               {isLoading ? "登录中…" : "登录"}
             </button>
+            {showConfirmationResend ? (
+              <button className="auth-text-button" disabled={isLoading} type="button" onClick={handleResendConfirmation}>
+                重新发送确认邮件
+              </button>
+            ) : null}
           </form>
         ) : (
           <form className="auth-form" onSubmit={handleRegister}>
@@ -398,7 +414,7 @@ export default function LoginPage() {
         )}
 
         {message ? (
-          <p className={`auth-message ${message.includes("失败") ? "error" : ""}`}>{message}</p>
+          <p role="status" aria-live="polite" className={`auth-message ${message.includes("失败") ? "error" : ""}`}>{message}</p>
         ) : null}
       </aside>
     </section>

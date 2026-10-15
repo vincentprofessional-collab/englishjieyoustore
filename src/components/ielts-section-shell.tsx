@@ -310,6 +310,7 @@ function IeltsSectionShellContent({
   const isIntegratedEnglish = activeGroup.id === "integrated-english";
   const examGroups = STUDY_NAV_GROUPS.filter((group) => group.id !== "integrated-english");
   const isBbcPage = pathname === "/articles" || pathname.startsWith("/articles/");
+  const isBbcArticle = /^\/articles\/[^/]+\/?$/.test(pathname);
   const isNewConceptPage = pathname === "/new-concept" || pathname.startsWith("/new-concept/");
   const isBookTwoLessonRoute = /\/new-concept\/book2-lesson-\d+/.test(pathname);
   const activeNewConceptBookCode = isBookTwoLessonRoute || searchParams.get("book") === "new-concept-2"
@@ -324,7 +325,7 @@ function IeltsSectionShellContent({
     : getNewConceptUnitFromPath(pathname, activeNewConceptUnitCount);
 
   return (
-    <div className="ielts-section-shell">
+    <div className={`ielts-section-shell${isBbcArticle ? " bbc-article-immersive" : ""}`}>
       <aside className={`ielts-side-nav study-directory-side-nav ${isIntegratedEnglish ? "integrated-english-side-nav" : "language-exams-side-nav"}`} aria-label={isIntegratedEnglish ? "综合英语导航" : "语言考试导航"}>
         <header className="study-directory-head">
           <div>

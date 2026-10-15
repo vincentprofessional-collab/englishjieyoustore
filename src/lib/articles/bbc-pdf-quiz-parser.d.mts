@@ -1,0 +1,16 @@
+import type { BbcQuizQuestion } from "./bbc-quiz";
+export type PdfAnswerLine = { full: string; bold: string };
+export type QuestionMarker = { number: number; text: string; index: number };
+export type QuestionDraft = Omit<BbcQuizQuestion, "answer">;
+export function normalizeSpace(value: string): string;
+export function normalizeAnswer(value: string): string;
+export function parseMatchingSection(lines: string[]): QuestionDraft[];
+export function findQuestionSequences(lines: string[]): QuestionMarker[][];
+export function parseQuestionGroup(lines: string[], sequence: QuestionMarker[], isExercise: boolean, groupEnd?: number): QuestionDraft[];
+export function parseSummaryExercise(lines: string[]): QuestionDraft[];
+export function findSummaryHeadingIndex(lines: (string | PdfAnswerLine)[]): number;
+export function parseAnswerGroupsWithoutHeadings(lines: PdfAnswerLine[], groups: QuestionDraft[][]): { number: number; answer: string }[][];
+export function parseAnswerGroup(lines: PdfAnswerLine[], heading: RegExp, stop?: RegExp, questions?: QuestionDraft[]): { number: number; answer: string }[];
+export function extractSummaryAnswers(lines: PdfAnswerLine[], options: string[], count?: number): { number: number; answer: string }[];
+export function extractMatchingAnswers(lines: PdfAnswerLine[], questions: QuestionDraft[]): { number: number; answer: string }[];
+export function resolveChoiceAnswer(question: QuestionDraft, extractedAnswer: string): string;

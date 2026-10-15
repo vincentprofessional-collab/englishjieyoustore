@@ -5,29 +5,12 @@ import { useState, type DragEvent, type FormEvent, type PointerEvent } from "rea
 import quizCatalog from "@/data/bbc/quiz-index.json";
 import { syncWrongBbcQuizFavorite } from "@/lib/bbc-quiz-favorites";
 import { recordPracticeAttempt } from "@/lib/learning/site-progress";
+import type { BbcQuizQuestion as Question, BbcQuizRecord as QuizRecord } from "@/lib/articles/bbc-quiz";
 
 import styles from "./bbc-article-quiz.module.css";
 
-type Question = {
-  answer: string;
-  isSummary?: boolean;
-  number: number;
-  options?: string[];
-  prompt: string;
-  type?: "matching";
-};
-
-type QuizRecord = {
-  articleId: string;
-  articleTitle: string;
-  exercise: Question[];
-  matching?: Question[];
-  quiz: Question[];
-  status: "ready" | "partial" | "review_required";
-};
-
-export function getBbcArticleMatchingParagraphGists(articleId: string) {
-  const record = (quizCatalog as QuizRecord[]).find(
+export function getBbcArticleMatchingParagraphGists(articleId: string, uploadedQuiz?: QuizRecord) {
+  const record = uploadedQuiz?.articleId === articleId && uploadedQuiz.status === "ready" ? uploadedQuiz : (quizCatalog as QuizRecord[]).find(
     (item) => item.articleId === articleId && item.status !== "review_required",
   );
   const gists: Record<number, string> = {};
@@ -429,6 +412,7 @@ function SummaryFillBlankQuestion({
               aria-label={value ? `第 ${number} 空已填入 ${value}` : `第 ${number} 空`}
               className={`${styles.dropZone} ${hovering === number ? styles.dropZoneHover : ""} ${correct ? styles.correctDropZone : ""} ${wrong ? styles.wrongDropZone : ""}`}
               data-bbc-blank-number={number}
+              key={`${id}-blank-${number}`}
               draggable={Boolean(value)}
               onClick={() => {
                 if (skipClick) {
@@ -630,8 +614,8 @@ function AnswerNotice({ correct, question }: { correct: boolean; question: Quest
   );
 }
 
-export function BbcArticleQuiz({ articleId, articleTitle }: { articleId: string; articleTitle?: string }) {
-  const record = (quizCatalog as QuizRecord[]).find(
+export function BbcArticleQuiz({ articleId, articleTitle, uploadedQuiz }: { articleId: string; articleTitle?: string; uploadedQuiz?: QuizRecord }) {
+  const record = uploadedQuiz?.articleId === articleId && uploadedQuiz.status === "ready" ? uploadedQuiz : (quizCatalog as QuizRecord[]).find(
     (item) => item.articleId === articleId && item.status !== "review_required",
   );
   if (!record) return null;
@@ -658,14 +642,14 @@ export function BbcArticleQuiz({ articleId, articleTitle }: { articleId: string;
           {record.quiz.map((question) => <ChoiceQuestion key={`quiz-${question.number}`} articleId={articleId} articleTitle={title} displayNumber={question.number} kind="quiz" question={question} />)}
         </section>
       ) : null}
-      <section className={styles.group} aria-labelledby={`${articleId}-exercise-heading`}>
+      {record.exercise.length ? <section className={styles.group} aria-labelledby={`${articleId}-exercise-heading`}>
         <h3 id={`${articleId}-exercise-heading`}>{matching.length ? "三" : "二"}、选词填空</h3>
         {record.exercise[0]?.isSummary ? (
           <SummaryFillBlankQuestion articleId={articleId} articleTitle={title} questions={record.exercise} />
       ) : (
         record.exercise.map((question) => <FillBlankQuestion key={`exercise-${question.number}`} articleId={articleId} articleTitle={title} displayNumber={question.number} question={question} />)
       )}
-      </section>
+      </section> : null}
       </div>
     </details>
   );

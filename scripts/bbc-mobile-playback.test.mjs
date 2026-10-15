@@ -357,3 +357,66 @@ test("all mobile sentence training modes advance, repeat, and retain looping aft
     assert.deepEqual(requests, [2, 2, 3, 3], "the last sequential sentence stops");
   }
 });
+
+test("BBC's native media reapplies the selected rate when a mobile engine resets it during play", async () => {
+  class Media extends EventTarget {
+    defaultPlaybackRate = 1; playbackRate = 1; readyState = 1;
+    duration = 60; currentTime = 0; paused = true;
+    load() {} pause() { this.paused = true; } removeAttribute() {}
+    play() { this.playbackRate = 1; this.paused = false; return Promise.resolve(); }
+  }
+  const exports = {};
+  const code = ts.transpileModule(fs.readFileSync(new URL("../src/lib/native-audio.ts", import.meta.url), "utf8"), { compilerOptions: { module: ts.ModuleKind.CommonJS } }).outputText;
+  vm.runInNewContext(code, { exports, Audio: Media, document: new EventTarget() });
+  const sound = new exports.NativeAudio({ src: ["/bbc.mp3"], rate: 0.75 });
+  const media = sound._sounds[0]._node;
+  for (const rate of [0.75, 1.25]) {
+    sound.rate(rate); sound.play(); await Promise.resolve();
+    assert.equal(media.playbackRate, rate);
+    media.playbackRate = 1; media.dispatchEvent(new Event("playing"));
+    assert.equal(media.playbackRate, rate);
+    media.playbackRate = 1; media.dispatchEvent(new Event("loadedmetadata"));
+    assert.equal(media.playbackRate, rate);
+  }
+  sound.unload();
+});
+
+test("entering retelling stops existing playback without changing the selected listening mode", () => {
+  const ast = ts.createSourceFile("article.tsx", fs.readFileSync(new URL("../src/components/bbc-article-detail-page.tsx", import.meta.url), "utf8"), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  let handler;
+  function collect(node) { if (ts.isFunctionDeclaration(node) && node.name?.text === "enterRetellingPractice") handler = node.getText(ast); ts.forEachChild(node, collect); }
+  collect(ast); assert.ok(handler);
+  for (const playMode of ["sequential", "sentence-loop"]) {
+    const state = { settings: { playMode, speakingMode: "imitation" }, version: 0, requests: 0 };
+    const context = vm.createContext({
+      clearSpeakingPracticeTimers() { state.clearedTimers = true; }, updateAudioSettings(next) { Object.assign(state.settings, next); },
+      setStudyMode(mode) { state.studyMode = mode; }, setSentenceAutoPlaySignals(signals) { state.signals = signals; }, setSentenceRestoreSeekRequest(value) { state.restore = value; },
+      setActiveSentencePosition(value) { state.position = value; }, setIsSentenceAudioPlaying(value) { state.playing = value; }, setIsFullAudioPlaying(value) { state.fullPlaying = value; },
+      setModeSelectionVersion(update) { state.version = update(state.version); }, setIsVocabularyVisible(value) { state.words = value; }, setIsRetellingPractice(value) { state.retelling = value; },
+      requestSentenceAutoPlay() { state.requests++; },
+    });
+    vm.runInContext(ts.transpileModule(handler, { compilerOptions: { target: ts.ScriptTarget.ES2020 } }).outputText, context);
+    context.enterRetellingPractice();
+    assert.equal(state.requests, 0); assert.equal(state.playing, false); assert.equal(state.fullPlaying, false);
+    assert.equal(state.version, 1); assert.equal(state.settings.playMode, playMode); assert.equal(state.settings.speakingMode, "none");
+    assert.equal(state.studyMode, "speaking"); assert.equal(state.retelling, true); assert.equal(Object.keys(state.signals).length, 0);
+  }
+});
+
+test("retelling listening choices preserve a paused state until the user presses Play", () => {
+  const ast = ts.createSourceFile("article.tsx", fs.readFileSync(new URL("../src/components/bbc-article-detail-page.tsx", import.meta.url), "utf8"), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  let handler;
+  function collect(node) { if (ts.isFunctionDeclaration(node) && node.name?.text === "updateAudioSettings") handler = node.getText(ast); ts.forEachChild(node, collect); }
+  collect(ast); assert.ok(handler);
+  for (const [retelling, playing, expected] of [[true, false, 0], [true, true, 1], [false, false, 1]]) {
+    let plays = 0;
+    const context = vm.createContext({
+      audioSettingsRef: { current: {} }, studyMode: "speaking", isRetellingPractice: retelling, isSentenceAudioPlaying: playing,
+      setAudioSettings() {}, clearSpeakingPracticeTimers() {}, currentStudySentenceNo: () => 2,
+      requestSentenceAutoPlay() { plays++; }, setOriginalDisplayMode() {},
+    });
+    vm.runInContext(ts.transpileModule(handler, { compilerOptions: { target: ts.ScriptTarget.ES2020 } }).outputText, context);
+    context.updateAudioSettings({ playMode: "sentence-loop" });
+    assert.equal(plays, expected); assert.equal(context.audioSettingsRef.current.playMode, "sentence-loop");
+  }
+});

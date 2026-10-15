@@ -11,6 +11,7 @@ import bbc2024Articles from "@/data/bbc/2024/index.json";
 import bbc2025Articles from "@/data/bbc/2025/index.json";
 import bbc2026Articles from "@/data/bbc/2026/index.json";
 import type { BbcSyntaxSentenceData } from "@/components/bbc-syntax-sentence";
+import type { BbcPdfQuiz } from "@/lib/articles/bbc-quiz";
 export {
   mergeBbcVocabularyItems,
   normalizeBbcVocabularyTerm,
@@ -47,6 +48,7 @@ export type BbcArticleSentence = {
 };
 
 export type BbcArticle = {
+  quiz?: BbcPdfQuiz;
   audioUrl?: string;
   body: string[];
   chineseParagraphs?: string[];

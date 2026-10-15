@@ -23,6 +23,7 @@ type VocabularyDetailContentProps = {
   inlineVideo?: ReactNode;
   lookupLayout?: boolean;
   showExamples?: boolean;
+  showIllustration?: boolean;
   phrases: VocabularyPhraseMatch[];
   synonymDistinctions?: VocabularySynonymDistinction[];
   usageScenario?: { context: string; translation: string; example: string } | null;
@@ -214,38 +215,25 @@ function PhraseSection({ phrases }: { phrases: VocabularyPhraseMatch[] }) {
   );
 }
 
-function useVocabularyIllustration(word: string | null) {
+export function useVocabularyIllustration(word: string | null, respectLookupPreferences = true) {
   const imageUrl = word ? getPrimarySchoolVocabularyImageUrl(word) : null;
   const [imagesVisible, setImagesVisible] = useState(true);
-  const [loadedImageUrl, setLoadedImageUrl] = useState<string | null>(null);
+  const [failedImageUrl, setFailedImageUrl] = useState<string | null>(null);
+  useEffect(() => { setFailedImageUrl(null); }, [imageUrl]);
   useEffect(() => {
+    if (!respectLookupPreferences) return;
     const sync = () => setImagesVisible(getVocabularyLookupDisplayPreferences().images);
     sync();
     return subscribeToVocabularyLookupDisplayPreferences(sync);
-  }, []);
-  useEffect(() => {
-    setLoadedImageUrl(null);
-    if (!imageUrl || !imagesVisible) {
-      return;
-    }
+  }, [respectLookupPreferences]);
 
-    const image = new window.Image();
-    image.onload = () => setLoadedImageUrl(imageUrl);
-    image.onerror = () => setLoadedImageUrl(null);
-    image.src = imageUrl;
-    return () => {
-      image.onload = null;
-      image.onerror = null;
-    };
-  }, [imageUrl, imagesVisible]);
-
-  return imagesVisible && imageUrl && loadedImageUrl === imageUrl ? (
+  return (!respectLookupPreferences || imagesVisible) && imageUrl && failedImageUrl !== imageUrl ? (
     <img
       alt={`${word} 的词汇插图`}
       className="vocabulary-primary-school-word-picture"
       decoding="async"
-      loading="lazy"
-      onError={() => setLoadedImageUrl(null)}
+      loading="eager"
+      onError={() => setFailedImageUrl(imageUrl)}
       src={imageUrl}
     />
   ) : null;
@@ -364,12 +352,13 @@ export function VocabularyDetailContent({
   inlineVideo,
   lookupLayout = false,
   showExamples = true,
+  showIllustration = true,
   phrases,
   synonymDistinctions = [],
   usageScenario,
   usageExamples,
 }: VocabularyDetailContentProps) {
-  const illustration = useVocabularyIllustration(entry.level === "小学" ? entry.word : null);
+  const illustration = useVocabularyIllustration(showIllustration && entry.level === "小学" ? entry.word : null);
   const chineseDefinition = (
     <VocabularyLookupDisplaySection controlsEnabled id="chineseDefinition" title="中文释义"><DefinitionRows entry={entry} /></VocabularyLookupDisplaySection>
   );

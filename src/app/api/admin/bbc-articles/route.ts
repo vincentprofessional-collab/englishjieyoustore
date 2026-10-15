@@ -10,6 +10,7 @@ import { extractBbcWaveText } from "@/lib/articles/bbc-paste-markup";
 import { normalizeBbcSyntaxSentenceEdits } from "@/lib/bbc-syntax-annotation-edits";
 import { buildAutomaticBbcSyntax } from "@/lib/articles/bbc-automatic-syntax";
 import { applyPastedBbcSyntax, retainReviewedBbcSyntax, type PastedBbcSyntaxSentence } from "@/lib/articles/bbc-pasted-syntax";
+import { normalizeBbcPdfQuiz } from "@/lib/articles/bbc-quiz";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -312,6 +313,11 @@ export async function POST(request: NextRequest) {
       const article = buildArticle(parsed, "");
       if (typeof article === "string") return NextResponse.json({ error: article }, { status: 400 });
       if (getBbcArticleById(article.id)) return NextResponse.json({ error: "内置文章正文由原有内容库维护，语法标注请在前端精读页面修改。" }, { status: 409 });
+      if (payload.quiz != null) {
+        const quiz = normalizeBbcPdfQuiz(payload.quiz, article.id, article.title, article.body.length);
+        if (typeof quiz === "string") return NextResponse.json({ error: quiz }, { status: 400 });
+        article.quiz = quiz;
+      }
       const syntaxSentences = article.syntaxSentences ?? [];
       const unmatchedSyntaxSentenceNos = parsed.syntaxAnnotations
         .filter((annotation) => syntaxSentences[annotation.sentenceNo - 1]?.status !== "reviewed")
@@ -446,6 +452,15 @@ export async function PUT(request: NextRequest) {
   const existingArticleResult = await supabase.from("bbc_uploaded_articles").select("article,published,created_at").eq("id", article.id).maybeSingle();
   if (existingArticleResult.error) return NextResponse.json({ error: `保存前无法读取文章状态：${existingArticleResult.error.message}` }, { status: 503 });
   const existingArticle = existingArticleResult.data;
+  if (payload.quiz != null) {
+    const quiz = normalizeBbcPdfQuiz(payload.quiz, article.id, article.title, article.body.length);
+    if (typeof quiz === "string") return NextResponse.json({ error: quiz }, { status: 400 });
+    article.quiz = quiz;
+  } else if (payload.quiz === undefined && (existingArticle?.article as BbcArticle | undefined)?.quiz) {
+    const quiz = normalizeBbcPdfQuiz((existingArticle!.article as BbcArticle).quiz, article.id, article.title, article.body.length);
+    if (typeof quiz === "string") return NextResponse.json({ error: `原有 PDF 练习需要核对：${quiz}` }, { status: 400 });
+    article.quiz = quiz;
+  }
   let previousSyntax = (existingArticle?.article as BbcArticle | undefined)?.syntaxSentences ?? [];
   if (existingArticle && previousSyntax.length) {
     const overrides = await supabase.from("bbc_article_syntax_overrides").select("sentences,updated_at").eq("article_id", article.id).maybeSingle();

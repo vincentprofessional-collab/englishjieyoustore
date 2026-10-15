@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-import { FormEvent, useEffect, useState, type CSSProperties } from "react";
+import { FormEvent, useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import type { SiteChromeConfig } from "@/lib/content/site-chrome";
 import { guidePostPagePlacementOptions, normalizeGuidePagePath } from "@/lib/content/guide-post-navigation";
 import {
@@ -15,6 +15,7 @@ import {
 import { resolveCurrentMembership, type MembershipEntitlement, type MembershipProfile } from "@/lib/membership/current-membership";
 import { supabase } from "@/lib/supabase/client";
 import { getVisitorNumber } from "@/lib/visitor-identity";
+import { buildGuideCommentTree, parseGuideComment, type GuideComment, type GuideCommentRow } from "@/lib/guide/comments";
 
 type GuideBoardProps = {
   eyebrow?: string;
@@ -32,76 +33,32 @@ type GuideBoardProps = {
   title?: string;
 };
 
-type GuideComment = {
-  avatarUrl?: string;
-  body: string;
-  createdAt: string;
-  displayName: string;
-  id: string;
-  isGuest?: boolean;
-  isPaidMember?: boolean;
-  parentCommentId?: string | null;
-  replyToCommentId?: string | null;
-  userId?: string | null;
-};
-
-type GuideCommentRow = {
-  avatar_url?: string | null;
-  body: string;
-  created_at: string;
-  display_name: string;
-  id: string;
-  is_guest?: boolean;
-  is_paid_member?: boolean;
-  parent_comment_id?: string | null;
-  reply_to_comment_id?: string | null;
-  user_id?: string | null;
-};
-
 const LOCAL_COMMENTS_KEY = "ielts-platform.guideComments";
 const LOCAL_LIKES_KEY = "ielts-platform.guideLikes";
 const MAX_GUIDE_COMMENT_LENGTH = 800;
 
-function parseGuideComment(comment: GuideCommentRow): GuideComment {
-  return {
-    avatarUrl: comment.avatar_url ?? undefined,
-    body: comment.body,
-    createdAt: comment.created_at,
-    displayName: comment.display_name,
-    id: comment.id,
-    isGuest: comment.is_guest ?? !comment.user_id,
-    isPaidMember: comment.is_paid_member ?? false,
-    parentCommentId: comment.parent_comment_id ?? null,
-    replyToCommentId: comment.reply_to_comment_id ?? null,
-    userId: comment.user_id ?? null,
-  };
+async function loadGuideComments(postId: string): Promise<GuideComment[]> {
+  const response = await fetch(`/api/guide-comments?postId=${encodeURIComponent(postId)}`, { cache: "no-store" });
+  const result = await response.json().catch(() => null);
+  if (!response.ok || !Array.isArray(result?.comments)) throw new Error(result?.error || "留言暂时无法读取，请稍后重试。");
+  return result.comments.map(parseGuideComment);
 }
 
-async function loadGuideComments(postId: string): Promise<GuideComment[]> {
-  try {
-    const response = await fetch(`/api/guide-comments?postId=${encodeURIComponent(postId)}`, { cache: "no-store" });
-    const result = (await response.json().catch(() => null)) as { comments?: GuideCommentRow[] } | null;
-    if (response.ok && Array.isArray(result?.comments)) return result.comments.map(parseGuideComment);
-  } catch {
-    // Public Supabase reads remain available if membership enrichment is unavailable.
+async function sendGuideComment(postId: string, comment: GuideComment, legacySync = false): Promise<GuideComment> {
+  const { data, error } = await supabase.auth.getSession();
+  if (error || (comment.userId && (!data.session || data.session.user.id !== comment.userId))) throw new Error("请重新登录后发布，留言内容已保留。");
+  async function send(token?: string) {
+    return fetch("/api/guide-comments", { method: "POST", headers: { "Content-Type": "application/json", ...(token ? { Authorization: `Bearer ${token}` } : {}) },
+      body: JSON.stringify({ postId, clientId: comment.id, body: comment.body, displayName: comment.displayName, parentCommentId: comment.parentCommentId, replyToCommentId: comment.replyToCommentId, legacySync, createdAt: comment.createdAt }) });
   }
-
-  const threadedResult = await supabase
-    .from("guide_comments")
-    .select("id,display_name,avatar_url,body,created_at,user_id,parent_comment_id,reply_to_comment_id")
-    .eq("post_id", postId)
-    .eq("status", "published")
-    .order("created_at", { ascending: true });
-  const result = threadedResult.error
-    ? await supabase
-        .from("guide_comments")
-        .select("id,display_name,avatar_url,body,created_at,user_id")
-        .eq("post_id", postId)
-        .eq("status", "published")
-        .order("created_at", { ascending: true })
-    : threadedResult;
-
-  return result.error ? [] : ((result.data ?? []) as GuideCommentRow[]).map(parseGuideComment);
+  let response = await send(data.session?.access_token);
+  if (response.status === 401 && data.session) {
+    const refreshed = await supabase.auth.refreshSession();
+    if (!refreshed.error && refreshed.data.session) response = await send(refreshed.data.session.access_token);
+  }
+  const result = await response.json().catch(() => null);
+  if (!response.ok || !result?.comment) throw new Error(result?.error || "留言未发布，请稍后重试。内容仍在输入框。");
+  return parseGuideComment(result.comment);
 }
 
 const FONT_FAMILIES: Record<GuideContentBlock["fontFamily"], string> = {
@@ -221,12 +178,18 @@ function GuidePostCard({
   const [replyBody, setReplyBody] = useState("");
   const [replyingTo, setReplyingTo] = useState<{ rootId: string; targetId: string } | null>(null);
   const [isReplySubmitting, setIsReplySubmitting] = useState(false);
+  const [isCommentSubmitting, setIsCommentSubmitting] = useState(false);
+  const [expandedComments, setExpandedComments] = useState<Set<string>>(() => new Set());
+  const [commentsLoadError, setCommentsLoadError] = useState(false);
+  const [commentsLoading, setCommentsLoading] = useState(!post.id.startsWith("default-"));
+  const commentRequest = useRef<{ body: string; id: string } | null>(null);
+  const replyRequest = useRef<{ body: string; target: string; id: string } | null>(null);
   const [commentIdentity, setCommentIdentity] = useState({
     avatarUrl: "",
     displayName: "",
     isPaidMember: false,
   });
-  const [expanded, setExpanded] = useState(initialExpanded);
+  const [expanded, setExpanded] = useState(false);
   const [interactionMessage, setInteractionMessage] = useState("");
   const [isLiked, setIsLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
@@ -238,10 +201,9 @@ function GuidePostCard({
 
   useEffect(() => {
     const localLikes = readLocalRecord<boolean>(LOCAL_LIKES_KEY);
-    const localComments = readLocalRecord<GuideComment[]>(LOCAL_COMMENTS_KEY);
     setIsLiked(Boolean(localLikes[post.id]));
     setLikeCount(localLikes[post.id] ? 1 : 0);
-    setComments(localComments[post.id] ?? []);
+
     setCommentIdentity({ avatarUrl: "", displayName: getVisitorNumber(), isPaidMember: false });
 
     void supabase.auth.getUser().then(async ({ data }) => {
@@ -275,11 +237,11 @@ function GuidePostCard({
           isPaidMember: membership.state === "active",
         });
       }
-    });
+    }).catch(() => undefined);
   }, [post.id]);
 
   useEffect(() => {
-    if (!expanded || post.id.startsWith("default-")) {
+    if (post.id.startsWith("default-")) {
       return;
     }
 
@@ -287,20 +249,33 @@ function GuidePostCard({
 
     async function loadInteractions() {
       const localComments = readLocalRecord<GuideComment[]>(LOCAL_COMMENTS_KEY)[post.id] ?? [];
+      try {
+        // Only the original author's signed-in account can sync its legacy local messages.
+        const migrated = new Map<string, string>();
+        for (const legacy of localComments.filter(comment => userId && comment.userId === userId)) {
+          const parent = legacy.parentCommentId ? migrated.get(legacy.parentCommentId) ?? legacy.parentCommentId : null;
+          const target = legacy.replyToCommentId ? migrated.get(legacy.replyToCommentId) ?? legacy.replyToCommentId : null;
+          if (parent?.startsWith("local-") || target?.startsWith("local-")) continue;
+          const saved = await sendGuideComment(post.id, { ...legacy, parentCommentId: parent, replyToCommentId: target }, true);
+          migrated.set(legacy.id, saved.id);
+          const local = readLocalRecord<GuideComment[]>(LOCAL_COMMENTS_KEY);
+          writeLocalRecord(LOCAL_COMMENTS_KEY, { ...local, [post.id]: (local[post.id] ?? []).filter(comment => comment.id !== legacy.id).map(comment => ({
+            ...comment,
+            parentCommentId: comment.parentCommentId === legacy.id ? saved.id : comment.parentCommentId,
+            replyToCommentId: comment.replyToCommentId === legacy.id ? saved.id : comment.replyToCommentId,
+          })) });
+        }
+      } catch {
+        if (active) setInteractionMessage("本机留言暂未同步，请保持登录并稍后重新打开帖子重试。");
+      }
       const [loadedComments, likesResult] = await Promise.all([
         loadGuideComments(post.id),
-        supabase
-          .from("guide_post_likes")
-          .select("post_id", { count: "exact", head: true })
-          .eq("post_id", post.id),
+        supabase.from("guide_post_likes").select("post_id", { count: "exact", head: true }).eq("post_id", post.id),
       ]);
-
-      if (!active) {
-        return;
-      }
-
-      const knownIds = new Set(loadedComments.map((comment) => comment.id));
-      setComments([...loadedComments, ...localComments.filter((comment) => !knownIds.has(comment.id))]);
+      if (!active) return;
+      setComments(loadedComments);
+      setCommentsLoadError(false);
+      setCommentsLoading(false);
 
       if (!likesResult.error) {
         setLikeCount(likesResult.count ?? 0);
@@ -320,12 +295,25 @@ function GuidePostCard({
       }
     }
 
-    void loadInteractions();
-
+    let loading = false;
+    const refresh = async () => {
+      if (loading || document.visibilityState === "hidden") return;
+      loading = true;
+      try { await loadInteractions(); }
+      catch (cause) { if (active) { setCommentsLoading(false); setCommentsLoadError(true); setInteractionMessage(cause instanceof Error ? cause.message : "留言暂时无法读取。"); } }
+      finally { loading = false; }
+    };
+    void refresh();
+    const timer = window.setInterval(() => void refresh(), 60_000);
+    window.addEventListener("focus", refresh);
+    document.addEventListener("visibilitychange", refresh);
     return () => {
       active = false;
+      window.clearInterval(timer);
+      window.removeEventListener("focus", refresh);
+      document.removeEventListener("visibilitychange", refresh);
     };
-  }, [expanded, post.id, userId]);
+  }, [post.id, userId]);
 
   function saveLocalLike(nextLiked: boolean) {
     const localLikes = readLocalRecord<boolean>(LOCAL_LIKES_KEY);
@@ -367,65 +355,31 @@ function GuidePostCard({
     setLikeCount((current) => Math.max(0, current + (nextLiked ? 1 : -1)));
   }
 
-  function saveLocalComment(comment: GuideComment) {
-    const localComments = readLocalRecord<GuideComment[]>(LOCAL_COMMENTS_KEY);
-    writeLocalRecord(LOCAL_COMMENTS_KEY, {
-      ...localComments,
-      [post.id]: [...(localComments[post.id] ?? []), comment],
-    });
-  }
-
   async function publishGuideComment(comment: GuideComment, isReply: boolean) {
-    const keepLocal = () => {
-      saveLocalComment(comment);
-      setComments((current) => [...current, comment]);
-    };
-
-    if (post.id.startsWith("default-") || comment.parentCommentId?.startsWith("local-")) {
-      keepLocal();
-      return;
+    if (post.id.startsWith("default-")) { setInteractionMessage("请刷新并打开正式帖子后发布留言。"); return false; }
+    try {
+      const saved = await sendGuideComment(post.id, comment);
+      setComments(current => current.some(item => item.id === saved.id) ? current : [...current, saved]);
+      setInteractionMessage(isReply ? "回复已发布，各设备均可查看。" : "留言已发布，各设备均可查看。");
+      return true;
+    } catch (cause) {
+      setInteractionMessage(cause instanceof Error ? cause.message : "留言未发布，内容已保留，请稍后重试。");
+      return false;
     }
-
-    const { data, error } = await supabase
-      .from("guide_comments")
-      .insert({
-        avatar_url: comment.avatarUrl || null,
-        body: comment.body,
-        display_name: comment.displayName,
-        parent_comment_id: comment.parentCommentId ?? null,
-        post_id: post.id,
-        reply_to_comment_id: comment.replyToCommentId ?? null,
-        status: "published",
-        user_id: userId,
-      })
-      .select("id,display_name,avatar_url,body,created_at,user_id,parent_comment_id,reply_to_comment_id")
-      .single();
-
-    if (error || !data) {
-      keepLocal();
-      setInteractionMessage(isReply ? "回复已保存在当前设备，公共留言库尚未连接。" : "留言已保存在当前设备，公共留言库尚未连接。");
-      return;
-    }
-
-    setComments((current) => [...current, {
-      ...parseGuideComment(data as GuideCommentRow),
-      isGuest: comment.isGuest,
-      isPaidMember: comment.isPaidMember,
-    }]);
-    setInteractionMessage(isReply ? "回复发布成功。" : "留言发布成功。");
   }
 
   async function submitComment(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const body = commentBody.trim();
-    if (!body || body.length > MAX_GUIDE_COMMENT_LENGTH) return;
+    if (!body || body.length > MAX_GUIDE_COMMENT_LENGTH || isCommentSubmitting) return;
+    if (commentRequest.current?.body !== body) commentRequest.current = { body, id: `local-${Date.now()}-${Math.random().toString(36).slice(2, 10)}` };
 
     const comment: GuideComment = {
       avatarUrl: commentIdentity.avatarUrl || undefined,
       body,
       createdAt: new Date().toISOString(),
       displayName: commentIdentity.displayName.trim() || getVisitorNumber(),
-      id: `local-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+      id: commentRequest.current!.id,
       isGuest: !userId,
       isPaidMember: commentIdentity.isPaidMember,
       parentCommentId: null,
@@ -433,21 +387,23 @@ function GuidePostCard({
       userId,
     };
     setInteractionMessage("");
-    setCommentBody("");
-    await publishGuideComment(comment, false);
+    setIsCommentSubmitting(true);
+    try { if (await publishGuideComment(comment, false)) { setCommentBody(""); commentRequest.current = null; } }
+    finally { setIsCommentSubmitting(false); }
   }
 
   async function submitReply(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const body = replyBody.trim();
-    if (!body || body.length > MAX_GUIDE_COMMENT_LENGTH || !replyingTo) return;
+    if (!body || body.length > MAX_GUIDE_COMMENT_LENGTH || !replyingTo || isReplySubmitting) return;
+    if (replyRequest.current?.body !== body || replyRequest.current.target !== replyingTo.targetId) replyRequest.current = { body, target: replyingTo.targetId, id: `local-${Date.now()}-${Math.random().toString(36).slice(2, 10)}` };
 
     const comment: GuideComment = {
       avatarUrl: commentIdentity.avatarUrl || undefined,
       body,
       createdAt: new Date().toISOString(),
       displayName: commentIdentity.displayName.trim() || getVisitorNumber(),
-      id: `local-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+      id: replyRequest.current!.id,
       isGuest: !userId,
       isPaidMember: commentIdentity.isPaidMember,
       parentCommentId: replyingTo.rootId,
@@ -457,18 +413,17 @@ function GuidePostCard({
     setInteractionMessage("");
     setIsReplySubmitting(true);
     try {
-      await publishGuideComment(comment, true);
-      setReplyBody("");
-      setReplyingTo(null);
+      if (await publishGuideComment(comment, true)) {
+        setExpandedComments(current => new Set([...current, replyingTo.targetId]));
+        setReplyBody(""); setReplyingTo(null); replyRequest.current = null;
+      }
     } finally {
       setIsReplySubmitting(false);
     }
   }
 
-  const commentsById = new Map(comments.map((comment) => [comment.id, comment]));
-  const rootComments = comments
-    .filter((comment) => !comment.parentCommentId || !commentsById.has(comment.parentCommentId))
-    .sort((left, right) => new Date(left.createdAt).getTime() - new Date(right.createdAt).getTime());
+  const commentTree = buildGuideCommentTree(comments);
+  const commentsById = commentTree.byId;
 
   function renderGuideComment(comment: GuideComment, rootId: string, isReply = false) {
     const isGuest = comment.isGuest ?? !comment.userId;
@@ -476,9 +431,9 @@ function GuidePostCard({
     const avatarLabel = isGuest ? "访" : isPaidMember ? "V" : comment.displayName.slice(0, 1).toUpperCase();
 
     return (
-      <article className={`guide-comment-item ${isReply ? "guide-comment-reply" : ""}`} key={comment.id}>
+      <article className={`guide-comment-item ${isReply ? "guide-comment-reply" : ""} ${comment.isAdmin ? "is-admin" : ""}`} key={comment.id}>
         <div className={`guide-comment-avatar ${isGuest ? "is-guest" : isPaidMember ? "is-paid" : ""}`} aria-hidden="true">
-          {!isGuest && !isPaidMember && comment.avatarUrl ? (
+          {!isGuest && comment.avatarUrl ? (
             // Public avatar URLs are supplied by the authenticated profile upload route.
             // eslint-disable-next-line @next/next/no-img-element
             <img alt="" decoding="async" loading="lazy" src={comment.avatarUrl} />
@@ -486,10 +441,14 @@ function GuidePostCard({
         </div>
         <div className="guide-comment-content">
           <header>
-            <strong>{comment.displayName}</strong>
-            <time>{formatGuideDate(comment.createdAt)}</time>
+            <strong>{comment.displayName}{comment.isAdmin ? <span className="guide-comment-admin-badge">管理员</span> : null}</strong>
+            <div className="guide-comment-meta"><time>{formatGuideDate(comment.createdAt)}</time>
+              <button aria-expanded={expandedComments.has(comment.id)} aria-label={`${comment.displayName}的留言：${commentTree.descendantCount(comment.id)} 条回复，${expandedComments.has(comment.id) ? "隐藏" : "展开"}`} disabled={!commentTree.descendantCount(comment.id)} onClick={() => setExpandedComments(current => { const next = new Set(current); if (next.has(comment.id)) next.delete(comment.id); else next.add(comment.id); return next; })} type="button">
+                {commentTree.descendantCount(comment.id)} 条回复{commentTree.descendantCount(comment.id) ? expandedComments.has(comment.id) ? " · 隐藏" : " · 展开" : ""}
+              </button>
+            </div>
           </header>
-          {comment.replyToCommentId && comment.replyToCommentId !== rootId ? (
+          {comment.replyToCommentId ? (
             <small className="guide-comment-reply-target">
               回复 {commentsById.get(comment.replyToCommentId)?.displayName ?? "留言用户"}
             </small>
@@ -505,8 +464,8 @@ function GuidePostCard({
     );
   }
 
-  function renderReplyForm(rootId: string) {
-    if (replyingTo?.rootId !== rootId) return null;
+  function renderReplyForm(targetId: string) {
+    if (replyingTo?.targetId !== targetId) return null;
     const targetName = commentsById.get(replyingTo.targetId)?.displayName ?? "留言用户";
 
     return (
@@ -533,9 +492,19 @@ function GuidePostCard({
     );
   }
 
+  function renderCommentThread(comment: GuideComment, depth = 0): ReactNode {
+    const children = commentTree.visibleChildren(comment.id, expandedComments.has(comment.id));
+    return <div className="guide-comment-thread" key={comment.id}>
+      {renderGuideComment(comment, commentTree.rootId(comment.id), depth > 0)}
+      {renderReplyForm(comment.id)}
+      {children.length ? <div className="guide-comment-replies" style={{ marginLeft: depth >= 2 ? 0 : undefined }}>{children.map(child => renderCommentThread(child, depth + 1))}</div> : null}
+    </div>;
+  }
+  const visibleComments = commentTree.visibleChildren(null, expanded);
+
   return (
     <article className={`guide-post-card ${expanded ? "expanded" : ""}`}>
-      <header className="guide-post-card-head">
+      <header className={`guide-post-card-head ${hidePostChrome ? "without-icon" : ""}`}>
         {!hidePostChrome ? (
           <div className="guide-post-number" aria-hidden="true">
             告
@@ -562,12 +531,15 @@ function GuidePostCard({
           {!hidePostChrome ? <p>{post.excerpt}</p> : null}
           {!titleOnly && post.author ? <small className="guide-post-author">作者：{post.author}</small> : null}
         </div>
-        {!titleOnly ? <time className="guide-post-date" dateTime={post.publishedAt}>
-          {formatGuideDate(post.publishedAt)}
-        </time> : null}
+        <div className="guide-post-meta">
+          {!titleOnly ? <time className="guide-post-date" dateTime={post.publishedAt}>{formatGuideDate(post.publishedAt)}</time> : null}
+          <button className="guide-post-thread-toggle" aria-expanded={expanded} onClick={toggleExpanded} type="button">
+            {commentsLoading ? "…" : commentsLoadError ? "—" : comments.length} 条留言 · {expanded ? "隐藏" : "展开"}
+          </button>
+        </div>
       </header>
 
-      {expanded ? (
+      {initialExpanded || expanded ? (
         <div className="guide-post-content">
           {post.blocks.map((block) => (
             <GuideBlock block={block} key={block.id} />
@@ -578,15 +550,6 @@ function GuidePostCard({
       {!hidePostChrome ? (
         <footer className="guide-post-actions">
           <div className="guide-post-action-buttons">
-            <button
-              aria-expanded={expanded}
-              className="guide-read-button"
-              onClick={() => setExpanded((current) => !current)}
-              type="button"
-            >
-              {expanded ? "收起内容" : "阅读全文与留言"}
-              <span aria-hidden="true">{expanded ? "↑" : "↓"}</span>
-            </button>
             <button
               aria-label={isLiked ? `取消点赞 ${post.title}` : `点赞 ${post.title}`}
               aria-pressed={isLiked}
@@ -601,27 +564,10 @@ function GuidePostCard({
         </footer>
       ) : null}
 
-      {expanded ? (
+      {expanded || visibleComments.length ? (
         <section className="guide-comment-section" aria-label={`${post.title} 留言`}>
-          <div className="guide-comment-list">
-            {rootComments.map((comment) => {
-              const replies = comments
-                .filter((candidate) => candidate.parentCommentId === comment.id)
-                .sort((left, right) => new Date(left.createdAt).getTime() - new Date(right.createdAt).getTime());
-              const hasReplyForm = replyingTo?.rootId === comment.id;
-              return (
-                <div className="guide-comment-thread" key={comment.id}>
-                  {renderGuideComment(comment, comment.id)}
-                  {replies.length || hasReplyForm ? (
-                    <div className="guide-comment-replies">
-                      {replies.map((reply) => renderGuideComment(reply, comment.id, true))}
-                      {renderReplyForm(comment.id)}
-                    </div>
-                  ) : null}
-                </div>
-              );
-            })}
-          </div>
+          <div className="guide-comment-list">{visibleComments.map(comment => renderCommentThread(comment))}</div>
+          {expanded ? <>
           <form className="guide-comment-form" onSubmit={submitComment}>
             <label>
               <span>留言</span>
@@ -635,14 +581,16 @@ function GuidePostCard({
               />
             </label>
             <div>
-              <small>{interactionMessage || "请友善交流，不要发布敏感个人信息。"}</small>
-              <button className="button primary" type="submit">
-                发布留言
+              <small>请友善交流，不要发布敏感个人信息。</small>
+              <button className="button primary" disabled={isCommentSubmitting || !commentBody.trim()} type="submit">
+                {isCommentSubmitting ? "发布中…" : "发布留言"}
               </button>
             </div>
           </form>
+          </> : null}
         </section>
       ) : null}
+      {interactionMessage ? <p className="guide-interaction-message" role="status">{interactionMessage}</p> : null}
     </article>
   );
 }

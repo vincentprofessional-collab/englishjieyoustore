@@ -1,12 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useEffect, useMemo, useRef, useState, type FormEvent } from "react";
 import styles from "./admin-bbc-article-upload.module.css";
 import { readBbcRichPaste, serializeBbcArticlePaste } from "@/lib/articles/bbc-paste-markup";
 import { adminRequest } from "@/lib/admin/request";
 import { analyzeBbcAudio } from "@/lib/admin/bbc-audio-alignment";
 import type { BbcArticle } from "@/lib/articles/bbc";
+import { parseBbcArticlePaste, splitBbcArticleParagraphs } from "@/lib/articles/bbc-article-upload";
+import { getBbcPdfQuizIssues, type BbcPdfQuiz } from "@/lib/articles/bbc-quiz";
+import { AdminBbcPdfQuizEditor } from "@/components/admin-bbc-pdf-quiz-editor";
 
 type UploadTicket = { headers: Record<string, string>; objectPath: string; uploadUrl: string };
 type SentenceUploadTicket = UploadTicket & { sentenceNo: number };
@@ -48,6 +51,14 @@ export function AdminBbcArticleUpload() {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [existingAudio, setExistingAudio] = useState<{ objectPath: string } | null>(null);
   const [articles, setArticles] = useState<{ id: string; published: boolean; title: string; year: number }[]>([]);
+  const [pdfQuiz, setPdfQuiz] = useState<BbcPdfQuiz | null>(null);
+  const [pdfBusy, setPdfBusy] = useState(false);
+  const [pdfMessage, setPdfMessage] = useState("");
+  const [pdfError, setPdfError] = useState(false);
+  const paragraphCount = useMemo(() => {
+    const parsed = parseBbcArticlePaste(text);
+    return typeof parsed === "string" ? undefined : splitBbcArticleParagraphs(parsed.english, "en").length;
+  }, [text]);
   const audioJob = useRef<{ file: File; sentenceKey: string; preparation?: AudioPreparation; objectPath?: string; uploaded: Map<number, string> } | null>(null);
 
   async function loadArticles() {
@@ -60,6 +71,7 @@ export function AdminBbcArticleUpload() {
     try {
       const result = await adminRequest(`/api/admin/bbc-articles?articleId=${encodeURIComponent(id)}`);
       setText(serializeBbcArticlePaste(result.article));
+      setPdfQuiz(result.article.quiz ?? null); setPdfMessage("");
       setEditingId(id); setAudioFile(null); setAudioProgress(0); setAudioStatus("waiting");
       audioJob.current = null;
       setExistingAudio(result.article.fullAudioUrl ? { objectPath: result.objectPath } : null);
@@ -69,11 +81,29 @@ export function AdminBbcArticleUpload() {
     finally { setBusy(false); }
   }
 
+  async function importPdf(file: File | undefined) {
+    if (!file) return;
+    setPdfBusy(true); setPdfError(false); setPdfMessage("正在读取 PDF……");
+    try {
+      const { readBbcPdf, parseBbcPdfQuiz } = await import("@/lib/admin/bbc-pdf-import");
+      const { pages, pdfSha256 } = await readBbcPdf(file, (page, total) => setPdfMessage(`正在识别 PDF 第 ${page}/${total} 页……`));
+      const quiz = parseBbcPdfQuiz(pages, { pdf: file.name, pdfSha256 });
+      setPdfQuiz(quiz);
+      setPdfMessage(`已识别 ${quiz.matching?.length ?? 0} 道段落主旨配对题、${quiz.quiz.length} 道阅读题、${quiz.exercise.length} 道填空题。`);
+    } catch (cause) { setPdfError(true); setPdfMessage(`${cause instanceof Error ? cause.message : "PDF 无法识别，请核对文件。"}当前练习未被替换。`); }
+    finally { setPdfBusy(false); }
+  }
+
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setMessage("");
     setPublishedHref("");
     setError(false);
+    if (pdfBusy) return;
+    if (pdfQuiz) {
+      const issues = getBbcPdfQuizIssues(pdfQuiz, paragraphCount);
+      if (issues.length) { setError(true); setMessage(issues.join("\n")); return; }
+    }
     if (!text.trim()) {
       setError(true);
       setMessage("请粘贴 BBC 文章全文。");
@@ -96,7 +126,7 @@ export function AdminBbcArticleUpload() {
     setAudioStatus(audioFile ? "analyzing" : "waiting");
     try {
       setMessage(audioFile ? "正在解析文章并生成词性、句子成分标注……" : "正在保存文章修改并保留原有音频时间轴……");
-      const prepared = await adminRequest("/api/admin/bbc-articles", { method: "POST", body: JSON.stringify({ action: "prepare", text }) }) as {
+      const prepared = await adminRequest("/api/admin/bbc-articles", { method: "POST", body: JSON.stringify({ action: "prepare", text, quiz: pdfQuiz }) }) as {
         article: BbcArticle;
         pastedSyntaxCount?: number;
         pastedSyntaxTotalCount?: number;
@@ -149,11 +179,12 @@ export function AdminBbcArticleUpload() {
       }
       setMessage("正在核对小音频并保存文章与语法标注……");
       const payload = await adminRequest("/api/admin/bbc-articles", {
-        body: JSON.stringify({ text, objectPath, ...(alignment ? { durationMs: alignment.durationMs, timings: alignment.timings, sentenceAudioFiles } : {}) }),
+        body: JSON.stringify({ text, objectPath, quiz: pdfQuiz, ...(alignment ? { durationMs: alignment.durationMs, timings: alignment.timings, sentenceAudioFiles } : {}) }),
         method: "PUT",
       });
 
       const articleId = typeof payload.articleId === "string" ? payload.articleId : prepared.article.id;
+      setPdfQuiz(prepared.article.quiz ?? null);
       const isPublished = payload.published === true;
       setEditingId(articleId);
       if (objectPath) setExistingAudio({ objectPath });
@@ -187,7 +218,7 @@ export function AdminBbcArticleUpload() {
         <div>
           <span>BBC · ARTICLE PUBLISHING</span>
           <h2>{editingId ? "修改 BBC 文章" : "上传 BBC 文章"}</h2>
-          <p>上传后自动整理中英文与词汇、完成词性和语法成分标注，并按原声切分独立小音频。新文章先保存为草稿，可预览后发布。</p>
+          <p>上传后自动整理中英文与词汇、完成词性和语法成分标注，并按原声切分独立小音频。添加练习 PDF 后会同时形成文章练习和口语复述的段落大意。新文章先保存为草稿，可预览后发布。</p>
         </div>
       </header>
 
@@ -216,6 +247,13 @@ export function AdminBbcArticleUpload() {
           <small>首行是标题，英文与中文逐段对应，编号词条自动归入右侧词汇栏。粘贴带格式的原文会保留波浪线；纯文本也可用 ~~词语~~ 标记波浪线。可在文章内容后追加“# 全文逐句词性+句子成分标注”及“## 句1”格式的标注。已提供的标注会严格按原文映射；词句匹配失败时会提示并阻止保存，避免退回错误的自动标注。未提供标注的句子才由系统自动分析。</small>
         </label>
         <label className={styles.full}>
+          <span>文章练习 PDF（含题目与答案）</span>
+          <input accept=".pdf,application/pdf" disabled={busy || pdfBusy} onChange={(event) => { void importPdf(event.target.files?.[0]); event.target.value = ""; }} type="file" />
+          <small>支持 BBC 原版可选中文字的 PDF，最大 30 MB。自动整理段落主旨配对、阅读理解和选词填空，并保留原题答案。</small>
+        </label>
+        {pdfMessage ? <p aria-live="polite" className={`${styles.message} ${pdfError ? styles.error : ""} ${styles.full}`}>{pdfMessage}</p> : null}
+        {pdfQuiz ? <AdminBbcPdfQuizEditor quiz={pdfQuiz} onChange={setPdfQuiz} disabled={busy || pdfBusy} paragraphCount={paragraphCount} /> : null}
+        <label className={styles.full}>
           <span>MP3 音频{existingAudio ? "（已有关联音频，可替换）" : ""}</span>
           <input accept=".mp3,audio/mpeg" disabled={busy} onChange={(event) => { setAudioFile(event.target.files?.[0] ?? null); audioJob.current = null; setAudioProgress(0); setAudioStatus("waiting"); }} type="file" />
           <small>{audioFile ? `${audioFile.name} · ${(audioFile.size / 1024 / 1024).toFixed(1)} MB` : existingAudio ? "已关联原音频；只改词汇、中文或语法时保留原有小音频。修改英文句子后请重新选择 MP3。" : "最大 200 MB；自动按句间停顿切分 MP3，并逐句上传。"}</small>
@@ -229,13 +267,13 @@ export function AdminBbcArticleUpload() {
         {message ? <p aria-live="polite" className={`${styles.message} ${error ? styles.error : ""} ${styles.full}`}>{message}</p> : null}
         {publishedHref ? <Link className={`${styles.publishedLink} ${styles.full}`} href={publishedHref} target="_blank">{publishedHref.includes("preview=draft") ? "打开草稿前端校改 ↗" : "打开文章前端 ↗"}</Link> : null}
         <div className={`${styles.actions} ${styles.full}`}>
-          {editingId ? <button className="button secondary" disabled={busy} onClick={() => { setEditingId(null); setExistingAudio(null); setText(""); setAudioFile(null); setMessage(""); setPublishedHref(""); }} type="button">新建文章</button> : null}
-          <button className="button primary" disabled={busy || !text.trim()} type="submit">
+          {editingId ? <button className="button secondary" disabled={busy || pdfBusy} onClick={() => { setEditingId(null); setExistingAudio(null); setText(""); setAudioFile(null); setPdfQuiz(null); setPdfMessage(""); setMessage(""); setPublishedHref(""); }} type="button">新建文章</button> : null}
+          <button className="button primary" disabled={busy || pdfBusy || !text.trim()} type="submit">
             {busy ? "解析并保存中…" : editingId ? "解析并保存修改" : "解析并保存为草稿"}
           </button>
         </div>
       </form>
-      {articles.length ? <section className={styles.articleList}><h3>已上传文章</h3>{articles.map((article) => <div key={article.id}><span>{article.id} · {article.title} · {article.published ? "已发布" : "草稿"}</span><button className="button secondary" disabled={busy} onClick={() => void editArticle(article.id)} type="button">修改正文</button><Link className="button secondary" href={`/articles/${article.id}${article.published ? "" : "?preview=draft"}`} target="_blank">{article.published ? "打开前端 ↗" : "前端校改 ↗"}</Link></div>)}</section> : null}
+      {articles.length ? <section className={styles.articleList}><h3>已上传文章</h3>{articles.map((article) => <div key={article.id}><span>{article.id} · {article.title} · {article.published ? "已发布" : "草稿"}</span><button className="button secondary" disabled={busy || pdfBusy} onClick={() => void editArticle(article.id)} type="button">修改正文</button><Link className="button secondary" href={`/articles/${article.id}${article.published ? "" : "?preview=draft"}`} target="_blank">{article.published ? "打开前端 ↗" : "前端校改 ↗"}</Link></div>)}</section> : null}
     </section>
   );
 }

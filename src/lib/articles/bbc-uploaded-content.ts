@@ -2,6 +2,7 @@ import "server-only";
 
 import { createClient } from "@supabase/supabase-js";
 import type { BbcArticle } from "@/lib/articles/bbc";
+import { normalizeBbcPdfQuiz } from "@/lib/articles/bbc-quiz";
 
 export type UploadedBbcArticleRecord = {
   article: BbcArticle;
@@ -35,6 +36,7 @@ function normalizeRecord(value: unknown, createdAt: unknown): UploadedBbcArticle
   }
 
   const fullAudioUrl = article.fullAudioUrl ?? article.audioUrl;
+  const quiz = article.quiz ? normalizeBbcPdfQuiz(article.quiz, article.id, article.title, article.body.length) : undefined;
   const normalizedArticle = fullAudioUrl
     ? {
         ...article,
@@ -49,7 +51,7 @@ function normalizeRecord(value: unknown, createdAt: unknown): UploadedBbcArticle
     : article;
 
   return {
-    article: { ...normalizedArticle, ...(typeof createdAt === "string" ? { contentUpdatedAt: createdAt } : {}) },
+    article: { ...normalizedArticle, quiz: typeof quiz === "object" ? quiz : undefined, ...(typeof createdAt === "string" ? { contentUpdatedAt: createdAt } : {}) },
     createdAt: typeof createdAt === "string" ? createdAt : "",
   };
 }

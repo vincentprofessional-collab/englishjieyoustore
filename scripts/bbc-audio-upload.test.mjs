@@ -367,7 +367,7 @@ test("automatic upload resumes after a clip failure without repeating recognitio
   const objectPath = "bbc/2026/260810/full-0123456789abcdef.mp3";
   const puts = [], requests = [];
   let hook = 0, analyses = 0, failSecondClip = true;
-  const react = { useEffect() {}, useRef: () => ({ current: null }), useState(initial) {
+  const react = { useEffect() {}, useMemo: (calculate) => calculate(), useRef: () => ({ current: null }), useState(initial) {
     const value = hook === 0 ? "260810-The art of farts 关于肠道排气的科学\nEnglish\n中文" : hook === 1 ? original : initial;
     hook++; return [value, () => {}];
   } };
@@ -400,6 +400,10 @@ test("automatic upload resumes after a clip failure without repeating recognitio
     if (specifier === "react") return react;
     if (specifier === "react/jsx-runtime") return { jsx, jsxs: jsx };
     if (specifier.includes("admin/request")) return { adminRequest };
+    if (specifier === "@/lib/articles/bbc-article-upload") return {
+      parseBbcArticlePaste: loadPasteParser(),
+      splitBbcArticleParagraphs: loadFunctions("../src/lib/articles/bbc-article-upload.ts", ["splitBbcArticleParagraphs"], {}),
+    };
     if (specifier.includes("bbc-audio-alignment")) return { analyzeBbcAudio: async () => { analyses++; return { durationMs: 173418, timings: fixture.timings, reviewSentenceNos: [], clips }; } };
     return {};
   } });
