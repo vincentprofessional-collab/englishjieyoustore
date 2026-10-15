@@ -18,6 +18,20 @@ const fixture = JSON.parse(fs.readFileSync(new URL("./fixtures/bbc-pdf-260727.js
 const catalog = JSON.parse(fs.readFileSync(new URL("../src/data/bbc/quiz-index.json", import.meta.url)));
 function imported() { return importer.parseBbcPdfQuiz(fixture.pages, fixture.source, "260727", "How to cope with disappointment"); }
 
+test("the actual 260824 PDF preserves all 11 source questions, including its summary choice", () => {
+  const actual = JSON.parse(fs.readFileSync(new URL("./fixtures/bbc-pdf-260824.json", import.meta.url)));
+  const quiz = importer.parseBbcPdfQuiz(actual.pages, actual.source, "260824", "How seasons affect our moods");
+  assert.equal(quiz.status, "ready");
+  assert.deepEqual([quiz.summary.length, quiz.matching.length, quiz.quiz.length, quiz.exercise.length], [1, 0, 5, 5]);
+  assert.equal(quiz.summary[0].answer, "How we feel may change depending on the season.");
+  assert.deepEqual([...quiz.quiz.map(q => q.answer)], ["autumn", "True", "dopamine", "they feel overwhelmed by spring and summer.", "True"]);
+  assert.deepEqual([...quiz.exercise.map(q => q.answer)], ["fluctuate", "triggers", "boost", "cosy", "regulate"]);
+  assert.deepEqual([...quiz.exercise[0].options], ["balmy", "boost", "cosy", "fluctuate", "recalibrates", "regulate", "triggers"]);
+  assert.equal(typeof schema.normalizeBbcPdfQuiz(quiz, "260824", "How seasons affect our moods", 5), "object");
+  quiz.summary[0].answer = "";
+  assert.equal(typeof schema.normalizeBbcPdfQuiz(quiz, "260824", "title", 5), "string", "a missing summary answer blocks publication");
+});
+
 test("the original 260727 PDF yields the same 15 prompts and source answers as the reviewed catalog", () => {
   const quiz = imported(), expected = catalog.find(record => record.articleId === "260727");
   for (const kind of ["matching", "quiz", "exercise"]) {

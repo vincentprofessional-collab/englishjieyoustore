@@ -199,7 +199,7 @@ export function BbcSentencePractice({
   const sentenceOrderBankRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const mobileQuery = window.matchMedia("(max-width: 820px), (pointer: coarse)");
+    const mobileQuery = window.matchMedia("(max-width: 820px), (pointer: coarse), (any-pointer: coarse)");
     const updateMobilePointerViewport = () => setIsMobilePointerViewport(mobileQuery.matches);
     updateMobilePointerViewport();
     if (typeof mobileQuery.addEventListener === "function") {
@@ -485,7 +485,7 @@ export function BbcSentencePractice({
 
     return (
       <span
-        className={`dictation-blank-wrap ${userAnswer ? "has-answer" : ""} ${activeTokenIndex === target.tokenIndex ? "current-word" : ""}`}
+        className={`dictation-blank-wrap ${userAnswer ? "has-answer" : ""} ${shouldRevealAnswer ? "answer-revealed" : ""} ${activeTokenIndex === target.tokenIndex ? "current-word" : ""}`}
         key={`${sentence.sentenceNo}-dictation-${target.tokenIndex}`}
       >
         <span aria-hidden="true" className="dictation-blank-measure">
@@ -603,6 +603,7 @@ export function BbcSentencePractice({
 
     event.preventDefault();
     event.stopPropagation();
+    window.getSelection?.()?.removeAllRanges();
     if (isMobilePointerViewport) {
       try {
         event.currentTarget.setPointerCapture?.(event.pointerId);
@@ -628,7 +629,9 @@ export function BbcSentencePractice({
     if (typeof window.PointerEvent !== "undefined") return;
     const touch = event.changedTouches[0];
     if (!touch) return;
+    if (event.cancelable) event.preventDefault();
     event.stopPropagation();
+    window.getSelection?.()?.removeAllRanges();
     setSentenceOrderDrag({ ...answer, pointerId: touch.identifier, input: "touch", sourceSlot });
     setSentenceOrderPointerPosition({ x: touch.clientX, y: touch.clientY });
     setSentenceOrderHover(null);
@@ -671,6 +674,10 @@ export function BbcSentencePractice({
           sentenceOrderDrag?.sourceSlot === target.tokenIndex ? "sentence-order-dragging" : ""
         } ${sentenceOrderHover === target.tokenIndex ? "hover" : ""} ${isCorrect ? "correct" : ""} ${isWrong ? "wrong" : ""}`}
         data-sentence-order-drop-target={target.tokenIndex}
+        data-no-word-hint="true"
+        onContextMenu={(event) => event.preventDefault()}
+        onCopy={(event) => event.preventDefault()}
+        onCut={(event) => event.preventDefault()}
         draggable={!isMobilePointerViewport && hasAnswer}
         key={`${sentence.sentenceNo}-order-${target.tokenIndex}`}
         onDragOver={(event) => event.preventDefault()}
@@ -739,11 +746,13 @@ export function BbcSentencePractice({
         <div
           className={`sentence-order-word-bank ${sentenceOrderHover === "bank" ? "hover" : ""}`}
           data-sentence-order-bank
+          data-no-word-hint="true"
           aria-label="词汇区域"
           role="group"
           ref={sentenceOrderBankRef}
-          onContextMenu={(event) => { if (isMobilePointerViewport) event.preventDefault(); }}
-          onCopy={(event) => { if (isMobilePointerViewport) event.preventDefault(); }}
+          onContextMenu={(event) => event.preventDefault()}
+          onCopy={(event) => event.preventDefault()}
+          onCut={(event) => event.preventDefault()}
           onDragOver={(event) => event.preventDefault()}
           onDrop={(event: ReactDragEvent<HTMLDivElement>) => {
             event.preventDefault();

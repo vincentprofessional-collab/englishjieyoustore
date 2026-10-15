@@ -118,6 +118,14 @@ export function VocabularySearchAutocomplete({
     return () => controller.abort();
   }, [deferredQuery, shouldUseRemoteSuggestions]);
 
+  function rememberSearchResults() {
+    if (pathname !== "/vocabulary" || !query.trim()) return;
+    const currentUrl = new URL(window.location.href);
+    currentUrl.searchParams.set("q", query.trim());
+    // Retain Next's history state so the browser's Back button restores this result page.
+    window.history.replaceState(window.history.state, "", currentUrl.href);
+  }
+
   return (
     <form action="/vocabulary" className="vocabulary-search" onSubmit={() => recordVocabularyLookup(query)} role="search">
       <div className="vocabulary-search-shell">
@@ -153,7 +161,7 @@ export function VocabularySearchAutocomplete({
                     return;
                   }
 
-                  setQuery("");
+                  rememberSearchResults();
                   recordVocabularyLookup(item.word);
                   router.push(detailHref);
                 }
@@ -164,7 +172,7 @@ export function VocabularySearchAutocomplete({
                   }
 
                   event.preventDefault();
-                  setQuery("");
+                  rememberSearchResults();
                   recordVocabularyLookup(item.word);
                   router.push(detailHref);
                 }
@@ -180,7 +188,7 @@ export function VocabularySearchAutocomplete({
                     tabIndex={0}
                   >
                     <Link className="autocomplete-word-link" href={detailHref} onClick={() => {
-                      setQuery("");
+                      rememberSearchResults();
                       recordVocabularyLookup(item.word);
                     }}>
                       {item.word}

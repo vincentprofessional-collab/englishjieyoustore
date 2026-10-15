@@ -28,10 +28,14 @@ const chain = [comment("root"), comment("member", "root"), comment("admin", "mem
 test("every reply has its own subtree count; admin messages survive collapsed ancestors without duplication", () => {
   const tree = model.buildGuideCommentTree(chain);
   assert.equal(tree.descendantCount("root"), 4); assert.equal(tree.descendantCount("member"), 3); assert.equal(tree.descendantCount("admin"), 2); assert.equal(tree.descendantCount("child"), 1);
-  assert.deepEqual([...tree.visibleChildren(null, false).map(item => item.id)], ["admin"]);
+  assert.deepEqual([...tree.visibleChildren(null, false).map(item => item.id)], ["root"]);
+  assert.deepEqual([...tree.visibleChildren("root", false).map(item => item.id)], ["admin"]);
   assert.deepEqual([...tree.visibleChildren("admin", false).map(item => item.id)], ["admin2"]);
   assert.deepEqual([...tree.visibleChildren("admin", true).map(item => item.id)], ["child"]);
   assert.equal(tree.rootId("admin2"), "root");
+  assert.deepEqual([...tree.descendantIds("root")], ["member", "admin", "child", "admin2"]);
+  const sameAuthorRoots = model.buildGuideCommentTree([{ ...comment("first"), userId: owner }, { ...comment("second"), userId: owner }]);
+  assert.equal(sameAuthorRoots.visibleChildren(null, false).length, 2, "each top-level conversation remains visible");
 });
 
 test("orphaned or cyclic imported threads remain finite and readable", () => {
@@ -41,41 +45,52 @@ test("orphaned or cyclic imported threads remain finite and readable", () => {
   assert.equal(tree.rootId("orphan"), "orphan");
 });
 
-test("the real post card renders administrator bodies when collapsed and independent reply controls when expanded", () => {
-  function fixture(initialExpanded = false) {
-    let cursor = 0;
-    const states = [];
-    const react = { useEffect() {}, useRef: () => ({ current: null }), useState(initial) {
-      const index = cursor++;
-      if (!(index in states)) states[index] = index === 0 ? chain : typeof initial === "function" ? initial() : initial;
-      return [states[index], value => { states[index] = typeof value === "function" ? value(states[index]) : value; }];
-    } };
-    const component = load("../src/components/guide-board.tsx", { react, "react/jsx-runtime": jsx,
-      "next/link": { __esModule: true, default: props => React.createElement("a", props) }, "next/navigation": {}, "@/lib/content/guide-post-navigation": {},
-      "@/lib/guide/posts": {}, "@/lib/membership/current-membership": membership, "@/lib/supabase/client": {}, "@/lib/visitor-identity": {}, "@/lib/guide/comments": model,
-    }, "\nexports.Card = GuidePostCard;");
-    let tree;
-    const render = () => { cursor = 0; tree = component.Card({ post: { id: postId, title: "原帖", slug: "guide-fixture", publishedAt: "2026-10-01", blocks: [], excerpt: "" }, initialExpanded, hidePostChrome: true, titleOnly: true }); return renderToStaticMarkup(tree); };
-    function find(node, predicate) {
-      if (Array.isArray(node)) return node.map(child => find(child, predicate)).find(Boolean);
-      if (!node || typeof node !== "object") return;
-      return predicate(node) ? node : find(node.props?.children, predicate);
-    }
-    return { render, click(predicate) { const button = find(tree, item => item.type === "button" && predicate(item.props)); assert.ok(button, "requested toggle exists"); button.props.onClick(); return render(); } };
+function postCardFixture(linkTitle = false) {
+  let cursor = 0;
+  const states = [];
+  const react = { useEffect() {}, useRef: () => ({ current: null }), useState(initial) {
+    const index = cursor++;
+    if (!(index in states)) states[index] = typeof initial === "function" ? initial() : initial;
+    return [states[index], value => { states[index] = typeof value === "function" ? value(states[index]) : value; }];
+  } };
+  const component = load("../src/components/guide-board.tsx", { react, "react/jsx-runtime": jsx,
+    "next/link": { __esModule: true, default: props => React.createElement("a", props) }, "next/navigation": {}, "@/lib/content/guide-post-navigation": {},
+    "@/lib/guide/posts": {}, "@/lib/membership/current-membership": membership, "@/lib/supabase/client": {}, "@/lib/visitor-identity": {}, "@/lib/guide/comments": model,
+  }, "\nexports.Card = GuidePostCard; exports.TitleCard = GuidePostTitleCard;");
+  const post = { id: postId, title: "原帖", slug: "guide-fixture", publishedAt: "2026-10-01", blocks: [], excerpt: "不在主页显示的正文摘要", author: "作者" };
+  let tree;
+  const render = () => { cursor = 0; tree = component.Card({ post, initialComments: chain, initialExpanded: true, hidePostChrome: true, linkTitle }); return renderToStaticMarkup(tree); };
+  function find(node, predicate) {
+    if (Array.isArray(node)) return node.map(child => find(child, predicate)).find(Boolean);
+    if (!node || typeof node !== "object") return;
+    return predicate(node) ? node : find(node.props?.children, predicate);
   }
-  for (const detailPage of [false, true]) {
-    const card = fixture(detailPage), collapsed = card.render();
-    assert.ok(collapsed.includes("admin正文") && collapsed.includes("admin2正文"));
-    assert.ok(!collapsed.includes("root正文") && !collapsed.includes("member正文") && !collapsed.includes("child正文"));
-    card.click(props => props.className === "guide-post-thread-toggle");
-    let expanded;
-    for (const id of ["root", "member", "admin", "child"]) expanded = card.click(props => props["aria-label"]?.startsWith(`${id}的留言：`));
-    for (const item of chain) assert.equal(expanded.split(`${item.id}正文`).length - 1, 1, item.id);
-    assert.ok(expanded.includes("4 条回复，隐藏") && expanded.includes("3 条回复，隐藏"));
-    const hidden = card.click(props => props.className === "guide-post-thread-toggle");
-    assert.ok(!hidden.includes("root正文") && !hidden.includes("member正文"));
-    assert.ok(hidden.includes("admin正文"));
-  }
+  return { render, title: () => renderToStaticMarkup(component.TitleCard({ post })), click(predicate) {
+    const button = find(tree, item => item.type === "button" && predicate(item.props));
+    assert.ok(button, "requested toggle exists"); button.props.onClick(); return render();
+  } };
+}
+
+test("homepage cards contain only the linked title and list pages never render comments", () => {
+  const card = postCardFixture(true);
+  const title = card.title();
+  assert.ok(title.includes('href="/contact/guide-fixture"') && title.includes("原帖"));
+  for (const omitted of ["正文摘要", "作者", "guide-comment", "展开正文", "<time", "<button"]) assert.ok(!title.includes(omitted), omitted);
+  const list = card.render();
+  assert.ok(!list.includes("guide-comment-section") && !list.includes("root正文") && !list.includes("admin正文"));
+});
+
+test("post details retain roots and admins; one expand reveals all descendants and collapse preserves the originals", () => {
+  const card = postCardFixture(), collapsed = card.render();
+  assert.ok(collapsed.includes("admin正文") && collapsed.includes("admin2正文"));
+  assert.ok(collapsed.includes("root正文") && !collapsed.includes("member正文") && !collapsed.includes("child正文"));
+  assert.ok(collapsed.includes("guide-comment-form") && !collapsed.includes("guide-post-thread-toggle"));
+  const expanded = card.click(props => props["aria-label"]?.startsWith("root的留言："));
+  for (const item of chain) assert.equal(expanded.split(`${item.id}正文`).length - 1, 1, item.id);
+  assert.ok(expanded.includes("4 条回复，隐藏其他回复") && expanded.includes("3 条回复，隐藏其他回复"));
+  const hidden = card.click(props => props["aria-label"]?.startsWith("root的留言："));
+  assert.ok(hidden.includes("root正文") && !hidden.includes("member正文") && !hidden.includes("child正文"));
+  assert.ok(hidden.includes("admin正文") && hidden.includes("admin2正文"));
 });
 
 function database({ admin = false, metadataFailure = false, profileFailure = false } = {}) {
@@ -116,12 +131,28 @@ function database({ admin = false, metadataFailure = false, profileFailure = fal
   return { db, tables, updates, metadata };
 }
 function routes(fixture, path = "../src/app/api/guide-comments/route.ts") {
-  return load(path, { "node:crypto": { createHash, randomUUID }, "@supabase/supabase-js": { createClient: () => fixture.db }, "next/server": { NextResponse: { json: (value, options) => new Response(JSON.stringify(value), options) } }, "@/lib/membership/current-membership": membership, "@/lib/cos/storage": {}, "@/lib/media/url": {} });
+  const comments = load("../src/lib/guide/public-comments.ts", { "server-only": {}, "@supabase/supabase-js": { createClient: () => fixture.db }, "@/lib/membership/current-membership": membership });
+  return load(path, { "node:crypto": { createHash, randomUUID }, "@supabase/supabase-js": { createClient: () => fixture.db }, "next/server": { NextResponse: { json: (value, options) => new Response(JSON.stringify(value), options) } }, "@/lib/guide/public-comments": comments, "@/lib/membership/current-membership": membership, "@/lib/cos/storage": {}, "@/lib/media/url": {} });
 }
 function request(input, token, origin = "https://fixture.invalid") {
   return { nextUrl: new URL(`https://fixture.invalid/api/guide-comments?postId=${input.postId ?? postId}`), headers: new Headers({ origin, ...(token ? { Authorization: `Bearer ${token}` } : {}) }), json: async () => input };
 }
 function payload(extra = {}) { return { postId, body: "公开留言", clientId: "local-fixture-0001", displayName: "访客", ...extra }; }
+
+test("the post page includes published public comments in its server render, before browser effects", async () => {
+  const fixture = database({ admin: true });
+  fixture.tables.guide_comments.push({ id: postId, post_id: postId, body: "随正文首屏显示的管理员回复", status: "published", user_id: owner, display_name: "旧昵称", avatar_url: null, created_at: "2026-10-01T00:00:00Z", parent_comment_id: null, reply_to_comment_id: null });
+  const comments = load("../src/lib/guide/public-comments.ts", { "server-only": {}, "@supabase/supabase-js": { createClient: () => fixture.db }, "@/lib/membership/current-membership": membership });
+  const page = load("../src/app/contact/[slug]/page.tsx", { "react/jsx-runtime": jsx, "next/navigation": { notFound() { throw new Error("not found"); } },
+    "@/components/guide-board": { GuidePostDetail: () => null }, "@/lib/guide/posts": { DEFAULT_GUIDE_POSTS: [], parseGuidePostRow: row => ({ id: row.id, slug: row.slug }) },
+    "@/lib/supabase/server": { createServerSupabaseClient: async () => fixture.db }, "@/lib/guide/comments": model, "@/lib/guide/public-comments": comments });
+  const result = await page.default({ params: Promise.resolve({ slug: "guide-fixture" }) });
+  const initial = result.props.initialComments;
+  assert.equal(initial.length, 1);
+  assert.equal(initial[0].body, "随正文首屏显示的管理员回复");
+  assert.equal(initial[0].displayName, "当前昵称"); assert.equal(initial[0].isAdmin, true);
+  assert.equal(initial[0].userId, null, "private user ids are excluded from server-rendered public comments");
+});
 
 test("a published comment is durable for an independent device; identity and administrator flags come from the server", async () => {
   const fixture = database({ admin: true }), api = routes(fixture);

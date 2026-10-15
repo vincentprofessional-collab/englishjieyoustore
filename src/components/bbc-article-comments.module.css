@@ -20,11 +20,11 @@
 .form { display: grid; gap: 12px; }
 .honeypot { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .nameField, .bodyField { display: grid; gap: 6px; color: #245d7b; font-weight: 700; }
-.identityPreview { display: flex; align-items: center; gap: 10px; min-height: 42px; color: #245d7b; }
+.identityPreview { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; min-height: 42px; min-width: 0; color: #245d7b; }
+.identityPreview strong { flex: 0 1 auto; min-width: 0; max-width: 100%; overflow-wrap: anywhere; }
 .previewAvatar { display: inline-flex; align-items: center; flex: 0 0 auto; }
 .previewAvatar .avatar { width: 38px; height: 38px; flex-basis: 38px; }
 .previewAvatar .avatarFallback { min-width: 38px; height: 38px; }
-.identityPreview small { color: #778078; }
 .nameField input, .bodyField textarea, .replyForm textarea { box-sizing: border-box; width: 100%; border: 1px solid #d8d0c2; border-radius: 10px; padding: 10px 12px; background: #fff; color: #171d19; font: inherit; }
 .bodyField textarea { min-height: 96px; resize: vertical; line-height: 1.6; }
 .formFooter { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
@@ -85,10 +85,10 @@
 .memberBadgeActive { border-color: #d6be82; background: #fff3ce; color: #76551a; }
 .memberBadgeExpired { border-color: #d7dbd8; background: #eff1ef; color: #929993; }
 
-.authorName { color: #245d7b; }
+.authorName { color: #245d7b; min-width: 0; max-width: 100%; overflow-wrap: anywhere; }
 .commentHeader time { color: #778078; font-size: 13px; }
 .comment > p, .replyComment > p { margin: 8px 0 0; line-height: 1.7; overflow-wrap: anywhere; white-space: pre-wrap; }
-.commentActions { display: flex; align-items: center; gap: 14px; margin-top: 7px; }
+.commentActions { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 14px; margin-top: 7px; }
 .commentActions button, .replyAction { border: 0; padding: 0; background: transparent; color: #245d7b; font: inherit; font-size: 13px; cursor: pointer; }
 .commentActions button:hover, .replyAction:hover { text-decoration: underline; }
 
@@ -104,7 +104,7 @@
 
 .replyForm > span { color: #66736a; font-size: 13px; }
 .replyForm textarea { min-height: 60px; resize: vertical; line-height: 1.5; }
-.replyForm > div { display: flex; justify-content: flex-end; gap: 8px; }
+.replyForm > div { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
 .replyForm button { border: 1px solid #d8d0c2; border-radius: 999px; padding: 6px 12px; background: #fff; color: #245d7b; font: inherit; cursor: pointer; }
 .replyForm button[type="submit"] { padding: 6px 14px; }
 
@@ -136,4 +136,8 @@
   .commentHeader { column-gap: 7px; row-gap: 5px; }
   .memberBadge { padding-inline: 7px; }
   .replyList { margin-left: 2ch; padding: 9px; }
+  .bodyField > span, .formFooter > span { font-size: 12px; line-height: 1.5; text-align: left; }
+  .formFooter > span { flex: 1 1 150px; min-width: 0; }
+  .formFooter button, .replyForm button { flex: 0 0 auto; font-size: clamp(11px, 3.2vw, 13px); padding: 8px 12px; white-space: nowrap; }
+  .formFooter button { margin-left: auto; }
 }

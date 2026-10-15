@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidateTag } from "next/cache";
 
 import { getExtendedVocabularyEntry } from "@/lib/vocabulary/local-vocabulary";
-import { createVocabularyVideoStorageClient, getVocabularyVideos, isEligibleVocabularyVideo, isPlayableVocabularyVideoFilename } from "@/lib/vocabulary/videos";
+import { createVocabularyVideoStorageClient, getVocabularyVideos, isEligibleVocabularyVideo, isPlayableVocabularyVideoFilename, VOCABULARY_VIDEO_FILES_TAG } from "@/lib/vocabulary/videos";
+import { toSupabaseSafeStoragePath } from "@/lib/media/url";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 
 export const dynamic = "force-dynamic";
@@ -43,8 +45,9 @@ export async function DELETE(request: NextRequest) {
     }
     const storage = createVocabularyVideoStorageClient();
     if (!storage) return NextResponse.json({ error: "视频存储服务未配置。" }, { status: 503 });
-    const { error } = await storage.storage.from("videos").remove([`vocabulary/${path}`]);
+    const { error } = await storage.storage.from("videos").remove([toSupabaseSafeStoragePath(`vocabulary/${path}`)]);
     if (error) throw error;
+    revalidateTag(VOCABULARY_VIDEO_FILES_TAG, { expire: 0 });
     return NextResponse.json({ ok: true, path }, { headers: { "Cache-Control": "no-store" } });
   } catch {
     return NextResponse.json({ error: "视频删除失败，请稍后重试。" }, { status: 503 });

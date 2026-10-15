@@ -62159,5 +62159,161 @@
         "answer": "materialise"
       }
     ]
+  },
+  {
+    "articleId": "260824",
+    "articleTitle": "How seasons affect our moods",
+    "summary": [
+      {
+        "number": 1,
+        "prompt": "为本文选择总结句。",
+        "options": [
+          "How we feel doesn't change season to season.",
+          "How we feel may change depending on the season.",
+          "How we feel will determine the weather."
+        ],
+        "answer": "How we feel may change depending on the season."
+      }
+    ],
+    "matching": [],
+    "quiz": [
+      {
+        "number": 1,
+        "options": [
+          "autumn",
+          "winter",
+          "spring"
+        ],
+        "prompt": "Which season in the UK sees leaves on the trees change from green to orange?",
+        "answer": "autumn"
+      },
+      {
+        "number": 2,
+        "options": [
+          "True",
+          "False",
+          "Not given"
+        ],
+        "prompt": "Our hormones change throughout the year.",
+        "answer": "True"
+      },
+      {
+        "number": 3,
+        "options": [
+          "cortisol",
+          "dopamine",
+          "melatonin"
+        ],
+        "prompt": "Sunny weather may increase ________ levels.",
+        "answer": "dopamine"
+      },
+      {
+        "number": 4,
+        "options": [
+          "there is less rainfall than spring and summer.",
+          "there is more sunlight than in spring and summer.",
+          "they feel overwhelmed by spring and summer."
+        ],
+        "prompt": "People may prefer autumn and winter because…",
+        "answer": "they feel overwhelmed by spring and summer."
+      },
+      {
+        "number": 5,
+        "options": [
+          "True",
+          "False",
+          "Not given"
+        ],
+        "prompt": "The writer understands that people experience seasons differently.",
+        "answer": "True"
+      }
+    ],
+    "exercise": [
+      {
+        "isSummary": true,
+        "number": 1,
+        "options": [
+          "balmy",
+          "boost",
+          "cosy",
+          "fluctuate",
+          "recalibrates",
+          "regulate",
+          "triggers"
+        ],
+        "prompt": "When we welcome a new season, our hormones ________. This",
+        "answer": "fluctuate"
+      },
+      {
+        "isSummary": true,
+        "number": 2,
+        "options": [
+          "balmy",
+          "boost",
+          "cosy",
+          "fluctuate",
+          "recalibrates",
+          "regulate",
+          "triggers"
+        ],
+        "prompt": ". This ________ some changes in how we feel and behave. Some of us feel like we need a",
+        "answer": "triggers"
+      },
+      {
+        "isSummary": true,
+        "number": 3,
+        "options": [
+          "balmy",
+          "boost",
+          "cosy",
+          "fluctuate",
+          "recalibrates",
+          "regulate",
+          "triggers"
+        ],
+        "prompt": "some changes in how we feel and behave. Some of us feel like we need a ________ in sunlight to be happy. Others find peace in",
+        "answer": "boost"
+      },
+      {
+        "isSummary": true,
+        "number": 4,
+        "options": [
+          "balmy",
+          "boost",
+          "cosy",
+          "fluctuate",
+          "recalibrates",
+          "regulate",
+          "triggers"
+        ],
+        "prompt": "in sunlight to be happy. Others find peace in ________ nights spent inside by a fireplace. Regardless of which season you prefer, it’s good to check in with yourself. This will help",
+        "answer": "cosy"
+      },
+      {
+        "isSummary": true,
+        "number": 5,
+        "options": [
+          "balmy",
+          "boost",
+          "cosy",
+          "fluctuate",
+          "recalibrates",
+          "regulate",
+          "triggers"
+        ],
+        "prompt": "nights spent inside by a fireplace. Regardless of which season you prefer, it’s good to check in with yourself. This will help ________ your emotions and direct your actions towards positivity.",
+        "answer": "regulate"
+      }
+    ],
+    "status": "ready",
+    "source": {
+      "pdf": "260824-How seasons affect our moods 四季如何影响我们的情绪.pdf",
+      "pdfSha256": "869a5af882259886ffaba33f55be9c70aeda58108edda78a8e4875c76b1f8d06",
+      "canonicalPageCount": 5,
+      "questionPage": 2,
+      "questionPageEnd": 4,
+      "answerPage": 5,
+      "answerPageEnd": 5
+    }
   }
 ]

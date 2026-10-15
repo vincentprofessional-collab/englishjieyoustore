@@ -14,7 +14,7 @@ test("浏览复习范围可以不选、按今日或整体筛选，并组合多�
   };
   const ids = (view, familiarity, categories = []) => filterBrowseReviewWords(words, progress, "小学:all", view, familiarity, now, categories).map((word) => word.id);
   assert.deepEqual(ids(null, []), ["familiar", "vague", "unfamiliar", "browsed", "fresh"]);
-  assert.deepEqual(ids("today", []), ["familiar", "vague", "browsed"]);
+  assert.deepEqual(ids("today", []), ["familiar", "vague"]);
   assert.deepEqual(ids("overall", []), ["familiar", "vague", "unfamiliar"]);
   assert.deepEqual(ids("today", ["vague", "unfamiliar"]), ["vague"]);
   assert.deepEqual(ids("overall", ["vague", "unfamiliar"]), ["vague", "unfamiliar"]);
@@ -83,4 +83,18 @@ test("每日新词播放完后只循环当天新词，单词仅有一个时也�
   assert.equal(nextBrowseLoopId(todayNew, "air", "random", () => 0), "ant");
   assert.equal(nextBrowseLoopId(["air"], "air", "sequential"), "air");
   assert.equal(nextBrowseLoopId([], "air", "sequential"), null);
+});
+
+
+test("400-word review draws cover the whole pool uniformly and never repeat the previous word", () => {
+  const words = Array.from({ length: 400 }, (_, i) => ({ id: String(i) }));
+  const counts = new Map(words.map(word => [word.id, 0]));
+  for (let i = 0; i < 40000; i++) {
+    const result = drawWeightedBrowseWord(words, {}, () => (i + .5) / 40000);
+    counts.set(result.id, counts.get(result.id) + 1);
+  }
+  assert.ok([...counts.values()].every(count => count === 100), "the first 20 have the same probability as the remaining 380");
+  for (const last of ["0", "19", "200", "399"]) for (const random of [0, .5, 1]) {
+    assert.notEqual(drawWeightedBrowseWord(words, {}, () => random, last).id, last);
+  }
 });

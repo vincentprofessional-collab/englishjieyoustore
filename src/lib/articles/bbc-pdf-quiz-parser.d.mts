@@ -5,6 +5,8 @@ export type QuestionDraft = Omit<BbcQuizQuestion, "answer">;
 export function normalizeSpace(value: string): string;
 export function normalizeAnswer(value: string): string;
 export function parseMatchingSection(lines: string[]): QuestionDraft[];
+export function parseSummaryChoice(lines: string[]): QuestionDraft[];
+export function extractSummaryChoiceAnswers(lines: PdfAnswerLine[]): { number: number; answer: string }[];
 export function findQuestionSequences(lines: string[]): QuestionMarker[][];
 export function parseQuestionGroup(lines: string[], sequence: QuestionMarker[], isExercise: boolean, groupEnd?: number): QuestionDraft[];
 export function parseSummaryExercise(lines: string[]): QuestionDraft[];

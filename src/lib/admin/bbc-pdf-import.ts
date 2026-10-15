@@ -3,7 +3,7 @@ import { getBbcPdfQuizIssues } from "@/lib/articles/bbc-quiz";
 import {
   extractMatchingAnswers, extractSummaryAnswers, findQuestionSequences, findSummaryHeadingIndex,
   normalizeAnswer, normalizeSpace, parseAnswerGroup, parseAnswerGroupsWithoutHeadings,
-  parseMatchingSection, parseQuestionGroup, parseSummaryExercise, resolveChoiceAnswer,
+  parseMatchingSection, parseSummaryChoice, extractSummaryChoiceAnswers, parseQuestionGroup, parseSummaryExercise, resolveChoiceAnswer,
   type PdfAnswerLine, type QuestionDraft,
 } from "@/lib/articles/bbc-pdf-quiz-parser.mjs";
 
@@ -16,7 +16,10 @@ export async function readBbcPdf(file: File, onProgress?: (page: number, total: 
   if (!new TextDecoder().decode(bytes.slice(0, 1024)).includes("%PDF-")) throw new Error("文件不是有效的 PDF。");
   const digest = await crypto.subtle.digest("SHA-256", bytes);
   const pdfSha256 = [...new Uint8Array(digest)].map((byte) => byte.toString(16).padStart(2, "0")).join("");
-  const pdfjs = await import("pdfjs-dist/legacy/build/pdf.mjs");
+  // Load the legacy reader unchanged so browser polyfills and the worker use
+  // the same PDF.js build, including in Safari and embedded browsers.
+  const readerUrl = "/vendor/bbc-pdf/pdf.min.mjs";
+  const pdfjs: typeof import("pdfjs-dist/legacy/build/pdf.mjs") = await import(/* webpackIgnore: true */ /* turbopackIgnore: true */ readerUrl);
   pdfjs.GlobalWorkerOptions.workerSrc = "/vendor/bbc-pdf/pdf.worker.min.mjs";
   const job = pdfjs.getDocument({ data: new Uint8Array(bytes), fontExtraProperties: true, cMapUrl: "/vendor/bbc-pdf/cmaps/", cMapPacked: true, standardFontDataUrl: "/vendor/bbc-pdf/standard_fonts/", wasmUrl: "/vendor/bbc-pdf/wasm/" });
   try {
@@ -76,6 +79,7 @@ export function parseBbcPdfQuiz(pages: BbcPdfPage[], source: { pdf: string; pdfS
   const questions = pages.slice(start, answerStart).flatMap((page) => page.lines.filter(clean).map((line) => line.full));
   const answerLines = pages.slice(answerStart).flatMap((page) => page.lines.filter(clean));
   const matching = parseMatchingSection(questions);
+  const summaryChoice = parseSummaryChoice(questions);
   const sequences = findQuestionSequences(questions);
   const summary = parseSummaryExercise(questions);
   const summaryStart = findSummaryHeadingIndex(questions);
@@ -97,7 +101,7 @@ export function parseBbcPdfQuiz(pages: BbcPdfPage[], source: { pdf: string; pdfS
     });
   }
   const result: BbcPdfQuiz = {
-    articleId, articleTitle, matching: answered(matching, matchingKey), quiz: answered(quiz, quizKey), exercise: answered(exercise, exerciseKey), status: "ready",
+    articleId, articleTitle, ...(summaryChoice.length ? { summary: answered(summaryChoice, extractSummaryChoiceAnswers(answerLines)) } : {}), matching: answered(matching, matchingKey), quiz: answered(quiz, quizKey), exercise: answered(exercise, exerciseKey), status: "ready",
     source: { ...source, canonicalPageCount: pages.length, questionPage: start + 1, questionPageEnd: answerStart, answerPage: answerStart + 1, answerPageEnd: pages.length },
   };
   if (getBbcPdfQuizIssues(result).length) result.status = "review_required";

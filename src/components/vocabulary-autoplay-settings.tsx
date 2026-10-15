@@ -37,7 +37,7 @@ export function VocabularyAutoplaySettings({ variant = "panel" }: VocabularyAuto
     ];
 
     return (
-      <section className="vocabulary-autoplay-settings panel" aria-label="自动发音设置">
+      <section className="vocabulary-autoplay-settings vocabulary-autoplay-panel" aria-label="自动发音设置">
         <header className="vocabulary-lookup-settings-heading">
           <div>
             <span>背单词</span>

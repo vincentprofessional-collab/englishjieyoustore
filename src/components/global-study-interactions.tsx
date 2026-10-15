@@ -77,7 +77,7 @@ function isInteractiveTarget(target: EventTarget | null) {
   return target instanceof HTMLElement
     ? Boolean(
         target.closest(
-          "button, input, textarea, select, [contenteditable='true'], .notes-panel, .selection-action-popover, .word-tooltip-floating, .sentence-order-dropzone, .sentence-order-word-bank, .sentence-order-chip, .sentence-order-drag-preview",
+          "button, input, textarea, select, [contenteditable='true'], [data-no-word-hint='true'], .notes-panel, .selection-action-popover, .word-tooltip-floating, .sentence-order-dropzone, .sentence-order-word-bank, .sentence-order-chip, .sentence-order-drag-preview",
         ),
       )
     : false;
@@ -151,6 +151,7 @@ function getEnglishWordAtPoint(clientX: number, clientY: number) {
   if (!textNode || textNode.nodeType !== Node.TEXT_NODE) {
     return null;
   }
+  if (textNode.parentElement?.closest("[data-no-word-hint='true']")) return null;
 
   const text = textNode.textContent ?? "";
   const wordPattern = /[A-Za-z]+(?:['’-][A-Za-z]+)?/g;

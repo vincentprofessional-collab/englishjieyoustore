@@ -391,26 +391,29 @@ export function VocabularyDetailContent({
       <EtymologySection chinese={etymologyChinese} english={etymologyEnglish} story={entry.etymologyStory} />
     </>
   ) : null;
+  const definitionsAndExamples = <>
+    {chineseDefinition}
+    <EnglishDefinitionSection entry={entry} />
+    {lookupLayout && illustration ? (
+      <VocabularyLookupDisplaySection className="vocabulary-lookup-mobile-picture" controlsEnabled id="images" title="图片">
+        <div className="vocabulary-primary-school-picture-only">{illustration}</div>
+      </VocabularyLookupDisplaySection>
+    ) : null}
+    {!lookupLayout ? <WordInflectionSection entry={entry} /> : null}
+    <UsageExamplesSection
+      key={entry.normalizedWord}
+      examples={showExamples ? usageExamples : []}
+      illustration={!lookupLayout ? illustration : null}
+    />
+  </>;
   return (
     <>
       {lookupLayout && illustration ? (
         <div className="vocabulary-definition-illustration-layout">
-          {chineseDefinition}
           <div className="vocabulary-definition-illustration">{illustration}</div>
+          {definitionsAndExamples}
         </div>
-      ) : chineseDefinition}
-      <EnglishDefinitionSection entry={entry} />
-      {lookupLayout && illustration ? (
-        <VocabularyLookupDisplaySection className="vocabulary-lookup-mobile-picture" controlsEnabled id="images" title="图片">
-          <div className="vocabulary-primary-school-picture-only">{illustration}</div>
-        </VocabularyLookupDisplaySection>
-      ) : null}
-      {!lookupLayout ? <WordInflectionSection entry={entry} /> : null}
-      <UsageExamplesSection
-        key={entry.normalizedWord}
-        examples={showExamples ? usageExamples : []}
-        illustration={!lookupLayout ? illustration : null}
-      />
+      ) : definitionsAndExamples}
       <SynonymDistinctionSection groups={synonymDistinctions} />
       {wordTreeAndEtymology}
       {lookupLayout ? <WordInflectionSection entry={entry} /> : null}

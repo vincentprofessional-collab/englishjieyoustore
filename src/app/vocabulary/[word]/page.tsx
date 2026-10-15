@@ -1,4 +1,5 @@
 import { VocabularyLookupEntry } from "@/components/vocabulary-lookup-entry";
+import { VocabularySearchAutocomplete } from "@/components/vocabulary-search-autocomplete";
 
 export const dynamic = "force-dynamic";
 
@@ -15,5 +16,8 @@ export default async function VocabularyWordPage({
   const backHref = requestedReturnTo && /^\/(?:articles|new-concept)\/[A-Za-z0-9_-]+$/.test(requestedReturnTo)
     ? requestedReturnTo
     : "/vocabulary";
-  return <VocabularyLookupEntry word={word} backHref={backHref} />;
+  return <section className="stack vocabulary-page vocabulary-lookup-landing">
+    <div className="vocabulary-hero"><VocabularySearchAutocomplete initialQuery="" autoFocus={false} /></div>
+    <VocabularyLookupEntry word={word} backHref={backHref} />
+  </section>;
 }

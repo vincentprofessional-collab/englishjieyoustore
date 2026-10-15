@@ -4,11 +4,9 @@ import { usePathname } from "next/navigation";
 import { VocabularySearchAutocomplete } from "@/components/vocabulary-search-autocomplete";
 
 function shouldHideGlobalVocabularySearch(pathname: string) {
-  if (pathname === "/vocabulary") {
-    return true;
-  }
-
-  return false;
+  const isWordDetail = /^\/vocabulary\/[^/]+$/.test(pathname)
+    && !["/vocabulary/books", "/vocabulary/pk", "/vocabulary/etymology"].includes(pathname);
+  return pathname === "/vocabulary" || isWordDetail;
 }
 
 export function GlobalVocabularySearch() {

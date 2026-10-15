@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import {
   formatProjectPrice,
-  PROJECT_ACCESS_PLANS,
   getProjectAccessRule,
   type ProjectAccessKey,
   type ProjectAccessPlan,
@@ -14,6 +13,7 @@ import {
 } from "@/lib/access-control";
 import { supabase } from "@/lib/supabase/client";
 import { DEFAULT_PAYMENT_INSTRUCTIONS, loadPaymentInstructions, savePaymentInstructions } from "@/lib/content/payment-instructions";
+import { BbcMembers } from "@/components/bbc-members";
 
 type ProjectAccessPaywallProps = {
   description?: string;
@@ -48,7 +48,9 @@ export function ProjectAccessPaywall({
 }: ProjectAccessPaywallProps) {
   const fallbackProject = getProjectAccessRule(projectKey);
   const [project, setProject] = useState<ProjectAccessRule>(fallbackProject);
-  const [plans, setPlans] = useState<ProjectAccessPlanOption[]>(PROJECT_ACCESS_PLANS);
+  const [plans, setPlans] = useState<ProjectAccessPlanOption[]>([]);
+  const [catalog, setCatalog] = useState({ projectKey: "", status: "loading" });
+  const [catalogAttempt, setCatalogAttempt] = useState(0);
   const [selectedPlan, setSelectedPlan] = useState<ProjectAccessPlan>("monthly");
   const selectedPlanOption = plans.find((plan) => plan.plan === selectedPlan) ?? plans[0];
   const [showPaymentCode, setShowPaymentCode] = useState(false);
@@ -103,7 +105,8 @@ export function ProjectAccessPaywall({
     let isMounted = true;
     const nextFallbackProject = getProjectAccessRule(projectKey);
     setProject(nextFallbackProject);
-    setPlans(PROJECT_ACCESS_PLANS);
+    setPlans([]);
+    setCatalog({ projectKey, status: "loading" });
 
     async function loadCatalog() {
       const [projectResult, plansResult] = await Promise.all([
@@ -122,6 +125,11 @@ export function ProjectAccessPaywall({
       ]);
 
       if (!isMounted) return;
+
+      if (projectResult.error || !projectResult.data || plansResult.error || !plansResult.data?.length) {
+        setCatalog({ projectKey, status: "error" });
+        return;
+      }
 
       if (!projectResult.error && projectResult.data) {
         const row = projectResult.data as ProjectRow;
@@ -150,13 +158,14 @@ export function ProjectAccessPaywall({
           nextPlans.some((plan) => plan.plan === current) ? current : nextPlans[0].plan,
         );
       }
+      setCatalog({ projectKey, status: "ready" });
     }
 
-    void loadCatalog();
+    void loadCatalog().catch(() => { if (isMounted) setCatalog({ projectKey, status: "error" }); });
     return () => {
       isMounted = false;
     };
-  }, [projectKey]);
+  }, [projectKey, catalogAttempt]);
 
   useEffect(() => {
     let isMounted = true;
@@ -210,6 +219,14 @@ export function ProjectAccessPaywall({
     setPaymentRequest(data as PaymentRequest);
     setShowPaymentCode(true);
     setIsCreatingPayment(false);
+  }
+
+  if (catalog.projectKey !== projectKey || catalog.status !== "ready") {
+    const failed = catalog.projectKey === projectKey && catalog.status === "error";
+    return <section aria-busy={!failed} aria-label="会员开通信息" className="project-access-gate">
+      <p role="status">{failed ? "会员开通信息暂时无法读取，请重试。" : "正在加载会员开通信息…"}</p>
+      {failed ? <button className="button" onClick={() => setCatalogAttempt(current => current + 1)} type="button">重新加载</button> : null}
+    </section>;
   }
 
   return (
@@ -284,6 +301,7 @@ export function ProjectAccessPaywall({
           <Image alt="微信支付收款码" height={894} priority src="/payment/wechat-pay.jpg" unoptimized width={640} />
         </section>
       ) : null}
+      {projectKey === "bbc" ? <BbcMembers /> : null}
     </section>
   );
 }

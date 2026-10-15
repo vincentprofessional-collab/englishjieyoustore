@@ -68,9 +68,9 @@ export async function VocabularyLookupEntry({ word, backHref = "/vocabulary" }: 
   const videoCandidates = isPhoneRequest ? [] : getVocabularyVideoCandidates(entry);
   const shouldLoadVideos = videoVisible && !isPhoneRequest;
   const videoData = shouldLoadVideos ? await getVocabularyVideos(entry) : null;
-  const hasVideoForVisibleSection = videoCandidates.length > 0 && (!shouldLoadVideos || Boolean(videoData?.videos.length));
+  const hasVideoForVisibleSection = !isPhoneRequest && (shouldLoadVideos ? Boolean(videoData?.videos.length) : videoCandidates.length > 0);
   const videoSection = hasVideoForVisibleSection ? (
-    <VocabularyLookupDisplaySection controlsEnabled id="video" initialVisible={videoVisible} title="视频">
+    <VocabularyLookupDisplaySection className="vocabulary-lookup-video-section" controlsEnabled id="video" initialVisible={videoVisible} title="视频">
       {videoData?.videos.length ? (
         <VocabularyVideoPlayer
           canDelete={videoData.canDelete}
@@ -89,6 +89,7 @@ export async function VocabularyLookupEntry({ word, backHref = "/vocabulary" }: 
       <VocabularyDetailShell
         backHref={backHref}
         entry={entry}
+        showBack={false}
       >
         <VocabularyDetailContent
           entry={entry}

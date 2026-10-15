@@ -12,6 +12,7 @@ export type BbcQuizRecord = {
   articleTitle: string;
   exercise: BbcQuizQuestion[];
   matching?: BbcQuizQuestion[];
+  summary?: BbcQuizQuestion[];
   quiz: BbcQuizQuestion[];
   status: "ready" | "partial" | "review_required";
 };
@@ -30,7 +31,7 @@ export type BbcPdfQuiz = BbcQuizRecord & {
 
 export function getBbcPdfQuizIssues(record: BbcQuizRecord, paragraphCount?: number) {
   const issues: string[] = [];
-  const groups = [["段落配对", record.matching ?? []], ["阅读题", record.quiz], ["填空题", record.exercise]] as const;
+  const groups = [["总结句选择", record.summary ?? []], ["段落配对", record.matching ?? []], ["阅读题", record.quiz], ["填空题", record.exercise]] as const;
   if (!groups.some(([, questions]) => questions.length)) issues.push("PDF 中没有识别到题目。");
   for (const [label, questions] of groups) {
     if (questions.length > 50) issues.push(`${label}超过 50 题。`);
@@ -76,10 +77,10 @@ export function normalizeBbcPdfQuiz(value: unknown, articleId: string, articleTi
     }
     return result;
   }
-  const matching = group(input.matching ?? []), quiz = group(input.quiz), exercise = group(input.exercise);
-  if (!matching || !quiz || !exercise) return "PDF 题目、选项或答案格式无效。";
+  const summary = group(input.summary ?? []), matching = group(input.matching ?? []), quiz = group(input.quiz), exercise = group(input.exercise);
+  if (!summary || !matching || !quiz || !exercise) return "PDF 题目、选项或答案格式无效。";
   const record: BbcPdfQuiz = {
-    articleId, articleTitle, matching, quiz, exercise, status: "ready",
+    articleId, articleTitle, ...(summary.length ? { summary } : {}), matching, quiz, exercise, status: "ready",
     source: { pdf: source.pdf.trim(), pdfSha256: source.pdfSha256, canonicalPageCount: pageCount, questionPage: source.questionPage, questionPageEnd: source.questionPageEnd, answerPage: source.answerPage, answerPageEnd: source.answerPageEnd },
   };
   const issues = getBbcPdfQuizIssues(record, paragraphCount);

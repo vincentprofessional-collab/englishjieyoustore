@@ -160,20 +160,26 @@ function GuideBlock({ block }: { block: GuideContentBlock }) {
   return block.text ? <p style={style}>{renderBlockText(block)}</p> : null;
 }
 
+function GuidePostTitleCard({ post }: { post: GuidePost }) {
+  return <article className="guide-post-card guide-post-title-only">
+    <Link className="guide-post-title-button" href={`/contact/${post.slug}`}>{post.title}</Link>
+  </article>;
+}
+
 function GuidePostCard({
   hidePostChrome = false,
+  initialComments,
   initialExpanded = false,
   linkTitle = true,
   post,
-  titleOnly = false,
 }: {
   hidePostChrome?: boolean;
+  initialComments?: GuideComment[];
   initialExpanded?: boolean;
   linkTitle?: boolean;
   post: GuidePost;
-  titleOnly?: boolean;
 }) {
-  const [comments, setComments] = useState<GuideComment[]>([]);
+  const [comments, setComments] = useState<GuideComment[]>(initialComments ?? []);
   const [commentBody, setCommentBody] = useState("");
   const [replyBody, setReplyBody] = useState("");
   const [replyingTo, setReplyingTo] = useState<{ rootId: string; targetId: string } | null>(null);
@@ -181,7 +187,7 @@ function GuidePostCard({
   const [isCommentSubmitting, setIsCommentSubmitting] = useState(false);
   const [expandedComments, setExpandedComments] = useState<Set<string>>(() => new Set());
   const [commentsLoadError, setCommentsLoadError] = useState(false);
-  const [commentsLoading, setCommentsLoading] = useState(!post.id.startsWith("default-"));
+  const [commentsLoading, setCommentsLoading] = useState(initialComments === undefined && !post.id.startsWith("default-"));
   const commentRequest = useRef<{ body: string; id: string } | null>(null);
   const replyRequest = useRef<{ body: string; target: string; id: string } | null>(null);
   const [commentIdentity, setCommentIdentity] = useState({
@@ -189,13 +195,14 @@ function GuidePostCard({
     displayName: "",
     isPaidMember: false,
   });
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(initialExpanded);
   const [interactionMessage, setInteractionMessage] = useState("");
   const [isLiked, setIsLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
   const [userId, setUserId] = useState<string | null>(null);
 
   function toggleExpanded() {
+    if (expanded) setExpandedComments(new Set());
     setExpanded((current) => !current);
   }
 
@@ -241,7 +248,7 @@ function GuidePostCard({
   }, [post.id]);
 
   useEffect(() => {
-    if (post.id.startsWith("default-")) {
+    if (linkTitle || post.id.startsWith("default-")) {
       return;
     }
 
@@ -313,7 +320,7 @@ function GuidePostCard({
       window.removeEventListener("focus", refresh);
       document.removeEventListener("visibilitychange", refresh);
     };
-  }, [post.id, userId]);
+  }, [linkTitle, post.id, userId]);
 
   function saveLocalLike(nextLiked: boolean) {
     const localLikes = readLocalRecord<boolean>(LOCAL_LIKES_KEY);
@@ -425,6 +432,18 @@ function GuidePostCard({
   const commentTree = buildGuideCommentTree(comments);
   const commentsById = commentTree.byId;
 
+  function toggleReplies(id: string) {
+    setExpandedComments(current => {
+      const next = new Set(current);
+      const collapse = next.has(id);
+      for (const branchId of [id, ...commentTree.descendantIds(id)]) {
+        if (collapse) next.delete(branchId);
+        else next.add(branchId);
+      }
+      return next;
+    });
+  }
+
   function renderGuideComment(comment: GuideComment, rootId: string, isReply = false) {
     const isGuest = comment.isGuest ?? !comment.userId;
     const isPaidMember = comment.isPaidMember ?? false;
@@ -441,18 +460,20 @@ function GuidePostCard({
         </div>
         <div className="guide-comment-content">
           <header>
-            <strong>{comment.displayName}{comment.isAdmin ? <span className="guide-comment-admin-badge">管理员</span> : null}</strong>
+            <div className="guide-comment-author">
+              <strong>{comment.displayName}{comment.isAdmin ? <span className="guide-comment-admin-badge">管理员</span> : null}</strong>
+              {comment.replyToCommentId ? (
+                <small className="guide-comment-reply-target">
+                  回复 {commentsById.get(comment.replyToCommentId)?.displayName ?? "留言用户"}
+                </small>
+              ) : null}
+            </div>
             <div className="guide-comment-meta"><time>{formatGuideDate(comment.createdAt)}</time>
-              <button aria-expanded={expandedComments.has(comment.id)} aria-label={`${comment.displayName}的留言：${commentTree.descendantCount(comment.id)} 条回复，${expandedComments.has(comment.id) ? "隐藏" : "展开"}`} disabled={!commentTree.descendantCount(comment.id)} onClick={() => setExpandedComments(current => { const next = new Set(current); if (next.has(comment.id)) next.delete(comment.id); else next.add(comment.id); return next; })} type="button">
-                {commentTree.descendantCount(comment.id)} 条回复{commentTree.descendantCount(comment.id) ? expandedComments.has(comment.id) ? " · 隐藏" : " · 展开" : ""}
+              <button aria-expanded={expandedComments.has(comment.id)} aria-label={`${comment.displayName}的留言：${commentTree.descendantCount(comment.id)} 条回复，${expandedComments.has(comment.id) ? "隐藏其他回复" : "展开所有回复"}`} disabled={!commentTree.descendantCount(comment.id)} onClick={() => toggleReplies(comment.id)} type="button">
+                {commentTree.descendantCount(comment.id)} 条回复{commentTree.descendantCount(comment.id) ? expandedComments.has(comment.id) ? " · 隐藏" : " · 展开所有回复" : ""}
               </button>
             </div>
           </header>
-          {comment.replyToCommentId ? (
-            <small className="guide-comment-reply-target">
-              回复 {commentsById.get(comment.replyToCommentId)?.displayName ?? "留言用户"}
-            </small>
-          ) : null}
           <p>{comment.body}</p>
           <button
             className="guide-comment-reply-button"
@@ -500,7 +521,7 @@ function GuidePostCard({
       {children.length ? <div className="guide-comment-replies" style={{ marginLeft: depth >= 2 ? 0 : undefined }}>{children.map(child => renderCommentThread(child, depth + 1))}</div> : null}
     </div>;
   }
-  const visibleComments = commentTree.visibleChildren(null, expanded);
+  const visibleComments = commentTree.visibleChildren(null, false);
 
   return (
     <article className={`guide-post-card ${expanded ? "expanded" : ""}`}>
@@ -529,13 +550,13 @@ function GuidePostCard({
             )
           )}
           {!hidePostChrome ? <p>{post.excerpt}</p> : null}
-          {!titleOnly && post.author ? <small className="guide-post-author">作者：{post.author}</small> : null}
+          {post.author ? <small className="guide-post-author">作者：{post.author}</small> : null}
         </div>
         <div className="guide-post-meta">
-          {!titleOnly ? <time className="guide-post-date" dateTime={post.publishedAt}>{formatGuideDate(post.publishedAt)}</time> : null}
-          <button className="guide-post-thread-toggle" aria-expanded={expanded} onClick={toggleExpanded} type="button">
-            {commentsLoading ? "…" : commentsLoadError ? "—" : comments.length} 条留言 · {expanded ? "隐藏" : "展开"}
-          </button>
+          <time className="guide-post-date" dateTime={post.publishedAt}>{formatGuideDate(post.publishedAt)}</time>
+          {linkTitle ? <button className="guide-post-thread-toggle" aria-expanded={expanded} onClick={toggleExpanded} type="button">
+            {expanded ? "收起正文" : "展开正文"}
+          </button> : null}
         </div>
       </header>
 
@@ -564,10 +585,9 @@ function GuidePostCard({
         </footer>
       ) : null}
 
-      {expanded || visibleComments.length ? (
+      {!linkTitle ? (
         <section className="guide-comment-section" aria-label={`${post.title} 留言`}>
           <div className="guide-comment-list">{visibleComments.map(comment => renderCommentThread(comment))}</div>
-          {expanded ? <>
           <form className="guide-comment-form" onSubmit={submitComment}>
             <label>
               <span>留言</span>
@@ -587,7 +607,6 @@ function GuidePostCard({
               </button>
             </div>
           </form>
-          </> : null}
         </section>
       ) : null}
       {interactionMessage ? <p className="guide-interaction-message" role="status">{interactionMessage}</p> : null}
@@ -595,10 +614,10 @@ function GuidePostCard({
   );
 }
 
-export function GuidePostDetail({ post }: { post: GuidePost }) {
+export function GuidePostDetail({ initialComments, post }: { initialComments?: GuideComment[]; post: GuidePost }) {
   return (
     <section className="stack guide-post-detail-page">
-      <GuidePostCard initialExpanded linkTitle={false} post={post} />
+      <GuidePostCard initialComments={initialComments} initialExpanded linkTitle={false} post={post} />
     </section>
   );
 }
@@ -697,13 +716,14 @@ export function GuideBoard({
       ) : null}
 
       <div className="guide-post-list">
-        {posts.map((post) => (
+        {posts.map((post) => homeLanding ? (
+          <GuidePostTitleCard key={post.id} post={post} />
+        ) : (
           <GuidePostCard
-            hidePostChrome={homeLanding || hidePostChrome}
-            initialExpanded={homeLanding ? false : initialExpanded}
+            hidePostChrome={hidePostChrome}
+            initialExpanded={initialExpanded}
             key={post.id}
             post={post}
-            titleOnly={homeLanding}
           />
         ))}
         {isLoading && isMobileHome ? (
@@ -750,13 +770,14 @@ export function GuidePostsOnNavigationPage({
   const isHandledByDedicatedBoard =
     currentPath === "/" || currentPath === "/contact" || currentPath.startsWith("/contact/");
   const isAdminRoute = currentPath === "/admin" || currentPath.startsWith("/admin/");
+  const isArticleDetail = pathname.startsWith("/articles/");
   const isNavigationPage = config?.nav?.items?.length
     ? guidePostPagePlacementOptions(config).some(
     (option) => option.path === currentPath,
       )
     : false;
 
-  if (!currentPath || isHandledByDedicatedBoard || isAdminRoute || !isNavigationPage) {
+  if (!currentPath || isHandledByDedicatedBoard || isAdminRoute || isArticleDetail || !isNavigationPage) {
     return null;
   }
 

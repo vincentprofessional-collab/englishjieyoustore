@@ -8,6 +8,8 @@ import { LearningProgressConsentPrompt } from "@/components/learning-progress-co
 import { SiteAnalyticsTracker } from "@/components/site-analytics-tracker";
 import { SiteFooter } from "@/components/site-footer";
 import { MobileBottomNav, SiteNav } from "@/components/site-nav";
+import { CommunityInboxProvider } from "@/components/community-inbox-provider";
+import { AccountProgressProvider } from "@/components/account-progress-provider";
 import { getCachedPublishedSiteChromeConfig } from "@/lib/content/site-chrome-server";
 import { DEFAULT_SITE_CHROME_CONFIG, mergeSiteChromeConfig, type SiteChromeConfig } from "@/lib/content/site-chrome";
 import { getLegacySessionMigrationScript } from "@/lib/supabase/legacy-session-migration";
@@ -59,6 +61,8 @@ export default async function RootLayout({
         ) : null}
       </head>
       <body>
+        <CommunityInboxProvider>
+        <AccountProgressProvider>
         <main className="shell">
           <Suspense fallback={<SiteNav config={navigationConfig(fallbackChrome)} />}>
             <PublishedNavigation config={siteChromeConfig} />
@@ -76,6 +80,8 @@ export default async function RootLayout({
             <PublishedPageFrame config={siteChromeConfig}>{children}</PublishedPageFrame>
           </Suspense>
         </main>
+        </AccountProgressProvider>
+        </CommunityInboxProvider>
       </body>
     </html>
   );

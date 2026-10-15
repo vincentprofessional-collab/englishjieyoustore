@@ -9,6 +9,7 @@ import {
   type ProjectAccessPlan,
 } from "@/lib/access-control";
 import { supabase } from "@/lib/supabase/client";
+import { AdminMembershipOverview } from "@/components/admin-membership-overview";
 
 type ProfileRow = {
   created_at: string | null;
@@ -217,6 +218,7 @@ export function AdminEntitlementManager() {
   }, [users, userSearch]);
   const [entitlements, setEntitlements] = useState<EntitlementRow[]>([]);
   const [paymentRequests, setPaymentRequests] = useState<PaymentRequestRow[]>([]);
+  const [membershipRefreshKey, setMembershipRefreshKey] = useState(0);
   const [accessProjects, setAccessProjects] = useState<AccessProjectRow[]>([]);
   const [accessProjectPlans, setAccessProjectPlans] = useState<AccessProjectPlanRow[]>([]);
   const [catalogDrafts, setCatalogDrafts] = useState<Record<string, CatalogDraft>>({});
@@ -260,6 +262,7 @@ export function AdminEntitlementManager() {
   }, [selectedPlan, selectedProjectPlans]);
 
   async function loadAccessData() {
+    setMembershipRefreshKey(value => value + 1);
     setIsLoading(true);
     setMessage("");
 
@@ -537,6 +540,7 @@ export function AdminEntitlementManager() {
 
       {message ? <p className="admin-form-message">{message}</p> : null}
 
+      <AdminMembershipOverview refreshKey={membershipRefreshKey} />
       <section className="admin-editor-card admin-access-catalog">
         <header className="admin-compact-heading admin-section-heading">
           <div>

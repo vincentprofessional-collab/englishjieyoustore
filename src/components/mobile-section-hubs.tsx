@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import type { ReactNode } from "react";
 import { VocabularySearchAutocomplete } from "@/components/vocabulary-search-autocomplete";
+import { UnreadReplyBadge } from "@/components/community-inbox-provider";
 
 type HubItem = { title: string; description?: string; href: string; meta?: string; featured?: boolean };
 export type MobileExamSection = { id: string; title: string; items: HubItem[]; href?: string };
@@ -15,7 +16,7 @@ function HubHeading({ title, description }: { title: string; description: string
 
 function HubLink({ item }: { item: HubItem }) {
   return <Link className={`mobile-hub-link${item.featured ? " featured" : ""}`} href={item.href}>
-    <span className="mobile-hub-link-copy"><strong>{item.title}</strong>{item.description ? <small>{item.description}</small> : null}{item.meta ? <em>{item.meta}</em> : null}</span>
+    <span className="mobile-hub-link-copy"><strong>{item.title}{item.href === "/me/posts" ? <UnreadReplyBadge /> : null}</strong>{item.description ? <small>{item.description}</small> : null}{item.meta ? <em>{item.meta}</em> : null}</span>
     <span aria-hidden="true" className="mobile-hub-chevron">›</span>
   </Link>;
 }
@@ -52,6 +53,7 @@ export function MobileTextbookHub() {
 
 export function MobileMeHub() {
   const items: HubItem[] = [
+    { title: "我发的帖子及留言", description: "查看收到的回复与自己的留言", href: "/me/posts" },
     { title: "收藏夹", description: "单词、句子、文章、错题与批注", href: "/me/favorites" },
     { title: "设置", description: "自动发音与个人偏好", href: "/me/settings" },
     { title: "学习进度", description: "查看练习记录与阶段进展", href: "/me/progress" },

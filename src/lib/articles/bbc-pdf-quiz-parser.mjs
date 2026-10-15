@@ -217,6 +217,26 @@ function parseMatchingSection(lines) {
   }));
 }
 
+function summaryChoiceSection(lines) {
+  const start = lines.findIndex((line) => /为本文选择总结句|choose (?:the |a )?(?:best )?summary sentence/i.test(line));
+  if (start < 0) return [];
+  const next = lines.findIndex((line, index) => index > start && /^(?:[一二三四五六][、.]|\d+[.．)]|Quiz\b|Exercise\b)/i.test(line.trim()));
+  return lines.slice(start, next < 0 ? lines.length : next);
+}
+
+function parseSummaryChoice(lines) {
+  const section = summaryChoiceSection(lines);
+  if (!section.length) return [];
+  const options = readLetterOptions(section.slice(1));
+  return options.length ? [{ number: 1, prompt: section[0].replace(/^[一二三四五六][、.]\s*/, "").trim(), options }] : [];
+}
+
+function extractSummaryChoiceAnswers(lines) {
+  const section = summaryChoiceSection(lines.map((line) => line.full));
+  const option = section.slice(1).map(parseLetterOptionLine).find(Boolean);
+  return option ? [{ number: 1, answer: `${option.letter}.` }] : [];
+}
+
 function findSummaryHeadingIndex(lines) {
   return lines.findIndex((line) => {
     const text = typeof line === "string" ? line : line.full;
@@ -402,4 +422,4 @@ function parseAnswerGroupsWithoutHeadings(lines, questionGroups = []) {
 }
 
 
-export { normalizeSpace, normalizeAnswer, parseMatchingSection, findQuestionSequences, parseQuestionGroup, parseSummaryExercise, findSummaryHeadingIndex, parseAnswerGroupsWithoutHeadings, parseAnswerGroup, extractSummaryAnswers, extractMatchingAnswers, resolveChoiceAnswer };
+export { normalizeSpace, normalizeAnswer, parseMatchingSection, parseSummaryChoice, extractSummaryChoiceAnswers, findQuestionSequences, parseQuestionGroup, parseSummaryExercise, findSummaryHeadingIndex, parseAnswerGroupsWithoutHeadings, parseAnswerGroup, extractSummaryAnswers, extractMatchingAnswers, resolveChoiceAnswer };

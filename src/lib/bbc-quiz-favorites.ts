@@ -1,10 +1,11 @@
 export const FAVORITE_QUESTIONS_STORAGE_KEY = "ielts-platform.favoriteQuestions";
 
+type BbcQuizKind = "summary" | "matching" | "quiz" | "exercise";
 type BbcQuizFavoriteInput = {
   answer: string;
   articleId: string;
   articleTitle: string;
-  kind: "matching" | "quiz" | "exercise";
+  kind: BbcQuizKind;
   options: string[];
   prompt: string;
   questionNumber: number;
@@ -21,14 +22,14 @@ type FavoriteQuestion = {
   prompt: string;
   questionNumber: string;
   questionType: "multiple-choice";
-  quizKind: "matching" | "quiz" | "exercise";
+  quizKind: BbcQuizKind;
   savedAt: string;
   sourceTitle: string;
   title: string;
   userAnswer: string;
 };
 
-export function getBbcQuizFavoriteId(articleId: string, kind: "matching" | "quiz" | "exercise", questionNumber: number) {
+export function getBbcQuizFavoriteId(articleId: string, kind: BbcQuizKind, questionNumber: number) {
   return `bbc-wrong:${articleId}:${kind}-${questionNumber}`;
 }
 
@@ -84,7 +85,7 @@ export function syncWrongBbcQuizFavorite(input: BbcQuizFavoriteInput) {
       quizKind: input.kind,
       savedAt: new Date().toISOString(),
       sourceTitle: `BBC ${input.articleId} ${input.articleTitle}`,
-      title: `BBC ${input.articleId} · ${input.kind === "matching" ? "配对题" : input.kind === "quiz" ? "选择题" : "选词填空"} 第${input.questionNumber}题`,
+      title: `BBC ${input.articleId} · ${input.kind === "summary" ? "总结句选择题" : input.kind === "matching" ? "配对题" : input.kind === "quiz" ? "选择题" : "选词填空"} 第${input.questionNumber}题`,
       userAnswer: input.userAnswer,
     };
 

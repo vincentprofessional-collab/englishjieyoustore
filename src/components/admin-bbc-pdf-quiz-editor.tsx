@@ -5,15 +5,15 @@ import styles from "./admin-bbc-article-upload.module.css";
 
 export function AdminBbcPdfQuizEditor({ quiz, onChange, disabled, paragraphCount }: { quiz: BbcPdfQuiz; onChange: (quiz: BbcPdfQuiz | null) => void; disabled?: boolean; paragraphCount?: number }) {
   const issues = getBbcPdfQuizIssues(quiz, paragraphCount);
-  function update(kind: "matching" | "quiz" | "exercise", index: number, change: Partial<BbcQuizQuestion> | null) {
+  function update(kind: "summary" | "matching" | "quiz" | "exercise", index: number, change: Partial<BbcQuizQuestion> | null) {
     const questions = quiz[kind] ?? [];
     onChange({ ...quiz, [kind]: change ? questions.map((question, position) => position === index ? { ...question, ...change } : question) : questions.filter((_, position) => position !== index) });
   }
   return <div className={`${styles.pdfPreview} ${styles.full}`}>
     <header><strong>{quiz.source.pdf}</strong><button className="button secondary" disabled={disabled} onClick={() => onChange(null)} type="button">移除 PDF 练习</button></header>
-    {issues.length ? <div className={styles.error} role="status"><strong>请核对以下内容后保存：</strong><ul>{issues.map((issue) => <li key={issue}>{issue}</li>)}</ul></div> : <p>题目与答案已整理完成。段落主旨将用于口语复述练习。</p>}
-    <details className={styles.pdfQuestions} open={Boolean(issues.length)}><summary>题目预览与修改 · {(quiz.matching?.length ?? 0) + quiz.quiz.length + quiz.exercise.length} 题</summary>
-      {([["matching", "段落主旨配对"], ["quiz", "阅读理解"], ["exercise", "选词填空"]] as const).map(([kind, label]) => (quiz[kind]?.length ?? 0) > 0 ? <fieldset key={kind} disabled={disabled}><legend>{label}</legend>{quiz[kind]?.map((question, index) => <details key={`${kind}-${index}`} open={!question.answer}>
+    {issues.length ? <div className={styles.error} role="status"><strong>请核对以下内容后保存：</strong><ul>{issues.map((issue) => <li key={issue}>{issue}</li>)}</ul></div> : <p>题目与答案已整理完成。{quiz.matching?.length ? "段落主旨将用于口语复述练习。" : "原文未提供段落配对题，保留现有段落大意。"}</p>}
+    <details className={styles.pdfQuestions} open={Boolean(issues.length)}><summary>题目预览与修改 · {(quiz.summary?.length ?? 0) + (quiz.matching?.length ?? 0) + quiz.quiz.length + quiz.exercise.length} 题</summary>
+      {([["summary", "总结句选择"], ["matching", "段落主旨配对"], ["quiz", "阅读理解"], ["exercise", "选词填空"]] as const).map(([kind, label]) => (quiz[kind]?.length ?? 0) > 0 ? <fieldset key={kind} disabled={disabled}><legend>{label}</legend>{quiz[kind]?.map((question, index) => <details key={`${kind}-${index}`} open={!question.answer}>
         <summary>第 {question.number} 题 · {question.prompt.length > 95 ? `${question.prompt.slice(0, 95)}…` : question.prompt}{!question.answer ? " · 缺少答案" : ""}</summary>
         <div className={styles.pdfQuestionFields}>
           <label><span>题号</span><input min={1} max={50} type="number" value={question.number} onChange={(event) => update(kind, index, { number: Number(event.target.value) })} /></label>

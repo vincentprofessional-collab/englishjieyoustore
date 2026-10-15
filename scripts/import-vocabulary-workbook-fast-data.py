@@ -13,6 +13,7 @@ from openpyxl import load_workbook
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_WORKBOOK = Path.home() / "Downloads" / "词汇总表20240307_new_带例句（含四级六级）.xlsx"
 OUTPUT_DIR = ROOT / "src" / "data" / "vocabulary"
+DEFINITION_CORRECTIONS = json.loads((OUTPUT_DIR / "definition-corrections.json").read_text(encoding="utf-8"))
 DEFINITION_SHEET = "总24555"
 EXAMPLE_PREFIX = re.compile(r"^\s*例句\s*[：:]\s*", re.I)
 TRANSLATION_PREFIX = re.compile(r"^\s*翻译\s*[：:]\s*", re.I)
@@ -112,13 +113,13 @@ def main():
         level, raw_word, phonetic, definition_cn, raw_english = map(cell_text, cells[:5])
         word = normalize_word(raw_word)
         english_definition = DEFINITION_PREFIX.sub("", raw_english).strip()
-        if not WORD_SHAPE.fullmatch(raw_word) or not word or not english_definition:
+        if not WORD_SHAPE.fullmatch(raw_word) or not word or not (definition_cn or english_definition):
             continue
         record = definitions.setdefault(word, {"definitionCn": [], "englishDefinitions": [], "level": "", "phonetic": ""})
         for value in (definition_cn,):
             if value and value not in record["definitionCn"]:
                 record["definitionCn"].append(value)
-        if english_definition not in record["englishDefinitions"]:
+        if english_definition and english_definition not in record["englishDefinitions"]:
             record["englishDefinitions"].append(english_definition)
         if not record["level"]:
             record["level"] = level
@@ -128,10 +129,10 @@ def main():
 
     details = {
         word: {
-            "definitionCn": "\n".join(record["definitionCn"]) or "释义待补充",
-            "englishDefinitions": record["englishDefinitions"],
+            "definitionCn": DEFINITION_CORRECTIONS.get(word, {}).get("definitionCn", "\n".join(record["definitionCn"])),
+            "englishDefinitions": DEFINITION_CORRECTIONS.get(word, {}).get("englishDefinitions", record["englishDefinitions"]),
             "level": record["level"],
-            "phonetic": record["phonetic"],
+            "phonetic": DEFINITION_CORRECTIONS.get(word, {}).get("phonetic", record["phonetic"]),
         }
         for word, record in definitions.items()
     }

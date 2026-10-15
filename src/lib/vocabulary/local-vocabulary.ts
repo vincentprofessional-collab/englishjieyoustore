@@ -5,6 +5,7 @@ import { supabase } from "@/lib/supabase/client";
 import excelLeftmostRootAffix from "@/data/vocabulary/excel-leftmost-root-affix.json";
 import excelRootAffixCatalog from "@/data/vocabulary/excel-root-affix-catalog.json";
 import workbookVocabularyDetails from "@/data/vocabulary/workbook-vocabulary-details.json";
+import definitionCorrections from "@/data/vocabulary/definition-corrections.json";
 import { sortVocabularyFamilyItems } from "@/lib/vocabulary/autocomplete-ranking";
 import { shouldShowAudioPronunciation } from "@/lib/audio-pronunciation";
 import { getAdjectiveBaseFormCandidates } from "./adjective-base-forms";
@@ -256,6 +257,11 @@ const WORKBOOK_VOCABULARY_DETAILS = workbookVocabularyDetails as Record<string, 
   level: string;
   phonetic: string;
 }>;
+const DEFINITION_CORRECTIONS = definitionCorrections as Record<string, {
+  definitionCn?: string;
+  englishDefinitions?: string[];
+  phonetic?: string;
+}>;
 
 let cachedVocabularyMap: Map<string, LocalVocabularyEntry> | null = null;
 let cachedVocabularyEntries: LocalVocabularyEntry[] | null = null;
@@ -296,9 +302,25 @@ export function normalizeLookupWord(value: string) {
 }
 
 function getWorkbookEnglishDefinitions(word: string) {
-  return (WORKBOOK_VOCABULARY_DETAILS[normalizeLookupWord(word)]?.englishDefinitions ?? [])
+  const normalizedWord = normalizeLookupWord(word);
+  return (DEFINITION_CORRECTIONS[normalizedWord]?.englishDefinitions ?? WORKBOOK_VOCABULARY_DETAILS[normalizedWord]?.englishDefinitions ?? [])
     .map((definition) => definition.trim())
     .filter(Boolean);
+}
+
+function getWorkbookDefinitionFields(word: string) {
+  const normalizedWord = normalizeLookupWord(word);
+  const correction = DEFINITION_CORRECTIONS[normalizedWord]?.definitionCn;
+  const lines = splitDefinition(correction ?? WORKBOOK_VOCABULARY_DETAILS[normalizedWord]?.definitionCn ?? "");
+  const definitionGroups = buildDefinitionGroups(lines);
+  const definitionLines = definitionGroups.length ? definitionGroups.map((group) => group.text) : lines;
+  return {
+    definitionCn: definitionLines.join(" / "),
+    definitionGroups,
+    definitionLines,
+    englishDefinitions: getWorkbookEnglishDefinitions(normalizedWord),
+    partOfSpeech: definitionGroups[0]?.partOfSpeech ?? "",
+  };
 }
 
 function compactDefinition(definition: string) {
@@ -920,22 +942,15 @@ function loadVocabularyEntries() {
   }
 
   cachedVocabularyEntries = [...vocabularyMap.values()].map((accumulator) => {
-    const definitionGroups = buildDefinitionGroups(accumulator.definitionLines);
+    // Legacy sources still supply roots, audio and word forms. Meanings come
+    // exclusively from the supplied workbook and explicit user corrections.
+    const definitions = getWorkbookDefinitionFields(accumulator.normalizedWord);
     const primaryEtymologyReference = accumulator.etymologyReferences[0];
     const primaryRootReference = accumulator.rootReferences[0];
 
     return {
-      definitionCn:
-        definitionGroups.length > 0
-          ? definitionGroups.map((group) => group.text).join(" / ")
-          : accumulator.definitionLines.join(" / "),
+      ...definitions,
       antonyms: accumulator.antonyms,
-      definitionGroups,
-      definitionLines:
-        definitionGroups.length > 0
-          ? definitionGroups.map((group) => group.text)
-          : accumulator.definitionLines,
-      englishDefinitions: getWorkbookEnglishDefinitions(accumulator.normalizedWord),
       englishExamples: accumulator.englishExamples,
       etymologyStory: accumulator.etymologyStory,
       etymologyReferences: accumulator.etymologyReferences,
@@ -945,7 +960,6 @@ function loadVocabularyEntries() {
       inflections: sortInflections(accumulator.inflections),
       level: accumulator.level,
       normalizedWord: accumulator.normalizedWord,
-      partOfSpeech: definitionGroups[0]?.partOfSpeech ?? "词性待补充",
       phonetic: accumulator.phonetic,
       reviewNotes: accumulator.reviewNotes,
       root: primaryRootReference?.root ?? "",
@@ -1618,7 +1632,7 @@ function findVocabularyEntry(value: string) {
 
     const ecdictEntry = ecdictMap.get(candidate);
     if (ecdictEntry) {
-      return createEcdictVocabularyEntry(ecdictEntry);
+      return { ...createEcdictVocabularyEntry(ecdictEntry), ...getWorkbookDefinitionFields(candidate) };
     }
   }
 
@@ -1626,7 +1640,7 @@ function findVocabularyEntry(value: string) {
 }
 
 export function getVocabularyHint(word: string): LocalVocabularyHint | null {
-  return findVocabularyEntry(word);
+  return getVocabularyEntry(word);
 }
 
 const irregularVocabularyBaseForms: Record<string, string> = {
@@ -1891,7 +1905,7 @@ export function getVocabularyEntry(word: string) {
 
   const entry = findVocabularyEntry(normalizedWord);
   return entry
-    ? { ...entry, englishDefinitions: getWorkbookEnglishDefinitions(entry.normalizedWord) }
+    ? { ...entry, ...getWorkbookDefinitionFields(entry.normalizedWord) }
     : null;
 }
 
@@ -1904,10 +1918,10 @@ export async function getExtendedVocabularyEntry(word: string) {
 
   const candidates = getVocabularyLookupCandidates(normalizedWord);
   const localEntry = getVocabularyEntry(normalizedWord);
-  // The imported workbook is the source of truth for English definitions and
+  // The imported workbook is the source of truth for all definitions and
   // already contains the vocabulary metadata needed by the learning page.
   // Use it directly instead of waiting on a dictionary/database request.
-  if (localEntry && getWorkbookEnglishDefinitions(localEntry.normalizedWord).length > 0) {
+  if (localEntry) {
     return localEntry;
   }
 
@@ -1917,14 +1931,14 @@ export async function getExtendedVocabularyEntry(word: string) {
     : localEntry ?? databaseEntry;
 
   if (primaryEntry?.englishDefinitions.length) {
-    return { ...primaryEntry, englishDefinitions: getWorkbookEnglishDefinitions(primaryEntry.normalizedWord) };
+    return { ...primaryEntry, ...getWorkbookDefinitionFields(primaryEntry.normalizedWord) };
   }
   const dictionaryEntry = await getFreeDictionaryVocabularyEntry(candidates);
   const combinedEntry = primaryEntry && dictionaryEntry
     ? mergeVocabularyEntries(primaryEntry, dictionaryEntry)
     : primaryEntry ?? dictionaryEntry;
   return combinedEntry
-    ? { ...combinedEntry, englishDefinitions: getWorkbookEnglishDefinitions(combinedEntry.normalizedWord) }
+    ? { ...combinedEntry, ...getWorkbookDefinitionFields(combinedEntry.normalizedWord) }
     : null;
 }
 
@@ -1977,6 +1991,8 @@ export async function getDatabaseVocabularyAutocompleteItems({
 
   return (data as DatabaseVocabularyEntry[])
     .map(createDatabaseVocabularyEntry)
+    .map((entry) => ({ ...entry, ...getWorkbookDefinitionFields(entry.normalizedWord) }))
+    .filter((entry) => !isChineseQuery || entry.definitionCn.toLowerCase().replace(/\s+/g, "").includes(normalizedQuery))
     .map((entry) => ({
       definition: entry.definitionLines[0] ?? entry.definitionCn,
       definitionSearchText: entry.definitionCn.toLowerCase().replace(/\s+/g, ""),

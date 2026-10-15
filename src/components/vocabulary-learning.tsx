@@ -18,6 +18,7 @@ import Link from "next/link";
 import { VocabularyDetailShell } from "@/components/vocabulary-detail-shell";
 import { VocabularyDetailContent, useVocabularyIllustration } from "@/components/vocabulary-detail-content";
 import { isPhoneUserAgent } from "@/lib/vocabulary/lookup-display-preferences";
+import { ACCOUNT_PROGRESS_EVENT } from "@/lib/learning/account-progress";
 import { VocabularyFavoriteButton } from "@/components/vocabulary-favorite-button";
 import { VocabularyInlinePronunciation } from "@/components/vocabulary-pronunciation";
 import { VocabularyLookupDisplaySection } from "@/components/vocabulary-lookup-display-section";
@@ -986,8 +987,7 @@ function LearningRoundExamples({ word }: { word: LearningWord }) {
 
 function LearningRoundPicture({ word }: { word: LearningWord }) {
   const picture = useVocabularyIllustration(word.level === "小学" ? word.word : null, false);
-  return picture ? <section aria-label="看图识词" className="vocabulary-learning-round-picture">
-    <h3>看图识词</h3>
+  return picture ? <section aria-label="词汇图片" className="vocabulary-learning-round-picture">
     {picture}
   </section> : null;
 }
@@ -1312,9 +1312,9 @@ function chooseNextWord(
         && (settings.reviewFamiliarities.length === 0 || settings.modes.length === 0)) return null;
       const allFamiliaritiesSelected = (["familiar", "vague", "unfamiliar"] as const).every((value) => settings.reviewFamiliarities.includes(value));
       const selected = filterBrowseReviewWords(
-        allFamiliaritiesSelected && settings.scope === "all" ? words : preferredWords, store, browseKey, settings.reviewView, settings.reviewFamiliarities, now, settings.modes,
+        settings.scope === "all" ? words : preferredWords, store, browseKey, settings.reviewView, settings.reviewFamiliarities, now, settings.modes,
       );
-      if (allFamiliaritiesSelected) return drawWeightedBrowseWord(selected, store);
+      if (settings.reviewView !== null || allFamiliaritiesSelected) return drawWeightedBrowseWord(selected, store, Math.random, excludeId);
       const nextId = nextBrowseLoopId(selected.map((word) => word.id), excludeId, order);
       return selected.find((word) => word.id === nextId) ?? (earlierWords.length
         ? chooseNextWord(earlierWords, store, now, order, excludeId, { ...settings, scope: "core" }, browseKey, "生词本")
@@ -1385,7 +1385,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
   const [browseSecondsRemaining, setBrowseSecondsRemaining] = useState<number | null>(null);
   const browseCountdownPausedRef = useRef(false);
   const [settingsDraft, setSettingsDraft] = useState<StudySettingsDraft>(() => toSettingsDraft(DEFAULT_STUDY_SETTINGS));
-  const weightedBrowse = settingsDraft.method === "browse" && (["familiar", "vague", "unfamiliar"] as const).every((value) => settingsDraft.reviewFamiliarities.includes(value));
+  const weightedBrowse = settingsDraft.method === "browse" && (settingsDraft.reviewView !== null || (["familiar", "vague", "unfamiliar"] as const).every((value) => settingsDraft.reviewFamiliarities.includes(value)));
   const reactionOptionsRef = useRef<HTMLDivElement | null>(null);
   const [favoriteWords, setFavoriteWords] = useState<FavoriteLearningWord[]>([]);
   const [customBookOpen, setCustomBookOpen] = useState(false);
@@ -1569,6 +1569,21 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
       setHydrated(true);
     }
   }, [books]);
+
+  useEffect(() => {
+    const refreshAccountProgress = () => {
+      try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? "{}");
+        setProgress(restoreProgress(saved.progress ?? {}, false));
+        const activity = JSON.parse(localStorage.getItem(DAILY_ACTIVITY_STORAGE_KEY) ?? "null");
+        if (activity?.date === localStudyDate() && Array.isArray(activity.events)) setDailyActivity(activity);
+        const groups = JSON.parse(localStorage.getItem(GROUP_PROGRESS_KEY) ?? "{}");
+        setNextGroupByBook(groups);
+      } catch { /* A failed sync must not interrupt the active word. */ }
+    };
+    window.addEventListener(ACCOUNT_PROGRESS_EVENT, refreshAccountProgress);
+    return () => window.removeEventListener(ACCOUNT_PROGRESS_EVENT, refreshAccountProgress);
+  }, []);
 
   useEffect(() => {
     const today = localStudyDate();
@@ -1807,9 +1822,11 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
       : words.filter((word) => word.level === selectedBook),
     [currentSettings.scope, selectedBook, words],
   );
-  const activeStudyWords = useMemo(() => groupBrowseIds
+  const activeStudyWords = useMemo(() => currentSettings.method === "browse" && currentSettings.reviewView !== null
+    ? visibleWords
+    : groupBrowseIds
     ? visibleWords.filter((word) => groupBrowseIds.includes(word.id))
-    : selectVocabularyStudyGroup(visibleWords, currentSettings.wordGroups[currentSettings.scope]), [currentSettings.scope, currentSettings.wordGroups, groupBrowseIds, visibleWords]);
+    : selectVocabularyStudyGroup(visibleWords, currentSettings.wordGroups[currentSettings.scope]), [currentSettings.method, currentSettings.reviewView, currentSettings.scope, currentSettings.wordGroups, groupBrowseIds, visibleWords]);
   const startClassifiedGroup = useCallback((settings: StudySettings, sourceWords: LearningWord[], book: BookSelectionKey) => {
     if (!sourceWords.length) return false;
     const groupCount = Math.max(1, Math.ceil(sourceWords.length / GROUP_SIZE));
@@ -3222,9 +3239,9 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
           >
             <div className="vocabulary-learning-settings-head">
             {setupMode === "single" ? <label className="vocabulary-learning-settings-book-select">
-              <span>词汇</span>
+              <span>选择词汇表</span>
               <select
-                aria-label="选择词汇"
+                aria-label="选择词汇表"
                 onChange={(event) => selectWord(event.target.value as BookSelectionKey)}
                 value={settingsOpenFor}
               >
@@ -3270,14 +3287,14 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
                 return <div className="vocabulary-learning-scope-choice" key={scope}>
                   <label>
                     <input checked={settingsDraft.scope === scope} name="study-scope" onChange={() => setSettingsDraft((current) => ({ ...current, scope }))} type="radio" />
-                    <span>{title}<small>{count.toLocaleString()}</small>{group !== null ? <small className="vocabulary-study-group-label">第 {group + 1} 组 · {Math.min(GROUP_SIZE, count - group * GROUP_SIZE)} 词</small> : null}</span>
+                    <span>{title}<small>{count.toLocaleString()}</small>{group !== null ? <small className="vocabulary-study-group-label">第 {group + 1} 组</small> : null}</span>
                   </label>
                   <select aria-label={`${title}选择词汇组`} className="vocabulary-study-group-select" disabled={!groups || loading} onChange={(event) => {
                     const value = event.currentTarget.value === "" ? null : Number(event.currentTarget.value);
                     setSettingsDraft((current) => ({ ...current, scope, wordGroups: { ...current.wordGroups, [scope]: value } }));
                   }} title={`${title}：每组 ${GROUP_SIZE} 词，共 ${groups} 组`} value={group ?? ""}>
                     <option value="">全部组（{groups} 组）</option>
-                    {Array.from({ length: groups }, (_, index) => <option key={index} value={index}>第 {index + 1} 组（{Math.min(GROUP_SIZE, count - index * GROUP_SIZE)} 词）</option>)}
+                    {Array.from({ length: groups }, (_, index) => <option key={index} value={index}>第 {index + 1} 组</option>)}
                   </select>
                   <span aria-hidden="true" className="vocabulary-study-group-arrow">▾</span>
                 </div>;
@@ -3366,7 +3383,6 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
                 <legend>记忆顺序</legend>
                 <label><input checked={!weightedBrowse && settingsDraft.order === "sequential"} disabled={weightedBrowse} name="study-order" onChange={() => setSettingsDraft((current) => ({ ...current, order: "sequential" }))} type="radio" />顺序</label>
                 <label><input checked={weightedBrowse || settingsDraft.order === "random"} name="study-order" onChange={() => setSettingsDraft((current) => ({ ...current, order: "random" }))} type="radio" />乱序</label>
-                {weightedBrowse ? <small>三项全选时随机浏览：模糊多 10%，生僻多 20%。</small> : null}
               </fieldset>
               <fieldset className="vocabulary-learning-settings-options">
                 <legend>发音设置</legend>

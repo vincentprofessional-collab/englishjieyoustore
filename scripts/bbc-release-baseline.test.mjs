@@ -66,7 +66,10 @@ test("BBC source quiz and wrong-answer collection stay in the release", () => {
   const readyRecords = quizCatalog.filter((record) => record.status === "ready");
   const favoriteSource = read("src/lib/bbc-quiz-favorites.ts");
 
-  assert.equal(readyRecords.length, 475);
+  assert.equal(readyRecords.length, 476);
+  const suppliedPdf = quizCatalog.find((record) => record.articleId === "260824");
+  assert.equal(suppliedPdf?.status, "ready");
+  assert.deepEqual([suppliedPdf.summary.length, suppliedPdf.quiz.length, suppliedPdf.exercise.length], [1, 5, 5]);
   assert.equal(quizCatalog.find((record) => record.articleId === "260727")?.status, "partial");
   assert.match(favoriteSource, /ielts-platform\.favoriteQuestions/);
   assert.match(favoriteSource, /bbc-wrong:\$\{articleId\}:\$\{kind\}-\$\{questionNumber\}/);

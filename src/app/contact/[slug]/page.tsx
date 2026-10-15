@@ -6,6 +6,8 @@ import {
   parseGuidePostRow,
 } from "@/lib/guide/posts";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { parseGuideComment, type GuideComment } from "@/lib/guide/comments";
+import { loadPublicGuideComments, serviceClient } from "@/lib/guide/public-comments";
 
 export const dynamic = "force-dynamic";
 
@@ -36,5 +38,15 @@ export default async function GuidePostPage({
     notFound();
   }
 
-  return <GuidePostDetail post={post} />;
+  let initialComments: GuideComment[] | undefined;
+  if (!post.id.startsWith("default-")) {
+    try {
+      const db = serviceClient();
+      if (db) initialComments = (await loadPublicGuideComments(db, post.id)).map(parseGuideComment);
+    } catch {
+      // Keep the article available; the client retries when comments are temporarily unavailable.
+    }
+  }
+
+  return <GuidePostDetail initialComments={initialComments} post={post} />;
 }

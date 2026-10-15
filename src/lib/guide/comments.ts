@@ -61,15 +61,18 @@ export function buildGuideCommentTree(comments: GuideComment[]) {
   function descendantCount(id: string): number {
     return (children.get(id) ?? []).reduce((total, child) => total + 1 + descendantCount(child.id), 0);
   }
+  function descendantIds(id: string): string[] {
+    return (children.get(id) ?? []).flatMap(child => [child.id, ...descendantIds(child.id)]);
+  }
   function rootId(id: string): string {
     let root = id;
     while (parents.get(root)) root = parents.get(root)!;
     return root;
   }
-  /** Administrator messages remain visible through any collapsed ancestor. */
+  /** Keep the original post, and project administrator replies through collapsed ancestors. */
   function visibleChildren(parent: string | null, expanded: boolean): GuideComment[] {
-    return (children.get(parent) ?? []).flatMap(comment => expanded || comment.isAdmin
+    return (children.get(parent) ?? []).flatMap(comment => parent === null || expanded || comment.isAdmin
       ? [comment] : visibleChildren(comment.id, false));
   }
-  return { byId, descendantCount, rootId, visibleChildren };
+  return { byId, descendantCount, descendantIds, rootId, visibleChildren };
 }

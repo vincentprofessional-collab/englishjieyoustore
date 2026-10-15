@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { UnreadReplyBadge } from "@/components/community-inbox-provider";
 import type {
   SiteChromeConfig,
   SiteChromeNavItem,
@@ -183,6 +184,7 @@ export function SiteNav({ config: initialConfig }: { config: SiteChromeConfig })
           <div className="nav-menu" key={item.id}>
             <Link className="nav-tab nav-link-tab" href={firstEnabledHref(item)}>
               {item.label}
+              {item.id === "me" ? <UnreadReplyBadge /> : null}
             </Link>
           </div>
         ))}
@@ -270,6 +272,7 @@ export function MobileBottomNav() {
             <Link aria-current={active ? "page" : undefined} className={active ? "active" : ""} href={item.href} key={item.id}>
               <MobileNavIcon id={item.id} />
               <span>{item.label}</span>
+              {item.id === "me" ? <UnreadReplyBadge /> : null}
             </Link>
           );
         })}

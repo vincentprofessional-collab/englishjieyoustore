@@ -101,7 +101,7 @@ export function PrimarySchoolVocabularyImageAdmin() {
     setMessage("");
     try {
       await uploadOne(word, file, await getAdminToken());
-      setMessage(`已保存 ${word} 的图片。`);
+      setMessage(`已保存 ${word} 的图片，并自动添加词汇标签。`);
       setMessageIsError(false);
     } catch (error) {
       setMessage(error instanceof Error ? error.message : "图片上传失败。");
@@ -185,7 +185,7 @@ export function PrimarySchoolVocabularyImageAdmin() {
         <div>
           <span className={styles.kicker}>词汇图卡 · 小学</span>
           <h2>小学词汇图片</h2>
-          <p>共 {primarySchoolVocabulary.length} 个词条。建议选用童趣、色彩明快、主体清晰的插画；上传时会压缩为最长边 512 像素的 WebP。</p>
+          <p>共 {primarySchoolVocabulary.length} 个词条。上传或替换图片后，会自动在下方添加黄色词汇标签，并保存为 512 像素的 WebP 图卡。</p>
         </div>
         <label className={styles.bulkButton}>
           {bulkProgress ? `批量上传 ${bulkProgress.completed}/${bulkProgress.total}` : "批量上传图片"}

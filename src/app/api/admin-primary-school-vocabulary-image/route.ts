@@ -71,7 +71,7 @@ export async function POST(request: NextRequest) {
   }
 
   let bytes: Buffer;
-  try { bytes = await encodeVocabularyImage(Buffer.from(await file.arrayBuffer())); }
+  try { bytes = await encodeVocabularyImage(Buffer.from(await file.arrayBuffer()), normalizePrimarySchoolVocabularyWord(String(formData.get("word")))!); }
   catch { return NextResponse.json({ error: "无法处理这张图片，请确认文件是有效的 JPG、PNG 或 WebP。" }, { status: 400 }); }
 
   try {

@@ -89,7 +89,7 @@ export function AdminBbcArticleUpload() {
       const { pages, pdfSha256 } = await readBbcPdf(file, (page, total) => setPdfMessage(`正在识别 PDF 第 ${page}/${total} 页……`));
       const quiz = parseBbcPdfQuiz(pages, { pdf: file.name, pdfSha256 });
       setPdfQuiz(quiz);
-      setPdfMessage(`已识别 ${quiz.matching?.length ?? 0} 道段落主旨配对题、${quiz.quiz.length} 道阅读题、${quiz.exercise.length} 道填空题。`);
+      setPdfMessage(`已识别 ${quiz.summary?.length ?? 0} 道总结句选择题、${quiz.matching?.length ?? 0} 道段落主旨配对题、${quiz.quiz.length} 道阅读题、${quiz.exercise.length} 道填空题。`);
     } catch (cause) { setPdfError(true); setPdfMessage(`${cause instanceof Error ? cause.message : "PDF 无法识别，请核对文件。"}当前练习未被替换。`); }
     finally { setPdfBusy(false); }
   }

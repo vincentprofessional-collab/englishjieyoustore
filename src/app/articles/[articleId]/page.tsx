@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 import ArticleDetailPage from "@/components/bbc-article-detail-page";
 import { BbcArticleComments } from "@/components/bbc-article-comments";
-import { GuideBoard } from "@/components/guide-board";
 import { ProjectAccessPaywall } from "@/components/project-access-paywall";
 import { BBC_ARTICLES, getBbcArticleById } from "@/lib/articles/bbc";
 import { getUploadedBbcArticle, getUploadedBbcArticleForAdmin } from "@/lib/articles/bbc-uploaded-content";
@@ -68,16 +67,6 @@ export default async function ArticlePage({
       <>
         <ProjectAccessPaywall projectKey="bbc" />
         <BbcArticleComments articleId={article.id} />
-        <div className="guide-posts-under-page guide-article-posts">
-          <GuideBoard
-            compact
-            eyebrow="PAGE POSTS · 页面帖子"
-            initialExpanded
-            placementPath={`/articles?year=${article.year}`}
-            title="页面帖子"
-            emptyMessage="这个页面还没有发布帖子。"
-          />
-        </div>
       </>
     );
   }

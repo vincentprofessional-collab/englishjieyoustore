@@ -30,12 +30,10 @@ export function filterBrowseReviewWords<T extends { id: string }>(
     const entry = progress[word.id];
     if (!entry) return false;
     const reviewedAt = entry.lastReviewedAt ?? null;
-    const browsedAt = entry.browseByBook?.[browseKey]?.browseLastSeenAt ?? null;
     const familiarity = entry.familiarity ?? (entry.lastOutcome === "unscored" ? null : entry.lastOutcome);
     if (familiarities.length > 0 && (!familiarity || !familiarities.includes(familiarity))) return false;
     if (categories.length > 0 && (reviewedAt === null || !categories.includes(entry.lastCategory ?? "reading"))) return false;
-    if (view === "today") return (reviewedAt !== null && new Date(reviewedAt).toDateString() === today)
-      || (browsedAt !== null && new Date(browsedAt).toDateString() === today);
+    if (view === "today") return reviewedAt !== null && new Date(reviewedAt).toDateString() === today;
     if (view === "overall") return reviewedAt !== null;
     return reviewedAt !== null;
   });
@@ -45,8 +43,10 @@ export function drawWeightedBrowseWord<T extends { id: string }>(
   words: readonly T[],
   progress: Record<string, BrowseProgress>,
   random: () => number = Math.random,
+  excludeId: string | null = null,
 ): T | null {
-  const candidates = [...new Map(words.map((word) => [word.id, word])).values()];
+  const all = [...new Map(words.map((word) => [word.id, word])).values()];
+  const candidates = all.length > 1 ? all.filter(word => word.id !== excludeId) : all;
   const weight = (word: T) => {
     const entry = progress[word.id];
     const familiarity = entry?.familiarity ?? entry?.lastOutcome;

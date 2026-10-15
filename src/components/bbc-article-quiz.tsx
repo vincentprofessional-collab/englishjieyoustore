@@ -24,7 +24,7 @@ export function getBbcArticleMatchingParagraphGists(articleId: string, uploadedQ
   return gists;
 }
 
-type QuestionKind = "matching" | "quiz" | "exercise";
+type QuestionKind = "summary" | "matching" | "quiz" | "exercise";
 
 function optionLabel(question: Question) {
   const index = question.options?.indexOf(question.answer) ?? -1;
@@ -622,6 +622,9 @@ export function BbcArticleQuiz({ articleId, articleTitle, uploadedQuiz }: { arti
 
   const title = articleTitle ?? record.articleTitle;
   const matching = record.matching ?? [];
+  const summary = record.summary ?? [];
+  const sectionNumbers = ["一", "二", "三", "四"];
+  const prefixSections = Number(summary.length > 0) + Number(matching.length > 0);
 
   return (
     <details className={`${styles.panel} ${styles.collapsible}`} id="bbc-article-quiz">
@@ -630,20 +633,24 @@ export function BbcArticleQuiz({ articleId, articleTitle, uploadedQuiz }: { arti
         <small>点击展开或收起</small>
       </summary>
       <div className={styles.quizContent}>
+      {summary.length ? <section className={styles.group} aria-labelledby={`${articleId}-summary-heading`}>
+        <h3 id={`${articleId}-summary-heading`}>一、为本文选择总结句</h3>
+        {summary.map((question) => <ChoiceQuestion key={`summary-${question.number}`} articleId={articleId} articleTitle={title} displayNumber={question.number} kind="summary" question={question} />)}
+      </section> : null}
       {matching.length ? (
         <section className={styles.group} aria-labelledby={`${articleId}-matching-heading`}>
-          <h3 id={`${articleId}-matching-heading`}>一、将标题和段落配对</h3>
+          <h3 id={`${articleId}-matching-heading`}>{sectionNumbers[Number(summary.length > 0)]}、将标题和段落配对</h3>
           <MatchingQuestionGroup articleId={articleId} articleTitle={title} questions={matching} />
         </section>
       ) : null}
       {record.quiz.length ? (
         <section className={styles.group} aria-labelledby={`${articleId}-quiz-heading`}>
-          <h3 id={`${articleId}-quiz-heading`}>{matching.length ? "二" : "一"}、根据文章内容回答问题</h3>
+          <h3 id={`${articleId}-quiz-heading`}>{sectionNumbers[prefixSections]}、根据文章内容回答问题</h3>
           {record.quiz.map((question) => <ChoiceQuestion key={`quiz-${question.number}`} articleId={articleId} articleTitle={title} displayNumber={question.number} kind="quiz" question={question} />)}
         </section>
       ) : null}
       {record.exercise.length ? <section className={styles.group} aria-labelledby={`${articleId}-exercise-heading`}>
-        <h3 id={`${articleId}-exercise-heading`}>{matching.length ? "三" : "二"}、选词填空</h3>
+        <h3 id={`${articleId}-exercise-heading`}>{sectionNumbers[prefixSections + Number(record.quiz.length > 0)]}、选词填空</h3>
         {record.exercise[0]?.isSummary ? (
           <SummaryFillBlankQuestion articleId={articleId} articleTitle={title} questions={record.exercise} />
       ) : (

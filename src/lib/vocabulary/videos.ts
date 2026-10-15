@@ -1,8 +1,9 @@
 import "server-only";
+import { unstable_cache } from "next/cache";
 
 import { createClient } from "@supabase/supabase-js";
 import catalogData from "@/data/vocabulary/video-catalog.json";
-import { getVocabularyVideoMediaUrl } from "@/lib/media/url";
+import { getVocabularyVideoMediaUrl, toSupabaseSafeStoragePath } from "@/lib/media/url";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import type { LocalVocabularyEntry } from "@/lib/vocabulary/local-vocabulary";
 import { getAllVocabularyEntries } from "@/lib/vocabulary/local-vocabulary";
@@ -113,26 +114,50 @@ export function createVocabularyVideoStorageClient() {
   return url && key ? createClient(url, key, { auth: { autoRefreshToken: false, persistSession: false } }) : null;
 }
 
+export const VOCABULARY_VIDEO_FILES_TAG = "vocabulary-video-files";
+// Non-ASCII file names are stored as root-level u- aliases, not under the folder.
+const encodedStoredNames = unstable_cache(async () => {
+  const storage = createVocabularyVideoStorageClient();
+  if (!storage) throw new Error("Video storage is unavailable");
+  const names: string[] = [];
+  for (let offset = 0; ; offset += 1000) {
+    const { data, error } = await storage.storage.from("videos").list("", {
+      limit: 1000, offset, search: "u-dm9jYWJ1bGFyeS", sortBy: { column: "name", order: "asc" },
+    });
+    if (error) throw error;
+    for (const file of data ?? []) if (file.id) names.push(file.name);
+    if ((data?.length ?? 0) < 1000) return names;
+  }
+}, ["vocabulary-video-encoded-files-v1"], { revalidate: 300, tags: [VOCABULARY_VIDEO_FILES_TAG] });
+
+// Storage search matches file-name prefixes, while a vocabulary word may be
+// anywhere in a clip's name. Cache the folder inventory across all words.
+const plainStoredNames = unstable_cache(async () => {
+  const storage = createVocabularyVideoStorageClient();
+  if (!storage) throw new Error("Video storage is unavailable");
+  const names: string[] = [];
+  for (let offset = 0; ; offset += 1000) {
+    const { data, error } = await storage.storage.from("videos").list("vocabulary", {
+      limit: 1000, offset, sortBy: { column: "name", order: "asc" },
+    });
+    if (error) throw error;
+    for (const file of data ?? []) if (file.id) names.push(file.name);
+    if ((data?.length ?? 0) < 1000) return names;
+  }
+}, ["vocabulary-video-plain-files-v1"], { revalidate: 300, tags: [VOCABULARY_VIDEO_FILES_TAG] });
+
 async function getStoredCandidates(entry: LocalVocabularyEntry) {
   const candidates = getCandidatePool(entry);
   if (!candidates.length) return candidates;
-  const storage = createVocabularyVideoStorageClient();
-  if (!storage) return [];
-
-  const searchTerms = new Set([entry.normalizedWord, ...entry.inflections.map((item) => item.value)]
-    .map((form) => wordsInFilename(form)[0]).filter(Boolean));
-  const storedNames = new Set<string>();
-  await Promise.all([...searchTerms].map(async (search) => {
-    for (let offset = 0; ; offset += 1000) {
-      const { data, error } = await storage.storage.from("videos").list("vocabulary", {
-        limit: 1000, offset, search, sortBy: { column: "name", order: "asc" },
-      });
-      if (error) throw error;
-      for (const file of data ?? []) if (file.id) storedNames.add(file.name);
-      if ((data?.length ?? 0) < 1000) break;
-    }
-  }));
-  return candidates.filter((candidate) => storedNames.has(candidate.path));
+  const [plain, encoded] = await Promise.all([
+    plainStoredNames(),
+    candidates.some(candidate => toSupabaseSafeStoragePath(`vocabulary/${candidate.path}`).startsWith("u-")) ? encodedStoredNames() : [],
+  ]);
+  const storedNames = new Set(plain), aliases = new Set(encoded);
+  return candidates.filter((candidate) => {
+    const storagePath = toSupabaseSafeStoragePath(`vocabulary/${candidate.path}`);
+    return storagePath.startsWith("u-") ? aliases.has(storagePath) : storedNames.has(candidate.path);
+  });
 }
 
 function addCalendarMonthsClamped(date: Date, months: number) {

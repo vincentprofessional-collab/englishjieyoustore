@@ -545,7 +545,6 @@ export function BbcArticleComments({ articleId }: { articleId: string }) {
               </span>
             ) : null}
             <strong>{identity.displayName}</strong>
-            <small>使用注册资料留言</small>
           </div>
         ) : (
           <label className={styles.nameField}>
@@ -559,7 +558,7 @@ export function BbcArticleComments({ articleId }: { articleId: string }) {
           </label>
         )}
         <label className={styles.bodyField}>
-          留言
+          <span>留言</span>
           <textarea
             maxLength={MAX_BODY_LENGTH}
             onChange={(event) => setBody(event.target.value)}
