@@ -1,10 +1,23 @@
 export const AUTH_REQUEST_TIMEOUT_MS = 20_000;
 const AUTH_REQUEST_TIMEOUT_MESSAGE = "Authentication request timed out.";
 
+// Keep the project's original SDK URL (and cookie name), but send browser JSON requests through our site.
+export function createBrowserSupabaseFetch(supabaseUrl: string): typeof fetch {
+  const upstreamOrigin = new URL(supabaseUrl).origin;
+  return (input, init) => {
+    const url = new URL(typeof input === "string" ? input : input instanceof URL ? input.href : input.url);
+    if (typeof window !== "undefined" && url.origin === upstreamOrigin && /^\/(auth|rest)\/v1\//.test(url.pathname)) {
+      const target = new URL(`/api/supabase${url.pathname}${url.search}`, window.location.origin);
+      input = input instanceof Request ? new Request(target, input) : target;
+    }
+    return fetchWithAuthTimeout(input, init);
+  };
+}
+
 // Only Auth's small JSON responses use this deadline; media and database requests keep their own behavior.
 export const fetchWithAuthTimeout: typeof fetch = async (input, init) => {
   const url = typeof input === "string" ? input : input instanceof URL ? input.href : input.url;
-  if (!new URL(url, "https://local.invalid").pathname.startsWith("/auth/v1/")) {
+  if (!/^(?:\/api\/supabase)?\/auth\/v1\//.test(new URL(url, "https://local.invalid").pathname)) {
     return fetch(input, init);
   }
 

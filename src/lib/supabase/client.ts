@@ -1,5 +1,5 @@
 import { createBrowserClient } from "@supabase/ssr";
-import { fetchWithAuthTimeout } from "./auth-request";
+import { createBrowserSupabaseFetch } from "./auth-request";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
@@ -9,5 +9,5 @@ if (!supabaseUrl || !supabaseAnonKey) {
 }
 
 export const supabase = createBrowserClient(supabaseUrl, supabaseAnonKey, {
-  global: { fetch: fetchWithAuthTimeout },
+  global: { fetch: createBrowserSupabaseFetch(supabaseUrl) },
 });

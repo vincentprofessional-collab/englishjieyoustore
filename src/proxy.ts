@@ -51,6 +51,9 @@ export async function proxy(request: NextRequest) {
     });
   }
 
+  // The browser SDK owns refresh-token rotation on these requests; do not rotate it a second time here.
+  if (path.startsWith("/api/supabase/")) return NextResponse.next({ request });
+
   const existingVisitorId = request.cookies.get(FREE_PREVIEW_VISITOR_COOKIE)?.value;
   const visitorId = isFreePreviewVisitorId(existingVisitorId)
     ? existingVisitorId
