@@ -28,12 +28,22 @@ const nextConfig: NextConfig = {
     "/api/vocabulary-audio/*": ["public/**/*.mp3"],
   },
   outputFileTracingIncludes: {
+    "/api/admin/bbc-pdf-quiz": [
+      "./node_modules/@napi-rs/canvas/**/*",
+      "./node_modules/@napi-rs/canvas-*/**/*",
+      "./node_modules/pdfjs-dist/legacy/build/pdf.worker.mjs",
+      "./node_modules/pdfjs-dist/cmaps/**/*",
+      "./node_modules/pdfjs-dist/standard_fonts/**/*",
+      "./node_modules/pdfjs-dist/wasm/**/*",
+    ],
+    "/api/admin-primary-school-vocabulary-image": ["./node_modules/pdfjs-dist/standard_fonts/LiberationSans-Bold.ttf"],
     "/*": [
       "./src/data/vocabulary/flat-vocabulary.json",
       "./src/data/vocabulary/lookup-etymology/*.json.gz",
     ],
   },
   reactStrictMode: true,
+  serverExternalPackages: ["pdfjs-dist"],
   turbopack: {
     ignoreIssue: [
       {

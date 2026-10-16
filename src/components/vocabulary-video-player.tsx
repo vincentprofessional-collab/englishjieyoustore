@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { flushSync } from "react-dom";
 import { useRouter } from "next/navigation";
 
 type VocabularyVideoItem = {
@@ -52,7 +53,6 @@ export function VocabularyVideoPlayer({
   const [notice, setNotice] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [visibleTotal, setVisibleTotal] = useState(totalVideos);
-  const [autoplayOnChange, setAutoplayOnChange] = useState(false);
   const router = useRouter();
   const videoRef = useRef<HTMLVideoElement>(null);
   const playerRef = useRef<HTMLElement | null>(null);
@@ -71,14 +71,26 @@ export function VocabularyVideoPlayer({
   function activateVideo(path: string, orderedVideos: VocabularyVideoItem[], autoplay: boolean) {
     const nextIndex = orderedVideos.findIndex((video) => video.path === path);
     if (nextIndex < 0) return;
-    activePathRef.current = path;
-    setVideos(orderedVideos);
-    setActiveIndex(nextIndex);
-    setIsPlaying(false);
-    setCurrentTime(0);
-    setDuration(0);
-    setNotice("");
-    setAutoplayOnChange(autoplay);
+    flushSync(() => {
+      activePathRef.current = path;
+      setVideos(orderedVideos);
+      setActiveIndex(nextIndex);
+      setIsPlaying(false);
+      setCurrentTime(0);
+      setDuration(0);
+      setNotice("");
+    });
+    if (previewMode) {
+      setIsPlaying(autoplay);
+    } else if (videoRef.current) {
+      const video = videoRef.current;
+      video.pause();
+      video.load();
+      // Commit the new src before play(), in the same user gesture. A later
+      // React src update would abort playback; a later effect can lose Safari's
+      // permission to start audio.
+      if (autoplay) void video.play().catch(() => setNotice("视频暂时无法播放，请点击播放重试。"));
+    }
   }
 
   useEffect(() => {
@@ -98,16 +110,6 @@ export function VocabularyVideoPlayer({
     }
   }, [initialVideos, totalVideos]);
 
-  useEffect(() => {
-    if (!autoplayOnChange) return;
-    setAutoplayOnChange(false);
-    if (previewMode) {
-      setIsPlaying(true);
-      return;
-    }
-    void videoRef.current?.play().catch(() => setNotice("视频暂时无法播放，请稍后再试。"));
-  }, [activeIndex, autoplayOnChange, previewMode]);
-
   function selectVideo(index: number, autoplay = false) {
     if (isDeleting || videos.length === 0) return;
     const nextIndex = (index + videos.length) % videos.length;
@@ -122,7 +124,9 @@ export function VocabularyVideoPlayer({
     }
     if (!videoRef.current) return;
     if (videoRef.current.paused) {
+      setNotice("");
       try {
+        if (videoRef.current.error) videoRef.current.load();
         await videoRef.current.play();
       } catch {
         setNotice("视频暂时无法播放，请稍后再试。");
@@ -203,7 +207,6 @@ export function VocabularyVideoPlayer({
       setIsPlaying(false);
       setCurrentTime(0);
       setDuration(0);
-      setAutoplayOnChange(false);
       setNotice("视频已删除。");
       router.refresh();
     } catch (error) {
@@ -262,12 +265,12 @@ export function VocabularyVideoPlayer({
               </div>
             ) : (
               <video
-                key={`${currentVideo.path}:${currentVideoSrc}`}
                 aria-label="单词例句视频"
                 controls={false}
                 controlsList="nodownload noplaybackrate noremoteplayback"
                 disableRemotePlayback
                 draggable={false}
+                onClick={togglePlayback}
                 onContextMenu={(event) => event.preventDefault()}
                 onDragStart={(event) => event.preventDefault()}
                 onDurationChange={(event) => {
@@ -280,16 +283,18 @@ export function VocabularyVideoPlayer({
                   setCurrentTime(event.currentTarget.currentTime);
                 }}
                 onPause={() => setIsPlaying(false)}
-                onPlay={() => setIsPlaying(true)}
+                onPlaying={() => { setIsPlaying(true); setNotice(""); }}
+                onEnded={() => setIsPlaying(false)}
                 onTimeUpdate={(event) => {
                   if (event.currentTarget === videoRef.current) setCurrentTime(event.currentTarget.currentTime);
                 }}
                 playsInline
-                preload="none"
+                preload="metadata"
                 ref={videoRef}
                 src={currentVideoSrc}
               />
             )}
+            {!previewMode && !isPlaying ? <button aria-label="播放词汇视频" className="vocabulary-video-poster-play" onClick={togglePlayback} type="button"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7z" /></svg></button> : null}
           </div>
           <div aria-label="视频控制条" className="vocabulary-video-controls">
             <div className="vocabulary-video-progress-row">

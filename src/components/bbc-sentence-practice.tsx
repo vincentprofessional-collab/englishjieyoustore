@@ -4,7 +4,6 @@ import { getBbcWaveSegments } from "@/lib/articles/bbc-paste-markup";
 import { createPortal } from "react-dom";
 
 import {
-  type DragEvent as ReactDragEvent,
   type KeyboardEvent as ReactKeyboardEvent,
   type PointerEvent as ReactPointerEvent,
   type TouchEvent as ReactTouchEvent,
@@ -251,9 +250,7 @@ export function BbcSentencePractice({
 
       event.preventDefault();
       setSentenceOrderHover(getDropTarget(event.clientX, event.clientY));
-      if (isMobilePointerViewport) {
-        setSentenceOrderPointerPosition({ x: event.clientX, y: event.clientY });
-      }
+      setSentenceOrderPointerPosition({ x: event.clientX, y: event.clientY });
     }
 
     function handlePointerUp(event: PointerEvent) {
@@ -320,7 +317,7 @@ export function BbcSentencePractice({
       window.removeEventListener("pointerup", handlePointerUp, true);
       window.removeEventListener("pointercancel", handlePointerCancel, true);
     };
-  }, [isMobilePointerViewport, sentenceOrderDrag]);
+  }, [sentenceOrderDrag]);
 
   function getDictationAnswerKey(tokenIndex: number) {
     return `${settings.dictationMode}:${tokenIndex}`;
@@ -604,14 +601,12 @@ export function BbcSentencePractice({
     event.preventDefault();
     event.stopPropagation();
     window.getSelection?.()?.removeAllRanges();
-    if (isMobilePointerViewport) {
-      try {
-        event.currentTarget.setPointerCapture?.(event.pointerId);
-      } catch {
-        // Capture is optional; window capture listeners still track this finger.
-      }
-      setSentenceOrderPointerPosition({ x: event.clientX, y: event.clientY });
+    try {
+      event.currentTarget.setPointerCapture?.(event.pointerId);
+    } catch {
+      // Capture is optional; window capture listeners still track this pointer.
     }
+    setSentenceOrderPointerPosition({ x: event.clientX, y: event.clientY });
     setSentenceOrderDrag({
       ...answer,
       pointerId: event.pointerId,
@@ -637,29 +632,6 @@ export function BbcSentencePractice({
     setSentenceOrderHover(null);
   }
 
-  function readSentenceOrderDragPayload(event: ReactDragEvent<HTMLElement>) {
-    try {
-      const payload = JSON.parse(
-        event.dataTransfer.getData("application/json"),
-      ) as SentenceOrderAnswer & { sourceSlot?: number | null };
-
-      if (payload.token) {
-        return {
-          sourceSlot: payload.sourceSlot ?? null,
-          token: payload.token,
-          tokenIndex: payload.tokenIndex,
-        };
-      }
-    } catch {
-      const fallbackToken = event.dataTransfer.getData("text/plain");
-      if (fallbackToken) {
-        return { sourceSlot: null, token: fallbackToken, tokenIndex: -1 };
-      }
-    }
-
-    return null;
-  }
-
   function renderSentenceOrderBlank(target: DictationTarget) {
     const placedAnswer = sentenceOrderAnswers[target.tokenIndex] ?? null;
     const hasAnswer = Boolean(placedAnswer);
@@ -678,27 +650,9 @@ export function BbcSentencePractice({
         onContextMenu={(event) => event.preventDefault()}
         onCopy={(event) => event.preventDefault()}
         onCut={(event) => event.preventDefault()}
-        draggable={!isMobilePointerViewport && hasAnswer}
+        draggable={false}
         key={`${sentence.sentenceNo}-order-${target.tokenIndex}`}
-        onDragOver={(event) => event.preventDefault()}
-        onDrop={(event: ReactDragEvent<HTMLSpanElement>) => {
-          event.preventDefault();
-          event.stopPropagation();
-
-          const payload = readSentenceOrderDragPayload(event);
-          if (payload) {
-            moveSentenceOrderAnswer(payload, target.tokenIndex);
-          }
-        }}
-        onDragStart={(event) => {
-          if (!placedAnswer) {
-            return;
-          }
-
-          const payload = { ...placedAnswer, sourceSlot: target.tokenIndex };
-          event.dataTransfer.setData("application/json", JSON.stringify(payload));
-          event.dataTransfer.setData("text/plain", placedAnswer.token);
-        }}
+        onDragStart={(event) => event.preventDefault()}
         onPointerDown={(event) => {
           if (placedAnswer) {
             startSentenceOrderPointerDrag(event, placedAnswer, target.tokenIndex);
@@ -753,33 +707,16 @@ export function BbcSentencePractice({
           onContextMenu={(event) => event.preventDefault()}
           onCopy={(event) => event.preventDefault()}
           onCut={(event) => event.preventDefault()}
-          onDragOver={(event) => event.preventDefault()}
-          onDrop={(event: ReactDragEvent<HTMLDivElement>) => {
-            event.preventDefault();
-            const payload = readSentenceOrderDragPayload(event);
-            if (payload) {
-              moveSentenceOrderAnswer(payload, "bank");
-            }
-          }}
         >
           {getSentenceOrderWordBank().map((target) => (
             <button
               className={`sentence-order-chip ${
                 sentenceOrderDrag?.tokenIndex === target.tokenIndex ? "sentence-order-dragging" : ""
               }`}
-              draggable={!isMobilePointerViewport}
+              draggable={false}
               key={`${sentence.sentenceNo}-word-bank-${target.tokenIndex}`}
               onClick={(event) => event.stopPropagation()}
-              onDragStart={(event) => {
-                const payload = {
-                  sourceSlot: null,
-                  token: target.token,
-                  tokenIndex: target.tokenIndex,
-                };
-
-                event.dataTransfer.setData("application/json", JSON.stringify(payload));
-                event.dataTransfer.setData("text/plain", target.token);
-              }}
+              onDragStart={(event) => event.preventDefault()}
               onPointerDown={(event) =>
                 startSentenceOrderPointerDrag(event, target, null)
               }
@@ -790,7 +727,7 @@ export function BbcSentencePractice({
             </button>
           ))}
         </div>
-        {isMobilePointerViewport && sentenceOrderDrag && sentenceOrderPointerPosition
+        {sentenceOrderDrag && sentenceOrderPointerPosition
           ? createPortal(
               <span
                 aria-hidden="true"

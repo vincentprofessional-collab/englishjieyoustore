@@ -9,8 +9,12 @@ import {
 
 export type BbcPdfPage = { lines: PdfAnswerLine[]; text: string };
 
-/** The reader is lazy loaded only in the admin uploader. The PDF stays local. */
-export async function readBbcPdf(file: File, onProgress?: (page: number, total: number) => void) {
+/** Shared extraction keeps server and browser imports faithful to the same PDF. */
+export async function readBbcPdf(
+  file: File,
+  onProgress?: (page: number, total: number) => void,
+  readerOptions?: { reader: typeof import("pdfjs-dist/legacy/build/pdf.mjs"); workerSrc: string; assetBase: string },
+) {
   if (!/\.pdf$/i.test(file.name) || !file.size || file.size > 30 * 1024 * 1024) throw new Error("请选择不超过 30 MB 的 PDF 文件。");
   const bytes = await file.arrayBuffer();
   if (!new TextDecoder().decode(bytes.slice(0, 1024)).includes("%PDF-")) throw new Error("文件不是有效的 PDF。");
@@ -19,9 +23,10 @@ export async function readBbcPdf(file: File, onProgress?: (page: number, total: 
   // Load the legacy reader unchanged so browser polyfills and the worker use
   // the same PDF.js build, including in Safari and embedded browsers.
   const readerUrl = "/vendor/bbc-pdf/pdf.min.mjs";
-  const pdfjs: typeof import("pdfjs-dist/legacy/build/pdf.mjs") = await import(/* webpackIgnore: true */ /* turbopackIgnore: true */ readerUrl);
-  pdfjs.GlobalWorkerOptions.workerSrc = "/vendor/bbc-pdf/pdf.worker.min.mjs";
-  const job = pdfjs.getDocument({ data: new Uint8Array(bytes), fontExtraProperties: true, cMapUrl: "/vendor/bbc-pdf/cmaps/", cMapPacked: true, standardFontDataUrl: "/vendor/bbc-pdf/standard_fonts/", wasmUrl: "/vendor/bbc-pdf/wasm/" });
+  const pdfjs = readerOptions?.reader ?? await import(/* webpackIgnore: true */ /* turbopackIgnore: true */ readerUrl) as typeof import("pdfjs-dist/legacy/build/pdf.mjs");
+  pdfjs.GlobalWorkerOptions.workerSrc = readerOptions?.workerSrc ?? "/vendor/bbc-pdf/pdf.worker.min.mjs";
+  const assets = readerOptions?.assetBase ?? "/vendor/bbc-pdf/";
+  const job = pdfjs.getDocument({ data: new Uint8Array(bytes), fontExtraProperties: true, cMapUrl: `${assets}cmaps/`, cMapPacked: true, standardFontDataUrl: `${assets}standard_fonts/`, wasmUrl: `${assets}wasm/` });
   try {
     const pdf = await job.promise;
     if (pdf.numPages > 80) throw new Error("BBC 练习 PDF 最多支持 80 页，请只保留本篇文章的页面。");

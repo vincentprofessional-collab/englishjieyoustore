@@ -85,9 +85,19 @@ export function AdminBbcArticleUpload() {
     if (!file) return;
     setPdfBusy(true); setPdfError(false); setPdfMessage("正在读取 PDF……");
     try {
-      const { readBbcPdf, parseBbcPdfQuiz } = await import("@/lib/admin/bbc-pdf-import");
-      const { pages, pdfSha256 } = await readBbcPdf(file, (page, total) => setPdfMessage(`正在识别 PDF 第 ${page}/${total} 页……`));
-      const quiz = parseBbcPdfQuiz(pages, { pdf: file.name, pdfSha256 });
+      let quiz: BbcPdfQuiz;
+      if (file.size <= 4 * 1024 * 1024) {
+        // Safari uses the same server reader as other browsers, without loading
+        // a PDF worker or relying on newer browser iterator APIs.
+        const body = new FormData();
+        body.set("file", file);
+        setPdfMessage("正在识别 PDF 题目与答案……");
+        quiz = (await adminRequest("/api/admin/bbc-pdf-quiz", { method: "POST", body })).quiz;
+      } else {
+        const { readBbcPdf, parseBbcPdfQuiz } = await import("@/lib/admin/bbc-pdf-import");
+        const { pages, pdfSha256 } = await readBbcPdf(file, (page, total) => setPdfMessage(`正在识别 PDF 第 ${page}/${total} 页……`));
+        quiz = parseBbcPdfQuiz(pages, { pdf: file.name, pdfSha256 });
+      }
       setPdfQuiz(quiz);
       setPdfMessage(`已识别 ${quiz.summary?.length ?? 0} 道总结句选择题、${quiz.matching?.length ?? 0} 道段落主旨配对题、${quiz.quiz.length} 道阅读题、${quiz.exercise.length} 道填空题。`);
     } catch (cause) { setPdfError(true); setPdfMessage(`${cause instanceof Error ? cause.message : "PDF 无法识别，请核对文件。"}当前练习未被替换。`); }

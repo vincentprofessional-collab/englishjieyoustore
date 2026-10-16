@@ -80,6 +80,7 @@ export async function POST(request: NextRequest) {
       cacheControl: "300",
       contentType: "image/webp",
       upsert: true,
+      metadata: { vocabularyLabel: "filename-word-v1" },
     });
     if (error) throw error;
   } catch (error) {

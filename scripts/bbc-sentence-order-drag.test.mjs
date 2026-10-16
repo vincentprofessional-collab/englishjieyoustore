@@ -105,6 +105,20 @@ test("a touch pointer starts dragging even when pointer capture throws", () => {
   assert.equal(h.drag()?.sourceSlot, null);
 });
 
+test("desktop and tablet mouse drags cancel text selection and retain the whole word", () => {
+  const h = harness();
+  h.context.isMobilePointerViewport = false;
+  let prevented = false, cleared = false, captured = false;
+  h.context.window.getSelection = () => ({ removeAllRanges() { cleared = true; } });
+  h.context.startSentenceOrderPointerDrag({ pointerType: "mouse", button: 0, pointerId: 8, clientX: 10, clientY: 20, preventDefault() { prevented = true; }, stopPropagation() {}, currentTarget: { setPointerCapture() { captured = true; } } }, a, null);
+  assert.ok(prevented && cleared && captured);
+  assert.equal(h.drag()?.token, "We");
+  assert.equal(h.drag()?.input, "pointer");
+  const other = harness();
+  other.context.startSentenceOrderPointerDrag({ pointerType: "mouse", button: 2 }, a, null);
+  assert.equal(other.drag(), null);
+});
+
 test("old touch-only browsers can drag placed words back from a blank", () => {
   const h = harness();
   h.context.window.PointerEvent = undefined;

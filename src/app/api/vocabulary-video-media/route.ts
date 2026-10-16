@@ -19,6 +19,7 @@ export async function GET(request: NextRequest) {
     const upstream = await fetch(mediaUrl, {
       cache: "no-store",
       headers: range ? { Range: range } : undefined,
+      method: request.method === "HEAD" ? "HEAD" : "GET",
     });
     if (!upstream.ok && upstream.status !== 206) {
       return new NextResponse("Media unavailable", { status: upstream.status });
@@ -36,8 +37,10 @@ export async function GET(request: NextRequest) {
       if (value) headers.set(name, value);
     }
 
-    return new NextResponse(upstream.body, { headers, status: upstream.status });
+    return new NextResponse(request.method === "HEAD" ? null : upstream.body, { headers, status: upstream.status });
   } catch {
     return new NextResponse("Media unavailable", { status: 502 });
   }
 }
+
+export const HEAD = GET;

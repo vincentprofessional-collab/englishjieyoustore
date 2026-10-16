@@ -980,7 +980,6 @@ function LearningRoundExamples({ word }: { word: LearningWord }) {
     .sort(compareStudyExamples)
     .slice(0, 1);
   return <section aria-label="语境例句" className="vocabulary-learning-round-examples">
-    <h3>语境例句</h3>
     {rows.length ? rows.map((example) => <div key={example.english}><p lang="en">{example.english}</p><p lang="zh-CN">{example.chinese}</p></div>) : <p className="muted">暂无该词的双语例句。</p>}
   </section>;
 }
@@ -2845,7 +2844,6 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
   </> : null;
   const definitionChoiceCards = currentSettings.showOptions && currentWord && modeIndex < 2 && definitionOptions.length >= 4 ? (
     <div aria-label="释义选项" className="vocabulary-learning-definition-options" role="group">
-      <strong>释义选项</strong>
       {definitionOptions.map((option, index) => {
         const isCorrect = currentRoundRevealed && option === getDefinitionOptionText(currentWord.definitionCn);
         const isWrong = currentRoundRevealed && definitionChoice === index && !isCorrect;
@@ -3250,8 +3248,8 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
                   <option key={book.key} value={book.key}>{book.label}</option>
                 ))}
               </select>
+              <span aria-hidden="true" className="vocabulary-book-select-arrow" />
             </label> : null}
-              <button aria-label="关闭设置并暂停学习" className="vocabulary-learning-settings-close" onClick={closeStudySettings} type="button">×</button>
             </div>
             <div className="vocabulary-learning-settings-body">
             <div aria-label="学习模式" className="vocabulary-learning-setup-modes" role="tablist">
@@ -3296,7 +3294,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, sourceCount
                     <option value="">全部组（{groups} 组）</option>
                     {Array.from({ length: groups }, (_, index) => <option key={index} value={index}>第 {index + 1} 组</option>)}
                   </select>
-                  <span aria-hidden="true" className="vocabulary-study-group-arrow">▾</span>
+                  <span aria-hidden="true" className="vocabulary-study-group-arrow" />
                 </div>;
               })}
             </fieldset>

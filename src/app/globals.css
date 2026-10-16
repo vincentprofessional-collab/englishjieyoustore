@@ -18173,6 +18173,24 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
   width: 100%;
 }
 
+.vocabulary-video-poster-play {
+  align-items: center;
+  background: rgba(20, 36, 46, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  height: 54px;
+  justify-content: center;
+  left: 50%;
+  padding: 0;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 54px;
+}
+.vocabulary-video-poster-play svg { fill: currentColor; height: 28px; width: 28px; }
+
 .vocabulary-video-frame-actions {
   display: flex;
   gap: 7px;
@@ -35710,12 +35728,74 @@ body .mobile-bottom-nav a.active { color: #245d7b !important; }
 
 .vocabulary-learning-round-picture { background: none; border: 0; border-radius: 0; gap: 0; justify-items: center; padding: 0; }
 .vocabulary-learning-page .vocabulary-learning-round-examples { display: grid; justify-items: center; }
-.vocabulary-learning-page .vocabulary-learning-round-examples h3 { justify-self: start; }
 .vocabulary-learning-page .vocabulary-learning-round-examples > div { max-width: 100%; text-align: left; width: fit-content; }
 .vocabulary-learning-page .vocabulary-learning-round-examples p,
 .vocabulary-learning-page .vocabulary-learning-round-examples p * { font-size: calc(var(--vocabulary-study-text-size) + 2px) !important; line-height: 1.5 !important; }
 .vocabulary-learning-round-picture .vocabulary-primary-school-word-picture { background: none; border: 0; box-shadow: none; margin-inline: auto; padding: 0; }
 .vocabulary-learning-page .vocabulary-browse-countdown { margin: 12px auto 8px; }
+.vocabulary-learning-page .vocabulary-learning-complete-detail-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  gap: 4px;
+  margin: 0 0 8px;
+  padding: 0 0 8px;
+  text-align: center;
+}
+.vocabulary-learning-page .vocabulary-learning-complete-detail-header h1 {
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: center;
+  line-height: 1.2;
+  margin: 0;
+  overflow: visible;
+  width: 100%;
+}
+.vocabulary-learning-page .vocabulary-learning-complete-detail-meta { display: block; grid-column: 1; grid-row: 2; }
+.vocabulary-learning-page .vocabulary-learning-complete-detail-meta .inline-pronunciation { justify-content: center; margin: 0; }
+.vocabulary-learning-page .vocabulary-learning-complete-detail-level { display: none; }
+.vocabulary-learning-page .vocabulary-learning-definition-options { background: none !important; border: 0 !important; box-shadow: none !important; margin-block: 6px 0; padding: 0 !important; }
+.vocabulary-learning-settings-dialog .vocabulary-study-group-select { -webkit-appearance: none !important; appearance: none !important; background-image: none !important; }
+.vocabulary-learning-settings-dialog :is(.vocabulary-study-group-arrow, .vocabulary-book-select-arrow) {
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 7px solid currentColor;
+  height: 0;
+  width: 0;
+}
+.vocabulary-learning-settings-dialog .vocabulary-learning-settings-head { justify-content: center; }
+.vocabulary-learning-settings-dialog .vocabulary-learning-settings-book-select {
+  align-items: center;
+  background: #fffdf8;
+  border: 1px solid #a9d4ea;
+  border-radius: 14px;
+  display: flex;
+  flex: 0 1 auto;
+  gap: 12px;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 100%;
+  padding: 10px 16px;
+}
+.vocabulary-learning-settings-dialog .vocabulary-learning-settings-book-select > span:first-child { color: inherit; font: inherit; white-space: nowrap; }
+.vocabulary-learning-settings-dialog .vocabulary-learning-settings-book-select select {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  background: none !important;
+  border: 0;
+  box-shadow: none;
+  color: inherit;
+  flex: 0 1 auto;
+  min-height: 30px;
+  min-width: 0;
+  padding: 0;
+  text-align: center;
+  text-align-last: center;
+  width: auto;
+}
+.vocabulary-learning-settings-dialog .vocabulary-book-select-arrow { flex: 0 0 auto; pointer-events: none; }
+.bbc-member-roster th:first-child { width: 40%; }
+.bbc-member-roster th:not(:first-child) { width: 20%; }
 @media (max-width: 820px) {
   .vocabulary-learning-page { row-gap: 6px !important; }
   .vocabulary-learning-page .vocabulary-learning-layout,
@@ -35725,7 +35805,11 @@ body .mobile-bottom-nav a.active { color: #245d7b !important; }
   .vocabulary-learning-page .vocabulary-learning-complete-detail-meta .inline-pronunciation { display: flex !important; flex-direction: row !important; flex-wrap: nowrap !important; gap: 10px; justify-content: center; }
   .vocabulary-learning-page .vocabulary-learning-complete-detail-meta .inline-pronunciation-side { display: inline-flex !important; flex: 0 1 auto; min-width: 0; white-space: nowrap; }
   .vocabulary-learning-page .vocabulary-learning-complete-detail-meta .inline-pronunciation-side :is(b, span) { font-size: clamp(12px, 3.5vw, 15px) !important; }
-  .vocabulary-learning-page .vocabulary-learning-definition-options button { align-items: flex-start; display: flex; flex-direction: column; gap: 4px; justify-content: center; min-height: 0 !important; padding: 12px 14px !important; }
+  .vocabulary-learning-page .vocabulary-learning-complete-detail { padding-block: 0 !important; }
+  .vocabulary-learning-page .vocabulary-learning-complete-detail-header { gap: 3px; margin-bottom: 6px; padding-bottom: 6px; }
+  .vocabulary-learning-page .vocabulary-learning-complete-detail-header h1 { font-size: clamp(26px, 7.5vw, 38px) !important; }
+  .vocabulary-learning-page .vocabulary-learning-round-picture .vocabulary-primary-school-word-picture { height: auto; max-height: clamp(120px, 24svh, 210px); object-fit: contain; width: auto; }
+  .vocabulary-learning-page .vocabulary-learning-definition-options button { align-items: flex-start; display: flex; flex-direction: column; gap: 4px; justify-content: center; min-height: 0 !important; padding: 9px 12px !important; }
   .vocabulary-learning-page .vocabulary-learning-definition-options button > b { display: none !important; }
   .vocabulary-learning-page .vocabulary-learning-definition-options button > span { line-height: 1.5; }
 }

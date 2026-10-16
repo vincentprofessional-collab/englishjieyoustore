@@ -3,12 +3,13 @@ export type BbcEntitlement = {
   user_id: string; plan: string; status: string; project_key: string;
   starts_at: string; expires_at: string;
 };
-export type PublicBbcMember = { maskedAccount: string; plan: string; startedAt: string };
+export type PublicBbcMember = { maskedAccount: string; plan: string; startedAt: string; expiresAt: string };
 
 export function maskMemberAccount(account: string) {
-  const characters = account.split("@")[0].replace(/[^a-z0-9]/gi, "");
-  // Conceal the first three characters, all middle characters, and the email domain.
-  return `***${characters.length > 3 ? characters.slice(-Math.min(2, characters.length - 3)) : ""}`;
+  const at = account.lastIndexOf("@");
+  const name = Array.from(at < 0 ? account : account.slice(0, at));
+  const hidden = Math.min(3, name.length);
+  return `${"*".repeat(hidden) || "***"}${name.slice(hidden).join("")}${at < 0 ? "" : account.slice(at)}`;
 }
 
 export function currentBbcEntitlements(rows: BbcEntitlement[], now = Date.now()) {
@@ -24,8 +25,10 @@ export function currentBbcEntitlements(rows: BbcEntitlement[], now = Date.now())
 }
 
 export function publicBbcMembers(rows: BbcEntitlement[], accounts: Map<string, string>, now = Date.now()): PublicBbcMember[] {
+  const date = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Shanghai", year: "numeric", month: "2-digit", day: "2-digit" });
   return currentBbcEntitlements(rows, now).map(row => ({
     maskedAccount: maskMemberAccount(accounts.get(row.user_id) ?? ""), plan: MEMBER_PLANS[row.plan as keyof typeof MEMBER_PLANS],
-    startedAt: new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Shanghai", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date(row.starts_at)),
+    startedAt: date.format(new Date(row.starts_at)),
+    expiresAt: row.plan === "lifetime" || /^(?:\+)?infinity$/i.test(row.expires_at.trim()) ? "永久有效" : date.format(new Date(row.expires_at)),
   }));
 }

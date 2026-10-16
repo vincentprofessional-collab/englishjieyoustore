@@ -112,16 +112,19 @@ test("membership roster counts currently granted BBC users once, includes manual
   const rows = [entitlement("year"), entitlement("month", { plan: "monthly" }), entitlement("quarter", { plan: "quarterly" }), entitlement("life", { plan: "lifetime", expires_at: "infinity" }), entitlement("year", { starts_at: "2026-10-02T00:00:00Z", plan: "lifetime", expires_at: "+infinity" }), entitlement("cancel", { status: "canceled" }), entitlement("past", { expires_at: "2026-10-14T00:00:00Z" }), entitlement("future", { starts_at: "2026-10-20T00:00:00Z" }), entitlement("other-project", { project_key: "writing" })];
   const publicRows = members.publicBbcMembers(rows, new Map(rows.map(row => [row.user_id, "ABCprivate45@example.invalid"])), now);
   assert.equal(publicRows.length, 4); assert.equal(publicRows[0].plan, "终身会员"); assert.equal(publicRows[0].startedAt, "2026-10-02");
-  assert.ok(publicRows.every(row => row.maskedAccount === "***45"));
-  const serialized = JSON.stringify(publicRows); assert.ok(!serialized.includes("private") && !serialized.includes("example") && !serialized.includes("user_id"));
-  assert.equal(members.maskMemberAccount("ab@domain.invalid"), "***");
+  assert.ok(publicRows.every(row => row.maskedAccount === "***private45@example.invalid"));
+  assert.equal(publicRows[0].expiresAt, "永久有效");
+  assert.ok(publicRows.filter(row => row.plan !== "终身会员").every(row => row.expiresAt === "2027-10-01"));
+  const serialized = JSON.stringify(publicRows); assert.ok(!serialized.includes("ABC") && !serialized.includes("user_id"));
+  assert.equal(members.maskMemberAccount("ab@domain.invalid"), "**@domain.invalid");
 });
 
 test("public roster reads entitlement records only and removes revoked members on the next request", async () => {
   const fixture = database();
   const api = load("../src/app/api/bbc-members/route.ts", { "next/server": json, "@supabase/supabase-js": { createClient: () => fixture.client }, "@/lib/payment/granted-members": members });
   const response = await api.GET(request()), data = await response.json();
-  assert.equal(data.total, 1); assert.equal(data.members[0].maskedAccount, "***45"); assert.equal(data.members[0].plan, "终身会员");
+  assert.equal(data.total, 1); assert.equal(data.members[0].maskedAccount, "***sitive12345@example.invalid"); assert.equal(data.members[0].plan, "终身会员");
+  assert.equal(data.members[0].expiresAt, "永久有效");
   assert.equal(response.headers.get("Cache-Control"), "no-store");
   assert.ok(!fixture.queries.includes("project_payment_requests"));
   assert.ok(!JSON.stringify(data).includes("sensitive"));

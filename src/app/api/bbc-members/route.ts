@@ -22,7 +22,7 @@ async function loadMembers() {
     if (error) throw new Error("unavailable");
     for (const row of data ?? []) accounts.set(row.id, row.email ?? "");
   }
-  // Only anonymized rows enter the public cache or HTTP response.
+  // Project masked emails and dates only; never expose account IDs or orders.
   return publicBbcMembers(current, accounts, now);
 }
 
