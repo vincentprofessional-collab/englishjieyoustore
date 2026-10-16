@@ -8,6 +8,6 @@ export default async function VocabularyPage({ searchParams }: { searchParams: P
   const query = q?.trim() ?? "";
   return <section className="stack vocabulary-page vocabulary-lookup-landing">
     <div className="vocabulary-hero"><VocabularySearchAutocomplete initialQuery={query} autoFocus={Boolean(query) || mode === "search"} /></div>
-    {!query && mode !== "search" ? <VocabularyLookupEntry word="balloon" backHref="/vocabulary?mode=search" /> : null}
+    {!query && mode !== "search" ? <VocabularyLookupEntry word="baby" backHref="/vocabulary?mode=search" /> : null}
   </section>;
 }

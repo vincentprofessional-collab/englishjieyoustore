@@ -12,6 +12,7 @@ type CatalogItem = {
   bytes: number;
   name: string;
   reviewRequired: boolean;
+  vocabularyWords?: string[];
 };
 
 export type VocabularyVideo = {
@@ -26,6 +27,11 @@ const MAX_VISIBLE_VIDEOS = 20;
 const VIDEOS_REPLACED_PER_QUARTER = 10;
 const catalog = catalogData as CatalogItem[];
 const catalogByName = new Map(catalog.map((item) => [item.name, item]));
+
+function getSemanticFilename(item: CatalogItem) {
+  // Catalog assignments are authoritative when a filename is misspelled or ambiguous.
+  return item.vocabularyWords?.join(" ") ?? item.name.replace(/\.mp4$/i, "");
+}
 
 function levelRank(level: string) {
   const normalized = level.toLowerCase();
@@ -89,10 +95,10 @@ function getCandidatePool(entry: LocalVocabularyEntry) {
       const key = item.name.toLowerCase();
       if (seen.has(key)) return false;
       seen.add(key);
-      return hasWholeWord(item.name.replace(/\.mp4$/i, ""), forms);
+      return hasWholeWord(getSemanticFilename(item), forms);
     })
     .sort((left, right) => {
-      const levelDifference = Number(containsAboveCet4Word(left.name)) - Number(containsAboveCet4Word(right.name));
+      const levelDifference = Number(containsAboveCet4Word(getSemanticFilename(left))) - Number(containsAboveCet4Word(getSemanticFilename(right)));
       if (levelDifference !== 0) return levelDifference;
       const filenameLengthDifference = left.name.replace(/\.mp4$/i, "").length - right.name.replace(/\.mp4$/i, "").length;
       if (filenameLengthDifference !== 0) return filenameLengthDifference;

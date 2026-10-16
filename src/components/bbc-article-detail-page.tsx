@@ -155,6 +155,42 @@ const SPEAKING_PLAYING_HINTS: Record<ActiveSpeakingMode, string> = {
   "sight-translation": "播放结束后自动进入练习计时",
 };
 
+function SpeakingTrainingStatus({
+  activeSentenceNo,
+  audioSettings,
+  isPlaying,
+  sentenceNo,
+  speakingTraining,
+}: {
+  activeSentenceNo: number | null;
+  audioSettings: AudioPlayerSettings;
+  isPlaying: boolean;
+  sentenceNo: number;
+  speakingTraining: SpeakingTrainingState | null;
+}) {
+  if (speakingTraining?.sentenceNo === sentenceNo) {
+    return (
+      <div aria-live="polite" className="bbc-speaking-training-status practicing">
+        <span>{SPEAKING_PHASE_LABELS[speakingTraining.mode]}</span>
+        <strong>{speakingTraining.remainingSeconds} 秒</strong>
+        <small>{audioSettings.playMode === "sentence-loop" ? "之后重播本句" : "之后播放下一句"}</small>
+      </div>
+    );
+  }
+
+  if (activeSentenceNo === sentenceNo && isPlaying && audioSettings.speakingMode !== "none") {
+    return (
+      <div className="bbc-speaking-training-status playing">
+        <span>{SPEAKING_MODE_LABELS[audioSettings.speakingMode]}</span>
+        <strong>正在播放</strong>
+        <small>{SPEAKING_PLAYING_HINTS[audioSettings.speakingMode]}</small>
+      </div>
+    );
+  }
+
+  return null;
+}
+
 function readStorageList<T>(key: string) {
   try {
     const rawValue = window.localStorage.getItem(key);
@@ -820,7 +856,7 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
   }, [audioSettings]);
 
   useEffect(() => {
-    const mobileQuery = window.matchMedia("(max-width: 820px)");
+    const mobileQuery = window.matchMedia("(max-width: 1024px), (any-pointer: coarse)");
     const updateMobileAudioViewport = () => setIsMobileAudioViewport(mobileQuery.matches);
     updateMobileAudioViewport();
     if (typeof mobileQuery.addEventListener === "function") {
@@ -1728,14 +1764,6 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
           surfaceRef={pageRef}
         />
 
-        {article.fullAudioUrl ? (
-        <nav aria-label="文章学习模式" className="bbc-audio-toolbar bbc-article-mode-bar">
-          <div className="bbc-audio-toolbar-settings bbc-audio-toolbar-modes">
-            {articleModeControls}
-          </div>
-        </nav>
-        ) : null}
-
       <div className="bbc-article-study" ref={studyWorkspaceRef}>
         <div
           className={`bbc-article-columns ${!isVocabularyVisible || studyMode === "intensive" || isRetellingPractice ? "without-vocabulary" : ""} ${isRetellingPractice ? "article-retelling-columns" : ""} ${
@@ -1788,7 +1816,6 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
                       key={`${modeSelectionVersion}-${sentence.sentenceNo}`}
                       autoPlaySignal={isMobileAudioViewport ? 0 : sentenceAutoPlaySignals[sentence.sentenceNo] ?? 0}
                       compactControls
-                      deferSentenceLoop={studyMode === "speaking" && audioSettings.speakingMode !== "none"}
                       hasSelectedRate
                       html5
                       preload={false}
@@ -1808,12 +1835,12 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
                       seekRequest={sentenceRestoreSeekRequest?.sentenceNo === sentence.sentenceNo ? { ...sentenceRestoreSeekRequest, positionSeconds: sentenceRestoreSeekRequest.positionSeconds + (sentence.audioUrl === article.fullAudioUrl ? sentence.startMs / 1000 : 0) } : null}
                       settings={audioSettings}
                       settingsPlacement="none"
+                      deferSentenceLoop
                       skipSeconds={3}
                       src={sentence.audioUrl}
                       playbackRange={sentence.audioUrl === article.fullAudioUrl ? { startSeconds: sentence.startMs / 1000, endSeconds: sentence.endMs / 1000 } : null}
                       startAtSeconds={sentence.audioUrl === article.fullAudioUrl ? sentence.startMs / 1000 : 0}
                       stopAtSeconds={sentence.audioUrl === article.fullAudioUrl ? sentence.endMs / 1000 : null}
-                      loopSegment={sentence.audioUrl === article.fullAudioUrl && !(studyMode === "speaking" && audioSettings.speakingMode !== "none") ? { startSeconds: sentence.startMs / 1000, endSeconds: sentence.endMs / 1000 } : null}
                       onStopAtEnd={sentence.audioUrl === article.fullAudioUrl ? () => handleSentenceEnded(sentence) : undefined}
                       title={`第 ${sentence.sentenceNo} 句音频`}
                       trailingControls={(
@@ -1972,18 +1999,14 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
                         translationContent={renderWaveHighlightedChinese(sentence.chinese, sentence.chineseUnderlinedTerms, sentence.chineseUnderlinedRanges)}
                       />
                     ) : null}
-                    {studyMode === "speaking" && speakingTraining?.sentenceNo === sentence.sentenceNo ? (
-                      <div aria-live="polite" className="bbc-speaking-training-status practicing">
-                        <span>{SPEAKING_PHASE_LABELS[speakingTraining.mode]}</span>
-                        <strong>{speakingTraining.remainingSeconds} 秒</strong>
-                        <small>{audioSettings.playMode === "sentence-loop" ? "之后重播本句" : "之后播放下一句"}</small>
-                      </div>
-                    ) : studyMode === "speaking" && activeSentenceNo === sentence.sentenceNo && isSentenceAudioPlaying && audioSettings.speakingMode !== "none" ? (
-                      <div className="bbc-speaking-training-status playing">
-                        <span>{SPEAKING_MODE_LABELS[audioSettings.speakingMode]}</span>
-                        <strong>正在播放</strong>
-                        <small>{SPEAKING_PLAYING_HINTS[audioSettings.speakingMode]}</small>
-                      </div>
+                    {studyMode === "speaking" && (!isMobileAudioViewport || !article.fullAudioUrl) ? (
+                      <SpeakingTrainingStatus
+                        activeSentenceNo={activeSentenceNo}
+                        audioSettings={audioSettings}
+                        isPlaying={isSentenceAudioPlaying}
+                        sentenceNo={sentence.sentenceNo}
+                        speakingTraining={speakingTraining}
+                      />
                     ) : null}
                     {hasReviewedSyntax ? null : sentencePlayer}
                   </div>
@@ -2073,8 +2096,7 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
             <div className="bbc-full-audio">
               <AudioPlayer
                 autoPlaySignal={mobileSentenceAudio ? sentenceAutoPlaySignals[mobileSentenceAudio.sentenceNo] ?? 0 : 0}
-                sentenceLoopDelayMs={mobileSentenceAudio ? 1000 : 0}
-                deferSentenceLoop={studyMode === "speaking" && audioSettings.speakingMode !== "none"}
+                deferSentenceLoop={Boolean(mobileSentenceAudio)}
                 playbackId={`${modeSelectionVersion}:${mobileSentenceAudio?.sentenceNo ?? "full"}`}
                 playbackRange={mobileSentenceRange}
                 playOnSeek={isMobileAudioViewport}
@@ -2103,7 +2125,6 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
                 onEnded={mobileSentenceAudio ? () => handleSentenceEnded(mobileSentenceAudio) : undefined}
                 onStopAtEnd={mobileSentenceRange && mobileSentenceAudio ? () => handleSentenceEnded(mobileSentenceAudio) : undefined}
                 stopAtSeconds={mobileSentenceRange?.endSeconds}
-                loopSegment={studyMode === "speaking" && audioSettings.speakingMode !== "none" ? null : mobileSentenceRange}
                 onPlayingChange={(isPlaying) => mobileSentenceAudio
                   ? handleSentencePlayingChange(mobileSentenceAudio.sentenceNo, isPlaying)
                   : handleFullAudioPlayingChange(isPlaying)}
@@ -2122,6 +2143,22 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
                 startAtSeconds={mobileSentenceAudio ? (mobileSentenceRange?.startSeconds ?? 0) + activeSentencePosition : fullAudioPosition}
                 title={mobileSentenceAudio ? `第 ${mobileSentenceAudio.sentenceNo} 句音频` : `${article.title} 完整音频`}
               />
+            </div>
+            <div className="bbc-mobile-audio-controls">
+              <nav aria-label="文章学习模式" className="bbc-audio-toolbar bbc-article-mode-bar bbc-mobile-audio-toolbar">
+                <div className="bbc-audio-toolbar-settings bbc-audio-toolbar-modes">
+                  {articleModeControls}
+                </div>
+              </nav>
+              {studyMode === "speaking" && activeStudySentence ? (
+                <SpeakingTrainingStatus
+                  activeSentenceNo={activeSentenceNo}
+                  audioSettings={audioSettings}
+                  isPlaying={isSentenceAudioPlaying}
+                  sentenceNo={activeStudySentence.sentenceNo}
+                  speakingTraining={speakingTraining}
+                />
+              ) : null}
             </div>
             <div className="bbc-audio-toolbar bbc-desktop-audio-toolbar">
               <nav aria-label="文章学习模式" className="bbc-audio-toolbar-settings bbc-audio-toolbar-modes bbc-desktop-mode-buttons">

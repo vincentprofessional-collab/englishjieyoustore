@@ -38,7 +38,6 @@ export function HomeStyleLab({
     <div className="home-style-lab home-simple">
       <section className="home-hero-panel home-announcement-panel" aria-label="英文解忧杂货铺首页介绍">
         <div className="home-hero-copy">
-          <span className="home-announcement-label">公告栏</span>
           <span
             className="home-kicker"
             style={{
@@ -65,11 +64,6 @@ export function HomeStyleLab({
             {content.summary}
           </p>
         </div>
-      </section>
-
-      <section aria-labelledby="home-updates-title" className="home-mobile-updates-heading">
-        <span>ANNOUNCEMENTS · POSTS</span>
-        <h2 id="home-updates-title">网站公告与帖子</h2>
       </section>
 
       <GuideBoard compact hideHeading hidePostChrome homeLanding initialExpanded={false} initialPostCount={initialPostCount} initialPosts={initialPosts} placementPath="/" postLimit={50} />
