@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSignedCosMediaUrl } from "@/lib/cos/storage";
 import { getSupabaseStorageUrl, isLegacyCosOnlyMediaPath } from "@/lib/media/url";
-import { isPrimarySchoolVocabularyImagePath } from "@/lib/vocabulary/primary-school-vocabulary-images";
+import { isVocabularyImagePath } from "@/lib/vocabulary/primary-school-vocabulary-images";
 import type { ManagedMediaBucket } from "@/lib/media/url";
 
 export const runtime = "nodejs";
@@ -111,7 +111,7 @@ async function handleMediaRequest(request: NextRequest) {
     return streamListeningAudio(request, cleanPath);
   }
 
-  if (bucket === "images" && isPrimarySchoolVocabularyImagePath(cleanPath)) {
+  if (bucket === "images" && isVocabularyImagePath(cleanPath)) {
     return streamVocabularyImage(request, cleanPath);
   }
 

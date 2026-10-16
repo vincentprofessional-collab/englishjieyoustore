@@ -3,6 +3,128 @@
   gap: 18px;
 }
 
+.levelList {
+  display: grid;
+  gap: 10px;
+}
+
+.levelGroup {
+  background: #fffdf8;
+  border: 1px solid rgba(169, 212, 234, 0.78);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.levelSummary {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  list-style: none;
+  min-height: 58px;
+  padding: 12px 18px;
+}
+
+.levelSummary::-webkit-details-marker {
+  display: none;
+}
+
+.levelSummary::after {
+  color: var(--accent-dark);
+  content: "+";
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1;
+  order: 1;
+}
+
+.levelGroup[open] > .levelSummary::after {
+  content: "−";
+}
+
+.levelSummary:focus-visible {
+  outline: 3px solid rgba(36, 93, 123, 0.2);
+  outline-offset: -3px;
+}
+
+.levelName {
+  color: var(--accent-dark);
+  font-size: 17px;
+  font-weight: 900;
+}
+
+.levelHint {
+  color: var(--muted);
+  font-size: 12px;
+  margin-left: auto;
+}
+
+.levelBody {
+  border-top: 1px solid rgba(169, 212, 234, 0.48);
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+}
+
+.levelContent {
+  display: grid;
+  gap: 12px;
+}
+
+.loadError {
+  align-items: center;
+  color: #8d3c26;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.loadError p {
+  margin: 0;
+}
+
+.alphabet {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.letterButton {
+  align-items: center;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  color: var(--accent-dark);
+  cursor: pointer;
+  display: inline-flex;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 850;
+  gap: 5px;
+  justify-content: center;
+  min-height: 34px;
+  min-width: 42px;
+  padding: 0 8px;
+}
+
+.letterButton small {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.letterButtonActive {
+  background: #dff2ff;
+  border-color: #b9def2;
+  box-shadow: inset 0 0 0 1px #b9def2;
+}
+
+.letterButton:focus-visible {
+  box-shadow: 0 0 0 3px rgba(36, 93, 123, 0.18);
+  outline: 0;
+}
+
 .header,
 .toolbar {
   align-items: end;
@@ -276,6 +398,17 @@
   }
 
   .bulkButton {
+    width: 100%;
+  }
+
+  .levelSummary {
+    align-items: start;
+    flex-wrap: wrap;
+  }
+
+  .levelHint {
+    margin-left: 0;
+    order: 2;
     width: 100%;
   }
 

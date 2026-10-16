@@ -1,12 +1,14 @@
 "use client";
 
 import { useMemo, useState, type ChangeEvent } from "react";
-import primarySchoolVocabulary from "@/data/vocabulary/primary-school-vocabulary.json";
 import { supabase } from "@/lib/supabase/client";
-import { getPrimarySchoolVocabularyImageUrl } from "@/lib/vocabulary/primary-school-vocabulary-images";
+import {
+  getVocabularyImageUrl,
+  vocabularyImageLevels,
+} from "@/lib/vocabulary/primary-school-vocabulary-images";
 import styles from "@/components/primary-school-vocabulary-image-admin.module.css";
 
-type VocabularyItem = (typeof primarySchoolVocabulary)[number];
+type VocabularyImageItem = { word: string; def: string };
 type ImageStatus = "present" | "missing";
 
 const PAGE_SIZE = 24;
@@ -21,7 +23,6 @@ async function prepareImage(file: File) {
   if (!allowedImageTypes.has(file.type)) {
     throw new Error("请选用 JPG、PNG 或 WebP 图片。");
   }
-  // Small source files go straight to the server's format-aware encoder.
   if (file.size <= 4 * 1024 * 1024) return file;
 
   const source = await createImageBitmap(file);
@@ -39,7 +40,9 @@ async function prepareImage(file: File) {
 
   const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, "image/webp", 0.78));
   if (!blob) throw new Error("图片压缩失败，请换一张图片再试。");
-  if (!allowedImageTypes.has(blob.type) || blob.size > 4 * 1024 * 1024) throw new Error("图片处理后仍过大，请先缩小图片再上传。");
+  if (!allowedImageTypes.has(blob.type) || blob.size > 4 * 1024 * 1024) {
+    throw new Error("图片处理后仍过大，请先缩小图片再上传。");
+  }
   const extension = blob.type === "image/webp" ? "webp" : blob.type === "image/png" ? "png" : "jpg";
   return new File([blob], `vocabulary.${extension}`, { type: blob.type, lastModified: file.lastModified });
 }
@@ -50,8 +53,93 @@ async function getAdminToken() {
   return session.access_token;
 }
 
-export function PrimarySchoolVocabularyImageAdmin() {
+export function VocabularyImageAdmin() {
+  const [openLevels, setOpenLevels] = useState<Record<string, boolean>>({});
+  const [itemsByLevel, setItemsByLevel] = useState<Record<string, VocabularyImageItem[]>>({});
+  const [loadingLevels, setLoadingLevels] = useState<Record<string, boolean>>({});
+  const [errorsByLevel, setErrorsByLevel] = useState<Record<string, string>>({});
+
+  async function loadLevel(levelId: string) {
+    setLoadingLevels((current) => ({ ...current, [levelId]: true }));
+    setErrorsByLevel((current) => ({ ...current, [levelId]: "" }));
+    try {
+      const token = await getAdminToken();
+      const response = await fetch(`${apiPath}?level=${encodeURIComponent(levelId)}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const result = await response.json().catch(() => ({})) as { error?: string; items?: VocabularyImageItem[] };
+      if (!response.ok || !Array.isArray(result.items)) throw new Error(result.error ?? "词库载入失败。");
+      setItemsByLevel((current) => ({ ...current, [levelId]: result.items ?? [] }));
+    } catch (error) {
+      setErrorsByLevel((current) => ({
+        ...current,
+        [levelId]: error instanceof Error ? error.message : "词库载入失败。",
+      }));
+    } finally {
+      setLoadingLevels((current) => ({ ...current, [levelId]: false }));
+    }
+  }
+
+  function handleToggle(levelId: string, open: boolean) {
+    setOpenLevels((current) => ({ ...current, [levelId]: open }));
+    if (open && !itemsByLevel[levelId] && !loadingLevels[levelId]) void loadLevel(levelId);
+  }
+
+  return (
+    <section className={styles.manager}>
+      <header className={styles.header}>
+        <div>
+          <span className={styles.kicker}>词汇图卡 · 按等级管理</span>
+          <h2>词汇图片</h2>
+          <p>先展开词库等级，再按首字母查看或批量上传。图片会压缩为最长边 512 像素的 WebP。</p>
+        </div>
+      </header>
+
+      <div className={styles.levelList}>
+        {vocabularyImageLevels.map((level) => {
+          const items = itemsByLevel[level.id];
+          const letters = items ? new Set(items.map(({ word }) => word[0]?.toUpperCase()).filter(Boolean)).size : null;
+          return (
+            <details
+              className={styles.levelGroup}
+              key={level.id}
+              onToggle={(event) => handleToggle(level.id, event.currentTarget.open)}
+            >
+              <summary className={styles.levelSummary}>
+                <span className={styles.levelName}>{level.label}词汇</span>
+                <span className={styles.levelHint}>
+                  {items ? `${items.length} 个词条 · ${letters} 个字母分组` : "点击展开"}
+                </span>
+              </summary>
+              <div className={styles.levelBody}>
+                {loadingLevels[level.id] ? <p className={styles.empty}>正在载入词库…</p> : null}
+                {errorsByLevel[level.id] ? (
+                  <div className={styles.loadError}>
+                    <p>{errorsByLevel[level.id]}</p>
+                    <button className={styles.replaceButton} onClick={() => void loadLevel(level.id)} type="button">重试</button>
+                  </div>
+                ) : null}
+                {items ? <VocabularyImageLevelPanel items={items} levelId={level.id} levelLabel={level.label} /> : null}
+              </div>
+            </details>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
+function VocabularyImageLevelPanel({
+  items,
+  levelId,
+  levelLabel,
+}: {
+  items: VocabularyImageItem[];
+  levelId: string;
+  levelLabel: string;
+}) {
   const [query, setQuery] = useState("");
+  const [activeLetter, setActiveLetter] = useState("A");
   const [page, setPage] = useState(0);
   const [imageStatuses, setImageStatuses] = useState<Record<string, ImageStatus>>({});
   const [imageVersions, setImageVersions] = useState<Record<string, number>>({});
@@ -60,13 +148,25 @@ export function PrimarySchoolVocabularyImageAdmin() {
   const [message, setMessage] = useState("");
   const [messageIsError, setMessageIsError] = useState(false);
 
+  const letters = useMemo(() => {
+    const counts = new Map<string, number>();
+    items.forEach(({ word }) => {
+      const letter = word[0]?.toUpperCase();
+      if (letter) counts.set(letter, (counts.get(letter) ?? 0) + 1);
+    });
+    return [...counts.entries()].sort(([a], [b]) => a.localeCompare(b));
+  }, [items]);
+  const selectedLetter = letters.some(([letter]) => letter === activeLetter) ? activeLetter : letters[0]?.[0] ?? "A";
   const normalizedQuery = normalizeWord(query);
-  const filteredWords = useMemo(() => primarySchoolVocabulary.filter((item) =>
-    !normalizedQuery || normalizeWord(item.word).includes(normalizedQuery) || item.def.toLowerCase().includes(query.trim().toLowerCase()),
-  ), [normalizedQuery, query]);
+  const filteredWords = useMemo(() => items.filter((item) => {
+    if (!normalizedQuery && !normalizeWord(item.word).startsWith(selectedLetter.toLowerCase())) return false;
+    return !normalizedQuery
+      || normalizeWord(item.word).includes(normalizedQuery)
+      || item.def.toLowerCase().includes(query.trim().toLowerCase());
+  }), [items, normalizedQuery, query, selectedLetter]);
   const pageCount = Math.max(1, Math.ceil(filteredWords.length / PAGE_SIZE));
   const visibleWords = filteredWords.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE);
-  const wordSet = useMemo(() => new Set(primarySchoolVocabulary.map(({ word }) => normalizeWord(word))), []);
+  const wordSet = useMemo(() => new Set(items.map(({ word }) => normalizeWord(word))), [items]);
   const busy = Boolean(busyWord || bulkProgress);
 
   function markImage(word: string, status: ImageStatus) {
@@ -80,6 +180,7 @@ export function PrimarySchoolVocabularyImageAdmin() {
   async function uploadOne(word: string, file: File, accessToken: string) {
     const prepared = await prepareImage(file);
     const body = new FormData();
+    body.append("level", levelId);
     body.append("word", word);
     body.append("file", prepared);
     const response = await fetch(apiPath, {
@@ -124,7 +225,7 @@ export function PrimarySchoolVocabularyImageAdmin() {
       else unmatched.push(file.name);
     }
     if (matched.length === 0) {
-      setMessage("没有匹配到词条。请把图片文件名设为词条，例如 air-conditioner.webp。");
+      setMessage("没有匹配到当前等级的词条。请把图片文件名设为词条，例如 air-conditioner.webp。");
       setMessageIsError(true);
       return;
     }
@@ -161,7 +262,7 @@ export function PrimarySchoolVocabularyImageAdmin() {
     try {
       const accessToken = await getAdminToken();
       const response = await fetch(apiPath, {
-        body: JSON.stringify({ word }),
+        body: JSON.stringify({ level: levelId, word }),
         headers: { Authorization: `Bearer ${accessToken}`, "Content-Type": "application/json" },
         method: "DELETE",
       });
@@ -180,33 +281,37 @@ export function PrimarySchoolVocabularyImageAdmin() {
   }
 
   return (
-    <section className={styles.manager}>
-      <header className={styles.header}>
-        <div>
-          <span className={styles.kicker}>词汇图卡 · 小学</span>
-          <h2>小学词汇图片</h2>
-          <p>共 {primarySchoolVocabulary.length} 个词条。上传或替换图片后，会自动在下方添加黄色词汇标签，并保存为 512 像素的 WebP 图卡。</p>
-        </div>
+    <div className={styles.levelContent}>
+      <div className={styles.alphabet} aria-label={`${levelLabel}词汇首字母`}>
+        {letters.map(([letter, count]) => (
+          <button
+            aria-pressed={selectedLetter === letter}
+            className={`${styles.letterButton}${selectedLetter === letter && !query ? ` ${styles.letterButtonActive}` : ""}`}
+            key={letter}
+            onClick={() => { setActiveLetter(letter); setQuery(""); setPage(0); }}
+            type="button"
+          >{letter}<small>{count}</small></button>
+        ))}
+      </div>
+
+      <div className={styles.toolbar}>
+        <label className={styles.search}>
+          <span>搜索{levelLabel}词条</span>
+          <input
+            onChange={(event) => { setQuery(event.target.value); setPage(0); }}
+            placeholder="输入英文或中文释义"
+            type="search"
+            value={query}
+          />
+        </label>
         <label className={styles.bulkButton}>
-          {bulkProgress ? `批量上传 ${bulkProgress.completed}/${bulkProgress.total}` : "批量上传图片"}
+          {bulkProgress ? `批量上传 ${bulkProgress.completed}/${bulkProgress.total}` : `批量上传${levelLabel}图片`}
           <input
             accept="image/jpeg,image/png,image/webp"
             disabled={busy}
             multiple
             onChange={(event) => void handleBulkUpload(event)}
             type="file"
-          />
-        </label>
-      </header>
-
-      <div className={styles.toolbar}>
-        <label className={styles.search}>
-          <span>搜索词条</span>
-          <input
-            onChange={(event) => { setQuery(event.target.value); setPage(0); }}
-            placeholder="输入英文或中文释义"
-            type="search"
-            value={query}
           />
         </label>
         <p className={styles.count}>显示 {visibleWords.length} / {filteredWords.length} 个词条</p>
@@ -220,9 +325,9 @@ export function PrimarySchoolVocabularyImageAdmin() {
       {message ? <p className={`${styles.message}${messageIsError ? ` ${styles.error}` : ""}`} role="status">{message}</p> : null}
 
       <div className={styles.grid}>
-        {visibleWords.map((item: VocabularyItem) => {
+        {visibleWords.map((item) => {
           const word = normalizeWord(item.word);
-          const imageUrl = getPrimarySchoolVocabularyImageUrl(word);
+          const imageUrl = getVocabularyImageUrl(levelId, word);
           const version = imageVersions[word] ?? 0;
           const imageStatus = imageStatuses[word];
           return (
@@ -268,6 +373,6 @@ export function PrimarySchoolVocabularyImageAdmin() {
         })}
       </div>
       {visibleWords.length === 0 ? <p className={styles.empty}>没有找到匹配词条。</p> : null}
-    </section>
+    </div>
   );
 }
