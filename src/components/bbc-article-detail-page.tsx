@@ -155,6 +155,16 @@ const SPEAKING_PLAYING_HINTS: Record<ActiveSpeakingMode, string> = {
   "sight-translation": "播放结束后自动进入练习计时",
 };
 
+function shouldUsePhoneAudioLayout() {
+  const userAgent = navigator.userAgent;
+  const isTablet = /ipad|tablet|playbook|silk/i.test(userAgent)
+    || (/macintosh/i.test(userAgent) && navigator.maxTouchPoints > 1)
+    || (/android/i.test(userAgent) && !/mobile/i.test(userAgent));
+  const isPhone = /iphone|ipod|windows phone/i.test(userAgent)
+    || (/android/i.test(userAgent) && /mobile/i.test(userAgent));
+  return !isTablet && (isPhone || window.matchMedia("(max-width: 820px)").matches);
+}
+
 function SpeakingTrainingStatus({
   activeSentenceNo,
   audioSettings,
@@ -856,8 +866,8 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
   }, [audioSettings]);
 
   useEffect(() => {
-    const mobileQuery = window.matchMedia("(max-width: 1024px), (any-pointer: coarse)");
-    const updateMobileAudioViewport = () => setIsMobileAudioViewport(mobileQuery.matches);
+    const mobileQuery = window.matchMedia("(max-width: 820px)");
+    const updateMobileAudioViewport = () => setIsMobileAudioViewport(shouldUsePhoneAudioLayout());
     updateMobileAudioViewport();
     if (typeof mobileQuery.addEventListener === "function") {
       mobileQuery.addEventListener("change", updateMobileAudioViewport);
@@ -1620,6 +1630,7 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
   return (
     <section
       className={`stack bbc-article-page ${isRetellingPractice ? "article-retelling-active" : ""}`}
+      data-mobile-audio-viewport={isMobileAudioViewport ? "true" : "false"}
       data-study-mode={studyMode}
       onCopy={(event) => event.preventDefault()}
       onCut={(event) => event.preventDefault()}
@@ -1755,6 +1766,25 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
             共 <b className="stat-number">{articleWordCount}</b> 词
           </div>
         </div>
+
+        {article.fullAudioUrl ? (
+          <div className="bbc-mobile-mode-controls">
+            <nav aria-label="文章学习模式" className="bbc-audio-toolbar bbc-article-mode-bar">
+              <div className="bbc-audio-toolbar-settings bbc-audio-toolbar-modes">
+                {articleModeControls}
+              </div>
+            </nav>
+            {studyMode === "speaking" && activeStudySentence ? (
+              <SpeakingTrainingStatus
+                activeSentenceNo={activeSentenceNo}
+                audioSettings={audioSettings}
+                isPlaying={isSentenceAudioPlaying}
+                sentenceNo={activeStudySentence.sentenceNo}
+                speakingTraining={speakingTraining}
+              />
+            ) : null}
+          </div>
+        ) : null}
 
         <StudyAnnotationTools
           buttonClassName="annotation-toggle ielts-exam-action bbc-annotation-toggle bbc-annotation-hidden-trigger"
@@ -2143,22 +2173,6 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
                 startAtSeconds={mobileSentenceAudio ? (mobileSentenceRange?.startSeconds ?? 0) + activeSentencePosition : fullAudioPosition}
                 title={mobileSentenceAudio ? `第 ${mobileSentenceAudio.sentenceNo} 句音频` : `${article.title} 完整音频`}
               />
-            </div>
-            <div className="bbc-mobile-audio-controls">
-              <nav aria-label="文章学习模式" className="bbc-audio-toolbar bbc-article-mode-bar bbc-mobile-audio-toolbar">
-                <div className="bbc-audio-toolbar-settings bbc-audio-toolbar-modes">
-                  {articleModeControls}
-                </div>
-              </nav>
-              {studyMode === "speaking" && activeStudySentence ? (
-                <SpeakingTrainingStatus
-                  activeSentenceNo={activeSentenceNo}
-                  audioSettings={audioSettings}
-                  isPlaying={isSentenceAudioPlaying}
-                  sentenceNo={activeStudySentence.sentenceNo}
-                  speakingTraining={speakingTraining}
-                />
-              ) : null}
             </div>
             <div className="bbc-audio-toolbar bbc-desktop-audio-toolbar">
               <nav aria-label="文章学习模式" className="bbc-audio-toolbar-settings bbc-audio-toolbar-modes bbc-desktop-mode-buttons">

@@ -35848,15 +35848,14 @@ body .mobile-bottom-nav a.active { color: #245d7b !important; }
   .guide-comment-reply-form > div { flex-wrap: wrap; }
 }
 
-.bbc-mobile-audio-controls { display: none; }
-@media (max-width: 1024px), (any-pointer: coarse) {
-  .bbc-article-page .bbc-mobile-audio-controls {
+.bbc-mobile-mode-controls { display: none; }
+.bbc-article-page[data-mobile-audio-viewport="true"] .bbc-mobile-mode-controls {
     display: flex;
     flex-direction: column;
     gap: 4px;
     margin-top: 4px;
   }
-  .bbc-article-page .bbc-mobile-audio-controls .bbc-article-mode-bar {
+.bbc-article-page[data-mobile-audio-viewport="true"] .bbc-mobile-mode-controls .bbc-article-mode-bar {
     background: #fffdf8;
     border: 1px solid rgba(228, 216, 189, 0.9);
     border-radius: 13px;
@@ -35865,38 +35864,38 @@ body .mobile-bottom-nav a.active { color: #245d7b !important; }
     overflow: visible;
     padding: 4px;
   }
-  .bbc-article-page .bbc-mobile-audio-controls .bbc-audio-toolbar-modes {
+.bbc-article-page[data-mobile-audio-viewport="true"] .bbc-mobile-mode-controls .bbc-audio-toolbar-modes {
     display: grid !important;
     gap: 4px;
     grid-template-columns: repeat(5, minmax(0, 1fr));
     width: 100%;
   }
-  .bbc-article-page .bbc-mobile-audio-controls .player-settings { display: contents; }
-  .bbc-article-page .bbc-mobile-audio-controls .player-menu,
-  .bbc-article-page .bbc-mobile-audio-controls .player-menu-trigger {
+.bbc-article-page[data-mobile-audio-viewport="true"] .bbc-mobile-mode-controls .player-settings { display: contents; }
+.bbc-article-page[data-mobile-audio-viewport="true"] .bbc-mobile-mode-controls .player-menu,
+.bbc-article-page[data-mobile-audio-viewport="true"] .bbc-mobile-mode-controls .player-menu-trigger {
     box-sizing: border-box;
     min-width: 0;
     width: 100%;
   }
-  .bbc-article-page .bbc-mobile-audio-controls .player-menu-trigger {
+.bbc-article-page[data-mobile-audio-viewport="true"] .bbc-mobile-mode-controls .player-menu-trigger {
     border-radius: 9px;
     font-size: 12px;
     min-height: 36px;
     padding: 0 2px;
     white-space: nowrap;
   }
-  .bbc-article-page .bbc-mobile-audio-controls .player-menu-panel {
+.bbc-article-page[data-mobile-audio-viewport="true"] .bbc-mobile-mode-controls .player-menu-panel {
     max-width: calc(100vw - 32px);
     min-width: 160px;
     position: absolute;
     width: max-content;
     z-index: 150;
   }
-  .bbc-article-page .bbc-mobile-audio-controls .player-settings:last-child .player-menu:nth-child(2) .player-menu-panel {
+.bbc-article-page[data-mobile-audio-viewport="true"] .bbc-mobile-mode-controls .player-settings:last-child .player-menu:nth-child(2) .player-menu-panel {
     left: auto;
     right: 0;
   }
-  .bbc-article-page .bbc-mobile-audio-controls .bbc-speaking-training-status {
+.bbc-article-page[data-mobile-audio-viewport="true"] .bbc-mobile-mode-controls .bbc-speaking-training-status {
     border-radius: 9px;
     font-size: 11px;
     gap: 2px 6px;
@@ -35904,6 +35903,5 @@ body .mobile-bottom-nav a.active { color: #245d7b !important; }
     margin: 0;
     padding: 4px 7px;
   }
-  .bbc-article-page .bbc-mobile-audio-controls .bbc-speaking-training-status small { flex-basis: auto; }
-  .bbc-article-page .bbc-desktop-audio-toolbar { display: none !important; }
-}
+.bbc-article-page[data-mobile-audio-viewport="true"] .bbc-mobile-mode-controls .bbc-speaking-training-status small { flex-basis: auto; }
+.bbc-article-page[data-mobile-audio-viewport="true"] .bbc-desktop-audio-toolbar { display: none !important; }

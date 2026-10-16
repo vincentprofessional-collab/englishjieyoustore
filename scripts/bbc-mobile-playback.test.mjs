@@ -403,6 +403,41 @@ test("entering retelling stops existing playback without changing the selected l
   }
 });
 
+test("mobile BBC study-mode buttons render below the article title, outside the sticky audio panel", () => {
+  const article = fs.readFileSync(new URL("../src/components/bbc-article-detail-page.tsx", import.meta.url), "utf8");
+  const css = fs.readFileSync(new URL("../src/app/globals.css", import.meta.url), "utf8");
+  const hero = article.indexOf('className="page-heading bbc-article-hero"');
+  const modes = article.indexOf('className="bbc-mobile-mode-controls"');
+  const annotationTools = article.indexOf("<StudyAnnotationTools", modes);
+  const study = article.indexOf('<div className="bbc-article-study"', modes);
+  const audioPanel = article.indexOf('<section className="bbc-full-audio-panel"', study);
+  const ast = ts.createSourceFile("article.tsx", article, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  let phoneLayoutFunction;
+  function collect(node) {
+    if (ts.isFunctionDeclaration(node) && node.name?.text === "shouldUsePhoneAudioLayout") phoneLayoutFunction = node.getText(ast);
+    ts.forEachChild(node, collect);
+  }
+  collect(ast);
+
+  assert.ok(hero >= 0 && hero < modes && modes < annotationTools && annotationTools < study && study < audioPanel);
+  assert.ok(article.slice(modes, annotationTools).includes("{articleModeControls}"));
+  assert.ok(!article.slice(audioPanel).includes('className="bbc-mobile-mode-controls"'));
+  assert.ok(css.includes('.bbc-article-page[data-mobile-audio-viewport="true"] .bbc-desktop-audio-toolbar { display: none !important; }'));
+
+  const code = ts.transpileModule(phoneLayoutFunction, { compilerOptions: { target: ts.ScriptTarget.ES2022 } }).outputText;
+  for (const [userAgent, maxTouchPoints, narrow, expected] of [
+    ["Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X)", 5, false, true],
+    ["Mozilla/5.0 (iPad; CPU OS 18_0 like Mac OS X) Mobile/22A3354 Safari/604.1", 5, true, false],
+    ["Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15) Safari/605.1.15", 5, true, false],
+    ["Mozilla/5.0 (Linux; Android 14; Pixel Tablet)", 5, true, false],
+    ["Mozilla/5.0 (Linux; Android 14; Pixel 9) AppleWebKit/537.36 Mobile Safari/537.36", 5, false, true],
+  ]) {
+    const context = vm.createContext({ navigator: { userAgent, maxTouchPoints }, window: { matchMedia: () => ({ matches: narrow }) } });
+    vm.runInContext(code, context);
+    assert.equal(context.shouldUsePhoneAudioLayout(), expected, userAgent);
+  }
+});
+
 test("retelling listening choices preserve a paused state until the user presses Play", () => {
   const ast = ts.createSourceFile("article.tsx", fs.readFileSync(new URL("../src/components/bbc-article-detail-page.tsx", import.meta.url), "utf8"), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
   let handler;
