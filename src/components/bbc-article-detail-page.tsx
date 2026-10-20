@@ -1751,14 +1751,16 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
             </div>
           </div>
           <h1 aria-label={`${article.title} ${articleTitleChinese}`.trim()}>
-            <span className="bbc-article-title-line" lang="en">
-              {article.title}
-            </span>
-            {articleTitleChinese ? (
-              <span className="bbc-article-title-line" lang="zh-CN">
-                {articleTitleChinese}
+            <span className="bbc-article-title-group">
+              <span className="bbc-article-title-line" lang="en">
+                {article.title}
               </span>
-            ) : null}
+              {articleTitleChinese ? (
+                <span className="bbc-article-title-line" lang="zh-CN">
+                  {articleTitleChinese}
+                </span>
+              ) : null}
+            </span>
             <time className="bbc-article-date" dateTime={article.date}>
               {article.date.replaceAll("-", ".")}
             </time>

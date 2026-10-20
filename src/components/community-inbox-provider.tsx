@@ -62,9 +62,8 @@ export function CommunityInboxProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     void refresh();
     const onVisible = () => { if (document.visibilityState === "visible") void refresh(); };
-    const timer = window.setInterval(onVisible, 60000);
     window.addEventListener("focus", onVisible); document.addEventListener("visibilitychange", onVisible);
-    return () => { window.clearInterval(timer); window.removeEventListener("focus", onVisible); document.removeEventListener("visibilitychange", onVisible); activeRequest.current?.abort(); };
+    return () => { window.removeEventListener("focus", onVisible); document.removeEventListener("visibilitychange", onVisible); activeRequest.current?.abort(); };
   }, [refresh]);
 
   const markRead = useCallback(async (until: string) => {

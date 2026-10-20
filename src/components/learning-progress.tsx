@@ -289,8 +289,6 @@ export function LearningProgress() {
       setVocabularyHistory(history);
     };
     refresh();
-    const timer = window.setInterval(refresh, 5000);
-    return () => window.clearInterval(timer);
   }, []);
 
   return <main className="stack learning-progress-page">

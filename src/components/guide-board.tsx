@@ -311,12 +311,10 @@ function GuidePostCard({
       finally { loading = false; }
     };
     void refresh();
-    const timer = window.setInterval(() => void refresh(), 60_000);
     window.addEventListener("focus", refresh);
     document.addEventListener("visibilitychange", refresh);
     return () => {
       active = false;
-      window.clearInterval(timer);
       window.removeEventListener("focus", refresh);
       document.removeEventListener("visibilitychange", refresh);
     };

@@ -55,10 +55,9 @@ export function useAdminCommentInbox(userId: string | null, open: boolean) {
     const controller = new AbortController();
     const update = () => { if (document.visibilityState === "visible") void refresh(controller.signal); };
     update();
-    const timer = window.setInterval(update, 60_000);
     window.addEventListener("focus", update);
     document.addEventListener("visibilitychange", update);
-    return () => { controller.abort(); window.clearInterval(timer); window.removeEventListener("focus", update); document.removeEventListener("visibilitychange", update); };
+    return () => { controller.abort(); window.removeEventListener("focus", update); document.removeEventListener("visibilitychange", update); };
   }, [userId, refresh]);
 
   async function deleteComment(comment: InboxComment) {

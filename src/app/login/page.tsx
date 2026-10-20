@@ -7,9 +7,6 @@ import { getAuthErrorFeedback, reportAuthFailure } from "@/lib/supabase/auth-req
 type AuthMode = "login" | "register";
 
 const AUTH_REDIRECT_URL = "https://www.englishjieyou.cn/login";
-const SESSION_ID_KEY = "ielts-platform.analytics.sessionId";
-const SESSION_STARTED_KEY = "ielts-platform.analytics.startedAt";
-const SESSION_FIRST_PATH_KEY = "ielts-platform.analytics.firstPath";
 
 function getSafeRedirectPath() {
   const searchParams = new URLSearchParams(window.location.search);
@@ -30,79 +27,6 @@ function getAuthRedirectUrl() {
   }
 
   return `${window.location.origin}/login?redirect=${encodeURIComponent(redirectPath)}`;
-}
-
-function getSessionId() {
-  const existingId = window.sessionStorage.getItem(SESSION_ID_KEY);
-
-  if (existingId) {
-    return existingId;
-  }
-
-  const nextId =
-    typeof crypto !== "undefined" && "randomUUID" in crypto
-      ? crypto.randomUUID()
-      : `${Date.now()}-${Math.random().toString(16).slice(2)}`;
-
-  window.sessionStorage.setItem(SESSION_ID_KEY, nextId);
-  window.sessionStorage.setItem(SESSION_STARTED_KEY, new Date().toISOString());
-  return nextId;
-}
-
-function getStartedAt() {
-  const value = window.sessionStorage.getItem(SESSION_STARTED_KEY);
-
-  if (value) {
-    return value;
-  }
-
-  const nextValue = new Date().toISOString();
-  window.sessionStorage.setItem(SESSION_STARTED_KEY, nextValue);
-  return nextValue;
-}
-
-function getFirstPath(path: string) {
-  const existingPath = window.sessionStorage.getItem(SESSION_FIRST_PATH_KEY);
-
-  if (existingPath) {
-    return existingPath;
-  }
-
-  window.sessionStorage.setItem(SESSION_FIRST_PATH_KEY, path);
-  return path;
-}
-
-function getDurationSeconds(startedAt: string) {
-  return Math.max(0, Math.round((Date.now() - new Date(startedAt).getTime()) / 1000));
-}
-
-async function recordAuthEvent(eventType: "login" | "registration", accessToken: string) {
-  try {
-    const startedAt = getStartedAt();
-    const headers: HeadersInit = {
-      Authorization: `Bearer ${accessToken}`,
-      "Content-Type": "application/json",
-    };
-
-    await fetch("/api/site-activity", {
-      body: JSON.stringify({
-        durationSeconds: getDurationSeconds(startedAt),
-        eventType,
-        firstPath: getFirstPath("/login"),
-        pageTitle: document.title,
-        path: "/login",
-        referrer: document.referrer || null,
-        sessionId: getSessionId(),
-        startedAt,
-      }),
-      headers,
-      keepalive: true,
-      method: "POST",
-      signal: AbortSignal.timeout(5_000),
-    });
-  } catch {
-    // 统计失败不能影响登录或注册。
-  }
 }
 
 async function uploadProfileAvatar(file: File, accessToken: string) {
@@ -161,8 +85,6 @@ export default function LoginPage() {
 
       if (error) throw error;
 
-      if (data.session) void recordAuthEvent("login", data.session.access_token);
-
       const redirectPath = getSafeRedirectPath();
 
       if (redirectPath) {
@@ -215,10 +137,6 @@ export default function LoginPage() {
         password: registerPassword,
       });
       if (error) throw error;
-
-      if (data.user && data.session) {
-        void recordAuthEvent("registration", data.session.access_token);
-      }
 
       let avatarMessage = "";
       if (data.session && registerAvatarFile) {
