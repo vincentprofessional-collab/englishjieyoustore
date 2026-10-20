@@ -1,5 +1,6 @@
 import { ArticlesHome } from "@/components/articles-home";
 import { BBC_DEFAULT_YEAR, BBC_YEARS, getBbcArticlesByYear } from "@/lib/articles/bbc";
+import { isFreeBbc2015ArticleUnlocked } from "@/lib/articles/bbc-free-access.mjs";
 import { getUploadedBbcArticles } from "@/lib/articles/bbc-uploaded-content";
 import { getPublishedPageContent } from "@/lib/content/page-content";
 
@@ -23,6 +24,7 @@ export default async function ArticlesPage({
       .sort((left, right) => right.id.localeCompare(left.id))
       .map((article) => ({
         date: article.date,
+        guestFree: isFreeBbc2015ArticleUnlocked(article.id),
         id: article.id,
         title: article.title,
         titleChinese: article.titleChinese,
@@ -35,6 +37,7 @@ export default async function ArticlesPage({
       .filter(({ article }) => article.year === group.year)
       .map(({ article }) => ({
         date: article.date,
+        guestFree: isFreeBbc2015ArticleUnlocked(article.id),
         id: article.id,
         title: article.title,
         titleChinese: article.titleChinese,

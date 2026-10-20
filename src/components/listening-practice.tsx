@@ -60,6 +60,7 @@ import {
 } from "@/lib/study-selection";
 import { clearPersistedInlineHighlights, focusInlineText, inlineHighlightKey, persistInlineHighlight, restoreInlineHighlights, textOccurrenceForRange } from "@/lib/inline-highlights";
 import { cleanVocabularyDefinition } from "@/lib/vocabulary/display";
+import { FAVORITE_WORDS_CHANGED_EVENT, FAVORITE_WORDS_STORAGE_KEY } from "@/lib/vocabulary/learning";
 import type { LocalVocabularyHint } from "@/lib/vocabulary/local-vocabulary";
 import {
   getActiveWordIndex,
@@ -191,7 +192,6 @@ type ActiveWordTooltip = {
 const FAVORITE_SENTENCES_STORAGE_KEY = "ielts-platform.favoriteSentences";
 const FAVORITE_ANNOTATIONS_STORAGE_KEY = "ielts-platform.favoriteAnnotations";
 const FAVORITE_QUESTIONS_STORAGE_KEY = "ielts-platform.favoriteQuestions";
-const FAVORITE_WORDS_STORAGE_KEY = "ielts-platform.favoriteWords";
 const LISTENING_REVIEW_ANSWERS_STORAGE_PREFIX = "ielts-platform.listeningReviewAnswers";
 const LISTENING_ATTEMPT_STORAGE_PREFIX = "ielts-platform.listeningAttempt";
 const LISTENING_REVIEW_DEFAULT_LEFT_PERCENT = 40;
@@ -3412,6 +3412,7 @@ export function ListeningPractice({
       (a, b) => new Date(b.savedAt).getTime() - new Date(a.savedAt).getTime(),
     );
     window.localStorage.setItem(FAVORITE_WORDS_STORAGE_KEY, JSON.stringify(sortedItems));
+    window.dispatchEvent(new Event(FAVORITE_WORDS_CHANGED_EVENT));
     setFavoriteWordIds(sortedItems.map((item) => item.id));
   }
 

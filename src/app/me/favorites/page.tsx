@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
 import { playVocabularyPronunciation } from "@/lib/vocabulary/pronunciation-audio";
+import { FAVORITE_WORDS_CHANGED_EVENT, FAVORITE_WORDS_STORAGE_KEY } from "@/lib/vocabulary/learning";
 import { supabase } from "@/lib/supabase/client";
 import { getPublicStorageUrl } from "@/lib/supabase/storage";
 
@@ -96,7 +97,6 @@ const FAVORITE_ANNOTATIONS_STORAGE_KEY = "ielts-platform.favoriteAnnotations";
 const FAVORITE_ARTICLES_STORAGE_KEY = "ielts-platform.favoriteArticles";
 const FAVORITE_QUESTIONS_STORAGE_KEY = "ielts-platform.favoriteQuestions";
 const FAVORITE_SENTENCES_STORAGE_KEY = "ielts-platform.favoriteSentences";
-const FAVORITE_WORDS_STORAGE_KEY = "ielts-platform.favoriteWords";
 
 const favoriteTabs: Array<{ id: FavoriteTab; label: string; eyebrow: string }> = [
   { id: "words", label: "单词", eyebrow: "Words" },
@@ -159,6 +159,7 @@ function readStorageList<T>(key: string) {
 
 function writeStorageList<T>(key: string, items: T[]) {
   window.localStorage.setItem(key, JSON.stringify(items));
+  if (key === FAVORITE_WORDS_STORAGE_KEY) window.dispatchEvent(new Event(FAVORITE_WORDS_CHANGED_EVENT));
 }
 
 function getFavoriteSentenceLookupKey(sentence: FavoriteSentenceItem) {
@@ -702,6 +703,19 @@ export default function FavoritesPage() {
       setSentences(hydratedSentences);
       writeStorageList(FAVORITE_SENTENCES_STORAGE_KEY, hydratedSentences);
     });
+  }, []);
+
+  useEffect(() => {
+    const refreshWords = () => setWords(readStorageList<FavoriteWordItem>(FAVORITE_WORDS_STORAGE_KEY));
+    const handleStorage = (event: StorageEvent) => {
+      if (event.key === FAVORITE_WORDS_STORAGE_KEY) refreshWords();
+    };
+    window.addEventListener(FAVORITE_WORDS_CHANGED_EVENT, refreshWords);
+    window.addEventListener("storage", handleStorage);
+    return () => {
+      window.removeEventListener(FAVORITE_WORDS_CHANGED_EVENT, refreshWords);
+      window.removeEventListener("storage", handleStorage);
+    };
   }, []);
 
   const counts = useMemo(

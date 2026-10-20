@@ -16,6 +16,7 @@ import {
 } from "@/lib/study-selection";
 import { cleanPartOfSpeech, cleanVocabularyDefinition } from "@/lib/vocabulary/display";
 import { loadVocabularyHoverHint } from "@/lib/vocabulary/hover-hint";
+import { FAVORITE_WORDS_CHANGED_EVENT, FAVORITE_WORDS_STORAGE_KEY } from "@/lib/vocabulary/learning";
 
 type VocabularyHint = {
   definitionCn: string;
@@ -56,8 +57,6 @@ type SavedSelectionNote = {
 };
 
 const GLOBAL_SELECTION_NOTES_KEY = "ielts-platform.globalSelectionNotes";
-const FAVORITE_WORDS_STORAGE_KEY = "ielts-platform.favoriteWords";
-
 type FavoriteWordItem = {
   definitionCn: string;
   id: string;
@@ -112,6 +111,7 @@ function writeFavoriteWords(items: FavoriteWordItem[]) {
     (left, right) => new Date(right.savedAt).getTime() - new Date(left.savedAt).getTime(),
   );
   window.localStorage.setItem(FAVORITE_WORDS_STORAGE_KEY, JSON.stringify(sortedItems));
+  window.dispatchEvent(new Event(FAVORITE_WORDS_CHANGED_EVENT));
 }
 
 function pointIsInsideRect(rect: DOMRect, clientX: number, clientY: number) {
@@ -225,7 +225,17 @@ export function GlobalStudyInteractions() {
   }, []);
 
   useEffect(() => {
-    setFavoriteWordIds(readFavoriteWords().map((item) => item.id));
+    const refreshFavorites = () => setFavoriteWordIds(readFavoriteWords().map((item) => item.id));
+    const handleStorage = (event: StorageEvent) => {
+      if (event.key === FAVORITE_WORDS_STORAGE_KEY) refreshFavorites();
+    };
+    refreshFavorites();
+    window.addEventListener(FAVORITE_WORDS_CHANGED_EVENT, refreshFavorites);
+    window.addEventListener("storage", handleStorage);
+    return () => {
+      window.removeEventListener(FAVORITE_WORDS_CHANGED_EVENT, refreshFavorites);
+      window.removeEventListener("storage", handleStorage);
+    };
   }, []);
 
   useEffect(() => {
@@ -365,7 +375,7 @@ export function GlobalStudyInteractions() {
     }
 
     function handlePointerDown(event: PointerEvent) {
-      if (event.pointerType !== "touch" || "ontouchstart" in window) return;
+      if (event.pointerType !== "touch") return;
       startLongPress(event.target, event.clientX, event.clientY);
     }
 
@@ -379,12 +389,12 @@ export function GlobalStudyInteractions() {
     }
 
     function handlePointerMove(event: PointerEvent) {
-      if (event.pointerType !== "touch" || "ontouchstart" in window) return;
+      if (event.pointerType !== "touch") return;
       checkLongPressMovement(event.clientX, event.clientY);
     }
 
     function handlePointerEnd(event: PointerEvent) {
-      if (event.pointerType !== "touch" || "ontouchstart" in window) return;
+      if (event.pointerType !== "touch") return;
       clearLongPressTimer();
       if (longPressTriggeredRef.current) {
         suppressTouchClickUntilRef.current = Date.now() + 1000;
@@ -401,12 +411,17 @@ export function GlobalStudyInteractions() {
 
     function handleClick(event: MouseEvent) {
       if (Date.now() > suppressTouchClickUntilRef.current) return;
+      if (event.target instanceof Element && event.target.closest(".word-tooltip-floating")) {
+        suppressTouchClickUntilRef.current = 0;
+        return;
+      }
       suppressTouchClickUntilRef.current = 0;
       event.preventDefault();
       event.stopImmediatePropagation();
     }
 
     function handleTouchStart(event: TouchEvent) {
+      if (typeof window.PointerEvent !== "undefined") return;
       if (event.touches.length !== 1) {
         clearLongPressTimer();
         return;
@@ -415,11 +430,13 @@ export function GlobalStudyInteractions() {
       startLongPress(event.target, touch.clientX, touch.clientY);
     }
     function handleTouchMove(event: TouchEvent) {
+      if (typeof window.PointerEvent !== "undefined") return;
       const touch = event.touches[0];
       if (touch) checkLongPressMovement(touch.clientX, touch.clientY);
       else clearLongPressTimer();
     }
     function handleTouchEnd(event: TouchEvent) {
+      if (typeof window.PointerEvent !== "undefined") return;
       clearLongPressTimer();
       if (longPressTriggeredRef.current) {
         suppressTouchClickUntilRef.current = Date.now() + 1000;

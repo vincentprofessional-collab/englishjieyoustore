@@ -48,7 +48,17 @@ export function VocabularyFavoriteButton({ entry }: VocabularyFavoriteButtonProp
   const [isSaved, setIsSaved] = useState(false);
 
   useEffect(() => {
-    setIsSaved(readFavoriteWords().some((item) => item.id === entry.normalizedWord));
+    const refresh = () => setIsSaved(readFavoriteWords().some((item) => item.id === entry.normalizedWord));
+    const handleStorage = (event: StorageEvent) => {
+      if (event.key === FAVORITE_WORDS_STORAGE_KEY) refresh();
+    };
+    refresh();
+    window.addEventListener(FAVORITE_WORDS_CHANGED_EVENT, refresh);
+    window.addEventListener("storage", handleStorage);
+    return () => {
+      window.removeEventListener(FAVORITE_WORDS_CHANGED_EVENT, refresh);
+      window.removeEventListener("storage", handleStorage);
+    };
   }, [entry.normalizedWord]);
 
   function toggleFavorite() {

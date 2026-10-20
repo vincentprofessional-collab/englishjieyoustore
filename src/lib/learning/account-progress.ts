@@ -1,8 +1,10 @@
+import { FAVORITE_WORDS_STORAGE_KEY } from "@/lib/vocabulary/learning";
+
 export const ACCOUNT_PROGRESS_BUCKET = "account-learning-progress";
 export const ACCOUNT_PROGRESS_EVENT = "englishjieyou:account-progress";
 export const VOCABULARY_PROGRESS_KEY = "ielts-vocabulary-learning-v1";
 export const STUDY_HISTORY_KEY = "ielts-platform.analytics.dailyProgress";
-const fixedKeys = new Set([VOCABULARY_PROGRESS_KEY, STUDY_HISTORY_KEY, "ielts-vocabulary-daily-activity-v1", "ielts-vocabulary-group-progress-v1", "ielts-vocabulary-learning-settings-v1", "ielts-platform.favoriteQuestions"]);
+const fixedKeys = new Set([VOCABULARY_PROGRESS_KEY, STUDY_HISTORY_KEY, "ielts-vocabulary-daily-activity-v1", "ielts-vocabulary-group-progress-v1", "ielts-vocabulary-learning-settings-v1", "ielts-platform.favoriteQuestions", FAVORITE_WORDS_STORAGE_KEY]);
 export function isProgressKey(key: string) { return fixedKeys.has(key) || /^ielts-platform\.(listeningAttempt|listeningReviewAnswers)\./.test(key); }
 type Data = Record<string, any>;
 export type ProgressRecord = { value: any; updatedAt: number };
@@ -11,7 +13,7 @@ export function emptyAccountSnapshot(): AccountSnapshot { return { version: 1, e
 const object = (value: any): Data => value && typeof value === "object" && !Array.isArray(value) ? value : {};
 const positive = (value: any) => Number.isFinite(Number(value)) ? Math.max(0, Number(value)) : 0;
 function union(left: any[] = [], right: any[] = []) { return [...new Map([...left, ...right].map(item => [typeof item === "string" ? item : JSON.stringify(item), item])).values()]; }
-export function validRecordKey(key: string) { return key.startsWith("v:") && key.length <= 250 && !["__proto__", "constructor", "prototype"].includes(key.slice(2)) || /^h:\d{4}-\d{2}-\d{2}$/.test(key) || key.startsWith("k:") && isProgressKey(key.slice(2)); }
+export function validRecordKey(key: string) { return key.startsWith("v:") && key.length <= 250 && !["__proto__", "constructor", "prototype"].includes(key.slice(2)) || /^h:\d{4}-\d{2}-\d{2}$/.test(key) || key.startsWith("k:") && isProgressKey(key.slice(2)) || key.startsWith("f:") && key.length > 2 && key.length <= 512; }
 export function sanitizeAccountSnapshot(input: any): AccountSnapshot {
   const result = emptyAccountSnapshot();
   for (const [key, value] of Object.entries(object(input?.entries))) {
@@ -63,6 +65,10 @@ export function flattenProgressValues(values: Record<string, any>) {
       for (const [word, row] of Object.entries(object(progress))) result[`v:${word}`] = row;
     } else if (key === STUDY_HISTORY_KEY) {
       for (const [date, row] of Object.entries(object(value))) { const { seconds, activitySeconds, ...rest } = object(row); result[`h:${date}`] = rest; }
+    } else if (key === FAVORITE_WORDS_STORAGE_KEY) {
+      for (const item of Array.isArray(value) ? value : []) {
+        if (item && typeof item === "object" && typeof item.id === "string" && item.id.length > 0 && item.id.length <= 510) result[`f:${item.id}`] = item;
+      }
     } else result[`k:${key}`] = value;
   }
   return result;
@@ -84,15 +90,17 @@ export function captureAccountChanges(values: Record<string, any>, baseline: Rec
   return delta;
 }
 export function materializeAccountProgress(snapshot: AccountSnapshot) {
-  const values: Record<string, any> = {}, progress: Data = {}, history: Data = {};
+  const values: Record<string, any> = {}, progress: Data = {}, history: Data = {}, favorites = new Map<string, any>();
   for (const [key, row] of Object.entries(snapshot.entries)) {
     if (row.value === null) continue;
     if (key.startsWith("k:")) values[key.slice(2)] = row.value;
     else if (key.startsWith("v:")) progress[key.slice(2)] = row.value;
     else if (key.startsWith("h:")) history[key.slice(2)] = row.value;
+    else if (key.startsWith("f:") && typeof row.value.id === "string") favorites.set(row.value.id, row.value);
   }
   if (Object.keys(progress).length || values[VOCABULARY_PROGRESS_KEY]) values[VOCABULARY_PROGRESS_KEY] = { ...values[VOCABULARY_PROGRESS_KEY], progress, reviewScheduleVersion: 2 };
   for (const [date, time] of Object.entries(snapshot.times)) history[date] = { lookedUpWords: [], studyItems: [], ...history[date], ...time };
   if (Object.keys(history).length) values[STUDY_HISTORY_KEY] = history;
+  if (favorites.size) values[FAVORITE_WORDS_STORAGE_KEY] = [...favorites.values()].sort((left, right) => new Date(right.savedAt).getTime() - new Date(left.savedAt).getTime());
   return values;
 }

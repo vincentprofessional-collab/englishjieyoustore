@@ -9,7 +9,8 @@ function load(path, imports = {}) {
  vm.runInNewContext(source,{exports,Date,JSON,Response,Blob,process:{env:{NEXT_PUBLIC_SUPABASE_URL:'https://fixture.invalid',SUPABASE_SERVICE_ROLE_KEY:'fixture'}},require:name=>{assert.ok(name in imports,name);return imports[name];}});
  return exports;
 }
-const model=load('../src/lib/learning/account-progress.ts');
+const FAVORITES='ielts-platform.favoriteWords';
+const model=load('../src/lib/learning/account-progress.ts',{'@/lib/vocabulary/learning':{FAVORITE_WORDS_STORAGE_KEY:FAVORITES}});
 const {emptyAccountSnapshot:empty, mergeAccountSnapshots:merge, captureAccountChanges:capture, materializeAccountProgress:restore, VOCABULARY_PROGRESS_KEY:VOC, STUDY_HISTORY_KEY:HISTORY}=model;
 const at=Date.now()-1000;
 const progress=(word,time,outcome='familiar')=>({[VOC]:{progress:{[word]:{lastReviewedAt:time,completed:true,familiarity:outcome,modeOutcomes:{reading:outcome}}}}});
@@ -46,6 +47,14 @@ test('empty second devices retain cloud records and explicit local removals use 
  assert.equal(restore(merge([existing,removed]))[VOC],undefined);
  const answers={'ielts-platform.listeningReviewAnswers.section-1':{1:'answer'}};
  assert.equal(restore(capture(answers,{},empty(),at))['ielts-platform.listeningReviewAnswers.section-1'][1],'answer');
+});
+test('vocabulary favorites merge by word across devices and removals become tombstones',()=>{
+ const baby={id:'baby',word:'baby',savedAt:new Date(at).toISOString()},bigger={id:'bigger',word:'bigger',savedAt:new Date(at+1).toISOString()};
+ const phone=capture({[FAVORITES]:[baby]}, {}, empty(), at),tablet=capture({[FAVORITES]:[bigger]}, {}, empty(), at+1);
+ const combined=merge([phone,tablet]);
+ assert.equal(restore(combined)[FAVORITES].map(item=>item.id).sort().join(','),'baby,bigger');
+ const removed=capture({[FAVORITES]:[bigger]}, {[FAVORITES]:[baby,bigger]}, combined, at+2);
+ assert.equal(restore(merge([combined,removed]))[FAVORITES].map(item=>item.id).join(','),'bigger');
 });
 function routeFixture(){
  const user='11111111-1111-4111-8111-111111111111', other='22222222-2222-4222-8222-222222222222', d1='33333333-3333-4333-8333-333333333333', d2='44444444-4444-4444-8444-444444444444';

@@ -1993,6 +1993,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
   const [activeGroupByBook, setActiveGroupByBook] = useState<Record<string, ActiveGroupProgress>>({});
   const [groupProgressHydrated, setGroupProgressHydrated] = useState(false);
   const [definitionChoice, setDefinitionChoice] = useState<number | null>(null);
+  const [definitionOptionLineCount, setDefinitionOptionLineCount] = useState<2 | 3>(2);
   const [wakeTick, setWakeTick] = useState(0);
   const [roundNonce, setRoundNonce] = useState(0);
   const [pageVisible, setPageVisible] = useState(() => typeof document === "undefined" || document.visibilityState === "visible");
@@ -2009,6 +2010,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
   const [sidebarHeight, setSidebarHeight] = useState<number | null>(null);
 
   const sidebarRef = useRef<HTMLElement | null>(null);
+  const definitionOptionGroupRef = useRef<HTMLDivElement | null>(null);
   const roundTokenRef = useRef(0);
   const browseSpellingRevealedTokenRef = useRef(-1);
   const speakingDetailsRevealedTokenRef = useRef(-1);
@@ -2623,6 +2625,31 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
     ? `${currentWord.id}:${modeIndex}:${roundNonce}:${browseMode ? "browse" : "classified"}`
     : null;
   const currentRoundRevealed = currentRoundKey !== null && revealedRoundKey === currentRoundKey;
+  useEffect(() => {
+    const group = definitionOptionGroupRef.current;
+    if (!group) {
+      setDefinitionOptionLineCount(2);
+      return;
+    }
+
+    const measureOptionLines = () => {
+      const lineCounts = Array.from(group.querySelectorAll<HTMLSpanElement>("button > span")).map((option) => {
+        const lineHeight = Number.parseFloat(window.getComputedStyle(option).lineHeight);
+        return lineHeight > 0 ? Math.round(option.scrollHeight / lineHeight) : 2;
+      });
+      const nextLineCount = Math.min(3, Math.max(2, ...lineCounts)) as 2 | 3;
+      setDefinitionOptionLineCount((current) => current === nextLineCount ? current : nextLineCount);
+    };
+
+    measureOptionLines();
+    const observer = typeof ResizeObserver === "undefined" ? null : new ResizeObserver(measureOptionLines);
+    observer?.observe(group);
+    window.addEventListener("resize", measureOptionLines);
+    return () => {
+      observer?.disconnect();
+      window.removeEventListener("resize", measureOptionLines);
+    };
+  }, [currentRoundRevealed, currentSettings.showOptions, currentWordId, definitionOptions, modeIndex]);
   const revealCurrentRound = useCallback(() => {
     if (currentRoundKey) setRevealedRoundKey(currentRoundKey);
   }, [currentRoundKey]);
@@ -3634,7 +3661,13 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
     {currentSettings.showExamples ? <LearningRoundExamples word={currentWord} /> : null}
   </> : null;
   const definitionChoiceCards = currentSettings.showOptions && currentWord && modeIndex < 2 && definitionOptions.length >= 4 ? (
-    <div aria-label="释义选项" className="vocabulary-learning-definition-options" role="group">
+    <div
+      aria-label="释义选项"
+      className="vocabulary-learning-definition-options"
+      data-option-lines={definitionOptionLineCount}
+      ref={definitionOptionGroupRef}
+      role="group"
+    >
       {definitionOptions.map((option, index) => {
         const isCorrect = currentRoundRevealed && option === getDefinitionOptionText(currentWord.definitionCn);
         const isWrong = currentRoundRevealed && definitionChoice === index && !isCorrect;

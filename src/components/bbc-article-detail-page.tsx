@@ -29,6 +29,7 @@ import { getLikelyProperNounWords, shouldShowAudioPronunciation } from "@/lib/au
 import { splitArticleSentences } from "@/lib/article-inline-annotations";
 import { supabase } from "@/lib/supabase/client";
 import { adminRequest } from "@/lib/admin/request";
+import { FAVORITE_WORDS_CHANGED_EVENT, FAVORITE_WORDS_STORAGE_KEY } from "@/lib/vocabulary/learning";
 import type {
   BbcArticle,
   BbcArticleSentence,
@@ -104,7 +105,6 @@ type FavoriteWordItem = {
 
 const FAVORITE_ARTICLES_STORAGE_KEY = "ielts-platform.favoriteArticles";
 const FAVORITE_SENTENCES_STORAGE_KEY = "ielts-platform.favoriteSentences";
-const FAVORITE_WORDS_STORAGE_KEY = "ielts-platform.favoriteWords";
 
 type OriginalDisplayMode = "english" | "bilingual" | "chinese";
 type ArticleStudyMode = "general" | "intensive" | "listening" | "speaking" | "writing";
@@ -215,6 +215,7 @@ function writeStorageList<T extends { savedAt: string }>(key: string, items: T[]
     (left, right) => new Date(right.savedAt).getTime() - new Date(left.savedAt).getTime(),
   );
   window.localStorage.setItem(key, JSON.stringify(sortedItems));
+  if (key === FAVORITE_WORDS_STORAGE_KEY) window.dispatchEvent(new Event(FAVORITE_WORDS_CHANGED_EVENT));
 }
 
 function readFavoriteSentences() {
@@ -1709,14 +1710,6 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
                     value={audioSettings.pronunciationMode}
                   />
                   <AudioSettingsMenus
-                    className="bbc-settings-rate"
-                    dismissOnSelect
-                    hasSelectedRate
-                    onChange={updateAudioSettings}
-                    settings={audioSettings}
-                    variant="rate-only"
-                  />
-                  <AudioSettingsMenus
                     className="bbc-settings-subtitle"
                     dismissOnSelect
                     onChange={updateAudioSettings}
@@ -1724,6 +1717,14 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
                     variant="subtitle-only"
                   />
                   </> : null}
+                  <AudioSettingsMenus
+                    className="bbc-settings-rate"
+                    dismissOnSelect
+                    hasSelectedRate
+                    onChange={updateAudioSettings}
+                    settings={audioSettings}
+                    variant="rate-only"
+                  />
                   <button
                     aria-pressed={isOriginalFullscreen}
                     className="bbc-fullscreen-toggle"

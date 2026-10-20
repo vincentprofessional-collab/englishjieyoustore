@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import type { WritingVocabularyItem } from "@/lib/ielts/writing";
+import { FAVORITE_WORDS_CHANGED_EVENT, FAVORITE_WORDS_STORAGE_KEY } from "@/lib/vocabulary/learning";
 
 type FavoriteWordItem = {
   definitionCn: string;
@@ -38,7 +39,6 @@ type WritingVocabularyTermProps = {
 };
 
 const FAVORITE_ANNOTATIONS_STORAGE_KEY = "ielts-platform.favoriteAnnotations";
-const FAVORITE_WORDS_STORAGE_KEY = "ielts-platform.favoriteWords";
 const WRITING_VOCABULARY_STORAGE_EVENT = "ielts-platform.writingVocabularyStorageChanged";
 
 function readStorageList<T>(key: string) {
@@ -56,6 +56,7 @@ function writeStorageList<T extends { savedAt: string }>(key: string, items: T[]
   );
   window.localStorage.setItem(key, JSON.stringify(sortedItems));
   window.dispatchEvent(new Event(WRITING_VOCABULARY_STORAGE_EVENT));
+  if (key === FAVORITE_WORDS_STORAGE_KEY) window.dispatchEvent(new Event(FAVORITE_WORDS_CHANGED_EVENT));
 }
 
 function normalizeTerm(value: string) {

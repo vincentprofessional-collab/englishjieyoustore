@@ -2,6 +2,7 @@
 
 import { Fragment, useEffect, useState, type ReactNode } from "react";
 import { supabase } from "@/lib/supabase/client";
+import { FAVORITE_WORDS_CHANGED_EVENT, FAVORITE_WORDS_STORAGE_KEY } from "@/lib/vocabulary/learning";
 import { ACCOUNT_PROGRESS_EVENT, captureAccountChanges, emptyAccountSnapshot, isProgressKey, materializeAccountProgress, mergeAccountSnapshots, readProgressValues, type AccountSnapshot } from "@/lib/learning/account-progress";
 const OWNER = "englishjieyou.progress-owner", DEVICE = "englishjieyou.progress-device";
 export function AccountProgressProvider({ children }: { children: ReactNode }) {
@@ -18,9 +19,11 @@ export function AccountProgressProvider({ children }: { children: ReactNode }) {
     const cacheKey = (id: string) => `englishjieyou.progress-cache.${id || "guest"}`;
     function persist() { localStorage.setItem(cacheKey(activeId), JSON.stringify({ own, visible: baseline })); }
     function replaceVisible(values: Record<string, any>) {
+      const previousFavorites = localStorage.getItem(FAVORITE_WORDS_STORAGE_KEY);
       for (const key of Object.keys(readProgressValues(localStorage))) if (!(key in values)) localStorage.removeItem(key);
       for (const [key, value] of Object.entries(values)) if (isProgressKey(key)) localStorage.setItem(key, JSON.stringify(value));
       baseline = readProgressValues(localStorage);
+      if (previousFavorites !== localStorage.getItem(FAVORITE_WORDS_STORAGE_KEY)) window.dispatchEvent(new Event(FAVORITE_WORDS_CHANGED_EVENT));
       window.dispatchEvent(new Event(ACCOUNT_PROGRESS_EVENT));
     }
     function capture() {
@@ -97,8 +100,10 @@ export function AccountProgressProvider({ children }: { children: ReactNode }) {
     const timer = window.setInterval(() => { if (document.visibilityState === "visible") void sync(); }, 5000);
     const focus = () => { void sync(true); };
     const hide = () => { if (document.visibilityState === "hidden") void sync(); };
+    const favoriteChanged = () => { void sync(); };
     window.addEventListener("focus", focus); window.addEventListener("online", focus); window.addEventListener("pagehide", hide); document.addEventListener("visibilitychange", hide);
-    return () => { stopped = true; subscription.unsubscribe(); clearInterval(timer); window.removeEventListener("focus", focus); window.removeEventListener("online", focus); window.removeEventListener("pagehide", hide); document.removeEventListener("visibilitychange", hide); };
+    window.addEventListener(FAVORITE_WORDS_CHANGED_EVENT, favoriteChanged);
+    return () => { stopped = true; subscription.unsubscribe(); clearInterval(timer); window.removeEventListener("focus", focus); window.removeEventListener("online", focus); window.removeEventListener("pagehide", hide); document.removeEventListener("visibilitychange", hide); window.removeEventListener(FAVORITE_WORDS_CHANGED_EVENT, favoriteChanged); };
   }, []);
   return <Fragment key={epoch}>{children}</Fragment>;
 }

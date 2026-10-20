@@ -21,6 +21,7 @@ import { focusInlineText, textOccurrenceForRange } from "@/lib/inline-highlights
 import { cleanVocabularyDefinition } from "@/lib/vocabulary/display";
 import { loadVocabularyHoverHint } from "@/lib/vocabulary/hover-hint";
 import type { LocalVocabularyHint } from "@/lib/vocabulary/local-vocabulary";
+import { FAVORITE_WORDS_CHANGED_EVENT, FAVORITE_WORDS_STORAGE_KEY } from "@/lib/vocabulary/learning";
 
 type AnnotationItem = {
   id: number;
@@ -69,7 +70,6 @@ type StudyAnnotationToolsProps = {
 };
 
 const FAVORITE_ANNOTATIONS_STORAGE_KEY = "ielts-platform.favoriteAnnotations";
-const FAVORITE_WORDS_STORAGE_KEY = "ielts-platform.favoriteWords";
 const INLINE_HIGHLIGHTS_STORAGE_PREFIX = "ielts-platform.inlineHighlights";
 
 type InlineHighlight = { end?: number; id: string; occurrence?: number; start?: number; text: string };
@@ -171,6 +171,7 @@ function writeStorageList<T extends { savedAt: string }>(key: string, items: T[]
     (left, right) => new Date(right.savedAt).getTime() - new Date(left.savedAt).getTime(),
   );
   window.localStorage.setItem(key, JSON.stringify(sortedItems));
+  if (key === FAVORITE_WORDS_STORAGE_KEY) window.dispatchEvent(new Event(FAVORITE_WORDS_CHANGED_EVENT));
 }
 
 function pointIsInsideRect(rect: DOMRect, clientX: number, clientY: number) {

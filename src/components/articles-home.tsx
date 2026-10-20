@@ -7,6 +7,7 @@ import type { ManagedPageContent } from "@/lib/content/page-content";
 export type BbcArticleListGroup = {
   articles: {
     date: string;
+    guestFree: boolean;
     id: string;
     title: string;
     titleChinese?: string;
@@ -33,8 +34,13 @@ export function ArticlesHome({
     monthGroups.set(month, articles);
   }
 
-  function renderArticleCard(article: BbcArticleListGroup["articles"][number], selectable: boolean) {
+  function renderArticleCard(article: BbcArticleListGroup["articles"][number]) {
     const isSelected = selectedArticles.includes(article.id);
+    const choiceDotClass = isSelected
+      ? "choice-dot read"
+      : article.guestFree
+        ? "choice-dot selected"
+        : "choice-dot";
     return (
       <div className="bbc-article-card bbc-article-list-item" key={article.id}>
         <Link className="bbc-article-card-link" href={`/articles/${article.id}`}>
@@ -44,17 +50,15 @@ export function ArticlesHome({
             {article.titleChinese ? <span className="bbc-article-list-translation">{article.titleChinese}</span> : null}
           </span>
         </Link>
-        {selectable ? (
-          <button
-            aria-label={`${isSelected ? "取消选择" : "选择"}文章 ${article.title}`}
-            aria-pressed={isSelected}
-            className="bbc-article-select"
-            onClick={() => toggleArticleSelection(article.id)}
-            type="button"
-          >
-            <span aria-hidden="true" className={isSelected ? "choice-dot selected" : "choice-dot"} />
-          </button>
-        ) : null}
+        <button
+          aria-label={`${isSelected ? "取消选择" : "选择"}文章 ${article.title}`}
+          aria-pressed={isSelected}
+          className="bbc-article-select"
+          onClick={() => toggleArticleSelection(article.id)}
+          type="button"
+        >
+          <span aria-hidden="true" className={choiceDotClass} />
+        </button>
       </div>
     );
   }
@@ -84,7 +88,7 @@ export function ArticlesHome({
             {[...monthGroups].map(([month, articles]) => (
               <section className="bbc-article-month-group" key={month}>
                 <h2>{Number(month.slice(5, 7))} 月</h2>
-                {articles.map((article) => renderArticleCard(article, true))}
+                {articles.map((article) => renderArticleCard(article))}
               </section>
             ))}
           </div>
@@ -106,7 +110,7 @@ export function ArticlesHome({
             {[...monthGroups].map(([month, articles]) => (
               <section className="bbc-article-month-group" key={month}>
                 <h2>{Number(month.slice(5, 7))} 月</h2>
-                {articles.map((article) => renderArticleCard(article, false))}
+                {articles.map((article) => renderArticleCard(article))}
               </section>
             ))}
           </div>

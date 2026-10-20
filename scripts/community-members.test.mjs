@@ -7,7 +7,7 @@ import ts from "typescript";
 function load(path, modules = {}) {
   const exports = {};
   const code = ts.transpileModule(fs.readFileSync(new URL(path, import.meta.url), "utf8"), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } }).outputText;
-  vm.runInNewContext(code, { exports, Date, Map, Intl, process: { env: { NEXT_PUBLIC_SUPABASE_URL: "https://fixture.invalid", SUPABASE_SERVICE_ROLE_KEY: "fixture-only" } }, require: name => {
+  vm.runInNewContext(code, { exports, Date, Map, Intl, process: { env: { NEXT_PUBLIC_SUPABASE_URL: "https://fixture.invalid", NEXT_PUBLIC_SUPABASE_ANON_KEY: "fixture-anon", SUPABASE_SERVICE_ROLE_KEY: "fixture-only" } }, require: name => {
     if (name in modules) return modules[name];
     throw new Error(`Unexpected import ${name}`);
   } });
@@ -30,8 +30,8 @@ function database() {
     project_payment_requests: [{id:"sale-1",user_id:"owner",project_key:"bbc",plan:"lifetime",status:"fulfilled",amount_cny:199,fulfilled_at:"2026-10-14T00:00:00Z"}],
     profiles: [{ id: "owner", role: "admin", email: "sensitive12345@example.invalid" }, { id: "other", email: "private98765@example.invalid" }],
   };
-  const queries = [], updates = [], user = { id: "owner", user_metadata: { nickname: "保留昵称", [model.COMMUNITY_READ_KEY]: "2026-10-13T00:00:00Z" } };
-  let failedTable = "";
+  const queries = [], updates = [], rpcCalls = [], user = { id: "owner", user_metadata: { nickname: "保留昵称", [model.COMMUNITY_READ_KEY]: "2026-10-13T00:00:00Z" } };
+  let failedTable = "", currentToken = "", forcedRpcError = null;
   class Query {
     filters = []; fromIndex = 0; toIndex = Infinity;
     constructor(table) { this.table = table; queries.push(table); }
@@ -45,11 +45,19 @@ function database() {
     maybeSingle() { return this.then(value => ({ ...value, data: value.data?.[0] ?? null })); }
     then(resolve, reject) { return Promise.resolve(this.table === failedTable ? { data: null, error: { code: "unavailable" } } : { data: tables[this.table].filter(row => this.filters.every(fn => fn(row))).slice(this.fromIndex, this.toIndex + 1), error: null }).then(resolve, reject); }
   }
-  const client = { from: table => new Query(table), auth: {
+  const client = { from: table => new Query(table), rpc: (name, args) => ({ abortSignal: async () => {
+    rpcCalls.push({ name, args });
+    if (currentToken === "Bearer expired") return { data: null, error: { code: "PGRST301", message: "invalid JWT" } };
+    if (forcedRpcError) return { data: null, error: forcedRpcError };
+    if (failedTable === "project_payment_requests") return { data: null, error: { code: "unavailable", message: "fixture query failure" } };
+    if (name === "get_admin_membership_sales_summary") return { data: { total_members: 1, total_qualifications: 1, total_sales_cny: 199, projects: [{ key: "bbc", title: "BBC", members: 1 }], series: { day: [], month: [], quarter: [], year: [] } }, error: null };
+    if (name === "get_admin_membership_sales_page") return { data: { total: 1, offset: args.p_offset, limit: args.p_limit, has_more: false, items: [{ id: "grant", account: "owner@example.invalid", project: "BBC", plan: "终身", price_cny: 199, purchased_at: "2026-10-14T00:00:00Z", expires_at: "+infinity" }] }, error: null };
+    return { data: null, error: { code: "42883", message: "missing function" } };
+  } }), auth: {
     getUser: async token => ({ data: { user: token === "valid" ? user : null }, error: token === "valid" ? null : { status: 401 } }),
     admin: { updateUserById: async (id, data) => { updates.push({ id, data }); Object.assign(user.user_metadata, data.user_metadata); return { error: null }; } },
   } };
-  return { tables, client, user, updates, queries, fail: table => failedTable = table };
+  return { tables, client, user, updates, queries, rpcCalls, fail: table => failedTable = table, setRpcError: error => forcedRpcError = error, setToken: token => currentToken = token };
 }
 const json = { NextResponse: { json: (body, options) => new Response(JSON.stringify(body), options) } };
 function inboxApi(fixture) {
@@ -156,11 +164,21 @@ test("sales charts use China dates, zero-fill gaps, and group real confirmed sal
 
 test("admin sales endpoint rejects visitors and ordinary accounts and returns private no-store data only to verified admins", async () => {
   const fixture=database();
-  const api=load("../src/app/api/admin/membership-sales/route.ts",{"next/server":json,"@supabase/supabase-js":{createClient:()=>fixture.client},"@/lib/payment/membership-sales":sales});
+  const api=load("../src/app/api/admin/membership-sales/route.ts",{"next/server":json,"@supabase/supabase-js":{createClient:(url,key,options)=>{fixture.setToken(options.global.headers.Authorization);return fixture.client;}}});
   assert.equal((await api.GET(request("",null))).status,401);
   assert.equal((await api.GET(request("","expired"))).status,401);
-  fixture.tables.profiles[0].role="student"; assert.equal((await api.GET(request())).status,403);
-  fixture.tables.profiles[0].role="admin"; const response=await api.GET(request()),report=await response.json();
-  assert.equal(response.status,200);assert.equal(report.totalMembers,1);assert.equal(report.totalSalesCny,199);assert.equal(report.members[0].priceCny,199);assert.equal(response.headers.get("Cache-Control"),"private, no-store");
-  fixture.fail("project_payment_requests");assert.equal((await api.GET(request())).status,503);
+  fixture.setRpcError({ code: "42501", message: "admin access required" });
+  assert.equal((await api.GET(request())).status,403);
+  fixture.setRpcError(null);
+  fixture.rpcCalls.length=0;
+  const response=await api.GET(request("?view=summary")),summary=await response.json();
+  assert.equal(response.status,200);assert.equal(summary.totalMembers,1);assert.equal(summary.totalSalesCny,199);assert.equal(summary.members,undefined);assert.equal(response.headers.get("Cache-Control"),"private, no-store");
+  const page=await (await api.GET(request("?view=members&offset=0&limit=20"))).json();
+  assert.equal(page.total,1);assert.equal(page.items[0].priceCny,199);assert.equal(page.items[0].expiresAt,"+infinity");
+  assert.deepEqual(fixture.rpcCalls.map(call=>call.name),["get_admin_membership_sales_summary","get_admin_membership_sales_page"]);
+  assert.ok(!fixture.queries.includes("user_project_entitlements")&&!fixture.queries.includes("project_payment_requests"));
+  fixture.setRpcError({ code: "PGRST202", message: "function missing" });
+  const missing=await api.GET(request()); assert.equal(missing.status,503); assert.match((await missing.json()).error,/升级尚未启用/);
+  fixture.setRpcError({ code: "XX000", message: "fixture SQL failure" });
+  assert.equal((await api.GET(request())).status,503);
 });
