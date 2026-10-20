@@ -7235,6 +7235,10 @@ textarea {
   white-space: nowrap;
 }
 
+.nav-mobile-editor-link {
+  display: none;
+}
+
 .nav-cta {
   background: var(--gold);
   border-radius: 999px;
@@ -31746,6 +31750,28 @@ body *:not(.bbc-vocabulary-highlight):not(.bbc-active-word) {
 
   .brand-copy small { display: none; }
 
+  .site-header .nav-actions:has(.nav-admin-link) {
+    align-items: flex-end;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .site-header .nav-admin-link:not(.nav-mobile-editor-link) {
+    display: none;
+  }
+
+  .site-header .nav-mobile-editor-link {
+    display: inline-flex;
+  }
+
+  .site-header .nav-actions:has(.nav-admin-link) .nav-cta {
+    order: -1;
+  }
+
+  body:has(.site-header-mobile-visible) .frontend-page-admin-nav-link {
+    display: none;
+  }
+
   .nav-cta {
     border-radius: 999px;
     font-size: 11px;
@@ -32084,17 +32110,26 @@ body .mobile-exam-sections button.active { color: #245d7b !important; }
 body .bbc-detail-back-link { color: #245d7b !important; }
 body .bbc-article-hero { background: #fffdf3 !important; }
 body .bbc-article-hero h1 { color: #1d1d1b !important; }
-body .bbc-article-title-line[lang="en"] {
+body .bbc-article-hero h1 > .bbc-article-title-line[lang="en"],
+body .bbc-article-hero h1 > .bbc-article-title-line[lang="zh-CN"] {
   background: #172b4d;
   box-decoration-break: clone;
   color: #fff !important;
-  justify-self: start;
+  justify-self: center;
+  margin-inline: auto;
   padding: 0.12em 0.28em;
   -webkit-box-decoration-break: clone;
 }
 body .bbc-article-title-line[lang="zh-CN"] { color: #1d1d1b !important; }
 body .bbc-article-date { color: #1d1d1b !important; }
 body .bbc-article-word-count { color: #85857a !important; }
+body .site-header-home .brand::after { display: none; }
+body .site-header-home .brand-copy strong {
+  text-decoration: underline;
+  text-decoration-color: var(--gold);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.16em;
+}
 body .bbc-article-mode-bar .player-menu-trigger.active { color: #245d7b !important; }
 body .bbc-full-audio .play-button { color: #245d7b !important; }
 .bbc-mobile-annotation-notice { display: none; }

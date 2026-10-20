@@ -176,6 +176,11 @@ export function SiteNav({ config: initialConfig }: { config: SiteChromeConfig })
           <Link className="nav-cta" href={config.nav.loginHref || "/login"}>
             {config.nav.loginLabel}
           </Link>
+          {canAccessAdmin ? (
+            <Link className="nav-admin-link nav-mobile-editor-link" href="/admin?view=chrome">
+              编辑导航
+            </Link>
+          ) : null}
         </div>
       </div>
 

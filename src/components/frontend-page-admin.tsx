@@ -258,7 +258,7 @@ export function FrontendPageAdmin({ children }: { children: React.ReactNode }) {
           </button>
           <button type="button" onClick={() => setAdding(true)}>增加内容</button>
           <button type="button" onClick={() => setPanelOpen(!panelOpen)}>内容列表</button>
-          <Link href="/admin?view=chrome">编辑导航</Link>
+          <Link className="frontend-page-admin-nav-link" href="/admin?view=chrome">编辑导航</Link>
         </div>
       ) : null}
 
