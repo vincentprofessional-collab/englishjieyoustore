@@ -164,21 +164,15 @@ test("sales charts use China dates, zero-fill gaps, and group real confirmed sal
 
 test("admin sales endpoint rejects visitors and ordinary accounts and returns private no-store data only to verified admins", async () => {
   const fixture=database();
-  const api=load("../src/app/api/admin/membership-sales/route.ts",{"next/server":json,"@supabase/supabase-js":{createClient:(url,key,options)=>{fixture.setToken(options.global.headers.Authorization);return fixture.client;}}});
+  const api=load("../src/app/api/admin/membership-sales/route.ts",{"next/server":json,"next/cache":{unstable_cache:fn=>fn},"@supabase/supabase-js":{createClient:()=>fixture.client},"@/lib/payment/membership-sales":sales});
   assert.equal((await api.GET(request("",null))).status,401);
   assert.equal((await api.GET(request("","expired"))).status,401);
-  fixture.setRpcError({ code: "42501", message: "admin access required" });
-  assert.equal((await api.GET(request())).status,403);
-  fixture.setRpcError(null);
-  fixture.rpcCalls.length=0;
   const response=await api.GET(request("?view=summary")),summary=await response.json();
   assert.equal(response.status,200);assert.equal(summary.totalMembers,1);assert.equal(summary.totalSalesCny,199);assert.equal(summary.members,undefined);assert.equal(response.headers.get("Cache-Control"),"private, no-store");
   const page=await (await api.GET(request("?view=members&offset=0&limit=20"))).json();
-  assert.equal(page.total,1);assert.equal(page.items[0].priceCny,199);assert.equal(page.items[0].expiresAt,"+infinity");
-  assert.deepEqual(fixture.rpcCalls.map(call=>call.name),["get_admin_membership_sales_summary","get_admin_membership_sales_page"]);
-  assert.ok(!fixture.queries.includes("user_project_entitlements")&&!fixture.queries.includes("project_payment_requests"));
-  fixture.setRpcError({ code: "PGRST202", message: "function missing" });
-  const missing=await api.GET(request()); assert.equal(missing.status,503); assert.match((await missing.json()).error,/升级尚未启用/);
-  fixture.setRpcError({ code: "XX000", message: "fixture SQL failure" });
+  assert.equal(page.total,1);assert.equal(page.items[0].priceCny,199);assert.equal(page.items[0].expiresAt,"infinity");
+  assert.ok(fixture.queries.includes("user_project_entitlements")&&fixture.queries.includes("project_payment_requests"));
+  fixture.tables.profiles[0].role="student"; assert.equal((await api.GET(request())).status,403);
+  fixture.tables.profiles[0].role="admin"; fixture.fail("project_payment_requests");
   assert.equal((await api.GET(request())).status,503);
 });

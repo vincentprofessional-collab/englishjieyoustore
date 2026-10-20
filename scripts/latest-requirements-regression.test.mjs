@@ -63,26 +63,21 @@ test("vocabulary books accumulate lower levels without auto-classifying scored r
   assert.match(vocabularyLearning, /setOralScoreFeedback\(score\);[\s\S]*?setPhase\("awaiting"\);/);
 });
 
-test("admin analytics uses bounded RPC pages and separates the summaries", () => {
-  assert.match(adminAnalytics, /loadPartition\(setOverview, "get_admin_analytics_overview"\)/);
-  assert.match(adminAnalytics, /loadPartition\(setHistory, "get_admin_analytics_history"\)/);
-  assert.match(adminAnalytics, /p_limit: 10/);
-  assert.match(adminAnalytics, /refreshInFlight\.current/);
+test("admin analytics bounds parallel reads and prevents overlapping full refreshes", () => {
+  assert.match(adminAnalytics, /const batchSize = 4/);
+  assert.match(adminAnalytics, /loadInFlight\.current/);
+  assert.match(adminAnalytics, /Promise\.all\(offsets\.map/);
   assert.match(adminAnalytics, /document\.visibilityState === "hidden"/);
-  assert.doesNotMatch(adminAnalytics, /fetchActivityPages|MAX_ACTIVITY_ROWS|from\("site_activity_/);
 });
 
-test("membership sales exposes aggregated summaries and capped detail pages", () => {
-  assert.match(membershipSalesRoute, /get_admin_membership_sales_summary/);
-  assert.match(membershipSalesRoute, /get_admin_membership_sales_page/);
-  assert.doesNotMatch(membershipSalesRoute, /readAll|from\("user_project_entitlements|from\("project_payment_requests/);
+test("membership sales uses a short shared cache and capped detail pages without a schema migration", () => {
+  assert.match(membershipSalesRoute, /unstable_cache/);
+  assert.match(membershipSalesRoute, /buildMembershipSalesReport/);
+  assert.match(membershipSalesRoute, /readAll/);
+  assert.match(membershipSalesRoute, /report\.members\.slice\(offset, offset \+ limit\)/);
+  assert.match(membershipSalesRoute, /role\.data\?\.role !== "admin"/);
+  assert.doesNotMatch(membershipSalesRoute, /\.rpc\(/);
   assert.match(adminMembership, /offset=\$\{offset\}&limit=20/);
-  assert.match(analyticsSql, /if not public\.is_admin\(\) then/);
-  assert.match(analyticsSql, /revoke all on function public\.get_admin_membership_sales_summary\(\) from public, anon/i);
-  assert.match(analyticsSql, /grant execute on function public\.get_admin_membership_sales_summary\(\) to authenticated/i);
-  assert.match(analyticsSql, /least\(greatest\(coalesce\(p_limit, 20\), 1\), 20\)/);
-  assert.match(analyticsSql, /'Asia\/Shanghai'/);
-  assert.match(analyticsSql, /status = 'fulfilled'/);
 });
 
 test("every existing vocabulary-favorite writer notifies account sync", () => {
