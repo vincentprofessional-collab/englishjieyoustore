@@ -1774,20 +1774,12 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
                 {articleModeControls}
               </div>
             </nav>
-            {studyMode === "speaking" && activeStudySentence ? (
-              <SpeakingTrainingStatus
-                activeSentenceNo={activeSentenceNo}
-                audioSettings={audioSettings}
-                isPlaying={isSentenceAudioPlaying}
-                sentenceNo={activeStudySentence.sentenceNo}
-                speakingTraining={speakingTraining}
-              />
-            ) : null}
           </div>
         ) : null}
 
         <StudyAnnotationTools
           buttonClassName="annotation-toggle ielts-exam-action bbc-annotation-toggle bbc-annotation-hidden-trigger"
+          enableVocabularyHover
           sourceHref={`/articles/${article.id}`}
           sourceId={`bbc:${article.id}`}
           sourceTitle={`BBC ${article.id} ${article.title}`}
@@ -2029,7 +2021,7 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
                         translationContent={renderWaveHighlightedChinese(sentence.chinese, sentence.chineseUnderlinedTerms, sentence.chineseUnderlinedRanges)}
                       />
                     ) : null}
-                    {studyMode === "speaking" && (!isMobileAudioViewport || !article.fullAudioUrl) ? (
+                    {studyMode === "speaking" ? (
                       <SpeakingTrainingStatus
                         activeSentenceNo={activeSentenceNo}
                         audioSettings={audioSettings}

@@ -13,9 +13,15 @@ export default async function VocabularyWordPage({
   const { word } = await params;
   const query = searchParams ? await searchParams : {};
   const requestedReturnTo = Array.isArray(query.returnTo) ? query.returnTo[0] : query.returnTo;
-  const backHref = requestedReturnTo && /^\/(?:articles|new-concept)\/[A-Za-z0-9_-]+$/.test(requestedReturnTo)
-    ? requestedReturnTo
-    : "/vocabulary";
+  let backHref = "/vocabulary";
+  if (requestedReturnTo?.startsWith("/") && !requestedReturnTo.startsWith("//")) {
+    const returnUrl = new URL(requestedReturnTo, "https://local.invalid");
+    const isAllowedPath = returnUrl.pathname === "/vocabulary/books"
+      || /^\/(?:articles|new-concept)\/[A-Za-z0-9_-]+$/.test(returnUrl.pathname);
+    if (returnUrl.origin === "https://local.invalid" && isAllowedPath) {
+      backHref = `${returnUrl.pathname}${returnUrl.search}`;
+    }
+  }
   return <section className="stack vocabulary-page vocabulary-lookup-landing">
     <div className="vocabulary-hero"><VocabularySearchAutocomplete initialQuery="" autoFocus={false} /></div>
     <VocabularyLookupEntry word={word} backHref={backHref} />

@@ -1,10 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import type { ReactNode } from "react";
 
 import { VocabularyFavoriteButton } from "@/components/vocabulary-favorite-button";
 import { VocabularyInlinePronunciation } from "@/components/vocabulary-pronunciation";
+import { VocabularyMobileBackLink } from "@/components/vocabulary-mobile-back-link";
 import { VocabularyShareButton } from "@/components/vocabulary-share-button";
 import type { LocalVocabularyEntry } from "@/lib/vocabulary/local-vocabulary";
 
@@ -49,10 +49,7 @@ export function VocabularyDetailShell({
       {showHeader ? (
         <div className="word-page-head vocabulary-detail-shell-head vocabulary-learning-detail-head">
           {showBack ? (
-            <Link aria-label="返回词汇列表" className="back-link" href={backHref}>
-              <span className="vocabulary-back-link-desktop-label">← 返回</span>
-              <span aria-hidden="true" className="vocabulary-back-link-mobile-arrow">←</span>
-            </Link>
+            <VocabularyMobileBackLink ariaLabel="返回词汇列表" className="back-link" href={backHref} />
           ) : null}
           <div className="word-title-row word-detail-title-row vocabulary-detail-shell-title-row vocabulary-learning-detail-title-row">
             <div className={`word-title-primary ${showWord || headerContent ? "" : "is-hidden"}`}>

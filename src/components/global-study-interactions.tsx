@@ -148,27 +148,38 @@ function getEnglishWordAtPoint(clientX: number, clientY: number) {
     offset = range?.startOffset ?? 0;
   }
 
-  if (!textNode || textNode.nodeType !== Node.TEXT_NODE) {
+  function findWordInTextNode(node: Node, expectedOffset?: number) {
+    if (node.nodeType !== Node.TEXT_NODE || node.parentElement?.closest("[data-no-word-hint='true']")) return null;
+    const text = node.textContent ?? "";
+    const wordPattern = /[A-Za-z]+(?:['’-][A-Za-z]+)?/g;
+    let match: RegExpExecArray | null;
+
+    while ((match = wordPattern.exec(text)) !== null) {
+      const start = match.index;
+      const end = start + match[0].length;
+      if (expectedOffset !== undefined && (expectedOffset < start || expectedOffset > end)) continue;
+      const range = document.createRange();
+      range.setStart(node, start);
+      range.setEnd(node, end);
+      const rect = range.getBoundingClientRect();
+      if (pointIsInsideRange(range, clientX, clientY)) return { rect, textNode: node, word: match[0] };
+    }
+
     return null;
   }
-  if (textNode.parentElement?.closest("[data-no-word-hint='true']")) return null;
 
-  const text = textNode.textContent ?? "";
-  const wordPattern = /[A-Za-z]+(?:['’-][A-Za-z]+)?/g;
-  let match: RegExpExecArray | null;
+  if (textNode) {
+    const word = findWordInTextNode(textNode, offset);
+    if (word) return word;
+  }
 
-  while ((match = wordPattern.exec(text)) !== null) {
-    const start = match.index;
-    const end = start + match[0].length;
-    if (offset < start || offset > end) continue;
-
-    const range = document.createRange();
-    range.setStart(textNode, start);
-    range.setEnd(textNode, end);
-    const rect = range.getBoundingClientRect();
-    if (!pointIsInsideRange(range, clientX, clientY)) return null;
-
-    return { rect, textNode, word: match[0] };
+  const element = document.elementFromPoint(clientX, clientY);
+  if (!element || element.closest("[data-no-word-hint='true']")) return null;
+  const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
+  let candidate: Node | null;
+  while ((candidate = walker.nextNode())) {
+    const word = findWordInTextNode(candidate);
+    if (word) return word;
   }
 
   return null;
@@ -328,16 +339,12 @@ export function GlobalStudyInteractions() {
       hoverWordTimerRef.current = window.setTimeout(() => {
         void showHint(wordAtPoint.word, wordAtPoint.rect);
         hoverWordTimerRef.current = null;
-      }, 120);
+      }, 1500);
     }
 
-    function handlePointerDown(event: PointerEvent) {
-      if (event.pointerType === "touch") suppressTouchClickUntilRef.current = 0;
-      if (event.pointerType !== "touch" || selectionPopover || isInteractiveTarget(event.target)) {
-        return;
-      }
-
-      const wordAtPoint = getEnglishWordAtPoint(event.clientX, event.clientY);
+    function startLongPress(target: EventTarget | null, clientX: number, clientY: number) {
+      if (selectionPopover || isInteractiveTarget(target)) return;
+      const wordAtPoint = getEnglishWordAtPoint(clientX, clientY);
       if (!wordAtPoint) {
         if (wordTooltipRef.current) scheduleHideWord();
         return;
@@ -347,7 +354,8 @@ export function GlobalStudyInteractions() {
       clearHideWordTimer();
       clearLongPressTimer();
       longPressTriggeredRef.current = false;
-      longPressPointRef.current = { x: event.clientX, y: event.clientY };
+      suppressTouchClickUntilRef.current = 0;
+      longPressPointRef.current = { x: clientX, y: clientY };
       longPressTimerRef.current = window.setTimeout(() => {
         longPressTriggeredRef.current = true;
         pendingWordRef.current = normalizeWord(wordAtPoint.word);
@@ -356,17 +364,27 @@ export function GlobalStudyInteractions() {
       }, 1500);
     }
 
-    function handlePointerMove(event: PointerEvent) {
-      if (event.pointerType !== "touch" || !longPressPointRef.current) return;
+    function handlePointerDown(event: PointerEvent) {
+      if (event.pointerType !== "touch" || "ontouchstart" in window) return;
+      startLongPress(event.target, event.clientX, event.clientY);
+    }
+
+    function checkLongPressMovement(clientX: number, clientY: number) {
+      if (!longPressPointRef.current) return;
       const distance = Math.hypot(
-        event.clientX - longPressPointRef.current.x,
-        event.clientY - longPressPointRef.current.y,
+        clientX - longPressPointRef.current.x,
+        clientY - longPressPointRef.current.y,
       );
       if (distance > 12) clearLongPressTimer();
     }
 
+    function handlePointerMove(event: PointerEvent) {
+      if (event.pointerType !== "touch" || "ontouchstart" in window) return;
+      checkLongPressMovement(event.clientX, event.clientY);
+    }
+
     function handlePointerEnd(event: PointerEvent) {
-      if (event.pointerType !== "touch") return;
+      if (event.pointerType !== "touch" || "ontouchstart" in window) return;
       clearLongPressTimer();
       if (longPressTriggeredRef.current) {
         suppressTouchClickUntilRef.current = Date.now() + 1000;
@@ -389,17 +407,19 @@ export function GlobalStudyInteractions() {
     }
 
     function handleTouchStart(event: TouchEvent) {
-      if (typeof window.PointerEvent !== "undefined" || event.touches.length !== 1) return;
+      if (event.touches.length !== 1) {
+        clearLongPressTimer();
+        return;
+      }
       const touch = event.touches[0];
-      handlePointerDown({ ...touch, clientX: touch.clientX, clientY: touch.clientY, pointerType: "touch", target: event.target } as unknown as PointerEvent);
+      startLongPress(event.target, touch.clientX, touch.clientY);
     }
     function handleTouchMove(event: TouchEvent) {
-      if (typeof window.PointerEvent !== "undefined") return;
       const touch = event.touches[0];
-      if (touch) handlePointerMove({ clientX: touch.clientX, clientY: touch.clientY, pointerType: "touch" } as PointerEvent);
+      if (touch) checkLongPressMovement(touch.clientX, touch.clientY);
+      else clearLongPressTimer();
     }
     function handleTouchEnd(event: TouchEvent) {
-      if (typeof window.PointerEvent !== "undefined") return;
       clearLongPressTimer();
       if (longPressTriggeredRef.current) {
         suppressTouchClickUntilRef.current = Date.now() + 1000;

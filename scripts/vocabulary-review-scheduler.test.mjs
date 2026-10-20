@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { nextClassifiedModeIndex, scheduleReview, selectEnabledMode } from "../src/lib/vocabulary/review-scheduler.ts";
+import { isReviewDue, nextClassifiedModeIndex, scheduleReview, selectEnabledMode } from "../src/lib/vocabulary/review-scheduler.ts";
 
 const minute = 60_000;
 const day = 24 * 60 * minute;
@@ -123,4 +123,14 @@ test("关闭的考察方式会跳过，单一方式答熟悉后进入长期复�
 
 test("分类记忆按阅读、听力、口语、写作循环", () => {
   assert.deepEqual([1, 0, 2, 3].map(nextClassifiedModeIndex), [0, 2, 3, 1]);
+});
+
+test("到期的熟悉、模糊、生僻词都进入复习队列；未到期或已完成的不进入", () => {
+  const now = day * 4;
+  for (const outcome of ["familiar", "vague", "unfamiliar"]) {
+    assert.equal(isReviewDue(now, false, outcome, now), true);
+    assert.equal(isReviewDue(now + minute, false, outcome, now), false);
+    assert.equal(isReviewDue(now, true, outcome, now), false);
+  }
+  assert.equal(isReviewDue(now, false, null, now), false);
 });

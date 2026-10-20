@@ -8,9 +8,10 @@ export const dynamic = "force-dynamic";
 export default async function VocabularyBooksPage({
   searchParams,
 }: {
-  searchParams: Promise<{ level?: string }>;
+  searchParams: Promise<{ level?: string; resume?: string; view?: string }>;
 }) {
-  const requestedLevel = (await searchParams).level;
+  const query = await searchParams;
+  const requestedLevel = query.level;
   const initialBook: LearningBookKey | "生词本" = requestedLevel === "生词本"
     ? "生词本"
     : requestedLevel === "未分级"
@@ -24,6 +25,8 @@ export default async function VocabularyBooksPage({
       bookCounts={counts}
       books={LEARNING_BOOKS.map(({ description, key, label }) => ({ description, key, label }))}
       initialBook={initialBook}
+      initialListMode={query.view === "list"}
+      initialListResume={query.resume === "1"}
       sourceCount={entries.length}
     />
   );

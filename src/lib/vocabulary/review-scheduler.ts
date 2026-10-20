@@ -16,6 +16,15 @@ export type ReviewHistory = {
   spellingHadError?: boolean;
 };
 
+export function isReviewDue(
+  nextReviewAt: number | null,
+  completed: boolean,
+  familiarity: ReviewOutcome | null,
+  now: number,
+) {
+  return !completed && familiarity !== null && nextReviewAt !== null && nextReviewAt <= now;
+}
+
 const MINUTE = 60_000;
 const DAY = 24 * 60 * MINUTE;
 const LONG_TERM_DAYS = [1, 3, 7, 15, 30];

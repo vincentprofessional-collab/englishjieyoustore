@@ -20605,11 +20605,22 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
   font-weight: 1000;
 }
 
+.vocabulary-mobile-back-link {
+  align-items: center;
+  color: var(--accent-dark);
+  display: inline-flex;
+  font-weight: 1000;
+  text-decoration: none;
+}
+
 .vocabulary-back-link-mobile-arrow {
   display: none;
 }
 
 @media (max-width: 760px) {
+  .vocabulary-mobile-back-link .vocabulary-back-link-desktop-label { display: none !important; }
+  .vocabulary-mobile-back-link .vocabulary-back-link-mobile-arrow { display: inline-flex; font-size: 22px; line-height: 1; }
+
   .vocabulary-hero,
   .word-detail-grid {
     grid-template-columns: 1fr;
@@ -23966,6 +23977,7 @@ audio.guide-editor-asset-preview {
   min-width: 235px;
   padding: 16px 26px 17px;
   transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+  touch-action: manipulation;
 }
 
 .vocabulary-mic-button:hover:not(:disabled) {
@@ -28179,7 +28191,7 @@ audio.guide-editor-asset-preview {
   align-items: start;
   display: grid;
   gap: 20px;
-  grid-template-columns: minmax(0, 1fr) minmax(300px, 360px);
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .vocabulary-learning-today-panel {
@@ -28717,6 +28729,16 @@ audio.guide-editor-asset-preview {
     grid-template-columns: minmax(0, 1fr);
   }
 
+  .vocabulary-learning-settings-paired-options .vocabulary-learning-settings-definition-options {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .vocabulary-learning-settings-paired-options .vocabulary-learning-settings-definition-options label {
+    font-size: clamp(11px, 3.4vw, 13px);
+    gap: 4px;
+    padding-inline: 3px;
+  }
+
   .vocabulary-learning-settings-paired-options .vocabulary-learning-settings-options label {
     padding: 8px 6px;
   }
@@ -28847,7 +28869,9 @@ audio.guide-editor-asset-preview {
   min-width: 110px;
   padding: 8px;
   position: absolute;
-  right: 0;
+  left: 0;
+  max-width: calc(100vw - 24px);
+  right: auto;
   top: calc(100% + 6px);
 }
 
@@ -30903,25 +30927,6 @@ body *:not(.bbc-vocabulary-highlight):not(.bbc-active-word) {
   .vocabulary-learning-list-actions { width: 100%; justify-content: flex-end; }
   .vocabulary-learning-list-filter-row { gap: 4px; }
   .vocabulary-learning-list-filter-row button { font-size: 11px; }
-}
-
-@media print {
-  @page { size: A4 portrait; margin: 12mm; }
-  body * { visibility: hidden !important; }
-  .vocabulary-learning-pdf-export,
-  .vocabulary-learning-pdf-export * { visibility: visible !important; }
-  .vocabulary-learning-pdf-export { display: block !important; position: absolute; inset: 0 auto auto 0; width: 100%; background: #fff; color: #111; font-family: Arial, "Noto Sans CJK SC", sans-serif; }
-  .vocabulary-learning-pdf-export h1 { margin: 0 0 10mm; font-size: 18pt; }
-  .vocabulary-learning-pdf-export table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 9pt; }
-  .vocabulary-learning-pdf-export .pdf-word { width: 18%; }
-  .vocabulary-learning-pdf-export .pdf-phonetic { width: 20%; }
-  .vocabulary-learning-pdf-export .pdf-definition { width: 20%; }
-  .vocabulary-learning-pdf-export .pdf-answer { width: 8.4%; }
-  .vocabulary-learning-pdf-export th,
-  .vocabulary-learning-pdf-export td { border: 1px solid #222; padding: 5px 4px; text-align: left; vertical-align: middle; overflow-wrap: anywhere; }
-  .vocabulary-learning-pdf-export th { background: #f0f0f0 !important; font-weight: 700; }
-  .vocabulary-learning-pdf-export td.pdf-answer-cell { text-align: center; white-space: nowrap; }
-  .vocabulary-learning-pdf-export tr { break-inside: avoid; }
 }
 
 /* Mini-app navigation and compact BBC article study layout. */
@@ -35500,6 +35505,8 @@ body .mobile-bottom-nav a.active { color: #245d7b !important; }
 .vocabulary-learning-settings-dialog .vocabulary-learning-settings-reaction-options input[type="number"] { appearance: textfield; background: transparent; border: 0; border-radius: 0; color: #111; flex: 0 0 2.5ch; font-size: 17px; font-variant-numeric: tabular-nums; font-weight: 800; height: 28px; margin: 0; padding: 0; text-align: right; width: 2.5ch; }
 .vocabulary-learning-settings-dialog .vocabulary-learning-settings-memory-options { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .vocabulary-learning-settings-dialog .vocabulary-learning-settings-paired-options .vocabulary-learning-settings-memory-options label { font-size: 14px; padding-inline: 6px; }
+.vocabulary-learning-settings-dialog .vocabulary-learning-settings-memory-options.is-disabled label { cursor: not-allowed; opacity: .55; }
+.vocabulary-learning-settings-dialog .vocabulary-learning-settings-memory-options input:disabled { cursor: not-allowed; }
 .vocabulary-learning-settings-dialog :is(input[type="radio"], input[type="checkbox"], .vocabulary-learning-settings-review-dot) { appearance: none; background: #fffdf8; border: 1.5px solid #87968c; border-radius: 50%; box-sizing: border-box; flex: 0 0 16px; height: 16px; margin: 0; width: 16px; }
 .vocabulary-learning-settings-dialog :is(input[type="radio"], input[type="checkbox"]):checked,
 .vocabulary-learning-settings-dialog button.active .vocabulary-learning-settings-review-dot,
@@ -35895,13 +35902,1756 @@ body .mobile-bottom-nav a.active { color: #245d7b !important; }
     left: auto;
     right: 0;
   }
-.bbc-article-page[data-mobile-audio-viewport="true"] .bbc-mobile-mode-controls .bbc-speaking-training-status {
-    border-radius: 9px;
-    font-size: 11px;
-    gap: 2px 6px;
+.bbc-article-page[data-mobile-audio-viewport="true"] .bbc-desktop-audio-toolbar { display: none !important; }
+
+.vocabulary-learning-page .vocabulary-learning-complete-detail-meta .inline-pronunciation {
+  justify-content: center;
+  margin-inline: auto;
+  width: 100%;
+}
+
+@media (max-width: 820px) {
+  .bbc-article-page[data-mobile-audio-viewport="true"][data-study-mode="intensive"] .bbc-mobile-mode-controls {
+    margin-bottom: -14px;
+  }
+
+  .bbc-article-page[data-mobile-audio-viewport="true"] .bbc-full-audio-panel {
+    box-sizing: border-box;
+    left: 0;
+    max-width: none;
+    right: 0;
+    transform: none;
+    width: 100vw;
+  }
+
+  .shell:not(:has(.mobile-bottom-nav)) .bbc-article-page[data-mobile-audio-viewport="true"] .bbc-full-audio-panel {
+    left: 0;
+    right: 0;
+    width: 100vw;
+  }
+}
+
+/* Vocabulary learning uses the full center/right workspace after removing the word-list rail. */
+.shell:has(.vocabulary-learning-page) .vocabulary-learning-layout {
+  max-width: none;
+  width: 100%;
+}
+.vocabulary-learning-page .vocabulary-learning-content-grid {
+  grid-template-columns: minmax(0, 1fr);
+  min-width: 0;
+  width: 100%;
+}
+.vocabulary-learning-page .vocabulary-learning-content-grid > .vocabulary-learning-detail-page {
+  max-width: none;
+  width: 100%;
+}
+.vocabulary-learning-page:has(.vocabulary-learning-list-mode) .vocabulary-learning-content-grid {
+  height: auto !important;
+  min-height: 0;
+}
+
+/* The web and tablet answer cards have enough width to sit in one balanced row. */
+@media (min-width: 681px) {
+  .vocabulary-learning-page .vocabulary-learning-definition-options {
+    gap: 12px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    padding: 14px;
+  }
+  .vocabulary-learning-page .vocabulary-learning-definition-options button {
+    font-size: clamp(14px, 1.35vw, 18px);
+    min-height: clamp(100px, 9.5vw, 136px) !important;
+    padding: 40px 14px 14px !important;
+  }
+  .vocabulary-learning-page .vocabulary-learning-definition-options button > b { display: flex !important; }
+}
+
+@media (min-width: 621px) and (max-width: 680px) {
+  .vocabulary-learning-page .vocabulary-learning-definition-options {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Vocabulary list mode. */
+.vocabulary-learning-view-modes {
+  background: #f1f5f7;
+  border: 1px solid #e1e8eb;
+  border-radius: 14px;
+  display: grid;
+  gap: 5px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: -6px 0 16px;
+  padding: 5px;
+}
+.vocabulary-learning-view-modes button,
+.vocabulary-learning-list-view-switch button {
+  background: transparent;
+  border: 0;
+  border-radius: 10px;
+  color: #53646e;
+  cursor: pointer;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 800;
+  min-height: 40px;
+}
+.vocabulary-learning-view-modes button.active,
+.vocabulary-learning-list-view-switch button.active {
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(28, 48, 63, .09);
+  color: #245d7b;
+}
+.vocabulary-learning-list-mode {
+  background: #fffdf9;
+  border: 1px solid #eadfca;
+  border-radius: 24px;
+  box-shadow: 0 12px 28px rgba(54, 122, 160, .08);
+  box-sizing: border-box;
+  min-width: 0;
+  padding: clamp(18px, 2.6vw, 36px);
+  width: 100%;
+}
+.vocabulary-learning-list-head {
+  align-items: center;
+  border-bottom: 1px solid #eadfca;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 24px;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  padding-bottom: 16px;
+}
+.vocabulary-learning-list-head p,
+.vocabulary-learning-list-head h2,
+.vocabulary-learning-list-head span { margin: 0; }
+.vocabulary-learning-list-head p { color: #73838b; font-size: 12px; font-weight: 800; margin-bottom: 4px; }
+.vocabulary-learning-list-head h2 { color: #245d7b; font-size: clamp(19px, 2vw, 26px); line-height: 1.3; }
+.vocabulary-learning-list-head > div:first-child > span { color: #77827b; display: inline-block; font-size: 13px; margin-top: 4px; }
+.vocabulary-learning-list-actions { align-items: center; display: flex; flex-wrap: wrap; gap: 9px; }
+.vocabulary-learning-list-head > .vocabulary-learning-list-actions { margin-left: auto; }
+.vocabulary-learning-list-actions > button,
+.vocabulary-learning-list-display-menu > button {
+  background: #edf4ff;
+  border: 1px solid #a9c3f1;
+  border-radius: 999px;
+  color: #245d7b;
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  min-height: 40px;
+  padding: 0 16px;
+}
+.vocabulary-learning-list-display-caret {
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid currentColor;
+  display: inline-block;
+  font-size: 0;
+  height: 0;
+  line-height: 0;
+  margin-left: 4px;
+  vertical-align: middle;
+  width: 0;
+}
+.vocabulary-learning-list-display-menu { position: relative; }
+.vocabulary-learning-list-display-options {
+  background: #fffdf9;
+  border: 1px solid #a9d4ea;
+  border-radius: 12px;
+  box-shadow: 0 10px 28px rgba(28, 48, 63, .14);
+  display: grid;
+  gap: 2px;
+  min-width: 136px;
+  padding: 5px 6px;
+  position: absolute;
+  left: 0;
+  max-width: calc(100vw - 24px);
+  right: auto;
+  top: calc(100% + 3px);
+  z-index: 20;
+}
+.vocabulary-learning-list-display-options label {
+  align-items: center;
+  border-radius: 9px;
+  display: flex;
+  gap: 5px;
+  min-height: 29px;
+  padding: 0 5px;
+}
+.vocabulary-learning-list-display-options input { accent-color: #6689df; margin: 0; }
+.vocabulary-learning-list-display-options small { color: #7b8790; font-size: 11px; line-height: 1.45; padding: 4px 8px 2px; }
+.vocabulary-learning-list-view-switch {
+  background: #f1f5f7;
+  border: 1px solid #e1e8eb;
+  border-radius: 12px;
+  display: grid;
+  gap: 3px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  padding: 3px;
+}
+.vocabulary-learning-list-view-switch button { font-size: 12px; min-height: 34px; padding: 0 10px; }
+.vocabulary-learning-list-table-wrap { max-width: 100%; min-width: 0; overflow-x: auto; overscroll-behavior-x: contain; width: 100%; }
+.vocabulary-learning-list-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  color: #253d4a;
+  min-width: 620px;
+  table-layout: fixed;
+  width: 100%;
+}
+.vocabulary-learning-list-table:not(.has-phonetics) { table-layout: auto; }
+.vocabulary-learning-list-table th,
+.vocabulary-learning-list-table td {
+  border-bottom: 1px solid #e5ebee;
+  overflow-wrap: anywhere;
+  padding: 12px 14px;
+  text-align: left;
+  vertical-align: top;
+}
+.vocabulary-learning-list-table th { background: #f1f6fa; color: #4f6470; font-size: 13px; font-weight: 850; }
+.vocabulary-learning-list-table th:first-child { border-radius: 10px 0 0 10px; width: 70px; }
+.vocabulary-learning-list-table th:last-child { border-radius: 0 10px 10px 0; }
+.vocabulary-learning-list-table td { font-size: 15px; line-height: 1.55; }
+.vocabulary-learning-list-table tbody tr:hover { background: #fbfcfd; }
+.vocabulary-learning-list-index { color: #7b8990; font-variant-numeric: tabular-nums; text-align: left !important; width: 70px; }
+.vocabulary-learning-list-word { color: #1d3443; font-family: Georgia, "Times New Roman", serif; font-size: 17px !important; font-weight: 800; width: 24%; }
+.vocabulary-learning-list-table:not(.has-phonetics) .vocabulary-learning-list-word { white-space: nowrap; width: 1%; }
+.vocabulary-learning-list-phonetic { color: #617887; font-family: Georgia, "Times New Roman", serif; white-space: nowrap; width: 20%; }
+.vocabulary-learning-list-pronunciation { color: #e53935; display: inline-flex; margin-left: 7px; vertical-align: middle; }
+.vocabulary-learning-list-pronunciation .pronunciation-wave-icon { height: 15px; width: 12px; }
+.vocabulary-learning-list-word-link { color: inherit; text-decoration: none; }
+.vocabulary-learning-list-word-link:hover { color: #245d7b; text-decoration: underline; text-underline-offset: 3px; }
+.vocabulary-learning-list-word-link:focus-visible { border-radius: 3px; outline: 2px solid #8fc7e2; outline-offset: 3px; }
+.vocabulary-learning-list-meaning { color: #263d49; }
+.vocabulary-learning-list-cloze {
+  box-sizing: border-box;
+  display: inline-block;
+  isolation: isolate;
+  max-width: 100%;
+  min-height: 1.65em;
+  min-width: 5ch;
+  position: relative;
+  vertical-align: middle;
+  width: max-content;
+}
+.vocabulary-learning-list-cloze::after {
+  border-bottom: 1.5px dashed #6689df;
+  bottom: 0;
+  content: "";
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  width: 200%;
+}
+.vocabulary-learning-list-cloze-word { max-width: 100%; }
+.vocabulary-learning-list-cloze.is-answer-submitted {
+  max-width: none;
+  min-width: max-content;
+  overflow: visible;
+}
+.vocabulary-learning-list-cloze.is-answer-submitted::after { width: calc(100% + 4px); }
+.vocabulary-learning-list-cloze-measure,
+.vocabulary-learning-list-cloze-letters,
+.vocabulary-learning-list-cloze input { letter-spacing: .04em; padding: 0 1px 2px; }
+.vocabulary-learning-list-cloze-measure {
+  display: block;
+  padding-right: 10px;
+  visibility: hidden;
+  white-space: pre;
+}
+.vocabulary-learning-list-cloze-letters {
+  align-items: center;
+  display: flex !important;
+  inset: 0;
+  min-width: 0;
+  overflow: hidden;
+  pointer-events: none;
+  position: absolute;
+  white-space: pre;
+  z-index: 2;
+}
+.vocabulary-learning-list-cloze.is-answer-submitted .vocabulary-learning-list-cloze-letters { overflow: visible; }
+.vocabulary-learning-list-mode[data-mode="writing"] .vocabulary-learning-list-word.has-writing-answer { overflow: visible !important; }
+.vocabulary-learning-list-cloze-letters .is-correct { color: #19804e !important; -webkit-text-fill-color: #19804e !important; }
+.vocabulary-learning-list-cloze-letters .is-wrong { color: #c84c4c !important; -webkit-text-fill-color: #c84c4c !important; }
+.vocabulary-learning-list-cloze-separator { color: #647780; font-weight: 500; white-space: pre; }
+.vocabulary-learning-list-cloze-expected { color: #19804e !important; font-weight: inherit; -webkit-text-fill-color: #19804e !important; }
+.vocabulary-learning-list-writing-answer-reveal { display: none; }
+.vocabulary-learning-list-reading-answer-reveal { display: none; }
+.vocabulary-learning-list-cloze-placeholder { min-width: 5ch; }
+.vocabulary-learning-list-cloze input {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  box-sizing: border-box;
+  color: transparent !important;
+  caret-color: #245d7b;
+  font: inherit;
+  -webkit-text-fill-color: transparent !important;
+  height: 1.65em;
+  min-width: 0;
+  outline: none;
+  position: absolute;
+  inset: 0;
+  text-shadow: none !important;
+  width: 100%;
+  z-index: 1;
+}
+.vocabulary-learning-list-cloze input:focus-visible { outline: none; }
+.vocabulary-learning-list-answer-feedback { color: #596d78; display: block; font-size: 12px; line-height: 1.5; margin-top: 5px; }
+.vocabulary-learning-list-answer-feedback.is-correct { color: #19804e; }
+.vocabulary-learning-list-answer-feedback.is-wrong { color: #c84c4c; }
+.vocabulary-learning-list-chinese-answer { display: grid; gap: 5px; }
+.vocabulary-learning-list-chinese-answer input {
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 1.5px dashed #6689df !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  box-sizing: border-box;
+  color: inherit;
+  font: inherit;
+  min-height: 34px;
+  outline: none;
+  padding: 2px 1px;
+  width: min(100%, 30em);
+}
+.vocabulary-learning-list-chinese-answer input::placeholder { color: #9aa8ad; font-size: 13px; }
+.vocabulary-learning-list-print { display: none; }
+
+/* The book selector opens from the arrow area as well as the selected value. */
+.vocabulary-learning-settings-dialog .vocabulary-learning-settings-book-select {
+  background: #edf4ff;
+  border-color: #a9c3f1;
+  justify-content: space-between;
+  width: min(100%, 500px);
+}
+.vocabulary-book-select-control { align-items: center; display: flex; flex: 1 1 150px; justify-content: center; min-height: 38px; min-width: 110px; position: relative; }
+.vocabulary-book-select-control > span:first-child { color: #245d7b; font-weight: 800; padding: 0 26px 0 8px; text-align: center; }
+.vocabulary-learning-settings-dialog .vocabulary-learning-settings-book-select .vocabulary-book-select-control select {
+  cursor: pointer;
+  flex: 0 0 auto;
+  height: 100%;
+  inset: 0;
+  min-height: 0;
+  opacity: 0;
+  padding: 0;
+  position: absolute;
+  width: 100%;
+  z-index: 2;
+}
+.vocabulary-book-select-control .vocabulary-book-select-arrow { pointer-events: none; position: absolute; right: 8px; top: 50%; transform: translateY(-50%); z-index: 1; }
+.vocabulary-learning-settings-dialog .vocabulary-learning-settings-book-select { box-sizing: border-box; height: 48px; margin: 0 auto 10px; min-height: 48px; padding-block: 4px; }
+
+@media (max-width: 680px) {
+  .vocabulary-learning-list-head { align-items: flex-start; flex-direction: column; }
+  .vocabulary-learning-list-actions { width: 100%; }
+  .vocabulary-learning-list-view-switch { margin-left: auto; }
+  .vocabulary-learning-list-mode { border-radius: 18px; padding: 14px; }
+  .vocabulary-learning-list-mode:is([data-mode="reading"], [data-mode="writing"]) .vocabulary-learning-list-cloze,
+  .vocabulary-learning-list-mode[data-mode="reading"] .vocabulary-learning-list-chinese-answer input,
+  .vocabulary-learning-list-mode[data-mode="reading"] .vocabulary-learning-list-chinese-answer-result {
+    font-size: 16px !important;
+  }
+  .vocabulary-learning-list-mode[data-mode="reading"] .vocabulary-learning-list-chinese-answer input {
+    flex: 1 1 100%;
+    justify-self: start;
+    max-width: 100%;
+    min-width: 0;
+    width: 100%;
+  }
+  .vocabulary-learning-list-mode[data-mode="reading"] .vocabulary-learning-list-chinese-answer {
+    align-items: stretch;
+    display: block;
+  }
+  .vocabulary-learning-list-mode[data-mode="reading"] .vocabulary-learning-list-chinese-answer-result {
+    align-items: stretch;
+    border-bottom: 0 !important;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-width: 100%;
+    width: 100%;
+  }
+  .vocabulary-learning-list-mode[data-mode="reading"] .vocabulary-learning-list-chinese-answer-result .vocabulary-learning-list-entered-answer {
+    border-bottom: 1.5px dashed #6689df;
+    padding-bottom: 3px;
+    width: 100%;
+  }
+  .vocabulary-learning-list-mode[data-mode="reading"] .vocabulary-learning-list-correct-answer > span:first-child {
+    display: none;
+  }
+  .vocabulary-learning-list-mode[data-mode="reading"] .vocabulary-learning-list-correct-answer {
+    display: block;
+    margin-top: 4px;
+    width: 100%;
+  }
+  .vocabulary-learning-list-mode[data-mode="reading"] .vocabulary-learning-list-reading-answer-reveal {
+    color: #19804e !important;
+    display: block;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: 1.35;
+    margin-top: 4px;
+    -webkit-text-fill-color: #19804e !important;
+    white-space: normal;
+  }
+  .vocabulary-learning-list-mode[data-mode="reading"] .vocabulary-learning-list-correct-meaning {
+    color: #19804e !important;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    -webkit-text-fill-color: #19804e !important;
+  }
+  .vocabulary-learning-list-mode[data-mode="reading"] .vocabulary-learning-list-chinese-answer input.is-correct {
+    color: #19804e !important;
+    -webkit-text-fill-color: #19804e !important;
+  }
+  .vocabulary-learning-list-mode[data-mode="reading"] .vocabulary-learning-list-chinese-answer input.is-wrong {
+    color: #c73535 !important;
+    -webkit-text-fill-color: #c73535 !important;
+  }
+  .vocabulary-learning-list-mode[data-mode="reading"] .vocabulary-learning-list-chinese-answer input::placeholder { font-size: inherit; }
+  .vocabulary-learning-list-table { table-layout: auto; }
+  .vocabulary-learning-list-table th:first-child,
+  .vocabulary-learning-list-table .vocabulary-learning-list-index { width: 48px; }
+  .vocabulary-learning-list-table th:nth-child(2),
+  .vocabulary-learning-list-table .vocabulary-learning-list-word { white-space: nowrap; width: 1%; }
+  .vocabulary-learning-list-table.has-phonetics th:nth-child(3),
+  .vocabulary-learning-list-table.has-phonetics .vocabulary-learning-list-phonetic { width: 1%; }
+  .vocabulary-learning-list-cloze-word { max-width: none; white-space: nowrap; }
+  .vocabulary-learning-list-table th,
+  .vocabulary-learning-list-table td { padding: 10px 8px; }
+}
+
+@media print {
+  body:has(.vocabulary-learning-list-mode) * { visibility: hidden !important; }
+  body:has(.vocabulary-learning-list-mode) .vocabulary-learning-list-print,
+  body:has(.vocabulary-learning-list-mode) .vocabulary-learning-list-print * { visibility: visible !important; }
+  body:has(.vocabulary-learning-list-mode) .vocabulary-learning-list-print {
+    background: #fff !important;
+    color: #111 !important;
+    display: block !important;
+    font-family: Arial, "Noto Sans CJK SC", sans-serif;
+    inset: 0 auto auto 0;
+    position: absolute;
+    width: 100%;
+  }
+  body:has(.vocabulary-learning-list-mode) .vocabulary-learning-list-print h1 { font-size: 18pt; margin: 0 0 8mm; }
+  body:has(.vocabulary-learning-list-mode) .vocabulary-learning-list-print table { border-collapse: collapse; table-layout: fixed; width: 100%; }
+  body:has(.vocabulary-learning-list-mode) .vocabulary-learning-list-print th,
+  body:has(.vocabulary-learning-list-mode) .vocabulary-learning-list-print td { border: 1px solid #888; font-size: 9pt; padding: 4px; text-align: left; vertical-align: top; }
+  body:has(.vocabulary-learning-list-mode) .vocabulary-learning-list-print tr { break-inside: avoid; }
+}
+
+.vocabulary-learning-page .vocabulary-learning-resume-guidance {
+  color: #667985;
+  line-height: 1.6;
+  margin: 4px 0 2px;
+  max-width: 760px;
+}
+.vocabulary-learning-page .vocabulary-learning-resume-actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 8px;
+}
+.vocabulary-learning-page .vocabulary-learning-resume-actions .button {
+  justify-content: center;
+  min-width: 150px;
+}
+.vocabulary-learning-page .vocabulary-learning-resume-actions .button.secondary {
+  background: #fffdf9;
+  border: 1px solid #a9c3f1;
+  color: #245d7b;
+}
+
+@media (max-width: 540px) {
+  .vocabulary-learning-page .vocabulary-learning-resume-actions {
+    width: 100%;
+  }
+  .vocabulary-learning-page .vocabulary-learning-resume-actions .button {
+    flex: 1 1 130px;
+    min-width: 0;
+    padding-inline: 16px;
+  }
+}
+
+.vocabulary-learning-settings-dialog :is(
+  .vocabulary-learning-settings-options label,
+  .vocabulary-learning-settings-review-range button,
+  .vocabulary-learning-reaction-choice,
+  .vocabulary-learning-setup-modes button,
+  .vocabulary-learning-view-modes button
+) {
+  box-sizing: border-box;
+  background: linear-gradient(115deg, #f2f7ff 0%, #e1edff 100%) !important;
+  border-color: #a9c3f1 !important;
+  color: #000 !important;
+  height: 48px;
+  min-height: 48px;
+}
+
+.vocabulary-learning-settings-dialog :is(
+  .vocabulary-learning-settings-options label:has(input:checked),
+  .vocabulary-learning-settings-review-range button.active,
+  .vocabulary-learning-reaction-choice.active,
+  .vocabulary-learning-setup-modes button.active,
+  .vocabulary-learning-view-modes button.active
+) {
+  background: linear-gradient(115deg, #dceaff 0%, #c6dcff 100%) !important;
+  border-color: #86a8e9 !important;
+}
+
+.vocabulary-learning-settings-dialog .vocabulary-learning-setup-modes,
+.vocabulary-learning-settings-dialog .vocabulary-learning-view-modes {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0;
+  gap: 10px;
+  padding: 0;
+}
+
+.vocabulary-learning-settings-dialog .vocabulary-learning-setup-modes {
+  margin: 0 0 10px;
+}
+
+.vocabulary-learning-settings-dialog .vocabulary-learning-view-modes {
+  margin: 0 0 18px;
+}
+
+.vocabulary-learning-settings-dialog .vocabulary-learning-setup-modes button,
+.vocabulary-learning-settings-dialog .vocabulary-learning-view-modes button {
+  border: 1px solid #a9c3f1 !important;
+  border-radius: 14px;
+  box-shadow: none !important;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.vocabulary-learning-settings-dialog .vocabulary-learning-settings-scope label small,
+.vocabulary-learning-settings-dialog .vocabulary-learning-settings-review-range button strong,
+.vocabulary-learning-settings-dialog .vocabulary-learning-settings-reaction-options input[type="number"] {
+  font-size: 13px !important;
+}
+
+.vocabulary-learning-settings-dialog :is(
+  .vocabulary-learning-settings-options label,
+  .vocabulary-learning-settings-review-range button,
+  .vocabulary-learning-reaction-choice,
+  .vocabulary-learning-setup-modes button,
+  .vocabulary-learning-view-modes button,
+  .vocabulary-learning-settings-book-select
+) {
+  font-family: inherit !important;
+  font-size: 13px !important;
+  line-height: 1.4 !important;
+}
+
+.vocabulary-learning-settings-dialog :is(
+  .vocabulary-learning-settings-options label,
+  .vocabulary-learning-settings-review-range button,
+  .vocabulary-learning-reaction-choice,
+  .vocabulary-learning-setup-modes button,
+  .vocabulary-learning-view-modes button,
+  .vocabulary-learning-settings-book-select
+) * {
+  font-family: inherit !important;
+  font-size: inherit !important;
+  line-height: inherit !important;
+}
+
+.vocabulary-learning-settings-dialog .vocabulary-learning-settings-body {
+  align-content: start;
+  display: grid;
+  gap: 10px;
+}
+
+.vocabulary-learning-settings-dialog .vocabulary-learning-settings-body > * {
+  margin-block: 0 !important;
+}
+
+.vocabulary-learning-settings-dialog .vocabulary-learning-settings-fields {
+  gap: 10px;
+}
+
+.vocabulary-learning-settings-dialog .vocabulary-learning-settings-fields > * {
+  margin-block: 0 !important;
+}
+
+.vocabulary-learning-settings-dialog .vocabulary-learning-settings-review-range {
+  display: grid;
+  gap: 10px;
+}
+
+.vocabulary-learning-settings-dialog .vocabulary-learning-settings-review-range h3,
+.vocabulary-learning-settings-dialog :is(
+  .vocabulary-learning-settings-review-progress,
+  .vocabulary-learning-settings-review-familiarity,
+  .vocabulary-learning-settings-review-categories
+) {
+  margin: 0;
+}
+
+.vocabulary-learning-settings-dialog :is(
+  .vocabulary-learning-settings-review-progress,
+  .vocabulary-learning-settings-review-familiarity,
+  .vocabulary-learning-settings-review-categories
+) {
+  gap: 10px;
+}
+
+.vocabulary-learning-settings-dialog .vocabulary-learning-settings-paired-options {
+  row-gap: 10px;
+}
+
+.vocabulary-learning-settings-dialog :is(
+  .vocabulary-learning-settings-options legend,
+  .vocabulary-learning-settings-reaction legend,
+  .vocabulary-learning-settings-review-range h3,
+  .vocabulary-learning-settings-book-select > span:first-child,
+  .vocabulary-learning-book-select-control > span:first-child
+) {
+  color: #ff0000 !important;
+  font-weight: 400 !important;
+}
+
+.vocabulary-learning-settings-dialog .vocabulary-learning-settings-definition-options {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.vocabulary-learning-list-practice-status {
+  background: #edf4ff;
+  border-radius: 10px;
+  color: #315b78;
+  font-size: 14px;
+  margin: 0 0 12px;
+  padding: 9px 12px;
+}
+.vocabulary-learning-list-practice-status-mobile { display: none; }
+.vocabulary-learning-list-speaking-start {
+  background: #dceaff;
+  border: 1px solid #a9c3f1;
+  border-radius: 999px;
+  color: #245d7b;
+  cursor: pointer;
+  font: inherit;
+  font-size: 14px;
+  padding: 8px 12px;
+}
+.vocabulary-learning-list-speaking-start:disabled { cursor: default; opacity: .75; }
+.vocabulary-learning-list-listening-meaning {
+  background: transparent;
+  border: 0;
+  border-radius: 4px;
+  color: #111;
+  cursor: pointer;
+  font: inherit;
+  padding: 0;
+  text-align: left;
+}
+.vocabulary-learning-list-listening-meaning:disabled { color: #111; cursor: default; }
+.vocabulary-learning-list-listening-meaning.is-correct,
+.vocabulary-learning-list-speaking-hidden.is-correct { color: #19804e !important; }
+.vocabulary-learning-list-listening-meaning.is-wrong,
+.vocabulary-learning-list-speaking-hidden.is-wrong { color: #c84c4c !important; }
+.vocabulary-learning-list-speaking-hidden {
+  border-bottom: 1.5px dashed #6689df;
+  color: #74828a;
+  display: inline-block;
+  letter-spacing: .18em;
+  line-height: 1;
+  min-width: 5em;
+  text-align: center;
+}
+.vocabulary-learning-list-speaking-choice {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  padding: 0;
+  text-align: inherit;
+}
+.vocabulary-learning-list-speaking-choice:disabled { cursor: default; opacity: 1; }
+.vocabulary-learning-list-speaking-choice.is-correct { color: #19804e !important; -webkit-text-fill-color: #19804e !important; }
+.vocabulary-learning-list-speaking-choice.is-wrong { color: #c84c4c !important; -webkit-text-fill-color: #c84c4c !important; }
+.vocabulary-learning-list-table tr.is-speaking-target { background: #f0f6ff; }
+.vocabulary-learning-list-table tr.is-speaking-target > td {
+  background: #f0f6ff;
+  transition: background-color .24s ease, box-shadow .24s ease;
+}
+.vocabulary-learning-list-table tr.is-speaking-target .vocabulary-learning-list-speaking-meaning.is-current {
+  animation: vocabulary-list-speaking-meaning-pulse .72s cubic-bezier(.2, .8, .2, 1) both;
+  color: #164f70;
+  display: inline-block;
+  font-size: clamp(22px, 2.4vw, 32px);
+  font-weight: 800;
+  line-height: 1.3;
+  text-shadow: 0 3px 14px rgba(44, 121, 161, .18);
+}
+.vocabulary-learning-list-table tr.is-speaking-revealed > td {
+  background: #e8f6ff;
+  box-shadow: inset 0 1px 0 rgba(89, 163, 202, .18), inset 0 -1px 0 rgba(89, 163, 202, .18);
+}
+.vocabulary-learning-list-speaking-reveal-text {
+  animation: vocabulary-list-speaking-reveal .32s cubic-bezier(.2, .8, .2, 1) both;
+  color: #173e54;
+  display: inline-block;
+  font-size: clamp(22px, 2.4vw, 32px);
+  font-weight: 800;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+.vocabulary-learning-list-mode[data-mode="speaking"] .vocabulary-learning-list-speaking-hidden { border-bottom: 0; min-width: 0; }
+.vocabulary-learning-list-mode.is-speaking-fit-page {
+  display: flex;
+  flex-direction: column;
+  height: calc(100dvh - 320px);
+  max-height: calc(100dvh - 320px);
+  min-height: 0;
+  overflow: hidden;
+  padding: 10px;
+}
+.vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-head {
+  flex: 0 0 auto;
+  margin-bottom: 6px;
+  padding-bottom: 8px;
+}
+.vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-practice-status {
+  flex: 0 0 auto;
+  font-size: 12px;
+  margin: 0 0 6px;
+  padding: 5px 9px;
+}
+.vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table-wrap {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow: hidden;
+}
+.vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table {
+  display: block;
+  height: 100%;
+  min-width: 0;
+  table-layout: auto;
+}
+.vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table thead { display: none; }
+.vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table tbody {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+.vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table tr {
+  align-items: center;
+  background: #fffdfa;
+  border-bottom: 1px solid #e5ebee;
+  box-sizing: border-box;
+  column-gap: 6px;
+  display: grid;
+  flex: 1 1 0;
+  grid-template-columns: 2.4ch minmax(0, 27%) minmax(0, 23%) minmax(0, 1fr);
+  min-height: 0;
+  overflow: hidden;
+  transition: flex-grow .28s ease, background-color .24s ease;
+}
+.vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table tr.is-speaking-target { flex-grow: 4; }
+.vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table td {
+  background: transparent !important;
+  border-bottom: 0;
+  box-shadow: none !important;
+  font-size: 13px;
+  line-height: 1.1;
+  min-width: 0;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  padding: 0 2px;
+  text-align: left;
+  vertical-align: middle;
+}
+.vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-index { font-size: 11px !important; text-align: left !important; width: auto; }
+.vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-meaning { justify-self: stretch; text-align: left; }
+.vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table .vocabulary-learning-list-word,
+.vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table .vocabulary-learning-list-phonetic { visibility: hidden; white-space: normal; width: auto; }
+.vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table tr.is-speaking-revealed .vocabulary-learning-list-word,
+.vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table tr.is-speaking-revealed .vocabulary-learning-list-phonetic { visibility: visible; }
+.vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table tr.is-speaking-target { background: #f0f6ff; }
+.vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table tr.is-speaking-target > td { font-size: clamp(18px, 2vw, 26px); }
+.vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table tr.is-speaking-target .vocabulary-learning-list-index { font-size: 11px !important; }
+.vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table tr.is-speaking-target .vocabulary-learning-list-meaning { color: #164f70; }
+.vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table tr.is-speaking-revealed { background: #e8f6ff; }
+.vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-speaking-reveal-text {
+  font-size: clamp(20px, 2.35vw, 30px);
+  line-height: 1.1;
+}
+.vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-meaning.is-current {
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  font-size: clamp(20px, 2.35vw, 30px);
+  font-weight: 800;
+  line-height: 1.1;
+  overflow: hidden;
+}
+@media (max-width: 600px) {
+  .vocabulary-learning-list-mode .vocabulary-learning-list-actions {
+    align-items: stretch;
+    display: grid;
+    gap: 5px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    justify-content: stretch;
+    width: 100%;
+  }
+  .vocabulary-learning-list-mode .vocabulary-learning-list-display-menu { min-width: 0; width: 100%; }
+  .vocabulary-learning-list-mode .vocabulary-learning-list-view-switch { display: contents; }
+  .vocabulary-learning-list-mode .vocabulary-learning-list-actions > button,
+  .vocabulary-learning-list-mode .vocabulary-learning-list-display-menu > button,
+  .vocabulary-learning-list-mode .vocabulary-learning-list-view-switch button {
+    align-items: center;
+    background: #edf4ff;
+    border: 1px solid #a9c3f1;
+    border-radius: 11px;
+    box-shadow: none;
+    box-sizing: border-box;
+    color: #245d7b;
+    display: inline-flex;
+    font-size: 10px;
     justify-content: center;
-    margin: 0;
+    min-height: 32px;
+    min-width: 0;
+    padding: 0 2px;
+    white-space: nowrap;
+    width: 100%;
+  }
+  .vocabulary-learning-list-mode .vocabulary-learning-list-view-switch button.active {
+    background: #dceaff;
+    border-color: #86a9ec;
+    color: #245d7b;
+  }
+  .vocabulary-learning-list-mode.is-speaking-fit-page {
+    height: calc(100dvh - 40px);
+    max-height: calc(100dvh - 40px);
+    padding: 8px;
+  }
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-head { gap: 6px; margin-bottom: 4px; padding-bottom: 5px; }
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-actions { gap: 5px; }
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-actions > button,
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-display-menu > button { min-height: 32px; padding-inline: 10px; }
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-practice-status { font-size: 10px; margin-bottom: 4px; padding: 4px 6px; }
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table tr {
+    column-gap: 3px;
+    grid-template-columns: 2.4ch minmax(0, 27%) minmax(0, 23%) minmax(0, 1fr);
+  }
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table td { font-size: 11px; padding: 0 1px; }
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table tr.is-speaking-target { grid-template-rows: repeat(2, minmax(0, 1fr)); }
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table tr.is-speaking-target > td { font-size: 11px; }
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table tr.is-speaking-target .vocabulary-learning-list-index { font-size: 10px !important; }
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table tr.is-speaking-target .vocabulary-learning-list-index { grid-row: 1 / 3; }
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table tr.is-speaking-target .vocabulary-learning-list-word,
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table tr.is-speaking-target .vocabulary-learning-list-phonetic {
+    align-self: center;
+    grid-column: 2 / 4;
+    text-align: center;
+  }
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table tr.is-speaking-target .vocabulary-learning-list-word { grid-row: 1; }
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table tr.is-speaking-target .vocabulary-learning-list-phonetic { grid-row: 2; }
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table tr.is-speaking-target .vocabulary-learning-list-meaning {
+    font-size: 11px;
+    grid-column: 4;
+    grid-row: 1 / 3;
+  }
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table tr.is-speaking-target:not(.is-speaking-revealed) .vocabulary-learning-list-speaking-meaning.is-current {
+    animation: none;
+    font-size: clamp(13px, 3.4vw, 17.5px);
+    font-weight: 800;
+    line-height: 1.2;
+    text-align: center;
+    text-shadow: none;
+  }
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table tr.is-speaking-revealed .vocabulary-learning-list-speaking-meaning.is-current {
+    animation: none;
+    font-size: inherit;
+    font-weight: 500;
+    text-shadow: none;
+  }
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table tr.is-speaking-target .vocabulary-learning-list-word .vocabulary-learning-list-speaking-reveal-text,
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table tr.is-speaking-target .vocabulary-learning-list-phonetic .vocabulary-learning-list-speaking-reveal-text {
+    font-size: clamp(13px, 3.4vw, 17.5px);
+  }
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-speaking-reveal-text { font-size: clamp(13px, 3.4vw, 17.5px); }
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table tr.is-speaking-revealed .vocabulary-learning-list-word .vocabulary-learning-list-speaking-reveal-text { font-size: clamp(15px, 4vw, 21px); }
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-toolbar.is-speaking {
+    display: block;
+    border-bottom: 1px solid #eadfca;
+    margin-bottom: 4px;
+    min-width: 0;
+    padding-bottom: 4px;
+  }
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-toolbar.is-speaking .vocabulary-learning-list-head {
+    margin-bottom: 4px;
+    padding-bottom: 4px;
+  }
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-practice-status {
+    font-size: 10px;
+    line-height: 1.4;
+    margin: 0 0 4px;
+    min-width: 0;
+    overflow: visible;
+    padding: 4px 5px;
+    text-overflow: clip;
+    white-space: normal;
+  }
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-display-caret {
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 5px solid currentColor;
+    display: inline-block;
+    font-size: 0;
+    height: 0;
+    line-height: 0;
+    margin-left: 2px;
+    vertical-align: middle;
+    width: 0;
+  }
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-actions > button,
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-display-menu > button,
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-view-switch button {
+    min-height: 32px;
+    padding: 0 2px;
+  }
+}
+@media (min-width: 601px) and (max-width: 820px) {
+  .vocabulary-learning-list-mode.is-speaking-fit-page {
+    height: calc(100dvh - 190px);
+    max-height: calc(100dvh - 190px);
+  }
+}
+@media (min-width: 681px) {
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page {
+    display: flex;
+    flex-direction: column;
+    height: calc(100dvh - 320px);
+    max-height: calc(100dvh - 320px);
+    min-height: 0;
+    overflow: hidden;
+    padding: 10px;
+  }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page .vocabulary-learning-list-head,
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page .vocabulary-learning-list-practice-status { flex: 0 0 auto; }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page .vocabulary-learning-list-head { margin-bottom: 8px; padding-bottom: 10px; }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page .vocabulary-learning-list-practice-status { margin-bottom: 8px; padding: 6px 9px; }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page .vocabulary-learning-list-table-wrap { flex: 1 1 0; min-height: 0; overflow: hidden; }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page .vocabulary-learning-list-table { display: block; height: 100%; min-width: 0; table-layout: auto; }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page .vocabulary-learning-list-table thead { display: none; }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page .vocabulary-learning-list-table tbody { display: flex; flex-direction: column; height: 100%; min-height: 0; }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page .vocabulary-learning-list-table tr {
+    align-items: center;
+    background: #fffdfa;
+    border-bottom: 1px solid #e5ebee;
+    box-sizing: border-box;
+    display: grid;
+    flex: 1 1 0;
+    grid-template-columns: 2.4ch minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, 1.4fr);
+    min-height: 0;
+    overflow: hidden;
+  }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page .vocabulary-learning-list-table:not(.has-phonetics) tr { grid-template-columns: 2.4ch minmax(0, 1.1fr) minmax(0, 1.6fr); }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page .vocabulary-learning-list-table td {
+    background: transparent !important;
+    border-bottom: 0;
+    box-shadow: none !important;
+    box-sizing: border-box;
+    font-size: clamp(11px, 1vw, 14px) !important;
+    line-height: 1.1;
+    min-width: 0;
+    overflow: hidden;
+    padding: 0 3px;
+    text-align: left;
+    vertical-align: middle;
+    width: auto !important;
+  }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page .vocabulary-learning-list-index { font-size: 11px !important; }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page .vocabulary-learning-list-word,
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page .vocabulary-learning-list-phonetic,
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page .vocabulary-learning-list-meaning { text-overflow: ellipsis; white-space: nowrap; }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page .vocabulary-learning-list-cloze { min-height: 1.1em; }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page .vocabulary-learning-list-cloze input { height: 1.1em; }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page .vocabulary-learning-list-chinese-answer { gap: 0; }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page .vocabulary-learning-list-chinese-answer input { font-size: inherit; min-height: 1.1em; padding-block: 0; }
+}
+@media (min-width: 681px) and (max-width: 820px) {
+  .vocabulary-learning-list-mode.is-speaking-fit-page,
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page { height: calc(100dvh - 190px); max-height: calc(100dvh - 190px); }
+}
+@media (min-width: 681px) and (any-pointer: coarse) {
+  .vocabulary-learning-list-mode.is-speaking-fit-page,
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page {
+    height: calc(100dvh - 32px);
+    max-height: calc(100dvh - 32px);
+    padding: 6px;
+  }
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-head,
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page .vocabulary-learning-list-head { margin-bottom: 4px; padding-bottom: 5px; }
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-practice-status,
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page .vocabulary-learning-list-practice-status { margin-bottom: 4px; padding: 4px 7px; }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page .vocabulary-learning-list-table tr { grid-template-columns: 3.5ch minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, 1.4fr); }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page .vocabulary-learning-list-table:not(.has-phonetics) tr { grid-template-columns: 3.5ch minmax(0, 1.1fr) minmax(0, 1.6fr); }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page .vocabulary-learning-list-table td { font-size: clamp(14px, 1.4vw, 18px) !important; }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page .vocabulary-learning-list-table td,
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table td { line-height: 1.3; }
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table tr { grid-template-columns: 3.5ch minmax(0, 27%) minmax(0, 23%) minmax(0, 1fr); }
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table tr { flex-grow: 1; }
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table tr.is-speaking-target { flex-grow: 2; }
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table td { font-size: clamp(14px, 1.4vw, 18px); }
+}
+@keyframes vocabulary-list-speaking-meaning-pulse {
+  0% { opacity: .65; transform: scale(.9); }
+  62% { opacity: 1; transform: scale(1.12); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes vocabulary-list-speaking-reveal {
+  0% { filter: blur(5px); opacity: 0; transform: translateY(5px) scale(.88); }
+  100% { filter: blur(0); opacity: 1; transform: translateY(0) scale(1); }
+}
+.vocabulary-learning-list-table tr.is-listening-choice { cursor: pointer; }
+.vocabulary-learning-list-table tr.is-listening-choice:hover:not(.is-listening-correct):not(.is-listening-wrong) > td { background: #f3f7ff; }
+.vocabulary-learning-list-table tr.is-listening-choice:focus-visible { outline: 2px solid #6689df; outline-offset: -2px; }
+.vocabulary-learning-list-table tr.is-speaking-correct > td {
+  background: #e8f6ec !important;
+  color: #19804e !important;
+  transition: background-color .16s ease, color .16s ease;
+}
+.vocabulary-learning-list-table tr.is-speaking-wrong > td {
+  background: #fff0ef !important;
+  color: #c84c4c !important;
+  transition: background-color .16s ease, color .16s ease;
+}
+.vocabulary-learning-list-mode .vocabulary-learning-list-table tr.is-listening-correct > td {
+  background: #e8f6ec !important;
+  box-shadow: none !important;
+  color: #19804e !important;
+  transition: background-color .16s ease, color .16s ease;
+}
+.vocabulary-learning-list-mode .vocabulary-learning-list-table tr.is-listening-correct .vocabulary-learning-list-listening-meaning { color: #19804e !important; -webkit-text-fill-color: #19804e !important; }
+.vocabulary-learning-list-mode .vocabulary-learning-list-table tr.is-listening-wrong > td {
+  background: #fff0ef !important;
+  box-shadow: none !important;
+  color: #c84c4c !important;
+  transition: background-color .16s ease, color .16s ease;
+}
+.vocabulary-learning-list-mode .vocabulary-learning-list-table tr.is-listening-wrong .vocabulary-learning-list-listening-meaning { color: #c84c4c !important; -webkit-text-fill-color: #c84c4c !important; }
+@media (prefers-reduced-motion: reduce) {
+  .vocabulary-learning-list-table tr.is-speaking-target .vocabulary-learning-list-speaking-meaning.is-current,
+  .vocabulary-learning-list-speaking-reveal-text { animation: none; }
+}
+@keyframes vocabulary-listening-correct-glow {
+  from { box-shadow: 0 0 8px 1px rgba(25, 128, 78, .3), inset 0 0 8px rgba(25, 128, 78, .12); }
+  to { box-shadow: 0 0 22px 5px rgba(25, 128, 78, .58), inset 0 0 18px rgba(25, 128, 78, .24); }
+}
+@keyframes vocabulary-listening-wrong-glow {
+  from { box-shadow: 0 0 8px 1px rgba(200, 76, 76, .3), inset 0 0 8px rgba(200, 76, 76, .12); }
+  to { box-shadow: 0 0 22px 5px rgba(200, 76, 76, .58), inset 0 0 18px rgba(200, 76, 76, .24); }
+}
+
+@media (min-width: 681px) and (any-pointer: coarse) {
+  .vocabulary-learning-page .vocabulary-learning-speaking-detail-main > .vocabulary-learning-speaking-row {
+    gap: 12px;
+    padding: 20px 28px 28px;
+  }
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table tr.is-speaking-revealed .vocabulary-learning-list-speaking-meaning.is-current {
+    animation: none;
+    font-size: inherit;
+    font-weight: 500;
+    text-shadow: none;
+  }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page,
+  .vocabulary-learning-list-mode.is-speaking-fit-page {
+    height: calc(100lvh - 32px);
+    max-height: calc(100lvh - 32px);
+  }
+}
+
+@media (min-width: 1024px) and (pointer: fine) {
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"],
+  .vocabulary-learning-list-mode.is-speaking-fit-page {
+    height: calc(100dvh - 10px);
+    max-height: calc(100dvh - 10px);
+  }
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table td {
+    font-size: calc(clamp(11px, 1vw, 14px) + 5px) !important;
+  }
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table tr.is-speaking-target > td,
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-speaking-meaning.is-current,
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-speaking-reveal-text {
+    font-size: calc(clamp(11px, 1vw, 14px) + 5px) !important;
+  }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-table.has-phonetics tr,
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table.has-phonetics tr {
+    column-gap: 0;
+    grid-template-columns: 84px repeat(3, minmax(0, 1fr));
+  }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-table:not(.has-phonetics) tr {
+    grid-template-columns: 84px repeat(2, minmax(0, 1fr));
+  }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-table td,
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table td {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-table tr {
+    flex: 1 1 0;
+    min-height: 0;
+    transform: none;
+  }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-table tr.is-listening-correct {
+    background: #e8f6ec !important;
+    animation: vocabulary-listening-correct-glow .8s ease-in-out infinite alternate;
+    position: relative;
+    z-index: 1;
+  }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-table tr.is-listening-wrong {
+    background: #fff0ef !important;
+    animation: vocabulary-listening-wrong-glow .8s ease-in-out infinite alternate;
+    position: relative;
+    z-index: 1;
+  }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-table tr.is-listening-correct > td,
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-table tr.is-listening-wrong > td {
+    background: transparent !important;
+  }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page:is([data-mode="reading"], [data-mode="writing"]) {
+    display: block;
+    height: auto;
+    max-height: none;
+    overflow: visible;
+  }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page:is([data-mode="reading"], [data-mode="writing"]) .vocabulary-learning-list-head,
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page:is([data-mode="reading"], [data-mode="writing"]) .vocabulary-learning-list-practice-status { flex: initial; }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page:is([data-mode="reading"], [data-mode="writing"]) .vocabulary-learning-list-table-wrap { flex: initial; overflow: visible; }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page:is([data-mode="reading"], [data-mode="writing"]) .vocabulary-learning-list-table {
+    display: table;
+    height: auto;
+    min-width: 620px;
+    table-layout: fixed;
+  }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page:is([data-mode="reading"], [data-mode="writing"]) .vocabulary-learning-list-table thead { display: table-header-group; }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page:is([data-mode="reading"], [data-mode="writing"]) .vocabulary-learning-list-table tbody { display: table-row-group; height: auto; }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page:is([data-mode="reading"], [data-mode="writing"]) .vocabulary-learning-list-table tr {
+    display: table-row;
+    flex: initial;
+    grid-template-columns: none;
+    overflow: visible;
+  }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page:is([data-mode="reading"], [data-mode="writing"]) .vocabulary-learning-list-table th:first-child,
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page:is([data-mode="reading"], [data-mode="writing"]) .vocabulary-learning-list-index { width: 84px; }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page:is([data-mode="reading"], [data-mode="writing"]) .vocabulary-learning-list-table td {
+    border-bottom: 1px solid #e5ebee;
+    font-size: 17px !important;
+    line-height: 1.55;
+    padding: 12px 14px;
+    vertical-align: top;
+  }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page:is([data-mode="reading"], [data-mode="writing"]) .vocabulary-learning-list-index { font-size: 15px !important; }
+}
+
+@media (min-width: 1024px) and (pointer: fine) and (prefers-reduced-motion: reduce) {
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-table tr.is-listening-correct {
+    animation: none;
+    box-shadow: 0 0 14px 3px rgba(25, 128, 78, .42), inset 0 0 12px rgba(25, 128, 78, .2);
+  }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-table tr.is-listening-wrong {
+    animation: none;
+    box-shadow: 0 0 14px 3px rgba(200, 76, 76, .42), inset 0 0 12px rgba(200, 76, 76, .2);
+  }
+}
+
+@media (min-width: 681px) and (any-pointer: coarse) {
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] {
+    display: block;
+    height: auto;
+    max-height: none;
+    overflow: visible;
+  }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-head,
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-practice-status,
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-table-wrap { flex: initial; }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-table-wrap { overflow: visible; }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-table {
+    display: table;
+    height: auto;
+    min-width: 620px;
+    table-layout: fixed;
+  }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-table tbody { display: table-row-group; height: auto; }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-table tr {
+    display: table-row;
+    flex: initial;
+    grid-template-columns: none;
+    overflow: visible;
+  }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-table td {
+    border-bottom: 1px solid #e5ebee;
+    font-size: clamp(14px, 1.4vw, 18px) !important;
+    line-height: 1.5 !important;
+    padding: 2px 8px;
+    vertical-align: middle;
+  }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="reading"],
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="writing"] {
+    display: block;
+    height: auto;
+    max-height: none;
+    overflow: visible;
+  }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="reading"] .vocabulary-learning-list-head,
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="reading"] .vocabulary-learning-list-practice-status,
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="writing"] .vocabulary-learning-list-head,
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="writing"] .vocabulary-learning-list-practice-status,
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="reading"] .vocabulary-learning-list-table-wrap,
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="writing"] .vocabulary-learning-list-table-wrap { flex: initial; }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="reading"] .vocabulary-learning-list-table-wrap,
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="writing"] .vocabulary-learning-list-table-wrap { overflow: visible; }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="reading"] .vocabulary-learning-list-table,
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="writing"] .vocabulary-learning-list-table {
+    display: table;
+    height: auto;
+    min-width: 620px;
+    table-layout: fixed;
+  }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="reading"] .vocabulary-learning-list-table thead,
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="writing"] .vocabulary-learning-list-table thead { display: table-header-group; }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="reading"] .vocabulary-learning-list-table tbody,
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="writing"] .vocabulary-learning-list-table tbody { display: table-row-group; height: auto; }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="reading"] .vocabulary-learning-list-table tr,
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="writing"] .vocabulary-learning-list-table tr {
+    display: table-row;
+    flex: initial;
+    grid-template-columns: none;
+    overflow: visible;
+  }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="reading"] .vocabulary-learning-list-table th:first-child,
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="reading"] .vocabulary-learning-list-index,
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="writing"] .vocabulary-learning-list-table th:first-child,
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="writing"] .vocabulary-learning-list-index { width: 84px; }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="reading"] .vocabulary-learning-list-table td,
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="writing"] .vocabulary-learning-list-table td {
+    border-bottom: 1px solid #e5ebee;
+    font-size: 15px !important;
+    line-height: 1.55;
+    padding: 12px 14px;
+    vertical-align: top;
+  }
+}
+
+@media (min-width: 681px) {
+  .vocabulary-lookup-landing,
+  .vocabulary-word-page,
+  .vocabulary-learning-page { row-gap: 16px !important; }
+  .vocabulary-word-page .vocabulary-detail-shell,
+  .vocabulary-learning-page .vocabulary-detail-shell { display: grid; row-gap: 16px; }
+  .vocabulary-learning-page .vocabulary-learning-detail-page,
+  .vocabulary-learning-page .vocabulary-learning-detail-grid,
+  .vocabulary-word-page .word-detail-main,
+  .vocabulary-learning-page .vocabulary-learning-detail-main.word-detail-main,
+  .vocabulary-word-page .vocabulary-lookup-details,
+  .vocabulary-learning-page .vocabulary-learning-lookup-details { row-gap: 16px; }
+  .vocabulary-word-page .word-detail-section,
+  .vocabulary-learning-page .vocabulary-lookup-section,
+  .vocabulary-learning-page .vocabulary-learning-complete-detail .word-detail-section { row-gap: 16px; }
+  .vocabulary-word-page .word-detail-section + .word-detail-section,
+  .vocabulary-learning-page .vocabulary-lookup-section + .vocabulary-lookup-section,
+  .vocabulary-learning-page .vocabulary-learning-complete-detail .word-detail-section + .word-detail-section { padding-top: 0; }
+  .vocabulary-word-page .definition-rows.large,
+  .vocabulary-learning-page .definition-rows.large { row-gap: 16px; }
+}
+.vocabulary-learning-list-speaking-prompt {
+  color: #6689df;
+  display: block;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  margin-top: 4px;
+}
+.vocabulary-learning-list-answer-feedback {
+  color: #536b77;
+  display: block;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5;
+  margin-top: 4px;
+}
+.vocabulary-learning-list-answer-feedback.is-correct { color: #19804e; }
+.vocabulary-learning-list-answer-feedback.is-wrong { color: #c84c4c; }
+.vocabulary-learning-list-chinese-answer-result {
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 1.5px dashed #6689df !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  box-sizing: border-box;
+  color: #111 !important;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font: inherit;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  min-height: 34px;
+  outline: none;
+  padding: 2px 1px;
+  width: min(100%, 30em);
+}
+.vocabulary-learning-list-chinese-answer-result {
+  gap: 0;
+  justify-content: flex-start;
+  max-width: 100%;
+  padding-right: 12px;
+  width: max-content;
+}
+.vocabulary-learning-list-chinese-answer-result .vocabulary-learning-list-entered-answer {
+  color: #111 !important;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  -webkit-text-fill-color: #111 !important;
+}
+.vocabulary-learning-list-chinese-answer-result.is-correct .vocabulary-learning-list-entered-answer {
+  color: #19804e !important;
+  -webkit-text-fill-color: #19804e !important;
+}
+.vocabulary-learning-list-chinese-answer-result.is-wrong .vocabulary-learning-list-entered-answer {
+  color: #c73535 !important;
+  -webkit-text-fill-color: #c73535 !important;
+}
+.vocabulary-learning-list-correct-answer {
+  align-items: baseline;
+  display: inline-flex;
+  margin-left: 0;
+  white-space: normal;
+}
+.vocabulary-learning-list-chinese-answer-result .vocabulary-learning-list-correct-meaning {
+  color: #19804e !important;
+  -webkit-text-fill-color: #19804e !important;
+  font-weight: 700;
+}
+
+.vocabulary-learning-settings-dialog .vocabulary-study-group-select:focus,
+.vocabulary-learning-settings-dialog .vocabulary-study-group-select:focus-visible {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.vocabulary-learning-settings-backdrop {
+  align-items: flex-start;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.vocabulary-learning-settings-dialog {
+  box-sizing: border-box;
+  flex: 0 1 660px;
+  margin-inline: auto;
+  max-width: 660px;
+  min-width: 0;
+  width: 100%;
+}
+
+.vocabulary-learning-settings-dialog .vocabulary-learning-settings-reaction-options {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0;
+  box-shadow: none !important;
+  gap: 10px;
+  overflow: visible;
+  padding: 0;
+}
+
+.vocabulary-learning-settings-dialog .vocabulary-learning-settings-body > *,
+.vocabulary-learning-settings-dialog .vocabulary-learning-settings-fields,
+.vocabulary-learning-settings-dialog .vocabulary-learning-settings-fields > * {
+  box-sizing: border-box;
+  max-width: 100%;
+  min-width: 0;
+}
+
+@media (max-width: 680px) {
+  .vocabulary-learning-settings-dialog {
+    flex: 0 1 auto;
+    max-width: calc(100vw - 24px);
+    width: calc(100vw - 24px);
+  }
+}
+
+/* Reading and writing lists use larger text while keeping the other modes unchanged. */
+.vocabulary-learning-list-mode:is([data-mode="reading"], [data-mode="writing"]) .vocabulary-learning-list-table th { font-size: 18px; }
+.vocabulary-learning-list-mode:is([data-mode="reading"], [data-mode="writing"]) .vocabulary-learning-list-table td { font-size: 20px !important; }
+.vocabulary-learning-list-mode:is([data-mode="reading"], [data-mode="writing"]) .vocabulary-learning-list-table .vocabulary-learning-list-word { font-size: 22px !important; }
+
+@media (min-width: 681px) and (pointer: fine) {
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page:is([data-mode="reading"], [data-mode="writing"]) .vocabulary-learning-list-table td {
+    font-size: calc(clamp(11px, 1vw, 14px) + 5px) !important;
+  }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page:is([data-mode="reading"], [data-mode="writing"]) .vocabulary-learning-list-table .vocabulary-learning-list-index {
+    font-size: 16px !important;
+  }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page:is([data-mode="reading"], [data-mode="writing"]) .vocabulary-learning-list-table .vocabulary-learning-list-word {
+    font-size: calc(clamp(11px, 1vw, 14px) + 5px) !important;
+  }
+}
+
+@media (min-width: 681px) and (any-pointer: coarse) {
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page:is([data-mode="reading"], [data-mode="writing"]) .vocabulary-learning-list-table th { font-size: 18px !important; }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page:is([data-mode="reading"], [data-mode="writing"]) .vocabulary-learning-list-table td { font-size: 20px !important; }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page:is([data-mode="reading"], [data-mode="writing"]) .vocabulary-learning-list-table .vocabulary-learning-list-index { font-size: 20px !important; }
+}
+
+/* Keep the listening list in its viewport while the correct answer row expands. */
+.vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-table tr {
+  transition: flex-grow .28s ease, background-color .24s ease;
+}
+.vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-table tr.is-listening-correct {
+  flex-grow: 3;
+  overflow: visible;
+  z-index: 2;
+}
+.vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-table tr.is-listening-correct > td {
+  font-size: clamp(21px, 2.1vw, 30px) !important;
+  line-height: 1.12 !important;
+  overflow: visible;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+.vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-table tr.is-listening-correct .vocabulary-learning-list-pronunciation .pronunciation-wave-icon {
+  height: 1em;
+  width: .75em;
+}
+
+@media (min-width: 681px) and (pointer: coarse) {
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] {
+    display: flex;
+    flex-direction: column;
+    height: calc(100lvh - 32px);
+    max-height: calc(100lvh - 32px);
+    overflow: hidden;
+  }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-head,
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-practice-status { flex: 0 0 auto; }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-table-wrap { flex: 1 1 0; min-height: 0; overflow: hidden; }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-table { display: block; height: 100%; min-width: 0; }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-table thead { display: none; }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-table tbody { display: flex; flex-direction: column; height: 100%; min-height: 0; }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-table tr {
+    align-items: center;
+    display: grid;
+    flex: 1 1 0;
+    grid-template-columns: 3.5ch minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, 1.4fr);
+    min-height: 0;
+    overflow: hidden;
+  }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-table:not(.has-phonetics) tr { grid-template-columns: 3.5ch minmax(0, 1fr) minmax(0, 1.5fr); }
+}
+
+@media (max-width: 680px) and (pointer: coarse) {
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] {
+    display: flex;
+    flex-direction: column;
+    height: calc(100dvh - 40px);
+    max-height: calc(100dvh - 40px);
+    min-height: 0;
+    overflow: hidden;
+    padding: 8px;
+  }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-head,
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-practice-status { flex: 0 0 auto; }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-table-wrap { flex: 1 1 0; min-height: 0; overflow: hidden; }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-table { display: block; height: 100%; min-width: 0; }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-table thead { display: none; }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-table tbody { display: flex; flex-direction: column; height: 100%; min-height: 0; }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-table tr {
+    align-items: center;
+    display: grid;
+    flex: 1 1 0;
+    grid-template-columns: 3ch minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, 1.35fr);
+    min-height: 0;
+    overflow: hidden;
+    transition: flex-grow .28s ease, background-color .24s ease;
+  }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-table:not(.has-phonetics) tr { grid-template-columns: 3ch minmax(0, 1fr) minmax(0, 1.5fr); }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-table td { font-size: clamp(11px, 3vw, 14px); line-height: 1.1; min-width: 0; overflow: hidden; padding: 0 2px; width: auto !important; }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-table tr.is-listening-correct { flex-grow: 3; overflow: visible; z-index: 2; }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-table tr.is-listening-correct > td { font-size: clamp(18px, 4.7vw, 23px) !important; }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-table tr.is-listening-correct .vocabulary-learning-list-pronunciation .pronunciation-wave-icon { height: 1em; width: .75em; }
+}
+
+@media (max-width: 680px) {
+  .vocabulary-learning-list-index-heading > span { display: none; }
+}
+
+@media (max-width: 680px) {
+  .vocabulary-learning-list-mode .vocabulary-learning-list-head {
+    align-items: center;
+    flex-direction: row;
+  }
+  .vocabulary-learning-list-mode .vocabulary-learning-list-actions {
+    align-items: center;
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    width: auto;
+  }
+  .vocabulary-learning-list-mode .vocabulary-learning-list-display-menu { min-width: 0; width: auto; }
+  .vocabulary-learning-list-mode .vocabulary-learning-list-actions > button,
+  .vocabulary-learning-list-mode .vocabulary-learning-list-display-menu > button {
+    flex: 0 0 auto;
+    min-width: max-content;
+    padding-inline: 14px;
+    width: auto;
+  }
+}
+
+@media (max-width: 680px) {
+  .vocabulary-learning-list-mode:is([data-mode="reading"], [data-mode="writing"]) {
+    border: 1px solid #eadfca;
+    border-radius: 18px;
+    box-shadow: 0 12px 28px rgba(54, 122, 160, .08);
+    box-sizing: border-box;
+    height: auto;
+    inset: auto;
+    max-height: none;
+    max-width: 100%;
+    overflow: visible;
+    padding: 14px;
+    position: static;
+    width: 100%;
+    z-index: auto;
+  }
+  .vocabulary-learning-list-mode:is([data-mode="reading"], [data-mode="writing"]) .vocabulary-learning-list-table-wrap {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  .vocabulary-learning-list-mode:is([data-mode="reading"], [data-mode="writing"]) .vocabulary-learning-list-table {
+    max-width: 100%;
+    min-width: 0;
+    table-layout: fixed;
+    width: 100%;
+  }
+  .vocabulary-learning-list-mode:is([data-mode="reading"], [data-mode="writing"]) .vocabulary-learning-list-table th {
+    font-size: 15px !important;
+  }
+  .vocabulary-learning-list-mode:is([data-mode="reading"], [data-mode="writing"]) .vocabulary-learning-list-table td {
+    font-size: 17px !important;
+  }
+  .vocabulary-learning-list-mode:is([data-mode="reading"], [data-mode="writing"]) .vocabulary-learning-list-index-heading,
+  .vocabulary-learning-list-mode:is([data-mode="reading"], [data-mode="writing"]) .vocabulary-learning-list-index {
+    display: none !important;
+  }
+  .vocabulary-learning-list-mode:is([data-mode="reading"], [data-mode="writing"]) .vocabulary-learning-list-table:not(.has-phonetics) th:first-child,
+  .vocabulary-learning-list-mode:is([data-mode="reading"], [data-mode="writing"]) .vocabulary-learning-list-table:not(.has-phonetics) .vocabulary-learning-list-index {
+    width: 34px;
+  }
+  .vocabulary-learning-list-mode:is([data-mode="reading"], [data-mode="writing"]) .vocabulary-learning-list-table:not(.has-phonetics) th:nth-child(2),
+  .vocabulary-learning-list-mode:is([data-mode="reading"], [data-mode="writing"]) .vocabulary-learning-list-table:not(.has-phonetics) .vocabulary-learning-list-word {
+    width: 42%;
+  }
+  .vocabulary-learning-list-mode:is([data-mode="reading"], [data-mode="writing"]) .vocabulary-learning-list-table.has-phonetics th:first-child,
+  .vocabulary-learning-list-mode:is([data-mode="reading"], [data-mode="writing"]) .vocabulary-learning-list-table.has-phonetics .vocabulary-learning-list-index {
+    width: 34px;
+  }
+  .vocabulary-learning-list-mode:is([data-mode="reading"], [data-mode="writing"]) .vocabulary-learning-list-table.has-phonetics th:nth-child(2),
+  .vocabulary-learning-list-mode:is([data-mode="reading"], [data-mode="writing"]) .vocabulary-learning-list-table.has-phonetics .vocabulary-learning-list-word {
+    width: 30%;
+  }
+  .vocabulary-learning-list-mode:is([data-mode="reading"], [data-mode="writing"]) .vocabulary-learning-list-table.has-phonetics th:nth-child(3),
+  .vocabulary-learning-list-mode:is([data-mode="reading"], [data-mode="writing"]) .vocabulary-learning-list-table.has-phonetics .vocabulary-learning-list-phonetic {
+    width: 25%;
+  }
+  .vocabulary-learning-list-mode:is([data-mode="reading"], [data-mode="writing"]) .vocabulary-learning-list-table .vocabulary-learning-list-word {
+    font-size: 17px !important;
+    white-space: normal;
+  }
+  .vocabulary-learning-list-mode:is([data-mode="reading"], [data-mode="writing"]) .vocabulary-learning-list-table .vocabulary-learning-list-meaning {
+    font-size: 15px !important;
+  }
+  .vocabulary-learning-list-mode[data-mode="reading"] .vocabulary-learning-list-chinese-answer input {
+    font-size: 16px !important;
+  }
+  .vocabulary-learning-list-mode[data-mode="writing"] .vocabulary-learning-list-table th:last-child,
+  .vocabulary-learning-list-mode[data-mode="writing"] .vocabulary-learning-list-table .vocabulary-learning-list-meaning {
+    padding-left: 32px !important;
+  }
+  .vocabulary-learning-list-mode:is([data-mode="reading"], [data-mode="writing"]) .vocabulary-learning-list-cloze:not(.is-answer-submitted)::after {
+    width: 133.333%;
+  }
+  .vocabulary-learning-list-mode[data-mode="writing"] .vocabulary-learning-list-word.has-writing-answer .vocabulary-learning-list-letter-answer {
+    display: block;
+    max-width: 100%;
+    overflow: visible;
+    width: 100%;
+  }
+  .vocabulary-learning-list-mode[data-mode="writing"] .vocabulary-learning-list-cloze.is-answer-submitted {
+    max-width: 100%;
+    min-width: 0;
+    width: auto;
+  }
+  .vocabulary-learning-list-mode[data-mode="writing"] .vocabulary-learning-list-cloze.is-answer-submitted .vocabulary-learning-list-cloze-letters {
+    overflow: visible;
+    width: max-content;
+  }
+  .vocabulary-learning-list-mode[data-mode="writing"] .vocabulary-learning-list-cloze.is-answer-submitted .vocabulary-learning-list-cloze-separator,
+  .vocabulary-learning-list-mode[data-mode="writing"] .vocabulary-learning-list-cloze.is-answer-submitted .vocabulary-learning-list-cloze-expected,
+  .vocabulary-learning-list-mode[data-mode="reading"] .vocabulary-learning-list-cloze.is-answer-submitted .vocabulary-learning-list-cloze-separator,
+  .vocabulary-learning-list-mode[data-mode="reading"] .vocabulary-learning-list-cloze.is-answer-submitted .vocabulary-learning-list-cloze-expected {
+    display: none !important;
+  }
+  .vocabulary-learning-list-mode[data-mode="writing"] .vocabulary-learning-list-writing-answer-reveal {
+    color: #19804e !important;
+    display: block;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: 1.35;
+    margin-top: 4px;
+    -webkit-text-fill-color: #19804e !important;
+    white-space: normal;
+  }
+  .vocabulary-learning-list-mode:is([data-mode="reading"], [data-mode="writing"]) .vocabulary-learning-list-cloze.is-answer-correct .vocabulary-learning-list-cloze-letters > span:not(.vocabulary-learning-list-cloze-expected):not(.vocabulary-learning-list-cloze-separator) {
+    color: #19804e !important;
+    -webkit-text-fill-color: #19804e !important;
+  }
+  .vocabulary-learning-list-mode:is([data-mode="reading"], [data-mode="writing"]) .vocabulary-learning-list-cloze.is-answer-wrong .vocabulary-learning-list-cloze-letters > span:not(.vocabulary-learning-list-cloze-expected):not(.vocabulary-learning-list-cloze-separator) {
+    color: #c84c4c !important;
+    -webkit-text-fill-color: #c84c4c !important;
+  }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] {
+    display: flex;
+    flex-direction: column;
+    height: calc(100dvh - 40px);
+    max-height: calc(100dvh - 40px);
+    min-height: 0;
+    overflow: hidden;
+    padding: 8px;
+  }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-toolbar { flex: 0 0 auto; }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-head {
+    border-bottom: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-practice-status {
+    font-size: clamp(11px, 3vw, 14px);
+    line-height: 1.3;
+    margin: 4px 0 6px;
     padding: 4px 7px;
   }
-.bbc-article-page[data-mobile-audio-viewport="true"] .bbc-mobile-mode-controls .bbc-speaking-training-status small { flex-basis: auto; }
-.bbc-article-page[data-mobile-audio-viewport="true"] .bbc-desktop-audio-toolbar { display: none !important; }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-table-wrap {
+    flex: 1 1 0;
+    min-height: 0;
+    overflow: hidden;
+  }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-table {
+    display: block;
+    height: 100%;
+    min-width: 0;
+    width: 100%;
+  }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-table thead { display: none; }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-table tbody {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+    width: 100%;
+  }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-table tr {
+    align-items: center;
+    display: grid;
+    flex: 1 1 0;
+    grid-template-columns: minmax(0, 1fr) !important;
+    min-height: 0;
+    width: 100%;
+  }
+  .vocabulary-learning-list-mode[data-mode="listening"] .vocabulary-learning-list-practice-status-desktop { display: none; }
+  .vocabulary-learning-list-mode[data-mode="listening"] .vocabulary-learning-list-practice-status-mobile { display: inline; }
+  .vocabulary-learning-list-mode[data-mode="listening"] .vocabulary-learning-list-index-heading,
+  .vocabulary-learning-list-mode[data-mode="listening"] .vocabulary-learning-list-index,
+  .vocabulary-learning-list-mode[data-mode="listening"] .vocabulary-learning-list-table th:nth-child(-n + 3),
+  .vocabulary-learning-list-mode[data-mode="listening"] .vocabulary-learning-list-word,
+  .vocabulary-learning-list-mode[data-mode="listening"] .vocabulary-learning-list-phonetic {
+    display: none !important;
+  }
+  .vocabulary-learning-list-mode[data-mode="listening"] .vocabulary-learning-list-table tbody {
+    width: 100%;
+  }
+  .vocabulary-learning-list-mode[data-mode="listening"] .vocabulary-learning-list-table tr {
+    grid-template-columns: minmax(0, 1fr) !important;
+    width: 100%;
+  }
+  .vocabulary-learning-list-mode[data-mode="listening"] .vocabulary-learning-list-table tr.is-listening-correct {
+    animation: vocabulary-listening-correct-glow .8s ease-in-out infinite alternate;
+    background: #e8f6ec !important;
+    position: relative;
+  }
+  .vocabulary-learning-list-mode[data-mode="listening"] .vocabulary-learning-list-table tr.is-listening-wrong {
+    animation: vocabulary-listening-wrong-glow .8s ease-in-out infinite alternate;
+    background: #fff0ef !important;
+    position: relative;
+  }
+  .vocabulary-learning-list-mode[data-mode="listening"] .vocabulary-learning-list-table tr:is(.is-listening-correct, .is-listening-wrong) > td {
+    background: transparent !important;
+  }
+  .vocabulary-learning-list-mode[data-mode="listening"] .vocabulary-learning-list-table td {
+    line-height: 1.3 !important;
+  }
+  .vocabulary-learning-list-mode[data-mode="listening"] .vocabulary-learning-list-meaning {
+    align-self: center;
+    grid-column: 1;
+    justify-self: stretch;
+    text-align: left !important;
+    vertical-align: middle;
+    width: 100% !important;
+  }
+  .vocabulary-learning-list-mode[data-mode="listening"] .vocabulary-learning-list-table {
+    table-layout: fixed;
+    width: 100%;
+  }
+}
+
+@media (min-width: 1024px) and (pointer: fine) {
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table.has-phonetics tr {
+    grid-template-columns: 84px minmax(0, 25%) minmax(0, 24%) minmax(0, 1fr);
+  }
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table tr.is-speaking-target .vocabulary-learning-list-word .vocabulary-learning-list-speaking-reveal-text {
+    font-size: clamp(26px, 2vw, 32px) !important;
+  }
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table tr.is-speaking-target .vocabulary-learning-list-phonetic .vocabulary-learning-list-speaking-reveal-text,
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table tr.is-speaking-target .vocabulary-learning-list-meaning .vocabulary-learning-list-speaking-meaning.is-current {
+    font-size: clamp(26px, 2vw, 32px) !important;
+  }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-table td,
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-table tr:is(.is-listening-correct, .is-listening-wrong) > td,
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table td,
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table tr.is-speaking-target > td,
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table tr.is-speaking-target .vocabulary-learning-list-speaking-meaning.is-current,
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table tr.is-speaking-target .vocabulary-learning-list-speaking-reveal-text {
+    font-size: calc(clamp(11px, 1vw, 14px) + 5px) !important;
+  }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-meaning,
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table .vocabulary-learning-list-meaning,
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table .vocabulary-learning-list-speaking-meaning.is-current,
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table .vocabulary-learning-list-speaking-reveal-text {
+    font-size: calc(clamp(11px, 1vw, 14px) + 7px) !important;
+  }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-table tr.is-listening-correct > td:not(.vocabulary-learning-list-index) {
+    font-size: clamp(26px, 2vw, 32px) !important;
+  }
+  .vocabulary-learning-list-mode.is-tablet-desktop-fit-page[data-mode="listening"] .vocabulary-learning-list-table .vocabulary-learning-list-index,
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table .vocabulary-learning-list-index,
+  .vocabulary-learning-list-mode.is-speaking-fit-page .vocabulary-learning-list-table tr.is-speaking-target .vocabulary-learning-list-index {
+    font-size: 16px !important;
+  }
+}

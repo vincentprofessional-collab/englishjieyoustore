@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { supabase } from "@/lib/supabase/client";
+import { VocabularyMobileBackLink } from "@/components/vocabulary-mobile-back-link";
 import type { LearningBookKey } from "@/lib/vocabulary/learning";
 import { createVocabularyPkAudio } from "@/lib/vocabulary/pk-audio";
 
@@ -305,7 +306,7 @@ export function VocabularyPk({ initialBook, initialChallenge, initialMode, initi
   return (
     <main className="vocabulary-pk-page">
       <header className="vocabulary-pk-header">
-        <Link href={`/vocabulary/books?level=${encodeURIComponent(initialBook)}`}>‹ 返回背单词</Link>
+        <VocabularyMobileBackLink ariaLabel="返回背单词" desktopLabel="← 返回背单词" href={`/vocabulary/books?level=${encodeURIComponent(initialBook)}`} />
         <div><span>词汇书对战</span><h1>{title}</h1></div>
         <div className="vocabulary-pk-header-controls"><span className="vocabulary-pk-header-badge">20 题 · 每题 10 秒</span><button aria-pressed={soundEnabled && audioReady} className="vocabulary-pk-sound-button" onClick={() => void toggleSound()} type="button">{soundEnabled && audioReady ? "声音已开启" : "开启声音"}</button></div>
       </header>
@@ -402,7 +403,7 @@ export function VocabularyPk({ initialBook, initialChallenge, initialMode, initi
               <h2>{resultLine}</h2>
               <div className="vocabulary-pk-final-score"><div><span>我答对</span><strong>{game.me.correct}<small> / 20</small></strong></div><span>—</span><div><span>{game.opponent?.name ?? "对手"}答对</span><strong>{game.opponent?.correct ?? 0}<small> / 20</small></strong></div></div>
               <p>{game.ranked ? `本场获得 ${game.me.points} 积分 · 已计入「${initialBook}」词汇书排名` : "友谊赛 · 本场只保留成绩统计，不累计积分和段位"}</p>
-              <div className="vocabulary-pk-result-actions"><button className="primary" onClick={() => { setGame(null); setPlayerToken(""); setInviteUrl(""); setQueueToken(""); setStage("choose"); }} type="button">再来一场</button><Link href={`/vocabulary/books?level=${encodeURIComponent(initialBook)}`}>返回词汇书</Link></div>
+              <div className="vocabulary-pk-result-actions"><button className="primary" onClick={() => { setGame(null); setPlayerToken(""); setInviteUrl(""); setQueueToken(""); setStage("choose"); }} type="button">再来一场</button><VocabularyMobileBackLink ariaLabel="返回词汇书" desktopLabel="← 返回词汇书" href={`/vocabulary/books?level=${encodeURIComponent(initialBook)}`} /></div>
             </div>
           ) : null}
           {busy && stage === "choose" ? <p className="vocabulary-pk-loading">正在准备……</p> : null}

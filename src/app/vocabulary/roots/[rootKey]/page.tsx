@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { VocabularyMobileBackLink } from "@/components/vocabulary-mobile-back-link";
 import { notFound } from "next/navigation";
 import { ProjectAccessGate } from "@/components/project-access-gate";
 import { getPaidContentKey, isFreeVocabularyEtymology } from "@/lib/access-control";
@@ -30,9 +31,7 @@ export default async function VocabularyRootPage({
   return (
     <section className="stack vocabulary-etymology-page vocabulary-root-page">
       <div className="root-page-head">
-        <Link className="back-link" href={backHref}>
-          ← 返回
-        </Link>
+        <VocabularyMobileBackLink ariaLabel="返回" className="back-link" href={backHref} />
         <div className="etymology-title-row">
           <p className="etymology-source-label">一级词源</p>
           <h1>{directory.etymologySource}</h1>

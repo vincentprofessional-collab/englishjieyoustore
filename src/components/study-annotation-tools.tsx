@@ -523,7 +523,7 @@ export function StudyAnnotationTools({
       hoverWordTimerRef.current = window.setTimeout(() => {
         void showHint(wordAtPoint.word, wordAtPoint.rect);
         hoverWordTimerRef.current = null;
-      }, 120);
+      }, 1500);
     }
 
     function handleMouseLeave() {
