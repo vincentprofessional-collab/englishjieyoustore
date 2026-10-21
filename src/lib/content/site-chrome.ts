@@ -307,6 +307,15 @@ export const DEFAULT_SITE_CHROME_CONFIG: SiteChromeConfig = {
         note: "",
       },
       {
+        children: [],
+        dropdownAlign: "right",
+        enabled: true,
+        href: "/courses",
+        id: "courses",
+        label: "英语课程",
+        note: "应试课程与单项能力课程",
+      },
+      {
         children: [
           {
             children: [],
@@ -487,6 +496,10 @@ export function mergeSiteChromeConfig(value: unknown): SiteChromeConfig {
     ? (footer.promo as Record<string, unknown>)
     : {};
   const mergedNavItems = mergeNavItems(nav.items, fallback.nav.items);
+  const coursesFallback = fallback.nav.items.find((item) => item.id === "courses");
+  const navWithCourses = coursesFallback && !mergedNavItems.some((item) => item.id === "courses")
+    ? [...mergedNavItems.slice(0, 1), coursesFallback, ...mergedNavItems.slice(1)]
+    : mergedNavItems;
   const examsFallback = fallback.nav.items.find((item) => item.id === "exams");
   const juniorHighFallback = fallback.nav.items
     .find((item) => item.id === "exams")
@@ -498,8 +511,8 @@ export function mergeSiteChromeConfig(value: unknown): SiteChromeConfig {
     .find((item) => item.id === "exams")
     ?.children.find((item) => item.id === "sat-reading-writing");
   const navWithJuniorHigh = examsFallback && juniorHighFallback
-    ? ensureJuniorHighExamMenu(mergedNavItems, examsFallback, juniorHighFallback)
-    : mergedNavItems;
+    ? ensureJuniorHighExamMenu(navWithCourses, examsFallback, juniorHighFallback)
+    : navWithCourses;
   const navWithSeniorHigh = examsFallback && seniorHighFallback
     ? ensureSeniorHighExamMenu(navWithJuniorHigh, examsFallback, seniorHighFallback)
     : navWithJuniorHigh;

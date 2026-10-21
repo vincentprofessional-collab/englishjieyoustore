@@ -11,6 +11,7 @@ import { VocabularyImageAdmin } from "@/components/primary-school-vocabulary-ima
 import { AdminCommentInbox, AdminCommentNotice, useAdminCommentInbox } from "@/components/admin-comment-inbox";
 import { GuidePostAdmin } from "@/components/guide-post-admin";
 import { GuideCommentsAdmin } from "@/components/guide-comments-admin";
+import { AdminCourseDirectory } from "@/components/admin-course-directory";
 import { supabase } from "@/lib/supabase/client";
 import { getAuthErrorFeedback, reportAuthFailure } from "@/lib/supabase/auth-request";
 
@@ -20,6 +21,7 @@ type AdminView =
   | "access"
   | "home"
   | "chrome"
+  | "courses"
   | "guide"
   | "vocabulary-images"
   | "bbc-upload"
@@ -187,7 +189,7 @@ export function AdminContentManager() {
         <div>
           <span>CONTENT ADMIN · V2</span>
           <h1>网站后台</h1>
-          <p>查看网站数据，维护导航底部，并发布首页帖子。</p>
+          <p>查看网站数据，维护导航、课程栏目与页面帖子。</p>
         </div>
         <div className="admin-header-actions">
           <Link className="button secondary" href="/" target="_blank">
@@ -240,6 +242,13 @@ export function AdminContentManager() {
           帖子管理
         </button>
         <button
+          className={activeView === "courses" ? "active" : ""}
+          type="button"
+          onClick={() => setActiveView("courses")}
+        >
+          英语课程
+        </button>
+        <button
           className={activeView === "vocabulary-images" ? "active" : ""}
           type="button"
           onClick={() => setActiveView("vocabulary-images")}
@@ -266,6 +275,8 @@ export function AdminContentManager() {
       {activeView === "chrome" && adminUserId ? (
         <AdminSiteChromeEditor adminUserId={adminUserId} />
       ) : null}
+
+      {activeView === "courses" && adminUserId ? <AdminCourseDirectory /> : null}
 
       {activeView === "guide" && adminUserId ? (
         <>

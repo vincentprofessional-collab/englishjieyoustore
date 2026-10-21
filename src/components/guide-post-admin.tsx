@@ -14,6 +14,7 @@ import {
   SITE_CHROME_SLUG,
 } from "@/lib/content/site-chrome";
 import { guidePostPagePlacementOptions, type GuidePagePlacementOption } from "@/lib/content/guide-post-navigation";
+import { coursePagePlacementOptions, normalizeCourseDirectory, COURSE_DIRECTORY_SLUG } from "@/lib/courses/course-directory";
 import { uploadAdminImage } from "@/lib/admin/upload-image";
 import { supabase } from "@/lib/supabase/client";
 import { uploadAdminAudio } from "@/lib/admin/upload-audio";
@@ -285,14 +286,20 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
   }, []);
 
   async function loadPagePlacementOptions() {
-    const { data } = await supabase
-      .from("managed_content_pages")
-      .select("meta_json")
-      .eq("slug", SITE_CHROME_SLUG)
-      .eq("status", "published")
-      .maybeSingle();
-    const config = mergeSiteChromeConfig(data?.meta_json ?? DEFAULT_SITE_CHROME_CONFIG);
-    setPagePlacementOptions(guidePostPagePlacementOptions(config));
+    const [chromeResult, courseResult] = await Promise.all([
+      supabase.from("managed_content_pages").select("meta_json").eq("slug", SITE_CHROME_SLUG).eq("status", "published").maybeSingle(),
+      supabase.from("managed_content_pages").select("meta_json").eq("slug", COURSE_DIRECTORY_SLUG).eq("status", "published").maybeSingle(),
+    ]);
+    const config = mergeSiteChromeConfig(chromeResult.data?.meta_json ?? DEFAULT_SITE_CHROME_CONFIG);
+    const courseOptions = coursePagePlacementOptions(normalizeCourseDirectory(courseResult.data?.meta_json));
+    const pageOptions = guidePostPagePlacementOptions(config);
+    if (!pageOptions.some((option) => option.path === "/courses")) {
+      pageOptions.push({ label: "英语课程首页", path: "/courses" });
+    }
+    setPagePlacementOptions([
+      ...pageOptions,
+      ...courseOptions,
+    ]);
   }
 
   async function loadPosts(preferredId?: string) {

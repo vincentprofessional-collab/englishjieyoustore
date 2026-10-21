@@ -3737,6 +3737,12 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
                 </button>
               </Fragment>
             ))}
+            <Link className="vocabulary-learning-nav-button vocabulary-learning-answer-words-nav" href="/vocabulary/listening-answer-words" title="按顺序听音并拼写雅思听力答案词">
+              <span aria-hidden="true" className="vocabulary-learning-nav-dot" />
+              <span className="vocabulary-learning-nav-label">雅思听力答案词</span>
+              <strong>3 套</strong>
+              <span aria-hidden="true" className="vocabulary-learning-nav-arrow">›</span>
+            </Link>
           </div>
         </aside>
 
@@ -4213,6 +4219,16 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
                 </div>
               </fieldset>
             </div>
+            {settingsDraft.modes.includes("writing") ? (
+              <section aria-label="雅思听力答案词写作练习" className="vocabulary-learning-answer-words-links">
+                <h3>雅思听力答案词 · 写作模式</h3>
+                <div>
+                  <Link href="/vocabulary/listening-answer-words?deck=core346&mode=writing"><strong>超核心高频词</strong><span>346 词</span></Link>
+                  <Link href="/vocabulary/listening-answer-words?deck=answers683&mode=writing"><strong>听力答案词 683</strong><span>683 词</span></Link>
+                  <Link href="/vocabulary/listening-answer-words?deck=numbers208&mode=writing"><strong>数字与拼写特辑</strong><span>208 词</span></Link>
+                </div>
+              </section>
+            ) : null}
             <section aria-label="模式选择" className="vocabulary-learning-settings-review-range">
               <h3>复习设置</h3>
               <div aria-label="进度范围" className="vocabulary-learning-settings-review-progress" role="group">

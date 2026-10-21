@@ -12,6 +12,8 @@ import { CommunityInboxProvider } from "@/components/community-inbox-provider";
 import { AccountProgressProvider } from "@/components/account-progress-provider";
 import { getCachedPublishedSiteChromeConfig } from "@/lib/content/site-chrome-server";
 import { DEFAULT_SITE_CHROME_CONFIG, mergeSiteChromeConfig, type SiteChromeConfig } from "@/lib/content/site-chrome";
+import { DEFAULT_COURSE_DIRECTORY, type CourseDirectory } from "@/lib/courses/course-directory";
+import { getCachedPublishedCourseDirectory } from "@/lib/courses/course-directory-server";
 import { getLegacySessionMigrationScript } from "@/lib/supabase/legacy-session-migration";
 import "./globals.css";
 import "./ielts-section-shell.css";
@@ -33,10 +35,11 @@ async function PublishedNavigation({ config }: { config: Promise<SiteChromeConfi
   return <SiteNav config={navigationConfig(await config)} />;
 }
 
-async function PublishedPageFrame({ children, config }: { children: React.ReactNode; config: Promise<SiteChromeConfig> }) {
+async function PublishedPageFrame({ children, config, courseDirectory }: { children: React.ReactNode; config: Promise<SiteChromeConfig>; courseDirectory: Promise<CourseDirectory> }) {
   const siteChromeConfig = await config;
+  const publishedCourseDirectory = await courseDirectory;
   return <>
-    <IeltsSectionShell siteChromeConfig={siteChromeConfig}>{children}</IeltsSectionShell>
+    <IeltsSectionShell courseDirectory={publishedCourseDirectory} siteChromeConfig={siteChromeConfig}>{children}</IeltsSectionShell>
     <SiteFooter config={siteChromeConfig} />
   </>;
 }
@@ -47,6 +50,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const siteChromeConfig = getCachedPublishedSiteChromeConfig();
+  const courseDirectory = getCachedPublishedCourseDirectory();
   const legacySessionMigrationScript = getLegacySessionMigrationScript(
     process.env.NEXT_PUBLIC_SUPABASE_URL,
   );
@@ -76,8 +80,8 @@ export default async function RootLayout({
             <SiteAnalyticsTracker />
           </Suspense>
           <GlobalStudyInteractions />
-          <Suspense fallback={<IeltsSectionShell siteChromeConfig={fallbackChrome}><Suspense fallback={null}>{children}</Suspense></IeltsSectionShell>}>
-            <PublishedPageFrame config={siteChromeConfig}>{children}</PublishedPageFrame>
+          <Suspense fallback={<IeltsSectionShell courseDirectory={DEFAULT_COURSE_DIRECTORY} siteChromeConfig={fallbackChrome}><Suspense fallback={null}>{children}</Suspense></IeltsSectionShell>}>
+            <PublishedPageFrame config={siteChromeConfig} courseDirectory={courseDirectory}>{children}</PublishedPageFrame>
           </Suspense>
         </main>
         </AccountProgressProvider>

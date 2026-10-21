@@ -32,6 +32,13 @@ export const PROJECT_ACCESS_RULES: Record<string, ProjectAccessRule> = {
     shortTitle: "词源词根",
     title: "查单词 · 词源词根",
   },
+  "vocabulary.ielts-listening-answer-words": {
+    description: "开通后可练习剑雅听力答案词、超核心高频词，以及数字与拼写特辑。按原词表顺序听音并完成拼写。",
+    gateTitle: "开通雅思听力答案词写作训练",
+    key: "vocabulary.ielts-listening-answer-words",
+    shortTitle: "雅思听力答案词",
+    title: "雅思听力答案词",
+  },
   bbc: {
     description: "",
     gateTitle: "《BBC随身英语》开通会员",
@@ -55,6 +62,7 @@ export const PROJECT_ACCESS_RULES: Record<string, ProjectAccessRule> = {
 
 export const PROJECT_ACCESS_PROJECTS = [
   PROJECT_ACCESS_RULES["vocabulary.etymology"],
+  PROJECT_ACCESS_RULES["vocabulary.ielts-listening-answer-words"],
   PROJECT_ACCESS_RULES.speaking,
   PROJECT_ACCESS_RULES.writing,
   PROJECT_ACCESS_RULES.bbc,
