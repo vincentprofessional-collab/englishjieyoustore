@@ -1750,23 +1750,27 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
               ) : null}
             </div>
           </div>
-          <h1 aria-label={`${article.title} ${articleTitleChinese}`.trim()}>
-            <span className="bbc-article-title-group">
-              <span className="bbc-article-title-line" lang="en">
-                {article.title}
-              </span>
-              {articleTitleChinese ? (
-                <span className="bbc-article-title-line" lang="zh-CN">
-                  {articleTitleChinese}
+          <div className="bbc-article-title-card">
+            <div className="bbc-article-title-meta">
+              <time className="bbc-article-date" dateTime={article.date}>
+                {article.date.replaceAll("-", ".")}
+              </time>
+              <div className="bbc-article-word-count">
+                共 <b className="stat-number">{articleWordCount}</b> 词
+              </div>
+            </div>
+            <h1 aria-label={`${article.title} ${articleTitleChinese}`.trim()}>
+              <span className="bbc-article-title-group">
+                <span className="bbc-article-title-line" lang="en">
+                  {article.title}
                 </span>
-              ) : null}
-            </span>
-            <time className="bbc-article-date" dateTime={article.date}>
-              {article.date.replaceAll("-", ".")}
-            </time>
-          </h1>
-          <div className="bbc-article-word-count">
-            共 <b className="stat-number">{articleWordCount}</b> 词
+                {articleTitleChinese ? (
+                  <span className="bbc-article-title-line" lang="zh-CN">
+                    {articleTitleChinese}
+                  </span>
+                ) : null}
+              </span>
+            </h1>
           </div>
         </div>
 

@@ -32172,19 +32172,9 @@ body .mobile-exam-sections button.active { color: #245d7b !important; }
 
 body .bbc-detail-back-link { color: #245d7b !important; }
 body .bbc-article-hero { background: #fffdf3 !important; }
-body .bbc-article-hero h1 { color: #1d1d1b !important; }
-body .bbc-article-hero h1 > .bbc-article-title-group > .bbc-article-title-line[lang="en"],
-body .bbc-article-hero h1 > .bbc-article-title-group > .bbc-article-title-line[lang="zh-CN"] {
-  background: #172b4d;
-  box-decoration-break: clone;
-  color: #fff !important;
-  justify-self: center;
-  margin-inline: auto;
-  padding: 0.12em 0.28em;
-  -webkit-box-decoration-break: clone;
-}
-body .bbc-article-date { color: #1d1d1b !important; }
-body .bbc-article-word-count { color: #85857a !important; }
+body .bbc-article-hero h1 { color: #fff !important; }
+body .bbc-article-date,
+body .bbc-article-word-count { color: #fff !important; }
 body .site-header-home .brand::after { display: none; }
 body .site-header-home .brand-copy strong {
   text-decoration: underline;
@@ -32196,27 +32186,102 @@ body .bbc-article-mode-bar .player-menu-trigger.active { color: #245d7b !importa
 body .bbc-full-audio .play-button { color: #245d7b !important; }
 .bbc-mobile-annotation-notice { display: none; }
 
-@media (max-width: 820px) {
-  body .bbc-article-hero h1 > .bbc-article-title-group {
-    align-self: flex-start;
+body .bbc-article-hero .bbc-article-title-card {
     background: #172b4d;
     box-sizing: border-box;
+    color: #fff;
     display: grid;
+    font-family: Georgia, "Times New Roman", "Noto Serif SC", serif;
+    font-size: clamp(28px, 3.5vw, 38px);
+    font-weight: 700;
     gap: 0;
-    margin: 0;
+    letter-spacing: -0.035em;
+    line-height: 1.22;
+    margin: 18px auto 0;
     max-width: 100%;
     padding: 0.12em 0.28em;
-    text-align: left;
     width: fit-content;
+}
+
+body .bbc-article-title-meta {
+  align-items: center;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+}
+
+body .bbc-article-title-card .bbc-article-date {
+  color: #fff !important;
+  font: inherit;
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: center;
+  margin: 0;
+  text-align: center;
+}
+
+body .bbc-article-title-card .bbc-article-word-count {
+  color: #fff !important;
+  font-size: clamp(10px, 0.4em, 15px);
+  grid-column: 3;
+  grid-row: 1;
+  justify-self: end;
+  margin: 0;
+  text-align: right;
+  white-space: nowrap;
+}
+
+body .bbc-article-title-card h1 {
+  align-items: center;
+  color: #fff !important;
+  display: grid;
+  font: inherit;
+  gap: 0;
+  justify-content: center;
+  letter-spacing: inherit;
+  line-height: inherit;
+  margin: 0;
+  max-width: 100%;
+  text-align: center;
+  width: 100%;
+}
+
+body .bbc-article-title-card .bbc-article-title-group {
+  display: grid;
+  gap: 0;
+  justify-items: center;
+  max-width: 100%;
+  width: 100%;
+}
+
+body .bbc-article-title-card .bbc-article-title-line {
+  background: transparent !important;
+  color: #fff !important;
+  display: block;
+  justify-self: stretch;
+  margin: 0;
+  overflow-wrap: anywhere;
+  padding: 0;
+  text-align: center;
+}
+
+@media (max-width: 820px) {
+  body .bbc-article-hero .bbc-article-title-card {
+    font-size: clamp(20px, 5.5vw, 25px);
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  body .bbc-article-hero .bbc-article-title-card {
+    justify-self: start;
+    margin-left: 0;
   }
 
-  body .bbc-article-hero h1 > .bbc-article-title-group > .bbc-article-title-line {
-    background: transparent;
-    color: #fff !important;
-    display: block;
-    justify-self: stretch;
-    margin: 0;
-    padding: 0;
+  body .bbc-article-title-card .bbc-article-title-group {
+    justify-items: start;
+  }
+
+  body .bbc-article-title-card .bbc-article-title-line {
     text-align: left;
   }
 }
