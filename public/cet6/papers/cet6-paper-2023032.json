@@ -11,85 +11,105 @@
     {
       "type": "notice",
       "tone": "info",
-      "text": "按原卷分区作答。提交整卷后显示可用答案与原资料参考内容。"
+      "text": "本卷原资料收录写作和翻译。"
     }
   ],
   "sections": [
     {
-      "id": "cet6-paper-2023032-part-1-writing",
+      "id": "cet6-paper-2023032-writing",
       "title": "Writing 写作",
       "layout": "flow",
       "instructions": [],
       "groups": [
         {
-          "id": "cet6-paper-2023032-part-1-writing-group",
-          "title": "写作题",
+          "id": "cet6-paper-2023032-writing-group",
+          "title": "写作",
           "presentation": "writing",
           "instructions": [],
           "stimulusBlocks": [],
           "sharedOptions": [],
           "questions": [
             {
-              "id": "cet6-paper-2023032-part-1-q-1",
-              "displayNumber": 1,
-              "sourceQuestionNumber": 1,
+              "id": "cet6-paper-2023032-essay-写作",
+              "displayNumber": 56,
               "type": "essay",
-              "promptBlocks": [],
+              "promptBlocks": [
+                {
+                  "type": "image",
+                  "assetId": "page-clean-v5-995780fc7694af43-1-0-227-1000-345",
+                  "alt": "六级原题",
+                  "caption": ""
+                }
+              ],
               "placement": {
                 "kind": "standalone"
               },
               "options": [],
               "blanks": [],
               "answerSpec": {
-                "availability": "none",
-                "gradingMode": "none",
-                "kind": "none"
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": [
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-995780fc7694af43-1-0-345-1000-622",
+                    "alt": "原参考范文与译文",
+                    "caption": "原解析第1页"
+                  }
+                ]
               },
               "explanationBlocks": [],
               "sourceRefs": [
                 {
-                  "sourceDocumentId": "d39a3cd74d99ed4230ed782003c77c24e69d1406008000334686cc8f0db6417a",
-                  "relativePath": "2023.03英语六级真题第2套.docx",
-                  "sha256": "d39a3cd74d99ed4230ed782003c77c24e69d1406008000334686cc8f0db6417a",
+                  "sourceDocumentId": "995780fc7694af43558aa00f69337f4027f9c813377cebb5cf7b01345d789857",
+                  "relativePath": "试卷/真题/2023.03英语六级详解第2套.pdf",
+                  "sha256": "995780fc7694af43558aa00f69337f4027f9c813377cebb5cf7b01345d789857",
                   "locator": {},
+                  "extractionMethod": "pdf-ocr",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "995780fc7694af43558aa00f69337f4027f9c813377cebb5cf7b01345d789857",
+                  "relativePath": "试卷/真题/2023.03英语六级详解第2套.pdf",
+                  "sha256": "995780fc7694af43558aa00f69337f4027f9c813377cebb5cf7b01345d789857",
+                  "locator": {
+                    "page": 1
+                  },
                   "extractionMethod": "manual-review",
-                  "confidence": 0.86
+                  "confidence": 1
                 }
               ],
-              "reviewStatus": "review_required"
+              "reviewStatus": "approved"
             }
           ]
         }
       ]
     },
     {
-      "id": "cet6-paper-2023032-part-2-translation",
+      "id": "cet6-paper-2023032-translation",
       "title": "Translation 翻译",
       "layout": "flow",
       "instructions": [],
       "groups": [
         {
-          "id": "cet6-paper-2023032-part-2-translation-group",
-          "title": "翻译题",
+          "id": "cet6-paper-2023032-translation-group",
+          "title": "汉译英",
           "presentation": "writing",
           "instructions": [],
           "stimulusBlocks": [],
           "sharedOptions": [],
           "questions": [
             {
-              "id": "cet6-paper-2023032-part-2-q-1-1",
-              "displayNumber": 1,
-              "sourceQuestionNumber": 1,
+              "id": "cet6-paper-2023032-translation-翻译",
+              "displayNumber": 57,
               "type": "translation",
               "promptBlocks": [
                 {
-                  "type": "paragraph",
-                  "runs": [
-                    {
-                      "type": "text",
-                      "text": "郑和是中国历史上最杰出的航海家,在航海、外交、军事等诸多领域都表现出非凡的智慧和卓越的才能。他曾七次率领庞大的船队远航,访问了西太平洋和印度洋的许多国家和地区,加深了中国同东南亚、东非的相互了解。 郑和下西洋对中外的经济和文化交流起到了十分积极的推进作用,也为维护区域和平做出了巨大贡献。为了永远铭记郑和及其丰功伟绩，7月11日，即郑和首次率船队远航启程的日子，被定为中国的航海节。"
-                    }
-                  ]
+                  "type": "image",
+                  "assetId": "page-clean-v5-995780fc7694af43-1-0-622-1000-794",
+                  "alt": "六级原题",
+                  "caption": ""
                 }
               ],
               "placement": {
@@ -98,45 +118,138 @@
               "options": [],
               "blanks": [],
               "answerSpec": {
-                "availability": "none",
-                "gradingMode": "none",
-                "kind": "none"
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": [
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-995780fc7694af43-1-0-794-1000-975",
+                    "alt": "原参考范文与译文",
+                    "caption": "原解析第1页"
+                  }
+                ]
               },
               "explanationBlocks": [],
               "sourceRefs": [
                 {
-                  "sourceDocumentId": "d39a3cd74d99ed4230ed782003c77c24e69d1406008000334686cc8f0db6417a",
-                  "relativePath": "2023.03英语六级真题第2套.docx",
-                  "sha256": "d39a3cd74d99ed4230ed782003c77c24e69d1406008000334686cc8f0db6417a",
+                  "sourceDocumentId": "995780fc7694af43558aa00f69337f4027f9c813377cebb5cf7b01345d789857",
+                  "relativePath": "试卷/真题/2023.03英语六级详解第2套.pdf",
+                  "sha256": "995780fc7694af43558aa00f69337f4027f9c813377cebb5cf7b01345d789857",
                   "locator": {},
+                  "extractionMethod": "pdf-ocr",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "995780fc7694af43558aa00f69337f4027f9c813377cebb5cf7b01345d789857",
+                  "relativePath": "试卷/真题/2023.03英语六级详解第2套.pdf",
+                  "sha256": "995780fc7694af43558aa00f69337f4027f9c813377cebb5cf7b01345d789857",
+                  "locator": {
+                    "page": 1
+                  },
                   "extractionMethod": "manual-review",
-                  "confidence": 0.86
+                  "confidence": 1
                 }
               ],
-              "reviewStatus": "review_required"
+              "reviewStatus": "approved"
             }
           ]
         }
       ]
     }
   ],
-  "assetRefs": [],
+  "assetRefs": [
+    {
+      "assetId": "page-clean-v5-995780fc7694af43-1-0-227-1000-345",
+      "kind": "image",
+      "url": "https://ahecwiqjfrrxxjxazmre.supabase.co/storage/v1/object/public/images/cet6/source-pages/5f00fbcff1600b329fa10e01643b21b8c153c91744de758fb85ac0c24e38b3fc.webp",
+      "mimeType": "image/webp",
+      "sha256": "5f00fbcff1600b329fa10e01643b21b8c153c91744de758fb85ac0c24e38b3fc",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "995780fc7694af43558aa00f69337f4027f9c813377cebb5cf7b01345d789857",
+          "relativePath": "试卷/真题/2023.03英语六级详解第2套.pdf",
+          "sha256": "995780fc7694af43558aa00f69337f4027f9c813377cebb5cf7b01345d789857",
+          "locator": {
+            "page": 1
+          },
+          "extractionMethod": "manual-review",
+          "confidence": 1
+        }
+      ]
+    },
+    {
+      "assetId": "page-clean-v5-995780fc7694af43-1-0-345-1000-622",
+      "kind": "image",
+      "url": "https://ahecwiqjfrrxxjxazmre.supabase.co/storage/v1/object/public/images/cet6/source-pages/446c528916fa79624cc827f3ebbf9207209dbbba6eb5ecb41ae5b2584801e21a.webp",
+      "mimeType": "image/webp",
+      "sha256": "446c528916fa79624cc827f3ebbf9207209dbbba6eb5ecb41ae5b2584801e21a",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "995780fc7694af43558aa00f69337f4027f9c813377cebb5cf7b01345d789857",
+          "relativePath": "试卷/真题/2023.03英语六级详解第2套.pdf",
+          "sha256": "995780fc7694af43558aa00f69337f4027f9c813377cebb5cf7b01345d789857",
+          "locator": {
+            "page": 1
+          },
+          "extractionMethod": "manual-review",
+          "confidence": 1
+        }
+      ]
+    },
+    {
+      "assetId": "page-clean-v5-995780fc7694af43-1-0-622-1000-794",
+      "kind": "image",
+      "url": "https://ahecwiqjfrrxxjxazmre.supabase.co/storage/v1/object/public/images/cet6/source-pages/64fe48271748e653b5f8847d388e7e917c33c898b4fd69ddaed4371246d9886e.webp",
+      "mimeType": "image/webp",
+      "sha256": "64fe48271748e653b5f8847d388e7e917c33c898b4fd69ddaed4371246d9886e",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "995780fc7694af43558aa00f69337f4027f9c813377cebb5cf7b01345d789857",
+          "relativePath": "试卷/真题/2023.03英语六级详解第2套.pdf",
+          "sha256": "995780fc7694af43558aa00f69337f4027f9c813377cebb5cf7b01345d789857",
+          "locator": {
+            "page": 1
+          },
+          "extractionMethod": "manual-review",
+          "confidence": 1
+        }
+      ]
+    },
+    {
+      "assetId": "page-clean-v5-995780fc7694af43-1-0-794-1000-975",
+      "kind": "image",
+      "url": "https://ahecwiqjfrrxxjxazmre.supabase.co/storage/v1/object/public/images/cet6/source-pages/955aaa36c4997733650c7837958e01448064e3205c416da555bb903f341ddd9c.webp",
+      "mimeType": "image/webp",
+      "sha256": "955aaa36c4997733650c7837958e01448064e3205c416da555bb903f341ddd9c",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "995780fc7694af43558aa00f69337f4027f9c813377cebb5cf7b01345d789857",
+          "relativePath": "试卷/真题/2023.03英语六级详解第2套.pdf",
+          "sha256": "995780fc7694af43558aa00f69337f4027f9c813377cebb5cf7b01345d789857",
+          "locator": {
+            "page": 1
+          },
+          "extractionMethod": "manual-review",
+          "confidence": 1
+        }
+      ]
+    }
+  ],
   "sourceRefs": [
     {
-      "sourceDocumentId": "d39a3cd74d99ed4230ed782003c77c24e69d1406008000334686cc8f0db6417a",
-      "relativePath": "2023.03英语六级真题第2套.docx",
-      "sha256": "d39a3cd74d99ed4230ed782003c77c24e69d1406008000334686cc8f0db6417a",
+      "sourceDocumentId": "995780fc7694af43558aa00f69337f4027f9c813377cebb5cf7b01345d789857",
+      "relativePath": "试卷/真题/2023.03英语六级详解第2套.pdf",
+      "sha256": "995780fc7694af43558aa00f69337f4027f9c813377cebb5cf7b01345d789857",
       "locator": {},
-      "extractionMethod": "manual-review",
-      "confidence": 0.86
+      "extractionMethod": "pdf-ocr",
+      "confidence": 1
     }
   ],
   "quality": {
-    "structureStatus": "review_required",
-    "structureConfidence": 0.72,
-    "issueCount": 1,
-    "issues": [
-      "原始资料注明部分题目与其他套相同，未重复列出"
-    ]
+    "structureStatus": "approved",
+    "structureConfidence": 1,
+    "issueCount": 0,
+    "issues": []
   }
 }

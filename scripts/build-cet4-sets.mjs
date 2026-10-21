@@ -1,6 +1,8 @@
 import { createHash } from "node:crypto";
 import { mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { buildCet6Paper } from "./cet6-paper-parser.mjs";
+import { buildCet6PracticeSets } from "./cet6-practice-parser.mjs";
 
 const EXAM = process.env.CET_EXAM === "cet6" ? "cet6" : "cet4";
 const EXAM_LABEL = EXAM === "cet6" ? "大学英语六级" : "大学英语四级";
@@ -315,6 +317,7 @@ function translationSection(lines, answerText, ref, prefix) {
 }
 
 function buildSet(entry, kind) {
+  if (EXAM === "cet6" && kind === "paper") return buildCet6Paper(entry);
   const { body, answerText } = splitSource(entry);
   const lines = cleanLines(body);
   const ref = sourceRef(entry);
@@ -376,8 +379,10 @@ await mkdir(path.join(ROOT, "papers"), { recursive: true });
 
 const indexEntries = [];
 const practiceSets = [];
+const cet6Papers = [];
 for (const entry of entries.filter((item) => item.section !== "知识点")) {
   const kind = entry.section === "试卷" ? "paper" : "practice";
+  if (EXAM === "cet6" && kind === "practice") continue;
   const set = buildSet(entry, kind);
   if (!set) continue;
   if (kind === "practice") {
@@ -385,8 +390,12 @@ for (const entry of entries.filter((item) => item.section !== "知识点")) {
     continue;
   }
   await writeFile(path.join(ROOT, "papers", `${entry.id}.json`), `${JSON.stringify(set, null, 2)}\n`);
+  if (EXAM === "cet6") cet6Papers.push(set);
   const questionCount = set.sections.reduce((sum, section) => sum + section.groups.reduce((groupSum, group) => groupSum + group.questions.length, 0), 0);
-  indexEntries.push({ id: entry.id, kind, title: entry.title, year: set.year, region: set.region, variant: set.variant, questionCount, answeredCount: set.sections.flatMap((section) => section.groups.flatMap((group) => group.questions)).filter((question) => question.answerSpec.availability === "answered").length, explanationCount: 0, answerStatus: "partial", questionTypes: [...new Set(set.sections.flatMap((section) => section.groups.flatMap((group) => group.questions.map((question) => question.type))))], href: `/${EXAM}/${entry.id}`, quality: { structureStatus: set.quality.structureStatus, structureConfidence: set.quality.structureConfidence, issueCount: set.quality.issueCount } });
+  const questions = set.sections.flatMap(section => section.groups.flatMap(group => group.questions));
+  const answeredCount = questions.filter(question => question.answerSpec.availability === "answered").length;
+  const explanationCount = questions.filter(question => question.explanationBlocks.length || question.answerSpec.referenceAnswer).length;
+  indexEntries.push({ id: entry.id, kind, title: entry.title, year: set.year, region: set.region, variant: set.variant, questionCount, answeredCount, explanationCount: EXAM === "cet6" ? explanationCount : 0, answerStatus: EXAM === "cet6" ? answeredCount === questionCount ? "answered" : answeredCount ? "partial" : "none" : "partial", questionTypes: [...new Set(questions.map(question => question.type))], href: `/${EXAM}/${entry.id}`, quality: { structureStatus: set.quality.structureStatus, structureConfidence: set.quality.structureConfidence, issueCount: set.quality.issueCount } });
 }
 const groupedPractice = new Map();
 for (const set of practiceSets) {
@@ -405,6 +414,12 @@ for (const group of groupedPractice.values()) {
   const questions = set.sections.flatMap((section) => section.groups.flatMap((questionGroup) => questionGroup.questions));
   indexEntries.unshift({ id, kind: "practice", title: set.title, year: set.year, region: set.region, variant: set.variant, questionCount: questions.length, answeredCount: questions.filter((question) => question.answerSpec.availability === "answered").length, explanationCount: 0, answerStatus: "partial", questionTypes: [...new Set(questions.map((question) => question.type))], href: `/${EXAM}/${id}`, quality: { structureStatus: set.quality.structureStatus, structureConfidence: set.quality.structureConfidence, issueCount: set.quality.issueCount } });
 }
+if (EXAM === "cet6") for (const set of buildCet6PracticeSets(cet6Papers)) {
+  await writeFile(path.join(ROOT, "practice", `${set.id}.json`), `${JSON.stringify(set, null, 2)}\n`);
+  const questions = set.sections.flatMap(section => section.groups.flatMap(group => group.questions));
+  const answeredCount = questions.filter(question => question.answerSpec.availability === "answered").length;
+  indexEntries.push({ id: set.id, kind: "practice", title: set.title, year: set.year, region: set.region, variant: "", questionCount: questions.length, answeredCount, explanationCount: questions.filter(question => question.explanationBlocks.length || question.answerSpec.referenceAnswer).length, answerStatus: answeredCount === questions.length ? "answered" : answeredCount ? "partial" : "none", questionTypes: [...new Set(questions.map(question => question.type))], href: `/cet6/${set.id}`, quality: { structureStatus: set.quality.structureStatus, structureConfidence: set.quality.structureConfidence, issueCount: set.quality.issueCount } });
+}
 indexEntries.sort((left, right) => (left.kind === right.kind ? right.title.localeCompare(left.title, "zh-CN", { numeric: true }) : left.kind === "practice" ? -1 : 1));
-await writeFile(path.join(ROOT, "index.json"), `${JSON.stringify({ schemaVersion: 2, generatedAt: new Date().toISOString(), entries: indexEntries }, null, 2)}\n`);
+await writeFile(path.join(ROOT, "index.json"), `${JSON.stringify({ schemaVersion: 2, generatedAt: EXAM === "cet6" ? libraryData.generatedAt : new Date().toISOString(), entries: indexEntries }, null, 2)}\n`);
 console.log(JSON.stringify({ output: ROOT, entries: indexEntries.length, practice: indexEntries.filter((entry) => entry.kind === "practice").length, papers: indexEntries.filter((entry) => entry.kind === "paper").length, questions: indexEntries.reduce((sum, entry) => sum + entry.questionCount, 0) }, null, 2));

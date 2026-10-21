@@ -11,30 +11,38 @@
     {
       "type": "notice",
       "tone": "info",
-      "text": "按原卷分区作答。提交整卷后显示可用答案与原资料参考内容。"
+      "text": "本卷原资料收录写作、阅读和翻译。"
     }
   ],
   "sections": [
     {
-      "id": "cet6-paper-2024063-part-1-writing",
+      "id": "cet6-paper-2024063-writing",
       "title": "Writing 写作",
       "layout": "flow",
       "instructions": [],
       "groups": [
         {
-          "id": "cet6-paper-2024063-part-1-writing-group",
-          "title": "写作题",
+          "id": "cet6-paper-2024063-writing-group",
+          "title": "写作",
           "presentation": "writing",
           "instructions": [],
           "stimulusBlocks": [],
           "sharedOptions": [],
           "questions": [
             {
-              "id": "cet6-paper-2024063-part-1-q-1",
-              "displayNumber": 1,
-              "sourceQuestionNumber": 1,
+              "id": "cet6-paper-2024063-essay-写作",
+              "displayNumber": 56,
               "type": "essay",
               "promptBlocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Directions: For this part, you are allowed 30 minutes to write an essay that begins with the sentence \"Nowadays, cultivating independent learning ability is becoming increasingly crucial for personal development.\" You can make comments, cite examples or use your personal experiences to develop your essay. You should write at least 150 words but no more than 200 words."
+                    }
+                  ]
+                },
                 {
                   "type": "paragraph",
                   "runs": [
@@ -51,37 +59,71 @@
               "options": [],
               "blanks": [],
               "answerSpec": {
-                "availability": "none",
-                "gradingMode": "none",
-                "kind": "none"
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": [
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-1-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第1页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-2-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第2页"
+                  }
+                ]
               },
               "explanationBlocks": [],
               "sourceRefs": [
                 {
                   "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
-                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "relativePath": "试卷/真题/2024.06六级真题第3套【可复制可检索】.docx",
                   "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
                   "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 1
+                  },
                   "extractionMethod": "manual-review",
-                  "confidence": 0.86
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 2
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
                 }
               ],
-              "reviewStatus": "review_required"
+              "reviewStatus": "approved"
             }
           ]
         }
       ]
     },
     {
-      "id": "cet6-paper-2024063-part-3",
-      "title": "Part III              Reading Comprehension             (40 minutes)",
+      "id": "cet6-paper-2024063-listening",
+      "title": "Listening Comprehension 听力",
       "layout": "flow",
       "instructions": [],
       "groups": [
         {
-          "id": "cet6-paper-2024063-part-3-section-1-group-1",
-          "title": "题目",
-          "presentation": "reading",
+          "id": "cet6-paper-2024063-listening-notice-group",
+          "title": "原卷听力说明",
+          "presentation": "inline",
           "instructions": [],
           "stimulusBlocks": [
             {
@@ -89,11 +131,48 @@
               "runs": [
                 {
                   "type": "text",
-                  "text": "Directions: In this section, there is a passage with ten blanks. You are required to select one word for each blank from a list of choices given in a word bank following the passage. Read the passage through carefully before making your choices. Each choice in the bank is identified by a letter. Please mark the corresponding letter for each item on Answer Sheet 2 with a single line through the centre. You may not use any of the words in the bank more than once. A rainbow is a multi-colored, arc-shaped phenomenon that can appear in the sky. The colors of a rainbow are produced by the reflection and "
+                  "text": "温馨提示:此次考试全国共考了2套听力,本套真题听力与前两套内容相同,只是选项顺序不同,因此,本套试卷听力部分不再重复列出"
+                }
+              ]
+            }
+          ],
+          "sharedOptions": [],
+          "questions": []
+        }
+      ]
+    },
+    {
+      "id": "cet6-paper-2024063-reading",
+      "title": "Reading Comprehension 阅读",
+      "layout": "flow",
+      "instructions": [],
+      "groups": [
+        {
+          "id": "cet6-paper-2024063-word-bank-group",
+          "title": "Section A 选词填空",
+          "presentation": "reading",
+          "instructions": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Directions: In this section, there is a passage with ten blanks. You are required to select one word for each blank from a list of choices given in a word bank following the passage. Read the passage through carefully before making your choices. Each choice in the bank is identified by a letter. Please mark the corresponding letter for each item on Answer Sheet 2 with a single line through the centre. You may not use any of the words in the bank more than once."
+                }
+              ]
+            }
+          ],
+          "stimulusBlocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "A rainbow is a multi-colored, arc-shaped phenomenon that can appear in the sky. The colors of a rainbow are produced by the reflection and "
                 },
                 {
                   "type": "blank",
-                  "blankId": "cet6-paper-2024063-part-3-section-1-group-1-blank-26"
+                  "blankId": "cet6-paper-2024063-blank-26"
                 },
                 {
                   "type": "text",
@@ -101,7 +180,7 @@
                 },
                 {
                   "type": "blank",
-                  "blankId": "cet6-paper-2024063-part-3-section-1-group-1-blank-27"
+                  "blankId": "cet6-paper-2024063-blank-27"
                 },
                 {
                   "type": "text",
@@ -109,7 +188,7 @@
                 },
                 {
                   "type": "blank",
-                  "blankId": "cet6-paper-2024063-part-3-section-1-group-1-blank-28"
+                  "blankId": "cet6-paper-2024063-blank-28"
                 },
                 {
                   "type": "text",
@@ -117,7 +196,7 @@
                 },
                 {
                   "type": "blank",
-                  "blankId": "cet6-paper-2024063-part-3-section-1-group-1-blank-29"
+                  "blankId": "cet6-paper-2024063-blank-29"
                 },
                 {
                   "type": "text",
@@ -125,7 +204,7 @@
                 },
                 {
                   "type": "blank",
-                  "blankId": "cet6-paper-2024063-part-3-section-1-group-1-blank-30"
+                  "blankId": "cet6-paper-2024063-blank-30"
                 },
                 {
                   "type": "text",
@@ -133,7 +212,7 @@
                 },
                 {
                   "type": "blank",
-                  "blankId": "cet6-paper-2024063-part-3-section-1-group-1-blank-31"
+                  "blankId": "cet6-paper-2024063-blank-31"
                 },
                 {
                   "type": "text",
@@ -141,7 +220,7 @@
                 },
                 {
                   "type": "blank",
-                  "blankId": "cet6-paper-2024063-part-3-section-1-group-1-blank-32"
+                  "blankId": "cet6-paper-2024063-blank-32"
                 },
                 {
                   "type": "text",
@@ -149,7 +228,7 @@
                 },
                 {
                   "type": "blank",
-                  "blankId": "cet6-paper-2024063-part-3-section-1-group-1-blank-33"
+                  "blankId": "cet6-paper-2024063-blank-33"
                 },
                 {
                   "type": "text",
@@ -157,7 +236,7 @@
                 },
                 {
                   "type": "blank",
-                  "blankId": "cet6-paper-2024063-part-3-section-1-group-1-blank-34"
+                  "blankId": "cet6-paper-2024063-blank-34"
                 },
                 {
                   "type": "text",
@@ -165,7 +244,7 @@
                 },
                 {
                   "type": "blank",
-                  "blankId": "cet6-paper-2024063-part-3-section-1-group-1-blank-35"
+                  "blankId": "cet6-paper-2024063-blank-35"
                 },
                 {
                   "type": "text",
@@ -191,21 +270,6 @@
               ]
             },
             {
-              "id": "I",
-              "label": "I",
-              "blocks": [
-                {
-                  "type": "paragraph",
-                  "runs": [
-                    {
-                      "type": "text",
-                      "text": "permeates"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
               "id": "B",
               "label": "B",
               "blocks": [
@@ -215,21 +279,6 @@
                     {
                       "type": "text",
                       "text": "completely"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "id": "J",
-              "label": "J",
-              "blocks": [
-                {
-                  "type": "paragraph",
-                  "runs": [
-                    {
-                      "type": "text",
-                      "text": "ponder"
                     }
                   ]
                 }
@@ -251,21 +300,6 @@
               ]
             },
             {
-              "id": "K",
-              "label": "K",
-              "blocks": [
-                {
-                  "type": "paragraph",
-                  "runs": [
-                    {
-                      "type": "text",
-                      "text": "preceding"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
               "id": "D",
               "label": "D",
               "blocks": [
@@ -275,21 +309,6 @@
                     {
                       "type": "text",
                       "text": "eccentric"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "id": "L",
-              "label": "L",
-              "blocks": [
-                {
-                  "type": "paragraph",
-                  "runs": [
-                    {
-                      "type": "text",
-                      "text": "recklessly"
                     }
                   ]
                 }
@@ -311,21 +330,6 @@
               ]
             },
             {
-              "id": "M",
-              "label": "M",
-              "blocks": [
-                {
-                  "type": "paragraph",
-                  "runs": [
-                    {
-                      "type": "text",
-                      "text": "relation"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
               "id": "F",
               "label": "F",
               "blocks": [
@@ -335,21 +339,6 @@
                     {
                       "type": "text",
                       "text": "optical"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "id": "N",
-              "label": "N",
-              "blocks": [
-                {
-                  "type": "paragraph",
-                  "runs": [
-                    {
-                      "type": "text",
-                      "text": "spectrum"
                     }
                   ]
                 }
@@ -371,21 +360,6 @@
               ]
             },
             {
-              "id": "O",
-              "label": "O",
-              "blocks": [
-                {
-                  "type": "paragraph",
-                  "runs": [
-                    {
-                      "type": "text",
-                      "text": "stands"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
               "id": "H",
               "label": "H",
               "blocks": [
@@ -399,387 +373,1002 @@
                   ]
                 }
               ]
+            },
+            {
+              "id": "I",
+              "label": "I",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "permeates"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "J",
+              "label": "J",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "ponder"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "K",
+              "label": "K",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "preceding"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "L",
+              "label": "L",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "recklessly"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "M",
+              "label": "M",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "relation"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "N",
+              "label": "N",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "spectrum"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "O",
+              "label": "O",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "stands"
+                    }
+                  ]
+                }
+              ]
             }
           ],
-          "sharedOptionsReusable": false,
           "questions": [
             {
-              "id": "cet6-paper-2024063-part-3-section-1-group-1-q-26",
+              "id": "cet6-paper-2024063-shared_option_matching-26",
               "displayNumber": 26,
               "sourceQuestionNumber": 26,
-              "type": "inline_fill",
+              "type": "shared_option_matching",
               "promptBlocks": [],
               "placement": {
                 "kind": "inline",
                 "blankIds": [
-                  "cet6-paper-2024063-part-3-section-1-group-1-blank-26"
+                  "cet6-paper-2024063-blank-26"
                 ]
               },
               "options": [],
               "blanks": [
                 {
-                  "blankId": "cet6-paper-2024063-part-3-section-1-group-1-blank-26",
-                  "label": "第 26 题"
+                  "blankId": "cet6-paper-2024063-blank-26",
+                  "label": "第26题"
                 }
               ],
               "answerSpec": {
-                "availability": "none",
-                "gradingMode": "none",
-                "kind": "per_blank"
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": [
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-2-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第2页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-3-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第3页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-4-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第4页"
+                  }
+                ]
               },
               "explanationBlocks": [],
               "sourceRefs": [
                 {
                   "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
-                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "relativePath": "试卷/真题/2024.06六级真题第3套【可复制可检索】.docx",
                   "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
                   "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 2
+                  },
                   "extractionMethod": "manual-review",
-                  "confidence": 0.86
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 3
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 4
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
                 }
               ],
-              "reviewStatus": "review_required"
+              "reviewStatus": "approved"
             },
             {
-              "id": "cet6-paper-2024063-part-3-section-1-group-1-q-27",
+              "id": "cet6-paper-2024063-shared_option_matching-27",
               "displayNumber": 27,
               "sourceQuestionNumber": 27,
-              "type": "inline_fill",
+              "type": "shared_option_matching",
               "promptBlocks": [],
               "placement": {
                 "kind": "inline",
                 "blankIds": [
-                  "cet6-paper-2024063-part-3-section-1-group-1-blank-27"
+                  "cet6-paper-2024063-blank-27"
                 ]
               },
               "options": [],
               "blanks": [
                 {
-                  "blankId": "cet6-paper-2024063-part-3-section-1-group-1-blank-27",
-                  "label": "第 27 题"
+                  "blankId": "cet6-paper-2024063-blank-27",
+                  "label": "第27题"
                 }
               ],
               "answerSpec": {
-                "availability": "none",
-                "gradingMode": "none",
-                "kind": "per_blank"
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": [
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-2-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第2页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-3-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第3页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-4-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第4页"
+                  }
+                ]
               },
               "explanationBlocks": [],
               "sourceRefs": [
                 {
                   "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
-                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "relativePath": "试卷/真题/2024.06六级真题第3套【可复制可检索】.docx",
                   "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
                   "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 2
+                  },
                   "extractionMethod": "manual-review",
-                  "confidence": 0.86
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 3
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 4
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
                 }
               ],
-              "reviewStatus": "review_required"
+              "reviewStatus": "approved"
             },
             {
-              "id": "cet6-paper-2024063-part-3-section-1-group-1-q-28",
+              "id": "cet6-paper-2024063-shared_option_matching-28",
               "displayNumber": 28,
               "sourceQuestionNumber": 28,
-              "type": "inline_fill",
+              "type": "shared_option_matching",
               "promptBlocks": [],
               "placement": {
                 "kind": "inline",
                 "blankIds": [
-                  "cet6-paper-2024063-part-3-section-1-group-1-blank-28"
+                  "cet6-paper-2024063-blank-28"
                 ]
               },
               "options": [],
               "blanks": [
                 {
-                  "blankId": "cet6-paper-2024063-part-3-section-1-group-1-blank-28",
-                  "label": "第 28 题"
+                  "blankId": "cet6-paper-2024063-blank-28",
+                  "label": "第28题"
                 }
               ],
               "answerSpec": {
-                "availability": "none",
-                "gradingMode": "none",
-                "kind": "per_blank"
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": [
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-2-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第2页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-3-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第3页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-4-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第4页"
+                  }
+                ]
               },
               "explanationBlocks": [],
               "sourceRefs": [
                 {
                   "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
-                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "relativePath": "试卷/真题/2024.06六级真题第3套【可复制可检索】.docx",
                   "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
                   "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 2
+                  },
                   "extractionMethod": "manual-review",
-                  "confidence": 0.86
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 3
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 4
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
                 }
               ],
-              "reviewStatus": "review_required"
+              "reviewStatus": "approved"
             },
             {
-              "id": "cet6-paper-2024063-part-3-section-1-group-1-q-29",
+              "id": "cet6-paper-2024063-shared_option_matching-29",
               "displayNumber": 29,
               "sourceQuestionNumber": 29,
-              "type": "inline_fill",
+              "type": "shared_option_matching",
               "promptBlocks": [],
               "placement": {
                 "kind": "inline",
                 "blankIds": [
-                  "cet6-paper-2024063-part-3-section-1-group-1-blank-29"
+                  "cet6-paper-2024063-blank-29"
                 ]
               },
               "options": [],
               "blanks": [
                 {
-                  "blankId": "cet6-paper-2024063-part-3-section-1-group-1-blank-29",
-                  "label": "第 29 题"
+                  "blankId": "cet6-paper-2024063-blank-29",
+                  "label": "第29题"
                 }
               ],
               "answerSpec": {
-                "availability": "none",
-                "gradingMode": "none",
-                "kind": "per_blank"
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": [
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-2-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第2页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-3-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第3页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-4-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第4页"
+                  }
+                ]
               },
               "explanationBlocks": [],
               "sourceRefs": [
                 {
                   "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
-                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "relativePath": "试卷/真题/2024.06六级真题第3套【可复制可检索】.docx",
                   "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
                   "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 2
+                  },
                   "extractionMethod": "manual-review",
-                  "confidence": 0.86
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 3
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 4
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
                 }
               ],
-              "reviewStatus": "review_required"
+              "reviewStatus": "approved"
             },
             {
-              "id": "cet6-paper-2024063-part-3-section-1-group-1-q-30",
+              "id": "cet6-paper-2024063-shared_option_matching-30",
               "displayNumber": 30,
               "sourceQuestionNumber": 30,
-              "type": "inline_fill",
+              "type": "shared_option_matching",
               "promptBlocks": [],
               "placement": {
                 "kind": "inline",
                 "blankIds": [
-                  "cet6-paper-2024063-part-3-section-1-group-1-blank-30"
+                  "cet6-paper-2024063-blank-30"
                 ]
               },
               "options": [],
               "blanks": [
                 {
-                  "blankId": "cet6-paper-2024063-part-3-section-1-group-1-blank-30",
-                  "label": "第 30 题"
+                  "blankId": "cet6-paper-2024063-blank-30",
+                  "label": "第30题"
                 }
               ],
               "answerSpec": {
-                "availability": "none",
-                "gradingMode": "none",
-                "kind": "per_blank"
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": [
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-2-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第2页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-3-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第3页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-4-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第4页"
+                  }
+                ]
               },
               "explanationBlocks": [],
               "sourceRefs": [
                 {
                   "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
-                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "relativePath": "试卷/真题/2024.06六级真题第3套【可复制可检索】.docx",
                   "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
                   "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 2
+                  },
                   "extractionMethod": "manual-review",
-                  "confidence": 0.86
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 3
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 4
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
                 }
               ],
-              "reviewStatus": "review_required"
+              "reviewStatus": "approved"
             },
             {
-              "id": "cet6-paper-2024063-part-3-section-1-group-1-q-31",
+              "id": "cet6-paper-2024063-shared_option_matching-31",
               "displayNumber": 31,
               "sourceQuestionNumber": 31,
-              "type": "inline_fill",
+              "type": "shared_option_matching",
               "promptBlocks": [],
               "placement": {
                 "kind": "inline",
                 "blankIds": [
-                  "cet6-paper-2024063-part-3-section-1-group-1-blank-31"
+                  "cet6-paper-2024063-blank-31"
                 ]
               },
               "options": [],
               "blanks": [
                 {
-                  "blankId": "cet6-paper-2024063-part-3-section-1-group-1-blank-31",
-                  "label": "第 31 题"
+                  "blankId": "cet6-paper-2024063-blank-31",
+                  "label": "第31题"
                 }
               ],
               "answerSpec": {
-                "availability": "none",
-                "gradingMode": "none",
-                "kind": "per_blank"
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": [
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-2-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第2页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-3-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第3页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-4-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第4页"
+                  }
+                ]
               },
               "explanationBlocks": [],
               "sourceRefs": [
                 {
                   "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
-                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "relativePath": "试卷/真题/2024.06六级真题第3套【可复制可检索】.docx",
                   "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
                   "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 2
+                  },
                   "extractionMethod": "manual-review",
-                  "confidence": 0.86
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 3
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 4
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
                 }
               ],
-              "reviewStatus": "review_required"
+              "reviewStatus": "approved"
             },
             {
-              "id": "cet6-paper-2024063-part-3-section-1-group-1-q-32",
+              "id": "cet6-paper-2024063-shared_option_matching-32",
               "displayNumber": 32,
               "sourceQuestionNumber": 32,
-              "type": "inline_fill",
+              "type": "shared_option_matching",
               "promptBlocks": [],
               "placement": {
                 "kind": "inline",
                 "blankIds": [
-                  "cet6-paper-2024063-part-3-section-1-group-1-blank-32"
+                  "cet6-paper-2024063-blank-32"
                 ]
               },
               "options": [],
               "blanks": [
                 {
-                  "blankId": "cet6-paper-2024063-part-3-section-1-group-1-blank-32",
-                  "label": "第 32 题"
+                  "blankId": "cet6-paper-2024063-blank-32",
+                  "label": "第32题"
                 }
               ],
               "answerSpec": {
-                "availability": "none",
-                "gradingMode": "none",
-                "kind": "per_blank"
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": [
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-2-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第2页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-3-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第3页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-4-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第4页"
+                  }
+                ]
               },
               "explanationBlocks": [],
               "sourceRefs": [
                 {
                   "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
-                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "relativePath": "试卷/真题/2024.06六级真题第3套【可复制可检索】.docx",
                   "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
                   "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 2
+                  },
                   "extractionMethod": "manual-review",
-                  "confidence": 0.86
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 3
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 4
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
                 }
               ],
-              "reviewStatus": "review_required"
+              "reviewStatus": "approved"
             },
             {
-              "id": "cet6-paper-2024063-part-3-section-1-group-1-q-33",
+              "id": "cet6-paper-2024063-shared_option_matching-33",
               "displayNumber": 33,
               "sourceQuestionNumber": 33,
-              "type": "inline_fill",
+              "type": "shared_option_matching",
               "promptBlocks": [],
               "placement": {
                 "kind": "inline",
                 "blankIds": [
-                  "cet6-paper-2024063-part-3-section-1-group-1-blank-33"
+                  "cet6-paper-2024063-blank-33"
                 ]
               },
               "options": [],
               "blanks": [
                 {
-                  "blankId": "cet6-paper-2024063-part-3-section-1-group-1-blank-33",
-                  "label": "第 33 题"
+                  "blankId": "cet6-paper-2024063-blank-33",
+                  "label": "第33题"
                 }
               ],
               "answerSpec": {
-                "availability": "none",
-                "gradingMode": "none",
-                "kind": "per_blank"
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": [
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-2-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第2页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-3-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第3页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-4-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第4页"
+                  }
+                ]
               },
               "explanationBlocks": [],
               "sourceRefs": [
                 {
                   "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
-                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "relativePath": "试卷/真题/2024.06六级真题第3套【可复制可检索】.docx",
                   "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
                   "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 2
+                  },
                   "extractionMethod": "manual-review",
-                  "confidence": 0.86
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 3
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 4
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
                 }
               ],
-              "reviewStatus": "review_required"
+              "reviewStatus": "approved"
             },
             {
-              "id": "cet6-paper-2024063-part-3-section-1-group-1-q-34",
+              "id": "cet6-paper-2024063-shared_option_matching-34",
               "displayNumber": 34,
               "sourceQuestionNumber": 34,
-              "type": "inline_fill",
+              "type": "shared_option_matching",
               "promptBlocks": [],
               "placement": {
                 "kind": "inline",
                 "blankIds": [
-                  "cet6-paper-2024063-part-3-section-1-group-1-blank-34"
+                  "cet6-paper-2024063-blank-34"
                 ]
               },
               "options": [],
               "blanks": [
                 {
-                  "blankId": "cet6-paper-2024063-part-3-section-1-group-1-blank-34",
-                  "label": "第 34 题"
+                  "blankId": "cet6-paper-2024063-blank-34",
+                  "label": "第34题"
                 }
               ],
               "answerSpec": {
-                "availability": "none",
-                "gradingMode": "none",
-                "kind": "per_blank"
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": [
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-2-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第2页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-3-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第3页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-4-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第4页"
+                  }
+                ]
               },
               "explanationBlocks": [],
               "sourceRefs": [
                 {
                   "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
-                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "relativePath": "试卷/真题/2024.06六级真题第3套【可复制可检索】.docx",
                   "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
                   "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 2
+                  },
                   "extractionMethod": "manual-review",
-                  "confidence": 0.86
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 3
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 4
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
                 }
               ],
-              "reviewStatus": "review_required"
+              "reviewStatus": "approved"
             },
             {
-              "id": "cet6-paper-2024063-part-3-section-1-group-1-q-35",
+              "id": "cet6-paper-2024063-shared_option_matching-35",
               "displayNumber": 35,
               "sourceQuestionNumber": 35,
-              "type": "inline_fill",
+              "type": "shared_option_matching",
               "promptBlocks": [],
               "placement": {
                 "kind": "inline",
                 "blankIds": [
-                  "cet6-paper-2024063-part-3-section-1-group-1-blank-35"
+                  "cet6-paper-2024063-blank-35"
                 ]
               },
               "options": [],
               "blanks": [
                 {
-                  "blankId": "cet6-paper-2024063-part-3-section-1-group-1-blank-35",
-                  "label": "第 35 题"
+                  "blankId": "cet6-paper-2024063-blank-35",
+                  "label": "第35题"
                 }
               ],
               "answerSpec": {
-                "availability": "none",
-                "gradingMode": "none",
-                "kind": "per_blank"
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": [
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-2-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第2页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-3-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第3页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-4-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第4页"
+                  }
+                ]
               },
               "explanationBlocks": [],
               "sourceRefs": [
                 {
                   "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
-                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "relativePath": "试卷/真题/2024.06六级真题第3套【可复制可检索】.docx",
                   "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
                   "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 2
+                  },
                   "extractionMethod": "manual-review",
-                  "confidence": 0.86
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 3
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 4
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
                 }
               ],
-              "reviewStatus": "review_required"
+              "reviewStatus": "approved"
             }
-          ]
+          ],
+          "sharedOptionsReusable": false
         },
         {
-          "id": "cet6-paper-2024063-part-3-section-2-group-1",
-          "title": "题目",
+          "id": "cet6-paper-2024063-matching-group",
+          "title": "Section B 长篇阅读（段落可重复选择）",
           "presentation": "reading",
-          "instructions": [],
+          "instructions": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Directions: In this section, you are going to read a passage with ten statements attached to it. Each statement contains information given in one of the paragraphs. Identify the paragraph from which the information is derived. You may choose a paragraph more than once. Each paragraph is marked with a letter. Answer the questions by making the corresponding letter on Answer Sheet 2."
+                }
+              ]
+            }
+          ],
           "stimulusBlocks": [
             {
               "type": "paragraph",
@@ -917,13 +1506,84 @@
               ]
             }
           ],
-          "sharedOptions": [],
+          "sharedOptions": [
+            {
+              "id": "A",
+              "label": "A",
+              "blocks": []
+            },
+            {
+              "id": "B",
+              "label": "B",
+              "blocks": []
+            },
+            {
+              "id": "C",
+              "label": "C",
+              "blocks": []
+            },
+            {
+              "id": "D",
+              "label": "D",
+              "blocks": []
+            },
+            {
+              "id": "E",
+              "label": "E",
+              "blocks": []
+            },
+            {
+              "id": "F",
+              "label": "F",
+              "blocks": []
+            },
+            {
+              "id": "G",
+              "label": "G",
+              "blocks": []
+            },
+            {
+              "id": "H",
+              "label": "H",
+              "blocks": []
+            },
+            {
+              "id": "I",
+              "label": "I",
+              "blocks": []
+            },
+            {
+              "id": "J",
+              "label": "J",
+              "blocks": []
+            },
+            {
+              "id": "K",
+              "label": "K",
+              "blocks": []
+            },
+            {
+              "id": "L",
+              "label": "L",
+              "blocks": []
+            },
+            {
+              "id": "M",
+              "label": "M",
+              "blocks": []
+            },
+            {
+              "id": "N",
+              "label": "N",
+              "blocks": []
+            }
+          ],
           "questions": [
             {
-              "id": "cet6-paper-2024063-part-3-section-2-group-1-q-36-1",
+              "id": "cet6-paper-2024063-shared_option_matching-36",
               "displayNumber": 36,
               "sourceQuestionNumber": 36,
-              "type": "short_answer",
+              "type": "shared_option_matching",
               "promptBlocks": [
                 {
                   "type": "paragraph",
@@ -933,36 +1593,119 @@
                       "text": "Although employees are said to be fatigued by meetings, the condition has not been considered worthy of further research until recently."
                     }
                   ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "blank",
+                      "blankId": "cet6-paper-2024063-paragraph-36"
+                    }
+                  ]
                 }
               ],
               "placement": {
-                "kind": "standalone"
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2024063-paragraph-36"
+                ]
               },
               "options": [],
-              "blanks": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2024063-paragraph-36",
+                  "label": "第36题"
+                }
+              ],
               "answerSpec": {
-                "availability": "none",
-                "gradingMode": "none",
-                "kind": "none"
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": [
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-fd4f1d1f9ab8beb2-4-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第4页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-fd4f1d1f9ab8beb2-5-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第5页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-fd4f1d1f9ab8beb2-6-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第6页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-fd4f1d1f9ab8beb2-7-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第7页"
+                  }
+                ]
               },
               "explanationBlocks": [],
               "sourceRefs": [
                 {
                   "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
-                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "relativePath": "试卷/真题/2024.06六级真题第3套【可复制可检索】.docx",
                   "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
                   "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "relativePath": "试卷/真题/2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "locator": {
+                    "page": 4
+                  },
                   "extractionMethod": "manual-review",
-                  "confidence": 0.86
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "relativePath": "试卷/真题/2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "locator": {
+                    "page": 5
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "relativePath": "试卷/真题/2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "locator": {
+                    "page": 6
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "relativePath": "试卷/真题/2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "locator": {
+                    "page": 7
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
                 }
               ],
-              "reviewStatus": "review_required"
+              "reviewStatus": "approved"
             },
             {
-              "id": "cet6-paper-2024063-part-3-section-2-group-1-q-37-2",
+              "id": "cet6-paper-2024063-shared_option_matching-37",
               "displayNumber": 37,
               "sourceQuestionNumber": 37,
-              "type": "short_answer",
+              "type": "shared_option_matching",
               "promptBlocks": [
                 {
                   "type": "paragraph",
@@ -972,36 +1715,119 @@
                       "text": "Mroz and his team compiled a list of what to do and what not to do to remedy the problem of MRS."
                     }
                   ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "blank",
+                      "blankId": "cet6-paper-2024063-paragraph-37"
+                    }
+                  ]
                 }
               ],
               "placement": {
-                "kind": "standalone"
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2024063-paragraph-37"
+                ]
               },
               "options": [],
-              "blanks": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2024063-paragraph-37",
+                  "label": "第37题"
+                }
+              ],
               "answerSpec": {
-                "availability": "none",
-                "gradingMode": "none",
-                "kind": "none"
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": [
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-fd4f1d1f9ab8beb2-4-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第4页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-fd4f1d1f9ab8beb2-5-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第5页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-fd4f1d1f9ab8beb2-6-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第6页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-fd4f1d1f9ab8beb2-7-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第7页"
+                  }
+                ]
               },
               "explanationBlocks": [],
               "sourceRefs": [
                 {
                   "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
-                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "relativePath": "试卷/真题/2024.06六级真题第3套【可复制可检索】.docx",
                   "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
                   "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "relativePath": "试卷/真题/2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "locator": {
+                    "page": 4
+                  },
                   "extractionMethod": "manual-review",
-                  "confidence": 0.86
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "relativePath": "试卷/真题/2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "locator": {
+                    "page": 5
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "relativePath": "试卷/真题/2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "locator": {
+                    "page": 6
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "relativePath": "试卷/真题/2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "locator": {
+                    "page": 7
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
                 }
               ],
-              "reviewStatus": "review_required"
+              "reviewStatus": "approved"
             },
             {
-              "id": "cet6-paper-2024063-part-3-section-2-group-1-q-38-3",
+              "id": "cet6-paper-2024063-shared_option_matching-38",
               "displayNumber": 38,
               "sourceQuestionNumber": 38,
-              "type": "short_answer",
+              "type": "shared_option_matching",
               "promptBlocks": [
                 {
                   "type": "paragraph",
@@ -1011,36 +1837,119 @@
                       "text": "Companies can get rid of the root cause of MRS if they give priority to workers' time."
                     }
                   ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "blank",
+                      "blankId": "cet6-paper-2024063-paragraph-38"
+                    }
+                  ]
                 }
               ],
               "placement": {
-                "kind": "standalone"
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2024063-paragraph-38"
+                ]
               },
               "options": [],
-              "blanks": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2024063-paragraph-38",
+                  "label": "第38题"
+                }
+              ],
               "answerSpec": {
-                "availability": "none",
-                "gradingMode": "none",
-                "kind": "none"
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": [
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-fd4f1d1f9ab8beb2-4-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第4页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-fd4f1d1f9ab8beb2-5-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第5页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-fd4f1d1f9ab8beb2-6-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第6页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-fd4f1d1f9ab8beb2-7-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第7页"
+                  }
+                ]
               },
               "explanationBlocks": [],
               "sourceRefs": [
                 {
                   "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
-                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "relativePath": "试卷/真题/2024.06六级真题第3套【可复制可检索】.docx",
                   "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
                   "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "relativePath": "试卷/真题/2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "locator": {
+                    "page": 4
+                  },
                   "extractionMethod": "manual-review",
-                  "confidence": 0.86
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "relativePath": "试卷/真题/2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "locator": {
+                    "page": 5
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "relativePath": "试卷/真题/2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "locator": {
+                    "page": 6
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "relativePath": "试卷/真题/2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "locator": {
+                    "page": 7
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
                 }
               ],
-              "reviewStatus": "review_required"
+              "reviewStatus": "approved"
             },
             {
-              "id": "cet6-paper-2024063-part-3-section-2-group-1-q-39-4",
+              "id": "cet6-paper-2024063-shared_option_matching-39",
               "displayNumber": 39,
               "sourceQuestionNumber": 39,
-              "type": "short_answer",
+              "type": "shared_option_matching",
               "promptBlocks": [
                 {
                   "type": "paragraph",
@@ -1050,36 +1959,119 @@
                       "text": "If workers are exhausted to a dangerous degree, it is extremely hard for them to transition to the next task."
                     }
                   ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "blank",
+                      "blankId": "cet6-paper-2024063-paragraph-39"
+                    }
+                  ]
                 }
               ],
               "placement": {
-                "kind": "standalone"
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2024063-paragraph-39"
+                ]
               },
               "options": [],
-              "blanks": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2024063-paragraph-39",
+                  "label": "第39题"
+                }
+              ],
               "answerSpec": {
-                "availability": "none",
-                "gradingMode": "none",
-                "kind": "none"
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": [
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-fd4f1d1f9ab8beb2-4-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第4页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-fd4f1d1f9ab8beb2-5-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第5页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-fd4f1d1f9ab8beb2-6-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第6页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-fd4f1d1f9ab8beb2-7-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第7页"
+                  }
+                ]
               },
               "explanationBlocks": [],
               "sourceRefs": [
                 {
                   "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
-                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "relativePath": "试卷/真题/2024.06六级真题第3套【可复制可检索】.docx",
                   "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
                   "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "relativePath": "试卷/真题/2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "locator": {
+                    "page": 4
+                  },
                   "extractionMethod": "manual-review",
-                  "confidence": 0.86
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "relativePath": "试卷/真题/2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "locator": {
+                    "page": 5
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "relativePath": "试卷/真题/2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "locator": {
+                    "page": 6
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "relativePath": "试卷/真题/2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "locator": {
+                    "page": 7
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
                 }
               ],
-              "reviewStatus": "review_required"
+              "reviewStatus": "approved"
             },
             {
-              "id": "cet6-paper-2024063-part-3-section-2-group-1-q-40-5",
+              "id": "cet6-paper-2024063-shared_option_matching-40",
               "displayNumber": 40,
               "sourceQuestionNumber": 40,
-              "type": "short_answer",
+              "type": "shared_option_matching",
               "promptBlocks": [
                 {
                   "type": "paragraph",
@@ -1089,36 +2081,119 @@
                       "text": "Employees in America spend a lot of time attending meetings while the number of hours managers meet is several times more."
                     }
                   ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "blank",
+                      "blankId": "cet6-paper-2024063-paragraph-40"
+                    }
+                  ]
                 }
               ],
               "placement": {
-                "kind": "standalone"
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2024063-paragraph-40"
+                ]
               },
               "options": [],
-              "blanks": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2024063-paragraph-40",
+                  "label": "第40题"
+                }
+              ],
               "answerSpec": {
-                "availability": "none",
-                "gradingMode": "none",
-                "kind": "none"
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": [
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-fd4f1d1f9ab8beb2-4-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第4页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-fd4f1d1f9ab8beb2-5-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第5页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-fd4f1d1f9ab8beb2-6-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第6页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-fd4f1d1f9ab8beb2-7-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第7页"
+                  }
+                ]
               },
               "explanationBlocks": [],
               "sourceRefs": [
                 {
                   "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
-                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "relativePath": "试卷/真题/2024.06六级真题第3套【可复制可检索】.docx",
                   "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
                   "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "relativePath": "试卷/真题/2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "locator": {
+                    "page": 4
+                  },
                   "extractionMethod": "manual-review",
-                  "confidence": 0.86
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "relativePath": "试卷/真题/2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "locator": {
+                    "page": 5
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "relativePath": "试卷/真题/2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "locator": {
+                    "page": 6
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "relativePath": "试卷/真题/2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "locator": {
+                    "page": 7
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
                 }
               ],
-              "reviewStatus": "review_required"
+              "reviewStatus": "approved"
             },
             {
-              "id": "cet6-paper-2024063-part-3-section-2-group-1-q-41-6",
+              "id": "cet6-paper-2024063-shared_option_matching-41",
               "displayNumber": 41,
               "sourceQuestionNumber": 41,
-              "type": "short_answer",
+              "type": "shared_option_matching",
               "promptBlocks": [
                 {
                   "type": "paragraph",
@@ -1128,36 +2203,119 @@
                       "text": "Phyllis Hartman has learned by herself many of the ways Mroz suggested in his study and made remarkable success in freeing herself from unnecessary meetings."
                     }
                   ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "blank",
+                      "blankId": "cet6-paper-2024063-paragraph-41"
+                    }
+                  ]
                 }
               ],
               "placement": {
-                "kind": "standalone"
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2024063-paragraph-41"
+                ]
               },
               "options": [],
-              "blanks": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2024063-paragraph-41",
+                  "label": "第41题"
+                }
+              ],
               "answerSpec": {
-                "availability": "none",
-                "gradingMode": "none",
-                "kind": "none"
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": [
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-fd4f1d1f9ab8beb2-4-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第4页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-fd4f1d1f9ab8beb2-5-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第5页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-fd4f1d1f9ab8beb2-6-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第6页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-fd4f1d1f9ab8beb2-7-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第7页"
+                  }
+                ]
               },
               "explanationBlocks": [],
               "sourceRefs": [
                 {
                   "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
-                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "relativePath": "试卷/真题/2024.06六级真题第3套【可复制可检索】.docx",
                   "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
                   "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "relativePath": "试卷/真题/2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "locator": {
+                    "page": 4
+                  },
                   "extractionMethod": "manual-review",
-                  "confidence": 0.86
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "relativePath": "试卷/真题/2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "locator": {
+                    "page": 5
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "relativePath": "试卷/真题/2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "locator": {
+                    "page": 6
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "relativePath": "试卷/真题/2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "locator": {
+                    "page": 7
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
                 }
               ],
-              "reviewStatus": "review_required"
+              "reviewStatus": "approved"
             },
             {
-              "id": "cet6-paper-2024063-part-3-section-2-group-1-q-42-7",
+              "id": "cet6-paper-2024063-shared_option_matching-42",
               "displayNumber": 42,
               "sourceQuestionNumber": 42,
-              "type": "short_answer",
+              "type": "shared_option_matching",
               "promptBlocks": [
                 {
                   "type": "paragraph",
@@ -1167,36 +2325,119 @@
                       "text": "When meetings continue too long or don't engage employees, they deplete vitality."
                     }
                   ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "blank",
+                      "blankId": "cet6-paper-2024063-paragraph-42"
+                    }
+                  ]
                 }
               ],
               "placement": {
-                "kind": "standalone"
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2024063-paragraph-42"
+                ]
               },
               "options": [],
-              "blanks": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2024063-paragraph-42",
+                  "label": "第42题"
+                }
+              ],
               "answerSpec": {
-                "availability": "none",
-                "gradingMode": "none",
-                "kind": "none"
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": [
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-fd4f1d1f9ab8beb2-4-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第4页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-fd4f1d1f9ab8beb2-5-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第5页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-fd4f1d1f9ab8beb2-6-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第6页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-fd4f1d1f9ab8beb2-7-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第7页"
+                  }
+                ]
               },
               "explanationBlocks": [],
               "sourceRefs": [
                 {
                   "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
-                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "relativePath": "试卷/真题/2024.06六级真题第3套【可复制可检索】.docx",
                   "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
                   "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "relativePath": "试卷/真题/2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "locator": {
+                    "page": 4
+                  },
                   "extractionMethod": "manual-review",
-                  "confidence": 0.86
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "relativePath": "试卷/真题/2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "locator": {
+                    "page": 5
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "relativePath": "试卷/真题/2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "locator": {
+                    "page": 6
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "relativePath": "试卷/真题/2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "locator": {
+                    "page": 7
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
                 }
               ],
-              "reviewStatus": "review_required"
+              "reviewStatus": "approved"
             },
             {
-              "id": "cet6-paper-2024063-part-3-section-2-group-1-q-43-8",
+              "id": "cet6-paper-2024063-shared_option_matching-43",
               "displayNumber": 43,
               "sourceQuestionNumber": 43,
-              "type": "short_answer",
+              "type": "shared_option_matching",
               "promptBlocks": [
                 {
                   "type": "paragraph",
@@ -1206,36 +2447,119 @@
                       "text": "When the time of meetings is reduced, employees will be more engaged in the meetings they do participate in."
                     }
                   ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "blank",
+                      "blankId": "cet6-paper-2024063-paragraph-43"
+                    }
+                  ]
                 }
               ],
               "placement": {
-                "kind": "standalone"
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2024063-paragraph-43"
+                ]
               },
               "options": [],
-              "blanks": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2024063-paragraph-43",
+                  "label": "第43题"
+                }
+              ],
               "answerSpec": {
-                "availability": "none",
-                "gradingMode": "none",
-                "kind": "none"
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": [
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-fd4f1d1f9ab8beb2-4-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第4页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-fd4f1d1f9ab8beb2-5-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第5页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-fd4f1d1f9ab8beb2-6-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第6页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-fd4f1d1f9ab8beb2-7-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第7页"
+                  }
+                ]
               },
               "explanationBlocks": [],
               "sourceRefs": [
                 {
                   "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
-                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "relativePath": "试卷/真题/2024.06六级真题第3套【可复制可检索】.docx",
                   "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
                   "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "relativePath": "试卷/真题/2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "locator": {
+                    "page": 4
+                  },
                   "extractionMethod": "manual-review",
-                  "confidence": 0.86
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "relativePath": "试卷/真题/2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "locator": {
+                    "page": 5
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "relativePath": "试卷/真题/2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "locator": {
+                    "page": 6
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "relativePath": "试卷/真题/2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "locator": {
+                    "page": 7
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
                 }
               ],
-              "reviewStatus": "review_required"
+              "reviewStatus": "approved"
             },
             {
-              "id": "cet6-paper-2024063-part-3-section-2-group-1-q-44-9",
+              "id": "cet6-paper-2024063-shared_option_matching-44",
               "displayNumber": 44,
               "sourceQuestionNumber": 44,
-              "type": "short_answer",
+              "type": "shared_option_matching",
               "promptBlocks": [
                 {
                   "type": "paragraph",
@@ -1245,36 +2569,119 @@
                       "text": "Some employees consider meetings one of the most dispensable parts of the workday."
                     }
                   ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "blank",
+                      "blankId": "cet6-paper-2024063-paragraph-44"
+                    }
+                  ]
                 }
               ],
               "placement": {
-                "kind": "standalone"
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2024063-paragraph-44"
+                ]
               },
               "options": [],
-              "blanks": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2024063-paragraph-44",
+                  "label": "第44题"
+                }
+              ],
               "answerSpec": {
-                "availability": "none",
-                "gradingMode": "none",
-                "kind": "none"
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": [
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-fd4f1d1f9ab8beb2-4-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第4页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-fd4f1d1f9ab8beb2-5-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第5页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-fd4f1d1f9ab8beb2-6-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第6页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-fd4f1d1f9ab8beb2-7-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第7页"
+                  }
+                ]
               },
               "explanationBlocks": [],
               "sourceRefs": [
                 {
                   "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
-                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "relativePath": "试卷/真题/2024.06六级真题第3套【可复制可检索】.docx",
                   "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
                   "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "relativePath": "试卷/真题/2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "locator": {
+                    "page": 4
+                  },
                   "extractionMethod": "manual-review",
-                  "confidence": 0.86
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "relativePath": "试卷/真题/2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "locator": {
+                    "page": 5
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "relativePath": "试卷/真题/2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "locator": {
+                    "page": 6
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "relativePath": "试卷/真题/2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "locator": {
+                    "page": 7
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
                 }
               ],
-              "reviewStatus": "review_required"
+              "reviewStatus": "approved"
             },
             {
-              "id": "cet6-paper-2024063-part-3-section-2-group-1-q-45-10",
+              "id": "cet6-paper-2024063-shared_option_matching-45",
               "displayNumber": 45,
               "sourceQuestionNumber": 45,
-              "type": "short_answer",
+              "type": "shared_option_matching",
               "promptBlocks": [
                 {
                   "type": "paragraph",
@@ -1284,38 +2691,132 @@
                       "text": "According to Mroz, if all his suggestions were applied, a very obvious change would be a steep decrease in the number of meetings scheduled."
                     }
                   ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "blank",
+                      "blankId": "cet6-paper-2024063-paragraph-45"
+                    }
+                  ]
                 }
               ],
               "placement": {
-                "kind": "standalone"
+                "kind": "inline",
+                "blankIds": [
+                  "cet6-paper-2024063-paragraph-45"
+                ]
               },
               "options": [],
-              "blanks": [],
+              "blanks": [
+                {
+                  "blankId": "cet6-paper-2024063-paragraph-45",
+                  "label": "第45题"
+                }
+              ],
               "answerSpec": {
-                "availability": "none",
-                "gradingMode": "none",
-                "kind": "none"
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": [
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-fd4f1d1f9ab8beb2-4-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第4页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-fd4f1d1f9ab8beb2-5-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第5页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-fd4f1d1f9ab8beb2-6-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第6页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-fd4f1d1f9ab8beb2-7-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第7页"
+                  }
+                ]
               },
               "explanationBlocks": [],
               "sourceRefs": [
                 {
                   "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
-                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "relativePath": "试卷/真题/2024.06六级真题第3套【可复制可检索】.docx",
                   "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
                   "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "relativePath": "试卷/真题/2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "locator": {
+                    "page": 4
+                  },
                   "extractionMethod": "manual-review",
-                  "confidence": 0.86
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "relativePath": "试卷/真题/2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "locator": {
+                    "page": 5
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "relativePath": "试卷/真题/2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "locator": {
+                    "page": 6
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "relativePath": "试卷/真题/2024年6月第3套英语六级真题解析.pdf",
+                  "sha256": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+                  "locator": {
+                    "page": 7
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
                 }
               ],
-              "reviewStatus": "review_required"
+              "reviewStatus": "approved"
             }
-          ]
+          ],
+          "sharedOptionsReusable": true
         },
         {
-          "id": "cet6-paper-2024063-part-3-section-3-group-1",
-          "title": "Questions 46 to 50 are based on the following passage.",
+          "id": "cet6-paper-2024063-reading-46-group",
+          "title": "Section C 仔细阅读 46—50",
           "presentation": "reading",
-          "instructions": [],
+          "instructions": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Directions: There are 2 passages in this section. Each passage is followed by some questions or unfinished statements. For each of them there are four choices marked A),B),C)and D).You should decide on the best choice and mark the corresponding letter on Answer Sheet 2 with a single line through the centre."
+                }
+              ]
+            }
+          ],
           "stimulusBlocks": [
             {
               "type": "paragraph",
@@ -1402,7 +2903,7 @@
           "sharedOptions": [],
           "questions": [
             {
-              "id": "cet6-paper-2024063-part-3-section-3-group-1-q-46-1",
+              "id": "cet6-paper-2024063-single_choice-46",
               "displayNumber": 46,
               "sourceQuestionNumber": 46,
               "type": "single_choice",
@@ -1437,21 +2938,6 @@
                   ]
                 },
                 {
-                  "id": "C",
-                  "label": "C",
-                  "blocks": [
-                    {
-                      "type": "paragraph",
-                      "runs": [
-                        {
-                          "type": "text",
-                          "text": "Both mean the opposite of what they appear to."
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
                   "id": "B",
                   "label": "B",
                   "blocks": [
@@ -1461,6 +2947,21 @@
                         {
                           "type": "text",
                           "text": "Both have exactly the same tone."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Both mean the opposite of what they appear to."
                         }
                       ]
                     }
@@ -1484,25 +2985,107 @@
               ],
               "blanks": [],
               "answerSpec": {
-                "availability": "none",
-                "gradingMode": "none",
-                "kind": "none"
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": [
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-7-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第7页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-8-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第8页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-9-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第9页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-10-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第10页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-11-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第11页"
+                  }
+                ]
               },
               "explanationBlocks": [],
               "sourceRefs": [
                 {
                   "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
-                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "relativePath": "试卷/真题/2024.06六级真题第3套【可复制可检索】.docx",
                   "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
                   "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 7
+                  },
                   "extractionMethod": "manual-review",
-                  "confidence": 0.86
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 8
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 9
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 10
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 11
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
                 }
               ],
-              "reviewStatus": "review_required"
+              "reviewStatus": "approved"
             },
             {
-              "id": "cet6-paper-2024063-part-3-section-3-group-1-q-47-2",
+              "id": "cet6-paper-2024063-single_choice-47",
               "displayNumber": 47,
               "sourceQuestionNumber": 47,
               "type": "single_choice",
@@ -1537,21 +3120,6 @@
                   ]
                 },
                 {
-                  "id": "C",
-                  "label": "C",
-                  "blocks": [
-                    {
-                      "type": "paragraph",
-                      "runs": [
-                        {
-                          "type": "text",
-                          "text": "They feel a strong urge to retaliate."
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
                   "id": "B",
                   "label": "B",
                   "blocks": [
@@ -1561,6 +3129,21 @@
                         {
                           "type": "text",
                           "text": "They feel belittled and disrespected."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "They feel a strong urge to retaliate."
                         }
                       ]
                     }
@@ -1584,25 +3167,107 @@
               ],
               "blanks": [],
               "answerSpec": {
-                "availability": "none",
-                "gradingMode": "none",
-                "kind": "none"
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": [
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-7-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第7页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-8-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第8页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-9-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第9页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-10-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第10页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-11-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第11页"
+                  }
+                ]
               },
               "explanationBlocks": [],
               "sourceRefs": [
                 {
                   "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
-                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "relativePath": "试卷/真题/2024.06六级真题第3套【可复制可检索】.docx",
                   "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
                   "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 7
+                  },
                   "extractionMethod": "manual-review",
-                  "confidence": 0.86
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 8
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 9
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 10
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 11
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
                 }
               ],
-              "reviewStatus": "review_required"
+              "reviewStatus": "approved"
             },
             {
-              "id": "cet6-paper-2024063-part-3-section-3-group-1-q-48-3",
+              "id": "cet6-paper-2024063-single_choice-48",
               "displayNumber": 48,
               "sourceQuestionNumber": 48,
               "type": "single_choice",
@@ -1684,25 +3349,107 @@
               ],
               "blanks": [],
               "answerSpec": {
-                "availability": "none",
-                "gradingMode": "none",
-                "kind": "none"
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": [
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-7-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第7页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-8-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第8页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-9-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第9页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-10-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第10页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-11-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第11页"
+                  }
+                ]
               },
               "explanationBlocks": [],
               "sourceRefs": [
                 {
                   "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
-                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "relativePath": "试卷/真题/2024.06六级真题第3套【可复制可检索】.docx",
                   "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
                   "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 7
+                  },
                   "extractionMethod": "manual-review",
-                  "confidence": 0.86
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 8
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 9
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 10
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 11
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
                 }
               ],
-              "reviewStatus": "review_required"
+              "reviewStatus": "approved"
             },
             {
-              "id": "cet6-paper-2024063-part-3-section-3-group-1-q-49-4",
+              "id": "cet6-paper-2024063-single_choice-49",
               "displayNumber": 49,
               "sourceQuestionNumber": 49,
               "type": "single_choice",
@@ -1784,25 +3531,107 @@
               ],
               "blanks": [],
               "answerSpec": {
-                "availability": "none",
-                "gradingMode": "none",
-                "kind": "none"
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": [
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-7-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第7页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-8-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第8页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-9-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第9页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-10-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第10页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-11-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第11页"
+                  }
+                ]
               },
               "explanationBlocks": [],
               "sourceRefs": [
                 {
                   "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
-                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "relativePath": "试卷/真题/2024.06六级真题第3套【可复制可检索】.docx",
                   "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
                   "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 7
+                  },
                   "extractionMethod": "manual-review",
-                  "confidence": 0.86
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 8
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 9
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 10
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 11
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
                 }
               ],
-              "reviewStatus": "review_required"
+              "reviewStatus": "approved"
             },
             {
-              "id": "cet6-paper-2024063-part-3-section-3-group-1-q-50-5",
+              "id": "cet6-paper-2024063-single_choice-50",
               "displayNumber": 50,
               "sourceQuestionNumber": 50,
               "type": "single_choice",
@@ -1837,21 +3666,6 @@
                   ]
                 },
                 {
-                  "id": "C",
-                  "label": "C",
-                  "blocks": [
-                    {
-                      "type": "paragraph",
-                      "runs": [
-                        {
-                          "type": "text",
-                          "text": "Their emphasis."
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
                   "id": "B",
                   "label": "B",
                   "blocks": [
@@ -1867,6 +3681,21 @@
                   ]
                 },
                 {
+                  "id": "C",
+                  "label": "C",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Their emphasis."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
                   "id": "D",
                   "label": "D",
                   "blocks": [
@@ -1875,7 +3704,7 @@
                       "runs": [
                         {
                           "type": "text",
-                          "text": "Their intention. Passage Two"
+                          "text": "Their intention."
                         }
                       ]
                     }
@@ -1884,30 +3713,122 @@
               ],
               "blanks": [],
               "answerSpec": {
-                "availability": "none",
-                "gradingMode": "none",
-                "kind": "none"
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": [
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-7-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第7页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-8-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第8页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-9-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第9页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-10-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第10页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-11-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第11页"
+                  }
+                ]
               },
               "explanationBlocks": [],
               "sourceRefs": [
                 {
                   "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
-                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "relativePath": "试卷/真题/2024.06六级真题第3套【可复制可检索】.docx",
                   "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
                   "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 7
+                  },
                   "extractionMethod": "manual-review",
-                  "confidence": 0.86
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 8
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 9
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 10
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 11
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
                 }
               ],
-              "reviewStatus": "review_required"
+              "reviewStatus": "approved"
             }
           ]
         },
         {
-          "id": "cet6-paper-2024063-part-3-section-3-group-2",
-          "title": "Questions 51 to 55 are based on the following passage.",
+          "id": "cet6-paper-2024063-reading-51-group",
+          "title": "Section C 仔细阅读 51—55",
           "presentation": "reading",
-          "instructions": [],
+          "instructions": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Directions: There are 2 passages in this section. Each passage is followed by some questions or unfinished statements. For each of them there are four choices marked A),B),C)and D).You should decide on the best choice and mark the corresponding letter on Answer Sheet 2 with a single line through the centre."
+                }
+              ]
+            }
+          ],
           "stimulusBlocks": [
             {
               "type": "paragraph",
@@ -2012,7 +3933,7 @@
           "sharedOptions": [],
           "questions": [
             {
-              "id": "cet6-paper-2024063-part-3-section-3-group-2-q-51-1",
+              "id": "cet6-paper-2024063-single_choice-51",
               "displayNumber": 51,
               "sourceQuestionNumber": 51,
               "type": "single_choice",
@@ -2094,25 +4015,107 @@
               ],
               "blanks": [],
               "answerSpec": {
-                "availability": "none",
-                "gradingMode": "none",
-                "kind": "none"
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": [
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-7-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第7页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-8-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第8页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-9-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第9页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-10-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第10页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-11-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第11页"
+                  }
+                ]
               },
               "explanationBlocks": [],
               "sourceRefs": [
                 {
                   "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
-                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "relativePath": "试卷/真题/2024.06六级真题第3套【可复制可检索】.docx",
                   "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
                   "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 7
+                  },
                   "extractionMethod": "manual-review",
-                  "confidence": 0.86
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 8
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 9
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 10
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 11
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
                 }
               ],
-              "reviewStatus": "review_required"
+              "reviewStatus": "approved"
             },
             {
-              "id": "cet6-paper-2024063-part-3-section-3-group-2-q-52-2",
+              "id": "cet6-paper-2024063-single_choice-52",
               "displayNumber": 52,
               "sourceQuestionNumber": 52,
               "type": "single_choice",
@@ -2194,25 +4197,107 @@
               ],
               "blanks": [],
               "answerSpec": {
-                "availability": "none",
-                "gradingMode": "none",
-                "kind": "none"
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": [
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-7-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第7页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-8-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第8页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-9-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第9页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-10-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第10页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-11-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第11页"
+                  }
+                ]
               },
               "explanationBlocks": [],
               "sourceRefs": [
                 {
                   "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
-                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "relativePath": "试卷/真题/2024.06六级真题第3套【可复制可检索】.docx",
                   "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
                   "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 7
+                  },
                   "extractionMethod": "manual-review",
-                  "confidence": 0.86
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 8
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 9
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 10
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 11
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
                 }
               ],
-              "reviewStatus": "review_required"
+              "reviewStatus": "approved"
             },
             {
-              "id": "cet6-paper-2024063-part-3-section-3-group-2-q-53-3",
+              "id": "cet6-paper-2024063-single_choice-53",
               "displayNumber": 53,
               "sourceQuestionNumber": 53,
               "type": "single_choice",
@@ -2294,25 +4379,107 @@
               ],
               "blanks": [],
               "answerSpec": {
-                "availability": "none",
-                "gradingMode": "none",
-                "kind": "none"
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": [
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-7-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第7页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-8-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第8页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-9-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第9页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-10-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第10页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-11-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第11页"
+                  }
+                ]
               },
               "explanationBlocks": [],
               "sourceRefs": [
                 {
                   "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
-                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "relativePath": "试卷/真题/2024.06六级真题第3套【可复制可检索】.docx",
                   "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
                   "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 7
+                  },
                   "extractionMethod": "manual-review",
-                  "confidence": 0.86
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 8
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 9
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 10
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 11
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
                 }
               ],
-              "reviewStatus": "review_required"
+              "reviewStatus": "approved"
             },
             {
-              "id": "cet6-paper-2024063-part-3-section-3-group-2-q-54-4",
+              "id": "cet6-paper-2024063-single_choice-54",
               "displayNumber": 54,
               "sourceQuestionNumber": 54,
               "type": "single_choice",
@@ -2394,25 +4561,107 @@
               ],
               "blanks": [],
               "answerSpec": {
-                "availability": "none",
-                "gradingMode": "none",
-                "kind": "none"
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": [
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-7-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第7页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-8-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第8页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-9-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第9页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-10-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第10页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-11-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第11页"
+                  }
+                ]
               },
               "explanationBlocks": [],
               "sourceRefs": [
                 {
                   "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
-                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "relativePath": "试卷/真题/2024.06六级真题第3套【可复制可检索】.docx",
                   "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
                   "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 7
+                  },
                   "extractionMethod": "manual-review",
-                  "confidence": 0.86
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 8
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 9
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 10
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 11
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
                 }
               ],
-              "reviewStatus": "review_required"
+              "reviewStatus": "approved"
             },
             {
-              "id": "cet6-paper-2024063-part-3-section-3-group-2-q-55-5",
+              "id": "cet6-paper-2024063-single_choice-55",
               "displayNumber": 55,
               "sourceQuestionNumber": 55,
               "type": "single_choice",
@@ -2494,45 +4743,126 @@
               ],
               "blanks": [],
               "answerSpec": {
-                "availability": "none",
-                "gradingMode": "none",
-                "kind": "none"
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": [
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-7-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第7页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-8-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第8页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-9-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第9页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-10-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第10页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-11-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第11页"
+                  }
+                ]
               },
               "explanationBlocks": [],
               "sourceRefs": [
                 {
                   "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
-                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "relativePath": "试卷/真题/2024.06六级真题第3套【可复制可检索】.docx",
                   "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
                   "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 7
+                  },
                   "extractionMethod": "manual-review",
-                  "confidence": 0.86
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 8
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 9
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 10
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 11
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
                 }
               ],
-              "reviewStatus": "review_required"
+              "reviewStatus": "approved"
             }
           ]
         }
       ]
     },
     {
-      "id": "cet6-paper-2024063-part-4-translation",
+      "id": "cet6-paper-2024063-translation",
       "title": "Translation 翻译",
       "layout": "flow",
       "instructions": [],
       "groups": [
         {
-          "id": "cet6-paper-2024063-part-4-translation-group",
-          "title": "翻译题",
+          "id": "cet6-paper-2024063-translation-group",
+          "title": "汉译英",
           "presentation": "writing",
           "instructions": [],
           "stimulusBlocks": [],
           "sharedOptions": [],
           "questions": [
             {
-              "id": "cet6-paper-2024063-part-4-q-1-1",
-              "displayNumber": 1,
-              "sourceQuestionNumber": 1,
+              "id": "cet6-paper-2024063-translation-翻译",
+              "displayNumber": 57,
               "type": "translation",
               "promptBlocks": [
                 {
@@ -2540,7 +4870,16 @@
                   "runs": [
                     {
                       "type": "text",
-                      "text": "扇子自古以来就深受中国人喜爱，但现在已不只是消暑纳凉的工具，而更多地作为艺术品供人欣赏。许多扇子造型优美、做工精良，并绘有山水、花鸟、人物等精美图案，具有很高的艺术价值。中国许多著名画家和书法家喜欢在扇子上作诗绘画，展示其艺术品味。扇子常作为礼物赠予他人，表达美好的祝福和真挚的情感。如今，扇子的实用功能已大为减弱，但作为一种文化符号和艺术形式，扇子仍然在中国传统文化中扮演着重要角色。"
+                      "text": "Directions: For this part, you are allowed 30 minutes to translate a passage from Chinese into English. You should write your answer on Answer Sheet 2."
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "扇子自古以来就深受中国人喜爱,但现在已不只是消暑纳凉的工具,而更多地作为艺术品供人欣赏。许多扇子造型优美、做工精良,并绘有山水、花鸟、人物等精美图案,具有很高的艺术价值。中国许多著名画家和书法家喜欢在扇子上作诗绘画,展示其艺术品味。扇子常作为礼物赠予他人,表达美好的祝福和真挚的情感。如今,扇子的实用功能已大为减弱,但作为一种文化符号和艺术形式,扇子仍然在中国传统文化中扮演着重要角色。"
                     }
                   ]
                 }
@@ -2551,45 +4890,344 @@
               "options": [],
               "blanks": [],
               "answerSpec": {
-                "availability": "none",
-                "gradingMode": "none",
-                "kind": "none"
+                "availability": "answered",
+                "gradingMode": "manual",
+                "kind": "reference",
+                "referenceAnswer": [
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-11-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第11页"
+                  },
+                  {
+                    "type": "image",
+                    "assetId": "page-clean-v5-06c8b22207ae38ad-12-0-20-1000-975",
+                    "alt": "原题答案与解析",
+                    "caption": "原解析第12页"
+                  }
+                ]
               },
               "explanationBlocks": [],
               "sourceRefs": [
                 {
                   "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
-                  "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+                  "relativePath": "试卷/真题/2024.06六级真题第3套【可复制可检索】.docx",
                   "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
                   "locator": {},
+                  "extractionMethod": "docx-xml",
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 11
+                  },
                   "extractionMethod": "manual-review",
-                  "confidence": 0.86
+                  "confidence": 1
+                },
+                {
+                  "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+                  "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+                  "locator": {
+                    "page": 12
+                  },
+                  "extractionMethod": "manual-review",
+                  "confidence": 1
                 }
               ],
-              "reviewStatus": "review_required"
+              "reviewStatus": "approved"
             }
           ]
         }
       ]
     }
   ],
-  "assetRefs": [],
+  "assetRefs": [
+    {
+      "assetId": "page-clean-v5-06c8b22207ae38ad-1-0-20-1000-975",
+      "kind": "image",
+      "url": "https://ahecwiqjfrrxxjxazmre.supabase.co/storage/v1/object/public/images/cet6/source-pages/c6ca4ca3499165106282d82eb815e48e331ad011b2c0d0066cfbcd3113693b7d.webp",
+      "mimeType": "image/webp",
+      "sha256": "c6ca4ca3499165106282d82eb815e48e331ad011b2c0d0066cfbcd3113693b7d",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+          "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+          "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+          "locator": {
+            "page": 1
+          },
+          "extractionMethod": "manual-review",
+          "confidence": 1
+        }
+      ]
+    },
+    {
+      "assetId": "page-clean-v5-06c8b22207ae38ad-2-0-20-1000-975",
+      "kind": "image",
+      "url": "https://ahecwiqjfrrxxjxazmre.supabase.co/storage/v1/object/public/images/cet6/source-pages/11a56af2891385ad388fd2c4b20abe4d42d85ed1e258d06a26a245b4f0fc83a7.webp",
+      "mimeType": "image/webp",
+      "sha256": "11a56af2891385ad388fd2c4b20abe4d42d85ed1e258d06a26a245b4f0fc83a7",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+          "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+          "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+          "locator": {
+            "page": 2
+          },
+          "extractionMethod": "manual-review",
+          "confidence": 1
+        }
+      ]
+    },
+    {
+      "assetId": "page-clean-v5-06c8b22207ae38ad-3-0-20-1000-975",
+      "kind": "image",
+      "url": "https://ahecwiqjfrrxxjxazmre.supabase.co/storage/v1/object/public/images/cet6/source-pages/f59fca56533eceb983a4fed9a890e3ba5b7f88a17da0cda0bf13deccf2432daf.webp",
+      "mimeType": "image/webp",
+      "sha256": "f59fca56533eceb983a4fed9a890e3ba5b7f88a17da0cda0bf13deccf2432daf",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+          "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+          "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+          "locator": {
+            "page": 3
+          },
+          "extractionMethod": "manual-review",
+          "confidence": 1
+        }
+      ]
+    },
+    {
+      "assetId": "page-clean-v5-06c8b22207ae38ad-4-0-20-1000-975",
+      "kind": "image",
+      "url": "https://ahecwiqjfrrxxjxazmre.supabase.co/storage/v1/object/public/images/cet6/source-pages/4f2d778fdfe46043c2353e60dcd23e86a47793989585961fae4df3711a5e2387.webp",
+      "mimeType": "image/webp",
+      "sha256": "4f2d778fdfe46043c2353e60dcd23e86a47793989585961fae4df3711a5e2387",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+          "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+          "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+          "locator": {
+            "page": 4
+          },
+          "extractionMethod": "manual-review",
+          "confidence": 1
+        }
+      ]
+    },
+    {
+      "assetId": "page-clean-v5-fd4f1d1f9ab8beb2-4-0-20-1000-975",
+      "kind": "image",
+      "url": "https://ahecwiqjfrrxxjxazmre.supabase.co/storage/v1/object/public/images/cet6/source-pages/7179026973a336c1c2c37680d683c58cef520650d47caff4aaba8a4bf9f3775d.webp",
+      "mimeType": "image/webp",
+      "sha256": "7179026973a336c1c2c37680d683c58cef520650d47caff4aaba8a4bf9f3775d",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+          "relativePath": "试卷/真题/2024年6月第3套英语六级真题解析.pdf",
+          "sha256": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+          "locator": {
+            "page": 4
+          },
+          "extractionMethod": "manual-review",
+          "confidence": 1
+        }
+      ]
+    },
+    {
+      "assetId": "page-clean-v5-fd4f1d1f9ab8beb2-5-0-20-1000-975",
+      "kind": "image",
+      "url": "https://ahecwiqjfrrxxjxazmre.supabase.co/storage/v1/object/public/images/cet6/source-pages/efaf3fc2a50aa781fe2dd9a90476fbb41e36fb92924533a9e13e22fd61376fda.webp",
+      "mimeType": "image/webp",
+      "sha256": "efaf3fc2a50aa781fe2dd9a90476fbb41e36fb92924533a9e13e22fd61376fda",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+          "relativePath": "试卷/真题/2024年6月第3套英语六级真题解析.pdf",
+          "sha256": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+          "locator": {
+            "page": 5
+          },
+          "extractionMethod": "manual-review",
+          "confidence": 1
+        }
+      ]
+    },
+    {
+      "assetId": "page-clean-v5-fd4f1d1f9ab8beb2-6-0-20-1000-975",
+      "kind": "image",
+      "url": "https://ahecwiqjfrrxxjxazmre.supabase.co/storage/v1/object/public/images/cet6/source-pages/a7b3d5f660edcff673c259349047a24c72ff5c0f890f84d99c434276da8e3e81.webp",
+      "mimeType": "image/webp",
+      "sha256": "a7b3d5f660edcff673c259349047a24c72ff5c0f890f84d99c434276da8e3e81",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+          "relativePath": "试卷/真题/2024年6月第3套英语六级真题解析.pdf",
+          "sha256": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+          "locator": {
+            "page": 6
+          },
+          "extractionMethod": "manual-review",
+          "confidence": 1
+        }
+      ]
+    },
+    {
+      "assetId": "page-clean-v5-fd4f1d1f9ab8beb2-7-0-20-1000-975",
+      "kind": "image",
+      "url": "https://ahecwiqjfrrxxjxazmre.supabase.co/storage/v1/object/public/images/cet6/source-pages/2b3ef6cbddca1fa0152c81b79532d151a61d96c444beeaf8077ee721f2764812.webp",
+      "mimeType": "image/webp",
+      "sha256": "2b3ef6cbddca1fa0152c81b79532d151a61d96c444beeaf8077ee721f2764812",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+          "relativePath": "试卷/真题/2024年6月第3套英语六级真题解析.pdf",
+          "sha256": "fd4f1d1f9ab8beb2d267b5c1da52b98a64f7bfa2739c37ed701c24bc5b3d0e22",
+          "locator": {
+            "page": 7
+          },
+          "extractionMethod": "manual-review",
+          "confidence": 1
+        }
+      ]
+    },
+    {
+      "assetId": "page-clean-v5-06c8b22207ae38ad-7-0-20-1000-975",
+      "kind": "image",
+      "url": "https://ahecwiqjfrrxxjxazmre.supabase.co/storage/v1/object/public/images/cet6/source-pages/d87506b18a038073233b8464ad4d6e39cc7863b1ac72fa630e2bd54bb8826b2b.webp",
+      "mimeType": "image/webp",
+      "sha256": "d87506b18a038073233b8464ad4d6e39cc7863b1ac72fa630e2bd54bb8826b2b",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+          "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+          "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+          "locator": {
+            "page": 7
+          },
+          "extractionMethod": "manual-review",
+          "confidence": 1
+        }
+      ]
+    },
+    {
+      "assetId": "page-clean-v5-06c8b22207ae38ad-8-0-20-1000-975",
+      "kind": "image",
+      "url": "https://ahecwiqjfrrxxjxazmre.supabase.co/storage/v1/object/public/images/cet6/source-pages/53c9f512cf6bf47dd70a69595a6d90349ccc591d23d765618f7a7847f92c45bd.webp",
+      "mimeType": "image/webp",
+      "sha256": "53c9f512cf6bf47dd70a69595a6d90349ccc591d23d765618f7a7847f92c45bd",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+          "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+          "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+          "locator": {
+            "page": 8
+          },
+          "extractionMethod": "manual-review",
+          "confidence": 1
+        }
+      ]
+    },
+    {
+      "assetId": "page-clean-v5-06c8b22207ae38ad-9-0-20-1000-975",
+      "kind": "image",
+      "url": "https://ahecwiqjfrrxxjxazmre.supabase.co/storage/v1/object/public/images/cet6/source-pages/6cd8f8830737f0cfd8c5d41305af51ea66fd7b1d155f5f67b630ac5889904843.webp",
+      "mimeType": "image/webp",
+      "sha256": "6cd8f8830737f0cfd8c5d41305af51ea66fd7b1d155f5f67b630ac5889904843",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+          "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+          "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+          "locator": {
+            "page": 9
+          },
+          "extractionMethod": "manual-review",
+          "confidence": 1
+        }
+      ]
+    },
+    {
+      "assetId": "page-clean-v5-06c8b22207ae38ad-10-0-20-1000-975",
+      "kind": "image",
+      "url": "https://ahecwiqjfrrxxjxazmre.supabase.co/storage/v1/object/public/images/cet6/source-pages/b9c7496e15c3e14eca9417ef33266c67053dc7dec077c5266f2d6b90e690dbd3.webp",
+      "mimeType": "image/webp",
+      "sha256": "b9c7496e15c3e14eca9417ef33266c67053dc7dec077c5266f2d6b90e690dbd3",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+          "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+          "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+          "locator": {
+            "page": 10
+          },
+          "extractionMethod": "manual-review",
+          "confidence": 1
+        }
+      ]
+    },
+    {
+      "assetId": "page-clean-v5-06c8b22207ae38ad-11-0-20-1000-975",
+      "kind": "image",
+      "url": "https://ahecwiqjfrrxxjxazmre.supabase.co/storage/v1/object/public/images/cet6/source-pages/caacb5228309d6f6dcb067eda12cbd41dedea595a3040814dbce2a4b61e25fae.webp",
+      "mimeType": "image/webp",
+      "sha256": "caacb5228309d6f6dcb067eda12cbd41dedea595a3040814dbce2a4b61e25fae",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+          "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+          "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+          "locator": {
+            "page": 11
+          },
+          "extractionMethod": "manual-review",
+          "confidence": 1
+        }
+      ]
+    },
+    {
+      "assetId": "page-clean-v5-06c8b22207ae38ad-12-0-20-1000-975",
+      "kind": "image",
+      "url": "https://ahecwiqjfrrxxjxazmre.supabase.co/storage/v1/object/public/images/cet6/source-pages/d380a101d187a5c1524d9258b81f227fd4de194528ee95b4e90086ea9a891916.webp",
+      "mimeType": "image/webp",
+      "sha256": "d380a101d187a5c1524d9258b81f227fd4de194528ee95b4e90086ea9a891916",
+      "sourceRefs": [
+        {
+          "sourceDocumentId": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+          "relativePath": "试卷/真题/2024.06六级英语第3套解析.pdf",
+          "sha256": "06c8b22207ae38ad2542b91ac9cd880fb2a8d63e7cf8c0d4b884ca0ff71584c0",
+          "locator": {
+            "page": 12
+          },
+          "extractionMethod": "manual-review",
+          "confidence": 1
+        }
+      ]
+    }
+  ],
   "sourceRefs": [
     {
       "sourceDocumentId": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
-      "relativePath": "2024.06六级真题第3套【可复制可检索】.docx；2024年6月第3套英语六级真题解析.pdf",
+      "relativePath": "试卷/真题/2024.06六级真题第3套【可复制可检索】.docx",
       "sha256": "3f51de5990886046286f1dba57c29ca6319bdd40079a320608025c037fde03a4",
       "locator": {},
-      "extractionMethod": "manual-review",
-      "confidence": 0.86
+      "extractionMethod": "docx-xml",
+      "confidence": 1
     }
   ],
   "quality": {
-    "structureStatus": "review_required",
-    "structureConfidence": 0.72,
-    "issueCount": 1,
-    "issues": [
-      "原始资料注明部分题目与其他套相同，未重复列出"
-    ]
+    "structureStatus": "approved",
+    "structureConfidence": 1,
+    "issueCount": 0,
+    "issues": []
   }
 }

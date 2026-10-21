@@ -1,26 +1,109 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-06T14:19:22.459Z",
+  "generatedAt": "2026-10-21T14:39:50.966Z",
   "entries": [
     {
       "id": "practice-cet6-reading",
       "kind": "practice",
-      "title": "大学英语六级阅读专项训练",
+      "title": "大学英语六级仔细阅读专项训练",
       "year": "历年",
       "region": "全国",
       "variant": "",
-      "questionCount": 84,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 710,
+      "answeredCount": 710,
+      "explanationCount": 710,
+      "answerStatus": "answered",
       "questionTypes": [
-        "short_answer",
         "single_choice"
       ],
       "href": "/cet6/practice-cet6-reading",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.84,
+        "structureConfidence": 1,
+        "issueCount": 0
+      }
+    },
+    {
+      "id": "practice-cet6-matching",
+      "kind": "practice",
+      "title": "大学英语六级长篇阅读专项训练",
+      "year": "历年",
+      "region": "全国",
+      "variant": "",
+      "questionCount": 710,
+      "answeredCount": 710,
+      "explanationCount": 710,
+      "answerStatus": "answered",
+      "questionTypes": [
+        "shared_option_matching"
+      ],
+      "href": "/cet6/practice-cet6-matching",
+      "quality": {
+        "structureStatus": "approved",
+        "structureConfidence": 1,
+        "issueCount": 0
+      }
+    },
+    {
+      "id": "practice-cet6-cloze",
+      "kind": "practice",
+      "title": "大学英语六级选词填空专项训练",
+      "year": "历年",
+      "region": "全国",
+      "variant": "",
+      "questionCount": 710,
+      "answeredCount": 710,
+      "explanationCount": 710,
+      "answerStatus": "answered",
+      "questionTypes": [
+        "shared_option_matching"
+      ],
+      "href": "/cet6/practice-cet6-cloze",
+      "quality": {
+        "structureStatus": "approved",
+        "structureConfidence": 1,
+        "issueCount": 0
+      }
+    },
+    {
+      "id": "practice-cet6-writing",
+      "kind": "practice",
+      "title": "大学英语六级写作专项训练",
+      "year": "历年",
+      "region": "全国",
+      "variant": "",
+      "questionCount": 76,
+      "answeredCount": 76,
+      "explanationCount": 76,
+      "answerStatus": "answered",
+      "questionTypes": [
+        "essay"
+      ],
+      "href": "/cet6/practice-cet6-writing",
+      "quality": {
+        "structureStatus": "approved",
+        "structureConfidence": 1,
+        "issueCount": 0
+      }
+    },
+    {
+      "id": "practice-cet6-listening",
+      "kind": "practice",
+      "title": "大学英语六级听力专项训练",
+      "year": "历年",
+      "region": "全国",
+      "variant": "",
+      "questionCount": 1225,
+      "answeredCount": 1225,
+      "explanationCount": 1225,
+      "answerStatus": "answered",
+      "questionTypes": [
+        "single_choice"
+      ],
+      "href": "/cet6/practice-cet6-listening",
+      "quality": {
+        "structureStatus": "approved",
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -31,17 +114,17 @@
       "year": "历年",
       "region": "全国",
       "variant": "",
-      "questionCount": 1,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 76,
+      "answeredCount": 76,
+      "explanationCount": 76,
+      "answerStatus": "answered",
       "questionTypes": [
         "translation"
       ],
       "href": "/cet6/practice-cet6-translation",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.84,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -52,21 +135,69 @@
       "year": "2026",
       "region": "全国",
       "variant": "第3套",
-      "questionCount": 22,
-      "answeredCount": 2,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 32,
+      "answeredCount": 32,
+      "explanationCount": 32,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
-        "short_answer",
+        "shared_option_matching",
         "single_choice",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2026063",
       "quality": {
-        "structureStatus": "review_required",
-        "structureConfidence": 0.72,
-        "issueCount": 1
+        "structureStatus": "approved",
+        "structureConfidence": 1,
+        "issueCount": 0
+      }
+    },
+    {
+      "id": "cet6-paper-2026062",
+      "kind": "paper",
+      "title": "2026年6月大学英语六级真题 · 第2套",
+      "year": "2026",
+      "region": "全国",
+      "variant": "第2套",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
+      "questionTypes": [
+        "essay",
+        "single_choice",
+        "shared_option_matching",
+        "translation"
+      ],
+      "href": "/cet6/cet6-paper-2026062",
+      "quality": {
+        "structureStatus": "approved",
+        "structureConfidence": 1,
+        "issueCount": 0
+      }
+    },
+    {
+      "id": "cet6-paper-2026061",
+      "kind": "paper",
+      "title": "2026年6月大学英语六级真题 · 第1套",
+      "year": "2026",
+      "region": "全国",
+      "variant": "第1套",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
+      "questionTypes": [
+        "essay",
+        "single_choice",
+        "shared_option_matching",
+        "translation"
+      ],
+      "href": "/cet6/cet6-paper-2026061",
+      "quality": {
+        "structureStatus": "approved",
+        "structureConfidence": 1,
+        "issueCount": 0
       }
     },
     {
@@ -76,21 +207,21 @@
       "year": "2025",
       "region": "全国",
       "variant": "第3套",
-      "questionCount": 22,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 32,
+      "answeredCount": 32,
+      "explanationCount": 32,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
-        "short_answer",
+        "shared_option_matching",
         "single_choice",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2025123",
       "quality": {
-        "structureStatus": "review_required",
-        "structureConfidence": 0.72,
-        "issueCount": 1
+        "structureStatus": "approved",
+        "structureConfidence": 1,
+        "issueCount": 0
       }
     },
     {
@@ -100,20 +231,20 @@
       "year": "2025",
       "region": "全国",
       "variant": "第2套",
-      "questionCount": 47,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2025122",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -124,20 +255,20 @@
       "year": "2025",
       "region": "全国",
       "variant": "第1套",
-      "questionCount": 47,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2025121",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -148,21 +279,21 @@
       "year": "2025",
       "region": "全国",
       "variant": "第3套",
-      "questionCount": 22,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 32,
+      "answeredCount": 32,
+      "explanationCount": 32,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
-        "short_answer",
+        "shared_option_matching",
         "single_choice",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2025063",
       "quality": {
-        "structureStatus": "review_required",
-        "structureConfidence": 0.72,
-        "issueCount": 1
+        "structureStatus": "approved",
+        "structureConfidence": 1,
+        "issueCount": 0
       }
     },
     {
@@ -172,20 +303,20 @@
       "year": "2025",
       "region": "全国",
       "variant": "第2套",
-      "questionCount": 48,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2025062",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -196,20 +327,20 @@
       "year": "2025",
       "region": "全国",
       "variant": "第1套",
-      "questionCount": 47,
-      "answeredCount": 1,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2025061",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -220,19 +351,20 @@
       "year": "2024",
       "region": "全国",
       "variant": "第3套",
-      "questionCount": 21,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 32,
+      "answeredCount": 32,
+      "explanationCount": 32,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
-        "short_answer",
-        "single_choice"
+        "shared_option_matching",
+        "single_choice",
+        "translation"
       ],
       "href": "/cet6/cet6-paper-2024123",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -243,19 +375,20 @@
       "year": "2024",
       "region": "全国",
       "variant": "第2套",
-      "questionCount": 39,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "short_answer"
+        "shared_option_matching",
+        "translation"
       ],
       "href": "/cet6/cet6-paper-2024122",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -266,19 +399,20 @@
       "year": "2024",
       "region": "全国",
       "variant": "第1套",
-      "questionCount": 38,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "short_answer"
+        "shared_option_matching",
+        "translation"
       ],
       "href": "/cet6/cet6-paper-2024121",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -290,21 +424,20 @@
       "region": "全国",
       "variant": "第3套",
       "questionCount": 32,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "answeredCount": 32,
+      "explanationCount": 32,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
-        "inline_fill",
-        "short_answer",
+        "shared_option_matching",
         "single_choice",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2024063",
       "quality": {
-        "structureStatus": "review_required",
-        "structureConfidence": 0.72,
-        "issueCount": 1
+        "structureStatus": "approved",
+        "structureConfidence": 1,
+        "issueCount": 0
       }
     },
     {
@@ -315,20 +448,19 @@
       "region": "全国",
       "variant": "第2套",
       "questionCount": 57,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "inline_fill",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2024062",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -340,20 +472,19 @@
       "region": "全国",
       "variant": "第1套",
       "questionCount": 57,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "inline_fill",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2024061",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -365,21 +496,20 @@
       "region": "全国",
       "variant": "第3套",
       "questionCount": 32,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "answeredCount": 32,
+      "explanationCount": 32,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
-        "inline_fill",
-        "short_answer",
+        "shared_option_matching",
         "single_choice",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2023123",
       "quality": {
-        "structureStatus": "review_required",
-        "structureConfidence": 0.72,
-        "issueCount": 1
+        "structureStatus": "approved",
+        "structureConfidence": 1,
+        "issueCount": 0
       }
     },
     {
@@ -390,20 +520,19 @@
       "region": "全国",
       "variant": "第2套",
       "questionCount": 57,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "inline_fill",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2023122",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -415,20 +544,19 @@
       "region": "全国",
       "variant": "第1套",
       "questionCount": 57,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "inline_fill",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2023121",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -440,21 +568,20 @@
       "region": "全国",
       "variant": "第3套",
       "questionCount": 32,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "answeredCount": 32,
+      "explanationCount": 32,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
-        "inline_fill",
-        "short_answer",
+        "shared_option_matching",
         "single_choice",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2023063",
       "quality": {
-        "structureStatus": "review_required",
-        "structureConfidence": 0.72,
-        "issueCount": 1
+        "structureStatus": "approved",
+        "structureConfidence": 1,
+        "issueCount": 0
       }
     },
     {
@@ -465,20 +592,19 @@
       "region": "全国",
       "variant": "第2套",
       "questionCount": 57,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "inline_fill",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2023062",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -490,20 +616,19 @@
       "region": "全国",
       "variant": "第1套",
       "questionCount": 57,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "inline_fill",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2023061",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -515,18 +640,18 @@
       "region": "全国",
       "variant": "第3套",
       "questionCount": 2,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "answeredCount": 2,
+      "explanationCount": 2,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2023033",
       "quality": {
-        "structureStatus": "review_required",
-        "structureConfidence": 0.72,
-        "issueCount": 1
+        "structureStatus": "approved",
+        "structureConfidence": 1,
+        "issueCount": 0
       }
     },
     {
@@ -537,18 +662,18 @@
       "region": "全国",
       "variant": "第2套",
       "questionCount": 2,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "answeredCount": 2,
+      "explanationCount": 2,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2023032",
       "quality": {
-        "structureStatus": "review_required",
-        "structureConfidence": 0.72,
-        "issueCount": 1
+        "structureStatus": "approved",
+        "structureConfidence": 1,
+        "issueCount": 0
       }
     },
     {
@@ -559,20 +684,19 @@
       "region": "全国",
       "variant": "第1套",
       "questionCount": 57,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "inline_fill",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2023031",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -584,21 +708,20 @@
       "region": "全国",
       "variant": "第3套",
       "questionCount": 32,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "answeredCount": 32,
+      "explanationCount": 32,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
-        "inline_fill",
-        "short_answer",
+        "shared_option_matching",
         "single_choice",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2022123",
       "quality": {
-        "structureStatus": "review_required",
-        "structureConfidence": 0.72,
-        "issueCount": 1
+        "structureStatus": "approved",
+        "structureConfidence": 1,
+        "issueCount": 0
       }
     },
     {
@@ -609,20 +732,19 @@
       "region": "全国",
       "variant": "第2套",
       "questionCount": 57,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "inline_fill",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2022122",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -634,20 +756,19 @@
       "region": "全国",
       "variant": "第1套",
       "questionCount": 57,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "inline_fill",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2022121",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -659,18 +780,18 @@
       "region": "全国",
       "variant": "第3套",
       "questionCount": 2,
-      "answeredCount": 1,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "answeredCount": 2,
+      "explanationCount": 2,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2022093",
       "quality": {
-        "structureStatus": "review_required",
-        "structureConfidence": 0.72,
-        "issueCount": 1
+        "structureStatus": "approved",
+        "structureConfidence": 1,
+        "issueCount": 0
       }
     },
     {
@@ -680,18 +801,19 @@
       "year": "2022",
       "region": "全国",
       "variant": "第2套",
-      "questionCount": 1,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 2,
+      "answeredCount": 2,
+      "explanationCount": 2,
+      "answerStatus": "answered",
       "questionTypes": [
+        "essay",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2022092",
       "quality": {
-        "structureStatus": "review_required",
-        "structureConfidence": 0.72,
-        "issueCount": 1
+        "structureStatus": "approved",
+        "structureConfidence": 1,
+        "issueCount": 0
       }
     },
     {
@@ -701,19 +823,20 @@
       "year": "2022",
       "region": "全国",
       "variant": "第1套",
-      "questionCount": 46,
-      "answeredCount": 1,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
+        "essay",
         "single_choice",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2022091",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -725,9 +848,9 @@
       "region": "全国",
       "variant": "第3套",
       "questionCount": 2,
-      "answeredCount": 1,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "answeredCount": 2,
+      "explanationCount": 2,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "translation"
@@ -735,7 +858,7 @@
       "href": "/cet6/cet6-paper-2022063",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -746,20 +869,20 @@
       "year": "2022",
       "region": "全国",
       "variant": "第2套",
-      "questionCount": 22,
-      "answeredCount": 1,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 32,
+      "answeredCount": 32,
+      "explanationCount": 32,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
-        "short_answer",
+        "shared_option_matching",
         "single_choice",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2022062",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -770,20 +893,20 @@
       "year": "2022",
       "region": "全国",
       "variant": "第1套",
-      "questionCount": 22,
-      "answeredCount": 1,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
-        "short_answer",
         "single_choice",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2022061",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -794,20 +917,20 @@
       "year": "2021",
       "region": "全国",
       "variant": "第3套",
-      "questionCount": 23,
-      "answeredCount": 1,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 32,
+      "answeredCount": 32,
+      "explanationCount": 32,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
-        "short_answer",
+        "shared_option_matching",
         "single_choice",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2021123",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -818,20 +941,20 @@
       "year": "2021",
       "region": "全国",
       "variant": "第2套",
-      "questionCount": 47,
-      "answeredCount": 1,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2021122",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -842,20 +965,20 @@
       "year": "2021",
       "region": "全国",
       "variant": "第1套",
-      "questionCount": 47,
-      "answeredCount": 1,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2021121",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -867,21 +990,20 @@
       "region": "全国",
       "variant": "第3套",
       "questionCount": 32,
-      "answeredCount": 7,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "answeredCount": 32,
+      "explanationCount": 32,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
-        "inline_fill",
-        "short_answer",
+        "shared_option_matching",
         "single_choice",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2021063",
       "quality": {
-        "structureStatus": "review_required",
-        "structureConfidence": 0.72,
-        "issueCount": 1
+        "structureStatus": "approved",
+        "structureConfidence": 1,
+        "issueCount": 0
       }
     },
     {
@@ -892,20 +1014,19 @@
       "region": "全国",
       "variant": "第2套",
       "questionCount": 57,
-      "answeredCount": 10,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "inline_fill",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2021062",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -917,20 +1038,19 @@
       "region": "全国",
       "variant": "第1套",
       "questionCount": 57,
-      "answeredCount": 13,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "inline_fill",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2021061",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -941,20 +1061,20 @@
       "year": "2020",
       "region": "全国",
       "variant": "第3套",
-      "questionCount": 24,
-      "answeredCount": 3,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 32,
+      "answeredCount": 32,
+      "explanationCount": 32,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
-        "short_answer",
+        "shared_option_matching",
         "single_choice",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2020123",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -965,20 +1085,20 @@
       "year": "2020",
       "region": "全国",
       "variant": "第2套",
-      "questionCount": 52,
-      "answeredCount": 30,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2020122",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -989,20 +1109,20 @@
       "year": "2020",
       "region": "全国",
       "variant": "第1套",
-      "questionCount": 52,
-      "answeredCount": 31,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2020121",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -1013,18 +1133,20 @@
       "year": "2020",
       "region": "全国",
       "variant": "第3套",
-      "questionCount": 2,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 32,
+      "answeredCount": 32,
+      "explanationCount": 32,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
+        "shared_option_matching",
+        "single_choice",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2020093",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -1036,20 +1158,19 @@
       "region": "全国",
       "variant": "第2套",
       "questionCount": 32,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "answeredCount": 32,
+      "explanationCount": 32,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
-        "inline_fill",
-        "short_answer",
+        "shared_option_matching",
         "single_choice",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2020092",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -1060,20 +1181,44 @@
       "year": "2020",
       "region": "全国",
       "variant": "第1套",
-      "questionCount": 56,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
+        "essay",
         "single_choice",
-        "inline_fill",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2020091",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
+        "issueCount": 0
+      }
+    },
+    {
+      "id": "cet6-paper-2020071",
+      "kind": "paper",
+      "title": "2020年7月大学英语六级真题 · 第1套",
+      "year": "2020",
+      "region": "全国",
+      "variant": "第1套",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
+      "questionTypes": [
+        "essay",
+        "single_choice",
+        "shared_option_matching",
+        "translation"
+      ],
+      "href": "/cet6/cet6-paper-2020071",
+      "quality": {
+        "structureStatus": "approved",
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -1084,20 +1229,20 @@
       "year": "2019",
       "region": "全国",
       "variant": "第3套",
-      "questionCount": 15,
-      "answeredCount": 1,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 32,
+      "answeredCount": 32,
+      "explanationCount": 32,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
-        "short_answer",
+        "shared_option_matching",
         "single_choice",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2019123",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -1108,21 +1253,20 @@
       "year": "2019",
       "region": "全国",
       "variant": "第2套",
-      "questionCount": 53,
-      "answeredCount": 32,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
         "shared_option_matching",
-        "short_answer",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2019122",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -1134,20 +1278,19 @@
       "region": "全国",
       "variant": "第1套",
       "questionCount": 57,
-      "answeredCount": 36,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
         "shared_option_matching",
-        "short_answer",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2019121",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -1159,20 +1302,19 @@
       "region": "全国",
       "variant": "第3套",
       "questionCount": 32,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "answeredCount": 32,
+      "explanationCount": 32,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
-        "inline_fill",
-        "short_answer",
+        "shared_option_matching",
         "single_choice",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2019063",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -1184,20 +1326,19 @@
       "region": "全国",
       "variant": "第2套",
       "questionCount": 57,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "inline_fill",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2019062",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -1209,20 +1350,19 @@
       "region": "全国",
       "variant": "第1套",
       "questionCount": 57,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "inline_fill",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2019061",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -1233,20 +1373,20 @@
       "year": "2018",
       "region": "全国",
       "variant": "第3套",
-      "questionCount": 13,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 32,
+      "answeredCount": 32,
+      "explanationCount": 32,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
-        "inline_fill",
+        "shared_option_matching",
         "single_choice",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2018123",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -1257,20 +1397,20 @@
       "year": "2018",
       "region": "全国",
       "variant": "第2套",
-      "questionCount": 30,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2018122",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -1281,21 +1421,20 @@
       "year": "2018",
       "region": "全国",
       "variant": "第1套",
-      "questionCount": 40,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "inline_fill",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2018121",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -1307,20 +1446,19 @@
       "region": "全国",
       "variant": "第3套",
       "questionCount": 32,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "answeredCount": 32,
+      "explanationCount": 32,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
-        "inline_fill",
-        "short_answer",
+        "shared_option_matching",
         "single_choice",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2018063",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -1331,20 +1469,20 @@
       "year": "2018",
       "region": "全国",
       "variant": "第2套",
-      "questionCount": 47,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2018062",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -1355,20 +1493,20 @@
       "year": "2018",
       "region": "全国",
       "variant": "第1套",
-      "questionCount": 47,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2018061",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -1379,20 +1517,20 @@
       "year": "2017",
       "region": "全国",
       "variant": "第3套",
-      "questionCount": 22,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 32,
+      "answeredCount": 32,
+      "explanationCount": 32,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
-        "short_answer",
+        "shared_option_matching",
         "single_choice",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2017123",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -1403,20 +1541,20 @@
       "year": "2017",
       "region": "全国",
       "variant": "第2套",
-      "questionCount": 47,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2017122",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -1427,20 +1565,20 @@
       "year": "2017",
       "region": "全国",
       "variant": "第1套",
-      "questionCount": 47,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2017121",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -1452,20 +1590,19 @@
       "region": "全国",
       "variant": "第3套",
       "questionCount": 32,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "answeredCount": 32,
+      "explanationCount": 32,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
-        "inline_fill",
-        "short_answer",
+        "shared_option_matching",
         "single_choice",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2017063",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -1477,20 +1614,19 @@
       "region": "全国",
       "variant": "第2套",
       "questionCount": 57,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "inline_fill",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2017062",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -1502,20 +1638,19 @@
       "region": "全国",
       "variant": "第1套",
       "questionCount": 57,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "inline_fill",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet6/cet6-paper-2017061",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -1526,19 +1661,20 @@
       "year": "2016",
       "region": "全国",
       "variant": "第3套",
-      "questionCount": 30,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 32,
+      "answeredCount": 32,
+      "explanationCount": 32,
+      "answerStatus": "answered",
       "questionTypes": [
-        "inline_fill",
-        "short_answer",
-        "single_choice"
+        "essay",
+        "shared_option_matching",
+        "single_choice",
+        "translation"
       ],
       "href": "/cet6/cet6-paper-2016123",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -1549,20 +1685,20 @@
       "year": "2016",
       "region": "全国",
       "variant": "第2套",
-      "questionCount": 48,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "inline_fill",
-        "short_answer"
+        "shared_option_matching",
+        "translation"
       ],
       "href": "/cet6/cet6-paper-2016122",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -1573,20 +1709,20 @@
       "year": "2016",
       "region": "全国",
       "variant": "第1套",
-      "questionCount": 48,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "inline_fill",
-        "short_answer"
+        "shared_option_matching",
+        "translation"
       ],
       "href": "/cet6/cet6-paper-2016121",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -1597,19 +1733,20 @@
       "year": "2016",
       "region": "全国",
       "variant": "第3套",
-      "questionCount": 30,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 32,
+      "answeredCount": 32,
+      "explanationCount": 32,
+      "answerStatus": "answered",
       "questionTypes": [
-        "inline_fill",
-        "short_answer",
-        "single_choice"
+        "essay",
+        "shared_option_matching",
+        "single_choice",
+        "translation"
       ],
       "href": "/cet6/cet6-paper-2016063",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -1620,18 +1757,20 @@
       "year": "2016",
       "region": "全国",
       "variant": "第2套",
-      "questionCount": 39,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
+        "essay",
         "single_choice",
-        "short_answer"
+        "shared_option_matching",
+        "translation"
       ],
       "href": "/cet6/cet6-paper-2016062",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -1642,19 +1781,20 @@
       "year": "2016",
       "region": "全国",
       "variant": "第1套",
-      "questionCount": 55,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
+        "essay",
         "single_choice",
-        "inline_fill",
-        "short_answer"
+        "shared_option_matching",
+        "translation"
       ],
       "href": "/cet6/cet6-paper-2016061",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -1665,19 +1805,20 @@
       "year": "2015",
       "region": "全国",
       "variant": "第3套",
-      "questionCount": 53,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
+        "essay",
         "single_choice",
-        "inline_fill",
-        "short_answer"
+        "shared_option_matching",
+        "translation"
       ],
       "href": "/cet6/cet6-paper-2015123",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -1688,20 +1829,20 @@
       "year": "2015",
       "region": "全国",
       "variant": "第2套",
-      "questionCount": 51,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "inline_fill",
-        "short_answer"
+        "shared_option_matching",
+        "translation"
       ],
       "href": "/cet6/cet6-paper-2015122",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -1712,19 +1853,20 @@
       "year": "2015",
       "region": "全国",
       "variant": "第1套",
-      "questionCount": 50,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
+        "essay",
         "single_choice",
-        "inline_fill",
-        "short_answer"
+        "shared_option_matching",
+        "translation"
       ],
       "href": "/cet6/cet6-paper-2015121",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -1735,20 +1877,20 @@
       "year": "2015",
       "region": "全国",
       "variant": "第3套",
-      "questionCount": 48,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "inline_fill",
-        "short_answer"
+        "shared_option_matching",
+        "translation"
       ],
       "href": "/cet6/cet6-paper-2015063",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -1759,20 +1901,20 @@
       "year": "2015",
       "region": "全国",
       "variant": "第2套",
-      "questionCount": 55,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "inline_fill",
-        "short_answer"
+        "shared_option_matching",
+        "translation"
       ],
       "href": "/cet6/cet6-paper-2015062",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     },
@@ -1783,20 +1925,20 @@
       "year": "2015",
       "region": "全国",
       "variant": "第1套",
-      "questionCount": 45,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "inline_fill",
-        "short_answer"
+        "shared_option_matching",
+        "translation"
       ],
       "href": "/cet6/cet6-paper-2015061",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
+        "structureConfidence": 1,
         "issueCount": 0
       }
     }

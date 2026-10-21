@@ -147,8 +147,9 @@ function validateAnswerSpec(answerSpec, question, path, errors, optionIds, blank
     if (question.type === "single_choice" && !optionIds.has(answer)) add(errors, `${path}.acceptedAnswers`, `references unknown option ${answer}`);
   }
   if (answerSpec.availability === "answered" && question.type === "multi_choice" && (answerSpec.kind !== "multi_choice" || (answerSpec.acceptedAnswers || []).length < 1)) add(errors, path, "answered multi_choice requires kind=multi_choice and acceptedAnswers");
-  if (answerSpec.availability === "answered" && question.type === "single_choice" && answerSpec.kind !== "choice") add(errors, path, "answered single_choice requires kind=choice");
-  if (answerSpec.availability === "answered" && question.type === "shared_option_matching" && answerSpec.kind !== "choice") add(errors, path, "answered shared_option_matching requires kind=choice");
+  const manualReference = answerSpec.gradingMode === "manual" && answerSpec.kind === "reference" && (typeof answerSpec.referenceAnswer === "string" ? answerSpec.referenceAnswer.trim().length > 0 : Array.isArray(answerSpec.referenceAnswer) && answerSpec.referenceAnswer.length > 0);
+  if (answerSpec.availability === "answered" && question.type === "single_choice" && answerSpec.kind !== "choice" && !manualReference) add(errors, path, "answered single_choice requires a choice or manual source reference");
+  if (answerSpec.availability === "answered" && question.type === "shared_option_matching" && answerSpec.kind !== "choice" && !manualReference) add(errors, path, "answered shared_option_matching requires a choice or manual source reference");
   if (["inline_fill", "multi_blank", "table_fill"].includes(question.type)) {
     if (answerSpec.kind !== "per_blank") add(errors, path, "blank questions require kind=per_blank");
     if (!isObject(answerSpec.perBlankAnswers)) add(errors, `${path}.perBlankAnswers`, "must be an object");

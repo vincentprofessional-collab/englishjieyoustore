@@ -70,9 +70,8 @@ const STUDY_NAV_GROUPS: StudyNavGroup[] = [
     { href: "/cet4?entry=papers", label: "历年试卷" },
   ], href: "/cet4", id: "cet4", label: "四级英语", mark: "四" },
   { children: [
-    { href: "/cet6?entry=knowledge", label: "知识点" },
     { href: "/cet6?entry=practice", label: "题型训练" },
-    { href: "/cet6?entry=papers", label: "历年试卷" },
+    { href: "/cet6?entry=papers", label: "历年真题" },
   ], href: "/cet6", id: "cet6", label: "六级英语", mark: "六" },
   { children: [], disabled: true, href: "", id: "postgraduate", label: "考研英语", mark: "研" },
   {
