@@ -57,6 +57,9 @@ function plainText(blocks: SeniorHighBlock[] | undefined): string {
 }
 
 function displayNumber(question: SeniorHighQuestion, _kind: SeniorHighSet["kind"]) {
+  if (question.id.startsWith("cet6-paper-") && question.type === "essay") return "写作";
+  if (question.id.startsWith("cet6-paper-") && question.type === "translation") return "翻译";
+  if (question.id.startsWith("cet6-paper-") && question.sourceQuestionNumber) return question.sourceQuestionNumber;
   return question.displayNumber;
 }
 
@@ -269,7 +272,7 @@ function BlockRenderer({
     if (block.type === "image") {
       if (hideWritingImages && block.alt.trim().toLowerCase() === "source image") return null;
       const asset = assets.get(block.assetId);
-      return asset ? <figure className="senior-high-v2-figure" key={key}><img alt={block.alt} src={asset.url} />{block.caption ? <figcaption>{block.caption}</figcaption> : null}</figure> : null;
+      return asset ? <figure className="senior-high-v2-figure" key={key}>{asset.assetId.startsWith("page-clean-v5-") ? <a aria-label={`${block.alt}（打开清晰原页）`} href={asset.url} rel="noreferrer" target="_blank"><img alt={block.alt} decoding="async" loading="lazy" src={asset.url} /></a> : <img alt={block.alt} decoding="async" loading="lazy" src={asset.url} />}{block.caption ? <figcaption>{block.caption}</figcaption> : null}</figure> : null;
     }
     if (block.type === "audio") {
       const asset = assets.get(block.assetId);
@@ -305,19 +308,21 @@ function Feedback({
     conflict: "答案存在冲突，待人工复核",
     correct: "✓ 正确",
     incorrect: "✕ 未答对",
-    manual: "已提交，请对照参考答案自行评阅",
+    manual: ["essay", "translation"].includes(question.type) ? "已提交，请对照参考答案自行评阅" : "已提交，请展开原解析核对答案",
     none: "已提交，暂无标准答案",
     unanswered: "未作答",
   };
   const answer = seniorHighCorrectAnswer(question);
   const hasReference = question.answerSpec.kind === "reference" && question.answerSpec.referenceAnswer;
+  const sourceReference = Array.isArray(question.answerSpec.referenceAnswer) && question.answerSpec.referenceAnswer.every(block => block.type === "image");
+  const sourcePageAnalysis = question.explanationBlocks.length > 0 && question.explanationBlocks.every(block => block.type === "image" && block.caption?.startsWith("原解析"));
   return <div className={`senior-high-feedback ${grade}`}>
     <span>{labels[grade]}</span>
     {answer ? <strong>答案：{answer}</strong> : null}
     {hasReference ? <strong>参考答案／范文见下方</strong> : null}
     {question.explanationBlocks.length === 0 && !hasReference ? <small>{answer ? "暂无解析" : ""}</small> : null}
-    {hasReference ? <div className="senior-high-analysis"><BlockRenderer answers={answers} assets={assets} bindings={bindings} blocks={Array.isArray(question.answerSpec.referenceAnswer) ? question.answerSpec.referenceAnswer : [{ type: "paragraph", runs: [{ type: "text", text: question.answerSpec.referenceAnswer || "" }] }]} kind={kind} onAnswer={onAnswer} /></div> : null}
-    {question.explanationBlocks.length > 0 ? <div className="senior-high-analysis"><BlockRenderer answers={answers} assets={assets} bindings={bindings} blocks={question.explanationBlocks} kind={kind} onAnswer={onAnswer} /></div> : null}
+    {hasReference ? sourceReference ? <details className="senior-high-analysis"><summary>查看参考答案与解析</summary><BlockRenderer answers={answers} assets={assets} bindings={bindings} blocks={question.answerSpec.referenceAnswer as SeniorHighBlock[]} kind={kind} onAnswer={onAnswer} /></details> : <div className="senior-high-analysis"><BlockRenderer answers={answers} assets={assets} bindings={bindings} blocks={Array.isArray(question.answerSpec.referenceAnswer) ? question.answerSpec.referenceAnswer : [{ type: "paragraph", runs: [{ type: "text", text: question.answerSpec.referenceAnswer || "" }] }]} kind={kind} onAnswer={onAnswer} /></div> : null}
+    {sourcePageAnalysis ? <details className="senior-high-analysis"><summary>查看原题解析</summary><BlockRenderer answers={answers} assets={assets} bindings={bindings} blocks={question.explanationBlocks} kind={kind} onAnswer={onAnswer} /></details> : question.explanationBlocks.length > 0 ? <div className="senior-high-analysis"><BlockRenderer answers={answers} assets={assets} bindings={bindings} blocks={question.explanationBlocks} kind={kind} onAnswer={onAnswer} /></div> : null}
   </div>;
 }
 
@@ -345,6 +350,9 @@ function QuestionCard({
   const grade = gradeSeniorHighQuestion(question, answers);
   if (inlineOnly) return submitted ? <div className="senior-high-v2-inline-feedback" key={question.id}><b>第 {displayNumber(question, kind)} 题</b><Feedback answers={answers} assets={assets} bindings={bindings} grade={grade} kind={kind} onAnswer={onAnswer} question={question} /></div> : null;
   const value = answers[question.id] || "";
+  const typeLabel = question.id.startsWith("cet6-paper-") && question.type === "shared_option_matching" ? Number(question.sourceQuestionNumber ?? question.displayNumber) <= 35 ? "选词填空" : "长篇阅读（段落匹配）" : TYPE_LABELS[question.type] || question.type;
+  const shownNumber = displayNumber(question, kind);
+  const numberLabel = typeof shownNumber === "string" ? shownNumber : `第 ${shownNumber} 题`;
   const selected = new Set(value.split(",").filter(Boolean));
   const correctOptionIds = new Set((question.answerSpec.acceptedAnswers || []).map((optionId) => optionId.trim().toUpperCase()));
   const hasChoiceAnswer = question.answerSpec.kind === "choice" && correctOptionIds.size > 0;
@@ -370,7 +378,7 @@ function QuestionCard({
   };
   const markedWords = new Set((answers[`${question.id}:marked`] || "").split(",").filter(Boolean));
   return <article className="senior-high-question-card" id={question.id}>
-    <div className="senior-high-question-meta"><span>第 {displayNumber(question, kind)} 题</span><small>{TYPE_LABELS[question.type] || question.type}</small></div>
+    <div className="senior-high-question-meta"><span>{numberLabel}</span><small>{typeLabel}</small></div>
     {promptBlocks.length > 0 ? <div className={`senior-high-v2-question-prompt${embeddedWriting ? " senior-high-writing-prompt" : ""}`}>{embeddedWriting ? writingPieces.map((piece) => piece.kind === "blocks" ? <BlockRenderer answers={answers} assets={assets} bindings={bindings} blocks={piece.blocks} kind={kind} key={`writing-blocks-${piece.blocks[0]?.id || piece.blocks.length}`} onAnswer={onAnswer} revealSolutions={submitted} hideWritingImages={question.type === "essay"} hideWritingLines /> : <textarea aria-label={`第 ${displayNumber(question, kind)} 题正文第 ${piece.index + 1} 段`} className="senior-high-answer-input senior-high-writing-input" data-senior-high-writing-input="true" key={`writing-input-${piece.index}`} onChange={(event) => updateWriting(piece.index, event.target.value)} placeholder={writingPlaceholder} rows={6} value={writingValues[piece.index]} />) : <BlockRenderer answers={answers} assets={assets} bindings={bindings} blocks={promptBlocks} kind={kind} onAnswer={onAnswer} revealSolutions={submitted} hideWritingImages={question.type === "essay"} hideWritingLines={textInput} />}</div> : null}
     {question.options.length > 0 ? <div className="senior-high-options">{question.options.map((option) => { const isSelected = selected.has(option.id); const isCorrect = correctOptionIds.has(option.id.trim().toUpperCase()); const optionState = showChoiceFeedback && isCorrect ? "correct-option" : showChoiceFeedback && isSelected ? "incorrect-option" : isSelected ? "selected" : ""; return <button aria-pressed={isSelected} className={optionState} key={option.id} onClick={() => choose(option.id)} type="button"><b>{option.label}.</b><span>{plainText(option.blocks)}</span>{showChoiceFeedback && isCorrect ? <strong aria-label="正确选项" className="senior-high-option-status">✓</strong> : null}{showChoiceFeedback && isSelected && !isCorrect ? <strong aria-label="回答错误" className="senior-high-option-status">×</strong> : null}</button>; })}</div> : null}
     {question.correctionStatement ? <div className="senior-high-correction"><small>点击句中词语划线标错，再在下方说明原因；再次点击可取消。</small><p>{question.correctionStatement.split(/\s+/).map((word, index) => <Fragment key={index}><button aria-pressed={markedWords.has(String(index))} className={markedWords.has(String(index)) ? "marked" : ""} onClick={() => { const next = new Set(markedWords); if (next.has(String(index))) next.delete(String(index)); else next.add(String(index)); onAnswer(`${question.id}:marked`, [...next].sort((a, b) => Number(a) - Number(b)).join(",")); }} type="button">{word}</button>{" "}</Fragment>)}</p></div> : null}
@@ -387,10 +395,11 @@ export function SeniorHighRunner({ kind, setId, basePath = "/senior-high", backH
   const [restored, setRestored] = useState(false);
   const [error, setError] = useState("");
   const [openQuestionGroup, setOpenQuestionGroup] = useState<number | null>(null);
+  const [practiceSection, setPracticeSection] = useState("");
   const storageKey = `${storageNamespace}:${kind}:${setId}`;
 
   useEffect(() => {
-    fetch(`/senior-high/${kind === "paper" ? "papers" : "practice"}/${setId}.json`)
+    fetch(`${basePath}/${kind === "paper" ? "papers" : "practice"}/${setId}.json`)
       .then((response) => {
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         return response.json() as Promise<SeniorHighSet>;
@@ -406,7 +415,7 @@ export function SeniorHighRunner({ kind, setId, basePath = "/senior-high", backH
     } finally {
       setRestored(true);
     }
-  }, [setId, storageKey]);
+  }, [basePath, setId, storageKey]);
 
   useEffect(() => {
     if (restored) window.localStorage.setItem(storageKey, JSON.stringify({ answers, submittedGroups }));
@@ -448,9 +457,15 @@ export function SeniorHighRunner({ kind, setId, basePath = "/senior-high", backH
       };
     });
     return () => observers.forEach((disconnect) => disconnect?.());
-  }, [data, submittedGroups]);
+  }, [data, submittedGroups, practiceSection]);
 
-  const questions = useMemo(() => data?.sections.flatMap((section) => section.groups.flatMap((group) => group.questions)).filter((question) => question.type !== "instruction_only") || [], [data]);
+  const selectPracticePaper = basePath === "/cet6" && kind === "practice";
+  const visibleSections = useMemo(() => {
+    const sections = data?.sections || [];
+    const selected = sections.find(section => section.id === practiceSection) || sections.at(-1);
+    return selectPracticePaper && selected ? [selected] : sections;
+  }, [data, selectPracticePaper, practiceSection]);
+  const questions = useMemo(() => visibleSections.flatMap((section) => section.groups.flatMap((group) => group.questions)).filter((question) => question.type !== "instruction_only"), [visibleSections]);
   const questionGroupKeys = useMemo(() => {
     const keys = new Map<string, string>();
     for (const section of data?.sections || []) for (const group of section.groups) for (const question of group.questions) keys.set(question.id, `${section.id}:${group.id}`);
@@ -505,10 +520,11 @@ export function SeniorHighRunner({ kind, setId, basePath = "/senior-high", backH
       <div className="senior-high-v2-runner-title"><h1>{data.title}</h1></div>
       <div className="senior-high-v2-progress"><strong>{answeredCount}/{questions.length}</strong><span>已作答</span></div>
     </header>
+    {selectPracticePaper ? <div className="senior-high-v2-filters"><label>选择题卷<select onChange={event => setPracticeSection(event.target.value)} value={visibleSections[0]?.id || ""}>{[...data.sections].reverse().map(section => <option key={section.id} value={section.id}>{section.title}</option>)}</select></label></div> : null}
     {questionNavigation("top")}
-    {kind === "paper" && data.submissionMode === "whole-paper" ? <div aria-live="polite" className="senior-high-paper-review" id="senior-high-paper-review"><div><strong>{allSubmitted ? "整卷已提交 · 答案与解析已展开" : "整卷练习"}</strong><p>{allSubmitted ? `客观题答对 ${autoQuestions.filter((question) => gradeSeniorHighQuestion(question, answers) === "correct").length}/${autoQuestions.length} 题；${questions.length - autoQuestions.length} 道主观题请结合参考答案自行评阅。` : "按题号依次作答，完成后点击页面最下方的提交按钮查看答案与解析。"}</p></div></div> : null}
+    {kind === "paper" && data.submissionMode === "whole-paper" ? <div aria-live="polite" className="senior-high-paper-review" id="senior-high-paper-review"><div><strong>{allSubmitted ? "整卷已提交 · 可以查看答案与解析" : "整卷练习"}</strong><p>{allSubmitted ? autoQuestions.length ? `可自动判分的客观题答对 ${autoQuestions.filter((question) => gradeSeniorHighQuestion(question, answers) === "correct").length}/${autoQuestions.length} 题；${questions.length - autoQuestions.length} 道题请结合参考答案与解析自行核对。` : "本次作答已保存，可逐题展开参考答案与解析核对。写作与翻译请结合范文自行评阅。" : "按题号依次作答，完成后点击页面最下方的提交按钮查看答案与解析。"}</p></div></div> : null}
     {kind === "paper" && data.instructions.length > 0 ? <div className="senior-high-v2-instructions"><BlockRenderer answers={answers} assets={assets} bindings={new Map()} blocks={data.instructions} kind={data.kind} onAnswer={onAnswer} revealSolutions={allSubmitted} /></div> : null}
-    <div className="senior-high-v2-sections">{data.sections.map((section) => { const isListeningSection = section.id.toLowerCase().includes("listening") || section.title.includes("听力"); return <section className="senior-high-v2-section" key={section.id}><header><h2>{section.title}</h2>{section.score ? <span>{section.score} 分</span> : null}</header>{section.instructions.length > 0 ? <BlockRenderer answers={answers} assets={assets} bindings={new Map()} blocks={section.instructions} kind={data.kind} onAnswer={onAnswer} revealSolutions={allSubmitted} /> : null}<div className="senior-high-v2-groups">{section.groups.map((group) => {
+    <div className="senior-high-v2-sections">{visibleSections.map((section) => { const isListeningSection = section.id.toLowerCase().includes("listening") || section.title.includes("听力"); return <section className="senior-high-v2-section" key={section.id}><header><h2>{section.title}</h2>{section.score ? <span>{section.score} 分</span> : null}</header>{section.instructions.length > 0 ? <BlockRenderer answers={answers} assets={assets} bindings={new Map()} blocks={section.instructions} kind={data.kind} onAnswer={onAnswer} revealSolutions={allSubmitted} /> : null}<div className="senior-high-v2-groups">{section.groups.map((group) => {
       const bindings = new Map<string, BlankBinding>();
       for (const question of group.questions) for (const blank of question.blanks) bindings.set(blank.blankId, { options: group.sharedOptions, question });
       const inlineQuestions = group.questions.filter((question) => ["inline_fill", "multi_blank", "table_fill", "shared_option_matching"].includes(question.type) && question.promptBlocks.length === 0 && question.options.length === 0);

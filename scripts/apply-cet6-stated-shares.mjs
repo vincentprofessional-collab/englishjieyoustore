@@ -1,0 +1,18 @@
+import {readFile,writeFile} from 'node:fs/promises';
+import {splitParts} from './cet6-paper-parser.mjs';
+const cache=process.argv[2]||'/tmp/cet6-intake-20261021';
+const inventory=JSON.parse(await readFile(`${cache}/inventory.json`,'utf8'));
+const proof=inventory.find(file=>file.sha256==='560e12e458d17d669195649516f087206c3d74b5363f0e78d611afc231c60e31');
+const text=await readFile(proof.cache,'utf8');
+if(!/第3套除写作和翻译题目外.{0,12}其余题目和第2套完全相同/.test(text.replace(/\s+/g,'')))throw Error('The original sharing statement is missing');
+const file='src/data/cet6/library.json',library=JSON.parse(await readFile(file,'utf8'));
+const source=library.entries.find(entry=>entry.id==='cet6-paper-2020092');
+const target=library.entries.find(entry=>entry.id==='cet6-paper-2020093');
+const own=splitParts(target.body),shared=splitParts(source.body);
+if(!shared.get('reading')?.length)throw Error('Referenced reading source missing');
+target.body=['Part I Writing',...own.get('writing'),'Part II Listening Comprehension',...(shared.get('listening')||['本套原资料未单独收录听力题面。']),'Part III Reading Comprehension',...shared.get('reading'),'Part IV Translation',...own.get('translation')].join('\n');
+const proofOffset=text.indexOf('第3套除写作和翻译题目外');
+target.sourceReview.sharedSupplement={from:source.id,sections:['reading'],reason:'原稿说明第3套除写作和翻译外，其余题目和第2套完全相同。'};
+target.sourceReview.sharedSupplementSourceRefs=[{sourceDocumentId:source.sourceHash,relativePath:source.sourceFiles[0],sha256:source.sourceHash,locator:{section:'Reading Comprehension'},extractionMethod:'manual-review',confidence:1},{sourceDocumentId:proof.sha256,relativePath:'试卷/真题/'+proof.name,sha256:proof.sha256,locator:{page:text.slice(0,proofOffset).split('\f').length},extractionMethod:'manual-review',confidence:1}];
+await writeFile(file,JSON.stringify(library,null,2)+'\n');
+console.log('Applied original September 2020 same-content statement.');
