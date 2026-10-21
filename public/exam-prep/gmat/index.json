@@ -1,0 +1,65 @@
+{
+  "exam": "gmat",
+  "entries": [
+    {
+      "id": "gmat-quant",
+      "title": "定量推理 · 官方指南",
+      "category": "定量推理",
+      "kind": "practice",
+      "questionCount": 271,
+      "answerCount": 271,
+      "reviewCount": 67,
+      "source": "GMAT OG 24-25.pdf",
+      "dataPath": "types/quantitative-reasoning/gmat-quant.json",
+      "href": "/exam-practice/gmat/gmat-quant"
+    },
+    {
+      "id": "gmat-di-sufficiency",
+      "title": "数据充分性 · 官方指南",
+      "category": "数据洞察 · 数据充分性",
+      "kind": "practice",
+      "questionCount": 136,
+      "answerCount": 136,
+      "reviewCount": 5,
+      "source": "GMAT OG 24-25.pdf",
+      "dataPath": "types/data-sufficiency/gmat-di-sufficiency.json",
+      "href": "/exam-practice/gmat/gmat-di-sufficiency"
+    },
+    {
+      "id": "gmat-di-two-part",
+      "title": "两部分分析 · 官方指南",
+      "category": "数据洞察 · 两部分分析",
+      "kind": "practice",
+      "questionCount": 48,
+      "answerCount": 47,
+      "reviewCount": 1,
+      "source": "GMAT OG 24-25.pdf",
+      "dataPath": "types/two-part-analysis/gmat-di-two-part.json",
+      "href": "/exam-practice/gmat/gmat-di-two-part"
+    },
+    {
+      "id": "gmat-reading",
+      "title": "阅读理解 · 官方指南",
+      "category": "阅读理解",
+      "kind": "practice",
+      "questionCount": 164,
+      "answerCount": 164,
+      "reviewCount": 0,
+      "source": "GMAT OG 24-25.pdf",
+      "dataPath": "types/reading-comprehension/gmat-reading.json",
+      "href": "/exam-practice/gmat/gmat-reading"
+    },
+    {
+      "id": "gmat-critical-reasoning",
+      "title": "批判性推理 · 官方指南",
+      "category": "批判性推理",
+      "kind": "practice",
+      "questionCount": 182,
+      "answerCount": 182,
+      "reviewCount": 3,
+      "source": "GMAT OG 24-25.pdf",
+      "dataPath": "types/critical-reasoning/gmat-critical-reasoning.json",
+      "href": "/exam-practice/gmat/gmat-critical-reasoning"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "exam": "gre",
+  "entries": [
+    {
+      "id": "gre-fill-1000",
+      "title": "填空 · 100 组练习",
+      "category": "填空",
+      "kind": "practice",
+      "questionCount": 933,
+      "answerCount": 933,
+      "reviewCount": 283,
+      "source": "GRE填空机经1000题难度分级版%28含答案%29.pdf",
+      "dataPath": "types/fill-in/gre-fill-1000.json",
+      "href": "/exam-practice/gre/gre-fill-1000"
+    },
+    {
+      "id": "gre-reading-101",
+      "title": "阅读理解 · 101 篇",
+      "category": "阅读理解",
+      "kind": "practice",
+      "questionCount": 201,
+      "answerCount": 195,
+      "reviewCount": 6,
+      "source": "101篇分类分级解析版.pdf",
+      "dataPath": "types/reading-comprehension/gre-reading-101.json",
+      "href": "/exam-practice/gre/gre-reading-101"
+    },
+    {
+      "id": "gre-logic-101",
+      "title": "逻辑推理 · 101 篇",
+      "category": "逻辑推理",
+      "kind": "practice",
+      "questionCount": 24,
+      "answerCount": 24,
+      "reviewCount": 0,
+      "source": "101篇分类分级解析版.pdf",
+      "dataPath": "types/logical-reasoning/gre-logic-101.json",
+      "href": "/exam-practice/gre/gre-logic-101"
+    }
+  ]
+}

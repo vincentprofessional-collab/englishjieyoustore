@@ -38035,3 +38035,20 @@ body .mobile-bottom-nav a.active { color: #245d7b !important; }
     font-size: 16px !important;
   }
 }
+.exam-prep-section { display: grid; gap: 18px; margin-top: 28px; }
+.exam-prep-section > header h2, .exam-prep-answer-source h2 { margin: 0; color: var(--accent-dark); font-family: KaiTi, STKaiti, serif; font-size: clamp(25px, 4vw, 34px); }
+.exam-prep-question-list { display: grid; gap: 14px; }
+.exam-prep-passage-group { display: grid; gap: 14px; }
+.exam-prep-passage-group h3 { margin: 8px 0 0; color: #245d7b; font-size: 20px; }
+.exam-prep-question { scroll-margin-top: 20px; }
+.exam-prep-review-badge { border: 1px solid #d6b25e; border-radius: 999px; background: #fff5d7; color: #80641d !important; padding: 2px 8px; }
+.exam-prep-review-note { margin: 20px 0; border-left: 4px solid #d5a63e; border-radius: 8px; background: #fff8df; color: #665328; line-height: 1.65; padding: 12px 16px; }
+.exam-prep-pagination { display: flex; align-items: center; justify-content: center; gap: 14px; padding: 8px; color: var(--muted); }
+.exam-prep-pagination button { border: 1px solid #d8d0c2; border-radius: 8px; background: #fffdf7; color: #245d7b; cursor: pointer; font: inherit; padding: 8px 14px; }
+.exam-prep-pagination button:disabled { cursor: not-allowed; opacity: .45; }
+.exam-prep-paper-submit { position: sticky; z-index: 3; bottom: 12px; display: flex; align-items: center; justify-content: space-between; gap: 12px; border: 1px solid #d8d0c2; border-radius: 14px; background: rgba(255, 253, 247, .96); box-shadow: 0 8px 24px rgba(41, 49, 43, .1); padding: 12px 16px; }
+.exam-prep-answer-source { display: grid; gap: 10px; margin-top: 26px; border: 1px solid #d8c99d; border-radius: 16px; background: #fff8df; padding: clamp(16px, 3vw, 24px); }
+.exam-prep-answer-source h3 { margin: 10px 0 0; color: #80641d; }
+.exam-prep-answer-source pre { max-height: 70vh; overflow: auto; margin: 0; color: #3d3424; font: inherit; line-height: 1.75; white-space: pre-wrap; overflow-wrap: anywhere; }
+.exam-prep-answer-pre { max-height: 65vh; overflow: auto; margin: 0; font: inherit; line-height: 1.7; white-space: pre-wrap; overflow-wrap: anywhere; }
+@media (max-width: 560px) { .exam-prep-paper-submit { align-items: stretch; flex-direction: column; text-align: center; } .exam-prep-pagination { gap: 8px; font-size: 13px; } .exam-prep-pagination button { padding-inline: 10px; } }

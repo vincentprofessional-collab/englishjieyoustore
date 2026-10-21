@@ -61,6 +61,8 @@ export default function ExamsPage() {
     { id: "cet4", title: "四级", sections: cetSections("cet4") },
     { id: "cet6", title: "六级", sections: cetSections("cet6") },
     { id: "postgraduate", title: "考研", sections: [
+      { id: "practice", title: "题型训练", items: [{ title: "2020–2026 完整试卷", description: "英语一、英语二整卷练习，提交后查看答案与解析", href: "/postgraduate?entry=papers", meta: "14 套试卷" }] },
+      { id: "papers", title: "历年试卷", items: [{ title: "2020–2026 考研英语真题", description: "按年份选择英语一或英语二", href: "/postgraduate?entry=papers", meta: "完整试卷" }] },
       { id: "vocabulary", title: "核心词汇", items: [{ title: "考研词汇", description: "进入现有词汇书与复习功能", href: "/vocabulary/books?level=考研", meta: "背单词" }] },
     ] },
     { id: "ielts", title: "雅思", sections: [
@@ -86,9 +88,11 @@ export default function ExamsPage() {
       items: satIndex.sets.filter((item) => item.domain === domain.label).map((item) => ({ title: item.skill.replace(/\b\w/g, (letter) => letter.toUpperCase()), description: `${item.difficulty} · ${item.expectedCount} 题`, href: `/sat/practice/${item.id}`, meta: domain.label })),
     })) },
     { id: "gmat", title: "GMAT", sections: [
+      { id: "practice", title: "题型训练", items: [{ title: "GMAT 官方指南题型练习", description: "定量推理、数据洞察、阅读理解与批判性推理", href: "/gmat?entry=practice", meta: "官方指南" }] },
       { id: "vocabulary", title: "核心词汇", items: [{ title: "GMAT 词汇", description: "进入现有词汇书与复习功能", href: "/vocabulary/books?level=GMAT", meta: "背单词" }] },
     ] },
     { id: "gre", title: "GRE", sections: [
+      { id: "practice", title: "题型训练", items: [{ title: "GRE 填空、阅读与逻辑", description: "按题型练习，提交后查看答案和解析", href: "/gre?entry=practice", meta: "真题练习" }] },
       { id: "vocabulary", title: "核心词汇", items: [{ title: "GRE 词汇", description: "进入现有词汇书与复习功能", href: "/vocabulary/books?level=GRE", meta: "背单词" }] },
     ] },
   ];
