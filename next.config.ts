@@ -29,6 +29,8 @@ const nextConfig: NextConfig = {
   },
   outputFileTracingIncludes: {
     "/api/admin/bbc-pdf-quiz": [
+      "./node_modules/pdfjs-dist/package.json",
+      "./node_modules/pdfjs-dist/legacy/build/pdf.mjs",
       "./node_modules/@napi-rs/canvas/**/*",
       "./node_modules/@napi-rs/canvas-*/**/*",
       "./node_modules/pdfjs-dist/legacy/build/pdf.worker.mjs",

@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-const [siteNav, articlesPage, articlesHome, newConceptLesson, vocabularyLearning, vocabularyLearningLib, globalCss, adminAnalytics, membershipSalesRoute, adminMembership, analyticsSql, popularPagesSql, progressProvider, favoritesPage, writingTerm, annotationTools, bbcDetail, listeningPractice] = await Promise.all([
+const [siteNav, articlesPage, articlesHome, newConceptLesson, vocabularyLearning, vocabularyLearningLib, globalCss, adminAnalytics, membershipSalesRoute, adminMembership, analyticsSql, popularPagesSql, dashboardSnapshotSql, progressProvider, favoritesPage, writingTerm, annotationTools, bbcDetail, listeningPractice] = await Promise.all([
   readFile(new URL("../src/components/site-nav.tsx", import.meta.url), "utf8"),
   readFile(new URL("../src/app/articles/page.tsx", import.meta.url), "utf8"),
   readFile(new URL("../src/components/articles-home.tsx", import.meta.url), "utf8"),
@@ -15,6 +15,7 @@ const [siteNav, articlesPage, articlesHome, newConceptLesson, vocabularyLearning
   readFile(new URL("../src/components/admin-membership-overview.tsx", import.meta.url), "utf8"),
   readFile(new URL("../supabase/030_admin_analytics_dashboard.sql", import.meta.url), "utf8"),
   readFile(new URL("../supabase/032_admin_popular_pages.sql", import.meta.url), "utf8"),
+  readFile(new URL("../supabase/033_admin_daily_visitors.sql", import.meta.url), "utf8"),
   readFile(new URL("../src/components/account-progress-provider.tsx", import.meta.url), "utf8"),
   readFile(new URL("../src/app/me/favorites/page.tsx", import.meta.url), "utf8"),
   readFile(new URL("../src/components/writing-vocabulary-term.tsx", import.meta.url), "utf8"),
@@ -64,9 +65,10 @@ test("vocabulary books accumulate lower levels without auto-classifying scored r
   assert.match(vocabularyLearning, /setOralScoreFeedback\(score\);[\s\S]*?setPhase\("awaiting"\);/);
 });
 
-test("admin analytics loads only the top 20 pages on manual refresh", () => {
-  assert.match(adminAnalytics, /supabase\.rpc\("get_admin_popular_pages"/);
-  assert.match(adminAnalytics, /p_limit:\s*20/);
+test("admin analytics loads today's visitor counts and top 20 pages in one manual refresh", () => {
+  assert.match(adminAnalytics, /supabase\.rpc\("get_admin_dashboard_snapshot"/);
+  assert.match(adminAnalytics, /p_days:\s*1/);
+  assert.match(adminAnalytics, /近 7 天热门页面 Top 20/);
   assert.match(adminAnalytics, /loadInFlight\.current/);
   assert.match(adminAnalytics, /onClick=\{\(\) => void refresh\(\)\}/);
   assert.match(adminAnalytics, /document\.visibilityState === "hidden"/);
@@ -74,6 +76,11 @@ test("admin analytics loads only the top 20 pages on manual refresh", () => {
   assert.match(popularPagesSql, /if not public\.is_admin\(\) then/);
   assert.match(popularPagesSql, /event\.event_type = 'page_view'/);
   assert.match(popularPagesSql, /limit least\(greatest\(coalesce\(p_limit, 20\), 1\), 20\)/);
+  assert.match(dashboardSnapshotSql, /'registered_visitors'/);
+  assert.match(dashboardSnapshotSql, /'returning_anonymous_visitors'/);
+  assert.match(dashboardSnapshotSql, /'registrations'/);
+  assert.match(dashboardSnapshotSql, /now\(\) - interval '7 days'/);
+  assert.match(dashboardSnapshotSql, /limit 20/);
 });
 
 test("membership sales uses a short shared cache and capped detail pages without a schema migration", () => {

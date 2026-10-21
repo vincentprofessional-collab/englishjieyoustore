@@ -772,6 +772,64 @@
   margin: 6px 0 0;
 }
 
+.admin-daily-visitors-scroll {
+  overflow-x: auto;
+}
+
+.admin-daily-visitors-table {
+  border-collapse: collapse;
+  min-width: 600px;
+  width: 100%;
+}
+
+.admin-daily-visitors-table th,
+.admin-daily-visitors-table td {
+  border-bottom: 1px solid rgba(228, 216, 189, 0.78);
+  padding: 11px 12px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.admin-daily-visitors-table thead th {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.admin-daily-visitors-table th:first-child {
+  text-align: left;
+}
+
+.admin-daily-visitors-table tbody th {
+  color: var(--accent-dark);
+  font-weight: 900;
+}
+
+.admin-daily-visitors-table tbody th span {
+  background: rgba(173, 220, 242, 0.55);
+  border-radius: 999px;
+  color: var(--accent-dark);
+  font-size: 10px;
+  margin-left: 8px;
+  padding: 3px 7px;
+}
+
+.admin-daily-visitors-table tbody td {
+  color: var(--accent-dark);
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+}
+
+.admin-daily-visitors-table tbody tr.is-today {
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.admin-daily-visitors-table .admin-empty-text {
+  color: var(--muted);
+  padding: 20px 12px;
+  text-align: center;
+}
+
 .admin-stat-grid {
   display: grid;
   gap: 14px;

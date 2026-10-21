@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useRef, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { supabase } from "@/lib/supabase/client";
 import { getAuthErrorFeedback, reportAuthFailure } from "@/lib/supabase/auth-request";
 
@@ -59,11 +59,36 @@ export default function LoginPage() {
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [showConfirmationResend, setShowConfirmationResend] = useState(false);
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
+  const [passwordRecoveryActive, setPasswordRecoveryActive] = useState(false);
+  const [resetEmail, setResetEmail] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [newPasswordConfirm, setNewPasswordConfirm] = useState("");
   const authRequestPending = useRef(false);
+
+  useEffect(() => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
+      if (event !== "PASSWORD_RECOVERY") return;
+      setAuthMode("login");
+      setShowForgotPassword(false);
+      setPasswordRecoveryActive(true);
+      setMessage("请设置新密码。");
+    });
+
+    const recoveryError = new URLSearchParams(window.location.hash.replace(/^#/, "")).get("error_code");
+    if (recoveryError) {
+      setShowForgotPassword(true);
+      setMessage("重置链接已失效或过期，请重新申请密码重置。");
+    }
+
+    return () => subscription.unsubscribe();
+  }, []);
 
   function switchMode(nextMode: AuthMode) {
     if (authRequestPending.current) return;
     setAuthMode(nextMode);
+    setShowForgotPassword(false);
+    setPasswordRecoveryActive(false);
     setMessage("");
     setShowConfirmationResend(false);
   }
@@ -201,29 +226,140 @@ export default function LoginPage() {
     }
   }
 
+  async function handleRequestPasswordReset(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (authRequestPending.current) return;
+    const email = resetEmail.trim();
+    if (!email) {
+      setMessage("请填写注册邮箱。");
+      return;
+    }
+
+    authRequestPending.current = true;
+    const startedAt = Date.now();
+    setIsLoading(true);
+    setMessage("");
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo: AUTH_REDIRECT_URL });
+      if (error) throw error;
+      setShowForgotPassword(false);
+      setMessage("如果该邮箱已注册，密码重置链接已发送。请检查收件箱和垃圾邮件，点击邮件链接后在此页设置新密码。");
+    } catch (error) {
+      setMessage(`发送失败：${getAuthErrorFeedback(error).message}`);
+      reportAuthFailure("password-reset-request", error, startedAt);
+    } finally {
+      authRequestPending.current = false;
+      setIsLoading(false);
+    }
+  }
+
+  async function handleSetNewPassword(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (authRequestPending.current) return;
+    if (newPassword.length < 6) {
+      setMessage("新密码至少需要 6 位。");
+      return;
+    }
+    if (newPassword !== newPasswordConfirm) {
+      setMessage("两次输入的密码不一致。");
+      return;
+    }
+
+    authRequestPending.current = true;
+    const startedAt = Date.now();
+    setIsLoading(true);
+    setMessage("");
+    try {
+      const { error } = await supabase.auth.updateUser({ password: newPassword });
+      if (error) throw error;
+      setPasswordRecoveryActive(false);
+      setNewPassword("");
+      setNewPasswordConfirm("");
+      setMessage("密码已更新，当前账号已登录。");
+    } catch (error) {
+      setMessage(`密码更新失败：${getAuthErrorFeedback(error).message}`);
+      reportAuthFailure("password-reset-update", error, startedAt);
+    } finally {
+      authRequestPending.current = false;
+      setIsLoading(false);
+    }
+  }
+
   return (
     <section className="auth-page">
       <aside className="auth-panel">
-        <div className="auth-mode-tabs" role="tablist" aria-label="登录注册">
-          <button
-            className={authMode === "login" ? "active" : ""}
-            disabled={isLoading}
-            type="button"
-            onClick={() => switchMode("login")}
-          >
-            登录
-          </button>
-          <button
-            className={authMode === "register" ? "active" : ""}
-            disabled={isLoading}
-            type="button"
-            onClick={() => switchMode("register")}
-          >
-            注册
-          </button>
-        </div>
+        {!passwordRecoveryActive && !showForgotPassword ? (
+          <div className="auth-mode-tabs" role="tablist" aria-label="登录注册">
+            <button
+              className={authMode === "login" ? "active" : ""}
+              disabled={isLoading}
+              type="button"
+              onClick={() => switchMode("login")}
+            >
+              登录
+            </button>
+            <button
+              className={authMode === "register" ? "active" : ""}
+              disabled={isLoading}
+              type="button"
+              onClick={() => switchMode("register")}
+            >
+              注册
+            </button>
+          </div>
+        ) : null}
 
-        {authMode === "login" ? (
+        {passwordRecoveryActive ? (
+          <form className="auth-form" onSubmit={handleSetNewPassword}>
+            <h2>设置新密码</h2>
+            <label>
+              <span>新密码</span>
+              <input
+                autoComplete="new-password"
+                minLength={6}
+                onChange={(event) => setNewPassword(event.target.value)}
+                required
+                type="password"
+                value={newPassword}
+              />
+            </label>
+            <label>
+              <span>确认新密码</span>
+              <input
+                autoComplete="new-password"
+                minLength={6}
+                onChange={(event) => setNewPasswordConfirm(event.target.value)}
+                required
+                type="password"
+                value={newPasswordConfirm}
+              />
+            </label>
+            <button className="button primary" disabled={isLoading} type="submit">
+              {isLoading ? "更新中…" : "更新密码"}
+            </button>
+          </form>
+        ) : showForgotPassword ? (
+          <form className="auth-form" onSubmit={handleRequestPasswordReset}>
+            <h2>重置密码</h2>
+            <p>填写注册邮箱，我们会发送密码重置链接。</p>
+            <label>
+              <span>邮箱</span>
+              <input
+                autoComplete="email"
+                onChange={(event) => setResetEmail(event.target.value)}
+                required
+                type="email"
+                value={resetEmail}
+              />
+            </label>
+            <button className="button primary" disabled={isLoading} type="submit">
+              {isLoading ? "发送中…" : "发送重置邮件"}
+            </button>
+            <button className="auth-text-button" disabled={isLoading} type="button" onClick={() => { setShowForgotPassword(false); setMessage(""); }}>
+              返回登录
+            </button>
+          </form>
+        ) : authMode === "login" ? (
           <form className="auth-form" onSubmit={handleLogin}>
             <h2>账号登录</h2>
             <label>
@@ -248,6 +384,9 @@ export default function LoginPage() {
             </label>
             <button className="button primary" disabled={isLoading} type="submit">
               {isLoading ? "登录中…" : "登录"}
+            </button>
+            <button className="auth-text-button" disabled={isLoading} type="button" onClick={() => { setResetEmail(loginAccount.trim()); setShowForgotPassword(true); setMessage(""); }}>
+              忘记密码？
             </button>
             {showConfirmationResend ? (
               <button className="auth-text-button" disabled={isLoading} type="button" onClick={handleResendConfirmation}>
