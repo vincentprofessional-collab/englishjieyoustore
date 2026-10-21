@@ -32230,6 +32230,18 @@ body .bbc-article-title-card .bbc-article-word-count {
   white-space: nowrap;
 }
 
+@media (min-width: 601px) {
+  body .bbc-article-title-card .bbc-article-word-count {
+    bottom: 28px;
+    color: #85857a !important;
+    font-size: 15px;
+    grid-column: auto;
+    grid-row: auto;
+    position: absolute;
+    right: 34px;
+  }
+}
+
 body .bbc-article-title-card h1 {
   align-items: center;
   color: #fff !important;
