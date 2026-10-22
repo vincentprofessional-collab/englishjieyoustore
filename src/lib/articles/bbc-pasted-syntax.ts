@@ -7,6 +7,7 @@ export type PastedBbcSyntaxSentence = {
   main: string;
   summaries?: { label: string; text: string }[];
   source?: string;
+  inlineComponents?: string;
 };
 
 const SECTION_HEADING = /^##\s*句\s*(\d+)\s*$/;
@@ -107,6 +108,8 @@ function appendSummarySpans(text: string, tokens: BbcSyntaxSentenceData["tokens"
 
 export function parsePastedBbcSyntaxBlock(value: string) {
   const normalized = value.replace(/^\uFEFF/, "").replace(/\r\n?/g, "\n");
+  const inline = parseInlineNumberedSyntax(normalized);
+  if (inline) return inline;
   const numbered = parseNumberedSyntax(normalized);
   if (numbered) return numbered;
   const title = SYNTAX_TITLE.exec(normalized);
@@ -161,6 +164,7 @@ export function applyPastedBbcSyntax(
     throw new Error(`第 ${annotation.sentenceNo} 句语法标注中的英文原句与正文不一致，请核对输入框内容。`);
   }
 
+  if (annotation.inlineComponents) return applyInlineNumberedSyntax(automatic, annotation);
   if (annotation.summaries) return applyNumberedSyntax(automatic, annotation);
 
   const tokens = automatic.tokens.map((token) => ({ ...token }));
@@ -342,6 +346,59 @@ function applyNumberedSyntax(automatic: BbcSyntaxSentenceData, annotation: Paste
   }
   for (const spans of layers) spans.sort((a, b) => a.start - b.start || b.end - a.end);
   return { ...automatic, tokens, level1: layers[0], level2: layers[1], level3: layers[2], level4: layers[3], level5: layers[4], notes: [...new Set(notes)], sourceAnnotation: annotation.source, status: "reviewed" };
+}
+
+function parseInlineNumberedSyntax(normalized: string) {
+  const headers = [...normalized.matchAll(/^#{1,6}\s+(\d+)[.．、]\s*(["“'‘]?[A-Za-z].+)$/gm)];
+  const sections = headers.map((header, index) => ({ header, source: normalized.slice(header.index, headers[index + 1]?.index ?? normalized.length) }));
+  const marked = sections.filter(({ source }) => /^词性\s*[:：]/m.test(source) && /^句子成分\s*[:：]/m.test(source));
+  if (!marked.length) return null;
+  const start = marked[0].header.index!;
+  const following = FOLLOWING_CONTENT_HEADING.exec(normalized.slice(start));
+  const end = following ? start + following.index : normalized.length;
+  const sentences: PastedBbcSyntaxSentence[] = marked.filter(({ header }) => header.index! < end).map(({ header, source }) => {
+    source = source.slice(0, Math.min(source.length, end - header.index!)).replace(/\n\s*---\s*$/, "").trim();
+    const pos = source.match(/^词性\s*[:：]\s*(.+)$/m)![1];
+    const items = pos.split(/[；;]/).filter((part) => part.trim()).map((part) => {
+      const match = part.trim().match(/^([A-Za-z0-9][\s\S]*?)\s+([\u3400-\u9fff].*)$/);
+      if (!match || !posCode(match[2])) throw new Error(`第 ${header[1]} 句的词性标注无法识别：${part.trim()}`);
+      return { term: match[1], description: match[2].replace(/[。.]$/, "") };
+    });
+    return { sentenceNo: Number(header[1]), text: header[2].trim(), items, main: "", source,
+      inlineComponents: source.match(/^句子成分\s*[:：]\s*(.+)$/m)![1] };
+  });
+  return { articleText: [normalized.slice(0, start).trim(), normalized.slice(end).trim()].filter(Boolean).join("\n\n"), sentences };
+}
+
+function applyInlineNumberedSyntax(automatic: BbcSyntaxSentenceData, annotation: PastedBbcSyntaxSentence): BbcSyntaxSentenceData {
+  // Reuse the complete word-coverage check before accepting teacher annotations.
+  const result = applyNumberedSyntax(automatic, { ...annotation, summaries: [] });
+  const layers: [BbcSyntaxSpan[], BbcSyntaxSpan[], BbcSyntaxSpan[], BbcSyntaxSpan[], BbcSyntaxSpan[]] = [result.level1, result.level2, result.level3 ?? [], result.level4 ?? [], result.level5 ?? []];
+  const notes = [...(result.notes ?? [])];
+  const whole = { start: 0, end: result.tokens.length };
+  for (const fragment of annotation.inlineComponents!.split(/[；;]/)) {
+    const components = markedComponents(fragment);
+    if (!components.length) { if (fragment.trim()) notes.push(fragment.trim()); continue; }
+    const context = fragment.match(/^\s*(.*?(?:从句|真正主语))中\s*/)?.[1];
+    const contextKind = context?.match(/主语从句|宾语从句|定语从句|表语从句|状语从句|真正主语/)?.[0];
+    const parent = contextKind ? layers.flatMap((spans, depth) => spans.filter((span) => span.label.includes(contextKind)).map((span) => ({ ...span, depth }))).at(-1) : undefined;
+    const depth = context ? Math.min(4, parent ? parent.depth + 1 : 1) : 0;
+    const scope = parent ?? whole;
+    let cursor = scope.start;
+    for (const component of components) {
+      const phrase = component.phrase.replace(/^.*[\u3400-\u9fff]\s*(?=[A-Za-z0-9"“'‘])/, "");
+      if (!wordParts(phrase).length) { notes.push(`${component.phrase}【${component.label}】`); continue; }
+      const matches = phraseMatches(result.tokens, phrase, scope, true);
+      const match = matches.find((item) => item.start >= cursor) ?? matches[0];
+      if (!match) throw new Error(`第 ${annotation.sentenceNo} 句的句子成分“${component.phrase}【${component.label}】”无法匹配原句。`);
+      cursor = match.end;
+      for (const span of runsForMatch(match, result.tokens, component.label)) {
+        if (!layers[depth].some((existing) => existing.start === span.start && existing.end === span.end && existing.label === span.label)) layers[depth].push(span);
+      }
+    }
+  }
+  for (const layer of layers) layer.sort((a, b) => a.start - b.start || b.end - a.end);
+  return { ...result, level3: layers[2], level4: layers[3], level5: layers[4], notes };
 }
 
 function parseNumberedSyntax(normalized: string) {

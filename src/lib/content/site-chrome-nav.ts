@@ -4,6 +4,32 @@ export type SiteChromeNavNode = {
   label: string;
 };
 
+export function ensureCoursesAfterExams<T extends SiteChromeNavNode>(items: T[], fallback: T): T[] {
+  const courses = items.find((item) => item.id === fallback.id) ?? fallback;
+  const rest = items.filter((item) => item.id !== courses.id);
+  const examsIndex = rest.findIndex((item) => item.id === "exams");
+  const position = examsIndex < 0 ? rest.length : examsIndex + 1;
+  return [...rest.slice(0, position), courses, ...rest.slice(position)];
+}
+
+export function removeRetiredCet4KnowledgeLinks<T extends SiteChromeNavNode>(items: T[]): T[] {
+  const visit = (item: SiteChromeNavNode): SiteChromeNavNode | null => {
+    const href = "href" in item && typeof item.href === "string" ? item.href : "";
+    let retiredTarget = false;
+    try {
+      const target = new URL(href, "https://local.invalid");
+      retiredTarget = target.pathname === "/cet4" && target.searchParams.get("entry") === "knowledge";
+    } catch {}
+    if (item.id === "cet4-knowledge" || (retiredTarget && item.label === "知识点")) return null;
+    return {
+      ...item,
+      ...(retiredTarget ? { href: "/cet4?entry=papers" } : {}),
+      children: item.children.map(visit).filter((child): child is SiteChromeNavNode => child !== null),
+    };
+  };
+  return items.map(visit).filter((item): item is T => item !== null) as T[];
+}
+
 export function ensureJuniorHighExamLink<T extends SiteChromeNavNode>(items: T[], juniorHigh: T): T[] {
   return items.some((item) => item.id === juniorHigh.id) ? items : [...items, juniorHigh];
 }

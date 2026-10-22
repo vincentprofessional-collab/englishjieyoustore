@@ -4,7 +4,24 @@ import {
   ensureCompleteExamMenu,
   ensureJuniorHighExamLink,
   ensureJuniorHighExamMenu,
+  removeRetiredCet4KnowledgeLinks,
 } from "../src/lib/content/site-chrome-nav.ts";
+
+test("retired CET-4 knowledge links disappear from older saved navigation", () => {
+  const source = [{ id: "exams", label: "语言考试", children: [
+    { id: "cet4", label: "四级英语", href: "/cet4?entry=knowledge", children: [
+      { id: "cet4-knowledge", label: "知识点", href: "/cet4?entry=knowledge", children: [] },
+      { id: "cet4-types", label: "题型训练", href: "/cet4?entry=practice", children: [] },
+      { id: "cet4-papers", label: "历年真题", href: "/cet4?entry=papers", children: [] },
+    ] },
+    { id: "cet6", label: "六级英语", children: [{ id: "cet6-knowledge", label: "知识点", href: "/cet6?entry=knowledge", children: [] }] },
+  ] }];
+  const result = removeRetiredCet4KnowledgeLinks(source);
+  assert.equal(result[0].children[0].href, "/cet4?entry=papers");
+  assert.deepEqual(result[0].children[0].children.map((item) => item.id), ["cet4-types", "cet4-papers"]);
+  assert.equal(result[0].children[1].children[0].id, "cet6-knowledge");
+  assert.equal(source[0].children[0].children.length, 3);
+});
 
 test("published exam menu keeps the junior-high link when an older config omits it", () => {
   const source = [

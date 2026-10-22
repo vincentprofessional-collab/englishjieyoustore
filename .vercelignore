@@ -22,6 +22,11 @@ public/**/*.wav
 public/**/*.weba
 public/**/*.webm
 public/**/*.webp
+# Reviewed reading assets are bound to the reading prebuild publication gate.
+!public/reading/source-pages/*.webp
+!public/reading/explanations/*.webp
+!public/cet4/evidence/*.webp
+!public/cet4/audio/*.mp3
 .next/
 .next/dev/
 .next/dev/**

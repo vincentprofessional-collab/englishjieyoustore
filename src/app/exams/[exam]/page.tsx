@@ -13,7 +13,7 @@ export default async function CollegeExamPage({
   const { section } = await searchParams;
   if (exam !== "cet4" && exam !== "cet6") notFound();
   const typedExam = exam as CetExam;
-  const entry = section === "types" ? "practice" : section === "papers" ? "papers" : "knowledge";
+  const entry = section === "types" ? "practice" : section === "papers" || exam === "cet4" ? "papers" : "knowledge";
   const knowledge = getCetExamEntries(typedExam)
     .filter((item) => item.section === "知识点")
     .map(({ id, title, topic, excerpt }) => ({ id, title, topic, excerpt }));

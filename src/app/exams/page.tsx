@@ -24,7 +24,7 @@ function cetSections(exam: CetExam) {
   }));
   const sets = getCetExamSetIndex(exam).entries;
   return [
-    { id: "knowledge", title: "知识点", items: knowledge },
+    ...(exam === "cet4" ? [] : [{ id: "knowledge", title: "知识点", items: knowledge }]),
     { id: "practice", title: "题型训练", items: sets.filter((item) => item.kind === "practice").map((item) => ({ title: item.title, description: `${item.questionCount} 题 · ${item.answerStatus === "answered" ? "答案完整" : "含可用答案"}`, href: item.href, meta: item.questionTypes.join("、") })) },
     { id: "papers", title: "历年试卷", items: sets.filter((item) => item.kind === "paper").map((item) => ({ title: item.title, description: `${item.year} · ${item.region} · ${item.questionCount} 题`, href: item.href, meta: item.answerStatus === "answered" ? "答案完整" : "查看试卷" })) },
   ].map((section) => ({ ...section, items: section.items.length ? section.items : [{ title: `${prefix}目录`, description: "进入现有题库目录", href: `/${exam}?entry=${section.id}` }] }));

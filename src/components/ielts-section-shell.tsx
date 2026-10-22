@@ -32,16 +32,10 @@ function getExpandableStudyNavIds(nodes: StudyNavNode[], parentId: string): stri
   });
 }
 
-function getExpandedCourseNavIds(nodes: CoursePageNode[], route: string[]) {
-  const expanded = new Set<string>();
-  let currentNodes = nodes;
-  for (const slug of route) {
-    const node = currentNodes.find((item) => item.slug === slug);
-    if (!node) break;
-    if (node.children.length) expanded.add(`course:${node.id}`);
-    currentNodes = node.children;
-  }
-  return expanded;
+function getExpandedCourseNavIds(nodes: CoursePageNode[]): Set<string> {
+  return new Set(nodes.flatMap((node) => node.children.length
+    ? [`course:${node.id}`, ...getExpandedCourseNavIds(node.children)]
+    : []));
 }
 
 const STUDY_NAV_GROUPS: StudyNavGroup[] = [
@@ -78,10 +72,9 @@ const STUDY_NAV_GROUPS: StudyNavGroup[] = [
     mark: "高",
   },
   { children: [
-    { href: "/cet4?entry=knowledge", label: "知识点" },
     { href: "/cet4?entry=practice", label: "题型训练" },
-    { href: "/cet4?entry=papers", label: "历年试卷" },
-  ], href: "/cet4", id: "cet4", label: "四级英语", mark: "四" },
+    { href: "/cet4?entry=papers", label: "历年真题" },
+  ], href: "/cet4?entry=papers", id: "cet4", label: "四级英语", mark: "四" },
   { children: [
     { href: "/cet6?entry=practice", label: "题型训练" },
     { href: "/cet6?entry=papers", label: "历年真题" },
@@ -237,9 +230,9 @@ function IeltsSectionShellContent({
 }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const [expandedExamGroupId, setExpandedExamGroupId] = useState<StudyNavGroup["id"] | null>(null);
-  const [expandedStudyNavChildIds, setExpandedStudyNavChildIds] = useState<Set<string>>(() => new Set());
   const isCoursePage = pathname === "/courses" || pathname.startsWith("/courses/");
+  const [expandedExamGroupId, setExpandedExamGroupId] = useState<StudyNavGroup["id"] | null>(null);
+  const [expandedStudyNavChildIds, setExpandedStudyNavChildIds] = useState<Set<string>>(() => isCoursePage ? getExpandedCourseNavIds(courseDirectory.groups) : new Set());
   const requestedBbcYear = Number(searchParams.get("year"));
   const activeBbcYear = BBC_DIRECTORY_YEARS.includes(requestedBbcYear)
     ? requestedBbcYear
@@ -261,7 +254,7 @@ function IeltsSectionShellContent({
 
   useEffect(() => {
     if (!isCoursePage) return;
-    setExpandedStudyNavChildIds(getExpandedCourseNavIds(courseDirectory.groups, pathname.split("/").filter(Boolean).slice(1)));
+    setExpandedStudyNavChildIds(getExpandedCourseNavIds(courseDirectory.groups));
   }, [courseDirectory, isCoursePage, pathname]);
 
   function renderStudyDirectoryNodes(

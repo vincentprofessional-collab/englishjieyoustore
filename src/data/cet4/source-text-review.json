@@ -1,0 +1,94 @@
+{
+  "reviewedOn": "2026-10-22",
+  "paragraphBanks": [
+    {
+      "id": "cet4-paper-2022123",
+      "sourceHash": "931aba71d81a9bcff016a7f954b6d154ceada7022fe999e12983196b5d6579a9",
+      "section": "reading-b",
+      "labels": "ABCDEFGHIJK",
+      "evidence": "第九段误印 D；位于 H 与 J 之间，解析按 I 段引用该任务与创造力的实验"
+    },
+    {
+      "id": "cet4-paper-2015062",
+      "sourceHash": "d3c4ef6939c068642b64bb4c84e6952592d355f998ad50031100508ddbc599d5",
+      "section": "reading-b",
+      "labels": "ABCDEFGHIJK",
+      "evidence": "源 PDF 第 5 页第九段误印 D；原阅读段落顺序及解析按 I 识别"
+    },
+    {
+      "id": "cet4-paper-2026061",
+      "sourceHash": "fd21222185ec1a1bd5c48e7e94f122da67ca0e4ad988bed0d819f0c9e32cf949",
+      "section": "reading-b",
+      "labels": "ABCDEFGHIJKL",
+      "evidence": "源 PDF 第 6 页 J) Another highlight：右括号被 OCR 漏识，源图标签正确"
+    },
+    {
+      "id": "cet4-paper-2015061",
+      "sourceHash": "0a35df76ec44f229acb766ac56687f9ac051dc2602343f5b428c53acd51ef96c",
+      "section": "reading-b",
+      "labels": "ABCDEFGHIJKLMNO",
+      "evidence": "原 PDF 第 5 页 We can look at and learn from Steve Jobs 段位于 H 与 J 之间；重复的 D 更正为 I，解析按 I 段对应"
+    },
+    {
+      "id": "cet4-paper-2017062",
+      "sourceHash": "b14c56d1578ce0ec0cb3ac707a9f1f5b5cefca96532a20a609d0e925ec54642e",
+      "section": "reading-b",
+      "labels": "ABCDEFGHIJ",
+      "evidence": "源 PDF 第 8 页 [J] However, organisations 标签的右括号被 OCR 漏识，已目视确认；源图无需修改"
+    }
+  ],
+  "textCorrections": [
+    {
+      "id": "cet4-paper-2022123",
+      "sourceHash": "931aba71d81a9bcff016a7f954b6d154ceada7022fe999e12983196b5d6579a9",
+      "section": "reading-b",
+      "before": "D) After each task, the researchers measured",
+      "after": "I) After each task, the researchers measured",
+      "evidence": "根据段落顺序与解析册中 I 段的实验描述更正重复标签"
+    }
+  ],
+  "pdfCorrections": [
+    {
+      "sourceHash": "d3c4ef6939c068642b64bb4c84e6952592d355f998ad50031100508ddbc599d5",
+      "page": 5,
+      "prefix": "D)But not all fast-food companies",
+      "before": "D",
+      "after": "I",
+      "evidence": "第九段标签的来源限定修正；H 后、J 前，解析按 I 段引用"
+    },
+    {
+      "sourceHash": "0a35df76ec44f229acb766ac56687f9ac051dc2602343f5b428c53acd51ef96c",
+      "page": 5,
+      "prefix": "D)\"We can look",
+      "before": "D",
+      "after": "I",
+      "evidence": "根据段落顺序与原解析更正第九段的重复标签"
+    }
+  ],
+  "legacyPromptCorrections": [
+    {
+      "questionId": "cet4-legacy-200612-1-new-part-1-q-1",
+      "sourceHash": "003b7d194d34caec9ac590afb5b43f8a0f0edd1432c1441328c2a5c8e39139ce",
+      "field": "promptBlocks",
+      "before": "Directions:\tFor this part, you are allowed 30 minute to write a short essay on the topic of students selecting their lectures. You should write at least 120 words following the outline given bellow:",
+      "after": "Directions:\tFor this part, you are allowed 30 minutes to write a short essay on the topic of The Spring Festival Gala on CCTV. You should write at least 120 words following the outline given below:",
+      "evidence": "源文档中文提纲及同文档参考范文一致；原英文 Directions 沿用了另一作文题的模板题名"
+    },
+    {
+      "questionId": "cet4-legacy-200906-1-part-1-q-1",
+      "sourceHash": "d59d0d26416c081d91a1cb50b7fa133b856ed9f76521b23af31fa32c32a63720",
+      "field": "promptBlocks",
+      "before": "Directions:\tFor this part, you are allowed 30 minute to write a short essay on the topic of students selecting their lectures. You should write at least 120 words following the outline given bellow:",
+      "after": "Directions:\tFor this part, you are allowed 30 minutes to write a short essay on the topic of Free Admission to Museums. You should write at least 120 words following the outline given below:",
+      "evidence": "源文档中文提纲及同文档参考范文一致；原英文 Directions 沿用了另一作文题的模板题名"
+    },
+    {
+      "questionId": "cet4-legacy-200906-1-part-1-q-1",
+      "sourceHash": "d59d0d26416c081d91a1cb50b7fa133b856ed9f76521b23af31fa32c32a63720",
+      "field": "referenceAnswer",
+      "before": "Free Admission to Museums(满分版)",
+      "after": "Free Admission to Museums",
+      "evidence": "去除参考范文标题附加的宣传性评价，保留范文本身"
+    }
+  ]
+}

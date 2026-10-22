@@ -98,6 +98,20 @@ const numberedAnnotations = parsePastedBbcSyntaxBlock(numberedSource).sentences;
 const numberedAutomatic = numberedAnnotations.map((annotation) => buildAutomaticBbcSyntax(annotation.text));
 const numberedReviewed = numberedAutomatic.map((sentence, index) => applyPastedBbcSyntax(sentence, numberedAnnotations, index + 1));
 
+test("Markdown sentence headings import all 23 supplied POS and component annotations", () => {
+  const input = readFileSync(new URL("./fixtures/bbc-paste-260817.txt", import.meta.url), "utf8");
+  const parsed = parsePastedBbcSyntaxBlock(input);
+  assert.equal(parsed.sentences.length, 23);
+  assert.ok(!parsed.articleText.includes("句子成分："));
+  for (const annotation of parsed.sentences) {
+    const result = applyPastedBbcSyntax(buildAutomaticBbcSyntax(annotation.text), parsed.sentences, annotation.sentenceNo);
+    assert.equal(result.status, "reviewed");
+    assert.ok(result.sourceAnnotation.startsWith(`## ${annotation.sentenceNo}.`));
+    assert.ok(result.tokens.every((token) => token.pos === "PUNCT" || token.posLabel));
+    assert.ok(result.level1.length > 0);
+  }
+});
+
 test("all 21 teacher-authored numbered BBC sentences retain POS, clauses, contractions and explicit omissions", () => {
   assert.equal(numberedReviewed.length, 21);
   for (const [index, sentence] of numberedReviewed.entries()) {

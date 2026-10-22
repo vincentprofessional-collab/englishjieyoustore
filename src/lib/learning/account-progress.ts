@@ -5,7 +5,7 @@ export const ACCOUNT_PROGRESS_EVENT = "englishjieyou:account-progress";
 export const VOCABULARY_PROGRESS_KEY = "ielts-vocabulary-learning-v1";
 export const STUDY_HISTORY_KEY = "ielts-platform.analytics.dailyProgress";
 const fixedKeys = new Set([VOCABULARY_PROGRESS_KEY, STUDY_HISTORY_KEY, "ielts-vocabulary-daily-activity-v1", "ielts-vocabulary-group-progress-v1", "ielts-vocabulary-learning-settings-v1", "ielts-platform.favoriteQuestions", FAVORITE_WORDS_STORAGE_KEY]);
-export function isProgressKey(key: string) { return fixedKeys.has(key) || /^ielts-platform\.(listeningAttempt|listeningReviewAnswers)\./.test(key); }
+export function isProgressKey(key: string) { return fixedKeys.has(key) || /^ielts-platform\.(listeningAttempt|listeningReviewAnswers)\./.test(key) || /^ielts-platform\.reading\.attempt:(?:mock|practice):cambridge-\d+-test-[1-4]$/.test(key); }
 type Data = Record<string, any>;
 export type ProgressRecord = { value: any; updatedAt: number };
 export type AccountSnapshot = { version: 1; entries: Record<string, ProgressRecord>; times: Record<string, { seconds: number; activitySeconds: Record<string, number> }> };

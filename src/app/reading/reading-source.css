@@ -1,0 +1,46 @@
+.reading-source-workbench { min-width: 0; }
+.reading-source-workbench.fullscreen { position: fixed; inset: 0; z-index: 1000; background: #faf7ef; padding: 18px; overflow-y: auto; }
+.reading-source-workbench button { font: inherit; cursor: pointer; }
+.reading-source-workbench button:disabled { cursor: default; opacity: .55; }
+.reading-source-part-tabs { align-items: center; display: flex; flex-wrap: wrap; gap: 10px; }
+.reading-source-part-tabs button, .reading-source-mobile-tabs button { border: 1px solid #d8d0c2; background: #fffdf7; border-radius: 9px; padding: 10px 16px; color: #4c5a52; }
+.reading-source-part-tabs button.active, .reading-source-mobile-tabs button[aria-pressed=true] { background: #c2daea; border-color: #a9d4ea; color: #245d7b; }
+.reading-source-part-tabs button span { margin-left: 12px; font-size: 12px; }
+.reading-source-part-tabs a { margin-left: auto; color: #766f62; font-size: 13px; }
+.reading-source-navigation.junior-high-paper-nav { grid-template-columns: repeat(20, minmax(0, 1fr)); margin: 4px 0; }
+.reading-source-layout { align-items: start; gap: 18px; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.reading-source-passage, .reading-source-questions { min-width: 0; max-height: 75dvh; overflow-y: auto; overscroll-behavior: contain; scrollbar-gutter: stable; }
+.reading-source-passage { border: 1px solid #e4dccd; border-radius: 14px; background: #fff; padding: 16px; }
+.reading-source-passage h2, .reading-source-questions h2 { font-size: 18px; color: #245d7b; margin: 0 0 14px; }
+.reading-source-pages { display: grid; gap: 14px; }
+.reading-source-pages figure { margin: 0; }
+.reading-source-pages img { display: block; width: 100%; height: auto; background: white; }
+.reading-source-pages figcaption { color: #766f62; font-size: 11px; text-align: center; margin: 4px 0; }
+.reading-source-questions > .junior-high-question-card { margin-top: 18px; }
+.reading-source-answer-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.reading-source-answer-grid label { display: grid; grid-template-columns: 26px minmax(0, 1fr); align-items: baseline; gap: 7px; }
+.reading-source-answer-grid input { min-width: 0; width: 100%; box-sizing: border-box; border: 1px solid #d8d0c2; border-radius: 7px; background: white; color: #253b32; font: inherit; padding: 9px; }
+.reading-source-answer-grid small { grid-column: 2; overflow-wrap: anywhere; }
+.reading-source-answer-grid .correct input { border-color: #6d9e74; background: #eff7ee; }
+.reading-source-answer-grid .correct small { color: #386842; }
+.reading-source-answer-grid .incorrect input { border-color: #b44a39; background: #fff3ee; }
+.reading-source-answer-grid .incorrect small { color: #b44a39; }
+.reading-source-result { color: #245d7b; font-weight: 700; }
+.reading-source-analysis { margin-top: 18px; white-space: normal; }
+.reading-source-analysis summary { cursor: pointer; color: #72531b; font-weight: 700; padding: 4px 0; }
+.reading-source-analysis > section { margin: 14px 0; }
+.reading-source-attribution { color: #766f62; font-size: 13px; }
+.reading-source-notice { color: #245d7b; }
+.reading-source-mobile-tabs { display: none; }
+@media (max-width: 760px) {
+  .reading-source-workbench .junior-high-exam-toolbar { grid-template-columns: minmax(0, 1fr) auto; gap: 10px; }
+  .reading-source-workbench .junior-high-exam-toolbar-title { grid-column: 1 / -1; grid-row: 2; }
+  .reading-source-workbench .junior-high-toolbar-actions { flex-wrap: wrap; grid-column: 1 / -1; }
+  .reading-source-navigation.junior-high-paper-nav { grid-template-columns: repeat(10, minmax(0, 1fr)); }
+  .reading-source-mobile-tabs { display: flex; gap: 8px; }
+  .reading-source-layout { display: block; }
+  .reading-source-layout.show-questions > .reading-source-passage, .reading-source-layout.show-passage > .reading-source-questions { display: none; }
+  .reading-source-passage, .reading-source-questions { max-height: none; overflow-y: visible; }
+  .reading-source-part-tabs a { margin-left: 0; }
+  .reading-source-answer-grid { grid-template-columns: minmax(0, 1fr); }
+}

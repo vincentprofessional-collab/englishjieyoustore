@@ -3,8 +3,15 @@ import { mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { buildCet6Paper } from "./cet6-paper-parser.mjs";
 import { buildCet6PracticeSets } from "./cet6-practice-parser.mjs";
+import { existsSync } from "node:fs";
 
 const EXAM = process.env.CET_EXAM === "cet6" ? "cet6" : "cet4";
+if (EXAM === "cet4") {
+  if (!existsSync("src/data/cet4/source-review.json")) throw new Error("CET-4 source review manifest is required; raw document imports cannot be published.");
+  const { buildReviewedCet4Sets } = await import("./build-cet4-reviewed-sets.mjs");
+  await buildReviewedCet4Sets();
+  process.exit(0);
+}
 const EXAM_LABEL = EXAM === "cet6" ? "大学英语六级" : "大学英语四级";
 const ROOT = path.resolve("public", EXAM);
 const libraryData = JSON.parse(await readFile(path.resolve("src/data", EXAM, "library.json"), "utf8"));

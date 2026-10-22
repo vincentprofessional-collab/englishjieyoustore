@@ -9,6 +9,12 @@ const legacyCosOnlyPaths = new Set(["static/cet4/audio/cet4-paper-2023121.mp3"])
 const supabaseSafePathSegment = /^[A-Za-z0-9_.,!&$@=;:+?() *'\-]+$/;
 const encodedPathAlias = /^u-[A-Za-z0-9_-]+$/;
 
+// These assets ship with the reviewed exam manifests and pass their prebuild
+// hash gates. Their exact directories are also allowed in .vercelignore.
+export function isPublishedExamStaticAsset(pathname: string) {
+  return /^\/(?:reading\/(?:source-pages|explanations)\/[a-z0-9_-]+\.webp|cet4\/evidence\/[a-f0-9]{24}\.webp|cet4\/audio\/[a-z0-9_-]+\.mp3)$/.test(pathname);
+}
+
 export function toSupabaseSafeStoragePath(path: string) {
   const normalizedPath = path.trim().replace(/^\/+|\/+$/g, "");
   const segments = normalizedPath.split("/");

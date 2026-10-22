@@ -32,6 +32,7 @@ import {
 } from "@/lib/study-selection";
 import { clearPersistedInlineHighlights, focusInlineText, inlineHighlightKey, persistInlineHighlight, restoreInlineHighlights, textOccurrenceForRange } from "@/lib/inline-highlights";
 import { recordPracticeAttempt } from "@/lib/learning/site-progress";
+import { ReadingSourceWorkbench } from "@/components/reading-source-workbench";
 
 type AnswerMap = Record<number, string[]>;
 type FillMap = Record<number, string>;
@@ -950,6 +951,10 @@ function ReadingChoiceBlock({
 }
 
 export function ReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: ReadingPracticeProps) {
+  return test.source ? <ReadingSourceWorkbench key={`${mode}:${test.id}`} mode={mode} test={test} /> : <LegacyReadingPractice mode={mode} test={test} />;
+}
+
+function LegacyReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: ReadingPracticeProps) {
   const inlineTextAnnotations = useArticleInlineAnnotations("ielts-reading", test.id);
   const parts = test.parts;
   const firstPart = parts[0];

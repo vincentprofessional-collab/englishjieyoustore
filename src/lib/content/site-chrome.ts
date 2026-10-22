@@ -1,10 +1,12 @@
 import { supabase } from "@/lib/supabase/client";
 import {
   ensureCompleteExamMenu,
+  ensureCoursesAfterExams,
   ensureJuniorHighExamMenu,
   ensureNewConceptMenu,
   ensureSatExamMenu,
   ensureSeniorHighExamMenu,
+  removeRetiredCet4KnowledgeLinks,
 } from "@/lib/content/site-chrome-nav";
 
 export const SITE_CHROME_SLUG = "site-chrome";
@@ -497,9 +499,6 @@ export function mergeSiteChromeConfig(value: unknown): SiteChromeConfig {
     : {};
   const mergedNavItems = mergeNavItems(nav.items, fallback.nav.items);
   const coursesFallback = fallback.nav.items.find((item) => item.id === "courses");
-  const navWithCourses = coursesFallback && !mergedNavItems.some((item) => item.id === "courses")
-    ? [...mergedNavItems.slice(0, 1), coursesFallback, ...mergedNavItems.slice(1)]
-    : mergedNavItems;
   const examsFallback = fallback.nav.items.find((item) => item.id === "exams");
   const juniorHighFallback = fallback.nav.items
     .find((item) => item.id === "exams")
@@ -511,8 +510,8 @@ export function mergeSiteChromeConfig(value: unknown): SiteChromeConfig {
     .find((item) => item.id === "exams")
     ?.children.find((item) => item.id === "sat-reading-writing");
   const navWithJuniorHigh = examsFallback && juniorHighFallback
-    ? ensureJuniorHighExamMenu(navWithCourses, examsFallback, juniorHighFallback)
-    : navWithCourses;
+    ? ensureJuniorHighExamMenu(mergedNavItems, examsFallback, juniorHighFallback)
+    : mergedNavItems;
   const navWithSeniorHigh = examsFallback && seniorHighFallback
     ? ensureSeniorHighExamMenu(navWithJuniorHigh, examsFallback, seniorHighFallback)
     : navWithJuniorHigh;
@@ -715,7 +714,7 @@ export function mergeSiteChromeConfig(value: unknown): SiteChromeConfig {
       adminHref: readString(nav.adminHref, fallback.nav.adminHref),
       adminLabel: readString(nav.adminLabel, fallback.nav.adminLabel),
       fontSize: readNumber(nav.fontSize, fallback.nav.fontSize, 12, 28),
-      items: visibleNavItems,
+      items: removeRetiredCet4KnowledgeLinks(coursesFallback ? ensureCoursesAfterExams(visibleNavItems, coursesFallback) : visibleNavItems),
       loginHref: readString(nav.loginHref, fallback.nav.loginHref),
       loginLabel: readString(nav.loginLabel, fallback.nav.loginLabel),
     },

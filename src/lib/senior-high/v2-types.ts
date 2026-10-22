@@ -114,7 +114,10 @@ export type SeniorHighPlacement =
 export type SeniorHighQuestion = {
   id: string;
   displayNumber: number;
+  displayLabel?: string;
+  typeLabel?: string;
   sourceQuestionNumber?: number;
+  sourceQuestionLabel?: string;
   type: SeniorHighQuestionType;
   promptBlocks: SeniorHighBlock[];
   placement: SeniorHighPlacement;
@@ -137,11 +140,13 @@ export type SeniorHighQuestionGroup = {
   sharedOptions: SeniorHighOption[];
   sharedOptionsReusable?: boolean;
   questions: SeniorHighQuestion[];
+  explanationBlocks?: SeniorHighBlock[];
 };
 
 export type SeniorHighSection = {
   id: string;
   title: string;
+  sourceYear?: string;
   instructions: SeniorHighBlock[];
   score?: number;
   layout: "flow" | "split" | "table" | "dialogue";

@@ -49,6 +49,23 @@ function loadPasteParser() {
   return exports.parseBbcArticlePaste;
 }
 
+test("BBC 260817 supplied paste keeps grammar out of vocabulary and aligns its original MP3 transcript", () => {
+  const parsed = loadPasteParser()(readFileSync(new URL("./fixtures/bbc-paste-260817.txt", import.meta.url), "utf8"));
+  assert.equal(typeof parsed, "object");
+  assert.equal(parsed.english.split("\n\n").length, 4);
+  assert.equal(parsed.chinese.split("\n\n").length, 4);
+  assert.equal(parsed.vocabulary.length, 28);
+  assert.equal(parsed.vocabulary.at(-1).translation, "标准发音通常与英国上层阶级联系在一起。");
+  assert.equal(parsed.syntaxAnnotations.length, 23);
+  const fixture = JSON.parse(readFileSync(new URL("./fixtures/bbc-audio-260817.json", import.meta.url), "utf8"));
+  const sentences = parsed.syntaxAnnotations.map(({ sentenceNo, text }) => ({ sentenceNo, english: text }));
+  const result = loadAudioAlignment()(sentences, fixture.recognized, fixture.duration, fixture.pauses);
+  assert.equal(result.timings.length, 23);
+  assert.deepEqual(Array.from(result.reviewSentenceNos), []);
+  assert.equal(result.timings[0].startMs, 5300);
+  assert.equal(result.timings.at(-1).endMs, 168468);
+});
+
 test("BBC pasted numbered vocabulary without a section heading stays out of bilingual body paragraphs", () => {
   const parse = loadPasteParser();
   const result = parse(`260803-Gen Z's love of the past 热衷怀旧的“Z世代”

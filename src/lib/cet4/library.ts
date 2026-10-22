@@ -30,6 +30,7 @@ export type Cet4SetSummary = {
   explanationCount: number;
   answerStatus: "answered" | "partial" | "none" | "conflict";
   questionTypes: string[];
+  coverageNote?: string;
   href: string;
   quality: { structureStatus: string; structureConfidence: number; issueCount: number };
 };

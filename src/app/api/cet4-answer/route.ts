@@ -1,9 +1,6 @@
 import { NextResponse } from "next/server";
-import { getCet4Entry } from "@/lib/cet4/library";
-
-export async function POST(request: Request) {
-  const entryId = new URL(request.url).searchParams.get("entryId") || "";
-  const entry = getCet4Entry(entryId);
-  if (!entry || entry.section === "知识点") return NextResponse.json({ error: "not found" }, { status: 404 });
-  return NextResponse.json({ answers: entry.answers });
+export async function POST() {
+  // Reviewed question payloads are the sole public answer source. The legacy
+  // endpoint must never expose uncleaned document extracts.
+  return NextResponse.json({ error: "请在对应试题页面提交作答后查看答案与解析。" }, { status: 410 });
 }

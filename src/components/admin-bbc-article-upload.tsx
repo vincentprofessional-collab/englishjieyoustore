@@ -270,7 +270,7 @@ export function AdminBbcArticleUpload() {
         </label>
         {audioFile ? (
           <div aria-label="MP3 音频上传进度" aria-valuemax={100} aria-valuemin={0} aria-valuenow={audioProgress} className={styles.progress} role="progressbar">
-            <span>{audioStatus === "uploaded" ? "原声和独立小音频已上传" : audioStatus === "analyzing" ? "正在识别原声并切分小音频" : audioStatus === "analysis-failed" ? "音频处理失败，请核对原文与 MP3" : audioStatus === "uploading" ? `音频上传中 ${audioProgress}%` : audioStatus === "failed" ? "音频上传失败，请重试" : "等待上传"}</span>
+            <span>{audioStatus === "uploaded" ? "原声和独立小音频已上传" : audioStatus === "analyzing" ? "正在识别原声并切分小音频" : audioStatus === "analysis-failed" ? "自动对齐未完成，请查看下方原因" : audioStatus === "uploading" ? `音频上传中 ${audioProgress}%` : audioStatus === "failed" ? "音频上传失败，请重试" : "等待上传"}</span>
             <div className={styles.progressTrack}><i style={{ width: `${audioProgress}%` }} /></div>
           </div>
         ) : null}

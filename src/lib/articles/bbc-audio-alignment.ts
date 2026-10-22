@@ -58,7 +58,8 @@ export function alignBbcAudioSentences(sentences: { sentenceNo: number; english:
     else j--;
   }
   if (2 * anchors.size / (source.length + recognized.length) < 0.88 || anchors.size / source.length < 0.88) {
-    throw new Error("音频与英文原文的匹配度不足，请检查是否选错 MP3，或原文与原声是否一致。");
+    const coverage = Math.round(100 * anchors.size / source.length);
+    throw new Error(`本次自动识别的匹配度不足（正文 ${source.length} 词，识别 ${recognized.length} 词，正文覆盖 ${coverage}%），尚未生成逐句音频。请保留原文件并核对本次输入正文与识别结果。`);
   }
   let offset = 0;
   const aligned = sentences.map((sentence) => {

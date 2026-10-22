@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { CAMBRIDGE_BOOKS } from "@/lib/ielts/cambridge-books";
 import { READING_TESTS, type ReadingTest } from "@/lib/ielts/reading";
 
 const IELTS_READING_TESTS = [1, 2, 3, 4];
+const READING_BOOKS = Array.from({ length: 21 }, (_, i) => ({ code: `cambridge-${i + 1}`, shortTitle: `CI${i + 1}`, title: `剑桥雅思 ${i + 1}` }));
 
 export function ReadingLibrary({ mode }: { mode: "mock" | "practice" }) {
   const testsByBook = new Map<string, ReadingTest[]>();
@@ -25,7 +25,7 @@ export function ReadingLibrary({ mode }: { mode: "mock" | "practice" }) {
         </div>
 
         <div className="listening-practice-book-list">
-          {CAMBRIDGE_BOOKS.map((book) => {
+          {READING_BOOKS.map((book) => {
             const bookTests = [...(testsByBook.get(book.code) ?? [])].sort(
               (a, b) => a.testNo - b.testNo,
             );
@@ -46,19 +46,20 @@ export function ReadingLibrary({ mode }: { mode: "mock" | "practice" }) {
                 <div className="listening-test-grid reading-test-grid">
                   {IELTS_READING_TESTS.map((testNo) => {
                     const test = bookTests.find((item) => item.testNo === testNo);
+                    const displayNo = test?.displayTestNo ?? (book.code === "cambridge-12" ? testNo + 4 : testNo);
 
                     return test ? (
                       <Link
-                        aria-label={`${book.title} Test ${testNo} ${mode === "mock" ? "模考" : "练习"}`}
+                        aria-label={`${book.title} Test ${displayNo} ${mode === "mock" ? "模考" : "练习"}`}
                         className="reading-test-link available"
                         href={`/reading/${mode}/${test.id}`}
                         key={testNo}
                       >
-                        <strong>Test {testNo}</strong>
+                        <strong>Test {displayNo}</strong>
                       </Link>
                     ) : (
                       <span className="reading-test-link locked" key={testNo}>
-                        <strong>Test {testNo}</strong>
+                        <strong>Test {displayNo}</strong>
                         <span>待导入</span>
                       </span>
                     );

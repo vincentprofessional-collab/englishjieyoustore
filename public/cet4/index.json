@@ -1,7 +1,217 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-06T14:19:21.778Z",
+  "generatedAt": "2026-10-22T01:15:42.067771+00:00",
   "entries": [
+    {
+      "id": "practice-cet4-reading",
+      "kind": "practice",
+      "title": "大学英语四级仔细阅读训练",
+      "year": "1990–2019",
+      "region": "全国",
+      "variant": "",
+      "questionCount": 1096,
+      "answeredCount": 1096,
+      "explanationCount": 346,
+      "answerStatus": "answered",
+      "questionTypes": [
+        "single_choice",
+        "short_answer"
+      ],
+      "href": "/cet4/practice-cet4-reading",
+      "quality": {
+        "structureStatus": "approved",
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
+      },
+      "coverageNote": "仅开放已核对题组；缺答案或对应关系不明的资料待复核"
+    },
+    {
+      "id": "practice-cet4-matching",
+      "kind": "practice",
+      "title": "大学英语四级长篇阅读训练",
+      "year": "1990–2019",
+      "region": "全国",
+      "variant": "",
+      "questionCount": 360,
+      "answeredCount": 360,
+      "explanationCount": 320,
+      "answerStatus": "answered",
+      "questionTypes": [
+        "shared_option_matching",
+        "single_choice",
+        "short_answer"
+      ],
+      "href": "/cet4/practice-cet4-matching",
+      "quality": {
+        "structureStatus": "approved",
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
+      },
+      "coverageNote": "仅开放已核对题组；缺答案或对应关系不明的资料待复核"
+    },
+    {
+      "id": "practice-cet4-word-bank",
+      "kind": "practice",
+      "title": "大学英语四级选词填空训练",
+      "year": "1990–2019",
+      "region": "全国",
+      "variant": "",
+      "questionCount": 420,
+      "answeredCount": 420,
+      "explanationCount": 380,
+      "answerStatus": "answered",
+      "questionTypes": [
+        "shared_option_matching"
+      ],
+      "href": "/cet4/practice-cet4-word-bank",
+      "quality": {
+        "structureStatus": "approved",
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
+      },
+      "coverageNote": "仅开放已核对题组；缺答案或对应关系不明的资料待复核"
+    },
+    {
+      "id": "practice-cet4-writing",
+      "kind": "practice",
+      "title": "大学英语四级写作训练",
+      "year": "1990–2019",
+      "region": "全国",
+      "variant": "",
+      "questionCount": 32,
+      "answeredCount": 32,
+      "explanationCount": 32,
+      "answerStatus": "answered",
+      "questionTypes": [
+        "essay"
+      ],
+      "href": "/cet4/practice-cet4-writing",
+      "quality": {
+        "structureStatus": "approved",
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
+      },
+      "coverageNote": "仅开放已核对题组；缺答案或对应关系不明的资料待复核"
+    },
+    {
+      "id": "practice-cet4-cloze",
+      "kind": "practice",
+      "title": "大学英语四级完形填空训练",
+      "year": "1990–2019",
+      "region": "全国",
+      "variant": "",
+      "questionCount": 560,
+      "answeredCount": 560,
+      "explanationCount": 0,
+      "answerStatus": "answered",
+      "questionTypes": [
+        "single_choice"
+      ],
+      "href": "/cet4/practice-cet4-cloze",
+      "quality": {
+        "structureStatus": "approved",
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
+      },
+      "coverageNote": "仅开放已核对题组；缺答案或对应关系不明的资料待复核"
+    },
+    {
+      "id": "practice-cet4-dictation",
+      "kind": "practice",
+      "title": "大学英语四级听写填空训练",
+      "year": "1990–2019",
+      "region": "全国",
+      "variant": "",
+      "questionCount": 72,
+      "answeredCount": 72,
+      "explanationCount": 20,
+      "answerStatus": "answered",
+      "questionTypes": [
+        "inline_fill"
+      ],
+      "href": "/cet4/practice-cet4-dictation",
+      "quality": {
+        "structureStatus": "approved",
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
+      },
+      "coverageNote": "仅开放已核对题组；缺答案或对应关系不明的资料待复核"
+    },
+    {
+      "id": "practice-cet4-listening",
+      "kind": "practice",
+      "title": "大学英语四级听力理解训练",
+      "year": "1990–2019",
+      "region": "全国",
+      "variant": "",
+      "questionCount": 1036,
+      "answeredCount": 1036,
+      "explanationCount": 470,
+      "answerStatus": "answered",
+      "questionTypes": [
+        "single_choice"
+      ],
+      "href": "/cet4/practice-cet4-listening",
+      "quality": {
+        "structureStatus": "approved",
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
+      },
+      "coverageNote": "仅开放已核对题组；缺答案或对应关系不明的资料待复核"
+    },
+    {
+      "id": "practice-cet4-translation",
+      "kind": "practice",
+      "title": "大学英语四级翻译训练",
+      "year": "1990–2019",
+      "region": "全国",
+      "variant": "",
+      "questionCount": 125,
+      "answeredCount": 125,
+      "explanationCount": 125,
+      "answerStatus": "answered",
+      "questionTypes": [
+        "translation"
+      ],
+      "href": "/cet4/practice-cet4-translation",
+      "quality": {
+        "structureStatus": "approved",
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
+      },
+      "coverageNote": "仅开放已核对题组；缺答案或对应关系不明的资料待复核"
+    },
+    {
+      "id": "practice-cet4-grammar",
+      "kind": "practice",
+      "title": "大学英语四级词汇与语法训练",
+      "year": "1990–2019",
+      "region": "全国",
+      "variant": "",
+      "questionCount": 1050,
+      "answeredCount": 1050,
+      "explanationCount": 0,
+      "answerStatus": "answered",
+      "questionTypes": [
+        "single_choice"
+      ],
+      "href": "/cet4/practice-cet4-grammar",
+      "quality": {
+        "structureStatus": "approved",
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
+      },
+      "coverageNote": "仅开放已核对题组；缺答案或对应关系不明的资料待复核"
+    },
     {
       "id": "cet4-paper-2026063",
       "kind": "paper",
@@ -9,22 +219,24 @@
       "year": "2026",
       "region": "全国",
       "variant": "第3套",
-      "questionCount": 21,
-      "answeredCount": 2,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 32,
+      "answeredCount": 32,
+      "explanationCount": 32,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
-        "short_answer",
+        "shared_option_matching",
         "single_choice",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2026063",
       "quality": {
-        "structureStatus": "review_required",
-        "structureConfidence": 0.72,
-        "issueCount": 1
-      }
+        "structureStatus": "approved",
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
+      },
+      "coverageNote": "原资料未提供听力题目"
     },
     {
       "id": "cet4-paper-2026062",
@@ -33,22 +245,22 @@
       "year": "2026",
       "region": "全国",
       "variant": "第2套",
-      "questionCount": 48,
-      "answeredCount": 3,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "inline_fill",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2026062",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
       }
     },
     {
@@ -58,21 +270,22 @@
       "year": "2026",
       "region": "全国",
       "variant": "第1套",
-      "questionCount": 43,
-      "answeredCount": 3,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2026061",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
       }
     },
     {
@@ -82,22 +295,24 @@
       "year": "2025",
       "region": "全国",
       "variant": "第3套",
-      "questionCount": 22,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 32,
+      "answeredCount": 32,
+      "explanationCount": 32,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
-        "short_answer",
+        "shared_option_matching",
         "single_choice",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2025123",
       "quality": {
-        "structureStatus": "review_required",
-        "structureConfidence": 0.72,
-        "issueCount": 1
-      }
+        "structureStatus": "approved",
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
+      },
+      "coverageNote": "原资料未提供听力题目"
     },
     {
       "id": "cet4-paper-2025122",
@@ -106,21 +321,22 @@
       "year": "2025",
       "region": "全国",
       "variant": "第2套",
-      "questionCount": 47,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2025122",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
       }
     },
     {
@@ -130,21 +346,22 @@
       "year": "2025",
       "region": "全国",
       "variant": "第1套",
-      "questionCount": 47,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2025121",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
       }
     },
     {
@@ -154,22 +371,24 @@
       "year": "2025",
       "region": "全国",
       "variant": "第3套",
-      "questionCount": 22,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 32,
+      "answeredCount": 32,
+      "explanationCount": 32,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
-        "short_answer",
+        "shared_option_matching",
         "single_choice",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2025063",
       "quality": {
-        "structureStatus": "review_required",
-        "structureConfidence": 0.72,
-        "issueCount": 1
-      }
+        "structureStatus": "approved",
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
+      },
+      "coverageNote": "原资料未提供听力题目"
     },
     {
       "id": "cet4-paper-2025062",
@@ -178,21 +397,22 @@
       "year": "2025",
       "region": "全国",
       "variant": "第2套",
-      "questionCount": 47,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2025062",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
       }
     },
     {
@@ -202,21 +422,22 @@
       "year": "2025",
       "region": "全国",
       "variant": "第1套",
-      "questionCount": 47,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2025061",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
       }
     },
     {
@@ -226,22 +447,24 @@
       "year": "2024",
       "region": "全国",
       "variant": "第3套",
-      "questionCount": 22,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 32,
+      "answeredCount": 32,
+      "explanationCount": 32,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
-        "short_answer",
+        "shared_option_matching",
         "single_choice",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2024123",
       "quality": {
-        "structureStatus": "review_required",
-        "structureConfidence": 0.72,
-        "issueCount": 1
-      }
+        "structureStatus": "approved",
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
+      },
+      "coverageNote": "原资料未提供听力题目"
     },
     {
       "id": "cet4-paper-2024122",
@@ -250,21 +473,22 @@
       "year": "2024",
       "region": "全国",
       "variant": "第2套",
-      "questionCount": 46,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2024122",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
       }
     },
     {
@@ -274,21 +498,22 @@
       "year": "2024",
       "region": "全国",
       "variant": "第1套",
-      "questionCount": 48,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2024121",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
       }
     },
     {
@@ -299,22 +524,23 @@
       "region": "全国",
       "variant": "第3套",
       "questionCount": 32,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "answeredCount": 32,
+      "explanationCount": 32,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
-        "inline_fill",
-        "short_answer",
+        "shared_option_matching",
         "single_choice",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2024063",
       "quality": {
-        "structureStatus": "review_required",
-        "structureConfidence": 0.72,
-        "issueCount": 1
-      }
+        "structureStatus": "approved",
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
+      },
+      "coverageNote": "原资料未提供听力题目"
     },
     {
       "id": "cet4-paper-2024062",
@@ -324,21 +550,21 @@
       "region": "全国",
       "variant": "第2套",
       "questionCount": 57,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "inline_fill",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2024062",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
       }
     },
     {
@@ -349,21 +575,21 @@
       "region": "全国",
       "variant": "第1套",
       "questionCount": 57,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "inline_fill",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2024061",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
       }
     },
     {
@@ -374,22 +600,23 @@
       "region": "全国",
       "variant": "第3套",
       "questionCount": 32,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "answeredCount": 32,
+      "explanationCount": 32,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
-        "inline_fill",
-        "short_answer",
+        "shared_option_matching",
         "single_choice",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2023123",
       "quality": {
-        "structureStatus": "review_required",
-        "structureConfidence": 0.72,
-        "issueCount": 1
-      }
+        "structureStatus": "approved",
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
+      },
+      "coverageNote": "原资料未提供听力题目"
     },
     {
       "id": "cet4-paper-2023122",
@@ -399,21 +626,21 @@
       "region": "全国",
       "variant": "第2套",
       "questionCount": 57,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "inline_fill",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2023122",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
       }
     },
     {
@@ -424,21 +651,21 @@
       "region": "全国",
       "variant": "第1套",
       "questionCount": 57,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "inline_fill",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2023121",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
       }
     },
     {
@@ -449,22 +676,23 @@
       "region": "全国",
       "variant": "第3套",
       "questionCount": 32,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "answeredCount": 32,
+      "explanationCount": 32,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
-        "inline_fill",
-        "short_answer",
+        "shared_option_matching",
         "single_choice",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2023063",
       "quality": {
-        "structureStatus": "review_required",
-        "structureConfidence": 0.72,
-        "issueCount": 1
-      }
+        "structureStatus": "approved",
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
+      },
+      "coverageNote": "原资料未提供听力题目"
     },
     {
       "id": "cet4-paper-2023062",
@@ -474,21 +702,21 @@
       "region": "全国",
       "variant": "第2套",
       "questionCount": 57,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "inline_fill",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2023062",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
       }
     },
     {
@@ -499,21 +727,21 @@
       "region": "全国",
       "variant": "第1套",
       "questionCount": 57,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "inline_fill",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2023061",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
       }
     },
     {
@@ -524,19 +752,21 @@
       "region": "全国",
       "variant": "第3套",
       "questionCount": 2,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "answeredCount": 2,
+      "explanationCount": 2,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2023033",
       "quality": {
-        "structureStatus": "review_required",
-        "structureConfidence": 0.72,
-        "issueCount": 1
-      }
+        "structureStatus": "approved",
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
+      },
+      "coverageNote": "原资料未提供听力题目；原资料未提供阅读题目"
     },
     {
       "id": "cet4-paper-2023032",
@@ -546,19 +776,21 @@
       "region": "全国",
       "variant": "第2套",
       "questionCount": 2,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "answeredCount": 2,
+      "explanationCount": 2,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2023032",
       "quality": {
-        "structureStatus": "review_required",
-        "structureConfidence": 0.72,
-        "issueCount": 1
-      }
+        "structureStatus": "approved",
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
+      },
+      "coverageNote": "原资料未提供听力题目；原资料未提供阅读题目"
     },
     {
       "id": "cet4-paper-2023031",
@@ -568,21 +800,21 @@
       "region": "全国",
       "variant": "第1套",
       "questionCount": 57,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "inline_fill",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2023031",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
       }
     },
     {
@@ -593,22 +825,23 @@
       "region": "全国",
       "variant": "第3套",
       "questionCount": 32,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "answeredCount": 32,
+      "explanationCount": 32,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
-        "inline_fill",
-        "short_answer",
+        "shared_option_matching",
         "single_choice",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2022123",
       "quality": {
-        "structureStatus": "review_required",
-        "structureConfidence": 0.72,
-        "issueCount": 1
-      }
+        "structureStatus": "approved",
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
+      },
+      "coverageNote": "原资料未提供听力题目"
     },
     {
       "id": "cet4-paper-2022122",
@@ -618,21 +851,21 @@
       "region": "全国",
       "variant": "第2套",
       "questionCount": 57,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "inline_fill",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2022122",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
       }
     },
     {
@@ -642,22 +875,22 @@
       "year": "2022",
       "region": "全国",
       "variant": "第1套",
-      "questionCount": 56,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "inline_fill",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2022121",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
       }
     },
     {
@@ -667,20 +900,24 @@
       "year": "2022",
       "region": "全国",
       "variant": "第3套",
-      "questionCount": 2,
-      "answeredCount": 1,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
+        "single_choice",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2022093",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
+      },
+      "coverageNote": "客观题按原资料说明沿用同场第1套对应部分"
     },
     {
       "id": "cet4-paper-2022092",
@@ -689,20 +926,24 @@
       "year": "2022",
       "region": "全国",
       "variant": "第2套",
-      "questionCount": 2,
-      "answeredCount": 1,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
+        "single_choice",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2022092",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
+      },
+      "coverageNote": "客观题按原资料说明沿用同场第1套对应部分"
     },
     {
       "id": "cet4-paper-2022091",
@@ -711,19 +952,22 @@
       "year": "2022",
       "region": "全国",
       "variant": "第1套",
-      "questionCount": 2,
-      "answeredCount": 2,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
+        "single_choice",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2022091",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
       }
     },
     {
@@ -733,20 +977,24 @@
       "year": "2022",
       "region": "全国",
       "variant": "第3套",
-      "questionCount": 2,
-      "answeredCount": 0,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 32,
+      "answeredCount": 32,
+      "explanationCount": 32,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
+        "shared_option_matching",
+        "single_choice",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2022063",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
+      },
+      "coverageNote": "原资料未提供听力题目；客观题按原资料说明沿用同场第2套对应部分"
     },
     {
       "id": "cet4-paper-2022062",
@@ -756,22 +1004,23 @@
       "region": "全国",
       "variant": "第2套",
       "questionCount": 32,
-      "answeredCount": 1,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "answeredCount": 32,
+      "explanationCount": 32,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
-        "inline_fill",
-        "short_answer",
+        "shared_option_matching",
         "single_choice",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2022062",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
+      },
+      "coverageNote": "原资料未提供听力题目"
     },
     {
       "id": "cet4-paper-2022061",
@@ -780,21 +1029,22 @@
       "year": "2022",
       "region": "全国",
       "variant": "第1套",
-      "questionCount": 47,
-      "answeredCount": 2,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2022061",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
       }
     },
     {
@@ -804,23 +1054,24 @@
       "year": "2021",
       "region": "全国",
       "variant": "第3套",
-      "questionCount": 31,
-      "answeredCount": 6,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 32,
+      "answeredCount": 32,
+      "explanationCount": 32,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
-        "inline_fill",
-        "short_answer",
+        "shared_option_matching",
         "single_choice",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2021123",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
+      },
+      "coverageNote": "原资料未提供听力题目"
     },
     {
       "id": "cet4-paper-2021122",
@@ -830,21 +1081,21 @@
       "region": "全国",
       "variant": "第2套",
       "questionCount": 57,
-      "answeredCount": 12,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "inline_fill",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2021122",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
       }
     },
     {
@@ -855,22 +1106,21 @@
       "region": "全国",
       "variant": "第1套",
       "questionCount": 57,
-      "answeredCount": 16,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "inline_fill",
         "shared_option_matching",
-        "short_answer",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2021121",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
       }
     },
     {
@@ -880,22 +1130,24 @@
       "year": "2021",
       "region": "全国",
       "variant": "第3套",
-      "questionCount": 22,
-      "answeredCount": 1,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 32,
+      "answeredCount": 32,
+      "explanationCount": 32,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
-        "short_answer",
+        "shared_option_matching",
         "single_choice",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2021063",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
+      },
+      "coverageNote": "原资料未提供听力题目"
     },
     {
       "id": "cet4-paper-2021062",
@@ -904,21 +1156,22 @@
       "year": "2021",
       "region": "全国",
       "variant": "第2套",
-      "questionCount": 55,
-      "answeredCount": 3,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2021062",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
       }
     },
     {
@@ -928,21 +1181,22 @@
       "year": "2021",
       "region": "全国",
       "variant": "第1套",
-      "questionCount": 58,
-      "answeredCount": 4,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2021061",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
       }
     },
     {
@@ -952,22 +1206,24 @@
       "year": "2020",
       "region": "全国",
       "variant": "第3套",
-      "questionCount": 22,
-      "answeredCount": 1,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 32,
+      "answeredCount": 32,
+      "explanationCount": 32,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
-        "short_answer",
+        "shared_option_matching",
         "single_choice",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2020123",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
+      },
+      "coverageNote": "原资料未提供听力题目"
     },
     {
       "id": "cet4-paper-2020122",
@@ -976,21 +1232,22 @@
       "year": "2020",
       "region": "全国",
       "variant": "第2套",
-      "questionCount": 46,
-      "answeredCount": 1,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2020122",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
       }
     },
     {
@@ -1000,20 +1257,22 @@
       "year": "2020",
       "region": "全国",
       "variant": "第1套",
-      "questionCount": 28,
-      "answeredCount": 1,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2020121",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
       }
     },
     {
@@ -1025,18 +1284,20 @@
       "variant": "第3套",
       "questionCount": 2,
       "answeredCount": 2,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "explanationCount": 2,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2020093",
       "quality": {
-        "structureStatus": "review_required",
-        "structureConfidence": 0.72,
-        "issueCount": 1
-      }
+        "structureStatus": "approved",
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
+      },
+      "coverageNote": "原资料未提供听力题目；原资料未提供阅读题目"
     },
     {
       "id": "cet4-paper-2020092",
@@ -1045,22 +1306,24 @@
       "year": "2020",
       "region": "全国",
       "variant": "第2套",
-      "questionCount": 22,
-      "answeredCount": 1,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 32,
+      "answeredCount": 32,
+      "explanationCount": 32,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
-        "short_answer",
+        "shared_option_matching",
         "single_choice",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2020092",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
+      },
+      "coverageNote": "原资料未提供听力题目"
     },
     {
       "id": "cet4-paper-2020091",
@@ -1069,47 +1332,47 @@
       "year": "2020",
       "region": "全国",
       "variant": "第1套",
-      "questionCount": 40,
-      "answeredCount": 1,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 57,
+      "answeredCount": 57,
+      "explanationCount": 57,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
         "single_choice",
-        "short_answer",
+        "shared_option_matching",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2020091",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
       }
     },
     {
       "id": "cet4-paper-2020071",
       "kind": "paper",
-      "title": "2020年7月大学英语四级真题 · 第1套",
+      "title": "2020年7月大学英语四级真题（写作与翻译）",
       "year": "2020",
       "region": "全国",
       "variant": "第1套",
-      "questionCount": 45,
-      "answeredCount": 5,
-      "explanationCount": 0,
-      "answerStatus": "partial",
+      "questionCount": 2,
+      "answeredCount": 2,
+      "explanationCount": 2,
+      "answerStatus": "answered",
       "questionTypes": [
         "essay",
-        "single_choice",
-        "inline_fill",
-        "shared_option_matching",
         "translation"
       ],
       "href": "/cet4/cet4-paper-2020071",
       "quality": {
         "structureStatus": "approved",
-        "structureConfidence": 0.86,
-        "issueCount": 0
-      }
+        "structureConfidence": 1,
+        "issueCount": 0,
+        "issues": []
+      },
+      "coverageNote": "源文件含拼接练习，按来源说明仅保留当场写作与翻译"
     }
   ]
 }

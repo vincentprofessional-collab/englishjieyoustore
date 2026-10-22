@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { GuideBoard } from "@/components/guide-board";
 import { coursePageHref, findCoursePage } from "@/lib/courses/course-directory";
 import { getCachedPublishedCourseDirectory } from "@/lib/courses/course-directory-server";
 
@@ -26,21 +25,8 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ s
       <header className="course-page-hero">
         <span>ENGLISH COURSE</span>
         <h1>{page.node.label}</h1>
-        {page.node.summary ? <p>{page.node.summary}</p> : <p>课程内容与配套学习资料。</p>}
+        <p>暂无内容，稍晚会有演示课及课程介绍等内容。</p>
       </header>
-      {page.children.length ? (
-        <section aria-label={`${page.node.label}子页面`} className="course-page-grid">
-          {page.children.map((child) => (
-            <Link className="course-page-card" href={coursePageHref([...slug, child.slug])} key={child.id}>
-              <span>课程页面</span>
-              <h2>{child.label}</h2>
-              {child.summary ? <p>{child.summary}</p> : null}
-              <strong>查看内容 <span aria-hidden="true">→</span></strong>
-            </Link>
-          ))}
-        </section>
-      ) : null}
-      <GuideBoard compact hideWhenEmpty initialExpanded placementPath={page.href} title={`${page.node.label}帖子`} />
     </main>
   );
 }
