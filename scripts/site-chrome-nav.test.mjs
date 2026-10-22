@@ -1,11 +1,71 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import { createRequire } from "node:module";
+import { createElement } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
+import ts from "typescript";
+import * as navHelpers from "../src/lib/content/site-chrome-nav.ts";
 import {
   ensureCompleteExamMenu,
   ensureJuniorHighExamLink,
   ensureJuniorHighExamMenu,
   removeRetiredCet4KnowledgeLinks,
 } from "../src/lib/content/site-chrome-nav.ts";
+
+test("published exam banks have clickable sidebar and saved-menu entry points", () => {
+  const require = createRequire(import.meta.url);
+  let pathname = "/junior-high";
+  function loadModule(relativePath) {
+    const code = ts.transpileModule(readFileSync(new URL(relativePath, import.meta.url), "utf8"), {
+      compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022, jsx: ts.JsxEmit.ReactJSX, esModuleInterop: true },
+    }).outputText;
+    const exports = {};
+    new Function("require", "exports", code)((name) => {
+      if (name === "next/link") return ({ children, ...props }) => createElement("a", props, children);
+      if (name === "next/navigation") return { usePathname: () => pathname, useSearchParams: () => new URLSearchParams() };
+      if (name === "@/components/guide-board") return { GuidePostsOnNavigationPage: () => null };
+      if (name === "@/lib/articles/bbc") return { BBC_DEFAULT_YEAR: 2026 };
+      if (name === "@/lib/courses/course-directory") return {};
+      if (name === "@/lib/supabase/client") return {};
+      if (name === "@/lib/content/site-chrome-nav") return navHelpers;
+      return require(name);
+    }, exports);
+    return exports;
+  }
+  const { IeltsSectionShell } = loadModule("../src/components/ielts-section-shell.tsx");
+  const { mergeSiteChromeConfig } = loadModule("../src/lib/content/site-chrome.ts");
+  const config = mergeSiteChromeConfig({ nav: { items: [{ id: "exams", label: "语言考试", children: [] }] } });
+  const groups = config.nav.items.find((item) => item.id === "exams").children;
+  const expected = [
+    ["postgraduate", "考研英语", "/postgraduate?entry=papers", "paper"],
+    ["gmat", "GMAT", "/gmat?entry=practice", "practice"],
+    ["gre", "GRE", "/gre?entry=practice", "practice"],
+  ];
+  for (const route of ["/junior-high", "/senior-high", "/cet4", "/postgraduate", "/gmat", "/gre"]) {
+    pathname = route;
+    const html = renderToStaticMarkup(createElement(IeltsSectionShell, {
+      siteChromeConfig: config, courseDirectory: { groups: [] }, children: createElement("p", null, "题库内容"),
+    }));
+    for (const [id, label, href] of expected) {
+      assert.match(html, new RegExp(`<a\\b[^>]*href="${href.replace("?", "\\?")}"[^>]*><strong>${label}</strong></a>`), `${route}: ${label} must be an actual link`);
+      const group = groups.find((item) => item.id === id);
+      assert.equal(group?.enabled, true);
+      assert.equal(group?.href, href);
+    }
+    assert.ok(html.includes("题库内容"));
+  }
+  for (const [exam, , , kind] of expected) {
+    const index = JSON.parse(readFileSync(new URL(`../public/exam-prep/${exam}/index.json`, import.meta.url), "utf8"));
+    const entries = index.entries.filter((entry) => entry.kind === kind);
+    assert.ok(entries.length > 0, `${exam}: linked category must contain published sets`);
+    for (const entry of entries) {
+      assert.equal(entry.href, `/exam-practice/${exam}/${entry.id}`);
+      const set = JSON.parse(readFileSync(new URL(`../public/exam-prep/${exam}/${entry.dataPath}`, import.meta.url), "utf8"));
+      assert.ok(set.questions?.length || set.sections?.some((section) => section.questions?.length || section.passages?.some((passage) => passage.questions?.length)), `${entry.href}: questions must exist`);
+    }
+  }
+});
 
 test("retired CET-4 knowledge links disappear from older saved navigation", () => {
   const source = [{ id: "exams", label: "语言考试", children: [

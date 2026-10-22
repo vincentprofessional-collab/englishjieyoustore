@@ -213,7 +213,7 @@ function isMobileNavItemActive(id: (typeof mobileNavItems)[number]["id"], pathna
   if (id === "books") return pathname.startsWith("/textbooks") || pathname.startsWith("/articles") || pathname.startsWith("/new-concept");
   if (id === "courses") return pathname === "/courses" || pathname.startsWith("/courses/");
   if (id === "me") return pathname.startsWith("/me");
-  return ["/listening", "/reading", "/writing", "/speaking", "/junior-high", "/senior-high", "/cet4", "/cet6", "/sat", "/exams"].some((path) => pathname.startsWith(path));
+  return ["/listening", "/reading", "/writing", "/speaking", "/junior-high", "/senior-high", "/cet4", "/cet6", "/sat", "/postgraduate", "/gre", "/gmat", "/exam-practice", "/exams"].some((path) => pathname.startsWith(path));
 }
 
 function isFocusedPracticeRoute(pathname: string) {

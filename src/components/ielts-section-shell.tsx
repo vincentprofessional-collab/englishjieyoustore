@@ -79,7 +79,7 @@ const STUDY_NAV_GROUPS: StudyNavGroup[] = [
     { href: "/cet6?entry=practice", label: "题型训练" },
     { href: "/cet6?entry=papers", label: "历年真题" },
   ], href: "/cet6", id: "cet6", label: "六级英语", mark: "六" },
-  { children: [], disabled: true, href: "", id: "postgraduate", label: "考研英语", mark: "研" },
+  { children: [], href: "/postgraduate?entry=papers", id: "postgraduate", label: "考研英语", mark: "研" },
   {
     children: [
       {
@@ -122,8 +122,8 @@ const STUDY_NAV_GROUPS: StudyNavGroup[] = [
     label: "SAT",
     mark: "S",
   },
-  { children: [], disabled: true, href: "", id: "gmat", label: "GMAT", mark: "G" },
-  { children: [], disabled: true, href: "", id: "gre", label: "GRE", mark: "G" },
+  { children: [], href: "/gmat?entry=practice", id: "gmat", label: "GMAT", mark: "G" },
+  { children: [], href: "/gre?entry=practice", id: "gre", label: "GRE", mark: "G" },
 ];
 
 function getPathSegments(pathname: string) {
@@ -494,7 +494,7 @@ function IeltsSectionShellContent({
             }
 
             return (
-              <div className={`study-directory-source-group ${isActive ? "active" : ""} ${group.disabled ? "disabled" : ""} ${group.id === "gmat" || group.id === "gre" ? "visible-placeholder" : ""}`} key={group.id}>
+              <div className={`study-directory-source-group ${isActive ? "active" : ""} ${group.disabled ? "disabled" : ""}`} key={group.id}>
                 {group.disabled ? (
                   <div aria-disabled="true" className="study-directory-source-link">
                     <strong>{group.label}</strong>
