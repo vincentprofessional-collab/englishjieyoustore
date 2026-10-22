@@ -203,6 +203,7 @@ const mobileNavItems = [
   { href: "/vocabulary/books", id: "word", label: "单词" },
   { href: "/textbooks", id: "books", label: "教材" },
   { href: "/exams", id: "exams", label: "考试" },
+  { href: "/courses", id: "courses", label: "课程" },
   { href: "/me", id: "me", label: "我的" },
 ] as const;
 
@@ -210,6 +211,7 @@ function isMobileNavItemActive(id: (typeof mobileNavItems)[number]["id"], pathna
   if (id === "home") return pathname === "/";
   if (id === "word") return pathname.startsWith("/vocabulary");
   if (id === "books") return pathname.startsWith("/textbooks") || pathname.startsWith("/articles") || pathname.startsWith("/new-concept");
+  if (id === "courses") return pathname === "/courses" || pathname.startsWith("/courses/");
   if (id === "me") return pathname.startsWith("/me");
   return ["/listening", "/reading", "/writing", "/speaking", "/junior-high", "/senior-high", "/cet4", "/cet6", "/sat", "/exams"].some((path) => pathname.startsWith(path));
 }
@@ -230,6 +232,7 @@ function MobileNavIcon({ id }: { id: (typeof mobileNavItems)[number]["id"] }) {
     home: <><path d="m3 10 9-7 9 7" /><path d="M5 9v11h5v-6h4v6h5V9" /></>,
     books: <><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v17H6.5A2.5 2.5 0 0 0 4 22z" /><path d="M4 5.5v14A2.5 2.5 0 0 1 6.5 17H20" /><path d="M8 7h8M8 11h8" /></>,
     exams: <><circle cx="12" cy="12" r="9" /><path d="m8 12 2.5 2.5L16 9" /></>,
+    courses: <><path d="M3 5.5A2.5 2.5 0 0 1 5.5 3H20v17H5.5A2.5 2.5 0 0 0 3 22z" /><path d="M3 5.5v14A2.5 2.5 0 0 1 5.5 17H20" /><path d="M8 7h8M8 11h6" /></>,
     me: <><circle cx="12" cy="8" r="3.5" /><path d="M4.5 21a7.5 7.5 0 0 1 15 0" /></>,
   }[id];
 

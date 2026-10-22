@@ -45,7 +45,8 @@ test("BBC archive defaults to 2026 and renders the selected year article list", 
   assert.match(articlesHome, /choice-dot selected/);
   assert.match(articlesHome, /articles\.map\(\(article\) => renderArticleCard\(article\)\)/);
   assert.match(articlesPage, /guestFree: isFreeBbc2015ArticleUnlocked\(article\.id\)/);
-  assert.match(globalCss, /\.bbc-article-select \.choice-dot\.read\s*\{\s*background:\s*#d1483f;\s*border-color:\s*#d1483f;/);
+  assert.match(globalCss, /\.bbc-article-select \.choice-dot\.read\s*\{[^}]*background:\s*transparent;[^}]*border-color:\s*#8a58c7;/);
+  assert.match(globalCss, /\.bbc-article-select \.choice-dot\.read::after\s*\{[^}]*content:\s*"♥";[^}]*left:\s*50%;[^}]*top:\s*50%;[^}]*transform:\s*translate\(-50%, -50%\);/);
   assert.match(globalCss, /\.home-style-lab \.home-announcement-panel \.home-hero-copy h1\s*\{[^}]*font-size:\s*clamp\(18px, 2vw, 24px\) !important;/);
 });
 

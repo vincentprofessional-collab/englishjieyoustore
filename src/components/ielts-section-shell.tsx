@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-import { Suspense, useState, type ReactNode } from "react";
+import { Suspense, useEffect, useState, type ReactNode } from "react";
 import type { SiteChromeConfig } from "@/lib/content/site-chrome";
 import { GuidePostsOnNavigationPage } from "@/components/guide-board";
 import { BBC_DEFAULT_YEAR } from "@/lib/articles/bbc";
+import { coursePageHref, type CourseDirectory, type CoursePageNode } from "@/lib/courses/course-directory";
 
 type StudyNavNode = {
   href: string;
@@ -29,6 +30,18 @@ function getExpandableStudyNavIds(nodes: StudyNavNode[], parentId: string): stri
       ? [nodeId, ...getExpandableStudyNavIds(node.children, nodeId)]
       : [];
   });
+}
+
+function getExpandedCourseNavIds(nodes: CoursePageNode[], route: string[]) {
+  const expanded = new Set<string>();
+  let currentNodes = nodes;
+  for (const slug of route) {
+    const node = currentNodes.find((item) => item.slug === slug);
+    if (!node) break;
+    if (node.children.length) expanded.add(`course:${node.id}`);
+    currentNodes = node.children;
+  }
+  return expanded;
 }
 
 const STUDY_NAV_GROUPS: StudyNavGroup[] = [
@@ -214,9 +227,11 @@ function getNewConceptUnitFromPath(pathname: string, unitCount: number) {
 }
 
 function IeltsSectionShellContent({
+  courseDirectory,
   children,
   siteChromeConfig,
 }: {
+  courseDirectory: CourseDirectory;
   children: ReactNode;
   siteChromeConfig: SiteChromeConfig;
 }) {
@@ -224,6 +239,7 @@ function IeltsSectionShellContent({
   const searchParams = useSearchParams();
   const [expandedExamGroupId, setExpandedExamGroupId] = useState<StudyNavGroup["id"] | null>(null);
   const [expandedStudyNavChildIds, setExpandedStudyNavChildIds] = useState<Set<string>>(() => new Set());
+  const isCoursePage = pathname === "/courses" || pathname.startsWith("/courses/");
   const requestedBbcYear = Number(searchParams.get("year"));
   const activeBbcYear = BBC_DIRECTORY_YEARS.includes(requestedBbcYear)
     ? requestedBbcYear
@@ -233,6 +249,20 @@ function IeltsSectionShellContent({
       ? pathname === "/articles" || pathname.startsWith("/articles/") || pathname === "/new-concept" || pathname.startsWith("/new-concept/")
       : isGroupPath(pathname, group),
   );
+
+  useEffect(() => {
+    setExpandedExamGroupId(activeGroup?.children.length ? activeGroup.id : null);
+    if (activeGroup?.children.length && !isCoursePage && !window.matchMedia("(max-width: 820px)").matches) {
+      setExpandedStudyNavChildIds(new Set(getExpandableStudyNavIds(activeGroup.children, activeGroup.id)));
+    } else if (!isCoursePage) {
+      setExpandedStudyNavChildIds(new Set());
+    }
+  }, [activeGroup?.id, pathname, isCoursePage]);
+
+  useEffect(() => {
+    if (!isCoursePage) return;
+    setExpandedStudyNavChildIds(getExpandedCourseNavIds(courseDirectory.groups, pathname.split("/").filter(Boolean).slice(1)));
+  }, [courseDirectory, isCoursePage, pathname]);
 
   function renderStudyDirectoryNodes(
     nodes: StudyNavNode[],
@@ -295,9 +325,63 @@ function IeltsSectionShellContent({
     });
   }
 
+  function renderCourseDirectoryNodes(nodes: CoursePageNode[], parentSlugs: string[] = [], depth = 0): ReactNode {
+    return nodes.map((node) => {
+      const slugs = [...parentSlugs, node.slug];
+      const href = coursePageHref(slugs);
+      const nodeId = `course:${node.id}`;
+      const isCurrent = pathname === href;
+      const isInCurrentBranch = isCurrent || pathname.startsWith(`${href}/`);
+      const isExpanded = expandedStudyNavChildIds.has(nodeId);
+      const nestedId = `course-directory-${node.id.replace(/[^a-z0-9_-]/gi, "-")}`;
+      const row = (
+        <div className={`course-directory-source-row ${isInCurrentBranch ? "active" : ""}`}>
+          <Link
+            aria-current={isCurrent ? "page" : undefined}
+            className={depth === 0 ? "study-directory-source-link" : `course-directory-nested-link ${isInCurrentBranch ? "active" : ""}`}
+            href={href}
+          >
+            {depth === 0
+              ? <><span aria-hidden="true" className="study-directory-source-mark">{getDirectoryMark(node.label, node.label.slice(0, 1))}</span><strong>{node.label}</strong></>
+              : <><span aria-hidden="true" />{node.label}</>}
+          </Link>
+          {node.children.length ? (
+            <button
+              aria-controls={nestedId}
+              aria-expanded={isExpanded}
+              aria-label={`${isExpanded ? "收起" : "展开"}${node.label}子页面`}
+              className="course-directory-expand-button"
+              onClick={() => setExpandedStudyNavChildIds((current) => {
+                const next = new Set(current);
+                if (next.has(nodeId)) next.delete(nodeId);
+                else next.add(nodeId);
+                return next;
+              })}
+              type="button"
+            >
+              <span aria-hidden="true" className="study-directory-chevron">{isExpanded ? "−" : "+"}</span>
+            </button>
+          ) : null}
+        </div>
+      );
+
+      return depth === 0 ? (
+        <div className={`study-directory-source-group course-directory-group ${isInCurrentBranch ? "active" : ""}`} key={node.id}>
+          {row}
+          {isExpanded ? <div className="study-directory-secondary" id={nestedId}>{renderCourseDirectoryNodes(node.children, slugs, depth + 1)}</div> : null}
+        </div>
+      ) : (
+        <div className={`study-directory-secondary-group course-directory-group ${isInCurrentBranch ? "active" : ""}`} key={node.id}>
+          {row}
+          {isExpanded ? <div className="study-directory-tertiary" id={nestedId}>{renderCourseDirectoryNodes(node.children, slugs, depth + 1)}</div> : null}
+        </div>
+      );
+    });
+  }
+
   // The New Concept home owns its content list. Every integrated-English page
   // uses the same source-aware directory shell below.
-  if (!activeGroup || (activeGroup.id !== "integrated-english" && isImmersiveIeltsPage(pathname))) {
+  if ((!activeGroup && !isCoursePage) || (activeGroup && activeGroup.id !== "integrated-english" && isImmersiveIeltsPage(pathname))) {
     return (
       <>
         {children}
@@ -306,7 +390,7 @@ function IeltsSectionShellContent({
     );
   }
 
-  const isIntegratedEnglish = activeGroup.id === "integrated-english";
+  const isIntegratedEnglish = activeGroup?.id === "integrated-english";
   const examGroups = STUDY_NAV_GROUPS.filter((group) => group.id !== "integrated-english");
   const isBbcPage = pathname === "/articles" || pathname.startsWith("/articles/");
   const isBbcArticle = /^\/articles\/[^/]+\/?$/.test(pathname);
@@ -325,17 +409,17 @@ function IeltsSectionShellContent({
 
   return (
     <div className={`ielts-section-shell${isBbcArticle ? " bbc-article-immersive" : ""}`}>
-      <aside className={`ielts-side-nav study-directory-side-nav ${isIntegratedEnglish ? "integrated-english-side-nav" : "language-exams-side-nav"}`} aria-label={isIntegratedEnglish ? "综合英语导航" : "语言考试导航"}>
+      <aside className={`ielts-side-nav study-directory-side-nav ${isIntegratedEnglish ? "integrated-english-side-nav" : isCoursePage ? "course-directory-side-nav" : "language-exams-side-nav"}`} aria-label={isIntegratedEnglish ? "综合英语导航" : isCoursePage ? "英语课程导航" : "语言考试导航"}>
         <header className="study-directory-head">
           <div>
             <span>Directory</span>
-            <strong>{isIntegratedEnglish ? "综合英语" : "语言考试"}</strong>
+            <strong>{isIntegratedEnglish ? "综合英语" : isCoursePage ? "英语课程" : "语言考试"}</strong>
           </div>
         </header>
 
         <nav className="study-directory-nav">
-          {(isIntegratedEnglish ? [activeGroup] : examGroups).map((group) => {
-            const isActive = group.id === activeGroup.id;
+          {isCoursePage ? renderCourseDirectoryNodes(courseDirectory.groups) : (isIntegratedEnglish ? [activeGroup!] : examGroups).map((group) => {
+            const isActive = group.id === activeGroup?.id;
 
             if (isIntegratedEnglish) {
               const bbcChild = group.children[0];
@@ -462,22 +546,24 @@ function IeltsSectionShellContent({
 
       <div className="ielts-section-content">
         {children}
-        <GuidePostsOnNavigationPage config={siteChromeConfig} />
+        {!isCoursePage ? <GuidePostsOnNavigationPage config={siteChromeConfig} /> : null}
       </div>
     </div>
   );
 }
 
 export function IeltsSectionShell({
+  courseDirectory,
   children,
   siteChromeConfig,
 }: {
+  courseDirectory: CourseDirectory;
   children: ReactNode;
   siteChromeConfig: SiteChromeConfig;
 }) {
   return (
     <Suspense fallback={children}>
-      <IeltsSectionShellContent siteChromeConfig={siteChromeConfig}>
+      <IeltsSectionShellContent courseDirectory={courseDirectory} siteChromeConfig={siteChromeConfig}>
         {children}
       </IeltsSectionShellContent>
     </Suspense>

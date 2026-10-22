@@ -49,7 +49,7 @@ export default async function ArticlePage({
 
   const canonicalSyntaxSentences = (article.year === 2026 ? (syntax2026 as Record<string, BbcSyntaxSentenceData[]>)[article.id] : undefined)
     ?? article.syntaxSentences
-    ?? (!builtinArticle ? article.sentences?.map((sentence) => buildAutomaticBbcSyntax(sentence.english)) : undefined);
+    ?? article.sentences?.map((sentence) => buildAutomaticBbcSyntax(sentence.english));
 
   if (process.env.NODE_ENV === "development" && preview === "mobile") {
     return <ArticleDetailPage key={article.id} article={article} isUploadedArticle={!builtinArticle} syntaxSentences={canonicalSyntaxSentences} />;
