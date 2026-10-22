@@ -65,7 +65,8 @@ if (!/const JIUFEN_PUBLICATION_ENABLED = false/.test(listeningCatalog)) {
 }
 
 const layout = readFileSync("src/app/layout.tsx", "utf8");
-if (!/<IeltsSectionShell\s+siteChromeConfig=\{siteChromeConfig\}>\s*\{children\}\s*<\/IeltsSectionShell>/.test(layout)) {
+// Additional shell props must preserve the configured wrapper and its page content.
+if (!/<IeltsSectionShell\b(?=[^>]*\bsiteChromeConfig=\{siteChromeConfig\})[^>]*>\s*\{children\}\s*<\/IeltsSectionShell>/.test(layout)) {
   failures.push("src/app/layout.tsx must wrap the page content in the configured IELTS section shell");
 }
 
