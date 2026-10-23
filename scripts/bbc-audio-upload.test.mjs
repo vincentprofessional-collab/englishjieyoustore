@@ -293,6 +293,20 @@ test("BBC audio alignment refuses to guess an unrecognized opening sentence", ()
   assert.throws(() => align(sentences, recognized, 8), /匹配度|未与原声完整对齐/);
 });
 
+test("BBC audio alignment accepts 76 percent coverage with anchored sentence edges and flags review", () => {
+  const align = loadAudioAlignment();
+  const words = Array.from({ length: 25 }, (_, index) => `word${index + 1}`);
+  const kept = [...words.slice(0, 4), ...words.slice(10)];
+  const result = align(
+    [{ sentenceNo: 1, english: words.join(" ") }],
+    kept.map((text, index) => ({ text, timestamp: [index * 0.2, index * 0.2 + 0.15] })),
+    6,
+  );
+  assert.deepEqual(Array.from(result.reviewSentenceNos), [1]);
+  assert.equal(result.timings[0].startMs, 0);
+  assert.ok(result.timings[0].endMs > 4000);
+});
+
 test("BBC audio alignment refuses to truncate or estimate unrecognized final words", () => {
   const align = loadAudioAlignment();
   const sentences = [
