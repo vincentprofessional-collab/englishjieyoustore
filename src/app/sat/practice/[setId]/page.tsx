@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SatPracticeRunner } from "@/components/sat/sat-practice-runner";
-import { getSatCatalogIndex, getSatSet } from "@/lib/sat/library";
+import { getSatCatalogIndex, getSatKnowledgeIndex, getSatSet } from "@/lib/sat/library";
 
 export const dynamicParams = false;
 
@@ -10,7 +10,8 @@ export const metadata: Metadata = {
 };
 
 export function generateStaticParams() {
-  return getSatCatalogIndex().sets.map((set) => ({ setId: set.id }));
+  const knowledgeSetIds = getSatKnowledgeIndex().groups.flatMap((group) => group.topics.map((topic) => topic.setId));
+  return [...getSatCatalogIndex().sets.map((set) => set.id), ...knowledgeSetIds].map((setId) => ({ setId }));
 }
 
 export default async function SatPracticePage({ params }: { params: Promise<{ setId: string }> }) {

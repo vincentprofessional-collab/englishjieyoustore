@@ -2,10 +2,12 @@
 import { recordPracticeAttempt } from "@/lib/learning/site-progress";
 
 import Link from "next/link";
+import { Fragment, type ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 import styles from "./sat.module.css";
-import type { SatContentBlock, SatProgress, SatQuestion, SatSet } from "@/lib/sat/types";
+import type { SatContentBlock, SatProgress, SatQuestion, SatSet, SatTextRun } from "@/lib/sat/types";
 import { applySatQuestionOverrides, loadSatQuestionOverrides, saveSatQuestionOverrides, type SatQuestionOverridePatch, type SatQuestionOverrides } from "@/lib/sat/question-overrides";
+import { getExamContentOverride } from "@/lib/exam-content/overrides";
 import { supabase } from "@/lib/supabase/client";
 
 const PROGRESS_PREFIX = "sat-progress:v1:";
@@ -45,7 +47,11 @@ function satBlockText(blocks: SatContentBlock[]): string {
 
 function satTextBlock(text: string, original: SatContentBlock[]) {
   const first = original[0];
-  if (original.length === 1 && first && (first.type === "paragraph" || first.type === "quote" || first.type === "figure")) return [{ ...first, text }];
+  if (original.length === 1 && first && (first.type === "paragraph" || first.type === "quote")) {
+    const { runs: _runs, ...block } = first;
+    return [{ ...block, text }];
+  }
+  if (original.length === 1 && first?.type === "figure") return [{ ...first, text }];
   return text.trim() ? [{ type: "paragraph" as const, text }] : [];
 }
 
@@ -60,11 +66,22 @@ function satChoicesFromText(question: SatQuestion, value: string) {
   }).filter((choice) => choice.text);
 }
 
+function renderChoiceText(text: string, runs?: SatTextRun[]) {
+  if (!runs?.length) return text;
+  return runs.map((run, index) => {
+    let content: ReactNode = run.text;
+    if (run.marks?.includes("bold")) content = <strong>{content}</strong>;
+    if (run.marks?.includes("italic")) content = <em>{content}</em>;
+    if (run.marks?.includes("underline")) content = <u>{content}</u>;
+    return <Fragment key={`${index}-${run.text}`}>{content}</Fragment>;
+  });
+}
+
 function BlockRenderer({ blocks }: { blocks: SatContentBlock[] }) {
   return <>{blocks.map((block, index) => {
     const key = `${block.type}-${index}`;
-    if (block.type === "paragraph") return <p key={key}>{block.text}</p>;
-    if (block.type === "quote") return <blockquote key={key}>{block.text}</blockquote>;
+    if (block.type === "paragraph") return <p key={key}>{renderChoiceText(block.text, block.runs)}</p>;
+    if (block.type === "quote") return <blockquote key={key}>{renderChoiceText(block.text, block.runs)}</blockquote>;
     if (block.type === "notes") return <ul className={styles.notes} key={key}>{block.items.map((item, itemIndex) => <li key={itemIndex}>{item}</li>)}</ul>;
     if (block.type === "twoText") return <div className={styles.twoText} key={key}>{block.texts.map((text) => <section className={styles.textPanel} key={text.label}><h3>{text.label}</h3><div className={styles.content}><BlockRenderer blocks={text.blocks} /></div></section>)}</div>;
     if (block.type === "table") return block.asset ? <figure className={styles.figure} key={key}><img alt={block.title || "SAT source table"} src={block.asset} /></figure> : null;
@@ -101,7 +118,8 @@ function Feedback({ question, answer, submitted }: { question: SatQuestion; answ
   if (!submitted) return null;
   const correct = Boolean(answer) && isCorrect(question, answer);
   const choiceRationales = question.choiceRationales || {};
-  return <section aria-live="polite" className={`${styles.feedback} ${!answer || correct ? styles.correct : styles.incorrect}`}><div className={styles.explanation}><div><h3>Correct option rationale</h3><p>{choiceRationales[question.correctAnswer] || question.rationale}</p></div><ul className={styles.rationaleList}>{(["A", "B", "C", "D"] as const).filter((id) => id !== question.correctAnswer).map((id) => <li key={id}><strong>Choice {id}</strong><p>{choiceRationales[id] || "See the complete rationale below."}</p></li>)}</ul></div></section>;
+  const explainedChoices = (["A", "B", "C", "D"] as const).filter((id) => id !== question.correctAnswer && choiceRationales[id]);
+  return <section aria-live="polite" className={`${styles.feedback} ${!answer || correct ? styles.correct : styles.incorrect}`}><div className={styles.explanation}><div><h3>Correct option rationale</h3><p>{choiceRationales[question.correctAnswer] || question.rationale}</p></div>{explainedChoices.length ? <ul className={styles.rationaleList}>{explainedChoices.map((id) => <li key={id}><strong>Choice {id}</strong><p>{choiceRationales[id]}</p></li>)}</ul> : null}</div></section>;
 }
 
 function SatAdminEditor({ question, isAdmin, onSave, onDelete }: { question: SatQuestion; isAdmin: boolean; onSave: (question: SatQuestion, patch: SatQuestionOverridePatch) => Promise<void>; onDelete: (question: SatQuestion) => Promise<void> }) {
@@ -160,17 +178,18 @@ export function SatPracticeRunner({ setId }: { setId: string }) {
 
   useEffect(() => {
     Promise.all([
-      fetch(`/sat/sets/${setId}.json`).then((response) => {
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        return response.json() as Promise<SatSet>;
-      }),
+      fetch(`/sat/sets/${setId}.json`, { cache: "no-store" }).then((response) => response.ok ? response.json() as Promise<SatSet> : null),
       loadSatQuestionOverrides(),
+      getExamContentOverride("sat", setId),
     ])
-      .then(([payload, loadedOverrides]) => {
+      .then(([payload, loadedOverrides, { override }]) => {
+        if (override?.is_deleted) throw new Error("这套 SAT 题组已由管理员删除。");
+        const effectiveSet = override?.bank_data ? override.bank_data as unknown as SatSet : payload;
+        if (!effectiveSet) throw new Error("这套 SAT 题组不存在或暂时无法载入。");
         setQuestionOverrides(loadedOverrides);
-        setData(applySatQuestionOverrides(payload, loadedOverrides));
+        setData(applySatQuestionOverrides(effectiveSet, loadedOverrides));
       })
-      .catch(() => setError("这套 SAT 题组暂时无法载入，请返回后重试。"));
+      .catch((reason: unknown) => setError(reason instanceof Error ? reason.message : "这套 SAT 题组暂时无法载入，请返回后重试。"));
     setProgress(readProgress(setId));
     setRestored(true);
   }, [setId]);
@@ -260,9 +279,14 @@ export function SatPracticeRunner({ setId }: { setId: string }) {
   if (error) return <section className={styles.root}><div className={styles.error}>{error}</div></section>;
   if (!data || !questions.length) return <section className={`${styles.root} ${styles.practice}`}><div className={styles.loading}>正在载入题组…</div></section>;
 
+  const isKnowledgeSet = setId.startsWith("grammar-");
+  const returnHref = isKnowledgeSet ? "/sat/knowledge" : "/sat";
+  const returnLabel = isKnowledgeSet ? "← 返回知识点" : "← 返回题型训练";
+  const difficultyLabel = data.difficulty === "Unrated" ? "原题练习" : data.difficulty;
+
   return <section className={`${styles.root} ${styles.practice}`} ref={rootRef}>
-    <header className={styles.toolbar}><Link className={styles.back} href="/sat">← 返回</Link><div className={styles.toolbarTitle}><strong><span>{data.domain} · {data.skill}</span><span>{data.difficulty}</span></strong></div><div className={styles.toolbarActions}><button className={styles.toolButton} onClick={submitAll} type="button">提交</button><button className={styles.toolButton} onClick={reset} type="button">重做</button><button className={styles.toolButton} onClick={() => void toggleFullscreen()} type="button">全屏</button></div></header>
+    <header className={styles.toolbar}><Link className={styles.back} href={returnHref}>{returnLabel}</Link><div className={styles.toolbarTitle}><strong><span>{data.domain} · {data.skill}</span><span>{difficultyLabel}</span></strong></div><div className={styles.toolbarActions}><button className={styles.toolButton} onClick={submitAll} type="button">提交</button><button className={styles.toolButton} onClick={reset} type="button">重做</button><button className={styles.toolButton} onClick={() => void toggleFullscreen()} type="button">全屏</button></div></header>
     <QuestionNavigation answers={progress.answers} focusedQuestionId={focusedQuestionId} onSelect={selectQuestion} questions={questions} submitted={progress.submitted} />
-    <div className={styles.questionWrap}>{questions.map((question, index) => { const answer = progress.answers[question.id]; const submitted = Boolean(progress.submitted[question.id]); return <article className={styles.questionCard} id={`sat-question-${question.id}`} key={question.id} onClick={() => setFocusedQuestionId(question.id)}><div className={styles.questionMeta}><strong>Question {index + 1}</strong><span className={styles.meta}>{question.id}</span><span className={styles.meta}>{question.difficulty}</span><SatAdminEditor isAdmin={isAdmin} onDelete={deleteAdminQuestion} onSave={saveAdminQuestion} question={question} /></div><div className={styles.content}><BlockRenderer blocks={question.contentBlocks} /></div><p className={styles.prompt}>{question.prompt}</p><div className={styles.choices}>{question.choices.map((choice) => { const selected = answer === choice.id; const right = submitted && choice.id === question.correctAnswer; const wrong = submitted && selected && !right; return <button aria-pressed={selected} className={`${styles.choice} ${selected ? styles.selected : ""} ${right ? styles.correct : ""} ${wrong ? styles.incorrect : ""}`} key={choice.id} onClick={(event) => { event.stopPropagation(); choose(question, choice.id); }} type="button"><span className={styles.choiceLabel}>{choice.id}.</span><span className={styles.choiceText}>{choice.text}</span>{right ? <span className={styles.choiceMark}>✓</span> : null}{wrong ? <span className={styles.choiceMark}>✕</span> : null}</button>; })}</div><Feedback answer={answer} question={question} submitted={submitted} /><div className={styles.questionActions}><button className={styles.submitButton} disabled={!answer || submitted} onClick={(event) => { event.stopPropagation(); submitQuestion(question.id); }} type="button">{submitted ? "已提交" : "提交"}</button></div></article>; })}</div>
+    <div className={styles.questionWrap}>{questions.map((question, index) => { const answer = progress.answers[question.id]; const submitted = Boolean(progress.submitted[question.id]); return <article className={styles.questionCard} id={`sat-question-${question.id}`} key={question.id} onClick={() => setFocusedQuestionId(question.id)}><div className={styles.questionMeta}><strong>Question {index + 1}</strong><span className={styles.meta}>{question.id}</span><span className={styles.meta}>{question.difficulty === "Unrated" ? "原题" : question.difficulty}</span><SatAdminEditor isAdmin={isAdmin} onDelete={deleteAdminQuestion} onSave={saveAdminQuestion} question={question} /></div><div className={styles.content}><BlockRenderer blocks={question.contentBlocks} /></div>{question.prompt ? <p className={styles.prompt}>{question.prompt}</p> : null}<div className={styles.choices}>{question.choices.map((choice) => { const selected = answer === choice.id; const right = submitted && choice.id === question.correctAnswer; const wrong = submitted && selected && !right; return <button aria-pressed={selected} className={`${styles.choice} ${selected ? styles.selected : ""} ${right ? styles.correct : ""} ${wrong ? styles.incorrect : ""}`} key={choice.id} onClick={(event) => { event.stopPropagation(); choose(question, choice.id); }} type="button"><span className={styles.choiceLabel}>{choice.id}.</span><span className={styles.choiceText}>{renderChoiceText(choice.text, choice.runs)}</span>{right ? <span className={styles.choiceMark}>✓</span> : null}{wrong ? <span className={styles.choiceMark}>✕</span> : null}</button>; })}</div><Feedback answer={answer} question={question} submitted={submitted} /><div className={styles.questionActions}><button className={styles.submitButton} disabled={!answer || submitted} onClick={(event) => { event.stopPropagation(); submitQuestion(question.id); }} type="button">{submitted ? "已提交" : "提交"}</button></div></article>; })}</div>
   </section>;
 }

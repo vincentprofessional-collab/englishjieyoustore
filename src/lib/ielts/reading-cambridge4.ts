@@ -59,8 +59,8 @@ const cambridge4Test1PartOne: ReadingPart = {
   id: "cambridge-4-test-1-part1",
   label: "Part 1",
   questionRange: "questions 1-14",
-  intro: "You should spend about 20 minutes on Questions 1-14, which are based on Reading Passage 1.",
-  title: "Children's ideas about rainforests",
+  intro: "You should spend about 20 minutes on Questions 1-14 which are based on Reading Passage 1 below.",
+  title: "Reading Passage 1",
   sections: [
     {
       id: "c4t1-p1-text",
@@ -68,12 +68,12 @@ const cambridge4Test1PartOne: ReadingPart = {
         "Adults and children are frequently confronted with statements about the alarming rate of loss of tropical rainforests. For example, one graphic illustration to which children might readily relate is the estimate that rainforests are being destroyed at a rate equivalent to one thousand football fields every forty minutes - about the duration of a normal classroom period. In the face of the frequent and often vivid media coverage, it is likely that children will have formed ideas about rainforests - what and where they are, why they are important, what endangers them - independent of any formal tuition. It is also possible that some of these ideas will be mistaken.",
         "Many studies have shown that children harbour misconceptions about 'pure', curriculum science. These misconceptions do not remain isolated but become incorporated into a multifaceted, but organised, conceptual framework, making it and the component ideas, some of which are erroneous, more robust but also accessible to modification. These ideas may be developed by children absorbing ideas through the popular media. Sometimes this information may be erroneous. It seems schools may not be providing an opportunity for children to re-express their ideas and so have them tested and refined by teachers and their peers.",
         "Despite the extensive coverage in the popular media of the destruction of rainforests, little formal information is available about children's ideas in this area. The aim of the present study is to start to provide such information, to help teachers design their educational strategies to build upon correct ideas and to displace misconceptions and to plan programmes in environmental studies in their schools.",
-        "The study surveys children's scientific knowledge and attitudes to rainforests. Secondary school children were asked to complete a questionnaire containing five open-form questions. The most frequent responses to the first question were descriptions which are self-evident from the term 'rainforest'. Some children described them as damp, wet or hot. The second question concerned the geographical location of rainforests. The commonest responses were continents or countries: Africa, South America and Brazil. Some children also gave more general locations, such as being near the Equator.",
-        "Responses to question three concerned the importance of rainforests. The dominant idea, raised by 64% of the pupils, was that rainforests provide animals with habitats. Fewer students responded that rainforests provide plant habitats, and even fewer mentioned the indigenous populations of rainforests. More girls than boys raised the idea of rainforest as animal habitats.",
-        "Similarly, but at a lower level, more girls than boys said that rainforests provided human habitats. These observations are generally consistent with previous studies of pupils' views about the use and conservation of rainforests, in which girls were shown to be more sympathetic to animals and expressed views which seem to place an intrinsic value on non-human animal life.",
-        "The fourth question concerned the causes of the destruction of rainforests. Perhaps encouragingly, more than half of the pupils identified that it is human activities which are destroying rainforests, some personalising the responsibility by the use of terms such as 'we are'. About 18% of the pupils referred specifically to logging activity.",
-        "One misconception, expressed by some pupils, was that acid rain is responsible for rainforest destruction; a similar proportion said that pollution is destroying rainforests. Here, children are confusing rainforest destruction with damage to the forests of Western Europe by these factors. While two fifths of the students provided the information that the rainforests provide oxygen, in some cases this response also embraced the misconception that rainforest destruction would reduce atmospheric oxygen, making the atmosphere incompatible with human life on Earth.",
-        "In answer to the final question about the importance of rainforest conservation, the majority of children simply said that we need rainforests to survive. Only a few of the pupils mentioned that rainforest destruction may contribute to global warming. This is surprising considering the high level of media coverage on this issue. Some children expressed the idea that the conservation of rainforests is not important.",
+        "The study surveys children's scientific knowledge and attitudes to rainforests. Secondary school children were asked to complete a questionnaire containing five open-form questions. The most frequent responses to the first question were descriptions which are self-evident from the term 'rainforest'. Some children described them as damp, wet or hot. The second question concerned the geographical location of rainforests. The commonest responses were continents or countries: Africa (given by 43% of children), South America (30%), Brazil (25%). Some children also gave more general locations, such as being near the Equator.",
+        "Responses to question three concerned the importance of rainforests. The dominant idea, raised by 64% of the pupils, was that rainforests provide animals with habitats. Fewer students responded that rainforests provide plant habitats, and even fewer mentioned the indigenous populations of rainforests. More girls (70%) than boys (60%) raised the idea of rainforest as animal habitats.",
+        "Similarly, but at a lower level, more girls (13%) than boys (5%) said that rainforests provided human habitats. These observations are generally consistent with our previous studies of pupils' views about the use and conservation of rainforests, in which girls were shown to be more sympathetic to animals and expressed views which seem to place an intrinsic value on non-human animal life.",
+        "The fourth question concerned the causes of the destruction of rainforests. Perhaps encouragingly, more than half of the pupils (59%) identified that it is human activities which are destroying rainforests, some personalising the responsibility by the use of terms such as 'we are'. About 18% of the pupils referred specifically to logging activity.",
+        "One misconception, expressed by some 10% of the pupils, was that acid rain is responsible for rainforest destruction; a similar proportion said that pollution is destroying rainforests. Here, children are confusing rainforest destruction with damage to the forests of Western Europe by these factors. While two fifths of the students provided the information that the rainforests provide oxygen, in some cases this response also embraced the misconception that rainforest destruction would reduce atmospheric oxygen, making the atmosphere incompatible with human life on Earth.",
+        "In answer to the final question about the importance of rainforest conservation, the majority of children simply said that we need rainforests to survive. Only a few of the pupils (6%) mentioned that rainforest destruction may contribute to global warming. This is surprising considering the high level of media coverage on this issue. Some children expressed the idea that the conservation of rainforests is not important.",
         "The results of this study suggest that certain ideas predominate in the thinking of children about rainforests. Pupils' responses indicate some misconceptions in basic scientific knowledge of rainforests' ecosystems, such as their ideas about rainforests as habitats for animals, plants and humans, and the relationship between climatic change and destruction of rainforests.",
         "Pupils did not volunteer ideas that suggested that they appreciated the complexity of causes of rainforest destruction. In other words, they gave no indication of an appreciation of either the range of ways in which rainforests are important or the complex social, economic and political factors which drive the activities which are destroying the rainforests. One encouragement is that the results of similar studies about other environmental issues suggest that older children seem to acquire the ability to appreciate, value and evaluate conflicting views. Environmental education offers an arena in which these skills can be developed, which is essential for these children as future decision-makers.",
       ],
@@ -83,7 +83,7 @@ const cambridge4Test1PartOne: ReadingPart = {
     {
       id: "c4t1-p1-true-false",
       type: "choice",
-      instruction: "Do the following statements agree with the information given in Reading Passage 1?",
+      instruction: "Do the following statements agree with the information given in Reading Passage 1? In boxes 1-8 on your answer sheet write TRUE if the statement agrees with the information, FALSE if the statement contradicts the information, or NOT GIVEN if there is no information on this.",
       questions: [
         {
           questionNumbers: [1],
@@ -138,7 +138,8 @@ const cambridge4Test1PartOne: ReadingPart = {
     {
       id: "c4t1-p1-response-matching",
       type: "choice",
-      instruction: "The box gives a list of responses A-P to the questionnaire discussed in Reading Passage 1. Choose the correct response.",
+      sharedOptions: true,
+      instruction: "The box below gives a list of responses A-P to the questionnaire discussed in Reading Passage 1. Answer the following questions by choosing the correct responses A-P. Write your answers in boxes 9-13 on your answer sheet.",
       questions: [
         {
           questionNumbers: [9],
@@ -166,7 +167,7 @@ const cambridge4Test1PartOne: ReadingPart = {
         },
         {
           questionNumbers: [13],
-          prompt: "Which response is cited as unexpectedly uncommon, given the amount of time spent on the issue by newspapers and television?",
+          prompt: "Which of the responses is cited as unexpectedly uncommon, given the amount of time spent on the issue by the newspapers and television?",
           answer: "J",
           options: passageOneResponseOptions,
         },
@@ -175,7 +176,7 @@ const cambridge4Test1PartOne: ReadingPart = {
     {
       id: "c4t1-p1-title",
       type: "choice",
-      instruction: "Choose the most suitable title for Reading Passage 1.",
+      instruction: "Choose the correct letter, A, B, C, D or E. Write your answer in box 14 on your answer sheet.",
       questions: [
         {
           questionNumbers: [14],
@@ -213,19 +214,20 @@ const cambridge4Test1PartTwo: ReadingPart = {
   id: "cambridge-4-test-1-part2",
   label: "Part 2",
   questionRange: "questions 15-26",
-  intro: "You should spend about 20 minutes on Questions 15-26, which are based on Reading Passage 2.",
+  intro: "You should spend about 20 minutes on Questions 15-26 which are based on Reading Passage 2 below.",
   title: "An examination of the functioning of the senses in cetaceans",
+  subtitle: "the group of mammals comprising whales, dolphins and porpoises",
   sections: [
     {
       id: "c4t1-p2-text",
       paragraphs: [
         "Some of the senses that we and other terrestrial mammals take for granted are either reduced or absent in cetaceans or fail to function well in water. For example, it appears from their brain structure that toothed species are unable to smell. Baleen species, on the other hand, appear to have some related brain structures but it is not known whether these are functional. It has been speculated that, as the blowholes evolved and migrated to the top of the head, the neural pathways serving sense of smell may have been nearly all sacrificed. Similarly, although at least some cetaceans have taste buds, the nerves serving these have degenerated or are rudimentary.",
-        "The sense of touch has sometimes been described as weak too; but this view is probably mistaken. Trainers of captive dolphins and small whales often remark on their animals' responsiveness to being touched or rubbed, and both captive and free-ranging cetacean individuals of all species appear to make frequent contact. This contact may help to maintain order within a group, and stroking or touching are part of the courtship ritual in most species. The area around the blowhole is also particularly sensitive and captive animals often object strongly to being touched there.",
-        "The sense of vision is developed to different degrees in different species. Baleen species studied at close quarters underwater have obviously tracked objects with vision underwater, and they can apparently see moderately well both in water and in air. However, the position of the eyes so restricts the field of vision in baleen whales that they probably do not have stereoscopic vision.",
+        "The sense of touch has sometimes been described as weak too; but this view is probably mistaken. Trainers of captive dolphins and small whales often remark on their animals' responsiveness to being touched or rubbed, and both captive and free-ranging cetacean individuals of all species (particularly adults and calves, or members of the same subgroup) appear to make frequent contact. This contact may help to maintain order within a group, and stroking or touching are part of the courtship ritual in most species. The area around the blowhole is also particularly sensitive and captive animals often object strongly to being touched there.",
+        "The sense of vision is developed to different degrees in different species. Baleen species studied at close quarters underwater — specifically a grey whale calf in captivity for a year, and free-ranging right whales and humpback whales studied and filmed off Argentina and Hawaii — have obviously tracked objects with vision underwater, and they can apparently see moderately well both in water and in air. However, the position of the eyes so restricts the field of vision in baleen whales that they probably do not have stereoscopic vision.",
         "On the other hand, the position of the eyes in most dolphins and porpoises suggests that they have stereoscopic vision forward and downward. Eye position in freshwater dolphins, which often swim on their side or upside down while feeding, suggests that what vision they have is stereoscopic forward and upward. By comparison, the bottlenose dolphin has extremely keen vision in water. Judging from the way it watches and tracks airborne flying fish, it can apparently see fairly well through the air-water interface as well. And although preliminary experimental evidence suggests that their in-air vision is poor, the accuracy with which dolphins leap high to take small fish out of a trainer's hand provides anecdotal evidence to the contrary.",
-        "Such variation can no doubt be explained with reference to the habitats in which individual species have developed. For example, vision is obviously more useful to species inhabiting clear open waters than to those living in turbid rivers and flooded plains. The South American boutu and Chinese beiji appear to have very limited vision, and the Indian susus are blind, their eyes reduced to slits that probably allow them to sense only the direction and intensity of light.",
-        "Although the senses of taste and smell appear to have deteriorated, and vision in water appears to be uncertain, such weaknesses are more than compensated for by cetaceans' well-developed acoustic sense. Most species are highly vocal, although they vary in the range of sounds they produce, and many forage for food using echolocation. Large baleen whales primarily use the lower frequencies and are often limited in their repertoire. Notable exceptions are the nearly song-like choruses of bowhead whales in summer and the complex, haunting utterances of the humpback whales. Toothed species in general employ more of the frequency spectrum, and produce a wider variety of sounds, than baleen species. Some of the more complicated sounds are clearly communicative, although what role they may play in the social life and 'culture' of cetaceans has been more the subject of wild speculation than of solid science.",
-        "Echolocation: the perception of objects by means of sound wave echoes.",
+        "Such variation can no doubt be explained with reference to the habitats in which individual species have developed. For example, vision is obviously more useful to species inhabiting clear open waters than to those living in turbid rivers and flooded plains. The South American boutu and Chinese beiji, for instance, appear to have very limited vision, and the Indian susus are blind, their eyes reduced to slits that probably allow them to sense only the direction and intensity of light.",
+        "Although the senses of taste and smell appear to have deteriorated, and vision in water appears to be uncertain, such weaknesses are more than compensated for by cetaceans' well-developed acoustic sense. Most species are highly vocal, although they vary in the range of sounds they produce, and many forage for food using echolocation¹. Large baleen whales primarily use the lower frequencies and are often limited in their repertoire. Notable exceptions are the nearly song-like choruses of bowhead whales in summer and the complex, haunting utterances of the humpback whales. Toothed species in general employ more of the frequency spectrum, and produce a wider variety of sounds, than baleen species (though the sperm whale apparently produces a monotonous series of high-energy clicks and little else). Some of the more complicated sounds are clearly communicative, although what role they may play in the social life and 'culture' of cetaceans has been more the subject of wild speculation than of solid science.",
+        "1. Echolocation: the perception of objects by means of sound wave echoes.",
       ],
     },
   ],
@@ -233,8 +235,75 @@ const cambridge4Test1PartTwo: ReadingPart = {
     {
       id: "c4t1-p2-senses-table",
       type: "fill",
-      title: "Senses in cetaceans",
-      instruction: "Complete the table. Choose NO MORE THAN THREE WORDS from the passage for each answer.",
+      title: "",
+      instruction: "Complete the table below. Choose NO MORE THAN THREE WORDS from Reading Passage 2 for each answer. Write your answers in boxes 15-21 on your answer sheet.",
+      table: {
+        headers: ["SENSE", "SPECIES", "ABILITY", "COMMENTS"],
+        rows: [
+          [
+            { text: "Smell", rowSpan: 2 },
+            { text: "toothed" },
+            { text: "no" },
+            { text: "evidence from brain structure" },
+          ],
+          [{ text: "baleen" }, { text: "not certain" }, { text: "related brain structures are present" }],
+          [
+            { text: "Taste" },
+            { text: "some types" },
+            { text: "poor" },
+            { before: "nerves linked to their ", questionNumber: 15, after: " are underdeveloped" },
+          ],
+          [
+            { text: "Touch" },
+            { text: "all" },
+            { text: "yes" },
+            { text: "region around the blowhole very sensitive" },
+          ],
+          [
+            { text: "Vision", rowSpan: 6 },
+            { questionNumber: 16 },
+            { text: "yes" },
+            { text: "probably do not have stereoscopic vision" },
+          ],
+          [
+            { text: "dolphins, porpoises" },
+            { text: "yes" },
+            { before: "probably have stereoscopic vision ", questionNumber: 17, inputCount: 2, joiners: [" and "] },
+          ],
+          [
+            { questionNumber: 18 },
+            { text: "yes" },
+            { text: "probably have stereoscopic vision forward and upward" },
+          ],
+          [
+            { text: "bottlenose dolphins" },
+            { text: "yes" },
+            { before: "exceptional in ", questionNumber: 19, after: " and good in air-water interface" },
+          ],
+          [{ text: "boutu and beiji" }, { text: "poor" }, { text: "have limited vision" }],
+          [
+            { text: "Indian susus" },
+            { text: "no" },
+            { text: "probably only sense direction and intensity of light" },
+          ],
+          [
+            { text: "Hearing", rowSpan: 3 },
+            { text: "most large baleen" },
+            { text: "yes" },
+            { before: "usually use ", questionNumber: 20, after: "; repertoire limited" },
+          ],
+          [
+            { questionNumber: 21, inputCount: 2, joiners: [" whales and "], after: " whales" },
+            { text: "yes" },
+            { text: "song-like" },
+          ],
+          [
+            { text: "toothed" },
+            { text: "yes" },
+            { text: "use more of frequency spectrum; have wider repertoire" },
+          ],
+        ],
+      },
       questions: [
         {
           number: 15,
@@ -251,7 +320,8 @@ const cambridge4Test1PartTwo: ReadingPart = {
         {
           number: 17,
           before: "Dolphins and porpoises probably have stereoscopic vision",
-          after: ".",
+          inputCount: 2,
+          joiners: [" and "],
           answer: ["forward", "downward"],
           answerMode: "all",
         },
@@ -276,6 +346,8 @@ const cambridge4Test1PartTwo: ReadingPart = {
         {
           number: 21,
           before: "Which two whale species produce song-like sounds?",
+          inputCount: 2,
+          joiners: [" and "],
           answer: ["bowhead", "humpback"],
           answerMode: "all",
         },
@@ -285,7 +357,7 @@ const cambridge4Test1PartTwo: ReadingPart = {
       id: "c4t1-p2-short-answer",
       type: "fill",
       title: "Short answers",
-      instruction: "Answer the questions using NO MORE THAN THREE WORDS from the passage.",
+      instruction: "Answer the questions below using NO MORE THAN THREE WORDS from the passage for each answer. Write your answers in boxes 22-26 on your answer sheet.",
       questions: [
         {
           number: 22,
@@ -321,14 +393,14 @@ const cambridge4Test1PartThree: ReadingPart = {
   id: "cambridge-4-test-1-part3",
   label: "Part 3",
   questionRange: "questions 27-40",
-  intro: "You should spend about 20 minutes on Questions 27-40, which are based on Reading Passage 3.",
+  intro: "You should spend about 20 minutes on Questions 27-40 which are based on Reading Passage 3 below.",
   title: "Visual Symbols and the Blind",
   sections: [
     {
       id: "c4t1-p3-text",
       paragraphs: [
         "Part 1",
-        "From a number of recent studies, it has become clear that blind people can appreciate the use of outlines and perspectives to describe the arrangement of objects and other surfaces in space. But pictures are more than literal representations. This fact was drawn to my attention dramatically when a blind woman in one of my investigations decided on her own initiative to draw a wheel as it was spinning. To show this motion, she traced a curve inside the circle. I was taken aback. Lines of motion, such as the one she used, are a very recent invention in the history of illustration. Indeed, as art scholar David Kunzle notes, Wilhelm Busch, a trend-setting nineteenth-century cartoonist, used virtually no motion lines in his popular figures until about 1877.",
+        "From a number of recent studies, it has become clear that blind people can appreciate the use of outlines and perspectives to describe the arrangement of objects and other surfaces in space. But pictures are more than literal representations. This fact was drawn to my attention dramatically when a blind woman in one of my investigations decided on her own initiative to draw a wheel as it was spinning. To show this motion, she traced a curve inside the circle (Fig. 1). I was taken aback. Lines of motion, such as the one she used, are a very recent invention in the history of illustration. Indeed, as art scholar David Kunzle notes, Wilhelm Busch, a trend-setting nineteenth-century cartoonist, used virtually no motion lines in his popular figures until about 1877.",
         "When I asked several other blind study subjects to draw a spinning wheel, one particularly clever rendition appeared repeatedly: several subjects showed the wheel's spokes as curved lines. When asked about these curves, they all described them as metaphorical ways of suggesting motion. Majority rule would argue that this device somehow indicated motion very well. But was it a better indicator than broken or wavy lines - or any other kind of line, for that matter? The answer was not clear. So I decided to test whether various lines of motion were apt ways of showing movement or if they were merely idiosyncratic marks. Moreover, I wanted to discover whether there were differences in how the blind and the sighted interpreted lines of motion.",
         "To search out these answers, I created raised-line drawings of five different wheels, depicting spokes with lines that curved, bent, waved, dashed and extended beyond the perimeter of the wheel. I then asked eighteen blind volunteers to feel the wheels and assign one of the following motions to each wheel: wobbling, spinning fast, spinning steadily, jerking or braking. My control group consisted of eighteen sighted undergraduates from the University of Toronto.",
         "All but one of the blind subjects assigned distinctive motions to each wheel. Most guessed that the curved spokes indicated that the wheel was spinning steadily; the wavy spokes suggested that the wheel was wobbling; and the bent spokes were taken as a sign that the wheel was jerking. Subjects assumed that spokes extending beyond the wheel's perimeter signified that the wheel had its brakes on and that dashed spokes indicated the wheel was spinning quickly.",
@@ -336,7 +408,37 @@ const cambridge4Test1PartThree: ReadingPart = {
         "Part 2",
         "We have found that the blind understand other kinds of visual metaphors as well. One blind woman drew a picture of a child inside a heart - choosing that symbol, she said, to show that love surrounded the child. With Chang Hong Liu, a doctoral student from China, I have begun exploring how well blind people understand the symbolism behind shapes such as hearts that do not directly represent their meaning.",
         "We gave a list of twenty pairs of words to sighted subjects and asked them to pick from each pair the term that best related to a circle and the term that best related to a square. For example, we asked: What goes with soft? A circle or a square? Which shape goes with hard?",
-        "All our subjects deemed the circle soft and the square hard. A full 94% ascribed happy to the circle, instead of sad. But other pairs revealed less agreement: 79% matched fast to slow and weak to strong, respectively. And only 51% linked deep to circle and shallow to square. When we tested four totally blind volunteers using the same list, we found that their choices closely resembled those made by the sighted subjects. One man, who had been blind since birth, scored extremely well. He made only one match differing from the consensus, assigning 'far' to square and 'near' to circle. In fact, only a small majority of sighted subjects had paired far and near to the opposite partners. Thus, we concluded that the blind interpret abstract shapes as sighted people do.",
+        "All our subjects deemed the circle soft and the square hard. A full 94% ascribed happy to the circle, instead of sad. But other pairs revealed less agreement: 79% matched fast to slow and weak to strong, respectively. And only 51% linked deep to circle and shallow to square (See Fig. 2.) When we tested four totally blind volunteers using the same list, we found that their choices closely resembled those made by the sighted subjects. One man, who had been blind since birth, scored extremely well. He made only one match differing from the consensus, assigning 'far' to square and 'near' to circle. In fact, only a small majority of sighted subjects — 53% — had paired far and near to the opposite partners. Thus, we concluded that the blind interpret abstract shapes as sighted people do.",
+      ],
+      figures: [
+        { afterParagraph: 1, caption: "Fig. 1", type: "wheel-motion" },
+        {
+          afterParagraph: 8,
+          caption: "Fig. 2 Subjects were asked which word in each pair fits best with a circle and which with a square. These percentages show the level of consensus among sighted subjects.",
+          rows: [
+            { pair: "SOFT-HARD", agreement: 100 },
+            { pair: "MOTHER-FATHER", agreement: 94 },
+            { pair: "HAPPY-SAD", agreement: 94 },
+            { pair: "GOOD-EVIL", agreement: 89 },
+            { pair: "LOVE-HATE", agreement: 89 },
+            { pair: "ALIVE-DEAD", agreement: 87 },
+            { pair: "BRIGHT-DARK", agreement: 87 },
+            { pair: "LIGHT-HEAVY", agreement: 85 },
+            { pair: "WARM-COLD", agreement: 81 },
+            { pair: "SUMMER-WINTER", agreement: 81 },
+            { pair: "WEAK-STRONG", agreement: 79 },
+            { pair: "FAST-SLOW", agreement: 79 },
+            { pair: "CAT-DOG", agreement: 74 },
+            { pair: "SPRING-FALL", agreement: 74 },
+            { pair: "QUIET-LOUD", agreement: 62 },
+            { pair: "WALKING-STANDING", agreement: 62 },
+            { pair: "ODD-EVEN", agreement: 57 },
+            { pair: "FAR-NEAR", agreement: 53 },
+            { pair: "PLANT-ANIMAL", agreement: 53 },
+            { pair: "DEEP-SHALLOW", agreement: 51 },
+          ],
+          type: "word-pair-table",
+        },
       ],
     },
   ],
@@ -344,7 +446,7 @@ const cambridge4Test1PartThree: ReadingPart = {
     {
       id: "c4t1-p3-choice",
       type: "choice",
-      instruction: "Choose the correct letter, A, B, C or D.",
+      instruction: "Choose the correct letter, A, B, C or D. Write your answers in boxes 27-29 on your answer sheet.",
       questions: [
         {
           questionNumbers: [27],
@@ -384,7 +486,8 @@ const cambridge4Test1PartThree: ReadingPart = {
     {
       id: "c4t1-p3-diagrams",
       type: "choice",
-      instruction: "Match each diagram to the type of movement A-E generally assigned to it in the experiment.",
+      sharedOptions: true,
+      instruction: "Look at the following diagrams (Questions 30-32), and the list of types of movement below. Match each diagram to the type of movement A-E generally assigned to it in the experiment. Choose the correct letter A-E and write them in boxes 30-32 on your answer sheet.",
       questions: [
         {
           questionNumbers: [30],
@@ -413,19 +516,20 @@ const cambridge4Test1PartThree: ReadingPart = {
       id: "c4t1-p3-summary",
       type: "fill",
       title: "Visual metaphors and abstract shapes",
-      instruction: "Complete the summary using words from the box. You may use any word more than once.",
+      instruction: "Complete the summary below using words from the box. Write your answers in boxes 33-39 on your answer sheet. NB You may use any word more than once.",
       wordBank: shapeWordBank,
+      rawText: "Questions 33-39\nComplete the summary below using words from the box. Write your answers in boxes 33-39 on your answer sheet. NB You may use any word more than once.\n\nIn the experiment described in Part 2, a set of word 33 ........ was used to investigate whether blind and sighted people perceived the symbolism in abstract 34 ........ in the same way.\nSubjects were asked which word fitted best with a circle and which with a square. From the 35 ........ volunteers, everyone thought a circle fitted 'soft' while a square fitted 'hard'.\nHowever, only 51% of the 36 ........ volunteers assigned a circle to 37 ........ . When the test was later repeated with 38 ........ volunteers, it was found that they made 39 ........ choices.",
       questions: [
         {
           number: 33,
-          before: "In Part 2, a set of word",
-          after: "was used to investigate whether blind and sighted people perceived symbolism in the same way.",
+          before: "In the experiment described in Part 2, a set of word",
+          after: "was used to investigate whether blind and sighted people perceived the symbolism in abstract shapes in the same way.",
           answer: "pairs",
         },
         {
           number: 34,
-          before: "The study explored symbolism in abstract",
-          after: ".",
+          before: "the symbolism in abstract",
+          after: "in the same way.",
           answer: "shapes",
         },
         {
@@ -436,13 +540,13 @@ const cambridge4Test1PartThree: ReadingPart = {
         },
         {
           number: 36,
-          before: "Only 51% of the",
-          after: "volunteers assigned a circle to the next answer.",
+          before: "However, only 51% of the",
+          after: "volunteers assigned a circle to",
           answer: "sighted",
         },
         {
           number: 37,
-          before: "Only 51% assigned a circle to",
+          before: "assigned a circle to",
           after: ".",
           answer: "deep",
         },
@@ -463,7 +567,7 @@ const cambridge4Test1PartThree: ReadingPart = {
     {
       id: "c4t1-p3-conclusion",
       type: "choice",
-      instruction: "Choose the statement that best summarises the writer's general conclusion.",
+      instruction: "Choose the correct letter, A, B, C or D. Write your answer in box 40 on your answer sheet.",
       questions: [
         {
           questionNumbers: [40],

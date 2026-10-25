@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
 import { SeniorHighRunner } from "@/components/senior-high/senior-high-runner";
 import { getCetExamSetIndex } from "@/lib/cet4/library";
+
+export const dynamicParams = true;
 
 export function generateStaticParams() {
   return [
@@ -15,9 +16,10 @@ export async function generateMetadata({ params }: { params: Promise<{ entryId: 
   return { title: `${set?.title || "大学英语六级"}｜大学英语六级` };
 }
 
-export default async function Cet6EntryPage({ params }: { params: Promise<{ entryId: string }> }) {
+export default async function Cet6EntryPage({ params, searchParams }: { params: Promise<{ entryId: string }>; searchParams: Promise<{ kind?: string }> }) {
   const { entryId } = await params;
+  const query = await searchParams;
   const set = getCetExamSetIndex("cet6").entries.find((item) => item.id === entryId);
-  if (!set) notFound();
-  return <SeniorHighRunner kind={set.kind} setId={set.id} basePath="/cet6" backHref={`/cet6?entry=${set.kind === "paper" ? "papers" : "practice"}`} storageNamespace="cet6:v3:1" />;
+  const kind = set?.kind || (query.kind === "paper" ? "paper" : "practice");
+  return <SeniorHighRunner kind={kind} setId={entryId} basePath="/cet6" backHref={`/cet6?entry=${kind === "paper" ? "papers" : "practice"}`} storageNamespace="cet6:v3:1" />;
 }

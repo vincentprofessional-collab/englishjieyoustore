@@ -9,7 +9,7 @@ ROOT = Path.cwd()
 OUT = ROOT / "public" / "exam-prep"
 GRE_SOURCE = Path("/private/tmp/gre_corpus_pdf.jsonl")
 GMAT_SOURCE = Path("/private/tmp/gmat_question_pages.jsonl")
-PROMO = re.compile(r"(?:公众号|微信号|微信ID|淘宝|二维码|扫码|添加老师|免费资料|课程咨询|GRE All in One|blog\.sina|https?://|www\.)", re.I)
+PROMO = re.compile(r"(?:^\s*>>>|公众号|微信号|微信ID|淘宝|二维码|扫码|添加老师|免费资料|课程咨询|GRE All in One|blog\.sina|https?://|www\.)", re.I)
 WATERMARK = re.compile(r"(?:file://|C:/Users/|VitalSource|eBook Converter|\[\[PAGE:\d+\]\]|\b\d{1,2}/\d{1,2}/20\d{2},\s*\d{1,2}:\d{2}\b|第\s*!?\s*\d+\s*页)", re.I)
 
 
@@ -92,12 +92,48 @@ def explanations_by_prompt(text, questions):
             for i, (start, question_id) in enumerate(ordered)}
 
 
+def trim_after_final_correct_answer(text):
+    markers = list(re.finditer(r"\bThe correct answer is\b", text, re.I))
+    if not markers:
+        return text.strip()
+    start = markers[-1].start()
+    ending = re.search(r"[.!?](?=\s|$)", text[start:])
+    return text[:start + ending.end()].rstrip() if ending else text.strip()
+
+
+def strip_question_echo(explanation, question):
+    """Remove an explanation prefix that repeats the complete prompt and options."""
+    prompt = str(question.get("prompt") or "").strip()
+    options = question.get("options") or []
+    if not prompt or len(options) < 2:
+        return explanation
+    echo = prompt + "\n" + "\n".join(
+        f"{option.get('label', '')}. {str(option.get('text') or '').strip()}"
+        for option in options
+    )
+    if any(not option.get("label") or not str(option.get("text") or "").strip() for option in options):
+        return explanation
+    pattern = "".join(
+        r"\s+" if part.isspace() else re.escape(part)
+        for part in re.split(r"(\s+)", echo)
+    )
+    match = re.match(r"^\s*" + pattern + r"\s*", explanation, re.S)
+    return explanation[match.end():].lstrip() if match else explanation
+
+
+def has_missing_expression(text):
+    return bool(re.search(r"\b(?:is|are|was|were|equals?|equal to)\s+\.(?=\s|$)", str(text or ""), re.I))
+
+
 def page_at(text, position):
     found = list(re.finditer(r"\[\[PAGE:(\d+)\]\]", text[:position]))
     return int(found[-1].group(1)) if found else None
 
 
 def write_bank(exam, bank_id, title, category, source, questions, kind="practice"):
+    if exam == "gmat":
+        title = f"{category}题型训练"
+        questions = [question for question in questions if not question.get("reviewRequired")]
     seen = {}
     unique = []
     duplicates = []
@@ -228,7 +264,56 @@ def build_gre(gre_rows):
     (OUT / "gre" / "index.json").write_text(json.dumps({"exam": "gre", "entries": entries}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
-def build_gmat(gmat_rows):
+def parse_tpa_source_page(row):
+    text = row.get("text", "")
+    number_match = re.search(r"(?m)^\s*(40[8-9]|4[1-5]\d)\.", text)
+    if not number_match:
+        return None
+    number = int(number_match.group(1))
+    if not 408 <= number <= 455:
+        return None
+    answer_match = re.search(r"答案\s*[:：]\s*([A-F])\s*[;；,，/]\s*([A-F])", text)
+    answer_labels = list(answer_match.groups()) if answer_match else []
+    lines = text.splitlines()
+    option_rows = []
+    incomplete_words = r"(?:a|an|the|of|to|for|from|in|on|at|with|and|or|whose|that|which|who|by|as|if|whether|because|will|could|would|should|into|than|rather|up|over|under)"
+    for index, line in enumerate(lines):
+        marker = re.search(r"(?<![A-Za-z])([A-F])\s+○\s+○", line)
+        if not marker:
+            continue
+        before = clean(line[:marker.start()]).replace("\n", " ")
+        after = clean(line[marker.end():]).replace("\n", " ")
+        if not before and index:
+            previous = lines[index - 1].strip()
+            if previous and not re.search(r"[A-F]\s+○\s+○", previous) and re.search(rf"\b{incomplete_words}\s*$", previous, re.I):
+                before = clean(previous)
+        if index + 1 < len(lines):
+            following = lines[index + 1].strip()
+            if following and not re.search(r"[A-F]\s+○\s+○", following):
+                ends_incomplete = not after or re.search(rf"\b{incomplete_words}\s*$", after, re.I)
+                if ends_incomplete:
+                    after = f"{after} {clean(following)}".strip()
+        value = re.sub(r"\s+", " ", f"{before} {after}").strip(" \t.,;:")
+        option_rows.append({"label": marker.group(1), "text": value})
+    # The PDF text layer split these compact fractions into numerator and denominator lines.
+    if number == 454 and row.get("page") == 50:
+        option_rows = [
+            {"label": label, "text": value}
+            for label, value in zip("ABCDE", ["1/55", "9/220", "9/110", "9/55", "27/55"])
+        ]
+    option_map = {option["label"]: option["text"] for option in option_rows}
+    answer = " / ".join(option_map[label] for label in answer_labels) if len(answer_labels) == 2 and all(option_map.get(label) for label in answer_labels) else None
+    return {"number": number, "options": option_rows, "answer": answer, "answerLabels": answer_labels, "page": row.get("page")}
+
+
+def build_gmat(gmat_rows, corroborating_rows=None):
+    tpa_source = {
+        item["number"]: item
+        for row in (corroborating_rows or [])
+        if row.get("source") == "「YesGMAT」 OG2024-2025 DI-TPA题目合集 .pdf"
+        for item in [parse_tpa_source_page(row)]
+        if item
+    }
     pages = sorted(gmat_rows, key=lambda row: row["page"])
     text_parts, page_marks, cursor = [], [], 0
     for row in pages:
@@ -252,10 +337,12 @@ def build_gmat(gmat_rows):
         parsed, matches = split_questions(practice, q_start, q_end)
         key_map = {}
         if multi:
-            for m in re.finditer(r"(?m)^\s*(\d{3})\.\s*(.*)$", keys):
+            for m in re.finditer(r"(?<!\d)(\d{3})\.\s*(.*?)(?=(?<!\d)\d{3}\.\s*|\n|\Z)", keys, re.S):
                 qid = int(m.group(1))
                 if q_start <= qid <= q_end:
                     cells = re.split(r"\s{3,}", m.group(2).strip(), maxsplit=1)
+                    if len(cells) != 2:
+                        cells = re.split(r"\s+", m.group(2).strip(), maxsplit=1)
                     if len(cells) == 2:
                         key_map[qid] = " / ".join(clean(x) for x in cells)
         else:
@@ -294,7 +381,7 @@ def build_gmat(gmat_rows):
                 "id": f"{bank_id}-q{number}", "number": number,
                 "group": category, "passage": context,
                 "prompt": prompt, "options": opts, "answer": answer,
-                "answerMode": "text" if multi or len(opts) != 5 else "choice",
+                "answerMode": "paired" if multi else "choice",
                 "explanation": "",
                 "reviewRequired": (not answer) or (not multi and len(opts) != 5) or flags
                     or (not multi and any(not option["text"] for option in opts)),
@@ -303,8 +390,134 @@ def build_gmat(gmat_rows):
         prompt_explanations = explanations_by_prompt(explanations, questions)
         for question in questions:
             question["explanation"] = prompt_explanations.get(question["id"], "")
-            if not question["explanation"]:
-                question["reviewRequired"] = True
+            number = question["number"]
+            if bank_id == "gmat-di-two-part" and number in tpa_source:
+                evidence = tpa_source[number]
+                question["options"] = evidence["options"]
+                if evidence["answer"]:
+                    question["answer"] = evidence["answer"]
+                question["source"].update({
+                    "corroboratingFile": "「YesGMAT」 OG2024-2025 DI-TPA题目合集 .pdf",
+                    "corroboratingPage": evidence["page"],
+                })
+            # The official text extraction places Question 2's table at the end of page 81,
+            # after Question 1's options. Keep it as editable table data with Question 2.
+            if bank_id == "gmat-quant" and number == 1:
+                question["options"][-1]["text"] = re.split(
+                    r"\nNumber of\s*\nPerformance Time", question["options"][-1]["text"], maxsplit=1
+                )[0].rstrip()
+                question["explanation"] = re.split(
+                    r"\nNumber of\s*\nPerformance Time", question["explanation"], maxsplit=1
+                )[0].rstrip()
+            if bank_id == "gmat-quant" and number == 2:
+                question["table"] = {
+                    "headers": ["Performance Time", "Ticket Price", "Number of Tickets Sold"],
+                    "rows": [
+                        ["Thursday night", "$40", "200"],
+                        ["Friday night", "$50", "240"],
+                        ["Saturday afternoon", "$40", "220"],
+                        ["Saturday night", "$50", "300"],
+                    ],
+                }
+            if bank_id == "gmat-quant" and number == 18:
+                question["options"] = [
+                    {"label": label, "text": value} for label, value in zip("ABCDE", ["2/3", "3/4", "4/5", "4/3", "3/2"])
+                ]
+                question["source"].update({"corroboratingFile": "「YesGMAT」 OG2024-2025 Quant.题目合集.pdf", "corroboratingPage": 9})
+            if bank_id == "gmat-quant" and number == 24:
+                question["options"] = [
+                    {"label": label, "text": value} for label, value in zip("ABCDE", ["3/24", "4/24", "7/24", "8/24", "17/24"])
+                ]
+                question["source"].update({"corroboratingFile": "「YesGMAT」 OG2024-2025 Quant.题目合集.pdf", "corroboratingPage": 11})
+            if bank_id == "gmat-quant" and number == 62:
+                question["options"][0]["text"] = "x/35"
+                question["source"].update({"corroboratingFile": "「YesGMAT」 OG2024-2025 Quant.题目合集.pdf", "corroboratingPage": 22})
+            if bank_id == "gmat-quant" and number == 190:
+                question["prompt"] = re.sub(
+                    r"If\s+what\s+is the value of y\?", "If x/y = 96.12, what is the value of y?", question["prompt"], flags=re.I
+                )
+                question["source"].update({"corroboratingFile": "「YesGMAT」 OG2024-2025 Quant.题目合集.pdf", "corroboratingPage": 63})
+            if bank_id == "gmat-quant" and number == 227:
+                question["source"].update({"corroboratingFile": "「YesGMAT」 OG2024-2025 Quant.题目合集.pdf", "corroboratingPage": 74})
+                topic = "Arithmetic Profit and Loss"
+                if topic in question["explanation"]:
+                    _, rest = question["explanation"].split(topic, 1)
+                    question["explanation"] = (
+                        question["prompt"] + "\nA. 3\nB. 4\nC. 5\nD. 6\nE. 7\n" + topic + rest
+                    )
+            # The first statement lost its inline width in the question text; the paired
+            # answer explanation on the same official source page confirms 5 by 8 inches.
+            if bank_id == "gmat-di-sufficiency" and number == 272:
+                width = re.search(r"each page is (\d+) inches by 8 inches", question["explanation"], re.I)
+                if width:
+                    question["prompt"] = question["prompt"].replace(
+                        "each page is inches by 8 inches", f"each page is {width.group(1)} inches by 8 inches"
+                    )
+                    topic = "Arithmetic Applied Problems"
+                    if topic in question["explanation"]:
+                        _, rest = question["explanation"].split(topic, 1)
+                        question["explanation"] = question["prompt"] + "\n" + topic + rest
+            # A damaged embedded icon split the word "gift" in the Official Guide text.
+            # The independent YesGMAT transcription has the complete word and same sentence.
+            if bank_id == "gmat-di-sufficiency" and number == 407:
+                question["prompt"] = question["prompt"].replace("will.pngt", "will gift")
+                question["explanation"] = question["explanation"].replace("will.pngt", "will gift")
+                question["explanation"] = question["explanation"].replace("lovers.pngts", "lovers gifts")
+                question["source"].update({"corroboratingFile": "「YesGMAT」 OG2024-2025 DI-DS题目合集.pdf", "corroboratingPage": 33})
+                question["table"] = {
+                    "headers": ["Topic", "Alex", "Beika", "Carlos", "Deepa"],
+                    "rows": [
+                        ["History", "X", "X", "✓", "X"],
+                        ["Humor", "X", "✓", "X", "✓"],
+                        ["Language", "X", "X", "✓", "✓"],
+                        ["Philosophy", "✓", "✓", "✓", "X"],
+                        ["Science Fiction", "✓", "X", "✓", "✓"],
+                    ],
+                }
+            if bank_id == "gmat-di-two-part" and number == 455:
+                question["explanation"] = question["explanation"].replace(
+                    "selecting the value 5 for Q makes A a 7-digit number",
+                    "selecting the value 5 for Q makes B a 7-digit number",
+                )
+            if question["answerMode"] == "paired":
+                question["reviewRequired"] = not question.get("options") or any(not option["text"] for option in question.get("options", []))
+            question["explanation"] = trim_after_final_correct_answer(question["explanation"])
+            if exam == "gmat":
+                question["explanation"] = strip_question_echo(question["explanation"], question)
+            figure_reference = re.search(
+                r"\b(?:figure|graph|chart)\s+(?:above|below)|shown\s+(?:above|below)|see\s+(?:the\s+)?figure|graph\s+shows",
+                question.get("prompt", ""), re.I
+            )
+            layout_review = question["answerMode"] == "paired" and (
+                not question.get("options") or any(not option["text"] for option in question.get("options", []))
+            )
+            missing_expression = has_missing_expression(question.get("prompt", "")) or has_missing_expression(question.get("explanation", ""))
+            needs_review = (
+                not question.get("answer") or not question["explanation"] or layout_review or bool(figure_reference)
+                or missing_expression
+                or (question["answerMode"] != "paired" and len(question.get("options", [])) != 5)
+                or any(not option["text"] for option in question.get("options", []))
+            )
+            question["reviewRequired"] = needs_review
+            if needs_review:
+                if layout_review:
+                    question["reviewNote"] = (
+                        "两部分分析题的共享选项表未能完整提取，待对照原始来源复核。"
+                    )
+                elif not question.get("answer"):
+                    question["reviewNote"] = "配套答案表未能确认本题答案，待核。"
+                elif not question["explanation"]:
+                    question["reviewNote"] = "配套解析未能从来源文本中配对，待核。"
+                elif missing_expression:
+                    question["reviewNote"] = "来源文本中的公式或数值未能完整提取，答案与选项可用；解析待对照原页复核。"
+                elif any(not option["text"] for option in question.get("options", [])):
+                    question["reviewNote"] = "部分选项在来源文本中缺失，可能依赖图形或公式；待对照原页。"
+                elif figure_reference:
+                    question["reviewNote"] = "题干引用图表或图片，提取文本未能还原其内容；待对照原页。"
+                else:
+                    question["reviewNote"] = "题面或选项结构无法由当前来源文本确认，待核。"
+            else:
+                question.pop("reviewNote", None)
         return write_bank("gmat", bank_id, title, category, "GMAT OG 24-25.pdf", questions)
 
     entries = [
@@ -318,7 +531,7 @@ def build_gmat(gmat_rows):
         build_set("gmat-di-two-part", "两部分分析 · 官方指南", "数据洞察 · 两部分分析", 408, 455,
                   "6.7 Practice Questions: Two-Part Analysis", "6.8 Answer Key: Two-Part Analysis",
                   "6.8 Answer Key: Two-Part Analysis", "6.9 Answer Explanations: Two-Part Analysis",
-                  "6.9 Answer Explanations: Two-Part Analysis", "8.0 Verbal Reasoning", multi=True),
+                  "6.9 Answer Explanations: Two-Part Analysis", "7.0 Verbal Review", multi=True),
         build_set("gmat-reading", "阅读理解 · 官方指南", "阅读理解", 456, 619,
                   "8.4 Practice Questions: Reading Comprehension", "8.5 Answer Key: Reading Comprehension",
                   "8.5 Answer Key: Reading Comprehension", "8.6 Answer Explanations: Reading Comprehension",
@@ -333,9 +546,10 @@ def build_gmat(gmat_rows):
 
 if __name__ == "__main__":
     gre_rows = read_jsonl(GRE_SOURCE)
-    gmat_rows = [row for row in read_jsonl(GMAT_SOURCE) if row.get("source") == "GMAT OG 24-25.pdf"]
+    all_gmat_rows = read_jsonl(GMAT_SOURCE)
+    gmat_rows = [row for row in all_gmat_rows if row.get("source") == "GMAT OG 24-25.pdf"]
     build_gre(gre_rows)
-    build_gmat(gmat_rows)
+    build_gmat(gmat_rows, all_gmat_rows)
     for exam in ["gre", "gmat"]:
         index = json.loads((OUT / exam / "index.json").read_text(encoding="utf-8"))
         print(exam, [(e["id"], e["questionCount"], e["answerCount"], e["reviewCount"]) for e in index["entries"]])

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { READING_TESTS, type ReadingTest } from "@/lib/ielts/reading";
+import { getEditableReadingPart } from "@/lib/ielts/reading-source-editable";
 
 const IELTS_READING_TESTS = [1, 2, 3, 4];
 const READING_BOOKS = Array.from({ length: 21 }, (_, i) => ({ code: `cambridge-${i + 1}`, shortTitle: `CI${i + 1}`, title: `剑桥雅思 ${i + 1}` }));
@@ -29,7 +30,8 @@ export function ReadingLibrary({ mode }: { mode: "mock" | "practice" }) {
             const bookTests = [...(testsByBook.get(book.code) ?? [])].sort(
               (a, b) => a.testNo - b.testNo,
             );
-            const isAvailable = bookTests.length > 0;
+            const readyTests = bookTests.filter((test) => test.parts.every((part) => getEditableReadingPart(part.id)));
+            const isAvailable = readyTests.length > 0;
 
             return (
               <article
@@ -46,9 +48,10 @@ export function ReadingLibrary({ mode }: { mode: "mock" | "practice" }) {
                 <div className="listening-test-grid reading-test-grid">
                   {IELTS_READING_TESTS.map((testNo) => {
                     const test = bookTests.find((item) => item.testNo === testNo);
+                    const isTextReady = Boolean(test?.parts.every((part) => getEditableReadingPart(part.id)));
                     const displayNo = test?.displayTestNo ?? (book.code === "cambridge-12" ? testNo + 4 : testNo);
 
-                    return test ? (
+                    return test && isTextReady ? (
                       <Link
                         aria-label={`${book.title} Test ${displayNo} ${mode === "mock" ? "模考" : "练习"}`}
                         className="reading-test-link available"
@@ -58,9 +61,9 @@ export function ReadingLibrary({ mode }: { mode: "mock" | "practice" }) {
                         <strong>Test {displayNo}</strong>
                       </Link>
                     ) : (
-                      <span className="reading-test-link locked" key={testNo}>
+                      <span aria-disabled="true" className="reading-test-link locked" key={testNo}>
                         <strong>Test {displayNo}</strong>
-                        <span>待导入</span>
+                        <span>{test ? "文字待核" : "待导入"}</span>
                       </span>
                     );
                   })}

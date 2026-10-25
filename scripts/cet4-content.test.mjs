@@ -25,6 +25,68 @@ test("CET-4 exposes 46 modern paper entries and nine legacy question families", 
   for (let year = 1990; year <= 2019; year++) assert.ok(years.has(String(year)), `missing legacy year ${year}`);
 });
 
+test("modern CET-4 papers publish PDF content as text without embedded scans or generic notice cards", () => {
+  for (const { set } of papers) {
+    assert.equal(set.assetRefs.some((asset) => asset.kind === "image"), false, set.id);
+    assert.doesNotMatch(JSON.stringify(set.sections), /"type":"image"/u, set.id);
+    assert.equal(set.instructions.some((block) => block.type === "notice"), false, set.id);
+    for (const section of set.sections) for (const group of section.groups) {
+      if (["-reading-a", "-reading-b", "-reading-c"].some((suffix) => section.id.endsWith(suffix))) {
+        assert.ok(group.stimulusBlocks.length, `${set.id}/${section.id}: passage missing`);
+      }
+      for (const question of group.questions) {
+        if (["essay", "translation"].includes(question.type)) assert.ok(question.promptBlocks.length, question.id);
+        if (question.type === "single_choice") {
+          assert.equal(question.options.length, 4, question.id);
+          assert.ok(question.options.every((option) => option.blocks.length), `${question.id}: option text missing`);
+        }
+      }
+    }
+  }
+});
+
+test("all CET-4 papers and practice questions publish editable text without image blocks", () => {
+  for (const { set } of sets) {
+    assert.equal(set.assetRefs.some((asset) => asset.kind === "image"), false, `${set.id}: image asset remains`);
+    assert.doesNotMatch(JSON.stringify(set.sections), /"type":"image"/u, `${set.id}: image block remains`);
+  }
+});
+
+test("modern CET-4 passages do not repeat their section directions", () => {
+  const blockText = (blocks) => blocks.map((block) => [block.text || "", ...(block.runs || []).filter((run) => run.type === "text").map((run) => run.text)].join(" ")).join(" ");
+  const normalize = (text) => text.replace(/\s+/gu, " ").trim().toLocaleLowerCase();
+  for (const { set } of papers) for (const section of set.sections) {
+    const directions = normalize(blockText(section.instructions));
+    if (directions.length < 30) continue;
+    for (const group of section.groups) for (const block of group.stimulusBlocks) {
+      const passageBlock = normalize(blockText([block]));
+      if (passageBlock.length > 35) assert.equal(directions.includes(passageBlock), false, `${set.id}/${group.id}: duplicated section directions`);
+    }
+  }
+});
+
+test("modern CET-4 instructions are not polluted with repeated passages or damaged OCR glosses", () => {
+  const damagedGloss = /\([^)]{0,18}(?:[#*]{1,}|AX\s*\d+|©|®|€|₺|É\s*\*|\b[0-9]{1,2}\s*[#*])[^)]{0,18}\)/u;
+  for (const { set } of papers) {
+    for (const section of set.sections) {
+      const instructions = section.instructions.flatMap((block) => [block.text || "", ...(block.runs || []).filter((run) => run.type === "text").map((run) => run.text)]).join(" ");
+      assert.ok(instructions.length <= 500, `${set.id}/${section.id}: OCR appended passage text to the directions`);
+    }
+    assert.doesNotMatch(JSON.stringify(set.sections), damagedGloss, `${set.id}: damaged vocabulary gloss`);
+    assert.doesNotMatch(JSON.stringify(set.sections), /\uFFFD/u, `${set.id}: replacement character from OCR`);
+  }
+});
+
+test("June 2026 careful-reading passages keep the source's Passage Two boundary", () => {
+  for (const { set } of papers.filter(({ set }) => set.id.startsWith("cet4-paper-202606"))) {
+    const section = set.sections.find((item) => item.id.endsWith("-reading-c"));
+    const group = section.groups[0];
+    assert.equal(group.questions.length, 10, set.id);
+    assert.ok(group.stimulusBlocks.some((block) => block.type === "heading" && block.text === "Passage One"), set.id);
+    assert.ok(group.stimulusBlocks.some((block) => block.type === "heading" && block.text === "Passage Two"), set.id);
+  }
+});
+
 test("raw source bodies, promotional documents and knowledge entries are not published", () => {
   assert.equal(library.entries.length, 46);
   for (const entry of library.entries) {
@@ -128,7 +190,7 @@ test("raw documents, subtitles and unrelated files cannot enter the public CET-4
   for (const file of ["index.json", "papers/cet4-paper-2026061.json", "practice/practice-cet4-reading.json", "audio/cet4-paper-2026061.mp3", `evidence/${"a".repeat(24)}.webp`]) assert.doesNotThrow(() => assertCet4PublicFile(file));
 });
 
-test("publication rejects a wrong option key, missing dictation answer and unreviewed image", () => {
+test("publication rejects a wrong option key, missing dictation answer and unreviewed image block", () => {
   const candidate = structuredClone(papers.find(({ summary }) => summary.questionCount === 57).set);
   const group = candidate.sections.flatMap((section) => section.groups).find((group) => group.questions[0].answerSpec.kind === "choice");
   group.questions[0].answerSpec.acceptedAnswers = ["Z"];
@@ -143,42 +205,135 @@ test("publication rejects a wrong option key, missing dictation answer and unrev
   assert.throws(() => validateReviewedCet4Set(dictation), /ambiguous dictation letter/);
   const typed = structuredClone(practice.find(({ set }) => set.id === "practice-cet4-grammar").set);
   typed.sections[0].groups[0].questions[0].options[0].blocks = [];
+  typed.sections[0].groups[0].stimulusBlocks = [];
   assert.throws(() => validateReviewedCet4Set(typed), /missing option text/);
   const embedded = structuredClone(papers.find(({ set }) => set.id === "cet4-paper-2020092").set);
-  embedded.sections.flatMap((section) => section.groups.flatMap((group) => group.questions)).find((q) => q.sourceQuestionNumber === 46).sourceQuestionNumber = 999;
+  const embeddedQuestion = embedded.sections.flatMap((section) => section.groups.flatMap((group) => group.questions)).find((q) => q.sourceQuestionNumber === 46);
+  embeddedQuestion.sourceQuestionNumber = 999;
+  embeddedQuestion.options.forEach((option) => { option.blocks = []; });
   assert.throws(() => validateReviewedCet4Set(embedded), /missing option text/);
   const image = structuredClone(papers[0].set);
-  image.assetRefs.find((asset) => asset.kind === "image").sha256 = "changed";
+  image.assetRefs.push({ assetId: "unreviewed-image", kind: "image", url: `/cet4/evidence/${"a".repeat(24)}.webp`, sha256: "changed" });
+  image.sections[0].groups[0].stimulusBlocks.push({ type: "image", assetId: "unreviewed-image", alt: "unreviewed source" });
   assert.throws(() => validateReviewedCet4Set(image), /evidence image/);
 });
 
-test("actual CET-4 writing images, matching selectors and dictation inputs render", async () => {
+test("CET-4 writing and dictation render; word-bank blanks drag and long-reading blanks use paragraph-letter menus", async () => {
   const require = createRequire(import.meta.url);
   const gradingModule = { exports: {} };
   const grading = ts.transpileModule(await readFile(new URL("../src/lib/senior-high/v2-grading.ts", import.meta.url), "utf8"), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } }).outputText;
   vm.runInNewContext(grading, { exports: gradingModule.exports, module: gradingModule, require: () => ({}) });
+  const cleanupModule = { exports: {} };
+  const cleanup = ts.transpileModule(await readFile(new URL("../src/lib/senior-high/v2-content-cleanup.ts", import.meta.url), "utf8"), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } }).outputText;
+  vm.runInNewContext(cleanup, { exports: cleanupModule.exports, module: cleanupModule, require: () => ({}) });
   const runnerSource = await readFile(new URL("../src/components/senior-high/senior-high-runner.tsx", import.meta.url), "utf8");
   const compiled = ts.transpileModule(`${runnerSource}\nexport { QuestionCard, BlockRenderer };`, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022, jsx: ts.JsxEmit.ReactJSX, esModuleInterop: true } }).outputText;
   const runnerModule = { exports: {} };
-  vm.runInNewContext(compiled, { exports: runnerModule.exports, module: runnerModule, require: (id) => id.endsWith(".css") ? {} : id.endsWith("/v2-grading") ? gradingModule.exports : id.endsWith("/inline-navigation") ? {} : require(id) });
+  vm.runInNewContext(compiled, { exports: runnerModule.exports, module: runnerModule, require: (id) => id.endsWith(".css") ? {} : id === "@/lib/exam-content/overrides" ? { getExamContentOverride: async () => ({ override: null, error: null }), listExamContentOverrides: async () => ({ overrides: [], error: null }) } : id.endsWith("/v2-grading") ? gradingModule.exports : id === "@/lib/senior-high/v2-content-cleanup" ? cleanupModule.exports : id.endsWith("/inline-navigation") ? {} : id === "@/components/cet4/cet4-set-admin-editor" ? { Cet4SetAdminEditor: () => null } : id === "@/lib/cet4/content-overrides" ? { getCet4AdminUserId: async () => "", loadCet4ContentOverrides: async () => ({}) } : id === "@/components/vocabulary-mobile-back-link" ? { VocabularyMobileBackLink: ({ ariaLabel, className, desktopLabel, href }) => createElement("a", { "aria-label": ariaLabel, className: `vocabulary-mobile-back-link ${className}`, href }, createElement("span", { className: "vocabulary-back-link-desktop-label" }, desktopLabel), createElement("span", { "aria-hidden": "true", className: "vocabulary-back-link-mobile-arrow" }, "‹")) } : require(id) });
   const { QuestionCard, BlockRenderer } = runnerModule.exports;
   const paper = papers.find(({ summary }) => summary.questionCount === 57).set;
   const essay = paper.sections.flatMap((s) => s.groups.flatMap((g) => g.questions)).find((q) => q.type === "essay");
   const common = { answers: {}, bindings: new Map(), kind: "practice", onAnswer: () => {}, submitted: false };
-  const writing = renderToStaticMarkup(createElement(QuestionCard, { ...common, assets: new Map(paper.assetRefs.map((a) => [a.assetId, a])), question: essay }));
-  assert.match(writing, /<img /);
+  const writing = renderToStaticMarkup(createElement(QuestionCard, { ...common, hideMeta: true, assets: new Map(paper.assetRefs.map((a) => [a.assetId, a])), question: essay }));
+  assert.doesNotMatch(writing, /<img /);
+  assert.doesNotMatch(writing, /senior-high-question-meta/);
+  assert.match(writing, /Directions:/);
   assert.match(writing, /<textarea /);
   const selfReview = renderToStaticMarkup(createElement(QuestionCard, { ...common, submitted: true, answers: { [essay.id]: "My draft answer." }, assets: new Map(paper.assetRefs.map((a) => [a.assetId, a])), question: essay }));
   assert.match(selfReview, /自行评阅/);
   const bank = practice.find(({ set }) => set.id === "practice-cet4-word-bank").set;
   const bankGroup = bank.sections[0].groups[0];
+  assert.equal(bankGroup.stimulusBlocks.flatMap((block) => block.runs || []).filter((run) => run.type === "blank").length, 10);
+  assert.equal(bankGroup.sharedOptions.length, 15);
+  assert.ok(bankGroup.sharedOptions.every((option) => option.blocks.some((block) => block.type === "paragraph" && block.runs.some((run) => run.type === "text" && run.text.trim()))));
   const matching = bankGroup.questions[0];
-  const selector = renderToStaticMarkup(createElement(QuestionCard, { ...common, assets: new Map(), bindings: new Map(matching.blanks.map((b) => [b.blankId, { options: bankGroup.sharedOptions, question: matching }])), question: matching }));
-  assert.match(selector, /<select /);
-  assert.equal((selector.match(/<option /g) || []).length, 16);
+  const matchingBindings = new Map(matching.blanks.map((b) => [b.blankId, { options: bankGroup.sharedOptions, question: matching }]));
+  const blank = renderToStaticMarkup(createElement(QuestionCard, { ...common, assets: new Map(), bindings: matchingBindings, question: matching }));
+  assert.doesNotMatch(blank, /<select /);
+  assert.match(blank, /data-senior-high-drop-target="true"/);
+  assert.match(blank, /draggable="false"/);
+  const assignedBlank = renderToStaticMarkup(createElement(QuestionCard, { ...common, answers: { [matching.id]: "A" }, assets: new Map(), bindings: matchingBindings, question: matching }));
+  assert.match(assignedBlank, /draggable="true"/);
+  assert.match(runnerSource, /className="senior-high-v2-shared-options"[\s\S]*?onDrop=/);
+  assert.match(runnerSource, /className=\{`senior-high-v2-shared-option/);
+  assert.match(runnerSource, /cet4WordBankQuestionIds = new Set\(isCetExam\(basePath \|\| ""\) && group\.sharedOptions\.length > 0/);
+  assert.match(runnerSource, /const standaloneQuestions = group\.questions\.filter\(\(question\) => !cet4WordBankQuestionIds\.has\(question\.id\)/);
+  assert.match(runnerSource, /const inlineQuestions = group\.questions\.filter\(\(question\) => !cet4WordBankQuestionIds\.has\(question\.id\)/);
+  const paperWordBank = papers.find(({ set }) => set.id === "cet4-paper-2026061").set;
+  const paperWordBankGroup = paperWordBank.sections.flatMap((section) => section.groups).find((group) => group.questions.some((question) => question.typeLabel === "选词填空"));
+  const paperWordBankBindings = new Map(paperWordBankGroup.questions.flatMap((question) => question.blanks.map((blank) => [blank.blankId, { options: paperWordBankGroup.sharedOptions, question }])));
+  const paperWordBankQuestions = new Map(paperWordBankGroup.questions.map((question) => [question.sourceQuestionNumber, question]));
+  const paperPassage = renderToStaticMarkup(createElement(BlockRenderer, { ...common, basePath: "/cet4", onOptionDrop: () => {}, assets: new Map(), bindings: paperWordBankBindings, blocks: paperWordBankGroup.stimulusBlocks, wordBankQuestions: paperWordBankQuestions }));
+  assert.match(paperPassage, /<b>26<\/b><button[^>]*data-senior-high-drop-target="true"/);
+  assert.doesNotMatch(paperPassage, /_{2,}26_{2,}/);
+  assert.match(runnerSource, /group\.sharedOptions\.filter\(\(option\) => isCetExam\(basePath \|\| ""\) \|\| group\.sharedOptionsReusable/);
+  const longReading = practice.find(({ set }) => set.id === "practice-cet4-matching").set;
+  const longReadingGroups = longReading.sections.flatMap((section) => section.groups).filter((group) => group.questions.some((question) => question.typeLabel === "长篇阅读"));
+  assert.equal(longReadingGroups.length, 30);
+  for (const group of longReadingGroups) {
+    const questions = group.questions.filter((question) => question.typeLabel === "长篇阅读");
+    assert.equal(questions.length, 10, group.id);
+    for (const question of questions) {
+      const runs = question.promptBlocks.flatMap((block) => block.runs || []);
+      assert.ok(runs.some((run) => run.type === "text" && run.text.trim().length > 25), question.id);
+      assert.equal(runs.filter((run) => run.type === "blank").length, 1, question.id);
+    }
+  }
+  const longReadingGroup = longReadingGroups[0];
+  const paragraphQuestion = longReadingGroup.questions.find((question) => question.typeLabel === "长篇阅读");
+  assert.ok(longReadingGroup.stimulusBlocks.length > 1 && longReadingGroup.stimulusBlocks.every((block) => block.type !== "image"));
+  assert.ok(longReadingGroup.questions.every((question) => question.promptBlocks.some((block) => block.type === "paragraph" && block.runs.some((run) => run.type === "text"))));
+  const paragraphBindings = new Map(paragraphQuestion.blanks.map((blank) => [blank.blankId, { options: longReadingGroup.sharedOptions, question: paragraphQuestion }]));
+  const paragraphMenu = renderToStaticMarkup(createElement(QuestionCard, { ...common, basePath: "/cet4", assets: new Map(), bindings: paragraphBindings, question: paragraphQuestion }));
+  assert.match(paragraphMenu, /class="senior-high-v2-inline-select"/);
+  assert.match(paragraphMenu, /class="senior-high-v2-inline-select-value"/);
+  assert.match(paragraphMenu, /<option value="A">A<\/option>/);
+  assert.doesNotMatch(paragraphMenu, /A 段/);
+  const restoredGroup = longReadingGroups.find((group) => group.id === "cet4-paper-2019062-reading-b-group");
+  const restoredQuestion = restoredGroup.questions.find((question) => question.typeLabel === "长篇阅读");
+  const restoredBindings = new Map(restoredQuestion.blanks.map((blank) => [blank.blankId, { options: restoredGroup.sharedOptions, question: restoredQuestion }]));
+  const restoredCard = renderToStaticMarkup(createElement(QuestionCard, { ...common, basePath: "/cet4", assets: new Map(), bindings: restoredBindings, question: restoredQuestion }));
+  assert.match(restoredCard, /Unemployed young men are more likely to live with their parents than the employed\./);
+  assert.match(restoredCard, /class="senior-high-v2-inline-select"/);
+  const examStyles = await readFile(new URL("../src/app/globals.css", import.meta.url), "utf8");
+  const paperStyles = await readFile(new URL("../src/components/senior-high/senior-high-paper.css", import.meta.url), "utf8");
+  assert.match(runnerSource, /VocabularyMobileBackLink ariaLabel="返回上一页" className="senior-high-back" desktopLabel="‹"/);
+  assert.match(runnerSource, /className="senior-high-v2-progress"><strong>\{answeredCount\}\/\{questions\.length\}<\/strong><\/div>/);
+  assert.match(paperStyles, /grid-template-areas: "back title progress"/);
+  assert.match(paperStyles, /\.senior-high-v2-progress \{[^}]*text-align: right/);
+  assert.match(paperStyles, /\.senior-high-page\.senior-high-v2-runner\[data-paper-font-size\] :is\(\.senior-high-v2-sections, \.senior-high-v2-question-nav, \.senior-high-v2-instructions, \.senior-high-paper-review, \.senior-high-paper-finish\) \{ margin-inline: 0; \}/);
+  assert.match(examStyles, /\.senior-high-v2-inline-select::after[^}]*color: #111[^}]*font-size: 18px/);
+  assert.match(examStyles, /\.senior-high-v2-inline-select select \{[^}]*width: 30px[^}]*opacity: 0/);
+  assert.match(paperStyles, /\.senior-high-page\.senior-high-v2-runner\[data-paper-font-size\] \{ width: 100%; max-width: none; padding-inline: 0; \}/);
+  assert.match(runnerSource, /group\.sharedOptions\.length > 0 && !\(isCetExam\(basePath \|\| ""\) && group\.questions\.some\(\(question\) => question\.typeLabel === "长篇阅读"\)\)/);
   const dictation = practice.find(({ set }) => set.id === "practice-cet4-dictation").set;
   const dictationGroup = dictation.sections.find((s) => s.groups[0].questions.some((q) => q.answerSpec.kind === "per_blank")).groups[0];
   const bindings = new Map(dictationGroup.questions.flatMap((q) => q.blanks.map((b) => [b.blankId, { options: [], question: q }])));
   const inputs = renderToStaticMarkup(createElement(BlockRenderer, { ...common, assets: new Map(), bindings, blocks: dictationGroup.stimulusBlocks }));
   assert.match(inputs, /<input /);
+  const loadPractice = async (name) => JSON.parse(await readFile(new URL(`../public/cet4/practice/${name}`, import.meta.url), "utf8"));
+  const [translationData, writingData, readingData, listeningData] = await Promise.all([
+    loadPractice("practice-cet4-translation.json"),
+    loadPractice("practice-cet4-writing.json"),
+    loadPractice("practice-cet4-reading.json"),
+    loadPractice("practice-cet4-listening.json"),
+  ]);
+  const translationQuestion = translationData.sections.find((section) => section.id === "cet4-paper-2018062-translation").groups[0].questions[0];
+  assert.ok(translationQuestion.promptBlocks.every((block) => block.type !== "image"));
+  assert.match(translationQuestion.promptBlocks.flatMap((block) => block.runs || []).map((run) => run.text || "").join(" "), /公交车曾是中国人出行的主要交通工具/);
+  assert.ok(translationQuestion.answerSpec.referenceAnswer.every((block) => block.type !== "image"));
+  const writingQuestion = writingData.sections.find((section) => section.id === "cet4-paper-2019063-writing").groups[0].questions[0];
+  assert.ok(writingQuestion.promptBlocks.every((block) => block.type !== "image"));
+  const carefulReading = readingData.sections.find((section) => section.id === "cet4-paper-2018062-reading-c").groups[0];
+  assert.ok(carefulReading.stimulusBlocks.every((block) => block.type !== "image"));
+  assert.ok(carefulReading.questions.every((question) => question.promptBlocks.length && question.options.every((option) => option.blocks.length)));
+  const listeningSections = listeningData.sections.filter((section) => /^cet4-paper-2018062-listening-[abc]$/.test(section.id));
+  assert.equal(listeningSections.length, 3);
+  assert.ok(listeningSections.every((section) => section.instructions.some((block) => block.type === "audio") && section.groups.every((group) => group.stimulusBlocks.every((block) => block.type !== "image") && group.questions.every((question) => question.options.every((option) => option.blocks.length)))));
+  for (const name of ["matching", "reading", "translation", "word-bank", "writing"]) {
+    const payload = await loadPractice(`practice-cet4-${name}.json`);
+    assert.doesNotMatch(JSON.stringify(payload), /原资料未提供听力题目/);
+  }
+  const cleaned = cleanupModule.exports.cleanExamSetNotice({ schemaVersion: 2, instructions: [{ type: "notice", text: "原资料未提供听力题目" }], sections: [] });
+  assert.equal(cleaned.instructions.length, 0);
 });

@@ -6,6 +6,16 @@ import { assertCet4PublicFile, validateReviewedCet4Set } from "./lib/cet4-public
 export async function buildReviewedCet4Sets() {
   const manifest = JSON.parse(await readFile("src/data/cet4/source-review.json", "utf8"));
   if (manifest.sets.filter((set) => set.kind === "paper").length !== 46) throw new Error("CET-4: the 46-paper source review is incomplete");
+  const publicationSets = manifest.sets.map((set) => set.id !== "practice-cet4-matching" ? set : {
+    ...set,
+    sections: set.sections.map((section) => ({
+      ...section,
+      groups: section.groups.map((group) => ({
+        ...group,
+        questions: group.questions.map((question) => /skimming and scanning/i.test(group.title) && question.typeLabel === "长篇阅读" ? { ...question, typeLabel: "快速阅读" } : question),
+      })),
+    })),
+  });
   async function checkPublicDirectory(directory) {
     for (const entry of await readdir(directory, { withFileTypes: true })) {
       const file = path.join(directory, entry.name);
@@ -17,7 +27,7 @@ export async function buildReviewedCet4Sets() {
   await checkPublicDirectory("public/cet4");
   const summaries = [];
   // Validate the entire replacement batch before mutating generated payloads.
-  for (const set of manifest.sets) {
+  for (const set of publicationSets) {
     validateReviewedCet4Set(set);
     for (const asset of set.assetRefs.filter((asset) => asset.kind === "image")) {
       const bytes = await readFile(path.join("public", asset.url));
@@ -30,7 +40,7 @@ export async function buildReviewedCet4Sets() {
       if (!/^[a-f0-9]{64}$/.test(asset.sha256) || createHash("sha256").update(bytes).digest("hex") !== asset.sha256) throw new Error(`${set.id}: audio hash changed`);
     }
   }
-  for (const set of manifest.sets) {
+  for (const set of publicationSets) {
     const directory = path.join("public/cet4", set.kind === "paper" ? "papers" : "practice");
     await mkdir(directory, { recursive: true });
     await writeFile(path.join(directory, `${set.id}.json`), JSON.stringify(set) + "\n");

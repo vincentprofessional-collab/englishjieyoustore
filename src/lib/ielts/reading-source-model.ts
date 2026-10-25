@@ -15,6 +15,7 @@ export type ReadingPartSource = {
   explanationPages?: ReadingSourcePage[];
   explanationAttribution?: string;
   analysisVerified?: boolean;
+  textVerified?: boolean;
 };
 
 export function normalizeReadingAnswer(value: string): string {

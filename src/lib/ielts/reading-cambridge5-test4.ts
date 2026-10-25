@@ -1,0 +1,251 @@
+import type { ReadingOption, ReadingPart } from "./reading";
+
+const trueFalseNotGiven: ReadingOption[] = [
+  { letter: "TRUE", text: "TRUE" },
+  { letter: "FALSE", text: "FALSE" },
+  { letter: "NOT GIVEN", text: "NOT GIVEN" },
+];
+
+const yesNoNotGiven: ReadingOption[] = [
+  { letter: "YES", text: "YES" },
+  { letter: "NO", text: "NO" },
+  { letter: "NOT GIVEN", text: "NOT GIVEN" },
+];
+
+const wildernessHeadings: ReadingOption[] = [
+  { letter: "i", text: "The expansion of international tourism in recent years" },
+  { letter: "ii", text: "How local communities can balance their own needs with the demands of wilderness tourism" },
+  { letter: "iii", text: "Fragile regions and the reasons for the expansion of tourism there" },
+  { letter: "iv", text: "Traditional methods of food-supply in fragile regions" },
+  { letter: "v", text: "Some of the disruptive effects of wilderness tourism" },
+  { letter: "vi", text: "The economic benefits of mass tourism" },
+];
+
+const glassSummaryOptions: ReadingOption[] = [
+  { letter: "A", text: "numerous" },
+  { letter: "B", text: "detected" },
+  { letter: "C", text: "quickly" },
+  { letter: "D", text: "agreed" },
+  { letter: "E", text: "warm" },
+  { letter: "F", text: "sharp" },
+  { letter: "G", text: "expands" },
+  { letter: "H", text: "slowly" },
+  { letter: "I", text: "unexpectedly" },
+  { letter: "J", text: "removed" },
+  { letter: "K", text: "contracts" },
+  { letter: "L", text: "disputed" },
+  { letter: "M", text: "cold" },
+  { letter: "N", text: "moved" },
+  { letter: "O", text: "small" },
+  { letter: "P", text: "calculated" },
+];
+
+const cambridge5Test4PartTwo: ReadingPart = {
+  id: "cambridge-5-test-4-part2",
+  label: "Part 2",
+  questionRange: "questions 14-26",
+  intro: "You should spend about 20 minutes on Questions 14–26, which are based on Reading Passage 2 below.",
+  title: "Flawed Beauty: the problem with toughened glass",
+  sections: [
+    {
+      id: "c5t4-p2-a",
+      paragraphs: [
+        "On 2nd August 1999, a particularly hot day in the town of Cirencester in the UK, a large pane of toughened glass in the roof of a shopping centre at Bishops Walk shattered without warning and fell from its frame. When fragments were analysed by experts at the giant glass manufacturer Pilkington, which had made the pane, they found that minute crystals of nickel sulphide trapped inside the glass had almost certainly caused the failure.",
+        "‘The glass industry is aware of the issue,’ says Brian Waldron, chairman of the standards committee at the Glass and Glazing Federation, a British trade association, and standards development officer at Pilkington. But he insists that cases are few and far between. ‘It’s a very rare phenomenon,’ he says.",
+        "Others disagree. ‘On average I see about one or two buildings a month suffering from nickel sulphide related failures,’ says Barrie Josie, a consultant engineer involved in the Bishops Walk investigation. Other experts tell of similar experiences. Tony Wilmott of London-based consulting engineers Sandberg, and Simon Armstrong at CladTech Associates in Hampshire both say they know of hundreds of cases. ‘What you hear is only the tip of the iceberg,’ says Trevor Ford, a glass expert at Resolve Engineering in Brisbane, Queensland. He believes the reason is simple: ‘No-one wants bad press.’",
+      ],
+    },
+    {
+      id: "c5t4-p2-b",
+      paragraphs: [
+        "Toughened glass is found everywhere, from cars and bus shelters to the windows, walls and roofs of thousands of buildings around the world. It’s easy to see why. This glass has five times the strength of standard glass, and when it does break it shatters into tiny cubes rather than large, razor-sharp shards. Architects love it because large panels can be bolted together to make transparent walls, and turning it into ceilings and floors is almost as easy.",
+        "It is made by heating a sheet of ordinary glass to about 620°C to soften it slightly, allowing its structure to expand, and then cooling it rapidly with jets of cold air. This causes the outer layer of the pane to contract and solidify before the interior. When the interior finally solidifies and shrinks, it exerts a pull on the outer layer that leaves it in permanent compression and produces a tensile force inside the glass. As cracks propagate best in materials under tension, the compressive force on the surface must be overcome before the pane will break, making it more resistant to cracking.",
+      ],
+    },
+    {
+      id: "c5t4-p2-c",
+      paragraphs: [
+        "The problem starts when glass contains nickel sulphide impurities. Trace amounts of nickel and sulphur are usually present in the raw materials used to make glass, and nickel can also be introduced by fragments of nickel alloys falling into the molten glass. As the glass is heated, these atoms react to form tiny crystals of nickel sulphide. Just a tenth of a gram of nickel in the furnace can create up to 50,000 crystals.",
+        "These crystals can exist in two forms: a dense form called the alpha phase, which is stable at high temperatures, and a less dense form called the beta phase, which is stable at room temperatures. The high temperatures used in the toughening process convert all the crystals to the dense, compact alpha form. But the subsequent cooling is so rapid that the crystals don’t have time to change back to the beta phase. This leaves unstable alpha crystals in the glass, primed like a coiled spring, ready to revert to the beta phase without warning.",
+        "When this happens, the crystals expand by up to 4%. And if they are within the central, tensile region of the pane, the stresses this unleashes can shatter the whole sheet. The time that elapses before failure occurs is unpredictable. It could happen just months after manufacture, or decades later, although if the glass is heated — by sunlight, for example — the process is speeded up. Ironically, says Graham Dodd, of consulting engineers Arup in London, the oldest pane of toughened glass known to have failed due to nickel sulphide inclusions was in Pilkington’s glass research building in Lathom, Lancashire. The pane was 27 years old.",
+      ],
+    },
+    {
+      id: "c5t4-p2-d",
+      paragraphs: [
+        "Data showing the scale of the nickel sulphide problem is almost impossible to find. The picture is made more complicated by the fact that these crystals occur in batches. So even if, on average, there is only one inclusion in 7 tonnes of glass, if you experience one nickel sulphide failure in your building, that probably means you’ve got a problem in more than one pane. Josie says that in the last decade he has worked on over 15 buildings with the number of failures into double figures.",
+        "One of the worst examples of this is Waterfront Place, which was completed in 1990. Over the following decade the 40-storey Brisbane block suffered a rash of failures. Eighty panes of its toughened glass shattered due to inclusions before experts were finally called in. John Barry, an expert in nickel sulphide contamination at the University of Queensland, analysed every glass pane in the building. Using a studio camera, a photographer went up in a cradle to take photos of every pane. These were scanned under a modified microfiche reader for signs of nickel sulphide crystals. ‘We discovered at least another 120 panes with potentially dangerous inclusions which were then replaced,’ says Barry. ‘It was a very expensive and time-consuming process that took around six months to complete.’ Though the project cost A$1.6 million (nearly £700,000), the alternative — re-cladding the entire building — would have cost ten times as much.",
+      ],
+    },
+  ],
+  questionBlocks: [
+    {
+      id: "c5t4-p2-people-matching",
+      type: "choice",
+      instruction: "Look at the following people and the list of statements. Match each person with the correct statement. Write the correct letter A–H.",
+      questions: [
+        { questionNumbers: [14], prompt: "Brian Waldron", options: [{ letter: "A", text: "suggests that publicity about nickel sulphide failure has been suppressed" }, { letter: "B", text: "regularly sees cases of nickel sulphide failure" }, { letter: "C", text: "closely examined all the glass in one building" }, { letter: "D", text: "was involved with the construction of Bishops Walk" }, { letter: "E", text: "recommended the rebuilding of Waterfront Place" }, { letter: "F", text: "thinks the benefits of toughened glass are exaggerated" }, { letter: "G", text: "claims that nickel sulphide failure is very unusual" }, { letter: "H", text: "refers to the most extreme case of delayed failure" }] },
+        { questionNumbers: [15], prompt: "Trevor Ford", options: [{ letter: "A", text: "suggests that publicity about nickel sulphide failure has been suppressed" }, { letter: "B", text: "regularly sees cases of nickel sulphide failure" }, { letter: "C", text: "closely examined all the glass in one building" }, { letter: "D", text: "was involved with the construction of Bishops Walk" }, { letter: "E", text: "recommended the rebuilding of Waterfront Place" }, { letter: "F", text: "thinks the benefits of toughened glass are exaggerated" }, { letter: "G", text: "claims that nickel sulphide failure is very unusual" }, { letter: "H", text: "refers to the most extreme case of delayed failure" }] },
+        { questionNumbers: [16], prompt: "Graham Dodd", options: [{ letter: "A", text: "suggests that publicity about nickel sulphide failure has been suppressed" }, { letter: "B", text: "regularly sees cases of nickel sulphide failure" }, { letter: "C", text: "closely examined all the glass in one building" }, { letter: "D", text: "was involved with the construction of Bishops Walk" }, { letter: "E", text: "recommended the rebuilding of Waterfront Place" }, { letter: "F", text: "thinks the benefits of toughened glass are exaggerated" }, { letter: "G", text: "claims that nickel sulphide failure is very unusual" }, { letter: "H", text: "refers to the most extreme case of delayed failure" }] },
+        { questionNumbers: [17], prompt: "John Barry", options: [{ letter: "A", text: "suggests that publicity about nickel sulphide failure has been suppressed" }, { letter: "B", text: "regularly sees cases of nickel sulphide failure" }, { letter: "C", text: "closely examined all the glass in one building" }, { letter: "D", text: "was involved with the construction of Bishops Walk" }, { letter: "E", text: "recommended the rebuilding of Waterfront Place" }, { letter: "F", text: "thinks the benefits of toughened glass are exaggerated" }, { letter: "G", text: "claims that nickel sulphide failure is very unusual" }, { letter: "H", text: "refers to the most extreme case of delayed failure" }] },
+      ],
+    },
+    {
+      id: "c5t4-p2-summary",
+      type: "fill",
+      title: "Toughened Glass",
+      instruction: "Complete the summary with the list of words A–P: A numerous; B detected; C quickly; D agreed; E warm; F sharp; G expands; H slowly; I unexpectedly; J removed; K contracts; L disputed; M cold; N moved; O small; P calculated.",
+      questions: [18, 19, 20, 21, 22, 23].map((number) => ({ number, before: `Question ${number}` })),
+      rawText: "Toughened glass is favoured by architects because it is much stronger than ordinary glass, and the fragments are not as 18 ...... when it breaks. However, it has one disadvantage: it can shatter 19 ...... . This fault is a result of the manufacturing process. Ordinary glass is first heated, then cooled very 20 ...... . The outer layer 21 ...... before the inner layer, and the tension between the two layers which is created because of this makes the glass stronger. However, if the glass contains nickel sulphide impurities, crystals of nickel sulphide are formed. These are unstable, and can expand suddenly, particularly if the weather is 22 ...... . If this happens, the pane of glass may break. The frequency with which such problems occur is 23 ...... by glass experts. Furthermore, the crystals cannot be detected without sophisticated equipment.",
+      wordBank: glassSummaryOptions.map((option) => option.letter),
+    },
+    {
+      id: "c5t4-p2-true-false",
+      type: "choice",
+      instruction: "Do the following statements agree with the information given in Reading Passage 2? Write TRUE, FALSE or NOT GIVEN.",
+      questions: [
+        { questionNumbers: [24], prompt: "Little doubt was expressed about the reason for the Bishops Walk accident.", options: trueFalseNotGiven },
+        { questionNumbers: [25], prompt: "Toughened glass has the same appearance as ordinary glass.", options: trueFalseNotGiven },
+        { questionNumbers: [26], prompt: "There is plenty of documented evidence available about the incidence of nickel sulphide failure.", options: trueFalseNotGiven },
+      ],
+    },
+  ],
+};
+
+const cambridge5Test4PartThree: ReadingPart = {
+  id: "cambridge-5-test-4-part3",
+  label: "Part 3",
+  questionRange: "questions 27-40",
+  intro: "You should spend about 20 minutes on Questions 27–40, which are based on Reading Passage 3 below.",
+  title: "The effects of light on plant and animal species",
+  sections: [
+    {
+      id: "c5t4-p3-a",
+      paragraphs: [
+        "Light is important to organisms for two different reasons. Firstly it is used as a cue for the timing of daily and seasonal rhythms in both plants and animals, and secondly it is used to assist growth in plants.",
+        "Breeding in most organisms occurs during a part of the year only, and so a reliable cue is needed to trigger breeding behaviour. Day length is an excellent cue, because it provides a perfectly predictable pattern of change within the year. In the temperate zone in spring, temperatures fluctuate greatly from day to day, but day length increases steadily by a predictable amount. The seasonal impact of day length on physiological responses is called photoperiodism, and the amount of experimental evidence for this phenomenon is considerable. For example, some species of birds’ breeding can be induced even in midwinter simply by increasing day length artificially (Wolfson 1964). Other examples of photoperiodism occur in plants. A short-day plant flowers when the day is less than a certain critical length. A long-day plant flowers after a certain critical day length is exceeded. In both cases the critical day length differs from species to species. Plants which flower after a period of vegetative growth, regardless of photoperiod, are known as day-neutral plants.",
+        "Breeding seasons in animals such as birds have evolved to occupy the part of the year in which offspring have the greatest chances of survival. Before the breeding season begins, food reserves must be built up to support the energy cost of reproduction, and to provide for young birds both when they are in the nest and after fledging. Thus many temperate-zone birds use the increasing day lengths in spring as a cue to begin the nesting cycle, because this is a point when adequate food resources will be assured.",
+        "The adaptive significance of photoperiodism in plants is also clear. Short-day plants that flower in spring in the temperate zone are adapted to maximising seedling growth during the growing season. Long-day plants are adapted for situations that require fertilization by insects, or a long period of seed ripening. Short-day plants that flower in the autumn in the temperate zone are able to build up food reserves over the growing season and over winter as seeds. Day-neutral plants have an evolutionary advantage when the connection between the favourable period for reproduction and day length is much less certain. For example, desert annuals germinate, flower and seed whenever suitable rainfall occurs, regardless of the day length.",
+        "The breeding season of some plants can be delayed to extraordinary lengths. Bamboos are perennial grasses that remain in a vegetative state for many years and then suddenly flower, fruit and die (Evans 1976). Every bamboo of the species Chusquea abietifolia on the island of Jamaica flowered, set seed and died during 1884. The next generation of bamboo flowered and died between 1916 and 1918, which suggests a vegetative cycle of about 31 years. The climatic trigger for this flowering cycle is not yet known, but the adaptive significance is clear. The simultaneous production of masses of bamboo seeds (in some cases lying 12 to 15 centimetres deep on the ground) is more than all the seed-eating animals can cope with at the time, so that some seeds escape being eaten and grow up to form the next generation (Evans 1976).",
+        "The second reason light is important to organisms is that it is essential for photosynthesis. This is the process by which plants use energy from the sun to convert carbon from soil or water into organic material for growth. The rate of photosynthesis in a plant can be measured by calculating the rate of its uptake of carbon. There is a wide range of photosynthetic responses of plants to variations in light intensity. Some plants reach maximal photosynthesis at one-quarter full sunlight, and others, like sugarcane, never reach a maximum, but continue to increase photosynthesis rate as light intensity rises.",
+        "Plants in general can be divided into two groups: shade-tolerant species and shade-intolerant species. This classification is commonly used in forestry and horticulture. Shade-tolerant plants have lower photosynthetic rates and hence have lower growth rates than those of shade-intolerant species. Plant species become adapted to living in a certain kind of habitat, and in the process evolve a series of characteristics that prevent them from occupying other habitats. Grime (1966) suggests that light may be one of the major components directing these adaptations. For example, eastern hemlock seedlings are shade-tolerant. They can survive in the forest understorey under very low light levels because they have a low photosynthetic rate.",
+      ],
+    },
+  ],
+  questionBlocks: [
+    {
+      id: "c5t4-p3-true-false",
+      type: "choice",
+      instruction: "Do the following statements agree with the information given in Reading Passage 3? Write TRUE, FALSE or NOT GIVEN.",
+      questions: [
+        { questionNumbers: [27], prompt: "There is plenty of scientific evidence to support photoperiodism.", options: trueFalseNotGiven },
+        { questionNumbers: [28], prompt: "Some types of bird can be encouraged to breed out of season.", options: trueFalseNotGiven },
+        { questionNumbers: [29], prompt: "Photoperiodism is restricted to certain geographic areas.", options: trueFalseNotGiven },
+        { questionNumbers: [30], prompt: "Desert annuals are examples of long-day plants.", options: trueFalseNotGiven },
+        { questionNumbers: [31], prompt: "Bamboos flower several times during their life cycle.", options: trueFalseNotGiven },
+        { questionNumbers: [32], prompt: "Scientists have yet to determine the cue for Chusquea abietifolia’s seasonal rhythm.", options: trueFalseNotGiven },
+        { questionNumbers: [33], prompt: "Eastern hemlock is a fast-growing plant.", options: trueFalseNotGiven },
+      ],
+    },
+    {
+      id: "c5t4-p3-sentence-completion",
+      type: "fill",
+      title: "",
+      instruction: "Complete the sentences. Choose NO MORE THAN THREE WORDS from the passage for each answer.",
+      questions: [
+        { number: 34, before: "Day length is a useful cue for breeding in areas where", after: "are unpredictable." },
+        { number: 35, before: "Plants which do not respond to light levels are referred to as" },
+        { number: 36, before: "Birds in temperate climates associate longer days with nesting and the availability of" },
+        { number: 37, before: "Plants that flower when days are long often depend on", after: "to help them reproduce." },
+        { number: 38, before: "Desert annuals respond to", after: "as a signal for reproduction." },
+        { number: 39, before: "There is no limit to the photosynthetic rate in plants such as" },
+        { number: 40, before: "Tolerance to shade is one criterion for the", after: "of plants in forestry and horticulture." },
+      ],
+    },
+  ],
+};
+
+const cambridge5Test4PartOne: ReadingPart = {
+  id: "cambridge-5-test-4-part1",
+  label: "Part 1",
+  questionRange: "questions 1-13",
+  intro: "You should spend about 20 minutes on Questions 1–13, which are based on Reading Passage 1 on the following pages.",
+  title: "The Impact of Wilderness Tourism",
+  sections: [
+    {
+      id: "c5t4-p1-a",
+      heading: "Section A",
+      headingQuestionNumber: 1,
+      paragraphs: [
+        "The market for tourism in remote areas is booming as never before. Countries all across the world are actively promoting their ‘wilderness’ regions — such as mountains, Arctic lands, deserts, small islands and wetlands — to high-spending tourists. The attraction of these areas is obvious: by definition, wilderness tourism requires little or no initial investment. But that does not mean that there is no cost. As the 1992 United Nations Conference on Environment and Development recognized, these regions are fragile (i.e. highly vulnerable to abnormal pressures) not just in terms of their ecology, but also in terms of the culture of their inhabitants. The three most significant types of fragile environment in these respects, and also in terms of the proportion of the Earth’s surface they cover, are deserts, mountains and Arctic areas. An important characteristic is their marked seasonality, with harsh conditions prevailing for many months each year. Consequently, most human activities, including tourism, are limited to quite clearly defined parts of the year. Tourists are drawn to these regions by their natural landscape beauty and the unique cultures of their indigenous people. And poor governments in these isolated areas have welcomed the new breed of ‘adventure tourist’, grateful for the hard currency they bring. For several years now, tourism has been the prime source of foreign exchange in Nepal and Bhutan. Tourism is also a key element in the economies of Arctic zones such as Lapland and Alaska and in desert areas such as Ayers Rock in Australia and Arizona’s Monument Valley.",
+      ],
+    },
+    {
+      id: "c5t4-p1-b",
+      heading: "Section B",
+      headingQuestionNumber: 2,
+      paragraphs: [
+        "Once a location is established as a main tourist destination, the effects on the local community are profound. When hill-farmers, for example, can make more money in a few weeks working as porters for foreign trekkers than they can in a year working in their fields, it is not surprising that many of them give up their farm-work, which is thus left to other members of the family. In some hill-regions, this has led to a serious decline in farm output and a change in the local diet, because there is insufficient labour to maintain terraces and irrigation systems and tend to crops. The result has been that many people in these regions have turned to outside supplies of rice and other foods.",
+        "In Arctic and desert societies, year-round survival has traditionally depended on hunting animals and fish and collecting fruit over a relatively short season. However, as some inhabitants become involved in tourism, they no longer have time to collect wild food; this has led to increasing dependence on bought food and stores. Tourism is not always the culprit behind such changes. All kinds of wage labour, or government handouts, tend to undermine traditional survival systems. Whatever the cause, the dilemma is always the same: what happens if these new, external sources of income dry up?",
+        "The physical impact of visitors is another serious problem associated with the growth in adventure tourism. Much attention has focused on erosion along major trails, but perhaps more important are the deforestation and impacts on water supplies arising from the need to provide tourists with cooked food and hot showers. In both mountains and deserts, slow-growing trees are often the main sources of fuel and water supplies may be limited or vulnerable to degradation through heavy use.",
+      ],
+    },
+    {
+      id: "c5t4-p1-c",
+      heading: "Section C",
+      headingQuestionNumber: 3,
+      paragraphs: [
+        "Stories about the problems of tourism have become legion in the last few years. Yet it does not have to be a problem. Although tourism inevitably affects the region in which it takes place, the costs to these fragile environments and their local cultures can be minimized. Indeed, it can even be a vehicle for reinvigorating local cultures, as has happened with the Sherpas of Nepal’s Khumbu Valley and in some Alpine villages. And a growing number of adventure tourism operators are trying to ensure that their activities benefit the local population and environment over the long term.",
+        "In the Swiss Alps, communities have decided that their future depends on integrating tourism more effectively with the local economy. Local concern about the rising number of second home developments in the Swiss Pays d’Enhaut resulted in limits being imposed on their growth. There has also been a renaissance in communal cheese production in the area, providing the locals with a reliable source of income that does not depend on outside visitors.",
+        "Many of the Arctic tourist destinations have been exploited by outside companies, who employ transient workers and repatriate most of the profits to their home base. But some Arctic communities are now operating tour businesses themselves, thereby ensuring that the benefits accrue locally. For instance, a native corporation in Alaska, employing local people, is running an air tour from Anchorage to Kotzebue, where tourists eat Arctic food, walk on the tundra and watch local musicians and dancers.",
+        "Native people in the desert regions of the American Southwest have followed similar strategies, encouraging tourists to visit their pueblos and reservations to purchase high-quality handicrafts and artwork. The Acoma and San Ildefonso pueblos have established highly profitable pottery businesses, while the Navajo and Hopi groups have been similarly successful with jewellery.",
+        "Too many people living in fragile environments have lost control over their economies, their culture and their environment when tourism has penetrated their homelands. Merely restricting tourism cannot be the solution to the imbalance, because people’s desire to see new places will not just disappear. Instead, communities in fragile environments must achieve greater control over tourism ventures in their regions, in order to balance their needs and aspirations with the demands of tourism. A growing number of communities are demonstrating that, with firm communal decision-making, this is possible. The critical question now is whether this can become the norm, rather than the exception.",
+      ],
+    },
+  ],
+  questionBlocks: [
+    {
+      id: "c5t4-p1-headings",
+      type: "headings",
+      title: "List of Headings",
+      instruction: "Reading Passage 1 has three sections, A–C. Choose the correct heading for each section. Write the correct numeral i–vi.",
+      options: wildernessHeadings.map(({ letter, text }) => ({ id: letter, text })),
+      questionNumbers: [1, 2, 3],
+    },
+    {
+      id: "c5t4-p1-yes-no",
+      type: "choice",
+      instruction: "Do the following statements reflect the opinion of the writer of Reading Passage 1? Write YES, NO or NOT GIVEN.",
+      questions: [
+        { questionNumbers: [4], prompt: "The low financial cost of setting up wilderness tourism makes it attractive to many countries.", options: yesNoNotGiven },
+        { questionNumbers: [5], prompt: "Deserts, mountains and Arctic regions are examples of environments that are both ecologically and culturally fragile.", options: yesNoNotGiven },
+        { questionNumbers: [6], prompt: "Wilderness tourism operates throughout the year in fragile areas.", options: yesNoNotGiven },
+        { questionNumbers: [7], prompt: "The spread of tourism in certain hill-regions has resulted in a fall in the amount of food produced locally.", options: yesNoNotGiven },
+        { questionNumbers: [8], prompt: "Traditional food-gathering in desert societies was distributed evenly over the year.", options: yesNoNotGiven },
+        { questionNumbers: [9], prompt: "Government handouts do more damage than tourism does to traditional patterns of food-gathering.", options: yesNoNotGiven },
+      ],
+    },
+    {
+      id: "c5t4-p1-community-table",
+      type: "fill",
+      title: "The positive ways in which some local communities have responded to tourism",
+      instruction: "Complete the table. Choose ONE WORD from Reading Passage 1 for each answer.",
+      questions: [10, 11, 12, 13].map((number) => ({ number, before: `Question ${number}` })),
+      table: {
+        headers: ["People/Location", "Activity"],
+        rows: [
+          [{ text: "Swiss Pays d’Enhaut" }, { before: "Revived production of ", questionNumber: 10 }],
+          [{ text: "Arctic communities" }, { before: "Operate ", questionNumber: 11, after: " businesses" }],
+          [{ text: "Acoma and San Ildefonso" }, { before: "Produce and sell ", questionNumber: 12 }],
+          [{ text: "Navajo and Hopi" }, { before: "Produce and sell ", questionNumber: 13 }],
+        ],
+      },
+    },
+  ],
+};
+
+export const CAMBRIDGE5_TEST4_PARTS: ReadingPart[] = [
+  cambridge5Test4PartOne,
+  cambridge5Test4PartTwo,
+  cambridge5Test4PartThree,
+];

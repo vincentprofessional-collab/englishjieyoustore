@@ -1,0 +1,1437 @@
+{
+  "exam": "gre",
+  "sourceFile": "新东方+GRE+官方真题+250+解析版.pdf",
+  "sourcePath": "综合与模考/新东方+GRE+官方真题+250+解析版.pdf",
+  "answerSourceFile": "麟渡兮填空(简体中文）--附加OG,PPII 题目解析.pdf",
+  "answerSourcePath": "填空/麟渡兮填空(简体中文）--附加OG,PPII 题目解析.pdf",
+  "matchMethod": "first 12 normalized English and numeric tokens",
+  "citationCount": 80,
+  "sourcePrefixMatchedCount": 79,
+  "unmatchedCount": 1,
+  "explanationSectionCount": 80,
+  "explicitCorrectAnswerWordingCount": 77,
+  "answerChoiceLabelCount": 76,
+  "citations": [
+    {
+      "companionPage": 13,
+      "companionQuestionNumber": 1,
+      "reference": "OG, p. 96, #1, Hard.",
+      "promptPrefix": "for some time now has been presumed not to exist the cynical",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        5
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": false,
+      "correctAnswerSentence": null,
+      "answerChoiceLabels": []
+    },
+    {
+      "companionPage": 16,
+      "companionQuestionNumber": 7,
+      "reference": "OG, p. 521, #17",
+      "promptPrefix": "the point we might still take from the first world war is",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        16
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": false,
+      "correctAnswerSentence": null,
+      "answerChoiceLabels": []
+    },
+    {
+      "companionPage": 18,
+      "companionQuestionNumber": 10,
+      "reference": "OG, p. 49, #1 (PPII, Test Preview, #4)",
+      "promptPrefix": "it is refreshing to read a book about our planet by an",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        1
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "” Thus the correct answer is overshadowed (Choice A), obscure (Choice E), and superficiality of our theories (Choice I).",
+      "answerChoiceLabels": [
+        "A",
+        "E",
+        "I"
+      ]
+    },
+    {
+      "companionPage": 19,
+      "companionQuestionNumber": 11,
+      "reference": "OG, p. 50, #2 (PPII, Test Preview, #5)",
+      "promptPrefix": "vain and prone to violence caravaggio could not handle success the more",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        1
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus the correct answer is eminence (Choice C) and tumultuous (Choice D).",
+      "answerChoiceLabels": [
+        "C",
+        "D"
+      ]
+    },
+    {
+      "companionPage": 21,
+      "companionQuestionNumber": 13,
+      "reference": "OG, p. 89, #8, Medium.",
+      "promptPrefix": "a misconception frequently held by novice writers is that sentence structure mirrors",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        5
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus the correct answer is complicated (Choice A) and involved (Choice F).",
+      "answerChoiceLabels": [
+        "A",
+        "F"
+      ]
+    },
+    {
+      "companionPage": 23,
+      "companionQuestionNumber": 15,
+      "reference": "OG, p. 375, #16",
+      "promptPrefix": "belanger dances with an i that draws one s attention as if",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        8
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "” Thus, the correct answer is undemonstrative panache (Choice A) and deflect.",
+      "answerChoiceLabels": [
+        "A"
+      ]
+    },
+    {
+      "companionPage": 26,
+      "companionQuestionNumber": 19,
+      "reference": "OG, p. 499, #7",
+      "promptPrefix": "only with the discovery of an ozone hole over antarctica in 1985",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        13
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus, the correct answer is imminent (Choice A); curtailed (Choice F); and encouraging (Choice G).",
+      "answerChoiceLabels": [
+        "A",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "companionPage": 27,
+      "companionQuestionNumber": 20,
+      "reference": "OG, p. 521, #18",
+      "promptPrefix": "this is the kind of movie stuffed with intimations of faraway strife",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        16
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus, the correct answer is humdrum (Choice D) and dull (Choice F).",
+      "answerChoiceLabels": [
+        "D",
+        "F"
+      ]
+    },
+    {
+      "companionPage": 28,
+      "companionQuestionNumber": 21,
+      "reference": "OG, p. 79, #6, Easy",
+      "promptPrefix": "as my eyesight began to i spent a lot of time writing",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        2
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus the correct answer is deteriorate (Choice A) and decline (Choice D).",
+      "answerChoiceLabels": [
+        "A",
+        "D"
+      ]
+    },
+    {
+      "companionPage": 32,
+      "companionQuestionNumber": 25,
+      "reference": "OG, p. 498, #6",
+      "promptPrefix": "putting a cash value on the ecological services provided by nature such",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        12
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "” Thus, the correct answer is problematic (Choice B); unsound (Choice E); and discredited (Choice H).",
+      "answerChoiceLabels": [
+        "B",
+        "E",
+        "H"
+      ]
+    },
+    {
+      "companionPage": 34,
+      "companionQuestionNumber": 27,
+      "reference": "OG, p. 382, #4",
+      "promptPrefix": "always circumspect she was reluctant to make judgments but once arriving at",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        10
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus, the correct answer is intransigent (Choice B) and resolute (Choice F).",
+      "answerChoiceLabels": [
+        "B",
+        "F"
+      ]
+    },
+    {
+      "companionPage": 35,
+      "companionQuestionNumber": 28,
+      "reference": "OG, p. 78, #3, Easy.",
+      "promptPrefix": "an investigation that is can occasionally yield new facts even notable ones",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        2
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus the correct answer is unguided .",
+      "answerChoiceLabels": []
+    },
+    {
+      "companionPage": 36,
+      "companionQuestionNumber": 30,
+      "reference": "OG, p. 378, #21",
+      "promptPrefix": "the plan which the engineers said would save the aquifer by reducing",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        8
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus, the correct answer is innocuous (Choice A) and benign (Choice F).",
+      "answerChoiceLabels": [
+        "A",
+        "F"
+      ]
+    },
+    {
+      "companionPage": 37,
+      "companionQuestionNumber": 31,
+      "reference": "OG, p. 100, #8, Hard",
+      "promptPrefix": "overlarge uneven and ultimately disappointing the retrospective exhibition seems too much like",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        6
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus the correct answer is limited (Choice A) and circumscribed (Choice D).",
+      "answerChoiceLabels": [
+        "A",
+        "D"
+      ]
+    },
+    {
+      "companionPage": 40,
+      "companionQuestionNumber": 35,
+      "reference": "OG, p. 498, #5",
+      "promptPrefix": "certain music lovers yearn for i but when it is achieved there",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        12
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus, the correct answer is flawlessness (Choice C) and wrong (Choice D).",
+      "answerChoiceLabels": [
+        "C",
+        "D"
+      ]
+    },
+    {
+      "companionPage": 41,
+      "companionQuestionNumber": 37,
+      "reference": "OG, p. 514, #6",
+      "promptPrefix": "everyone has routines that govern their work the myth is that artists",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        15
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus, the correct answer is habit (Choice B) and ploddingly (Choice E).",
+      "answerChoiceLabels": [
+        "B",
+        "E"
+      ]
+    },
+    {
+      "companionPage": 42,
+      "companionQuestionNumber": 38,
+      "reference": "OG, p. 370, #5",
+      "promptPrefix": "in her later years bertha pappenheim was an apostle of noble but",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        7
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus, the correct answer is anachronistic (Choice A) and alienated from (Choice F).",
+      "answerChoiceLabels": [
+        "A",
+        "F"
+      ]
+    },
+    {
+      "companionPage": 45,
+      "companionQuestionNumber": 41,
+      "reference": "OG, p. 87, #3, Medium",
+      "promptPrefix": "political advertising may well be the most i kind of advertising political",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        3
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus the correct answer is deceptive (Choice C) and dissimilar (Choice E).",
+      "answerChoiceLabels": [
+        "C",
+        "E"
+      ]
+    },
+    {
+      "companionPage": 46,
+      "companionQuestionNumber": 42,
+      "reference": "OG, p. 52, #1",
+      "promptPrefix": "although it does contain some pioneering ideas one would hardly characterize the",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        1
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus the correct answer is original (Choice C) and innovative (Choice F).",
+      "answerChoiceLabels": [
+        "C",
+        "F"
+      ]
+    },
+    {
+      "companionPage": 47,
+      "companionQuestionNumber": 44,
+      "reference": "OG, p. 496, #1",
+      "promptPrefix": "although plant and animal species that become established in ecosystems where they",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        11
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus, the correct answer is innocuous (Choice A).",
+      "answerChoiceLabels": [
+        "A"
+      ]
+    },
+    {
+      "companionPage": 48,
+      "companionQuestionNumber": 47,
+      "reference": "OG, p. 79, #7, Easy",
+      "promptPrefix": "the judge s standing in the legal community though shaken by phony",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        3
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus the correct answer is undiminished (Choice B) and undamaged (Choice D).",
+      "answerChoiceLabels": [
+        "B",
+        "D"
+      ]
+    },
+    {
+      "companionPage": 49,
+      "companionQuestionNumber": 48,
+      "reference": "OG, p. 514, #5",
+      "promptPrefix": "unlike the problems in recent financial scandals issues raised by the regulators",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        15
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus, the correct answer is sham (Choice A) and cloak (Choice D).",
+      "answerChoiceLabels": [
+        "A",
+        "D"
+      ]
+    },
+    {
+      "companionPage": 51,
+      "companionQuestionNumber": 50,
+      "reference": "OG, p. 98, #5, Hard",
+      "promptPrefix": "managers who think that strong environmental performance will i their company s",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        6
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "” Thus the correct answer is bolster (Choice B), uncritically accept (Choice D), and peripheral (Choice I).",
+      "answerChoiceLabels": [
+        "B",
+        "D",
+        "I"
+      ]
+    },
+    {
+      "companionPage": 53,
+      "companionQuestionNumber": 51,
+      "reference": "OG, p. 376, #17",
+      "promptPrefix": "the most striking thing about the politician is how often his politics",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        8
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus, the correct answer is strategic (Choice C), brandish (Choice D), and deeply felt moral code (Choice H).",
+      "answerChoiceLabels": [
+        "C",
+        "D",
+        "H"
+      ]
+    },
+    {
+      "companionPage": 55,
+      "companionQuestionNumber": 55,
+      "reference": "OG, p. 80, #8, Easy",
+      "promptPrefix": "modern agricultural practices have been extremely successful in increasing the productivity of",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        3
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus the correct answer is significant (Choice C) and considerable (Choice D).",
+      "answerChoiceLabels": [
+        "C",
+        "D"
+      ]
+    },
+    {
+      "companionPage": 56,
+      "companionQuestionNumber": 57,
+      "reference": "OG, p. 86, #1, Medium",
+      "promptPrefix": "it comes as no surprise that societies have codes of behavior the",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        3
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "” Thus the correct answer is unexpected (Choice B).",
+      "answerChoiceLabels": [
+        "B"
+      ]
+    },
+    {
+      "companionPage": 57,
+      "companionQuestionNumber": 58,
+      "reference": "OG, p. 513, #3",
+      "promptPrefix": "even the charisma and technical prowess of two fine actors are not",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        14
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus, the correct answer is adequate to (Choice D).",
+      "answerChoiceLabels": [
+        "D"
+      ]
+    },
+    {
+      "companionPage": 60,
+      "companionQuestionNumber": 62,
+      "reference": "OG, p. 505, #16",
+      "promptPrefix": "notwithstanding their regarding other issues township residents have consistently passed the board",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        13
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus, the correct answer is disagreement (Choice D) and divergence (Choice E).",
+      "answerChoiceLabels": [
+        "D",
+        "E"
+      ]
+    },
+    {
+      "companionPage": 61,
+      "companionQuestionNumber": 64,
+      "reference": "OG, p. 520, #15",
+      "promptPrefix": "it would have been disingenuous of the candidate to appear when her",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        16
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus, the correct answer is ecstatic (Choice B) and euphoric (Choice E).",
+      "answerChoiceLabels": [
+        "B",
+        "E"
+      ]
+    },
+    {
+      "companionPage": 63,
+      "companionQuestionNumber": 66,
+      "reference": "OG, p. 387, #11",
+      "promptPrefix": "what readers most commonly remember about john stuart mill s classic exploration",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        10
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "” Thus, the correct answer is complacency (Choice B), embrace only a portion of the truth (Choice D), and erroneous (Choice G).",
+      "answerChoiceLabels": [
+        "B",
+        "D",
+        "G"
+      ]
+    },
+    {
+      "companionPage": 65,
+      "companionQuestionNumber": 69,
+      "reference": "OG, p. 496, #2",
+      "promptPrefix": "far from being the corporate world because of cutbacks serious researchers are",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        12
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus, the correct answer is banished from (Choice C).",
+      "answerChoiceLabels": [
+        "C"
+      ]
+    },
+    {
+      "companionPage": 66,
+      "companionQuestionNumber": 71,
+      "reference": "OG, p. 87, #4, Medium.",
+      "promptPrefix": "richard m russell said 52 percent of the nation s growth since",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        4
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus the correct answer is come through (Choice C), aside from supporting (Choice E), and protect (Choice H).",
+      "answerChoiceLabels": [
+        "C",
+        "E",
+        "H"
+      ]
+    },
+    {
+      "companionPage": 67,
+      "companionQuestionNumber": 72,
+      "reference": "OG, p. 78, #4, Easy",
+      "promptPrefix": "it is i that so many portrait paintings hang in art museums",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        2
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus the correct answer is surprising (Choice A) and justifies (Choice E).",
+      "answerChoiceLabels": [
+        "A",
+        "E"
+      ]
+    },
+    {
+      "companionPage": 68,
+      "companionQuestionNumber": 73,
+      "reference": "OG, p. 497, #3",
+      "promptPrefix": "the brief survey published under the title the work of nature how",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        12
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus, the correct answer is comprehensive (Choice C) and redundant (Choice D).",
+      "answerChoiceLabels": [
+        "C",
+        "D"
+      ]
+    },
+    {
+      "companionPage": 69,
+      "companionQuestionNumber": 74,
+      "reference": "OG, p. 381, #1",
+      "promptPrefix": "only by ignoring decades of mismanagement and inefficiency could investors conclude that",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        9
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus, the correct answer is fleeting (Choice B) and momentary (Choice C).",
+      "answerChoiceLabels": [
+        "B",
+        "C"
+      ]
+    },
+    {
+      "companionPage": 71,
+      "companionQuestionNumber": 76,
+      "reference": "OG, p. 97, #3, Hard",
+      "promptPrefix": "serling s account of his employer s reckless decision making i that",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        5
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus the correct answer is belies (Choice A) and a cautious (Choice F).",
+      "answerChoiceLabels": [
+        "A",
+        "F"
+      ]
+    },
+    {
+      "companionPage": 72,
+      "companionQuestionNumber": 77,
+      "reference": "OG, p. 390, #17",
+      "promptPrefix": "in the midst of so many evasive comments this forthright statement whatever",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        11
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus, the correct answer is an anomaly (Choice E).",
+      "answerChoiceLabels": [
+        "E"
+      ]
+    },
+    {
+      "companionPage": 73,
+      "companionQuestionNumber": 78,
+      "reference": "OG, p. 382, #3",
+      "promptPrefix": "given the flood of information presented by the mass media the only",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        10
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus, the correct answer is synoptic (Choice A) and abridged (Choice B).",
+      "answerChoiceLabels": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "companionPage": 75,
+      "companionQuestionNumber": 81,
+      "reference": "OG, p. 513, #4",
+      "promptPrefix": "there may be a threshold below which blood pressure reductions become given",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        15
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "” Thus, the correct answer is superfluous (Choice E).",
+      "answerChoiceLabels": [
+        "E"
+      ]
+    },
+    {
+      "companionPage": 79,
+      "companionQuestionNumber": 85,
+      "reference": "OG, p. 99, #6, Hard.",
+      "promptPrefix": "philosophy unlike most other subjects does not try to extend our knowledge",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        6
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus the correct answer is rumination on (Choice B), utterly mysterious (Choice E), and most prosaic (Choice G).",
+      "answerChoiceLabels": [
+        "B",
+        "E",
+        "G"
+      ]
+    },
+    {
+      "companionPage": 82,
+      "companionQuestionNumber": 87,
+      "reference": "OG, p. 391, #18",
+      "promptPrefix": "the activists energetic work in the service of both woman suffrage and",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        11
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus, the correct answer is undermines (Choice A) and inimical (Choice E).",
+      "answerChoiceLabels": [
+        "A",
+        "E"
+      ]
+    },
+    {
+      "companionPage": 84,
+      "companionQuestionNumber": 89,
+      "reference": "OG, p. 370, #6",
+      "promptPrefix": "the reception given to kimura s radical theory of molecular evolution shows",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        7
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus, the correct answer is invention (Choice D).",
+      "answerChoiceLabels": [
+        "D"
+      ]
+    },
+    {
+      "companionPage": 86,
+      "companionQuestionNumber": 91,
+      "reference": "OG, p. 515, #8",
+      "promptPrefix": "rather than viewing the massachusetts bay colony s antinomian controversy as the",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        15
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus, the correct answer is collision (Choice C), orthodox (Choice E), and clerical (Choice G).",
+      "answerChoiceLabels": [
+        "C",
+        "E",
+        "G"
+      ]
+    },
+    {
+      "companionPage": 88,
+      "companionQuestionNumber": 94,
+      "reference": "OG, p. 78, #5, Easy",
+      "promptPrefix": "in stark contrast to his later i simpson was largely ii politics",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        2
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "” Thus the correct answer is activism (Choice A) and indifferent to (Choice E).",
+      "answerChoiceLabels": [
+        "A",
+        "E"
+      ]
+    },
+    {
+      "companionPage": 89,
+      "companionQuestionNumber": 95,
+      "reference": "OG, p. 371, #8",
+      "promptPrefix": "mathematicians have a distinctive sense of beauty they strive to present their",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        7
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus, the correct answer is aesthetics (Choice B).",
+      "answerChoiceLabels": [
+        "B"
+      ]
+    },
+    {
+      "companionPage": 90,
+      "companionQuestionNumber": 96,
+      "reference": "OG, p. 375, #14",
+      "promptPrefix": "unenlightened authoritarian managers rarely recognize a crucial reason for the low levels",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        7
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus, the correct answer is schism (Choice B).",
+      "answerChoiceLabels": [
+        "B"
+      ]
+    },
+    {
+      "companionPage": 90,
+      "companionQuestionNumber": 97,
+      "reference": "OG, p. 50, #3 (PPII, Test Preview, #6)",
+      "promptPrefix": "in parts of the arctic the land grades into the landfast ice",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        1
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus the correct answer is imperceptibly (Choice B).",
+      "answerChoiceLabels": [
+        "B"
+      ]
+    },
+    {
+      "companionPage": 91,
+      "companionQuestionNumber": 98,
+      "reference": "OG, p. 375, #15",
+      "promptPrefix": "the novelist devotes so much time to avid descriptions of his characters",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        8
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "” Thus, the correct answer is sartorial (Choice D).",
+      "answerChoiceLabels": [
+        "D"
+      ]
+    },
+    {
+      "companionPage": 92,
+      "companionQuestionNumber": 99,
+      "reference": "OG, p. 387, #12",
+      "promptPrefix": "just as the authors book on eels is often a key text",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        10
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus, the correct answer is inform (Choice D).",
+      "answerChoiceLabels": [
+        "D"
+      ]
+    },
+    {
+      "companionPage": 93,
+      "companionQuestionNumber": 100,
+      "reference": "OG, p. 388, #13",
+      "promptPrefix": "mechanisms develop whereby every successful species can its innate capacity for population",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        11
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "” Thus, the correct answer is reconcile (Choice E).",
+      "answerChoiceLabels": [
+        "E"
+      ]
+    },
+    {
+      "companionPage": 94,
+      "companionQuestionNumber": 101,
+      "reference": "OG, p. 77, #1, Easy",
+      "promptPrefix": "dominant interests often benefit most from of governmental interference in business since",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        2
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus the correct answer is elimination (Choice E).",
+      "answerChoiceLabels": [
+        "E"
+      ]
+    },
+    {
+      "companionPage": 95,
+      "companionQuestionNumber": 102,
+      "reference": "OG, p. 77, #2, Easy",
+      "promptPrefix": "kagan maintains that an infant s reactions to its first stressful experiences",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        2
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus the correct answer is prophetic (Choice A).",
+      "answerChoiceLabels": [
+        "A"
+      ]
+    },
+    {
+      "companionPage": 96,
+      "companionQuestionNumber": 103,
+      "reference": "OG, p. 512, #2",
+      "promptPrefix": "the belief that politicians might become after their election to office led",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        14
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus, the correct answer is venal (Choice C).",
+      "answerChoiceLabels": [
+        "C"
+      ]
+    },
+    {
+      "companionPage": 99,
+      "companionQuestionNumber": 108,
+      "reference": "OG, p. 96, #2, Hard",
+      "promptPrefix": "human nature and long distances have made exceeding the speed limit a",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        5
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus the correct answer is cherished tradition (Choice B) and rejected (Choice F).",
+      "answerChoiceLabels": [
+        "B",
+        "F"
+      ]
+    },
+    {
+      "companionPage": 101,
+      "companionQuestionNumber": 111,
+      "reference": "OG, p. 379, #22",
+      "promptPrefix": "though feminist in its implications yvonne rainer s 1974 film the filmmaker",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        8
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus, the correct answer is antedated (Choice A) and preceded (Choice D).",
+      "answerChoiceLabels": [
+        "A",
+        "D"
+      ]
+    },
+    {
+      "companionPage": 102,
+      "companionQuestionNumber": 112,
+      "reference": "OG, p. 392, #20",
+      "promptPrefix": "wills argues that certain malarial parasites are especially i because they have",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        11
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus, the correct answer is malignant (Choice B), insufficient (Choice E), and benignity (Choice H).",
+      "answerChoiceLabels": [
+        "B",
+        "E",
+        "H"
+      ]
+    },
+    {
+      "companionPage": 103,
+      "companionQuestionNumber": 113,
+      "reference": "OG, p. 386, #10",
+      "promptPrefix": "ironically the writer so wary of i was ii with ink and",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        10
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus, the correct answer is extravagance (Choice B) and profligate (Choice F).",
+      "answerChoiceLabels": [
+        "B",
+        "F"
+      ]
+    },
+    {
+      "companionPage": 107,
+      "companionQuestionNumber": 119,
+      "reference": "OG, p. 512, #1",
+      "promptPrefix": "the unexplained digressions into the finer points of quantum electrodynamics are so",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        14
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus, the correct answer is frustrating (Choice D).",
+      "answerChoiceLabels": [
+        "D"
+      ]
+    },
+    {
+      "companionPage": 109,
+      "companionQuestionNumber": 124,
+      "reference": "OG, p. 499, #8",
+      "promptPrefix": "the incipient i regarding taxes could affect trade between the two countries",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        13
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "”) Thus, the correct answer is row (Choice A) and festering dispute over (Choice F).",
+      "answerChoiceLabels": [
+        "A",
+        "F"
+      ]
+    },
+    {
+      "companionPage": 110,
+      "companionQuestionNumber": 125,
+      "reference": "OG, p. 497, #4",
+      "promptPrefix": "the government has no choice but to i the incessant demands for",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        12
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus, the correct answer is heed (Choice B) and compromise (Choice F).",
+      "answerChoiceLabels": [
+        "B",
+        "F"
+      ]
+    },
+    {
+      "companionPage": 111,
+      "companionQuestionNumber": 126,
+      "reference": "OG, p. 86, #2, Medium",
+      "promptPrefix": "like bela bartok ruth crawford not only brought a composer s acumen",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        3
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus the correct answer is reverence for (Choice A) and fastidiousness (Choice D).",
+      "answerChoiceLabels": [
+        "A",
+        "D"
+      ]
+    },
+    {
+      "companionPage": 112,
+      "companionQuestionNumber": 127,
+      "reference": "OG, p. 370, #7",
+      "promptPrefix": "the i of vladimir nabokov as one of north america s literary",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        7
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus, the correct answer is lionization (Choice B) and foreground (Choice D).",
+      "answerChoiceLabels": [
+        "B",
+        "D"
+      ]
+    },
+    {
+      "companionPage": 113,
+      "companionQuestionNumber": 128,
+      "reference": "OG, p. 391, #19",
+      "promptPrefix": "there is nothing quite like this movie and indeed i am not",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        11
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus, the correct answer is peculiarity (Choice A) and assertive (Choice E).",
+      "answerChoiceLabels": [
+        "A",
+        "E"
+      ]
+    },
+    {
+      "companionPage": 118,
+      "companionQuestionNumber": 134,
+      "reference": "OG, p. 515, #7",
+      "promptPrefix": "repression of painful memories is sometimes called willed forgetting yet true forgetting",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        15
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus, the correct answer is different in its effect (Choice B), entails (Choice F), and permanent (Choice G).",
+      "answerChoiceLabels": [
+        "B",
+        "F",
+        "G"
+      ]
+    },
+    {
+      "companionPage": 119,
+      "companionQuestionNumber": 135,
+      "reference": "OG, p. 88, #5, Medium",
+      "promptPrefix": "statements presented as fact in a patent application are i unless a",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        4
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus the correct answer is presumed verifiable (Choice A), debunking (Choice F), and bogus (Choice H).",
+      "answerChoiceLabels": [
+        "A",
+        "F",
+        "H"
+      ]
+    },
+    {
+      "companionPage": 120,
+      "companionQuestionNumber": 136,
+      "reference": "OG, p. 97, #4, Hard",
+      "promptPrefix": "no other contemporary poet s work has such a well earned reputation",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        5
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus the correct answer is near impenetrability (Choice C), penitential austerity (Choice D), and volubility (Choice H).",
+      "answerChoiceLabels": [
+        "C",
+        "D",
+        "H"
+      ]
+    },
+    {
+      "companionPage": 128,
+      "companionQuestionNumber": 143,
+      "reference": "OG, p. 520, #16",
+      "promptPrefix": "as market forces penetrate firms and bid up the value of attributes",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        16
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": false,
+      "correctAnswerSentence": null,
+      "answerChoiceLabels": []
+    },
+    {
+      "companionPage": 129,
+      "companionQuestionNumber": 144,
+      "reference": "OG, p. 52, #2",
+      "promptPrefix": "it was her view that the country s problems had been by",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        1
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus the correct answer is exacerbated (Choice D) and worsened (Choice F).",
+      "answerChoiceLabels": [
+        "D",
+        "F"
+      ]
+    },
+    {
+      "companionPage": 130,
+      "companionQuestionNumber": 145,
+      "reference": "OG, p. 504, #15",
+      "promptPrefix": "in american indian art the supposed distinction between modern and traditional was",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        13
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus, the correct answer is eliminated (Choice A) and put to rest (Choice C).",
+      "answerChoiceLabels": [
+        "A",
+        "C"
+      ]
+    },
+    {
+      "companionPage": 131,
+      "companionQuestionNumber": 146,
+      "reference": "OG, p. 505, #17",
+      "promptPrefix": "some of the company s supporters charged that the negative report had",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        13
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus, the correct answer is reined in (Choice A) and manacled (Choice E).",
+      "answerChoiceLabels": [
+        "A",
+        "E"
+      ]
+    },
+    {
+      "companionPage": 132,
+      "companionQuestionNumber": 147,
+      "reference": "OG, p. 506, #18",
+      "promptPrefix": "skeptics contend that any scheme for charging visitors to web sites that",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        14
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus, the correct answer is bridling (Choice A) and inhibiting (Choice D).",
+      "answerChoiceLabels": [
+        "A",
+        "D"
+      ]
+    },
+    {
+      "companionPage": 133,
+      "companionQuestionNumber": 148,
+      "reference": "OG, p. 506, #19",
+      "promptPrefix": "it seems obvious that miles davis the julliard school which resulted in",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [],
+      "matchStatus": "unmatched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus, the correct answer is disaffection with (Choice A) and estrangement from (Choice F).",
+      "answerChoiceLabels": [
+        "A",
+        "F"
+      ]
+    },
+    {
+      "companionPage": 138,
+      "companionQuestionNumber": 157,
+      "reference": "OG, p. 88, #6, Medium",
+      "promptPrefix": "ever a demanding reader of the fiction of others the novelist chase",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        4
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus the correct answer is exacting (Choice A) and meticulous (Choice F).",
+      "answerChoiceLabels": [
+        "A",
+        "F"
+      ]
+    },
+    {
+      "companionPage": 139,
+      "companionQuestionNumber": 158,
+      "reference": "OG, p. 89, #7, Medium",
+      "promptPrefix": "her should not be confused with miserliness as long as i have",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        4
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus the correct answer is frugality (Choice C) and thrift (Choice F).",
+      "answerChoiceLabels": [
+        "C",
+        "F"
+      ]
+    },
+    {
+      "companionPage": 140,
+      "companionQuestionNumber": 159,
+      "reference": "OG, p. 99, #7, Hard",
+      "promptPrefix": "the government s implementation of a new code of ethics appeared intended",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        6
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus the correct answer is restive (Choice C) and skittish (Choice D).",
+      "answerChoiceLabels": [
+        "C",
+        "D"
+      ]
+    },
+    {
+      "companionPage": 141,
+      "companionQuestionNumber": 160,
+      "reference": "OG, p. 100, #9, Hard",
+      "promptPrefix": "newspapers report that the former executive has been trying to keep a",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        7
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus the correct answer is indecorous (Choice E) and unseemly (Choice F).",
+      "answerChoiceLabels": [
+        "E",
+        "F"
+      ]
+    },
+    {
+      "companionPage": 142,
+      "companionQuestionNumber": 161,
+      "reference": "OG, p. 379, #23",
+      "promptPrefix": "congress is having great difficulty developing a consensus on energy policy primarily",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        9
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus, the correct answer is disparate (Choice B) and divergent (Choice C).",
+      "answerChoiceLabels": [
+        "B",
+        "C"
+      ]
+    },
+    {
+      "companionPage": 143,
+      "companionQuestionNumber": 162,
+      "reference": "OG, p. 379, #24",
+      "promptPrefix": "during the opera s most famous aria the tempo chosen by the",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        9
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus, the correct answer is arbitrary (Choice A) and capricious (Choice B).",
+      "answerChoiceLabels": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "companionPage": 144,
+      "companionQuestionNumber": 163,
+      "reference": "OG, p. 380, #25",
+      "promptPrefix": "because they had expected the spacecraft voyager 2 to be able to",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        9
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus, the correct answer is thrilled about (Choice C) and elated by (Choice E).",
+      "answerChoiceLabels": [
+        "C",
+        "E"
+      ]
+    },
+    {
+      "companionPage": 145,
+      "companionQuestionNumber": 164,
+      "reference": "OG, p. 381, #2",
+      "promptPrefix": "some scientists argue that carbon compounds play such a central role in",
+      "promptPrefixTokenCount": 12,
+      "official250Pages": [
+        9
+      ],
+      "matchStatus": "source_prefix_matched",
+      "hasExplanationSection": true,
+      "hasExplicitCorrectAnswerWording": true,
+      "correctAnswerSentence": "Thus, the correct answer is diversity (Choice A) and variety (Choice C).",
+      "answerChoiceLabels": [
+        "A",
+        "C"
+      ]
+    }
+  ]
+}

@@ -23,6 +23,7 @@ import { VocabularyInlinePronunciation } from "@/components/vocabulary-pronuncia
 import newConceptZhTranslations from "@/data/new-concept/translations-zh.json";
 import newConceptZhTurnTranslations from "@/data/new-concept/translations-zh-turns.json";
 import { getLikelyProperNounWords, shouldShowAudioPronunciation } from "@/lib/audio-pronunciation";
+import type { DictationWordMetadata } from "@/lib/articles/dictation-targets";
 import { getActiveWordIndex, getSpeakingPracticeDelayMs } from "@/lib/articles/bbc-speaking-training.mjs";
 import {
   consumeVocabularyStudyReturn,
@@ -501,12 +502,14 @@ function LessonTranscript({
 export function NewConceptLessonPage({
   audioEdition,
   audioUrl,
+  dictationWordMetadata,
   lesson,
   sentenceAudioUrls,
   vocabulary,
 }: {
   audioEdition: "us" | "uk";
   audioUrl: string | null;
+  dictationWordMetadata: Record<string, DictationWordMetadata>;
   lesson: NewConceptLesson;
   sentenceAudioUrls: (string | null)[];
   vocabulary: NewConceptVocabularyItem[];
@@ -1417,6 +1420,14 @@ export function NewConceptLessonPage({
                     <BbcSentencePractice
                       key={`${activeStudySentenceIndex + 1}:${activeStudyEnglish}`}
                       activeWordIndex={activeStudyWordIndex}
+                      dictationVocabularyCandidates={studyMode === "writing" ? vocabularyForDisplay.map((item) => ({
+                        definition: item.definitionLines.join(" "),
+                        level: item.level,
+                        partOfSpeech: item.partOfSpeech,
+                        term: item.word,
+                      })) : undefined}
+                      dictationWordMetadata={studyMode === "writing" ? dictationWordMetadata : undefined}
+                      dictationExcludedWords={studyMode === "writing" ? [...likelyProperNounWords] : undefined}
                       englishContent={renderNewConceptArticleEnglish(activeStudyEnglish, vocabularyForDisplay.map((item) => item.word), articlePronunciations, activeStudyWordIndex)}
                       isAudioPlaying={isSentenceAudioPlaying && activeSentenceNo === activeStudySentenceIndex + 1}
                       sentence={{ chinese: activeStudyChinese, english: activeStudyEnglish, sentenceNo: activeStudySentenceIndex + 1 }}

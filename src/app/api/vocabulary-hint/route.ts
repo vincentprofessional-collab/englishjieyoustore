@@ -67,5 +67,9 @@ export async function GET(request: Request) {
     );
   }
 
-  return NextResponse.json({ hint });
+  return NextResponse.json({
+    hint: hint.definitionCn.trim()
+      ? hint
+      : { ...hint, definitionCn: "词库暂未收录中文释义，可结合文章上下文理解。" },
+  });
 }

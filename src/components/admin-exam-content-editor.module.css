@@ -1,0 +1,152 @@
+.editor {
+  display: grid;
+  gap: 1rem;
+}
+
+.heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.heading h2 {
+  margin: 0.25rem 0;
+}
+
+.heading p,
+.help,
+.message {
+  margin: 0;
+  color: var(--muted, #596579);
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: minmax(180px, 240px) minmax(260px, 1fr);
+  gap: 0.8rem;
+}
+
+.controls label {
+  display: grid;
+  gap: 0.35rem;
+  font-weight: 650;
+}
+
+.newBankForm,
+.questionTools {
+  display: grid;
+  gap: 0.75rem;
+  border: 1px solid #d5dce5;
+  border-radius: 0.8rem;
+  padding: 1rem;
+  background: #f8fafc;
+}
+
+.newBankForm {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.newBankForm label,
+.questionTools label {
+  display: grid;
+  gap: 0.35rem;
+  font-weight: 650;
+}
+
+.newBankForm input,
+.newBankForm select,
+.questionControls select {
+  width: 100%;
+  min-height: 2.65rem;
+  border: 1px solid #d5dce5;
+  border-radius: 0.55rem;
+  background: #fff;
+  padding: 0.5rem 0.65rem;
+  color: #162235;
+}
+
+.questionTools h3,
+.questionTools p {
+  margin: 0;
+}
+
+.questionTools p {
+  color: var(--muted, #596579);
+}
+
+.questionControls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(180px, 1fr));
+  gap: 0.8rem;
+}
+
+.controls select,
+.jsonEditor {
+  width: 100%;
+  border: 1px solid #d5dce5;
+  border-radius: 0.6rem;
+  background: #fff;
+  color: #162235;
+}
+
+.questionEditor {
+  width: 100%;
+  min-height: 18rem;
+  border: 1px solid #d5dce5;
+  border-radius: 0.6rem;
+  background: #fff;
+  color: #162235;
+  padding: 0.85rem;
+  font: 0.86rem/1.55 ui-monospace, SFMono-Regular, Menlo, monospace;
+  resize: vertical;
+  tab-size: 2;
+}
+
+.controls select {
+  min-height: 2.8rem;
+  padding: 0.55rem 0.7rem;
+}
+
+.jsonEditor {
+  min-height: 52vh;
+  padding: 0.85rem;
+  font: 0.86rem/1.55 ui-monospace, SFMono-Regular, Menlo, monospace;
+  resize: vertical;
+  tab-size: 2;
+}
+
+.actions {
+  display: flex;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.actions button {
+  min-height: 2.65rem;
+}
+
+.danger {
+  color: #9d2525;
+}
+
+.deleted {
+  display: inline-flex;
+  margin-left: 0.5rem;
+  border-radius: 999px;
+  padding: 0.15rem 0.5rem;
+  background: #fff0ed;
+  color: #9d2525;
+  font-size: 0.78rem;
+}
+
+@media (max-width: 680px) {
+  .controls {
+    grid-template-columns: 1fr;
+  }
+
+  .questionControls {
+    grid-template-columns: 1fr;
+  }
+}

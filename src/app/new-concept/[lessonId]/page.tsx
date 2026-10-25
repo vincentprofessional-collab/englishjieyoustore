@@ -3,6 +3,8 @@ import { NewConceptLessonPage } from "@/components/new-concept-lesson-page";
 import { NEW_CONCEPT_LESSONS, getNewConceptLessonById } from "@/lib/new-concept";
 import { getNewConceptVocabularyItems } from "@/lib/new-concept-vocabulary";
 import { getNewConceptMediaUrls } from "@/lib/new-concept-media";
+import { createDictationWordMetadata } from "@/lib/articles/dictation-targets";
+import { getVocabularyHintsForTexts } from "@/lib/vocabulary/local-vocabulary";
 
 export const dynamicParams = false;
 export function generateStaticParams() {
@@ -26,6 +28,7 @@ export default async function NewConceptLessonRoute({
   }
 
   const media = getNewConceptMediaUrls(lesson, audioEdition);
+  const lessonEnglish = lesson.kind === "dialogue" ? lesson.english : lesson.exercise;
 
   return (
     <NewConceptLessonPage
@@ -33,6 +36,7 @@ export default async function NewConceptLessonRoute({
       audioEdition={audioEdition}
       lesson={lesson}
       sentenceAudioUrls={media.sentenceAudioUrls}
+      dictationWordMetadata={createDictationWordMetadata(getVocabularyHintsForTexts(lessonEnglish))}
       vocabulary={getNewConceptVocabularyItems(lesson)}
     />
   );

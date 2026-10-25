@@ -13,11 +13,11 @@ const sets = await Promise.all(index.entries.map(entry => read(`public/cet6/${en
 const questions = set => set.sections.flatMap(section => section.groups.flatMap(group => group.questions));
 const papers = sets.filter(set => set.kind === 'paper');
 
-test('CET-6 removes knowledge and publishes 76 source papers plus six consistent practice families', () => {
-  assert.equal(library.entries.length,76);
+test('CET-6 removes knowledge and review-pending papers and publishes 73 source papers plus six consistent practice families', () => {
+  assert.equal(library.entries.length,73);
   assert.ok(library.entries.every(entry => entry.section === '试卷'));
-  assert.equal(papers.length,76);
-  assert.equal(papers.reduce((sum,paper)=>sum+questions(paper).length,0),3507);
+  assert.equal(papers.length,73);
+  assert.equal(papers.reduce((sum,paper)=>sum+questions(paper).length,0),3336);
   assert.deepEqual(sets.filter(set => set.kind === 'practice').map(set => set.id).sort(), ['cloze','listening','matching','reading','translation','writing'].map(name=>`practice-cet6-${name}`));
   assert.equal(new Set(index.entries.map(entry => entry.id)).size,index.entries.length);
 });

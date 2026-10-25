@@ -12,6 +12,8 @@ import syntax2026 from "@/data/bbc/2026-syntax.json";
 import { normalizeBbcSyntaxSentenceEdits } from "@/lib/bbc-syntax-annotation-edits";
 import type { BbcSyntaxSentenceData } from "@/components/bbc-syntax-sentence";
 import { buildAutomaticBbcSyntax } from "@/lib/articles/bbc-automatic-syntax";
+import { createDictationWordMetadata } from "@/lib/articles/dictation-targets";
+import { getVocabularyHintsForTexts } from "@/lib/vocabulary/local-vocabulary";
 
 export const dynamicParams = true;
 export const dynamic = "force-dynamic";
@@ -47,12 +49,16 @@ export default async function ArticlePage({
     notFound();
   }
 
+  const dictationWordMetadata = createDictationWordMetadata(
+    getVocabularyHintsForTexts(article.body),
+  );
+
   const canonicalSyntaxSentences = (article.year === 2026 ? (syntax2026 as Record<string, BbcSyntaxSentenceData[]>)[article.id] : undefined)
     ?? article.syntaxSentences
     ?? article.sentences?.map((sentence) => buildAutomaticBbcSyntax(sentence.english));
 
   if (process.env.NODE_ENV === "development" && preview === "mobile") {
-    return <ArticleDetailPage key={article.id} article={article} isUploadedArticle={!builtinArticle} syntaxSentences={canonicalSyntaxSentences} />;
+    return <ArticleDetailPage key={article.id} article={article} dictationWordMetadata={dictationWordMetadata} isUploadedArticle={!builtinArticle} syntaxSentences={canonicalSyntaxSentences} />;
   }
 
   const hasPublicRelease = article.year === 2015 && isFreeBbc2015ArticleUnlocked(article.id);
@@ -85,5 +91,5 @@ export default async function ArticlePage({
     }
   }
 
-  return <ArticleDetailPage key={article.id} adminPreview={adminPreview} article={article} draftPreview={draftPreview} isUploadedArticle={!builtinArticle} syntaxSentences={syntaxSentences} />;
+  return <ArticleDetailPage key={article.id} adminPreview={adminPreview} article={article} dictationWordMetadata={dictationWordMetadata} draftPreview={draftPreview} isUploadedArticle={!builtinArticle} syntaxSentences={syntaxSentences} />;
 }

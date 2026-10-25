@@ -1,6 +1,12 @@
 "use client";
 
 import { getBbcWaveSegments } from "@/lib/articles/bbc-paste-markup";
+import { getLikelyProperNounWords, shouldShowAudioPronunciation } from "@/lib/audio-pronunciation";
+import {
+  isLikelyTechnicalTerm,
+  type DictationVocabularyCandidate,
+  type DictationWordMetadata,
+} from "@/lib/articles/dictation-targets";
 import { createPortal } from "react-dom";
 
 import {
@@ -26,7 +32,9 @@ type BbcPracticeSentence = {
 };
 
 type DictationTarget = {
+  end: number;
   normalizedWord: string;
+  start: number;
   token: string;
   tokenIndex: number;
 };
@@ -107,6 +115,37 @@ function isWordToken(token: string) {
   return /^[A-Za-z]/.test(token);
 }
 
+function getDictationTermWords(value: string) {
+  return (value.match(/[A-Za-z]+(?:['’-][A-Za-z]+)*/g) ?? [])
+    .map((word) => normalizeWord(word.replace(/[’]/g, "'")))
+    .filter(Boolean);
+}
+
+function matchesVocabularyWord(actual: string, expected: string) {
+  const normalizedActual = normalizeWord(actual.replace(/[’]/g, "'")).replace(/'/g, "");
+  const normalizedExpected = normalizeWord(expected.replace(/[’]/g, "'")).replace(/'/g, "");
+  if (normalizedActual === normalizedExpected) return true;
+
+  const forms = new Set<string>();
+  if (/[^aeiou]y$/.test(normalizedExpected)) {
+    forms.add(`${normalizedExpected.slice(0, -1)}ies`);
+    forms.add(`${normalizedExpected.slice(0, -1)}ied`);
+  } else if (/(s|x|z|ch|sh)$/.test(normalizedExpected)) {
+    forms.add(`${normalizedExpected}es`);
+    forms.add(`${normalizedExpected}ed`);
+  } else if (normalizedExpected.endsWith("e")) {
+    forms.add(`${normalizedExpected}s`);
+    forms.add(`${normalizedExpected}d`);
+    forms.add(`${normalizedExpected.slice(0, -1)}ing`);
+  } else {
+    forms.add(`${normalizedExpected}s`);
+    forms.add(`${normalizedExpected}ed`);
+    forms.add(`${normalizedExpected}ing`);
+  }
+  forms.add(`${normalizedExpected}'s`);
+  return forms.has(normalizedActual);
+}
+
 function stableHash(value: string) {
   let hash = 0;
 
@@ -168,6 +207,9 @@ export function BbcSentencePractice({
   englishContent,
   isAudioPlaying = false,
   dictationTargetTokenIndexes,
+  dictationVocabularyCandidates,
+  dictationWordMetadata,
+  dictationExcludedWords,
   showAnswers = false,
   translationContent,
   sentence,
@@ -175,6 +217,9 @@ export function BbcSentencePractice({
 }: {
   activeWordIndex?: number | null;
   dictationTargetTokenIndexes?: number[];
+  dictationVocabularyCandidates?: DictationVocabularyCandidate[];
+  dictationWordMetadata?: Record<string, DictationWordMetadata>;
+  dictationExcludedWords?: string[];
   englishContent?: ReactNode;
   isAudioPlaying?: boolean;
   showAnswers?: boolean;
@@ -392,14 +437,19 @@ export function BbcSentencePractice({
   }
 
   function getSentenceWordTargets() {
+    let characterOffset = 0;
     return splitEnglishTokens(sentence.english)
       .map((token, tokenIndex) => {
+        const start = characterOffset;
+        characterOffset += token.length;
         if (!isWordToken(token)) {
           return null;
         }
 
         return {
+          end: characterOffset,
           normalizedWord: normalizeWord(token),
+          start,
           token,
           tokenIndex,
         };
@@ -432,6 +482,91 @@ export function BbcSentencePractice({
     if (dictationTargetTokenIndexes) {
       const selected = new Set(dictationTargetTokenIndexes);
       return wordTargets.filter((target) => selected.has(target.tokenIndex));
+    }
+
+    if (dictationVocabularyCandidates || dictationWordMetadata || dictationExcludedWords) {
+      const targetCount = getBlankDictationTargetCount(wordTargets.length);
+      const excludedWords = new Set([
+        ...getLikelyProperNounWords(sentence.english),
+        ...(dictationExcludedWords ?? []).map((word) => normalizeWord(word.replace(/[’]/g, "'"))),
+      ]);
+      const metadataFor = (word: string) => {
+        const normalized = normalizeWord(word.replace(/[’]/g, "'")).toLowerCase();
+        return dictationWordMetadata?.[normalized] ?? dictationWordMetadata?.[word.toLowerCase()];
+      };
+      const isProperOrTechnical = (word: string, metadata?: DictationWordMetadata) =>
+        excludedWords.has(normalizeWord(word.replace(/[’]/g, "'"))) ||
+        Boolean(metadata?.isTechnical) ||
+        isLikelyTechnicalTerm(metadata?.partOfSpeech);
+      const isExcludedWord = (word: string, metadata?: DictationWordMetadata) =>
+        isProperOrTechnical(word, metadata) || !shouldShowAudioPronunciation(metadata?.level, word);
+
+      const preferredGroups: Array<{ endIndex: number; startIndex: number }> = [];
+      for (const candidate of dictationVocabularyCandidates ?? []) {
+        const pattern = getDictationTermWords(candidate.term);
+        if (
+          !pattern.length ||
+          !shouldShowAudioPronunciation(candidate.level, candidate.term) ||
+          isLikelyTechnicalTerm(candidate.term, candidate.definition, candidate.level, candidate.partOfSpeech) ||
+          pattern.some((word) => excludedWords.has(word))
+        ) {
+          continue;
+        }
+
+        for (let startIndex = 0; startIndex <= wordTargets.length - pattern.length; startIndex += 1) {
+          let matches = true;
+          for (let offset = 0; offset < pattern.length; offset += 1) {
+            const target = wordTargets[startIndex + offset];
+            if (!target || isProperOrTechnical(target.normalizedWord, metadataFor(target.normalizedWord)) ||
+              (pattern.length === 1 && !shouldShowAudioPronunciation(metadataFor(target.normalizedWord)?.level, target.normalizedWord)) ||
+              !matchesVocabularyWord(target.token, pattern[offset])) {
+              matches = false;
+              break;
+            }
+            if (offset > 0) {
+              const previous = wordTargets[startIndex + offset - 1];
+              if (sentence.english.slice(previous.end, target.start).trim()) {
+                matches = false;
+                break;
+              }
+            }
+          }
+          if (matches) {
+            preferredGroups.push({ endIndex: startIndex + pattern.length, startIndex });
+            break;
+          }
+        }
+      }
+
+      const selectedIndexes = new Set<number>();
+      const uniquePreferredGroups = [...new Map(
+        preferredGroups.map((group) => [`${group.startIndex}:${group.endIndex}`, group] as const),
+      ).values()].sort((left, right) =>
+        (right.endIndex - right.startIndex) - (left.endIndex - left.startIndex) || left.startIndex - right.startIndex,
+      );
+      for (const group of uniquePreferredGroups) {
+        const indexes = wordTargets.slice(group.startIndex, group.endIndex).map((target) => target.tokenIndex);
+        if (
+          indexes.length === 0 ||
+          indexes.length > targetCount - selectedIndexes.size ||
+          indexes.some((index) => selectedIndexes.has(index))
+        ) continue;
+        indexes.forEach((index) => selectedIndexes.add(index));
+        if (selectedIndexes.size >= targetCount) break;
+      }
+
+      if (selectedIndexes.size < targetCount) {
+        const fallbackCandidates = wordTargets
+          .filter((target) => !selectedIndexes.has(target.tokenIndex))
+          .filter((target) => !isExcludedWord(target.normalizedWord, metadataFor(target.normalizedWord)))
+          .sort((left, right) => right.normalizedWord.length - left.normalizedWord.length || left.tokenIndex - right.tokenIndex);
+        for (const target of fallbackCandidates) {
+          selectedIndexes.add(target.tokenIndex);
+          if (selectedIndexes.size >= targetCount) break;
+        }
+      }
+
+      return wordTargets.filter((target) => selectedIndexes.has(target.tokenIndex));
     }
 
     return [...wordTargets]

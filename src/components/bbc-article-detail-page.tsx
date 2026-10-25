@@ -26,6 +26,7 @@ import { ArticleRetellingPractice, buildRetellingParagraphs } from "@/components
 import { ContentShareButton } from "@/components/content-share-button";
 import { StudyAnnotationTools } from "@/components/study-annotation-tools";
 import { getLikelyProperNounWords, shouldShowAudioPronunciation } from "@/lib/audio-pronunciation";
+import type { DictationWordMetadata } from "@/lib/articles/dictation-targets";
 import { splitArticleSentences } from "@/lib/article-inline-annotations";
 import { supabase } from "@/lib/supabase/client";
 import { adminRequest } from "@/lib/admin/request";
@@ -53,6 +54,7 @@ type ArticlePageProps = {
   article: BbcArticle;
   adminPreview?: boolean;
   draftPreview?: boolean;
+  dictationWordMetadata: Record<string, DictationWordMetadata>;
   isUploadedArticle?: boolean;
   syntaxSentences?: BbcSyntaxSentenceData[];
 };
@@ -719,7 +721,7 @@ function renderWaveHighlightedChinese(text: string, terms: string[] = [], ranges
     ? <span className="bbc-wave-term" key={`zh-wave-${index}`}>{part.text}</span> : part.text);
 }
 
-export default function ArticleDetailPage({ article, adminPreview = false, draftPreview = false, isUploadedArticle = false, syntaxSentences }: ArticlePageProps) {
+export default function ArticleDetailPage({ article, adminPreview = false, draftPreview = false, dictationWordMetadata, isUploadedArticle = false, syntaxSentences }: ArticlePageProps) {
   const inlineTextAnnotations = useArticleInlineAnnotations("bbc", article.id);
   const [editableInlineAnnotations, setEditableInlineAnnotations] = useState(inlineTextAnnotations);
   const inlineAnnotationUnits = useMemo(
@@ -1750,26 +1752,28 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
               ) : null}
             </div>
           </div>
-          <div className="bbc-article-title-card">
-            <time className="bbc-article-date" dateTime={article.date}>
-              {article.date.replaceAll("-", ".")}
-            </time>
-            <h1 aria-label={`${article.title} ${articleTitleChinese}`.trim()}>
-              <span className="bbc-article-title-group">
-                <span className="bbc-article-title-line" lang="en">
-                  {article.title}
+          <div className="bbc-article-title-shell">
+            <div className="bbc-article-title-card">
+              <time className="bbc-article-date" dateTime={article.date}>
+                {article.date.replaceAll("-", ".")}
+              </time>
+              <h1 aria-label={`${article.title} ${articleTitleChinese}`.trim()}>
+                <span className="bbc-article-title-group">
+                  <span className="bbc-article-title-line" lang="en">
+                    {article.title}
+                  </span>
                 </span>
-              </span>
-            </h1>
-            <div className="bbc-article-title-bottom-row">
-              {articleTitleChinese ? (
-                <span className="bbc-article-title-line" lang="zh-CN">
-                  {articleTitleChinese}
-                </span>
-              ) : null}
-              <div className="bbc-article-word-count">
-                共 <b className="stat-number">{articleWordCount}</b> 词
+              </h1>
+              <div className="bbc-article-title-bottom-row">
+                {articleTitleChinese ? (
+                  <span className="bbc-article-title-line" lang="zh-CN">
+                    {articleTitleChinese}
+                  </span>
+                ) : null}
               </div>
+            </div>
+            <div className="bbc-article-word-count">
+              共 <b className="stat-number">{articleWordCount}</b> 词
             </div>
           </div>
         </div>
@@ -2009,6 +2013,14 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
                       <BbcSentencePractice
                         key={`${sentence.sentenceNo}:${sentence.english}`}
                         activeWordIndex={activeStudyWordIndex}
+                        dictationVocabularyCandidates={studyMode === "writing" ? articleVocabularyForDisplay.map((item) => ({
+                          definition: [item.definition, item.translation, item.entry].filter(Boolean).join(" "),
+                          level: item.sourceLevel,
+                          partOfSpeech: item.partOfSpeech,
+                          term: extractBbcVocabularyHeadword(item.term || item.lemma || item.entry),
+                        })) : undefined}
+                        dictationWordMetadata={studyMode === "writing" ? dictationWordMetadata : undefined}
+                        dictationExcludedWords={studyMode === "writing" ? [...likelyProperNounWords] : undefined}
                         englishContent={renderHighlightedEnglish(
                           sentence.english,
                           activeStudySentenceWordOffset,

@@ -195,6 +195,7 @@ export function SiteSectionShell({
     ? findBestActiveLeaf(activeTopItem, pathname, searchParams)
     : undefined;
   const hideSidebar = !activeTopItem || ["home", "me"].includes(activeTopItem.id);
+  const examRunnerActive = /^\/exam-practice\/gmat\/[^/]+\/?$/.test(pathname);
   const [sidebarHidden, setSidebarHidden] = useState(false);
 
   useEffect(() => {
@@ -222,7 +223,7 @@ export function SiteSectionShell({
 
   return (
     <>
-    <div className={`site-section-shell${sidebarHidden ? " sidebar-hidden" : ""}`}>
+    <div className={`site-section-shell${sidebarHidden && !examRunnerActive ? " sidebar-hidden" : ""}${examRunnerActive ? " exam-runner-active" : ""}`}>
       <aside className="section-side-nav" aria-label={`${activeTopItem.label}目录`}>
         <button
           aria-label="隐藏目录侧栏"
@@ -255,7 +256,7 @@ export function SiteSectionShell({
 
       <div className="section-page-content">{children}</div>
     </div>
-    {sidebarHidden ? (
+    {sidebarHidden && !examRunnerActive ? (
       <button
         aria-label="显示目录侧栏"
         className="section-side-reveal"

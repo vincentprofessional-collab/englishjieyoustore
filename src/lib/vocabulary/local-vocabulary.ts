@@ -1531,6 +1531,7 @@ function getVocabularyLookupCandidates(value: string) {
     }
     if (!stem.endsWith("y") && /[^aeiou][aeiou][^aeiou]$/i.test(stem)) {
       addCandidate(`${stem}e`);
+      addCandidate(stem);
     } else if (!stem.endsWith("y")) {
       addCandidate(stem);
       addCandidate(`${stem}e`);
@@ -1606,13 +1607,19 @@ export function getVocabularyEntryForWordForm(word: string) {
   if (exactEntry) {
     const baseWord = getReferencedVocabularyBaseWord(exactEntry, vocabularyMap);
 
-    return baseWord ? vocabularyMap.get(baseWord) ?? exactEntry : exactEntry;
+    if (baseWord) {
+      return vocabularyMap.get(baseWord) ?? exactEntry;
+    }
+
+    if (exactEntry.definitionCn.trim()) {
+      return exactEntry;
+    }
   }
 
   for (const candidate of getVocabularyLookupCandidates(normalizedWord).slice(1)) {
     const entry = vocabularyMap.get(candidate);
 
-    if (entry) {
+    if (entry?.definitionCn.trim()) {
       return entry;
     }
   }
@@ -1904,9 +1911,58 @@ export function getVocabularyEntry(word: string) {
   }
 
   const entry = findVocabularyEntry(normalizedWord);
-  return entry
-    ? { ...entry, ...getWorkbookDefinitionFields(entry.normalizedWord) }
-    : null;
+  if (!entry) {
+    return null;
+  }
+
+  const workbookFields = getWorkbookDefinitionFields(entry.normalizedWord);
+  const resolvedEntry = {
+    ...entry,
+    definitionCn: workbookFields.definitionCn || entry.definitionCn,
+    definitionGroups: workbookFields.definitionGroups.length ? workbookFields.definitionGroups : entry.definitionGroups,
+    definitionLines: workbookFields.definitionLines.length ? workbookFields.definitionLines : entry.definitionLines,
+    englishDefinitions: workbookFields.englishDefinitions.length ? workbookFields.englishDefinitions : entry.englishDefinitions,
+    partOfSpeech: workbookFields.partOfSpeech || entry.partOfSpeech,
+  };
+
+  if (resolvedEntry.definitionCn.trim()) {
+    return resolvedEntry;
+  }
+
+  const baseEntry = getVocabularyEntryForWordForm(normalizedWord);
+  if (!baseEntry || baseEntry.normalizedWord === entry.normalizedWord) {
+    return resolvedEntry;
+  }
+
+  const baseWorkbookFields = getWorkbookDefinitionFields(baseEntry.normalizedWord);
+  let baseDefinitionGroups = baseWorkbookFields.definitionGroups.length
+    ? baseWorkbookFields.definitionGroups
+    : baseEntry.definitionGroups;
+  let baseDefinitionLines = baseWorkbookFields.definitionLines.length
+    ? baseWorkbookFields.definitionLines
+    : baseEntry.definitionLines;
+  let baseDefinitionCn = baseWorkbookFields.definitionCn || baseEntry.definitionCn;
+  if (/(?:ied|ed|ing)$/.test(normalizedWord)) {
+    const verbGroups = baseDefinitionGroups.filter((group) => /^(?:v|vt|vi)\.?$/i.test(group.partOfSpeech.trim()));
+    if (verbGroups.length) {
+      baseDefinitionGroups = verbGroups;
+      baseDefinitionLines = verbGroups.map((group) => group.text);
+      baseDefinitionCn = baseDefinitionLines.join(" / ");
+    }
+  }
+  if (!baseDefinitionCn.trim()) {
+    return resolvedEntry;
+  }
+
+  return {
+    ...resolvedEntry,
+    definitionCn: baseDefinitionCn,
+    definitionGroups: baseDefinitionGroups,
+    definitionLines: baseDefinitionLines,
+    englishDefinitions: baseWorkbookFields.englishDefinitions.length ? baseWorkbookFields.englishDefinitions : baseEntry.englishDefinitions,
+    partOfSpeech: baseDefinitionGroups[0]?.partOfSpeech || baseWorkbookFields.partOfSpeech || baseEntry.partOfSpeech || resolvedEntry.partOfSpeech,
+    level: baseEntry.level || resolvedEntry.level,
+  };
 }
 
 export async function getExtendedVocabularyEntry(word: string) {

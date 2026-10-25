@@ -1,0 +1,176 @@
+.editor {
+  display: grid;
+  gap: 18px;
+}
+
+.heading,
+.questionBar,
+.summary,
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.heading h2 {
+  margin: 4px 0;
+}
+
+.heading p {
+  margin: 0;
+  color: #706855;
+}
+
+.bankPicker,
+.questionBar label {
+  display: grid;
+  gap: 6px;
+  min-width: min(100%, 320px);
+}
+
+.bankPicker span,
+.questionBar label span,
+.fields label > span,
+.fieldLabel {
+  color: #57645e;
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.bankPicker select,
+.questionBar select,
+.fields input,
+.fields select,
+.fields textarea {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 42px;
+  border: 1px solid #d6cdbc;
+  border-radius: 8px;
+  background: #fffdf7;
+  color: #29362f;
+  font: inherit;
+  padding: 9px 11px;
+}
+
+.fields textarea {
+  min-height: 90px;
+  resize: vertical;
+  white-space: pre-wrap;
+}
+
+.summary {
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  border-block: 1px solid #e5ddcf;
+  color: #5a675f;
+  padding: 10px 0;
+}
+
+.summary span + span::before {
+  content: "·";
+  margin-right: 14px;
+  color: #b5a98f;
+}
+
+.questionBar > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.fields > label {
+  display: grid;
+  align-content: start;
+  gap: 6px;
+}
+
+.wide {
+  grid-column: 1 / -1;
+}
+
+.options {
+  display: grid;
+  gap: 10px;
+  margin-top: 7px;
+}
+
+.option {
+  display: grid;
+  grid-template-columns: 70px minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 8px;
+}
+
+.option textarea {
+  min-height: 58px;
+}
+
+.removeButton {
+  min-height: 40px;
+  border: 1px solid #dfc7bf;
+  border-radius: 8px;
+  background: #fff8f5;
+  color: #844833;
+  cursor: pointer;
+  font: inherit;
+  padding: 7px 10px;
+}
+
+.checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.checkbox input {
+  width: 18px;
+  min-height: 18px;
+}
+
+.actions {
+  justify-content: flex-end;
+  border-top: 1px solid #e5ddcf;
+  padding-top: 14px;
+}
+
+.message {
+  margin: 0;
+  border-left: 3px solid #b38b31;
+  background: #fff8df;
+  color: #665328;
+  line-height: 1.55;
+  padding: 9px 12px;
+}
+
+@media (max-width: 680px) {
+  .heading,
+  .questionBar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .fields {
+    grid-template-columns: 1fr;
+  }
+
+  .wide {
+    grid-column: auto;
+  }
+
+  .option {
+    grid-template-columns: 56px minmax(0, 1fr);
+  }
+
+  .removeButton {
+    grid-column: 2;
+    justify-self: start;
+  }
+}

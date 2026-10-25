@@ -1,4 +1,34 @@
-/* Opt-in paper layouts; existing catalogs retain their current group layout. */
+/* CET and Kaoyan runners share the full-width, large-type exam layout. */
+.site-section-shell.exam-runner-active { display: block !important; grid-template-columns: minmax(0, 1fr) !important; width: 100%; min-height: 100dvh; margin: 0; gap: 0; }
+.site-section-shell.exam-runner-active > .section-side-nav { display: none !important; }
+.site-section-shell.exam-runner-active > .section-page-content { width: 100%; max-width: none; min-width: 0; margin: 0; padding: 0; }
+.senior-high-page.senior-high-v2-runner[data-paper-font-size] { width: 100%; max-width: none; padding-inline: 0; }
+.senior-high-v2-runner[data-paper-font-size] .senior-high-v2-runner-header { display: grid; grid-template-columns: minmax(60px, 1fr) minmax(0, auto) minmax(60px, 1fr); grid-template-areas: "back title progress"; align-items: center; gap: 8px 12px; margin-inline: 0; padding-inline: clamp(18px, 3vw, 40px); }
+.senior-high-v2-runner[data-paper-font-size] .senior-high-v2-runner-header .senior-high-back { grid-area: back; justify-self: start; display: inline-flex; align-items: center; justify-content: center; color: #111; font-size: clamp(42px, 5vw, 60px); font-weight: 1000; line-height: 1; text-decoration: none; }
+.senior-high-v2-runner[data-paper-font-size] .senior-high-back .vocabulary-back-link-desktop-label { display: inline-flex !important; }
+.senior-high-v2-runner[data-paper-font-size] .senior-high-back .vocabulary-back-link-mobile-arrow { display: none !important; }
+.senior-high-v2-runner[data-paper-font-size] .senior-high-v2-runner-title { grid-area: title; justify-content: center; gap: 12px; min-width: 0; text-align: center; }
+.senior-high-v2-runner[data-paper-font-size] .senior-high-v2-runner-header h1 { margin: 0; text-align: center; }
+.senior-high-v2-runner[data-paper-font-size] .senior-high-v2-progress { grid-area: progress; justify-self: end; display: block; min-width: 0; text-align: right; white-space: nowrap; }
+.senior-high-v2-runner[data-paper-font-size] .senior-high-v2-progress strong { font-size: clamp(22px, 3vw, 32px); }
+.senior-high-page.senior-high-v2-runner[data-paper-font-size] :is(.senior-high-v2-sections, .senior-high-v2-question-nav, .senior-high-v2-instructions, .senior-high-paper-review, .senior-high-paper-finish) { margin-inline: 0; }
+.senior-high-v2-runner[data-paper-font-size="large"] { --cet4-paper-font-size: 20px; }
+.senior-high-v2-runner[data-paper-font-size] .senior-high-v2-stimulus,
+.senior-high-v2-runner[data-paper-font-size] .senior-high-v2-question-column,
+.senior-high-v2-runner[data-paper-font-size] .senior-high-v2-instructions { font-size: var(--cet4-paper-font-size); }
+.senior-high-v2-runner[data-paper-font-size] .senior-high-v2-paragraph,
+.senior-high-v2-runner[data-paper-font-size] .senior-high-v2-question-prompt,
+.senior-high-v2-runner[data-paper-font-size] .senior-high-options button,
+.senior-high-v2-runner[data-paper-font-size] .senior-high-v2-shared-options { font-size: var(--cet4-paper-font-size); }
+.senior-high-v2-runner[data-paper-font-size] .senior-high-v2-inline-control > b { color: #7650a2; font-size: 1em; }
+@media (max-width: 700px) {
+  .senior-high-v2-runner[data-paper-font-size] .senior-high-v2-runner-header { grid-template-columns: minmax(48px, 1fr) minmax(0, auto) minmax(48px, 1fr); gap: 6px 8px; padding-inline: 14px; }
+  .senior-high-v2-runner[data-paper-font-size] .senior-high-v2-runner-header .senior-high-back { font-size: 42px; }
+  .senior-high-v2-runner[data-paper-font-size] .senior-high-v2-runner-header h1 { font-size: clamp(23px, 5vw, 34px); }
+  .senior-high-v2-runner[data-paper-font-size] .senior-high-v2-progress strong { font-size: 22px; }
+}
+.senior-high-v2-question-nav.direct button.essay-label,
+.senior-high-v2-question-nav.direct button.translation-label { grid-column: span 2; white-space: nowrap; }
 .senior-high-v2-group[data-presentation="inline"] .senior-high-v2-group-body {
   grid-template-columns: minmax(0, 1fr);
 }
@@ -40,8 +70,12 @@
   grid-template-columns: minmax(0, 1fr);
 }
 .senior-high-v2-group[data-side-questions="true"] .senior-high-v2-question-column {
+  position: sticky;
+  top: 110px;
+  max-height: calc(100vh - 126px);
   min-height: 0;
   overflow-y: auto;
+  overscroll-behavior: contain;
   padding-right: 0;
 }
 .senior-high-v2-group[data-side-questions="true"] .senior-high-v2-stimulus { align-self: start; }
@@ -111,6 +145,7 @@
   .senior-high-v2-group[data-presentation="reading"] .senior-high-v2-group-body { grid-template-columns: minmax(0, 1fr); }
   .senior-high-v2-group[data-presentation="inline"][data-has-options="true"] .senior-high-v2-group-body { grid-template-columns: minmax(0, 1fr); }
   .senior-high-v2-group[data-side-questions="true"] .senior-high-v2-question-column {
+    position: static;
     height: auto;
     max-height: none;
     overflow: visible;
@@ -122,3 +157,6 @@
   .senior-high-v2-group[data-presentation="cloze"] .senior-high-options { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .senior-high-paper-review, .senior-high-paper-finish { align-items: stretch; flex-direction: column; gap: 12px; padding: 16px; }
 }
+.senior-high-v2-runner .cet4-word-bank-inline-control > b { color: #7650a2; font-size: 1em; }
+.senior-high-v2-runner .cet4-word-bank-inline-control .senior-high-v2-choice-blank.drop-target { min-width: 5.5em; padding: 0 6px; }
+.senior-high-v2-runner .senior-high-v2-shared-option.assigned { border-color: #7650a2; background: #f4eef9; }

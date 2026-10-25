@@ -1,0 +1,78 @@
+.tableWrap {
+  max-width: 100%;
+  overflow-x: auto;
+  border: 1px solid #d8d0c2;
+  border-radius: 10px;
+  background: #fffdf7;
+}
+
+.dataTable {
+  width: 100%;
+  min-width: 420px;
+  border-collapse: collapse;
+  color: #25332d;
+  line-height: 1.5;
+}
+
+.dataTable th,
+.dataTable td {
+  border: 1px solid #ded7ca;
+  padding: 9px 12px;
+  text-align: left;
+  vertical-align: top;
+  white-space: pre-wrap;
+}
+
+.dataTable th {
+  background: #f3eee3;
+  font-weight: 650;
+}
+
+.pairedAnswers {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.pairedAnswers label {
+  display: grid;
+  gap: 6px;
+  color: #58665f;
+  font-size: 14px;
+}
+
+.pairedAnswers input,
+.pairedAnswers select {
+  min-width: 0;
+  min-height: 44px;
+  border: 1px solid #c9c1b2;
+  border-radius: 8px;
+  background: #fffdf7;
+  color: #26332e;
+  font: inherit;
+  padding: 9px 11px;
+}
+
+.pairedAnswers input:focus-visible,
+.pairedAnswers select:focus-visible {
+  outline: 2px solid #537b8b;
+  outline-offset: 2px;
+}
+
+.reviewInline {
+  margin: -4px 0 0;
+  color: #80641d;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.answerTextarea {
+  min-height: 6em;
+  field-sizing: content;
+}
+
+@media (max-width: 600px) {
+  .pairedAnswers {
+    grid-template-columns: 1fr;
+  }
+}

@@ -9,19 +9,24 @@ import type {
   PointerEvent as ReactPointerEvent,
   ReactNode,
 } from "react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { Fragment, useEffect, useMemo, useRef, useState } from "react";
+import { getExamContentOverride } from "@/lib/exam-content/overrides";
 import {
   DEFAULT_READING_TEST,
   getReadingPart,
   getReadingQuestionNumbers,
   type ReadingChoiceQuestion,
   type ReadingDiagramKind,
+  type ReadingFillChart,
   type ReadingFillQuestion,
+  type ReadingFillTableCell,
   type ReadingPart,
   type ReadingPartId,
+  type ReadingPassageFigure,
   type ReadingTest,
 } from "@/lib/ielts/reading";
 import { getRawReadingParagraphs } from "@/lib/ielts/reading-article-text";
+import type { ReadingSourcePage } from "@/lib/ielts/reading-source-model";
 import { ArticleInlineAnnotatedParagraph } from "@/components/article-inline-annotated-text";
 import { useArticleInlineAnnotations } from "@/components/use-article-inline-annotations";
 import {
@@ -33,6 +38,7 @@ import {
 import { clearPersistedInlineHighlights, focusInlineText, inlineHighlightKey, persistInlineHighlight, restoreInlineHighlights, textOccurrenceForRange } from "@/lib/inline-highlights";
 import { recordPracticeAttempt } from "@/lib/learning/site-progress";
 import { ReadingSourceWorkbench } from "@/components/reading-source-workbench";
+import type { ReadingSourceAnswer } from "@/lib/ielts/reading-source-model";
 
 type AnswerMap = Record<number, string[]>;
 type FillMap = Record<number, string>;
@@ -69,6 +75,7 @@ type FavoriteQuestionItem = {
 type ReadingNavigationItem = { label: string; questionNumbers: number[] };
 type ReadingReviewRow = {
   correctAnswer: string;
+  explanation?: string;
   firstQuestionNo: number;
   hasCorrectAnswer: boolean;
   isCorrect: boolean;
@@ -90,6 +97,26 @@ function formatReadingTime(totalSeconds: number) {
 function formatQuestionNumbers(questionNumbers: number[]) {
   if (questionNumbers.length === 1) return String(questionNumbers[0]);
   return `${questionNumbers[0]}–${questionNumbers.at(-1)}`;
+}
+
+const MULTI_FILL_SEPARATOR = "\u001f";
+
+function getFillInputValues(value: string, inputCount: number) {
+  if (inputCount <= 1) return [value];
+  return Array.from({ length: inputCount }, (_, index) => value.split(MULTI_FILL_SEPARATOR)[index] ?? "");
+}
+
+function updateFillInputValue(currentValue: string, nextValue: string, inputIndex: number, inputCount: number) {
+  if (inputCount <= 1) return nextValue;
+  const values = getFillInputValues(currentValue, inputCount);
+  values[inputIndex] = nextValue;
+  return values.join(MULTI_FILL_SEPARATOR);
+}
+
+function formatFillUserAnswer(value: string, inputCount: number) {
+  return inputCount > 1
+    ? getFillInputValues(value, inputCount).filter(Boolean).join(" + ")
+    : value;
 }
 
 function getPartNavigation(part: ReadingPart): ReadingNavigationItem[] {
@@ -168,6 +195,23 @@ function splitAnswerAlternatives(value: string) {
     .split(/\s*\/\s*/)
     .map((item) => item.trim())
     .filter(Boolean);
+}
+
+function expandOptionalAnswer(value: string): string[] {
+  const optional = /\(([^)]+)\)/.exec(value);
+  if (!optional) return [value];
+  return [
+    ...expandOptionalAnswer(value.replace(optional[0], "")),
+    ...expandOptionalAnswer(value.replace(optional[0], optional[1])),
+  ];
+}
+
+function getSourceGroupAnswerAlternatives(value: string) {
+  return [...new Set(value
+    .split(/\s*\/\s*/)
+    .flatMap(expandOptionalAnswer)
+    .map((alternative) => normalizeAnswerValue(alternative.replace(/\s+or$/i, "")))
+    .filter(Boolean))];
 }
 
 function getComparableAnswerValues(value: string) {
@@ -756,7 +800,7 @@ function splitUserRequiredAnswers(value: string, requiredAnswers: string[]) {
   if (!normalizedValue) return [];
 
   const separated = normalizedValue
-    .split(/\s*(?:\/|,|;|\n|\band\b)\s*/i)
+    .split(/\s*(?:\u001f|\/|,|;|\n|\band\b)\s*/i)
     .map((item) => item.trim())
     .filter(Boolean);
 
@@ -847,23 +891,40 @@ function buildReadingReviewRows({
   fillAnswers,
   headingAssignments,
   parts,
+  sourceAnswers,
+  sourceGroups,
 }: {
   choiceAnswers: AnswerMap;
   fillAnswers: FillMap;
   headingAssignments: HeadingAssignments;
   parts: ReadingPart[];
+  sourceAnswers?: Record<number, ReadingSourceAnswer>;
+  sourceGroups?: NonNullable<ReadingTest["source"]>["groups"];
 }): ReadingReviewRow[] {
   return parts.flatMap((part) =>
     part.questionBlocks.flatMap<ReadingReviewRow>((block) => {
       if (block.type === "fill") {
+        const unorderedFillAnswers = new Map<number, boolean>();
+        for (const group of sourceGroups ?? []) {
+          if (group.mode !== "unordered" || !group.numbers.every((number) => block.questions.some((question) => question.number === number))) continue;
+          const remaining = group.values.map(getSourceGroupAnswerAlternatives);
+          for (const number of group.numbers) {
+            const userValue = normalizeAnswerValue(fillAnswers[number] ?? "");
+            const matchIndex = remaining.findIndex((values) => values.includes(userValue) && userValue.length > 0);
+            unorderedFillAnswers.set(number, matchIndex >= 0);
+            if (matchIndex >= 0) remaining.splice(matchIndex, 1);
+          }
+        }
         return block.questions.map((question) => {
-          const userAnswer = fillAnswers[question.number]?.trim() ?? "";
+          const rawUserAnswer = fillAnswers[question.number]?.trim() ?? "";
+          const userAnswer = formatFillUserAnswer(rawUserAnswer, question.inputCount ?? 1);
           const correctValues = getFillCorrectValues(question);
           return {
             correctAnswer: formatFillCorrectAnswer(question),
+            explanation: sourceAnswers?.[question.number]?.explanation,
             firstQuestionNo: question.number,
             hasCorrectAnswer: correctValues.length > 0,
-            isCorrect: isFillAnswerCorrect(userAnswer, question),
+            isCorrect: unorderedFillAnswers.get(question.number) ?? isFillAnswerCorrect(rawUserAnswer, question),
             label: String(question.number),
             partLabel: part.label,
             userAnswer: userAnswer || "未作答",
@@ -872,19 +933,44 @@ function buildReadingReviewRows({
       }
 
       if (block.type === "choice") {
-        return block.questions.map((question) => {
+        return block.questions.flatMap((question) => {
           const key = question.questionNumbers[0];
           const userLetters = choiceAnswers[key] ?? [];
           const correctLetters = getChoiceCorrectLetters(question);
-          return {
+          if (question.selectCount && question.selectCount === question.questionNumbers.length) {
+            const unmatchedUserLetters = [...userLetters];
+            const matchedRows = correctLetters.map((correctLetter) => {
+              const matchIndex = unmatchedUserLetters.findIndex((userLetter) =>
+                normalizeAnswerValue(userLetter) === normalizeAnswerValue(correctLetter),
+              );
+              const userLetter = matchIndex < 0 ? "" : unmatchedUserLetters.splice(matchIndex, 1)[0];
+              return { correctLetter, matched: Boolean(userLetter), userLetter };
+            });
+            const rows = matchedRows.map((row) => ({ ...row, userLetter: row.userLetter || unmatchedUserLetters.shift() || "" }));
+            return question.questionNumbers.map((number, index) => {
+              const { correctLetter, matched, userLetter } = rows[index] ?? { correctLetter: "", matched: false, userLetter: "" };
+              return {
+                correctAnswer: correctLetter || "未录入",
+                explanation: sourceAnswers?.[number]?.explanation ?? sourceAnswers?.[key]?.explanation,
+                firstQuestionNo: number,
+                hasCorrectAnswer: Boolean(correctLetter),
+                isCorrect: Boolean(correctLetter && matched),
+                label: String(number),
+                partLabel: part.label,
+                userAnswer: userLetter || "未作答",
+              };
+            });
+          }
+          return [{
             correctAnswer: formatChoiceAnswerKey(question, getAnswerValues(question.answer)),
+            explanation: sourceAnswers?.[key]?.explanation,
             firstQuestionNo: key,
             hasCorrectAnswer: correctLetters.length > 0,
             isCorrect: correctLetters.length > 0 && compareAnswerLists(userLetters, correctLetters),
             label: formatQuestionNumbers(question.questionNumbers),
             partLabel: part.label,
             userAnswer: formatChoiceAnswerKey(question, userLetters),
-          };
+          }];
         });
       }
 
@@ -893,6 +979,7 @@ function buildReadingReviewRows({
         const correctHeadingId = block.answers?.[questionNo] ?? "";
         return {
           correctAnswer: correctHeadingId ? formatHeadingAnswer(block, correctHeadingId) : "未录入",
+          explanation: sourceAnswers?.[questionNo]?.explanation,
           firstQuestionNo: questionNo,
           hasCorrectAnswer: Boolean(correctHeadingId),
           isCorrect: Boolean(correctHeadingId) && userHeadingId === correctHeadingId,
@@ -909,10 +996,12 @@ function ReadingChoiceBlock({
   answers,
   onChange,
   question,
+  sharedOptions = false,
 }: {
   answers: AnswerMap;
   onChange: (question: ReadingChoiceQuestion, letter: string) => void;
   question: ReadingChoiceQuestion;
+  sharedOptions?: boolean;
 }) {
   const questionKey = question.questionNumbers[0];
   const selected = answers[questionKey] ?? [];
@@ -927,7 +1016,18 @@ function ReadingChoiceBlock({
         {isMultiple ? <small>已选 {selected.length}/{question.selectCount}</small> : null}
       </div>
       {question.diagram ? <ReadingMotionDiagram kind={question.diagram} /> : null}
-      <div className="reading-choice-options">
+      {sharedOptions ? (
+        <select
+          aria-label={`Question ${questionKey}`}
+          className="reading-shared-choice-select"
+          value={selected[0] ?? ""}
+          onChange={(event) => onChange(question, event.target.value)}
+        >
+          <option value="">Choose an answer</option>
+          {question.options.map((option) => <option key={option.letter} value={option.letter}>{option.letter}</option>)}
+        </select>
+      ) : null}
+      {!sharedOptions ? <div className="reading-choice-options">
         {question.options.map((option) => {
           const isSelected = selected.includes(option.letter);
           return (
@@ -945,13 +1045,152 @@ function ReadingChoiceBlock({
             </label>
           );
         })}
-      </div>
+      </div> : null}
     </article>
   );
 }
 
-export function ReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: ReadingPracticeProps) {
-  return test.source ? <ReadingSourceWorkbench key={`${mode}:${test.id}`} mode={mode} test={test} /> : <LegacyReadingPractice mode={mode} test={test} />;
+function ReadingFillTable({
+  answers,
+  onChange,
+  table,
+}: {
+  answers: FillMap;
+  onChange: (number: number, value: string, fieldIndex: number, inputCount: number) => void;
+  table: { headers: string[]; rows: ReadingFillTableCell[][] };
+}) {
+  return (
+    <div className="reading-fill-table-wrap">
+      <table className="reading-fill-table">
+        <thead><tr>{table.headers.map((header) => <th key={header}>{header}</th>)}</tr></thead>
+        <tbody>
+          {table.rows.map((row, rowIndex) => (
+            <tr key={rowIndex}>
+              {row.map((cell, cellIndex) => {
+                const inputCount = cell.inputCount ?? 1;
+                const values = cell.questionNumber == null ? [] : getFillInputValues(answers[cell.questionNumber] ?? "", inputCount);
+                return (
+                  <td colSpan={cell.colSpan} key={`${rowIndex}-${cellIndex}`} rowSpan={cell.rowSpan}>
+                    {cell.before ?? cell.text ?? ""}
+                    {cell.questionNumber != null ? values.map((value, fieldIndex) => (
+                      <span
+                        className={`reading-fill-input-wrap reading-table-fill-input-wrap ${fieldIndex ? "no-number" : ""}`}
+                        id={fieldIndex === 0 ? `reading-question-${cell.questionNumber}` : undefined}
+                        key={`${cell.questionNumber}-${fieldIndex}`}
+                      >
+                        {fieldIndex === 0 ? <b>{cell.questionNumber}</b> : null}
+                        <input
+                          aria-label={`Question ${cell.questionNumber}${inputCount > 1 ? `, answer ${fieldIndex + 1}` : ""}`}
+                          autoComplete="off"
+                          value={value}
+                          onChange={(event) => onChange(cell.questionNumber!, event.target.value, fieldIndex, inputCount)}
+                        />
+                      </span>
+                    )).flatMap((input, fieldIndex) => fieldIndex < values.length - 1
+                      ? [input, <span aria-hidden="true" className="reading-table-fill-joiner" key={`join-${cell.questionNumber}-${fieldIndex}`}>{cell.joiners?.[fieldIndex] ?? " "}</span>]
+                      : [input]) : null}
+                    {cell.after ?? ""}
+                  </td>
+                );
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function ReadingFillAxisChart({
+  answers,
+  chart,
+  onChange,
+}: {
+  answers: FillMap;
+  chart: ReadingFillChart;
+  onChange: (number: number, value: string) => void;
+}) {
+  return (
+    <figure className="reading-fill-axis-chart">
+      <figcaption>{chart.title}</figcaption>
+      <div className="reading-fill-axis-chart-rows">
+        {chart.rows.map((row, index) => (
+          <div className="reading-fill-axis-chart-row" key={(row.questionNumber ?? row.label) + "-" + index}>
+            <div className="reading-fill-axis-chart-label">
+              {row.questionNumber != null ? (
+                <label htmlFor={"reading-question-" + row.questionNumber}>
+                  <span>{row.questionNumber}</span>
+                  <input
+                    aria-label={"Question " + row.questionNumber}
+                    autoComplete="off"
+                    id={"reading-question-" + row.questionNumber}
+                    value={answers[row.questionNumber] ?? ""}
+                    onChange={(event) => onChange(row.questionNumber!, event.target.value)}
+                  />
+                </label>
+              ) : row.label}
+            </div>
+            <div
+              aria-label={row.percent + "%"}
+              className="reading-fill-axis-chart-track"
+              role="img"
+            >
+              <span style={{ width: String((row.percent / chart.scale) * 100) + "%" }} />
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="reading-fill-axis-chart-axis">
+        <span aria-hidden="true" />
+        <div>{chart.ticks.map((tick) => <span key={tick}>{tick}%</span>)}</div>
+      </div>
+    </figure>
+  );
+}
+
+function ReadingPassageFigureBlock({ figure }: { figure: ReadingPassageFigure }) {
+  if (figure.type === "wheel-motion") {
+    return (
+      <figure className="reading-passage-figure reading-wheel-figure">
+        <svg aria-label="A circle with a curved line inside it" role="img" viewBox="0 0 200 200">
+          <circle cx="100" cy="100" r="82" />
+          <path d="M43 103 C62 79 79 82 95 99 C111 116 132 119 157 95" />
+        </svg>
+        {figure.caption ? <figcaption>{figure.caption}</figcaption> : null}
+      </figure>
+    );
+  }
+
+  if (figure.type === "data-table") {
+    return (
+      <figure className="reading-passage-figure reading-data-table-figure">
+        <table>
+          <thead><tr>{figure.headers.map((header) => <th key={header}>{header}</th>)}</tr></thead>
+          <tbody>{figure.rows.map((row, index) => (
+            <tr key={index}>{row.map((cell, cellIndex) => <td key={`${index}-${cellIndex}`}>{cell}</td>)}</tr>
+          ))}</tbody>
+        </table>
+        {figure.caption ? <figcaption>{figure.caption}</figcaption> : null}
+      </figure>
+    );
+  }
+
+  return (
+    <figure className="reading-passage-figure reading-word-pair-figure">
+      <table>
+        <thead><tr><th>Words associated with circle/square</th><th>Agreement among subjects (%)</th></tr></thead>
+        <tbody>{figure.rows?.map((row) => <tr key={row.pair}><td>{row.pair}</td><td>{row.agreement}</td></tr>)}</tbody>
+      </table>
+      {figure.caption ? <figcaption>{figure.caption}</figcaption> : null}
+    </figure>
+  );
+}
+
+function ReadingPracticeContent({ mode = "mock", test = DEFAULT_READING_TEST }: ReadingPracticeProps) {
+  const textVerified = test.parts.length > 0 && test.parts.every((part) => part.source?.textVerified);
+  return test.source && !textVerified
+    ? <ReadingSourceWorkbench key={`${mode}:${test.id}`} mode={mode} test={test} />
+    : <LegacyReadingPractice mode={mode} test={test} />;
 }
 
 function LegacyReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: ReadingPracticeProps) {
@@ -1029,6 +1268,8 @@ function LegacyReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: R
     [parts],
   );
   const activePart = getReadingPart(activePartId, parts);
+  const sourcePassagePages = activePart.source?.passagePages ?? [];
+  const sourceQuestionPages = activePart.source?.questionPages ?? [];
   const headingBlocks = activePart.questionBlocks.filter((block) => block.type === "headings");
   const headingById = useMemo(
     () => new Map(headingBlocks.flatMap((block) => block.options).map((heading) => [heading.id, heading])),
@@ -1038,13 +1279,14 @@ function LegacyReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: R
   const isUrgent = seconds <= 600;
   const isCritical = seconds <= 300;
   const reviewRows = useMemo(
-    () => buildReadingReviewRows({ choiceAnswers, fillAnswers, headingAssignments, parts }),
-    [choiceAnswers, fillAnswers, headingAssignments, parts],
+    () => buildReadingReviewRows({ choiceAnswers, fillAnswers, headingAssignments, parts, sourceAnswers: test.source?.answers, sourceGroups: test.source?.groups }),
+    [choiceAnswers, fillAnswers, headingAssignments, parts, test.source?.answers, test.source?.groups],
   );
   const reviewGroups = useMemo(
     () =>
       parts.map((part) => ({
         label: part.label,
+        explanationAttribution: part.source?.explanationAttribution,
         rows: reviewRows.filter((row) => row.partLabel === part.label),
       })),
     [parts, reviewRows],
@@ -1152,12 +1394,16 @@ function LegacyReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: R
         question.questionNumbers.forEach((item) => answered.add(item));
       }
     });
-    Object.entries(fillAnswers).forEach(([questionNo, value]) => {
-      if (value.trim()) answered.add(Number(questionNo));
-    });
+    parts.forEach((part) => part.questionBlocks.forEach((block) => {
+      if (block.type !== "fill") return;
+      block.questions.forEach((question) => {
+        const values = getFillInputValues(fillAnswers[question.number] ?? "", question.inputCount ?? 1);
+        if (values.every((value) => value.trim())) answered.add(question.number);
+      });
+    }));
     Object.keys(headingAssignments).forEach((questionNo) => answered.add(Number(questionNo)));
     return answered;
-  }, [allChoiceQuestions, choiceAnswers, fillAnswers, headingAssignments]);
+  }, [allChoiceQuestions, choiceAnswers, fillAnswers, headingAssignments, parts]);
 
   function setPart(partId: ReadingPartId) {
     const nextPart = getReadingPart(partId, parts);
@@ -1186,6 +1432,11 @@ function LegacyReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: R
     const selectCount = question.selectCount ?? 1;
     setChoiceAnswers((current) => {
       const existing = current[key] ?? [];
+      if (!letter) {
+        const next = { ...current };
+        delete next[key];
+        return next;
+      }
       if (selectCount === 1) return { ...current, [key]: [letter] };
       if (existing.includes(letter)) {
         return { ...current, [key]: existing.filter((item) => item !== letter) };
@@ -1193,6 +1444,13 @@ function LegacyReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: R
       if (existing.length >= selectCount) return current;
       return { ...current, [key]: [...existing, letter] };
     });
+  }
+
+  function updateFill(number: number, value: string, fieldIndex = 0, inputCount = 1) {
+    setFillAnswers((current) => ({
+      ...current,
+      [number]: updateFillInputValue(current[number] ?? "", value, fieldIndex, inputCount),
+    }));
   }
 
   function assignHeading(questionNo: number, headingId: string) {
@@ -1572,6 +1830,52 @@ function LegacyReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: R
     }
   }
 
+  function renderPassageParagraphs(section: ReadingPart["sections"][number]) {
+    return <>
+      {section.heading ? <h2 className="reading-passage-section-title">{section.heading}</h2> : null}
+      {section.paragraphs.flatMap((paragraph, paragraphIndex) => {
+        const displayParagraphs = section.format === "pre"
+          ? getRawReadingParagraphs(paragraph, activePart.title, activePart.subtitle)
+          : [paragraph];
+        return displayParagraphs.map((displayParagraph, displayIndex) => {
+          const displayedParagraphIndex = section.format === "pre" ? displayIndex : paragraphIndex;
+          const figures = displayIndex === displayParagraphs.length - 1
+            ? section.figures?.filter((figure) => figure.afterParagraph === paragraphIndex) ?? []
+            : [];
+          const paragraphKey = `${section.id}-${displayedParagraphIndex}`;
+          const paragraphContent = (
+            <ArticleInlineAnnotatedParagraph
+              annotations={inlineTextAnnotations}
+              paragraphId={`${activePart.id}:${section.id}:${paragraphIndex}:${displayedParagraphIndex}`}
+              text={displayParagraph}
+            />
+          );
+          return (
+            <Fragment key={paragraphKey}>
+              {/^Part \d+$/.test(displayParagraph) ? (
+                <h2 className="reading-passage-subsection">{paragraphContent}</h2>
+              ) : <p>{paragraphContent}</p>}
+              {figures.map((figure) => <ReadingPassageFigureBlock figure={figure} key={`${section.id}-figure-${figure.afterParagraph}`} />)}
+            </Fragment>
+          );
+        });
+      })}
+      {section.listItems?.length ? (
+        <ul className="reading-passage-list">
+          {section.listItems.map((item, index) => (
+            <li key={`${section.id}-item-${index}`}>
+              <ArticleInlineAnnotatedParagraph
+                annotations={inlineTextAnnotations}
+                paragraphId={`${activePart.id}:${section.id}:list:${index}`}
+                text={item}
+              />
+            </li>
+          ))}
+        </ul>
+      ) : null}
+    </>;
+  }
+
   function submitAnswers() {
     recordPracticeAttempt({ id: `reading:${test.id}:${practiceAttemptStartedAt.current}`, title: `雅思阅读 · ${test.title}`, href: getCurrentReadingHref(), correct: correctCount, total: reviewRows.length });
     syncWrongReadingQuestionFavorites(reviewRows);
@@ -1676,6 +1980,7 @@ function LegacyReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: R
           <article className="reading-passage-pane">
             <h1>{activePart.title}</h1>
             {activePart.subtitle ? <p className="reading-passage-subtitle">{activePart.subtitle}</p> : null}
+            {activePart.byline ? <p className="reading-passage-byline">{activePart.byline}</p> : null}
             <div className={activePart.sections.some((section) => section.headingQuestionNumber) ? "reading-heading-sections" : "reading-passage-copy"}>
               {activePart.sections.map((section) => {
                 const questionNo = section.headingQuestionNumber;
@@ -1720,50 +2025,31 @@ function LegacyReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: R
                           <small>{selectedHeadingId ? "点击放置所选标题" : "拖入标题"}</small>
                         )}
                       </div>
-                      {section.paragraphs.map((paragraph, paragraphIndex) => {
-                        const displayParagraphs = section.format === "pre"
-                          ? getRawReadingParagraphs(paragraph, activePart.title, activePart.subtitle)
-                          : [paragraph];
-                        return displayParagraphs.map((displayParagraph, displayIndex) => {
-                          const displayedParagraphIndex = section.format === "pre" ? displayIndex : paragraphIndex;
-                          return (
-                            <p key={`${section.id}-${displayedParagraphIndex}`}>
-                              <ArticleInlineAnnotatedParagraph
-                                annotations={inlineTextAnnotations}
-                                paragraphId={`${activePart.id}:${section.id}:${paragraphIndex}:${displayedParagraphIndex}`}
-                                text={displayParagraph}
-                              />
-                            </p>
-                          );
-                        });
-                      })}
+                      {renderPassageParagraphs(section)}
                     </section>
                   );
                 }
 
                 return (
                   <section className="reading-passage-section" key={section.id}>
-                    {section.paragraphs.map((paragraph, paragraphIndex) => {
-                      const displayParagraphs = section.format === "pre"
-                        ? getRawReadingParagraphs(paragraph, activePart.title, activePart.subtitle)
-                        : [paragraph];
-                      return displayParagraphs.map((displayParagraph, displayIndex) => {
-                        const displayedParagraphIndex = section.format === "pre" ? displayIndex : paragraphIndex;
-                        return (
-                          <p key={`${section.id}-${displayedParagraphIndex}`}>
-                            <ArticleInlineAnnotatedParagraph
-                              annotations={inlineTextAnnotations}
-                              paragraphId={`${activePart.id}:${section.id}:${paragraphIndex}:${displayedParagraphIndex}`}
-                              text={displayParagraph}
-                            />
-                          </p>
-                        );
-                      });
-                    })}
+                    {renderPassageParagraphs(section)}
                   </section>
                 );
               })}
             </div>
+            {sourcePassagePages.length ? (
+              <details className="reading-source-reference">
+                <summary>查看原始 PDF 页面与插图</summary>
+                <div>
+                  {sourcePassagePages.map((page: ReadingSourcePage) => (
+                    <a href={page.src} key={page.src} rel="noreferrer" target="_blank">
+                      <img alt={`原始 PDF 第 ${page.page} 页`} height={page.height} loading="lazy" src={page.src} width={page.width} />
+                      <span>第 {page.page} 页</span>
+                    </a>
+                  ))}
+                </div>
+              </details>
+            ) : null}
           </article>
 
           <div
@@ -1828,6 +2114,13 @@ function LegacyReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: R
                   <section className="reading-question-section" key={block.id}>
                     <h2>Questions {formatQuestionNumbers(questionNumbers)}</h2>
                     <p>{block.instruction}</p>
+                    {block.sharedOptions && block.questions[0]?.options.length ? (
+                      <div className="reading-shared-option-bank">
+                        {block.questions[0].options.map((option) => (
+                          <div key={option.letter}><strong>{option.letter}</strong><span>{option.text}</span></div>
+                        ))}
+                      </div>
+                    ) : null}
                     <div className="reading-choice-list">
                       {block.questions.map((question) => (
                         <ReadingChoiceBlock
@@ -1835,6 +2128,7 @@ function LegacyReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: R
                           key={question.questionNumbers.join("-")}
                           question={question}
                           onChange={updateChoice}
+                          sharedOptions={block.sharedOptions}
                         />
                       ))}
                     </div>
@@ -1845,7 +2139,20 @@ function LegacyReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: R
               const questionNumbers = block.questions.map((question) => question.number);
               return (
                 <section className="reading-question-section reading-fill-section" key={block.id}>
-                  {block.rawText ? (
+                  {block.chart ? (
+                    <>
+                      <h2>Questions {formatQuestionNumbers(questionNumbers)}</h2>
+                      <p>{block.instruction}</p>
+                      <ReadingFillAxisChart answers={fillAnswers} chart={block.chart} onChange={(number, value) => updateFill(number, value)} />
+                    </>
+                  ) : block.table ? (
+                    <>
+                      <h2>Questions {formatQuestionNumbers(questionNumbers)}</h2>
+                      <p>{block.instruction}</p>
+                      {block.title ? <h3>{block.title}</h3> : null}
+                      <ReadingFillTable answers={fillAnswers} onChange={updateFill} table={block.table} />
+                    </>
+                  ) : block.rawText ? (
                     <RawQuestionText
                       fillAnswers={fillAnswers}
                       onAnswerChange={(number, value) => setFillAnswers((current) => ({
@@ -1864,28 +2171,39 @@ function LegacyReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: R
                   )}
                   {block.wordBank ? (
                     <div className="reading-word-bank" aria-label="word bank">
-                      {block.wordBank.map((word) => (
-                        <span key={word}>{word}</span>
+                      {block.wordBank.map((word, index) => (
+                        <button
+                          key={`${word}-${index}`}
+                          type="button"
+                          title="填入下一个空格"
+                          onClick={() => {
+                            const target = block.questions.find((question) => !(fillAnswers[question.number] ?? "").trim());
+                            if (target) updateFill(target.number, word);
+                          }}
+                        >
+                          {word}
+                        </button>
                       ))}
                     </div>
                   ) : null}
-                  {block.rawText ? null : (
+                  {block.rawText || block.table || block.chart ? null : (
                     <div className="reading-fill-list">
                       {block.questions.map((question) => (
                         <label id={`reading-question-${question.number}`} key={question.number}>
                           <span>{question.before}</span>
-                          <span className="reading-fill-input-wrap">
-                            <b>{question.number}</b>
-                            <input
-                              aria-label={`Question ${question.number}`}
-                              autoComplete="off"
-                              value={fillAnswers[question.number] ?? ""}
-                              onChange={(event) => setFillAnswers((current) => ({
-                                ...current,
-                                [question.number]: event.target.value,
-                              }))}
-                            />
-                          </span>
+                          {getFillInputValues(fillAnswers[question.number] ?? "", question.inputCount ?? 1).map((value, fieldIndex) => (
+                            <span className={`reading-fill-input-wrap ${fieldIndex ? "no-number" : ""}`} key={`${question.number}-${fieldIndex}`}>
+                              {fieldIndex === 0 ? <b>{question.number}</b> : null}
+                              <input
+                                aria-label={`Question ${question.number}${(question.inputCount ?? 1) > 1 ? `, answer ${fieldIndex + 1}` : ""}`}
+                                autoComplete="off"
+                                value={value}
+                                onChange={(event) => updateFill(question.number, event.target.value, fieldIndex, question.inputCount ?? 1)}
+                              />
+                            </span>
+                          )).flatMap((input, fieldIndex, inputs) => fieldIndex < inputs.length - 1
+                            ? [input, <span aria-hidden="true" className="reading-table-fill-joiner" key={`join-${question.number}-${fieldIndex}`}>{question.joiners?.[fieldIndex] ?? " and "}</span>]
+                            : [input])}
                           {question.after ? <span>{question.after}</span> : null}
                         </label>
                       ))}
@@ -1894,6 +2212,19 @@ function LegacyReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: R
                 </section>
               );
             })}
+            {sourceQuestionPages.length ? (
+              <details className="reading-source-reference">
+                <summary>查看原始题目页与图表</summary>
+                <div>
+                  {sourceQuestionPages.map((page: ReadingSourcePage) => (
+                    <a href={page.src} key={page.src} rel="noreferrer" target="_blank">
+                      <img alt={`原始 PDF 第 ${page.page} 页`} height={page.height} loading="lazy" src={page.src} width={page.width} />
+                      <span>第 {page.page} 页</span>
+                    </a>
+                  ))}
+                </div>
+              </details>
+            ) : null}
           </aside>
         </div>
 
@@ -2074,6 +2405,18 @@ function LegacyReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: R
                     </div>
                   ))}
                 </div>
+                {group.rows.some((row) => row.explanation) ? (
+                  <details className="reading-review-explanations">
+                    <summary>查看答案与解析</summary>
+                    {group.explanationAttribution ? <p>{group.explanationAttribution}</p> : null}
+                    {group.rows.filter((row) => row.explanation).map((row) => (
+                      <section key={row.label}>
+                        <strong>第 {row.label} 题</strong>
+                        <p>{row.explanation}</p>
+                      </section>
+                    ))}
+                  </details>
+                ) : null}
               </section>
             ))}
           </div>
@@ -2101,4 +2444,32 @@ function LegacyReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: R
       ) : null}
     </section>
   );
+}
+
+export function ReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: ReadingPracticeProps) {
+  const [activeTest, setActiveTest] = useState(test);
+  const [isDeleted, setIsDeleted] = useState(false);
+  const [revision, setRevision] = useState("");
+
+  useEffect(() => {
+    let cancelled = false;
+    setActiveTest(test);
+    setIsDeleted(false);
+    setRevision("");
+    getExamContentOverride("ielts", test.id).then(({ override, error }) => {
+      if (cancelled || error || !override) return;
+      if (override.is_deleted) {
+        setIsDeleted(true);
+        return;
+      }
+      if (override.bank_data) {
+        setActiveTest(override.bank_data as unknown as ReadingTest);
+        setRevision(override.updated_at);
+      }
+    }).catch(() => undefined);
+    return () => { cancelled = true; };
+  }, [test]);
+
+  if (isDeleted) return <section className="senior-high-page"><div className="senior-high-alert">这套雅思阅读已从管理员后台删除。</div></section>;
+  return <ReadingPracticeContent key={test.id + ":" + mode + ":" + revision} mode={mode} test={activeTest} />;
 }

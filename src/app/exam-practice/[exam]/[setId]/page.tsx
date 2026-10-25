@@ -15,7 +15,7 @@ function getEntry(exam: ExamId, setId: string) {
   return getIndex(exam).entries.find((entry) => entry.id === setId);
 }
 
-export const dynamicParams = false;
+export const dynamicParams = true;
 
 export function generateStaticParams() {
   return exams.flatMap((exam) => getIndex(exam).entries.map((entry) => ({ exam, setId: entry.id })));
@@ -35,6 +35,6 @@ export default async function ExamPracticePage({ params }: { params: Promise<{ e
   const { exam, setId } = await params;
   if (!exams.includes(exam)) notFound();
   const entry = getEntry(exam, setId);
-  if (!entry || !fs.existsSync(path.join(process.cwd(), "public", "exam-prep", exam, entry.dataPath))) notFound();
-  return <ExamPrepRunner dataPath={entry.dataPath} exam={exam} setId={setId} />;
+  if (entry && !fs.existsSync(path.join(process.cwd(), "public", "exam-prep", exam, entry.dataPath))) notFound();
+  return <ExamPrepRunner dataPath={entry?.dataPath || ""} exam={exam} setId={setId} />;
 }

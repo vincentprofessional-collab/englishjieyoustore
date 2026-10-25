@@ -59,7 +59,7 @@ type ProgressView = "today" | "overall";
 type VocabularyScope = "core" | "all";
 type LearningMethod = "classified" | "browse";
 type AssessmentDefinitionLanguage = "zh" | "en";
-type DefinitionLanguage = AssessmentDefinitionLanguage;
+type DefinitionLanguage = AssessmentDefinitionLanguage | "zh-audio";
 type StudySettings = {
   dailyNew: number;
   browseGroups: number;
@@ -819,6 +819,7 @@ function VocabularyListClozeInput({
   label,
   onChange,
   onBlur,
+  onFocus,
   onEnter,
   revealedAnswer,
   answerSubmitted = false,
@@ -831,6 +832,7 @@ function VocabularyListClozeInput({
   label: string;
   onChange: (value: string) => void;
   onBlur?: () => void;
+  onFocus?: () => void;
   onEnter: () => void;
   revealedAnswer?: string;
   answerSubmitted?: boolean;
@@ -861,6 +863,7 @@ function VocabularyListClozeInput({
         autoCapitalize="off"
         onChange={(event) => onChange(event.target.value)}
         onBlur={onBlur}
+        onFocus={onFocus}
         onKeyDown={(event) => {
           // This field accepts English spelling, so Enter always submits it;
           // mobile IMEs often mark that action as composing.
@@ -918,7 +921,7 @@ function VocabularyStudyList({
   const speakingTimerRef = useRef<number | null>(null);
   const speakingRunRef = useRef(0);
   const speakingQueueRef = useRef<number[]>([]);
-  const displayLanguage: DefinitionLanguage = mode === "listening" || mode === "speaking" ? "zh" : language;
+  const displayLanguage: DefinitionLanguage = mode === "listening" || mode === "speaking" || language !== "en" ? "zh" : "en";
   const answerColumnTitle = displayLanguage === "zh" ? "中文释义" : "英文释义";
   const showPhoneticsColumn = mode === "speaking" || !hiddenFields.phonetics;
   const activeAnswerField: Exclude<VocabularyListDisplayField, "phonetics"> | null = mode === "reading" ? "meaning" : mode === "writing" ? "word" : null;
@@ -1104,26 +1107,31 @@ function VocabularyStudyList({
 
     setSpeakingIndex(rowIndex);
     setSpeakingRevealed(false);
-    speakingTimerRef.current = window.setTimeout(() => {
+    const waitToReveal = () => {
       if (runId !== speakingRunRef.current) return;
-      setSpeakingRevealed(true);
-      void playWordAudio(word, voice, 1).catch(() => undefined).then(() => {
+      speakingTimerRef.current = window.setTimeout(() => {
         if (runId !== speakingRunRef.current) return;
-        speakingTimerRef.current = window.setTimeout(() => {
+        setSpeakingRevealed(true);
+        void playWordAudio(word, voice, 1).catch(() => undefined).then(() => {
           if (runId !== speakingRunRef.current) return;
-          setSpeakingRevealed(false);
-          stopLearningAudio();
-          const candidates = speakingQueueRef.current.filter((index) => index < words.length);
-          if (candidates.length === 0) {
-            candidates.push(...shuffleVocabularyListIndices(words.map((_, index) => index).filter((index) => index !== rowIndex)));
-          }
-          const nextIndex = candidates.shift() ?? rowIndex;
-          speakingQueueRef.current = candidates;
-          runSpeakingCycleRef.current(nextIndex, runId);
-        }, 3000);
-      });
-    }, reactionSeconds * 1000);
-  }, [mode, reactionSeconds, voice, words]);
+          speakingTimerRef.current = window.setTimeout(() => {
+            if (runId !== speakingRunRef.current) return;
+            setSpeakingRevealed(false);
+            stopLearningAudio();
+            const candidates = speakingQueueRef.current.filter((index) => index < words.length);
+            if (candidates.length === 0) {
+              candidates.push(...shuffleVocabularyListIndices(words.map((_, index) => index).filter((index) => index !== rowIndex)));
+            }
+            const nextIndex = candidates.shift() ?? rowIndex;
+            speakingQueueRef.current = candidates;
+            runSpeakingCycleRef.current(nextIndex, runId);
+          }, 3000);
+        });
+      }, reactionSeconds * 1000);
+    };
+    if (language === "zh-audio") void playChineseDefinitionAudio(word).then(waitToReveal);
+    else waitToReveal();
+  }, [language, mode, reactionSeconds, voice, words]);
   runSpeakingCycleRef.current = runSpeakingCycle;
 
   const speakingWordsKey = words.map((word) => word.id).join("\u001f");
@@ -1238,6 +1246,7 @@ function VocabularyStudyList({
                           inputRef={(node) => { if (node) inputRefs.current.set(word.id, node); else inputRefs.current.delete(word.id); }}
                           label={`第 ${index + 1} 行词汇`}
                           onChange={(value) => setAnswer(word.id, value)}
+                          onFocus={mode === "writing" && language === "zh-audio" ? () => { void playChineseDefinitionAudio(word); } : undefined}
                           onBlur={() => {
                             if (window.matchMedia("(max-width: 680px)").matches && wordAnswer.trim()) {
                               setSubmitted((current) => ({ ...current, [word.id]: true }));
@@ -1789,6 +1798,58 @@ async function playWordAudio(word: LearningWord, voice: Voice, repeats: number) 
   return usedBrowserVoice;
 }
 
+function getChineseMeaningSpeechText(definition: string) {
+  return getConciseStudyDefinition(definition)
+    .split(/\n+/)
+    .filter((line) => !/^\s*abbr\./i.test(line))
+    .flatMap((line) => line.replace(DEFINITION_PART_OF_SPEECH_PREFIX, "").split(/[；;]/))
+    .map((meaning) => meaning
+      .replace(/\[[^\]]*\]/g, " ")
+      .replace(/[（(][^）)]*(?:缩写|简称|abbr\.?)[^）)]*[）)]/gi, " ")
+      .replace(/[A-Za-z][A-Za-z0-9.'-]*/g, " ")
+      .replace(/\s+/g, " ")
+      .trim())
+    .filter((meaning) => /[\u3400-\u9fff]/.test(meaning))
+    .slice(0, 2)
+    .join("，");
+}
+
+function playChineseDefinitionAudio(word: LearningWord) {
+  const text = getChineseMeaningSpeechText(word.definitionCn);
+  if (!text || typeof window.speechSynthesis === "undefined" || typeof SpeechSynthesisUtterance === "undefined") return Promise.resolve();
+
+  const generation = learningAudioGeneration;
+  return new Promise<void>((resolve) => {
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = "zh-CN";
+    utterance.rate = 0.9;
+    let settled = false;
+    let timeout = 0;
+    const stop = () => finish();
+    const finish = () => {
+      if (settled) return;
+      settled = true;
+      window.clearTimeout(timeout);
+      activeLearningAudioStops.delete(stop);
+      resolve();
+    };
+    activeLearningAudioStops.add(stop);
+    utterance.addEventListener("end", finish, { once: true });
+    utterance.addEventListener("error", finish, { once: true });
+    timeout = window.setTimeout(finish, 12000);
+    if (generation !== learningAudioGeneration) {
+      finish();
+      return;
+    }
+    try {
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.speak(utterance);
+    } catch {
+      finish();
+    }
+  });
+}
+
 function playSpellingFeedbackSound(correct: boolean): Promise<void> {
   if (typeof window === "undefined") return Promise.resolve();
   const AudioContextConstructor = window.AudioContext
@@ -2239,7 +2300,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
           wordGroups: { core: vocabularyStudyGroupIndex(item.wordGroups?.core), all: vocabularyStudyGroupIndex(item.wordGroups?.all) },
           voice: item.voice === "uk" ? "uk" : "us",
           order: item.order === "random" ? "random" : "sequential",
-          definitionLanguage: storedDefinitionLanguage === "en" || (storedDefinitionLanguage === "synonym" && storedAssessmentDefinitionLanguage === "en") ? "en" : "zh",
+          definitionLanguage: storedDefinitionLanguage === "zh-audio" ? "zh-audio" : storedDefinitionLanguage === "en" || (storedDefinitionLanguage === "synonym" && storedAssessmentDefinitionLanguage === "en") ? "en" : "zh",
           assessmentDefinitionLanguage: storedAssessmentDefinitionLanguage === "en" || (!storedAssessmentDefinitionLanguage && storedDefinitionLanguage === "en") ? "en" : "zh",
           showExamples: item.showExamples !== false,
           showOptions: item.showOptions !== false,
@@ -2439,9 +2500,10 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
   // the definition language in sync with the user's selection before the
   // saved settings state is committed, so an old Chinese line cannot flash
   // before the English definition appears.
-  const displayedDefinitionLanguage: AssessmentDefinitionLanguage = settingsOpenFor === selectedBook
+  const selectedDefinitionLanguage = settingsOpenFor === selectedBook
     ? settingsDraft.definitionLanguage
     : currentSettings.definitionLanguage;
+  const displayedDefinitionLanguage: AssessmentDefinitionLanguage = selectedDefinitionLanguage === "en" ? "en" : "zh";
   const visibleWords = useMemo(
     () => selectedBook === "生词本" || currentSettings.scope === "all"
       ? words
@@ -2825,6 +2887,8 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
       if (browseMode) {
         if (modeIndex === 3) {
           setPhase("awaiting");
+          if (currentSettings.definitionLanguage === "zh-audio") await playChineseDefinitionAudio(currentWord);
+          if (roundTokenRef.current !== token || countdownController.signal.aborted) return;
           await waitForBrowseTime(reactionDelay, token, countdownController.signal);
           if (roundTokenRef.current === token && !countdownController.signal.aborted) revealBrowseSpelling(token);
           return;
@@ -2843,6 +2907,10 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
           return;
         }
         setPhase("awaiting");
+        if ((modeIndex === 2 || modeIndex === 3) && currentSettings.definitionLanguage === "zh-audio") {
+          await playChineseDefinitionAudio(currentWord);
+          if (roundTokenRef.current !== token || countdownController.signal.aborted) return;
+        }
         await waitForBrowseTime(reactionDelay, token, countdownController.signal);
         if ((roundTokenRef.current !== token || countdownController.signal.aborted)) return;
         revealCurrentRound();
@@ -2863,6 +2931,8 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
 
       if (modeIndex === 2) {
         setPhase("awaiting");
+        if (currentSettings.definitionLanguage === "zh-audio") await playChineseDefinitionAudio(currentWord);
+        if (roundTokenRef.current !== token || countdownController.signal.aborted) return;
         await new Promise<void>((resolve) => window.setTimeout(resolve, reactionDelay));
         if ((roundTokenRef.current !== token || countdownController.signal.aborted) || recordingRef.current) return;
         revealSpeakingDetails(token);
@@ -2871,11 +2941,14 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
 
       if ((roundTokenRef.current !== token || countdownController.signal.aborted)) return;
       setPhase("awaiting");
+      if (modeIndex === 3 && currentSettings.definitionLanguage === "zh-audio") {
+        await playChineseDefinitionAudio(currentWord);
+      }
     };
 
     void startRound();
     return () => countdownController.abort();
-  }, [browseMode, canRunRound, currentProgress.completed, currentSettings.reactionSeconds, currentWord, modeIndex, replaceRecordingAudio, revealBrowseSpelling, revealCurrentRound, revealSpeakingDetails, roundNonce, studyReady, voice, waitForBrowseTime]);
+  }, [browseMode, canRunRound, currentProgress.completed, currentSettings.definitionLanguage, currentSettings.reactionSeconds, currentWord, modeIndex, replaceRecordingAudio, revealBrowseSpelling, revealCurrentRound, revealSpeakingDetails, roundNonce, studyReady, voice, waitForBrowseTime]);
 
   const selectWord = useCallback((nextSelection: BookSelectionKey) => {
     if (advancePending) return;
@@ -4275,6 +4348,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
                 <legend>释义选择</legend>
                 <label><input checked={settingsDraft.definitionLanguage === "zh"} name="study-definition-language" onChange={() => setSettingsDraft((current) => ({ ...current, definitionLanguage: "zh", assessmentDefinitionLanguage: "zh" }))} type="radio" />中文释义</label>
                 <label><input checked={settingsDraft.definitionLanguage === "en"} name="study-definition-language" onChange={() => setSettingsDraft((current) => ({ ...current, definitionLanguage: "en", assessmentDefinitionLanguage: "en" }))} type="radio" />英文释义</label>
+                <label><input checked={settingsDraft.definitionLanguage === "zh-audio"} name="study-definition-language" onChange={() => setSettingsDraft((current) => ({ ...current, definitionLanguage: "zh-audio", assessmentDefinitionLanguage: "zh" }))} type="radio" />中文语音</label>
               </fieldset>
               <fieldset aria-disabled={settingsListMode} className={`vocabulary-learning-settings-options vocabulary-learning-settings-memory-options${settingsListMode ? " is-disabled" : ""}`}>
                 <legend>辅助记忆</legend>

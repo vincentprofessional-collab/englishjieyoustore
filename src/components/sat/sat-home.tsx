@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import styles from "./sat.module.css";
-import type { SatCatalogIndex, SatProgress, SatSetSummary } from "@/lib/sat/types";
+import type { SatCatalogIndex, SatProgress, SatSet, SatSetSummary } from "@/lib/sat/types";
+import { listExamContentOverrides, type ExamContentOverride } from "@/lib/exam-content/overrides";
 
 const PROGRESS_PREFIX = "sat-progress:v1:";
 const DIFFICULTY_ORDER = ["Easy", "Medium", "Hard"];
@@ -23,18 +24,68 @@ function setProgress(set: SatSetSummary) {
   return { answered, completed: answered === set.expectedCount };
 }
 
+function mergeCatalog(catalog: SatCatalogIndex, overrides: ExamContentOverride[]): SatCatalogIndex {
+  const byId = new Map(overrides.map((row) => [row.bank_id, row]));
+  const staticIds = new Set(catalog.sets.map((set) => set.id));
+  const toSummary = (row: ExamContentOverride, fallback?: SatSetSummary): SatSetSummary | null => {
+    if (row.is_deleted) return null;
+    const bank = row.bank_data as unknown as SatSet | null;
+    if (!bank) return fallback || null;
+    const questions = Array.isArray(bank.questions) ? bank.questions : [];
+    const questionIds = questions.length ? questions.map((question) => question.id) : (bank.questionIds || fallback?.questionIds || []);
+    return {
+      ...(fallback || {} as SatSetSummary),
+      id: bank.id || row.bank_id,
+      assessment: "SAT",
+      test: "Reading and Writing",
+      domain: bank.domain || row.category || fallback?.domain || "SAT",
+      skill: bank.skill || row.title || fallback?.skill || row.bank_id,
+      difficulty: bank.difficulty || fallback?.difficulty || "Unrated",
+      expectedCount: questions.length || bank.expectedCount || fallback?.expectedCount || 0,
+      questionIds,
+      sourceRefs: bank.sourceRefs || fallback?.sourceRefs || [],
+    };
+  };
+  const sets = catalog.sets.flatMap((set) => {
+    const row = byId.get(set.id);
+    if (!row) return [set];
+    const merged = toSummary(row, set);
+    return merged ? [merged] : [];
+  });
+  for (const row of overrides) {
+    if (staticIds.has(row.bank_id)) continue;
+    const added = toSummary(row);
+    if (added) sets.push(added);
+  }
+  const domains = catalog.domains.map((domain) => ({ ...domain, skills: domain.skills.slice() }));
+  for (const set of sets) {
+    let domain = domains.find((item) => item.label === set.domain);
+    if (!domain) {
+      domain = { id: set.domain.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "sat-added", label: set.domain, skills: [] };
+      domains.push(domain);
+    }
+    if (!domain.skills.some((skill) => skill.label === set.skill)) {
+      domain.skills.push({ id: set.skill.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || set.id, label: set.skill });
+    }
+  }
+  return { ...catalog, domains, sets, totalQuestionCount: sets.reduce((sum, set) => sum + set.expectedCount, 0) };
+}
+
 export function SatHome() {
   const [catalog, setCatalog] = useState<SatCatalogIndex | null>(null);
   const [error, setError] = useState("");
   const [progressVersion, setProgressVersion] = useState(0);
 
   useEffect(() => {
-    fetch("/sat/index.json")
+    fetch("/sat/index.json", { cache: "no-store" })
       .then((response) => {
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         return response.json() as Promise<SatCatalogIndex>;
       })
-      .then(setCatalog)
+      .then(async (index) => {
+        const { overrides } = await listExamContentOverrides("sat");
+        setCatalog(mergeCatalog(index, overrides));
+      })
       .catch(() => setError("SAT 资料暂时无法载入，请刷新后重试。"));
   }, []);
 
@@ -59,6 +110,7 @@ export function SatHome() {
 
   const domains = catalog.domains.map((item) => ({ ...item, sets: catalog.sets.filter((set) => set.domain === item.label) })).filter((item) => item.sets.length);
   return <section className={`${styles.root} ${styles.home}`}>
+    <header className={styles.homeHeader}><div><span className={styles.eyebrow}>SAT READING AND WRITING</span><h1>题型训练</h1><p>按 SAT 官方题型练习阅读与写作题目。</p></div><Link className={styles.homeTab} href="/sat/knowledge">知识点</Link></header>
     <div className={styles.summary} aria-label="SAT 题库总览"><div className={styles.summaryItem}><strong>{catalog.totalQuestionCount}</strong><span>总题数</span></div><div className={styles.summaryItem}><strong>{overall.completed}</strong><span>已完成题组</span></div><div className={styles.summaryItem}><strong>{overall.incomplete}</strong><span>未完成题组</span></div></div>
     {domains.length === 0 ? <p className={styles.empty}>没有符合当前筛选条件的题组。</p> : domains.map((item) => {
       const grouped = item.skills.map((skillItem) => ({ ...skillItem, sets: item.sets.filter((set) => set.skill === skillItem.label.replace(/, /g, ",").toLowerCase() || set.skill === skillItem.label) })).filter((group) => group.sets.length);

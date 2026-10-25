@@ -1,0 +1,2927 @@
+{
+  "exam": "gre",
+  "sourceRoot": "备课/GRE/题型分类",
+  "banks": [
+    {
+      "id": "gre-ppii-test2-verbal",
+      "title": "官方 PowerPrep II Test 2 · 填空与句子等价节选",
+      "kind": "practice",
+      "source": {
+        "file": "PPII_v2p0_t2_tc_se.pdf",
+        "path": "填空/PPII_v2p0_t2_tc_se.pdf",
+        "pageCount": 17
+      },
+      "sourceFiles": [
+        "PPII_v2p0_t2_tc_se.pdf",
+        "麟渡兮填空(简体中文）--附加OG,PPII 题目解析.pdf"
+      ],
+      "rawQuestionCount": 40,
+      "questionCount": 40,
+      "duplicateCount": 0,
+      "answerCount": 40,
+      "explanationCount": 2,
+      "answerSourceVerifiedCount": 40,
+      "explanationSourceVerifiedCount": 2,
+      "sourcePageMatchedCount": 40,
+      "promptMatchedCount": 40,
+      "optionsMatchedCount": 40,
+      "passageQuestionCount": 0,
+      "passageSourceVerifiedCount": 0,
+      "status": "review_required",
+      "pendingQuestionIds": [
+        "ppii-single-q1",
+        "ppii-single-q2",
+        "ppii-single-q3",
+        "ppii-single-q4",
+        "ppii-single-q5",
+        "ppii-single-q6",
+        "ppii-single-q7",
+        "ppii-single-q8",
+        "ppii-double-q1",
+        "ppii-double-q2",
+        "ppii-double-q3",
+        "ppii-double-q4",
+        "ppii-double-q5",
+        "ppii-double-q6",
+        "ppii-double-q7",
+        "ppii-triple-q2",
+        "ppii-triple-q3",
+        "ppii-triple-q4",
+        "ppii-triple-q5",
+        "ppii-triple-q6",
+        "ppii-triple-q7",
+        "ppii-triple-q8",
+        "ppii-triple-q9",
+        "ppii-equivalence-q1",
+        "ppii-equivalence-q2",
+        "ppii-equivalence-q3",
+        "ppii-equivalence-q4",
+        "ppii-equivalence-q5",
+        "ppii-equivalence-q6",
+        "ppii-equivalence-q7",
+        "ppii-equivalence-q8",
+        "ppii-equivalence-q9",
+        "ppii-equivalence-q10",
+        "ppii-equivalence-q12",
+        "ppii-equivalence-q13",
+        "ppii-equivalence-q14",
+        "ppii-equivalence-q15",
+        "ppii-equivalence-q16"
+      ],
+      "pendingQuestionReasons": {
+        "ppii-single-q1": [
+          "来源未提供逐题解析"
+        ],
+        "ppii-single-q2": [
+          "来源未提供逐题解析"
+        ],
+        "ppii-single-q3": [
+          "来源未提供逐题解析"
+        ],
+        "ppii-single-q4": [
+          "来源未提供逐题解析"
+        ],
+        "ppii-single-q5": [
+          "来源未提供逐题解析"
+        ],
+        "ppii-single-q6": [
+          "来源未提供逐题解析"
+        ],
+        "ppii-single-q7": [
+          "来源未提供逐题解析"
+        ],
+        "ppii-single-q8": [
+          "来源未提供逐题解析"
+        ],
+        "ppii-double-q1": [
+          "来源未提供逐题解析"
+        ],
+        "ppii-double-q2": [
+          "来源未提供逐题解析"
+        ],
+        "ppii-double-q3": [
+          "来源未提供逐题解析"
+        ],
+        "ppii-double-q4": [
+          "来源未提供逐题解析"
+        ],
+        "ppii-double-q5": [
+          "来源未提供逐题解析"
+        ],
+        "ppii-double-q6": [
+          "来源未提供逐题解析"
+        ],
+        "ppii-double-q7": [
+          "来源未提供逐题解析"
+        ],
+        "ppii-triple-q2": [
+          "来源未提供逐题解析"
+        ],
+        "ppii-triple-q3": [
+          "来源未提供逐题解析"
+        ],
+        "ppii-triple-q4": [
+          "来源未提供逐题解析"
+        ],
+        "ppii-triple-q5": [
+          "来源未提供逐题解析"
+        ],
+        "ppii-triple-q6": [
+          "来源未提供逐题解析"
+        ],
+        "ppii-triple-q7": [
+          "来源未提供逐题解析"
+        ],
+        "ppii-triple-q8": [
+          "来源未提供逐题解析"
+        ],
+        "ppii-triple-q9": [
+          "来源未提供逐题解析"
+        ],
+        "ppii-equivalence-q1": [
+          "来源未提供逐题解析"
+        ],
+        "ppii-equivalence-q2": [
+          "来源未提供逐题解析"
+        ],
+        "ppii-equivalence-q3": [
+          "来源未提供逐题解析"
+        ],
+        "ppii-equivalence-q4": [
+          "来源未提供逐题解析"
+        ],
+        "ppii-equivalence-q5": [
+          "来源未提供逐题解析"
+        ],
+        "ppii-equivalence-q6": [
+          "来源未提供逐题解析"
+        ],
+        "ppii-equivalence-q7": [
+          "来源未提供逐题解析"
+        ],
+        "ppii-equivalence-q8": [
+          "来源未提供逐题解析"
+        ],
+        "ppii-equivalence-q9": [
+          "来源未提供逐题解析"
+        ],
+        "ppii-equivalence-q10": [
+          "来源未提供逐题解析"
+        ],
+        "ppii-equivalence-q12": [
+          "来源未提供逐题解析"
+        ],
+        "ppii-equivalence-q13": [
+          "来源未提供逐题解析"
+        ],
+        "ppii-equivalence-q14": [
+          "来源未提供逐题解析"
+        ],
+        "ppii-equivalence-q15": [
+          "来源未提供逐题解析"
+        ],
+        "ppii-equivalence-q16": [
+          "来源未提供逐题解析"
+        ]
+      }
+    },
+    {
+      "id": "gre-official250-matched-verbal",
+      "title": "官方 GRE 真题 · 配套答案解析已核子集（65题）",
+      "kind": "practice",
+      "source": {
+        "file": "新东方+GRE+官方真题+250+解析版.pdf",
+        "path": "综合与模考/新东方+GRE+官方真题+250+解析版.pdf",
+        "pageCount": 49
+      },
+      "sourceFiles": [
+        "新东方+GRE+官方真题+250+解析版.pdf",
+        "麟渡兮填空(简体中文）--附加OG,PPII 题目解析.pdf"
+      ],
+      "rawQuestionCount": 65,
+      "questionCount": 65,
+      "duplicateCount": 0,
+      "answerCount": 65,
+      "explanationCount": 65,
+      "answerSourceVerifiedCount": 65,
+      "explanationSourceVerifiedCount": 65,
+      "sourcePageMatchedCount": 65,
+      "promptMatchedCount": 65,
+      "optionsMatchedCount": 65,
+      "passageQuestionCount": 0,
+      "passageSourceVerifiedCount": 0,
+      "status": "source_matched",
+      "pendingQuestionIds": [],
+      "pendingQuestionReasons": {}
+    },
+    {
+      "id": "gre-2016-0408-fill-recall",
+      "title": "2016-04-08 填空考试回忆",
+      "kind": "practice",
+      "source": {
+        "file": "2016填空机经.pdf",
+        "path": "填空/2016填空机经.pdf",
+        "pageCount": 26
+      },
+      "sourceFiles": [
+        "2016填空机经.pdf"
+      ],
+      "rawQuestionCount": 4,
+      "questionCount": 4,
+      "duplicateCount": 0,
+      "answerCount": 4,
+      "explanationCount": 0,
+      "answerSourceVerifiedCount": 4,
+      "explanationSourceVerifiedCount": 0,
+      "sourcePageMatchedCount": 4,
+      "promptMatchedCount": 4,
+      "optionsMatchedCount": 4,
+      "passageQuestionCount": 0,
+      "passageSourceVerifiedCount": 0,
+      "status": "review_required",
+      "pendingQuestionIds": [
+        "recall-20160408-fill-q1",
+        "recall-20160408-fill-q2",
+        "recall-20160408-fill-q3",
+        "recall-20160408-fill-q4"
+      ],
+      "pendingQuestionReasons": {
+        "recall-20160408-fill-q1": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20160408-fill-q2": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20160408-fill-q3": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20160408-fill-q4": [
+          "来源未提供逐题解析"
+        ]
+      }
+    },
+    {
+      "id": "gre-2016-0416-fill-recall",
+      "title": "2016-04-16 填空考试回忆",
+      "kind": "practice",
+      "source": {
+        "file": "2016填空机经.pdf",
+        "path": "填空/2016填空机经.pdf",
+        "pageCount": 26
+      },
+      "sourceFiles": [
+        "2016填空机经.pdf"
+      ],
+      "rawQuestionCount": 3,
+      "questionCount": 3,
+      "duplicateCount": 0,
+      "answerCount": 3,
+      "explanationCount": 0,
+      "answerSourceVerifiedCount": 3,
+      "explanationSourceVerifiedCount": 0,
+      "sourcePageMatchedCount": 3,
+      "promptMatchedCount": 3,
+      "optionsMatchedCount": 3,
+      "passageQuestionCount": 0,
+      "passageSourceVerifiedCount": 0,
+      "status": "review_required",
+      "pendingQuestionIds": [
+        "recall-20160416-fill-q1",
+        "recall-20160416-fill-q2",
+        "recall-20160416-fill-q3"
+      ],
+      "pendingQuestionReasons": {
+        "recall-20160416-fill-q1": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20160416-fill-q2": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20160416-fill-q3": [
+          "来源未提供逐题解析"
+        ]
+      }
+    },
+    {
+      "id": "gre-2016-0508-fill-recall",
+      "title": "2016-05-08 填空考试回忆",
+      "kind": "practice",
+      "source": {
+        "file": "2016填空机经.pdf",
+        "path": "填空/2016填空机经.pdf",
+        "pageCount": 26
+      },
+      "sourceFiles": [
+        "2016填空机经.pdf"
+      ],
+      "rawQuestionCount": 7,
+      "questionCount": 7,
+      "duplicateCount": 0,
+      "answerCount": 7,
+      "explanationCount": 0,
+      "answerSourceVerifiedCount": 7,
+      "explanationSourceVerifiedCount": 0,
+      "sourcePageMatchedCount": 7,
+      "promptMatchedCount": 7,
+      "optionsMatchedCount": 7,
+      "passageQuestionCount": 0,
+      "passageSourceVerifiedCount": 0,
+      "status": "review_required",
+      "pendingQuestionIds": [
+        "recall-20160508-fill-q1",
+        "recall-20160508-fill-q2",
+        "recall-20160508-fill-q3",
+        "recall-20160508-fill-q4",
+        "recall-20160508-fill-q5",
+        "recall-20160508-fill-q6",
+        "recall-20160508-fill-q7"
+      ],
+      "pendingQuestionReasons": {
+        "recall-20160508-fill-q1": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20160508-fill-q2": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20160508-fill-q3": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20160508-fill-q4": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20160508-fill-q5": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20160508-fill-q6": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20160508-fill-q7": [
+          "来源未提供逐题解析"
+        ]
+      }
+    },
+    {
+      "id": "gre-2016-0521-fill-recall",
+      "title": "2016-05-21 填空考试回忆",
+      "kind": "practice",
+      "source": {
+        "file": "2016填空机经.pdf",
+        "path": "填空/2016填空机经.pdf",
+        "pageCount": 26
+      },
+      "sourceFiles": [
+        "2016填空机经.pdf"
+      ],
+      "rawQuestionCount": 6,
+      "questionCount": 6,
+      "duplicateCount": 0,
+      "answerCount": 6,
+      "explanationCount": 0,
+      "answerSourceVerifiedCount": 6,
+      "explanationSourceVerifiedCount": 0,
+      "sourcePageMatchedCount": 6,
+      "promptMatchedCount": 6,
+      "optionsMatchedCount": 6,
+      "passageQuestionCount": 0,
+      "passageSourceVerifiedCount": 0,
+      "status": "review_required",
+      "pendingQuestionIds": [
+        "recall-20160521-fill-q1",
+        "recall-20160521-fill-q2",
+        "recall-20160521-fill-q3",
+        "recall-20160521-fill-q4",
+        "recall-20160521-fill-q5",
+        "recall-20160521-fill-q6"
+      ],
+      "pendingQuestionReasons": {
+        "recall-20160521-fill-q1": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20160521-fill-q2": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20160521-fill-q3": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20160521-fill-q4": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20160521-fill-q5": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20160521-fill-q6": [
+          "来源未提供逐题解析"
+        ]
+      }
+    },
+    {
+      "id": "gre-2016-0527-fill-recall",
+      "title": "2016-05-27 填空考试回忆",
+      "kind": "practice",
+      "source": {
+        "file": "2016填空机经.pdf",
+        "path": "填空/2016填空机经.pdf",
+        "pageCount": 26
+      },
+      "sourceFiles": [
+        "2016填空机经.pdf"
+      ],
+      "rawQuestionCount": 5,
+      "questionCount": 5,
+      "duplicateCount": 0,
+      "answerCount": 5,
+      "explanationCount": 0,
+      "answerSourceVerifiedCount": 5,
+      "explanationSourceVerifiedCount": 0,
+      "sourcePageMatchedCount": 5,
+      "promptMatchedCount": 5,
+      "optionsMatchedCount": 5,
+      "passageQuestionCount": 0,
+      "passageSourceVerifiedCount": 0,
+      "status": "review_required",
+      "pendingQuestionIds": [
+        "recall-20160527-fill-q1",
+        "recall-20160527-fill-q2",
+        "recall-20160527-fill-q3",
+        "recall-20160527-fill-q4",
+        "recall-20160527-fill-q5"
+      ],
+      "pendingQuestionReasons": {
+        "recall-20160527-fill-q1": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20160527-fill-q2": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20160527-fill-q3": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20160527-fill-q4": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20160527-fill-q5": [
+          "来源未提供逐题解析"
+        ]
+      }
+    },
+    {
+      "id": "gre-2016-0605-fill-recall",
+      "title": "2016-06-05 填空考试回忆",
+      "kind": "practice",
+      "source": {
+        "file": "2016填空机经.pdf",
+        "path": "填空/2016填空机经.pdf",
+        "pageCount": 26
+      },
+      "sourceFiles": [
+        "2016填空机经.pdf"
+      ],
+      "rawQuestionCount": 3,
+      "questionCount": 3,
+      "duplicateCount": 0,
+      "answerCount": 3,
+      "explanationCount": 0,
+      "answerSourceVerifiedCount": 3,
+      "explanationSourceVerifiedCount": 0,
+      "sourcePageMatchedCount": 3,
+      "promptMatchedCount": 3,
+      "optionsMatchedCount": 3,
+      "passageQuestionCount": 0,
+      "passageSourceVerifiedCount": 0,
+      "status": "review_required",
+      "pendingQuestionIds": [
+        "recall-20160605-fill-q1",
+        "recall-20160605-fill-q2",
+        "recall-20160605-fill-q3"
+      ],
+      "pendingQuestionReasons": {
+        "recall-20160605-fill-q1": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20160605-fill-q2": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20160605-fill-q3": [
+          "来源未提供逐题解析"
+        ]
+      }
+    },
+    {
+      "id": "gre-2016-0626-fill-recall",
+      "title": "2016-06-26 填空考试回忆",
+      "kind": "practice",
+      "source": {
+        "file": "2016填空机经.pdf",
+        "path": "填空/2016填空机经.pdf",
+        "pageCount": 26
+      },
+      "sourceFiles": [
+        "2016填空机经.pdf"
+      ],
+      "rawQuestionCount": 6,
+      "questionCount": 6,
+      "duplicateCount": 0,
+      "answerCount": 6,
+      "explanationCount": 0,
+      "answerSourceVerifiedCount": 6,
+      "explanationSourceVerifiedCount": 0,
+      "sourcePageMatchedCount": 6,
+      "promptMatchedCount": 6,
+      "optionsMatchedCount": 6,
+      "passageQuestionCount": 0,
+      "passageSourceVerifiedCount": 0,
+      "status": "review_required",
+      "pendingQuestionIds": [
+        "recall-20160626-fill-q1",
+        "recall-20160626-fill-q2",
+        "recall-20160626-fill-q3",
+        "recall-20160626-fill-q4",
+        "recall-20160626-fill-q5",
+        "recall-20160626-fill-q6"
+      ],
+      "pendingQuestionReasons": {
+        "recall-20160626-fill-q1": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20160626-fill-q2": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20160626-fill-q3": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20160626-fill-q4": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20160626-fill-q5": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20160626-fill-q6": [
+          "来源未提供逐题解析"
+        ]
+      }
+    },
+    {
+      "id": "gre-2016-0717-fill-recall",
+      "title": "2016-07-17 填空考试回忆",
+      "kind": "practice",
+      "source": {
+        "file": "2016填空机经.pdf",
+        "path": "填空/2016填空机经.pdf",
+        "pageCount": 26
+      },
+      "sourceFiles": [
+        "2016填空机经.pdf"
+      ],
+      "rawQuestionCount": 4,
+      "questionCount": 4,
+      "duplicateCount": 0,
+      "answerCount": 3,
+      "explanationCount": 0,
+      "answerSourceVerifiedCount": 3,
+      "explanationSourceVerifiedCount": 0,
+      "sourcePageMatchedCount": 4,
+      "promptMatchedCount": 4,
+      "optionsMatchedCount": 4,
+      "passageQuestionCount": 0,
+      "passageSourceVerifiedCount": 0,
+      "status": "review_required",
+      "pendingQuestionIds": [
+        "recall-20160717-fill-q1",
+        "recall-20160717-fill-q2",
+        "recall-20160717-fill-q3",
+        "recall-20160717-fill-q4"
+      ],
+      "pendingQuestionReasons": {
+        "recall-20160717-fill-q1": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20160717-fill-q2": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20160717-fill-q3": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20160717-fill-q4": [
+          "该场次答案页另有未编号键 AEH，未作题号配对",
+          "来源未提供逐题解析"
+        ]
+      }
+    },
+    {
+      "id": "gre-2016-0817-fill-recall",
+      "title": "2016-08-17 填空考试回忆",
+      "kind": "practice",
+      "source": {
+        "file": "2016填空机经.pdf",
+        "path": "填空/2016填空机经.pdf",
+        "pageCount": 26
+      },
+      "sourceFiles": [
+        "2016填空机经.pdf"
+      ],
+      "rawQuestionCount": 3,
+      "questionCount": 3,
+      "duplicateCount": 0,
+      "answerCount": 3,
+      "explanationCount": 0,
+      "answerSourceVerifiedCount": 3,
+      "explanationSourceVerifiedCount": 0,
+      "sourcePageMatchedCount": 3,
+      "promptMatchedCount": 3,
+      "optionsMatchedCount": 3,
+      "passageQuestionCount": 0,
+      "passageSourceVerifiedCount": 0,
+      "status": "review_required",
+      "pendingQuestionIds": [
+        "recall-20160817-fill-q1",
+        "recall-20160817-fill-q2",
+        "recall-20160817-fill-q3"
+      ],
+      "pendingQuestionReasons": {
+        "recall-20160817-fill-q1": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20160817-fill-q2": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20160817-fill-q3": [
+          "来源未提供逐题解析"
+        ]
+      }
+    },
+    {
+      "id": "gre-2016-0826-fill-recall",
+      "title": "2016-08-26 填空考试回忆",
+      "kind": "practice",
+      "source": {
+        "file": "2016填空机经.pdf",
+        "path": "填空/2016填空机经.pdf",
+        "pageCount": 26
+      },
+      "sourceFiles": [
+        "2016填空机经.pdf"
+      ],
+      "rawQuestionCount": 5,
+      "questionCount": 5,
+      "duplicateCount": 0,
+      "answerCount": 5,
+      "explanationCount": 0,
+      "answerSourceVerifiedCount": 5,
+      "explanationSourceVerifiedCount": 0,
+      "sourcePageMatchedCount": 5,
+      "promptMatchedCount": 5,
+      "optionsMatchedCount": 5,
+      "passageQuestionCount": 0,
+      "passageSourceVerifiedCount": 0,
+      "status": "review_required",
+      "pendingQuestionIds": [
+        "recall-20160826-fill-q1",
+        "recall-20160826-fill-q2",
+        "recall-20160826-fill-q3",
+        "recall-20160826-fill-q4",
+        "recall-20160826-fill-q5"
+      ],
+      "pendingQuestionReasons": {
+        "recall-20160826-fill-q1": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20160826-fill-q2": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20160826-fill-q3": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20160826-fill-q4": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20160826-fill-q5": [
+          "来源未提供逐题解析"
+        ]
+      }
+    },
+    {
+      "id": "gre-2016-0923-fill-recall",
+      "title": "2016-09-23 填空考试回忆",
+      "kind": "practice",
+      "source": {
+        "file": "2016填空机经.pdf",
+        "path": "填空/2016填空机经.pdf",
+        "pageCount": 26
+      },
+      "sourceFiles": [
+        "2016填空机经.pdf"
+      ],
+      "rawQuestionCount": 9,
+      "questionCount": 9,
+      "duplicateCount": 0,
+      "answerCount": 8,
+      "explanationCount": 0,
+      "answerSourceVerifiedCount": 8,
+      "explanationSourceVerifiedCount": 0,
+      "sourcePageMatchedCount": 9,
+      "promptMatchedCount": 9,
+      "optionsMatchedCount": 9,
+      "passageQuestionCount": 0,
+      "passageSourceVerifiedCount": 0,
+      "status": "review_required",
+      "pendingQuestionIds": [
+        "recall-20160923-fill-q1",
+        "recall-20160923-fill-q2",
+        "recall-20160923-fill-q3",
+        "recall-20160923-fill-q4",
+        "recall-20160923-fill-q5",
+        "recall-20160923-fill-q6",
+        "recall-20160923-fill-q7",
+        "recall-20160923-fill-q8",
+        "recall-20160923-fill-q9"
+      ],
+      "pendingQuestionReasons": {
+        "recall-20160923-fill-q1": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20160923-fill-q2": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20160923-fill-q3": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20160923-fill-q4": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20160923-fill-q5": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20160923-fill-q6": [
+          "原答案键 BC 与题目空格数不符，暂不采纳",
+          "来源未提供逐题解析"
+        ],
+        "recall-20160923-fill-q7": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20160923-fill-q8": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20160923-fill-q9": [
+          "来源未提供逐题解析"
+        ]
+      }
+    },
+    {
+      "id": "gre-2016-1012-fill-recall",
+      "title": "2016-10-12 填空考试回忆",
+      "kind": "practice",
+      "source": {
+        "file": "2016填空机经.pdf",
+        "path": "填空/2016填空机经.pdf",
+        "pageCount": 26
+      },
+      "sourceFiles": [
+        "2016填空机经.pdf"
+      ],
+      "rawQuestionCount": 7,
+      "questionCount": 7,
+      "duplicateCount": 0,
+      "answerCount": 7,
+      "explanationCount": 0,
+      "answerSourceVerifiedCount": 7,
+      "explanationSourceVerifiedCount": 0,
+      "sourcePageMatchedCount": 7,
+      "promptMatchedCount": 7,
+      "optionsMatchedCount": 7,
+      "passageQuestionCount": 0,
+      "passageSourceVerifiedCount": 0,
+      "status": "review_required",
+      "pendingQuestionIds": [
+        "recall-20161012-fill-q1",
+        "recall-20161012-fill-q2",
+        "recall-20161012-fill-q3",
+        "recall-20161012-fill-q4",
+        "recall-20161012-fill-q5",
+        "recall-20161012-fill-q6",
+        "recall-20161012-fill-q7"
+      ],
+      "pendingQuestionReasons": {
+        "recall-20161012-fill-q1": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20161012-fill-q2": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20161012-fill-q3": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20161012-fill-q4": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20161012-fill-q5": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20161012-fill-q6": [
+          "来源未提供逐题解析"
+        ],
+        "recall-20161012-fill-q7": [
+          "来源未提供逐题解析"
+        ]
+      }
+    },
+    {
+      "id": "gre-2016-dec04-reading-recall",
+      "title": "2016-12-04 考试回忆 · 阅读片段（非完整试卷）",
+      "kind": "practice",
+      "source": {
+        "file": "【小站教育】16年12月4日GRE机经.pdf",
+        "path": "综合与模考/【小站教育】16年12月4日GRE机经.pdf",
+        "pageCount": 11
+      },
+      "sourceFiles": [
+        "【小站教育】16年12月4日GRE机经.pdf"
+      ],
+      "rawQuestionCount": 3,
+      "questionCount": 3,
+      "duplicateCount": 0,
+      "answerCount": 3,
+      "explanationCount": 3,
+      "answerSourceVerifiedCount": 3,
+      "explanationSourceVerifiedCount": 3,
+      "sourcePageMatchedCount": 3,
+      "promptMatchedCount": 3,
+      "optionsMatchedCount": 3,
+      "passageQuestionCount": 3,
+      "passageSourceVerifiedCount": 3,
+      "status": "source_matched",
+      "pendingQuestionIds": [],
+      "pendingQuestionReasons": {}
+    },
+    {
+      "id": "gre-2016-dec04-logic-recall",
+      "title": "2016-12-04 考试回忆 · 逻辑片段（非完整试卷）",
+      "kind": "practice",
+      "source": {
+        "file": "【小站教育】16年12月4日GRE机经.pdf",
+        "path": "综合与模考/【小站教育】16年12月4日GRE机经.pdf",
+        "pageCount": 11
+      },
+      "sourceFiles": [
+        "【小站教育】16年12月4日GRE机经.pdf"
+      ],
+      "rawQuestionCount": 1,
+      "questionCount": 1,
+      "duplicateCount": 0,
+      "answerCount": 1,
+      "explanationCount": 1,
+      "answerSourceVerifiedCount": 1,
+      "explanationSourceVerifiedCount": 1,
+      "sourcePageMatchedCount": 1,
+      "promptMatchedCount": 1,
+      "optionsMatchedCount": 1,
+      "passageQuestionCount": 1,
+      "passageSourceVerifiedCount": 1,
+      "status": "source_matched",
+      "pendingQuestionIds": [],
+      "pendingQuestionReasons": {}
+    },
+    {
+      "id": "gre-fill-1000",
+      "title": "填空 · 100 组练习",
+      "kind": "practice",
+      "source": {
+        "file": "GRE填空机经1000题难度分级版%28含答案%29.pdf",
+        "path": "填空/GRE填空机经1000题难度分级版%28含答案%29.pdf",
+        "pageCount": 217
+      },
+      "sourceFiles": [
+        "GRE填空机经1000题难度分级版%28含答案%29.pdf",
+        "考满分1000填空解析.pdf"
+      ],
+      "rawQuestionCount": 1000,
+      "questionCount": 881,
+      "duplicateCount": 119,
+      "answerCount": 881,
+      "explanationCount": 877,
+      "answerSourceVerifiedCount": 881,
+      "explanationSourceVerifiedCount": 877,
+      "sourcePageMatchedCount": 881,
+      "promptMatchedCount": 881,
+      "optionsMatchedCount": 881,
+      "passageQuestionCount": 0,
+      "passageSourceVerifiedCount": 0,
+      "status": "review_required",
+      "pendingQuestionIds": [
+        "s2-q1",
+        "s4-q7",
+        "s5-q8",
+        "s27-q10"
+      ],
+      "pendingQuestionReasons": {
+        "s2-q1": [
+          "来源未提供逐题解析"
+        ],
+        "s4-q7": [
+          "来源未提供逐题解析"
+        ],
+        "s5-q8": [
+          "来源未提供逐题解析"
+        ],
+        "s27-q10": [
+          "来源未提供逐题解析"
+        ]
+      }
+    },
+    {
+      "id": "gre-reading-101",
+      "title": "阅读理解 · 101 篇",
+      "kind": "practice",
+      "source": {
+        "file": "101篇分类分级解析版.pdf",
+        "path": "阅读/101篇分类分级解析版.pdf",
+        "pageCount": 91
+      },
+      "sourceFiles": [
+        "101篇分类分级解析版.pdf",
+        "kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf"
+      ],
+      "rawQuestionCount": 210,
+      "questionCount": 210,
+      "duplicateCount": 0,
+      "answerCount": 204,
+      "explanationCount": 210,
+      "answerSourceVerifiedCount": 204,
+      "explanationSourceVerifiedCount": 210,
+      "sourcePageMatchedCount": 210,
+      "promptMatchedCount": 210,
+      "optionsMatchedCount": 204,
+      "passageQuestionCount": 210,
+      "passageSourceVerifiedCount": 210,
+      "status": "review_required",
+      "pendingQuestionIds": [
+        "p2-q1",
+        "p19-q4",
+        "p40-q2",
+        "p55-q2",
+        "p58-q1",
+        "p95-q1"
+      ],
+      "pendingQuestionReasons": {
+        "p2-q1": [
+          "选项不足或缺失",
+          "标准答案缺失",
+          "选项内容未完全匹配原题页"
+        ],
+        "p19-q4": [
+          "选项不足或缺失",
+          "标准答案缺失",
+          "选项内容未完全匹配原题页"
+        ],
+        "p40-q2": [
+          "选项不足或缺失",
+          "标准答案缺失",
+          "选项内容未完全匹配原题页"
+        ],
+        "p55-q2": [
+          "选项不足或缺失",
+          "标准答案缺失",
+          "选项内容未完全匹配原题页"
+        ],
+        "p58-q1": [
+          "选项不足或缺失",
+          "标准答案缺失",
+          "选项内容未完全匹配原题页"
+        ],
+        "p95-q1": [
+          "选项不足或缺失",
+          "标准答案缺失",
+          "选项内容未完全匹配原题页"
+        ]
+      }
+    },
+    {
+      "id": "gre-logic-101",
+      "title": "逻辑推理 · 101 篇",
+      "kind": "practice",
+      "source": {
+        "file": "101篇分类分级解析版.pdf",
+        "path": "阅读/101篇分类分级解析版.pdf",
+        "pageCount": 91
+      },
+      "sourceFiles": [
+        "101篇分类分级解析版.pdf",
+        "kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf"
+      ],
+      "rawQuestionCount": 23,
+      "questionCount": 23,
+      "duplicateCount": 0,
+      "answerCount": 23,
+      "explanationCount": 23,
+      "answerSourceVerifiedCount": 23,
+      "explanationSourceVerifiedCount": 23,
+      "sourcePageMatchedCount": 23,
+      "promptMatchedCount": 23,
+      "optionsMatchedCount": 23,
+      "passageQuestionCount": 23,
+      "passageSourceVerifiedCount": 23,
+      "status": "source_matched",
+      "pendingQuestionIds": [],
+      "pendingQuestionReasons": {}
+    }
+  ],
+  "passages": [
+    {
+      "passage": 1,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 5,
+      "passageVerified": true,
+      "questionIds": [
+        "p1-q1",
+        "p1-q2",
+        "p1-q3"
+      ],
+      "questionCount": 3,
+      "pendingQuestionIds": [],
+      "topic": "短文章／现象解释／生物／中等",
+      "status": "source_matched"
+    },
+    {
+      "passage": 2,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 6,
+      "passageVerified": true,
+      "questionIds": [
+        "p2-q1",
+        "p2-q2"
+      ],
+      "questionCount": 2,
+      "pendingQuestionIds": [
+        "p2-q1"
+      ],
+      "topic": "短文章／文学评论／中等",
+      "status": "review_required"
+    },
+    {
+      "passage": 3,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 6,
+      "passageVerified": true,
+      "questionIds": [
+        "p3-q1"
+      ],
+      "questionCount": 1,
+      "pendingQuestionIds": [],
+      "topic": "逻辑单题／假设／难",
+      "status": "source_matched"
+    },
+    {
+      "passage": 4,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 7,
+      "passageVerified": true,
+      "questionIds": [
+        "p4-q1",
+        "p4-q2",
+        "p4-q3"
+      ],
+      "questionCount": 3,
+      "pendingQuestionIds": [],
+      "topic": "短文章／文学评论（对比",
+      "status": "source_matched"
+    },
+    {
+      "passage": 5,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 7,
+      "passageVerified": true,
+      "questionIds": [
+        "p5-q1",
+        "p5-q2",
+        "p5-q3"
+      ],
+      "questionCount": 3,
+      "pendingQuestionIds": [],
+      "topic": "短文章／现象解释／生物／中等",
+      "status": "source_matched"
+    },
+    {
+      "passage": 6,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 8,
+      "passageVerified": true,
+      "questionIds": [
+        "p6-q1",
+        "p6-q2"
+      ],
+      "questionCount": 2,
+      "pendingQuestionIds": [],
+      "topic": "短文章／现象解释／气候／易",
+      "status": "source_matched"
+    },
+    {
+      "passage": 7,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 9,
+      "passageVerified": true,
+      "questionIds": [
+        "p7-q1",
+        "p7-q2",
+        "p7-q3"
+      ],
+      "questionCount": 3,
+      "pendingQuestionIds": [],
+      "topic": "短文章／文学评论／中等",
+      "status": "source_matched"
+    },
+    {
+      "passage": 8,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 10,
+      "passageVerified": true,
+      "questionIds": [
+        "p8-q1"
+      ],
+      "questionCount": 1,
+      "pendingQuestionIds": [],
+      "topic": "逻辑单题／加强／中等",
+      "status": "source_matched"
+    },
+    {
+      "passage": 9,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 10,
+      "passageVerified": true,
+      "questionIds": [
+        "p9-q1",
+        "p9-q2"
+      ],
+      "questionCount": 2,
+      "pendingQuestionIds": [],
+      "topic": "短文章／观点论证／社会历史／易",
+      "status": "source_matched"
+    },
+    {
+      "passage": 10,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 11,
+      "passageVerified": true,
+      "questionIds": [
+        "p10-q1"
+      ],
+      "questionCount": 1,
+      "pendingQuestionIds": [],
+      "topic": "逻辑单题／加强／难",
+      "status": "source_matched"
+    },
+    {
+      "passage": 11,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 11,
+      "passageVerified": true,
+      "questionIds": [
+        "p11-q1",
+        "p11-q2"
+      ],
+      "questionCount": 2,
+      "pendingQuestionIds": [],
+      "topic": "短文章／文学问题解决／中等",
+      "status": "source_matched"
+    },
+    {
+      "passage": 12,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 12,
+      "passageVerified": true,
+      "questionIds": [
+        "p12-q1"
+      ],
+      "questionCount": 1,
+      "pendingQuestionIds": [],
+      "topic": "逻辑单题／假设／易",
+      "status": "source_matched"
+    },
+    {
+      "passage": 13,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 12,
+      "passageVerified": true,
+      "questionIds": [
+        "p13-q1",
+        "p13-q2"
+      ],
+      "questionCount": 2,
+      "pendingQuestionIds": [],
+      "topic": "短文章／观点论证／生物／易",
+      "status": "source_matched"
+    },
+    {
+      "passage": 14,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 13,
+      "passageVerified": true,
+      "questionIds": [
+        "p14-q1",
+        "p14-q2"
+      ],
+      "questionCount": 2,
+      "pendingQuestionIds": [],
+      "topic": "短文章／文学评论（对比",
+      "status": "source_matched"
+    },
+    {
+      "passage": 15,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 13,
+      "passageVerified": true,
+      "questionIds": [
+        "p15-q1",
+        "p15-q2"
+      ],
+      "questionCount": 2,
+      "pendingQuestionIds": [],
+      "topic": "短文章／艺术评论／中等",
+      "status": "source_matched"
+    },
+    {
+      "passage": 16,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 14,
+      "passageVerified": true,
+      "questionIds": [
+        "p16-q1"
+      ],
+      "questionCount": 1,
+      "pendingQuestionIds": [],
+      "topic": "逻辑单题／假设／中等",
+      "status": "source_matched"
+    },
+    {
+      "passage": 17,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 14,
+      "passageVerified": true,
+      "questionIds": [
+        "p17-q1",
+        "p17-q2"
+      ],
+      "questionCount": 2,
+      "pendingQuestionIds": [],
+      "topic": "短文章／观点论证／动物／易",
+      "status": "source_matched"
+    },
+    {
+      "passage": 18,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 15,
+      "passageVerified": true,
+      "questionIds": [
+        "p18-q1",
+        "p18-q2",
+        "p18-q3",
+        "p18-q4"
+      ],
+      "questionCount": 4,
+      "pendingQuestionIds": [],
+      "topic": "长文章／现象解释／天文／中等",
+      "status": "source_matched"
+    },
+    {
+      "passage": 19,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 16,
+      "passageVerified": true,
+      "questionIds": [
+        "p19-q1",
+        "p19-q2",
+        "p19-q3",
+        "p19-q4"
+      ],
+      "questionCount": 4,
+      "pendingQuestionIds": [
+        "p19-q4"
+      ],
+      "topic": "长文章／问题解决／社会历史／难",
+      "status": "review_required"
+    },
+    {
+      "passage": 20,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 18,
+      "passageVerified": true,
+      "questionIds": [
+        "p20-q1",
+        "p20-q2",
+        "p20-q3",
+        "p20-q4"
+      ],
+      "questionCount": 4,
+      "pendingQuestionIds": [],
+      "topic": "长文章／现象解释／天文／易",
+      "status": "source_matched"
+    },
+    {
+      "passage": 21,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 19,
+      "passageVerified": true,
+      "questionIds": [
+        "p21-q1",
+        "p21-q2",
+        "p21-q3",
+        "p21-q4"
+      ],
+      "questionCount": 4,
+      "pendingQuestionIds": [],
+      "topic": "长文章／研究介绍评论／历史／中等",
+      "status": "source_matched"
+    },
+    {
+      "passage": 22,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 20,
+      "passageVerified": true,
+      "questionIds": [
+        "p22-q1",
+        "p22-q2",
+        "p22-q3",
+        "p22-q4"
+      ],
+      "questionCount": 4,
+      "pendingQuestionIds": [],
+      "topic": "长文章／研究介绍评论／历史／难",
+      "status": "source_matched"
+    },
+    {
+      "passage": 23,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 22,
+      "passageVerified": true,
+      "questionIds": [
+        "p23-q1",
+        "p23-q2",
+        "p23-q3",
+        "p23-q4"
+      ],
+      "questionCount": 4,
+      "pendingQuestionIds": [],
+      "topic": "长文章／观点介绍评论／历史／中等",
+      "status": "source_matched"
+    },
+    {
+      "passage": 24,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 23,
+      "passageVerified": true,
+      "questionIds": [
+        "p24-q1",
+        "p24-q2",
+        "p24-q3",
+        "p24-q4"
+      ],
+      "questionCount": 4,
+      "pendingQuestionIds": [],
+      "topic": "长文章／研究介绍评论／历史社会／难",
+      "status": "source_matched"
+    },
+    {
+      "passage": 25,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 24,
+      "passageVerified": true,
+      "questionIds": [
+        "p25-q1",
+        "p25-q2",
+        "p25-q3",
+        "p25-q4"
+      ],
+      "questionCount": 4,
+      "pendingQuestionIds": [],
+      "topic": "长文章／文学介绍评论／难",
+      "status": "source_matched"
+    },
+    {
+      "passage": 26,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 26,
+      "passageVerified": true,
+      "questionIds": [
+        "p26-q1"
+      ],
+      "questionCount": 1,
+      "pendingQuestionIds": [],
+      "topic": "逻辑单题／高亮句作用／易",
+      "status": "source_matched"
+    },
+    {
+      "passage": 27,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 26,
+      "passageVerified": true,
+      "questionIds": [
+        "p27-q1",
+        "p27-q2",
+        "p27-q3",
+        "p27-q4"
+      ],
+      "questionCount": 4,
+      "pendingQuestionIds": [],
+      "topic": "长文章／研究介绍／地质／易",
+      "status": "source_matched"
+    },
+    {
+      "passage": 28,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 28,
+      "passageVerified": true,
+      "questionIds": [
+        "p28-q1",
+        "p28-q2"
+      ],
+      "questionCount": 2,
+      "pendingQuestionIds": [],
+      "topic": "短文章／问题解决／社会／易",
+      "status": "source_matched"
+    },
+    {
+      "passage": 29,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 28,
+      "passageVerified": true,
+      "questionIds": [
+        "p29-q1",
+        "p29-q2"
+      ],
+      "questionCount": 2,
+      "pendingQuestionIds": [],
+      "topic": "短文章／观点论证／地质／易",
+      "status": "source_matched"
+    },
+    {
+      "passage": 30,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 29,
+      "passageVerified": true,
+      "questionIds": [
+        "p30-q1",
+        "p30-q2"
+      ],
+      "questionCount": 2,
+      "pendingQuestionIds": [],
+      "topic": "短文章／观点论证／天文／易",
+      "status": "source_matched"
+    },
+    {
+      "passage": 31,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 29,
+      "passageVerified": true,
+      "questionIds": [
+        "p31-q1",
+        "p31-q2"
+      ],
+      "questionCount": 2,
+      "pendingQuestionIds": [],
+      "topic": "短文章／观点论证／气候／易",
+      "status": "source_matched"
+    },
+    {
+      "passage": 32,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 30,
+      "passageVerified": true,
+      "questionIds": [
+        "p32-q1"
+      ],
+      "questionCount": 1,
+      "pendingQuestionIds": [],
+      "topic": "逻辑单题／削弱／易",
+      "status": "source_matched"
+    },
+    {
+      "passage": 33,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 30,
+      "passageVerified": true,
+      "questionIds": [
+        "p33-q1",
+        "p33-q2",
+        "p33-q3",
+        "p33-q4"
+      ],
+      "questionCount": 4,
+      "pendingQuestionIds": [],
+      "topic": "长文章／艺术评论／对比／难",
+      "status": "source_matched"
+    },
+    {
+      "passage": 34,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 32,
+      "passageVerified": true,
+      "questionIds": [
+        "p34-q1",
+        "p34-q2"
+      ],
+      "questionCount": 2,
+      "pendingQuestionIds": [],
+      "topic": "短文章／现象解释／考古／易",
+      "status": "source_matched"
+    },
+    {
+      "passage": 35,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 32,
+      "passageVerified": true,
+      "questionIds": [
+        "p35-q1",
+        "p35-q2",
+        "p35-q3",
+        "p35-q4"
+      ],
+      "questionCount": 4,
+      "pendingQuestionIds": [],
+      "topic": "长文章／现象解释／建筑历史／易",
+      "status": "source_matched"
+    },
+    {
+      "passage": 36,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 34,
+      "passageVerified": true,
+      "questionIds": [
+        "p36-q1",
+        "p36-q2",
+        "p36-q3"
+      ],
+      "questionCount": 3,
+      "pendingQuestionIds": [],
+      "topic": "短文章／现象解释／天文／中等",
+      "status": "source_matched"
+    },
+    {
+      "passage": 37,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 35,
+      "passageVerified": true,
+      "questionIds": [
+        "p37-q1",
+        "p37-q2"
+      ],
+      "questionCount": 2,
+      "pendingQuestionIds": [],
+      "topic": "短文章／文学评论／中等",
+      "status": "source_matched"
+    },
+    {
+      "passage": 38,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 35,
+      "passageVerified": true,
+      "questionIds": [
+        "p38-q1",
+        "p38-q2"
+      ],
+      "questionCount": 2,
+      "pendingQuestionIds": [],
+      "topic": "短文章／观点论证／天文／中等",
+      "status": "source_matched"
+    },
+    {
+      "passage": 39,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 36,
+      "passageVerified": true,
+      "questionIds": [
+        "p39-q1"
+      ],
+      "questionCount": 1,
+      "pendingQuestionIds": [],
+      "topic": "逻辑单题／假设／中等",
+      "status": "source_matched"
+    },
+    {
+      "passage": 40,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 36,
+      "passageVerified": true,
+      "questionIds": [
+        "p40-q1",
+        "p40-q2",
+        "p40-q3"
+      ],
+      "questionCount": 3,
+      "pendingQuestionIds": [
+        "p40-q2"
+      ],
+      "topic": "短文章／文学评论／对比／中等",
+      "status": "review_required"
+    },
+    {
+      "passage": 41,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 37,
+      "passageVerified": true,
+      "questionIds": [
+        "p41-q1",
+        "p41-q2",
+        "p41-q3",
+        "p41-q4"
+      ],
+      "questionCount": 4,
+      "pendingQuestionIds": [],
+      "topic": "长文章／文学介绍评论／对比／难",
+      "status": "source_matched"
+    },
+    {
+      "passage": 42,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 38,
+      "passageVerified": true,
+      "questionIds": [
+        "p42-q1",
+        "p42-q2"
+      ],
+      "questionCount": 2,
+      "pendingQuestionIds": [],
+      "topic": "短文章／文学评论／易",
+      "status": "source_matched"
+    },
+    {
+      "passage": 43,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 38,
+      "passageVerified": true,
+      "questionIds": [
+        "p43-q1",
+        "p43-q2",
+        "p43-q3"
+      ],
+      "questionCount": 3,
+      "pendingQuestionIds": [],
+      "topic": "短文章／对比／物理／中等",
+      "status": "source_matched"
+    },
+    {
+      "passage": 44,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 39,
+      "passageVerified": true,
+      "questionIds": [
+        "p44-q1",
+        "p44-q2"
+      ],
+      "questionCount": 2,
+      "pendingQuestionIds": [],
+      "topic": "短文章／现象描述／生物／易",
+      "status": "source_matched"
+    },
+    {
+      "passage": 45,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 40,
+      "passageVerified": true,
+      "questionIds": [
+        "p45-q1",
+        "p45-q2"
+      ],
+      "questionCount": 2,
+      "pendingQuestionIds": [],
+      "topic": "短文章／现象描述／植物／易",
+      "status": "source_matched"
+    },
+    {
+      "passage": 46,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 40,
+      "passageVerified": true,
+      "questionIds": [
+        "p46-q1"
+      ],
+      "questionCount": 1,
+      "pendingQuestionIds": [],
+      "topic": "逻辑单题／填空／难",
+      "status": "source_matched"
+    },
+    {
+      "passage": 47,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 40,
+      "passageVerified": true,
+      "questionIds": [
+        "p47-q1",
+        "p47-q2"
+      ],
+      "questionCount": 2,
+      "pendingQuestionIds": [],
+      "topic": "短文章／研究方法对比／历史／易",
+      "status": "source_matched"
+    },
+    {
+      "passage": 48,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 41,
+      "passageVerified": true,
+      "questionIds": [
+        "p48-q1"
+      ],
+      "questionCount": 1,
+      "pendingQuestionIds": [],
+      "topic": "短文章／现象解释／生物／易",
+      "status": "source_matched"
+    },
+    {
+      "passage": 49,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 42,
+      "passageVerified": true,
+      "questionIds": [
+        "p49-q1",
+        "p49-q2",
+        "p49-q3"
+      ],
+      "questionCount": 3,
+      "pendingQuestionIds": [],
+      "topic": "短文章／现象解释／地质／中等",
+      "status": "source_matched"
+    },
+    {
+      "passage": 50,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 42,
+      "passageVerified": true,
+      "questionIds": [
+        "p50-q1",
+        "p50-q2"
+      ],
+      "questionCount": 2,
+      "pendingQuestionIds": [],
+      "topic": "短文章／现象解释／生物／易",
+      "status": "source_matched"
+    },
+    {
+      "passage": 51,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 43,
+      "passageVerified": true,
+      "questionIds": [
+        "p51-q1",
+        "p51-q2",
+        "p51-q3"
+      ],
+      "questionCount": 3,
+      "pendingQuestionIds": [],
+      "topic": "短文章／文学理论／对比／中等",
+      "status": "source_matched"
+    },
+    {
+      "passage": 52,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 44,
+      "passageVerified": true,
+      "questionIds": [
+        "p52-q1",
+        "p52-q2"
+      ],
+      "questionCount": 2,
+      "pendingQuestionIds": [],
+      "topic": "短文章／问题解决／物理／易",
+      "status": "source_matched"
+    },
+    {
+      "passage": 53,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 44,
+      "passageVerified": true,
+      "questionIds": [
+        "p53-q1",
+        "p53-q2",
+        "p53-q3"
+      ],
+      "questionCount": 3,
+      "pendingQuestionIds": [],
+      "topic": "短文章／问题解决／历史／难",
+      "status": "source_matched"
+    },
+    {
+      "passage": 54,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 46,
+      "passageVerified": true,
+      "questionIds": [
+        "p54-q1",
+        "p54-q2"
+      ],
+      "questionCount": 2,
+      "pendingQuestionIds": [],
+      "topic": "短文章／新发现分析／生物／易",
+      "status": "source_matched"
+    },
+    {
+      "passage": 55,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 46,
+      "passageVerified": true,
+      "questionIds": [
+        "p55-q1",
+        "p55-q2",
+        "p55-q3"
+      ],
+      "questionCount": 3,
+      "pendingQuestionIds": [
+        "p55-q2"
+      ],
+      "topic": "短文章／观点论证／历史／中等",
+      "status": "review_required"
+    },
+    {
+      "passage": 56,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 47,
+      "passageVerified": true,
+      "questionIds": [
+        "p56-q1",
+        "p56-q2"
+      ],
+      "questionCount": 2,
+      "pendingQuestionIds": [],
+      "topic": "短文章／现象描述／生物／易",
+      "status": "source_matched"
+    },
+    {
+      "passage": 57,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 47,
+      "passageVerified": true,
+      "questionIds": [
+        "p57-q1",
+        "p57-q2",
+        "p57-q3"
+      ],
+      "questionCount": 3,
+      "pendingQuestionIds": [],
+      "topic": "短文章／新发现分析／生物／中等",
+      "status": "source_matched"
+    },
+    {
+      "passage": 58,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 48,
+      "passageVerified": true,
+      "questionIds": [
+        "p58-q1",
+        "p58-q2"
+      ],
+      "questionCount": 2,
+      "pendingQuestionIds": [
+        "p58-q1"
+      ],
+      "topic": "短文章／现象解释／历史／中等",
+      "status": "review_required"
+    },
+    {
+      "passage": 59,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 49,
+      "passageVerified": true,
+      "questionIds": [
+        "p59-q1",
+        "p59-q2"
+      ],
+      "questionCount": 2,
+      "pendingQuestionIds": [],
+      "topic": "短文章／现象描述分析／历史建筑／易",
+      "status": "source_matched"
+    },
+    {
+      "passage": 60,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 49,
+      "passageVerified": true,
+      "questionIds": [
+        "p60-q1",
+        "p60-q2"
+      ],
+      "questionCount": 2,
+      "pendingQuestionIds": [],
+      "topic": "短文章／艺术现象描述／对比／中等",
+      "status": "source_matched"
+    },
+    {
+      "passage": 61,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 50,
+      "passageVerified": true,
+      "questionIds": [
+        "p61-q1",
+        "p61-q2"
+      ],
+      "questionCount": 2,
+      "pendingQuestionIds": [],
+      "topic": "短文章／问题描述／对比／中等",
+      "status": "source_matched"
+    },
+    {
+      "passage": 62,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 51,
+      "passageVerified": true,
+      "questionIds": [
+        "p62-q1",
+        "p62-q2",
+        "p62-q3"
+      ],
+      "questionCount": 3,
+      "pendingQuestionIds": [],
+      "topic": "短文章／观点论证／社会／中等",
+      "status": "source_matched"
+    },
+    {
+      "passage": 63,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 51,
+      "passageVerified": true,
+      "questionIds": [
+        "p63-q1"
+      ],
+      "questionCount": 1,
+      "pendingQuestionIds": [],
+      "topic": "短文章／研究介绍评论／社会／中等",
+      "status": "source_matched"
+    },
+    {
+      "passage": 64,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 52,
+      "passageVerified": true,
+      "questionIds": [
+        "p64-q1",
+        "p64-q2",
+        "p64-q3"
+      ],
+      "questionCount": 3,
+      "pendingQuestionIds": [],
+      "topic": "短文章／研究介绍评论／对比／中等",
+      "status": "source_matched"
+    },
+    {
+      "passage": 65,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 52,
+      "passageVerified": true,
+      "questionIds": [
+        "p65-q1"
+      ],
+      "questionCount": 1,
+      "pendingQuestionIds": [],
+      "topic": "逻辑单题／高亮句作用／易",
+      "status": "source_matched"
+    },
+    {
+      "passage": 66,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 53,
+      "passageVerified": true,
+      "questionIds": [
+        "p66-q1",
+        "p66-q2"
+      ],
+      "questionCount": 2,
+      "pendingQuestionIds": [],
+      "topic": "短文章／文学研究评论／现象解释／中等",
+      "status": "source_matched"
+    },
+    {
+      "passage": 67,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 54,
+      "passageVerified": true,
+      "questionIds": [
+        "p67-q1",
+        "p67-q2"
+      ],
+      "questionCount": 2,
+      "pendingQuestionIds": [],
+      "topic": "短文章／文学评论／易",
+      "status": "source_matched"
+    },
+    {
+      "passage": 68,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 54,
+      "passageVerified": true,
+      "questionIds": [
+        "p68-q1",
+        "p68-q2",
+        "p68-q3"
+      ],
+      "questionCount": 3,
+      "pendingQuestionIds": [],
+      "topic": "短文章／现象解释／生物／易",
+      "status": "source_matched"
+    },
+    {
+      "passage": 69,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 55,
+      "passageVerified": true,
+      "questionIds": [
+        "p69-q1",
+        "p69-q2",
+        "p69-q3"
+      ],
+      "questionCount": 3,
+      "pendingQuestionIds": [],
+      "topic": "短文章／现象解释／对比／历史／中等",
+      "status": "source_matched"
+    },
+    {
+      "passage": 70,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 56,
+      "passageVerified": true,
+      "questionIds": [
+        "p70-q1",
+        "p70-q2",
+        "p70-q3",
+        "p70-q4"
+      ],
+      "questionCount": 4,
+      "pendingQuestionIds": [],
+      "topic": "长文章／现象解释／对比／动物行为／中等",
+      "status": "source_matched"
+    },
+    {
+      "passage": 71,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 57,
+      "passageVerified": true,
+      "questionIds": [
+        "p71-q1",
+        "p71-q2",
+        "p71-q3",
+        "p71-q4",
+        "p71-q5",
+        "p71-q6",
+        "p71-q7"
+      ],
+      "questionCount": 7,
+      "pendingQuestionIds": [],
+      "topic": "长文章／事实介绍评论／法律／难",
+      "status": "source_matched"
+    },
+    {
+      "passage": 72,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 59,
+      "passageVerified": true,
+      "questionIds": [
+        "p72-q1",
+        "p72-q2",
+        "p72-q3",
+        "p72-q4"
+      ],
+      "questionCount": 4,
+      "pendingQuestionIds": [],
+      "topic": "长文章／新老观点论证／地质／中等",
+      "status": "source_matched"
+    },
+    {
+      "passage": 73,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 61,
+      "passageVerified": true,
+      "questionIds": [
+        "p73-q1",
+        "p73-q2",
+        "p73-q3",
+        "p73-q4"
+      ],
+      "questionCount": 4,
+      "pendingQuestionIds": [],
+      "topic": "长文章／文学评论／难",
+      "status": "source_matched"
+    },
+    {
+      "passage": 74,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 62,
+      "passageVerified": true,
+      "questionIds": [
+        "p74-q1"
+      ],
+      "questionCount": 1,
+      "pendingQuestionIds": [],
+      "topic": "逻辑单题／削弱／中等",
+      "status": "source_matched"
+    },
+    {
+      "passage": 75,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 62,
+      "passageVerified": true,
+      "questionIds": [
+        "p75-q1"
+      ],
+      "questionCount": 1,
+      "pendingQuestionIds": [],
+      "topic": "逻辑单题／推理／难",
+      "status": "source_matched"
+    },
+    {
+      "passage": 76,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 63,
+      "passageVerified": true,
+      "questionIds": [
+        "p76-q1"
+      ],
+      "questionCount": 1,
+      "pendingQuestionIds": [],
+      "topic": "逻辑单题／高亮句作用／中等",
+      "status": "source_matched"
+    },
+    {
+      "passage": 77,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 63,
+      "passageVerified": true,
+      "questionIds": [
+        "p77-q1"
+      ],
+      "questionCount": 1,
+      "pendingQuestionIds": [],
+      "topic": "逻辑单题／高亮句作用／中等",
+      "status": "source_matched"
+    },
+    {
+      "passage": 78,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 64,
+      "passageVerified": true,
+      "questionIds": [
+        "p78-q1"
+      ],
+      "questionCount": 1,
+      "pendingQuestionIds": [],
+      "topic": "逻辑单题／假设／难",
+      "status": "source_matched"
+    },
+    {
+      "passage": 79,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 64,
+      "passageVerified": true,
+      "questionIds": [
+        "p79-q1",
+        "p79-q2"
+      ],
+      "questionCount": 2,
+      "pendingQuestionIds": [],
+      "topic": "短文章／文学介绍评论／中等",
+      "status": "source_matched"
+    },
+    {
+      "passage": 80,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 64,
+      "passageVerified": true,
+      "questionIds": [
+        "p80-q1"
+      ],
+      "questionCount": 1,
+      "pendingQuestionIds": [],
+      "topic": "逻辑单题／假设／中等",
+      "status": "source_matched"
+    },
+    {
+      "passage": 81,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 65,
+      "passageVerified": true,
+      "questionIds": [
+        "p81-q1",
+        "p81-q2"
+      ],
+      "questionCount": 2,
+      "pendingQuestionIds": [],
+      "topic": "短文章／现象描述／历史／中等",
+      "status": "source_matched"
+    },
+    {
+      "passage": 82,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 66,
+      "passageVerified": true,
+      "questionIds": [
+        "p82-q1"
+      ],
+      "questionCount": 1,
+      "pendingQuestionIds": [],
+      "topic": "逻辑单题／削弱／易",
+      "status": "source_matched"
+    },
+    {
+      "passage": 83,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 66,
+      "passageVerified": true,
+      "questionIds": [
+        "p83-q1",
+        "p83-q2"
+      ],
+      "questionCount": 2,
+      "pendingQuestionIds": [],
+      "topic": "短文章／观点论证／生物／易",
+      "status": "source_matched"
+    },
+    {
+      "passage": 84,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 66,
+      "passageVerified": true,
+      "questionIds": [
+        "p84-q1",
+        "p84-q2",
+        "p84-q3"
+      ],
+      "questionCount": 3,
+      "pendingQuestionIds": [],
+      "topic": "短文章／现象解释／对比／社会／中等",
+      "status": "source_matched"
+    },
+    {
+      "passage": 85,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 67,
+      "passageVerified": true,
+      "questionIds": [
+        "p85-q1"
+      ],
+      "questionCount": 1,
+      "pendingQuestionIds": [],
+      "topic": "逻辑单题／削弱／中等",
+      "status": "source_matched"
+    },
+    {
+      "passage": 86,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 68,
+      "passageVerified": true,
+      "questionIds": [
+        "p86-q1"
+      ],
+      "questionCount": 1,
+      "pendingQuestionIds": [],
+      "topic": "逻辑单题／假设／难",
+      "status": "source_matched"
+    },
+    {
+      "passage": 87,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 68,
+      "passageVerified": true,
+      "questionIds": [
+        "p87-q1",
+        "p87-q2",
+        "p87-q3"
+      ],
+      "questionCount": 3,
+      "pendingQuestionIds": [],
+      "topic": "短文章／现象解释／对比／地质",
+      "status": "source_matched"
+    },
+    {
+      "passage": 88,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 69,
+      "passageVerified": true,
+      "questionIds": [
+        "p88-q1",
+        "p88-q2"
+      ],
+      "questionCount": 2,
+      "pendingQuestionIds": [],
+      "topic": "短文章／现象解释／生物／中等",
+      "status": "source_matched"
+    },
+    {
+      "passage": 89,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 69,
+      "passageVerified": true,
+      "questionIds": [
+        "p89-q1"
+      ],
+      "questionCount": 1,
+      "pendingQuestionIds": [],
+      "topic": "逻辑单题／假设／易",
+      "status": "source_matched"
+    },
+    {
+      "passage": 90,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 70,
+      "passageVerified": true,
+      "questionIds": [
+        "p90-q1",
+        "p90-q2"
+      ],
+      "questionCount": 2,
+      "pendingQuestionIds": [],
+      "topic": "短文章／现象解释／历史／易",
+      "status": "source_matched"
+    },
+    {
+      "passage": 91,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 71,
+      "passageVerified": true,
+      "questionIds": [
+        "p91-q1"
+      ],
+      "questionCount": 1,
+      "pendingQuestionIds": [],
+      "topic": "逻辑单题／评价／难",
+      "status": "source_matched"
+    },
+    {
+      "passage": 92,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 71,
+      "passageVerified": true,
+      "questionIds": [
+        "p92-q1",
+        "p92-q2"
+      ],
+      "questionCount": 2,
+      "pendingQuestionIds": [],
+      "topic": "短文章／观点论证／中等",
+      "status": "source_matched"
+    },
+    {
+      "passage": 93,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 72,
+      "passageVerified": true,
+      "questionIds": [
+        "p93-q1"
+      ],
+      "questionCount": 1,
+      "pendingQuestionIds": [],
+      "topic": "逻辑单题／削弱／中等",
+      "status": "source_matched"
+    },
+    {
+      "passage": 94,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 73,
+      "passageVerified": true,
+      "questionIds": [
+        "p94-q1",
+        "p94-q2"
+      ],
+      "questionCount": 2,
+      "pendingQuestionIds": [],
+      "topic": "短文章／观点论证／生物／中等",
+      "status": "source_matched"
+    },
+    {
+      "passage": 95,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 73,
+      "passageVerified": true,
+      "questionIds": [
+        "p95-q1",
+        "p95-q2",
+        "p95-q3"
+      ],
+      "questionCount": 3,
+      "pendingQuestionIds": [
+        "p95-q1"
+      ],
+      "topic": "短文章／观点论证／历史／中等",
+      "status": "review_required"
+    },
+    {
+      "passage": 96,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 74,
+      "passageVerified": true,
+      "questionIds": [
+        "p96-q1",
+        "p96-q2"
+      ],
+      "questionCount": 2,
+      "pendingQuestionIds": [],
+      "topic": "短文章／观点对比评论／难",
+      "status": "source_matched"
+    },
+    {
+      "passage": 97,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 75,
+      "passageVerified": true,
+      "questionIds": [
+        "p97-q1"
+      ],
+      "questionCount": 1,
+      "pendingQuestionIds": [],
+      "topic": "逻辑单题／高亮句作用／中等",
+      "status": "source_matched"
+    },
+    {
+      "passage": 98,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 76,
+      "passageVerified": true,
+      "questionIds": [
+        "p98-q1",
+        "p98-q2"
+      ],
+      "questionCount": 2,
+      "pendingQuestionIds": [],
+      "topic": "短文章／新研究介绍评论／历史／中等",
+      "status": "source_matched"
+    },
+    {
+      "passage": 99,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 77,
+      "passageVerified": true,
+      "questionIds": [
+        "p99-q1",
+        "p99-q2"
+      ],
+      "questionCount": 2,
+      "pendingQuestionIds": [],
+      "topic": "短文章／现象描述／生态／易",
+      "status": "source_matched"
+    },
+    {
+      "passage": 100,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 78,
+      "passageVerified": true,
+      "questionIds": [
+        "p100-q1",
+        "p100-q2"
+      ],
+      "questionCount": 2,
+      "pendingQuestionIds": [],
+      "topic": "短文章／天文／新发现意义／中等",
+      "status": "source_matched"
+    },
+    {
+      "passage": 101,
+      "source": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "page": 78,
+      "passageVerified": true,
+      "questionIds": [
+        "p101-q1",
+        "p101-q2",
+        "p101-q3",
+        "p101-q4"
+      ],
+      "questionCount": 4,
+      "pendingQuestionIds": [],
+      "topic": "长文章／研究介绍／生态／中等",
+      "status": "source_matched"
+    }
+  ],
+  "sourceInventory": [
+    {
+      "file": "5. 《新GRE作文大讲堂－－方法、素材、题目剖析》完整版 第五章 Argument写作方法及新GRE Argument 题库.pdf",
+      "path": "写作/Argument/5. 《新GRE作文大讲堂－－方法、素材、题目剖析》完整版 第五章 Argument写作方法及新GRE Argument 题库.pdf",
+      "topic": "写作",
+      "pageCount": 83,
+      "status": "reference_only",
+      "bankIds": [],
+      "note": "已纳入本地来源清单；按目录属于写作、词汇或资料索引，未作为可自动判分题组导入。"
+    },
+    {
+      "file": "6. 7.《新GRE作文大讲堂－－方法、素材、题目剖析》完整版 第六章 第七章 GRE写作黄金句型及名人名言（Issue Argument 篇）.pdf",
+      "path": "写作/Argument/6. 7.《新GRE作文大讲堂－－方法、素材、题目剖析》完整版 第六章 第七章 GRE写作黄金句型及名人名言（Issue Argument 篇）.pdf",
+      "topic": "写作",
+      "pageCount": 50,
+      "status": "reference_only",
+      "bankIds": [],
+      "note": "已纳入本地来源清单；按目录属于写作、词汇或资料索引，未作为可自动判分题组导入。"
+    },
+    {
+      "file": "新gre中文argu提纲.pdf",
+      "path": "写作/Argument/新gre中文argu提纲.pdf",
+      "topic": "写作",
+      "pageCount": 21,
+      "status": "reference_only",
+      "bankIds": [],
+      "note": "已纳入本地来源清单；按目录属于写作、词汇或资料索引，未作为可自动判分题组导入。"
+    },
+    {
+      "file": "2. 《新GRE作文大讲堂－－方法、素材、题目剖析》完整版 第二章 ISSUE写作.pdf",
+      "path": "写作/Issue/2. 《新GRE作文大讲堂－－方法、素材、题目剖析》完整版 第二章 ISSUE写作.pdf",
+      "topic": "写作",
+      "pageCount": 24,
+      "status": "reference_only",
+      "bankIds": [],
+      "note": "已纳入本地来源清单；按目录属于写作、词汇或资料索引，未作为可自动判分题组导入。"
+    },
+    {
+      "file": "3. 《新GRE作文大讲堂－－方法、素材、题目剖析》完整版 第三章  Issue官方题库及各个题目的论证概念和思路启发.pdf",
+      "path": "写作/Issue/3. 《新GRE作文大讲堂－－方法、素材、题目剖析》完整版 第三章  Issue官方题库及各个题目的论证概念和思路启发.pdf",
+      "topic": "写作",
+      "pageCount": 174,
+      "status": "reference_only",
+      "bankIds": [],
+      "note": "已纳入本地来源清单；按目录属于写作、词汇或资料索引，未作为可自动判分题组导入。"
+    },
+    {
+      "file": "4. 《新GRE作文大讲堂－－方法、素材、题目剖析》完整版 第四章 Issue写作素材及论证工具箱.pdf",
+      "path": "写作/Issue/4. 《新GRE作文大讲堂－－方法、素材、题目剖析》完整版 第四章 Issue写作素材及论证工具箱.pdf",
+      "topic": "写作",
+      "pageCount": 75,
+      "status": "reference_only",
+      "bankIds": [],
+      "note": "已纳入本地来源清单；按目录属于写作、词汇或资料索引，未作为可自动判分题组导入。"
+    },
+    {
+      "file": "GRE_Issue提纲_完整版.pdf",
+      "path": "写作/Issue/GRE_Issue提纲_完整版.pdf",
+      "topic": "写作",
+      "pageCount": 894,
+      "status": "reference_only",
+      "bankIds": [],
+      "note": "已纳入本地来源清单；按目录属于写作、词汇或资料索引，未作为可自动判分题组导入。"
+    },
+    {
+      "file": "exp.pdf",
+      "path": "写作/Issue/exp.pdf",
+      "topic": "写作",
+      "pageCount": 4,
+      "status": "reference_only",
+      "bankIds": [],
+      "note": "已纳入本地来源清单；按目录属于写作、词汇或资料索引，未作为可自动判分题组导入。"
+    },
+    {
+      "file": "新G-Issue提纲byGRE&amp;amp;amp;amp;托福全体成员.pdf",
+      "path": "写作/Issue/新G-Issue提纲byGRE&amp;amp;amp;amp;托福全体成员.pdf",
+      "topic": "写作",
+      "pageCount": 129,
+      "status": "reference_only",
+      "bankIds": [],
+      "note": "已纳入本地来源清单；按目录属于写作、词汇或资料索引，未作为可自动判分题组导入。"
+    },
+    {
+      "file": "新G之issue 全部作文提纲及部分范文.pdf",
+      "path": "写作/Issue/新G之issue 全部作文提纲及部分范文.pdf",
+      "topic": "写作",
+      "pageCount": 207,
+      "status": "reference_only",
+      "bankIds": [],
+      "note": "已纳入本地来源清单；按目录属于写作、词汇或资料索引，未作为可自动判分题组导入。"
+    },
+    {
+      "file": "北美GRE范文精讲.pdf",
+      "path": "写作/综合/北美GRE范文精讲.pdf",
+      "topic": "写作",
+      "pageCount": 277,
+      "status": "reference_only",
+      "bankIds": [],
+      "note": "已纳入本地来源清单；按目录属于写作、词汇或资料索引，未作为可自动判分题组导入。"
+    },
+    {
+      "file": "2016填空机经.pdf",
+      "path": "填空/2016填空机经.pdf",
+      "topic": "填空",
+      "pageCount": 26,
+      "status": "partial_recall_imported",
+      "bankIds": [
+        "gre-2016-0408-fill-recall",
+        "gre-2016-0416-fill-recall",
+        "gre-2016-0508-fill-recall",
+        "gre-2016-0521-fill-recall",
+        "gre-2016-0527-fill-recall",
+        "gre-2016-0605-fill-recall",
+        "gre-2016-0626-fill-recall",
+        "gre-2016-0717-fill-recall",
+        "gre-2016-0817-fill-recall",
+        "gre-2016-0826-fill-recall",
+        "gre-2016-0923-fill-recall",
+        "gre-2016-1012-fill-recall"
+      ],
+      "note": "已按日期拆分导入 12 场填空回忆，共 62 题；题干与选项均按原页核对。答案页列出 61 个编号键，其中 1 个与三空题不符；另 1 题缺题号，页内另有未编号键 AEH，未作配对；暂采用 60 个答案，来源未提供逐题解析。",
+      "questionCount": 62
+    },
+    {
+      "file": "GRE_1.19.pdf",
+      "path": "填空/GRE_1.19.pdf",
+      "topic": "填空",
+      "pageCount": 10,
+      "status": "pending_item_audit",
+      "bankIds": [],
+      "note": "已纳入本地来源清单；题目、答案与页码尚未逐项核对。"
+    },
+    {
+      "file": "GRE_2.23.pdf",
+      "path": "填空/GRE_2.23.pdf",
+      "topic": "填空",
+      "pageCount": 10,
+      "status": "pending_item_audit",
+      "bankIds": [],
+      "note": "已纳入本地来源清单；题目、答案与页码尚未逐项核对。"
+    },
+    {
+      "file": "GRE填空机经1000题难度分级版%28含答案%29.pdf",
+      "path": "填空/GRE填空机经1000题难度分级版%28含答案%29.pdf",
+      "topic": "填空",
+      "pageCount": 217,
+      "status": "imported_review_required",
+      "bankIds": [
+        "gre-fill-1000"
+      ],
+      "note": "填空 1000 题已逐题核对原题页与选项；4 题缺少逐题解析，见题目级待核记录。",
+      "questionCount": 881
+    },
+    {
+      "file": "GRE模拟题1.11.pdf",
+      "path": "填空/GRE模拟题1.11.pdf",
+      "topic": "填空",
+      "pageCount": 11,
+      "status": "pending_item_audit",
+      "bankIds": [],
+      "note": "已纳入本地来源清单；题目、答案与页码尚未逐项核对。"
+    },
+    {
+      "file": "GRE模拟题11.30.pdf",
+      "path": "填空/GRE模拟题11.30.pdf",
+      "topic": "填空",
+      "pageCount": 12,
+      "status": "pending_item_audit",
+      "bankIds": [],
+      "note": "已纳入本地来源清单；题目、答案与页码尚未逐项核对。"
+    },
+    {
+      "file": "GRE模拟题3.29.pdf",
+      "path": "填空/GRE模拟题3.29.pdf",
+      "topic": "填空",
+      "pageCount": 17,
+      "status": "pending_item_audit",
+      "bankIds": [],
+      "note": "已纳入本地来源清单；题目、答案与页码尚未逐项核对。"
+    },
+    {
+      "file": "GRE模拟题3.9.pdf",
+      "path": "填空/GRE模拟题3.9.pdf",
+      "topic": "填空",
+      "pageCount": 18,
+      "status": "pending_item_audit",
+      "bankIds": [],
+      "note": "已纳入本地来源清单；题目、答案与页码尚未逐项核对。"
+    },
+    {
+      "file": "GRE模拟题4.13.pdf",
+      "path": "填空/GRE模拟题4.13.pdf",
+      "topic": "填空",
+      "pageCount": 11,
+      "status": "pending_item_audit",
+      "bankIds": [],
+      "note": "已纳入本地来源清单；题目、答案与页码尚未逐项核对。"
+    },
+    {
+      "file": "GRE模拟题4.26.pdf",
+      "path": "填空/GRE模拟题4.26.pdf",
+      "topic": "填空",
+      "pageCount": 11,
+      "status": "pending_item_audit",
+      "bankIds": [],
+      "note": "已纳入本地来源清单；题目、答案与页码尚未逐项核对。"
+    },
+    {
+      "file": "GRE模拟题5.10.pdf",
+      "path": "填空/GRE模拟题5.10.pdf",
+      "topic": "填空",
+      "pageCount": 11,
+      "status": "pending_item_audit",
+      "bankIds": [],
+      "note": "已纳入本地来源清单；题目、答案与页码尚未逐项核对。"
+    },
+    {
+      "file": "PPII_v2p0_t2_tc_se.pdf",
+      "path": "填空/PPII_v2p0_t2_tc_se.pdf",
+      "topic": "填空",
+      "pageCount": 17,
+      "status": "partial_official_set_imported",
+      "bankIds": [
+        "gre-ppii-test2-verbal"
+      ],
+      "note": "PowerPrep II Test 2 节选共 40 题；题干、选项、答案键和页码已核对。配套解析仅有 2 道题可逐题配对解法，其余 38 题待解析来源。",
+      "questionCount": 40
+    },
+    {
+      "file": "《GREGMATLSAT长难句300例精讲精练》（大黄书）.pdf",
+      "path": "填空/《GREGMATLSAT长难句300例精讲精练》（大黄书）.pdf",
+      "topic": "填空",
+      "pageCount": 410,
+      "status": "pending_item_audit",
+      "bankIds": [],
+      "note": "已纳入本地来源清单；题目、答案与页码尚未逐项核对。"
+    },
+    {
+      "file": "填空.pdf",
+      "path": "填空/填空.pdf",
+      "topic": "填空",
+      "pageCount": 100,
+      "status": "pending_item_audit",
+      "bankIds": [],
+      "note": "已纳入本地来源清单；题目、答案与页码尚未逐项核对。"
+    },
+    {
+      "file": "填空点题B班.pdf",
+      "path": "填空/填空点题B班.pdf",
+      "topic": "填空",
+      "pageCount": 24,
+      "status": "pending_item_audit",
+      "bankIds": [],
+      "note": "已纳入本地来源清单；题目、答案与页码尚未逐项核对。"
+    },
+    {
+      "file": "新GRE填空(台湾麟渡兮老师).pdf",
+      "path": "填空/新GRE填空(台湾麟渡兮老师).pdf",
+      "topic": "填空",
+      "pageCount": 177,
+      "status": "pending_item_audit",
+      "bankIds": [],
+      "note": "已纳入本地来源清单；题目、答案与页码尚未逐项核对。"
+    },
+    {
+      "file": "新东方+GRE+填空机经+500+解析版.pdf",
+      "path": "填空/新东方+GRE+填空机经+500+解析版.pdf",
+      "topic": "填空",
+      "pageCount": 97,
+      "status": "pending_item_audit",
+      "bankIds": [],
+      "note": "已纳入本地来源清单；题目、答案与页码尚未逐项核对。"
+    },
+    {
+      "file": "新东方GRE填空.pdf",
+      "path": "填空/新东方GRE填空.pdf",
+      "topic": "填空",
+      "pageCount": 155,
+      "status": "pending_item_audit",
+      "bankIds": [],
+      "note": "已纳入本地来源清单；题目、答案与页码尚未逐项核对。"
+    },
+    {
+      "file": "老肖新GRE填空真题90套.pdf",
+      "path": "填空/老肖新GRE填空真题90套.pdf",
+      "topic": "填空",
+      "pageCount": 192,
+      "status": "pending_item_audit",
+      "bankIds": [],
+      "note": "同目录存在单独答案修订版；需逐题配对题本和答案文件后再导入。"
+    },
+    {
+      "file": "老肖新GRE填空真题90套答案（修订版1.2）.pdf",
+      "path": "填空/老肖新GRE填空真题90套答案（修订版1.2）.pdf",
+      "topic": "填空",
+      "pageCount": 4,
+      "status": "pending_answer_key_pairing",
+      "bankIds": [],
+      "note": "独立答案修订文件；尚未与 90 套题本逐题配对。"
+    },
+    {
+      "file": "考满分1000填空解析.pdf",
+      "path": "填空/考满分1000填空解析.pdf",
+      "topic": "填空",
+      "pageCount": 216,
+      "status": "linked_explanation_source",
+      "bankIds": [
+        "gre-fill-1000"
+      ],
+      "note": "已配对 877 道填空解析；4 道题在来源解析文件中未找到对应讲解。",
+      "associatedQuestionCount": 877
+    },
+    {
+      "file": "麟渡兮填空(简体中文）--附加OG,PPII 题目解析.pdf",
+      "path": "填空/麟渡兮填空(简体中文）--附加OG,PPII 题目解析.pdf",
+      "topic": "填空",
+      "pageCount": 150,
+      "status": "linked_partial_answer_source",
+      "bankIds": [
+        "gre-ppii-test2-verbal",
+        "gre-official250-matched-verbal"
+      ],
+      "note": "含 80 条 OG 出处，79 条题干前缀与官方250题 PDF 匹配；65 道题的题干、选项、答案和解说已逐项配对导入。另有 40 条 PPII Test 2 题干引用，其中 2 条带解法并已配对，38 条仍无逐题解析。",
+      "associatedQuestionCount": 67
+    },
+    {
+      "file": "巍哥数学机经200题-3.pdf",
+      "path": "数学/巍哥数学机经200题-3.pdf",
+      "topic": "数学",
+      "pageCount": 69,
+      "status": "pending_item_audit",
+      "bankIds": [],
+      "note": "已纳入本地来源清单；题目、答案与页码尚未逐项核对。"
+    },
+    {
+      "file": "【小站教育】16年12月4日GRE机经.pdf",
+      "path": "综合与模考/【小站教育】16年12月4日GRE机经.pdf",
+      "topic": "综合与模考",
+      "pageCount": 11,
+      "status": "partial_recall_imported",
+      "bankIds": [
+        "gre-2016-dec04-reading-recall",
+        "gre-2016-dec04-logic-recall"
+      ],
+      "note": "11 页考试回忆资料；已导入可配对答案与解析的 3 道阅读题和 1 道逻辑题，文件不是完整试卷。",
+      "questionCount": 4
+    },
+    {
+      "file": "新东方+GRE+官方真题+250+解析版.pdf",
+      "path": "综合与模考/新东方+GRE+官方真题+250+解析版.pdf",
+      "topic": "综合与模考",
+      "pageCount": 49,
+      "status": "partial_official_set_imported",
+      "bankIds": [
+        "gre-official250-matched-verbal"
+      ],
+      "note": "本 PDF 本身未找到答案键；已从配套解析导入 65 道题干、选项、答案和解析均逐项匹配的题目。其余引用仍待核，逐条页码与答案证据见 source-audits/official250-companion.json。",
+      "questionCount": 65
+    },
+    {
+      "file": "Verbal_Workout_for_the_New_GRE_4nd_Edition(1).pdf",
+      "path": "综合语文/Verbal_Workout_for_the_New_GRE_4nd_Edition(1).pdf",
+      "topic": "综合语文",
+      "pageCount": 367,
+      "status": "pending_item_audit",
+      "bankIds": [],
+      "note": "已纳入本地来源清单；题目、答案与页码尚未逐项核对。"
+    },
+    {
+      "file": "逻辑10套.pdf",
+      "path": "逻辑/逻辑10套.pdf",
+      "topic": "逻辑",
+      "pageCount": 79,
+      "status": "pending_item_audit",
+      "bankIds": [],
+      "note": "已纳入本地来源清单；题目、答案与页码尚未逐项核对。"
+    },
+    {
+      "file": "101篇分类分级解析版.pdf",
+      "path": "阅读/101篇分类分级解析版.pdf",
+      "topic": "阅读",
+      "pageCount": 91,
+      "status": "imported_review_required",
+      "bankIds": [
+        "gre-reading-101",
+        "gre-logic-101"
+      ],
+      "note": "题干、选项、答案和解析来自本文件；阅读材料原文以同目录 2016.7.14 分类版为准。6 道选句题缺少可配对的完整选项或答案，标记待核。",
+      "questionCount": 233
+    },
+    {
+      "file": "36套.pdf",
+      "path": "阅读/36套.pdf",
+      "topic": "阅读",
+      "pageCount": 217,
+      "status": "pending_revision_comparison",
+      "bankIds": [],
+      "note": "217 页版本含 36 个练习与答案页；与 2014.01 版本答案键及部分题量不同，暂作版本比对材料，不与新版本合并。"
+    },
+    {
+      "file": "kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "path": "阅读/kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf",
+      "topic": "阅读",
+      "pageCount": 84,
+      "status": "linked_passage_source",
+      "bankIds": [
+        "gre-reading-101",
+        "gre-logic-101"
+      ],
+      "note": "作为《101篇分类分级解析版》的配套原文来源；101 篇全文均已按编号提取并与本 PDF 对应页完整匹配。",
+      "associatedQuestionCount": 233,
+      "linkedPassageCount": 101
+    },
+    {
+      "file": "考满分GRE最新机经70篇5.30.pdf",
+      "path": "阅读/考满分GRE最新机经70篇5.30.pdf",
+      "topic": "阅读",
+      "pageCount": 74,
+      "status": "pending_item_audit",
+      "bankIds": [],
+      "note": "资料自述仍可能有答案错误，并记录了第 41 篇答案修订；逐题核验前不导入。"
+    },
+    {
+      "file": "阅读36套.pdf",
+      "path": "阅读/阅读36套.pdf",
+      "topic": "阅读",
+      "pageCount": 232,
+      "status": "pending_item_audit_preferred_revision",
+      "bankIds": [],
+      "note": "232 页文件标题标注 2014.01，含 36 个练习与答案页；与另一份 217 页版本的题目和答案键存在差异，需按本版本逐项映射后再导入。"
+    },
+    {
+      "file": "高智威高频阅读机经20140515.pdf",
+      "path": "阅读/高智威高频阅读机经20140515.pdf",
+      "topic": "阅读",
+      "pageCount": 47,
+      "status": "pending_item_audit",
+      "bankIds": [],
+      "note": "已纳入本地来源清单；题目、答案与页码尚未逐项核对。"
+    }
+  ]
+}

@@ -1,0 +1,4696 @@
+{
+  "id": "grammar-end-of-sentence-punctuation",
+  "assessment": "SAT",
+  "test": "Reading and Writing",
+  "domain": "Standard English Conventions",
+  "skill": "End-of-sentence punctuation",
+  "difficulty": "Unrated",
+  "expectedCount": 60,
+  "questionIds": [
+    "6c9f5a85",
+    "0faa16e2",
+    "bf540299",
+    "e1e485c4",
+    "8d6498f4",
+    "8cad30a8",
+    "0f85be94",
+    "17a21a9a",
+    "1f2176fe",
+    "1726ec73",
+    "7a593b35",
+    "f2db5f92",
+    "d8de8fe1",
+    "43acd93c",
+    "fcdc941e",
+    "6c75468e",
+    "89877f0e",
+    "7688a251",
+    "8d3689e8",
+    "804618f5",
+    "e7371f1d",
+    "1db44724",
+    "f2d802ce",
+    "3a27053c",
+    "eef87773",
+    "dae7ec20",
+    "0196d582",
+    "6d85ee96",
+    "506d356e",
+    "fc2ca643",
+    "13cd018d",
+    "71910839",
+    "fa5251aa",
+    "2b071625",
+    "c1c992ef",
+    "0e4dee50",
+    "bc5d5295",
+    "9d80fd42",
+    "35cb076b",
+    "447f5599",
+    "1bd29586",
+    "6691a388",
+    "79f09032",
+    "0860e992",
+    "5896c662",
+    "d00aeb15",
+    "4ccc4c68",
+    "9379fd5a",
+    "813d791d",
+    "504a849d",
+    "30f9d7a2",
+    "dff52e32",
+    "be9b48ab",
+    "a4e330d1",
+    "eb10996b",
+    "9e66cd16",
+    "70b37c30",
+    "6376f508",
+    "1786a087",
+    "d0c20ad1"
+  ],
+  "sourceRefs": [
+    {
+      "role": "question",
+      "path": "语法竖版成稿.docx",
+      "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6"
+    },
+    {
+      "role": "question",
+      "path": "语法.pdf",
+      "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d"
+    },
+    {
+      "role": "answer",
+      "path": "语法.pdf",
+      "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d"
+    }
+  ],
+  "questions": [
+    {
+      "id": "6c9f5a85",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Watch out? That bird is headed straight for your head!",
+          "runs": [
+            {
+              "text": "Watch "
+            },
+            {
+              "text": "out? That",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " bird is headed straight for your head!"
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "out. That"
+        },
+        {
+          "id": "C",
+          "text": "out that"
+        },
+        {
+          "id": "D",
+          "text": "out! That"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "0faa16e2",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "It's not a question of if my three best friends will see the new Star Wars movie, but when.",
+          "runs": [
+            {
+              "text": "It's not a question of if my three best friends will see the new "
+            },
+            {
+              "text": "Star Wars",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "text": " movie, but "
+            },
+            {
+              "text": "when.",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "when,"
+        },
+        {
+          "id": "C",
+          "text": "when;"
+        },
+        {
+          "id": "D",
+          "text": "when—"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "bf540299",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The oddest protester at the waterfront redevelopment rally was a large foam duck.",
+          "runs": [
+            {
+              "text": "The oddest protester at the waterfront redevelopment rally was a large foam "
+            },
+            {
+              "text": "duck.",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "duck?"
+        },
+        {
+          "id": "C",
+          "text": "duck . . ."
+        },
+        {
+          "id": "D",
+          "text": "duck—"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "e1e485c4",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Does anyone know the difference between regular, and fancy ketchup?",
+          "runs": [
+            {
+              "text": "Does anyone know the difference between "
+            },
+            {
+              "text": "regular, and fancy ketchup?",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "regular and fancy ketchup?"
+        },
+        {
+          "id": "C",
+          "text": "regular and fancy ketchup."
+        },
+        {
+          "id": "D",
+          "text": "regular, and fancy ketchup."
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "8d6498f4",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "“Does pointillism use dots—or was it lines?” the weary art student wondered aloud, before falling asleep?",
+          "runs": [
+            {
+              "text": "“Does pointillism use dots—or was it lines?” the weary art student wondered aloud, before falling "
+            },
+            {
+              "text": "asleep?",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "asleep."
+        },
+        {
+          "id": "C",
+          "text": "asleep;"
+        },
+        {
+          "id": "D",
+          "text": "asleep—"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "8cad30a8",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Fundamentally, we know that light is both a particle and a wave. We also know that light travels extraordinarily fast!",
+          "runs": [
+            {
+              "text": "Fundamentally, we know that light is both a particle and a wave. We also know that light travels "
+            },
+            {
+              "text": "extraordinarily ",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "text": "fast!",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "fast;"
+        },
+        {
+          "id": "C",
+          "text": "fast—"
+        },
+        {
+          "id": "D",
+          "text": "fast . . ."
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "0f85be94",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "\"Stop. I'm late for work!\" Emily called fruitlessly after the departing bus.",
+          "runs": [
+            {
+              "text": "\""
+            },
+            {
+              "text": "Stop.",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " I'm late for work!\" Emily called fruitlessly after the departing bus."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "Stop!"
+        },
+        {
+          "id": "C",
+          "text": "Stop?"
+        },
+        {
+          "id": "D",
+          "text": "Stop"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "17a21a9a",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In his 1532 book of political theory, The Prince, Niccolò Machiavelli poses the question of whether it is better to be loved or feared?",
+          "runs": [
+            {
+              "text": "In his 1532 book of political theory, "
+            },
+            {
+              "text": "The Prince",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "text": ", Niccolò Machiavelli poses the question of whether it is better to be loved or "
+            },
+            {
+              "text": "feared?",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "feared—"
+        },
+        {
+          "id": "C",
+          "text": "feared."
+        },
+        {
+          "id": "D",
+          "text": "feared. . ."
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "1f2176fe",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Be careful! The hurricane is expected to arrive any minute now!",
+          "runs": [
+            {
+              "text": "Be "
+            },
+            {
+              "text": "careful! The",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " hurricane is expected to arrive any minute now!"
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "careful the"
+        },
+        {
+          "id": "C",
+          "text": "careful. The"
+        },
+        {
+          "id": "D",
+          "text": "careful? The"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "1726ec73",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "James vacillated between applying to medical school and taking a year to do laboratory research?",
+          "runs": [
+            {
+              "text": "James vacillated between applying to medical school and taking a year to do "
+            },
+            {
+              "text": "laboratory research?",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "laboratory research."
+        },
+        {
+          "id": "C",
+          "text": "laboratory research!"
+        },
+        {
+          "id": "D",
+          "text": "laboratory, research?"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "7a593b35",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The rescue team members wondered if they should call for backup or try to attempt the rescue themselves?",
+          "runs": [
+            {
+              "text": "The rescue team members wondered if they should call for backup or try to attempt the rescue "
+            },
+            {
+              "text": "themselves?",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "themselves."
+        },
+        {
+          "id": "C",
+          "text": "themselves!"
+        },
+        {
+          "id": "D",
+          "text": "themselves,"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "f2db5f92",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "\"It looks like it's going to rain? Do you think I should bring my umbrella?\" Antonio asked his father.",
+          "runs": [
+            {
+              "text": "\"It looks like it's going to "
+            },
+            {
+              "text": "rain?",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " Do you think I should bring my umbrella?\" Antonio asked his father."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "rain"
+        },
+        {
+          "id": "C",
+          "text": "rain,"
+        },
+        {
+          "id": "D",
+          "text": "rain."
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "d8de8fe1",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In Tristan's role-playing video game, your actions determine whether you become a hero or a villain? It's an interesting commentary on real life.",
+          "runs": [
+            {
+              "text": "In Tristan's role-playing video game, your actions determine whether you become a hero or a "
+            },
+            {
+              "text": "villain? It's",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " an interesting commentary on real life."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "villain? Its"
+        },
+        {
+          "id": "C",
+          "text": "villain. It's"
+        },
+        {
+          "id": "D",
+          "text": "villain. Its"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "43acd93c",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "I think you might enjoy ceviche? It is a popular and delicious seafood dish.",
+          "runs": [
+            {
+              "text": "I think you might enjoy "
+            },
+            {
+              "text": "ceviche? It",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " is a popular and delicious seafood dish."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "ceviche. It"
+        },
+        {
+          "id": "C",
+          "text": "ceviche, it"
+        },
+        {
+          "id": "D",
+          "text": "ceviche it"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "fcdc941e",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Whether or not you decide to listen to the Zen master's instructions is up to you? After all, it's your life.",
+          "runs": [
+            {
+              "text": "Whether or not you decide to listen to the Zen master's instructions is up to "
+            },
+            {
+              "text": "you? After",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " all, it's your life."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "you, after"
+        },
+        {
+          "id": "C",
+          "text": "you. After"
+        },
+        {
+          "id": "D",
+          "text": "you after"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "6c75468e",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "“Goodbye!” she yelled, her voice growing louder over the roar of the train’s engine, “I’ll miss you?”",
+          "runs": [
+            {
+              "text": "“Goodbye!” she yelled, her voice growing louder over the roar of the train’s engine, “I’"
+            },
+            {
+              "text": "ll"
+            },
+            {
+              "text": " miss "
+            },
+            {
+              "text": "you?”",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "you.”"
+        },
+        {
+          "id": "C",
+          "text": "you!”"
+        },
+        {
+          "id": "D",
+          "text": "you— ”"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "89877f0e",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "She was trying to yell something after us, but the door closed, cutting off her speech: “Make sure that you don’t.”",
+          "runs": [
+            {
+              "text": "She was trying to yell something after us, but the door closed, cutting off her speech: “Make sure that you "
+            },
+            {
+              "text": "don’t.”",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "don’t . . .”"
+        },
+        {
+          "id": "C",
+          "text": "don’t!”"
+        },
+        {
+          "id": "D",
+          "text": "don’t?”"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "7688a251",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Wherever you go, make sure that you are at least prepared for the weather?",
+          "runs": [
+            {
+              "text": "Wherever you go, make sure that you are at least prepared for the "
+            },
+            {
+              "text": "weather?",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "weather:"
+        },
+        {
+          "id": "C",
+          "text": "weather . . ."
+        },
+        {
+          "id": "D",
+          "text": "weather."
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "8d3689e8",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "If you are going to eat in front of the fridge, at least close the door,",
+          "runs": [
+            {
+              "text": "If you are going to eat in front of the fridge, at least close the "
+            },
+            {
+              "text": "door,",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "door:"
+        },
+        {
+          "id": "C",
+          "text": "door—"
+        },
+        {
+          "id": "D",
+          "text": "door."
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "804618f5",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Whether or not you choose to move away from home for college is ultimately up to you?",
+          "runs": [
+            {
+              "text": "Whether or not you choose to move away from home for college is ultimately up to "
+            },
+            {
+              "text": "you?",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "you!"
+        },
+        {
+          "id": "C",
+          "text": "you."
+        },
+        {
+          "id": "D",
+          "text": "you;"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "e7371f1d",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "\"Can you believe that our son received an A in his math class!\" Jeremy asked his wife in disbelief.",
+          "runs": [
+            {
+              "text": "\"Can you believe that our son received an A in his math "
+            },
+            {
+              "text": "class!",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": "\" Jeremy asked his wife in disbelief."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "class."
+        },
+        {
+          "id": "C",
+          "text": "class?"
+        },
+        {
+          "id": "D",
+          "text": "class,"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "1db44724",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "\"Your tardiness is making me question your commitment to this project?\" Julia's boss warned.",
+          "runs": [
+            {
+              "text": "\"Your tardiness is making me question your commitment to this "
+            },
+            {
+              "text": "project?\" Julia's boss warned.",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "project,\" Julia's boss warned."
+        },
+        {
+          "id": "C",
+          "text": "project,\" Julia's boss warned?"
+        },
+        {
+          "id": "D",
+          "text": "project?\" Julia's boss warned?"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "f2d802ce",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "\"Are you the same person you were a year ago?\" is a question philosophers have wrestled with for ages.",
+          "runs": [
+            {
+              "text": "\"Are you the same person you were a year "
+            },
+            {
+              "text": "ago?\" is",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " a question philosophers have wrestled with for ages."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "ago,\" is"
+        },
+        {
+          "id": "C",
+          "text": "ago\" is"
+        },
+        {
+          "id": "D",
+          "text": "ago.\" Is"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "3a27053c",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The agricultural officer eased fears of a bovine zombie apocalypse, calmly observing that \"a nutrient deficiency following the dry season might be behind this cow’s carnivorous tendencies!\"",
+          "runs": [
+            {
+              "text": "The agricultural officer eased fears of a bovine zombie apocalypse, calmly observing that \"a nutrient deficiency following the dry season might be behind this cow’s carnivorous "
+            },
+            {
+              "text": "tendencies!\"",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "tendencies?\""
+        },
+        {
+          "id": "C",
+          "text": "tendencies.”"
+        },
+        {
+          "id": "D",
+          "text": "tendencies\""
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "eef87773",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Maybe you already know this, but the Outer Banks is a 200-mile stretch of barrier islands off the coast of Virginia and North Carolina?",
+          "runs": [
+            {
+              "text": "Maybe you already know this, but the Outer Banks is a 200-mile stretch of barrier islands off the coast of Virginia and "
+            },
+            {
+              "text": "North Carolina?",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "North Carolina."
+        },
+        {
+          "id": "C",
+          "text": "North Carolina . . ."
+        },
+        {
+          "id": "D",
+          "text": "North Carolina—"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "dae7ec20",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Annie Lee was an African-American artist and businesswoman who turned her paintings and sketches into collectibles for Black women. Two of her works, Blue Monday and Six No Uptown, may be two of her most recognized pieces?",
+          "runs": [
+            {
+              "text": "Annie Lee was an African-American artist and businesswoman who turned her paintings and sketches into collectibles for Black women. Two of her works, "
+            },
+            {
+              "text": "Blue Monday",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "text": " and "
+            },
+            {
+              "text": "Six No Uptown,",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "text": " may be two of her most recognized "
+            },
+            {
+              "text": "pieces?",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "pieces."
+        },
+        {
+          "id": "C",
+          "text": "piece."
+        },
+        {
+          "id": "D",
+          "text": "piece?"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "0196d582",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "\"From the birthplace of airplanes to the mysterious disappearing colony of Roanoke, Virginia, the Outer Banks are steeped in American history—\" the guide droned on, slowly losing his audience of tourists.",
+          "runs": [
+            {
+              "text": "\"From the birthplace of airplanes to the mysterious disappearing colony of Roanoke, Virginia, the Outer Banks are steeped in American "
+            },
+            {
+              "text": "history—",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": "\" the guide droned on, slowly losing his audience of tourists."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "history!\""
+        },
+        {
+          "id": "C",
+          "text": "history . . .\""
+        },
+        {
+          "id": "D",
+          "text": "history.\""
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "6d85ee96",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Although Raksha Bandhan is a traditional Hindu ceremony, this celebration of the relationship between brothers and sisters has also been adopted by some secular communities which are not religious.",
+          "runs": [
+            {
+              "text": "Although Raksha Bandhan is a traditional Hindu ceremony, this celebration of the relationship between brothers and sisters "
+            },
+            {
+              "text": "has also been adopted by some "
+            },
+            {
+              "text": "secular communities which are not religious.",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "secular communities."
+        },
+        {
+          "id": "C",
+          "text": "secular communities?"
+        },
+        {
+          "id": "D",
+          "text": "secular communities which are not religious?"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "506d356e",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Stunned, Peter accepted his award for Employee of the Year at Augur Enterprises amid raucous applause and realized he had no idea what to say.",
+          "runs": [
+            {
+              "text": "Stunned, Peter accepted his award for Employee of the Year at Augur Enterprises amid raucous applause and realized he had no idea what to "
+            },
+            {
+              "text": "say.",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "say?"
+        },
+        {
+          "id": "C",
+          "text": "say;"
+        },
+        {
+          "id": "D",
+          "text": "say—"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "fc2ca643",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Having a birthday celebration? Cosmic Kids' Party House can take care of all your rental needs, including inflatable castles, cotton candy, sound systems, and more!",
+          "runs": [
+            {
+              "text": "Having a birthday "
+            },
+            {
+              "text": "celebration?",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " Cosmic Kids' Party House can take care of all your rental needs, including inflatable castles, cotton candy, sound systems, and more!"
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "celebration!"
+        },
+        {
+          "id": "C",
+          "text": "celebration,"
+        },
+        {
+          "id": "D",
+          "text": "celebration."
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "13cd018d",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The first telescopes, invented in the early 17th century, helped answer the question of what the moon's surface looked like? They also allowed astronomers to identify the Milky Way galaxy.",
+          "runs": [
+            {
+              "text": "The first telescopes, invented in the early 17th century, helped answer the question of what the moon's surface looked "
+            },
+            {
+              "text": "like? They",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " also allowed astronomers to identify the Milky Way galaxy."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "like, they"
+        },
+        {
+          "id": "C",
+          "text": "like they"
+        },
+        {
+          "id": "D",
+          "text": "like. They"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "71910839",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Twentieth century film director Alfred Hitchcock made cameo appearances in the majority of his movies, keeping his fans eagerly watching for when he would appear? Typically, Hitchcock would only show up briefly in the background of his films.",
+          "runs": [
+            {
+              "text": "Twentieth century film director Alfred Hitchcock made cameo appearances in the majority of his movies, keeping his fans eagerly watching for when he would "
+            },
+            {
+              "text": "appear? Typically,",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " Hitchcock would only show up briefly in the background of his films."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "appear, typically,"
+        },
+        {
+          "id": "C",
+          "text": "appear. Typically,"
+        },
+        {
+          "id": "D",
+          "text": "appear typically,"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "fa5251aa",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Can you believe that the sitar, a stringed instrument originating in India, is made partly from a gourd! The round resonating chamber at the base of the instrument is usually crafted from a hollowed-out pumpkin.",
+          "runs": [
+            {
+              "text": "Can you believe that the sitar, a stringed instrument originating in India, is made partly from a "
+            },
+            {
+              "text": "gourd! The",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " round resonating chamber at the base of the instrument is usually crafted from a hollowed-out pumpkin."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "gourd. The"
+        },
+        {
+          "id": "C",
+          "text": "gourd; the"
+        },
+        {
+          "id": "D",
+          "text": "gourd? The"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "2b071625",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The annual Cheese Rolling at Cooper's Hill is a festival in Gloucestershire, England, where contestants race after a wheel of cheese to find out who can catch it.",
+          "runs": [
+            {
+              "text": "The annual Cheese Rolling at Cooper's Hill is a festival in Gloucestershire, England, where contestants race after a wheel of cheese to find out who can catch "
+            },
+            {
+              "text": "it.",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "it?"
+        },
+        {
+          "id": "C",
+          "text": "it . . ."
+        },
+        {
+          "id": "D",
+          "text": "it;"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "c1c992ef",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Imhotep, historically recognized as the first known doctor, lived in Egypt from 2667 to 2648 BCE and left a legacy of medical writings that relied on his knowledge of anatomy and disease!",
+          "runs": [
+            {
+              "text": "Imhotep, historically recognized as the first known doctor, lived in Egypt from 2667 to 2648 BCE and left a legacy of medical writings that relied on his knowledge of anatomy and "
+            },
+            {
+              "text": "disease!",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "disease—"
+        },
+        {
+          "id": "C",
+          "text": "disease."
+        },
+        {
+          "id": "D",
+          "text": "disease,"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "0e4dee50",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "An ancient stone structure called \"The Wheel of Giants,\" a series of concentric circles in the Golan Heights region of the Middle East, has archaeologists stumped as to its meaning and how it was created? The Wheel is 5,000 years old.",
+          "runs": [
+            {
+              "text": "An ancient stone structure called \"The Wheel of Giants,\" a series of concentric circles in the Golan Heights region of the Middle East, has archaeologists stumped as to its meaning and how it was "
+            },
+            {
+              "text": "created? The",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " Wheel is 5,000 years old."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "created, the"
+        },
+        {
+          "id": "C",
+          "text": "created. The"
+        },
+        {
+          "id": "D",
+          "text": "created the"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "bc5d5295",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Before starting the marathon, Joel asked Zabrina if she had a spare water bottle. He had left his at home.",
+          "runs": [
+            {
+              "text": "Before starting the marathon, Joel asked Zabrina if she had a spare water "
+            },
+            {
+              "text": "bottle. He",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " had left his at home."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "bottle? He"
+        },
+        {
+          "id": "C",
+          "text": "bottle, he"
+        },
+        {
+          "id": "D",
+          "text": "bottle he"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "9d80fd42",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The tourist was amazed by the panoramic view from the Golden Gate Bridge; on her blog, she later declared (with perfect grammar) that \"it was stunning!\"",
+          "runs": [
+            {
+              "text": "The tourist was amazed by the panoramic view from the Golden Gate Bridge; on her blog, she later declared (with perfect grammar) that "
+            },
+            {
+              "text": "\"it was stunning!\"",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "\"they were stunning!\""
+        },
+        {
+          "id": "C",
+          "text": "\"it was stunning?\""
+        },
+        {
+          "id": "D",
+          "text": "\"they were stunning?\""
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "35cb076b",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Anish and Carrie had both entered their pumpkins into the Giant Pumpkin Contest and Weigh-Off to find out who was more successful this year, the winner would take home a cash prize and free tickets to next year's state fair.",
+          "runs": [
+            {
+              "text": "Anish and Carrie had both entered their pumpkins into the Giant Pumpkin Contest and Weigh-Off to find out who was more successful this "
+            },
+            {
+              "text": "year, the",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " winner would take home a cash prize and free tickets to next year's state fair."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "year. The"
+        },
+        {
+          "id": "C",
+          "text": "year? The"
+        },
+        {
+          "id": "D",
+          "text": "year the"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "447f5599",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "\"Eat your brussels sprouts or else I will ground you?\" my mother hollered at me from across the hallway.",
+          "runs": [
+            {
+              "text": "\"Eat your brussels sprouts or else I will ground "
+            },
+            {
+              "text": "you?\" my",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " mother hollered at me from across the hallway."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "you!\" my"
+        },
+        {
+          "id": "C",
+          "text": "you!\" Which my mother"
+        },
+        {
+          "id": "D",
+          "text": "you:\" my mother"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "1bd29586",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In a perfect world, wouldn't it be nice if everyone who wanted a pet and had the ability to take care of it could do so (without worrying about weight limits or apartment building restrictions).",
+          "runs": [
+            {
+              "text": "In a perfect world, wouldn't it be nice if everyone who wanted a pet and had the ability to take care of it could do so (without worrying about weight limits or apartment building "
+            },
+            {
+              "text": "restrictions).",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "restrictions)!"
+        },
+        {
+          "id": "C",
+          "text": "restrictions),"
+        },
+        {
+          "id": "D",
+          "text": "restrictions)?"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "6691a388",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Olivia could not tell: was Friday's \"mystery special\" at the cafeteria a freshly made casserole, or just a combination of leftovers from the week's previous meals.",
+          "runs": [
+            {
+              "text": "Olivia could not tell: was Friday's \"mystery special\" at the cafeteria a freshly made casserole, or just a combination of leftovers from the week's previous "
+            },
+            {
+              "text": "meals.",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "meals!"
+        },
+        {
+          "id": "C",
+          "text": "meals . . ."
+        },
+        {
+          "id": "D",
+          "text": "meals?"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "79f09032",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Did you know that Marie Curie not only was the first woman to win the Nobel Prize, but is also the only person to win Nobel Prizes in multiple science fields?",
+          "runs": [
+            {
+              "text": "Did you know that Marie Curie not only was the first woman to win the Nobel Prize, but is also the only person to win Nobel Prizes in multiple science "
+            },
+            {
+              "text": "fields?",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "NO CHANGE"
+        },
+        {
+          "type": "paragraph",
+          "text": "B） fields."
+        },
+        {
+          "type": "paragraph",
+          "text": "C） fields!"
+        },
+        {
+          "type": "paragraph",
+          "text": "D） fields . . ."
+        },
+        {
+          "type": "paragraph",
+          "text": "44. A cooperative board game, Pandemic asks players to work in teams to defeat threats? Players are assigned specific roles within the game, such as medic or scientist.",
+          "runs": [
+            {
+              "text": "44."
+            },
+            {
+              "text": " "
+            },
+            {
+              "text": "A cooperative board game, "
+            },
+            {
+              "text": "Pandemic",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "text": " asks players to work in teams to defeat "
+            },
+            {
+              "text": "threats? Players",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " are assigned specific roles within the game, such as medic or scientist."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "threats, players"
+        },
+        {
+          "id": "C",
+          "text": "threats. Players"
+        },
+        {
+          "id": "D",
+          "text": "threats players"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "按 Word 文档中的星标选项（C）录入；《语法.pdf》第 153 页答案表列为 B。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "0860e992",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "A cooperative board game, Pandemic asks players to work in teams to defeat threats? Players are assigned specific roles within the game, such as medic or scientist.",
+          "runs": [
+            {
+              "text": "A cooperative board game, "
+            },
+            {
+              "text": "Pandemic",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "text": " asks players to work in teams to defeat "
+            },
+            {
+              "text": "threats?",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " Players are assigned specific roles within the game, such as medic or scientist."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "threats, players"
+        },
+        {
+          "id": "C",
+          "text": "threats. Players"
+        },
+        {
+          "id": "D",
+          "text": "threats players"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            102
+          ],
+          "extractionMethod": "pdf-text-layout"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "5896c662",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Barrier islands are long, narrow, coastal sand dune formations; they lie parallel to mainland coastlines and offer protection from storms and erosion! Barrier islands occur in chains; they influence local terrain by creating lagoons, estuaries, and marshes.",
+          "runs": [
+            {
+              "text": "Barrier islands are long, narrow, coastal sand dune formations; they lie parallel to mainland coastlines and offer protection from storms and "
+            },
+            {
+              "text": "erosion! Barrier",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " islands occur in chains; they influence local terrain by creating lagoons, estuaries, and marshes."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "erosion; Barrier"
+        },
+        {
+          "id": "C",
+          "text": "erosion: barrier"
+        },
+        {
+          "id": "D",
+          "text": "erosion. Barrier"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "d00aeb15",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "It was not clear from his facial expression whether he preferred the salmon sushi or the shrimp roll? It’s possible that he liked them both equally.",
+          "runs": [
+            {
+              "text": "It was not clear from his facial expression whether he preferred the salmon sushi or the shrimp "
+            },
+            {
+              "text": "roll? It’s",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " possible that he liked them both equally."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "roll. It's"
+        },
+        {
+          "id": "C",
+          "text": "roll? Its"
+        },
+        {
+          "id": "D",
+          "text": "roll. Its"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "4ccc4c68",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "\"Should we go to Stanley Park or the Granville street market?\" Jacquie asked her brother as she thought about the Canadian trip itinerary? She vacillated between the two options.",
+          "runs": [
+            {
+              "text": "\"Should we go to Stanley Park or the Granville street market?\" Jacquie asked her brother as she thought about the Canadian trip "
+            },
+            {
+              "text": "itinerary? She",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " vacillated between the two options."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "itinerary. She"
+        },
+        {
+          "id": "C",
+          "text": "itinerary, she"
+        },
+        {
+          "id": "D",
+          "text": "itinerary! She"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "9379fd5a",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The Ganges River holds an important place in Indian life and mythology. Many locals and visitors are concerned that pollution and overcrowding now threaten the river!",
+          "runs": [
+            {
+              "text": "The Ganges River holds an important place in Indian life and mythology. Many locals and visitors are concerned that pollution and overcrowding now threaten the "
+            },
+            {
+              "text": "river!",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "river."
+        },
+        {
+          "id": "C",
+          "text": "river?"
+        },
+        {
+          "id": "D",
+          "text": "river;"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "813d791d",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "“Did you know that the Outer Banks is both historically and naturally important?” asked Tameka, the future oceanographer or astronaut (she hadn’t decided yet what type of scientist she would become)!",
+          "runs": [
+            {
+              "text": "“Did you know that the Outer Banks is both historically and naturally important?” asked Tameka, the future oceanographer or astronaut (she hadn’t decided yet what type of scientist she would "
+            },
+            {
+              "text": "become)!",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "become)."
+        },
+        {
+          "id": "C",
+          "text": "become)?"
+        },
+        {
+          "id": "D",
+          "text": "become)—"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "504a849d",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In his essay The Ethics of Living Jim Crow, Richard Wright recounts growing up as a Black child in the Jim Crow South and living in constant fear of violence at the hands of white citizens, especially the police. The modern Black Lives Matter movement questions how much has changed since then!",
+          "runs": [
+            {
+              "text": "In his essay "
+            },
+            {
+              "text": "The Ethics of Living Jim Crow",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "text": ", Richard Wright recounts growing up as a Black child in the Jim Crow South and living in constant fear of violence at the hands of white citizens, especially the police. The modern Black Lives Matter movement questions how much has "
+            },
+            {
+              "text": "changed since then!",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "changed since then?"
+        },
+        {
+          "id": "C",
+          "text": "changed since then."
+        },
+        {
+          "id": "D",
+          "text": "changed since then;"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "30f9d7a2",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Did the Vikings actually wear horned helmets: sadly, it appears that opera composer Richard Wagner's costume designer, Carl Emil Doepler, was the first person to affix horns to a Viking helmet for an 1876 production of The Ring of the Nibelung.",
+          "runs": [
+            {
+              "text": "Did the Vikings actually wear horned "
+            },
+            {
+              "text": "helmets: sadly,",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " it appears that opera composer Richard Wagner's costume designer, Carl Emil Doepler, was the first person to affix horns to a Viking helmet for an 1876 production of "
+            },
+            {
+              "text": "The Ring of the Nibelung.",
+              "marks": [
+                "italic"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "helmets? Sadly,"
+        },
+        {
+          "id": "C",
+          "text": "helmets; sadly"
+        },
+        {
+          "id": "D",
+          "text": "helmets. Sadly,"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "dff52e32",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Is it true what our violin tutor, Mr. Gershon, always says: \"practice makes perfect\"? Other factors, such as genetics and innate talent, may also play a significant role.",
+          "runs": [
+            {
+              "text": "Is it true what our violin tutor, Mr. Gershon, always says: \"practice makes "
+            },
+            {
+              "text": "perfect\"? Other",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " factors, such as genetics and innate talent, may also play a significant role."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "perfect.\" Other"
+        },
+        {
+          "id": "C",
+          "text": "perfect!\" Other"
+        },
+        {
+          "id": "D",
+          "text": "perfect\"; other"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "be9b48ab",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "\"I thought I just asked you—\" Julian's mom yelled before she was drowned out by a stampede of muddy-footed boys running through the house; none of Julian's friends had heeded her warning about removing their shoes.",
+          "runs": [
+            {
+              "text": "\"I thought I just asked "
+            },
+            {
+              "text": "you—",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": "\" Julian's mom yelled before she was drowned out by a stampede of muddy-footed boys running through the house; none of Julian's friends had heeded her warning about removing their shoes."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "you?"
+        },
+        {
+          "id": "C",
+          "text": "you!"
+        },
+        {
+          "id": "D",
+          "text": "you;"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "a4e330d1",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "You may have heard of anthropomorphism? Zoomorphism, where animal traits are attributed to objects and humans, is another common technique in literature; for example, the Egyptian goddess Sekhmet is portrayed with the head of a lion.",
+          "runs": [
+            {
+              "text": "You may have heard of "
+            },
+            {
+              "text": "anthropomorphism? Zoomorphism,",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " where animal traits are attributed to objects and humans, is another common technique in literature; for example, the Egyptian goddess Sekhmet is portrayed with the head of a lion."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "anthropomorphism. Zoomorphism,"
+        },
+        {
+          "id": "C",
+          "text": "anthropomorphism! Zoomorphism,"
+        },
+        {
+          "id": "D",
+          "text": "anthropomorphism, zoomorphism,"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "eb10996b",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "People love sharing urban legends, whether or not they believe they are true? One popular tale features a man who successfully collected on an insurance policy he had purchased for an expensive box of cigars, stating his possessions had been destroyed by fires.",
+          "runs": [
+            {
+              "text": "People love sharing urban legends, whether or not they believe they are "
+            },
+            {
+              "text": "true? One",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " popular tale features a man who successfully collected on an insurance policy he had purchased for an expensive box of cigars, stating his possessions had been destroyed by fires."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "true. One"
+        },
+        {
+          "id": "C",
+          "text": "true, one"
+        },
+        {
+          "id": "D",
+          "text": "true one"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "9e66cd16",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "While flipping channels in his hotel room, one-hit wonder Blake Burgess was disheartened to find himself the subject of Entertainment Nightly's \"Where They Went\" segment?",
+          "runs": [
+            {
+              "text": "While flipping channels in his hotel room, one-hit wonder Blake Burgess was disheartened to find himself the subject of Entertainment Nightly's "
+            },
+            {
+              "text": "\"Where They Went\" segment?",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "\"Where They Went?\" segment?"
+        },
+        {
+          "id": "C",
+          "text": "\"Where They Went\" segment."
+        },
+        {
+          "id": "D",
+          "text": "\"Where They Went\" segment—"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "70b37c30",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Did you know that cheese melts in two stages! In the first, milkfat is released as a result of hydrophobic reactions. In the second, increased protein movement from heat results in liquid-like behavior.",
+          "runs": [
+            {
+              "text": "Did you know that cheese melts in two "
+            },
+            {
+              "text": "stages! In",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " the first, milkfat is released as a result of hydrophobic reactions. In the second, increased protein movement from heat results in liquid-like behavior."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "stages. In"
+        },
+        {
+          "id": "C",
+          "text": "stages, in"
+        },
+        {
+          "id": "D",
+          "text": "stages? In"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "6376f508",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Although Frank had been instructed to memorize all the states in alphabetical order, he wondered if it would be acceptable to memorize them by region! He preferred studying images.",
+          "runs": [
+            {
+              "text": "Although Frank had been instructed to memorize all the states in alphabetical order, he wondered if it would be acceptable to memorize them by "
+            },
+            {
+              "text": "region! He",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " preferred studying images."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "region? He"
+        },
+        {
+          "id": "C",
+          "text": "region, he"
+        },
+        {
+          "id": "D",
+          "text": "region. He"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "1786a087",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "\"Wind! Water! Fire! Earth!\" the four heroes exclaimed, as they attempted in vain to summon Captain Planet. It's possible that the fifth hero neglected to exclaim, \"Heart!\"",
+          "runs": [
+            {
+              "text": "\"Wind! Water! Fire! Earth!\" the four heroes exclaimed, as they attempted in vain to summon Captain "
+            },
+            {
+              "text": "Planet. It's",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " possible that the fifth hero neglected to exclaim, \"Heart!\""
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "Planet it's"
+        },
+        {
+          "id": "C",
+          "text": "Planet? It's"
+        },
+        {
+          "id": "D",
+          "text": "Planet, it's"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "d0c20ad1",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "End-of-sentence punctuation",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Although scientists believe that their Mars simulation on the surface of Mauna Kea is important scientific research, native Hawaiians wonder if there should be more focus on taking care of Earth? Both Hawaiians and NASA recognize the astronomical significance of the site, but disagree about its use.",
+          "runs": [
+            {
+              "text": "Although scientists believe that their Mars simulation on the surface of Mauna Kea is important scientific research, native Hawaiians wonder if there should be more focus on taking care of "
+            },
+            {
+              "text": "Earth? Both",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " Hawaiians and NASA recognize the astronomical significance of the site, but disagree about its use."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "Earth, both"
+        },
+        {
+          "id": "C",
+          "text": "Earth. Both"
+        },
+        {
+          "id": "D",
+          "text": "Earth! Both"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 153 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            153
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    }
+  ]
+}

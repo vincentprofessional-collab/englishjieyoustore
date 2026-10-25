@@ -2008,6 +2008,11 @@
 .senior-high-v2-inline-control { display: inline-flex; align-items: baseline; gap: 4px; max-width: 100%; margin: 0 4px; color: #245d7b; vertical-align: baseline; }
 .senior-high-v2-inline-control > b { font-size: 12px; }
 .senior-high-v2-inline-control select { max-width: 92px; border: 0; border-bottom: 2px dashed #9a907f; border-radius: 0; background: transparent; color: #245d7b; font: inherit; padding: 0 2px 1px; }
+.senior-high-v2-inline-select { position: relative; display: inline-flex; align-items: center; box-sizing: border-box; min-width: 58px; min-height: 1.5em; border-bottom: 2px dashed #9a907f; padding: 0 30px 1px 4px; vertical-align: baseline; }
+.senior-high-v2-inline-select::after { position: absolute; z-index: 0; top: 50%; right: 3px; color: #111; content: "▼"; font-size: 18px; font-weight: 1000; line-height: 1; pointer-events: none; transform: translateY(-55%); }
+.senior-high-v2-inline-select:focus-within { outline: 2px solid #a9d4ea; outline-offset: 2px; }
+.senior-high-v2-inline-select-value { min-width: 18px; color: #111; font-weight: 800; text-align: center; }
+.senior-high-v2-inline-select select { position: absolute; z-index: 1; top: 0; right: 0; width: 30px; height: 100%; max-width: 30px; margin: 0; border: 0; background: transparent; cursor: pointer; opacity: 0; appearance: none; padding: 0; }
 .senior-high-v2-choice-blank { display: inline-flex; align-items: center; gap: 5px; min-width: 62px; margin: 0 4px; border-bottom: 2px dashed #9a907f; color: #245d7b; text-align: center; vertical-align: baseline; }
 .senior-high-v2-choice-blank.drop-target { min-width: 80px; touch-action: none; }
 .senior-high-v2-choice-blank.assigned { border-bottom-color: var(--accent); border-radius: 4px; background: var(--accent-soft); }
@@ -5817,6 +5822,14 @@ html.reading-fullscreen-active .shell {
   margin: -8px 0 24px;
 }
 
+.reading-passage-byline {
+  color: #505050;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 15px;
+  font-style: italic;
+  margin: -16px 0 24px;
+}
+
 .reading-passage-copy {
   display: grid;
   gap: 22px;
@@ -5913,6 +5926,41 @@ html.reading-fullscreen-active .shell {
   font-family: Arial, "Noto Sans SC", sans-serif;
   font-size: 15px;
   line-height: 1.55;
+}
+
+.reading-shared-option-bank {
+  background: #fffaf0;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  display: grid;
+  gap: 7px 18px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  padding: 12px;
+}
+
+.reading-shared-option-bank > div {
+  align-items: baseline;
+  display: flex;
+  gap: 8px;
+  line-height: 1.45;
+}
+
+.reading-shared-option-bank strong {
+  color: #74530b;
+  flex: 0 0 20px;
+}
+
+.reading-shared-choice-select {
+  background: #fff;
+  border: 1px solid #9b927e;
+  border-radius: 8px;
+  color: #111;
+  font: 700 14px/1.4 Arial, "Noto Sans SC", sans-serif;
+  margin-left: 42px;
+  max-width: 100%;
+  min-height: 40px;
+  padding: 7px 10px;
+  width: min(100%, 360px);
 }
 
 .reading-raw-question-flow {
@@ -6379,6 +6427,327 @@ html.reading-fullscreen-active .shell {
   padding-bottom: 28px;
 }
 
+.reading-fill-table-wrap {
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 2px 0 10px;
+}
+
+.reading-fill-table {
+  border-collapse: collapse;
+  font-family: Arial, "Noto Sans SC", sans-serif;
+  font-size: 14px;
+  min-width: 650px;
+  width: 100%;
+}
+
+.reading-fill-table th,
+.reading-fill-table td {
+  border: 1px solid #9c9a90;
+  line-height: 1.45;
+  padding: 9px 8px;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.reading-fill-table th {
+  background: #f0eee6;
+  font-size: 13px;
+  text-align: center;
+}
+
+.reading-fill-table td:first-child {
+  font-weight: 800;
+  min-width: 92px;
+}
+
+.reading-fill-table td:nth-child(2) {
+  min-width: 132px;
+}
+
+.reading-fill-table td:nth-child(3) {
+  min-width: 75px;
+  text-align: center;
+}
+
+.reading-fill-axis-chart {
+  margin: 22px 0 10px;
+  max-width: 100%;
+  overflow-x: auto;
+  padding-bottom: 6px;
+}
+
+.reading-fill-axis-chart figcaption,
+.reading-fill-axis-chart-rows,
+.reading-fill-axis-chart-axis {
+  min-width: 560px;
+}
+
+.reading-fill-axis-chart figcaption {
+  color: #191919;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 17px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.reading-fill-axis-chart-rows {
+  display: grid;
+  gap: 8px;
+}
+
+.reading-fill-axis-chart-row,
+.reading-fill-axis-chart-axis {
+  align-items: center;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: minmax(170px, 220px) minmax(300px, 1fr);
+}
+
+.reading-fill-axis-chart-label {
+  color: #242424;
+  font-size: 13px;
+  line-height: 1.3;
+  text-align: right;
+}
+
+.reading-fill-axis-chart-label label {
+  align-items: center;
+  display: flex;
+  gap: 7px;
+  justify-content: flex-end;
+}
+
+.reading-fill-axis-chart-label input {
+  background: #fff;
+  border: 1px solid #aaa79d;
+  border-radius: 4px;
+  color: #171717;
+  font: inherit;
+  height: 30px;
+  max-width: 150px;
+  min-width: 92px;
+  padding: 3px 7px;
+  text-align: left;
+}
+
+.reading-fill-axis-chart-track {
+  background: repeating-linear-gradient(
+    to right,
+    #fff 0,
+    #fff calc(16.6667% - 1px),
+    #d8d5cc calc(16.6667% - 1px),
+    #d8d5cc 16.6667%
+  );
+  border-bottom: 1px solid #88867f;
+  height: 19px;
+}
+
+.reading-fill-axis-chart-track > span {
+  background: #747b83;
+  display: block;
+  height: 100%;
+}
+
+.reading-fill-axis-chart-axis {
+  margin-top: 7px;
+}
+
+.reading-fill-axis-chart-axis > div {
+  color: #535353;
+  display: flex;
+  font-size: 12px;
+  justify-content: space-between;
+}
+
+.reading-table-fill-input-wrap {
+  margin: 2px 0;
+  vertical-align: middle;
+}
+
+.reading-table-fill-input-wrap input {
+  min-width: 82px;
+  width: 108px;
+}
+
+.reading-table-fill-input-wrap.no-number input {
+  min-width: 72px;
+  width: 92px;
+}
+
+.reading-table-fill-joiner {
+  white-space: pre-wrap;
+}
+
+.reading-passage-subsection {
+  color: #111;
+  font-size: 17px;
+  margin: 20px 0 10px;
+}
+
+.reading-passage-section-title {
+  color: #111;
+  font-size: 19px;
+  line-height: 1.35;
+  margin: 0 0 8px;
+}
+
+.reading-passage-list {
+  color: #111;
+  display: grid;
+  font-family: Arial, "Noto Sans SC", sans-serif;
+  font-size: 17px;
+  gap: 12px;
+  line-height: 1.72;
+  margin: 4px 0 0;
+  padding-left: 24px;
+}
+
+.reading-passage-figure {
+  background: #fffdf8;
+  border: 1px solid rgba(228, 216, 189, 0.95);
+  border-radius: 12px;
+  color: #111;
+  margin: 16px auto 22px;
+  padding: 14px;
+}
+
+.reading-wheel-figure {
+  max-width: 240px;
+  text-align: center;
+}
+
+.reading-wheel-figure svg {
+  fill: none;
+  height: 180px;
+  max-width: 100%;
+  stroke: #111;
+  stroke-linecap: round;
+  stroke-width: 3;
+  width: 180px;
+}
+
+.reading-passage-figure figcaption {
+  color: #30342f;
+  font-family: Arial, "Noto Sans SC", sans-serif;
+  font-size: 12px;
+  line-height: 1.45;
+  margin-top: 9px;
+}
+
+.reading-word-pair-figure {
+  max-width: 520px;
+  overflow-x: auto;
+}
+
+.reading-word-pair-figure table {
+  border-collapse: collapse;
+  font-family: Arial, "Noto Sans SC", sans-serif;
+  font-size: 13px;
+  min-width: 360px;
+  width: 100%;
+}
+
+.reading-word-pair-figure th,
+.reading-word-pair-figure td {
+  border-bottom: 1px solid #ddd6c7;
+  padding: 4px 8px;
+  text-align: left;
+}
+
+.reading-word-pair-figure th:last-child,
+.reading-word-pair-figure td:last-child {
+  text-align: right;
+}
+
+.reading-data-table-figure {
+  overflow-x: auto;
+}
+
+.reading-data-table-figure table {
+  border-collapse: collapse;
+  font-family: Arial, "Noto Sans SC", sans-serif;
+  font-size: 13px;
+  min-width: 440px;
+  width: 100%;
+}
+
+.reading-data-table-figure th,
+.reading-data-table-figure td {
+  border-bottom: 1px solid #ddd6c7;
+  padding: 4px 8px;
+  text-align: center;
+}
+
+.reading-data-table-figure th:first-child,
+.reading-data-table-figure td:first-child {
+  text-align: left;
+}
+
+.reading-source-reference {
+  border-top: 1px solid var(--line);
+  margin-top: 24px;
+  padding-top: 14px;
+}
+
+.reading-source-reference summary {
+  color: #475045;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.reading-source-reference > div {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  margin-top: 12px;
+}
+
+.reading-source-reference a {
+  color: #475045;
+  display: grid;
+  font-size: 12px;
+  gap: 5px;
+  text-align: center;
+}
+
+.reading-source-reference img {
+  border: 1px solid #ddd6c7;
+  border-radius: 6px;
+  height: 180px;
+  object-fit: contain;
+  width: 100%;
+}
+
+.reading-review-explanations {
+  background: #fffaf0;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  margin-top: 12px;
+  padding: 12px 14px;
+}
+
+.reading-review-explanations summary {
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.reading-review-explanations > p,
+.reading-review-explanations section p {
+  color: #333;
+  font-size: 13px;
+  line-height: 1.55;
+  margin: 8px 0;
+}
+
+.reading-review-explanations section {
+  border-top: 1px solid #e2dac8;
+  margin-top: 10px;
+  padding-top: 8px;
+}
+
 .reading-fill-list {
   display: grid;
   gap: 17px;
@@ -6396,14 +6765,21 @@ html.reading-fullscreen-active .shell {
   padding: 10px;
 }
 
-.reading-word-bank span {
+.reading-word-bank button {
   background: #fff;
   border: 1px solid rgba(228, 216, 189, 0.95);
   border-radius: 999px;
   color: #111;
+  cursor: pointer;
   font-size: 13px;
   font-weight: 900;
   padding: 6px 10px;
+}
+
+.reading-word-bank button:hover,
+.reading-word-bank button:focus-visible {
+  background: #f4e8c7;
+  border-color: #b99a4a;
 }
 
 .reading-fill-list > label {
@@ -32293,6 +32669,12 @@ body .bbc-article-mode-bar .player-menu-trigger.active { color: #245d7b !importa
 body .bbc-full-audio .play-button { color: #245d7b !important; }
 .bbc-mobile-annotation-notice { display: none; }
 
+body .bbc-article-title-shell {
+  display: grid;
+  gap: 4px;
+  width: 100%;
+}
+
 body .bbc-article-hero .bbc-article-title-card {
   background: #172b4d;
   box-sizing: border-box;
@@ -32319,33 +32701,19 @@ body .bbc-article-title-card .bbc-article-date {
   text-align: center;
 }
 
-body .bbc-article-title-card .bbc-article-word-count {
-  color: #fff !important;
-  font-size: clamp(10px, 0.4em, 15px);
+body .bbc-article-hero .bbc-article-word-count {
+  color: #1d1d1b !important;
+  font-size: 15px;
+  justify-self: end;
   margin: 0;
+  position: static;
   text-align: right;
   white-space: nowrap;
 }
 
 body .bbc-article-title-bottom-row {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  position: relative;
+  display: block;
   width: 100%;
-}
-
-body .bbc-article-title-bottom-row .bbc-article-title-line {
-  grid-column: 1 / -1;
-}
-
-@media (min-width: 601px) {
-  body .bbc-article-title-card .bbc-article-word-count {
-    bottom: 28px;
-    color: #85857a !important;
-    font-size: 15px;
-    position: absolute;
-    right: 34px;
-  }
 }
 
 body .bbc-article-title-card h1 {
@@ -32395,6 +32763,10 @@ body .bbc-article-title-card .bbc-article-title-line {
     margin-left: 0;
   }
 
+  body .bbc-article-title-shell {
+    justify-items: stretch;
+  }
+
   body .bbc-article-title-card .bbc-article-title-group {
     justify-items: start;
   }
@@ -32404,18 +32776,11 @@ body .bbc-article-title-card .bbc-article-title-line {
     text-align: left;
   }
 
-  body .bbc-article-title-card .bbc-article-word-count {
-    color: #fff !important;
+  body .bbc-article-hero .bbc-article-word-count {
+    color: #1d1d1b !important;
     font-size: 12px;
-    grid-column: 2;
-    grid-row: 1;
     position: static;
     text-align: right;
-  }
-
-  body .bbc-article-title-bottom-row .bbc-article-title-line {
-    grid-column: 1;
-    justify-self: stretch;
   }
 
   body .bbc-article-title-card .bbc-article-title-line {
@@ -36866,7 +37231,7 @@ body .mobile-bottom-nav a.active { color: #245d7b !important; }
 }
 
 .vocabulary-learning-settings-dialog .vocabulary-learning-settings-definition-options {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .vocabulary-learning-list-practice-status {
@@ -38176,6 +38541,49 @@ body .mobile-bottom-nav a.active { color: #245d7b !important; }
 .exam-prep-answer-source h3 { margin: 10px 0 0; color: #80641d; }
 .exam-prep-answer-source pre { max-height: 70vh; overflow: auto; margin: 0; color: #3d3424; font: inherit; line-height: 1.75; white-space: pre-wrap; overflow-wrap: anywhere; }
 .exam-prep-answer-pre { max-height: 65vh; overflow: auto; margin: 0; font: inherit; line-height: 1.7; white-space: pre-wrap; overflow-wrap: anywhere; }
+.site-section-shell.exam-runner-active { display: block !important; grid-template-columns: minmax(0, 1fr) !important; width: 100%; min-height: 100dvh; margin: 0; gap: 0; }
+.site-section-shell.exam-runner-active > .section-side-nav { display: none !important; }
+.site-section-shell.exam-runner-active > .section-page-content { width: 100%; max-width: none; min-width: 0; margin: 0; padding: 0; }
+.exam-prep-runner.is-gmat[data-paper-font-size] { width: 100%; max-width: none; padding-inline: 0; }
+.exam-prep-runner.is-gmat[data-paper-font-size] .senior-high-v2-runner-header { display: grid; grid-template-columns: minmax(60px, 1fr) minmax(0, auto) minmax(60px, 1fr); grid-template-areas: "back title progress"; align-items: center; gap: 8px 12px; margin-inline: 0; padding-inline: clamp(18px, 3vw, 40px); }
+.exam-prep-runner.is-gmat[data-paper-font-size] .senior-high-v2-runner-header .senior-high-back { grid-area: back; justify-self: start; display: inline-flex; align-items: center; justify-content: center; color: #111; font-size: clamp(42px, 5vw, 60px); font-weight: 1000; line-height: 1; text-decoration: none; }
+.exam-prep-runner.is-gmat[data-paper-font-size] .senior-high-back .vocabulary-back-link-desktop-label { display: inline-flex !important; }
+.exam-prep-runner.is-gmat[data-paper-font-size] .senior-high-back .vocabulary-back-link-mobile-arrow { display: none !important; }
+.exam-prep-runner.is-gmat[data-paper-font-size] .senior-high-v2-runner-title { grid-area: title; justify-content: center; gap: 12px; min-width: 0; text-align: center; }
+.exam-prep-runner.is-gmat[data-paper-font-size] .senior-high-v2-runner-header h1 { margin: 0; text-align: center; }
+.exam-prep-runner.is-gmat[data-paper-font-size] .senior-high-v2-progress { grid-area: progress; justify-self: end; display: block; min-width: 0; text-align: right; white-space: nowrap; }
+.exam-prep-runner.is-gmat[data-paper-font-size] .senior-high-v2-progress strong { font-size: clamp(22px, 3vw, 32px); }
+.exam-prep-runner.is-gmat[data-paper-font-size] :is(.senior-high-v2-sections, .senior-high-v2-question-nav, .exam-prep-reading-groups, .exam-prep-pagination) { margin-inline: 0; }
+.exam-prep-runner.is-gmat[data-paper-font-size="large"] { --exam-paper-font-size: 20px; }
+.exam-prep-runner.is-gmat[data-paper-font-size] .senior-high-v2-stimulus,
+.exam-prep-runner.is-gmat[data-paper-font-size] .senior-high-v2-question-column { font-size: var(--exam-paper-font-size); }
+.exam-prep-runner.is-gmat[data-paper-font-size] .senior-high-question-stem,
+.exam-prep-runner.is-gmat[data-paper-font-size] .senior-high-options button { font-size: var(--exam-paper-font-size); }
+.exam-prep-runner.is-gmat[data-paper-font-size] .exam-prep-question-list { gap: 14px; }
+.exam-prep-runner.is-gmat[data-paper-font-size] .exam-prep-reading-row[data-side-questions="true"] .senior-high-v2-question-column { position: sticky; top: 110px; max-height: calc(100vh - 126px); min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding-right: 0; }
+.exam-prep-runner.is-gmat .senior-high-question-stem { white-space: normal; }
+.exam-prep-reading-groups { display: grid; gap: 22px; }
+.exam-prep-reading-row { gap: 14px; }
+.exam-prep-reading-passage { color: #245d7b; font-size: 20px; line-height: 1.9; }
+.exam-prep-reading-lines { display: grid; min-width: 0; }
+.exam-prep-reading-line { display: grid; grid-template-columns: 42px minmax(0, 1fr); align-items: baseline; column-gap: 12px; min-width: 0; }
+.exam-prep-reading-line-number { color: #667985; font-size: 13px; line-height: inherit; text-align: right; font-variant-numeric: tabular-nums; }
+.exam-prep-reading-line-text { min-width: 0; color: #245d7b; line-height: 1.9; white-space: normal; overflow-wrap: anywhere; }
+.exam-prep-reading-row .senior-high-v2-question-column { display: grid; gap: 14px; min-width: 0; }
+.exam-prep-reading-row .exam-prep-question { min-width: 0; }
+@media (max-width: 900px) {
+  .exam-prep-runner.is-gmat[data-paper-font-size] .exam-prep-reading-row[data-side-questions="true"] .senior-high-v2-question-column { position: static; height: auto; max-height: none; overflow: visible; padding-right: 0; }
+}
+@media (max-width: 700px) {
+  .exam-prep-runner.is-gmat[data-paper-font-size] .senior-high-v2-runner-header { grid-template-columns: minmax(48px, 1fr) minmax(0, auto) minmax(48px, 1fr); gap: 6px 8px; padding-inline: 14px; }
+  .exam-prep-runner.is-gmat[data-paper-font-size] .senior-high-v2-runner-header .senior-high-back { font-size: 42px; }
+  .exam-prep-runner.is-gmat[data-paper-font-size] .senior-high-v2-runner-header h1 { font-size: clamp(23px, 5vw, 34px); }
+  .exam-prep-runner.is-gmat[data-paper-font-size] .senior-high-v2-progress strong { font-size: 22px; }
+}
+@media (max-width: 420px) {
+  .exam-prep-runner.is-gmat[data-paper-font-size] .senior-high-v2-runner-header { grid-template-columns: 1fr auto; grid-template-areas: "back progress" "title title"; }
+  .exam-prep-runner.is-gmat[data-paper-font-size] .senior-high-v2-runner-title { justify-self: center; }
+}
 @media (max-width: 560px) { .exam-prep-paper-submit { align-items: stretch; flex-direction: column; text-align: center; } .exam-prep-pagination { gap: 8px; font-size: 13px; } .exam-prep-pagination button { padding-inline: 10px; } }
 
 .course-admin-editor {
@@ -38293,4 +38701,57 @@ body .mobile-bottom-nav a.active { color: #245d7b !important; }
   .mobile-bottom-nav {
     grid-template-columns: repeat(6, minmax(0, 1fr));
   }
+}
+
+/* Exam runner layout and page refinements carried forward from reviewed work. */
+body .bbc-article-title-shell { display: grid; gap: 4px; width: 100%; }
+body .bbc-article-hero .bbc-article-word-count { color: #1d1d1b !important; font-size: 15px; justify-self: end; margin: 0; position: static; text-align: right; white-space: nowrap; }
+body .bbc-article-title-bottom-row { display: block; width: 100%; }
+.vocabulary-learning-settings-dialog .vocabulary-learning-settings-definition-options { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 600px) {
+  body .bbc-article-title-shell { justify-items: stretch; }
+  body .bbc-article-hero .bbc-article-word-count { font-size: 12px; position: static; }
+}
+.site-section-shell.exam-runner-active { display: block !important; grid-template-columns: minmax(0, 1fr) !important; width: 100%; min-height: 100dvh; margin: 0; gap: 0; }
+.site-section-shell.exam-runner-active > .section-side-nav { display: none !important; }
+.site-section-shell.exam-runner-active > .section-page-content { width: 100%; max-width: none; min-width: 0; margin: 0; padding: 0; }
+.exam-prep-runner.is-gmat[data-paper-font-size] { width: 100%; max-width: none; padding-inline: 0; }
+.exam-prep-runner.is-gmat[data-paper-font-size] .senior-high-v2-runner-header { display: grid; grid-template-columns: minmax(60px, 1fr) minmax(0, auto) minmax(60px, 1fr); grid-template-areas: "back title progress"; align-items: center; gap: 8px 12px; margin-inline: 0; padding-inline: clamp(18px, 3vw, 40px); }
+.exam-prep-runner.is-gmat[data-paper-font-size] .senior-high-v2-runner-header .senior-high-back { grid-area: back; justify-self: start; display: inline-flex; align-items: center; justify-content: center; color: #111; font-size: clamp(42px, 5vw, 60px); font-weight: 1000; line-height: 1; text-decoration: none; }
+.exam-prep-runner.is-gmat[data-paper-font-size] .senior-high-back .vocabulary-back-link-desktop-label { display: inline-flex !important; }
+.exam-prep-runner.is-gmat[data-paper-font-size] .senior-high-back .vocabulary-back-link-mobile-arrow { display: none !important; }
+.exam-prep-runner.is-gmat[data-paper-font-size] .senior-high-v2-runner-title { grid-area: title; justify-content: center; gap: 12px; min-width: 0; text-align: center; }
+.exam-prep-runner.is-gmat[data-paper-font-size] .senior-high-v2-runner-header h1 { margin: 0; text-align: center; }
+.exam-prep-runner.is-gmat[data-paper-font-size] .senior-high-v2-progress { grid-area: progress; justify-self: end; display: block; min-width: 0; text-align: right; white-space: nowrap; }
+.exam-prep-runner.is-gmat[data-paper-font-size] .senior-high-v2-progress strong { font-size: clamp(22px, 3vw, 32px); }
+.exam-prep-runner.is-gmat[data-paper-font-size] :is(.senior-high-v2-sections, .senior-high-v2-question-nav, .exam-prep-reading-groups, .exam-prep-pagination) { margin-inline: 0; }
+.exam-prep-runner.is-gmat[data-paper-font-size="large"] { --exam-paper-font-size: 20px; }
+.exam-prep-runner.is-gmat[data-paper-font-size] .senior-high-v2-stimulus,
+.exam-prep-runner.is-gmat[data-paper-font-size] .senior-high-v2-question-column { font-size: var(--exam-paper-font-size); }
+.exam-prep-runner.is-gmat[data-paper-font-size] .senior-high-question-stem,
+.exam-prep-runner.is-gmat[data-paper-font-size] .senior-high-options button { font-size: var(--exam-paper-font-size); }
+.exam-prep-runner.is-gmat[data-paper-font-size] .exam-prep-question-list { gap: 14px; }
+.exam-prep-runner.is-gmat[data-paper-font-size] .exam-prep-reading-row[data-side-questions="true"] .senior-high-v2-question-column { position: sticky; top: 110px; max-height: calc(100vh - 126px); min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding-right: 0; }
+.exam-prep-runner.is-gmat .senior-high-question-stem { white-space: normal; }
+.exam-prep-reading-groups { display: grid; gap: 22px; }
+.exam-prep-reading-row { gap: 14px; }
+.exam-prep-reading-passage { color: #245d7b; font-size: 20px; line-height: 1.9; }
+.exam-prep-reading-lines { display: grid; min-width: 0; }
+.exam-prep-reading-line { display: grid; grid-template-columns: 42px minmax(0, 1fr); align-items: baseline; column-gap: 12px; min-width: 0; }
+.exam-prep-reading-line-number { color: #667985; font-size: 13px; line-height: inherit; text-align: right; font-variant-numeric: tabular-nums; }
+.exam-prep-reading-line-text { min-width: 0; color: #245d7b; line-height: 1.9; white-space: normal; overflow-wrap: anywhere; }
+.exam-prep-reading-row .senior-high-v2-question-column { display: grid; gap: 14px; min-width: 0; }
+.exam-prep-reading-row .exam-prep-question { min-width: 0; }
+@media (max-width: 900px) {
+  .exam-prep-runner.is-gmat[data-paper-font-size] .exam-prep-reading-row[data-side-questions="true"] .senior-high-v2-question-column { position: static; height: auto; max-height: none; overflow: visible; padding-right: 0; }
+}
+@media (max-width: 700px) {
+  .exam-prep-runner.is-gmat[data-paper-font-size] .senior-high-v2-runner-header { grid-template-columns: minmax(48px, 1fr) minmax(0, auto) minmax(48px, 1fr); gap: 6px 8px; padding-inline: 14px; }
+  .exam-prep-runner.is-gmat[data-paper-font-size] .senior-high-v2-runner-header .senior-high-back { font-size: 42px; }
+  .exam-prep-runner.is-gmat[data-paper-font-size] .senior-high-v2-runner-header h1 { font-size: clamp(23px, 5vw, 34px); }
+  .exam-prep-runner.is-gmat[data-paper-font-size] .senior-high-v2-progress strong { font-size: 22px; }
+}
+@media (max-width: 420px) {
+  .exam-prep-runner.is-gmat[data-paper-font-size] .senior-high-v2-runner-header { grid-template-columns: 1fr auto; grid-template-areas: "back progress" "title title"; }
+  .exam-prep-runner.is-gmat[data-paper-font-size] .senior-high-v2-runner-title { justify-self: center; }
 }

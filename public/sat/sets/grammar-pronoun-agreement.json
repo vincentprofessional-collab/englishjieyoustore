@@ -1,0 +1,6745 @@
+{
+  "id": "grammar-pronoun-agreement",
+  "assessment": "SAT",
+  "test": "Reading and Writing",
+  "domain": "Standard English Conventions",
+  "skill": "Pronoun agreement",
+  "difficulty": "Unrated",
+  "expectedCount": 84,
+  "questionIds": [
+    "2a9ff96e",
+    "a36b1e31",
+    "540d73b3",
+    "6b4573a3",
+    "dc29190c",
+    "9ebea6bc",
+    "1f8bab93",
+    "2dd389eb",
+    "61908abe",
+    "773e9c22",
+    "f605bcb4",
+    "f13fc1f1",
+    "028a9633",
+    "155cec31",
+    "bccb0ce8",
+    "5ce0f918",
+    "22c96a0a",
+    "f96aea22",
+    "8f285765",
+    "bc8c04d5",
+    "f13468d2",
+    "ca94b5c5",
+    "aee8250e",
+    "7c6ac304",
+    "264d592c",
+    "9a37efbb",
+    "cddd3676",
+    "cd89f2fd",
+    "0793ba08",
+    "ffd70ff1",
+    "7ff13f4b",
+    "b7ea81ae",
+    "56d4f63f",
+    "a27aaf85",
+    "bf8aada1",
+    "055aa5d5",
+    "ebe10b1a",
+    "84efac9b",
+    "8dfec3f0",
+    "31b0b1d8",
+    "9ae24db2",
+    "ce5201e6",
+    "2e05dbb5",
+    "47a398f6",
+    "cf45a5ee",
+    "47fa36a8",
+    "15d27be6",
+    "d49a3810",
+    "461246bb",
+    "60f0a22b",
+    "1c35e2eb",
+    "06292e8b",
+    "918920a0",
+    "8cd12a6f",
+    "f2cdc503",
+    "24d7702d",
+    "1106883f",
+    "f2f3083b",
+    "27c8ede7",
+    "499796fa",
+    "b2410b5b",
+    "2775cb80",
+    "46f72055",
+    "c0f819a1",
+    "cf4c02bc",
+    "585a2c15",
+    "78d2ef97",
+    "5eda3105",
+    "93b662b9",
+    "247d1ce8",
+    "50794d77",
+    "a9901a7e",
+    "fd56d430",
+    "1fe2a9fa",
+    "e64d3fd2",
+    "524d6eb4",
+    "a0e6b4a3",
+    "9366bb1b",
+    "9fb5fc59",
+    "bd6c788b",
+    "83ff9470",
+    "b83c2cf3",
+    "bda3a01f",
+    "2d1253e8"
+  ],
+  "sourceRefs": [
+    {
+      "role": "question",
+      "path": "语法竖版成稿.docx",
+      "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6"
+    },
+    {
+      "role": "answer",
+      "path": "语法.pdf",
+      "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d"
+    }
+  ],
+  "questions": [
+    {
+      "id": "2a9ff96e",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The CEO of the tech company announced that she would retire at the end of the year.",
+          "runs": [
+            {
+              "text": "The CEO of the tech company announced that "
+            },
+            {
+              "text": "she",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " would retire at the end of the year."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "they"
+        },
+        {
+          "id": "C",
+          "text": "it"
+        },
+        {
+          "id": "D",
+          "text": "you"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "a36b1e31",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The principal of the school sent a clear message to the school that she was supportive of the diversity initiative.",
+          "runs": [
+            {
+              "text": "The principal of the school sent a clear message to the school that "
+            },
+            {
+              "text": "she was",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " supportive of the diversity initiative."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "it was"
+        },
+        {
+          "id": "C",
+          "text": "they were"
+        },
+        {
+          "id": "D",
+          "text": "you were"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "540d73b3",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The human body is a more complex machine than a computer. Its bones, organs, and systems operate in concert to ensure life and determine health.",
+          "runs": [
+            {
+              "text": "The human body is a more complex machine than a computer. "
+            },
+            {
+              "text": "Its",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " bones, organs, and systems operate in concert to ensure life and determine health."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "Their"
+        },
+        {
+          "id": "C",
+          "text": "Her"
+        },
+        {
+          "id": "D",
+          "text": "His"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "6b4573a3",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In the U.S., we often think of Dr. Martin Luther King Jr. as the original nonviolent resister, but it's important to remember that their role model was Mahatma Gandhi.",
+          "runs": [
+            {
+              "text": "In the U.S., we often think of Dr. Martin Luther King Jr. as the original nonviolent resister, but it's important to remember that "
+            },
+            {
+              "text": "their",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " role model was Mahatma Gandhi."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "one's"
+        },
+        {
+          "id": "C",
+          "text": "our"
+        },
+        {
+          "id": "D",
+          "text": "his"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "dc29190c",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The location of Queen Nefertiti's burial site has remained undiscovered since her death in 1330 B.C. Now, more than three millennia later, their tomb may have finally been found by British archeologist Nicholas Reeves.",
+          "runs": [
+            {
+              "text": "The location of Queen Nefertiti's burial site has remained undiscovered since her death in 1330 B.C. Now, more than three millennia later, "
+            },
+            {
+              "text": "their",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " tomb may have finally been found by British archeologist Nicholas Reeves."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "his"
+        },
+        {
+          "id": "C",
+          "text": "our"
+        },
+        {
+          "id": "D",
+          "text": "her"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "9ebea6bc",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Although the black-tailed jackrabbit and the antelope jackrabbit appear nearly identical, tiny differences in ear size, fur coloring, and speed mark them as separate species.",
+          "runs": [
+            {
+              "text": "Although the black-tailed jackrabbit and the antelope jackrabbit appear nearly identical, tiny differences in ear size, fur coloring, and speed mark "
+            },
+            {
+              "text": "them",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " as separate species."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "it"
+        },
+        {
+          "id": "C",
+          "text": "us"
+        },
+        {
+          "id": "D",
+          "text": "this"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "1f8bab93",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Megan Amram's self-satirizing comedy draws on one's own experiences with women's magazines and gender discrimination.",
+          "runs": [
+            {
+              "text": "Megan Amram's self-satirizing comedy draws on "
+            },
+            {
+              "text": "one's",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " own experiences with women's magazines and gender discrimination."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "its"
+        },
+        {
+          "id": "C",
+          "text": "their"
+        },
+        {
+          "id": "D",
+          "text": "her"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "2dd389eb",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Though Dorothy's shoes were silver in the Wizard of Oz books, it was changed to red in the film.",
+          "runs": [
+            {
+              "text": "Though Dorothy's shoes were silver in the "
+            },
+            {
+              "text": "Wizard of Oz",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "text": " books, "
+            },
+            {
+              "text": "it was",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " changed to red in the film."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "they were"
+        },
+        {
+          "id": "C",
+          "text": "you were"
+        },
+        {
+          "id": "D",
+          "text": "she was"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "61908abe",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The stethoscope was invented by Rene Theophile Hyacinthe Läennec, a male French physician who was too embarrassed to press its ear to a young woman's chest.",
+          "runs": [
+            {
+              "text": "The stethoscope was invented by Rene Theophile Hyacinthe Läennec, a male French physician who was too embarrassed to press "
+            },
+            {
+              "text": "its",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " ear to a young woman's chest."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "her"
+        },
+        {
+          "id": "C",
+          "text": "their"
+        },
+        {
+          "id": "D",
+          "text": "his"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "773e9c22",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Grace Eldering and Pearl Kendrick worked together to develop their pertussis vaccine.",
+          "runs": [
+            {
+              "text": "Grace Eldering and Pearl Kendrick worked together to develop "
+            },
+            {
+              "text": "their",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " pertussis vaccine."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "its"
+        },
+        {
+          "id": "C",
+          "text": "our"
+        },
+        {
+          "id": "D",
+          "text": "her"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "f605bcb4",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Children who are perceptive in distinguishing rhythmic patterns in music also excel in their understanding of grammatical structure.",
+          "runs": [
+            {
+              "text": "Children who are perceptive in distinguishing rhythmic patterns in music also excel in "
+            },
+            {
+              "text": "their",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " understanding of grammatical structure."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "its"
+        },
+        {
+          "id": "C",
+          "text": "his"
+        },
+        {
+          "id": "D",
+          "text": "one's"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "f13fc1f1",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Known as COTSbots (COT for the Crown of Thorns starfish they were constructed to kill), the robots will soon use depth perception, GPS, and other sensors to distinguish and lethally inject their prey.",
+          "runs": [
+            {
+              "text": "Known as COTSbots (COT for the Crown of Thorns starfish they were constructed to kill), the robots will soon use depth perception, GPS, and other sensors to distinguish and lethally inject "
+            },
+            {
+              "text": "their",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " prey."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "its"
+        },
+        {
+          "id": "C",
+          "text": "her"
+        },
+        {
+          "id": "D",
+          "text": "one's"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "028a9633",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In an effort to reduce water evaporation in the Los Angeles reservoir, 96 million \"shade balls\" have been dropped into the water. We are proven to reduce evaporation by 85-90 percent.",
+          "runs": [
+            {
+              "text": "In an effort to reduce water evaporation in the Los Angeles reservoir, 96 million \"shade balls\" have been dropped into the water. "
+            },
+            {
+              "text": "We are",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " proven to reduce evaporation by 85-90 percent."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "They are"
+        },
+        {
+          "id": "C",
+          "text": "It is"
+        },
+        {
+          "id": "D",
+          "text": "He is"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "155cec31",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Although middle children may not reap certain advantages of being the oldest or youngest sibling, he is said to be peacemakers and happy-go-lucky optimists.",
+          "runs": [
+            {
+              "text": "Although middle children may not reap certain advantages of being the oldest or youngest sibling, "
+            },
+            {
+              "text": "he is",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " said to be peacemakers and happy-go-lucky optimists."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "one is"
+        },
+        {
+          "id": "C",
+          "text": "they are"
+        },
+        {
+          "id": "D",
+          "text": "you are"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "bccb0ce8",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Caretakers of the Smithsonian Museum's owls also needed to watch out for themselves; the owls' frequent attacks necessitated special protective suits and helmets.",
+          "runs": [
+            {
+              "text": "Caretakers of the Smithsonian Museum's owls also needed to watch out for "
+            },
+            {
+              "text": "themselves",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": "; the owls' frequent attacks necessitated special protective suits and helmets."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "itself"
+        },
+        {
+          "id": "C",
+          "text": "himself"
+        },
+        {
+          "id": "D",
+          "text": "oneself"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "5ce0f918",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In a recent underwater expedition, a diver off the coast of Madagascar found a 100-pound silver block that may have belonged to the notorious pirate, Captain Kidd. The pirate presumably amassed over $25 million in bounty, but he was executed without disclosing the treasure's location.",
+          "runs": [
+            {
+              "text": "In a recent underwater expedition, a diver off the coast of Madagascar found a 100-pound silver block that may have belonged to the notorious pirate, Captain Kidd. The pirate presumably amassed over $25 million in bounty, but "
+            },
+            {
+              "text": "he was",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " executed without disclosing the treasure's location."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "they were"
+        },
+        {
+          "id": "C",
+          "text": "one was"
+        },
+        {
+          "id": "D",
+          "text": "it was"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "22c96a0a",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Rosa learned to read with Mother Goose's Nursery Rhymes. But it was Shel Silverstein's Where the Sidewalk Ends that she enjoyed most as a child.",
+          "runs": [
+            {
+              "text": "Rosa learned to read with "
+            },
+            {
+              "text": "Mother Goose's Nursery Rhymes.",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "text": " But "
+            },
+            {
+              "text": "it was",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " Shel Silverstein's "
+            },
+            {
+              "text": "Where the Sidewalk Ends",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "text": " that she enjoyed most as a child."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "they are"
+        },
+        {
+          "id": "C",
+          "text": "those are"
+        },
+        {
+          "id": "D",
+          "text": "these were"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "f96aea22",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "As the six fish swam down the river, they suddenly encountered a large bear claw.",
+          "runs": [
+            {
+              "text": "As the six fish swam down the river, "
+            },
+            {
+              "text": "they",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " suddenly encountered a large bear claw."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "it"
+        },
+        {
+          "id": "C",
+          "text": "he or she"
+        },
+        {
+          "id": "D",
+          "text": "you"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "8f285765",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Unlike cows in pastures, when salmon are penned into breeding pools, he tries to escape.",
+          "runs": [
+            {
+              "text": "Unlike cows in pastures, when salmon are penned into breeding pools, "
+            },
+            {
+              "text": "he tries",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " to escape."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "they try"
+        },
+        {
+          "id": "C",
+          "text": "it tries"
+        },
+        {
+          "id": "D",
+          "text": "she tries"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "bc8c04d5",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The Pulitzer Prize honors the best works of journalism each year. They rank among the most prestigious writing awards in the world.",
+          "runs": [
+            {
+              "text": "The Pulitzer Prize honors the best works of journalism each year. "
+            },
+            {
+              "text": "They rank",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " among the most prestigious writing awards in the world."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "It ranks"
+        },
+        {
+          "id": "C",
+          "text": "Those rank"
+        },
+        {
+          "id": "D",
+          "text": "Theirs rank"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "f13468d2",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Although we know him best as a maestro of theater, William Shakespeare considered penning poetry to be a more serious literary endeavor than writing plays. \"The Bard\" crafted more than 150 sonnets, and our first-ever publication was the poem, Venus and Adonis.",
+          "runs": [
+            {
+              "text": "Although we know him best as a maestro of theater, William Shakespeare considered penning poetry to be a more serious literary endeavor than writing plays. \"The Bard\" crafted more than 150 sonnets, and "
+            },
+            {
+              "text": "our",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " first-ever publication was the poem, "
+            },
+            {
+              "text": "Venus and Adonis.",
+              "marks": [
+                "italic"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "his"
+        },
+        {
+          "id": "C",
+          "text": "their"
+        },
+        {
+          "id": "D",
+          "text": "they"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "ca94b5c5",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Opinions on how we should resolve the current scarcity of district court judges are diverse: some argue that it would be better to create and fill new positions, while others argue that it should streamline the process of nomination and confirmation that has left many existing positions vacant.",
+          "runs": [
+            {
+              "text": "Opinions on how we should resolve the current scarcity of district court judges are diverse: some argue that it would "
+            },
+            {
+              "text": "be better to create and fill new positions, while others argue that "
+            },
+            {
+              "text": "it",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " should streamline the process of nomination and confirmation that has left many existing positions vacant."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "we"
+        },
+        {
+          "id": "C",
+          "text": "I"
+        },
+        {
+          "id": "D",
+          "text": "they"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "aee8250e",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Following the great trapeze stunt in the middle of Grand Central station, no witnesses could say whether the acrobats were men or women, children or adults. \"One was just too fast,\" one witness stated.",
+          "runs": [
+            {
+              "text": "Following the great trapeze stunt in the middle of Grand Central station, no witnesses could say whether the acrobats were men or women, children or adults. \""
+            },
+            {
+              "text": "One was",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " just too fast,\" one witness stated."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "He was"
+        },
+        {
+          "id": "C",
+          "text": "We were"
+        },
+        {
+          "id": "D",
+          "text": "They were"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "7c6ac304",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "If one truly wants to be a samurai, one must fight, dress, and live like a samurai, embodying the many values of the warrior caste.",
+          "runs": [
+            {
+              "text": "If one truly wants to be a samurai, "
+            },
+            {
+              "text": "one",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " must fight, dress, and live like a samurai, embodying the many values of the warrior caste."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "you"
+        },
+        {
+          "id": "C",
+          "text": "they"
+        },
+        {
+          "id": "D",
+          "text": "we"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "264d592c",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Although almost everyone agrees that there is room for improvement in the United Nations, there are many different opinions on how: some suggest that the organization needs reform, while others argue that they need to be abandoned in favor of a better model.",
+          "runs": [
+            {
+              "text": "Although almost everyone agrees that there is room for improvement in the United Nations, there are many different opinions on how: some suggest that the organization needs reform, while others argue that "
+            },
+            {
+              "text": "they need",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " to be abandoned in favor of a better model."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "he needs"
+        },
+        {
+          "id": "C",
+          "text": "it needs"
+        },
+        {
+          "id": "D",
+          "text": "those need"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "9a37efbb",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Because frog eggs have no shell, yet must be kept hydrated to ensure proper development, external moisture is imperative for its development.",
+          "runs": [
+            {
+              "text": "Because frog eggs have no shell, yet must be kept hydrated to ensure proper development, external moisture is imperative for "
+            },
+            {
+              "text": "its",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " development."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "his"
+        },
+        {
+          "id": "C",
+          "text": "their"
+        },
+        {
+          "id": "D",
+          "text": "our"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "cddd3676",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The Phantom of the Opera holds the record for longest running Broadway show. Since its premiere in 1988, they have been staged nearly 11,500 times.",
+          "runs": [
+            {
+              "text": "The Phantom of the Opera",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "text": " holds the record for longest running Broadway show. Since its premiere in 1988, "
+            },
+            {
+              "text": "they have",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " been staged nearly 11,500 times."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "one has"
+        },
+        {
+          "id": "C",
+          "text": "he has"
+        },
+        {
+          "id": "D",
+          "text": "it has"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "cd89f2fd",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Nobel Prizes are awarded for economics, literature, the sciences, and peace-making. You recognize individuals and research teams that make long-lasting and important contributions to their fields.",
+          "runs": [
+            {
+              "text": "Nobel Prizes are awarded for economics, literature, the sciences, and peace-making. "
+            },
+            {
+              "text": "You recognize",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " individuals and research teams that make long-lasting and important contributions to their fields."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "I recognize"
+        },
+        {
+          "id": "C",
+          "text": "It recognizes"
+        },
+        {
+          "id": "D",
+          "text": "They recognize"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "0793ba08",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "When the professor introduced himself on the first day, Molly realized with embarrassment that he was speaking Spanish and they were in the wrong class.",
+          "runs": [
+            {
+              "text": "When the professor introduced himself on the first day, "
+            },
+            {
+              "text": "Molly",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " realized with embarrassment that he was speaking Spanish and they were in the wrong class."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "Harriett"
+        },
+        {
+          "id": "C",
+          "text": "Molly and Harriett"
+        },
+        {
+          "id": "D",
+          "text": "DELETE the underlined portion"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "ffd70ff1",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "At a public school called Quest to Learn in New York, teachers use video games to teach because students love playing them.",
+          "runs": [
+            {
+              "text": "At a public school called Quest to Learn in New York, teachers use "
+            },
+            {
+              "text": "video games",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " to teach because students love playing them."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "a video game"
+        },
+        {
+          "id": "C",
+          "text": "an electronic game"
+        },
+        {
+          "id": "D",
+          "text": "DELETE the underlined portion."
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "7ff13f4b",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "As soon as the United Nations’ packages of food and supplies arrived at the site of the earthquake, I delivered it to the Red Cross dispatch center.",
+          "runs": [
+            {
+              "text": "As soon as the United Nations’ "
+            },
+            {
+              "text": "packages",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " of food and supplies arrived at the site of the earthquake, I delivered it to the Red Cross dispatch center."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "shipment"
+        },
+        {
+          "id": "C",
+          "text": "parcels"
+        },
+        {
+          "id": "D",
+          "text": "freights"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "b7ea81ae",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "All the members of Boy Scout Troop 115 made sure that he brought a water bottle on the camping trip.",
+          "runs": [
+            {
+              "text": "All the members",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " of Boy Scout Troop 115 made sure that he brought a water bottle on the camping trip."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "Every member"
+        },
+        {
+          "id": "C",
+          "text": "All"
+        },
+        {
+          "id": "D",
+          "text": "DELETE the underlined portion."
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "56d4f63f",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The dead pirate's treasure hoard spread its curse to the archeologist who found it, causing her to bark every time she tried to talk.",
+          "runs": [
+            {
+              "text": "The dead pirate's "
+            },
+            {
+              "text": "treasure hoard",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " spread its curse to the archeologist who found it, causing her to bark every time she tried to talk."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "treasure hoards"
+        },
+        {
+          "id": "C",
+          "text": "hoards of treasure"
+        },
+        {
+          "id": "D",
+          "text": "hoarded treasures"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "a27aaf85",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Although some scholars have suggested that baths were taken infrequently in the Medieval period, primary sources indicate that it was a relatively common practice.",
+          "runs": [
+            {
+              "text": "Although some scholars have suggested that "
+            },
+            {
+              "text": "baths were taken infrequently",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " in the Medieval period, primary sources indicate that it was a relatively common practice."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "bathing was an infrequent event"
+        },
+        {
+          "id": "C",
+          "text": "infrequent baths were normal"
+        },
+        {
+          "id": "D",
+          "text": "baths were few and far in between"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "bf8aada1",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "China’s Great Green Wall is the government’s full-fledged attempt to intentionally increase vegetation with tree planting projects, but scientists have yet to determine its effectiveness.",
+          "runs": [
+            {
+              "text": "China’s Great Green Wall is the government’s full-fledged attempt to intentionally increase vegetation with tree planting projects, but scientists have yet to determine "
+            },
+            {
+              "text": "its",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " effectiveness."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "their"
+        },
+        {
+          "id": "C",
+          "text": "this"
+        },
+        {
+          "id": "D",
+          "text": "that"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "055aa5d5",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "When we won the lottery, we didn't expect that dozens of long lost relatives would show up on our doorstep.",
+          "runs": [
+            {
+              "text": "When we won the lottery, we didn't expect that dozens of long lost relatives would show up on "
+            },
+            {
+              "text": "our",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " doorstep."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "their"
+        },
+        {
+          "id": "C",
+          "text": "one's"
+        },
+        {
+          "id": "D",
+          "text": "its"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "ebe10b1a",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Four varieties of puffin exist today, and each variety has distinctly different markings on they're beak.",
+          "runs": [
+            {
+              "text": "Four varieties of puffin exist today, and each variety has distinctly different markings on "
+            },
+            {
+              "text": "they're",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " beak."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "that"
+        },
+        {
+          "id": "C",
+          "text": "its"
+        },
+        {
+          "id": "D",
+          "text": "it's"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "84efac9b",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Eugène Delacroix's famous painting Liberty Leading the People celebrates the moment, during the 1830 French Revolution, that the people fought for her liberty.",
+          "runs": [
+            {
+              "text": "Eugène Delacroix's famous painting "
+            },
+            {
+              "text": "Liberty Leading the People",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "text": " celebrates the moment, during the 1830 French Revolution, that the people fought for "
+            },
+            {
+              "text": "her",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " liberty."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "their"
+        },
+        {
+          "id": "C",
+          "text": "its"
+        },
+        {
+          "id": "D",
+          "text": "it's"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "8dfec3f0",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Achieving an Olympic gold medal was the pinnacle of Julia’s professional career, but it disrupted her personal life.",
+          "runs": [
+            {
+              "text": "Achieving an Olympic gold medal was the pinnacle of Julia’s professional career, but "
+            },
+            {
+              "text": "it",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " disrupted her personal life."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "they"
+        },
+        {
+          "id": "C",
+          "text": "she"
+        },
+        {
+          "id": "D",
+          "text": "he"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "31b0b1d8",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In some isolated parts of the world where educational resources are scarce, nonprofits are setting up computer kiosks that provide children with the opportunity to enrich their learning.",
+          "runs": [
+            {
+              "text": "In some isolated parts of the world where educational resources are scarce, nonprofits are setting up computer kiosks that provide children with the opportunity to enrich "
+            },
+            {
+              "text": "their",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " learning."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "they're"
+        },
+        {
+          "id": "C",
+          "text": "its"
+        },
+        {
+          "id": "D",
+          "text": "them"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "9ae24db2",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Although deforestation can provide economic benefits, they have negative effects on the biodiversity of an ecosystem.",
+          "runs": [
+            {
+              "text": "Although deforestation can provide economic benefits, "
+            },
+            {
+              "text": "they have",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " negative effects on the biodiversity of an ecosystem."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "those have"
+        },
+        {
+          "id": "C",
+          "text": "it has"
+        },
+        {
+          "id": "D",
+          "text": "these have"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "ce5201e6",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The brothers, who were accountants, always said the most important thing they mother taught was how to balance a checkbook.",
+          "runs": [
+            {
+              "text": "The brothers, who were accountants, always said the most important thing "
+            },
+            {
+              "text": "they mother taught",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " was how to balance a checkbook."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "his mother taught"
+        },
+        {
+          "id": "C",
+          "text": "their mother taught them"
+        },
+        {
+          "id": "D",
+          "text": "they mother taught them"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "2e05dbb5",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Training dolphins requires a deep appreciation for its friendly nature and human-like intelligence.",
+          "runs": [
+            {
+              "text": "Training dolphins requires a deep appreciation for "
+            },
+            {
+              "text": "its",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " friendly nature and human-like intelligence."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "their"
+        },
+        {
+          "id": "C",
+          "text": "his"
+        },
+        {
+          "id": "D",
+          "text": "her"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "47a398f6",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Aside from humans, only higher primates, dolphins, killer whales, and elephants are able to recognize them in a mirror.",
+          "runs": [
+            {
+              "text": "Aside from humans, only higher primates, dolphins, killer whales, and elephants are able to recognize "
+            },
+            {
+              "text": "them",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " in a mirror."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "itself"
+        },
+        {
+          "id": "C",
+          "text": "himself or herself"
+        },
+        {
+          "id": "D",
+          "text": "themselves"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "cf45a5ee",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The study abroad advisor asked the students to protect themselves in Africa by taking malaria medication.",
+          "runs": [
+            {
+              "text": "The study abroad advisor asked the students to protect "
+            },
+            {
+              "text": "themselves",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " in Africa by taking malaria medication."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "herself"
+        },
+        {
+          "id": "C",
+          "text": "itself"
+        },
+        {
+          "id": "D",
+          "text": "ourselves"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "47fa36a8",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Winston and Hallie put distinct stickers on their black suitcase so that they could spot it at the airport.",
+          "runs": [
+            {
+              "text": "Winston and Hallie put distinct stickers on "
+            },
+            {
+              "text": "their",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " black suitcase so that they could spot it at the airport."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "his and her"
+        },
+        {
+          "id": "C",
+          "text": "one's"
+        },
+        {
+          "id": "D",
+          "text": "they're"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "15d27be6",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In the comedy film Death at a Funeral, the patriarch of the family dies and the protagonists are shocked to discover that they didn't know one at all.",
+          "runs": [
+            {
+              "text": "In the comedy film "
+            },
+            {
+              "text": "Death at a Funeral",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "text": ", the patriarch of the family dies and the protagonists are shocked to discover that they didn't know "
+            },
+            {
+              "text": "one",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " at all."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "her"
+        },
+        {
+          "id": "C",
+          "text": "him"
+        },
+        {
+          "id": "D",
+          "text": "it"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "d49a3810",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Motorcyclists should inspect their helmets and check the motorcycle’s tires before you ride.",
+          "runs": [
+            {
+              "text": "Motorcyclists should inspect their helmets and check the motorcycle’s tires before "
+            },
+            {
+              "text": "you ride.",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "he rides."
+        },
+        {
+          "id": "C",
+          "text": "it rides."
+        },
+        {
+          "id": "D",
+          "text": "they ride."
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "461246bb",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "A career in engineering can be very exciting. You may not enjoy the many hours of working on fine details, but it gets the satisfaction of seeing your bridge constructed.",
+          "runs": [
+            {
+              "text": "A career in engineering can be very exciting. You may not enjoy the many hours of working on fine details, but "
+            },
+            {
+              "text": "it gets",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " the satisfaction of seeing your bridge constructed."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "you get"
+        },
+        {
+          "id": "C",
+          "text": "it's"
+        },
+        {
+          "id": "D",
+          "text": "they get"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "60f0a22b",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Before you cross the street, one should always look both ways.",
+          "runs": [
+            {
+              "text": "Before you cross the street, "
+            },
+            {
+              "text": "one",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " should always look both ways."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "you"
+        },
+        {
+          "id": "C",
+          "text": "he or she"
+        },
+        {
+          "id": "D",
+          "text": "they"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "1c35e2eb",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Although robots will one day help with household chores, it will never completely replace maids.",
+          "runs": [
+            {
+              "text": "Although robots will one day help with household chores, "
+            },
+            {
+              "text": "it",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " will never completely replace maids."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "they"
+        },
+        {
+          "id": "C",
+          "text": "he"
+        },
+        {
+          "id": "D",
+          "text": "you"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "06292e8b",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "One should obtain all necessary malaria shots before one visits Africa.",
+          "runs": [
+            {
+              "text": "One should obtain all necessary malaria shots before "
+            },
+            {
+              "text": "one",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " visits Africa."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "them"
+        },
+        {
+          "id": "C",
+          "text": "you"
+        },
+        {
+          "id": "D",
+          "text": "it"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "918920a0",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "As the children sang along to the old songs of the Sound of Music, they began to feel happy.",
+          "runs": [
+            {
+              "text": "As the children sang along to the old songs of the "
+            },
+            {
+              "text": "Sound of Music",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "text": ", "
+            },
+            {
+              "text": "they",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " began to feel happy."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "he"
+        },
+        {
+          "id": "C",
+          "text": "you"
+        },
+        {
+          "id": "D",
+          "text": "it"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "8cd12a6f",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "For a boat to move forward, you must have enough force to push its own weight in water out of the way.",
+          "runs": [
+            {
+              "text": "For a boat to move forward, "
+            },
+            {
+              "text": "you",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " must have enough force to push its own weight in water out of the way."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "it"
+        },
+        {
+          "id": "C",
+          "text": "we"
+        },
+        {
+          "id": "D",
+          "text": "they"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "f2cdc503",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Happiness is a state of mind we all strive to achieve; however, it is sometimes difficult to obtain.",
+          "runs": [
+            {
+              "text": "Happiness is a state of mind we all strive to achieve; however, "
+            },
+            {
+              "text": "it is",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " sometimes difficult to obtain."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "he is"
+        },
+        {
+          "id": "C",
+          "text": "you are"
+        },
+        {
+          "id": "D",
+          "text": "they are"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "24d7702d",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "When tourists visit the Las Vegas Strip, you will find Paris, Venice, pirates and a volcano—all within a four-mile stretch!",
+          "runs": [
+            {
+              "text": "When tourists visit the Las Vegas Strip, "
+            },
+            {
+              "text": "you",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " will find Paris, Venice, pirates and a volcano—all within a four-mile stretch!"
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "yours"
+        },
+        {
+          "id": "C",
+          "text": "we"
+        },
+        {
+          "id": "D",
+          "text": "they"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "1106883f",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "An Actor Prepares, Building a Character, and Creating a Role describe Constantin Stanislavski's \"System\" of acting. Some are among the most read books on the craft.",
+          "runs": [
+            {
+              "text": "An Actor Prepares, Building a Character, and Creating a Role",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "text": " describe Constantin Stanislavski's \"System\" of acting. "
+            },
+            {
+              "text": "Some are",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " among the most read books on the craft."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "It is"
+        },
+        {
+          "id": "C",
+          "text": "They are"
+        },
+        {
+          "id": "D",
+          "text": "Ours are"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "f2f3083b",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Although Facebook has become the most popular social media site, it still competes with Instagram, Snapchat, and LinkedIn for user time.",
+          "runs": [
+            {
+              "text": "Although Facebook has become the most popular social media site, "
+            },
+            {
+              "text": "it",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " still competes with Instagram, Snapchat, and LinkedIn for user time."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "they"
+        },
+        {
+          "id": "C",
+          "text": "he"
+        },
+        {
+          "id": "D",
+          "text": "You"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "27c8ede7",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "When you become the President of the United States, you should address the inequalities in the education system.",
+          "runs": [
+            {
+              "text": "When you become the President of the United States, "
+            },
+            {
+              "text": "you",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " should address the inequalities in the education system."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "they"
+        },
+        {
+          "id": "C",
+          "text": "he"
+        },
+        {
+          "id": "D",
+          "text": "it"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "499796fa",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "When you become an adult, one must assume many responsibilities such as money management, food preparation, and housekeeping.",
+          "runs": [
+            {
+              "text": "When you become an adult, "
+            },
+            {
+              "text": "one",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " must assume many responsibilities such as money management, food preparation, and housekeeping."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "they"
+        },
+        {
+          "id": "C",
+          "text": "you"
+        },
+        {
+          "id": "D",
+          "text": "he or she"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "b2410b5b",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Though kangaroos seem docile, males can be fiercely competitive when he search for mates.",
+          "runs": [
+            {
+              "text": "Though kangaroos seem docile, males can be fiercely competitive when "
+            },
+            {
+              "text": "he",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " search for mates."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "it"
+        },
+        {
+          "id": "C",
+          "text": "they"
+        },
+        {
+          "id": "D",
+          "text": "she"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "2775cb80",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Woolly rhinos once made its home in places as diverse as Scotland and South Korea.",
+          "runs": [
+            {
+              "text": "Woolly rhinos once made "
+            },
+            {
+              "text": "its",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " home in places as diverse as Scotland and South Korea."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "his"
+        },
+        {
+          "id": "C",
+          "text": "our"
+        },
+        {
+          "id": "D",
+          "text": "their"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "46f72055",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "One of the most devastating things for a young child is when they lose a comfort object such as a blanket or stuffed animal.",
+          "runs": [
+            {
+              "text": "One of the most devastating things for a young child is when "
+            },
+            {
+              "text": "they lose",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " a comfort object such as a blanket or stuffed animal."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "he or she loses"
+        },
+        {
+          "id": "C",
+          "text": "you lose"
+        },
+        {
+          "id": "D",
+          "text": "we lose"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "c0f819a1",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Breakfast is one of the richest and most varied world traditions. As you traverse the globe, he may sit down to a bowl of steamy rice porridge in Thailand, strong coffee and oatmeal in Iceland, or fried doughnuts and coconut milk in Kenya.",
+          "runs": [
+            {
+              "text": "Breakfast is one of the richest and most varied world traditions. As you traverse the globe, "
+            },
+            {
+              "text": "he",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " may sit down to a bowl of steamy rice porridge in Thailand, strong coffee and oatmeal in Iceland, or fried doughnuts and coconut milk in Kenya."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "one"
+        },
+        {
+          "id": "C",
+          "text": "you"
+        },
+        {
+          "id": "D",
+          "text": "they"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "cf4c02bc",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "It’s important for members of the Boy Scouts to practice communication skills so that they can work with their patrol.",
+          "runs": [
+            {
+              "text": "It’s important for members of the Boy Scouts to practice communication skills so that "
+            },
+            {
+              "text": "they",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " can work with their patrol."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "he"
+        },
+        {
+          "id": "C",
+          "text": "it"
+        },
+        {
+          "id": "D",
+          "text": "you"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "585a2c15",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The gladiator was surrounded by too many beasts and savages; he had to rely on the other warriors for assistance.",
+          "runs": [
+            {
+              "text": "The gladiator was surrounded by too many beasts and savages; "
+            },
+            {
+              "text": "he",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " had to rely on the other warriors for assistance."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "they"
+        },
+        {
+          "id": "C",
+          "text": "it"
+        },
+        {
+          "id": "D",
+          "text": "you"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "78d2ef97",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Although all-terrain vehicles are best suited for rugged environments such as forests or sand dunes, it can also be used in small towns where the streets are too narrow for cars.",
+          "runs": [
+            {
+              "text": "Although all-terrain vehicles are best suited for rugged environments such as forests or sand dunes, "
+            },
+            {
+              "text": "it",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " can also be used in small towns where the streets are too narrow for cars."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "you"
+        },
+        {
+          "id": "C",
+          "text": "we"
+        },
+        {
+          "id": "D",
+          "text": "they"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "5eda3105",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Although Great White Sharks are responsible for one-third to one-half of all shark attacks worldwide, research suggests my attacks are \"sample bites\" out of curiosity, not a desire to hunt and eat humans.",
+          "runs": [
+            {
+              "text": "Although Great White Sharks are responsible for one-third to one-half of all shark attacks worldwide, research suggests "
+            },
+            {
+              "text": "my attacks are",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " \"sample bites\" out of curiosity, not a desire to hunt and eat humans."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "their attacks are"
+        },
+        {
+          "id": "C",
+          "text": "her attacks are"
+        },
+        {
+          "id": "D",
+          "text": "our attacks are"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "93b662b9",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Did your mayor research all the arguments for and against the measure before he voted on it?",
+          "runs": [
+            {
+              "text": "Did your mayor research all the arguments for and against the measure before "
+            },
+            {
+              "text": "he",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " voted on it?"
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "they"
+        },
+        {
+          "id": "C",
+          "text": "it"
+        },
+        {
+          "id": "D",
+          "text": "you"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "247d1ce8",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In the past, mathematicians had limited resources available; they had to rely on an abacus for counting.",
+          "runs": [
+            {
+              "text": "In the past, mathematicians had limited resources available; "
+            },
+            {
+              "text": "they",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " had to rely on an abacus for counting."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "you"
+        },
+        {
+          "id": "C",
+          "text": "he or she"
+        },
+        {
+          "id": "D",
+          "text": "it"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "50794d77",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "People with rich imaginations tend to be talented architects because he or she can visualize how to manipulate spaces.",
+          "runs": [
+            {
+              "text": "People with rich imaginations tend to be talented architects because "
+            },
+            {
+              "text": "he or she",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " can visualize how to manipulate spaces."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "one"
+        },
+        {
+          "id": "C",
+          "text": "they"
+        },
+        {
+          "id": "D",
+          "text": "you"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "a9901a7e",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Starfish are, remarkably, able to clone itself by literally tearing off a limb; that limb then undergoes its own process of rapid cell regeneration.",
+          "runs": [
+            {
+              "text": "Starfish are, remarkably, able to clone "
+            },
+            {
+              "text": "itself",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " by literally tearing off a limb; that limb then undergoes its own process of rapid cell regeneration."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "himself"
+        },
+        {
+          "id": "C",
+          "text": "themselves"
+        },
+        {
+          "id": "D",
+          "text": "oneself"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "fd56d430",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The members of the research team had built various multidisciplinary research collaborations and partnerships in order to facilitate clinical applications of his efforts—such applications would be the culmination of the project into which everyone had invested so much time.",
+          "runs": [
+            {
+              "text": "The members of the research team had built various multidisciplinary research collaborations and partnerships in order to facilitate clinical applications of "
+            },
+            {
+              "text": "his",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " efforts—such applications would be the culmination of the project into which everyone had invested so much time."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "her"
+        },
+        {
+          "id": "C",
+          "text": "their"
+        },
+        {
+          "id": "D",
+          "text": "its"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "1fe2a9fa",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Crybaby Brand’s There-There Ice Cream Sandwich, a delicious dessert, was my nephew's first request after her trip to the dentist.",
+          "runs": [
+            {
+              "text": "Crybaby Brand’s There-There Ice Cream Sandwich, a delicious dessert, was my "
+            },
+            {
+              "text": "nephew's",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " first request after her trip to the dentist."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "niece's"
+        },
+        {
+          "id": "C",
+          "text": "cousins'"
+        },
+        {
+          "id": "D",
+          "text": "proteges'"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "e64d3fd2",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Shari knew something was awry when a voice from the chicken coop said, \"No one here but we chickens.\"",
+          "runs": [
+            {
+              "text": "Shari knew something was awry when a voice from the chicken coop said, \"No one here but "
+            },
+            {
+              "text": "we chickens",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": ".\""
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "them"
+        },
+        {
+          "id": "C",
+          "text": "us"
+        },
+        {
+          "id": "D",
+          "text": "they"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "524d6eb4",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "There are nine known species of hammerhead shark. Although we are fierce predators, attacks on humans are rare.",
+          "runs": [
+            {
+              "text": "There are nine known species of hammerhead shark. Although "
+            },
+            {
+              "text": "we",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " are fierce predators, attacks on humans are rare."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "they"
+        },
+        {
+          "id": "C",
+          "text": "ours"
+        },
+        {
+          "id": "D",
+          "text": "mine"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "a0e6b4a3",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "After they were hypnotized by the magician, the audience members offered him a hoard of cash and jewelry.",
+          "runs": [
+            {
+              "text": "After "
+            },
+            {
+              "text": "they were",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " hypnotized by the magician, the audience members offered him a hoard of cash and jewelry."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "you were"
+        },
+        {
+          "id": "C",
+          "text": "it was"
+        },
+        {
+          "id": "D",
+          "text": "one was"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "9366bb1b",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "While their namesake, Narcissus, comes from ancient Greek mythology, Narcissistic Personality Disorder was first described in the 1914 essay, On Narcissism, by Sigmund Freud.",
+          "runs": [
+            {
+              "text": "While "
+            },
+            {
+              "text": "their",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " namesake, Narcissus, comes from ancient Greek mythology, Narcissistic Personality Disorder was first described in the 1914 essay, "
+            },
+            {
+              "text": "On Narcissism,",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "text": " by Sigmund Freud."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "its"
+        },
+        {
+          "id": "C",
+          "text": "his"
+        },
+        {
+          "id": "D",
+          "text": "my"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "9fb5fc59",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The naturalist, who had a reputation as one of the few experts on all such issues, embarrassed oneself by incorrectly identifying the very common tree.",
+          "runs": [
+            {
+              "text": "The naturalist, who had a reputation as one of the few experts on all such issues, embarrassed"
+            },
+            {
+              "text": " "
+            },
+            {
+              "text": "oneself",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " by incorrectly identifying the very common tree."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "themselves"
+        },
+        {
+          "id": "C",
+          "text": "itself"
+        },
+        {
+          "id": "D",
+          "text": "himself"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "bd6c788b",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Students who competed in speech and debate exhibited improved communication skills, because they had to phrase the arguments in a rhetorically effective way.",
+          "runs": [
+            {
+              "text": "Students who competed in speech and debate exhibited improved communication skills, because"
+            },
+            {
+              "text": " "
+            },
+            {
+              "text": "they",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " had to phrase the arguments in a rhetorically effective way."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "he"
+        },
+        {
+          "id": "C",
+          "text": "you"
+        },
+        {
+          "id": "D",
+          "text": "it"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "83ff9470",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "According to a recent study using geographic data, the Earth should actually have around three trillion trees on our surface.",
+          "runs": [
+            {
+              "text": "According to a recent study using geographic data, the Earth should actually have around three trillion trees on "
+            },
+            {
+              "text": "our",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " surface."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "my"
+        },
+        {
+          "id": "C",
+          "text": "their"
+        },
+        {
+          "id": "D",
+          "text": "its"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "b83c2cf3",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In a new TV series, Bryan Cranston is transformed (through the magic of extensive prosthetics, makeup, and costuming) into the spitting image of their character, Lyndon B. Johnson.",
+          "runs": [
+            {
+              "text": "In a new TV series, Bryan Cranston is transformed (through the magic of extensive prosthetics, makeup, and costuming) into the spitting image of "
+            },
+            {
+              "text": "their",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " character, Lyndon B. Johnson."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "our"
+        },
+        {
+          "id": "C",
+          "text": "his"
+        },
+        {
+          "id": "D",
+          "text": "its"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "bda3a01f",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "If history and architecture interest you, visit Paris, which offers theirs in abundance.",
+          "runs": [
+            {
+              "text": "If history and architecture interest you, visit Paris, which offers "
+            },
+            {
+              "text": "theirs",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " in abundance."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "them"
+        },
+        {
+          "id": "C",
+          "text": "it"
+        },
+        {
+          "id": "D",
+          "text": "us"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "2d1253e8",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Pronoun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "When people try to learn a foreign language, particularly one that contains unfamiliar vowels or unexpected syntax, he or she must overcome the initial struggle to form new sounds or comprehend different sentence structures.",
+          "runs": [
+            {
+              "text": "When people try to learn a foreign language, particularly one that contains unfamiliar vowels or unexpected syntax, "
+            },
+            {
+              "text": "he or she",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " must overcome the initial struggle to form new sounds or comprehend different sentence structures."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "they"
+        },
+        {
+          "id": "C",
+          "text": "it"
+        },
+        {
+          "id": "D",
+          "text": "one"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 147 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            147
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    }
+  ]
+}

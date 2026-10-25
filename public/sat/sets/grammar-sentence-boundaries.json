@@ -1,0 +1,5008 @@
+{
+  "id": "grammar-sentence-boundaries",
+  "assessment": "SAT",
+  "test": "Reading and Writing",
+  "domain": "Standard English Conventions",
+  "skill": "Sentence boundaries",
+  "difficulty": "Unrated",
+  "expectedCount": 63,
+  "questionIds": [
+    "5543ca13",
+    "38b08e64",
+    "b3ffb41c",
+    "ca590847",
+    "2331a756",
+    "458b2e29",
+    "ecb2eecf",
+    "3d25cf12",
+    "8b4e9c05",
+    "22dcdd91",
+    "31267262",
+    "866a5002",
+    "dff20c80",
+    "d8cf6f42",
+    "4684a674",
+    "66c90237",
+    "93401ac9",
+    "8fd8365b",
+    "ef992930",
+    "aeb99d5b",
+    "ea3985f8",
+    "8b52ad86",
+    "a6f0981f",
+    "2e5e72ad",
+    "8fcbeced",
+    "de493f05",
+    "00b3c14c",
+    "9cceba4c",
+    "c83c7473",
+    "f0d3e68e",
+    "2eeaa2e7",
+    "85b113d0",
+    "80854614",
+    "cc6c1232",
+    "8f423767",
+    "4c70559f",
+    "7a286d9d",
+    "8940ff28",
+    "cd6f2ec5",
+    "dc2d30df",
+    "dba39d78",
+    "565c3341",
+    "9030cb3d",
+    "4bfbad32",
+    "b05494a9",
+    "23823cca",
+    "58fc397a",
+    "58e0fab9",
+    "703ddee9",
+    "d4dd724c",
+    "21ca05bc",
+    "d5f28605",
+    "e216543d",
+    "2d81fc49",
+    "881e8d75",
+    "8c13ac1d",
+    "1260bbdf",
+    "862afe97",
+    "7ba69a4b",
+    "f3f732d7",
+    "d4cbcba3",
+    "534771ef",
+    "7d86c445"
+  ],
+  "sourceRefs": [
+    {
+      "role": "question",
+      "path": "语法竖版成稿.docx",
+      "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6"
+    },
+    {
+      "role": "answer",
+      "path": "语法.pdf",
+      "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d"
+    }
+  ],
+  "questions": [
+    {
+      "id": "5543ca13",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "While they are fierce rivals when playing on opposite sides of the net Serena and Venus Williams together have won 13 Grand Slam titles in doubles tennis.",
+          "runs": [
+            {
+              "text": "While they are fierce rivals when playing on opposite sides of the "
+            },
+            {
+              "text": "net Serena",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " and Venus Williams together have won 13 Grand Slam titles in doubles tennis."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "net, Serena"
+        },
+        {
+          "id": "C",
+          "text": "net. Serena"
+        },
+        {
+          "id": "D",
+          "text": "net; Serena"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "38b08e64",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Crows and ravens are both large, black birds, they can be distinguished by the difference in their voices. The American Crow makes a \"caw, caw, caw\" sound, whereas the Common Raven articulates deep, croaking vocals.",
+          "runs": [
+            {
+              "text": "Crows and ravens are both large, black "
+            },
+            {
+              "text": "birds, they can be distinguished by",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " the difference in their voices. The American Crow makes a \"caw, caw, caw\" sound, whereas the Common Raven articulates deep, croaking vocals."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "birds. Distinguished"
+        },
+        {
+          "id": "C",
+          "text": "birds they can be distinguished by"
+        },
+        {
+          "id": "D",
+          "text": "birds. They can be distinguished by"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "b3ffb41c",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In order to retrieve and study the bones of the early hominids. The paleoanthropologist hired a team of women who were thin enough to fit through the cave's extremely narrow chute.",
+          "runs": [
+            {
+              "text": "In order to retrieve and study the bones of the early "
+            },
+            {
+              "text": "hominids. The",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " paleoanthropologist hired a team of women who were thin enough to fit through the cave's extremely narrow chute."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "hominids; the"
+        },
+        {
+          "id": "C",
+          "text": "hominids, the"
+        },
+        {
+          "id": "D",
+          "text": "hominids the"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "ca590847",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Hindus routinely bathe in India's sacred Ganges river. Also home to the Ganges shark."
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "river, also"
+        },
+        {
+          "id": "C",
+          "text": "river; also"
+        },
+        {
+          "id": "D",
+          "text": "river and this river is also"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "2331a756",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The dean of the Art Institute of Chicago denied admission to Kyle because he couldn't name the three primary colors. Blue, red, and yellow.",
+          "runs": [
+            {
+              "text": "The dean of the Art Institute of Chicago denied admission to Kyle because he couldn't name the three primary "
+            },
+            {
+              "text": "colors. Blue,",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " red, and yellow."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "colors, blue,"
+        },
+        {
+          "id": "C",
+          "text": "colors: which are blue,"
+        },
+        {
+          "id": "D",
+          "text": "colors: blue,"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "458b2e29",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "A supermoon is so named because it appears larger and brighter than usual. It happens at the closest point to Earth on the moon's orbit. Also known as the perigee.",
+          "runs": [
+            {
+              "text": "A supermoon is so named because it appears larger and brighter than usual. It happens at the closest point to Earth on the moon's "
+            },
+            {
+              "text": "orbit. Also",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " known as the perigee."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "orbit also"
+        },
+        {
+          "id": "C",
+          "text": "orbit; also"
+        },
+        {
+          "id": "D",
+          "text": "orbit, also"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "ecb2eecf",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The Credible Hulk was much more reasonable than the Incredible Hulk. Supporting his arguments with data before engaging in smashing.",
+          "runs": [
+            {
+              "text": "The Credible Hulk was much more reasonable than the Incredible "
+            },
+            {
+              "text": "Hulk. Supporting",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " his arguments with data before engaging in smashing."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "Hulk supporting"
+        },
+        {
+          "id": "C",
+          "text": "Hulk; supporting"
+        },
+        {
+          "id": "D",
+          "text": "Hulk, supporting"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "3d25cf12",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Although Indonesia claims to have the most islands of any nation. Finland, with 180,000 islands, actually has more.",
+          "runs": [
+            {
+              "text": "Although Indonesia claims to have the most islands of any "
+            },
+            {
+              "text": "nation. Finland,",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " with 180,000 islands, actually has more."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "nation; Finland,"
+        },
+        {
+          "id": "C",
+          "text": "nation: Finland,"
+        },
+        {
+          "id": "D",
+          "text": "nation, Finland,"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "8b4e9c05",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Violet might have won the competition to be Willy Wonka's successor: had she not eaten the inflatable gum and turned into a giant blueberry.",
+          "runs": [
+            {
+              "text": "Violet might have won the competition to be Willy Wonka's "
+            },
+            {
+              "text": "successor: had",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " she not eaten the inflatable gum and turned into a giant blueberry."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "successor; had"
+        },
+        {
+          "id": "C",
+          "text": "successor. Had"
+        },
+        {
+          "id": "D",
+          "text": "successor, had"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "22dcdd91",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "While time capsules are a popular method of preserving items for the future. They're not always successful.",
+          "runs": [
+            {
+              "text": "While time capsules are a popular method of preserving items for the "
+            },
+            {
+              "text": "future. They're",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " not always successful."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "future, they're"
+        },
+        {
+          "id": "C",
+          "text": "future; they're"
+        },
+        {
+          "id": "D",
+          "text": "future they're"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "31267262",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Ironically, John Marin's 1822 painting, \"Destruction of Pompeii and Herculaneum.\" Was itself destroyed in a 1928 London flood.",
+          "runs": [
+            {
+              "text": "Ironically, John Marin's 1822 painting, \"Destruction of Pompeii and "
+            },
+            {
+              "text": "Herculaneum.\" Was itself destroyed in a 1928 London flood.",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "Herculaneum\" in a 1928 London flood."
+        },
+        {
+          "id": "C",
+          "text": "Herculaneum\" which was destroyed in a London flood."
+        },
+        {
+          "id": "D",
+          "text": "Herculaneum,\" was itself destroyed in a 1928 London flood."
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "866a5002",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The geologist, the printmaker, and the scissor manufacturer played a game of rock, paper, scissors. Each displaying a preference that complemented their occupation.",
+          "runs": [
+            {
+              "text": "The geologist, the printmaker, and the scissor manufacturer played a game of rock, paper, "
+            },
+            {
+              "text": "scissors. Each",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " displaying a preference that complemented their occupation."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "scissors; each"
+        },
+        {
+          "id": "C",
+          "text": "scissors, each"
+        },
+        {
+          "id": "D",
+          "text": "scissors: each"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "dff20c80",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Before cleaning her turtle's tank. Sophie always tied a helium balloon around the animal, so that he would be easier to find.",
+          "runs": [
+            {
+              "text": "Before cleaning her turtle's "
+            },
+            {
+              "text": "tank. Sophie",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " always tied a helium balloon around the animal, so that he would be easier to find."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "tank Sophie"
+        },
+        {
+          "id": "C",
+          "text": "tank, Sophie"
+        },
+        {
+          "id": "D",
+          "text": "tank; Sophie"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "d8cf6f42",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "During what would otherwise have been a boring presentation on safety Tyrone added a few jokes to the script that kept the students in stitches.",
+          "runs": [
+            {
+              "text": "During what would otherwise have been a boring presentation on "
+            },
+            {
+              "text": "safety",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " Tyrone added a few jokes to the script that kept the students in stitches."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "safety;"
+        },
+        {
+          "id": "C",
+          "text": "safety."
+        },
+        {
+          "id": "D",
+          "text": "safety,"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "4684a674",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Although Samuel Clemens was a prolific journalist while using his given name, he became one of the most famous fiction writers of all-time while using his pen name, Mark Twain.",
+          "runs": [
+            {
+              "text": "Although Samuel Clemens was a prolific journalist while using his given "
+            },
+            {
+              "text": "name, he",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " became one of the most famous fiction writers of all-time while using his pen name, Mark Twain."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "name; he"
+        },
+        {
+          "id": "C",
+          "text": "name he"
+        },
+        {
+          "id": "D",
+          "text": "name. He"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "66c90237",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Readers may think that Carolyn Keene was a prolific and long-lived writer. Publishing more than 150 Nancy Drew Mystery Stories between 1930 and 2003. Actually, “Carolyn Keene” was the pen name for more than a dozen authors!",
+          "runs": [
+            {
+              "text": "Readers may think that Carolyn Keene was a prolific and long-lived "
+            },
+            {
+              "text": "writer. Publishing",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " more than 150 Nancy Drew Mystery Stories between 1930 and 2003. Actually, “Carolyn Keene” was the pen name for more than a dozen authors!"
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "writer, she published"
+        },
+        {
+          "id": "C",
+          "text": "writer, publishing"
+        },
+        {
+          "id": "D",
+          "text": "writer she published"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "93401ac9",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The old adage that sarcasm is the lowest form of wit might not be true, according to a 2015 study by Huang, Gino, and Galinsky the study claims that people who make sarcastic comments while attempting a difficult task are more likely to be creative in their problem-solving.",
+          "runs": [
+            {
+              "text": "The old adage that sarcasm is the lowest form of wit might not be true, according to a 2015 study by Huang, Gino, and "
+            },
+            {
+              "text": "Galinsky the",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " study claims that people who make sarcastic comments while attempting a difficult task are more likely to be creative in their problem-solving."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "Galinsky, the"
+        },
+        {
+          "id": "C",
+          "text": "Galinsky; and the"
+        },
+        {
+          "id": "D",
+          "text": "Galinsky. The"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "8fd8365b",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Dan Price, the CEO of Gravity Payments, made history by slashing his own salary to provide a minimum wage of $70,000 for all the employees of his company.",
+          "runs": [
+            {
+              "text": "Dan Price, the CEO of Gravity Payments, made history by slashing his own "
+            },
+            {
+              "text": "salary to",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " provide a minimum wage of $70,000 for all the employees of his company."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "salary. To"
+        },
+        {
+          "id": "C",
+          "text": "salary; to"
+        },
+        {
+          "id": "D",
+          "text": "salary: to"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "ef992930",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "After 550 people volunteered at King's Circle Station in Mumbai. The station grew cleaner, safer, and even more beautiful.",
+          "runs": [
+            {
+              "text": "After 550 people volunteered at King's Circle Station in "
+            },
+            {
+              "text": "Mumbai. The",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " station grew cleaner, safer, and even more beautiful."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "Mumbai: the"
+        },
+        {
+          "id": "C",
+          "text": "Mumbai; the"
+        },
+        {
+          "id": "D",
+          "text": "Mumbai, the"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "aeb99d5b",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The new carbon nanotubes are so light, they float in the air. Once implemented in artificial muscle. However, they can generate an incredible amount of force.",
+          "runs": [
+            {
+              "text": "The new carbon nanotubes are so light, they float in the air. Once implemented in artificial "
+            },
+            {
+              "text": "muscle. However, they",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " can generate an incredible amount of force."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "muscle, however, they"
+        },
+        {
+          "id": "C",
+          "text": "muscle; however, they"
+        },
+        {
+          "id": "D",
+          "text": "muscle however. They"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "ea3985f8",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "An art installation in Dublin, Ohio, features 109 concrete ears of corn, though the piece is actually called \"Field of Corn with Osage Oranges,\" the locals have dubbed it \"Cornhenge.\"",
+          "runs": [
+            {
+              "text": "An art installation in Dublin, Ohio, features 109 concrete ears of "
+            },
+            {
+              "text": "corn, though",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " the piece is actually called \"Field of Corn with Osage Oranges,\" the locals have dubbed it \"Cornhenge.\""
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "corn. Though"
+        },
+        {
+          "id": "C",
+          "text": "corn though"
+        },
+        {
+          "id": "D",
+          "text": "corn: though"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "8b52ad86",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Tech titan Steve Jobs loved raw carrots and reportedly ate several per day. Turning his skin an orange hue.",
+          "runs": [
+            {
+              "text": "Tech titan Steve Jobs loved raw carrots and reportedly ate several per "
+            },
+            {
+              "text": "day. Turning",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " his skin an orange hue."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "day, turning"
+        },
+        {
+          "id": "C",
+          "text": "day, this turned"
+        },
+        {
+          "id": "D",
+          "text": "day; turning"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "a6f0981f",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The Sasquatch, also known as Bigfoot, is rumored to be living; in the forests of the American Pacific Northwest.",
+          "runs": [
+            {
+              "text": "The Sasquatch, also known as Bigfoot, is rumored to be "
+            },
+            {
+              "text": "living; in",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " the forests of the American Pacific Northwest."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "living: in"
+        },
+        {
+          "id": "C",
+          "text": "living in"
+        },
+        {
+          "id": "D",
+          "text": "living, and he is living in"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "2e5e72ad",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Although urban gardening has become very popular. City gardeners need to be careful to protect their crops from soil contaminants.",
+          "runs": [
+            {
+              "text": "Although urban gardening has become very "
+            },
+            {
+              "text": "popular. City",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " gardeners need to be careful to protect their crops from soil contaminants."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "popular; city"
+        },
+        {
+          "id": "C",
+          "text": "popular, city"
+        },
+        {
+          "id": "D",
+          "text": "popular city"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "8fcbeced",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Artist-biologist Joseph Tomelleri is painstaking in his drawings of fish. Detailing minutiae like the exact number of scales and tiny variations in color.",
+          "runs": [
+            {
+              "text": "Artist-biologist Joseph Tomelleri is painstaking in his drawings of "
+            },
+            {
+              "text": "fish. Detailing",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " minutiae like the exact number of scales and tiny variations in color."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "fish; detailing"
+        },
+        {
+          "id": "C",
+          "text": "fish, detailing"
+        },
+        {
+          "id": "D",
+          "text": "fish detailing"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "de493f05",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Carrie peered at the photo, trying to make out the wheat field the picture was too grainy.",
+          "runs": [
+            {
+              "text": "Carrie peered at the photo, trying to make out the wheat "
+            },
+            {
+              "text": "field the picture was",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " too grainy."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "field. The picture was"
+        },
+        {
+          "id": "C",
+          "text": "field the picture. Was"
+        },
+        {
+          "id": "D",
+          "text": "field, the picture"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "00b3c14c",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The differences in Neanderthal and modern human faces are partially due to the way bone deposits formed, though Neanderthals accrued bone deposits through adolescence, humans experience bone resorption during childhood, leading to a flatter facial structure.",
+          "runs": [
+            {
+              "text": "The differences in Neanderthal and modern human faces are partially due to the way bone deposits "
+            },
+            {
+              "text": "formed, though",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " Neanderthals accrued bone deposits through adolescence, humans experience bone resorption during childhood, leading to a flatter facial structure."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "formed. Though"
+        },
+        {
+          "id": "C",
+          "text": "formed though"
+        },
+        {
+          "id": "D",
+          "text": "DELETE the underlined portion"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "9cceba4c",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Olympus Mons, a volcano on Mars, is the largest mountain in the solar system.",
+          "runs": [
+            {
+              "text": "Olympus Mons, a volcano on "
+            },
+            {
+              "text": "Mars, is",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " the largest mountain in the solar system."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "Mars; is"
+        },
+        {
+          "id": "C",
+          "text": "Mars is"
+        },
+        {
+          "id": "D",
+          "text": "Mars. Is"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "c83c7473",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The Microbead-Free Waters Act aims to eliminate tiny plastic beads from soaps and other beauty products microbeads pollute the water and cause internal abrasions in fish.",
+          "runs": [
+            {
+              "text": "The Microbead-Free Waters Act aims to eliminate tiny plastic beads from soaps and other beauty "
+            },
+            {
+              "text": "products microbeads",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " pollute the water and cause internal abrasions in fish."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "products, microbeads"
+        },
+        {
+          "id": "C",
+          "text": "products microbeads,"
+        },
+        {
+          "id": "D",
+          "text": "products. Microbeads"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "f0d3e68e",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "King Frederick the Great of Prussia once gifted the moon to a farmer, Aul Jurgens, who had helped him recover from gout descendants of the Jurgens family still claim ownership of the moon.",
+          "runs": [
+            {
+              "text": "King Frederick the Great of Prussia once gifted the moon to a farmer, Aul Jurgens, who had helped him recover from "
+            },
+            {
+              "text": "gout descendants",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " of the Jurgens family still claim ownership of the moon."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "gout, descendants"
+        },
+        {
+          "id": "C",
+          "text": "gout. Descendants"
+        },
+        {
+          "id": "D",
+          "text": "gout and descendants"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "2eeaa2e7",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Olena Kalytiak Davis, who works as a lawyer and poet in Anchorage, Alaska.",
+          "runs": [
+            {
+              "text": "Olena Kalytiak Davis, "
+            },
+            {
+              "text": "who works as a lawyer and poet in Anchorage, Alaska.",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "a lawyer and poet in Anchorage, Alaska."
+        },
+        {
+          "id": "C",
+          "text": "a lawyer in Anchorage, Alaska, also writes poetry."
+        },
+        {
+          "id": "D",
+          "text": "an Anchorage, Alaska lawyer and poet."
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "85b113d0",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Jill Salloway, the creator of Transparent, likens directing to playing with dolls.",
+          "runs": [
+            {
+              "text": "Jill Salloway, the creator of "
+            },
+            {
+              "text": "Transparent",
+              "marks": [
+                "italic",
+                "underline"
+              ]
+            },
+            {
+              "text": ", likens",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " directing to playing with dolls."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "Transparent. Likens",
+          "runs": [
+            {
+              "text": "Transparent",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "text": ". Likens"
+            }
+          ]
+        },
+        {
+          "id": "C",
+          "text": "Transparent likens",
+          "runs": [
+            {
+              "text": "Transparent",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "text": " likens"
+            }
+          ]
+        },
+        {
+          "id": "D",
+          "text": "Transparent; likens",
+          "runs": [
+            {
+              "text": "Transparent",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "text": "; likens"
+            }
+          ]
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "80854614",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In standard and business communication, it is always important to use appropriate punctuation. However, according to Celia Klin of Binghamton University, using a period at the end of a text message can lead the recipient to doubt the message's sincerity.",
+          "runs": [
+            {
+              "text": "In standard and business communication, it is always important to use appropriate "
+            },
+            {
+              "text": "punctuation. However, according",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " to Celia Klin of Binghamton University, using a period at the end of a text message can lead the recipient to doubt the message's sincerity."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "punctuation, however, according"
+        },
+        {
+          "id": "C",
+          "text": "punctuation however, according"
+        },
+        {
+          "id": "D",
+          "text": "punctuation however according"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "cc6c1232",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Because teacher pay is so low. Some school districts are trying to attract new staff with affordable housing.",
+          "runs": [
+            {
+              "text": "Because teacher pay is so "
+            },
+            {
+              "text": "low. Some school",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " districts are trying to attract new staff with affordable housing."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "low, some school"
+        },
+        {
+          "id": "C",
+          "text": "low some school"
+        },
+        {
+          "id": "D",
+          "text": "low; some school"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "8f423767",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Bruce Mau's \"111 Navy\" chair, designed for Coca-Cola, reuses 111 plastic soda bottles, Mau's designs are often socially, ethically, and environmentally responsible.",
+          "runs": [
+            {
+              "text": "Bruce Mau's \"111 Navy\" chair, designed for Coca-Cola, reuses 111 plastic soda "
+            },
+            {
+              "text": "bottles, Mau's designs",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " are often socially, ethically, and environmentally responsible."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "bottles Mau's designs"
+        },
+        {
+          "id": "C",
+          "text": "bottles Mau's designs,"
+        },
+        {
+          "id": "D",
+          "text": "bottles. Mau's designs"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "4c70559f",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The \"Gravity Potato\" map was designed by the German Research Center for Geosciences it shows variations in Earth's gravitational pull.",
+          "runs": [
+            {
+              "text": "The \"Gravity Potato\" map was designed by the German Research Center for "
+            },
+            {
+              "text": "Geosciences it shows",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " variations in Earth's gravitational pull."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "Geosciences, it shows"
+        },
+        {
+          "id": "C",
+          "text": "Geosciences. Shows"
+        },
+        {
+          "id": "D",
+          "text": "Geosciences. It shows"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "7a286d9d",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Concerned about employees stopping work to check their email. Some companies are banning the technology.",
+          "runs": [
+            {
+              "text": "Concerned about employees stopping work to check their "
+            },
+            {
+              "text": "email. Some",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " companies are banning the technology."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "email; some"
+        },
+        {
+          "id": "C",
+          "text": "email, some"
+        },
+        {
+          "id": "D",
+          "text": "email: some"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "8940ff28",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Although high school football is now under scrutiny for the number of traumatic head injuries it causes, some parents may be surprised by recent findings. As a percentage of youth sports injuries, statistics suggest that cheerleading results in more concussions than football.",
+          "runs": [
+            {
+              "text": "Although high school football is now under scrutiny for the number of traumatic head injuries it causes, some parents may be surprised by recent "
+            },
+            {
+              "text": "findings. As a percentage of youth sports injuries, statistics",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " suggest that cheerleading results in more concussions than football."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "findings, as a percentage of youth sports injuries, statistics"
+        },
+        {
+          "id": "C",
+          "text": "findings as a percentage of youth sports injuries statistics"
+        },
+        {
+          "id": "D",
+          "text": "findings. As a percentage of youth sports injuries. Statistics"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "cd6f2ec5",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In a recent issue of Rolling Stone magazine, Jimi Hendrix topped the list of the best guitarists in rock history, perhaps due to his incredibly fast and complex guitar solos.",
+          "runs": [
+            {
+              "text": "In a recent issue of "
+            },
+            {
+              "text": "Rolling Stone",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "text": " magazine, Jimi Hendrix topped the list of the best guitarists in rock "
+            },
+            {
+              "text": "history, perhaps",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " due to his incredibly fast and complex guitar solos."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "history. Perhaps"
+        },
+        {
+          "id": "C",
+          "text": "history; perhaps"
+        },
+        {
+          "id": "D",
+          "text": "history and this was perhaps"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "dc2d30df",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "\"Free-range\" parenting, which functions on the assumption that children should be able to explore their environment without constant parental supervision, is gaining popularity and the movement has even created playgrounds where kids can set fires and play in salvage heaps.",
+          "runs": [
+            {
+              "text": "\"Free-range\" parenting, which functions on the assumption that children should be able to explore their environment without constant parental supervision, is gaining "
+            },
+            {
+              "text": "popularity and the",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " movement has even created playgrounds where kids can set fires and play in salvage heaps."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "popularity. The"
+        },
+        {
+          "id": "C",
+          "text": "popularity, the"
+        },
+        {
+          "id": "D",
+          "text": "popularity: and the"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "dba39d78",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Hedy Lamarr invented a way to bypass radio frequencies to sneak messages past the Nazis in World War II she was also a famous Hollywood actress.",
+          "runs": [
+            {
+              "text": "Hedy Lamarr invented a way to bypass radio frequencies to sneak messages past the Nazis in "
+            },
+            {
+              "text": "World War II she",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " was also a famous Hollywood actress."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "World War II, she"
+        },
+        {
+          "id": "C",
+          "text": "World War II but she"
+        },
+        {
+          "id": "D",
+          "text": "World War II. She"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "565c3341",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The poet Pablo Neruda was known as a powerful, sensory-driven poet, but he also had a lighter side. One of his most famous odes is written in celebration of socks.",
+          "runs": [
+            {
+              "text": "The poet Pablo Neruda was known as a powerful, sensory-driven poet, but he also had a lighter "
+            },
+            {
+              "text": "side. One",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " of his most famous odes is written in celebration of socks."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "side one"
+        },
+        {
+          "id": "C",
+          "text": "side, one"
+        },
+        {
+          "id": "D",
+          "text": "side and one"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "9030cb3d",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Despite their gentle and amiable personalities, Dachshunds were bred to be hunters, their shape allowed them to scurry down burrows after small animals.",
+          "runs": [
+            {
+              "text": "Despite their gentle and amiable personalities, Dachshunds were bred to be "
+            },
+            {
+              "text": "hunters, their",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " shape allowed them to scurry down burrows after small animals."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "hunters. Their"
+        },
+        {
+          "id": "C",
+          "text": "hunters: their"
+        },
+        {
+          "id": "D",
+          "text": "hunters, and in addition, their"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "4bfbad32",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Totem poles are carvings that feature various symbols or figures, they can serve as a family crest, a grave marker, or even as a \"shame pole\" for public ridicule.",
+          "runs": [
+            {
+              "text": "Totem poles are carvings that feature various symbols or "
+            },
+            {
+              "text": "figures, they",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " can serve as a family crest, a grave marker, or even as a \"shame pole\" for public ridicule."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "figures. They"
+        },
+        {
+          "id": "C",
+          "text": "figures, and also, they"
+        },
+        {
+          "id": "D",
+          "text": "figures, and in addition they"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "b05494a9",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Visitors to Iceland have the option of staying in an ice hotel. Where lavish rooms are carved from solid blocks of ice.",
+          "runs": [
+            {
+              "text": "Visitors to Iceland have the option of staying in an ice "
+            },
+            {
+              "text": "hotel. Where",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " lavish rooms are carved from solid blocks of ice."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "hotel; where"
+        },
+        {
+          "id": "C",
+          "text": "hotel, where"
+        },
+        {
+          "id": "D",
+          "text": "hotel, and in this hotel are"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "23823cca",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The Tour de France bicycle race would have already celebrated its 100th anniversary. If not for its cessation during the two World Wars.",
+          "runs": [
+            {
+              "text": "The Tour de France bicycle race would have already celebrated its 100th "
+            },
+            {
+              "text": "anniversary. If",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " not for its cessation during the two World Wars."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "anniversary if"
+        },
+        {
+          "id": "C",
+          "text": "anniversary; if"
+        },
+        {
+          "id": "D",
+          "text": "anniversary: if"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "58fc397a",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Medieval scribes often created readable works of art—fully-illustrated illuminated manuscripts, the work was time-consuming, however, with experienced scribes producing five or six words a minute.",
+          "runs": [
+            {
+              "text": "Medieval scribes often created readable works of art—fully-illustrated illuminated "
+            },
+            {
+              "text": "manuscripts, the work was ",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": "time-consuming, however,",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " with experienced scribes producing five or six words a minute."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "manuscripts. The work was time consuming, however,"
+        },
+        {
+          "id": "C",
+          "text": "manuscripts the work was time consuming, however,"
+        },
+        {
+          "id": "D",
+          "text": "manuscripts; the work was time consuming. However"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "58e0fab9",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The most important architect to emerge from the urbane and innovative \"Chicago School\" was Louis Sullivan. Who enjoyed creating \"democratic\" structures that enhanced the actions of the people using them. He completed his first skyscraper, the Wainwright Building, in St. Louis, Missouri in 1891.",
+          "runs": [
+            {
+              "text": "The most important architect to emerge from the urbane and innovative \"Chicago School\" was Louis "
+            },
+            {
+              "text": "Sullivan. Who enjoyed creating \"democratic\" structures that enhanced the actions of the people using them. He",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " completed his first skyscraper, the Wainwright Building, in St. Louis, Missouri in 1891."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "Sullivan, who enjoyed creating \"democratic\" structures that enhanced the actions of the people using them. He"
+        },
+        {
+          "id": "C",
+          "text": "Sullivan who enjoyed creating \"democratic\" structures that enhanced the actions of the people using them, he"
+        },
+        {
+          "id": "D",
+          "text": "Sullivan, he enjoyed creating \"democratic\" structures that enhanced the actions of the people using them. He"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "703ddee9",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Elisha Graves Otis—founder of The Elevator Company—invented the safety lever for elevators. By combining a steel spring with a ratchet to break the elevator's fall.",
+          "runs": [
+            {
+              "text": "Elisha Graves Otis—founder of The Elevator Company—invented the safety lever for "
+            },
+            {
+              "text": "elevators. By combining a steel spring with a ratchet",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " to break the elevator's fall."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "elevators by combining a steel spring"
+        },
+        {
+          "id": "C",
+          "text": "elevators; by combining a steel spring"
+        },
+        {
+          "id": "D",
+          "text": "elevators by combining a steel spring;"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "d4dd724c",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "When 20th Century Fox green-lit the first Star Wars film, it had a much more cumbersome title. Adventures of Luke Starkiller, as taken from the Journal of the Whills, Saga 1: The Star Wars.",
+          "runs": [
+            {
+              "text": "When 20th Century Fox green-lit the first "
+            },
+            {
+              "text": "Star Wars",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "text": " film, it had a much more cumbersome "
+            },
+            {
+              "text": "title. ",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": "Adventures",
+              "marks": [
+                "italic",
+                "underline"
+              ]
+            },
+            {
+              "text": " of Luke Starkiller, as taken from the Journal of the Whills, Saga 1: The Star Wars.",
+              "marks": [
+                "italic"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "title: Adventures"
+        },
+        {
+          "id": "C",
+          "text": "title; Adventures"
+        },
+        {
+          "id": "D",
+          "text": "title Adventures"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "21ca05bc",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "What eCommerce did for auction, estate, and garage sale aficionados, Craftsy has done for artisans and craftspeople around the world, they can open an online store presenting their handmade, unique goods to a global marketplace.",
+          "runs": [
+            {
+              "text": "What eCommerce did for auction, estate, and garage sale aficionados, Craftsy has done for artisans and craftspeople around the "
+            },
+            {
+              "text": "world, they can open an online store presenting",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " their handmade, unique goods to a global marketplace."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "world. They can open an online store presenting"
+        },
+        {
+          "id": "C",
+          "text": "world: they can open an online store. Presenting"
+        },
+        {
+          "id": "D",
+          "text": "world: they can open an online store, artists can present"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "d5f28605",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The legend and the letters of Ben Franklin suggest there was debate about the bird that should be chosen to symbolize the United States, although the American Bald Eagle won the spot the Wild Turkey came in a close second.",
+          "runs": [
+            {
+              "text": "The legend and the letters of Ben Franklin suggest there was debate about the bird that should be chosen to symbolize the "
+            },
+            {
+              "text": "United States, although the American Bald Eagle won the spot",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " the Wild Turkey came in a close second."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "United States although the American Bald Eagle won the spot"
+        },
+        {
+          "id": "C",
+          "text": "United States. Although the American Bald Eagle won the spot,"
+        },
+        {
+          "id": "D",
+          "text": "United States, although the American Bald Eagle won the spot:"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "e216543d",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "With laptops, smartphones, and tablets now commonplace, the new Smart Watch raises the question: \"How many personal computers does one person need?\"",
+          "runs": [
+            {
+              "text": "With laptops, smartphones, and tablets now "
+            },
+            {
+              "text": "commonplace, the new Smart Watch raises the question:",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " \"How many personal computers does one person need?\""
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "commonplace. The Smart Watch raises the question,"
+        },
+        {
+          "id": "C",
+          "text": "commonplace; the Apple Watch raises the question:"
+        },
+        {
+          "id": "D",
+          "text": "commonplace; the Smart Watch raises the question,"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "2d81fc49",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Marvel's newest superheroes are more diverse than their previous versions. In this generation, several characters have seen major changes: Thor is a woman, Hulk is Korean American, and Captain America is African American the ever-popular Spider-Man is African American and Latino.",
+          "runs": [
+            {
+              "text": "Marvel's newest superheroes are more diverse than their previous versions. In this generation, several characters have seen major changes: Thor is a woman, Hulk is Korean American, and Captain America is African "
+            },
+            {
+              "text": "American the ever-popular",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " Spider-Man is African American and Latino."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "American. The"
+        },
+        {
+          "id": "C",
+          "text": "American: the"
+        },
+        {
+          "id": "D",
+          "text": "American, the"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "881e8d75",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Malaria diagnosis, which is done through a process called microscopy, currently takes about an hour to complete and relies on medical workers to spot parasites in the blood, a new device uses magnets to detect the presence of hemozoin, waste produced by the parasites, in the bloodstream, making the process faster and easier.",
+          "runs": [
+            {
+              "text": "Malaria diagnosis, which is done through a process called microscopy, currently takes about an hour to complete and relies on medical workers to spot parasites in the "
+            },
+            {
+              "text": "blood, a",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " new device uses magnets to detect the presence of hemozoin, waste produced by the parasites, in the bloodstream, making the process faster and easier."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "blood. A"
+        },
+        {
+          "id": "C",
+          "text": "blood a"
+        },
+        {
+          "id": "D",
+          "text": "blood: a"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "8c13ac1d",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "A primary tenet of American architect Frank Lloyd Wright's style was \"organic design.\" Which explores ways to adapt a building to its physical surroundings.",
+          "runs": [
+            {
+              "text": "A primary tenet of American architect Frank Lloyd Wright's "
+            },
+            {
+              "text": "style was \"organic design.\" Which",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " explores ways to adapt a building to its physical surroundings."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "style: was \"organic design\" which"
+        },
+        {
+          "id": "C",
+          "text": "style was \"organic design\" which"
+        },
+        {
+          "id": "D",
+          "text": "style was \"organic design,\" which"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "1260bbdf",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Augusta Savage, a Harlem Renaissance sculptor and former student of Charles Despiau. Created the most popular exhibit at the 1939 New York World's Fair: a striking statue entitled \"The Harp.\" The statue depicted twelve African singers as the strings, the hand of God as the sounding board, and a kneeling man holding music as the foot pedal.",
+          "runs": [
+            {
+              "text": "Augusta Savage, a Harlem Renaissance sculptor and former student of Charles "
+            },
+            {
+              "text": "Despiau. Created",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " the most popular exhibit at the 1939 New York World's Fair: a striking statue entitled \"The Harp.\" The statue depicted twelve African singers as the strings, the hand of God as the sounding board, and a kneeling man holding music as the foot pedal."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "Despiau created"
+        },
+        {
+          "id": "C",
+          "text": "Despiau, created"
+        },
+        {
+          "id": "D",
+          "text": "Despiau; created"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "862afe97",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Habitat for Humanity has teamed up with artists in Detroit to transform underutilized buildings into art in one such project, artist Mark Dean Veca created a piece called \"Pony Show,\" a stunning mural glorifying the 1970s auto industry, on the surface of an abandoned auto repair shop.",
+          "runs": [
+            {
+              "text": "Habitat for Humanity has teamed up with artists in Detroit to transform underutilized buildings into art "
+            },
+            {
+              "text": "in one such project, artist",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " Mark Dean Veca created a piece called \"Pony Show,\" a stunning mural glorifying the 1970s auto industry, on the surface of an abandoned auto repair shop."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "art, in one such project, artist"
+        },
+        {
+          "id": "C",
+          "text": "art. In one such project, artist"
+        },
+        {
+          "id": "D",
+          "text": "art, in one such project artist"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "7ba69a4b",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Lupita Nyong'o had already won an Academy Award for her role in Twelve Years a Slave when she landed the lead in Eclipsed, an off-Broadway play. Successfully launching her stage career.",
+          "runs": [
+            {
+              "text": "Lupita Nyong'o had already won an Academy Award for her role in "
+            },
+            {
+              "text": "Twelve Years a Slave",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "text": " when she landed the lead in "
+            },
+            {
+              "text": "Eclipsed",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "text": ", an off-Broadway "
+            },
+            {
+              "text": "play. Successfully",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " launching her stage career."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "play successfully"
+        },
+        {
+          "id": "C",
+          "text": "play; successfully"
+        },
+        {
+          "id": "D",
+          "text": "play, successfully"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "f3f732d7",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The United Nations reported a list of the three happiest countries in the world. Which are Switzerland, Iceland, and Denmark.",
+          "runs": [
+            {
+              "text": "The United Nations reported a list of the three happiest countries in the "
+            },
+            {
+              "text": "world. Which are Switzerland,",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " Iceland, and Denmark."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "world: Switzerland,"
+        },
+        {
+          "id": "C",
+          "text": "world. Known as Switzerland,"
+        },
+        {
+          "id": "D",
+          "text": "world. Such as Switzerland,"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "d4cbcba3",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Whether penguin chicks are guarded by their mother or father.",
+          "runs": [
+            {
+              "text": "Whether penguin chicks are guarded by their mother or "
+            },
+            {
+              "text": "father.",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "father penguin."
+        },
+        {
+          "id": "C",
+          "text": "father depends on the season."
+        },
+        {
+          "id": "D",
+          "text": "father in the winter."
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "534771ef",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Although there are more than 2000 varieties of cheese in the world. The most widely consumed is mozzarella.",
+          "runs": [
+            {
+              "text": "Although there are more than 2000 varieties of cheese in the "
+            },
+            {
+              "text": "world. The",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " most widely consumed is mozzarella."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "world, the"
+        },
+        {
+          "id": "C",
+          "text": "world; the"
+        },
+        {
+          "id": "D",
+          "text": "world the"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "7d86c445",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Sentence boundaries",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Seven of the ten largest container ports in the world are in China: the other three are in Singapore, South Korea, and Dubai.",
+          "runs": [
+            {
+              "text": "Seven of the ten largest container ports in the world are in "
+            },
+            {
+              "text": "China: the other three",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " are in Singapore, South Korea, and Dubai."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "China the other three"
+        },
+        {
+          "id": "C",
+          "text": "China, the other three"
+        },
+        {
+          "id": "D",
+          "text": "China. The other three"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 152 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            152
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    }
+  ]
+}

@@ -1,0 +1,217 @@
+# IELTS 阅读题目文字化检查点（2026-10-25）
+
+## 当前目标与基线
+
+- 工作分支：`codex/ielts-reading-text-20261025`，基于 `origin/main` 的 `d3bfb9b`。
+- 当前任务分工：剑桥 21–13（9 册、36 套、1440 题）；另一对话负责剑桥 4–12。若总任务继续覆盖剑桥 1–3，待 4–12 范围完成后再处理。
+- 既有阅读题库共 84 套、252 篇 Passage、3,358 题。此前题库只提供扫描页图片和通用题号占位，不能作为可在线作答的文字题目。
+- 归档盘已有剑桥 1–21 PDF 清单、页码映射、OCR 页面缓存及旧题库核对报告。继续复用这些资料；只对识别歧义或版面信息不全之处回看原 PDF。
+- 当前分支在本地隔离 worktree 中，尚未提交、推送或发布。
+
+## 已核对完成
+
+- 剑桥 21 Test 1 三篇 Passage 已转为可编辑文字，共 40 题：
+  - Passage 1：PDF 实体页 17–20，Questions 1–13。
+  - Passage 2：PDF 实体页 21–25，Questions 14–26。
+  - Passage 3：PDF 实体页 26–29，Questions 27–40。
+- 来源 PDF：`剑21-A类.pdf`；SHA-256：`09c78b6a9716e4a692649f895d8ed18d69355e50053c6e5496d0dfb07caf7d20`；146 页。
+- 已录入文章、段落/分节、标题与副标题、Directions、题干、选项/词库和相应输入或选择控件；答题键继续读取原有已核实答案映射，不在转录文件中另造答案。
+- 原 PDF 图像仅作为折叠的来源核对材料保留；未完成转录的 Passage 明示“文字待核”并禁用作答，题库入口也不会把它们标成可练习。
+- OCR 复核修正包括姓名 `François`，并去除了扫描识别插入的等号和空白占位；题目顺序与编号逐题对齐原映射。Passage 2 的引用标点已回看局部 PDF 原图确认。
+- 剑桥 21 Test 2 三篇 Passage 已转为可编辑文字，共 40 题：
+  - Passage 1：PDF 实体页 39–42，Questions 1–13；Questions 1–5 复原成三列表格，Questions 6–13 为 True/False/Not Given。
+  - Passage 2：PDF 实体页 43–46，Questions 14–26；包含段落匹配、双答案选择和单词填空。
+  - Passage 3：PDF 实体页 47–51，Questions 27–40；按双栏与跨页顺序重建原文，包含选择题、词库摘要填空和 Yes/No/Not Given。
+- Test 2 同源哈希与 Test 1 一致；页码、题号和答案映射通过回归。核对了来源页联系图及原卷局部放大：修复 OCR 的 `evolved`，整理 Mapungubwe 副标题标点，按原版栏序重建 AI 文章；原答案键沿用题库已核数据。
+- 剑桥 21 Test 3 三篇 Passage 已转为可编辑文字，共 40 题：
+  - Passage 1：PDF 实体页 61–64，Questions 1–13；包括分层笔记填空和 True/False/Not Given。
+  - Passage 2：PDF 实体页 65–68，Questions 14–26；包括判断题与 DART 系统笔记填空。
+  - Passage 3：PDF 实体页 69–72，Questions 27–40；包括单选、句子匹配和 Yes/No/Not Given。
+- Test 3 原文及题目来源页均已逐页目视检查；校正 OCR 的 `almost`、`QR code`、`phase I`、`firm`、`Archaeology` 和 `palaeoanthropological`，原答案键沿用题库已核数据。
+- 剑桥 21 Test 4 三篇 Passage 已转为可编辑文字，共 40 题：
+  - Passage 1：PDF 实体页 82–85，Questions 1–13；包括判断、流程图填空与笔记填空。
+  - Passage 2：PDF 实体页 86–89，Questions 14–26；包括词库摘要填空、判断题和单选。
+  - Passage 3：PDF 实体页 90–94，Questions 27–40；包括词库摘要填空、判断题和单选。
+- Test 4 全部来源页均已查看；校正 OCR 的 `escaped` 引号、`8- to 11-year-old` 和 `a child’s`，原答案键沿用题库已核数据。
+- 剑桥 20 Test 1 三篇 Passage 已转为可编辑文字，共 40 题：
+  - Passage 1：PDF 实体页 18–21，Questions 1–13；包括判断题与物种笔记填空。
+  - Passage 2：PDF 实体页 22–26，Questions 14–26；包括章节匹配、人物匹配和单词摘要填空。
+  - Passage 3：PDF 实体页 27–30，Questions 27–40；包括单选、句子匹配和 Yes/No/Not Given。
+- 剑20 PDF 哈希为 `dc84053e73b09ab32262beb25a857743ac2b3208426fc314387fa4ee4a0286a8`（与清单一致，145 页）；本套来源页已查看，补正 kākāpō 的长音符号及识别错误，题号和题型逐项对齐。
+- 剑桥 20 Test 2 三篇 Passage 已转为可编辑文字，共 40 题：
+  - Passage 1：PDF 实体页 40–43，Questions 1–13；包括海牛笔记填空与 True/False/Not Given。
+  - Passage 2：PDF 实体页 44–47，Questions 14–26；包括章节匹配、单词摘要填空及两组双答案选择。
+  - Passage 3：PDF 实体页 48–51，Questions 27–40；包括 Yes/No/Not Given、词库摘要填空与单选。
+- Test 2 页码和哈希与源卷清单一致。复用了现有页面 OCR，逐页核对文章和题目图像；Passage 3 按双栏、跨页顺序恢复文章段落，原题选项字母及答案键与题库映射一致。
+- 剑桥 20 Test 3 三篇 Passage 已转为可编辑文字，共 40 题：
+  - Passage 1：PDF 实体页 61–64，Questions 1–13；包括年代/工艺笔记填空与 True/False/Not Given。
+  - Passage 2：PDF 实体页 65–68，Questions 14–26；包括章节标题匹配、两组双答案选择和句子填空。
+  - Passage 3：PDF 实体页 69–73，Questions 27–40；包括专家匹配、句子匹配和单选。
+- Test 3 来源页图像逐页检查，六节 A–F 与题目标题匹配结构、选项字母、问答段落及两条脚注均保留；题号、来源哈希及答案键映射通过回归。
+- 剑桥 20 Test 4 三篇 Passage 已转为可编辑文字，共 40 题：
+  - Passage 1：PDF 实体页 83–86，Questions 1–13；包括笔记填空与 True/False/Not Given。
+  - Passage 2：PDF 实体页 87–90，Questions 14–26；包括段落匹配、单词填空和人物匹配。
+  - Passage 3：PDF 实体页 91–95，Questions 27–40；包括段落匹配、人物匹配和摘要填空。
+- Test 4 来源页与对应题页已逐页复核；修正 Abiquiú 重音符号并保留 CO₂ 下标，检查了段落结构、题目次序、选项/词库及摘要空格位置；来源哈希、物理页码和 40 题映射通过回归。
+- 剑桥 19 Test 1 三篇 Passage 已转为可编辑文字，共 40 题：
+  - Passage 1：PDF 实体页 18–21，Questions 1–13；包括 True/False/Not Given 与笔记填空。
+  - Passage 2：PDF 实体页 22–26，Questions 14–26；包括段落匹配、两组双答案选择和摘要填空。
+  - Passage 3：PDF 实体页 27–31，Questions 27–40；包括单选、词组词库摘要和 Yes/No/Not Given。
+- Test 1 来源页逐页复核；从 PDF/OCR 的识别噪声中恢复 Gonçalo、Amarna、airwaves 等原文拼写，并保持 caravel 脚注、段落/题页边界及来源题型。题号、页码、哈希、词库选项和输入/选择映射通过回归。
+- 剑桥 19 Test 2 三篇 Passage 已转为可编辑文字，共 40 题：
+  - Passage 1：PDF 实体页 42–45，Questions 1–13；包括分组笔记填空和 True/False/Not Given。
+  - Passage 2：PDF 实体页 46–49，Questions 14–26；包括段落匹配、单词句子填空和两组双答案选择。
+  - Passage 3：PDF 实体页 50–53，Questions 27–40；按双栏顺序重建原文，包括词组词库摘要、Yes/No/Not Given 和单选。
+- Test 2 来源页与题页逐页对照；恢复 jury 等 PDF 文本层误识并检查跨栏续接、笔记标题/分组和选项。来源页码、哈希和 40 题映射通过回归。
+- 剑桥 19 Test 3 三篇 Passage 已转为可编辑文字，共 40 题：
+  - Passage 1：PDF 实体页 64–67，Questions 1–13；包括 True/False/Not Given 和考古发现笔记。
+  - Passage 2：PDF 实体页 68–71，Questions 14–26；包括段落匹配、句子填空和专家匹配。
+  - Passage 3：PDF 实体页 72–76，Questions 27–40；包括单选、句子配对和 Yes/No/Not Given。
+- Test 3 来源页与题页逐页检查；保留湿地段落 A–H、peat 与 subsidence 双脚注及语音翻译文章的副标题/题目结构，并校正 PDF 文本层对 peat、very 的误识。来源页码、哈希和 40 题映射通过回归。
+- 剑桥 19 Test 4 三篇 Passage 已转为可编辑文字，共 40 题：
+  - Passage 1：PDF 实体页 86–89，Questions 1–13；包括 True/False/Not Given 与蝴蝶物种笔记填空。
+  - Passage 2：PDF 实体页 90–93，Questions 14–26；包括段落匹配、人物观点匹配和单词摘要填空。
+  - Passage 3：PDF 实体页 94–97，Questions 27–40；包括单选、猎采社会摘要填空和 Yes/No/Not Given。
+- Test 4 原文和题目页联系图逐页核对；保持段落、A–F 标签、副标题、人物名单及摘要空格位置。来源哈希、物理页码和 40 题映射通过回归。
+- 剑桥 18 Test 1 三篇 Passage 已转为可编辑文字，共 40 题：
+  - Passage 1：PDF 实体页 18–21，Questions 1–13；包括句子填空、四列表格和 True/False/Not Given。
+  - Passage 2：PDF 实体页 22–26，Questions 14–26；包括段落匹配、木材砍伐方式匹配和单词句子填空。
+  - Passage 3：PDF 实体页 27–30，Questions 27–40；包括章节匹配、摘要填空和人物匹配。
+- Test 1 来源为扫描 PDF，使用本机 OCR 起稿后逐页对照来源图像；保留 Forest management 脚注及农法比较表的四列、题号和原有空单元格。来源哈希、物理页码及 40 题映射通过回归。
+- 剑桥 18 Test 2 三篇 Passage 已转为可编辑文字，共 40 题：
+  - Passage 1：PDF 实体页 41–44，Questions 1–13；包括 Stonehenge 建造笔记和 True/False/Not Given。
+  - Passage 2：PDF 实体页 45–49，Questions 14–26；包括单选、Yes/No/Not Given 和词库摘要填空。
+  - Passage 3：PDF 实体页 50–53，Questions 27–40；包括 True/False/Not Given 和 Leonardo da Vinci 城市设计摘要填空。
+- Test 2 扫描页使用本机 OCR 起稿并逐页核对；保留 Neolithic/Celtic 双脚注、分阶段笔记、题型顺序及词库选项。来源哈希、物理页码及 40 题映射通过回归。
+- 剑桥 18 Test 3 三篇 Passage 已转为可编辑文字，共 40 题：
+  - Passage 1：PDF 实体页 63–66，Questions 1–13；包括 A–H 段落匹配、木材摘要和人物匹配。
+  - Passage 2：PDF 实体页 67–71，Questions 14–26；包括 A–G 标题匹配、单选和 Model E 摘要。
+  - Passage 3：PDF 实体页 72–76，Questions 27–40；包括单选、词库摘要填空和 Yes/No/Not Given。
+- Test 3 扫描页使用本机 OCR 起稿并逐页目视核对；恢复混合能力课程文章的双栏阅读顺序，保留蒸汽汽车章节标记和两个词库选项集。来源哈希、物理页码及 40 题映射通过回归。
+- 剑桥 18 Test 4 三篇 Passage 已转为可编辑文字，共 40 题：
+  - Passage 1：PDF 实体页 86–89，Questions 1–13；包括 A–E 段落匹配、摘要填空和两组双选题。
+  - Passage 2：PDF 实体页 90–93，Questions 14–26；包括单选、人物观点匹配和 Yes/No/Not Given。
+  - Passage 3：PDF 实体页 94–97，Questions 27–40；包括判断、词库摘要和单选。
+- Test 4 扫描页经本机 OCR 起稿、联系图逐页核对；保留 Wegener 书评的作者署名、Introduction 标题和 paleoclimatology 脚注。来源哈希、物理页码及 40 题映射通过回归。
+- 剑桥 17 Test 1 三篇 Passage 已转为可编辑文字，共 40 题：
+  - Passage 1：PDF 实体页 16–19，Questions 1–13；包括伦敦地铁建设笔记和 True/False/Not Given。
+  - Passage 2：PDF 实体页 20–23，Questions 14–26；包括 A–G 信息匹配、单词摘要填空和两组双选题。
+  - Passage 3：PDF 实体页 24–27，Questions 27–40；包括短语词库摘要、Yes/No/Not Given 和书评单选题。
+- Test 1 来源为可提取文本的 PDF；逐页核对原文与题面，并目视复核跨页和双栏内容、笔记版式、段落标签与两条脚注。来源哈希、物理页码及 40 题映射通过回归。
+- 剑桥 17 Test 2 三篇 Passage 已转为可编辑文字，共 40 题：
+  - Passage 1：PDF 实体页 37–40，Questions 1–13；包括 Dead Sea Scrolls 笔记填空和 True/False/Not Given。
+  - Passage 2：PDF 实体页 41–44，Questions 14–26；包括 A–E 信息匹配、研究者观点匹配和句子填空。
+  - Passage 3：PDF 实体页 45–49，Questions 27–40；包括单选、Yes/No/Not Given 和创意行为摘要词库。
+- Test 2 来源 PDF 文本层可直接提取；逐页核对原文与题面，目视复核脚注、分节标记和各类题型布局。来源哈希、物理页码及 40 题映射通过回归。
+- 剑桥 17 Test 3 三篇 Passage 已转为可编辑文字，共 40 题：
+  - Passage 1：PDF 实体页 59–62，Questions 1–13；包括 thylacine 笔记填空、True/False/Not Given 和双脚注。
+  - Passage 2：PDF 实体页 63–66，Questions 14–26；包括 A–H 信息匹配、RSPO 双选题和短句填空。
+  - Passage 3：PDF 实体页 67–71，Questions 27–40；包括书评单选、Yes/No/Not Given、双脚注和短语词库摘要。
+- Test 3 来源 PDF 文本层可直接提取；检查题面图像并核对题型、段落标签、摘要空格、脚注和单词限制。来源哈希、物理页码及 40 题映射通过回归。
+
+- 剑桥 17 Test 4 三篇 Passage 已转为可编辑文字，共 40 题：
+  - Passage 1：PDF 实体页 81–84，Questions 1–13；包括 True/False/Not Given 与蝙蝠研究表格填空。
+  - Passage 2：PDF 实体页 85–88，Questions 14–26；包括 A–F 信息匹配、单词摘要填空和两组双选题。
+  - Passage 3：PDF 实体页 89–92，Questions 27–40；包括段落匹配、True/False/Not Given 和研究摘要填空。
+- Test 4 来源页、题面及表格结构已核对；保留来源 PDF 哈希、A–H 段落标签、C/F 双段结构与 guild 脚注。题号、表格/摘要空格顺序、页码及 40 题映射通过回归。
+- 剑桥 16 Test 1 三篇 Passage 已转为可编辑文字，共 40 题：
+  - Passage 1：PDF 实体页 16–19，Questions 1–13；包括 True/False/Not Given 与北极熊保护笔记填空。
+  - Passage 2：PDF 实体页 20–23，Questions 14–26；包括 A–G 标题匹配、单词笔记填空和双选题。
+  - Passage 3：PDF 实体页 24–28，Questions 27–40；包括单选、算法词库摘要与人物匹配。
+- Test 1 原 PDF 为扫描件，本地 OCR 起稿后逐页对照图片；校正 APOB、题面指令和被 OCR 破坏的题目表格，恢复 Step Pyramid 标题列表、摘要与选项。PDF 哈希、题号映射、物理页码和 40 题结构通过回归。
+- 剑桥 16 Test 2 三篇 Passage 已转为可编辑文字，共 40 题：
+  - Passage 1：PDF 实体页 38–41，Questions 1–13；包括 geoglyph 判断题与 Uffington White Horse 笔记。
+  - Passage 2：PDF 实体页 42–46，Questions 14–26；包括单选、微生物摘要词库和 Yes/No/Not Given。
+  - Passage 3：PDF 实体页 47–51，Questions 27–40；包括单选、wise reasoning 摘要词库和 True/False/Not Given。
+- Test 2 原 PDF 为扫描件；本地 OCR 后逐页对照源图，保留 Iron Age、Bronze Age、Neolithic、Celtic 脚注，重建两组词库和所有题面选项。PDF 哈希、题号映射、物理页码及 40 题结构通过回归。
+- 剑桥 16 Test 3 三篇 Passage 已转为可编辑文字，共 40 题：
+  - Passage 1：PDF 实体页 61–64，Questions 1–13；包括罗马造船/航海判断题和摘要填空。
+  - Passage 2：PDF 实体页 65–68，Questions 14–26；包括 A–H 信息匹配、单词摘要和两组双选题。
+  - Passage 3：PDF 实体页 69–72，Questions 27–40；包括 True/False/Not Given、章节匹配和句子填空。
+- Test 3 原 PDF 为扫描件；本地 OCR 后逐页对照源图，保留 A–H 段落及 B/C/F/G 多段结构、Viking Age/Stone Age 脚注、副标题和题面选项。PDF 哈希、题号映射、物理页码及 40 题结构通过回归。
+- 剑桥 16 Test 4 三篇 Passage 已转为可编辑文字，共 40 题：
+  - Passage 1：PDF 实体页 82–85，Questions 1–13；包括 Qanat 图示标注、True/False/Not Given 和短答。
+  - Passage 2：PDF 实体页 86–89，Questions 14–26；包括单选、数字阅读词库摘要和 Yes/No/Not Given。
+  - Passage 3：PDF 实体页 90–94，Questions 27–40；包括 A–F 标题匹配、单选和 Yes/No/Not Given。
+- Test 4 原 PDF 为扫描件；本地 OCR 后逐页核对图像，修正 qanat 识别、还原图示空格、选项和 A–F 段落结构。来源哈希、物理页码、题号映射和 40 题结构通过回归。
+- 剑桥 15 Test 1 三篇 Passage 已转为可编辑文字，共 40 题：
+  - Passage 1：PDF 实体页 18–21，Questions 1–13；包括笔记、True/False/Not Given 和历史表格。
+  - Passage 2：PDF 实体页 22–25，Questions 14–26；包括 A–G 信息匹配、短语填空和两组双选题。
+  - Passage 3：PDF 实体页 26–29，Questions 27–40；包括单选、探险家匹配和摘要填空。
+- Test 1 PDF 文本层与来源页图像逐页对照；保留 Driverless cars 的 A–G 多段结构、Nutmeg 历史表格空格和 Explorers 选项名单。PDF 哈希、页码及 40 题映射通过回归。
+- 剑桥 15 Test 2 三篇 Passage 已转为可编辑文字，共 40 题：
+  - Passage 1：PDF 实体页 39–41，Questions 1–13；包括段落信息匹配和 Guard rails 单词摘要填空。
+  - Passage 2：PDF 实体页 42–45，Questions 14–26；包括 A–F 段落信息匹配、猛犸象摘要和人物匹配。
+  - Passage 3：PDF 实体页 46–50，Questions 27–40；包括单选、humour 词库摘要填空和 Yes/No/Not Given。
+- Test 2 PDF 文本层及三组来源页图像已核对；保留 Having a laugh 副标题、跨 46–47 页的段落、所有题型说明和选项。来源哈希、物理页码、40 题映射和结构回归通过。
+- 剑桥 15 Test 3 三篇 Passage 已转为可编辑文字，共 40 题：
+  - Passage 1：PDF 实体页 60–63，Questions 1–13；包括 True/False/Not Given 与 Moore 生涯笔记表格。
+  - Passage 2：PDF 实体页 64–67，Questions 14–26；包括 A–G 标题匹配和 Desolenator 工作原理摘要。
+  - Passage 3：PDF 实体页 68–72，Questions 27–40；包括句尾匹配、词库摘要和单选。
+- Test 3 PDF 文本层及来源页图像已核对；保留 Henry Moore 与童话文章脚注、段落结构、表格、标题选项和全部题面。来源哈希、页码、40 题映射和结构回归通过。
+- 剑桥 15 Test 4 三篇 Passage 已转为可编辑文字，共 40 题：
+  - Passage 1：PDF 实体页 82–85，Questions 1–13；包括 huarango 笔记、传统用途表格和 True/False/Not Given。
+  - Passage 2：PDF 实体页 86–89，Questions 14–26；包括 True/False/Not Given 和 Silbo Gomero 笔记摘要。
+  - Passage 3：PDF 实体页 90–94，Questions 27–40；包括词库摘要、单选和 Yes/No/Not Given。
+- Test 4 PDF 文本层及来源页图像已核对；保留 huarango 副标题、Silbo Gomero 与大企业段落结构及题目表格。原卷 Q27–31 说明写 A–J，但可见词库只有 A–I，按原页保留可见选项，没有补造 J。来源哈希、页码、40 题映射和结构回归通过。
+- 剑桥 14 Test 1 三篇 Passage 已转为可编辑文字，共 40 题：
+  - Passage 1：PDF 实体页 17–20，Questions 1–13；包括儿童游戏笔记与 True/False/Not Given。
+  - Passage 2：PDF 实体页 21–25，Questions 14–26；包括 A–G 段落匹配、两组双选题和单词摘要填空。
+  - Passage 3：PDF 实体页 26–29，Questions 27–40；包括研究者匹配、Yes/No/Not Given 和摘要填空。
+- Test 1 来源 PDF 文本层及题面图像逐页复核；保留 Lego 脚注、A–G 段落、两组双答案题和 12 段主体结构。来源哈希、物理页码、题号映射和 40 题结构通过回归。
+- 剑桥 14 Test 2 三篇 Passage 已转为可编辑文字，共 40 题：
+  - Passage 1：PDF 实体页 39–42，Questions 1–13；包括 Alexander Henderson 生平、摄影笔记和 True/False/Not Given。
+  - Passage 2：PDF 实体页 43–46，Questions 14–26；包括 A–I 段落匹配和医院通风摘要。
+  - Passage 3：PDF 实体页 47–50，Questions 27–40；包括 i–ix 标题匹配、单词句子填空和 True/False/Not Given。
+- Test 2 PDF 文本层及来源图像逐页核对；保留 Henderson 副标题、pathogens 脚注、A–I 分段和完整标题词库。来源哈希、物理页码、40 题映射和段落结构通过回归。
+- 剑桥 14 Test 3 三篇 Passage 已转为可编辑文字，共 40 题：
+  - Passage 1：PDF 实体页 60–63，Questions 1–13；包括 A–J 段落信息匹配、Yes/No/Not Given 和三种 intelligence theory 匹配。
+  - Passage 2：PDF 实体页 64–67，Questions 14–26；包括 A–I 段落信息匹配、双选题和摘要填空。
+  - Passage 3：PDF 实体页 68–72，Questions 27–40；包括研究者匹配、Yes/No/Not Given 和 guided play 摘要。
+- Test 3 PDF 文本层及来源图像逐页核对；校正 intelligence 段落和 play 文章 OCR 漏字，保留原有题型分组、研究者名表和段落标签。来源哈希、页码、40 题映射和结构回归通过。
+- 剑桥 14 Test 4 三篇 Passage 已转为可编辑文字，共 40 题：
+  - Passage 1：PDF 实体页 83–86，Questions 1–13；包括 Pheidole dentata 笔记和 True/False/Not Given。
+  - Passage 2：PDF 实体页 87–90，Questions 14–26；包括 A–F 段落匹配、True/False/Not Given 和两组双选题。
+  - Passage 3：PDF 实体页 91–94，Questions 27–40；包括海洋垃圾判断题、研究笔记和标题单选。
+- Test 4 来源 PDF 文本层与原页图像逐页核对；保留 notes 的分组顺序、A–F 段落、两组各自独立的双答案选项及摘要空格顺序。来源哈希、物理页码、40 题映射和结构回归通过。
+- 剑桥 13 Test 1 三篇 Passage 已转为可编辑文字，共 40 题：
+  - Passage 1：PDF 实体页 17–20，Questions 1–13；包括 Tourism New Zealand 网站信息表和 True/False/Not Given。
+  - Passage 2：PDF 实体页 21–24，Questions 14–26；包括 i–viii 标题匹配、观点匹配和 boredom 摘要填空。
+  - Passage 3：PDF 实体页 25–29，Questions 27–40；包括单选、句尾匹配和 Yes/No/Not Given。
+- Test 1 PDF 文本层和题面图像逐页核对；恢复 Painting Fool 文章中的 OCR 引号/标点和表格层次，保留 A–F 段落、研究者列表及题型顺序。来源哈希、物理页码和 40 题映射通过回归。
+- 剑桥 13 Test 2 三篇 Passage 已转为可编辑文字，共 40 题：
+  - Passage 1：PDF 实体页 39–42，Questions 1–13；包括 Cinnamon 历史笔记和 True/False/Not Given。
+  - Passage 2：PDF 实体页 43–46，Questions 14–26；包括 A–F 段落匹配、研究者匹配和 Oxytocin 摘要。
+  - Passage 3：PDF 实体页 47–51，Questions 27–40；包括 trends 策略单选、公司匹配和句尾匹配。
+- Test 2 PDF 文本层及来源页图像逐页核对；保留 cinnamon 笔记顺序、氧催产素研究者名单、infuse-and-augment 等策略名称及选项分组。来源哈希、页码、40 题映射通过回归。
+- 剑桥 13 Test 3 三篇 Passage 已转为可编辑文字，共 40 题：
+  - Passage 1：PDF 实体页 61–64，Questions 1–13；包括椰子树用途表格和 True/False/Not Given。
+  - Passage 2：PDF 实体页 65–68，Questions 14–26；包括 A–F 段落、研究者匹配、婴儿语摘要及段落定位。
+  - Passage 3：PDF 实体页 69–73，Questions 27–40；包括 A–H 段落、气候变化摘要及研究者匹配。
+- Test 3 PDF 文本层及来源页图像逐页核对；保留段落标签、副标题、表格结构和三组题型次序。来源哈希、页码及 40 题映射回归通过。
+- 剑桥 13 Test 4 三篇 Passage 已转为可编辑文字，共 40 题：
+  - Passage 1：PDF 实体页 83–85，Questions 1–13；保留 11 个段落、True/False/Not Given 与单词填空。
+  - Passage 2：PDF 实体页 86–89，Questions 14–26；保留 A–G 分节、摘要、句尾匹配、段落定位和 humus 脚注。
+  - Passage 3：PDF 实体页 90–94，Questions 27–40；保留 Book Review 标题、书名和作者行、Jeremy Bentham 词库及 Yes/No/Not Given。
+- Test 4 复用仓库中的来源页原图、本地 OCR 起稿并逐页对照；来源哈希、页码、题号和题型映射回归通过。
+
+## 当前实现文件
+
+- `src/lib/ielts/reading-source-editable.ts`：可编辑题目模型及当前已核内容。
+- `src/components/reading-source-workbench.tsx`：文字文章与题目控件、作答校验、未核内容锁定、折叠来源图。
+- `src/components/reading-library.tsx`：只开放已完成逐篇文字化的套题。
+- `src/app/reading/reading-source.css`：文字题目布局与待核/来源面板样式。
+- `scripts/reading-source.test.mjs`：现有来源回归及可编辑题目结构检查。
+
+## 验证与阻塞
+
+- `node --test scripts/reading-source.test.mjs`：46 项通过。
+- 题号范围、每篇题数、来源页码与 PDF 哈希均有自动断言；本任务范围内三十六套均完成各 40 题，并检查了不同题型的表格/摘要、匹配、脚注和作答结构。
+- 全项目 TypeScript 检查和 Next 构建未能完成：现有依赖环境缺少 `xlsx`、`pdfjs-dist`、`@ffmpeg/ffmpeg`、`wink-nlp`、`wink-eng-lite-web-model`、`@huggingface/transformers` 等包；TypeScript 6 另报告既有 `baseUrl` 弃用项。未新增或安装依赖。
+- 临时依赖链接及 `.next` 构建输出已清理。
+
+## 待办与发布门槛
+
+- 本任务范围内剑桥 21–13 的 36 套、108 篇 Passage、1,440 题均已转录、结构化并完成来源与回归检查；当前完成 36/36 套。总题库中剑桥 1–12 由另一批次处理。
+- 每批继续使用 OCR/页码映射作初稿，按篇对照来源 PDF；识别不确定的文字或答案标记为待核，不猜填。
+- 当前尚未部署、提交或推送；发布前仍须按项目既有发布门槛处理。

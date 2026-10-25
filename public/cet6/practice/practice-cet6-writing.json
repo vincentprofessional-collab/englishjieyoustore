@@ -2993,109 +2993,6 @@
       ]
     },
     {
-      "id": "cet6-paper-2020071-writing-cet6-paper-2020071-writing-group",
-      "title": "2020年7月大学英语六级真题 · 第1套",
-      "layout": "flow",
-      "instructions": [],
-      "groups": [
-        {
-          "id": "cet6-paper-2020071-writing-group",
-          "title": "写作",
-          "presentation": "writing",
-          "instructions": [],
-          "stimulusBlocks": [],
-          "sharedOptions": [],
-          "questions": [
-            {
-              "id": "cet6-paper-2020071-essay-写作",
-              "displayNumber": 31,
-              "type": "essay",
-              "promptBlocks": [
-                {
-                  "type": "image",
-                  "assetId": "page-clean-v5-27705de9c6dc4005-13-0-87-1000-975",
-                  "alt": "六级原题",
-                  "caption": ""
-                }
-              ],
-              "placement": {
-                "kind": "standalone"
-              },
-              "options": [],
-              "blanks": [],
-              "answerSpec": {
-                "availability": "answered",
-                "gradingMode": "manual",
-                "kind": "reference",
-                "referenceAnswer": [
-                  {
-                    "type": "image",
-                    "assetId": "page-clean-v5-b8afb30f8558b180-1-0-20-1000-975",
-                    "alt": "原题答案与解析",
-                    "caption": "原解析第1页"
-                  },
-                  {
-                    "type": "image",
-                    "assetId": "page-clean-v5-b8afb30f8558b180-2-0-20-1000-975",
-                    "alt": "原题答案与解析",
-                    "caption": "原解析第2页"
-                  },
-                  {
-                    "type": "image",
-                    "assetId": "page-clean-v5-b8afb30f8558b180-3-0-20-1000-975",
-                    "alt": "原题答案与解析",
-                    "caption": "原解析第3页"
-                  }
-                ]
-              },
-              "explanationBlocks": [],
-              "sourceRefs": [
-                {
-                  "sourceDocumentId": "27705de9c6dc40056e7d211f67d26f4e2f9f3283bb6cd5e52c5b370bb1c94d86",
-                  "relativePath": "试卷/真题/2020.07六级真题全1套【可复制可搜索，打印首选】.pdf",
-                  "sha256": "27705de9c6dc40056e7d211f67d26f4e2f9f3283bb6cd5e52c5b370bb1c94d86",
-                  "locator": {},
-                  "extractionMethod": "pdf-ocr",
-                  "confidence": 1
-                },
-                {
-                  "sourceDocumentId": "b8afb30f8558b180e6fb534ae81b5666fc2f20c4bc735720e4a7f949f6d78755",
-                  "relativePath": "试卷/真题/2020.07英语六级考试全1套解析.pdf",
-                  "sha256": "b8afb30f8558b180e6fb534ae81b5666fc2f20c4bc735720e4a7f949f6d78755",
-                  "locator": {
-                    "page": 1
-                  },
-                  "extractionMethod": "manual-review",
-                  "confidence": 1
-                },
-                {
-                  "sourceDocumentId": "b8afb30f8558b180e6fb534ae81b5666fc2f20c4bc735720e4a7f949f6d78755",
-                  "relativePath": "试卷/真题/2020.07英语六级考试全1套解析.pdf",
-                  "sha256": "b8afb30f8558b180e6fb534ae81b5666fc2f20c4bc735720e4a7f949f6d78755",
-                  "locator": {
-                    "page": 2
-                  },
-                  "extractionMethod": "manual-review",
-                  "confidence": 1
-                },
-                {
-                  "sourceDocumentId": "b8afb30f8558b180e6fb534ae81b5666fc2f20c4bc735720e4a7f949f6d78755",
-                  "relativePath": "试卷/真题/2020.07英语六级考试全1套解析.pdf",
-                  "sha256": "b8afb30f8558b180e6fb534ae81b5666fc2f20c4bc735720e4a7f949f6d78755",
-                  "locator": {
-                    "page": 3
-                  },
-                  "extractionMethod": "manual-review",
-                  "confidence": 1
-                }
-              ],
-              "reviewStatus": "approved"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "id": "cet6-paper-2020091-writing-cet6-paper-2020091-writing-group",
       "title": "2020年9月大学英语六级真题 · 第1套",
       "layout": "flow",
@@ -3111,7 +3008,7 @@
           "questions": [
             {
               "id": "cet6-paper-2020091-essay-写作",
-              "displayNumber": 32,
+              "displayNumber": 31,
               "type": "essay",
               "promptBlocks": [
                 {
@@ -3198,7 +3095,7 @@
           "questions": [
             {
               "id": "cet6-paper-2020092-essay-写作",
-              "displayNumber": 33,
+              "displayNumber": 32,
               "type": "essay",
               "promptBlocks": [
                 {
@@ -3288,7 +3185,7 @@
           "questions": [
             {
               "id": "cet6-paper-2020093-essay-写作",
-              "displayNumber": 34,
+              "displayNumber": 33,
               "type": "essay",
               "promptBlocks": [
                 {
@@ -3378,7 +3275,7 @@
           "questions": [
             {
               "id": "cet6-paper-2020121-essay-写作",
-              "displayNumber": 35,
+              "displayNumber": 34,
               "type": "essay",
               "promptBlocks": [
                 {
@@ -3449,7 +3346,7 @@
           "questions": [
             {
               "id": "cet6-paper-2020122-essay-写作",
-              "displayNumber": 36,
+              "displayNumber": 35,
               "type": "essay",
               "promptBlocks": [
                 {
@@ -3520,7 +3417,7 @@
           "questions": [
             {
               "id": "cet6-paper-2020123-essay-写作",
-              "displayNumber": 37,
+              "displayNumber": 36,
               "type": "essay",
               "promptBlocks": [
                 {
@@ -3591,7 +3488,7 @@
           "questions": [
             {
               "id": "cet6-paper-2021061-essay-写作",
-              "displayNumber": 38,
+              "displayNumber": 37,
               "type": "essay",
               "promptBlocks": [
                 {
@@ -3678,7 +3575,7 @@
           "questions": [
             {
               "id": "cet6-paper-2021062-essay-写作",
-              "displayNumber": 39,
+              "displayNumber": 38,
               "type": "essay",
               "promptBlocks": [
                 {
@@ -3749,7 +3646,7 @@
           "questions": [
             {
               "id": "cet6-paper-2021063-essay-写作",
-              "displayNumber": 40,
+              "displayNumber": 39,
               "type": "essay",
               "promptBlocks": [
                 {
@@ -3820,7 +3717,7 @@
           "questions": [
             {
               "id": "cet6-paper-2021121-essay-写作",
-              "displayNumber": 41,
+              "displayNumber": 40,
               "type": "essay",
               "promptBlocks": [
                 {
@@ -3907,7 +3804,7 @@
           "questions": [
             {
               "id": "cet6-paper-2021122-essay-写作",
-              "displayNumber": 42,
+              "displayNumber": 41,
               "type": "essay",
               "promptBlocks": [
                 {
@@ -3994,7 +3891,7 @@
           "questions": [
             {
               "id": "cet6-paper-2021123-essay-写作",
-              "displayNumber": 43,
+              "displayNumber": 42,
               "type": "essay",
               "promptBlocks": [
                 {
@@ -4081,7 +3978,7 @@
           "questions": [
             {
               "id": "cet6-paper-2022061-essay-写作",
-              "displayNumber": 44,
+              "displayNumber": 43,
               "type": "essay",
               "promptBlocks": [
                 {
@@ -4168,7 +4065,7 @@
           "questions": [
             {
               "id": "cet6-paper-2022062-essay-写作",
-              "displayNumber": 45,
+              "displayNumber": 44,
               "type": "essay",
               "promptBlocks": [
                 {
@@ -4255,7 +4152,7 @@
           "questions": [
             {
               "id": "cet6-paper-2022063-essay-写作",
-              "displayNumber": 46,
+              "displayNumber": 45,
               "type": "essay",
               "promptBlocks": [
                 {
@@ -4326,7 +4223,7 @@
           "questions": [
             {
               "id": "cet6-paper-2022091-essay-写作",
-              "displayNumber": 47,
+              "displayNumber": 46,
               "type": "essay",
               "promptBlocks": [
                 {
@@ -4397,7 +4294,7 @@
           "questions": [
             {
               "id": "cet6-paper-2022092-essay-写作",
-              "displayNumber": 48,
+              "displayNumber": 47,
               "type": "essay",
               "promptBlocks": [
                 {
@@ -4468,7 +4365,7 @@
           "questions": [
             {
               "id": "cet6-paper-2022093-essay-写作",
-              "displayNumber": 49,
+              "displayNumber": 48,
               "type": "essay",
               "promptBlocks": [
                 {
@@ -4551,7 +4448,7 @@
           "questions": [
             {
               "id": "cet6-paper-2022121-essay-写作",
-              "displayNumber": 50,
+              "displayNumber": 49,
               "type": "essay",
               "promptBlocks": [
                 {
@@ -4641,7 +4538,7 @@
           "questions": [
             {
               "id": "cet6-paper-2022122-essay-写作",
-              "displayNumber": 51,
+              "displayNumber": 50,
               "type": "essay",
               "promptBlocks": [
                 {
@@ -4731,7 +4628,7 @@
           "questions": [
             {
               "id": "cet6-paper-2022123-essay-写作",
-              "displayNumber": 52,
+              "displayNumber": 51,
               "type": "essay",
               "promptBlocks": [
                 {
@@ -4805,7 +4702,7 @@
           "questions": [
             {
               "id": "cet6-paper-2023031-essay-写作",
-              "displayNumber": 53,
+              "displayNumber": 52,
               "type": "essay",
               "promptBlocks": [
                 {
@@ -4879,7 +4776,7 @@
           "questions": [
             {
               "id": "cet6-paper-2023032-essay-写作",
-              "displayNumber": 54,
+              "displayNumber": 53,
               "type": "essay",
               "promptBlocks": [
                 {
@@ -4950,7 +4847,7 @@
           "questions": [
             {
               "id": "cet6-paper-2023033-essay-写作",
-              "displayNumber": 55,
+              "displayNumber": 54,
               "type": "essay",
               "promptBlocks": [
                 {
@@ -5021,7 +4918,7 @@
           "questions": [
             {
               "id": "cet6-paper-2023061-essay-写作",
-              "displayNumber": 56,
+              "displayNumber": 55,
               "type": "essay",
               "promptBlocks": [
                 {
@@ -5111,7 +5008,7 @@
           "questions": [
             {
               "id": "cet6-paper-2023062-essay-写作",
-              "displayNumber": 57,
+              "displayNumber": 56,
               "type": "essay",
               "promptBlocks": [
                 {
@@ -5185,7 +5082,7 @@
           "questions": [
             {
               "id": "cet6-paper-2023063-essay-写作",
-              "displayNumber": 58,
+              "displayNumber": 57,
               "type": "essay",
               "promptBlocks": [
                 {
@@ -5275,7 +5172,7 @@
           "questions": [
             {
               "id": "cet6-paper-2023121-essay-写作",
-              "displayNumber": 59,
+              "displayNumber": 58,
               "type": "essay",
               "promptBlocks": [
                 {
@@ -5365,7 +5262,7 @@
           "questions": [
             {
               "id": "cet6-paper-2023122-essay-写作",
-              "displayNumber": 60,
+              "displayNumber": 59,
               "type": "essay",
               "promptBlocks": [
                 {
@@ -5455,7 +5352,7 @@
           "questions": [
             {
               "id": "cet6-paper-2023123-essay-写作",
-              "displayNumber": 61,
+              "displayNumber": 60,
               "type": "essay",
               "promptBlocks": [
                 {
@@ -5545,7 +5442,7 @@
           "questions": [
             {
               "id": "cet6-paper-2024061-essay-写作",
-              "displayNumber": 62,
+              "displayNumber": 61,
               "type": "essay",
               "promptBlocks": [
                 {
@@ -5644,7 +5541,7 @@
           "questions": [
             {
               "id": "cet6-paper-2024062-essay-写作",
-              "displayNumber": 63,
+              "displayNumber": 62,
               "type": "essay",
               "promptBlocks": [
                 {
@@ -5743,7 +5640,7 @@
           "questions": [
             {
               "id": "cet6-paper-2024063-essay-写作",
-              "displayNumber": 64,
+              "displayNumber": 63,
               "type": "essay",
               "promptBlocks": [
                 {
@@ -5842,7 +5739,7 @@
           "questions": [
             {
               "id": "cet6-paper-2024121-essay-写作",
-              "displayNumber": 65,
+              "displayNumber": 64,
               "type": "essay",
               "promptBlocks": [
                 {
@@ -5929,7 +5826,7 @@
           "questions": [
             {
               "id": "cet6-paper-2024122-essay-写作",
-              "displayNumber": 66,
+              "displayNumber": 65,
               "type": "essay",
               "promptBlocks": [
                 {
@@ -6016,7 +5913,7 @@
           "questions": [
             {
               "id": "cet6-paper-2024123-essay-写作",
-              "displayNumber": 67,
+              "displayNumber": 66,
               "type": "essay",
               "promptBlocks": [
                 {
@@ -6087,7 +5984,7 @@
           "questions": [
             {
               "id": "cet6-paper-2025061-essay-写作",
-              "displayNumber": 68,
+              "displayNumber": 67,
               "type": "essay",
               "promptBlocks": [
                 {
@@ -6174,7 +6071,7 @@
           "questions": [
             {
               "id": "cet6-paper-2025062-essay-写作",
-              "displayNumber": 69,
+              "displayNumber": 68,
               "type": "essay",
               "promptBlocks": [
                 {
@@ -6261,7 +6158,7 @@
           "questions": [
             {
               "id": "cet6-paper-2025063-essay-写作",
-              "displayNumber": 70,
+              "displayNumber": 69,
               "type": "essay",
               "promptBlocks": [
                 {
@@ -6348,7 +6245,7 @@
           "questions": [
             {
               "id": "cet6-paper-2025121-essay-写作",
-              "displayNumber": 71,
+              "displayNumber": 70,
               "type": "essay",
               "promptBlocks": [
                 {
@@ -6435,7 +6332,7 @@
           "questions": [
             {
               "id": "cet6-paper-2025122-essay-写作",
-              "displayNumber": 72,
+              "displayNumber": 71,
               "type": "essay",
               "promptBlocks": [
                 {
@@ -6522,7 +6419,7 @@
           "questions": [
             {
               "id": "cet6-paper-2025123-essay-写作",
-              "displayNumber": 73,
+              "displayNumber": 72,
               "type": "essay",
               "promptBlocks": [
                 {
@@ -6594,164 +6491,6 @@
       ]
     },
     {
-      "id": "cet6-paper-2026061-writing-cet6-paper-2026061-writing-group",
-      "title": "2026年6月大学英语六级真题 · 第1套",
-      "layout": "flow",
-      "instructions": [],
-      "groups": [
-        {
-          "id": "cet6-paper-2026061-writing-group",
-          "title": "写作",
-          "presentation": "writing",
-          "instructions": [],
-          "stimulusBlocks": [],
-          "sharedOptions": [],
-          "questions": [
-            {
-              "id": "cet6-paper-2026061-essay-写作",
-              "displayNumber": 74,
-              "type": "essay",
-              "promptBlocks": [
-                {
-                  "type": "image",
-                  "assetId": "page-clean-v5-2072fa097921ed98-1-0-114-1000-262",
-                  "alt": "六级原题",
-                  "caption": ""
-                }
-              ],
-              "placement": {
-                "kind": "standalone"
-              },
-              "options": [],
-              "blanks": [],
-              "answerSpec": {
-                "availability": "answered",
-                "gradingMode": "manual",
-                "kind": "reference",
-                "referenceAnswer": [
-                  {
-                    "type": "image",
-                    "assetId": "page-clean-v5-2d93dc9f5ae222ab-1-0-20-1000-975",
-                    "alt": "原题答案与解析",
-                    "caption": "原解析第1页"
-                  }
-                ]
-              },
-              "explanationBlocks": [],
-              "sourceRefs": [
-                {
-                  "sourceDocumentId": "2072fa097921ed98caad02eccc703f896a7dd5567562fe33735a6d11bf059049",
-                  "relativePath": "试卷/真题/2026.06六级真题第1套【可复制可搜索，打印首选】.pdf",
-                  "sha256": "2072fa097921ed98caad02eccc703f896a7dd5567562fe33735a6d11bf059049",
-                  "locator": {},
-                  "extractionMethod": "pdf-ocr",
-                  "confidence": 1
-                },
-                {
-                  "sourceDocumentId": "2d93dc9f5ae222ab2f452c090b1bcfb0cd426d6c6d1959eeb1edfb7b33093b40",
-                  "relativePath": "试卷/真题/2026年6月英语六级解析第2套.pdf",
-                  "sha256": "2d93dc9f5ae222ab2f452c090b1bcfb0cd426d6c6d1959eeb1edfb7b33093b40",
-                  "locator": {
-                    "page": 1
-                  },
-                  "extractionMethod": "manual-review",
-                  "confidence": 1
-                }
-              ],
-              "reviewStatus": "approved"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "cet6-paper-2026062-writing-cet6-paper-2026062-writing-group",
-      "title": "2026年6月大学英语六级真题 · 第2套",
-      "layout": "flow",
-      "instructions": [],
-      "groups": [
-        {
-          "id": "cet6-paper-2026062-writing-group",
-          "title": "写作",
-          "presentation": "writing",
-          "instructions": [],
-          "stimulusBlocks": [],
-          "sharedOptions": [],
-          "questions": [
-            {
-              "id": "cet6-paper-2026062-essay-写作",
-              "displayNumber": 75,
-              "type": "essay",
-              "promptBlocks": [
-                {
-                  "type": "image",
-                  "assetId": "page-clean-v5-0d7db53a9f7a8fda-1-0-116-1000-266",
-                  "alt": "六级原题",
-                  "caption": ""
-                }
-              ],
-              "placement": {
-                "kind": "standalone"
-              },
-              "options": [],
-              "blanks": [],
-              "answerSpec": {
-                "availability": "answered",
-                "gradingMode": "manual",
-                "kind": "reference",
-                "referenceAnswer": [
-                  {
-                    "type": "image",
-                    "assetId": "page-clean-v5-7d9b35bec4f9d63b-1-0-20-1000-975",
-                    "alt": "原题答案与解析",
-                    "caption": "原解析第1页"
-                  },
-                  {
-                    "type": "image",
-                    "assetId": "page-clean-v5-7d9b35bec4f9d63b-2-0-20-1000-975",
-                    "alt": "原题答案与解析",
-                    "caption": "原解析第2页"
-                  }
-                ]
-              },
-              "explanationBlocks": [],
-              "sourceRefs": [
-                {
-                  "sourceDocumentId": "0d7db53a9f7a8fdacd0695f52fd6064ffe8cf0831df268ec88218d8e18da07fc",
-                  "relativePath": "试卷/真题/2026.06六级真题第2套【可复制可搜索，打印首选】.pdf",
-                  "sha256": "0d7db53a9f7a8fdacd0695f52fd6064ffe8cf0831df268ec88218d8e18da07fc",
-                  "locator": {},
-                  "extractionMethod": "pdf-ocr",
-                  "confidence": 1
-                },
-                {
-                  "sourceDocumentId": "7d9b35bec4f9d63b087e3dca76567a51c4772919178edbfe3e04dc29128bac59",
-                  "relativePath": "试卷/真题/2026年6月英语六级解析第3套.pdf",
-                  "sha256": "7d9b35bec4f9d63b087e3dca76567a51c4772919178edbfe3e04dc29128bac59",
-                  "locator": {
-                    "page": 1
-                  },
-                  "extractionMethod": "manual-review",
-                  "confidence": 1
-                },
-                {
-                  "sourceDocumentId": "7d9b35bec4f9d63b087e3dca76567a51c4772919178edbfe3e04dc29128bac59",
-                  "relativePath": "试卷/真题/2026年6月英语六级解析第3套.pdf",
-                  "sha256": "7d9b35bec4f9d63b087e3dca76567a51c4772919178edbfe3e04dc29128bac59",
-                  "locator": {
-                    "page": 2
-                  },
-                  "extractionMethod": "manual-review",
-                  "confidence": 1
-                }
-              ],
-              "reviewStatus": "approved"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "id": "cet6-paper-2026063-writing-cet6-paper-2026063-writing-group",
       "title": "2026年6月大学英语六级真题 · 第3套",
       "layout": "flow",
@@ -6767,7 +6506,7 @@
           "questions": [
             {
               "id": "cet6-paper-2026063-essay-写作",
-              "displayNumber": 76,
+              "displayNumber": 73,
               "type": "essay",
               "promptBlocks": [
                 {
@@ -8411,82 +8150,6 @@
           "sha256": "1e76d74fb018903aaf850cae91232f8cf95bd3e3e98a9de5d80bde51beb0abb7",
           "locator": {
             "page": 9
-          },
-          "extractionMethod": "manual-review",
-          "confidence": 1
-        }
-      ]
-    },
-    {
-      "assetId": "page-clean-v5-b8afb30f8558b180-1-0-20-1000-975",
-      "kind": "image",
-      "url": "https://ahecwiqjfrrxxjxazmre.supabase.co/storage/v1/object/public/images/cet6/source-pages/5f3052a3dbdd9c63b9f44b85e72634000437900dca5f8f706436f2438e76e210.webp",
-      "mimeType": "image/webp",
-      "sha256": "5f3052a3dbdd9c63b9f44b85e72634000437900dca5f8f706436f2438e76e210",
-      "sourceRefs": [
-        {
-          "sourceDocumentId": "b8afb30f8558b180e6fb534ae81b5666fc2f20c4bc735720e4a7f949f6d78755",
-          "relativePath": "试卷/真题/2020.07英语六级考试全1套解析.pdf",
-          "sha256": "b8afb30f8558b180e6fb534ae81b5666fc2f20c4bc735720e4a7f949f6d78755",
-          "locator": {
-            "page": 1
-          },
-          "extractionMethod": "manual-review",
-          "confidence": 1
-        }
-      ]
-    },
-    {
-      "assetId": "page-clean-v5-b8afb30f8558b180-2-0-20-1000-975",
-      "kind": "image",
-      "url": "https://ahecwiqjfrrxxjxazmre.supabase.co/storage/v1/object/public/images/cet6/source-pages/2242e9322595a838f0cef036c681f163bb919531074b4bb373d811a77b43482b.webp",
-      "mimeType": "image/webp",
-      "sha256": "2242e9322595a838f0cef036c681f163bb919531074b4bb373d811a77b43482b",
-      "sourceRefs": [
-        {
-          "sourceDocumentId": "b8afb30f8558b180e6fb534ae81b5666fc2f20c4bc735720e4a7f949f6d78755",
-          "relativePath": "试卷/真题/2020.07英语六级考试全1套解析.pdf",
-          "sha256": "b8afb30f8558b180e6fb534ae81b5666fc2f20c4bc735720e4a7f949f6d78755",
-          "locator": {
-            "page": 2
-          },
-          "extractionMethod": "manual-review",
-          "confidence": 1
-        }
-      ]
-    },
-    {
-      "assetId": "page-clean-v5-b8afb30f8558b180-3-0-20-1000-975",
-      "kind": "image",
-      "url": "https://ahecwiqjfrrxxjxazmre.supabase.co/storage/v1/object/public/images/cet6/source-pages/f44a0478dc8b89081faf3b01c94d1342fad3902aecec4958992d666fe3c77783.webp",
-      "mimeType": "image/webp",
-      "sha256": "f44a0478dc8b89081faf3b01c94d1342fad3902aecec4958992d666fe3c77783",
-      "sourceRefs": [
-        {
-          "sourceDocumentId": "b8afb30f8558b180e6fb534ae81b5666fc2f20c4bc735720e4a7f949f6d78755",
-          "relativePath": "试卷/真题/2020.07英语六级考试全1套解析.pdf",
-          "sha256": "b8afb30f8558b180e6fb534ae81b5666fc2f20c4bc735720e4a7f949f6d78755",
-          "locator": {
-            "page": 3
-          },
-          "extractionMethod": "manual-review",
-          "confidence": 1
-        }
-      ]
-    },
-    {
-      "assetId": "page-clean-v5-27705de9c6dc4005-13-0-87-1000-975",
-      "kind": "image",
-      "url": "https://ahecwiqjfrrxxjxazmre.supabase.co/storage/v1/object/public/images/cet6/source-pages/6def8c48f614ac8687a1bdd519d8101808b0c929fe609c2cdb03096ab2ab9277.webp",
-      "mimeType": "image/webp",
-      "sha256": "6def8c48f614ac8687a1bdd519d8101808b0c929fe609c2cdb03096ab2ab9277",
-      "sourceRefs": [
-        {
-          "sourceDocumentId": "27705de9c6dc40056e7d211f67d26f4e2f9f3283bb6cd5e52c5b370bb1c94d86",
-          "relativePath": "试卷/真题/2020.07六级真题全1套【可复制可搜索，打印首选】.pdf",
-          "sha256": "27705de9c6dc40056e7d211f67d26f4e2f9f3283bb6cd5e52c5b370bb1c94d86",
-          "locator": {
-            "page": 13
           },
           "extractionMethod": "manual-review",
           "confidence": 1
@@ -10299,101 +9962,6 @@
       ]
     },
     {
-      "assetId": "page-clean-v5-2d93dc9f5ae222ab-1-0-20-1000-975",
-      "kind": "image",
-      "url": "https://ahecwiqjfrrxxjxazmre.supabase.co/storage/v1/object/public/images/cet6/source-pages/4a2348f1a1575d63eb505a10c80a72899374f9ebeb299502dde6fdb5f4a014fa.webp",
-      "mimeType": "image/webp",
-      "sha256": "4a2348f1a1575d63eb505a10c80a72899374f9ebeb299502dde6fdb5f4a014fa",
-      "sourceRefs": [
-        {
-          "sourceDocumentId": "2d93dc9f5ae222ab2f452c090b1bcfb0cd426d6c6d1959eeb1edfb7b33093b40",
-          "relativePath": "试卷/真题/2026年6月英语六级解析第2套.pdf",
-          "sha256": "2d93dc9f5ae222ab2f452c090b1bcfb0cd426d6c6d1959eeb1edfb7b33093b40",
-          "locator": {
-            "page": 1
-          },
-          "extractionMethod": "manual-review",
-          "confidence": 1
-        }
-      ]
-    },
-    {
-      "assetId": "page-clean-v5-2072fa097921ed98-1-0-114-1000-262",
-      "kind": "image",
-      "url": "https://ahecwiqjfrrxxjxazmre.supabase.co/storage/v1/object/public/images/cet6/source-pages/6378ab8e10f27b306077d68ce01aa176ca5d42cdec3a19e0adb13849f887f8ed.webp",
-      "mimeType": "image/webp",
-      "sha256": "6378ab8e10f27b306077d68ce01aa176ca5d42cdec3a19e0adb13849f887f8ed",
-      "sourceRefs": [
-        {
-          "sourceDocumentId": "2072fa097921ed98caad02eccc703f896a7dd5567562fe33735a6d11bf059049",
-          "relativePath": "试卷/真题/2026.06六级真题第1套【可复制可搜索，打印首选】.pdf",
-          "sha256": "2072fa097921ed98caad02eccc703f896a7dd5567562fe33735a6d11bf059049",
-          "locator": {
-            "page": 1
-          },
-          "extractionMethod": "manual-review",
-          "confidence": 1
-        }
-      ]
-    },
-    {
-      "assetId": "page-clean-v5-7d9b35bec4f9d63b-1-0-20-1000-975",
-      "kind": "image",
-      "url": "https://ahecwiqjfrrxxjxazmre.supabase.co/storage/v1/object/public/images/cet6/source-pages/8f2f8965c5285c98060341d648cac29a46a3026953df768c57ee4315dbd502d3.webp",
-      "mimeType": "image/webp",
-      "sha256": "8f2f8965c5285c98060341d648cac29a46a3026953df768c57ee4315dbd502d3",
-      "sourceRefs": [
-        {
-          "sourceDocumentId": "7d9b35bec4f9d63b087e3dca76567a51c4772919178edbfe3e04dc29128bac59",
-          "relativePath": "试卷/真题/2026年6月英语六级解析第3套.pdf",
-          "sha256": "7d9b35bec4f9d63b087e3dca76567a51c4772919178edbfe3e04dc29128bac59",
-          "locator": {
-            "page": 1
-          },
-          "extractionMethod": "manual-review",
-          "confidence": 1
-        }
-      ]
-    },
-    {
-      "assetId": "page-clean-v5-7d9b35bec4f9d63b-2-0-20-1000-975",
-      "kind": "image",
-      "url": "https://ahecwiqjfrrxxjxazmre.supabase.co/storage/v1/object/public/images/cet6/source-pages/1ee8254fc556fc06affc1b2bc1ff3d3a93ec4e0aac2169b889873de4ac352cdb.webp",
-      "mimeType": "image/webp",
-      "sha256": "1ee8254fc556fc06affc1b2bc1ff3d3a93ec4e0aac2169b889873de4ac352cdb",
-      "sourceRefs": [
-        {
-          "sourceDocumentId": "7d9b35bec4f9d63b087e3dca76567a51c4772919178edbfe3e04dc29128bac59",
-          "relativePath": "试卷/真题/2026年6月英语六级解析第3套.pdf",
-          "sha256": "7d9b35bec4f9d63b087e3dca76567a51c4772919178edbfe3e04dc29128bac59",
-          "locator": {
-            "page": 2
-          },
-          "extractionMethod": "manual-review",
-          "confidence": 1
-        }
-      ]
-    },
-    {
-      "assetId": "page-clean-v5-0d7db53a9f7a8fda-1-0-116-1000-266",
-      "kind": "image",
-      "url": "https://ahecwiqjfrrxxjxazmre.supabase.co/storage/v1/object/public/images/cet6/source-pages/1a09afbb2ea970858bd1c3a959b21b28ced8fb4eb41cd76969cb8249e97b794a.webp",
-      "mimeType": "image/webp",
-      "sha256": "1a09afbb2ea970858bd1c3a959b21b28ced8fb4eb41cd76969cb8249e97b794a",
-      "sourceRefs": [
-        {
-          "sourceDocumentId": "0d7db53a9f7a8fdacd0695f52fd6064ffe8cf0831df268ec88218d8e18da07fc",
-          "relativePath": "试卷/真题/2026.06六级真题第2套【可复制可搜索，打印首选】.pdf",
-          "sha256": "0d7db53a9f7a8fdacd0695f52fd6064ffe8cf0831df268ec88218d8e18da07fc",
-          "locator": {
-            "page": 1
-          },
-          "extractionMethod": "manual-review",
-          "confidence": 1
-        }
-      ]
-    },
-    {
       "assetId": "page-clean-v5-1395d882618ae5d2-1-0-20-1000-975",
       "kind": "image",
       "url": "https://ahecwiqjfrrxxjxazmre.supabase.co/storage/v1/object/public/images/cet6/source-pages/9c0f8440cb286c013bcee65d269e9e91fd9159ecc581a2c0914bc6020e8d146b.webp",
@@ -10690,14 +10258,6 @@
       "sha256": "b96f2b85f8d73c7ac8b1c245b2be7624b14af4d018eecabdf3d7e57e65d9e2ad",
       "locator": {},
       "extractionMethod": "docx-xml",
-      "confidence": 1
-    },
-    {
-      "sourceDocumentId": "27705de9c6dc40056e7d211f67d26f4e2f9f3283bb6cd5e52c5b370bb1c94d86",
-      "relativePath": "试卷/真题/2020.07六级真题全1套【可复制可搜索，打印首选】.pdf",
-      "sha256": "27705de9c6dc40056e7d211f67d26f4e2f9f3283bb6cd5e52c5b370bb1c94d86",
-      "locator": {},
-      "extractionMethod": "pdf-ocr",
       "confidence": 1
     },
     {
@@ -11046,22 +10606,6 @@
       "sha256": "f92c8c9a770eb166ac109a8132412cef3f34eae744cde07caedc2973c42cb92c",
       "locator": {},
       "extractionMethod": "pdf-text",
-      "confidence": 1
-    },
-    {
-      "sourceDocumentId": "2072fa097921ed98caad02eccc703f896a7dd5567562fe33735a6d11bf059049",
-      "relativePath": "试卷/真题/2026.06六级真题第1套【可复制可搜索，打印首选】.pdf",
-      "sha256": "2072fa097921ed98caad02eccc703f896a7dd5567562fe33735a6d11bf059049",
-      "locator": {},
-      "extractionMethod": "pdf-ocr",
-      "confidence": 1
-    },
-    {
-      "sourceDocumentId": "0d7db53a9f7a8fdacd0695f52fd6064ffe8cf0831df268ec88218d8e18da07fc",
-      "relativePath": "试卷/真题/2026.06六级真题第2套【可复制可搜索，打印首选】.pdf",
-      "sha256": "0d7db53a9f7a8fdacd0695f52fd6064ffe8cf0831df268ec88218d8e18da07fc",
-      "locator": {},
-      "extractionMethod": "pdf-ocr",
       "confidence": 1
     },
     {

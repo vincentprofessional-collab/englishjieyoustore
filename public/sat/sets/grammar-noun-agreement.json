@@ -1,0 +1,4803 @@
+{
+  "id": "grammar-noun-agreement",
+  "assessment": "SAT",
+  "test": "Reading and Writing",
+  "domain": "Standard English Conventions",
+  "skill": "Noun agreement",
+  "difficulty": "Unrated",
+  "expectedCount": 61,
+  "questionIds": [
+    "8552aa3c",
+    "8506278f",
+    "f6fe79d8",
+    "630cf5f2",
+    "27885ca1",
+    "c84a9d26",
+    "b0a62888",
+    "e1762b5e",
+    "efa83a77",
+    "857d4f98",
+    "6b3f2a18",
+    "e30a81f7",
+    "ec2a924e",
+    "b504eae4",
+    "379992ff",
+    "cc07a14b",
+    "bc0c8e36",
+    "34727a83",
+    "3713fcfe",
+    "4f1e2433",
+    "2b6a6b33",
+    "0e3e77ab",
+    "1ebc3f64",
+    "f096434b",
+    "1c4db97f",
+    "e09ba558",
+    "dabdff5e",
+    "26955042",
+    "efa464ee",
+    "1cc1bb93",
+    "0d647f36",
+    "d2be9259",
+    "66f5aff4",
+    "ba9d4355",
+    "01b9b68c",
+    "add47a63",
+    "6e7cf673",
+    "66e160f0",
+    "0e029add",
+    "aa363158",
+    "92045211",
+    "c845f1a0",
+    "56f6476b",
+    "387f9972",
+    "947cbf7d",
+    "9268525f",
+    "a0274dc8",
+    "687efbfe",
+    "8cffc083",
+    "4db5cfa3",
+    "61bdf754",
+    "1bd02463",
+    "04d0eed6",
+    "3501a68f",
+    "9abeed67",
+    "6530e75b",
+    "f1241c1e",
+    "1bb52800",
+    "d39c86fc",
+    "11413a8b",
+    "ed2bf54b"
+  ],
+  "sourceRefs": [
+    {
+      "role": "question",
+      "path": "语法竖版成稿.docx",
+      "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6"
+    },
+    {
+      "role": "answer",
+      "path": "语法.pdf",
+      "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d"
+    }
+  ],
+  "questions": [
+    {
+      "id": "8552aa3c",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Sugars and Sweets Candy Company has contracts with four food companies to bring products to the store.",
+          "runs": [
+            {
+              "text": "Sugars and Sweets Candy Company has contracts with four food "
+            },
+            {
+              "text": "companies",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " to bring products to the store."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "manufacturer"
+        },
+        {
+          "id": "C",
+          "text": "provider"
+        },
+        {
+          "id": "D",
+          "text": "business"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "8506278f",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Microsoft, Google, Facebook, and Instagram had a startup phase that lasted only a few years.",
+          "runs": [
+            {
+              "text": "Microsoft, Google, Facebook, and Instagram had "
+            },
+            {
+              "text": "a startup phase that lasted",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " only a few years."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "a startup phase lasting"
+        },
+        {
+          "id": "C",
+          "text": "startup phases that lasted"
+        },
+        {
+          "id": "D",
+          "text": "a phase starting up that lasted"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "f6fe79d8",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The rise of meal delivery service HomeBites and the app Foodie (that allows users to rate restaurants) are just two instance of how technology has dominated our eating culture.",
+          "runs": [
+            {
+              "text": "The rise of meal delivery service HomeBites and the app Foodie (that allows users to rate restaurants) are just two "
+            },
+            {
+              "text": "instance",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " of how technology has dominated our eating culture."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "illustrations"
+        },
+        {
+          "id": "C",
+          "text": "example"
+        },
+        {
+          "id": "D",
+          "text": "case"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "630cf5f2",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The baseball player wished he could speak to his fans directly, instead of having to address crowds of media representative.",
+          "runs": [
+            {
+              "text": "The baseball player wished he could speak to his fans directly, instead of having to address crowds of "
+            },
+            {
+              "text": "media representative.",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE."
+        },
+        {
+          "id": "B",
+          "text": "journalist."
+        },
+        {
+          "id": "C",
+          "text": "reporters."
+        },
+        {
+          "id": "D",
+          "text": "newscaster."
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "27885ca1",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Spizzerinctum, meaning high spirits or nerve, and ginchy, meaning excellent, are just two case of defunct American slang words.",
+          "runs": [
+            {
+              "text": "Spizzerinctum",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "text": ", meaning "
+            },
+            {
+              "text": "high spirits",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "text": " or "
+            },
+            {
+              "text": "nerve",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "text": ", and "
+            },
+            {
+              "text": "ginchy",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "text": ", meaning "
+            },
+            {
+              "text": "excellent",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "text": ", are just two "
+            },
+            {
+              "text": "case",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " of defunct American slang words."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "examples"
+        },
+        {
+          "id": "C",
+          "text": "illustration"
+        },
+        {
+          "id": "D",
+          "text": "instance"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "c84a9d26",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Federer, Nadal, and Wawrinka were each warriors of tennis, always fighting until the end of the fifth set.",
+          "runs": [
+            {
+              "text": "Federer, Nadal, and Wawrinka were each "
+            },
+            {
+              "text": "warriors of tennis",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": ", always fighting until the end of the fifth set."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "a warrior of tennis"
+        },
+        {
+          "id": "C",
+          "text": "master warriors of tennis"
+        },
+        {
+          "id": "D",
+          "text": "role models of tennis"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "b0a62888",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Pancakes and waffles seem like an easy breakfast items to make, but there are many people who cannot make them from scratch.",
+          "runs": [
+            {
+              "text": "Pancakes and waffles seem like "
+            },
+            {
+              "text": "an easy breakfast items",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " to make, but there are many people who cannot make them from scratch."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "a simple breakfast item"
+        },
+        {
+          "id": "C",
+          "text": "simple breakfast items"
+        },
+        {
+          "id": "D",
+          "text": "a basic breakfast item"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "e1762b5e",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In 1897, Charlotte Wiberg wed Arthur St. Andrassy in an unlikely places—inside a lion’s cage at a Boston zoo.",
+          "runs": [
+            {
+              "text": "In 1897, Charlotte Wiberg wed Arthur St. Andrassy in an unlikely "
+            },
+            {
+              "text": "places",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": "—"
+            },
+            {
+              "text": "inside a lion"
+            },
+            {
+              "text": "’"
+            },
+            {
+              "text": "s cage at a Boston zoo."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "venues"
+        },
+        {
+          "id": "C",
+          "text": "locales"
+        },
+        {
+          "id": "D",
+          "text": "location"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "efa83a77",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "All eight of Elizabeth's siblings became a politician; Elizabeth became a professional clown.",
+          "runs": [
+            {
+              "text": "All eight of Elizabeth's siblings became "
+            },
+            {
+              "text": "a politician",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": "; Elizabeth became a professional clown."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "a figurehead in the political arena"
+        },
+        {
+          "id": "C",
+          "text": "politicians"
+        },
+        {
+          "id": "D",
+          "text": "a political activist"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "857d4f98",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Jack and Jill were both adventurers who enjoyed exploring new places and using various means of locomotion.",
+          "runs": [
+            {
+              "text": "Jack and Jill were both "
+            },
+            {
+              "text": "adventurers",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " who enjoyed exploring new places and using various means of locomotion."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "traveler"
+        },
+        {
+          "id": "C",
+          "text": "explorer"
+        },
+        {
+          "id": "D",
+          "text": "journey-goer"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "6b3f2a18",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Otto Dix and George Grosz were both artists who contributed to the New Objectivity art movement.",
+          "runs": [
+            {
+              "text": "Otto Dix and George Grosz were both "
+            },
+            {
+              "text": "artists",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " who contributed to the "
+            },
+            {
+              "text": "New Objectivity",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "text": " art movement."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "an artist"
+        },
+        {
+          "id": "C",
+          "text": "a creator of socially-focused art"
+        },
+        {
+          "id": "D",
+          "text": "a painter"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "e30a81f7",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The attorneys, who are both officer in the bankruptcy field, believe that the recession will soon end.",
+          "runs": [
+            {
+              "text": "The attorneys, who are both "
+            },
+            {
+              "text": "officer",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " in the bankruptcy field, believe that the recession will soon end."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "practitioners"
+        },
+        {
+          "id": "C",
+          "text": "counselor"
+        },
+        {
+          "id": "D",
+          "text": "worker"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "ec2a924e",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Though Root Brew and Brew Roots are both an artisan root beer company, Root Brew has proven superior in blind taste tests.",
+          "runs": [
+            {
+              "text": "Though "
+            },
+            {
+              "text": "Root Brew",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "text": " and "
+            },
+            {
+              "text": "Brew Roots",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "text": " are both "
+            },
+            {
+              "text": "an artisan root beer company, ",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": "Root Brew",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "text": " has proven superior in blind taste tests."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "specialty root beer companies"
+        },
+        {
+          "id": "C",
+          "text": "an artisan root beer producer"
+        },
+        {
+          "id": "D",
+          "text": "a specialized root beer producer"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "b504eae4",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Although both of the men were a grocer, Sam received more business.",
+          "runs": [
+            {
+              "text": "Although both of the men were "
+            },
+            {
+              "text": "a grocer,",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " Sam received more business."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "grocery store owners"
+        },
+        {
+          "id": "C",
+          "text": "a grocery professional"
+        },
+        {
+          "id": "D",
+          "text": "a grocery vendor"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "379992ff",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The librarians, who are both a graduate of the same library science program, agree that libraries are more important now than ever.",
+          "runs": [
+            {
+              "text": "The librarians, who are both "
+            },
+            {
+              "text": "a graduate",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " of the same library science program, agree that libraries are more important now than ever."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "alumnus"
+        },
+        {
+          "id": "C",
+          "text": "grad"
+        },
+        {
+          "id": "D",
+          "text": "graduates"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "cc07a14b",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Science, law, and computer programming are all a profession suited for left-brained thinkers.",
+          "runs": [
+            {
+              "text": "Science, law, and computer programming are all "
+            },
+            {
+              "text": "a profession",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " suited for left-brained thinkers."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "a career"
+        },
+        {
+          "id": "C",
+          "text": "an area of specialization"
+        },
+        {
+          "id": "D",
+          "text": "fields"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "bc0c8e36",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The sushi chef's three slicing knives were extremely sharp.",
+          "runs": [
+            {
+              "text": "The sushi chef's three slicing "
+            },
+            {
+              "text": "knives",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " were extremely sharp."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "blade"
+        },
+        {
+          "id": "C",
+          "text": "cutter"
+        },
+        {
+          "id": "D",
+          "text": "utensil"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "34727a83",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The Burren and Cliffs of Moher are both example of Ireland's wild and magnificent geology.",
+          "runs": [
+            {
+              "text": "The Burren and Cliffs of Moher are both "
+            },
+            {
+              "text": "example",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " of Ireland's wild and magnificent geology."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "sample"
+        },
+        {
+          "id": "C",
+          "text": "models"
+        },
+        {
+          "id": "D",
+          "text": "case"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "3713fcfe",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The store's most successful fall sellers were its school item.",
+          "runs": [
+            {
+              "text": "The store's most successful fall sellers were its school "
+            },
+            {
+              "text": "item.",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "supplies."
+        },
+        {
+          "id": "C",
+          "text": "material."
+        },
+        {
+          "id": "D",
+          "text": "good."
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "4f1e2433",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The pink land iguana and the dragon millipede are two representative of animals that are naturally rosy in hue.",
+          "runs": [
+            {
+              "text": "The pink land iguana and the dragon millipede are two "
+            },
+            {
+              "text": "representative",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " of animals that are naturally rosy in hue."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "circumstance"
+        },
+        {
+          "id": "C",
+          "text": "example"
+        },
+        {
+          "id": "D",
+          "text": "cases"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "2b6a6b33",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "All of Hamlet's piglets had black spot on the forehead, except for Spotty, who was completely white.",
+          "runs": [
+            {
+              "text": "All of Hamlet's piglets had "
+            },
+            {
+              "text": "black spot",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " on the forehead, except for Spotty, who was completely white."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "black birthmark"
+        },
+        {
+          "id": "C",
+          "text": "black marks"
+        },
+        {
+          "id": "D",
+          "text": "signature spot"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "0e3e77ab",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Saturn, Uranus, Neptune, and Pluto have an orbit that takes more than 30 Earth years.",
+          "runs": [
+            {
+              "text": "Saturn, Uranus, Neptune, and Pluto have "
+            },
+            {
+              "text": "an orbit that takes",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " more than 30 Earth years."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "an orbit which takes"
+        },
+        {
+          "id": "C",
+          "text": "orbits that take"
+        },
+        {
+          "id": "D",
+          "text": "an orbit taking"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "1ebc3f64",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The cooks at the fancy restaurant were all former scholar of the local culinary arts school.",
+          "runs": [
+            {
+              "text": "The cooks at the fancy restaurant were all former "
+            },
+            {
+              "text": "scholar",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " of the local culinary arts school."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "pupil"
+        },
+        {
+          "id": "C",
+          "text": "students"
+        },
+        {
+          "id": "D",
+          "text": "graduate"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "f096434b",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Thomas Edison’s talking dolls did not have success in their day; people (including Edison himself) found them to be a creepy figure.",
+          "runs": [
+            {
+              "text": "Thomas Edison"
+            },
+            {
+              "text": "’"
+            },
+            {
+              "text": "s talking dolls did not have success in their day; people (including Edison himself) found them to be "
+            },
+            {
+              "text": "a creepy figure.",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "creepy figures."
+        },
+        {
+          "id": "C",
+          "text": "an unsettling figure."
+        },
+        {
+          "id": "D",
+          "text": "an eerie novelty."
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "1c4db97f",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Batman was viewed by his nemeses as crooked villains, but most of Gotham considered him a hero.",
+          "runs": [
+            {
+              "text": "Batman was viewed by his nemeses as "
+            },
+            {
+              "text": "crooked villains",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": ", but most of Gotham considered him a hero."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "a crooked villain,"
+        },
+        {
+          "id": "C",
+          "text": "crooks and villains,"
+        },
+        {
+          "id": "D",
+          "text": "villains who were crooked,"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "e09ba558",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "An aster is a particularly colorful flower to plant in one's garden or backyard.",
+          "runs": [
+            {
+              "text": "An aster is "
+            },
+            {
+              "text": "a particularly colorful flower",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " to plant in one's garden or backyard."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "particularly colorful flowers"
+        },
+        {
+          "id": "C",
+          "text": "particularly multi-colored flowers"
+        },
+        {
+          "id": "D",
+          "text": "particularly beautiful species"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "dabdff5e",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "One of Mario's sisters, Isabella, acted like divas around their mother, Rosalina.",
+          "runs": [
+            {
+              "text": "One of Mario's sisters, Isabella, acted like "
+            },
+            {
+              "text": "divas",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " around their mother, Rosalina."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "a princess"
+        },
+        {
+          "id": "C",
+          "text": "members of royalty"
+        },
+        {
+          "id": "D",
+          "text": "prima donnas"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "26955042",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Although the name suggests otherwise, koala bears are actually not a bear.",
+          "runs": [
+            {
+              "text": "Although the name suggests otherwise, koala bears are actually not "
+            },
+            {
+              "text": "a bear.",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "bear."
+        },
+        {
+          "id": "C",
+          "text": "really a bear."
+        },
+        {
+          "id": "D",
+          "text": "bears."
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "efa464ee",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "\"California Condors are a particularly ugly scavenging bird,\" said Jasper, picking his teeth.",
+          "runs": [
+            {
+              "text": "\"California Condors are "
+            },
+            {
+              "text": "a particularly ugly scavenging bird",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": ",\" said Jasper, picking his teeth."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "an ugly bird that scavenges for food,"
+        },
+        {
+          "id": "C",
+          "text": "particularly ugly scavenging birds,"
+        },
+        {
+          "id": "D",
+          "text": "the ugliest member of the Condor family,"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "1cc1bb93",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In the classic adventure trilogy, Indiana Jones' main jobs (when not hunting for rare artifacts) was as an archeology professor.",
+          "runs": [
+            {
+              "text": "In the classic adventure trilogy, Indiana Jones' main "
+            },
+            {
+              "text": "jobs",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " (when not hunting for rare artifacts) was as an archeology professor."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "vocation"
+        },
+        {
+          "id": "C",
+          "text": "occupations"
+        },
+        {
+          "id": "D",
+          "text": "professions"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "0d647f36",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Each character in the novel turned out to be spies working against the others.",
+          "runs": [
+            {
+              "text": "Each character in the novel turned out to be "
+            },
+            {
+              "text": "spies",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " working against the others."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "operatives"
+        },
+        {
+          "id": "C",
+          "text": "agents"
+        },
+        {
+          "id": "D",
+          "text": "a secret agent"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "d2be9259",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Extinct relatives of current animals, including penguins and armadillos, were often much larger than humans.",
+          "runs": [
+            {
+              "text": "Extinct "
+            },
+            {
+              "text": "relatives",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " of current animals, including penguins and armadillos, were often much larger than humans."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "predecessor"
+        },
+        {
+          "id": "C",
+          "text": "ancestor"
+        },
+        {
+          "id": "D",
+          "text": "relation"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "66f5aff4",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Each neighborhood was great places to raise a family. How could the prospective homeowners choose?",
+          "runs": [
+            {
+              "text": "Each neighborhood was "
+            },
+            {
+              "text": "great places",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " to raise a family. How could the prospective homeowners choose?"
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "a wonderful place"
+        },
+        {
+          "id": "C",
+          "text": "fantastic communities"
+        },
+        {
+          "id": "D",
+          "text": "excellent locations"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "ba9d4355",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "No matter how hopeless their plots may seem, each of the books in The Hunger Games series has a positive ending.",
+          "runs": [
+            {
+              "text": "No matter how hopeless their plots may seem, each of the books in "
+            },
+            {
+              "text": "The Hunger Games",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "text": " series has "
+            },
+            {
+              "text": "a positive ending.",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "positive terminations."
+        },
+        {
+          "id": "C",
+          "text": "positive finales."
+        },
+        {
+          "id": "D",
+          "text": "positive conclusions."
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "01b9b68c",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Falls and Shankill roads in Belfast, Ireland both serve as backdrops for many politically-motivated murals.",
+          "runs": [
+            {
+              "text": "Falls and Shankill roads in Belfast, Ireland both serve as "
+            },
+            {
+              "text": "backdrops",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " for many politically-motivated murals."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "foundation"
+        },
+        {
+          "id": "C",
+          "text": "canvas"
+        },
+        {
+          "id": "D",
+          "text": "background"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "add47a63",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Both of the postmen's trucks had a built-in compartment for storing dog treats to appease growly canines.",
+          "runs": [
+            {
+              "text": "Both of the postmen's trucks had "
+            },
+            {
+              "text": "a built-in compartment",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " for storing dog treats to appease growly canines."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "built-in pockets"
+        },
+        {
+          "id": "C",
+          "text": "a built-in drawer"
+        },
+        {
+          "id": "D",
+          "text": "a built-in case"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "6e7cf673",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The Salzburg Marionette Theater in Austria and the Bread and Puppet Theater in Vermont are among the most famous functioning performance house for puppet shows.",
+          "runs": [
+            {
+              "text": "The "
+            },
+            {
+              "text": "Salzburg Marionette Theater",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "text": " in Austria and the "
+            },
+            {
+              "text": "Bread and Puppet Theater",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "text": " in Vermont are among the most famous functioning "
+            },
+            {
+              "text": "performance house",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " for puppet shows."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "playhouses"
+        },
+        {
+          "id": "C",
+          "text": "venue"
+        },
+        {
+          "id": "D",
+          "text": "theater"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "66e160f0",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "A recent survey conducted at Rasmussen College revealed that in the mid-20th century, kids most aspired to be doctor.",
+          "runs": [
+            {
+              "text": "A recent survey conducted at Rasmussen College revealed that in the mid-20th century, kids most aspired to be "
+            },
+            {
+              "text": "doctor.",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "medical specialist."
+        },
+        {
+          "id": "C",
+          "text": "medical practitioner."
+        },
+        {
+          "id": "D",
+          "text": "physicians."
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "0e029add",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Margaret Atwood and Alice Munro, two of Canada's most celebrated authors, are also close pairs.",
+          "runs": [
+            {
+              "text": "Margaret Atwood and Alice Munro, two of Canada's most celebrated authors, are also "
+            },
+            {
+              "text": "close pairs.",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "a devoted companion."
+        },
+        {
+          "id": "C",
+          "text": "a great friend."
+        },
+        {
+          "id": "D",
+          "text": "close friends."
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "aa363158",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Ramona and Richard, the pioneer family's two bovine, were invaluable on the family's covered wagon voyage.",
+          "runs": [
+            {
+              "text": "Ramona and Richard, the pioneer family's two "
+            },
+            {
+              "text": "bovine",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": ", were invaluable on the family's covered wagon voyage."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "bull"
+        },
+        {
+          "id": "C",
+          "text": "cow"
+        },
+        {
+          "id": "D",
+          "text": "oxen"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "92045211",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Brian May of Queen and Gene Simmons of KISS were both teachers prior to becoming professional musician.",
+          "runs": [
+            {
+              "text": "Brian May of Queen and Gene Simmons of KISS were both teachers prior to becoming "
+            },
+            {
+              "text": "professional musician.",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "a famous rocker."
+        },
+        {
+          "id": "C",
+          "text": "famous musicians."
+        },
+        {
+          "id": "D",
+          "text": "a member of a famous rock band."
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "c845f1a0",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "A Hero of Our Time, written by the nineteenth century Russian author Mikhail Lermontov, is often considered the founding works of realist fiction.",
+          "runs": [
+            {
+              "text": "A Hero of Our Time",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "text": ", written by the nineteenth century Russian author Mikhail Lermontov, is often considered the founding "
+            },
+            {
+              "text": "works",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " of realist fiction."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "novels"
+        },
+        {
+          "id": "C",
+          "text": "documents"
+        },
+        {
+          "id": "D",
+          "text": "text"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "56f6476b",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Astronomers have discovered two larger-than-Earth planets only 54 lightyears from Earth; both are close to their sun, and are therefore a very hot planet.",
+          "runs": [
+            {
+              "text": "Astronomers have discovered two larger-than-Earth planets only 54 lightyears from Earth; both are close to their sun, and are therefore "
+            },
+            {
+              "text": "a very hot planet.",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "a hot planet."
+        },
+        {
+          "id": "C",
+          "text": "very hot planets."
+        },
+        {
+          "id": "D",
+          "text": "a scorching planet."
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "387f9972",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Different types of printmaking have a different matrix for transferring ink, such as a metal plate or a block of wood.",
+          "runs": [
+            {
+              "text": "Different types of printmaking have "
+            },
+            {
+              "text": "a different matrix",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " for transferring ink, such as a metal plate or a block of wood."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "different matrices"
+        },
+        {
+          "id": "C",
+          "text": "its own matrix"
+        },
+        {
+          "id": "D",
+          "text": "some matrix"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "947cbf7d",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Mayor Breuckner issued one statement about his support for local businesses, and a later comment about the ways in which the super-store could benefit the community; therefore, the townspeople figured that he must be lying in one of the speech.",
+          "runs": [
+            {
+              "text": "Mayor Breuckner issued one statement about his support for local businesses, and a later comment about the ways in which the super-store could benefit the community; therefore, the townspeople figured that he must be lying in one of the "
+            },
+            {
+              "text": "speech.",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "declaration."
+        },
+        {
+          "id": "C",
+          "text": "proclamation."
+        },
+        {
+          "id": "D",
+          "text": "speeches."
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "9268525f",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The politician promised one group that he would halt urban sprawl, and another that he would decrease urban density. Therefore, voters suspected that he was lying in one of his commitment.",
+          "runs": [
+            {
+              "text": "The politician promised one group that he would halt urban sprawl, and another that he would decrease urban density. Therefore, voters suspected that he was lying in one of his "
+            },
+            {
+              "text": "commitment.",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "pledge."
+        },
+        {
+          "id": "C",
+          "text": "guarantee."
+        },
+        {
+          "id": "D",
+          "text": "statements."
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "a0274dc8",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Theodor Geisel, also known as Dr. Seuss, was obsessive perfectionists: in addition to selecting specific colors, he chose precise degrees of color saturation for many of the components in his illustration.",
+          "runs": [
+            {
+              "text": "Theodor Geisel, also known as Dr. Seuss, was "
+            },
+            {
+              "text": "obsessive perfectionists:",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " in addition to selecting specific colors, he chose precise degrees of color saturation for many of the components in his illustration."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "writers obsessed with perfection"
+        },
+        {
+          "id": "C",
+          "text": "an obsessive perfectionist"
+        },
+        {
+          "id": "D",
+          "text": "obsessively perfect artists"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "687efbfe",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In 1958, the United Nations established a committee to promote international collaboration in space science, areas of research which attracted scientists from nations with various levels of scientific and technological development.",
+          "runs": [
+            {
+              "text": "In 1958, the United Nations established a committee to promote international collaboration in space science, "
+            },
+            {
+              "text": "areas",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " "
+            },
+            {
+              "text": "of research which attracted scientists from nations with various levels of scientific and technological development."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "divisions"
+        },
+        {
+          "id": "C",
+          "text": "a field"
+        },
+        {
+          "id": "D",
+          "text": "subjects"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "8cffc083",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "According to a study on Central Asian Glaciochemical data published in 1990, understanding which factors contribute to the chemical composition of the snow are critical steps in producing a reliable scientific analysis.",
+          "runs": [
+            {
+              "text": "According to a study on Central Asian Glaciochemical data published in 1990, understanding which factors contribute to the chemical composition of the snow "
+            },
+            {
+              "text": "are critical steps",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " in producing a reliable scientific analysis."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "is an essential step"
+        },
+        {
+          "id": "C",
+          "text": "are key steps"
+        },
+        {
+          "id": "D",
+          "text": "are necessary steps"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "4db5cfa3",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Although some research suggests that caffeine consumption may be counterproductive, many people consider coffee, tea, and other caffeinated beverages to be something necessary for their productivity and mental health.",
+          "runs": [
+            {
+              "text": "Although some research suggests that caffeine consumption may be counterproductive, many people consider coffee, tea, and other caffeinated beverages to be "
+            },
+            {
+              "text": "something necessary for",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " their productivity and mental health."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "necessities of"
+        },
+        {
+          "id": "C",
+          "text": "a necessary part of"
+        },
+        {
+          "id": "D",
+          "text": "something essential to"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "61bdf754",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "According to research on health and medicine in the Caribbean territories during the eighteenth century, the impact of an infectious disease depended partially on external factor like geography, residential arrangements, and trading patterns.",
+          "runs": [
+            {
+              "text": "According to research on health and medicine in the Caribbean territories during the eighteenth century, the impact of an infectious disease depended partially on external "
+            },
+            {
+              "text": "factor",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " like geography, residential arrangements, and trading patterns."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "component"
+        },
+        {
+          "id": "C",
+          "text": "characteristic"
+        },
+        {
+          "id": "D",
+          "text": "circumstances"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "1bd02463",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Although military governments are arguably more efficient, these benefits are often outbalanced by the potential for corruption when leaders are less accountable to the public.",
+          "runs": [
+            {
+              "text": "Although military governments are arguably more efficient, "
+            },
+            {
+              "text": "these benefits are",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " often outbalanced by the potential for corruption when leaders are less accountable to the public."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "this advantage is"
+        },
+        {
+          "id": "C",
+          "text": "these assets are"
+        },
+        {
+          "id": "D",
+          "text": "these virtues are"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "04d0eed6",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Capoeira is a centuries-old Brazilian martial art that integrates the aspect of acrobatics, fighting, dance, and music.",
+          "runs": [
+            {
+              "text": "Capoeira is a centuries-old Brazilian martial art that integrates "
+            },
+            {
+              "text": "the aspect",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " of acrobatics, fighting, dance, and music."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "aspects"
+        },
+        {
+          "id": "C",
+          "text": "some aspect"
+        },
+        {
+          "id": "D",
+          "text": "a particular aspect"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "3501a68f",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Pork belly buns and shrimp summer rolls appear to be an uncommon appetizer in the United States, but many restaurants in Asia serve them.",
+          "runs": [
+            {
+              "text": "Pork belly buns and shrimp summer rolls appear to be "
+            },
+            {
+              "text": "an uncommon appetizer",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " in the United States, but many restaurants in Asia serve them."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "exotic appetizers"
+        },
+        {
+          "id": "C",
+          "text": "a rare appetizer"
+        },
+        {
+          "id": "D",
+          "text": "an unusual appetizer"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "9abeed67",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Leonardo da Vinci, Caravaggio, and Rembrandt were each experts in the chiaroscuro technique, which exploits the strong contrast between light and shadow.",
+          "runs": [
+            {
+              "text": "Leonardo da Vinci, Caravaggio, and Rembrandt were each "
+            },
+            {
+              "text": "experts in ",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": "the chiaroscuro technique, which exploits the strong contrast between light and shadow."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "painters experienced in"
+        },
+        {
+          "id": "C",
+          "text": "an expert in"
+        },
+        {
+          "id": "D",
+          "text": "masters of"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "6530e75b",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "For protection, medieval knights often wore a combination of padded garments and plate armor, which was a cumbersome article of clothing.",
+          "runs": [
+            {
+              "text": "For protection, medieval knights often wore a combination of padded garments and plate armor, which was a cumbersome "
+            },
+            {
+              "text": "article of clothing.",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "ensemble."
+        },
+        {
+          "id": "C",
+          "text": "layer."
+        },
+        {
+          "id": "D",
+          "text": "accessory."
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "f1241c1e",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Kintsugi, a Japanese method for repairing broken pottery in an aesthetically pleasing manner, can be understood as both an art form and theories of redemption.",
+          "runs": [
+            {
+              "text": "Kintsugi, a Japanese method for repairing broken pottery in an aesthetically pleasing manner, can be understood as both an art form and "
+            },
+            {
+              "text": "theories",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " of redemption."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "a philosophy"
+        },
+        {
+          "id": "C",
+          "text": "ideologies"
+        },
+        {
+          "id": "D",
+          "text": "doctrines"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "1bb52800",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The urban farm, a functional hydroponic growth system inside Tokyo's Pasona human resources firm, is surrounded by office space.",
+          "runs": [
+            {
+              "text": "The urban farm, "
+            },
+            {
+              "text": "a functional hydroponic growth system",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " inside Tokyo's Pasona human resources firm, is surrounded by office space."
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "operational hydroponic growth systems"
+        },
+        {
+          "id": "C",
+          "text": "functional hydroponic growing gardens"
+        },
+        {
+          "id": "D",
+          "text": "hydroponic growth operations"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "d39c86fc",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Dr. Jen Welter, the NFL's first woman coach, is both psychologists and former professional running backs.",
+          "runs": [
+            {
+              "text": "Dr. Jen Welter, the NFL's first woman coach, is both "
+            },
+            {
+              "text": "psychologists and former professional running backs.",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "a psychologist and former professional running back."
+        },
+        {
+          "id": "C",
+          "text": "psychologists and former professional running back."
+        },
+        {
+          "id": "D",
+          "text": "a psychologist and former professional running backs."
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "11413a8b",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The young astrophysicist had always been fascinated with watching comets and the aurora borealis, as well as other celestial event.",
+          "runs": [
+            {
+              "text": "The young astrophysicist had always been fascinated with watching comets and the aurora borealis, as well as other celestial "
+            },
+            {
+              "text": "event.",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "wonder."
+        },
+        {
+          "id": "C",
+          "text": "phenomena."
+        },
+        {
+          "id": "D",
+          "text": "rarity."
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    },
+    {
+      "id": "ed2bf54b",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "Standard English Conventions",
+      "skill": "Noun agreement",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The art of speed reading, especially in occupations that prioritize swift comprehension and repackaging of novel content, is a key skill.",
+          "runs": [
+            {
+              "text": "The art of speed reading, especially in occupations that prioritize swift comprehension and repackaging of novel content, "
+            },
+            {
+              "text": "is a key skill.",
+              "marks": [
+                "underline"
+              ]
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "NO CHANGE"
+        },
+        {
+          "id": "B",
+          "text": "are essential abilities."
+        },
+        {
+          "id": "C",
+          "text": "are central techniques."
+        },
+        {
+          "id": "D",
+          "text": "are vital capacities."
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "答案见《语法.pdf》第 146 页。原书未提供逐题解析。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "语法竖版成稿.docx",
+          "sha256": "9e1004a8751291aa00ad566e5631994e5d4c1f010bc9dada07b1197b79c35ca6",
+          "pages": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "extractionMethod": "docx-xml-text-and-run-styles"
+        },
+        {
+          "role": "answer",
+          "path": "语法.pdf",
+          "sha256": "3a6e11c0176cd3456c7c9f08bd0f652b77e0823a4f657566e7e772781079079d",
+          "pages": [
+            146
+          ],
+          "extractionMethod": "pdf-text-layout"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": []
+    }
+  ]
+}

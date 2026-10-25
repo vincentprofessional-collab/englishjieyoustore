@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import { listExamContentOverrides } from "@/lib/exam-content/overrides";
 import type { Cet4SetSummary } from "@/lib/cet4/library";
 
 type KnowledgeSummary = { id: string; title: string; topic: string; excerpt: string };
@@ -32,8 +33,23 @@ function answerLabel(entry: Cet4SetSummary) {
   return "提交后查看可用答案";
 }
 
+function countQuestions(value: unknown): number {
+  if (!value || typeof value !== "object") return 0;
+  if (Array.isArray(value)) return value.reduce((sum, item) => sum + countQuestions(item), 0);
+  return Object.entries(value as Record<string, unknown>).reduce((sum, [key, child]) => {
+    if (key === "questions" && Array.isArray(child)) {
+      return sum + child.reduce((count, question) => {
+        if (question && typeof question === "object" && Array.isArray((question as Record<string, unknown>).questionNumbers)) return count + ((question as Record<string, unknown>).questionNumbers as unknown[]).length;
+        return count + 1;
+      }, 0) + countQuestions(child);
+    }
+    return sum + countQuestions(child);
+  }, 0);
+}
+
 export function Cet4Library({ knowledge, sets, exam = "cet4", initialEntry }: { knowledge: KnowledgeSummary[]; sets: Cet4SetSummary[]; exam?: CetExam; initialEntry?: Entry }) {
   const searchParams = useSearchParams();
+  const [activeSets, setActiveSets] = useState(sets);
   const requestedEntry = searchParams.get("entry") === "knowledge" ? "papers" : searchParams.get("entry");
   const [entry, setEntry] = useState<Entry>(() => requestedEntry === "knowledge" || requestedEntry === "practice" || requestedEntry === "papers" ? requestedEntry : initialEntry ?? (sets.some((item) => item.kind === "practice") ? "practice" : knowledge.length ? "knowledge" : "papers"));
   const [topic, setTopic] = useState("全部");
@@ -45,8 +61,63 @@ export function Cet4Library({ knowledge, sets, exam = "cet4", initialEntry }: { 
       setEntry(exam === "cet4" && requestedEntry === "knowledge" ? "papers" : requestedEntry);
     }
   }, [exam, requestedEntry]);
-  const practice = sets.filter((item) => item.kind === "practice");
-  const papers = sets.filter((item) => item.kind === "paper");
+  useEffect(() => {
+    let cancelled = false;
+    setActiveSets(sets);
+    async function loadOverrides() {
+      const { overrides, error } = await listExamContentOverrides(exam);
+      if (cancelled || error) return;
+      const byId = new Map(overrides.map((item) => [item.bank_id, item]));
+      const knownIds = new Set(sets.map((item) => item.id));
+      const savedSets = sets.flatMap((item) => {
+        const saved = byId.get(item.id);
+        if (saved?.is_deleted) return [];
+        const data = saved?.bank_data as Record<string, unknown> | null;
+        if (!data) return [item];
+        return [{
+          ...item,
+          title: typeof data.title === "string" ? data.title : item.title,
+          year: typeof data.year === "string" ? data.year : item.year,
+          region: typeof data.region === "string" ? data.region : item.region,
+          variant: typeof data.variant === "string" ? data.variant : item.variant,
+          questionCount: typeof data.questionCount === "number" ? data.questionCount : item.questionCount,
+          answeredCount: typeof data.answeredCount === "number" ? data.answeredCount : item.answeredCount,
+          explanationCount: typeof data.explanationCount === "number" ? data.explanationCount : item.explanationCount,
+          answerStatus: data.answerStatus === "answered" || data.answerStatus === "partial" || data.answerStatus === "none" || data.answerStatus === "conflict" ? data.answerStatus : item.answerStatus,
+          coverageNote: typeof data.coverageNote === "string" ? data.coverageNote : item.coverageNote,
+        }];
+      });
+      const addedSets = overrides.flatMap((saved) => {
+        const data = saved.bank_data as Record<string, unknown> | null;
+        if (knownIds.has(saved.bank_id) || saved.is_deleted || !data) return [];
+        const kind: "paper" | "practice" = data.kind === "practice" ? "practice" : "paper";
+        const year = String(data.year || "未标年份");
+        const title = typeof data.title === "string" ? data.title : saved.title || saved.bank_id;
+        const count = typeof data.questionCount === "number" ? data.questionCount : countQuestions(data);
+        const answered = typeof data.answeredCount === "number" ? data.answeredCount : typeof data.answerCount === "number" ? data.answerCount : 0;
+        return [{
+          id: saved.bank_id,
+          kind,
+          title,
+          year,
+          region: typeof data.region === "string" ? data.region : "全国",
+          variant: typeof data.variant === "string" ? data.variant : "",
+          questionCount: count,
+          answeredCount: answered,
+          explanationCount: typeof data.explanationCount === "number" ? data.explanationCount : 0,
+          answerStatus: answered > 0 ? answered >= count ? "answered" as const : "partial" as const : "none" as const,
+          questionTypes: [],
+          href: "/" + exam + "/" + encodeURIComponent(saved.bank_id) + "?kind=" + kind,
+          quality: { structureStatus: "approved", structureConfidence: 1, issueCount: 0 },
+        }];
+      });
+      setActiveSets([...savedSets, ...addedSets]);
+    }
+    void loadOverrides();
+    return () => { cancelled = true; };
+  }, [exam, sets]);
+  const practice = activeSets.filter((item) => item.kind === "practice");
+  const papers = activeSets.filter((item) => item.kind === "paper");
   const topics = useMemo(() => ["全部", ...(exam === "cet6" ? ["写作", "听力", "选词填空", "长篇阅读", "仔细阅读", "翻译"] : practiceOrder).filter((name) => practice.some((item) => family(item.title, exam) === name))], [practice, exam]);
   const years = useMemo(() => [...new Set(papers.map((item) => item.year).filter(Boolean))].sort((a, b) => b.localeCompare(a)), [papers]);
   const regions = useMemo(() => [...new Set(papers.map((item) => item.region).filter(Boolean))].sort((a, b) => a.localeCompare(b, "zh-CN")), [papers]);

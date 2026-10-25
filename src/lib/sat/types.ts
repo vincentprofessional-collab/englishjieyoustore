@@ -6,7 +6,8 @@ export type SatSourceRef = {
   extractionMethod: string;
 };
 
-export type SatParagraphBlock = { type: "paragraph" | "quote"; text: string };
+export type SatTextRun = { text: string; marks?: Array<"bold" | "italic" | "underline"> };
+export type SatParagraphBlock = { type: "paragraph" | "quote"; text: string; runs?: SatTextRun[] };
 export type SatNotesBlock = { type: "notes"; items: string[] };
 export type SatTableBlock = {
   type: "table";
@@ -32,7 +33,8 @@ export type SatContentBlock =
   | SatFigureBlock
   | SatTwoTextBlock;
 
-export type SatChoice = { id: "A" | "B" | "C" | "D"; text: string };
+export type SatChoice = { id: "A" | "B" | "C" | "D"; text: string; runs?: SatTextRun[] };
+export type SatDifficulty = "Easy" | "Medium" | "Hard" | "Unrated";
 
 export type SatQuestion = {
   id: string;
@@ -40,7 +42,7 @@ export type SatQuestion = {
   test: "Reading and Writing";
   domain: string;
   skill: string;
-  difficulty: "Easy" | "Medium" | "Hard";
+  difficulty: SatDifficulty;
   contentBlocks: SatContentBlock[];
   prompt: string;
   choices: SatChoice[];
@@ -59,7 +61,7 @@ export type SatSet = {
   test: "Reading and Writing";
   domain: string;
   skill: string;
-  difficulty: "Easy" | "Medium" | "Hard";
+  difficulty: SatDifficulty;
   expectedCount: number;
   questionIds: string[];
   sourceRefs: Array<Pick<SatSourceRef, "role" | "path" | "sha256">>;
@@ -84,6 +86,25 @@ export type SatCatalogIndex = {
   expectedQuestionCount: number;
   domains: SatDomain[];
   sets: SatSetSummary[];
+};
+
+export type SatKnowledgeTopic = {
+  id: string;
+  label: string;
+  title: string;
+  setId: string;
+  questionCount: number;
+  sourceQuestionCount: number;
+  reviewRequiredCount: number;
+  questionPages: number[];
+  answerPage: number;
+  reviewNote?: string;
+};
+
+export type SatKnowledgeIndex = {
+  totalQuestionCount: number;
+  reviewRequiredCount: number;
+  groups: Array<{ id: string; label: string; topics: SatKnowledgeTopic[] }>;
 };
 
 export type SatProgress = {
