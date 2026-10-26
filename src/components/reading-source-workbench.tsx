@@ -103,7 +103,7 @@ function EditableQuestions({ part, partRows, answers, onAnswer, disabled, locked
 
 function EditablePassage({ part }: { part: EditableReadingPart }) {
   return <div className="reading-source-editable-passage">
-    {part.passageTitle ? <h2>{part.passageTitle}</h2> : null}
+    <h2>{part.passageTitle}</h2>
     <p className="reading-source-direction reading-source-passage-direction">{part.passageDirections}</p>
     {part.subtitle ? <p className="reading-source-subtitle">{part.subtitle}</p> : null}
     {part.sections.map((section, sectionIndex) => <section className="reading-source-passage-section" key={`${section.label ?? "passage"}-${sectionIndex}`}>

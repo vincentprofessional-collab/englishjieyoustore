@@ -47,7 +47,7 @@ export type EditableReadingPart = {
     physicalPages: number[];
     reviewedAt: string;
   };
-  passageTitle?: string;
+  passageTitle: string;
   subtitle?: string;
   passageDirections: string;
   sections: EditableReadingSection[];
@@ -8926,6 +8926,7 @@ export const EDITABLE_READING_PARTS: Record<string, EditableReadingPart> = {
   },
   "cambridge-14-test-4-part3": {
     status: "source-verified",
+    passageTitle: "Marine debris",
     source: {
       pdfName: "【14】剑桥雅思真题14.pdf",
       sha256: "10098627c87ac6d7a9512a1d77a92a400f6c3a5be664cf4723a12f535e88ff5b",

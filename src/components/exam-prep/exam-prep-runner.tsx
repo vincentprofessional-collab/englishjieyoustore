@@ -2,8 +2,10 @@
 
 import Link from "next/link";
 import { VocabularyMobileBackLink } from "@/components/vocabulary-mobile-back-link";
+import { ExamPrepQuestionAdmin } from "@/components/exam-prep/exam-prep-question-admin";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { getExamContentOverride } from "@/lib/exam-content/overrides";
+import { supabase } from "@/lib/supabase/client";
+import { applyExamPrepQuestionOverrides, loadExamPrepQuestionOverrides, type ExamPrepQuestionOverrideState } from "@/lib/exam-prep/question-overrides";
 import styles from "./exam-prep-runner.module.css";
 
 type ExamId = "postgraduate" | "gre" | "gmat";
@@ -168,7 +170,8 @@ function PaperSection({ section, sectionIndex, answers, submitted, onAnswer }: {
 }
 
 export function ExamPrepRunner({ exam, setId, dataPath }: { exam: ExamId; setId: string; dataPath: string }) {
-  const [data, setData] = useState<ExamSet | null>(null);
+  const [baseData, setBaseData] = useState<ExamSet | null>(null);
+  const [questionOverrides, setQuestionOverrides] = useState<ExamPrepQuestionOverrideState>({ overrides: {}, additions: [] });
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [submittedIds, setSubmittedIds] = useState<Set<string>>(new Set());
   const [allSubmitted, setAllSubmitted] = useState(false);
@@ -180,26 +183,34 @@ export function ExamPrepRunner({ exam, setId, dataPath }: { exam: ExamId; setId:
 
   useEffect(() => {
     let cancelled = false;
-    setData(null);
+    setBaseData(null);
+    setQuestionOverrides({ overrides: {}, additions: [] });
     setError("");
     async function loadSet() {
       try {
-        const { override, error: overrideError } = await getExamContentOverride(exam, setId);
-        if (cancelled) return;
-        if (!overrideError && override?.is_deleted) {
-          setError("这组题目已从管理员后台删除。");
-          return;
-        }
-        if (!overrideError && override?.bank_data) {
-          const content = override.bank_data as ExamSet;
-          setData(exam === "gmat" ? cleanGmatBank(content) : content);
-          return;
-        }
-        if (!dataPath) throw new Error("自定义题库内容不存在。");
         const response = await fetch(`/exam-prep/${exam}/${dataPath}`);
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        const content = await response.json() as ExamSet;
-        setData(exam === "gmat" ? cleanGmatBank(content) : content);
+        const rawStaticData = await response.json() as ExamSet;
+        const staticData = exam === "gmat" ? cleanGmatBank(rawStaticData) : rawStaticData;
+        if (cancelled) return;
+        setBaseData(staticData);
+        if (exam === "gmat") {
+          try {
+            const { data: saved, error: savedError } = await supabase
+              .from("exam_prep_banks")
+              .select("bank_data")
+              .eq("exam", "gmat")
+              .eq("bank_id", setId)
+              .eq("status", "published")
+              .maybeSingle();
+            if (!cancelled && !savedError && saved?.bank_data) setBaseData(cleanGmatBank(saved.bank_data as ExamSet));
+          } catch { /* Keep the static GMAT bank available when its optional override table is unavailable. */ }
+        } else if (exam === "gre") {
+          try {
+            const overrides = await loadExamPrepQuestionOverrides(exam, setId);
+            if (!cancelled) setQuestionOverrides(overrides);
+          } catch { /* Keep the static GRE bank available when the override store is unreachable. */ }
+        }
       } catch {
         if (!cancelled) setError("这组题目暂时无法载入，请返回目录选择其他练习。");
       }
@@ -222,6 +233,11 @@ export function ExamPrepRunner({ exam, setId, dataPath }: { exam: ExamId; setId:
     if (loadedStorageKey !== storageKey) return;
     window.localStorage.setItem(storageKey, JSON.stringify({ answers, submittedIds: [...submittedIds], allSubmitted } satisfies SavedAttempt));
   }, [answers, allSubmitted, loadedStorageKey, storageKey, submittedIds]);
+
+  const data = useMemo(() => {
+    if (!baseData) return null;
+    return exam === "gre" ? applyExamPrepQuestionOverrides(baseData, questionOverrides) : baseData;
+  }, [baseData, exam, questionOverrides]);
 
   const questionRefs = useMemo(() => {
     const refs: { id: string; question: Question }[] = [];
@@ -283,6 +299,7 @@ export function ExamPrepRunner({ exam, setId, dataPath }: { exam: ExamId; setId:
     <header className="senior-high-v2-runner-header">{exam === "gmat" ? <VocabularyMobileBackLink ariaLabel="返回题库" className="senior-high-back" desktopLabel="‹" href={`/${exam}?entry=${isPaper ? "papers" : "practice"}`} /> : <Link className="senior-high-back" href={`/${exam}?entry=${isPaper ? "papers" : "practice"}`}>← 返回题库</Link>}<div className="senior-high-v2-runner-title"><h1>{data.title}</h1></div><div aria-label={`${answeredCount}/${data.questionCount}`} className="senior-high-v2-progress"><strong>{answeredCount}/{data.questionCount}</strong>{exam === "gmat" ? null : <span>已作答</span>}</div></header>
     {exam !== "gmat" && data.reviewCount ? <div className="exam-prep-review-note">本组有 {data.reviewCount}{data.unitLabel ? ` 个${data.unitLabel}` : " 题"}标记为来源复核项；题目仍可练习，查看答案时请留意原文缺失或 OCR 质量。</div> : null}
     {data.sections?.map((section, sectionIndex) => <PaperSection key={`${section.title}-${sectionIndex}`} onAnswer={saveAnswer} section={section} sectionIndex={sectionIndex} submitted={allSubmitted} answers={answers} />)}
+    {exam === "gre" && baseData?.questions ? <ExamPrepQuestionAdmin exam={exam} setId={setId} questions={baseData.questions} overrideState={questionOverrides} onChange={(next) => { setQuestionOverrides(next); setQuestionPage(0); }} /> : null}
     {data.questions?.length ? <>
       {groupNames.length > 1 ? <div className="senior-high-v2-filters"><label>题组<select onChange={(event) => { setActiveGroup(event.target.value); setQuestionPage(0); }} value={currentGroup}>{groupNames.map((group) => <option key={group}>{group}</option>)}</select></label></div> : null}
       {showPageNavigation ? <nav aria-label="题目页码" className="exam-prep-pagination"><button disabled={questionPage === 0} onClick={() => setQuestionPage((page) => Math.max(0, page - 1))} type="button">上一页</button><span>第 {pageStart}–{pageEnd} 题 · 共 {groupedQuestions.length} 题</span><button disabled={questionPage + 1 >= pageCount} onClick={() => setQuestionPage((page) => Math.min(pageCount - 1, page + 1))} type="button">下一页</button></nav> : null}

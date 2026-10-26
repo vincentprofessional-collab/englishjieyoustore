@@ -18,7 +18,6 @@ export async function getExamContentOverride(exam: ExamContentId, bankId: string
     .select("bank_id,title,category,source,bank_data,is_deleted,updated_at")
     .eq("exam", exam)
     .eq("bank_id", bankId)
-    .eq("status", "published")
     .maybeSingle();
   return { override: (data as ExamContentOverride | null) ?? null, error };
 }
@@ -27,7 +26,6 @@ export async function listExamContentOverrides(exam: ExamContentId) {
   const { data, error } = await supabase
     .from("exam_prep_banks")
     .select("bank_id,title,category,source,bank_data,is_deleted,updated_at")
-    .eq("exam", exam)
-    .eq("status", "published");
+    .eq("exam", exam);
   return { overrides: (data as ExamContentOverride[] | null) ?? [], error };
 }

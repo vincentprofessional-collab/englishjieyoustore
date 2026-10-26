@@ -7,7 +7,6 @@ import { useEffect, useRef, useState } from "react";
 import styles from "./sat.module.css";
 import type { SatContentBlock, SatProgress, SatQuestion, SatSet, SatTextRun } from "@/lib/sat/types";
 import { applySatQuestionOverrides, loadSatQuestionOverrides, saveSatQuestionOverrides, type SatQuestionOverridePatch, type SatQuestionOverrides } from "@/lib/sat/question-overrides";
-import { getExamContentOverride } from "@/lib/exam-content/overrides";
 import { supabase } from "@/lib/supabase/client";
 
 const PROGRESS_PREFIX = "sat-progress:v1:";
@@ -178,18 +177,17 @@ export function SatPracticeRunner({ setId }: { setId: string }) {
 
   useEffect(() => {
     Promise.all([
-      fetch(`/sat/sets/${setId}.json`, { cache: "no-store" }).then((response) => response.ok ? response.json() as Promise<SatSet> : null),
+      fetch(`/sat/sets/${setId}.json`).then((response) => {
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return response.json() as Promise<SatSet>;
+      }),
       loadSatQuestionOverrides(),
-      getExamContentOverride("sat", setId),
     ])
-      .then(([payload, loadedOverrides, { override }]) => {
-        if (override?.is_deleted) throw new Error("这套 SAT 题组已由管理员删除。");
-        const effectiveSet = override?.bank_data ? override.bank_data as unknown as SatSet : payload;
-        if (!effectiveSet) throw new Error("这套 SAT 题组不存在或暂时无法载入。");
+      .then(([payload, loadedOverrides]) => {
         setQuestionOverrides(loadedOverrides);
-        setData(applySatQuestionOverrides(effectiveSet, loadedOverrides));
+        setData(applySatQuestionOverrides(payload, loadedOverrides));
       })
-      .catch((reason: unknown) => setError(reason instanceof Error ? reason.message : "这套 SAT 题组暂时无法载入，请返回后重试。"));
+      .catch(() => setError("这套 SAT 题组暂时无法载入，请返回后重试。"));
     setProgress(readProgress(setId));
     setRestored(true);
   }, [setId]);

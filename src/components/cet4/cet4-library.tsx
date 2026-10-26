@@ -8,7 +8,7 @@ import type { Cet4SetSummary } from "@/lib/cet4/library";
 
 type KnowledgeSummary = { id: string; title: string; topic: string; excerpt: string };
 type Entry = "knowledge" | "practice" | "papers";
-type CetExam = "cet4" | "cet6";
+type CetExam = "cet4" | "cet6" | "kaoyan";
 const practiceOrder = ["听力理解", "听写填空", "选词填空", "长篇阅读", "仔细阅读", "词汇与语法", "完形填空", "翻译", "写作", "综合题型"];
 
 function family(title: string, exam?: CetExam) {
@@ -65,6 +65,7 @@ export function Cet4Library({ knowledge, sets, exam = "cet4", initialEntry }: { 
     let cancelled = false;
     setActiveSets(sets);
     async function loadOverrides() {
+      if (exam === "kaoyan") return;
       const { overrides, error } = await listExamContentOverrides(exam);
       if (cancelled || error) return;
       const byId = new Map(overrides.map((item) => [item.bank_id, item]));

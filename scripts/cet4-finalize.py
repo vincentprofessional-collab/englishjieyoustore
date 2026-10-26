@@ -147,8 +147,7 @@ for category,slug in zip(families,slugs):
     refs={ref['sha256']:ref for section in parts for group in section['groups'] for q in group['questions'] for ref in q['sourceRefs']}
     practice.append({'schemaVersion':2,'id':'practice-cet4-'+slug,'kind':'practice',
                      'title':'大学英语四级'+category+'训练','year':'1990–2019','region':'全国','variant':'',
-                     'coverageNote':'仅开放已核对题组；缺答案或对应关系不明的资料待复核',
-                     'instructions':[{'type':'notice','tone':'info','text':'按来源年份选择练习，题目保留原题号。仅开放已核对题组，其余资料继续复核。'}],
+                     'instructions':[],
                      'sections':parts,'assetRefs':[assets[aid]for aid in sorted(used)],'sourceRefs':list(refs.values()),
                      'quality':{'structureStatus':'approved','structureConfidence':1,'issueCount':0,'issues':[]}})
 

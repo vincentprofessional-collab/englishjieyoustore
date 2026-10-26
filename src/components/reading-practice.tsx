@@ -25,8 +25,8 @@ import {
   type ReadingPassageFigure,
   type ReadingTest,
 } from "@/lib/ielts/reading";
-import { getRawReadingParagraphs } from "@/lib/ielts/reading-article-text";
 import type { ReadingSourcePage } from "@/lib/ielts/reading-source-model";
+import { getRawReadingParagraphs } from "@/lib/ielts/reading-article-text";
 import { ArticleInlineAnnotatedParagraph } from "@/components/article-inline-annotated-text";
 import { useArticleInlineAnnotations } from "@/components/use-article-inline-annotations";
 import {

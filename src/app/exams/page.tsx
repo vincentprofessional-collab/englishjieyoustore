@@ -1,9 +1,10 @@
 import fs from "node:fs";
 import path from "node:path";
 import { MobileExamHub, type MobileExam } from "@/components/mobile-section-hubs";
-import { getCetExamEntries, getCetExamSetIndex, type CetExam } from "@/lib/cet4/library";
+import { getCetExamSetIndex, type CetExam } from "@/lib/cet4/library";
 import { JUNIOR_HIGH_PAPER_CATALOG } from "@/lib/junior-high/paper-catalog";
 import { JUNIOR_HIGH_PRACTICE_CATALOG } from "@/lib/junior-high/practice-catalog";
+import { getKaoyanSetIndex } from "@/lib/kaoyan/library";
 
 export const metadata = { title: "考试 | 英文解忧杂货铺" };
 
@@ -16,15 +17,8 @@ function readJson<T>(relativePath: string): T {
 
 function cetSections(exam: CetExam) {
   const prefix = exam === "cet4" ? "四级" : "六级";
-  const knowledge = getCetExamEntries(exam).filter((entry) => entry.section === "知识点").map((entry) => ({
-    title: entry.title,
-    description: entry.excerpt,
-    href: `/${exam}/${entry.id}`,
-    meta: entry.topic,
-  }));
   const sets = getCetExamSetIndex(exam).entries;
   return [
-    ...(exam === "cet4" ? [] : [{ id: "knowledge", title: "知识点", items: knowledge }]),
     { id: "practice", title: "题型训练", items: sets.filter((item) => item.kind === "practice").map((item) => ({ title: item.title, description: `${item.questionCount} 题 · ${item.answerStatus === "answered" ? "答案完整" : "含可用答案"}`, href: item.href, meta: item.questionTypes.join("、") })) },
     { id: "papers", title: "历年试卷", items: sets.filter((item) => item.kind === "paper").map((item) => ({ title: item.title, description: `${item.year} · ${item.region} · ${item.questionCount} 题`, href: item.href, meta: item.answerStatus === "answered" ? "答案完整" : "查看试卷" })) },
   ].map((section) => ({ ...section, items: section.items.length ? section.items : [{ title: `${prefix}目录`, description: "进入现有题库目录", href: `/${exam}?entry=${section.id}` }] }));
@@ -47,6 +41,7 @@ export default function ExamsPage() {
     .map((topic) => ({ title: topic, description: "知识点练习与即时判分", href: `/senior-high?entry=knowledge&topic=${encodeURIComponent(topic)}`, meta: "知识点" }));
   const seniorIndex = readJson<{ entries: PublicEntry[] }>("senior-high/index.json");
   const satIndex = readJson<{ domains: { id: string; label: string }[]; sets: { id: string; domain: string; skill: string; difficulty: string; expectedCount: number }[] }>("sat/index.json");
+  const kaoyanIndex = getKaoyanSetIndex();
   const exams: MobileExam[] = [
     { id: "junior", title: "中考", sections: [
       { id: "knowledge", title: "知识点", items: juniorTopics },
@@ -61,9 +56,8 @@ export default function ExamsPage() {
     { id: "cet4", title: "四级", sections: cetSections("cet4") },
     { id: "cet6", title: "六级", sections: cetSections("cet6") },
     { id: "postgraduate", title: "考研", sections: [
-      { id: "practice", title: "题型训练", items: [{ title: "2020–2026 完整试卷", description: "英语一、英语二整卷练习，提交后查看答案与解析", href: "/postgraduate?entry=papers", meta: "14 套试卷" }] },
-      { id: "papers", title: "历年试卷", items: [{ title: "2020–2026 考研英语真题", description: "按年份选择英语一或英语二", href: "/postgraduate?entry=papers", meta: "完整试卷" }] },
-      { id: "vocabulary", title: "核心词汇", items: [{ title: "考研词汇", description: "进入现有词汇书与复习功能", href: "/vocabulary/books?level=考研", meta: "背单词" }] },
+      { id: "practice", title: "题型训练", items: kaoyanIndex.entries.filter((item) => item.kind === "practice").map((item) => ({ title: item.title, description: `${item.questionCount} 题 · 1980–2019`, href: item.href, meta: item.variant })) },
+      { id: "papers", title: "历年真题", items: kaoyanIndex.entries.filter((item) => item.kind === "paper").map((item) => ({ title: item.title, description: `${item.year} · ${item.region} · ${item.questionCount} 题`, href: item.href, meta: item.variant })) },
     ] },
     { id: "ielts", title: "雅思", sections: [
       { id: "listening", title: "听力", items: [
@@ -88,11 +82,9 @@ export default function ExamsPage() {
       items: satIndex.sets.filter((item) => item.domain === domain.label).map((item) => ({ title: item.skill.replace(/\b\w/g, (letter) => letter.toUpperCase()), description: `${item.difficulty} · ${item.expectedCount} 题`, href: `/sat/practice/${item.id}`, meta: domain.label })),
     })) },
     { id: "gmat", title: "GMAT", sections: [
-      { id: "practice", title: "题型训练", items: [{ title: "GMAT 官方指南题型练习", description: "定量推理、数据洞察、阅读理解与批判性推理", href: "/gmat?entry=practice", meta: "官方指南" }] },
       { id: "vocabulary", title: "核心词汇", items: [{ title: "GMAT 词汇", description: "进入现有词汇书与复习功能", href: "/vocabulary/books?level=GMAT", meta: "背单词" }] },
     ] },
     { id: "gre", title: "GRE", sections: [
-      { id: "practice", title: "题型训练", items: [{ title: "GRE 填空、阅读与逻辑", description: "按题型练习，提交后查看答案和解析", href: "/gre?entry=practice", meta: "真题练习" }] },
       { id: "vocabulary", title: "核心词汇", items: [{ title: "GRE 词汇", description: "进入现有词汇书与复习功能", href: "/vocabulary/books?level=GRE", meta: "背单词" }] },
     ] },
   ];

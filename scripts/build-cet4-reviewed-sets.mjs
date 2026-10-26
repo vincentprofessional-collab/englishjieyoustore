@@ -68,12 +68,7 @@ export async function buildReviewedCet4Sets() {
       if (filename.endsWith(".json") && !summaries.some((summary) => filename === `${summary.id}.json`)) await rm(path.join(directory, filename));
     }
   }
-  const usedMedia = new Set(manifest.sets.flatMap((set) => set.assetRefs.map((asset) => path.basename(asset.url))));
-  for (const [directory, extension] of [["public/cet4/evidence", ".webp"], ["public/cet4/audio", ".mp3"]]) {
-    for (const filename of await readdir(directory)) {
-      if (filename.endsWith(extension) && !usedMedia.has(filename)) await rm(path.join(directory, filename));
-    }
-  }
+  // Keep evidence and audio assets as a durable audit trail when manifests change.
   summaries.sort((a, b) => a.kind === b.kind ? b.title.localeCompare(a.title, "zh-CN", { numeric: true }) : a.kind === "practice" ? -1 : 1);
   await writeFile("public/cet4/index.json", JSON.stringify({ schemaVersion: 2, generatedAt: manifest.reviewedAt, entries: summaries }, null, 2) + "\n");
   console.log(`CET-4: ${summaries.filter((s) => s.kind === "paper").length} reviewed papers; ${summaries.filter((s) => s.kind === "practice").length} practice categories; ${summaries.reduce((n, s) => n + s.questionCount, 0)} questions`);

@@ -1,10 +1,6 @@
-"use client";
-
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import styles from "./sat.module.css";
-import type { SatKnowledgeIndex, SatSet } from "@/lib/sat/types";
-import { listExamContentOverrides, type ExamContentOverride } from "@/lib/exam-content/overrides";
+import { getSatKnowledgeIndex } from "@/lib/sat/library";
 
 function pageRange(pages: number[]) {
   if (!pages.length) return "";
@@ -12,72 +8,7 @@ function pageRange(pages: number[]) {
 }
 
 export function SatKnowledgeHome() {
-  const [catalog, setCatalog] = useState<SatKnowledgeIndex | null>(null);
-  const [error, setError] = useState("");
-
-  useEffect(() => {
-    let active = true;
-    Promise.all([
-      fetch("/sat/knowledge.json", { cache: "no-store" }).then((response) => {
-        if (!response.ok) throw new Error("SAT 知识点目录读取失败。");
-        return response.json() as Promise<SatKnowledgeIndex>;
-      }),
-      listExamContentOverrides("sat"),
-    ]).then(([index, { overrides }]) => {
-      if (!active) return;
-      const byId = new Map(overrides.map((row) => [row.bank_id, row]));
-      const staticIds = new Set(index.groups.flatMap((group) => group.topics.map((topic) => topic.setId)));
-      const topicFromRow = (row: ExamContentOverride) => {
-        if (row.is_deleted || !row.bank_data) return null;
-        const bank = row.bank_data as unknown as SatSet;
-        const questions = Array.isArray(bank.questions) ? bank.questions : [];
-        return {
-          id: bank.id || row.bank_id,
-          setId: bank.id || row.bank_id,
-          label: bank.skill || row.title || row.bank_id,
-          title: bank.skill || row.title || row.bank_id,
-          questionCount: questions.length || bank.expectedCount || 0,
-          sourceQuestionCount: questions.length || bank.expectedCount || 0,
-          reviewRequiredCount: questions.filter((question) => question.reviewStatus === "review_required").length,
-          questionPages: [],
-          answerPage: 0,
-        };
-      };
-      const groups = index.groups.map((group) => ({
-        ...group,
-        topics: group.topics.flatMap((topic) => {
-          const row = byId.get(topic.setId);
-          if (!row) return [topic];
-          const merged = topicFromRow(row);
-          return merged ? [{ ...topic, ...merged, id: topic.id }] : [];
-        }),
-      }));
-      const extraRows = overrides.filter((row) => !staticIds.has(row.bank_id));
-      const grouped = new Map<string, NonNullable<ReturnType<typeof topicFromRow>>[]>();
-      for (const row of extraRows) {
-        const topic = topicFromRow(row);
-        if (!topic) continue;
-        const domain = (row.bank_data as Record<string, unknown> | null)?.domain;
-        const label = typeof domain === "string" && domain ? domain : "SAT 新增题库";
-        grouped.set(label, [...(grouped.get(label) || []), topic]);
-      }
-      for (const [label, topics] of grouped) {
-        const id = label.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "sat-added";
-        const existing = groups.find((group) => group.label === label);
-        if (existing) existing.topics.push(...topics);
-        else groups.push({ id, label, topics });
-      }
-      const totalQuestionCount = groups.reduce((sum, group) => sum + group.topics.reduce((subtotal, topic) => subtotal + topic.questionCount, 0), 0);
-      const reviewRequiredCount = groups.reduce((sum, group) => sum + group.topics.reduce((subtotal, topic) => subtotal + topic.reviewRequiredCount, 0), 0);
-      setCatalog({ ...index, groups, totalQuestionCount, reviewRequiredCount });
-    }).catch((reason: unknown) => {
-      if (active) setError(reason instanceof Error ? reason.message : "SAT 知识点目录暂时无法载入。");
-    });
-    return () => { active = false; };
-  }, []);
-
-  if (error) return <section className={`${styles.root} ${styles.home}`}><div className={styles.error}>{error}</div></section>;
-  if (!catalog) return <section className={`${styles.root} ${styles.home}`}><div className={styles.loading}>正在载入知识点…</div></section>;
+  const catalog = getSatKnowledgeIndex();
   const topicCount = catalog.groups.reduce((count, group) => count + group.topics.length, 0);
 
   return <section className={`${styles.root} ${styles.home}`}>

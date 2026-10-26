@@ -12,7 +12,6 @@ import { AdminCommentInbox, AdminCommentNotice, useAdminCommentInbox } from "@/c
 import { GuidePostAdmin } from "@/components/guide-post-admin";
 import { GuideCommentsAdmin } from "@/components/guide-comments-admin";
 import { AdminCourseDirectory } from "@/components/admin-course-directory";
-import { AdminExamContentEditor } from "@/components/admin-exam-content-editor";
 import { AdminExamPrepEditor } from "@/components/admin-exam-prep-editor";
 import { supabase } from "@/lib/supabase/client";
 import { getAuthErrorFeedback, reportAuthFailure } from "@/lib/supabase/auth-request";
@@ -24,7 +23,6 @@ type AdminView =
   | "home"
   | "chrome"
   | "courses"
-  | "exam-content"
   | "exam-prep"
   | "guide"
   | "vocabulary-images"
@@ -253,13 +251,6 @@ export function AdminContentManager() {
           英语课程
         </button>
         <button
-          className={activeView === "exam-content" ? "active" : ""}
-          type="button"
-          onClick={() => setActiveView("exam-content")}
-        >
-          考试题库
-        </button>
-        <button
           className={activeView === "exam-prep" ? "active" : ""}
           type="button"
           onClick={() => setActiveView("exam-prep")}
@@ -296,7 +287,6 @@ export function AdminContentManager() {
 
       {activeView === "courses" && adminUserId ? <AdminCourseDirectory /> : null}
 
-      {activeView === "exam-content" && adminUserId ? <AdminExamContentEditor adminUserId={adminUserId} /> : null}
       {activeView === "exam-prep" && adminUserId ? <AdminExamPrepEditor adminUserId={adminUserId} /> : null}
 
       {activeView === "guide" && adminUserId ? (
