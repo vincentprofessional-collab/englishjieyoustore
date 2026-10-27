@@ -18,6 +18,27 @@ import { getVocabularyHintsForTexts } from "@/lib/vocabulary/local-vocabulary";
 export const dynamicParams = true;
 export const dynamic = "force-dynamic";
 
+function applyBbcSyntaxCorrections(articleId: string, sentences: BbcSyntaxSentenceData[]) {
+  if (articleId !== "260817") return sentences;
+
+  return sentences.map((sentence, index) => {
+    if (index !== 7 || !sentence.text.startsWith("The first version of English, Old English,")) return sentence;
+    const misplacedSpan = sentence.level1.find((span) =>
+      span.start === 28 && span.end === 33 && span.label === "后置定语，修饰 region",
+    );
+    if (!misplacedSpan) return sentence;
+
+    return {
+      ...sentence,
+      level1: sentence.level1.filter((span) => span !== misplacedSpan),
+      level2: [
+        ...(sentence.level2 ?? []).filter((span) => span.start !== misplacedSpan.start || span.end !== misplacedSpan.end),
+        misplacedSpan,
+      ].sort((left, right) => left.start - right.start || left.end - right.end),
+    };
+  });
+}
+
 export function generateStaticParams() {
   return BBC_ARTICLES.map((article) => ({ articleId: article.id }));
 }
@@ -53,9 +74,12 @@ export default async function ArticlePage({
     getVocabularyHintsForTexts(article.body),
   );
 
-  const canonicalSyntaxSentences = (article.year === 2026 ? (syntax2026 as Record<string, BbcSyntaxSentenceData[]>)[article.id] : undefined)
+  const sourceSyntaxSentences = (article.year === 2026 ? (syntax2026 as Record<string, BbcSyntaxSentenceData[]>)[article.id] : undefined)
     ?? article.syntaxSentences
     ?? article.sentences?.map((sentence) => buildAutomaticBbcSyntax(sentence.english));
+  const canonicalSyntaxSentences = sourceSyntaxSentences
+    ? applyBbcSyntaxCorrections(article.id, sourceSyntaxSentences)
+    : undefined;
 
   if (process.env.NODE_ENV === "development" && preview === "mobile") {
     return <ArticleDetailPage key={article.id} article={article} dictationWordMetadata={dictationWordMetadata} isUploadedArticle={!builtinArticle} syntaxSentences={canonicalSyntaxSentences} />;

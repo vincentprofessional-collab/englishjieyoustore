@@ -75,6 +75,7 @@ function makeTracks(spans: BbcSyntaxSpan[]) {
 function syntaxTracks(data: BbcSyntaxSentenceData, displayMode: BbcSyntaxDisplayMode) {
   if (displayMode === "none") return [];
   const clauseSpans = data.level1.filter((span) => span.label.includes("从句"));
+  // Higher nesting levels render first so their lines appear above their parents.
   return [...SYNTAX_LEVELS].reverse().flatMap((level) => {
     const candidates = spansAtLevel(data, level);
     const spans = displayMode === "main" && level > 1

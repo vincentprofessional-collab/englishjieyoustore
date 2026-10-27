@@ -40,8 +40,6 @@ type Props = {
   sentenceNo: number;
   showPos: boolean;
   translation: ReactNode;
-  waveTerms?: string[];
-  waveRanges?: { start: number; end: number }[];
 };
 
 function spanText(sentence: BbcSyntaxSentenceData, span: BbcSyntaxSpan) {
@@ -72,8 +70,6 @@ export function BbcSyntaxInlineEditor({
   sentenceNo,
   showPos,
   translation,
-  waveTerms = [],
-  waveRanges,
 }: Props) {
   const router = useRouter();
   const [isAdmin, setIsAdmin] = useState(false);
@@ -265,6 +261,19 @@ export function BbcSyntaxInlineEditor({
     setMessage("语法成分已删除，点击“保存并更新文章”后生效。");
   }
 
+  function deleteEditingSpan() {
+    if (!editingSpan) return;
+    const span = (data[layerKey(editingSpan.level)] ?? []).find((item) =>
+      item.start === editingSpan.start && item.end === editingSpan.end,
+    );
+    if (!span) {
+      setEditingSpan(null);
+      setMessage("当前选中的成分已不存在，请重新选择。");
+      return;
+    }
+    deleteSpan(editingSpan.level, span);
+  }
+
   function changeSelectedLineStyle(nextStyle: ArticleInlineLineStyle) {
     setLineStyle(nextStyle);
     if (!selectedInlineId) return;
@@ -350,8 +359,7 @@ export function BbcSyntaxInlineEditor({
         showPos={showPos}
         translation={translation}
         vocabularyWordIndexes={new Set<number>()}
-        waveTerms={waveTerms}
-        waveRanges={waveRanges}
+        waveTerms={[]}
       />
       {sentenceAudio}
       {isAdmin ? (
@@ -387,11 +395,11 @@ export function BbcSyntaxInlineEditor({
                     setEditingSpan(null);
                     if (selection) setLabel(nextLevel === 1 ? "主语" : nextLevel === 2 ? "定语" : "中心成分");
                   }} value={level}>
-                    <option value={1}>一级成分</option>
-                    <option value={2}>二级嵌套</option>
-                    <option value={3}>三级嵌套</option>
-                    <option value={4}>四级嵌套</option>
-                    <option value={5}>五级嵌套</option>
+                    <option value={1}>一级成分 · 实线</option>
+                    <option value={2}>二级嵌套 · 虚线</option>
+                    <option value={3}>三级嵌套 · 波浪线</option>
+                    <option value={4}>四级嵌套 · 波浪线</option>
+                    <option value={5}>五级嵌套 · 波浪线</option>
                   </select>
                 </label>
                 <label className={styles.labelInput}>
@@ -399,6 +407,7 @@ export function BbcSyntaxInlineEditor({
                   <input onChange={(event) => setLabel(event.target.value)} value={label} />
                 </label>
                 <button disabled={!selection || !label.trim()} onClick={applyComponent} type="button">{editingSpan ? "修改成分" : "添加 / 修改成分"}</button>
+                <button disabled={!editingSpan} onClick={deleteEditingSpan} type="button">删除成分</button>
                 <label>
                   <span>下划线样式</span>
                   <select disabled={!selectedInlineId} onChange={(event) => changeSelectedLineStyle(event.target.value as ArticleInlineLineStyle)} value={lineStyle}>

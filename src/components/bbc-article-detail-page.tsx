@@ -1963,9 +1963,7 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
                             onSentenceChange={(updated) => setEditableSyntaxSentences((current) => current.map((item, index) => index === activeStudySentenceIndex ? updated : item))}
                             sentenceNo={sentence.sentenceNo}
                             showPos={syntaxPosVisible}
-                            waveTerms={sentence.underlinedTerms}
-                            waveRanges={sentence.englishUnderlinedRanges}
-                            translation={renderWaveHighlightedChinese(sentence.chinese, sentence.chineseUnderlinedTerms, sentence.chineseUnderlinedRanges)}
+                            translation={sentence.chinese}
                           />
                         ) : hasBackendGrammarAnnotations && inlineUnit ? (
                           <p className="bbc-intensive-english" lang="en">
@@ -1995,16 +1993,16 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
                               studyMode === "intensive" ? 0 : activeStudySentenceWordOffset,
                               activeStudyWordIndex,
                               studyMode === "intensive" ? new Set<number>() : vocabularyHighlightWordIndexes,
-                              sentence.underlinedTerms ?? [],
+                              studyMode === "intensive" ? [] : sentence.underlinedTerms ?? [],
                               articlePronunciations,
-                              sentence.englishUnderlinedRanges,
+                              studyMode === "intensive" ? undefined : sentence.englishUnderlinedRanges,
                               audioSettings.pronunciationMode === "uk" || audioSettings.pronunciationMode === "us" ? audioSettings.pronunciationMode : undefined,
                             )}
                           </p>
                         )}
                         {sentence.chinese && !hasReviewedSyntax ? (
                           <p className="bbc-intensive-chinese" lang="zh-CN">
-                            {renderWaveHighlightedChinese(sentence.chinese, sentence.chineseUnderlinedTerms, sentence.chineseUnderlinedRanges)}
+                            {sentence.chinese}
                           </p>
                         ) : null}
                       </>
