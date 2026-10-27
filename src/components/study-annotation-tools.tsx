@@ -446,11 +446,7 @@ export function StudyAnnotationTools({
       }
     }
 
-    function scheduleHide(delay = 2200) {
-      if (selectedText) {
-        return;
-      }
-
+    function scheduleHide(delay = 400) {
       pendingHoverWordRef.current = "";
       clearHoverTimer();
       clearHideTimer();
@@ -859,7 +855,11 @@ export function StudyAnnotationTools({
             }
           }}
           onMouseLeave={() => {
-            hideWordTimerRef.current = window.setTimeout(() => setActiveWordTooltip(null), 1500);
+            if (hideWordTimerRef.current != null) window.clearTimeout(hideWordTimerRef.current);
+            hideWordTimerRef.current = window.setTimeout(() => {
+              setActiveWordTooltip(null);
+              hideWordTimerRef.current = null;
+            }, 400);
           }}
         >
           <div className="word-tooltip-title-row">

@@ -273,7 +273,7 @@ export function GlobalStudyInteractions() {
           dismissedHoverWordRef.current = wordTooltipRef.current?.word ?? "";
           setWordTooltip(null);
           hideWordTimerRef.current = null;
-        }, 1000);
+        }, 400);
       }
     }
 
@@ -335,7 +335,11 @@ export function GlobalStudyInteractions() {
       const normalizedWord = normalizeWord(wordAtPoint.word);
       if (lastHoveredWordRef.current !== normalizedWord) dismissedHoverWordRef.current = "";
       lastHoveredWordRef.current = normalizedWord;
-      if (!normalizedWord || pendingWordRef.current === normalizedWord || wordTooltipRef.current?.word === normalizedWord || dismissedHoverWordRef.current === normalizedWord) {
+      if (wordTooltipRef.current?.word === normalizedWord) {
+        clearHideWordTimer();
+        return;
+      }
+      if (!normalizedWord || pendingWordRef.current === normalizedWord || dismissedHoverWordRef.current === normalizedWord) {
         return;
       }
 
@@ -633,7 +637,7 @@ export function GlobalStudyInteractions() {
               dismissedHoverWordRef.current = wordTooltipRef.current?.word ?? "";
               setWordTooltip(null);
               hideWordTimerRef.current = null;
-            }, 1000);
+            }, 400);
           }}
         >
           <div className="word-tooltip-title-row">
